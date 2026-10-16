@@ -4,16 +4,16 @@
   "is": null,
   "from": {
    "node": "def-weil-global-geometric-frobenius",
-   "place": "its statement (a notion the statement uses)",
+   "place": "statement: g_Y = id_{Y_0} × Spec(gamma); the cohomology transport arrows require its Cartesian square over s = Spec k (made explicit in def-weil-frobenius-cohomology-transport)",
    "via": [
     "def-weil-frobenius-cohomology-transport"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Frobenius square of a k_0-morphism is Cartesian",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$ and put\n$\\gamma=\\operatorname{Frob}_q=\\varphi_q^{-1}\\in\\operatorname{Aut}(k/k_0)$, the\ngeometric Frobenius [def-weil-frobenius-detailed]. Let $f_0:X_0\\to Y_0$ be a\nmorphism of $k_0$-schemes [def-weil-scheme-morphism-properties], put\n$X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$ and $f=f_0\\times\\operatorname{id}_k:X\\to Y$,\nand let\n\n$$\n g_X=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X,\\qquad\n g_Y=\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma):Y\\to Y .\n$$\n\nThen:\n\n1. $g_X$ and $g_Y$ are isomorphisms of schemes, with inverses\n$\\operatorname{id}_{X_0}\\times\\Spec(\\gamma^{-1})$ and\n$\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma^{-1})$;\n\n2. $f\\circ g_X=g_Y\\circ f$;\n\n3. the commutative square\n\n$$\n\\begin{array}{ccc}\n X & \\xrightarrow{\\ g_X\\ } & X\\\\\n f\\downarrow & & \\downarrow f\\\\\n Y & \\xrightarrow{\\ g_Y\\ } & Y\n\\end{array}\n$$\n\nis Cartesian: the morphism $(g_X,f):X\\to X\\times_{f,Y,g_Y}Y$ is an\nisomorphism. This square, with the identification $(g_X,f)$, is the\n*Frobenius square* of $f_0$.\n\nIn particular, for $Y_0=\\Spec k_0$ one has $Y=s=\\Spec k$ (via\n$\\Spec k_0\\times_{k_0}k=\\Spec k$), $g_Y=g_s=\\Spec(\\gamma)$, and for a\n$k_0$-scheme $X_0$ with structure morphism $a_{X_0}$ the base change\n$a_X:X\\to s$ satisfies $a_X\\circ g_X=g_s\\circ a_X$, the square\n$(a_X,g_X,g_s)$ being Cartesian.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$ and put\n$\\gamma=\\operatorname{Frob}_q=\\varphi_q^{-1}\\in\\operatorname{Aut}(k/k_0)$, the\ngeometric Frobenius [def-weil-frobenius-detailed]. Let $f_0:X_0\\to Y_0$ be a\nmorphism of $k_0$-schemes [def-weil-scheme-over-base], put\n$X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$ and $f=f_0\\times\\operatorname{id}_k:X\\to Y$,\nwhere fibre products are as in [def-pc-fibre-product] and spectra and their induced morphisms as in [def-weil-affine-spectrum], and let\n\n$$\n g_X=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X,\\qquad\n g_Y=\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma):Y\\to Y .\n$$\n\nThen:\n\n1. $g_X$ and $g_Y$ are isomorphisms of schemes, with inverses\n$\\operatorname{id}_{X_0}\\times\\Spec(\\gamma^{-1})$ and\n$\\operatorname{id}_{Y_0}\\times\\Spec(\\gamma^{-1})$;\n\n2. $f\\circ g_X=g_Y\\circ f$;\n\n3. the commutative square\n\n$$\n\\begin{array}{ccc}\n X & \\xrightarrow{\\ g_X\\ } & X\\\\\n f\\downarrow & & \\downarrow f\\\\\n Y & \\xrightarrow{\\ g_Y\\ } & Y\n\\end{array}\n$$\n\nis Cartesian: the morphism $(g_X,f):X\\to X\\times_{f,Y,g_Y}Y$ is an\nisomorphism. This square, with the identification $(g_X,f)$, is the\n*Frobenius square* of $f_0$.\n\nIn particular, for $Y_0=\\Spec k_0$ one has $Y=s=\\Spec k$ (via\n$\\Spec k_0\\times_{k_0}k=\\Spec k$), $g_Y=g_s=\\Spec(\\gamma)$, and for a\n$k_0$-scheme $X_0$ with structure morphism $a_{X_0}$ the base change\n$a_X:X\\to s$ satisfies $a_X\\circ g_X=g_s\\circ a_X$, the square\n$(a_X,g_X,g_s)$ being Cartesian.",
  "source": {
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
   "place": "Deligne, La conjecture de Weil II, (1.1.10)(i) and (1.1.11), pp. 151-152: the action of W(F/F_q) on X = X_0 (x) F through the factor F, id_{X_0} x F being 'l'action du Frobenius geometrique' of (1.1.14), p. 152; the Cartesian property is the one asserted without proof in the slopmaster2 definition def:weil-direct-image-object (literature/blueprint/slopmaster2/src/version/sketch/01_final_weil_conjectures.tex, lines 2405-2425: 'The Frobenius square for f_0 is Cartesian') and in def-pur-scheme-geometric-frobenius"
@@ -21,11 +21,82 @@
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-frobenius-detailed",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S_0=\\operatorname{Spec}k_0$, $s=\\operatorname{Spec}k$, $u=\\operatorname{Spec}(\\iota):s\\to S_0$, $\\sigma=\\operatorname{Spec}(\\gamma)$ and $\\rho=\\operatorname{Spec}(\\gamma^{-1})$. By the field-level clause of [def-weil-frobenius-detailed], $\\gamma$ and $\\gamma^{-1}$ fix $\\iota(k_0)$ and are inverse ring maps. The contravariant functoriality in [def-weil-affine-spectrum] therefore gives $u\\sigma=u$, $u\\rho=u$, and $\\sigma\\rho=\\rho\\sigma=\\operatorname{id}_s$. Thus both maps may be used over $S_0$. Here and below juxtaposition denotes ordinary composition, with the rightmost map applied first.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+    "place": "Spec.map_id, Spec.map_comp, Scheme.Spec, lines 482-498; agent-written application to the two inverse field automorphisms"
+   }
+  },
+  {
+   "text": "For either $Z_0=X_0$ or $Z_0=Y_0$, write $Z=Z_0\\times_{S_0}s$ with projections $\\pi_Z:Z\\to Z_0$ and $b_Z:Z\\to s$. The induced map $g_Z$ is characterized by $\\pi_Zg_Z=\\pi_Z$ and $b_Zg_Z=\\sigma b_Z$, by [def-pc-fibre-product]. Likewise define $h_Z=\\operatorname{id}_{Z_0}\\times_{S_0}\\rho$, with $\\pi_Zh_Z=\\pi_Z$ and $b_Zh_Z=\\rho b_Z$. These maps exist because step 1 gives $u\\sigma=u\\rho=u$. The two projections of $g_Zh_Z$ are $\\pi_Z$ and $\\sigma\\rho b_Z=b_Z$, and those of $h_Zg_Z$ are $\\pi_Z$ and $\\rho\\sigma b_Z=b_Z$. Uniqueness in the same universal property makes both composites $\\operatorname{id}_Z$. This proves clause 1 with precisely the displayed inverses, for both schemes.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+   }
+  },
+  {
+   "text": "The base-changed morphism $f$ has $\\pi_Yf=f_0\\pi_X$ and $b_Yf=b_X$, by the induced-morphism clause of [def-pc-fibre-product]; the hypothesis that $f_0$ is over $S_0$ is exactly the compatibility needed to induce it. The composites $fg_X$ and $g_Yf$ have the same two projections to $Y_0$ and $s$: respectively $f_0\\pi_X$ and $\\sigma b_X$. Uniqueness for the fibre product $Y$ gives $fg_X=g_Yf$, proving clause 2. Multiplying this equality by the inverses established in step 2 also gives $fh_X=h_Yf$: explicitly $h_Yfg_X=f$, hence $h_Yf=fh_X$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+   }
+  },
+  {
+   "text": "Let $P=X\\times_{f,Y,g_Y}Y$, with projections $r:P\\to X$ and $t:P\\to Y$, so $fr=g_Yt$. By step 3 and [def-pc-fibre-product], the map $\\eta=(g_X,f):X\\to P$ exists, with $r\\eta=g_X$ and $t\\eta=f$. Set $\\theta=h_Xr:P\\to X$. Then $\\theta\\eta=h_Xg_X=\\operatorname{id}_X$. For the other composite, $r\\eta\\theta=g_Xh_Xr=r$ and $t\\eta\\theta=fh_Xr=h_Yfr=h_Yg_Yt=t$. The uniqueness clause for $P$ gives $\\eta\\theta=\\operatorname{id}_P$. Thus the exact morphism $(g_X,f)$ specified in clause 3 is an isomorphism, with inverse $h_Xr$, proving that this square is Cartesian.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+   }
+  },
+  {
+   "text": "If $Y_0=S_0$, its structure map is $\\operatorname{id}_{S_0}$. The projection $b_Y:S_0\\times_{S_0}s\\to s$ is an isomorphism with inverse $(u,\\operatorname{id}_s)$: one composite is immediately $\\operatorname{id}_s$; the other has projections $ub_Y=\\pi_Y$ and $b_Y$, so is the identity by [def-pc-fibre-product]. Under this particular identification $Y=s$, the equation $b_Yg_Y=\\sigma b_Y$ identifies $g_Y$ with $g_s=\\sigma$, and $f$ with the scalar-extended structure morphism $a_X=b_X$. Clauses 2 and 3 now give exactly $a_Xg_X=g_sa_X$ and the claimed Cartesian structure square with its specified comparison map.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+    "place": "pullback.lift, pullback.lift_fst, pullback.lift_snd and pullback.hom_ext (read in lines 125-235); pullback.map, lines 260-275; agent-written universal-property calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-scheme-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+  "place": "Explicit projection and inverse calculation from the fibre-product universal property, Stacks Tag 001V, categories.tex, definition-fibre-products, lines 715-746 (read at /home/ubuntu/work-bp/sheaf/literature/stacks-project/categories.tex), and pullback.lift/pullback.map; Spec functoriality read in AlgebraicGeometry/Scheme.lean. Deligne (1.1.7), (1.1.10)(i), (1.1.11), (1.1.14) and the original blueprint were independently read during second reading; they supply the convention and the Cartesian assertion, whose omitted calculation is written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,10 +111,73 @@
    "results": "HasPullback.lean:339 instance pullback.map_isIso, :283 pullback.map_comp, :295 pullback.map_id (functoriality of the fibre product, from which parts 1 and 2 follow for g = pullback.map of id and Spec gamma); nothing on Frobenius in AlgebraicGeometry/",
    "date": "2026-10-09",
    "verdict": "ingredients only (functoriality of pullback.map); no statement about the base change of a Galois automorphism of k/k_0; no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The square of a morphism of schemes with the geometric Frobenius automorphisms of its scalar extensions is cartesian",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.of_horiz_isIso",
+   "results": "CategoryTheory.IsPullback.of_horiz_isIso in Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic. Read local lines 69-80, in particular declaration at 78. Requires an already commutative square and invertible horizontal maps; only an ingredient for clause 3.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item; ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes over a base commutes with an automorphism of the scalar extension; its square with the induced two automorphisms is cartesian",
+   "results": "8 hits, led by AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, pullbackSpecIso_hom_fst'_assoc, pullbackSpecIso_hom_base, pullbackSpecIso_hom_snd_assoc, pullbackSpecIso_hom_fst_assoc in Mathlib/AlgebraicGeometry/Pullbacks; remaining hits concern tensor pullback triplets. None states Frobenius naturality and the inverse/Cartesian bundle.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "of_horiz_isIso|map_isIso|map_comp|map_id",
+   "results": "25 hits. HasPullback.lean:283 pullback.map_comp, :295 pullback.map_id, :339 pullback.map_isIso; IsPullback/Basic.lean:78 of_horiz_isIso. Read these declarations. Further hits are uses or pushout variants. Ingredients requiring the projection/naturality calculations, not the full item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item; ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square whose horizontal morphisms are isomorphisms is a pullback square. Pullback maps induced by invertible maps are invertible.",
+   "results": "8 hits: CategoryTheory.IsPullback.of_horiz_isIso, of_vert_isIso, Square.IsPullback.of_iso, IsPullback.of_iso_pullback, Square.IsPullback.iff_of_iso, IsPullback.of_iso, of_iso', and Limits.pullback.map_isIso. Read local IsPullback/Basic.lean:69-80 and HasPullback.lean:270-345. General pullback tools, no whole Frobenius statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|galois",
+   "results": "13 hits, all on Galois connections for projective zero loci or ideal sheaves. No scheme Frobenius or Galois base-extension square.",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item; ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the pullback functor applied to an automorphism of the base: base change of an isomorphism and commuting pullback maps form a cartesian square.",
+   "results": "8 hits: ChosenPullbacksAlong.iso_pullback_map and iso_pullback_obj, CategoricalPullback.mkNatIso and its equalities, CategoricalPullback.Hom.w and w′, Functor.IsFibered.pullbackPullbackIso. These concern over-category pullback functors or categorical pullbacks, not the entire scheme/Frobenius assertion.",
+   "date": "2026-10-16",
+   "verdict": "No exact whole-item match; elementary calculation retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.map_comp",
+   "results": "One hit: CategoryTheory.Limits.pullback.map_comp, Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback. Read local lines 283-291: composition of induced maps is induced by componentwise composites.",
+   "date": "2026-10-16",
+   "verdict": "Ingredient only; it does not state the field automorphism, inverse description and Cartesian comparison together."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|map_id|map_isIso|hom_ext",
+   "results": "Second-reader directory search returned 25 capped hits including PullbackCone.IsLimit.hom_ext. A file-restricted search returned five capped hits at HasPullback.lean:53,223,226,236,239 (msearch parsed the single-file line numbers as file names); independently read actual HasPullback.lean:125-160,215-236,260-345, including pullback.hom_ext, map, map_comp, map_id and map_isIso.",
+   "date": "2026-10-16",
+   "verdict": "General universal-property and functoriality ingredients only; no full-item Mathlib match."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +197,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-frobenius-square-cartesian",
+  "worker": "stage1",
+  "summary": "Proved all three clauses and the structure-map specialization directly from the existing fibre-product universal property and Spec functoriality. No new nodes: inverse and naturality identities and the explicit inverse to (g_X,f) are elementary projection calculations. Replaced the unrelated morphism-properties bundle by the actual definition of an S-morphism, and explicitly cited fibre products and Spec in the statement without changing its hypotheses or assertions. Read the close source Lean special case using AlgebraicClosure k, which does not state this arbitrary-closure item with its displayed inverses. Repeated real Mathlib searches, including a second semantic phrasing; no match for the whole item. Second reading located and read the original literature in /home/ubuntu/work-bp/sheaf/literature, checked the convention and Cartesian assertion, and corrected the printed page of Deligne (1.1.14) to 153. The universal-property calculation remains marked agent-written because it supplies the omitted proof.",
+  "blueprint": "Realizes the geometric-Frobenius map and the transport-square input in the statement of def-weil-global-geometric-frobenius, via def-weil-frobenius-cohomology-transport: steps 1-2 construct the compatible inverse maps, step 3 supplies naturality, step 4 supplies the chosen Cartesian comparison, and step 5 supplies the square over s."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q44-7d1aa6d71",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-7d1aa6d71 (reviewer sub-agent of L); spot-checked: Read and verified the full item, all five proof steps, cited statements, sources, route, and duplicate candidates. The specified Cartesian comparison and inverse are correct, including empty and nonreduced cases. Corrected Deligne (1.1.14) from page 152 to 153 in the whole JSON under fixes/. Detailed checks are in review.md; no mathematical gaps or target weakening found.; 1 file(s) fixed by the reviewer"
+ }
 }
