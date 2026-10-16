@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-tw-frobenius-action",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Geometric Frobenius action",
- "statement": "Let $\\Phi_X$ be the geometric Frobenius endomorphism of\n$X_{\\overline k}$ (the inverse of the $q$-power map, extended by base\nchange from $X$; the scheme-theoretic Frobenius is described in the\ntrace-formula chapter, 09). It induces, for every\n$i$, a $\\overline{\\mathbf Q}_\\ell$-linear automorphism\n\n$$\n\\Phi_X^*:H^i(X_{\\overline k},\\overline{\\mathbf Q}_\\ell)\n\\longrightarrow H^i(X_{\\overline k},\\overline{\\mathbf Q}_\\ell),\n$$\n\nand similarly on compactly supported cohomology; the same notation is used\nafter any base change.",
+ "statement": "Let $q=p^r$ be a prime power, let $k_0=\\mathbf F_q$ with fixed algebraic closure $k$, and fix a prime $\\ell\\neq p$. Choose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme and put $X=X_0\\times_{k_0}k$. Retain the coefficient conventions of [def-tw-conventions], namely the common-stage category of [def-weil-pbc-qbar-category]. Use its completed-coefficient presentation as follows. A separated finite-type scheme over a field is noetherian and finite-dimensional, and $\\ell$ is invertible on $X$ and on $s=\\operatorname{Spec}k$. On these schemes [lem-weil-pbc-integral-stratified-perfect-characterization] identifies the integral full subcategory used by those conventions with [def-weil-derived-complete-integral-detailed], inside the same derived category of modules over $\\widehat{\\mathcal O}_{E,-}=\\varprojlim_n(\\mathcal O_E/\\varpi_E^n)_{-}$. Their raw rationalizations therefore agree. The natural maps [lem-weil-finite-free-completed-scalar-comparison] identify the integral scalar extensions in [def-weil-rationalization-karoubi] with those of [prop-weil-pbc-scalar-extension]; after rationalization these identify the common-stage presentation [def-weil-algebraically-closed-coefficients] with the original coefficient category. These identifications use the identity on integral objects and morphisms and the canonical tensor and reduction maps on coefficient extensions. Compatibility with successive extensions follows on the common finite reductions from $(x\\otimes b)\\otimes c\\mapsto x\\otimes bc$ in either order, and the quotient maps defining the completion comparison commute with this formula. Use this presentation for the ordinary and compact-support cohomology notation of [def-weil-ordinary-compact-cohomology]. Write $\\sigma:k\\to k$, $z\\mapsto z^q$, and $\\gamma=\\sigma^{-1}$. The geometric Galois Frobenius is the scheme automorphism\n\n$$\n \\Phi_X=g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma):X\\xrightarrow{\\sim}X\n$$\n\nof [def-weil-frobenius-detailed]; on an affine open obtained from $\\operatorname{Spec}A_0\\subseteq X_0$ its ring map is $a\\otimes b\\mapsto a\\otimes\\gamma(b)$. Let $\\Lambda_X=(\\overline{\\mathbf Q}_\\ell)_X$ be the constant coefficient object with its canonical Weil isomorphism $\\theta:L\\Phi_X^*\\Lambda_X\\xrightarrow{\\sim}\\Lambda_X$ [def-weil-constant-weil-structure]. It is represented at the coefficient stage $E=\\mathbf Q_\\ell$, and all the following constructions are passed from that stage to the common-stage algebraically closed coefficient category of [def-weil-algebraically-closed-coefficients].\n\nUsing the ordinary and compact-support cohomology functors of [def-weil-ordinary-compact-cohomology] and their transports $\\tau_{\\Lambda_X}$ and $\\tau_{c,\\Lambda_X}$ along $\\Phi_X$ [def-weil-frobenius-cohomology-transport], define\n\n$$\n F_X=R\\Gamma(X,\\theta)\\circ\\tau_{\\Lambda_X},\n \\qquad F_{c,X}=R\\Gamma_c(X,\\theta)\\circ\\tau_{c,\\Lambda_X}.\n$$\n\nThese are the global geometric Frobenius operators of [def-weil-global-geometric-frobenius] for the canonical constant Weil object. The transports are isomorphisms by [lem-weil-frobenius-cohomology-transport-iso], and $R\\Gamma$ and $R\\Gamma_c$ carry $\\theta$ to isomorphisms. Thus, for every integer $i$, taking cohomology gives the $\\overline{\\mathbf Q}_\\ell$-linear automorphisms denoted\n\n$$\n \\Phi_X^*=H^i(F_X):H^i(X,\\overline{\\mathbf Q}_\\ell)\\xrightarrow{\\sim}H^i(X,\\overline{\\mathbf Q}_\\ell),\n \\qquad \\Phi_{X,c}^*=H^i(F_{c,X}):H_c^i(X,\\overline{\\mathbf Q}_\\ell)\\xrightarrow{\\sim}H_c^i(X,\\overline{\\mathbf Q}_\\ell).\n$$\n\nThe same notation is used when this construction is repeated after base change, with the specified finite-field model and its geometric Frobenius.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-tw-frobenius-action.md",
   "place": "node def-tw-frobenius-action, order 2105",
@@ -16,14 +16,153 @@
   ]
  },
  "stmt_deps": [
-  "def-tw-conventions"
+  "def-tw-conventions",
+  "def-weil-pbc-qbar-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-frobenius-detailed",
+  "def-weil-constant-weil-structure",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-global-geometric-frobenius",
+  "lem-weil-frobenius-cohomology-transport-iso"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric Frobenius action on ordinary and compactly supported etale cohomology over a finite field",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.Isocrystal.frobenius, WittVector.Isocrystal.frob, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.IsocrystalHom.frob_equivariant, WittVector.isocrystal_classification, WittVector.FractionRing.frobenius; returned field-level Frobenius or Witt-vector/isocrystal results do not construct the scheme cohomology operators",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.geometricFrobenius, Scheme.Hom.geometricFrobenius, cohomology",
+   "results": "0 hits; loogle: unknown identifier 'FiniteField.geometricFrobenius'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; unknown identifier, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|geometric Frobenius|compactly supported cohomology",
+   "results": "0 hits; the supplied scope repeated the Mathlib prefix; superseded by correctly scoped searches below",
+   "date": "2026-10-16",
+   "verdict": "invalid scope; not evidence of absence",
+   "subdirectory": "Mathlib/"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric Frobenius induces an automorphism on cohomology,",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "automorphism induced by geometric Frobenius on etale cohomology of a scheme over a finite field",
+   "results": "WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv, WittVector.instIsocrystalStandardOneDimIsocrystal, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.IsocrystalEquiv.frob_equivariant, FiniteField.frobeniusAlgEquiv_apply; returned field-level Frobenius or Witt-vector/isocrystal results do not construct the scheme cohomology operators",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.frobeniusAlgEquivOfAlgebraic, Scheme.Hom.geometricFrobenius",
+   "results": "0 hits; loogle: unknown identifier 'Scheme.Hom.geometricFrobenius'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; unknown identifier, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|frobeniusAlgEquivOfAlgebraic|ellAdicSheaf",
+   "results": "0 hits; the supplied scope repeated the Mathlib prefix; superseded by correctly scoped searches below",
+   "date": "2026-10-16",
+   "verdict": "invalid scope; not evidence of absence",
+   "subdirectory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|frobeniusAlgEquivOfAlgebraic",
+   "results": "0 hits; the supplied scope repeated the Mathlib prefix; superseded by correctly scoped searches below",
+   "date": "2026-10-16",
+   "verdict": "invalid scope; not evidence of absence",
+   "subdirectory": "Mathlib/FieldTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFrobenius|geometric Frobenius|compactly supported cohomology",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|ellAdicSheaf|EllAdicCohomology",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; read ElladicCohomology.lean:63-76 or Finite/Basic.lean:363-375; these define integral ordinary cohomology or the field automorphism only",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"cohomology\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric Frobenius induces an automorphism on cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquivOfAlgebraic",
+   "results": "Mathlib/FieldTheory/Galois/NormalBasis.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean; read ElladicCohomology.lean:63-76 or Finite/Basic.lean:363-375; these define integral ordinary cohomology or the field automorphism only",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "FieldTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobeniusAlgEquivOfAlgebraic\"",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow; field Frobenius and its powers only, not cohomology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "galois.*cohomology|cohomology.*galois|compact.*support|geometric.*frobenius",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois action on l-adic cohomology of the geometric fibre and compact support cohomology as linear equivalences",
+   "results": "8 hits: ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.coindIso, InfiniteGalois.limitToAlgEquiv_apply, groupCohomology.map_id_comp_H0Iso_hom, InfiniteGalois.profiniteGalGrpIsoLimit, groupCohomology.map_id_comp_H0Iso_hom_apply, InfiniteGalois.mulEquivToLimit, groupCohomology.linearYonedaObjResProjectiveResolutionIso",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"frobenius\"",
+   "results": "0 hits",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -54,5 +193,44 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-rem-sf-pf-done"
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-tw-frobenius-action",
+  "worker": "stage1",
+  "summary": "Maintainer repair: retain the original def-tw-conventions coefficient category. The delivery report incorrectly described its integral coefficients as discrete: def-weil-pbc-adic-coefficient-datum explicitly uses the completed ring sheaf. Cite the existing integral stratified-perfect characterization and finite-free completed scalar comparison to identify the finite-stage categories and their transition functors with the completed presentation used for the action. No new comparison theorem is assumed or created. The Frobenius source correction remains: the relative q-power scheme map has no inverse on the affine line, while id × Spec(gamma) is the geometric Galois automorphism. Both cohomology operators are the displayed transport followed by the constant Weil isomorphism. No new nodes. Repair of returned head a1ee02487415: incorporated the approved maintainer fixes, which had not reached the sandbox after the merge-lock timeout. Re-read all fourteen current dependency statements and compared their full JSON with the immutable review snapshot: all unchanged. Introduced X before the coefficient comparisons which use it. The report retracts the earlier discrete-coefficient claim.",
+  "blueprint": "Realizes all clauses of blueprint def-tw-frobenius-action (order 2105), retaining the coefficient conventions of order 2104. Corrects only the inverse-of-scheme-Frobenius phrase using Deligne Weil II (1.1.7), (1.1.10), (1.1.14), pp. 150–153 and the affine-line counterexample. Existing comparison statements justify the completed-coefficient presentation, rather than changing the source coefficient category. The item is auxiliary to the projection-formula remark, whose statement and route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Its part 3 supplies the ordinary and compact-support transport isomorphisms for the same coefficient category and separated finite-type model; the item unit is a projection-formula remark and supplies no such transport theorem."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two integral full subcategories over the noetherian finite-dimensional schemes here; required to retain the source coefficient convention, not replace the unit route."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identifies the canonical finite coefficient-extension functors used in the two common-stage presentations."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies the original coefficient-extension functors and coherent tensor associators used by def-weil-pbc-qbar-category; generic coefficient tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-b59186e8e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-b59186e8e (reviewer sub-agent of L); spot-checked: Read the complete item, report, fourteen dependency statements, chapter/unit route, and cited sources. Verified the geometric Galois Frobenius correction, explicit coefficient comparisons, both transport endpoints and inverse formulas, and edge cases. No new nodes, duplicate splits, or cycles through the item. Accepted four declared generic tool uses; no fixes needed. Concrete checks recorded in review.md."
+ }
 }
