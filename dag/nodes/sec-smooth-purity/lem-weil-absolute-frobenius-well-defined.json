@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-frobenius-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement, final paragraph: \"This is distinct from the absolute $q$-power morphism of $Y$\"; supplies the well-defined absolute Frobenius and its affine and iterate descriptions through def-weil-absolute-frobenius-scheme.",
    "via": [
     "def-weil-absolute-frobenius-scheme"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Frobenius of the structure sheaf is a morphism of locally ringed spaces; affine case",
@@ -23,11 +23,127 @@
   "def-weil-scheme-characteristic-p",
   "def-weil-locally-ringed-space-morphism",
   "def-weil-affine-spectrum",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For (i), use the ring endomorphism $F_A(a)=a^p$ of [def-weil-ring-frobenius]. If $a\\in\\mathfrak p$ then $a^p\\in\\mathfrak p$ by closure of an ideal under multiplication. Conversely, for every integer $r\\geq1$, primality gives $a^r\\in\\mathfrak p\\Rightarrow a\\in\\mathfrak p$: induct on $r$, using $a^{r+1}=a\\,a^r$ and the defining implication $bc\\in\\mathfrak p\\Rightarrow b\\in\\mathfrak p$ or $c\\in\\mathfrak p$. Since $p\\geq1$, this proves $a\\in F_A^{-1}(\\mathfrak p)\\Leftrightarrow a\\in\\mathfrak p$.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), following paragraph, first two sentences; elementary prime-ideal argument written out."
+   }
+  },
+  {
+   "text": "By the definition of the map on spectra induced by a ring homomorphism, its value at $\\mathfrak p$ is the inverse-image prime ideal. Thus Step 1 shows that the underlying continuous map of $\\operatorname{Spec}(F_A)$ [def-weil-affine-spectrum] fixes every point, and is the identity. If $A$ is the zero ring, its spectrum is empty and the same conclusion is vacuous.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), following paragraph: the ring Frobenius induces the identity on Spec(A)."
+   }
+  },
+  {
+   "text": "For (ii), write $\\mathfrak m$ for the unique maximal ideal of the local ring $A$. If $a\\in\\mathfrak m$, then $F_A(a)=a^p\\in\\mathfrak m$ by the ideal property, so $F_A$ maps the maximal ideal into itself and is local in the sense of [def-weil-locally-ringed-space-morphism]. One can also check the unit-reflection formulation directly: if $a^pb=1$, then $a(a^{p-1}b)=1$, so $a$ is a unit; if $a$ is a unit, $(a^{-1})^p$ inverts $a^p$. No reducedness or perfection is used.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), following paragraph: if A is local then F_A is a local homomorphism; elementary ideal and unit calculations."
+   }
+  },
+  {
+   "text": "For (iii), [def-weil-scheme-characteristic-p] gives $p\\cdot1=0$ in every $\\mathcal O_X(U)$. Apply [def-weil-ring-frobenius] to define $\\psi_U(s)=s^p$ as a ring endomorphism, including when $U=\\varnothing$. For an inclusion $V\\subseteq U$, the restriction ring homomorphism $\\rho_{UV}$ satisfies $\\rho_{UV}(s^p)=\\rho_{UV}(s)^p$ (multiply $s$ by itself $p$ times). Therefore $\\rho_{UV}\\psi_U=\\psi_V\\rho_{UV}$. These are exactly the restriction-compatibility equations for a map of sheaves of rings in [def-weil-locally-ringed-space-morphism], so the maps define $F^\\sharp:\\mathcal O_X\\to\\mathcal O_X$.",
+   "uses": [
+    "def-weil-scheme-characteristic-p",
+    "def-weil-ring-frobenius",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius) and following paragraph; restriction compatibility is the ring-map power identity also used in the proof of Tag 0CC7 (lemma-frobenius-endomorphism-identity)."
+   }
+  },
+  {
+   "text": "Compute on germs to identify the stalk map. An element of $\\mathcal O_{X,x}$ is represented by a pair $(U,s)$ with $x\\in U$, two pairs being equal if their sections agree after restriction to some common neighbourhood of $x$. Step 4 shows that $[U,s]\\mapsto[U,s^p]$ respects this relation. Ring operations on germs are computed on a common neighbourhood, so $[U,s^p]=[U,s]^p$; also $p\\cdot1=0$ on germs because it is zero on sections. Hence the stalk map is precisely the Frobenius of $\\mathcal O_{X,x}$. This stalk is local since $X$ is a locally ringed space [def-weil-locally-ringed-space-morphism]. Step 3 applies to this stalk ring, so its Frobenius is local.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0078 (section-stalks) and 007G (section-stalks-presheaves-structures), explicit description by germs and ring operations; applied to the map in Tag 03SM."
+   }
+  },
+  {
+   "text": "The identity of the underlying topological space is continuous. Combine it with the sheaf map of Step 4 and the local stalk maps of Step 5. The identity-on-space criterion in [def-weil-locally-ringed-space-morphism] now says exactly that $(\\mathrm{id}_X,F^\\sharp)$ is a morphism of locally ringed spaces. A morphism between schemes is such a morphism of their underlying locally ringed spaces, so this is a scheme endomorphism, as required in (iii).",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), following paragraph: this defines an endomorphism in the category of schemes; Schemes Tag 01HB (definition-locally-ringed-space)."
+   }
+  },
+  {
+   "text": "For the affine assertion in (iv), let $X=\\operatorname{Spec}A$. Under $\\Gamma(X,\\mathcal O_X)=A$, the map on global sections of the scheme endomorphism constructed in Step 6 is $a\\mapsto a^p$. The affine-spectrum correspondence of [def-weil-affine-spectrum] says that morphisms $\\operatorname{Spec}A\\to\\operatorname{Spec}A$ are uniquely determined by their induced ring homomorphisms on global sections. The endomorphism constructed in Step 6 and $\\operatorname{Spec}(F_A)$ both induce $F_A$, so they are equal.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), bijection taking a morphism to its map on global sections; used to identify the construction of Tag 03SM on an affine scheme."
+   }
+  },
+  {
+   "text": "For an open subscheme $U\\subseteq X$, its structure sheaf is $\\mathcal O_X|_U$ by [def-weil-open-immersion]. Thus for every open $V\\subseteq U$ the restricted sheaf endomorphism sends the same section $s\\in\\mathcal O_U(V)=\\mathcal O_X(V)$ to $s^p$. The restricted underlying map is the identity of $U$. Hence this restriction is exactly the endomorphism constructed for $U$ in Steps 4–6. If $U\\cong\\operatorname{Spec}A$, identify its global sections with $A$ by that isomorphism: any ring isomorphism preserves powers, so Step 7 identifies this restriction with $\\operatorname{Spec}(F_A)$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HE (definition-immersion-locally-ringed-spaces), open subspaces with restricted structure sheaf, and Tag 01I1 (lemma-morphism-into-affine); applied to the sectionwise formula of Varieties Tag 03SM."
+   }
+  },
+  {
+   "text": "Finally, for every integer $n\\geq0$, form the $n$-fold composite, starting at $n=0$ with the identity. For a prime ideal $\\mathfrak p\\subseteq A$, induction using Step 1 gives $(F_A^n)^{-1}(\\mathfrak p)=\\mathfrak p$: the base is the identity map and the successor inverse image is $F_A^{-1}((F_A^n)^{-1}(\\mathfrak p))=F_A^{-1}(\\mathfrak p)=\\mathfrak p$. For local $A$, each $F_A^n$ maps the maximal ideal into itself by repeated application of Step 3. By the composition formula in [def-weil-locally-ringed-space-morphism], it has identity underlying map and section map $F_{\\mathcal O_X(V)}^n$. The iterate formula in [def-weil-ring-frobenius] gives $s\\mapsto s^{p^n}$: the induction step is $(s^{p^n})^p=s^{p^{n+1}}$. For a germ represented by $(U,s)$, the $n$-fold stalk composite sends $[U,s]$ to $[U,s^{p^n}]$, which equals $[U,s]^{p^n}$ by the germ ring operations. Each composite remains local because a composite of maps carrying maximal ideals into maximal ideals does so. On an open $U$, the restricted section map is still $s\\mapsto s^{p^n}$ on every open subset of $U$. On an affine open, functoriality of $\\operatorname{Spec}$ in [def-weil-affine-spectrum] identifies the composite with $\\operatorname{Spec}(F_A^n)$. This proves all the iterate assertions, including $n=0$ and the empty scheme.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-ring-frobenius",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), sectionwise formula, iterated by composition; elementary exponent and restriction computations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Detailed expansion of Tag 03SM (definition-absolute-frobenius) and its following paragraph, using the explicit germ description in Sheaves Tags 0078/007G and the affine-spectrum correspondence of Schemes Tag 01I1. The source asserts well-definedness without this full argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +165,94 @@
    "results": "none",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "absolute Frobenius of a scheme in characteristic p is a locally ringed space morphism and on affine schemes equals Spec.map of ring Frobenius",
+   "results": "{\"t\": \"2026-10-16T07:26:53Z\", \"tool\": \"leanfinder\", \"query\": \"absolute Frobenius of a scheme in characteristic p is a locally ringed space morphism and on affine schemes equals Spec.map of ring Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectionMap.map\", \"PerfectionMap.map_eq_map\", \"WittVector.frobenius_eq_map_frobenius\", \"coe_frobeniusEquiv\", \"frobeniusEquiv_apply\", \"AlgebraicGeometry.Spec.map\", \"RingHom.map_frobenius\", \"frobeniusEquiv_def\"], \"digest\": \"1009caf8876f9ea8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ring/perfection constructions, Spec.map and RingHom.map_frobenius are ingredients, not this multi-clause scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, frobenius, Spec.map",
+   "results": "{\"t\": \"2026-10-16T07:26:53Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, frobenius, Spec.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Spec.map'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned no hits and reported unknown identifier Spec.map"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|Frobenius",
+   "results": "{\"t\": \"2026-10-16T07:26:53Z\", \"tool\": \"grep\", \"query\": \"frobenius|Frobenius\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no Frobenius occurrence in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "absolute Frobenius of a scheme in characteristic p, identity on Spec and local homomorphism",
+   "results": "{\"t\": \"2026-10-16T07:26:54Z\", \"tool\": \"leansearch\", \"query\": \"absolute Frobenius of a scheme in characteristic p, identity on Spec and local homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"frobenius_def\", \"frobenius\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap_id\", \"LinearMap.frobenius_def\", \"AlgebraicGeometry.Spec.map_eq_id\", \"AlgebraicGeometry.Spec.map_id\", \"frobenius_one\"], \"digest\": \"8da36be70b80eaeb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ring Frobenius and Spec identity lemmas only; Spec.map_eq_id concerns equality of scheme morphisms, not identity of the underlying map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural ring homomorphism taking each section of a sheaf of rings to its pth power induces Frobenius on stalks and fixes prime ideals",
+   "results": "{\"t\": \"2026-10-16T07:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"natural ring homomorphism taking each section of a sheaf of rings to its pth power induces Frobenius on stalks and fixes prime ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgHom.IsArithFrobAt.localize\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom\", \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"AlgebraicGeometry.StructureSheaf.stalkAlgebra_map\"], \"digest\": \"ad7a6e0647b2cb9f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: structure-sheaf stalk and arithmetic Frobenius localization constructions do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius, Ideal.comap",
+   "results": "{\"t\": \"2026-10-16T07:30:53Z\", \"tool\": \"loogle\", \"query\": \"frobenius, Ideal.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits for the Frobenius/comap pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*(comap|IsLocalHom|Spec)|(?:comap|IsLocalHom|Spec).*frobenius|stalk.*frobenius|frobenius.*stalk",
+   "results": "{\"t\": \"2026-10-16T07:30:53Z\", \"tool\": \"grep\", \"query\": \"frobenius.*(comap|IsLocalHom|Spec)|(?:comap|IsLocalHom|Spec).*frobenius|stalk.*frobenius|frobenius.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/FieldTheory/IsPerfectClosure.lean\", \"Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean\", \"Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean\", \"Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean\", \"Mathlib/RingTheory/WittVector/Isocrystal.lean\", \"Mathlib/RingTheory/WittVector/Isocrystal.lean\", \"Mathlib/RingTheory/WittVector/IsPoly.lean\"], \"digest\": \"51ea8c03849711eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: eight unrelated FrobeniusNumber, perfect-closure or Witt-vector textual matches, not the scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius ring map induces the identity map on prime spectrum and preserves units in a local ring",
+   "results": "{\"t\": \"2026-10-16T07:30:54Z\", \"tool\": \"leansearch\", \"query\": \"Frobenius ring map induces the identity map on prime spectrum and preserves units in a local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.specComap\", \"LinearMap.frobenius\", \"AlgebraicGeometry.Spec.topMap_id\", \"isUnit_map_iff\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"map_mem_nonunits_iff\", \"PrimeSpectrum.mapPiLocalization_id\", \"isUnit_of_map_unit\"], \"digest\": \"b4fb1198b421dace\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: spectrum comap and unit-reflection interfaces are ingredients; no assertion identifying their specialization to Frobenius"
+  },
+  {
+   "tool": "grep",
+   "query": "def Spec.map|def locallyRingedSpaceMap|theorem map_frobenius|lemma map_frobenius|def specComap",
+   "results": "{\"t\": \"2026-10-16T07:31:51Z\", \"tool\": \"grep\", \"query\": \"def Spec.map|def locallyRingedSpaceMap|theorem map_frobenius|lemma map_frobenius|def specComap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Expand.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"Mathlib/RingTheory/WittVector/Frobenius.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\"], \"digest\": \"613b35a401c016a9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: general Spec.map construction and polynomial/Witt-vector expansion lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The power endomorphism of a structure sheaf in prime characteristic gives a scheme self map fixing every point, and agrees with the prime spectrum map on affine charts",
+   "results": "{\"t\": \"2026-10-16T07:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"The power endomorphism of a structure sheaf in prime characteristic gives a scheme self map fixing every point, and agrees with the prime spectrum map on affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectionMap.map_eq_map\", \"PerfectionMap.id\", \"coe_iterateFrobeniusEquiv\", \"Perfection.pthRoot_frobenius\", \"frobeniusEquiv_def\", \"iterateFrobenius_zero_apply\", \"frobenius\", \"Perfection.lift_apply_apply_coe\"], \"digest\": \"81eb9559711cf2a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the results concern ring Frobenius and perfections, not the multi-clause scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "iterateFrobenius|frobenius",
+   "results": "{\"t\": \"2026-10-16T07:47:39Z\", \"tool\": \"grep\", \"query\": \"iterateFrobenius|frobenius\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits for this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius, PrimeSpectrum.comap",
+   "results": "{\"t\": \"2026-10-16T07:47:49Z\", \"tool\": \"loogle\", \"query\": \"frobenius, PrimeSpectrum.comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits for this query"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +272,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": null
+ "unit": null,
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-absolute-frobenius-well-defined",
+  "worker": "stage1",
+  "summary": "Kept all four clauses and all hypotheses. Expanded prime-ideal, locality, section-restriction, germ, scheme-morphism, affine-identification and iterate arguments into nine steps. Reused six existing definition/interface nodes; the affine-spectrum node explicitly supplies the needed uniqueness theorem. Added the open-immersion definition for the restricted structure sheaf. No new node: the algebra and germ calculations are elementary; the sole non-elementary input is the already recorded affine-spectrum correspondence. Checked the empty scheme, the zero section ring, nonreduced rings, and the zeroth iterate. Recorded the actual Mathlib searches; the existing Lean Frobenius construction covers only part of the item and is not attached.",
+  "blueprint": "Supplies the absolute q-power morphism referred to in the final paragraph of def-weil-frobenius-detailed through def-weil-absolute-frobenius-scheme: Steps 1–6 establish well-definedness, Steps 7–8 the affine/open description, Step 9 the q-power iterates. The ancestor is a definition with no proof steps; no unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-8fb67fd99",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-8fb67fd99 (reviewer sub-agent of L); spot-checked: Mathematics and all nine proof steps pass source, hypothesis, edge-case, dependency, and route checks. Fix the item source metadata: Tag 03SM’s following paragraph explicitly states that absolute Frobenius is a scheme endomorphism, so remove the claim that clauses (iii)–(iv) are unstated. Corrected DAG JSON is in fixes/dag/nodes/sec-smooth-purity/lem-weil-absolute-frobenius-well-defined.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ }
 }
