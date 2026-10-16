@@ -13,17 +13,127 @@
  },
  "kind": "statement",
  "title": "Cofiltered coherent diagrams whose arrows are equivalences",
- "statement": "Fix universes as in [def-weil-size-convention]. Let $I$ be a small nonempty ordinary category such that any two objects receive arrows from a common object and every parallel pair $f,g:i\\to j$ is equalized by some arrow $k\\to i$. Let $\\mathscr C$ be an enhanced category in the larger universe (a category retaining mapping spaces and all composition homotopies, equivalently an infinity category). A coherent diagram on $I$ consists of its objects, arrows, composition homotopies for strings of arrows and all higher compatibilities, i.e. a functor from the nerve $N(I)$ to $\\mathscr C$. Write $\\operatorname{Fun}_{\\mathrm{eq}}(N(I),\\mathscr C)$ for the full enhanced subcategory of diagrams sending every arrow of $I$ to an equivalence. Then the constant-diagram functor\n$$\\mathscr C\\longrightarrow\\operatorname{Fun}_{\\mathrm{eq}}(N(I),\\mathscr C)$$\nis an equivalence; evaluation at any fixed object of $I$ is an inverse equivalence. For each such diagram $F$, its homotopy limit exists and every projection $\\operatorname{holim}_I F\\to F(i)$ is an equivalence. The space of limiting cones is contractible. These constructions are natural for coherent transformations of diagrams and for changes of indexing category between nonempty cofiltered categories. The same assertions hold for filtered categories and homotopy colimits. They apply also when $\\mathscr C$ is an enhanced functor category, so that the cones and equivalences are natural in its parameters. No assertion is made about diagrams having noninvertible arrows or about the empty index category.",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $I$ be a small nonempty ordinary category such that any two objects receive arrows from a common object and every parallel pair $f,g:i\\to j$ is equalized by some arrow $k\\to i$. Let $\\mathscr C$ be an enhanced category in the larger universe (a category retaining mapping spaces and all composition homotopies, equivalently an infinity category), using the precise coherent-diagram and cone conventions of [def-cbc-enhanced-diagrams-cones]. A coherent diagram on $I$ consists of its objects, arrows, composition homotopies for strings of arrows and all higher compatibilities, i.e. a functor from the nerve $N(I)$ to $\\mathscr C$. Write $\\operatorname{Fun}_{\\mathrm{eq}}(N(I),\\mathscr C)$ for the full enhanced subcategory of diagrams sending every arrow of $I$ to an equivalence. Then the constant-diagram functor\n$$\\mathscr C\\longrightarrow\\operatorname{Fun}_{\\mathrm{eq}}(N(I),\\mathscr C)$$\nis an equivalence; evaluation at any fixed object of $I$ is an inverse equivalence. For each such diagram $F$, its homotopy limit exists and every projection $\\operatorname{holim}_I F\\to F(i)$ is an equivalence. The space of limiting cones is contractible. These constructions are natural for coherent transformations of diagrams and for changes of indexing category between nonempty cofiltered categories. The same assertions hold for filtered categories and homotopy colimits. They apply also when $\\mathscr C$ is an enhanced functor category, so that the cones and equivalences are natural in its parameters. No assertion is made about diagrams having noninvertible arrows or about the empty index category.",
  "source": {
   "document": "literature/stacks-project/categories.tex",
   "place": "Tag 04AZ, label definition-codirected, supplies the precise nonempty/common-predecessor/equalizer hypotheses only. The contractibility of the nerve and the enhanced constant-diagram and limiting-cone assertions are additional agent-formulated foundations. WANTED: weak contractibility of filtered nerves and the universal property of groupoid completion in enhanced categories."
  },
  "stmt_deps": [
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=N(I)$, in the terminology of [def-cbc-enhanced-diagrams-cones]. The nonemptiness, common-predecessor and actual parallel-arrow equalizer hypotheses of the item are exactly the cofiltered alternative in [lem-cbc-filtered-nerve-weak-contractibility]. Thus the unique map $p:K\\to\\Delta^0$ is a weak homotopy equivalence. This is a statement about all homotopy groups; replacing it by mere connectedness would not suffice.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-filtered-nerve-weak-contractibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "The target $\\Delta^0$ is Kan: there is exactly one map from each simplex or horn to it, and it extends uniquely. Apply [lem-cbc-simplicial-groupoid-localization] to $p$. Since $\\operatorname{Fun}(\\Delta^0,\\mathscr C)=\\mathscr C$, the resulting functor $p^*$ is exactly $\\Delta_I:\\mathscr C\\to E_I:=\\operatorname{Fun}_{\\mathrm{eq}}(N(I),\\mathscr C)$. It is an equivalence of enhanced categories on objects and on the entire mapping spaces of coherent transformations. The functor and full subcategory are enhanced categories by [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "For any chosen $i\\in I$, evaluation $e_i:E_I\\to\\mathscr C$ satisfies $e_i\\Delta_I=\\mathrm{id}$. To exhibit its other inverse equation, choose a quasi-inverse $L_I$ to the equivalence in step 2, with natural equivalence $\\alpha:\\Delta_I L_I\\simeq\\mathrm{id}_{E_I}$. Applying $e_i$ gives $L_I\\simeq e_i$; applying $\\Delta_I$ to the inverse of this equivalence and then composing with $\\alpha$ gives $\\Delta_I e_i\\simeq\\mathrm{id}_{E_I}$. These are coherent transformations because all operations take place in the functor categories of [def-cbc-enhanced-diagrams-cones]. Thus every evaluation is an inverse equivalence. In particular each component of $\\alpha_F$ is an equivalence, by componentwise detection in [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "For $F\\in E_I$, regard $\\alpha_F:\\Delta_I(L_IF)\\simeq F$ as a cone. For each $x\\in\\mathscr C$, its universal map on mapping spaces factors as\n$$\\operatorname{Map}_{\\mathscr C}(x,L_IF)\\xrightarrow{\\Delta_I}\\operatorname{Map}_{E_I}(\\Delta_Ix,\\Delta_I L_IF)\\xrightarrow{\\alpha_F\\circ-}\\operatorname{Map}_{E_I}(\\Delta_Ix,F).$$\nThe first map is an equivalence because $\\Delta_I$ is an equivalence; the second has inverse given by postcomposition with $\\alpha_F^{-1}$; the two inverse equations follow by composing with $\\alpha_F^{-1}\\alpha_F\\simeq\\mathrm{id}$ and $\\alpha_F\\alpha_F^{-1}\\simeq\\mathrm{id}$. Fullness identifies the last mapping space with that in all of $\\operatorname{Fun}(K,\\mathscr C)$. These are precisely the maps in the cone criterion of [lem-cbc-enhanced-functor-cone-calculus], so this cone is limiting. Its projection at $i$ is $(\\alpha_F)_i:L_IF\\to F(i)$, already an equivalence. No general existence of $I$-limits in $\\mathscr C$ has been assumed.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "The limiting cones on the fixed diagram $F$ are exactly the terminal objects of its coherent cone category. Its terminal-object subcategory is nonempty by step 4. By [lem-cbc-enhanced-functor-cone-calculus], the full subcategory of its terminal objects is a contractible Kan complex. Thus the space of limiting cones, including their apices and comparison homotopies, is contractible. Any other limiting cone is equivalent to the one from step 4 in the cone category. Its projections are therefore composites, up to the cone compatibility homotopies, of equivalences of apices with the projections in step 4, hence are equivalences as well.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "The quasi-inverse $L_I$ and the transformation $\\alpha$ from step 3 are already coherent in every $F$ and every transformation $t:F\\to H$ in $E_I$. Explicitly, cone naturality is the homotopy $t\\alpha_F\\simeq\\alpha_H\\Delta_I(L_It)$, together with its higher compatibilities, supplied by this natural transformation. For an arbitrary functor $u:J\\to I$ between nonempty cofiltered categories, restriction satisfies $u^*\\Delta_I=\\Delta_J$. Restrict $\\alpha_F$ to obtain an equivalence cone $\\Delta_J L_IF\\to u^*F$. For every $x$, the map $\\operatorname{Map}_{\\mathscr C}(x,L_IF)\\to\\operatorname{Map}_{\\operatorname{Fun}(N(J),\\mathscr C)}(\\Delta_Jx,u^*F)$ factors through $\\operatorname{Map}_{E_J}(\\Delta_Jx,\\Delta_JL_IF)$ by full faithfulness of $\\Delta_J$ and postcomposition with $u^*\\alpha_F$; both maps are equivalences. The cone criterion therefore makes the restricted cone limiting. The universal property of the chosen limit of $u^*F$ supplies the comparison $L_IF\\to L_J(u^*F)$, with the homotopy intertwining the cone maps; it is an equivalence because both cones are limiting. Its space of cone-compatible choices is contractible by the cone mapping-space formula in [lem-cbc-enhanced-functor-cone-calculus]. For $v:H\\to J$, the composite of these comparisons and the comparison for $uv$ intertwine the same restricted cone, so their space of compatible identifications is contractible; the identity comparison is identified with the identity by the same terminal mapping-space condition. To include transformations and higher simplices without inferring them from objectwise uniqueness, apply this calculation in $\\operatorname{Fun}(E_I,\\mathscr C)$, a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Here the universal diagram sends $i$ to the evaluation functor $F\\mapsto F(i)$, and $\\alpha$ is an equivalence cone on this diagram, since it is componentwise an equivalence. Both compared cones are limiting there by the displayed calculation. Their contractible comparison space thus consists of transformations natural on all of $E_I$, including its noninvertible arrows; composing comparisons in these parameter categories gives the stated coherent composition and identity identifications. This proves index-change compatibility for the equivalence-arrow diagrams in question, without asserting that every such $u$ preserves limits of arbitrary diagrams.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "If $J$ is filtered, the filtered alternative of [lem-cbc-filtered-nerve-weak-contractibility] gives $N(J)\\to\\Delta^0$ a weak homotopy equivalence. Applying [lem-cbc-simplicial-groupoid-localization] gives $\\Delta_J:\\mathscr C\\simeq E_J$. Choose a quasi-inverse $M_J$ and natural equivalence $\\alpha:\\Delta_JM_J\\simeq\\mathrm{id}_{E_J}$, and write $\\beta=\\alpha^{-1}$. Evaluation $e_j$ satisfies $e_j\\Delta_J=\\mathrm{id}$ and $e_j\\alpha:M_J\\simeq e_j$; thus $\\Delta_Je_j\\simeq\\mathrm{id}$ by $\\alpha\\circ\\Delta_J(e_j\\alpha)^{-1}$, proving the evaluation assertion. For each $F\\in E_J$, use the cocone $\\beta_F:F\\to\\Delta_JM_JF$. For every $x$, its mapping-space map factors as\n$$\\operatorname{Map}_{\\mathscr C}(M_JF,x)\\xrightarrow{\\Delta_J}\\operatorname{Map}_{E_J}(\\Delta_JM_JF,\\Delta_Jx)\\xrightarrow{-\\circ\\beta_F}\\operatorname{Map}_{E_J}(F,\\Delta_Jx).$$\nFull faithfulness gives the first equivalence; precomposition with $\\alpha_F$ is inverse to the second. Fullness identifies the last mapping space with the ambient functor-category mapping space. The cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] makes $\\beta_F$ colimiting. Its components are equivalences by componentwise detection. The full subcategory of initial objects of the cocone category is nonempty and contractible by that same node, and any other colimiting cocone has equivalent apex and therefore equivalence structure maps. For $t:F\\to H$, naturality is the homotopy $\\Delta_J(M_Jt)\\beta_F\\simeq\\beta_Ht$ with the higher simplices of $\\beta$. For $u:H\\to J$ between nonempty filtered categories, restrict $\\beta_F$ to $u^*F\\to\\Delta_HM_JF$. The displayed factorization with $\\Delta_H$ and this restricted equivalence makes this cocone colimiting. The initial-object property of the chosen cocone on $u^*F$ gives the comparison $M_H(u^*F)\\to M_JF$ in a contractible space, and it is an equivalence because both cocones are initial. Apply the same displayed mapping-space factorization in $\\operatorname{Fun}(E_J,\\mathscr C)$ to obtain comparisons natural in every transformation and higher simplex of $F$. For composable index functors, the iterated and direct comparisons are maps between these initial cocones, so their compatible composition and identity homotopies have contractible spaces of choices.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-filtered-nerve-weak-contractibility",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  },
+  {
+   "text": "For any enhanced parameter category $P$ small in the chosen sufficiently large universe, [lem-cbc-enhanced-functor-cone-calculus] permits $\\mathscr C=\\operatorname{Fun}(P,\\mathscr D)$. Every previous step applies to this category itself: $\\alpha_F$ is then an equivalence of enhanced functors, so its cones and projections are coherent natural transformations in the parameter. Evaluation at a parameter sends this equivalence cone to an equivalence cone on an equivalence-arrow diagram, which is limiting by the calculation of step 4, and dually colimiting in the filtered case. All constructions stay within the universes of [def-cbc-enhanced-diagrams-cones]. The nonempty hypothesis was used in step 1 and the equivalence-arrow hypothesis in step 2, so no empty-index or noninvertible-arrow assertion is obtained.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+    "place": "Proof opening compactification choice: generic enhanced choice-independence argument (agent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-filtered-nerve-weak-contractibility",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.md",
+  "place": "Opening compactification choice, expanded into the generic enhanced choice-independence proof; Stacks 04AZ supplies only the cofiltered indexing criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +204,45 @@
    "results": "0 hits: ",
    "date": "2026-10-16",
    "verdict": "no match: EventuallyConstant.lean lines 82-145 constructs ordinary limiting cones; its objects and arrows are in an ordinary category, so it does not give coherent diagrams in an infinity category. SimplicialNerve.lean lines 27-35 lists the quasicategory theorem as future work. LocallyConstant grep hits concern condensed presheaves, not locally constant coherent category diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent diagram of equivalences in an infinity category indexed by a nonempty cofiltered category is constant and has a limit given by evaluation",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantTo.hasLimit, CategoryTheory.Functor.IsEventuallyConstantTo.cone_pt, CategoryTheory.Functor.IsEventuallyConstantTo.isLimitCone, LightProfinite.asLimit', CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant, CategoryTheory.Functor.IsEventuallyConstantTo.cone, LightDiagram.isLimit, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; digest 8228ba7854d46367",
+   "date": "2026-10-16",
+   "verdict": "no match: EventuallyConstant.lean:35-39,82-145 is an ordinary-category limit construction, not an enhanced result. Quasicategory primitives and internal functor-category closure exist, but do not prove the item. Read Quasicategory/Basic.lean:34-55, StrictBicategory.lean:14-32 and AnodyneExtensions/Inner/PushoutProduct.lean:153-154."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCofiltered\", \"IsIso\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "verdict": "no match: EventuallyConstant.lean:35-39,82-145 is an ordinary-category limit construction, not an enhanced result. Quasicategory primitives and internal functor-category closure exist, but do not prove the item. Read Quasicategory/Basic.lean:34-55, StrictBicategory.lean:14-32 and AnodyneExtensions/Inner/PushoutProduct.lean:153-154."
+  },
+  {
+   "tool": "grep",
+   "query": "cofiltered.*contract|contract.*cofiltered|nerve.*contract|contract.*nerve",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-16",
+   "verdict": "no match: EventuallyConstant.lean:35-39,82-145 is an ordinary-category limit construction, not an enhanced result. Quasicategory primitives and internal functor-category closure exist, but do not prove the item. Read Quasicategory/Basic.lean:34-55, StrictBicategory.lean:14-32 and AnodyneExtensions/Inner/PushoutProduct.lean:153-154."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant infinity categorical diagrams over a filtered category are constant up to coherent equivalence",
+   "results": "8 hits: CategoryTheory.IsFiltered.IsEventuallyConstant, CategoryTheory.IsFiltered.instHasColimitOfIsEventuallyConstant, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf', CategoryTheory.IsFiltered.IsEventuallyConstant.exists_isEventuallyConstantFrom, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf, CategoryTheory.Limits.hasColimitsOfShape_of_has_filtered_colimits, CategoryTheory.Comma.isFiltered_of_final; digest 940e9a0fbc9c72aa",
+   "date": "2026-10-16",
+   "verdict": "no match: EventuallyConstant.lean:35-39,82-145 is an ordinary-category limit construction, not an enhanced result. Quasicategory primitives and internal functor-category closure exist, but do not prove the item. Read Quasicategory/Basic.lean:34-55, StrictBicategory.lean:14-32 and AnodyneExtensions/Inner/PushoutProduct.lean:153-154."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant functors to an infinity category indexed by a weakly contractible nerve are equivalent to all diagrams sending every morphism to an equivalence",
+   "results": "8 hits: CategoryTheory.nerveFunctor.fullyfaithful, CategoryTheory.nerveEquiv, SSet.OneTruncation₂.ofNerve₂, CategoryTheory.nerveFunctorCompHoFunctorIso, SSet.hoFunctor.terminalIso, CategoryTheory.nerve.fullyFaithfulNerveFunctor₂, SSet.OneTruncation₂.nerveEquiv_apply, SSet.Truncated.HomotopyCategory.functorEquiv; digest 5d428be8a69bc1e1",
+   "date": "2026-10-16",
+   "verdict": "no match: EventuallyConstant.lean:35-39,82-145 is an ordinary-category limit construction, not an enhanced result. Quasicategory primitives and internal functor-category closure exist, but do not prove the item. Read Quasicategory/Basic.lean:34-55, StrictBicategory.lean:14-32 and AnodyneExtensions/Inner/PushoutProduct.lean:153-154."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-etale-local-compact-support-extension",
   "by": "worker",
@@ -113,5 +258,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+  "worker": "stage1",
+  "summary": "Retained the full enhanced statement and supplied an eight-step proof via filtered-nerve weak contractibility and simplicial groupoid localization. Defined all enhanced notions and exposed the non-elementary general cone calculus; proved the evaluation inverse, constructed limiting equivalence cones by full faithfulness, treated all projections, contractible choices, coherent transformations, arbitrary cofiltered index-change functors, the filtered dual, and functor parameters. Ordinary eventually-constant and ordinary free-groupoid results were rejected as partial matches. No Lean was written or compiled. Second reading corrected the right-pinched mapping-space definition, specified the comma pullbacks, made the inverse direction explicit, and expanded filtered and parameterized index-change arguments.",
+  "blueprint": "Expands the opening choice of compactification in thm-cbc-finite-level-proetale, through lem-cbc-etale-local-compact-support-extension: the generic higher-coherent refinement choice-independence tool. The unit has no proof steps, and this is not its key statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-595cf155c",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-595cf155c (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, unit/chapter route, exact Stacks and blueprint sources, and recorded Mathlib searches. Verified every proof step, hypotheses, variance, coherent mapping-space use, filtered dual, parameter case, small cases, duplicate search, and DAG acyclicity. The finite-level master source’s exact coefficient category and exchange morphism are preserved; the enhanced foundations are honestly marked unsplit/WANTED. Review written to review.md."
  }
 }
