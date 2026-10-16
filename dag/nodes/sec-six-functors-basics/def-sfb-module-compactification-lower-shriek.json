@@ -3,26 +3,102 @@
  "blueprint": {
   "is": "def-sfb-module-compactification-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sfb-module-lower-shriek"
+  ]
  },
  "kind": "definition",
  "title": "Lower shriek of module objects for a compactification",
- "statement": "Let $\\Lambda$ be a commutative condensed ring, $f\\colon X\\to Y$ a morphism of schemes\nand $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ a compactification of $f$\n([sk-def-nagata-sketch-data]): $f=g\\circ i$, $i$ an open immersion, $g$ proper. The\n*lower shriek attached to $c$* is\n\n$$\nf^c_!:=g_*\\circ i_!\\colon\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y},\n$$\n\nthe extension by zero along $i$ ([def-sfb-module-open-lower-shriek]) followed by the\npushforward along $g$ ([def-sfb-module-lower-star]).",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring ([sk-def-sfb-condensed-ring]), let $f\\colon X\\to Y$ be a morphism of schemes, and let $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ be a compactification of $f$ ([sk-def-nagata-sketch-data]): $f=g\\circ i$, $i$ a quasi-compact open immersion, and $g$ proper. For $T=X,\\bar X,Y$, write $\\Lambda_T=p_T^*\\Lambda$ for the pulled-back coefficient ring ([sk-def-sfb-pulled-back-coefficients]) and $\\Mod_{\\Lambda_T}$ for the category of module objects ([sk-def-sfb-module-objects]). The *lower shriek attached to $c$* is\n\n$$\nf^c_!:=g_*\\circ i_!\\colon\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y},\n$$\n\nthe extension by zero along $i$ ([def-sfb-module-open-lower-shriek]) followed by the pushforward of module objects $g_*\\colon\\Mod_{\\Lambda_{\\bar X}}\\to\\Mod_{\\Lambda_Y}$ of [def-sfb-module-lower-star], including the restriction of scalars along $\\eta_g\\colon\\Lambda_Y\\to g^{\\Ab}_*\\Lambda_{\\bar X}$ built into that functor.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-compactification-lower-shriek.md",
   "place": "node def-sfb-module-compactification-lower-shriek, order 1698"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
   "sk-def-nagata-sketch-data",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
   "def-sfb-module-open-lower-shriek",
   "def-sfb-module-lower-star"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactificationLowerShriek|lowerShriek",
+   "results": "0 hits in Mathlib/; no compactification lower-shriek declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "lowerShriek compactificationLowerShriek, CategoryTheory.Functor.comp",
+   "results": "0 hits; initial query reports unknown identifier lowerShriek.",
+   "date": "2026-10-16",
+   "verdict": "query error (unknown identifier lowerShriek); not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.comp, SheafOfModules.pushforward, PresheafOfModules.pushforward₀",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define module-object lower shriek for a compactification by composing extension by zero with pushforward",
+   "results": "PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforward, and related generic presheaf/module declarations; none states the pro-etale condensed-module compactification definition.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactification lower shriek of module objects as pushforward after extension by zero",
+   "results": "PresheafOfModules.pushforward₀_obj, CondensedMod.LocallyConstant.functorToPresheaves, PresheafOfModules.pushforward₀, CompHausLike.LocallyConstantModule.functorToPresheaves, and related generic module declarations; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero followed by proper pushforward module sheaves compactification",
+   "results": "SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj, and related generic sheaf-module declarations; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(extension|shriek)|compactificationLowerShriek|linearOpenImmersionLowerShriek",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image composed with open extension by zero for internal modules over a condensed coefficient ring",
+   "results": "8 hits: Condensed.profiniteSolid, Condensed.free, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorToPresheaves, Condensed.profiniteFree, CondensedMod.ofSheafCompHaus, LightCondMod, LightCondMod.LocallyConstant.functor. Their returned types concern condensed modules over an ordinary ring on profinite/compact Hausdorff sites; none defines a compactification composite on scheme pro-etale module objects.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional pushforward functor on internal sheaves of modules obtained by compactification into an open immersion and a proper morphism",
+   "results": "8 hits: SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj. These concern individual pushforward functors, their composition isomorphism or adjunction, or structure-sheaf modules; none defines the specified pro-etale internal-module compactification composite. Read PushforwardContinuous.lean lines 34-49 and Modules/Sheaf.lean lines 163-171. Also read PushforwardContinuous.lean lines 132-143 and 259-274: the additional candidates respectively give a composition isomorphism for two direct images and an adjunction under a site-level adjunction, not an exceptional compactification image.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*(pushforward|module)|exceptional.*(direct.image|pushforward)|extension[Bb]y[Zz]ero",
+   "results": "0 hits in Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -43,5 +119,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-module-lower-shriek"
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-compactification-lower-shriek",
+  "worker": "stage1",
+  "summary": "Revalidated the retained repair against the archived returned head f03f60e289fc and the current DAG. Two cited statements differ: sk-def-nagata-sketch-data retains the same compactification clause while replacing unrelated blow-up material by refinements; def-sfb-module-lower-star replaces umbrella citations by detailed transport, lax-monoidal pushforward and scalar-restriction nodes without changing its functor. Reread all six current statements and their blueprint sources. The item explicitly includes quasi-compactness and the target coefficient restriction, with matching intermediate module category. No new nodes or Mathlib leaves.",
+  "blueprint": "The Lower shriek bullet of sk-def-sfb-module-lower-shriek/_section.md and the complete statement in def-sfb-module-compactification-lower-shriek.md. This item realizes only the definition f^c_! = g_* \\circ i_!; the chosen-compactification lower-shriek and its exactness/left-exactness clauses belong to the neighbouring item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q10-770b6a970",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-770b6a970 (reviewer sub-agent of L); spot-checked: Reviewed item, parent unit, all six cited nodes and sources, blueprint route, DAG closure, Mathlib searches, coefficient categories, scalar map eta_g, and edge cases. No new nodes or repairable faults; review written to review.md."
+ }
 }

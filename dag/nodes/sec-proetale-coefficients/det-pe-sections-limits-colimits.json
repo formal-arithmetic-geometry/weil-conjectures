@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-sections-limits-colimits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Evaluation on a weakly contractible affine preserves limits and colimits of modules",
@@ -12,42 +12,196 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
   "place": "node det-pe-sections-limits-colimits, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-small-proetale-site",
+  "det-pe-weak-contractible-equivalences",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention"
+ ],
  "proof": [
   {
-   "text": "*Limits.* Limits of sheaves of modules are computed sectionwise, so $\\Gamma(W,-)$ preserves\nthem.",
-   "uses": [],
-   "elementary": null
+   "text": "Work in the fixed universes and a small skeleton of the pro-étale site; all diagrams and families below are small in the universe in which their colimits are formed. By the sectionwise-limit lemma, for any diagram $(M_a)$ its limit has sections $\\{(m_a)\\in\\prod_a M_a(V): M(u)(m_a)=m_b\\text{ for all }u:a\\to b\\}$. Setting $V=W$ identifies the limit cone with the limit cone of $\\mathcal R(W)$-modules. Thus evaluation preserves all limits, including the empty limit and kernels. No weak contractibility is needed for this part.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limit construction; Tag 03CO, lemma-limits-colimits-abelian-sheaves (2)"
+   }
   },
   {
-   "text": "*Direct sums.* Let $P$ be the presheaf $V\\mapsto\\bigoplus_iM_i(V)$; then\n$\\bigoplus_iM_i=P^{\\#}$. For a finite subset $J\\subset I$, the finite sum\n$\\bigoplus_{i\\in J}M_i=\\prod_{i\\in J}M_i$ is already a sheaf, and it is a subsheaf of\n$P^{\\#}$ (the presheaf inclusion $\\bigoplus_JM_i\\to P$ is injective and sheafification is\nexact).\n\nSurjectivity: let $s\\in P^{\\#}(W)$. Every section of a sheafification is locally a section\nof the presheaf, so there are a covering $\\{V_k\\to W\\}$ and $p_k\\in P(V_k)$ with\n$s|_{V_k}=p_k$. Since $W$ is affine, the covering condition\n[def-weil-pbc-proetale-covering] gives finitely many affine opens of members of the\ncovering whose images cover $W$; they form a finite covering $\\{V'_l\\to W\\}$ refining the\nfirst one, and restricting the $p_k$ gives $p'_l\\in P(V'_l)$. Each $p'_l$ has finite\nsupport, so there is one finite $J\\subset I$ with $p'_l\\in\\bigoplus_{i\\in J}M_i(V'_l)$ for\nall $l$. The $p'_l$ are compatible in $P^{\\#}$, hence in the subsheaf\n$\\bigoplus_JM_i$, so they glue to $t\\in(\\bigoplus_JM_i)(W)=\\bigoplus_{i\\in J}M_i(W)$. Its\nimage in $P^{\\#}(W)$ agrees with $s$ on the covering, hence equals $s$.\n\nInjectivity: an element of $\\bigoplus_iM_i(W)$ lies in $\\bigoplus_{i\\in J}M_i(W)$ for some\nfinite $J$, and $(\\bigoplus_JM_i)(W)\\to P^{\\#}(W)$ is injective because\n$\\bigoplus_JM_i\\subset P^{\\#}$ is a subsheaf.",
+   "text": "For a family $(M_i)_{i\\in I}$ form the presheaf of modules $P(V)=\\bigoplus_{i\\in I}M_i(V)$ with componentwise restrictions. The sectionwise-presheaf-colimit lemma makes $P$ the coproduct of the underlying module presheaves. Let $\\eta:P\\to Q=P^\\#$ be module sheafification. A morphism $Q\\to H$ to a module sheaf is, by the sheafification universal property, exactly a presheaf morphism $P\\to H$, and hence exactly a family of module-sheaf morphisms $M_i\\to H$. Consequently $Q$, with the maps induced by the summand inclusions, is the coproduct in module sheaves. This identifies the canonical comparison in the statement with $P(W)\\xrightarrow{\\eta_W}Q(W)$.",
    "uses": [
-    "def-weil-pbc-proetale-covering"
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, colimit construction, using Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
   },
   {
-   "text": "*Colimits.* A colimit of $\\mathcal R$-modules is the cokernel of a map between direct sums\n$\\bigoplus_{\\alpha\\to\\beta}M_\\alpha\\to\\bigoplus_\\gamma M_\\gamma$. $\\Gamma(W,-)$ preserves\nboth direct sums and cokernels, the latter because it is exact\n([det-pe-wc-sections-exact], valid for every weakly contractible $W$ by part 3 of\n[det-pe-weak-contractible-equivalences]); hence it preserves the colimit. Filtered\ncolimits are a special case.",
+   "text": "For each finite subset $J\\subset I$, the presheaf $F_J(V)=\\bigoplus_{j\\in J}M_j(V)=\\prod_{j\\in J}M_j(V)$ is a module sheaf: glue each of the finitely many coordinates separately, and uniqueness follows coordinatewise. The coordinate projection $P\\to F_J$ extends uniquely to $r_J:Q\\to F_J$ by module sheafification. The composite $i_J:F_J\\hookrightarrow P\\xrightarrow{\\eta}Q$ satisfies $r_Ji_J=\\mathrm{id}_{F_J}$, as is checked on every section before sheafification. Hence $i_J(V)$ is injective for every object $V$. This proves the subsheaf assertion needed for descent without presuming that evaluation preserves an infinite sum.",
    "uses": [
-    "det-pe-wc-sections-exact",
-    "det-pe-weak-contractible-equivalences"
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md",
+    "place": "Direct sums, finite subsum paragraph; elementary split-inclusion proof in place of the sheafification-exactness argument"
+   }
+  },
+  {
+   "text": "Let $s\\in Q(W)$. Module sheafification is abelian-group sheafification, whose underlying sets are set sheafification by the cited comparison. The local-sections theorem therefore gives a covering $\\{V_k\\to W\\}$ and $p_k\\in P(V_k)$ with $\\eta(p_k)=s|_{V_k}$. Apply the affine finite-cover-refinement lemma to the covering sieve generated by these arrows. Its finite covering family $\\{T_l\\to W\\}_{l\\in L}$ consists of arrows in that sieve, so each factors through some $V_k\\to W$; restriction gives $p'_l\\in P(T_l)$ lifting $s|_{T_l}$. Each $p'_l$ has finite support, and their union over finite $L$ is a single finite $J\\subset I$. Regard all $p'_l$ as sections of $F_J$. After restriction along any pair of arrows from a common object into two covering members, they have the same image in $Q$, namely the restriction of $s$; the sectionwise injectivity of $i_J$ from step 3 makes them equal in $F_J$. The sheaf condition glues them to $t\\in F_J(W)$. Its image in $Q(W)$ is $s$ by separatedness. Thus $\\eta_W$ is surjective. This argument also applies to an empty covering of the empty object: both sheaves have their unique zero section there.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-proetale-affine-finite-cover-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Tag 00WK, lemma-sections-sheafification; Tag 0935, lemma-sections-over-quasi-compact (2), expanded finite-support argument; Bhatt–Scholze Definition 4.1.1, p. 27, finite affine refinement of a covering"
+   }
+  },
+  {
+   "text": "If $x\\in P(W)$ maps to zero in $Q(W)$, its support is contained in a finite $J\\subset I$. Then $x$ is the image of $t\\in F_J(W)$ and $i_J(W)(t)=0$; applying the retraction $r_J(W)$ gives $t=0$, hence $x=0$. Together with step 4 this proves that $\\eta_W$ is a bijective $\\mathcal R(W)$-linear map, hence an isomorphism. It is exactly the coproduct comparison from step 2, so evaluation preserves arbitrary direct sums, including the empty sum. For a map between two families its comparison square commutes on each summand by the definition of $\\eta$; the coproduct universal property then gives commutativity.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md",
+    "place": "Direct sums, injectivity paragraph; compatibility with summand maps written out"
+   }
+  },
+  {
+   "text": "We now prove preservation of cokernels for the full weak-contractibility hypothesis in the statement. Let $f:M\\to N$ be a morphism of module sheaves, set $A(V)=N(V)/f_V(M(V))$, and let $C=A^\\#$ with $q:N\\to C$. The definition of module sheaves identifies $q$ as a cokernel; its underlying sheafification is abelian-group sheafification and hence set sheafification by the cited comparisons. The local-sections theorem shows that $q$ is locally surjective as a map of sheaves of sets: locally a section of $C$ comes from a class in $A$, which has a representative in $N$. By the set-sheaf epi criterion, $q$ is an epimorphism on underlying set sheaves. Let $K=\\ker q$, computed sectionwise by the limit lemma. For $n\\in K(V)$, the class of $n$ and zero in $A(V)$ have equal image in $A^\\#(V)$. The local-equality clause of the local-sections theorem gives a covering on which this class is zero, so on each covering member $n$ is $f(m)$ for some section $m$. Thus $M\\to K$ is also locally surjective on underlying set sheaves, hence an epimorphism there. Condition (3) of weak contractibility makes both $N(W)\\to C(W)$ and $M(W)\\to K(W)$ surjective. Since $K(W)=\\ker q_W$, it follows that $\\ker q_W=f_W(M(W))$ and $q_W$ induces the canonical isomorphism $N(W)/f_W(M(W))\\cong C(W)$. Therefore evaluation preserves cokernels. This proves the exactness consequence for every weakly contractible $W$, without imposing that its coordinate ring be w-contractible.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "det-pe-weak-contractible-equivalences",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03DA, lemma-abelian, preceding cokernel construction; Tag 03CY, lemma-sheafification-presheaf-modules; Tags 00WB, 00WK and 00WN, theorem-plus, lemma-sections-sheafification and lemma-mono-epi-sheaves; Tag 0946, lemma-w-contractible (1), explicit module argument"
+   }
+  },
+  {
+   "text": "For a small diagram $D:\\mathcal I\\to\\operatorname{Mod}(\\mathcal R)$, let $B=\\bigoplus_{a\\in\\mathrm{Ob}\\mathcal I}D(a)$ and $A=\\bigoplus_{u:a\\to b}D(a)$. Define $d:A\\to B$ on the summand for $u:a\\to b$ by $\\iota_bD(u)-\\iota_a$, and let $q:B\\to L$ be its cokernel. A map $h:B\\to H$ is a family $h_a:D(a)\\to H$; the condition $hd=0$ says, on the summand for each $u:a\\to b$, exactly $h_bD(u)=h_a$. By the cokernel universal property such families factor uniquely through $L$. Thus $L$ with the maps $q\\iota_a$ is the colimit of $D$. For the section diagram, put $B_W=\\bigoplus_aD(a)(W)$ and $A_W=\\bigoplus_{u:a\\to b}D(a)(W)$, define $d_W$ on the $u$-summand by $x\\mapsto\\iota_bD(u)_W(x)-\\iota_a(x)$, and set $L_W=B_W/\\operatorname{im}d_W$. For an $\\mathcal R(W)$-module $H$, a linear map $B_W\\to H$ is a family $h_a:D(a)(W)\\to H$. It factors uniquely through $L_W$ exactly when it kills every displayed relation, equivalently when $h_bD(u)_W=h_a$ for every arrow $u$. Thus $L_W$ with the quotient coprojections is the module colimit, including the empty diagram, for which $A_W=B_W=L_W=0$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md",
+    "place": "Colimits paragraph, explicit maps and verification of the presentation by its universal property"
+   }
+  },
+  {
+   "text": "Under the direct-sum comparisons of steps 2–5, the map $d(W)$ of step 7 is the map on direct sums of $\\mathcal R(W)$-modules whose component for $u:a\\to b$ sends $x$ to $\\iota_bD(u)_W(x)-\\iota_a(x)$: evaluation preserves addition and composition of module-sheaf maps sectionwise. Step 6 identifies $L(W)$, with its quotient map, with the cokernel of this map. By the universal-property computation in step 7, it is the colimit of $a\\mapsto D(a)(W)$, with the same structure maps. Thus the resulting isomorphism is the canonical colimit comparison. If a morphism of diagrams is given, the two comparison composites agree on each structure map $D(a)(W)$, and so are equal by the colimit universal property. In particular evaluation commutes with filtered colimits, and step 1 supplies all limits as required.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md",
+    "place": "Colimits paragraph, evaluation of the presentation and verification of canonical structure maps and naturality"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-covering",
-  "det-pe-wc-sections-exact",
-  "det-pe-weak-contractible-equivalences"
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-size-convention",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-proetale-affine-finite-cover-refinement",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "det-pe-weak-contractible-equivalences",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md",
+  "place": "Limits, Direct sums, and Colimits; expanded using Stacks Tags 03DB, 03CY, 00WK, 0935, 00WN, 0946 and Bhatt–Scholze Definition 4.1.1"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluationPreserves|evaluation.*[Cc]olimit|[Cc]olimit.*evaluation",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of module sheaves at a quasi compact weakly contractible object preserves colimits",
+   "results": "8 hits: PresheafOfModules.evaluation_preservesColimit, PresheafOfModules.evaluation_preservesColimitsOfShape, CategoryTheory.Limits.evaluation_preservesColimits, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.hasColimit, PresheafOfModules.evaluation_preservesColimitsOfSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, SheafOfModules.evaluation",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, CategoryTheory.Limits.PreservesColimits",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sheaves of modules on a weakly contractible quasi compact object preserves all limits and colimits",
+   "results": "8 hits: SheafOfModules.evaluationPreservesLimit, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.evaluationPreservesLimitsOfShape, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.hasLimit, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|wContractible|sections.*[Cc]oproduct",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Limits.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"PreservesColimits\"",
+   "results": "6 hits: CategoryTheory.Limits.evaluation_preservesColimits, CategoryTheory.Limits.evaluation_preservesColimitsOfShape, CategoryTheory.Limits.preservesColimits_of_evaluation, CategoryTheory.Limits.preservesColimitsOfShape_of_evaluation, PresheafOfModules.evaluation_preservesColimitsOfSize, PresheafOfModules.evaluation_preservesColimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections over a compact projective object of a site preserve arbitrary direct sums and cokernels of module sheaves",
+   "results": "8 hits: Condensed.instAB5CondensedMod, instAbelianCondensedMod, CompHausLike.LocallyConstantModule.functor, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, CondensedMod.ofSheafStonean, CondensedMod.ofSheafCompHaus, CategoryTheory.preservesFiniteColimits_preadditiveCoyonedaObj_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match: limit preservation and presheaf evaluation are present, but not the full colimit assertion for module sheaves at a weakly contractible affine"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a site is projective and quasi compact, sections of module sheaves preserve coproducts and epimorphisms",
+   "results": "8 hits: SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isQuasicoherent, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp, SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-16",
+   "verdict": "No full match: generating-section and quasi-coherence predicates do not state preservation by evaluation, and the projective coherent-site criterion is a sheaf criterion under different category hypotheses."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -62,5 +216,34 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-sections"
+ "unit": "sk-cor-pe-sections",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-sections-limits-colimits",
+  "worker": "stage1",
+  "summary": "Kept the statement, expanded the direct-sum proof via finite subsums and finite covering refinement, proved the cokernel claim directly from weak contractibility on set sheaves, and verified the cokernel presentation of arbitrary colimits and the canonical comparison maps. Reused existing generic nodes; no new nodes or attachment.",
+  "blueprint": "Realizes the Limits paragraph in step 1, Direct sums paragraphs in steps 2–5, and Colimits paragraph in steps 6–8. The unit sk-cor-pe-sections route is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "General-site local representatives and local equality in sheafification are the sheafification infrastructure used by the finite-support argument and cokernel lifting; this does not replace a unit-route step."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-affine-finite-cover-refinement",
+    "why": "Generic finite-cover refinement of an affine pro-étale site object supplies the quasi-compactness input of this unit, directly from its covering definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-proetale-affine-finite-cover-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-a87b9e38d",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-a87b9e38d (reviewer sub-agent of L); spot-checked: Read the item, route, cited node statements, source passages, and report in full. All eight steps are justified; hypotheses, coefficient category, weak-contractibility use, finite-support descent, colimit presentation, naturality, edge cases, and duplicate candidates checked. No new nodes or repairs needed."
+ }
 }

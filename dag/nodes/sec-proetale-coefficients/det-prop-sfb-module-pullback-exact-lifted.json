@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-prop-sfb-module-pullback-exact-lifted",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lifts of exact functors to module objects are exact",
@@ -13,48 +13,184 @@
   "place": "node det-prop-sfb-module-pullback-exact-lifted, order None"
  },
  "stmt_deps": [
-  "lem-sfb-modobj-abelian"
+  "lem-sfb-modobj-abelian",
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-ring-object-monoid",
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-galois-exact-functor"
  ],
  "proof": [
   {
-   "text": "**Additivity.** The abelian group structure on Hom-sets of module objects is that of the\nunderlying Hom-sets (sums of module maps are module maps because $\\otimes$ is additive), so the\nforgetful functors are additive. For module maps $a,b$,\n$U_{\\mathcal S}G(a+b)=F(U_{\\mathcal R}a+U_{\\mathcal R}b)=U_{\\mathcal S}(Ga+Gb)$, and $U_{\\mathcal S}$ is\nfaithful ([lem-sfb-modobj-forget-faithful]), so $G(a+b)=Ga+Gb$.",
+   "text": "By [def-galois-exact-functor], right exactness of $T_{\\mathcal R}=\\mathcal R\\otimes-$ and $T_{\\mathcal S}=\\mathcal S\\otimes-$ means preservation of finite colimits. Thus [lem-sfb-modobj-abelian] applies to both monoids: both module categories are abelian. Use the composition convention $ba=b\\circ a$. The module-morphism equation of [sk-def-sfb-module-objects] is $a\\gamma_M=\\gamma_N T(a)$. Its solutions are closed under addition, zero and negatives, by bilinearity of composition and additivity of $T$: for instance $(a+b)\\gamma_M=\\gamma_N(Ta+Tb)=\\gamma_NT(a+b)$. Hence the Hom groups and the additive forgetful functors are inherited from the base categories. For parallel module maps $a,b$, the assumed commutation gives $U_{\\mathcal S}G(a+b)=F(U_{\\mathcal R}a+U_{\\mathcal R}b)=U_{\\mathcal S}Ga+U_{\\mathcal S}Gb=U_{\\mathcal S}(Ga+Gb)$. Faithfulness [lem-sfb-modobj-forget-faithful] gives $G(a+b)=Ga+Gb$, which is additivity [def-weil-pbc-additive-functor]; setting $a=b=0$ and subtracting also gives $G(0)=0$.",
    "uses": [
-    "lem-sfb-modobj-forget-faithful"
+    "def-galois-exact-functor",
+    "lem-sfb-modobj-abelian",
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-forget-faithful",
+    "def-weil-pbc-additive-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Additivity paragraph, with the abelian-category hypotheses checked first"
+   }
   },
   {
-   "text": "**$U_{\\mathcal S}$ reflects kernels.** Let $\\varphi\\colon M\\to N$ and $\\kappa\\colon K\\to M$ be morphisms\nof $\\mathcal S$-modules with $\\varphi\\kappa=0$ such that $U\\kappa$ is a kernel of $U\\varphi$ in\n$\\mathcal D$. If $\\psi\\colon P\\to M$ is a module map with $\\varphi\\psi=0$, there is a unique $u$ in\n$\\mathcal D$ with $\\kappa u=\\psi$. Then\n$\\kappa\\circ u\\gamma_P=\\psi\\gamma_P=\\gamma_M(\\mathcal S\\otimes\\psi)=\\gamma_M(\\mathcal S\\otimes\\kappa)(\\mathcal S\\otimes u)=\\kappa\\circ\\gamma_K(\\mathcal S\\otimes u)$,\nand $\\kappa$ is a monomorphism, so $u$ is a module map. Hence $\\kappa$ is a kernel of $\\varphi$ in\n$\\Mod_{\\mathcal S}(\\mathcal D)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "**$U_{\\mathcal S}$ reflects cokernels.** Dually, let $\\pi\\colon N\\to Q$ with $\\pi\\varphi=0$ and $U\\pi$ a\ncokernel of $U\\varphi$. For a module map $\\psi\\colon N\\to P$ with $\\psi\\varphi=0$ write $\\psi=u\\pi$ in\n$\\mathcal D$. Then\n$u\\gamma_Q(\\mathcal S\\otimes\\pi)=u\\pi\\gamma_N=\\psi\\gamma_N=\\gamma_P(\\mathcal S\\otimes\\psi)=\\gamma_P(\\mathcal S\\otimes u)(\\mathcal S\\otimes\\pi)$.\nSince $\\mathcal S\\otimes-$ is right exact, it preserves epimorphisms, so $\\mathcal S\\otimes\\pi$ is an\nepimorphism and $u\\gamma_Q=\\gamma_P(\\mathcal S\\otimes u)$. Hence $\\pi$ is a cokernel in\n$\\Mod_{\\mathcal S}(\\mathcal D)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "**Exactness of $G$.** Let $\\kappa$ be a kernel of $\\varphi$ in $\\Mod_{\\mathcal R}(\\mathcal C)$. By\n[lem-sfb-modobj-kernels], kernels in $\\Mod_{\\mathcal R}(\\mathcal C)$ are computed in $\\mathcal C$, so\n$U_{\\mathcal R}\\kappa$ is a kernel of $U_{\\mathcal R}\\varphi$ (any two kernels are isomorphic). As $F$ is\nexact, $U_{\\mathcal S}G\\kappa=FU_{\\mathcal R}\\kappa$ is a kernel of $U_{\\mathcal S}G\\varphi$, and by the\nreflection step $G\\kappa$ is a kernel of $G\\varphi$. The same argument with\n[lem-sfb-modobj-cokernels] shows that $G$ preserves cokernels. An additive functor between abelian\ncategories preserving kernels and cokernels is exact, and it preserves finite limits and finite\ncolimits, as these are built from finite biproducts and kernels, resp. cokernels.",
+   "text": "The source forgetful functor $U_{\\mathcal R}$ preserves all kernels and cokernels. Indeed, for a module morphism $\\varphi$, choose an underlying kernel $k_0:K_0\\to U_{\\mathcal R}M$. The statement of [lem-sfb-modobj-kernels] equips $K_0$ with an action and makes $k_0$ a module kernel. For any other module kernel $k:K\\to M$, the two universal properties give module maps $v:K\\to K_0$ and $w:K_0\\to K$ with $k_0v=k$, $kw=k_0$; uniqueness gives $wv=1$ and $vw=1$. Their underlying maps are inverse, so $U_{\\mathcal R}k=(U_{\\mathcal R}k_0)(U_{\\mathcal R}v)$ is an underlying kernel. For cokernels, [lem-sfb-modobj-cokernels] supplies an action on a chosen underlying cokernel $q_0:U_{\\mathcal R}N\\to Q_0$, making $q_0$ a module cokernel; its finite-colimit hypothesis holds by step 1. Comparing any module cokernel $q:N\\to Q$ with $q_0$ gives inverse module maps $v:Q_0\\to Q$, $w:Q\\to Q_0$ satisfying $vq_0=q$, $wq=q_0$. Thus $U_{\\mathcal R}q=(U_{\\mathcal R}v)(U_{\\mathcal R}q_0)$ is an underlying cokernel. These comparisons use only the kernel property (unique factorization of maps killed by $\\varphi$), respectively the dual cokernel property.",
    "uses": [
     "lem-sfb-modobj-kernels",
     "lem-sfb-modobj-cokernels"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Exactness paragraph, first and fourth sentences: spell out comparison with the constructed (co)kernels"
+   }
+  },
+  {
+   "text": "The target forgetful functor reflects kernels. Suppose $\\varphi:M\\to N$ and $k:K\\to M$ are module maps with $\\varphi k=0$ and underlying $k$ a kernel. Given a module map $\\psi:P\\to M$ with $\\varphi\\psi=0$, let $u:UP\\to UK$ be its unique underlying factorization, $ku=\\psi$. Using the module-morphism equations of [sk-def-sfb-module-objects], compute $ku\\gamma_P=\\psi\\gamma_P=\\gamma_M T_{\\mathcal S}\\psi=\\gamma_M T_{\\mathcal S}k\\,T_{\\mathcal S}u=k\\gamma_K T_{\\mathcal S}u$. A kernel arrow is monic: two maps with equal composites with it are factorizations of the same map through that kernel, so are equal by uniqueness. Cancelling $k$ therefore gives $u\\gamma_P=\\gamma_K T_{\\mathcal S}u$, making $u$ a module map. Uniqueness is the underlying uniqueness, since module morphisms are underlying morphisms satisfying an equation. This is the module kernel universal property.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Paragraph U_S reflects kernels"
+   }
+  },
+  {
+   "text": "The target forgetful functor reflects cokernels. Suppose $q:N\\to Q$ is a module map with $q\\varphi=0$ and underlying $q$ a cokernel of $U\\varphi$. For any module map $\\psi:N\\to P$ killed by $\\varphi$, the underlying property supplies a unique $u:UQ\\to UP$ with $uq=\\psi$. Put $T=T_{\\mathcal S}$. By [sk-def-sfb-module-objects], $u\\gamma_Q Tq=uq\\gamma_N=\\psi\\gamma_N=\\gamma_P T\\psi=\\gamma_P Tu\\,Tq$. Right exactness in [def-galois-exact-functor] preserves this finite coequalizer of $U\\varphi$ and $0$; additivity gives $T0=0$, so $Tq$ is a cokernel of $T(U\\varphi)$. A cokernel arrow $e$ is epic directly from uniqueness: if $ae=be$, both $a,b$ factor the same map through $e$, so $a=b$. Cancel $Tq$ to obtain $u\\gamma_Q=\\gamma_P Tu$. Thus $u$ is a module map, and its uniqueness is underlying uniqueness. This proves the module cokernel universal property without an uncited assertion about preservation of arbitrary epimorphisms.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Paragraph U_S reflects cokernels, replacing the general epimorphism claim by preservation of this cokernel"
+   }
+  },
+  {
+   "text": "Let $k$ be any module kernel of $\\varphi$ in the source category. Step 2 makes $U_{\\mathcal R}k$ an underlying kernel. A kernel is the equalizer of $U_{\\mathcal R}\\varphi$ and $0$, a finite diagram. Exactness of $F$ in [def-galois-exact-functor] therefore makes $F(U_{\\mathcal R}k)$ a kernel of $F(U_{\\mathcal R}\\varphi)$, since additivity makes $F(0)=0$. The assumed equality of composite functors identifies these maps with $U_{\\mathcal S}Gk$ and $U_{\\mathcal S}G\\varphi$. Also $G\\varphi\\,Gk=G(0)=0$ by step 1, so step 3 proves $Gk$ is a module kernel. For a source module cokernel $q$, step 2 and finite-colimit preservation by $F$ make $U_{\\mathcal S}Gq=F(U_{\\mathcal R}q)$ an underlying cokernel of $U_{\\mathcal S}G\\varphi$ (the coequalizer of that map and zero). Step 4 and $Gq\\,G\\varphi=0$ then show $Gq$ is a module cokernel. Consequently $G$ preserves every kernel and every cokernel.",
+   "uses": [
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Exactness paragraph: apply exactness of F, then the two reflection calculations"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-kernel-cokernel-finite-exactness] to $G$ between the abelian module categories from step 1. Its additivity is step 1 and its preservation of all kernels and cokernels is step 5, so both clauses apply: $G$ preserves finite limits and finite colimits. By [def-galois-exact-functor], this is exactly exactness. The additivity already proved gives every clause of the assertion.",
+   "uses": [
+    "lem-sfb-kernel-cokernel-finite-exactness",
+    "def-galois-exact-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Exactness paragraph, final sentence: the general finite-(co)limit criteria"
+   }
   }
  ],
  "proof_deps": [
+  "def-galois-exact-functor",
+  "lem-sfb-modobj-abelian",
+  "sk-def-sfb-module-objects",
   "lem-sfb-modobj-forget-faithful",
+  "def-weil-pbc-additive-functor",
   "lem-sfb-modobj-kernels",
-  "lem-sfb-modobj-cokernels"
+  "lem-sfb-modobj-cokernels",
+  "lem-sfb-kernel-cokernel-finite-exactness"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+  "place": "All four proof paragraphs, with the universal-property comparisons and the final Mathlib criteria made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "12 hits: CategoryTheory.Limits.PreservesFiniteLimits, CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize.preservesFiniteLimits, CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits, CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize, CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits, CategoryTheory.Limits.PreservesFiniteLimits.preservesFiniteLimits",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves(Limits|Colimits)_of_reflects_of_preserves|preservesFinite(Limits|Colimits)_of_preserves(Kernels|Cokernels)|additive_of_comp",
+   "results": "14 hits: Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/CategoryTheory/Preadditive/Yoneda/Limits.lean, Mathlib/CategoryTheory/Preadditive/Yoneda/Limits.lean, Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean, Mathlib/CategoryTheory/Limits/Yoneda.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor lifted to categories of module objects over monoid objects is exact if the forgetful functors commute with it",
+   "results": "8 hits: CategoryTheory.ShortComplex.exact_iff_of_hasForget, CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂, CategoryTheory.AdditiveFunctor.ofExact, CategoryTheory.RightExactFunctor.ofExact, CategoryTheory.ExactFunctor.forget, CategoryTheory.AdditiveFunctor.ofExact_obj_fst, CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.ExactFunctor.forget_obj_of",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive exact functor lifts to an exact functor on module objects commuting with forgetful functors",
+   "results": "8 hits: CategoryTheory.leftExactFunctor_le_additiveFunctor, ModuleCat.forget₂_addCommGrp_additive, CategoryTheory.ExactFunctor.forget_obj, CategoryTheory.rightExactFunctor_le_additiveFunctor, CategoryTheory.exactFunctor_le_additiveFunctor, CategoryTheory.Mat_.lift_additive, CategoryTheory.AdditiveFunctor.forget_obj, CategoryTheory.AdditiveFunctor.ofExact_obj_fst",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between abelian categories which is additive and preserves kernels and cokernels preserves all finite limits and colimits",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.preservesFiniteColimits_tfae, CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology, CategoryTheory.exactFunctor_iff, CategoryTheory.Functor.preservesEqualizers_of_preservesKernels, CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels",
+   "results": "1 hits: CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma preservesFinite(Limits_of_preservesKernels|Colimits_of_preservesCokernels)",
+   "results": "2 hits: Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor between abelian categories preserving kernels preserves finite limits and preserving cokernels preserves finite colimits",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels, CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels, CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology, CategoryTheory.Functor.preservesFiniteColimits_tfae, CategoryTheory.exactFunctor_iff, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.exactFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero-morphism preserving functor between preadditive categories with finite limits and colimits preserves finite limits if it preserves kernels and finite colimits if it preserves cokernels",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels, CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels, CategoryTheory.Functor.preservesEqualizers_of_preservesKernels, CategoryTheory.Functor.preservesEqualizer_of_preservesKernels, CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology, CategoryTheory.Functor.isLimitMapConeBinaryFanOfPreservesKernels, CategoryTheory.Functor.preservesBinaryProduct_of_preservesKernels, CategoryTheory.Functor.preservesBinaryProducts_of_preservesKernels",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels",
+   "results": "1 hits: CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesZeroMorphisms|map_zero",
+   "results": "5 hits: 68, 69, 137, 227, 236",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole module-object lifting statement; general finite exactness/additivity criteria are partial coverage only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -71,5 +207,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-pullback-exact"
+ "unit": "sk-prop-sfb-module-pullback-exact",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-sfb-module-pullback-exact-lifted",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded additivity, preservation by the source forgetful functor, reflection by the target forgetful functor, and exactness of the lift. Added one general Mathlib leaf for the kernel/cokernel criteria. Avoided the unsupported arbitrary-epimorphism assertion by showing this tensor of a cokernel is itself a cokernel. No project declaration found stating the entire lift theorem.",
+  "blueprint": "Step 1 realizes Additivity; step 3 realizes U_S reflects kernels; step 4 realizes U_S reflects cokernels; steps 2, 5 and 6 realize Exactness of G. Read main-20261015 chapter and unit _section.md files; The chapter record was read on resumption; the corresponding dag/units record is absent for this new import. The unit route is unchanged: the lemma supplies exactness of the lift used by the module-pullback proposition."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-3084e4751",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-3084e4751 (reviewer sub-agent of L); spot-checked: Read all six proof steps and the sole new node in full; checked cited statements, current blueprint route, Stacks 010N, and both Mathlib criteria. Mathematics passes, including edge cases; no duplicate, cycle, or extra hypothesis found. Supplied corrected leaf JSON adding missing created.by and created.date. Full findings are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
