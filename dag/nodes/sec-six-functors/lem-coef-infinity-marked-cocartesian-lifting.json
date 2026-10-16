@@ -29,9 +29,85 @@
   "def-coef-infinity-marked-coanodyne",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $J$ be the four generating families (i)-(iv) of [def-coef-infinity-marked-coanodyne]. Apply [lem-coef-infinity-marked-coanodyne-rlp-saturation] to $q:(E,T)\\to B^\\sharp$: lifting against every marked coanodyne map is equivalent to lifting against every member of $J$. All squares and diagonals here are marked maps over the specified simplicial base map.",
+   "uses": [
+    "lem-coef-infinity-marked-coanodyne-rlp-saturation",
+    "def-coef-infinity-marked-coanodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.1, opposite-category dual; generator reduction for Proposition 3.1.1.6"
+   }
+  },
+  {
+   "text": "Suppose first that $q$ lifts all four families. By [def-coef-infinity-marked-coanodyne] and [def-coef-infinity-fibrations], family (i) gives the inner-horn fillers for $p$: minimal markings impose only preservation of degenerate edges. For $n\\geq2$, the initial edge $\\{0,1\\}$ already lies in $\\Lambda_0^n$, so any initial-horn problem with that edge in $T$ is a marked square of type (ii); its diagonal is exactly a filler in the definition of a $p$-cocartesian edge. Thus every edge in $T$ is $p$-cocartesian. For $n=1$, the horn is the source vertex $\\Lambda_0^1=\\{0\\}$, so (ii) provides a marked lift of each base edge with every prescribed source. Consequently $p$ is a cocartesian fibration. We now prove the reverse inclusion using (iii) and (iv), not just the first two families. Fix any $p$-cocartesian edge $e:x\\to y$ over $\\alpha:p(x)\\to b$, and choose $t:x\\to z$ in $T$ over $\\alpha$. Both $t$ and $e$ are initial objects of $L(x,\\alpha)$ in [lem-coef-infinity-cocartesian-composition-initiality]. That statement supplies a comparison from $t$ to $e$, with a triangle $\\sigma$ whose edges $[0,1],[1,2],[0,2]$ are $t,u,e$ and whose base is $s_1\\alpha$; its edge $u:z\\to y$ is an equivalence in the fibre $E_b$. The fibre is a quasicategory: fill any of its inner horns using $p$ over the constant simplex at $b$. The map $E_b\\to\\Delta^0$ is therefore an isofibration in [lem-coef-infinity-core-kan-fibration]: it lifts inner horns and lifts the sole base equivalence at each vertex by its degenerate edge. That node implies that $K=(E_b)^\\simeq$ is a Kan complex (the core of the point is the point), and $u$ belongs to $K$ by its definition. Apply (iv) to the square with top map $K^\\flat\\to(E,T)$ the inclusion and bottom map $K^\\sharp\\to B^\\sharp$ constant at $b$. Since (iv) is the identity on underlying simplicial sets, its diagonal has underlying map the same inclusion; consequently every edge of $K$, in particular $u$, lies in $T$. Now $t,u$ are the consecutive marked edges of $\\sigma$. Apply (iii) to $\\sigma$ over $s_1\\alpha$: its diagonal again has the same underlying simplex and marks $e$. This proves $\\{p\\text{-cocartesian edges}\\}\\subseteq T$ and completes the forward direction.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-core-kan-fibration",
+    "def-coef-infinity-marked-coanodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, forward direction, printed pp. 149-150, opposite-category dual: comparison in a fibre, its Kan core, and generators (iv) then (iii)"
+   }
+  },
+  {
+   "text": "Conversely suppose that $p$ is a cocartesian fibration and $T$ is exactly its cocartesian edges. Family (i) in [def-coef-infinity-marked-coanodyne] lifts by the inner-fibration condition of [def-coef-infinity-fibrations], and every filler preserves the minimal marking. For (ii) with $n=1$, the horn $\\Lambda_0^1=\\{0\\}$ specifies the source, and the cocartesian-fibration condition supplies a lift of the specified base edge from that source; the lift lies in $T$. For (ii) with $n\\geq2$, the first edge $\\{0,1\\}$ is already in the horn and its image is marked, hence $p$-cocartesian. The defining initial-horn condition gives a filler over the given base simplex. It preserves the target marking because that marking adds only degeneracies and this already prescribed first edge. These are all cases of (i) and (ii).",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-marked-coanodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, converse for generator families (1) and (2), opposite-category dual"
+   }
+  },
+  {
+   "text": "For a square against (iii), let $\\sigma:\\Delta^2\\to E$ be its given underlying simplex. Its consecutive edges are in $T$, so both are $p$-cocartesian. The composition clause of [lem-coef-infinity-cocartesian-composition-initiality] makes the diagonal edge $p$-cocartesian and hence marked. Thus the same $\\sigma$ is the marked diagonal against (iii), still over the given base simplex.",
+   "uses": [
+    "def-coef-infinity-marked-coanodyne",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, converse for generator (3), and Proposition 2.4.1.7, opposite-category duals"
+   }
+  },
+  {
+   "text": "For a square against (iv), let $f:K\\to E$ be the given underlying map, where $K$ is Kan. By [lem-coef-infinity-core-kan-fibration], every edge of $K$ is an equivalence. Applying $f$ to each inverse edge and its two witnessing $2$-simplices shows that each image edge is an equivalence in $E$. The initial-horn assertion of [lem-cbc-inner-fibration-equivalence-outer-horn-lift] applies to $p$ (an inner fibration between the given small quasicategories): every prescribed $\\Lambda_0^n$ problem, $n\\geq2$, whose initial edge is such an equivalence has a filler over its specified base simplex. By the definition in [def-coef-infinity-fibrations], each image edge is therefore $p$-cocartesian. Equality of the marking puts all these edges in $T$, so $f$ itself is the required marked map $K^\\sharp\\to(E,T)$ over the original base map. We have proved lifting for all four families, and Step 1 gives lifting against every marked coanodyne map.",
+   "uses": [
+    "def-coef-infinity-marked-coanodyne",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, converse for generator (4), opposite-category dual; Proposition 2.4.1.5 and Kerodon Tag 01H0 (relative special-horn theorem), initial-horn dual"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-marked-coanodyne-rlp-saturation",
+  "def-coef-infinity-marked-coanodyne",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded opposite-category proof of Proposition 3.1.1.6 and Remark 3.1.1.10, read online, printed pp. 149-151; not archived in literature/. Relative special-horn assertion from existing Kerodon Tag 01H0 node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,7 +160,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-cocartesian-transport",
@@ -104,5 +180,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-marked-cocartesian-lifting",
+  "worker": "stage1",
+  "summary": "Second-reader repair: fold the elementary relative inner/initial-horn test into Steps 2 and 3 and remove its unnecessary new node. The forward direction compares cocartesian lifts, marks their fibre equivalence using (iv), then marks the given edge using (iii). The converse checks all four generator families. The one retained new node is the generic saturation Mathlib leaf. Item statement unchanged.",
+  "blueprint": "Realizes the marked lifting input in the finite-coefficient mapping-complex adjunction paragraph of prop-coef-integral-exceptional-adjoint, through its listed cocartesian transport ancestry. Current main-20261015 places that ancestor in sk-thm-sf-package; no ancestor-route or maintainer-owned unit metadata is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Step 5 uses the generic initial outer-horn lifting theorem along an equivalence for an arbitrary inner fibration; no node of this unit states it. This implies equivalence edges are p-cocartesian by the horn definition and does not replace a step of the biduality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-0be8a521b",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0be8a521b (reviewer sub-agent of L); spot-checked: I read the item, the one new node (lem-coef-infinity-marked-coanodyne-rlp-saturation, a Mathlib leaf) and all six cited statements in full. The removed horn-test node does not exist in the snapshot and nothing cites it. The item statement is unchanged and is the correct opposite of HTT Prop 3.1.1.6 for small quasicategories; the duals of generators (ii) and (iii) match def-coef-infinity-marked-coanodyne. HTT is not archived, so the item keeps proof_origin=agent with a WANTED. All five steps hold. Step 1: the leaf applies to an arbitrary marked map, with no fibrancy hypothesis. Step 2: (i) gives inner fibration; (ii) with n>=2 gives the cocartesian horn condition for marked edges; (ii) with n=1 gives lifts from a prescribed source. For the reverse inclusion, the comparison triangle (t,u,e) lies over s_1(alpha), so u lies in the fibre and composition-initiality says it is an equivalence there. The fibre is a quasicategory and its map to the point is an isofibration, so its core is a Kan complex containing u; (iv) marks u and then (iii) marks e. Step 3 is correctly marked elementary. Step 4 uses the composition clause. Step 5: Kan edges are equivalences, f preserves equivalences by the 2-simplex definition, and lem-cbc-inner-fibration-equivalence-outer-horn-lift then makes the image edges cocartesian. I accept that tool use: it is a generic black box from unit sk-prop-sf-cbc, no node of this unit states it, and it replaces no route step. I checked the leaf's Mathlib lines in LiftingProperty.lean (43, 51, 61, 72, 112, 116, 123) and TransfiniteCompositionLifting.lean (265, 275); all are exact, and the argument J ⊆ closure ⊆ J.rlp.llp, then antitonicity and rlp_llp_rlp, is correct. The leaf does not duplicate lem-coef-lifting-class-closure, lem-coef-transfinite-left-lifting, the right-anodyne saturation node or the anodyne lifting calculus. Edge cases checked: the walking isomorphism over a point fails (iv) as it should, the identity map with the sharp marking, empty E, n=1 and n=2, and empty K. Remark, no change: the existing unsplit node lem-coef-relative-marked-anodyne-calculus states the cartesian analogue. No fixes were written."
  }
 }

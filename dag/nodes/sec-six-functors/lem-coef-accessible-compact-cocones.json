@@ -29,9 +29,157 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\operatorname{Fun}(K,\\mathcal C)$ and $Q=\\mathcal C_{p/}$. The coherent cocone calculus makes $H,Q$ quasicategories and gives, for $q=(c,u:p\\to\\Delta_Kc)$ and $r=(d,v:p\\to\\Delta_Kd)$, the natural formula\n$$\\operatorname{Map}_Q(q,r)\\simeq\\operatorname{fib}_{v}\\bigl(\\operatorname{Map}_{\\mathcal C}(c,d)\\xrightarrow{a\\mapsto\\Delta_K(a)u}\\operatorname{Map}_H(p,\\Delta_Kd)\\bigr).$$\nLocal smallness of $\\mathcal C$ follows from accessibility. The local-smallness clause of the spine/tower lemma makes $H$ locally small, so this homotopy fiber is small and $Q$ is locally small. We compute with small mapping-space models using the coherent mapping bifunctor of the transport-classification node. The inclusion of small spaces into the larger space universe is fully faithful and preserves small colimits by the space-universe node. Thus all compactness comparisons below, computed with small models, are also the comparisons required by the larger-space-universe definition of compactness; no change of compactness convention is implicit.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-space-transport-classification",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 5.4.5.13-15, coherent cocone model and local-smallness preliminaries; mapping-space formulation of the argument."
+   }
+  },
+  {
+   "text": "Let $I$ be any small $\\beta$-filtered quasicategory, without a bound on its cardinality. The filtered weak-contractibility assertion of the coslice-colimit node shows that $I$ is weakly contractible. Consequently $I\\to *$ satisfies the comma criterion (its sole comma is $I$), and the cofinal-comma node shows that restriction identifies cocones on an object of any quasicategory with cocones on its constant $I$-diagram. In particular $*\\to H$ with value $p$ preserves $I$-colimits. Pointwise colimits give $I$-colimits in $H$, in $\\operatorname{Arr}(H)$ and in $H\\times H$; the constant-diagram functor $\\Delta_K:\\mathcal C\\to H$ preserves them. Model $Q$ as the strict pullback of\n$$\\operatorname{Arr}(H)\\xrightarrow{(\\operatorname{ev}_0,\\operatorname{ev}_1)}H\\times H\\xleftarrow{(p,\\Delta_K)}*\\times\\mathcal C.$$\nThe endpoint restriction is an isofibration by the exponential-corner node applied to $\\partial\\Delta^1\\subseteq\\Delta^1$ and $H\\to *$. The isofibration-pullback node therefore identifies this strict pullback with the categorical homotopy pullback (enlarge the ambient universe so all displayed categories are small there). Both legs preserve $I$-colimits, so the pullback-colimit node supplies colimits in $Q$ and characterizes them by their two components. For a cocone already in $Q$, its source component in $H$ is the constant identity cocone at $p$, which is colimiting by the preceding argument. Its target component is obtained by applying $\\Delta_K$ to its apex cocone. Hence an apex colimit gives a colimit in $Q$. Conversely a colimit in $Q$ gives a colimit in $*\\times\\mathcal C$, hence an apex colimit. For a chosen colimiting apex cocone with vertex $c$, start with a colimit in $Q$ with vertex $(c_0,u_0)$. The two apex colimit cocones are initial objects of the same cocone category, so there is an equivalence between them, with apex component $e:c_0\\simeq c$ and its coherent compatibility with the diagram. Postcompose $u_0$ with $\\Delta_K(e)$ to obtain the new cocone $p\\to\\Delta_Kc$. Postcomposing the colimit cocone in $Q$ with this equivalence, and using the compatibility just specified, gives a colimit whose apex cocone is identified with the chosen one. Componentwise equivalences and the cocone calculus justify these compositions, including their higher simplices. The cores of colimit-cocone categories in $Q$ and $\\mathcal C$ are nonempty contractible spaces by the coherent cocone calculus. The induced map between them is therefore an equivalence; its homotopy fiber over the chosen apex cocone is contractible. This is precisely the space of lifts, with the identification of their apex cocone included. Thus $U$ creates and detects all the colimits claimed.",
+   "uses": [
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-accessible-pullback-filtered-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.5.14 and the pointwise/pullback proof behind Lemma 5.4.5.13; Corollary 5.1.2.3 and Lemma 5.4.5.5. Creation/detection expanded by the pullback model."
+   }
+  },
+  {
+   "text": "We need the following bounded-diagram calculation, without assuming $\\alpha$-accessibility of $\\mathcal C$: for every $\\beta$-small simplicial set $L$ and pointwise $\\beta$-compact $a:L\\to\\mathcal C$, the object $a$ is $\\beta$-compact in $\\operatorname{Fun}(L,\\mathcal C)$. All the colimits tested are computed pointwise. First prove this for $L=\\Delta^n$. For $n=0$ it is the definition of compactness. For an arrow $a_0\\to a_1$, the arrow-morphism-square node expresses its mapping space to $b_0\\to b_1$ as\n$$\\operatorname{Map}(a_0,b_0)\\times^h_{\\operatorname{Map}(a_0,b_1)}\\operatorname{Map}(a_1,b_1).$$\nEach of the three terms preserves $\\beta$-filtered colimits by compactness of $a_0,a_1$; the finite-limit case of the spaces interchange node makes the homotopy pullback preserve them. For $n>1$, replace $\\Delta^n$ by its spine using the spine equivalence. Adjoin the $n$ edges successively along the shared vertices. Mapping excision gives a homotopy pullback at each attachment, so induction on the number of edges and the same finite-limit interchange prove the claim for the spine, hence for $\\Delta^n$. All formulas are natural in the target diagram, so they identify the actual compactness comparison.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "lem-coef-infinity-mapping-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, proof (1)-(3): vertices, arrows and spines; Lemma 5.4.5.13."
+   }
+  },
+  {
+   "text": "Continue the calculation of step 3 by induction on the dimension of a finite-dimensional $\\beta$-small $L$. In dimension zero, the mapping space is the product of the mapping spaces for its fewer than $\\beta$ vertices, by the degreewise internal-functor definition; apply the product case of the spaces interchange node. At dimension $n$, attach the disjoint union of its nondegenerate $n$-simplices to the $(n-1)$-skeleton along their boundaries. This is a degreewise simplicial pushout: the nondegenerate-decomposition node says every simplex is uniquely a degeneracy of a nondegenerate simplex, so the newly attached simplices meet only in their prescribed boundary faces. Mapping excision expresses the mapping space as a homotopy pullback. Its boundary terms satisfy the induction hypothesis, its simplex terms satisfy step 3, and the disjoint unions give products of fewer than $\\beta$ factors. The spaces interchange node applies to these products and the homotopy pullback. For general $L$, use $L=\\bigcup_{n\\geq0}\\operatorname{sk}_n L$ and the spine/tower node's natural mapping-space limit formula. Because $\\beta$ is uncountable, the nerve of $\\mathbb N^{\\mathrm{op}}$ is $\\beta$-small, and its limit commutes with $\\beta$-filtered colimits by the spaces interchange node. This completes the calculation, including $L=\\varnothing$: its mapping space is terminal, and the empty-limit case of the same interchange theorem applies. The argument uses $L$-smallness at rank $\\beta$, not at rank $\\alpha$. Since $\\alpha<\\beta$, the given $K$ is $\\beta$-small.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-functor-spine-tower-mapping-descent",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.4.13, proof (4)-(6), cellular attachment and inverse tower; Lemma 5.4.5.13."
+   }
+  },
+  {
+   "text": "Let $q=(c,u)$ have $\\beta$-compact apex. By steps 3-4 the boundary diagram $p$ is $\\beta$-compact in $H$. In the mapping-space fiber formula of step 1, both functors of $r$,\n$$\\operatorname{Map}_{\\mathcal C}(c,U(r)),\\qquad \\operatorname{Map}_H(p,\\Delta_K U(r)),$$\npreserve $\\beta$-filtered colimits, by step 2, pointwise colimits for $\\Delta_K$, and the two compactness assertions. The point selecting $v$ is a coherent natural transformation from the terminal-space functor to the second functor. Thus the fiber formula is a finite limit of the displayed two functors and the terminal-space functor. The spaces interchange node makes this finite limit preserve $\\beta$-filtered colimits, including the colimit of the constant terminal space. It follows that $\\operatorname{Map}_Q(q,-)$ preserves them. This proves that every compact-apex cocone is $\\beta$-compact.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.5.13, compactness under the fixed-boundary homotopy-fiber formula."
+   }
+  },
+  {
+   "text": "Let $D\\subseteq\\mathcal C$ be the replete full subcategory of $\\beta$-compact objects and $Q_D\\subseteq Q$ the full subcategory of cocones whose apex lies in $D$. Since $D$ is full, $Q_D$ is exactly the coherent cocone category $D_{p/}$: fullness identifies all its transformations, their compatibility homotopies and their higher simplices with those in $\\mathcal C$, and every vertex of $p$ lies in $D$. $Q_D$ is replete in $Q$, because $U$ carries equivalences to equivalences and $D$ is replete. Essential smallness. By the compact-slice-density node, $D$ is equivalent to a small quasicategory $D_0$; the images of the vertices of $D_0$ form a small family $(d_j)_{j\\in J}$ in $D$ such that every object of $D$ is equivalent to some $d_j$. By step 1, $H$ and $Q$ are locally small, so each set $\\pi_0\\operatorname{Map}_H(p,\\Delta_Kd_j)$ is small; choose representatives $u_{j,s}$, $s\\in S_j$, of its components and put $x_{j,s}=(d_j,u_{j,s})\\in Q_D$. This is a small family. Let $q=(c,u)\\in Q_D$. Choose an equivalence $e:c\\to d_j$ and then $s\\in S_j$ and a path $\\gamma$ in $\\operatorname{Map}_H(p,\\Delta_Kd_j)$ from $\\Delta_K(e)u$ to $u_{j,s}$. By the dual cocone fiber formula of the cone-calculus node (step 1), $(e,\\gamma)$ is a point $\\phi\\in\\operatorname{Map}_Q(q,x_{j,s})$ lying over $e$. For every $r=(d,v)\\in Q$, precomposition with $\\phi$ is the map of homotopy fibers over $v$ induced by the square whose top is precomposition with $e$, $\\operatorname{Map}_{\\mathcal C}(d_j,d)\\to\\operatorname{Map}_{\\mathcal C}(c,d)$, whose bottom is the identity of $\\operatorname{Map}_H(p,\\Delta_Kd)$, and which commutes up to the homotopy $\\Delta_K(a)\\gamma$ between $a\\mapsto\\Delta_K(ae)u$ and $a\\mapsto\\Delta_K(a)u_{j,s}$. The top map is an equivalence because $e$ is one, so the induced map of homotopy fibers over the same point $v$ is an equivalence (the path-space model of the homotopy fiber in [def-cbc-enhanced-diagrams-cones] is invariant under an equivalence of total spaces over a fixed base). Thus precomposition with $\\phi$ gives equivalences $\\operatorname{Map}_Q(x_{j,s},r)\\to\\operatorname{Map}_Q(q,r)$, naturally in $r$. By full faithfulness of the Yoneda functor of the Yoneda node, applied to $Q^{\\mathrm{op}}$ in a universe in which $Q$ is small, and the vertexwise criterion for equivalences of coherent transformations in the cone-calculus node, $\\phi$ is an equivalence in $Q$. Hence $Q_D$ is the full subcategory of the locally small quasicategory $Q$ on all objects equivalent to a member of the small family $(x_{j,s})$, and the small-full-subcategory node shows that $Q_D$ is essentially small. No claim about the size of an unrestricted large slice is used. Step 5 says all objects of $Q_D$ are $\\beta$-compact.",
+   "uses": [
+    "lem-coef-accessible-compact-slice-density",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-small-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, first paragraph: essential smallness of the compact-apex full subcategory, via a small family of representatives (HTT Proposition 5.4.1.7)."
+   }
+  },
+  {
+   "text": "Fix $q=(c,u)\\in Q$. The compact-slice-density node gives an essentially small $\\beta$-filtered category $E=D_{/c}$ with its canonical source cocone colimiting at $c$. The boundary $u$ is a diagram $\\widetilde p:K\\to E$, because every $p(v)$ is compact. Replace $E$ by a small equivalent model and transport this diagram; filteredness and the stated colimit cocone are invariant under the equivalence by transporting cocones along a quasi-inverse and using the mapping-space colimit criterion. Put $T=E_{\\widetilde p/}$ and let $V:T\\to E$ be its apex projection. It is small by the explicit cocone pullback construction, and is $\\beta$-filtered by the filtered-cocone clause of the cofinal-coslice node, since $K$ is $\\beta$-small. For $e\\in E$, an object of $(e\\downarrow V)$ is a cocone from $\\widetilde p$ to $t$ together with an arrow $e\\to t$. Compute this comma using the arrow model: the endpoint restriction in $E$ is an isofibration, and so is its pullback with source fixed at $e$. The isofibration-pullback node therefore says that the strict pullback of this arrow category along $V$ computes the categorical homotopy comma. This model identifies the entire coherent comma category with $E_{(\\widetilde p\\amalg e)/}$, where the boundary has shape $K\\amalg\\Delta^0$: both descriptions consist of those transformations, their triangles, and their higher simplices, and restriction to the two summands gives inverse descriptions in each simplicial degree. That boundary is $\\beta$-small. Hence its cocone category is $\\beta$-filtered by the same cofinal-coslice node, and weakly contractible by the filtered weak-contractibility clause of the coslice-colimit node. Apply the cofinal-comma criterion to the small categories $T,E$. Restriction along $V$ preserves the canonical colimit cocone $E\\to\\mathcal C$ with apex $c$. Each object of $T$ gives a cocone under $p$ with compact apex together with an arrow to $q$: its arrows to $c$ and all boundary compatibilities come from its definition as a cocone inside $D_{/c}$. These assemble to a diagram $T\\to Q_D$ and cocone to $q$. Its apex cocone is the just-proved colimit $c$, so step 2 makes it a colimit in $Q$. We have presented every $q$ as a small $\\beta$-filtered colimit of objects of $Q_D$.",
+   "uses": [
+    "lem-coef-accessible-compact-slice-density",
+    "lem-coef-infinity-cofinal-coslice-calculus",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, second paragraph: the category E and its cocones; finality of the apex projection proved by its comma categories, as in Lemmas 5.3.1.21 and 5.4.5.12."
+   }
+  },
+  {
+   "text": "Steps 1-2 give local smallness and all small $\\beta$-filtered colimits in $Q$; steps 5-7 give an essentially small full subcategory of compact objects generating it under these colimits. These are exactly the clauses of $\\beta$-accessibility. To prove the converse compactness assertion, let $q\\in Q$ be $\\beta$-compact and apply compact-stage factorization to its presentation of step 7 and $1_q$. There is a stage $t\\in T$ and maps $q\\to q_t\\to q$ whose composite is homotopic to $1_q$. Applying $U$ makes $U(q)$ a homotopy retract of the compact object $U(q_t)$. Compactness is closed under such retracts directly: precomposition with the two retract maps makes $\\operatorname{Map}_{\\mathcal C}(U(q),-)$ a retract of $\\operatorname{Map}_{\\mathcal C}(U(q_t),-)$, compatibly with every compactness comparison. The former comparison is therefore a retract of an equivalence; composing the retraction and section with the inverse comparison gives its inverse up to the two unit homotopies. Thus $U(q)$ is compact. Together with step 5 this is the equivalence claimed. If $K$ is empty, $H$ is terminal and $Q\\simeq\\mathcal C$; the construction above has $\\widetilde p$ empty and $T\\simeq E$, so every step still applies. If $\\mathcal C$ is empty, a boundary diagram can exist only for empty $K$; $Q$ is then empty, with empty compact generating subcategory, and the assertions hold vacuously. No smaller-rank accessibility is assumed or used. The sharp-cardinal hypothesis is compatible with the source but is stronger than this proof needs.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-compact-stage-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.5.15, conclusion via the compact-retract argument of Lemma 5.4.2.4 instead of the equivalent Ind-completion characterization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-functor-spine-tower-mapping-descent",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-accessible-pullback-filtered-colimit",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-spaces-kappa-limit-filtered-colimit",
+  "lem-coef-infinity-mapping-excision",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-accessible-compact-slice-density",
+  "lem-coef-infinity-small-full-subcategory",
+  "lem-coef-infinity-cofinal-coslice-calculus",
+  "lem-coef-infinity-compact-stage-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent expansion of HTT Lemmas 5.4.5.13-14 and Proposition 5.4.5.15, using the existing DAG foundations; online source read, archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +222,66 @@
    "results": "{\"t\": \"2026-10-16T20:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"An under category of a small diagram of presentable objects has presentable objects exactly at presentable apices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CommRingCat.isFinitelyPresentable_under\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\"], \"digest\": \"91699c8e60ff326a\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. The returned declarations assume ordinary Category instances and Type-valued Hom/presheaves. Read Mathlib/CategoryTheory/Presentable/Basic.lean:43-77 and Limits/Indization/IndObject.lean:53-70. They do not state the corresponding theorem for quasicategories, coherent mapping spaces or space-valued right fibrations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an accessible infinity category the coherent cocones under a small diagram of compact objects form an accessible infinity category with compactness detected by its apex",
+   "results": "{\"t\": \"2026-10-16T21:38:13Z\", \"tool\": \"leanfinder\", \"query\": \"In an accessible infinity category the coherent cocones under a small diagram of compact objects form an accessible infinity category with compactness detected by its apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.Functor.isCardinalAccessible_of_isLimit\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory\"], \"digest\": \"408cab8a8cdf0333\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessibleCategory\"",
+   "results": "{\"t\": \"2026-10-16T21:38:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalAccessibleCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\"], \"digest\": \"36a872e8625a8e25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cocone|compact|accessible",
+   "results": "{\"t\": \"2026-10-16T21:38:31Z\", \"tool\": \"grep\", \"query\": \"cocone|compact|accessible\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "under|compact|accessible",
+   "results": "{\"t\": \"2026-10-16T21:38:46Z\", \"tool\": \"grep\", \"query\": \"under|compact|accessible\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"f78986d416645b74\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded diagram of compact objects in an accessible quasicategory has an accessible category of cocones with compact objects exactly those with compact apex",
+   "results": "{\"t\": \"2026-10-16T21:38:47Z\", \"tool\": \"leansearch\", \"query\": \"A bounded diagram of compact objects in an accessible quasicategory has an accessible category of cocones with compact objects exactly those with compact apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Functor.coconeTypes\", \"CategoryTheory.Limits.ColimitCocone\", \"CategoryTheory.Limits.Cocone.mk\", \"CategoryTheory.Functor.isCardinalAccessible_of_isLimit\", \"CategoryTheory.Limits.diagramOfCoconesInhabited\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\"], \"digest\": \"06804b5013895f32\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits in infinity categories under a small diagram are computed at the cone vertex and compact vertices generate the undercategory",
+   "results": "{\"t\": \"2026-10-16T21:38:47Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimits in infinity categories under a small diagram are computed at the cone vertex and compact vertices generate the undercategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.ObjectProperty.isCardinalFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.instIsClosedUnderColimitsOfShapeFunctorOppositeTypeIsIndObjectOfIsFiltered\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.Limits.isIndObject_colimit\"], \"digest\": \"78860d340f9908a8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits read; ordinary CategoryTheory cocones and Type-valued accessibility do not state coherent quasicategory compactness or accessible cocone categories. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93, Presentable/Limits.lean:35-65 and AlgebraicTopology/Quasicategory/Basic.lean:32-43. The quasicategory grep has no matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact objects of a quasicategory under a compact diagram are precisely cocones with compact vertex",
+   "results": "{\"t\": \"2026-10-16T22:22:11Z\", \"tool\": \"leanfinder\", \"query\": \"Compact objects of a quasicategory under a compact diagram are precisely cocones with compact vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.IsFiltered.cocone_nonempty\", \"SSet.finite_of_isColimit\", \"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"CategoryTheory.IsFiltered.cocone\", \"CategoryTheory.IsCardinalFiltered.cocone\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\"], \"digest\": \"0c0a06e0f24b57b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Returned declarations concern ordinary CategoryTheory cocones or finite simplicial sets as objects of SSet, not compact objects inside a quasicategory. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93 and AlgebraicTopology/Quasicategory/Basic.lean:32-43; quasicategory grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "compact|accessible|presentable|cocone",
+   "results": "{\"t\": \"2026-10-16T22:24:32Z\", \"tool\": \"grep\", \"query\": \"compact|accessible|presentable|cocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Returned declarations concern ordinary CategoryTheory cocones or finite simplicial sets as objects of SSet, not compact objects inside a quasicategory. Read Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean:35-93 and AlgebraicTopology/Quasicategory/Basic.lean:32-43; quasicategory grep has no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-compact-approximation",
@@ -97,5 +301,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-compact-cocones",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded filtered colimit creation by an isofibration pullback, bounded-diagram compactness by cells and spines, compact-apex generation by the compact-source slice and an explicit comma-category cofinality test, and the converse by a compact-stage retract. Reused every foundational input; no new nodes, no ordinary-category result mistaken for an infinity-category result.",
+  "blueprint": "Preserves the inherited ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 mapping-complex adjunction infrastructure; makes precise the compact-cocone input used by lem-coef-infinity-compact-approximation. The current main-20261015 paragraph has the mapping-complex calculation, not an explicit HTT citation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory cocone mapping-space and contractibility theorem used as a tool; the coefficient unit gives no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-5186e65e8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-5186e65e8 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, every cited statement, the citer lem-coef-infinity-compact-approximation (steps 6-7) and unit sk-prop-sf-biduality-general. HTT 5.4.5.13-15 and 5.3.4.13 are not archived (WANTED) and there is no network access here, so the HTT places were checked from memory; each step was checked independently against the cited DAG statements. The statement is true without alpha-accessibility and is not weakened. Small cases: K empty (Q=C); C=N(Set), K=pt with |A|<beta (compact objects are A->X with |X|<beta); C terminal; C empty; stable C with p=0. Steps 1-5, 7 and 8 are correct. Step 2 uses the exact pullback definition of the cocone category, an isofibration, a homotopy pullback and componentwise colimits, with no size bound on I. Steps 3-4 need only beta-smallness, via spine, skeleta, 017R and the countable tower. Step 7's comma (e|V)=E_{(p~+e)/} is beta-filtered, hence cofinal. Step 8 uses compact-stage factorization and the retract argument. No cycle (closure of 341 nodes); no duplicate (diagram-presentations needs smaller-rank accessibility). The tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. Repaired one fault, C2/E5 in step 6: it was marked elementary and proved essential smallness of Q_D by an uncited simplexwise 'precompose with the inverse of FGp~p' transport. It is rewritten, using only cited statements, through a small family of representatives (d_j,u_{j,s}), the fiber formula, Yoneda and the existing node lem-coef-infinity-small-full-subcategory (HTT 5.4.1.7, same unit). The step is now elementary=false and proof_deps is recomputed. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-accessible-compact-cocones.json.; 1 file(s) fixed by the reviewer"
  }
 }

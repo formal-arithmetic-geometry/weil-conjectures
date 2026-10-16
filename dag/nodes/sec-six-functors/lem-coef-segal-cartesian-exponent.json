@@ -33,9 +33,92 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a simplicial space $T$, write $\\operatorname{Map}(T,X)_q=\\operatorname{Hom}(T\\times c\\Delta^q,X)$, as in [lem-coef-simplicial-space-reedy-cartesian]. Evaluation at the identity of $[n]$ gives $\\operatorname{Map}(F(n),X)=X_n$: its inverse sends a simplex $x\\in X_{n,q}$ to the map whose value on $\\alpha:[k]\\to[n]$ is $X(\\alpha)(x)$, in every inner degree by the simplicial operators of $x$. Naturality verifies these are inverse and commute with all operators. Define $G(n)$ to be the union of the consecutive copies of $F(1)$, glued at the common copies of $F(0)$. A map from this union is exactly a tuple of maps from the edges agreeing on their common endpoints. Thus $\\operatorname{Map}(G(n),X)=X_1\\times_{X_0}\\cdots\\times_{X_0}X_1$, and restriction from $F(n)$ is exactly the consecutive-edge map. For arbitrary simplicial spaces $A,T,X$, the displayed internal-hom formula gives a natural bijection $\\operatorname{Hom}(T,X^A)=\\operatorname{Hom}(A\\times T,X)$: send $h:T\\to X^A$ to the map whose value on $(a,t)\\in A_{n,q}\\times T_{n,q}$ is $h(t)(a,\\mathrm{id}_{[n]},\\mathrm{id}_{[q]})$. Conversely, given $k:A\\times T\\to X$, send $t\\in T_{n,q}$ to the map taking $(a,\\alpha,\\beta)\\in A_{r,s}\\times\\operatorname{Hom}_\\Delta([r],[n])\\times\\operatorname{Hom}_\\Delta([s],[q])$ to $k(a,T(\\alpha,\\beta)t)$. Naturality makes these inverse and makes the bijection commute with all maps of $A,T,X$. Evaluation in outer degree $n$ now identifies $\\operatorname{Map}(F(n),X^T)$ with $\\operatorname{Map}(T\\times F(n),X)$; mapping out of the union gives $\\operatorname{Map}(G(n),X^T)=\\operatorname{Map}(T\\times G(n),X)$. All these are isomorphisms of simplicial sets, with the stated restriction maps, not merely equivalences of components.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.3 and 4.1, printed pp. 5-6 and 11; explicit evaluation, gluing, and the internal-hom adjunction on bidegree simplices."
+   }
+  },
+  {
+   "text": "First prove Reedy fibrancy and the restriction-fibration assertion without using the Segal condition. Let $j:A\\hookrightarrow B$ be any monomorphism and let $V$ be Reedy fibrant. To test whether $V^B\\to V^A$ is a Reedy fibration, take any Reedy trivial cofibration $i:C\\to D$ and a commutative lifting square against restriction. The internal-hom formula identifies that square with a map $(B\\times C)\\amalg_{A\\times C}(A\\times D)\\to V$; a lift is precisely its extension to $B\\times D$. The pushout product $j\\mathbin{\\square}i$ is a Reedy trivial cofibration by [lem-coef-simplicial-space-reedy-cartesian]. The map $V\\to *$ lifts against it, by the weak-factorization-system characterization of Reedy fibrations in [lem-coef-reedy-model-structure]. This gives the required lift for every $i$. Taking $j:\\varnothing\\to T$ proves $V^T$ Reedy fibrant for every small $T$, because $V^{\\varnothing}=*$ directly from the internal-hom formula.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.4-2.5, printed pp. 6-7; pushout-product and lifting adjunction expanded."
+   }
+  },
+  {
+   "text": "Put $f=\\coprod_{n\\geq2}(G(n)\\hookrightarrow F(n))$, a monomorphism of small simplicial spaces, and take its localization model from [lem-coef-simplicial-space-localization-interval-criterion]. Its local objects are exactly the Segal spaces of the item. To check this carefully, for any Reedy fibrant $W$ the maps $r_n:\\operatorname{Map}(F(n),W)\\to\\operatorname{Map}(G(n),W)$ are Kan fibrations by the mapping-space assertion of [lem-coef-simplicial-space-reedy-cartesian], since the spine inclusions are monomorphisms. The map $\\operatorname{Map}(f,W)$ is their product. If $W$ is Segal, every $r_n$ is a trivial fibration by step 1, so their product lifts against every boundary inclusion by taking coordinatewise lifts; it is a trivial fibration by [lem-coef-kan-quillen-right-proper]. Conversely suppose $W$ is $f$-local. If $W_0$ is empty, the vertex maps force all $W_k$ to be empty, so both mapping spaces in each $r_n$ are empty and $r_n$ is the identity of the empty simplicial set. If $W_0$ has a vertex $x$, its totally degenerate simplices give compatible basepoints in both sides of every $r_n$. Fixing those basepoints in all coordinates except $n$ and projecting back exhibits $r_n$ as a retract, in the arrow category, of $\\prod_m r_m$. That product is a weak equivalence by $f$-locality, and weak equivalences are retract closed by the model axioms in [lem-coef-reedy-model-structure]. Thus every $r_n$ is a weak equivalence, which is the Segal condition by step 1. This covers also empty and disconnected vertex spaces; no completeness condition has been imposed.",
+   "uses": [
+    "lem-coef-simplicial-space-localization-interval-criterion",
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 10, opening paragraph, printed p. 23; Proposition 9.1 and Section 4.1. The coproduct-locality argument includes the empty-object case explicitly."
+   }
+  },
+  {
+   "text": "For every $f$-local $W$, step 3 makes $W$ a Segal space. Step 2 makes $W^{F(1)}$ Reedy fibrant. For $n\\geq2$, its consecutive-edge map identifies by step 1 with restriction $\\operatorname{Map}(F(1)\\times F(n),W)\\to\\operatorname{Map}(F(1)\\times G(n),W)$. This is a weak equivalence by [lem-coef-segal-spine-interval-test]. Hence $W^{F(1)}$ is Segal, and therefore $f$-local by step 3. This verifies the additional hypothesis of [lem-coef-simplicial-space-localization-interval-criterion] for every local object, so the cartesian pushout product of two monomorphisms is a local equivalence whenever either factor is one.",
+   "uses": [
+    "lem-coef-segal-spine-interval-test",
+    "lem-coef-simplicial-space-localization-interval-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 10 after Remark 10.2, Lemma 10.3, and Proposition 9.2, printed pp. 22-24; verification of the interval criterion."
+   }
+  },
+  {
+   "text": "Let $A$ now be any small simplicial space and $V$ any Segal space. To prove that $V^A$ is $f$-local, test its terminal map against an arbitrary trivial cofibration $u:C\\hookrightarrow D$ in the $f$-local model of [lem-coef-simplicial-space-localization-interval-criterion]. A map $C\\to V^A$ is exactly a map $A\\times C\\to V$, and extending it to $D\\to V^A$ is exactly extending that map to $A\\times D\\to V$. By step 4 the map $A\\times u=(\\varnothing\\to A)\\mathbin{\\square}u$ is a monomorphism and an $f$-local equivalence. Since $V$ is local by step 3, $V\\to *$ lifts against $A\\times u$. The resulting extension proves the right lifting property against every local trivial cofibration. The model characterization in the cited node makes $V^A$ fibrant in the local model, hence $f$-local and Segal by step 3. This uses the given internal hom throughout, and applies also to $A=\\varnothing$.",
+   "uses": [
+    "lem-coef-simplicial-space-localization-interval-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Corollary 7.3, printed p. 16, derived from Theorem 7.1 by the pushout-product adjunction; the lifting argument is written explicitly."
+   }
+  },
+  {
+   "text": "For the monomorphism $j:A\\hookrightarrow B$ in the item, step 2 already proves that restriction $V^B\\to V^A$ is a Reedy fibration. In outer degree zero the matching diagram is empty, so the relative matching map is exactly $(V^B)_0\\to(V^A)_0$. The fibration formula of [lem-coef-reedy-model-structure], in the Kan model structure [lem-coef-kan-quillen-right-proper], makes this a Kan fibration, as asserted.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 2.4, printed p. 6; degree-zero relative matching formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-spine-interval-test",
+  "lem-coef-simplicial-space-localization-interval-criterion",
+  "lem-coef-simplicial-space-reedy-cartesian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Rezk Sections 2.3-2.5, 4.1, Propositions 9.1-9.2, Lemma 10.3 and Corollary 7.3; read online, archival copy WANTED. Explicit coproduct-locality and lifting arguments supplied in steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +169,45 @@
    "date": "2026-10-17",
    "verdict": "no match: the StrictSegal hits concern bijective spines of a single simplicial set. Cartesian closedness of simplicial sets does not assert preservation of the homotopy Segal condition or Reedy restriction fibrations of simplicial spaces. Read StrictSegal.lean:35-57,280-325; the indexed name SSet.instMonoidalClosed is not found by the additional grep in the installed SimplicialSet directory.",
    "directory": "Mathlib/AlgebraicTopology/SimplicialSet"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal hom from any bisimplicial set into a Reedy fibrant Segal space is a Segal space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"SSet.StrictSegal.truncation\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → ((SSet.truncation (n + 1)).obj X).StrictSegal\", \"doc\": \"For a natural number $ n $, this functor maps a strict Segal space to its $(n+1)$-truncated version by restricting the domain of the original simplicial set to the opposite of the truncated simplex ca\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.StrictSegal.isRightKanExtension\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal),\\n  CategoryTheory.Functor.IsRightKanExtension X\\n    (CategoryTheory.CategoryStruct.id ((SimplexCategory.Truncated.inclusion 2).op.comp X))\", \"doc\": \"For a strict Segal space $ X $, the simplicial set $ X $ is the right Kan extension of the composition of the opposite of the inclusion functor $ \\\\Delta_{\\\\leq 2} \\\\to \\\\Delta $ with $ X $. This characte\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → ((n : ℕ) → X.StrictSegalCore n) → X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} → X.StrictSegal → (SSet.Truncated.rightExtensionInclusion X 2).IsPointwiseRightKanExtension\", \"doc\": \"For a strict Segal space $X$, the right Kan extension of $X$ along the inclusion of the truncated simplex category $\\\\Delta_{\\\\leq 2}$ is pointwise at each object $[n]$. This means the canonical cone co\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:35-65,275-325 concerns bijective spines of a single simplicial set, not weak equivalences of spaces in a Reedy fibrant bisimplicial set. The internal-Hom hits give ordinary closed structures without homotopy Segal preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian exponentiation preserves Segal spaces and restriction along monomorphisms is a Reedy fibration",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"SSet.StrictSegal.truncation\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → X.StrictSegal → (n : ℕ) → ((SSet.truncation (n + 1)).obj X).StrictSegal\", \"doc\": \"For a natural number $ n $, this functor maps a strict Segal space to its $(n+1)$-truncated version by restricting the domain of the original simplicial set to the opposite of the truncated simplex ca\"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(X : SSet) → [X.IsStrictSegal] → X.StrictSegal\", \"doc\": \"Given a simplicial set $ X $ satisfying the strict Segal condition (i.e., the spine function $ X.\\\\text{spine}(n) $ is bijective for all $ n $), this constructs a strict Segal space structure on $ X $ \"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} → ((n : ℕ) → X.StrictSegalCore n) → X.StrictSegal\", \"doc\": \"Given a simplicial set $X$ such that for every natural number $n$, the strict Segal condition at level $n$ holds (i.e., $X_n$ decomposes as a product of $X_1$ and $X_0$ respecting composition), this c\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:35-65,275-325 concerns bijective spines of a single simplicial set, not weak equivalences of spaces in a Reedy fibrant bisimplicial set. The internal-Hom hits give ordinary closed structures without homotopy Segal preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"exp\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:35-65,275-325 concerns bijective spines of a single simplicial set, not weak equivalences of spaces in a Reedy fibrant bisimplicial set. The internal-Hom hits give ordinary closed structures without homotopy Segal preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|Segal.*expon|Segal.*internal|Segal.*cartesian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:35-65,275-325 concerns bijective spines of a single simplicial set, not weak equivalences of spaces in a Reedy fibrant bisimplicial set. The internal-Hom hits give ordinary closed structures without homotopy Segal preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal hom of simplicial spaces preserves the homotopy Segal condition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (Truncated.{u} n)\", \"doc\": \"The category of $ n $-truncated simplicial sets, equipped with the Cartesian monoidal structure, is a monoidal closed category. This means it has an internal hom-functor $[X, Y]$ such that for all obj\"}\n  {\"name\": \"CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.mk\", \"module\": \"Mathlib.CategoryTheory.Monoidal.DayConvolution.Closed\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {V : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} V] →\\n        [inst_2 : CategoryTheory.MonoidalCategory C] →\\n          [inst_3 : CategoryTheory.MonoidalCategory V] →\\n            [inst_4 : CategoryTheory.MonoidalClose\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{V}$ with $\\\\mathcal{V}$ closed, and functors $F,G,H: \\\\mathcal{C} \\\\to \\\\mathcal{V}$, this constructor defines the internal hom $[F,G]$ in the Day con\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHom\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \"(K L : C) : SSet.{v}\", \"doc\": \"For objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, this denotes the simplicial set of morphisms from $K$ to $L$, defined as the internal hom $K \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.ihom_map\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Subcategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  (P : CategoryTheory.ObjectProperty C) [inst_2 : P.IsMonoidal] [inst_3 : CategoryTheory.MonoidalClosed C]\\n  [inst_4 : P.IsMonoidalClosed] (X : P.FullSubcategory) {Y Z : P.FullSubcategory} (f : Y ⟶ \", \"doc\": \"For a monoidal closed category $\\\\mathcal{C}$ and a predicate $P$ on its objects compatible with both monoidal and closed structures, the internal hom-functor $[X, -]$ in the full subcategory $\\\\mathcal\"}\n  {\"name\": \"SSet.instMonoidalClosed\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Monoidal\", \"type\": \": MonoidalClosed (SSet.{u})\", \"doc\": \"The category of simplicial sets is equipped with a monoidal closed structure, where the internal hom-functor is defined via the Hom-tensor adjunction. This structure arises from the fact that simplici\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.ihom_map_hom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Subcategory\", \"type\": \"(X : P.FullSubcategory) {Y Z : P.FullSubcategory} (f : Y ⟶ Z) : ((ihom X).map f).hom = (ihom X.obj).map f.hom\", \"doc\": \"For a monoidal closed category $\\\\mathcal{C}$ and a predicate $P$ compatible with its monoidal closed structure, consider the full subcategory $\\\\mathcal{D} \\\\subseteq \\\\mathcal{C}$ of objects satisfying \"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"(sx : StrictSegal X) : IsStrictSegal X\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \": Cᵒᵖ ⥤ C ⥤ SSet.{v}\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:35-65,275-325 concerns bijective spines of a single simplicial set, not weak equivalences of spaces in a Reedy fibrant bisimplicial set. The internal-Hom hits give ordinary closed structures without homotopy Segal preservation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rezk-explicit-completion",
@@ -109,5 +227,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-cartesian-exponent",
+  "worker": "stage1",
+  "summary": "Six-step proof through the Reedy cartesian lifting argument, identification of spine-local objects with Segal spaces including empty vertex spaces, the interval test, and the general localization criterion. Three statement-only supporting nodes isolate the Reedy cartesian model, arbitrary-map localization criterion, and single-interval spine test. Statement unchanged; no Lean attachment found and no Mathlib match.",
+  "blueprint": "Realizes the mapping-space foundation under prop-coef-integral-exceptional-adjoint proof paragraph 2, the displayed finite-coefficient derived adjunction in the existing via chain. This is the same auxiliary Rezk infrastructure stated in the inherited blueprint.from.place, using Sections 2 and 9-10; it is not a literal assertion of the ancestor paragraph and does not replace any unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NE-ed881bc0f",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-ed881bc0f (reviewer sub-agent of L); spot-checked: Read in full: the item, the three new nodes, the cited Kan/Reedy statements and the parent lem-coef-rezk-explicit-completion (steps 2, 3 and 5 use only the unchanged item statement). Source: Rezk, local text copy of the cited PDF: §2.3–2.5, §4.1, Thm 7.1 and Cor 7.3, Props 9.1–9.2, Lemmas 10.1 and 10.3 with diagram (10.4). Item statement is unchanged against the base. Steps: (1) elementary Yoneda, union and adjunction formulas, checked degree by degree. (2) j□i lifting against Reedy fibrant V; V^∅=* gives Reedy fibrancy. (3) local objects equal Segal spaces: the product of r_n gives one direction; for the converse, W_0=∅ gives id_∅, otherwise r_n is an arrow retract of the product via degenerate basepoints. (4) Lemma 10.3 makes W^{F(1)} Segal for every local W, verifying the 9.2 hypothesis. (5) A×u=(∅→A)□u, so V^A is local (Rezk 7.3). (6) M_0=*, so the degree-zero map is a Kan fibration. All correct; route stays in the unit; no tool_uses; no SGA. New nodes are true and match their sources. reedy-cartesian uses the correct SM7 variance (Rezk's printed 2.5(2) has X and Y swapped). spine-interval-test is Rezk 10.3 exactly: a strictly smaller special case with its own combinatorial proof, not a relabelling. Duplicate candidates read and rejected: reedy-model-structure, sset-anodyne-pushout-product, rezk-local-model (complete case only), bousfield-quillen-descent and bousfield-local-fibrations (assume the localization exists), lem-cbc-general-bousfield-localization (other unit, no interval criterion), segal-external-local-equivalences, labelled-spine-prism-horn-calculus. One B3 repair: the localization node said 'simplicial model structure' without a definition. Citing lem-coef-simplicial-model-nerve-localization would close a cycle (that node reaches the item; BFS checked), so the SM7 meaning is written inline per Rezk 9.1, and lem-coef-kan-quillen-right-proper is added to stmt_deps (acyclic). Nothing weakened. Fix file: fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-space-localization-interval-criterion.json.; 1 file(s) fixed by the reviewer"
  }
 }
