@@ -40,3 +40,5 @@ identity under each server repository's merge lock. No Lean file was changed,
 so no Lean compile or global build is needed. No process was signalled.
 The canonical transport itself remains the prerequisite worker's authorized
 stage-2 work; this maintenance fixes the false completion and repair handoff.
+
+Handoff validation found that claim.py created the full repair entry for NV, but the dispatcher initially started that newly claimed prerequisite as new without inlining its return. The standing coord/brief-stage2.md now explicitly requires workers and second readers to read any released stage-2 repair note before accepting an existing declaration, and to validate the recorded consumer. This makes the repair diagnostic available through a document every stage-2 worker/second reader already reads. Its backups carry the .maint-Q23-1792137457-handoff.bak suffix. No dispatcher process restart, task cancellation, or message to a worker was used.

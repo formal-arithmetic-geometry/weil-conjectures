@@ -4,6 +4,7 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 
 ## 0. What you read
 
+- Maintenance repair handoff (2026-10-16): read `coord/repair-notes/<id>.json` when present, including before an `existing: true` match. A note with `stage: "2"` and `state: "released"` records an interface repair on this item even when the dispatcher calls the newly claimed task "new". Read its diagnostic and archived binding; repair every recorded defect and show the required consumer validation in the worker report. Second readers verify that repair before delivery. Rebinding the withdrawn declaration without fixing its recorded defect is not a repair. This does not authorize stating another DAG node.
 - The node `dag/nodes/<chapter>/<id>.json`: `statement`, `kind`, `source`, `stmt_deps`, `proof` (statement nodes), `mathlib_searches`.
 - Every node in `stmt_deps`, its statement and its `lean` record (`module`, `declaration`) or `mathlib_match`.
 - The source module of each recorded declaration: `~/weil-conjectures-slopmaster2/<module path>.lean` (module `A.B.C` is file `A/B/C.lean`; compiled, read-only). Read the declaration and its docstring, not only its name.
