@@ -7,6 +7,7 @@ module
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -29,7 +30,8 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
 set_option hygiene false in
 local notation "𝒜" => SheafOfModules.{w}
   ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
-private theorem tensorPreadditive :
+/-- Tensor of module sheaves is preadditive at independent site and coefficient universes. -/
+theorem tensorPreadditive :
     letI := isMonoidal_W_independentCoefficients R
     letI := monoidalCategory R
     MonoidalPreadditive 𝒜 := by
@@ -46,7 +48,8 @@ private theorem tensorPreadditive :
       whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
       add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
 
-private theorem flat_to_cat (M : 𝒜) (h : IsFlatOnSite (J := J) (R := R) M) :
+/-- Site-flatness implies categorical flatness for the sheaf tensor product. -/
+theorem flat_to_cat (M : 𝒜) (h : IsFlatOnSite (J := J) (R := R) M) :
     letI := isMonoidal_W_independentCoefficients R
     letI := monoidalCategory R
     ObjectProperty.flat M := by

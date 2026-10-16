@@ -17,42 +17,89 @@
  ],
  "proof": [
   {
-   "text": "The acyclic K-flat cycles criterion [lem-weil-pbc-site-acyclic-kflat-cycles-flat] gives flat cycles in every degree. The good truncation at n has the original terms below n, this flat cycle sheaf at n, and zero terms above n. Its terms are therefore flat and it is bounded above.",
+   "text": "Use the existing tensorPreadditive and flat_to_cat lemmas in BoundedFlatIndependentCoefficients, exported there for reuse. They obtain monoidal preadditivity from additive tensor functors and identify site-flatness with categorical flatness through siteSheafTensorRightIso and the braiding. Their original proofs are unchanged and are not repeated in this module.",
    "uses": [
-    "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply flat-module pullback [lem-weil-pbc-ringed-topos-flat-module-pullback] to the terms of each good truncation. Additivity preserves the zero terms, so its image remains bounded above. Apply the proved independent-universe bounded-above flat criterion [lem-weil-pbc-independent-bounded-flat-kflat] directly to that image.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-flat-sheaf-modules",
     "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "The good truncations indexed by natural numbers have degreewise colimit P: they are eventually equal to P in any fixed degree. The specified module pullback preserves this colimit by [lem-weil-pbc-ringed-topos-pullback-filtered-colimits]. Filtered-colimit closure of K-flatness [lem-pc-module-filtered-colimits-tensor] now gives the conclusion. This avoids a second replacement tower and avoids flat-quotient short exact sequences.",
+   "text": "For any complex F, choose a K-flat resolution r:Q→F by lem-pc-kflat-resolution. Its cone is acyclic, hence K-flatness of the given acyclic P makes Cone(r) tensor P acyclic. The tensor-cone isomorphism makes r tensor id_P a quasi-isomorphism. K-flatness of Q makes P tensor Q acyclic, and the signed total-tensor symmetry identifies this with Q tensor P. Transport exactness along r tensor id_P to obtain acyclicity of F tensor P. The private tensor_acyclic helper proves this argument without identifying any site universes.",
    "uses": [
-    "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-pc-quasi-iso-modules"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the preceding result to N concentrated in degree zero. The single-complex tensor comparison and the braiding show that the termwise tensor P tensor N is exact in every degree. Prove the Tor criterion directly, with only finite-colimit preservation of tensor: for Q=coker(P^(a-1)→P^a), tensoring its cokernel sequence remains exact. Given a short exact N1→N2→N3 and an element of Q tensor N1 killed in Q tensor N2, use epimorphic refinements to lift it to P^a tensor N1 and then lift its image to P^(a-1) tensor N2. Exactness over N3 gives a boundary in degree a-2; lift that boundary and subtract it to make the lift come from P^(a-1) tensor N1, using flatness of P^(a-1). Flatness of P^a identifies its differential with the first lift, so the original element is zero. Thus tensoring Q preserves monomorphisms, and right exactness gives flatness. This is the complete private flat_opcycles_of_tensor_exactAt proof, generalizing the source FlatModel.flat_opcycles_of_exactAt argument without requiring a closedness instance.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set a=n-1 in the Tor criterion. Acyclicity makes P.opcyclesToCycles (n-1) n both monic and epic: fromOpcycles is monic in degree n-1 and toCycles is epic in degree n. The abelian-category criterion makes the induced map invertible. Transfer flatness from opcycles to cycles through this isomorphism and siteSheafTensorRightIso. For each truncation at n, use truncLEXIso below n, truncLEXIsoCycles at n, and flatness of a zero object above n to obtain categorical flatness of every term.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert AlgebraicInverseImage to AlgebraicInverseImageOfUniverses with both coefficient and module universe w by the natural trivial-ULift isomorphisms on the underlying ring and module sheaves. Transport each graph-operation equation explicitly; the modules functor is unchanged. Apply flat-module pullback, rewrite changeOfRings as changeOfRingsOfUniverses (definitionally equal here), and transfer site-flatness back to categorical flatness. Therefore every image truncation has flat terms; additivity of uStar preserves its zero terms, so it remains bounded above.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use CochainComplex.filtrationLE and its proved isColimitFiltrationLECocone from WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc. This integer-indexed good-truncation diagram has colimit P because its components are eventually isomorphisms in every degree. Apply pullback preservation to the coefficient-sized category AsSmall.{w} ℤ and transport along AsSmall.equiv to ℤ. The induced functor on complexes preserves this colimit degreewise.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-pullback-filtered-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Supply exact integer-indexed colimits of target module sheaves by shrinking AB5 for abelian groups to universe zero, then using exact colimits of abelian sheaves and HasExactColimitsOfShape.domain_of_functor for the module forgetful functor. Tensor colimit preservation gives the graded tensor instances. Apply the source-library CochainComplex.kFlat_of_isStrictlyLE_of_flat to each image truncation and ObjectProperty.prop_of_isColimit to their preserved colimit, using closedUnderColimitsOfShape_kFlat. This gives categorical K-flatness of the image of P.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary acyclic Z, the zero map 0→Z is a quasi-isomorphism. Categorical K-flatness makes its tensor with the image of P a quasi-isomorphism. Its source is zero by additivity, hence its target is acyclic by exactAt_iff_of_quasiIsoAt. This is IsKFlatIndependentCoefficients of the image, with exactly the original hypotheses and conclusion.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-flat-sheaf-modules",
-  "lem-pc-module-filtered-colimits-tensor",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
   "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
-  "lem-weil-pbc-site-acyclic-kflat-cycles-flat"
+  "lem-weil-pbc-ringed-topos-pullback-filtered-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0G7E (sites-cohomology-lemma-pullback-K-flat), acyclic case; direct good-truncation variant using Tag 0G7C; the argument is detailed in the proof steps"
+  "place": "Tag 0G7E (lemma-pullback-K-flat), acyclic case, and Tag 0G7C (lemma-K-flat-flat-acyclic); independent-universe tensor-cone and Tor arguments proved by private helpers. The Tor diagram chase follows WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean, flat_opcycles_of_exactAt, with right exactness replacing closedness. Integer-indexed good truncations and categorical K-flat colimit closure are taken from the proved source library. Repair: the existing tensorPreadditive and flat_to_cat proofs in BoundedFlatIndependentCoefficients are exported and imported instead of duplicated. The redundant changeOfRings_eq_ofUniverses theorem is removed; the pullback application uses definitional equality directly."
  },
  "mathlib_searches": [
   {
@@ -137,11 +184,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-fc1c2",
-  "group": "K3",
+  "reviewer": "X-89a2c",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261016T064223-L-582607",
+  "landing": "20261016T075723-L-1295408",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+  "note": "independent Codex review: Delivered Lean against the node and baseline signatures; DAG against proof; compiled delivery, original helper module, RingedToposAdaptedFlatResolution, and KFlatRingedToposPullback; checked all ten declarations' axioms."
  }
 }
