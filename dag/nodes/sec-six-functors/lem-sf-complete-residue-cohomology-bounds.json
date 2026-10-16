@@ -33,7 +33,10 @@
   "def-pur-sheaf-inverse-limit",
   "def-weil-derived-limit",
   "def-pc-sheaf-restrict-scalars",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-cbc-strict-constant-tower-operations"
  ],
  "proof": [
   {
@@ -320,5 +323,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e321926e5 (reviewer sub-agent of L); spot-checked: I read the whole item, all the cited statements, the parent's citing step, unit sk-rem-sf-pf-done and the sources. Stacks proetale 09C2 (l.5788-5822); sites-cohomology 0942 (l.12615) and 0947 (l.13801); all tags checked against tags/tags. The statement is a correct generalization of the boundedness argument in the proof of 09C2(1),(2) to arbitrary derived-complete K over B_X; no constructibility is needed. I tested B_X itself, K=0, X empty, a=b, and the varpi-divisible counterexample that shows completeness is needed. The parent's hypotheses match: the same B_U, the same completeness notion and the same local Tor condition, on a quasi-compact clopen U. There is no duplicate: lem-coef-integral-residue-tor and lem-sfb-integral-cohomological-adic-criterion both assume constructibility and have different conclusions. Steps 1-5 and 7 check out, including the DVR coefficient sequence and its B_X-linearity, the long exact sequences, top-degree surjectivity, and the j=b+1 term killed by det-pe-milnor-epimorphic. One fault, C1/E5, in step 6: the step identified the Milnor cone Cone(1-T)[-1], built from termwise products, with a derived limit in the sense of def-weil-derived-limit (a Roos triangle on the product in D) without citing that termwise products are products in D (Stacks 0947(5)). Repaired in fixes/: step 6 now cites det-pe-products-derived, checks that pr_n∘Q(1-T) is the transition map 1-s, and gets the Roos triangle by rotating the cone triangle (def-weil-abstract-derived-category, TR2 of def-weil-triangulated-category) before applying clause 1 of lem-weil-derived-limit-existence. proof_deps is recomputed. Accepted tool uses: lem-pc-kflat-resolution, lem-pur-derived-change-of-rings, lem-weil-pbc-complex-ses-triangle, lem-sf-derived-homology-long-exact, det-pe-milnor-sequence, lem-weil-derived-limit-existence (clause 1), det-pe-milnor-epimorphic, plus det-pe-products-derived added here. No cycle. Statement unchanged, no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65697f604",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Every clause matches the node, checked against the side-clone declarations. B_X = limit of constant ULift(O_E/ϖ^(n+1)) sheaves (real data). IsDerivedCompleteUnrestricted unfolds to the canonical K-flat reduction tower and an augmented IsDerivedLimitTriangle; its FiniteFieldDatum existential is unused and always satisfiable. K_1 = scalarReductionDerivedExtension at level 0 (exponent 1). Restriction to every V : X.ProEt is proEtaleRingDerivedPullback via the canonical constantRingIso. HasProEtaleTorAmplitude quantifies over all module sheaves, representatives and K-flat resolutions. Conclusion: IsZero of homologyFunctor j for j<a or b<j, same instances as K. No constructibility, Noetherian or characteristic assumption. The shared universe u for E and X matches the consumer ResidueLisseProjectiveModels, is forced by the Tor API, and does not identify the site's object and morphism universes. lean.statement is verbatim the signature; the node changes only lean plus three landed, passed stmt_deps (def-weil-derived-complete, def-weil-integral-derived-reduction, def-cbc-strict-constant-tower-operations), all definitions, so no cycle. One theorem, proved by sorry; docstrings give source and blueprint and all seven proof steps. Report has Worker report and Second reading by Q11. nt_compile --json: rc=0, 1.9 s, no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteResidueCohomologyBounds",
+  "declaration": "WeilConjectures.complete_residue_cohomology_bounds",
+  "file": "lean/Sheaf/Paper/CompleteResidueCohomologyBounds.lean",
+  "statement": "theorem complete_residue_cohomology_bounds (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [CompactSpace X] (K : @DerivedCategory (integralTowerModules.{u, u} l E X) _ (@SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X) (completedIntegralCoefficientSheafUnrestricted l E X) (integralCoefficientAbSheafify.{u, u} X) (integralCoefficientAbLocallyBijective.{u, u} X)) (integralTowerHasDerivedCategory.{u, u} l E X)) (_hcomplete : IsDerivedCompleteUnrestricted.{u, u} l E X K) (a b : ℤ) (_hab : a ≤ b) (_hTor : ∀ V : X.ProEt, HasProEtaleTorAmplitude.{u} V.left (Padic.coefficientExtensionRing l E 1) ((proEtaleRingDerivedPullback.{u} V.hom (proEtaleConstantRing X (Padic.coefficientExtensionRing l E 1)) (proEtaleConstantRing V.left (Padic.coefficientExtensionRing l E 1)) (AlgebraicGeometry.ProEtale.StrictTower.constantRingIso.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E 1)) V.hom)).obj ((scalarReductionDerivedExtension.{u, u} l E X 0).obj K)) a b) : ∀ j : ℤ, j < a ∨ b < j → IsZero ((@DerivedCategory.homologyFunctor (integralTowerModules.{u, u} l E X) _ (@SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X) (completedIntegralCoefficientSheafUnrestricted l E X) (integralCoefficientAbSheafify.{u, u} X) (integralCoefficientAbLocallyBijective.{u, u} X)) (integralTowerHasDerivedCategory.{u, u} l E X) j).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
