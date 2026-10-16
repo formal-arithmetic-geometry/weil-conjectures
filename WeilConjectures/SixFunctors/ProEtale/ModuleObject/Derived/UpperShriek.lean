@@ -117,6 +117,18 @@ noncomputable def boundedConstructibleUpperShriekOfCompactificationAdjunction :
   (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ c.overI).comp
     (Adjunction.ofIsLeftAdjoint _)
 
+/-- The lower shriek `Rf_!(c)` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleUpperShriekOfCompactification`. -/
+instance isLeftAdjoint_boundedConstructibleLowerShriekOfCompactification :
+    (boundedConstructibleLowerShriekOfCompactification Λ ℓ c).IsLeftAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction Λ ℓ c).isLeftAdjoint
+
+/-- The exceptional inverse image `Rf^!(c)` on bounded constructible complexes is a right
+adjoint, its left adjoint being `boundedConstructibleLowerShriekOfCompactification`. -/
+instance isRightAdjoint_boundedConstructibleUpperShriekOfCompactification :
+    (boundedConstructibleUpperShriekOfCompactification Λ ℓ c).IsRightAdjoint :=
+  (boundedConstructibleUpperShriekOfCompactificationAdjunction Λ ℓ c).isRightAdjoint
+
 end OfCompactification
 
 /-! ### The adjunction `Rf_! ⊣ Rf^!` -/
