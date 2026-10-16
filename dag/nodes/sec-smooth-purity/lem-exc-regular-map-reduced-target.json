@@ -22,37 +22,108 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unfold regularity of $\\varphi$ using [def-weil-pbc-g-ring]. The map $A\\to B$ is flat, and for every prime $\\mathfrak p\\subset A$ the ring $F_{\\mathfrak p}=B\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$. Take the degree-one finite purely inseparable extension $\\kappa(\\mathfrak p)/\\kappa(\\mathfrak p)$ in this definition. The canonical identification $\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}F_{\\mathfrak p}\\cong F_{\\mathfrak p}$ sends $a\\otimes x$ to $ax$ with inverse $x\\mapsto1\\otimes x$; hence $F_{\\mathfrak p}$ is regular. By [def-weil-regular-scheme], every prime localization of $F_{\\mathfrak p}$ is therefore a regular local ring.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07BZ, definition-regular; geometric regularity in Section 07BY and Algebra Tag 0381, condition (2); preparatory unpacking for Tag 07QK"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\subset A$. Every prime localization $(F_{\\mathfrak p})_{\\mathfrak r}$ is a domain by [lem-sc-regular-local-domain], applied to the regular local rings of step 1. A domain is reduced: if $x^n=0$ for $n\\ge1$, induction on $n$ and $x\\cdot x^{n-1}=0$ gives $x=0$. Thus all these prime localizations are reduced. Apply the reducedness clause of [lem-weil-pbc-prime-localizations-jointly-injective] to the commutative ring $F_{\\mathfrak p}$; it follows that $F_{\\mathfrak p}$ is reduced. This holds for every prime of $A$, including a zero fibre, for which the family of primes is empty and reducedness still holds.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NP, lemma-regular-domain; Tag 00HN, lemma-characterize-zero-local, part (1); expansion of the regular-fibre input in More on Algebra Tag 07QK"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-serre-criterion-reduced] to the Noetherian reduced ring $A$: it has $(R_0)$ and $(S_1)$. Apply the same equivalence to every $F_{\\mathfrak p}$, using its Noetherianity from step 1 and its reducedness from step 2. Thus every fibre has $(R_0)$ and $(S_1)$ as well. These are precisely the two fibre hypotheses required for the ascent lemmas, with indices $0$ and $1$ respectively.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QK, lemma-reduced-goes-up, proof: reducedness is (R_0) plus (S_1), citing Algebra Tag 031R, lemma-criterion-reduced"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-regularity-rk-goes-up] with $R=A$, $S=B$, and $k=0$. Both rings are Noetherian by hypothesis, the map is flat by step 1, and $A$ and every fibre have $(R_0)$ by step 3. It follows that $B$ has $(R_0)$. Separately use [lem-weil-pbc-serre-sk-goes-up] for the same map with $k=1$: both Noetherian hypotheses and flatness are the same, while step 3 supplies $(S_1)$ for $A$ and every fibre. Therefore $B$ has $(S_1)$. No finite-type or smoothness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-regularity-rk-goes-up",
+    "lem-weil-pbc-serre-sk-goes-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QK, lemma-reduced-goes-up, proof: Algebra Tags 033A (lemma-Rk-goes-up) and 0339 (lemma-Sk-goes-up)"
+   }
+  },
+  {
+   "text": "The ring $B$ is Noetherian by hypothesis and satisfies $(R_0)$ and $(S_1)$ by step 4. The converse direction of [lem-weil-pbc-serre-criterion-reduced], now applied to $B$, gives that $B$ is reduced, as required.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QK, lemma-reduced-goes-up, concluding use of Algebra Tag 031R, lemma-criterion-reduced"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-regularity-rk-goes-up",
+  "lem-weil-pbc-serre-sk-goes-up"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QK, lemma-reduced-goes-up, proof via Algebra Tags 031R, 0339 and 033A; the regular-fibre reducedness input is expanded using Tags 00NP and 00HN"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "regular ring map from reduced Noetherian ring to Noetherian ring has reduced target",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isReduced_localizationPreserves\", \"module\": \"Mathlib/RingTheory/LocalProperties/Reduced\", \"type\": \"LocalizationPreserves fun R x => IsReduced R\", \"doc\": \"If $ R $ is a reduced ring, then the localization of $ R $ is also a reduced ring. In other words, the property of being reduced is preserved under localization.\"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_1) {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [Algebra.IsGeometricallyReduced k A], IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}\n  {\"name\": \"AlgebraicGeometry.affine_isReduced_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsReduced (AlgebraicGeometry.Spec R) ↔ IsReduced ↑R\", \"doc\": \"For a commutative ring $ R $, the affine scheme $ \\\\operatorname{Spec}(R) $ is reduced (i.e., all its local rings have no nonzero nilpotent elements) if and only if the ring $ R $ itself is reduced (i.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_injective\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A] {B : Type u_3}\\n  [inst_3 : Ring B] [inst_4 : Algebra k B] (f : A →ₐ[k] B),\\n  Function.Injective ⇑f → ∀ [Algebra.IsGeometricallyReduced k B], Algebra.IsGeometricallyReduced k A\", \"doc\": \"If there exists an injective algebra homomorphism from a ring $ A $ to a ring $ B $ over a field $ k $, and $ B $ is geometrically reduced over $ k $, then $ A $ is also geometrically reduced over $ k\"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Localization/Submodule\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] [IsNoetherianRing R], IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"instIsReducedLocalization\", \"module\": \"Mathlib/RingTheory/LocalProperties/Reduced\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Submonoid R) [IsReduced R], IsReduced (Localization M)\", \"doc\": \"If $ R $ is a commutative ring with no non-zero nilpotent elements, then the localization of $ R $ at any submonoid $ M $ is also a reduced ring. This means that the localization $ R[M^{-1}] $ inherit\"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [H : IsReduced ↑R], AlgebraicGeometry.IsReduced (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a reduced commutative ring (i.e., $ R $ has no nonzero nilpotent elements), then the scheme $ \\\\operatorname{Spec}(R) $ is reduced, meaning all its local rings have no nonzero nilpotent ele\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: localization and geometric reducedness results do not state regular-map ascent; the flat tensor-product result requires reducedness after tensoring with every finitely generated subalgebra, not regular fibres"
   },
   {
    "tool": "leanfinder",
    "query": "A flat algebra over a reduced Noetherian ring whose fibres are geometrically regular is reduced",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_1) {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [Algebra.IsGeometricallyReduced k A], IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u_1} {C : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : CommSemiring C] [inst_2 : Semiring A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R C] [Module.Flat R C],\\n  (∀ (B : Subalgebra R A), B.FG → IsReduced (TensorProduct R C ↥B)) → IsReduced (TensorProduct R C A)\", \"doc\": \"Let $ R $ and $ C $ be commutative semirings, and let $ A $ be a semiring equipped with an $ R $-algebra structure. If $ C $ is a flat $ R $-module and for every finitely generated $ R $-subalgebra $ \"}\n  {\"name\": \"Algebra.isGeometricallyReduced_iff\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  Algebra.IsGeometricallyReduced k A ↔ IsReduced (TensorProduct k (AlgebraicClosure k) A)\", \"doc\": \"For a field $ k $ and a $ k $-algebra $ A $, the algebra $ A $ is geometrically reduced over $ k $ (i.e., $ A \\\\otimes_k L $ is reduced for every field extension $ L/k $) if and only if the tensor prod\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: localization and geometric reducedness results do not state regular-map ascent; the flat tensor-product result requires reducedness after tensoring with every finitely generated subalgebra, not regular fibres"
   },
   {
    "tool": "loogle",
    "query": "IsReduced, Module.Flat",
    "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u_1} {C : Type u_2} {A : Type u_3} [CommSemiring R] [CommSemiring C] [Semiring A] [Algebra R A] [Algebra R C] [Module.Flat R C] (h : ∀ (B : Subalgebra R A), B.FG → IsReduced (TensorProduct R C ↥B)) : IsReduced (TensorProduct R C A)\", \"doc\": \"Let `R` be a commutative semiring, let `C` be a commutative `R`-algebra, and let `A` be an\\n`R`-algebra. If `C ⊗[R] B` is reduced for all finitely generated subalgebras `B` of `A`, then\\n`C ⊗[R] A` is a\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: localization and geometric reducedness results do not state regular-map ascent; the flat tensor-product result requires reducedness after tensoring with every finitely generated subalgebra, not regular fibres"
   },
   {
    "tool": "grep",
-   "query": "IsRegular|geometrically regular|reduced_goes_up|isReduced.*flat|Flat.*isReduced",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"line\": \"800\", \"text\": \"  · have hr' : IsRegular r := IsUnit.isRegular <| .of_mul_eq_one x.leadingCoeff hr\"}\n  {\"file\": \"Mathlib/RingTheory/HahnSeries/Summable.lean\", \"line\": \"802\", \"text\": \"      rw [(order_single_mul_of_isRegular hr' hy)]\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"21\", \"text\": \"* `Polynomial.isRegularRing_of_isRegularRing` : the polynomial ring over a regular ring is\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"24\", \"text\": \"* `MvPolynomial.isRegularRing_of_isRegularRing` : the multivariate polynomial ring with finite\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"35\", \"text\": \"lemma Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"36\", \"text\": \"    [IsRegularLocalRing R] (p : Ideal R[X]) [p.IsPrime] (max : p.comap C = maximalIdeal R) :\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"line\": \"37\", \"text\": \"    IsRegularLocalRing (Localization.AtPrime p) := by\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"17\", \"text\": \"For a Noetherian local ring `R`, we define `IsRegularLocalRing` as\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"20\", \"text\": \"(see `IsRegularLocalRing.iff_finrank_cotangentSpace`).\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"28\", \"text\": \"* `IsRegularLocalRing` : A Noetherian local ring is regular if\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"32\", \"text\": \"* `IsRegularLocalRing.iff_finrank_cotangentSpace` : the equivalence of `IsRegularLocalRing` and\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"35\", \"text\": \"* `IsRegularRing` : A noetherian ring is regular if its localization at any prime\"}\n  {\"file\": \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\", \"line\": \"578\", \"text\": \"theorem order_single_mul_of_isRegular {g : Γ} {r : R} (hr : IsRegular r)\"}\n  {\"file\": \"Mathlib/RingTheory/HahnSeries/Multiplication.lean\", \"line\": \"584\", \"text\": \"  rw [order_mul_of_ne_zero hrx, order_single <| IsRegular.ne_zero hr]\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Flat.lean\", \"line\": \"65\", \"text\": \"theorem IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Flat.lean\", \"line\": \"68\", \"text\": \"    IsRegular N (rs.map (algebraMap R S)) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Flat.lean\", \"line\": \"70\", \"text\": \"  refine (IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal (fun _ hr ↦ ?_)).mpr <|\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Flat.lean\", \"line\": \"75\", \"text\": \"theorem IsWeaklyRegular.isRegular_of_isLocalization_of_mem\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/Flat.lean\", \"line\": \"77\", \"text\": \"    IsRegular S (rs.map (algebraMap R S)) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"458\", \"text\": \"theorem isUnit_iff_isRegular [IsArtinianRing R] {x : R} : IsUnit x ↔ IsRegular x := by\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"459\", \"text\": \"  rw [isRegular_iff, ← isUnit_iff_isRightRegular, and_iff_right_of_imp (·.isRegular.1)]\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"464\", \"text\": \"theorem isUnit_iff_isRegular_of_mulOpposite [IsArtinianRing Rᵐᵒᵖ] {x : R} :\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"465\", \"text\": \"    IsUnit x ↔ IsRegular x := by\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"466\", \"text\": \"  rw [isRegular_iff, ← isUnit_iff_isLeftRegular, and_iff_left_of_imp (·.isRegular.2)]\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Module.lean\", \"line\": \"76\", \"text\": \"theorem LinearIndependent.of_isLocalizedModule_of_isRegular {ι : Type*} {v : ι → M}\"}",
+   "query": "RingHom.IsRegular|geometrically regular|IsReduced.tensorProduct_of_flat_of_forall_fg",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"line\": \"97\", \"text\": \"  exact IsReduced.tensorProduct_of_flat_of_forall_fg h\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"642\", \"text\": \"theorem IsReduced.tensorProduct_of_flat_of_forall_fg {R C A : Type*}\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: localization and geometric reducedness results do not state regular-map ascent; the flat tensor-product result requires reducedness after tensoring with every finitely generated subalgebra, not regular fibres"
   },
   {
    "tool": "leansearch",
@@ -60,29 +131,49 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-16",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "RingHom.IsRegular|geometrically regular|IsReduced.tensorProduct_of_flat_of_forall_fg",
-   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"line\": \"97\", \"text\": \"  exact IsReduced.tensorProduct_of_flat_of_forall_fg h\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"642\", \"text\": \"theorem IsReduced.tensorProduct_of_flat_of_forall_fg {R C A : Type*}\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read Flat/Basic.lean:638–661; the tensor-product lemma assumes reducedness after tensoring with every finitely generated subalgebra, rather than geometrically regular fibres of a regular ring map"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Flat algebra over a reduced ring with reduced residue field fibres is reduced",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isReduced_of_isGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_1) {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [Algebra.IsGeometricallyReduced k A], IsReduced A\", \"doc\": \"If $ A $ is a $ k $-algebra that is geometrically reduced over a field $ k $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u_1} {C : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : CommSemiring C] [inst_2 : Semiring A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R C] [Module.Flat R C],\\n  (∀ (B : Subalgebra R A), B.FG → IsReduced (TensorProduct R C ↥B)) → IsReduced (TensorProduct R C A)\", \"doc\": \"Let $ R $ and $ C $ be commutative semirings, and let $ A $ be a semiring equipped with an $ R $-algebra structure. If $ C $ is a flat $ R $-module and for every finitely generated $ R $-subalgebra $ \"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"Algebra.isGeometricallyReduced_iff\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  Algebra.IsGeometricallyReduced k A ↔ IsReduced (TensorProduct k (AlgebraicClosure k) A)\", \"doc\": \"For a field $ k $ and a $ k $-algebra $ A $, the algebra $ A $ is geometrically reduced over $ k $ (i.e., $ A \\\\otimes_k L $ is reduced for every field extension $ L/k $) if and only if the tensor prod\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_3} {A : Type u_4} {inst : Field k} {inst_1 : Ring A} {inst_2 : Algebra k A}\\n  [self : Algebra.IsGeometricallyReduced k A], IsReduced (TensorProduct k (AlgebraicClosure k) A)\", \"doc\": \"If $ A $ is a geometrically reduced algebra over a field $ k $, then the tensor product $ A \\\\otimes_k \\\\overline{k} $, where $ \\\\overline{k} $ denotes the algebraic closure of $ k $, is a reduced ring (\"}\n  {\"name\": \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ (k : Type u_3) (A : Type u_4) (K : Type u_5) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : Field K] [inst_4 : Algebra k K] [Algebra.IsAlgebraic k K] [Algebra.IsGeometricallyReduced k A],\\n  IsReduced (TensorProduct k K A)\", \"doc\": \"Let $A$ be a geometrically reduced algebra over a field $k$, and let $K/k$ be an algebraic field extension. Then the tensor product $K \\\\otimes_k A$ is a reduced ring, meaning it has no non-zero nilpot\"}\n  {\"name\": \"Algebra.FormallyUnramified.isReduced_of_field\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A], IsReduced A\", \"doc\": \"If $ A $ is a formally unramified algebra over a field $ R $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned reduced tensor-product theorem requires every finitely generated subalgebra tensor product to be reduced; no theorem using residue-field fibres"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-quasi-excellent-nagata",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-regular-map-reduced-target",
+  "worker": "stage1",
+  "summary": "Kept the exact 07QK statement and its two statement dependencies. Followed the Stacks Serre-criterion proof, expanding regular fibres to reduced fibres via prime-local domains and joint injectivity. Reused all algebra facts from the DAG; no new nodes. Verified all ascent hypotheses and the zero-ring cases, searched the blueprint and the source project, and repeated Mathlib searches with the logged command. Read the Stacks text on the server because this read-only shared checkout omits untracked literature.",
+  "blueprint": "Realizes the support for the sentence \"Excellence implies the Nagata property\" in lem-exc-punctured-curve-branches, via lem-exc-quasi-excellent-nagata: its split step 4 uses 07QK for the regular completion map of a reduced local domain. The present split keeps the existing from.node, from.place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-serre-criterion-reduced",
+    "why": "General Noetherian reducedness criterion 031R, used for the base, fibres and target exactly as 07QK requires; no node of the Kummer unit states this algebra criterion."
+   },
+   {
+    "node": "lem-weil-pbc-regularity-rk-goes-up",
+    "why": "General flat ascent 033A at k=0 is the R_0 half of the cited 07QK proof; no node of this unit states that ascent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-serre-sk-goes-up",
+    "why": "General flat ascent 0339 at k=1 is the S_1 half of the cited 07QK proof; no node of this unit states that ascent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-regularity-rk-goes-up",
+  "lem-weil-pbc-serre-sk-goes-up"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-ce3826b69",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-ce3826b69 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, route, and Stacks sources. All five steps satisfy their hypotheses; zero-ring and singular-base cases hold. No duplicate, circularity, missing citation, or repair found. Accepted the three declared Serre-criterion/ascent tool uses. Wrote review.md."
+ }
 }
