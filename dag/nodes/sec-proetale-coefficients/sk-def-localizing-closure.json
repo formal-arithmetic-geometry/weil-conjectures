@@ -3,24 +3,108 @@
  "blueprint": {
   "is": "sk-def-localizing-closure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The localizing closure",
- "statement": "For admissible $\\Lambda$ (that is, $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb\\}$\nwith $A$ a finite commutative ring killed by a power of $\\ell$ and $E/\\mathbf Q_\\ell$ finite),\nlet $\\Loc(\\Dctf(X,\\Lambda))$ be the smallest full triangulated subcategory of\n$D(X_{\\mathrm{proét}},\\Lambda)$ containing $\\Dctf(X,\\Lambda)$ ([sk-def-sfb-constructible])\nand closed under arbitrary direct sums. For integral and rational coefficients this is also\n$\\Loc(\\Dbc(X,\\Lambda))$, since for $\\Lambda=\\mathbf Z_\\ell,\\cO_E,\\mathbf Q_\\ell,E,\\Qlb$ one has\n$\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$.\n\nBrown representability needs a category with arbitrary direct sums, so it is applied to\n$\\Loc(\\Dctf(-,\\Lambda))$. It needs two facts: that the objects of $\\Dctf(-,\\Lambda)$ are\ncompact generators of $\\Loc(\\Dctf(-,\\Lambda))$ and that proper direct image preserves direct\nsums there. For $\\cO_E$ the generators are derived complete, but their localizing closure\nalso contains objects which are not.",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. Let $A$ be a finite commutative ring annihilated by a power of $\\ell$. Let $X$ be a scheme, and let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, regarded as a condensed ring [sk-def-sfb-condensed-ring]: $A$ has the discrete topology, and the other rings have the topologies induced by the $\\ell$-adic absolute value on $\\overline{\\mathbf Q}_\\ell$. Write $\\Lambda_X=p_X^*\\Lambda$ for its pulled-back sheaf of rings [sk-def-sfb-pulled-back-coefficients], and put\n$$\n\\mathcal T=D(X_{\\mathrm{pro\\acute et}},\\Lambda):=D(\\Mod_{\\Lambda_X}),\n$$\nwhere $\\Mod_{\\Lambda_X}$ is the category of module objects [sk-def-sfb-module-objects] and $D$ denotes the unbounded derived category [def-weil-abstract-derived-category]. Let $\\mathcal S=\\Dctf(X,\\Lambda)$ be the bounded constructible complexes of finite Tor amplitude defined in [sk-def-sfb-constructible].\n\nThe localizing closure $\\Loc(\\Dctf(X,\\Lambda))$ is the full subcategory of $\\mathcal T$ on the objects belonging to every full replete triangulated subcategory [def-weil-triangulated-subcategory] that contains $\\mathcal S$ and is closed under all small coproducts in $\\mathcal T$. Here replete means closed under isomorphisms, and small is relative to the fixed indexing universe [def-weil-size-convention]. Thus this is the smallest such subcategory; the coproducts are those of the ambient unbounded module-object derived category. In particular, no derived-completeness condition is imposed in taking this closure.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
   "place": "node sk-def-localizing-closure, order 746"
  },
  "stmt_deps": [
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-weil-size-convention"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localizing closure of a collection of objects in a triangulated category is the smallest full triangulated subcategory closed under arbitrary coproducts containing those objects",
+   "results": "8 hit(s). CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.Triangulated.Subcategory.W.mk'; CategoryTheory.Triangulated.Subcategory.ext₁'; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.Triangulated.Subcategory.ext₂'",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.triangulatedClosure",
+   "results": "0 hit(s). none. loogle: unknown identifier 'CategoryTheory.ObjectProperty.triangulatedClosure'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier; no match established by this query"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|triangulatedClosure",
+   "results": "6 hit(s). Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean; Mathlib/CategoryTheory/Sites/Over.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smallest triangulated subcategory containing a collection of objects and closed under coproducts",
+   "results": "8 hit(s). CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.IsTriangulated.mk; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.IsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "12 hit(s). CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero; CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift; CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|sInf|iInf",
+   "results": "5 hit(s). 18; 29; 63; 69; 75; searched Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of all full replete triangulated subcategories closed under small direct sums and containing a given object property",
+   "results": "8 hit(s). CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.Triangulated.Subcategory.W.mk'; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "no complete match after reading the returned source; only generic triangulated-subcategory infrastructure or Verdier localization"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|colimit|sInf|iInf|closure",
+   "results": "19 hit(s). Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean",
+   "date": "2026-10-16",
+   "verdict": "Read Generators.lean: triangEnvelope is a thick envelope using finite operations, not closure under all small coproducts. The other hits do not define this hull."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape",
+   "results": "12 hit(s). CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape; CategoryTheory.ObjectProperty.instIsStableUnderRetractsOfIsClosedUnderColimitsOfShapeWalkingParallelPair; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeTop; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeBotOfNonempty; CategoryTheory.ObjectProperty.ColimitOfShape.prop; CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence; CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_iff_of_equivalence; CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeOppositeOpOfIsClosedUnderLimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "Read ColimitsOfShape.lean: this predicate expresses closure under one diagram shape, not the generated triangulated localizing hull."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subcategory generated by an object property under isomorphisms, integer shifts, exact triangles and all small coproducts in a triangulated category",
+   "results": "8 hit(s). CategoryTheory.Triangulated.Subcategory; CategoryTheory.Triangulated.Subcategory.W; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk'",
+   "date": "2026-10-16",
+   "verdict": "No complete match: triangulated-subcategory predicates omit the coproduct-closed hull."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing subcategory generated by a class of objects: closure under small direct sums, shifts, cones and isomorphisms",
+   "results": "8 hit(s). CategoryTheory.MorphismProperty.Localization'; CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂; CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.ObjectProperty.IsTriangulated.mk; CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure",
+   "date": "2026-10-16",
+   "verdict": "No complete match: hits are localization at morphisms or triangulated-subcategory infrastructure, not this localizing closure."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -33,5 +117,20 @@
  "blueprint_tags": [
   "sketch"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-localizing-closure",
+  "worker": "stage1",
+  "summary": "Expanded the ambient condensed module-object category, coefficient topologies and universe convention, and defined the localizing closure as a full replete intersection. Existing det-def-localizing-closure-existence and det-def-localizing-closure-ctf-equals-bc retain the separate existence and integral/rational identification claims. Brown hypotheses are downstream theorems, not defining data. The source's unconditional assertion of a noncomplete object fails for the empty scheme; the corrected definition imposes no completeness condition. No new nodes or Mathlib leaves are needed. Rechecked the earlier attempt against the current shared DAG; none of the seven statement dependencies now has a return path to this item.",
+  "blueprint": "Main-20261015 sk-def-localizing-closure/_section.md, first paragraph (smallest full triangulated, coproduct-closed subcategory), with its two existing detail nodes; second paragraph treated as motivation and its empty-scheme defect reported."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-f69d58ce5",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-f69d58ce5 (reviewer sub-agent of L); spot-checked: Reviewed the complete definition, seven dependency statements, current blueprint sources and route, duplicate candidates, and edge cases. Ambient condensed module coefficients and intersection closure agree with the sources; no dependency cycle or new nodes. The empty-scheme counterexample correctly justifies omitting the source’s false unconditional non-completeness claim. Detailed checks and a procedural deviation are recorded in review.md; no fixes needed."
+ }
 }
