@@ -391,5 +391,24 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-ef4388f46 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the statements of all 28 proof_deps, plus Bhatt–Scholze arXiv 1309.1198 §6.4 (printed pp. 47–49: standing assumption, Ex. 6.4.1, Lemmas 6.4.4–6.4.6, Rem. 6.4.7, the end of Prop. 6.4.8). The statement is a faithful specialization: finite ℓ-torsion C, L finite locally constant flat in degree 0, g_*j_! in place of BS's g_!f_*, with the same sheaf. Finite type over k gives Noetherian schemes, so the strata are constructible as Rem. 6.4.7 requires; no separatedness is needed. Small cases: Spec k with L = C works. C = Z/ℓ² with L = Z/ℓ shows the flatness hypothesis is necessary. Empty strata give 0. Steps: (1) finite type, Noetherian, qcqs of j, q and a, from the closed-immersion definition and the cited permanence lemmas, with no affine-intersection assumption. (2) Termwise sums are exact derived coproducts and inverse image preserves them. (3) The finite-type separably-closed dimension node is applied separately to q and a. The qcqs coproduct node then gives that Rq_* and Ra_* preserve sums, and Γ(Spec k) is an equivalence. (4) In the unbounded closed-support triangle, naturality gives a morphism of triangles, and then g^* with the counit g^*g_* ≅ id gives that Rg^! preserves sums. (5) P is finite, hence finitely presented, flat and so projective, hence a retract of C^n; sheafifying the constant presheaves keeps the splitting. (6) Slice restriction of RHom, RHom(C^n, N) = N^n, the explicit retract inverse, and the stalk-conservativity check. (7) The adjunctions plus lem-pur-rhom-global-sections and H^0 of sums in D(C). There is no cycle and there are no new nodes. det-ctf-finite-compact-etale (imported, other unit) is a generalization and was correctly not used as a shortcut; same_as [] is right. No SGA source is cited. tool_uses accepted: the 12 genuinely off-unit generic tools, each used as a black box at its step (the unit has uses []). The declarations for the same-unit lem-pur-rhom-global-sections and the Mathlib-status nodes are redundant but harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurEtaleLisseStratumCompact",
+  "declaration": "AlgebraicGeometry.Etale.isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf",
+  "file": "lean/Sheaf/Paper/PurEtaleLisseStratumCompact.lean",
+  "statement": "theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf {k : Type u} [Field k] [IsAlgClosed k] (ell : ℕ) (hell : Nat.Prime ell) (hellk : IsUnit (ell : k)) {C : Type (u + 1)} [CommRing C] [Finite C] (hC : ∃ r : ℕ, (ell : C) ^ r = 0) {X Z V : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] (j : V ⟶ Z) [IsOpenImmersion j] (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (L : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C)) [Scheme.IsFiniteLocallyConstantSheaf L] (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ V), ObjectProperty.flat ((Scheme.pointSmallEtale s).sheafFiber.obj L)) : ∃ (hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule C X)), @IsCompactObject (DerivedCategoryModule C X) _ _ hcoprod ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj ((Etale.lowerStar (ModuleCat.{u + 1} C) g).obj ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} C) j).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-16",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c9b702dbe"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9b702dbe",
+  "group": "NF",
+  "result": "fix",
+  "note": "Statement matches node and Bhatt-Scholze 6.4 clause by clause: alg. closed k, prime ell invertible, finite C killed by ell^r (Type (u+1) forced by recorded DerivedCategoryModule; harmless for finite C), X finite type as LocallyOfFiniteType+QuasiCompact (recorded interface, no separatedness), IsClosedImmersion g, IsOpenImmersion j, IsFiniteLocallyConstantSheaf L, hL = ObjectProperty.flat (tensor-exact) of every geometric stalk, g_* j_! L in degree 0 via recorded lowerStar/openImmersionLowerShriek, IsCompactObject with Prop-valued exists HasCoproducts.{u+1} (equivalent to coproducts exist and compact, same as sibling finiteRing_compactGenerators). Edge cases (empty schemes, L=0, empty family, r=0, ell prime) fine. Node changed only in lean; statement verbatim; no hollow defs, only sorry, no pro-etale substitute; nt_compile --json clean (EXIT 0) for delivered and fixed module. Finding H8: theorem docstring lacked the node's proof step by step; fixes/PurEtaleLisseStratumCompact.lean replaces only the docstring with the 7 proof steps, source place and blueprint tag; signature unchanged."
  }
 }
