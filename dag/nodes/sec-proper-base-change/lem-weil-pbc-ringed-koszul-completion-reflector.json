@@ -211,21 +211,34 @@
   }
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-83538c607",
-  "group": "NL",
+  "reviewer": "NT-stage2-Codex-884995e9b",
+  "group": "NJ",
   "result": "pass",
-  "note": "Wrote review.md. Verified immutable files, all statement dependencies, source correspondence, canonical tower and unit, edge cases, universes, docstrings, substantive report sections, and verbatim statement field. Snapshot module compiles cleanly through scompile.py with the local overlay. No repairs needed."
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.RingedKoszulCompletionReflector",
-  "declaration": "CategoryTheory.ringedKoszulCompletionReflector",
-  "file": "lean/Sheaf/CategoryTheory/RingedKoszulCompletionReflector.lean",
-  "statement": "theorem ringedKoszulCompletionReflector {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) (r : ℕ) (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) [Mono ι] (_hgen : ∀ U : C, IsRingedIdealGeneratingList O I ι U r (fun i ↦ (b i).val (op U))) : ∃ D : RingedKoszulLimitPresentation O r b, (∀ N : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι (D.completion.obj N)) ∧ (∀ (N L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O I ι L → Function.Bijective (fun a : D.completion.obj N ⟶ L ↦ D.unit N ≫ a)) ∧ (∀ N : ringedSiteDerived O, IsIso (D.unit N) ↔ IsLocallyDerivedRingedIdealComplete O I ι N) ∧ (∀ (N N' : ringedSiteDerived O) (a : N ⟶ N'), D.unit N ≫ D.completion.map a = a ≫ D.unit N')",
+  "module": "Sheaf.Paper.WeilCompletedTensorReflector",
+  "declaration": "AlgebraicGeometry.Scheme.wfCompletionReflector",
+  "file": "lean/Sheaf/Paper/WeilCompletedTensorReflector.lean",
+  "statement": "theorem wfCompletionReflector : (∀ M : PbcCompletedDerived X d, WfIsComplete X d r a ha (wfCompletionObj X d r a ha M)) ∧ ∀ (M L : PbcCompletedDerived X d), WfIsComplete X d r a ha L → Function.Bijective (fun f : wfCompletionObj X d r a ha M ⟶ L ↦ wfCompletionUnit X d r a ha M ≫ f)",
   "branch": "newtargets-dag",
-  "by": "NL",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): the original ringed-site interface fixes the site object and Hom universes equal, so cannot be instantiated on the actual small pro-etale site. Publicly retain that original theorem and supply its completed-coefficient specialization at site sizes u+1/u. The object and unit are exactly the recorded intrinsic Koszul fiber and (u,0) unit, on a genuine representative of the same derived object. The Hom bijection uniquely defines its functor action; no arbitrary completion object or map is chosen.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.wfCompletionRepresentative",
+   "AlgebraicGeometry.Scheme.wfCompletionObj",
+   "AlgebraicGeometry.Scheme.wfCompletionUnit",
+   "AlgebraicGeometry.Scheme.WfIsComplete",
+   "AlgebraicGeometry.Scheme.WfCompleteCategory",
+   "AlgebraicGeometry.Scheme.wfCompletionReflector",
+   "AlgebraicGeometry.Scheme.wfCompleteObj",
+   "AlgebraicGeometry.Scheme.wfCompletionExtend",
+   "AlgebraicGeometry.Scheme.wfCompletionMap_laws",
+   "AlgebraicGeometry.Scheme.wfCompletion"
+  ]
  }
 }
