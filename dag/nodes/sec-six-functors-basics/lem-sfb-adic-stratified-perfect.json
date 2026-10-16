@@ -32,7 +32,10 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-constructible-stratification",
   "def-pc-perfect-ring-complex",
-  "def-sc-finitely-presented-module"
+  "def-sc-finitely-presented-module",
+  "def-constructible-constructible",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum"
  ],
  "proof": [
   {
@@ -368,5 +371,38 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-cb613271e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement against Bhatt–Scholze (Def. 6.3.1/Rem. 6.3.2, Def. 6.5.1 and its triangulatedness sentence, Lemmas 6.5.3, 6.5.8, 6.6.8, Prop. 6.6.11) and Stacks (09C6 lemma-connected-adic-lisse, 09B5 lemma-constructible-serre, proetale definition-constructible, 09AL, 03RZ(3)). No SGA is cited. The item statement is unchanged. It agrees with BS for complete Noetherian local A and needs no finite or perfect quotients; edge cases checked: X empty, K=0, I=0, nilpotent I, infinite residue field. All six steps hold. Step 1: restriction and Koszul-unit completeness tests, detected on stratum covers. Step 2: finite Tor amplitude over a field via geometric stalks. Step 3: fibre-product refinement, then the local lift. Step 4: torsion-limit completeness and uniform bounds from finitely many quasi-compact pieces. Step 5: reduction plus the Noetherian-Λ comparison. Step 6: two-out-of-three for the completion unit plus weak Serre. New lem-sfb-adic-residue-lisse-perfect-lift: a true, statement-only generalization of Stacks 09C6/BS 6.6.8. Its hypothesis implies étale-local perfect constancy. It is not a duplicate: the existing lem-weil-pbc-residue-lisse-perfect-lift needs finite, torsion, perfect quotients. New lem-sfb-discrete-noetherian-constructible-serre: exactly Stacks 03RZ(3)/09B5 for Noetherian Λ. thm-constructible-serre and lem-weil-proetale-dbc-triangulated need a finite ring. Neither new node restates a clause of the item. Accepted tool_uses: sk-thm-pe-constructible-comparison (det-lem-integral-models-stacks cites it too) and generic lemmas from the pbc, stalk and derived units. FIX (E5/C3): sk-thm-pe-constructible-comparison uses the affine-local constructibility of def-pe-etale-constructible-module, but (a) and the weak Serre node use a global finite stratification. Steps 5 and 6 used the two as equal without argument. I added to step 5 the argument that they agree on Noetherian X, on both sites: |X| is Noetherian, global-to-local by fibre products with affine opens, local-to-global via W_i = U_i minus the earlier U_j. Step 5 now cites def-pe-etale-constructible-module, lem-sc-affine-noetherian-underlying-space and def-weil-constructible-subset; step 6 gained one sentence pointing to it, and proof_deps were recomputed. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-adic-stratified-perfect.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicStratifiedPerfect",
+  "declaration": "AlgebraicGeometry.Scheme.adic_stratified_perfect",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbFixedScalarRestriction",
+   "AlgebraicGeometry.Scheme.sfbFixedScalarRestriction_additive",
+   "AlgebraicGeometry.Scheme.sfbEtaleTensorDegreeZero",
+   "AlgebraicGeometry.Scheme.sfbResidueComplex",
+   "AlgebraicGeometry.Scheme.sfbModelRings",
+   "AlgebraicGeometry.Scheme.IsSfbAdicComplete",
+   "AlgebraicGeometry.Scheme.IsSfbAdicConstructible",
+   "AlgebraicGeometry.Scheme.sfbCompletedModel",
+   "AlgebraicGeometry.Scheme.sfbLocalRestriction",
+   "AlgebraicGeometry.Scheme.IsSfbStratifiedPerfect",
+   "AlgebraicGeometry.Scheme.SfbAdicConstructibleCategory",
+   "AlgebraicGeometry.Scheme.adic_stratified_perfect"
+  ],
+  "file": "lean/Sheaf/Paper/AdicStratifiedPerfect.lean",
+  "statement": "theorem adic_stratified_perfect (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (_hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I) [IsAdicComplete I A] : (∀ K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)), IsSfbAdicConstructible X I K ↔ IsSfbStratifiedPerfect X I K) ∧ (∀ K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)), IsSfbAdicConstructible X I K → ∃ a b : ℤ, a ≤ b ∧ K.IsGE a ∧ K.IsLE b) ∧ IsSfbAdicConstructible X I (0 : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) ∧ (∀ (K L : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))), Nonempty (K ≅ L) → IsSfbAdicConstructible X I K → IsSfbAdicConstructible X I L) ∧ (∀ (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) (n : ℤ), IsSfbAdicConstructible X I K → IsSfbAdicConstructible X I (K⟦n⟧)) ∧ ∀ T : Triangle (DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))), T ∈ distTriang _ → (IsSfbAdicConstructible X I T.obj₁ ∧ IsSfbAdicConstructible X I T.obj₂ → IsSfbAdicConstructible X I T.obj₃) ∧ (IsSfbAdicConstructible X I T.obj₂ ∧ IsSfbAdicConstructible X I T.obj₃ → IsSfbAdicConstructible X I T.obj₁) ∧ (IsSfbAdicConstructible X I T.obj₃ ∧ IsSfbAdicConstructible X I T.obj₁ → IsSfbAdicConstructible X I T.obj₂)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already recorded global constructibility predicate of def-constructible-constructible for arbitrary residue fields. The kernel ideal completeness predicate is transported to the equivalent small site without equating site object and morphism universes. Local perfect representatives retain the actual inverse-image coefficient ring, canonically identified with the completion on each immersion. Second reading reuses CompletedConstantReduction.base and constantComplex, and completedAdicChange/completedAdicDerivedChange, instead of duplicating their constructions or additivity theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5260e670",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Snapshot changes only the item node (lean, stmt_deps gaining three already-landed nodes: def-constructible-constructible, lem-weil-pbc-completed-constant-sheaf-reduction, def-weil-pbc-adic-coefficient-datum) and lean/Sheaf/Paper/AdicStratifiedPerfect.lean; the 17 dependency node files are identical to the clone. Read against BS Def 6.3.1/Rem 6.3.2/Def 6.5.1/Lem 6.5.3/Prop 6.6.11. Hypotheses: IsNoetherian X, IsNoetherianRing A, I the unique maximal ideal, IsAdicComplete I A; A : Type (u+1) comes from the recorded adicLisseRingSystem. (a): recorded ConstantCompletion.IsComplete (IsLocallyDerivedRingedIdealComplete of the kernel ideal) via exact transport to the AsSmall model site; canonical completedAdicDerivedChange to (A/I^1)_X; termwise comparisonUpperStar; cohomologically bounded C with IsConstructibleSheaf; finite Tor amplitude by termwise tensor with flat N over a field. (b): LocallyClosedStratification with constructible strata, covering sieves, per-member bounded finite projective IsPerfectRingComplex P with an isomorphism after immersion and slice restriction, using the inverse-image ring with its canonical identification. Conclusions: equivalence, K.IsGE/IsLE bounds, zero, isomorphism and shift invariance, all three two-out-of-three cases. No dimension, residue-characteristic, finite-residue-field or site-universe assumptions. Edge cases: empty X, K=0, I=0 with infinite field, nilpotent I, zero ring excluded by maximality. Recorded declarations reused; helpers have real data and source/blueprint docstrings; only sorry is the main proof; six-step proof docstring present. lean.statement verbatim; 12 declarations listed; no lines over 100 characters. nt_compile.py: 41 overlay modules plus the item compiled, exit 0, no errors or warnings. Minor: the worker report still names two helper theorems the second reading removed, and the second reading explains this. No faults."
  }
 }

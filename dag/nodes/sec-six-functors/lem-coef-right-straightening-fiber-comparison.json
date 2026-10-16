@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-interval-lifting",
-  "def-coef-infinity-right-anodyne"
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-slice-right-fibration"
  ],
  "proof": [
   {
@@ -231,5 +232,59 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-e8ada57b2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent's steps 6 and 8, and HTT (pdftotext of the 2017 PDF already in /tmp, read only) at 2.1.4.7–2.1.4.12, the §2.2.1 St_φ definition, 2.2.1.1–2.2.1.2, 2.2.2.1, 2.2.2.7–2.2.2.11 and 2.2.3.1–2.2.3.15. The item statement (unchanged) matches HTT: St_S is HTT's St_φ with C=C[S]^op and φ=id; M_a=C[X^▷]⊔C[S]; the variance is C[S]^op→sSet; the representable is C[S](s,t); the right-anodyne clause is 2.2.1.2 with 2.1.4.9 dualized; the fiber clause is exactly Prop 2.2.3.15, with no quasicategory hypothesis on S. Step 1: L_φ=St_S at φ=id, and the representable comes from a free one-arrow pushout. Step 2 is the two-line Quillen argument. Step 3: C is a left adjoint, so V(Δ^n)=C[J^n](x,y)=Q^n and V(∂Δ^n)=L_nQ, which is monic; Q^n is contractible, so every hypothesis of the boundary-collapse test holds. Step 4 is the 2.2.2.7 skeletal induction; the gluing lemma's mono and filtered hypotheses hold and the induction is set up properly. Step 5: LV≅id, Sing_Q T is cofibrant and T is fibrant, so the counit criterion applies. Step 6 is the 2.2.3.15 proof; I checked r(s)φ_s=ε∘V(h_s) myself, and fiberwise detection applies to two right fibrations. Step 7 is strict naturality. New nodes, both true and not restatements of the item. Contravariant-slice-model: cone orientation, Dwyer–Kan categorical equivalence and fiberwise criterion checked; tested on S=∅, Δ^0 and Δ^1 with an empty fiber. Unmarked-straightening-quillen: φ:C[S]→D^op variance, the Yoneda right adjoint and the fiber isomorphism (Remark 2.2.2.11) checked; no local-Kan hypothesis is needed; tested on S=∅ and on S=Δ^0, D=*. Its projective-model clause is a special case of lem-coef-simplicial-projective-model-calculus, but citing that node would create a cycle (projective-model-calculus→coherent-nerve-comparison→pinched-rigidification-resolution→item), so restating the clause is justified. It does not duplicate the marked, space-valued or relative-nerve straightening nodes. Route: all citations are in sk-prop-sf-biduality-general, tool_uses=[] is correct, my reachability check found the DAG acyclic, blueprint fields are filled, no SGA is used, and my Mathlib grep found nothing. Advisory for the later split: HTT proves 2.2.3.12–2.2.3.13 (bundled in slice-model) from 2.2.3.11, and unmarked-quillen has slice-model as a statement dependency. So whoever splits slice-model must prove those clauses without straightening, or move them to a node above unmarked-quillen. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RightStraighteningFiberComparison",
+  "declaration": "SSet.Straightening.right_straightening_fiber_comparison",
+  "declarations": [
+   "SSet.Straightening.simplexInclusion",
+   "SSet.Straightening.vertex",
+   "SSet.Straightening.coneMap",
+   "SSet.Straightening.coneInclusion_naturality",
+   "SSet.Straightening.conePushout",
+   "SSet.Straightening.baseInclusion",
+   "SSet.Straightening.coneInclusion",
+   "SSet.Straightening.coneVertex",
+   "SSet.Straightening.valueAt",
+   "SSet.Straightening.value",
+   "SSet.Straightening.precomposition",
+   "SSet.Straightening.enrichedAction",
+   "SSet.Straightening.enrichedAction_id",
+   "SSet.Straightening.enrichedAction_comp",
+   "SSet.Straightening.straightening",
+   "SSet.Straightening.conePushoutMap",
+   "SSet.Straightening.conePushoutMap_vertices",
+   "SSet.Straightening.valueMap",
+   "SSet.Straightening.valueMap_id",
+   "SSet.Straightening.valueMap_comp",
+   "SSet.Straightening.valueFunctor",
+   "SSet.Straightening.fiberComparison",
+   "SSet.Straightening.fiberMap",
+   "SSet.Straightening.fiberMap_overPoint",
+   "SSet.Straightening.intervalInitial",
+   "SSet.Straightening.intervalFinal",
+   "SSet.Straightening.intervalArrow",
+   "SSet.Straightening.attachedInterval",
+   "SSet.Straightening.attachedInterval_endpoints",
+   "SSet.Straightening.coneArrow",
+   "SSet.Straightening.representableMap",
+   "SSet.Straightening.right_straightening_fiber_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RightStraighteningFiberComparison.lean",
+  "statement": "theorem right_straightening_fiber_comparison : (∀ (S : SSet.{u}) (s : S _⦋0⦌), PreservesColimitsOfSize.{u, u} (valueFunctor S s)) ∧ (∀ (S : SSet.{u}) (s t : S _⦋0⦌), IsIso (representableMap s t)) ∧ (∀ {X Y S : SSet.{u}} (a : X ⟶ S) (b : Y ⟶ S) (f : X ⟶ Y) (w : a ≫ 𝟙 S = f ≫ b) (s t : S _⦋0⦌), precomposition a (vertex s) (vertex t) ≫ valueMap a b f (𝟙 S) w t = (𝟙 _ ⊗ₘ valueMap a b f (𝟙 S) w s) ≫ precomposition b (vertex s) (vertex t)) ∧ (∀ {X Y S : SSet.{u}} (a : X ⟶ S) (b : Y ⟶ S) (j : X ⟶ Y) (w : a ≫ 𝟙 S = j ≫ b), rightAnodyneExtensions j → ∀ s : S _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (valueMap a b j (𝟙 S) w s)) ∧ (∀ {X S : SSet.{u}} (a : X ⟶ S), Enhanced.rightFibration a → ∀ s : S _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (fiberComparison a s)) ∧ (∀ {X Y S T : SSet.{u}} (a : X ⟶ S) (b : Y ⟶ T) (f : X ⟶ Y) (g : S ⟶ T) (w : a ≫ g = f ≫ b), Enhanced.rightFibration a → Enhanced.rightFibration b → ∀ s : S _⦋0⦌, fiberComparison a s ≫ valueMap a b f g w s = valueMap (pullback.fst (SSet.const (X := Δ[0]) s) a) (pullback.fst (SSet.const (X := Δ[0]) (g.app _ s)) b) (fiberMap a b f g w s) (𝟙 Δ[0]) (fiberMap_overPoint a b f g w s) (stdSimplex.obj₀Equiv.symm 0) ≫ fiberComparison b (g.app _ s))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Constructs cone straightening on the landed rigidification SSet.PinchedCube.rigidification and coherent simplices SSet.PinchedCube.coherentSimplex of lem-coef-pinched-cube-latching (a recorded proof dependency of this item), the landed right join cone SSet.Enhanced.rightJoinCone (def-coef-infinity-relative-cone), and the landed SSet.Enhanced.rightFibration and SSet.Enhanced.fiber (def-coef-infinity-fibrations); the reviewer's fix removed the delivery's private copies of these notions (simplexRealization, realization, its colimit instances, cone, fiber, and the inline right-horn predicate). Cone pushouts, enriched precomposition, maps of pushouts, the adjoined arrow, the representable comparison and strict-fiber comparison all have explicit data. Postponed helper theorems are the functoriality and endpoint laws of this same node. The additional landed statement dependency lem-coef-infinity-slice-right-fibration supplies the common ordered-join inclusions.",
+  "fixed_by": "NT-stage2-cc-b33b471c1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b33b471c1",
+  "group": "NB",
+  "result": "fix",
+  "note": "Read the item, its deps' Lean (IsWeakHomotopyEquivalence, rightAnodyneExtensions, SCat colimits, orderedJoin*), Mathlib SimplicialThickening and the HTT 2.2.1/2.2.3.15 place. All six conjuncts match the node: colimit preservation, representable iso via t->v, simplicial naturality, right anodyne -> objectwise WHE, right-fibration fiber comparison, naturality. No extra hypotheses; edge cases checked (empty S/X/fiber, empty colimits, Lambda^1_1); no hollow defs; report sections real; delivered file compiles clean with nt_compile. Finding H4: delivery redefined C[-] (simplexRealization/realization/sCatColimits) although SSet.PinchedCube.coherentSimplex/rigidification (lem-coef-pinched-cube-latching, a proof dep, no cycle) was landed on its base; also cone/fiber/inline right-horn predicate duplicate landed Enhanced.rightJoinCone/Enhanced.fiber/Enhanced.rightFibration. Fixed in fixes/: module rewritten to use the landed declarations, statement meaning unchanged, compiles clean with no warnings and no lines >100; lean-record (32 declarations, note) and report with a maintainer-fix section."
  }
 }
