@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-compactification-over-base",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactifications of morphisms over a qcqs base",
@@ -13,28 +13,186 @@
   "place": "node lem-sfb-compactification-over-base, order 1775"
  },
  "stmt_deps": [
-  "sk-def-nagata-sketch-data"
+  "sk-def-nagata-sketch-data",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
  "proof": [
   {
-   "text": "Write $a_X\\colon X\\to S$ and $a_Y\\colon Y\\to S$ for the structure morphisms, so $a_X=a_Y\\circ f$.\nSince $a_X$ is separated, so is $f$. Since $a_X$ is locally of finite type, so is $f$. Since $a_X$\nis quasi-compact and $a_Y$ is separated (in particular quasi-separated), $f$ is quasi-compact.\nHence $f$ is separated and of finite type. Moreover $Y$ is quasi-compact, because $a_Y$ is\nquasi-compact and $S$ is quasi-compact. And $Y$ is quasi-separated, because $a_Y$ is\nquasi-separated and $S$ is quasi-separated. So [sk-thm-nagata-compactification], applied to\n$f\\colon X\\to Y$ over the qcqs base $Y$, gives a compactification of $f$.",
+   "text": "Write $a_X\\colon X\\to S$ and $a_Y\\colon Y\\to S$ for the structure morphisms. Because $f$ is an $S$-morphism, $a_X=a_Y\\circ f$ by [def-weil-scheme-over-base]. By [def-weil-finite-type-morphism], $a_X$ is quasi-compact and locally of finite type. The separated morphism $a_Y$ is quasi-separated by [lem-pc-separated-quasi-separated]. Apply clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] to $a_X$ and the quasi-compact scheme $S$ to obtain that $X$ is quasi-compact. Apply the same clause to $a_Y$: its quasi-compactness and the quasi-compactness of $S$ give quasi-compactness of $Y$; its quasi-separatedness and the quasi-separatedness of $S$ give quasi-separatedness of $Y$.",
    "uses": [
-    "sk-thm-nagata-compactification"
+    "def-weil-scheme-over-base",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.proof.md",
+    "place": "## Proof: structure maps, quasi-compact source and qcqs target"
+   }
+  },
+  {
+   "text": "Apply clause (b) of [lem-weil-pbc-separated-cancellation] to $X\\xrightarrow{f}Y\\xrightarrow{a_Y}S$. Its composite is $a_X$, which is separated, so $f$ is separated. Apply clause (f) of [lem-weil-pbc-proper-fp-permanence] to this triangle: since $a_X$ is locally of finite type, $f$ is locally of finite type. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] applies because Step 1 gives $X$ quasi-compact and $Y$ quasi-separated; hence $f$ is quasi-compact. By [def-weil-finite-type-morphism], the last two assertions mean precisely that $f$ is of finite type.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.proof.md",
+    "place": "## Proof: separatedness, local finite type, and quasi-compactness of f"
+   }
+  },
+  {
+   "text": "Apply [sk-thm-nagata-compactification] to $f\\colon X\\to Y$, with the theorem's base scheme equal to $Y$. Step 1 supplies the quasi-compact and quasi-separated base; Step 2 supplies the separated finite-type morphism. The theorem gives a dense compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$. By [sk-def-nagata-sketch-data], $p\\circ j=f$, $j$ is a quasi-compact open immersion and $p$ is proper. Forgetting the additional scheme-theoretic density condition gives the required compactification.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.proof.md",
+    "place": "## Proof, final sentence: apply Nagata compactification over Y"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-nagata-compactification"
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-thm-nagata-compactification",
+  "sk-def-nagata-sketch-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compactification of a separated finite type morphism over a quasi-compact quasi-separated base",
+   "results": "Hits concerned quasi-compactness, normalization, and properness; none states existence of a compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.HasCompactification, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "0 hits; unknown identifier AlgebraicGeometry.HasCompactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasCompactification|NagataCompactification|compactification [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactification of morphism over qcqs base",
+   "results": "Hits concerned quasi-compact morphisms and spectral maps; none states compactification existence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification for a morphism between S-schemes when S is quasi-compact and quasi-separated",
+   "results": "Hits concerned normalization, quasi-compactness, and Proj; none states Nagata compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparated, LocallyOfFiniteType, QuasiCompact, HasCompactification",
+   "results": "0 hits; unknown identifier IsSeparated in the supplied pattern.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|IsSeparated|LocallyOfFiniteType [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nagata compactification exists for separated finite type morphism over qcqs scheme",
+   "results": "Hits concerned quasi-compactness, quasi-separatedness, and separatedness; none states compactification existence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism is separated when source and target are separated over a common base",
+   "results": "Found general separatedness declarations including IsSeparated.comp_iff and stability under base change; no single declaration states the full project lemma.",
+   "date": "2026-10-16",
+   "verdict": "generalization: IsSeparated.comp_iff and base-change stability, but no compactification theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparated (f ≫ g) IsSeparated f",
+   "results": "0 hits; parser rejected the pattern.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparated.*of_comp|separated.*of_comp|isSeparated.*comp [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separated morphism from two morphisms separated over base",
+   "results": "Found IsSeparated.comp_iff, composition, and base-change declarations; no full compactification statement.",
+   "date": "2026-10-16",
+   "verdict": "generalization: separatedness facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism factors as an open immersion followed by a proper morphism, by Nagata theorem",
+   "results": "8 hits: IsPreimmersion, UniversallyClosed, IsImmersion, IsProper, UniversallyOpen, IsImmersion.isImmersion_iff_exists_of_quasiCompact, IsFinite, IsClosedImmersion; none gives proper compactification existence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|Nagata",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactification\"",
+   "results": "0 hits, no service or parser error.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "existence of a proper scheme containing an open subscheme over a base",
+   "results": "8 hits about restrictions, open subschemes and open immersions; no existence of a proper compactification.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -46,5 +204,20 @@
   "sk-def-nagata-sketch-data"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-compactification-over-base",
+  "worker": "stage1",
+  "summary": "Three steps verify the qcqs target and quasi-compact source, deduce separatedness and finite type of f from existing Mathlib leaves, and apply the existing Nagata theorem over Y. All non-elementary scheme-property facts are cited explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the single paragraph of the current lem-sfb-compactification-over-base.proof.md: structure-map properties and qcqs Y (Step 1), separatedness/local finite type/quasi-compactness of f (Step 2), and Nagata over Y (Step 3). The quasi-compactness inference is specialized through the absolute qcqs permanence leaf using the stated qcqs base S."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-9b5ae1db4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-9b5ae1db4 (reviewer sub-agent of L); spot-checked: Reviewed item, all three proof steps, cited nodes, blueprint route, Stacks sources, Mathlib matches, edge cases, and duplicate/cycle risks. The repaired proof correctly derives qcqs Y and separated finite-type f before applying Nagata over Y. Review written to review.md; no fixes needed."
+ }
 }
