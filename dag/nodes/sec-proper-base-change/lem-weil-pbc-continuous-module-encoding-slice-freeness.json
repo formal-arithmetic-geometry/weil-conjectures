@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-continuous-module-encoding-slice-freeness",
+ "kind": "statement",
+ "title": "Finite freeness on a pro-etale slice agrees with internal inverse-image freeness",
+ "statement": "Let X be a scheme, T a totally disconnected commutative topological ring, P an internal module over its condensed continuous coefficient ring, and W an object of X_proet. For the encoding of [def-weil-pbc-continuous-coefficient-module-encoding], the restriction of the encoded P to the slice over W is isomorphic to a finite free module sheaf of some rank n if and only if raw internal inverse image of P along W.hom is finite free over the raw inverse-image coefficient ring. Rank zero and empty schemes are included.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DM and 03DO (finite locally free modules and localization); Bhatt--Scholze, Section 6.8"
+ },
+ "proof": [
+  {
+   "text": "Use the actual pro-etale slice equivalence and the existing module_transport construction to identify module sheaves on the slice with module sheaves on W. The continuous-function ring comparison is identity on sections. The equivalence carries the unit module to the unit, hence carries each finite free module to its counterpart.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction comparison identifies the transported slice encoding with encoding of canonical internal inverse image. Fully faithful transport and continuousRingFreeIso then identify its finite free presentations in both directions.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-module-encoding-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical coefficient map is invertible. The existing free_comap, free_of_comap, and free_of_iso lemmas and extendScalarsIsoComapInv identify finite freeness after canonical inverse image with finite freeness after raw inverse image.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-continuous-module-encoding-restriction",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DM and 03DO (finite locally free modules and localization); Bhatt--Scholze, Section 6.8",
+  "note": "Stage-3 E4: fully proved from existing library and Mathlib declarations; no new proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of module sheaves preserves local finite freeness and commutes with scalar extension by sheafified tensor product",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.sheafify, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "date": "2026-10-16",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|mapFreeIso|eqToHom_app",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousModuleEncodingLattices",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; Local freeness and lattice compatibility of the explicit continuous encodings; Finite freeness on a pro-etale slice agrees with internal inverse-image freeness",
+   "via": [
+    "lem-weil-pbc-continuous-module-encoding-lattices",
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousModuleEncodingSliceFreeness",
+  "file": "lean/Sheaf/Paper/ContinuousModuleEncodingSliceFreeness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousRing_slice_free_iff",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRing_slice_free_iff"
+  ],
+  "statement": "theorem continuousRing_slice_free_iff\n    (X : Scheme.{u}) (T : Type)\n    [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj T) X))\n    (W : X.ProEt) :\n    (∃ n : ℕ, Nonempty (((continuousRingModuleEquivalence X T).functor.obj P).over W ≅\n      SheafOfModules.free (ULift.{u + 1} (Fin n)))) ↔\n    Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} W.hom).obj\n      (condensedRingObj (Profinite.continuousMapRingObj T) X))\n      (((ProEtale.upperStar Ab.{u + 1} W.hom).mapMod _).obj P)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T114443-L-2638351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T114443-L-2638351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

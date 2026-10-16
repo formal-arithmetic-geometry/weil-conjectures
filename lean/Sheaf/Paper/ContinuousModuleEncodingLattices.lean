@@ -5,12 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientNormalization
-import Sheaf.AlgebraicGeometry.LisseLatticeCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.ContinuousCoefficientRealizations
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.ContinuousModuleEncodingLocalFreeness
+import Sheaf.Paper.ContinuousModuleEncodingScalarExtension
+import Sheaf.Paper.ContinuousModuleEncodingRestriction
 
 /-! # Lattice compatibility of the continuous module encoding
 
@@ -90,6 +87,16 @@ theorem continuousModuleEncoding_lattice_compatibility
             ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M))) ∧
       Nonempty ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)).obj
           ((continuousIntegerModuleEquivalence ℓ E Y).inverse.obj M) ≅
-        (upperStar (Profinite.continuousMapRingObj E) f).obj P) := by sorry
+        (upperStar (Profinite.continuousMapRingObj E) f).obj P) := by
+  refine ⟨continuousField_locallyFree ℓ E X P hP, ?_⟩
+  intro Y f _ M hM hα
+  let : M.IsFiniteLocallyFree := hM
+  refine ⟨continuousInteger_inverse_locallyFree ℓ E Y M, ?_⟩
+  obtain ⟨eS⟩ := continuousModuleEncoding_scalar_extension ℓ E Y M
+  obtain ⟨eR⟩ := continuousField_module_restriction ℓ E X Y f P
+  obtain ⟨eα⟩ := hα
+  let F := continuousFieldModuleEquivalence ℓ E Y
+  refine ⟨F.fullyFaithfulFunctor.preimageIso ?_⟩
+  exact eS ≪≫ (SheafOfModules.fullyFaithfulForget _).preimageIso (eα ≪≫ eR.symm)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

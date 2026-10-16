@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-continuous-module-encoding-restriction",
+ "kind": "statement",
+ "title": "Continuous module encoding commutes with restriction along an etale morphism",
+ "statement": "Let ell be prime, E a finite-dimensional normed extension of Q_ell, f:Y -> X an etale morphism of schemes, and P an internal module over the condensed continuous E coefficient ring. For the specified encoding FE of [def-weil-pbc-continuous-coefficient-module-encoding], the underlying module presheaf of FE_Y(f*P), with canonical internal inverse image, is isomorphic to the restriction of FE_X(P) along lisseEtaleCoefficientIdentification of [def-weil-pbc-lisse-lattice-coefficients]. More generally, for a totally disconnected commutative topological ring T and weakly etale f, the unnormalized continuous encoding commutes with restriction along the identity map on continuous-function coefficient sections.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-lisse-lattice-coefficients"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DO and 03EL (restriction and inverse image of module sheaves); Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(6)"
+ },
+ "proof": [
+  {
+   "text": "Specialize the existing upperStarIsoLocalizationRestriction to abelian sheaves and its explicit restriction functor. The adjunction unit restricts sections along the site-adjunction counit; its tensor and unit formulas show that this comparison is monoidal. This is the abelian specialization of the source-library InternalHom argument, kept private because importing that module conflicts with the existing module-object monoidal imports.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the monoidal localization comparison to the internal module. Conjugate by the invertible continuous-chart coefficient maps; continuousChart_pullback identifies the conjugated coefficient map with the identity map on continuous functions. Apply mapModNatIso and the section-module encoding. Evaluating the natural multiplication map proves the resulting sectionwise isomorphism is linear.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the normalized rational encoding, transport both coefficients along lisseFieldSheaf_eq. Their components agree because they are equality transports of the same section rings. Evaluating the generic comparison gives linear isomorphisms and naturality for the prescribed lisseEtaleCoefficientIdentification.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-lisse-lattice-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DO and 03EL (restriction and inverse image of module sheaves); Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(6)",
+  "note": "Stage-3 E4: fully proved from existing library and Mathlib declarations; no new proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of module sheaves preserves local finite freeness and commutes with scalar extension by sheafified tensor product",
+   "date": "2026-10-16",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.sheafify, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "date": "2026-10-16",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|mapFreeIso|eqToHom_app",
+   "date": "2026-10-16",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+   "verdict": "No exact comparison theorem. Use the existing sheafification, module free-object, and adjunction APIs in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousModuleEncodingLattices",
+  "date": "2026-10-16",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous coefficient integral-model input: etale-local lattices in degree zero; Local freeness and lattice compatibility of the explicit continuous encodings; Continuous module encoding commutes with restriction along an etale morphism",
+   "via": [
+    "lem-weil-pbc-continuous-module-encoding-lattices",
+    "lem-weil-pbc-continuous-etale-local-lattice",
+    "lem-weil-pbc-continuous-constructible-integral-stratum",
+    "lem-weil-pbc-continuous-constructible-integral-single",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousModuleEncodingRestriction",
+  "file": "lean/Sheaf/Paper/ContinuousModuleEncodingRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousField_module_restriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRestrictionMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousRing_module_restriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousField_module_restriction"
+  ],
+  "statement": "theorem continuousField_module_restriction\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (X Y : Scheme.{u}) (f : Y ⟶ X) [Etale f]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)) :\n    Nonempty (((continuousFieldModuleEquivalence ℓ E Y).functor.obj\n        ((upperStar (Profinite.continuousMapRingObj E) f).obj P)).val ≅\n      (PresheafOfModules.pushforward (lisseEtaleCoefficientIdentification ℓ E f)).obj\n        ((continuousFieldModuleEquivalence ℓ E X).functor.obj P).val)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T114443-L-2638351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261016T114443-L-2638351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

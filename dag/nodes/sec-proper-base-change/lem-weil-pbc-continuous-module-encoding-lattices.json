@@ -14,49 +14,39 @@
  },
  "proof": [
   {
-   "text": "The proved continuousFieldFreeIso and continuousIntegerFreeIso identify finite free objects in the two encodings, including rank zero. The already proved finiteLocallyFree_restrict transports finite local freeness along the coefficient ring isomorphisms. On a covering slice use the localization equivalence of the small pro-etale site to identify the encoding of raw inverse image with restriction of the encoded module. Both forget to restriction of the same abelian sheaf, and their scalar actions are the tensor actions evaluated after the sheafification unit. The proved continuousChart_pullback identifies the canonical coefficient comparison on a covering slice with condensedPullbackHom, using the adjoint form of the existing scheme-naturality theorem. Thus finite free trivializations in either encoding transport to finite free trivializations in the other. A covering sieve contains a pro-etale precover, so the inverse integral encoding has an actual scheme cover of the form required in the statement.",
+   "text": "Apply continuousField_locallyFree to the given raw-inverse-image free cover. For any given finite locally free integral M, apply continuousInteger_inverse_locallyFree to obtain the required pro-etale scheme cover. Both conclusions are proved in the local-freeness comparison, including cover-index universe restriction and coefficient normalization.",
    "uses": [
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+    "lem-weil-pbc-continuous-module-encoding-local-freeness"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient square commutes by chartComparison_naturality; the spectral and integral coefficient equalities and lisseScalar_square are proved in the encoding module. The proved continuousRing_comap_compatibility compares restriction of scalars for the full continuous encodings; sectionModuleComapIso is its reconstructed-ring step. Extension of scalars is left adjoint to restriction in each encoding: the sectionwise Hom bijection is the tensor universal property followed by sheafification. Compose these natural Hom bijections with the encoding equivalences. Uniqueness of left adjoints identifies ordinary internal scalar extension with the sheafified sectionwise tensor product.",
+   "text": "Use continuousModuleEncoding_scalar_extension on the specified M to identify the rational encoding of internal extension of inverseEncoding(M) with the actual sheafified sectionwise changeOfRings object. Use continuousField_module_restriction to identify the prescribed etale restriction with the rational encoding of canonical internal inverse image.",
    "uses": [
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "lem-weil-pbc-continuous-module-encoding-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "For an etale f, inverse image is restriction to the localized site, with the continuous-function coefficient identification of lisseEtaleCoefficientIdentification. The preceding restriction comparison identifies the supplied sectionwise target with the encoding of canonical internal f*P. Transport the supplied rationalization through full faithfulness of the rational encoding and use the counit of the integral equivalence. This proves the assertion for any already given lattice, with no lattice-existence argument.",
+   "text": "Compose the scalar-extension comparison, the supplied rationalization isomorphism, and the inverse restriction comparison. Lift the resulting presheaf isomorphism through the fully faithful forgetful functor for module sheaves and then the fully faithful rational encoding. This is the requested isomorphism between the specified internal modules; no existence of a lattice is asserted.",
    "uses": [
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "def-weil-pbc-lisse-lattice-coefficients",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-profinite-point-pullback"
+    "def-weil-pbc-continuous-coefficient-module-encoding"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-continuous-coefficient-module-encoding",
-  "def-weil-pbc-lisse-lattice-coefficients",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-lisse-lattice-coefficient-normalization",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-pbc-continuous-module-encoding-local-freeness",
+  "lem-weil-pbc-continuous-module-encoding-restriction",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03DM (finite local freeness is intrinsic), 03DO (local pullback), 03D7 (module adjunction), 03EK and 03EL (tensor and pullback); Bhatt--Scholze Definition 6.8.3",
-  "note": "Stage-3 explicit encoding and finite-cover reduction of the unchanged continuous etale lattice theorem; existing lattice existence theorem is reused."
+  "note": "E4: complete Lean proof of the unchanged statement. Four fully proved helper modules implement the localization, local-freeness, and extension-restriction comparisons; no new sorry and no lattice-existence premise."
  },
  "mathlib_searches": [
   {
@@ -132,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-cc706",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261016T093725-L-2050642",
+  "landing": "20261016T114443-L-2638351",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched their DAG records and published interfaces; all seven modules and the direct importer compiled cleanly, with the forced helper-sharing adaptation verified."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
