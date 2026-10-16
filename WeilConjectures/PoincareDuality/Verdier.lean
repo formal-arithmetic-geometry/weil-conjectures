@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
+public import WeilConjectures.TraceFormula.Dualizing
 
 /-!
 
@@ -15,8 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCo
 
 Let `k` be a field of characteristic `≠ ℓ` and `f : X ⟶ Y` a morphism of separated `k`-schemes
 of finite type, a morphism of `Over (Spec (.of k))`. This file specializes the abstract
-constructions of `WeilConjectures.PoincareDuality.Abstract` to the six functors on the bounded
-constructible derived categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` with coefficients in the condensed ring `ℚ̲̄_ℓ`
+constructions of `WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierExchange` to the six
+functors on the bounded constructible derived categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` with coefficients in the
+condensed ring `ℚ̲̄_ℓ`
 (`Profinite.padicAlgClRingObj ℓ`): the adjunctions `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!`, the internal
 hom `RHom` and the derived exceptional projection morphism `PF^!` of
 `WeilConjectures.PoincareDuality.ProjectionFormula`.
@@ -35,8 +36,9 @@ monoidal closed structure on `Dᵇc` is that of
 - `ProEtale.CondensedRing.verdierExchange`: the Verdier exchange morphism
   `Φ_{f,K,L} : Rf_* RHom(K, Rf^! L) ⟶ RHom(Rf_! K, L)`.
 - `ProEtale.CondensedRing.relativeDualizingComplex`: for a structure morphism `a : X ⟶ S`, the
-  dualizing complex `ω_X = Ra^! ℚ̄_ℓ,S`, and `ProEtale.CondensedRing.verdierDual`: the Verdier
-  dual `𝔻_X K = RHom(K, ω_X)`.
+  dualizing complex `ω_X = Ra^! ℚ̄_ℓ,S` (for `a = a_X : X ⟶ Spec k` it is
+  `ProEtale.CondensedRing.dualizingComplex`, `relativeDualizingComplex_toPoint`), and
+  `ProEtale.CondensedRing.verdierDual`: the Verdier dual `𝔻_X K = RHom(K, ω_X)`.
 - `ProEtale.CondensedRing.verdierBiduality`: the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`.
 - `ProEtale.CondensedRing.upperShriekDualizingComplexIso`: for `f : X ⟶ Y` and `a_Y : Y ⟶ S`,
   the identification `γ : Rf^! ω_Y ≅ ω_X` with `ω_X` relative to `f ≫ a_Y`, the composition
@@ -55,12 +57,13 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
 
 - `ProEtale.CondensedRing.isIso_verdierExchange`: **Verdier duality**, the exchange morphism
   is an isomorphism, deduced from the derived projection formula
-  (`isIso_boundedConstructibleExceptionalProjectionMorphism`) by the Yoneda argument.
+  (`isIso_boundedConstructibleExceptionalProjection_app_app`) by the Yoneda argument.
 
 ## Sorried input
 
 - `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
-  isomorphism for `K` bounded constructible (Input 3.3 of the specification).
+  isomorphism for `K` bounded constructible and the dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of the
+  structure morphism `a_X : X ⟶ Spec k` (blueprint `thm-coef-qbar-verdier`).
 
 -/
 
@@ -111,7 +114,6 @@ projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (L : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierExchange ℓ f K L) := by
-  have := isIso_boundedConstructibleExceptionalProjection_app_app _ ℓ f K
   exact Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
@@ -141,10 +143,18 @@ noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRing
     K ⟶ verdierDual ℓ a (verdierDual ℓ a K) :=
   Verdier.bidualityMap (relativeDualizingComplex ℓ a) K
 
-/-- **Constructible Verdier biduality**: the double-dual morphism `δ_K` is an isomorphism for
-`K` bounded constructible. See the module docstring. -/
+/-- For the structure morphism `a_X : X ⟶ Spec k`, the relative dualizing complex is the
+dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of `ProEtale.CondensedRing.dualizingComplex`. -/
+lemma relativeDualizingComplex_toPoint :
+    relativeDualizingComplex ℓ (toPoint X) = dualizingComplex ℓ X :=
+  rfl
+
+/-- **Constructible Verdier biduality** (blueprint `thm-coef-qbar-verdier`, the `ℚ̄_ℓ` case of
+`thm-sf-biduality-class`): for the dualizing complex `ω_X = Ra_X^! ℚ̄_ℓ` of the structure
+morphism `a_X : X ⟶ Spec k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism
+for every bounded constructible `K`. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (verdierBiduality ℓ a K) :=
+    IsIso (verdierBiduality ℓ (toPoint X) K) :=
   sorry
 
 end Dualizing
