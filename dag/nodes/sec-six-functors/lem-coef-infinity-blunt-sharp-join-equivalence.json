@@ -29,9 +29,115 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a degree $r$, let $T_r$ be the set of nonconstant weakly increasing maps $[r]\\to[1]$; in particular $T_0=\\varnothing$. The defining quotient has the disjoint normal form\n$$(X\\diamond Y)_r=X_r\\amalg Y_r\\amalg(X_r\\times T_r\\times Y_r).$$\nIndeed, a cylinder simplex with constant interval coordinate is identified with exactly its indicated pure endpoint simplex; no relation involves a nonconstant interval coordinate, nor identifies distinct pure simplices. Operators on these classes restrict the cylinder coordinates and collapse to the indicated pure summand when the interval becomes constant. The formula for $c_{X,Y}$ is well-defined on the quotient: for a constant interval it is the corresponding pure inclusion. Restricting along $\\alpha:[s]\\to[r]$ restricts the zero and one blocks to their inverse images under $\\alpha$, so either route gives the same concatenation, also when a block becomes empty. Maps in $X$ and $Y$ commute with these restrictions. Consequently $\\diamond$, $\\star$ are ordinary bifunctors and $c$ is a natural transformation in both variables, fixing both pure summands.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HR",
+    "place": "Notation 4.6.2.3 (01HR): degreewise quotient, comparison and its naturality; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "Both bifunctors preserve degreewise injections and all small connected colimits separately in each variable. For fixed $Y$, the displayed normal form is a constant summand $Y_r$ plus $X_r\\times(\\{*\\}\\amalg(T_r\\times Y_r))$, while the sharp-join formula is $Y_r\\amalg X_r\\amalg\\coprod_{a+b+1=r}(X_a\\times Y_b)$. In a nonempty connected indexing category, the colimit of the constant summand is one copy of that summand: arrows identify its copies, connectedness identifies any two copies, and no arrow changes its value. The other summands commute with colimits of sets: their generating relations change only the variable simplex, leaving the summand label and the fixed coordinate unchanged. Thus a class is precisely a class of variable simplices with the fixed label and coordinate. These bijections commute with all simplicial operators. For fixed $X$, the blunt-join normal form is $X_r\\amalg(Y_r\\times(\\{*\\}\\amalg(X_r\\times T_r)))$, and the sharp-join formula is $X_r\\amalg Y_r\\amalg\\coprod_{a+b+1=r}(X_a\\times Y_b)$. For a connected diagram in $Y$, the constant $X_r$ copies are identified to one copy, and every other generating relation changes only the $Y$ coordinate, preserving the fixed $X$ coordinate and the summand label. Its quotient classes are therefore precisely the corresponding $Y$-colimit classes with those labels. Restriction of simplices preserves these descriptions, giving the canonical simplicial colimit isomorphisms in this variable as well. The formulas also show directly that injections stay injective. Degreewise set colimits give simplicial-set colimits: define operators on representatives, and their universal property is the compatible family of set universal properties. Finally, $\\varnothing\\diamond Y=\\varnothing\\star Y=Y$ and $X\\diamond\\varnothing=X\\star\\varnothing=X$, with $c$ the identity in either case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV): preservation hypotheses for a two-variable cellular reduction; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "Take $X=\\Delta^m$, $Y=\\Delta^n$, with $m,n\\geq0$, and put $P=X\\diamond Y$, $Q=X\\star Y=\\Delta^{m+n+1}$. The last equality identifies a mixed simplex with its weakly increasing list of initial vertices in $[m]$ followed by vertices in $[n]$, shifted by $m+1$; the pure lists supply the remaining cases. The cylinder is the nerve of the product poset $D=[m]\\times[1]\\times[n]$, since a chain in the product is a triple of chains. Define a monotone map $f:D\\to[m+n+1]$ by $f(a,0,b)=a$ and $f(a,1,b)=m+1+b$. Its induced nerve map descends through the endpoint quotient to exactly $c:P\\to Q$. The monotone map $k:[m+n+1]\\to D$ given by $k(a)=(a,0,0)$ for $a\\leq m$ and $k(m+1+b)=(m,1,b)$ gives $s:Q\\to P$ by the quotient map. Crossing from the first block to the second is monotone because $a\\leq m$ and $0\\leq b$. The equality $fk=1$ gives $cs=1_Q$. These constructions include $m=0$ and $n=0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV), simplex-pair case: explicit section of the comparison; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "On $D$ define $g(a,0,b)=(a,0,0)$, $g(a,1,b)=(a,1,b)$, and $h=kf$, so $h(a,0,b)=(a,0,0)$ and $h(a,1,b)=(m,1,b)$. They are monotone: within either layer each coordinate is nondecreasing, and crossing layers gives $(a,0,0)\\leq(a',1,b')$ for $g$ and $(a,0,0)\\leq(m,1,b')$ for $h$. Pointwise $g\\leq1_D$ and $g\\leq h$. Each inequality $u\\leq v$ gives the monotone map $D\\times[1]\\to D$ with values $u$ and $v$ on the two layers: for $d\\leq d'$ the crossing inequality is $u(d)\\leq u(d')\\leq v(d')$. Its nerve is a simplicial homotopy. The two homotopies descend to $P\\times\\Delta^1$: on the bottom layer the quotient always retains just $a$, and on the top layer it always retains just $b$, independent of the homotopy parameter. Products with the parameter preserve the quotient, since its generating relations never change that coordinate. Thus there is a self-map $\\bar g:P\\to P$ and homotopies $\\bar g\\Rightarrow1_P$, $\\bar g\\Rightarrow sc$. Each is the constant homotopy on the entire pure copies of $X$ and $Y$, so its edge at every vertex of $P$ is degenerate.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV), simplex-pair case: explicit zigzag of homotopies relative to the pure summands; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "We need the following pointwise test, derived from existing statements rather than assumed. If $Z$ is a quasicategory and $K$ any small simplicial set, then $\\operatorname{Fun}(K,Z)$ is a quasicategory by [lem-cbc-internal-hom-quasicategory]. Suppose an edge $e$ of this functor object has equivalence components at every vertex of $K$. A horn $\\Lambda_0^r\\to\\operatorname{Fun}(K,Z)$, $r\\geq2$, whose first edge is $e$, is adjoint to a map $K\\times\\Lambda_0^r\\to Z$ whose distinguished vertical edge at every vertex of $K$ is an equivalence. Apply [lem-cbc-invertible-prism-extension] with $A=\\varnothing$, $B=K$, $Q=Z$ to extend this map to $K\\times\\Delta^r$. Currying supplies the horn filler. Therefore $e$ has the outer-horn extension property for every $r\\geq2$, and the converse clause of [lem-cbc-equivalence-outer-horn-filling] makes $e$ an equivalence. This proof works in any sufficiently large universe containing $K$ and $Z$.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-cbc-invertible-prism-extension",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV), functor-equivalence interpretation of the explicit homotopies; derived pointwise test; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "For every quasicategory $\\mathcal E$, put $\\mathcal A=\\operatorname{Fun}(P,\\mathcal E)$ and $\\mathcal B=\\operatorname{Fun}(Q,\\mathcal E)$; both are quasicategories by [lem-cbc-internal-hom-quasicategory]. Precomposition gives $c^*:\\mathcal B\\to\\mathcal A$ and $s^*:\\mathcal A\\to\\mathcal B$, with $s^*c^*=1_{\\mathcal B}$. We turn the zigzag of Step 4 into one coherent natural equivalence while keeping its vertex components degenerate. Let $V\\subseteq P$ be the simplicial subset of constant simplices at vertices of $P$; distinct vertices give distinct constant simplices by vertex restriction. Put $B=P\\times\\mathcal A$ and $A_0=V\\times\\mathcal A\\subseteq B$, in a larger universe if necessary. The two homotopies in Step 4, followed by evaluation, define a map $B\\times\\Lambda_0^2\\to\\mathcal E$: on edge $01$ use $\\bar g\\Rightarrow1_P$, and on edge $02$ use $\\bar g\\Rightarrow sc$. For an $r$-simplex $F:P\\times\\Delta^r\\to\\mathcal E$, this evaluates as $(x,t,z)\\mapsto F(H(x,t),z)$; thus it is compatible with every parameter operator. On $A_0\\times\\Lambda_0^2$ both edges are constant in the horn coordinate because the homotopies fix $V$. Prescribe the extension to $A_0\\times\\Delta^2$ by evaluation with the triangle coordinate ignored. At each vertex $(x,F)$ of $B$, the distinguished edge $01$ maps to the degenerate edge at $F(x)$. Apply [lem-cbc-invertible-prism-extension] with its $A=A_0$, $B=B$, $n=2$, $Q=\\mathcal E$. Restrict its filler to edge $12$ and curry the $P$ coordinate: this gives a coherent transformation $1_{\\mathcal A}\\Rightarrow c^*s^*$ whose component at every vertex $x$ of $P$ is degenerate, since the filler agrees with the prescribed map on $A_0\\times\\Delta^2$. Step 5 with $K=P$, $Z=\\mathcal E$ makes its component at each object $F$ an equivalence in $\\mathcal A$. Apply Step 5 again with $K=\\mathcal A$, $Z=\\mathcal A$, enlarging the universe if necessary; the transformation itself is an equivalence edge in $\\operatorname{Fun}(\\mathcal A,\\mathcal A)$, with both inverse-triangle witnesses. Together with $s^*c^*=1_{\\mathcal B}$ this proves that $s^*$ is a coherent quasi-inverse of the actual restriction $c^*$. Hence the desired full functor equivalence holds for every pair of standard simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-cbc-invertible-prism-extension",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV) and Example 4.6.4.9 (05YH): explicit functor quasi-inverse in the simplex-pair case; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "For each fixed $m\\geq0$, apply [lem-coef-infinity-cellular-natural-equivalence] to the functors $P_m(Y)=\\Delta^m\\diamond Y$ and $Q_m(Y)=\\Delta^m\\star Y$ with natural transformation $c_{\\Delta^m,Y}$. Step 2 proves preservation of injections and all small connected colimits, and identifies $c_{\\Delta^m,\\varnothing}$ as the identity. Step 6 proves the simplex hypotheses for every $\\Delta^n$, with the full functor-equivalence convention required by the cited criterion. Consequently, for every small $Y$ and every quasicategory $\\mathcal E$ in a sufficiently large universe, $c_{\\Delta^m,Y}^*$ is a functor equivalence.",
+   "uses": [
+    "lem-coef-infinity-cellular-natural-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV): first cellular extension, in the second variable; explicit argument supplied here, not archived under literature/."
+   }
+  },
+  {
+   "text": "Now fix any small $Y$ and apply [lem-coef-infinity-cellular-natural-equivalence] to $P^Y(X)=X\\diamond Y$ and $Q^Y(X)=X\\star Y$ and their natural comparison. Step 2 verifies the preservation hypotheses and the identity $c_{\\varnothing,Y}$; Step 7 verifies every standard-simplex hypothesis. The criterion therefore gives, for every small $X$, exactly the required functor equivalence $c_{X,Y}^*$. No finiteness, quasicategory or nonemptiness condition on either factor entered the argument. In particular if a factor is empty the comparison was already the identity in Step 2.",
+   "uses": [
+    "lem-coef-infinity-cellular-natural-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HV",
+    "place": "Theorem 4.6.2.8 (01HV): second cellular extension, in the first variable; explicit argument supplied here, not archived under literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-cbc-invertible-prism-extension",
+  "lem-coef-infinity-cellular-natural-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01HV",
+  "place": "Explicit simplex-pair section and two relative homotopies, extended separately in each variable using the existing cellular criterion. Kerodon Theorem 4.6.2.8 (01HV) and Example 4.6.4.9 (05YH) give the conclusion; this is an agent-written proof, not their published reduction to Delta^1. Online sources read 2026-10-17, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +180,80 @@
    "results": "{\"t\": \"2026-10-16T17:28:50Z\", \"tool\": \"grep\", \"query\": \"isEquivalenceMapPair|def mapPairEquiv\", \"sub\": \"CategoryTheory/Join/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"634\", \"651\"], \"digest\": \"02601c77ae3f8b6a\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected hits and Mathlib/CategoryTheory/Join/Basic.lean:624-653 (mapPairEquiv and isEquivalenceMapPair), and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:280-301. The join declarations compare joins of ordinary categories under equivalences of their factors; the nerve adjunction only treats ordinary nerves. Neither is the blunt-to-sharp comparison for arbitrary simplicial sets into arbitrary quasicategories. Loogle returns neighborhood-filter declarations; the focused simplicial-source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary small simplicial sets X and Y, the blunt join to sharp join comparison induces a functor equivalence into every quasicategory",
+   "results": "{\"t\": \"2026-10-16T18:33:46Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary small simplicial sets X and Y, the blunt join to sharp join comparison induces a functor equivalence into every quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.mapPairEquiv_counitIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.coskAdj\", \"CategoryTheory.Join.mapPairEquiv_functor\"], \"digest\": \"7f751a1b5bcf5e49\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet join Fun equivalence quasicategory",
+   "results": "{\"t\": \"2026-10-16T18:33:46Z\", \"tool\": \"loogle\", \"query\": \"SSet join Fun equivalence quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  join\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query parser error; no absence conclusion drawn from this query."
+  },
+  {
+   "tool": "grep",
+   "query": "blunt|fat.?join|join.*sharp|sharp.*join",
+   "results": "{\"t\": \"2026-10-16T18:33:46Z\", \"tool\": \"grep\", \"query\": \"blunt|fat.?join|join.*sharp|sharp.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison from the blunt join of two simplicial sets to their sharp join induces an equivalence of functor quasicategories",
+   "results": "{\"t\": \"2026-10-16T18:33:47Z\", \"tool\": \"leansearch\", \"query\": \"The comparison from the blunt join of two simplicial sets to their sharp join induces an equivalence of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.mapPairEquiv_inverse\", \"CategoryTheory.Join.mapPair\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.mapPairEquiv_functor\", \"CategoryTheory.Join.opEquiv\", \"CategoryTheory.Join.mkNatIso_hom\", \"CategoryTheory.Join.mkNatTrans.congr_simp\"], \"digest\": \"95f8a10740444280\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, CategoryTheory.Join",
+   "results": "{\"t\": \"2026-10-16T19:10:09Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, CategoryTheory.Join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from a fat simplicial join to an ordinary join is an equivalence of exponential quasicategories",
+   "results": "{\"t\": \"2026-10-16T19:10:13Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from a fat simplicial join to an ordinary join is an equivalence of exponential quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Join.mapPairEquiv_counitIso\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"9f2529b9c52a7e4a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "def mapPairEquiv|isEquivalenceMapPair|def functorEquiv",
+   "results": "{\"t\": \"2026-10-16T19:10:13Z\", \"tool\": \"grep\", \"query\": \"def mapPairEquiv|isEquivalenceMapPair|def functorEquiv\", \"sub\": \"CategoryTheory/Join/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"634\", \"651\"], \"digest\": \"02601c77ae3f8b6a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the inspected CategoryTheory/Join/Basic.lean:624-653 declarations concern joins of ordinary categories, and SimplicialSet/NerveAdjunction.lean:280-301 concerns maps into ordinary nerves, not arbitrary quasicategory targets or the blunt-to-sharp simplicial comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial sets from a fat join to the ordinary join becomes an equivalence under exponentiation into a fibrant object in the Joyal model structure",
+   "results": "{\"t\": \"2026-10-16T19:37:55Z\", \"tool\": \"leanfinder\", \"query\": \"A map of simplicial sets from a fat join to the ordinary join becomes an equivalence under exponentiation into a fibrant object in the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObj\\u03b9\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.FibrantObject.\\u03b9\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\"], \"digest\": \"d31d89d7edbe75c9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight returned declarations concern model-category homotopy relations, Quillen fibrations, or the ordinary nerve adjunction; none states a blunt-to-sharp simplicial join comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "blunt|fatJoin|fat_join|sharpJoin|sharp_join|Joyal",
+   "results": "{\"t\": \"2026-10-16T19:38:07Z\", \"tool\": \"grep\", \"query\": \"blunt|fatJoin|fat_join|sharpJoin|sharp_join|Joyal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/Geometry/Convex/Cone/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"9d666f3a5d4adc35\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the twelve hits concern convex cones, the generic lifting-property Joyal trick, and braided categories; no simplicial join comparison occurs."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, \"join\"",
+   "results": "{\"t\": \"2026-10-16T19:38:17Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: valid Loogle query returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-slice-arrow-equivalence",
@@ -85,5 +261,34 @@
   "group": "Q53"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "worker": "stage1",
+  "summary": "Zero new nodes. Constructed a section for every pair of standard simplices and explicit monotone maps giving a zigzag of homotopies relative to both pure factors. Derived the pointwise-equivalence test from existing prism and outer-horn statements, obtained a coherent functor quasi-inverse, verified degreewise injections and connected-colimit preservation, and applied the existing cellular criterion in each variable. Statement and statement dependencies are unchanged. Discarded an early self-review draft that would have repackaged the theorem as universal-property children.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: coherent enhancement of coefficient diagrams, via the finite-shape generation argument and the right-pinch comparison used in lem-coef-infinity-anodyne-cocones. The total slice diagonal equivalence used before taking fibers in the proof of Kerodon Proposition 4.6.5.10. Supporting general blunt-to-sharp join comparison, Kerodon Theorem 4.6.2.8, used in the diagram-class proof of Theorem 4.6.4.19. This is generic coherent-diagram infrastructure under the historical ancestry, not a literal assertion in the ancestor paragraph. Steps 1-4 construct the generic join comparison and its simplex-pair witnesses; Steps 5-6 prove the full functor equivalence; Steps 7-8 extend to arbitrary shapes. The main-20261015 ancestor proof has the paragraph beginning For K in D^b_c(X,R), but does not itself state a join theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Generic extension over a prism with equivalence vertical edges proves the pointwise-equivalence test; the assigned unit contains no such horn-extension statement and no biduality step is replaced."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic converse outer-horn criterion turns the explicitly constructed fillers into an equivalence edge; no statement of the assigned unit supplies this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-invertible-prism-extension",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-36e2df0ed",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-36e2df0ed (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item and the statements of all 6 cited nodes in full. Statement: unchanged and true. It is the Joyal blunt-to-sharp join comparison (Kerodon 01HR/01HV/05YH, HTT 4.2.1.2) in its functor-equivalence form, with no added hypotheses on X or Y. Edge cases hold: an empty factor gives the identity, and Delta^0 blunt-join Delta^0 = Delta^1. Step 1: the normal form X_r + Y_r + X_r x T_r x Y_r is correct and c is well defined and natural. Step 2: degreewise connected-colimit and injection preservation is correct in both variables, and the empty case gives the identity. Steps 3-4: I checked by hand, and by script for m,n<=3, that f, k, g and h are monotone, that fk=1 (so cs=1), that g<=1 and g<=kf, and that the homotopies keep a on layer 0 and b on layer 1, so they descend and are constant on the pure parts. Step 5: the cited prism extension (with A empty) and the converse outer-horn clause apply with every hypothesis met (r>=2). Step 6: the two homotopies agree at horn vertex 0, the prescription on V x A agrees with them on the overlap, the distinguished edges are degenerate, and edge 12 gives 1 => c*s*. Two applications of Step 5 make this an equivalence edge, which matches the functor-equivalence definition in def-cbc-enhanced-diagrams-cones. Steps 7-8: every hypothesis of lem-coef-infinity-cellular-natural-equivalence (same unit, unsplit, plausible) is supplied. DAG: no cycle and no new nodes. The only citer is lem-coef-infinity-slice-arrow-equivalence. Neither lem-coef-infinity-blunt-join-comparison nor lem-coef-infinity-join-cone-calculus duplicates the item. I accept the declared generic tool uses of lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling (unit sk-prop-sf-cbc). Kerodon is not archived, so the proof is correctly marked by: agent and the report carries a WANTED line. No SGA is cited. No fixes were made."
+ }
 }
