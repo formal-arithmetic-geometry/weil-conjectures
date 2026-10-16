@@ -24,7 +24,7 @@
    "elementary": true
   },
   {
-   "text": "Write s:Spec L → Spec K and C for the strict henselization at s. In the identity affine chart the maximal ideal of C is the image of the unique prime (0) of K, hence zero. C is a field. Its residue field is separably closed by strict-henselization local structure, so C is separably closed because the residue map is an isomorphism.",
+   "text": "Apply strictHenselization_chart_maximalIdeal in the identity affine chart of Spec K. The unique prime of K is zero, so its extension, the maximal ideal of the strict henselization C, is zero. IsLocalRing.isField_iff_maximalIdeal_eq makes C a field. Its residue map is injective and surjective, hence a ring equivalence; transfer the proved separably closed residue-field instance back along this equivalence. The project strictHenselizationRing and strictHenselizationScheme are compatibility abbreviations for the upstream ring and strictLocalization in the published build.",
    "uses": [
     "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
     "lem-weil-pbc-strict-henselization-local-structure"
@@ -32,7 +32,7 @@
    "elementary": true
   },
   {
-   "text": "The chart map ρ:K → C and evaluation C → L compose to the given K → L: apply Spec and compatibility of evaluation with the strict-localization structural map. These maps form a scalar tower. L is algebraic over K, hence over C. Mathlib Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed makes L/C purely inseparable, and the source instance Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes Spec L → Spec C a universal homeomorphism.",
+   "text": "The identity pointed etale neighbourhood of Spec K gives the canonical map K to C. SpecPointedEtaleNeighborhood.ι_comp_strictHenselizationEval proves that its composite with evaluation C to L is the given algebraMap K L. Use the induced algebra structures and this equality to supply IsScalarTower K C L. Algebraicity of L over K gives algebraicity over C by Algebra.IsAlgebraic.tower_top. Since C is separably closed, Mathlib Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed gives purely inseparable L/C. Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes Spec of the evaluation a universal homeomorphism.",
    "uses": [
     "def-weil-pbc-strict-henselization-structural-map",
     "lem-weil-pbc-strict-henselization-local-structure",
@@ -49,7 +49,7 @@
    "elementary": false
   },
   {
-   "text": "The pullback universal property constructs X_L → X_C. Cancel the outer pullback square to show it is the base change of Spec L → Spec C, hence a universal homeomorphism. Compose the stalk comparison with Etale.cohomologyEquiv and upperStarComp to identify the pulled-back coefficient sheaf with F|_(X_L). Choices of comparison isomorphisms occur only inside a proof of Nonempty; no definition chooses arbitrary data from an unproved existence theorem.",
+   "text": "Let h:Spec L to the strict localization be Spec of evaluation; its composite with the structural morphism is the geometric point s, by spec_map_strictHenselizationEval_comp_strictLocalizationToBase. Construct g:X_L to X_C by pullback.lift. Cancel the right pullback square with IsPullback.of_right to prove that g is the base change of h. Base-change stability gives IsUniversalHomeomorphism g. Compose the strict-localization additive equivalence, Etale.cohomologyEquiv g, and the image under Sheaf.functorH of the inverse component of upperStarComp identifying the iterated pullback with the restriction to X_L. All choices are inside proofs of propositions; no new definition chooses data from an unproved existence theorem.",
    "uses": [
     "thm-weil-pbc-universal-homeomorphism-invariance",
     "def-weil-pbc-inverse-image"
@@ -70,7 +70,7 @@
   "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
-  "by": "worker P4",
+  "by": "worker K4",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03Q9 (theorem-higher-direct-images), Tag 03SI (proposition-topological-invariance), and strict-henselization local structure Tags 04HX and 04GP"
  },
@@ -144,13 +144,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261015T221002-L-2558877",
-  "kind": "interface",
+  "landing": "20261016T221617-L-1617064",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
