@@ -3,40 +3,243 @@
  "blueprint": {
   "is": "lem-sf-ext-sheaf-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible internal Hom with a site-perfect first variable",
- "statement": "If $K$ is site-perfect and $M$ is bounded constructible on\n$X_{\\Et}$, then every cohomology sheaf of\n$R\\mathcal Hom_A(K,M)$ is constructible. In particular, for a finite\nlocally free sheaf $F$ and a constructible sheaf $G$,\n$\\mathcal Ext_A^r(F,G)=0$ for $r\\ne0$, and\n$\\mathcal Hom_A(F,G)$ is constructible.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Let $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ be the finite commutative coefficient ring of [def-weil-l-adic-coefficient-extension], and let $X$ be a scheme [def-pc-scheme]. Work in $D(X_{\\Et},A)$ [def-weil-pbc-derived-categories]. Here an object $K$ is site-perfect on the small etale site if there is an etale covering $\\{U_\\alpha\\to X\\}$ such that $K|_{U_\\alpha}$ is isomorphic to a bounded cochain complex $P_\\alpha^\\bullet$ of $A_{U_\\alpha}$-module sheaves, each term being a direct summand of a finite sum $A_{U_\\alpha}^{\\oplus N}$. The bounds and the integers $N$ may depend on $\\alpha$ and on the term. If $K$ is site-perfect in this sense and $M$ is bounded constructible [def-weil-pbc-constructible-complexes], then for every $i\\in\\mathbf Z$ the cohomology sheaf $\\mathcal H^i(R\\mathcal Hom_A(K,M))$ [def-pur-derived-internal-hom, def-weil-derived-cohomology-sheaves] is constructible [def-weil-pbc-etale-constructible-sheaf]. In particular, if $F$ is a finite locally free $A_X$-module sheaf (etale locally isomorphic to $A_U^{\\oplus r}$ for a finite integer $r$) and $G$ is a constructible $A_X$-module sheaf, then, writing $F,G$ as complexes in degree zero and $\\mathcal Ext_A^j(F,G)=\\mathcal H^j(R\\mathcal Hom_A(F,G))$, one has $\\mathcal Ext_A^j(F,G)=0$ for every $j\\ne0$, and the sheaf $\\mathcal Hom_A(F,G)$ [def-pur-sheaf-hom] is constructible.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
   "place": "node lem-sf-ext-sheaf-constructible, order 2197"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pur-sheaf-hom"
+ ],
  "proof": [
   {
-   "text": "On a site cover choose a bounded finite free model $P$ of $K$\nusing [def-weil-site-perfect-complex]. Then\n$R\\mathcal Hom_A(K,M)=P^\\vee\\otimes_A^LM$ by\n[lem-sf-hom-finite-projective]. Finite sums, shifts and cones of\nconstructible cohomology sheaves remain constructible by\n[thm-constructible-serre]. This proves the local assertion,\nwhich descends on the site. For $F$ concentrated in degree zero the\nsame model has only one term, giving the last assertion.",
+   "text": "Fix a common stratification for $M$. By [def-weil-pbc-constructible-complexes] choose $c\\leq d$ such that $\\mathcal H^q(M)=0$ outside $[c,d]$. Each of the finitely many sheaves $\\mathcal H^q(M)$, $c\\leq q\\leq d$, has a finite constructible locally closed immersed stratification by [def-weil-pbc-etale-constructible-sheaf]. Repeatedly apply [lem-weil-pbc-constructible-stratification-intersection] and [lemma-constructible-of-refines] to obtain one finite stratification $(s_\\nu:S_\\nu\\to X)_\\nu$, with constructible strata, on which all these sheaves are finite locally constant. For the zero sheaves outside this interval this is automatic. All intersections here are the actual fibre products of the immersed schemes, so the refinement maps exist. This same stratification will witness constructibility of every cohomology sheaf of the internal Hom. The finite-value and finite-stalk formulations of finite local constancy used in these nodes agree by [lem-weil-pbc-finite-locally-constant-module-values].",
    "uses": [
-    "def-weil-site-perfect-complex",
-    "lem-sf-hom-finite-projective",
-    "thm-constructible-serre"
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lemma-constructible-of-refines",
+    "lem-weil-pbc-finite-locally-constant-module-values"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, constructibility of cohomology; common-partition refinement of Stacks 03RZ (lemma-constructible-abelian)."
+   }
+  },
+  {
+   "text": "Choose the etale cover in the site-perfect hypothesis and fix a member $u:U\\to X$ and its bounded model $P$ for $K|_U$. Put $N=M|_U$. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], whose restriction clause is Stacks 08JB (lemma-restriction-RHom-to-U), $R\\mathcal Hom_A(K,M)|_U\\cong R\\mathcal Hom_{A_U}(P,N)$. Choose a K-injective representative $I$ for $N$. The construction in [def-pur-derived-internal-hom] represents the right hand side by the ordinary complex $C=\\mathcal Hom^\\bullet_{A_U}(P,I)$; its differential is the one in [def-pur-hom-complex]. In particular its degree $n$ term is the finite sum of $\\mathcal Hom(P^p,I^{p+n})$ over the nonzero terms of $P$. No finite Tor amplitude of $M$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, first sentence (local bounded finite-projective model), with Stacks 08J7 (section-internal-hom) and 08JB."
+   }
+  },
+  {
+   "text": "For a term $Q=P^p$, choose its displayed splitting $i:Q\\to A_U^r$, $p:A_U^r\\to Q$, $pi=1$. From the sectionwise definition of sheaf Hom [def-pur-sheaf-hom], $\\mathcal Hom(A_U^r,B)=B^{\\oplus r}$ by evaluation on the standard basis. Precomposition with $p$ and $i$ exhibits $\\mathcal Hom(Q,B)$ as the image of the idempotent induced by $ip$ on $B^{\\oplus r}$. This is an exact functor of $B$: on an exact sequence of finite sums the arrows commute with that idempotent, so its kernel and image in each summand are the corresponding summands of the original kernel and image. Thus $\\mathcal H^q(\\mathcal Hom(Q,J^\\bullet))=\\mathcal Hom(Q,\\mathcal H^q(J^\\bullet))$ for any complex $J$. This is an argument about internal sheaf Hom, not projectivity for global sections.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, finite-projective calculation (write the free calculation and its retract explicitly); Stacks 04TT/03EM (internal Hom)."
+   }
+  },
+  {
+   "text": "Fix a stratum $s:S\\to X$ of step 1 and form $V=U\\times_XS$, with projections $v:V\\to U$ and $w:V\\to S$. Inverse image of constant-coefficient module sheaves is additive and exact and carries $A_U$ to $A_V$, by [prop-weil-pbc-inverse-image-modules-exact]. Hence it preserves the splitting of each $P^p$ and finite sums. The basis calculation of step 3, followed by this preserved splitting, gives $v^{-1}\\mathcal Hom(P^p,I^q)\\cong\\mathcal Hom(v^{-1}P^p,v^{-1}I^q)$. These maps are natural in both arguments: the basis formula sends a homomorphism to its values, and the retract formula uses precomposition with $i,p$. Therefore they commute with $d_I\\circ f-(-1)^nf\\circ d_P$ [def-pur-hom-complex]. They identify the whole pulled-back complex $v^{-1}C$ with $\\mathcal Hom^\\bullet(P_V,J)$, where $P_V=v^{-1}P$ and $J=v^{-1}I$. Exactness also gives $\\mathcal H^n(v^{-1}C)=v^{-1}\\mathcal H^n(C)$. We do not assert that $J$ remains K-injective or apply a restriction theorem for derived Hom along the immersion $s$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, local assertion: explicit finite-summand calculation under stratum inverse image, using Stacks 03EM and exact inverse image."
+   }
+  },
+  {
+   "text": "Every $\\mathcal H^q(J)$ is finite locally constant on $V$. Indeed exact inverse image gives $\\mathcal H^q(J)=w^{-1}s^{-1}\\mathcal H^q(M)$: both composite inverse images in the cartesian square are inverse image along $V\\to X$. The sheaf $s^{-1}\\mathcal H^q(M)$ is finite locally constant by step 1. Local constancy and finiteness are preserved by inverse image by [lemma-constructible-pullback-locally-constant] and [lemma-constructible-pullback-finite]; together with [def-constructible-finite-locally-constant] this proves the claim. This covers all $q$, including the vanishing cohomology outside $[c,d]$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "def-constructible-finite-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, common-stratum calculation; Stacks 03RV (lemma-pullback-locally-constant), 03RU (definition-finite-locally-constant)."
+   }
+  },
+  {
+   "text": "For each $p,q$, the sheaf $\\mathcal Hom(P_V^p,\\mathcal H^q(J))$ is finite locally constant. The finite sum $(\\mathcal H^q(J))^{\\oplus r}$ is finite locally constant by [lemma-constructible-flc-biproduct]. The splitting from step 3 makes $\\mathcal Hom(P_V^p,\\mathcal H^q(J))$ the kernel of $1-e$ on that finite sum, where $e$ is the induced idempotent. Apply the kernel clause of [lemma-constructible-flc-serre]. The finite coefficient ring is the same $A$ throughout. This uses closure only for morphisms between finite locally constant sheaves, not arbitrary subobjects.",
+   "uses": [
+    "lemma-constructible-flc-biproduct",
+    "lemma-constructible-flc-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, finite sums and summands; Stacks 03RX (lemma-kernel-finite-locally-constant), module clause (3)."
+   }
+  },
+  {
+   "text": "Write $P_V^p=0$ outside $[a,b]$. Filter $D=\\mathcal Hom^\\bullet(P_V,J)$ by the subcomplexes $D_t$ whose components $f^p$ vanish for $p>t$. The differential formula of [def-pur-hom-complex] shows that $d(f)^p=d_Jf^p-(-1)^nf^{p+1}d_{P_V}^p$, so $D_t$ really is a subcomplex. There are degreewise split short exact sequences $0\\to D_{t-1}\\to D_t\\to E_t\\to0$, with $E_t^n=\\mathcal Hom(P_V^t,J^{t+n})$ and differential induced by $d_J$. The base is $D_{a-1}=0$ and the final object is $D_b=D$. By step 3 and step 6, $\\mathcal H^n(E_t)=\\mathcal Hom(P_V^t,\\mathcal H^{t+n}(J))$ is finite locally constant. This is a finite filtration, even if the representative $J$ has unbounded terms.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, finite-complex devissage: explicit column filtration replacing the unspecific reference to sums, shifts and cones."
+   }
+  },
+  {
+   "text": "Induct on $t=a,\\ldots,b$, with the assertion that every $\\mathcal H^n(D_t)$ is finite locally constant. It holds for $D_{a-1}=0$. For the induction step, [lem-weil-pbc-complex-ses-homology-long-exact] supplies the exact segment $\\mathcal H^{n-1}(E_t)\\xrightarrow{\\delta}\\mathcal H^n(D_{t-1})\\to\\mathcal H^n(D_t)\\to\\mathcal H^n(E_t)\\xrightarrow{\\delta}\\mathcal H^{n+1}(D_{t-1})$. Consequently $\\mathcal H^n(D_t)$ is an extension of the kernel of the last map by the cokernel of the first map. The induction hypothesis and step 7 make all four outer sheaves finite locally constant. The kernel, cokernel and extension clauses of [lemma-constructible-flc-serre] give the induction step. Thus every cohomology sheaf of $D$ is finite locally constant on $V$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lemma-constructible-flc-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, finite-complex devissage; Stacks 0117 (lemma-long-exact-sequence-cochain) and 03RX (lemma-kernel-finite-locally-constant)."
+   }
+  },
+  {
+   "text": "For a fixed stratum $S$ and integer $n$, the schemes $V_\\alpha=U_\\alpha\\times_XS$ form an etale covering of $S$ by [lem-weil-pbc-etale-covering-base-change]. By steps 2, 4 and 8, the restriction of $s^{-1}\\mathcal H^n(R\\mathcal Hom_A(K,M))$ to every $V_\\alpha$ is finite locally constant. By [lem-weil-pbc-finite-locally-constant-module-values], each has a further etale covering on which it is constant with finite module values. Composing these trivialising coverings with $V_\\alpha\\to S$ gives a trivialising etale covering of $S$ itself by [lem-weil-pbc-etale-covering-composition], hence the same lemma gives finite local constancy on $S$. Step 1's finite constructible stratification therefore satisfies exactly [def-weil-pbc-etale-constructible-sheaf] for $\\mathcal H^n(R\\mathcal Hom_A(K,M))$. This proves the first assertion for every $n$. Only finite local constancy is glued; we have not assumed that arbitrary locally constructible partitions glue on a non-quasi-compact scheme. Bounds for $P_\\alpha$ need not be uniform.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, final local-to-global sentence, made explicit on the fixed strata; Stacks 03RU and 095E condition (3). Covering operations: Stacks 02GO (lemma-base-change-etale), 01S1 (lemma-base-change-surjective), and 0217 (lemma-etale), part (2)."
+   }
+  },
+  {
+   "text": "For the last assertion use a trivialising etale cover for $F$, on which $F=A_U^{\\oplus r}[0]$. With a K-injective representative $I$ of $G|_U[0]$, the same internal Hom construction [def-pur-derived-internal-hom, def-pur-sheaf-hom] is $I^{\\oplus r}$. Its cohomology is zero for $j\\ne0$ and is $(G|_U)^{\\oplus r}=\\mathcal Hom(F|_U,G|_U)$ in degree zero. The identifications are the basis evaluation maps and commute with restriction, so the canonical sheaf-Hom comparison in degree zero is an isomorphism globally, and the higher and negative cohomology sheaves vanish globally (a sheaf which is zero on a covering is zero by the sheaf axiom). Taking $K=F[0]$, $M=G[0]$ in the first assertion shows that this degree-zero sheaf is constructible. The notation for $\\mathcal Ext^j$ in the statement gives exactly the asserted vanishing.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-sheaf-hom",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
+    "place": "Proof, last sentence (one-term finite-free model); Stacks 08J7 and 04TT."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-site-perfect-complex",
-  "lem-sf-hom-finite-projective",
-  "thm-constructible-serre"
+  "def-constructible-finite-locally-constant",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-flc-serre",
+  "lemma-constructible-of-refines",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-pullback-locally-constant",
+  "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-hom-ctf/lem-sf-ext-sheaf-constructible.md",
-  "place": "## Proof"
+  "place": "Proof: finite-projective local models, explicit common-stratum Hom-complex filtration and one-term case; external interfaces checked against Stacks 08J7, 08JB, 03EM, 0117, 03RX, 03RU, 095E."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal derived Hom from a locally perfect complex into a bounded constructible complex of etale sheaves has constructible cohomology",
+   "results": "8 hits; top results: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.Sheaf.cohomologyPresheaf, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.right_fac_of_isStrictlyLE. Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\"",
+   "results": "12 hits; top results: Topology.IsConstructible, Topology.IsLocallyConstructible, Topology.IsConstructible.univ, Topology.IsLocallyConstructible.univ, Topology.IsConstructible.empty, Topology.IsLocallyConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible. Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(Hom|Ext)|(?:Hom|Ext).*constructible",
+   "results": "10 hits; top results: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean. Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sheaf Hom from a finite locally free sheaf preserves constructible cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective sheaves has internal derived Hom with constructible cohomology when the second complex is bounded constructible",
+   "results": "8 hits; top results: CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CategoryTheory.Sheaf.H, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat. Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"Hom\"",
+   "results": "12 hits; top results: AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank, CompHausLike.LocallyConstant.locallyConstantIsoContinuousMap_hom, CompHausLike.LocallyConstant.componentHom, CompHausLike.LocallyConstant.functor_map_hom_app, CompHausLike.LocallyConstant.counit_app_hom_app_hom_apply, Condensed.locallyConstantIsoFinYoneda_hom_app, LocallyConstant.constRingHom, LocallyConstant.evalRingHom. Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|IsFiniteLocallyConstantSheaf|SitePerfect|site.perfect",
+   "results": "0 hits; top results: . Read returned hits: no constructible-etale-sheaf internal Hom theorem; algebraic spectrum constructibility, general derived-category projectivity, and sheaf cohomology are different assertions.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant sheaves are closed under finite projective internal Hom and bounded Hom complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +263,84 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-hom-ctf"
+ "unit": "sk-thm-sf-hom-ctf",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-ext-sheaf-constructible",
+  "worker": "stage1",
+  "summary": "Made the finite coefficient and etale site-perfect meanings explicit, retaining every conclusion. Replaced the inapplicable finite-Tor Hom citation and unsupported site-local descent sentence with one common finite constructible stratification of M, a finite column filtration of the local ordinary Hom complex, and finite-local-constancy closure on each stratum. Read every cited statement. No new nodes or Mathlib leaves; no Lean writing or compiling.",
+  "blueprint": "Imported proof order 2197: first sentence realized in step 2; finite-projective/tensor calculation replaced by the explicit sheaf-Hom retract calculation in steps 3-4; sums/shifts/cones realized by the finite column filtration and its long exact sequences in steps 6-8; site descent realized on the fixed common stratification by steps 1, 5 and 9; final one-term assertion realized in step 10. The site-perfect branch of the unit is retained; no geometric-duality branch is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Common finite constructible partition for finitely many cohomology sheaves of M; the unit has no partition-refinement construction."
+   },
+   {
+    "node": "lemma-constructible-of-refines",
+    "why": "Finite local constancy survives the common refinement; this is a generic stratification tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Only the arbitrary-complex slice restriction clause of Stacks 08JB is used to compute RHom on an etale cover, without imposing Tor amplitude."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image for constant coefficients, preserving cohomology and split finite summands; the unit has no separate module-pullback theorem."
+   },
+   {
+    "node": "lemma-constructible-pullback-locally-constant",
+    "why": "Local constancy of the already lisse cohomology on the pulled-back stratum; a generic sheaf pullback tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-finite",
+    "why": "Finiteness of the already lisse cohomology on the pulled-back stratum; a generic sheaf pullback tool."
+   },
+   {
+    "node": "lemma-constructible-flc-biproduct",
+    "why": "Finite sums of finite locally constant sheaves on a stratum; a generic Serre-devissage input."
+   },
+   {
+    "node": "lemma-constructible-flc-serre",
+    "why": "Kernel/cokernel/extension closure on each fixed stratum, the lisse version of the unit common-stratification argument."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Long exact sequences for the explicit column filtration; ordinary homological algebra, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "The equivalence of finite local constancy and a trivialising cover with finite module values permits the explicit covering composition on each stratum."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "The site-perfect covering pulls back to a covering of each fixed stratum; generic etale topology, not a constructibility descent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "The local finite-value trivialising covers compose to one cover on each stratum; generic etale topology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lemma-constructible-of-refines",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-flc-biproduct",
+  "lemma-constructible-flc-serre",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-ccead2404",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-ccead2404 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, ten proof steps, unit/chapter route, every cited DAG statement, and Stacks sources 08J7, 08JB, 03EM/04TT, 0117, 03RX, 03RU, 03RV, 02GO, 01S1, and 0217. The repaired etale coefficient typing, finite-stratum Hom-complex filtration, exact base-change argument, and fixed-partition descent are mathematically sound; hypotheses and edge cases were checked. There are no new nodes, duplicates, circularities, or required fixes. Full review written to review.md."
+ }
 }
