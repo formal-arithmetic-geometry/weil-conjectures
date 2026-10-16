@@ -221,5 +221,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-9b5ae1db4 (reviewer sub-agent of L); spot-checked: Reviewed item, all three proof steps, cited nodes, blueprint route, Stacks sources, Mathlib matches, edge cases, and duplicate/cycle risks. The repaired proof correctly derives qcqs Y and separated finite-type f before applying Nagata over Y. Review written to review.md; no fixes needed."
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-dc-setting"
+ "unit": "sk-def-sfb-dc-setting",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactificationOverBase",
+  "declaration": "AlgebraicGeometry.compactification_over_base",
+  "statement": "theorem compactification_over_base {S X Y : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] [X.Over S] [Y.Over S] (f : X ⟶ Y) [f.IsOver S] [IsSeparated (X ↘ S)] [LocallyOfFiniteType (X ↘ S)] [QuasiCompact (X ↘ S)] [IsSeparated (Y ↘ S)] [QuasiCompact (Y ↘ S)] : Nonempty (Compactification.BoundaryCompactification f)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/CompactificationOverBase.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd9dd5948",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Node statement is verbatim the blueprint source (order 1775). Every Lean clause is exact: CompactSpace/QuasiSeparatedSpace S; Over instances and f.IsOver S; X↘S separated, locally of finite type and quasi-compact; Y↘S separated and quasi-compact; the conclusion Nonempty BoundaryCompactification f is the recorded sk-def-nagata-sketch-data declaration (quasi-compact open immersion, proper map, comm; no density). No extra hypotheses; one universe u. Empty, zero-ring and proper-f cases are covered. The mathematics holds via Nagata over the qcqs Y. Only change to the node is its lean field, whose statement appears verbatim in the file. The theorem's proof is sorry; docstrings give source, blueprint tag and proof steps; Worker report and Second reading by Q87 are present. nt_compile --json: module compiles cleanly (1.4-2.2 s), probe #check/#print/axioms ok. No findings."
+ }
 }
