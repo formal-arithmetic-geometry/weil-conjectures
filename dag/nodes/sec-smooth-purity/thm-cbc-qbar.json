@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-cbc-qbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\Qlb$ compact-support base change",
@@ -15,40 +15,164 @@
  "stmt_deps": [
   "thm-cbc-finite-extension",
   "prop-weil-pbc-descent-functors",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-qbar-category"
  ],
  "proof": [
   {
-   "text": "The scalar-extension compatibilities for the functors $Rf_!$ and\n$Lg^*$ hold: for the direct image factor, scalar extension\ncommutes with $Rp_*$ of the proper $p$ by\n[prop-weil-pbc-scalar-extension], and with $j_!$ by the\nprojection formula [lem-cbc-extension-zero-projection-formula]\n(whose scalar-extension instance is\n$F\\otimes^L_{\\mathcal O_E}j_!K\\cong j_!(F\\otimes^L_{\\mathcal O_E}K)$ for a finite field $F/E$,\nas $j^*$ of the constant coefficient is the restriction);\nhence the family $(Rf_{!,E})_E$ with the exchange\ntransformations descends by\n[prop-weil-pbc-descent-functors], and at every finite stage it\nis an isomorphism by [thm-cbc-finite-extension]. The common\nstage colimit of [def-weil-pbc-qbar-category], triangulated and\nidempotent complete by\n[thm-weil-pbc-idempotent-complete-triangulation], preserves the\nisomorphism, giving the assertion, with the stated independence as\nin [thm-cbc-finite-extension] and [lem-weil-compact-support-finite-field-independence].",
+   "text": "Work at the coefficient stages and on the completed pro-etale/raw rational categories of [thm-cbc-finite-extension]. The hypotheses in the statement are exactly its hypotheses at every stage: the compact-support square and its chosen compactifications, noetherian finite-dimensional schemes with $\\ell$ invertible, separated finite-type $f$, and arbitrary $g$. Write $H_{h,E}=Rh_{!,E}$ and $P_{u,E}=Lu^*_{\\mathrm{comp},E}$. At each finite stage that theorem supplies the actual rational exchange\n$$\\eta_E:U_E=P_{g,E}H_{f,E}\\Rightarrow V_E=H_{f',E}P_{g',E},$$\nwhich is natural in every rational morphism and has invertible components. The $\\Qlb$ category in this argument is exactly the raw pair category of [def-weil-pbc-qbar-category], formed from these same finite-stage categories.",
    "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "lem-cbc-extension-zero-projection-formula",
-    "prop-weil-pbc-descent-functors",
     "thm-cbc-finite-extension",
-    "def-weil-pbc-qbar-category",
-    "thm-weil-pbc-idempotent-complete-triangulation",
-    "lem-weil-compact-support-finite-field-independence"
+    "def-weil-pbc-qbar-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Finite-stage isomorphy and the common-stage category; domain check"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-rational-compact-support-coefficient-coherence] to this square. It gives the exact coherent comparisons $b^f_{M/E}$ and $b^{f'}_{M/E}$ for compact support, and the pullback comparisons $d^g_{M/E},d^{g'}_{M/E}$ used in its statement. In particular the composite comparisons $b^U,b^V$ satisfy\n$$\\eta_{M,T^X_{M/E}K_E}\\,b^U_{M/E,K_E}=b^V_{M/E,K_E}\\,T^{Y'}_{M/E}(\\eta_{E,K_E}).$$\nThis is a comparison of the specified completed-then-rationalized exchange maps, rather than only of their endpoints. The unit, associator and shift equations in that lemma are precisely the coherence required for descent. The missing argument in the source is coefficient coherence for completed coefficient sheaves; its displayed finite-ring projection formula alone does not apply to $\\mathcal O_E$ or $E$.",
+   "uses": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Opening scalar-extension paragraph, with its missing completed-coefficient coherence isolated"
+   }
+  },
+  {
+   "text": "Use [prop-weil-pbc-descent-functors] first for each family $H_{h,E}$ and $P_{u,E}$ with the comparisons of step 2. Its general assertion gives their descended exact functors. Composing them gives descended functors $\\overline U,\\overline V$, whose coefficient comparisons are $b^U,b^V$; these are the two composites in the statement. The compatibility equation in step 2 makes $(\\eta_E)_E$ a compatible natural transformation, so the same proposition descends it to $\\overline\\eta:\\overline U\\Rightarrow\\overline V$. At an object $(E,K_E)$ of [def-weil-pbc-finite-stage-pair-category], its component is $[E,\\eta_{E,K_E}]$. Thus it is the descended exchange specified by the statement, with no identification with a different ambient sheaf or Karoubi category.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Descent of the coherent functors and of the exchange transformation"
+   }
+  },
+  {
+   "text": "By [thm-cbc-finite-extension], $v_E=\\eta_{E,K_E}^{-1}$ exists in $\\mathcal C_E(Y')$. Composition and identity in [def-weil-pbc-finite-stage-pair-category] give\n$$[E,v_E][E,\\eta_{E,K_E}]=[E,v_E\\eta_{E,K_E}]=[E,1],\\qquad [E,\\eta_{E,K_E}][E,v_E]=[E,1].$$\nConsequently $\\overline\\eta_{(E,K_E)}$ is an isomorphism for every object. The inverse equations, rather than any exactness or idempotent-completeness assertion about the colimit, prove invertibility.",
+   "uses": [
+    "thm-cbc-finite-extension",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Passage of the finite-stage inverse to the common-stage category"
+   }
+  },
+  {
+   "text": "For a finite $M\\supset E$, step 2 rewrites as\n$$T^{Y'}_{M/E}(\\eta_{E,K_E})=(b^V_{M/E,K_E})^{-1}\\,\\eta_{M,T^X_{M/E}K_E}\\,b^U_{M/E,K_E}.$$\nThe left side represents the same morphism as $[E,\\eta_{E,K_E}]$ by [def-weil-pbc-finite-stage-pair-category], since both endpoints initially have coefficient field $E$ and $T_{E/E}=1$. The right side says exactly that under the prescribed coefficient identifications of source and target this representative is the $M$-coefficient isomorphism applied to $T_{M/E}K_E$. The associator equation of [lem-cbc-rational-compact-support-coefficient-coherence] makes these identifications consistent under $M\\subset N$. For two nonnested choices, enlarge to their compositum, which is an allowed common stage by the pair-category definition. They then represent the same map, proving independence of $M$.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "The finite-overfield representative and independence of its stage"
+   }
+  },
+  {
+   "text": "It remains to spell out independence of the pair representing the fixed object $K$. Fix representing isomorphisms $\\alpha_E:(E,K_E)\\xrightarrow{\\sim}K$ and $\\alpha_L:(L,K_L)\\xrightarrow{\\sim}K$. The common-stage calculus [prop-weil-pbc-common-stage-calculus] realizes $\\alpha_L^{-1}\\alpha_E$ and its inverse, with their two identity equations, at one finite stage $M$. Thus it is represented there by an isomorphism $u:T^X_{M/E}K_E\\xrightarrow{\\sim}T^X_{M/L}K_L$. The finite-stage naturality in [thm-cbc-finite-extension] is the equation\n$$V_M(u)\\,\\eta_{M,T_{M/E}K_E}=\\eta_{M,T_{M/L}K_L}\\,U_M(u).$$\nPut $w=\\alpha_L^{-1}\\alpha_E$. By the morphism formula of [prop-weil-pbc-descent-functors], $\\overline V(w)$ is represented at $M$ by $(b^V_{M/L})^{-1}V_M(u)b^V_{M/E}$, and $\\overline U(w)$ is represented by $(b^U_{M/L})^{-1}U_M(u)b^U_{M/E}$. Substitute the step-5 formula for each transported exchange component into the two composites $\\overline V(w)\\overline\\eta_{(E,K_E)}$ and $\\overline\\eta_{(L,K_L)}\\overline U(w)$. After cancellation of adjacent comparison inverses, their $M$-representatives are respectively $(b^V_{M/L})^{-1}V_M(u)\\eta_{M,T_{M/E}K_E}b^U_{M/E}$ and $(b^V_{M/L})^{-1}\\eta_{M,T_{M/L}K_L}U_M(u)b^U_{M/E}$. The displayed finite-stage naturality equation identifies them. Therefore in the descended category\n$$\\overline V(\\alpha_L^{-1}\\alpha_E)\\,\\overline\\eta_{(E,K_E)}=\\overline\\eta_{(L,K_L)}\\,\\overline U(\\alpha_L^{-1}\\alpha_E).$$\nThe conjugated maps are exactly the images of the input comparison by the explicit morphism formula of [prop-weil-pbc-descent-functors]. Multiplication by $\\overline V(\\alpha_L)$ on the left and $\\overline U(\\alpha_E)^{-1}$ on the right therefore identifies the two maps to the fixed endpoints for $K$. Changing the morphism representative or enlarging $M$ does not change these classes by the common-stage calculus and descent. This proves independence of $E$ and of the representative, relative to its specified identification with $K$, entirely inside the same raw PBC coefficient categories.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "thm-cbc-finite-extension",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Final independence clause, with representing isomorphisms and naturality written explicitly"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-scalar-extension",
-  "lem-cbc-extension-zero-projection-formula",
-  "prop-weil-pbc-descent-functors",
   "thm-cbc-finite-extension",
   "def-weil-pbc-qbar-category",
-  "thm-weil-pbc-idempotent-complete-triangulation",
-  "lem-weil-compact-support-finite-field-independence"
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "prop-weil-pbc-descent-functors",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-qbar.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+  "place": "Complete proof paragraph, expanded into explicit descent, inverse and representative-independence equations; unsupported finite-ring coefficient substitution corrected"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Qbar compact-support base change exchange isomorphism for separated finite type morphism",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerShriekBaseChangeMap, ModuleCat, IsIso",
+   "results": "0 hits: ; loogle: unknown identifier 'rightDerivedLowerShriekBaseChangeMap'",
+   "date": "2026-10-16",
+   "verdict": "unavailable: query was not parsed; superseded by valid ModuleCat.extendScalars query"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriekBaseChangeMap|compact.?support.*base.?change",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Qbar compact-support base change exchange isomorphism",
+   "results": "8 hits: IsBaseChange.basis_repr_comp, IsBaseChange.basis_apply, IsBaseChange.of_fintype_basis, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, CliffordAlgebra.toBaseChange_ofBaseChange, IsBaseChange.basis, CliffordAlgebra.ofBaseChange_toBaseChange, RingHom.QuasiFinite.isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible natural transformations which are isomorphisms at each finite coefficient stage descend to filtered colimit categories",
+   "results": "8 hits: CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms, CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.compYonedaColimitIsoColimitCompYoneda, CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim, CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.iso, CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; read Mathlib/CategoryTheory/MorphismProperty/Limits.lean:628-646: colimits of arrows inside a fixed category, not the common-stage category construction",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "12 hits: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso; read Mathlib/CategoryTheory/Iso.lean:473: functorial inverse preservation only; this elementary ingredient is written in the item",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|common.stage|scalar.*extension.*exchange",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state coefficient transport for compact-support functors or the specified completed exchange on the raw PBC categories",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support base change for rational adic constructible sheaves over algebraic closure of p-adic numbers",
+   "results": "8 hits: PadicAlgCl, IsBaseChange.finsuppPow, PadicComplex, PadicComplex.instIsScalarTowerPadicPadicAlgCl, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, PadicAlgCl.isAlgebraic, IsBaseChange.finitePow",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module/sheaf scalar functors, condensed constructions, p-adic fields or scheme base-change properties; none states this completed rational compact-support exchange or its common-stage descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of compactly supported derived pushforward and pullback descends from finite l-adic fields to their common-stage pair category",
+   "results": "8 hits: lightProfiniteToLightCondSetIsoTopCatToLightCondSet, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary module/sheaf scalar functors, condensed constructions, p-adic fields or scheme base-change properties; none states this completed rational compact-support exchange or its common-stage descent"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -175,5 +299,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-cbc-qbar",
+  "worker": "stage1",
+  "summary": "Kept the statement and its exact finite-stage hypotheses. Replaced the imported one-paragraph proof by six steps in the raw PBC categories. Isolated one non-elementary coefficient-coherence lemma, rather than apply a finite-ring projection formula at non-torsion coefficients. Proved invertibility by represented inverse equations and representative independence by finite-stage naturality. Removed the irrelevant idempotent-completeness theorem and the finite-base-field/Karoubi-category independence lemma from proof dependencies. No Lean attachment matches the item.",
+  "blueprint": "Current main-20261015 proof paragraph: opening scalar-compatibility argument is isolated in the new coefficient-coherence node and step 2; finite-stage theorem in step 1; descent in step 3; common-stage inverse in step 4; finite-overfield representation in step 5; final independence assertion in step 6. The unit compact-support route, finite reductions then completion/rationalization/common-stage descent, is unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Its general exact-functor and compatible-transformation descent statement is the prescribed common-stage descent tool; no theorem of this unit gives that general construction."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Realizes the fixed representative isomorphism and its inverse at a common field, including both identity equations; this general pair-category calculus is needed for the final independence step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-9342fef0a",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-9342fef0a (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, sources, and unit/chapter route. All six steps check; coefficient coherence is a distinct unsplit prerequisite. Verified map directions, representative independence, edge cases, duplicate candidates, and absence of self-dependency. Accepted both declared descent tools. No target-category identification is assumed. Detailed review written to review.md; no fixes required."
+ }
 }

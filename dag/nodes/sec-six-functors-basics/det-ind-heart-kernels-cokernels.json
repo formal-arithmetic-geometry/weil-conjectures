@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-ind-heart-kernels-cokernels",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kernels and cokernels of ind-constructible sheaves",
@@ -12,49 +12,172 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.md",
   "place": "node det-ind-heart-kernels-cokernels, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "det-ind-heart-full-faithfulness",
+  "det-ind-heart-canonical-presentation",
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "*Filtered.* A finite diagram in $P_f$ is a finite diagram of arrows $v_k\\colon C_k\\to D_k$ with\ncompatible maps to $f$. Its colimit in the arrow category of $\\Cons(X,\\Lambda)$ is computed by finite\ncolimits of the $C_k$ and of the $D_k$, which exist since $\\Cons(X,\\Lambda)$ is abelian (part (1) of\n[sk-lem-coefficient-heart]); the maps to $B$, $B'$ factor through these colimits by their universal\nproperty. So every finite diagram has a cocone, and $P_f$ is filtered.",
+   "text": "Ambient category and size. Write $\\mathcal M=\\Mod(X_{\\mathrm{proét}},\\Lambda)$ and $\\mathcal A=\\Cons(X,\\Lambda)$. Use the small-site/universe convention of [def-weil-size-convention]. The coefficient $\\Lambda_X$ is a commutative ring object by [sk-def-sfb-pulled-back-coefficients], and $\\mathcal M$ means its internal modules [sk-def-sfb-module-objects]. The sheafified tensor and monoidal sheafification are those of [sk-def-sfb-sheaf-tensor]. Thus [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies $\\mathcal M$ with sectionwise module sheaves over the reconstructed ring sheaf, without changing underlying abelian sheaves. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to this ring sheaf on the small site. It gives an abelian category with all small colimits and exact small filtered colimits. These properties transport across the equivalence: limits and colimits are characterized by their Hom universal properties, and kernels, cokernels and exactness are consequently preserved. No discreteness or finiteness of the coefficient ring is assumed here.",
    "uses": [
-    "sk-lem-coefficient-heart"
+    "def-weil-size-convention",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "Final paragraph: exactness of filtered colimits in the ambient module category"
+   }
   },
   {
-   "text": "*Cofinality of $P_f\\to J(B)$.* (i) Every $(C,c)\\in J(B)$ is in the image up to a map: the composite\n$f\\circ c\\colon C\\to B'$ factors through some $(D,d)\\in J(B')$ by finite presentation\n([det-ind-heart-full-faithfulness], [det-ind-heart-canonical-presentation]), giving a square\n$(C\\to D)$. (ii) Two lifts $(C\\xrightarrow{v_1}D_1)$, $(C\\xrightarrow{v_2}D_2)$ of $(C,c)$ are dominated\nby $(C\\to D_1\\oplus D_2)$. (iii) If a map $C_0\\to C$ in $J(B)$ and lifts over $C_0$ and $C$ are given,\nthe two composites $C_0\\to D$ agree after mapping to $B'$; by finite presentation of $C_0$ they agree\nafter composing with some $D\\to D'$ in $J(B')$, which can be chosen as the cokernel of their\ndifference. Explicitly: two choices over $C_0$ are dominated by the square with source\n$C_1\\amalg_{C_0}C_2$ and target the quotient of $D_1\\oplus D_2$ by the two images of $C_0$, and\nparallel choices are dominated by their cokernel. These are the cofinality conditions.",
+   "text": "Smallness and filteredness of $P_f$. By [sk-lem-coefficient-heart], $\\mathcal A$ is essentially small and abelian, and its inclusion into $\\mathcal M$ is exact. Choose representatives in a small skeleton. Objects of $P_f$ are tuples $(C,D,v,c,d)$ with $dv=fc$; morphisms to $(\\widetilde C,\\widetilde D,\\widetilde v,\\widetilde c,\\widetilde d)$ are pairs $(a,b)$ with $\\widetilde v a=bv$, $\\widetilde c a=c$, $\\widetilde d b=d$. All choices of $v,c,d$ are sets, so $P_f$ is essentially small too. It contains $(0,0,0,0,0)$. Two objects map to their componentwise direct sum, with maps to $B,B'$ given by the two pairs of structure maps. For parallel arrows $(a,b),(a',b'):p_1\\rightrightarrows p_2$, let $q_C:C_2\\to\\coker(a-a')$ and $q_D:D_2\\to\\coker(b-b')$. The map $q_Dv_2$ kills $a-a'$ because $v_2(a-a')=(b-b')v_1$, so it induces $\\bar v$ between these cokernels. Also $c_2(a-a')=0$ and $d_2(b-b')=0$, so $c_2,d_2$ descend to $\\bar c,\\bar d$, and $\\bar d\\bar v=f\\bar c$ follows after precomposing the epimorphism $q_C$. Both cokernels are constructible; exactness of the inclusion makes them the ambient cokernels as well. Thus $(q_C,q_D)$ equalizes the parallel arrows in $P_f$. These are exactly the nonemptiness, common-successor and parallel-equalization conditions for filteredness [def-weil-pbc-category-colimit]. All colimits below use the resulting small skeletons.",
    "uses": [
-    "det-ind-heart-full-faithfulness",
-    "det-ind-heart-canonical-presentation"
+    "sk-lem-coefficient-heart",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "First paragraph: finite colimits of squares"
+   }
   },
   {
-   "text": "*Cofinality of $P_f\\to J(B')$.* Every $(D,d)$ is the target of the square $(0\\to D)$; the domination\narguments are the same.",
+   "text": "Source cofinality, directly. Let $S:P_f\\to J(B)$ be the source projection. For $j=(C_0,c_0)$ put $L(j)=(C_0,C_0,1,c_0,fc_0)$. On a morphism $a:j\\to j_1$, define $L(a)=(a,a)$; the equations over $B$ and $B'$ verify that this is a functor. An object of $(j\\downarrow S)$ is $p=(C,D,v,c,d)$ together with $u:C_0\\to C$ satisfying $cu=c_0$. There is a unique morphism from $(L(j),1)$ to it: the pair $(u,vu)$. Its target compatibility is $dvu=fcu=fc_0$, and uniqueness follows from the identity top arrow of $L(j)$. Hence every such comma category has an initial object; any two objects are connected by the two arrows from that object, so it is nonempty and connected. This proves cofinality in its comma-category sense, without a finite-presentation or later-stage equality argument.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "Second paragraph: cofinality of the source projection; explicit identity-square argument replacing choices of lifts"
+   }
   },
   {
-   "text": "*Colimits.* By cofinality and [det-ind-heart-canonical-presentation],\n$\\varinjlim_{P_f}C=\\varinjlim_{J(B)}C=B$ and $\\varinjlim_{P_f}D=B'$, compatibly with $v$ and $f$, so\n$f=\\varinjlim_{P_f}v$. Filtered colimits are exact in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$, hence commute with\nkernels and cokernels. Each $\\ker v$, $\\coker v$ is constructible, so their filtered colimits lie in\n$\\IndCons(X,\\Lambda)$.",
+   "text": "Target cofinality, directly. Let $T:P_f\\to J(B')$ be the target projection. For $j'=(D_0,d_0)$ put $R(j')=(0,D_0,0,0,d_0)$. On a morphism $b:j'\\to j'_1$, define $R(b)=(1_0,b)$; these pairs preserve identities and composition. An object of $(j'\\downarrow T)$ is $p=(C,D,v,c,d)$ together with $u:D_0\\to D$ satisfying $du=d_0$. The pair $(0,u)$ is the unique morphism from $(R(j'),1)$ to that object. Thus this comma category has an initial object and is nonempty; any two objects are connected by the two arrows from that object. This proves target cofinality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "Third paragraph: cofinality of the target projection"
+   }
+  },
+  {
+   "text": "Identify the colimit arrow, including its cocone maps. By [det-ind-heart-canonical-presentation], the tautological diagrams on $J(B)$ and $J(B')$ have colimits $B$ and $B'$. Here is the reindexing argument explicitly, using the universal property [def-weil-pbc-category-colimit]. Restrict a cocone on $p\\mapsto C_p$ to the objects $L(j)$ of Step 3. This is a cocone on $J(B)$, and the morphism $L(S(p))\\to p$ with components $(1,v_p)$ shows that its value at $S(p)$ is the original leg at $p$. Conversely pull back a cocone on $J(B)$ along $S$; these operations are inverse since $SL=1$. Thus the maps $c_p:C_p\\to B$ exhibit $B$ as the source colimit. For targets, let $(\\lambda_p:D_p\\to M)$ be a cocone and set $\\mu_{j'}=\\lambda_{R(j')}$. For $b:j'\\to j'_1$, compatibility with $R(b)$ gives $\\mu_{j'_1}b=\\mu_{j'}$, so this is a cocone on $J(B')$. Conversely a cocone $(\\mu_{j'})$ on $J(B')$ gives $\\lambda_p=\\mu_{T(p)}$. Restricting this along $R$ returns $\\mu$ since $TR=1$. Starting with $\\lambda$, the morphism $R(T(p))\\to p$ with components $(0,1_{D_p})$ gives $\\lambda_{R(T(p))}=\\lambda_p$, so the other composite returns $\\lambda$. Both operations preserve maps of cocones. The universal property of $B'$ therefore exhibits it as the target colimit with legs $d_p$. The equations $d_pv_p=fc_p$ say the induced colimit morphism is exactly $f$, by uniqueness on all legs $c_p$. Equivalently, a cocone of arrows is a pair of component cocones whose vertex arrow commutes with them, so these two universal properties also give $f=\\varinjlim_{P_f}v$ in the arrow category.",
    "uses": [
-    "det-ind-heart-canonical-presentation"
+    "det-ind-heart-canonical-presentation",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "Final paragraph, first sentence: recover both vertices and the arrow from the canonical presentations"
+   }
+  },
+  {
+   "text": "Kernels, cokernels and ind-constructibility. For each $p\\in P_f$, put $K_p=\\ker v_p$, $I_p=\\operatorname{im}v_p$ and $Q_p=\\coker v_p$ in $\\mathcal M$. A commutative square induces maps on all three objects by the kernel, image and cokernel universal properties, giving diagrams of short exact sequences $0\\to K_p\\to C_p\\to I_p\\to0$ and $0\\to I_p\\to D_p\\to Q_p\\to0$. Step 1 applies because the index category is small and filtered by Step 2. Exactness after taking colimits makes $\\varinjlim I_p\\to B'$ monic and $B\\to\\varinjlim I_p$ epic, with composite $f$ by Step 5. Hence the first sequence identifies $\\varinjlim K_p$ with $\\ker f$, and the second identifies $\\varinjlim Q_p$ with $\\coker f$. More explicitly, write $K=\\varinjlim K_p$ and $Q=\\varinjlim Q_p$. The map $K\\to B$ just obtained restricts on $K_p$ to $K_p\\hookrightarrow C_p\\xrightarrow{c_p}B$, and it is a kernel of $f$; its unique isomorphism to $\\ker f$ is therefore the canonical kernel comparison. If $q:B'\\to Q$ is the cokernel just obtained and $\\rho_p:Q_p\\to Q$ its colimit legs, then $q d_p=\\rho_p(D_p\\twoheadrightarrow Q_p)$. Thus the isomorphism $Q\\to\\coker f$ restricts on $Q_p$ to the unique map whose composite with $D_p\\twoheadrightarrow Q_p$ is $D_p\\xrightarrow{d_p}B'\\twoheadrightarrow\\coker f$; it is the canonical cokernel comparison. By [sk-lem-coefficient-heart], each $K_p,Q_p$ is constructible and the constructible and ambient kernels/cokernels coincide. Both displayed colimits are therefore filtered colimits of constructible sheaves. They belong to $\\IndCons(X,\\Lambda)$ by its definition, as recorded in [det-ind-heart-full-faithfulness](2).",
+   "uses": [
+    "sk-lem-coefficient-heart",
+    "det-ind-heart-full-faithfulness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+    "place": "Final paragraph: commute the filtered colimit with kernels/cokernels and apply the definition of ind-constructibility"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
   "sk-lem-coefficient-heart",
-  "det-ind-heart-full-faithfulness",
-  "det-ind-heart-canonical-presentation"
+  "def-weil-pbc-category-colimit",
+  "det-ind-heart-canonical-presentation",
+  "det-ind-heart-full-faithfulness"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.proof.md",
+  "place": "All four proof paragraphs, with initial comma objects replacing the lift-choice argument and explicit ambient exactness citations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between filtered colimits of finitely presented objects in an abelian category is a filtered colimit of morphisms between finitely presented objects, with kernels and cokernels computed by filtered colimits",
+   "results": "8 hits: preservesFilteredColimits_coyoneda, CommRingCat.preservesFilteredColimits_coyoneda, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit, preservesColimit_coyoneda_of_finitePresentation, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable. No match: finite-presentation factorization/equality results and ring analogues, not the whole statement with the specified square category and two cofinal projections.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ind",
+   "results": "12 hits: CategoryTheory.Ind, CategoryTheory.instCategoryInd, CategoryTheory.instHasFilteredColimitsInd, CategoryTheory.Ind.yoneda, CategoryTheory.instHasColimitsIndOfHasFiniteColimits, CategoryTheory.instHasCoproductsIndOfHasFiniteCoproducts, CategoryTheory.instHasFiniteLimitsInd, CategoryTheory.instHasLimitsInd. No match: definitions and structural instances for formal Ind categories, not the specified ambient realization and square category.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(kernel|cokernel)|ind.*abelian|indization.*exact",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean. No match: generic kernel/cokernel constructions and abelian Ind category; read Abelian/Indization.lean and Limits/Indization/Category.lean.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernels and cokernels of ind constructible sheaves filtered colimits",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Limits.isIndObject_colimit, CategoryTheory.Ind.lim, CategoryTheory.Abelian.isColimitMapCoconeOfCokernelCoforkOfπ, CategoryTheory.Limits.IndObjectPresentation.mk, CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits, CategoryTheory.Limits.IndObjectPresentation.ofCocone. No match: generic Ind presentation and exactness results; none states the two projection cofinalities for this P_f.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism of ind objects can be presented as a filtered colimit of arrows in the original category",
+   "results": "8 hits: CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered, CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall, CategoryTheory.Ind.presentation, CategoryTheory.Limits.isIndObject_iff, CategoryTheory.Limits.IsIndObject.isFiltered, CategoryTheory.Limits.IndObjectPresentation.hI, CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim, CategoryTheory.Limits.IsIndObject.mk. No match for the whole item: CategoryTheory.Ind.exists_nonempty_arrow_mk_iso_ind_lim gives existence of some filtered arrow presentation only. Read CategoryTheory/Limits/Indization/Category.lean:289-302; it does not identify P_f or prove the required projection cofinalities.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Arrow|arrow|Morphism|morphism",
+   "results": "21 hits: Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean, Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean, Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean, Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean, Mathlib/CategoryTheory/Limits/Indization/ParallelPair.lean, Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean, Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean, Mathlib/CategoryTheory/Limits/Indization/FilteredColimits.lean. No match for the whole item: read CategoryTheory/Limits/Indization/Category.lean:289-302 and the category file introductory structural results. The arrow-presentation theorem supplies only part of the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comma category of arrows between finitely presentable objects over a fixed arrow is filtered and the domain and codomain projections are final",
+   "results": "8 hits: Comma.isFiltered_of_final, isFiltered_of_isFiltered_costructuredArrow, IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι, Comma.final_snd, IsCardinalAccessibleCategory.final_toCostructuredArrow, Limits.isFiltered_costructuredArrow_yoneda_of_preservesFiniteLimits, RepresentablyCoflat.filtered, Under.final_forget. Read Mathlib/CategoryTheory/Comma/Final.lean:42-190. These are general comma-category results, not the specified square category together with the ambient kernel/cokernel formulas.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.final_of_adjunction",
+   "results": "1 hit: CategoryTheory.Functor.final_of_adjunction. Read Mathlib/CategoryTheory/Limits/Final.lean:93-141, especially lines 130-141. It asserts finality of a right adjoint given an adjunction; it does not state filteredness of P_f, its presentation of f, or its kernel/cokernel formulas.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "final.*[Aa]dj|[Aa]dj.*final|filtered.*[Aa]rrow|[Aa]rrow.*filtered",
+   "results": "25 hits, beginning with ObjectProperty/Ind.lean:93,95,96 and including Limits/Final.lean:130. Read the finality definition and adjunction theorem in Limits/Final.lean:93-141 and the comma-category statements in Comma/Final.lean:42-190. General finality, filtered comma and presentability results; no whole-item specialization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -69,5 +192,29 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-ind-heart"
+ "unit": "sk-prop-ind-heart",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-ind-heart-kernels-cokernels",
+  "worker": "stage1",
+  "summary": "Kept the statement and replaced the incomplete cofinality argument by explicit initial objects (identity squares and zero-source squares). Proved filteredness by sums and component cokernels, justified essential smallness, reconstructed the colimit arrow by inverse operations on cocones, and cited the internal/sectionwise-module equivalence plus general ring-sheaf Grothendieck exactness for the kernel/cokernel calculation. No new nodes.",
+  "blueprint": "Realizes sk-prop-ind-heart unit step 5 and all four paragraphs of det-ind-heart-kernels-cokernels.proof.md: filtered squares; both cofinal projections; arrow colimit; kernel/cokernel closure. The identity-square source lift replaces the unsupported direct-sum lift assertion inside the same route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Supplies exact small filtered colimits and ambient abelianness for arbitrary ring sheaves, after the internal-module equivalence. The unit only asserts this ambient fact in prose; no node of sk-prop-ind-heart states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-b70cfcb76",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-b70cfcb76 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited DAG statements, blueprint proof, and literature sources. The repaired identity-square and zero-source cofinality arguments are valid; filteredness, colimit, kernel/cokernel, coefficient, size, and edge-case checks pass. No new nodes, duplicates, weakened hypotheses, circularity, or route violations found. Review written to review.md."
+ }
 }
