@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-classical-sheaves-unit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The comparison unit is an isomorphism",
@@ -17,29 +17,102 @@
  ],
  "proof": [
   {
-   "text": "Let $V\\to X$ be étale. Then $V$ is an object of both sites, and\n$(\\nu_{X,*}\\nu_X^*F)(V)=(\\nu_X^*F)(V)$ since $\\nu_{X,*}$ is restriction to the\nétale subsite. By the formula of [sk-prop-pe-comparison-morphism] with $h$\nétale, $(\\nu_X^*F)(V)=\\Gamma(V_{\\Et},h_{\\Et}^*F)=F(V)$, because the étale inverse\nimage along an étale map is restriction to the slice. Under this identification\nthe unit $\\eta_F(V)$ is the identity of $F(V)$: the unit is the map\n$F\\to\\nu_{X,*}\\nu_X^*F$ adjoint to the identity of $\\nu_X^*F$, and in the explicit\nadjunction of [lem-weil-pbc-comparison-sections] it sends a section on an étale\nobject to the same section regarded as a section of $\\nu_X^*F$. (When $V$ is\naffine this is the presentation of $V$ by the constant system; the general case\nfollows by gluing over an affine open cover of $V$.) Hence $\\eta_F$ is bijective\non every étale $V$, so it is an isomorphism of sheaves.",
+   "text": "Fix a sheaf of sets $F$ on $X_{\\Et}$ and an arbitrary etale object $h:V\\to X$. By [def-weil-pbc-site-comparison-morphism], $(\\nu_{X,*}\\nu_X^*F)(V)=(\\nu_X^*F)(V)$. Apply [lem-cbc-comparison-pullback-sections] to this object: its section isomorphism identifies this set with $\\Gamma(V_{\\Et},h_{\\Et}^{-1}F)$, and, importantly, its last sentence identifies the actual comparison unit with the usual identification on etale objects. By [lem-weil-pbc-sets-etale-inverse-image-restriction], $h_{\\Et}^{-1}F$ identifies with $F|_V$, whose value at the identity object is $F(V)$. Thus the composite $F(V)\\xrightarrow{\\eta_F(V)}(\\nu_X^*F)(V)\\xrightarrow{\\sim}\\Gamma(V_{\\Et},h_{\\Et}^{-1}F)\\xrightarrow{\\sim}F(V)$ sends every $s$ to $s$. All three nodes concern sheaves of sets; no abelian-category or coefficient-ring assumption is imposed. In particular $\\eta_F(V)$ is bijective.",
    "uses": [
-    "lem-weil-pbc-comparison-sections"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-cbc-comparison-pullback-sections",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness"
+   }
   },
   {
-   "text": "For full faithfulness, the adjunction gives a bijection\n$\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$, and the composite\n$\\Hom(F,F')\\to\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$ is\n$\\varphi\\mapsto\\eta_{F'}\\circ\\varphi$. Since $\\eta_{F'}$ is an isomorphism, this\ncomposite is bijective, hence so is $\\varphi\\mapsto\\nu_X^*\\varphi$.",
+   "text": "For every etale object $V$, let $b_V$ be the inverse bijection of $\\eta_F(V)$ obtained in step 1. For an arrow $a:W\\to V$, naturality of $\\eta_F$ gives $(\\nu_*\\nu^*F)(a)\\eta_F(V)=\\eta_F(W)F(a)$. Multiply on the left by $b_W$ and on the right by $b_V$ to obtain $b_W(\\nu_*\\nu^*F)(a)=F(a)b_V$. The $b_V$ therefore define a morphism of sheaves inverse to $\\eta_F$, with both inverse identities checked on every object. This proves that the unit is an isomorphism for arbitrary $X$, including the empty scheme.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness"
+   }
+  },
+  {
+   "text": "The adjunction $\\nu_X^*\\dashv\\nu_{X,*}$ of [def-weil-pbc-site-comparison-morphism] sends a morphism $\\psi:\\nu_X^*F\\to\\nu_X^*F'$ to $\\nu_{X,*}(\\psi)\\circ\\eta_F$ and is a bijection $\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$. For $\\psi=\\nu_X^*\\varphi$, naturality of the unit gives $\\nu_{X,*}\\nu_X^*(\\varphi)\\circ\\eta_F=\\eta_{F'}\\circ\\varphi$. Postcomposition with the isomorphism $\\eta_{F'}$ is a bijection, with inverse postcomposition with $\\eta_{F'}^{-1}$. Hence the comparison map on Hom sets, whose composite with the adjunction bijection is this postcomposition map, is itself bijective. Explicitly its inverse sends $\\psi$ to $\\eta_{F'}^{-1}\\circ\\nu_{X,*}(\\psi)\\circ\\eta_F$.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-sections"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-unit.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|comparisonAdjunction",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proetale etale comparison pullback fully faithful on sheaves of sets",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.fullyFaithfulSheafCompose, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, CategoryTheory.GrothendieckTopology.yonedaFullyFaithful, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.Limits.pullbackComparison",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Functor.FullyFaithful",
+   "results": "4 hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit from an etale sheaf of sets to the direct image of its proetale inverse image is an isomorphism",
+   "results": "8 hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CategoryTheory.Equivalence.sheafCongr.unitIso, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, CategoryTheory.Equivalence.sheafCongr.counitIso, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "grep",
+   "query": "toProEt|comparisonUpperStar|smallEtale.*[Pp]ro|[Pp]ro.*smallEtale",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly etale morphism Y to X and an etale sheaf F, proetale inverse image sections on Y equal global sections of the scheme inverse image on the etale site of Y",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image from the small etale topos to the small proetale topos is fully faithful and its adjunction unit is invertible",
+   "results": "8 hits: CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful, CategoryTheory.Adjunction.unitSplitEpiOfLFull, CategoryTheory.Adjunction.unit_isSplitEpi_of_L_full, CategoryTheory.Equivalence.fullyFaithfulInverse, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit, CategoryTheory.Equivalence.fullyFaithfulFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic site, adjunction, condensed, etale-forgetful and scheme results do not prove the set-valued etale/proetale comparison unit; the formal unit/full-faithfulness theorem is only the final categorical implication"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -53,5 +126,34 @@
   "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-sheaves-unit",
+  "worker": "stage1",
+  "summary": "Kept the statement. Replaced the affine-only comparison-sections citation and the missing imported comparison-morphism citation by the existing global set-valued section formula, including its canonical-unit normalization, and the set-valued etale restriction theorem. Wrote the sectionwise inverse and adjunction Hom calculation explicitly. No new nodes, no Lean writes or compilation.",
+  "blueprint": "Steps 1 and 2 realize paragraph 1 of sk-thm-pe-classical-sheaves-unit.proof.md (evaluate on etale objects and identify the unit); step 3 realizes paragraph 2 (adjunction gives full faithfulness). This is the route of the classical-sheaves unit through the comparison morphism, using the existing 0GLZ tool for the formula.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-comparison-pullback-sections",
+    "why": "Generic set-valued comparison inverse-image section formula and normalization of its unit, exactly the formula invoked in the blueprint via sk-prop-pe-comparison-morphism; this is a tool supplying that formula, not a change of route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic set-valued etale localization theorem identifying inverse image along an etale map with restriction, used for the blueprint evaluation at an etale object."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-comparison-pullback-sections",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q57-b48a0e2f2",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-b48a0e2f2 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, route, cited nodes, and sources. Verified all three proof steps, hypotheses, set-valued coefficients, unit normalization, full-faithfulness calculation, edge cases, searches, and route compliance. No new nodes or repairs required. Review written to review.md."
+ }
 }
