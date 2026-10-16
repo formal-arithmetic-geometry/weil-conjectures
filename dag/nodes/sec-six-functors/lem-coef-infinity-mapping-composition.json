@@ -272,5 +272,34 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-83f894eb8 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, plus the full statements of all six cited nodes, the unit route and the parent that uses the item. There are no new nodes, no cycle, every cited id exists and is unmerged, and proof_deps equals the union of the step uses. I wrote no fixes. Step 1: V(a,b,d) is exactly the spine node's fiber H_D(a,b,d) under def-cbc's Fun, and U is H_D(x,y). Step 2: lifting against boundaries plus the monomorphism cell filtration gives lifting against all monomorphisms. That gives V Kan, a section s with ps=1, and a cylinder sp~1; I checked that the square commutes, and the argument covers an empty target. Step 3: c=K C (J x J) satisfies the stated characterization and is unique. Homotopy is an equivalence relation because Fun(A,Z) is Kan (kan-mapping-homotopy-invariance with u=id). Step 4: I expanded both bracketings of associativity by conjugation and both unit equations; they reduce to the spine clauses, using that the degree-0 pinch map is the identity on edges. Component dependence follows from the cylinder c(z,q(t)), and the identification of components is the stated clause of realization-serre. Step 5: [v][u]=[w] holds on components. I rechecked the right-pinched degree-1 face convention: an edge id_x to w in M(x,x) is a triangle (id,w,id). The inner horn Lambda^3_1 on (x,x,y,x) with faces 123=(f,g,w), 013=(id,w,id), 012=s0 f has matching shared edges, and its filler's face 023 is (f,g,id_x). This gives both inverse triangles with the same v. Small cases (empty, the point, ordinary-category nerves, N([1]), groupoid nerves) are all consistent with the statement. I accept the declared tool_uses lem-cbc-simplicial-composition-spine and lem-cbc-kan-mapping-homotopy-invariance: they are generic foundations from sk-prop-sf-cbc, which is off the biduality route, and the unit has no replacement. The rg duplicate search found no existing node with this statement, and the spine node is more general and in the arrow model. The Kerodon sources are not archived; WANTED is recorded and proof_origin is agent. I verified the mathematics directly. No SGA is cited and no target is weakened."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityMappingComposition",
+  "declaration": "SSet.Enhanced.mapping_composition",
+  "declarations": [
+   "SSet.Enhanced.triangleVertices",
+   "SSet.Enhanced.triangleEndpointMap",
+   "SSet.Enhanced.triangleFiber",
+   "SSet.Enhanced.triangleEdgePair",
+   "SSet.Enhanced.triangleLongEdge",
+   "SSet.Enhanced.ComponentCategoryData",
+   "SSet.Enhanced.MappingCompositionStatement",
+   "SSet.Enhanced.mapping_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityMappingComposition.lean",
+  "statement": "theorem mapping_composition (D : SSet.{u}) [Quasicategory D] : MappingCompositionStatement D",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical pinch family is fixed by its dependency prism formula; both triangle restrictions are fixed after their inclusions. The composition homotopy is in the arrow mapping space itself. The package gives explicit associativity, identity homotopies, the category laws on Mathlib π₀, triangle composition, component representatives, invertibility iff the recorded inverse-triangle predicate, and component dependence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29c7f4025",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, both stmt deps (EnhancedDiagramsCones, RightPinchComparison Lean in full), module, report, Mathlib Homotopy/PiZero/const. Every clause matches: j fixed degreewise by the dependency prism formula (inclusion mono, so unique; not arbitrary); V = pullback fixing all three vertex factors; θ = pre δ0, pre δ2 (edges 12,01 in order), ℓ = pre δ1; V Kan; θ has two-sided homotopy inverse r; characterization c≫j ~ (j⊗j)≫r≫ℓ pins the class, later clauses homotopy-invariant; associativity with α.inv on correct bracketing; units at σ0 vertices (non-vacuous); ComponentCategoryData is a real structure with id/comp/unit/assoc laws and comp = π0 of c; triangle rule uses correct faces; invertibility ↔ IsEquivalenceEdge (unfolded, boundary triples (u,v,id_a),(v,u,id_b)); pre/postcomposition component dependence. Edge cases (empty D, empty fibers, point, repeated vertices, nerves, N[1], groupoids) fine; single universe u, no extra hypotheses. Gates: no hollow defs, single sorry, docstrings with source and blueprint, lean.statement verbatim, 8 declarations present, node differs only in lean, imports correct, no duplicates by rg, both report sections present. nt_compile.py on snapshot module: rc 0, no errors or warnings (error-injection probe confirms errors surface; axioms show only the item's sorryAx). Only cosmetic: Kerodon numbers garbled in report prose."
  }
 }

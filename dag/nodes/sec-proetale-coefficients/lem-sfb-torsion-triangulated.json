@@ -52,12 +52,18 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-rationalization",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization",
+  "declaration": "CategoryTheory.Rationalization.instIsTriangulatedTorsion",
   "declarations": [
    "CategoryTheory.Rationalization.instIsTriangulatedTorsion",
    "CategoryTheory.Rationalization.smul_id_obj₂_eq_zero"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 18:34 UTC for group NP, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The instance gives zero containment, shift stability, and triangle closure with product in M; the lemma gives the midd"
+  "statement": "instance instIsTriangulatedTorsion : (torsion M C).IsTriangulated where",
+  "branch": "slopmaster2",
+  "by": "Q88",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The upstream instance exactly states that the M-torsion object property is a triangulated subcategory: it contains zero, is stable under all integer shifts, and is closed under distinguished triangles, with the product witness supplied by M.mul_mem. The companion declaration smul_id_obj₂_eq_zero gives the middle-object annihilation clause. Source: WeilConjectures/CategoryTheory/DerivedCategory/Complete/Rationalization.lean."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -87,5 +93,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47e91242a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the lean record of the node changed (module, declaration, verbatim statement 'instance instIsTriangulatedTorsion : (torsion M C).IsTriangulated where', existing:true, declarations incl. smul_id_obj₂_eq_zero), plus a report with real Worker report and Second reading by Q88 sections. The upstream Rationalization.lean (identical in slopmaster2, side and newtargets) has exactly the node's hypotheses (CommRing R, Submonoid M, Preadditive, Linear R C, HasZeroObject, HasShift ℤ, additive and R-linear shifts, Pretriangulated) and gives ContainsZero, IsStableUnderShift ℤ and triangle closure with witness m₁*m₃ via M.mul_mem. The dependency torsion is the landed def-sfb-torsion-objects declaration. Statement equals the source text verbatim; no extra assumptions; universes w,u,v independent; edge cases (zero object, 0∈M, M=⊥, n=0) covered. nt_compile.py compiled the module through the side overlay and lcompile.py compiled a check file with #check, #print axioms (standard axioms, no sorry) and examples for every clause. Informational only: lean_audit keeps a stale module path (a maintainer field)."
  }
 }
