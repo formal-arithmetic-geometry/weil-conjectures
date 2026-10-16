@@ -56,12 +56,18 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Compactification.Noetherian",
+  "declaration": "AlgebraicGeometry.nagataCompactification_of_isNoetherian",
   "declarations": [
    "AlgebraicGeometry.nagataCompactification_of_isNoetherian",
    "AlgebraicGeometry.Compactification.quasiCompact_openImmersion"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:04 UTC for group Q38, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: the first gives a proper/open-immersion factorization of f under exactly the node’s Noetherian, separated"
+  "statement": "theorem nagataCompactification_of_isNoetherian [IsNoetherian S] (f : X ⟶ S) [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f] : HasCompactification f",
+  "branch": "slopmaster2",
+  "by": "Q63",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing theorem: IsNoetherian S and IsSeparated f, with finite type expressed as LocallyOfFiniteType f and QuasiCompact f, imply HasCompactification f. Compactification.quasiCompact_openImmersion supplies quasi-compactness of the open immersion for every such compactification, since f is quasi-compact. Both declarations and the compactification definition were read; the theorem source was also confirmed with scompile.py --source."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -93,5 +99,13 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-thm-nagata-sketch-noetherian"
+ "unit": "sk-thm-nagata-sketch-noetherian",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a3eccf2f",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the node's lean field and the report changed, and the report has real Worker report and Second reading by Q63 sections. AlgebraicGeometry.nagataCompactification_of_isNoetherian matches the node clause by clause: IsNoetherian S, IsSeparated f, and LocallyOfFiniteType f with QuasiCompact f (Mathlib's finite type) imply HasCompactification f, which is Nonempty of a proper g and open immersion i with f = i ≫ g. Compactification.quasiCompact_openImmersion supplies the chapter's quasi-compact open immersion convention. The record is complete and its statement is verbatim at the delivery head and in the live source (line 249). No other node binds the declaration and there is no repair note. Edge cases (empty X or S, no extra assumptions, one universe u) are fine. nt_compile.py rejected the probe because it is outside the side lean tree; the lcompile.py probe with #check and #print axioms exited 0 with only propext, Classical.choice and Quot.sound, so both declarations are sorry-free. No findings."
+ }
 }
