@@ -114,12 +114,40 @@ noncomputable def upperStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g'
     (g)^*[A] ≅ (g')^*[A] :=
   eqToIso (by rw [h])
 
+/-- The component of the square comparison, with its source and target specified. -/
+noncomputable def upperStarCompIsoHom {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
+    {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d)
+    (M : Sheaf (ProEt.topology T) A) :
+    (a)^*[A].obj ((b)^*[A].obj M) ⟶ (c)^*[A].obj ((d)^*[A].obj M) :=
+  ((upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d).hom.app M
+
+/-- The inverse component of the square comparison. -/
+noncomputable def upperStarCompIsoInv {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
+    {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d)
+    (M : Sheaf (ProEt.topology T) A) :
+    (c)^*[A].obj ((d)^*[A].obj M) ⟶ (a)^*[A].obj ((b)^*[A].obj M) :=
+  ((upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d).inv.app M
+
 /-- The pullbacks along the two sides of a commutative square `a ≫ b = c ≫ d` agree:
 `a^* ∘ b^* ≅ (a ≫ b)^* = (c ≫ d)^* ≅ c^* ∘ d^*`. -/
 noncomputable def upperStarCompIso {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
     {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d) :
     (b)^*[A] ⋙ (a)^*[A] ≅ (d)^*[A] ⋙ (c)^*[A] :=
-  (upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d
+  let e := (upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d
+  NatIso.ofComponents (fun M ↦
+    { hom := upperStarCompIsoHom A h M
+      inv := upperStarCompIsoInv A h M
+      hom_inv_id := e.hom_inv_id_app M
+      inv_hom_id := e.inv_hom_id_app M })
+    (fun k ↦ e.hom.naturality k)
+
+/-- The component presentation is the original composition of inverse-image comparisons. -/
+theorem upperStarCompIso_eq_composite {Y Z₁ Z₂ T : Scheme.{u}}
+    {a : Y ⟶ Z₁} {b : Z₁ ⟶ T} {c : Y ⟶ Z₂} {d : Z₂ ⟶ T}
+    (h : a ≫ b = c ≫ d) :
+    upperStarCompIso A h =
+      (upperStarComp A a b).symm ≪≫ upperStarCongr A h ≪≫ upperStarComp A c d := by
+  rfl
 
 variable {X Y : Scheme.{u}}
 

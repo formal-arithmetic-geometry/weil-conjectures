@@ -20,19 +20,22 @@
    "elementary": false
   },
   {
-   "text": "Construct the extended model by scalar extension, the tensor map by extendScalarsComp and extendScalarsIsoOfEq, and q by homEquiv followed by mapModComapIso inverse. Tensor transitivity preserves the supplied isomorphism. The unit formula expresses q as a monic unit followed by isomorphisms. Applying the inverse homEquiv recovers the tensor map.",
-   "uses": [],
-   "elementary": true
+   "text": "Construct the extended model and tensor-transitivity map as before. Define the local adjunct underlying map explicitly as the mixed-scalar comparison followed by the original map. The scalar-unit identities and uniqueness of scalar adjunction prove equality to the previous canonical adjunct, hence linearity. Package the module map from that named linearity theorem. Rewrite the existing monomorphism and scalar-adjunction arguments using the equality to the canonical adjunct. The scalar_unit and mixedScalarMap_unit identities are stated once here and imported by the overlap transpose proof.",
+   "uses": [
+    "def-weil-pbc-condensed-coefficient-complex-diagram"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-condensed-coefficient-complex-diagram",
   "lem-weil-pbc-condensed-coefficient-derived-faithful"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
   "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
-  "note": "C1 explicit Lean proof/API construction; the only remaining hole is reported by declaration name."
+  "note": "C1 explicit underlying-map representation, with proved equality to the original canonical scalar adjunct; no holes."
  },
  "mathlib_searches": [
   {
@@ -103,7 +106,13 @@
    "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint",
    "AlgebraicGeometry.ProEtale.isIso_finiteCoefficientLocalTensorMap",
    "AlgebraicGeometry.ProEtale.mono_finiteCoefficientLocalAdjoint",
-   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_scalarAdjoint"
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_scalarAdjoint",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalScalarTriangle",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjointHom",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjointHom_linear",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalAdjoint_eq_canonical",
+   "AlgebraicGeometry.ProEtale.scalar_unit",
+   "AlgebraicGeometry.ProEtale.mixedScalarMap_unit"
   ]
  },
  "reviewed": {
@@ -122,7 +131,7 @@
   "reviewer": "COMPILER",
   "group": "C1",
   "result": "pass",
-  "landing": "20261016T143640-L-3698335",
+  "landing": "20261016T221557-L-1611538",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

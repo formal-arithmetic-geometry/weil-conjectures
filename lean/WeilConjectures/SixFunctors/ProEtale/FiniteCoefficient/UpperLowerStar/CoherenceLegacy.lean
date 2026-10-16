@@ -169,6 +169,7 @@ lemma upperStarCompIso_eq_upperStarFactor {Z₁ Z₂ : Scheme.{u}} {a : P ⟶ Z�
     {c : P ⟶ Z₂} {d : Z₂ ⟶ Y} (h : a ≫ b = c ≫ d) {k : P ⟶ Y} (e₁ : a ≫ b = k)
     (e₂ : c ≫ d = k) :
     upperStarCompIso A h = (upperStarFactor A e₁).symm ≪≫ upperStarFactor A e₂ := by
+  rw [upperStarCompIso_eq_composite]
   subst e₁
   rw [upperStarFactor_rfl]
   rfl

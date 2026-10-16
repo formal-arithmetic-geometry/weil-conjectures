@@ -12,37 +12,49 @@
  ],
  "proof": [
   {
-   "text": "On each pairwise pullback, inverse image preserves a finite free cokernel presentation: it is a left adjoint, preserves finite biproducts, and maps the regular module to the regular pulled-ring module. Scalar transport along a ring isomorphism preserves the presentation as well. Pull the supplied isomorphisms and identify both coefficient systems with the canonical coefficients by the monoidal composition comparisons of the coefficient-module convention.",
+   "text": "Keep the actual pulled coefficient rings. Scalar-extension coequalizers commute with their colimit: apply the coequalizer-colimit lemma to the ring colimit transported by upperStar f and upperStar g. This gives rawScalarCocone_isColimit.",
    "uses": [
-    "def-weil-pbc-condensed-e-module-category"
+    "lem-weil-pbc-condensed-coefficient-complex-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the pulled coefficient rings to canonical coefficient rings on each pullback by upperStarFromPointComp. Apply the proved finite-family coefficient Hom stage theorem to all pairs and both directions. This gives one finite common stage. Transport the descended maps back.",
+   "text": "Extend the cocone point by the given Omega-extension isomorphism and mapModComapIso. Its legs are exactly the specified finiteCoefficientLocalAdjoint, by the scalar unit identities. Pull back the cocone to an overlap and restrict along the monoidal E-ring comparison, which is an equivalence. The source is finitely presented by fp_pullback.",
    "uses": [
-    "lem-weil-pbc-condensed-coefficient-family-hom-stage"
+    "def-weil-pbc-condensed-local-coefficient-adjoints",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-profinite-point-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Write u_i and u_j for the pulled Omega-extension isomorphisms into the common module V, and b_ij for the finite-stage factor of the E-to-Omega adjoint of u_i followed by u_j inverse. Define s_ij as the E-to-F adjunct of b_ij. By the adjunction unit and tensor transitivity, the E-to-F transpose of s_ij followed by q_j is b_ij followed by mixedScalarMap followed by Res(u_j). The factorization equation reduces this to the transpose of u_i, which is also the transpose of q_i. Injectivity of homEquiv gives the required equality. Repeat in the reverse direction; transporting back introduces the forward upperStarCompIso and its inverse, respectively.",
+   "text": "Index all ordered pairs and both directions by I times I times Bool. Apply condensed_fp_hom_stage to each pulled source and the constructed cocone, and take one common upper object in the filtered coefficient category. This also handles the empty family.",
    "uses": [
-    "def-weil-pbc-condensed-local-coefficient-adjoints"
+    "lem-weil-pbc-condensed-fp-hom-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fixed-field overlap factor transposition to each factor. The two Boolean cases provide the forward and reverse maps. The comparison for the reversed square is the inverse of the original comparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-overlap-factor-transpose"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-condensed-e-module-category",
-  "lem-weil-pbc-condensed-coefficient-family-hom-stage",
-  "def-weil-pbc-condensed-local-coefficient-adjoints"
+  "lem-weil-pbc-condensed-coefficient-complex-colimit",
+  "def-weil-pbc-condensed-local-coefficient-adjoints",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-fp-hom-stage",
+  "lem-weil-pbc-condensed-overlap-factor-transpose"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
   "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
-  "note": "C1 second reading: canonical finite-family Hom factorization is proved; the only hole is the specified pullback/scalar-adjunction transport. Its docstring gives the adjunct calculation. Removed two citations whose main statements concerned bounded constructibility rather than this global finite-presentation transport."
+  "note": "Use the actual pulled coefficient rings and their colimit instead of normalizing all coefficients on overlaps. Prove the common-stage construction directly from generic fp Hom continuity. Isolate only the fixed-field transposition calculation."
  },
  "mathlib_searches": [
   {
@@ -124,7 +136,7 @@
   "reviewer": "COMPILER",
   "group": "C1",
   "result": "pass",
-  "landing": "20261016T143640-L-3698335",
+  "landing": "20261016T221557-L-1611538",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
