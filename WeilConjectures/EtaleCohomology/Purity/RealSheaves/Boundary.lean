@@ -357,8 +357,8 @@ these regular schemes, which are finite
 are not needed for this. -/
 theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
     (p : C ⟶ Spec (.of K)) [IsCurve p] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (hs : IsClosed {s})
-    (hsj : s ∉ Set.range j.base) :
+    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (_hs : IsClosed {s})
+    (_hsj : s ∉ Set.range j.base) :
     Scheme.IsFiniteLocallyConstantSheaf
       ((C.fromSpecResidueField s)^*[ModuleCat.{u + 1} Λ].obj
         ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F)) := by
@@ -438,6 +438,7 @@ private theorem isConstructibleSheaf_lowerStar_of_upperStar (p : C ⟶ Spec (.of
     have hx := ((Finite.equivFin ↥(Set.range j.base)ᶜ).symm i).2
     exact h _ (hcl _ hx) hx
 
+omit [Finite K] in
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
 Also `lem-wf-dense-open-pi1-surjective`, part (5).
 
