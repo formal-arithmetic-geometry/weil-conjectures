@@ -7,11 +7,11 @@
    "place": "step 5 of its split (source: ## Proof, third paragraph ('(3) also directly implies (2)'); stated without proof in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157 (Bourbaki's Exercise 3(d)))",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A linear recurrence bounds the shift span",
- "statement": "Let $K$ be a field [def-weil-field], $m\\geq0$, $d\\geq1$ integers, $a_0,\\ldots,a_{d-1}\\in K$, and $(c_n)_{n\\geq0}$ a sequence in $K$ satisfying the linear recurrence of order $d$ with coefficients $a_0,\\ldots,a_{d-1}$ from the index $m$ on [def-weil-eventual-linear-recurrence]. For $j\\geq0$ let $R_j=(c_{j+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$. Then every $R_j$ lies in the $K$-linear span of $R_0,\\ldots,R_{m+d-1}$. Consequently the subspace $V\\subseteq K^{\\mathbf Z_{\\geq0}}$ [def-weil-sequence-subspace] spanned by all $R_j$ is finite-dimensional [def-weil-finite-dimensional-subspace] with $\\dim_KV\\leq m+d$ [def-weil-vector-space-dimension].",
+ "statement": "Let $K$ be a field [def-weil-field], $m\\geq0$, $d\\geq1$ integers, $a_0,\\ldots,a_{d-1}\\in K$, and $(c_n)_{n\\geq0}$ a sequence in $K$ satisfying the linear recurrence of order $d$ with coefficients $a_0,\\ldots,a_{d-1}$ from the index $m$ on [def-weil-eventual-linear-recurrence]. For $j\\geq0$ let $R_j=(c_{j+s})_{s\\geq0}\\in K^{\\mathbf Z_{\\geq0}}$. Then every $R_j$ lies in the $K$-linear span [def-weil-submodule-span] of $R_0,\\ldots,R_{m+d-1}$. Consequently the subspace $V\\subseteq K^{\\mathbf Z_{\\geq0}}$ [def-weil-sequence-subspace] spanned by all $R_j$ is finite-dimensional [def-weil-finite-dimensional-subspace] with $\\dim_KV\\leq m+d$ [def-weil-vector-space-dimension].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.md",
   "place": "## Proof, third paragraph ('(3) also directly implies (2): ... All rows therefore lie in the span of $R_0,\\ldots,R_{m+d-1}$'); stated without proof in literature/milne-lectures-on-etale-cohomology_LEC.pdf, p. 157, Bourbaki's Exercise 3(d)"
@@ -21,11 +21,73 @@
   "def-weil-eventual-linear-recurrence",
   "def-weil-sequence-subspace",
   "def-weil-finite-dimensional-subspace",
-  "def-weil-vector-space-dimension"
+  "def-weil-vector-space-dimension",
+  "def-weil-submodule-span"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $j\\geq m$ and $s\\geq0$, apply the assumed recurrence [def-weil-eventual-linear-recurrence] at $n=j+s$, which satisfies $n\\geq m$. It gives $c_{j+s+d}=-\\sum_{i=0}^{d-1}a_i c_{j+s+i}$. Since sequence addition and scalar multiplication are coordinatewise [def-weil-sequence-subspace], equality in every coordinate $s$ gives the sequence identity $R_{j+d}=-\\sum_{i=0}^{d-1}a_iR_{j+i}$. Thus this identity holds for every $j\\geq m$.",
+   "uses": [
+    "def-weil-eventual-linear-recurrence",
+    "def-weil-sequence-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "third paragraph, final sentences, lines 27-30: '(3) also directly implies (2)' and 'All rows therefore lie in the span of R_0,...,R_{m+d-1}'; apply the scalar recurrence in each coordinate"
+   }
+  },
+  {
+   "text": "Using the span definition [def-weil-submodule-span], put $W=\\operatorname{span}_K\\{R_0,\\ldots,R_{m+d-1}\\}$. Prove $R_k\\in W$ for all $k\\geq0$ by strong induction on $k$. If $k<m+d$, this is one of the defining generators. If $k\\geq m+d$, set $j=k-d\\geq m$; the identity of step 1 gives $R_k=-\\sum_{i=0}^{d-1}a_iR_{k-d+i}$. For every $0\\leq i<d$, $0\\leq k-d+i<k$, so the induction hypothesis puts each summand vector in $W$. The closure under scalar multiplication and addition in [def-weil-sequence-subspace], including multiplication by $-1$, puts $R_k$ in $W$. This establishes the first conclusion without assuming any of the initial rows independent.",
+   "uses": [
+    "def-weil-sequence-subspace",
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "third paragraph, final sentences, lines 27-30: '(3) also directly implies (2)' and 'All rows therefore lie in the span of R_0,...,R_{m+d-1}'; write out the strong induction hidden in the last sentence"
+   }
+  },
+  {
+   "text": "Let $W=\\operatorname{span}_K\\{R_0,\\ldots,R_{m+d-1}\\}$ as in step 2. By [def-weil-submodule-span], a span is the smallest subspace containing its generators. Step 2 shows that $W$ contains every $R_k$, so $V\\subseteq W$. Conversely $V$ contains each generator of $W$, so $W\\subseteq V$. Hence $V=W$. To see directly that every element of $V$ is a finite linear combination of the initial rows, the set $U=\\{\\sum_{i=0}^{m+d-1}\\lambda_iR_i:\\lambda_i\\in K\\}$ is a subspace: zero uses all zero coefficients, the sum of two such vectors adds their coefficients, and scalar multiplication multiplies their coefficients [def-weil-sequence-subspace]. It contains every initial row, so $W\\subseteq U$ by the smallest-subspace characterization; the reverse inclusion follows from closure of $W$ under finite sums and scalar multiplication. Thus the $m+d$ initial rows span $V$ in the sense of [def-weil-finite-dimensional-subspace], proving finite-dimensionality.",
+   "uses": [
+    "def-weil-sequence-subspace",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "third paragraph, final sentences, lines 27-30: '(3) also directly implies (2)' and 'All rows therefore lie in the span of R_0,...,R_{m+d-1}'; identify the full shift span with the initial finite span"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-span-independent-subfamily] to the finite family $R_0,\\ldots,R_{m+d-1}$. It supplies a subset $S\\subseteq\\{0,\\ldots,m+d-1\\}$ such that $(R_i)_{i\\in S}$ is independent and has the same span as all the initial rows, namely $V$ by step 3 (the cited statement uses indices $1,\\ldots,m+d$, which are relabelled by subtracting $1$). Write $k=|S|$ and list its elements in increasing order. Apply [lem-weil-dimension-span-independent-family] to this independent list of $k$ vectors: its span is $V$, so $\\dim_KV=k$. Since $S$ is a subset of an index set with $m+d$ elements, $k\\leq m+d$. Therefore $\\dim_KV\\leq m+d$. This requires no independence, distinctness or nonvanishing of the original family.",
+   "uses": [
+    "lem-weil-span-independent-subfamily",
+    "lem-weil-dimension-span-independent-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+    "place": "third paragraph, final sentences, lines 27-30: '(3) also directly implies (2)' and 'All rows therefore lie in the span of R_0,...,R_{m+d-1}'; extract an independent subfamily with the same span and count its indices"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-eventual-linear-recurrence",
+  "def-weil-sequence-subspace",
+  "def-weil-submodule-span",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-span-independent-subfamily",
+  "lem-weil-dimension-span-independent-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-criterion/prop-weil-rationality-criterion.proof.md",
+  "place": "third paragraph, final sentences, lines 27-30: '(3) also directly implies (2)' and 'All rows therefore lie in the span of R_0,...,R_{m+d-1}'; expanded coordinate calculation and induction, followed by a standard Mathlib dimension estimate"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,10 +102,59 @@
    "results": "rank_span_le (:427), finrank_span_le_card (:446): the span of finitely many vectors has dimension at most their number (used for the bound, not the statement)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every shift of a sequence satisfying an eventual linear recurrence lies in the span of the first m+d shifts, and the span has dimension at most m+d",
+   "results": "LinearRecurrence.solSpace, is_sol_iff_mem_solSpace, IsSolution, solSpace_rank, mkSol, is_sol_mkSol, LinearRecurrence, order (Mathlib/Algebra/LinearRecurrence). These do not state containment of all shifted sequences in the initial m+d shift span.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finrank (Submodule.span K (Set.range f)) ≤ Fintype.card ι, FiniteDimensional",
+   "results": "0 hits; parser diagnostic: loogle: Unknown identifier `finrank`. Retried with finrank_le_of_span_eq_top for the separate generic dimension bound.",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid query, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_range_le_card|finrank_span_le_card|rank_span_le",
+   "results": "8 hits in LinearAlgebra/Dimension: rank_span_le (:427), finrank_span_le_card (:446), and uses in Constructions, FreeAndStrongRankCondition and OrzechProperty. These bound the dimension of a given finite span, and do not show that the recurrence puts all shifts in that span.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional span of finitely many shifted sequences dimension bounded by number of shifts",
+   "results": "FiniteDimensional.span_of_finite, FiniteDimensional.span_finset, finrank_span_finset_le_card, finrank_le_of_span_eq_top and affine vectorSpan results. Only the generic finite-span/dimension facts match, not the recurrence argument.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence satisfying a monic recurrence after an initial segment has every translate in the span of finitely many initial translates",
+   "results": "LinearRecurrence.IsSolution, is_sol_mkSol, mkSol, solSpace, is_sol_iff_mem_solSpace, LinearRecurrence, tupleSucc, toInit. Read Algebra/LinearRecurrence.lean:53-120 and 168-200: solution construction and initial-value equivalence do not state the required shift-span containment.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearRecurrence.IsSolution, Submodule.span",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shift|solSpace_rank|IsSolution",
+   "results": "5 hits in Algebra/LinearRecurrence.lean at lines 70, 84, 97, 112, 118: IsSolution and its solution-construction lemmas. No shift-span theorem returned. The search command displays single-file hits with the line in the file column; source inspected directly.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +174,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-criterion"
+ "unit": "sk-prop-criterion",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-linear-recurrence-shift-span",
+  "worker": "stage1",
+  "summary": "Mathematical statement unchanged; added the existing span-definition citation. Checked the current blueprint third paragraph and Milne p. 157. The sorry-free slopmaster2 finiteDimensional_shiftSpan_of_forall_add_eq_zero has only finite-dimensionality in its conclusion, so it does not attach this node with its explicit containment and dimension bound. Expanded the coordinate recurrence and strong induction directly in the item, identified V with the finite span, and used the existing Mathlib leaves for extraction of an independent subfamily and the dimension of its span. No new nodes are needed. Searches, citation quotes, edge cases, and the B-E review are recorded in report.md.",
+  "blueprint": "Realizes prop-weil-rationality-criterion's proof, third paragraph, lines 27-30 in the current main-20261015 proof: coordinate identity, then 'All rows therefore lie in the span of R_0,...,R_{m+d-1}', with its finite-dimensional rank estimate. This is the (3)⇒(2) branch of the inherited unit proof; no unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-63925ea63",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-63925ea63 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, the dependencies and split_report. The statement matches the source sentence ('(3) also directly implies (2) ... All rows therefore lie in the span of R_0..R_{m+d-1}') in main-20261015 prop-weil-rationality-criterion.proof.md lines 27-30 and in the master .md line 50. It also matches what parent step 4 of prop-weil-rationality-criterion uses (containment and dim<=m+d). It is not weakened; the only change is the added stmt_dep def-weil-submodule-span. Step 1 applies the recurrence at n=j+s>=m and compares coordinatewise; this is correct against the def-weil-eventual-linear-recurrence and def-weil-sequence-subspace statements. Step 2 sets up the strong induction explicitly: the base k<m+d is a generator, and for k>=m+d it takes j=k-d>=m with indices k-d+i in [k-d,k-1]. Step 3 gets V=W from the smallest-subspace definition, which gives finite spanning. Step 4 uses two Mathlib leaves: lem-weil-span-independent-subfamily (exists_linearIndependent', LinearIndependent/Lemmas.lean:799) and lem-weil-dimension-span-independent-family (finrank_span_eq_card, Dimension/Constructions.lean:461). These give dim V=|S|<=m+d, and their hypotheses hold. Small cases tested: the zero sequence; m=1,d=1,a0=-1 with c=(5,1,1,...) (dim 2); m=0,d=1,a0=0; and a sharp example. There are no new nodes. The rg duplicate search found only related nodes (rational-series-finite-shift-span, shift-span-linear-recurrence, linear-recurrence-denominator, rational-series-linear-recurrence), none of which is a duplicate. The off-unit citations are Mathlib leaves, so no tool_uses are needed. No SGA source is used, and the node has no base-change content. No fixes were needed."
+ }
 }
