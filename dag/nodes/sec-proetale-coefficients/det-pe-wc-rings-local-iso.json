@@ -46,11 +46,15 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "Algebra.WeaklyEtale.bijective_localRingHom_of_isStrictlyHenselianLocalRing"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 11:35 UTC for group Q62, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_2104a988.jsonl.gz: Assuming commutative rings, the given algebra structure, weak étaleness, primality of n, and strict henselianity of R localized at its contraction m, this p"
+  "module": "Sheaf.RingTheory.StrictHenselianMaximalLocalRingIso",
+  "declaration": "Algebra.WeaklyEtale.bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing",
+  "file": "lean/Sheaf/RingTheory/StrictHenselianMaximalLocalRingIso.lean",
+  "statement": "theorem bijective_localRingHom_of_isMaximal_of_isStrictlyHenselianLocalRing {R : Type u} {B : Type v} [CommRing R] [CommRing B] [Algebra R B] [Algebra.WeaklyEtale R B] (m : Ideal R) [m.IsMaximal] [IsStrictlyHenselianLocalRing (Localization.AtPrime m)] (n : Ideal B) [n.IsPrime] (hmn : m = n.comap (algebraMap R B)) : Function.Bijective (Localization.localRingHom m n (algebraMap R B) hmn)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The previously attached upstream stalk theorem is more general: it omits maximality and uses one shared ring universe. This module retains the node's explicit maximal ideal and lying-over equality, with independent ring universes, and uses the existing canonical local-ring map."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -70,5 +74,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6a2fa52e8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement, hypotheses, canonical localization map, docstrings, dependencies, edge cases, and source declarations checked. scompile.py sandbox and library compiles passed with no errors or warnings; review.md written."
  }
 }
