@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldUnits
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.SplitSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
@@ -219,6 +221,66 @@ theorem subsingleton_sheafH_gmSheaf_of_forall_field
       Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj C.gmSheaf) (n + 2)) :=
     ((Sheaf.functorH _ (n + 2)).mapIso e).addCommGroupIsoToAddEquiv.subsingleton_congr.2 this
   exact hinj.subsingleton
+
+include f in
+/-- **Higher cohomology of `𝔾ₘ` on an integral curve.** Let `C` be an integral curve over an
+algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`. This is
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_forall_field` together with the
+vanishing for algebraic extensions of `k(C)`
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField`). Neither
+smoothness nor properness is needed.
+(blueprint: `det-thm-br-higher-vanishing`, for integral curves) -/
+theorem subsingleton_sheafH_gmSheaf_of_isIntegral (q : ℕ) (hq : 2 ≤ q) :
+    Subsingleton (Sheaf.H C.gmSheaf q) :=
+  subsingleton_sheafH_gmSheaf_of_forall_field f
+    (fun L _ _ _ q ↦ subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField f L (q + 1)
+      (by omega)) q hq
+
+end IsCurve
+
+namespace IsCurve
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+
+/-- **Higher cohomology of `𝔾ₘ` on a smooth curve.** Let `C` be a smooth separated curve of
+finite type over an algebraically closed field `k`. Then `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`.
+
+The finitely many connected components of `C` are clopen, so it suffices to treat each of them
+(`AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`); a connected smooth curve is integral,
+and `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isIntegral` applies.
+(blueprint: `det-thm-br-higher-vanishing`) -/
+theorem subsingleton_sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
+    (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H C.gmSheaf q) := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  -- the connected components of `C`, indexed by `ConnectedComponents C`
+  choose x hx using _root_.ConnectedComponents.surjective_coe (α := C)
+  let U (c : _root_.ConnectedComponents C) : C.Opens :=
+    ⟨connectedComponent (x c), TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hU (y : C) : y ∈ U y := by
+    change y ∈ connectedComponent (x y)
+    rw [_root_.ConnectedComponents.coe_eq_coe.mp (hx y)]
+    exact mem_connectedComponent
+  refine Etale.subsingleton_H_of_isClopen U (fun c ↦ isClosed_connectedComponent)
+    (fun c d hcd ↦ ?_) (fun y ↦ ⟨y, hU y⟩) _ q fun c ↦ ?_
+  · refine Set.disjoint_left.mpr fun y (hyc : y ∈ connectedComponent (x c))
+      (hyd : y ∈ connectedComponent (x d)) ↦ hcd ?_
+    rw [← hx c, ← hx d, _root_.ConnectedComponents.coe_eq_coe,
+      connectedComponent_eq hyc, connectedComponent_eq hyd]
+  -- each connected component is a smooth connected curve, hence integral
+  have : ConnectedSpace (U c) := isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+  have : IsCurve ((U c).ι ≫ f) :=
+    { krullDim_le_one :=
+        (topologicalKrullDim_subspace_le C (U c)).trans (IsCurve.krullDim_le_one f) }
+  have : IsLocallyNoetherian (U c) := LocallyOfFiniteType.isLocallyNoetherian ((U c).ι ≫ f)
+  have : IsRegular (U c) := IsRegular.of_smooth ((U c).ι ≫ f)
+  have : IrreducibleSpace (U c) := IsRegular.irreducibleSpace (U c)
+  have : IsReduced (U c) := isReduced_of_isReduced_stalk (U c)
+  have : IsIntegral (U c) := isIntegral_of_irreducibleSpace_of_isReduced (U c)
+  have := subsingleton_sheafH_gmSheaf_of_isIntegral ((U c).ι ≫ f) q hq
+  exact ((Sheaf.functorH _ q).mapIso
+    (Scheme.upperStarGmSheafIso (U c).ι)).addCommGroupIsoToAddEquiv.subsingleton_congr.2 this
 
 end IsCurve
 

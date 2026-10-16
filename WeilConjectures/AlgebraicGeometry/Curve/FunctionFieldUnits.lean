@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldCohomology
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologyTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 
@@ -22,16 +23,16 @@ and multiplication by every prime `ℓ` is injective on it: the kernel and the c
 cohomological dimension at most one
 (`AlgebraicGeometry.Scheme.subsingleton_sheafH_of_isQuasiAlgClosed`).
 
-For now, the torsion property of the cohomology in positive degrees is a hypothesis.
+The torsion property is `AlgebraicGeometry.Scheme.isOfFinAddOrder_sheafH_of_field`.
 
 ## Main statements
 
 - `CategoryTheory.Sheaf.H.map_injective_of_subsingleton_kernel_cokernel`: a morphism of
   abelian sheaves induces an injection on `Hⁿ⁺¹` as soon as `Hⁿ⁺¹` of its kernel and `Hⁿ` of its
   cokernel vanish.
-- `AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed_of_torsion`: the
+- `AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed`: the
   vanishing for a `C₁` field containing an algebraically closed field.
-- `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField_of_torsion`:
+- `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField`:
   the vanishing for algebraic extensions of function fields of curves.
 -/
 
@@ -108,13 +109,12 @@ lemma nsmul_injective_sheafH_gmSheaf_of_isQuasiAlgClosed (k L : Type u) [Field k
   exact hxy
 
 /-- **Cohomology of the units of a `C₁` field.** Let `L` be a quasi-algebraically closed field
-containing an algebraically closed field `k`, and assume that the cohomology groups
-`Hᵠ(Spec L_ét, 𝔾ₘ)`, `q ≥ 1`, are torsion. Then `Hᵠ(Spec L_ét, 𝔾ₘ) = 0` for every `q ≥ 1`:
+containing an algebraically closed field `k`. Then `Hᵠ(Spec L_ét, 𝔾ₘ) = 0` for every `q ≥ 1`:
 for `q = 1` by Hilbert 90, for `q = 2` since the Brauer group of a `C₁` field vanishes, and for
-`q ≥ 3` since multiplication by every prime is injective on the torsion group `Hᵠ`. -/
-theorem subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed_of_torsion (k L : Type u) [Field k]
+`q ≥ 3` since multiplication by every prime is injective on `Hᵠ`, which is torsion
+(`AlgebraicGeometry.Scheme.isOfFinAddOrder_sheafH_of_field`). -/
+theorem subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed (k L : Type u) [Field k]
     [IsAlgClosed k] [Field L] [Algebra k L] [IsQuasiAlgClosed L]
-    (htors : ∀ (q : ℕ) (x : Sheaf.H (Spec (.of L)).gmSheaf (q + 1)), IsOfFinAddOrder x)
     (q : ℕ) (hq : 1 ≤ q) : Subsingleton (Sheaf.H (Spec (.of L)).gmSheaf q) := by
   obtain _ | _ | _ | n := q
   · omega
@@ -124,7 +124,7 @@ theorem subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed_of_torsion (k L : Type u
     suffices h : ∀ z : Sheaf.H (Spec (.of L)).gmSheaf (n + 3), z = 0 by rw [h x, h y]
     intro z
     by_contra hz
-    have hpos := (htors (n + 2) z).addOrderOf_pos
+    have hpos := (isOfFinAddOrder_sheafH_of_field L _ (n + 2) z).addOrderOf_pos
     have hne : addOrderOf z ≠ 1 := fun h ↦ hz (AddMonoid.addOrderOf_eq_one_iff.1 h)
     obtain ⟨ℓ, hℓ, m, hm⟩ := Nat.exists_prime_and_dvd hne
     have hm0 : 0 < m := Nat.pos_of_ne_zero (by rintro rfl; omega)
@@ -144,16 +144,14 @@ namespace IsCurve
 
 /-- **Cohomology of the units of an algebraic extension of a curve function field.** Let `k` be
 an algebraically closed field, `C` an integral curve over `k` and `L` an algebraic extension of
-its function field `k(C)`, and assume that the cohomology groups `Hᵠ(Spec L_ét, 𝔾ₘ)`, `q ≥ 1`,
-are torsion. Then `Hᵠ(Spec L_ét, 𝔾ₘ) = 0` for every `q ≥ 1`: the field `L` is `C₁` by Tsen's
-theorem (`AlgebraicGeometry.IsCurve.isQuasiAlgClosed_functionField`), and
-`AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed_of_torsion` applies.
+its function field `k(C)`. Then `Hᵠ(Spec L_ét, 𝔾ₘ) = 0` for every `q ≥ 1`: the field `L` is
+`C₁` by Tsen's theorem (`AlgebraicGeometry.IsCurve.isQuasiAlgClosed_functionField`), and
+`AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed` applies.
 (blueprint: `det-thm-br-field-units`) -/
-theorem subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField_of_torsion {k : Type u}
+theorem subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField {k : Type u}
     [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsIntegral C] (L : Type u) [Field L] [Algebra C.functionField L]
     [Algebra.IsAlgebraic C.functionField L]
-    (htors : ∀ (q : ℕ) (x : Sheaf.H (Spec (.of L)).gmSheaf (q + 1)), IsOfFinAddOrder x)
     (q : ℕ) (hq : 1 ≤ q) : Subsingleton (Sheaf.H (Spec (.of L)).gmSheaf q) := by
   have := isQuasiAlgClosed_functionField f
   have : IsQuasiAlgClosed L := IsQuasiAlgClosed.of_isAlgebraic C.functionField L
@@ -161,7 +159,7 @@ theorem subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField_of_torsion {k :
   have : Nonempty (⊤ : C.Opens) := ⟨⟨x, trivial⟩⟩
   let : Algebra k L := ((algebraMap C.functionField L).comp ((C.germToFunctionField ⊤).hom.comp
     (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom))).toAlgebra
-  exact Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed_of_torsion k L htors q hq
+  exact Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed k L q hq
 
 end IsCurve
 
