@@ -3,32 +3,266 @@
  "blueprint": {
   "is": "lem-trf-simple-constructible",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Simple constructible sheaves",
- "statement": "Let $X$ be a Noetherian scheme and $\\Lambda$ a finite ring. Every\nsimple object of the abelian category of constructible $\\Lambda$-sheaves on\n$X_{\\Et}$ is of the form $i_{x!}M$, where $x\\in X$ is a point with\n$\\{x\\}$ locally closed, $i_x:\\operatorname{Spec}\\kappa(x)\\to X$ is the\ninduced immersion, and $M$ is a simple finite $\\Lambda$-module with a\ncontinuous action of $\\operatorname{Gal}(\\kappa(x)^{\\mathrm{sep}}/\\kappa(x))$,\nviewed as a sheaf on $\\operatorname{Spec}\\kappa(x)$. If $X$ is of finite type\nover a field, $x$ is a closed point and $i_{x!}=i_{x*}$. In particular a\nnonzero lisse sheaf on a scheme of positive dimension is not a finite\nextension of simple constructible sheaves.",
+ "statement": "Let $X$ be a Noetherian scheme (quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth]) and $\\Lambda$ a finite ring. Use constructible sheaves of left $\\Lambda$-modules on the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site]: constructible means admitting a finite partition into locally closed constructible strata on each of which the sheaf is etale locally a constant finite $\\Lambda$-module [def-constructible-constructible, def-constructible-locally-constant]. A simple object is nonzero and every constructible subsheaf is zero or the whole object.\nEvery simple object $F$ is isomorphic to $i_{x!}M$, where $x\\in X$ has $\\{x\\}$ locally closed [def-weil-locally-closed-subset], $i_x:\\operatorname{Spec}\\kappa(x)\\to X$ is the canonical residue-field immersion [def-weil-residue-field, def-weil-closed-immersion], and $M$ is a simple finite left $\\Lambda$-module with a continuous $\\Lambda$-linear action of $G_x=\\operatorname{Gal}(\\kappa(x)^{\\mathrm{sep}}/\\kappa(x))$, with its Krull topology and $M$ discrete [def-exc-discrete-modules-category]. Here simplicity of $M$ means $M\\neq0$ and every $G_x$-stable $\\Lambda$-submodule is zero or $M$; it does not require simplicity after forgetting the action. View $M$ as the corresponding sheaf on $\\operatorname{Spec}\\kappa(x)$ [lem-exc-abelian-sheaves-gmodules]. If $i_x$ is factored as a closed immersion $g:\\operatorname{Spec}\\kappa(x)\\to W$ followed by an open immersion $j:W\\to X$, write $i_{x!}M=j_!g_*M$, using open extension by zero [def-weil-pbc-extension-by-zero] on underlying abelian sheaves with its induced $\\Lambda$-action and ordinary direct image [def-weil-pbc-direct-image]. Conversely every such $i_{x!}M$ is simple.\nIf $X$ is of finite type over a field [def-weil-finite-type-morphism], the supporting point $x$ is closed and one may take $W=X$, so $i_{x!}=i_{x*}$. In particular, if $X$ is connected [def-weil-connected-scheme], of finite type over a field, and $\\dim X>0$ [def-kun-topological-krull-dimension], no nonzero lisse sheaf of finite $\\Lambda$-modules on $X_{\\Et}$ is a finite iterated extension of simple constructible sheaves. Here lisse means etale locally constant with finite module values; finite iterated extension means a finite filtration with simple successive quotients.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-simple-constructible.md",
   "place": "node lem-trf-simple-constructible, order 2220"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-etale-site",
+  "def-constructible-constructible",
+  "def-constructible-locally-constant",
+  "def-weil-locally-closed-subset",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-exc-discrete-modules-category",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
  "proof": [
   {
-   "text": "Let $F$ be simple, and let $\\eta$ be the generic point of an irreducible\ncomponent $V$ of the closure of the support of $F$. Choose an open\n$U\\subset V$ containing $\\eta$, disjoint from the other components, on\nwhich $F|_U$ is locally constant and nonzero, and an open $W\\subset X$ with\n$W\\cap\\overline{\\operatorname{supp}F}=U$. Extension by zero gives a nonzero\nsubsheaf $j_{W!}(F|_W)\\subset F$, so it equals $F$ and\n$\\operatorname{supp}F\\subset U$. If $U\\neq\\{\\eta\\}$, pick a point\n$y\\in U$ closed in $U$, $y\\neq\\eta$, and put\n$W'=W\\setminus\\overline{\\{y\\}}$; then $j_{W'!}(F|_{W'})$ is a nonzero\nsubsheaf of $F$ (it is nonzero at $\\eta$) with zero stalk at $y$, where $F$\nis nonzero, contradicting simplicity. Hence $U=\\{\\eta\\}$, so $\\{\\eta\\}$ is\nlocally closed and $F=i_{\\eta!}M$ with $M=i_\\eta^*F$. Subsheaves of\n$i_{\\eta!}M$ are supported in $\\{\\eta\\}$, hence of the form $i_{\\eta!}N$ for\na Galois-stable submodule $N\\subset M$, so $M$ is simple. Conversely each\nsuch $i_{x!}M$ is simple by the same correspondence. On a scheme of finite\ntype over a field a locally closed point is closed (Jacobson property). For\nthe last assertion: a finite extension of punctual sheaves has finite\nsupport, while a nonzero lisse sheaf on a positive-dimensional scheme does\nnot.",
-   "uses": [],
-   "elementary": null
+   "text": "The assertions about stalks and localization can be checked on underlying abelian sheaves. Write $c\\geq1$ for the characteristic of the finite ring $\\Lambda$, and restrict scalars to the finite commutative ring $R=\\mathbf Z/c$. Every finite locally constant $\\Lambda$-module trivialization is also such an $R$-module trivialization. The space $X$ is quasi-compact by hypothesis and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Consequently [lem-weil-pbc-constructible-module-support-constructible], applied over $R$, defines $S=\\operatorname{Supp}(F)$ independently of the geometric point over each ordinary point and shows that $S$ is constructible. Since all geometric stalks detect isomorphisms [lemma-weil-pbc-geometric-stalk-conservative], $F\\neq0$ implies $S\\neq\\varnothing$. All restriction, direct-image and extension-by-zero maps below commute with each scalar endomorphism $\\lambda:F\\to F$; their abelian exactness and isomorphism assertions therefore also hold for the given $\\Lambda$-action, without assuming $\\Lambda$ commutative.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-constructible-module-support-constructible",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09YS (lemma-support-constructible), 04FS (definition-support), 04FN (remark-map-stalks), and 03PT (lemma-stalk-exact); restriction of scalars is explicit."
+   }
+  },
+  {
+   "text": "For any open immersion $j:U\\hookrightarrow X$, give the closed subset $X\\setminus U$ its reduced induced closed subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme], and denote its closed immersion by $i$. Set $H=j_!j^{-1}F$. The open-closed sequence [lem-weil-pbc-open-closed-short-exact] gives a canonical monomorphism $H\\to F$. This is a monomorphism of $\\Lambda$-sheaves by the naturality just described. The open unit [lem-weil-pbc-extension-by-zero-unit-iso] identifies $j^{-1}H$ with $j^{-1}F$, which is constructible by [prop-constructible-pullback]; the stalk formula [lem-weil-pbc-extension-by-zero-stalks], inverse-image stalk formula [lemma-openclosed-stalk-upperstar], and conservativity [lemma-weil-pbc-geometric-stalk-conservative] give $i^{-1}H=0$. To check constructibility of $H$, [lem-weil-pbc-noetherian-open-subscheme-noetherian] says that every open subset of $X$ is quasi-compact. The intersection of any two opens is again open and hence quasi-compact, so every open is retrocompact. Thus every locally closed subset of $X$ is constructible by [def-weil-constructible-subset]. A stratum locally closed in the open $U$ is locally closed in $X$: write it as $A\\cap C$ with $A$ open in $U$ (hence in $X$) and $C=D\\cap U$ for $D$ closed in $X$, so it is $A\\cap D$. Extend a finite stratification of $U$ adapted to $F|_U$ by the closed complement on which $H=0$. This is a finite locally closed constructible partition adapted to $H$, proving that $H$ is constructible. The maps identify the support of $H$ with $S\\cap U$ and its counit stalks on $U$ with the identity. Simplicity forces $H=0$ or $H=F$, and therefore either $S\\cap U=\\varnothing$ or $S\\subseteq U$.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095L (lemma-ses-associated-to-open), 0F70 (lemma-jshriek-open), 03S5 (proposition-describe-jshriek), 03Q1 (lemma-stalk-pullback), and 095E (lemma-constructible-quasi-compact-quasi-separated). The complementary closed immersion exists by Schemes Tag 01J3 (lemma-reduced-closed-subscheme); quasi-compactness of opens follows from Properties Tags 01OW (lemma-locally-Noetherian) and 01OZ (lemma-Noetherian-topology)."
+   }
+  },
+  {
+   "text": "A scheme is $T_0$: the uniqueness of generic points in [lem-sc-scheme-sober] applied to the closures of singletons shows that two points with the same open neighbourhoods are equal. If $S$ contained distinct points $x,y$, a distinguishing open would meet $S$ but fail to contain $S$, contradicting the previous step. Thus $S=\\{x\\}$. Since $S$ is constructible, it is a finite union of locally closed subsets [def-weil-constructible-subset]. A nonempty member of this union is contained in the singleton and must equal it. Thus $\\{x\\}$ is locally closed.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YS (lemma-support-constructible); the topological argument is elementary from Schemes Tag 01IS (lemma-scheme-sober) and the definition of constructibility."
+   }
+  },
+  {
+   "text": "Choose an open $W\\subseteq X$ in which $x$ is closed, as permitted by [def-weil-locally-closed-subset]. Apply [lem-trf-closed-point-residue-immersion] to the point $x$ of the scheme $W$. By [lem-weil-pbc-residue-field-point-naturality], open restriction induces an isomorphism on residue fields and the residue-field point morphisms commute with this isomorphism. Thus this supplies the closed immersion $g:\\operatorname{Spec}\\kappa(x)\\to W$ whose composite with $j:W\\hookrightarrow X$ is the canonical $i_x$. Let $F_W=j^{-1}F$ and $M=g^{-1}F_W$. Because $F$ vanishes outside $W$, [lem-weil-pbc-open-closed-short-exact] and stalk conservativity give $j_!F_W\\xrightarrow{\\sim}F$. Apply the same sequence on $W$ with closed part $g$; the open restriction of $F_W$ outside $x$ vanishes by [lemma-openclosed-stalk-upperstar], so its unit $F_W\\xrightarrow{\\sim}g_*M$ is an isomorphism. Consequently $F\\cong j_!g_*M$. Pullback preserves constructibility [prop-constructible-pullback], hence $M$ is a constructible sheaf on the spectrum of the field $\\kappa(x)$.",
+   "uses": [
+    "def-weil-locally-closed-subset",
+    "lem-trf-closed-point-residue-immersion",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-stalk-upperstar",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open), applied twice; residue morphism as in Schemes Tag 01J9 (lemma-characterize-points)."
+   }
+  },
+  {
+   "text": "For any sheaf $N$ of left $\\Lambda$-modules on $\\operatorname{Spec}\\kappa(x)$, put $E(N)=j_!g_*N$. The closed counit [prop-openclosed-lowerstar-fully-faithful] and the open unit [lem-weil-pbc-extension-by-zero-unit-iso] identify $g^{-1}j^{-1}E(N)$ naturally with $N$. Also $g_*N$ vanishes on $W\\setminus\\{x\\}$ by [lemma-openclosed-vanishing-lowerstar], and open extension by zero has zero stalks outside $W$ by [lem-weil-pbc-extension-by-zero-stalks]; hence $E(N)$ vanishes outside $x$. Both functors preserve monomorphisms: closed direct image carries $0\\to N\\to N'$ to a left exact sequence by [lem-weil-pbc-direct-image-left-exact], while for open extension by zero this follows from its stalk formula and exact conservative stalks [lem-weil-pbc-extension-by-zero-stalks, prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative]. If $N$ is constructible, it is finite locally constant, since the spectrum of a field has only one nonempty locally closed stratum. On $W$ use the two strata $\\{x\\}$, with its scheme structure given by $g$, and $W\\setminus\\{x\\}$: the restrictions of $g_*N$ are $N$ by the closed counit and zero by disjoint-range vanishing. On $X$ use the three strata $\\{x\\}$, $W\\setminus\\{x\\}$, and $X\\setminus W$, omitting empty ones and giving the last its reduced closed structure as in step 2. Each is locally closed in $X$, hence constructible by the retrocompactness argument of step 2 and [def-weil-constructible-subset]. The restrictions of $E(N)$ to them are respectively $N$, zero, and zero, by the open unit, the closed counit, and the inverse-image stalk formula [lemma-openclosed-stalk-upperstar] with conservativity. All these isomorphisms commute with the scalar endomorphisms, so this is a finite stratification by finite locally constant $\\Lambda$-modules, as required by [def-constructible-constructible]. Thus $g_*N$ and $E(N)$ are constructible as module sheaves, including for noncommutative $\\Lambda$.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lemma-openclosed-vanishing-lowerstar",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-constructible-subset",
+    "lemma-openclosed-stalk-upperstar",
+    "def-constructible-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA (proposition-closed-immersion-pushforward), 0F70 (lemma-jshriek-open), 03S5 (proposition-describe-jshriek), 03Q1 (lemma-stalk-pullback), and 03PT (lemma-stalk-exact); constructibility by the explicit three-stratum partition, using 095E (lemma-constructible-quasi-compact-quasi-separated)."
+   }
+  },
+  {
+   "text": "For a constructible subsheaf $N\\subseteq M$, step 5 gives a constructible subsheaf $E(N)\\subseteq E(M)\\cong F$. Simplicity of $F$ makes this inclusion zero or an isomorphism; applying $g^{-1}j^{-1}$ makes $N=0$ or $N=M$. Also $M\\neq0$, since $F\\cong E(M)\\neq0$. Conversely, let $M$ be simple. The natural isomorphism $g^{-1}j^{-1}E(M)\\cong M$ proves $E(M)\\neq0$. If $a:G\\hookrightarrow E(M)$ is a constructible subsheaf, exactness of stalks makes all stalks of $G$ outside $x$ zero. Put $P=g^{-1}j^{-1}$ and $N=P(G)$. It is constructible by [prop-constructible-pullback]. The inverse-image stalk formula [lemma-openclosed-stalk-upperstar] identifies stalks of $P(a)$ with stalks of $a$; exact stalks and conservativity [prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative] therefore show that $P(a)$ is monic. Compose with $P(E(M))\\cong M$ to view $N$ as a constructible subsheaf of $M$. For either $H=G$ or $H=E(M)$, the open-closed sequence [lem-weil-pbc-open-closed-short-exact] on $X$ gives a counit isomorphism $\\varepsilon_H:j_!j^{-1}H\\to H$: the other term is zero, since the closed restriction outside $W$ has zero stalks. On $W$ the sequence for the closed part $g$ gives a unit isomorphism $\\eta_H:j^{-1}H\\to g_*P(H)$, since the open restriction outside $x$ is zero. Define $\\alpha_H=j_!(\\eta_H)\\varepsilon_H^{-1}:H\\xrightarrow{\\sim}E(P(H))$. Naturality of these units and counits gives $\\alpha_{E(M)}a=E(P(a))\\alpha_G$. If $N=0$, then $G\\cong E(N)=0$; if $N\\to M$ is an isomorphism, the displayed identity makes $a$ an isomorphism. Simplicity of $M$ gives these two cases, proving that $E(M)$ is simple. Finally, for a second factorization $i_x=j'g'$ form $E'(M)=j'_!g'_*M$. It is supported at $x$ and its pullback along the canonical $i_x$ is $M$, by step 5 for $j',g'$. Applying the just-displayed localization isomorphisms for the first factorization to $H=E'(M)$ gives $E'(M)\\cong E(P(E'(M)))\\cong E(M)$. Here $P$ is pullback along the same $i_x$, so $P(E'(M))\\cong M$. Thus the notation $i_{x!}M$ is independent of the factorization up to the stated natural isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); the subobject argument uses the comparisons established in steps 4 and 5."
+   }
+  },
+  {
+   "text": "Set $K=\\kappa(x)$. By [lem-exc-abelian-sheaves-gmodules], the geometric stalk equivalence on $\\operatorname{Spec}K$ identifies abelian sheaves with discrete continuous $G_K$-modules. Transport each endomorphism giving the action of $\\lambda\\in\\Lambda$ through this fully faithful additive equivalence. Its faithfulness transports the relations $1m=m$, $(\\lambda\\mu)m=\\lambda(\\mu m)$, and $(\\lambda+\\mu)m=\\lambda m+\\mu m$ in both directions. Thus it identifies $\\Lambda$-sheaves with discrete $G_K$-representations on left $\\Lambda$-modules, including their subobjects. The geometric stalk of a constructible sheaf here has a finite underlying group: a finite stratification of the field spectrum has just its one nonempty stratum, on which finite locally constant module trivializations give finite stalks. Conversely a finite discrete continuous $G_K$-module has a finite underlying $G_K$-set. Decompose this set into its finitely many orbits; [lem-exc-etale-field-galois-classification] realizes each orbit by a finite separable field extension. Each field spectrum is etale by [lem-weil-pbc-finite-separable-extension-etale], and finite by the affine definition of a finite morphism, since its coordinate algebra is finite dimensional over $K$. By [thm-galois-lc-etale] its represented sheaf is finite locally constant. Taking a common refinement of the finitely many trivializing covers shows that their finite disjoint union is also finite locally constant. The transported module operations make it locally constant as a module: after a finite-set trivialization, refine to make its finitely many addition and scalar-operation values constant; there are only finitely many such values since both $\\Lambda$ and the module are finite. Explicitly each operation is determined by a finite table of sections of the constant finite set sheaf; each such section is locally constant by definition, and a common refinement of the finitely many covers makes the whole table constant. Therefore the equivalence restricts to constructible $\\Lambda$-sheaves and finite continuous $\\Lambda$-representations. The simplicity in step 6 is exactly absence of a proper nonzero Galois-stable $\\Lambda$-submodule.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-etale-field-galois-classification",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04JQ (lemma-equivalence-abelian-sheaves-point), 03QT (theorem-equivalence-sheaves-point), and 03RV (lemma-characterize-finite-locally-constant) in etale-cohomology.tex; Tag 03QR (lemma-sheaves-point) in pione.tex. The finite-set operation tables are written out in the step."
+   }
+  },
+  {
+   "text": "If $X$ is of finite type over a field, closed points are dense in every closed subset by [lem-sc-lft-over-field-jacobson-space]. Write $C=\\overline{\\{x\\}}$ and choose open $W$ with $W\\cap C=\\{x\\}$. Density supplies a point closed in $X$ in this nonempty open subset of $C$, so it must be $x$. Hence $x$ is closed in $X$. One may now take $W=X$ in steps 4--6, giving $E(M)=i_{x*}M$; this is precisely extension by zero for the closed immersion $i_x$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-weil-locally-closed-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Finite-type-over-a-field Jacobson assertion: literature/stacks-project/varieties.tex, Tag 0478 (lemma-locally-finite-type-Jacobson); localization by Tag 095L."
+   }
+  },
+  {
+   "text": "For the final assertion assume that $X$ is connected, of finite type over a field, and $\\dim X>0$. If $0=L_0\\subset L_1\\subset\\cdots\\subset L_r=L$ is a finite filtration with simple constructible successive quotients, step 8 puts the support of each quotient at a closed point $x_k$. At any geometric point outside $\\{x_1,\\ldots,x_r\\}$, induction starting at $(L_0)_{\\bar y}=0$ in the exact stalk sequences $0\\to(L_{k-1})_{\\bar y}\\to(L_k)_{\\bar y}\\to(L_k/L_{k-1})_{\\bar y}\\to0$ gives $(L_k)_{\\bar y}=0$ for every $k$ [prop-weil-pbc-geometric-stalks-exact]. Thus $L$ has support in this finite set of closed points; $r=0$ gives $L=0$. On the other hand let $L$ be a nonzero lisse finite $\\Lambda$-sheaf. For any geometric point $\\bar y$, the finite-coefficient equivalence of [cor-galois-lisse-representations] sends $L$ to its fibre $L_{\\bar y}$ and reflects zero objects. If $L_{\\bar y}=0$ it would identify $L$ with zero, a contradiction. Thus $L$ has support all of $X$.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Exact stalks: Tag 03PT; finite locally constant representation equivalence: literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md, finite-coefficient clause (Stacks 0BND and 03RV)."
+   }
+  },
+  {
+   "text": "If $L$ had such a finite filtration, the previous step would force every point of $X$ to belong to a finite set of closed points. A finite space all of whose points are closed is discrete. Every nonempty irreducible closed subset of a discrete space is a singleton, so there is no strict chain of nonempty irreducible closed subsets of length $1$. The definition [def-kun-topological-krull-dimension] would then give $\\dim X=0$, contradicting $\\dim X>0$. This proves the corrected final assertion.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Final finite-support argument of the blueprint proof, with the connected finite-type hypotheses explicitly checked."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "def-constructible-constructible",
+  "def-kun-topological-krull-dimension",
+  "def-weil-constructible-subset",
+  "def-weil-locally-closed-subset",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-field-galois-classification",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-scheme-sober",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-galois-lc-etale"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/lem-trf-simple-constructible.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/lem-trf-simple-constructible.proof.md",
+  "place": "Entire proof, expanded with Stacks localization, support constructibility and Galois equivalences; final assertion repaired with connected finite-type hypotheses."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simple constructible etale sheaves on a Noetherian scheme are extensions by zero from locally closed points",
+   "results": "8 hits: AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Simple, Sheaf",
+   "results": "0 hits: ; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier); superseded by the qualified CategoryTheory.Simple query, not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "simple.*constructible|constructible.*simple|punctual",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple constructible etale sheaves are supported on a single locally closed point",
+   "results": "8 hits: skyscraperSheaf, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, Topology.IsConstructible.isLocallyConstructible, AlgebraicGeometry.Scheme.IdealSheafData.support, Topology.IsLocallyConstructible, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.support_bot",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple object in the category of constructible sheaves is a skyscraper sheaf at a locally closed point",
+   "results": "8 hits: skyscraperSheaf, skyscraperSheafFunctor, PrimeSpectrum.ConstructibleSetData, skyscraperPresheaf_isSheaf, PrimeSpectrum.BasicConstructibleSetData, skyscraperPresheaf, skyscraperPresheafFunctor_obj, skyscraperPresheaf_obj",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Simple",
+   "results": "12 hits: CategoryTheory.Simple, CategoryTheory.Simple.not_isZero, CategoryTheory.instNontrivialEndOfSimple, CategoryTheory.instNontrivialSubobjectOfSimple, CategoryTheory.zero_not_simple, CategoryTheory.Simple.of_iso, CategoryTheory.Simple.iff_of_iso, CategoryTheory.indecomposable_of_simple",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "simple|Simple",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: these hits do not classify simple constructible etale module sheaves or prove the finite-extension assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -50,5 +284,125 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-lem-sf-ctf-generation"
+ "unit": "sk-lem-sf-ctf-generation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-trf-simple-constructible",
+  "worker": "stage1",
+  "summary": "Corrected the false final clause by adding connectedness and finite type over a field, and clarified that simplicity of the finite Galois module means simplicity in the representation category. Retained arbitrary finite rings by explicitly applying the commutative-coefficient support tool after restriction to Z/char(Lambda). Expanded the imported paragraph into ten steps, using existing localization and constructibility statements. Added one exact Mathlib leaf for the closed-point residue immersion criterion; no new unsplit nodes. The existing Simple.lean covers the corrected clauses individually but does not attach the original false last clause. On resumption, added existing citations for the reduced closed complement and quasi-compactness of open subschemes, and wrote out the retrocompactness and stratum-extension argument; no extra nodes were introduced. Second reading replaced the constructibility-criterion application by an explicit three-stratum module argument, displayed the localization maps and their naturality for subobjects and factorization independence, and specified the filtration induction and its zero-length case.",
+  "blueprint": "Steps 1--3 prove the punctual-support claim of the first four sentences, using arbitrary-open localization rather than an unproved choice of a closed point in the source argument. Steps 4--7 realize the factorization, Galois module and converse sentences. Step 8 realizes the Jacobson sentence. Steps 9--10 repair and prove the final finite-support sentence. This is an auxiliary diagnostic lemma of the generation unit; no unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Step 9 uses its finite-coefficient fibre equivalence to show that a nonzero lisse sheaf on a connected scheme has no zero fibre; the generation unit does not supply this Galois-theoretic tool."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Step 7 uses the field stalk equivalence for abelian sheaves, compatible with the underlying Galois-set equivalence, to transport the finite ring action and subobjects. The generation unit does not prove the field equivalence."
+   },
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Step 7 realizes each finite transitive orbit by a finite separable field spectrum. This field Galois classification is a generic input to the point coefficient description."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-support-constructible",
+    "why": "Step 1 uses the independence of vanishing from the chosen geometric point and constructibility of support over the commutative ring Z/char(Lambda). This support tool is not a generation step."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-left-exact",
+    "why": "Step 5 uses its preservation of kernels and the displayed left exact sequence to preserve monomorphisms under the closed direct image. The unit does not develop underived direct-image exactness."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Steps 2 and 5 use the zero and identity stalk formulas for open extension by zero to locate its support and prove preservation of monomorphisms. This is a generic localization input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-unit-iso",
+    "why": "Steps 2 and 5 restrict open extension by zero back to the original sheaf using its stated natural unit isomorphism. This local sheaf identity is not replaced by the unit generation argument."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Steps 2, 4 and 6 use its actual counit monomorphism and unit epimorphism, with vanishing complementary restrictions giving the required isomorphisms. This underived localization tool supports the classification."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Steps 2, 4 and 6 identify inverse-image stalks with original stalks; step 6 then checks the kernel of a pulled-back monomorphism. The unit does not prove this base-point comparison."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowerstar",
+    "why": "Step 5 applies the stated vanishing of the restriction of a direct image to a disjoint open, for the closed residue-field immersion and its complement. This sheaf tool is needed before the subobject argument."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Steps 1, 2, 4, 5 and 6 detect zero sheaves or isomorphisms from geometric stalks. This generic small-etale-site tool is independent of generation."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Steps 2, 4 and 6 preserve constructibility under the indicated open or residue-point inverse images. This is the general pullback tool, not a change of generation route."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Step 5 uses exactly the displayed closed counit isomorphism to recover N from g^*g_*N. The generation unit does not construct this adjunction comparison."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Step 7 turns represented finite etale field covers into finite locally constant set sheaves. This generic coefficient description is independent of the unit generation argument."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Step 2 uses clause (2), the closed immersion with prescribed underlying closed subset, for X minus U. This supplies the complementary closed immersion required by the localization sequence."
+   }
+  ]
+ },
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.Etale.exists_iso_openImmersionLowerShriek_lowerStar_of_simple",
+   "module": "WeilConjectures.ConstructibleSheaf.Simple",
+   "line": 375,
+   "note": "Partial coverage: classification; not the original full item."
+  },
+  {
+   "declaration": "AlgebraicGeometry.Etale.simple_openImmersionLowerShriek_lowerStar",
+   "module": "WeilConjectures.ConstructibleSheaf.Simple",
+   "line": 461,
+   "note": "Partial coverage: converse."
+  },
+  {
+   "declaration": "AlgebraicGeometry.Etale.exists_iso_lowerStar_fromSpecResidueField_of_simple",
+   "module": "WeilConjectures.ConstructibleSheaf.Simple",
+   "line": 543,
+   "note": "Partial coverage: finite-type closed point clause."
+  },
+  {
+   "declaration": "AlgebraicGeometry.Etale.not_forall_prop_of_isLocallyConstantSheaf",
+   "module": "WeilConjectures.ConstructibleSheaf.Simple",
+   "line": 591,
+   "note": "Covers the corrected final clause with connectedness and finite type; original omits these necessary hypotheses."
+  }
+ ],
+ "tool_uses": [
+  "cor-galois-lisse-representations",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-pullback",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "thm-galois-lc-etale",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-80e910162",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-80e910162 (reviewer sub-agent of L); spot-checked: Read both delivered nodes, all ten proof steps, cited statements, sources and unit/chapter routes. Verified localization maps, arbitrary finite-ring coefficients, Galois simplicity and the exact Mathlib residue-point criterion. Counterexamples justify the corrected final clause. No duplicate, cycle or major gap found. Accepted tool uses and inherited DAG issues are documented in review.md; no fixes required."
+ }
 }
