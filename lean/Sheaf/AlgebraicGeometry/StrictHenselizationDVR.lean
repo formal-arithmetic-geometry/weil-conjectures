@@ -32,7 +32,9 @@ open AlgebraicGeometry CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical map from a Noetherian scheme local ring to its strict henselization
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The canonical map from a Noetherian scheme local ring to its strict henselization
 is flat, local and injective, and preserves and reflects the DVR property.
 The first conjunct specifies the map on every germ using the affine pointed
 neighbourhood coprojections: whenever a representative factors through an affine
@@ -64,9 +66,7 @@ Proof:
 4. Conversely, if the strict henselization is a DVR, it is regular local of
    dimension one. The dimension and regularity lemmas reflect these properties
    to `A_p`. The assumed Noetherianity and `lem-sc-regular-dim1-dvr` make `A_p`
-   a DVR. These two implications give Tag 0AP3. -/
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
+   a DVR. These two implications give Tag 0AP3. - /
 theorem strictHenselization_dvr
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) (x : Spec (.of Ω))
