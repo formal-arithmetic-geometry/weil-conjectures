@@ -81,15 +81,18 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology",
-  "declaration": "CategoryTheory.ringedSiteZerothHypercohomology",
-  "file": "lean/Sheaf/Algebra/Homology/RingedSiteZerothHypercohomology.lean",
-  "statement": "def ringedSiteZerothHypercohomology {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤ AddCommGrpCat.{u}",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
+  "module": "Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses",
+  "declaration": "CategoryTheory.ringedSiteZerothHypercohomologyOfUniverses",
+  "declarations": [
+   "CategoryTheory.ringedSiteZerothHypercohomologyOfUniverses"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteZerothHypercohomologyOfUniverses.lean",
+  "statement": "def ringedSiteZerothHypercohomologyOfUniverses\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] :\n    DerivedCategory (SheafOfModules.{max c v r}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ⥤\n      AddCommGrpCat.{max c v r}",
+  "branch": "newtargets-dag",
+  "by": "L",
+  "date": "2026-10-16",
   "existing": false,
-  "fixed_by": "R-rgs"
+  "note": "Maintenance repair for NZ/lem-coef-derived-system-evaluation-calculus: the old API equated site object, site morphism and coefficient universes and could not accept Scheme.ProEt.topology Y and its completed integral coefficient sheaf. This companion publicly imports the unchanged legacy API and uses independent site universes c, v, coefficients/modules max c v r, canonical sheafification instances and the standard derived-category localization. Mathematical statement and graph unchanged. The separate side-only module is required because the compiler uses published live artifacts for existing live modules. This is the same real construction H0 composed with the right derived functor of Hom_R(R,-); no definition data is sorry."
  },
  "reviewed": {
   "date": "2026-10-11",
