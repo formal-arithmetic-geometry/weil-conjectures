@@ -37,7 +37,11 @@
   "def-weil-open-immersion",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-cbc-etale-section-proper-support",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pod-ring-scalar-extension",
+  "def-weil-pbc-underived-exchange"
  ],
  "proof": [
   {
@@ -493,5 +497,47 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-72f1a7932 (reviewer sub-agent of L); spot-checked: Read the full item, all ten steps, all 48 cited dependency statements, SGA XVII 6.2.1–6.2.3, and relevant Stacks sources. Verified hypotheses, actual base-change maps, coefficient categories, refinements, edge cases, duplicates and acyclicity. No new nodes or repairs. Accepted all 14 proposed generic tool uses. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc1267fb5",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable source, all statement dependencies, declarations, hypotheses, conclusions, edge cases, universes, docstrings and verbatim statement. Per-file scompile.py reproduction passed cleanly in both forms (4.9 s, 5.5 s). No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation",
+  "declaration": "AlgebraicGeometry.Etale.quasiFinite_finiteParts_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FinitePartsDecomposition",
+   "AlgebraicGeometry.Etale.finitePartsCoordinate",
+   "AlgebraicGeometry.Etale.FinitePartsRefinement",
+   "AlgebraicGeometry.Etale.FinitePartsRestriction",
+   "AlgebraicGeometry.Etale.finitePartsTransition",
+   "AlgebraicGeometry.Etale.finitePartsPieceObject",
+   "AlgebraicGeometry.Etale.finitePartsPieceInclusion",
+   "AlgebraicGeometry.Etale.FinitePartsMaps",
+   "AlgebraicGeometry.Etale.FinitePartsCompatible",
+   "AlgebraicGeometry.Etale.IsFinitePartsGenerator",
+   "AlgebraicGeometry.Etale.FinitePartsSpecial",
+   "AlgebraicGeometry.Etale.FinitePartsUniversal",
+   "AlgebraicGeometry.Etale.FinitePartsStalkIso",
+   "AlgebraicGeometry.Etale.finitePartsBaseChangeMap",
+   "AlgebraicGeometry.Etale.FinitePartsBaseChange",
+   "AlgebraicGeometry.Etale.finitePartsBaseChangeTuple",
+   "AlgebraicGeometry.Etale.FinitePartsSupportCondition",
+   "AlgebraicGeometry.Etale.FinitePartsBaseChangeCompatible",
+   "AlgebraicGeometry.Etale.finitePartsCoefficientDirectImage",
+   "AlgebraicGeometry.Etale.FinitePartsCoefficientMapCondition",
+   "AlgebraicGeometry.Etale.FinitePartsCoefficientCompatible",
+   "AlgebraicGeometry.Etale.quasiFinite_finiteParts_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteFinitePartsPresentation.lean",
+  "statement": "theorem quasiFinite_finiteParts_presentation {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] (f : X ⟶ S) [IsSeparated f] [LocallyOfFinitePresentation f] (hf : f.IsQuasiFinite) (B : Type (u + 1)) [CommRing B] (F H : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} B)) (ι : H ⟶ (lowerStar (ModuleCat.{u + 1} B) f).obj ((upperStar (ModuleCat.{u + 1} B) f).obj F)) [Mono ι] (hH : FinitePartsSupportCondition f F H ι) : (∃ η : FinitePartsMaps f F H, IsFinitePartsGenerator f F H ι η ∧ FinitePartsCompatible η ∧ FinitePartsUniversal η ∧ FinitePartsStalkIso η ∧ FinitePartsBaseChangeCompatible ι η ∧ FinitePartsCoefficientCompatible ι η) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), ∃ (U : S.Etale) (_ : QuasiCompact U.hom) (_ : QuasiSeparated U.hom) (t : Spec (.of Ω) ⟶ U.left) (D : FinitePartsDecomposition f U), t ≫ U.hom = s ∧ FinitePartsSpecial D t",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
