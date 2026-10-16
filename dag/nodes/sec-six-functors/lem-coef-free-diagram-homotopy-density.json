@@ -1,0 +1,104 @@
+{
+ "id": "lem-coef-free-diagram-homotopy-density",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: generation of localized ordinary coefficient diagrams by free evaluation diagrams, used to prove the rectification comparison is fully faithful.",
+   "via": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free strict diagrams generate a model-diagram localization",
+ "statement": "Use quasicategories, coherent colimits and functor equivalences of [def-cbc-enhanced-diagrams-cones]. Fix a universe $\\mathcal U$ and an ordinary category $\\mathcal M$ with $\\mathcal U$-small Hom sets and all $\\mathcal U$-small limits and colimits. Suppose it has classes $C,F,W$, with $W$ retract closed and satisfying two-out-of-three, and functorial weak factorization systems $(C,F\\cap W)$ and $(C\\cap W,F)$. Here a weak factorization system is a factorization of every arrow through its left and right classes, each class characterized by diagonal lifting against the other. Let $0$ be the initial object of $\\mathcal M$ and let $\\mathcal M_c$ be the full subcategory on the cofibrant objects, where an object $X$ is cofibrant by definition when $0\\to X\\in C$. For a $\\mathcal U$-small ordinary category $I$, let $W_I$ be the natural transformations in $\\operatorname{Fun}(I,\\mathcal M_c)$ whose components belong to $W$, and put $\\mathcal A_I=N(\\operatorname{Fun}(I,\\mathcal M_c))[W_I^{-1}]_\\infty$, with localization defined by the full coherent functor-category universal property in a larger universe. Assume $\\mathcal A_I$ admits all $\\mathcal U$-small colimits.\n\nFor $i\\in I$ and $X\\in\\mathcal M_c$, define the strict free diagram $E_iX$ by $(E_iX)(j)=\\coprod_{u\\in\\operatorname{Hom}_I(i,j)}X$; an arrow $v:j\\to j'$ maps the summand indexed by $u$ identically to the summand indexed by $vu$. Then the smallest full subcategory of $\\mathcal A_I$ which contains the images of all $E_iX$, is closed under equivalences, and is closed under all $\\mathcal U$-small coherent colimits is $\\mathcal A_I$ itself. Equivalently, any full replete colimit-closed subcategory containing those free diagrams contains every localized strict diagram. The closure includes the empty colimit. This is a generation assertion internal to the localization of strict diagrams; it does not identify that localization with a coherent functor category.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "The generation subargument in the proof of Theorem 7.9.8, printed pp. 411-412, formulas (7.9.8.11)-(7.9.8.14) and the final paragraph, for ordinary model categories. The model hypotheses supply the sequential cofibration condition of Remark 7.9.7. This extracts the free-diagram homotopy-density ingredient, not the full rectification theorem. Read online, not archived in literature/. No Stacks tag states this homotopy-density result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "free.diagram|diagram.*[Hh]omotopy.*dens|[Hh]omotopy.*dens.*diagram",
+   "results": "{\"t\": \"2026-10-16T19:35:53Z\", \"tool\": \"grep\", \"query\": \"free.diagram|diagram.*[Hh]omotopy.*dens|[Hh]omotopy.*dens.*diagram\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits concern ordinary localizations, ModelCategory constructors and ordinary diagrams of cocones. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70; neither states coherent colimit generation of arbitrary strict diagram localizations. Both semantic phrasings and the free-diagram density grep were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"colimit\", \"generat\"",
+   "results": "{\"t\": \"2026-10-16T19:35:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"colimit\\\", \\\"generat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits concern ordinary localizations, ModelCategory constructors and ordinary diagrams of cocones. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70; neither states coherent colimit generation of arbitrary strict diagram localizations. Both semantic phrasings and the free-diagram density grep were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free diagrams generate the infinity localization of strict model category diagrams under colimits",
+   "results": "{\"t\": \"2026-10-16T19:35:54Z\", \"tool\": \"leansearch\", \"query\": \"Free diagrams generate the infinity localization of strict model category diagrams under colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.lift\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"CategoryTheory.Limits.diagramOfCoconesInhabited\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\"], \"digest\": \"d6dd640be8101c92\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits concern ordinary localizations, ModelCategory constructors and ordinary diagrams of cocones. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70; neither states coherent colimit generation of arbitrary strict diagram localizations. Both semantic phrasings and the free-diagram density grep were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a model category strict diagrams localized at objectwise weak equivalences are generated under small colimits by free diagrams Hom i j coproduct X",
+   "results": "{\"t\": \"2026-10-16T19:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"In a model category strict diagrams localized at objectwise weak equivalences are generated under small colimits by free diagrams Hom i j coproduct X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"CategoryTheory.ObjectProperty.strictColimitsOfShape\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\"], \"digest\": \"4b4d37766c998561\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits concern ordinary localizations, ModelCategory constructors and ordinary diagrams of cocones. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70; neither states coherent colimit generation of arbitrary strict diagram localizations. Both semantic phrasings and the free-diagram density grep were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy density of free evaluation diagrams in the localization of strict functors into a model category without a projective model structure",
+   "results": "{\"t\": \"2026-10-16T19:36:27Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy density of free evaluation diagrams in the localization of strict functors into a model category without a projective model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"4205fcf48f857ded\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits concern ordinary localizations, ModelCategory constructors and ordinary diagrams of cocones. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70; neither states coherent colimit generation of arbitrary strict diagram localizations. Both semantic phrasings and the free-diagram density grep were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free functors on objects generate homotopy colimits of diagrams of cofibrant objects in a model category",
+   "results": "{\"t\": \"2026-10-16T19:49:10Z\", \"tool\": \"leanfinder\", \"query\": \"Free functors on objects generate homotopy colimits of diagrams of cofibrant objects in a model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"fac7c00c378a6fff\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*diagram|diagram.*generat|[Hh]omotopy[Cc]olimit|cofibrant.*generat",
+   "results": "{\"t\": \"2026-10-16T19:50:05Z\", \"tool\": \"grep\", \"query\": \"free.*diagram|diagram.*generat|[Hh]omotopy[Cc]olimit|cofibrant.*generat\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CofibrantObject\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T19:50:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorHoCatAdjCounit'\", \"HomotopicalAlgebra.BifibrantObject.ιCofibrantObjectLocalizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorHoCatCounitHoCatAdj\"], \"digest\": \"360a1695ef513181\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-small-diagram-model-rectification",
+  "date": "2026-10-17",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

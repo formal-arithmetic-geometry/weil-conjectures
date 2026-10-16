@@ -1,0 +1,104 @@
+{
+ "id": "lem-coef-coherent-diagram-coyoneda",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent free-diagram co-Yoneda extension, used to construct the inverse of the small-diagram rectification comparison.",
+   "via": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coherent relative co-Yoneda density and extension",
+ "statement": "Use quasicategories, coherent mapping spaces, functor categories and colimits of [def-cbc-enhanced-diagrams-cones]. Fix a universe $\\mathcal U$, a $\\mathcal U$-small ordinary category $I$, and infinity categories $\\mathcal B,\\mathcal E$ admitting all $\\mathcal U$-small colimits, formed in larger universes when necessary. No presentability or local smallness relative to $\\mathcal U$ is assumed. Put $\\mathcal P=\\operatorname{Fun}(N(I),\\mathcal B)$. This category has $\\mathcal U$-small colimits, computed pointwise, and evaluation preserves them. The coherent free diagram $i!x$ is defined by $(i!x)(j)=\\coprod_{\\operatorname{Hom}_I(i,j)}x$, with structure maps induced by composition in $I$. It is contravariantly functorial in $i$ and covariantly functorial in $x$, and there are coherent natural equivalences\n$$\\operatorname{Map}_{\\mathcal P}(i!x,F)\\simeq\\operatorname{Map}_{\\mathcal B}(x,F(i)).$$\nEvery $F$ has the canonical co-Yoneda colimit presentation by the free diagrams equipped with maps to $F$:\n$$F\\simeq\\operatorname{colim}_{(i,x,a:x\\to F(i))} i!x.$$\nPrecisely, the indexing category is the relative slice of $N(I)^{\\mathrm{op}}\\times\\mathcal B\\to\\mathcal P$, $(i,x)\\mapsto i!x$, over $F$; although this slice may be large, it admits a final map from a $\\mathcal U$-small simplicial set $K_F$. Here a map to an indexing infinity category is final when restricting along it leaves the colimit of every coherent diagram unchanged, in every target universe in which those colimits exist. The displayed colimit and cocone can therefore be computed on $K_F$. Mapping out of this colimit gives the corresponding limit of mapping spaces, in a universe containing those spaces.\n\nWrite $\\operatorname{Fun}^L_{\\mathcal U}$ for the full coherent functor subcategory on functors preserving $\\mathcal U$-small colimits. Restriction along $(i,x)\\mapsto i!x$ induces an equivalence between $\\operatorname{Fun}^L_{\\mathcal U}(\\mathcal P,\\mathcal E)$ and the full subcategory of $\\operatorname{Fun}(N(I)^{\\mathrm{op}}\\times\\mathcal B,\\mathcal E)$ on $T$ for which each $T(i,-)$ preserves $\\mathcal U$-small colimits. The extension $H_T$ sends $F$ to the colimit of $T(i,x)$ on the same $K_F$, and satisfies $H_T(i!x)\\simeq T(i,x)$ coherently. Restriction is an equivalence on entire functor categories, including transformations; in particular natural transformations between colimit-preserving extensions are determined by their restrictions to the free diagrams.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Section 6.7: relative Yoneda formulas (6.7.1.1)-(6.7.1.3), Theorem 6.7.2, Lemma 6.7.5 and Lemma 6.7.7, printed pp. 315-318, with A=N(I)^op. Pointwise colimits are the dual of Theorem 6.1.22. The small final map is the explicit interpretation in the proof of Theorem 7.9.8 following (7.9.8.10), printed pp. 410-411. Read online, not archived in literature/. No Stacks tag states this infinity-categorical relative co-Yoneda theorem."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "co.?Yoneda|relative.Yoneda|[Dd]uality.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-16T19:35:57Z\", \"tool\": \"grep\", \"query\": \"co.?Yoneda|relative.Yoneda|[Dd]uality.*[Ff]unctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor infinity categories have co Yoneda colimit density and colimit preserving extensions from representable tensors",
+   "results": "{\"t\": \"2026-10-16T19:35:57Z\", \"tool\": \"leansearch\", \"query\": \"Functor infinity categories have co Yoneda colimit density and colimit preserving extensions from representable tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.Cocone.isColimitYonedaEquiv\", \"CategoryTheory.Functor.isDenseAt_iff\", \"CategoryTheory.yoneda_preservesLimit\", \"CategoryTheory.Functor.representableByCompYonedaObjOfIsLimit\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.yonedaFunctor_preservesLimits\"], \"digest\": \"5354f66d4e8d1fd4\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coyoneda\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T19:35:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"coyoneda\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coyoneda.colimitCocone\", \"CategoryTheory.Coyoneda.instHasColimitObjOppositeFunctorTypeCoyoneda\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit\", \"CategoryTheory.Coyoneda.colimitCocone_pt\", \"CategoryTheory.Coyoneda.colimitCoyonedaIso\", \"CategoryTheory.Coyoneda.colimitCocone_ι_app\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit_desc\", \"CategoryTheory.Functor.final_of_colimit_comp_coyoneda_iso_pUnit\"], \"digest\": \"bc9b9ebe5a773ecb\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocomplete infinity category valued functors satisfy co Yoneda density and extension from free evaluation diagrams by colimits",
+   "results": "{\"t\": \"2026-10-16T19:35:56Z\", \"tool\": \"leanfinder\", \"query\": \"Cocomplete infinity category valued functors satisfy co Yoneda density and extension from free evaluation diagrams by colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.Presheaf.uniqueExtensionAlongULiftYoneda\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Coyoneda.colimitCoconeIsColimit\", \"CategoryTheory.Presheaf.isExtensionAlongYoneda\", \"CategoryTheory.Limits.IndObjectPresentation.yoneda\", \"CategoryTheory.Functor.Final.colimitCompCoyonedaIso\"], \"digest\": \"6ecc11b4e07cb5ea\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Yoneda duality: cocontinuous functors from Fun I B into C correspond to functors I opposite into cocontinuous functors B to C",
+   "results": "{\"t\": \"2026-10-16T19:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Yoneda duality: cocontinuous functors from Fun I B into C correspond to functors I opposite into cocontinuous functors B to C\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.functorToInterchange\", \"CategoryTheory.CostructuredArrow.toOverCompCoyoneda\", \"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.functorToInterchangeIso\", \"CategoryTheory.Presheaf.yonedaAdjunction\", \"CategoryTheory.GrothendieckTopology.yonedaOpCompCoyoneda\", \"CategoryTheory.GrothendieckTopology.uliftYonedaOpCompCoyoneda_inv_app_app_val_app\", \"CategoryTheory.GrothendieckTopology.uliftYonedaOpCompCoyoneda_hom_app_app_down\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\"], \"digest\": \"027aef887fa574e3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Loogle coyoneda/colimit hits are ordinary Hom-set colimit formulas; semantic hits include ordinary IsDense/DenseAt, Presheaf.colimitOfRepresentable and ordinary presheaf adjunctions. Read Functor/KanExtension/DenseAt.lean:20-80 and Limits/Yoneda.lean:35-100: these do not treat arbitrary cocomplete infinity-category valued diagrams, coherent mapping spaces or their cocontinuous extension equivalence. Second relative-Yoneda phrasing also gave only ordinary sheaf/Yoneda adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation left adjoints freely generate a functor infinity category under colimits by a relative Yoneda formula",
+   "results": "{\"t\": \"2026-10-16T19:49:08Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation left adjoints freely generate a functor infinity category under colimits by a relative Yoneda formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationLeftAdjoint\", \"CategoryTheory.evaluationLeftAdjoint_obj_obj\", \"CategoryTheory.evaluationLeftAdjoint_obj_map\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.evaluationIsLeftAdjoint\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.evaluationLeftAdjoint_map_app\"], \"digest\": \"c4762ee655a81b99\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Yy]oneda|[Yy]oneda.*relative|[Cc]oyoneda|evaluationLeftAdjoint",
+   "results": "{\"t\": \"2026-10-16T19:50:05Z\", \"tool\": \"grep\", \"query\": \"relative.*[Yy]oneda|[Yy]oneda.*relative|[Cc]oyoneda|evaluationLeftAdjoint\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\", \"Mathlib/CategoryTheory/Adjunction/Evaluation.lean\"], \"digest\": \"ce349d350b4912e6\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-16T19:50:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"evaluation\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationAdjunctionLeft\", \"CategoryTheory.evaluationAdjunctionRight\", \"CategoryTheory.evaluationAdjunctionRight_unit_app\", \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"CategoryTheory.evaluationAdjunctionLeft_unit_app_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\"], \"digest\": \"4fdef3b40f6cfa84\"}",
+   "date": "2026-10-16",
+   "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-small-diagram-model-rectification",
+  "date": "2026-10-17",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

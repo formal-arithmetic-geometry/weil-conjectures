@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Integral exceptional-adjoint proof, paragraph 2, the displayed derived coefficient-adjunction and inverse-limit calculation; mapping-space foundation used by the finite-adjunction-diagram realization and its cosimplicial-frame comparison. Technical input: The comparison from actual reduced hammocks to free simplicial resolution localization, before passing to infinity categories. Supporting input: Dwyer–Kan, Calculating simplicial localizations, Comparison Lemma 2.3, printed p.20; proof in Section 5.8, printed pp.24–25",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: mapping-space foundation through finite-adjunction diagrams and cosimplicial frames; DK Comparison Lemma 2.3 supplies the free-factor inversion input.",
    "via": [
     "lem-coef-dk-cofibrant-localization-comparison",
     "lem-coef-hammock-infinity-localization",
@@ -28,9 +28,106 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The row-product assignment is well defined. In a reduced hammock, orient each rightward horizontal arrow as it is written and each leftward arrow by the inverse of its arrow in $V$. Commutativity of every rectangle and the fact that each vertical arrow belongs to $V$ imply that the products along adjacent rows agree in $P[V^{-1}]$; the endpoint vertical arrows are identities, so all row products equal. Deleting or repeating a row and then reducing identity columns or adjacent columns preserves this value, and horizontal concatenation multiplies the values. Thus the assignment is a simplicial functor, identity on objects, and is natural under functors preserving $V$. The meaning of weak homotopy equivalence on mapping simplicial sets is the one in [lem-coef-coherent-nerve-comparison].",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1 and the row-product map in Comparison Lemma 2.3, printed pp.19–20"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-free-factor-hammock-pushout] with $W=V$. It gives $H(P,V)=D*_O H(V,V)$ and $P[V^{-1}]=D*_O V[V^{-1}]$, and identifies the comparison with $D*_O$ of the whole-category comparison. The last clause of [lem-coef-fixed-object-simplicial-free-calculus], applied to the identity of the discrete simplicial category $D$ and the whole-category comparison, preserves mappingwise weak equivalences under this free product over $O$. Thus it suffices to prove the comparison for $(C,C)$ with $C$ free. Separate the generating graph into its connected components: every arrow and every row of a hammock stays in one such component. For objects in distinct components both the hammock set and ordinary-localization Hom set are empty. There are no object pairs if $O$ is empty. It remains to treat a nonempty connected free category.",
+   "uses": [
+    "lem-coef-free-factor-hammock-pushout",
+    "lem-coef-fixed-object-simplicial-free-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(i), Proposition 3.2"
+   }
+  },
+  {
+   "text": "For a nonempty connected free $C$, choose a lift $\\widetilde x$ of $x$ in the covering category of [lem-coef-free-factor-hammock-universal-cover-reduction]. Its generating graph is an oriented tree and its nerve is contractible. The stated simplicial isomorphism decomposes $H(C,C)(x,y)$ as the disjoint union of $H(\\widetilde C,\\widetilde C)(\\widetilde x,\\widetilde y)$ over lifts of $y$. Accordingly it is enough to prove that the mapping simplicial sets for the free category on an arbitrary oriented tree are nonempty and weakly contractible. The covering lemma applies only to $(C,C)$; it is never applied to a pair with a surviving $D$ factor.",
+   "uses": [
+    "lem-coef-free-factor-hammock-universal-cover-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(ii), printed p.25"
+   }
+  },
+  {
+   "text": "Fix a vertex $x$ of an oriented tree $T$ and a finite signed word $w$. First suppose $T$ is finite. We prove $NZ_w(x,x)$ weakly contractible by induction on the number of edges, using the diagram categories of [def-coef-zigzag-homotopy-calculus]. For the singleton tree every object and arrow of $Z_w(x,x)$ is the constant identity diagram, including when $w$ is empty, so its nerve is a point. Otherwise choose a leaf $l\\ne x$, with neighbour $a$, and let $T'$ be obtained by deleting $l$ and its incident edge. Such a leaf exists: a maximal simple path in a finite tree has two leaf endpoints. Let $i:C_{T'}\\to C_T$ be inclusion and let $r:C_T\\to C_{T'}$ send $l$ to $a$, its incident generating edge to $1_a$, and every other generator to itself. Freeness extends this to a functor, with $ri=1$. If the edge is $l\\to a$, it is the sole nonidentity component of a natural transformation $1\\Rightarrow ir$; if it is $a\\to l$, it defines $ir\\Rightarrow1$. Naturality holds on that edge and on all unchanged generating edges, hence on every path. Applying $i,r$ and this transformation at every vertex of a fixed-word diagram gives functors between $Z_w^{C_{T'}}(x,x)$ and $Z_w^{C_T}(x,x)$, a retraction, and a transformation from one composite to the identity in the stated orientation. All endpoint components are identities because $l\\ne x$; all vertical components lie in the distinguished category $C_T$. By [lem-coef-nerve-natural-homotopy-equivalence], their nerves are homotopy equivalent. Induction proves the finite-tree assertion.\n\nFor arbitrary small $T$, index by the nonempty directed poset of finite subtrees $S\\subseteq T$ containing $x$. The union of two such subtrees is again a finite subtree because they intersect at $x$. For each $S$ the preceding induction gives $NZ^{C_S}_w(x,x)\\to\\Delta^0$ a weak homotopy equivalence. A simplex of $NZ_w$ has finitely many arrows, and every arrow is a finite generating path. All their edges, together with the finitely many paths connecting their vertices to $x$, lie in a finite subtree. Thus $NZ^{C_T}_w(x,x)$ is exactly the degreewise filtered colimit of these nerves; there are no extra identifications because subtree inclusions are faithful and injective on objects. Apply [lem-coef-filtered-colimit-weak-equivalences] to these collapse maps and the constant point diagram. The indexing category is small, nonempty and filtered, so its constant point colimit is a point. Hence $NZ^{C_T}_w(x,x)$ is weakly contractible.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii): explicit rooted-leaf induction, followed by finite-subtree filtered colimits; natural-transformations-on-nerves input is cited separately."
+   }
+  },
+  {
+   "text": "By [lem-coef-hammock-graph-colimit-presentation], the fixed-word nerves $NZ^C_w(x,x)$ form a proper diagram on the small signed-word category, and their colimit is $H(C,C)(x,x)$. Collapse every fixed-word nerve to a point. The constant point diagram is proper: all injection maps are identities and the two-image intersection condition is the equality $\\{*\\}=\\{*\\}\\cap\\{*\\}$. The collapse maps are weak homotopy equivalences by the preceding step, so [lem-coef-proper-word-colimit-invariance] makes the map on colimits a weak homotopy equivalence. The signed-word category has an initial empty word, so its constant point diagram has colimit a point. It follows that $H(C,C)(x,x)$ is weakly contractible.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation",
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Sections 4.1–4.5, 5.4–5.5 and 5.8(iii)"
+   }
+  },
+  {
+   "text": "For arbitrary vertices $x,y$ of the tree, follow the finite undirected path from $x$ to $y$. All its oriented generating arrows belong to the distinguished category $C$. With source fixed at $x$, each such arrow induces a weak equivalence between the successive target mapping spaces by [lem-coef-hammock-inverted-arrow-actions], in the forward or backward direction according to its orientation. Starting with the weakly contractible $H(C,C)(x,x)$, this finite chain of weak equivalences shows $H(C,C)(x,y)$ is nonempty and weakly contractible. By the cover decomposition above, every component of the original $H(C,C)(x,y)$ is weakly contractible. Finally [lem-coef-hammock-components-localization] says that the row-product comparison induces the bijection from these components to $C[C^{-1}](x,y)$, so it is a weak homotopy equivalence to that discrete simplicial set. Step 2 now gives the required free-factor comparison.",
+   "uses": [
+    "lem-coef-hammock-inverted-arrow-actions",
+    "lem-coef-hammock-components-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Propositions 3.1 and 3.3; Section 5.8(ii)–(iii)"
+   }
+  },
+  {
+   "text": "The constructions use only composition, identities, the chosen wide subcategory and inversion of its arrows. Applying a functor of free-factor pairs preserving $V$ sends every row, vertical square, reduction and row product to the corresponding one in the target, so the comparison is natural and the composition law is respected. This completes the stated weak equivalence and its naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1 and Proposition 3.4, printed pp.19–21"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-free-factor-hammock-pushout",
+  "lem-coef-free-factor-hammock-universal-cover-reduction",
+  "lem-coef-hammock-components-localization",
+  "lem-coef-hammock-graph-colimit-presentation",
+  "lem-coef-hammock-inverted-arrow-actions",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-proper-word-colimit-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Comparison Lemma 2.3, Sections 3.1–3.3 and 4.1–5.8, read online; finite-subtree and proper-word colimit arguments written out here. Paper not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +184,38 @@
    "results": "{\"t\": \"2026-10-16T15:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocalizerMorphism\\\", \\\"IsLocalizedEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.id\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedFullyFaithfulOfIsLocalizedEquivalence\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_isInduced\", \"CategoryTheory.LocalizerMorphism.instIsLocalizedEquivalenceOppositeOpOp\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.comp\"], \"digest\": \"aff41fb774d49abf\"}",
    "date": "2026-10-16",
    "verdict": "no match: second-reader search. The semantic hits and LocalizerMorphism declarations concern equivalences of ordinary localized categories, not weak equivalences of reduced-hammock mapping simplicial sets. FreeGroupoid.instIsLocalizationOfTopMorphismProperty is ordinary inversion of every arrow, without the relative free-factor homotopy claim. Read FreeGroupoidOfCategory.lean:30–105, CofibrantObjectHomotopy.lean:55–105, and the returned signatures. The independent source grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The componentwise Dwyer Kan hammock comparison for a free factor reduces to the case W equals C with contractible nerve",
+   "results": "CategoryTheory nerve and localization declarations; no hammock weak-equivalence theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hammock\", \"Localization\", \"FreeCategory\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|free.*factor.*localiz|contractible.*nerve",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dwyer Kan comparison of reduced hammock mapping spaces with ordinary inversion for free categories",
+   "results": "CategoryTheory.Localization and FreeGroupoid results; no hammock weak-equivalence theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dk-cofibrant-localization-comparison",
@@ -98,5 +223,20 @@
   "group": "NF"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-factor-hammock-comparison",
+  "worker": "stage1",
+  "summary": "Second reading: four statement-only supports; free-product weak-equivalence preservation reused from the existing fixed-object free calculus; finite rooted-leaf contraction proved directly in Step 4 using the existing nerve-homotopy lemma. Componentwise cover, filtered-subtree and proper-word colimits, endpoint actions and component bijection checked.",
+  "blueprint": "Ancestor proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation, via finite-adjunction diagrams and cosimplicial frames: DK Comparison Lemma 2.3 provides the mapping-space localization input. Steps 2–3 implement DK 5.8(i)–(ii); Steps 4–6 give the rooted-leaf induction, filtered-subtree and proper-word colimits, endpoint transport and component argument for DK 5.8(iii)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-1ccfe4080",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-1ccfe4080 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the 4 new nodes and all 7 cited statements in full. I also read Dwyer–Kan from the recorded PDF (scanned pages read as images, kept in /tmp only): CL 2.3 p.20, Prop 3.1–3.3 pp.20–21, 5.1–5.8 pp.24–25. The new nodes faithfully state DK 3.2 (pushout L^H C=D*L^H W, plus the true ordinary-localization pushout), 5.8(ii) (cover, made precise as a coproduct over the lifts of y), 3.1 (π0 is the ordinary localization, general) and 3.3 (u_*, u^* weak equivalences). The steps follow DK 5.8(i)-(iii). Step 2: the free-product weak-equivalence preservation comes from the last clause of the existing fixed-object free calculus, and the connected-component and empty-O cases are handled. Step 3: I checked the lifting of hammocks myself (endpoint identities force a common source and target lift; identity columns correspond). Step 4: Z_w is unreduced, so the singleton tree gives a point. In the leaf retraction, r fixes x, and eta is 1=>ir or ir=>1 with endpoint components identities. The infinite tree is a filtered union of full subcategories over finite subtrees containing x. Step 5: G(h)=NZ_h by definition, the constant point diagram is proper, and the empty word is initial. Step 6: transport along tree edges in either orientation, then π0 by DK 3.1. Small cases checked: empty O, generator-free D or W, W=C, one arrow, a loop (infinite-line cover). No duplicates in the DAG (checked against the DK 2.4 and 6.2 nodes, the infinity-localization node and the special-hammock nodes). No cycles; the only citer is lem-coef-dk-cofibrant-localization-comparison. All cited nodes are in the same unit, so no tool_uses. Statement unchanged, no SGA. New nodes are statement-only with all three search kinds and correct blueprint.from/via. No fixes."
+ }
 }

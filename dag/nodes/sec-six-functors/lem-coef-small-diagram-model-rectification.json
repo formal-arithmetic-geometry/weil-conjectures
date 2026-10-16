@@ -29,35 +29,130 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $0$ be an initial object, let $\\mathcal M_c$ be the full subcategory of objects $X$ with $0\\to X\\in C$ (the cofibrant objects), and write $\\iota:\\mathcal M_c\\hookrightarrow\\mathcal M$ for inclusion. Work in a common larger universe containing all categories and their mapping spaces; all colimits asserted below remain $\\mathcal U$-small. Choose the functorial factorization of $0\\to X$ into $0\\to QX$ in $C$ and $e_X:QX\\to X$ in $F\\cap W$. It gives a functor $Q:\\mathcal M\\to\\mathcal M_c$ and a natural weak equivalence $e:\\iota Q\\to\\mathrm{id}$. Naturality and two-out-of-three imply that $Q$ preserves weak equivalences. On $\\mathcal M_c$ the same $e$ has both endpoints in $\\mathcal M_c$, so $Q\\iota\\to\\mathrm{id}_{\\mathcal M_c}$ is also a natural weak equivalence. Apply this pointwise to strict diagrams. The entire-functor-category localization property descends these functors and transformations; their components become equivalences, hence they are coherent natural equivalences. Thus it suffices to compare $\\mathcal A=N(\\operatorname{Fun}(I,\\mathcal M_c))[W_I^{-1}]_\\infty$ with $\\mathcal P=\\operatorname{Fun}(N(I),\\mathcal B)$, where $\\mathcal B=N(\\mathcal M_c)[W^{-1}]_\\infty\\simeq\\mathcal M[W^{-1}]_\\infty$. This reduction constructs quasi-inverses and does not assume a model structure on $\\mathcal M^I$.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Theorem 7.9.8, reduction to cofibrant objects after (7.9.8.2); here implemented directly using the assumed functorial model factorization."
+   }
+  },
+  {
+   "text": "Verify the hypotheses of [lem-coef-cocomplete-cofibration-localization] for $\\mathcal M_c$ and $\\operatorname{Fun}(I,\\mathcal M_c)$ with pointwise cofibrations and weak equivalences. Isomorphisms have both diagonal lifting properties and hence belong to $C\\cap W$ and $F\\cap W$. The lifting-class closure gives identities, composition, retracts and pushout closure for $C$ and $C\\cap W$. Weak equivalences in each diagram category are closed under composition and retracts and satisfy two-out-of-three because evaluation sends a composite or an arrow-retract diagram to the corresponding diagram in $\\mathcal M$. Factorizations starting at a cofibrant object have cofibrant middle object. For diagram arrows, applying the functorial factorization in $\\mathcal M$ componentwise gives a natural factorization, and pushouts and coproducts are formed pointwise. A coproduct of left-lifting maps has the same lifting property: restrict a lifting square to each summand, choose its lift, and assemble the lifts. In particular coproducts of cofibrant objects are cofibrant. For a pushout along a cofibration between cofibrant objects, the other target is cofibrant because its initial map followed by the pushed-out cofibration is a cofibration. These checks give all the hypotheses of the cited cocompletion lemma without diagram fibrations. It follows that $\\mathcal A$ and $\\mathcal B$ admit all $\\mathcal U$-small colimits and their localization functors preserve initial objects, coproducts and cofibration pushouts. The relative co-Yoneda lemma gives pointwise colimits in $\\mathcal P$. The strict diagram functor $D\\mapsto q\\circ N(D)$ inverts $W_I$, preserves those initial objects, coproducts and cofibration pushouts pointwise, and therefore descends by the cocompletion lemma to a colimit-preserving functor $\\Theta:\\mathcal A\\to\\mathcal P$.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-system-localization-universal",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual of Definition 7.7.2, Proposition 7.7.4 and Theorem 7.7.9; Theorem 7.9.8, (7.9.8.1)-(7.9.8.2)."
+   }
+  },
+  {
+   "text": "For each $i$, form the strict free diagram $E_iX(j)=\\coprod_{\\operatorname{Hom}_I(i,j)}X$. The ordinary adjunction $E_i\\dashv\\operatorname{ev}_i$ is explicit: a transformation $E_iX\\to D$ is determined by its map $X\\to D(i)$ on the identity summand; conversely use $D(u)$ on the $u:i\\to j$ summand. Both functors preserve weak equivalences on cofibrant objects. For $E_i$, this follows from Brown split factorizations: for any family of weak equivalences $f$, write $f=pi$ and $ps=1$ with $p$ trivial fibrations and $i,s$ cofibrations. Two-out-of-three makes $i,s$ trivial cofibrations. Their coproducts are trivial cofibrations by the summand lifting argument; $(\\coprod p)(\\coprod s)=1$ then makes $\\coprod p$, and finally $\\coprod f$, weak equivalences. Descend the two relative functors and the ordinary unit and counit via the full functor-category localization property. The triangle identities descend too, since restriction is fully faithful, giving $E_i^L\\dashv\\operatorname{ev}_i^L$ and $\\operatorname{Map}_{\\mathcal A}(E_i^Lx,D)\\simeq\\operatorname{Map}_{\\mathcal B}(x,D(i))$. Adjunction and the colimit mapping-space property imply $E_i^L$ preserves small colimits: mapping out of $E_i^L\\operatorname{colim}x_k$ is the limit of the maps out of $E_i^Lx_k$. Finite-product preservation of localization descends the whole bifunctor $N(I)^{\\mathrm{op}}\\times N(\\mathcal M_c)\\to\\mathcal A$ to $T:N(I)^{\\mathrm{op}}\\times\\mathcal B\\to\\mathcal A$. Preservation of coproducts by $q$ identifies $\\Theta T(i,x)$ with the coherent free diagram $i!x$, including its maps in both variables.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-system-localization-universal",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, (7.9.8.3)-(7.9.8.9); Proposition 7.1.14 for descending adjunctions, written out using the full localization property."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-diagram-coyoneda] to $T$ to obtain a colimit-preserving $H:\\mathcal P\\to\\mathcal A$ with $H(i!x)\\simeq E_i^Lx$. The colimit-preserving functors $\\Theta H$ and $\\mathrm{id}_{\\mathcal P}$ agree coherently on the free bifunctor, hence the entire-functor-category extension equivalence gives a natural equivalence $\\Theta H\\simeq\\mathrm{id}_{\\mathcal P}$. For $F\\in\\mathcal P$ and $D\\in\\mathcal A$, take the canonical free-diagram presentation of $F$ on the small final $K_F$ provided by the same lemma. The colimit mapping property and the adjunction of step 3 give, naturally in $F,D$,\n$$\\operatorname{Map}_{\\mathcal A}(HF,D)\\simeq\\lim_{K_F^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal A}(E_i^Lx,D)\\simeq\\lim_{K_F^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal B}(x,D(i))\\simeq\\operatorname{Map}_{\\mathcal P}(F,\\Theta D).$$\nThe pointwise representability criterion promotes this bifunctor equivalence to $H\\dashv\\Theta$ with coherent unit and counit. On every free diagram its unit is an equivalence, since the displayed bifunctor equivalence restricts to the evaluation adjunction in step 3. Both $\\mathrm{id}_{\\mathcal P}$ and $\\Theta H$ preserve small colimits. The free-diagram presentation then makes the unit an equivalence on every $F$, retaining coherent transformations. All colimits in this calculation are on $K_F$, never on an unrestricted large slice.",
+   "uses": [
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.9.8, (7.9.8.6), (7.9.8.9)-(7.9.8.10) and the mapping-space calculation on printed pp. 410-411."
+   }
+  },
+  {
+   "text": "Let $\\epsilon:H\\Theta\\to\\mathrm{id}_{\\mathcal A}$ be that adjunction's counit. Write $\\eta:\\mathrm{id}_{\\mathcal P}\\to\\Theta H$ for the unit, which step 4 proved invertible. For $F=i!x$, the triangle identity is $\\epsilon_{HF}\\circ H(\\eta_F)=1_{HF}$. Since $H(\\eta_F)$ is an equivalence, this identity makes $\\epsilon_{HF}$ its inverse. The coherent free-diagram identification supplies an equivalence $a:H(i!x)\\xrightarrow{\\sim}E_i^Lx$. Naturality gives $\\epsilon_{E_i^Lx}\\circ H\\Theta(a)=a\\circ\\epsilon_{H(i!x)}$. Both $H\\Theta(a)$ and the right-hand composite are equivalences, so $\\epsilon_{E_i^Lx}$ is an equivalence. The full replete subcategory of $\\mathcal A$ on objects where $\\epsilon$ is an equivalence is closed under small colimits: both $H\\Theta$ and the identity preserve them, and a colimit functor takes equivalences of coherent diagrams to equivalences. The free strict diagram generation lemma applies, with the model hypotheses unchanged and the colimits supplied in step 2, so this subcategory is all of $\\mathcal A$. Componentwise equivalence of transformations makes both the unit and counit coherent natural equivalences. Thus $H$ is a quasi-inverse of $\\Theta$, proving the comparison on objects and all mapping spaces.",
+   "uses": [
+    "lem-coef-free-diagram-homotopy-density",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The free-diagram generation part of Theorem 7.9.8, (7.9.8.11)-(7.9.8.14), printed pp. 411-412; the counit argument packages that generation into the equivalence proof."
+   }
+  },
+  {
+   "text": "Transfer the comparison back through the pointwise cofibrant-replacement equivalences of step 1. Before localization, its underlying bifunctor is evaluation followed by $q_{\\mathcal M}$; the natural transformation $Q D\\to D$ identifies the transferred functor with $D\\mapsto q_{\\mathcal M}\\circ N(D)$. The entire-functor-category localization property extends this identification on objects, transformations and all higher simplices. For $v:J\\to I$, the prelocalization evaluation bifunctors commute strictly with restriction $v^*$; their equality, and the equalities for composite restrictions and identity restrictions, descend through the same fully faithful restriction equivalences. This provides the requested coherent restriction compatibility. Taking $I\\to *$ gives constant diagrams. For $I=\\varnothing$ both categories are terminal, and the generation argument uses the empty colimit; for $I=*$ the comparison is the identity localization. Thus no enrichment, combinatoriality, properness or diagram model structure has entered the proof.",
+   "uses": [
+    "lem-coef-system-localization-universal",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The canonical evaluation comparison (7.9.8.1)-(7.9.8.2) and Remark 7.9.10; restriction and constant compatibility follow from its full coherent localization property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-system-localization-universal",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-cocomplete-cofibration-localization",
+  "lem-coef-coherent-diagram-coyoneda",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-free-diagram-homotopy-density",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Argument following the proof of Theorem 7.9.8, with the free-diagram generation subargument extracted as a statement-only leaf; source read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Localization at objectwise weak equivalences of functors from a small category to a model category is equivalent to coherent diagrams in the infinity localization",
-   "results": "{\"t\": \"2026-10-16T17:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"Localization at objectwise weak equivalences of functors from a small category to a model category is equivalent to coherent diagrams in the infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"87e96109a0b35a3c\"}",
+   "results": "{\"t\": \"2026-10-16T19:35:45Z\", \"tool\": \"leanfinder\", \"query\": \"Localization at objectwise weak equivalences of functors from a small category to a model category is equivalent to coherent diagrams in the infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"f9a1fca15a73a6d6\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned localizer and HoCat declarations concern ordinary category localizations; constructors of ModelCategory assume the model axioms. No hit rectifies arbitrary coherent diagrams or identifies their mapping spaces. Two semantic phrasings and two grep scopes were read."
   },
   {
    "tool": "leansearch",
    "query": "Strict diagrams in a combinatorial model category localized at objectwise weak equivalences model the infinity category of homotopy coherent diagrams",
-   "results": "{\"t\": \"2026-10-16T17:10:41Z\", \"tool\": \"leansearch\", \"query\": \"Strict diagrams in a combinatorial model category localized at objectwise weak equivalences model the infinity category of homotopy coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\"], \"digest\": \"775498c651b5e1af\"}",
+   "results": "{\"t\": \"2026-10-16T19:35:47Z\", \"tool\": \"leansearch\", \"query\": \"Strict diagrams in a combinatorial model category localized at objectwise weak equivalences model the infinity category of homotopy coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\"], \"digest\": \"775498c651b5e1af\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned localizer and HoCat declarations concern ordinary category localizations; constructors of ModelCategory assume the model axioms. No hit rectifies arbitrary coherent diagrams or identifies their mapping spaces. Two semantic phrasings and two grep scopes were read."
   },
   {
    "tool": "loogle",
    "query": "\"Localization\", \"Functor\"",
-   "results": "{\"t\": \"2026-10-16T17:10:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_obj\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_map\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_map_hom_app\", \"CategoryTheory.Functor.instIsLocalizationIdIsomorphisms\", \"CategoryTheory.Functor.IsLocalization\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Functor.IsLocalization.inverts\"], \"digest\": \"a6b0f96db32d6e3c\"}",
+   "results": "{\"t\": \"2026-10-16T19:35:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_obj\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_map\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_map_hom_app\", \"CategoryTheory.Functor.instIsLocalizationIdIsomorphisms\", \"CategoryTheory.Functor.IsLocalization\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Functor.IsLocalization.inverts\"], \"digest\": \"a6b0f96db32d6e3c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned localizer and HoCat declarations concern ordinary category localizations; constructors of ModelCategory assume the model axioms. No hit rectifies arbitrary coherent diagrams or identifies their mapping spaces. Two semantic phrasings and two grep scopes were read."
   },
   {
    "tool": "grep",
    "query": "rectif|homotopyCoherent|[Ll]ocaliz.*[Ff]unctor[Cc]ategory|[Ff]unctor[Cc]ategory.*[Ll]ocaliz",
-   "results": "{\"t\": \"2026-10-16T17:10:40Z\", \"tool\": \"grep\", \"query\": \"rectif|homotopyCoherent|[Ll]ocaliz.*[Ff]unctor[Cc]ategory|[Ff]unctor[Cc]ategory.*[Ll]ocaliz\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T19:35:46Z\", \"tool\": \"grep\", \"query\": \"rectif|homotopyCoherent|[Ll]ocaliz.*[Ff]unctor[Cc]ategory|[Ff]unctor[Cc]ategory.*[Ll]ocaliz\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned localizer and HoCat declarations concern ordinary category localizations; constructors of ModelCategory assume the model axioms. No hit rectifies arbitrary coherent diagrams or identifies their mapping spaces. Two semantic phrasings and two grep scopes were read."
   },
@@ -81,10 +176,59 @@
    "results": "{\"t\": \"2026-10-16T17:11:04Z\", \"tool\": \"grep\", \"query\": \"homotopyCoherent|quasicategor|infinity.?categor|rectif\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned localizer and HoCat declarations concern ordinary category localizations; constructors of ModelCategory assume the model axioms. No hit rectifies arbitrary coherent diagrams or identifies their mapping spaces. Two semantic phrasings and two grep scopes were read."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*model|objectwise.*weak|homotopy coherent",
+   "results": "{\"t\": \"2026-10-16T18:25:45Z\", \"tool\": \"grep\", \"query\": \"projective.*model|objectwise.*weak|homotopy coherent\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict ordinary diagrams in a model category localized at objectwise weak equivalences are equivalent to coherent diagrams in the infinity localization",
+   "results": "{\"t\": \"2026-10-16T18:25:46Z\", \"tool\": \"leansearch\", \"query\": \"strict ordinary diagrams in a model category localized at objectwise weak equivalences are equivalent to coherent diagrams in the infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.structuredArrowEquiv.congr_simp\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"CategoryTheory.Localization.structuredArrowEquiv\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"83dc3f23f8745472\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict ordinary diagrams in a model category localized at objectwise weak equivalences are equivalent to coherent diagrams in the infinity localization",
+   "results": "{\"t\": \"2026-10-16T18:25:52Z\", \"tool\": \"leanfinder\", \"query\": \"strict ordinary diagrams in a model category localized at objectwise weak equivalences are equivalent to coherent diagrams in the infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"e8c3144e170597e2\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyCoherent|rectif|[Cc]ofibration[Cc]ategory|[Hh]omotopy[Cc]olimit",
+   "results": "{\"t\": \"2026-10-16T18:33:13Z\", \"tool\": \"grep\", \"query\": \"homotopyCoherent|rectif|[Cc]ofibration[Cc]ategory|[Hh]omotopy[Cc]olimit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra.ModelCategory\", \"CategoryTheory.Functor\"",
+   "results": "{\"t\": \"2026-10-16T18:33:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopicalAlgebra.ModelCategory\\\", \\\"CategoryTheory.Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rectifying homotopy coherent ordinary indexing diagrams in an arbitrary model category via cofibration category homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T19:36:37Z\", \"tool\": \"leanfinder\", \"query\": \"Rectifying homotopy coherent ordinary indexing diagrams in an arbitrary model category via cofibration category homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.CofibrantObject.homRel\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.PathObject.IsVeryGood\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfFactorizationDataOfIsStableUnderCompositionCofibrations\"], \"digest\": \"dddd59d437bfb12d\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary IsLocalization/HoCat and homotopy relation results do not identify coherent functor categories for arbitrary model categories. Read CofibrantObjectHomotopy.lean:30-105 and Quasicategory/StrictBicategory.lean:20-70. No sorry-free project declaration or blueprint tag for this rectification was found in the two reference sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModelCategory, Functor, Localization",
+   "results": "{\"t\": \"2026-10-16T18:25:46Z\", \"tool\": \"loogle\", \"query\": \"ModelCategory, Functor, Localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ModelCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable as a useful name-pattern query: the unquoted query returned an unknown-identifier error; it is not evidence of absence. The subsequent quoted ModelCategory/Functor search was valid and returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-colimit-localization-comparison",
@@ -92,5 +236,29 @@
   "group": "N5"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-diagram-model-rectification",
+  "worker": "stage1",
+  "summary": "Checked Cisinski Theorem 7.9.8 online and extracted three smaller statements: cofibration-localization cocompletion, free strict diagram homotopy density, and coherent relative co-Yoneda extension. The proof reduces to cofibrant values, verifies pointwise cofibration-category axioms directly, descends free evaluation adjunctions, constructs a coherent inverse by co-Yoneda, and uses free-diagram generation for its counit. No projective model structure or saturation node depending on this item is used. Preserved the item statement; checked all citations, universes, empty and terminal shapes and exact Mathlib search logs. Independent second reading made the pointwise weak-equivalence axioms explicit and proved the counit on free generators using the triangle identity and naturality.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction/inverse-limit calculation: rectification of strict ordinary indexing diagrams, including restriction and constant diagrams, as the input to lem-coef-model-colimit-localization-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence and mapping-space calculus for coherent transformations; no node of this unit states that general quasicategory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-08fbd6760",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-08fbd6760 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and all six cited node statements in full. I also read the citer step in lem-coef-model-colimit-localization-comparison and paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint proof. I could not open Cisinski's CatLR: it is not archived and network access is blocked here. proof_origin is correctly 'agent', and I checked every statement mathematically myself. Item: the statement is unchanged and true. It is the rectification theorem for ordinary model categories with functorial factorizations. Edge cases I∅ and I=* both work, and with W the isomorphisms it reduces to the ordinary functor comparison. Steps: step 1's cofibrant replacement is valid (2-of-3 and naturality). In step 2 I checked every cocompletion hypothesis for Fun(I,M_c) with pointwise classes: pushouts, coproducts, factorizations and the constant initial object. Step 3 uses the Brown split factorization exactly as stated (i,s in C; p in F∩W; ps=1) to show coproducts preserve W, and the adjunction descent is correct. Step 4's co-Yoneda extension, small final K_F and adjoint criterion are right. Step 5's triangle identity and the free-density generation are right. Step 6's transfer, restriction and constants are right. New nodes: cocomplete-cofibration-localization is true (all-cofibrant Brown lemma plus coproducts and pushouts) and is not the finite dual brown-fibrant-localization-pullbacks. coherent-diagram-coyoneda has the correct N(I)^op variance; I checked its density by hand for I=[1]. free-diagram-homotopy-density is a generation statement with an independent bar-construction proof, so it is neither circular nor a clause of the item. All three nodes pass B1-B9; searches of all three kinds are recorded. There is no cycle: the 83 nodes reached from the item do not include it. The rg duplicate search found nothing. The declared tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. Fix (C1): steps 2 and 3 used componentwise detection of equivalences without citing it (W_I inversion; the identification ΘT(i,x)≃i!x). I added lem-cbc-enhanced-functor-cone-calculus to their uses; proof_deps is unchanged. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-small-diagram-model-rectification.json.; 1 file(s) fixed by the reviewer"
+ }
 }

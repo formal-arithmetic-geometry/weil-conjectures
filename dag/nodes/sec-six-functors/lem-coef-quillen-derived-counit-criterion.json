@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Pinched simplices give a weakly equivalent mapping resolution. Smaller input: Derived ordinary adjunction and counit criterion for Quillen equivalences.",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Pinched simplices give a weakly equivalent mapping resolution. Smaller input: Derived ordinary adjunction and counit criterion for Quillen equivalences. Independent ordinary homotopy-category proof, without the descendant infinity-adjunction theorem.",
    "via": [
     "lem-coef-pinched-rigidification-resolution",
     "lem-coef-coherent-nerve-comparison",
@@ -29,9 +29,153 @@
  "stmt_deps": [
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use the model axioms in [lem-coef-reedy-model-structure]. Lifting classes are closed under composition and pushout/pullback in the appropriate direction: solve the constituent lifting squares and use the universal property. They contain isomorphisms, so $W$ contains identities. Since $L\\dashv U$, a lifting square against $U(p)$ transposes to a lifting square against $p$ with left map $L(i)$. The preservation hypotheses on $L$ therefore imply that $U$ preserves fibrations and trivial fibrations. Left adjoints preserve initial objects and coproducts, and right adjoints preserve terminal objects and products, directly from the adjunction Hom bijection. Consequently $L$ preserves cofibrant objects and $U$ preserves fibrant objects.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; elementary lifting-adjunction argument (Hovey Lemma 1.3.4)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-brown-split-factorizations] to a weak equivalence $f:A\\to B$ between cofibrant objects. Write $f=pi$ with $p$ a trivial fibration and $s:B\\to Z$ a cofibration section. Two-out-of-three gives $i,s\\in C\\cap W$. Thus $L(i),L(s)\\in W$; $L(p)L(s)=1$ gives $L(p)\\in W$, and $L(f)=L(p)L(i)\\in W$. For a weak equivalence $g:A\\to B$ between fibrant objects, the dual split factorization $g=pi$, $ri=1$, has $p,r\\in F\\cap W$. Hence $U(p),U(r)\\in W$, $U(r)U(i)=1$ gives $U(i)\\in W$, and $U(g)\\in W$. The required retract and two-out-of-three axioms are exactly those in [lem-coef-reedy-model-structure].",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; Brown preservation argument, Hovey Lemma 1.1.12 (split factorizations verified in Mathlib BrownLemma.lean:48-87,97-134)."
+   }
+  },
+  {
+   "text": "Choose functorial cofibrant replacements $q_X:QX\\to X$ as trivial fibrations and fibrant replacements $r_Y:Y\\to RY$ as trivial cofibrations, using [lem-coef-reedy-model-structure]. Naturality of these weak equivalences and two-out-of-three show that $Q$ and $R$ preserve $W$. Step 2 then makes $\\gamma_{\\mathcal N}LQ$ and $\\gamma_{\\mathcal M}UR$ invert $W$. The localization universal property in the item defines functors $\\mathbf LL$ and $\\mathbf RU$ from these two functors. If $A$ is cofibrant, $L(q_A)$ is a weak equivalence by Step 2, giving $\\mathbf LL(\\gamma A)\\cong\\gamma(LA)$. If $B$ is fibrant, $U(r_B)$ is a weak equivalence, giving $\\mathbf RU(\\gamma B)\\cong\\gamma(UB)$. These comparisons are natural because $q$ and $r$ are natural.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; replacement/localization construction, Hovey Definition 1.3.6 and Lemma 1.3.10."
+   }
+  },
+  {
+   "text": "For cofibrant $A$ and fibrant $B$, the ordinary adjunction bijection between maps $LA\\to B$ and $A\\to UB$ respects and reflects equality after localization, as follows. By [lem-coef-localized-good-homotopy-test], an equality between maps $LA\\to B$ is represented on a good path object of $B$. Its image under $U$ is a good path object of $UB$: $U$ preserves products and fibrations, and preserves its section weak equivalence by Step 2 since the path object is fibrant (it fibrates over the fibrant product $B\\times B$). Transposing the path homotopy gives a path homotopy between the adjoint maps. Conversely an equality between the adjoint maps is represented on a good cylinder of $A$. Its image under $L$ is a good cylinder of $LA$: $L$ preserves coproducts and cofibrations, and preserves its contraction weak equivalence by Step 2 since its total object is cofibrant. Transposing gives a cylinder homotopy between the original maps. Good cylinders and paths exist by factoring the fold $A\\amalg A\\to A$ and diagonal $B\\to B\\times B$ using [lem-coef-reedy-model-structure]. The same cited homotopy test makes both transposed homotopies equalities in the required localizations.",
+   "uses": [
+    "lem-coef-localized-good-homotopy-test",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; explicit descent of the adjunction Hom bijection using good homotopies; Hovey Proposition 1.2.5 and proof of Lemma 1.3.10."
+   }
+  },
+  {
+   "text": "[lem-coef-model-localization-map-surjective] (applied in both model categories, with $LA$ cofibrant and $UB$ fibrant by Step 1) and Step 4 give a bijection $\\operatorname{Hom}_{\\operatorname{Ho}(\\mathcal N)}(\\gamma LA,\\gamma B)\\cong\\operatorname{Hom}_{\\operatorname{Ho}(\\mathcal M)}(\\gamma A,\\gamma UB)$ for cofibrant $A$ and fibrant $B$. Apply it to $A=QX$, $B=RY$, and compose with the isomorphisms $\\gamma(q_X)$ and $\\gamma(r_Y)$. This gives $\\operatorname{Hom}(\\mathbf LL(\\gamma X),\\gamma Y)\\cong\\operatorname{Hom}(\\gamma X,\\mathbf RU(\\gamma Y))$. Its formula on a representative is ordinary adjunction followed by these replacement isomorphisms, so naturality follows from ordinary adjunction and naturality of $q,r$. Naturality extends to the localization: the naturality equation for the inverse of an inverted map follows by multiplying its naturality equation by the inverse on both sides. Equivalently, use the universal property for natural transformations stipulated in the item, one variable at a time. A natural Hom bijection is precisely an ordinary adjunction; thus these bijections give $\\mathbf LL\\dashv\\mathbf RU$.",
+   "uses": [
+    "lem-coef-model-localization-map-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; construction of the ordinary derived adjunction, Hovey Lemma 1.3.10, without any infinity-category truncation."
+   }
+  },
+  {
+   "text": "Let $Y$ be fibrant, so $UY$ is fibrant by Step 1. For the chosen trivial-fibration replacement $q_0:Q(UY)\\to UY$, the ordinary adjunction sends $e_0=\\epsilon_Y\\circ L(q_0):LQ(UY)\\to Y$ to $q_0:Q(UY)\\to UY$: indeed $U(\\epsilon_Y)\\circ UL(q_0)\\circ\\eta_{Q(UY)}=U(\\epsilon_Y)\\circ\\eta_{UY}\\circ q_0=q_0$. Here the first equality is naturality of $\\eta$, and the second is an ordinary triangle identity. Under the Hom bijection of Step 5 and the fibrant/cofibrant comparisons of Step 3, $\\gamma(q_0)$ becomes the identity of the object represented by $UY$. Hence $\\gamma(e_0)$ is the counit component of the derived adjunction, after the indicated representation isomorphisms. This identifies the actual map, rather than only its source and target.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; explicit counit transpose calculation, Hovey Lemma 1.3.10 and Proposition 1.3.13(b)-(c)."
+   }
+  },
+  {
+   "text": "If $\\mathbf LL$ is an equivalence, [lem-coef-adjunction-equivalence-counit-iso] says that the counit of the adjunction in Step 5 is a natural isomorphism. Step 6 therefore shows that $\\gamma_{\\mathcal N}(e_0)$ is an isomorphism. We next prove directly from ordinary homotopies that a map with invertible localization image is a weak equivalence; this avoids the existing detection node, whose dependencies lead back to the present item.",
+   "uses": [
+    "lem-coef-adjunction-equivalence-counit-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; categorical counit fact, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:247-249; Hovey Proposition 1.3.13."
+   }
+  },
+  {
+   "text": "Let $v:X\\to Y$ be any map in either model category with $\\gamma(v)$ invertible. Use the functorial replacements of Step 3 to put $A=RQX$, $B=RQY$, $f=RQ(v)$. Both $A,B$ are cofibrant and fibrant, since $QX\\to RQX$ and $QY\\to RQY$ are trivial cofibrations. The naturality identities $q_YQ(v)=vq_X$ and $f r_{QX}=r_{QY}Q(v)$ imply that $\\gamma(f)$ is invertible. Factor $f=pi$ with $i:A\\to E$ a trivial cofibration and $p:E\\to B$ a fibration. Then $E$ is also cofibrant and fibrant, and $\\gamma(p)$ is invertible. These factorizations and object properties use only [lem-coef-reedy-model-structure].",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; independent ordinary saturation proof, Hovey Theorem 1.2.10(iv), replacement and fibration-factor reduction."
+   }
+  },
+  {
+   "text": "By [lem-coef-model-localization-map-surjective], since $B$ is cofibrant and $E$ fibrant, represent $\\gamma(p)^{-1}$ by a map $s:B\\to E$. By [lem-coef-localized-good-homotopy-test], the equality $\\gamma(ps)=1$ gives a homotopy $H:I\\to B$ on a chosen good cylinder $B\\xrightarrow{a_0,a_1}I\\xrightarrow{c}B$ with $Ha_0=ps$, $Ha_1=1_B$. As $B$ is cofibrant, $a_0$ is a cofibration; $ca_0=1_B$ and $c\\in W$ make it a trivial cofibration. The square with top $s$, left $a_0$, right $p$, and bottom $H$ has a lift $V:I\\to E$ by [lem-coef-reedy-model-structure]. Thus $t=Va_1$ satisfies $pt=1_B$, and necessarily $\\gamma(t)=\\gamma(p)^{-1}$. The lifting square is valid because $p$ is the fibration factor from Step 8.",
+   "uses": [
+    "lem-coef-localized-good-homotopy-test",
+    "lem-coef-model-localization-map-surjective",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; ordinary saturation: homotopy inverse rectified to a strict section by a specified lifting square (Hovey Theorem 1.2.10(iv))."
+   }
+  },
+  {
+   "text": "Now $\\gamma(tp)=1_{\\gamma E}$. Applying [lem-coef-localized-good-homotopy-test] to the cofibrant and fibrant object $E$ gives a cylinder $E\\xrightarrow{b_0,b_1}J\\xrightarrow{d}E$ and $G:J\\to E$ with $Gb_0=tp$, $Gb_1=1_E$, $db_0=db_1=1_E$, and $d\\in W$. Two-out-of-three makes $b_0,b_1,G$ weak equivalences, and then $tp=Gb_0\\in W$. In the arrow category $p:E\\to B$ is a retract of $tp:E\\to E$: the maps have components $(1_E,t)$ and $(1_E,p)$, and their composite on $p$ is $(1_E,pt)=(1_E,1_B)$. Retract closure gives $p\\in W$ and then $f=pi\\in W$. Finally $f r_{QX}=r_{QY}Q(v)$ gives $Q(v)\\in W$, and $vq_X=q_YQ(v)$ gives $v\\in W$. All weak-equivalence deductions use the two-out-of-three and retract axioms in [lem-coef-reedy-model-structure].",
+   "uses": [
+    "lem-coef-localized-good-homotopy-test",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; ordinary saturation: homotopy-to-identity, explicit arrow retract, and both replacement squares (Hovey Theorem 1.2.10(iv))."
+   }
+  },
+  {
+   "text": "Apply the detection argument of Steps 8-10 to $e_0$ from Step 7; it is a weak equivalence. Now let $q:C\\to UY$ be the arbitrary cofibrant replacement allowed in the item; it need not be a fibration. Since $C$ is cofibrant and $q_0:Q(UY)\\to UY$ is a trivial fibration, [lem-coef-reedy-model-structure] supplies a lift $a:C\\to Q(UY)$ with $q_0a=q$. Two-out-of-three gives $a\\in W$; its two endpoints are cofibrant, so Step 2 gives $L(a)\\in W$. Consequently $\\epsilon_Y L(q)=e_0 L(a)$ is a weak equivalence. This proves the claim for every weak-equivalence replacement with cofibrant source, as stated.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; Hovey Proposition 1.3.13(b)-(c), with the comparison lift needed for arbitrary replacements explicitly supplied."
+   }
+  },
+  {
+   "text": "If $UY$ is cofibrant, take the allowed replacement to be $q=1_{UY}$. Its counit composite is $\\epsilon_Y:LUY\\to Y$ itself, so Step 11 gives the final clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2 foundation; Hovey Corollary 1.3.14, identity-replacement specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-adjunction-equivalence-counit-iso",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-localized-good-homotopy-test",
+  "lem-coef-model-localization-map-surjective",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 foundational expansion; independent ordinary-model proof following the Hom-bijection argument of Hovey Lemma 1.3.10 and Proposition 1.3.13, with a direct proof of ordinary weak-equivalence detection."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +218,38 @@
    "results": "{\"t\": \"2026-10-16T17:29:14Z\", \"tool\": \"leanfinder\", \"query\": \"A model category left Quillen functor admits a total derived adjunction and its counit is an isomorphism when the derived left adjoint is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε_fac_app\"], \"digest\": \"0619919ff1310065\"}",
    "date": "2026-10-17",
    "verdict": "No exact match: Adjunction.derived and derived_counit require absolute-derived-functor instances; they do not construct them from the Quillen hypotheses or detect weak equivalences. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:14-25, 49-57, 117-150."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Quillen adjunction induces ordinary derived functors and an adjunction on homotopy categories; an equivalence of the derived left adjoint makes its replacement counit a weak equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: Adjunction.derived assumes absolute derived functors and does not construct them from the Quillen hypotheses or prove the model counit weak-equivalence criterion. Read Functor/Derived/Adjunction.lean:38-58,117-150."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quillen\", \"Adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: Adjunction.derived assumes absolute derived functors and does not construct them from the Quillen hypotheses or prove the model counit weak-equivalence criterion. Read Functor/Derived/Adjunction.lean:38-58,117-150."
+  },
+  {
+   "tool": "grep",
+   "query": "QuillenAdjunction|QuillenEquivalence|derived.*[Cc]ounit|[Cc]ounit.*derived",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"117\", \"text\": \"/-- The counit of the derived adjunction, see `Adjunction.derived`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"198\", \"text\": \"noncomputable def totalLeftDerivedCounit : L ⋙ F.totalLeftDerived L W ⟶ F :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"203\", \"text\": \"    (F.totalLeftDerivedCounit L W) W where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"205\", \"text\": \"    dsimp [totalLeftDerived, totalLeftDerivedCounit]\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: Adjunction.derived assumes absolute derived functors and does not construct them from the Quillen hypotheses or prove the model counit weak-equivalence criterion. Read Functor/Derived/Adjunction.lean:38-58,117-150."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction of model categories and the counit criterion for a Quillen equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ is constructed via the right derived functor description, combining whiskered natural transformations $\\\\bet\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: Adjunction.derived assumes absolute derived functors and does not construct them from the Quillen hypotheses or prove the model counit weak-equivalence criterion. Read Functor/Derived/Adjunction.lean:38-58,117-150."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pinched-rigidification-resolution",
@@ -85,5 +257,20 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quillen-derived-counit-criterion",
+  "worker": "stage1",
+  "summary": "Constructed the ordinary derived adjunction by Brown preservation, replacement functors and the Hom test on prescribed good cylinders and path objects. Computed its counit by an explicit transpose and proved ordinary weak-equivalence detection in the item, including rectification of a homotopy section and the arrow-category retract. This avoids a dependency cycle through the existing infinity-adjunction and detection nodes. Added two exact Mathlib leaves, no unsplit helpers.",
+  "blueprint": "Ancestor proof paragraph 2: ordinary model-category foundation of the coherent coefficient-adjunction calculation, via the pinched-rigidification counit input. Steps 1-6 construct and compute the ordinary derived adjunction; Step 7 supplies invertibility; Steps 8-10 prove detection; Steps 11-12 handle every replacement and the ordinary counit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-5c4c6aefc",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-5c4c6aefc (reviewer sub-agent of L); spot-checked: I read all twelve steps of the item in full and checked each one against the exact statements of the nodes it cites. Those are reedy-model-structure (model axioms with functorial factorizations), brown-split-factorizations (ps=1 and ri=1 clauses) and the two new leaves. Steps 4-5 check: a good path object P is fibrant, so U(s) is in W by Ken Brown, and a good cylinder I is cofibrant, so L(c) is in W. Step 6 checks: I recomputed that gamma(e_0) is the derived counit at gamma Y transported by gamma U(r_Y). Steps 8-10 check: the lift a_0/p gives a strict section t with pt=1, both retract squares commute, and two-out-of-three applies at each use. Step 11 checks: a lift against the trivial fibration q_0 from the cofibrant C handles any replacement q. The statement is unchanged and matches Hovey 1.3.13(b)/1.3.14. I tested it on the identity adjunction, on W = isomorphisms, on the terminal category, and on a replacement q that is not a fibration. No coefficient category, base-change morphism or target is involved. I checked the Mathlib sources: FundamentalLemma.lean 31-34 and 65-134, Homotopy.lean 100-119, Cylinder.lean and PathObject.lean (IsGood), FullyFaithful.lean 247-249. Leaf counit-iso is an exact match for instIsIsoFunctorCounitOfIsEquivalence, and I found no duplicate anywhere in the DAG. A traversal of the snapshot finds no cycle, and every cited node is in the item's unit or a Mathlib leaf, so no tool_uses is needed. One fault, fixed: the surjectivity clause of the new leaf lem-coef-localized-good-homotopy-test duplicated the existing leaf lem-coef-model-localization-map-surjective, which does not reach the item. I removed that clause from the leaf and updated its title, source and mathlib_match. Item Steps 5 and 9 now cite lem-coef-model-localization-map-surjective, and proof_deps is the union of the uses. Corrected files are in fixes/dag/nodes/sec-six-functors/. The second reading says it changed the item's created field, but the file still has pinched-rigidification/N7. That value is correct, so no change is needed. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
