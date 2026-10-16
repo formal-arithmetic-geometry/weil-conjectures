@@ -1,6 +1,6 @@
 # Work queue
 
-35 items; claim with `tools/claim.py next <group> [--stage N]`.
+36 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (35)
+## Stage 3: modules to prove (36)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -23,7 +23,6 @@
 | `Sheaf.Paper.ContinuousConstructibleIntegralGluing` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralStratum` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
-| `Sheaf.Paper.IntegralMatrixPivotCover` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
@@ -34,6 +33,7 @@
 | `Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralConstructibleSheafHom` | 7 | 1 | proof |
+| `Sheaf.Paper.IntegralMatrixAnalyticCover` | 7 | 1 | proof |
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 8 | 1 | proof |
@@ -46,4 +46,5 @@
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent` | 40 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeCounitFactor` | 41 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
