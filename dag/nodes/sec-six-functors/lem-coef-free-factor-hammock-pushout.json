@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-fixed-object-simplicial-free-calculus"
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-hammock-graph-colimit-presentation"
  ],
  "proof": [
   {
@@ -204,5 +205,39 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c1e54fd17 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the new node lem-coef-free-factor-category-normal-form, and the full statements of every cited node: coherent-nerve-comparison, fixed-object-simplicial-free-calculus, hammock-graph-colimit-presentation and def-nagata-category. I also read the consumer free-factor-hammock-comparison and the base statement of the item. The delivered statement only adds two clarifications to the base: the inline definition of free categories and the degreewise-coproduct citation. I checked Dwyer–Kan, Calculating simplicial localizations, at the node URL (read-only text layer): Def 2.1, Comparison Lemma 2.3 (D and W free), Prop 3.2 on p.20, its proof on p.21 (unique alternating factorization), 3.4, 5.1/5.3, Prop 5.5 and 5.8(i) on p.25. The item is Prop 3.2 under the free hypotheses of 2.3, plus the ordinary-localization isomorphism and the comparison that 5.8(i) uses. Step 2 checked: in a free W, u b = id forces u = b = id, so uniqueness of the reduced word keeps the D-letters and internal W-letters fixed in every row and gives u_{i,0} = a_i u_{i+1,0} and u_{i,r} b_i = u_{i+1,r}. Step 4 checked: when two rightward columns are composed, the merged end block telescopes to a column that is constant in i, so it is the identity in all rows or in none, and in the identity case the adjacent D-letters merge. This matches the normal form of the composite. Steps 3, 5, 6 and 7 use exactly what the cited statements say; the steps marked elementary are elementary. The new node is true: it is the standard normal form for free products of categories, the rewriting system terminates and is confluent, and the functor clause correctly reduces image letters. It is statement-only and strictly smaller than the item. An rg duplicate search found no duplicate; the closest nodes, free-resolution-coproduct-augmentation and free-product-nerve-gluing, give the coproduct as a quotient of words without uniqueness. Everything cited is in unit sk-prop-sf-biduality-general, there are no tool_uses, no SGA, no cycle, and proof_deps equals the union of step uses. Edge cases tested: O empty, factors with no generators, k = 0, a loop example with d w and w² that is consistent, and a face that collapses a W-block. One fix: the item's source.place said Prop 3.2 is used in the reduction preceding Section 5.8; corrected to Prop 3.2 on p.20, its proof on p.21 and its use in 5.8(i) on p.25 (whole file in fixes/). Also noted: the item file dropped the base's lean_audit key, which is not a split-owned field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeFactorHammockPushout",
+  "declaration": "CategoryTheory.FreeFactorPushout.free_factor_hammock_pushout",
+  "declarations": [
+   "CategoryTheory.FreeFactorPushout.discreteEnrichment",
+   "CategoryTheory.FreeFactorPushout.discreteCategory",
+   "CategoryTheory.FreeFactorPushout.discreteMap",
+   "CategoryTheory.FreeFactorPushout.objectInclusion",
+   "CategoryTheory.FreeFactorPushout.Input",
+   "CategoryTheory.FreeFactorPushout.marking",
+   "CategoryTheory.FreeFactorPushout.markingMultiplicative",
+   "CategoryTheory.FreeFactorPushout.rowProduct",
+   "CategoryTheory.FreeFactorPushout.RowComparison",
+   "CategoryTheory.FreeFactorPushout.Data",
+   "CategoryTheory.FreeFactorPushout.Naturality",
+   "CategoryTheory.FreeFactorPushout.Statement",
+   "CategoryTheory.FreeFactorPushout.free_factor_hammock_pushout"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeFactorHammockPushout.lean",
+  "statement": "theorem free_factor_hammock_pushout : Nonempty Statement.{u}",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two canonical isomorphisms are expressed by IsPushout for the specified factor legs, giving the unique isomorphism to any chosen coproduct. Uses the recorded degreewise free-category universal property and actual reduced hammocks. Row products, factor restrictions and naturality are specified on all simplices. The added landed statement dependency supplies the reused hammock definitions and gridwise functor characterization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6a1cc9c3",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node diff vs base: only lean (new) and stmt_deps (+landed lem-coef-hammock-graph-colimit-presentation, already a proof_dep; allowed by the STMT_DEPS MAY GAIN LANDED NODES rule; no cycle). All 9 clauses match: free D/W via IsDegreewiseFree on the constant enrichment (equivalent to free categories), C as a strict IsPushout in Cat over Discrete O, marking = W-factor image, H(-,-) = landed HammockLocalization (Equiv with ReducedHammock, row/identity/composition laws), both isomorphisms as IsPushout with pinned legs (dColumns, IsHammockMap, localizedTriangle), rowProduct via Paths.lift/wInv with correct direction, RowComparison on all rows (true by telescoping), naturality for arbitrary object maps. Strict SCat category (sCatCategory). Edge cases (empty O, no generators, identities, n=0, collapsing faces) OK; one-universe u is the recorded SCat convention. Gates: real helpers, only sorry is the main theorem, docstrings with source and blueprint, 7-step proof docstring, statement verbatim, 13 declarations listed, imports = stmt_deps, both report sections present, no duplicate. nt_compile --json against the local side overlay: exit 0, 2.5 s, no errors or warnings."
  }
 }
