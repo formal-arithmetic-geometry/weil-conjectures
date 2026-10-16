@@ -249,5 +249,27 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-afe1d15f5 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement and Kerodon 00YZ in full. Kerodon 00YZ is not archived locally; I read it online and the report already records it as WANTED. The statement is the same as Kerodon Prop 3.3.4.8 for every small simplicial set T, with no Kan, finite-dimensional or nonempty hypothesis added, and the weak homotopy equivalence is the realization notion of def-cbc. Steps 1–8: (1) colimit preservation follows from the Sd–Ex adjunction in the face-poset node, and the induced map is lambda by its naturality. (2) On the standard simplex, lambda is the nerve of the max map M, and the transformations id=>CM and id=>MC meet the hypotheses of lem-coef-nerve-natural-homotopy-equivalence. (3) Coproduct closure follows directly from the realization quotient. (4) Sd of the boundary inclusion is the nerve of the inclusion of proper nonempty subsets, which is injective, also for n=0. (5) The filtration from the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells is indexed correctly, and the boundary stabilizes because every k-simplex of the boundary with k>=n is degenerate. (6) The induction is quantified over all K, starts from the empty set, and is not circular. (7) Every hypothesis of the pushout clause of lem-coef-sset-gluing-filtered-equivalences holds: both boundary legs are injective, the attaching map is correctly not assumed injective, and the three components are equivalences. (8) The filtered-colimit lemma applies over N. Small cases tested: empty T, a point, Delta^1, the boundary of Delta^2, and the non-regular Delta^1/boundary. The dependency closure (91 nodes) does not reach the item or its parent, and searches of the DAG found no duplicate. Every citation is in the item's unit or is a definition or Mathlib leaf, so no tool_uses are needed, and no SGA source is cited. One inaccuracy in the report: it says created.item was changed to this delivery, but the file correctly keeps lem-coef-ex-comparison-weak-equivalence/NN, so no fix is needed. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SubdivisionLastVertexEquivalence",
+  "declaration": "SSet.subdivisionLastVertex_isWeakHomotopyEquivalence",
+  "declarations": [
+   "SSet.subdivisionLastVertex",
+   "SSet.subdivisionLastVertex_isWeakHomotopyEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SubdivisionLastVertexEquivalence.lean",
+  "statement": "theorem subdivisionLastVertex_isWeakHomotopyEquivalence (T : SSet.{u}) : Enhanced.IsWeakHomotopyEquivalence (subdivisionLastVertex.app T)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-725691e0c",
+  "group": "NW",
+  "result": "pass",
+  "note": "Every clause matches Kerodon 00YZ: T:SSet.{u} with no extra hypothesis; the conclusion Enhanced.IsWeakHomotopyEquivalence unfolds to pi0 bijectivity plus pi_r (r>=1) bijectivity at every source basepoint. subdivisionLastVertex is the Classical.choose from the face-poset existential; its max-vertex property on simplexInclusion(id) (an iso), together with naturality and the colimit cocone, determines it uniquely, so it is canonical, real data. It does not compete with ExInfinityFiniteProducts' exLastVertexUnit (transpose). Node diff touches only the lean field; statement verbatim; source/blueprint docstrings and the 8-step proof plan present; only sorry; report sections present. nt_compile --json of the snapshot module: rc=0, no errors, 1.2 s. No findings requiring repair."
  }
 }

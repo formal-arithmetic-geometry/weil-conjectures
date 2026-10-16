@@ -237,5 +237,32 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-12b47d201 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited statements (def-cbc-enhanced-diagrams-cones, lem-coef-joyal-model-structure), the citer lem-coef-infinity-slice-arrow-equivalence, the ancestor prop-coef-integral-exceptional-adjoint, the unit and the chapter, all in full. The Kerodon sources (01KV, 01HW, 01K5, 01KD, 016M, 016X, 016Y) are not archived under literature/, so I could not open them here. They are recorded as WANTED and proof_origin is agent, so I checked each statement and step on its own mathematics. Item: the statement is unchanged and true; the strict fiber over y fixes the whole apex simplex, and no hypothesis was added or weakened. Step 1: the join-slice bijection holds for pure and mixed simplices, deleting the whole L-block gives the degenerate simplex at y, and the bijection is natural in L. Step 2: Λ^n_i⋆Δ^0 together with the initial face is exactly Λ^{n+1}_i with 0<i<n+1, so two inner fillings show S_y is a quasicategory without the cyclic slice lemma; the cited nodes do not depend on the item. Step 3: the Joyal factorization of the fold map gives an injective J⊔J→J̄, πs_i=id and π a categorical equivalence. Step 4: π⋆id is a categorical equivalence by the join node, and B⊔_A B→J̄⋆Δ^0 is injective degree by degree, with the two images disjoint except on the apex. Steps 5 and 6: the criterion applies with (∅, J, S_y) and with (apex, J^▷, C); Fun_{f_A} equals A_J degree by degree. Step 7: the extension conditions correspond by naturality of the bijection, and every extension sends the apex to y. proof_deps equals the union of uses. Join node: true for arbitrary simplicial sets; empty factors are fine; not a duplicate of the blunt/sharp join nodes; Mathlib's isEquivalenceMapPair is for ordinary categories only. Cylinder criterion: I checked it independently through the model structure under A, using the (B×J)⊔_{A×J}A cylinder, the invertible-interval node and the any-good-cylinder test; the cases A=B and A=∅ work. It is not a duplicate of lem-coef-localized-good-homotopy-test or lem-coef-model-localization-homotopy-classes, which do not identify homotopy classes with equivalence edges in a strict relative fiber. All nodes are in the same unit, so no tool_uses are needed. No SGA is used, no target is involved, and I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JoinSliceDiagramIsomorphisms",
+  "declaration": "SSet.Enhanced.join_slice_diagram_equivalence_iff",
+  "declarations": [
+   "SSet.Enhanced.rightConeApex",
+   "SSet.Enhanced.IsRightConeExtension",
+   "SSet.Enhanced.existsUnique_rightConeExtension",
+   "SSet.Enhanced.rightConeExtension",
+   "SSet.Enhanced.rightConeDiagramFiber",
+   "SSet.Enhanced.join_slice_diagram_equivalence_iff"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/JoinSliceDiagramIsomorphisms.lean",
+  "statement": "theorem join_slice_diagram_equivalence_iff (C : SSet.{u}) [Quasicategory C] (y : C _⦋0⦌) (J : SSet.{u}) (e₀ e₁ : J ⟶ rightVertexSlice C y) : AreNaturallyEquivalent e₀ e₁ ↔ ∃ f : (rightConeDiagramFiber C J y).toSSet _⦋1⦌, ((rightConeDiagramFiber C J y).toSSet.δ 1 f).val = diagramVertex (rightConeExtension y e₀) ∧ ((rightConeDiagramFiber C J y).toSSet.δ 0 f).val = diagramVertex (rightConeExtension y e₁) ∧ IsEquivalenceEdge (rightConeDiagramFiber C J y).toSSet f",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses rightVertexSlice, orderedJoinFunctor and joinPointTopSimplex. The uniquely specified cone extension is chosen only from its apex and all top-joined-simplex equations; the construction clause of this node supplies its existsUnique theorem. The strict diagram fiber imposes constancy on the entire apex simplex in every degree; both inverse triangles in the main theorem lie in that fiber. All six declarations belong to the constructions and assertion explicitly stated by this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75a5735c4",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement matches the file signature. Each clause matches Kerodon 01KV at K=Δ^0, F=y: Quasicategory C, vertex y, arbitrary J in one universe u; rightVertexSlice gives the last-vertex-y simplices with appendLast operators; the existing orderedJoinFunctor gives J⋆Δ^0 with apex via orderedJoinInr; IsRightConeExtension (apex equation plus top-simplex equations) defines the cone, and its unique-existence makes the Classical.choose allowed by AGENTS.md §5; calculusFiber fixes the whole apex simplex in every degree; both sides use IsEquivalenceEdge, with the witnesses inside the fiber. Edge cases J empty, J a point, degenerate simplices and C empty are fine. Docstrings and the seven-step proof are present; no hollow definitions; sorry-only proofs; the Joyal proof import is present; rule-7 cycle omissions are listed. nt_compile --json on the local side overlay: item 1.4 s, no errors or warnings. No findings."
  }
 }
