@@ -3,44 +3,148 @@
  "blueprint": {
   "is": "cor-sf-direct-image-ctf-nonproper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The direct image on finite Tor amplitude for a non-proper morphism",
- "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, $n\\geq1$,\n$A=A_{E,n}$, and the algebraically closed field\n$k=\\overline{\\mathbf F}_q$. Let $X,Y$ be finite-type $k$-schemes with\n$\\dim X\\leq d$, let $f:X\\to Y$ be a\nseparated finite-type\nmorphism, and let $K$ be a bounded constructible complex of\n$A$-modules on the small étale site $X_{\\Et}$ with finite\nTor amplitude in $[a,b]$. Then\n$Rf_*K$ is bounded constructible on $Y_{\\Et}$ and has finite Tor\namplitude in $[a,b+2d]$. No properness and no compactifiability of $f$\nis assumed.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ [def-weil-l-adic-coefficient-extension] and $k=\\overline{\\mathbf F}_q$. Let $d\\in\\mathbf N$ and let $X,Y$ be finite-type $k$-schemes [def-weil-finite-type-morphism] with $\\dim X\\leq d$, where dimension is the topological Krull dimension [def-kun-topological-krull-dimension]. Let $f:X\\to Y$ be a separated finite-type morphism, with separatedness as in [def-weil-proper-morphism]. Let $a,b$ be integers, and let $K$ be a bounded complex in the derived category of $A$-module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-etale-sheaves] on the small étale site $X_{\\Et}$ [def-weil-pbc-etale-site], with constructible cohomology sheaves [def-weil-pbc-etale-constructible-sheaf] and Tor amplitude in $[a,b]$ [def-kun-tor-amplitude]. Then the module-sheaf derived direct image $Rf_*K$ [def-weil-pbc-direct-image] is bounded constructible on $Y_{\\Et}$ and has Tor amplitude in $[a,b+2d]$. No properness and no compactifiability of $f$ is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md",
   "place": "node cor-sf-direct-image-ctf-nonproper, order 2191"
  },
  "stmt_deps": [
-  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-etale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-etale-sheaves",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof": [
   {
-   "text": "By [lem-sf-etale-direct-image-vanishing] the hypothesis\n$\\operatorname{UDV}(f,A;2d)$ of\n[def-sf-uniform-direct-image-vanishing] holds for $f$ on the\nsmall étale sites, for every sheaf of\n$A$-modules; [thm-sf-direct-image-tor-amplitude] with $N=2d$ then\ngives the assertion.",
+   "text": "Specialize the final, global-coefficient-stage clause of [lem-sf-etale-direct-image-vanishing] to the given finite-field datum, $A=A_{E,n}$, finite-type $k$-schemes $X,Y$, separated finite-type $f$, and nonnegative integer $d$ with $\\dim X\\leq d$. It gives $\\operatorname{UDV}(f,A;2d)$. Explicitly, by [def-sf-uniform-direct-image-vanishing] this says $R^rf_*M=0$ for every $A$-module sheaf $M$ on $X_{\\Et}$ and every integer $r>2d$. The bound $N=2d$ is nonnegative and independent of $M$. Thus the vanishing needed below is on all module sheaves, not just constructible ones.",
    "uses": [
     "lem-sf-etale-direct-image-vanishing",
-    "def-sf-uniform-direct-image-vanishing",
-    "thm-sf-direct-image-tor-amplitude"
+    "def-sf-uniform-direct-image-vanishing"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md",
+    "place": "Proof, first clause: UDV(f,A;2d) from the étale higher-direct-image vanishing lemma"
+   }
+  },
+  {
+   "text": "Apply [thm-sf-direct-image-tor-amplitude] with $N=2d$ and the given $K$. Its ground field is algebraically closed and has characteristic $p$, so its condition $\\ell\\ne\\operatorname{char}k$ is exactly the given $\\ell\\ne p$. Its coefficient stage, $n\\geq1$, finite-type source and target, and separated finite-type morphism are the present ones. Its uniform vanishing hypothesis is Step 1. Its input is precisely a bounded constructible complex on the small étale site with the given Tor interval: the étale clause of [lem-sf-flat-model], named in that theorem, defines this interval by the same universal derived-tensor vanishing condition as [def-kun-tor-amplitude]. The theorem therefore gives bounded constructibility of $Rf_*K$ and Tor amplitude in $[a,b+N]=[a,b+2d]$. Neither cited theorem requires properness or a compactification, so no such hypothesis has entered the argument.",
+   "uses": [
+    "thm-sf-direct-image-tor-amplitude",
+    "def-kun-tor-amplitude",
+    "lem-sf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md",
+    "place": "Proof, final clause: specialize the finite-Tor direct-image theorem at N=2d"
+   }
   }
  ],
  "proof_deps": [
   "lem-sf-etale-direct-image-vanishing",
   "def-sf-uniform-direct-image-vanishing",
-  "thm-sf-direct-image-tor-amplitude"
+  "thm-sf-direct-image-tor-amplitude",
+  "def-kun-tor-amplitude",
+  "lem-sf-flat-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-direct-image-tor-amplitude/cor-sf-direct-image-ctf-nonproper.md",
-  "place": "## Proof"
+  "place": "Proof, expanded hypothesis checks for its two existing citations; unit sk-thm-sf-direct-image-tor-amplitude, Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complex finite Tor amplitude direct image along separated finite type morphism over algebraically closed field has amplitude [a,b+2d] without properness",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.locallyOfFiniteType_of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern morphism permanence, constructible subsets, etale algebras or finite presentation of module sheaves, not derived-direct-image Tor intervals"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar, AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar",
+   "results": "0 hits: none; loogle: unknown identifier 'AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid query; valid general rightDerived searches follow"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_rightDerivedLowerStar|boundedConstructible_rightDerivedLowerStar|direct.image.*Tor",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid Mathlib/Mathlib scope; corrected by unscoped searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "direct image of bounded constructible finite Tor amplitude etale complex has Tor amplitude increased by twice dimension",
+   "results": "0 hits: none; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform vanishing higher etale direct images for every module sheaf implies direct image finite Tor amplitude",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.instForallOfFinite, SheafOfModules.isFinitePresentation, Algebra.Etale.exists_subalgebra_fg, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern morphism permanence, constructible subsets, etale algebras or finite presentation of module sheaves, not derived-direct-image Tor intervals"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, torAmplitudeIn",
+   "results": "0 hits: none; loogle: unknown identifier 'torAmplitudeIn'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid query; valid general rightDerived searches follow"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|torAmplitudeIn_rightDerivedLowerStar",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid Mathlib/Mathlib scope; corrected by unscoped searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "12 hits: CategoryTheory.Functor.HasRightDerivedFunctor, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension', CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension, CategoryTheory.Functor.hasRightDerivedFunctor_iff, CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: generic derived-functor construction or vanishing on injectives does not supply a geometric uniform bound, constructibility or Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn_rightDerivedLowerStar|boundedConstructible_rightDerivedLowerStar|direct.image.*Tor",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|[Tt]or[Aa]mplitude|boundedConstructible",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match: generic derived-functor construction or vanishing on injectives does not supply a geometric uniform bound, constructibility or Tor amplitude"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +179,34 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-direct-image-tor-amplitude"
+ "unit": "sk-thm-sf-direct-image-tor-amplitude",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-sf-direct-image-ctf-nonproper",
+  "worker": "stage1",
+  "summary": "Repair L: remove the out-of-scope existing unit file from the delivery while retaining the reviewed two-step split. Re-read the current item, all fifteen immediate dependency statements, and the archived item, unit and five proof-dependency sources. Compared the cited records to the immutable maintainer snapshot: only the vanishing lemma differs, in Lean metadata alone. Checked all five literal citation quotes and all eleven historical search records. The two-step all-module UDV and N=2d specialization remains valid with no new node or Mathlib leaf. The required current-base dry run passes after the unit file is removed; the pre-existing empty sk-prop-sf-finiteness realization is reported for maintenance under coord/dag-sync.md. Independent second reading by NK checked every step, all current immediate dependency statements, archived sources, boundary cases and five exact citation quotations; no mathematical change was needed. The report now records this reading and the inherited transitive missing-id findings for maintenance.",
+  "blueprint": "Realizes cor-sf-direct-image-ctf-nonproper Proof: Step 1 is its first UDV clause and Step 2 its final N=2d specialization. This is also the statement of unit sk-thm-sf-direct-image-tor-amplitude: its single spectral-sequence/projection/residue paragraph is carried by the existing general theorem thm-sf-direct-image-tor-amplitude, with the unit’s all-module dimension bound supplied by lem-sf-etale-direct-image-vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-direct-image-vanishing",
+    "why": "The corollary explicitly invokes this existing all-module geometric dimension-bound tool; the unit needs exactly its UDV(f,A;2d) clause."
+   },
+   {
+    "node": "thm-sf-direct-image-tor-amplitude",
+    "why": "The corollary explicitly invokes this existing general UDV-to-Tor-interval theorem. Its proof is the same flat-model, truncation spectral sequence, finiteness, constant-coefficient projection formula and residue test route as the unit, at general bound N; the present proof supplies N=2d."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-direct-image-vanishing",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-571fc9810",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-571fc9810 (reviewer sub-agent of L); spot-checked: Read the full item, unit, chapter, report, all cited DAG statements, exact blueprint sources, and related direct-image variants. The two proof steps correctly establish UDV(f,A;2d) and then specialize the general small-etale finite-Tor theorem to obtain bounded constructibility and interval [a,b+2d]. Coefficient category, base-change morphism, hypotheses, nonproper scope, route, duplicates, searches, and edge cases all check. No repair is needed; the empty unit realization is a pre-existing maintenance metadata issue documented under coord/dag-sync.md."
+ }
 }
