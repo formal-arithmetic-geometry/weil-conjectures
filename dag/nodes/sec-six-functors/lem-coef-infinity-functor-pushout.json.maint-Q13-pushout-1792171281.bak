@@ -1,0 +1,214 @@
+{
+ "id": "lem-coef-infinity-functor-pushout",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Integral exceptional-adjoint proof, paragraph 2, the displayed derived coefficient-adjunction and inverse-limit calculation; mapping-space foundation used by the finite-adjunction-diagram realization and its cosimplicial-frame comparison. Technical input: Generic internal-Hom calculus needed to retain all natural transformations in the localization universal property.",
+   "via": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functor infinity categories turn source pushouts into pullbacks",
+ "statement": "Use quasicategories, coherent functor categories, full subcategories and mapping spaces as in [def-cbc-enhanced-diagrams-cones]. Fix a universe of small quasicategories and a larger universe for their collection $\\mathrm{Cat}_\\infty$. This infinity category has small colimits and is cartesian closed, with internal Hom the quasicategory $\\operatorname{Fun}(A,E)$ including all coherent natural transformations. For a span of small infinity categories $B\\leftarrow A\\to D$ and its pushout $P=B\\amalg_A D$ in $\\mathrm{Cat}_\\infty$, restriction gives an equivalence of infinity categories\n$$\\operatorname{Fun}(P,E)\\simeq\\operatorname{Fun}(B,E)\\mathop{\\times}^{h}_{\\operatorname{Fun}(A,E)}\\operatorname{Fun}(D,E)$$\nfor every infinity category $E$ in a sufficiently large universe. The right side is the pullback in $\\mathrm{Cat}_\\infty$: its objects consist of functors on $B,D$ and a coherent equivalence between their restrictions to $A$; its transformations include noninvertible transformations with their coherent compatibility on $A$. These equivalences are natural in maps of spans and in $E$, and commute with composition of transformations. In particular this assertion is about the whole functor infinity category, not just its core.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.1.3, especially the internal Hom preceding Proposition 3.1.3.3; Proposition 3.1.4.2 and Corollary 3.1.4.3 for the cartesian model structure over a point; Corollary 4.2.4.8 for small colimits of the associated infinity category. The displayed internal-Hom pushout formula is an agent-formulated consequence of cartesian closedness and the mapping-space universal property. No Stacks tag states this infinity-categorical formula."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Realize $\\mathrm{Cat}_\\infty$ by the coherent nerve of the fibrant objects in the marked cartesian model over a point. All marked objects are cofibrant and a fibrant object is $C^\\natural$ for a quasicategory $C$. Thus the model mapping Kan complex from $C^\\natural$ to $D^\\natural$ is $\\operatorname{Fun}(C,D)^\\simeq$, and the coherent-nerve comparison identifies it with $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(C,D)$. This fixes the meaning of $\\mathrm{Cat}_\\infty$ and of its mapping spaces without invoking an ordinary homotopy category.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.0.0.1; Proposition 3.1.3.7 and Corollary 3.1.4.4; Proposition 2.2.4.1."
+   }
+  },
+  {
+   "text": "For an arbitrary small shape $K$ and $p:K\\to\\mathrm{Cat}_\\infty$, use strict coherent-diagram comparison to present $p$ by an enriched diagram $F:I\\to\\mathrm{sSet}^+$. Its projective cofibrant replacement gives an ordinary enriched colimit; take a fibrant replacement of that apex. The first cone-mapping formula identifies its mapping space into $Y$ with the space of coherent cocones $p\\to\\Delta_KY$. The coherent cocone criterion therefore makes this a colimit. The injectively fibrant replacement and the second formula give limits. This includes the empty shape. The diagram, ordinary enriched (co)limit and replacements can be formed in the universe of the small input objects. If that universe is enlarged, the same projective cofibrant replacement is still cofibrant: by the free-diagram generating-cofibration clause, it is a retract of a transfinite composite of pushouts of coproducts of maps $I(i,-)\\otimes a\\to I(i,-)\\otimes b$, with $a\\to b$ a generating marked cofibration. Each such marked cofibration is still a cofibration in the larger universe, so each free-diagram map remains a projective cofibration there. The same small coproducts, transfinite compositions, pushouts and retract diagrams exist in the larger universe. This argument includes generators which enlarge the marking without changing the underlying simplicial set; it does not identify marked cofibrations with unmarked boundary cells. Fibrancy and weak equivalences of the marked replacements are absolute. Applying the same cone formulas in the larger universe shows that these smaller-universe colimits remain colimits there. In particular the given pushout $P$ can be used with an arbitrary larger $E$ after choosing one universe containing $E$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4; Theorem 4.2.4.1; Corollary 4.2.4.8, together with the universe-relative marked model construction."
+   }
+  },
+  {
+   "text": "For quasicategories $T,A,E$, the exponential identity is explicit in each simplicial degree: a map $T\\times\\Delta^n\\to\\operatorname{Fun}(A,E)$ is a map $T\\times\\Delta^n\\times A\\to E$, and permuting the last two factors makes it a map $T\\times A\\times\\Delta^n\\to E$. This gives an isomorphism $\\operatorname{Fun}(T,\\operatorname{Fun}(A,E))\\cong\\operatorname{Fun}(T\\times A,E)$, commuting with all simplicial operators. Both sides are quasicategories. Taking cores and using the mapping-complex identity of step 1 gives $\\operatorname{Map}(T,\\operatorname{Fun}(A,E))\\simeq\\operatorname{Map}(T\\times A,E)$. Equivalences are preserved by this isomorphism; pointwise equivalence identifies the marked exponent $(E^\\natural)^{A^\\natural}$ with $\\operatorname{Fun}(A,E)^\\natural$. Products have their degreewise simplicial meaning, since their model mapping complexes are products. This proves cartesian closedness with the whole $\\operatorname{Fun}(A,E)$ as internal Hom.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Internal Hom preceding Remark 3.1.3.1; Definition 3.0.0.1; the simplicial exponential identity."
+   }
+  },
+  {
+   "text": "For every $T,X$, apply step 3 and the pushout universal property to compute\n$$\\operatorname{Map}(T\\times P,X)\\simeq\\operatorname{Map}(P,\\operatorname{Fun}(T,X))\\simeq\\operatorname{Map}(B,\\operatorname{Fun}(T,X))\\times^h_{\\operatorname{Map}(A,\\operatorname{Fun}(T,X))}\\operatorname{Map}(D,\\operatorname{Fun}(T,X)).$$\nUncurrying the three factors identifies the last space with the coherent cocones from $T\\times B\\leftarrow T\\times A\\to T\\times D$ to $X$. Thus $T\\times P$ is the pushout of the product span. All these maps are restrictions or the explicit currying of step 3, so the displayed equivalence uses the canonical product cocone.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent deduction from the exponential identity and the mapping-space universal property of a pushout."
+   }
+  },
+  {
+   "text": "Let $R$ be the pullback of $\\operatorname{Fun}(B,E)\\to\\operatorname{Fun}(A,E)\\leftarrow\\operatorname{Fun}(D,E)$; step 2 supplies it. Restriction of a diagram on $P$ and its coherent gluing along $A$ defines a comparison $\\phi:\\operatorname{Fun}(P,E)\\to R$. For every quasicategory $T$, the pullback universal property and step 3 identify $\\operatorname{Map}(T,R)$ with\n$$\\operatorname{Map}(T\\times B,E)\\times^h_{\\operatorname{Map}(T\\times A,E)}\\operatorname{Map}(T\\times D,E).$$\nStep 4 identifies this space with $\\operatorname{Map}(T\\times P,E)$, and step 3 identifies that with $\\operatorname{Map}(T,\\operatorname{Fun}(P,E))$. The resulting map is exactly $\\operatorname{Map}(T,\\phi)$, since each factor is restriction along a leg of the given cocone.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent mapping-space computation using the colimit and limit universal properties; internal Hom preceding Remark 3.1.3.1."
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{Fun}(P,E)$. The equivalence of $\\operatorname{Map}(R,\\phi)$ gives $\\psi:R\\to S$ with $\\phi\\psi\\simeq\\mathrm{id}_R$. Since $\\operatorname{Map}(S,\\phi)$ is injective on components and $\\phi\\psi\\phi\\simeq\\phi$, it follows that $\\psi\\phi\\simeq\\mathrm{id}_S$. These are coherent natural equivalences because the mapping spaces in step 1 are the cores of functor quasicategories. Hence $\\phi$ is an equivalence of quasicategories. The argument tests all $T$, including non-groupoidal $T$, rather than just the core of $S$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.1.3.2, whose inverse argument is written out here; Definition 3.0.0.1."
+   }
+  },
+  {
+   "text": "For the promised description of $R$, put $C=\\operatorname{Fun}(A,E)$ and let $V$ be the underlying quasicategory of $(C^\\natural)^{(\\Delta^1)^\\sharp}$. Its objects are equivalence edges of $C$, and its $n$-simplices are maps $\\Delta^n\\times\\Delta^1\\to C$ carrying each edge $\\{v\\}\\times\\Delta^1$ to an equivalence. Thus $V$ is the full subcategory of $\\operatorname{Fun}(\\Delta^1,C)$ on the equivalence edges; other parameter edges are unrestricted. The endpoint inclusion $(\\partial\\Delta^1)^\\sharp\\hookrightarrow(\\Delta^1)^\\sharp$ is a cofibration. Its internal-Hom map into the fibrant $C^\\natural$ is a fibration: a lifting problem against a trivial cofibration is, by the exponential adjunction, a lifting problem for its pushout product with this endpoint inclusion, which is trivial by the marked-model axiom. Since the target $C^\\natural\\times C^\\natural$ is fibrant, the marked exponent is itself fibrant; the fibrant-object characterization therefore identifies its marking with exactly the equivalences of $V$. The constant-path map $C\\to V$ is an equivalence. Indeed evaluation at $0$ is its retraction, and the map $(s,t)\\mapsto\\min(s,t)$ on $[1]\\times[1]$ contracts every equivalence edge to its source; at a vertex $e:x\\to y$ of $V$, the resulting edge from the constant path at $x$ to $e$ has components $\\mathrm{id}_x$ and $e$ in $C$. Both are equivalences. The pointwise criterion in $\\operatorname{Fun}(\\Delta^1,C)$ makes this edge an equivalence there and in its full subcategory $V$, so the contraction is a natural equivalence by the pointwise criterion again. Thus $C^\\natural\\to V^\\natural\\to C^\\natural\\times C^\\natural$ is a path object. Apply the fibrant-cospan clause of the coherent-diagram comparison: $R$ is modeled by\n$$\\operatorname{Fun}(B,E)\\times_{C,\\operatorname{ev}_0}V\\times_{\\operatorname{ev}_1,C}\\operatorname{Fun}(D,E).$$\nIts vertices are the two functors and an equivalence of their restrictions. Its edges and higher simplices are their transformations with coherent compatibility along that equivalence; the transformations on $B,D$ need not be invertible, because the $\\Delta^n$ parameter is minimally marked in the underlying internal Hom.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.1.4.3, internal marked Hom in Section 3.1.3, and Proposition A.2.4.4 and Remark A.2.4.5; the interval contraction and the lifting adjunction are written out."
+   }
+  },
+  {
+   "text": "Restriction of maps $K\\times\\Delta^n\\to E$ commutes with precomposition in $K$, postcomposition in $E$, and every simplicial operator. The currying maps only permute factors, so they have the same compatibilities. Therefore the comparison $\\phi$ is natural contravariantly in maps of spans and covariantly in $E$, retaining all higher compatibility simplices. The pointwise equivalence criterion makes this natural comparison an equivalence of functor quasicategories. Composition of transformations is preserved because the comparison is a simplicial functor, restricting the very same $2$-simplices that witness composition. This proves the stated naturality and composition clauses for the full functor categories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent check on simplices of the restriction comparison; Proposition 1.2.7.3 for pointwise equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Technical internal-Hom input to paragraph 2; proof derived explicitly from the marked model and coherent-diagram comparisons in HTT, read online, not archived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In infinity categories internal functor categories send source pushouts to pullbacks retaining noninvertible natural transformations",
+   "results": "{\"t\": \"2026-10-16T15:07:44Z\", \"tool\": \"leanfinder\", \"query\": \"In infinity categories internal functor categories send source pushouts to pullbacks retaining noninvertible natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PushoutObjObj.isPushout\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangeFunctorFunctorCategoryOfHasPushouts\", \"CategoryTheory.Functor.PushoutObjObj.ofHasPushout\", \"CategoryTheory.Limits.inr_comp_pushoutObjIso_inv\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_inv\", \"CategoryTheory.Functor.PushoutObjObj.ofHasPushout_pt\", \"CategoryTheory.Limits.inl_comp_pushoutObjIso_inv_assoc\"], \"digest\": \"fed9f3c721a802c1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary SSet (co)limits and closed structure, ordinary categorical pullbacks, and the strict QCat bicategory do not give homotopy colimits in Cat infinity or the full internal-Hom pushout formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T15:09:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary SSet (co)limits and closed structure, ordinary categorical pullbacks, and the strict QCat bicategory do not give homotopy colimits in Cat infinity or the full internal-Hom pushout formula."
+  },
+  {
+   "tool": "grep",
+   "query": "CatInfinity|InfinityCategory|homotopyPushout|cartesianClosed",
+   "results": "{\"t\": \"2026-10-16T15:09:25Z\", \"tool\": \"grep\", \"query\": \"CatInfinity|InfinityCategory|homotopyPushout|cartesianClosed\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"2e284a326b4db773\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary SSet (co)limits and closed structure, ordinary categorical pullbacks, and the strict QCat bicategory do not give homotopy colimits in Cat infinity or the full internal-Hom pushout formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity categorical internal functor categories transform source pushouts into homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-16T15:09:25Z\", \"tool\": \"leansearch\", \"query\": \"Infinity categorical internal functor categories transform source pushouts into homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PushoutObjObj.ofHasPushout\", \"CategoryTheory.adhesive_functor\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Functor.PushoutObjObj.mk\", \"CategoryTheory.Functor.PushoutObjObj.isPushout\", \"CategoryTheory.Functor.PushoutObjObj.ofHasPushout_inl\", \"CategoryTheory.IsPushout.map\", \"CategoryTheory.Functor.PushoutObjObj\"], \"digest\": \"c0720226776acdd2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary SSet (co)limits and closed structure, ordinary categorical pullbacks, and the strict QCat bicategory do not give homotopy colimits in Cat infinity or the full internal-Hom pushout formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of small quasicategories is cartesian closed and admits all small colimits",
+   "results": "{\"t\": \"2026-10-16T15:13:25Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of small quasicategories is cartesian closed and admits all small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.Truncated.instMonoidalClosed\", \"SSet.hasColimits\", \"SSet.instMonoidalClosed\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat.bicategory\", \"SSet.hasLimits\", \"SSet.QCat.catEnrichedOrdinaryCategory\"], \"digest\": \"f66701cd53894e63\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary SSet (co)limits and closed structure, ordinary categorical pullbacks, and the strict QCat bicategory do not give homotopy colimits in Cat infinity or the full internal-Hom pushout formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-hammock-infinity-localization",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-functor-pushout",
+  "worker": "stage1",
+  "summary": "Kept every clause and universe generality. Added point-set marked-model and strict/coherent-diagram technical inputs, avoiding the cycle through combinatorial-localization-presentability. Wrote the exponential, product-pushout, mapping tests, inverse, isocomma and naturality arguments explicitly. No Lean attachment or Mathlib match.",
+  "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure, pointwise equivalence and mapping-space cone criterion for quasicategories; this technical foundation does not replace any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-4f835306c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-4f835306c (reviewer sub-agent of L); spot-checked: Read the complete item, both new nodes, report, route documents, delivery errors A–F, blueprint source, Scholze Lecture II, and all cited HTT locations. Verified every proof step, hypotheses, universe and fibrancy arguments, path-object construction, edge cases, duplicate search, Mathlib searches, and route compliance. Review written to review.md."
+ }
+}
