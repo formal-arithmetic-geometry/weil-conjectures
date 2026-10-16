@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-locally-finitely-presented",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Locally finitely presented modules on the pro-étale site",
- "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive, let $X$ be a scheme, and let $\\mathcal R$ be a ring object of\n$\\Sh(X_{\\mathrm{proét}},\\mathcal A)$. An $\\mathcal R$-module $M$ is *locally finitely\npresented* if there is a pro-étale cover $\\{u_i\\colon U_i\\to X\\}$\n[def-weil-pbc-proetale-site] such that, for every $i$, the $u_i^*\\mathcal R$-module\n$\\operatorname{mapMod}(u_i^*)(M)$ is finitely presented\n[def-sfb-finitely-presented-module]. Here $u_i^*$ is the pullback of pro-étale sheaves\n[sk-def-sfb-finite-pushforward-pullback], and $\\operatorname{mapMod}$ transports modules\nalong the monoidal functor $u_i^*$ [sk-def-sfb-transport].",
+ "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive, let $X$ be a scheme, and let $\\mathcal R$ be a ring object of\n$\\Sh(X_{\\mathrm{proét}},\\mathcal A)$. An $\\mathcal R$-module $M$ is *locally finitely\npresented* if there is a pro-étale cover $\\{u_i\\colon U_i\\to X\\}$\n[def-weil-pbc-proetale-site] such that, for every $i$, the $u_i^*\\mathcal R$-module\n$\\operatorname{mapMod}(u_i^*)(M)$ is finitely presented\n[def-sfb-finitely-presented-module]. Here $u_i^*$ is the pullback of pro-étale sheaves\n[def-sfb-finite-upper-star], and $\\operatorname{mapMod}$ transports modules\nalong the strong monoidal functor $u_i^*$\n[def-sfb-finite-upper-star-monoidal], using [def-sfb-modobj-transport].\nHere the tensor product on sheaves is that of [sk-def-sfb-sheaf-tensor], ring objects\nare as in [sk-def-sfb-ring-object], and module objects are as in\n[sk-def-sfb-module-objects].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/def-sfb-locally-finitely-presented.md",
   "place": "node def-sfb-locally-finitely-presented, order 1639"
@@ -15,16 +15,90 @@
  "stmt_deps": [
   "def-weil-pbc-proetale-site",
   "def-sfb-finitely-presented-module",
-  "sk-def-sfb-transport",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-modobj-transport",
   "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-ring-object"
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LocallyFinitelyPresented|locally finitely presented",
+   "results": "none (directory Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match in CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finitely presented sheaves of modules over a ring object",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; AlgebraicGeometry.Scheme.Modules; SheafOfModules.mk; SheafOfModules",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: SheafOfModules.IsFinitePresentation is only the ordinary ring-sheaf analogue."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyFinitelyPresented\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over a ring object in sheaves on the pro etale site of a scheme",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: SheafOfModules.IsFinitePresentation covers ordinary ring sheaves and AddCommGrp-valued modules, not arbitrary closed symmetric monoidal Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: source Quasicoherent.lean:197-269 specializes coefficients to AddCommGrpCat and a sheaf of ordinary rings."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsFinitePresentation|def isFinitePresentation|structure IsFinitePresentation|LocallyFinitelyPresented",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (directory Mathlib/Algebra/Category/ModuleCat/Sheaf)",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: Quasicoherent.lean:236,267 give finite presentation for ordinary SheafOfModules only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules internal to an arbitrary monoidal abelian category of sheaves that locally admit finite free presentations",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFiniteType; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-16",
+   "verdict": "no match: same ordinary SheafOfModules candidates; LightCondensed monoidal structure is not the local finite-presentation predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentations by finite sums of the regular module for sheaves valued in a general monoidal category",
+   "results": "SheafOfModules.Presentation.IsFinite; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData (8 hits; independent second-reading search; full receipt in searches.jsonl)",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: Quasicoherent.lean:33-34,197-209,236-237,267-269 defines presentations for a sheaf of ordinary rings and additive-group-valued modules, not module objects in sheaves valued in arbitrary monoidal A."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\"",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.instIsClosedUnderIsomorphismsIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFinitePresentation.mk (12 hits; independent second-reading search; full receipt in searches.jsonl)",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: Quasicoherent.lean:33-34,197-209,236-237,267-269 defines presentations for a sheaf of ordinary rings and additive-group-valued modules, not module objects in sheaves valued in arbitrary monoidal A."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|IsFinitelyPresented",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/RingTheory/Flat/EquationalCriterion.lean; Mathlib/GroupTheory/FinitelyPresentedGroup.lean; Mathlib/GroupTheory/FinitelyPresentedGroup.lean (11 hits; independent second-reading search; full receipt in searches.jsonl)",
+   "date": "2026-10-16",
+   "verdict": "no match in the stated generality: Quasicoherent.lean:33-34,197-209,236-237,267-269 defines presentations for a sheaf of ordinary rings and additive-group-valued modules, not module objects in sheaves valued in arbitrary monoidal A."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -49,5 +123,20 @@
   "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-ring-object"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-locally-finitely-presented",
+  "worker": "stage1",
+  "summary": "Definition-only split: preserved the covering predicate and arbitrary monoidal Grothendieck abelian coefficient category. Replaced the nonexistent section-id citation for pullback by its existing definition, cited its strong monoidal structure and the precise module-transport definition, and made the sheaf tensor, ring and module notions explicit. Searched project Lean, whole DAG/blueprint and Mathlib; no attachment or exact Mathlib match. No new nodes and no proof obligations for the definition.",
+  "blueprint": "Realizes the full definition in def-sfb-locally-finitely-presented.md, especially its cover condition and final pullback/transport sentences. The surrounding sk-def-sfb-constructible unit distinguishes finite constant local models from this more general predicate; that distinction is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-a38b75693",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-a38b75693 (reviewer sub-agent of L); spot-checked: Read the full definition, report, cited statements and source places, and chapter/unit route. The arbitrary coefficient category, covering predicate and module transport agree with the current blueprint and reference master. Checked duplicate candidates, Mathlib analogues, dependency cycles, zero/regular/torsion modules, noncommutative coefficients and the empty scheme. No repairs or tool_uses needed; detailed review written to review.md."
+ }
 }
