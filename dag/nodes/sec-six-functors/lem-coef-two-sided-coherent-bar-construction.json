@@ -26,9 +26,100 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathsf{BM}$ for the planar operad with colours $v,m,t$ and its unique operations $v^r\\to v$, $t^s\\to t$, and $v^rmt^s\\to m$, for $r,s\\geq0$. The coherent left action gives a coherent functor on its operator category: the colour fibers are $\\mathcal V,\\mathcal M,*$, the fiber at a list is the product of its colour fibers, and a block operation acts by the given iterated tensor/action, with the terminal right factors ignored. The functoriality simplices are the assumed tensor/action associativity and unit coherences, including the higher ones. Apply [lem-coef-cocartesian-straightening], in an enlarged universe containing these categories, to obtain $q:\\mathcal E^\\otimes\\to N(\\mathsf{BM}^\\otimes)$. Its cocartesian transports are precisely these block tensor/action functors. For an operator $\\alpha$ and tuples $x,y$ over its source and target, take a cocartesian edge $x\\to\\alpha_!x$. The cocartesian mapping-space pullback square in [lem-coef-cocartesian-straightening], restricted to the fiber over $\\alpha$ and the identity of its target, identifies maps from $x$ to $y$ over $\\alpha$ with maps $\\alpha_!x\\to y$ in the target fiber. This fiber is a product, so that mapping space is the product of the mapping spaces from the individual transported blocks to the corresponding components of $y$. Thus the product decomposition on lists and the relative mapping-space product decomposition of [def-coef-monoidal-infinity-category] make $\\mathcal E^\\otimes$ an operadic target: inert transports are the coordinate projections. This constructs the action-valued cocartesian fibration from the given coherent action, without asking for any colimit.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.4.2.12, the bitensored setting with terminal right monoidal category; Construction 4.4.2.7, its cocartesian-fibration hypothesis."
+   }
+  },
+  {
+   "text": "Use $\\mathsf{Chain}_2$ of [lem-coef-composable-bimodule-operad-segal]. Map its colours $a_0,a_1,p$ to $v$, its colour $q$ to $m$, and its colour $a_2$ to $t$. This gives a map $g$ of operator categories into $\\mathsf{BM}^\\otimes$: every allowed block has the required output type. On $\\mathsf{BM}_{01}$ the given $(B,A)$-bimodule $P$ defines an algebra lift with values $(B,P,A)$; on $\\mathsf{BM}_{12}$ the left $A$-module $Q$ defines a lift with values $(A,Q,*)$, where the right terminal action is the identity. Their restrictions to $a_1$ are the same specified algebra $A$. The relative restriction equivalence in the cited node therefore packages them as an inert-preserving coherent functor $F_0:N(\\mathsf{Chain}_2^\\otimes)\\to\\mathcal E^\\otimes$ equipped with a coherent equivalence $qF_0\\simeq g$. This is an equivalence of full infinity-categories of input structures, so retains their coherent maps and all parameter simplices. No tensor product over $A$ has been formed.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.4.1.11 and Remark 4.4.2.2, relative version; Example 4.4.2.12, terminal right action."
+   }
+  },
+  {
+   "text": "Define $w:\\Delta^{\\mathrm{op}}\\to\\mathsf{Chain}_2^\\otimes$ by $w[n]=(p,a_1,\\ldots,a_1,q)$ with $n$ middle colours. For $f:[m]\\to[n]$, its contravariant arrow contracts $p,a_{1,1},\\ldots,a_{1,f(0)}$ to $p$; for $1\\leq j\\leq m$ it contracts the block numbered $f(j-1)+1,\\ldots,f(j)$ to the $j$th output $a_1$; and it contracts the remaining middle colours together with $q$ to $q$. An empty middle block uses the nullary $a_1$ operation. Equivalently the underlying interval map sends $0\\mapsto0$, $j+1\\mapsto f(j)+1$ for $0\\leq j\\leq m$, and $m+2\\mapsto n+2$. This preserves both outer endpoints. Refining these consecutive blocks for a second monotone map gives exactly the blocks for the composite, and $\\mathsf{Chain}_2$ has just one operation of each allowed type; hence this is an ordinary functor, including identities. Its base map $gw$ has a natural transformation $\\beta$ to the constant one-letter word $m$: at each word use the single operation contracting all $v$ factors and the final $m$. Naturality holds because both composite block substitutions are that same unique operation of $\\mathsf{BM}$.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 4.4.2.4 and Construction 4.4.2.7; explicit planar cut-word formula."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $q$, $K=N(\\Delta^{\\mathrm{op}})$, $F_0w$, and the transformation $\\gamma:qF_0w\\to\\operatorname{const}(m)$ obtained by composing the specified equivalence $qF_0w\\simeq gw$ with $\\beta$. Thus an infinity-categorical lift from step 2 suffices; no identification of a strict fiber with a homotopy fiber is required. The index category is countable and thus small; the source and target of $q$ are quasicategories, and its cocartesian lifts exist by step 1 with the mapping-space characterization stated in [lem-coef-cocartesian-straightening]. We get a coherent diagram $X_\\bullet$ in the fiber $\\mathcal E_m=\\mathcal M$. Its degree $n$ is the transport of $(P,A,\\ldots,A,U_AQ)$ along the total contraction, namely $P\\otimes A^{\\otimes n}\\otimes U_AQ$. The same transport theorem says that transport of a substituted sequence agrees coherently with its composite. Therefore the maps of $X$ are the word contractions and unit insertions of step 3, with their entire strings of substitution simplices; this constructs the whole coherent simplicial diagram, rather than just its edges and pairwise identities.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7: lift the transformation to the constant output colour by cocartesian transport; no use of Theorem 4.4.2.8."
+   }
+  },
+  {
+   "text": "Perform this transport simultaneously on the subcategory of $\\mathsf{Chain}_2^\\otimes$ whose words are $a_0^r p a_1^n q$, for $r,n\\geq0$, and whose arrows use the allowed block operations over interval maps preserving both outer endpoints, while retaining one $p$ and one $q$. Thus no input is discarded, and the total contractions again form a natural transformation to the constant colour $m$. Restriction to $r=0$ is step 4. Its total tensor at $(r,n)$ is coherently $B^{\\otimes r}\\otimes X_n$, because successive tensor transports compose as in [lem-coef-infinity-pointwise-cocartesian-transport]. The block $a_0^r p\\to p$ gives its action to $X_n$; substitution of $a_0$ multiplication and nullary operations gives the associative and unital $B$-module coherences in every dimension. In the joint word category, applying an $a_0$ block and an $a_1$ block in either order has the same substitution. The full coherent $F_0$ therefore supplies the action-preserving simplices for every $n$-map and for every string of them. By the meaning of $\\operatorname{LMod}_B(\\mathcal M)$ in the statement, this is a coherent simplicial diagram in that category, with left action through $P$. For the coface omitting $0$, the initial block is $p,a_1$; omitting an interior vertex joins its two adjacent $a_1$ factors; omitting $n$ gives the last block $a_1,q$. Repeating a vertex produces an empty middle block. These are exactly $d_0,d_i,d_n,s_i$ with the asserted indices, including $s_0:P\\otimes Q\\to P\\otimes A\\otimes Q$ in degree zero.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7; retention of the external algebra action, and Example 4.4.2.12. Explicit degree-zero and generator calculation."
+   }
+  },
+  {
+   "text": "Let $b:P\\otimes U_AQ\\to U_BN$ be the specified balanced, $B$-linear pairing. On a word $a_0^r p a_1^n q$, first apply the iterated left $A$-action to the final $Q$, then apply $b$, and then the $r$-fold $B$-action on $N$. These operations give a coherent transformation from the pre-transport word diagram to the constant object $N$ over total contraction. To check its content, an interior $a_1$ contraction or an empty $a_1$ block is compatible by the associativity or unit data of the $A$-action; the terminal block is compatible by the same iterated action. An initial $p,a_1$ contraction moves that $A$ factor through $b$, and the required comparison is exactly the supplied balancing homotopy. A prefix $a_0$ contraction uses exactly the supplied $B$-linearity. For an arbitrary string of block contractions these are the specified higher balancing and linearity compatibilities, evaluated on the corresponding nested blocks; they are part of the coherent pairing hypothesis, not inferred from pairwise equalities. Apply the mapping-space fiber equivalence of [lem-coef-infinity-pointwise-cocartesian-transport] to this transformation. It factors coherently through the transported word diagram and hence gives a cocone $X_\\bullet\\to N$. Since the prefix words were included, it is a cocone in $\\operatorname{LMod}_B(\\mathcal M)$. Its degree-zero map is $b$ and its degree-$n$ map is the pairing after the intervening $A$-actions, as claimed.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7 with a specified balanced output pairing; factorization through the cocartesian total-tensor edges."
+   }
+  },
+  {
+   "text": "The restriction equivalence of [lem-coef-composable-bimodule-operad-segal] retains full coherent maps of both input modules. Applying the transport and mapping-space factorization of [lem-coef-infinity-pointwise-cocartesian-transport] with these parameter simplices, or jointly on their products with the small word category, makes the construction and augmentation natural in $P,Q$. Parenthesizing tensor products in stages is successive transport; its comparison with one total contraction is the cited transport-composition coherence. An inserted unit block is the nullary operation, and composing it with its neighbouring block gives the original operation by the operadic unit law. Consequently every further substitution has the same comparison simplex; this proves compatibility with insertion and removal of unit blocks, not just the degeneracy identities. For the regular specialization $B=A$ and $P=A$ with both actions given by multiplication, the unit insertion before this first factor after forgetting its left action has the following explicit extension. Take the category of words $a_1^kq$, $k\\geq0$, with all allowed block maps over endpoint-preserving interval maps retaining the final $q$. Restrict $F_0$ to these words, and apply the cited transport theorem to their total contractions to $m$, composed with the specified base equivalence from step 2. On $a_1^kq$ this evaluates to $A^{\\otimes k}\\otimes U_AQ$. A map from the word of length $k+1$ to the word of length $k+2$ has opposite interval map $h:[k+2]\\to[k+1]$ given by $h(0)=h(1)=0$ and $h(j)=j-1$ for $2\\leq j\\leq k+2$; its first output block is empty, so its evaluation is the leading unit insertion. Identifying the regular word $p a_1^nq$ with $a_1^{n+1}q$ identifies its operations with this restriction, since both actions on the regular factor are multiplication. Every string involving the leading insertion is now a simplex of this one word category; the coherent $F_0$ and transport provide its compatibility with all contractions. This extension is in $\\mathcal M$ after forgetting the external action; no linearity of the leading-unit map is asserted. All constructions used only the given operations and cocartesian transport.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.2.2.6 and Example 4.7.2.7, ordered words and nullary operations; Construction 4.4.2.7, coherent transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-composable-bimodule-operad-segal",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Source-guided expansion of HA Proposition 4.4.1.11, Notation 4.4.2.4 and Construction 4.4.2.7, with the action model of Example 4.4.2.12. Source read online; no archived copy in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +162,66 @@
    "results": "{\"t\": \"2026-10-16T20:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial bar construction with multiplication and unit face degeneracy maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.compForgetAugmented\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"AlgebraicTopology.DoldKan.hσ\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"AlgebraicTopology.DoldKan.QInfty\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"CategoryTheory.SimplicialObject.σ\"], \"digest\": \"1cce9ecf62640410\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. The returned classifyingSpaceUniversalCover and its extra degeneracy are a particular monoid construction in Type; read Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:24-95, whose general structure is for strict simplicial objects in an ordinary category. Neither states the arbitrary coherent bimodule bar."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent two-sided bar construction bimodule left module infinity category",
+   "results": "{\"t\": \"2026-10-16T20:33:21Z\", \"tool\": \"leanfinder\", \"query\": \"coherent two-sided bar construction bimodule left module infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.whiskerLeft\", \"Bimod.leftUnitorBimod\", \"Bimod.X\", \"Bimod.whiskerLeft_hom\", \"Bimod.id_whiskerLeft_bimod\", \"Bimod.regular\", \"Bimod.whiskerRight\", \"Bimod.LeftUnitorBimod.hom_left_act_hom'\"], \"digest\": \"64fe04902707aed3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Bimod tensor bar simplicial",
+   "results": "{\"t\": \"2026-10-16T20:33:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Bimod tensor bar simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `CategoryTheory.Bimod`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar|[Bb]imodule|[Cc]oherent",
+   "results": "{\"t\": \"2026-10-16T20:33:21Z\", \"tool\": \"grep\", \"query\": \"[Bb]ar|[Bb]imodule|[Cc]oherent\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\"], \"digest\": \"bb1c24d4951e63d1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent two sided bar construction of a bimodule and left module",
+   "results": "{\"t\": \"2026-10-16T20:33:22Z\", \"tool\": \"leansearch\", \"query\": \"coherent two sided bar construction of a bimodule and left module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.left_assoc\", \"Bimod.middle_assoc_assoc\", \"Bimod.mk\", \"Bimod.left_assoc_assoc\", \"Bimod.TensorBimod.middle_assoc'\", \"Bimod.recOn\", \"Bimod.casesOn\", \"Bimod.whiskerLeft\"], \"digest\": \"d14173c7af0823ed\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial bar construction associative algebra right module left module coherent",
+   "results": "{\"t\": \"2026-10-16T20:35:45Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial bar construction associative algebra right module left module coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Rep.barResolution_complex\", \"Coalgebra.TensorProduct.assoc\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc\", \"Rep.standardComplex.compForgetAugmentedIso\"], \"digest\": \"f38577f81c4b4a72\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.tensorBimod, CategoryTheory.SimplicialObject",
+   "results": "{\"t\": \"2026-10-16T20:35:46Z\", \"tool\": \"loogle\", \"query\": \"Bimod.tensorBimod, CategoryTheory.SimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBimod|barResolution|simplicial",
+   "results": "{\"t\": \"2026-10-16T20:35:46Z\", \"tool\": \"grep\", \"query\": \"tensorBimod|barResolution|simplicial\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Four.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Basic.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Three.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Two.lean\"], \"digest\": \"2539222683019820\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "simplicial object from a bimodule over an associative algebra with face maps multiplication and action",
+   "results": "{\"t\": \"2026-10-16T20:35:47Z\", \"tool\": \"leansearch\", \"query\": \"simplicial object from a bimodule over an associative algebra with face maps multiplication and action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject\", \"CategoryTheory.SimplicialObject.δ\", \"CategoryTheory.instCategorySimplicialObject\", \"Bimod.regular_actLeft\", \"Bimod.regular_actRight\", \"CategoryTheory.SimplicialObject.σ\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"AlgebraicTopology.DoldKan.MorphComponents\"], \"digest\": \"d2f8750b74857d8c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 defines ordinary bimodules and a coequalizer tensor; AlgebraicTopology/ExtraDegeneracy.lean:65-83 defines a strict augmented simplicial extra degeneracy. RepresentationTheory/Homological/Resolution.lean:152-162 gives a specific monoid universal-cover construction in modules. None supplies the coherent two-sided bar in an arbitrary left-tensored infinity-category. Both semantic phrasings and the source files were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-free-module-bar",
@@ -82,5 +229,21 @@
   "group": "Q98"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-two-sided-coherent-bar-construction",
+  "worker": "stage1",
+  "summary": "Seven-step construction through the planar operator word category, operadic Segal gluing, and existing pointwise cocartesian transport. Explicit consecutive-block maps construct the entire simplicial index functor; prefix algebra words retain B-linearity, and the mapping-space transport property produces the specified balanced augmentation. New statement-only lemma isolates operadic gluing, with no bar or realization assertion. Avoided the presentably monoidal active-slice free-algebra formula, whose hypotheses do not apply here. No statement change. Second reading makes the homotopy-fiber base identification explicit and constructs the regular leading-unit extension on the enlarged word category.",
+  "blueprint": "Supports prop-coef-integral-exceptional-adjoint, proof paragraph 2, middle mapping-complex adjunction, through the recorded free-module-bar ancestry. Steps 1-2 encode the given action and pair of modules; steps 3-5 prove the whole coherent two-sided word bar and explicit generators; step 6 proves the balanced augmentation; step 7 proves naturality and unit-word compatibility.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-6313ae95c",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-6313ae95c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-composable-bimodule-operad-segal, all four cited statements, the parent lem-coef-infinity-free-module-bar and unit sk-prop-sf-biduality-general in full. Source checked in Higher Algebra (2017): Def 4.4.1.1, Not 4.4.1.9-10, Prop 4.4.1.11, Prop 4.4.1.17, Def 4.3.1.1 (BM has no nullary operations into m), Rem 4.4.2.2, Not 4.4.2.4, Constr 4.4.2.7, Thm 4.4.2.8 (not used) and Ex 4.4.2.11-12. Item statement, stmt_deps and blueprint are unchanged from the side DAG. It is not a target, so no base-change morphism or coefficient check applies. Step 1: straightening gives the operadic target, and the mapping-space product comes from the homotopy-pullback square. Step 2: the colour map g (a0,a1,p to v, q to m, a2 to t) equals the retraction of HA Ex 4.4.2.12. Step 3: I recomputed the interval formula (0 to 0, j+1 to f(j)+1, m+2 to n+2); its blocks agree with HA Not 4.4.2.4, and marking the step elementary is correct. Step 4: every hypothesis of pointwise cocartesian transport holds, with K = N(Delta^op) and gamma = beta composed with the equivalence qF0w ~ gw; this is HA Constr 4.4.2.7. Step 5: the B-action comes from prefix words a0^r p a1^n q; d0, di, dn and si (s0 included) check out. It relies on the DAG's shared informal meaning of LMod_B, noted for stage 2 but not a fault. Step 6: the augmentation follows from the mapping-space fibre formula and the given balanced, B-linear pairing. Step 7: naturality, unit blocks and the leading-unit map h(0)=h(1)=0, h(j)=j-1 are checked. The new node is a true planar form of HA 4.4.1.11 / Rem 4.4.2.2: its operations match Def 4.4.1.1 with no p,q composite and no nullary operations into p or q. It is statement-only, self-contained and searched in Mathlib with four kinds of search. It is not a restatement of an item clause and does not duplicate any of the seven operad and bar nodes I opened. Route: every cited node is in the item's unit; tool_uses is empty; no cycle; no SGA. HA is cited by URL with a WANTED recorded, as in about 50 other nodes. No fixes written."
+ }
 }

@@ -29,41 +29,235 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First take $\\epsilon=1$. The two inclusions defining $P_1$ are inclusions of simplicial subsets of $\\Delta^1\\times B$, and their intersection is $\\{1\\}\\times A$. Its pushout is their union: in each degree a pair of maps agreeing on the intersection defines a unique map on the union, and these maps commute with operators on each piece. This verifies the colimit property of [def-weil-pbc-category-colimit] and identifies the given $h_0$ with data on that union. Apply [lem-coef-infinity-monomorphism-boundary-cells] to $A\\hookrightarrow B$, obtaining $Z_0=A$, $Z_n\\hookrightarrow Z_{n+1}$ and colimit $B$. There are no zero-dimensional cells because every vertex belongs to $A$, so $Z_1=A$. We construct compatible $H_n:\\Delta^1\\times Z_n\\to\\mathcal C$ over $g$, agreeing with $h_0$ on $\\Delta^1\\times A$ and on $\\{1\\}\\times Z_n$. Set $H_0=H_1=h_0|_{\\Delta^1\\times A}$. The subsequent steps perform the induction for each cell dimension $n\\geq1$. The small simplicial set $B$ supplies a small set of choices of fillers.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proof, extension ordered by subcomplexes; expanded here by the existing relative skeletal filtration instead of Zorn."
+   }
+  },
+  {
+   "text": "Fix a cell in the pushout at the stage $Z_n\\hookrightarrow Z_{n+1}$, where $n\\geq1$, and let $\\tau:\\Delta^n\\to Z_{n+1}\\hookrightarrow B$ be its characteristic map from that pushout. The attaching map sends its boundary into $Z_n$ by [lem-coef-infinity-monomorphism-boundary-cells]. No additional property of the cell indexing, or injectivity of $\\tau$, is needed. Pull back $H_n$ along that boundary and $h_0|_{\\{1\\}\\times B}$ along $\\tau$. These maps agree on $\\{1\\}\\times\\partial\\Delta^n$, and give a map $v$ on $X_0=(\\Delta^1\\times\\partial\\Delta^n)\\cup(\\{1\\}\\times\\Delta^n)$, over $g_\\tau=g(1\\times\\tau)$. Use [lem-coef-infinity-right-prism-boundary] with $m=n$. It supplies the successive pushouts along $\\Lambda_{q+1}^{n+1}\\hookrightarrow\\Delta^{n+1}$ and the specified simplices $\\sigma_q$, for $0\\leq q\\leq n$. Starting from $v_0=v$, when $q<n$ the horn index satisfies $0<q+1<n+1$. The hypothesis on $p$ therefore supplies a filler of the horn map $v_q\\sigma_q|_{\\Lambda_{q+1}^{n+1}}$ over the actual simplex $g_\\tau\\sigma_q$. Glue that filler with $v_q$ by the cited pushout universal property to obtain $v_{q+1}$. Both composites to $\\mathcal D$ agree with $g_\\tau$ on the old subset and the attached simplex, hence everywhere by uniqueness in the same pushout.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-infinity-right-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proof, reduction to a boundary inclusion and the inner-horn stages of the standard prism filtration."
+   }
+  },
+  {
+   "text": "At $q=n$, the last attachment is $\\Lambda_{n+1}^{n+1}\\hookrightarrow\\Delta^{n+1}$. Its dimension is $n+1\\geq2$. The formula for $\\sigma_n$ in [lem-coef-infinity-right-prism-boundary] sends its last two vertices to $(0,n)$ and $(1,n)$, so it sends the final ordered edge exactly to $\\Delta^1\\times\\{n\\}$. Indeed maps $[1]\\to[1]$ and $[1]\\to[n]$ are determined by their endpoints, using [def-cbc-enhanced-diagrams-cones]. The vertex $\\tau(n)$ belongs to $A$ because every vertex of $B$ does, and the item hypothesis says its prescribed vertical edge is an equivalence; for $n\\geq1$ this vertex also belongs to the boundary. Thus this entire vertical edge is already in $X_0$, and its image under $v_n$ is the original equivalence $h_0|_{\\Delta^1\\times\\{\\tau(n)\\}}$. Apply [lem-cbc-inner-fibration-equivalence-outer-horn-lift], whose final-horn clause has dimension $n+1$, to the horn map $v_n\\sigma_n$ and base simplex $g_\\tau\\sigma_n$. It gives a filler over that precise base simplex. The last pushout gives $V_\\tau:\\Delta^1\\times\\Delta^n\\to\\mathcal C$ extending $v$ and satisfying $pV_\\tau=g_\\tau$. This completes the cell calculation; no lifting of new vertex edges is requested.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-right-prism-boundary",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proof, final outer-horn stage, using the relative theorem 01H0 with its final-edge hypothesis checked explicitly."
+   }
+  },
+  {
+   "text": "Choose such a $V_\\tau$ for every cell at this stage and glue it with $H_n$. Here is the degreewise construction from the pushout in [lem-coef-infinity-monomorphism-boundary-cells], including cells whose maps into $B$ identify vertices or faces. The simplicial set obtained degreewise from $(Z_n)_k\\amalg\\coprod_\\tau(\\Delta^n)_k$ by the boundary identifications has the required pushout property: compatible maps define a unique function on classes in every degree, and these functions are simplicial on each summand. By [def-weil-pbc-category-colimit] it is therefore canonically $Z_{n+1}$. In degree $k$ define the value at $(t,z)$ using $H_n(t,z)$ on the old summand, and $V_\\tau(t,u)$ on the simplex summand. These values agree under every boundary identification because $V_\\tau$ extends the pulled-back boundary map. They therefore give a unique function on $(\\Delta^1)_k\\times(Z_{n+1})_k$; operators commute with it on every representative. This defines $H_{n+1}$. On each representative $pH_{n+1}=g$, its terminal-endpoint restriction is $h_0$, and it extends $H_n$. The prescribed vertical edges at final vertices of newly attached simplices remain unchanged; each such edge is the original equivalence supplied by the hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proof, passage from one boundary-prism filler to arbitrary attachments; quotient construction spells out preservation of this pushout by the degreewise product."
+   }
+  },
+  {
+   "text": "The increasing union $Z_\\infty=\\bigcup_n Z_n$ is $B$. To justify this directly from [lem-coef-infinity-monomorphism-boundary-cells], the degreewise union is a simplicial subset of $B$ and is a colimit of the sequence: compatible maps define the unique map on its elements by their values at any containing stage, independently of the stage. Its colimit property and the stated colimit $B$ identify its inclusion with an isomorphism by [def-weil-pbc-category-colimit]. For $z\\in B_k$ choose a stage containing it and set $h_k(t,z)=(H_n)_k(t,z)$. Compatibility makes the value independent of the choice; each operator preserves the chosen stage and commutes with its $H_n$, so $h$ is simplicial. The identities $ph=g$ and $h|_{P_1}=h_0$ hold at every stage and hence exactly on the union. This proves the assertion for $\\epsilon=1$, including infinitely many cells and unbounded dimension.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Proof, maximality/exhaustion step; rewritten as the compatible union of relative skeleta."
+   }
+  },
+  {
+   "text": "For $\\epsilon=0$ use the opposite involution explicitly. For $\\alpha:[r]\\to[s]$ set $\\alpha^{\\mathrm{rev}}(j)=s-\\alpha(r-j)$; it is monotone, respects identities and compositions, and applying it twice gives $\\alpha$. Define $(X^{\\mathrm{op}})_r=X_r$ with operator $X(\\alpha^{\\mathrm{rev}})$. This commutes degreewise with products, unions and the defining pushout. The bijection on standard simplices given by $f\\mapsto f^{\\mathrm{rev}}$ identifies $(\\Delta^s)^{\\mathrm{op}}$ with $\\Delta^s$ and carries $(\\Lambda_i^s)^{\\mathrm{op}}$ to $\\Lambda_{s-i}^s$, by the omitted-vertex definition in [def-cbc-enhanced-diagrams-cones]. Hence $p^{\\mathrm{op}}$ still lifts inner horns and its source and target are quasicategories. Reversing each inverse edge and the two witness triangles preserves the equivalence-edge condition. Under the interval identification, endpoint $0$ becomes endpoint $1$, and $(P_0)^{\\mathrm{op}}$ identifies with $P_1$ for $A^{\\mathrm{op}}\\subseteq B^{\\mathrm{op}}$; every prescribed vertical equivalence remains an equivalence for $A^{\\mathrm{op}}\\subseteq B^{\\mathrm{op}}$. Apply the proved $\\epsilon=1$ case to $(p^{\\mathrm{op}},h_0^{\\mathrm{op}},g^{\\mathrm{op}})$. Applying the involution again to its filler yields the required $\\epsilon=0$ filler, with both restriction and base-map equations unchanged as exact equalities. If $A=B$ the given map is already the filler; empty $B$ is included.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NX",
+    "place": "Opposite-simplicial-set dual, with operator formula and horn, endpoint and equivalence checks written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-right-prism-boundary",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01NX",
+  "place": "Proposition 4.4.5.8 read online. The proof is expanded using the existing relative skeletal Mathlib leaf, finite prism filtration and the relative final outer-horn theorem; epsilon=0 is proved explicitly by opposites. No archived Kerodon copy is present; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "equivalence.*prism|prism.*equivalence|natural.*isomorphism|InnerFibration",
-   "results": "{\"t\": \"2026-10-16T16:43:06Z\", \"tool\": \"grep\", \"query\": \"equivalence.*prism|prism.*equivalence|natural.*isomorphism|InnerFibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12ede9b02dab9486\"}",
+   "results": "{\"t\": \"2026-10-16T20:53:28Z\", \"tool\": \"grep\", \"query\": \"equivalence.*prism|prism.*equivalence|natural.*isomorphism|InnerFibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12ede9b02dab9486\"}",
    "date": "2026-10-17",
    "verdict": "no match: the two semantic queries return inner-horn filling and RelativeMorphism homotopy data, not existence of extensions over an arbitrary inner fibration with invertible vertex components. The Loogle query has no hits. Read pinned Quasicategory/InnerFibration.lean:55-103 and SimplicialSet/RelativeMorphism.lean:34-97: these give definitions and homotopy records only; no such extension theorem. The grep hits are only the inner-fibration definition."
   },
   {
    "tool": "leansearch",
    "query": "A simplicial homotopy over an inner fibration extends relative to all vertices when its components are invertible",
-   "results": "{\"t\": \"2026-10-16T16:43:06Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial homotopy over an inner fibration extends relative to all vertices when its components are invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.RelativeMorphism.Homotopy.mk.inj\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.RelativeMorphism.Homotopy.mk.injEq\", \"SSet.RelativeMorphism.Homotopy.mk.noConfusion\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"86265de32f01fce0\"}",
+   "results": "{\"t\": \"2026-10-16T20:53:29Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial homotopy over an inner fibration extends relative to all vertices when its components are invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.RelativeMorphism.Homotopy.mk.inj\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.RelativeMorphism.Homotopy.mk.injEq\", \"SSet.RelativeMorphism.Homotopy.mk.noConfusion\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"86265de32f01fce0\"}",
    "date": "2026-10-17",
    "verdict": "no match: the two semantic queries return inner-horn filling and RelativeMorphism homotopy data, not existence of extensions over an arbitrary inner fibration with invertible vertex components. The Loogle query has no hits. Read pinned Quasicategory/InnerFibration.lean:55-103 and SimplicialSet/RelativeMorphism.lean:34-97: these give definitions and homotopy records only; no such extension theorem. The grep hits are only the inner-fibration definition."
   },
   {
    "tool": "loogle",
    "query": "\"InnerFibration\", \"homotopy\"",
-   "results": "{\"t\": \"2026-10-16T16:43:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T20:50:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the two semantic queries return inner-horn filling and RelativeMorphism homotopy data, not existence of extensions over an arbitrary inner fibration with invertible vertex components. The Loogle query has no hits. Read pinned Quasicategory/InnerFibration.lean:55-103 and SimplicialSet/RelativeMorphism.lean:34-97: these give definitions and homotopy records only; no such extension theorem. The grep hits are only the inner-fibration definition."
   },
   {
    "tool": "leanfinder",
    "query": "For an inner fibration of quasicategories extend a relative natural equivalence across a simplicial inclusion containing every vertex with one endpoint prescribed",
-   "results": "{\"t\": \"2026-10-16T16:43:08Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration of quasicategories extend a relative natural equivalence across a simplicial inclusion containing every vertex with one endpoint prescribed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.app\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"e42f61d4bd3b4e6d\"}",
+   "results": "{\"t\": \"2026-10-16T20:53:36Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration of quasicategories extend a relative natural equivalence across a simplicial inclusion containing every vertex with one endpoint prescribed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.app\", \"SSet.Truncated.rightExtensionInclusion\"], \"digest\": \"e42f61d4bd3b4e6d\"}",
    "date": "2026-10-17",
    "verdict": "no match: the two semantic queries return inner-horn filling and RelativeMorphism homotopy data, not existence of extensions over an arbitrary inner fibration with invertible vertex components. The Loogle query has no hits. Read pinned Quasicategory/InnerFibration.lean:55-103 and SimplicialSet/RelativeMorphism.lean:34-97: these give definitions and homotopy records only; no such extension theorem. The grep hits are only the inner-fibration definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration between quasicategories lifts relative interval homotopies with invertible components and all vertices prescribed",
+   "results": "{\"t\": \"2026-10-16T19:54:13Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration between quasicategories lifts relative interval homotopies with invertible components and all vertices prescribed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"b945688501f82da3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.*prism|prism.*equivalence|outer.*horn|horn.*equivalence",
+   "results": "{\"t\": \"2026-10-16T19:54:33Z\", \"tool\": \"grep\", \"query\": \"equivalence.*prism|prism.*equivalence|outer.*horn|horn.*equivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "grep",
+   "query": "InnerFibration|innerFibration",
+   "results": "{\"t\": \"2026-10-16T19:54:33Z\", \"tool\": \"grep\", \"query\": \"InnerFibration|innerFibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"12ede9b02dab9486\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a natural equivalence relative to every vertex over an inner fibration of infinity categories",
+   "results": "{\"t\": \"2026-10-16T19:54:34Z\", \"tool\": \"leansearch\", \"query\": \"Extend a natural equivalence relative to every vertex over an inner fibration of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Localization.Construction.natTransExtension\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Equivalence.hom_ext\", \"CategoryTheory.Equivalence.hom_ext_iff\", \"CategoryTheory.Localization.Construction.natTransExtension_app\", \"CategoryTheory.NatTrans.Equifibered\"], \"digest\": \"086d17dc4da9c0b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"horn\"",
+   "results": "{\"t\": \"2026-10-16T19:54:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-16T19:54:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inner fibration lifts outer horns whose final edge is invertible",
+   "results": "{\"t\": \"2026-10-16T19:54:34Z\", \"tool\": \"leansearch\", \"query\": \"An inner fibration lifts outer horns whose final edge is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Quasicategory.hornFilling'\", \"CategoryTheory.HasLiftingPropertyFixedBot\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.IsHomLift.inv\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.fibrations_llp\"], \"digest\": \"4ea07e803ecf736e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a final outer horn over an inner fibration when its last edge is an equivalence",
+   "results": "{\"t\": \"2026-10-16T19:54:35Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a final outer horn over an inner fibration when its last edge is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal.hδ'₁\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.liftOfStrictSegal.hδ'₀\", \"SSet.horn₃₁.exists_desc\"], \"digest\": \"6f86e30094c1b351\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible final edge gives a prescribed base simplex lift for a right outer horn in an infinity category",
+   "results": "{\"t\": \"2026-10-16T19:54:37Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible final edge gives a prescribed base simplex lift for a right outer horn in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.desc\", \"SSet.horn₃₂.desc\", \"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.horn₃₁.ι₀_desc\"], \"digest\": \"744065a9c1942a69\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an invertible simplicial homotopy from a subcomplex containing all vertices with the terminal endpoint fixed",
+   "results": "{\"t\": \"2026-10-16T19:54:38Z\", \"tool\": \"leanfinder\", \"query\": \"Extend an invertible simplicial homotopy from a subcomplex containing all vertices with the terminal endpoint fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.ofExtend\", \"Homotopy.extendEquiv\", \"Homotopy.extend\", \"Homotopy.extend_ofExtend\", \"Homotopy.extend_hom_eq\", \"Homotopy.extend.hom_eq\", \"Homotopy.ofExtend_hom\", \"Homotopy.ofExtend_extend\"], \"digest\": \"4c2dab07e5cdb809\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The results give inner-horn fillers, Quillen fibrations requiring all horns, ordinary Kan extensions, or homotopies of chain complexes. Read Quasicategory/InnerFibration.lean:29-103, SimplicialSet/CategoryWithFibrations.lean:44-100, CategoryTheory/Functor/KanExtension/Basic.lean:163-210 and Algebra/Homology/Embedding/ExtendHomotopy.lean:28-83. None states extension of a relative interval prism over an arbitrary inner fibration with all vertex edges prescribed."
+  },
+  {
+   "tool": "grep",
+   "query": "InnerFibration|equivalence.*prism|prism.*equivalence",
+   "results": "{\"t\": \"2026-10-16T20:50:55Z\", \"tool\": \"grep\", \"query\": \"InnerFibration|equivalence.*prism|prism.*equivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read pinned InnerFibration.lean:29-103, RelativeMorphism.lean:34-97, CategoryWithFibrations.lean:35-100, AnodyneExtensions/Inner/PushoutProduct.lean:54-85, Localization/Predicate.lean:375-382, FiberedCategory/HasFibers.lean:151-159 and SimplicialSet/NerveAdjunction.lean:50-63. These supply inner horns, stronger all-horn lifting, homotopy records, internal-Hom inner fibrations, ordinary categorical lifts, or strict-Segal truncated constructions. None is the asserted relative equivalence-prism extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend an invertible simplicial homotopy across a simplicial subset along an inner fibration",
+   "results": "{\"t\": \"2026-10-16T20:50:55Z\", \"tool\": \"leansearch\", \"query\": \"Extend an invertible simplicial homotopy across a simplicial subset along an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.RelativeMorphism.Homotopy.mk\", \"SSet.RelativeMorphism.Homotopy.h₀\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"Homotopy.ofExtend.congr_simp\", \"SSet.RelativeMorphism.Homotopy\"], \"digest\": \"31c521591427388b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read pinned InnerFibration.lean:29-103, RelativeMorphism.lean:34-97, CategoryWithFibrations.lean:35-100, AnodyneExtensions/Inner/PushoutProduct.lean:54-85, Localization/Predicate.lean:375-382, FiberedCategory/HasFibers.lean:151-159 and SimplicialSet/NerveAdjunction.lean:50-63. These supply inner horns, stronger all-horn lifting, homotopy records, internal-Hom inner fibrations, ordinary categorical lifts, or strict-Segal truncated constructions. None is the asserted relative equivalence-prism extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T20:50:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read pinned InnerFibration.lean:29-103, RelativeMorphism.lean:34-97, CategoryWithFibrations.lean:35-100, AnodyneExtensions/Inner/PushoutProduct.lean:54-85, Localization/Predicate.lean:375-382, FiberedCategory/HasFibers.lean:151-159 and SimplicialSet/NerveAdjunction.lean:50-63. These supply inner horns, stronger all-horn lifting, homotopy records, internal-Hom inner fibrations, ordinary categorical lifts, or strict-Segal truncated constructions. None is the asserted relative equivalence-prism extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative lifting of natural isomorphisms for inner fibrations with the target endpoint fixed on the entire diagram",
+   "results": "{\"t\": \"2026-10-16T20:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"Relative lifting of natural isomorphisms for inner fibrations with the target endpoint fixed on the entire diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Lifting.ofIsos\", \"SSet.Truncated.liftOfStrictSegal\", \"HasFibers.Fib.isoMk\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top\", \"CategoryTheory.IsHomLift.isoOfIsoLift\", \"CategoryTheory.Localization.Lifting₂.iso'\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HasFibers.homLift\"], \"digest\": \"c2f2c48775b4e96e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read pinned InnerFibration.lean:29-103, RelativeMorphism.lean:34-97, CategoryWithFibrations.lean:35-100, AnodyneExtensions/Inner/PushoutProduct.lean:54-85, Localization/Predicate.lean:375-382, FiberedCategory/HasFibers.lean:151-159 and SimplicialSet/NerveAdjunction.lean:50-63. These supply inner horns, stronger all-horn lifting, homotopy records, internal-Hom inner fibrations, ordinary categorical lifts, or strict-Segal truncated constructions. None is the asserted relative equivalence-prism extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration of quasicategories extends an interval prism relative to a subcomplex containing all vertices when prescribed vertical edges are equivalences",
+   "results": "{\"t\": \"2026-10-16T20:51:05Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration of quasicategories extends an interval prism relative to a subcomplex containing all vertices when prescribed vertical edges are equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.ι₀_desc\"], \"digest\": \"61045bac0cd5811c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read pinned InnerFibration.lean:29-103, RelativeMorphism.lean:34-97, CategoryWithFibrations.lean:35-100, AnodyneExtensions/Inner/PushoutProduct.lean:54-85, Localization/Predicate.lean:375-382, FiberedCategory/HasFibers.lean:151-159 and SimplicialSet/NerveAdjunction.lean:50-63. These supply inner horns, stronger all-horn lifting, homotopy records, internal-Hom inner fibrations, ordinary categorical lifts, or strict-Segal truncated constructions. None is the asserted relative equivalence-prism extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-isofibration-exponentiation",
@@ -71,5 +265,29 @@
   "group": "Q37"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-prism-extension",
+  "worker": "stage1",
+  "summary": "Preserved the imported all-vertex hypothesis, which is a valid specialization of Kerodon 01NX, undoing the earlier sandbox attempt to generalize it. No project Lean attachment found. Six steps give relative skeletal induction, finite prism inner fillers, the existing relative outer-horn lift with its equivalence hypothesis checked, explicit quotient gluing and union exhaustion, and the opposite dual. All ingredients already have DAG nodes; no new node is needed.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. The joint endpoint restriction is an isofibration; its action on unpinched morphism spaces is a Kan fibration. Relative prism lifting with all vertices prescribed, used after adjoining the missing vertex equivalence lifts. Steps 1-5 realize the relative simplex-attachment calculation of Kerodon 01NX needed by the parent isofibration exponentiation; Step 6 supplies its source-fixed dual. This is supporting coherent-diagram infrastructure for the inherited paragraph, not a replacement of a geometric unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic relative outer-horn filler over a prescribed base simplex, with an equivalence edge in the source. This is the final finite-prism attachment in Step 3; no same-unit node supplies this relative filler."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-8a376da64",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-8a376da64 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full, plus the statements of every cited node (def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit, the boundary-cells Mathlib leaf SSet.relativeCellComplexOfMono, lem-coef-infinity-right-prism-boundary, lem-cbc-inner-fibration-equivalence-outer-horn-lift), the parent isofibration-exponentiation and the unit and chapter records. Kerodon 01NX is not archived, so WANTED and proof_origin=agent are correct; I checked the argument independently against the standard prism argument. Steps 1-5 (epsilon=1): A contains every vertex, so Z_1=A, and the inductive claim and its base are stated. For q<n the horns Lambda_{q+1}^{n+1} are inner. At q=n, sigma_n sends the edge [n,n+1] to Delta^1x{n}, which lies in X_0 and maps to the prescribed equivalence at tau(n), so the dual clause of the outer-horn node applies (n+1>=2, inner fibration between quasicategories). Gluing and the union are written out degreewise. Step 6: the opposite involution sends inner horns to inner horns, keeps equivalence edges, and identifies (P_0)^op with P_1. Small cases checked: B empty; A=B; B=Delta^1 with A its two endpoints, where both prism fillers were computed by hand; and a counterexample showing the vertex hypothesis is needed. No new nodes; no duplicate found in the DAG: lem-cbc-invertible-prism-extension is the absolute version, and the marked-anodyne nodes are a different route. Accepted tool use: lem-cbc-inner-fibration-equivalence-outer-horn-lift, the generic relative outer-horn lift that no node of this unit supplies. The 'small' in that node's statement is the shared universe convention. No coefficient category or base-change map is involved. created.item=parent/Q37 is the correct provenance; the report wrongly says it was restamped to Q24, but the file is right. No changes made."
+ }
 }

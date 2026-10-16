@@ -31,9 +31,148 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first record the elementary universal-property calculations needed below, without using a straightening equivalence. Write $I=\\mathfrak C[S]^{\\mathrm{op}}$ and $L=L_S$. In a cone pushout no nonidentity arrow leaves the new object $v$. Thus an arrow to $v$ is a string of old arrows followed by a cone arrow, modulo composition and the face/degeneracy relations of the simplices of $X$. A map from $L(X)$ to a marked enriched diagram $F$ is exactly a compatible family of maps from the cone diagrams of the minimally marked simplices of $X$, subject to the additional requirement that the cone edge of each marked edge of $X$, and all its precomposites, have marked images. Gluing simplicial sets glues these generators and relations, and takes the image-union of the markings. Consequently $L$ preserves small colimits, including identifications of vertices, and these colimits are computed objectwise. For a simplicial functor $u:\\mathfrak C[B]\\to\\mathfrak C[S]$, extending a cone diagram from $B$ to $S$ replaces each old-arrow prefix by an arrow in $\\mathfrak C[S]$. Its value at $s$ is the enriched coend of $\\mathfrak C[S](s,u(b))^\\sharp\\times L_B(X)(b)$: identify $(k\\circ h,z)$ with $(h,k^*z)$ for $h:s\\to u(b)$, $k:b\\to c$ in $\\mathfrak C[B]$ (using $u(k)$ on the left), and $z\\in L_B(X)(c)$. Maps out of this quotient are precisely enriched natural maps from $L_B(X)$ to the restricted target diagram. This proves the enriched left-Kan-extension formula directly, including its marked generators. In particular base composition and index extension give the same cone diagram. If $B=\\Delta^{n-1}\\subseteq S=\\Delta^n$, restriction of that extension to an object $i<n$ is the original value: the mapping sets between old objects are unchanged by the subset-poset formula, and the coend map $(h,z)\\mapsto h^*z$ has inverse $z\\mapsto(1_i,z)$, by its defining relation. At the new object $n$ it is empty, since there is no arrow from $n$ to an old object.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2 and Proposition 3.2.1.4(1)-(3); generators-and-relations verification of the colimit and substitution formulas."
+   }
+  },
+  {
+   "text": "We need only the cofibration and marked-anodyne parts of the cone calculus. Every marked monomorphism is built by first attaching its missing nondegenerate simplices with minimal marking, in increasing dimension, and then adding its missing marked edges. The underlying boundary-cell presentation is [lem-coef-infinity-monomorphism-boundary-cells]; adding markings is the pushout of $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$. For each such generator, [lem-coef-marked-cone-generator-calculations] gives a projective cofibration in the canonical indexing category of its target. The index-extension formula of step 1 transfers this to any chosen base: restriction preserves objectwise trivial fibrations, so its left adjoint preserves cofibrations, by their lifting characterization. Colimits and retracts now give the assertion for every marked monomorphism. The same reasoning with the four marked-anodyne generator types gives projective trivial cofibrations for all marked-anodyne maps, since that class is their weak saturation. Evaluation preserves cofibrations and trivial cofibrations by [lem-coef-simplicial-projective-model-calculus]. Therefore $L_S$ carries marked monomorphisms to objectwise cofibrations and marked-anodyne maps to objectwise trivial cofibrations. No assertion that it preserves every Cartesian equivalence is needed.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 3.2.1.7 and 3.2.1.11; generator extension and weak saturation, before any unit-equivalence argument."
+   }
+  },
+  {
+   "text": "Here is a marked-anodyne presentation of the fully marked final-vertex inclusions used in the source. To build $\\{m\\}^\\sharp\\hookrightarrow(\\Delta^m)^\\sharp$, enumerate the nonempty nondegenerate faces $\\sigma$ of $\\Delta^{m-1}$ in increasing dimension. Attach $\\sigma$ together with its cone $\\sigma\\star\\{m\\}$ by the final horn $\\Lambda_{r+1}^{r+1}\\hookrightarrow\\Delta^{r+1}$, where $r=\\dim\\sigma$. Every other face is a cone on a proper face of $\\sigma$ and was already attached. For $r=0$ this adds the marked edge to $m$, by generator (ii). For $r=1$ it adds a triangle whose two edges ending at $m$ are marked; [lem-coef-marked-triangle-cancellation] then marks its remaining edge. For $r\\geq2$ all edges of the new face already belong to its proper faces, so all are marked. Extra markings already present in a horn cause no difficulty: push out the minimally marked generator along the map to that horn. The resulting marking is the union of those markings and the generator's marking. This proves the claim, with $m=0$ the identity. The construction applies to any ordered face and its final vertex. By step 2 its image under $L_S$, in any base, is objectwise a weak equivalence.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-triangle-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, last paragraph: explicit presentation of the two horizontal marked-anodyne inclusions."
+   }
+  },
+  {
+   "text": "Set $X=M^m(A_0\\leftarrow\\cdots\\leftarrow A_n)$. For the terminal vertex $n$, the displayed map is an isomorphism. Indeed every simplex of $X$ has nondecreasing base vertices. In the coherent-realization presentation, any string starting at an object over $n$ can therefore use only the terminal portions of its simplices, all lying in $X_n=A_n$. For a mapping cube the coordinates preceding the starting vertex are absent, by the subset-poset formula for $\\mathfrak C[\\Delta^r]$. Thus all the generators and relations contributing to $P_X(n,v)$ are exactly those of the cone on $A_n$ with its base collapsed to the single object $n$. The only old arrow starting at $n$ in $\\mathfrak C[\\Delta^n]$ is its identity. This identifies $P_X(n,v)$ with $T(A_n^\\flat)$ and identifies the map with the identity on these generators. The marked edges agree as well: the marked edges inside the fiber are precisely its degenerate edges, and a coning edge with source over $n$ cannot come from an edge leaving that fiber. This proves the terminal case for every $n$ and the entire assertion for $n=0$, including $A_n=\\varnothing$.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, opening observation that the comparison at n is an isomorphism; subset-cube verification."
+   }
+  },
+  {
+   "text": "For $n>0$ put $a=n-1$, $b=n$, $J=\\Delta^{\\{a,b\\}}$, and fix $i<n$. Write $H=\\mathfrak C[\\Delta^n](i,a)$ and $K=\\mathfrak C[\\Delta^n](i,b)$. Directly adjoining a cone to a vertex gives $L_{\\Delta^n}(\\{a\\}^\\sharp)(i)=H^\\sharp$. Adjoining the cone to $J^\\sharp$ gives\n$$L_{\\Delta^n}(J^\\sharp)(i)=(H^\\sharp\\times(\\Delta^1)^\\sharp)\\amalg_{H^\\sharp\\times\\{1\\}}K^\\sharp.$$\nTo check this pushout, $\\mathfrak C[J\\star\\Delta^0](a,v)=\\Delta^1$ and $\\mathfrak C[J\\star\\Delta^0](b,v)=\\Delta^0$. The endpoint $1$ is composition through $b$, so it is identified with the map $H\\to K$ given by adjoining $b$ to a subset containing $a$. There are no further new arrows or relations. The edge of $J$ is marked, so its cone interval is marked; its precomposites mark every edge of $H\\times\\Delta^1$, and the degenerate edge at $b$ marks every edge of $K$. These observations also show that the vertex inclusion is the endpoint-$0$ inclusion of $H$ into the displayed pushout. For $i=a$, $H=K=\\Delta^0$. For $i<a$, the subset coordinates identify $K=H\\times\\Delta^1$, with $H\\to K$ the face with the coordinate for $a$ equal to $1$.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, final easy computation, expanded as a marked cylinder pushout."
+   }
+  },
+  {
+   "text": "The endpoint-$0$ inclusion in step 5 is a weak equivalence. Generator (ii) in dimension one gives $\\{1\\}^\\sharp\\to(\\Delta^1)^\\sharp$ as marked anodyne. Its retraction to the point is therefore a weak equivalence (the mapping tests in [lem-coef-marked-anodyne-lifting-calculus] and the absolute model's definition apply). The endpoint-$0$ inclusion $\\{0\\}^\\sharp\\to(\\Delta^1)^\\sharp$ is also a section of that retraction, so by two-out-of-three both endpoint inclusions are weak equivalences. (There is no simplicial automorphism of $\\Delta^1$ exchanging its endpoints; none is used.) Products preserve weak equivalences by [lem-coef-marked-point-cartesian-model]. Also $H^\\sharp\\to K^\\sharp$ is a trivial cofibration: it is the identity for $i=a$, and for $i<a$ it is the product of $H^\\sharp$ with the endpoint-$1$ inclusion, hence a monomorphism and a weak equivalence. Its pushout makes $H^\\sharp\\times(\\Delta^1)^\\sharp$ weakly equivalent to the pushout in step 5. Composing with endpoint $0$ proves the claim. Now use the square with horizontal maps $\\{a\\}^\\sharp\\to(\\Delta^{n-1})^\\sharp$ and $J^\\sharp\\to(\\Delta^n)^\\sharp$. Step 3 and step 2 make their $L_{\\Delta^n}$ images objectwise weak equivalences: the upper map is the final-vertex inclusion of the face $\\Delta^{n-1}$; for the lower map, run the filtration of step 3 for $m=n$ attaching the vertex $\\sigma=\\{a\\}$ first, so that $J^\\sharp$ is a stage of it and $J^\\sharp\\to(\\Delta^n)^\\sharp$ is a composite of pushouts of generators, hence marked anodyne (alternatively, apply two-out-of-three to $\\{b\\}^\\sharp\\to J^\\sharp\\to(\\Delta^n)^\\sharp$). The left vertical map is the equivalence just proved. Commutativity and two-out-of-three consequently give\n$$L_{\\Delta^n}((\\Delta^{n-1})^\\sharp)(i)\\longrightarrow L_{\\Delta^n}((\\Delta^n)^\\sharp)(i)$$\nas a weak equivalence for every $i<n$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, final square and marked interval calculation; trivial-cofibration pushouts use the model lifting axioms."
+   }
+  },
+  {
+   "text": "For any small simplicial set $B$, apply [lem-coef-marked-cone-external-product] with first base a point, first object $B^\\flat$, second base $\\Delta^n$ and second object either $(\\Delta^{n-1})^\\sharp$ or $(\\Delta^n)^\\sharp$. Its index functors are the identity and the terminal one, so the resulting product index is canonically $\\mathfrak C[\\Delta^n]^{\\mathrm{op}}$. We obtain a commutative square whose upper map is\n$$L_{\\Delta^n}(B^\\flat\\times(\\Delta^{n-1})^\\sharp)(i)\\longrightarrow L_{\\Delta^n}(B^\\flat\\times(\\Delta^n)^\\sharp)(i),$$\nwhose lower map is the product of $T(B^\\flat)$ with the map of step 6, and whose vertical maps are weak equivalences. Naturality here is part of the external-product statement. Products preserve weak equivalences in the absolute marked model, so the lower map is a weak equivalence for $i<n$; two-out-of-three gives the upper map. This works also for $B=\\varnothing$, since both upper objects are then initial. By step 2 the upper map is additionally a cofibration.",
+   "uses": [
+    "lem-coef-marked-cone-external-product",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, reduction by Proposition 3.2.1.13; keep the natural product comparison and the actual upper arrow."
+   }
+  },
+  {
+   "text": "Let $A'$ be the truncated chain through $A_{n-1}$ and put $X'=M^m(A')$. There is a strict pushout of marked objects over $\\Delta^n$\n$$X=X'\\amalg_{A_n^\\flat\\times(\\Delta^{n-1})^\\sharp}(A_n^\\flat\\times(\\Delta^n)^\\sharp).$$\nIndeed a simplex $(\\alpha,z)$ with $\\alpha(r)=n$ is represented uniquely in the right-hand product; a simplex with $\\alpha(r)<n$ belongs to $X'$, and the product simplex over the old face is identified with $(\\alpha,f_{n,\\alpha(r)}z)$ there. These are exactly the degreewise pushout identifications. Applying any simplicial operator gives the same identification, because the transitions of the chain compose. An edge in either product is marked exactly when its $A_n$ coordinate is degenerate. Its image in $X$ is then marked, and every marked edge of $X$ is represented by a marked edge in the corresponding piece. Thus the pushout also has exactly the required marking. The upper map from the old-face product to the full product is a monomorphism; no injectivity assumption on $A_n\\to A_{n-1}$ is used.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, displayed mapping-simplex pushout; direct degreewise verification."
+   }
+  },
+  {
+   "text": "Induct on $n$, with the base and terminal vertex supplied by step 4. Suppose $n>0$ and $i<n$. Apply the colimit calculation of step 1 to the pushout of step 8 and evaluate at $i$. Its upper horizontal arrow is a trivial cofibration by step 7 with $B=A_n$, hence its pushout\n$$f_i:L_{\\Delta^n}(X')(i)\\longrightarrow L_{\\Delta^n}(X)(i)$$\nis a trivial cofibration as well. For completeness this uses only the lifting characterization: a lifting square against a fibration for a pushout of a trivial cofibration restricts to one for the original trivial cofibration; its filler extends to the pushout. By step 1 the source is canonically $L_{\\Delta^{n-1}}(X')(i)$. The induction hypothesis makes the canonical $T(A_i^\\flat)\\to L_{\\Delta^{n-1}}(X')(i)$ a weak equivalence. Its composite with $f_i$ is the map in the item: both maps are induced by the same inclusion of the fiber and the identity at $i$. The composite is a weak equivalence by two-out-of-three. Together with step 4 this completes the induction. The only input beyond the smaller chain is the product-face calculation already proved in steps 5-7; no straightening unit or counit equivalence is used.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-cartesian-mapping-simplex-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.3.3, induction; replace homotopy-pushout terminology by the actual pushout of an evaluated trivial cofibration."
+   }
+  },
+  {
+   "text": "Finally retain the specified map and its naturality. A map of chains $(h_j)$ sends a simplex $(\\alpha,z)$ of $M^m(A)$ to $(\\alpha,h_{\\alpha(r)}z)$ and restricts at $i$ to $h_i$. On cone arrows the induced functor sends the generator coning $z$ to the generator coning its image, and sends every old-arrow prefix to the identical prefix in $\\mathfrak C[\\Delta^n]$. Thus the two composites in the naturality square for $T(A_i^\\flat)\\to L_{\\Delta^n}(M^m(A))(i)$ agree on every generator and on every defining relation, including marked-edge generators. They are equal as marked simplicial maps. This is exactly the inclusion-of-fiber/cone-pushout map with identity prefix at $i$, as asserted; it was the map followed at each stage of the induction.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Displayed map psi before Lemma 3.2.3.3; functoriality of cone pushouts and the chain simplex formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-marked-cone-generator-calculations",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-triangle-cancellation",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-marked-cone-external-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 3.2.3.3, pp. 189-191 (PDF pp. 206-208), read online; not archived under literature/. Induction follows this source, with the omitted marked-cylinder calculation and strict pushout argument written out independently."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +215,45 @@
    "results": "{\"t\": \"2026-10-16T20:02:23Z\", \"tool\": \"leanfinder\", \"query\": \"Kan enriched functor projective model structure Cartesian equivalence marked simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"097622378c22b767\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search returned related ordinary simplicial, enriched-category or model-category declarations, but none states this marked-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked cone straightening evaluated at a vertex of a mapping simplex is equivalent to straightening its fiber",
+   "results": "{\"t\": \"2026-10-16T20:40:54Z\", \"tool\": \"leanfinder\", \"query\": \"Marked cone straightening evaluated at a vertex of a mapping simplex is equivalent to straightening its fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.spine_vertex\", \"SSet.horn.const\", \"SSet.PtSimplex\", \"CategoryTheory.WithTerminal.coneEquiv_functor_obj_π_app_of\"], \"digest\": \"426dd2ea34479b63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern strict Segal coskeleta, ordinary simplicial horns, model cylinders, hypercovers or chain-complex cones; none states the marked cone mapping-simplex fiber comparison. Targeted Mathlib grep and Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "mapping.?simplex|straighten|MarkedSimplicial",
+   "results": "{\"t\": \"2026-10-16T20:41:04Z\", \"tool\": \"grep\", \"query\": \"mapping.?simplex|straighten|MarkedSimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern strict Segal coskeleta, ordinary simplicial horns, model cylinders, hypercovers or chain-complex cones; none states the marked cone mapping-simplex fiber comparison. Targeted Mathlib grep and Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"straightening\"",
+   "results": "{\"t\": \"2026-10-16T20:41:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"straightening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern strict Segal coskeleta, ordinary simplicial horns, model cylinders, hypercovers or chain-complex cones; none states the marked cone mapping-simplex fiber comparison. Targeted Mathlib grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent realization cone mapping cylinder vertex fiber Cartesian marked equivalence",
+   "results": "{\"t\": \"2026-10-16T20:41:06Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent realization cone mapping cylinder vertex fiber Cartesian marked equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Precylinder.i₀\", \"HomotopicalAlgebra.Precylinder.π\", \"CategoryTheory.PreOneHypercover.cylinder_I₀\", \"CategoryTheory.PreOneHypercover.cylinderHom_s₁\", \"CategoryTheory.PreOneHypercover.cylinderf\", \"CategoryTheory.PreOneHypercover.cylinderHom_s₀\", \"CategoryTheory.PreOneHypercover.cylinder_f\", \"HomologicalComplex.cylinder.ι₀_desc\"], \"digest\": \"d86d3ce82dc81a4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern strict Segal coskeleta, ordinary simplicial horns, model cylinders, hypercovers or chain-complex cones; none states the marked cone mapping-simplex fiber comparison. Targeted Mathlib grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain of simplicial sets has a marked mapping simplex whose cone straightening at each vertex is the straightening of that fiber",
+   "results": "{\"t\": \"2026-10-16T20:41:06Z\", \"tool\": \"leansearch\", \"query\": \"A chain of simplicial sets has a marked mapping simplex whose cone straightening at each vertex is the straightening of that fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.stdSimplex\", \"SSet.StrictSegal.spineToSimplex_vertex\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map_assoc\", \"SSet.S.map\", \"CochainComplex.mappingCone.inl\", \"SSet.Truncated.StrictSegal.spineToSimplex_map\", \"SSet.PtSimplex.RelStruct.map\"], \"digest\": \"b8ea8e5d85a883b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern strict Segal coskeleta, ordinary simplicial horns, model cylinders, hypercovers or chain-complex cones; none states the marked cone mapping-simplex fiber comparison. Targeted Mathlib grep and Loogle returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -87,5 +261,21 @@
   "group": "Q111"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-mapping-simplex-cone-fibers",
+  "worker": "stage1",
+  "summary": "Unchanged statement; proved the HTT mapping-simplex induction in ten steps, with explicit colimit/substitution and marking arguments, the last-vertex isomorphism, the marked edge-cylinder computation, product reduction and degreewise pushout. Reused existing generator, external-product, marking and projective-model nodes. No new nodes or attachments. Avoided circular use of the parent marked straightening theorem. Fresh logged Mathlib searches found no match.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coefficient derived mapping-complex adjunction before inverse limit, through the recorded via chain. Supplies the vertex-fiber calculation used by step 9 of lem-coef-marked-cone-straightening-quillen; realizes HTT Lemma 3.2.3.3 without assuming the equivalence it is used to prove. Current main-20261015 ancestor proof retains that paragraph-2 calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-211f361ae",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-211f361ae (reviewer sub-agent of L); spot-checked: I read the whole item, all nine cited node statements, and HTT §3.2.1–3.2.3 from a local PDF copy, read-only: Def. 3.2.1.2, Props. 3.2.1.4/3.2.1.7/3.2.1.11, the mapping simplex and Notation 3.2.2.3, the map psi, and Lemma 3.2.3.3 with its proof on pp. 189–191. The statement matches Lemma 3.2.3.3 exactly: same chain direction, the M^natural marking, St^+ with phi=id, the actual map psi, and every i. Its marking convention agrees with the action-marked convention of the generator and external-product nodes. Steps 1–5 and 7–10 check out: the coend variance, j_!F(i)=F(i) and j_!F(n)=empty, and the step-3 filtration, with m=0,1,2 checked and the edge [0,1] marked by triangle cancellation, whose class W is the marked-anodyne class. Also checked: the n-fiber calculation, the cylinder pushout (H x Delta^1) glued to K along H x {1} (i=a and i<a), the external-product specialisation with u boxtimes u' = id, the strict degreewise mapping-simplex pushout with its marking, and the induction against HTT. proof_deps equals the union of uses. There is no cycle: a script found the item is not in its 260-node closure, and the only citer is lem-coef-marked-cone-straightening-quillen. Every dependency is in unit sk-prop-sf-biduality-general, so there are no tool_uses and none were accepted. lem-coef-right-straightening-fiber-comparison, the unmarked right-fibration version, is not a duplicate. There are no new nodes. Fix, step 6 only: the second reader's 'order-reversing automorphism of the fully marked interval' is false, because Delta^1 has no simplicial automorphism swapping its endpoints. I replaced it with two-out-of-three: {0} -> Delta^1 is a section of the retraction to the point, which is a weak equivalence. I also wrote out why J^sharp -> (Delta^n)^sharp is marked anodyne: J is a stage of the step-3 filtration when sigma={a} is attached first, or use two-out-of-three on {b} -> J -> Delta^n. Statement, dependencies and searches are unchanged. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-mapping-simplex-cone-fibers.json; the details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

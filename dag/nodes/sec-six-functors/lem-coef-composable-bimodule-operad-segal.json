@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-composable-bimodule-operad-segal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar.",
+   "via": [
+    "lem-coef-two-sided-coherent-bar-construction",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Operadic Segal encoding of a composable pair of bimodules",
+ "statement": "Use the universe, quasicategory, nerve, coherent-functor and mapping-space conventions of [def-cbc-enhanced-diagrams-cones], and the inert maps and Segal/mapping-space product decompositions of [def-coef-monoidal-infinity-category]. A nonsymmetric infinity operad means an inner fibration over $N(\\Delta^{\\mathrm{op}})$ with cocartesian lifts of inert maps and those two product decompositions; arbitrary base maps need not have cocartesian lifts. Here $\\Delta$ has objects $[r]=\\{0,\\ldots,r\\}$ and monotone maps. An algebra in an infinity operad $\\mathcal X^\\otimes$ for a planar coloured operad $\\mathsf O$ means an inert-preserving coherent functor $N(\\mathsf O^\\otimes)\\to\\mathcal X^\\otimes$ over $N(\\Delta^{\\mathrm{op}})$, with all coherent transformations over that base.\n\nDefine the ordinary planar coloured operad $\\mathsf{Chain}_2$ with colours $a_0,a_1,a_2,p,q$. Its operation sets are singletons exactly for the ordered input/output types\n$$a_i^r\\to a_i\\ (i=0,1,2),\\qquad a_0^r p a_1^s\\to p,\\qquad a_1^r q a_2^s\\to q\\quad(r,s\\geq0),$$\nand are empty otherwise. Composition substitutes ordered input lists; $a_i^0$ is the empty list and unary identity operations are included. For such an operad, $\\mathsf O^\\otimes$ has objects finite ordered lists of colours. A morphism from a length-$n$ list $(c_1,\\ldots,c_n)$ to a length-$m$ list $(d_1,\\ldots,d_m)$ over the opposite of $f:[m]\\to[n]$ is a choice, for every $1\\leq j\\leq m$, of an operation $(c_{f(j-1)+1},\\ldots,c_{f(j)})\\to d_j$. Inputs before $f(0)+1$ or after $f(m)$ are discarded. Composition substitutes these operations. Inert maps select a consecutive sublist by unary identity operations.\n\nLet $\\mathsf{BM}_{01}$ and $\\mathsf{BM}_{12}$ be the full suboperads on $\\{a_0,p,a_1\\}$ and $\\{a_1,q,a_2\\}$, and let $\\mathsf{Ass}_1$ be their common one-colour suboperad on $a_1$. For every nonsymmetric infinity operad $\\mathcal X^\\otimes$, restriction induces an equivalence of infinity-categories\n$$\\operatorname{Alg}_{\\mathsf{Chain}_2}(\\mathcal X)\\simeq\\operatorname{Alg}_{\\mathsf{BM}_{01}}(\\mathcal X)\\mathbin{\\times}_{\\operatorname{Alg}_{\\mathsf{Ass}_1}(\\mathcal X)}\\operatorname{Alg}_{\\mathsf{BM}_{12}}(\\mathcal X),$$\nwhere the fiber product is the infinity-categorical pullback and includes the specified coherent identification of the shared algebra. This equivalence is natural in $\\mathcal X^\\otimes$. In particular, for a map of infinity operads $v:\\mathcal X^\\otimes\\to\\mathcal O^\\otimes$ and a fixed $g:N(\\mathsf{Chain}_2^\\otimes)\\to\\mathcal O^\\otimes$, restriction also gives the corresponding equivalence of categories of algebra lifts over $g$. These relative categories are the infinity-categorical fibers of postcomposition over $g$ (so include the coherent identification of the base map); when the induced postcomposition functor on algebra categories is a categorical fibration, its strict fiber is an equivalent model. Neither presentability nor existence or preservation of colimits in the target is assumed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Proposition 4.4.1.11 (Segal condition), printed p. 560; Remark 4.4.2.2, printed p. 574, and the relative formulation used in Construction 4.4.2.7. The displayed planar category is the nonsymmetric ordered-word model of Tens_[2]. Online source read; WANTED: archived Higher Algebra. No Stacks tag treats this operadic infinity-categorical encoding. The planar presentation uses Definition 4.4.1.1 (colours (i,i) and (i,i+1)) and the planar/associative comparison of Theorem 4.1.3.14 and Proposition 4.4.1.17; its block operations are the consecutive intervals selected by Cut."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction equivalence algebras coloured operad composable pair bimodules Segal gluing",
+   "results": "{\"t\": \"2026-10-16T20:41:31Z\", \"tool\": \"leanfinder\", \"query\": \"restriction equivalence algebras coloured operad composable pair bimodules Segal gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve.homEquiv_comp\", \"SSet.StrictSegalCore.concat\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve\", \"SSet.StrictSegal.spineToSimplex_interval\", \"SSet.StrictSegalCore.map_mkOfSucc_zero_concat\"], \"digest\": \"11340470e2294923\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod, Operad",
+   "results": "{\"t\": \"2026-10-16T20:41:32Z\", \"tool\": \"loogle\", \"query\": \"Bimod, Operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Operad'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reports unknown identifier 'Operad'; this query provides no absence evidence. Valid replacement searches, including second-reader Bimod equivalence and algebra-functor queries, are recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "Tens|[Oo]perad|[Gg]luing",
+   "results": "{\"t\": \"2026-10-16T20:41:32Z\", \"tool\": \"grep\", \"query\": \"Tens|[Oo]perad|[Gg]luing\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\"], \"digest\": \"ae50a6cd03b43473\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebras over the operad of a string of bimodules are pairs of bimodules over their shared algebra",
+   "results": "{\"t\": \"2026-10-16T20:41:32Z\", \"tool\": \"leansearch\", \"query\": \"algebras over the operad of a string of bimodules are pairs of bimodules over their shared algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.monBicategory\", \"Bimod.tensorBimod\", \"Bimod\", \"Bimod.Hom\", \"Bimod.recOn\", \"Bimod.casesOn\", \"Bimod.regular\", \"Bimod.associatorBimod\"], \"digest\": \"08bcc64c35890303\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal equivalence for two coloured associative module operads glued along their common algebra",
+   "results": "{\"t\": \"2026-10-16T20:42:11Z\", \"tool\": \"leanfinder\", \"query\": \"Segal equivalence for two coloured associative module operads glued along their common algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.StrictSegal.isStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"591bddcf8d4a6cfd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod, \"equivalence\"",
+   "results": "{\"t\": \"2026-10-16T20:42:12Z\", \"tool\": \"loogle\", \"query\": \"Bimod, \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad|Segal|gluing",
+   "results": "{\"t\": \"2026-10-16T20:42:12Z\", \"tool\": \"grep\", \"query\": \"[Oo]perad|Segal|gluing\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of algebras over composable bimodule operad equivalence fiber product",
+   "results": "{\"t\": \"2026-10-16T20:42:13Z\", \"tool\": \"leansearch\", \"query\": \"category of algebras over composable bimodule operad equivalence fiber product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.monModuleEquivalenceAlgebraForget\", \"ModuleCat.monModuleEquivalenceAlgebra\", \"Algebra.TensorProduct.liftEquiv\", \"Bimod.instCategory\", \"CategoryTheory.PreGaloisCategory.fiberBinaryProductEquiv\", \"Bimod.comp_hom'\", \"Bimod.TensorBimod.X\", \"CategoryTheory.coalgebraEquivOver\"], \"digest\": \"9cbcc682d94fff1a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Bimod and Bimod.tensorBimod in Mathlib/CategoryTheory/Monoidal/Bimod.lean:101-139,356-366 concern bimodules in an ordinary monoidal category and a coequalizer tensor. CategoryTheory.Nerve.strictSegal at Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:525-539 concerns the strict Segal property of the ordinary nerve, not the equivalence of infinity-categories of operad algebras. Read those sources; none gives the operadic restriction equivalence, even by a one-line specialization. The second-phrasing grep of CategoryTheory/Monoidal for operad/Segal/gluing has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of algebra functors along amalgamated associative bimodule operad is an equivalence",
+   "results": "{\"t\": \"2026-10-16T20:58:19Z\", \"tool\": \"leanfinder\", \"query\": \"restriction of algebra functors along amalgamated associative bimodule operad is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.algebraEquivUnder_functor\", \"ModuleCat.monModuleEquivalenceAlgebraForget\", \"ModuleCat.monModuleEquivalenceAlgebra\", \"CategoryTheory.algebraEquivUnder\", \"CategoryTheory.algebraEquivUnder_inverse\", \"ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_X_carrier\", \"CategoryTheory.algebraEquivUnder_counitIso\", \"ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_mon\"], \"digest\": \"0446ba6b8ecb16c7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary categorical monads, internal monoid objects, or sheaf amalgamation, not algebras in nonsymmetric infinity operads. Read CategoryTheory/Monad/Products.lean:98-145 (coproduct monad and algebraEquivUnder), CategoryTheory/Monoidal/Internal/Module.lean:177-224 (internal monoids vs algebras), and CategoryTheory/Monoidal/Bimod.lean:78-139,356-366 (ordinary bimodules and coequalizer tensor). None is a specialization of this operadic restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod, \"equiv\"",
+   "results": "{\"t\": \"2026-10-16T20:58:53Z\", \"tool\": \"loogle\", \"query\": \"Bimod, \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary categorical monads, internal monoid objects, or sheaf amalgamation, not algebras in nonsymmetric infinity operads. Read CategoryTheory/Monad/Products.lean:98-145 (coproduct monad and algebraEquivUnder), CategoryTheory/Monoidal/Internal/Module.lean:177-224 (internal monoids vs algebras), and CategoryTheory/Monoidal/Bimod.lean:78-139,356-366 (ordinary bimodules and coequalizer tensor). None is a specialization of this operadic restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad|[Mm]ulticategor|[Aa]malgamat",
+   "results": "{\"t\": \"2026-10-16T20:58:15Z\", \"tool\": \"grep\", \"query\": \"[Oo]perad|[Mm]ulticategor|[Aa]malgamat\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/CategoryTheory/Topos/Sheaf.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\"], \"digest\": \"643d931191c107a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary categorical monads, internal monoid objects, or sheaf amalgamation, not algebras in nonsymmetric infinity operads. Read CategoryTheory/Monad/Products.lean:98-145 (coproduct monad and algebraEquivUnder), CategoryTheory/Monoidal/Internal/Module.lean:177-224 (internal monoids vs algebras), and CategoryTheory/Monoidal/Bimod.lean:78-139,356-366 (ordinary bimodules and coequalizer tensor). None is a specialization of this operadic restriction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-two-sided-coherent-bar-construction",
+  "date": "2026-10-17",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
