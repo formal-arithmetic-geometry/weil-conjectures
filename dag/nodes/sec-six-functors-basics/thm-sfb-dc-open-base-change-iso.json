@@ -17,25 +17,28 @@
  ],
  "proof": [
   {
-   "text": "All functors involved are restrictions of ambient functors and commute with the inclusions, and\non the ambient categories $Lg^*\\cong D(g^*)$ and $j_!=D(j_!)$ are computed levelwise\n([sk-prop-sfb-module-derived-factorization]). So it suffices to show that the underived exchange\n$j'_!g'^*M\\to g^*j_!M$ is an isomorphism for every $\\Lambda_X$-module $M$. This exchange is the\nmate of the base change morphism $j^*g_*\\to g'_*j'^*$ for the pushforwards\n([sk-def-sfb-module-pushforward-pullback]). For $N$ on $Z'$, adjunction gives\n\n$$\n\\Hom(g^*j_!M,N)\\cong\\Hom(M,j^*g_*N),\\qquad\\Hom(j'_!g'^*M,N)\\cong\\Hom(M,g'_*j'^*N).\n$$",
+   "text": "Apply the cartesian extension-by-zero left-inverse subclaim to obtain a morphism β whose composite with the exchange morphism is the identity.",
    "uses": [
-    "sk-def-sfb-module-pushforward-pullback"
+    "stage3-sfb-open-base-change-left-inverse"
    ],
    "elementary": false
   },
   {
-   "text": "So it suffices that $j^*g_*N\\to g'_*j'^*N$ is an isomorphism. On an object $V$ of\n$X_{\\mathrm{proét}}$, both sides are the sections of $N$ over $V\\times_ZZ'=V\\times_XX'$. These\nagree because the square is cartesian. The isomorphism is compatible with the module structures,\nwhich are transported along the coefficient maps of the square.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the corresponding right-inverse subclaim to obtain γ. Associativity and the two inverse equations identify β and γ, and CategoryTheory.IsIso.mk constructs the IsIso instance for the exchange morphism.",
+   "uses": [
+    "stage3-sfb-open-base-change-right-inverse"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-module-pushforward-pullback"
+  "stage3-sfb-open-base-change-left-inverse",
+  "stage3-sfb-open-base-change-right-inverse"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "H3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
-  "place": "## Proof"
+  "place": "Stage 3 proof: assemble the two inverse equations with CategoryTheory.IsIso.mk"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -53,5 +56,15 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-open-base-change"
+ "unit": "sk-def-sfb-open-base-change",
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T221612-L-1615819",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

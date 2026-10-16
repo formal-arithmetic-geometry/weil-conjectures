@@ -175,6 +175,37 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : C
     (boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep Λ ℓ sq).hom ≫
       boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Λ ℓ j g j'
 
+/-- The cartesian extension-by-zero exchange has a left inverse.
+
+Source: the proof of `thm-sfb-dc-open-base-change-iso` in the blueprint. On every
+pro-étale object the inverse is induced by the identification of the two cartesian
+pullback sections; the componentwise left-inverse equations assemble naturally.
+(blueprint: stage3-sfb-open-base-change-left-inverse) -/
+theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse
+    (sq : IsPullback g' j' j g) :
+    ∃ β : boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
+        boundedConstructibleUpperStar Λ ℓ g' ⋙
+          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j',
+      β ≫ boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq =
+        𝟙 (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
+          boundedConstructibleUpperStar Λ ℓ g) := by
+  sorry
+
+/-- The cartesian extension-by-zero exchange has a right inverse.
+
+Source: the proof of `thm-sfb-dc-open-base-change-iso` in the blueprint. The same
+cartesian section identification gives the opposite inverse equation, naturally.
+(blueprint: stage3-sfb-open-base-change-right-inverse) -/
+theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_rightInverse
+    (sq : IsPullback g' j' j g) :
+    ∃ γ : boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶
+        boundedConstructibleUpperStar Λ ℓ g' ⋙
+          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j',
+      boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq ≫ γ =
+        𝟙 (boundedConstructibleUpperStar Λ ℓ g' ⋙
+          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') := by
+  sorry
+
 /-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
 square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
 an isomorphism.
@@ -183,8 +214,18 @@ Mathematically, since the square is cartesian, `X'` is the preimage of the open 
 `X ⊆ Z` under `g`, and on stalks at points of `Z'_proét` both sides are the pulled-back stalk at
 points of `X'` and vanish outside `X'`. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) :=
-  sorry
+    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) := by
+  obtain ⟨β, hβ⟩ := boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse Λ ℓ sq
+  obtain ⟨γ, hγ⟩ := boundedConstructibleOpenImmersionLowerShriekBaseChange_rightInverse Λ ℓ sq
+  have hβγ : β = γ := by
+    calc
+      β = β ≫ 𝟙 _ := by simp
+      _ = β ≫ (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq ≫ γ) := by
+        rw [hγ]
+      _ = (β ≫ boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) ≫ γ := by
+        rw [Category.assoc]
+      _ = γ := by rw [hβ, Category.id_comp]
+  exact ⟨⟨β, by rw [hβγ]; exact hγ, hβ⟩⟩
 
 /-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` on bounded
 constructible complexes for a cartesian square of open immersions: the inverse of the canonical
