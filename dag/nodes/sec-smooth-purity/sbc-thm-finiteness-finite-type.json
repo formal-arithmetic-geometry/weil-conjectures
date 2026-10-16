@@ -19,7 +19,8 @@
   "sbc-def-coefficient-conventions",
   "def-weil-pbc-derived-categories",
   "def-amb-etale-compact-support",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "lem-dg-compact-support-amplitude"
  ],
  "proof": [
   {
@@ -262,5 +263,24 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-2e9527e59 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all cited node statements, blueprint sources, Stacks locations, unit/chapter route, hypotheses, coefficient category, compactification comparison, edge cases, Mathlib searches, and declared tool uses. No new nodes, false steps, missing citations, duplicate splits, circularity, or route errors found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness",
+  "declaration": "AlgebraicGeometry.Etale.finiteType_directImages_finiteConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeSheafFiniteness.lean",
+  "statement": "theorem finiteType_directImages_finiteConstructible (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (N : ℕ) (hΛ : IsSmoothBaseChangeCoefficients N Λ (Spec (.of k))) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : DerivedCategory.isBoundedConstructible Λ Y ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) f).obj ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)) ∧ ∀ [IsSeparated f], DerivedCategory.isBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) (compactSupportAmplitudeCompactification k Y f)).obj ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)) ∧ ∀ (d : ℕ), (∀ y : Y, topologicalKrullDim (↑(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) ≤ (d : WithBot ℕ∞)) → ∀ (q : ℤ), 2 * (d : ℤ) < q → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) (compactSupportAmplitudeCompactification k Y f)).obj ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All three clauses use the recorded finite-constant-value constructibility predicate. Separatedness occurs only after the ordinary-image conjunct. The existing compactSupportAmplitudeCompactification supplies the Nagata choice without extra hypotheses; bounded-below compactification comparisons identify its candidate with Rf_!. Its owning, already stated node is added to stmt_deps because the helper occurs in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-26ba81227",
+  "group": "Q34",
+  "result": "pass",
+  "note": "All three clauses match the source and recorded notions; signature is verbatim, per-file compilation passes, and no H1–H13 defects were found."
  }
 }

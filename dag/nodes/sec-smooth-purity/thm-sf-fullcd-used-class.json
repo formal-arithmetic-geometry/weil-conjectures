@@ -23,7 +23,8 @@
   "def-weil-l-adic-coefficient-extension",
   "def-kun-topological-krull-dimension",
   "def-weil-proetale-inverse-image",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-sf-fullcd-class"
  ],
  "proof": [
   {
@@ -391,5 +392,24 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-c120a1ab2 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md with checks for all eleven steps and 34 dependencies. Verified Stacks 095T/09A6/099V/09B1, arbitrary-base-change hypotheses, coefficient encodings, closure arguments, edge cases and acyclicity. Accepted all twelve proposed tool uses. No new nodes, repairs or target weakening."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfFullcdUsedClass",
+  "declaration": "AlgebraicGeometry.ProEtale.sfFullcdUsedClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfFullcdUsedClass.lean",
+  "statement": "theorem sfFullcdUsedClass (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (p : X ⟶ Y) [p.IsOver (Spec (CommRingCat.of D.k))] [IsProper p] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) : sfClassFullCohomologicalDimension p (Padic.coefficientExtensionRing l E (n + 1)) (2 * d) ∧ (∀ (T T' : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [LocallyOfFiniteType T'.hom] [QuasiCompact T'.hom] (h : T' ⟶ T) (F : Sheaf (ProEt.topology T.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))), (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage F → (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T'.left).essImage ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) h.left).obj F)) ∧ ∀ (T : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom], (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage.IsClosedUnderExtensions ∧ (∀ (J : Type w) [Category.{v} J] (H : J ⥤ Sheaf (ProEt.topology T.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) (c : Cocone H), IsColimit c → (∀ j : J, (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage (H.obj j)) → (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage c.pt) ∧ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage ((constantSheaf (ProEt.topology T.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ∧ ∀ F : Sheaf (ProEt.topology T.left) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))), (∃ G : Sheaf T.left.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))), Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).obj G ≅ F)) → (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.left).essImage F",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the already stated class-restricted FullCD predicate (def-sf-fullcd-class), with fixed-scalar module-valued sheaves. These are the canonical coordinates of the intrinsic constant-ring module category via sfIntrinsicModuleEquivalence and sfIntrinsicDerivedDirectImageComparison. The level n+1 parametrizes exactly all positive levels. All closure and containment clauses use the same essential-image predicate, with no constructibility or sheaf-finiteness restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-79a558434",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all twelve statement dependencies, exact declarations, sources, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim signature. Immutable module compiles cleanly through scompile.py under sandbox and library names. No repairs required; no branch changes made."
  }
 }
