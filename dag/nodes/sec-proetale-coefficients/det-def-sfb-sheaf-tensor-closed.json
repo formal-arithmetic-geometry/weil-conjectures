@@ -195,5 +195,30 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-8e2d19002 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint route and cited source passages in full. All six steps check out; no new nodes, missing mathematical inputs or cycles. review.md records source locations, edge cases and the harmless report error about the chapter JSON's existence. No fixes or additional tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7f3cd350",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps, blueprint source/proof/_section, dependency modules SheafTensorStructure and PresheafTensorInternalHom, Mathlib Sites/Monoidal, upstream TensorColimits. Theorem uses the canonical sfbSheafTensorStructure; internal Hom is exactly functorEnrichedHom bundled via Presheaf.isSheaf_functorEnrichedHom (rfl-checked against the presheaf ihom); naturality in all three variables via the canonical pre/ihom.map; closed, PreservesColimitsOfSize.{w,w} (the node's step-3 size convention), Additive and PreservesFiniteColimits for both tensor functors. Hypotheses are the dependency binders, nothing stronger, universes independent and bound; edge cases (empty diagram, zero, empty site) covered. Not a duplicate: Mathlib has only abstract closedness (Hom identification is a TODO) and the upstream instances are universe-specialized and size-0. Helpers are real constructions (their sorryAx comes only from the landed Prop theorem presheaf_enrichedHoms_exist); docstrings and source places present; lean.statement verbatim; report sections present. nt_compile.py --json against the side overlay: rc 0, clean. No findings; remark only that size-w preservation is weaker than true but matches the node."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafTensorClosed",
+  "declaration": "CategoryTheory.sfbSheafTensorClosed",
+  "declarations": [
+   "CategoryTheory.sfbSheafInternalHom",
+   "CategoryTheory.sfbSheafInternalHomMap",
+   "CategoryTheory.SfbSheafTensorClosedData",
+   "CategoryTheory.sfbSheafTensorClosed"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafTensorClosed.lean",
+  "statement": "theorem sfbSheafTensorClosed {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A] [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] [MonoidalPreadditive A] (J : GrothendieckTopology C) [HasWeakSheafify J A] : Nonempty (SfbSheafTensorClosedData (sfbSheafTensorStructure (A := A) J))",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "note": "Second reading: specialized to the recorded canonical tensor structure; internal Hom is the existing presheaf enriched Hom bundled as a sheaf, with canonical pre/postcomposition; preservation covers coefficient-small colimits in universe w."
  }
 }
