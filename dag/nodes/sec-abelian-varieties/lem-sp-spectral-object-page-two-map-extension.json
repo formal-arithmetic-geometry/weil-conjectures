@@ -13,36 +13,32 @@
  },
  "proof": [
   {
-   "text": "For each page and bidegree, use the natural transformations in φ and the compatibility of connecting maps to obtain a morphism of the three-term complexes defining pageX. The induced kernel and cokernel maps give the page component, and the same equations give commutation with the page differential.",
+   "text": "Apply the stated existence theorem for the kernel/image construction to obtain a spectral-sequence morphism satisfying the page-two comparison equation.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-spectral-sequence"
+    "lem-sp-spectral-object-page-two-map-existence"
    ],
    "elementary": false
   },
   {
-   "text": "The kernel and cokernel universal properties identify the induced maps with the homology maps used in the successor-page isomorphisms, so the page components form a morphism of spectral sequences. At page two the first-page comparison equation follows from the same kernel/image maps.",
+   "text": "For uniqueness, cancel the comparison isomorphism to show that two candidate maps agree on page two. Induct on r ≥ 2 using the successor-page isomorphisms and the commutation equations of spectral-sequence morphisms.",
    "uses": [
-    "def-sp-spectral-sequence"
+    "lem-sp-spectral-object-page-two-map-existence"
    ],
    "elementary": false
   },
   {
-   "text": "If another spectral-sequence morphism has the displayed page-two equation, its page-two components agree because the comparison maps are isomorphisms. Induction on r≥2 using the successor-page isomorphisms gives equality on every page, and SpectralSequence.hom_ext gives equality of morphisms.",
-   "uses": [
-    "def-sp-spectral-sequence"
-   ],
-   "elementary": false
+   "text": "Apply SpectralSequence.hom_ext to conclude equality of the morphisms from equality on every page.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-sp-spectral-sequence"
+  "lem-sp-spectral-object-page-two-map-existence"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Mathlib Algebra/Homology/SpectralObject and Stacks Project",
-  "place": "Tags 012K and 015K"
+  "document": "Mathlib Algebra/Homology/SpectralObject/{Page,SpectralSequence,FirstPage}.lean and Stacks Project",
+  "place": "Existence is split to the kernel/image construction theorem; uniqueness is proved by page induction in Lean."
  },
  "mathlib_searches": [
   {
@@ -114,13 +110,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-f83ba",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261015T221711-L-2641190",
+  "landing": "20261016T015249-L-722449",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules and DAG nodes match the stated changes; all modules and both direct importers compile cleanly, with only the named support theorem remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

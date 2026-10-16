@@ -6,6 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
+import Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence
 
 /-! # The page-two map extension for spectral-object morphisms
 
@@ -66,6 +67,31 @@ theorem exists_unique_pageTwoMap
               (φ.hom (p + q)).app (ComposableArrows.mk₁
                 (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))) →
         e' = e := by
-  sorry
+  obtain ⟨e, he⟩ := exists_pageTwoMap_data φ
+  refine ⟨e, ?_, ?_⟩
+  · intro p q
+    exact he p q
+  · intro e' he'
+    have hpage : ∀ (r : ℤ) (hr : 2 ≤ r), e'.hom r = e.hom r := by
+      intro r hr
+      induction r, hr using Int.leInduction with
+      | base =>
+          apply HomologicalComplex.Hom.ext
+          funext pq
+          rcases pq with ⟨p, q⟩
+          have h₁ := he' p q
+          have h₂ := he p q
+          apply (cancel_mono
+            (pageTwoComparison Y (Iso.refl _) p q (p + q) rfl).hom).1
+          exact h₁.trans h₂.symm
+      | succ r hr ih =>
+          apply HomologicalComplex.Hom.ext
+          funext pq
+          apply (cancel_epi (X.E₂SpectralSequence.iso r (r + 1) pq rfl hr).hom).1
+          rw [← e.comm r (r + 1) pq rfl hr,
+            ← e'.comm r (r + 1) pq rfl hr, ih]
+    apply SpectralSequence.hom_ext
+    intro r hr
+    exact hpage r hr
 
 end CategoryTheory.Abelian.SpectralObject
