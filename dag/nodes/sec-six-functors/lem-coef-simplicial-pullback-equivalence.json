@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-coherent-nerve-infrastructure"
  ],
  "proof": [
   {
@@ -187,5 +188,24 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-6b6911bea (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the cited node statements (def-weil-pbc-simplicial-set, lem-coef-kan-quillen-right-proper, lem-coef-realization-finite-limits), the parent lem-coef-simplicial-interval-lifting Steps 6-8, unit sk-prop-sf-biduality-general and the blueprint ancestor's paragraph 2. The statement is correct, is used by parent Step 7 exactly as stated (p_O mappingwise Kan fibration, v arbitrary), and is not weakened. Small cases checked: p=id, q=id, discrete mapping sets (reduces to an ordinary categorical pullback), x=y, empty mapping sets. Steps 3-4 are a correct Brown-type factorization argument: the graph factorization; s and t are trivial fibrations, so stable under pullback; base change along T->Z, and right properness used only along the fibrations f_1 and its pullbacks; no fibrancy of any base is needed. Step 6 algebra (surjectivity at z=x, injectivity at z=y) is correct. Fault C1, fixed: Step 2 used without citation the non-elementary fact that a homotopy equivalence induces a bijection on path components and isomorphisms on homotopy groups at every basepoint (non-stationary homotopies). That is the statement of the existing same-unit node lem-coef-homotopy-groups-basepoint-change (unsplit, no dependencies, so no cycle). I added it to Step 2's text, uses and proof_deps in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-pullback-equivalence.json. No new nodes, no duplicates (I checked lem-coef-kan-homotopy-pullback-invariance, lem-coef-kan-pullback-path-comparison and lem-coef-brown-fibrant-localization-pullbacks), no off-unit tool use, no SGA. Bergner arXiv math/0406507 Prop. 2.5 is not archived and network access is blocked, so I could not read the cited page. The node is honestly agent-written with a WANTED line, and its proof depends only on DAG node statements, which I checked.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67b503d08",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Node delta is only lean plus the landed stmt_dep def-coef-coherent-nerve-infrastructure; no cycle. Every clause matches: A,B,C : SCat.{u} (one explicit universe); p,q enriched functors; the Kan hypothesis on p is J.rlp (p.map a a'), the same class as lem-coef-kan-quillen-right-proper, with nothing on q; E is a PullbackCone with IsLimit in SCat, i.e. the strict pullback up to unique iso; invertibility in π₀ is an inverse vertex plus two π₀.mk equations ([d∘e]=[1_x], [e∘d]=[1_y]), the same as the downstream IsEquivalenceVertex; iff with both projections joined by ∧; no Kan or equivalence-lifting assumption. Edge cases checked: empty object and mapping sets, x=y, identity functors, discrete and non-Kan mapping sets. The only citer (interval-lifting Step 7) can use it. No new definitions; source and blueprint docstrings present with all six proof steps; proof is sorry; lean.statement matches the file verbatim; report has both required sections. nt_compile.py --json with the snapshot text: clean, 1.5 s; error-injection control confirms diagnostics are reported. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialPullbackEquivalence",
+  "declaration": "SSet.simplicial_pullback_equivalence",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialPullbackEquivalence.lean",
+  "statement": "theorem simplicial_pullback_equivalence {A B C : SCat.{u}} (p : A ⟶ B) (q : C ⟶ B) (_hp : ∀ a a' : A, SSet.modelCategoryQuillen.J.rlp (p.map a a')) (E : PullbackCone p q) (_hE : IsLimit E) {x y : E.pt} (e : (EnrichedCategory.Hom x y) _⦋0⦌) : (∃ d : (EnrichedCategory.Hom y x) _⦋0⦌, π₀.mk ((eComp SSet x y x).app _ (e, d)) = π₀.mk ((eId SSet x).app _ PUnit.unit) ∧ π₀.mk ((eComp SSet y x y).app _ (d, e)) = π₀.mk ((eId SSet y).app _ PUnit.unit)) ↔ (∃ d : (EnrichedCategory.Hom (E.fst.obj y) (E.fst.obj x)) _⦋0⦌, π₀.mk ((eComp SSet (E.fst.obj x) (E.fst.obj y) (E.fst.obj x)).app _ ((E.fst.map x y).app _ e, d)) = π₀.mk ((eId SSet (E.fst.obj x)).app _ PUnit.unit) ∧ π₀.mk ((eComp SSet (E.fst.obj y) (E.fst.obj x) (E.fst.obj y)).app _ (d, (E.fst.map x y).app _ e)) = π₀.mk ((eId SSet (E.fst.obj y)).app _ PUnit.unit)) ∧ (∃ d : (EnrichedCategory.Hom (E.snd.obj y) (E.snd.obj x)) _⦋0⦌, π₀.mk ((eComp SSet (E.snd.obj x) (E.snd.obj y) (E.snd.obj x)).app _ ((E.snd.map x y).app _ e, d)) = π₀.mk ((eId SSet (E.snd.obj x)).app _ PUnit.unit) ∧ π₀.mk ((eComp SSet (E.snd.obj y) (E.snd.obj x) (E.snd.obj y)).app _ (d, (E.snd.map x y).app _ e)) = π₀.mk ((eId SSet (E.snd.obj y)).app _ PUnit.unit))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The strict enriched pullback is represented by a PullbackCone with IsLimit in the recorded ordinary category SCat of simplicial categories and arbitrary-object enriched functors. Two-sided inverses are expanded directly in the recorded component quotient; no local Kan or equivalence-lifting assumptions are added. Uses the landed coherent-nerve infrastructure without importing the downstream interval-lifting theorem."
  }
 }
