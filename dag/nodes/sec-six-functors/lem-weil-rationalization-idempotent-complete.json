@@ -3,43 +3,146 @@
  "blueprint": {
   "is": "lem-weil-rationalization-idempotent-complete",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Idempotent completeness of the rationalized category",
- "statement": "Let $E/\\Ql$ be a finite extension with valuation ring $\\mathcal O_E$, let $Y$\nbe a scheme, and let $D^b_c(Y,E)$ be the rationalized category of\n[def-weil-rationalization-karoubi]. Then $D^b_c(Y,E)$ is idempotent\ncomplete, and the canonical functor\n\n$$\n D^b_c(Y,E)\\longrightarrow\\Kar\\bigl(D^b_c(Y,E)\\bigr)\n$$\n\ninto its Karoubi envelope is an exact equivalence.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$ with $q=p^a$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$ [def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], and let $D^b_c(Y,E)$ be the raw rationalized category of [def-weil-rationalization-karoubi]. Then $D^b_c(Y,E)$ is idempotent complete, and the canonical functor\n\n$$\n D^b_c(Y,E)\\longrightarrow\\Kar\\bigl(D^b_c(Y,E)\\bigr)\n$$\n\ninto its Karoubi envelope [def-weil-karoubi-envelope] is an exact equivalence.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
   "place": "node lem-weil-rationalization-idempotent-complete, order 2114"
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
   "def-weil-rationalization-karoubi",
   "def-weil-karoubi-envelope"
  ],
  "proof": [
   {
-   "text": "The rationalization $D^b_c(Y,E)$ of [def-weil-rationalization-karoubi] is the\nscalar localization of the derived-complete integral category\n$D^b_c(Y,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed] at\nthe central endomorphism given by $\\varpi_E$, and it carries the rationalized\nstandard bounded $t$-structure, whose restriction to the integral category is\ngiven by the levelwise truncations on the reduction tower. By the\nfinite-stage Karoubian theorem the rationalization of the integral\nconstructible category at a finite coefficient field is idempotent complete,\nand the canonical functor into the Karoubi envelope is an exact equivalence.\nThe same conclusion follows from the bounded $t$-structure alone, every\nidempotent of a triangulated category with a bounded $t$-structure splitting\nby the Karoubian bounded-$t$ theorem. Both displayed assertions are therefore\nestablished.",
+   "text": "Put $\\mathcal T=D^b_c(Y,E)$. By [def-weil-rationalization-karoubi], this is the triangulated raw scalar localization of the derived-complete integral category, without formally adjoining any retracts. Apply [prop-constructible-truncations] with the fixed finite-field datum, the given finite extension $E\\subset\\Qlb$, the finite-type $k$-scheme $Y$, and $\\Lambda=E$. Its asserted truncation functors, natural maps and distinguished truncation triangles give a bounded t-structure on precisely $\\mathcal T$. Only its rational-stage bounded-t-structure assertion is used; no assertion about levelwise integral truncations or a comparison with a different coefficient category is needed.",
    "uses": [
     "def-weil-rationalization-karoubi",
-    "def-weil-derived-complete-integral-detailed"
+    "prop-constructible-truncations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
+    "place": "## Proof, opening bounded-t-structure assertion; expanded with the rational-stage statement of prop-constructible-truncations (order 2432)"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-karoubian-bounded-t] to the triangulated category $\\mathcal T$ and the bounded t-structure of step 1. This theorem supplies both assertions: every idempotent in $\\mathcal T$ splits, and the canonical fully faithful functor $\\mathcal T\\to\\Kar(\\mathcal T)$ is an exact equivalence. By [def-weil-karoubi-envelope] that functor sends $K$ to $(K,\\operatorname{id}_K)$ and acts identically on morphisms, so it is exactly the functor in the statement. In particular the conclusion concerns the raw rationalization itself, rather than merely the idempotent completeness of a formally enlarged category.",
+   "uses": [
+    "thm-weil-karoubian-bounded-t",
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
+    "place": "## Proof, final bounded-t-structure argument and conclusion"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-rationalization-karoubi",
-  "def-weil-derived-complete-integral-detailed",
+  "prop-constructible-truncations",
   "thm-weil-karoubian-bounded-t",
-  "thm-weil-pbc-finite-stage-karoubian"
+  "def-weil-karoubi-envelope"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-rationalization-idempotent-complete.md",
-  "place": "## Proof"
+  "place": "## Proof, bounded-t-structure route, with the finite-type setting inherited from the enclosing sk-prop-sf-biduality-general unit made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "idempotent|Karoubi|rationalization",
+   "results": "Invalid supplied subdirectory: msearch.py roots its path at Mathlib already, so this searched a nonexistent Mathlib/Mathlib path. The historical 0-hit output suppresses rg stderr and is not evidence of absence. Replaced by the correctly rooted searches recorded below.",
+   "date": "2026-10-16",
+   "verdict": "invalid path; superseded by correctly rooted searches",
+   "subdirectory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rationalized derived category over a finite extension of Q_l is idempotent complete and equivalent to its Karoubi envelope",
+   "results": "8 displayed hits: CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence, CategoryTheory.Idempotents.karoubiHomologicalComplexEquivalence_functor, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence, CategoryTheory.Idempotents.karoubiChainComplexEquivalence, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor_obj, CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor, DerivedCategory.Qh_obj_singleFunctors_obj",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete, CategoryTheory.Triangulated.TStructure, toKaroubi",
+   "results": "loogle: unknown identifier 'toKaroubi'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier combination; superseded by the single-identifier query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "idempotent complete rationalization of a derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIdempotentComplete|toKaroubi|Karoubi",
+   "results": "Invalid supplied subdirectory: msearch.py roots its path at Mathlib already, so this searched a nonexistent Mathlib/Mathlib path. The historical 0-hit output suppresses rg stderr and is not evidence of absence. Replaced by the correctly rooted searches recorded below.",
+   "date": "2026-10-16",
+   "verdict": "invalid path; superseded by correctly rooted searches",
+   "subdirectory": "Mathlib/CategoryTheory/Idempotents"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every rationalized bounded constructible derived category over a finite extension is idempotent complete",
+   "results": "8 displayed hits: CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex, CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Idempotents.Karoubi.karoubi_hasFiniteBiproducts, DerivedCategory.exists_iso_Q_obj_of_isLE, HasDerivedCategory.standard",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete",
+   "results": "12 displayed hits: CategoryTheory.IsIdempotentComplete, CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, CategoryTheory.Idempotents.instIsIdempotentCompleteOpposite, CategoryTheory.Idempotents.isIdempotentComplete_of_isIdempotentComplete_opposite, CategoryTheory.Idempotents.isIdempotentComplete_iff_opposite, CategoryTheory.Idempotents.Equivalence.isIdempotentComplete, CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence, CategoryTheory.Idempotents.isIdempotentComplete_iff_hasEqualizer_of_id_and_idempotent",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIdempotentComplete|[Kk]aroub|[Rr]ationaliz",
+   "results": "0 displayed hits: ; no bounded-t-structure Karoubian theorem or rationalized constructible category in this directory.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item",
+   "subdirectory": "CategoryTheory/Triangulated"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIdempotentComplete|toKaroubi|bounded",
+   "results": "25 displayed hits: Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean, Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean, Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean, Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean, Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean, Mathlib/CategoryTheory/Idempotents/Basic.lean; source read: Basic.lean:50-61 defines splitting, :116 abelian completeness; Karoubi.lean:139 defines toKaroubi. Generic idempotent-completeness infrastructure, not rationalized constructible complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item",
+   "subdirectory": "CategoryTheory/Idempotents"
+  },
+  {
+   "tool": "grep",
+   "query": "isIdempotentComplete.*bounded|bounded.*isIdempotentComplete|rationaliz.*constructible|constructible.*rationaliz",
+   "results": "0 displayed hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the rationalized constructible category; abstract theorem already attached to thm-weil-karoubian-bounded-t",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated category with a bounded t-structure has split idempotents",
+   "results": "8 displayed hits: CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.exists_triangle, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE",
+   "date": "2026-10-16",
+   "verdict": "no match for the rationalized constructible category; abstract theorem already attached to thm-weil-karoubian-bounded-t"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +173,35 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-rationalization-idempotent-complete",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported unrestricted scheme scope omits the finite-field and finite-type setting of its enclosing unit and of the available bounded-t-structure input. Made that setting explicit and followed the source's bounded-t-structure route in two steps. Reused prop-constructible-truncations for the same rational category and the existing Lean-closed bounded-t Karoubian theorem. Removed the unsupported identification with the distinct proper-base-change coefficient category and the unconditional levelwise-truncation claim. No new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 realizes the opening assertion that the raw rationalization carries a bounded t-structure, using the existing statement for this exact category. Step 2 realizes the final sentence beginning \"The same conclusion follows from the bounded t-structure alone\". This is an explicit alternative already in the blueprint node, without altering the enclosing unit's duality route.",
+  "statement_dispute": "The item says only \"Y be a scheme\", whereas its enclosing unit fixes a separated finite-type k-scheme and its named finite-stage theorem requires noetherian finite-dimensional schemes with ell invertible. The purported substitution T=Y fails, e.g. for Y=Spec(F_ell), and finite-type scope fails for an infinite disjoint union of Spec(k). The repaired statement exposes the finite-field datum, ell distinct from p, and finite-type k-scheme scope appropriate to the available rational-stage truncation theorem. These are explicit failed hypothesis checks, not claimed counterexamples to abstract idempotent completeness. No equality between the detailed integral category and the separate PBC category with compatible etale-origin witnesses is asserted.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Uses only the rational-stage bounded-t-structure assertion for the exact raw rationalized constructible category in this item. This supplies the categorical input expressly required by the source's bounded-t alternative; no node in the biduality unit states this input."
+   },
+   {
+    "node": "thm-weil-karoubian-bounded-t",
+    "why": "The abstract bounded-t Karoubian criterion explicitly cited in the blueprint; it supplies both idempotent completeness and exact equivalence without any coefficient-category comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "thm-weil-karoubian-bounded-t"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-e111aeb36",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-e111aeb36 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and source passages in full. Both steps apply to the same raw rational category; the bounded-t criterion supplies exact equivalence. No new nodes, duplicate splits or dependency cycles. Accepted both declared tool uses. Scope correction is disclosed; no target is weakened or condensed-category comparison assumed. Detailed checks are in review.md."
+ }
 }
