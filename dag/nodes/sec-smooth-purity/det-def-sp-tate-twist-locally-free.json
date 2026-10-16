@@ -3,61 +3,81 @@
  "blueprint": {
   "is": "det-def-sp-tate-twist-locally-free",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Tate twists are well defined and locally free of rank one",
- "statement": "Let $X$ be a scheme on which $\\ell$ is invertible, and let $\\mu_{\\ell^n,X}$ be the sheaf of\n$\\ell^n$th roots of unity [def-pur-roots-of-unity-sheaf], with transition maps\n$\\mu_{\\ell^{n+1},X}\\to\\mu_{\\ell^n,X}$, $u\\mapsto u^\\ell$.\n\n1. There is a pro-étale cover $\\widetilde X\\to X$ and a compatible system\n   $(\\zeta_n)_{n\\ge1}$, $\\zeta_n\\in\\mu_{\\ell^n,X}(\\widetilde X)$, $\\zeta_{n+1}^\\ell=\\zeta_n$,\n   such that each $\\zeta_n$ generates: $(\\mathbf Z/\\ell^n)_{\\widetilde X}\\to\\mu_{\\ell^n,\\widetilde X}$,\n   $a\\mapsto\\zeta_n^a$, is an isomorphism.\n2. For a finite ring $A$ with $\\ell^rA=0$ and $r'\\ge r$, the Kummer map\n   $\\mu_{\\ell^{r'},X}\\to\\mu_{\\ell^r,X}$, $u\\mapsto u^{\\ell^{r'-r}}$, induces an isomorphism\n   $\\mu_{\\ell^{r'},X}\\otimes_{\\mathbf Z/\\ell^{r'}}A_X\\cong\\mu_{\\ell^r,X}\\otimes_{\\mathbf Z/\\ell^r}A_X$;\n   so $A_X(1)$ is independent of $r$ up to canonical isomorphism.\n3. For $\\Lambda\\in\\{A,\\cO_E,E,\\Qlb\\}$ the sheaf $\\Lambda_X(1)$ is an invertible\n   $\\Lambda_X$-module: on $\\widetilde X$ it is isomorphic to $\\Lambda_{\\widetilde X}$. Hence\n   so are $\\Lambda_X(d)$ and $\\Lambda_X(-d)$ for $d\\ge0$, $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\cong\\Lambda_X$,\n   and $K\\mapsto K(d)$ is an autoequivalence of $D(X_{\\mathrm{proét}},\\Lambda)$ with inverse\n   $K\\mapsto K(-d)$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\cO_E$, and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ containing $E$. Let $X$ be a scheme on which $\\ell$ is invertible, and let $\\mu_{\\ell^n,X}$ be the sheaf of\\n$\\ell^n$th roots of unity [def-pur-roots-of-unity-sheaf], with transition maps\\n$\\mu_{\\ell^{n+1},X}\\to\\mu_{\\ell^n,X}$, $u\\mapsto u^\\ell$. For every finite commutative ring $A$ and integer $r\\geq1$ with $\\ell^rA=0$, write $A_X$ for its constant sheaf [def-weil-pbc-constant-sheaf]. Interpret the coefficient objects and twists for $\\cO_E$, $E$, and $\\Qlb$ using [def-coefficient-twists-detailed].\\n\\n1. There is a pro-étale cover $\\widetilde X\\to X$ and a compatible system\\n   $(\\zeta_n)_{n\\ge1}$, $\\zeta_n\\in\\mu_{\\ell^n,X}(\\widetilde X)$, $\\zeta_{n+1}^\\ell=\\zeta_n$,\\n   such that each $\\zeta_n$ generates: $(\\mathbf Z/\\ell^n)_{\\widetilde X}\\to\\mu_{\\ell^n,\\widetilde X}$,\\n   $a\\mapsto\\zeta_n^a$, is an isomorphism.\\n2. For $r'\\ge r$, the Kummer map\\n   $\\mu_{\\ell^{r'},X}\\to\\mu_{\\ell^r,X}$, $u\\mapsto u^{\\ell^{r'-r}}$, induces an isomorphism\\n   $\\mu_{\\ell^{r'},X}\\otimes_{\\mathbf Z/\\ell^{r'}}A_X\\cong\\mu_{\\ell^r,X}\\otimes_{\\mathbf Z/\\ell^r}A_X$;\\n   so $A_X(1)$ is independent of $r$ up to canonical isomorphism.\\n3. For $\\Lambda\\in\\{A,\\cO_E,E,\\Qlb\\}$, the sheaf $\\Lambda_X(1)$ is an invertible\\n   $\\Lambda_X$-module: on $\\widetilde X$ it is isomorphic to $\\Lambda_{\\widetilde X}$. Hence\\n   so are $\\Lambda_X(d)$ and $\\Lambda_X(-d)$ for $d\\ge0$, and\\n   $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\cong\\Lambda_X$. The functor $K\\mapsto K(d)$ is an autoequivalence, with inverse $K\\mapsto K(-d)$, on each coefficient category defined in [def-coefficient-twists-detailed]: $D(X_{\\mathrm{proét}},A)$ and the bounded constructible categories for $\\cO_E$, $E$, and $\\Qlb$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
   "place": "node det-def-sp-tate-twist-locally-free, order None"
  },
  "stmt_deps": [
-  "def-pur-roots-of-unity-sheaf"
+  "def-pur-roots-of-unity-sheaf",
+  "def-weil-pbc-constant-sheaf",
+  "def-coefficient-twists-detailed"
  ],
  "proof": [
   {
-   "text": "(1) The sheaf $\\mu_{\\ell^n,X}$ is represented by the finite étale $X$-group scheme\n$\\mu_{\\ell^n}=\\Spec\\cO_X[t]/(t^{\\ell^n}-1)$; it is étale because $\\ell$ is invertible.\nLet $P_n\\to X$ be the scheme of primitive $\\ell^n$th roots of unity, the closed and open\nsubscheme of $\\mu_{\\ell^n}$ where $t$ has exact order $\\ell^n$ in every fibre; it is finite\nétale and surjective over $X$ (over a field in which $\\ell$ is invertible, $t^{\\ell^n}-1$ is\nseparable and has primitive roots in a separable closure). The maps $t\\mapsto t^\\ell$ give\nfinite étale surjections $P_{n+1}\\to P_n$. Put $\\widetilde X=\\varprojlim_nP_n$, an affine\nmorphism limit of finite étale surjections; it is pro-étale and surjective, hence a\npro-étale cover. The coordinates give $\\zeta_n\\in\\mu_{\\ell^n}(\\widetilde X)$ with\n$\\zeta_{n+1}^\\ell=\\zeta_n$, each of exact order $\\ell^n$ in every fibre. The morphism of\nfinite étale $\\widetilde X$-schemes $\\coprod_{a\\in\\mathbf Z/\\ell^n}\\widetilde X\\to\\mu_{\\ell^n,\\widetilde X}$,\ngiven by $\\zeta_n^a$ on the $a$-th copy, is a bijection on geometric fibres (the\n$\\zeta_n^a$ are the $\\ell^n$ distinct roots of the separable polynomial $t^{\\ell^n}-1$), and\nboth sides have degree $\\ell^n$; a morphism of finite étale schemes that is bijective on\ngeometric fibres is an isomorphism. This is the isomorphism of (1).",
+   "text": "(1) By [lem-pur-twist-sheaf-locally-free] (2), after a pro-étale cover \\widetilde X\\to X the inverse-limit Tate line \\mathbf Z_\\ell(1) is identified with the completed constant line \\widehat{\\mathbf Z}_\\ell. Reducing the image of its section $1$ modulo \\ell^n through the canonical quotient isomorphism in that clause gives \\zeta_n\\in\\mu_{\\ell^n,X}(\\widetilde X). The quotient maps send \\zeta_{n+1}$ to \\zeta_n$, hence \\zeta_{n+1}^\\ell=\\zeta_n$; and the image of $1$ identifies $(\\mathbf Z/\\ell^n)_{\\widetilde X}$ with \\mu_{\\ell^n,\\widetilde X}. Thus this one cover and the resulting compatible generators prove (1).",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof, clause (1)"
+   }
+  },
+  {
+   "text": "(2) On the cover from (1), use the generators \\zeta_{r'} and \\zeta_r=\\zeta_{r'}^{\\ell^{r'-r}}. Both tensor products are thereby identified with the constant sheaf $A_{\\widetilde X}$, and the displayed Kummer map is the identity under these identifications. Isomorphisms of sheaves are local for the pro-étale topology, so the map is an isomorphism on $X$. This proves that the finite twist is independent of the chosen annihilating level.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof, clause (2)"
+   }
   },
   {
-   "text": "(2) This is [lem-pur-finite-kummer-level], applied with $\\ell^N$ the exponent; concretely,\non $\\widetilde X$ both sides are identified with $A_{\\widetilde X}$ via $\\zeta_{r'}$ and\n$\\zeta_r=\\zeta_{r'}^{\\ell^{r'-r}}$, and these identifications are compatible with the\nKummer map; since being an isomorphism is local, the map is an isomorphism on $X$.",
+   "text": "For a finite ring $A$ killed by \\ell^r$, (1) identifies $A_X(1)$ with the constant free rank-one $A_{\\widetilde X}$ on the same cover. For \\cO_E$, [lem-pur-twist-sheaf-locally-free] (3) gives a pro-étale cover on which \\cO_E(1)_X is free of rank one over the completed coefficient sheaf. Replace the cover from (1) by its common pro-étale refinement with this cover; the compatible generators and their quotient isomorphisms pull back, so the same symbol \\widetilde X now trivializes both the root sheaves and the integral twist. The integral-limit comparison [det-prop-sfb-qlbar-colimit-x-integral-limit] identifies the completed coefficient sheaf with the inverse limit of the finite constant levels, while [det-prop-sfb-qlbar-colimit-x-invert-ell] identifies its localization at \\ell with $E_X$ and gives flatness. Thus the local trivialization base-changes to $E_X(1)\\cong E_X$. The \\Qlb-object is, by [def-coefficient-twists-detailed], the compatible common-stage scalar extension of the same integral/rational object, so the same local trivialization gives \\Qlb_X(1)\\cong\\Qlb_X. Hence every displayed $\\Lambda_X(1)$ is invertible.",
    "uses": [
-    "lem-pur-finite-kummer-level"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(3) For finite $A$: by (1), $A_{\\widetilde X}(1)=\\mu_{\\ell^r,\\widetilde X}\\otimes A_{\\widetilde X}\\cong A_{\\widetilde X}$.\nFor $\\cO_E$: the isomorphisms $(\\cO_E/\\ell^n)_{\\widetilde X}\\cong(\\cO_E/\\ell^n)_{\\widetilde X}(1)$,\n$a\\mapsto\\zeta_n\\otimes a$ are compatible with the transition maps because\n$\\zeta_{n+1}\\mapsto\\zeta_{n+1}^\\ell=\\zeta_n$. Passing to the limit and using\n$\\cO_{E,\\widetilde X}=\\varprojlim_n(\\cO_E/\\ell^n)_{\\widetilde X}$\n([det-prop-sfb-qlbar-colimit-x-integral-limit]; the systems $\\pi_E^n$ and $\\ell^n$ are\ncofinal) gives $\\cO_{E,\\widetilde X}(1)\\cong\\cO_{E,\\widetilde X}$, an isomorphism of\n$\\cO_{E,\\widetilde X}$-modules. Inverting $\\ell$\n([det-prop-sfb-qlbar-colimit-x-invert-ell]) and taking the colimit over $E$ give the same for\n$E$ and $\\Qlb$. The isomorphism $\\Lambda_X(1)|_{\\widetilde X}\\cong\\Lambda_{\\widetilde X}$\nshows that $\\Lambda_X(1)$ is invertible; tensor powers and duals of invertible modules are\ninvertible; the evaluation map $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\to\\Lambda_X$ is an\nisomorphism because it is so locally. Finally an invertible module is flat, so\n$K\\otimes^{\\mathbf L}\\Lambda_X(d)=K\\otimes\\Lambda_X(d)$ termwise, and\n$(K(d))(-d)\\cong K\\otimes\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\cong K$.",
-   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell"
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "def-coefficient-twists-detailed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof, clause (3), finite, integral, and scalar-extension cases"
+   }
   },
   {
-   "text": "The explicit construction of the twists for all coefficients at once, including the\nconvention $\\Lambda(m)$ for $m\\in\\mathbf Z$, is [def-coefficient-twists-detailed].",
+   "text": "The explicit construction of the twists for all coefficients at once, including the convention $\\Lambda(m)$ for $m\\in\\mathbf Z$, is [def-coefficient-twists-detailed]. Tensor powers and duals of a locally free rank-one module are locally free rank one: on a cover where the line is free, this is the corresponding calculation for a free rank-one module and its dual. The evaluation map $\\Lambda_X(d)\\otimes\\Lambda_X(-d)\\to\\Lambda_X$ is therefore an isomorphism locally, hence globally. Such a line is flat, so derived tensoring with it is represented termwise by ordinary tensoring; the evaluation isomorphism gives $(K(d))(-d)\\cong K$ and similarly $(K(-d))(d)\\cong K$ in each coefficient category defined there, including the integral representative construction for $E$ and $\\Qlb$. Thus $K\\mapsto K(d)$ is an autoequivalence with inverse $K\\mapsto K(-d)$.",
    "uses": [
     "def-coefficient-twists-detailed"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof, final paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pur-finite-kummer-level",
+  "lem-pur-twist-sheaf-locally-free",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "def-coefficient-twists-detailed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
   "place": "## Proof"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +90,20 @@
   "det-prop-sfb-qlbar-colimit-x-invert-ell"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sp-tate-twist-locally-free",
+  "worker": "stage1",
+  "summary": "Repaired the proof by explicitly replacing the root-generator cover by a common pro-étale refinement with the integral twist trivializing cover, preserving the compatible generators and establishing the item's same-cover clause.",
+  "blueprint": "Realizes the blueprint proof clauses (1), (2), (3), and its final sentence invoking def-coefficient-twists-detailed; the common-refinement sentence supplies the omitted identification of covers."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-b73228119",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-b73228119 (reviewer sub-agent of L); spot-checked: The theorem and cited sources pass mathematical review. Step 3 omitted that the integral twist trivialization may use a different pro-étale cover than the root-generator cover required by clause 1. A corrected whole DAG JSON explicitly takes their common refinement, preserving compatible generators and establishing the same-cover claim. Review and repair are in review.md and fixes/dag/nodes/sec-smooth-purity/det-def-sp-tate-twist-locally-free.json.; 1 file(s) fixed by the reviewer"
+ }
 }
