@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-double-complex-truncation-decalage",
+ "kind": "statement",
+ "title": "Horizontal smart truncation total equals a decalage step",
+ "statement": "Let C be Grothendieck abelian and J a first-quadrant integer bicomplex [def-sp-double-complex-total]. Let L be a filtration of Tot(J) whose degreewise steps equal the second filtration. For every integer q, the totalized horizontal smart truncation inclusion factors uniquely through Dec(L)^(-q), and the factor is an isomorphism. Its inclusion equation determines it, and it is natural in bicomplex maps and all filtered lifts of their specified total maps. Negative q and negative total degrees are included.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15, the second filtration and horizontal smart truncations; Tag 0118, smart truncations."
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof": [
+  {
+   "text": "Every diagonal summand of the upper smart truncation has horizontal degree at most q, so its image lies in the shifted second-filtration step. Assemble these restrictions by totalDesc. The proved decalage universal property yields the unique complex factor.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use totalDesc to construct each diagonal projection. First-quadrant vanishing gives a finite identity decomposition over [0,n]. Projections with horizontal index greater than q annihilate the shifted filtration step. The projection of the total differential to horizontal degree q+1 is the horizontal differential of the degree-q projection: check this on the finite image-supremum generators, where the signed vertical term vanishes.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project the decalage inclusion into every diagonal term. Past q these maps are zero. At q the preceding differential calculation and the next-degree support condition make the horizontal differential zero; preservation of the cycles kernel by evaluation gives a lift to the smart truncation. Below q use the canonical coordinate isomorphism. Sum the finitely many lifts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Coproducts in a Grothendieck abelian category preserve monomorphisms, so the totalized truncation inclusion is monic. The summed lift composes with it to the decalage inclusion by the diagonal identity. Cancel this mono to prove the chain-map equation. Cancel the two inclusions to prove the two inverse identities. The inclusion equations also prove naturality for every specified filtered lift.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 015X, Remark 13.26.15, the second filtration and horizontal smart truncations; Tag 0118, smart truncations.",
+  "note": "G4 expands the parent comparison plan into the concrete tower and its normalized maps; the cited sources supply the filtered and injective-resolution constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE, HomologicalComplex₂.total",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total complex of a horizontal smart truncation is the decalage step of the second filtration of a first quadrant bicomplex",
+   "results": "8 hits. HomologicalComplex.πTruncGE; HomologicalComplex.truncGE'; HomologicalComplex.truncGE; HomologicalComplex.truncGE'.d; HomologicalComplex.ιTruncLE; HomologicalComplex.restrictionToTruncGE'.f; HomologicalComplex.truncGE'Map; HomologicalComplex.truncLE'. No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|truncLE.*total|total.*truncLE",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total of a horizontal smart truncation of a first quadrant bicomplex equals a decalage step of its second filtration",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; Horizontal smart truncation total equals a decalage step",
+   "via": [
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DoubleComplexTruncationDecalage",
+  "file": "lean/Sheaf/CategoryTheory/DoubleComplexTruncationDecalage.lean",
+  "declaration": "HomologicalComplex₂.totalTruncLEToDecalage_isIso",
+  "statement": "theorem totalTruncLEToDecalage_isIso\n    (J : HomologicalComplex₂ C (.up ℤ) (.up ℤ))\n    (hJ : ∀ i j : ℤ, i < 0 ∨ j < 0 → IsZero ((J.X i).X j))\n    (L : DecreasingFiltration (J.total (.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n = (J.secondFiltration n).step p)\n    (q : ℤ) : IsIso (J.totalTruncLEToDecalage hJ L hL q)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16",
+  "declarations": [
+   "HomologicalComplex₂.totalTruncLEToDecalage_isIso",
+   "HomologicalComplex₂.total_truncLE_secondFiltration",
+   "HomologicalComplex₂.total_truncLE_decalage_factor",
+   "HomologicalComplex₂.totalTruncLEToDecalage",
+   "HomologicalComplex₂.totalTruncLEToDecalage_arrow",
+   "HomologicalComplex₂.totalTruncLEToDecalage_naturality",
+   "HomologicalComplex₂.totalTruncLEToDecalage_mono"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

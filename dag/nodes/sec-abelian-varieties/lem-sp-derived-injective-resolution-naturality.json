@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-derived-injective-resolution-naturality",
+ "kind": "statement",
+ "title": "Naturality of the specified injective-resolution computation",
+ "statement": "Let B be abelian with enough injectives, C abelian, both with derived categories, and G:B to C additive. Given specified quasi-isomorphisms a:K to I and b:L to J between bounded-below complexes with injective terms in I,J, and a commuting square a g = f b, the normalized derived-object comparisons RG QK to Q(GI) and RG QL to Q(GJ) commute with f and Gg, already before taking cohomology. Their cohomology comparisons have the same naturality. For a whole indexing diagram of specified resolutions the derived-object comparisons assemble into a natural isomorphism of diagrams. A square of quasi-isomorphisms induces a quasi-isomorphism on actual mapping cones. Cones of bounded-below termwise injective complexes are again bounded below and termwise injective. The cone functor sends any diagram of augmentation squares to a diagram of specified cone resolutions, and the same natural comparison computes all its derived interval images. The comparison is constructed by mapping the specified augmentation and then inverting the derived-functor unit on injectives; it is not an arbitrary cohomology isomorphism.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 0156, Lemma 13.20.1, injective-resolution computation; Tag 014A, five lemma for distinguished triangles; Mathlib right-derived-functor unit naturality."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply naturality of the right-derived-functor unit to a map of bounded-below injective complexes and invert its components, which are isomorphisms. Apply cohomology and the natural derived/homotopy/complex homology comparison isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A specified quasi-isomorphism becomes invertible under Q. Define the derived-object resolution comparison by the image of its augmentation under RG followed by the inverse-unit comparison. Apply cohomology and the natural derived/homotopy/complex comparisons for the cohomology version. Functoriality sends the augmentation square to a commuting square; compose with the proved inverse-unit naturality square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Localize the mapping-cone triangle map of a commuting augmentation square. The first two components are invertible, hence the third component is invertible by the five lemma for distinguished triangles. Localization reflects quasi-isomorphisms. A cone vanishes below the smaller of the shifted source bound and target bound, and each of its terms is a biproduct of injectives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Actual cone maps satisfy identity and composition and hence form a functor on arrows of bounded-below cochain complexes. Whisker the diagram of augmentation squares with this functor. Its components are the proved cone quasi-isomorphisms into termwise injective complexes. Apply the proved whole-diagram normalized resolution comparison to obtain the natural isomorphism for interval cones.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 0156, Lemma 13.20.1, injective-resolution computation; Tag 014A, five lemma for distinguished triangles; Mathlib right-derived-functor unit naturality.",
+  "note": "G4 expands the parent comparison plan into the concrete tower and its normalized maps; the cited sources supply the filtered and injective-resolution constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse unit of a right derived functor on bounded below injective complexes computes cohomology naturally in maps of resolutions",
+   "results": "8 hits. CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality. No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "homologyRightDerivedFunctorPlusObjQIsoOfInjective",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage|homologyRightDerivedFunctorPlusObjQIsoOfInjective",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor on a specified bounded below injective resolution is naturally isomorphic to the localization of the mapped resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; Naturality of the specified injective-resolution computation",
+   "via": [
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality",
+  "file": "lean/Sheaf/CategoryTheory/DerivedInjectiveResolutionNaturality.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlusResolutionIso_naturality",
+  "statement": "theorem rightDerivedFunctorPlusResolutionIso_naturality\n    {K L I J : CochainComplex.Plus B} (a : K ⟶ I) (b : L ⟶ J)\n    [QuasiIso a.hom] [QuasiIso b.hom]\n    [∀ n : ℤ, Injective (I.obj.X n)] [∀ n : ℤ, Injective (J.obj.X n)]\n    (f : K ⟶ L) (g : I ⟶ J) (h : a ≫ g = f ≫ b) :\n    G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map f) ≫\n        (G.rightDerivedFunctorPlusResolutionIso b).hom =\n      (G.rightDerivedFunctorPlusResolutionIso a).hom ≫\n        DerivedCategory.Plus.Qh.map\n          (G.mapHomotopyCategoryPlus.map ((HomotopyCategory.Plus.quotient B).map g))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Functor.rightDerivedFunctorPlusResolutionIso_naturality",
+   "CochainComplex.mappingCone.quasiIso_map_of_quasiIso",
+   "CochainComplex.Plus.mappingCone",
+   "CochainComplex.Plus.mappingConeMap",
+   "CochainComplex.Plus.mappingConeMap_quasiIso",
+   "CochainComplex.Plus.mappingConeFunctor",
+   "CochainComplex.Plus.mappingCone_injective",
+   "CategoryTheory.Functor.rightDerivedFunctorPlusConeResolutionIso",
+   "CategoryTheory.Functor.rightDerivedFunctorPlusConeResolutionNatIso",
+   "CategoryTheory.Functor.rightDerivedFunctorPlusResolutionIso",
+   "CategoryTheory.Functor.rightDerivedFunctorPlusResolutionNatIso",
+   "CategoryTheory.Functor.homologyRightDerivedFunctorPlusResolutionIso_naturality",
+   "CategoryTheory.Functor.homologyRightDerivedFunctorPlusResolutionIso",
+   "CategoryTheory.Functor.homologyRightDerivedFunctorPlusObjQIsoOfInjective_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

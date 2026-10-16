@@ -1,0 +1,142 @@
+{
+ "id": "lem-sp-filtered-complex-decalage-comparison",
+ "kind": "statement",
+ "title": "The canonical quotient sequence compared with the decalage tower",
+ "statement": "For every abelian category C, the fixed canonical quotient sequence of every filtered cochain complex [lem-sp-filtered-complex-canonical-model] is isomorphic to the E2 sequence of its concrete decalage-tower spectral object [def-sp-filtered-complex-decalage-tower]. These isomorphisms are normalized so that for every filtered map the canonical page-two map, conjugated by the page-two interval comparison, is exactly the induced spectral-object interval cohomology map [lem-sp-spectral-object-page-two-functor]. No boundedness or CE hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 012K, cycle/boundary formulas for filtered-complex spectral sequences; Tag 015X, Remark 13.26.15, the second filtration."
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-decalage-tower",
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-spectral-object-page-two-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved cone-to-cokernel quasi-isomorphism for every finite interval. Its naturality identifies interval maps with the maps on quotients of decalage steps.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write Z_s(F)^(p,n) = F^p K^n intersect d^-1 F^(p+s) K^(n+1). The E_s denominator is Z_(s-1)(F)^(p+1,n) plus d Z_(s-1)(F)^(p-s+1,n-1). For a=p-n and r>=2, substitution in the decalage formula and d squared equal to zero give Z_(r-1)(Dec F)^(a,n)=Z_r(F)^(p,n), and the two denominator terms agree respectively. Thus E_(r-1)(Dec F)^(a,n-a) equals E_r(F)^(p,n-p). With tower index q corresponding to Dec(F)^(1-q), the spectral-object page at (p,q) is the original quotient cycle/boundary page at (p,q), starting at page two.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-model",
+    "lem-sp-filtered-complex-decalage",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison sends representatives to their own quotient classes. The differential is represented by d on both sides, and the successor homology comparison is the same quotient map. Cancel the epic representative maps to prove compatibility and assemble an isomorphism of entire sequences.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a filtered map, restrict to the representative pullbacks and descend to the boundary quotients. Cancellation gives the stated normalized page-two naturality. Infinite endpoints are the zero and full complexes; finite-page calculations use finite endpoints only.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower",
+    "lem-sp-spectral-object-page-two-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-decalage-tower",
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-filtered-complex-decalage",
+  "lem-sp-spectral-object-page-two-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tag 012K, cycle/boundary formulas for filtered-complex spectral sequences; Tag 015X, Remark 13.26.15, the second filtration.",
+  "note": "G4 expands the parent comparison plan into the concrete tower and its normalized maps; the cited sources supply the filtered and injective-resolution constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical filtered complex model isomorphic to Grothendieck spectral object",
+   "results": "8 hits. DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; HomotopyCategory.spectralObjectMappingCone_ω₁; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor; DerivedCategory.singleFunctorIsoCompQ. No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FilteredPageTwoModel E₂SpectralSequence",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckSpectralObject.*iso",
+   "results": "0 hits. . No complete comparison theorem; the cited generic APIs are used below.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral sequence of a filtered cochain complex is the spectral sequence of the increasing tower of decalage subcomplexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison",
+  "date": "2026-10-16",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; The canonical quotient sequence compared with the decalage tower",
+   "via": [
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexDecalageComparison",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexDecalageComparison.lean",
+  "declaration": "CategoryTheory.filteredComplex_decalage_comparison",
+  "statement": "theorem filteredComplex_decalage_comparison\n    (C : Type u) [Category.{v} C] [Abelian C] :\n    ∃ e : ∀ U : FilteredObject (CochainComplex C ℤ),\n      (filteredComplexCanonicalModel C).S.obj U ≅\n        ((filteredComplexDecalageSpectralObjectFunctor C).obj U).E₂SpectralSequence,\n      ∀ {U V : FilteredObject (CochainComplex C ℤ)} (t : U ⟶ V) (p q : ℤ),\n        (((filteredComplexCanonicalModel C).S.map t).hom 2).f (p, q) ≫\n            (Abelian.SpectralObject.pageTwoComparison\n              ((filteredComplexDecalageSpectralObjectFunctor C).obj V)\n              (e V) p q (p + q) rfl).hom =\n          (Abelian.SpectralObject.pageTwoComparison\n            ((filteredComplexDecalageSpectralObjectFunctor C).obj U)\n            (e U) p q (p + q) rfl).hom ≫\n            (((filteredComplexDecalageSpectralObjectFunctor C).map t).hom (p + q)).app\n              (ComposableArrows.mk₁\n                (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261016T015249-L-722295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

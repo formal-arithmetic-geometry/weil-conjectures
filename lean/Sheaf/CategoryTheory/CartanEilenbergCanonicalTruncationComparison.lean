@@ -9,12 +9,8 @@ public import Sheaf.CategoryTheory.FilteredComplexCanonicalModel
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
-import Sheaf.CategoryTheory.CartanEilenbergTruncationResolution
-import Sheaf.CategoryTheory.LeftExactTruncationIso
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
-import Sheaf.CategoryTheory.CartanEilenbergDerivedTruncationCohomology
-import Sheaf.CategoryTheory.FilteredComplexDecalage
+import Sheaf.CategoryTheory.FilteredComplexDecalageComparison
+import Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject
 
 /-! # The canonical CE quotient sequence and truncation
 
@@ -30,44 +26,61 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem exists_spectralObject_sequence_iso
+    {C : Type uC} [Category.{vC} C] [Abelian C]
+    {X Y : Abelian.SpectralObject C EInt} (i : X ≅ Y) :
+    ∃ e : X.E₂SpectralSequence ≅ Y.E₂SpectralSequence,
+      ∀ p q : ℤ,
+        (Abelian.SpectralObject.pageTwoComparison Y e p q (p + q) rfl).hom =
+          (Abelian.SpectralObject.pageTwoComparison X (Iso.refl _) p q (p + q) rfl).hom ≫
+            (i.hom.hom (p + q)).app (ComposableArrows.mk₁
+              (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))) := by
+  obtain ⟨E, c, hc⟩ := Abelian.SpectralObject.exists_pageTwo_functor
+    (𝟭 (Abelian.SpectralObject C EInt))
+  let e := (c X).symm ≪≫ E.mapIso i ≪≫ c Y
+  refine ⟨e, ?_⟩
+  intro p q
+  have hi := hc X Y i.hom p q
+  dsimp only [Abelian.SpectralObject.pageTwoComparison, Iso.trans_hom,
+    Functor.mapIso_hom, e, Iso.symm_hom, SpectralSequence.comp_hom,
+    HomologicalComplex.comp_f] at hi ⊢
+  simp only [HomologicalComplex.eval, SpectralSequence.pageFunctor, Category.assoc] at hi ⊢
+  simp only [SpectralSequence.comp_hom, HomologicalComplex.comp_f, Iso.refl_hom,
+    SpectralSequence.id_hom, HomologicalComplex.id_f, Category.id_comp, Category.assoc] at *
+  erw [hi]
+  have hX := congrArg (fun k ↦ (k.hom 2).f (p, q)) (c X).inv_hom_id
+  simp only [SpectralSequence.comp_hom, HomologicalComplex.comp_f,
+    SpectralSequence.id_hom, HomologicalComplex.id_f] at hX
+  rw [reassoc_of% hX]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Compare the explicit, normalized quotient sequence of a CE second filtration
 with the truncation spectral object; only the first-page square is required here.
 Source: Stacks Project, Tag 015X, Remark 13.26.15, and Tags 015K and 012K.
 (blueprint: lem-sp-ce-canonical-truncation-comparison).
 
-Proof. Before applying G, use DecreasingFiltration.exists_decalage to form
-the unique functorial decalage of the second filtration V by
-Dec(V)^a Tot(I)^n = V^(a+n) intersect d^{-1}(V^(a+n+1)). The augmentation from
-F(J) restricts from its upper smart truncation in degree q to Dec(V)^(-q).
-The proved cartanEilenberg_truncation_resolution supplies the unique
-augmentation and a bounded-below K-injective total for every horizontal smart
-truncation, with its original total sign convention. The CE augmentations on
-horizontal cycles, boundaries and cohomology show that
-the induced graded maps are quasi-isomorphisms. The injective horizontal cycle
-and boundary terms split their short exact sequences, so the Dec graded terms
-are injective and the step inclusions split degreewise. Thus these maps give a
-filtered injective resolution of the smart truncation filtration of F(J).
-The proved leftExact_truncation_iso identifies the cycles after applying G,
-and cartanEilenberg_mapped_total_iso commutes G with the finite diagonals.
-The proved cartanEilenberg_derived_truncation_cohomology computes the
-objectwise derived cohomology of these upper truncations. Compare this
-resolution to the derived truncation diagram by the injective
-comparison theorem. Its comparison maps are unique up to filtered homotopy,
-and additive G preserves the homotopies. On quotient cycles and boundaries,
-decalage shifts the spectral-sequence page by one. Reindexing its bidegrees
-therefore identifies the CE quotient sequence starting at page two with the
-truncation spectral sequence. The representative differential formula and the
-normalized homology quotient formula used in the canonical model are precisely
-the formulas of that comparison. Consequently it commutes with differentials
-and successor-page isomorphisms and gives an isomorphism of entire sequences.
-The split horizontal cohomology calculation, with the sign (-1)^(q*j) on the
-resolution direction, identifies its first-page map with interval cohomology
-of the truncation spectral object. Every map of CE presentations commutes with
-these augmented cycle and boundary diagrams. Passing through kernels and
-cokernels gives the displayed first-page naturality square for every filtered
-lift of the mapped total map. Equality of the specified filtration in each
-degree suffices throughout: subcomplexes and their inclusions are determined
-by their degreewise subobjects. No acyclicity assumption on F(J) for G is used. -/
+Proof. Form the concrete decalage tower, whose step at q is Dec(L)^(1-q),
+with zero and the full total at the infinite endpoints. Its mapping-cone
+spectral object gives an intermediate sequence. The universal theorem
+filteredComplex_decalage_comparison compares the canonical quotient sequence
+with this intermediate sequence. It identifies quotient representatives and
+normalizes the first-page map for every filtered chain map.
+The theorem cartanEilenberg_decalage_spectralObject compares the intermediate
+spectral object with the derived truncation spectral object, naturally for every
+CE presentation comparison and every filtered lift of its mapped total map.
+Its argument identifies horizontal smart truncations with decalage steps, uses
+the normalized CE augmentations to compute the derived truncation tower, and
+compares the interval cones and their connecting maps before taking cohomology.
+Apply exists_pageTwo_functor to the identity functor on spectral objects. The
+resulting functor maps the spectral-object isomorphisms to sequence isomorphisms;
+conjugating by its object comparisons gives the desired normalized sequence
+isomorphisms. Compose them with the universal quotient comparison. The first
+comparison's page-two naturality equation and the cohomology component of the
+second comparison's naturality equation compose, by associativity, to the
+stated square. No arbitrary cohomology isomorphism or filtered homotopy choice
+is used in this assembly. -/
 theorem cartanEilenberg_canonical_truncation_comparison
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
@@ -96,6 +109,37 @@ theorem cartanEilenberg_canonical_truncation_comparison
               (F.grothendieckSpectralObject G P.X) (e P) p q (p + q) rfl).hom ≫
               (((F.grothendieckSpectralObjectFunctor G).map d.f).hom (p + q)).app
                 (ComposableArrows.mk₁
-                  (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))) := by sorry
+                  (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))) := by
+  classical
+  obtain ⟨a, ha⟩ := filteredComplex_decalage_comparison C
+  obtain ⟨b, hb⟩ := cartanEilenberg_decalage_spectralObject F G L hL
+  choose c hc using fun (P : CartanEilenbergPresentation F) ↦
+    exists_spectralObject_sequence_iso (b P)
+  let e := fun (P : CartanEilenbergPresentation F) ↦
+    a (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ≪≫ c P
+  refine ⟨e, ?_⟩
+  intro P Q d t ht p q
+  have ha' := ha t p q
+  have hb' := congrArg (fun k ↦ (k.hom (p + q)).app (ComposableArrows.mk₁
+    (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))) (hb P Q d t ht)
+  have he (R : CartanEilenbergPresentation F) :
+      (Abelian.SpectralObject.pageTwoComparison
+        (F.grothendieckSpectralObject G R.X) (e R) p q (p + q) rfl).hom =
+      (Abelian.SpectralObject.pageTwoComparison
+        ((filteredComplexDecalageSpectralObjectFunctor C).obj
+          (⟨R.total G, L R⟩ : FilteredObject (CochainComplex C ℤ)))
+        (a _) p q (p + q) rfl).hom ≫
+          ((b R).hom.hom (p + q)).app (ComposableArrows.mk₁
+            (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt)))) := by
+    have h := hc R p q
+    dsimp only [e, Abelian.SpectralObject.pageTwoComparison, Iso.trans_hom,
+      Functor.mapIso_hom] at h ⊢
+    simp only [HomologicalComplex.eval, SpectralSequence.pageFunctor,
+      SpectralSequence.comp_hom, HomologicalComplex.comp_f, Category.assoc,
+      Iso.refl_hom, SpectralSequence.id_hom, HomologicalComplex.id_f,
+      Category.id_comp] at h ⊢
+    rw [h]
+  simp only [Abelian.SpectralObject.comp_hom, NatTrans.comp_app] at hb'
+  rw [he P, he Q, ← Category.assoc, ha', Category.assoc, hb', ← Category.assoc]
 
 end CategoryTheory
