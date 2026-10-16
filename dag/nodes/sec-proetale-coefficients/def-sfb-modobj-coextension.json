@@ -3,34 +3,156 @@
  "blueprint": {
   "is": "def-sfb-modobj-coextension",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sfb-change-of-scalars"
+  ]
  },
  "kind": "definition",
  "title": "Coextension of scalars",
- "statement": "Let $\\mathcal C$ be a monoidal category with equalizers. Assume it is closed: each\n$X\\otimes-$ has a right adjoint $\\underline{\\Hom}(X,-)$, with evaluation\n$\\mathrm{ev}\\colon X\\otimes\\underline{\\Hom}(X,Y)\\to Y$. Let\n$\\varphi\\colon\\mathcal R\\to\\mathcal S$ be a morphism between monoid objects. No\ncommutativity or braiding is assumed. For an $\\mathcal R$-module object $N$\n([sk-def-sfb-module-objects]), let $\\Hom_{\\mathcal R}(\\mathcal S,N)$ be the equalizer of\nthe two maps\n$$\n\\underline{\\Hom}(\\mathcal S,N)\\rightrightarrows\\underline{\\Hom}(\\mathcal R\\otimes\\mathcal S,N).\n$$\nThe first precomposes with the action\n$\\mu_{\\mathcal S}(\\varphi\\otimes\\mathcal S)\\colon\\mathcal R\\otimes\\mathcal S\\to\\mathcal S$.\nThe second is adjoint to\n$\\mathcal R\\otimes\\mathcal S\\otimes\\underline{\\Hom}(\\mathcal S,N)\n\\xrightarrow{\\mathcal R\\otimes\\mathrm{ev}}\\mathcal R\\otimes N\\xrightarrow{\\gamma_N}N$.\nLet $\\mathcal S$ act on $\\Hom_{\\mathcal R}(\\mathcal S,N)$ by right multiplication on the\nsource, $(s\\cdot f)(t)=f(ts)$. That is, the action is adjoint to\n$$\n\\mathcal S\\otimes\\mathcal S\\otimes\\Hom_{\\mathcal R}(\\mathcal S,N)\n\\xrightarrow{\\mu_{\\mathcal S}\\otimes1}\\mathcal S\\otimes\\Hom_{\\mathcal R}(\\mathcal S,N)\n\\to\\mathcal S\\otimes\\underline{\\Hom}(\\mathcal S,N)\\xrightarrow{\\mathrm{ev}}N .\n$$\nWith postcomposition on morphisms, this defines the *coextension of scalars* functor\n$\\operatorname{Coext}_\\varphi=\\Hom_{\\mathcal R}(\\mathcal S,-)\\colon\n\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.",
+ "statement": "Let $\\mathcal C$ be a monoidal category with equalizers. Assume it is closed: each\n$X\\otimes-$ has a right adjoint $\\underline{\\Hom}(X,-)$, with evaluation\n$\\mathrm{ev}\\colon X\\otimes\\underline{\\Hom}(X,Y)\\to Y$. Let\n$\\varphi\\colon\\mathcal R\\to\\mathcal S$ be a morphism between monoid objects ([det-def-sfb-ring-object-monoid]). No\ncommutativity or braiding is assumed. For an $\\mathcal R$-module object $N$\n([sk-def-sfb-module-objects]), let $\\Hom_{\\mathcal R}(\\mathcal S,N)$ be the equalizer of\nthe two maps\n$$\n\\underline{\\Hom}(\\mathcal S,N)\\rightrightarrows\\underline{\\Hom}(\\mathcal R\\otimes\\mathcal S,N).\n$$\nThe first precomposes with the action\n$\\mu_{\\mathcal S}(\\varphi\\otimes\\mathcal S)\\colon\\mathcal R\\otimes\\mathcal S\\to\\mathcal S$.\nThe second is adjoint to\n$\\mathcal R\\otimes\\mathcal S\\otimes\\underline{\\Hom}(\\mathcal S,N)\n\\xrightarrow{\\mathcal R\\otimes\\mathrm{ev}}\\mathcal R\\otimes N\\xrightarrow{\\gamma_N}N$.\nLet $\\mathcal S$ act on $\\Hom_{\\mathcal R}(\\mathcal S,N)$ by right multiplication on the\nsource, $(s\\cdot f)(t)=f(ts)$. That is, the action is adjoint to\n$$\n\\mathcal S\\otimes\\mathcal S\\otimes\\Hom_{\\mathcal R}(\\mathcal S,N)\n\\xrightarrow{\\mu_{\\mathcal S}\\otimes1}\\mathcal S\\otimes\\Hom_{\\mathcal R}(\\mathcal S,N)\n\\to\\mathcal S\\otimes\\underline{\\Hom}(\\mathcal S,N)\\xrightarrow{\\mathrm{ev}}N .\n$$\nWith postcomposition on morphisms, this defines the *coextension of scalars* functor\n$\\operatorname{Coext}_\\varphi=\\Hom_{\\mathcal R}(\\mathcal S,-)\\colon\n\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.\n\nHere an equalizer of $p,q\\colon H\\rightrightarrows K$ means an object $E$ with a morphism $i\\colon E\\to H$ such that $pi=qi$, through which every $h\\colon T\\to H$ satisfying $ph=qh$ factors uniquely. The closed structure supplies natural bijections $\\operatorname{Hom}_{\\mathcal C}(X\\otimes T,Y)\\simeq\\operatorname{Hom}_{\\mathcal C}(T,\\underline{\\operatorname{Hom}}(X,Y))$. In the displayed action construction, first transpose with respect to the first $\\mathcal S$ factor to obtain $\\mathcal S\\otimes E\\to\\underline{\\operatorname{Hom}}(\\mathcal S,N)$, and then take its unique factorization through the equalizer $E=\\operatorname{Hom}_{\\mathcal R}(\\mathcal S,N)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
   "place": "node def-sfb-modobj-coextension, order 1590"
  },
  "stmt_deps": [
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-module-objects",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof": [
   {
-   "text": "All identities below are checked after composing with the monomorphism\n$\\Hom_{\\mathcal R}(\\mathcal S,N)\\to\\underline{\\Hom}(\\mathcal S,N)$ and passing to adjoint\nmaps $\\mathcal S\\otimes Y\\to N$. In elementwise notation for these maps, the equalizer\ncondition on $f$ reads $f(\\varphi(r)t)=r\\cdot f(t)$.\n- The action lands in the equalizer: $t\\mapsto f(ts)$ satisfies\n  $f(\\varphi(r)ts)=r\\cdot f(ts)$, which is the condition on $f$ at $ts$, using\n  associativity of $\\mu_{\\mathcal S}$.\n- The unit and associativity laws of the action follow from those of $\\mu_{\\mathcal S}$.\n- For an $\\mathcal R$-linear $g\\colon N\\to N'$, postcomposition with $g$ preserves the\n  equalizer condition and commutes with the $\\mathcal S$-action.",
+   "text": "Write $H_N=\\underline{\\operatorname{Hom}}(\\mathcal S,N)$, $E_N=\\operatorname{Hom}_{\\mathcal R}(\\mathcal S,N)$, and $i_N\\colon E_N\\to H_N$ for the equalizer inclusion. Let $v_N=\\mathrm{ev}\\circ(1_{\\mathcal S}\\otimes i_N)\\colon\\mathcal S\\otimes E_N\\to N$, and $a=\\mu_{\\mathcal S}\\circ(\\varphi\\otimes1_{\\mathcal S})$. Uncurrying the equalizer equation gives $v_N\\circ(a\\otimes1_{E_N})=\\gamma_N\\circ(1_{\\mathcal R}\\otimes v_N)$, with associators inserted. The inclusion $i_N$ is monic directly by uniqueness in its universal property: if $i_Nu=i_Nw$, both $u,w$ are the factorization of that same equalizing map. Thus maps into $E_N$ can be compared by composing with $i_N$ and then uncurrying. Below expressions such as $v_N(t,e)$ are notation for these composites on ordered tensor factors, not an assumption that elements detect morphisms. Parentheses are changed only by associators.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
+    "place": "Construction and well-definedness, expanded from the coextension clause of sk-def-sfb-change-of-scalars"
+   }
+  },
+  {
+   "text": "Transpose $v_N\\circ(\\mu_{\\mathcal S}\\otimes1_{E_N})$ with respect to the first $\\mathcal S$ to get $k_N\\colon\\mathcal S\\otimes E_N\\to H_N$. It equalizes the defining pair: after uncurrying, the required equality on the ordered factors $\\mathcal R,\\mathcal S,\\mathcal S,E_N$ is $v_N((\\varphi(r)t)s,e)=v_N(\\varphi(r)(ts),e)=\\gamma_N(r,v_N(ts,e))$. The first equality is associativity of the monoid multiplication in [det-def-sfb-ring-object-monoid], and the second is the equalizer equation from step 1 precomposed with $1_{\\mathcal R}\\otimes\\mu_{\\mathcal S}\\otimes1_{E_N}$. The equalizer universal property therefore defines the unique $b_N\\colon\\mathcal S\\otimes E_N\\to E_N$ with $i_Nb_N=k_N$. Its defining evaluation identity is $v_N(t,b_N(s,e))=v_N(ts,e)$.",
+   "uses": [
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
+    "place": "Construction and well-definedness, expanded from the coextension clause of sk-def-sfb-change-of-scalars"
+   }
+  },
+  {
+   "text": "The action $b_N$ obeys the module laws of [sk-def-sfb-module-objects]. To check the unit law, compose with $i_N$ and uncurry; the resulting equality is $v_N(t,b_N(1,e))=v_N(t1,e)=v_N(t,e)$, by the right unit law of [det-def-sfb-ring-object-monoid]. For associativity the corresponding equality on ordered factors $t,s_1,s_2,e$ is $v_N(t,b_N(s_1,b_N(s_2,e)))=v_N(ts_1,b_N(s_2,e))=v_N((ts_1)s_2,e)=v_N(t(s_1s_2),e)=v_N(t,b_N(s_1s_2,e))$. Each equality uses the defining evaluation identity or the monoid associativity law. Injectivity of transposition and monicity of $i_N$ give the required two action equations, including their associators and unitors.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
+    "place": "Construction and well-definedness, expanded from the coextension clause of sk-def-sfb-change-of-scalars"
+   }
+  },
+  {
+   "text": "For a module morphism $g\\colon N\\to N'$, transpose $g\\circ v_N$ to get $h_g\\colon E_N\\to H_{N'}$. It equalizes the defining pair for $E_{N'}$: on ordered factors $r,t,e$, $g(v_N(\\varphi(r)t,e))=g(\\gamma_N(r,v_N(t,e)))=\\gamma_{N'}(r,g(v_N(t,e)))$. The last equality is exactly the module-morphism equation of [sk-def-sfb-module-objects]. Define $E(g)\\colon E_N\\to E_{N'}$ by its unique equalizer factorization, so $v_{N'}(t,E(g)e)=g(v_N(t,e))$. This morphism is $\\mathcal S$-linear because $v_{N'}(t,E(g)b_N(s,e))=g(v_N(ts,e))=v_{N'}(ts,E(g)e)=v_{N'}(t,b_{N'}(s,E(g)e))$. Comparison after $i_{N'}$ and transposition proves the equality of action maps. Finally $v_N(t,E(1)e)=v_N(t,e)$ and $v_{N''}(t,E(g'\\circ g)e)=g'(g(v_N(t,e)))=v_{N''}(t,E(g')E(g)e)$ prove the identity and composition laws by the same uniqueness. This constructs the stated functor on objects and morphisms.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
+    "place": "Construction and well-definedness, expanded from the coextension clause of sk-def-sfb-change-of-scalars"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "det-def-sfb-ring-object-monoid",
+  "sk-def-sfb-module-objects"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension.md",
-  "place": "## Proof"
+  "place": "Equalizer construction and right-multiplication action; expanded elementary verification"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendAdjunction",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coextension of scalars for module objects in a closed monoidal category as equalizer of internal homs",
+   "results": "ModuleCat.coextendScalars, ModuleCat.CoextendScalars.obj', ModuleCat.CoextendScalars.isModule, ModuleCat.CoextendScalars.hasSMul, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.CoextendScalars.mulAction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendScalars.obj'",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coextendScalars\"",
+   "results": "ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coextension of scalars for modules over monoid objects in a monoidal closed category constructed as an equalizer of internal homs",
+   "results": "Rep.ihom_coev_app_hom, Rep.MonoidalClosed.linearHomEquiv, Rep.MonoidalClosed.linearHomEquivComm, Rep.ihom_ev_app_hom, ModuleCat.monoidalClosed_pre_app, Rep.instMonoidalClosed, Rep.MonoidalClosed.linearHomEquiv_hom, ModuleCat.instMonoidalClosed",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to restriction of scalars for internal modules over associative monoids without a braiding",
+   "results": "ModuleCat.instIsRightAdjointRestrictScalars, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, Rep.instIsLeftAdjointActionModuleCatRes, Rep.resCoindAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"coextend\"",
+   "results": "ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "grep",
+   "query": "^(def coextendScalars|def obj\\x27|def map\\x27|def restrictCoextendScalarsAdj)",
+   "results": "66, 73, 373, 380, 498; single-file rg output was parsed without a filename by msearch; repeated with directory and exact declaration pattern",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "grep",
+   "query": "^def coextendScalars|^def restrictCoextendScalarsAdj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; coextendScalars at line 520 and restrictCoextendScalarsAdj at line 659, source read at lines 441–565",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules and representations do not give internal modules in an arbitrary closed monoidal category"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|coextend|internalHom|ihom|equalizer",
+   "results": "Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the internal module declarations define actions and morphisms, while the representation declarations concern a special category; none constructs coextension along an arbitrary monoid morphism in a closed monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of left modules over monoid objects, with the left action induced by right multiplication on a bimodule",
+   "results": "Rep.ihom_coev_app_hom, CategoryTheory.ModObj.smul, Rep.ihom_obj_ρ_def, Rep.ihom_ev_app_hom, CategoryTheory.Mod_.Hom, CategoryTheory.Mod_.Hom.mk'', Rep.ihom_obj_ρ, Rep.MonoidalClosed.linearHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: the internal module declarations define actions and morphisms, while the representation declarations concern a special category; none constructs coextension along an arbitrary monoid morphism in a closed monoidal category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -47,5 +169,21 @@
   "CategoryTheory.Mod.coextendScalars"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-coextension",
+  "worker": "stage1",
+  "summary": "Checked the current main blueprint, module and monoid definition nodes, project Lean, and Mathlib candidates. Expanded the existing universal properties and made the equalizer factorization of the action explicit without changing hypotheses. Verified the equalizer condition, module laws, postcomposition, and functor laws as morphism calculations with ordered tensor factors. No new nodes needed.",
+  "blueprint": "Realizes sk-def-sfb-change-of-scalars clause 3 (coextension construction only), and all construction and well-definedness content of def-sfb-modobj-coextension. The adjunction and preservation of colimits remain in their existing separate nodes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-161de2f56",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-161de2f56 (reviewer sub-agent of L); spot-checked: Read the complete item, all four steps, cited definitions, current blueprint sources, and chapter/unit route. Equalizer factorization, action laws, and functoriality are valid without braiding or tensor preservation of equalizers. All 2,304 finite noncommutative associativity checks passed. No new nodes, circular dependencies, or required repairs. Detailed checks recorded in review.md."
+ }
 }
