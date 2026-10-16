@@ -284,23 +284,23 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-96fd79354",
-  "group": "Q01",
+  "reviewer": "NT-stage2-Codex-c0f13cc3d",
+  "group": "Q33",
   "result": "pass",
-  "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, reports, and compiler evidence checked; no substantive or mechanical defects found."
+  "note": "Statement, dependencies, source, declarations, edge cases, docstrings, report headings, and compiler evidence checked; no findings."
  },
  "lean": {
-  "module": "Sheaf.Paper.UniformCompleteTriangulated",
-  "declaration": "AlgebraicGeometry.Scheme.pbcUniformComplete_isTriangulated",
+  "module": "Sheaf.Paper.PbcUniformCompleteTriangulated",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIntegralUniformComplete_isTriangulated",
   "declarations": [
-   "AlgebraicGeometry.Scheme.pbcUniformComplete_isTriangulated"
+   "AlgebraicGeometry.Scheme.pbcIntegralUniformComplete_isTriangulated"
   ],
-  "file": "lean/Sheaf/Paper/UniformCompleteTriangulated.lean",
-  "statement": "theorem pbcUniformComplete_isTriangulated (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian T] (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hl : IsUnit (l : Γ(T, ⊤))) : ObjectProperty.IsClosedUnderIsomorphisms (IsPbcBoundedConstructibleComplete T l E) ∧ ObjectProperty.IsTriangulated (IsPbcBoundedConstructibleComplete T l E)",
+  "file": "lean/Sheaf/Paper/PbcUniformCompleteTriangulated.lean",
+  "statement": "theorem pbcIntegralUniformComplete_isTriangulated (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) [IsNoetherian T] (_hDim : ∃ d : ℕ, topologicalKrullDim T ≤ d) (_hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t)) : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (C := PbcCompletedDerived T (pbcIntegralDatum l E)) (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ∧ ObjectProperty.IsTriangulated.{u + 2, u + 2} (C := PbcCompletedDerived T (pbcIntegralDatum l E)) (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))",
   "branch": "newtargets-dag",
-  "by": "Q01",
+  "by": "Q33",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Previously unstated dependency, supplied under §1(A). States isomorphism closure and inherited triangulated closure for the published PbcIsBoundedConstructibleComplete specialized to pbcPadicCoefficientDatum. IntegralUniformCoefficient only abbreviates that predicate and supplies its actual finite-extension scalar action; no completion, tower, or witness notion is replaced."
+  "note": "The current recorded Sheaf.Paper.UniformCompleteTriangulated theorem applies to E : Type (u+1), IsPbcBoundedConstructibleComplete T l E, and the unlifted pbcPadicCoefficientDatum. The rational-category dependency of this item uses E : Type u, ULift coefficients, and pbcIntegralDatum l E. The two completed coefficient categories are not definitionally equal. This §1(B) interface states the same closure and inherited triangulation for the published lifted-coefficient category, with the same geometric hypotheses. Its distinct declaration name avoids a duplicate of the newly recorded unlifted theorem. No coefficient construction, tower, completion, or compatible-origin predicate is redefined."
  }
 }

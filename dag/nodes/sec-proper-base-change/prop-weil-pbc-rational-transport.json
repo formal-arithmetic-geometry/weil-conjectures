@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-rational-category",
   "def-weil-linear-functor",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-uniform-complete-triangulated"
  ],
  "proof": [
   {
@@ -188,5 +189,52 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-3d13e274c (reviewer sub-agent of L); spot-checked: Read the complete item and report; checked all five steps, six cited statements, source locations, edge cases, DAG reuse and cycles. Accepted the generic triangulated-localization tool. The conditional transport correction is valid; the exact master condensed-category and unit–square–counit exchange comparison remains a separate unsplit obligation. No target weakened. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcRationalTransport",
+  "declaration": "CategoryTheory.ScalarLocalization.transport_exact",
+  "declarations": [
+   "CategoryTheory.ScalarLocalization.HasExactTransport",
+   "CategoryTheory.ScalarLocalization.transport_exact",
+   "CategoryTheory.ScalarLocalization.transportHom",
+   "CategoryTheory.ScalarLocalization.transport_laws",
+   "CategoryTheory.ScalarLocalization.transport",
+   "CategoryTheory.ScalarLocalization.transportAdditive",
+   "CategoryTheory.ScalarLocalization.transportLinear",
+   "CategoryTheory.ScalarLocalization.transport_unique",
+   "CategoryTheory.ScalarLocalization.transportNat_naturality",
+   "CategoryTheory.ScalarLocalization.transportNat",
+   "CategoryTheory.ScalarLocalization.transportNat_unique",
+   "AlgebraicGeometry.Scheme.pbcIntegralTriangulated",
+   "AlgebraicGeometry.Scheme.pbcIntegralZero",
+   "AlgebraicGeometry.Scheme.pbcIntegralShift",
+   "AlgebraicGeometry.Scheme.pbcIntegralShiftAdditive",
+   "AlgebraicGeometry.Scheme.pbcIntegralPretriangulated",
+   "AlgebraicGeometry.Scheme.pbcIntegralIsTriangulated",
+   "AlgebraicGeometry.Scheme.pbcRationalTriangulationData",
+   "AlgebraicGeometry.Scheme.pbcRationalZero",
+   "AlgebraicGeometry.Scheme.pbcRationalShift",
+   "AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv",
+   "AlgebraicGeometry.Scheme.pbcRationalLinear",
+   "WeilConjectures.pbcRationalExtension",
+   "WeilConjectures.HasExactPbcRationalTransport",
+   "WeilConjectures.pbcRationalTransport",
+   "WeilConjectures.pbcRationalExchange"
+  ],
+  "file": "lean/Sheaf/Paper/PbcRationalTransport.lean",
+  "statement": "theorem transport_exact (R : Type r) [CommRing R] {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C] {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear R D] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [(shiftFunctor C (1 : ℤ)).Linear R] [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [IsTriangulated D] [(shiftFunctor D (1 : ℤ)).Linear R] (p : R) (F : C ⥤ D) [F.Additive] [F.Linear R] [F.CommShift ℤ] [F.IsTriangulated] : (transport R p F).Additive ∧ (transport R p F).Linear (Localization.Away p) ∧ (∀ (K L : C) (f : K ⟶ L) (a : Localization.Away p), (transport R p F).map (a ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := p) K ⟶ ⟨L⟩) = a ⊗ₜ[R] F.map f) ∧ HasExactTransport R p F ∧ (∀ (H : ScalarLocalization R C p ⥤ ScalarLocalization R D p) [H.Additive] [H.Linear (Localization.Away p)], (∀ K : C, H.obj ⟨K⟩ = ⟨F.obj K⟩) → (∀ (K L : C) (f : K ⟶ L), HEq (H.map ((1 : Localization.Away p) ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := p) K ⟶ ⟨L⟩)) ((1 : Localization.Away p) ⊗ₜ[R] F.map f)) → H = transport R p F) ∧ (∀ (G : C ⥤ D) [G.Additive] [G.Linear R] [G.CommShift ℤ] [G.IsTriangulated] (η : F ⟶ G), ∃! e : transport R p F ⟶ transport R p G, ∀ K : C, e.app ⟨K⟩ = (1 : Localization.Away p) ⊗ₜ[R] η.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The generic arbitrary-category transport theorem is primary: it constructs the tensor extension, localized exactness data, uniqueness, and natural-transformation extension. The same module retains the finite-field scheme specialization pbcRationalTransport and the four-operation exchange pbcRationalExchange. Uses the published PbcIntegralCategory and PbcRationalDerivedCategory unchanged; tensor extension and canonical ULift coefficient transport are explicit helpers. Repairs the recorded integral triangulation interface for the lifted coefficient realization under §1(B). Second reading fixes generic exactness to the characterized induced localization structures, prescribes the tensor shift comparison, and states the pure-tensor formula explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c0f13cc3d",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Statement, dependencies, source, declarations, edge cases, docstrings, report headings, and compiler evidence checked; no findings."
  }
 }
