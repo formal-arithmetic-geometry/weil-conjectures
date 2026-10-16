@@ -1,126 +1,344 @@
 {
-  "id": "lem-weil-verdier-preservation-strata",
-  "blueprint": {
-    "is": "lem-weil-verdier-preservation-strata",
-    "from": null,
-    "same_as": null
+ "id": "lem-weil-verdier-preservation-strata",
+ "blueprint": {
+  "is": "lem-weil-verdier-preservation-strata",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constructible preservation before biduality",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism], with structure morphism $a_X:X\\to\\operatorname{Spec}k$. Work in the ordinary derived category $D(X_{\\mathrm{et}},A)$ of constant-$A$ module sheaves on the small etale site [def-weil-pbc-derived-categories]. Write $D^b_{ctf}(X_{\\mathrm{et}},A)$ for its bounded constructible complexes [def-weil-pbc-constructible-complexes] having Tor amplitude in some finite interval [def-kun-tor-amplitude]. Let $a_X^{\\times}$ be the ambient right adjoint to ordinary etale compact-support direct image $Ra_{X!}$ [def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint], put $\\omega_X=a_X^{\\times}A$, and write $D_X=R\\mathcal Hom_A(-,\\omega_X)$ [def-pur-derived-internal-hom]. Then $D_X$ carries $D^b_{ctf}(X_{\\mathrm{et}},A)$ into itself. More precisely, for $d\\in\\mathbf N$, integers $a,b$, and $K\\in D^b_{ctf}(X_{\\mathrm{et}},A)$ with $\\dim X\\leq d$ [def-kun-topological-krull-dimension] and Tor amplitude in $[a,b]$, the complex $D_XK$ has Tor amplitude in $[-b-2d,-a]$. This bound is independent of $n$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.md",
+  "place": "node lem-weil-verdier-preservation-strata, order 2070"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "If $a>b$, testing the Tor condition with $M=A_X$ and using [lem-kun-tensor-unit] makes every cohomology sheaf of $K$ zero, so $K=0$ and $D_XK=0$; the assertion holds even for the empty interval. Assume henceforth $a\\leq b$. Choose, by [lem-sf-etale-smooth-stratified-ctf], a finite partition of the underlying space of $X$ by reduced, connected, smooth locally closed immersions $s_r:S_r\\hookrightarrow X$, with pure dimensions $e_r\\leq\\dim X\\leq d$. Put $P_r=s_r^{-1}K$. The cited statement supplies an etale covering of each $S_r$ on which $P_r$ is represented by a bounded complex $E_r^\\bullet$ of constant finite projective $A$-modules, zero outside $[a,b]$. It also supplies finite locally constant cohomology of $P_r$. The theorem applies because $k$ is algebraically closed, $A$ is finite, and $K$ is bounded constructible with the stated Tor interval. If $X$ is empty its partition has no strata.",
+   "uses": [
+    "lem-kun-tensor-unit",
+    "lem-sf-etale-smooth-stratified-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Proof, first paragraph"
+   }
   },
-  "kind": "statement",
-  "title": "Constructible preservation before biduality",
-  "statement": "Let $X$ be separated of finite type over $k$.\nIts ambient dualizing object is $\\omega_X=Ra_X^{\\times}A$.\nWrite $D_X=R\\mathcal Hom_A(-,\\omega_X)$.\nThen $D_X$ carries $D^b_{ctf}(X_{\\Et},A)$ into itself.\nMore precisely, if $\\dim X\\leq d$ and $K$ has Tor amplitude\nin $[a,b]$, then $D_XK$ has Tor amplitude in\n$[-b-2d,-a]$. This bound is independent of the exponent $n$.\nThis conclusion is independent of Verdier biduality and of the boundary\nexchange $i^*D_X\\to D_ZRi^!$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.md",
-    "place": "node lem-weil-verdier-preservation-strata, order 2070"
+  {
+   "text": "The same stratification theorem supplies objects $F_0=K,F_1,\\ldots,F_m=0$ and distinguished triangles $G_r\\to F_{r-1}\\to F_r\\to G_r[1]$, where $G_r=Rs_{r!}P_r$. Its statement also identifies $Rs_{r!}=j_!i_*$ for a closed-then-open factorization $s_r=ji$. We will prove the bound and bounded constructibility for $D_XG_r$, then recover $D_XF_{r-1}$ from $D_XF_r$ by the reverse induction written in step 5. No pro-etale recollement assertion is needed.",
+   "uses": [
+    "lem-sf-etale-smooth-stratified-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Proof, second paragraph"
+   }
   },
-  "stmt_deps": [
-    "def-weil-finite-torsion-constructibility"
-  ],
-  "proof": [
-    {
-      "text": "Choose a finite stratification of $X_{\\mathrm{red}}$ by smooth\nlocally closed subschemes $s:S\\hookrightarrow X$ on which the\ncohomology of $K$ is finite locally constant. Such a stratification\nexists by constructibility, Noetherian induction, and the fact that a\nreduced scheme over the perfect field $k$ has a dense smooth open in\neach irreducible component. Nilpotent thickenings leave the etale site\nunchanged. The finite-Tor restriction $P=s^*K$ is site-perfect:\nsuccessive local finite-free presentations give a bounded-above free\nresolution, and truncation below the Tor bound leaves a finitely\npresented flat last syzygy. This is the sheaf-local argument of\n[lem-weil-bounded-finite-tor-perfect], with the notion of\n[def-weil-site-perfect-complex]; it does not claim that each\ncohomology module separately has finite projective dimension.",
-      "uses": [
-        "lem-weil-bounded-finite-tor-perfect",
-        "def-weil-site-perfect-complex"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The open–closed triangles of\n[def-weil-open-closed-recollement] build $K$, by finitely many\ncones, from the objects $Rs_!P$. Ambient tensor adjunction gives\n\n$$\nD_XRs_!P\\cong\nRs_*R\\mathcal Hom_A(P,Rs^{\\times}\\omega_X)\n=Rs_*D_SP.\n$$",
-      "uses": [
-        "def-weil-open-closed-recollement"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "This is [lem-weil-stratum-ambient-hom] for the locally closed\nimmersion, using composition of right adjoints. It is an ambient\nidentity, so it assumes no constructible preservation by $D_X$.\nOn a stratum of dimension $r$, the ambient smooth theorem\n[thm-asd-smooth-tensor] makes $\\omega_S$ an invertible sheaf\nshifted by $[2r]$. Thus $D_SP=P^\\vee\\otimes\\omega_S$ is\na site-perfect complex of Tor amplitude\n$[-b-2r,-a-2r]$. The direct-image\ntheorem [thm-sf-direct-image-tor-amplitude], with the uniform\nvanishing bound of [lem-sf-etale-direct-image-vanishing], makes\n$Rs_*D_SP$ bounded constructible of Tor amplitude\n$[-b-2r,-a]$, contained in $[-b-2d,-a]$.\nThe localization triangles assemble these pieces by extensions;\ntensoring such a triangle with any module sheaf preserves the common\nvanishing interval. Exactness of internal Hom in its first variable\ntherefore gives the stated bound for $D_XK$. Taking $K=A_X$ also proves that\n$\\omega_X$ is bounded constructible of finite Tor amplitude.",
-      "uses": [
-        "lem-weil-stratum-ambient-hom",
-        "thm-asd-smooth-tensor",
-        "thm-sf-direct-image-tor-amplitude",
-        "lem-sf-etale-direct-image-vanishing"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-bounded-finite-tor-perfect",
-    "def-weil-site-perfect-complex",
-    "def-weil-open-closed-recollement",
+  {
+   "text": "The field spectrum is Noetherian (its only ideals are $0$ and $k$), so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. In a factorization $S_r\\xrightarrow{i}V\\xrightarrow{j}X$, the open $V$ and each of its intersections with affine opens of $X$ are Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Hence $j$ is quasi-compact and of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. The closed immersion $i$ is of finite type: on affine opens its ring map is a quotient, generated as an algebra by the empty set [def-weil-closed-immersion]. Thus $S_r$ and $s_r$ are finite type, and $S_r$ is Noetherian by the same finite-type theorem. An immersion is separated since it is a monomorphism, whose diagonal is an isomorphism. Consequently all structure morphisms and stratum immersions here are separated of finite type between Noetherian schemes; [thm-nagata-compactification] supplies compactifications. Use the unbounded ordinary-etale composition isomorphism of [lem-amb-unbounded-compact-support-comparisons], including the closed/open factorizations, to identify $Ra_{X!}Rs_{r!}\\cong Ra_{S_r!}$. The ambient adjoints exist by [thm-amb-etale-exceptional-adjoint]; $s_r^!$ is the closed/open right adjoint specified in [lem-weil-stratum-ambient-hom]. For every $Q\\in D(S_r{}_{\\mathrm{et}},A)$ and $B\\in D(\\operatorname{Spec}k_{\\mathrm{et}},A)$, the composite adjunction [def-weil-pbc-composite-adjunction] gives the natural bijections\n$$\\operatorname{Hom}(Q,s_r^!a_X^{\\times}B)\\cong\\operatorname{Hom}(Rs_{r!}Q,a_X^{\\times}B)\\cong\\operatorname{Hom}(Ra_{X!}Rs_{r!}Q,B)\\cong\\operatorname{Hom}(Ra_{S_r!}Q,B).$$\nThus $s_r^!a_X^{\\times}$ and $a_{S_r}^{\\times}$ are right adjoints of the same functor and identify by [det-sp-unique-right-adjoint]. In particular $s_r^!\\omega_X\\cong\\omega_{S_r}$. The ambient identity [lem-weil-stratum-ambient-hom], with $M=\\omega_X$, now gives\n$$D_XG_r\\cong Rs_{r*}R\\mathcal Hom_A(P_r,s_r^!\\omega_X)\\cong Rs_{r*}D_{S_r}P_r.$$\nEvery adjunction and internal Hom in this calculation is ambient.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-closed-immersion",
+    "thm-nagata-compactification",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
     "lem-weil-stratum-ambient-hom",
-    "thm-asd-smooth-tensor",
-    "thm-sf-direct-image-tor-amplitude",
-    "lem-sf-etale-direct-image-vanishing"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.md",
-    "place": "## Proof"
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Proof, second paragraph"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2070,
-  "blueprint_uses": [
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-open-closed-recollement",
-    "def-weil-site-perfect-complex",
+  {
+   "text": "Apply [thm-asd-smooth-tensor] to the smooth compactifiable structure morphism $a_{S_r}$ of pure relative dimension $e_r$. Its base is Noetherian and the exponent of $A$ is invertible there. It gives $\\omega_{S_r}=L_r[2e_r]$ with $L_r$ etale locally free of rank one. The restriction isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] lets us calculate $D_{S_r}P_r$ on a common covering trivializing $L_r$ and providing $E_r^\\bullet$ from step 1. By [def-pur-derived-internal-hom], this restriction is represented by\n$$Q_r^\\bullet=\\mathcal Hom_A^\\bullet(E_r^\\bullet,A[2e_r]).$$\nIndeed, $\\mathcal Hom_A(E_r^i,-)$ is a direct summand of a finite power of the identity, hence is exact; the finite filtration by the source degrees therefore shows that $\\mathcal Hom_A^\\bullet(E_r^\\bullet,-)$ preserves quasi-isomorphisms. Applying it to a K-injective resolution of $A[2e_r]$ justifies the displayed model. The Hom-complex degree formula gives $Q_r^j=\\mathcal Hom_A(E_r^{-j-2e_r},A)$, so it is zero unless $-b-2e_r\\leq j\\leq-a-2e_r$, and each term is finite projective. Its cohomology is finite locally constant by the kernel/cokernel clauses of [lemma-constructible-flc-serre]. The flat-complex bound [lem-kun-flat-bounded-tor-amplitude] gives this Tor interval on every covering member. Derived tensor commutes with restriction by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so the vanishing holds for every degree-zero module sheaf globally: its cohomology restricts to zero on a cover and is therefore zero. Thus $D_{S_r}P_r$ is bounded constructible with this interval.\nThe immersion $s_r$ is separated of finite type and its source has dimension $e_r$. Apply the all-module-sheaf vanishing assertion of [lem-sf-etale-direct-image-vanishing] with $N=2e_r$ and then [thm-sf-direct-image-tor-amplitude]. They give bounded constructibility of $Rs_{r*}D_{S_r}P_r$ and the Tor interval $[-b-2e_r,-a]$, which is contained in $I=[-b-2d,-a]$.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom",
+    "lemma-constructible-flc-serre",
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-sf-etale-direct-image-vanishing",
-    "lem-weil-bounded-finite-tor-perfect",
-    "lem-weil-stratum-ambient-hom",
-    "thm-asd-smooth-tensor",
     "thm-sf-direct-image-tor-amplitude"
-  ],
-  "uses_not_cited": [
-    "def-weil-finite-torsion-constructibility"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Proof, third paragraph"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be separated of finite type over $k$.\nIts ambient dualizing object is $\\omega_X=Ra_X^{\\times}A$.\nWrite $D_X=R\\mathcal Hom_A(-,\\omega_X)$.\nThen $D_X$ carries $D^b_{ctf}(X_{\\Et},A)$ into itself.\nMore precisely, if $\\dim X\\leq d$ and $K$ has Tor amplitude\nin $[a,b]$, then $D_XK$ has Tor amplitude in\n$[-b-2d,-a]$. This bound is independent of the exponent $n$.",
-    "proof": [
-      {
-        "text": "Choose a finite stratification of $X_{\\mathrm{red}}$ by smooth\nlocally closed subschemes $s:S\\hookrightarrow X$ on which the\ncohomology of $K$ is finite locally constant. Such a stratification\nexists by constructibility, Noetherian induction, and the fact that a\nreduced scheme over the perfect field $k$ has a dense smooth open in\neach irreducible component. Nilpotent thickenings leave the etale site\nunchanged. The finite-Tor restriction $P=s^*K$ is site-perfect:\nsuccessive local finite-free presentations give a bounded-above free\nresolution, and truncation below the Tor bound leaves a finitely\npresented flat last syzygy. This is the sheaf-local argument of\n[lem-weil-bounded-finite-tor-perfect], with the notion of\n[def-weil-site-perfect-complex]; it does not claim that each\ncohomology module separately has finite projective dimension.",
-        "uses": [
-          "lem-weil-bounded-finite-tor-perfect",
-          "def-weil-site-perfect-complex"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The open–closed triangles of\n[def-weil-open-closed-recollement] build $K$, by finitely many\ncones, from the objects $Rs_!P$. Ambient tensor adjunction gives\n\n$$\nD_XRs_!P\\cong\nRs_*R\\mathcal Hom_A(P,Rs^{\\times}\\omega_X)\n=Rs_*D_SP.\n$$",
-        "uses": [
-          "def-weil-open-closed-recollement"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "This is [lem-weil-stratum-ambient-hom] for the locally closed\nimmersion, using composition of right adjoints. It is an ambient\nidentity, so it assumes no constructible preservation by $D_X$.\nOn a stratum of dimension $r$, the ambient smooth theorem\n[thm-asd-smooth-tensor] makes $\\omega_S$ an invertible sheaf\nshifted by $[2r]$. Thus $D_SP=P^\\vee\\otimes\\omega_S$ is\na site-perfect complex of Tor amplitude\n$[-b-2r,-a-2r]$. The direct-image\ntheorem [thm-sf-direct-image-tor-amplitude], with the uniform\nvanishing bound of [lem-sf-etale-direct-image-vanishing], makes\n$Rs_*D_SP$ bounded constructible of Tor amplitude\n$[-b-2r,-a]$, contained in $[-b-2d,-a]$.\nThe localization triangles assemble these pieces by extensions;\ntensoring such a triangle with any module sheaf preserves the common\nvanishing interval. Exactness of internal Hom in its first variable\ntherefore gives the stated bound for $D_XK$. Taking $K=A_X$ also proves that\n$\\omega_X$ is bounded constructible of finite Tor amplitude.",
-        "uses": [
-          "lem-weil-stratum-ambient-hom",
-          "thm-asd-smooth-tensor",
-          "thm-sf-direct-image-tor-amplitude",
-          "lem-sf-etale-direct-image-vanishing"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "By [lem-sf-hom-triangulated], applying $D_X$ to the triangles of step 2 gives distinguished triangles\n$$D_XF_r\\longrightarrow D_XF_{r-1}\\longrightarrow D_XG_r\\longrightarrow D_XF_r[1].$$\nStart with $D_XF_m=D_X0=0$ and induct downwards on $r$. Suppose $D_XF_r$ is bounded constructible with Tor interval $I$; step 4 proves this for $D_XG_r$. For any degree-zero module sheaf $M$, [lem-kun-derived-tensor-triangulated] gives the tensor triangle, and the long exact sequence [lem-sf-derived-homology-long-exact] contains\n$$\\mathcal H^j(D_XF_r\\otimes_A^LM)\\longrightarrow\\mathcal H^j(D_XF_{r-1}\\otimes_A^LM)\\longrightarrow\\mathcal H^j(D_XG_r\\otimes_A^LM).$$\nBoth outer terms vanish for $j\\notin I$, so the middle term vanishes there. With $M=A_X$ this also bounds ordinary cohomology. For each $j$, the untensored long exact sequence writes $\\mathcal H^j(D_XF_{r-1})$ as an extension of a cokernel of a map between constructible sheaves by a kernel of a map between constructible sheaves. These are constructible by [thm-constructible-serre]. This proves the induction claim, hence the assertion for $F_0=K$. For qualitative preservation, choose any Tor interval $[a,b]$ for $K$ and set $d_0=\\max(\\{0\\}\\cup\\{e_r:1\\leq r\\leq m\\})$; the same argument uses only $e_r\\leq d_0$ and gives a finite interval without needing a previously chosen dimension bound. The quantitative common interval uses only $a,b,d$, not $n$. Finally $A_X$ has Tor interval $[0,0]$, and $R\\mathcal Hom_A(A_X,\\omega_X)\\cong\\omega_X$: in the K-injective model of [def-pur-derived-internal-hom], the termwise identification $\\mathcal Hom_A(A_X,J^i)=J^i$ commutes with the differentials. Thus $\\omega_X$ is bounded constructible with Tor interval $[-2d,0]$.",
+   "uses": [
+    "lem-sf-hom-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Proof, third paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-kun-tensor-unit",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-sf-etale-smooth-stratified-ctf",
+  "lem-sf-hom-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-constructible-flc-serre",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-asd-smooth-tensor",
+  "thm-constructible-serre",
+  "thm-nagata-compactification",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+  "place": "Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual preserves bounded constructible finite Tor etale complexes with amplitude bound",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.isGE_Q_obj_iff; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "verdierDual, torAmplitudeIn, constructibleFiniteTor",
+   "results": "0 hits; unknown identifier verdierDual",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom into a dualizing complex preserves constructible finite Tor amplitude with interval [-b-2d,-a]",
+   "results": "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.preservesHomologyOfExact; dualTensorHomEquiv; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.ShortComplex.hasHomology_of_preserves; CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes on an etale site: internal Hom into a dualizing object preserves finite tor dimension",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE; DerivedCategory.TStructure.t; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.IsLE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.instIsGEObjSingleFunctor. Hits concern generic t-structures and light condensed internal projectivity, not this theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|dualizing|tor.?amplitude",
+   "results": "25 hits: Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean. Grep hits are comments/references or generic categorical dualization; no etale Verdier-preservation declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2070,
+ "blueprint_uses": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-open-closed-recollement",
+  "def-weil-site-perfect-complex",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-stratum-ambient-hom",
+  "thm-asd-smooth-tensor",
+  "thm-sf-direct-image-tor-amplitude"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be separated of finite type over $k$.\nIts ambient dualizing object is $\\omega_X=Ra_X^{\\times}A$.\nWrite $D_X=R\\mathcal Hom_A(-,\\omega_X)$.\nThen $D_X$ carries $D^b_{ctf}(X_{\\Et},A)$ into itself.\nMore precisely, if $\\dim X\\leq d$ and $K$ has Tor amplitude\nin $[a,b]$, then $D_XK$ has Tor amplitude in\n$[-b-2d,-a]$. This bound is independent of the exponent $n$.",
+  "proof": [
+   {
+    "text": "Choose a finite stratification of $X_{\\mathrm{red}}$ by smooth\nlocally closed subschemes $s:S\\hookrightarrow X$ on which the\ncohomology of $K$ is finite locally constant. Such a stratification\nexists by constructibility, Noetherian induction, and the fact that a\nreduced scheme over the perfect field $k$ has a dense smooth open in\neach irreducible component. Nilpotent thickenings leave the etale site\nunchanged. The finite-Tor restriction $P=s^*K$ is site-perfect:\nsuccessive local finite-free presentations give a bounded-above free\nresolution, and truncation below the Tor bound leaves a finitely\npresented flat last syzygy. This is the sheaf-local argument of\n[lem-weil-bounded-finite-tor-perfect], with the notion of\n[def-weil-site-perfect-complex]; it does not claim that each\ncohomology module separately has finite projective dimension.",
+    "uses": [
+     "lem-weil-bounded-finite-tor-perfect",
+     "def-weil-site-perfect-complex"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The open–closed triangles of\n[def-weil-open-closed-recollement] build $K$, by finitely many\ncones, from the objects $Rs_!P$. Ambient tensor adjunction gives\n\n$$\nD_XRs_!P\\cong\nRs_*R\\mathcal Hom_A(P,Rs^{\\times}\\omega_X)\n=Rs_*D_SP.\n$$",
+    "uses": [
+     "def-weil-open-closed-recollement"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "This is [lem-weil-stratum-ambient-hom] for the locally closed\nimmersion, using composition of right adjoints. It is an ambient\nidentity, so it assumes no constructible preservation by $D_X$.\nOn a stratum of dimension $r$, the ambient smooth theorem\n[thm-asd-smooth-tensor] makes $\\omega_S$ an invertible sheaf\nshifted by $[2r]$. Thus $D_SP=P^\\vee\\otimes\\omega_S$ is\na site-perfect complex of Tor amplitude\n$[-b-2r,-a-2r]$. The direct-image\ntheorem [thm-sf-direct-image-tor-amplitude], with the uniform\nvanishing bound of [lem-sf-etale-direct-image-vanishing], makes\n$Rs_*D_SP$ bounded constructible of Tor amplitude\n$[-b-2r,-a]$, contained in $[-b-2d,-a]$.\nThe localization triangles assemble these pieces by extensions;\ntensoring such a triangle with any module sheaf preserves the common\nvanishing interval. Exactness of internal Hom in its first variable\ntherefore gives the stated bound for $D_XK$. Taking $K=A_X$ also proves that\n$\\omega_X$ is bounded constructible of finite Tor amplitude.",
+    "uses": [
+     "lem-weil-stratum-ambient-hom",
+     "thm-asd-smooth-tensor",
+     "thm-sf-direct-image-tor-amplitude",
+     "lem-sf-etale-direct-image-vanishing"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-verdier-preservation-strata",
+  "worker": "stage1",
+  "summary": "Five-step ambient ordinary-etale proof following main-20261015: cited finite smooth stratification and its localization triangles; compact-support composition plus uniqueness of ambient right adjoints; explicit local finite-projective Hom-complex calculation; uniform direct-image bound; reverse extension induction with constructible Serre closure. Zero new nodes.",
+  "blueprint": "Realizes the first proof paragraph in step 1; the stratification and cone reduction in step 2; and the ambient Hom, smooth-stratum, direct-image, and finite-cone assembly arguments in steps 3–5 of the current blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-smooth-stratified-ctf",
+    "why": "Existing geometric stratification and localization assembly used as a tool; the item does not reconstruct it."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Compactification existence verifies hypotheses of the ambient compact-support comparison and smooth theorem."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic ambient compact-support composition, needed before composing right adjoints."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic existence of ambient ordinary-etale right adjoints."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic categorical uniqueness identifies the two right adjoints."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "The prescribed smooth-purity theorem computes the stratum dualizing object."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic unbounded ringed-site Hom restriction, without a six-functor-datum assumption."
+   },
+   {
+    "node": "lemma-constructible-flc-serre",
+    "why": "Generic closure of finite locally constant sheaves under kernels and cokernels."
+   },
+   {
+    "node": "lem-kun-flat-bounded-tor-amplitude",
+    "why": "Generic bound for the explicit local bounded flat Hom complex."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison used only for restriction to covering objects."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Generic exactness of derived tensor on the dual localization triangles."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished triangle."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic constructible Serre closure completes the extension induction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian/finite-type facts verify the hypotheses of the ambient compact-support tools on each stratum."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherian/finite-type facts verify the hypotheses of the ambient compact-support tools on each stratum."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic Noetherian/finite-type facts verify the hypotheses of the ambient compact-support tools on each stratum."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Generic tensor unit identifies K tensor A with K in the empty-interval case."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-smooth-stratified-ctf",
+  "thm-nagata-compactification",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "thm-amb-etale-exceptional-adjoint",
+  "det-sp-unique-right-adjoint",
+  "thm-asd-smooth-tensor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lemma-constructible-flc-serre",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "thm-constructible-serre",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-kun-tensor-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-f35c76acc",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-f35c76acc (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and chapter/unit route. Verified ambient adjunction composition, coefficient categories, smooth-stratum Hom calculation, Tor bounds, and reverse extension induction. Checked edge cases, duplicates, cycles, and archived master target morphisms. No new nodes or repairs; accepted tool uses are documented in review.md."
+ }
 }
