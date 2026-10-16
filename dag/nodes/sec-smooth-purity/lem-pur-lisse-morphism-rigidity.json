@@ -328,5 +328,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-48b4651fb (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All seven proof steps and the new constant-Hom lemma check against the restored master blueprint and Stacks 093T, 099Y, and stalk/comparison sources. Finite coefficients and ordinary sheaf morphisms match the unit; no duplicate, circular dependency, restated split, or mathematical gap found. Seven declared tool uses accepted; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurLisseMorphismRigidity",
+  "declaration": "WeilConjectures.purLisseMorphismRigidity",
+  "declarations": [
+   "WeilConjectures.purityProEtaleStalkMap",
+   "WeilConjectures.PurityFiniteLisse",
+   "WeilConjectures.PurityVanishingAtComponent",
+   "WeilConjectures.purLisseMorphismRigidity"
+  ],
+  "statement": "theorem purLisseMorphismRigidity (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of P.field.k))] [IsSeparated (T ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (T ↘ Spec (CommRingCat.of P.field.k))] (L M : proEtaleRingModules T (proEtaleConstantRing T P.Ring)) (hL : PurityFiniteLisse P T L) (hM : PurityFiniteLisse P T M) : PurityFiniteLisse P T (SheafOfModules.homObj (R := proEtaleConstantRing T P.Ring) L M) ∧ ((∀ (f : L ⟶ M), (∀ (x : T), PurityVanishingAtComponent P T L M f x) → f = 0) ∧ (ConnectedSpace T → ∀ (f g : L ⟶ M) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T), purityProEtaleStalkMap P T y f = purityProEtaleStalkMap P T y g → f = g))",
+  "by": "Q29",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/PurLisseMorphismRigidity.lean",
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-998611376",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all nine statement dependencies, exact declarations, hypotheses, both conclusions, universes, edge cases, docstrings, and verbatim signature. Immutable module compiles successfully through scompile.py in sandbox and library modes. No substantive errors or repairs; branch head unchanged."
  }
 }

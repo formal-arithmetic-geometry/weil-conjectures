@@ -239,5 +239,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-b899cbabc (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All five steps are sound, including coefficient transport and the actual canonical unit. Accepted the declared localization and exactness tools. Checked edge cases, duplicate candidates, and the 474-node dependency closure; no cycle or repair needed. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingModule_closed_essImage_iff_and_unit_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClosedEssentialImage.lean",
+  "statement": "theorem proEtaleRingModule_closed_essImage_iff_and_unit_isIso {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (Ri : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (Rj : Sheaf (ProEt.topology U) CommRingCat.{u + 1}) (ci : (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R ≅ Ri) (cj : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ Rj) (F : proEtaleRingModules X R) : ((proEtaleRingModuleDirectImage i R Ri ci).essImage F ↔ IsZero ((proEtaleRingModulePullback j R Rj cj).obj F)) ∧ (IsZero ((proEtaleRingModulePullback j R Rj cj).obj F) → IsIso ((proEtaleRingModuleAdjunction i R Ri ci).unit.app F))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-bb84ab210",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Exact statement/declarations verified; dependencies and Stacks sources checked; byte-identical file compiled successfully via scompile.py; no findings."
  }
 }
