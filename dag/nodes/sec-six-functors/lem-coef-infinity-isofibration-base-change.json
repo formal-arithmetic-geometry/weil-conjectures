@@ -28,67 +28,158 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary quasicategory $\\mathcal R$ and map $h:\\mathcal R\\to\\mathcal S$, and choose a common sufficiently large universe containing $\\mathcal A,\\mathcal B,\\mathcal S,\\mathcal R$ and these maps. Work in the Joyal model structure supplied by [lem-coef-joyal-model-structure], writing $C,F,W$ for its cofibrations, fibrations and weak equivalences. The inner-horn and source-equivalence lifting conditions defining the given isofibrations $p,q$ agree literally with clause (1) of [lem-coef-joyal-quasicategory-characterizations]. Thus $p,q\\in F$. Clause (2) applied to the given coherent quasi-inverse of $v$ gives $v\\in W$. All three source and target simplicial sets are quasicategories, as those characterizations require.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.1 and Corollary 3.6.6, with Theorem 3.6.8 for the test definition of W."
+   }
+  },
+  {
+   "text": "We will use only the lifting characterizations in [lem-coef-joyal-model-structure] to manipulate $F$ and $F\\cap W$. Any class characterized by a fixed right lifting property is closed under pullback: compose a lifting square with the pullback projection, take its filler, and pair that filler with the prescribed map to the new base. It is also closed under composition: first lift against the second map, then lift the resulting square against the first map. Every identity has each such right lifting property (its filler is the bottom map). Applying this to the right classes of $(C\\cap W,F)$ and $(C,F\\cap W)$ proves the pullback and composition closures we need, and shows that identities belong to $W$. These are explicit lifting-square arguments, not an assumption of right properness.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof below the derived coefficient adjunction: elementary lifting-class closure and identity calculation."
+   }
+  },
+  {
+   "text": "Form the degreewise pullback $P=\\mathcal A\\times_{\\mathcal S}\\mathcal B$, with projections $\\pi_A,\\pi_B$, using [def-cbc-enhanced-diagrams-cones]. The equation $qv=p$ defines the graph $\\gamma:\\mathcal A\\to P$, $a\\mapsto(a,v(a))$, as a simplicial map. Apply the trivial-cofibration/fibration factorization of [lem-coef-joyal-model-structure] to this particular graph, obtaining $\\mathcal A\\xrightarrow{i}Z\\xrightarrow{k}P$ with $i\\in C\\cap W$, $k\\in F$ and $ki=\\gamma$. The factorization occurs in the chosen universe. Define $r=\\pi_Ak:Z\\to\\mathcal A$, $t=\\pi_Bk:Z\\to\\mathcal B$, and $s=pr=qt:Z\\to\\mathcal S$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent graph factorization over the joint endpoint base, supplying the ordinary-pullback foundation for proof paragraph 2."
+   }
+  },
+  {
+   "text": "The projection $\\pi_A$ is a pullback of $q$, and $\\pi_B$ is a pullback of $p$. They are fibrations by Step 2 and the conclusions of Step 1. Composing with $k$ shows $r,t\\in F$. The graph factorization gives the exact equations $ri=\\operatorname{id}_{\\mathcal A}$ and $ti=v$. Since $i$, the identity, and $v$ belong to $W$, two-out-of-three in [lem-coef-joyal-model-structure] gives $r,t\\in W$. Thus both $r$ and $t$ are trivial fibrations. Also $si=pri=p$, so $i$ is a map over $\\mathcal S$.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof: two pullback projections, graph identities and two-out-of-three."
+   }
+  },
+  {
+   "text": "Use the arbitrary $h:\\mathcal R\\to\\mathcal S$ fixed in Step 1. Put $A_h=\\mathcal R\\times_{\\mathcal S}\\mathcal A$, $B_h=\\mathcal R\\times_{\\mathcal S}\\mathcal B$, and $Z_h=\\mathcal R\\times_{\\mathcal S}Z$. Define $r_h(u,z)=(u,r(z))$, $t_h(u,z)=(u,t(z))$, $i_h(u,a)=(u,i(a))$ and $v_h(u,a)=(u,v(a))$ degree by degree. They commute with simplicial operators because all their coordinates do. The square for $r_h$ over $r$, with bottom map $A_h\\to\\mathcal A$, is a pullback: a simplex in its other pullback is a triple $((u,a),z)$ with $a=r(z)$ and $h(u)=p(a)$; deleting $a$ identifies it with $(u,z)\\in Z_h$, since $p(r(z))=s(z)$. For $t_h$, the pullback of $t$ along $B_h\\to\\mathcal B$ consists in each degree of triples $((u,b),z)$ satisfying $b=t(z)$ and $h(u)=q(b)$. Deleting $b$ gives $(u,z)\\in Z_h$ because $q(t(z))=s(z)$; the inverse sends $(u,z)$ to $((u,t(z)),z)$. Both identifications commute with simplicial operators, so this square is also an actual simplicial pullback. Step 2 and the lifting characterization of trivial fibrations in [lem-coef-joyal-model-structure] therefore show $r_h,t_h\\in F\\cap W$. No lifting condition on $h$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof: explicit iterated-pullback identification followed by trivial-fibration lifting."
+   }
+  },
+  {
+   "text": "The coordinate formulas of Step 5 and the equations of Step 4 give $r_hi_h=\\operatorname{id}_{A_h}$ and $t_hi_h=v_h$ as exact simplicial maps. Because $r_h\\in W$ and the identity lies in $W$, two-out-of-three in [lem-coef-joyal-model-structure] gives $i_h\\in W$. Since $t_h\\in W$, two-out-of-three again gives $v_h\\in W$. This proves a statement about the specified induced map itself, not just the existence of an equivalence between its source and target.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof: the two equations after base change and two applications of two-out-of-three."
+   }
+  },
+  {
+   "text": "Finally, $A_h$ and $B_h$ are quasicategories. Indeed the projections $A_h\\to\\mathcal R$ and $B_h\\to\\mathcal R$ are pullbacks of $p$ and $q$, respectively, and hence lie in $F$ by Step 2. By [lem-coef-joyal-model-structure] the map $\\mathcal R\\to\\Delta^0$ lies in $F$ because $\\mathcal R$ is a quasicategory. Composition closure makes both terminal maps $A_h\\to\\Delta^0$ and $B_h\\to\\Delta^0$ fibrations, so that node’s fibrant-object characterization makes both pullbacks quasicategories. Clause (2) of [lem-coef-joyal-quasicategory-characterizations] now converts $v_h\\in W$ from Step 6 into a functor equivalence in exactly the convention of the statement. The argument used neither $v\\in F$ nor $h\\in F$.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.1 and Corollary 3.6.6, after elementary closure of fibrations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent diagram foundation: an explicit graph-factorization argument for the ordinary-pullback invariance used by the join/cone comparison. The original external statement is Kerodon 03PM; the two identification inputs are Cisinski Theorem 3.6.1 and Corollary 3.6.6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An equivalence between two infinity categories is preserved by ordinary simplicial pullback over a common base if both projections are isofibrations",
-   "results": "{\"t\": \"2026-10-16T14:23:09Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence between two infinity categories is preserved by ordinary simplicial pullback over a common base if both projections are isofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"SSet.instFinitePullback\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv\"], \"digest\": \"497bf6ee42675de5\"}",
+   "query": "An equivalence between quasicategories over a common base is preserved by strict pullback when both projections are isofibrations",
+   "results": "{\"t\": \"2026-10-16T16:42:52Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence between quasicategories over a common base is preserved by strict pullback when both projections are isofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.QCat.bicategory\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"SSet.instFinitePullback\", \"SSet.StrictSegal.isStrictSegal\"], \"digest\": \"0447c014ffceeb56\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
+   "verdict": "no match: the semantic hits are generic model-category base-change instances, SSet.QCat bicategory structures, and finite pullbacks. Read Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246: these instances preserve fibrations or trivial fibrations, while v here is not assumed to be a fibration. Read Quasicategory/StrictBicategory.lean:14-76: it constructs bicategories, not this pullback theorem. The focused grep found no isofibration, Joyal model structure, or categoricalEquivalence declaration. The result is not a one-line specialization without the separate Joyal identification and graph-factorization argument."
   },
   {
    "tool": "loogle",
    "query": "\"Quasicategory\", \"pullback\"",
-   "results": "{\"t\": \"2026-10-16T14:23:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T16:42:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
+   "verdict": "no match: the semantic hits are generic model-category base-change instances, SSet.QCat bicategory structures, and finite pullbacks. Read Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246: these instances preserve fibrations or trivial fibrations, while v here is not assumed to be a fibration. Read Quasicategory/StrictBicategory.lean:14-76: it constructs bicategories, not this pullback theorem. The focused grep found no isofibration, Joyal model structure, or categoricalEquivalence declaration. The result is not a one-line specialization without the separate Joyal identification and graph-factorization argument."
   },
   {
    "tool": "grep",
-   "query": "isofibration|categoricalEquivalence|categorical.equivalence|pullback",
-   "results": "{\"t\": \"2026-10-16T14:23:10Z\", \"tool\": \"grep\", \"query\": \"isofibration|categoricalEquivalence|categorical.equivalence|pullback\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "isofibration|modelCategoryJoyal|categoricalEquivalence",
+   "results": "{\"t\": \"2026-10-16T16:42:53Z\", \"tool\": \"grep\", \"query\": \"isofibration|modelCategoryJoyal|categoricalEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
+   "verdict": "no match: the semantic hits are generic model-category base-change instances, SSet.QCat bicategory structures, and finite pullbacks. Read Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246: these instances preserve fibrations or trivial fibrations, while v here is not assumed to be a fibration. Read Quasicategory/StrictBicategory.lean:14-76: it constructs bicategories, not this pullback theorem. The focused grep found no isofibration, Joyal model structure, or categoricalEquivalence declaration. The result is not a one-line specialization without the separate Joyal identification and graph-factorization argument."
   },
   {
    "tool": "leansearch",
-   "query": "Base change preserves equivalences between quasicategorical isofibrations",
-   "results": "{\"t\": \"2026-10-16T14:23:11Z\", \"tool\": \"leansearch\", \"query\": \"Base change preserves equivalences between quasicategorical isofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.MorphismProperty.rlp_isStableUnderBaseChange\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.isomorphisms\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeFunctorFunctorCategoryOfHasPullbacks\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChangeAlong\"], \"digest\": \"f1bd775540df5793\"}",
+   "query": "Pullback preserves weak equivalences between fibrant objects in a slice model category",
+   "results": "{\"t\": \"2026-10-16T16:42:53Z\", \"tool\": \"leansearch\", \"query\": \"Pullback preserves weak equivalences between fibrant objects in a slice model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverWeakEquivalences\", \"CategoryTheory.IsPullback.of_iso'\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.PathObject.trans\", \"CategoryTheory.Subobject.pullback_obj_mk\"], \"digest\": \"0f7a58b948a62aa1\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
+   "verdict": "no match: the semantic hits are generic model-category base-change instances, SSet.QCat bicategory structures, and finite pullbacks. Read Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246: these instances preserve fibrations or trivial fibrations, while v here is not assumed to be a fibration. Read Quasicategory/StrictBicategory.lean:14-76: it constructs bicategories, not this pullback theorem. The focused grep found no isofibration, Joyal model structure, or categoricalEquivalence declaration. The result is not a one-line specialization without the separate Joyal identification and graph-factorization argument."
   },
   {
    "tool": "leanfinder",
-   "query": "Homotopy invariance of strict fiber products of quasicategories whose maps to the base lift equivalences and inner horns",
-   "results": "{\"t\": \"2026-10-16T14:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy invariance of strict fiber products of quasicategories whose maps to the base lift equivalences and inner horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.liftOfStrictSegal.hσ'₁\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.StrictSegal.quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"55d1f85ce56f8f39\"}",
+   "query": "Brown lemma base change functor preserves weak equivalences between two fibrations with the same codomain",
+   "results": "{\"t\": \"2026-10-16T16:42:59Z\", \"tool\": \"leanfinder\", \"query\": \"Brown lemma base change functor preserves weak equivalences between two fibrations with the same codomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"2097b061ba863428\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
-  },
-  {
-   "tool": "grep",
-   "query": "instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration|instIsStableUnderBaseChangeFibrations",
-   "results": "{\"t\": \"2026-10-16T14:25:26Z\", \"tool\": \"grep\", \"query\": \"instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration|instIsStableUnderBaseChangeFibrations\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
-  },
-  {
-   "tool": "grep",
-   "query": "weakEquivalence.*[Ff]st|WeakEquivalence.*[Ff]st|isStableUnderBaseChange",
-   "results": "{\"t\": \"2026-10-16T14:26:14Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*[Ff]st|WeakEquivalence.*[Ff]st|isStableUnderBaseChange\", \"sub\": \"AlgebraicTopology/ModelCategory/Instances.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"123\", \"165\", \"226\", \"231\", \"236\"], \"digest\": \"f304f4a118815398\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246. The generic instances require a map that is both a fibration and weak equivalence (a trivial fibration), whereas the comparison here is only an equivalence over two fibrations. A Joyal structure identifying these notions is not supplied in the pinned quasicategory library. Ordinary CategoricalPullback.functorEquiv and truncated StrictSegal lifting are not this theorem. The focused quasicategory pullback/isofibration grep has no hits. Autogenerated instance names returned by services are not literal strings in the source."
+   "verdict": "no match: the semantic hits are generic model-category base-change instances, SSet.QCat bicategory structures, and finite pullbacks. Read Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:113-170,220-246: these instances preserve fibrations or trivial fibrations, while v here is not assumed to be a fibration. Read Quasicategory/StrictBicategory.lean:14-76: it constructs bicategories, not this pullback theorem. The focused grep found no isofibration, Joyal model structure, or categoricalEquivalence declaration. The result is not a one-line specialization without the separate Joyal identification and graph-factorization argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-join-cone-calculus",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-isofibration-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and both statement dependencies unchanged. Supplied a seven-step graph-factorization proof using the existing Joyal model-structure node and one new statement-only characterization node. Wrote out right-lifting closure, trivial-fibration identities, the iterated pullback coordinates and the two-out-of-three argument; imposed no fibration condition on h or v. Checked Kerodon 03PM and Cisinski 3.3.15, 3.6.1, 3.6.5-3.6.8, existing statements, edge cases, DAG/blueprint duplicates and actual msearch results. The synced live-DAG mirror contains this newly landed item while the supplied shared checkout is older; its exact node was used as baseline. Independent second reading fixed the base-change universe at Step 1 and wrote both coordinate identifications in Step 5 explicitly; source and Mathlib checks confirmed the statements.",
+  "blueprint": "Proof paragraph 2 (the displayed derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint, historical ancestry through finite-Reedy localization and source-attachment join/cone calculus. The same calculation is in main-20261015 at sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md. Steps 1-7 justify ordinary base change of the joint-endpoint comparison; no unit step, coefficient category or target statement is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: Read the item, its new node lem-coef-joyal-quasicategory-characterizations, every cited statement and both sources in full. The item is exactly Kerodon 03PM (Cor 4.5.3.34, fetched online) with C0=A, D0=B, C=D=S, C1=D1=R, middle and right verticals identities, U=p, V=q. The left square is qv=p, h is arbitrary, both isofibration hypotheses are kept, and nothing is weakened. All 7 steps are correct. Step 1: p,q are Joyal fibrations by clause (1) and v is a weak equivalence by clause (2). Step 2: right-lifting classes are closed under pullback and composition, which is genuinely elementary. Steps 3-4: graph gamma=(id,v) factored as k i with i a trivial cofibration and k a fibration; pi_A pulls back q and pi_B pulls back p; r i=id and t i=v, so r,t are trivial fibrations. Step 5: A_h x_A Z = R x_S Z because p r=s, and likewise q t=s for B_h; i_h is well defined. Step 6: two-out-of-three twice gives v_h in W. Step 7: both pullbacks are fibrant, then clause (2) applies. proof_deps equals the union of uses. New node checked against Cisinski's PDF, fetched online and text-extracted under /tmp: Def 3.3.15 (source-prescribed lifting, same as the exponentiation node's isofibration), Thm 3.6.1 (clause 1), Rem 3.6.5 and Cor 3.6.6 (clause 2, matching def-cbc's functor-equivalence convention), and Thm 3.6.8 (i)<=>(iii), which is the hFun test of lem-coef-joyal-model-structure. The node is true, statement-only, and meets B1-B9. It is not a restatement of the item. A DAG-wide statement scan for isofibration, Joyal, categorical/functor equivalence and Brown-type lemmas found no duplicate or generalization; brown-split-factorizations and cellular-natural-equivalence are different statements. Small cases checked: empty R or S, h=id, v=id, nerves of ordinary categories, and a two-object-groupoid counterexample showing the isofibration hypothesis on p is needed. Route: all cited statements are in unit sk-prop-sf-biduality-general and def-cbc is a notion, so there are no tool_uses. No SGA is cited. No target, base-change morphism or coefficient category is involved. Kerodon and Cisinski are recorded as WANTED with proof_origin agent. No fixes were written."
+ }
 }
