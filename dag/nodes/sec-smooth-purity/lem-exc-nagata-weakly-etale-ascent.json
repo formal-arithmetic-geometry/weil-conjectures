@@ -26,60 +26,246 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-ind-etale-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the field-fibre calculation, for reuse below. Let $k\\to F$ be any weakly etale algebra over a field. By [lem-weil-pbc-weak-etale-field], $F$ is reduced, every finitely generated $k$-subalgebra is finite etale, and its residue fields are separable algebraic over $k$. Apply [lem-weil-pbc-finite-algebra-is-integral] to the finite subalgebra $k[x]$, for each $x\\in F$: every element of $F$ is integral over $k$. For any prime $P$ of $F$, the domain $F/P$ is therefore algebraic over $k$. For $0\\ne z\\in F/P$, choose a monic relation of least degree. Its constant term is nonzero, since otherwise cancellation of $z$ gives a lower-degree relation. Solving this relation for $z^{-1}$ shows that $F/P$ is a field. Thus every prime of $F$ is maximal, and no two distinct primes are comparable; every prime is also minimal. Now [lem-weil-pbc-minimal-prime-reduced-localization-field] says that $F_P$ is a field for each $P$. In particular these local rings are normal domains by [def-weil-pbc-normal-ring], because the fraction field of a field is that field itself. Thus $F$ is a normal ring, with every prime maximal, including when $F$ is the zero ring (there are then no primes).",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092Q (lemma-absolutely-flat-over-field), with algebra.tex Tags 00GK (lemma-finite-is-integral) and 00EU (lemma-minimal-prime-reduced-ring); elementary inverse-polynomial calculation is written out"
+   }
+  },
+  {
+   "text": "For any weakly etale map $U\\to V$ of Noetherian rings and any $U$-algebra $U'$, the ring-to-scheme equivalence in [def-weil-pbc-ind-etale-algebra] and the base-change clause of [lem-weil-pbc-weakly-etale-composition-base-change], identified on affine spectra by [lem-weil-pbc-affine-chart-base-change-iso], makes $U'\\to V\\otimes_U U'$ weakly etale. In particular its fibre at $p\\subset U$ is $F_p=V\\otimes_U\\kappa(p)=(U\\setminus p)^{-1}(V/pV)$. This ring is Noetherian: $V/pV$ is a cyclic finite $V$-algebra, so [lem-weil-pbc-finite-algebra-noetherian] applies, and then [lem-weil-pbc-localization-noetherian] applies. Step 1 shows that every $F_p$ is normal and has all primes maximal. Its residue fields are separable algebraic over $\\kappa(p)$. For $q\\subset V$ over $p$, the fibre prime is the extension of $q/pV$; its residue field is $\\operatorname{Frac}(V/q)=\\kappa(q)$: localizing $V/q$ first at $U\\setminus p$ and then at all its nonzero elements gives exactly the same fractions as localizing at all nonzero elements at once. Thus $\\kappa(q)/\\kappa(p)$ is algebraic, including when it is infinite.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094U (lemma-base-change-weakly-etale); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); algebra.tex Tag 00FN (lemma-Noetherian-permanence). Fibre fractions are displayed explicitly"
+   }
+  },
+  {
+   "text": "Fix a prime $q\\subset B$, put $p=f^{-1}(q)$, $k=\\kappa(p)=\\operatorname{Frac}(A/p)$ and $E=\\kappa(q)=\\operatorname{Frac}(B/q)$, and fix an arbitrary finite field extension $L/E$. Step 2 gives that $E/k$ is algebraic. There is a finite subextension $L_0/k$ inside $L$ with $L=EL_0$: choose a finite $E$-basis $x_1,\\ldots,x_r$ of $L$. Each $x_i$ satisfies a monic polynomial over $E$; the finitely many coefficients of these polynomials lie in a finite extension $k_1/k$ inside $E$, because adjoining finitely many algebraic elements is spanned successively by bounded powers. The ring $k_1[x_1,\\ldots,x_r]$ is finite dimensional over $k_1$ by the same bounded-power spanning argument and is a domain, hence a field: multiplication by a nonzero element is an injective endomorphism of a finite-dimensional vector space and is surjective. It is therefore a finite extension of $k$, and so is its subfield $L_0=k(x_1,\\ldots,x_r)$. Finally $EL_0=L$ since $EL_0$ contains the chosen $E$-basis. No finite degree for $E/k$ is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Elementary finite field model: choose equations for a finite E-basis, adjoin their algebraic coefficients over k, and use the bounded monomials to obtain a finite-dimensional domain, hence a field. This is the finite-normalization model argument, with no J-2 hypothesis."
+   }
+  },
+  {
+   "text": "Let $R\\subset L_0$ be the integral closure of $A/p$ in $L_0$. Since $A$ is Nagata, [def-weil-pbc-nagata-ring] gives that $A/p$ is Japanese; [def-weil-pbc-japanese-domain] gives that $R$ is finite over $A/p$, hence over $A$. The precise normalization lemma [lem-weil-pbc-integral-closure-finite-extension-normal] gives that $R$ is a normal domain with fraction field $L_0$. By [lem-weil-pbc-finite-algebra-noetherian], $R$ is Noetherian. By [lem-weil-pbc-localization-normal-domain], each prime localization of $R$ is a normal domain, so $R$ is a normal ring as required by the normality ascent lemma.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R (definition-nagata), 032F (definition-N), 034L (lemma-integral-closure-in-normal), 00FN (lemma-Noetherian-permanence), 00GY (lemma-localize-normal-domain); fraction-field clause from the cited existing normalization node"
+   }
+  },
+  {
+   "text": "Set $C=B\\otimes_A R$. Step 2 gives that $R\\to C$ is weakly etale. If $r_1,\\ldots,r_s$ generate $R$ as an $A$-module, the elements $1\\otimes r_j$ generate $C$ as a $B$-module, by expanding each pure tensor and then each sum of pure tensors. Thus $C$ is finite over the Noetherian ring $B$, and [lem-weil-pbc-finite-algebra-noetherian] makes $C$ Noetherian. Its fibre rings over $R$ are normal by step 2; the map $R\\to C$ is flat by [def-weil-pbc-ind-etale-algebra]. All five hypotheses of [lem-weil-pbc-flat-normal-fibres-noetherian-normal] are now present: $R,C$ Noetherian, flatness, normal fibres, and $R$ normal. Consequently $C$ is normal.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C22 (lemma-normal-goes-up-noetherian); the finite base-change spanning calculation is written out"
+   }
+  },
+  {
+   "text": "The maps $B\\to B/q\\subset E\\subset L$ and $R\\subset L_0\\subset L$ agree on $A$ and give $h:C\\to L$, $b\\otimes r\\mapsto\\bar b r$. Write $Q=\\ker h$ and $D=h(C)=C/Q\\subset L$. Then $Q\\cap R=0$ and $Q\\cap B=q$. The prime $Q$ is minimal: the generic fibre is weakly etale over $L_0$ by step 2; applying [lem-weil-pbc-weak-etale-field] and the algebraic-domain inverse calculation of step 1 shows that all its primes are maximal, so the following extension-contraction argument applies. If $Q_0\\subseteq Q$ is another prime of $C$, both avoid every nonzero element of $R$. Their extensions in $C\\otimes_R L_0$ are primes, since the quotients embed in localizations of the domains $C/Q_i$. These extensions contract back to $Q_i$: if $sc\\in Q_i$ with $0\\ne s\\in R$, primality gives $c\\in Q_i$. But the generic fibre $C\\otimes_R L_0$ has every prime maximal by step 2. The two extended primes, one contained in the other, must be equal, hence $Q_0=Q$. This proves minimality without claiming that $h$ is surjective onto $L$.",
+   "uses": [
+    "lem-weil-pbc-weak-etale-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent prime-ideal calculation from the zero-dimensional generic fibre established in step 2; compare Tag 092Q"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $C$ has finitely many minimal primes. It is reduced, since every prime localization of the normal ring $C$ is a domain and the maps to those localizations are jointly injective by [lem-weil-pbc-prime-localizations-jointly-injective]. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to obtain $C\\cong\\prod_{i=1}^t C_i$ with each $C_i$ a normal domain. A prime in a finite product chooses one factor: of the orthogonal idempotents $e_i$ summing to $1$, exactly one is outside a prime; all other factors vanish in the quotient. Since $Q$ is minimal, its prime in the selected domain factor is $(0)$. Thus $D=C/Q$ is that normal domain factor. It is finite over $B/q$, generated by the images of $1\\otimes r_j$. Its fraction field inside $L$ contains $E$ because it contains $B/q$, and contains $L_0$ because it contains $R$. It therefore equals $EL_0=L$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-localizations-jointly-injective",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FR (lemma-Noetherian-irreducible-components) and 030C (lemma-characterize-reduced-ring-normal), together with the source of lem-weil-pbc-prime-localizations-jointly-injective; product-prime and fraction-field identifications are written out"
+   }
+  },
+  {
+   "text": "The finite algebra $D$ is integral over $B/q$ by [lem-weil-pbc-finite-algebra-is-integral]. Conversely any $x\\in L$ integral over $B/q$ satisfies the same monic polynomial over the larger subring $D$, so lies in $D$, since $D$ is normal with fraction field $L$. Therefore $D$ is exactly the integral closure of $B/q$ in $L$, and it is finite over $B/q$. The prime $q$ and finite extension $L/E$ were arbitrary. By [def-weil-pbc-japanese-domain] every $B/q$ is Japanese. With the assumed Noetherianity of $B$, [def-weil-pbc-nagata-ring] gives that $B$ is Nagata. This part of the argument has not needed J-2. If $B$ is the zero ring there is no prime $q$, so the Japanese conditions are vacuous and its assumed Noetherianity still gives the conclusion.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-nagata-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 032F (definition-N), 032R (definition-nagata); equality with the integral closure is proved in the step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Nagata ascent argument reconstructed from Greco, Theorem 5.3(iii) and Remark 5.7(ii), with the finite-normalization construction expanded from Stacks Tags 032R, 032F, 034L, 00FN, 00GY, 00FR and 030C. The shared checkout has no local Stacks sources; the second reader checked the upstream Stacks .tex files directly (see report.md)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A weakly etale homomorphism between Noetherian rings preserves Nagata rings",
-   "results": "{\"t\": \"2026-10-16T02:36:29Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale homomorphism between Noetherian rings preserves Nagata rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"RingHom.Etale.toAlgebra\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.comp\", \"RingHom.etale_algebraMap\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\"], \"digest\": \"2a5325f9a4eaf51c\"}",
+   "query": "A weakly etale homomorphism from a Nagata ring to a Noetherian ring makes the target Nagata",
+   "results": "{\"t\": \"2026-10-16T05:00:35Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale homomorphism from a Nagata ring to a Noetherian ring makes the target Nagata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.toAlgebra\", \"Algebra.Etale.comp\", \"Algebra.Etale.finitePresentation\", \"RingHom.etale_algebraMap\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\"], \"digest\": \"dacafa408aa1333a\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic hits concern etale presentations, flatness and going-down; Loogle is empty and the only grep hit is the historical Nagata credit in NoetherNormalization.lean:14. None states Nagata or Japanese ascent."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Universally Japanese Noetherian rings ascend under absolutely flat algebra homomorphisms",
-   "results": "{\"t\": \"2026-10-16T02:36:29Z\", \"tool\": \"leanfinder\", \"query\": \"Universally Japanese Noetherian rings ascend under absolutely flat algebra homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.Smooth.flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"RingHom.FaithfullyFlat\", \"RingHom.Flat.isStableUnderBaseChange\"], \"digest\": \"a7246e42843d6888\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits concern etale presentations, flatness and going-down; Loogle is empty and the only grep hit is the historical Nagata credit in NoetherNormalization.lean:14. None states Nagata or Japanese ascent."
+   "verdict": "no match: etale presentations, flatness and formal smoothness do not assert Nagata ascent."
   },
   {
    "tool": "loogle",
-   "query": "\"Nagata\"",
-   "results": "{\"t\": \"2026-10-16T02:36:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nagata\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "Nagata Japanese universally Japanese weakly etale",
+   "results": "{\"t\": \"2026-10-16T05:00:36Z\", \"tool\": \"loogle\", \"query\": \"Nagata Japanese universally Japanese weakly etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Nagata`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic hits concern etale presentations, flatness and going-down; Loogle is empty and the only grep hit is the historical Nagata credit in NoetherNormalization.lean:14. None states Nagata or Japanese ascent."
+   "verdict": "no match: no Nagata declaration; loogle: Unknown identifier `Nagata`"
   },
   {
    "tool": "grep",
    "query": "Nagata|Japanese|universallyJapanese|IsNagata",
-   "results": "{\"t\": \"2026-10-16T02:36:29Z\", \"tool\": \"grep\", \"query\": \"Nagata|Japanese|universallyJapanese|IsNagata\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
+   "results": "{\"t\": \"2026-10-16T05:00:36Z\", \"tool\": \"grep\", \"query\": \"Nagata|Japanese|universallyJapanese|IsNagata\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}",
    "date": "2026-10-16",
-   "verdict": "no match: semantic hits concern etale presentations, flatness and going-down; Loogle is empty and the only grep hit is the historical Nagata credit in NoetherNormalization.lean:14. None states Nagata or Japanese ascent."
+   "verdict": "no match: the only hit is the historical credit for Noether normalization at Mathlib/RingTheory/NoetherNormalization.lean:14."
   },
   {
    "tool": "leansearch",
-   "query": "A weakly etale algebra over a Noetherian Nagata ring is Nagata if it is Noetherian",
-   "results": "{\"t\": \"2026-10-16T02:36:29Z\", \"tool\": \"leansearch\", \"query\": \"A weakly etale algebra over a Noetherian Nagata ring is Nagata if it is Noetherian\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "A weakly etale homomorphism from a Nagata ring to a Noetherian ring makes the target Nagata",
+   "results": "{\"t\": \"2026-10-16T05:00:36Z\", \"tool\": \"leansearch\", \"query\": \"A weakly etale homomorphism from a Nagata ring to a Noetherian ring makes the target Nagata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.FormallyEtale\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.Etale\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"299cd4db2f6e992c\"}",
    "date": "2026-10-16",
-   "verdict": "unavailable"
+   "verdict": "no match: etale presentations, flatness and formal smoothness do not assert Nagata ascent."
   },
   {
    "tool": "leanfinder",
-   "query": "Integral closure finiteness and universally Japanese rings preserved by algebras with flat multiplication map",
-   "results": "{\"t\": \"2026-10-16T02:49:47Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure finiteness and universally Japanese rings preserved by algebras with flat multiplication map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"59b1c5f17935b39a\"}",
+   "query": "Finite integral closure in all finite fraction field extensions is preserved by absolutely flat maps of Noetherian rings",
+   "results": "{\"t\": \"2026-10-16T05:06:09Z\", \"tool\": \"leanfinder\", \"query\": \"Finite integral closure in all finite fraction field extensions is preserved by absolutely flat maps of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.finite\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\", \"fg_of_fg_of_fg\", \"integralClosure.isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"TensorProduct.toIntegralClosure_injective_of_flat\"], \"digest\": \"4bd166648f764361\"}",
    "date": "2026-10-16",
-   "verdict": "no match: going-down, smooth flatness and an injective map of integral closures do not state Nagata ascent."
+   "verdict": "no match: read Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:144-178. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; it gives no Nagata ascent and does not cover arbitrary inseparable finite extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nagata\"",
+   "results": "{\"t\": \"2026-10-16T05:06:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nagata\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no Nagata declaration; "
+  },
+  {
+   "tool": "grep",
+   "query": "japanese|nagata|universally_japanese|WeaklyEtale",
+   "results": "{\"t\": \"2026-10-16T05:11:21Z\", \"tool\": \"grep\", \"query\": \"japanese|nagata|universally_japanese|WeaklyEtale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\"], \"digest\": \"f89e7b7c992e0489\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the only Nagata hit credits Noether normalization; WeaklyEtale hits define weak etaleness, not Nagata ascent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Japanese\"",
+   "results": "{\"t\": \"2026-10-16T05:11:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Japanese\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration name contains Japanese."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally Japanese Noetherian algebras are stable under flat maps with flat multiplication diagonal",
+   "results": "{\"t\": \"2026-10-16T05:11:22Z\", \"tool\": \"leanfinder\", \"query\": \"Universally Japanese Noetherian algebras are stable under flat maps with flat multiplication diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat\", \"Algebra.Smooth.flat\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\"], \"digest\": \"81aa7f29a45e0446\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned flatness, smoothness and going-down declarations do not state finiteness of integral closures or Nagata ascent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-weakly-etale-locally-nagata-catenary",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-nagata-weakly-etale-ascent",
+  "worker": "stage1",
+  "summary": "Expanded the Nagata-ascent argument into eight complete steps. The route constructs finite normalizations after passing to residue fields, uses weak-etale field fibres and flat normal-fibre ascent to identify the integral closure, and concludes the Nagata condition for every prime quotient of B. The existing J-2 argument was intentionally omitted because it is not part of this item; no new support nodes were needed.",
+  "blueprint": "Realizes the ancestor proof clause recorded under thm-exc-curve-open-dimension-general: the Greco Theorem 5.3(iii)/Remark 5.7(ii) ascent of Nagata rings along weakly etale Noetherian maps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-weak-etale-field",
+    "why": "Generic weakly-etale field-fibre structure supplies algebraic residue fields and zero-dimensional normal fibres; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine tensor-product description identifies scheme base change with the required ring map; it preserves the chosen Nagata ascent route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic normality ascent with all five hypotheses checked on the finite normalization model; no same-unit result supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic decomposition of a reduced normal ring with finitely many minimal primes isolates the component giving the integral closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-weak-etale-field",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-bb50d765e",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-bb50d765e (reviewer sub-agent of L); spot-checked: Reviewed the complete target and all eight proof steps against Greco (Remark 5.2, Theorem 5.3(iii), Remark 5.7(ii), pp. 147–148), every cited DAG statement/source, the unit/chapter route, and delivery errors A–F. Checked hypotheses, base change, coefficient categories, edge cases (zero rings, empty fibres, arbitrary algebraic residue extensions, inseparable finite extensions), duplicates, and Mathlib searches. No new nodes or repairs are needed. Wrote review.md."
+ }
 }
