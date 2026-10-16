@@ -383,5 +383,29 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-70bc85f98 (reviewer sub-agent of L); spot-checked: Read the full mathematics and all cited statements. Verified nine steps against Stacks 00RJ/00RK, polynomial-chart criteria, and localized flatness ascent/descent; checked edge cases, duplicates, cycles, and route. Accepted seven generic tool uses. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-df604cae9",
+  "group": "NK",
+  "result": "pass",
+  "note": "Checked source clauses, all statement dependencies, exact declarations, docstrings, universes, edge cases, report sections, and verbatim statement record. Per-file scompile.py reproduction passed in sandbox and library contexts without diagnostics. No delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayFieldExtension",
+  "declaration": "AlgebraicGeometry.stalk_depth_eq_ringKrullDim_iff_of_field_extension",
+  "declarations": [
+   "AlgebraicGeometry.stalk_depth_eq_ringKrullDim_iff_of_field_extension",
+   "AlgebraicGeometry.fibre_depth_eq_ringKrullDim_iff_geometric",
+   "AlgebraicGeometry.fibre_depth_eq_ringKrullDim_locus_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayFieldExtension.lean",
+  "statement": "theorem stalk_depth_eq_ringKrullDim_iff_of_field_extension {k K : Type u} [Field k] [Field K] [Algebra k K] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x' : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))) : Scheme.{u})) : ((IsLocalRing.depth (R := (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x') ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x') : WithBot ℕ∞) = ringKrullDim ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x')) ↔ (IsLocalRing.depth (R := X.presheaf.stalk ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) x')) (X.presheaf.stalk ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) x')) : WithBot ℕ∞) = ringKrullDim (X.presheaf.stalk ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) x'))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The three declarations state, respectively, the absolute field-extension equivalence, the existential and universal geometric-fibre tests, and equality of the relative locus with its inverse image under base change. All Cohen–Macaulay conditions use the recorded depth and ringKrullDim inline."
  }
 }
