@@ -2974,6 +2974,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapPrecomp
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
