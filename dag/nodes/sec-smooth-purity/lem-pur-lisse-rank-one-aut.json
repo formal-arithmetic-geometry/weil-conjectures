@@ -3,40 +3,254 @@
  "blueprint": {
   "is": "lem-pur-lisse-rank-one-aut",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Automorphisms of a rank-one finite locally constant sheaf",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T$ be a separated\nfinite-type $k$-scheme and let $L,M$ be finite locally constant\n$\\Lambda$-sheaves of rank one on $T$.\n\n1. The canonical map $\\Lambda_T\\to\\mathcal Hom(L,L)$,\n$1\\mapsto\\operatorname{id}_L$, is an isomorphism; hence every\nendomorphism of $L$ is multiplication by a unique locally\nconstant function $T\\to\\Lambda$, and\n$\\operatorname{Aut}(L)=\\Gamma(T,\\Lambda_T^\\times)$ is the group\nof locally constant units.\n1. Any two isomorphisms $\\varphi,\\psi:L\\to M$ differ by a unique\nautomorphism of $M$: there is a unique locally constant unit\n$u\\in\\Gamma(T,\\Lambda_T^\\times)$ with $\\psi=u\\cdot\\varphi$.\nIn particular, for every geometric point $\\bar t$ of $T$ and\nevery unit $v\\in\\Lambda^\\times$ there is an isomorphism\n$\\psi:L\\to M$ with $\\psi_{\\bar t}=v\\cdot\\varphi_{\\bar t}$,\nnamely $\\psi=v\\cdot\\varphi$ for the constant unit $v$.",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] finite setting $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ of [def-weil-l-adic-coefficient-extension]),\nlet $T$ be a separated [def-weil-proper-morphism]\nfinite-type [def-weil-finite-type-morphism] $k$-scheme and let $L,M$ be finite locally constant\n$\\Lambda$-sheaves of rank one on $T$ [def-weil-proetale-locally-constant-sheaf]. Here rank one means locally isomorphic to the coefficient module sheaf $\\Lambda_T$ on a covering of the small pro-etale site [def-weil-pbc-proetale-site]; restrictions are those of [def-pur-localized-ringed-site]. Hom is ordinary sheaf Hom [def-pur-sheaf-hom], and geometric stalks are those of [def-weil-proetale-geometric-stalk]. The integral and rational coefficient transports in the conventions are separate from this ordinary finite-sheaf assertion.\n\n1. The canonical map $\\Lambda_T\\to\\mathcal Hom(L,L)$,\n$1\\mapsto\\operatorname{id}_L$, is an isomorphism; hence every\nendomorphism of $L$ is multiplication by a unique locally\nconstant function $T\\to\\Lambda$, and\n$\\operatorname{Aut}(L)=\\Gamma(T,\\Lambda_T^\\times)$ is the group\nof locally constant units.\n1. Any two isomorphisms $\\varphi,\\psi:L\\to M$ differ by a unique\nautomorphism of $M$: there is a unique locally constant unit\n$u\\in\\Gamma(T,\\Lambda_T^\\times)$ with $\\psi=u\\cdot\\varphi$.\nIn particular, given an isomorphism $\\varphi:L\\to M$, for every geometric point $\\bar t$ of $T$ and\nevery unit $v\\in\\Lambda^\\times$ there is an isomorphism\n$\\psi:L\\to M$ with $\\psi_{\\bar t}=v\\cdot\\varphi_{\\bar t}$,\nnamely $\\psi=v\\cdot\\varphi$ for the constant unit $v$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
   "place": "node lem-pur-lisse-rank-one-aut, order 1959"
  },
  "stmt_deps": [
-  "def-pur-conventions"
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-proetale-geometric-stalk"
  ],
  "proof": [
   {
-   "text": "Step 1: (1). By [def-weil-scheme-morphism-properties] local\nconstancy means that $L$ becomes constant after pullback along a\ncovering family of the site; let $u:U\\to T$ be a member of such a\nfamily, so that $Lu^*L\\cong\\Lambda_U$. Pullback commutes with the\ninternal Hom of [def-weil-derived-pullback-tensor-hom], so it\ncarries the\ncanonical map $\\Lambda_T\\to\\mathcal Hom(L,L)$ to the canonical map\n$\\Lambda_U\\to\\mathcal Hom(\\Lambda_U,\\Lambda_U)=\\Lambda_U$, which is\nan isomorphism; a morphism of sheaves which becomes an isomorphism\nafter pullback along a covering family is itself an isomorphism, by the\nsheaf axiom. Hence $\\Lambda_T\\to\\mathcal Hom(L,L)$ is an\nisomorphism, and taking global sections writes\n$\\operatorname{End}(L)=\\Gamma(T,\\Lambda_T)$ as the ring of locally\nconstant $\\Lambda$-valued functions, whose unit group is\n$\\Gamma(T,\\Lambda_T^\\times)$.\nStep 2: (2). The composite $\\psi\\circ\\varphi^{-1}$ is an\nautomorphism of $M$, hence is multiplication by a unique locally\nconstant unit $u$ by (1) applied to $M$; then\n$\\psi=u\\cdot\\varphi$, and conversely $u\\cdot\\varphi$ is an\nisomorphism exactly for a unit $u$. For the final assertion take the\nconstant function with value $v\\in\\Lambda^\\times$, which is a unit.",
+   "text": "By clause (4) of [def-weil-l-adic-coefficient-extension], $\\Lambda=A_{E,n}$ is a finite commutative ring, so the finite-ring comparison used below applies. Put $R=\\Lambda_T$. The locally constant rank-one hypothesis, with the local-constancy meaning of [def-weil-proetale-locally-constant-sheaf], gives a covering $\\{U_i\\to T\\}$ and $R|_{U_i}$-linear isomorphisms $e_i:L|_{U_i}\\simeq R|_{U_i}$. Define $a:R\\to\\mathcal Hom_R(L,L)$ by $a_V(r)(s)=rs$ on every localization. It is a map of $R$-modules because $R$ is commutative, and it sends $1$ to the identity. This construction is independent of the chosen $e_i$.",
    "uses": [
-    "def-weil-scheme-morphism-properties",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 1: rank-one trivializing cover and canonical scalar map"
+   }
+  },
+  {
+   "text": "On $T_{\\mathrm{proet}}/U_i$, ordinary Hom commutes with restriction directly from [def-pur-sheaf-hom]: its value at $V/U_i$ is the Hom of the restrictions to $T_{\\mathrm{proet}}/V$, identified sectionwise by the relocalization rule of [def-pur-localized-ringed-site]. Conjugate by the restriction of $e_i$ to reduce $a_V$ to the scalar map $R(V)\\to\\operatorname{End}_{R|_V}(R|_V)$. For an $R|_V$-linear sheaf endomorphism $h$, put $b=h_V(1)\\in R(V)$. For every $W\\to V$ and $x\\in R(W)$, naturality and linearity give $h_W(x)=x h_W(1)=x\\,b|_W$. Thus $h$ is multiplication by $b$. Conversely multiplication by any $b$ is a linear sheaf map and its value on $1$ at $V$ is $b$. These two identities prove that evaluation at $1$ and scalar multiplication are inverse. For $V'\\to V$, the scalar of $h|_{V'}$ is $h_{V'}(1)=b|_{V'}$, so the inverses commute with every further restriction. This proves $a|_{U_i}$ is an isomorphism without a constant-module comparison or a finite-presentation theorem.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 1 local free rank-one computation, expanded by evaluation at 1; ordinary Hom restriction is Stacks sites-modules.tex Tag 0E8H (lemma-internal-hom-restriction), immediate from the definitions"
+   }
+  },
+  {
+   "text": "Here is the sheaf argument passing from the local inverses to a global inverse. For any object $V$ and $h\\in\\mathcal Hom_R(L,L)(V)$, pull back the cover to $V_i=V\\times_TU_i$. Each $h|_{V_i}$ has a unique preimage $r_i\\in R(V_i)$ under $a$. On $V_i\\times_VV_j$ the two $r_i$ restrict to the same element because their images are both the restriction of $h$ and $a$ is injective there by step 2. The equalizer sheaf axiom of [def-weil-pbc-sites-and-cohomology] glues them to a unique $r\\in R(V)$; separatedness gives $a(r)=h$. The same argument proves injectivity. Restricting this unique preimage to $W\\to V$ gives the unique preimage of $h|_W$, so the inverses are natural and $R$-linear. This proves $a$ is an isomorphism of sheaves.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 1: sheaf descent of the local isomorphisms, written sectionwise"
+   }
+  },
+  {
+   "text": "To justify the words locally constant function on the underlying scheme, write $C=\\underline\\Lambda$ on $T_{\\mathrm{et}}$ and $D=R$ on $T_{\\mathrm{proet}}$. In this step all Hom sets are in sheaves of modules over the fixed ring $\\Lambda$, using the underlying $\\Lambda$-module sheaves of $C$ and $D$. The comparison adjunction of [def-weil-pbc-site-comparison-morphism] gives, for every pro-etale $\\Lambda$-module sheaf $F$, natural bijections\n$$\\operatorname{Hom}(\\nu_T^*C,F)\\cong\\operatorname{Hom}(C,\\nu_{T,*}F)\\cong\\operatorname{Hom}_\\Lambda(\\Lambda,F(T))\\cong\\operatorname{Hom}(D,F).$$\nFor the middle and last bijections, [def-weil-pbc-sheafification] and the constant-module construction of [def-sf-site-constant-module-functor] say that a map from the constant sheaf is exactly a map from the constant presheaf. Such a natural map is determined by its component at the final object $T$, with all other components its restrictions, and $(\\nu_{T,*}F)(T)=F(T)$ by the comparison's displayed definition. Write $X=\\nu_T^*C$ and let $\\Theta_F:\\operatorname{Hom}(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}(D,F)$ be this natural bijection. Set $b=\\Theta_X(1_X):D\\to X$ and $c=\\Theta_D^{-1}(1_D):X\\to D$. Naturality under postcomposition by $c$ gives $c\\circ b=\\Theta_D(c)=1_D$. Naturality under postcomposition by $b$ gives $\\Theta_X(b\\circ c)=b\\circ\\Theta_D(c)=b=\\Theta_X(1_X)$; injectivity of $\\Theta_X$ gives $b\\circ c=1_X$. Thus $c$ is the required isomorphism $\\nu_T^*C\\simeq D$. To check the constant labels used below, let $\\eta:C\\to\\nu_{T,*}X$ be the adjunction unit. Under the displayed Hom bijections, $\\Theta_D(c)=1_D$ says precisely that the adjunct $\\nu_{T,*}c\\circ\\eta:C\\to\\nu_{T,*}D$ sends the section labelled $1$ at $T$ to the section labelled $1$ in $D(T)$. Its $\\Lambda$-linearity therefore sends every constant label $r\\in\\Lambda$ to $r$, and naturality gives the same assertion on every etale object $V\\to T$ by restriction from $T$. Thus the composite of the unit with $\\nu_{T,*}c$, which is exactly the comparison used in step 5, preserves constant labels and restrictions. This is the constant-coefficient identification needed below.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-sheafification",
+    "def-sf-site-constant-module-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 1: expanded constant-coefficient comparison by adjunction and sheafification, before the global-function interpretation"
+   }
+  },
+  {
+   "text": "The unit isomorphism $C\\to\\nu_{T,*}\\nu_T^*C$ from [prop-weil-pbc-site-comparison-finite-level], evaluated at $T$ and followed by the isomorphism of step 4, identifies $C(T)$ with $R(T)$. Its finite-ring hypothesis holds because $\\Lambda=A_{E,n}$ in [def-pur-conventions] is finite by clause (4) of [def-weil-l-adic-coefficient-extension], as noted in step 1. The natural model [lem-weil-pbc-constant-module-locally-constant], applied to the $\\Lambda$-module $\\Lambda$, identifies $C(T)$ with $\\operatorname{LC}(|T|,\\Lambda)$. It imposes no connectedness or nonemptiness hypothesis. More precisely, choose the constant-label model as follows. That lemma implies the presheaf of locally constant maps is a sheaf. The map from the constant presheaf sends $r$ to the constant function $r$. It is locally surjective by restriction to the open fibers of any locally constant function, an etale covering by [lem-weil-pbc-open-immersion-etale] and [def-weil-pbc-etale-site]. It is locally injective: equal constant functions have equal labels on a nonempty object, while the empty covering handles the empty object. By [lem-weil-pbc-site-sheafification-iso-locally-bijective] this map induces an isomorphism from the constant sheaf to the locally constant model. Thus the identifications preserve constant sections and restrictions. They also preserve addition and multiplication: after restricting a section of $C$ to the open fibers of its locally constant model, it is a constant section; products of two sections are checked on the intersections of these open fibers, where the assertion is the equality of their labels' product in $\\Lambda$. Explicitly, let $\\beta_V:C(V)\\to R(V)$ be the comparison on an etale object $V$. If $s,t\\in C(T)$ have respective labels $a,b$ on the intersection $W$ of two open fibers, then naturality and preservation of constant sections give $\\beta_T(st)|_W=\\beta_W(ab)=ab=\\beta_T(s)|_W\\,\\beta_T(t)|_W$. These intersections cover $T$, so the sheaf uniqueness axiom gives $\\beta_T(st)=\\beta_T(s)\\beta_T(t)$ globally; the constant label $1$ gives preservation of the identity. Thus $\\Gamma(T,R)$ is the ring of locally constant $\\Lambda$-valued functions, with its pointwise ring operations.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-pur-conventions",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-constant-module-locally-constant",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T (lemma-fully-faithful), applied to the finite constant coefficient sheaf; etale constant-module model of lem-weil-pbc-constant-module-locally-constant, made constant-label compatible using the cited sheafification criterion (local representatives: sites.tex Tag 00WK) and morphisms.tex Tag 02GP; blueprint Step 1 global sections"
+   }
+  },
+  {
+   "text": "By the global-sections rule of [def-pur-sheaf-hom], step 3 identifies $\\operatorname{End}(L)$ with $\\Gamma(T,R)$ by $r\\mapsto(s\\mapsto rs)$. This is a ring isomorphism, since $m_r\\circ m_s=m_{rs}$ and $m_1=1_L$. If $m_r$ is invertible, its inverse has a unique scalar $s$ by the same isomorphism, and the two inverse equations give $rs=sr=1$. Conversely these equations make $m_s$ its inverse. A section of the sheaf $R^\\times$ is precisely a section $r$ of $R$ equipped with an inverse: local inverses are unique, hence glue, so $\\Gamma(T,R^\\times)=\\Gamma(T,R)^\\times$. Under step 5 these are exactly locally constant functions with values in $\\Lambda^\\times$: pointwise inversion is locally constant on the same open fibers. This proves all of clause (1), including the uniqueness and the asserted automorphism group.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 1: endomorphism ring, its units, and locally constant unit functions"
+   }
+  },
+  {
+   "text": "For two given isomorphisms $\\varphi,\\psi:L\\to M$, set $b=\\psi\\circ\\varphi^{-1}$. It is an automorphism of $M$. Apply clause (1), already proved, to $M$ to obtain its unique scalar unit $u$, so $b=m_u$ and $\\psi=m_u\\circ\\varphi$. If $m_{u'}\\circ\\varphi=\\psi$, composition with $\\varphi^{-1}$ gives $m_{u'}=b$, hence $u'=u$. Finally, for a given isomorphism $\\varphi$ and $v\\in\\Lambda^\\times$, the constant section $v$ and its constant inverse define $m_v$ and $m_{v^{-1}}$, so $\\psi=m_v\\circ\\varphi$ is an isomorphism. In the geometric-stalk colimit of [def-weil-proetale-geometric-stalk], restrictions are linear and multiplication by the constant label $v$ sends the class of any section $s$ to the class of $vs$. Therefore $\\psi_{\\bar t}=v\\cdot\\varphi_{\\bar t}$. This asserts existence relative to the given $\\varphi$; it does not assert that arbitrary $L$ and $M$ are isomorphic.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
+    "place": "Proof Step 2: composite automorphism, uniqueness, and prescribed scalar at a geometric point"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-scheme-morphism-properties",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sheafification",
+  "def-sf-site-constant-module-functor",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "def-pur-conventions",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-proetale-geometric-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-rank-one-aut.md",
-  "place": "## Proof"
+  "place": "Proof Steps 1 and 2, expanded using localized ordinary Hom and its explicit evaluation-at-1 inverse, sheaf gluing, and ordinary etale/pro-etale constant-coefficient comparison (Stacks 0E8H and 099T); no derived Hom/pullback assertion used"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyConstantSheaf|internal Hom|rank one",
+   "results": "OK 0 hit(s); ; subdirectory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope: redundant Mathlib prefix; retried in CategoryTheory/Sites, so this empty result is not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "automorphisms of a rank one locally constant sheaf are locally constant units",
+   "results": "UNAVAILABLE 0 hit(s); ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "endomorphisms of a rank one finite locally constant sheaf are locally constant scalar multiplications",
+   "results": "OK 8 hit(s); LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed locally constant objects and free-module Hom equivalences do not state the canonical endomorphism-sheaf and automorphism result for locally free rank-one sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Hom, rank one",
+   "results": "OK 0 hit(s); ; loogle: unknown identifier 'Hom'",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier; superseded by the successful quoted SheafOfModules/hom query"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.?one|[Ee]ndomorphism|[Aa]utomorphism|homObj",
+   "results": "OK 0 hit(s); ; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: sheafHom and monoidal closed structures or locally free/free-module infrastructure are ingredients, not the full scheme-sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally free rank one sheaf of modules over a ring sheaf, the scalar multiplication map from the ring sheaf to its endomorphism sheaf is an isomorphism",
+   "results": "OK 8 hit(s); SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, PresheafOfModules.Sheafify.one_smul, CommRing.Pic.instFreeAsModuleOfNat, SheafOfModules.ιFree_mapFree_inv, CommRing.Pic.mk_eq_one_iff_free, CommRing.Pic.mapAlgebra_self_apply, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.freeHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed locally constant objects and free-module Hom equivalences do not state the canonical endomorphism-sheaf and automorphism result for locally free rank-one sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"hom\"",
+   "results": "OK 12 hit(s); PresheafOfModules.Hom, PresheafOfModules.instAddCommGroupHom, PresheafOfModules.instAddHom, PresheafOfModules.instNegHom, PresheafOfModules.instSubHom, PresheafOfModules.instZeroHom, PresheafOfModules.unitHomEquiv, PresheafOfModules.Hom.app",
+   "date": "2026-10-16",
+   "verdict": "no match: these declarations describe ordinary presheaf morphisms and their algebraic structure, not the locally free rank-one sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|freeHomEquiv|LocallyFree",
+   "results": "OK 25 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: sheafHom and monoidal closed structures or locally free/free-module infrastructure are ingredients, not the full scheme-sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyConstantSheaf|internal Hom|rank one",
+   "results": "OK 3 hit(s); Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: sheafHom and monoidal closed structures or locally free/free-module infrastructure are ingredients, not the full scheme-sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The endomorphism sheaf of an invertible sheaf of modules is canonically isomorphic to the structure sheaf",
+   "results": "OK 8 hit(s); SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, SheafOfModules.unit_val, CommRing.Pic.mapAlgebra_self_apply, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, CommRing.Pic.mapAlgebra_self, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply; ",
+   "date": "2026-10-16",
+   "verdict": "Second reading: ingredients only; no declaration states all clauses for locally rank-one scheme sheaves or is a one-line specialization of the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Iso\"",
+   "results": "OK 12 hit(s); PresheafOfModules.isoMk, PresheafOfModules.isoMk_hom_app, PresheafOfModules.isoMk_inv_app, PresheafOfModulesOfCommRing.isoMk, SheafOfModules.instReflectsIsomorphismsPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCatOfIso, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; ",
+   "date": "2026-10-16",
+   "verdict": "Second reading: ingredients only; no declaration states all clauses for locally rank-one scheme sheaves or is a one-line specialization of the whole item."
+  },
+  {
+   "tool": "grep",
+   "query": "endomorphism|invertible|unitHomEquiv",
+   "results": "OK 5 hit(s); 178, 180, 183, 184, 186; ; scope Algebra/Category/ModuleCat/Sheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "Second reading: rg on a single file returned real hits but msearch parsed line numbers as filenames; source read directly at Sheaf.lean:178-184 and query rerun on the parent directory. Not used as evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|IsInvertible|endomorphism sheaf",
+   "results": "OK 16 hit(s); Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; ; scope Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "Second reading: ingredients only; no declaration states all clauses for locally rank-one scheme sheaves or is a one-line specialization of the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle over a ringed site, scalar multiplication identifies its sheaf of endomorphisms with the coefficient ring sheaf",
+   "results": "OK 8 hit(s); SheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.Sheafify.one_smul, SheafOfModules.unit_val, SheafOfModules.unitHomEquiv, ModuleCat.Tilde.smul_section_apply, SheafOfModules.unit, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, AlgebraicGeometry.Scheme.Modules.map_smul",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: local free-module Hom and evaluation-at-1 ingredients only; inspected SheafOfModules.unitHomEquiv and its formula at Algebra/Category/ModuleCat/Sheaf.lean:178–184. No hit states the whole locally rank-one scheme-sheaf assertion or makes it a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsInvertible|rankOne|rank_one|unitHomEquiv",
+   "results": "OK 16 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; scope Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: local free-module Hom and evaluation-at-1 ingredients only; inspected SheafOfModules.unitHomEquiv and its formula at Algebra/Category/ModuleCat/Sheaf.lean:178–184. No hit states the whole locally rank-one scheme-sheaf assertion or makes it a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"unitHomEquiv\"",
+   "results": "OK 8 hit(s); PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "Fresh second reading: local free-module Hom and evaluation-at-1 ingredients only; inspected SheafOfModules.unitHomEquiv and its formula at Algebra/Category/ModuleCat/Sheaf.lean:178–184. No hit states the whole locally rank-one scheme-sheaf assertion or makes it a one-line specialization."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +274,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-inv"
+ "unit": "sk-prop-a1-inv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-lisse-rank-one-aut",
+  "worker": "stage1",
+  "summary": "Revalidated the returned delivery aeb5a154ee against the current shared DAG: all 20 previously quoted full statements are unchanged and no cited node is merged. Replaced the local finite-presentation constant-module Hom comparison by the explicit inverse h -> h_V(1) on every slice, with the formula h_W(x)=x h_V(1)|_W and restriction compatibility. Removed the two unnecessary constant-module comparison dependencies. Retained finite coefficient scope, both original conclusions, the explicit sheaf-gluing argument, constant-coefficient global-function comparison and given-isomorphism quantifier. No new nodes or attachments. Fresh independent second reading checked every step and citation against the current DAG and sources, specified fixed-ring module Hom in step 4, and computed the adjunct on the constant generator to justify the label compatibility used in step 5; no new nodes.",
+  "blueprint": "Blueprint Proof Step 1 is realized by steps 1–6 (canonical scalar map, explicit local evaluation-at-1 inverse, gluing, comparison of constant sheaves, locally constant global functions, and units). Blueprint Proof Step 2 is realized by step 7. The sk-prop-a1-inv unit and its geometric route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Its unit-isomorphism clause computes global sections of the constant pro-etale coefficient sheaf from its etale counterpart; the affine-line unit has no such comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-locally-constant",
+    "why": "Its natural etale constant-module model identifies coefficient sections with functions on the underlying scheme; it is a generic sheaf tool, without replacing the affine-line uniqueness route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-constant-module-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-7477a435b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-7477a435b (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all cited statements, source passages, and unit/chapter route. All seven steps check out; finite coefficients and the comparison unit match their sources. Both declared tool uses are accepted. No new nodes, duplicate, or cycle through this item. Inherited source-metadata issues are documented in review.md; no delivery repairs needed."
+ }
 }
