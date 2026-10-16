@@ -1,336 +1,182 @@
 {
- "id": "def-sfb-upper-star-from-point",
- "blueprint": {
-  "is": "def-sfb-upper-star-from-point",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "The inverse image $p_X^*$ from the point",
- "statement": "For a scheme $X$ with structure morphism $\\pi_X\\colon X\\to\\Spec\\Z$, define\n$$\np_X^*:=\\pi_X^*\\circ p^*\\colon\\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh(X_{\\mathrm{proét}},\\Ab),\n$$\nwhere $p^*$ is the inverse-image functor of [def-sfb-point-upper-star] and\n$\\pi_X^*$ is the pullback of [def-sfb-finite-upper-star] for $\\mathcal A=\\Ab$.\nFor the sheafified objectwise tensor products over $\\mathbf Z$ of\n[sk-def-sfb-sheaf-tensor], $p_X^*$ is strong monoidal and braided.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-upper-star-from-point.md",
-  "place": "node def-sfb-upper-star-from-point, order 1547"
- },
- "stmt_deps": [
-  "def-sfb-point-upper-star",
-  "def-sfb-finite-upper-star",
-  "sk-def-sfb-sheaf-tensor"
- ],
- "proof": [
-  {
-   "text": "Put $P=p^*$, $Q=\\pi_X^*$ and $R=Q\\circ P$. By [lem-sfb-point-upper-star-braided], $P$ is strong monoidal and braided. By [lem-sfb-finite-upper-star-braided], $Q$ is strong symmetric monoidal, hence strong monoidal and braided. These statements apply with the coefficient category $\\Ab$ and the arbitrary scheme morphism $\\pi_X$; no finiteness assumption on $X$ or $\\pi_X$ is required.\nWrite $\\epsilon^P,\\mu^P$ and $\\epsilon^Q,\\mu^Q$ for their unit and tensor comparison isomorphisms in the direction $\\mathbf 1\\to P\\mathbf 1$ and $PA\\otimes PB\\to P(A\\otimes B)$. Give $R$ the comparisons\n$$\n\\epsilon^R=Q(\\epsilon^P)\\circ\\epsilon^Q,\\qquad\n\\mu^R_{A,B}=Q(\\mu^P_{A,B})\\circ\\mu^Q_{PA,PB}.\n$$\nThey are invertible, since functors preserve inverses and composites of invertible maps are invertible. Expanding either side of each associativity or unit coherence identity for these maps, naturality of $\\mu^Q$ moves the maps $Q(\\mu^P)$ or $Q(\\epsilon^P)$ together; the remaining equalities are $Q$ applied to the corresponding identity for $P$, followed by the corresponding identity for $Q$. Thus these maps give the composite strong monoidal structure. For the braiding $\\beta$, its compatibility is explicitly\n$$\n\\begin{aligned}\n\\mu^R_{B,A}\\circ\\beta_{RA,RB}\n&=Q(\\mu^P_{B,A})\\circ\\mu^Q_{PB,PA}\\circ\\beta_{QPA,QPB}\\\\\n&=Q(\\mu^P_{B,A}\\circ\\beta_{PA,PB})\\circ\\mu^Q_{PA,PB}\\\\\n&=Q(P(\\beta_{A,B})\\circ\\mu^P_{A,B})\\circ\\mu^Q_{PA,PB}\\\\\n&=R(\\beta_{A,B})\\circ\\mu^R_{A,B}.\n\\end{aligned}\n$$\nThe second equality is the braided identity for $Q$, the third is that for $P$, and the last is functoriality. Hence the defined $p_X^*=R$ is strong monoidal and braided.",
-   "uses": [
+  "id": "def-sfb-upper-star-from-point",
+  "blueprint": {
+    "is": "def-sfb-upper-star-from-point",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "definition",
+  "title": "The inverse image $p_X^*$ from the point",
+  "statement": "For a scheme $X$ with structure morphism $\\pi_X\\colon X\\to\\Spec\\Z$, define\n$$\np_X^*:=\\pi_X^*\\circ p^*\\colon\\Sh(*_{\\mathrm{proét}},\\Ab)\\longrightarrow\\Sh(X_{\\mathrm{proét}},\\Ab),\n$$\nwhere $p^*$ is the inverse-image functor of [def-sfb-point-upper-star] and\n$\\pi_X^*$ is the pullback of [def-sfb-finite-upper-star] for $\\mathcal A=\\Ab$.\nFor the sheafified objectwise tensor products over $\\mathbf Z$ of\n[sk-def-sfb-sheaf-tensor], $p_X^*$ is strong monoidal and braided.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-upper-star-from-point.md",
+    "place": "node def-sfb-upper-star-from-point, order 1547"
+  },
+  "stmt_deps": [
+    "def-sfb-point-upper-star",
+    "def-sfb-finite-upper-star",
+    "sk-def-sfb-sheaf-tensor"
+  ],
+  "proof": [
+    {
+      "text": "Put $P=p^*$, $Q=\\pi_X^*$ and $R=Q\\circ P$. By [lem-sfb-point-upper-star-braided], $P$ is strong monoidal and braided. By [lem-sfb-finite-upper-star-braided], $Q$ is strong symmetric monoidal, hence strong monoidal and braided. These statements apply with the coefficient category $\\Ab$ and the arbitrary scheme morphism $\\pi_X$; no finiteness assumption on $X$ or $\\pi_X$ is required.\nWrite $\\epsilon^P,\\mu^P$ and $\\epsilon^Q,\\mu^Q$ for their unit and tensor comparison isomorphisms in the direction $\\mathbf 1\\to P\\mathbf 1$ and $PA\\otimes PB\\to P(A\\otimes B)$. Give $R$ the comparisons\n$$\n\\epsilon^R=Q(\\epsilon^P)\\circ\\epsilon^Q,\\qquad\n\\mu^R_{A,B}=Q(\\mu^P_{A,B})\\circ\\mu^Q_{PA,PB}.\n$$\nThey are invertible, since functors preserve inverses and composites of invertible maps are invertible. Expanding either side of each associativity or unit coherence identity for these maps, naturality of $\\mu^Q$ moves the maps $Q(\\mu^P)$ or $Q(\\epsilon^P)$ together; the remaining equalities are $Q$ applied to the corresponding identity for $P$, followed by the corresponding identity for $Q$. Thus these maps give the composite strong monoidal structure. For the braiding $\\beta$, its compatibility is explicitly\n$$\n\\begin{aligned}\n\\mu^R_{B,A}\\circ\\beta_{RA,RB}\n&=Q(\\mu^P_{B,A})\\circ\\mu^Q_{PB,PA}\\circ\\beta_{QPA,QPB}\\\\\n&=Q(\\mu^P_{B,A}\\circ\\beta_{PA,PB})\\circ\\mu^Q_{PA,PB}\\\\\n&=Q(P(\\beta_{A,B})\\circ\\mu^P_{A,B})\\circ\\mu^Q_{PA,PB}\\\\\n&=R(\\beta_{A,B})\\circ\\mu^R_{A,B}.\n\\end{aligned}\n$$\nThe second equality is the braided identity for $Q$, the third is that for $P$, and the last is functoriality. Hence the defined $p_X^*=R$ is strong monoidal and braided.",
+      "uses": [
+        "lem-sfb-point-upper-star-braided",
+        "lem-sfb-finite-upper-star-braided"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-upper-star-from-point.proof.md",
+        "place": "single proof paragraph; expanded composite comparison maps and braiding calculation"
+      }
+    }
+  ],
+  "proof_deps": [
     "lem-sfb-point-upper-star-braided",
     "lem-sfb-finite-upper-star-braided"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-upper-star-from-point.proof.md",
-    "place": "single proof paragraph; expanded composite comparison maps and braiding calculation"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sfb-point-upper-star-braided",
-  "lem-sfb-finite-upper-star-braided"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/def-sfb-upper-star-from-point.proof.md",
-  "place": "single proof paragraph, with the elementary composition argument expanded"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "For any scheme X the inverse image from condensed abelian groups is the composite of point pullback and pullback along X to Spec Z and is strong monoidal and braided",
-   "results": "8 hit(s): LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.pullback, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
+    "place": "single proof paragraph, with the elementary composition argument expanded"
   },
-  {
-   "tool": "grep",
-   "query": "upperStarFromPoint|pointUpperStar|ProEtale|pro.etale",
-   "results": "10 hit(s): Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "leansearch",
-   "query": "The composite inverse image from condensed abelian groups to pro etale abelian sheaves on any scheme is strong monoidal and braided",
-   "results": "8 hit(s): CategoryTheory.Monoidal.transportedFunctorCompInverseBraided, CategoryTheory.Functor.mapCommGrp_obj_grp_inv, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Equivalence.mapCommMon_inverse, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Monoidal.transportedFunctorCompInverseLaxBraided; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.LaxBraided",
-   "results": "0 hit(s): none; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "grep",
-   "query": "compMonoidal|compLaxBraided|compBraided",
-   "results": "0 hit(s): none; search subdirectory: CategoryTheory/Monoidal",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"comp\", CategoryTheory.Functor.Monoidal",
-   "results": "12 hit(s): CategoryTheory.Functor.Monoidal.instComp, CategoryTheory.Equivalence.monoidalOfPostcompFunctor, CategoryTheory.Equivalence.monoidalOfPostcompInverse, CategoryTheory.Equivalence.monoidalOfPrecompFunctor, CategoryTheory.Equivalence.monoidalOfPrecompInverse, CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Equivalence.map_η_comp_η; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Composition of two braided strong monoidal functors is braided and strong monoidal, applied to inverse image functors on sheaves of abelian groups",
-   "results": "8 hit(s): CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Functor.Braided.instComp, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Functor.LaxBraided.instComp, CategoryTheory.Functor.mapCommGrp, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.sheafToPresheafMonoidal; search subdirectory: all Mathlib",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
-  },
-  {
-   "tool": "grep",
-   "query": "instance instComp",
-   "results": "0 hit(s): none; search subdirectory: CategoryTheory/Monoidal",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "grep",
-   "query": "instance.*(F ⋙ G)|instance.*Monoidal|instance.*Braided",
-   "results": "25 hit(s): Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean; search subdirectory: CategoryTheory/Monoidal",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image"
-  },
-  {
-   "tool": "grep",
-   "query": "\\[F.Monoidal\\].*\\[G.Monoidal\\]",
-   "results": "4 hit(s): 567, 807, 903, 1140; search subdirectory: CategoryTheory/Monoidal/Functor.lean",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
-  },
-  {
-   "tool": "grep",
-   "query": "\\[F.(LaxBraided|Braided)\\].*\\[G.(LaxBraided|Braided)\\]",
-   "results": "2 hit(s): 397, 564; search subdirectory: CategoryTheory/Monoidal/Braided/Basic.lean",
-   "date": "2026-10-16",
-   "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "lean_not_found"
- ],
- "blueprint_kind": "definition",
- "blueprint_order": 1547,
- "blueprint_uses": [
-  "lem-sfb-point-upper-star-braided",
-  "sk-def-sfb-finite-pushforward-pullback"
- ],
- "blueprint_lean": [
-  "AlgebraicGeometry.ProEtale.upperStarFromPoint"
- ],
- "blueprint_lean_not_found": [
-  "AlgebraicGeometry.ProEtale.upperStarFromPoint"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "def-sfb-upper-star-from-point",
-  "worker": "stage1",
-  "summary": "Rechecked the earlier sandbox split against the current blueprint and read-only source. Made both component inverse images and the tensor convention explicit statement dependencies; reused the two existing braided-monoidal statements and expanded the elementary composite comparison maps and braiding identity. Ran and recorded all Mathlib searches; no new nodes or statement dispute.",
-  "blueprint": "Realizes the entire single proof paragraph of def-sfb-upper-star-from-point.proof.md, itself the inverse-image definition and monoidality clause of part 4 of sk-def-sfb-pullback-from-point. The same route is retained: point braided lemma, generic pullback symmetry, elementary composition."
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-Codex-N5-a2aae667d",
-  "group": "N5",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-a2aae667d (reviewer sub-agent of L); spot-checked: Read the item, complete proof, cited statements and source locations, and chapter/unit route. Composite comparison maps, coherence, braiding, coefficient category and edge cases check out. No new nodes, circular dependencies, missing citations or repairs. Detailed checks recorded in review.md."
- },
- "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point",
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-c343b670d",
-  "group": "Q10",
-  "result": "pass",
-  "note": "Existing binding upperStarFromPoint := pointUpperStar ⋙ upperStar Ab (toSpecZ X) (checked by rfl) is exactly p_X^* = π_X^* ∘ p^*, on Sheaf (coherentTopology Profinite.{u}) Ab.{u+1} ⥤ Sheaf (ProEt.topology X) Ab.{u+1}, X arbitrary, no extra hypotheses, size-convention universes, matches the blueprint's lean field. The monoidal instance is checked by rfl to equal sfbSheafTensorStructure.monoidal on source and target, and the braiding agrees by HEq.rfl. Monoidal and LaxBraided instances give the braided strong monoidal clause. The dependency def-sfb-point-upper-star gets a valid §1(B) record-only repair to pointUpperStar (sheafPullback along profiniteToProEt; mathlib_match kept, note given). Only lean fields were added (diffed). No Lean delivered, no hollow definition, no global build. nt_compile.py check file: no errors, only long-line warnings. Notes: the dependency record also lists laxBraided_pointUpperStar, which the blueprint assigns to lem-sfb-point-upper-star-braided; def-sfb-profinite-to-proetale is still unbound."
- },
- "lean": {
-  "existing": true,
-  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-  "declaration": "AlgebraicGeometry.ProEtale.upperStarFromPoint",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.upperStarFromPoint",
-   "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
-   "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint"
-  ],
-  "statement": "def upperStarFromPoint (X : Scheme.{u}) :\n    Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⥤ Sheaf (ProEt.topology X) Ab.{u + 1}",
-  "branch": "slopmaster2",
-  "by": "Q10",
-  "date": "2026-10-17",
-  "note": "The published pro-etale framework supplies the exact composite p_X^* = pointUpperStar ⋙ (toSpecZ X)^*[Ab], together with its strong monoidal and braided structure instances. The point pullback is the sheafified left Kan extension along profiniteToProEt, and the scheme pullback is the recorded ProEtale.upperStar for the structure morphism; no independent construction is introduced."
- },
- "reviewed_proof": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
-  "result": "pass",
-  "landing": "20261016T221604-L-1612926",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AddCommGrpCat.hasFunctorialFlatResolution",
-   "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
-   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
-   "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
-   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
-   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
-   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
-   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
-  ],
-  "sorry_after": []
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.ProEtale.upperStarFromPoint",
-    "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
-    "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint"
-   ]
-  },
-  "slopmaster2": {
-   "state": "rests_on_sorry",
-   "decls": [
+  "mathlib_searches": [
     {
-     "name": "AlgebraicGeometry.ProEtale.upperStarFromPoint",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      299,
-      303
-     ],
-     "kind": "def",
-     "sorry": false
+      "tool": "leanfinder",
+      "query": "For any scheme X the inverse image from condensed abelian groups is the composite of point pullback and pullback along X to Spec Z and is strong monoidal and braided",
+      "results": "8 hit(s): LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.pullback, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
     },
     {
-     "name": "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      305,
-      309
-     ],
-     "kind": "instance",
-     "sorry": false
+      "tool": "grep",
+      "query": "upperStarFromPoint|pointUpperStar|ProEtale|pro.etale",
+      "results": "10 hit(s): Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
     },
     {
-     "name": "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      311,
-      316
-     ],
-     "kind": "instance",
-     "sorry": false
+      "tool": "leansearch",
+      "query": "The composite inverse image from condensed abelian groups to pro etale abelian sheaves on any scheme is strong monoidal and braided",
+      "results": "8 hit(s): CategoryTheory.Monoidal.transportedFunctorCompInverseBraided, CategoryTheory.Functor.mapCommGrp_obj_grp_inv, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Equivalence.mapCommMon_inverse, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Monoidal.transportedFunctorCompInverseLaxBraided; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.LaxBraided",
+      "results": "0 hit(s): none; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
+    },
+    {
+      "tool": "grep",
+      "query": "compMonoidal|compLaxBraided|compBraided",
+      "results": "0 hit(s): none; search subdirectory: CategoryTheory/Monoidal",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"comp\", CategoryTheory.Functor.Monoidal",
+      "results": "12 hit(s): CategoryTheory.Functor.Monoidal.instComp, CategoryTheory.Equivalence.monoidalOfPostcompFunctor, CategoryTheory.Equivalence.monoidalOfPostcompInverse, CategoryTheory.Equivalence.monoidalOfPrecompFunctor, CategoryTheory.Equivalence.monoidalOfPrecompInverse, CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Equivalence.map_η_comp_η; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Composition of two braided strong monoidal functors is braided and strong monoidal, applied to inverse image functors on sheaves of abelian groups",
+      "results": "8 hit(s): CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Functor.Braided.instComp, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Functor.LaxBraided.instComp, CategoryTheory.Functor.mapCommGrp, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.sheafToPresheafMonoidal; search subdirectory: all Mathlib",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
+    },
+    {
+      "tool": "grep",
+      "query": "instance instComp",
+      "results": "0 hit(s): none; search subdirectory: CategoryTheory/Monoidal",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
+    },
+    {
+      "tool": "grep",
+      "query": "instance.*(F ⋙ G)|instance.*Monoidal|instance.*Braided",
+      "results": "25 hit(s): Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean; search subdirectory: CategoryTheory/Monoidal",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image"
+    },
+    {
+      "tool": "grep",
+      "query": "\\[F.Monoidal\\].*\\[G.Monoidal\\]",
+      "results": "4 hit(s): 567, 807, 903, 1140; search subdirectory: CategoryTheory/Monoidal/Functor.lean",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
+    },
+    {
+      "tool": "grep",
+      "query": "\\[F.(LaxBraided|Braided)\\].*\\[G.(LaxBraided|Braided)\\]",
+      "results": "2 hit(s): 397, 564; search subdirectory: CategoryTheory/Monoidal/Braided/Basic.lean",
+      "date": "2026-10-16",
+      "verdict": "no match for the scheme-specific point inverse image; general composition structure found, but this does not construct the two project-specific functors"
     }
-   ],
-   "missing": [],
-   "open": [
-    {
-     "name": "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      203,
-      207
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "sk-def-sfb-pullback-from-point",
-      "lem-sfb-profinite-to-proetale-cover-preserving"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      214,
-      218
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-sfb-point-lan-exists",
-      "sk-def-sfb-pullback-from-point"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      262,
-      265
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-sfb-point-upper-star-tensor",
-      "sk-def-sfb-pullback-from-point"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      258,
-      260
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-sfb-point-upper-star-unit",
-      "sk-def-sfb-pullback-from-point"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      196,
-      198
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "sk-def-sfb-pullback-from-point",
-      "lem-sfb-profinite-to-proetale-finite-limits"
-     ],
-     "below": true
-    },
-    {
-     "name": "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme",
-     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-     "lines": [
-      180,
-      183
-     ],
-     "kind": "theorem",
-     "nodes": [
-      "lem-sfb-lc-weakly-etale",
-      "sk-def-sfb-pullback-from-point"
-     ],
-     "below": true
-    }
-   ]
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "lean_not_found"
+  ],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1547,
+  "blueprint_uses": [
+    "lem-sfb-point-upper-star-braided",
+    "sk-def-sfb-finite-pushforward-pullback"
+  ],
+  "blueprint_lean": [
+    "AlgebraicGeometry.ProEtale.upperStarFromPoint"
+  ],
+  "blueprint_lean_not_found": [
+    "AlgebraicGeometry.ProEtale.upperStarFromPoint"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "def-sfb-upper-star-from-point",
+    "worker": "stage1",
+    "summary": "Rechecked the earlier sandbox split against the current blueprint and read-only source. Made both component inverse images and the tensor convention explicit statement dependencies; reused the two existing braided-monoidal statements and expanded the elementary composite comparison maps and braiding identity. Ran and recorded all Mathlib searches; no new nodes or statement dispute.",
+    "blueprint": "Realizes the entire single proof paragraph of def-sfb-upper-star-from-point.proof.md, itself the inverse-image definition and monoidality clause of part 4 of sk-def-sfb-pullback-from-point. The same route is retained: point braided lemma, generic pullback symmetry, elementary composition."
+  },
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-Codex-N5-a2aae667d",
+    "group": "N5",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-a2aae667d (reviewer sub-agent of L); spot-checked: Read the item, complete proof, cited statements and source locations, and chapter/unit route. Composite comparison maps, coherence, braiding, coefficient category and edge cases check out. No new nodes, circular dependencies, missing citations or repairs. Detailed checks recorded in review.md."
+  },
+  "chapter": "sec-proetale-coefficients",
+  "unit": "sk-def-sfb-pullback-from-point",
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-c343b670d",
+    "group": "Q10",
+    "result": "pass",
+    "note": "Existing binding upperStarFromPoint := pointUpperStar ⋙ upperStar Ab (toSpecZ X) (checked by rfl) is exactly p_X^* = π_X^* ∘ p^*, on Sheaf (coherentTopology Profinite.{u}) Ab.{u+1} ⥤ Sheaf (ProEt.topology X) Ab.{u+1}, X arbitrary, no extra hypotheses, size-convention universes, matches the blueprint's lean field. The monoidal instance is checked by rfl to equal sfbSheafTensorStructure.monoidal on source and target, and the braiding agrees by HEq.rfl. Monoidal and LaxBraided instances give the braided strong monoidal clause. The dependency def-sfb-point-upper-star gets a valid §1(B) record-only repair to pointUpperStar (sheafPullback along profiniteToProEt; mathlib_match kept, note given). Only lean fields were added (diffed). No Lean delivered, no hollow definition, no global build. nt_compile.py check file: no errors, only long-line warnings. Notes: the dependency record also lists laxBraided_pointUpperStar, which the blueprint assigns to lem-sfb-point-upper-star-braided; def-sfb-profinite-to-proetale is still unbound."
+  },
+  "lean": {
+    "existing": true,
+    "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+    "declaration": "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+      "AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint",
+      "AlgebraicGeometry.ProEtale.laxBraided_upperStarFromPoint"
+    ],
+    "statement": "def upperStarFromPoint (X : Scheme.{u}) :\n    Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⥤ Sheaf (ProEt.topology X) Ab.{u + 1}",
+    "branch": "slopmaster2",
+    "by": "Q10",
+    "date": "2026-10-17",
+    "note": "The published pro-etale framework supplies the exact composite p_X^* = pointUpperStar ⋙ (toSpecZ X)^*[Ab], together with its strong monoidal and braided structure instances. The point pullback is the sheafified left Kan extension along profiniteToProEt, and the scheme pullback is the recorded ProEtale.upperStar for the structure morphism; no independent construction is introduced."
   }
- }
 }
