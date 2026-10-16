@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-prop-int-compactness-direct-sums",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral proper direct image on the localizing categories",
- "statement": "Let $p:X\\to Y$ be proper, with fibres of dimension $\\le d$.\n\n1. For $N\\in\\Cons(X,\\mathcal O_E)$, $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ has\n   cohomology in degrees $[0,2d+1]$; for $N\\in\\IndCons(X,\\mathcal O_E)$,\n   $H^qRp_*N\\in\\IndCons(Y,\\mathcal O_E)$ and vanishes outside $[0,2d+1]$.\n2. For $K\\in\\Dic(X,\\mathcal O_E)$, $H^qRp_*K$ depends only on the degrees\n   $[q-2d-1,q]$ of $K$, and $Rp_*$ commutes with arbitrary direct sums of\n   objects of $\\Dic(X,\\mathcal O_E)$.\n3. $Rp_*$ maps $\\Loc(\\Dbc(X,\\mathcal O_E))$ into $\\Loc(\\Dbc(Y,\\mathcal O_E))$ and\n   preserves direct sums there.",
+ "statement": "Work in the standing scheme setting [sk-def-sfb-dc-setting]: fix a prime $\\ell$, a field $k$ of characteristic $p>0$ different from $\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $p:X\\to Y$ a proper $k$-morphism, with geometric fibres of Krull dimension at most $d\\in\\mathbf Z_{\\ge0}$ [def-weil-proper-morphism, def-pc-scheme-fibre, def-kun-topological-krull-dimension]. Use the condensed ring $\\underline{\\mathcal O_E}$, its pulled-back coefficient sheaves $\\mathcal O_{E,T}$ and module objects [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects], and the ordinary unbounded derived categories $D(T_{\\mathrm{proét}},\\mathcal O_E)=D(\\Mod_{\\mathcal O_{E,T}})$, for $T=X,Y$ [sk-def-sfb-derived-categories]. Let $Rp_*$ be the total right derived module-object pushforward [sk-def-sfb-module-derived-pushpull]. Write $\\Cons(T,\\mathcal O_E)$ for constructible coefficient-module sheaves and $\\Dbc(T,\\mathcal O_E)$ for bounded complexes with constructible cohomology [sk-def-sfb-constructible]. Define $\\IndCons(T,\\mathcal O_E)$ to consist of sheaves isomorphic to small filtered colimits of objects of $\\Cons(T,\\mathcal O_E)$, computed in the ambient module category; put $\\Dic(T,\\mathcal O_E)=\\{K:H^i(K)\\in\\IndCons(T,\\mathcal O_E)\\text{ for all }i\\}$ as in [det-prop-int-compactness-compact]. Let $\\Loc(\\Dbc(T,\\mathcal O_E))$ be the smallest full replete triangulated subcategory containing $\\Dbc$ and closed under ordinary small coproducts in this ambient derived category [det-def-localizing-closure-existence]. All sums and filtered diagrams are small in the fixed universe [def-weil-size-convention]. Then:\n\n1. For $N\\in\\Cons(X,\\mathcal O_E)$, $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ has cohomology in degrees $[0,2d+1]$. For $N\\in\\IndCons(X,\\mathcal O_E)$, $H^qRp_*N\\in\\IndCons(Y,\\mathcal O_E)$ and vanishes outside $[0,2d+1]$.\n2. For $K\\in\\Dic(X,\\mathcal O_E)$ and $q\\in\\mathbf Z$, the canonical truncation zig-zag $K\\leftarrow\\tau_{\\le q}K\\to\\tau_{\\ge q-2d-1}\\tau_{\\le q}K$ [def-kun-truncations] induces isomorphisms on $H^qRp_*$. The functor $Rp_*$ commutes with arbitrary direct sums of objects of $\\Dic(X,\\mathcal O_E)$.\n3. $Rp_*$ maps $\\Loc(\\Dbc(X,\\mathcal O_E))$ into $\\Loc(\\Dbc(Y,\\mathcal O_E))$ and preserves direct sums there.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
   "place": "node det-prop-int-compactness-direct-sums, order None",
@@ -26,45 +26,293 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "det-prop-int-compactness-compact",
+  "det-def-localizing-closure-existence",
+  "def-weil-size-convention",
+  "def-kun-truncations"
+ ],
  "proof": [
   {
-   "text": "(1) $Rp_*N\\in\\Dbc(Y,\\mathcal O_E)$ by the integral case of\n[sk-thm-sfb-proper-base-change]. On a weakly contractible affine $V\\to Y$,\nproper direct image of a torsion sheaf has cohomology in degrees $\\le2d$\n(Stacks, Tag 095U), and $\\Gamma(V,-)$ is exact, so this bounds the cohomology of\nsections. The reductions $N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ are torsion\ncomplexes in degrees $[-1,0]$, so their direct images have cohomology in\ndegrees $\\le2d$. Direct image commutes with derived limits, so\n$Rp_*N=R\\varprojlim_nRp_*(N\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n)$ by derived\ncompleteness of $N$, and one derived limit of a countable tower raises the\nupper bound by at most one (Milnor sequence): $Rp_*N$ has cohomology in\ndegrees $\\le2d+1$. It has no cohomology in negative degrees because $N$ is a\nsheaf in degree $0$ and $p_*$ is left exact. For\n$N=\\varinjlim_iN_i$ with $N_i$ constructible, the family is bounded below\nuniformly, so by continuity of direct image for bounded below systems\n(as in [sk-lem-int-ext](1)) $H^qRp_*N=\\varinjlim_iH^qRp_*N_i$, a filtered\ncolimit of constructible sheaves, i.e. an object of $\\IndCons(Y,\\mathcal O_E)$,\nvanishing outside $[0,2d+1]$.",
+   "text": "Properness makes $p$ finite type and separated. The finite-type definition includes quasi-compactness, and the separated-to-quasi-separated theorem makes $p$ quasi-separated; thus $p$ is qcqs for the later comparison and continuity steps. Set $F=Rp_*$. The coefficient-compatible module pushforward is additive and left exact, and its pullback is exact, by the cited module-functor and Cartesian-coefficient statements. Their total derived adjunction gives $Lp^*\\dashv F$, so the right-adjoint limit theorem makes $F$ preserve countable products with their projections. Its unbounded triangulated exactness is the cited K-injective right-derived theorem. Module sheaves on these small sites are Grothendieck abelian; internal modules can be read as sectionwise module sheaves by the cited equivalence (abelian sheafification and its monoidal compatibility are supplied by the sheaf-tensor theorem). In particular the source module category is Grothendieck abelian, so the right-derived clause of the current derived-category statement supplies K-injective resolutions for every unbounded source complex. The adjunction used above is the one explicitly asserted by the module-derived-pushpull statement; the generic derived-adjunction clause is not applied without its left-derived existence hypotheses. The negative-vanishing theorem gives $F(D^{\\ge a})\\subset D^{\\ge a}$ for every integer $a$. These are statements about the ordinary module-object derived functor, not a completed derived functor.",
    "uses": [
-    "sk-lem-int-ext"
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), direct image preserves derived limits and negative vanishing; Proof (3), exactness"
+   }
   },
   {
-   "text": "(2) By (1), each cohomology object of $K$ contributes to $H^qRp_*K$ only from\ndegrees $[q-2d-1,q]$. The proofs of [sk-lem-proper-unbounded-window] and\n[sk-lem-proper-unbounded-window-ii], which use only this uniform bound, the\nleft completeness of the pro-étale derived category and the Milnor sequence,\nshow that $H^qRp_*K=H^qRp_*\\tau_{[q-2d-1,q]}K$. On complexes with cohomology in\na finite range, $Rp_*$ commutes with direct sums by induction on the length of\nthe range, starting from the case of a single object of $\\IndCons$, where it\nfollows from (1) and continuity. Truncations commute with direct sums, so\n$Rp_*$ commutes with arbitrary direct sums in $\\Dic(X,\\mathcal O_E)$, with no\ncommon lower bound needed.",
+   "text": "Let $N\\in\\Cons(X,\\mathcal O_E)$. It belongs to $\\Dbc(X,\\mathcal O_E)$ by the integral-heart statement. The integral proper-base-change preservation statement gives $FN\\in\\Dbc(Y,\\mathcal O_E)$. The integral cohomological adic criterion makes $N$ derived $\\pi_E$-complete, with the coefficient sheaf identified with the inverse limit of finite quotients by the integral-limit statement. Its Noetherian hypothesis holds: a field is Noetherian (its only ideals are $0$ and $k$), and the finite-type-over-Noetherian theorem applies to $X\\to\\operatorname{Spec}k$. Here the adic criterion uses local derived completeness, defined by vanishing of derived internal Hom from localizations. Apply the ringed Koszul-completion reflector with the single global generator $\\pi_E$ and ring sheaf $B=\\mathcal O_{E,X}$. It identifies $N$ with the derived limit of $N\\otimes_B^{\\mathbf L}[B\\xrightarrow{\\pi_E^n}B]$, with transition multiplication by $\\pi_E$ in degree $-1$ and identity in degree $0$. The cited two-term quotient resolution identifies these complexes with $N_n=N\\otimes_B^{\\mathbf L}(\\mathcal O_E/\\pi_E^n)_X$. The augmentations to the quotients commute with those transitions and the degree-zero maps from $B$, so this is the reduction tower with its prescribed maps from $N$. The strict-tower homotopy-limit theorem supplies its Roos triangle with derived-category products. Thus $N$ is a derived limit of this tower in the sense required by step 5; no equivalence of the two meanings of completeness is left implicit.",
    "uses": [
-    "sk-lem-proper-unbounded-window",
-    "sk-lem-proper-unbounded-window-ii"
+    "sk-lem-int-integral-heart",
+    "det-thm-sfb-proper-base-change-integral",
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "det-pe-derived-nakayama-resolution",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), preservation of Dbc and completeness (use the adic criterion, not the incorrect Tag 099Q pointer); Stacks Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul), one-generator case"
+   }
   },
   {
-   "text": "(3) The objects of $\\Loc(\\Dbc(X,\\mathcal O_E))$ whose direct image lies in\n$\\Loc(\\Dbc(Y,\\mathcal O_E))$ are closed under shifts and cones ($Rp_*$ is exact)\nand under direct sums (by (2), since\n$\\Loc(\\Dbc(X,\\mathcal O_E))\\subset\\Dic(X,\\mathcal O_E)$ by\n[det-prop-int-compactness-compact](2)). They contain $\\Dbc(X,\\mathcal O_E)$ by\nthe first assertion of (1), extended to complexes by finite extensions.\nHence they form a localizing subcategory containing the generators, i.e. all\nof $\\Loc(\\Dbc(X,\\mathcal O_E))$; and $Rp_*$ preserves direct sums there by (2).",
+   "text": "The two-term quotient resolution identifies $N_n$ with the cone of $\\pi_E^n:N\\to N$, so $N_n$ has cohomology only in degrees $-1,0$. Let $U$ be forgetting to abelian sheaves; the module-sheaf forgetful theorem makes $U$ exact, so it acts termwise on derived categories, preserves these triangles and detects cohomological vanishing. The adic criterion in step 2 says the first reduction $N_1$ is pulled back from a constructible residue-field complex on the etale site, hence $UN_1$ is a classical abelian complex. The quotient-resolution theorem supplies triangles $N_1\\to N_{n+1}\\to N_n\\to$. Inductively all $UN_n$ belong to the essential image of $\\nu_X^*:D^+(X_{\\mathrm{et}},\\mathbf Z)\\to D^+(X_{\\mathrm{proet}},\\mathbf Z)$: comparison is exact and fully faithful, so a map between two objects of its image lifts and its cone is again in the image. The cited classical derived equivalence and comparison theorem identify this image with bounded-below complexes with classical cohomology. Thus choose an abelian etale complex $C_n$ with $\\nu_X^*C_n\\simeq UN_n$. Exactness and full faithfulness identify its cohomology, so $C_n$ has cohomology only in $[-1,0]$. Those cohomology sheaves are torsion, since $N_n$ is a derived $A_n=\\mathcal O_E/\\pi_E^n$-module and this finite ring is killed by a power of $\\ell$. No finite-free or torsion-free condition on $N$ is used.",
    "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-classical-derived-equivalence",
+    "sk-prop-sf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), reductions are classical torsion complexes in degrees [-1,0]"
+   }
+  },
+  {
+   "text": "Apply the proper torsion bound directly to the abelian etale sheaves $H^{-1}C_n$ and $H^0C_n$; it gives vanishing above $2d$. Its ordinary-fibre hypothesis follows from the geometric-fibre hypothesis (an empty fibre already has dimension $-\\infty$): a scheme-theoretic fibre is finite type over its residue field, and each affine chart has the same Krull dimension after extension to an algebraic closure by the field-extension dimension lemma; the affine-cover dimension theorem then identifies the dimensions of the two fibres. Apply derived etale direct image to the truncation triangle with pieces $H^{-1}C_n[1]$ and $H^0C_n$. The first image vanishes above $2d-1$ and the second above $2d$, so the long exact sequence gives $Rp_{\\mathrm{et},*}C_n\\in D^{\\le2d}$. Proper $p$ is qcqs, so the discrete-coefficient direct-image comparison, with coefficient ring $\\mathbf Z$, gives $Rp_{\\mathrm{proet},*}(UN_n)\\in D^{\\le2d}$. To compare this with $U(FN_n)$, apply the ringed-topos composition theorem to the identity-topos morphisms induced by $\\mathbf Z_T\\to\\mathcal O_{E,T}$ and the scheme morphism $p$. The two composites are the same ringed-topos morphism, their identity-topos direct images are exact coefficient restriction (step 3). The source categories for those restrictions are module sheaves for $\\mathcal O_{E,T}$ or $\\mathbf Z_T$, hence Grothendieck abelian by the same small-site module theorem as in step 1. They therefore have K-injective resolutions, meeting the current derived-category statement's right-derived existence hypothesis; its exact-functor clause gives $R\\operatorname{Res}\\cong D(\\operatorname{Res})$. The composition isomorphisms therefore give $U(FN_n)\\simeq Rp_{\\mathrm{proet},*}(UN_n)$. Since $U$ is exact and conservative on sheaves, $FN_n\\in D^{\\le2d}$ in the integral module category.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "def-kun-truncations",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "sk-def-sfb-derived-categories",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), torsion proper bound and comparison; Stacks 095U, etale-cohomology.tex lemma-cohomological-dimension-proper"
+   }
+  },
+  {
+   "text": "Apply $F$ to the Roos triangle expressing completeness of $N$. Step 1 preserves its triangle and products, and the $n$th projection of the transformed transition endomorphism is still $F(t_n)\\operatorname{pr}_{n+1}$; thus $FN$ is a derived limit of the tower $(FN_n)$. Countable products of module sheaves are exact (step 7's product statement), so by the derived-product theorem the products in this Roos triangle are represented by termwise products of complexes and $H^q$ commutes with them. Represent the tower $(FN_n)$ by a strict tower of K-injective complexes, lifting each transition to a map of complexes; its termwise product cone is then a derived limit, isomorphic to $FN$ by TR3. Apply the sheaf Milnor sequence to this strict tower. (Equivalently, the long exact cohomology sequence of the Roos triangle gives the same vanishing.) If $q>2d+1$, both $H^{q-1}(FN_n)$ and $H^q(FN_n)$ vanish by step 4, so both outer terms in the sequence vanish and $H^q(FN)=0$. Step 1 gives vanishing for $q<0$. Together with step 2 this proves the constructible part of (1). No canonical choice of a cone or of a derived-limit comparison is needed: applying $F$ to the specified Roos triangle suffices.",
+   "uses": [
+    "def-weil-derived-limit",
+    "det-pe-milnor-sequence",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), derived inverse limit costs at most one degree (Stacks 08TB/08TC)"
+   }
+  },
+  {
+   "text": "For $N\\in\\IndCons(X,\\mathcal O_E)$ choose its small filtered presentation $N=\\varinjlim_iN_i$ with constructible $N_i$. Put $A=\\mathcal O_{E,X}$ and $C=p_*A$. The continuity theorem, using qcqs from step 1, gives filtered-colimit and direct-sum comparisons for higher direct images with values in $C$-modules. The module pushforward of step 1 is this functor followed by restriction along $\\eta_p:\\mathcal O_{E,Y}\\to C$. Restriction leaves the underlying abelian sheaf unchanged; kernels, cokernels and sheafified colimits have the same underlying abelian sheaves by the module-sheaf forgetful theorem, so this restriction is exact and preserves all small colimits. Apply the ringed-topos composition theorem to $(X,A)\\to(Y,C)\\to(Y,\\mathcal O_{E,Y})$, where the second underlying topos map is the identity and the first structural map is the counit $p^{-1}p_*A\\to A$. Their composite is the ringed-topos morphism defining $F$. The $C$-module source category is Grothendieck by step 1's small-site module theorem, so its K-injective resolutions exist; the exact-functor clause used in step 4 identifies derived restriction with termwise restriction. Consequently the continuity isomorphisms restrict to $H^qFN\\simeq\\varinjlim_iH^qFN_i$ in $\\mathcal O_{E,Y}$-modules, and give commutation of $H^qF$ with arbitrary direct sums of sheaves there. Each term is constructible by step 2 and zero outside $[0,2d+1]$ by step 5. The colimit is ind-constructible by its definition and has the same vanishing range. Negative degrees vanish by step 1. This proves the rest of (1), and supplies the sheaf-level sum comparison needed below. The Ext-continuity statement sk-lem-int-ext is not used for this assertion.",
+   "uses": [
+    "det-proper-heart-continuity-direct-image",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (1), passage from Cons to IndCons and the sheaf-level direct-sum comparison"
+   }
+  },
+  {
+   "text": "Countable products of pro-étale module sheaves are exact by the cited product statement, and the derived-product theorem computes them termwise and makes cohomology commute with them. The left-complete truncation-tower theorem identifies every complex with the derived limit of its lower good truncations. Apply the new class-relative upper-bound lemma to $T=F$, $\\mathcal S=\\IndCons(X,\\mathcal O_E)$ and $c=2d+1$. Its hypotheses are step 1 (exactness and product preservation), these exact-product/left-completeness statements, and step 6 (the uniform heart upper bound). It follows that for every $L\\in\\Dic(X,\\mathcal O_E)$ with $H^iL=0$ for $i>b$, one has $FL\\in D^{\\le b+2d+1}$ even when $L$ is unbounded below. The cited integral compactness node ensures that all good truncations remain in $\\Dic$. No rational-coefficient window theorem is applied here.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "det-pe-left-complete-iso",
+    "lem-sfb-left-complete-heart-upper-bound",
     "det-prop-int-compactness-compact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (2), extend the integral heart bound to the unbounded lower tail"
+   }
+  },
+  {
+   "text": "Fix $q$ and $K\\in\\Dic(X,\\mathcal O_E)$; put $A=\\tau_{\\le q}K$ and $B=\\tau_{\\ge q-2d-1}A$. In the triangle $A\\to K\\to\\tau_{\\ge q+1}K\\to$, step 1 puts the last image in $D^{\\ge q+1}$, so its cohomology in degrees $q-1,q$ is zero. The long exact sequence gives $H^qFA\\xrightarrow{\\sim}H^qFK$. In the triangle $\\tau_{\\le q-2d-2}K\\to A\\to B\\to$, step 7 puts the first image in $D^{\\le q-1}$, so its cohomology in degrees $q,q+1$ is zero. The long exact sequence gives $H^qFA\\xrightarrow{\\sim}H^qFB$. Both isomorphisms are induced by the stated truncation arrows, and hence are natural in $K$. This is the precise finite-window assertion of (2).",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (2), the two canonical finite-window arrows"
+   }
+  },
+  {
+   "text": "For a family $(M_\\alpha)$ in $\\Dic$ with cohomology in a common finite interval $[a,b]$, prove the canonical sum comparison is an isomorphism by induction on $b-a$. For $a=b$, each object is its shifted cohomology sheaf and step 6 gives the comparison in every degree. For $a<b$, sum the triangles $\\tau_{\\le b-1}M_\\alpha\\to M_\\alpha\\to H^b(M_\\alpha)[-b]\\to$; the cited coproduct theorem says their sum is distinguished. The left and right comparison maps are isomorphisms by induction and the base case. Applying the five lemma to each five-term segment of the long exact cohomology diagram makes the middle comparison an isomorphism in every degree, hence in the derived category. Exact filtered colimits of module sheaves give exact direct sums: write a sum as the filtered colimit of its finite subsums. It follows directly from the kernel/image definition of cohomology that sums commute with cohomology and with both good truncations. The empty interval and the empty family give zero and start no extra case.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "def-kun-truncations",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (2), finite-range induction and exactness of sums"
+   }
+  },
+  {
+   "text": "For an arbitrary small family $(K_\\alpha)$ in $\\Dic$, fix $q$ and write $W_q=\\tau_{\\ge q-2d-1}\\tau_{\\le q}$. The integral compactness node makes $\\bigoplus_\\alpha K_\\alpha$ and all its truncations objects of $\\Dic$. Step 9 gives $W_q(\\bigoplus K_\\alpha)\\simeq\\bigoplus W_qK_\\alpha$, compatibly with both truncation arrows. Consider the natural comparison $\\bigoplus FK_\\alpha\\to F(\\bigoplus K_\\alpha)$ in degree $q$. Its two-arrow window zig-zags from step 8 identify it with $\\bigoplus H^q(FW_qK_\\alpha)\\to H^q(F\\bigoplus W_qK_\\alpha)$. This latter map is invertible by step 9, since all $W_qK_\\alpha$ have cohomology in $[q-2d-1,q]$. Naturality of the actual truncation arrows makes the comparison diagrams commute; no abstract endpoint isomorphisms are substituted. Thus the original comparison is an isomorphism in every degree, and is an isomorphism. This proves arbitrary direct-sum preservation with no common lower bound.",
+   "uses": [
+    "det-prop-int-compactness-compact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (2), arbitrary families via the same finite interval in each fixed output degree"
+   }
+  },
+  {
+   "text": "Let $\\mathcal L_T=\\Loc(\\Dbc(T,\\mathcal O_E))$. By the integral compactness statement $\\mathcal L_X\\subset\\Dic(X,\\mathcal O_E)$. Let $\\mathcal U$ be the full subcategory of $\\mathcal L_X$ on objects $K$ for which $FK\\in\\mathcal L_Y$. It contains $\\Dbc(X,\\mathcal O_E)$ by integral proper preservation, is closed under isomorphisms, shifts and cones by step 1, and is closed under small sums by step 10 and the sum-closure of $\\mathcal L_Y$. Hence $\\mathcal U$ is a full replete triangulated subcategory of the ambient category closed under small sums and containing the generators. Minimality of the localizing closure gives $\\mathcal L_X\\subset\\mathcal U$, proving (3); preservation of its sums is step 10.",
+   "uses": [
+    "det-prop-int-compactness-compact",
+    "det-thm-sfb-proper-base-change-integral",
+    "det-def-localizing-closure-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+    "place": "Proof (3), the localizing subcategory containing the bounded constructible generators"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-int-ext",
-  "sk-lem-proper-unbounded-window",
-  "sk-lem-proper-unbounded-window-ii",
-  "det-prop-int-compactness-compact"
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "sk-lem-int-integral-heart",
+  "det-thm-sfb-proper-base-change-integral",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "det-pe-derived-nakayama-resolution",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-classical-derived-equivalence",
+  "sk-prop-sf-comparison",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "def-kun-truncations",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-derived-limit",
+  "det-pe-milnor-sequence",
+  "det-proper-heart-continuity-direct-image",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "det-pe-left-complete-iso",
+  "lem-sfb-left-complete-heart-upper-bound",
+  "det-prop-int-compactness-compact",
+  "det-def-localizing-closure-existence",
+  "lem-weil-pbc-five-lemma",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1)-(3); expose integral coefficients and the class-relative left-completeness argument instead of citing the rational window statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral proper direct image on ind-constructible sheaves and unbounded derived complexes preserves direct sums",
+   "results": "8 hits: Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, Condensed.hasExactColimitsOfShape, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, LightCondensed.instIsGrothendieckAbelianLightCondMod, HomologicalComplex.map_isStrictlySupported",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, direct sum, cohomology",
+   "results": "loogle: Unknown identifier `direct`; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*direct.*sum|derived.*limit|cohomological.*dimension",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of integral l-adic constructible complexes commutes with arbitrary coproducts on the localizing closure",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.LocallyRingedSpace.coproduct, CategoryTheory.MorphismProperty.instIsStableUnderCoproductsMonomorphismsOfAB4OfSize, AlgebraicGeometry.IsIntegralHom.instDescScheme, CategoryTheory.Limits.FormalCoproduct.ι_comp_coproductIsoSelf_hom_assoc, AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall, CategoryTheory.MorphismProperty.IsStableUnderCoproducts",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite cohomological dimension derived functor computes each cohomology from a finite truncation interval and preserves coproducts",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.IsGE, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.NatTrans.rightDerived",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|pro[Ee]tale|IndConstructible|indConstructible",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: general condensed AB4/AB5, ordinary derived functors, sheaf pushforwards and t-structure APIs do not state integral proper pushforward on ind-constructible/localizing categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -82,5 +330,204 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-int-compactness"
+ "unit": "sk-prop-int-compactness",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-prop-int-compactness-direct-sums",
+  "worker": "stage1",
+  "summary": "Expanded the implicit standing scheme/coefficient/size setting. Reused integral proper preservation, the integral adic criterion, classical finite-coefficient comparison, 095U, continuity, products, left completeness and integral IndCons closure. Replaced inapplicable E/Qlb window citations with one generic class-relative upper-bound lemma; the item itself proves both truncation arrows, finite-range sums, arbitrary sums and the localizing conclusion. Corrected the inherited completeness pointer (099Q is not a completeness theorem). Second reading made the local-completeness to reduction-tower comparison explicit using the existing one-generator Koszul reflector and strict-tower Roos triangle. Repair of the 2026-10-16 landing return revalidated all current citation statements, refreshed the changed derived-category, Cartesian-coefficient and integral compactness quotations, and explicitly verified the right-derived existence hypotheses in steps 1 and 4.",
+  "blueprint": "Steps 1-6 realize proof (1) and unit step 3 / first half of unit step 4; steps 7-10 realize proof (2) / the unbounded-window and direct-sum part of unit step 4; step 11 realizes proof (3) / the final localizing argument of unit step 4. The cited rational-unit proofs are used only as source material for a coefficient-independent argument, not as integral statements.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Step 1: additive left-exact module pushforward and its underived adjunction; these are the ambient functors, not a separate integral compactness assertion. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Step 1: inverse-image coefficient maps are isomorphisms and module pullback is exact for integral pulled-back coefficients. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Step 1: total derived module-object adjunction, needed to preserve products for the actual functor in the item. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Step 1: right adjoints preserve small products together with projections; the integral compactness unit has no general adjoint-limit theorem. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Step 1: the K-injective unbounded derived functor preserves shifts and distinguished triangles. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Steps 1, 4 and 9: module sheaves over the actual integral or Z coefficient sheaves are Grothendieck, supplying K-injective existence and exact filtered colimits; finite subsums then give exact arbitrary sums. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Step 1: identify internal modules with sectionwise ring-sheaf modules, preserving the underlying sheaves, before applying generic sheaf theorems. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Step 1: abelian sheafification is exact and monoidal, verifying the hypotheses of the internal-module equivalence. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Steps 1 and 4: Grothendieck categories have K-injectives; exact coefficient restriction derives termwise. These generic resolution inputs are not supplied by the compactness unit. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Step 1: a left-exact derived functor preserves lower cohomology bounds on bounded-below objects. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-sfb-integral-cohomological-adic-criterion",
+    "why": "Step 2: bounded integral constructible complexes are derived complete and their residue-field reduction comes from the etale site; replaces the erroneous completeness pointer. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Step 2: identify the pulled-back integral ring sheaf with the inverse limit of its finite quotient sheaves. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 2: X is Noetherian as a finite-type scheme over a field, as required by the adic criterion. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Step 3: the quotient resolution, cone description, and successive-reduction triangles. The unit route requires this general finite-level algebra input. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Step 3: forgetful functor to abelian sheaves is faithful and exact, so cohomology and vanishing can be checked there. This supplies a generic input to the stated integral route, not a replacement route. Step 6 uses its kernel, cokernel and colimit descriptions to show restriction from p_*A-modules is exact and preserves colimits."
+   },
+   {
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "Step 3: bounded-below classical complexes are precisely the essential image of etale inverse image. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "sk-prop-sf-comparison",
+    "why": "Step 3: fully faithful bounded-below etale inverse image for discrete Z coefficients, so its essential image is closed under cones. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Step 4: the 2d proper higher-image bound for arbitrary torsion abelian etale sheaves, applied to the two cohomology sheaves of each reduction. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Step 4: finite-type affine fibre dimensions are invariant under residue-field extension to an algebraic closure. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Step 4: compare scheme fibre dimensions from the dimensions of their affine charts. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "Steps 4, 8 and 9: standard good truncations, their cohomology, and successive-truncation triangles; no integral-special substitute is needed. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Step 4: qcqs bounded-below direct-image comparison for discrete Z coefficients. It is not applied directly to O_E coefficients. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Step 4: the two ways of composing scheme direct image with exact coefficient restriction are canonically isomorphic on unbounded derived categories. This supplies a generic input to the stated integral route, not a replacement route. Step 6 also identifies the continuity theorem with target p_*A followed by exact restriction along O_{E,Y} to p_*A with the integral module-object derived pushforward."
+   },
+   {
+    "node": "def-weil-derived-limit",
+    "why": "Step 5: the Roos-triangle meaning of a derived limit, allowing F to be applied without choosing functorial cones. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-pe-milnor-sequence",
+    "why": "Step 5: the sheaf Milnor short exact sequence for countable towers on the pro-etale site. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-proper-heart-continuity-direct-image",
+    "why": "Step 6: filtered-colimit and direct-sum continuity of higher direct images for arbitrary source ring sheaves; Ext continuity alone does not say this. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Step 7: exact countable products in both pro-etale module categories. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Step 7: derived products are termwise and cohomology preserves them, under the exact-product hypotheses. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-pe-left-complete-iso",
+    "why": "Step 7: each integral module complex is the derived limit of its lower good truncations, the left-completeness input. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "det-def-localizing-closure-existence",
+    "why": "Steps 9 and 11: sums of distinguished triangles are distinguished and Loc is the smallest full replete triangulated subcategory closed under sums. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Step 9: identify the middle cohomology comparison in the finite-range induction from the surrounding isomorphisms. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Steps 9 and 10: cohomology and localization at quasi-isomorphisms; a comparison is invertible once its cone has zero cohomology. This supplies a generic input to the stated integral route, not a replacement route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Step 2: generic ringed-site reflector identifies local derived completeness from the adic criterion with the one-generator Koszul tower; the integral compactness unit supplies no such comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Step 2: generic strict-tower theorem identifies total derived inverse limit with the Roos triangle and its projections needed in step 5."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Step 1: finite type includes quasi-compactness; properness supplies finite type, so the later qcqs comparison and continuity hypotheses hold."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Step 1: properness supplies separatedness, and this generic lemma supplies quasi-separatedness for the later comparison and continuity hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-sfb-integral-cohomological-adic-criterion",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-pe-derived-nakayama-resolution",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "det-pe-classical-derived-equivalence",
+  "sk-prop-sf-comparison",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "def-kun-truncations",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-derived-limit",
+  "det-pe-milnor-sequence",
+  "det-proper-heart-continuity-direct-image",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "det-pe-left-complete-iso",
+  "det-def-localizing-closure-existence",
+  "lem-weil-pbc-five-lemma",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-036689a28",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-036689a28 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the blueprint main-20261015 statement and proof (1)-(3) of det-prop-int-compactness-direct-sums in full. Item statement: it matches the blueprint with the standing setting made explicit. The coefficient category is the ordinary D(Mod_{O_E,X}), the same as det-prop-int-compactness-compact and det-thm-sfb-proper-base-change-integral. Cons/Dbc use the finite-constant-local-model predicate of sk-def-sfb-constructible, which is the same predicate the adic criterion uses. The bound 2d+1 is unchanged, and the two actual truncation arrows make 'depends only on [q-2d-1,q]' precise. Stacks sources checked at the cited places: 095U etale-cohomology.tex lemma-cohomological-dimension-proper; 08TB/08TC/07KC/0H72 in derived.tex; tags 099B and 0A0E. 099Q is indeed proetale-proposition-enough-weakly-contractibles, so the worker was right to drop it as a completeness pointer. The completeness notion of the adic criterion (def-weil-pbc-locally-derived-ringed-ideal-complete) is exactly the local condition of the Koszul reflector, so step 2 holds. Step 3: the cone-lifting induction through the fully faithful exact nu^* is correct. Step 4: H^{-1}[1] gives degrees up to 2d-1, and qcqs comparison plus ringed-topos composition with exact restriction is correct. Steps 6-11 check out: continuity into p_*A-modules followed by restriction along eta_p; the window arrows kill degrees q-1,q and q,q+1; finite-range induction with summed triangles and the five lemma; arbitrary sums through the common window; the localizing closure by minimality. New node lem-sfb-left-complete-heart-upper-bound: I proved it independently and it is true. The finite induction gives b+c, Roos plus exact products gives b+c+1, and the transition triangle with T-image <= c-n-1 makes H^{b+c} eventually isomorphic. An explicit finite-sum section of 1-s then kills lim^1 in any abelian category with exact products. Tested T=id, T=0, T=[r] (c=-r), K=0, a single degree, an infinite negative tail, and S without 0. It passes B1-B7, has proper blueprint from/same_as, and is not a restatement. rg over dag/nodes found no duplicate: the window/heart-bound nodes are rational or Rp_*-specific, lem-sf-finite-cd-derived-upper-bound needs an all-object bound, and lem-pc-unbounded-derived-functor-cohomological-bound is QCoh->Ab. Mechanical checks: stmt_deps match the bracket citations, proof_deps equals the union of uses, no merged or missing ids, and no cycle. I accept all 36 declared tool_uses as generic tools. Replacing the rational window lemmas' proofs, which are outside unit uses, with a coefficient-free lemma is a correct realization, not a route departure, and no SGA is used. One fault, C1/C4: step 5 applied det-pe-milnor-sequence, which is stated for strict towers with termwise products, to a tower in D without the termwise-product bridge. FIX: step 5 now uses lem-weil-derived-limit-products-core (07KC) and lem-weil-proetale-countable-products-exact, both already in proof_deps and tool_uses. It also gains a sentence representing (FN_n) by a strict K-injective tower whose termwise cone is isomorphic to FN by TR3. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/det-prop-int-compactness-direct-sums.json. No statement changed and no node was added or dropped.; 1 file(s) fixed by the reviewer"
+ }
 }

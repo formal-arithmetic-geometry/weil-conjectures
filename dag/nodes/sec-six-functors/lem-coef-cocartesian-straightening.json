@@ -19,7 +19,7 @@
  },
  "kind": "statement",
  "title": "Straightening cocartesian fibrations over arbitrary infinity categories",
- "statement": "Use the infinity-category, mapping-space and universe conventions of [def-coef-complete-algebroid]. For any infinity category $S$ in a fixed universe, let $\\operatorname{coCart}(S)$ be the infinity category of cocartesian fibrations over $S$ and functors over $S$ preserving cocartesian arrows, in a sufficiently large universe. The simplicial convention for these fibrations is [def-coef-infinity-fibrations]; intrinsically a cocartesian arrow $u:x\\to y$ of a functor $q:X\\to S$ is characterized by the homotopy-pullback square\n$$\\begin{matrix}\\operatorname{Map}_X(y,z)&\\longrightarrow&\\operatorname{Map}_X(x,z)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_S(qy,qz)&\\longrightarrow&\\operatorname{Map}_S(qx,qz)\\end{matrix}$$\nfor every $z\\in X$, and a cocartesian fibration is a functor admitting such a lift from every $x$ over every arrow out of $qx$. This intrinsic convention is equivalent, after replacement over $S$, to the simplicial one. Fibers and base changes in the intrinsic convention are infinity-categorical pullbacks; for a simplicial cocartesian fibration these are represented by its simplicial fibers and base changes. There is an equivalence\n$$\\operatorname{St}_S:\\operatorname{coCart}(S)\\simeq\\operatorname{Fun}(S,\\operatorname{Cat}_\\infty),$$\nwhere $\\operatorname{Cat}_\\infty$ denotes infinity categories and functors of the chosen size and has finite products given by products of infinity categories, with terminal object the one-object terminal category. For $q:X\\to S$, its image has value $X_s$ at $s$ and sends $f:s\\to t$ to cocartesian transport $f_!:X_s\\to X_t$. For every $a:T\\to S$, straightening identifies $a^*q$ with $(\\operatorname{St}_Sq)\\circ a$, naturally and with all higher coherences. The space of choices of a classifying functor together with its classification equivalence is contractible.",
+ "statement": "Use the infinity-category, mapping-space and universe conventions of [def-coef-complete-algebroid]. Fix universes $\\mathcal U\\in\\mathcal U'$. For any $\\mathcal U$-small infinity category $S$, let $\\operatorname{coCart}(S)$ be the infinity category of cocartesian fibrations $q:X\\to S$ with $X$ $\\mathcal U$-small and functors over $S$ preserving cocartesian arrows; form this infinity category in $\\mathcal U'$. The same size convention is used for intrinsic representatives before replacement over $S$. The simplicial convention for these fibrations is [def-coef-infinity-fibrations]; intrinsically a cocartesian arrow $u:x\\to y$ of a functor $q:X\\to S$ is characterized by the homotopy-pullback square\n$$\\begin{matrix}\\operatorname{Map}_X(y,z)&\\longrightarrow&\\operatorname{Map}_X(x,z)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_S(qy,qz)&\\longrightarrow&\\operatorname{Map}_S(qx,qz)\\end{matrix}$$\nfor every $z\\in X$, and a cocartesian fibration is a functor admitting such a lift from every $x$ over every arrow out of $qx$. This intrinsic convention is equivalent, after replacement over $S$, to the simplicial one. Fibers and base changes in the intrinsic convention are infinity-categorical pullbacks; for a simplicial cocartesian fibration these are represented by its simplicial fibers and base changes. There is an equivalence\n$$\\operatorname{St}_S:\\operatorname{coCart}(S)\\simeq\\operatorname{Fun}(S,\\operatorname{Cat}_\\infty),$$\nwhere $\\operatorname{Cat}_\\infty$ denotes infinity categories and functors that are $\\mathcal U$-small and has finite products given by products of infinity categories, with terminal object the one-object terminal category. For $q:X\\to S$, its image has value $X_s$ at $s$ and sends $f:s\\to t$ to cocartesian transport $f_!:X_s\\to X_t$. For every $a:T\\to S$, straightening identifies $a^*q$ with $(\\operatorname{St}_Sq)\\circ a$, naturally and with all higher coherences. The space of choices of a classifying functor together with its classification equivalence is contractible.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Definitions 2.4.1.1 and 2.4.2.1 (cocartesian dual), Proposition 2.4.4.3 (mapping-space criterion, dual), Theorem 3.2.0.1 with Proposition 4.2.4.4 (straightening equivalence), and Definition 3.3.2.2 with Remark 3.3.2.3 (classifying functors). Also Ramzi 2209.12569v2, proof of Theorem 2.1, displayed ordinary straightening equivalence. Read online; not archived in literature/. No Stacks tag states this infinity-categorical result."
@@ -28,9 +28,130 @@
   "def-coef-complete-algebroid",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First compare the intrinsic notion with an inner-fibration representative. The Joyal model structure of [lem-coef-joyal-model-structure] factors a functor $q:X\\to S$ between quasicategories as an equivalence $X\\to X'$ followed by a fibration $q':X'\\to S$; the latter is an inner fibration and lifts equivalences by [lem-coef-joyal-quasicategory-characterizations]. An equivalence over $S$ identifies the four mapping spaces in the displayed square for corresponding objects, and every testing object of $X'$ is equivalent to one from $X$. Thus the homotopy-pullback condition is preserved and reflected. The universal lift condition is interpreted over $S$ in its infinity-categorical slice: a lift includes the identification of its image with the prescribed base arrow. In the fibration representative these identifications can be made strict. Indeed equivalences in the base lift along a categorical fibration, and the maps on mapping spaces are Kan fibrations by [lem-coef-infinity-isofibration-exponentiation], so a path from the image edge to the prescribed edge lifts with fixed endpoints. Consequently it suffices to check the mapping criterion and construct straightening for inner-fibration representatives. This is a replacement over $S$, not a claim that every original functor is already an inner fibration.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Joyal fibrant replacement; proof of Proposition 2.4.4.3; intrinsic interpretation spelled out here"
+   }
+  },
+  {
+   "text": "Now compare the edge conditions on an inner-fibration representative $q:X\\to S$ between quasicategories, as produced in step 1. For an edge $u:x\\to y$ of $X$, the mapping-space criterion [lem-coef-infinity-cocartesian-mapping-criterion] states that $u$ is $q$-cocartesian in the horn-lifting sense of [def-coef-infinity-fibrations] (lifts for $\\Lambda_0^n\\subseteq\\Delta^n$, $n\\geq2$, with ordered edge $\\{0,1\\}$ equal to $u$) if and only if, for every vertex $z$ of $X$, the square with top row $\\operatorname{Map}_X(y,z)\\to\\operatorname{Map}_X(x,z)$ and bottom row $\\operatorname{Map}_S(qy,qz)\\to\\operatorname{Map}_S(qx,qz)$, given by precomposition with $u$ and $q(u)$, is a homotopy pullback, meaning that the map to the path-space homotopy fiber product is a weak homotopy equivalence. These are the right-pinched mapping spaces of the conventions of [def-coef-complete-algebroid], so this square is exactly the intrinsic square of the statement; no existence of other lifts is used. Hence on the representative the intrinsic and simplicial cocartesian arrows coincide. Together with step 1, which strictifies an intrinsic lift (with its identification of the base arrow) to a lift over the prescribed edge and shows that the homotopy-pullback condition is preserved and reflected by the replacement, a functor admits intrinsic cocartesian lifts of every base arrow exactly when its representative is a cocartesian fibration in the simplicial sense. This proves both directions of the intrinsic/simplicial comparison.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.1.1 dual and Proposition 2.4.4.3 (dual), as stated in lem-coef-infinity-cocartesian-mapping-criterion"
+   }
+  },
+  {
+   "text": "Let $\\mathsf M_{S^{\\mathrm{op}}}$ be the relative marked Cartesian model category [lem-coef-marked-relative-cartesian-model]. Its fibrant objects are cartesian fibrations with all cartesian edges marked, and every object is cofibrant. Its simplicial mapping space between fibrant objects is the core of the functor category over $S^{\\mathrm{op}}$ preserving the marked edges. By [lem-coef-simplicial-model-nerve-localization], its infinity localization is therefore exactly this infinity category of cartesian fibrations and preserving functors, with the stated higher transformations. Taking opposites of total spaces identifies these with cocartesian fibrations over $S$. The criterion just proved identifies their edge condition with the intrinsic one. The pullback assertion of the relative model theorem identifies their degreewise fibers and base changes with infinity-categorical pullbacks; it applies in particular to each $\\{s\\}\\to S$.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.4.1, Corollary 3.1.4.4, Corollary 3.3.1.4 and passage to bifibrant nerves"
+   }
+  },
+  {
+   "text": "Choose a functorial locally Kan replacement $I_S=R\\mathfrak C[S]$, and let $u_S:\\mathfrak C[S]\\to I_S$ be its Dwyer--Kan equivalence [lem-coef-coherent-nerve-comparison]. Opposite realization, obtained by reversing the ordered vertices of each simplex, identifies $\\mathfrak C[S^{\\mathrm{op}}]$ with $\\mathfrak C[S]^{\\mathrm{op}}$; hence it supplies $\\phi_S:\\mathfrak C[S^{\\mathrm{op}}]\\to I_S^{\\mathrm{op}}$. Apply [lem-coef-marked-cone-straightening-quillen] to this $\\phi_S$. By [lem-coef-model-infinity-derived-adjunction] the Quillen adjunction gives an adjunction between infinity localizations. Its unit and counit are equivalences by the two explicit weak-equivalence assertions of the marked-cone theorem, so its derived functors are inverse equivalences. Now apply [lem-coef-simplicial-model-coherent-diagrams] to the absolute marked model category $\\mathsf M$ and $u_S$. By [lem-coef-marked-point-cartesian-model], $N_{\\mathrm{hc}}(\\mathsf M^{cf})=\\operatorname{Cat}_\\infty$, so this second equivalence has target $\\operatorname{Fun}(S,\\operatorname{Cat}_\\infty)$. Taking opposites preserves the absolute marked weak equivalences: its testing functor spaces are identified by taking opposite functor categories and then their cores. Hence the opposite involution localizes to an equivalence of $\\operatorname{Cat}_\\infty$ by [lem-coef-simplicial-model-nerve-localization]. Finally postcompose with this equivalence, to compensate for having replaced $X$ by $X^{\\mathrm{op}}$. Combining these equivalences with step 3 constructs $\\operatorname{St}_S$, including its mapping spaces; no equivalence of ordinary homotopy categories alone is being used.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 3.2.0.1 and Proposition 4.2.4.4, with the cocartesian variance explicitly implemented"
+   }
+  },
+  {
+   "text": "Here is the pullback comparison, including its coherence. For $a:T\\to S$, use $R\\mathfrak C[a]:I_T\\to I_S$, which commutes with $u_T,u_S$ by functoriality. For a projectively fibrant diagram $F:I_S\\to\\mathsf M$, restriction remains projectively fibrant. The two change-of-base isomorphisms of [lem-coef-marked-cone-straightening-quillen] give, on right adjoints,\n$$a^{\\mathrm{op}*}\\operatorname{Un}^+_{\\phi_S}F\\cong\\operatorname{Un}^+_{\\phi_T}\\big((R\\mathfrak C[a])^*F\\big).$$\nPullback is right Quillen by [lem-coef-marked-relative-cartesian-model], and both unstraightenings here are fibrant. Thus this is already the derived comparison. The diagram comparison [lem-coef-simplicial-model-coherent-diagrams] is induced by restriction and the nerve adjunction, so it sends the restricted diagram to precomposition by $a$. Taking opposites as in step 4 proves $\\operatorname{St}_T(a^*q)\\simeq\\operatorname{St}_S(q)\\circ a$. On two composable base maps the isomorphism is the same substitution into the same cone pushout as for their composite; on the identity it is the identity. These are natural isomorphisms of functors on the marked diagram categories. Applying coherent localization and the coherent nerve retains their simplices in every degree, giving the comparison on transformations and all higher homotopies, rather than choosing separate pointwise equivalences.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-simplicial-model-coherent-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(2)-(3), passing to right adjoints; not Proposition 4.2.4.4 alone"
+   }
+  },
+  {
+   "text": "Apply the preceding comparison to a vertex $s:\\Delta^0\\to S$. For the terminal indexing category the marked-cone theorem identifies straightening with $T$ and supplies a natural weak equivalence $T\\to\\mathrm{id}$. It follows that the value of the Cartesian diagram from step 4 is equivalent to $(X_s)^{\\mathrm{op}}$; the final opposite-category functor gives $X_s$ as claimed. For an edge $f:s\\to t$, restrict to $\\Delta^1$ and use the marked cone formula. If $e:x\\to y$ is a $q$-cocartesian lift of $f$, coning the opposite marked edge produces the marked edge $\\widetilde y\\to F(f)\\widetilde x$ of that formula. A projectively fibrant diagram marks exactly equivalences in each value, so this is an equivalence. After the final opposite it is $\\operatorname{St}_S(q)(f)(x)\\simeq y$. This comparison is natural on the whole fiber category: a simplex of maps between lifts is coned to the corresponding simplex in the marked mapping object, and the adjunction unit is a natural map of marked simplicial sets. Restriction to every face or degeneracy of that simplex commutes with coning. Thus it identifies the full transport functor, not just the images of its objects. The mapping-square universal property from step 2 makes the space of a lift together with such an identification contractible: its maps to any other candidate form the homotopy fiber of the same equivalence of mapping spaces. Therefore the functor on $f$ is the intrinsic cocartesian transport $f_!$, with the coherent comparison just specified.",
+   "uses": [
+    "lem-coef-marked-cone-straightening-quillen",
+    "lem-coef-marked-point-cartesian-model",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2, Proposition 3.2.1.14, and Lemma 3.2.3.2 (evaluation of unstraightening); mapping-square uniqueness written explicitly"
+   }
+  },
+  {
+   "text": "The finite-product assertion about $\\operatorname{Cat}_\\infty$ can be checked in the marked model of [lem-coef-marked-point-cartesian-model]. For quasicategories $A,C,D$, the simplicial identity $\\operatorname{Fun}(A,C\\times D)=\\operatorname{Fun}(A,C)\\times\\operatorname{Fun}(A,D)$ restricts to the same identity on cores, since an edge in a product is an equivalence exactly when both components are. The mapping-space comparison [lem-coef-coherent-nerve-comparison] therefore gives the product universal property in $\\operatorname{Cat}_\\infty$. For the one-object terminal category the corresponding core is a point for every $A$, giving the empty product.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition of Cat infinity and product universal property in the marked model"
+   }
+  },
+  {
+   "text": "Fix $q$ and the equivalence constructed in step 4. Let $\\operatorname{Un}_S$ be its inverse. Passing to cores gives an equivalence of spaces $\\operatorname{Fun}(S,\\operatorname{Cat}_\\infty)^\\simeq\\to\\operatorname{coCart}(S)^\\simeq$. A classifying functor together with its classification equivalence is exactly a point of its homotopy fiber over $q$: a pair $(F,\\epsilon:\\operatorname{Un}_S F\\simeq q)$. The homotopy fiber of an equivalence of spaces is contractible, as is seen by applying an inverse equivalence and reducing to the fiber of the identity, whose points are pairs $(q',\\text{path }q'\\to q)$ and which contracts to $(q,\\mathrm{id})$. This proves the choice-space assertion; uniqueness of $F$ only up to equivalence would not suffice. Because the base-change comparison of step 5 is a natural equivalence of the same unstraightening functors, pulling back $(F,\\epsilon)$ gives the corresponding classified pair on $T$, and the composite and identity comparisons already verified supply its higher compatibilities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.3.2.2; the stronger contractibility conclusion follows formally from the equivalence proved above"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-coef-complete-algebroid",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-coef-infinity-fibrations",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-cone-straightening-quillen",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-marked-point-cartesian-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proof of Proposition 2.4.4.3; §§3.1.3–3.2.1; Theorem 3.2.0.1 with Proposition 4.2.4.4. The model-to-intrinsic assembly, naturality and contractible-fiber arguments are written out by the second reader from these sources."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -90,7 +211,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-monoidal-straightening",
@@ -98,5 +219,20 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-straightening",
+  "worker": "stage1",
+  "summary": "Replaced the citation-only split by eight argument steps: intrinsic replacement and join-slice mapping criterion; bifibrant model presentation; marked-cone unit/counit plus existing coherent-diagram rectification; explicit base-change comparisons; fibers and transport; products; and the contractible homotopy fiber of classification. Two strictly technical model inputs added, none a restatement of the classification theorem. Explicitly matched the size of total categories to the chosen Cat infinity universe; see STATEMENT-DISPUTED in the report. Maintainer reader (2026-10-17): step 2 now cites the existing lem-coef-infinity-cocartesian-mapping-criterion (HTT 2.4.4.3 dual) instead of re-proving it; the delivered relative join-slice node, used only there, is dropped, and with it the off-unit tool use of lem-cbc-right-fibration-space-fiber.",
+  "blueprint": "Realizes the foundation named in the ancestor proof paragraph: straightening cocartesian fibrations over arbitrary infinity categories, including the intrinsic/simplicial comparison, straightening equivalence, pullback compatibility, and contractible choices."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N9-e9993d5a2",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e9993d5a2 (reviewer sub-agent of L); spot-checked: I read the whole item, the three new nodes, every cited statement, the unit, the chapter and the parent. HTT is not archived locally, so I checked 2.1.2.1/2.1.2.5, 2.4.1.1, 2.4.4.3, 3.1.3.3/3.1.3.7/3.1.4.1/3.1.4.4, 3.2.0.1, 3.2.1.2/3.2.1.4/3.2.1.14 and 3.3.2.2 against my own knowledge of the text. The size clarification of the statement (S and X U-small, Cat∞ U-small) is correct: its counterexample works, it weakens nothing, and the parent still applies. Steps 1 and 3-8 hold. The Joyal replacement and isofibration path-lifting are right; the variance is checked (cartesian over S^op gives I_S-diagrams, and the final opposite restores X_s and f_!); the base-change right adjoints work out; the product and contractible-fiber steps are elementary. One fault (C5), repaired: step 2 re-proved HTT 2.4.4.3 (dual) through the new lem-coef-relative-join-slice-fibrations. The existing lem-coef-infinity-cocartesian-mapping-criterion (same unit, in this DAG, no cycle) already states exactly that criterion with the same right-pinched mapping spaces. The inline proof also identified a left-pinched fiber with the right-pinched Map without a cited comparison. Step 2 now cites the criterion node and proof_deps is recomputed. The join-slice node (correct, but used only in step 2) is dropped, and the tool use of lem-cbc-right-fibration-space-fiber is removed. I kept lem-coef-marked-relative-cartesian-model and lem-coef-marked-cone-straightening-quillen: both are true, self-contained and searched, and neither is a duplicate or a restatement of the item. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
 }
