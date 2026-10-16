@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-grothendieck-etale-section-colimit",
+ "kind": "statement",
+ "title": "Normalize relative section continuity to coefficients over a common base",
+ "statement": "For a cofiltered diagram D:I→Over(S) of qcqs schemes with affine transitions, a qcqs underlying limit cone c, Grothendieck abelian A, an A-valued étale sheaf F on S, and a stage i, there exist a presheaf-valued tail diagram P, object identifications with sections of F_j on the base change from D_i to D_j, and a cocone to the analogous limit presheaf. Its legs are the displayed canonical tailSectionMap and evaluation on every qcqs étale object of D_i is colimiting.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients.",
+  "external": [
+   {
+    "document": "Stacks Project, Étale Cohomology",
+    "place": "Tag 09YQ, degree zero (abelian coefficients); arbitrary Grothendieck coefficients by the categorical finite-matching argument stated in the proof"
+   },
+   {
+    "document": "Stacks Project, Sites",
+    "place": "Tag 0738(4), finite-cover section-colimit argument"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-grothendieck-etale-relative-section-colimit",
+  "def-weil-pbc-grothendieck-hypercover-stage-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit relative section diagram and cocone for the sheaf G=(D_i→S)*F. At every tail stage and at the limit, inverse-image composition identifies these objects with the stated common-base coefficient sheaves. Naturality of the unit, the inverse of inverse-image associativity, and naturality along the pullback-pasting map prove that the normalized cocone legs are exactly tailSectionMap. Evaluate the limit coefficient isomorphism and transport the degree-zero continuity colimit through this cocone isomorphism.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-etale-relative-section-colimit",
+    "def-weil-pbc-grothendieck-hypercover-stage-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-grothendieck-etale-relative-section-colimit",
+  "def-weil-pbc-grothendieck-hypercover-stage-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For arbitrary Grothendieck abelian coefficients the sections of an inverse image sheaf on a finite presentation etale scheme over an inverse limit are a filtered colimit of sections at the stages",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, SheafOfModules.Presentation.isColimit, CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.createsColimitOfIsSheaf, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split etale hypercover truncation descends along a cofiltered limit of quasi compact quasi separated schemes with affine transitions",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|finite.*split.*etale|etale.*section.*colimit",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-limit-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_tail_section_colimit",
+  "statement": "theorem exists_tail_section_colimit\n    [IsCofiltered I] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]\n    (F : Sheaf S.smallEtaleTopology A)\n    (hc : IsLimit ((Over.forget S).mapCone c)) (i : I) :\n    ∃ (P : (Over i)ᵒᵖ ⥤ ((D.obj i).left.Etaleᵒᵖ ⥤ A))\n      (e : ∀ j, P.obj j ≅ tailSections A D F i j.unop)\n      (ν : P ⟶ (Functor.const (Over i)ᵒᵖ).obj\n        ((coneProjection D c i).Etale.op ⋙ ((Etale.upperStar A c.pt.hom).obj F).obj)),\n      (∀ j, ν.app j = (e j).hom ≫ tailSectionMap A D c F i j.unop) ∧\n        ∀ (U : (D.obj i).left.Etale), CompactSpace U.left → QuasiSeparatedSpace U.left →\n          Nonempty (IsColimit (((evaluation _ A).obj (op U)).mapCocone\n            (Cocone.mk _ ν)))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

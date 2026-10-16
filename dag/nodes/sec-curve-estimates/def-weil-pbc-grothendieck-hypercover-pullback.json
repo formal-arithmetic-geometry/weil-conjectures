@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-grothendieck-hypercover-pullback",
+ "kind": "definition",
+ "title": "Pullback on actual hypercover cohomology",
+ "statement": "For qcqs schemes X,Y, a morphism f:X→Y, a Grothendieck abelian category A, sheaves F on Y and G on X, a coefficient map k:f*F→G and q≥0, construct the canonical morphism from the hypercover-cohomology colimit of F to that of G. Its component at U is base-change cohomology followed by k and the injection for the pulled-back hypercover.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients.",
+  "external": [
+   {
+    "document": "Stacks Project, Hypercoverings",
+    "place": "Tag 0DAV, extension of finite split skeleta"
+   },
+   {
+    "document": "Project blueprint, étale cohomology continuity",
+    "place": "Detailed proof paragraph 2: finite skeleta and canonical section comparisons"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-finite-split-hypercover-base-change",
+  "lem-weil-pbc-grothendieck-hypercover-model"
+ ],
+ "proof": [
+  {
+   "text": "For each hypercover U, compose its base-change cohomology map, the coefficient map, and the target colimit injection. Refinement compatibility follows from naturality of the coefficient transformation and of the adjunction unit, and the colimit relation. These components define a cocone on the homotopy quotient: quotient morphisms are represented by refinements. Take its colimit descent. The universal colimit equation gives the component formula.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover-base-change",
+    "lem-weil-pbc-grothendieck-hypercover-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-split-hypercover-base-change",
+  "lem-weil-pbc-grothendieck-hypercover-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite split etale hypercovers admit base change and every finite skeleton extends to a full hypercover with a prescribed map",
+   "results": "CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover.mk', AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, CategoryTheory.GrothendieckTopology.instIsGeneratedByOneHypercovers, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.Precoverage.IsStableUnderBaseChange.of_preZeroHypercoverFamily_of_isClosedUnderIsomorphisms, SSet.Truncated.sk.full, CategoryTheory.GrothendieckTopology.Cover.oneHypercover",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite split etale hypercover truncation descends along a cofiltered limit of quasi compact quasi separated schemes with affine transitions",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|finite.*split.*etale|etale.*section.*colimit",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-limit-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckHypercoverPullback.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.hypercoverPullback",
+  "statement": "def hypercoverPullback (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology A) (G : Sheaf X.smallEtaleTopology A) (k : (Etale.upperStar A f).obj F ⟶ G) (q : ℕ) : hypercoverCohomology A F q ⟶ hypercoverCohomology A G q",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

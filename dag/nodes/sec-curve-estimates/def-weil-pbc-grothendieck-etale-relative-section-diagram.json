@@ -1,0 +1,106 @@
+{
+ "id": "def-weil-pbc-grothendieck-etale-relative-section-diagram",
+ "kind": "definition",
+ "title": "The explicit relative section diagram and cone cocone",
+ "statement": "For a small diagram of schemes D:I→Sch, a stage i and an A-valued étale sheaf G on D_i, construct a functor from (Over i)^op to presheaves on D_i.Etale whose j object is the section presheaf of (D_j→D_i)*G on the base changes of D_i-objects. Its maps are the canonical unit comparisons. For any cone c on D, the canonical comparisons to sections of (c→D_i)*G form a cocone.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof paragraph 2: canonical inverse-image unit maps; categorical composition and pullback-pasting coherence.",
+  "external": []
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-grothendieck-etale-section-system"
+ ],
+ "proof": [
+  {
+   "text": "For composition, move the first pullback-pasting restriction across the second unit by presheaf naturality, then move the first coefficient composition isomorphism across that unit by sheaf naturality. Inverse-image associativity combines the two coefficient isomorphisms. The composite-unit equation combines the units, and pullback-pasting associativity cancels the remaining inverse pasting map. For identity, the unit for an identity scheme map and all other comparison factors are isomorphisms. Composition makes this map idempotent; cancel it to get identity. These laws give the diagram functor laws. Their composition formula and the cone equation give naturality of the cocone.",
+   "uses": [
+    "def-weil-pbc-grothendieck-etale-section-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-grothendieck-etale-section-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image adjunction units commute with composition isomorphisms and pullback pasting for sections of sheaves",
+   "results": "CategoryTheory.Adjunction.unitAsIsoOfIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit gives a functorial map from sections of an inverse image to sections after another base change and the maps satisfy identity and composition laws",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(unit|[Cc]omposition)|inverse.*image.*[Cc]omp|pullbackComp",
+   "results": "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-limit-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionSystemLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckEtaleSectionSystemLaws.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeSectionDiagram",
+  "statement": "def Etale.relativeSectionDiagram {I : Type u} [SmallCategory I] (D : I ⥤ Scheme.{u}) (i : I) (F : Sheaf (D.obj i).smallEtaleTopology A) : (Over i)ᵒᵖ ⥤ ((D.obj i).Etaleᵒᵖ ⥤ A)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

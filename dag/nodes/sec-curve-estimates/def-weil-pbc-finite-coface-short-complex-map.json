@@ -1,0 +1,99 @@
+{
+ "id": "def-weil-pbc-finite-coface-short-complex-map",
+ "kind": "definition",
+ "title": "Map on a cochain short complex from a finite cosimplicial map",
+ "statement": "For a preadditive category A, cosimplicial objects K,L, q≥0 and a natural transformation between their truncations through q+1, construct the induced map from the three-term short complex of K at q to that of L. Its components are the finite-map components in degrees prev(q),q,next(q).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof paragraph 2: only cochain degrees through q+1 are needed; elementary alternating-coface naturality.",
+  "external": []
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Naturality at every coface commutes with the alternating sum defining each differential. For pairs of degrees not differing by one the differential is zero. The predecessor and successor of q in the natural-number cochain shape lie through q+1, including predecessor zero at q=0. These equations verify both short-complex squares for the three displayed components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Detailed proof, paragraph 2: finite skeleton descent and finite-cochain section continuity; explicit categorical construction with Grothendieck coefficients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology functor on short complexes preserves filtered colimits in a Grothendieck abelian category",
+   "results": "CategoryTheory.Functor.PreservesHomology, CategoryTheory.ShortComplex.homologyFunctor, CategoryTheory.ShortComplex.LeftHomologyData.IsPreservedBy.f', CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf, instPreservesHomologyFunctorAddCommGrpCatColim, CategoryTheory.ShortComplex.LeftHomologyData.IsPreservedBy.hf', HomologicalComplex.preservesColimitsOfShape_of_eval, CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a cosimplicial object in an abelian category depends only on its truncation through degree q plus one and maps of such truncations extend after hypercover refinement",
+   "results": "CochainComplex.πTruncGE, CategoryTheory.CosimplicialObject.Truncated.trunc, CochainComplex.πTruncGE_naturality, CategoryTheory.CosimplicialObject.truncationCompTrunc, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE, CochainComplex.πTruncGE_naturality_assoc, CochainComplex.ιTruncLE, CochainComplex.shortComplexTruncLEX₃ToTruncGE",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Cc]olimit|[Cc]olimit.*homology",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no identical statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives",
+   "via": [
+    "lem-weil-pbc-grothendieck-hypercover-limit-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.FiniteCofaceShortComplex",
+  "file": "lean/Sheaf/AlgebraicTopology/FiniteCofaceShortComplex.lean",
+  "declaration": "AlgebraicTopology.finiteCofaceShortComplexMap",
+  "statement": "def finiteCofaceShortComplexMap (q : ℕ) (e : SimplexCategory.Truncated.inclusion (q + 1) ⋙ K ⟶ SimplexCategory.Truncated.inclusion (q + 1) ⋙ L) : ((alternatingCofaceMapComplex A).obj K).sc q ⟶ ((alternatingCofaceMapComplex A).obj L).sc q",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T061026-L-327514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

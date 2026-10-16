@@ -22,26 +22,30 @@
  ],
  "proof": [
   {
-   "text": "Pullback of a finite split hypercover along a cone projection preserves its finite splitting and matching covers. The inverse-image unit gives maps of alternating section complexes, hence stage-to-limit cohomology maps compatible with refinement.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For a fixed q only the finite truncation through q+1 affects cohomology. Descend this truncation to a stage using finite hypercover object descent; matching covers allow it to be extended to a full finite split hypercover at that stage. The argument is applied to finite truncations, never a claim that an entire infinite simplicial object descends at once.",
+   "text": "Construct canonical stage and tail cochain maps with their hypercover-colimit injection equations. These maps use only units, inverse-image composition, base change and pullback pasting.",
    "uses": [
-    "lemma-weil-pbc-finite-hypercover-descent-objects"
+    "def-weil-pbc-grothendieck-hypercover-stage-maps"
    ],
    "elementary": false
   },
   {
-   "text": "On a descended qcqs etale constituent, sections of the inverse-image sheaf are the filtered colimit of the stage section objects. Prove this coherent-site coefficient formula categorically: sheaf conditions use finite equalizers after finite-cover refinement, and AB5 commutes finite limits with filtered colimits. The existing abelian-group section-continuity proof supplies the geometric finite-cover argument, but its elementwise conclusion is not assumed for arbitrary A.",
+   "text": "For a fixed stage hypercover, the explicit canonical tail section-short-complex cocone is colimiting in all three terms. AB5 makes short-complex homology preserve this filtered colimit. The hypothesis therefore equalizes f and g after the injection of its limit pullback.",
    "uses": [
-    "lem-weil-pbc-etale-section-continuity"
+    "lem-weil-pbc-grothendieck-hypercover-section-colimit",
+    "src-weil-homology-preserves-exact-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exactness of filtered colimits in A to the finitely many terms and differentials through q+1, obtaining joint epimorphy of the canonical stage maps on each cohomology summand. Colimit injections are jointly epic, so the canonical stage family generates the actual hypercover colimit. The hypothesis includes every canonical stage map, proving f=g. Degree zero is the same finite equalizer argument, and an empty limit scheme has zero section objects.",
+   "text": "For an arbitrary limit hypercover, descend only its finite truncation through q+1 and extend at a stage. The finite truncation isomorphism induces a finite refinement map, and its homology followed by the pulled-back-stage injection is the original hypercover injection. The preceding step thus equalizes f,g after every hypercover injection.",
+   "uses": [
+    "lem-weil-pbc-finite-split-hypercover-skeleton-descent",
+    "lem-weil-pbc-hypercover-colimit-finite-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The injections into the actual hypercover cohomology colimit are jointly epic by the universal property of a colimit. Cancel them to conclude f=g. Double-opposite reindexing supplies exactly the filtered indexing convention required by finite hypercover descent.",
    "uses": [
     "lem-weil-pbc-grothendieck-hypercover-model"
    ],
@@ -49,14 +53,17 @@
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-hypercover-descent-objects",
-  "lem-weil-pbc-etale-section-continuity",
+  "def-weil-pbc-grothendieck-hypercover-stage-maps",
+  "lem-weil-pbc-grothendieck-hypercover-section-colimit",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-finite-split-hypercover-skeleton-descent",
+  "lem-weil-pbc-hypercover-colimit-finite-refinement",
   "lem-weil-pbc-grothendieck-hypercover-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "Detailed proof, paragraph 2: finite skeleton descent and section representatives, categorical version of surjectivity; generalization from abelian groups to Grothendieck abelian coefficients using the categorical constructions described in the proof. The cited Stacks result itself is for abelian sheaves."
+  "place": "Detailed proof paragraph 2, implemented by finite skeleton descent, degree-zero section continuity and preservation of filtered colimits by short-complex homology."
  },
  "mathlib_searches": [
   {
@@ -139,9 +146,9 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T032812-L-1930622",
+  "landing": "20261016T061026-L-327514",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
