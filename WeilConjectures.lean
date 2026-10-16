@@ -181,6 +181,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.KummerCover
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.RationalTateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
@@ -1495,6 +1496,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition
 public import WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism
 public import WeilConjectures.AlgebraicGeometry.Picard.DegreePoints
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
+public import WeilConjectures.AlgebraicGeometry.Picard.GaloisTwist
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Picard.LocalizationAwayRigidity
