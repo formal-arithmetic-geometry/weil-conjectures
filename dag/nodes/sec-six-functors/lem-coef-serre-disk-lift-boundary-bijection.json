@@ -226,5 +226,43 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SerreDiskLiftBoundaryBijection",
+  "declaration": "SSet.Enhanced.serre_disk_lift_boundary_bijection",
+  "file": "lean/Sheaf/AlgebraicTopology/SerreDiskLiftBoundaryBijection.lean",
+  "statement": "theorem serre_disk_lift_boundary_bijection {E B : Type u} [TopologicalSpace E] [TopologicalSpace B] (c : SerreSimplexCubePairs) (p : C(E, B)) (e : E) (hp : HasSerreDiskLifting p) : (∀ (j : ℕ) (a : C(serreSimplex (j + 1), B)) (ha : ∀ t ∈ serreSimplexBoundary (j + 1), a t = p e), (∃ g : C(serreSimplex (j + 1), E), IsSerreHornLift p e j a g) ∧ ∀ g : C(serreSimplex (j + 1), E), IsSerreHornLift p e j a g → ∃ f : C(serreSimplex j, serreKFiber p (p e)), IsSerreFaceRestriction p e j g f) ∧ (∀ j : ℕ, ∃! δ : HomotopyGroup.Pi (j + 1) B (p e) → HomotopyGroup.Pi j (serreKFiber p (p e)) (serreKBasepoint p e), IsSerreConnecting c p e j δ) ∧ (∀ (j : ℕ) (δ : HomotopyGroup.Pi (j + 1) B (p e) → HomotopyGroup.Pi j (serreKFiber p (p e)) (serreKBasepoint p e)), IsSerreConnecting c p e j δ → δ (serreConstantClass (j + 1) (p e)) = serreConstantClass j (serreKBasepoint p e) ∧ (∀ (E' B' : Type u) (_ : TopologicalSpace E') (_ : TopologicalSpace B') (p' : C(E', B')) (u : C(E, E')) (v : C(B, B')), HasSerreDiskLifting p' → (h : ∀ x, p' (u x) = v (p x)) → ∀ δ' : HomotopyGroup.Pi (j + 1) B' (p' (u e)) → HomotopyGroup.Pi j (serreKFiber p' (p' (u e))) (serreKBasepoint p' (u e)), IsSerreConnecting c p' (u e) j δ' → ∀ x, δ' (serreBasedMap v (j + 1) (p e) (p' (u e)) (h e).symm x) = homotopyGroupMap (serreKFiberMap p p' u v e h) j (serreKBasepoint p e) (δ x)) ∧ (∀ H : C(E × unitInterval, E), (∀ z, H (z, 0) = z) → (∀ z, H (z, 1) = e) → (∀ t, H (e, t) = e) → Function.Bijective δ)) ∧ (∀ δ : HomotopyGroup.Pi 1 B (p e) → HomotopyGroup.Pi 0 (serreKFiber p (p e)) (serreKBasepoint p e), IsSerreConnecting c p e 0 δ → ∀ (a : C(serreSimplex 1, B)) (ha : ∀ t ∈ serreSimplexBoundary 1, a t = p e) (g : C(serreSimplex 1, E)), IsSerreHornLift p e 0 a g → g (SSet.stdSimplex.toTopObjIsoI.{0}.inv 1) = e ∧ ∃ x : serreKFiber p (p e), x.1 = g (SSet.stdSimplex.toTopObjIsoI.{0}.inv 0) ∧ HomotopyGroup.pi0EquivZerothHomotopy (δ (serreSimplexClass c 1 (p e) a ha)) = Quotient.mk _ x)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.serreSimplex",
+   "SSet.Enhanced.serreSimplexBoundary",
+   "SSet.Enhanced.serreLastHorn",
+   "SSet.Enhanced.serreLastFace",
+   "SSet.Enhanced.SerreSimplexCubePairs",
+   "SSet.Enhanced.serreSimplexClass",
+   "SSet.Enhanced.serreConstantClass",
+   "SSet.Enhanced.serreKFiber",
+   "SSet.Enhanced.serreKFiber.instTopologicalSpace",
+   "SSet.Enhanced.serreKBasepoint",
+   "SSet.Enhanced.serreKFiberMap",
+   "SSet.Enhanced.serreBasedMap",
+   "SSet.Enhanced.HasSerreDiskLifting",
+   "SSet.Enhanced.IsSerreHornLift",
+   "SSet.Enhanced.IsSerreFaceRestriction",
+   "SSet.Enhanced.IsSerreConnecting",
+   "SSet.Enhanced.serre_disk_lift_boundary_bijection"
+  ],
+  "note": "Repair of return L at immutable head 17b7fea9da22: actual horn-fixed lifts and last-face restrictions; compact-test k-fibre; unique connecting maps characterized for every representative and lift, with pointedness, naturality, contraction bijectivity, and explicit initial-endpoint component. Pair coordinates are supplied as actual normalized cube/simplex homeomorphisms, used consistently for all classes. No change to the mathematical node statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f84b73f2",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps and their Lean (EnhancedDiagramsCones homotopyGroupMap and SSet.toTop; RealizationFiniteLimits compactlyGenerated k-topology and existential pair homeomorphisms), Mathlib toTopObjIsoI/δ lemmas, the report and the module. Every clause matches: HasSerreDiskLifting covers all closed disks including m=0; the k-fibre uses compactlyGenerated.{u}; IsSerreHornLift fixes the realized last horn and IsSerreFaceRestriction restricts along the realized δ(Fin.last); ∃! δ characterized on every representative and lift gives independence of both choices; pointedness; naturality via the real restricted fibre map and homotopyGroupMap; bijectivity under exactly H(z,0)=z, H(z,1)=e, H(e,t)=e with no connectedness; the j=0 clause takes the initial endpoint (face δ1 maps to 0 in Mathlib). The cube/simplex coordinate datum c is honest, since the dependency is existential; all conclusions are invariant under c and such c exist. Edge cases j=0, m=0, constant class and disconnected B checked. E and B share one universe u, consistent with the size convention (remark only). No hollow definitions, only the theorem is sorry, docstrings with source and blueprint plus six proof steps, lines at most 100, node changed only in lean, statement verbatim, report sections present. nt_compile --json: rc=0, clean, 5.2 s. No fixes."
  }
 }

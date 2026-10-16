@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [
   {
@@ -350,5 +351,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeKanExistence",
+  "declaration": "SSet.Enhanced.exists_relative_pointwise_kan",
+  "declarations": [
+   "SSet.Enhanced.kanSliceSubcategoryProjection",
+   "SSet.Enhanced.kanSliceVertexSliceInclusion",
+   "SSet.Enhanced.kanSliceConeCollapse",
+   "SSet.Enhanced.IsKanSliceCone",
+   "SSet.Enhanced.existsUnique_kanSliceCone",
+   "SSet.Enhanced.kanSliceCocone",
+   "SSet.Enhanced.kanSliceCone",
+   "SSet.Enhanced.exists_relative_pointwise_kan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeKanExistence.lean",
+  "statement": "theorem exists_relative_pointwise_kan {C D B : SSet.{u}} [Quasicategory C] [Quasicategory D] [Quasicategory B] (P : C _⦋0⦌ → Prop) (p : D ⟶ B) (h : (fullSubcomplex C P).toSSet ⟶ D) (s : C ⟶ B) (hp : IsIsofibration p) (compat : h ≫ p = (fullSubcomplex C P).ι ≫ s) : ((∀ c : C _⦋0⦌, ∃ q : rightJoinCone (kanSlice (fullSubcomplex C P) c true) ⟶ D, rightJoinConeInclusion _ ≫ q = kanSliceSubcategoryProjection (fullSubcomplex C P) c true ≫ h ∧ q ≫ p = kanSliceCocone (fullSubcomplex C P) c ≫ s ∧ IsRelativeColimitDiagram p q) → ∃ H : C ⟶ D, (fullSubcomplex C P).ι ≫ H = h ∧ H ≫ p = s ∧ ∀ c : C _⦋0⦌, IsRelativeColimitDiagram p (kanSliceCocone (fullSubcomplex C P) c ≫ H)) ∧ ((∀ c : C _⦋0⦌, ∃ q : leftJoinCone (kanSlice (fullSubcomplex C P) c false) ⟶ D, leftJoinConeInclusion _ ≫ q = kanSliceSubcategoryProjection (fullSubcomplex C P) c false ≫ h ∧ q ≫ p = kanSliceCone (fullSubcomplex C P) c ≫ s ∧ IsRelativeLimitDiagram p q) → ∃ H : C ⟶ D, (fullSubcomplex C P).ι ≫ H = h ∧ H ≫ p = s ∧ ∀ c : C _⦋0⦌, IsRelativeLimitDiagram p (kanSliceCone (fullSubcomplex C P) c ≫ H))",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two dual assertions are separate implications. Reuses the existing IsIsofibration and kanSlice. Reviewer fix (H4): the canonical slice cocone k_c is the existing SSet.Enhanced.rightConeExtension (lem-coef-join-slice-diagram-isomorphisms, Sheaf.CategoryTheory.JoinSliceDiagramIsomorphisms; no DAG cycle) of the real inclusion kanSliceVertexSliceInclusion of the restricted slice into rightVertexSlice C c, replacing the delivered second specification IsKanSliceCocone. The dual cone l_c has no existing counterpart and is still chosen from the uniquely determining specification existsUnique_kanSliceCone; that theorem and the main statement have sorry proofs. The item's stmt_deps should record lem-coef-join-slice-diagram-isomorphisms (a stage-2 fix cannot add it). All helpers belong to the canonical slice data explicitly introduced by this node.",
+  "fixed_by": "NT-stage2-cc-19189c67c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19189c67c",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Read the node, the Kerodon 0302 source place, the three stmt_deps declarations, the kanSlice and join helpers, the module, and both report sections. Every clause matches: isofibration, full subcomplex, exact compat equation, K_c/L_c with whole-face projections, the three local lift conditions, the exact global lift with pointwise p-colimit/p-limit, two independent implications, one universe. The mixed join formulas are correct, the edge cases hold, the statement is verbatim, there are no hollow definitions, and the delivered file compiles clean. H4: kanSliceCocone/IsKanSliceCocone redefined the existing SSet.Enhanced.rightConeExtension (JoinSliceDiagramIsomorphisms, landed node lem-coef-join-slice-diagram-isomorphisms, no DAG cycle). Fixed: added the real inclusion kanSliceVertexSliceInclusion into rightVertexSlice, defined kanSliceCocone := rightConeExtension c of it, dropped IsKanSliceCocone, narrowed the uniqueness theorem to the dual cone (existsUnique_kanSliceCone); main statement unchanged. The fixed module compiles with no errors or warnings, and a probe shows only sorryAx plus the standard axioms. Fixes: RelativeKanExistence.lean, lean-record.json (declarations and note), report.md. The maintainer should add lem-coef-join-slice-diagram-isomorphisms to the item's stmt_deps; a fix cannot."
  }
 }
