@@ -3,42 +3,238 @@
  "blueprint": {
   "is": "det-lem-coefficient-finite-descent-sections",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finitely many sections of $\\overline{\\mathbf Q}_{\\ell,X}$ lie in one $E_X$",
- "statement": "Let $X$ be a scheme and $V\\in X_{\\mathrm{proét}}$ quasi-compact.\n\n1. For a filtered diagram of sheaves of sets (or abelian groups) $(\\mathcal F_\\alpha)$ on\n   $X_{\\mathrm{proét}}$, the natural map $\\varinjlim_\\alpha\\mathcal F_\\alpha(V)\\to(\\varinjlim_\\alpha\\mathcal F_\\alpha)(V)$\n   is bijective.\n2. Consequently $\\QbarX(V)=\\bigcup_EE_X(V)$, the union over finite subextensions\n   $E\\subseteq\\Qlb$ (the maps $E_X(V)\\to\\QbarX(V)$ being injective), and any finite set of\n   elements of $\\QbarX(V)$, or of matrices over it, lies in $E_X(V)$ for a single finite $E$.",
+ "statement": "Let $\\ell$ be a prime, let $\\Qlb$ be an algebraic closure of $\\mathbf Q_\\ell$, and let $X$ be a scheme. Use the small pro-étale site $X_{\\mathrm{proét}}$ [sk-def-pe-site] and a universe containing the site and the small indexing diagrams. Let $V$ be a quasi-compact object, with quasi-compactness as in [def-weil-pbc-quasi-compact-scheme]. Write $E_X=p_X^*\\underline E$ and $\\QbarX=p_X^*\\underline{\\Qlb}$ for the coefficient sheaves of [def-sfb-subfield-coefficient-ring] and [def-sfb-qlbar-coefficient-ring], using the finite-subextension condensed ring of [sk-def-sfb-qlbar-condensed].\n\n1. For every small filtered diagram of sheaves of sets (or abelian groups) $(\\mathcal F_\\alpha)$, the canonical map\n$$\\varinjlim_\\alpha\\mathcal F_\\alpha(V)\\longrightarrow(\\varinjlim_\\alpha\\mathcal F_\\alpha)(V)$$\nis injective. It is bijective if $V$ is also quasi-separated [def-weil-quasi-separated-morphism], or if every transition map is injective on sections over every object of the site. Colimits on the right are sheaf colimits and those on the left are colimits of sets (respectively abelian groups), as in [def-weil-pbc-category-colimit].\n2. Without any quasi-separatedness assumption on $V$, the maps $E_X(V)\\to\\QbarX(V)$ are injective and\n$$\\QbarX(V)=\\bigcup_{\\mathbf Q_\\ell\\subseteq E\\subseteq\\Qlb,\\ [E:\\mathbf Q_\\ell]<\\infty} E_X(V).$$\nEvery finite set of elements of $\\QbarX(V)$ lies in one $E_X(V)$. For a finite family of matrices, each with finitely many rows and columns and entries in $\\QbarX(V)$, all entries lie in one such $E_X(V)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-sections.md",
   "place": "node det-lem-coefficient-finite-descent-sections, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-coefficient-ring",
+  "sk-def-sfb-qlbar-condensed"
+ ],
  "proof": [
   {
-   "text": "(1) Let $\\mathcal P$ be the presheaf colimit $U\\mapsto\\varinjlim_\\alpha\\mathcal F_\\alpha(U)$. We\nclaim that on quasi-compact objects $\\mathcal P$ already satisfies the sheaf condition and\nagrees with its sheafification. Every covering of a quasi-compact $W$ in $X_{\\mathrm{proét}}$\nadmits a finite subcovering by quasi-compact (affine) objects (\\stacks{0988}), and the fibre\nproducts of these are again quasi-compact when computed over affines. For a finite covering\n$\\{W_k\\to W\\}$, the sheaf condition is the equalizer\n$\\mathcal F(W)\\to\\prod_k\\mathcal F(W_k)\\rightrightarrows\\prod_{k,k'}\\mathcal F(W_k\\times_WW_{k'})$,\na finite limit; filtered colimits of sets commute with finite limits, so $\\mathcal P$\nsatisfies it for such coverings. Since the quasi-compact objects form a basis of the site\nwhose coverings are refined by finite ones, the sheafification of $\\mathcal P$ agrees with\n$\\mathcal P$ on quasi-compact objects. (This is the degree-zero case of \\stacks{0739}.)",
-   "uses": [],
-   "elementary": null
+   "text": "First work with sheaves of sets. Put $P(U)=\\varinjlim_\\alpha\\mathcal F_\\alpha(U)$. The sectionwise-colimit theorem makes $P$ the presheaf colimit. By the sheafification adjunction, $P^\\#$ is the sheaf colimit: a map from $P^\\#$ to any sheaf is exactly a compatible family of maps from the $\\mathcal F_\\alpha$. Concretely $P(U)$ is the disjoint union of the $\\mathcal F_\\alpha(U)$ modulo eventual equality. Filteredness makes the relation 'equal after mapping to a common stage' transitive: take a common cocone on the finitely many stages and arrows witnessing two successive equalities. Thus each element has a stage representative and equality of representatives is witnessed at a common stage. This also explains every use of a common stage below, for a filtered category as well as for a directed poset.",
+   "uses": [
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VB (section-limits-colimits-PSh); Tag 00WH (proposition-sheafification-adjoint); construction used in Tag 0738 (lemma-directed-colimits-sections)"
+   }
   },
   {
-   "text": "(2) By [sk-prop-sfb-qlbar-colimit-x], $\\QbarX=\\varinjlim_EE_X$, a filtered colimit, so by (1)\n$\\QbarX(V)=\\varinjlim_EE_X(V)$. The transition maps are injective: $E_X\\to F_X$ is the\ninclusion of a direct summand of a finite free module (a basis of $F$ over $E$ containing\n$1$), so injective on sections. Hence the colimit is the union, and finitely many elements\nlie in a common $E_X(V)$ because the poset of finite subextensions is filtered.",
+   "text": "Every covering of a quasi-compact object $T$ admits a finite affine refinement. Indeed choose finitely many affine opens covering $T$; over each one use the finite affine refinement in the definition of a pro-étale covering, and take the finite union of the resulting families. The composite family is a covering by the site axioms. No assertion about the quasi-compactness of overlaps is made here.",
+   "uses": [
+    "sk-def-pe-site",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0989 (definition-fpqc-covering), applied on a finite affine open cover of T"
+   }
+  },
+  {
+   "text": "The local description of sheafification says that any section of $P^\\#$ is locally represented in $P$, and that equal images of two sections of $P$ become equal on a covering. Suppose sections $s\\in\\mathcal F_\\alpha(T)$ and $t\\in\\mathcal F_\\beta(T)$ have equal images in $P^\\#(T)$ with $T$ quasi-compact. Refine the equality covering by the finite affine family of step 2. On each member equality in $P$ is witnessed at a later stage by step 1. A common cocone on these finitely many witnesses gives one stage at which the restrictions of $s$ and $t$ agree everywhere on the covering. The sheaf condition at that stage gives equality on $T$. This proves injectivity in clause (1), and applies to every quasi-compact overlap used below.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738 (lemma-directed-colimits-sections), proof of (2); Tag 00WK (lemma-sections-sheafification)"
+   }
+  },
+  {
+   "text": "If $V$ is quasi-separated and $A,B\\to V$ are affine objects of a covering, then $A\\times_V B$ is quasi-compact. It is the pullback of the quasi-compact diagonal $V\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$ along $A\\times_{\\operatorname{Spec}\\mathbf Z}B\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$. Its projection to $A\\times_{\\operatorname{Spec}\\mathbf Z}B$ is quasi-compact by base change. The latter is affine by the affine-spectrum fibre-product theorem, so its whole inverse image is quasi-compact by the definition of a quasi-compact morphism. Now let $s\\in P^\\#(V)$. Choose local representatives and refine to a finite affine cover as in step 2. Move their finitely many stages to a common stage. On each pairwise overlap their images in $P^\\#$ agree; step 3 and the just-proved quasi-compactness give equality at a later stage. Take a common cocone on the finitely many overlap witnesses. The resulting sections are compatible and glue in that stage sheaf to a section on $V$ mapping to $s$. Together with step 3 this proves the quasi-separated case of clause (1).",
+   "uses": [
+    "def-weil-quasi-separated-morphism",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738 (lemma-directed-colimits-sections), proof of (4); geometry: schemes.tex Tags 01KK (definition-separated), items (2) and (4), 01K5 (lemma-quasi-compact-preserved-base-change), 01I4 (lemma-fibre-product-affine-schemes)"
+   }
+  },
+  {
+   "text": "Instead assume all transition maps are injective on every object. Then $\\mathcal F_\\alpha(U)\\to P(U)$ is injective for every $U$: if $s,t\\in\\mathcal F_\\alpha(U)$ have the same image, there are arrows $f,g:\\alpha\\to\\beta$ with $\\mathcal F(f)(s)=\\mathcal F(g)(t)$. Filteredness gives $h:\\beta\\to\\gamma$ with $hf=hg$. Applying $\\mathcal F(h)$ and using injectivity of $\\mathcal F(hf)$ gives $s=t$. If two sections of $\\mathcal F_\\alpha(U)$ have equal images in $P^\\#(U)$, the local equality description of sheafification and this sectionwise injectivity make them locally equal in $\\mathcal F_\\alpha$, hence equal by its sheaf condition. Thus $\\mathcal F_\\alpha(U)\\to P^\\#(U)$ is injective for every $U$, with no compactness hypothesis. For $s\\in P^\\#(V)$ use local representatives and a finite refinement as in step 2, and move the representatives to one stage $\\alpha$. On any overlap they agree in $P^\\#$, so they agree already in $\\mathcal F_\\alpha$ by the preceding injectivity, even when that overlap is not quasi-compact. They glue to a representative on $V$. This proves the injective-transition case of clause (1) without quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1) and (3); Tag 00WK (lemma-sections-sheafification)"
+   }
+  },
+  {
+   "text": "For abelian sheaves, the presheaf colimit is still computed sectionwise, and the sheaf colimit is its abelian sheafification. The forgetful functor from abelian groups to sets preserves filtered colimits, and abelian sheafification has as underlying set sheafification that of the underlying presheaf. Hence the underlying comparison map is exactly the set comparison proved in steps 3--5, with all its hypotheses unchanged. A bijective group homomorphism is an isomorphism. For later use the same injective-transition argument applies to commutative ring sheaves: the sectionwise filtered union carries ring operations by moving finitely many operands to one stage; the ring laws and universal property follow at that stage. Its ring sheafification has the set sheafification as underlying set sheaf by the same underlying-sets theorem. The sheafification adjunction therefore makes it the colimit of ring sheaves as well.",
+   "uses": [
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YR (section-sheaves-algebraic-structures), especially (gamma); sites-modules.tex Tag 03CO (lemma-limits-colimits-abelian-sheaves), part (4)"
+   }
+  },
+  {
+   "text": "For finite subextensions $E\\subseteq F$, the map $\\underline E\\to\\underline F$ is sectionwise injective on the point: it sends a continuous function $S\\to E$ to the same function followed by the field inclusion. The coefficient map $E_X\\to F_X$ is its image under $p_X^*$. To justify preservation of injectivity, use the finite-limit and covering-preservation assertions for the test-object functor in [sk-def-sfb-pullback-from-point]. The general left-exact site inverse-image theorem applied to $u$ gives exactness on abelian sheaves of $p^*$. The scheme pro-étale inverse-image theorem gives exactness of $\\pi_X^*$, hence of their composite $p_X^*$. This explicitly supplies the covering-preservation and finite-limit properties needed for scheme base change. Exactness sends the zero kernel of $\\underline E\\to\\underline F$ to the zero kernel of $E_X\\to F_X$. For each site object $U$, the section functor $\\Gamma(U,-)$ is left exact by [def-weil-pbc-sites-and-cohomology], so $E_X(U)\\to F_X(U)$ also has zero kernel and is injective. This replaces the imported argument by a basis containing $1$ and needs no unproved assertion about continuous coordinate projections.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-subfield-coefficient-map",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "det-pe-topos-functoriality-inverse-image",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6 (proposition-get-morphism); coefficient maps and test functor as in the current blueprint proof, clause (2)"
+   }
+  },
+  {
+   "text": "The coefficient proposition identifies $\\QbarX$ with the colimit $\\varinjlim_E E_X$ in sheaves of rings, indexed by the filtered poset of finite subextensions, with transition maps induced by $\\underline E\\to\\underline F$. Use this finite-subextension comparison only; the proposition's separate rationalization comparison is a module colimit equipped with a localization ring structure. Apply the ring-sheaf version of steps 5--6 to the finite-subextension diagram, whose transitions are injective by step 7. It follows for the original quasi-compact $V$, without quasi-separatedness, that $\\QbarX(V)=\\varinjlim_E E_X(V)$. The canonical maps from each $E_X(V)$ into this colimit are injective by the eventual-equality description in step 1 and step 7, so it is their union inside $\\QbarX(V)$. This proves the first assertion of clause (2).",
    "uses": [
     "sk-prop-sfb-qlbar-colimit-x"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-sections.proof.md",
+    "place": "Proof, clause (2), with the injective-transition case of Stacks Tag 0738(3) in place of the invalid unrestricted quasi-compact assertion"
+   }
+  },
+  {
+   "text": "Choose a finite-stage representative for each member of the given finite set. The finite subextensions form a nonempty directed poset, so a common upper bound contains all these stages; all representatives then lie in its $E_X(V)$. For a finite family of finite matrices apply this to the union of their finitely many entries. The empty set, a matrix with an empty dimension, and the empty family are covered by choosing $E=\\mathbf Q_\\ell$.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-sections.proof.md",
+    "place": "Proof, clause (2), last sentence and the matrix-entry specialization"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "sk-def-pe-site",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-subfield-coefficient-map",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "det-pe-topos-functoriality-inverse-image",
   "sk-prop-sfb-qlbar-colimit-x",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell"
+  "sk-def-sfb-qlbar-condensed"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-sections.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1)--(4); apply to the blueprint coefficient colimit in clause (2)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsFiltered, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": "Returned: ; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|quasi.?compact|filteredColimit",
+   "results": "Returned: Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a filtered union of subsheaves on a quasi compact object descend to a single stage",
+   "results": "Returned: TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Sheaf.existsUnique_gluing', TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.Presheaf.IsGluing, TopCat.Presheaf.section_ext, TopCat.Presheaf.IsSheaf.section_ext, TopCat.Sheaf.existsUnique_gluing, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of filtered colimits of sheaves on quasi compact quasi separated pro etale schemes and finite coefficient field descent",
+   "results": "Returned: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, Condensed.isColimitLocallyConstantPresheaf_desc_apply, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|colimit.*filtered|finite.*subextension",
+   "results": "Returned: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on a compact object preserves filtered unions of subsheaves and on a coherent object preserves all filtered colimits of sheaves",
+   "results": "Returned: Condensed.hasExactColimitsOfShape, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.isSheaf_pointwiseColimit, LightProfinite.hasSheafify, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits provide general sheaf colimits or other geometries, not both clauses for pro-etale coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*[Ee]val|preserves.*[Ff]iltered|[Ff]iltered.*[Ss]ection",
+   "results": "14 hits: Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: extensive-topology pointwise colimits, conditional sheaf colimits, and point fibres do not state evaluation on this pro-etale site or the coefficient descent conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "1 hits: CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-16",
+   "verdict": "no exact match: extensive-topology pointwise colimits, conditional sheaf colimits, and point fibres do not state evaluation on this pro-etale site or the coefficient descent conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a sheaf colimit on a quasicompact object commutes with filtered unions of subobjects",
+   "results": "8 hits: CategoryTheory.isSheaf_pointwiseColimit, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.createsColimitOfIsSheaf, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, CategoryTheory.Sheaf.instHasColimitsOfSize, CategoryTheory.Sheaf.instHasColimitsOfShape, CategoryTheory.Sheaf.isColimitSheafifyCocone, Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+   "date": "2026-10-16",
+   "verdict": "no exact match: extensive-topology pointwise colimits, conditional sheaf colimits, and point fibres do not state evaluation on this pro-etale site or the coefficient descent conclusion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -53,5 +249,39 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-coefficient-finite-descent-sections",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: quasi-compactness does not ensure compact overlaps. Corrected clause (1) to injectivity on quasi-compact objects and bijectivity for quasi-separated objects or injective transitions, following Stacks 0738. Preserved clause (2) on all quasi-compact objects by proving the coefficient transitions injective. Replaced the earlier finite-cover-site misapplication by the local representative and finite-stage gluing argument, using only existing DAG nodes. Repair of returned head 889665477e: revalidated all current cited statements, refreshed the changed site, subfield-map, and coefficient-colimit quotations, and made step 8 explicitly use only the ring-sheaf finite-subextension colimit, not the clarified module rationalization colimit.",
+  "blueprint": "Steps 1--6 repair and realize blueprint proof paragraph (1); steps 7--9 realize paragraph (2). The chapter and unit route through the coefficient colimit is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "General site/sheaf or scheme tool used in the explicit local-representative proof; it does not replace the unit coefficient-descent route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic exact inverse-image theorem applied to the finite-limit and covering-preserving profinite test-object functor, to prove that coefficient inclusions remain injective after pullback."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic exactness of scheme pro-etale inverse image, applied to the structure morphism to prove injectivity of the coefficient transitions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-19d64ad1d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-19d64ad1d (reviewer sub-agent of L); spot-checked: Read in full: the item, all 20 cited statements, and the citers (det-lem-coefficient-finite-descent-lisse and the unit sk-thm-sfb-qlbar-two-colimit). No new nodes. Source correction (E7) accepted: the blueprint's clause (1), bijectivity for every quasi-compact V, is false. I checked the doubled convergent-sequence counterexample myself: V = two copies of Spec(eventually constant F_2-sequences) glued along N is quasi-compact but not quasi-separated; the finite gluings V_S are etale over V with sheaf colimit h_V, and no V_S has a section over V. The corrected clause (1) matches Stacks sites.tex 0738(2)-(4). Clause (2) is unchanged and is all that downstream nodes use. Steps: 1 (sectionwise colimit, sheafification adjunction, filtered cocone) and 2 (finite affine refinement from the 0989 condition) are elementary. 3 is 0738(2) via 00WK. 4 handles the quasi-separated case: A x_V B is the base change of the diagonal over affine A x_Z B, using 01K5 and 01I4. 5 handles injective transitions without quasi-compact overlaps, with the parallel arrows equalized. 6 covers abelian groups and rings through the underlying-set sheafification. 7 shows the coefficient maps stay injective: p^* is exact by the left-exact inverse-image lemma (test functor preserves finite limits and coverings), pi_X^* by the scheme inverse-image theorem, and Gamma(U,-) is left exact. 8 uses only the finite-subextension ring-sheaf colimit clause of sk-prop-sfb-qlbar-colimit-x. 9 is directedness. The coefficient ring is the finite-subextension condensed ring, consistent with the cited definitions. No duplicates: the existing site nodes need finite-index coverings, and the qcqs pro-etale section-calculus node needs quasi-separated V. Accepted tool_uses: lem-weil-pbc-site-sheafification-sections-local, lem-weil-pbc-left-exact-site-inverse-image-tensor, det-pe-topos-functoriality-inverse-image. No SGA. Pre-existing note: sk-def-pe-site and the size-bounded def-weil-pbc-proetale-site coexist; this does not affect step 2. No fixes written."
+ }
 }
