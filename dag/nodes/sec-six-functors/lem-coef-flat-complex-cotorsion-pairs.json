@@ -28,9 +28,144 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pur-ringed-site-grothendieck-abelian], $\\mathcal A=\\operatorname{Mod}(R)$ is Grothendieck. Apply [lem-coef-module-flat-cotorsion-foundation]. Denote the flat modules by $\\mathcal F$ and their cotorsion right class by $\\mathcal T$; fix the flat generator $G$ and the set $S\\subseteq\\mathcal F$ with $\\mathcal T=S^{\\perp_1}$. In particular this is a hereditary cotorsion pair in the module category, both classes are extension-closed, and kernels of epimorphisms between flats remain flat. This uses tensor-flatness of sheaves and the smallness of the site, without a test on stalks or on all sections.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-coef-module-flat-cotorsion-foundation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Module-level hypotheses for the derived coefficient adjunction; online checks: Recktenwald 2.5.35; Stacks 03EV, 03EW."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-hereditary-cotorsion-complex-lift] to this pair, its set $S$, and $G$. Use its classes $\\widetilde{\\mathcal F},\\widetilde{\\mathcal T},\\operatorname{dg}\\mathcal F,\\operatorname{dg}\\mathcal T$ and its sphere set $\\Sigma=\\{S^nA:n\\in\\mathbf Z,\\ A\\in S\\cup\\{G\\}\\}$. We have hereditary cotorsion pairs $(\\operatorname{dg}\\mathcal F,\\widetilde{\\mathcal T})$ and $(\\widetilde{\\mathcal F},\\operatorname{dg}\\mathcal T)$, the two acyclic-intersection identities, and $\\widetilde{\\mathcal T}=\\Sigma^{\\perp_1}$. The Hom complexes here are the global Hom complexes in the item. The alternative chain-map formulation is equivalent: an $r$-cocycle is a map into a shift, and being a boundary is being null-homotopic; the exact-cycle test classes are closed under all shifts.",
+   "uses": [
+    "lem-coef-hereditary-cotorsion-complex-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Abstract complex lifting; Recktenwald 2.2.7 and 2.2.13, Gillespie arXiv:math/0607769 Proposition 3.7."
+   }
+  },
+  {
+   "text": "The complex category $\\mathcal B$ is Grothendieck: kernels, cokernels and colimits are degreewise, and filtered colimits are exact because they are exact in $\\mathcal A$. For $D^nG$ the disk in degrees $n,n+1$ with differential $1_G$, $\\operatorname{Hom}_{\\mathcal B}(D^nG,X)=\\operatorname{Hom}_{\\mathcal A}(G,X^n)$. Hence $H=\\bigoplus_{n\\in\\mathbf Z}D^nG$ is a generator. This direct sum is contractible (use the identity from the upper copy in each disk to the lower copy), and its cycle in each degree is a copy of $G$; thus $H\\in\\widetilde{\\mathcal F}\\subseteq\\operatorname{dg}\\mathcal F$ by Step 2. These statements verify [def-sp-grothendieck-abelian] directly. Every sphere in $\\Sigma$ belongs to $\\operatorname{dg}\\mathcal F$: the equality $\\widetilde{\\mathcal T}=\\Sigma^{\\perp_1}$ gives its Ext-one vanishing against $\\widetilde{\\mathcal T}$, and the first induced cotorsion pair identifies this left orthogonal with $\\operatorname{dg}\\mathcal F$. Adding $H$ to $\\Sigma$ does not change this right orthogonal since $H$ is in its left class. Now [lem-coef-generating-set-cotorsion-smallness] with $\\Sigma,H$ makes $(\\operatorname{dg}\\mathcal F,\\widetilde{\\mathcal T})$ complete and small and expresses every object of $\\operatorname{dg}\\mathcal F$ as a retract of a $(\\Sigma\\cup\\{H\\})$-filtered complex. For the other pair, [lem-coef-exact-flat-complex-set-cogeneration] supplies $S_{\\mathrm{ex}}\\subseteq\\widetilde{\\mathcal F}$ with $\\operatorname{dg}\\mathcal T=\\widetilde{\\mathcal F}^{\\perp_1}=S_{\\mathrm{ex}}^{\\perp_1}$; apply [lem-coef-generating-set-cotorsion-smallness] with $S_{\\mathrm{ex}}$ and generator $H$. Its left orthogonal is $\\widetilde{\\mathcal F}$ by the second induced cotorsion pair, and $H\\in\\widetilde{\\mathcal F}$ was checked above. The theorem makes this second pair complete and small. Every ordinal, set and coproduct is small in the fixed universe.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-sp-grothendieck-abelian",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-generating-set-cotorsion-smallness",
+    "lem-coef-exact-flat-complex-set-cogeneration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Degreewise Grothendieck axioms and disks; set detection (Recktenwald 2.5.37) and the efficient-category small-object theorem."
+   }
+  },
+  {
+   "text": "The factors of the filtration in Step 3 are K-flat. Each $S^nA$ with $A\\in S\\cup\\{G\\}$ is a bounded-above complex of flat sheaves, so [lem-pc-kflat-closure] applies. For $H$, the displayed disk contraction gives a contraction of $N\\otimes_R H$ for every complex $N$: on homogeneous $x\\otimes y$ put $h(x\\otimes y)=(-1)^{|x|}x\\otimes h_H(y)$. Then $dh+hd=1$ by the tensor differential. Thus $H$ is K-flat as well. These factors all have flat terms: spheres have one flat term, and in each degree $H$ has two copies of $G$, a flat coproduct by Step 1.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "lem-coef-module-flat-cotorsion-foundation",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Stacks Tag 06YQ (sites-cohomology-lemma-bounded-flat-K-flat); disk tensor contraction written here."
+   }
+  },
+  {
+   "text": "We prove by transfinite induction that a $(\\Sigma\\cup\\{H\\})$-filtered complex $Y$ is K-flat. Fix any acyclic $N$. At the zero stage $N\\otimes0=0$. At a successor stage $0\\to Y_\\alpha\\to Y_{\\alpha+1}\\to Q_\\alpha\\to0$, the quotient $Q_\\alpha$ is a factor in Step 4 and has flat terms. Apply [lem-weil-pbc-site-flat-quotient-tensor-ses] to each component after tensoring with $N^i$. Taking the direct sums over $i+j=k$ gives a short exact sequence of total tensor complexes: these sums are exact because a small direct sum is the filtered colimit of its finite subsums and $\\mathcal A$ has exact filtered colimits. By [lem-weil-pbc-complex-ses-homology-long-exact], the acyclicity of $N\\otimes Y_\\alpha$ and $N\\otimes Q_\\alpha$ gives the acyclicity of $N\\otimes Y_{\\alpha+1}$. At a nonzero limit ordinal $\\lambda$, $N\\otimes Y_\\lambda=\\varinjlim_{\\alpha<\\lambda}(N\\otimes Y_\\alpha)$. Indeed [lem-pc-sheaf-modules-tensor-closed] gives, for any module $M$, $\\operatorname{Hom}(M\\otimes\\varinjlim F_\\alpha,T)=\\varprojlim\\operatorname{Hom}(F_\\alpha,\\mathcal Hom(M,T))=\\varprojlim\\operatorname{Hom}(M\\otimes F_\\alpha,T)$; then interchange the two colimits defining the direct-sum totalization. Exact filtered colimits preserve kernels and cokernels, hence cohomology, so this limit complex is acyclic. This proves the induction. Tensoring preserves a retract diagram, and cohomology of a retract of an acyclic complex is zero. By the filtration/retract assertion of [lem-coef-generating-set-cotorsion-smallness], every $Q\\in\\operatorname{dg}\\mathcal F$ is therefore K-flat. Its terms are flat by the definition in Step 2, so $\\operatorname{dg}\\mathcal F\\subseteq\\mathcal D$.",
+   "uses": [
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-coef-generating-set-cotorsion-smallness",
+    "lem-coef-hereditary-cotorsion-complex-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Stacks 03EX (flat quotient tensor exactness), 0117 (long exact cohomology), 03EO (tensor adjunction), 03DB (filtered exactness); explicit induction and colimit calculation."
+   }
+  },
+  {
+   "text": "Conversely let $P\\in\\mathcal D$. Completeness in Step 3 gives $0\\to T\\xrightarrow{i}Q\\xrightarrow{p}P\\to0$ with $Q\\in\\operatorname{dg}\\mathcal F$ and $T\\in\\widetilde{\\mathcal T}$. Each $T^n$ is cotorsion: its two successive cycles are in the extension-closed class $\\mathcal T$. Since $P^n$ is flat, $\\operatorname{Ext}^1(P^n,T^n)=0$; choose a section $s^n$ of $p^n$. Thus this sequence is degreewise split, so tensoring with any $N$ and taking direct-sum totalizations again gives a short exact sequence. Both $N\\otimes Q$ and $N\\otimes P$ are acyclic when $N$ is acyclic, by Step 5 and the hypothesis on $P$; [lem-weil-pbc-complex-ses-homology-long-exact] makes $N\\otimes T$ acyclic. Hence $T$ is K-flat. Its terms are flat since $Q^n\\to P^n$ is an epimorphism between flats and the flat class is resolving by [lem-coef-module-flat-cotorsion-foundation]. Also $T$ is acyclic by its membership in $\\widetilde{\\mathcal T}$. Consequently [lem-weil-pbc-site-acyclic-kflat-cycles-flat] says its cycles are flat, giving $T\\in\\widetilde{\\mathcal F}$. By Step 2, $T\\in\\operatorname{dg}\\mathcal F$ as well. Its Hom complex into itself is acyclic, because $T\\in\\widetilde{\\mathcal T}$. The identity cocycle is therefore a boundary: there is $h\\in\\operatorname{Hom}^{-1}(T,T)$ with $d_Th+hd_T=1_T$.",
+   "uses": [
+    "lem-coef-module-flat-cotorsion-foundation",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-generating-set-cotorsion-smallness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent identification of K-flat and dg-flat; the non-elementary cycle-flatness input is exactly Stacks 0G7C (sites-cohomology-lemma-K-flat-flat-acyclic)."
+   }
+  },
+  {
+   "text": "Correct the graded section in Step 6 to a chain section. There is a unique degree-one cochain $a:P\\to T$ with $ia=d_Qs-sd_P$; it satisfies $\\delta a=0$ by $d^2=0$. Put $b=ha$. The Hom differential satisfies $\\delta(ha)=(\\delta h)a-h\\delta a=a$, so $s'=s-ib$ obeys $d_Qs'=s'd_P$ and $ps'=1_P$. Thus $P$ is a retract of $Q$ as a complex. For every $U\\in\\widetilde{\\mathcal T}$, precomposition exhibits $\\operatorname{Hom}^\\bullet(P,U)$ as a retract of the acyclic $\\operatorname{Hom}^\\bullet(Q,U)$, so it is acyclic; $P$ already has flat terms. This is precisely $P\\in\\operatorname{dg}\\mathcal F$. Combined with Step 5 it proves $\\mathcal D=\\operatorname{dg}\\mathcal F$ and, by the compatibility in [lem-coef-hereditary-cotorsion-complex-lift], $\\mathcal D\\cap\\mathcal W=\\widetilde{\\mathcal F}$.",
+   "uses": [
+    "lem-coef-hereditary-cotorsion-complex-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Elementary graded-section correction: the differential, cocycle and contraction equations are written out."
+   }
+  },
+  {
+   "text": "Using $\\mathcal D\\cap\\mathcal W=\\widetilde{\\mathcal F}$, the definition of $\\mathcal E$ is exactly the definition of $\\operatorname{dg}\\mathcal T$ in [lem-coef-hereditary-cotorsion-complex-lift]. We next show $\\mathcal E_0=\\widetilde{\\mathcal T}$. If $T\\in\\widetilde{\\mathcal T}$, its terms are cotorsion by extension closure in [lem-coef-module-flat-cotorsion-foundation], and $\\operatorname{Hom}^\\bullet(P,T)$ is acyclic for $P\\in\\mathcal D=\\operatorname{dg}\\mathcal F$ by the definition of $\\operatorname{dg}\\mathcal F$; hence $T\\in\\mathcal E_0$. Conversely let $T\\in\\mathcal E_0$ and $P\\in\\operatorname{dg}\\mathcal F$. Any extension $0\\to T\\xrightarrow{i}X\\xrightarrow{p}P\\to0$ splits in each degree since $P^n$ is flat and $T^n$ cotorsion. For its graded section $s$, write $ia=d_Xs-sd_P$; again $\\delta a=0$. The acyclicity of $\\operatorname{Hom}^\\bullet(P,T)$ gives a degree-zero $b$ with $\\delta b=a$, so $s-ib$ is a chain section. Thus $\\operatorname{Ext}^1_{\\mathcal B}(P,T)=0$ for every such $P$. The right-orthogonal equality of the first cotorsion pair in [lem-coef-hereditary-cotorsion-complex-lift] implies $T\\in\\widetilde{\\mathcal T}$. No assertion about exactness of internal sheaf Hom or about sections of an epimorphism is used.",
+   "uses": [
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-module-flat-cotorsion-foundation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Elementary degreewise-split extension calculation and the abstract right-orthogonal equality."
+   }
+  },
+  {
+   "text": "The compatibility identity of [lem-coef-hereditary-cotorsion-complex-lift] now reads $\\mathcal E\\cap\\mathcal W=\\operatorname{dg}\\mathcal T\\cap\\mathcal W=\\widetilde{\\mathcal T}=\\mathcal E_0$. The two hereditary cotorsion pairs of Step 2 are exactly $(\\mathcal D,\\mathcal E_0)$ and $(\\mathcal D\\cap\\mathcal W,\\mathcal E)$. Step 3, using [lem-coef-generating-set-cotorsion-smallness] for each pair, gives both approximation sequences for every complex and a set of monomorphisms whose right lifting class is precisely the epimorphisms with kernel in the corresponding right class. Their cokernels lie in the corresponding left class. This is the precise completeness and smallness requested in the item, together with its hereditary kernel/cokernel closure.",
+   "uses": [
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-generating-set-cotorsion-smallness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Assembly after the explicit K-flat and global-Hom identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-coef-module-flat-cotorsion-foundation",
+  "lem-coef-hereditary-cotorsion-complex-lift",
+  "def-sp-grothendieck-abelian",
+  "lem-coef-generating-set-cotorsion-smallness",
+  "lem-coef-exact-flat-complex-set-cogeneration",
+  "lem-pc-kflat-closure",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-site-acyclic-kflat-cycles-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: additional flat-model foundation for derived coefficient adjunction. Abstract results checked online in Recktenwald, Gillespie, and Saorin--Stovicek, requested for archiving in report.md; K-flat/dg-flat and global-Hom identifications supplied explicitly here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,15 +215,82 @@
    "date": "2026-10-16",
    "results": "0 hits: ",
    "verdict": "no match: independently read the returned declarations; none states this foundation. The recognition hits provide injective factorizations or assume model axioms, the flat hits are K-injective/K-projective orthogonality, and the stability hits concern ordinary localization only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete hereditary small cotorsion pairs of flat K-flat complexes and dg cotorsion sheaf complexes on a small ringed site",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Ext, CochainComplex.IsKInjective, CochainComplex.IsKProjective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.IsKProjective.leftOrthogonal, CochainComplex.IsKInjective.rightOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient Grothendieck, single-ring flatness and K-projective/K-injective declarations do not assert either of these cotorsion pairs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible cotorsion pairs of flat complexes in a Grothendieck category",
+   "results": "8 hits: HomologicalComplex.isGrothendieckAbelian, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, HomologicalComplex.instAbelian, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.IsGrothendieckAbelian.hasExt, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient Grothendieck, single-ring flatness and K-projective/K-injective declarations do not assert either of these cotorsion pairs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotorsion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient Grothendieck, single-ring flatness and K-projective/K-injective declarations do not assert either of these cotorsion pairs."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|dg.?flat|dg.?cotorsion|K.?flat",
+   "results": "3 hits: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient Grothendieck, single-ring flatness and K-projective/K-injective declarations do not assert either of these cotorsion pairs."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-sheaf-flat-model",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-flat-complex-cotorsion-pairs",
+  "worker": "stage1",
+  "summary": "Four smaller foundations separate module cotorsion theory, exact-flat set detection, the abstract induced pairs and generic smallness/filtrations. The item proves the K-flat/dg-flat identification by a transfinite sphere filtration and a corrected graded section, then identifies both stated global-Hom classes. Statement unchanged; no enough-projectives/points assumption.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction immediately before its derived inverse-limit Hom calculation; preserves the unit and chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Generic tensor-exactness tool for a flat quotient on any small ringed site, needed at successor filtration steps; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
+    "why": "Generic Stacks 0G7C tool for cycles of acyclic flat-term K-flat complexes, needed to split the approximation; no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Generic bounded-above K-flat criterion for the filtration sphere factors; no same-unit node states it."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic sheaf tensor adjunction used to prove the filtered-colimit comparison explicitly; no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
+  "lem-pc-kflat-closure",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-80208a4c1",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-80208a4c1 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, primary source passages, route, and target coefficient/base-change definitions. Mathematics accepted; repaired shared provenance/default metadata omissions in four whole JSON files under fixes/. Concrete step-by-step checks, edge cases, duplicate searches, and accepted tool uses are recorded in review.md.; 4 file(s) fixed by the reviewer"
+ }
 }
