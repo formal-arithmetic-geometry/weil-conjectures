@@ -18,18 +18,120 @@
  },
  "kind": "statement",
  "title": "Kan-valued relative nerves are the classified left fibrations",
- "statement": "Use the simplicial sets, horns, Kan spaces and ordinary nerves of [def-cbc-enhanced-diagrams-cones] and the left and cocartesian fibrations of [def-coef-infinity-fibrations]. Fix universes $\\mathcal U\\in\\mathcal U'$. Let $C$ be a $\\mathcal U$-small ordinary category and let $F:C\\to\\mathsf{sSet}_{\\mathcal U}$ be a strict functor taking every object to a Kan complex. For a nonempty finite ordered set $J$, write $\\Delta^J=N(J)$, viewing $J$ as an ordinary category; an order-preserving map $h:J\\to K$ induces $\\Delta(h):\\Delta^J\\to\\Delta^K$ by postcomposition on the simplices of these nerves. Define $N_F(C)$ by the following data in dimension $r$: a functor $\\sigma:[r]\\to C$ and, for every nonempty subset $J\\subseteq[r]$, a simplicial map $t_J:\\Delta^J\\to F(\\sigma(\\max J))$ satisfying\n$$t_J|_{\\Delta^I}=F(\\sigma(\\max I)\\to\\sigma(\\max J))\\circ t_I\\qquad(\\varnothing\\ne I\\subseteq J).$$\nFor $\\theta:[s]\\to[r]$, reindex $\\sigma$ by $\\theta$ and set $t'_J=t_{\\theta(J)}\\circ\\Delta(\\theta|_J)$ for nonempty $J\\subseteq[s]$. Projection to $\\sigma$ gives $p:N_F(C)\\to N(C)$. Then $p$ is a left fibration, is also a cocartesian fibration, and every edge in its domain is $p$-cocartesian. The fiber over $c$ is naturally isomorphic to $F(c)$. Under these identifications cocartesian transport along $u:c\\to d$ is the map $F(u)$, with its coherent composition data given by the strict functor $F$. Equivalently this is the left fibration classified by the coherent space-valued functor represented by $F$.",
+ "statement": "Use the simplicial sets, horns, Kan spaces and ordinary nerves of [def-cbc-enhanced-diagrams-cones] and the left and cocartesian fibrations of [def-coef-infinity-fibrations]. Fix universes $\\mathcal U\\in\\mathcal U'$. Let $C$ be a $\\mathcal U$-small ordinary category and let $F:C\\to\\mathsf{sSet}_{\\mathcal U}$ be a strict functor taking every object to a Kan complex. For a nonempty finite ordered set $J$, write $\\Delta^J=N(J)$, viewing $J$ as an ordinary category; an order-preserving map $h:J\\to K$ induces $\\Delta(h):\\Delta^J\\to\\Delta^K$ by postcomposition on the simplices of these nerves. Define $N_F(C)$ by the following data in dimension $r$: a functor $\\sigma:[r]\\to C$ and, for every nonempty subset $J\\subseteq[r]$, a simplicial map $t_J:\\Delta^J\\to F(\\sigma(\\max J))$ satisfying\n$$t_J|_{\\Delta^I}=F(\\sigma(\\max I)\\to\\sigma(\\max J))\\circ t_I\\qquad(\\varnothing\\ne I\\subseteq J).$$\nFor $\\theta:[s]\\to[r]$, reindex $\\sigma$ by $\\theta$ and set $t'_J=t_{\\theta(J)}\\circ\\Delta(\\theta|_J)$ for nonempty $J\\subseteq[s]$. Projection to $\\sigma$ gives $p:N_F(C)\\to N(C)$. Then $p$ is a left fibration, is also a cocartesian fibration, and every edge in its domain is $p$-cocartesian. The fiber over $c$ is naturally isomorphic to $F(c)$. Under these identifications cocartesian transport along $u:c\\to d$ is the map $F(u)$, with its coherent composition data given by the strict functor $F$. Equivalently, using classification as defined in [lem-coef-space-valued-straightening], this is the left fibration classified by the coherent space-valued functor represented by $F$.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19 (left fibrations) and Proposition 3.2.5.21 (cocartesian edges and classification). Read online; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-space-valued-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check that the prescribed operators define a simplicial set. If $I\\subseteq J$, the restriction of $t_{\\theta(J)}\\Delta(\\theta|_J)$ to $\\Delta^I$ equals $t_{\\theta(J)}|_{\\Delta^{\\theta(I)}}\\Delta(\\theta|_I)$; the defining compatibility makes this $F(\\sigma(\\theta(\\max I))\\to\\sigma(\\theta(\\max J)))t_{\\theta(I)}\\Delta(\\theta|_I)$. Here monotonicity gives $\\max\\theta(I)=\\theta(\\max I)$, even for noninjective $\\theta$. For another monotone $\\eta$, image subsets satisfy $\\theta(\\eta(J))=(\\theta\\eta)(J)$ and the induced maps of nerves compose; hence applying the two reindexings equals reindexing by $\\theta\\eta$. Identity reindexing is the identity. Forgetting the $t_J$ commutes with these operators, so $p$ is simplicial.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "Over the constant simplex at $c$, all transition maps are identities. The compatibility for $J\\subseteq[r]$ therefore forces $t_J=t_{[r]}|_{\\Delta^J}$. Conversely any simplex $x:\\Delta^r\\to F(c)$ supplies exactly these restrictions. The mutually inverse assignments $(\\sigma,t)\\mapsto t_{[r]}$ and $x\\mapsto(\\mathrm{const}_c,(x|_{\\Delta^J})_J)$ commute with every monotone operator by step 1. They give a degreewise, hence simplicial, isomorphism $p^{-1}(c)\\cong F(c)$, natural for maps of strict diagrams.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "Consider a left horn lifting problem with $n\\geq1$, $0\\leq i<n$, and specified base simplex $\\sigma:[n]\\to C$. Put $V=[n]$, $A=V\\setminus\\{i\\}$ and $K=F(\\sigma(n))$. A nonempty subset $J\\subseteq V$ occurs in the horn precisely when it omits some $k\\ne i$. Consequently the horn determines compatible $t_J$ for all $J$ except $V$ and $A$. For each face $J_k=V\\setminus\\{k\\}$, $k\\ne i$, postcompose its given $t_{J_k}$ with $F(\\sigma(\\max J_k)\\to\\sigma(n))$. On an intersection indexed by nonempty $I\\subseteq J_k\\cap J_l$, both restrictions are $F(\\sigma(\\max I)\\to\\sigma(n))t_I$, by compatibility and strict composition in $F$. Thus these face maps glue to a map $a:\\Lambda_i^n\\to K$. Gluing here is degreewise: a simplex lies in a face precisely when its vertex image is contained in that face, and the two values agree on intersections.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "Since $K$ is Kan, extend $a$ to $T:\\Delta^n\\to K$. Define the two missing data by $t_V=T$ and $t_A=T|_{\\Delta^A}$; both have the correct target because $i<n$, so $\\max A=n$. For a proper nonempty $I\\subset A$, choose $k\\in A\\setminus I$. This $k\\ne i$, so $I$ is contained in the known face $J_k$, and restricting $T$ to $I$ gives $F(\\sigma(\\max I)\\to\\sigma(n))t_I$. For any other known proper $J\\subset V$, choose $k\\ne i$ omitted by $J$ and use the same equality on $J$. These identities verify all compatibility equations involving either new datum; the old ones held in the horn. The resulting simplex of $N_F(C)$ lies over $\\sigma$ and restricts to the prescribed horn. This includes $n=1,i=0$, where $A=\\{1\\}$ and the horn map is the prescribed initial vertex mapped into $F(\\sigma(1))$. Thus $p$ has every left horn filler required in the definition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "The ordinary nerve $N(C)$ is a quasicategory directly from the nerve definition in [def-cbc-enhanced-diagrams-cones]. In dimension 2 the only inner horn specifies consecutive arrows $f_{01},f_{12}$; take $f_{02}=f_{12}f_{01}$. In dimension 3 either inner horn contains all edges and three triangular composition equations. For the missing triangle these equations and associativity give $f_{03}=f_{23}(f_{12}f_{01})=(f_{23}f_{12})f_{01}$, which is precisely its required equation. In dimensions $n\\geq4$, every edge and triangle lies in a present face: its vertex set omits at least two vertices, so one can choose an omitted vertex distinct from the horn index. Thus the horn specifies all arrows $f_{ab}$ and the equations $f_{ac}=f_{bc}f_{ab}$. They define a functor $[n]\\to C$ and its restriction is the given horn, since every face functor is determined by these arrows. These constructions fill every inner horn in $N(C)$. For $p$, any lifting problem against an inner horn already includes a base simplex; step 4 fills it because $0<i<n$ is within the left-horn range. To fill an inner horn in the total space $N_F(C)$, first fill its projected horn in $N(C)$ by the preceding argument, and then apply step 4. Hence $p$ is an inner fibration and $N_F(C)$ is a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "For any edge $e$ of $N_F(C)$, every outer horn $\\Lambda_0^n$, $n\\geq2$, having $e$ as its $\\{0,1\\}$ edge is one of the lifting problems solved in step 4. The definition of a cocartesian edge therefore makes every edge $p$-cocartesian. Given $x$ over $c$ and $u:c\\to d$, the $n=1,i=0$ case of step 4 supplies an edge with source $x$ over $u$. Since it is cocartesian and both source and base are quasicategories by step 5, the defining lift condition for a cocartesian fibration holds.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "Here is an explicit lift family, including its higher compatibilities. For a base simplex $\\sigma:[r]\\to C$, define $H_\\sigma:F(\\sigma(0))\\times\\Delta^r\\to N_F(C)$ over $\\sigma$. On an $m$-simplex $(x,b)$, where $x:\\Delta^m\\to F(\\sigma(0))$ and $b:[m]\\to[r]$, its base is $\\sigma b$ and its subset datum is\n$$t_J=F(\\sigma(0)\\to\\sigma(b(\\max J)))\\,x|_{\\Delta^J}.$$\nThe compatibility for nested subsets is exactly the composition law of $F$. Restriction along $\\alpha:[q]\\to[m]$ replaces $x$ by $x\\Delta(\\alpha)$ and $b$ by $b\\alpha$, giving the same formula, so $H_\\sigma$ is simplicial. On the vertex $j$ it is $F(\\sigma(0)\\to\\sigma(j))$, using the fiber identification in step 2. In particular $H_u$ supplies, simultaneously for every simplex of $F(c)$, lifts from $x$ to $F(u)x$, whose vertexwise edges are cocartesian by step 6. For every monotone $\\theta:[s]\\to[r]$ the complete face-and-degeneracy identity is\n$$H_\\sigma(\\mathrm{id}\\times\\Delta(\\theta))=H_{\\sigma\\theta}(F(\\sigma(0)\\to\\sigma(\\theta(0)))\\times\\mathrm{id}).$$\nBoth sides have the same subset data because the two transition arrows compose to $\\sigma(0)\\to\\sigma(\\theta(b(\\max J)))$. This establishes the coherence in all dimensions, including faces which remove the initial vertex. For $c\\xrightarrow{u}d\\xrightarrow{v}e$ the endpoint map is $F(vu)=F(v)F(u)$, and constant base simplices give the identity coherence. Thus the induced transport can be represented by the actual simplicial map $F(u)$ with the strict coherent composition data of $F$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Definition 3.2.5.2; Remark 3.2.5.4; Corollary 3.2.5.19; Proposition 3.2.5.21. Explicit direct argument by Q33, checked against these statements."
+   }
+  },
+  {
+   "text": "Use $A_\\sigma,L_C,R_C$ and the classification convention in [lem-coef-space-valued-straightening]. For each base simplex $\\sigma:[r]\\to C$, a natural map $A_\\sigma\\to F$ is equivalent to a family of simplicial maps $t_J:\\Delta^J\\to F(\\sigma(\\max J))$: extract $t_J(z)$ by evaluating the summand $(J,z,\\mathrm{id}_{\\sigma(\\max J)})$, and conversely send $(J,z,h)$ to $F(h)t_J(z)$. Naturality in $c$ forces this latter formula for every $h$. The quotient relation in $A_\\sigma$ holds exactly when $t_J|_{\\Delta^I}=F(\\sigma(\\max I)\\to\\sigma(\\max J))t_I$. Thus the two assignments are inverse, including when any value is empty. The map $A_{\\sigma\\theta}\\to A_\\sigma$ induces on these families exactly $t'_J=t_{\\theta(J)}\\Delta(\\theta|_J)$, including for noninjective $\\theta$. A simplex of the right adjoint $R_CF$ over $\\sigma$ is precisely a map from the object $(\\Delta^r,\\sigma)$ into $R_CF$; the adjunction identifies it with $\\operatorname{Nat}(L_C(\\Delta^r,\\sigma),F)=\\operatorname{Nat}(A_\\sigma,F)$, since the identity simplex is terminal in the simplex category of $\\Delta^r$. The preceding inverse assignments therefore give a simplicial isomorphism $E=N_F(C)\\cong R_CF$ over $N(C)$, not a comparison using only transports or the coend of the $H_\\sigma$. The total space $E$ is small: each degree uses a small set of base simplices and finitely many subsets, with all maps into small $F(c)$. Steps 4 and 5 give the small left fibration required by the comparison theorem. Since every $F(c)$ is Kan, that theorem's actual counit $L_C(R_CF)\\to F$ is an objectwise weak homotopy equivalence; using the isomorphism just constructed yields $L_C(E)\\to F$. Apply its straightening-comparison clause with $X=E$ and $D=F$. It follows that $\\operatorname{St}_{N(C)}(p)\\simeq N_{\\mathrm{hc}}(F)$, which is exactly the classification clause. Step 7 continues to provide the separately asserted explicit cocartesian transport and composition data.",
+   "uses": [
+    "lem-coef-space-valued-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 (covariant dual) and Section 3.3.2 (classification); Remark 3.2.5.5 (relative-nerve left adjoint), Remark 3.2.5.10 and Lemma 3.2.5.17(1) (natural straightening comparison on every X), Proposition 3.2.5.18(1) (Quillen equivalence and counit for fibrant diagrams). The displayed A_sigma quotient spells out the left adjoint on simplices. Read online, not archived in literature/. No Stacks tag states this result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-space-valued-straightening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational relative-nerve argument for the existing enrichment dependency chain under paragraph 2; explicit combinatorial proof checked against HTT 3.2.5.2, 3.2.5.19 and 3.2.5.21."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +181,74 @@
    "results": "{\"t\": \"2026-10-16T15:16:48Z\", \"tool\": \"leanfinder\", \"query\": \"Unstraightening of a diagram of Kan complexes over a category is a left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"HomotopicalAlgebra.FibrantObject.ι\"], \"digest\": \"034743b1c67e4604\"}",
    "date": "2026-10-16",
    "verdict": "No match. The returned Quillen fibrations concern all-horn lifting, and ordinary nerves and fibrant-object inclusions provide no relative-nerve construction, left-fibration theorem or classification for arbitrary Kan-valued diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative nerve of a diagram of Kan complexes over an ordinary category is a left fibration with the given fibers and transport",
+   "results": "{\"t\": \"2026-10-16T16:17:49Z\", \"tool\": \"leanfinder\", \"query\": \"The relative nerve of a diagram of Kan complexes over an ordinary category is a left fibration with the given fibers and transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"62cf6b84b4ad574a\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary nerve and ordinary Grothendieck/fibered-category results do not classify simplicial left fibrations. Quillen all-horn fibrations are a different notion. The grep hits involving Lfib are local variables in ordinary homotopy-category localization, not left fibrations or straightening."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftFibration\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T16:19:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftFibration\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary nerve and ordinary Grothendieck/fibered-category results do not classify simplicial left fibrations. Quillen all-horn fibrations are a different notion. The grep hits involving Lfib are local variables in ordinary homotopy-category localization, not left fibrations or straightening."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeNerve|relative_nerve|LeftFibration|Unstraightening|Straightening",
+   "results": "{\"t\": \"2026-10-16T16:19:23Z\", \"tool\": \"grep\", \"query\": \"relativeNerve|relative_nerve|LeftFibration|Unstraightening|Straightening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary nerve and ordinary Grothendieck/fibered-category results do not classify simplicial left fibrations. Quillen all-horn fibrations are a different notion. The grep hits involving Lfib are local variables in ordinary homotopy-category localization, not left fibrations or straightening."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan complex valued functor has a relative nerve which is a left fibration",
+   "results": "{\"t\": \"2026-10-16T16:19:29Z\", \"tool\": \"leansearch\", \"query\": \"A Kan complex valued functor has a relative nerve which is a left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerveFunctor_map\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"8f28db3af17d8b32\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary nerve and ordinary Grothendieck/fibered-category results do not classify simplicial left fibrations. Quillen all-horn fibrations are a different notion. The grep hits involving Lfib are local variables in ordinary homotopy-category localization, not left fibrations or straightening."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unstraightening a strict functor into spaces produces a cocartesian fibration whose every edge is cocartesian",
+   "results": "{\"t\": \"2026-10-16T16:19:37Z\", \"tool\": \"leanfinder\", \"query\": \"Unstraightening a strict functor into spaces produces a cocartesian fibration whose every edge is cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian\"], \"digest\": \"84ce3b04b1067460\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Ordinary nerve and ordinary Grothendieck/fibered-category results do not classify simplicial left fibrations. Quillen all-horn fibrations are a different notion. The grep hits involving Lfib are local variables in ordinary homotopy-category localization, not left fibrations or straightening."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-coef-complete-algebroid",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-relative-nerve-left-fibration",
+  "worker": "stage1",
+  "summary": "Steps 1-7 give the direct simplicial, fiber, horn-filling, cocartesian and transport proofs. Repaired step 8 identifies the relative nerve with the right adjoint of a concrete quotient-and-simplex-colimit left adjoint; the ordinary-base counit and straightening comparison identify its full classifying functor. Removed the undefined transport-recognition claim. Classification is defined by the new statement dependency. Step 5 proves ordinary-nerve inner horn fillers directly, avoiding the current cyclic coherent-nerve comparison dependency. No mathematical hypothesis or conclusion of the item was changed.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, paragraph 2, finite-level mapping-complex adjunction before derived inverse limit; through the inherited enrichment chain, this proves the relative-nerve indexing construction required in def-coef-complete-algebroid. Steps 1-7 supply that explicit construction and its properties; step 8 identifies its classifier through the ordinary-base adjoint comparison of HTT 3.2.5.17-3.2.5.18.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic simplicial-set, horn, Kan and nerve definitions; no geometric biduality unit node replaces these foundational notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-034680241",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-034680241 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node lem-coef-space-valued-straightening, the cited nodes def-cbc-enhanced-diagrams-cones and def-coef-infinity-fibrations, the citer def-coef-complete-algebroid, the unit and chapter records, the blueprint ancestor's paragraph 2, and the Q33 return of 2026-10-16. HTT is not in literature/, so I fetched the author's PDF and read §3.2.5 (pp. 195-204): Def 3.2.5.2, Rem 3.2.5.4/3.2.5.5/3.2.5.10, Lemma 3.2.5.17(1), Prop 3.2.5.18(1), Cor 3.2.5.19/3.2.5.20 and Prop 3.2.5.21. The item agrees with that source and is not weakened. Steps 1-7 are correct and I re-derived each: max theta(J)=theta(max J); the fiber is F(c); the horn gaps are exactly V and V minus i, filled by one Kan filler in F(sigma(n)), including the k=n face and n=1; the ordinary-nerve fillers for n=2, n=3 and n>=4 hold; every edge is cocartesian by the Lambda^n_0 definition; H_sigma satisfies the theta identity. The returned points B2, E5/E6, D1 and B3 are repaired. In step 8, Yoneda gives Nat(A_sigma,F) = the item's t_J data, the quotient relation is exactly the compatibility, the theta action matches, the identity simplex is terminal, and so E is isomorphic to R_C F. Then the counit and the comparison clause give the classification. The new node is true: clause (a) is the counit of HTT's Quillen equivalence 3.2.5.18(1), valid because every covariant object is cofibrant and G is projectively fibrant; clause (b) is Lemma 3.2.5.17(1) combined with straightening. It holds for C empty, a point and [1], and with empty values. It is self-contained (Q_r is the correct C[Delta^r]), statement-only, has four kinds of recorded search, and has correct blueprint from/via. It does not restate the item. lem-coef-space-transport-classification (Q66) overlaps only its first paragraph and cannot be cited here because it would close a cycle through def-coef-complete-algebroid. The item's dependency closure has no cycle. The declared tool_use is a definition and harmless. No SGA source is used. No fixes written."
+ }
 }

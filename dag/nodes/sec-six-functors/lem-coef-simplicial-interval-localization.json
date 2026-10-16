@@ -29,9 +29,91 @@
   "lem-coef-coherent-nerve-comparison",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a_X,b_X:X\\to I X$ for the endpoints of $h_X$. Transposing the constant-identity path gives $p_Xa_X=p_Xb_X=1_X$. Since $p_X\\in W$, both endpoints belong to $W$ by two-out-of-three. If vertices $f,g:X\\to Y$ are joined by an edge, its transpose is $H:I X\\to Y$ with endpoints $Ha_X=f$, $Hb_X=g$. If $f\\in W$, then $H\\in W$ and $g\\in W$ by two-out-of-three; the same reasoning with the other endpoint handles a reversed edge. Inducting on a finite edge zigzag shows that $W$ is a union of components in every $\\mathcal C(X,Y)$. It contains identities and is closed under composition, since it contains isomorphisms and satisfies two-out-of-three. Let $B(X,Y)$ be the union of the components whose vertices belong to $W$. Simplicial composition restricts to $B$: vertices of a composite of two such simplices are composites in $W$, and all vertices of a simplex are edge-connected. Thus $B$ is a wide simplicial subcategory.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed p. 113: endpoint retractions and component saturation of W; expanded elementary calculation."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C_n$ have the objects of $\\mathcal C$ and morphisms $\\mathcal C(X,Y)_n$. Let $W_n$ consist of the simplices all of whose vertices belong to $W$, so it equals $B(X,Y)_n$ from Step 1. It is wide and two-out-of-three vertexwise. Put $L_n=N(\\mathcal C_n)[W_n^{-1}]_\\infty$. The theorem [lem-coef-enriched-marked-realization] applies to the wide union-of-components subcategory just constructed. It provides a coherent simplicial diagram $L_\\bullet$ and identifies its colimit with $\\mathcal D[V^{-1}]_\\infty$; its zero-degree leg is induced by $\\theta$. No Kan hypothesis on the original mapping sets is needed. Every $\\mathcal C_n$ and its localization fits in the stipulated enlarged universes.",
+   "uses": [
+    "lem-coef-enriched-marked-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 1.3.4.11, Proposition 1.3.4.14 and the first homotopy-colimit factorization in the proof of Proposition 1.3.4.7, printed pp. 112-114."
+   }
+  },
+  {
+   "text": "Fix $n$. The constant-simplex functor $F_n:\\mathcal C_0\\to\\mathcal C_n$ and evaluation at the vertex $0$, $G_n:\\mathcal C_n\\to\\mathcal C_0$, preserve the distinguished arrows and satisfy $G_nF_n=1$. We construct an endofunctor $U_n$ of $\\mathcal C_n$. Let $q:\\Delta^n\\times\\Delta^1\\to\\Delta^n$ be the nerve of the monotone function $(i,0)\\mapsto0$, $(i,1)\\mapsto i$. Take $U_n(X)=I X$. For $\\alpha:\\Delta^n\\to\\mathcal C(X,Y)$, define $U_n(\\alpha)$ by transposing the simplicial map\n$$\\Delta^n\\times\\Delta^1\\longrightarrow\\mathcal C(X,IY),\\qquad(s,t)\\longmapsto h_Y(t)\\circ\\alpha(q(s,t)).$$\nIn this formula $(s,t)$ denotes arbitrary simplices of the product, with all compositions interpreted degreewise. The defining identity is\n$$U_n(\\alpha)(s)\\circ h_X(t)=h_Y(t)\\circ\\alpha(q(s,t)).$$\nThe transpose of the identity arrow is $h_X(t)$, so $U_n(1_X)=1_{IX}$. For composable $\\alpha,\\beta$, precomposing $U_n(\\beta)(s)U_n(\\alpha)(s)$ with $h_X(t)$ gives $h_Z(t)\\beta(q(s,t))\\alpha(q(s,t))$, which is the transpose defining $U_n(\\beta\\alpha)$. Uniqueness in the given simplicial isomorphism proves composition. Thus $U_n$ really is a functor; no functorial choice of tensors was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed p. 114: explicit U and the map r=(q,id); functoriality expanded by the tensor universal property."
+   }
+  },
+  {
+   "text": "At $t=0$ and $t=1$ the identity in Step 3 becomes\n$$U_n(\\alpha)\\,a_X=a_Y\\,F_nG_n(\\alpha),\\qquad U_n(\\alpha)\\,b_X=b_Y\\,\\alpha.$$\nHere each endpoint arrow is viewed as a constant $n$-simplex. Hence these arrows define ordinary natural transformations $F_nG_n\\Rightarrow U_n\\Leftarrow1_{\\mathcal C_n}$, whose components lie in $W_n$ by Step 1. If $\\alpha\\in W_n$, evaluate the second identity at any vertex: $U_n(\\alpha)_i b_X=b_Y\\alpha_i\\in W$. As $b_X\\in W$, two-out-of-three gives $U_n(\\alpha)_i\\in W$. Thus $U_n$ preserves $W_n$ as well. This verifies all relative-functor hypotheses, including the transformation components, rather than assuming that a homotopy automatically respects the chosen marking.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed p. 114: endpoint natural transformations; markedness expanded vertexwise."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-hammock-infinity-localization] to $(\\mathcal C_0,W)$ and $(\\mathcal C_n,W_n)$. Both distinguished classes are wide subcategories by Steps 1 and 2. Its universal property on full functor infinity categories gives induced functors $\\overline F_n:L_0\\to L_n$, $\\overline G_n:L_n\\to L_0$, and $\\overline U_n:L_n\\to L_n$. The natural transformations of Step 4 descend as well: a transformation between two $W_n$-inverting functors is an arrow in that full functor category, so the universal-property equivalence lifts it along with its higher coherences. Their components are equivalences because they came from $W_n$. By [lem-cbc-enhanced-functor-cone-calculus] they are equivalences in the functor category. Consequently $\\overline F_n\\overline G_n\\simeq1_{L_n}$ and $\\overline G_n\\overline F_n=1_{L_0}$ up to the canonical localization equivalence. Therefore every $\\overline F_n$ is an equivalence. This argument controls noninvertible transformations as well as equivalences of objects.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed p. 114; full-functor localization interpretation of the cylinder zigzag."
+   }
+  },
+  {
+   "text": "The constant-simplex maps form a natural transformation $\\operatorname{const}(L_0)\\to L_\\bullet$: precomposing a constant simplex by any simplex operator leaves it constant. Step 5 makes this a pointwise equivalence, hence an equivalence of coherent diagrams by [lem-cbc-enhanced-functor-cone-calculus]. The nerve of $\\Delta^{\\mathrm{op}}$ is contractible: $[0]$ is initial, and its unique arrows give a natural transformation from the constant functor at $[0]$ to the identity. The colimit of a constant $L_0$ over this index is $L_0$. To check this last assertion by its universal property, mapping the colimit to any $E$ gives the limit of the constant space $\\operatorname{Map}_{\\mathrm{Cat}_\\infty}(L_0,E)$, namely maps from the contractible index space to that mapping space, which is equivalent to the same mapping space. Taking colimits therefore gives\n$$L_0\\simeq\\operatorname*{colim}_{\\Delta^{\\mathrm{op}}}L_n\\simeq\\mathcal D[V^{-1}]_\\infty.$$\nThe second equivalence and identification of its zero-degree leg are exactly [lem-coef-enriched-marked-realization]. Thus the displayed equivalence is the functor induced by $\\theta$, rather than an unrelated equivalence of the localizations.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-enriched-marked-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 1.3.4.7, printed p. 114: homotopically constant simplicial diagram and contractibility of the simplex index; colimit universal property expanded."
+   }
+  },
+  {
+   "text": "For every $\\mathcal E$, precomposition with the equivalence induced by $\\theta$ in Step 6 identifies the entire functor categories out of the two localizations. Their defining localization properties identify these with $\\operatorname{Fun}_V(\\mathcal D,\\mathcal E)$ and $\\operatorname{Fun}_W(N(\\mathcal C_0),\\mathcal E)$, respectively; existence and the full-functor properties are included in [lem-coef-enriched-marked-realization]. Since the equivalence uses the zero-degree cocone leg specified in Step 2, its restriction is exactly $\\theta^*$. This proves the requested restriction equivalence, as well as the equivalent localization statement, in the original locally Kan replacement chosen in the question.",
+   "uses": [
+    "lem-coef-enriched-marked-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Conclusion of Proposition 1.3.4.7, printed pp. 110 and 114; unpacking the full-functor definition of infinity localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-enriched-marked-realization",
+  "lem-coef-hammock-infinity-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: agent expansion of the online HA 1.3.4.7 proof using its explicit cylinder and degreewise realization. HA is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +170,52 @@
    "results": "{\"t\": \"2026-10-16T16:35:04Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent nerve of a simplicial enrichment admits a localization universal property from the ordinary nerve when tensor cylinders are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"a3f45ceaf4dbc610\"}",
    "date": "2026-10-16",
    "verdict": "no match: second-reader searches return the SimplicialNerve definition, ordinary nerve/homotopy-category adjunctions, and the TODO for simplicial tensors. Read SimplicialNerve.lean:28-34,193-197 and SimplicialCategory/Basic.lean:19-30; none states an interval localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial category with interval objects and weak equivalence projections has the same infinity localization as its ordinary category",
+   "results": "{\"t\": \"2026-10-16T18:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial category with interval objects and weak equivalence projections has the same infinity localization as its ordinary category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"SSet.QCat\", \"SSet.Truncated.instCategoryHomotopyCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"5dccf55120a58d5e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialCategory, Localization",
+   "results": "{\"t\": \"2026-10-16T18:33:04Z\", \"tool\": \"loogle\", \"query\": \"SimplicialCategory, Localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
+  },
+  {
+   "tool": "grep",
+   "query": "interval|localization",
+   "results": "{\"t\": \"2026-10-16T18:33:04Z\", \"tool\": \"grep\", \"query\": \"interval|localization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"7440b89091e2c9dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy coherent nerve localization of simplicial category with interval tensor",
+   "results": "{\"t\": \"2026-10-16T18:33:05Z\", \"tool\": \"leansearch\", \"query\": \"homotopy coherent nerve localization of simplicial category with interval tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\"], \"digest\": \"068049d6737db43b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|geometricRealization|marked.*[Ll]ocal",
+   "results": "{\"t\": \"2026-10-16T18:38:39Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|geometricRealization|marked.*[Ll]ocal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary category of vertices and the homotopy coherent nerve become equivalent localizations when cylinder projections are inverted",
+   "results": "{\"t\": \"2026-10-16T18:38:41Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary category of vertices and the homotopy coherent nerve become equivalent localizations when cylinder projections are inverted\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\"], \"digest\": \"02d274c0ca1cccb3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: coherent nerve and ordinary nerve/localization hits do not state the interval criterion. The SimplicialNerve definition at AlgebraicTopology/SimplicialNerve.lean:193 has no localization theorem, and lines 28-34 still list its locally Kan foundations as projects. Read all returned types. Loogle query SimplicialCategory, Localization was ill-formed (unknown unqualified identifier); the later quoted SimplicialNerve query ran successfully."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-model-nerve-localization",
@@ -99,5 +223,29 @@
   "group": "Q19"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-interval-localization",
+  "worker": "stage1",
+  "summary": "Retained the statement; proved component saturation, constructed the degreewise cylinder functor by transposition with explicit identity/composition checks, verified endpoint naturality and markings vertexwise, and used the existing full-functor localization property to prove the constant-simplex functors are equivalences. Added one interval-independent marked realization theorem, statement-only, for the HA 1.3.4.14 geometric-realization input. No project attachment or Mathlib match was found.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction before the displayed R Hom / R lim calculation: the general interval-tensor comparison needed to pass from an ordinary model category to its enriched coherent localization.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence criterion for coherent transformations and diagrams; the coefficient unit supplies no alternative statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-5d1239e3f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-5d1239e3f (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node lem-coef-enriched-marked-realization and every cited statement in full (coherent-nerve-comparison, def-cbc-enhanced-diagrams-cones, hammock-infinity-localization, cbc-enhanced-functor-cone-calculus), plus the unit, the blueprint ancestor's proof paragraph 2 and the citer simplicial-model-nerve-localization. That citer applies the item to cofibrant objects, which do not have Kan mapping sets, so the non-Kan formulation through the replacement RC is the right one. HA is not archived locally and network access is blocked, so I checked HA 1.3.4.7, 1.3.4.11 and 1.3.4.14 from my own knowledge of the source and verified every step mathematically myself. Step 1: p a = p b = 1 gives a, b in W; two-out-of-three along each edge transpose H (Ha = f, Hb = g) shows W is a union of components, and B is a wide simplicial subcategory. Step 2: the new node's hypotheses hold, V_B = V, and its degree-zero leg is theta. Step 3: q is monotone; identity and composition follow by injectivity of the tensor isomorphism; U_n is only needed for each fixed n. Step 4: the endpoint naturality squares hold, the components lie in W_n, and U preserves W_n vertex by vertex. Step 5: the hammock universal property plus the componentwise criterion (applied after restricting, then reflected along the equivalence) give F_bar G_bar ~ U_bar ~ 1 and G_bar F_bar = 1. Step 6: the constant-to-L_bullet map exists, N(Delta^op) is contractible, and the composite is the theta-induced map. Step 7: unpacking the universal properties gives theta^*. The new node is true (hocolim presentation of A by the A_n), tested on B = A, discrete A, identity components and the empty category. It is strictly smaller than the item (no interval objects; degree zero sufficing is the item's own content), statement-only, self-contained, and its blueprint and created fields are correct. It is not a duplicate of diagonal-coherent-nerve-comparison, cofibrant-simplicial-inversion, dk-cofibrant/hammock-pair/free-factor or special-resolution. The declared tool_use of lem-cbc-enhanced-functor-cone-calculus is accepted: a generic componentwise criterion already used this way in the chapter. No SGA is used. No fixes were needed."
+ }
 }

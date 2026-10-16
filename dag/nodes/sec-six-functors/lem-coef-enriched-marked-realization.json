@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-enriched-marked-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed R Hom / R lim calculation: the general interval-tensor comparison needed to pass from an ordinary model category to its enriched coherent localization. Auxiliary realization of the degreewise relative categories; no interval hypothesis.",
+   "via": [
+    "lem-coef-simplicial-interval-localization",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degreewise relative categories realize enriched localization",
+ "statement": "Use simplicial categories, Dwyer--Kan equivalences, object-preserving locally Kan replacements and the derived coherent nerve as in [lem-coef-coherent-nerve-comparison], and infinity categories and coherent diagrams as in [def-cbc-enhanced-diagrams-cones]. Enlarge universes to contain all the categories and diagrams below. For a quasicategory $Q$ and a class $S$ of its edges, a localization $Q[S^{-1}]_\\infty$ means a quasicategory with a functor $q:Q\\to Q[S^{-1}]_\\infty$ such that, for every quasicategory $E$, restriction is an equivalence from $\\operatorname{Fun}(Q[S^{-1}]_\\infty,E)$ to the full subcategory $\\operatorname{Fun}_S(Q,E)$ on functors inverting $S$; thus the universal property includes every coherent transformation.\n\nLet $A$ be any small simplicial category. Suppose $B\\subseteq A$ is a simplicial subcategory with the same objects and with each $B(x,y)\\subseteq A(x,y)$ a union of connected components. Here components are equivalence classes of vertices under finite zigzags of simplicial edges, and a union of components includes every simplex having vertices in those components. No interval objects, saturation of morphisms, or model structure on $A$ is assumed. For $n\\geq0$ let $A_n$ be the ordinary category with these objects and morphisms $A(x,y)_n$, with composition induced by simplicial composition; let $B_n$ be its wide subcategory with morphisms $B(x,y)_n$. The simplicial operators make $(A_n,B_n)$ a simplicial diagram of relative ordinary categories. Put $D=\\mathbf RN_{\\mathrm{hc}}(A)$ and let $V_B$ be the edges corresponding to vertices in $B(x,y)$.\n\nThe localizations in this statement exist. Enriched evaluation induces a natural coherent cocone from $[n]\\mapsto N(A_n)[B_n^{-1}]_\\infty$ to $D[V_B^{-1}]_\\infty$, and its comparison is an equivalence in $\\mathrm{Cat}_\\infty$:\n$$\\operatorname*{colim}_{[n]\\in\\Delta^{\\mathrm{op}}}N(A_n)[B_n^{-1}]_\\infty\\ \\simeq\\ D[V_B^{-1}]_\\infty.$$\nThe degree-zero leg of this cocone is induced by the actual vertex-category map $N(A_0)\\to D$ followed by localization. The comparison is natural for simplicial functors preserving the subcategories $B$, and for changes of the object-preserving locally Kan replacement.",
+ "source": {
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Notation 1.3.4.11 and Proposition 1.3.4.14, printed pp. 112-113, and the marked homotopy-colimit comparison in the proof of Proposition 1.3.4.7, printed pp. 113-114. The statement isolates that comparison for an arbitrary union-of-components simplicial subcategory. No Stacks tag states this enriched result."
+ },
+ "stmt_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The infinity localization of a simplicial category at a union of components of its mapping spaces is the geometric realization of its degreewise ordinary localizations",
+   "results": "{\"t\": \"2026-10-16T18:38:05Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity localization of a simplicial category at a union of components of its mapping spaces is the geometric realization of its degreewise ordinary localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SSet.hoFunctor\", \"SSet.QCat\", \"CategoryTheory.SimplicialNerve\", \"SSet.uliftFunctor\", \"SSet.sk\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.truncation\"], \"digest\": \"ff0bd1a1aa776feb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T18:38:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|geometricRealization|[Mm]arked",
+   "results": "{\"t\": \"2026-10-16T18:38:06Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|geometricRealization|[Mm]arked\", \"sub\": \"AlgebraicTopology/SimplicialCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization of the ordinary categories of degree n morphisms recovers an enriched simplicial category after localization",
+   "results": "{\"t\": \"2026-10-16T18:38:06Z\", \"tool\": \"leansearch\", \"query\": \"Geometric realization of the ordinary categories of degree n morphisms recovers an enriched simplicial category after localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"SSet.toTop\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.Functor.q_isLocalization\"], \"digest\": \"1345690c71603172\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial object of relative categories presents an enriched localization by taking the colimit of the infinity localizations of each degree",
+   "results": "{\"t\": \"2026-10-16T18:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial object of relative categories presents an enriched localization by taking the colimit of the infinity localizations of each degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.SimplicialObject.Augmented\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialObject.instCategoryAugmented\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"dbc377b6bbccc36f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define the coherent nerve, enrichment of simplicial objects, ordinary localization and colimits. None identifies a colimit of degreewise infinity localizations with enriched localization. Read SimplicialNerve.lean:14-38,193-197 and the returned types. The general enriched realization theorem has no Mathlib instance to specialize."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-interval-localization",
+  "date": "2026-10-17",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

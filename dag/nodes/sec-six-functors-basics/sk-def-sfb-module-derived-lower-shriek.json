@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-def-sfb-module-derived-lower-shriek",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived lower shriek of module objects",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes. For a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ of $f$\n([sk-def-nagata-sketch-data]) the *derived lower shriek attached to $c$* is the\ncomposite of derived functors\n\n$$\nRf^c_!:=Rg_*\\circ D(i_!)\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y}),\n\\qquad\nR^+f^c_!:=R^+g_*\\circ D^+(i_!)\\colon D^+(\\Mod_{\\Lambda_X})\\to D^+(\\Mod_{\\Lambda_Y}),\n$$\n\nwhere $D(i_!)$, $D^+(i_!)$ apply the exact extension by zero of module objects\n([sk-def-sfb-module-lower-shriek]) levelwise ([sk-def-sfb-derived-categories]) and $Rg_*$, $R^+g_*$ are the derived\npushforwards of [sk-def-sfb-module-derived-pushpull]. For $f$ admitting a\ncompactification, $Rf_!:=Rf^c_!$ and $R^+f_!:=R^+f^c_!$ for the chosen\ncompactification $c$ of $f$. The bounded below functors are the restrictions of the\nunbounded ones: $R^+f^c_!$ agrees with $Rf^c_!$ on $D^+(\\Mod_{\\Lambda_X})$.\n\nHere, and only here, the derived functor is a composite of derived functors rather\nthan the derived functor of the composite: $Rf^c_!$ is *not* the total right derived\nfunctor of $f^c_!=g_*\\circ i_!$. The extension by zero $i_!$ does not send injective\nmodules to $g_*$-acyclic ones, so $R(g_*\\circ i_!)$ is the wrong functor, although its\n$H^0$ is $f^c_!$.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes. For a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$ of $f$\n([sk-def-nagata-sketch-data]) the *derived lower shriek attached to $c$* is the\ncomposite of derived functors\n\n$$\nRf^c_!:=Rg_*\\circ D(i_!)\\colon D(\\Mod_{\\Lambda_X})\\to D(\\Mod_{\\Lambda_Y}),\n\\qquad\nR^+f^c_!:=R^+g_*\\circ D^+(i_!)\\colon D^+(\\Mod_{\\Lambda_X})\\to D^+(\\Mod_{\\Lambda_Y}),\n$$\n\nwhere $D(i_!)$, $D^+(i_!)$ apply the exact extension by zero of module objects\n([sk-def-sfb-module-lower-shriek]) levelwise ([sk-def-sfb-derived-categories]) and $Rg_*$, $R^+g_*$ are the derived\npushforwards of [sk-def-sfb-module-derived-pushpull]. For $f$ admitting a\ncompactification, $Rf_!:=Rf^c_!$ and $R^+f_!:=R^+f^c_!$ for the chosen\ncompactification $c$ of $f$. The bounded below functors are the restrictions of the\nunbounded ones: $R^+f^c_!$ agrees with $Rf^c_!$ on $D^+(\\Mod_{\\Lambda_X})$.\n\nThis construction applies the derived-functor construction to the factors separately;\nit does not define $Rf^c_!$ by deriving the underived composite\n$f^c_!=g_*\\circ i_!$. No assertion that these constructions differ for every\ncompactification is intended. For a module object $M$ placed in degree zero,\n$H^0(Rf^c_!M)\\cong g_*i_!M=f^c_!M$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/_section.md",
   "place": "node sk-def-sfb-module-derived-lower-shriek, order 1687"
@@ -16,34 +16,163 @@
   "sk-def-nagata-sketch-data",
   "sk-def-sfb-module-lower-shriek",
   "sk-def-sfb-derived-categories",
-  "sk-def-sfb-module-derived-pushpull"
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects"
  ],
  "proof": [
   {
-   "text": "The functors attached to a compactification are\n[def-sfb-module-derived-lower-shriek-compactification] and\n[def-sfb-module-derived-lower-shriek-compactification-plus], and their compatibility\nis [prop-sfb-module-derived-lower-shriek-compactification-plus-restriction]. The\nfunctors for the chosen compactification are [def-sfb-module-derived-lower-shriek-chosen]\nand [def-sfb-module-derived-lower-shriek-chosen-plus], with compatibility\n[prop-sfb-module-derived-lower-shriek-chosen-plus-restriction].",
+   "text": "For a compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$, use the composites in [def-sfb-module-derived-lower-shriek-compactification] and [def-sfb-module-derived-lower-shriek-compactification-plus]. For a chosen compactification use [def-sfb-module-derived-lower-shriek-chosen] and the current [def-sfb-module-derived-lower-shriek-chosen-plus]. These give all four functors with exactly the stated source and target categories; in particular the last definition explicitly identifies $R^+f_!$ with $R^+g_*\\circ D^+(i_!)$ for that chosen $c$.",
    "uses": [
     "def-sfb-module-derived-lower-shriek-compactification",
     "def-sfb-module-derived-lower-shriek-compactification-plus",
     "def-sfb-module-derived-lower-shriek-chosen",
     "def-sfb-module-derived-lower-shriek-chosen-plus"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/sk-def-sfb-module-derived-lower-shriek.proof.md",
+    "place": "first paragraph, four component definitions"
+   }
+  },
+  {
+   "text": "Check the hypotheses for the general derived-functor comparison. For each $T=X,\\bar X,Y$, the module objects of [sk-def-sfb-module-objects] are sheaves of modules over the ring sheaf $\\Lambda_T$. Indeed, by the sheafified tensor product in [sk-def-sfb-sheaf-tensor], a sheaf action $\\Lambda_T\\otimes M\\to M$ is exactly a compatible family of bilinear sectionwise actions; the two module axioms give the usual sectionwise module axioms, and the linear morphisms coincide. Thus [lem-weil-pbc-ring-sheaves-grothendieck] applies to the small pro-etale site (in a universe containing it), giving a Grothendieck abelian category. By [lem-sp-grothendieck-enough-injectives] it has enough injectives, and the Right derived functors clause of the current [sk-def-sfb-derived-categories] gives K-injective resolutions for each of these Grothendieck abelian categories. Use the localization universes fixed in that statement; no claim of a small derived category in the original object universe is needed. Finally the pushforward clause of the current [sk-def-sfb-module-pushforward-pullback], specialized to $g\\colon\\bar X\\to Y$, defines $g_*=\\operatorname{Res}_{\\eta_g}\\circ\\operatorname{mapMod}(g^{\\Ab}_*)$ and explicitly states that this functor is additive and left exact. Its general commutative condensed coefficient ring and arbitrary scheme-morphism hypotheses are exactly those in force here. These are precisely the abelianness, injective-resolution and additivity hypotheses needed in the next step.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/prop-sfb-module-derived-lower-shriek-compactification-plus-restriction.proof.md",
+    "place": "second factor: hypotheses of the general comparison made explicit"
+   }
+  },
+  {
+   "text": "By [def-sfb-module-open-lower-shriek], $i_!$ is exact and additive. In particular it preserves kernels, images and their quotients, so $H^n(i_!K)\\cong i_!H^n(K)$; termwise application preserves quasi-isomorphisms and the condition of cohomology vanishing below a bound. With the localization and termwise $D(F)$ convention of the current [sk-def-sfb-derived-categories], it therefore induces $D(i_!)$ directly and restricts to $D^+(i_!)$. Both $\\iota_{\\bar X}\\circ D^+(i_!)$ and $D(i_!)\\circ\\iota_X$ are induced by the same termwise functor on complexes, giving their canonical natural isomorphism. The respective existence hypotheses in that statement's Exact functors clause are satisfied on the right-derived side by step 2; this argument does not invoke a left-derived functor or K-flat resolutions. Apply [src-right-derived-functor-plus-compatibility] to $F=g_*$, with the abelian-category, universe, enough-injectives, K-injective-resolution and additivity hypotheses verified in step 2. Since [sk-def-sfb-module-derived-pushpull] defines $R^+g_*$ and $Rg_*$ as these general derived functors of the module-object pushforward, this gives $\\iota_Y\\circ R^+g_*\\cong Rg_*\\circ\\iota_{\\bar X}$. This uses the comparison theorem's natural isomorphism, rather than just an objectwise agreement of resolutions.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "sk-def-sfb-derived-categories",
+    "src-right-derived-functor-plus-compatibility",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/prop-sfb-module-derived-lower-shriek-compactification-plus-restriction.proof.md",
+    "place": "first and second factor comparisons"
+   }
+  },
+  {
+   "text": "Paste the natural isomorphisms of step 3: $\\iota_Y\\circ R^+g_*\\circ D^+(i_!)\\cong Rg_*\\circ\\iota_{\\bar X}\\circ D^+(i_!)\\cong Rg_*\\circ D(i_!)\\circ\\iota_X$. By [def-sfb-module-derived-lower-shriek-compactification] and [def-sfb-module-derived-lower-shriek-compactification-plus], the outside composites are $\\iota_Y\\circ R^+f^c_!$ and $Rf^c_!\\circ\\iota_X$. Substitute the chosen compactification, using [def-sfb-module-derived-lower-shriek-chosen] and the current [def-sfb-module-derived-lower-shriek-chosen-plus], to obtain $\\iota_Y\\circ R^+f_!\\cong Rf_!\\circ\\iota_X$ as well.",
+   "uses": [
+    "def-sfb-module-derived-lower-shriek-compactification",
+    "def-sfb-module-derived-lower-shriek-compactification-plus",
+    "def-sfb-module-derived-lower-shriek-chosen",
+    "def-sfb-module-derived-lower-shriek-chosen-plus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/prop-sfb-module-derived-lower-shriek-chosen-plus-restriction.proof.md",
+    "place": "chosen compactification specialization; previous proof final sentence gives the pasting"
+   }
+  },
+  {
+   "text": "For a module object $M$ in degree zero, exactness of $i_!$ in [def-sfb-module-open-lower-shriek] identifies $D(i_!)(M[0])$ with $(i_!M)[0]$. Apply [lem-weil-pbc-dplus-injective-representative] to $(i_!M)[0]$ with lower bound zero, obtaining a complex $I$ of injectives with $I^n=0$ for $n<0$ and $QI\\cong(i_!M)[0]$; enough injectives was checked in step 2. Taking zeroth cohomology identifies $i_!M\\cong\\ker(I^0\\to I^1)$, so composing this isomorphism with the kernel inclusion supplies the augmentation $i_!M\\to I^0$. The vanishing of the other cohomology objects makes $0\\to i_!M\\to I^0\\to I^1\\to\\cdots$ exact. By [lem-weil-pbc-bounded-below-injectives-kinjective], this resolution also computes the unbounded derived pushforward in [sk-def-sfb-module-derived-pushpull]. Apply the left exactness in the current pushforward clause of [sk-def-sfb-module-pushforward-pullback] to the augmented sequence at $I^0$. It gives $\\ker(g_*I^0\\to g_*I^1)\\cong g_*i_!M$. There is no negative-degree term, so this kernel is $H^0(Rg_*i_!M)$. The composite definition [def-sfb-module-derived-lower-shriek-compactification] and the underived definition [sk-def-sfb-module-lower-shriek] now give $H^0(Rf^c_!M)\\cong f^c_!M$. This degree-zero identity does not identify the two derived constructions.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-derived-lower-shriek-compactification",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/_section.md",
+    "place": "last paragraph, clarified degree-zero assertion"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-module-derived-lower-shriek-compactification",
   "def-sfb-module-derived-lower-shriek-compactification-plus",
   "def-sfb-module-derived-lower-shriek-chosen",
-  "def-sfb-module-derived-lower-shriek-chosen-plus"
+  "def-sfb-module-derived-lower-shriek-chosen-plus",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-open-lower-shriek",
+  "src-right-derived-functor-plus-compatibility",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "sk-def-sfb-module-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-lower-shriek/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived lower shriek for pro-etale module objects over a condensed ring defined by exact extension by zero followed by right derived pushforward along a compactification",
+   "results": "Condensed.profiniteSolid, Condensed.profiniteFree, Condensed.free, LightCondMod, CondensedMod.LocallyConstant.functor, LightCondensed.free, CondensedMod, CondensedMod.IsSolid",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|rightDerivedLowerShriek|compactification",
+   "results": "No hits; Mathlib subdirectory: AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional derived direct image of sheaves of modules is the composite of extension by zero and derived proper pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compactly supported derived pushforward is defined as the composite of a derived exact functor and a right derived proper pushforward, with bounded below restriction compatibility",
+   "results": "SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforward, CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|rightDerivedFunctorPlus",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean; Mathlib subdirectory: Algebra/Homology/DerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: condensed modules, underived sheaf-module pushforward, and generic exact/right-derived functors do not define the compactification composite on pro-etale module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional direct image for modules on the proetale site defined using an open immersion and a proper compactification",
+   "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, Condensed.profiniteSolid, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, LightCondMod",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern structure-sheaf modules on the Zariski site or condensed modules alone; none defines the derived pro-etale compactification composite"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -79,5 +208,34 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-module-derived-lower-shriek"
+ "unit": "sk-def-sfb-module-derived-lower-shriek",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sfb-module-derived-lower-shriek",
+  "worker": "stage1",
+  "summary": "Repair the 2026-10-16 18:42 UTC return for reviewed head 7b131b1fc4 against the current DAG. Of the 16 retained proof-dependency statement hashes only sk-def-sfb-derived-categories changed. Re-read its current statement, including universe conventions and the existence qualification for exact derived functors. Step 2 explicitly uses its right-derived clause and localization universes; step 3 writes the exact-functor descent and bounded-below restriction directly on cohomology and checks the right-derived existence hypotheses, without invoking K-flat or constructible clauses. Replace both obsolete whole-statement quotes with the precise current clauses actually used, refresh the citation baseline and unit overlay, and rewrite the repair report. Preserve the five-step factorwise construction and prior explicit source correction; no new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 unfolds the four component definitions; steps 2-4 realize the two factor comparisons and their pasting from the compactification compatibility proof and then its chosen-compactification specialization; step 5 proves the degree-zero assertion. The final warning is clarified as a construction convention, with the identity counterexample recorded in report.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General arbitrary-ring-sheaf theorem verifies the module categories used by the source route are Grothendieck; it does not replace a six-functor construction."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "General bounded-below versus unbounded right-derived comparison supplies exactly the second factor comparison called for in the blueprint proof; no restriction on coefficient categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N2-e59f8e7e3",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-e59f8e7e3 (reviewer sub-agent of L); spot-checked: I read the item in full: all 5 steps, the 6 stmt_deps and 16 proof_deps at their current statements, every file in the main-20261015 unit directory (_section, proof, the four component definitions, and both restriction propositions with their proofs), the unit and chapter records, and Stacks 013K/070J at derived.tex l.6280 and l.9688. Statement: it matches _section.md except the last paragraph, which is a reported source correction. Taking the identity compactification (id is a quasi-compact open immersion and proper), i_! ≅ id preserves injectives and R(g_*∘i_!) ≅ Rg_*∘D(i_!), so the source's universal 'not' is false. The construction convention is kept, and the degree-zero clause H^0(Rf^c_!M) ≅ g_*i_!M is true and proved in step 5. Grepping all 17 citers turned up none that relies on the removed claim. The coefficient category throughout is module objects in Sh(T_proét,Ab) (layer B), never a fixed-module-valued sheaf category; this is not a target node, so there is no master base-change morphism to check. Step 1 is an elementary unfolding of the four component definitions. Step 2: identifying module objects with sheaves of Λ_T-modules via the sheafification adjunction and strong monoidality is correct and written out. The closed node lem-sfb-modobj-grothendieck would give the same conclusion; the item's route is a valid alternative. The step also checks that Mod is Grothendieck under the 𝒰∈𝒱 size convention, enough injectives (Mathlib leaf), K-injective resolutions (verbatim in the derived-categories right-derived clause), and that g_* is additive and left exact. Step 3: exactness of i_! gives H^n(i_!K) ≅ i_!H^n(K), so the termwise functor descends to D and to D^+. The closed Lean comparison rightDerivedFunctorPlusCompatibility applies; I checked each of its hypotheses against step 2, and no left-derived or K-flat clause is used. Step 4: the pasting is correct, with domains checked, and so is the chosen-compactification specialization. Step 5: the injective representative with I^{<0} = 0 gives an augmented exact resolution; I is K-injective by 070J; left exactness of g_* gives H^0 ≅ g_*i_!M = f^c_!M. No new nodes and no duplicates: the layer-A finite analogues use a different coefficient category. The unit overlay changes only realized and realized_by. I accept both tool uses (ring-sheaves-grothendieck, plus comparison): they are generic and Lean-closed. No SGA is used. No fixes."
+ }
 }

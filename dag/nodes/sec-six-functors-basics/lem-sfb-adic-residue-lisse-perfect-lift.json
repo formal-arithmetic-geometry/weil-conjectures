@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-adic-residue-lisse-perfect-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: the local lifting input of Bhatt–Scholze Lemma 6.6.8 in Proposition 6.6.11, below the stratified-perfect characterization.",
+   "via": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local perfect lifting from a lisse residue complex without finite coefficient hypotheses",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning that it has a finite affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Let $A$ be a commutative Noetherian ring, $J\\subseteq A$ an ideal, and assume $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/J^n$ [def-weil-pbc-adically-complete-ring]. On the small pro-étale site [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_{n\\geq1}\\underline{A/J^n}$, using constant sheaves [def-weil-pbc-constant-sheaf]. Use module sheaves and derived categories [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category], and let $M\\in D(\\operatorname{Mod}(B_X))$ be locally derived $JB_X$-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. Suppose $M\\otimes^L_{B_X}\\underline{A/J}\\simeq\\nu_X^*C$, where $\\nu_X$ is the étale/pro-étale comparison [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-etale-site], and $C$ is a bounded étale $A/J$-complex. Assume each $H^q(C)$ is étale locally constant with finitely generated $A/J$-module values [def-weil-finitely-generated-module], and that there are integers $a\\leq b$ with $H^q(C\\otimes^L_{\\underline{A/J}}N)=0$ for every degree-zero étale $A/J$-module sheaf $N$ and every $q\\notin[a,b]$. Derived tensors are [lem-pur-derived-change-of-rings]. Then there is a pro-étale covering $\\{U_t\\to X\\}$ and, for each $t$, a bounded complex $P_t^\\bullet$ of finite projective $A$-modules [def-pc-perfect-ring-complex] such that $M|_{U_t}\\simeq (B_X|_{U_t})\\otimes_A P_t^\\bullet$. The last expression is termwise extension of the constant complex. Neither $A/J$ nor $A/J^n$ is required to be finite as a set or perfect over $A$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, lemma-connected-adic-lisse; passage between constant and completed coefficients in Tag 099L, section-derived-completion-noetherian. Bhatt–Scholze, literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Lemma 6.6.8 and the forward proof of Proposition 6.6.11; apply on the finitely many connected open components of affine Noetherian charts."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-finitely-generated-module",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex over a complete noetherian ring sheaf with locally constant finite Tor residue cohomology is pro etale locally a constant perfect complex",
+   "results": "Algebra.Etale.formallyEtale; Algebra.FormallyEtale.instForallOfFinite; Algebra.FormallyEtale.of_unramified_and_smooth; Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth; Algebra.etaleLocus_eq_univ_iff; AlgebraicGeometry.IsEtale.of_comp; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.localization_base",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern formally étale ring maps or ordinary constant sheaves; none gives derived perfect lifting on the pro-étale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Perfect\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern formally étale ring maps or ordinary constant sheaves; none gives derived perfect lifting on the pro-étale site"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*lisse|lisse.*adic|derived.*complet.*perfect|perfect.*derived.*complet",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern formally étale ring maps or ordinary constant sheaves; none gives derived perfect lifting on the pro-étale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete pro etale sheaf complex with locally constant constructible residue reduction has a perfect constant local model",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage; Condensed.lanSheafProfinite; CondensedSet.LocallyConstant.functorFullyFaithful; LightCondensed.lanLightCondSet; CompHausLike.LocallyConstantModule.functor_obj_val; LightCondensed.IsDiscrete; CompHausLike.LocallyConstant.functor_obj_val; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern formally étale ring maps or ordinary constant sheaves; none gives derived perfect lifting on the pro-étale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible adic system with locally constant perfect residue complex on a connected affine scheme admits a pro etale trivialization by a bounded finite projective complex",
+   "results": "StandardEtalePair.instFormallyEtaleRing; AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.instForallOfFinite; Algebra.Etale.formallyEtale; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.FormallyEtale.of_unramified_and_smooth; Algebra.etaleLocus_eq_univ_iff; AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern formally étale ring maps or ordinary constant sheaves; none gives derived perfect lifting on the pro-étale site"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-stratified-perfect",
+  "date": "2026-10-17",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models"
+}
