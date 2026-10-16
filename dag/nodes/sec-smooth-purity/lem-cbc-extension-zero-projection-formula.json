@@ -99,7 +99,7 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj",
+  "module": "WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection",
   "declaration": "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso",
   "declarations": [
    "AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso",
@@ -107,17 +107,17 @@
   ],
   "statement": "def derivedOpenImmersionLowerShriekProjectionIso :\n    (Functor.postcompose₂.obj D((j)_!open[A])).obj\n        (derivedTensorWhiskeringRightLeftDerivedUpperStar A j) ≅\n      derivedTensorWhiskeringLeftOpenImmersionLowerShriek A j",
   "branch": "slopmaster2",
-  "by": "NG",
-  "date": "2026-10-15",
+  "by": "N1",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "§1(B): The old attachment names the two declarations but omits the module, primary declaration and signature needed to import it. Reuse the same already attached declarations and their full canonical natural isomorphism. Its inverse has precisely the node orientation (j shriek K) tensor L to j shriek (K tensor j inverse-image L), on arbitrary unbounded complexes. No new projection or tensor is defined."
+  "note": "Section 1(B): the finite-coefficient split module imports a parallel copy of leftDerivedUpperStarComp and clashes with the standard operations used by this item. Rebind the same canonical derivedOpenImmersionLowerShriekProjectionIso and its invertibility theorem to their standard upstream owning module, as already recorded in lean_audit. Its inverse is exactly the displayed open projection map on all complexes; no definition, hypothesis or signature changes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-760802677",
-  "group": "NG",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, declarations, edge cases, docstrings, report sections, and per-file scompile evidence; no substantive or mechanical findings."
+  "reviewer": "NT-stage2-cc-f574dc01e",
+  "group": "N1",
+  "result": "fix",
+  "note": "Substance correct. Statement matches node and source clause by clause: separatedness only on f, D^b_c K,L, finite Tor amplitude on L only, every compactification, actual etale projectionMapOfCompactification (natural transformation, so naturality in K,L), pro-etale clause via the finiteExchangeProjection component with retained EtaleOriginWitness data tied to K,L and the canonical realization equivalence. Helper instances have real data; universes bound; edge cases covered; statement verbatim. The §1(B) rebind of lem-cbc-extension-zero-projection-formula to the standard OpenImmersionLowerShriekProjection module (same declaration and signature) is accepted. Mechanical fault: the delivered file fails nt_compile because the landed proof-dep module Sheaf.Paper.FiniteCoefficientFlatModel is broken since side commit 4b050b8948 (duplicate IsConstructibleEtaleModuleSheaf declarations). Fix: fixes/FiniteCompactProjectionFormula.lean drops only that non-public import and compiles cleanly (5.4 s); the report gets a reviewer-fix note. Maintainers should repair FiniteCoefficientFlatModel."
  }
 }

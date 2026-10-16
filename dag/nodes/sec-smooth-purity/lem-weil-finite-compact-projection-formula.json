@@ -27,7 +27,8 @@
   "def-kun-projection-formula-map",
   "def-exchange-projection",
   "def-weil-pbc-etale-origin-witness",
-  "def-sf-comparison-derived-pullback"
+  "def-sf-comparison-derived-pullback",
+  "lem-cbc-extension-zero-projection-formula"
  ],
  "proof": [
   {
@@ -536,5 +537,31 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-5b9735058 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 47 cited statements, the unit sk-thm-sf-pf-finite (route: itself plus sk-def-sf-exchanges), the chapter, and the main-20261015 statement and proof. The master statement (order 1878) is byte-identical to main (order 2222). The statement keeps every blueprint hypothesis: f separated finite type between finite-type k-schemes (X, Y need not be separated), K and L in D^b_c on the étale site, L of finite Tor amplitude. The pro-étale witness clause uses the ordinary constant-A_{E,n} pro-étale category of def-exchange-projection with S=Spec k. Nothing is weakened. Step checks: (1) X, Y and the compactification are Noetherian; Nagata needs a Noetherian base; j is quasi-compact by 01OY plus the qc-intersection lemma; invertibility is proved for an arbitrary compactification. (2) The truncation zigzag is correct, including u=v. The étale clause of lem-sf-flat-model applies since ell is invertible. Bounded flat implies K-flat, and pullback keeps it K-flat. D+ domains are verified. (3) The open map is the transpose of the unit, iso by stalks and conservativity. (4) thm-cbc-finite-torsion applies with arbitrary g, D+ inputs, quasi-compact j and proper p. (5) The proper part is the exact equality in lem-weil-pbc-ringed-exchange-tensor-coherence; the open part is the unit-mate normalization, proved by transposition. (6) The finite-free stalk model, the shift, triangle and unit structure of the projection map, stupid truncation and two-out-of-three match Stacks 0944. (7) lem-kun-stalk-faithful-derived is applied after forgetting module structure. (8)-(9) b_p is named and invertible since p is qcqs; c_j is fixed through the Hom-bijection chain; the coherence lemma allows the non-cartesian comparison square; the witness clause follows by conjugation. Edge cases checked: X empty, K or L zero, L=A or its shifts, a two-term finite-free stalk, non-flat K over Z/ell^2, f=id, n=1. No new nodes. No duplicates: thm-sf-pf-finite, lem-etale-proper-projection-formula-finite, lemma-weil-pbc-projection-formula-compactified (needs site-perfect input) and the others differ. No cycle; no missing or merged cites; no SGA. proof_deps equals the union of step uses. All 24 off-route statements are declared generic tools, and I accept them as used by the blueprint proof itself; 4 extra declarations name Mathlib leaves and are harmless. Not blocking: the second reader says source was updated to main-20261015 order 2222, but the file still has the master path, order 1878. Since the two statements are identical, I made no change. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula",
+  "declaration": "AlgebraicGeometry.Etale.isIso_finiteCompactProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_finiteCompactProjection",
+   "AlgebraicGeometry.Etale.finiteCompactProjectionCoefficient_finite",
+   "AlgebraicGeometry.Etale.finiteCompactProjectionCoefficient_topology",
+   "AlgebraicGeometry.Etale.finiteCompactProjectionCoefficient_discrete"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCompactProjectionFormula.lean",
+  "statement": "theorem isIso_finiteCompactProjection (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) [Fact (1 ≤ n)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (K : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X) (L : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y) (_hK : DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) X K) (_hL : DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) Y L) (_hTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a b L) : IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c).app K).app L) ∧ ∀ (Kp : ProEtale.FiniteCoefficientDerivedCategoryPlus X (Padic.coefficientExtensionRing l E n)) (Lp : ProEtale.FiniteCoefficientDerivedCategoryPlus Y (Padic.coefficientExtensionRing l E n)) (wx : Scheme.EtaleOriginWitness X (Padic.coefficientExtensionRing l E n) Kp) (wy : Scheme.EtaleOriginWitness Y (Padic.coefficientExtensionRing l E n) Lp) (_hx : wx.L.obj ≅ K) (_hy : wy.L.obj ≅ L), IsIso (((ProEtale.projectionMapOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c).app (((ProEtale.finiteCoefficientRealization X (Padic.coefficientExtensionRing l E n)).mapDerivedCategory.asEquivalence.inverse).obj Kp.obj)).app (((ProEtale.finiteCoefficientRealization Y (Padic.coefficientExtensionRing l E n)).mapDerivedCategory.asEquivalence.inverse).obj Lp.obj))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The first conjunct is the canonical etale projection component for every compactification. The second quantifies over every retained origin witness, with its representative isomorphism to the bounded constructible inputs, and evaluates the published pro-etale projection map on the canonical inverse coefficient realization. Fact (1 ≤ n) is the positive-level hypothesis. The three instances only expose the existing positive-level finiteness theorem and the discrete coefficient convention.",
+  "fixed_by": "NT-stage2-cc-f574dc01e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f574dc01e",
+  "group": "N1",
+  "result": "fix",
+  "note": "Substance correct. Statement matches node and source clause by clause: separatedness only on f, D^b_c K,L, finite Tor amplitude on L only, every compactification, actual etale projectionMapOfCompactification (natural transformation, so naturality in K,L), pro-etale clause via the finiteExchangeProjection component with retained EtaleOriginWitness data tied to K,L and the canonical realization equivalence. Helper instances have real data; universes bound; edge cases covered; statement verbatim. The §1(B) rebind of lem-cbc-extension-zero-projection-formula to the standard OpenImmersionLowerShriekProjection module (same declaration and signature) is accepted. Mechanical fault: the delivered file fails nt_compile because the landed proof-dep module Sheaf.Paper.FiniteCoefficientFlatModel is broken since side commit 4b050b8948 (duplicate IsConstructibleEtaleModuleSheaf declarations). Fix: fixes/FiniteCompactProjectionFormula.lean drops only that non-public import and compiles cleanly (5.4 s); the report gets a reviewer-fix note. Maintainers should repair FiniteCoefficientFlatModel."
  }
 }
