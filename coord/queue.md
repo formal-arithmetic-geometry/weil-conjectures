@@ -1,6 +1,6 @@
 # Work queue
 
-54 items; claim with `tools/claim.py next <group> [--stage N]`.
+66 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (54)
+## Stage 3: modules to prove (66)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -24,6 +24,7 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 8 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 10 | proof |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap` | 4 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnit` | 5 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 5 | proof |
@@ -31,34 +32,45 @@
 | `WeilConjectures.Compactification.OverRefinement` | 5 | 2 | proof |
 | `Sheaf.CategoryTheory.ModuleInverseImageAdjunction` | 6 | 1 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
-| `Sheaf.Paper.ProEtalePointComponentsMaps` | 7 | 4 | proof |
+| `Sheaf.Paper.ProEtalePointComponentsMaps` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.ContinuousModuleEncodingRestriction` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh` | 11 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic` | 11 | 1 | proof |
 | `Sheaf.Paper.ContinuousModuleEncodingSliceFreeness` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient` | 12 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility` | 12 | 2 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
+| `Sheaf.Paper.FiniteDiscreteCoefficientTerminal` | 12 | 1 | proof |
 | `Sheaf.Paper.FiniteEtaleLocallyFreeModels` | 12 | 3 | proof |
 | `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 2 | proof |
 | `Sheaf.Paper.SectionModuleAlgebraicInverseImage` | 13 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FixedAbelianDescendedSectionLift` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 14 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent` | 15 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent` | 15 | 1 | proof |
+| `Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators` | 15 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalSecondIdealQuotientSupported` | 16 | 1 | proof |
+| `Sheaf.CategoryTheory.FilteredStationaryCycleComparison` | 16 | 1 | proof |
 | `Sheaf.RingTheory.LciConormalFreeRankCodimension` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FormalGraphFirstQuotientEpi` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalCompletionAffineSections` | 17 | 1 | proof |
+| `Sheaf.CategoryTheory.DerivedCoupleFunctoriality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalComparisonAlgebraizationQuotientLift` | 18 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TorsionControlledDescendedSourceComparisons` | 18 | 1 | proof |
 | `Sheaf.CategoryTheory.ExactFunctorHalfPlane` | 18 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentStalkMapExtends` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CompatibleQuotientFormalComparisons` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FormalComparisonFlatTransportSquare` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineQCohTorAmplitudeDetection` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction` | 21 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero` | 22 | 1 | proof |
