@@ -15526,3 +15526,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:39 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk (stage 3; reviewer PASS; first push; landing 20261016T123957-L-2921378 (proof); batch 20261016T123956; modules 1; new nodes 0)
 - 12:45 L: merged deliver/C4/Sheaf.Paper.CondensedQbarFieldEvaluationLinearity (stage 3; reviewer PASS; first push; landing 20261016T124531-L-2952231 (interface); batch 20261016T124529; modules 3; new nodes 2)
 - 12:48 L: returned deliver/A3/Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis (reviewer RETURN: (the landing tools, head 96fd00dc8) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 12:52 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261016T125247-L-2995085 (proof); batch 20261016T125245; modules 1; new nodes 0)
