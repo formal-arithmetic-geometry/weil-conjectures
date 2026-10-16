@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Excellence of strict local rings of finite-type field algebras",
- "statement": "Let $k$ be a field and $B$ a finitely generated commutative $k$-algebra (a quotient of a polynomial ring in finitely many variables). Let $\\mathfrak p$ be a prime ideal of $B$, put $L=B_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], choose a separable closure $K$ of its residue field, and let $C=L^{\\mathrm{sh}}$ be a strict henselization relative to $K$ [def-sc-ring-strict-henselization]. Then $L$, $C$, and every quotient $C/I$ by an ideal $I$ are excellent. In particular $C$ and $C/\\sqrt{(0)}$ are Noetherian.\n\nHere a ring $D$ is excellent if it is a Noetherian G-ring [def-weil-pbc-g-ring], its regular locus is open after every finite-type algebra extension, and it is universally catenary. More explicitly, for every finitely generated $D$-algebra $E$, the subset of $\\operatorname{Spec}E$ consisting of primes $\\mathfrak q$ for which $E_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme] is open, and for any two primes $\\mathfrak q\\subseteq\\mathfrak r$ of $E$ all saturated chains of primes between them have the same finite length; a chain is saturated if no additional prime can be inserted between successive terms. The ideal $\\sqrt{(0)}$ consists of the nilpotent elements of $C$.",
+ "statement": "Let $k$ be a field and $B$ a finitely generated commutative $k$-algebra (a quotient of a polynomial ring in finitely many variables). Let $\\mathfrak p$ be a prime ideal of $B$, put $L=B_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], choose a separable closure $K$ of its residue field, and let $C=L^{\\mathrm{sh}}$ be a strict henselization relative to $K$ [def-sc-ring-strict-henselization]. Then $L$, $C$, and every quotient $C/I$ by an ideal $I$ are excellent. In particular $C$ and $C/\\sqrt{(0)}$ are Noetherian.\n\nHere a ring $D$ is excellent [def-exc-excellent-ring] if it is a Noetherian G-ring [def-weil-pbc-g-ring], its regular locus is open after every finite-type algebra extension, and it is universally catenary. More explicitly, for every finitely generated $D$-algebra $E$, the subset of $\\operatorname{Spec}E$ consisting of primes $\\mathfrak q$ for which $E_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme] is open, and for any two primes $\\mathfrak q\\subseteq\\mathfrak r$ of $E$ all saturated chains of primes between them have the same finite length; a chain is saturated if no additional prime can be inserted between successive terms. The ideal $\\sqrt{(0)}$ consists of the nilpotent elements of $C$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
   "place": "Proof, second paragraph, ordinary local-algebra permanence assertion (strict henselization and reduction). Supporting Stacks sources: Tags 07QT (definition-excellent), 07QW (proposition-ubiquity-excellent), 07QU (lemma-finite-type-over-excellent); these tags alone do not assert strict-henselization permanence.",
@@ -30,11 +30,112 @@
   "def-weil-pbc-localization-at-prime",
   "def-sc-ring-strict-henselization",
   "def-weil-pbc-g-ring",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-exc-fields-excellent], the given field $k$ is excellent. This applies to every characteristic and does not require $k$ to be perfect.",
+   "uses": [
+    "lem-exc-fields-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QW (proposition-ubiquity-excellent), (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-finite-type-localization-excellent] with $R=k$, $E=B$, and $M=B\\setminus\\mathfrak p$. The finite-generation hypothesis is exactly the hypothesis on $B$. Primality makes $M$ multiplicatively closed and ensures $1\\in M$. By [def-weil-pbc-localization-at-prime], the localization in its conclusion is $L=B_{\\mathfrak p}$, so $L$ is excellent and is a local ring.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU (lemma-finite-type-over-excellent)."
+   }
+  },
+  {
+   "text": "Excellence includes Noetherianity by [def-exc-excellent-ring], so $L$ is Noetherian. Apply the forward implication of [lem-sc-strict-henselization-noetherian] to the strict henselization $C$ relative to the chosen separable closure $K$. It gives that $C$ is Noetherian. The local-ring hypothesis is supplied by the localization in step 2; no finite residue-extension hypothesis is needed.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06LJ (lemma-henselization-noetherian), (1) implies (3)."
+   }
+  },
+  {
+   "text": "By [def-sc-ring-strict-henselization], $C$ is isomorphic as an $L$-algebra to the colimit of the pointed etale $L$-algebras $(S,\\chi:S\\to K)$. The objects and morphisms here are exactly those in [lem-sc-pointed-etale-small-filtered]: an object of its full subcategory of $\\operatorname{Over}(\\operatorname{CommAlgCat}_L(K))$ is such a map $\\chi$, and a morphism is an $L$-algebra map commuting with $\\chi$. Consequently this category $P$ is essentially small and filtered. Choose a small full skeleton $J$ and, for each object $X$ of $P$, an isomorphism $u_X:rX\\to X$ from its representative, with $u_X$ the identity on representatives. A finite diagram in $J$ has a cocone in $P$ by filteredness; composing its legs with the inverse of the chosen isomorphism of its vertex gives a cocone in $J$, so $J$ is filtered. A cocone $(\\lambda_j)$ on the restricted algebra diagram extends by $\\lambda_X=\\lambda_{rX}\\circ u_X^{-1}$; for a morphism $f:X\\to Y$, its naturality follows by applying the restricted cocone identity to $u_Y^{-1}fu_X:rX\\to rY$. Restriction and extension are inverse, also on morphisms of cocones. Thus $C$ with its transported cocone is the colimit of the small filtered diagram. Each term $S$ is etale over $L$ by its definition, and clause (1) of [lem-weil-pbc-etale-algebra-finite-presentation-localization] gives its finite presentation over $L$. This very presentation satisfies [def-weil-pbc-ind-etale-algebra], proving that $L\\to C$ is ind-etale.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-sc-pointed-etale-small-filtered",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), pointed-algebra colimit presentation; the cited existing filteredness node supplies smallness and filteredness. Affine-etale finite presentation: Tag 00U1 (definition-etale) and morphisms.tex Tag 02GJ (lemma-etale-characterize), as stated in the cited existing Mathlib leaf. Skeleton and cocone comparison written out."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ind-etale-stability], an ind-etale map is weakly etale, so $L\\to C$ is weakly etale. Apply [lem-exc-weakly-etale-excellent] to this map. Its excellent-source hypothesis was proved in step 2, and its Noetherian-target hypothesis in step 3. The conclusion is that $C$ is excellent.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Silvio Greco, Two theorems on excellent rings, Nagoya Mathematical Journal 60 (1976), 139–149, DOI 10.1017/S0027763000017190",
+    "place": "Greco, Theorem 5.3(iv), pp. 146–147, with the equivalence of absolutely flat and weakly etale in Remark 5.2, p. 146; Stacks Tag 092N (lemma-when-weakly-etale) supplies the implication from ind-etale recorded in the cited existing node."
+   }
+  },
+  {
+   "text": "Let $I$ be any ideal of $C$. The scalar homomorphism $C\\to C/I$ is surjective, so every element of $C/I$ is already a scalar and the empty finite list generates it as a $C$-algebra. Apply the final sentence of [lem-exc-finite-type-localization-excellent] with $R=C$ and $A=C/I$. Its excellent-source hypothesis is step 5, and the preceding finite-generation argument supplies its finite-type hypothesis. It gives that $C/I$ is excellent directly. This applies also to $I=(0)$ and $I=C$; no properness or finite-generation hypothesis on $I$ is used.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU (lemma-finite-type-over-excellent), finite-type specialization applied directly to the quotient algebra."
+   }
+  },
+  {
+   "text": "By [def-exc-excellent-ring], the excellence of $C$ includes its Noetherianity. The nilpotent elements form an ideal: if $x^a=0$ and $y^b=0$ for positive integers $a,b$, the binomial expansion makes $(x+y)^{a+b}=0$, and $(-x)^a=0$ and $(rx)^a=0$ for every $r$. Hence $\\sqrt{(0)}$ is an allowed ideal in step 6. That step gives excellence of $C/\\sqrt{(0)}$, and unfolding excellence again gives its Noetherianity.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QT (definition-excellent); elementary verification that the nilradical is an ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "def-weil-pbc-localization-at-prime",
+  "def-exc-excellent-ring",
+  "lem-sc-strict-henselization-noetherian",
+  "def-sc-ring-strict-henselization",
+  "lem-sc-pointed-etale-small-filtered",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
+  "place": "Proof, second paragraph; agent assembly from Stacks 07QW, 07QU, 06LJ, 04GW, 00U1/02GJ and 092N, and Greco Theorem 5.3(iv). The full Greco paper is available in the permitted sandbox; Foreword, Remark 5.2, Theorem 5.3 and Corollary 5.6 were read."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -101,12 +202,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-exc-curve-open-dimension-general",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-field-algebra-strict-henselization-excellent",
+  "worker": "stage1",
+  "summary": "Repaired the merge-lock return against the current shared DAG: reopened all existing cited statements, including the current excellence definition with its finite-chain bound; none of the used clauses changed. Seven steps preserve every hypothesis and conclusion. Step 4 now explicitly identifies the two pointed categories and writes the small-skeleton cocone comparison; step 6 applies the existing finite-type conclusion directly to C/I, avoiding an unnecessary localization identification. Refreshed all verbatim citations and added a current-DAG dependency snapshot. Two statement-only child nodes (field excellence and Greco weakly-etale ascent), no new Mathlib leaves. All sources checked, including the full Greco PDF and its global Noetherian convention; current Mathlib and duplication searches recorded honestly.",
+  "blueprint": "Realizes thm-exc-curve-open-dimension-general, Proof second paragraph, the excellence/Noetherianity assertion and passage to R_red. It is a local-algebra tool below the unit, with no unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Noetherianity theorem for the same strict henselization; sk-prop-a1-kummer has no local algebra replacement."
+   },
+   {
+    "node": "lem-sc-pointed-etale-small-filtered",
+    "why": "Generic essential-smallness and filteredness of exactly the pointed-etale category in the definition; needed to establish ind-etaleness."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic implication from ind-etale to weakly etale, needed to apply Greco without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-pointed-etale-small-filtered",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-958d29090",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-958d29090 (reviewer sub-agent of L); spot-checked: Reviewed item, both new nodes, all cited DAG statements, blueprint route, delivery rules, and source locations. All seven steps have valid hypotheses and dependencies; edge cases and duplicate searches were checked. Review written to review.md."
+ }
 }
