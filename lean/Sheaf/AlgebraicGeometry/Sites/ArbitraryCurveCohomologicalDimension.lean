@@ -12,18 +12,9 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Regular
-import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.Paper.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion cohomological dimension of arbitrary curves
@@ -85,7 +76,18 @@ theorem torsionEtaleCohomologicalDimensionLE_of_dim_le_one
     (hdim : topologicalKrullDim X ≤ 1) :
     (IsAffine X ∧ Scheme.HasTorsionEtaleCohomologicalDimensionLE X 1) ∨
       (¬ IsAffine X ∧ Scheme.HasTorsionEtaleCohomologicalDimensionLE X 2) := by
-  sorry
+  let _ : IsCurve f := { krullDim_le_one := hdim }
+  obtain ⟨h₂, h₁⟩ := IsCurve.hasTorsionCohomologicalDimensionLE f
+  have convert (n : ℕ) (h : X.HasTorsionCohomologicalDimensionLE n) :
+      Scheme.HasTorsionEtaleCohomologicalDimensionLE X n := by
+    intro F hF q hq
+    have h' := h F hF q hq
+    have : Subsingleton ((Sheaf.functorH X.smallEtaleTopology q).obj F) := h'
+    obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso X q
+    exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
+  by_cases ha : IsAffine X
+  · exact Or.inl ⟨ha, convert 1 (h₁ ha)⟩
+  · exact Or.inr ⟨ha, convert 2 h₂⟩
 
 end AlgebraicGeometry
 
