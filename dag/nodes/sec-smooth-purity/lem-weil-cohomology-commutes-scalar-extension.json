@@ -4,12 +4,12 @@
   "is": null,
   "from": {
    "node": "def-weil-ordinary-compact-cohomology",
-   "place": "its statement (a notion the statement uses)",
+   "place": "Statement of def-weil-ordinary-compact-cohomology: 'For $\\Qlb$, the target is the stagewise $D^b_{\\mathrm{fd}}(\\Qlb)$' and the displayed formulas $H^i(Y,K)=\\mathrm H^i(\\RGamma(Y,K))$, $H_c^i(Y,K)=\\mathrm H^i(\\RGammac(Y,K))$; the stage-independence of this cohomology functor.",
    "via": [
     "def-weil-coefficient-cohomology-modules"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology commutes with extension of scalars along a field extension",
@@ -22,27 +22,171 @@
   "def-weil-derived-category-cohomology-functor",
   "def-weil-vector-space-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $i\\in\\mathbf Z$ and put $Z^i=\\ker d^i$ and $B^i=\\operatorname{im}d^{i-1}$, so $\\mathrm H^i(C)=Z^i/B^i$ by [def-weil-derived-category-cohomology-functor]. The termwise tensor maps of [def-weil-vector-space-scalar-extension] give a complex, since $(d^{r+1}\\otimes1)(d^r\\otimes1)=(d^{r+1}d^r)\\otimes1=0$. If $x\\in Z^i$, then $d(x\\otimes\\lambda)=dx\\otimes\\lambda=0$. Replacing $x$ by $x+d^{i-1}y$ changes $x\\otimes\\lambda$ by the boundary $d^{i-1}(y\\otimes\\lambda)$. Thus $([x],\\lambda)\\mapsto[x\\otimes\\lambda]$ is well defined on $\\mathrm H^i(C)\\times L$. It is additive in each variable and $K$-balanced, since $[ax\\otimes\\lambda]=[x\\otimes a\\lambda]$. The tensor universal property therefore gives the asserted map $\\beta^i_{C,L}:\\mathrm H^i(C)\\otimes_KL\\to\\mathrm H^i(C\\otimes_KL)$. It is $L$-linear because $[x\\otimes a\\lambda]=a[x\\otimes\\lambda]$ for $a\\in L$.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V (section-complexes), cochain cohomology as cycles modulo boundaries; algebra.tex Tag 00CV (section-tensor-product), balanced tensor universal property"
+   }
+  },
+  {
+   "text": "By [lem-weil-field-scalar-extension-exact], $F_L=-\\otimes_KL:\\operatorname{Mod}_K\\to\\operatorname{Mod}_L$ is additive and preserves finite limits and finite colimits, for arbitrary vector spaces. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to this functor and $C$. Its isomorphism $c^i_C:\\mathrm H^i(C\\otimes_KL)\\to\\mathrm H^i(C)\\otimes_KL$ is compatible with cycles and their projections to cohomology. In particular the tensored cycle $x\\otimes\\lambda$ is sent to $[x]\\otimes\\lambda$, so $c^i_C\\beta^i_{C,L}$ fixes every $[x]\\otimes\\lambda$. Every cohomology class has a cycle representative and pure tensors span a tensor product, so $c^i_C\\beta^i_{C,L}=1$. Since $c^i_C$ is an isomorphism, $\\beta^i_{C,L}=(c^i_C)^{-1}$, and hence is an isomorphism. This argument uses only the three terms in degrees $i-1,i,i+1$, and needs neither boundedness nor finite-dimensional terms.",
+   "uses": [
+    "lem-weil-field-scalar-extension-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (lemma-exact-functor), preservation of kernels and cokernels; the induced homology comparison applied to the three-term complex in degree i"
+   }
+  },
+  {
+   "text": "For a morphism of complexes $f:C\\to C'$, the induced cohomology map is $[x]\\mapsto[f^i(x)]$ by [def-weil-derived-category-cohomology-functor], and its scalar extension acts on pure tensors as in [def-weil-vector-space-scalar-extension]. The two naturality composites from $\\mathrm H^i(C)\\otimes_KL$ to $\\mathrm H^i(C'\\otimes_KL)$ both send $[x]\\otimes\\lambda$ to $[f^i(x)\\otimes\\lambda]$. Since pure tensors span, the composites agree. Thus the isomorphisms of Step 2 are natural in $C$.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V (section-complexes), formula for the induced cohomology map"
+   }
+  },
+  {
+   "text": "If $\\mathrm H^i(C)$ is finite-dimensional over $K$, its scalar extension is finite-dimensional over $L$ by the basis assertion in [def-weil-vector-space-scalar-extension]. The isomorphism of Step 2 identifies that scalar extension with $\\mathrm H^i(C\\otimes_KL)$, proving the finite-dimensionality assertion degree by degree. No finiteness condition on the terms of $C$ is used.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05G5 (lemma-base-change-finiteness), finite modules remain finite under base change; basis extension for fields"
+   }
+  },
+  {
+   "text": "Let $f:C\\to C'$ be a quasi-isomorphism. By [def-weil-derived-category-cohomology-functor], every $\\mathrm H^i(f)$ is an isomorphism. Its tensor extension is an isomorphism: tensoring its inverse gives an inverse by functoriality in [def-weil-vector-space-scalar-extension]. The naturality square of Step 3 expresses $\\mathrm H^i(f\\otimes_KL)$ as this tensor extension conjugated by the two isomorphisms $\\beta^i_{C,L}$ and $\\beta^i_{C',L}$. It too is an isomorphism, for every $i$. This is exactly the definition of $f\\otimes_KL$ being a quasi-isomorphism.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V (section-complexes), Definition 0115 (definition-quasi-isomorphism-cochain)"
+   }
+  },
+  {
+   "text": "For $K\\subset L\\subset M$, let $\\tau_V:(V\\otimes_KL)\\otimes_LM\\to V\\otimes_KM$ be the tower isomorphism of [def-weil-vector-space-scalar-extension], $(v\\otimes\\lambda)\\otimes\\mu\\mapsto v\\otimes\\lambda\\mu$. Its inverse sends $v\\otimes\\nu$ to $(v\\otimes1)\\otimes\\nu$: the two composites are identities because $(v\\otimes1)\\otimes\\lambda\\mu=(v\\otimes\\lambda)\\otimes\\mu$ by $L$-balancing. Applied termwise it is a chain isomorphism $\\tau_C$, since both $d\\tau_C$ and $\\tau_Cd$ send $(x\\otimes\\lambda)\\otimes\\mu$ to $dx\\otimes\\lambda\\mu$. Apply the cohomology functor of [def-weil-derived-category-cohomology-functor] to $\\tau_C$; its inverse is the cohomology of $\\tau_C^{-1}$. On the common source $(\\mathrm H^i(C)\\otimes_KL)\\otimes_LM$, compare the direct composite $\\beta^i_{C,M}\\circ\\tau_{\\mathrm H^i(C)}$ and the successive composite $\\mathrm H^i(\\tau_C)\\circ\\beta^i_{C\\otimes_KL,M}\\circ(\\beta^i_{C,L}\\otimes_LM)$. On $([x]\\otimes\\lambda)\\otimes\\mu$ the first gives $[x\\otimes\\lambda\\mu]$; the second gives first $[x\\otimes\\lambda]\\otimes\\mu$, then $[(x\\otimes\\lambda)\\otimes\\mu]$, then $[x\\otimes\\lambda\\mu]$. Here $\\beta^i_{C\\otimes_KL,M}$ is Step 1 for the $L$-complex $C\\otimes_KL$ and the extension $L\\subset M$. Nested pure tensors span the source, so the two $M$-linear maps agree. This is the asserted tower square after its canonical associativity identifications.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-derived-category-cohomology-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product), tensor universal property and balancing; Tag 00D0 (lemma-transitive), associativity over a single base ring, with the change-of-base tower map and inverse checked explicitly above using the cited scalar-extension definition; homology.tex Tag 010V (section-complexes), induced maps on cycle classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-category-cohomology-functor",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Expansion of Tags 010N and 010V and algebra.tex Tags 00HB and 00D0; local literature is absent, online Stacks statements checked, WANTED entries in report.md."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -n 'class PreservesHomology\\|def mapHomologyIso' Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; grep -n 'preservesHomology_of' Mathlib/CategoryTheory/Abelian/Exact.lean; grep -n 'lTensor_shortComplex_exact\\|PreservesFiniteLimits' Mathlib/RingTheory/Flat/CategoryTheory.lean; grep -rn 'homologyFunctor\\|QuasiIsoAt' Mathlib/Algebra/Homology/QuasiIso.lean | grep mapHomologicalComplex; grep -rln 'baseChange.*homology\\|homology.*baseChange\\|ker_baseChange' Mathlib/LinearAlgebra/TensorProduct Mathlib/RingTheory/Flat",
-   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:40 `Functor.PreservesHomology` and :455 `ShortComplex.mapHomologyIso : (S.map F).homology ≅ F.obj S.homology` for a functor preserving homology; Mathlib/CategoryTheory/Abelian/Exact.lean:267 `preservesHomology_of_map_exact`, :294 `preservesHomology_of_preservesMonos_and_cokernels`; Mathlib/RingTheory/Flat/CategoryTheory.lean:41 `Module.Flat.lTensor_shortComplex_exact` (tensoring with a flat module carries exact short complexes of modules to exact ones), :79 `PreservesFiniteLimits (tensorLeft M)` for flat M; Mathlib/Algebra/Homology/QuasiIso.lean:257-267 `quasiIsoAt_map_iff_of_preservesHomology`-type lemmas: F.mapHomologicalComplex preserves (and reflects, for faithful exact F) quasi-isomorphisms when F preserves homology. No lemma identifying the homology of a complex of vector spaces tensored with a field extension as the tensor product of its homology (`ker_baseChange`, `range_baseChange` do not exist)",
-   "date": "2026-10-09",
-   "verdict": "no match as one statement: the ingredients are there (the base-change functor `ModuleCat.extendScalars` / `tensorLeft L` preserves finite limits by flatness of L over K, hence homology by `preservesHomology_of_map_exact`, and `ShortComplex.mapHomologyIso` then gives H^i(C ⊗ L) ≅ H^i(C) ⊗ L), but assembling them for cochain complexes of vector spaces with the naturality and the compatibility with towers is not one line"
+   "tool": "leanfinder",
+   "query": "cohomology of a cochain complex commutes with extension of scalars along a field extension, naturally and compatibly with towers",
+   "results": "8 hits: groupCohomologyIsoExt, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply, groupCohomology.coindIso, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂, groupCohomology.isoShortComplexH2_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.homologyFunctorIso, ModuleCat.extendScalars, PreservesHomology",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.homologyFunctorIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: the short identifier was not recognized; this result gives no evidence of absence. The later fully qualified query succeeded."
   },
   {
    "tool": "grep",
-   "query": "grep -n 'def homologyFunctorIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
-   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean:777 `Functor.homologyFunctorIso : F.mapShortComplex ⋙ ShortComplex.homologyFunctor D ≅ ShortComplex.homologyFunctor C ⋙ F` for F preserving homology (natural iso on short complexes); applied to `(K.sc i)` it gives H^i(F(K)) ≅ F(H^i(K)) naturally",
-   "date": "2026-10-09",
-   "verdict": "no match as one statement: the natural iso is `Functor.homologyFunctorIso` at `K.sc i` once `ModuleCat.extendScalars` is shown to preserve homology (flatness + `preservesHomology_of_map_exact`); the compatibility with towers K⊂L⊂M is not in Mathlib"
+   "query": "homologyFunctorIso|mapHomologyIso|extendScalars",
+   "results": "16 hits: Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology commutes with scalar extension of complexes over a field",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserves homology of a complex naturally via kernels and cokernels",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.ShortComplex.Exact.map, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff, CategoryTheory.Functor.PreservesHomology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso",
+   "results": "9 hits: CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc, CategoryTheory.NatTrans.app_homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*comp|mapHomologyIso.*naturality|homologyFunctorIso|mapHomologyIso_comp",
+   "results": "8 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; Mathlib/Algebra/Homology/ShortComplex",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_comp|mapHomologyIso.*comp|homologyFunctorIso",
+   "results": "8 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean, Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean; Mathlib/Algebra/Homology/ShortComplex",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item, including the explicit coefficient-tower square; existing exactness and natural homology-comparison leaves supply the main isomorphism, with the other clauses proved by the displayed cycle calculations"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|homologyFunctorIso|cancelBaseChange",
+   "results": "25 hits (logged result): Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic homology naturality and module tower ingredients found, but no declaration stating the complete coefficient-tower comparison; retained the explicit calculation rather than claiming a new leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the homology comparison isomorphism with a composite of functors that preserve homology",
+   "results": "8 hits (logged result): CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality, CategoryTheory.ShortComplex.map_leftRightHomologyComparison', CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality_assoc, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic homology naturality and module tower ingredients found, but no declaration stating the complete coefficient-tower comparison; retained the explicit calculation rather than claiming a new leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso, CategoryTheory.Functor.comp",
+   "results": "0 hits (logged result): ",
+   "date": "2026-10-16",
+   "verdict": "second reading: generic homology naturality and module tower ingredients found, but no declaration stating the complete coefficient-tower comparison; retained the explicit calculation rather than claiming a new leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +206,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-cohomology-commutes-scalar-extension",
+  "worker": "stage1",
+  "summary": "Kept every clause and all hypotheses of the statement. No finished project declaration found. Reused the existing field-exactness and exact-functor-cohomology Mathlib leaves, with the explicit cycle formula identifying the inverse comparison. Wrote naturality, finite-dimensionality, quasi-isomorphism preservation, and the full tower equality on nested pure tensors. No new nodes. Local literature absent; source tags checked online and WANTED recorded. Repeated Mathlib searches honestly, including unavailable LeanSearch. Second reading clarified the difference between single-base associativity and the coefficient tower, wrote the tower inverse and the intermediate base field, corrected the invalid-query verdict, and independently repeated searches.",
+  "blueprint": "Realizes the stagewise coefficient-cohomology requirement behind def-weil-ordinary-compact-cohomology (the sentence defining the target over Qbar_l as stagewise and the two displayed H^i formulas), via def-weil-coefficient-cohomology-modules. The ancestor is a definition without proof steps; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-5bcfca90e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-5bcfca90e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All six steps check, including the canonical comparison’s normalization and tower compatibility. Edge cases and duplicate/dependency searches found no gap or cycle. No new nodes, fixes, or accepted tool_uses. Detailed checks are in review.md; no target-level coefficient-category comparison is inferred."
+ }
 }
