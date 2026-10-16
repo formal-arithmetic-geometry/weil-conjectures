@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Apply etale_local_ring_triples to the affine open i and geometric point xR. It supplies the chart restriction, the equivalence E with residue triples, the natural diagram isomorphism δ, and compatible colimit cocones cn and ct. Apply strictHenselization_triples with the relative separable closure to obtain a local colimit c, its R-map ρ, and maximalIdeal(c) = p.map(ρ).",
+   "text": "Apply etale_local_ring_triples to i and xR. Retain the chart equivalence E, the diagram isomorphism delta, its R-map compatibility, colimit cocones cn and ct, and the colimit isomorphism t with its coprojection formula. Apply strictHenselization_triples over the relative separable closure K to obtain a local triple colimit c, its structure map rho, and maximalIdeal(c) = p.map(rho).",
    "uses": [
     "lem-weil-pbc-etale-local-ring-triples",
     "lem-weil-pbc-strict-henselization-triples"
@@ -21,21 +21,22 @@
    "elementary": false
   },
   {
-   "text": "The inverse small-model equivalence followed by strictHenselizationAffineInclusion is an equivalence q. The final-functor colimit isomorphism for q, the comparison with cn, the chart-to-triples comparison and uniqueness of the triple colimit yield ringIso : strictHenselizationRing(xR ≫ i) ≅ c.pt. Transport locality by the inverse ring equivalence and use ρ ≫ ringIso.inv as the R-map.",
+   "text": "The chosen strictHenselizationRing is the coordinate-ring colimit D on all affine pointed neighbourhoods in the consolidated upstream construction. Colimit uniqueness identifies it with cn.pt. Compose this isomorphism with t and the unique comparison ct.pt isomorphic to c.pt to obtain e. The comparison equation colimit.iota(D,n) followed by e.hom = cn.iota(n) followed by t.hom followed by the ct-to-c comparison is the coprojection formula for colimit uniqueness.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose a representative j isomorphic to the pointed chart (Spec R,xR). Its affine image b has a map g to Spec R. Coprojection formulas for all colimit comparisons and the equation (ΓSpecIso R).inv ≫ g.appTop ≫ δ = the triple R-map give (ΓSpecIso R).inv ≫ g.appTop ≫ colimit.ι(j) = ρ ≫ ringIso.inv. Apply Spec and naturality of isoSpec.inv, and compose with i. Since g ≫ i is the neighbourhood structure map, its structural-map coprojection equation gives Spec.map(ρ ≫ ringIso.inv) ≫ i = strictHenselizationStructuralMap(xR ≫ i).",
+   "text": "Use the actual pointed chart (Spec R, i, xR) as an affine neighbourhood, and put it in the chart subcategory using the identity map to Spec R. The compatibility formula for delta at the identity chart, the coprojection formula for t, and the ct-to-c colimit comparison give GammaSpecIso(R).inv followed by colimit.iota(chart) followed by e.hom = rho. Cancel e.hom to identify the canonical chart ring map with rho followed by e.inv. Apply Spec. The upstream strictLocalizationCone projection formula, its equation over S, and the fact that Spec.map(GammaSpecIso(R).inv) is the inverse of toSpecGamma prove that Spec(rho followed by e.inv) followed by i is the stated structural map.",
    "uses": [
-    "def-weil-pbc-strict-henselization-structural-map"
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-etale-local-ring-triples"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Ring equivalences carry maximal ideals to maximal ideals. Map maximalIdeal(c) = p.map(ρ) through ringIso.inv and use Ideal.map_map to get the required ideal identity. The point p in SpecToEquivOfField equals xR(closedPoint Ω).",
+   "text": "Transport the local-ring instance from c.pt along e.inv. Map maximalIdeal(c) = p.map(rho) through e.inv and use Mathlib IsLocalRing.map_ringEquiv_maximalIdeal and Ideal.map_map. The point p defined by SpecToEquivOfField is definitionally xR(closedPoint Omega). This gives the required equality for rho followed by e.inv.",
    "uses": [],
    "elementary": true
   }
@@ -48,9 +49,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "M1",
-  "date": "2026-10-13",
-  "note": "Lean proof of colimit transport following Stacks Tags 04HX, 04GW and 04GP; no new proof holes."
+  "by": "D2",
+  "date": "2026-10-17",
+  "note": "Complete Lean colimit-transport proof following Stacks 04HX, 04GW and 04GP. The consolidated upstream affine-neighbourhood colimit allows use of the actual chart, so the old small-representative comparison step is unnecessary. No new proof holes."
  },
  "mathlib_searches": [
   {
@@ -128,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T173841-L-3299828",
-  "kind": "interface",
+  "landing": "20261016T221602-L-1612596",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
