@@ -132,4 +132,90 @@ lemma galoisCharacter_eq_monodromy (σ : Gal(Ω/C.functionField)) :
 
 end Monodromy
 
+section KummerResidue
+
+variable [IsLocallyNoetherian C]
+
+omit [Nonempty U] in
+/-- An element of `Ω` fixed by `Gal(Ω / k(C))` lies in `k(C)`. -/
+lemma exists_algebraMap_eq_of_forall_apply_eq {y : Ω}
+    (h : ∀ σ : Gal(Ω/C.functionField), σ y = y) :
+    ∃ f : C.functionField, algebraMap C.functionField Ω f = y := by
+  have hmem : y ∈ IntermediateField.fixedField
+      (⊥ : IntermediateField C.functionField Ω).fixingSubgroup := by
+    rw [IntermediateField.mem_fixedField_iff]
+    exact fun σ _ ↦ h σ
+  rw [InfiniteGalois.fixedField_fixingSubgroup] at hmem
+  exact IntermediateField.mem_bot.1 hmem
+
+omit [IsIntegral C] [IsLocallyNoetherian C] in
+/-- The order of vanishing of a power. -/
+lemma _root_.AlgebraicGeometry.Scheme.ord_pow {X : Scheme.{u}} [IsIntegral X]
+    [IsLocallyNoetherian X] {g : X.functionField} (hg : g ≠ 0) (n : ℕ) (x : X) :
+    X.ord (g ^ n) x = n * X.ord g x := by
+  induction n with
+  | zero =>
+    have h := Scheme.ord_mul (x := x) (one_ne_zero (α := X.functionField)) one_ne_zero
+    rw [mul_one] at h
+    simp only [pow_zero, Nat.cast_zero, zero_mul]
+    omega
+  | succ n ih =>
+    rw [pow_succ, Scheme.ord_mul (pow_ne_zero n hg) hg, ih]
+    push_cast
+    ring
+
+/-- `ξ ^ (a + b).val = ξ ^ a.val * ξ ^ b.val` for an `N`-th root of unity `ξ`. -/
+lemma _root_.pow_zmod_val_add {M : Type*} [Monoid M] {ξ : M} (hξ : ξ ^ N = 1) (a b : ZMod N) :
+    ξ ^ (a + b).val = ξ ^ a.val * ξ ^ b.val := by
+  rw [← pow_add, ZMod.val_add, ← Nat.mod_add_div (a.val + b.val) N, pow_add, pow_mul, hξ,
+    one_pow, mul_one, Nat.mod_add_div]
+
+variable (C) in
+open Classical in
+/-- The **Kummer residue** at `z` of a function `χ : Gal(Ω / k(C)) → ℤ / N` against `ξ ∈ Ω`:
+`ord_z (x ^ N) mod N` for a Kummer element `x` of `χ` against `ξ`, i.e. `x ≠ 0` with `x ^ N` in
+`k(C)` and `σ x = ξ ^ χ(σ) x` for all `σ`. It does not depend on the choice of `x`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.kummerResidue_eq`), and is `0` if there is no Kummer
+element. -/
+noncomputable def kummerResidue (χ : Gal(Ω/C.functionField) → ZMod N) (z : C) (ξ : Ω) :
+    ZMod N :=
+  if h : ∃ x : Ω, ∃ f : C.functionField, x ≠ 0 ∧ algebraMap C.functionField Ω f = x ^ N ∧
+      ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x
+  then (C.ord h.choose_spec.choose z : ZMod N) else 0
+
+omit [Nonempty U] in
+/-- The Kummer residue is computed by any Kummer element. -/
+theorem kummerResidue_eq {χ : Gal(Ω/C.functionField) → ZMod N} (z : C) {ξ x : Ω}
+    {f : C.functionField} (hx : x ≠ 0) (hf : algebraMap C.functionField Ω f = x ^ N)
+    (hχ : ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x) :
+    kummerResidue C χ z ξ = (C.ord f z : ZMod N) := by
+  have h : ∃ x : Ω, ∃ f : C.functionField, x ≠ 0 ∧ algebraMap C.functionField Ω f = x ^ N ∧
+      ∀ σ : Gal(Ω/C.functionField), σ x = ξ ^ (χ σ).val * x := ⟨x, f, hx, hf, hχ⟩
+  rw [kummerResidue, dif_pos h]
+  obtain ⟨hx', hf', hχ'⟩ := h.choose_spec.choose_spec
+  set x' := h.choose
+  set f' := h.choose_spec.choose
+  -- `x' / x` is fixed by the Galois group, hence lies in `k(C)`
+  have hξ (σ : Gal(Ω/C.functionField)) : ξ ^ (χ σ).val ≠ 0 := by
+    have : σ x ≠ 0 := (map_ne_zero_iff _ σ.injective).2 hx
+    rw [hχ σ] at this
+    exact left_ne_zero_of_mul this
+  obtain ⟨g, hg⟩ := exists_algebraMap_eq_of_forall_apply_eq (C := C) (y := x' / x) fun σ ↦ by
+    rw [map_div₀, hχ σ, hχ' σ, mul_div_mul_left _ _ (hξ σ)]
+  have hg0 : g ≠ 0 := by
+    rintro rfl
+    rw [map_zero, eq_comm, div_eq_zero_iff] at hg
+    exact hg.elim hx' hx
+  have hf0 : f ≠ 0 := by
+    rintro rfl
+    rw [map_zero, eq_comm] at hf
+    exact hx (pow_eq_zero_iff (NeZero.ne N) |>.1 hf)
+  have hff : f' = f * g ^ N := (algebraMap C.functionField Ω).injective (by
+    rw [hf', map_mul, map_pow, hf, hg, ← mul_pow, mul_div_cancel₀ _ hx])
+  rw [hff, Scheme.ord_mul hf0 (pow_ne_zero N hg0), Scheme.ord_pow hg0]
+  push_cast
+  rw [ZMod.natCast_self, zero_mul, add_zero]
+
+end KummerResidue
+
 end AlgebraicGeometry.Scheme.EtaleTorsor
