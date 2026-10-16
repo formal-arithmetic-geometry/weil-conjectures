@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: common-stage descent; the closed-costalk step in the locally closed-piece Hom continuity argument.",
+   "via": [
+    "lem-weil-pbc-condensed-local-piece-costalk-model",
+    "lem-weil-pbc-condensed-local-piece-hom-continuity",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived closed costalk continuity on strict bounded diagrams",
+ "statement": "Let T be a scheme with noetherian underlying space, Λ a commutative condensed ring, and i:Z→T a closed immersion. Let H be any additive right adjoint of internal module pushforward i_*. For a (u+1)-small filtered diagram D of internal Λ_T-module cochain complexes, a common strict lower bound a, and q∈ℤ, the canonical comparison from colim_s H^q(RH(QD_s)) to H^q(RH(Q(colim_s truncGE_a D_s))) is an isomorphism. Its legs are RH applied to the original complexes' good-truncation projections followed by their colimit inclusions. Here the internal module categories are [def-weil-pbc-condensed-e-module-category], and Q and RH belong to [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the complementary open k, quasi-compact by noetherianity. Extract the natural supported localization triangle i_*R H₀→id→Rk_*k* from condensed open/closed recollement, where H₀ is its exceptional right adjoint.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "For any filtered cocone of distinguished triangles, form the five-term portions of its long exact cohomology sequences. Exact filtered colimits give exact top rows; the ordinary five lemma shows that continuity for the middle and third vertices implies continuity for the first. This is the proved triangleComparison_isIso helper.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "The good-truncated cocone of D is colimiting because every truncation projection is invertible under the strict lower bound. Cohomology preserves filtered colimits. Restriction k* is exact and preserves colimits; qcqs pushforward continuity, transferred between the two colimit cocones, proves the third-vertex comparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "Apply the five lemma, commute exact i_* through cohomology and filtered colimits, and reflect the resulting isomorphism through fully faithful i_*. Uniqueness of right adjoints identifies RH₀ with RH naturally, so all comparison maps agree with condensedContinuityComparison.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedClosedCostalkDerivedContinuity.lean",
+  "place": "D3 stage-3 proof following HRS Lemma 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived functor of exceptional inverse image for closed immersion preserves filtered bounded below cohomology colimits",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono",
+   "results": "1 hits: CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Cc]olimit|[Cc]olimit.*rightDerivedFunctor",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right derived exceptional inverse image for a closed immersion commutes with filtered uniformly bounded below colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable: the service returned Internal Server Error. No mathematical conclusion is inferred; LeanFinder, Loogle and Mathlib source searches were also run."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceCostalkModel",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedClosedCostalkDerivedContinuity",
+  "file": "lean/Sheaf/Paper/CondensedClosedCostalkDerivedContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_closed_costalk_derived_continuity",
+  "statement": "theorem condensed_closed_costalk_derived_continuity\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))\n    [H.Additive] (adj : CondensedRing.lowerStar Λ i ⊣ H)\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (D : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ)\n    (a : ℤ) (hD : ∀ s, (D.obj s).IsStrictlyGE a) (q : ℤ) :\n    IsIso (condensedContinuityComparison D a\n      (DerivedCategory.Q ⋙ H.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ q))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensed_closed_costalk_derived_continuity",
+   "AlgebraicGeometry.ProEtale.colimit_isStrictlyGE"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T040115-L-2416999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T040115-L-2416999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-condensed-closed-costalk-injective-continuity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, first sentence: common-stage descent; the closed-costalk step in the locally closed-piece Hom continuity argument.",
+   "via": [
+    "lem-weil-pbc-condensed-local-piece-costalk-model",
+    "lem-weil-pbc-condensed-local-piece-hom-continuity",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Closed costalks preserve bounded injective quasi-colimit cocones",
+ "statement": "Let T be a scheme with noetherian underlying space, Λ a commutative condensed ring, i:Z→T a closed immersion, and H an additive right adjoint of internal module pushforward i_*. Let I be a (u+1)-small filtered category and J:I→CochainComplex(Mod_Λ(T),ℤ). Let c be a cocone of J. Suppose every J_s and c.pt is termwise injective and zero in degrees below one integer a. If the canonical map colim J→c.pt is a quasi-isomorphism, then the canonical map colim_s H(J_s)→H(c.pt), with H applied degree by degree, is a quasi-isomorphism. The internal module and derived categories use [def-weil-pbc-condensed-e-module-category] and [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Bounded-below injective complexes are K-injective. Construct the natural isomorphisms RH(QJ_s)≅Q(HJ_s) using the right-derived-unit isomorphism, and prove their naturality directly from that unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "The good-truncated cocone is colimiting since its truncation projections are isomorphisms. Its universal map to c is a quasi-isomorphism, by comparison with the assumed quasi-isomorphism colim J→c.pt.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "Apply closed derived continuity in every cohomological degree. Use the canonical universal map and the K-injective comparison at c.pt to identify the vertex; naturality gives the exact leg equation.",
+   "uses": [
+    "lem-weil-pbc-condensed-closed-costalk-derived-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  },
+  {
+   "text": "Apply the existing representative comparison theorem to conclude that the displayed canonical termwise-H colimit map is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), proof, final paragraph on page 14; (3.4) and Lemma 5.3(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CondensedClosedCostalkInjectiveContinuity.lean",
+  "place": "D3 stage-3 proof following HRS Lemma 5.3(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below injective cocone is sent to a quasi-colimit by a right derived functor that commutes with filtered colimits",
+   "results": "8 hits: CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit', CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit, CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone, CategoryTheory.Functor.hasRightDerivedFunctor_of_hasPointwiseRightDerivedFunctor, CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt, CategoryTheory.Functor.HasPointwiseRightDerivedFunctor, CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit', CategoryTheory.Functor.hasPointwiseRightDerivedFunctorAt_iff",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso _",
+   "results": "12 hits: HomotopyEquiv.quasiIso_hom, HomotopyEquiv.quasiIso_inv, QuasiIso.quasiIsoAt, quasiIso_iff, quasiIso_of_isIso, QuasiIso.mk, HomologicalComplex.mem_quasiIso_iff, quasiIso_of_retractArrow",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "isKInjective_of_injective|rightDerivedFunctorObjQIso",
+   "results": "9 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/ModelCategory/Injective.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The general derived-functor, quasi-isomorphism and five-lemma APIs are ingredients, and do not state closed-costalk continuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right derived exceptional inverse image for a closed immersion commutes with filtered uniformly bounded below colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable: the service returned Internal Server Error. No mathematical conclusion is inferred; LeanFinder, Loogle and Mathlib source searches were also run."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedLocalPieceCostalkModel",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedClosedCostalkInjectiveContinuity",
+  "file": "lean/Sheaf/Paper/CondensedClosedCostalkInjectiveContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_closed_costalk_injective_continuity",
+  "statement": "theorem condensed_closed_costalk_injective_continuity\n    (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))\n    [H.Additive] (adj : CondensedRing.lowerStar Λ i ⊣ H)\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    (J : I ⥤ CochainComplex\n      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) ℤ)\n    (c : Cocone J) (a : ℤ)\n    (hJ : ∀ s, (J.obj s).IsStrictlyGE a)\n    (hJi : ∀ s r, Injective ((J.obj s).X r))\n    (hc : c.pt.IsStrictlyGE a) (hci : ∀ r, Injective (c.pt.X r))\n    (hq : QuasiIso (colimit.desc J c)) :\n    QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))\n      ((H.mapHomologicalComplex (.up ℤ)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensed_closed_costalk_injective_continuity",
+   "AlgebraicGeometry.ProEtale.rightDerivedObjQIso_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T040115-L-2416999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T040115-L-2416999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

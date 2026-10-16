@@ -24,61 +24,45 @@
  ],
  "proof": [
   {
-   "text": "Use the closed exceptional right adjoint and exact open pullback. Their bounded-below derived adjunctions identify the two Hom functors naturally, including the shift and single-functor comparisons.",
+   "text": "Choose the complementary quasi-compact open of i and extract an additive exceptional right adjoint H₀ of exact i_* from recollement. Compose H₀ with exact open restriction j*; its left adjoint is j_! followed by i_*.",
    "uses": [
     "lem-weil-pbc-condensed-open-closed-recollement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the functorial bounded injective resolutions at the common bound, apply the exceptional functor and open restriction, and take good truncation to construct L with a common termwise bound. The Grothendieck and K-injective results ensure the required resolution models exist.",
+   "text": "Construct functorial injective embeddings using the source library Grothendieck K-injective resolution functor, then apply the functorial bounded injective resolution preserving every strict lower bound to the whole diagram and its colimit cocone. Exact filtered colimits make its canonical comparison a quasi-isomorphism. Use the shared colimit_isStrictlyGE helper in the derived-continuity module for the original colimit bound.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "lem-weil-pbc-condensed-closed-costalk-derived-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For the complementary quasi-compact open k, recollement identifies i_*Ri! with Cone(id→Rk_*k*)[-1]. Qcqs pushforward continuity and exact filtered colimits identify the colimit of the models with j*Ri! of the original colimit. Fully faithful exact i_* reflects this comparison.",
+   "text": "Closed costalk injective continuity makes termwise H₀ preserve that quasi-colimit cocone. Exact colimit-preserving open restriction j* preserves the resulting quasi-isomorphism. Define L by applying j*H₀ to the injective diagram; additive functors preserve its strict lower bound.",
    "uses": [
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+    "lem-weil-pbc-condensed-closed-costalk-injective-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply Hom(P[0],-[n]) to the comparison and use the natural derived adjunctions. Their naturality gives the displayed leg equation, with the original cocone legs. The same construction covers zero P and empty schemes.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "lean/Sheaf/Paper/CondensedSheafExtContinuity.lean",
-    "place": "Original declaration docstring, expanded geometric argument steps 1--7, following Hemo--Richarz--Scholbach 5.3(2)"
-   }
+   "text": "Use the derived adjunction of exact i_*j_! with RH, the shift and single-functor isomorphisms, and the natural K-injective right-derived-unit comparison to construct e. Construct v by the resolution at the colimit and the inverse of the canonical quasi-colimit comparison. Naturality and colimit.ι_desc prove the required equation for every original cocone leg. Reuse rightDerivedObjQIso_naturality from the injective-continuity module; its proof is not duplicated here.",
+   "uses": [
+    "lem-weil-pbc-condensed-closed-costalk-injective-continuity"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+  "lem-weil-pbc-condensed-closed-costalk-injective-continuity",
   "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-functorial-bounded-injective-resolution"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/Paper/CondensedLocalPieceCostalkModel.lean",
-  "place": "Stage-3 reduction by H3, following HRS Lemma 5.3(2)"
+  "place": "D3 stage-3 Lean proof, following HRS Lemma 5.3(2), with canonical bounded injective cocones and derived adjunctions"
  },
  "mathlib_searches": [
   {
@@ -136,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-bef8e",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261016T011145-L-265743",
+  "landing": "20261016T040115-L-2416999",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled successfully; target and existing signatures match; adapted importers compile; DAG, proofs, and remaining sorries conform to the review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
