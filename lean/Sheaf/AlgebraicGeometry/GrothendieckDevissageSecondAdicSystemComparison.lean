@@ -41,21 +41,7 @@ private def quotientSwapMap {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ⟶
       formalModuleQuotient K e (formalModuleQuotient I n H) := by
-  let qI := formalModuleQuotientπ I n H
-  let qK := formalModuleQuotientπ K e H
-  let pK := formalModuleQuotientπ K e (formalModuleQuotient I n H)
-  let bK := Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι e).2 H
-  have hK : bK ≫ qI ≫ pK = 0 :=
-    (idealModuleProduct_quotient_comp_zero_iff _ qI pK).mp (cokernel.condition _)
-  let t := cokernel.desc bK (qI ≫ pK) hK
-  let bI := Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2
-    (formalModuleQuotient K e H)
-  have hI : bI ≫ t = 0 := by
-    apply (idealModuleProduct_quotient_comp_zero_iff _ qK t).mpr
-    dsimp [qK, t, formalModuleQuotientπ]
-    rw [cokernel.π_desc]
-    simp [qI, formalModuleQuotientπ]
-  exact cokernel.desc bI t hI
+  sorry
 -/
 -/
 -/

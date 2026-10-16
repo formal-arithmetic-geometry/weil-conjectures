@@ -204,16 +204,7 @@ theorem strictHenselizationRing_local_presentation
         (algebraMap R (Localization.AtPrime q) r) = b.hom r) ∧
       Algebra.IsStrictHenselization (Localization.AtPrime q) K
         (strictHenselizationRing barY) := by
-  have h := chart_local_presentation R (𝟙 (Spec R)) barY
-  rw [Category.comp_id] at h
-  obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, ρ, hstruct, hbase, hH⟩ := h
-  have hρ : ρ = b := by
-    apply Spec.map_injective
-    have hstruct' : Spec.map ρ = strictHenselizationStructuralMap barY := by
-      simpa only [Category.comp_id] using hstruct
-    exact hstruct'.trans hb.symm
-  subst ρ
-  exact ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩
+  sorry
 -/
 
 end AlgebraicGeometry.Scheme

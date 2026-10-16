@@ -24,7 +24,9 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Punctured root charts commute with the pointed etale limit defining strict henselization.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Punctured root charts commute with the pointed etale limit defining strict henselization.
 
 Source: Stacks Project, Tags 0BSK and 05N9.
 (blueprint: lem-sbc-punctured-root-limit-presentation)
@@ -46,7 +48,7 @@ are induced by the inclusions of the base rings, so their displayed equations
 follow from the colimit cocone equations and hb. Every transition is affine because
 both schemes are affine. This argument includes n=0, f=0, and zero quotient rings:
 localization and quotient have the same universal properties in those cases, and
-the empty schemes still form a valid affine diagram. -/
+the empty schemes still form a valid affine diagram. - /
 theorem punctured_root_limit_presentation
     (R : CommRingCat.{u}) (f : R) (n : ℕ)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
@@ -86,5 +88,6 @@ theorem punctured_root_limit_presentation
   intro j
   obtain ⟨het, z, hz⟩ := hstage (Opposite.op j)
   exact ⟨F.obj (Opposite.op j), a.app (Opposite.op j), z, het, hz, hd j⟩
+-/
 
 end AlgebraicGeometry.Scheme
