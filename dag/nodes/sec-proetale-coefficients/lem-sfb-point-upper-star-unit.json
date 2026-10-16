@@ -205,5 +205,28 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-7bcf5eef4 (reviewer sub-agent of L); spot-checked: Read the full item, sole new node, cited statements, sources, and unit/chapter route. All seven steps are valid, including the canonical mate comparison; the new leaf matches Mathlib exactly. Empty-object checks and duplicate/cycle searches passed. No repairs or tool-use exceptions needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.laxMonoidal_pointLowerStar",
+   "AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar"
+  ],
+  "statement": "instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u})",
+  "branch": "slopmaster2",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing statement in the published pro-etale module-object framework (side copy documented in coord/pefw-upstream-framework.md), read locally and through scompile.py --source. The two auxiliary instances render the lax p_* and the oplax p^* clauses; the latter is exactly pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal. Both sheaf tensors are the localized objectwise integer tensor of sk-def-sfb-sheaf-tensor, using Sheaf.monoidalCategory; η is the actual oplax unit map, not a chosen isomorphism of objects. The read-only side checkout has a sorry proof; the current published source returned by scompile.py --source has a proof by unfolding pointUpperStar and instance synthesis. The binding concerns the identical statement and canonical structure in both versions, not an assertion about proof closure. No module, new node, dependency replacement, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27ca53fca",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Existing binding to WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic: isIso_η_pointUpperStar (with laxMonoidal_pointLowerStar and oplaxMonoidal_pointUpperStar). Every clause matches: the coherent Profinite and ProEt(specZ) sheaf categories with Ab.{u+1} coefficients; the canonical lax structure on p_*; the adjunction is exactly sheafPullbackConstruction.sheafAdjunctionContinuous, the recorded Mathlib match of def-sfb-point-adjunction; p^* gets the canonical leftAdjointOplaxMonoidal structure; the final clause is IsIso of the actual η. A probe compiled with nt_compile.py shows both synthesized sheaf tensors are rfl-equal to sfbSheafTensorStructure(...).monoidal (tensor over Z, constant unit Z). #print axioms on the published build gives only propext, Classical.choice, Quot.sound. lean.statement matches the source verbatim. No extra hypotheses or universe restrictions; empty and singleton profinite sets covered. Report has both required sections; only the lean field changed. No faults."
  }
 }
