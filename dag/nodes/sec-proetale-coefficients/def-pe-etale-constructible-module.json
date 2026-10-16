@@ -11,12 +11,13 @@
  },
  "kind": "definition",
  "title": "Constructible etale modules for discrete Noetherian coefficients",
- "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Lambda$ a discrete commutative Noetherian ring [def-weil-pbc-noetherian-ring]. On its small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], write $\\underline\\Lambda_X$ for the constant sheaf of rings [def-weil-pbc-constant-sheaf], and use sheaves of $\\underline\\Lambda_X$-modules and their linear morphisms [def-weil-sheaf-of-modules-category]. Such a module sheaf $F$ is constructible if, for every affine open $U\\subseteq X$, there is a finite partition $U=\\coprod_{a=1}^n Z_a$ into constructible locally closed subschemes: their underlying subsets are constructible in $U$ [def-weil-constructible-subset], locally closed [def-weil-locally-closed-subset], pairwise disjoint, and cover $U$. For each inclusion $i_a:Z_a\\to X$, the inverse-image restriction $i_a^{-1}F$ [def-weil-pbc-inverse-image] must admit an etale covering $\\{V_{ab}\\to Z_a\\}_b$ and isomorphisms $(i_a^{-1}F)|_{V_{ab}}\\cong\\underline{M_{ab}}_{V_{ab}}$ of module sheaves, where $M_{ab}$ are finitely generated $\\Lambda$-modules [def-weil-finitely-generated-module] and the right side is the constant module sheaf. Finite generation refers to modules, and does not require their underlying sets to be finite. The constructible etale module category is the full subcategory on these sheaves.\n\nWrite $D^b_c(X_{\\mathrm{et}},\\Lambda)$ for the full subcategory of the derived category of the ambient abelian category of all sheaves of $\\underline\\Lambda_X$-modules on $X_{\\mathrm{et}}$ [def-weil-abstract-derived-category] whose objects $K$ have constructible cohomology sheaves $H^q(K)$ for every integer $q$ and $H^q(K)=0$ outside some finite interval. No completeness condition is imposed.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\Lambda$ a discrete commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Use the universes and small skeletons of [def-weil-size-convention]. On its small etale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], write $\\underline\\Lambda_X$ for the constant sheaf of rings [def-weil-pbc-constant-sheaf], and use sheaves of $\\underline\\Lambda_X$-modules and their linear morphisms [def-weil-sheaf-of-modules-category]. Such a module sheaf $F$ is constructible if, for every affine open $U\\subseteq X$, there is a finite partition $U=\\coprod_{a=1}^n Z_a$ into constructible locally closed subschemes (a scheme stratification [def-constructible-stratification], including its schemes and immersion maps): their underlying subsets are constructible in $U$ [def-weil-constructible-subset], locally closed [def-weil-locally-closed-subset], pairwise disjoint, and cover $U$. For each inclusion $i_a:Z_a\\to X$, the inverse-image restriction $i_a^{-1}F$ [def-weil-pbc-inverse-image] must admit an etale covering $\\{V_{ab}\\to Z_a\\}_b$ and isomorphisms $(i_a^{-1}F)|_{V_{ab}}\\cong\\underline{M_{ab}}_{V_{ab}}$ of module sheaves, where $M_{ab}$ are finitely generated $\\Lambda$-modules [def-weil-finitely-generated-module] and the right side is the sheafification of the constant presheaf with value $M_{ab}$ [def-weil-pbc-constant-sheaf], with its induced $\\underline\\Lambda_{V_{ab}}$-module structure. Finite generation refers to modules, and does not require their underlying sets to be finite. The constructible etale module category has these sheaves as objects and all module-sheaf morphisms between them as morphisms, with identities and composition inherited from the ambient module-sheaf category (the full subcategory).\n\nWrite $D^b_c(X_{\\mathrm{et}},\\Lambda)$ for the full subcategory of the derived category of the ambient abelian category of all sheaves of $\\underline\\Lambda_X$-modules on $X_{\\mathrm{et}}$ [def-weil-abstract-derived-category] whose objects $K$ have constructible cohomology sheaves $H^q(K)$ for every integer $q$ and $H^q(K)=0$ outside some finite interval. Here full subcategory again means that all ambient derived morphisms between the specified objects are retained, with inherited identities and composition. No completeness condition is imposed.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03RW, label definition-constructible, clause (3); literature/stacks-project/proetale.tex, Tag 09AL, label lemma-compare-constructible-derived, definition of D_c with the bounded restriction."
  },
  "stmt_deps": [
+  "def-weil-size-convention",
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-etale-site",
@@ -26,7 +27,8 @@
   "def-weil-locally-closed-subset",
   "def-weil-pbc-inverse-image",
   "def-weil-finitely-generated-module",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-constructible-stratification"
  ],
  "proof": [],
  "proof_deps": [],
@@ -87,10 +89,73 @@
    "results": "0 hits; no declarations returned. Receipt 4f53cda18c2baa0c.",
    "date": "2026-10-16",
    "verdict": "no match: the semantic hits concern condensed-module functors or general finite-type/presentation predicates, not scheme-site local-system descent or affine-local constructible stratifications; Loogle and the scheme-site grep return no declarations for these patterns"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|IsConstructibleSheaf|constructible.*[Ss]heaf",
+   "results": "No hits. Search receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf of finitely generated modules over a Noetherian ring",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType.mk; AlgebraicGeometry.Scheme.Modules; SheafOfModules.mk; SheafOfModules.IsFiniteType.mk; SheafOfModules.noConfusionType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation Search receipt 8d05b1c74eeb9720.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Sheaf\"",
+   "results": "No hits. Search receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible etale module sheaves over a Noetherian coefficient ring with affine local finite stratifications and bounded constructible derived category",
+   "results": "AlgebraicGeometry.Scheme.Modules.instAbelian; AlgebraicGeometry.Scheme.etaleTopology; SheafOfModules.LocalGeneratorsData.IsFiniteType; AlgebraicGeometry.Scheme.Modules.isSheaf; SheafOfModules.IsFinitePresentation; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation Search receipt 9460500e00929a28.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on a scheme small etale site locally constant with finite type module values on each piece of a finite constructible stratification",
+   "results": "CompHausLike.LocallyConstantModule.functor; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.isFinitePresentation Search receipt 01eca5d6b7f92d6d.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|LocallyConstant",
+   "results": "No hits. Search receipt 4f53cda18c2baa0c. Mathlib subdirectory: AlgebraicGeometry/Sites.",
+   "date": "2026-10-17",
+   "verdict": "no match: general finite-type sheaf predicates, structure-sheaf modules, or condensed locally constant module functors do not define affine-local constructible etale modules and their bounded constructible derived category."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|Constructible",
+   "results": "5 source lines in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:117-124, all about Scheme.Hom.isLocallyConstructible_image (Chevalley). Subdirectory AlgebraicGeometry. Search receipt c360eb7f048e36ff.",
+   "date": "2026-10-17",
+   "verdict": "no match: independently checked by the second reader; the hits concern constructible subsets, condensed-module sheaves, or general finite generation/presentation, not constructible etale module sheaves or their bounded constructible derived category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"ModuleCat\"",
+   "results": "No hits. Search receipt 4f53cda18c2baa0c.",
+   "date": "2026-10-17",
+   "verdict": "no match: independently checked by the second reader; the hits concern constructible subsets, condensed-module sheaves, or general finite generation/presentation, not constructible etale module sheaves or their bounded constructible derived category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant sheaf of finite modules on a stratified scheme and cohomologically bounded constructible complexes",
+   "results": "LightCondMod.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functor; SheafOfModules.LocalGeneratorsData.IsFiniteType; LightCondMod.LocallyConstant.functorToPresheaves; SheafOfModules.IsFinitePresentation; CondensedMod.LocallyConstant.functor; SheafOfModules.IsFiniteType; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule Search receipt 0d13ed6e3f720676.",
+   "date": "2026-10-17",
+   "verdict": "no match: independently checked by the second reader; the hits concern constructible subsets, condensed-module sheaves, or general finite generation/presentation, not constructible etale module sheaves or their bounded constructible derived category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-pe-constructible-comparison",
@@ -98,5 +163,20 @@
   "group": "Q47"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-pe-constructible-comparison"
+ "unit": "sk-thm-pe-constructible-comparison",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pe-etale-constructible-module",
+  "worker": "stage1",
+  "summary": "Audited this definition against Stacks 03RW(3), 03RU and the definition of D_c in 09AL. Retained arbitrary schemes and arbitrary discrete commutative Noetherian coefficients, affine-local finite constructible partitions, finitely generated module models rather than finite sets, and globally bounded cohomology without completeness. Reused the existing definition nodes, adding explicit small-universe and scheme-stratification dependencies and expanding constant module sheaves and full-subcategory morphisms. No new nodes and no proof steps are needed for this definition. Source Lean imposes a single global stratification and therefore is not an exact attachment.",
+  "blueprint": "The source category of the constructible-sheaf equivalence and D^b_c(X_Et,Lambda) in the statement of sk-thm-pe-constructible-comparison; these are notions for the comparison, not a replacement of its proof route. Whole-blueprint searches for constructible, constructible etale, constructible sheaf, Noetherian ring and finite stratification found no imported definition with the same arbitrary-scheme, Noetherian-coefficient etale scope and both clauses. same_as remains empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NP-d6828349f",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-d6828349f (reviewer sub-agent of L); spot-checked: I read the whole item and report, the unit and chapter records, the main-20261015 blueprint comparison and equivalence statements, all 12 stmt_deps, and both citers (sk-thm-pe-constructible-comparison steps 2 and 3, lem-sfb-adic-stratified-perfect). Sources checked: Stacks etale-cohomology.tex, the paragraph before Def 03RW (definition-constructible) and clause (3); proetale.tex Lemma 09AL (lemma-compare-constructible-derived), its definition of D_c. Checked clause by clause: arbitrary scheme X; commutative Noetherian Lambda; Mod over Lambda_X on the small etale site; every affine open U gets a finite partition into locally closed strata whose sets are constructible in U, with immersions; the restriction i_a^{-1}F is taken along Z_a->X. The item's 'etale cover plus constant model with f.g. M' wording is equivalent to Stacks' 'locally constant of finite type': a stalk of a finite-type sheaf is f.g., and on an empty piece M=0 can be chosen. D^b_c is the full subcategory with constructible H^q bounded on a finite interval, with no completeness condition, matching 09AL and the blueprint. No new nodes; the delivery creates no cycle. Duplicate search covered 03RW/03RU/09AL plus all constructible definitions. Every candidate defines a different category: def-constructible-constructible, def-weil-pbc-etale-constructible-sheaf/-constructible-complexes/-constructible-abelian-sheaf and def-weil-pbc-etale-sheaves use finite coefficients or one global stratification; pur713-def-finite-constructible and -category-et use O_E/varpi^n; the sfb/pur713 module nodes are pro-etale. def-weil-pbc-*locally-constant-finite-type* states the same local notion that the item writes inline; that is acceptable and they agree. Small cases checked: empty X with n=0; a separably closed point with Lambda=Z, where the infinite module Z is allowed; zero module; Lambda=0; a non-quasi-compact open stratum is rejected because the constructibility clause is stated explicitly; unbounded cohomology is excluded. No SGA is cited. No fixes and no tool_uses."
+ }
 }

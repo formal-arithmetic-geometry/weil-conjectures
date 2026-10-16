@@ -28,9 +28,147 @@
   "def-coef-complete-algebroid",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first in a universe $\\mathcal V$ containing the base and all total spaces in question. The presentation [lem-coef-simplicial-right-fibration-presentation] gives the ordinary Quillen equivalence with right adjoint $U^{\\mathrm{cov}}_A F=(U_{A^{\\mathrm{op}}}F)^{\\mathrm{op}}$ from covariant strict diagrams to the covariant slice model category. Apply [lem-coef-model-infinity-derived-adjunction] to obtain the derived adjunction. Its unit on a cofibrant slice object $X$ is a weak equivalence: apply the Quillen-equivalence criterion to the weak equivalence $TX\\to R(TX)$. Its counit on a fibrant diagram $F$ is a weak equivalence: apply the same criterion to $TQ(UF)\\to F$, whose adjoint is the cofibrant replacement $Q(UF)\\to UF$. These unit and counit transformations are therefore pointwise equivalences after localization, and hence equivalences by [lem-cbc-enhanced-functor-cone-calculus]. Thus the derived adjunction is an equivalence. All slice objects are cofibrant and its fibrant objects are the left fibrations. By [lem-coef-simplicial-model-nerve-localization] its localization is consequently the coherent nerve of the locally Kan simplicial category $\\mathsf{LFib}(A)$ with the usual mapping complexes. Apply [lem-coef-enriched-diagram-rectification] with $K=A$, $\\mathcal C=\\mathfrak C[A]$, $u=1$, and $\\mathcal M=\\mathsf{sSet}_{\\mathcal V}$; the Kan model structure is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]. It identifies the strict diagram localization with $\\operatorname{Fun}(A,\\mathcal S_{\\mathcal V})$. Composing gives the left-fibration classification. On a cofibrant-fibrant strict diagram $F$ its representative is $U^{\\mathrm{cov}}_AF$. Its fiber is naturally equivalent as a space to $F(a)$, by the presentation's fiber clause and rectification's evaluation clause. This argument uses the derived ordinary adjunction, with no claim that taking opposites is a simplicial functor for the usual mapping complexes.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 2.1.4.7–8 and Remark 2.1.4.12 (covariant/contravariant simplicial model structures), Theorem 2.2.1.2 (ordinary Quillen equivalence), and Proposition 4.2.4.4 (rectification); derived adjunction via the cited model-infinity-derived-adjunction node."
+   }
+  },
+  {
+   "text": "The covariant slice model category of [lem-coef-simplicial-right-fibration-presentation] has all objects cofibrant and left fibrations fibrant. The mapping-space assertion of [lem-coef-simplicial-model-nerve-localization] therefore identifies its localized mapping space between $E_F$ and $E_G$ with the actual simplicial set $\\operatorname{Fun}_{/A}(E_F,E_G)$. In degree $n$ this consists precisely of maps $E_F\\times\\Delta^n\\to E_G$ over $A$. It is Kan by the presentation, for every source over $A$ and a left-fibration target, without a quasicategory hypothesis on $A$. The functor-equivalence mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus], applied to the equivalence in step 1, gives the displayed comparison of spaces. Enriched composition over $A$ is ordinary composition with the shared $\\Delta^n$ parameter: send $(g,f)$ to $(z,t)\\mapsto g(f(z,t),t)$. This is associative and unital in each degree and commutes with every simplex operator. The localization mapping comparison respects these compositions by its stated clause. This gives coherence in both variables and compatibility with composition.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 2.2.3.4 and 2.2.3.6; coherent-nerve mapping comparison"
+   }
+  },
+  {
+   "text": "For any objectwise Kan diagram $D$ on $\\mathfrak C[B]$, factor $\\varnothing\\to D$ in the projective model structure of [lem-coef-simplicial-right-fibration-presentation] as a cofibration followed by a trivial fibration $QD\\to D$, using the functorial factorization in [lem-coef-simplicial-model-nerve-localization]. Then $QD$ is cofibrant and is also fibrant: the composite $QD\\to D\\to *$ is a fibration. This applies to a restricted diagram $D=F\\circ\\mathfrak C[u]$ even when restriction does not preserve cofibrancy. The map $QD\\to D$ is objectwise a weak equivalence, so the presentation gives an equivalence of their unstraightenings. Enriched evaluation on $QD$ and $D$ commutes with this map and with $\\mathfrak C[u]$ on every thickened simplex. Thus the evaluation comparison of [lem-coef-enriched-diagram-rectification], with the pointwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus], identifies the coherent diagram of $QD$ with restriction of the coherent diagram of $F$. This is the derived restriction argument; rectification is used only for its stated evaluation comparison. For a constant Kan diagram $X$ the same replacement argument and the constant-product comparison in the presentation identify its right-fibration representative with $B\\times X$ and its left-fibration representative with $B\\times X^{\\mathrm{op}}$. These left products are equivalent over $B$ to $B\\times X$: reversal of barycentric coordinates gives $|X^{\\mathrm{op}}|\\cong|X|$ (the quotient formula is in [def-cbc-enhanced-diagrams-cones]); for a monotone $\\alpha:[m]\\to[n]$, reversing coordinates changes it to $i\\mapsto n-\\alpha(m-i)$, exactly the opposite operator. Thus this is a homeomorphism natural in $X$ and compatible with products. It identifies $X^{\\mathrm{op}}$ and $X$ in spaces. The mapping comparison for the Kan model in [lem-coef-simplicial-model-nerve-localization] represents this equivalence by simplicial homotopy inverse maps between the Kan complexes. Multiplying these maps and their homotopies by $B$ gives an equivalence of products over $B$. Hence a constant coherent diagram is classified by the product projection. Finally, for $u:B\\to A$ use the presentation's natural isomorphism $u^*U_AF\\cong U_B(F\\circ\\mathfrak C[u]^{\\mathrm{op}})$ and its covariant counterpart. Combined with the replacement argument this proves pullback compatibility. The isomorphisms for $u$, $v$, and $uv$ agree by that node's base-change clause. Restriction is enriched and preserves objectwise weak equivalences. The full functor-category universal property of localization in [lem-coef-simplicial-model-nerve-localization] therefore gives its derived functor, retaining transformations and all their higher simplices. The evaluation square commutes before localization and hence after localization. This proves compatibility on mapping spaces and with their compositions and identities; no simplicial enrichment of the chosen factorization is assumed.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 (base change), Remark 2.2.2.11 (constants)"
+   }
+  },
+  {
+   "text": "Apply the contravariant version of [lem-coef-simplicial-right-fibration-presentation] and [lem-coef-enriched-diagram-rectification] with $K=A^{\\mathrm{op}}$ and $\\mathcal C=\\mathfrak C[A]^{\\mathrm{op}}$. Reversal of ordered vertex labels identifies $\\mathfrak C[A^{\\mathrm{op}}]$ with $\\mathfrak C[A]^{\\mathrm{op}}$: in every thickened simplex it reverses the labels of subsets defining the mapping objects and preserves their union composition, using the explicit thickening of [lem-coef-coherent-nerve-comparison]. Compose the nerve of this enriched presentation with rectification to obtain the right-fibration classification. The coherent-nerve mapping comparison identifies the maps-over-$A$ mapping complexes of this locally Kan presentation with its mapping spaces. The functor-equivalence mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus] then gives the right-handed displayed formula. In degree $n$ the composition is $(g,f)(z,t)=g(f(z,t),t)$, so its coherence is the enriched composition coherence of the coherent-nerve node. For constants use the presentation's map $A\\times X\\to U_A(\\mathrm{const}\\,X)$ and its fiberwise-equivalence criterion. For pullbacks use its natural isomorphism $u^*U_AF\\cong U_B(F\\circ\\mathfrak C[u]^{\\mathrm{op}})$; replacing the restricted diagram by $QD\\to D$ as in step 3 makes it cofibrant-fibrant without changing its unstraightening. Its composition law and the localization universal property used in step 3 give compatibility on full mapping spaces. No identification of a simplicial mapping complex with its opposite is asserted.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.3.11 (contravariant version); Proposition 4.2.4.4"
+   }
+  },
+  {
+   "text": "Let $\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$ be the full simplicial subcategory of $\\mathcal V$-small Kan complexes equivalent to $\\mathcal U$-small ones. Its coherent nerve is the full replete subcategory $\\mathcal S_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$. The enriched inclusion $\\operatorname{Kan}_{\\mathcal U}\\to\\operatorname{Kan}_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$ is a Dwyer--Kan equivalence: its mapping simplicial sets are unchanged, and every target object is isomorphic in $\\pi_0$ to a small representative. For the latter, the Kan-model localization and its mapping-space assertion in [lem-coef-simplicial-model-nerve-localization] identify equivalence of spaces with isomorphism in this $\\pi_0$ category. The Dwyer--Kan nerve comparison of [lem-coef-coherent-nerve-comparison] therefore gives an equivalence $i:\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal V}^{\\mathrm{ess}\\mathcal U}$. Choose a quasi-inverse $j$ with coherent unit and counit. Postcompose diagrams with $i$ and $j$; whiskering the unit and counit gives transformations whose components are equivalences. By [lem-cbc-enhanced-functor-cone-calculus] these are equivalences in the functor quasicategories, proving $\\operatorname{Fun}(A,\\mathcal S_{\\mathcal U})\\simeq\\operatorname{Fun}(A,\\mathcal S_{\\mathcal V}^{\\mathrm{ess}\\mathcal U})$. A diagram into $\\mathcal S_{\\mathcal V}$ with essentially $\\mathcal U$-small vertex values factors through this full subcategory: each simplex lies in it because all its vertices do. The same is true of transformations, so the factorization is full. Using the fiber clause, step 1 now restricts to exactly the left fibrations with essentially $\\mathcal U$-small fibers; step 4 gives the right-fibration assertion. This restriction does not assume that $\\operatorname{Fun}(A,\\mathcal S_{\\mathcal U})$ is replete in the larger functor category. If $A$ is $\\mathcal U$-small, perform the construction and replacement in $\\mathcal U$; the size clause of [lem-coef-simplicial-right-fibration-presentation] gives a $\\mathcal U$-small total space. For a merely $\\mathcal U'$-small base, work in a containing universe and use the displayed functor equivalence.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universe-relative diagrams and unstraightening; full subcategory restriction"
+   }
+  },
+  {
+   "text": "Form the explicit left fibration $\\lambda:\\operatorname{Tw}(\\mathcal E)\\to\\mathcal E^{\\mathrm{op}}\\times\\mathcal E$ of [lem-coef-twisted-arrow-left-fibration]. Its fiber at $(x,y)$ is equivalent to the mapping space from $x$ to $y$. To see this, take opposites of that node's target-fixed slice equivalence over $\\mathcal E^{\\mathrm{op}}$ and use [lem-coef-infinity-right-fibration-fibers] to obtain equivalences on vertex fibers. To remove the opposite from a fiber, reverse barycentric coordinates $(t_0,\\ldots,t_n)\\mapsto(t_n,\\ldots,t_0)$ on each realized simplex. For $\\alpha:[m]\\to[n]$ the opposite operator is induced by $i\\mapsto n-\\alpha(m-i)$; inserting this and reversing the coordinates in the quotient formula of [def-cbc-enhanced-diagrams-cones] gives the same point on both sides of each gluing relation. Reversing twice is the identity, giving a natural homeomorphism between the realizations of a simplicial set and its opposite, hence the same space up to weak homotopy equivalence. The slice-fiber assertion of [lem-coef-infinity-slice-right-fibration] identifies the other fiber with the right-pinched mapping space. Local $\\mathcal U$-smallness consequently makes the fibers essentially $\\mathcal U$-small. Steps 1 and 5 classify $\\lambda$ by a coherent $H_{\\mathcal E}:\\mathcal E^{\\mathrm{op}}\\times\\mathcal E\\to\\mathcal S_{\\mathcal U}$. This constructs the functor rather than assuming that pairwise mapping spaces already form one.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JQ",
+    "place": "Kerodon Proposition 8.1.1.11 (03JQ), Proposition 8.1.2.10 (03K0) and its dual"
+   }
+  },
+  {
+   "text": "For fixed $e$, the slice comparisons of [lem-coef-twisted-arrow-left-fibration] identify the restrictions of the twisted-arrow left fibration with $(\\mathcal E_{/e})^{\\mathrm{op}}$ over $\\mathcal E^{\\mathrm{op}}$ and $\\mathcal E_{e/}$ over $\\mathcal E$. The existing equivalence [lem-coef-infinity-slice-arrow-equivalence] identifies the join slice with the fixed-target arrow model over $\\mathcal E$, via its explicit map $\\rho_n$ and its equation over the base. The target-arrow projection is a right fibration by [lem-coef-infinity-arrow-target-right-fibration], and the source-arrow statement is its opposite. The definition $U^{\\mathrm{cov}}_{\\mathcal E^{\\mathrm{op}}}F=(U_{\\mathcal E}F)^{\\mathrm{op}}$ in [lem-coef-simplicial-right-fibration-presentation] explicitly identifies covariant classification over $\\mathcal E^{\\mathrm{op}}$ with contravariant classification over $\\mathcal E$. Thus the classification from steps 1, 4 and 6 identifies the target-fixed restriction with $\\mathcal E_{/e}\\to\\mathcal E$ classified by $H_{\\mathcal E}(-,e)$ and the source-fixed restriction with $\\mathcal E_{e/}\\to\\mathcal E$ classified by $H_{\\mathcal E}(e,-)$. The formulas commute with simplicial functors and carry the degenerate identity edge to itself. These are equivalences of fibrations, not equality on their simplices.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03K0",
+    "place": "Kerodon 8.1.2.10 (03K0), 4.6.4.13 (01KQ), 4.6.5.10 (01L5)"
+   }
+  },
+  {
+   "text": "Choose a locally Kan simplicial category $\\mathcal A$ and a coherent equivalence $j:\\mathcal E\\simeq N_{\\mathrm{hc}}\\mathcal A$ by [lem-coef-coherent-nerve-comparison]. Its enriched Hom functor acts by the simplicial composition map $(u,a,v)\\mapsto v\\circ a\\circ u$. By [lem-coef-enriched-hom-twisted-arrow-comparison], the coherent nerve of this Hom functor is represented by the twisted-arrow coupling of $N_{\\mathrm{hc}}\\mathcal A$, with its identity witness. With precisely the explicit unstraightening and enriched-evaluation normalization used in step 1, the universal-left-fibration statement [lem-coef-universal-left-fibration-identity] says that the universal left fibration over $\\mathcal S$ is the unstraightening of the identity, so pulling it back along this Hom functor is classified by that Hom functor. The functorial twisted-arrow construction of [lem-coef-twisted-arrow-left-fibration] gives $\\operatorname{Tw}(j)$, whose fiber maps are the mapping-space maps of $j$ under the natural identifications in step 6. It compares the twisted-arrow coupling with the pullback of this universal fibration to $\\mathcal E^{\\mathrm{op}}\\times\\mathcal E$. The pointwise equivalence criterion and functor-equivalence mapping-space comparison from [lem-cbc-enhanced-functor-cone-calculus], together with the fiberwise criterion in [lem-coef-simplicial-right-fibration-presentation], make this comparison an equivalence of left fibrations. Classification and pullback compatibility identify $H_{\\mathcal E}$ with the pulled-back enriched Hom functor. In degree $n$, precomposition and postcomposition apply simplicial composition to an $n$-simplex of its mapping complex; faces and degeneracies commute because composition is simplicial. Enriched associativity and both unit identities give their coherent homotopies under the coherent-nerve comparison. Hence $v:e\\to e'$ acts at $x$ by $a\\mapsto v\\circ a$ on the entire space, with all higher simplices and the unit witness. This also supplies coherent dependence on $e$ for the restrictions of step 7.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-enriched-hom-twisted-arrow-comparison",
+    "lem-coef-universal-left-fibration-identity",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03N7",
+    "place": "Kerodon Construction 8.3.6.1 (03N6), Proposition 8.3.6.2 (03N7), Proposition 8.3.5.5 (03NK); HTT Section 3.3.2, Corollaries 3.3.2.7–8 for the independent universal identity theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-enriched-hom-twisted-arrow-comparison",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-universal-left-fibration-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 2.2.3.11 composed with Proposition 4.2.4.4; Kerodon twisted-arrow coupling 03JQ/03K0 and enriched Hom recognition 03N7. Second reading replaces uncited theorem invocations and invalid uses of fibers/exponentiation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,7 +221,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-presheaf-limits",
@@ -91,5 +229,29 @@
   "group": "Q66"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-transport-classification",
+  "worker": "stage1",
+  "summary": "Repair of F1–F4: added a normalized universal-left-fibration identity theorem with HTT 3.3.2 source; explicitly defined covariant unstraightening by opposites; cited the accepted functor-cone calculus; derived cofibrant replacement after restriction from model factorization; proved the universe-change functor equivalence through Dwyer–Kan comparison; cited the existing slice-arrow equivalence. Eight proof steps. Second reading: used the derived ordinary covariant Quillen equivalence instead of claiming opposites preserve simplicial enrichment; corrected the covariant constant product to X-opposite; expanded the right-handed mapping and base-change argument.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent space-valued transport, universal arrows, twisted-arrow and slice comparisons, and enriched Hom recognition. Eight steps realize the straightening, mapping, universe, slice, and coherence infrastructure.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise equivalence criterion and the mapping-space consequence of a functor equivalence, used in steps 2, 3, 5 and 8; the coefficient unit has no node stating these general functor-category facts. The return explicitly requests this accepted tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-4c5b4cd16",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-4c5b4cd16 (reviewer sub-agent of L); spot-checked: Read the item (statement byte-identical to the side-tree base; only proof, proof_deps, proof_origin, status and split_report changed), all four new nodes, every cited statement, the unit sk-prop-sf-biduality-general and the ancestor prop-coef-integral-exceptional-adjoint. HTT and Kerodon are not archived (WANTED), so I checked against my knowledge of HTT 2.1.4, 2.2.1.2, 2.2.2, 2.2.3.11-13, 3.3.2 and 4.2.4.4 and Kerodon 03JK/03JQ/03K0/03MT/03NK/03N6/03N7, without opening the source pages. Steps: (1) the transported ordinary covariant Quillen equivalence U^cov_A F=(U_{A^op}F)^op is valid, and so is the derived unit/counit argument; the covariant structure is indeed simplicial for X x K, checked independently; nerve-localization plus rectification with K=A, C=C[A], u=1 is correct. (2) Fun_{/A} is a Kan mapping complex: all objects cofibrant, left-fibration target. (3) QD->D replacement; constant map S x X, whose covariant opposite is S x X^op (the second reader's correction is right); |X^op|~|X| represented by a Kan homotopy equivalence; pullback via u*U ~ U(F o C[u]^op). (4) Contravariant case via the label-reversal DK iso C[A^op]~C[A]^op. (5) Kan_U -> Kan_V^{essU} is a DK equivalence; fullness simplexwise; U-small totals for a U-small base. (6) Fibers of Tw via the opposite target-fixed slice equivalence, right-fibration-fibers and the slice fiber. (7) Variance bridge and slice-arrow rho; the source-arrow case dualizes elementarily. (8) Enriched-Hom recognition plus the universal-fibration theorem plus fiberwise Tw(j); not circular. New nodes: all true, self-contained, statement-only (B1-B7 pass), three search kinds each with one Loogle query honestly marked unavailable; tested on n=0/1, empty and point bases, empty Kan value, a one-object group. None is a duplicate (DAG grep for twisted/universal/pointed/straightening) and none restates an item clause. Acyclic in the snapshot and on the current side tree with the delivery overlaid. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, generic pointwise and mapping-space criteria, with precedent in this unit. Maintainer note, not a fault: the first paragraph of existing unsplit lem-coef-space-valued-straightening (Q33) is a special case of this item's first clause; consider citing or merging it later. No fixes."
+ }
 }
