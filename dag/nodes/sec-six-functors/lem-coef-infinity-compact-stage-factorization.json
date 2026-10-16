@@ -1,0 +1,76 @@
+{
+ "id": "lem-coef-infinity-compact-stage-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, accessible-localization infrastructure: factor the identity of a compact object through its compact-hull presentation, the retract argument of HTT Lemma 5.4.2.4.",
+   "via": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compact maps factor through a stage up to homotopy",
+ "statement": "Use universes, quasicategories, coherent diagrams, cocones and mapping spaces from [def-cbc-enhanced-diagrams-cones], and compactness and filteredness from [def-coef-presentable-infinity-category]. Let $\\gamma$ be an infinite regular cardinal in the smaller universe. Let $\\mathcal E$ be a locally small quasicategory admitting small $\\gamma$-filtered colimits. Let $F:I\\to\\mathcal E$ be a coherent diagram indexed by a small $\\gamma$-filtered quasicategory, with a colimiting cocone $\\iota_i:F(i)\\to c$. If $x$ is $\\gamma$-compact, every morphism $h:x\\to c$ admits an object $i\\in I$ and a morphism $v:x\\to F(i)$ for which $\\iota_i v$ and $h$ lie in the same connected component of $\\operatorname{Map}_{\\mathcal E}(x,c)$. In particular, if $c=x$ and $h=1_x$, then $x$ is a retract of $F(i)$ in the homotopy category: there are $v:x\\to F(i)$ and $\\iota_i:F(i)\\to x$ with $\\iota_i v$ homotopic to $1_x$. No compactness of the objects $F(i)$ is assumed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "The identity-factorization argument in the proof of Lemma 5.4.2.4, printed pp. 424-425, applied to an arbitrary given filtered presentation; compactness Definition 5.3.4.5 and the colimit-of-spaces realization of Proposition 3.3.4.5 give the general morphism version. Read online, not archived under literature/. No Stacks tag states this mapping-space version."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps from a kappa compact object into a kappa filtered colimit in an infinity category factor through a stage up to homotopy",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] {J : Type u₂} [Category.{v₂} J] [EssentiallySmall.{w} J] [IsCardinalFiltered J κ]\\n  {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) (f : X ⟶ c.pt) : ∃ (j : J) (f' : X ⟶ F.obj j), f' ≫ c.ι.app j = f\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal, $X$ a $\\\\kappa$-presentable object in a category $\\\\mathcal{C}$, $J$ a $\\\\kappa$-filtered category, and $F : J \\\\to \\\\mathcal{C}$ a functor with colimit cocone $c$. For \"}\n  {\"name\": \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \"{J : Type w} [SmallCategory J] [IsFiltered J] {D : J ⥤ C} {c : Cocone D} (hc : IsColimit c) {X : C}\\n  [IsFinitelyPresentable.{w} X] (f : X ⟶ c.pt) : ∃ (j : J) (p : X ⟶ D.obj j), p ≫ c.ι.app j = f\", \"doc\": \"Let $\\\\mathcal{J}$ be a small filtered category, $D : \\\\mathcal{J} \\\\to \\\\mathcal{C}$ a diagram, and $c$ a colimit cocone for $D$. If $X$ is a finitely presentable object in $\\\\mathcal{C}$ and $f : X \\\\to c\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular],\\n  autoParam\\n      (∀ (J : Type w) [inst_2 : CategoryTheory.SmallCategory J] [CategoryTheory.IsCardinalFiltered J κ],\\n        CategoryTheory.Limits.HasColimitsOfShape J C)\\n      CategoryTheory.\", \"doc\": \"If for every small κ-filtered category $ J $, the category $ \\\\mathcal{C} $ admits all colimits of shape $ J $, then $ \\\\mathcal{C} $ has κ-filtered colimits, where $ κ $ is a regular cardinal.\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits.hasColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} (κ : Cardinal.{w}) {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.HasCardinalFilteredColimits C κ] (J : Type w) [inst_2 : CategoryTheory.SmallCategory J]\\n  [CategoryTheory.IsCardinalFiltered J κ], CategoryTheory.Limits.HasColimitsOfSh\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal. If a category $\\\\mathcal{C}$ has all $\\\\kappa$-filtered colimits and $\\\\mathcal{J}$ is a $\\\\kappa$-filtered category, then $\\\\mathcal{C}$ admits colimits of diagrams ind\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] {J : Type u₂} [Category.{v₂} J] [EssentiallySmall.{w} J] [IsCardinalFiltered J κ]\\n  {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) {i₁ i₂ : J} (f₁ : X ⟶ F.obj i₁) (f₂ : X ⟶ F.obj i₂)\\n  (hf : f₁ ≫ c.ι.app i₁ = f₂ ≫ c.ι.app i₂) : ∃ (j : J) (u : i₁ ⟶ j) (v : i₂ ⟶ j), f₁ ≫ F.m\", \"doc\": \"For a κ-presentable object $X$, a κ-filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a colimit cocone $c$ of $F$, if morphisms $f_1 : X \\\\to F(i_1)$ and $f_2 : X \\\\to F(\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Limits\", \"type\": \"[LocallySmall.{w} C] {K : Type u'} [Category.{v'} K] [HasLimitsOfShape Kᵒᵖ (Type w)] {Y : K ⥤ C} (c : Cocone Y)\\n  (hc : IsColimit c) (κ : Cardinal.{w}) [Fact κ.IsRegular] (hK : HasCardinalLT (Arrow K) κ)\\n  [∀ k, IsCardinalPresentable (Y.obj k) κ] : IsCardinalPresentable c.pt κ\", \"doc\": \"In a locally small category $ \\\\mathcal{C} $, if $ \\\\mathcal{K} $ is a category with limits of shape $ \\\\mathcal{J} $, and $ Y : \\\\mathcal{K} \\\\to \\\\mathcal{C} $ is a functor such that each object $ Y(k) $ \"}\n  {\"name\": \"CategoryTheory.preservesColimitsOfShape_of_isCardinalPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] (J : Type w) [SmallCategory.{w} J] [IsCardinalFiltered J κ] :\\n  PreservesColimitsOfShape J (coyoneda.obj (op X))\", \"doc\": \"If $ X $ is a $ \\\\kappa $-presentable object and $ J $ is a $ \\\\kappa $-filtered small category, then the coyoneda embedding functor $ \\\\text{coyoneda.obj}(\\\\text{op } X) $ preserves colimits of shape $ J\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit in Presentable/Basic.lean and the pinned quasicategory sources. The former gives strict factorization in ordinary categories using Hom-set compactness, whereas this node assumes mapping-space compactness of a coherent filtered colimit. The second semantic phrasing returns SSet finite-presentability/model-category facts, not this coherent statement; Quasicategory grep returns no compact/presentable/filtered theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact object which is a filtered colimit is a homotopy retract of an object of the diagram in a quasicategory",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.Finite.instIsFinitelyPresentable\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable\", \"type\": \"∀ (X : SSet) [X.Finite], CategoryTheory.IsFinitelyPresentable X\", \"doc\": \"Every finite simplicial set is finitely presentable, meaning that the hom-functor Hom(X, -) preserves ℵ₀-filtered colimits for any finite simplicial set X.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂.homMk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"∀ {A : SSet.Truncated 2} [inst : A.Quasicategory₂]\\n  {x y : A.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Quasicategory₂._proof_1 })},\\n  Function.Surjective SSet.Truncated.HomotopyCategory₂.homMk\", \"doc\": \"For any 2-truncated quasicategory $ A $, the function that maps each edge (1-simplex) between 0-simplices $ x $ and $ y $ to its equivalence class in the homotopy category of $ A $ is surjective. This\"}\n  {\"name\": \"SSet.Finite.exists_epi_from_isCardinalPresentable\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable\", \"type\": \"∀ (X : SSet) [X.Finite], ∃ Y, ∃ (_ : Y.Finite) (_ : CategoryTheory.IsFinitelyPresentable Y), ∃ p, CategoryTheory.Epi p\", \"doc\": \"Every finite simplicial set $ X $ admits an epimorphism from a finite simplicial set $ Y $ that is finitely presentable, i.e., there exists a finite $ Y $, a proof that $ Y $ is finitely presentable, \"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.mk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2}, Function.Surjective SSet.Truncated.HomotopyCategory.mk\", \"doc\": \"The canonical map from 0-simplices of a 2-truncated simplicial set $ V $ to objects in its homotopy category is surjective, meaning every object in the homotopy category arises as the equivalence clas\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit in Presentable/Basic.lean and the pinned quasicategory sources. The former gives strict factorization in ordinary categories using Hom-set compactness, whereas this node assumes mapping-space compactness of a coherent filtered colimit. The second semantic phrasing returns SSet finite-presentability/model-category facts, not this coherent statement; Quasicategory grep returns no compact/presentable/filtered theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"exists_hom_of_isColimit\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X : C} (κ : Cardinal.{w}) [Fact κ.IsRegular] {J : Type u_1} [CategoryTheory.Category.{v_1, u_1} J] [CategoryTheory.IsCardinalPresentable X κ] [CategoryTheory.EssentiallySmall.{w, v_1, u_1} J] [CategoryTheory.IsCardinalFiltered J κ] {F : CategoryTh\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit in Presentable/Basic.lean and the pinned quasicategory sources. The former gives strict factorization in ordinary categories using Hom-set compactness, whereas this node assumes mapping-space compactness of a coherent filtered colimit. The second semantic phrasing returns SSet finite-presentability/model-category facts, not this coherent statement; Quasicategory grep returns no compact/presentable/filtered theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompact|[Pp]resentable|[Ff]iltered",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit in Presentable/Basic.lean and the pinned quasicategory sources. The former gives strict factorization in ordinary categories using Hom-set compactness, whereas this node assumes mapping-space compactness of a coherent filtered colimit. The second semantic phrasing returns SSet finite-presentability/model-category facts, not this coherent statement; Quasicategory grep returns no compact/presentable/filtered theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-presentable-cardinal-enlargement",
+  "date": "2026-10-17",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

@@ -30,9 +30,95 @@
   "def-coef-infinity-relative-cone",
   "lem-coef-infinity-relative-initial-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix either sign and write $L=K^\\epsilon$, $X=\\operatorname{Fun}(L,\\mathcal C)$, $A=\\operatorname{Fun}(K,\\mathcal C)$, $V=\\operatorname{Fun}(L,\\mathcal D)$, $W=\\operatorname{Fun}(K,\\mathcal D)$ and $T=A\\times_W V$. The pure-factor inclusion $K\\hookrightarrow L$ in the degreewise join is injective in every degree: it is the summand whose other factor has degree $-1$. Apply the exponential-corner assertion of [lem-coef-infinity-isofibration-exponentiation] to this inclusion and $p$. It gives quasicategories $X,T$ and the claimed isofibration $q=p_\\epsilon:X\\to T$. The same assertion applied to the restriction with target $\\mathcal D$ gives quasicategories $V,W$ and an isofibration $s:V\\to W$; $A$ is also a quasicategory by its restriction assertion with target $\\mathcal C$.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1 and Corollary 4.4.5.3; application to the pure-factor inclusion in the join."
+   }
+  },
+  {
+   "text": "For any $a,b\\in T$, write their coordinates as $(a_A,a_V)$ and $(b_A,b_V)$ and their common images in $W$ as $a_W,b_W$. Using the arrow mapping spaces $U$ defined in [lem-coef-infinity-pinch-comparison], the degreewise pullback definition gives the simplicial identity $$U_T(a,b)=U_A(a_A,b_A)\\times_{U_W(a_W,b_W)}U_V(a_V,b_V).$$ Indeed a simplex on the left is a map $\\Delta^n\\times\\Delta^1\\to A\\times_W V$ with fixed endpoints; its two coordinate maps have exactly the fixed endpoints on the right and equal composites to $W$. Conversely those coordinate maps give the unique map into the pullback. These identifications commute with every simplicial operator.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01P8",
+    "place": "Arrow mapping-space construction preceding Proposition 4.6.1.22; degreewise pullback calculation written out by the worker."
+   }
+  },
+  {
+   "text": "The map $s:V\\to W$ from step 1 is in particular an inner fibration. The last assertion of [lem-coef-infinity-isofibration-exponentiation] therefore says that $U_V(a_V,b_V)\\to U_W(a_W,b_W)$ is a Kan fibration between Kan complexes. All the other $U$ spaces here are Kan by [lem-coef-infinity-pinch-comparison]. Apply [lem-coef-kan-pullback-path-comparison] to the identity in step 2: inserting the constant path gives a weak homotopy equivalence $$c_U:U_T(a,b)\\longrightarrow P\\bigl(U_A(a_A,b_A)\\to U_W(a_W,b_W)\\leftarrow U_V(a_V,b_V)\\bigr).$$ Here $P$ denotes precisely the path-space pullback in that cited statement.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7, using the arrow mapping-space Kan fibration of Proposition 4.6.1.22 (01P8)."
+   }
+  },
+  {
+   "text": "Let $M_Z=\\operatorname{Map}_Z(a_Z,b_Z)$ for $Z=A,V,W$, and put $M_T=\\operatorname{Map}_T(a,b)$. Restriction gives a constant-path comparison $c_M:M_T\\to P(M_A\\to M_W\\leftarrow M_V)$. The natural right-pinch inclusions of [lem-coef-infinity-pinch-comparison] give a strictly commuting square with top map $c_M$, bottom map $c_U$, left map $j_T$ and right map $P(j_A,j_W,j_V)$. Strict commutation follows because each pinch map is precomposition by the same simplicial map and sends constant paths to constant paths. The left map is a homotopy equivalence, and the right map is a weak homotopy equivalence by [lem-coef-kan-homotopy-pullback-invariance]. Since the bottom map is a weak homotopy equivalence by step 3, the top map $c_M$ is one too: on components and every based homotopy group the equation $P(j_A,j_W,j_V)c_M=c_Uj_T$ expresses its induced map as a composite of isomorphisms after cancelling the right vertical isomorphism. This proves the comparison for every ordered pair $a,b$ of objects of $T$.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, its natural pinch maps, and Proposition 3.4.0.9 (032B); agent-written comparison argument."
+   }
+  },
+  {
+   "text": "Now take $\\epsilon=\\triangleright$ and $a=q(u)$, $b=q(t)$, for any $t\\in X$. The comparison map defining the homotopy-pullback square in [def-coef-infinity-relative-cone] is exactly the composite $$\\operatorname{Map}_X(u,t)\\xrightarrow{q_*}\\operatorname{Map}_T(q(u),q(t))\\xrightarrow{c_M}P\\bigl(\\operatorname{Map}_A(u|_K,t|_K)\\to\\operatorname{Map}_W(pu|_K,pt|_K)\\leftarrow\\operatorname{Map}_V(pu,pt)\\bigr).$$ Both composites send a simplex to its restriction, its image under $p$, and the constant path at their equal further restrictions. The second arrow is a weak homotopy equivalence by step 4. Thus the composite is a weak homotopy equivalence if and only if $q_*$ is: cancel the induced isomorphisms on components and all based homotopy groups. Quantifying over $t$, the left condition is precisely that $u$ is a $p$-colimit diagram, while the right condition is precisely that $u$ is $q$-initial by [lem-coef-infinity-relative-initial-boundary].",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, condition (2), colimit dual; relative-initial predicate of Proposition 7.1.5.16 (02WR)."
+   }
+  },
+  {
+   "text": "For $\\epsilon=\\triangleleft$ and each $t\\in X$, apply step 4 to the ordered pair $a=q(t)$, $b=q(u)$. The defining comparison for the $p$-limit square is $$\\operatorname{Map}_X(t,u)\\xrightarrow{q_*}\\operatorname{Map}_T(q(t),q(u))\\xrightarrow{c_M}P\\bigl(\\operatorname{Map}_A(t|_K,u|_K)\\to\\operatorname{Map}_W(pt|_K,pu|_K)\\leftarrow\\operatorname{Map}_V(pt,pu)\\bigr).$$ An $n$-simplex $\\sigma$ of $\\operatorname{Map}_X(t,u)$ is sent by either map to $(\\sigma|_K,p\\sigma,\\operatorname{const}_{p(\\sigma|_K)})$: restriction and postcomposition commute strictly, so the two endpoints of the displayed constant path coincide. This proves equality of the maps in every degree and with all simplicial operators. Since $c_M$ is a weak homotopy equivalence, the square is a homotopy pullback if and only if $q_*$ is a weak homotopy equivalence. For every $t$, these are exactly the $p$-limit condition of [def-coef-infinity-relative-cone] and the $q$-final condition of [lem-coef-infinity-relative-initial-boundary]. No construction of a universal diagram, and hence no existence assumption on other limits or colimits, entered any step.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "Proposition 7.1.6.19, condition (2), and Proposition 7.1.6.13 (02XB); relative-final mapping-space predicate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-relative-initial-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02X1",
+  "place": "Direct proof from condition (2), using the existing arrow/pinched mapping-space and path-pullback lemmas; the source of Proposition 7.1.6.13 uses a different slice/fiber proof. Online sources read; archival copies wanted."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +175,66 @@
    "results": "{\"t\": \"2026-10-16T19:41:19Z\", \"tool\": \"grep\", \"query\": \"IsInitial|IsTerminal|[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Jj]oin\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"b983ec3da1948eef\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. The returned SSet initial objects are initial objects of the ordinary category of simplicial sets, the horn fillers give only the defining quasicategory lifting condition, and the cocone declarations concern ordinary categories. None states this relative mapping-space or coherent join assertion. Read Quasicategory/InnerFibration.lean:29-117, SimplicialSet/Subcomplex.lean:137, and CategoryTheory/Limits/ConeCategory.lean:345-355."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Cc]olimit|relative.?[Ll]imit|[Ii]so[Ff]ibration",
+   "results": "{\"t\": \"2026-10-16T20:18:21Z\", \"tool\": \"grep\", \"query\": \"relative.?[Cc]olimit|relative.?[Ll]imit|[Ii]so[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures. Ordinary CategoryTheory cones and universal colimits concern ordinary categories, while generic model-category pullback/path-object lemmas do not assert relative universality in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:345-355 and Limits/VanKampen.lean:40-61. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsInitial\"",
+   "results": "{\"t\": \"2026-10-16T20:18:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsInitial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures. Ordinary CategoryTheory cones and universal colimits concern ordinary categories, while generic model-category pullback/path-object lemmas do not assert relative universality in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:345-355 and Limits/VanKampen.lean:40-61. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative universal cones in infinity categories are final objects relative to the restriction pullback functor",
+   "results": "{\"t\": \"2026-10-16T20:18:21Z\", \"tool\": \"leansearch\", \"query\": \"Relative universal cones in infinity categories are final objects relative to the restriction pullback functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cone.ofPullbackCone\", \"CategoryTheory.IsPullback.isLimit\", \"CategoryTheory.CommSq.cocone\", \"CategoryTheory.Limits.FormalCoproduct.isLimitPullbackCone\", \"CategoryTheory.Limits.Types.limitConeIsLimit\", \"CategoryTheory.Limits.PullbackCone.isLimitAux\", \"CategoryTheory.Square.IsPullback.isLimit\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone\"], \"digest\": \"5bff9488c95bd7da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures. Ordinary CategoryTheory cones and universal colimits concern ordinary categories, while generic model-category pullback/path-object lemmas do not assert relative universality in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:345-355 and Limits/VanKampen.lean:40-61. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative colimit in a quasicategory is a relative initial object for the exponential corner functor on cocone diagrams",
+   "results": "{\"t\": \"2026-10-16T20:18:27Z\", \"tool\": \"leanfinder\", \"query\": \"A relative colimit in a quasicategory is a relative initial object for the exponential corner functor on cocone diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.WithInitial.isColimitEquiv\", \"CategoryTheory.Limits.hasColimit_iff_hasInitial_cocone\", \"SSet.hasColimits\", \"CategoryTheory.IsUniversalColimit.isColimit\", \"CategoryTheory.WithInitial.isColimitEquiv_apply_desc_right\", \"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Limits.hasInitialChangeDiagram\"], \"digest\": \"81e8274623efb890\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures. Ordinary CategoryTheory cones and universal colimits concern ordinary categories, while generic model-category pullback/path-object lemmas do not assert relative universality in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:345-355 and Limits/VanKampen.lean:40-61. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces in the pullback of infinity categories along an isofibration are homotopy pullbacks of mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces in the pullback of infinity categories along an isofibration are homotopy pullbacks of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"12151fdcffaf18f1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures. Ordinary CategoryTheory cones and universal colimits concern ordinary categories, while generic model-category pullback/path-object lemmas do not assert relative universality in arbitrary quasicategories. Read Mathlib/CategoryTheory/Limits/ConeCategory.lean:345-355 and Limits/VanKampen.lean:40-61. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*IsInitial|isColimitEquivIsInitial|relative.*[Cc]one",
+   "results": "{\"t\": \"2026-10-16T20:37:45Z\", \"tool\": \"grep\", \"query\": \"IsColimit.*IsInitial|isColimitEquivIsInitial|relative.*[Cc]one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits.lean\", \"Mathlib/Analysis/Convex/Cone/InnerDual.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\"], \"digest\": \"341e1e9353d7c4ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. Returned finite simplicial-set pullbacks, ordinary cocone initiality, quasicategories over terminal simplicial sets, fibered ordinary categories, and stability of model-category fibrations do not state relative initiality of coherent cone diagrams or the comparison of their mapping spaces. Read ConeCategory.lean:345-355 and Quasicategory/InnerFibration.lean:78-97 in the pinned Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsTerminal\"",
+   "results": "{\"t\": \"2026-10-16T20:37:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsTerminal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"ba7f1aea610bc2ed\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. Returned finite simplicial-set pullbacks, ordinary cocone initiality, quasicategories over terminal simplicial sets, fibered ordinary categories, and stability of model-category fibrations do not state relative initiality of coherent cone diagrams or the comparison of their mapping spaces. Read ConeCategory.lean:345-355 and Quasicategory/InnerFibration.lean:78-97 in the pinned Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pullback of mapping spaces for a pullback of quasicategories along a categorical fibration",
+   "results": "{\"t\": \"2026-10-16T20:37:48Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy pullback of mapping spaces for a pullback of quasicategories along a categorical fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instFinitePullback\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HasFibers.mkPullback\", \"HomotopicalAlgebra.PathObject.instFibrationP\\u2081\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HasFibers.pullbackMap\"], \"digest\": \"7d61011deb6a8809\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. Returned finite simplicial-set pullbacks, ordinary cocone initiality, quasicategories over terminal simplicial sets, fibered ordinary categories, and stability of model-category fibrations do not state relative initiality of coherent cone diagrams or the comparison of their mapping spaces. Read ConeCategory.lean:345-355 and Quasicategory/InnerFibration.lean:78-97 in the pinned Mathlib."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-parameter-cone-extension",
@@ -100,5 +242,21 @@
   "group": "Q40"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-cone-initial-corner",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved both relative universal-diagram criteria by an explicit mapping-space calculation in the exponential corner. Reused the existing general isofibration-exponentiation, natural pinch, and Kan path-pullback comparison/invariance nodes; no new nodes. Checked the arbitrary-small-shape hypothesis, both endpoint orders, and degenerate/empty cases. Recorded fresh genuine Mathlib searches and project-source attachment searches.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint: derived coefficient adjunction computation in paragraph 2, through the recorded enhancement chain. The current main-20261015 ancestor has no separate generic corner paragraph. This split supplies the local relative-universal-cone recognition used by lem-coef-infinity-parameter-cone-extension, without replacing any unit-level route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-b404f0188",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-b404f0188 (reviewer sub-agent of L); spot-checked: I read the item in full and the full statements of all 7 cited nodes; there are no new nodes. The statement is unchanged: p is an isofibration of quasicategories, K is any small simplicial set, the corner maps are isofibrations, and u is a p-colimit (p-limit) diagram exactly when it is corner-initial (corner-final). The parent (parameter-cone-extension) supplies the isofibration hypothesis. Step 1: the injective inclusion K into its cone and the corner/restriction clauses of isofibration-exponentiation give the quasicategories and the inner fibration s:V->W. Step 2 (marked elementary): the arrow space of the pullback T is strictly the pullback of the arrow spaces of A, V over W, because pullbacks are formed degreewise. Step 3: U_V->U_W is a Kan fibration by the last clause of isofibration-exponentiation, and the U spaces are Kan by pinch-comparison, so pullback-path-comparison makes the constant-path map an equivalence. Step 4: the pinch maps commute strictly with both spans by naturality, homotopy-pullback-invariance applies, and 2-out-of-3 transfers the equivalence to the pinched mapping spaces. Steps 5 and 6: the composite equals the defining comparison of def-coef-infinity-relative-cone, in the same corner order as the path lemma; cancelling the equivalence gives the colimit case and, with pair (q(t),q(u)), the limit case. relative-initial-boundary is used only for its defining clause. Route: all statements used are in unit sk-prop-sf-biduality-general, and def-cbc counts as a notion, so no tool use is needed. No SGA source is used. Edge cases checked: K empty reduces to p-initial; p from N[1] to a point with the edge 0->1 fails on both sides; p = id passes on both sides. No duplicates among the four relative-cone nodes compared. No fixes were made. Limit: Kerodon 02XB/02X1 is online only and I could not check it verbatim, but the proof argues from the DAG definitions; the WANTED archive request stands."
+ }
 }

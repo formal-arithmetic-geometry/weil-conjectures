@@ -33,9 +33,107 @@
   "def-coef-monoidal-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a color $d$. The active slice $K_d$ is small: it is a pullback of the small operads and an arrow slice of the small operad $\\mathcal D$. Let $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$. The base diagram $pT_d$ has a coherent transformation to the constant $[1]$, whose components are the active arrows underlying the operations into $d$. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to obtain $\\lambda:T_d\\to Q_d$ with cocartesian components and $Q_d:K_d\\to\\mathcal V$. At an input tuple $(x_1,\\ldots,x_r)$, $Q_d$ is $X(x_1)\\otimes\\cdots\\otimes X(x_r)$ by [def-coef-monoidal-infinity-category], with value $\\mathbf1$ for $r=0$. The mapping-fiber assertion of the transport node identifies active coherent cocones on $T_d$ with ordinary coherent cocones on $Q_d$, naturally in their apex. This uses transport in a functor category, so it includes the higher simplices of $K_d$, rather than only its objects.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.2.10, cocartesian transport to the fiber [1]."
+   }
+  },
+  {
+   "text": "By presentability, $Q_d$ has a colimit $v_d$ since $K_d$ is small. Compose its colimit cocone with $\\lambda$ to obtain an active cocone $T_d\\to v_d$. For fixed tuples $L,R$, put $l=\\bigotimes L$ and $r=\\bigotimes R$, taking $\\mathbf1$ for an empty tuple. The functor $z\\mapsto l\\otimes z\\otimes r$ preserves small colimits: it is a composite of tensoring with fixed objects, each colimit preserving by the definition of presentably monoidal. Here is the fixed-context transport check. If $L,T_d(k),R$ have lengths $a,s,b$, concatenate the component of $\\lambda$ with the fixed identity arrows to get an arrow $e$ over the block contraction $[a+s+b]\\to[a+1+b]$. Choose a cocartesian lift $e_0$ of this contraction with the same source. The cocartesian mapping formula factors $e$ through $e_0$ by a vertical arrow from the target of $e_0$ to the target of $e$. Under each inert projection, composition of transports identifies this vertical arrow with the comparison of two lifts of the same selected identity or of the active map $[s]\\to[1]$; those comparisons are equivalences. The Segal equivalence makes the vertical arrow an equivalence, so $e$ is cocartesian. Functor-category transport gives these comparisons coherently for all $k$. The cocartesian mapping formula, followed by composition of transports, therefore identifies restriction for the context $L\\oplus T_d\\oplus R$ with\n$$\\operatorname{Map}_{\\mathcal V}(l\\otimes v_d\\otimes r,w)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K_d,\\mathcal V)}(l\\otimes Q_d\\otimes r,\\Delta w).$$\nThis is an equivalence by the dual cone criterion of [lem-cbc-enhanced-functor-cone-calculus]. Thus the constructed active cocone satisfies the required two-sided context condition. In particular it satisfies the one-sided conditions of [def-coef-operadic-correspondence]. This works even for an empty slice, since tensoring preserves the initial object, and for nullary inputs, which transport to $\\mathbf1$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-operadic-correspondence",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.2.10 and the tensor-colimit argument of Corollary A.2.7; the two-sided version follows by applying both tensor factors."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-operadic-collage-comparison] to $u$ and write $\\mathcal M_u$ for its correspondence. It is constant over $[0]$ precisely under the assumed equivalence on the space zero-fibers; both smallness and those hypotheses are retained. Its source active slice at $d$ is $K_d$ with the same diagram $T_d$. Therefore step 2 supplies the local cocones required by the existence assertion of [lem-coef-operadic-correspondence-kan-filling]. Obtain an operadic left Kan extension $H:\\mathcal M_u\\to\\mathcal V^\\otimes$ of $X$. Under the collage comparison its data are a $\\mathcal D$-algebra $F$ and a coherent algebra transformation $\\eta:X\\to u^*F$; its local cocones are exactly the ones induced by $\\eta$ and the action of $F$. This constructs the algebra and the unit together; independent choices of operations are not being asserted to be coherent.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison",
+    "lem-coef-operadic-correspondence-kan-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Remark A.4.2, Theorem A.3.4(1), and the construction in the proof of Proposition A.4.4."
+   }
+  },
+  {
+   "text": "The left Kan extension from step 3 gives the one-sided operadic condition of [def-coef-operadic-correspondence]. Empty context and [lem-coef-infinity-pointwise-cocartesian-transport] identify its restriction map with\n$$\\operatorname{Map}_{\\mathcal V}(F(d),w)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K_d,\\mathcal V)}(Q_d,\\Delta w).$$\nIt is an equivalence for every $w$, so $Q_d\\to F(d)$ is a colimit cocone by [lem-cbc-enhanced-functor-cone-calculus]. For fixed tuples $L,R$, set $l=\\bigotimes L$ and $r=\\bigotimes R$, with value $\\mathbf1$ for an empty tuple. Tensoring with fixed objects preserves small colimits by [def-coef-complete-algebroid], so $l\\otimes Q_d\\otimes r\\to l\\otimes F(d)\\otimes r$ is colimiting. For lengths $a,s,b$ of $L,T_d(k),R$, concatenate the component of $\\lambda$ with the fixed identities, over $[a+s+b]\\to[a+1+b]$. Factor it through a chosen cocartesian lift of this block contraction, using the cocartesian mapping formula. Each inert projection of the intervening vertical arrow compares two cocartesian lifts of an identity-selected factor or of $[s]\\to[1]$, hence is an equivalence. By the Segal equivalence of [def-coef-monoidal-infinity-category], the vertical arrow is an equivalence; thus the concatenated arrow is cocartesian. Functor-category transport supplies the coherent comparisons over $K_d$. Composing this transport with the active tensor transport identifies restriction in the simultaneous context $L\\oplus T_d\\oplus R$ with\n$$\\operatorname{Map}_{\\mathcal V}(l\\otimes F(d)\\otimes r,w)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K_d,\\mathcal V)}(l\\otimes Q_d\\otimes r,\\Delta w).$$\nThe dual cone criterion makes this an equivalence. Consequently the specific $\\eta$ from step 3 satisfies the stated two-sided condition for every $L,R$, including the empty cases.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-complete-algebroid",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions A.2.1, A.4.1 and Proposition A.2.10: recover the ordinary colimit and then tensor on both sides."
+   }
+  },
+  {
+   "text": "Now let $(F,\\eta)$ be any pair with the stated two-sided property, and let $H=(X,F,\\eta)$ in $\\mathcal E=\\mathcal E_{\\mathcal M_u}(\\mathcal V)$. Taking $L$ or $R$ empty shows that $H$ is an operadic left Kan extension. For any $G\\in\\mathcal E$ with source restriction $Y$, restriction defines\n$$\\rho:\\operatorname{Map}_{\\mathcal E}(H,G)\\longrightarrow\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal C}(\\mathcal V)}(X,Y).$$\nWe prove it lifts every boundary $\\partial\\Delta^n\\subseteq\\Delta^n$, including $n=0$. By the right-pinched mapping-space definition, the specified boundary on the left is a diagram on the proper faces of $\\Delta^{n+1}$ that contain its final vertex. Keep the fixed final vertex $G$ and adjoin its entire initial face $\\Delta^{\\{0,\\ldots,n\\}}$ as the constant simplex at $H$; together these are $\\partial\\Delta^{n+1}$. The proposed $n$-simplex on the right gives a compatible diagram on $\\mathcal C\\times\\Delta^{n+1}$ with that initial face constant at $X$. These data have exactly the domain in the relative boundary assertion of [lem-coef-operadic-correspondence-kan-filling], with $m=n+1>0$ and initial vertex $H$. Its filler is the required pinched $n$-simplex: it preserves the specified initial face and final vertex. For $n=0$ this same argument prescribes the two vertices and produces the missing edge. By [lem-coef-kan-quillen-right-proper], a map lifting all such boundaries is a trivial Kan fibration and hence a weak homotopy equivalence. Thus $\\rho$ is an equivalence of mapping spaces, with no passage to homotopy classes.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison",
+    "def-coef-operadic-correspondence",
+    "lem-coef-operadic-correspondence-kan-filling",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proof of Proposition A.4.3; Theorem A.3.4(2) and the relative prism argument of Higher Algebra, Lemma 3.1.3.16."
+   }
+  },
+  {
+   "text": "For a $\\mathcal D$-algebra $B$, take $G_B=(u^*B,B,\\operatorname{id})$ in the coherent comma description. The mapping formula of [lem-coef-operadic-collage-comparison] gives\n$$\\operatorname{Map}_{\\mathcal E}(H,G_B)\\simeq\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal C}(\\mathcal V)}(X,u^*B)\\times^h_{\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal C}(\\mathcal V)}(X,u^*B)}\\operatorname{Map}_{\\operatorname{Alg}_{\\mathcal D}(\\mathcal V)}(F,B).$$\nThe first map to the common base is the identity, so projection to the last factor is an equivalence: the space of a point together with a path from it to a specified point is contractible, with inverse given by the constant path. Under this equivalence, $\\rho$ of step 5 is $b\\mapsto u^*b\\circ\\eta$. Step 5 says this map is an equivalence, which is the asserted adjunction formula. The comma comparison and its mapping formula are natural in $B$; restriction and composition are coherent functors. Therefore this identification is natural on the whole algebra infinity category, including its higher simplices. No separate choices of inverse maps are used to assert naturality.",
+   "uses": [
+    "lem-coef-operadic-collage-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition A.4.3, comma mapping-space calculation in the proof of Higher Algebra Proposition 3.1.3.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-complete-algebroid",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "def-coef-operadic-correspondence",
+  "lem-coef-operadic-collage-comparison",
+  "lem-coef-operadic-correspondence-kan-filling",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Explicit reconstruction of the proofs of Propositions A.2.10, A.4.3 and A.4.4 from Theorem A.3.4; relative boundary argument as in Higher Algebra Lemma 3.1.3.16 and the proof of Proposition 3.1.3.2. Online sources, WANTED for the archive."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,14 +190,78 @@
    "results": "{\"t\": \"2026-10-16T19:26:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanExtension\\\", \\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. LeanFinder returned homotopy-category/nerve adjunctions, ordinary categorical Kan extensions, and adjoint lifting; their displayed types concern ordinary categories and do not state operadic-colimit existence or the free-algebra cocone criterion. Loogle and source grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|nonsymmetric.*operad|InfinityOperad",
+   "results": "{\"t\": \"2026-10-16T20:00:05Z\", \"tool\": \"grep\", \"query\": \"operadic|nonsymmetric.*operad|InfinityOperad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source grep gives no relevant declaration; the only Operad hits in the broad grep are bibliographic titles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\", \"KanExtension\"",
+   "results": "{\"t\": \"2026-10-16T20:00:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\", \\\"KanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected all displayed types; these concern ordinary categories, ordinary monads, model-category cylinder objects, or strict Segal simplicial sets, not families of generalized nonsymmetric infinity operads. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:35-81 and Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:100-145, CategoryTheory/Monad/Limits.lean:45-62 and CategoryTheory/Grothendieck.lean:73-85. No one-line specialization supplies the stated coherent operadic result; two semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Operadic left Kan extension unit satisfies a mapping space adjunction",
+   "results": "{\"t\": \"2026-10-16T20:00:05Z\", \"tool\": \"leansearch\", \"query\": \"Operadic left Kan extension unit satisfies a mapping space adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.lanAdjunction_unit\", \"CategoryTheory.Functor.leftKanExtensionUnit\", \"CategoryTheory.Functor.lanUnit\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.lanAdjunction\", \"CategoryTheory.Bicategory.lanUnit\", \"CategoryTheory.Functor.lan\", \"CategoryTheory.Functor.instIsIsoAppLanUnit_1\"], \"digest\": \"10a57bdc136f9feb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected all displayed types; these concern ordinary categories, ordinary monads, model-category cylinder objects, or strict Segal simplicial sets, not families of generalized nonsymmetric infinity operads. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:35-81 and Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:100-145, CategoryTheory/Monad/Limits.lean:45-62 and CategoryTheory/Grothendieck.lean:73-85. No one-line specialization supplies the stated coherent operadic result; two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operadic colimit cocones characterize relative free algebras over nonsymmetric infinity operads",
+   "results": "{\"t\": \"2026-10-16T20:00:15Z\", \"tool\": \"leanfinder\", \"query\": \"Operadic colimit cocones characterize relative free algebras over nonsymmetric infinity operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ColimitTypeRel\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint_a\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_pt\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_ι_app_f\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit_desc_f\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\"], \"digest\": \"656eaed2d7ba291b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected all displayed types; these concern ordinary categories, ordinary monads, model-category cylinder objects, or strict Segal simplicial sets, not families of generalized nonsymmetric infinity operads. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:35-81 and Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:100-145, CategoryTheory/Monad/Limits.lean:45-62 and CategoryTheory/Grothendieck.lean:73-85. No one-line specialization supplies the stated coherent operadic result; two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise colimit cocones on active slices assemble coherently to a free algebra",
+   "results": "{\"t\": \"2026-10-16T20:00:16Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise colimit cocones on active slices assemble coherently to a free algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_pt\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint_a\", \"CategoryTheory.Monad.ForgetCreatesColimits.coconePoint_A\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCocone_ι_app_f\", \"CategoryTheory.Monad.FreeCoequalizer.topMap\", \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"CategoryTheory.Monad.ForgetCreatesColimits.newCocone\"], \"digest\": \"e578bb04d1c66704\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected all displayed types; these concern ordinary categories, ordinary monads, model-category cylinder objects, or strict Segal simplicial sets, not families of generalized nonsymmetric infinity operads. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:35-81 and Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:100-145, CategoryTheory/Monad/Limits.lean:45-62 and CategoryTheory/Grothendieck.lean:73-85. No one-line specialization supplies the stated coherent operadic result; two semantic phrasings were tried."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-operadic-active-slice-formula",
   "date": "2026-10-17",
   "group": "NO"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-free-cocone-characterization",
+  "worker": "stage1",
+  "summary": "Constructed colorwise tensor colimits, assembled them through an operadic correspondence, and proved the mapping property using relative boundary lifting and an explicit comma mapping-space calculation. Three new statement-only prerequisites: correspondence definition, Kan-extension existence/boundary filling, and mapping-cylinder comparison. No statement change, Lean attachment, or Mathlib leaf.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint in main-20261015: the coherent derived coefficient mapping-complex adjunction before R lim, through the fixed-object enrichment/free-monad chain; this split supplies the active-cocone universal property before the parent decomposes arities.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 2 and 4 use the dual mapping-space colimit criterion, a generic foundation not supplied by this unit."
+   },
+   {
+    "node": "lem-coef-kan-quillen-right-proper",
+    "why": "Step 5 uses the general simplicial-set theorem that lifting all boundaries is a trivial Kan fibration, to retain every higher homotopy in the adjunction; no operadic node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-5a0e1a8af",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-5a0e1a8af (reviewer sub-agent of L); spot-checked: I read the delivery, the rules, every cited statement and the sources. Gepner–Haugseng 1312.3178v4 Appendix A pp. 87–92 (A.2.1, A.2.2, A.2.4–A.2.10, A.3.1–A.3.4, A.4.1–A.4.4, A.4.6) and Higher Algebra Thm 3.1.2.3, Props 3.1.3.2–3.1.3.3, Rem 3.1.3.15, Lem 3.1.3.16 (p. 347) were fetched and read from text extracted in /tmp. Item: this is GH A.4.4 + A.2.10 + A.4.3. Its two-sided L⊕T⊕R cocone condition is stronger than GH A.2.1's one-sided condition, so its existence clause is stronger than GH. Step 4 proves it, because tensoring preserves colimits separately in each variable. No weakening and no statement change. Steps: step 1 lifts the transformation with the transport node (V⊗ is a cocartesian fibration) and gives the arity-0 value 1; step 2 uses presentability, colimit preservation by fixed tensors and the dual cone criterion, with the cocartesian concatenation argument written out (empty slice gives the initial object); step 3 applies the collage node and the existence clause of the filling node, whose hypotheses all hold; step 4 recovers the ordinary colimit from the empty context and adds the fixed tensors; step 5's right-pinched boundary is checked against def-cbc (d_{n+1} constant at H gives ∂Δ^{n+1}, m=n+1>0, n=0 included), and lifting every boundary makes ρ a trivial fibration by the Kan–Quillen node; in step 6 the comma mapping formula with θ=id makes the first leg the identity, so composition with η is an equivalence. New nodes: def-coef-operadic-correspondence matches GH A.3.1–A.3.3 and A.2.1/A.2.2 in mapping-space form. lem-coef-operadic-correspondence-kan-filling: its boundary clause is HA Lem 3.1.3.16 in nonsymmetric form (prism filtration with GH A.3.4(ii) for the last horn), and its existence clause is A.3.4(i) with the colour criterion of A.3.3/A.4.4. Non-colour objects reduce to colours over the Kan zero-fiber; the next splitter must write this reduction out. lem-coef-operadic-collage-comparison matches GH Rem A.4.2 / HA Rem 3.1.3.15; I checked the comma formula directions by hand. Small cases checked: u=id, empty slice, nullary operations, m=1, r=0 and r=1. All three are true, strictly smaller than the item (not D1 relabelling), carry correct blueprint from/via chains and recorded searches, and are statement-only. A whole-DAG duplicate search (operadic free-extension and cocomplete-extensions, cartesian initial boundary lift, fiber-colimit collage, module colimit detection) found no duplicate. Tool uses: lem-cbc-enhanced-functor-cone-calculus accepted (already accepted on the parent); lem-coef-kan-quillen-right-proper is in the item's own unit, so its declaration is harmless. Cosmetic only: the source fields write A.3.4(1)/(2) where the PDF has (i)/(ii). No fixes written."
  }
 }

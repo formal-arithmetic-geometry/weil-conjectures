@@ -28,9 +28,112 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-coef-presentable-infinity-category], choose an infinite regular cardinal $\\lambda\\in\\mathcal U$ and an essentially small full subcategory $\\mathcal G\\subseteq\\mathcal C$ of $\\lambda$-compact generators under small $\\lambda$-filtered colimits. For each endpoint $e$ of an arrow in $S$, choose one such presentation $p_e:I_e\\to\\mathcal G$ with colimit $e$. There are only a small family of endpoints (index them by $S\\times\\{0,1\\}$, allowing repetitions), and each $I_e$ is small. The disjoint union of their sets of nondegenerate simplices is small. Choose an infinite cardinal $\\theta\\in\\mathcal U$ at least $\\lambda$ and at least the cardinality of that disjoint union. If $S$ is empty take $\\theta=\\lambda$. These choices concern only a small family, not all objects of $\\mathcal C$.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.0.1 and Proposition 5.4.2.2(3); endpoint-size bound in the cardinal choice before Lemma 5.5.4.14"
+   }
+  },
+  {
+   "text": "Put $\\eta=2^\\theta$ and $\\kappa=\\eta^+$. By [lem-coef-infinite-cardinal-square-power], $\\theta<\\eta$ and $\\eta^\\theta=\\eta$; by [lem-coef-infinite-cardinal-successor-regular], $\\kappa$ is infinite regular. Thus $\\lambda\\leq\\theta<\\eta<\\kappa$, and $\\kappa$ is uncountable. For $\\mu<\\kappa$ one has $\\mu\\leq\\eta$ by the definition of successor cardinal. For $\\nu<\\lambda$ one has $\\nu\\leq\\theta$; inject the sets of functions first into functions with codomain of size $\\eta$ and then extend across an injection of their domains into a set of size $\\theta$, filling the remaining coordinates by one fixed element of $\\eta$. Consequently $\\mu^\\nu\\leq\\eta^\\theta=\\eta<\\kappa$. This includes the edge cases: if $\\mu=0$ and $\\nu>0$, the function set is empty, while if $\\mu=0=\\nu$, it is a singleton, which embeds into the nonempty set of functions from a $\\theta$-sized set to $\\eta$. All these power sets and successors remain in $\\mathcal U$.",
+   "uses": [
+    "lem-coef-infinite-cardinal-square-power",
+    "lem-coef-infinite-cardinal-successor-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.2.6.3, printed p. 819, explicit power-successor calculation"
+   }
+  },
+  {
+   "text": "Every small $\\kappa$-filtered indexing quasicategory is $\\lambda$-filtered: a $\\lambda$-small test shape is $\\kappa$-small, so the required cocone exists by [def-coef-presentable-infinity-category]. The mapping-space functor of each $g\\in\\mathcal G$ already preserves all small $\\lambda$-filtered colimits; hence it preserves the smaller class of $\\kappa$-filtered colimits. Thus each $g$ is $\\kappa$-compact. Each $I_e$ is $\\kappa$-small by the bound in Step 1 and $\\theta<\\kappa$. Since $\\mathcal C$ is presentable it is locally small and admits all small $\\kappa$-filtered colimits. Apply [lem-coef-compact-small-colimits] to $p_e$ to conclude that every endpoint $e$ is $\\kappa$-compact.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.4.15, printed p. 401; compactness monotonicity and the endpoint-presentation bound"
+   }
+  },
+  {
+   "text": "Let $\\mathcal H\\subseteq\\mathcal C$ be the replete full subcategory of all colimits in $\\mathcal C$ of $\\kappa$-small coherent diagrams with values in $\\mathcal G$. These colimits exist by presentability. The bounded-colimit clause of [lem-coef-locally-small-infinity-size-calculus] makes $\\mathcal H$ essentially small: it requires only that $\\mathcal C$ be locally small and $\\mathcal G$ essentially small, both supplied in Step 1. By Step 3 its vertex objects are $\\kappa$-compact, so [lem-coef-compact-small-colimits] makes every object of $\\mathcal H$ $\\kappa$-compact. Equivalence does not change this property because the two represented mapping-space functors are naturally equivalent. The empty diagram is allowed and contributes the initial object.",
+   "uses": [
+    "lem-coef-locally-small-infinity-size-calculus",
+    "lem-coef-compact-small-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, printed p. 426, bounded small-colimit hull; Corollary 5.3.4.15"
+   }
+  },
+  {
+   "text": "Fix any $X\\in\\mathcal C$. Its $\\lambda$-accessible presentation from [def-coef-presentable-infinity-category] is $X\\simeq\\operatorname{colim}_I p$ with $I$ small $\\lambda$-filtered and $p$ valued in $\\mathcal G$. Apply [lem-coef-infinity-cofinal-kappa-poset] with its cardinal equal to $\\lambda$ (its ambient quasicategory $\\mathcal C$ admits all small colimits by presentability): it gives a small poset $A$ in which every subset of cardinality less than $\\lambda$, including the empty one, has an upper bound, and a coherent functor $u:N(A)\\to I$ along which the colimiting cocone restricts to a colimiting cocone. Put $q=p\\circ u:N(A)\\to\\mathcal G$; it has the same colimit cocone with apex $X$. Apply [lem-coef-sharp-filtered-poset-subsets] with $(\\alpha,\\beta)=(\\lambda,\\kappa)$, using the power bound of Step 2. Its poset $\\mathscr B$ of $\\kappa$-small $\\lambda$-filtered subsets of $A$ is small, $\\kappa$-filtered in the upper-bound sense, and covers $A$. Its nerve is $\\kappa$-filtered directly from the test-shape definition: the fewer than $\\kappa$ vertices of a test shape land in a family with an upper bound, and the unique order arrows to this bound extend the whole map to a cocone. Each nerve $N(B)$ for $B\\in\\mathscr B$ is $\\kappa$-small: its nondegenerate simplices are finite strict chains, and there are at most $\\max(\\aleph_0,|B|)$ finite strings when $B$ is infinite or finite. This bound is less than the uncountable $\\kappa$; the finite-string estimate follows by induction from the infinite-square identity [lem-coef-infinite-cardinal-square-power].",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-cofinal-kappa-poset",
+    "lem-coef-sharp-filtered-poset-subsets",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9 using Proposition 5.3.1.18 (5.3.1.16 in the numbering cited by lem-coef-infinity-cofinal-kappa-poset) and Lemma 5.4.2.8, printed pp. 386-387 and 425-426"
+   }
+  },
+  {
+   "text": "For each $B\\in\\mathscr B$, choose $X_B=\\operatorname{colim}_{N(B)}q|_{N(B)}$, which belongs to $\\mathcal H$ by Step 5. Every finite chain in $A$ lies in some $B$: its finite set of vertices lies in one of the filtered subsets by [lem-coef-sharp-filtered-poset-subsets]. Hence $N(A)=\\bigcup_{B\\in\\mathscr B}N(B)$ as simplicial subsets. The poset $\\mathscr B$ is nonempty and directed since it is $\\kappa$-filtered. The statement of [lem-coef-directed-cover-colimit-assembly] applies to this cover and the specified cocones: $\\mathcal C$ admits all small colimits, and it gives a coherent $N(\\mathscr B)$-diagram $B\\mapsto X_B$ whose cocone to $X$ is colimiting. Thus every object of $\\mathcal C$ is a small $\\kappa$-filtered colimit of objects of the essentially small full subcategory $\\mathcal H$ of $\\kappa$-compact objects. Together with local smallness and existence of all small colimits, this is precisely $\\kappa$-accessibility in [def-coef-presentable-infinity-category]. $\\lambda$-accessibility was the choice in Step 1.",
+   "uses": [
+    "lem-coef-sharp-filtered-poset-subsets",
+    "lem-coef-directed-cover-colimit-assembly",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.4.2.9, last paragraph; Propositions 4.2.3.4 and 4.2.3.8 for coherent directed-cover assembly"
+   }
+  },
+  {
+   "text": "Let $x$ be any $\\kappa$-compact object and use its presentation $x\\simeq\\operatorname{colim}_{B\\in\\mathscr B}X_B$ from Step 6. By [lem-coef-infinity-compact-stage-factorization], apply the identity clause with $\\gamma=\\kappa$: the indexing quasicategory is small and $\\kappa$-filtered, so there are $i:x\\to X_B$ and the cocone arrow $r:X_B\\to x$ with $ri\\simeq1_x$. Thus every $\\kappa$-compact object lies in the homotopy retract closure of $\\mathcal H$. By the retract clause of [lem-coef-locally-small-infinity-size-calculus], that full retract closure is essentially small. A full subcategory of it has a small family of equivalence-class representatives (select the represented classes satisfying compactness), and $\\mathcal C^\\kappa$ is replete, so it is the full subcategory on all objects equivalent to one of these small-indexed representatives; [lem-coef-infinity-small-full-subcategory], applied in the locally small $\\mathcal C$, makes $\\mathcal C^\\kappa$ essentially small. This counts all compact objects, not merely the chosen compact generators.",
+   "uses": [
+    "lem-coef-infinity-compact-stage-factorization",
+    "lem-coef-locally-small-infinity-size-calculus",
+    "lem-coef-infinity-small-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.2.4 and Proposition 5.4.2.2(2), printed pp. 424-425"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-coef-infinite-cardinal-square-power",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-compact-small-colimits",
+  "lem-coef-locally-small-infinity-size-calculus",
+  "lem-coef-infinity-cofinal-kappa-poset",
+  "lem-coef-sharp-filtered-poset-subsets",
+  "lem-coef-directed-cover-colimit-assembly",
+  "lem-coef-infinity-compact-stage-factorization",
+  "lem-coef-infinity-small-full-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 5.4.2.9 and the retract argument of Lemma 5.4.2.4, with explicit endpoint and power-successor bounds. Read online; not archived under literature/. The proof is recorded as agent-written under the missing-local-source rule."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +183,73 @@
    "results": "{\"t\": \"2026-10-16T19:43:36Z\", \"tool\": \"leansearch\", \"query\": \"Two filtered colimit diagrams of compact objects with the same colimit admit small filtered restrictions with equal colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf\", \"CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff_aux\", \"CategoryTheory.Limits.Types.FilteredColimit.isColimitOf'\"], \"digest\": \"1463a21d0ff0d720\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Hits concern ordinary CategoryTheory Hom-set compactness, ordinary Ind objects, or the ambient category SSet; none states the coherent infinity-category assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an accessible infinity category compact objects form an essentially small subcategory and accessibility holds at sharply larger regular cardinals",
+   "results": "Direct run, 8 hits, headed by CategoryTheory.IsAccessibleCategory.exists_cardinal; ordinary-category signatures only.",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned ordinary CategoryTheory presentability definitions (LocallyPresentable.lean:35-52 and Basic.lean:145-152) and Quasicategory sources; the coherent mapping-space assertion is not a one-line specialization. Second semantic phrasing included in this search record."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An accessible infinity category is accessible at every sharply larger regular cardinal and its compact objects are essentially small",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"Given a category $ C $ and a regular cardinal $ \\\\kappa $, this predicate asserts that $ C $ is $ \\\\kappa $-accessible, meaning it has $ \\\\kappa $-directed colimits and a set of $ \\\\kappa $-presentable ob\"}\n  {\"name\": \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[F.IsCardinalAccessible κ] {κ' : Cardinal.{w}} [Fact κ'.IsRegular] (h : κ ≤ κ') : F.IsCardinalAccessible κ'\", \"doc\": \"If a functor $ F $ is $\\\\kappa$-accessible and $\\\\kappa'\\\\geq \\\\kappa$ is a regular cardinal, then $F$ is also $\\\\kappa'$-accessible. This means that if $F$ preserves colimits of $\\\\kappa$-filtered diagrams\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [toHasCardinalFilteredGenerator : CategoryTheory.HasCardinalFilteredGenerator C κ]\\n  [toHasCardinalFilteredColimits : CategoryTheory.HasCardinalFilteredColimits C κ],\\n  CategoryTheory.IsCardinal\", \"doc\": \"If a category $ C $ has all κ-filtered colimits and a κ-filtered generator, then $ C $ is κ-accessible.\"}\n  {\"name\": \"CategoryTheory.Functor.IsCardinalAccessible\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        CategoryTheory.Functor C D → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A functor $ F : C \\\\to D $ is κ-accessible if it preserves colimits of diagrams indexed by κ-filtered categories, where κ is a regular cardinal.\"}\n  {\"name\": \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"(κ : Cardinal.{w}) [Fact κ.IsRegular] [IsCardinalAccessible F κ] : IsAccessible.{w} F\", \"doc\": \"If a functor $ F $ is κ-accessible for a regular cardinal $ κ $, then $ F $ is accessible.\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}\n  {\"name\": \"CategoryTheory.IsFinitelyAccessibleCategory.instEssentiallySmallIsFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Dense\", \"type\": \"[IsFinitelyAccessibleCategory.{w} C] : ObjectProperty.EssentiallySmall.{w} (ObjectProperty.isFinitelyPresentable.{w} C)\", \"doc\": \"In a finitely accessible category, the property of being finitely presentable is essentially small. That is, there exists a small full subcategory such that every finitely presentable object is isomor\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned ordinary CategoryTheory presentability definitions (LocallyPresentable.lean:35-52 and Basic.lean:145-152) and Quasicategory sources; the coherent mapping-space assertion is not a one-line specialization. Second semantic phrasing included in this search record."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalAccessibleCategory\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [Fact κ.IsRegular] : Prop\", \"doc\": \"Given a regular cardinal `κ`, a category `C` is `κ`-accessible\\nif it has `κ`-filtered colimits and admits a (small) family `G : ι → C` of `κ`-presentable\\nobjects such that any object identifies as a `\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] : CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst✝¹ : Fact κ.IsRegular} [self : CategoryTheory.IsCardinalAccessibleCategory C κ] : CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst✝¹ : Fact κ.IsRegular} [self : CategoryTheory.IsCardinalAccessibleCategory C κ] : CategoryTheory.HasCardinalFilteredGenerator C κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [Fact κ.IsRegular] [toHasCardinalFilteredGenerator : CategoryTheory.HasCardinalFilteredGenerator C κ] [toHasCardinalFilteredColimits : CategoryTheory.HasCardinalFilteredColimits C κ] : CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib.CategoryTheory.Presentable.Dense\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] : (CategoryTheory.isCardinalPresentable C κ).ι.IsDense\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib.CategoryTheory.Presentable.Dense\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] (X : C) : CategoryTheory.IsCardinalFiltered (CategoryTheory.CostructuredArrow (CategoryTheory.isCardinalPresentable C κ).ι X) κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.final_toCostructuredArrow\", \"module\": \"Mathlib.CategoryTheory.Presentable.Dense\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [Fact κ.IsRegular] {J : Type u'} [CategoryTheory.Category.{v', u'} J] [CategoryTheory.EssentiallySmall.{w, v', u'} J] [CategoryTheory.IsCardinalFiltered J κ] {X : C} (p : (CategoryTheory.isCardinalPresentable C κ).ColimitOfShape J X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.Adjunction\", \"type\": \" {C : Type u} {D : Type u'} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Category.{v', u'} D] (e : C ≌ D) (κ : Cardinal.{w}) [Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] : CategoryTheory.IsCardinalAccessibleCategory D κ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.Adjunction\", \"type\": \" {C : Type u} {D : Type u'} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Category.{v', u'} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w}) [Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G.IsCardinalAccessible κ] [G.Fu\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.CardinalDirectedPoset.instIsCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.CardinalDirectedPoset\", \"type\": \" {κ : Cardinal.{u}} [Fact κ.IsRegular] : CategoryTheory.IsCardinalAccessibleCategory (CategoryTheory.CardinalDirectedPoset κ) κ\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.isCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.IsCardinalAccessibleCategory C κ₁] : CategoryTheory.IsCardinalAccessibleCategory C κ₂\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned ordinary CategoryTheory presentability definitions (LocallyPresentable.lean:35-52 and Basic.lean:145-152) and Quasicategory sources; the coherent mapping-space assertion is not a one-line specialization. Second semantic phrasing included in this search record."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalAccessibleCategory|IsCardinalPresentable",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read pinned ordinary CategoryTheory presentability definitions (LocallyPresentable.lean:35-52 and Basic.lean:145-152) and Quasicategory sources; the coherent mapping-space assertion is not a one-line specialization. Second semantic phrasing included in this search record."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose arbitrarily large uncountable regular cardinals kappa such that mu to the nu is less than kappa for all mu less than kappa and nu less than lambda",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Cardinal.powerlt\", \"module\": \"Mathlib/SetTheory/Cardinal/Basic\", \"type\": \"Cardinal.{u} → Cardinal.{u} → Cardinal.{u}\", \"doc\": \"For cardinals $a$ and $b$, this is the supremum (least upper bound) of all cardinal exponentiations $a^c$ where $c$ ranges over cardinals strictly less than $b$. The operation leverages the conditiona\"}\n  {\"name\": \"Cardinal.IsStrongLimit\", \"module\": \"Mathlib/SetTheory/Cardinal/Order\", \"type\": \"Cardinal.{u_1} → Prop\", \"doc\": \"A cardinal number $\\\\kappa$ is a strong limit if for every cardinal $\\\\lambda < \\\\kappa$, the cardinality of the power set of $\\\\lambda$ satisfies $2^\\\\lambda < \\\\kappa$.\"}\n  {\"name\": \"HasCardinalLT.exists_regular_cardinal\", \"module\": \"Mathlib/SetTheory/Cardinal/HasCardinalLT\", \"type\": \"∀ (X : Type u) [Small.{w, u} X], ∃ κ, κ.IsRegular ∧ HasCardinalLT X κ\", \"doc\": \"For any small type $X$, there exists a regular cardinal $\\\\kappa$ such that the cardinality of $X$ is strictly less than $\\\\kappa$.\"}\n  {\"name\": \"HasCardinalLT.exists_regular_cardinal_forall\", \"module\": \"Mathlib/SetTheory/Cardinal/HasCardinalLT\", \"type\": \"∀ {ι : Type v} (X : ι → Type u) [Small.{w, v} ι] [∀ (i : ι), Small.{w, u} (X i)],\\n  ∃ κ, κ.IsRegular ∧ ∀ (i : ι), HasCardinalLT (X i) κ\", \"doc\": \"Given a small type $\\\\iota$ and a family of small types $X_i$ indexed by $\\\\iota$, there exists a regular cardinal $\\\\kappa$ such that for every $i \\\\in \\\\iota$, the cardinality of $X_i$ is strictly less t\"}\n  {\"name\": \"Cardinal.IsInaccessible\", \"module\": \"Mathlib/SetTheory/Cardinal/Regular\", \"type\": \"Cardinal.{u_1} → Prop\", \"doc\": \"A cardinal number $ c $ is inaccessible if it satisfies three conditions: (1) it is uncountable ($\\\\aleph_0 < c$), (2) it is regular (its cofinality $\\\\mathrm{cof}(c)$ equals $ c $), and (3) it is a str\"}\n  {\"name\": \"Ordinal.principal_opow_ord\", \"module\": \"Mathlib/SetTheory/Cardinal/Ordinal\", \"type\": \"∀ {c : Cardinal.{u_1}}, Cardinal.aleph0 ≤ c → Ordinal.Principal (fun x1 x2 => x1 ^ x2) c.ord\", \"doc\": \"For any cardinal $ c $ satisfying $ \\\\aleph_0 \\\\leq c $, the ordinal exponentiation operation is principal at the ordinal corresponding to $ c $, meaning that for all ordinals $ a $ and $ b $ less than \"}\n  {\"name\": \"Cardinal.IsInaccessible.isStrongLimit\", \"module\": \"Mathlib/SetTheory/Cardinal/Regular\", \"type\": \"∀ {c : Cardinal.{u_1}}, c.IsInaccessible → c.IsStrongLimit\", \"doc\": \"If a cardinal $ c $ is inaccessible, then it is a strong limit cardinal, i.e., for every cardinal $ \\\\lambda < c $, the cardinality of the power set of $ \\\\lambda $ satisfies $ 2^\\\\lambda < c $.\"}\n  {\"name\": \"Cardinal.isStrongLimit_aleph0\", \"module\": \"Mathlib/SetTheory/Cardinal/Basic\", \"type\": \"Cardinal.aleph0.IsStrongLimit\", \"doc\": \"The cardinal number $\\\\aleph_0$ (aleph-null) is a strong limit cardinal, meaning that for every cardinal $\\\\lambda < \\\\aleph_0$, the cardinality of the power set of $\\\\lambda$ satisfies $2^\\\\lambda < \\\\alep\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact item match: ordinary categorical sharpness or cardinal bounds only; the useful arithmetic declarations were inspected and are recorded on the two new Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Cardinal.SharplyLT",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Cardinal.SharplyLT\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" (κ₁ κ₂ : Cardinal.{w}) [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] : Prop\", \"doc\": \"If `κ₁ < κ₂` are two regular cardinals, we say that `κ₁` is sharply\\nsmaller than `κ₂` if the category `CardinalDirectedPoset κ₁`\\nis `κ₂`-accessible. There are other characterizations (TODO @joelriou),\"}\n  {\"name\": \"Cardinal.SharplyLT.le\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) : κ₁ ≤ κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.lt\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (self : κ₁.SharplyLT κ₂) : κ₁ < κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.isCardinalAccessible_cardinalDirectedPoset\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (self : κ₁.SharplyLT κ₂) : CategoryTheory.IsCardinalAccessibleCategory (CategoryTheory.CardinalDirectedPoset κ₁) κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.isCardinalAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.IsCardinalAccessibleCategory C κ₁] : CategoryTheory.IsCardinalAccessibleCategory C κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.trans\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h₁₂ : κ₁.SharplyLT κ₂) {κ₃ : Cardinal.{w}} [Fact κ₃.IsRegular] (h₂₃ : κ₂.SharplyLT κ₃) : κ₁.SharplyLT κ₃\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.isCardinalFilteredGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.IsCardinalAccessibleCategory C κ₁] : (Cardinal.SharplyLT.generator κ₁ κ₂ C).IsCardinalFilteredGenerator κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (lt : κ₁ < κ₂) (isCardinalAccessible_cardinalDirectedPoset : CategoryTheory.IsCardinalAccessibleCategory (CategoryTheory.CardinalDirectedPoset κ₁) κ₂) : κ₁.SharplyLT κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.exists_cofinal\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) {X : Type w} (hX : HasCardinalLT X κ₂) : ∃ A, HasCardinalLT (↑A) κ₂ ∧ IsCofinal A\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.of_exists_cofinal\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h₀ : κ₁ < κ₂) (h : ∀ (X : Type w), HasCardinalLT X κ₂ → ∃ A, HasCardinalLT (↑A) κ₂ ∧ IsCofinal A) : κ₁.SharplyLT κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.exists_isCardinalFiltered_set\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) {X : Type w} [PartialOrder X] [CategoryTheory.IsCardinalFiltered X κ₁] (A : Set X) (hA : HasCardinalLT (↑A) κ₂) : ∃ B, A ⊆ B ∧ CategoryTheory.IsCardinalFiltered (↑B) κ₁ ∧ HasCardinalLT (↑B) κ₂\", \"doc\": \"\"}\n  {\"name\": \"Cardinal.SharplyLT.tfae\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁ < κ₂) : [κ₁.SharplyLT κ₂, CategoryTheory.IsCardinalAccessibleCategory (CategoryTheory.CardinalDirectedPoset κ₁) κ₂, ∀ (C : Type (w + 1)) [inst : CategoryTheory.Category.{w, w + 1} C] [CategoryTheory.IsCardinalAccessibleCategory \", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact item match: ordinary categorical sharpness or cardinal bounds only; the useful arithmetic declarations were inspected and are recorded on the two new Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ss]harp|[Ss]harp.*exists|def SharplyLT",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no exact item match: ordinary categorical sharpness or cardinal bounds only; the useful arithmetic declarations were inspected and are recorded on the two new Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "isRegular_succ|theorem cantor|theorem mul_eq_self|theorem power_mul|lemma power_mul",
+   "results": "11 hits in SetTheory/Cardinal: Arithmetic.lean:45 Cardinal.mul_eq_self; Regular.lean:79 Cardinal.isRegular_succ and later uses; Order.lean:243 Cardinal.power_mul and :337 Cardinal.cantor; Basic.lean:317 cantor'. Read the declaration signatures.",
+   "date": "2026-10-17",
+   "verdict": "partial arithmetic matches: recorded as the two new Mathlib leaves; no coherent accessibility statement."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_cardinal_directed|exists_hom_of_isColimit|essentiallySmall.*[Rr]etract|EssentiallySmallRetractClosure",
+   "results": "25 capped CategoryTheory hits, including ObjectProperty/Retract.lean:145, Presentable/Directed.lean and Basic.lean, ordinary factorization and directed-presentation uses. Read Directed.lean:517-540, Basic.lean:285-297 and ObjectProperty/Retract.lean:140-164.",
+   "date": "2026-10-17",
+   "verdict": "no coherent match: ordinary categories with Hom sets."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -91,5 +257,20 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-presentable-cardinal-enlargement",
+  "worker": "stage1",
+  "summary": "Chose an explicit power-successor cardinal above a small family of endpoint presentations; proved endpoint compactness using the existing small-colimit lemma; realized larger accessibility by filtered poset subdivision and existing coherent directed-cover assembly; obtained smallness of all compact objects by homotopy retract detection. Added three statement-only general tools (the reviewer replaced the duplicate cofinal-poset tool by lem-coef-infinity-cofinal-kappa-poset and the size criterion by lem-coef-infinity-small-full-subcategory) and two exact Mathlib arithmetic leaves. Statement unchanged.",
+  "blueprint": "Supporting accessible-localization infrastructure along the recorded ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 (the finite-level mapping-complex adjunction before R lim). Current main-20261015 does not literally state a cardinal-enlargement claim. Steps 1-6 expand HTT Proposition 5.4.2.9 and the cardinal choice underlying Lemma 5.5.4.14; Step 7 expands HTT Proposition 5.4.2.2 via compact retracts."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-76cb8d2bf",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-76cb8d2bf (reviewer sub-agent of L); spot-checked: I read all of the mathematics and it is correct. Item statement unchanged and true (test case C=Δ^0, S=∅). Steps 1-7 hold. Step 2: κ=(2^θ)^+ is regular and uncountable, and μ^ν≤η^θ=η<κ including 0^0. Step 3: κ-filtered implies λ-filtered, I_e is κ-small, and the hypotheses of compact-small-colimits are met. Steps 4-6: bounded hull H, poset replacement, the sharp-subset cover, κ-filteredness of N(𝓑), and directed-cover assembly with every hypothesis checked. Step 7: the homotopy retract onto a stage gives essential smallness. Mathlib leaves verified: isRegular_succ Regular.lean:79, mul_eq_self Arithmetic.lean:45, cantor Order.lean:337, power_mul Order.lean:243. I proved the unsplit nodes sharp-subsets, compact-stage factorization and the size clauses myself; all are true. HTT is not archived (WANTED), so page numbers are unverified locally; proof_origin=agent is correct. No SGA, no target or coefficient category involved, no off-route citation, no tool_uses. Two C5 duplicate faults, fixed in fixes/: (1) the new lem-coef-filtered-cofinal-poset duplicates the existing lem-coef-infinity-cofinal-kappa-poset (same HTT result, numbered 5.3.1.16 there). Step 5 now cites the existing node with cardinal λ and C cocomplete, and the new node is dropped. (2) The first clause of lem-coef-locally-small-infinity-size-calculus (small family of classes plus locally small implies essentially small) restates the existing lem-coef-infinity-small-full-subcategory. I deleted that clause, and step 7 now cites the existing node. proof_deps and split_report summary updated.; 2 file(s) fixed by the reviewer"
+ }
 }

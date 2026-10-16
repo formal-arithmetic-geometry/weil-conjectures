@@ -1,0 +1,82 @@
+{
+ "id": "lem-coef-sharp-filtered-poset-subsets",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, accessible-localization infrastructure: HTT Proposition 5.4.2.9 decomposes a filtered poset into small filtered subsets using Lemma 5.4.2.8.",
+   "via": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Small filtered subsets under a cardinal power bound",
+ "statement": "Use the smaller universe of [def-coef-presentable-infinity-category]. Fix a universe $\\mathcal U$ and infinite regular cardinals $\\alpha<\\beta$ in $\\mathcal U$. Suppose that $\\mu^\\nu<\\beta$ for every cardinal $\\mu<\\beta$ and $\\nu<\\alpha$. Let $A$ be a small partially ordered set in which every subset of cardinality less than $\\alpha$, including the empty subset, has an upper bound. Every subset $T\\subseteq A$ with $|T|<\\beta$ is contained in a subset $B\\subseteq A$ with $|B|<\\beta$ such that every subset of $B$ of cardinality less than $\\alpha$ has an upper bound in $B$, with its inherited order. The poset $\\mathscr B$ of all such $B$, ordered by inclusion, is small, covers $A$, and every family of fewer than $\\beta$ elements of $\\mathscr B$, including the empty family, has an upper bound in $\\mathscr B$.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 5.4.2.8 and its transfinite closure proof, printed pp. 425-426; the two cardinals are written here as alpha (lower) and beta (upper). Read online, not archived under literature/. No Stacks tag states this cardinal-directedness lemma."
+ },
+ "stmt_deps": [
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For regular lambda sharply smaller than kappa every subset of a lambda filtered poset of cardinality less than kappa lies in a lambda filtered subset of cardinality less than kappa",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalFiltered.of_le\", \"module\": \"Mathlib.CategoryTheory.Presentable.IsCardinalFiltered\", \"type\": \"{κ' : Cardinal.{w}} [Fact κ'.IsRegular] (h : κ' ≤ κ) : IsCardinalFiltered J κ'\", \"doc\": \"If $\\\\kappa'$ is a regular cardinal satisfying $\\\\kappa' \\\\leq \\\\kappa$, then any $\\\\kappa$-filtered category $J$ is also $\\\\kappa'$-filtered.\"}\n  {\"name\": \"HasCardinalLT.Set.isFiltered_of_aleph0_le\", \"module\": \"Mathlib.CategoryTheory.Presentable.Type\", \"type\": \"(hκ : Cardinal.aleph0 ≤ κ) : IsFiltered (HasCardinalLT.Set X κ)\", \"doc\": \"Given a cardinal $\\\\kappa$ satisfying $\\\\aleph_0 \\\\leq \\\\kappa$, the category of subsets $A \\\\subseteq X$ with cardinality strictly less than $\\\\kappa$ forms a filtered category. This means every finite dia\"}\n  {\"name\": \"HasCardinalLT.Set.instIsCardinalFiltered\", \"module\": \"Mathlib.CategoryTheory.Presentable.Type\", \"type\": \"[Fact κ.IsRegular] : IsCardinalFiltered (HasCardinalLT.Set X κ) κ\", \"doc\": \"If $\\\\kappa$ is a regular cardinal, then the category of subsets of $X$ with cardinality strictly less than $\\\\kappa$ is $\\\\kappa$-filtered. This means that for any diagram in this category of size less \"}\n  {\"name\": \"HasCardinalLT.Set.instIsFilteredOfFactIsRegular\", \"module\": \"Mathlib.CategoryTheory.Presentable.Type\", \"type\": \"[Fact κ.IsRegular] : IsFiltered (HasCardinalLT.Set X κ)\", \"doc\": \"Given a regular cardinal $\\\\kappa$, the category of subsets of a type $X$ with cardinality strictly less than $\\\\kappa$ forms a filtered category. This follows from the property that a regular cardinal \"}\n  {\"name\": \"CategoryTheory.isCardinalFiltered_iff\", \"module\": \"Mathlib.CategoryTheory.Presentable.IsCardinalFiltered\", \"type\": \":\\n  IsCardinalFiltered J κ ↔\\n    (∀ ⦃ι : Type w⦄ (j : ι → J) (_ : HasCardinalLT ι κ), ∃ (k : J), ∀ (i : ι), Nonempty (j i ⟶ k)) ∧\\n      ∀ ⦃ι : Type w⦄ ⦃j k : J⦄ (f : ι → (j ⟶ k)) (_ : HasCardinalLT ι κ),\\n        ∃ (l : J) (a : k ⟶ l) (b : j ⟶ l), ∀ (i : ι), f i ≫ a = b\", \"doc\": \"A category $ J $ is $\\\\kappa$-filtered if and only if it satisfies the following two conditions: (1) every diagram in $ J $ of size less than $\\\\kappa$ has a cocone, and (2) every family of parallel mor\"}\n  {\"name\": \"CategoryTheory.isCardinalFiltered_preorder\", \"module\": \"Mathlib.CategoryTheory.Presentable.IsCardinalFiltered\", \"type\": \"(J : Type w) [Preorder J] (κ : Cardinal.{w}) [Fact κ.IsRegular]\\n  (h : ∀ ⦃K : Type w⦄ (s : K → J) (_ : Cardinal.mk K < κ), ∃ (j : J), ∀ (k : K), s k ≤ j) : IsCardinalFiltered J κ\", \"doc\": \"A preorder $ J $ is $\\\\kappa$-filtered if for every set $ K $ with cardinality less than $ \\\\kappa $ and every function $ s : K \\\\to J $, there exists an element $ j \\\\in J $ such that $ s(k) \\\\leq j $ for\"}\n  {\"name\": \"CategoryTheory.isFiltered_of_isCardinalFiltered\", \"module\": \"Mathlib.CategoryTheory.Presentable.IsCardinalFiltered\", \"type\": \"(J : Type u) [Category.{v} J] (κ : Cardinal.{w}) [hκ : Fact κ.IsRegular] [IsCardinalFiltered J κ] : IsFiltered J\", \"doc\": \"If $ J $ is a $\\\\kappa$-filtered category for a regular cardinal $\\\\kappa$, then $ J $ is filtered. This means that whenever a category admits cocones for all diagrams of size less than $\\\\kappa$ (where \"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"(C : Type u₁) → [CategoryTheory.Category.{v₁, u₁} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"The category $ C $ has all κ-filtered colimits, where $ κ $ is a regular cardinal.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean. The returned SharplyLT.exists_isCardinalFiltered_set has a categorical SharplyLT hypothesis, defined by accessibility of CardinalDirectedPoset; the pinned file instead exposes exists_isCardinalFiltered_set_of_exists_cofinal requiring small cofinal families. Neither is the stated cardinal-exponent hypothesis by one-line specialization. The second phrasing returns ordinary filteredness criteria only; arithmetic-to-cofinal comparison would need a proof. Loogle also advertised SharplyLT/Lemmas.lean, absent from this pinned checkout, so it is not a pinned match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed poset is a kappa filtered union of its kappa small lambda directed subsets under cardinal power bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.isCardinalFiltered_preorder\", \"module\": \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered\", \"type\": \"∀ (J : Type w) [inst : Preorder J] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular],\\n  (∀ ⦃K : Type w⦄ (s : K → J), Cardinal.mk K < κ → ∃ j, ∀ (k : K), s k ≤ j) → CategoryTheory.IsCardinalFiltered J κ\", \"doc\": \"A preorder $ J $ is $\\\\kappa$-filtered if for every set $ K $ with cardinality less than $ \\\\kappa $ and every function $ s : K \\\\to J $, there exists an element $ j \\\\in J $ such that $ s(k) \\\\leq j $ for\"}\n  {\"name\": \"CategoryTheory.isFiltered_of_isCardinalDirected\", \"module\": \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered\", \"type\": \"∀ (J : Type u) [inst : CategoryTheory.Category.{v, u} J] (κ : Cardinal.{w}) [hκ : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalFiltered J κ], CategoryTheory.IsFiltered J\", \"doc\": \"The cosine function evaluated at $x = \\\\pi$ is equal to $-1$, i.e., $\\\\cos(\\\\pi) = -1$.\"}\n  {\"name\": \"CategoryTheory.IsCardinalFiltered\", \"module\": \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered\", \"type\": \"(J : Type u) → [CategoryTheory.Category.{v, u} J] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"The category $ J $ is κ-filtered, where $ κ $ is a regular cardinal. This means that for every diagram in $ J $ of size less than $ κ $, there exists a cocone, ensuring closure under colimits of small\"}\n  {\"name\": \"CategoryTheory.instIsCardinalFilteredToTypeOrd\", \"module\": \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered\", \"type\": \"∀ (κ : Cardinal.{w}) [hκ : Fact κ.IsRegular], CategoryTheory.IsCardinalFiltered κ.ord.ToType κ\", \"doc\": \"For any regular cardinal $\\\\kappa$, the category constructed from the underlying type of the ordinal corresponding to $\\\\kappa$ is $\\\\kappa$-filtered. This means that every diagram in this category of si\"}\n  {\"name\": \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"module\": \"Mathlib/CategoryTheory/Presentable/Directed\", \"type\": \"(J : Type w) → [CategoryTheory.SmallCategory J] → Cardinal.{w} → Type w\", \"doc\": \"A diagram constructed from a small category $J$ and a cardinal number, resulting in a type in universe $w$.\"}\n  {\"name\": \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.hP\", \"module\": \"Mathlib/CategoryTheory/Presentable/Directed\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.SmallCategory J] {κ : Cardinal.{w}}\\n  (self : CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram J κ), self.P.HasCardinalLT κ\", \"doc\": \"For any small category $ J $ and cardinal $ \\\\kappa $, and for any diagram constructed from $ J $ and $ \\\\kappa $, the cardinality of the subtype of objects in $ J $ satisfying the cardinal-filtered con\"}\n  {\"name\": \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.iSup\", \"module\": \"Mathlib/CategoryTheory/Presentable/Directed\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    {κ : Cardinal.{w}} →\\n      [Fact κ.IsRegular] →\\n        {ι : Type u_1} →\\n          (ι → CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram J κ) →\\n            HasCardinalLT ι κ → CategoryTheory.IsCardinalFiltered.exists_ca\", \"doc\": \"Given a family of diagrams $ D_i $ indexed by a type $ \\\\iota $ with cardinality strictly less than a regular cardinal $ \\\\kappa $, this function constructs a new diagram in the cardinal-filtered contex\"}\n  {\"name\": \"CategoryTheory.isFiltered_of_isCardinalFiltered\", \"module\": \"Mathlib/CategoryTheory/Presentable/IsCardinalFiltered\", \"type\": \"∀ (J : Type u) [inst : CategoryTheory.Category.{v, u} J] (κ : Cardinal.{w}) [hκ : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalFiltered J κ], CategoryTheory.IsFiltered J\", \"doc\": \"If $ J $ is a $\\\\kappa$-filtered category for a regular cardinal $\\\\kappa$, then $ J $ is filtered. This means that whenever a category admits cocones for all diagrams of size less than $\\\\kappa$ (where \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean. The returned SharplyLT.exists_isCardinalFiltered_set has a categorical SharplyLT hypothesis, defined by accessibility of CardinalDirectedPoset; the pinned file instead exposes exists_isCardinalFiltered_set_of_exists_cofinal requiring small cofinal families. Neither is the stated cardinal-exponent hypothesis by one-line specialization. The second phrasing returns ordinary filteredness criteria only; arithmetic-to-cofinal comparison would need a proof. Loogle also advertised SharplyLT/Lemmas.lean, absent from this pinned checkout, so it is not a pinned match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Cardinal.SharplyLT.exists_isCardinalFiltered_set",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Cardinal.SharplyLT.exists_isCardinalFiltered_set\", \"module\": \"Mathlib.CategoryTheory.Presentable.SharplyLT.Basic\", \"type\": \" {κ₁ κ₂ : Cardinal.{w}} [Fact κ₁.IsRegular] [Fact κ₂.IsRegular] (h : κ₁.SharplyLT κ₂) {X : Type w} [PartialOrder X] [CategoryTheory.IsCardinalFiltered X κ₁] (A : Set X) (hA : HasCardinalLT (↑A) κ₂) : ∃ B, A ⊆ B ∧ CategoryTheory.IsCardinalFiltered (↑B) κ₁ ∧ HasCardinalLT (↑B) κ₂\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean. The returned SharplyLT.exists_isCardinalFiltered_set has a categorical SharplyLT hypothesis, defined by accessibility of CardinalDirectedPoset; the pinned file instead exposes exists_isCardinalFiltered_set_of_exists_cofinal requiring small cofinal families. Neither is the stated cardinal-exponent hypothesis by one-line specialization. The second phrasing returns ordinary filteredness criteria only; arithmetic-to-cofinal comparison would need a proof. Loogle also advertised SharplyLT/Lemmas.lean, absent from this pinned checkout, so it is not a pinned match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isCardinalFiltered_set|exists_cofinal|of_exists_cofinal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"line\": \"26\", \"text\": \"((i) → (iii) is `exists_cofinal_of_isCardinalAccessibleCategory_cardinalDirectedPoset`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"line\": \"27\", \"text\": \"(iii) → (iv) is `exists_isCardinalFiltered_set_of_exists_cofinal`, (ii) → (i) is obvious;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"line\": \"62\", \"text\": \"public lemma exists_cofinal_of_isCardinalAccessibleCategory_cardinalDirectedPoset\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"line\": \"106\", \"text\": \"lemma `exists_isCardinalFiltered_set_of_exists_cofinal` below,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"line\": \"119\", \"text\": \"  -- In the proof of `exists_isCardinalFiltered_set_of_exists_cofinal` below,\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean. The returned SharplyLT.exists_isCardinalFiltered_set has a categorical SharplyLT hypothesis, defined by accessibility of CardinalDirectedPoset; the pinned file instead exposes exists_isCardinalFiltered_set_of_exists_cofinal requiring small cofinal families. Neither is the stated cardinal-exponent hypothesis by one-line specialization. The second phrasing returns ordinary filteredness criteria only; arithmetic-to-cofinal comparison would need a proof. Loogle also advertised SharplyLT/Lemmas.lean, absent from this pinned checkout, so it is not a pinned match."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma|theorem|power|pow|SharplyLT",
+   "results": "[grep] OK 0 hit(s); searched CategoryTheory/Presentable/SharplyLT/Lemmas.lean, which is absent in this pinned source.",
+   "date": "2026-10-17",
+   "verdict": "no pinned match: the online Loogle result from that path is unavailable in the pinned checkout."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-presentable-cardinal-enlargement",
+  "date": "2026-10-17",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

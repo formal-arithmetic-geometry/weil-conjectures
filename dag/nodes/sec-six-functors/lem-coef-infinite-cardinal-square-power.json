@@ -1,0 +1,73 @@
+{
+ "id": "lem-coef-infinite-cardinal-square-power",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, adjunction infrastructure: power-successor cardinal bound in the presentability/localization argument.",
+   "via": [
+    "lem-coef-presentable-cardinal-enlargement",
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-small-saturated-coslice-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Infinite-cardinal square and power identities",
+ "statement": "Use the smaller universe of [def-coef-presentable-infinity-category]. Fix a universe $\\mathcal U$. Let $\\theta\\in\\mathcal U$ be an infinite cardinal; multiplication and exponentiation below are cardinal operations. Then $\\theta\\cdot\\theta=\\theta$, $\\theta<2^\\theta$, and $(2^\\theta)^\\theta=2^\\theta$.",
+ "source": {
+  "document": "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+  "place": "Cardinal.mul_eq_self, line 45; Cardinal.cantor in Mathlib/SetTheory/Cardinal/Order.lean, line 337; Cardinal.power_mul there, line 243, specialized to a=2 and b=c=theta and rewritten by mul_eq_self. These are the arithmetic identities used in HTT Definition A.2.6.3, printed p. 819."
+ },
+ "stmt_deps": [
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An infinite cardinal multiplied by itself equals itself and Cantor theorem cardinal power",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Cardinal.aleph0_mul_aleph0\", \"module\": \"Mathlib.SetTheory.Cardinal.Basic\", \"type\": \": ℵ₀ * ℵ₀ = ℵ₀\", \"doc\": \"ℵ₀ × ℵ₀ = ℵ₀\"}\n  {\"name\": \"Cardinal.mk_mul_aleph0_eq\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{α : Type*} [Infinite α] : #α * ℵ₀ = #α\", \"doc\": \"For any infinite set $ \\\\alpha $, the product of its cardinality $ |\\\\alpha| $ and $ \\\\aleph_0 $ is equal to $ |\\\\alpha| $, i.e., $ |\\\\alpha| \\\\times \\\\aleph_0 = |\\\\alpha| $.\"}\n  {\"name\": \"Cardinal.aleph0_mul_ofNat\", \"module\": \"Mathlib.SetTheory.Cardinal.Basic\", \"type\": \"{n : ℕ} [Nat.AtLeastTwo n] : ℵ₀ * ofNat(n) = ℵ₀\", \"doc\": \"For any natural number $ n \\\\geq 2 $, the product of the cardinal number $ \\\\aleph_0 $ and the finite cardinal $ n $ satisfies $ \\\\aleph_0 \\\\times n = \\\\aleph_0 $.\"}\n  {\"name\": \"Cardinal.aleph0_mul_eq\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{a : Cardinal} (ha : ℵ₀ ≤ a) : ℵ₀ * a = a\", \"doc\": \"For any cardinal number $ a $ with $ \\\\aleph_0 \\\\leq a $, the product of $ \\\\aleph_0 $ and $ a $ equals $ a $, i.e., $ \\\\aleph_0 \\\\cdot a = a $.\"}\n  {\"name\": \"Cardinal.mul_aleph0_eq\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{a : Cardinal} (ha : ℵ₀ ≤ a) : a * ℵ₀ = a\", \"doc\": \"For any cardinal number $ a $ such that $ \\\\aleph_0 \\\\leq a $, it holds that $ a \\\\times \\\\aleph_0 = a $.\"}\n  {\"name\": \"Cardinal.mul_eq_self\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{c : Cardinal} (h : ℵ₀ ≤ c) : c * c = c\", \"doc\": \"For any cardinal number $ \\\\kappa $ with $ \\\\aleph_0 \\\\leq \\\\kappa $, it holds that $ \\\\kappa \\\\cdot \\\\kappa = \\\\kappa $.\"}\n  {\"name\": \"Cardinal.aleph0_mul_mk_eq\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{α : Type*} [Infinite α] : ℵ₀ * #α = #α\", \"doc\": \"For any infinite set $ \\\\alpha $, the product of the cardinality of the natural numbers $ \\\\aleph_0 $ and the cardinality of $ \\\\alpha $ is equal to the cardinality of $ \\\\alpha $ itself, i.e., $ \\\\aleph_0\"}\n  {\"name\": \"Cardinal.power_nat_eq\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \"{c : Cardinal.{u}} {n : ℕ} (h1 : ℵ₀ ≤ c) (h2 : 1 ≤ n) : c ^ n = c\", \"doc\": \"For any cardinal $ c $ with $ \\\\aleph_0 \\\\leq c $ and any natural number $ n $ satisfying $ 1 \\\\leq n $, it holds that $ c^n = c $.\"}",
+   "date": "2026-10-17",
+   "verdict": "match: read Cardinal.mul_eq_self (Arithmetic.lean:45), Cardinal.cantor (Order.lean:337), and Cardinal.power_mul (Order.lean:243). The third clause is the one-line rewrite of power_mul by mul_eq_self; first two clauses are exact."
+  },
+  {
+   "tool": "loogle",
+   "query": "Cardinal.power_mul",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Cardinal.power_mul\", \"module\": \"Mathlib.SetTheory.Cardinal.Order\", \"type\": \" {a b c : Cardinal.{u_1}} : a ^ (b * c) = (a ^ b) ^ c\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "match: read Cardinal.mul_eq_self (Arithmetic.lean:45), Cardinal.cantor (Order.lean:337), and Cardinal.power_mul (Order.lean:243). The third clause is the one-line rewrite of power_mul by mul_eq_self; first two clauses are exact."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mul_eq_self|theorem power_mul|theorem cantor ",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/SetTheory/Cardinal/Arithmetic.lean\", \"line\": \"45\", \"text\": \"theorem mul_eq_self {c : Cardinal} (hc : ℵ₀ ≤ c) : c * c = c := by\"}\n  {\"file\": \"Mathlib/SetTheory/Cardinal/Order.lean\", \"line\": \"243\", \"text\": \"theorem power_mul {a b c : Cardinal} : a ^ (b * c) = (a ^ b) ^ c := by\"}\n  {\"file\": \"Mathlib/SetTheory/Cardinal/Order.lean\", \"line\": \"337\", \"text\": \"theorem cantor (a : Cardinal.{u}) : a < 2 ^ a := by\"}",
+   "date": "2026-10-17",
+   "verdict": "match: read Cardinal.mul_eq_self (Arithmetic.lean:45), Cardinal.cantor (Order.lean:337), and Cardinal.power_mul (Order.lean:243). The third clause is the one-line rewrite of power_mul by mul_eq_self; first two clauses are exact."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Cardinal.mul_eq_self, Cardinal.cantor, Cardinal.power_mul",
+  "file": "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+  "how": "specializes in one line: clauses 1 and 2 are Cardinal.mul_eq_self (Arithmetic.lean:45) and Cardinal.cantor (Order.lean:337); clause 3 follows by rewriting ← Cardinal.power_mul (Order.lean:243) with Cardinal.mul_eq_self. All three declarations and lines were read in the pinned source.",
+  "line": 45
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-presentable-cardinal-enlargement",
+  "date": "2026-10-17",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

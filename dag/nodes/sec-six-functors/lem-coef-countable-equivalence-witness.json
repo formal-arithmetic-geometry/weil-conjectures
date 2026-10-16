@@ -28,43 +28,212 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leanfinder",
-   "query": "Every homotopy equivalence vertex in a simplicial category factors through a countable cofibrant simplicial category with two objects and contractible mapping spaces",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.RightHomotopyRel.FactorsThroughLocalization (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"In a category equipped with weak equivalences, if two morphisms between objects $X$ and $Y$ are right homotopic, then their images under the localization functor with respect to weak equivalences are \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] (X : C),\\n  ∃ X',\\n    ∃ (_ : HomotopicalAlgebra.IsCofibrant X'),\\n      ∃ p, HomotopicalAlgebra.Fibration p ∧ HomotopicalAlgebra.WeakEquivalence p\", \"doc\": \"For any object $X$ in a model category $\\\\mathcal{C}$, there exists a cofibrant object $X'$ and a morphism $p : X' \\\\to X$ such that $p$ is both a fibration and a weak equivalence. A cofibrant object is\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) → [inst : CategoryTheory.Category.{v_1, u_1} C] → [HomotopicalAlgebra.ModelCategory C] → Type u_1\", \"doc\": \"The quotient category of the full subcategory of cofibrant objects in a model category, where morphisms are identified up to right homotopy. This category is constructed by taking the homotopy relatio\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  Function.Surjective HomotopicalAlgebra.CofibrantObject.toHoCat.obj\", \"doc\": \"The object mapping of the canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category is surjective, meaning every object in the homotopy category is \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homRel\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] → HomRel (HomotopicalAlgebra.CofibrantObject C)\", \"doc\": \"For morphisms $ f, g $ between cofibrant objects in a model category $ \\\\mathcal{C} $, the right homotopy relation holds if there exists a path object $ P(Y) $ for the target object $ Y $ and a morphis\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] (X : C),\\n  HomotopicalAlgebra.IsCofibrant (HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj X)\", \"doc\": \"For any object $X$ in a model category $\\\\mathcal{C}$, its cofibrant replacement $X'$ is cofibrant. This follows from the definition of cofibrant replacements, where $X'$ is constructed such that the u\"}\n  {\"name\": \"HomotopicalAlgebra.cofibrantObjects\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithCofibrations C] →\\n      [CategoryTheory.Limits.HasInitial C] → CategoryTheory.ObjectProperty C\", \"doc\": \"The property of an object in a category with cofibrations, asserting that the unique morphism from the initial object to the given object is a cofibration.\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: general cofibrant resolutions and ordinary category countability do not construct a countable contractible enriched interval carrying a prescribed vertex."
+   "text": "Apply [lem-coef-two-object-localization-pullback] with $E'=D$, $x=0$, $y=1$ and the prescribed vertex $e$. Its homotopy-equivalence subcategory contains $e$ because $[e]$ is invertible in $\\pi_0D$. The lemma gives a labelled factorization $F\\to G\\to D$ of the specified functor and weak contractibility of all four mapping simplicial sets of $G$. No mapping set of $D$ is assumed Kan.",
+   "uses": [
+    "lem-coef-two-object-localization-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 4.1 and preceding construction, printed pp. 13–14"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Bergner lemma a homotopy invertible arrow is contained in a countable free contractible enriched interval",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CountableCategory.instCountableHomHomAsType\", \"module\": \"Mathlib.CategoryTheory.Countable\", \"type\": \"{i j : HomAsType α} : Countable (i ⟶ j)\", \"doc\": \"In a countable category, the set of morphisms between any two objects is countable.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.DerivabilityStructureCofibrant\", \"type\": \": (localizerMorphism C).arrow.HasLeftResolutions\", \"doc\": \"For a model category $\\\\mathcal{C}$, the arrow category of its full subcategory of cofibrant objects admits left resolutions with respect to the arrow weak equivalences. This means that for every morph\"}\n  {\"name\": \"CategoryTheory.FreeBicategory.Hom₂.left_unitor_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Free\", \"type\": \"{B : Type u} →\\n  [inst : Quiver B] →\\n    {a b : CategoryTheory.FreeBicategory B} →\\n      (f : a ⟶ b) →\\n        CategoryTheory.FreeBicategory.Hom₂ f (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.id a) f)\", \"doc\": \"For any 1-morphism $ f : a \\to b $ in the free bicategory generated by a type $ B $, there exists a 2-morphism from $ f $ to the composition of the identity morphism on $ a $ with $ f $.\"}\n  {\"name\": \"CategoryTheory.FreeBicategory.Hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Free\", \"type\": \": B → B → Type max u v\", \"doc\": \"The inductive type representing morphisms between objects of a type B in the free bicategory, constructed as a quiver with edges in $\\\\Type_{\\\\max(u, v)}$\"}\n  {\"name\": \"CategoryTheory.HasLiftingProperty.iff_of_arrow_iso_left\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Basic\", \"type\": \"{A B A' B' X Y : C} {i : A ⟶ B} {i' : A' ⟶ B'} (e : Arrow.mk i ≅ Arrow.mk i') (p : X ⟶ Y) :\\n  HasLiftingProperty i p ↔ HasLiftingProperty i' p\", \"doc\": \"If two morphisms $i$ and $i'$ are isomorphic in the arrow category of a category $\\\\mathcal{C}$, then for any morphism $p: X \\\\to Y$ in $\\\\mathcal{C}$, the lifting property of $i$ with respect to $p$ is \"}\n  {\"name\": \"CategoryTheory.FreeBicategory.mk_left_unitor_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Free\", \"type\": \": Quot.mk _ (Hom₂.left_unitor_inv f) = (λ_ f).inv\", \"doc\": \"In the free bicategory generated by a type $ B $, for any 1-morphism $ f : a \\to b $, the quotient of the left unitor inverse 2-morphism for $ f $ is equal to the inverse of the left unitor isomorphism\"}\n  {\"name\": \"CategoryTheory.Iso.eHomCongr_inv\", \"module\": \"Mathlib.CategoryTheory.Enriched.HomCongr\", \"type\": \"∀ (V : Type u') [inst : CategoryTheory.Category.{v', u'} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u}\\n  [inst_2 : CategoryTheory.Category.{v, u} C] [inst_3 : CategoryTheory.EnrichedOrdinaryCategory V C] {X Y X₁ Y₁ : C}\\n  (α : X ≅ X₁) (β : Y ≅ Y₁),\\n  (CategoryTheory.Iso.eHomCongr V α \", \"doc\": \"Given isomorphisms $\\\\alpha: X \\\\cong X_1$ and $\\\\beta: Y \\\\cong Y_1$ in a category $\\\\mathcal{C}$ enriched over a monoidal category $\\\\mathcal{V}$, there exists an isomorphism between the enriched hom-obje\"}\n  {\"name\": \"CategoryTheory.FreeBicategory.Rel.left_unitor_hom_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Free\", \"type\": \"∀ {B : Type u} [inst : Quiver B] {a b : B} (f : CategoryTheory.FreeBicategory.Hom a b),\\n  CategoryTheory.FreeBicategory.Rel\\n    ((CategoryTheory.FreeBicategory.Hom₂.left_unitor f).vcomp (CategoryTheory.FreeBicategory.Hom₂.left_unitor_inv f))\\n    (CategoryTheory.FreeBicategory.Hom₂.id ((CategoryTheor\", \"doc\": \"This constructor introduces a defining relation on 2-morphisms in the free bicategory on a quiver $B$. For any 1-morphism $f: a \\\\to b$, it posits the equivalence\\n$$ \\\\lambda_f \\\\circ \\\\lambda_f^{-1} \\\\sim\"}",
+   "text": "Here is the finite attachment operation used below. Given $A\\to G(a,b)$ and $u:S^n\\to|A|$, factor this simplicial map as a monomorphism $A\\hookrightarrow B$ followed by a trivial fibration $B\\to G(a,b)$ using [lem-coef-kan-quillen-right-proper]. Then $B$ is weakly contractible. For $n=0$ path connectedness, and for $n\\geq1$ the vanishing of the based homotopy group, give an extension of $u$ to $D^{n+1}\\to|B|$. Apply [lem-cbc-realization-compact-finite-support] to this extension and let $L\\subseteq B$ be the resulting finite simplicial subset. The disk is compact Hausdorff: it is the image of the compact sphere $S^{n+1}$ under coordinate projection, and is a subspace of Euclidean space. Set $A'=A\\cup L\\subseteq B$. By [lem-cbc-realization-cw-subcomplex], realization inclusions of simplicial subsets are embeddings; hence the disk map into $|L|\\subseteq|A'|$ restricts to the given $u$ in $|A|$, rather than merely agreeing after mapping to $|B|$. This gives $A\\hookrightarrow A'\\to G(a,b)$ killing $u$ and adding only finitely many nondegenerate simplices; attach those new nondegenerate simplices in increasing dimension, each along its already present boundary. This is a three-line consequence of model factorization, nullhomotopy in a weakly contractible space, and compact finite support, rather than a new node.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-cbc-realization-compact-finite-support",
+    "lem-cbc-realization-cw-subcomplex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Lemma 4.2 and its proof, printed pp. 14–15; finite-support input made explicit"
+   }
+  },
+  {
+   "text": "Use the algebraic theory with four sorts $(a,b)\\in\\{0,1\\}^2$, identity constants at $(a,a)$, and composition operations $(b,c)\\times(a,b)\\to(a,c)$, with the unit and associativity equations. Its strict simplicial algebras are exactly the labelled simplicial categories. By [lem-coef-sorted-simplicial-algebra-model] the free functor $F_{(a,b)}$ and all cell pushouts exist. A boundary attachment in $C(a,b)\\hookrightarrow A'$ from step 2 is realized in a simplicial category $C$ by the pushout of $F_{(a,b)}(\\partial\\Delta^d)\\to F_{(a,b)}(\\Delta^d)$. The map $A'\\to G(a,b)$ and the existing $C\\to G$ agree on each attaching boundary; the free adjunction gives an extended functor to $G$. In each degree, the pushout freely adjoins the new arrows. Its arrows have reduced-word forms alternating old arrows and new generators, with adjacent old arrows composed and identities removed. Hence old arrows remain distinct, the map from $C$ is a mappingwise inclusion, and the map $A'\\to C'(a,b)$ retains the selected nullhomotopy. A countable collection of old arrows and finitely many simplicial generators has only countably many finite composable words, in each degree and in total. Thus each operation preserves countability; it need not add only finitely many composites. Begin with $F\\to G$ and freely adjoin a reverse vertex $1\\to0$ mapped to any vertex of the nonempty $G(1,0)$. This produces a countable category $H_0$ with all four mapping sets nonempty, still mapping to $G$.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4, construction after Lemma 4.2, printed p. 15; free attachments expressed by the fixed-sort free adjunction"
+   }
+  },
+  {
+   "text": "Construct successive rounds $H_r$ for $r\\in\\mathbb N$. For a countable $H_r$, [lem-coef-countable-sphere-homotopy-classes] says that the union, over its four mapping sets and all $n\\geq0$, of sphere homotopy classes is countable. Choose a representative for each class and enumerate them. Starting at $H_r$, apply steps 2–3 successively to the image of each listed representative in the current category; take the union after this countable list to obtain $H_{r+1}$. Every class from $H_r$ is now zero in $H_{r+1}$. New classes created during the attachments are allowed and are treated in the following round. All intermediate categories and all $H_r$ are countable by the finite-word count of step 3 and countable unions. Put $H=\\bigcup_r H_r$, with face maps, degeneracies and composition defined in a common stage containing their finitely many arguments. These definitions agree on overlaps, satisfy the category laws, and give compatible functors $F\\to H\\to G$. For any sphere map into $|H(a,b)|$, [lem-cbc-realization-compact-finite-support] factors it through a finite simplicial subset of $H(a,b)$. Its finitely many nondegenerate simplices all occur in a single $H_r(a,b)$, so this sphere map occurs in that round and is nullhomotopic in $H_{r+1}(a,b)$. Thus every sphere map into each final mapping set is nullhomotopic, and every final mapping set has countably many simplices.",
+   "uses": [
+    "lem-coef-countable-sphere-homotopy-classes",
+    "lem-cbc-realization-compact-finite-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Section 4, countable construction and Lemma 4.3, printed p. 15; repeated countable rounds supply the exhaustion argument"
+   }
+  },
+  {
+   "text": "All four mapping sets of $H$ are nonempty by the reverse-arrow attachment. Taking $n=0$ in step 4 joins any pair of their realization points by a path. For a based sphere representative $v:S^n\\to|H(a,b)|$, $n\\geq1$, step 4 supplies a possibly unbased nullhomotopy. The basepoint track $\\gamma$ in that nullhomotopy satisfies $v_*=\\beta_\\gamma\\circ(\\operatorname{const})_*=0$ by [lem-coef-homotopy-groups-basepoint-change]. Applied to the identity sphere class this says that the represented based class is zero; the cube model of a based class gives this sphere representative by collapsing the cube boundary. Thus every positive based homotopy group is zero. By [lem-coef-kan-quillen-right-proper], each mapping set maps to the point by a weak homotopy equivalence, so is weakly contractible. The composite $F\\to H\\to G\\to D$ continues to take its original arrow exactly to $e$.",
+   "uses": [
+    "lem-coef-homotopy-groups-basepoint-change",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Definition of weak contractibility and Lemma 2.4, printed pp. 3 and 15–16; moving-basepoint check supplied explicitly"
+   }
+  },
+  {
+   "text": "The discrete category $O$ first acquires the walking arrow and then the reverse arrow by free $0$-simplex attachments. Every subsequent attachment is a pushout of a free boundary inclusion as in step 3; at each limit we took the union. Thus $O\\to H$ is a relative generating-cofibration cell map for the sorted theory of step 3. The cell-map and weak-factorization-system clauses of [lem-coef-sorted-simplicial-algebra-model] make it a cofibration with the required left lifting property against the mappingwise weak-equivalence Kan fibrations. Explicitly, in a given lifting square, extend a partial functor across a new generator by lifting its boundary in that mapping set; [lem-coef-kan-quillen-right-proper] supplies this boundary filler, including dimension zero. Send words to composites of the chosen images, and take the union at limits. This produces the required functor filler. This uses the existing sorted-model input, not an uncited claim that free maps are cofibrations and not the cyclic fixed-object free-calculus node.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Definition 2.1 and final paragraph before the proof of Lemma 2.4, printed pp. 5 and 15; explicit cellwise lifting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-realization-compact-finite-support",
+  "lem-cbc-realization-cw-subcomplex",
+  "lem-coef-countable-sphere-homotopy-classes",
+  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-two-object-localization-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://arxiv.org/pdf/math/0406507",
+  "place": "Lemma 2.4 and its proof in Section 4, Lemmas 4.1–4.3, printed pp. 5 and 13–16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bergner|simplicial.*category.*countable|weakly contractible.*mapping",
+   "results": "grep ran: 0 hit(s); top=[]; note=",
    "date": "2026-10-17",
-   "verdict": "no match: general cofibrant resolutions and ordinary category countability do not construct a countable contractible enriched interval carrying a prescribed vertex."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"SimplicialCategory\", \"Countable\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "query": "SimplicialCategory Countable",
+   "results": "loogle ran: 0 hit(s); top=[]; note=loogle: Unknown identifier `SimplicialCategory`",
    "date": "2026-10-17",
-   "verdict": "no match: general cofibrant resolutions and ordinary category countability do not construct a countable contractible enriched interval carrying a prescribed vertex."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bergner Lemma 2.4 countable simplicial category witness for a prescribed homotopy equivalence",
+   "results": "leansearch ran: 8 hit(s); top=['CategoryTheory.CountableCategory.objAsTypeEquiv', 'CategoryTheory.SimplicialObject.instSimplicialCategory', 'CategoryTheory.nerveFunctorCompHoFunctorIso', 'SSet.hoFunctor.terminalIso', 'SSet.hoFunctor.unitHomEquiv', 'SSet.modelCategoryQuillen.instCategoryWithCofibrations', 'SimplexCategory.Hom.ext_iff', 'SimplexCategory.skeletal']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed homotopy equivalence in a two-object simplicial category factors through a countable two-object simplicial category with weakly contractible mapping spaces and a cofibrant interval inclusion",
+   "results": "leanfinder ran: 8 hit(s); top=['instQFactorsThroughHomotopyDown', 'ComplexShape.QFactorsThroughHomotopy_of_exists_prev', 'AlgebraicTopology.DoldKan.homotopyPInftyToId', 'HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization', 'HomotopicalAlgebra.PathObject.RightHomotopy.exists_good_pathObject', 'HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization', 'AlgebraicTopology.DoldKan.homotopyQToZero', 'HomotopicalAlgebra.RightHomotopyRel.exists_good_pathObject']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Bergner|contractible.*[Ii]nterval|[Ii]nterval.*contractible|countable.*simplicial",
-   "results": "[grep] OK 0 hit(s)",
+   "query": "weakly contractible|sphere|attach.*simplex",
+   "results": "grep ran: 2 hit(s); top=['Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean']; note=",
    "date": "2026-10-17",
-   "verdict": "no match: general cofibrant resolutions and ordinary category countability do not construct a countable contractible enriched interval carrying a prescribed vertex."
+   "verdict": "no match: hits are unrelated to the requested enriched statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeaklyContractible Sphere",
+   "results": "loogle ran: 0 hit(s); top=[]; note=loogle: Unknown identifier `WeaklyContractible`",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite simplex attachment kills a sphere map into a weakly contractible simplicial set",
+   "results": "leansearch ran: 8 hit(s); top=['Topology.RelCWComplex.mapsTo', 'SSet.instInhabited', 'SSet.PtSimplex', 'SSet.instFiniteObjOppositeSimplexCategoryOfFinite', 'SSet.Subcomplex.range_eq_ofSimplex', 'SSet.Augmented.stdSimplex', 'SSet.stdSimplex.instFiniteToSSetOfSimplex', 'SSet.toTop']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a simplicial set into a weakly contractible simplicial set factors after finitely many simplex attachments so a finite sphere becomes nullhomotopic",
+   "results": "leanfinder ran: 8 hit(s); top=['SSet.HasDimensionLT', 'SSet.hasDimensionLT_of_finite', 'SSet.modelCategoryQuillen.I', 'SSet.HasDimensionLE', 'SSet.modelCategoryQuillen.J', 'SSet.degenerate', 'SSet.KanComplex', 'SSet.degenerate_app_apply']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*homotopy|homotopy.*countable|simplices.*countably",
+   "results": "grep ran: 0 hit(s); top=[]; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Countable HomotopyGroup",
+   "results": "loogle ran: 0 hit(s); top=[]; note=loogle: Application type mismatch: The argument\n  HomotopyGroup\nhas type\n  Type ?u.3 → (X : Type ?u.2) → [TopologicalSpace X] → X → Type (max ?u.3 ?u.2)\nbut is expected to have type\n  Type (max ?u.2 ?u.3)\nin ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "countably many homotopy classes of maps from spheres into a countable simplicial set",
+   "results": "leansearch ran: 8 hit(s); top=['SSet.RelativeMorphism.HomotopyClass', 'CategoryTheory.CountableCategory.instCountableHomHomAsType', 'CategoryTheory.CountableCategory.countableHom', 'CategoryTheory.CountableCategory.instCountableHomObjAsType', 'CategoryTheory.hoFunctor.preservesFiniteProducts', 'CategoryTheory.CountableCategory.instCountableHomAsType', \"SSet.hoFunctor.preservesTerminal'\", 'SSet.RelativeMorphism.homotopyClass']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable simplicial set has countably many homotopy classes of maps from every finite sphere",
+   "results": "leanfinder ran: 8 hit(s); top=['SSet.Finite', 'SSet.instFiniteInitial', 'SSet.Finite.finite', 'SSet.HasDimensionLT', 'SSet.instFiniteObjOppositeSimplexCategoryOfFinite', 'SSet.hasDimensionLT_of_finite', 'SSet.instFiniteElemObjOppositeSimplexCategoryOpMkNonDegenerateOfFinite', 'SSet.HasDimensionLE']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*completion|homotopy.*equivalence|weak.*contractible",
+   "results": "grep ran: 25 hit(s); top=['Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean', 'Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are unrelated to the requested enriched statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "GroupoidCompletion WeakEquivalence",
+   "results": "loogle ran: 0 hit(s); top=[]; note=loogle: Unknown identifier `GroupoidCompletion`",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of a cofibrant simplicial category and a groupoid completion is a weak equivalence when mapping arrows are homotopy equivalences",
+   "results": "leansearch ran: 8 hit(s); top=['HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff', 'HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff', 'HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS', 'HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj', 'HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceICofibrationsTrivialFibrations', 'HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences', 'HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff', 'HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two-object simplicial category whose arrows are homotopy equivalences has a cofibrant groupoid-completion pullback with weakly contractible mapping spaces",
+   "results": "leanfinder ran: 8 hit(s); top=['HomotopicalAlgebra.CofibrantObject.HoCat', 'HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood', 'HomotopicalAlgebra.PathObject.IsVeryGood', 'HomotopicalAlgebra.PathObject.IsVeryGood.toIsGood', 'HomotopicalAlgebra.PathObject.IsGood', 'HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat', 'HomotopicalAlgebra.PathObject.instIsFibrantP', 'HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-lifting",
@@ -72,5 +241,34 @@
   "group": "Q07"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-countable-equivalence-witness",
+  "worker": "stage1",
+  "summary": "Second reading repaired the split into six steps: localization pullback; finite attachment derived directly from existing factorization and compact-support nodes; free sorted cells; repeated countable rounds; weak contractibility with basepoint changes; and the cell-map lifting property. Two supporting nodes remain; the redundant finite-attachment node was removed. Statement unchanged.",
+  "blueprint": "The steps realize the ancestor proof paragraph's technical input that countable simplicial intervals detect equivalence lifting, using the prescribed factorization of the equivalence vertex.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-compact-finite-support",
+    "why": "Generic compact-domain finite-support theorem for realizations, needed for the nullhomotopy disk and for passage from the countable union back to a finite stage; no statement of this unit gives it. It does not replace the unit route."
+   },
+   {
+    "node": "lem-cbc-realization-cw-subcomplex",
+    "why": "Generic realization embedding theorem for simplicial subsets, used to identify the boundary of the chosen finite nullhomotopy with the given sphere map in A; no theorem of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-compact-finite-support",
+  "lem-cbc-realization-cw-subcomplex"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-52b56df0d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-52b56df0d (reviewer sub-agent of L); spot-checked: I read Bergner arXiv:math/0406507v2 as text: A2 on p.4, Def 2.1 and Lemma 2.4 on p.5, all of Section 4 on pp.13-16. The item statement is unchanged and matches Lemma 2.4 with A2 unpacked: two distinct labels, e invertible in pi_0, no Kan condition, a strict factorization F->H->D, four weakly contractible countable mapping sets, and O->H having the LLP against mappingwise trivial fibrations. Nothing is weakened, and the parent interval-lifting uses exactly these outputs. Step checks: S1 takes Lemma 4.1 from the localization-pullback node, and e lies in the equivalence subcategory. S2 folds in Lemma 4.2 as an elementary step: mono/trivial-fibration factorization, a disk extension (D^{n+1} as the projection of S^{n+1}), finite support, and subcomplex embeddings that put the disk boundary on u inside |A'|. S3 attaches free cells; colimits in sCat_O are degreewise and give C_k * free(interior simplices), reduced words make the old arrows inject, and countably many words keep everything countable; H_0 gets a reverse vertex in the nonempty G(1,0). S4 kills classes in countable rounds, and finite support sends any final sphere back to some round H_r. S5 uses the basepoint-change node with f0=v, f1=const to get [v]=0, so each mapping set is weakly contractible in the kan-quillen sense. S6 shows O->H is a relative cell map and gets the LLP from the sorted model, avoiding the cyclic free-calculus node. proof_deps is the union of the step uses, and a DFS over all deps finds no cycle. New node two-object-localization-pullback is true: Ẽ->Ẽ^{-1}Ẽ is a weak equivalence by DK 9.5 (groupoid completion is left Quillen, so this holds for any cofibrant replacement), right properness then gives G ~ Z ~ the indiscrete 2-object groupoid, and F̃≅F holds for the DK resolution; it states no countability or cofibration, so it does not restate the item. New node countable-sphere-homotopy-classes (Lemma 4.3, p.15) is true via finite subcomplexes and simplicial approximation; I tested A empty, A a point and n=0. Both new nodes are statement-only and self-contained, with no SGA cited. A rg search of the DAG (0406507, Bergner, groupoid completion, countable homotopy classes) and reading the nearest nodes found no duplicates. The dropped sphere-attachment node is absent and nothing cites it. I accept both declared tool uses, lem-cbc-realization-compact-finite-support and lem-cbc-realization-cw-subcomplex: they are generic topology facts from sk-prop-sf-cbc and no node of the unit states them. This is not a target node, so the base-change and coefficient checks do not apply. No fixes were written."
+ }
 }
