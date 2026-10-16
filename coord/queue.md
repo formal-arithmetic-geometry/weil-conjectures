@@ -1,6 +1,6 @@
 # Work queue
 
-98 items; claim with `tools/claim.py next <group> [--stage N]`.
+100 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (98)
+## Stage 3: modules to prove (100)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -43,13 +43,15 @@
 | `Sheaf.Paper.StrictHenselizationPointEvaluationComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.StrictHenselizationPointEvaluationImage` | 6 | 1 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
+| `Sheaf.Paper.CondensedQbarFunctionCoefficients` | 7 | 1 | proof |
 | `Sheaf.Paper.ProEtalePointComponentsMaps` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk` | 8 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore` | 8 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteFamilyHomDescent` | 9 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteEncodedPresentation` | 9 | 3 | proof |
 | `Sheaf.Paper.GeometricFieldProfiniteDenseSubsite` | 9 | 6 | proof |
 | `Sheaf.Paper.ContinuousModuleEncodingRestriction` | 10 | 1 | proof |
-| `Sheaf.Paper.ContinuousModuleEncodingScalarExtension` | 10 | 1 | proof |
+| `Sheaf.Paper.ContinuousModuleEncodingScalarExtension` | 10 | 3 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic` | 11 | 1 | proof |
