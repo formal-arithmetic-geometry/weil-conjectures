@@ -3,77 +3,332 @@
  "blueprint": {
   "is": "fix-lem-exchanges",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exchange functoriality: naturality, identities, and pasting",
- "statement": "In the six-functor datum of\n[def-fix-six-functor-datum], let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\n\nbe a cartesian square of\nfinite-type $k$-schemes\nwhose four arrows are\nseparated and of finite\ntype, and let $K\\in D^b_c(X,\\Lambda)$, with $K'=Lg'^*K$. The\nexchange transformations\n\n$$\n\\operatorname{Ex}_*(K):Lg^*Rf_*K\\longrightarrow Rf'_*K',\n\\qquad\n\\operatorname{Ex}_!(K):Lg^*Rf_!K\\longrightarrow Rf'_!K',\n$$\n\nof [def-exchange-projection] satisfy:\n\n1. both are natural in $K$, in the morphisms of the square, and\nin the coefficient ring; $\\operatorname{Ex}_!$ agrees with the\ncompact-support exchange map of [def-cbc-exchange-map] at every\nfinite level and with its transports of\n[thm-cbc-finite-extension] and [thm-cbc-qbar] at the\nrational and algebraically closed levels;\n1. both are the identity for an identity square, and for\nvertically or horizontally pasted cartesian squares the exchange\ntransformation of the outer rectangle is the composite of the\nexchange transformations of the two inner squares after inserting\nthe canonical associativity isomorphisms; $\\operatorname{Ex}_*$\nobeys the identity and pasting equations of\n[lem-weil-pbc-exchange-identity-pasting] and of\n[sbc-lem-identity-and-base-change-composition],\n$\\operatorname{Ex}_!$ those of [thm-cbc-finite-torsion];\n1. for smooth $g$,\n$\\operatorname{Ex}_*$ is the smooth-base-change exchange morphism of\n[sbc-thm-bounded-below-derived-smooth-base-change], and it is an\nisomorphism;\n1. $\\operatorname{Ex}_!$ is independent of the chosen\ncompactification and compatible with the refinement comparison\nisomorphisms of [prop-compactification-coherence-detailed] and with the\ncomposition law of [thm-sf-comp-composition].",
+ "statement": "Use the finite-field and coefficient datum of [def-fix-six-functor-datum], with $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $\\ell\\ne\\operatorname{char}k$. Let\n$$\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\\end{array}$$\nbe a Cartesian square [def-weil-pbc-cartesian-square] of finite-type $k$-schemes whose arrows are separated and of finite type. For $K\\in D^b_c(X,\\Lambda)$ put $K'=Lg'^*K$ and form\n$$\\operatorname{Ex}_*(K):Lg^*Rf_*K\\longrightarrow Rf'_*K',\\qquad \\operatorname{Ex}_!(K):Lg^*Rf_!K\\longrightarrow Rf'_!K'.$$\nThe coefficient categories and these symbols have the following typing. At $\\Lambda=A_{E,n}$ use bounded-below constant-coefficient module categories on the small étale sites and their pro-étale transports on complexes supplied with étale-origin witnesses [def-weil-pbc-etale-origin-witness]. At $\\Lambda=\\mathcal O_E$ use the derived-complete pro-étale categories, with $Lg^*$ denoting completed pullback [def-weil-pbc-completed-pullback], and compatible étale-origin witnesses on all finite reductions when compact support or smooth base change is invoked. At $\\Lambda=E$ use raw scalar localization of the completed integral categories and functors, with the localized integral exchange as in [sbc-thm-e-coefficient-smooth-base-change]; at $\\overline{\\mathbf Q}_\\ell$ use common finite stages. Retain the specified lattice presentations, constructibility and amplitude hypotheses of [thm-cbc-finite-extension], [thm-cbc-qbar] and of the smooth-base-change statements below. Assertions in $D^b_c$ are restrictions of the ambient assertions whenever the displayed operations preserve that subcategory; no preservation is implicit in this notation.\n\nAt finite étale level $\\operatorname{Ex}_*$ is the constant-module unit--square--counit mate of [lem-weil-pbc-exchange-forget-coefficients]; at witnessed finite pro-étale level it is the mate of [def-exchange-projection], equivalently the constant-ring mate of [def-weil-pbc-ambient-ringed-exchange], identified with the étale map in the proof; $\\operatorname{Ex}_!$ is the compactification formula of [def-cbc-exchange-map], transported by [thm-cbc-finite-level-proetale] on the witnessed pro-étale domain. At the integral stage use the completed adjunction-mate exchange and the compact-support map of [def-cbc-completed-exchange-map]. Integral open factors are reconstructed from their strict finite extension-by-zero reduction diagrams as in [def-weil-integral-rational-qbar-compact-support]; in constant-coefficient coordinates they are $J_j^c=CJ_j$, with the normalization proved below. At field coefficients use their rational and common-stage transports. Then:\n\n1. Both transformations are natural in $K$. They respect morphisms of square data through the canonical functor comparison transformations: taking a mate commutes with pre- and post-whiskering of the square comparison. They commute with coefficient comparisons on the domains of [lem-fix-operation-reduction] and [prop-weil-pbc-scalar-extension]; finite quotient comparisons for compact support use the stated finite-Tor domains. The compact-support map agrees with [def-cbc-exchange-map], [def-cbc-completed-exchange-map], [thm-cbc-finite-extension] and [thm-cbc-qbar] at their respective stages.\n2. For an identity base change the transformations are identities under the canonical identity-functor comparisons. For horizontally pasted squares $(f,f',g,g')$, $(f',f'',h,h')$, writing $P$ for either $R(-)_*$ or $R(-)_!$, the equation is\n$$\\operatorname{Ex}_{gh}=(\\operatorname{Ex}_h\\,Lg'^*)\\circ(Lh^*\\operatorname{Ex}_g).$$\nFor vertically pasted squares $(f,f',g,g')$, $(e,e',g',g'')$ it is\n$$\\operatorname{Ex}_{fe}=(P(f')\\operatorname{Ex}_e)\\circ(\\operatorname{Ex}_f P(e)).$$\nThese equations insert the canonical pullback and direct-image composition isomorphisms, and for compact support the finite-level composition law of [thm-sf-comp-composition] and its completed and transported forms constructed in the proof. At finite étale level they are exactly the formulas of [lem-weil-pbc-exchange-identity-pasting], [sbc-lem-identity-and-base-change-composition] for $\\operatorname{Ex}_*$ and [thm-cbc-finite-torsion] for $\\operatorname{Ex}_!$; the same equations hold on the completed and transported domains above.\n3. If $g$ is smooth, then $\\operatorname{Ex}_*$ is the smooth-base-change map with the labels exchanged, as defined in [sbc-def-base-change-map], and is an isomorphism. At finite étale level this is [sbc-thm-bounded-below-derived-smooth-base-change]; on witnessed finite pro-étale complexes use [sbc-thm-finite-proetale-smooth-base-change]. At integral, rational and algebraically closed rational levels retain respectively the coefficient and lattice hypotheses of [sbc-thm-adic-smooth-base-change], [sbc-thm-e-coefficient-smooth-base-change], and [sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch], including finite dimension of the input and output corners $X$ and $Y'$, the chosen lattice presentation at $E$, and their uniform-interval hypotheses when asserting the result in $D^b_c$. Finite dimension here follows from finite type over $k$, as verified in the proof. The displayed exchange functors have their codomain on $Y'$.\n4. The compact-support transformation is independent of the compactification, commutes with the refinement comparisons of [prop-compactification-coherence-detailed] on its witnessed domain, and is compatible with the finite-level composition law of [thm-sf-comp-composition] and its completed and transported forms on the corresponding coefficient domains.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
   "place": "node fix-lem-exchanges, order 1647"
  },
  "stmt_deps": [
-  "def-fix-six-functor-datum",
-  "def-exchange-projection",
-  "def-cbc-exchange-map",
-  "thm-cbc-finite-extension",
-  "thm-cbc-qbar",
-  "lem-weil-pbc-exchange-identity-pasting",
-  "sbc-lem-identity-and-base-change-composition",
-  "thm-cbc-finite-torsion",
+  "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+  "sbc-thm-e-coefficient-smooth-base-change",
   "sbc-thm-bounded-below-derived-smooth-base-change",
-  "prop-compactification-coherence-detailed",
+  "sbc-lem-identity-and-base-change-composition",
+  "sbc-thm-adic-smooth-base-change",
+  "sbc-thm-finite-proetale-smooth-base-change",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "prop-weil-pbc-scalar-extension",
   "thm-sf-comp-composition",
-  "def-weil-scheme-morphism-properties"
+  "prop-compactification-coherence-detailed",
+  "def-fix-six-functor-datum",
+  "thm-cbc-finite-level-proetale",
+  "lem-fix-operation-reduction",
+  "thm-cbc-finite-extension",
+  "def-exchange-projection",
+  "def-cbc-completed-exchange-map",
+  "thm-cbc-qbar",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-torsion",
+  "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "Step 1: construction. By [def-exchange-projection],\n$\\operatorname{Ex}_*$ is the adjoint of the composite of the\ncanonical identification $Lf'^*Lg^*\\cong Lg'^*Lf^*$ of the\ncartesian square ([def-weil-pbc-cartesian-square]) with the\ncounit of $Lf^*\\dashv Rf_*$ of [def-weil-derived-direct-image],\nand $\\operatorname{Ex}_!$ is represented by $\\operatorname{Ex}_*$\nfor a proper compactification $\\bar f$, followed by the\nextension-by-zero identification\n$L\\bar g'^*j_!\\cong j'_!Lg'^*$ of [def-exchange-projection]; at\na finite coefficient level the latter is the map of\n[def-cbc-exchange-map], whose definition is the same composite.\nStep 2: naturality. Each ingredient of these composites is a natural\ntransformation: the identification of the cartesian square is natural\nin the square and the coefficient ring\n([def-weil-pbc-cartesian-square]), the counit is natural by\n[def-weil-derived-pullback-tensor-hom] and\n[def-weil-derived-direct-image], and the extension-by-zero\nidentification is natural by [def-cbc-exchange-map]; the\ntransports of [thm-cbc-finite-extension] and\n[thm-cbc-qbar] are the coefficient extensions of the same maps.\nStep 3: identity and pasting. The identity and pasting equations\nfor $\\operatorname{Ex}_*$ are the mate versions of the identity\nand pasting laws of the identification of the cartesian square,\nrecorded in [lem-weil-pbc-exchange-identity-pasting] (finite\netale coefficients) and in\n[sbc-lem-identity-and-base-change-composition] (derived level,\nfor successive base changes); the identity and horizontal and\nvertical pasting for $\\operatorname{Ex}_!$ are the corresponding\nproperties of its two ingredients, stated in\n[thm-cbc-finite-torsion], together with\n[lem-weil-pbc-exchange-identity-pasting] for the proper factor.\nStep 4: smooth base\nchange. For smooth $g$, $\\operatorname{Ex}_*$ is the derived\nexchange morphism of [sbc-def-base-change-map] read on the same\nsquare, and it is an isomorphism by\n[sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch] at\nthe algebraically closed rational level and by the corresponding\nfinite-level statement of [sbc-thm-bounded-below-derived-smooth-base-change]\nat the other levels. Step 5: independence. The comparison\nisomorphisms of [prop-compactification-coherence-detailed] identify the\ntwo compactification candidates of $\\operatorname{Ex}_!$ and are\ncompatible with the composition law of\n[thm-sf-comp-composition] (the proper-composition\nisomorphism and the extension-by-zero identification), so\n$\\operatorname{Ex}_!$ does not depend on the compactification.",
+   "text": "Fix a finite coefficient ring. At the finite etale level use the specified constant-module mate of [lem-weil-pbc-exchange-forget-coefficients] and the compactification formula of [def-cbc-exchange-map]. For a compactification $f=pj$ they give\n$$\\operatorname{Ex}_*=R f'_*(Lg'^*\\varepsilon_f)\\circ R f'_*(\\theta Rf_*)\\circ\\eta_{f'},\\qquad \\operatorname{Ex}_!^c=Rp'_*\\beta\\circ\\operatorname{Ex}_{*,p}(j_!-).$$\nThe open-factor map $\\beta$ is natural, has identity normalization and satisfies pasting by [cor-cbc-derived-extension-zero-base-change]. At finite pro-etale level [def-exchange-projection] explicitly defines these same unit--square--counit and proper-plus-open composites in the ambient constant-module categories. Its compactification superscript records a choice and its definition assumes no compactification coherence; Step 2 compares the etale and pro-etale formulas on the witnessed domain, and Steps 6 and 7 prove the needed coherence. Naturality of each unit, counit, square comparison and $\\beta$ implies naturality of the displayed composites in $K$.",
    "uses": [
     "def-exchange-projection",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-derived-direct-image",
     "def-cbc-exchange-map",
-    "def-weil-derived-pullback-tensor-hom",
-    "thm-cbc-finite-extension",
-    "thm-cbc-qbar",
-    "lem-weil-pbc-exchange-identity-pasting",
-    "sbc-lem-identity-and-base-change-composition",
-    "thm-cbc-finite-torsion",
-    "sbc-def-base-change-map",
-    "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
-    "sbc-thm-bounded-below-derived-smooth-base-change",
-    "prop-compactification-coherence-detailed",
-    "thm-sf-comp-composition"
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Step 1 and first part of Step 2; Stacks 07A7, remark-base-change, and 03S6, lemma-shriek-base-change"
+   }
+  },
+  {
+   "text": "For finite pro-étale coefficients use the specified mate of [def-weil-pbc-ambient-ringed-exchange]. The normalization in [lem-weil-pbc-transport-identifies-exchange] says precisely $T_L\\nu^*(E_L)=\\operatorname{Ex}^{R}_{\\nu^*L}S_L$; therefore the étale and pro-étale ordinary exchanges agree under the canonical comparisons, rather than under an arbitrary choice of isomorphism. For compact support, [thm-cbc-finite-level-proetale] specifies the transported map of [def-cbc-exchange-map]. All these comparisons are natural; a change of witness by an isomorphism conjugates both endpoints and the map, so gives the same transformation on the witnessed domain. The qcqs hypotheses of the direct-image comparison hold: by [def-weil-pbc-scheme-conventions] finite type includes quasi-compactness, while separated means the diagonal is a closed immersion, hence affine and quasi-compact; thus $f$ and $f'$ are quasi-separated. The field $k$ is Noetherian (its only ideals are $(0)$ and $(1)$), and its spectrum is one point; [lem-weil-pbc-finite-type-over-noetherian] applied to the four structure morphisms therefore makes every corner Noetherian. [lem-kun-dimension-finite-type] applied over $k$ makes every corner finite-dimensional. These verifications do not use smoothness and supply the geometric category domains also needed in Step 8. A Noetherian scheme is quasi-compact; intersections of affine opens are open subsets of a Noetherian affine scheme and hence quasi-compact, so it is quasi-separated. Thus [thm-nagata-compactification] supplies compactifications of each separated finite-type edge and of the composites used below. Their ambient schemes are proper over finite-type k-schemes, hence finite type over k and again Noetherian and finite-dimensional by the same two cited results.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "thm-cbc-finite-level-proetale",
+    "def-cbc-exchange-map",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Steps 1 and 2, finite-site transport; explicit distinction of the étale-origin domain"
+   }
+  },
+  {
+   "text": "At the integral stage apply [lem-sp-completed-pullback-adjunction] on the small pro-etale topoi with constant $A=\\mathcal O_E$ coefficients. Transport by the equivalences of [lem-weil-pbc-constant-completion-equivalence]. Its last paragraph identifies quotient towers, their derived limits and completion units; [def-weil-pbc-completed-pullback] explicitly identifies the defined integral pullback with ordinary constant-coefficient pullback followed by the reflector. For direct image, restriction from the completed coefficient sheaf to the constant ring is exact, commutes with underived direct image on underlying sheaves, and has exact left adjoint given by extension along the flat ring map in [lem-weil-pbc-constant-completion-equivalence]. The tensor/restriction adjunction is the balanced bijection $h\\mapsto(m\\mapsto h(1\\otimes m))$, with inverse $t\\mapsto(b\\otimes m\\mapsto bt(m))$. Thus [lem-weil-pbc-right-adjoint-preserves-kinjective] makes restriction preserve K-injectives, and one K-injective resolution computes the canonical equality of the two derived direct images after restriction. On the diagram sites restriction is exact levelwise, and its extension-of-scalars left adjoint is exact levelwise by the same flat coefficient map. The displayed balanced bijections commute with every tower transition, so give the adjunction on strict diagrams. Applying [lem-weil-pbc-right-adjoint-preserves-kinjective] to that adjunction makes one K-injective diagram resolution compute both restricted derived direct images. Now [lem-weil-ringed-tower-pushforward-limit-comparison] gives the limit comparison: its projection to $n$ is the direct image of that tower projection. Together with the unit-preserving coefficient equivalence this fixes the right adjoint and its adjunction, rather than choosing an arbitrary isomorphism of functors. We may consequently calculate on complete constant-coefficient categories and transport back at the end.\n\nIn these coordinates apply [lem-sp-completion-mate-comparison]. Its strict diagram objects are $B=G_gR_f^{\\mathcal T}\\mathcal R_XK$ and $D=R_{f'}^{\\mathcal T}G_{g'}\\mathcal R_XK$, and its arrow is the actual tower mate $v=E^{\\mathcal T}_{\\mathcal R_XK}$. Its normalized comparisons $s,t$ satisfy\n$$t\\operatorname{Ex}^{c}_*=R\\lim(v)s.$$\nThus the completed-adjunction mate is exactly the exchange obtained by applying the derived limit functor to the finite exchange diagram, with the canonical projection-formula and direct-image/limit maps. This comparison lemma requires perfect $A/I^n$; for $A=\\mathcal O_E$, $I=(\\varpi_E)$, the DVR assertion of [lem-weil-l-adic-extension-integers-dvr] gives the free resolution $[A\\xrightarrow{\\varpi_E^n}A]$ in degrees $-1,0$, so the hypothesis holds. No scheme morphism is required to be flat. For a proper factor $p$, [lem-weil-pbc-strict-tower-exchange-mate-normalization] identifies the specified completed-base-change tower $v^\\prime$ with this actual constant-coefficient mate: $d\\,\\operatorname{Res}(v^\\prime)=v\\,b$ in the derived category of strict diagrams. The comparisons $b,d$ there are induced by the same coefficient restriction and diagram projection-formula maps used here in $H,s,t$. Applying the derived limit to this equality and conjugating by these specified source and target comparisons identifies the proper completed map with $E^c=t^{-1}\\mathcal L(v)s$. For the integral open factor use its completion, not an unproved completeness assertion for ordinary extension by zero. Let $J_j$ be ordinary constant-coefficient extension by zero. The localization identification [lem-weil-proetale-weakly-etale-localization] and [lem-pur-site-restriction-module-adjunction-exact] give its exactness and adjunction. On the extension presheaf, tensoring with a target module gives the source tensor on objects factoring through the open and zero otherwise; [lem-pc-sites-module-sheafification-tensor] sheafifies this equality to $J_jM\\otimes_A L\\cong J_j(M\\otimes_Aj^{-1}L)$. Applied to complexes, exactness of $J_j$ and $j^{-1}$ shows that $J_j$ sends a K-flat complex to a K-flat complex: tensor with an acyclic target complex is $J_j$ of the tensor with its acyclic restriction. It also preserves flat terms by the same identity. Hence one flat-term K-flat representative gives the actual strict-diagram identification $\\mathcal R_{\\overline X}(J_jK)\\cong J_j\\mathcal R_XK$, including every quotient transition. Put $J_j^cK=C_{\\overline X}(J_jK)$. By [lem-sp-completed-pullback-adjunction] this is complete and canonically equals $R\\lim(J_j\\mathcal R_XK)$. Its finite reductions are $J_jK_n$: use the finite-reduction invariance of completion in [lemma-weil-pbc-adic-completion-reduction], on its constant-coefficient domain and with no completeness hypothesis on $J_jK$. Its perfect-quotient hypothesis was checked above. [lem-weil-valued-dvr-finite-quotients] gives finite quotients; the finite residue field has characteristic $\\ell$ because $|\\ell|_E<1$ and every integer prime to $\\ell$ has absolute value one. Thus $A/I$ is additive torsion as required. The completion unit gives an actual strict-diagram morphism $\\mathcal R_{\\overline X}(J_jK)\\to\\mathcal R_{\\overline X}(J_j^cK)$. Its evaluation at each $n$ is inverse to the projection-adjoint isomorphism just cited: the completion unit composed with the limit projection is the original quotient map. Hence each evaluated cone is acyclic, and exact levelwise kernels and cokernels [lem-weil-tower-category-levelwise-abelian] make this actual diagram morphism an isomorphism. Its inverse, followed by the representative identification above, supplies the specified strict reduction comparison $\\mathcal R_{\\overline X}(J_j^cK)\\cong J_j\\mathcal R_XK$. Thus it has the compatible origin reductions needed on the proper factor, with a canonical strict comparison rather than only a list of evaluated isomorphisms. The canonical direct-image/limit comparison identifies $Rp_*J_j^cK$ with $R\\lim(R_p^{\\mathcal T}J_j\\mathcal R_XK)$, the integral compactification construction of [def-weil-integral-rational-qbar-compact-support]. Here the integral open symbol in [def-cbc-completed-exchange-map] is read through this completed construction. The normalized mate above is applied to the complete object $J_j^cK$, followed by the completed open comparison obtained by taking $R\\lim$ of the strict open comparisons. No commutation of ordinary $J_j$ with infinite products or inverse limits is assumed. [thm-cbc-complete-proetale] gives its isomorphism and its naturality on complete complexes with compatible origin reductions. The strict compactification comparisons needed for refinement and composition are constructed in Step 7; they are not consequences of completion adjunction existence alone.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-sp-completion-mate-comparison",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-cbc-completed-exchange-map",
+    "thm-cbc-complete-proetale",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lemma-weil-pbc-adic-completion-reduction",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M, lemma-naive-completion, and 099N, lemma-pushforward-Noetherian-case (1), (2), (5); blueprint Proof Steps 1 and 2 at integral coefficients"
+   }
+  },
+  {
+   "text": "For changes of the square comparisons, [lem-weil-pbc-mate-whisker] gives the precise naturality equation\n$$\\operatorname{mate}((\\tau L_1)\\alpha(L_2\\sigma))=(R_2\\tau)\\operatorname{mate}(\\alpha)(\\sigma R_1).$$\nConsequently the unit--square--counit formula respects a compatible morphism of square data, with its comparison maps inserted. For coefficient change, [lem-fix-operation-reduction] states that the supplied comparisons preserve the units and counits constructing exchange; it includes the finite-Tor qualification for finite quotient compact-support comparisons. Substituting these unit, square and counit comparisons in the displayed mate formula gives a commuting comparison square. For finite field extensions the ordinary-exchange comparison is explicitly part of [prop-weil-pbc-scalar-extension]. For the compactification formula apply the same substitution to the proper factor and the extension-by-zero comparison; preservation of compositions gives the compact-support comparison. This asserts compatibility only for these specified coefficient comparisons, not commutation of arbitrary scalar extension with arbitrary direct image.",
+   "uses": [
+    "lem-weil-pbc-mate-whisker",
+    "lem-fix-operation-reduction",
+    "prop-weil-pbc-scalar-extension",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Step 2, precise morphism-of-square and coefficient-comparison interpretation"
+   }
+  },
+  {
+   "text": "We prove the ordinary identity and pasting equations by mates. At finite level inverse image is exact, so the canonical composition identifications are represented termwise; in the pro-étale module model these are the identifications stated in [lem-weil-pbc-proetale-derived-pullback-composition]. On a representative their associativity sends a tensor generator $r\\otimes(s\\otimes x)$ to $rs\\otimes x$ by either association, and identity sends $1\\otimes x$ to $x$. Hence the square comparison for an outer rectangle is the pasted square comparison. The direct-image composition maps are the conjugates of these pullback maps. At completed coefficients the same normalization is obtained from [lem-sp-completed-pullback-adjunction]: compose the adjunctions using [def-weil-pbc-composite-adjunction], and conjugate the canonical direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. For three morphisms the two composite-adjunction hom-set bijections are the same three bijections composed in the same order, so are equal by associativity of composition of functions. The derived direct-image comparisons are normalized by the canonical resolution comparisons, as in the cited derived-composition statement. By the bijection and composition law in [def-weil-pbc-adjunction-conjugate], the two triple-composition comparisons have the same conjugate, namely the direct-image associativity comparison, and are equal; the identity comparison is obtained in the same way. Thus the normalized square identifications also satisfy both pasting laws on completed categories. Now clauses (1), (2), (3), (4) of [lem-weil-pbc-mate-pasting] respectively turn these square pastings, composition conjugacies and identity into\n$$\\operatorname{Ex}_{gh}=(\\operatorname{Ex}_h Lg'^*)\\circ(Lh^*\\operatorname{Ex}_g),\\qquad \\operatorname{Ex}_{fe}=(Rf'_*\\operatorname{Ex}_e)\\circ(\\operatorname{Ex}_f Re_*),\\qquad\\operatorname{Ex}_{\\mathrm{id}}=1.$$\nThis argument is categorical and applies to either the finite or completed adjunctions. In particular the finite abelian-sheaf equations are exactly [lem-weil-pbc-exchange-identity-pasting], with the successive-base-change form of [sbc-lem-identity-and-base-change-composition].",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sp-completed-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-exchange-identity-pasting",
+    "sbc-lem-identity-and-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; Tags 0E46 and 0E47, remark-compose-base-change and remark-compose-base-change-horizontal; omitted verifications supplied by the cited generic mate identities"
+   }
+  },
+  {
+   "text": "For compact support at finite étale level, [thm-cbc-finite-torsion] states naturality, identity normalization, both pasting laws, independence of compactification, and compatibility with the proper/open comparisons. One can see the compatibility with a refinement $u:c_1\\to c_2$ directly in the formula: [lem-cbc-proper-open-interchange-coherence] gives the commuting base-change square for $Ru_*j_{1!}\\cong j_{2!}$. Whisker this square by the direct images of the proper compactification factors and insert the ordinary vertical-pasting equation of Step 5. Its two boundary composites are precisely $\\operatorname{Ex}^{c_1}_!$ and $\\operatorname{Ex}^{c_2}_!$ conjugated by the refinement maps. These refinement maps and their cocycle are exactly [prop-compactification-coherence-detailed] on the witnessed pro-étale domain. Comparing two compactifications through a common refinement, the commuting squares just proved and the cocycle show equality after either comparison; no choice of common refinement remains. Finite pro-étale transport carries this equality to the domain of [thm-cbc-finite-level-proetale].",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-cbc-proper-open-interchange-coherence",
+    "prop-compactification-coherence-detailed",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7F, lemma-shriek-proper-and-open-base-change, and 0F7I, lemma-shriek-well-defined; blueprint Proof Step 5"
+   }
+  },
+  {
+   "text": "Work in constant $A=\\mathcal O_E$ coefficient diagram categories through the equivalence of Step 3. All the symbols $G_u$, $R_u^{\\mathcal T}$, $J_j$, and $\\Gamma_Q$ in this step mean the functors and the specified open-adjunction comparison of [lem-sp-proper-open-tower-comparison]. Start with the one strict reduction object $N=\\mathcal R_XK$ of Step 3. Every operation below is performed on this diagram object before $R\\lim$ is applied; its finite evaluations are the specified finite coefficient operations. When $J_cN$ is used, its origin witness at level $n$ is $j_!L_n$: [lem-cbc-proetale-extension-zero-comparison] gives the comparison on sheaves, and exactness on both sites [lem-cbc-proetale-extension-zero, lem-weil-pbc-extension-by-zero-exact] makes it a comparison on bounded-below complexes. Hence the proper/open isomorphism hypothesis remains satisfied there. In particular the different origin witnesses are not being supplied with invented transition maps.\n\nFirst establish the base-change equation for the proper/open comparison itself. Write a commutative proper/open square $Q$ as\n$$\\begin{array}{ccc}\nU&\\xrightarrow{k}&V\\\\\nr\\downarrow&&\\downarrow p\\\\\nW&\\xrightarrow{i}&Z\n\\end{array}$$\nand let $b:Z_1\\to Z$ induce $a:V_1\\to V$, $c:W_1\\to W$, $d:U_1\\to U$, and the square $Q_1$. Put $\\beta_i:G_bJ_i\\simeq J_{i_1}G_c$, $\\beta_k:G_aJ_k\\simeq J_{k_1}G_d$. These are maps on diagram complexes: on the open they are the inverse-image identity, and the zero presheaf is zero on its complement. Hence their identities and compositions are equal on representatives. Let $E_p,E_r$ be the tower adjunction mates. The following is the diagram to be checked in $D(\\mathcal T_{Z_1})$:\n$$\\begin{array}{ccc}\nG_bJ_iR_r^{\\mathcal T}N&\\xrightarrow{G_b\\Gamma_Q}&G_bR_p^{\\mathcal T}J_kN\\\\\n{\\scriptstyle J_{i_1}E_r\\,\\circ\\,\\beta_i}\\downarrow&&\\downarrow{\\scriptstyle R_{p_1}^{\\mathcal T}\\beta_k\\,\\circ\\,E_p}\\\\\nJ_{i_1}R_{r_1}^{\\mathcal T}G_dN&\\xrightarrow{\\Gamma_{Q_1}}&R_{p_1}^{\\mathcal T}J_{k_1}G_dN .\n\\end{array}$$\nTo verify it, use $\\beta_i$ to identify the source with $J_{i_1}G_cR_r^{\\mathcal T}N$, transpose under $J_{i_1}\\dashv G_{i_1}$, and compose with $\\lambda_{Q_1}:G_{i_1}R_{p_1}^{\\mathcal T}J_{k_1}\\simeq R_{r_1}^{\\mathcal T}$. The bottom-left route transposes to $E_r$, since $\\lambda_{Q_1}G_{i_1}\\Gamma_{Q_1}=1$. For the top-right route, the square defining $E_p$ restricted to the open-and-closed component $U\\subset V\\times_ZW$ is the square defining $E_r$. Substitution of $\\lambda_QG_i\\Gamma_Q=1$ and the termwise inverse-image composition identifications therefore gives the transpose $E_r$ again. This substitution is the two-square mate-pasting law [lem-weil-pbc-mate-pasting], with the composite counit and the identities on the open component inserted; on the complementary component both extensions are zero. Injectivity of the open adjunction bijection proves the displayed equality. The two composition checks can be written separately. For vertically stacked proper/open squares $Q_1,Q_2$ with proper edges $(r_1,p_1)$ and $(r_2,p_2)$ and successive bottom opens $i_1,i_2$, the candidate for the outer arrow is $(R_{p_2}^{\\mathcal T}\\Gamma_{Q_1})\\circ(\\Gamma_{Q_2}R_{r_1}^{\\mathcal T})$. Transpose under $J_{i_2}\\dashv G_{i_2}$ and use the composite restriction identification: naturality moves the first factor through the restriction comparison, so the transpose, followed by the outer $\\lambda$, is $R_{r_2}^{\\mathcal T}(\\lambda_{Q_1}G_{i_1}\\Gamma_{Q_1})\\circ(\\lambda_{Q_2}G_{i_2}\\Gamma_{Q_2})R_{r_1}^{\\mathcal T}=1$. For horizontally adjacent squares $Q_1,Q_2$ with top opens $k,l$, bottom opens $i,j$ and proper edges $r,p,q$, the candidate is $(\\Gamma_{Q_2}J_k)\\circ(J_j\\Gamma_{Q_1})$. Transpose under the composite open adjunction $J_jJ_i\\dashv G_iG_j$. Restriction to the outer open-and-closed component first cancels $\\lambda_{Q_2}G_j\\Gamma_{Q_2}=1$ at $J_kN$, then cancels $\\lambda_{Q_1}G_i\\Gamma_{Q_1}=1$ at $N$; on the complementary component the extension is zero. The transpose followed by the outer restriction identification is therefore the identity. The two composite-adjunction units are those of [def-weil-pbc-composite-adjunction], and the factor substitutions are clauses (1) and (2) of [lem-weil-pbc-mate-pasting]. Injectivity of the respective open hom bijections identifies each candidate with the outer $\\Gamma$. This proves both composition equations in the derived diagram category itself.\n\nFor a refinement $u:c_1\\to c_2$ with $c_i=(j_i,p_i)$, use $Q_u=(r=1_X,p=u,k=j_1,i=j_2)$. This square need only commute, which is allowed by the new proper/open lemma. Its $\\Gamma_{Q_u}:J_{j_2}N\\simeq R_u^{\\mathcal T}J_{j_1}N$ is invertible because every $N_n$ has the stipulated finite origin witness. Define the actual comparison\n$$\\rho_u:R_{p_1}^{\\mathcal T}J_{j_1}N\\xrightarrow{\\sim}R_{p_2}^{\\mathcal T}R_u^{\\mathcal T}J_{j_1}N\\xrightarrow{R_{p_2}^{\\mathcal T}\\Gamma_{Q_u}^{-1}}R_{p_2}^{\\mathcal T}J_{j_2}N.$$\nThese finite evaluations are precisely the comparison in [def-sf-refinement-comparison-isomorphism]. Let $F_i=R_{p_i}^{\\mathcal T}J_{j_i}$ and let $F'_i$ denote the base-changed candidates. The exchange $E_i:G_gF_iN\\to F'_iG_{g'}N$ is $R_{p'_i}^{\\mathcal T}\\beta_{j_i}\\circ E_{p_i}J_{j_i}$. Whisker the preceding proper/open base-change square for $Q_u$ by $R_{p'_2}^{\\mathcal T}$ and insert the ordinary vertical mate-pasting law of Step 5, now in diagram categories. This gives the explicit refinement equation\n$$\\rho_{u'}G_{g'}\\circ E_1=E_2\\circ G_g\\rho_u.$$\nIdentity and transitivity of $\\rho$ follow from the same open-adjunction identity for successive proper/open squares. Common refinements and their cocycle on the witnessed domain are those of [prop-compactification-coherence-detailed].\n\nFor the composition comparison choose a compactification $d=(v,b)$ of $f:Y\\to S$ and a compactification $c_0$ of $fe:X\\to S$, which exist by Step 2. Apply [lem-cbc-compactifiable-compatible-tower] with $(e,f,d,c_0)$, its two required compactifications, to obtain the compactification $pa:X\\hookrightarrow\\overline X\\to\\overline Y$ of $ve$, where $f=bv$ and $v:Y\\hookrightarrow\\overline Y$. Put $V=\\overline X\\times_{\\overline Y}Y$, with $t:V\\hookrightarrow\\overline X$, proper $p_Y:V\\to Y$ and $a=tc$. In diagram categories define\n$$\\alpha^{\\mathcal T}_{f,e}:R_b^{\\mathcal T}J_vR_{p_Y}^{\\mathcal T}J_c\\xrightarrow{R_b^{\\mathcal T}\\Gamma_QJ_c}R_b^{\\mathcal T}R_p^{\\mathcal T}J_tJ_c\\xrightarrow{\\sim}R_{bp}^{\\mathcal T}J_{tc},$$\nwhere $Q$ is the proper/open square $(r=p_Y,p=p,k=t,i=v)$. For the vertically stacked squares let $g:S'\\to S$, $g':Y'\\to Y$, $g'':X'\\to X$ and $f',e'$ be the base-changed edges. The diagram equation, with a common source $G_gF_fF_eN$ and target $F_{fe}'G_{g''}N$, is\n$$E_{fe}\\circ G_g\\alpha^{\\mathcal T}_{f,e}=(\\alpha^{\\mathcal T}_{f',e'}G_{g''})\\circ(F_{f'}E_e)\\circ(E_fF_e).$$\nIts commutativity follows factor by factor: the $\\Gamma_Q$ rectangle is the displayed proper/open square above, the proper-composition rectangle is mate-pasting, and the open-composition rectangle sends every section on the open to that same section and zero to zero. This constructs the diagram for compatibility with $\\alpha$. At each finite coefficient $A_{E,n}$ its evaluation is exactly the composition isomorphism of [thm-sf-comp-composition] on bounded-below etale-origin pro-etale complexes and the exchange of [thm-cbc-finite-torsion]. The current composition theorem explicitly preserves that etale-origin class, so both successive compact-support functors are within its domain. The field, invertible prime, finite extension, positive index, and separated finite-type arrows required there are our fixed data. That theorem is used only for these finite evaluations; the integral comparison is obtained from the actual diagram equation below.\n\nFinally apply $R\\lim$ to these actual diagram equalities, using the exact functor for arbitrary ringed strict towers of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The integral compact-support definition [def-weil-integral-rational-qbar-compact-support] uses these fixed compactification diagrams. In the constant-coefficient coordinates its open factor is $J_j^c=CJ_j$ as established in Step 3, and the input to every proper completed mate is this complete factor. Thus nested integral operations are not being identified with ordinary extension by zero of an arbitrary complete complex. The identifications of nested operations with the corresponding limits use the completed pullback definition, its projection-induced reduction isomorphisms [lemma-weil-pbc-completed-pullback-reduction], the projection-formula comparisons of [prop-weil-pbc-direct-image-limits], and the canonical direct-image/limit comparison of [lem-weil-ringed-tower-pushforward-limit-comparison]. The latter is normalized by the common tower projections, so the intermediate comparison for two consecutive arrows is the same map. The open comparisons are the ones induced by the maps $\\beta$ on the strict diagrams. Step 3 identifies each proper exchange with its specified completed mate; [def-cbc-completed-exchange-map] then identifies the compact-support composite. If $a_i:C_i\\simeq R\\lim V_i$ are these specified vertex comparisons and $U:V_0\\to V_1$, $V:V_1\\to V_2$ the two strict arrows, the two completed arrows are $a_1^{-1}R\\lim(U)a_0$ and $a_2^{-1}R\\lim(V)a_1$. Their composite is $a_2^{-1}R\\lim(VU)a_0$. Applying this to the displayed refinement and composition diagrams proves the integral claims, with the canonical $\\alpha$ normalization retained. Equality of finite evaluations alone has not been used to prove equality of morphisms.",
+   "uses": [
+    "lem-sp-proper-open-tower-comparison",
+    "lem-weil-pbc-mate-pasting",
+    "def-sf-refinement-comparison-isomorphism",
+    "prop-compactification-coherence-detailed",
+    "thm-sf-comp-composition",
+    "thm-cbc-finite-torsion",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-pbc-completed-pullback",
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "def-cbc-completed-exchange-map",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-cbc-compactifiable-compatible-tower",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, and lemma-base-change-shriek; Tag 0F7F, lemma-shriek-proper-and-open-base-change; blueprint Proof Steps 3 and 5, completed transport"
+   }
+  },
+  {
+   "text": "For rational coefficients [prop-weil-pbc-rational-transport] extends functors and natural transformations by scalar localization. Explicitly an integral equality of composites becomes the same equality after tensoring each morphism with $1$; this preserves naturality, identity, both pasting equations and the refinement and composition squares. For compact support, all four corners are Noetherian and finite-dimensional by Step 2, $\\ell$ is invertible on them, and $f$ is separated of finite type. Thus the current statement of [thm-cbc-finite-extension] applies to every $K\\in D^b_c(X,E)$ on its raw rationalized completed categories. It explicitly defines its exchange as the extension of the specified completed integral exchange, so the map is exactly ours; it is independent of the integral representative and natural for every rational morphism. The current statement imposes no additional lattice-reduction interval hypothesis for this compact-support conclusion. The separate lattice and common-interval qualifications used for smooth ordinary exchange remain those of Step 9. For algebraically closed rational coefficients [prop-weil-pbc-descent-functors] descends compatible transformations and their equations. Represent the finitely many objects and arrows in any one of our diagrams at a common finite extension, prove the equality there as just done, and use its class in the common-stage category; enlarging the stage preserves the equation by the scalar comparisons of Step 4. [thm-cbc-qbar] identifies this map with the stipulated compact-support exchange and asserts independence of the representative. This proves clauses (1), (2), (4) at the remaining coefficient stages.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "thm-cbc-finite-extension",
+    "prop-weil-pbc-descent-functors",
+    "thm-cbc-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Steps 2, 3 and 5, rationalization and common-stage transports"
+   }
+  },
+  {
+   "text": "Finally assume $g$ is smooth. Relabel the smooth-base-change square by $S_{\\mathrm{sbc}}=Y$, $X_{\\mathrm{sbc}}=Y'$, $T_{\\mathrm{sbc}}=X$, $Y_{\\mathrm{sbc}}=X'$ and $(f_{\\mathrm{sbc}},g_{\\mathrm{sbc}},h_{\\mathrm{sbc}},e_{\\mathrm{sbc}})=(g,f,f',g')$. At finite coefficients, [sbc-def-base-change-map] says that the displayed unit--composition--counit composite is the inverse mate of the pullback-square comparison; after this relabeling its transpose is\n$$Lf'^*Lg^*Rf_*K\\xrightarrow{\\theta_\\square}Lg'^*Lf^*Rf_*K\\xrightarrow{Lg'^*\\varepsilon_f}Lg'^*K,$$\nso it is exactly the exchange in this item. At integral coefficients the finite definition [sbc-def-base-change-map] is not directly applicable. Instead, [lem-sp-completion-mate-comparison], used in Step 3 with $f$ our qcqs direct-image edge, supplies the needed identification. The finite-diagram construction gives the map $t^{-1}R\\lim(v)s$, where $v$ is the actual strict diagram mate and $s,t$ are its specified projection-formula and direct-image/limit maps. This is the finite-reduction route for the completed smooth exchange, not an application of the finite coefficient definition to $\\mathcal O_E$. The new comparison theorem asserts $tE^c=R\\lim(v)s$, so cancellation of $t$ identifies that map with the completed-adjunction mate $E^c$ of this item. In particular its transpose is exactly\n$$Lf'^*_{\\mathrm{comp}}Lg^*_{\\mathrm{comp}}Rf_{*,\\mathrm{comp}}K\\xrightarrow{\\theta^{\\mathrm{comp}}_\\square}Lg'^*_{\\mathrm{comp}}Lf^*_{\\mathrm{comp}}Rf_{*,\\mathrm{comp}}K\\xrightarrow{Lg'^*_{\\mathrm{comp}}\\varepsilon_{f,\\mathrm{comp}}}Lg'^*_{\\mathrm{comp}}K.$$\nThe unit and counit are those fixed by [lem-sp-completed-pullback-adjunction], not freely selected adjunction data. The source/target coefficient equivalences preserve the quotient tower and its completion unit by [lem-weil-pbc-constant-completion-equivalence], and Step 3 fixes the direct-image comparison. Thus this is a comparison of the named maps in their completed coefficient categories; it does not infer equality from equal reductions, and it does not merely exhibit another isomorphism between the same endpoints. At finite étale coefficients $K$ is bounded below and its cohomology is annihilated by a power of $\\ell$, which is invertible on $Y$; the direct-image edge $f$ is qcqs because it is separated of finite type. Thus [sbc-thm-bounded-below-derived-smooth-base-change] applies after forgetting the finite coefficient-module structure. By [lem-weil-pbc-exchange-forget-coefficients], forgetting takes the specified module exchange to this abelian-sheaf exchange and detects its invertibility; hence the original module exchange is invertible. The field $k$ is Noetherian since its only ideals are $(0)$ and $(1)$; its one-point affine spectrum is Noetherian. Applying [lem-weil-pbc-finite-type-over-noetherian] to the four structure morphisms shows all four schemes are Noetherian. Applying [lem-kun-dimension-finite-type] with $K=k$ to each corner gives finite dimension, in particular at $T_{\\mathrm{sbc}}=X$ and $X_{\\mathrm{sbc}}=Y'$, as explicitly required by the current $E$-coefficient theorem. This uses only the existing finite-type hypotheses, not an added assumption. For any specified bounded-below origin witness $L$, [lem-weil-pbc-transport-identifies-exchange] gives the exact equation $T_L\\nu^*(E_L)=\\operatorname{Ex}^{R}_{\\nu^*L}S_L$. The two comparisons are isomorphisms and the etale module exchange is invertible by the preceding paragraph, so the specified pro-etale exchange is invertible. This argument applies to every bounded-below finite origin witness used in the tower. [sbc-thm-finite-proetale-smooth-base-change] records the bounded constructible specialization; it is used only on that domain. For the coefficient hypotheses use [lem-weil-l-adic-extension-integers-dvr], which gives the DVR $\\mathcal O_E$ and its uniformizer, and [lem-weil-valued-dvr-finite-quotients], which gives finite quotients. The residue characteristic is $\\ell$: $\\ell$ has absolute value less than one and hence lies in the maximal ideal; an integer prime to $\\ell$ has absolute value one and is a unit. The successive quotients of the filtration by powers of the uniformizer are copies of this finite residue field, so $A_{E,n}$ has $\\ell$-power cardinality, invertible on our $k$-schemes. At the integral stage $\\mathcal O_E/\\varpi_E^n$ is perfect over $\\mathcal O_E$; the two-term free resolution given by multiplication by $\\varpi_E^n$ verifies perfection. Each evaluation of $v$ is the finite mate by [lem-sp-completion-mate-comparison], hence is invertible by the bounded-below etale smooth theorem and the normalized transport equation just checked, without applying a constructible-only theorem to an arbitrary witness. The cone of $v$ has zero evaluated cohomology; kernels and cokernels of diagram sheaves are levelwise by [lem-weil-tower-category-levelwise-abelian], so its cohomology is zero and $v$ is invertible in the derived diagram category. The functor $R\\lim$ takes this isomorphism to an isomorphism. Since $s,t$ are invertible, the specified completed mate $E^c=t^{-1}R\\lim(v)s$ is invertible. This proves the integral smooth assertion for the named mate; equality of morphisms was established by the new comparison statement, not inferred from evaluated reductions. Retaining compatible origin witnesses and the uniform-interval condition whenever a bounded constructible codomain is claimed gives exactly the integral statement of [sbc-thm-adic-smooth-base-change]. At $E$, apply the current statement of [sbc-thm-e-coefficient-smooth-base-change] to a finite-level etale admissible lattice $L$ with its specified isomorphism $\\iota:L[1/\\varpi]\\xrightarrow{\\sim}K_E$. Its completed coefficient sheaf categories are the ones already fixed above, and its rational operations and exchange are explicitly the raw scalar localizations of the integral completed operations and exchange. It therefore gives the isomorphism for this named exchange in $D_{\\mathrm{comp}}(X_{\\mathrm{sbc}},E)=D_{\\mathrm{comp}}(Y',E)$, independently of both lattice and presentation. Use square-constructible admissibility only for its additional $D^b_c(Y',E)$ conclusion. On constructibility-preserving domains this is also the transport described in Step 8; ambient localization is supplied directly by the current $E$-coefficient statement. At $\\overline{\\mathbf Q}_\\ell$, [sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch] assumes these same current $E$-coefficient hypotheses at every finite representative and after common-overfield passage; with those hypotheses Step 8 identifies its descended map with ours. The smooth condition is on $g$, not on $f$. All three higher-coefficient exchanges land on $X_{\\mathrm{sbc}}=Y'$. The current $E$ theorem already has this corrected output label; only the integral and algebraically closed rational statements still print $S$ in their final category labels. For those two statements the printed index is a scheme-index typo, interpreted here at the output of the displayed functors; no change to their exchange or isomorphism assertion is used.",
+   "uses": [
+    "sbc-def-base-change-map",
+    "lem-sp-completion-mate-comparison",
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "sbc-thm-bounded-below-derived-smooth-base-change",
+    "sbc-thm-finite-proetale-smooth-base-change",
+    "sbc-thm-adic-smooth-base-change",
+    "sbc-thm-e-coefficient-smooth-base-change",
+    "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Step 4, with explicit exchanged labels and coefficient-specific smooth-base-change hypotheses"
+   }
   }
  ],
  "proof_deps": [
   "def-exchange-projection",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-derived-direct-image",
   "def-cbc-exchange-map",
-  "def-weil-derived-pullback-tensor-hom",
-  "thm-cbc-finite-extension",
-  "thm-cbc-qbar",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "thm-cbc-finite-level-proetale",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "thm-nagata-compactification",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sp-completion-mate-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-cbc-completed-exchange-map",
+  "thm-cbc-complete-proetale",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-mate-whisker",
+  "lem-fix-operation-reduction",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-exchange-identity-pasting",
   "sbc-lem-identity-and-base-change-composition",
   "thm-cbc-finite-torsion",
-  "sbc-def-base-change-map",
-  "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
-  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "lem-cbc-proper-open-interchange-coherence",
   "prop-compactification-coherence-detailed",
-  "thm-sf-comp-composition"
+  "lem-sp-proper-open-tower-comparison",
+  "def-sf-refinement-comparison-isomorphism",
+  "thm-sf-comp-composition",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-cbc-compactifiable-compatible-tower",
+  "prop-weil-pbc-rational-transport",
+  "thm-cbc-finite-extension",
+  "prop-weil-pbc-descent-functors",
+  "thm-cbc-qbar",
+  "sbc-def-base-change-map",
+  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "sbc-thm-finite-proetale-smooth-base-change",
+  "sbc-thm-adic-smooth-base-change",
+  "sbc-thm-e-coefficient-smooth-base-change",
+  "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "## Proof"
+  "place": "Proof Steps 1–5, expanded using Stacks Tags 07A7, 0E46, 0E47, 0F7F, 0F7I, 0F7J, 099M and 099N; coefficient-domain corrections recorded in report.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change exchange natural transformations for derived direct image and compact support are natural and compatible with identity and horizontal vertical pasting of Cartesian squares",
+   "results": "SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general mates or ordinary module pullback comparisons do not state the full coefficient-dependent six-functor exchange package"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general mates or ordinary module pullback comparisons do not state the full coefficient-dependent six-functor exchange package"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|mate|shriek",
+   "results": "Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; Mathlib/CategoryTheory/GuitartExact/KanExtension.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general mates or ordinary module pullback comparisons do not state the full coefficient-dependent six-functor exchange package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality identity composition of derived base change transformations and compact support pushforward",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mates respect composition of squares identity and coefficient scalar extension for sheaf cohomology",
+   "results": "SheafOfModules.unitHomEquiv_comp_apply; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; LightCondensed.ihomPoints_symm_comp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general mates or ordinary module pullback comparisons do not state the full coefficient-dependent six-functor exchange package"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv_id",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: general mates or ordinary module pullback comparisons do not state the full coefficient-dependent six-functor exchange package"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -146,5 +401,209 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fix-lem-exchanges",
+  "worker": "stage1",
+  "summary": "Repair of both returned gaps: Step 7 explicitly constructs the strict proper/open, refinement and compactification-composition diagrams before Rlim; Steps 3 and 9 use a general completion/mate comparison to identify the smooth theorem's limit-defined map with the specified completed-adjunction mate. Three supporting statement-only nodes, including the original completed-adjunction node, are left for the next DAG level. Second reading made the proper-tower normalization, compatible-tower existence and module/abelian smooth comparison explicit, expanded restriction on diagrams, and corrected the general mate lemma's projection-formula scope. Revalidated the returned stale E-coefficient citation against the current DAG: made raw localization and the chosen lattice presentation explicit, supplied finite dimension from the existing finite-type dimension lemma, and distinguished the already corrected E output corner from the remaining printed index errors. Revalidated the concurrent change to def-exchange-projection: Step 1 and the statement now distinguish its ambient finite pro-etale formulas from the finite etale module mate supplied by the existing forget-coefficients lemma, retaining Step 2 for their normalized identification and Steps 6-7 for coherence. Revalidated the concurrent finite-level typing clarification in thm-sf-comp-composition, restricting its use to the witnessed finite evaluations and retaining the strict-diagram proof of the integral extension. Revalidated the concurrent rational compact-support theorem update: Step 2 supplies Noetherian finite-dimensional corners without smoothness, and Step 8 now applies its current every-object raw-rationalization statement without obsolete lattice-interval qualifications. Fresh independent second reading supplies both compactification inputs, defines the complete integral open factor by its strict reduction diagram, and uses normalized D+ transport for finite smooth witnesses.",
+  "blueprint": "Steps 1–2 realize blueprint Proof Step 1 and finite-site part of Step 2; Steps 3–4 give the completed/coefficient naturality of Step 2; Step 5 realizes ordinary identity/pasting of Step 3; Steps 6–8 realize compact-support Step 3 and Step 5 including coefficient transports; Step 9 realizes smooth-base-change Step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Steps 2 use the statement \"Transport identifies the exchange map\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Steps 3, 9 use the statement \"Constant-to-completed coefficients on derived-complete categories\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Steps 3, 7 use the statement \"Derived pushforward commutes canonically with strict tower inverse limit\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Steps 3, 9 use the statement \"The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Steps 3 use the statement \"A right adjoint of an exact functor preserves K-injective complexes\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-mate-whisker",
+    "why": "Steps 4 use the statement \"Mates are natural in the non-adjoint sides of the square\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Steps 4 use the statement \"Basic operations and coefficient reduction\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Steps 4 use the statement \"Compatibility with finite scalar extension\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Steps 5 use the statement \"Composition of derived pro-etale module pullbacks\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Steps 5 use the statement \"Canonical composition comparison for unbounded ringed-topos direct images\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Steps 5, 7 use the statement \"Mates of pasted squares and of conjugate-whiskered squares\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Steps 5 use the statement \"Identity and pasting equations for exchange\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-lem-identity-and-base-change-composition",
+    "why": "Steps 5 use the statement \"Identity and base-change composition\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Steps 6, 7 use the statement \"Compactification coherence\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Steps 7 use the statement \"The composition law for $Rf_!$\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Steps 7 use the statement \"Reduction commutes with completed pullback\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Steps 7 use the statement \"Direct image, derived limits, and completeness\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Steps 7 use the statement \"Extension by zero is exact (étale site)\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Steps 8 use the statement \"Functorial transport to a finite field\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Steps 8 use the statement \"Descent of coefficient-compatible functors\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-thm-bounded-below-derived-smooth-base-change",
+    "why": "Steps 9 use the statement \"Bounded-below derived smooth base change\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-thm-finite-proetale-smooth-base-change",
+    "why": "Steps 9 use the statement \"Finite pro-etale smooth base change\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-thm-adic-smooth-base-change",
+    "why": "Steps 9 use the statement \"Adic smooth base change\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-thm-e-coefficient-smooth-base-change",
+    "why": "Steps 9 use the statement \"$E$-coefficient smooth base change\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+    "why": "Steps 9 use the statement \"$\\overline{\\mathbf Q}_\\ell$-coefficient smooth base change\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Steps 2 and 9 use the existing finite-type-over-Noetherian theorem to verify the current coefficient-category and comparison domains at all corners over the field k."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Steps 9 use the statement \"Finite quotients of a discrete valuation ring with finite residue field\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Steps 9 use the statement \"Inverse systems in an abelian category form an abelian category, computed levelwise\" as generic infrastructure for the explicit compact-support route; this unit does not replace this adjunction, coefficient, site or comparison result."
+   },
+   {
+    "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "why": "Step 3 uses its exact d Res(v-prime) = E b equality for proper compactification factors to identify the pre-existing completed compact-support map with the normalized completed mate; no such strict comparison is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Step 7 applies the exact derived-limit functor on constant-coefficient strict module towers; this is general ringed-site infrastructure, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Steps 1 and 9 use the specified finite-etale module exchange and its compatibility with the abelian exchange; the ambient pro-etale definition does not supply this etale-domain statement."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Steps 2 and 9 use the existing finite-type-over-a-field dimension theorem solely to verify the rational category domains at all four corners and the current E-coefficient smooth-base-change input/output; no unit-route argument is replaced."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Fresh second reading: supplies compactification existence or the exact localized-module/completion comparison needed for the integral open factor; no compact-support route is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Fresh second reading: supplies compactification existence or the exact localized-module/completion comparison needed for the integral open factor; no compact-support route is replaced."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Fresh second reading: supplies compactification existence or the exact localized-module/completion comparison needed for the integral open factor; no compact-support route is replaced."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Fresh second reading: supplies compactification existence or the exact localized-module/completion comparison needed for the integral open factor; no compact-support route is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-adic-completion-reduction",
+    "why": "Fresh second reading: supplies compactification existence or the exact localized-module/completion comparison needed for the integral open factor; no compact-support route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-mate-whisker",
+  "lem-fix-operation-reduction",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "sbc-lem-identity-and-base-change-composition",
+  "prop-compactification-coherence-detailed",
+  "thm-sf-comp-composition",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-descent-functors",
+  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "sbc-thm-finite-proetale-smooth-base-change",
+  "sbc-thm-adic-smooth-base-change",
+  "sbc-thm-e-coefficient-smooth-base-change",
+  "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-kun-dimension-finite-type",
+  "thm-nagata-compactification",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lemma-weil-pbc-adic-completion-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-e38e59172",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-e38e59172 (reviewer sub-agent of L); spot-checked: Read the complete item, all three new nodes, cited DAG statements, blueprint route, Stacks sources 099M/099N, 0F7B/0F7F, and relevant blueprint proofs. Checked all nine steps, coefficient categories, mate directions, strict tower comparisons, hypotheses, edge cases, duplicates, and non-restatement requirements. No mathematical or structural defect found; review.md records the checks. No repairs or tool_uses accepted."
+ }
 }

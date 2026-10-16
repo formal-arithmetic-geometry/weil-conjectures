@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-completed-pullback-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 2 and 3: adjunction-mate naturality and pasting, at the integral coefficient stage; supplies the completed adjunction before applying the mate calculus.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed pullback is left adjoint to direct image",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in the universe of [def-weil-size-convention], let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I\\subset A$ be an ideal. Write $D(\\mathcal C,A)$ for the unbounded derived category [def-weil-abstract-derived-category] of sheaves of modules [def-weil-sheaf-of-modules-category] over the constant sheaf $\\underline A$ [def-weil-pbc-constant-sheaf] on $\\mathcal C$, and similarly for $\\mathcal D$. Let $D_{\\mathrm{comp}}(\\mathcal C,A)$ be its full subcategory of derived $I$-complete complexes: for every object $U$ of $\\mathcal C$ and every local section $a\\in (I\\underline A)(U)$, the derived sheaf Hom [def-pur-derived-internal-hom] from $\\underline A|_U[1/a]$ to $K|_U$ is zero. Here $\\underline A|_U[1/a]$ is the sheafification of sectionwise localization, and derived sheaf Hom means the right derived functor of sheaf Hom.\n\nDerived completion $C_{\\mathcal C}:D(\\mathcal C,A)\\to D_{\\mathrm{comp}}(\\mathcal C,A)$ is left adjoint to the full inclusion; its underlying object is canonically\n$$C_{\\mathcal C}K=R\\varprojlim_{n\\geq1}(K\\otimes_A^L\\underline{A/I^n}).$$\nHere $\\otimes^L$ is the left derived functor of the sheaf tensor product [def-pur-sheaf-tensor-product], and $R\\varprojlim$ is computed by resolving a strict inverse sequence by a K-injective sequence complex (a complex such that every map to it from an acyclic sequence complex is null-homotopic) and then taking its inverse limit. The completion map is the unit of this adjunction.\n\nLet $u:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a morphism of topoi, meaning an adjunction $u^{-1}\\dashv u_*$ with finite-limit-preserving inverse image. Use the canonical identification $u^{-1}\\underline A=\\underline A$ and the resulting exact inverse image of $A$-module sheaves. Let $Lu^*$ be this inverse image on derived categories and let $Ru_*$ be the K-injective total right derived direct image [def-pur-kinjective-complex]. Then $Ru_*$ preserves derived $I$-complete complexes and\n$$L u^*_{\\mathrm{comp}}:=C_{\\mathcal D}\\circ Lu^*|_{D_{\\mathrm{comp}}(\\mathcal C,A)}\\ \\dashv\\ Ru_*|_{D_{\\mathrm{comp}}(\\mathcal D,A)}.$$\nThis is the adjunction induced by the ordinary derived inverse-image/direct-image adjunction and the completion adjunction; in particular its units and counits are fixed by those two hom-set bijections.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, label lemma-naive-completion; Tag 099N, label lemma-pushforward-Noetherian-case, clauses (1), (2), (5); lines 4304-4388 in the obtained source"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete modules on ringed topoi completed inverse image is left adjoint to derived direct image and their composition adjunctions are coherent",
+   "results": "SheafOfModules.sheafificationCompPullback; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.sheafComposeNatIso; CategoryTheory.Sheaf.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf module adjunctions and abstract reflectors do not give derived-completion reflectivity or preservation by derived direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Reflective, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.reflectorAdjunction; CategoryTheory.Reflective.adj; CategoryTheory.Reflective.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf module adjunctions and abstract reflectors do not give derived-completion reflectivity or preservation by derived direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*(adjoint|pullback)|completion.*(Adjunction|adjoint)|pullback.*comp",
+   "results": "Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf module adjunctions and abstract reflectors do not give derived-completion reflectivity or preservation by derived direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of topoi and a Noetherian adic ring, derived direct image preserves derived complete complexes and its left adjoint is derived pullback followed by completion",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.sheafificationCompPullback; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf module adjunctions and abstract reflectors do not give derived-completion reflectivity or preservation by derived direct image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed derived pullback left adjoint to direct image on derived complete sheaves",
+   "results": "service unavailable: Internal Server Error; 0 hits",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?[Cc]omplet|[Cc]ompleted.*pullback|pushforward-Noetherian",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf module adjunctions and abstract reflectors do not give derived-completion reflectivity or preservation by derived direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Aa]djunction|[Aa]djunction.*completion|[Mm]ate.*[Ll]imit|[Ss]hriek",
+   "results": "2 hits: Mathlib/Analysis/Calculus/Deriv/Slope.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match: the hits are abstract localization/adjunction or ordinary sheaf functor comparisons, not this derived-completion or strict proper/open theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a reflective localization of a derived category, complete inverse image is left adjoint to direct image and Beck Chevalley mates commute with inverse limits of quotient coefficient diagrams",
+   "results": "8 hits: CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.localization, CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.unitCompPartialBijective_symm_natural",
+   "date": "2026-10-15",
+   "verdict": "no exact match: the hits are abstract localization/adjunction or ordinary sheaf functor comparisons, not this derived-completion or strict proper/open theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley mate for a square of geometric morphisms is compatible with derived adic completion via projection formula and right derived inverse limit of strict quotient sequences",
+   "results": "8 hits: localCohomology.diagramComp, CategoryTheory.sheafComposeNatTrans_fac, LightCondensed.ihomPoints_symm_comp, Condensed.profiniteSolidification, CategoryTheory.Adjunction.derivedε_fac_app, Condensed.profiniteSolidCounit, localCohomology.isoOfFinal, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-15",
+   "verdict": "no exact match: read abstract reflective and derived adjunction declarations, ordinary structure-module pushforward/restriction, and local-cohomology diagrams; none states derived-adic completion or the normalized strict quotient/proper-open comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived[Cc]omplet|adic.*[Aa]djunction|[Bb]eck.*[Cc]hevalley|extension[Bb]y[Zz]ero",
+   "results": "23 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-15",
+   "verdict": "no exact match: read abstract reflective and derived adjunction declarations, ordinary structure-module pushforward/restriction, and local-cohomology diagrams; none states derived-adic completion or the normalized strict quotient/proper-open comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.reflectorAdjunction",
+   "results": "12 hits: CategoryTheory.reflectorAdjunction, CategoryTheory.mem_essImage_of_unit_isSplitMono, CategoryTheory.Functor.essImage.unit_isIso, CategoryTheory.instIsIsoAppUnitReflectorAdjunctionObjEssImage, CategoryTheory.equivEssImageOfReflective_unitIso, CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.unitCompPartialBijective_symm_apply, CategoryTheory.unitCompPartialBijectiveAux_symm_apply",
+   "date": "2026-10-15",
+   "verdict": "no exact match: read abstract reflective and derived adjunction declarations, ordinary structure-module pushforward/restriction, and local-cohomology diagrams; none states derived-adic completion or the normalized strict quotient/proper-open comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Noetherian coefficients on arbitrary topoi, the reflector onto derived adically complete sheaves is left adjoint to inclusion and inverse image followed by this reflector is adjoint to derived pushforward",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify, LightCondMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Sheaf.adjunction",
+   "date": "2026-10-15",
+   "verdict": "no exact match: the actual hits concern ordinary sheaf/structure-module adjunctions, abstract derived adjunctions or local-cohomology diagrams; none gives the derived-completion or strict proper/open interface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper vertical morphisms and open horizontal immersions, extension by zero commutes with derived pushforward on strict inverse sequences of finite coefficient etale origin sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+   "date": "2026-10-15",
+   "verdict": "no exact match: the actual hits concern ordinary sheaf/structure-module adjunctions, abstract derived adjunctions or local-cohomology diagrams; none gives the derived-completion or strict proper/open interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "fix-lem-exchanges",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}
