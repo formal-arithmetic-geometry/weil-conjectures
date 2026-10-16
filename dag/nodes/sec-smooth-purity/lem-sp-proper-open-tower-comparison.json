@@ -38,9 +38,104 @@
   "def-weil-proper-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the operations with the existing strict constant-coefficient tower operations, taking $B=A$ and reindexing $n\\geq1$ as $n-1\\in\\mathbb N$. The localized-site equivalence identifies the coefficient ring with $\\underline A$ on the open, preserving constant sections. In the extension-by-zero presheaf of the module adjunction, the summands at a test object $H$ are indexed by maps $H\\to U$ over the ambient scheme. There is at most one such map, and it exists precisely when $H$ factors through the open. Thus that presheaf is exactly the presheaf in the statement, not a different version of extension by zero. Its restriction to the open is the original sheaf, so the adjunction unit is the indicated identification. Exactness and the induced derived adjunction are those of the cited open-extension operation. The quasi-compactness hypothesis in the strict-tower calculus holds: the inverse image of an affine open under $i$ or $k$ is an open subscheme of a Noetherian scheme, hence quasi-compact by the cited Noetherian-open lemma. Apply the calculus to this square. It supplies $S=V\\times_ZW$, $b:S\\hookrightarrow V$, $q:S\\to W$, and the clopen lift $s:U\\hookrightarrow S$, with $bs=k$, $qs=r$. It also supplies a comparison $\\gamma_Q:J_iR_r^{\\mathcal T}\\to R_p^{\\mathcal T}J_k$, defined as the proper-adjunction mate of $\\alpha_Q=(J_b\\pi_sG_q)\\beta_{i,p}$. In the following steps we identify this specific comparison with the one specified in the item.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE (definition-extension-zero); the module construction is sites-modules.tex Section 03DH and Tag 03DJ; agent identification with the strict-tower calculus"
+   }
+  },
+  {
+   "text": "For the clopen $s$, put $S'=S\\setminus s(U)$. Every test object $H\\to S$ is covered by its disjoint inverse images in $s(U)$ and $S'$. A module sheaf is therefore uniquely specified by its two restrictions: sections on $H$ are the product of the sections on those two opens, and gluing gives the inverse to restriction. This applies to maps, transitions, and differentials as well. In this product description $G_s$ is projection onto the first factor and both $J_s$ and $s_*$ are $F\\mapsto(F,0)$. They are canonically identified by the map which is identity on $U$ and zero on $S'$. In particular $s_*$ is exact and $J_s=R_s^{\\mathcal T}$ after deriving. The direct-image adjunction unit $1\\to R_s^{\\mathcal T}G_s$ is exactly the clopen projection $\\pi_s$ of the calculus. Open-extension composition gives $G_bJ_k=G_bJ_bJ_s=J_s$, with all identifications preserving the open units. No proper base-change theorem or finiteness of coefficients is used in this decomposition.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, with the disjoint-open sheaf gluing argument written here; derived descent is derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "Work on the small ringed diagram sites realizing the tower categories. They have K-injective resolutions. The ringed-site localization comparison gives the sectionwise identity $G_i p_*\\cong q_*G_b$ before deriving. Restriction $G_b$ preserves K-injectives because it is right adjoint to the exact $J_b$. Consequently, if $F\\to I$ is a K-injective diagram resolution, both $G_iR_p^{\\mathcal T}F$ and $R_q^{\\mathcal T}G_bF$ are represented by the identical complex $q_*G_bI$. This constructs a natural isomorphism $\\chi:G_iR_p^{\\mathcal T}\\xrightarrow{\\sim}R_q^{\\mathcal T}G_b$, normalized by the identity on restricted sections. It is the inverse-image/direct-image square mate: the sectionwise identity is the transpose of the restricted direct-image counit, and deriving the same adjunctions preserves this description. With the clopen identification of step 2 and the canonical derived direct-image composition comparison, form\n$$\\lambda_Q:G_iR_p^{\\mathcal T}J_k\\xrightarrow{\\chi J_k}R_q^{\\mathcal T}G_bJ_k\\cong R_q^{\\mathcal T}J_s\\cong R_q^{\\mathcal T}R_s^{\\mathcal T}\\cong R_r^{\\mathcal T}.$$\nThese operations occur on the diagram sites, so this is a natural isomorphism of functors on the entire derived tower category. When the original square is cartesian, $s=1$ and this formula is precisely the open base-change mate followed by $G_kJ_k=1$.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites); derived.tex Tags 08BJ and 070K; sites-cohomology.tex Tags 0D6E and 07A7; agent application on the diagram sites"
+   }
+  },
+  {
+   "text": "We compute the open adjunct of $\\gamma_Q$, suppressing the normalized composition isomorphisms. Write $R_u=R_u^{\\mathcal T}$, and write $\\eta_u,\\varepsilon_u$ for $G_u\\dashv R_u$. By the mate formula,\n$$\\gamma_Q=R_pJ_k\\varepsilon_r\\circ R_p\\alpha_QR_r\\circ\\eta_pJ_iR_r.$$\nLet $\\theta:G_bG_p\\xrightarrow{\\sim}G_qG_i$ be the localized inverse-image identification. The mate formula for the sectionwise comparison $\\chi:G_iR_p\\to R_qG_b$ gives the typed unit equation\n$$R_q\\theta\\circ\\chi G_p\\circ G_i\\eta_p=\\eta_qG_i.$$\nThis follows by substituting the mate formula and canceling the $G_p\\dashv R_p$ unit-counit pair. Apply this equation at $J_iR_rN$ and identify $G_iJ_iR_rN=R_rN$. The restriction of $\\beta_{i,p}$, after $G_bJ_b=1$ and $G_iJ_i=1$, is the identity of $G_qR_rN$: indeed its inverse has precisely the open-unit transpose specified by the calculus, and that unit becomes the identity after these identifications. Thus restricting $\\alpha_Q=(J_b\\pi_sG_q)\\beta_{i,p}$ leaves $\\pi_sG_q$, with no residual automorphism. Naturality of $\\chi$ moves $R_pJ_k\\varepsilon_r$ through the restriction comparison. Inserting these three equalities into the mate formula gives\n$$\\lambda_Q\\,G_i\\gamma_Q\n=R_qJ_s\\varepsilon_r\\circ R_q\\pi_sG_qR_r\\circ\\eta_qR_r.$$\nHere $R_qJ_s=R_r$ by step 2. Moreover $\\pi_s=\\eta_s$ under $J_s=R_s$. The composite-adjunction unit for $G_r=G_sG_q\\dashv R_qR_s=R_r$ is\n$$\\eta_r=R_q\\eta_sG_q\\circ\\eta_q.$$\nSubstitution therefore gives\n$$\\lambda_Q\\,G_i\\gamma_Q=R_r\\varepsilon_r\\circ\\eta_rR_r=1_{R_r},$$\nby the adjunction triangle identity. The computation uses transformations in the derived tower categories and their normalized units, rather than an equality tested after evaluation. Thus $G_i\\gamma_Q=\\lambda_Q^{-1}$. The bijection for $J_i\\dashv G_i$, whose unit is the open identification, says that $\\gamma_Q$ is exactly the adjunct defining $\\Gamma_Q$. This proves both existence of the specified actual morphism and its normalization.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0 (lemma-compose-counits), dual unit formula; sites-cohomology.tex Tag 07A7 (remark-base-change); agent explicit calculation of the two adjunction normalizations"
+   }
+  },
+  {
+   "text": "Apply the finite-origin and finite-evaluation clauses of the strict-tower calculus to $B=A$, the homomorphisms $A\\to P_n=A/I^n$, and the given isomorphisms $N_n\\simeq\\operatorname{Res}\\nu_U^*L_n$. Each $P_n$ is a finite commutative ring and each $L_n$ is bounded below, exactly as required there. The calculus permits a different bound and finite coefficient ring at each $n$; it requires no system of transitions between the $L_n$. Its strict tower input is $N$ itself. It follows that $\\gamma_{Q,N}$ is invertible and that its $n$-th evaluation, through the canonical scalar and site direct-image/open-extension comparisons, is the normalized finite proper/open map of the cited finite-coherence node, directed $i_!Rr_*\\to Rp_*k_!$. Since step 4 proves $\\Gamma_Q=\\gamma_Q$ before evaluating, these assertions hold for the specific $\\Gamma_{Q,N}$ in the item. No injectivity of evaluation on morphisms is used.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), finite etale comparison; the cited strict-tower calculus states its scalar/pro-etale evaluation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-cbc-strict-tower-open-extension",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+  "place": "Proof Steps 3 and 5; open-adjunction normalization obtained from the existing strict-tower calculus by the explicit clopen projection and triangle calculation in steps 2-4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -139,13 +234,129 @@
    "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify, LightCondMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Sheaf.adjunction",
    "date": "2026-10-15",
    "verdict": "no exact match: the actual hits concern ordinary sheaf/structure-module adjunctions, abstract derived adjunctions or local-cohomology diagrams; none gives the derived-completion or strict proper/open interface"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|proper_open|extensionByZero|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(pushforward|derived)|strict.*tower|proper.*interchange",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of inverse systems of sheaves commutes with extension by zero for a proper open commutative square",
+   "results": "8 hits: Opens.mayerVietorisSquare, Opens.mayerVietorisSquare', AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.CommSq.shortComplex', Module.DirectLimit.of.zero_exact",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward commutes with extension by zero on derived strict inverse systems of finite coefficient sheaves, normalized by open restriction adjunction",
+   "results": "8 hits: LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply, Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.lanSheafProfinite, SheafOfModules.pushforwardComp_inv_app_val_app, LightCondensed.isoLocallyConstantOfIsColimit, Condensed.isoLocallyConstantOfIsColimit, Condensed.isColimitLocallyConstantPresheafDiagram_desc_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate for an open immersion and proper morphism is an isomorphism on strict towers with finite etale origin coefficients",
+   "results": "8 hits: AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern underived structure-module restriction, ordinary scalar towers or condensed colimits, not the specified proper/open morphism on derived strict coefficient towers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "fix-lem-exchanges",
   "by": "worker",
   "date": "2026-10-16"
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sp-proper-open-tower-comparison",
+  "worker": "stage1",
+  "summary": "Five steps using existing nodes only. Identified the stated presheaf with the exact tower open-extension operation, constructed lambda by localization and K-injective diagram resolutions, and calculated its composite with the existing proper mate using the clopen projection and the composite-adjunction triangle. The finite-origin and evaluation clauses then follow from the existing strict-tower calculus. Statement unchanged; no new nodes, Mathlib leaves, Lean edits or compiler runs.",
+  "blueprint": "fix-lem-exchanges Proof Steps 3 and 5: the proper/open comparison needed before compactification refinement and composition; the split establishes its open-adjunction normalization at the strict diagram level. The unit record has no steps and is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the pro-etale site of an open with the localized site, including its constant ring and the unique-factorization test objects needed to compare the prescribed presheaf with module extension by zero. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Provides exact restriction and extension by zero on arbitrary ringed localized sites; needed to construct the prescribed functor and preserve K-injective resolutions under open restriction. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Provides quasi-compactness of every inverse image of an affine open, verifying the quasi-compact-open hypothesis of the existing strict-tower calculus. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Realizes the small strict-tower category as a ringed-site module category so that the generic K-injective and localization theorems apply to actual strict diagrams. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies unbounded K-injective resolutions on the small diagram site. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Gives the canonical restricted direct-image section identity and the commuting ringed-topos square used to construct chi and compare its adjunction units. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Proves that open restriction, as right adjoint of exact extension by zero, preserves K-injective diagram complexes. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Justifies computing both sides of chi on the same K-injective diagram representative. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Identifies Rq Rs with Rr on the unbounded ringed diagram-site categories, with its canonical derived normalization. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Supplies the explicit unit/alpha/counit formula for the proper mate and the bijection identifying the final open adjunct. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Supplies the composite-unit formula used in the explicit triangle calculation. This is a generic site, resolution or adjunction tool; no statement of this compact-support unit replaces it, and its proper/open route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-e9f5bbd5b",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-e9f5bbd5b (reviewer sub-agent of L); spot-checked: Read the complete item, all five steps, cited statements, sources, and unit/chapter route. Verified clopen geometry, unbounded diagram resolutions, mate normalization before evaluation, finite-origin hypotheses, and coefficient-category distinctions against archived master targets. No new nodes, circular dependencies, or repairs needed. Concrete checks and accepted tool_uses are recorded in review.md."
  }
 }
