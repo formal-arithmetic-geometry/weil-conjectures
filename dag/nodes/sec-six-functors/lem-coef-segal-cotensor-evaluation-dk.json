@@ -35,9 +35,120 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-segal-cartesian-exponent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=W^E$ and $B=W^{F(1)}$, and let $a:F(1)\\hookrightarrow E$ select $0\\to1$. The exponent lemma makes $A,B$, and each $W^{F(n)}$, Segal spaces. Write $r=W^a:A\\to B$ and $s=rj:W\\to B$, where $s$ is induced by $F(1)\\to F(0)$. All these maps commute with the outer endpoint operators. The inclusions $\\partial F(1)\\hookrightarrow F(1)$ and any union of edges $K\\hookrightarrow F(2)$ give Kan fibrations on mapping spaces into $W$, by taking degree zero in the restriction clause of the exponent lemma. In particular the endpoint maps of $W,A,B$ are Kan fibrations, so their strict mapping fibers represent homotopy fibers. All spaces here are small Kan complexes, by Reedy fibrancy.",
+   "uses": [
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, the diagram on p.31; Corollary 7.3 and Sections 2.3-2.5."
+   }
+  },
+  {
+   "text": "We first prove that $hj$ is an equivalence of ordinary categories, without using Proposition 13.8. For $i=0,1$, define a functor $h_i:I[1]\\times I[1]\\to I[1]$ by $h_i(u,0)=i$ and $h_i(u,1)=u$. Every object function into this groupoid extends uniquely to a functor. Its nerve is a map $E\\times E\\to E$: degreewise it applies $h_i$ to the paired strings of vertices. Currying evaluation after this map gives $H_i:A\\times E\\to A$, with endpoint restrictions $jp_i$ and $1_A$, while $p_i j=1_W$ strictly. For any Segal space $U$, the product $U\\times E$ is again a Segal space: $E$ is Reedy fibrant, since its matching maps are maps of discrete simplicial sets and every horn in a discrete simplicial set is constant, so such maps are Kan fibrations; Reedy fibrations are characterized by matching maps, and these maps for $U\\times E$ are the products of those for $U$ and $E$; finally the Segal maps of $U\\times E$ are products of those of $U$ with the Segal bijections of the nerve $E$. The mapping fiber of $U\\times E$ from $(x,k)$ to $(y,l)$ is $M_U(x,y)$ times the one-point set consisting of the unique arrow $k\\to l$; identities and degree-two compositions are coordinatewise. Thus $h(U\\times E)=hU\\times I[1]$. Applying this to $H_i$ gives a natural isomorphism $h(jp_i)\\cong1_{hA}$: its component at $b$ is the class of $H_i(s_0b,0\\to1)$, its inverse is the reverse arrow, and functoriality on the two triangles expressing a square proves naturality. Together with $h(p_i j)=1_{hW}$, this makes $hj$ and $hp_i$ quasi-inverse functors.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-segal-cartesian-exponent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "First paragraph of Proposition 13.8, used in Lemma 13.9; Proposition 13.5, with the contraction written explicitly."
+   }
+  },
+  {
+   "text": "The classifier applied to $V=W^{F(n)}$ identifies $r_n:A_n\\to B_n$ with the weak equivalence $(V^E)_0\\to V_{\\mathrm{eq}}$ followed by inclusion $V_{\\mathrm{eq}}\\subseteq V_1$. The identification is currying and interchange of the factors $E,F(n)$; it respects the actual endpoint maps. Consequently every homotopy fiber of $r_n$ is either empty or contractible: over a component outside $V_{\\mathrm{eq}}$ there is no path into the image, and over a component inside it the homotopy fiber is that of the classifier weak equivalence. The contractible-fiber criterion justifies the latter assertion. The same holds for $r_0\\times r_0$, since its homotopy fibers are the products of the two respective homotopy fibers.",
+   "uses": [
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-segal-equivalence-classifier",
+    "lem-coef-space-contractible-fiber-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, application of Theorem 6.2 to W^{F(n)}; homotopy monomorphisms as in Section 12.2."
+   }
+  },
+  {
+   "text": "The square of simplicial sets $\\Delta^1\\times\\Delta^1$ is the union of its two nondegenerate triangles along their common diagonal. More explicitly those triangles have vertices $((0,0),(1,0),(1,1))$ and $((0,0),(0,1),(1,1))$; every weakly increasing string in the square lies in one of them and their intersection is the diagonal. After taking discrete outer nerves and mapping into $W$, this gives the strict identification $B_1=W_2\\times_{W_1,d_1,d_1}W_2$, with endpoint map $(d_2\\pi_1,d_0\\pi_2):B_1\\to B_0^2=W_1^2$. The map $s_1:W_1\\to B_1$ is $(s_0,s_1)$ and $s_0:W_0\\to B_0$ is the degeneracy $s_0$. The simplicial identities show that all four maps form the large rectangle of Lemma 13.9. The notation $s_n$ here denotes degree $n$ of the map $s$; the degeneracies in the displayed pairs are the ordinary degeneracies of $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, second displayed square on pp.31-32; explicit two-triangle decomposition."
+   }
+  },
+  {
+   "text": "Here is the missing computation for that rectangle. Let $L=\\{(x,\\sigma)\\in W_0\\times W_2:d_2\\sigma=s_0x\\}$ and $R=\\{(\\tau,y)\\in W_2\\times W_0:d_0\\tau=s_0y\\}$. The degree-two Segal map $(d_2,d_0):W_2\\to W_1\\times_{W_0}W_1$ is also a Kan fibration by restriction to the two consecutive edges, hence a trivial Kan fibration. Pulling it back with the first edge an identity gives a trivial fibration $L\\to W_1$, $(x,\\sigma)\\mapsto d_0\\sigma$, and with the second edge an identity gives a trivial fibration $R\\to W_1$, $(\\tau,y)\\mapsto d_2\\tau$. Their sections are $f\\mapsto(d_1f,s_0f)$ and $f\\mapsto(s_1f,d_0f)$, so these sections are weak equivalences. Instead use $d_1:L\\to W_1$ and $d_1:R\\to W_1$: they are Kan fibrations by restriction to the edge pairs $(d_2,d_1)$ and $(d_1,d_0)$, respectively, followed by the same identity-edge pullback. Each has the same section, and its composite with that section is the identity. Two-out-of-three for weak homotopy equivalences therefore makes both $d_1$ maps trivial fibrations. These applications require no completeness. Pullbacks and composites of trivial fibrations are trivial fibrations: a boundary lifting problem is solved in the original map, or successively in the two maps. Thus $L\\times_{W_1,d_1,d_1}R\\to W_1$ is a trivial fibration. It is over $W_0^2$, with the map to $W_1$ giving the common diagonal. For fixed $x,y$, its restriction is a trivial fibration $M_B(s_0x,s_0y)\\to M_W(x,y)$ whose section is the map induced by $s$. Hence $M_W(x,y)\\to M_B(s_0x,s_0y)$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, computation using Lemma 12.4; degree-two Segal maps and identity-edge pullbacks, with the computation expanded."
+   }
+  },
+  {
+   "text": "Fix $x,y\\in W_0$, and write $J:M_W(x,y)\\to M_A(jx,jy)$ and $T:M_A(jx,jy)\\to M_B(s_0x,s_0y)$ for the maps induced by $j,r$; put $b=(jx,jy)$, so that $(r_0\\times r_0)(b)=(s_0x,s_0y)$. We show that $T$ is a weak equivalence onto a union of components of its target, which is Rezk's homotopy-monomorphism property in the form used here. By step 3, for $n=0,1$ the map $r_n$ factors as a weak equivalence $r_n':A_n\\to C_n$ followed by the inclusion of a union of components $C_n\\subseteq B_n$. Write $\\partial$ for the endpoint maps $(d_1,d_0)$. The map $\\partial_B:B_1\\to B_0^2$ sends $C_1$ into $C_0^2$: every component of $C_1$ contains a point $r_1(a)$, because $r_1'$ is surjective on components; then $\\partial_Br_1(a)=(r_0\\times r_0)(\\partial_Aa)\\in C_0^2$; and a connected set maps into one component of $B_0^2$, of which $C_0^2$ is a union. The restriction $\\partial_C:C_1\\to C_0^2$ of the Kan fibration $\\partial_B$ (step 1) is a Kan fibration: a horn $\\Lambda^n_k$, $n\\geq1$, is connected, and its lift $\\Delta^n$ in $B_1$ is connected and meets $C_1$, hence lies in $C_1$. Its strict fiber over $(s_0x,s_0y)$ is $M_B(s_0x,s_0y)\\cap C_1$, a union of components of $M_B(s_0x,s_0y)$, since each component of that fiber lies in one component of $B_1$. The map $r_0'\\times r_0':A_0^2\\to C_0^2$ is a weak equivalence: by step 3, its homotopy fibers are the products of the contractible homotopy fibers of $r_0'$, and we apply the contractible-fiber criterion; all these spaces are Kan complexes. Let $Q=A_0^2\\times_{C_0^2}C_1$ be the strict pullback along $\\partial_C$. Right properness says the projection $Q\\to C_1$ is a weak equivalence, as the pullback of the weak equivalence $r_0'\\times r_0'$ along the Kan fibration $\\partial_C$. The map $u=(\\partial_A,r_1'):A_1\\to Q$ composed with that projection is the weak equivalence $r_1'$. Two-out-of-three therefore makes $u$ a weak equivalence. Both $\\partial_A:A_1\\to A_0^2$ (step 1) and $Q\\to A_0^2$ are Kan fibrations; the latter is a pullback of $\\partial_C$. The map $u$ lies over $A_0^2$. By the fiberwise criterion for Kan fibrations over an arbitrary base, its strict fiber over the vertex $b$ is a weak equivalence. That fiber is $T$ with its target restricted to $M_B(s_0x,s_0y)\\cap C_1$. Hence $T$ factors as a weak equivalence $M_A(jx,jy)\\to M_B(s_0x,s_0y)\\cap C_1$ followed by the inclusion of a union of components. This is the case for any fixed pair, empty fibers included.",
+   "uses": [
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-kan-fibration-arbitrary-base-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, printed p. 31: 'i* is a homotopy monomorphism ... whence j* is a weak equivalence'; homotopy monomorphism in the sense of Section 12.2 (weak equivalence onto a union of components), expanded through the fiberwise Kan-fibration criterion."
+   }
+  },
+  {
+   "text": "Step 5 shows that $TJ$ is a weak equivalence, so it is surjective on components. Then $T$ is surjective on components too: for a component of $M_B(s_0x,s_0y)$, take a preimage component under $TJ$ and apply $J$. By step 6, $T$ lands in the union of components $M_B(s_0x,s_0y)\\cap C_1$. That union therefore meets every component of $M_B(s_0x,s_0y)$, so it is the whole space. Hence $T$ is itself a weak equivalence. Two-out-of-three for the Kan model structure, applied to $TJ$ and $T$, makes $J$ a weak equivalence. This holds for every pair $x,y$, including an empty mapping space: then $M_B(s_0x,s_0y)$ is empty because $TJ$ is a weak equivalence, and so is $M_A(jx,jy)$ because $T$ is one.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, conclusion that j induces weak equivalences on all mapping spaces; the component argument in the homotopy-monomorphism cancellation."
+   }
+  },
+  {
+   "text": "Step 2 and step 7 say exactly that $j$ is a Dwyer--Kan equivalence. Apply the existing two-out-of-six theorem to the three composable maps $1_W:W\\to W$, $j:W\\to A$, and $p_i:A\\to W$. Their successive composites are $j$ and $p_i j=1_W$, both Dwyer--Kan equivalences (identity maps induce identity functors and identity mapping-space maps). The theorem gives that $p_i$ is a Dwyer--Kan equivalence, for $i=0,1$. Step 1 already supplies the asserted Segal condition on $W^E$.",
+   "uses": [
+    "lem-coef-segal-dk-two-out-of-six"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, first sentence and final conclusion; Proposition 7.5, using the existing stronger two-out-of-six node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-cartesian-exponent",
+  "lem-coef-segal-dk-two-out-of-six",
+  "lem-coef-segal-equivalence-classifier",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: mapping-space foundation through the inherited Rezk-completion chain. Agent expansion of Rezk Lemma 13.9 read online, pp.31-32; source archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +184,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.walkingCospanOpEquiv_counitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"∀ (X : CategoryTheory.Limits.WidePushoutShape CategoryTheory.Limits.WalkingPair),\\n  CategoryTheory.Limits.walkingCospanOpEquiv.counitIso.inv.app X = CategoryTheory.CategoryStruct.id X\", \"doc\": \"For every object $X$ in the wide pushout shape category (walking span category), the inverse of the counit isomorphism component at $X$ is equal to the identity morphism on $X$.\"}\n  {\"name\": \"CategoryTheory.whiskeringRightCompEvaluation\", \"module\": \"Mathlib.CategoryTheory.Products.Basic\", \"type\": \"(F : B ⥤ C) (a : A) : (whiskeringRight A B C).obj F ⋙ (evaluation _ _).obj a ≅ (evaluation _ _).obj a ⋙ F\", \"doc\": \"For a functor $ F : B \\\\to C $ and an object $ a $ in $ A $, the composition of the whiskering right functor applied to $ F $ with the evaluation functor at $ a $ is naturally isomorphic to the composi\"}\n  {\"name\": \"CategoryTheory.Limits.diagramIsoSpan_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Functor CategoryTheory.Limits.WalkingSpan C) (X : CategoryTheory.Limits.WalkingSpan),\\n  (CategoryTheory.Limits.diagramIsoSpan F).hom.app X = ((fun j => CategoryTheory.eqToIso ⋯) X).hom\", \"doc\": \"For any category $\\\\mathcal{C}$ and functor $F : \\\\mathcal{W} \\\\to \\\\mathcal{C}$ from the walking span category $\\\\mathcal{W}$ to $\\\\mathcal{C}$, the hom-component of the natural isomorphism between $F$ and\"}\n  {\"name\": \"CategoryTheory.Limits.diagramIsoCospan\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan\", \"type\": \"(F : WalkingCospan ⥤ C) : F ≅ cospan (F.map inl) (F.map inr)\", \"doc\": \"For any category $\\\\mathcal{C}$, there is a natural isomorphism between functors $F : \\\\text{WalkingCospan} \\\\to \\\\mathcal{C}$ and cospan diagrams $X \\\\to Z \\\\leftarrow Y$ in $\\\\mathcal{C}$. This isomorphism\"}\n  {\"name\": \"CategoryTheory.Limits.diagramIsoCospan_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Cospan\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Functor CategoryTheory.Limits.WalkingCospan C) (X : CategoryTheory.Limits.WalkingCospan),\\n  (CategoryTheory.Limits.diagramIsoCospan F).hom.app X = ((fun j => CategoryTheory.eqToIso ⋯) X).hom\", \"doc\": \"For any category $\\\\mathcal{C}$, there is a natural isomorphism between functors $F : \\\\text{WalkingCospan} \\\\to \\\\mathcal{C}$ and cospan diagrams $X \\\\to Z \\\\leftarrow Y$ in $\\\\mathcal{C}$. This isomorphism\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Compatibility\", \"type\": \": eA.functor ≅ F ⋙ e'.inverse\", \"doc\": \"The isomorphism $\\\\upsilon$ between the functor $eA.\\\\text{functor}$ and the composition $F \\\\circ e'.\\\\text{inverse}$, constructed via natural isomorphisms involving the right unitor, unit isomorphism, a\"}\n  {\"name\": \"CategoryTheory.Limits.walkingCospanOpEquiv_unitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"∀ (X : (CategoryTheory.Limits.WidePullbackShape CategoryTheory.Limits.WalkingPair)ᵒᵖ),\\n  CategoryTheory.Limits.walkingCospanOpEquiv.unitIso.hom.app X = CategoryTheory.CategoryStruct.id X\", \"doc\": \"For any object $X$ in the opposite category of the walking cospan category, the component of the unit isomorphism of the categorical equivalence between this opposite category and the walking span cat\"}\n  {\"name\": \"CategoryTheory.Limits.walkingCospanOpEquiv_counitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"∀ (X : CategoryTheory.Limits.WidePushoutShape CategoryTheory.Limits.WalkingPair),\\n  CategoryTheory.Limits.walkingCospanOpEquiv.counitIso.hom.app X = CategoryTheory.CategoryStruct.id X\", \"doc\": \"For any object $X$ in the wide pushout shape category, the component of the counit isomorphism of the equivalence between the opposite walking cospan category and the walking span category at $X$ is t\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: ordinary nerve full faithfulness, strict Segal simplicial sets, and evaluation or walking-cospan identities do not state evaluation on Segal-space internal homs is fully faithful on mapping Kan complexes. Read Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:370-407 and StrictSegal.lean:35-57,275-325. No Rezk Segal-space evaluation theorem occurred."
+  },
+  {
+   "tool": "grep",
+   "query": "Dwyer.?Kan|[Ss]egal.*[Cc]otensor|[Ss]egal.*[Ee]val",
+   "results": "{\"t\": \"2026-10-16T22:40:15Z\", \"tool\": \"grep\", \"query\": \"Dwyer.?Kan|[Ss]egal.*[Cc]otensor|[Ss]egal.*[Ee]val\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, the ordinary categorical nerve, ordinary fully faithful functors or condensed locally constant functors; none states the walking-isomorphism cotensor theorem for Reedy-fibrant Segal spaces. Read StrictSegal.lean:35-65, Coskeletal.lean:45-85, NerveAdjunction.lean:370-407, Functor/FullyFaithful.lean:35-70 and Condensed/Discrete/LocallyConstant.lean:378-395."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor Segal space on the contractible groupoid has fully faithful evaluation mapping spaces",
+   "results": "{\"t\": \"2026-10-16T22:40:16Z\", \"tool\": \"leansearch\", \"query\": \"Functor Segal space on the contractible groupoid has fully faithful evaluation mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Functor.FullyFaithful\", \"CategoryTheory.Functor.FullyFaithful.mapCommGrp\", \"CategoryTheory.yonedaGrpFullyFaithful\", \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"CategoryTheory.Functor.FullyFaithful.mapGrp\"], \"digest\": \"23979f4c0484101a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, the ordinary categorical nerve, ordinary fully faithful functors or condensed locally constant functors; none states the walking-isomorphism cotensor theorem for Reedy-fibrant Segal spaces. Read StrictSegal.lean:35-65, Coskeletal.lean:45-85, NerveAdjunction.lean:370-407, Functor/FullyFaithful.lean:35-70 and Condensed/Discrete/LocallyConstant.lean:378-395."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation from the walking isomorphism cotensor of a Segal space is a Dwyer Kan equivalence",
+   "results": "{\"t\": \"2026-10-16T22:40:17Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation from the walking isomorphism cotensor of a Segal space is a Dwyer Kan equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison\"], \"digest\": \"46ea7aafc673fb4e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, the ordinary categorical nerve, ordinary fully faithful functors or condensed locally constant functors; none states the walking-isomorphism cotensor theorem for Reedy-fibrant Segal spaces. Read StrictSegal.lean:35-65, Coskeletal.lean:45-85, NerveAdjunction.lean:370-407, Functor/FullyFaithful.lean:35-70 and Condensed/Discrete/LocallyConstant.lean:378-395."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant functor inclusion into the Segal space of equivalence arrows is fully faithful on homotopy mapping spaces",
+   "results": "{\"t\": \"2026-10-16T22:40:57Z\", \"tool\": \"leanfinder\", \"query\": \"The constant functor inclusion into the Segal space of equivalence arrows is fully faithful on homotopy mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.SimplicialObject.Truncated.sk.fullyFaithful\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.nerveFunctor.faithful\"], \"digest\": \"74adf6391a9a8637\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern strict Segal simplicial sets, the ordinary categorical nerve, ordinary fully faithful functors or condensed locally constant functors; none states the walking-isomorphism cotensor theorem for Reedy-fibrant Segal spaces. Read StrictSegal.lean:35-65, Coskeletal.lean:45-85, NerveAdjunction.lean:370-407, Functor/FullyFaithful.lean:35-70 and Condensed/Discrete/LocallyConstant.lean:378-395."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-equivalence-dk",
@@ -96,5 +235,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-cotensor-evaluation-dk",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Rezk Lemma 13.9 without citing its parent Proposition 13.8: explicit categorical contraction for homotopy categories, classifier homotopy-monomorphism test, strict two-triangle arrow-space calculation, identity-edge trivial fibrations, and iterated homotopy-fiber cancellation. Existing nodes suffice; zero new nodes. Mathlib searches repeated through msearch.py; no attachment or leaf.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction, mapping-space foundation through the cosimplicial-frame/cofibrant-inversion and Rezk-completion chain. Supporting the categorical-equivalence criterion used in Rezk Section 14, proof of assertions (1) and (3); this is additional Segal-space infrastructure, not a literal assertion of the blueprint paragraph. Specific supporting lemma for Proposition 13.8: Lemma 13.9, the three maps W -> W^E -> W.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e9262cf3c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e9262cf3c (reviewer sub-agent of L); spot-checked: Read the item in full, the seven cited statements, the parent and the unit sk-prop-sf-biduality-general. Also read Rezk at the cited place from the Rochester PDF (Lemma 12.4, §13.1 E, Proposition 13.8 first paragraph, Lemma 13.9 full proof, pp. 30-32). The statement is unchanged and agrees with Rezk 13.9. I tested it on empty W, the discrete nerve of BG (DK equivalence but not levelwise) and the discrete nerve of [1]. Steps 1-5 and 8 are correct: exponent-lemma fibrations; categorical contraction via h_i; classifier giving r_n as a weak equivalence onto V_eq; the two-triangle square, with d_2 T1 the source and d_0 T2 the target and s_1=(s_0,s_1), matching Rezk's square; identity-edge trivial fibrations, with all simplicial identities checked; two-out-of-six on 1_W, j, p_i. Fault (E5): step 6 identified hofib(T) with an iterated homotopy fiber 'by rearranging homotopy pullbacks' and called it an equality. That identification is not strict and no node states it. Repaired with existing same-unit nodes: T factors as a weak equivalence onto a union of components of M_B, through C_n ⊂ B_n, the pullback Q=A_0^2 ×_{C_0^2} C_1, right properness, two-out-of-three, and lem-coef-kan-fibration-arbitrary-base-fibers. Step 7 is adapted to this, and lem-coef-kan-homotopy-pullback-invariance is dropped from proof_deps. Minor fix: step 2 now justifies that U×E is a Segal space (cites the Reedy node). No cycle: the new citation's closure does not reach the item. No new nodes, no SGA, no off-unit citations, no tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-segal-cotensor-evaluation-dk.json.; 1 file(s) fixed by the reviewer"
  }
 }

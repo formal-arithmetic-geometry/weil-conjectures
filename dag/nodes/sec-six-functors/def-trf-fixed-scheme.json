@@ -1,73 +1,171 @@
 {
-  "id": "def-trf-fixed-scheme",
-  "blueprint": {
-    "is": "def-trf-fixed-scheme",
-    "from": null,
-    "same_as": null
+ "id": "def-trf-fixed-scheme",
+ "blueprint": {
+  "is": "def-trf-fixed-scheme",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Fixed scheme of a correspondence",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and the coefficient conventions [def-trf-coefficient-conventions], and put $s=\\operatorname{Spec}k$. Let $X,C$ be separated finite-type $k$-schemes [def-weil-scheme-morphism-properties] and let $c=(c_1,c_2):C\\to X\\times_sX$ be the underlying geometric correspondence of a cohomological correspondence [def-trf-correspondence]. Write $a_X:X\\to s$ for the structure morphism. Products here are fibre products of schemes [def-pc-fibre-product].\n\nThe diagonal $\\Delta_X:X\\to X\\times_sX$ is the unique morphism whose composites with both projections are $\\operatorname{id}_X$, that is, the morphism induced by the pair $(\\operatorname{id}_X,\\operatorname{id}_X)$.\n\nThe fixed scheme, with its two projections, is the fibre product\n$$\nF=\\operatorname{Fix}(c):=C\\times_{X\\times_sX,c,\\Delta_X}X,\\qquad i_F:F\\to C,\\qquad d:F\\to X.\n$$\nThus the defining fibre-product relation is $c\\circ i_F=\\Delta_X\\circ d$ and its two projection identities are $c_1\\circ i_F=d=c_2\\circ i_F$. This is the scheme-theoretic inverse image of the diagonal along $c$, as a scheme over $C$; the coefficient map of the cohomological correspondence is not used in this construction.\n\nFor an endomorphism $h:X\\to X$ over $s$, meaning $a_X\\circ h=a_X$, put\n$$\n\\operatorname{Fix}(h):=X\\times_{X\\times_sX,(\\operatorname{id}_X,h),\\Delta_X}X.\n$$\nThis is also denoted $\\operatorname{Fix}((\\operatorname{id}_X,h))$, using just the geometric correspondence. Its first projection is the scheme-theoretic equalizer of $h$ and $\\operatorname{id}_X$: for every scheme $T$, a morphism $T\\to\\operatorname{Fix}(h)$ is uniquely specified by a morphism $t:T\\to X$ with $h\\circ t=t$.\n\nA connected component of the underlying topological space of $F$ means a maximal nonempty connected subset, with connectedness in the subspace topology as in [def-weil-connected-scheme]; write $\\pi_0(F)$ for the set of all these subsets. We say that $F$ has finitely many open-and-closed components when $\\pi_0(F)$ is finite and every one of its members is open and closed in $F$. For such a component $\\beta$, use the open subscheme structure\n$$\n\\beta=(\\beta,\\mathcal O_F|_\\beta)\n$$\nof [def-weil-open-immersion], without passing to a reduced subscheme. In this case the inclusions give the canonical identification\n$$\n\\coprod_{\\beta\\in\\pi_0(F)}\\beta\\ \\xrightarrow{\\ \\sim\\ }\\ F,\n$$\nwhere the coproduct is the scheme coproduct of [lem-weil-pbc-scheme-coproduct-family]; morphisms from the disjoint open cover glue uniquely by [lem-weil-pbc-scheme-morphism-gluing]. The empty fixed scheme is allowed: its component set and its coproduct are both empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-fixed-scheme.md",
+  "place": "node def-trf-fixed-scheme, order 2087",
+  "note": [
+   "*Recorded in advance* from chapter *The trace formula* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fixed scheme correspondence pullback diagonal equalizer scheme finite connected components",
+   "results": "8 returned hit(s); first returned names/files: AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.Pullback.diagonalCover_map, AlgebraicGeometry.Scheme.Pullback.Triplet.ctorIdx, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.instQuasiCompactFstScheme, AlgebraicGeometry.Flat.instSndScheme.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
   },
-  "kind": "definition",
-  "title": "Fixed scheme of a correspondence",
-  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $c=(c_1,c_2):C\\to X\\times_sX$ be a\ncohomological correspondence with\n$s=\\Spec k$. Let\n\n$$\n\\Delta_X:X\\longrightarrow X\\times_sX\n$$\n\nbe the diagonal. The *fixed scheme* is\n\n$$\nF=\\operatorname{Fix}(c):=C\\times_{X\\times_sX,c,\\Delta_X}X,\n$$\n\nthe scheme-theoretic intersection of the image of $c$ with the\ndiagonal, with first projection $i_F:F\\to C$ and second projection\n$d:F\\to X$, so that $c_1i_F=d=c_2i_F$. For $h:X\\to X$ a\nmorphism,\n$\\operatorname{Fix}(h):= \\operatorname{Fix}((\\operatorname{id}_X,h))$ is the scheme-theoretic\nequalizer of $h$ and the identity. We say that $F$ has\n*finitely many open-and-closed components* when the set\n$\\pi_0(F)$ of open-and-closed connected components of $F$ is finite;\nin that case\n\n$$\nF=\\coprod_{\\beta\\in\\pi_0(F)}\\beta,\n$$\n\nwith each $\\beta$ an open-and-closed\nsubscheme of $F$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-fixed-scheme.md",
-    "place": "node def-trf-fixed-scheme, order 2087",
-    "note": [
-      "*Recorded in advance* from chapter *The trace formula* of the source."
-    ]
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback, CategoryTheory.Limits.equalizer",
+   "results": "11 returned hit(s); first returned names/files: CategoryTheory.Limits.equalizerPullbackMapIso, CategoryTheory.Limits.equalizerPullbackMapIso_hom_snd, CategoryTheory.Limits.equalizerPullbackMapIso_inv_ι_fst, CategoryTheory.Limits.equalizerPullbackMapIso_inv_ι_snd, CategoryTheory.Limits.equalizerPullbackMapIso_inv_ι_fst_assoc, CategoryTheory.Limits.equalizerPullbackMapIso_inv_ι_snd_assoc, CategoryTheory.Limits.equalizerPullbackMapIso_hom_snd_assoc, CategoryTheory.Limits.equalizerPullbackMapIso_hom_fst. Read Pullback/Equalizer.lean:60: equalizerPullbackMapIso is compatibility with base change, not this definition.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
   },
-  "stmt_deps": [
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2087,
-  "blueprint_uses": [
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "fixedScheme|fixed.scheme|isPullback_equalizer|diagonal|connectedComponents",
+   "results": "25 returned hit(s); first returned names/files: Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean. Search subdirectory argument: AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $c=(c_1,c_2):C\\to X\\times_sX$ be a\ncohomological correspondence with\n$s=\\Spec k$. Let\n\n$$\n\\Delta_X:X\\longrightarrow X\\times_sX\n$$\n\nbe the diagonal. The *fixed scheme* is\n\n$$\nF=\\operatorname{Fix}(c):=C\\times_{X\\times_sX,c,\\Delta_X}X,\n$$\n\nthe scheme-theoretic intersection of the image of $c$ with the\ndiagonal, with first projection $i_F:F\\to C$ and second projection\n$d:F\\to X$, so that $c_1i_F=d=c_2i_F$. For $h:X\\to X$ a\nmorphism,\n$\\operatorname{Fix}(h):= \\operatorname{Fix}((\\operatorname{id}_X,h))$ is the scheme-theoretic\nequalizer of $h$ and the identity. We say that $F$ has\n*finitely many open-and-closed components* when the set\n$\\pi_0(F)$ of open-and-closed connected components of $F$ is finite;\nin that case\n\n$$\nF=\\coprod_{\\beta\\in\\pi_0(F)}\\beta,\n$$\n\nwith each $\\beta$ an open-and-closed\nsubscheme of $F$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "The fixed scheme of a scheme correspondence is the pullback along the diagonal, the equalizer of its legs, with finite clopen connected components",
+   "results": "8 returned hit(s); first returned names/files: AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange, AlgebraicGeometry.Scheme.Pullback.diagonalCover, AlgebraicGeometry.isClosedImmersion_equalizer_ι_left, AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|diagonal|connectedComponent|IsClopen",
+   "results": "5 returned hit(s); first returned names/files: 13, 15, 33, 37, 38. Search subdirectory argument: CategoryTheory/Limits/Shapes/Diagonal.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms c1 and c2 to X over S the fibre product of (c1,c2) with the diagonal represents their equalizer",
+   "results": "8 returned hit(s); first returned names/files: AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.Scheme.exists_preimage_of_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage, AlgebraicGeometry.Scheme.Pullback.instHasPullbacks, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.mk'.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"equalizer\", \"diagonal\"",
+   "results": "0 returned hit(s); first returned names/files: .",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizerPullbackMapIso|def diagonal|abbrev diagonal|theorem diagonal_(fst|snd)|lemma diagonal_(fst|snd)",
+   "results": "11 returned hit(s); first returned names/files: Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean. Search subdirectory argument: CategoryTheory/Limits/Shapes. Read Diagonal.lean:38-50 and Pullback/Equalizer.lean:25-34,60: standard diagonal and absolute-product equalizer statements, not the whole correspondence/component convention.",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration covers the whole item; existing DAG leaves supply the individual constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "^(def|theorem|lemma|abbrev).*([Cc]omponent|eq|surj|preimage)|connectedComponent_eq",
+   "results": "25 returned hits, including connectedComponent at Topology/Connected/Basic.lean:495; source lines 495-606 read for its definition, membership, maximality, disjointness and closedness. The other returned hits concern path components and component cardinality under open maps. Subdirectory: Topology/Connected.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: these are constituent topology results; connected components are defined inline from the existing connectedness node"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback.*equalizer|equalizer.*diagonal|connectedComponents.*[Ii]so",
+   "results": "16 returned hits: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/LocallyConnected.lean, Mathlib/Topology/Connected/LocallyConnected.lean.",
+   "date": "2026-10-17",
+   "verdict": "No full-item match. isPullback_equalizer_prod (Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equalizer.lean:28) concerns an absolute binary product; the existing relative fibre-product node supplies the construction used here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The categorical equalizer of an endomorphism and the identity represents fixed morphisms into a scheme",
+   "results": "8 returned hits: AlgebraicGeometry.isClosedImmersion_equalizer_ι_left, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.Pullback.Triplet.mk', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback.",
+   "date": "2026-10-17",
+   "verdict": "No full-item match. The returned equalizer immersion facts concern properties of an equalizer, not the fixed-scheme definition and component convention."
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2087,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $c=(c_1,c_2):C\\to X\\times_sX$ be a\ncohomological correspondence with\n$s=\\Spec k$. Let\n\n$$\n\\Delta_X:X\\longrightarrow X\\times_sX\n$$\n\nbe the diagonal. The *fixed scheme* is\n\n$$\nF=\\operatorname{Fix}(c):=C\\times_{X\\times_sX,c,\\Delta_X}X,\n$$\n\nthe scheme-theoretic intersection of the image of $c$ with the\ndiagonal, with first projection $i_F:F\\to C$ and second projection\n$d:F\\to X$, so that $c_1i_F=d=c_2i_F$. For $h:X\\to X$ a\nmorphism,\n$\\operatorname{Fix}(h):= \\operatorname{Fix}((\\operatorname{id}_X,h))$ is the scheme-theoretic\nequalizer of $h$ and the identity. We say that $F$ has\n*finitely many open-and-closed components* when the set\n$\\pi_0(F)$ of open-and-closed connected components of $F$ is finite;\nin that case\n\n$$\nF=\\coprod_{\\beta\\in\\pi_0(F)}\\beta,\n$$\n\nwith each $\\beta$ an open-and-closed\nsubscheme of $F$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-fixed-scheme",
+  "worker": "stage1",
+  "summary": "Q100 checked the current blueprint and project Lean, reused the existing fibre-product, connectedness, open-subscheme, coproduct and morphism-gluing nodes, and introduced no new nodes. Corrected scheme-theoretic intersection of the image to inverse image along c (dual-number counterexample), made the graph endomorphism explicitly over s, and clarified that pi_0 lists all components and clopen subschemes retain their full structure sheaf. Universal-property and component/gluing verifications are written out in report.md. This is a definition split, so proof and proof_deps remain empty; no project declaration covers every clause. Independent second reading clarified the quantification over test schemes and the subspace topology, reran semantic and source searches, and confirmed all existing dependency statements and source corrections.",
+  "blueprint": "Realizes the full current definition def-trf-fixed-scheme, order 2431: the first display and projections, graph/equalizer sentence, and the finite open-and-closed component convention and final coproduct display. The inherited unit is a recorded-in-advance storage location; this is not its key statement and no unit realized fields are changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-7e34c40b0",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7e34c40b0 (reviewer sub-agent of L); spot-checked: Read the item in full: all 9 stmt_deps statements, the main-20261015 source def-trf-fixed-scheme.md (identical to the stored blueprint_update), the unit sk-prop-sf-rf-shriek-preservation (the item is only stored there and realizes no step), the citers (def-trf-graph-correspondence, prop-trf-fixed-square-cartesian, thm-trf-frobenius-fixed-points, def-trf-scheme-frobenius, lem-trf-integration-component-sum), Stacks 004S/004T/01JP/01IO/01JB/01JC, and the project Lean Correspondence.fix/ofGraph. The fibre-product definition and c1 iF = d = c2 iF are correct. Both source corrections are genuine and checked on counterexamples. (1) 'Intersection of the image with the diagonal' fails for C = Spec k[eps] -> s; 'inverse image along c' is exactly the displayed pullback. (2) (id,h) needs a_X h = a_X, which fails for the Frobenius of Spec of an algebraic closure of F_q. This matches the graph node's k-endomorphism, Lean ofGraph's hg, and the k-linear Phi of the only Fix(h) citer. The equalizer description holds for every test scheme (h = id gives X; translation on A^1 gives the empty scheme). The pi_0 convention counts all components; the clopen clause is redundant but true and blocks the misreading under which the coproduct display fails. The coproduct identification is an elementary instance of the Mathlib-leaf coproduct and gluing nodes. Edge cases checked: empty F, two points, a nonreduced point. No new nodes, no cycle, no duplicate definition of connected components or equalizers in the DAG, no hypothesis added, no SGA, no tool_uses. No fixes."
+ }
 }
