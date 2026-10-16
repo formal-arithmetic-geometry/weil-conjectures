@@ -9,6 +9,10 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # Smooth base change on the pro-étale site, finite coefficients

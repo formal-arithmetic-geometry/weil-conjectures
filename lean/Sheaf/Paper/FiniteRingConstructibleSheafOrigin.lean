@@ -25,6 +25,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence
 
 /-!
 # Constructible finite-ring sheaves have etale origin
