@@ -262,11 +262,17 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-categories",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat",
+  "declaration": "CochainComplex.kFlat_of_isStrictlyLE_of_flat",
   "declarations": [
    "CochainComplex.kFlat_of_isStrictlyLE_of_flat"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 19:41 UTC for group Q106, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: gives the stated K-flatness conclusion for the bounded-above complex with degreewise flat terms."
+  "statement": "lemma kFlat_of_isStrictlyLE_of_flat (b : ℤ) [K.IsStrictlyLE b]\n    [HasColimitsOfShape ℤ A] [HasExactColimitsOfShape ℤ A]\n    (hK : ∀ n, ObjectProperty.flat (K.X n)) :\n    (quasiIso A (.up ℤ)).kFlat K",
+  "branch": "slopmaster2",
+  "by": "Q58",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact source declaration in WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat, lines 338–355. Its section supplies the abelian, monoidal, monoidal-preadditive, graded tensor, and fixed-object Z-colimit-preservation hypotheses; the item additionally states countable coproducts, which provide the countable graded coproduct instances needed by the source theorem. The conclusion is precisely two-sided K-flatness for a complex strictly bounded above with flat terms. The declaration is sorry-free in the pinned slopmaster2 source."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -286,5 +292,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1646cf20",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Existing upstream binding CochainComplex.kFlat_of_isStrictlyLE_of_flat (FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean:338-355, identical in slopmaster2 and side clone). Clause-by-clause match with the node: abelian+MonoidalCategory+MonoidalPreadditive, exact Z-colimits (HasColimitsOfShape/HasExactColimitsOfShape ℤ, preorder), fixed-object tensor preserving Z-colimits on both sides, K.IsStrictlyLE b (termwise vanishing above b), ObjectProperty.flat (two-sided exactness), conclusion kFlat equals the dependency's IsKFlatForTotalTensor definitionally. Reproduced via nt_compile.py: scratch consumer with exactly the node's hypotheses (HasCountableCoproducts + countable-discrete and Z colimit preservation by tensorLeft/Right) infers the section's graded-tensor instances and accepts the theorem as K.IsKFlatForTotalTensor; rc=0, no warnings; axioms propext/Classical.choice/Quot.sound only. Universes independent; lean.statement verbatim; stmt_deps unchanged; only lean field differs from base (completes Q106 attach record); both report sections present; no repair note; no new module/definition/proof. Stacks 064K (more-algebra.tex:14284) is the module special case. No findings."
  }
 }
