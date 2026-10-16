@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.Multifunctor
 
 /-!
 
@@ -20,10 +21,11 @@ categories `C` (for `D(X)`) and `D` (for `D(Y)`) are monoidal closed, and
 
 * `adj : F ⊣ G` plays the role of `Lf^* ⊣ Rf_*`, with `F` oplax monoidal;
 * `adj' : P ⊣ S` plays the role of `Rf_! ⊣ Rf^!`;
-* `pf K B : P K ⊗ B ⟶ P (K ⊗ F B)` plays the role of the derived exceptional projection
-  morphism `PF^!` (`f_! K ⊗ B ⟶ f_!(K ⊗ f^* B)`), which in practice is constructed from a
-  compactification (see `WeilConjectures.PoincareDuality.ProjectionFormula`), and is here an
-  arbitrary family of morphisms.
+* `pf`, a natural transformation of bifunctors `C ⥤ D ⥤ D` from `(K, B) ↦ P K ⊗ B` to
+  `(K, B) ↦ P (K ⊗ F B)`, plays the role of the derived exceptional projection morphism `PF^!`
+  (`f_! K ⊗ B ⟶ f_!(K ⊗ f^* B)`), which in practice is constructed from a compactification (see
+  `WeilConjectures.PoincareDuality.ProjectionFormula`), and is here an arbitrary natural
+  transformation.
 
 The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with this convention
 `K` is always the *left* tensor factor, matching the direction of `PF^!`.
@@ -55,9 +57,9 @@ The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with 
 
 * `CategoryTheory.Verdier.uncurry_poincareMap`: **Poincaré duality is the trace–cup pairing**:
   the transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the Poincaré duality morphism is the composite of the cup
-  product and the trace, provided `pf` is natural in its second variable.
+  product and the trace.
 * `CategoryTheory.Verdier.isIso_exchange_of_isIso`: the exchange morphism `Φ_{K,L}` is an
-  isomorphism if `pf K B` is an isomorphism for every `B` and `pf` is natural in `B` (the Yoneda
+  isomorphism if the component of `pf` at `(K, B)` is an isomorphism for every `B` (the Yoneda
   argument of the specification).
 
 -/
@@ -159,10 +161,19 @@ In the application to a morphism `f : X ⟶ Y` of separated `k`-schemes of finit
 * `adj' : P ⊣ S` is `Rf_! ⊣ Rf^!`,
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`;
 * `pf` is the exceptional projection morphism `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)`,
-  `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism`.
+  `ProEtale.CondensedRing.boundedConstructibleExceptionalProjection`.
 
-The morphism `pf` is an input rather than being built from `adj` and `adj'`: neither
-`Adjunction.projectionMorphism` (which concerns `G = Rf_*`, not `P = Rf_!`) nor
+The input `pf` is a natural transformation of bifunctors `C ⥤ D ⥤ D`
+```
+pf : curriedTensorInsertFunctor₁ P ⟶ curriedTensorPost P ⋙ (whiskeringLeft D C D).obj F,
+         (K, B) ↦ P K ⊗ B                       (K, B) ↦ P (K ⊗ F B)
+```
+whose component `(pf.app K).app B` is `PF^!_{f,K,B}`, natural in both `K` and `B`. Only the
+naturality in `B` is used below (`pf_naturality_right`), in the Yoneda argument for `exchange`
+and in the trace–cup comparison.
+
+The natural transformation `pf` is an input rather than being built from `adj` and `adj'`:
+neither `Adjunction.projectionMorphism` (which concerns `G = Rf_*`, not `P = Rf_!`) nor
 `Adjunction.projectionComparison` (which goes the other way and involves `S = Rf^!`, not
 `F = Lf^*`) produces it for a general `f`, and the two adjunctions alone give no canonical such
 morphism. In the application it depends on a compactification `f = g ∘ j`, with `j` an open
@@ -174,7 +185,15 @@ inverse of `projectionComparison` for `Dj_! ⊣ Lj^*`, and `Lj^* Lg^* ≅ Lf^*`
 variable [MonoidalClosed C] [MonoidalClosed D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
   {P : C ⥤ D} {S : D ⥤ C} (adj' : P ⊣ S)
-  (pf : ∀ (K : C) (B : D), P.obj K ⊗ B ⟶ P.obj (K ⊗ F.obj B))
+  (pf : curriedTensorInsertFunctor₁ P ⟶
+    curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
+
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- The naturality of the projection morphism `pf` in its second variable, written out. -/
+@[reassoc]
+lemma pf_naturality_right (K : C) {B B' : D} (h : B ⟶ B') :
+    P.obj K ◁ h ≫ (pf.app K).app B' = (pf.app K).app B ≫ P.map (K ◁ F.map h) :=
+  (pf.app K).naturality h
 
 section Exchange
 
@@ -183,7 +202,7 @@ projection morphism `pf`, followed by the counit `F G ⟶ 𝟭`, the evaluation
 `K ⊗ RHom(K, S L) ⟶ S L` and the counit `P S ⟶ 𝟭`. -/
 noncomputable def exchangePairing (K : C) (L : D) :
     P.obj K ⊗ G.obj ((ihom K).obj (S.obj L)) ⟶ L :=
-  pf K _ ≫ P.map (K ◁ adj.counit.app _) ≫ P.map ((ihom.ev K).app _) ≫ adj'.counit.app L
+  (pf.app K).app _ ≫ P.map (K ◁ adj.counit.app _) ≫ P.map ((ihom.ev K).app _) ≫ adj'.counit.app L
 
 /-- The **Verdier exchange morphism** `Φ_{K,L} : G RHom(K, S L) ⟶ RHom(P K, L)`, i.e.
 `Rf_* RHom(K, Rf^! L) ⟶ RHom(Rf_! K, L)`: the transpose of `exchangePairing` under the
@@ -196,32 +215,30 @@ lemma uncurry_exchange (K : C) (L : D) :
     uncurry (exchange adj adj' pf K L) = exchangePairing adj adj' pf K L :=
   uncurry_curry _
 
-/-- **Verdier exchange is an isomorphism** as soon as the projection morphisms `pf K B` are, for
-every `B`, and are natural in `B`: for every test object `T`, composing with `Φ_{K,L}` is the
-chain of bijections
+/-- **Verdier exchange is an isomorphism** as soon as the projection morphisms
+`(pf.app K).app B` are, for every `B`: for every test object `T`, composing with `Φ_{K,L}` is
+the chain of bijections
 ```
 Hom(T, G RHom(K, S L)) ≃ Hom(F T, RHom(K, S L)) ≃ Hom(K ⊗ F T, S L) ≃ Hom(P (K ⊗ F T), L)
   ≃ Hom(P K ⊗ T, L) ≃ Hom(T, RHom(P K, L)),
 ```
-the fourth one being precomposition with the isomorphism `pf K T`, so `Φ_{K,L}` is an
-isomorphism by the Yoneda lemma. -/
-theorem isIso_exchange_of_isIso
-    (hpf : ∀ (K : C) {B B' : D} (h : B ⟶ B'),
-      P.obj K ◁ h ≫ pf K B' = pf K B ≫ P.map (K ◁ F.map h))
-    (K : C) (L : D) [∀ B, IsIso (pf K B)] : IsIso (exchange adj adj' pf K L) := by
+the fourth one being precomposition with the isomorphism `(pf.app K).app T`, so `Φ_{K,L}` is
+an isomorphism by the Yoneda lemma. -/
+theorem isIso_exchange_of_isIso (K : C) (L : D) [∀ B, IsIso ((pf.app K).app B)] :
+    IsIso (exchange adj adj' pf K L) := by
   rw [isIso_iff_yoneda_map_bijective]
   intro T
   have e : (fun u : T ⟶ G.obj ((ihom K).obj (S.obj L)) ↦ u ≫ exchange adj adj' pf K L) =
-      curry ∘ (fun x ↦ pf K T ≫ x) ∘ (adj'.homEquiv _ _).symm ∘ uncurry ∘
+      curry ∘ (fun x ↦ (pf.app K).app T ≫ x) ∘ (adj'.homEquiv _ _).symm ∘ uncurry ∘
         (adj.homEquiv _ _).symm := by
     funext u
     simp only [Function.comp_apply, exchange, ← curry_natural_left, exchangePairing,
-      reassoc_of% hpf, Adjunction.homEquiv_counit, uncurry_eq,
+      pf_naturality_right_assoc, Adjunction.homEquiv_counit, uncurry_eq,
       MonoidalCategory.whiskerLeft_comp, Category.assoc, Functor.map_comp]
   rw [e]
   refine Function.Bijective.comp ⟨curry_injective, fun g ↦ ⟨uncurry g, curry_uncurry g⟩⟩
-    (Function.Bijective.comp ⟨fun a b h ↦ (cancel_epi (pf K T)).1 h,
-      fun y ↦ ⟨inv (pf K T) ≫ y, by simp⟩⟩ (Function.Bijective.comp (Equiv.bijective _)
+    (Function.Bijective.comp ⟨fun a b h ↦ (cancel_epi ((pf.app K).app T)).1 h,
+      fun y ↦ ⟨inv ((pf.app K).app T) ≫ y, by simp⟩⟩ (Function.Bijective.comp (Equiv.bijective _)
       (Function.Bijective.comp ⟨uncurry_injective, fun g ↦ ⟨curry g, uncurry_curry g⟩⟩
         (Equiv.bijective _))))
 
@@ -267,18 +284,16 @@ noncomputable def poincareMap : G.obj T ⟶ (ihom (P.obj (𝟙_ C))).obj (𝟙_ 
 `Rf_! Λ ⊗ Rf_* Λ(d)[2d] ⟶ Rf_!(Λ ⊗ Lf^* Rf_* Λ(d)[2d]) ⟶ Rf_!(Λ ⊗ Λ(d)[2d]) ⟶ Rf_! Λ(d)[2d]`:
 the projection morphism, the counit `F G ⟶ 𝟭` and the left unitor. -/
 noncomputable def cupProduct : P.obj (𝟙_ C) ⊗ G.obj T ⟶ P.obj T :=
-  pf (𝟙_ C) (G.obj T) ≫ P.map (𝟙_ C ◁ adj.counit.app T) ≫ P.map (λ_ T).hom
+  (pf.app (𝟙_ C)).app (G.obj T) ≫ P.map (𝟙_ C ◁ adj.counit.app T) ≫ P.map (λ_ T).hom
 
-/-- **Poincaré duality is the trace–cup pairing.** If the projection morphism `pf` is natural
-in its second variable, the transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the Poincaré duality morphism is
-exactly the cup product followed by the trace. In particular the Poincaré duality morphism,
-the trace and the pairing share the normalization of the purity isomorphism. -/
-theorem uncurry_poincareMap
-    (hpf : ∀ (K : C) {B B' : D} (h : B ⟶ B'),
-      P.obj K ◁ h ≫ pf K B' = pf K B ≫ P.map (K ◁ F.map h)) :
+/-- **Poincaré duality is the trace–cup pairing.** The transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the
+Poincaré duality morphism is exactly the cup product followed by the trace. In particular the
+Poincaré duality morphism, the trace and the pairing share the normalization of the purity
+isomorphism. -/
+theorem uncurry_poincareMap :
     uncurry (poincareMap adj adj' pf pur) = cupProduct adj pf ≫ trace adj' pur := by
-  rw [poincareMap, uncurry_natural_left, uncurry_exchange, exchangePairing, reassoc_of% hpf,
-    cupProduct, trace]
+  rw [poincareMap, uncurry_natural_left, uncurry_exchange, exchangePairing,
+    pf_naturality_right_assoc, cupProduct, trace]
   simp only [Category.assoc, ← P.map_comp_assoc, ← P.map_comp]
   congr 3
   have hc := adj.counit_naturality (pur.inv ≫ toIhomUnit (S.obj (𝟙_ D)))

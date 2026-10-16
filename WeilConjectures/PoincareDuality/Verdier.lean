@@ -98,14 +98,13 @@ noncomputable def verdierExchange (K : Dᵇc(X.left)⟦Λ⟧) (L : Dᵇc(Y.left)
       (ihom ((boundedConstructibleLowerShriek Λ ℓ f).obj K)).obj L :=
   Verdier.exchange (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
     (boundedConstructibleUpperShriekAdjunction Λ ℓ f)
-    (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f) K L
+    (boundedConstructibleExceptionalProjection Λ ℓ f) K L
 
 /-- **Verdier duality**: the exchange morphism `Φ_{f,K,L}` is an isomorphism, by the derived
 projection formula and the Yoneda lemma. -/
 theorem isIso_verdierExchange (K : Dᵇc(X.left)⟦Λ⟧) (L : Dᵇc(Y.left)⟦Λ⟧) :
     IsIso (verdierExchange Λ ℓ f K L) :=
-  Verdier.isIso_exchange_of_isIso _ _ _
-    (boundedConstructibleExceptionalProjectionMorphism_natural_right Λ ℓ f) K L
+  Verdier.isIso_exchange_of_isIso _ _ _ K L
 
 end Exchange
 
@@ -164,7 +163,7 @@ noncomputable def absoluteVerdierExchange (K : Dᵇc(X.left)⟦Λ⟧) :
       verdierDual Λ ℓ aY ((boundedConstructibleLowerShriek Λ ℓ f).obj K) :=
   Verdier.absoluteExchange (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
     (boundedConstructibleUpperShriekAdjunction Λ ℓ f)
-    (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f)
+    (boundedConstructibleExceptionalProjection Λ ℓ f)
     (dualizingComplex Λ ℓ aX) (dualizingComplex Λ ℓ aY) γ K
 
 /-- The **opposite Verdier exchange morphism** `Θ_K : Rf_! 𝔻_X K ⟶ 𝔻_Y Rf_* K`, given an
@@ -176,7 +175,7 @@ noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Λ⟧) :
       verdierDual Λ ℓ aY ((boundedConstructibleLowerStar Λ ℓ f).obj K) :=
   Verdier.dualExchange (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f)
     (boundedConstructibleUpperShriekAdjunction Λ ℓ f)
-    (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f)
+    (boundedConstructibleExceptionalProjection Λ ℓ f)
     (dualizingComplex Λ ℓ aX) (dualizingComplex Λ ℓ aY) γ K
 
 end Absolute

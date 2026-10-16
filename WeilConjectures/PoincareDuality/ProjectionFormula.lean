@@ -46,19 +46,23 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 - `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism`: `PF^!_f` on
   bounded constructible complexes, for a morphism `f` of separated `k`-schemes of finite type
   and the compactification `compactificationOverField f` defining
-  `boundedConstructibleLowerShriek`. This is the version used by Verdier duality.
+  `boundedConstructibleLowerShriek`.
+- `ProEtale.CondensedRing.boundedConstructibleExceptionalProjection`: the same morphisms
+  bundled into a natural transformation of bifunctors `(K, B) ↦ Rf_! K ⊗ᴸ B` to
+  `(K, B) ↦ Rf_! (K ⊗ᴸ Lf^* B)`. This is the version used by Verdier duality.
 
 ## Main results
 
 - `ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_natural_right` and
   `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_right`:
-  `PF^!_{f,K,B}` is natural in `B`. This is the only property of `PF^!` used downstream
-  besides its invertibility.
+  `PF^!_{f,K,B}` is natural in `B`.
   Its proof (sorried for now) is the naturality of the three constituent maps:
   `Adjunction.projectionMorphism_natural_right`,
   `Adjunction.inv_projectionComparison_natural_right` and that of
   `leftDerivedUpperStarCompactificationIso`. The bounded constructible version is its image
   under the faithful inclusion, also sorried: the direct proof times out.
+- `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_natural_left`:
+  `PF^!_{f,K,B}` is natural in `K` (sorried for now).
 
 ## Sorried input
 
@@ -253,6 +257,44 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
           (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
   sorry
 
+/-- The exceptional projection morphism on bounded constructible complexes is natural in its
+first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
+follows from the naturality of the three constituent maps; it is `sorry`ed for now. -/
+@[reassoc]
+lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : Dᵇc(X.left)⟦Λ⟧}
+    (φ : K ⟶ K') (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructibleLowerShriek Λ ℓ f).map φ ▷ B ≫
+        boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K' B =
+      boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
+        (boundedConstructibleLowerShriek Λ ℓ f).map
+          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
+  sorry
+
+/-- The **derived exceptional projection morphism** on bounded constructible complexes, as a
+natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
+```
+(K, B) ↦ Rf_! K ⊗ᴸ B   ⟶   (K, B) ↦ Rf_! (K ⊗ᴸ Lf^* B),
+```
+with components `boundedConstructibleExceptionalProjectionMorphism`. This is the form in which
+`PF^!` enters `CategoryTheory.Verdier`. -/
+noncomputable def boundedConstructibleExceptionalProjection :
+    curriedTensorInsertFunctor₁ (boundedConstructibleLowerShriek Λ ℓ f) ⟶
+      curriedTensorPost (boundedConstructibleLowerShriek Λ ℓ f) ⋙
+        (Functor.whiskeringLeft _ _ _).obj (boundedConstructibleUpperStar Λ ℓ f) where
+  app K :=
+    { app B := boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B
+      naturality _ _ h :=
+        boundedConstructibleExceptionalProjectionMorphism_natural_right Λ ℓ f K h }
+  naturality _ _ φ := NatTrans.ext <| funext fun B ↦
+    boundedConstructibleExceptionalProjectionMorphism_natural_left Λ ℓ f φ B
+
+@[simp]
+lemma boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ⟧)
+    (B : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructibleExceptionalProjection Λ ℓ f).app K).app B =
+      boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B :=
+  rfl
+
 /-- **The derived projection formula for `Rf_!`**: the exceptional projection morphism
 `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
 docstring. -/
@@ -260,6 +302,11 @@ instance isIso_boundedConstructibleExceptionalProjectionMorphism (K : Dᵇc(X.le
     (B : Dᵇc(Y.left)⟦Λ⟧) :
     IsIso (boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B) :=
   sorry
+
+instance isIso_boundedConstructibleExceptionalProjection_app_app (K : Dᵇc(X.left)⟦Λ⟧)
+    (B : Dᵇc(Y.left)⟦Λ⟧) :
+    IsIso (((boundedConstructibleExceptionalProjection Λ ℓ f).app K).app B) :=
+  isIso_boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B
 
 end BoundedConstructible
 
