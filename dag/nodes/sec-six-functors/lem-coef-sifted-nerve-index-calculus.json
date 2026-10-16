@@ -29,9 +29,156 @@
   "def-coef-complete-algebroid",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first derive separate product preservation in spaces from the existing transport interface. At the point, that interface identifies $\\operatorname{Map}_{\\mathcal S}(U,V)$ with the Kan complex $\\operatorname{Fun}(U,V)$, coherently in both variables; degreewise products therefore satisfy $\\operatorname{Map}(T,X\\times Y)=\\operatorname{Map}(T,X)\\times\\operatorname{Map}(T,Y)$, and the point is terminal. The exponential identity of simplicial maps, obtained by rearranging factors in $T\\times X\\times Y\\times\\Delta^r$, gives $\\operatorname{Map}(X\\times Y,Z)\\simeq\\operatorname{Map}(Y,\\operatorname{Fun}(X,Z))$; the universal-arrow theorem assembles this into the adjunction $X\\times-\\dashv\\operatorname{Fun}(X,-)$ and its coherent-diagram formula. If $L=\\operatorname{colim}_A D$, apply that formula and the cocone criterion to obtain\n$$\\operatorname{Map}(X\\times L,Z)\\simeq\\operatorname{Map}(L,\\operatorname{Fun}(X,Z))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal S)}(D,\\Delta_A\\operatorname{Fun}(X,Z))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal S)}(X\\times D,\\Delta_A Z).$$\nThus $X\\times L$ with legs $\\mathrm{id}_X\\times\\lambda_a$ is the colimit. Naturality is the stated coherent naturality of transport and universal arrows, and restriction of each formula along $\\Delta^s\\to\\Delta^r$ commutes with factor rearrangement. Empty $A$ and empty $X$ are included.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary universal-property calculation behind Lemma 5.5.2.3 and Remark 5.5.8.12; uses existing coherent universal-arrow and cocone interfaces."
+   }
+  },
+  {
+   "text": "For small simplicial sets $A,B$ and a quasicategory $\\mathcal E$ with small colimits, the cocone criterion and the left-adjoint clause of the universal-arrow theorem supply $\\operatorname{colim}_A\\dashv\\Delta_A$ and $\\operatorname{colim}_B\\dashv\\Delta_B$, with their coherent-diagram mapping-space formulas. Curry $H:A\\times B\\to\\mathcal E$ by rearranging the simplicial factors; for every $T\\in\\mathcal E$ these formulas give\n$$\\operatorname{Map}_{\\mathcal E}(\\operatorname{colim}_A\\operatorname{colim}_B H,T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal E)}(\\operatorname{colim}_B H,\\Delta_A T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(A\\times B,\\mathcal E)}(H,\\Delta_{A\\times B}T).$$\nThe cocone criterion proves that the iterated colimit is the total colimit, with leg $H(a,b)\\to\\operatorname{colim}_B H(a,-)\\to\\operatorname{colim}_A\\operatorname{colim}_B H$; exchanging $A,B$ proves the other order. Naturality, including higher simplices and all leg compatibilities, follows directly from the parameter and evaluation clauses of the cited universal-arrow statement. This argument includes empty shapes.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary universal-property calculation behind Lemma 5.5.2.3 and Remark 5.5.8.12; uses existing coherent universal-arrow and cocone interfaces."
+   }
+  },
+  {
+   "text": "Using steps 1-2, record the independent-index calculation in spaces. For diagrams $X:A\\to\\mathcal S$ and $Y:B\\to\\mathcal S$, Fubini and separate colimit preservation of products give\n$$\\operatorname{colim}_{A\\times B}(X(a)\\times Y(b))\\simeq(\\operatorname{colim}_A X)\\times(\\operatorname{colim}_B Y).$$\nAt the $(a,b)$ leg this is the pair of the two colimit legs, by the explicit cocone-leg formulas in steps 1-2. For $a\\in K$, put $h^a(k)=\\operatorname{Map}_K(a,k)$. The identity functor of $K$ is final directly from its definition. Applying condition (4) of the cofinality criterion to that identity gives $\\operatorname{colim}_K h^a\\simeq *$. This is the coherent corepresentable-colimit calculation, without using any assertion about ordinary set-valued Yoneda.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 5.5.8.6 and Lemma 5.5.8.11; corepresentable colimit calculation from Kerodon 7.4.3.11(4) for the identity functor"
+   }
+  },
+  {
+   "text": "Assume the colimit functor on $K$-diagrams of spaces preserves finite products. If $K$ were empty, it would send the terminal diagram to the empty space, which is not terminal; thus $K$ has a vertex. For $a,b\\in K$, binary product preservation and step 3 give $\\operatorname{colim}_{k\\in K}(h^a(k)\\times h^b(k))\\simeq *$. This product is the corepresentable functor $H_{K\\times K}((a,b),-)$ restricted along $\\delta$. Indeed $\\operatorname{Fun}(\\Delta^1,K\\times K)=\\operatorname{Fun}(\\Delta^1,K)\\times\\operatorname{Fun}(\\Delta^1,K)$ degreewise, so the pullback along $\\delta$ of the source-fixed arrow left fibration of $(a,b)$ is the fiber product over $K$ of the source-fixed arrow left fibrations of $a$ and of $b$. By the transport mapping-space formula, $\\operatorname{Fun}_{/K}(E,E_1\\times_KE_2)=\\operatorname{Fun}_{/K}(E,E_1)\\times\\operatorname{Fun}_{/K}(E,E_2)$, so this fiber product classifies the product $h^a\\times h^b$ in $\\operatorname{Fun}(K,\\mathcal S)$; on values it is the coordinatewise right-pinched formula $\\operatorname{Map}_{K\\times K}((a,b),(k,k))=\\operatorname{Map}_K(a,k)\\times\\operatorname{Map}_K(b,k)$. Condition (4) of the cofinality criterion now applies to the diagonal $\\delta:K\\to K\\times K$ and proves that $\\delta$ is final. This uses only corepresentable tests, rather than assuming the equivalence being proved.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.8.1 and converse to Lemma 5.5.8.11; Kerodon 7.4.3.11(4)"
+   }
+  },
+  {
+   "text": "Conversely suppose $K$ has a vertex and its diagonal is final. Put $B=\\operatorname{colim}_K\\operatorname{const}*$. Finality of the diagonal and step 3 identify the comparison $B\\to\\operatorname{colim}_{K\\times K}\\operatorname{const}*\\simeq B\\times B$ with the diagonal of $B$; it is an equivalence. The chosen vertex supplies a point $b_0$ of $B$. Since both projections are inverses to this diagonal, they are homotopic. Restricting that homotopy along $b\\mapsto(b,b_0)$ gives $\\mathrm{id}_B\\simeq\\operatorname{const}b_0$, so $B\\simeq *$. For every space $T$, separate product preservation gives $\\operatorname{colim}_K\\operatorname{const}T\\simeq B\\times T\\simeq T$, with the comparison to $T$ the projection. Condition (2) of the cofinality criterion implies that $K\\to *$ is final; its comma category at the unique vertex is $K$ itself, so condition (3) proves weak contractibility. Finally the existing groupoid-localization theorem applied to the weak equivalence $K\\to\\Delta^0$ identifies $\\operatorname{Fun}(\\Delta^0,\\mathcal E)$ with all coherent functors $K\\to\\mathcal E$ inverting the arrows, for every $\\mathcal E$. This is exactly localization of $K$ at all arrows, with value the one-point space.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 5.5.8.7, with the diagonal contraction written in spaces instead of homotopy groups"
+   }
+  },
+  {
+   "text": "For $X,Y:K\\to\\mathcal S$, diagonal finality followed by step 3 identifies $\\operatorname{colim}_{k\\in K}(X(k)\\times Y(k))$ with $(\\operatorname{colim}_K X)\\times(\\operatorname{colim}_K Y)$. The map is the binary product comparison because both its projections on each cocone leg are the original colimit legs. Step 5 gives the terminal-object comparison $\\operatorname{colim}_K\\operatorname{const}*\\simeq *$. Induction on the number of factors, with terminal object as base and binary products as the induction step, proves preservation of every finite product. Together with step 4 this proves the claimed equivalence of the two definitions of siftedness.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.8.6 and Lemma 5.5.8.11 with Remark 5.5.8.12"
+   }
+  },
+  {
+   "text": "Final functors compose: successively restricting a colimit cocone still gives a colimit cocone. They remain final after taking product with an identity: for $u:A\\to B$ final, a space-valued diagram on $B\\times L$ has the same colimit after restriction to $A\\times L$, by applying finality at each fixed $l$ and then Fubini; condition (2) implies finality of $u\\times\\mathrm{id}_L$. The diagonal $\\delta_1$ is the identity. If $\\delta_n:K\\to K^n$ is final with $n\\geq1$, then\n$$\\delta_{n+1}=(\\delta_n\\times\\mathrm{id}_K)\\circ\\delta_2$$\nis final by these two facts. The base $n=0$ is $K\\to *$, already proved final in step 5; this base is not inferred merely from nonemptiness. This proves all finite diagonal assertions.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Iteration of Definition 5.5.8.1; HTT Corollary 4.1.1.13, here derived using Fubini and the space test"
+   }
+  },
+  {
+   "text": "Let $K=N(I)$. More generally if $v:A\\to B$ is an ordinary functor whose nerve is final, condition (3) says every ordinary $(b\\downarrow v)$ has weakly contractible nerve, hence is nonempty and connected by finite zigzags of arrows (components of a nerve are exactly the equivalence classes of its vertices generated by its edges). Given a cocone $z_a:D(v(a))\\to T$, define its extension at $b$ to be $z_aD(\\beta)$ for any $(a,\\beta:b\\to v(a))$. A comma arrow leaves this composite unchanged by the cocone identity; connectedness makes it independent of the choice. For $g:b\\to b'$, choose $(a,\\beta':b'\\to v(a))$ and use $(a,\\beta'g)$ at $b$; then the extension satisfies $z_{b'}D(g)=z_b$. Choosing $(a,\\mathrm{id})$ at $v(a)$ shows restriction recovers the original cocone, and extending a restricted cocone recovers it by its original naturality. These inverse extensions work for every vertex $T$ and commute with maps of vertices, so restriction preserves and reflects ordinary colimit cocones. Apply this to each $I\\to I^n$, using $N(I^n)=N(I)^n$, to get ordinary finality. Taking $n=0$ gives that $I$ is nonempty and connected, including the required nullary assertion.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Warning 5.5.8.2; ordinary finality proved by explicit extension of cocones, not identified with homotopy finality"
+   }
+  },
+  {
+   "text": "For $n\\geq1$ form the ordinary diagram $H:I^n\\to\\mathcal E$, $H(i_1,\\ldots,i_n)=F(X_1(i_1),\\ldots,X_n(i_n))$. Its colimit is the iterated colimit: a compatible family of maps from all $H(i_1,\\ldots,i_n)$ to $T$ is equivalently a family compatible in one coordinate at a time, and applying each universal property gives the same maps to $T$. Fubini permits any order of iteration. Separate colimit preservation by $F$ therefore identifies this colimit with $F(\\operatorname{colim}_I X_1,\\ldots,\\operatorname{colim}_I X_n)$. Step 8 identifies the colimit of $H$ with the colimit of $H\\delta_n$. The composite comparison at each diagonal leg is $F$ applied to the original $X_a(i)\\to\\operatorname{colim}_I X_a$; hence it is the map displayed in the statement. For $n=0$, $F$ selects a single object of $\\mathcal E$ and finality of $I\\to *$ gives the identity constant cocone as its colimit.",
+   "uses": [
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Ordinary version of the independent-index calculation in HTT Proposition 5.5.8.6"
+   }
+  },
+  {
+   "text": "For the infinity-category comparison, form the coherent diagram $H:N(I)^n\\to\\mathcal E$, $H(i_1,\\ldots,i_n)=F(X_1(i_1),\\ldots,X_n(i_n))$, and apply step 2 repeatedly for $n\\geq1$. At the $a$th iteration, preservation in the $a$th variable replaces $X_a(i_a)$ by $\\operatorname{colim}X_a$, leaving the other arguments fixed. After $n$ iterations this computes its iterated colimit as $F(\\operatorname{colim}X_1,\\ldots,\\operatorname{colim}X_n)$. Finality of $N(I)\\to N(I)^n$ from step 7 identifies this colimit cocone with that of the diagonal restriction. The leg compatibility in Fubini identifies the resulting map with the canonical comparison, including all coherent compatibility data: at $(i_1,\\ldots,i_n)$ its leg is $F(\\lambda_{1,i_1},\\ldots,\\lambda_{n,i_n})$, and restricting the tuple to the diagonal gives $F(\\lambda_{1,i},\\ldots,\\lambda_{n,i})$. For $n=1$ no interchange is needed; preservation by $F$ gives precisely this leg. For $n=0$, use finality $N(I)\\to *$ on the diagram consisting of the object selected by $F$. Cocompleteness supplies all partial colimits; no filteredness, constructibility or model-category hypothesis is used.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.8.6, iterated to finite arity"
+   }
+  },
+  {
+   "text": "It remains to check the geometric-realization index. The category $\\Delta^{\\mathrm{op}}$ is nonempty. For $([m],[n])$ in $(\\Delta^{\\mathrm{op}})^2$, its comma category under the diagonal is the opposite of the category $C$ of weakly increasing maps $\\sigma:[r]\\to P=[m]\\times[n]$, where a morphism $\\sigma\\to\\tau$ is a monotone $\\theta$ with $\\tau\\theta=\\sigma$. Let $Q$ be the poset of nonempty chains of $P$. Sending $\\sigma$ to its image defines $R:C\\to Q$, and increasing enumeration defines $J:Q\\to C$. Then $RJ=\\mathrm{id}_Q$ and the quotient map onto the image gives a natural transformation $\\mathrm{id}_C\\to JR$: for $\\theta$ as above, both composites send an index $t$ to the position of $\\sigma(t)$ in the image of $\\tau$. Let $p_0=(0,0)$ and $T(q)=q\\cup\\{p_0\\}$. This is a chain since $p_0$ is the least element of $P$; inclusions give natural transformations $\\mathrm{id}_Q\\to T\\leftarrow\\operatorname{const}\\{p_0\\}$. The cited nerve-homotopy theorem makes these transformations a contraction of $NQ$, hence of $NC$. On opposite categories the transformations are $\\mathrm{id}_{C^{\\mathrm{op}}}\\leftarrow J^{\\mathrm{op}}R^{\\mathrm{op}}$ and $\\mathrm{id}_{Q^{\\mathrm{op}}}\\leftarrow T^{\\mathrm{op}}\\to\\operatorname{const}\\{p_0\\}$, with $R^{\\mathrm{op}}J^{\\mathrm{op}}=\\mathrm{id}_{Q^{\\mathrm{op}}}$. The cited nerve-homotopy theorem contracts $N(C^{\\mathrm{op}})$ through these displayed zigzags. The comma criterion proves finality of the diagonal of $N(\\Delta^{\\mathrm{op}})$. Steps 5-6 give siftedness, and steps 7-10 give every comparison for coherent simplicial diagrams, whose colimit is precisely the geometric realization in the statement.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.8.4: image-chain retraction as in HTT, with explicit least-vertex contraction replacing the subdivision sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-small-colimits-universe",
+  "lem-pc-colimit-fubini"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT 5.5.8.1-7,5.5.8.11-12; online source read. Expanded corepresentable converse and ordinary cocone extension; least-vertex contraction fills the simplex-index argument. Archived source WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +221,45 @@
    "results": "{\"t\": \"2026-10-16T19:36:43Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of the opposite simplex category is homotopy cofinal and colimits commute with finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"SimplicialObject.Splitting.isColimit'\", \"CategoryTheory.Limits.IsIPC\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\"], \"digest\": \"f2d6f327c1d87ed7\"}",
    "date": "2026-10-16",
    "verdict": "No match: Limits/Sifted.lean:218-220,267-273 concerns Type-valued ordinary colimits; SimplicialSet/NerveAdjunction.lean:484-485 concerns the homotopy-category functor SSet to Cat. Neither states homotopy finality or colimits of spaces indexed by sifted nerves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy sifted infinity category colimits of spaces preserve finite products and diagonal is cofinal",
+   "results": "{\"t\": \"2026-10-16T20:05:43Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy sifted infinity category colimits of spaces preserve finite products and diagonal is cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesFiniteProducts\"], \"digest\": \"81930ad3fe6c34c2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:57-66,218-220,267-273 (ordinary Type-valued siftedness) and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:475-485 (homotopy-category functor). Neither states this coherent sifted-nerve calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits of spaces indexed by a homotopy sifted infinity category commute with finite products",
+   "results": "{\"t\": \"2026-10-16T20:06:01Z\", \"tool\": \"leansearch\", \"query\": \"Colimits of spaces indexed by a homotopy sifted infinity category commute with finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsIPC.isIso\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π\", \"CategoryTheory.Limits.coconePointwiseProduct_ι_app\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesBinaryProducts\"], \"digest\": \"aa705c3245fa392f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:57-66,218-220,267-273 (ordinary Type-valued siftedness) and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:475-485 (homotopy-category functor). Neither states this coherent sifted-nerve calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "Sifted|sifted",
+   "results": "{\"t\": \"2026-10-16T20:06:33Z\", \"tool\": \"grep\", \"query\": \"Sifted|sifted\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"25276d8d4640943e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:57-66,218-220,267-273 (ordinary Type-valued siftedness) and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:475-485 (homotopy-category functor). Neither states this coherent sifted-nerve calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sifted\"",
+   "results": "{\"t\": \"2026-10-16T20:06:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sifted\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted\", \"CategoryTheory.IsSiftedOrEmpty\", \"CategoryTheory.IsSifted.nonempty\", \"CategoryTheory.IsSifted.instIsConnected\", \"CategoryTheory.IsSifted.instIsSiftedOrEmptyOfHasBinaryCoproducts\", \"CategoryTheory.IsSifted.isSifted_of_hasBinaryCoproducts_and_nonempty\", \"CategoryTheory.IsSifted.isSifted_iff_asSmallIsSifted\", \"CategoryTheory.IsSifted.isSifted_of_equiv\"], \"digest\": \"d3aaa7fdecbfc9ea\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:57-66,218-220,267-273 (ordinary Type-valued siftedness) and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:475-485 (homotopy-category functor). Neither states this coherent sifted-nerve calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy sifted nerve of opposite simplex category has homotopy cofinal diagonal",
+   "results": "{\"t\": \"2026-10-16T20:06:41Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy sifted nerve of opposite simplex category has homotopy cofinal diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"1ab0f24f71db1e1f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/CategoryTheory/Limits/Sifted.lean:57-66,218-220,267-273 (ordinary Type-valued siftedness) and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:475-485 (homotopy-category functor). Neither states this coherent sifted-nerve calculus."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-associative-algebra-sifted-localization",
@@ -85,5 +267,34 @@
   "group": "N7"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sifted-nerve-index-calculus",
+  "worker": "stage1",
+  "summary": "Second reading retained the full statement and the nine substantive arguments. Derived space product preservation and coherent Fubini in two elementary steps from existing transport, universal-arrow and cocone interfaces; removed their two proposed nodes. Only general coherent cofinality remains a new unsplit prerequisite. Explicit finite-arity leg formulas, nullary comparisons and simplex-opposite contraction are supplied. Maintainer reader (Codex S1) repair: the new node's condition (4) now names the coherent corepresentable H_B(b,-) of lem-coef-space-transport-classification as a statement dependency, and step 4 derives the identification of the restricted corepresentable of K x K with the pointwise product h^a x h^b from the transport fibration model, citing that node.",
+  "blueprint": "Realizes the generic sifted-index calculus below prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2, the finite-level R Hom adjunction in the middle R lim comparison, through the existing associative-algebra sifted localization/fixed-object dg enrichment ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Its generic universal property identifies localization at all arrows with the one-point Kan space once K is proved weakly contractible; this unit has no separate groupoid-localization theorem."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion recognizes the colimit cocones in the two elementary preparatory calculations; the unit has no separate theorem giving the coherent-diagram cocone mapping-space interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-ded9fa40a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-ded9fa40a (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 11 steps), the one new node lem-coef-infinity-cofinality-space-test, and the full statement of every cited node. Sources: HTT 5.5.8.1/.2/.4/.6/.7/.11-.12, checked from my knowledge of the text because HTT is not archived. Kerodon 04K3 (Prop 7.4.3.11) and 02NY (Thm 7.2.3.1) read online. The item statement is unchanged and correct; the sifted-nerve ⇒ ordinarily-sifted direction respects Warning 5.5.8.2. Steps checked: step 4 (empty K rejected by the terminal diagram); step 5 (the diagonal B→B×B argument, (2) for K→*, comma at * equals K, and the groupoid localization with S=Δ^0); step 7 (δ_{n+1}=(δ_n×id)∘δ_2 checked; n=0 and n=1 bases); step 8 (cocone extension); step 11 (I re-derived that the comma category is C^op; image retraction, least vertex (0,0), nerve-homotopy theorem in either orientation). The new node is true and strictly more general than the item (D1 ok), with the correct (a, b→u(a)) orientation. One universe κ suffices for Kerodon's all-κ quantifier. Small cases checked: empty source, both empty, identity, and the diagonal of a discrete 2-point K. It is not a duplicate of right-adjoint-reindexing, the filtered-cofinal nodes, final-index-colimit, slice-equivalence-final or grothendieck-aspherical. Both declared tool uses are accepted as generic black boxes. Two repairs (B3/C4), written to fixes/: (1) the new node's condition (4) used the coherent corepresentable Map_B(b,-) without naming it; it now cites H_B(b,-) of lem-coef-space-transport-classification and adds that node to stmt_deps. (2) Item step 4 identified Map_{K×K}((a,b),δ(-)) with h^a×h^b only on values; it now derives this from the arrow left fibration splitting as a fiber product over K, using the transport mapping formula, and cites that node, which is already in proof_deps. No cycle. Maintainer note: the existing unsplit lem-coef-infinity-sifted-colimit-calculus is a sub-case of this item and is a merge candidate.; 2 file(s) fixed by the reviewer"
+ }
 }
