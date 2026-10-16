@@ -301,5 +301,31 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-0e8e96685 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, cited statements, unit/chapter route, and source passages. Verified the unbounded torsion-ring scope, canonical refinement maps, cocycle, proper normalization, and tower compatibility; checked archived master target categories and morphisms. No repairs needed. Seven declared tool uses accepted; detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-098e42097",
+  "group": "N8",
+  "result": "pass",
+  "note": "Checked immutable statements, dependencies, sources, canonical constructions, universes, edge cases, report sections, and maintainer gates. Exact module reproduced cleanly through scompile.py in sandbox and library modes (6.2s/6.4s). No delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition",
+  "declaration": "AlgebraicGeometry.Etale.unboundedEtaleProperComposition_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.unboundedEtaleProperCandidateIso",
+   "AlgebraicGeometry.Etale.unboundedEtaleProperCompositionIso",
+   "AlgebraicGeometry.Etale.unboundedEtaleProperRefinement_normalization",
+   "AlgebraicGeometry.Etale.unboundedEtaleProperRefinement_coherence",
+   "AlgebraicGeometry.Etale.unboundedEtaleProperComposition_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedCompactSupportProperComposition.lean",
+  "statement": "theorem unboundedEtaleProperComposition_normalization (k : Type u) [Field k] (A : Type (u + 1)) [CommRing A] [Finite A] {X Y S : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [S.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ Y) (g : Y ⟶ S) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] [IsProper f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] : (∀ (c : Compactification f) (d : Compactification f), rightDerivedLowerShriekOfCompactificationIso A c d ≪≫ unboundedEtaleProperCandidateIso A f d = unboundedEtaleProperCandidateIso A f c) ∧ (unboundedEtaleProperCandidateIso A f (Compactification.ofIsProper f) = Functor.isoWhiskerRight (Functor.mapDerivedCategoryNatIso (Adjunction.leftAdjointIdIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X)) (upperStarId (ModuleCat.{u + 1} A) X)) ≪≫ Functor.mapDerivedCategoryIdIso _) _ ≪≫ Functor.leftUnitor _) ∧ (∀ (d : Compactification g) (c : Compactification (f ≫ g)) (e : Compactification (f ≫ d.i)), (unboundedEtaleProperCompositionIso A f g d c).hom = Functor.whiskerRight (unboundedEtaleProperCandidateIso A f e.restrict).inv (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d) ≫ (rightDerivedLowerShriekOfCompactificationCompIso A d e).hom ≫ (rightDerivedLowerShriekOfCompactificationIso A (d.comp e) c).hom) ∧ (∀ (d₁ d₂ : Compactification g) (c₁ c₂ : Compactification (f ≫ g)), Functor.whiskerLeft R((f)_*[ModuleCat.{u + 1} A]) (rightDerivedLowerShriekOfCompactificationIso A d₁ d₂).hom ≫ (unboundedEtaleProperCompositionIso A f g d₂ c₂).hom = (unboundedEtaleProperCompositionIso A f g d₁ c₁).hom ≫ (rightDerivedLowerShriekOfCompactificationIso A c₁ c₂).hom)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two definitions assemble the existing common-refinement isomorphisms, identity-open normalization, and proper/open tower isomorphism with real data. Three sorry-only theorems state the arbitrary-refinement sheaf and K-injective normalization, identities and common-refinement cocycle, proper normalization, every-tower characterization, and compatibility with all compactification choices. The generic single-morphism refinement clauses apply separately to f, g, and f ≫ g; all input categories are ordinary unbounded small-etale ModuleCat-valued derived categories."
  }
 }
