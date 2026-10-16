@@ -1,0 +1,233 @@
+{
+ "id": "lem-coef-suspension-square-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction in the displayed R Hom / R lim calculation: stable enhancement of the flat models, through lem-coef-finite-adjunction-diagram-realization, lem-coef-semilinear-derived-sections, lem-coef-sheaf-flat-model and lem-coef-pointed-model-stability. Generic suspension-square comparison used in the stability argument; the two pushout grids of HA Lemma 1.4.2.15 are realized by steps 1-8 of this split.",
+   "via": [
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Two factorizations of the suspension comparison of a pushout square",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be pointed infinity categories, modeled by simplicial sets with fillers for every inner horn, and each having a zero object $0$ that is both initial and terminal. A standard simplex is the nerve of a finite ordered set; an inner horn is the union of its codimension-one faces except one face that is neither first nor last. Assume $\\mathcal C$ admits finite colimits and $\\mathcal D$ admits finite limits, all in the mapping-space sense; finite diagrams are indexed by simplicial sets with finitely many nondegenerate simplices [def-weil-pbc-simplicial-set]. Write $\\Sigma X=0\\coprod_X0$ in $\\mathcal C$ and $\\Omega Y=0\\times_Y0$ in $\\mathcal D$. Let $F:\\mathcal C\\to\\mathcal D$ be reduced, meaning that $F(0)$ is a zero object. For each coherent commutative square $\\tau:\\Delta^1\\times\\Delta^1\\to\\mathcal C$, with vertices and edges $(W\\to X,W\\to Y,X\\to Z,Y\\to Z)$, let\n$$a_\\tau:F(W)\\longrightarrow P_\\tau=F(X)\\times_{F(Z)}F(Y)$$\nbe its canonical pullback comparison. Applying $F$ to the suspension square defines $\\eta_V:F(V)\\to\\Omega F(\\Sigma V)$ for each $V$. Naturality defines\n$$u_\\tau:P_\\tau\\longrightarrow Q_\\tau=\\Omega F(\\Sigma X)\\times_{\\Omega F(\\Sigma Z)}\\Omega F(\\Sigma Y).$$\nUnder the canonical identification $Q_\\tau\\simeq\\Omega(F(\\Sigma X)\\times_{F(\\Sigma Z)}F(\\Sigma Y))$, if $\\tau$ is a pushout square, there exists a map\n$$\\theta_\\tau:P_\\tau\\longrightarrow\\Omega F(\\Sigma W)$$\nwith specified homotopies\n$$\\theta_\\tau a_\\tau\\simeq\\eta_W,\\qquad (\\Omega a_{\\Sigma\\tau})\\theta_\\tau\\simeq u_\\tau.$$\nHere $\\Sigma\\tau$ is the square obtained by applying suspension to every vertex and arrow. No equivalence hypothesis on the maps $\\eta_V$ is assumed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Lurie, Higher Algebra (September 18, 2017), Notation 1.4.2.12 and Lemma 1.4.2.15. The arrow-category pullback in clause (2) is written here as the equality with the induced map between pullbacks of the unit maps, inserting the loop on the suspended square comparison to type the composite. Read online; not archived in the shared literature/. No Stacks tag states this infinity-categorical result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\{0<1\\}^2$ and $G=\\{0,1,2,3\\}^2\\setminus\\{(0,3),(3,0)\\}$ with componentwise order. Let $H\\subset G$ be the full subposet consisting of $K$ and $(0,2),(2,0),(1,3),(3,1)$. First right Kan extend $\\tau:N(K)\\to\\mathcal C$ to $N(H)$ using [lem-coef-infinity-finite-poset-kan-extension]. At each of the four added vertices the indexing upper poset in $K$ is empty, so the value is the terminal object $0$; at an old vertex that upper poset has that vertex as its initial object, so its limit is the old value. Thus only a terminal object, rather than all finite limits in $\\mathcal C$, is needed for this extension. Next left Kan extend from $H$ to $G$ by the same cited statement: every lower indexing poset is finite, so the assumed finite colimits in $\\mathcal C$ suffice. Call the resulting coherent grid $T:N(G)\\to\\mathcal C$. Both inclusions are full, so the equivalence unit/counit retain the given square and all its homotopies. Its rows, with omitted positions left blank, have the form\n$$\\begin{array}{cccc}W&X&0&{}\\\\\nY&Z&B&0\\\\\n0&A&S&S_Y\\\\\n{}&0&S_X&S_Z\\end{array},\\qquad A=Z\\coprod_Y0,\\quad B=0\\coprod_XZ.$$\nThe identifications of $A,B$ are the lower-poset colimit formulas; arrows are those of the single coherent grid, not separately chosen edges.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, first displayed grid; agent construction of its coherent diagram by local right and finite left Kan extension."
+   }
+  },
+  {
+   "text": "Identify the outer upper-left square. For any $V\\in\\mathcal C$, write $M_U=\\operatorname{Map}_{\\mathcal C}(U,V)$. The lower-poset colimit formula of [lem-coef-infinity-finite-poset-kan-extension] gives, with the specified maps from the two zero vertices,\n$$\\operatorname{Map}(S,V)\\simeq(*\\times_{M_X}M_Z)\\times_{M_Z}(M_Z\\times_{M_Y}*)\\simeq *\\times_{M_X}M_Z\\times_{M_Y}*.$$\nIndeed a cocone on $H_{\\leq(2,2)}$ is a cocone on $X\\to Z\\leftarrow Y$ together with its compatible extensions to the zero vertices $(0,2)$ and $(2,0)$; grouping these data yields the displayed two pullbacks. Since the ORIGINAL square $\\tau$ is a pushout, $M_Z\\simeq M_X\\times_{M_W}M_Y$, compatibly with its two projections. Substitution gives $\\operatorname{Map}(S,V)\\simeq *\\times_{M_W}*$, naturally in $V$ and with the cocone maps. This is exactly the mapping-space universal property of $0\\coprod_W0$. Hence the square on vertices $(0,0),(0,2),(2,0),(2,2)$ is a suspension square for $W$, and we identify $S$ with $\\Sigma W$ by that universal property.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, first displayed grid, outer upper-left suspension square; explicit mapping-space computation."
+   }
+  },
+  {
+   "text": "The other three outer squares are suspension squares for $X,Y,Z$. Here is an explicit reduction of the lower indexing posets in the cited Kan-extension formula [lem-coef-infinity-finite-poset-kan-extension]. For $(3,2)$ retract $H_{\\leq(3,2)}$ onto the span $\\{(0,1),(0,2),(3,1)\\}$: send $(0,0)$ to $(0,1)$, fix that span, and send every remaining vertex to $(3,1)$. For $(2,3)$ retract onto $\\{(1,0),(2,0),(1,3)\\}$: send $(0,0)$ to $(1,0)$, fix that span, and send every remaining vertex to $(1,3)$. For $(3,3)$ retract onto $\\{(1,1),(1,3),(3,1)\\}$: send the four vertices of $K$ to $(1,1)$, $(0,2)$ to $(1,3)$ and $(2,0)$ to $(3,1)$, fixing the two remaining vertices. Each retraction $r$ is order preserving, fixes its span, and satisfies $v\\leq r(v)$. Restriction and extension along $v\\to r(v)$ give inverse equivalences on spaces of cocones: restriction after extension is the identity, and the other composite is homotopic to the identity by the cocone naturality along $v\\to r(v)$. Thus the three colimits are respectively $0\\coprod_X0$, $0\\coprod_Y0$, $0\\coprod_Z0$. This identifies $S_X,S_Y,S_Z$ with $\\Sigma X,\\Sigma Y,\\Sigma Z$, including their suspension cocones. The order comparisons of these four outer squares supply their coherent maps, so their lower-right corners give the square $\\Sigma\\tau$ itself: suspension on arrows is defined by these same maps of suspension cocones.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, the remaining three outer suspension squares of its first grid; explicit finite-poset cocone reductions."
+   }
+  },
+  {
+   "text": "Apply $F$ to $T$ and write $R=F\\circ T$. Every zero vertex becomes a zero object because $F$ is reduced; choose the compatible identifications with $0$ in $\\mathcal D$. Let $G^\\times=G\\setminus\\{(0,0)\\}$ and right Kan extend $R|_{G^\\times}$ along its inclusion into $G$, by [lem-coef-infinity-finite-poset-kan-extension]. Finite limits in $\\mathcal D$ supply every required limit. Denote this new grid by $\\widetilde R$ and the adjunction unit by $\\lambda:R\\to\\widetilde R$. It is an equivalence at every vertex except possibly $(0,0)$. At $(0,0)$ the Kan formula is the limit over $G^\\times$. This is $P=F(X)\\times_{F(Z)}F(Y)$: retract $G^\\times$ onto $J=\\{(0,1),(1,0),(1,1)\\}$ by $r(i,j)=(0,1)$ if $i=0$, by $(1,0)$ if $j=0$, and by $(1,1)$ otherwise. This is order preserving, fixes $J$ and satisfies $r(v)\\leq v$. A coherent cone on $J$ extends using $r(v)\\to v$; cone naturality gives the inverse homotopy to restriction, so the spaces of cones are equivalent. The unit component $\\lambda_{(0,0)}$ is the canonical map $a_\\tau$ because its cone restricts to the given coherent square $F(\\tau)$.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, second displayed grid, replacing the upper-left corner by the pullback; explicit cone-space reduction."
+   }
+  },
+  {
+   "text": "The outer upper-left square of $\\widetilde R$ has vertices $P,0,0,F(\\Sigma W)$. Its canonical map into the pullback of the other three vertices is a morphism $\\theta_\\tau:P\\to\\Omega F(\\Sigma W)$. Restricting the NATURAL transformation $\\lambda$ from step 4 to these four vertices gives a map from the corresponding square of $R$ to this square, whose components are $a_\\tau$ at the initial vertex and identity equivalences at the other vertices. The pullback comparison is natural on coherent squares: it is the component at the omitted vertex of the natural unit for right Kan extension from the punctured square, as stated in [lem-coef-infinity-finite-poset-kan-extension]. In $R$ this comparison is $\\eta_W$ by step 2 and the definition from the suspension square. Naturality of that unit therefore supplies the specified homotopy $\\theta_\\tau a_\\tau\\simeq\\eta_W$.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, final sentence, property (1); explicit natural-unit homotopy."
+   }
+  },
+  {
+   "text": "To retain the full coherence needed for property (2), define four order-preserving maps $s_U:K\\to G$ by listing their values in the order $(0,0),(0,1),(1,0),(1,1)$:\n$$\\begin{array}{c|cccc}U&W\\text{-corner}&\\text{upper-right}&\\text{lower-left}&\\text{lower-right}\\\\\nW&(0,0)&(0,2)&(2,0)&(2,2)\\\\\nX&(0,1)&(0,2)&(3,1)&(3,2)\\\\\nY&(1,0)&(1,3)&(2,0)&(2,3)\\\\\nZ&(1,1)&(1,3)&(3,1)&(3,3)\\end{array}.$$\nThey satisfy $s_W\\leq s_X$, $s_W\\leq s_Y$, $s_X\\leq s_Z$ and $s_Y\\leq s_Z$ pointwise. Consequently the table is ONE order-preserving map $K\\times K\\to G$, with first coordinate indexing $W,X,Y,Z$ and second coordinate indexing the selected square. Composing its nerve with $\\widetilde R$ gives a coherent square of coherent squares, including the homotopy at $Z$. Apply the natural punctured-square right-Kan unit of [lem-coef-infinity-finite-poset-kan-extension] to these squares. Their initial vertices form the pullback square $\\Gamma=(P,F(X),F(Y),F(Z))$ of step 4. Their other two adjacent vertices are zero, with equivalence transitions, and their last vertices form $F(\\Sigma\\tau)$ by step 3. The resulting coherent natural transformation is\n$$\\alpha:\\Gamma\\longrightarrow\\Omega F(\\Sigma\\tau),\\qquad (\\alpha_W,\\alpha_X,\\alpha_Y,\\alpha_Z)=(\\theta_\\tau,\\eta_X,\\eta_Y,\\eta_Z).$$\nThe three last components are exactly the specified suspension comparisons since the selected $X,Y,Z$ squares were unchanged by the replacement. Thus the homotopies of this transformation are produced together by the table, including compatibility over $F(Z)$.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15, final sentence, property (2); explicit simultaneous four-square selectors and their coherent natural transformation."
+   }
+  },
+  {
+   "text": "For completeness the loop/pullback identification used in the statement is canonical at the level of cones. For any cospan $U\\to V\\leftarrow U'$ in $\\mathcal D$ and any $T_0\\in\\mathcal D$, put $N_U=\\operatorname{Map}(T_0,U)$, and similarly for the other objects, all pointed by their zero morphisms. The two relevant mapping spaces are\n$$(*\\times_{N_U}*)\\times_{(*\\times_{N_V}*)}(*\\times_{N_{U'}}*)\\simeq *\\times_{(N_U\\times_{N_V}N_{U'})}*.$$\nBoth sides describe the same coherent cones on the product of the loop cospan with the given cospan: one groups the cone conditions by rows and the other by columns. The zero rows are contractible. This gives inverse maps by regrouping the same cone data, natural in $T_0$ and the cospan, hence the canonical identification\n$$\\Omega U\\times_{\\Omega V}\\Omega U'\\simeq\\Omega(U\\times_VU').$$\nUnder it the map from $\\Omega F(\\Sigma W)$ to $Q_\\tau$ induced by the suspended square's two edges and its coherence is $\\Omega a_{\\Sigma\\tau}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Agent cone-space verification of the loop/pullback identification implicit in HA Lemma 1.4.2.15(2)."
+   }
+  },
+  {
+   "text": "Restrict $\\alpha$ of step 6 to the punctured square $J$ and take its limit using the functorial right Kan extension of [lem-coef-infinity-finite-poset-kan-extension]. Its source limit is $P$ and its target limit is $Q_\\tau$; the induced map is $u_\\tau$, since the components on $J$ are $\\eta_X,\\eta_Z,\\eta_Y$ with their natural coherence. The natural pullback-comparison unit, applied to $\\alpha$, supplies a homotopy\n$$a_{\\Omega F(\\Sigma\\tau)}\\alpha_W\\simeq (\\operatorname{lim}_J\\alpha)\\,a_\\Gamma.$$\nHere $a_\\Gamma:P\\to P$ is the identity up to the canonical homotopy of the limiting cone from step 4; $\\alpha_W=\\theta_\\tau$; and by step 7, $a_{\\Omega F(\\Sigma\\tau)}$ is $\\Omega a_{\\Sigma\\tau}$. Substituting gives the specified second homotopy $(\\Omega a_{\\Sigma\\tau})\\theta_\\tau\\simeq u_\\tau$. This compares full cones, rather than only checking equality of two projections in the homotopy category, so it retains the required compatibility over $\\Omega F(\\Sigma Z)$.",
+   "uses": [
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+    "place": "Lemma 1.4.2.15(2), explicit naturality on cones and the required loop on the suspended comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-finite-poset-kan-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA2012.pdf",
+  "place": "Explicit finite-poset Kan-extension construction following the two grids of HA Lemma 1.4.2.15, and expanding its final verification into coherent natural-unit calculations. Reference read online but not archived; WANTED is recorded in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced functor and a pushout square construct a comparison from the pullback of its images to the loop of its suspended initial vertex with a pullback square in the arrow category",
+   "results": "{\"t\": \"2026-10-16T07:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced functor and a pushout square construct a comparison from the pullback of its images to the loop of its suspended initial vertex with a pullback square in the arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutComparison\", \"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.Limits.pushoutComparison_map_desc\", \"CategoryTheory.Limits.pushoutComparison_map_desc_assoc\", \"CategoryTheory.Limits.inr_comp_pushoutComparison_assoc\", \"CategoryTheory.Limits.map_lift_pullbackComparison\", \"CategoryTheory.Limits.inl_comp_pushoutComparison_assoc\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\"], \"digest\": \"d73dddc2d55faea4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned pushoutComparison and pullbackComparison are ordinary-category maps and do not construct theta or its suspended factorization in pointed infinity categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Suspension\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Suspension\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned pushoutComparison and pullbackComparison are ordinary-category maps and do not construct theta or its suspended factorization in pointed infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xcisive|[Ss]uspension.*[Pp]ullback|[Pp]ullback.*[Ss]uspension",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"grep\", \"query\": \"[Ee]xcisive|[Ss]uspension.*[Pp]ullback|[Pp]ullback.*[Ss]uspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned pushoutComparison and pullbackComparison are ordinary-category maps and do not construct theta or its suspended factorization in pointed infinity categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced functor on a pointed infinity category has a suspension comparison factoring through a pushout image pullback",
+   "results": "{\"t\": \"2026-10-16T07:42:21Z\", \"tool\": \"leansearch\", \"query\": \"A reduced functor on a pointed infinity category has a suspension comparison factoring through a pushout image pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutComparison\", \"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.Limits.PreservesPushout.of_iso_comparison\", \"CategoryTheory.Limits.pushoutComparison_map_desc\", \"CategoryTheory.Limits.inl_comp_pushoutComparison\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Limits.PreservesPushout.iso_hom\", \"CategoryTheory.Limits.instIsIsoPushoutComparison\"], \"digest\": \"2f4c757244591894\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned pushoutComparison and pullbackComparison are ordinary-category maps and do not construct theta or its suspended factorization in pointed infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a pushout square and reduced infinity functor the suspension comparison factors through the pullback, with a cartesian square of arrows between the unit comparisons",
+   "results": "{\"t\": \"2026-10-16T07:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a pushout square and reduced infinity functor the suspension comparison factors through the pullback, with a cartesian square of arrows between the unit comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutComparison_map_desc\", \"CategoryTheory.Limits.pushoutComparison_map_desc_assoc\", \"CategoryTheory.Limits.pushoutComparison\", \"CategoryTheory.Limits.inr_comp_pushoutComparison_assoc\", \"CategoryTheory.Limits.inl_comp_pushoutComparison_assoc\", \"CategoryTheory.Limits.inr_comp_pushoutComparison\", \"CategoryTheory.Limits.inl_comp_pushoutComparison\", \"CategoryTheory.Limits.map_lift_pullbackComparison\"], \"digest\": \"b778be79f32f0c2f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned pushoutComparison and pullbackComparison are ordinary-category maps and do not construct theta or its suspended factorization in pointed infinity categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced functor cross effect square factors through loop of cofiber diagonal suspension",
+   "results": "{\"t\": \"2026-10-16T07:53:24Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced functor cross effect square factors through loop of cofiber diagonal suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"CochainComplex.mappingCone.map_inr\", \"HomologicalComplex.homotopyCofiber.inlX_desc_f\", \"HomotopyCategory.spectralObjectMappingCone_δ'_app\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom_desc_hom\", \"HomologicalComplex.homotopyCofiber.inlX_desc_f_assoc\", \"CochainComplex.mappingCone.map_δ\"], \"digest\": \"e0247cc3a0da465e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: these are cylinder/mapping-cone formulas for homological complexes in ordinary preadditive categories, not the two comparison homotopies for arbitrary reduced infinity functors."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|reedy|excisive|loop.*suspension",
+   "results": "{\"t\": \"2026-10-16T07:54:55Z\", \"tool\": \"grep\", \"query\": \"quasicategory|reedy|excisive|loop.*suspension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"9b340826eeb0500f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Quasicategory/Basic.lean:34-42, the Quasicategory directory, and Reedy/Basic.lean:21-24; the hits define quasicategories and Reedy structures but do not state these coherent comparison or finite-(co)limit theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "excisive|suspension.*pullback|pullback.*suspension",
+   "results": "{\"t\": \"2026-10-16T08:22:35Z\", \"tool\": \"grep\", \"query\": \"excisive|suspension.*pullback|pullback.*suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category pushout comparisons (HasPullback.lean:415,458), Dold-Kan equivalences, small-object cell attachments and precylinders do not state the two coherent homotopies for an arbitrary reduced infinity functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Suspension\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T08:22:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Suspension\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category pushout comparisons (HasPullback.lean:415,458), Dold-Kan equivalences, small-object cell attachments and precylinders do not state the two coherent homotopies for an arbitrary reduced infinity functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced infinity functor on a pushout square has a comparison to the loop of the suspension",
+   "results": "{\"t\": \"2026-10-16T08:22:36Z\", \"tool\": \"leansearch\", \"query\": \"A reduced infinity functor on a pushout square has a comparison to the loop of the suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutComparison\", \"CategoryTheory.Limits.pushoutComparison_map_desc_assoc\", \"CategoryTheory.Limits.inl_comp_pushoutComparison\", \"CategoryTheory.Limits.PreservesPushout.of_iso_comparison\", \"CategoryTheory.Limits.instIsIsoPushoutComparison\", \"CategoryTheory.Limits.inr_comp_pushoutComparison\", \"CategoryTheory.Limits.inl_comp_pushoutComparison_assoc\", \"CategoryTheory.Limits.pushoutObjIso\"], \"digest\": \"63cb2962f5f9ad14\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category pushout comparisons (HasPullback.lean:415,458), Dold-Kan equivalences, small-object cell attachments and precylinders do not state the two coherent homotopies for an arbitrary reduced infinity functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced functor between pointed infinity categories factors the pushout pullback comparison through the loop of the suspension",
+   "results": "{\"t\": \"2026-10-16T08:22:44Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced functor between pointed infinity categories factors the pushout pullback comparison through the loop of the suspension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"CategoryTheory.Limits.inl_comp_pushoutComparison\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"pointedToBipointedCompBipointedToPointedSnd\", \"pointedToBipointedCompBipointedToPointedFst\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"pointedToTwoPSnd_comp_forget_to_bipointed\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\"], \"digest\": \"503d28b85fb04ae7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category pushout comparisons (HasPullback.lean:415,458), Dold-Kan equivalences, small-object cell attachments and precylinders do not state the two coherent homotopies for an arbitrary reduced infinity functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout grid of cofibers gives a coherent map from the image pullback to Omega F Sigma of the initial object",
+   "results": "{\"t\": \"2026-10-16T08:23:30Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout grid of cofibers gives a coherent map from the image pullback to Omega F Sigma of the initial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.ιFunctorObj\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"CategoryTheory.SmallObject.ρFunctorObj\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_π\", \"CategoryTheory.SmallObject.πFunctorObj\", \"HomotopicalAlgebra.Precylinder.i\", \"CategoryTheory.SmallObject.ρFunctorObj_π\", \"CategoryTheory.SmallObject.ιFunctorObj_extension\"], \"digest\": \"2c406e776cfc10ce\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary-category pushout comparisons (HasPullback.lean:415,458), Dold-Kan equivalences, small-object cell attachments and precylinders do not state the two coherent homotopies for an arbitrary reduced infinity functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-pointed-model-stability",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-suspension-square-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the two coherent grids by one generic local finite-poset Kan-extension theorem. Identified all four suspension corners by explicit mapping-space and finite-poset reductions, constructed theta, and proved both homotopies by naturality of a single coherent four-square diagram. Kept the loop on the suspended comparison; assumed no invertibility of eta and no finite limits in C. One statement-only child; no new Mathlib leaf.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction): generic stable-enhancement foundation reached through the four recorded intervening nodes. Steps 1-4 construct the grids behind the suspension comparison used by lem-coef-pointed-model-stability; steps 5-8 supply both coherent factorizations. This does not change the unit statement or its route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-125d3dd02",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-125d3dd02 (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources. All eight steps and the new Kan-extension lemma check out; finite-poset and adjunction tests pass. Verified target coefficient categories and base-change direction against master sources. No repairs or accepted tool_uses; detailed checks are in review.md."
+ }
+}
