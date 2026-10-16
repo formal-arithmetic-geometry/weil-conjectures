@@ -236,5 +236,47 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-3f1dc42ee (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes and every cited statement (coherent-nerve-comparison, enhanced-diagrams-cones, enhanced-functor-cone-calculus, space-geometric-descent, marked-anodyne-lifting-calculus, marked-point-cartesian-model, infinity-functor-pushout, kan-quillen-right-proper). I also read the citer lem-coef-simplicial-interval-localization, which uses the item exactly as stated. HA §1.3.4 is not in literature/: it is listed as WANTED, the proof is marked agent-written, and I checked the mathematics independently. Step checks: T_nA is a simplicial category and p_n, e_n are natural simplicial functors. p_n is a DK equivalence. N(Δ^op) is sifted in the node's sense by the geometric-descent clause. For the zero leg I verified p_0c_0=1 and that e_0c_0 is the vertex inclusion. In Step 3, Map^♭((Q,S),E^♮)=Fun_S(Q,E), and Map^♯(T^♮×L^♮,E^♮) is Fun(T,Fun(L,E))^≃ because marked (e1,e2,e3) reduces to (id,id,e3); the inverse argument is correct. In Step 4, c_n is simplicial in m, and e_nc_n takes a simplex to its final vertex in B_0. Steps 5–6 are universal-property and full-subcategory checks; Step 7 rests on the naturality equation R(η'_A)η_A=η_{R'A}η'_A and two-out-of-three. New node join-translation-resolution: true with no Kan condition, because the extra degeneracy s_n contracts the fibres of p_n and the e-cocone is an equivalence on simplices, then everywhere. Edge cases ∅, discrete, Δ^0 and Δ^1 hold. New node sifted-fixed-object-hocolimit: true by the Segal-space argument (sifted colimits commute with the finite products in the Segal levels, and completion is a left adjoint). Edge cases empty O, terminal J and empty J hold. Neither new node is a duplicate: bisimplicial-diagonal-space-colimit reaches the item (I confirmed the path, so citing it would be a cycle), and diagonal-coherent-nerve, segal-dk-diagonal, the sifted-calculus nodes and algebroid-ff-realization state other things. The dependency closure (171 nodes) is acyclic, proof_deps equals the union of uses, and Mathlib searches are recorded with all three kinds. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic componentwise and mapping-space cone criterion from another unit. Minor remark: the union-of-components hypothesis is not needed by the argument, but it is harmless and is what the citer supplies. No base-change morphism or coefficient category is involved, no SGA is cited, and no changes or fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a02eb450",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the packet, check-brief2, delivery-errors H, the snapshot module and node copies, and the dependency declarations: CoherentNerveComparisonStatement, LocallyKanReplacement, FiniteReedy diagram/transformation/IsColimitEdge/IsLocalization, and EnhancedDiagramsCones fullSubcomplex/coconeCategory/AreNaturallyEquivalent. Also checked Mathlib tensorHomOf, inl' and inr' (ordinal-sum maps and block inclusions). lean.statement is verbatim; only the item's lean field changed; all 21 declarations are listed; the imports are the statement deps plus the stated proof-dep modules. Clauses checked: marked wide subcomplex with the pi0 union-of-components iff; discretely enriched A_n pinned through levelSimplex and operators; translation T_nA with HA 1.3.4.11 formulas, p restricting to the first block and e to the last; IsEdgeLocalization is actual restriction onto the full internal-hom subcomplex for every quasicategory; the evaluation triangle (p, eval, e) and the localization square determine the cocone; IsColimitEdge per pair with the restricted source checked consistent; the zero leg follows from zeroSection (p0c0=1, e0c0 = vertex inclusion); naturality over Pair x Delta^op; independence of the replacement as an equivalence of entire cocone cylinders. Edge cases (empty, B=A, discrete A, n=0, non-Kan, universes) are fine. No duplicate upstream notion (the similar inverting helpers are other notions or downstream citers). No hollow definitions; docstrings and the 7-step proof docstring are present; the single sorry is the theorem. nt_compile.py --json on the side overlay: exit 0, no errors or warnings. Remarks only: replacement independence is a non-canonical coherent equivalence, matching the node's 'coherent sense'; derivedNerve generalises N.derived_nerve to arbitrary R, as needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedMarkedRealization",
+  "declaration": "CategoryTheory.EnrichedMarkedRealization.enriched_marked_realization",
+  "declarations": [
+   "CategoryTheory.EnrichedMarkedRealization.Pair",
+   "CategoryTheory.EnrichedMarkedRealization.Pair.Hom",
+   "CategoryTheory.EnrichedMarkedRealization.pairCategory",
+   "CategoryTheory.EnrichedMarkedRealization.forgetPair",
+   "CategoryTheory.EnrichedMarkedRealization.Index",
+   "CategoryTheory.EnrichedMarkedRealization.pairProjection",
+   "CategoryTheory.EnrichedMarkedRealization.originalDiagram",
+   "CategoryTheory.EnrichedMarkedRealization.EvaluationSpan",
+   "CategoryTheory.EnrichedMarkedRealization.derivedNerve",
+   "CategoryTheory.EnrichedMarkedRealization.vertexEdge",
+   "CategoryTheory.EnrichedMarkedRealization.invertingDiagrams",
+   "CategoryTheory.EnrichedMarkedRealization.IsEdgeLocalization",
+   "CategoryTheory.EnrichedMarkedRealization.markedEdges",
+   "CategoryTheory.EnrichedMarkedRealization.levelMarkedEdges",
+   "CategoryTheory.EnrichedMarkedRealization.largeLocalization",
+   "CategoryTheory.EnrichedMarkedRealization.infinityDiagram",
+   "CategoryTheory.EnrichedMarkedRealization.infinityTransformation",
+   "CategoryTheory.EnrichedMarkedRealization.indexAt",
+   "CategoryTheory.EnrichedMarkedRealization.indexNerveAt",
+   "CategoryTheory.EnrichedMarkedRealization.RealizationData",
+   "CategoryTheory.EnrichedMarkedRealization.enriched_marked_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedMarkedRealization.lean",
+  "statement": "theorem enriched_marked_realization (N : CoherentNerveComparisonStatement.{u}) : ∃ S : EvaluationSpan.{u}, ∃ C : ∀ R : LocallyKanReplacement.{u}, RealizationData N R S, ∀ R R' : LocallyKanReplacement.{u}, SSet.Enhanced.AreNaturallyEquivalent (MonoidalClosed.uncurry (SSet.yonedaEquiv.symm (C R).cocone)) (MonoidalClosed.uncurry (SSet.yonedaEquiv.symm (C R').cocone))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The evaluation span is specified on all mapping simplices by the HA join-translation formulas. The localized cocone is induced by this span and is colimiting in the dependency Cat-infinity model; its degree-zero section gives the actual vertex-category leg. Replacement independence compares entire cocone cylinder maps."
  }
 }

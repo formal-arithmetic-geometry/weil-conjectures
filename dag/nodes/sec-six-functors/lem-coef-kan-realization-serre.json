@@ -258,5 +258,31 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-76e4053b0 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited existing statement in full; review.md has the details. I could not open the cited sources (Hovey 3.4–3.6, Hatcher Thm 4.41): they are not in literature/ and the review sandbox has no network. I checked those places from my own knowledge of the texts and of Goerss–Jardine I.7 and I.10. The item is correctly marked agent-origin and the report lists them as WANTED. Steps: Step 1's graph lift checks out (h i=1 and r h=pr_2 give the continuous lift formula; no Kan hypothesis needed). Step 2 composes two lifts and covers empty fibres. Steps 3–4 (edge components; realizing representatives and homotopies) are correct and elementary. In step 5 the based contraction comes from the mono Z into P×Δ^1 and the trivial fibration P→Δ^0, and the fibre is identified through finite limits. In step 6 the realized horn-constant lift is an admissible continuous lift, and both degree-0 conventions take vertex 0 of a lift ending at c_x. Step 7's induction uses that Ω_xK is Kan. In step 8 the radial map works because only F_n is visible from z. I checked the orientation independently: Σ(-1)^i[d_i w]=0 gives d_n w=α+β, and for n=1 it gives 02≃01·12 in that order. New nodes: all four are true, statement-only, self-contained, strictly smaller than the item, and not duplicates. Minimal factorization: Hovey 3.5 / GJ I.10. Simplexwise-trivial Kan fibration realizes to a Serre fibration: a simplicial fibre bundle, so minimality is not needed. Simplicial path fibration with boundary bijections: GJ I.7 convention; it overlaps one clause of lem-coef-space-path-fibration-replacement, but that is not a duplicate. Serre disk-lift boundary with bijectivity under a based contraction: Hatcher 4.41; checked on R→S^1. Their blueprint from/via fields match tools/blueprint_refs.py ancestor. The blueprint search found nothing. There is no Mathlib leaf in the local KanComplex/ files. There are no cycles, and proof_deps is the union of the step uses. The declared tool use of lem-weil-pbc-trivial-kan-lifts-monomorphisms (a Mathlib-status node) is accepted. Not a target, nothing weakened, no SGA. Two remarks, neither needing a repair: step 8 is generously labelled elementary, though fully written out; the cube/simplex identification in the disk-lift node is implicit but used consistently with step 4. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9797b2a2",
+  "group": "Q51",
+  "result": "fix",
+  "note": "Checked every clause of SSet.kan_realization_serre against the node, the def-cbc and realization-finite-limits deps and Mathlib. Horn RLP, the Serre lift for all m>=0, the vertex-fixed natural pi0 bijection, the relative cylinder quotient, the MulStruct faces at Fin.last (d_n=b, d_{n+1}=c, d_{n+2}=a) and the HEq naturality are all exact. Defect: Mathlib HomotopyGroup.mul_spec gives [p]*[q]=[transAt q p] (q first). With realize's (1-z,z) parametrization, equiv[02]=[|a| then |b|]=equiv b*equiv a, so the delivered map_mul (equiv a*equiv b) forces pi_1 to be abelian: false for N(G), G nonabelian, so the theorem was unprovable. Fix: map_mul now has equiv b.homotopyClass * equiv a.homotopyClass (the node's first-coordinate concatenation in Mathlib's order), and the docstrings explain the convention. The theorem signature and lean.statement are unchanged. fixes/KanRealizationSerre.lean compiles clean (nt_compile rc 0; a broken copy gives rc 1). fixes/lem-coef-kan-realization-serre.report.md keeps both required sections and adds a correction section. No hollow definitions, only sorry, no extra universe or instance, no duplicate declaration."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanRealizationSerre",
+  "declaration": "SSet.kan_realization_serre",
+  "declarations": [
+   "SSet.realizationVertex",
+   "SSet.groupMul",
+   "SSet.realizationCubeCoordinates",
+   "SSet.KanRealizationComparison",
+   "SSet.kan_realization_serre"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanRealizationSerre.lean",
+  "statement": "theorem kan_realization_serre {X Y : SSet.{u}} (p : X ⟶ Y) (hp : ∀ (n : ℕ) (i : Fin (n + 2)), HasLiftingProperty (SSet.horn (n + 1) i).ι p) : (∀ (m : ℕ) (a : Metric.closedBall (0 : EuclideanSpace ℝ (Fin m)) 1 → ↥(SSet.toTop.obj X)) (b : Metric.closedBall (0 : EuclideanSpace ℝ (Fin m)) 1 × unitInterval → ↥(SSet.toTop.obj Y)), Continuous a → Continuous b → b ∘ (fun z ↦ (z, (0 : unitInterval))) = (SSet.toTop.map p).hom ∘ a → ∃ l : Metric.closedBall (0 : EuclideanSpace ℝ (Fin m)) 1 × unitInterval → ↥(SSet.toTop.obj X), Continuous l ∧ l ∘ (fun z ↦ (z, (0 : unitInterval))) = a ∧ (SSet.toTop.map p).hom ∘ l = b) ∧ (∃ e₀ : ∀ (K : SSet.{u}), K.KanComplex → SSet.π₀ K ≃ ZerothHomotopy (SSet.toTop.obj K), (∀ (K : SSet.{u}) (hK : K.KanComplex) (x : K _⦋0⦌), e₀ K hK (SSet.π₀.mk x) = Quotient.mk _ (realizationVertex x)) ∧ (∀ (K L : SSet.{u}) (hK : K.KanComplex) (hL : L.KanComplex) (f : K ⟶ L) (z : SSet.π₀ K), e₀ L hL (SSet.mapπ₀ f z) = SSet.Enhanced.componentsMap (SSet.toTop.map f).hom (e₀ K hK z))) ∧ (∃ e : ∀ (K : SSet.{u}), K.KanComplex → ∀ (x : K _⦋0⦌) (n : ℕ), KanRealizationComparison K x n, ∀ (K L : SSet.{u}) (hK : K.KanComplex) (hL : L.KanComplex) (f : K ⟶ L) (x : K _⦋0⦌) (n : ℕ) (z : SSet.RelativeMorphism.HomotopyClass (SSet.boundary (n + 1)) (SSet.Subcomplex.ofSimplex x) (SSet.const ⟨x, SSet.Subcomplex.mem_ofSimplex_obj x⟩)), HEq ((e L hL (f.app _ x) n).equiv (z.postcomp (SSet.RelativeMorphism.ofSimplex₀ f x (f.app _ x) rfl) (by simp))) (SSet.Enhanced.homotopyGroupMap (SSet.toTop.map f).hom (n + 1) (realizationVertex x) ((e K hK x n).equiv z)))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-16",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e9797b2a2"
  }
 }
