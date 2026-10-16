@@ -138,26 +138,37 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.KFlatIndependentCoefficients",
+  "module": "Sheaf.Algebra.Homology.KFlat",
   "declaration": "CochainComplex.IsKFlatIndependentCoefficients",
+  "statement": "def IsKFlatIndependentCoefficients (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved.",
   "declarations": [
+   "SheafOfModules.hasSheafify_coefficientUniverse",
+   "SheafOfModules.wEqualsLocallyBijective_coefficientUniverse",
+   "SheafOfModules.isMonoidal_W_separateHomUniverse",
+   "SheafOfModules.preservesZeroMorphisms_curriedTensor",
+   "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
+   "CochainComplex.IsKFlat",
+   "CochainComplex.IsKFlatResolution",
+   "CochainComplex.independentCoefficients_isMonoidal",
+   "CochainComplex.independentCoefficients_preservesZeroMorphisms",
+   "CochainComplex.independentCoefficients_preservesZeroMorphisms_obj",
    "CochainComplex.IsKFlatIndependentCoefficients",
    "CochainComplex.IsKFlatResolutionIndependentCoefficients"
   ],
-  "statement": "def IsKFlatIndependentCoefficients\n    (K : CochainComplex (SheafOfModules.{w} ((sheafCompose J\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : Prop",
-  "branch": "newtargets-dag",
-  "by": "Q05",
-  "date": "2026-10-15",
-  "existing": true,
-  "note": "§1(B), H4: the current published KFlatIndependentCoefficients module already supplies exactly the independent-coefficient K-flatness and resolution predicates, with canonical sheafified tensor and proved coefficient-universe infrastructure. Read its full source through scompile.py --source. Reuse these declarations instead of replaying the stale KFlat overlay, which conflicts with the published module. All acyclic complexes in the coefficient universe are tested; site universes remain independent."
+  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-06c02526a",
-  "group": "Q05",
+  "reviewer": "NT-stage2-Codex-05a6587fa",
+  "group": "Q28",
   "result": "pass",
-  "note": "Statement, dependencies, constructions, docstrings, edge cases, universes, source alignment, report sections, and server compiler evidence checked; no fixes required."
+  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

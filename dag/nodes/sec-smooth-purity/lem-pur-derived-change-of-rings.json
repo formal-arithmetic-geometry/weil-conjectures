@@ -145,21 +145,21 @@
    "SheafOfModules.derivedChangeRingIndependentCoefficients",
    "SheafOfModules.derivedChangeOfRingsIndependentCoefficients"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/DerivedChangeOfRingsIndependentCoefficients.lean",
   "statement": "theorem derivedChangeOfRingsIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {O O' : Sheaf J CommRingCat.{r}} (φ : O ⟶ O') [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O))] [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))] : ∃ (E : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O) ⥤ SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O')) (h : ∀ M : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O), E.obj M = changeOfRings.{v, u, r} φ M) (_ : ∀ {M N : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)} (a : M ⟶ N), E.map a = eqToHom (h M) ≫ changeOfRingsHom.{v, u, r} φ M a ≫ eqToHom (h N).symm) (_ : E.Additive), (∀ {P Q : CochainComplex (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)) ℤ} (α : P ⟶ Q), CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := O) P → CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := O) Q → QuasiIso α → QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧ (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor (HomotopyCategory.quasiIso (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)) (ComplexShape.up ℤ)) ∧ ∃ (LF : DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)) ⥤ DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))) (ε : DerivedCategory.Qh ⋙ LF ⟶ E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)) (ComplexShape.up ℤ)) ∧ (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧ ∀ P : CochainComplex (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := O) P → IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))",
   "branch": "newtargets-dag",
-  "by": "NZ",
+  "by": "Q28",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B), H10 repair: use IsKFlatIndependentCoefficients for every K-flat complex in both clauses of derived change of rings, and rebuild against the generalized KFlat source. The ordinary scalar extension, universal derived pair, exactness, K-flat computation and canonical resolution comparisons are unchanged."
+  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved.",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedChangeOfRingsIndependentCoefficients.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-26a22ba19",
-  "group": "NZ",
+  "reviewer": "NT-stage2-Codex-05a6587fa",
+  "group": "Q28",
   "result": "pass",
-  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

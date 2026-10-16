@@ -14,7 +14,14 @@
  },
  "stmt_deps": [
   "def-coef-normalized-dvr-tower",
-  "def-weil-derived-complete"
+  "def-weil-derived-complete",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-integral-reduction-tower"
  ],
  "proof": [
   {
@@ -291,5 +298,29 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-7d4a4645a (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements and sources, route, and exact master target categories/maps. Repaired steps 6–7 to cite and explicitly apply the completed-coefficient derived tensor–restriction adjunction. DVR fiber transitions, unbounded product calculation, counit coherence, and completeness check out; no duplicates or delivery cycle. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedDVREffectivity",
+  "declaration": "WeilConjectures.normalizedDVRTower_effectivity",
+  "declarations": [
+   "WeilConjectures.normalizedDVRIntegralAdjunction",
+   "WeilConjectures.normalizedDVRReductionTransition",
+   "WeilConjectures.normalizedDVRCounitComparison",
+   "WeilConjectures.normalizedDVRTower_effectivity"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedDVREffectivity.lean",
+  "statement": "theorem normalizedDVRTower_effectivity (T : NormalizedDVRTower l E X D hl) (M : completedIntegralDerivedCategory l E X D hl) [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)] (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶ M⟦(1 : ℤ)⟧) (hc : IsDerivedLimitTriangle (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower) M p δ) : (∀ n : ℕ, IsIso (normalizedDVRCounitComparison l E X D hl T M p n)) ∧ (∀ {m n : ℕ} (h : n ≤ m), normalizedDVRCounitComparison l E X D hl T M p m ≫ T.tau h = normalizedDVRReductionTransition l E X D hl h M ≫ (normalizedDVRRes l E X h).map (normalizedDVRCounitComparison l E X D hl T M p n)) ∧ IsDerivedComplete l E X D hl M",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05a6587fa",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  }
 }

@@ -143,21 +143,21 @@
   "declarations": [
    "CochainComplex.exists_isKFlatResolutionIndependentCoefficients"
   ],
-  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean",
   "statement": "theorem exists_isKFlatResolutionIndependentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R : Sheaf J CommRingCat.{r}} (G : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : K ⟶ G), CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) K ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.X i)) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
   "branch": "newtargets-dag",
-  "by": "NZ",
+  "by": "Q28",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B), H10 repair: compile the independent-coefficient K-flat resolution theorem together with the generalized KFlat source. The independent IsKFlatIndependentCoefficients helper retains coefficient universe r independently of the site universes; the flat terms, quasi-isomorphism, and degreewise epimorphism clauses are unchanged. Disable autoImplicit explicitly so this source is included in the repair packet."
+  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved.",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatResolutionIndependentCoefficients.lean"
  },
  "reviewed_lean": {
   "date": "2026-10-15",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-26a22ba19",
-  "group": "NZ",
+  "reviewer": "NT-stage2-Codex-05a6587fa",
+  "group": "Q28",
   "result": "pass",
-  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+  "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
