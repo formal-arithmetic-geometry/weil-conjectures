@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward",
+ "kind": "statement",
+ "title": "Derived direct image commutes with coherent coefficient scalar actions",
+ "statement": "Let Lambda be any commutative condensed ring and f:X -> Y any scheme morphism, as in [def-weil-pbc-condensed-e-module-category]. Let bX:1 -> Lambda_X and bY:1 -> Lambda_Y be coefficient sections with bX=epsilon_f followed by f^* bY and the canonical coefficient comparison. Form multiplication by each section on internal modules, termwise on cochain complexes, on the homotopy category, and by the actual CatCenter localization on the derived category. For every derived Lambda_X-module M, Rf_* carries the descended multiplication by bX to descended multiplication by bY on Rf_* M. The module also supplies the explicit multiplication and localization constructions used in this statement.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "scalarEndo_hom, scalarNatEndo, derivedCenter, map_derivedCenter, map_center_rightAdjoint, and lowerStar_derivedScalarEndo_of_eq. The scalar and localization calculations are shared in the new lower module, avoiding an import cycle."
+ },
+ "proof": [
+  {
+   "text": "Move the existing tensorπ_leftUnitor_hom and leftUnitor_inv_hom proofs from Compatibility into this shared lower module, retaining their original names. Use them to compute multiplication by b using the unitors and regular-module lift. Its underlying action formula proves naturality, and the monoidal unit and multiplication identities show that mapMod carries multiplication to multiplication by epsilon followed by F(b). Restriction of scalars and scalar extension along an invertible coefficient map preserve this formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the central map degreewise on complexes and descend first to homotopy and then by CatCenter.localization to the derived category. Prove exact-functor compatibility by precomposing with Qh, applying Localization.natTrans_ext, and using the explicit derived factorization isomorphism and its naturality. Export the equation on Qh objects, keeping the localized center body non-exposed. Name the derived scalar-unit leg explicitly and prove its computation equation to avoid repeated expansion in concrete coefficient statements.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing map_center_of_iso and map_center_rightAdjoint proofs, moved from Compatibility into this module under their original names. Apply exact-functor compatibility to inverse image of modules, using the canonical derived-to-termwise comparison. Transport the central action through the comparison isomorphism. The adjunction hom equivalence is injective; counit naturality and central naturality transpose the inverse-image scalar equation to the direct-image equation. Substitute the given coherent coefficient sections.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisPushforward.lean",
+  "place": "Repair of returned head 96fd00dc8: share the four original unitor/center proofs under their original names and import them from both consumers; remaining scalar and localization calculations unchanged, 2026-10-16; compact scalar-unit interface and non-exposed localized center with characterizing equations, repair 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous algebraic basis gives coproduct decomposition of condensed scalar extension",
+   "results": "8 hits: continuous_coinducingCoprod, profiniteSolidCounit, free, freeForgetAdjunction, profiniteFree, LightCondensed.free, LocallyConstant.adjunction. No complete coefficient-basis result.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; retain coordinate construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central natural transformation commutes with a right adjoint if its left adjoint commutes with it",
+   "results": "8 hits: adjunction hom-equivalence naturality, CatCenter.naturality_assoc, CommSq.right_adjoint and shift/adjunction comparisons. No complete derived scalar theorem.",
+   "date": "2026-10-16",
+   "verdict": "Use the naturality and adjunction API in the copied source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarNatEndo|map_center_rightAdjoint|lowerStar_derivedScalarEndo",
+   "results": "Compatibility.lean contains private scalar multiplication, termwise central localization, and adjunction transport proofs. It imports the assigned module, so direct reuse by import would be cyclic.",
+   "date": "2026-10-16",
+   "verdict": "Adapt those proved calculations locally."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis",
+  "group": "A3",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+   "place": "Strict substeps of the assigned scalar-basis proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisPushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisPushforward.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.qbar_lowerStar_derivedScalarEndo_of_eq",
+  "statement": "lemma qbar_lowerStar_derivedScalarEndo_of_eq\n    (bX : 𝟙_ (Sheaf (ProEt.topology X) Ab.{u + 1}) ⟶ condensedRingObj Λ X)\n    (bY : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶ condensedRingObj Λ Y)\n    (hb : bX = CategoryTheory.Functor.LaxMonoidal.ε (f)^*[Ab.{u + 1}] ≫\n      (f)^*[Ab.{u + 1}].map bY ≫ condensedPullbackHom Λ f)\n    (M : DerivedCategory\n      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    R((f)_*⟦Λ⟧).map ((CategoryTheory.qbar_derivedCenter (Mod.qbar_scalarNatEndo bX)).app M) =\n      (CategoryTheory.qbar_derivedCenter (Mod.qbar_scalarNatEndo bY)).app (R((f)_*⟦Λ⟧).obj M)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Mod.tensorπ_leftUnitor_hom",
+   "CategoryTheory.Mod.leftUnitor_inv_hom",
+   "CategoryTheory.Mod.qbar_scalarEndo",
+   "CategoryTheory.Mod.qbar_scalarEndo_hom",
+   "CategoryTheory.Mod.qbar_scalarNatEndo",
+   "CategoryTheory.Mod.qbar_scalarNatEndo_app",
+   "CategoryTheory.qbar_complexCenter",
+   "CategoryTheory.qbar_complexCenter_app_f",
+   "CategoryTheory.qbar_homotopyCenter",
+   "CategoryTheory.qbar_homotopyCenter_app",
+   "CategoryTheory.qbar_derivedCenter",
+   "CategoryTheory.qbar_derivedCenter_Qh",
+   "CategoryTheory.Mod.qbar_scalarUnitLeg",
+   "CategoryTheory.Mod.qbar_scalarUnitLeg_eq",
+   "CategoryTheory.map_center_rightAdjoint",
+   "CategoryTheory.map_center_of_iso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.qbar_lowerStar_derivedScalarEndo_of_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-48fd7",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T173551-L-1931163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-48fd7",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T173551-L-1931163",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG against the packet and original library; all four delivered modules and 21 direct importers compile in the overlay, with only the declared unit theorem using sorryAx."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit",
+ "kind": "statement",
+ "title": "Coherent coefficient sections giving the derived scalar-extension unit decomposition",
+ "statement": "Fix a prime ell and a finite intermediate field E of its algebraic closure Omega, using the coefficient model of [def-weil-pbc-condensed-e-module-category] and the actual scalar actions of [lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward]. There exist a common index type I and sections b(Z,i):1 -> Omega_Z for every scheme Z. For every morphism f:X -> Y they satisfy b(X,i)=epsilon_f followed by f^* b(Y,i) and the canonical coefficient comparison. For every derived E_Z-module M and every chosen I-copower of M, the extension unit followed by restriction of the explicitly descended multiplication by b(Z,i) exhibits its restriction of derived extension as that copower. No direct-image conclusion is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
+ ],
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "finiteFreePushData, continuousBasisSheafIso and isIso_leftDerivedBasisUnitDesc for the finite-basis template; the finite-subextension-valued section model of WeilConjectures/CategoryTheory/RingObjects/Condensed/FiniteSubextension.lean supplies the finite-support extension described in the original scalar-basis proof."
+ },
+ "proof": [
+  {
+   "text": "Construct the finite-support coordinate coproduct on the point from an algebraic E-basis and continuity of finite-dimensional coordinates.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the algebraic basis-vector sections to every scheme by the monoidal point inverse image. The monoidal point-composition comparison proves their coefficient-section coherence. Tensor the regular-module coordinate decomposition with a module and identify its legs with the extension unit followed by multiplication. Exact coproducts and coefficient extension descend this natural isomorphism termwise through the homotopy and derived localizations. Naturality and uniqueness of coproducts handle arbitrary derived objects and chosen copowers.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisUnit.lean",
+  "place": "Source scalar calculations adapted without cyclic imports; coherent coefficient-section reduction, 2026-10-16; compact scalar-unit interface and non-exposed localized center with characterizing equations, repair 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous algebraic basis gives coproduct decomposition of condensed scalar extension",
+   "results": "8 hits: continuous_coinducingCoprod, profiniteSolidCounit, free, freeForgetAdjunction, profiniteFree, LightCondensed.free, LocallyConstant.adjunction. No complete coefficient-basis result.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; retain coordinate construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central natural transformation commutes with a right adjoint if its left adjoint commutes with it",
+   "results": "8 hits: adjunction hom-equivalence naturality, CatCenter.naturality_assoc, CommSq.right_adjoint and shift/adjunction comparisons. No complete derived scalar theorem.",
+   "date": "2026-10-16",
+   "verdict": "Use the naturality and adjunction API in the copied source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarNatEndo|map_center_rightAdjoint|lowerStar_derivedScalarEndo",
+   "results": "Compatibility.lean contains private scalar multiplication, termwise central localization, and adjunction transport proofs. It imports the assigned module, so direct reuse by import would be cyclic.",
+   "date": "2026-10-16",
+   "verdict": "Adapt those proved calculations locally."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function into a finite dimensional subspace has uniformly finite Hamel basis coordinate support, giving a coproduct of condensed modules",
+   "results": "8 hits: Condensed.finFree, Condensed.free, Condensed.profiniteFree, CondensedSet.continuous_coinducingCoprod, CondensedMod.LocallyConstant.functor, Condensed.profiniteSolid, LightCondSet.continuous_coinducingCoprod and CondensedMod.ofSheafCompHaus. None constructs the finite-subextension-valued internal coefficient module or its derived unit.",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no complete match; discrete/constant coefficients and free modules on profinite spaces do not supply this internal scalar-basis decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Finsupp",
+   "results": "12 hits including Module.Basis.repr, ofRepr, coe_repr_symm, repr_self, coord_apply and sum_repr. These supply algebraic finite coordinates, not continuous internal module sheaf or derived-unit comparisons.",
+   "date": "2026-10-17",
+   "verdict": "Second reading: use the coordinate primitives when completing the remaining construction; no theorem closes the unit hole directly."
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*(basis|scalar)|basis.*(coproduct|condensed)|basis.*support",
+   "results": "25 Mathlib hits, chiefly ordinary basis/support formulas; no condensed internal scalar-basis theorem. Separate rg searches of lean/Sheaf, lean/WeilConjectures and the source checkout find only the existing finite-basis template and the original assigned scalar-basis hole.",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no complete duplicate of the remaining infinite-basis unit theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis",
+  "group": "A3",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+   "place": "Strict substeps of the assigned scalar-basis proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasisUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_condensedQbar_scalar_basis_unit",
+  "statement": "theorem exists_condensedQbar_scalar_basis_unit :\n    ∃ (I : Type (u + 1))\n      (b : ∀ Z : Scheme.{u}, I →\n        (𝟙_ (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) ⟶\n          condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z)),\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (i : I), b X i =\n        Functor.LaxMonoidal.ε (f)^*[Ab.{u + 1}] ≫\n          (f)^*[Ab.{u + 1}].map (b Y i) ≫\n            condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f) ∧\n      (∀ (Z : Scheme.{u}) (M : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj E) Z)))\n        [HasCoproduct (fun _ : I ↦ M)],\n        IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦\n          Mod.qbar_scalarUnitLeg (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z) (b Z i) M))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.exists_condensedQbar_scalar_basis_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-48fd7",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T173551-L-1931163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-48fd7",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T173551-L-1931163",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG against the packet and original library; all four delivered modules and 21 direct importers compile in the overlay, with only the declared unit theorem using sorryAx."
+ }
+}

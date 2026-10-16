@@ -12,33 +12,28 @@
  ],
  "proof": [
   {
-   "text": "Choose an algebraic E-basis of Omega. A finite-field-valued continuous function takes values in a finite-dimensional E-subspace after forming the compositum with E. Its finitely many Hamel coordinates are continuous by finite-dimensional topological linear algebra. Finite covers preserve finite support. Hence restriction of the regular condensed Omega-module is the coproduct of regular E-modules, with basis-vector summand maps.",
+   "text": "Choose the index type and coherent coefficient sections whose actual descended scalar actions give the derived unit decomposition.",
    "uses": [
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit"
    ],
    "elementary": false
   },
   {
-   "text": "Pull this decomposition to each scheme along the monoidal inverse-image functor. Tensor with M and identify each summand map with the extension unit followed by its basis scalar. Exact coproducts make extension exact and descend this decomposition termwise to the unbounded derived category. The coproduct assertion is independent of the chosen coproduct by uniqueness of colimits.",
+   "text": "Use the explicitly proved direct-image compatibility for those coherent sections, with no direct-image preservation of infinite coproducts. Package their descended central actions and the unit decomposition in the required existential.",
    "uses": [
-    "lem-weil-pbc-profinite-point-pullback"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
    ],
    "elementary": false
-  },
-  {
-   "text": "The scalar endomorphisms are central. Pullback carries the same global coefficient scalars to each other, by its monoidal unit and coefficient square. Transpose this identity through the derived pullback/direct-image adjunction to obtain scalar compatibility of direct image. No direct-image preservation of infinite sums is used.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-  "lem-weil-pbc-profinite-point-pullback"
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasis.lean",
-  "place": "F3 scalar-basis and bounded-below coproduct route, 2026-10-16"
+  "place": "Actual descended scalar actions from coherent coefficient sections; proved direct-image compatibility via scalar formulas, localization and the derived adjunction, 2026-10-16; repair: compact exposed name for the identical proposition and scalar-unit computation equation, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -103,10 +98,14 @@
   "module": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis",
   "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasis.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedQbar_derived_scalar_basis",
-  "statement": "theorem condensedQbar_derived_scalar_basis :\n    ∃ (I : Type (u + 1))\n      (τ : ∀ Z : Scheme.{u}, I → CatCenter (DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z)))),\n      (∀ (Z : Scheme.{u}) (M : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj E) Z)))\n        [HasCoproduct (fun _ : I ↦ M)],\n        IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).unit.app M ≫\n          (Mod.comap (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).mapDerivedCategory.map\n              ((τ Z i).app ((Mod.extendScalars (coefficientMap\n                (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).leftDerivedFunctor.obj M)))) ∧\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (i : I)\n        (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))),\n        R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map ((τ X i).app M) =\n          (τ Y i).app (R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M))",
+  "statement": "theorem condensedQbar_derived_scalar_basis :\n    CondensedQbarDerivedScalarBasis ℓ E",
   "branch": "sheaf-dag",
   "by": "F3",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.CondensedQbarDerivedScalarBasis",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedQbar_derived_scalar_basis"
+  ]
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -121,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-2a861",
-  "group": "F3",
+  "reviewer": "X-48fd7",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261016T093726-L-2050850",
+  "landing": "20261016T173551-L-1931163",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with all four node records, retained interfaces, declared API retirement, forced adaptation errors, axiom audit, and direct-importer compilation."
+  "note": "independent Codex review: Delivered Lean/DAG against the packet and original library; all four delivered modules and 21 direct importers compile in the overlay, with only the declared unit theorem using sorryAx."
  }
 }
