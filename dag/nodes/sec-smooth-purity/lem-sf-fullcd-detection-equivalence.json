@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sf-fullcd-detection-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The full cohomological-dimension condition is a bound on the pro-étale cohomology of the base-changed source",
- "statement": "In the setting of [def-weil-full-cohomological-dimension] the condition\n$\\operatorname{FullCD}(p,A;c)$ is equivalent to the following statement: for\nevery object $V\\to Y$ of $Y_{\\Proet}$\n([def-weil-pbc-proetale-site]) and every sheaf $\\mathcal F$ of\n$A$-modules on $\\overline X_{\\Proet}$, with $p_V$ and $(p_V)_*$ as in\nthe derived direct image of [def-weil-pbc-direct-image], one has\n\n$$\nH^r\\bigl((\\overline X\\times_YV)_{\\Proet},\\mathcal F|_{\\overline X\\times_YV}\\bigr)=0\n\\qquad(r\\in\\mathbf Z,\\ r>c),\n$$\n\nthe cohomology being that of the small pro-étale site of the base-changed\nsource.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$ of its valuation ring $\\mathcal O_E$, and $n\\geq1$, and put $A=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$. Let $S$ be a scheme on which $\\ell$ is invertible, let $\\overline X,Y$ be finite-type $S$-schemes, let $p:\\overline X\\to Y$ be a proper $S$-morphism, and let $c\\in\\mathbf Z_{\\geq0}$. Use the constant-ring module categories, the pullbacks, and $\\operatorname{FullCD}(p,A;c)$ of [def-weil-full-cohomological-dimension], on the small pro-etale sites [def-weil-pbc-proetale-site], with finite-level derived direct images [def-weil-derived-direct-image] and cohomology sheaves [def-weil-derived-cohomology-sheaves].\n\nAn object $W$ of a site is weakly contractible if evaluation at $W$ sends every epimorphism of sheaves of sets to a surjection. Then $\\operatorname{FullCD}(p,A;c)$ is equivalent to the following cohomology test: for every object $V\\to Y$ of $Y_{\\mathrm{proet}}$, every affine weakly contractible object $W\\to V$ of $V_{\\mathrm{proet}}$, every sheaf $\\mathcal F$ of $A_{\\overline X}$-modules on $\\overline X_{\\mathrm{proet}}$, and every integer $r>c$, one has\n$$\n H^r\\bigl((\\overline X\\times_Y W)_{\\mathrm{proet}},\\mathcal F|_{\\overline X\\times_Y W}\\bigr)=0.\n$$\nHere $\\overline X_V=\\overline X\\times_YV$, $p_V:\\overline X_V\\to V$ is the projection, and $\\mathcal F_V=\\mathcal F|_{\\overline X_V}$ is the module pullback. The restriction in the displayed formula is the successive restriction of $\\mathcal F_V$ to $\\overline X_V\\times_VW=\\overline X\\times_YW$. For a scheme $T$ and a module sheaf $G$, $H^r(T_{\\mathrm{proet}},G)$ means the $r$-th right derived functor of global sections in the category of $A_T$-module sheaves (equivalently, the cohomology of global sections of an injective resolution). There is no finite-type assumption on $V$ or $W$, and $\\mathcal F$ is quantified on the original source, with no constructibility or etale-origin restriction. The cohomology test is on affine weakly contractible $W$, not on all base objects without this restriction.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-fullcd-detection-equivalence.md",
   "place": "node lem-sf-fullcd-detection-equivalence, order 1794",
@@ -21,41 +21,128 @@
  "stmt_deps": [
   "def-weil-full-cohomological-dimension",
   "def-weil-pbc-proetale-site",
-  "def-weil-pbc-direct-image"
+  "def-weil-derived-direct-image",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [
   {
-   "text": "*Auxiliary fact.* Let $T$ be a scheme, let $W\\to T$ be an object of\n$T_{\\Proet}$ every pro-étale covering family of which contains a member\nadmitting a section – a weakly contractible object, the objects whose\nexistence in abundance is Stacks Project, Pro-étale Cohomology, Lemma\n61.13.4, [Tag 0990](https://stacks.math.columbia.edu/tag/0990), and\nwhich are the ones used in [lem-sf-proetale-vanishing-detection]. Then\n$H^q(W,\\mathcal G)=0$ for every $q>0$ and every sheaf $\\mathcal G$ of\n$A$-modules on $T_{\\Proet}$: the functor\n$\\mathcal G\\mapsto\\mathcal G(W)$ is left exact, and it is right exact\nbecause for a surjection $\\mathcal G\\to\\mathcal G'$ and a section of\n$\\mathcal G'$ over $W$ there is a covering family of $W$ on which the\nsection lifts, and one of its members admits a section $W\\to W_i$ along\nwhich the lift pulls back. Hence the global-sections functor of the site\nover $W$ is exact and its higher derived functors vanish. In particular\nthe Leray spectral sequence of the composite\n$\\Gamma\\bigl((\\overline X\\times_YV)_{\\Proet},-\\bigr)= \\Gamma\\bigl(V_{\\Proet},-\\bigr)\\circ R(p_V)_*$, which exists by\n[thm-sp-grothendieck], has\n$E_2^{p,q}=H^p\\bigl(V_{\\Proet},R^q(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)$ and therefore collapses at $q=0$ for such a $V$:\n\n$$\nH^r\\bigl((\\overline X\\times_YV)_{\\Proet},\\mathcal F|_{\\overline X\\times_YV}\\bigr)\n\\cong H^r\\bigl(V_{\\Proet},R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)\n=\\bigl(\\mathcal H^r(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))\\bigr)(V).\n$$",
+   "text": "Fix $V\\to Y$, $\\mathcal F$, and $r>c$, and put $K_V=\\iota\\mathcal F_V$. On the chosen small skeleton of $(\\overline X_V)_{\\mathrm{proet}}$ the coefficient sheaf $A_{\\overline X_V}$ is a sheaf of commutative rings. By [lem-weil-pbc-ring-sheaves-grothendieck] its module category is Grothendieck abelian, so [lem-sp-grothendieck-enough-injectives] gives enough injectives. Apply [lem-weil-pbc-dplus-injective-representative] to $K_V$, whose cohomology is concentrated in degree zero, obtaining a representing complex $I_V^\\bullet$ of injective module sheaves with $I_V^i=0$ for $i<0$. That node also says this complex is K-injective. Thus the finite-level definition [def-weil-derived-direct-image] computes $R(p_V)_*K_V$ by the actual complex $(p_V)_*I_V^\\bullet$. All these constructions use the same constant coefficient ring $A$; the category is not replaced by etale sheaves or by constructible sheaves.",
    "uses": [
-    "lem-sf-proetale-vanishing-detection",
-    "thm-sp-grothendieck"
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-derived-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective); injectives.tex Tags 079Q (remark-existence-D), 079H (theorem-injective-embedding-grothendieck)"
+   }
   },
   {
-   "text": "*The condition implies the vanishing.* Assume\n$\\operatorname{FullCD}(p,A;c)$. By its relative clause the sheaves\n$\\mathcal H^q(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))$\n([def-weil-derived-cohomology-sheaves]) vanish for $q>c$; the Leray\nspectral sequence of the composite then has $E_2^{p,q}=0$ for $q>c$,\nwhence $H^r=0$ for $r>c$, for *every* base change $V\\to Y$.\n*The vanishing implies the condition.* Assume the vanishing of the\nstatement. Fix a base change $V\\to Y$ and a sheaf $\\mathcal F$ of\n$A$-modules on $\\overline X_{\\Proet}$; put\n$\\mathcal Q^r=\\mathcal H^r(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV}))$. For an affine weakly contractible object $W\\to V$ of\n$V_{\\Proet}$ the object $W\\to Y$ is a weakly contractible object of\n$Y_{\\Proet}$: a pro-étale covering family of $W$ over $Y$ is one\nover $V$, and such a family contains a member admitting a section, so\n$W\\to V$ may be replaced by $W$ in the auxiliary fact and the\nidentification above applies to the base change $\\overline X\\times_YW\\to W$.\nHence $\\mathcal Q^r(W)=H^r\\bigl((\\overline X\\times_YW)_{\\Proet},\\mathcal F|_{\\overline X\\times_YW}\\bigr)=0$ for $r>c$. The affine weakly\ncontractible objects of $V_{\\Proet}$ detect the vanishing of a sheaf by\n[lem-sf-proetale-vanishing-detection](i), so $\\mathcal Q^r=0$ for\n$r>c$; as $V$ was arbitrary this is\n$\\operatorname{FullCD}(p,A;c)$, which is also the form of the test recorded\nin [cor-sf-fullcd-weakly-contractible-test].",
+   "text": "Let $W\\to V$ be affine and weakly contractible in $V_{\\mathrm{proet}}$, and write $Z=\\overline X_V\\times_VW$. The projection $Z\\to\\overline X_V$ is weakly etale: $W\\to V$ is weakly etale by the site definition, and weakly etale maps are stable under base change by [lem-weil-pbc-ind-etale-stability]. Therefore [lem-weil-pbc-proetale-restriction-injectives] identifies $Z_{\\mathrm{proet}}$ with the localized site and says that restriction is exact and preserves injectives. The restricted complex $I_V^\\bullet|_Z$ is bounded below and termwise injective. Exactness of restriction gives $\\mathcal H^0(I_V^\\bullet|_Z)\\cong\\mathcal F|_Z$ and $\\mathcal H^i(I_V^\\bullet|_Z)=0$ for $i\\ne0$, by applying restriction to the representative isomorphism from step 1. Thus it represents the degree-zero sheaf $\\mathcal F|_Z$. Its global-section cohomology is $H^r(Z_{\\mathrm{proet}},\\mathcal F|_Z)$. By the sectionwise formula in [def-weil-proetale-module-direct-image], there is an equality of complexes $((p_V)_*I_V^\\bullet)(W)=\\Gamma(Z_{\\mathrm{proet}},I_V^\\bullet|_Z)$; in degree $i$ both sides are $I_V^i(Z)$, and their differential is the same map $d^i_Z:I_V^i(Z)\\to I_V^{i+1}(Z)$, because the definition specifies $((p_V)_*d^i)_W=d^i_Z$. Apply [lem-weil-pbc-proetale-weakly-contractible-evaluation-exact] on $V$, with coefficient sheaf $A_V$: its hypothesis is exactly the stipulated weak contractibility of $W$. Evaluation therefore commutes with the homology of $(p_V)_*I_V^\\bullet$. With [def-weil-derived-cohomology-sheaves] this gives\n$$\n \\bigl(\\mathcal H^r(R(p_V)_*\\iota\\mathcal F_V)\\bigr)(W)\n \\cong H^r\\bigl(Z_{\\mathrm{proet}},\\mathcal F|_Z\\bigr).\n$$\nThe fibre-product identity $Z=\\overline X\\times_YW$ is its defining universal-property identification. Since $r>c\\geq0$, only positive-degree cohomology is used. No collapse of Leray over an arbitrary $V$ is asserted.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "lem-sf-proetale-vanishing-detection",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "def-weil-proetale-module-direct-image",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3 (lemma-cohomology-of-open), proof; Tag 0946 (lemma-w-contractible), clause (1); proetale.tex Tag 09A5 (section-morphism), introductory paragraph"
+   }
+  },
+  {
+   "text": "Use [cor-sf-fullcd-weakly-contractible-test] with precisely the coefficient $A$, the proper $S$-morphism $p$, and the nonnegative integer $c$ of the statement. If $\\operatorname{FullCD}(p,A;c)$ holds, that node gives zero for every relative evaluation on the left of the comparison in step 2; its right side is therefore zero for all $V,W,\\mathcal F,r$ in the cohomology test. Conversely, assume the cohomology test. Step 2 makes all the relative evaluations in the corollary zero. Take $V=Y$ with its identity map as well: $p_V=p$ and $\\mathcal F_V=\\mathcal F$ under the canonical identity fibre-product identifications, so the absolute evaluations in the corollary are also zero. These are every clause, with exactly the same quantifiers, of the corollary's evaluation test. Its converse gives $\\operatorname{FullCD}(p,A;c)$. In particular no sheaf on a base-changed source that is not a pullback of an original-source sheaf has been introduced into the quantifier.",
+   "uses": [
     "cor-sf-fullcd-weakly-contractible-test"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-fullcd-detection-equivalence.md",
+    "place": "Proof, reverse implication and reference to cor-sf-fullcd-weakly-contractible-test, with the invalid unrestricted forward implication corrected"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-vanishing-detection",
-  "thm-sp-grothendieck",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-derived-direct-image",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "def-weil-proetale-module-direct-image",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
   "def-weil-derived-cohomology-sheaves",
   "cor-sf-fullcd-weakly-contractible-test"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/lem-sf-fullcd-detection-equivalence.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Combination of Tags 03F3 and 0946 with the existing weakly contractible evaluation criterion; repair of the imported blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weaklyContractible|weakly_contractible|HasUniformCohomologicalDimension|cohomologicalDimension",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the full finite-coefficient pro-etale cohomological-dimension equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomological dimension bound on higher direct images is detected by cohomology over weakly contractible objects of a site",
+   "results": "8 hits; CategoryTheory.Functor.IsDenseSubsite.instIsCocontinuous, SSet.instHasDimensionLTToSSetRange, CategoryTheory.Sheaf.instHasFiniteCoproducts, CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mk, CategoryTheory.hasColimitsEssentiallySmallSite, CategoryTheory.injectiveDimension_ne_top_iff, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.Sheaf.instHasColimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the full finite-coefficient pro-etale cohomological-dimension equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image cohomology sheaves evaluated at a weakly contractible object equal cohomology of the inverse image scheme",
+   "results": "8 hits; CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_map_val_app, TopCat.Sheaf.pullbackIso, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the full finite-coefficient pro-etale cohomological-dimension equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Functor.PreservesHomology",
+   "results": "0 hits; ; loogle: unknown identifier 'Functor.PreservesHomology'",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid Loogle name; repeated with a valid pattern"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher direct images of all module sheaves is equivalent to vanishing of fiber product cohomology over projective objects of the target topos",
+   "results": "8 hits; CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, Rep.isZero_Tor_succ_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, isZero_Ext_succ_of_projective, CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the full finite-coefficient pro-etale cohomological-dimension equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"homology\"",
+   "results": "12 hits; CategoryTheory.ShortComplex.leftHomologyFunctor, CategoryTheory.ShortComplex.leftHomologyπNatTrans, CategoryTheory.ShortComplex.rightHomologyFunctor, CategoryTheory.ShortComplex.rightHomologyιNatTrans, CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso, CategoryTheory.ShortComplex.rightHomologyFunctorOpNatIso, CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso_hom_app, CategoryTheory.ShortComplex.leftHomologyFunctorOpNatIso_inv_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state the full finite-coefficient pro-etale cohomological-dimension equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|IsProjective.*Sheaf|preservesHomology_of",
+   "results": "21 hits; Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Injective/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic exactness, projective-resolution and abelian sheaf cohomology declarations do not state the corrected pro-etale FullCD equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site derived direct image evaluated on a projective object is cohomology on the localized source site",
+   "results": "8 hits; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.Functor.mapProjectiveResolution, CochainComplex.isKProjective_of_projective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: generic exactness, projective-resolution and abelian sheaf cohomology declarations do not state the corrected pro-etale FullCD equivalence"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -85,5 +172,54 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-fullcd-detection-equivalence",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported unrestricted global cohomology equivalence is false, already for an identity morphism over a finite field. Repaired to the affine weakly contractible test over every site object V. Proved the cohomology/evaluated-direct-image identification from existing resolution, localization and exact evaluation nodes, then applied the existing test. No new nodes. Corrected the etale-only direct-image definition citation.",
+  "blueprint": "Auxiliary fact: replace the misindexed Leray-collapse argument by exact evaluation on a bounded below injective representative. Forward implication: correct the false assertion over arbitrary V to evaluations over affine weakly contractible W. Reverse implication: retain the detection route through cor-sf-fullcd-weakly-contractible-test, including both absolute and relative clauses. This is a correction of the node-level argument; the unit and chapter records are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General ringed-site module category theorem, needed to obtain injective representatives on every base-changed source; the unit supplies no such categorical existence theorem."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "General enough-injectives theorem applied to the pro-etale module category; no node of this unit gives its existence."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "General bounded below injective representative and K-injectivity theorem; needed for the explicit comparison, not a replacement of the unit vanishing argument."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Only the base-change stability clause for weakly etale maps is used to localize at the source fibre product."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "General localized pro-etale site comparison and preservation of injectives, needed to compute cohomology on the actual fibre-product scheme."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
+    "why": "General module evaluation preserves homology at a weakly contractible object; the existing unit detector alone does not state this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-865fa4dc4",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-865fa4dc4 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, source passages, and unit/chapter route in full. The finite-field counterexample justifies the explicit source correction; the injective-complex comparison and both implications preserve FullCD’s exact quantifiers. No new nodes, duplicates, cycles, or repairable faults found. Accepted six declared generic tool uses. Detailed checks are in review.md; no target coefficient comparison is inferred from the seeded route."
+ }
 }
