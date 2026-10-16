@@ -1,0 +1,162 @@
+{
+ "id": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty-gluing",
+ "kind": "statement",
+ "title": "Gluing open/closed finite-coefficient models",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "finite-stage extension classification and Ext-continuity"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedStratumModelInductionStepNonempty",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty",
+   "place": "strict decomposition of the nonempty support argument",
+   "via": [
+    "new-lem-weil-pbc-condensed-stratum-model-induction-step-nonempty"
+   ]
+  }
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficient.*(glue|gluing|extension)|model.*(closed|stratum)|closed.*support.*step",
+   "results": "7 hits: Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/FieldTheory/AxGrothendieck.lean, Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean, Mathlib/Geometry/Manifold/Notation.lean, Mathlib/Data/WSeq/Basic.lean; no finite-coefficient support-induction step.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induction step gluing finite coefficient models of module sheaves using a model on a smaller closed complement and a model on an open stratum",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, TopCat.PrelocalPredicate.sheafify_inductionOn₂, AlgebraicGeometry.Scheme.OpenCover.ext_elem, SheafOfModules.IsFiniteType.exists_localGeneratorsData, TopCat.Presheaf.IsGluing; no finite-coefficient support-induction step.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.Closeds, WellFoundedLT",
+   "results": "2 hits: TopologicalSpace.instWellFoundedLTClosedsOfNoetherianSpace, TopologicalSpace.noetherianSpace_TFAE; no finite-coefficient support-induction step.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf with finite coefficient models on an open piece and its closed complement descends by finite-stage descent of the localization extension class",
+   "results": "service unavailable: Internal Server Error; unavailable, no result obtained.",
+   "date": "2026-10-16"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement": "Let T be a Scheme with [TopologicalSpace.NoetherianSpace T], let ℓ : ℕ with [Fact ℓ.Prime], and let M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ). Let i : Y ⟶ T be a closed immersion with [IsClosedImmersion i] and [Nonempty Y]. Let j : U ⟶ Y be an open immersion and k : Z ⟶ Y a closed immersion, with [IsOpenImmersion j] and [IsClosedImmersion k], and assume hcover : Set.range j ∪ Set.range k = Set.univ and hdisj : Disjoint (Set.range j) (Set.range k). Given finite coefficient fields EU and EZ, module objects PU on U and PZ on Z over their finite coefficient rings, constructibility hypotheses hPU and hPZ for PU and PZ, and Nonempty scalar-extension isomorphisms eU and eZ identifying those objects with the pullbacks of M along j ≫ i and k ≫ i, there exist a finite coefficient field E and a module object P on Y over padicSubfieldRingObj Y ℓ E such that P is constructible and its scalar extension is Nonempty isomorphic to (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M. This is exactly the complete Lean signature of glue_nonempty_support_open_closed_models, including every immersion instance, object, hypothesis and witness.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-constructible-stratification",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Enlarge EU and EZ to a finite compositum and extend both models. Apply open/closed localization to express the pullback of M as an extension of the closed direct image by the open extension by zero. Use tensor-restriction adjunction, exactness and filtered-colimit continuity to identify scalar extensions of the outer terms. Descend the localization extension class by Ext-continuity to a finite stage, realize it by extension classification, and use Serre closure to obtain the constructible middle term whose scalar extension is the desired pullback.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-proetale-inverse-image",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ext-one-extension-classification",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-closed-immersion",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-proetale-inverse-image",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Source module docstring",
+  "place": "finite-stage extension classification and Ext-continuity",
+  "group": "F3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing",
+  "file": "lean/Sheaf/Paper/CondensedStratumModelInductionStepNonemptyGluing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.glue_nonempty_support_open_closed_models",
+  "statement": "theorem glue_nonempty_support_open_closed_models (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (padicAlgClRingObj T ℓ)) {Y : Scheme.{u}} (i : Y ⟶ T) [IsClosedImmersion i] [Nonempty Y] {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] {Z : Scheme.{u}} (k : Z ⟶ Y) [IsClosedImmersion k] (hcover : Set.range j ∪ Set.range k = Set.univ) (hdisj : Disjoint (Set.range j) (Set.range k)) (EU : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (PU : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (padicSubfieldRingObj U ℓ EU)) (EZ : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (PZ : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (padicSubfieldRingObj Z ℓ EZ)) (hPU : IsConstructibleModuleObject (padicSubfieldRingObj U ℓ EU) PU) (hPZ : IsConstructibleModuleObject (padicSubfieldRingObj Z ℓ EZ) PZ) (eU : Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl U ℓ EU)).obj PU ≅ (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (j ≫ i)).obj M)) (eZ : Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Z ℓ EZ)).obj PZ ≅ (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (k ≫ i)).obj M)) : ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (padicSubfieldRingObj Y ℓ E)), IsConstructibleModuleObject (padicSubfieldRingObj Y ℓ E) P ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj P ≅ (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-facba",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T015248-L-721921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-facba",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T015248-L-721921",
+  "kind": "interface",
+  "note": "independent Codex review: All three Lean signatures match their nodes; existing signature unchanged. Delivery and sole direct importer Sheaf.Paper.CondensedStratumModelInductionStep compile. Axioms are permitted plus sorryAx from the two documented helpers; prior return repaired."
+ }
+}
