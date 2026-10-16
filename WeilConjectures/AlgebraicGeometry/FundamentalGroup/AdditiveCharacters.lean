@@ -48,7 +48,7 @@ noncomputable abbrev constantZModPowReduction (n : ℕ) :
 
 /-- The inverse limit `lim_n H¹(Y_ét, ℤ/ℓⁿ)` under the maps induced by the reductions
 `ℤ/ℓⁿ⁺¹ → ℤ/ℓⁿ`: the compatible families of classes. -/
-def sheafHOneLimit : Type (u + 1) :=
+abbrev sheafHOneLimit : Type (u + 1) :=
   {x : ∀ n : ℕ, Sheaf.H (constantZModPow Y l n) 1 //
     ∀ n, Sheaf.H.map (constantZModPowReduction Y l n) 1 (x (n + 1)) = x n}
 
