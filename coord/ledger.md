@@ -15481,3 +15481,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-16 16:18:03 launcher: retired Z2 delivery/claim of Sheaf.NumberTheory.Padics.CoefficientExtension (not in the queue: pruned or finished)
 - 08:23 L: returned deliver/A4/Sheaf.Paper.IntegralLfpLocalTorsionCharts (reviewer RETURN: (the landing tools, head e689186ba) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 08:23 L: returned deliver/H2/Sheaf.Paper.FiniteDiscreteCoefficientExchange (reviewer RETURN: (the landing tools, head a56e0b751) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
+- 08:23 L: merged deliver/F4/Sheaf.Algebra.Homology.RingedToposAdaptedFlatResolution (stage 3; reviewer PASS; after a return; landing 20261016T082348-L-1528841 (interface); batch 20261016T082346; modules 1; new nodes 0; change records: coord/changes/ringed-topos-adapted-flat-resolution-proof-support.md)

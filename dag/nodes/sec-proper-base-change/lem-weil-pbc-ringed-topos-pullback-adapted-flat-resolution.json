@@ -17,43 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Choose a strictly compatible tower of bounded-above flat resolutions E_n of the good truncations of P, using [lem-pc-flat-truncation-tower]. Their degreewise colimit L carries a map q to P. Exact filtered colimits commute with homology, and the good truncations are eventually P in each degree. Thus q is a quasi-isomorphism.",
+   "text": "Construct a functorial flat cover by sheafifying the free presheaf on the underlying presheaf of sets of a module sheaf. Its evaluation is sectionwise surjective, hence epi after sheafification. Sectionwise tensor with a free module preserves finite limits; the monoidal sheafification comparison transports this to the sheaf cover. Tensor colimit preservation from [lem-weil-pbc-independent-sheaf-tensor-colimits] supplies finite colimits. This proves HasFunctorialFlatResolution with an explicit free-presheaf cover and no unproved existence choice. Apply the proved source-library reduced Abelian.LeftResolution.resolutionFunctor directly to P, with its resolutionNatTrans augmentation q. Exact integer-indexed colimits of module sheaves give QuasiIso q. The proved colimitOfShapeFlatResolutionFunctorObj supplies the actual integer-indexed filtered colimit presentation by bounded-above categorically flat complexes. No separate public existence statement is introduced.",
    "uses": [
-    "lem-pc-flat-truncation-tower",
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the proved independent-universe bounded-above flat criterion [lem-weil-pbc-independent-bounded-flat-kflat] directly to every E_n. Filtered colimits of K-flat complexes and of flat module sheaves remain K-flat and flat, respectively, by the tensor-colimit and exact-colimit argument of [lem-pc-module-filtered-colimits-tensor]. Thus their colimit L is K-flat with flat terms.",
+   "text": "Install the sheaf tensor comparisons and coefficient-sized tensor colimit preservation of [lem-weil-pbc-independent-sheaf-tensor-colimits]. Exact integer-indexed colimits follow by HasExactColimitsOfShape.domain_of_functor from the underlying abelian-sheaf functor and AB5 for abelian groups. Use the proved source-library LeftResolution.kFlat_resolutionFunctor_obj to obtain categorical K-flatness of L directly. Apply this tensor quasi-isomorphism preservation to the map 0→Z for an arbitrary acyclic test complex Z: the source tensor is zero, so the target tensor is acyclic. This is precisely IsKFlatIndependentCoefficients. CochainComplex.closedUnderColimitsOfShape_flat applied to each evaluation cocone gives flat terms of L; siteSheafTensorRightIso converts the categorical condition to IsFlatOnSite.",
    "uses": [
-    "lem-weil-pbc-independent-bounded-flat-kflat",
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "The specified module pullback preserves the degreewise filtered colimit and its differentials by [lem-weil-pbc-ringed-topos-pullback-filtered-colimits]. Its terms on every E_n are flat by [lem-weil-pbc-ringed-topos-flat-module-pullback]; additivity preserves zero terms and therefore boundedness above. The bounded-above flat criterion and filtered-colimit closure prove that its image of L is K-flat.",
+   "text": "The specified module pullback preserves coefficient-sized filtered colimits by [lem-weil-pbc-ringed-topos-pullback-filtered-colimits]. Enlarge the integer order category with ULiftHomULiftCategory.equiv and transport preservation back to ℤ. Thus its complex functor preserves the displayed colimit presentation. Each image stage is bounded above, since additivity preserves its zero terms. Its terms are flat by [lem-weil-pbc-ringed-topos-flat-module-pullback]; the explicit ULift-triviality comparison turns the supplied AlgebraicInverseImage into the universe-explicit presentation required there. Apply the same source-library bounded-flat criterion, filtered-colimit closure, and acyclic-test conversion on the destination site. This proves independent-coefficient K-flatness of uStar(L). At the flat-pullback call, rewrite with hobj and use direct definitional conversion between changeOfRings and changeOfRingsOfUniverses in equal coefficient universes; no separate equality theorem or downstream import is needed.",
    "uses": [
     "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
     "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-weil-pbc-independent-bounded-flat-kflat",
-    "lem-pc-module-filtered-colimits-tensor"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-truncation-tower",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "lem-weil-pbc-ringed-topos-pullback-filtered-colimits"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "F4",
+  "date": "2026-10-16",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0G7E (sites-cohomology-lemma-pullback-K-flat), first paragraph: compatible flat resolutions and their pulled-back colimit; the argument is detailed in the proof steps"
+  "place": "Tag 0G7E, first paragraph; Tags 077J and 06YS implemented directly with the proved reduced LeftResolution and K-flat colimit APIs, using explicit free-presheaf covers"
  },
  "mathlib_searches": [
   {
@@ -138,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-fc1c2",
-  "group": "K3",
+  "reviewer": "X-875da",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261016T064223-L-582607",
+  "landing": "20261016T082348-L-1528841",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+  "note": "independent Codex review: Matched the unchanged Lean signature with its node and published interface, and the proof with its DAG metadata and Stacks route; delivery and direct importer Sheaf.Paper.KFlatRingedToposPullback compile cleanly; all 18 declarations use only permitted axioms."
  }
 }
