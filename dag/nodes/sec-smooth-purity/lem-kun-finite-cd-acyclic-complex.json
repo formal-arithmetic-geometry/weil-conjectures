@@ -25,107 +25,47 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sp-grothendieck-enough-injectives], $\\mathcal A$ has enough injectives. The vanishing theorem [lem-weil-pbc-derived-functor-injective-vanishing] makes every injective object $F$-acyclic. Fix the given bound $d$: no object has positive derived cohomology in degree greater than $d$. All applications of the long exact sequence below are therefore in an abelian category with enough injectives.",
-   "uses": [
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-derived-functor-injective-vanishing"
-   ],
+   "text": "Let RF be the existing unbounded right-derived functor of F. Define α on a complex K as the composite of the inverse quotient comparison for B, the image under Qh of the inverse homotopy-category factorization of F, the canonical right-derived unit at the homotopy quotient of K, and RF applied to the quotient comparison for A. Naturality follows from naturality of the unit and of the factorization isomorphism, together with functoriality of Qh and RF.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, assumptions and initial paragraph"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+    "place": "existing right-derived functor and unit API; target module definition of α"
    }
   },
   {
-   "text": "Apply [lem-pur-kinjective-degreewise-existence] to $\\mathcal A$. Every complex $K$ has a quasi-isomorphism $u_K:K\\to I(K)$ to a K-injective complex with injective terms. Termwise application of the additive $F$ induces a functor $F_h:K(\\mathcal A)\\to K(\\mathcal B)$: a homotopy equation $v-w=dh+hd$ remains that equation after applying $F$. This functor preserves shifts and cone triangles: for a chain map $v:X\\to Y$, the canonical biproduct isomorphisms $F(Y^r\\oplus X^{r+1})\\cong F(Y^r)\\oplus F(X^{r+1})$ send its differential to $\\begin{pmatrix}F(d_Y^r)&F(v^{r+1})\\\\0&-F(d_X^{r+1})\\end{pmatrix}$. Indeed the four entries are obtained by composing with the biproduct inclusions and projections; functoriality and additivity preserve these composites, zero and the minus sign. These isomorphisms also preserve the cone inclusion and projection, and $F(-d_X)=-F(d_X)$ identifies the shifted complexes. Thus the image of each cone triangle is its corresponding cone triangle. Thus $Q_{\\mathcal B}F_h$ is an exact functor to $D(\\mathcal B)$. Apply [lem-weil-pbc-kinjective-total-derived] to obtain $RF$ and a natural comparison $\\alpha$, invertible on every K-injective complex. Only the source category is required to be Grothendieck.",
-   "uses": [
-    "lem-pur-kinjective-degreewise-existence",
-    "def-sp-left-exact-additive",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
+   "text": "For any derived functor G and transformation β from termwise F followed by Q to Q followed by G, transport β across the quotient comparison isomorphisms and lift it through the homotopy quotient with Quotient.natTransLift. The right-derived universal property supplies a unique transformation RF ⟶ G. Uniqueness is checked after the right-derived unit using rightDerived_ext; existence is checked by rightDerived_fac and the lift equation, with cancellation of the quotient isomorphisms.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070K/070Y, lemma-enough-K-injectives-implies / lemma-K-injective-defined; alternative existence input to Tag 07K7"
+    "document": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+    "place": "rightDerived_ext, rightDerivedDesc and rightDerived_fac"
    }
   },
   {
-   "text": "Let $C$ be any acyclic complex all of whose terms are $F$-acyclic, and set $Z^r=\\ker(d_C^r)$. Exactness of $C$ gives short exact sequences $0\\to Z^r\\to C^r\\to Z^{r+1}\\to0$ for every integer $r$. For $q>0$ their long exact sequences [lem-weil-pbc-derived-functor-long-exact] have zero outer terms $R^qF(C^r)$ and $R^{q+1}F(C^r)$, giving $R^qF(Z^{r+1})\\cong R^{q+1}F(Z^r)$. For fixed $r,q>0$, iterating backwards $d$ times gives $R^qF(Z^r)\\cong R^{q+d}F(Z^{r-d})=0$. The iteration has base zero iterations (identity) and induction step the displayed isomorphism at index $r-j-1$ and degree $q+j$. When $d=0$ the asserted vanishing is directly the given global bound. This uses finitely many cycle sequences for each $r,q$, with no convergence claim about an infinite filtration.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
-    "def-weil-abstract-derived-category"
-   ],
+   "text": "For every complex L whose terms are F-right-acyclic, the component α.app L is invertible by the finite-cohomological-dimension comparison theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic, after unfolding the definition of α and inferring the surrounding isomorphism instances.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, preservation of quasi-isomorphisms; direct finite dimension-shifting argument in place of bounded truncations"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+    "place": "theorem isIso_rightDerivedFunctorUnit_app_of_rightAcyclic"
    }
   },
   {
-   "text": "In degree zero, the same long exact sequence, together with $R^1F(Z^r)=0$ from Step 3, yields $0\\to F(Z^r)\\to F(C^r)\\to F(Z^{r+1})\\to0$. Here $R^0F=F$, and left exactness identifies $F(Z^r)$ with the kernel of $F(d_C^r)$. The previous differential factors as the epimorphism $F(C^{r-1})\\to F(Z^r)$ followed by the monomorphism $F(Z^r)\\to F(C^r)$. Consequently its image is this kernel and $H^r(F(C))=0$ for every $r$. Thus applying $F$ to any such exact complex produces an exact complex.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
-    "def-sp-left-exact-additive",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, quasi-isomorphism claim; cycle sequence calculation"
-   }
-  },
-  {
-   "text": "Now take a quasi-isomorphism $v:L\\to M$ between complexes of $F$-acyclic objects. Its cone $C(v)$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Each cone term $M^r\\oplus L^{r+1}$ is $F$-acyclic: apply [lem-weil-pbc-derived-functor-long-exact] to the split short exact sequence $0\\to M^r\\to M^r\\oplus L^{r+1}\\to L^{r+1}\\to0$; for every $q>0$ its two outside $R^qF$ terms vanish, so the middle one vanishes. Steps 3-4 make $F(C(v))$ acyclic. The cone matrix computation in Step 2 identifies it with $C(F(v))$. The cone criterion again, now in $\\mathcal B$, proves that $F(v)$ is a quasi-isomorphism.",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, quasi-isomorphism claim; finite biproduct and cone argument"
-   }
-  },
-  {
-   "text": "For the stipulated complex $L$ use $u_L:L\\to I(L)$ from Step 2. Its target has injective and hence $F$-acyclic terms by Step 1, so Step 5 makes $F(u_L)$ a quasi-isomorphism. Naturality of the comparison gives $RF(Q_{\\mathcal A}u_L)\\circ\\alpha_L=\\alpha_{I(L)}\\circ Q_{\\mathcal B}(F(u_L))$. The right-hand side is invertible: its first factor is invertible on K-injectives by [lem-weil-pbc-kinjective-total-derived] and its second factor by the localization definition. The left factor $RF(Q_{\\mathcal A}u_L)$ is also invertible because $u_L$ is a quasi-isomorphism and functors preserve inverses. Hence $\\alpha_L$ is invertible. This proves computation for every unbounded complex of $F$-acyclic objects.",
-   "uses": [
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, assertions (1)-(2); comparison with K-injective replacement"
-   }
-  },
-  {
-   "text": "For any map $v:L\\to M$ of complexes with $F$-acyclic terms, comparison naturality reads $RF(Q_{\\mathcal A}v)\\circ\\alpha_L=\\alpha_M\\circ Q_{\\mathcal B}(F(v))$. Inverting the comparison components from Step 6 gives $RF(Q_{\\mathcal A}v)=\\alpha_M\\circ Q_{\\mathcal B}(F(v))\\circ\\alpha_L^{-1}$. This is exactly the claimed identification on maps, with no quasi-isomorphism assumption on $v$.",
+   "text": "For complexes L and M with right-acyclic terms and any chain map f, the required square is exactly the naturality equation α.naturality f, after the definitions of the composite functors are unfolded.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K7, lemma-unbounded-right-derived, assertion (2); naturality of the derived comparison"
+    "document": "Mathlib/CategoryTheory/NaturalTransformation.lean",
+    "place": "naturality of a natural transformation"
    }
   }
  ],
- "proof_deps": [
-  "def-sp-left-exact-additive",
-  "def-weil-abstract-derived-category",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-kinjective-total-derived"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 07K7, lemma-unbounded-right-derived, (1)-(2); finite dimension shift replaces the truncation spectral-sequence argument; existence uses existing Tags 070K/070Y nodes"
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+  "place": "Existing finite-cohomological-dimension right-derived unit theorem and Mathlib right-derived universal property; the target proof assembles their canonical quotient comparison maps."
  },
  "mathlib_searches": [
   {
@@ -323,5 +263,15 @@
   "by": "NE",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261016T133217-L-3234321",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

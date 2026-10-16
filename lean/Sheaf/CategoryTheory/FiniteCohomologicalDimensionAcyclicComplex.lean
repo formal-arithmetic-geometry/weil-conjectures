@@ -8,10 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 
 /-!
 # Unbounded acyclic-complex computation in finite cohomological dimension
@@ -81,6 +78,157 @@ theorem exists_rightDerived_computes_acyclic_of_finite_dimension
         (∀ r : ℤ, F.rightAcyclic (M.X r)) → ∀ f : L ⟶ M,
         DerivedCategory.Q.map ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f) ≫
           α.app M = α.app L ≫ RF.map (DerivedCategory.Q.map f)) := by
-  sorry
+  let RF := F.rightDerivedFunctor
+  let α : F.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ RF := {
+    app := fun K =>
+      (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app K) ≫
+        F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient A (.up ℤ)).obj K) ≫
+        RF.map ((DerivedCategory.quotientCompQhIso A).hom.app K)
+    naturality := by
+      intro K L f
+      have h := F.rightDerivedFunctorUnit.naturality
+        ((HomotopyCategory.quotient A (.up ℤ)).map f)
+      have hfac := (F.mapHomotopyCategoryFactors (.up ℤ)).inv.naturality
+        f
+      simp only [Functor.comp_map, Functor.mapHomotopyCategory_map] at h
+      simp only [Functor.comp_map,
+        DerivedCategory.quotientCompQhIso_inv_naturality_assoc, Category.assoc]
+      simp only [Functor.comp_map, Functor.mapHomotopyCategory_map] at hfac
+      have hfac' := congrArg DerivedCategory.Qh.map hfac
+      simp only [Functor.map_comp] at hfac'
+      rw [← DerivedCategory.Qh.map_comp_assoc, hfac,
+        DerivedCategory.Qh.map_comp_assoc]
+      rw [reassoc_of% h,
+        ← RF.map_comp, ← RF.map_comp,
+        DerivedCategory.quotientCompQhIso_hom_naturality] }
+  have hα (L : CochainComplex A ℤ)
+      (hL : ∀ r : ℤ, F.rightAcyclic (L.X r)) : IsIso (α.app L) := by
+    dsimp [α, RF]
+    have h := F.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic d hd L hL
+    infer_instance
+  let c := ComplexShape.up ℤ
+  let qA := HomotopyCategory.quotient A c
+  let qB := HomotopyCategory.quotient B c
+  let eA := DerivedCategory.quotientCompQhIso A
+  let eB := DerivedCategory.quotientCompQhIso B
+  let αh := F.rightDerivedFunctorUnit
+  have hαh : RF.IsRightDerivedFunctor αh (HomotopyCategory.quasiIso A c) := by
+    dsimp [RF, αh]
+    infer_instance
+  refine ⟨RF, α, ?_, ?_, ?_⟩
+  · intro G
+    let iL : qA ⋙ F.mapHomotopyCategory c ⋙ DerivedCategory.Qh ≅
+        F.mapHomologicalComplex c ⋙ DerivedCategory.Q :=
+      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors c) DerivedCategory.Qh ≪≫
+        Functor.isoWhiskerLeft (F.mapHomologicalComplex c) eB
+    let iR : DerivedCategory.Q ⋙ G ≅ qA ⋙ DerivedCategory.Qh ⋙ G :=
+      Functor.isoWhiskerRight eA.symm G
+    let lift (β : F.mapHomologicalComplex c ⋙ DerivedCategory.Q ⟶
+        DerivedCategory.Q ⋙ G) :
+        F.mapHomotopyCategory c ⋙ DerivedCategory.Qh ⟶
+          DerivedCategory.Qh ⋙ G := by
+      let τ : qA ⋙ (F.mapHomotopyCategory c ⋙ DerivedCategory.Qh) ⟶
+          qA ⋙ (DerivedCategory.Qh ⋙ G) :=
+        iL.hom ≫ β ≫ iR.hom
+      exact Quotient.natTransLift _ τ
+    constructor
+    · intro f g hfg
+      have hfg' : αh ≫ Functor.whiskerLeft DerivedCategory.Qh f =
+          αh ≫ Functor.whiskerLeft DerivedCategory.Qh g := by
+        apply NatTrans.ext
+        apply funext
+        intro X
+        obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+        have hk := congr_app hfg K
+        dsimp [αh, α, eA, eB, RF, c] at hk ⊢
+        apply (cancel_epi ((DerivedCategory.quotientCompQhIso B).inv.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app K))).mp
+        have hf := f.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K)
+        have hg := g.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K)
+        simp only [Category.assoc] at hk
+        rw [hf, hg] at hk
+        apply (cancel_mono (G.map ((DerivedCategory.quotientCompQhIso A).hom.app K))).mp
+        simpa only [Category.assoc, Functor.comp_obj, Functor.comp_map,
+          IsIso.hom_inv_id_assoc, IsIso.inv_hom_id_assoc] using hk
+      set_option linter.style.haveILetI false in
+        letI : RF.IsRightDerivedFunctor αh (HomotopyCategory.quasiIso A c) := hαh
+      exact Functor.rightDerived_ext RF αh (HomotopyCategory.quasiIso A c) G f g hfg'
+    · intro β
+      let β' := lift β
+      let f := RF.rightDerivedDesc αh (HomotopyCategory.quasiIso A c) G β'
+      refine ⟨f, ?_⟩
+      apply NatTrans.ext
+      apply funext
+      intro K
+      have hf := Functor.rightDerived_fac_app RF αh
+        (HomotopyCategory.quasiIso A c) G β' (qA.obj K)
+      have hβ : β'.app (qA.obj K) = (iL.hom ≫ β ≫ iR.hom).app K := by
+        dsimp [β', lift]
+        exact Quotient.natTransLift_app _ _ _ _ _
+      dsimp [lift, β', f, iL, iR] at hf hβ
+      dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+      dsimp [α]
+      have hrest :
+          (αh.app (qA.obj K) ≫ RF.map ((DerivedCategory.quotientCompQhIso A).hom.app K)) ≫
+            f.app (DerivedCategory.Q.obj K) =
+          (DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors c).hom.app K) ≫
+            (DerivedCategory.quotientCompQhIso B).hom.app
+              ((F.mapHomologicalComplex c).obj K)) ≫ β.app K := by
+        have hf' : αh.app (qA.obj K) ≫ f.app (DerivedCategory.Qh.obj (qA.obj K)) =
+            β'.app (qA.obj K) := by simpa [f, β', lift, iL, iR] using hf
+        have hβ' : β'.app (qA.obj K) =
+            (DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors c).hom.app K) ≫
+              eB.hom.app ((F.mapHomologicalComplex c).obj K)) ≫ β.app K ≫
+              G.map (eA.inv.app K) := by
+          simpa [β', lift, iL, iR] using hβ
+        calc
+          _ = αh.app (qA.obj K) ≫ f.app (DerivedCategory.Qh.obj (qA.obj K)) ≫
+              G.map ((DerivedCategory.quotientCompQhIso A).hom.app K) := by
+            set_option linter.unnecessarySimpa false in
+              simpa [Functor.mapHomotopyCategoryFactors, Category.assoc] using congrArg
+                (fun t ↦ αh.app (qA.obj K) ≫ t)
+                (f.naturality ((DerivedCategory.quotientCompQhIso A).hom.app K))
+          _ = β'.app (qA.obj K) ≫
+              G.map ((DerivedCategory.quotientCompQhIso A).hom.app K) := by
+            rw [reassoc_of% hf']
+          _ = (DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors c).hom.app K) ≫
+              eB.hom.app ((F.mapHomologicalComplex c).obj K)) ≫ β.app K := by
+            rw [hβ']
+            simp only [Category.assoc, Functor.comp_obj]
+            rw [← G.map_comp, (DerivedCategory.quotientCompQhIso A).inv_hom_id_app,
+              G.map_id, Category.comp_id]
+      have hclean : αh.app (qA.obj K) ≫ f.app (DerivedCategory.Qh.obj (qA.obj K)) ≫
+          G.map ((DerivedCategory.quotientCompQhIso A).hom.app K) =
+          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors c).hom.app K) ≫
+            eB.hom.app ((F.mapHomologicalComplex c).obj K) ≫ β.app K := by
+        simpa [Category.assoc] using hrest
+      simp only [Category.assoc]
+      rw [f.naturality (eA.hom.app K)]
+      have hclean' : αh.app (qA.obj K) ≫
+          f.app ((qA ⋙ DerivedCategory.Qh).obj K) ≫ G.map (eA.hom.app K) =
+          DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors c).hom.app K) ≫
+            eB.hom.app ((F.mapHomologicalComplex c).obj K) ≫ β.app K := by
+        simpa only [Functor.comp_obj] using hclean
+      rw [hclean']
+      dsimp [c]
+      rw [← DerivedCategory.Qh.map_comp_assoc]
+      have hq := (DerivedCategory.Qh :
+        HomotopyCategory B (ComplexShape.up ℤ) ⥤ DerivedCategory B).map_id
+      rw [(F.mapHomotopyCategoryFactors (.up ℤ)).inv_hom_id_app]
+      have hqK := hq ((HomotopyCategory.quotient B (.up ℤ)).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj K))
+      simp only [Functor.comp_obj]
+      rw [hqK]
+      simp only [Category.id_comp]
+      dsimp [eB]
+      rw [← Category.assoc, (DerivedCategory.quotientCompQhIso B).inv_hom_id_app,
+        Category.id_comp]
+  · intro L hL
+    exact hα L hL
+  · intro L M hL hM f
+    exact α.naturality f
 
 end CategoryTheory.Functor
