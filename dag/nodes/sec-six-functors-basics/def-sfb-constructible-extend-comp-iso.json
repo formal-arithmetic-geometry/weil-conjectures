@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-constructible-extend-comp-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Transitivity on bounded constructible complexes",
@@ -15,28 +15,141 @@
  "stmt_deps": [
   "def-sfb-constructible-extend-subfield",
   "def-sfb-constructible-extend-to-qlbar",
-  "def-sfb-derived-extend-comp-iso"
+  "def-sfb-derived-extend-comp-iso",
+  "def-sfb-dcons-subfield",
+  "def-sfb-dcons-qlbar"
  ],
  "proof": [
   {
-   "text": "Both functors, followed by the inclusion of $D_{\\mathrm{cons}}(X,\\Qlb)$ into\n$D(\\Mod_{\\overline{\\mathbf Q}_{\\ell,X}})$, are the restrictions to $D_{\\mathrm{cons}}(X,E)$ of\n$T_{F,\\Qlb}\\circ T_{E,F}$ resp. $T_{E,\\Qlb}$, which are isomorphic by\n[def-sfb-derived-extend-comp-iso]. The inclusion of a full subcategory is fully faithful, so the\nisomorphism lifts uniquely to $D_{\\mathrm{cons}}(X,\\Qlb)$.",
+   "text": "Write $C_E=D_{\\mathrm{cons}}(X,E)$ and $C_\\Omega=D_{\\mathrm{cons}}(X,\\Qlb)$, with inclusions $i_E$ and $i_\\Omega$ into their ambient derived categories. These are full subcategories by [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar]: the arrows between two of their objects are precisely the ambient arrows, with the same identities and composition. Let $A=T_{F,\\Qlb}\\circ T_{E,F}$ and $B=T_{E,\\Qlb}$ denote the restricted functors $C_E\\to C_\\Omega$. By [def-sfb-constructible-extend-subfield] and [def-sfb-constructible-extend-to-qlbar], their underlying objects and maps are those of the corresponding ambient composite and direct extension, restricted along $i_E$. In particular both endpoints of every component of the ambient comparison belong to $C_\\Omega$.",
+   "uses": [
+    "def-sfb-dcons-subfield",
+    "def-sfb-dcons-qlbar",
+    "def-sfb-constructible-extend-subfield",
+    "def-sfb-constructible-extend-to-qlbar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
+    "place": "First sentence: identify the two restricted functors after inclusion in the ambient derived category."
+   }
+  },
+  {
+   "text": "Let $\\theta$ be the ambient natural isomorphism of [def-sfb-derived-extend-comp-iso]. For $K\\in C_E$, define $\\alpha_K:A(K)\\to B(K)$ to be the arrow of the full subcategory whose underlying arrow is $\\theta_{i_EK}$. Define $\\beta_K:B(K)\\to A(K)$ in the same way from $\\theta_{i_EK}^{-1}$. The endpoints are those checked in step 1, so these are actual arrows of $C_\\Omega$; no choice of an object or of a new isomorphism is involved. The equalities $\\theta_{i_EK}^{-1}\\circ\\theta_{i_EK}=\\mathrm{id}_{A(K)}$ and $\\theta_{i_EK}\\circ\\theta_{i_EK}^{-1}=\\mathrm{id}_{B(K)}$ hold in the full subcategory because its composition and identity are the ambient ones. Thus $\\alpha_K$ is an isomorphism with inverse $\\beta_K$.",
    "uses": [
     "def-sfb-derived-extend-comp-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
+    "place": "First sentence and second sentence: use the ambient isomorphism and lift its components through the full inclusion."
+   }
+  },
+  {
+   "text": "For an arrow $u:K\\to L$ in $C_E$, naturality of the comparison $\\theta$ of [def-sfb-derived-extend-comp-iso] gives $B(u)\\circ\\alpha_K=\\alpha_L\\circ A(u)$ on underlying ambient arrows. Since the Hom sets of $C_\\Omega$ are those ambient Hom sets, this is the naturality equation in $C_\\Omega$. Naturality of $\\theta^{-1}$ gives $A(u)\\circ\\beta_K=\\beta_L\\circ B(u)$ on underlying ambient arrows; the equality of Hom sets makes this the naturality equation for $\\beta$ in $C_\\Omega$. The componentwise inverse identities of step 2 therefore make $\\alpha:A\\xrightarrow{\\sim}B$ a natural isomorphism. After $i_\\Omega$ its components are exactly those of $\\theta$ restricted along $i_E$, so it is the restriction specified in the statement. Any other lift with that image has the same underlying component at every $K$, hence the same component in the full subcategory; it equals $\\alpha$.",
+   "uses": [
+    "def-sfb-derived-extend-comp-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
+    "place": "Second sentence: write out naturality, the inverse identities and uniqueness of the lifted natural isomorphism."
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-dcons-subfield",
+  "def-sfb-dcons-qlbar",
+  "def-sfb-constructible-extend-subfield",
+  "def-sfb-constructible-extend-to-qlbar",
   "def-sfb-derived-extend-comp-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-constructible-extend-comp-iso.proof.md",
+  "place": "The complete proof paragraph, expanded on full-subcategory Hom sets, component inverses, naturality and uniqueness."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a natural isomorphism of derived extension of scalars functors to bounded constructible full subcategories",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors. These concern exact functors on derived categories and Ext.",
+   "date": "2026-10-17",
+   "verdict": "no match for the coefficient-specific restricted comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "7 hits: CategoryTheory.Functor.FullyFaithful.preimageIso and its hom/inv/isoEquiv lemmas; CategoryTheory.Equivalence.congrFullSubcategory_counitIso and unitIso; CategoryTheory.Limits.CategoricalPullback.mkNatIso_eq. Read preimageIso in Mathlib/CategoryTheory/Functor/FullyFaithful.lean:205.",
+   "date": "2026-10-17",
+   "verdict": "generic component-lifting tool only; no direct match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleToPadicAlgClCompIso|liftNatIso|preimageIso|fullyFaithfulι",
+   "results": "25 hits in CategoryTheory: path-category and localization liftNatIso results, ObjectProperty.fullyFaithfulι in Mathlib/CategoryTheory/ObjectProperty/FullSubcategory.lean:92 and uses of preimageIso. Read FullSubcategory.lean:40-105 and 150-172. No constructibleToPadicAlgClCompIso hit.",
+   "date": "2026-10-17",
+   "verdict": "generic full-subcategory constructions only; no direct match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between functors restricts to full subcategories when both functors take values in the subcategories",
+   "results": "8 hits: CategoryTheory.NatIso.isIso_map_iff, CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Iso.core, CategoryTheory.Functor.FullyFaithful.ofIso.",
+   "date": "2026-10-17",
+   "verdict": "generic categorical tools only; no coefficient-specific comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a natural isomorphism between two functors through the inclusion of a full subcategory by keeping the same components",
+   "results": "8 hits: CategoryTheory.Functor.essImage.liftFunctorCompIso and its hom/inv component lemmas; CategoryTheory.ObjectProperty.liftCompιIso and liftCompιOfLEIso; CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app; CategoryTheory.Functor.preimageIso_mapIso; CategoryTheory.Equivalence.congrFullSubcategory_functor. Read the cancellation construction in Mathlib/CategoryTheory/Functor/FullyFaithful.lean:372-385.",
+   "date": "2026-10-17",
+   "verdict": "generic tool match: cancellation constructs a lift once the project-specific functors and ambient comparison have been supplied; the item is retained as the specified restriction of those data"
+  },
+  {
+   "tool": "grep",
+   "query": "def preimageIso|def preimage.*[Nn]at|def.*[Nn]atIso|def.*iso",
+   "results": "4 hits in CategoryTheory/Functor/FullyFaithful.lean:113, 205, 217, 229: preimageIso (two versions), isoEquiv, ofIso. The command output for a single-file search splits line text as file/line fields; read the actual file at 190-225.",
+   "date": "2026-10-17",
+   "verdict": "generic component-lifting tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.fullyFaithfulι",
+   "results": "3 hits: CategoryTheory.ObjectProperty.fullyFaithfulι, CategoryTheory.Equivalence.congrFullSubcategory_counitIso, CategoryTheory.Equivalence.congrFullSubcategory_unitIso. fullyFaithfulι states that the full-subcategory inclusion is fully faithful.",
+   "date": "2026-10-17",
+   "verdict": "generic tool match only, not the project-specific comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def.*[Ii]so|def lift|abbrev fullyFaithful",
+   "results": "5 hits in CategoryTheory/ObjectProperty/FullSubcategory.lean:92 fullyFaithfulι, 102 isoMk, 147 ιOfLECompιIso, 159 lift, 165 liftCompιIso. Single-file output parsing was checked against the actual source, especially 92-105 and 159-165.",
+   "date": "2026-10-17",
+   "verdict": "generic full-subcategory constructors only"
+  },
+  {
+   "tool": "grep",
+   "query": "def fullyFaithfulCancelRight|fullyFaithfulCancelRight|def preimageIso",
+   "results": "5 hits in CategoryTheory/Functor: Mathlib/CategoryTheory/Functor/FullyFaithful.lean:113, 205 preimageIso; :372 fullyFaithfulCancelRight; :378, :380 component lemma and its formula. Read 350-385: cancellation uses component preimages and faithful naturality.",
+   "date": "2026-10-17",
+   "verdict": "generic tool match only: it needs the ambient comparison and restricted-functor identifications from existing project nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations and natural isomorphisms can be recovered after postcomposition with a fully faithful functor",
+   "results": "8 hits: CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app, CategoryTheory.Functor.FullyFaithful.whiskeringRight_preimage_app, CategoryTheory.Functor.fullyFaithfulCancelRight, CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app, CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down, CategoryTheory.Functor.FullyFaithful.homNatIso_hom_app_down, CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight_hom_app_down, CategoryTheory.Functor.FullyFaithful.homNatIso'. Read FullyFaithful.lean:368-387; this recovers components from the given ambient comparison.",
+   "date": "2026-10-17",
+   "verdict": "generic lifting tool; no coefficient-specific restricted functors or ambient comparison supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulCancelRight|fullyFaithful.*NatTrans|fullyFaithful.*whisker",
+   "results": "25 hits, including Mathlib/CategoryTheory/Functor/FullyFaithful.lean:372,378,380,384,386 and Mathlib/CategoryTheory/Whiskering.lean:116,172. Read FullyFaithful.lean:368-387 and FullSubcategory.lean:40-105: components, inverse and naturality are the full-subcategory construction written in the proof.",
+   "date": "2026-10-17",
+   "verdict": "generic constructions only; no new node needed"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +171,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-constructible-extend-comp-iso",
+  "worker": "stage1",
+  "summary": "Kept the source statement unchanged. Expanded the imported full-faithfulness paragraph into three sourced steps identifying the restricted functors, constructing the components and their inverses, and checking naturality and uniqueness on the unchanged ambient Hom sets. All five dependencies already exist in the same unit; no new node or Mathlib leaf is needed. No matching declaration exists in the read-only slopmaster2 project. The master construction is reference material only and depends on sorried preservation results.",
+  "blueprint": "Realizes the complete proof paragraph of def-sfb-constructible-extend-comp-iso.proof.md: step 1 expands its first sentence, step 2 constructs the lift asserted in its second sentence, and step 3 verifies naturality and uniqueness. This is the constructible-transitivity clause in the cocone paragraph (unit step 9) of sk-thm-sfb-qlbar-two-colimit. Whole-DAG and whole-blueprint searches found no second blueprint statement of this same restricted comparison; the ambient comparison has a different domain and codomain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-27df013d9",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-27df013d9 (reviewer sub-agent of L); spot-checked: I read the whole item and the main-20261015 source with its proof. I also read the statements of all five cited nodes and the proof steps of def-sfb-derived-extend-comp-iso, plus unit sk-thm-sfb-qlbar-two-colimit (the cocone paragraph, step index 8). The statement matches the source word for word: prime l, any scheme X, finite E<=F inside Qlb, bounded constructible source and target, and the map runs from the composite to the direct extension. The coefficient categories are the module categories over E_X and Qlb_X, as in def-sfb-dcons-subfield and def-sfb-dcons-qlbar; no discrete coefficients are swapped in. Adding the two dcons nodes to stmt_deps is right, since the statement names those categories. Step 1 holds: the dcons statements say these are full subcategories, and the two restricted-extension statements give the restricted functors as restrictions of the ambient ones. Constructibility is preserved by the lem-sfb-extend-*-constructible nodes, which those definitions cite, so it is not assumed silently. Step 2 lifts the ambient isomorphism and its inverse componentwise, in the same direction, using only the cited statement. Step 3 writes out naturality of the lift and its inverse, the inverse identities and uniqueness, which the source compresses into 'lifts uniquely' (E5). proof_deps equals the union of the uses lists. Edge cases checked: E=F (no identity is claimed), the zero object, empty X and Spec k; no finite-type, Noetherian or finite-Tor hypothesis is used. The delivery adds no new nodes. The candidate duplicates (the ambient comparison, def-sfb-constructible-cocone and the other users of the ambient isomorphism) are different statements. A transitive closure over stmt_deps and proof_deps reaches 465 nodes and not the item itself, so there is no cycle. Every citation is inside the unit, tool_uses is empty, no SGA is used and no unit fields were touched. No fixes."
+ }
 }

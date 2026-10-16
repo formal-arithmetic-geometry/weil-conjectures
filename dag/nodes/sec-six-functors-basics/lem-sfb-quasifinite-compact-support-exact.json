@@ -32,9 +32,197 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-etale-sum-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A Noetherian scheme in the stated convention is quasi-compact (use its finite affine cover) and locally Noetherian, hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [thm-pqf-zmt-factorization] to $h$ to obtain $h=pj_0$ with $j_0:V\\hookrightarrow V_0$ a quasi-compact open immersion and $p:V_0\\to T$ finite. A finite algebra is generated as an algebra by any finite set of module generators, so $p$ is of finite type. By [lem-weil-pbc-finite-type-over-noetherian] $V_0$ is Noetherian, and by [lem-weil-pbc-finite-proper] $p$ is proper. Thus $(j_0,p)$ is an admissible compactification. No excellence, finite dimension, or invertibility of the order of $A$ has been used.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-pqf-zmt-factorization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM, lemma-Rf-shriek-for-quasi-finite, first sentence of proof; More on Morphisms Tag 05K0"
+   }
+  },
+  {
+   "text": "The support-composition theorem [lem-cbc-proper-support-sheaf-composition], applied to $j_0,p$, gives the natural $A$-linear identification $h^{\\mathrm{supp}}_!=p_*j_{0!}$: the proper-support functor is ordinary direct image for $p$, and extension by zero for $j_0$. The functor $j_{0!}$ is exact by [lem-weil-pbc-extension-by-zero-exact]. The finite direct-image theorem [lemma-weil-pbc-finite-direct-image-exact] gives exactness of $p_*$ on underlying abelian sheaves. It also gives exactness for constant-$A$ module sheaves: direct image commutes with forgetting the action by its sectionwise definition [def-weil-pbc-direct-image], and [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies the underlying kernels and cokernels. Vanishing of an underlying kernel/cokernel is vanishing of that module sheaf, so the faithful forgetful functor reflects exactness. Hence $h^{\\mathrm{supp}}_!$ is exact.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM, lemma-Rf-shriek-for-quasi-finite, last two sentences of proof; Tag 0F50, lemma-f-shriek-composition; Tag 0F51, lemma-proper-f-shriek"
+   }
+  },
+  {
+   "text": "For an arbitrary compactification $c=(j,r)$, its ambient scheme $\\overline V$ is Noetherian: $r$ is proper, hence of finite type by definition, and its target $T$ is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] applies. The locally Noetherian ambient scheme is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Since $V$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence] (1) makes $j$ quasi-compact, as required by the compactification category in step 5. For every compactification $c=(j,r)$, the same support-composition theorem identifies $r_*j_!$ with the exact functor $h^{\\mathrm{supp}}_!$. Define a comparison in the reverse direction, $\\delta_c:D(h^{\\mathrm{supp}}_!)\\to Rr_*Dj_!$, by the derived-functor unit for $r_*$. Explicitly, on a complex $K$ choose a K-injective resolution $j_!K\\to I$; its component is $Q_T(r_*j_!K)\\to Q_T(r_*I)$. Resolutions exist by [prop-weil-pbc-kinjective-resolutions-exist], and [def-amb-etale-compact-support, lem-weil-pbc-kinjective-total-derived] specify this unit and its naturality. Since the source functor is exact, [lem-weil-pbc-exact-functor-derived-factorization] makes its termwise functor invert quasi-isomorphisms; [lem-weil-pbc-localization-universal-property] therefore descends the natural comparison to the derived category. This construction uses all complexes, without truncations. For the finite compactification $c_0=(j_0,p)$, [lem-weil-pbc-exact-functor-derived-functor] applied to the exact module functor $p_*$ says that its derived unit is an isomorphism on every complex. Consequently $\\delta_{c_0}$ is an isomorphism on the entire unbounded category.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM, lemma-Rf-shriek-for-quasi-finite; Derived Categories Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "Check the normalization under a proper refinement $u:V_1\\to V_2$, with $uj_1=j_2$ and $r_2u=r_1$. Write $\\beta_u:Rr_{2*}Dj_{2!}\\to Rr_{1*}Dj_{1!}$ for its refinement comparison. We claim $\\beta_u\\delta_{c_2}=\\delta_{c_1}$. Represent the input by a K-injective $J$ and resolve $j_{1!}J\\to I$. By [lem-amb-unbounded-proper-open-interchange], for the square with left proper edge $\\mathrm{id}_V$, right proper edge $u$, top open $j_1$ and bottom open $j_2$, the proper/open map is represented by $j_{2!}J=u_*j_{1!}J\\to u_*I$; the equality is the support identification of [lem-cbc-proper-support-sheaf-composition]. Direct image preserves K-injectives by [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-right-adjoint-preserves-kinjective]. Thus for a resolution $j_{2!}J\\to I_2$, the comparison to $u_*I$ lifts to $I_2\\to u_*I$, with the triangle commuting up to homotopy by [lem-weil-pbc-kinjective-hom-derived]. Apply $r_{2*}$ to this triangle. Its top map is $r_{2*}j_{2!}J=r_{1*}j_{1!}J\\to r_{1*}I$. The resolution normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies the other path with $\\beta_u\\delta_{c_2}$. This proves the claim, first on representatives and then on the derived category by [lem-weil-pbc-localization-universal-property]. The comparisons here are precisely the proper/open refinement comparisons in [lem-amb-unbounded-compact-support-comparisons].",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B and 0F7I, lemma-shriek-proper-and-open and lemma-shriek-well-defined, refinement case; Tag 0D6E, lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Any compactification $c$ and the finite compactification $c_0$ have a common proper refinement $d\\xrightarrow{u}c$, $d\\xrightarrow{v}c_0$ by [lem-cbc-compactifiable-cofiltered]. Its ambient scheme is Noetherian by the properness argument of step 3. Put $F_c=Rr_*Dj_!$ for each compactification. The comparisons $\\beta_u:F_c\\to F_d$ and $\\beta_v:F_{c_0}\\to F_d$ are isomorphisms with coherent composition by [lem-amb-unbounded-compact-support-comparisons]. Step 4 gives\n$$\\beta_u\\delta_c=\\delta_d=\\beta_v\\delta_{c_0},\\qquad\n\\delta_c=\\beta_u^{-1}\\beta_v\\delta_{c_0}.$$\nThus $\\delta_c$ is invertible. Set $c_h^c=\\delta_c^{-1}$. For every refinement $w:c_1\\to c_2$, inverting $\\beta_w\\delta_{c_2}=\\delta_{c_1}$ gives $c_h^{c_1}\\beta_w=c_h^{c_2}$. In the common-refinement diagram this says\n$$c_h^c=c_h^{c_0}\\beta_v^{-1}\\beta_u.$$\nThe right side equals the fixed map $\\delta_c^{-1}$ for every $d,u,v$; the coherent comparison cocycle identifies these expressions with the canonical compactification comparisons. This proves the required independence without any choice of an unspecified isomorphism.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined; Tag 0GKM, lemma-Rf-shriek-for-quasi-finite"
+   }
+  },
+  {
+   "text": "It remains to compare composition maps. Choose the finite compactification of $e$ from step 1. Apply [lem-weil-pbc-compatible-compactification-triangle] to $V\\xrightarrow{h}T\\xrightarrow{e}B$ and this compactification of $e$; the three schemes are qcqs by step 1. It supplies the tower used in [lem-amb-unbounded-compact-support-comparisons]. Write $T\\xrightarrow{i}\\overline T\\xrightarrow{s}B$, $V\\xrightarrow{a}\\overline V\\xrightarrow{p}\\overline T$, and $U=\\overline V\\times_{\\overline T}T$, with $b:U\\hookrightarrow\\overline V$, $q:U\\to T$, $j:V\\hookrightarrow U$, $bj=a$ and $pb=iq$. The geometric triangle node states that these are compactifications of $e,h,eh$, with $s,p,q$ proper and $i,a,b,j$ open immersions. Their ambient schemes are Noetherian: $s,p,q$ are of finite type and [lem-weil-pbc-finite-type-over-noetherian] applies successively over $B$, $\\overline T$, and $T$. On sheaves both $e^{\\mathrm{supp}}_!h^{\\mathrm{supp}}_!$ and $(eh)^{\\mathrm{supp}}_!$ identify with $s_*p_*a_!$ through $i_!q_*=p_*b_!$; each identification keeps the section itself, by [lem-cbc-proper-support-sheaf-composition]. In particular $(eh)^{\\mathrm{supp}}_!$ is exact, since $e^{\\mathrm{supp}}_!$ and $h^{\\mathrm{supp}}_!$ are exact, so its $D$ is defined even before making any separate geometric argument about $eh$.\n\nHere is the chain-level check of the comparison. Represent the input by a K-injective $J$ on $V$. Choose resolutions $j_!J\\to I$ on $U$ and $b_!I\\to M$ on $\\overline V$. The complex $q_*I$ is K-injective by [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-right-adjoint-preserves-kinjective]. Choose a resolution $i_!q_*I\\to L$ on $\\overline T$. The proper/open comparison of [lem-amb-unbounded-proper-open-interchange] is the class of $i_!q_*I=p_*b_!I\\to p_*M$. Since $p_*M$ is K-injective, this map lifts to $L\\to p_*M$, commuting with the resolution map up to homotopy by [lem-weil-pbc-kinjective-hom-derived]. Naturality of $\\delta_e$ rewrites $(Re_!\\delta_h)\\circ(\\delta_eD(h^{\\mathrm{supp}}_!))$ as $(\\delta_eRh_!)\\circ D(e^{\\mathrm{supp}}_!)(\\delta_h)$. Hence the successive units, followed by $\\alpha_{e,h}$, are represented by the composite\n$$s_*i_!q_*j_!J\\longrightarrow s_*i_!q_*I\\longrightarrow s_*L\\longrightarrow s_*p_*M.$$\nUsing the lifting triangle and the sheaf equality $i_!q_*=p_*b_!$, this is exactly $s_*p_*b_!j_!J\\to s_*p_*M$, induced by $a_!J=b_!j_!J\\to b_!I\\to M$. By [lem-weil-pbc-extension-by-zero-exact], $b_!$ preserves the quasi-isomorphism $j_!J\\to I$, so $a_!J=b_!j_!J\\to b_!I\\to M$ is a K-injective resolution of $a_!J$. The open-extension composition of [lem-cbc-extension-zero-composition] and the resolution normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identify the last map with $\\delta_{eh}$, after the section-preserving map $D(\\sigma_{e,h})$. Thus\n$$\\alpha_{e,h}\\circ(Re_!\\delta_h)\\circ(\\delta_eD(h^{\\mathrm{supp}}_!))=\\delta_{eh}\\circ D(\\sigma_{e,h}).$$\nInvert the $\\delta$ maps to obtain the displayed equation of the statement. Equality descends by [lem-weil-pbc-localization-universal-property]. For any other choices let $\\eta_h,\\eta_e,\\eta_{eh}$ be their canonical compactification comparisons, and write $\\star$ for horizontal composition of natural transformations. The cited refinement compatibility of composition is $\\alpha^{\\prime}(\\eta_e\\star\\eta_h)=\\eta_{eh}\\alpha$. Step 4 gives $\\delta_h^{\\prime}=\\eta_h\\delta_h$ and the corresponding equalities for $e,eh$. Substitute these equalities, using naturality to move $\\eta$ past the whiskered $\\delta$ maps, and both sides of the displayed equation are postcomposed with the same $\\eta_{eh}$. Hence the equation holds for those choices too; step 5 identifies the comparisons through any common refinement.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, four displayed equalities; Tag 0F7B, lemma-shriek-proper-and-open, explicit K-injective construction"
+   }
+  },
+  {
+   "text": "Now let $h$ be separated etale of finite type. By [def-weil-etale-morphism] it is unramified, and [lem-weil-pbc-unramified-quasi-finite-at-points] makes it locally quasi-finite. It is quasi-compact because it is of finite type, so [pqf-lem-qf-locqf-qc] makes it quasi-finite. Construct a morphism $h_{\\Sigma!}F\\to h^{\\mathrm{supp}}_!F$ directly from the sum presheaf [def-weil-pbc-etale-sum-extension]. For a lift $t:W\\to V$ over $T$, its graph is a section of the separated etale map $V_W\\to W$. By [lem-weil-pbc-etale-base-change-finite-limits, lem-weil-pbc-separated-base-change, lem-weil-pbc-etale-section-clopen-immersion] that graph is open and closed. Extend a section in the summand indexed by $t$ by zero on the complementary open. Its support is a closed subset of the graph, and hence proper over $W$ by [lem-weil-pbc-closed-subset-proper-over-base-properties], since the graph is isomorphic over $W$ to $W$. Addition and restriction give a map of presheaves into the proper-support sheaf; sheafification gives the claimed natural $A$-linear map.\n\nIt is an isomorphism on stalks. Indeed [lem-cbc-proper-support-geometric-stalk] identifies the target stalk at $\\bar t:\\operatorname{Spec}\\Omega\\to T$ with $H^0_c(V_{\\bar t},F|_{V_{\\bar t}})$. The geometric fibre is separated etale over $\\Omega$; by [sbc-lem-etale-over-normal] applied to the integral normal scheme $\\operatorname{Spec}\\Omega$ it is a disjoint union of copies of $\\operatorname{Spec}\\Omega$. This union is finite: $h$ is quasi-compact and quasi-compactness is preserved under base change by [lem-weil-pbc-qcqs-morphism-permanence], so its cover by these disjoint open points has a finite subcover. A finite union of such points is finite over $\\Omega$ (on rings it is the finite free algebra $\\Omega^n$), hence proper by [lem-weil-pbc-finite-proper]; every closed support is proper by [lem-weil-pbc-closed-subset-proper-over-base-properties]. Sections are the finite product of the sections on the points by the sheaf axiom, and [lem-weil-pbc-geometric-point-pullback-stalk, lem-weil-pbc-inverse-image-stalk-germ] identify each with $F_{\\bar v}$. Thus the target stalk is $\\bigoplus_{h\\bar v=\\bar t}F_{\\bar v}$. Under the generator formula in [lem-amb-etale-sum-stalks], the source-to-target map sends a germ in the summand of $t$ to the same germ in the summand of $t\\bar w$. It is the identity on these finite sums. Therefore it is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]; forgetting scalars detects isomorphisms by [lem-weil-pbc-module-sheaves-colimits-forgetful].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-qf-locqf-qc",
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-cbc-proper-support-geometric-stalk",
+    "sbc-lem-etale-over-normal",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-amb-etale-sum-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F4Y, lemma-separated-etale-shriek; Etale Cohomology Tags 0F4L and 03S5, lemma-shriek-into-star-separated-etale and proposition-describe-jshriek; Tag 09Z9, lemma-normal-scheme-with-alg-closed-function-field"
+   }
+  },
+  {
+   "text": "For composable separated etale $V\\xrightarrow{h}T\\xrightarrow{e}B$, the sheaf map $\\sigma_{e,h}$ keeps the section on $V\\times_BW$ unchanged by [lem-cbc-proper-support-sheaf-composition]. A generator with a lift $v:W\\to T$ and a lift $w:W\\to V$ satisfying $hw=v$ first extends its section along the graph of $w$ over $T$, then along the graph of $v$ over $B$. This is its extension by zero along the graph of $w$ over $B$: its restriction there is the original section and its restriction to the complementary open is zero in both constructions. The sheaf axiom on that clopen decomposition proves equality of the two sections. Finite sums and sheafification prove that $\\sigma_{e,h}$ is exactly the stated nested-summand comparison. For the identity morphism, the only lift over each test object is its structural map, so the same construction is the identity. For its identity compactification, the derived unit $\\delta$ is also the identity, choosing the exact identity functor as its own derived functor with identity unit, as permitted by [lem-weil-pbc-exact-functor-derived-functor]. Step 4 gives the identical normalization after comparison with any other compactification.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F50, lemma-f-shriek-composition; Tag 0F4Y, lemma-separated-etale-shriek; Tag 0F7I, identity normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-sum-stalks",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-support-geometric-stalk",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-qf-locqf-qc",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "sbc-lem-etale-over-normal",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKM, lemma-Rf-shriek-for-quasi-finite; Tag 0F7B, lemma-shriek-proper-and-open; Tag 0F7J, lemma-shriek-composition; Tag 0F4Y, lemma-separated-etale-shriek. The refinement/composition checks spell out the canonical resolution maps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -112,10 +300,59 @@
    "results": "{\"t\": \"2026-10-16T16:35:33Z\", \"tool\": \"grep\", \"query\": \"shriek|extensionByZero|classical.*[Cc]ohomology|[Cc]ohomology.*classical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"a09c846f47a02974\"}",
    "date": "2026-10-16",
    "verdict": "no match: inspected the returned declaration types; site definitions, dense-subsite sheaf equivalences, and structure-module pushforward composition do not state this derived etale/pro-etale or proper-support comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite separated scheme morphisms have exact etale direct image with proper supports agreeing with unbounded derived compact support",
+   "results": "8 hits: IsEtale.of_comp and related instances; exists_app_map_eq_zero_of_isLimit; LocallyQuasiFinite.of_comp; LocallyQuasiFinite; QuasiCompact.of_comp; instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated. The returned types are geometric permanence and affine limits, with no compact-support functor.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|properSupport|proper_support|compactSupport.*[Ss]heaf",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact direct image with proper supports for quasi finite separated morphisms of schemes",
+   "results": "8 hits: IsProper.of_comp_of_isSeparated, Scheme.Hom.support_ker, IsProper.of_valuativeCriterion, IsProper.of_comp, isProper_iff, isProper_eq, IsProper.toUniversallyClosed, IsProper.toIsSeparated. Read returned types: ordinary scheme properness and ideal-sheaf support, no etale proper-support theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite compactification computes lower shriek termwise and the comparison commutes with composition",
+   "results": "8 hits: Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; Presieve.IsSheafFor.functorInclusion_comp_extend_assoc; RanIsSheafOfIsCocontinuous.fac_assoc and liftAux_map variants; sheafComposeIso_hom_fac; Functor.toSheafify_pullbackSheafificationCompatibility. Read returned types: site sheafification compatibility, no proper-support or derived compactification theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|proper[Ss]upport|proper_support|[Qq]uasi[Ff]inite.*[Ee]xact",
+   "results": "Independent second reading: 1 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Returned types concern finite-presentation/quasicoherent module sheaves and abelianness/Grothendieck categories (LeanFinder), or a geometric quasi-finite-at-point proof line (grep); none gives the stated etale proper-support functor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-finite separated morphism, the functor from etale sheaves of modules sending a section to its proper-support subsheaf is exact and its derived functor is computed without resolutions",
+   "results": "Independent second reading: 8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.IsFiniteType, SheafOfModules.isQuasicoherent, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.QuasicoherentData.IsFinitePresentation. Returned types concern finite-presentation/quasicoherent module sheaves and abelianness/Grothendieck categories (LeanFinder), or a geometric quasi-finite-at-point proof line (grep); none gives the stated etale proper-support functor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-geo-affine-local",
@@ -123,5 +360,124 @@
   "group": "Q41"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-geo-affine-local"
+ "unit": "sk-lem-geo-affine-local",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-quasifinite-compact-support-exact",
+  "worker": "stage1",
+  "summary": "Followed the finite-compactification argument of Stacks 0GKM, using existing nodes only. Proved exactness before descent; constructed the reverse derived unit explicitly and checked refinement and proper/open tower composition on K-injective representatives. Identified separated etale proper support with sum-extension by the actual graph map and stalk formulas. No statement change, new node, SGA source, Lean edit, or compilation. Second reader made Noetherian ambient checks explicit, cited the existing geometric tower-existence statement, and wrote the common-refinement cancellation equations.",
+  "blueprint": "sk-lem-geo-affine-local, proof (2), last Hom equality: exact etale sum-extension agrees with compactification-defined lower shriek with the section-preserving composition and identity normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Its generator formula identifies the source stalk and the actual comparison on each summand."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Supplies coherent refinement isomorphisms and the specified proper/open tower composition to be compared."
+   },
+   {
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Its specified K-injective proper/open map fixes refinement and composition normalization on unbounded categories."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Common proper refinements transport the finite computation to arbitrary compactifications."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Generic Composition of open immersions input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-cbc-proper-support-geometric-stalk",
+    "why": "Its actual restriction map identifies the target stalk of the graph-to-support comparison."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Identifies sheaf proper support with proper/open composites and specifies the section-preserving composition map."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Generic Closed subsets proper over a base: any scheme structure, closed subsets, images input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic Inverse image to a geometric point is the stalk input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic An unramified morphism is quasi-finite at every point input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exact finite etale-site direct image is the finite-compactification input."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic Quasi-finite = locally quasi-finite + quasi-compact input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions input for the explicit compact-support computation; the affine-local unit uses this tool but does not prove it."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Supplies the geometric proper/open tower for the canonical composition comparison with a prescribed compactification of e; the normalization statement alone does not assert this existence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-sum-stalks",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proper-support-geometric-stalk",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "pqf-lem-qf-locqf-qc",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-compatible-compactification-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NY-2077c99a0",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2077c99a0 (reviewer sub-agent of L); spot-checked: Read the whole delivery (item only: no new nodes, statement and stmt_deps unchanged), all 39 proof-dependency and 14 statement-dependency statements, the unit sk-lem-geo-affine-local, and Stacks more-etale 0GKM, 0F7B, 0F7I, 0F7J, 0F4Y and 0F5F, More on Morphisms 05K0, and Etale Cohomology 09Z9 and the finite-higher-direct-image proposition. The route follows 0GKM. Step 1 builds a finite compactification by the Zariski main theorem; Noetherian implies qcqs, finite implies finite type, so the ambient scheme is Noetherian. Step 2 identifies the support functor with p_* j_0! and uses only the exactness clause of the finite-direct-image node, passed to module sheaves through the forgetful functor. Step 3 defines the reverse unit delta_c on all complexes, and it is invertible for the finite compactification. Step 4: I recomputed beta_u delta_{c2} = delta_{c1} on K-injective representatives, using the interchange square (id_V, u, j_1, j_2), K-injectivity of u_*I and the composition normalization; the direction is correct. Step 5 is genuine cancellation through a common refinement. Step 6: I recomputed the 0F7J tower chain, including the naturality rewrite, and inverting gives exactly the stated equation c_{eh} alpha = D(sigma)(c_e D(h^supp))(Re_! c_h); delta_{eh} is invertible because the other three factors are. Step 7 builds the actual graph map into proper supports and checks it on stalks: the fibre is a finite disjoint union of copies of Spec Omega by 09Z9, and the generator formula matches. Step 8 checks the nested-summand formula and the identity normalization. Hypotheses checked at each use: Noetherian ambients, quasi-compact opens, finite A, separatedness. Small cases checked: finite Spec k[eps]/eps^2 -> Spec k, a non-proper open immersion A^1 in P^1, empty and multi-point etale fibres, the zero ring, and the identity. No cycle; proof_deps equals the union of the step uses. All 20 declared tool_uses are accepted as generic black boxes. No SGA source and no change of coefficient category. Observation (not a fault of this delivery): the statement of lem-amb-unbounded-compact-support-comparisons fixes refinement comparisons only as 'restricting to the identity on X'. The identification with kappa o Rr_2* Gamma used in step 4 is the one that node constructs in its step 3, and the only one in the DAG. FIX: step 7's source gave Tag 09Z9 the nonexistent label 'lemma-etale-over-normal'. I corrected it to 'lemma-normal-scheme-with-alg-closed-function-field' in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-quasifinite-compact-support-exact.json; nothing else was changed.; 1 file(s) fixed by the reviewer"
+ }
 }

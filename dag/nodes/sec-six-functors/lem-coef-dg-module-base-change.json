@@ -27,81 +27,192 @@
   "lem-coef-dg-module-projective-resolution",
   "lem-coef-dg-module-diagram-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the displayed coend degreewise as a quotient complex. Its relations are\n$$[f\\,u(a)\\otimes m]=[f\\otimes M(a)m],\\qquad a\\in\\mathcal C(c,c'),\\ f\\in\\mathcal E(u(c'),e),\\ m\\in M(c),$$\nfor homogeneous elements; the tensor order here is $f\\otimes a\\otimes m$, so no interchange sign is suppressed. The two maps imposing these relations are chain maps, because the actions and composition are chain maps. Postcomposition in $\\mathcal E$ gives the covariant action on this quotient. Complexes have the required coproducts and quotients by [lem-coef-enriched-projective-diagram-model]. For a module chain map $t:M\\to u^*N$ define $\\overline t_e([f\\otimes m])=N(f)t_c(m)$. Its balancing equation is precisely the displayed relation and naturality of $t$. Conversely send $s:u_!M\\to N$ to $t_c(m)=s_{u(c)}([1_{u(c)}\\otimes m])$. The unit and the balancing relation show that the two constructions are inverse, and their formulas commute with maps of $M,N$. This proves the ordinary adjunction and its specified coend formula; no existence theorem for enriched Kan extensions is being used without its construction.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Use the unital associative dg composition of [lem-coef-dgcat-model-structure] and the representable right modules, with action by composition, defined in [lem-coef-dg-module-semi-free-replacement]. Write $r^c=\\mathcal C(c,-)$. The map\n$$u_!r^c(e)\\longrightarrow\\mathcal E(u(c),e),\\qquad [f\\otimes a]\\longmapsto f\\,u(a)$$\nhas inverse $z\\mapsto[z\\otimes1_c]$; balancing proves both inverse equations. For right modules, apply the displayed coend formula to $v^{\\mathrm{op}}$: it gives $v_!h_b\\cong h_{v(b)}$. In the order used in step 1, this right-module map sends $[f\\otimes a]$ with $f\\in\\mathcal E(e,v(x))$, $a\\in\\mathcal B(x,b)$ to $(-1)^{|f||a|}v(a)f$, the composition in the opposite dg category. Its inverse is again $z\\mapsto[z\\otimes1_b]$. For composable $u:\\mathcal C\\to\\mathcal E$, $v:\\mathcal E\\to\\mathcal F$, the comparison $v_!u_!M\\to(vu)_!M$ sends $[g\\otimes[f\\otimes m]]$ to $[g\\,v(f)\\otimes m]$. Its inverse sends $[h\\otimes m]$ to $[h\\otimes[1_{u(c)}\\otimes m]]$. Each relation on either side is taken to a balancing relation on the other; the two composites reduce to the identity by balancing. For the identity functor the unitor is $[f\\otimes m]\\mapsto M(f)m$. On any iterated pure tensor, every path in a unit or pentagon diagram is the same ordered composite of morphisms applied to $m$; associativity and the unit law in the dg categories give equality. Pure tensors generate the quotient, proving the canonical coherences.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "The projective module models exist by [lem-coef-enriched-projective-diagram-model] with coefficient model $\\mathrm{Ch}(\\mathbf Z)$. Restriction retains selected object values, so it preserves fibrations and trivial fibrations, which are respectively objectwise surjections and objectwise surjective quasi-isomorphisms. In an adjunction a lifting problem against $u_!i$ is exactly a lifting problem against $i$ and $u^*p$; hence the left lifting definitions show that $u_!$ preserves cofibrations and trivial cofibrations. It preserves the initial module, and therefore cofibrant modules. Apply [lem-coef-model-infinity-derived-adjunction] to these two complete and cocomplete model categories and this adjunction. It gives the derived adjunction, computed on a projectively cofibrant replacement on the left; restriction preserves every objectwise quasi-isomorphism, so its derived functor is restriction itself. The same cited statement gives preservation by $u_!$ of weak equivalences between cofibrant modules. All these assertions apply to opposites as well.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Suppose $u$ is a quasi-equivalence. Apply [lem-coef-dg-module-semi-free-replacement] to $\\mathcal C^{\\mathrm{op}}$ to obtain, for every covariant module $M$, a quasi-isomorphism $q:P\\to M$ with a graded-split filtration $0=P_0\\subset P_1\\subset\\cdots$, whose successive quotients are sums of shifts of $r^c$. Such a semi-free module is projectively cofibrant. For a summand generated at an object $c$ in degree $n$ of $P_{i+1}/P_i$, lift its identity generator to $e\\in P_{i+1}(c)^n$. Its quotient differential is zero, so $z=de$ belongs to $P_i(c)^{n+1}$ and $dz=0$. Send the generator of $r^c\\otimes S^{n+1}$ to $z$, and the degree-$n$ disk generator of $r^c\\otimes D^n$ to $e$. On the other disk generator the latter map is necessarily $z$. These are dg-module maps by the free-diagram adjunction in [lem-coef-enriched-projective-diagram-model]. Taking their coproduct over the quotient generators gives a pushout square: the induced map from the pushout to $P_{i+1}$ is the identity on $P_i$ and an isomorphism on its graded free quotient, hence is an isomorphism of complexes. Thus each inclusion is a pushout of a coproduct of the cited sphere-to-disk generating cofibrations. A compatible lifting across any trivial fibration is obtained stage by stage using these generating lifts, and then by taking the union.\n\nFor this $P$, prove that the actual unit $\\eta_P:P\\to u^*u_!P$ is an objectwise quasi-isomorphism by induction on the filtration. The coend, even on graded modules, preserves colimits and graded-split direct sums, so the filtrations after extension and restriction remain graded-split, and the quotient unit is a direct sum of shifts of\n$$\\mathcal C(c,x)\\longrightarrow\\mathcal E(u(c),u(x)).$$\nThese are quasi-isomorphisms by the hypothesis on $u$. The cone of the unit at the next stage is a graded-split extension of the preceding cone by this acyclic quotient cone. To check acyclicity, map a cycle into the quotient, express it as a boundary there, subtract a lifted boundary, and then express the remaining cycle in the preceding cone as a boundary. This starts at zero. At the union a cycle and its differential equation occur at a common finite stage, so it too is a boundary. For an arbitrary cofibrant $M$, both $P$ and $M$ are cofibrant, and [lem-coef-model-infinity-derived-adjunction] makes $u_!q$ a quasi-isomorphism. Naturality of $\\eta$ and two-out-of-three then make $\\eta_M$ a quasi-isomorphism. For a general $M$, the replacement $QM\\to M$ now proves that its derived unit is invertible.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Restriction detects objectwise quasi-isomorphisms of $\\mathcal E$-modules when $u$ is a quasi-equivalence. Indeed for every $e$ choose an isomorphism $u(c)\\cong e$ in $H^0\\mathcal E$, represented by closed degree-zero arrows $a,b$ with $ba-1=dh$, $ab-1=dk$. Applying any dg module carries these equations to chain homotopies: for example $N(b)N(a)-1=dN(h)+N(h)d$. Thus a natural map of modules is a quasi-isomorphism at $e$ if it is so at $u(c)$, by the naturality square with these homotopy equivalences. For $N$ choose $q:Q(u^*N)\\to u^*N$. The derived counit is the ordinary-adjoint transpose $\\epsilon:u_!Q(u^*N)\\to N$. Its restriction satisfies\n$$u^*\\epsilon\\circ\\eta_{Q(u^*N)}=q.$$\nThe unit is a quasi-isomorphism by step 4, so $u^*\\epsilon$ is a quasi-isomorphism, and detection makes $\\epsilon$ one too. The derived adjunction of step 3 therefore has invertible unit and counit. This proves the asserted Quillen equivalence without imposing local cofibrancy on $\\mathcal C$ or $\\mathcal E$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Set $\\mathcal N=\\operatorname{Mod}(\\mathcal B^{\\mathrm{op}})$. Apply [lem-coef-enriched-projective-diagram-model] first with coefficient model $\\mathrm{Ch}(\\mathbf Z)$ and index $\\mathcal B^{\\mathrm{op}}$. It says that $\\mathcal N$ is complete, cocomplete, locally presentable, enriched, tensored and cotensored, satisfies the enriched model axiom, and has generating cofibrations between cofibrant objects. It therefore satisfies every hypothesis for a second application of that node with index $\\mathcal C$. Its evaluation clause applies because each $\\mathcal C(c,c')$ is projectively cofibrant, and gives cofibrant values of projectively cofibrant $\\mathcal C$-diagrams. Write $A(a)$ for the degree-$|a|$ action of $a\\in\\mathcal C(c,c')$ and $B(\\beta)$ for that of $\\beta\\in\\mathcal B^{\\mathrm{op}}(b,b')$. The enriched naturality equation from the cited node is $B(\\beta)A(a)=(-1)^{|a||\\beta|}A(a)B(\\beta)$. Set $T(a\\otimes\\beta)=A(a)B(\\beta)$ on the complexes $T(c,b)$. For composable homogeneous pairs, the composite of these operators is $(-1)^{|\\beta'||a|}A(a'a)B(\\beta'\\beta)$, exactly the tensor-category composition. The differential rule follows from the Leibniz rule for the two actions. Conversely restrict a tensor-category action to $a\\otimes1_b$ and $1_c\\otimes\\beta$; their two composites give this same signed equation and recover the original action on $a\\otimes\\beta$. Degree-zero chain maps commute with the tensor action exactly when they commute with both restricted actions. These inverse constructions give the currying identification $\\mathcal N^{\\mathcal C}\\cong\\operatorname{Mod}(\\mathcal C\\otimes\\mathcal B^{\\mathrm{op}})$. Objectwise weak equivalences and fibrations agree in the two descriptions, so their left lifting classes, hence projectively cofibrant objects, agree. This proves the evaluation assertion, with no hypothesis on the Hom complexes of $\\mathcal B$.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "Here is the complex argument needed for the final tensor assertion. Apply [lem-coef-dg-module-semi-free-replacement] to the one-object dg category with endomorphisms $\\mathbf Z[0]$. It gives every complex $V$ a quasi-isomorphism $P\\to V$, where $P$ has a graded-split increasing filtration with quotients sums of shifts of $\\mathbf Z$. For any acyclic complex $A$, the tensor filtration of $P\\otimes A$ is still graded-split and its quotients are sums of shifts of $A$, hence acyclic. In a direct sum a cycle has finite support; choose a primitive in each of those finitely many summands to see this last assertion directly. The cycle/subtract-a-lifted-boundary argument of step 4 proves acyclicity at successors, and each cycle occurs at a finite stage at the union. Therefore $P\\otimes A$ is acyclic. Tensor commutes with the direct-sum cone: for $f:X\\to Y$ put $\\operatorname{Cone}(f)^n=Y^n\\oplus X^{n+1}$ with $d(y,x)=(dy+f(x),-dx)$. The total tensor differential identifies $\\operatorname{Cone}(f)\\otimes P$ with $\\operatorname{Cone}(f\\otimes1_P)$. It follows that $P$ is homotopically flat.\n\nIf $K$ is both acyclic and homotopically flat, then $K\\otimes V$ is acyclic for every $V$: for the replacement $P\\to V$ just constructed, $K\\otimes P\\to K\\otimes V$ is a quasi-isomorphism by flatness of $K$, while $K\\otimes P$ is acyclic by flatness of $P$ applied to $K\\to0$. Finally, the cone of a map between homotopically flat complexes is homotopically flat. For an acyclic $A$, its tensor with that cone is the cone between two acyclic complexes, hence acyclic by the same cycle calculation. Applied to the cone of an arbitrary quasi-isomorphism, this is precisely the defining flatness test. This argument requires no flatness of $V$.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  },
+  {
+   "text": "For every pair $c,c'$ the local map $f:\\mathcal C(c,c')\\to\\mathcal E(u(c),u(c'))$ is a quasi-isomorphism between homotopically flat complexes. By step 7 its cone is acyclic and homotopically flat, so its tensor with $\\mathcal D(d,d')$ is acyclic even when that latter complex is not flat. The cone-tensor identity there says exactly that $f\\otimes1_{\\mathcal D(d,d')}$ is a quasi-isomorphism. Thus $u\\otimes\\mathrm{id}_{\\mathcal D}$ is locally a quasi-isomorphism. For an object $(e,d)$ choose the closed degree-zero arrows $a:u(c)\\to e$, $b:e\\to u(c)$ from essential surjectivity. The arrows $a\\otimes1_d$, $b\\otimes1_d$ are inverse in $H^0$ because the boundaries $dh$, $dk$ become $d(h\\otimes1_d)$, $d(k\\otimes1_d)$. This proves essential surjectivity and hence quasi-equivalence. Steps 3-5 applied to this dg functor give the asserted localized module equivalence with inverse derived extension. Finally [lem-coef-dgcat-model-structure] explicitly states that the Hom complexes of a cofibrant dg category are projectively cofibrant and homotopically flat, so cofibrant $\\mathcal C,\\mathcal E$ meet the hypotheses. Empty source or tensor categories cause no exception: a quasi-equivalence from an empty category has empty target, and the module category of an empty category has its single empty diagram.",
+   "uses": [
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0408337",
+    "place": "Section 3, scalar extension before Proposition 3.2; Proposition 3.2, Proposition 3.3, Corollary 3.4; Section 4, tensor products before Definition 4.1. Explicit module and K-flat arguments supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-projective-diagram-model",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite derived mapping-complex adjunction before R inverse limit. Worker supplies coend, semi-free unit/counit and K-flat arguments; Toën Section 3 and Section 4 are external comparison sources, absent from local literature."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Projective model categories of dg modules admit scalar extension Quillen adjunctions and quasi equivalences of dg categories induce equivalences of their derived module categories",
-   "results": "{\"t\": \"2026-10-16T13:09:47Z\", \"tool\": \"leanfinder\", \"query\": \"Projective model categories of dg modules admit scalar extension Quillen adjunctions and quasi equivalences of dg categories induce equivalences of their derived module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"instHasExtModuleCatOfSmall\", \"CochainComplex.IsKProjective.Qh_map_bijective\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"HomotopyEquiv.isKProjective\", \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"ModuleCat.projectiveResolution\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\"], \"digest\": \"6bb547b8c4eb8b0e\"}",
+   "query": "Restriction of differential graded modules along a quasi equivalence has a left Quillen extension of scalars and is a derived equivalence",
+   "results": "{\"t\": \"2026-10-16T16:51:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of differential graded modules along a quasi equivalence has a left Quillen extension of scalars and is a derived equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"HomologicalComplex.instQuasiIsoExtendMap\", \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.Qh\", \"DerivedCategory.Q\"], \"digest\": \"64f63aefd5bb7bac\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"QuillenAdjunction\"",
-   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuillenAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+   "verdict": "no match: returned exact abelian-functor localization, complex extension along a shape embedding, and DerivedCategory.Q/Qh. None constructs dg-module scalar extension, its projective Quillen equivalence, or dg evaluation."
   },
   {
    "tool": "grep",
-   "query": "quasi.?representable|dg.?module|dg.?categor",
-   "results": "{\"t\": \"2026-10-16T13:09:45Z\", \"tool\": \"grep\", \"query\": \"quasi.?representable|dg.?module|dg.?categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "coend|dg.?module|Quillen|homotopically.flat",
+   "results": "{\"t\": \"2026-10-16T16:51:39Z\", \"tool\": \"grep\", \"query\": \"coend|dg.?module|Quillen|homotopically.flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"0232052d6714e77f\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
+   "verdict": "no match: the broad query returns Quillen references and generic model-category files; the targeted dg-module/quasi-equivalence/homotopical-flatness query has zero hits. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 12-150: its ordinary derived-adjunction construction presupposes absolute derived functors and does not supply this dg-module package."
   },
   {
    "tool": "leansearch",
-   "query": "Restriction along a quasi equivalence of dg categories induces a Quillen equivalence of module categories and evaluation preserves cofibrant modules for locally cofibrant sources",
-   "results": "{\"t\": \"2026-10-16T13:09:46Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a quasi equivalence of dg categories induces a Quillen equivalence of module categories and evaluation preserves cofibrant modules for locally cofibrant sources\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\"], \"digest\": \"5f202c680f0b01fc\"}",
+   "query": "Tensoring a quasi equivalence of differential graded categories with any dg category preserves quasi equivalence when both source and target Hom complexes are K flat",
+   "results": "{\"t\": \"2026-10-16T16:51:40Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a quasi equivalence of differential graded categories with any dg category preserves quasi equivalence when both source and target Hom complexes are K flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.below.tensor\", \"HomotopyEquiv.isKProjective\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"digest\": \"ed8e7713f9e2a6cc\"}",
    "date": "2026-10-16",
-   "verdict": "no match: ModuleCat.restrictScalarsEquivalenceOfRingEquiv concerns an isomorphism of ordinary rings, not a quasi-equivalence of dg categories. ModuleCat.projectiveResolution and CochainComplex.IsKProjective.Qh_map_bijective concern complexes in an abelian category, not scalar extension of dg-module diagrams or the evaluation criterion. The CofibrantObject localization instances assume a model category and give no dg-module model structure. Read the returned signatures and the existing CofibrantObjectHomotopy source; both semantic phrasings give no match and the dg grep and Loogle have no hits."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Extension of scalars along an enriched equivalence gives an equivalence of derived module categories",
-   "results": "{\"t\": \"2026-10-16T13:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars along an enriched equivalence gives an equivalence of derived module categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor_obj\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_inverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse_obj\"], \"digest\": \"3778b4556d6c96cd\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: TransportEnrichment.forgetEnrichmentEquiv (CategoryTheory/Enriched/Ordinary/Basic.lean:250-323) compares forgetting and transporting enrichment, not dg-module scalar extension; mapDerivedCategory (Algebra/Homology/DerivedCategory/ExactFunctor.lean:14-60) derives an exact abelian functor, not a quasi-equivalence of dg indices. Independent dg-module/Quillen-equivalence source grep had no hits."
-  },
-  {
-   "tool": "grep",
-   "query": "QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule",
-   "results": "{\"t\": \"2026-10-16T13:25:45Z\", \"tool\": \"grep\", \"query\": \"QuillenEquivalence|quasi.?representable|dgModule|DGModule|DifferentialGraded.*[Mm]odule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "No match: TransportEnrichment.forgetEnrichmentEquiv (CategoryTheory/Enriched/Ordinary/Basic.lean:250-323) compares forgetting and transporting enrichment, not dg-module scalar extension; mapDerivedCategory (Algebra/Homology/DerivedCategory/ExactFunctor.lean:14-60) derives an exact abelian functor, not a quasi-equivalence of dg indices. Independent dg-module/Quillen-equivalence source grep had no hits."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restriction of enriched functor categories along a differential graded quasi equivalence has a derived inverse given by enriched left Kan extension",
-   "results": "{\"t\": \"2026-10-16T14:13:02Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of enriched functor categories along a differential graded quasi equivalence has a derived inverse given by enriched left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.singleFunctorsPostcompQIso_inv_hom\"], \"digest\": \"ec6553f0f5bbe2e7\"}",
-   "date": "2026-10-16",
-   "verdict": "No match. ExactFunctor.lean:14-60 constructs mapDerivedCategory for an exact functor between abelian categories; Localization gives ordinary homological-complex factorization. Neither gives derived extension of dg-module indices."
+   "verdict": "no match: ordinary flat modules, formal tensor congruences and transfer of K-projectivity by homotopy equivalence do not assert a dg-category quasi-equivalence or its scalar extension."
   },
   {
    "tool": "loogle",
-   "query": "\"LeftQuillen\", \"IsEquivalence\"",
-   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftQuillen\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "\"Quillen\"",
+   "results": "{\"t\": \"2026-10-16T16:51:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
    "date": "2026-10-16",
-   "verdict": "No match; the actual Loogle query returned zero hits."
+   "verdict": "no match: hits concern the injective model on bounded-below complexes, not projective models on unbounded dg modules; read Mathlib/Algebra/Homology/ModelCategory/Injective.lean, lines 16-92."
   },
   {
    "tool": "grep",
-   "query": "enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial",
-   "results": "{\"t\": \"2026-10-16T14:12:59Z\", \"tool\": \"grep\", \"query\": \"enriched.*[Kk]an|[Kk]an.*enriched|[Qq]uillen.*[Ee]quivalence|[Dd]wyer|[Bb]isimplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
+   "query": "dg.?module|quasi.?equivalence|homotopically.flat",
+   "results": "{\"t\": \"2026-10-16T16:52:46Z\", \"tool\": \"grep\", \"query\": \"dg.?module|quasi.?equivalence|homotopically.flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "No match. The sole source hit is SingularSet.lean:37, a TODO to prove the geometric realization/singular-set adjunction is a Quillen equivalence; it states none of this node."
+   "verdict": "no match: the broad query returns Quillen references and generic model-category files; the targeted dg-module/quasi-equivalence/homotopical-flatness query has zero hits. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, lines 12-150: its ordinary derived-adjunction construction presupposes absolute derived functors and does not supply this dg-module package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of indexing enriched category induces an adjunction on categories of chain complex valued functors, and an equivalence after localization for a quasi equivalence",
+   "results": "{\"t\": \"2026-10-16T17:01:07Z\", \"tool\": \"leanfinder\", \"query\": \"Change of indexing enriched category induces an adjunction on categories of chain complex valued functors, and an equivalence after localization for a quasi equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Localization.Construction.whiskeringLeftEquivalence\", \"CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"1eedc1a171e21abc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search; read Enriched/Basic.lean:455-510, ModelCategory/CofibrantObjectHomotopy.lean:276-302 and Localization/Adjunction.lean:28-106. The hits define enriched functors or localize an already supplied adjunction/model category; they do not construct dg-module scalar extension or prove quasi-equivalence invariance. The broader K-flat/dg-module/enriched-Kan grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\"",
+   "results": "{\"t\": \"2026-10-16T17:01:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedFunctor.id_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.EnrichedFunctor.comp\"], \"digest\": \"3c8be03114ad3634\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search; read Enriched/Basic.lean:455-510, ModelCategory/CofibrantObjectHomotopy.lean:276-302 and Localization/Adjunction.lean:28-106. The hits define enriched functors or localize an already supplied adjunction/model category; they do not construct dg-module scalar extension or prove quasi-equivalence invariance. The broader K-flat/dg-module/enriched-Kan grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Kk][-_ ]flat|dg.?[Mm]odule|enriched.*[Kk]an",
+   "results": "{\"t\": \"2026-10-16T17:01:26Z\", \"tool\": \"grep\", \"query\": \"KFlat|[Kk][-_ ]flat|dg.?[Mm]odule|enriched.*[Kk]an\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second-reader search; read Enriched/Basic.lean:455-510, ModelCategory/CofibrantObjectHomotopy.lean:276-302 and Localization/Adjunction.lean:28-106. The hits define enriched functors or localize an already supplied adjunction/model category; they do not construct dg-module scalar extension or prove quasi-equivalence invariance. The broader K-flat/dg-module/enriched-Kan grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dgcat-bimodule-mapping-space",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-module-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the statement and every hypothesis. Constructed the scalar-extension coend, its adjunction, representable comparison and associative unital coherences on generators. Proved quasi-equivalence invariance using existing semi-free replacements, the unit filtration, and counit detection. Reused the enriched projective diagram model for cofibrant evaluation and the general model derived adjunction. Proved the K-flat cone argument for arbitrary unchanged tensor factors. All substantive steps are marked non-elementary and cite the precise existing interfaces they use. No new nodes or Mathlib leaves. Second reading makes the semi-free cell attachments and signed tensor/currying actions explicit; direct-sum acyclicity is checked by finite support.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint, the middle finite enriched adjunction before total inverse limit: dg-module change of indices/values underlying the bimodule mapping-space construction; steps 1-5 scalar extension, step 6 cofibrant evaluation, steps 7-8 flat tensor comparison. The current main-20261015 proof agrees with the historical ancestry; no unit step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-380472111",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-380472111 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of the six cited nodes. Statement: it is byte-identical to the live unsplit node. The coefficients are Ch(Z) throughout, matching the enriched diagram model's Ch(Z) specialization, and nothing is weakened. There are no new nodes. All citations are within the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. proof_deps equals the union of the steps' uses. No cited node depends back on the item (196 nodes traversed). Step 1: checked the coend relation f∘u(a) and the balancing of t̄ by naturality. Step 2: checked the representable inverse [f u(a)⊗1_c]=[f⊗a], the opposite-composition sign, and the associator and unitor on generators. Step 3: objectwise fibrations give the adjoint lifting argument; the derived-adjunction node supplies the cofibrant-replacement formula and preservation of weak equivalences between cofibrant objects. Step 4: checked that the sphere/disk pushout cell attachment rebuilds P_{i+1}, that graded splitting survives u_!, and the induction and union for the unit. Step 5: checked N(dh)=dN(h)+N(h)d, the detection argument and u^*ε∘η=q. Step 6: checked that the two applications of the enriched node chain together, and the Koszul sign in currying (-1)^{|β'||a|}; no hypothesis is placed on B. Step 7: checked the Cone(f)⊗P=Cone(f⊗1) sign, that an acyclic K-flat complex tensors to acyclic, and closure of K-flat under cones. Step 8: checked the local quasi-isomorphism via the K-flat cone, H^0 essential surjectivity, and the cofibrant-dg-category clause. Small cases tested: empty source, identity functor, dg rings, D with End Z/2[0]. Not duplicates: lem-coef-locally-cofibrant-dg-restriction needs both categories locally cofibrant, and lem-coef-dg-two-sided-bar-derived-tensor is about balanced tensor. Toën math/0408337 is absent from the local literature; the WANTED line is recorded and proof_origin.by is agent. No SGA is cited. No fixes were made."
+ }
 }

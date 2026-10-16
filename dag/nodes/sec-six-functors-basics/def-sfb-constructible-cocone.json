@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-constructible-cocone",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The cocone $E\\mapsto D_{\\mathrm{cons}}(X,E)$",
@@ -23,9 +23,59 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleCocone|PadicSubfieldConstructible|constructibleExtendScalars|constructibleToPadicAlgCl",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cocone, CategoryTheory.Cat",
+   "results": "CategoryTheory.Limits.coconeFiberwiseColimitOfCocone; CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit; CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone; CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone; CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_pt; CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_pt; CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_ι_app; CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app",
+   "date": "2026-10-16",
+   "verdict": "no match: Grothendieck fiberwise-colimit constructions produce ordinary cocones in a fixed target category; they do not define these constructible categories or their coefficient-change cocone"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocone of bounded constructible pro-etale derived categories under extension of p-adic coefficient fields",
+   "results": "CategoryTheory.Functor.LeftExtension.coconeAtFunctor; CategoryTheory.Functor.coconeOfIsLeftKanExtension; CategoryTheory.Functor.LeftExtension.coconeAt; CategoryTheory.Functor.isColimitCoconeOfIsLeftKanExtension; Profinite.Extend.cocone; CategoryTheory.Limits.Cocone.extend_pt; CategoryTheory.Under.liftCocone; CategoryTheory.Limits.Cocone.extend",
+   "date": "2026-10-16",
+   "verdict": "no match: Kan-extension and ordinary-cocone constructors do not supply this coefficient diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cocone of bounded constructible derived categories of pro-etale sheaves over finite extensions of Q_l, with vertex the algebraic closure and extension of scalars functors",
+   "results": "LightProfinite.Extend.cocone; Profinite.Extend.cocone; CategoryTheory.PreGaloisCategory.PointedGaloisObject.cocone; LightCondensed.fintypeCatAsCofanIsColimit; LightCondensed.instFinalNatCostructuredArrowOppositeFintypeCatLightProfiniteOpToLightProfiniteOpPtAsLimitConeFunctorOp; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; Profinite.Extend.isColimitCocone; Condensed.isColimitLocallyConstantPresheafDiagram",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are cocones of profinite-space diagrams and condensed-module constructions, not the specified family of bounded constructible derived categories and scalar-extension functors"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|proetale|pro.etale|padic.*constructible",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the pro-etale topology and ell-adic coefficient sheaf hits do not define the constructible scalar-extension cocone"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categories of constructible complexes of sheaves with scalar extension along finite p-adic field inclusions and compatible functors to algebraic closure coefficients",
+   "results": "Condensed.profiniteSolid; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.functor; Condensed.profiniteFree; CondensedMod.LocallyConstant.functor; LightCondMod.ofSheafLightProfinite; LightCondMod.LocallyConstant.functorToPresheaves; CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-16",
+   "verdict": "no match: profiniteSolid, ofSheafProfinite, and locally constant condensed-module functors do not define bounded constructible derived coefficient categories or this cocone"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of categories indexed by a preorder with transition functors and natural comparison isomorphisms to a common vertex category",
+   "results": "InverseSystem; preordToCat; LightDiagram'; DirectedSystem; CategoryTheory.Functor.WellOrderInductionData; LightDiagram; CategoryTheory.SmallObject.FunctorObjIndex; CategoryTheory.Limits.HasIterationOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: returned inverse/directed systems of types, preorder categories, light-profinite diagram types, and small-object/iteration data do not construct the bounded constructible derived coefficient cocone"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -49,5 +99,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sfb-constructible-cocone",
+  "worker": "stage1",
+  "summary": "Preserved the definition verbatim and verified all six existing statement dependencies against their full statements and current blueprint sources. The categories, transition functors, vertex functors and comparison isomorphisms have matching domains and codomains for an arbitrary scheme. No new nodes, proof obligations, attachment or Mathlib leaf. Searched the whole imported blueprint and project source, and recorded six actual Mathlib searches.",
+  "blueprint": "Realizes the entire definition def-sfb-constructible-cocone.md (all four bullets), and the final construction in unit sk-thm-sfb-qlbar-two-colimit, step 9: the restricted scalar-extension functors and comparison isomorphisms form the specified cocone. This definition has no proof steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NW-3ab326884",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-3ab326884 (reviewer sub-agent of L); spot-checked: I read the whole definition and every cited node. The statement matches the current blueprint main-20261015 def-sfb-constructible-cocone.md (order 1769) word for word, and stmt_deps is exactly the six ids the source lists under uses. Each of the six cited statements supplies exactly one piece of the cocone, with the right domain and codomain. sk-def-sfb-filtered-two-colimit gives the cocone data T_ij, Phi_i and theta_ij: Phi_j T_ij ≅ Phi_i, with no coherence required. dcons-subfield gives the stage categories, extend-subfield the transition functors T_{E,F}, dcons-qlbar the vertex and extend-to-qlbar the functors T_{E,Qlb}. comp-iso gives T_{F,Qlb} T_{E,F} ≅ T_{E,Qlb}, and with i=E, j=F this has the same direction as theta_ij. The coefficient categories are the bounded constructible derived categories of modules over the pulled-back condensed rings E_X and Qlb_X. They are not swapped for sheaves over discrete rings, and the item does not identify them with the separate condensed Omega variant used in the proper-base-change chapter. The item is not a target node and makes no base-change claim. The (Obj), (Hom-surj) and (Hom-inj) properties are not asserted; they stay with the lem-sfb-constructible-cocone-* nodes and thm-sfb-constructible-cocone-two-colimit. Edge cases checked: E=F (comp-iso is stated for E≤F, so equality is included), E=Q_l, a nontrivial E<F, X empty and X=Spec k; the definition needs no hypothesis on X. The proof fields are empty, which is correct for a definition. Tracing the dependencies (472 nodes reachable) never leads back to the item, so the in_cycle import flag is stale and was kept as the brief requires. A search for duplicates over the DAG found none: the only other 'cocone' definition, def-weil-pbc-condensed-coefficient-complex-diagram, is a cocone of cochain complexes for a different coefficient ring, so same_as [] is accepted. There are no new nodes, no SGA citations and no tool_uses. Mathlib searches of all three kinds (grep, loogle, leansearch, leanfinder) are recorded with their results. The unit's realized fields were correctly left alone, since this item is not the unit's key node. No fixes were needed."
+ }
 }
