@@ -3,38 +3,121 @@
  "blueprint": {
   "is": "lem-sfb-alpha-ring-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\alpha_f$ is a morphism of ring objects",
- "statement": "Give $f^*\\Lambda_Y$ the ring object structure transported along the strong\nmonoidal functor $f^*$ ([sk-def-sfb-finite-pushforward-pullback]). Then\n$\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$ ([def-sfb-alpha]) is a morphism of\nring objects.",
+ "statement": "Give $f^*\\Lambda_Y$ the ring object structure transported along the strong\nmonoidal functor $f^*$ ([def-sfb-finite-upper-star-monoidal]). Then\n$\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$ ([def-sfb-alpha]) is a morphism of\nring objects.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.md",
   "place": "node lem-sfb-alpha-ring-hom, order 1560"
  },
  "stmt_deps": [
-  "def-sfb-alpha"
+  "def-sfb-alpha",
+  "def-sfb-finite-upper-star-monoidal",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof": [
   {
-   "text": "The ring structures of $f^*\\Lambda_Y=(f^*\\circ p_Y^*)\\Lambda$ and of\n$\\Lambda_X=p_X^*\\Lambda$ are those of $\\Lambda$, transported along the strong\nmonoidal functors $f^*\\circ p_Y^*$ and $p_X^*$. The component at a ring object\nof a monoidal natural transformation between monoidal functors is a morphism\nof the transported ring objects. The transformation is monoidal by\n[lem-sfb-pullback-from-point-comp-monoidal].",
+   "text": "Write $P=p_Y^*$, $H=f^*$, $F=H\\circ P$, and $G=p_X^*$. Write $(\\Lambda,m,u)$ for the coefficient ring object. By [sk-def-sfb-pulled-back-coefficients] the ring on $P\\Lambda$ is the transport along $P$, and the ring on $G\\Lambda$ is the transport along $G$. Use the strong monoidal structure on $H$ of [def-sfb-finite-upper-star-monoidal]. In the notation of [det-def-sfb-ring-object-transport], the lax comparison maps of the composite are $c^F_{A,B}=H(c^P_{A,B})\\circ c^H_{PA,PB}$ and $e^F=H(e^P)\\circ e^H$. Thus the multiplication obtained by transporting first along $P$ and then along $H$ is\n$$H(Pm\\circ c^P_{\\Lambda,\\Lambda})\\circ c^H_{P\\Lambda,P\\Lambda}=F(m)\\circ c^F_{\\Lambda,\\Lambda},$$\nand its unit is $H(Pu\\circ e^P)\\circ e^H=F(u)\\circ e^F$, by preservation of composition. These are exactly the direct transport formulas. Consequently the specified ring structures on $f^*\\Lambda_Y$ and $\\Lambda_X$ are the transported structures on $F\\Lambda$ and $G\\Lambda$.",
    "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star-monoidal",
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.proof.md",
+    "place": "First sentence; expansion of successive transport"
+   }
+  },
+  {
+   "text": "Let $\\tau:F\\Rightarrow G$ be the underlying natural transformation of [def-sfb-pullback-from-point-comp-iso]. By [def-sfb-alpha], $\\alpha_f=\\tau_\\Lambda$. The statement of [lem-sfb-pullback-from-point-comp-monoidal] says that this very comparison is monoidal for the strong monoidal structures on $F$ and $G$. Thus it satisfies the unit and tensor compatibility needed to apply the monoidal-transformation assertion of the transport lemma, with domain the category of condensed abelian groups and codomain the category of abelian pro-étale sheaves on $X$.",
+   "uses": [
+    "def-sfb-pullback-from-point-comp-iso",
+    "def-sfb-alpha",
     "lem-sfb-pullback-from-point-comp-monoidal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.proof.md",
+    "place": "Last sentence: monoidality of the comparison"
+   }
+  },
+  {
+   "text": "Apply clause 3 of [det-def-sfb-ring-object-transport] to the monoidal transformation $\\tau:F\\Rightarrow G$ at the ring object $\\Lambda$. It gives that $\\tau_\\Lambda$ preserves multiplication and unit for the transported rings identified in step 1. Explicitly the multiplication identity is\n$$\\tau_\\Lambda\\circ F(m)\\circ c^F_{\\Lambda,\\Lambda}=G(m)\\circ\\tau_{\\Lambda\\otimes\\Lambda}\\circ c^F_{\\Lambda,\\Lambda}=G(m)\\circ c^G_{\\Lambda,\\Lambda}\\circ(\\tau_\\Lambda\\otimes\\tau_\\Lambda),$$\nand the unit identity is $\\tau_\\Lambda\\circ F(u)\\circ e^F=G(u)\\circ\\tau_{\\mathbf1}\\circ e^F=G(u)\\circ e^G$. The first equality in each chain is naturality; the second is monoidality. By the definition of a morphism of ring objects in [det-def-sfb-ring-object-monoid], these identities say exactly that $\\alpha_f=\\tau_\\Lambda:f^*\\Lambda_Y\\to\\Lambda_X$ is a morphism of ring objects.",
+   "uses": [
+    "det-def-sfb-ring-object-transport",
+    "det-def-sfb-ring-object-monoid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.proof.md",
+    "place": "Middle sentence; the transport lemma, clause 3"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-pullback-from-point-comp-monoidal"
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "det-def-sfb-ring-object-transport",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-alpha",
+  "lem-sfb-pullback-from-point-comp-monoidal",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/lem-sfb-alpha-ring-hom.proof.md",
+  "place": "Complete proof, with explicit composite-transport formulas and existing transport lemma clause 3"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isMonHom.*(app|compAlgHom)|mapMonNatTrans|compAlgHom",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:909 mapMonNatTrans supplies the generic theorem, but does not assert geometric monoidality; reuse existing det-def-sfb-ring-object-transport, not a Mathlib match for this item.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic transport exists"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapMonNatTrans",
+   "results": "No hits: unknown identifier Functor.mapMonNatTrans; retried with fully qualified name.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component of a monoidal natural transformation preserves multiplication and unit of a monoid object",
+   "results": "mapMonNatTrans, mapMonNatTrans_app_hom, NatTrans.IsMonoidal.mk, Mon.Hom.mk' and generic monoidality hits; no geometric comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic transport exists"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural transformation between lax monoidal functors induces a morphism of monoid objects at each monoid object",
+   "results": "mapMonNatTrans and mapMon are generic transport hits; no geometric comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic transport exists"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMonNatTrans",
+   "results": "Four hits: mapMonNatTrans, mapMonNatTrans_app_hom, Adjunction.mapMon_counit, Adjunction.mapMon_unit. Generic transport, not geometric monoidality.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic transport exists"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMonCompIso|mapMonNatTrans",
+   "results": "Read Mathlib/CategoryTheory/Monoidal/Mon.lean:898 mapMonCompIso and :909 mapMonNatTrans. File-target grep printed malformed file/line fields (898 and 909 as file); verified the actual lines by reading source. Generic transport only.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic transport exists"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -53,5 +136,29 @@
   "AlgebraicGeometry.ProEtale.isMonHom_condensedPullbackHom"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-alpha-ring-hom",
+  "worker": "stage1",
+  "summary": "Retained the mathematical claim, correcting only the missing unit-level reference to its concrete defining child; and expanded the blueprint proof into composite-transport formulas, the monoidality application, and both ring-hom identities. Reused the existing general transport node; no new nodes. Added concrete statement dependencies for the unit-level pullback reference and for ring objects. No closed slopmaster2 declaration exists.",
+  "blueprint": "First sentence is step 1; last sentence is step 2; middle sentence is step 3, using det-def-sfb-ring-object-transport clause 3.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-transport",
+    "why": "Generic transport of monoid objects and monoidal transformations, used with the comparison of this unit; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q05-a7a7095f7",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-a7a7095f7 (reviewer sub-agent of L); spot-checked: Mathematics and proof pass all checks, including coefficient categories, transport formulas, monoidality, ring-hom equations, edge cases, and route/source fidelity. One repairable metadata fault remains: the item’s blueprint.from is null and lacks from.place, violating delivery rule B9. Corrected DAG JSON is in fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-alpha-ring-hom.json.; 1 file(s) fixed by the reviewer"
+ }
 }
