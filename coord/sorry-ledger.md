@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1357**, closure **65**, holes in definitions **4**, definitions with undetermined data **27** (closure **1**).
+Holes now: library **1332**, closure **33**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -41,108 +41,108 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.LisseAdicSheaves::AlgebraicGeometry.Scheme.lisseCoefficientDiagramData` (line 527), chosen from `AlgebraicGeometry.Scheme.lisseCoefficientDiagram_exists`
 - `Sheaf.Paper.ProjectionFormulaArrows::SheafOfModules.mixedTensorRepresentative` (line 290), chosen from `SheafOfModules.mixedTensorRepresentative_existsUnique`
 - `Sheaf.Paper.RingedSiteIdeal::CategoryTheory.RingedSiteIdeal.extension` (line 172), chosen from `CategoryTheory.RingedSiteIdeal.existsUnique_extension`
-- `Sheaf.Paper.RingedTopoiCanonicalTensorPullback::SheafOfModules.ringedTopoiCanonicalDerivedTensorComparison` (line 528), chosen from `SheafOfModules.ringedTopoiCanonicalDerivedTensorPullback`
+- `Sheaf.Paper.RingedTopoiCanonicalTensorPullback::SheafOfModules.ringedTopoiCanonicalDerivedTensorComparison` (line 752), chosen from `SheafOfModules.ringedTopoiCanonicalDerivedTensorPullback`
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1147 | 54 |
-| WeilConjectures | 210 | 11 |
+| Sheaf | 1130 | 29 |
+| WeilConjectures | 202 | 4 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2268 | 799 | 1469 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2222 | 797 | 1425 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1968 | 58 | 1910 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2279 | 785 | 1494 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2233 | 783 | 1450 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1978 | 31 | 1947 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3552 |
+| proved | 3591 |
 | decomposed | 52 |
-| moved | 3950 |
-| pruned | 128 |
-| other | 582 |
+| moved | 3986 |
+| pruned | 131 |
+| other | 603 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 117 | 115 | 79 | 36 | 58/117 (49.6%) |
-| A3 | 121 | 117 | 76 | 41 | 52/121 (43.0%) |
-| A4 | 66 | 70 | 43 | 27 | 33/66 (50.0%) |
+| A2 | 119 | 117 | 84 | 33 | 60/119 (50.4%) |
+| A3 | 122 | 118 | 78 | 40 | 53/122 (43.4%) |
+| A4 | 69 | 73 | 45 | 28 | 35/69 (50.7%) |
 | B2 | 125 | 131 | 83 | 48 | 52/125 (41.6%) |
-| B3 | 140 | 147 | 83 | 64 | 58/140 (41.4%) |
-| B4 | 61 | 64 | 42 | 22 | 28/61 (45.9%) |
-| C1 | 138 | 141 | 105 | 36 | 71/138 (51.4%) |
-| C2 | 120 | 115 | 80 | 35 | 54/120 (45.0%) |
+| B3 | 143 | 150 | 85 | 65 | 60/143 (42.0%) |
+| B4 | 65 | 68 | 45 | 23 | 30/65 (46.2%) |
+| C1 | 140 | 143 | 107 | 36 | 72/140 (51.4%) |
+| C2 | 121 | 116 | 82 | 34 | 55/121 (45.5%) |
 | C3 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
-| C4 | 49 | 50 | 30 | 20 | 19/49 (38.8%) |
-| D2 | 135 | 135 | 88 | 47 | 60/135 (44.4%) |
-| D3 | 105 | 116 | 67 | 49 | 48/105 (45.7%) |
-| D4 | 61 | 59 | 44 | 15 | 26/61 (42.6%) |
-| E1 | 156 | 182 | 104 | 78 | 80/156 (51.3%) |
-| E2 | 116 | 113 | 84 | 29 | 58/116 (50.0%) |
-| E3 | 108 | 106 | 86 | 20 | 57/108 (52.8%) |
-| E4 | 43 | 51 | 27 | 24 | 19/43 (44.2%) |
-| F1 | 142 | 148 | 104 | 44 | 69/142 (48.6%) |
-| F2 | 142 | 151 | 98 | 53 | 61/142 (43.0%) |
-| F3 | 95 | 97 | 60 | 37 | 42/95 (44.2%) |
-| F4 | 57 | 52 | 39 | 13 | 26/57 (45.6%) |
-| G1 | 138 | 139 | 112 | 27 | 75/138 (54.3%) |
-| G2 | 136 | 134 | 90 | 44 | 62/136 (45.6%) |
-| G3 | 100 | 103 | 66 | 37 | 45/100 (45.0%) |
-| G4 | 53 | 45 | 29 | 16 | 19/53 (35.8%) |
-| H1 | 130 | 128 | 105 | 23 | 73/130 (56.2%) |
-| H2 | 111 | 108 | 88 | 20 | 64/111 (57.7%) |
-| H3 | 119 | 134 | 94 | 40 | 65/119 (54.6%) |
-| H4 | 57 | 54 | 41 | 13 | 30/57 (52.6%) |
-| J1 | 122 | 129 | 75 | 54 | 53/122 (43.4%) |
+| C4 | 51 | 52 | 31 | 21 | 20/51 (39.2%) |
+| D2 | 137 | 137 | 89 | 48 | 61/137 (44.5%) |
+| D3 | 106 | 117 | 68 | 49 | 49/106 (46.2%) |
+| D4 | 64 | 61 | 44 | 17 | 26/64 (40.6%) |
+| E1 | 158 | 184 | 104 | 80 | 80/158 (50.6%) |
+| E2 | 119 | 115 | 84 | 31 | 58/119 (48.7%) |
+| E3 | 110 | 111 | 94 | 17 | 58/110 (52.7%) |
+| E4 | 45 | 53 | 27 | 26 | 19/45 (42.2%) |
+| F1 | 143 | 149 | 106 | 43 | 70/143 (49.0%) |
+| F2 | 146 | 155 | 98 | 57 | 61/146 (41.8%) |
+| F3 | 97 | 99 | 62 | 37 | 43/97 (44.3%) |
+| F4 | 60 | 55 | 42 | 13 | 28/60 (46.7%) |
+| G1 | 139 | 140 | 112 | 28 | 75/139 (54.0%) |
+| G2 | 137 | 135 | 91 | 44 | 63/137 (46.0%) |
+| G3 | 101 | 104 | 66 | 38 | 45/101 (44.6%) |
+| G4 | 55 | 47 | 31 | 16 | 20/55 (36.4%) |
+| H1 | 134 | 132 | 106 | 26 | 74/134 (55.2%) |
+| H2 | 113 | 110 | 89 | 21 | 65/113 (57.5%) |
+| H3 | 120 | 135 | 96 | 39 | 66/120 (55.0%) |
+| H4 | 58 | 55 | 41 | 14 | 30/58 (51.7%) |
+| J1 | 123 | 130 | 75 | 55 | 53/123 (43.1%) |
 | J2 | 102 | 104 | 70 | 34 | 51/102 (50.0%) |
-| J3 | 118 | 124 | 77 | 47 | 54/118 (45.8%) |
-| J4 | 59 | 51 | 39 | 12 | 26/59 (44.1%) |
-| K1 | 118 | 131 | 88 | 43 | 60/118 (50.8%) |
-| K2 | 119 | 117 | 83 | 34 | 64/119 (53.8%) |
+| J3 | 119 | 125 | 77 | 48 | 54/119 (45.4%) |
+| J4 | 60 | 52 | 40 | 12 | 27/60 (45.0%) |
+| K1 | 119 | 132 | 89 | 43 | 61/119 (51.3%) |
+| K2 | 120 | 118 | 84 | 34 | 65/120 (54.2%) |
 | K3 | 106 | 106 | 75 | 31 | 55/106 (51.9%) |
-| K4 | 61 | 45 | 35 | 10 | 24/61 (39.3%) |
+| K4 | 62 | 47 | 35 | 12 | 24/62 (38.7%) |
 | M1 | 138 | 137 | 92 | 45 | 65/138 (47.1%) |
-| M2 | 128 | 130 | 103 | 27 | 69/128 (53.9%) |
-| M3 | 106 | 107 | 71 | 36 | 51/106 (48.1%) |
-| M4 | 44 | 48 | 23 | 25 | 16/44 (36.4%) |
+| M2 | 129 | 131 | 104 | 27 | 70/129 (54.3%) |
+| M3 | 107 | 108 | 72 | 36 | 52/107 (48.6%) |
+| M4 | 45 | 49 | 24 | 25 | 17/45 (37.8%) |
 | N1 | 135 | 136 | 108 | 28 | 74/135 (54.8%) |
-| N2 | 127 | 116 | 78 | 38 | 57/127 (44.9%) |
-| N3 | 87 | 82 | 65 | 17 | 45/87 (51.7%) |
+| N2 | 128 | 117 | 78 | 39 | 57/128 (44.5%) |
+| N3 | 88 | 83 | 65 | 18 | 45/88 (51.1%) |
 | N4 | 56 | 54 | 48 | 6 | 29/56 (51.8%) |
-| P1 | 118 | 138 | 92 | 46 | 66/118 (55.9%) |
+| P1 | 119 | 139 | 93 | 46 | 67/119 (56.3%) |
 | P2 | 131 | 123 | 82 | 41 | 56/131 (42.7%) |
-| P3 | 101 | 94 | 81 | 13 | 52/101 (51.5%) |
+| P3 | 102 | 95 | 81 | 14 | 52/102 (51.0%) |
 | P4 | 53 | 49 | 39 | 10 | 26/53 (49.1%) |
 | Q1 | 107 | 108 | 75 | 33 | 55/107 (51.4%) |
 | Q2 | 103 | 106 | 79 | 27 | 52/103 (50.5%) |
 | Q3 | 100 | 99 | 70 | 29 | 46/100 (46.0%) |
 | Q4 | 46 | 49 | 26 | 23 | 20/46 (43.5%) |
-| R1 | 124 | 127 | 98 | 29 | 67/124 (54.0%) |
+| R1 | 125 | 128 | 98 | 30 | 67/125 (53.6%) |
 | R2 | 122 | 125 | 75 | 50 | 52/122 (42.6%) |
 | R3 | 96 | 93 | 65 | 28 | 42/96 (43.8%) |
 | R4 | 58 | 49 | 41 | 8 | 26/58 (44.8%) |
-| S1 | 123 | 125 | 104 | 21 | 68/123 (55.3%) |
-| S2 | 123 | 127 | 101 | 26 | 65/123 (52.8%) |
+| S1 | 124 | 126 | 106 | 20 | 69/124 (55.6%) |
+| S2 | 124 | 128 | 102 | 26 | 66/124 (53.2%) |
 | S3 | 104 | 99 | 63 | 36 | 48/104 (46.2%) |
-| S4 | 46 | 44 | 35 | 9 | 24/46 (52.2%) |
-| T1 | 109 | 109 | 80 | 29 | 55/109 (50.5%) |
-| T2 | 131 | 153 | 97 | 56 | 64/131 (48.9%) |
-| T3 | 101 | 96 | 77 | 19 | 53/101 (52.5%) |
+| S4 | 47 | 45 | 35 | 10 | 24/47 (51.1%) |
+| T1 | 110 | 111 | 82 | 29 | 56/110 (50.9%) |
+| T2 | 132 | 154 | 97 | 57 | 64/132 (48.5%) |
+| T3 | 102 | 97 | 77 | 20 | 53/102 (52.0%) |
 | T4 | 68 | 60 | 38 | 22 | 24/68 (35.3%) |
 | U1 | 126 | 129 | 92 | 37 | 62/126 (49.2%) |
-| U2 | 135 | 129 | 92 | 37 | 63/135 (46.7%) |
+| U2 | 136 | 130 | 92 | 38 | 63/136 (46.3%) |
 | U3 | 97 | 100 | 69 | 31 | 49/97 (50.5%) |
 | U4 | 51 | 45 | 40 | 5 | 28/51 (54.9%) |
 | V1 | 114 | 107 | 85 | 22 | 55/114 (48.2%) |
 | V2 | 125 | 122 | 89 | 33 | 61/125 (48.8%) |
-| V3 | 106 | 110 | 74 | 36 | 55/106 (51.9%) |
-| V4 | 49 | 43 | 36 | 7 | 24/49 (49.0%) |
-| W2 | 113 | 118 | 78 | 40 | 54/113 (47.8%) |
+| V3 | 107 | 111 | 75 | 36 | 56/107 (52.3%) |
+| V4 | 50 | 44 | 38 | 6 | 25/50 (50.0%) |
+| W2 | 114 | 119 | 78 | 41 | 54/114 (47.4%) |
 | W3 | 85 | 86 | 58 | 28 | 40/85 (47.1%) |
 | W4 | 48 | 43 | 36 | 7 | 27/48 (56.2%) |
 | X2 | 121 | 118 | 95 | 23 | 64/121 (52.9%) |
@@ -166,32 +166,32 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y2 | 109 | 111 | 98 | 13 | 59/109 (54.1%) |
 | Y3 | 104 | 91 | 56 | 35 | 45/104 (43.3%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
-| launcher prover | 115 | 15 | 9 | 6 | 6/115 (5.2%) |
+| launcher prover | 134 | 15 | 9 | 6 | 6/134 (4.5%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| Sheaf.Paper.ContinuousExchangeIntegralModel | 2 | 1 | A2 |
-| Sheaf.Paper.IntegralReductionConservative | 2 | 1 | B4 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | C3 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 1 | A2 |
 | Sheaf.Paper.CondensedQbarExchangeEquality | 3 | 1 | A3 |
-| Sheaf.Paper.CondensedQcqsPushforwardContinuity | 3 | 1 | D3 |
-| Sheaf.Paper.IntegralFiniteExchangeComparison | 3 | 1 | C2 |
 | Sheaf.Paper.CondensedFlatCoefficientCalculus | 4 | 1 | G2 |
-| Sheaf.Paper.CondensedQcqsPushforwardLocalComparison | 4 | 1 | G2 |
+| Sheaf.Paper.ContinuousIntegralPushComparison | 4 | 1 | B2 |
+| Sheaf.Paper.FiniteDiscreteExchangeComparison | 4 | 1 | — |
+| Sheaf.Paper.IntegralResidueExchange | 4 | 1 | C2 |
 | Sheaf.Paper.ProfinitePointPullback | 4 | 1 | D2 |
-| Sheaf.Paper.RingedTopoiCanonicalTensorPullback | 4 | 3 | A4 |
-| Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients | 5 | 1 | J2 |
-| Sheaf.AlgebraicGeometry.ProEtaleSiteComparison | 5 | 1 | U4 |
-| Sheaf.Paper.KFlatRingedToposPullback | 5 | 1 | K3 |
-| Sheaf.Paper.RingedTopoiDerivedTensorPullback | 5 | 1 | V1 |
-| WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic | 5 | 1 | V2 |
-| Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback | 6 | 1 | M2 |
-| Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishing | 6 | 1 | V3 |
-| Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence | 6 | 1 | U2 |
-| Sheaf.AlgebraicGeometry.CondensedCoefficientComplexModel | 6 | 1 | — |
-| Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality | 6 | 1 | F1 |
+| Sheaf.Paper.CondensedQcqsPushforwardContinuity | 5 | 1 | D3 |
+| Sheaf.Paper.ContinuousConstructibleIntegralGluing | 5 | 1 | C1 |
+| Sheaf.Paper.ContinuousConstructibleIntegralStratum | 5 | 1 | C4 |
+| Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct | 5 | 1 | E4 |
+| Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct | 5 | 1 | F1 |
+| Sheaf.Paper.IntegralMatrixPivotCover | 5 | 1 | C3 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility | 5 | 1 | G1 |
+| Sheaf.AlgebraicGeometry.ProEtaleSiteComparison | 6 | 1 | U4 |
+| Sheaf.Paper.CondensedLfpCoefficientModel | 6 | 1 | A4 |
+| Sheaf.Paper.CondensedQbarLfpMatrixRefinement | 6 | 1 | E3 |
+| Sheaf.Paper.CondensedQcqsPushforwardLocalComparison | 6 | 1 | G2 |
+| WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic | 6 | 1 | V2 |
+| Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation | 7 | 1 | B4 |
 
 Modules pruned since the imports baseline:
 
@@ -237,6 +237,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.AffineCohomologyLocalization`
 - `Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve`
 - `Sheaf.AlgebraicGeometry.AffineDerivedConcentration`
+- `Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit`
 - `Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech`
 - `Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal`
 - `Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent`
@@ -287,8 +288,10 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints`
 - `Sheaf.AlgebraicGeometry.EtaleFieldGsets`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
+- `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
 - `Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent`
+- `Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings`
 - `Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf`
 - `Sheaf.AlgebraicGeometry.EtaleSheaves`
 - `Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift`
@@ -338,6 +341,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift`
+- `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting`
+- `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1`
 - `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1`
@@ -348,7 +353,9 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
 - `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
+- `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
+- `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis`
 - `Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary`
 - `Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit`
@@ -385,15 +392,21 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover`
 - `Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection`
 - `Sheaf.AlgebraicGeometry.RelativeSpecBaseChange`
+- `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember`
 - `Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings`
 - `Sheaf.AlgebraicGeometry.SchemeTheoreticUnion`
 - `Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology`
 - `Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing`
+- `Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableObject`
 - `Sheaf.AlgebraicGeometry.SemilocalDimOneConductor`
 - `Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleComparison`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleFinite`
+- `Sheaf.AlgebraicGeometry.SimplicialHomObject`
+- `Sheaf.AlgebraicGeometry.SimplicialHomObjectExists`
+- `Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout`
+- `Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex`
 - `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`
 - `Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants`
 - `Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections`
@@ -409,6 +422,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.TensorGeneratingSections`
 - `Sheaf.AlgebraicGeometry.TensorGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.TensorSectionAffineOpen`
+- `Sheaf.AlgebraicGeometry.TorsionFilteredUnion`
 - `Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct`
 - `Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint`
@@ -420,6 +434,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete`
 - `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan`
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
+- `Sheaf.AlgebraicTopology.GlueSimplex`
+- `Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial`
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
@@ -438,6 +454,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.CommAlgebraSheafModule`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DeltaFunctor`
+- `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
+- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit`
 - `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
 - `Sheaf.CategoryTheory.DerivedFunctorInverts`
@@ -481,16 +499,19 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
 - `Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets`
 - `Sheaf.CategoryTheory.OpcyclesTorSurjection`
+- `Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral`
 - `Sheaf.CategoryTheory.PushoutShortExactSequence`
 - `Sheaf.CategoryTheory.QuotientJShriek`
 - `Sheaf.CategoryTheory.RightLocalizationHomColimit`
 - `Sheaf.CategoryTheory.SiteCechComplex`
 - `Sheaf.CategoryTheory.SiteCohomologyPullback`
+- `Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
 - `Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites`
 - `Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport`
 - `Sheaf.CategoryTheory.SiteFilteredColimitSections`
 - `Sheaf.CategoryTheory.SiteLerayDegenerate`
+- `Sheaf.CategoryTheory.SiteMorphismComposition`
 - `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
@@ -541,11 +562,18 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.ConstantSheafOpenMaps`
 - `Sheaf.Paper.CyclicExtensionCocycle`
 - `Sheaf.Paper.DerivationExtendsFiniteType`
+- `Sheaf.Paper.EtaleFiniteDataDescent`
 - `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial`
+- `Sheaf.Paper.EtaleHypercover`
+- `Sheaf.Paper.EtaleHypercoverProduct`
 - `Sheaf.Paper.EtaleStandardCoverCech`
+- `Sheaf.Paper.FiniteHypercoverDescent`
 - `Sheaf.Paper.FiniteSplitEtaleHypercover`
+- `Sheaf.Paper.FiniteSplitHypercoverRefinement`
 - `Sheaf.Paper.GaloisLisseRepresentations`
+- `Sheaf.Paper.HypercoverCohomology`
 - `Sheaf.Paper.HypercoverCohomologyColimit`
+- `Sheaf.Paper.HypercoverFreeResolution`
 - `Sheaf.Paper.ImagePresheafSheafificationIso`
 - `Sheaf.Paper.InverseImageExtensionByEmptyConstant`
 - `Sheaf.Paper.InverseImageFreeEtaleModule`
@@ -558,6 +586,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.SectionsOverQuasiCompactOpen`
 - `Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange`
 - `Sheaf.Paper.SheavesKilledByNZmodModules`
+- `Sheaf.Paper.SimplicialSetAddSimplices`
 - `Sheaf.Paper.SiteCoveringIsomorphicFamily`
 - `Sheaf.Paper.SiteCoveringMorphismsSameH0Map`
 - `Sheaf.Paper.SitePlusInjectiveSeparated`
@@ -683,7 +712,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.SurjectionKernelPairCoequalizer`
 - `WeilConjectures.AlgebraicGeometry.Cohomology.Projective`
 - `WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence`
-- `WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit`
 - `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension`
 - `WeilConjectures.SixFunctors.Finite.GlobalSections`
 
