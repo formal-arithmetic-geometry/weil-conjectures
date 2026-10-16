@@ -694,5 +694,41 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-8b5abf895 (reviewer sub-agent of L); spot-checked: Read the full item, nine proof steps, all 58 cited-node statements, report, route, and cited sources. Verified 0F09/0F1C hypotheses, constant-A coefficient comparison, boundedness, and canonical evaluation/counit compatibilities. No new nodes, duplicate conclusion, or cycle back to the item. Detailed checks are in review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cdf75a24e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, sources, canonical maps, clauses, edge cases, universes, records and docstrings. Independent scompile.py sandbox and library checks passed with exit 0 and no diagnostics. No corrections needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGenericExchangeAlgClosed",
+  "declaration": "AlgebraicGeometry.Etale.isIso_closedSupportExchange_geometricGeneric",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricGenericMap",
+   "AlgebraicGeometry.Etale.closedSupportExchange",
+   "AlgebraicGeometry.Etale.inverseImageHomExchange",
+   "AlgebraicGeometry.Etale.closedSupportShiftIso",
+   "AlgebraicGeometry.Etale.closedSupportProjectionIso",
+   "AlgebraicGeometry.Etale.closedSupportTensorComparison",
+   "AlgebraicGeometry.Etale.closedSupportExchange_counit",
+   "AlgebraicGeometry.Etale.inverseImageHomExchange_evaluation",
+   "AlgebraicGeometry.Etale.closedSupportExchange_commShift",
+   "AlgebraicGeometry.Etale.ClosedSupportExchangeTensorCompatible",
+   "AlgebraicGeometry.Etale.closedSupportExchange_tensor",
+   "AlgebraicGeometry.Etale.pastedClosedSupportExchange",
+   "AlgebraicGeometry.Etale.closedSupportExchange_openRestriction",
+   "AlgebraicGeometry.Etale.isIso_closedSupportExchange_geometricGeneric",
+   "AlgebraicGeometry.Etale.isIso_inverseImageHomExchange_geometricGeneric"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericExchangeAlgClosed.lean",
+  "statement": "theorem isIso_closedSupportExchange_geometricGeneric (F : Type u) [Field F] [IsAlgClosed F] (N : ℕ) (_hN : 1 ≤ N) (_hNF : IsUnit (N : F)) (A : Type (u + 1)) [CommRing A] [Finite A] (_hNA : (N : A) = 0) (B : Scheme.{u}) (b : B ⟶ Spec (.of F)) [Smooth b] [IsIntegral B] [LocallyOfFiniteType b] [QuasiCompact b] (_hdim : topologicalKrullDim B = 1) (U : B.Opens) (hU : IsAffineOpen U) (_hUnonempty : Nonempty U) (Q : Type u) [Field Q] [Algebra (B.presheaf.obj (op U)) Q] [IsFractionRing (B.presheaf.obj (op U)) Q] (L : Type u) [Field L] [Algebra Q L] [Algebra.IsAlgebraic Q L] [IsAlgClosed L] (X : Scheme.{u}) (f : X ⟶ B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] (M : DerivedCategoryModule A X) (_hM : DerivedCategory.isBoundedConstructible A X M) : IsIso ((closedSupportExchange A (IsPullback.of_hasPullback i (pullback.fst f (geometricGenericMap U hU Q L)))).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Two main theorem declarations render the closed-support and internal-Hom isomorphism clauses, with the common field/curve/geometric-generic hypotheses explicit in each. The other theorem declarations render the counit, evaluation, shift, invertible rank-one tensor and open-restriction compatibilities. All comparison arrows have real adjunction-mate constructions; the chosen closed right adjoint is the dependency adjoint determined by its universal property. The geometric fibre of the closed immersion is the iterated pullback Z ×_X (X ×_B Spec L), canonically the same B-base change. No statement correction or new independent notion."
  }
 }
