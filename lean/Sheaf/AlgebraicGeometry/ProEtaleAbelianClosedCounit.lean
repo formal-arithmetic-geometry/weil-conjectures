@@ -7,10 +7,13 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 
 /-!

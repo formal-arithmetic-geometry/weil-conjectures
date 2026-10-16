@@ -5,6 +5,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 

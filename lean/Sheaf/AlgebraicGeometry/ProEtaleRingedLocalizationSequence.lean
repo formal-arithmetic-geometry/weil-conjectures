@@ -7,11 +7,20 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.Algebra.Homology.ExactSequence
 
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.RingTheory.BoundedWContractibleExtension
 import Sheaf.RingTheory.WContractibleClosedLocalization
+import Sheaf.AlgebraicGeometry.AffineClosedSpecializationLocalization
 import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
 import all Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Sheaf.AlgebraicGeometry.ProEtaleModuleSpecializationUnit
 

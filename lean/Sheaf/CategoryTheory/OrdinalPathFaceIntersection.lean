@@ -6,6 +6,7 @@ module
 
 public import Sheaf.CategoryTheory.SimplicialOrdinalPath
 import Sheaf.CategoryTheory.SimplexMonoPullback
+import Mathlib.Tactic
 
 /-!
 # Intersections of faces in the ordered path simplex

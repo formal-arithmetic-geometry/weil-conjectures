@@ -5,7 +5,20 @@ Authors: SHEAF group NG
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
 import all Sheaf.AlgebraicGeometry.ProEtaleOperations
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal

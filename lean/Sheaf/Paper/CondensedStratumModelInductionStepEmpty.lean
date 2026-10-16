@@ -7,6 +7,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 

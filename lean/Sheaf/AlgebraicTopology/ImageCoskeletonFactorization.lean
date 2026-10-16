@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan
 import Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits
 import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.CategoryTheory.Subfunctor.Image
+import Mathlib.CategoryTheory.Functor.Currying
 /-!
 # Factoring a coskeletal comparison through its image coskeleton
 

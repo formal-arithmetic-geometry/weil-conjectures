@@ -7,8 +7,12 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.Subcanonical
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentationRing
 

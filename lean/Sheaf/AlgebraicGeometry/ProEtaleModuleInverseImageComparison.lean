@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
 

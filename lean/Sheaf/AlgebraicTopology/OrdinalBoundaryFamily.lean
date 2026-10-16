@@ -8,6 +8,7 @@ public import Sheaf.CategoryTheory.SimplicialOrdinalPath
 import Sheaf.CategoryTheory.OrdinalPathFaceIntersection
 public import Sheaf.AlgebraicTopology.SimplexFaceFamilyGluing
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
+import Mathlib.Tactic
 
 /-!
 # The finite boundary family for the ordered path construction

@@ -9,6 +9,8 @@ public import Sheaf.Paper.ContinuousIntegralCoefficients
 import Sheaf.Paper.IntegralFiniteFreeContractive
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
 /-! # Nakayama for integral constructible module objects
 

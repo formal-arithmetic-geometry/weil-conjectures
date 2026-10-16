@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleModelRingPresentation
 import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
 import Sheaf.CategoryTheory.SheafPullbackForgetComparison
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 
 @[expose] public section

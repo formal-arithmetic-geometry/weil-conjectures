@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!

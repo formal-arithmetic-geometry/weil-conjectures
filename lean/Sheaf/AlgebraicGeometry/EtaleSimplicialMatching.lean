@@ -8,6 +8,7 @@ public import Sheaf.Paper.EtaleHypercover
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
+import Mathlib.Tactic
 
 /-!
 # Canonical matching schemes for simplicial étale schemes

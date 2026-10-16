@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
+import Mathlib.Data.Finset.Sort
+import Mathlib.Tactic
 
 /-!
 # Nonempty intersections of simplex faces

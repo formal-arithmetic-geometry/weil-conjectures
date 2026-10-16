@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
+import Mathlib.CategoryTheory.Functor.OfSequence
+import Mathlib.CategoryTheory.Limits.Types.Filtered
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 
 /-! # Exactness of integral scalar localization -/
