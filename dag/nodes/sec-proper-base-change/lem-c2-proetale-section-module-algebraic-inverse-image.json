@@ -25,7 +25,7 @@
    "elementary": false
   },
   {
-   "text": "For each of the seven operation graph fields, form the two maps from L(T) to the target underlying set sheaf and transpose through the set-sheaf adjunction. Naturality and pullbackForgetIso_unit_hom identify their transposes with the source maps followed by the abelian adjunction unit and the inverse coefficient isomorphism. The unit preserves addition and zero because its components are additive; it preserves multiplication and one by the monoidal adjunction unit homomorphism property, evaluated using the tensor and unit formulas for pushforward. The lifted module adjunction unit and the linear source section-equivalence counit preserve scalar multiplication. The assumed source graph equation therefore makes the transposed maps equal; injectivity of the hom-equivalence proves equality of the original maps. Evaluate at every target section and apply ULift.down to obtain the seven fields. Choose exactly the composite section-module functor already constructed, with its identity isomorphism as the final comparison. The argument applies also to zero rings/modules and empty sites. The private lemmas pullback_add_graph and pullback_zero_graph implement the additive graph step without sorry, before the final coefficient and section-equivalence transports. The private pushforward_section_mul, pushforward_section_one and pushforward_section_smul lemmas also implement the pointwise pushforward operation formulas. The private inverseImageSectionRingUnit constructs the ring homomorphism induced on sections by the adjunction unit and the inverse coefficient map. The proved sectionRingPullbackIso_unit identifies this ring homomorphism with the transpose of the underlying ring comparison. The private sectionRingPullbackIso_transpose, sectionRingPullback_add_graph, sectionRingPullback_mul_graph and sectionRingPullback_nat_graph implement all ring graphs without sorry; zero and one are natural-constant cases. What remains in Lean is assembly of these fields and the module-operation transports, particularly the lifted module-unit scalar equation after coefficient restriction.",
+   "text": "For each of the seven operation graph fields, form the two maps from L(T) to the target underlying set sheaf and transpose through the set-sheaf adjunction. Naturality and pullbackForgetIso_unit_hom identify their transposes with the source maps followed by the abelian adjunction unit and the inverse coefficient isomorphism. The unit preserves addition and zero because its components are additive; it preserves multiplication and one by the monoidal adjunction unit homomorphism property, evaluated using the tensor and unit formulas for pushforward. The existing sectionRingPullback_add_graph, sectionRingPullback_mul_graph and sectionRingPullback_nat_graph give all four ring fields. For modules, sectionModulePullbackIso_inv_factor and sectionModulePullbackIso_inv_apply express the comparison as the inverse source section-equivalence counit followed by the abelian pullback comparison and canonical universe lifts. The linear counit transports source addition and zero, so pullback_add_graph and pullback_zero_graph give moduleAdd and moduleZero. For the scalar field, sectionModuleCounit_smul supplies the counit scalar equation, and section_comap_smul identifies the section action after restriction of scalars. Apply sectionModuleFunctor to the unit of Adjunction.mapModAdjunction: the resulting linear maps preserve scalar multiplication. Rewrite the target action with section_comap_smul and pushforward_section_smul, then use rho followed by its inverse to obtain inverseImageSectionModuleUnit_smul for the coefficient identification. The lemma sectionModulePullbackIso_transpose identifies the module comparison's transpose with this unit composed with the linear section-equivalence counit. Use moduleSMulSections to form the target scalar graph as a morphism. Transposition, the source graph equation, counit linearity and inverseImageSectionModuleUnit_smul prove equality of its two maps. Evaluate at every target section and apply ULift.down. Assemble the seven proved fields and choose the composite section-module functor itself with the identity comparison isomorphism. All constructions and identities are valid for zero rings/modules and empty sites.",
    "uses": [
     "def-weil-pbc-algebraic-inverse-image"
    ],
@@ -40,7 +40,7 @@
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 03D2, algebraic inverse image; section-intrinsic; compare Sites Tag 00YV",
-  "note": "C2: remaining geometric algebraic-operations identification, independent of flatness."
+  "note": "C3: completed all seven operation graph fields and assembled the existing concrete inverse image; no new proof obligations or statement changes."
  },
  "mathlib_searches": [
   {
@@ -114,10 +114,10 @@
   "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261016T173552-L-1931552",
-  "kind": "interface",
+  "landing": "20261016T221559-L-1611841",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

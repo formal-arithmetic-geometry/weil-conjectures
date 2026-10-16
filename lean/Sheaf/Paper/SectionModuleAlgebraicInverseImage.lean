@@ -140,6 +140,67 @@ private noncomputable def sectionModulePullbackIso {X Y : Scheme.{u}} (f : X ⟶
       (Functor.isoWhiskerLeft (SheafOfModules.toSheaf _) euY.symm) (setPullback f)
 
 
+private theorem sectionModulePullbackIso_inv_factor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
+    (ρ : S ⟶ (f)^*[Ab.{u + 1}].obj R) [IsMonHom ρ] [IsIso ρ] :
+    let eY := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology Y) R
+    let eX := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology X) S
+    let I := eY.inverse ⋙ Mod.mapModComap ρ ⋙ eX.functor
+    let QY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology Y) R))
+    let QX := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology X) S))
+    let UY := sheafCompose (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+    let euY := sheafUliftIso (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+    let euX := sheafUliftIso (Scheme.ProEt.topology X) (CategoryTheory.forget Ab.{u + 1})
+    ∀ M, (sectionModulePullbackIso f R S ρ).inv.app M =
+      (setPullback f).map ((euY.app (QY.obj M)).hom ≫
+        (QY ⋙ UY).map (eY.counitIso.inv.app M)) ≫
+      (pullbackForgetIso f).inv.app (eY.inverse.obj M).X ≫
+      (euX.app (QX.obj (I.obj M))).inv := by
+  intro eY eX I QY QX UY euY euX M
+  rw [Functor.map_comp]
+  dsimp only [sectionModulePullbackIso]
+  simp only [Category.assoc]
+  rfl
+
+private theorem sectionModulePullbackIso_inv_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
+    (ρ : S ⟶ (f)^*[Ab.{u + 1}].obj R) [IsMonHom ρ] [IsIso ρ] :
+    let eY := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology Y) R
+    let QY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology Y) R))
+    let UY := sheafCompose (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+    let euY := sheafUliftIso (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+    ∀ (M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Y) R)))
+      (T : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1)))
+      (q : T ⟶ (QY ⋙ sheafCompose (Scheme.ProEt.topology Y)
+        (CategoryTheory.forget Ab.{u + 1} ⋙ uliftFunctor.{u + 1, u + 1})).obj M)
+      (V : X.ProEtᵒᵖ) (x : ((setPullback f).obj T).obj.obj V),
+    (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app V
+      (((setPullback f).map q).hom.app V x)).down =
+      (((setPullback f).map (q ≫ (euY.app (QY.obj M)).hom ≫
+          (QY ⋙ UY).map (eY.counitIso.inv.app M)) ≫
+        (pullbackForgetIso f).inv.app (eY.inverse.obj M).X).hom.app V x) := by
+  intro eY QY UY euY M T q V x
+  rw [sectionModulePullbackIso_inv_factor]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
 /- Compatibility with the two adjunction units. -/
 private theorem setPullback_unit_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (G : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1))) :
@@ -428,6 +489,34 @@ private theorem pushforward_section_smul {X Y : Scheme.{u}} (f : X ⟶ Y)
   have ht' := congrArg (fun x : (S ⊗ M.X).obj.obj (U.op.obj W) ↦
     (Mod.act M.X).hom.app (U.op.obj W) x) ht
   exact ht'
+private theorem section_comap_smul {X : Scheme.{u}}
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (W : X.ProEtᵒᵖ) (a : R.obj.obj W) (b : M.X.obj.obj W) :
+    let RR := (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology X) R).obj W
+    let RS := (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology X) S).obj W
+    let MR := ((InternalAbelianSheafModule.sectionModuleFunctor
+      (Scheme.ProEt.topology X) R).obj ((Mod.comap φ).obj M)).val.obj W
+    let MS := ((InternalAbelianSheafModule.sectionModuleFunctor
+      (Scheme.ProEt.topology X) S).obj M).val.obj W
+    @HSMul.hSMul RR MR MR inferInstance a b =
+      @HSMul.hSMul RS MS MS inferInstance (φ.hom.app W a) b := by
+  let H := sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1}
+  have he : Functor.LaxMonoidal.μ H R M.X ≫
+      H.map (Mod.act ((Mod.comap φ).obj M).X) =
+      H.map φ ▷ H.obj M.X ≫ Functor.LaxMonoidal.μ H S M.X ≫ H.map (Mod.act M.X) := by
+    change _ ≫ H.map (φ ▷ M.X ≫ Mod.act M.X) = _
+    rw [Functor.map_comp, Functor.LaxMonoidal.μ_natural_left_assoc]
+  have ht := ConcreteCategory.congr_hom (NatTrans.congr_app he W) (a ⊗ₜ[ℤ] b)
+  change (Mod.act ((Mod.comap φ).obj M).X).hom.app W
+      ((Functor.LaxMonoidal.μ H R M.X).app W (a ⊗ₜ[ℤ] b)) =
+    (Mod.act M.X).hom.app W ((Functor.LaxMonoidal.μ H S M.X).app W
+      ((φ.hom.app W ▷ M.X.obj.obj W) (a ⊗ₜ[ℤ] b))) at ht
+  rw [AddCommGrpCat.MonoidalCategory.whiskerRight_tmul] at ht
+  exact ht
+
 private noncomputable def sectionRingMap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -469,6 +558,73 @@ by
   exact (pushforwardSectionRingHom f S W).comp
     (sectionRingMap ((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app R ≫
       ((f)_*[Ab.{u + 1}]).map (asIso ρ).inv) W)
+
+private theorem sectionModuleCounit_smul {Y : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    let eY := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology Y) R
+    ∀ (M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Y) R)))
+      (W : Y.ProEtᵒᵖ)
+      (a : (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology Y) R).obj W)
+      (b : M.val.obj W),
+    let RR := (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology Y) R).obj W
+    let NM := ((InternalAbelianSheafModule.sectionModuleFunctor
+      (Scheme.ProEt.topology Y) R).obj (eY.inverse.obj M)).val.obj W
+    ((eY.counitIso.inv.app M).val.app W).hom (a • b) =
+      @HSMul.hSMul RR NM NM inferInstance a
+        (((eY.counitIso.inv.app M).val.app W).hom b) := by
+  intro eY M W a b
+  exact ((eY.counitIso.inv.app M).val.app W).hom.map_smul a b
+
+private theorem inverseImageSectionModuleUnit_smul {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
+    (ρ : S ⟶ (f)^*[Ab.{u + 1}].obj R) [IsMonHom ρ] [IsIso ρ]
+    (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    (W : Y.ProEtᵒᵖ) (a : R.obj.obj W) (b : N.X.obj.obj W) :
+    let U := MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
+    let RY := (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology Y) R).obj W
+    let SX := (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology X) S).obj
+      (U.op.obj W)
+    let MY := ((InternalAbelianSheafModule.sectionModuleFunctor
+      (Scheme.ProEt.topology Y) R).obj N).val.obj W
+    let MX := ((InternalAbelianSheafModule.sectionModuleFunctor
+      (Scheme.ProEt.topology X) S).obj ((Mod.mapModComap ρ).obj N)).val.obj (U.op.obj W)
+    ((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app N.X).hom.app W
+      (@HSMul.hSMul RY MY MY inferInstance a b) =
+      @HSMul.hSMul SX MX MX inferInstance (inverseImageSectionRingUnit f R S ρ W a)
+        (((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app N.X).hom.app W b) := by
+  let U := MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
+  let adj := upperStarLowerStarAdjunction Ab.{u + 1} f
+  let P := (((f)^*[Ab.{u + 1}]).mapMod R).obj N
+  let Z := (((f)_*[Ab.{u + 1}]).mapMod ((f)^*[Ab.{u + 1}].obj R)).obj P
+  let j := (adj.mapModAdjunction R).unit.app N
+  let H := InternalAbelianSheafModule.sectionModuleFunctor (Scheme.ProEt.topology Y) R
+  have hj := (((H.map j).val.app W).hom).map_smul
+    (show (InternalAbelianSheafModule.sectionRings (Scheme.ProEt.topology Y) R).obj W from a)
+    (show (H.obj N).val.obj W from b)
+  have hc := section_comap_smul R ((f)_*[Ab.{u + 1}].obj
+      ((f)^*[Ab.{u + 1}].obj R)) (adj.unitAlgHom R) Z W a
+      (j.hom.hom.app W b)
+  have hp := pushforward_section_smul f ((f)^*[Ab.{u + 1}].obj R) P W
+    ((adj.unit.app R).hom.app W a) (j.hom.hom.app W b)
+  have hd := section_comap_smul S ((f)^*[Ab.{u + 1}].obj R) ρ P (U.op.obj W)
+    (inverseImageSectionRingUnit f R S ρ W a) (j.hom.hom.app W b)
+  have hr : ρ.hom.app (U.op.obj W) (inverseImageSectionRingUnit f R S ρ W a) =
+      (adj.unit.app R).hom.app W a := by
+    have he := ConcreteCategory.congr_hom (NatTrans.congr_app
+      (congrArg (fun z ↦ z.hom) (asIso ρ).inv_hom_id) (U.op.obj W))
+        ((adj.unit.app R).hom.app W a)
+    exact he
+  rw [hr] at hd
+  have hu : j.hom = adj.unit.app N.X := adj.mapModAdjunction_unit_app_hom R N
+  have he := hj.trans (hc.trans (hp.trans hd.symm))
+  change j.hom.hom.app W _ = _ at he
+  rw [hu] at he
+  exact he
 
 private theorem sectionRingPullbackIso_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
@@ -515,6 +671,78 @@ private noncomputable def ringMulSections {X : Scheme.{u}}
          (congrArg ULift.down (ConcreteCategory.congr_hom (a.hom.naturality q) x))
          (congrArg ULift.down (ConcreteCategory.congr_hom (b.hom.naturality q) x))).trans
          (map_mul (R.obj.map q).hom _ _).symm }⟩
+private noncomputable def moduleSMulSections {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
+    (M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))
+    (T : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))
+    (a : T ⟶ (sheafCompose _ (CategoryTheory.forget CommRingCat.{u + 1} ⋙
+      uliftFunctor.{u + 1, u + 1})).obj R)
+    (b : T ⟶ (sheafCompose _ (CategoryTheory.forget Ab.{u + 1} ⋙
+      uliftFunctor.{u + 1, u + 1})).obj ((SheafOfModules.toSheaf _).obj M)) :
+    T ⟶ (sheafCompose _ (CategoryTheory.forget Ab.{u + 1} ⋙
+      uliftFunctor.{u + 1, u + 1})).obj ((SheafOfModules.toSheaf _).obj M) :=
+  ⟨{ app := fun W ↦ ↾(fun x ↦ ULift.up
+       ((@id (R.obj.obj W) (a.hom.app W x).down) •
+         (@id (M.val.obj W) (b.hom.app W x).down)))
+     naturality := fun V W q ↦ by
+       ext x
+       apply ULift.ext
+       change _ = M.val.map q (_ • _)
+       exact (congrArg₂ (fun (a : R.obj.obj W) (b : M.val.obj W) ↦ a • b)
+         (congrArg ULift.down (ConcreteCategory.congr_hom (a.hom.naturality q) x))
+         (congrArg ULift.down (ConcreteCategory.congr_hom (b.hom.naturality q) x))).trans
+         (M.val.map_smul q _ _).symm }⟩
+
+private theorem sectionModulePullbackIso_transpose {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
+    (ρ : S ⟶ (f)^*[Ab.{u + 1}].obj R) [IsMonHom ρ] [IsIso ρ] :
+    let eY := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology Y) R
+    let QY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology Y) R))
+    ∀ (M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Y) R)))
+      (T : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1)))
+      (q : T ⟶ (QY ⋙ sheafCompose (Scheme.ProEt.topology Y)
+        (CategoryTheory.forget Ab.{u + 1} ⋙ uliftFunctor.{u + 1, u + 1})).obj M)
+      (W : Y.ProEtᵒᵖ) (x : T.obj.obj W),
+    let U := MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
+    let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous U
+      (Type (u + 1)) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+    (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app (U.op.obj W)
+      (((setPullback f).map q).hom.app (U.op.obj W)
+        ((adj.unit.app T).hom.app W x))).down =
+      ((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (eY.inverse.obj M).X).hom.app W
+        (((eY.counitIso.inv.app M).val.app W).hom (q.hom.app W x).down) := by
+  intro eY QY M T q W x U adj
+  let UY := sheafCompose (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+  let euY := sheafUliftIso (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+  let k := (euY.app (QY.obj M)).hom ≫ (QY ⋙ UY).map (eY.counitIso.inv.app M)
+  let N := eY.inverse.obj M
+  have ht :
+      (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app (U.op.obj W)
+        (((setPullback f).map q).hom.app (U.op.obj W)
+          ((adj.unit.app T).hom.app W x))).down =
+      (((setPullback f).map (q ≫ k) ≫
+        (pullbackForgetIso f).inv.app N.X).hom.app (U.op.obj W)
+          ((adj.unit.app T).hom.app W x)) := by
+    exact sectionModulePullbackIso_inv_apply f R S ρ M T q (U.op.obj W)
+      ((adj.unit.app T).hom.app W x)
+  have hn := ConcreteCategory.congr_hom
+    (NatTrans.congr_app (congrArg (sheafToPresheaf (Scheme.ProEt.topology Y)
+      (Type (u + 1))).map (adj.unit.naturality (q ≫ k))) W) x
+  have hu := ConcreteCategory.congr_hom
+    (NatTrans.congr_app (pullbackForgetIso_unit_hom f N.X) W) ((q ≫ k).hom.app W x)
+  have hn' := congrArg (fun z ↦ ((pullbackForgetIso f).inv.app N.X).hom.app
+    (U.op.obj W) z) hn
+  exact ht.trans (hn'.symm.trans hu)
+
 private theorem sectionRingPullbackIso_transpose {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
@@ -692,6 +920,7 @@ private theorem sectionRingPullback_nat_graph {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (congrArg (inverseImageSectionRingUnit f R S ρ W) (h W x)).trans
     (map_natCast (inverseImageSectionRingUnit f R S ρ W) n)
 
+
 /-- The internal inverse image has the algebraic operations transported by the
 inverse image of set sheaves. Source: Stacks Project, Tags 00YV and 03D2.
 Proof: express both set and abelian inverse image as sheafification of the
@@ -740,5 +969,143 @@ theorem exists_sectionModuleAlgebraicInverseImage {X Y : Scheme.{u}} (f : X ⟶ 
             (Scheme.ProEt.topology Y) R).inverse ⋙ Mod.mapModComap ρ ⋙
           (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
             (Scheme.ProEt.topology X) S).functor ≅ I.modules) := by
-  sorry
+  dsimp only
+  let eY := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology Y) R
+  let eX := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) S
+  let I : SheafOfModules.AlgebraicInverseImageOfUniverses.{u + 1, u, u + 1, u,
+      u + 1, u + 1} (setPullback f)
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology Y) R)
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology X) S) := by
+    refine
+      { ringUnderlying := sectionRingPullbackIso f R S ρ
+        ringAdd := ?_
+        ringMul := ?_
+        ringZero := ?_
+        ringOne := ?_
+        modules := eY.inverse ⋙ Mod.mapModComap ρ ⋙ eX.functor
+        moduleUnderlying := sectionModulePullbackIso f R S ρ
+        moduleAdd := ?_
+        moduleZero := ?_
+        moduleSMul := ?_ }
+    · intro T a b t h V x
+      exact congrArg ULift.down (congrArg (fun q ↦ q.hom.app V x)
+        (sectionRingPullback_add_graph f R S ρ T a b t h))
+    · intro T a b t h V x
+      exact congrArg ULift.down (congrArg (fun q ↦ q.hom.app V x)
+        (sectionRingPullback_mul_graph f R S ρ T a b t h))
+    · intro T a h V x
+      exact congrArg ULift.down (congrArg (fun q ↦ q.hom.app V x)
+        (sectionRingPullback_nat_graph f R S ρ T 0 a h))
+    · intro T a h V x
+      have he := sectionRingPullback_nat_graph f R S ρ T 1 a (fun W y ↦ by
+        rw [Nat.cast_one]
+        exact h W y)
+      simpa [ringNatSections] using
+        congrArg ULift.down (congrArg (fun q ↦ q.hom.app V x) he)
+    · intro M T a b t h V x
+      let QY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Y) R))
+      let UY := sheafCompose (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+      let euY := sheafUliftIso (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+      let k := (euY.app (QY.obj M)).hom ≫ (QY ⋙ UY).map (eY.counitIso.inv.app M)
+      let N := eY.inverse.obj M
+      have ht (q : T ⟶ (QY ⋙ sheafCompose (Scheme.ProEt.topology Y)
+          (CategoryTheory.forget Ab.{u + 1} ⋙ uliftFunctor.{u + 1, u + 1})).obj M) :
+          (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app V
+            (((setPullback f).map q).hom.app V x)).down =
+          (((setPullback f).map (q ≫ k) ≫
+            (pullbackForgetIso f).inv.app N.X).hom.app V x) := by
+        exact sectionModulePullbackIso_inv_apply f R S ρ M T _ V x
+      have h' : ∀ W y, (t ≫ k).hom.app W y =
+          (@id (N.X.obj.obj W) ((a ≫ k).hom.app W y)) +
+          (@id (N.X.obj.obj W) ((b ≫ k).hom.app W y)) := by
+        intro W y
+        change ((eY.counitIso.inv.app M).val.app W).hom (t.hom.app W y).down =
+          ((eY.counitIso.inv.app M).val.app W).hom (a.hom.app W y).down +
+          ((eY.counitIso.inv.app M).val.app W).hom (b.hom.app W y).down
+        have hh := h W y
+        dsimp only [id] at hh
+        exact (congrArg ((eY.counitIso.inv.app M).val.app W).hom hh).trans
+          (map_add ((eY.counitIso.inv.app M).val.app W).hom _ _)
+      have hp := pullback_add_graph f N.X T (a ≫ k) (b ≫ k) (t ≫ k) h'
+      rw [ht t, ht a, ht b]
+      exact congrArg (fun q ↦ q.hom.app V x) hp
+    · intro M T a h V x
+      let QY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology Y) R))
+      let UY := sheafCompose (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+      let euY := sheafUliftIso (Scheme.ProEt.topology Y) (CategoryTheory.forget Ab.{u + 1})
+      let k := (euY.app (QY.obj M)).hom ≫ (QY ⋙ UY).map (eY.counitIso.inv.app M)
+      let N := eY.inverse.obj M
+      have ht :
+          (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app V
+            (((setPullback f).map a).hom.app V x)).down =
+          (((setPullback f).map (a ≫ k) ≫
+            (pullbackForgetIso f).inv.app N.X).hom.app V x) := by
+        exact sectionModulePullbackIso_inv_apply f R S ρ M T _ V x
+      have h' : ∀ W y, (a ≫ k).hom.app W y = (0 : N.X.obj.obj W) := by
+        intro W y
+        change ((eY.counitIso.inv.app M).val.app W).hom (a.hom.app W y).down = 0
+        have hh := h W y
+        dsimp only [id] at hh
+        exact (congrArg ((eY.counitIso.inv.app M).val.app W).hom hh).trans
+          (map_zero ((eY.counitIso.inv.app M).val.app W).hom)
+      exact ht.trans (congrArg (fun q ↦ q.hom.app V x)
+        (pullback_zero_graph f N.X T (a ≫ k) h'))
+    · intro M T a b t h V x
+      let U := MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
+      let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous U
+        (Type (u + 1)) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+      let MX := (eY.inverse ⋙ Mod.mapModComap ρ ⋙ eX.functor).obj M
+      let RX := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology X) S
+      let sa := (setPullback f).map a ≫ (sectionRingPullbackIso f R S ρ).hom
+      let sb := (setPullback f).map b ≫ (sectionModulePullbackIso f R S ρ).inv.app M
+      let st := (setPullback f).map t ≫ (sectionModulePullbackIso f R S ρ).inv.app M
+      have hp : st = moduleSMulSections RX MX ((setPullback f).obj T) sa sb := by
+        apply (adj.homEquiv _ _).injective
+        apply ObjectProperty.hom_ext _
+        ext W y
+        apply ULift.ext
+        change (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app (U.op.obj W)
+          (((setPullback f).map t).hom.app (U.op.obj W)
+            ((adj.unit.app T).hom.app W y))).down = _
+        have ht := sectionModulePullbackIso_transpose f R S ρ M T t W y
+        change _ = (@id ((InternalAbelianSheafModule.sectionRings
+          (Scheme.ProEt.topology X) S).obj (U.op.obj W))
+          ((sectionRingPullbackIso f R S ρ).hom.hom.app (U.op.obj W)
+            (((setPullback f).map a).hom.app (U.op.obj W)
+              ((adj.unit.app T).hom.app W y))).down) •
+          (@id (MX.val.obj (U.op.obj W))
+          (((sectionModulePullbackIso f R S ρ).inv.app M).hom.app (U.op.obj W)
+            (((setPullback f).map b).hom.app (U.op.obj W)
+              ((adj.unit.app T).hom.app W y))).down)
+        have ha := sectionRingPullbackIso_transpose f R S ρ T a W y
+        have hb := sectionModulePullbackIso_transpose f R S ρ M T b W y
+        have hh := h W y
+        dsimp only [id] at hh
+        have hc := congrArg ((eY.counitIso.inv.app M).val.app W).hom hh
+        have hc' := sectionModuleCounit_smul R M W
+          (a.hom.app W y).down (b.hom.app W y).down
+        have he := (congrArg (fun z ↦
+          ((upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app (eY.inverse.obj M).X).hom.app W z)
+          (hc.trans hc')).trans
+          (inverseImageSectionModuleUnit_smul f R S ρ (eY.inverse.obj M) W
+            (a.hom.app W y).down
+            (((eY.counitIso.inv.app M).val.app W).hom (b.hom.app W y).down))
+        exact ht.trans (he.trans (congrArg₂
+          (fun (r : (InternalAbelianSheafModule.sectionRings
+            (Scheme.ProEt.topology X) S).obj (U.op.obj W))
+            (m : MX.val.obj (U.op.obj W)) ↦ r • m) ha.symm hb.symm))
+      exact congrArg ULift.down (congrArg (fun q ↦ q.hom.app V x) hp)
+  exact ⟨I, ⟨Iso.refl _⟩⟩
+
 end AlgebraicGeometry.ProEtale
