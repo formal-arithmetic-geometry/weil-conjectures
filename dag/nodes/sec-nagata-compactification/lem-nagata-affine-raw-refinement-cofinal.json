@@ -21,9 +21,84 @@
   "lemma-nagata-affine-gluing-coefficients-descend",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-nagata-affine-raw-refinement-system], the tuple C itself satisfies the defining conditions for I(C). For B,B' in I(C), choose finite ring-generating sets E_a for B_a and E'_a for B'_a, and put H_a=Z[E_a union E'_a] inside A_a. These are finitely generated subrings containing C_a, B_a and B'_a. For p:a to b, every element of H_b is an integral polynomial in E_b union E'_b. Its image under rho_p is the same polynomial in the images of these generators. Those images lie in (B_a)_{f_p} or (B'_a)_{f_p}, hence in (H_a)_{f_p}. Thus H is an object of I(C) above both B and B'. Here the localized inclusions send x/f_p^n to the identical fraction; they are injective: if such a fraction becomes zero in (A_a)_{f_p}, some power of f_p annihilates x in A_a, and the same equality holds in the subring. This also justifies all localizations viewed as subrings in the definition.",
+   "uses": [
+    "def-nagata-affine-raw-refinement-system",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), compatible coefficient refinement preorder; elementary subring and fraction verification for the raw variant"
+   }
+  },
+  {
+   "text": "Fix finite T_a and B in I(C). Choose finite ring-generating sets E_a of B_a, and let L_a=T_a union E_a. Form another selected finite affine gluing presentation of the same S, keeping all main charts, all original overlap pieces, and all their original maps. In the self-overlap U_a intersection U_a=U_a append U_a itself to the finite affine overlap cover. Give this added member the finite basic-open cover consisting of D(1) and D(t) for each t in L_a, in both orientations. The old cover members and their covers remain. Each D(t) is affine by [lem-weil-pbc-affine-open-section-vanishing-prime](b); D(1)=U_a, so these added opens cover the added member. All new maps are restrictions of the identity of U_a. This is a permitted presentation by [def-nagata-finite-affine-gluing-presentation], including its original identity and cocycle maps. Only finitely many opens were added, since both the main chart set and all L_a are finite. In particular every t in L_a is now a labelled basic-open element, even when its basic open is empty.",
+   "uses": [
+    "def-nagata-finite-affine-gluing-presentation",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-affine-gluing-coefficient-stage.md",
+    "place": "Order 334, initial finite lists of basic-open elements, enlarged by redundant self-overlap pieces; affineness is Stacks 01I3 (lemma-standard-open-affine)"
+   }
+  },
+  {
+   "text": "Apply [def-nagata-affine-gluing-coefficient-stage] to the enlarged selected presentation from step 2, retaining all its original and added marked basic-open elements in the initial seed. This definition asserts a nonempty directed set of finite affine subring models containing every finite seed, and defines a selected index lambda_coeff for this presentation whose tuple contains its initial seed. Let K_a be the MAIN-CHART component of that selected tuple at lambda_coeff, rather than the component of an unrelated model. Thus K_a is a finitely generated integer subring of A_a and contains every added label t in L_a, as well as every original label. Apply the CURRENT statement of [lemma-nagata-affine-gluing-coefficients-descend] at this very selected stage. For every retained original piece p:a to b it supplies the small map rho_{p,0}:K_b -> (K_a)_{f_p} and the explicit equation j_{a,f_p} composed with rho_{p,0} = rho_p composed with j_b, where j_b is inclusion and j_{a,f_p} is the localized inclusion checked in step 1. For each z in K_b this equation identifies rho_p(z) with the image of rho_{p,0}(z). Hence rho_p(K_b) is contained in (K_a)_{f_p} inside (A_a)_{f_p}, exactly the stability condition for every ORIGINAL piece. The descent statement applies to the selected tuple of this enlarged marked record; it supplies no additional hypothesis on the original arbitrary raw tuple B. Since E_a is contained in K_a, the whole subring B_a=Z[E_a] is contained in K_a. Hence C_a is contained in K_a, and K belongs to the ORIGINAL I(C) by [def-nagata-affine-raw-refinement-system]. Set B'=K. Then B<=B' and T_a is contained in B'_a for every a. The selected index here belongs to the enlarged presentation; it is not identified with the coefficient index of the original presentation. Only its tuple of actual subrings and restricted maps is used to form B' in the original preorder.",
+   "uses": [
+    "def-nagata-affine-gluing-coefficient-stage",
+    "lemma-nagata-affine-gluing-coefficients-descend",
+    "def-nagata-affine-raw-refinement-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-coefficients-descend.md",
+    "place": "Order 335, entire statement, applied to the presentation enlarged in step 2; supporting source Stacks 07RN (lemma-approximate), finite affine induction"
+   }
+  },
+  {
+   "text": "Fix a main chart a. The set I(C) is a subset of the finite product of the power sets of the A_b, and its thin category is therefore small. For any x in A_a apply step 3 with B=C, T_a={x}, and the other T_b empty. Thus the union of the subrings B_a is A_a. To check the colimit in [def-weil-pbc-category-colimit] directly, take any compatible family of unital ring maps mu_B:B_a -> R. Define u(x)=mu_B(x) at any B with x in B_a. If B and B' both contain x, step 1 gives H above both and compatibility gives mu_B(x)=mu_H(x)=mu_B'(x), so u is well-defined. For x,y choose one H containing representatives of both, again using step 1. The identities for u(x+y), u(xy), u(-x), u(0), and u(1) follow from the corresponding identities for mu_H. Thus u is a unital ring map. It restricts to every mu_B and is unique because every x occurs at some B. This is exactly the required universal property of the inclusion cocone.",
+   "uses": [
+    "def-nagata-affine-raw-refinement-system",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), conclusion that the directed coefficient-ring colimit is the original ring; universal property checked explicitly"
+   }
+  },
+  {
+   "text": "All comparisons remain the inclusions of [def-nagata-affine-raw-refinement-system]. For a fixed original piece p:a to b and f=f_p, the localized family has union (A_a)_f: given x/f^n, step 3 provides a B containing x, while f belongs to every B_a. Equality of x/f^n and y/f^m in (A_a)_f means f^k(x f^m-y f^n)=0 in A_a for some k; after choosing one B containing x and y, the same equality holds in B_a. Thus the displayed fraction equality already holds in (B_a)_f by [def-weil-ring-localization-away]. For a compatible cocone nu_B:(B_a)_f -> R, define v(x/f^n)=nu_B(x/f^n) at any B containing x. If y/f^m is another representative at B' and the two fractions are equal in (A_a)_f, choose H above B and B' by step 1. The annihilating-power equality just proved holds in H_a, so nu_H(x/f^n)=nu_H(y/f^m); cocone compatibility identifies these with the chosen values. Thus v is independent of both the fraction representation and the stage. To verify addition and multiplication choose one H containing x and y: their fraction formulas have numerators x f^m+y f^n and xy and denominators f^(n+m), all in (H_a)_f, so applying nu_H gives the addition and multiplication identities for v. The fractions -x/f^n, 0/1 and 1/1 give preservation of negatives, zero and one. Hence v is a unital ring map, restricts to each nu_B, and is unique because every fraction is represented at a stage. This verifies the localized colimit universal property in [def-weil-pbc-category-colimit]. For z in A_b choose B containing z. The map on that representative is rho_{p,B}(z), whose image is rho_p(z) by its defining restriction. If B<=B', both routes in the piece-map comparison send z to exactly rho_p(z), and the localized transition sends x/f^n to x/f^n. Therefore the induced limiting map is the ORIGINAL rho_p on every z, with all comparisons the prescribed actual maps. This uses no open-preservation, inverse or cocycle equation at a finite tuple.",
+   "uses": [
+    "def-nagata-affine-raw-refinement-system",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), compatibility of the constructed ring maps; fraction computation for the raw-subring formulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-raw-refinement-system",
+  "def-weil-ring-localization-away",
+  "def-nagata-finite-affine-gluing-presentation",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-nagata-affine-gluing-coefficient-stage",
+  "lemma-nagata-affine-gluing-coefficients-descend",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-affine-gluing-valid-stage.md",
+  "place": "Order 336, availability of coefficient refinements; explicit redundancy argument using orders 334-335, with Stacks 07RN as background rather than a verbatim source"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,15 +155,144 @@
    "results": "Twenty hits in Mathlib/AlgebraicGeometry: ProjectiveSpectrum, StructureSheaf, ValuativeCriterion, AffineTransitionLimit, EllipticCurve, Normalization. The AffineTransitionLimit.lean:396 hit restricts a supplied cofiltered diagram; no compatible coefficient refinement construction or extension assertion.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal.*subring|compatible.*subring|raw.*refinement",
+   "results": "No hits. Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type subrings on a finite affine cover stable under localized overlap restriction maps form a directed union recovering the chart rings",
+   "results": "Hits: AlgebraicGeometry.Scheme.directedAffineCover, AlgebraicGeometry.Scheme.AffineCover.X, AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.Scheme.affineBasisCoverRing, RingHom.finiteType_ofLocalizationSpan, AlgebraicGeometry.Scheme.affineBasisCoverOfAffine, AlgebraicGeometry.LocallyOfFiniteType.mk Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine atlas of a quasi compact quasi separated scheme has a directed cofinal system of finitely generated compatible subrings under localized overlap maps",
+   "results": "Hits: AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover, AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover, AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀, AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover, AlgebraicGeometry.Scheme.directedAffineCover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.directedAffineCover_I₀, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.NoetherianApproximation",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.Scheme.NoetherianApproximation' Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|[Ss]ubring|[Ss]ubalgebra",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enlarge finite sets of elements on each chart by adding them to a finite affine gluing presentation and then descending the overlap maps to finitely generated subrings",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.Cover.gluedCover_J, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.GlueData.openCover Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subring.closure_le",
+   "results": "Hits: Subring.closure_le Read returned cover/gluing candidates and Subring.closure_le: none supplies compatible cofinal coefficient tuples.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme admits finite type coefficient subrings containing arbitrary finite sets of local sections and respecting finitely many localization homomorphisms",
+   "results": "Eight hits concerning LocallyOfFiniteType and IsFinite, including LocallyOfFiniteType.finiteType_appLE and finiteType_of_affine_subset. Read Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:39-58: these require an already locally finite type morphism and assert its section maps are finite type. They do not construct subrings compatible with a fixed affine atlas.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subring, IsDirected",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteType.*(Subring|Subalgebra)|((Subring|Subalgebra).*(directed|iSup|colimit))",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subring.*(model|approximation)|((compatible|directed).*(coefficient|subring))",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated scheme has finitely generated integer subring models for any finite affine open diagram containing prescribed finite subsets",
+   "results": "Eight hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.IsFinite.finite_app. Read Morphisms/QuasiCompact.lean:78-95: these give finite covers of one scheme. Other signatures assume a finite morphism or test Noetherianity on a supplied cover; none constructs compatible finite subrings above prescribed seeds.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subring, Directed, iSup",
+   "results": "Three hits: Subring.coe_iSup_of_directed, Subring.mem_iSup_of_directed, Subring.isMulCommutative_iSup. Read Mathlib/Algebra/Ring/Subring/Basic.lean:762-787. These identify a directed supremum with a union or give commutativity of that union; they do not construct the compatible finite subring family or prove it exhausts a chart ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact scheme with finitely many affine charts admits finitely generated subrings containing prescribed elements and closed under overlap localization restriction homomorphisms",
+   "results": "8 hit(s): AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover; AlgebraicGeometry.Scheme.affineBasisCoverRing; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered; AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens; AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen. Read the returned types and Mathlib/AlgebraicGeometry/Cover/Open.lean:285-286 and Noetherian.lean:284-307. These construct covers or characterize Noetherian schemes; none constructs compatible finitely generated subrings above prescribed finite subsets.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subring.*(overlap|restriction)|((atlas|gluing).*(subring|subalgebra))",
+   "results": "1 hit(s): Mathlib/RingTheory/Polynomial/Basic.lean. Read Mathlib/RingTheory/Polynomial/Basic.lean:331-335. The sole hit is Polynomial.eval₂_restriction, an identity for polynomial evaluation through the coefficient subring, not a compatible gluing refinement theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subring, RingHom, IsLocalization",
+   "results": "1 hit(s): IsLocalization.scaleRoots_commonDenom_mem_lifts. Read Mathlib/RingTheory/Localization/Integral.lean:233-236. The declaration rescales a polynomial into the lifts of a localization map, not a finite affine subring refinement system.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "def-nagata-affine-gluing-valid-stage",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-nagata-affine-raw-refinement-cofinal",
+  "worker": "stage1",
+  "summary": "No statement change and no new node. Proved nonemptiness and directedness by generated unions; encoded prescribed generators and finite chart subsets as labels on redundant basic opens of the self-overlaps and invoked the existing coefficient-descent assertion for that enlarged presentation. Checked the colimit by its universal property and the limiting piece maps elementwise, with explicit localization equality witnesses. No absolute-approximation or eventual-gluing node is used. Repaired the returned landing against the current descent lemma: step 3 now uses its explicit localized-inclusion comparison equation at the enlarged presentation's selected stage, and its citation was refreshed; all other current dependency statements were revalidated.",
+  "blueprint": "Order 336 first and final sentences: supplies availability and cofinality of the raw refinements used for witness stages; does not select lambda_glue or prove finite-stage gluing. The finite chart/coefficient route is unit step 1.",
+  "tool_uses": [],
+  "new_nodes": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-353fc3fba",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-353fc3fba (reviewer sub-agent of L); spot-checked: Read the full item, report, seven cited statements, blueprint route, and cited Stacks sources. All five steps check, including selected-stage descent, localized inclusions, and colimit comparisons. Edge cases and dependency acyclicity checked; no new nodes or repairs. Findings recorded in review.md."
+ }
 }
