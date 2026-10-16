@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Locally constant module sheaves on the small pro-etale site
@@ -65,7 +63,19 @@ theorem proEtaleConstantRingUnit_locallyBijective (Y : Scheme.{t}) (A : Type t)
       (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
         ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
         (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})) := by
-  sorry
+  constructor
+  · apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
+    change Presheaf.IsLocallyInjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
+        (CategoryTheory.forget CommRingCat.{t + 1}))
+    infer_instance
+  · apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
+    change Presheaf.IsLocallySurjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
+        (CategoryTheory.forget CommRingCat.{t + 1}))
+    infer_instance
 
 /-- The constant module sheaf, sheafifying the constant module presheaf together
 with the constant coefficient ring. Scalar multiplication is the sheafified original
@@ -103,7 +113,12 @@ theorem proEtaleConstantRingUnit_over_locallyBijective (Y : Scheme.{t}) (A : Typ
         (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
           ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
           (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}))) := by
-  sorry
+  have := (proEtaleConstantRingUnit_locallyBijective Y A).1
+  have := (proEtaleConstantRingUnit_locallyBijective Y A).2
+  exact ⟨Presheaf.isLocallyInjective_whisker ((ProEt.topology Y).over U)
+    (ProEt.topology Y) (Over.forget U) _,
+    Presheaf.isLocallySurjective_whisker ((ProEt.topology Y).over U)
+      (ProEt.topology Y) (Over.forget U) _⟩
 
 /-- The constant module sheaf on the localized site, formed by sheafification over
 the restricted coefficient ring. Source: Bhatt--Scholze 7.3.1(1), module version
