@@ -340,5 +340,29 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-f35c76acc (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and chapter/unit route. Verified ambient adjunction composition, coefficient categories, smooth-stratum Hom calculation, Tor bounds, and reverse extension induction. Checked edge cases, duplicates, cycles, and archived master target morphisms. No new nodes or repairs; accepted tool uses are documented in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilVerdierPreservationStrata",
+  "declaration": "WeilConjectures.verdier_preservation_strata",
+  "declarations": [
+   "WeilConjectures.finiteStageDualizingComplex",
+   "WeilConjectures.verdier_preservation_strata",
+   "WeilConjectures.verdier_preserves_boundedConstructible_finiteTor"
+  ],
+  "file": "lean/Sheaf/Paper/WeilVerdierPreservationStrata.lean",
+  "statement": "theorem verdier_preservation_strata (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ) (K : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X) (_hK : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X K) (_hTor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X a b K) : @Etale.DerivedCategory.isBoundedConstructible.{u} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X (((Etale.derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X).obj (op K)).obj (finiteStageDualizingComplex D l _hl E n hn X)) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X (-b - 2 * (d : ℤ)) (-a) (((Etale.derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X).obj (op K)).obj (finiteStageDualizingComplex D l _hl E n hn X))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The quantitative and qualitative clauses are separate declarations of this node. The helper specializes the existing ambient dualizingComplex using the recorded exceptional-adjoint theorem and Nagata compactification; it introduces no replacement construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1a65ad380",
+  "group": "NR",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, helper construction, and no-pro-etale requirement checked; scompile.py passed both overlay and library compilation."
  }
 }
