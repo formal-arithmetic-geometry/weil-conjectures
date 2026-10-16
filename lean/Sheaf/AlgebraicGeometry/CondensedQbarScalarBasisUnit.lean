@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisPushforward
+import Sheaf.Paper.ProfinitePointPullback
 
 /-! The scalar-basis unit decomposition used for condensed algebraic closures.
 
