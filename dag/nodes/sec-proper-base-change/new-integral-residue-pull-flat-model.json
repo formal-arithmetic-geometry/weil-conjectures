@@ -12,28 +12,32 @@
  ],
  "proof": [
   {
-   "text": "Pullback preserves flat modules: the local relation criterion for flatness is preserved by inverse image, and extension along the coefficient pullback isomorphism preserves flatness. Pullback preserves colimits. Hence the given colimit presentation maps to a colimit of bounded-above flat complexes, which is K-flat. The reduction counit on it is invertible.",
+   "text": "Apply integralResidue_pullback_preservesFlat, then kFlat_mapHomologicalComplex_obj_of_colimitsOfShape to hcolim. The scalar-extension counit on the resulting K-flat complex is invertible by isIso_leftDerivedFunctorCounit_app_of_kFlat.",
    "uses": [
-    "new-integral-residue-pull-square-data"
+    "new-integral-residue-pull-square-data",
+    "new-integral-residue-pullback-preserves-flat"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the desired equality under derived scalar extension/restriction. The derived unit and counit factorization identities reduce it to the ordinary scalar pull square on P. Check that ordinary pullIso transposes to comapUpperStarIso by the balanced-tensor presentation epimorphism and the action identities. Apply the equation degreewise, pass to homotopy categories, and localize. This gives exactly the equality in the declaration.",
+   "text": "Transpose the comparison under the derived extension/restriction adjunction. Its unit factors through the ordinary homotopy-category scalar unit by derivedη_fac_app and rightDerivedFunctorIsoMapDerivedCategory_hom_fac. The exact restriction/pullback square factors through homotopy localization by mapDerivedCategoryCompIso_fach and mapDerivedCategoryNatIso_fach, transported along leftDerivedFunctorIsoMapDerivedCategory. Naturality and the ordinary unit equation then give equality after the invertible restriction localization factor, hence equality of the original maps by the adjunction hom equivalence. The private generic lemmas mixedDerivedUnitFac, exactLeftSquareFac, naturalOrdinaryFac and mateModel implement these calculations.",
    "uses": [
-    "new-integral-residue-pull-square-data"
+    "new-integral-residue-pull-square-data",
+    "new-integral-residue-pull-ordinary-unit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-integral-residue-pull-square-data"
+  "new-integral-residue-pull-square-data",
+  "new-integral-residue-pullback-preserves-flat",
+  "new-integral-residue-pull-ordinary-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "B2: flat-resolution computation, exact derived-square transport, and proved inverse-mate pasting."
+  "note": "B2: proved the flatness clause, generic derived-unit factorization, exact-square transport, and inverse-mate assembly. The ordinary homotopy unit compatibility is also proved in its own module."
  },
  "mathlib_searches": [
   {
@@ -107,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-0c017",
+  "reviewer": "COMPILER",
   "group": "B2",
   "result": "pass",
-  "landing": "20261016T151821-L-177787",
+  "landing": "20261016T180844-L-2345227",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with DAG statements and baseline interfaces; all eight modules and both direct importers compile cleanly within 60 seconds; axiom checks show only standard axioms and sorryAx from the two documented residual obligations."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

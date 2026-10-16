@@ -1,0 +1,119 @@
+{
+ "id": "new-integral-residue-pull-ordinary-unit",
+ "kind": "statement",
+ "title": "Ordinary scalar pullback intertwines the scalar adjunction units",
+ "statement": "For a scheme map f:X→Y and an arbitrary homotopy-category complex H of integral coefficient modules, apply integral pullback to the extension/restriction unit at H, then the inverse ordinary restriction/pullback comparison at the scalar extension of H. This equals the scalar unit on the pulled complex followed by restriction of the ordinary scalar pull isomorphism. The coefficients and reduction map are those of [def-weil-pbc-continuous-integral-coefficients], and all displayed functors are their ordinary homotopy-category functors; no K-flatness or derived scalar extension is involved.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For an ordinary residue module, identify each coefficient-module pullback with the inverse image of its underlying abelian sheaf using extension along the coefficient pullback isomorphism. The underlying map of comapUpperStarIso followed by this identification is the identification for the other coefficient ring. The module inverse-image adjunction unit becomes the underlying sheaf inverse-image unit, by the existing moduleUnit_forget lemma of ProfinitePointPullback, reused through a proof-only import all. The underlying comapLowerStarIso map is the identity. These facts prove the unit equation characterizing the inverse vertical mate of comapLowerStarIso, and therefore that mate is the inverse of comapUpperStarIso. Apply iterated_mateEquiv_conjugateEquiv_symm to the two scalar and two geometric adjunctions: the inverse horizontal mate is precisely the conjugate defining pullIso. Its unit identity is the required ordinary module equation. Apply this equation degreewise to a cochain complex and pass to homotopy classes. The induced adjunction unit is the image of the degreewise unit, so this gives exactly the stated equation for every H by quotient_obj_surjective. Identity coefficient maps and identity geometric maps reduce to their adjunction triangle identities; zero complexes give zero morphisms.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "B2: the ordinary comparison is proved. The underlying-sheaf compatibility of the explicit pullback isomorphisms gives the vertical unit identity; iterated inverse mates give the scalar identity; quotient_obj_surjective and degreewise extensionality lift it to homotopy categories. Second reading removes the duplicate moduleUnit_forget_aux entirely and reuses the original private moduleUnit_forget via import all."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+   "date": "2026-10-17",
+   "results": "One exact generic iterated-mates identity in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "Applicable generic ingredient; it still requires identifying the geometric restriction/pullback comparison as the vertical mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension adjunction unit intertwines pullback and restriction of coefficients via the inverse mate of the restriction pushforward isomorphism",
+   "date": "2026-10-17",
+   "results": "Eight ModuleCat change-of-rings unit results; no internal sheaf-module comparison.",
+   "verdict": "No direct specialization for internal module objects and the project geometric adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv_symm|iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-17",
+   "results": "Seven generic mate and iterated-mate matches.",
+   "verdict": "unit_mateEquiv_symm and iterated_mateEquiv_conjugateEquiv_symm give the categorical calculation once the ordinary geometric mate is identified."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The iterated mate of a natural transformation under four adjunctions equals its conjugate under the composite adjunctions",
+   "date": "2026-10-17",
+   "results": "Eight results, including CategoryTheory.iterated_mateEquiv_conjugateEquiv and its bicategorical analogue.",
+   "verdict": "Supplies the generic categorical identity; identifying the explicit geometric comparison with the vertical mate remains necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app|moduleUnit_forget|derivedη_fac_app; local lean/Sheaf and lean/WeilConjectures searches",
+   "date": "2026-10-17",
+   "results": "Mathlib generic unit and derived-unit identities; local ProfinitePointPullback contains private moduleUnit_forget, available by import all. No existing ordinary scalar/homotopy unit theorem found.",
+   "verdict": "Reuse moduleUnit_forget; delete the duplicated helper, including its spurious True parameter. Generic mate identities are already used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResiduePullFlatModel",
+  "date": "2026-10-17",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-pull-flat-model",
+   "place": "Ordinary scalar square in proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResiduePullOrdinaryUnit",
+  "file": "lean/Sheaf/Paper/IntegralResiduePullOrdinaryUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePull_ordinary_unit",
+  "statement": "theorem residueExchangePull_ordinary_unit {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (H : HomotopyCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    (((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)).map\n        (((Mod.extendRestrictAdjunction\n          (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n            (.up ℤ)).unit.app H) ≫\n      (NatTrans.mapHomotopyCategory\n        (comapUpperStarIso (integralReductionMap ℓ E) f).inv (.up ℤ)).app\n          (((Mod.extendScalars\n            (coefficientMap (integralReductionMap ℓ E) Y)).mapHomotopyCategory\n              (.up ℤ)).obj H) =\n    ((Mod.extendRestrictAdjunction\n        (coefficientMap (integralReductionMap ℓ E) X)).mapHomotopyCategory\n          (.up ℤ)).unit.app\n        ((((f)^*⟦integralCoeff ℓ E⟧).mapHomotopyCategory (.up ℤ)).obj H) ≫\n      ((Mod.comap (coefficientMap (integralReductionMap ℓ E) X)).mapHomotopyCategory\n        (.up ℤ)).map\n        ((NatTrans.mapHomotopyCategory\n          (pullIso (integralReductionMap ℓ E) f).hom (.up ℤ)).app H)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T180844-L-2345227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261016T180844-L-2345227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
