@@ -28,7 +28,8 @@
   "place": "Dual of Definition 7.7.2, Proposition 7.7.4 and Theorem 7.7.9, printed pp. 397-399; the all-cofibrant ordinary case of the cofibration-category axioms dual to section 7.4. Read online, not archived in literature/. No Stacks tag states this infinity-categorical cocompletion theorem."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -255,5 +256,34 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-2704e3604 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, the 3 new nodes and every cited statement in full: brown-fibrant-localization-pullbacks, def-cbc-enhanced-diagrams-cones, cbc-enhanced-functor-cone-calculus, weil-pbc-category-colimit. Statement unchanged. Step 1: the Brown pullback node applied to A^op, every hypothesis matched (terminal=0, F=C^op, pullbacks=pushouts, W-then-F = C-then-W). Step 2: elementary coproduct argument checked line by line (inclusions are pushouts of initial maps, i,s in C∩W, coproduct axiom, two-out-of-three). Step 3: descent of the Σ/Δ adjunction through the product-localization node with J=∅ included; mapping-space inverse maps written out. Steps 4 and 6: generation existence and preservation. Step 5: span rectification, factor u=pi, componentwise equivalence (p,1,1), transfer of cocones. Step 7: restriction to full subcategories. New nodes are true, self-contained, statement-only and strictly smaller than the item. Edge cases tested: empty J/I/family, a singleton, the span, and W = isomorphisms. Not duplicates: system-localization-universal gives only finite products; finite-reedy and small-diagram rectification need model hypotheses (the latter depends on this item); finite-shape generation is finite and existence only; Q83's infinity-limits-products-pullbacks is the κ-bounded limit-preservation result with no existence clause. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic cone/equivalence calculus). Closure acyclic (101 nodes). No target, base-change morphism or coefficient category touched; no SGA. The Cisinski CatLR source is not archived and network access is blocked here, so its numbered places were checked from knowledge of the book and HTT 4.4.2.6/4.4.2.7, not against the text; it stays WANTED and proof_origin agent. The 'dual Theorem 7.7.9' wording could not be confirmed without the book; it does not affect the mathematics. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocompleteCofibrationLocalization",
+  "declaration": "SSet.Enhanced.cocomplete_cofibration_localization",
+  "declarations": [
+   "SSet.Enhanced.IsColimitingImage",
+   "SSet.Enhanced.HasSmallCoherentColimits",
+   "SSet.Enhanced.PreservesSmallCoherentColimits",
+   "SSet.Enhanced.IsColimitingOrdinaryImage",
+   "SSet.Enhanced.IsHomotopyCocontinuous",
+   "SSet.Enhanced.smallCocontinuousFunctors",
+   "SSet.Enhanced.homotopyCocontinuousFunctors",
+   "SSet.Enhanced.cocomplete_cofibration_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocompleteCofibrationLocalization.lean",
+  "statement": "theorem cocomplete_cofibration_localization (A : Type u) [Category.{v} A] (zero : A) (hzero : CategoryTheory.Limits.IsInitial zero) (C W : MorphismProperty A) (hCiso : MorphismProperty.isomorphisms A ≤ C) (hWiso : MorphismProperty.isomorphisms A ≤ W) [C.IsStableUnderComposition] [W.IsStableUnderRetracts] [W.HasTwoOutOfThreeProperty] (hcof : ∀ X : A, C (hzero.to X)) [MorphismProperty.HasFactorization C W] (hpush : ∀ (X Y Z : A) (i : X ⟶ Y) (f : X ⟶ Z), C i → HasPushout i f) [C.IsStableUnderCobaseChange] [(C ⊓ W).IsStableUnderCobaseChange] [HasCoproducts.{w} A] [C.IsStableUnderCoproducts.{w}] [(C ⊓ W).IsStableUnderCoproducts.{w}] (L : SSet.{max u v w t}) (q : largeNerve.{u, v, max w t} A ⟶ L) (hq : IsLocalization W q) : HasSmallCoherentColimits.{w, max u v t} L ∧ IsHomotopyCocontinuous.{u, v, w, t} zero C W q ∧ ∀ (E : SSet.{max u v w t}), Quasicategory E → HasSmallCoherentColimits.{w, max u v t} E → (∀ (T : largeNerve.{u, v, max w t} A ⟶ E), IsHomotopyCocontinuous.{u, v, w, t} zero C W T → ∀ F : L ⟶ E, AreNaturallyEquivalent (q ≫ F) T → PreservesSmallCoherentColimits.{w, max u v t} F) ∧ ∃ e : (smallCocontinuousFunctors.{w, max u v t} L E).toSSet ⟶ (homotopyCocontinuousFunctors.{u, v, w, t} A zero C W E).toSSet, e ≫ (homotopyCocontinuousFunctors.{u, v, w, t} A zero C W E).ι = (smallCocontinuousFunctors.{w, max u v t} L E).ι ≫ (MonoidalClosed.pre q).app E ∧ IsFunctorEquivalence e",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the separately recorded coherent-localization interface and its degreewise enlarged nerve. Helpers express actual images of cocones, independent small indexing universes, homotopy cocontinuity and full coherent functor subcategories. The weak-equivalence composition hypothesis is included in Mathlib HasTwoOutOfThreeProperty."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b66169423",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Every node hypothesis is matched exactly in the Lean (initial object, C/W containing isomorphisms and closed under composition, W retract-closed with 2-of-3 via Mathlib HasTwoOutOfThreeProperty, every object cofibrant, HasFactorization C W, pushouts along C, cobase-change stability of C and C⊓W, U-small coproducts and coproduct stability, IsLocalization W q); no extra assumptions. All four conclusion clauses are exact: small coherent colimits in L; q preserves the initial object, coproduct cocones and C-pushout cocones, tested on the actual apex and transformation; every factor F of a homotopy-cocontinuous T preserves small colimits; restriction along q is an IsFunctorEquivalence between the full subcomplexes. Edge cases (empty family and shape, identity legs, degenerate W) and universes checked; no hollow definitions; one sorry; docstrings complete; lean.statement verbatim; only lean and stmt_deps changed (landed interface added); both report sections real. nt_compile.py --json on the snapshot module exited 0 in 1.2 s with no errors or warnings. Non-blocking note: diagram/transformation/IsColimitEdge are recorded only under the downstream lem-coef-finite-reedy-localization; only definitions are used, as in the landed small-diagram-model-rectification."
  }
 }

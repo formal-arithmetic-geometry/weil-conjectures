@@ -196,5 +196,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-2d08fcf7c (reviewer sub-agent of L); spot-checked: I read the whole item, all 3 cited node statements, the unit record and blueprint paragraph 2, and Kerodon 01DK and 01DP online. The statement matches Kerodon 01DK (Thm 4.4.4.4) hypothesis by hypothesis: arbitrary quasicategory C, arbitrary small simplicial set K, an actual edge of Fun(K,C), tested at every vertex. Nothing is added or dropped, and it is unchanged. lem-cbc-invertible-prism-extension is exactly Kerodon 01DP (Lemma 4.4.4.8) at S=Δ^0. Step 1 (Fun(K,C) is a quasicategory, via the Mathlib pushout-product leaf with ∅→K) is correct but not needed by steps 3-5, since the DAG's equivalence-edge definition does not need it; it is harmless. Step 2 holds because evaluation at a vertex is a simplicial map; it is elementary. Step 3 is correct: the horn on Λ^2_0 has 01=τ and 02=id_F, the prism with A=∅ and n=2 has distinguished edge τ_k, and the filled triangle T gives σ with σ∘τ≃id_F. Step 4: I recomputed the 0-horn on Λ^3_0 with faces 012=T, 013=s_1τ (edges 01=τ, 03=τ, 13=id_G) and 023=s_0τ (edges 02=id_F, 03=τ, 23=τ). The overlaps 01, 02, 03 agree. The prism with n=3 has distinguished edge τ, and face 123 of the result has edges σ, τ, id_G, giving τ∘σ≃id_G for the same σ. Step 5 is elementary. Edge cases checked: K empty, K a point, K=Δ^1 or with non-invertible edges, C a nerve, and n=2,3 both ≥2. Duplicate check: lem-cbc-enhanced-functor-cone-calculus contains this as one clause, but citing it would create a cycle. lem-coef-infinity-equivalence-prism-extension is a different relative statement. No other node states the item. I computed the dependency closures by script (4, 11 and 10 nodes) and none reaches the item, so the graph is acyclic. The unit cites only sk-def-sf-operations and sk-prop-sf-rf-shriek-preservation, so the prism is off-route. I accept its declared tool_use as a generic simplicial lifting lemma used as a black box. The Mathlib searches cover all three kinds with actual results, and there is no leaf. There are 0 new nodes, no SGA is used, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PointwiseEquivalences",
+  "declaration": "SSet.Enhanced.pointwise_equivalences",
+  "file": "lean/Sheaf/CategoryTheory/PointwiseEquivalences.lean",
+  "statement": "theorem pointwise_equivalences (K C : SSet.{u}) [Quasicategory C] (F G : K ⟶ C) (τ : ((ihom K).obj C) _⦋1⦌) (hτ₁ : ((ihom K).obj C).δ 1 τ = diagramVertex F) (hτ₀ : ((ihom K).obj C).δ 0 τ = diagramVertex G) : IsEquivalenceEdge ((ihom K).obj C) τ ↔ ∀ k : K _⦋0⦌, IsEquivalenceEdge C ((evaluation K C k).app _ τ)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ceb4fe61",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement matches node and Kerodon 01DK clause by clause: [Quasicategory C], arbitrary K : SSet.{u}, edge τ of ihom K C with δ1 = diagramVertex F (source) and δ0 = diagramVertex G (target), iff with ∀ k : K _⦋0⦌ IsEquivalenceEdge C ((evaluation K C k).app _ τ). Checked IsEquivalenceEdge (two inverse triangles), diagramVertex and evaluation (restriction to a vertex) in EnhancedDiagramsCones. Edge cases covered: empty K, point, Δ¹, empty or discrete C. Shared universe u is the dependency's convention. No hollow definitions, one sorry, source and blueprint docstrings with the 5 proof steps, lean.statement verbatim in file, report has Worker report and Second reading by NA, no duplicate (ComponentwiseEquivalence would close a cycle). nt_compile per-file compile with side overlay: no errors or warnings, exit 0; a broken copy gave a type error, confirming the compile type-checks. No findings, no fixes."
  }
 }

@@ -155,5 +155,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-b8769c415 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and it is correct. I repaired three small faults in fixes/dag/nodes/sec-proetale-coefficients (the item and def-weil-pbc-topos); no node is dropped. (1) C7/C8: step 1 used lem-trf-weakly-etale-between-objects and lem-weil-pbc-ind-etale-stability as off-unit tools, with a 'why' saying the unit has no such statement. That is false: the unit cites sk-lem-pe-weakly-etale-stability, which states both facts, and the unit proof names it for this step. Step 1 now cites it and both tool uses are withdrawn. (2) B4: step 4 had an unescaped \\to that JSON read as a TAB. The step also rebuilt the sheafification reflector through an off-unit tool (lem-weil-pbc-sheafification-plus-theorem, stated for covering-family sites while (D,K) is a sieve site), which the delivered 00XA-style definition does not need. Step 4 is now the elementary instance of def-weil-pbc-topos from step 3, and that tool use is withdrawn too. (3) B3/C4: def-weil-pbc-topos cited def-weil-pbc-sites-and-cohomology (00VH covering-family sites) for 'Grothendieck topology', which that node does not define, and no DAG node does. The statement now defines sieves, Grothendieck topology (Stacks 00Z4) and V-set sheaves (00Z8) inline. I also made clause 3 name Sh(X_proet; Sets_V) explicitly; the V-essential-smallness reading is the only true one, because U-small weakly etale X-schemes do not have a U-small set of isomorphism classes. Sources checked: Stacks 022D at topologies.tex 3104-3147, 023Q at descent.tex 4130ff, 00XA at sites.tex 2942, 00Z4 at sites.tex 10993; Mathlib Fpqc.lean 60-63 (the three fpqcPrecoverage instances) and the Subcanonical instance at 87. Step 2's double use of descent (target T, then target X) and the empty cover are correct, and the step 3 transport hypotheses hold. The new leaf lem-weil-pbc-fpqc-covering-axioms is accepted; lem-galois-fpqc-covering-base-change states only its clause (3). No duplicates, no cycle in the overlaid DAG (131 dependencies), no SGA source. No tool_uses are accepted and none is needed.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties",
+  "declaration": "AlgebraicGeometry.Scheme.proetale_site_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/ProetaleSiteProperties.lean",
+  "statement": "theorem proetale_site_properties (X : Scheme.{u}) : (ProEt.precoverage X).IsSiteForCoverings ∧ (ProEt.topology X).Subcanonical ∧ EssentiallySmall.{u + 1} X.ProEt ∧ IsGrothendieckTopos.{u + 1} (Sheaf (ProEt.topology X) (Type (u + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b93e7ad7",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Read the node, all six stmt_deps, the report (real Worker report and Second reading by Q126) and the module. X : Scheme.{u} has no extra hypotheses. Clause 1 = (ProEt.precoverage X).IsSiteForCoverings: HasIsos, bind composition, and IsPullback base change inside X.ProEt with I : Type (u+1). Clause 2 = (ProEt.topology X).Subcanonical (Mathlib's notion). Clause 3 = EssentiallySmall.{u+1} X.ProEt and IsGrothendieckTopos.{u+1} (Sheaf (ProEt.topology X) (Type (u+1))). pp.universes and an rfl probe confirm w = u+1: a presentation by a Type (u+1) small site with Type (u+1) sheaves, exactly def-weil-pbc-topos with V = u+1. Site universes are not collapsed. Empty scheme, empty/infinite covers and any characteristic are allowed. lean.statement is verbatim; only the lean field changed from base. Docstrings give the source and blueprint tags and the 4 proof steps; the only proof is sorry; no new definitions; no pro-etale substitute. nt_compile.py was clean (1.5 s), and the probe copy compiled clean. No findings."
  }
 }
