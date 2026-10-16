@@ -1,0 +1,128 @@
+{
+ "id": "lem-c2-internal-section-module-flatness",
+ "kind": "statement",
+ "title": "Flatness under the internal-section module equivalence",
+ "statement": "Let C be a site, with coefficient universe u containing its object and morphism universes. Assume abelian sheafification exists, its local equivalences are monoidal, and local equivalences of abelian presheaves are exactly locally bijective maps. Assume the abelian sheaf category has coequalizers and is monoidal closed. For a commutative monoid object R, use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to form its section ring and module equivalence. For every internal R-module M, internal flatness (exactness of both tensor functors) is equivalent to IsFlatOnSite of its section module, in the sense of [def-pc-flat-sheaf-modules].",
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Tensor product; definition-flat (Tag 03ER)"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the internal relative tensor coequalizer on pure integer tensors. Its balancing relation identifies (r m) tensor n with m tensor (r n); its action equation identifies r times a pure tensor with the tensor of r m and n. TensorProduct.lift therefore gives a linear map from the sectionwise tensor presheaf to the section module of the internal tensor, natural in the site object. Extend it by module sheafification.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, send m tensor_Z n to m tensor_R n and compose with the abelian sheafification unit. The lax tensor comparison of sheaf inclusion is the adjoint of the canonical sheafification tensor isomorphism, so this raw pairing extends uniquely to an internal bilinear morphism. It is balanced: precompose the triple tensor diagram with the raw tensor comparison; that comparison belongs to the localization class and is cancelled after sheafification. The relative tensor coequalizer then produces the inverse map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the first inverse identity after the relative tensor coequalizer and the raw binary tensor comparison. Check the second after the sheafification unit and the sectionwise surjective quotient from integer tensors to R-tensors; tensor induction proves this quotient is epi. Both identities reduce to pure tensors. Naturality in the first module follows from the coequalizer whiskering equation and naturality of the sheafification adjunction. Thus sectionModuleFunctor followed by siteSheafTensorRight is naturally isomorphic to internal tensorRight followed by sectionModuleFunctor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "An equivalence preserves and reflects finite limits and colimits. Whisker the tensor comparison with the inverse equivalence and its counit to transfer exactness in both directions. The braiding identifies left tensoring with right tensoring. Apply the definition of IsFlatOnSite. All constructions include zero rings, zero modules, empty finite tensors and empty sites.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Tensor product; definition-flat (Tag 03ER)",
+  "note": "C2: explicit universal-property tensor proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionModule.*(flat|tensor)|flat.*sectionModule",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafificationHomEquiv\"",
+   "date": "2026-10-16",
+   "results": "4 hits: PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between internal modules in abelian sheaves and section modules preserves tensor products and flat objects",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_comp_apply, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', SheafOfModules.unitHomEquiv, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, PresheafOfModules.sheafifyHomEquiv",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of internal module objects agrees with flatness of sheaves of modules under the section module equivalence",
+   "date": "2026-10-16",
+   "results": "8 hits: Module.Flat.of_linearEquiv, Module.Flat.iff_flat_tensorProduct, AlgebraicGeometry.Flat.iff_flat_stalkMap, Module.FaithfullyFlat.toFlat, Module.Flat, Module.flat_iff_of_isLocalization, PresheafOfModules.unitHomEquiv, SheafOfModules.freeHomEquiv",
+   "verdict": "No exact internal/section comparison; the generic sheafification and module ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InverseImageModuleFlat",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-proetale-inverse-image-module-flat",
+   "place": "Tensor transport"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalSectionModuleFlat",
+  "file": "lean/Sheaf/CategoryTheory/InternalSectionModuleFlat.lean",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.flat_iff_sectionModule",
+  "statement": "theorem flat_iff_sectionModule (M : IM) :\n    ObjectProperty.flat M ↔ SheafOfModules.IsFlatOnSite ((E).obj M)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T173552-L-1931552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T173552-L-1931552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

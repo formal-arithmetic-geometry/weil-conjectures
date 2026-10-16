@@ -1,0 +1,123 @@
+{
+ "id": "lem-c2-proetale-section-module-algebraic-inverse-image",
+ "kind": "statement",
+ "title": "Algebraic presentation of pro-etale internal module inverse image",
+ "statement": "For any morphism f:X to Y of schemes in universe u, commutative monoid objects R and S in abelian sheaves in universe u+1 on their respective pro-etale sites, and a monoid isomorphism rho:S to f*R, let L be set-valued inverse image constructed as sheafification after left Kan extension along the opposite of pro-etale base change. Using [def-weil-pbc-internal-abelian-sheaf-module-equivalence], there exists an AlgebraicInverseImageOfUniverses structure [def-weil-pbc-algebraic-inverse-image] over L, from the section ring of R to that of S, whose module functor is naturally isomorphic to the inverse source section-module equivalence followed by Mod.mapModComap rho and the target section-module equivalence. Both rings and modules have universe u+1. No flatness assumption or flatness conclusion occurs in this identification.",
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, algebraic inverse image; section-intrinsic; compare Sites Tag 00YV"
+ },
+ "proof": [
+  {
+   "text": "For the base-change functor U, both inverse images are inclusion into presheaves followed by U.op.lan and sheafification. Its costructured-arrow categories are filtered, since U is representably flat. The abelian forgetful functor preserves filtered colimits (shrink the morphism universe when necessary), giving a natural comparison of the two Kan extensions. It also preserves sheafification. Compose these comparisons to identify the underlying set sheaf of abelian inverse image with L applied to the underlying set sheaf. These data are constructed in the module as pullbackForgetIso. The lemma pullbackForgetIso_unit_hom proves compatibility with adjunction units from the inverse Kan comparison factorization and sheafComposeNatTrans_fac.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this comparison to R and compose with the inverse of rho on underlying sheaves; insert the canonical equal-universe ULift identifications. This constructs ringUnderlying. Define the module functor to be exactly inverse section equivalence, internal inverse image with coefficient restriction, and target section equivalence. The same comparison and the counit of the section equivalence construct moduleUnderlying naturally on this functor. The concrete private constructions sectionRingPullbackIso and sectionModulePullbackIso implement these isomorphisms without sorry.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of the seven operation graph fields, form the two maps from L(T) to the target underlying set sheaf and transpose through the set-sheaf adjunction. Naturality and pullbackForgetIso_unit_hom identify their transposes with the source maps followed by the abelian adjunction unit and the inverse coefficient isomorphism. The unit preserves addition and zero because its components are additive; it preserves multiplication and one by the monoidal adjunction unit homomorphism property, evaluated using the tensor and unit formulas for pushforward. The lifted module adjunction unit and the linear source section-equivalence counit preserve scalar multiplication. The assumed source graph equation therefore makes the transposed maps equal; injectivity of the hom-equivalence proves equality of the original maps. Evaluate at every target section and apply ULift.down to obtain the seven fields. Choose exactly the composite section-module functor already constructed, with its identity isomorphism as the final comparison. The argument applies also to zero rings/modules and empty sites. The private lemmas pullback_add_graph and pullback_zero_graph implement the additive graph step without sorry, before the final coefficient and section-equivalence transports. The private pushforward_section_mul, pushforward_section_one and pushforward_section_smul lemmas also implement the pointwise pushforward operation formulas. The private inverseImageSectionRingUnit constructs the ring homomorphism induced on sections by the adjunction unit and the inverse coefficient map. The proved sectionRingPullbackIso_unit identifies this ring homomorphism with the transpose of the underlying ring comparison. The private sectionRingPullbackIso_transpose, sectionRingPullback_add_graph, sectionRingPullback_mul_graph and sectionRingPullback_nat_graph implement all ring graphs without sorry; zero and one are natural-constant cases. What remains in Lean is assembly of these fields and the module-operation transports, particularly the lifted module-unit scalar equation after coefficient restriction.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, algebraic inverse image; section-intrinsic; compare Sites Tag 00YV",
+  "note": "C2: remaining geometric algebraic-operations identification, independent of flatness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image functor on sheaves of abelian groups commutes with the underlying sheaf of sets",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongrPreregular_inverse_obj_val_map, CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.sheafBotEquivalence_inverse_map_val",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.lift",
+   "date": "2026-10-16",
+   "results": "12 hits: TensorProduct.lift, TensorProduct.lift_mk, TensorProduct.lift_mk_compr₂ₛₗ, TensorProduct.lift_compr₂ₛₗ, TensorProduct.lift_comp_comm_eq, TensorProduct.lift_mk_compr₂, TensorProduct.lift_compr₂, TensorProduct.lift.tmul",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|AlgebraicInverseImageOfUniverses",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic sheafification and tensor ingredients only; no statement with this internal/section module comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of abelian groups commutes with the forgetful functor to sheaves of sets",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.sheafForget, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.toSheaf_obj_val, SheafOfModules.fullyFaithfulForget_preimage_val, SheafOfModules.forget, SheafOfModules.toSheaf, PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf, SheafOfModules.fullyFaithfulForget",
+   "verdict": "No exact internal/section comparison; the generic sheafification and module ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InverseImageModuleFlat",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-proetale-inverse-image-module-flat",
+   "place": "Identify the inverse-image operations"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionModuleAlgebraicInverseImage",
+  "file": "lean/Sheaf/Paper/SectionModuleAlgebraicInverseImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_sectionModuleAlgebraicInverseImage",
+  "statement": "theorem exists_sectionModuleAlgebraicInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]\n    (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]\n    (ρ : S ⟶ (f)^*[Ab.{u + 1}].obj R) [IsMonHom ρ] [IsIso ρ] :\n    let L := Functor.sheafPullbackConstruction.sheafPullback\n      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) (Type (u + 1))\n      (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)\n    ∃ I : SheafOfModules.AlgebraicInverseImageOfUniverses.{u + 1, u, u + 1, u, u + 1, u + 1} L\n        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology Y) R)\n        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology X) S),\n      Nonempty\n        ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology Y) R).inverse ⋙ Mod.mapModComap ρ ⋙\n          (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology X) S).functor ≅ I.modules)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T173552-L-1931552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261016T173552-L-1931552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

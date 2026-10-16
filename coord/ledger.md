@@ -15565,3 +15565,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:27 L: batch 20261016T171803 dependency take-out
 - 17:35 L: returned deliver/B2/Sheaf.Paper.IntegralResiduePullFlatModel (reviewer RETURN: (the landing tools, head f5118d17e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 17:35 L: merged deliver/A3/Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis (stage 3; reviewer PASS; after a return; landing 20261016T173551-L-1931163 (interface); batch 20261016T173548; modules 4; new nodes 2; change records: coord/changes/A3-qbar-scalar-basis-proposition.md, coord/changes/A3-qbar-shared-scalar-helpers.md)
+- 17:35 L: merged deliver/C2/Sheaf.Paper.InverseImageModuleFlat (stage 3; reviewer PASS; first push; landing 20261016T173552-L-1931552 (interface); batch 20261016T173548; modules 3; new nodes 2)
