@@ -386,5 +386,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-5f9162a6c (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the parent's use (lem-coef-kan-realization-serre step 2) and the downstream lem-coef-kan-locally-trivial-realization, and checked all 17 steps of the proof. The statement matches Hovey Thm 3.5.9 with Cor 3.5.7 and Def 3.5.1 (Hovey is not archived under literature/, so it is recorded WANTED and the proof is marked agent-written). That means p = q r with r in I-inj, q minimal Kan and a product over every simplex; no Kan hypothesis on X or Y, and empty fibres allowed. No hypothesis was added and no target touched. Checks: the relation is an equivalence via the Kan strict fibre of Phi. Step 4's identities d_i s_j = s_{j-1} d_i and s_i s_{j-1} = s_j s_i hold. A is closed under faces and degeneracies. The moving-boundary correction in Step 7 is correct (lift the edge, take the representative, fill the inner horn over s_1 e). For the r-lifting in Steps 9–10, every face of the Lambda^2_0 horn agrees with the sigma^1 boundary datum. Transport horns in Step 13 run over s_0 h and s_1 h in the right directions. The rigidity induction in Steps 14–15 uses compatible preimage boundaries, the horns J(u)sigma^0 and J(u)sigma^1, and minimality. In Steps 16–17, alpha is invertible from the two composites. Small cases checked: n=0, X empty, a point base, identity of Delta^n, a non-Kan base, an empty fibre. There are no new nodes, no duplicate of the item, and no cycle. Route: cited statements are in the item's unit or are definitions/Mathlib leaves, so no tool_uses. FIX: Step 2 re-derived, through the non-closed Kerodon right-anodyne node with order reversal and saturation, exactly the reviewed Mathlib leaf lem-cbc-internal-hom-fibration-corner-map (SSet.fibration_pullbackObjObjpi, PushoutProduct.lean:70-93, which I read). The corrected item in fixes/ makes Steps 1–2 cite that leaf while keeping the explicit curry correspondence. Steps 3, 7, 9, 10 and 12–15 now use the leaf, and proof_deps = {def-cbc-enhanced-diagrams-cones, the leaf, well-ordering, monomorphism-boundary-cells}, all definitions or Mathlib leaves. Step numbering and statement are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialSet.KanMinimalFactorization",
+  "declaration": "SSet.exists_subcomplex_retract_simplexwise_product",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialSet/KanMinimalFactorization.lean",
+  "statement": "theorem exists_subcomplex_retract_simplexwise_product {X Y : SSet.{u}} (p : X ⟶ Y) [Fibration p] : ∃ (A : X.Subcomplex) (r : X ⟶ A.toSSet), A.ι ≫ r = 𝟙 A.toSSet ∧ p = r ≫ (A.ι ≫ p) ∧ (∀ n : ℕ, HasLiftingProperty (boundary.{u} n).ι r) ∧ Fibration (A.ι ≫ p) ∧ ∀ (n : ℕ) (y : (Δ[n] : SSet.{u}) ⟶ Y), ∃ (F : SSet.{u}), KanComplex F ∧ ∃ (e : pullback y (A.ι ≫ p) ≅ ((Δ[n] : SSet.{u}) ⊗ F)), e.hom ≫ fst (Δ[n] : SSet.{u}) F = pullback.fst y (A.ι ≫ p)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a40e28b32",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Lean SSet.exists_subcomplex_retract_simplexwise_product matches the node clause by clause. [Fibration p] is J.rlp, i.e. all horns with n>=1 including outer ones, with no Kan hypothesis on X or Y. A is a Subcomplex with its canonical inclusion; r satisfies A.ι≫r=𝟙 and p=r≫(A.ι≫p); r has the RLP against every boundary inclusion including n=0 (boundary_zero=⊥); Fibration (A.ι≫p) holds. For all n and y:Δ[n]⟶Y there is a Kan F, possibly empty, and an iso pullback ≅ Δ[n]⊗F over Δ[n] via fst. Edge cases n=0, empty X/Y/fibre and non-Kan identity are covered; one bound universe u with no restriction. Module has one theorem with sorry and no defs; both docstrings carry the source and blueprint tag; theorem docstring has all 17 proof steps. Node differs from the shared node only in lean; lean.statement is verbatim. stmt_deps import present; no duplicate found in Mathlib or the project. Worker report and Second reading by Q54 present. nt_compile.py on the snapshot module: rc=0, no errors or warnings."
  }
 }
