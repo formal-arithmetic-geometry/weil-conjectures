@@ -260,5 +260,26 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-1feeab41e (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and 10 steps. I also read the statements of def-cbc-enhanced-diagrams-cones (degreewise products) and def-weil-pbc-category-colimit (colimits), and the parent lem-coef-infinity-right-anodyne-product in full, which applies this lemma with W = the right-anodyne maps. The source is Kerodon Prop. 4.2.5.3 (tag 0153); it is not under literature/, and the report's WANTED line is appropriate. The generalization to an arbitrary weakly saturated W is true because only the four closure properties of W are used. This is a strengthening, not a weakening. There are no new nodes and no tool_uses, and the steps cite only definitions. Duplicate search with rg over dag/nodes: pushout-join-saturation (joins/inner), sset-anodyne-pushout-product (Kan), inner-anodyne-pushout-product and transfinite-left-lifting are all different; same_as [] stands. The item is not a clause of its parent, which still needs the horn and prism steps. Small cases tested: K empty (θ = i×L); k an isomorphism; A empty, B = Δ⁰ (θ = k); a pushout along a non-injective map; the zero-length chain. I also checked the P_α and Q_α intersection/union identities and the limit-stage unions. Three wording/gap repairs to the step texts, in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-right-anodyne-saturation.json; statement, deps and source unchanged: (1) Steps 3 and 8 claimed the square's 'intersection is D_0' even when the attaching map is non-injective; they now argue by degreewise complements, B' = A' ⊔ (B_0∖A_0) with new cells (B_0∖A_0)×(L∖K), and say that i' (and k') is a monomorphism. (2) Step 5's undefined θ_{X_0,k} is now θ_{X_0↪X_λ,k}, with its domain P_0 and codomain P_λ named. (3) Steps 6 and 10 omitted that a retract of a monomorphism is a monomorphism, which T_k and T_i' need; the two-line argument is added, and Steps 5 and 9 now say the composite is a monomorphism.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RightAnodyneSaturation",
+  "file": "lean/Sheaf/AlgebraicTopology/RightAnodyneSaturation.lean",
+  "declaration": "SSet.Enhanced.weaklySaturated_cartesianPushoutProduct",
+  "declarations": [
+   "SSet.Enhanced.weaklySaturated_cartesianPushoutProduct"
+  ],
+  "statement": "theorem weaklySaturated_cartesianPushoutProduct (W : MorphismProperty SSet.{u}) (hW : WeaklySaturated W) : (∀ {K L : SSet.{u}} (k : K ⟶ L), Mono k → WeaklySaturated (fun {A B : SSet.{u}} (i : A ⟶ B) ↦ Mono i ∧ W (Functor.PushoutObjObj.ofHasPushout (curriedTensor SSet) i k).ι)) ∧ (∀ {A B : SSet.{u}} (i : A ⟶ B), Mono i → WeaklySaturated (fun {K L : SSet.{u}} (k : K ⟶ L) ↦ Mono k ∧ W (Functor.PushoutObjObj.ofHasPushout (curriedTensor SSet) i k).ι))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14f9e7a95",
+  "group": "Q40",
+  "result": "pass",
+  "note": "The Lean statement matches every clause of the node: W with hW : WeaklySaturated W; for fixed mono k, the class {i | Mono i ∧ W θ} is weakly saturated, and symmetrically for fixed mono i. θ is Mathlib's ofHasPushout (curriedTensor SSet) i k, with the right objects and direction. It reuses the project's SSet.Enhanced.WeaklySaturated (isos, cobase change, transfinite composition in universe u, retracts), which is exactly the node's definition; Mathlib has none. No extra hypotheses or universe restriction; edge cases covered. Only the item's lean field changed, its statement is verbatim, and the dependency nodes are byte-identical to the base. The citer lem-coef-infinity-right-anodyne-product uses the same map. Proof is sorry only; docstrings give the source and blueprint id; imports and line widths are fine. Worker report and Second reading by Q40 are present. nt_compile.py --json on the side overlay: rc=0, no diagnostics. Only a cosmetic garbled phrase in the second reading."
  }
 }
