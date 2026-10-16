@@ -26,6 +26,8 @@ namespace AlgebraicGeometry.Scheme
 set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem chart_local_presentation
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]
@@ -160,8 +162,11 @@ private theorem chart_local_presentation
         rfl)
   exact ⟨p.asIdeal, p.isPrime, L, hL, ares, hsep, aL, htower, aH,
     ρ ≫ ringIso.inv, hstruct, hbase, hH⟩
+-/
 
-/-- The geometric strict henselization is an algebraic strict henselization of a prime
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The geometric strict henselization is an algebraic strict henselization of a prime
 localization, compatibly with the given structural ring map. There is no divisor here.
 Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), using Tag 04GW.
 (blueprint: lem-sbc-geometric-strict-henselization-local-presentation)
@@ -180,7 +185,7 @@ is a unit in the colimit, so the structural R-map extends uniquely to A. The com
 preserves the maps from R; applying the faithful spectrum functor and hb identifies that
 R-map with b. Transport the A-algebra structure through the colimit ring isomorphism;
 its composite with R -> A is therefore b. All colimit identifications are characterized
-by their legs, so no arbitrary algebraic object is chosen from mere existence. -/
+by their legs, so no arbitrary algebraic object is chosen from mere existence. - /
 theorem strictHenselizationRing_local_presentation
     (R : CommRingCat.{u})
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -209,5 +214,6 @@ theorem strictHenselizationRing_local_presentation
     exact hstruct'.trans hb.symm
   subst ρ
   exact ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩
+-/
 
 end AlgebraicGeometry.Scheme

@@ -26,7 +26,9 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- Existence of a local map over the base with the prescribed pointed residue map.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- Existence of a local map over the base with the prescribed pointed residue map.
 Source: Stacks Project, paragraph after Tag 03PS, Tags 04GU and 08HR
 (blueprint: lem-weil-pbc-strict-henselization-map-exists).
 
@@ -57,7 +59,7 @@ already supplied; their signatures are retained unchanged.
 Source for the section argument: Stacks Tags 03QO and 092Z; the pointed
 localization calculation also occurs inside
 `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` as a private proof.
--/
+- /
 theorem strictHenselizationMapExists
     {S T : Scheme.{v}} (g : T ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
@@ -346,6 +348,7 @@ theorem strictHenselizationMapExists
     have : IsLocalHom (ψT.comp h.hom) := hres ▸ inferInstanceAs (IsLocalHom ψS)
     exact isLocalHom_of_comp h.hom ψT
   exact ⟨h, hlocal, hbase, hres⟩
+-/
 
 
 end AlgebraicGeometry

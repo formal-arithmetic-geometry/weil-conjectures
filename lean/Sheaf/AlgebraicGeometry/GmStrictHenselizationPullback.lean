@@ -33,7 +33,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical units comparison is invertible after base change to a strict henselization.
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The canonical units comparison is invertible after base change to a strict henselization.
 Source: Stacks Project, Tag 03Q9, proof, using Tag 09YQ
 (blueprint: lem-weil-pbc-gm-pullback-strict-henselization).
 
@@ -62,12 +64,13 @@ their inverse equations hold at some later stage; hence units commute with this 
 These identifications send a stage unit to its pullback, so their composite is the
 canonical adjoint comparison `upperStarGmSheafToGmSheaf`. It is bijective on affine étale
 test objects. Those objects cover every étale object, and the sheaf axiom therefore
-makes the comparison an isomorphism. -/
+makes the comparison an isomorphism. - /
 theorem isIso_upperStarGmSheafToGmSheaf_strictHenselization
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     IsIso (upperStarGmSheafToGmSheaf
       (pullback.fst f (strictHenselizationStructuralMap s))) := by
   sorry
+-/
 
 end AlgebraicGeometry.Scheme

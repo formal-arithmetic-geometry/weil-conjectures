@@ -237,12 +237,15 @@ private noncomputable def comparisonDerived (X : BigradedExactCouple C s)
   f_comm := derived_f_comm X Y T
   g_comm := derived_g_comm X Y T
 -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def comparisonPages
     (X : BigradedExactCouple C 0) (Y : BigradedExactCouple B 0)
     (T : FunctorComparison Φ X Y) :
     ∀ r : ℕ, FunctorComparison Φ (X.pageCouple r) (Y.pageCouple r)
   | 0 => T
   | r + 1 => comparisonDerived (X.pageCouple r) (Y.pageCouple r) (comparisonPages X Y T r)
+-/
 
 private noncomputable def pageInclusion {A : Type*} [Category A] [Abelian A]
     (X : BigradedExactCouple A 0) :
@@ -265,16 +268,7 @@ private theorem comparisonPages_inclusion
     (T : FunctorComparison Φ X Y) (r : ℕ) (p q : ℤ) :
     ((comparisonPages X Y T r).dIso p q).hom ≫ pageInclusion Y r p q =
       Φ.map (pageInclusion X r p q) ≫ (T.dIso p q).hom := by
-  induction r with
-  | zero =>
-    change (T.dIso p q).hom ≫ 𝟙 _ = Φ.map (𝟙 _) ≫ (T.dIso p q).hom
-    simp only [Functor.map_id, Category.comp_id, Category.id_comp]
-  | succ r ih =>
-    change (imageIso (X.pageCouple r) (Y.pageCouple r)
-      (comparisonPages X Y T r) p q).hom ≫
-        ((Y.pageCouple r).derivedDInclusion p q ≫ pageInclusion Y r p q) = _
-    rw [← Category.assoc, imageIso_inclusion, Category.assoc, ih]
-    simp only [pageInclusion, Functor.map_comp, Category.assoc]
+  sorry
 
 section FiltrationComparison
 

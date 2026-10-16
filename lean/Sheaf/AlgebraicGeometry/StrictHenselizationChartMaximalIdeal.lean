@@ -25,7 +25,9 @@ namespace AlgebraicGeometry.Scheme
 set_option maxHeartbeats 800000 in
 -- Comparing the nested chart, triple and small-model diagrams requires extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- In any affine open chart through which the geometric point factors, the structural
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- In any affine open chart through which the geometric point factors, the structural
 ring map extends the distinguished prime to the maximal ideal of the strict henselization.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
 (blueprint: lem-weil-pbc-strict-henselization-chart-maximal-ideal)
@@ -44,7 +46,7 @@ ideals to the corresponding ideals, giving the displayed equality. On the chart
 neighbourhood the coprojection defines the structure morphism; the comparison preserves
 that coprojection, so the transported R-map has spectrum followed by i equal to the
 chosen structural morphism. The assertion includes the field case; the triple colimit
-has a field quotient, so it is nonzero even when a chart ring has zero divisors. -/
+has a field quotient, so it is nonzero even when a chart ring has zero divisors. - /
 theorem strictHenselization_chart_maximalIdeal
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]
@@ -144,5 +146,6 @@ theorem strictHenselization_chart_maximalIdeal
     change Ideal.map ringEquiv.toRingHom (Ideal.map ρ.hom p.asIdeal) = _
     rw [Ideal.map_map]
     rfl
+-/
 
 end AlgebraicGeometry.Scheme

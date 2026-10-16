@@ -23,7 +23,9 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- The ring of a strict henselization is ind-etale over any affine neighbourhood
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The ring of a strict henselization is ind-etale over any affine neighbourhood
 of its geometric point, with the algebra structure specified by its structural map.
 Source: Stacks Project, Tag 04HX, proof, using Tags 04GW and 04GP.
 (blueprint: lem-weil-pbc-strict-henselization-affine-chart-ind-etale).
@@ -50,7 +52,7 @@ filtered etale colimit presentation required by Algebra.IndEtale.
 Edge cases: no local or reduced hypothesis on R is used. The chart containing
 the specified geometric point is nonempty, and the pointed-neighbourhood category
 has an object, so no empty filtered diagram is asserted. The identification e is
-arbitrary; the equation ha fixes the transported R-algebra structure. -/
+arbitrary; the equation ha fixes the transported R-algebra structure. - /
 theorem strictHenselization_indEtale_of_affine_chart
     {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]
     (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})
@@ -220,5 +222,6 @@ theorem strictHenselization_indEtale_of_affine_chart
       exact (HasRingHomProperty.Spec_iff (P := @Etale)).1 inferInstance
     · change (H.obj j).α ≫ c.ι.app (H.obj j) ≫ isoA.hom = _
       rw [← Category.assoc, hρ, hmap]
+-/
 
 end AlgebraicGeometry.Scheme

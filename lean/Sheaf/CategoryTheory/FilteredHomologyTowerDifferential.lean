@@ -36,7 +36,9 @@ private theorem quotient_homology_heq
   rfl
 
 set_option linter.unusedVariables false in
-/-- The canonical derived-couple differential differentiates simultaneous filtered
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The canonical derived-couple differential differentiates simultaneous filtered
 representatives. The maps into the tower are fixed by their initial-homology
 normalization; no quotient isomorphism is supplied or asserted here.
 Source: Stacks Project, Tag 011R, derived-map restriction equations, and Tag 012K,
@@ -54,7 +56,7 @@ projection. Naturality of homologyπ for the graded projection, together with
 hy, hj and ht, identifies this factorization on b with y followed by tQ.
 Compose the forward equation with g and transport the integer indices to
 obtain the stated differential equation. The supplied hBZ, eH and hH are
-unnecessary for this direct representative calculation. -/
+unnecessary for this direct representative calculation. - /
 theorem filteredHomology_tower_differential
     (C : Type u) [Category.{v} C] [Abelian C]
     (hBZ : ∀ (U : ObjectProperty.FullSubcategory
@@ -245,5 +247,6 @@ theorem filteredHomology_tower_differential
       rw [← Category.assoc, hcy]
       dsimp only [F, X, T, P, Q, p', q']
       simp only [Category.assoc]
+-/
 
 end CategoryTheory
