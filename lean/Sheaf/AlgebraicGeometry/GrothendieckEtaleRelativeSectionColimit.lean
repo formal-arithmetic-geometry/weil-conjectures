@@ -5,6 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 public import Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionSystemLaws
+import Sheaf.Paper.EtaleFiniteDataDescent
 /-! # Degree-zero continuity on the qcqs étale basis -/
 @[expose] public section
 universe u' u

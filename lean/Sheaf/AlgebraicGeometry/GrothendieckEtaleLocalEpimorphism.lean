@@ -4,6 +4,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Local lifting families for general Grothendieck coefficients
 
