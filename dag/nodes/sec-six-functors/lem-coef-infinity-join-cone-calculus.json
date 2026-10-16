@@ -25,7 +25,11 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-cbc-simplicial-composition-spine"
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -433,5 +437,57 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-83a820379 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, four new nodes, cited statements, chapter/unit route, sources, edge cases, dependencies, and delivery requirements. No mathematical or structural fault found; review.md records the checks and accepted tool use."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityJoinConeCalculus",
+  "declaration": "SSet.Enhanced.infinity_join_cone_calculus",
+  "declarations": [
+   "SSet.Enhanced.coneCylinderEnd",
+   "SSet.Enhanced.fatLeftJoinCone",
+   "SSet.Enhanced.coneSplitInterval",
+   "SSet.Enhanced.coneFinalBlock",
+   "SSet.Enhanced.coneMixedSimplex",
+   "SSet.Enhanced.IsJoinConeCylinder",
+   "SSet.Enhanced.varyingCone",
+   "SSet.Enhanced.varyingConeApex",
+   "SSet.Enhanced.varyingConeArrow",
+   "SSet.Enhanced.varyingConeBoundary",
+   "SSet.Enhanced.varyingConeJoint",
+   "SSet.Enhanced.joinConeJoint",
+   "SSet.Enhanced.joinConeArrowFamily",
+   "SSet.Enhanced.coneComparisonBaseChange",
+   "SSet.Enhanced.coneSquareFamily",
+   "SSet.Enhanced.coneSquareData",
+   "SSet.Enhanced.coneSquareDataEndpoints",
+   "SSet.Enhanced.coneSquarePath",
+   "SSet.Enhanced.coneSquarePathTriangles",
+   "SSet.Enhanced.coneSquarePathData",
+   "SSet.Enhanced.coneSquarePathBase",
+   "SSet.Enhanced.coneSquareDataAmbient",
+   "SSet.Enhanced.coneMappingEndpoints",
+   "SSet.Enhanced.coneMappingPath",
+   "SSet.Enhanced.coneMappingPathBoundary",
+   "SSet.Enhanced.coneSquareTriangleComparison",
+   "SSet.Enhanced.IsConeSquarePathEquivalence",
+   "SSet.Enhanced.conePointPinch",
+   "SSet.Enhanced.ConeSquarePathNaturality",
+   "SSet.Enhanced.infinity_join_cone_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityJoinConeCalculus.lean",
+  "statement": "theorem infinity_join_cone_calculus : ∃ κ : ∀ K : SSet.{u}, K ⊗ Δ[1] ⟶ orderedJoinFunctor.obj (Δ[0], K), (∀ K : SSet.{u}, IsJoinConeCylinder K (κ K)) ∧ (∀ (K L : SSet.{u}) (f : K ⟶ L), (f ⊗ₘ 𝟙 Δ[1]) ≫ κ L = κ K ≫ orderedJoinFunctor.map (𝟙 Δ[0], f)) ∧ ∃ d : ∀ K : SSet.{u}, fatLeftJoinCone K ⟶ orderedJoinFunctor.obj (Δ[0], K), (∀ K : SSet.{u}, pushout.inl _ _ ≫ d K = orderedJoinInl Δ[0] K ∧ pushout.inr _ _ ≫ d K = κ K) ∧ ∃ i : ∀ K E : SSet.{u}, (ihom (fatLeftJoinCone K)).obj E ≅ varyingCone K E, (∀ K E : SSet.{u}, (i K E).hom ≫ varyingConeApex K E = (MonoidalClosed.pre (pushout.inl _ _)).app E ≫ evaluation Δ[0] E (stdSimplex.obj₀Equiv.symm 0) ∧ (i K E).hom ≫ varyingConeArrow K E = joinConeArrowFamily E (pushout.inr _ _)) ∧ ∃ c : ∀ K E : SSet.{u}, (ihom (orderedJoinFunctor.obj (Δ[0], K))).obj E ⟶ varyingCone K E, (∀ K E : SSet.{u}, c K E = (MonoidalClosed.pre (d K)).app E ≫ (i K E).hom ∧ c K E ≫ varyingConeArrow K E = joinConeArrowFamily E (κ K)) ∧ (∀ (K E : SSet.{u}) [Quasicategory E], IsFunctorEquivalence (c K E) ∧ ∃ w : c K E ≫ varyingConeJoint K E = joinConeJoint K E, ∀ (R : SSet.{u}) [Quasicategory R] (h : R ⟶ E ⊗ (ihom K).obj E), IsFunctorEquivalence (coneComparisonBaseChange (joinConeJoint K E) (varyingConeJoint K E) (c K E) w h)) ∧ (∀ (α : Type u) (K E : α → SSet.{u}) (_ : ∀ a : α, Quasicategory (E a)), ∃ w : CategoryTheory.Limits.Pi.map (fun a ↦ c (K a) (E a)) ≫ CategoryTheory.Limits.Pi.map (fun a ↦ varyingConeJoint (K a) (E a)) = CategoryTheory.Limits.Pi.map (fun a ↦ joinConeJoint (K a) (E a)), ∀ (R : SSet.{u}) [Quasicategory R] (h : R ⟶ ∏ᶜ fun a : α ↦ E a ⊗ (ihom (K a)).obj (E a)), IsFunctorEquivalence (coneComparisonBaseChange (CategoryTheory.Limits.Pi.map (fun a ↦ joinConeJoint (K a) (E a))) (CategoryTheory.Limits.Pi.map (fun a ↦ varyingConeJoint (K a) (E a))) (CategoryTheory.Limits.Pi.map (fun a ↦ c (K a) (E a))) w h)) ∧ (∀ (K L E E' : SSet.{u}) (f : L ⟶ K) (g : E ⟶ E'), ∃ s : varyingCone K E ⟶ varyingCone L E', s ≫ varyingConeApex L E' = varyingConeApex K E ≫ g ∧ s ≫ varyingConeArrow L E' = varyingConeArrow K E ≫ (ihom Δ[1]).map ((MonoidalClosed.pre f).app E ≫ (ihom L).map g) ∧ s ≫ varyingConeBoundary L E' = varyingConeBoundary K E ≫ (MonoidalClosed.pre f).app E ≫ (ihom L).map g ∧ c K E ≫ s = (MonoidalClosed.pre (orderedJoinFunctor.map (𝟙 Δ[0], f))).app E ≫ (ihom (orderedJoinFunctor.obj (Δ[0], L))).map g ≫ c L E') ∧ ∃ q : ∀ (T K E : SSet.{u}) [Quasicategory E] (U V : T ⟶ varyingCone K E), (coneSquareFamily U V).toSSet ⟶ coneSquarePath U V, (∀ (T K E : SSet.{u}) [Quasicategory E] (U V : T ⟶ varyingCone K E), IsConeSquarePathEquivalence (q T K E U V) ∧ q T K E U V ≫ coneSquarePathData U V ≫ (coneSquareData U V).ι = coneSquareDataAmbient U V ∧ q T K E U V ≫ coneSquarePathTriangles U V ≫ (arrowSquarePathFamily (U ≫ varyingConeArrow K E) (V ≫ varyingConeArrow K E)).ι = coneSquareTriangleComparison U V) ∧ ConeSquarePathNaturality q ∧ ∀ (K E : SSet.{u}) [Quasicategory E], ∃ hC : Quasicategory (varyingCone K E), ∀ X Y : (varyingCone K E) _⦋0⦌, ArrowSquareSpanPresentation ((ihom K).obj E) ((varyingConeArrow K E).app _ X) ((varyingConeArrow K E).app _ Y) ∧ ∃ j : arrowMappingSpace (varyingCone K E) X Y ≅ (coneSquareFamily (SSet.const (X := Δ[0]) X) (SSet.const Y)).toSSet, j.hom ≫ (coneSquareFamily (SSet.const X) (SSet.const Y)).ι ≫ snd _ _ = arrowMappingSpaceInclusion (varyingCone K E) X Y ∧ ∃ v : mappingSpace (varyingCone K E) X Y ⟶ coneMappingPath K E X Y, IsWeakHomotopyEquivalence v ∧ v ≫ pullback.snd _ _ = lift (mappingSpaceMap (varyingConeApex K E) X Y) (mappingSpaceMap (varyingConeBoundary K E) X Y) ∧ v ≫ pullback.fst _ _ ≫ (arrowSquarePathFamily (SSet.const (X := Δ[0]) X ≫ varyingConeArrow K E) (SSet.const Y ≫ varyingConeArrow K E)).ι = conePointPinch K E hC X Y ≫ j.hom ≫ q Δ[0] K E (SSet.const X) (SSet.const Y) ≫ coneSquarePathTriangles (SSet.const X) (SSet.const Y) ≫ (arrowSquarePathFamily (SSet.const (X := Δ[0]) X ≫ varyingConeArrow K E) (SSet.const Y ≫ varyingConeArrow K E)).ι",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The canonical fat-cone collapse is uniquely specified on pure ends and every mixed simplex. Varying-boundary mapping spaces use the existing arrow-square composition spans, retaining the right-pinched boundary projection and naturality over arbitrary simplicial parameters. stmt_deps adds landed owners of the join inclusions, arrow-square path model, pinch map and functor-quasicategory closure; no new DAG node, dependency repair or mathematical statement correction.",
+  "fixed_by": "NT-stage2-cc-90d821fed"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90d821fed",
+  "group": "N7",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: left join cone, fat-cone pushout and collapse fixed on every simplex, iso to the comma object, comparison as precomposition with an equivalence over the joint projection, every quasicategory pullback, small products, mapping-space homotopy pullback with the right-pinched boundary projection, naturality. Edge cases (empty K, K a point, empty products, universes) checked; node changes only lean and stmt_deps (4 landed deps, no cycle); lean.statement verbatim; no hollow defs; only the main theorem is sorry. FIXED: added the missing private imports of Sheaf.AlgebraicTopology.CellularNaturalEquivalence and Sheaf.CategoryTheory.IsofibrationExponentiation (stated proof_deps on the base; the report wrongly says unstated); corrected the coneCylinderEnd docstring (it covers both ends). The fix leaves signature and record unchanged; nt_compile.py clean on delivered and fixed file. Non-blocking: the landed bluntJoin with a point is isomorphic to fatLeftJoinCone but is a different object; the node defines the one-step pushout."
  }
 }

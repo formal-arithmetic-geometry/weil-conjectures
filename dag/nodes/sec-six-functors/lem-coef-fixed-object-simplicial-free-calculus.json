@@ -26,7 +26,8 @@
   "place": "Sections 1.4(iii)-(v), Proposition 2.7 (free-product invariance), Propositions 7.2 and 7.6 and Definition 7.4 (fixed-object structure and strong free retracts), pp.269-271,276-278. Agreement with Bergner cofibrations follows from the common fixed-object free boundary-cell generators immediately before and in HTT Proposition A.3.2.4, printed p.858; no Stacks tag states this enriched model-category result."
  },
  "stmt_deps": [
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-simplicial-interval-lifting"
  ],
  "proof": [
   {
@@ -237,5 +238,29 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-97d98e9f5 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, and Dwyer-Kan in the online scan: printed pp.269-271 (1.4, 2.1-2.9) and pp.276-278 (7.1-7.6). The statement is unchanged and matches DK 7.2, 7.4-7.6 and 2.7: free maps are 1-1 with degeneracy-stable generators, retracts keep the domain fixed, and the free-product clause needs no cofibrancy. Step 1 correctly specializes lem-coef-sorted-simplicial-algebra-model, including O empty. Step 2 is correct: Bergner trivial fibrations are exactly the maps surjective on objects with local trivial Kan fibrations, and the E_a/D_b restriction works when object maps are not injective. Step 3: in degree k a boundary-cell pushout adds exactly the surjections [k]->[m] as generators, degeneracies keep them as generators, and the retract argument is the standard one. Step 4 handles the two different initial objects (the empty category and I_O) correctly. Step 5 is the identity-allowed normal-form product/coproduct formula. Steps 6-7 follow DK 2.7(ii)-(iii) by diagonal arguments and are correct. The new node lem-coef-free-resolution-coproduct-augmentation matches DK 2.4-2.6 (face/degeneracy indices, how Fu acts on generators). It is DK 2.7(iii) as DK state it, specialized to constant A, and it is true: it is 2.7 applied to the weak equivalence F_*C->C of 2.6. It is strictly smaller than the item, has no proof deps, and duplicates no existing node: lem-coef-dk-cofibrant-localization-comparison covers only A=I_O and lem-coef-extra-degeneracy-contraction is generic. Its form passes B1-B9. Warning for whoever splits it later: wrapping each F-block into one generator is not an extra degeneracy (counterexample: the word u a v a^-1 u' with eps(v)=1). The worker honestly flagged this. Route: all cited statements are in sk-prop-sf-biduality-general, there are no tool_uses, no SGA is cited, and there is no cycle. FIX (C1/C4): step 2 uses 'Kan fibration + weak equivalence = trivial Kan fibration' and step 5 checks weak homotopy equivalences, both from lem-coef-kan-quillen-right-proper, which those steps did not cite. I added it to the uses of steps 2 and 5. proof_deps is unchanged. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedObjectSimplicialFreeCalculus",
+  "declaration": "SSet.Bergner.fixed_object_simplicial_free_calculus",
+  "declarations": [
+   "SSet.Bergner.IsDegreewiseFree",
+   "SSet.Bergner.IsDegreewiseCoproduct",
+   "SSet.Bergner.fixed_object_simplicial_free_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedObjectSimplicialFreeCalculus.lean",
+  "statement": "theorem fixed_object_simplicial_free_calculus (M : CategoryTheory.BergnerModelData.{u}) (O : Type u) : HasLimitsOfSize.{u, u} (Fixed O) ∧ HasColimitsOfSize.{u, u} (Fixed O) ∧ (∃ m : ModelCategory (Fixed O), m.categoryWithWeakEquivalences.weakEquivalences = fixedWeakEquivalences O ∧ m.categoryWithFibrations.fibrations = fixedFibrations O ∧ m.categoryWithCofibrations.cofibrations = fixedCofibrations O) ∧ HasFunctorialFactorization (fixedCofibrations O) (fixedFibrations O ⊓ fixedWeakEquivalences O) ∧ HasFunctorialFactorization (fixedCofibrations O ⊓ fixedWeakEquivalences O) (fixedFibrations O) ∧ (∀ (A B : Fixed O) (f : A ⟶ B), fixedCofibrations O f ↔ M.model.categoryWithCofibrations.cofibrations (bundleMap f)) ∧ (∀ A : Fixed O, fixedCofibrations O (discreteInclusion A) ↔ M.model.categoryWithCofibrations.cofibrations (fromEmpty (bundle A))) ∧ (∀ (A B : Fixed O) (f : A ⟶ B), fixedCofibrations O f → ∃ (B' : Fixed O) (j : A ⟶ B') (s : B ⟶ B') (r : B' ⟶ B), IsFreeExtension j ∧ f ≫ s = j ∧ j ≫ r = f ∧ s ≫ r = 𝟙 B) ∧ (∀ A : Fixed O, fixedCofibrations O (discreteInclusion A) → ∃ (B : Fixed O) (s : A ⟶ B) (r : B ⟶ A), s ≫ r = 𝟙 A ∧ IsDegreewiseFree B) ∧ (∀ (A B P : Fixed O) (i : A ⟶ P) (j : B ⟶ P), IsColimit (BinaryCofan.mk i j) → IsDegreewiseCoproduct i j) ∧ (∀ (X X' Y Y' P P' : Fixed O) (f : X ⟶ X') (g : Y ⟶ Y') (i : X ⟶ P) (j : Y ⟶ P) (i' : X' ⟶ P') (j' : Y' ⟶ P') (h : P ⟶ P'), IsColimit (BinaryCofan.mk i j) → IsColimit (BinaryCofan.mk i' j') → i ≫ h = f ≫ i' → j ≫ h = g ≫ j' → fixedWeakEquivalences O f → fixedWeakEquivalences O g → fixedWeakEquivalences O h)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the landed SSet.Bergner fixed-object category, local classes, discrete category, degreewise functors, and degeneracy-stable free-extension predicate. The added statement dependency records their owning landed node. No canonical construction is chosen from the postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5fa3de84a",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Every node clause matches the Lean in order (model structure with functorial factorizations, cofibrations agreeing with Bergner, cofibrant objects compared from I_O and from the empty category, fixed-domain retract of an IsFreeExtension map, degreewise-free retract, degreewise coproduct, coproduct invariance with no cofibrancy assumption). The two new predicates are concrete universal properties. Edge cases checked: empty O, loops, empty mapping sets, n=0, non-injective object maps. One universe u, no extra hypotheses. Node diff: only lean was added, plus the landed, acyclic stmt_dep lem-coef-simplicial-interval-lifting allowed by brief-stage2 section 5. lean.statement matches the file verbatim. Proof-dependency imports follow rule 7. Docstrings carry source and blueprint, the only sorry is the theorem's, no line over 100 characters, no duplicate declaration found. nt_compile.py exited 0 with no errors or warnings."
  }
 }
