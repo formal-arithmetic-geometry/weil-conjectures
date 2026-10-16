@@ -27,9 +27,84 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the Joyal model structure of [lem-coef-joyal-model-structure]. Every simplicial set is cofibrant, since its map from the empty simplicial set is degreewise injective. By [lem-coef-joyal-functor-equivalence-test], the categorical equivalences specified in the item are exactly the weak equivalences of this model structure. Call $L$ good when $\\eta_L$ is such a weak equivalence. The hypotheses give goodness of the empty simplicial set and of every standard simplex. Goodness is invariant under a simplicial isomorphism $a:L\\cong L\\prime$: naturality expresses $\\eta_{L\\prime}=Q(a)\\eta_LP(a)^{-1}$, and isomorphisms and composites of weak equivalences are weak equivalences.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.8; Definition 3.3.7 and Theorem 3.6.1; preparation for Proposition 4.2.3"
+   }
+  },
+  {
+   "text": "Goodness is closed under a pushout $L=X\\amalg_A B$ when $A\\hookrightarrow B$ is degreewise injective and $X,A,B$ are good. The connected-colimit hypotheses identify the two image spans and their pushouts with $P(L)$ and $Q(L)$. Their specified legs are monomorphisms. Use the weak factorization systems in [lem-coef-joyal-model-structure] to prove the comparison directly. In the following finite construction all coproducts and pullbacks are constructed degreewise in simplicial sets; their compatible maps are given on representatives or tuples, so their universal properties hold. Trivial cofibrations are closed under pushout and composition: a lifting square from a pushout is the original square with the prescribed extra map, and two successive lifts solve a square for a composite. Trivial fibrations are closed under pullback and composition by pulling a lifting problem back and taking successive lifts. The two lifting-class characterizations in the cited node justify these closure assertions.\n\nFor a map $f:S\\to T$ of spans $S=(X\\leftarrow A\\hookrightarrow B)$ and $T=(X'\\leftarrow A'\\hookrightarrow B')$ whose three components are weak equivalences, construct a span $R$ and maps $i:S\\to R$, $s:T\\to R$, $p:R\\to T$ with $pi=f$ and $ps=1$. First factor $X\\amalg X'\\to X'$ (with components $f_X,1$) as a cofibration into $R_X$ followed by a trivial fibration $p_X:R_X\\to X'$. Next factor $A\\amalg A'\\to A'\\times_{X'}R_X$ as a cofibration into $R_A$ followed by a trivial fibration. The map on the $A$ summand is $(f_A,i_X\\circ(A\\to X))$ and that on the $A'$ summand is $(1,s_X\\circ(A'\\to X'))$. Projection defines $R_A\\to R_X$ and $p_A:R_A\\to A'$. The latter is a trivial fibration because the projection $A'\\times_{X'}R_X\\to A'$ is a pullback of $p_X$. Finally put $D=(B\\amalg B')\\amalg_{A\\amalg A'}R_A$ and factor $D\\to B'$ as a cofibration into $R_B$ followed by a trivial fibration $p_B$. The map from $R_A$ to $B'$ is $R_A\\xrightarrow{p_A}A'\\to B'$. This defines the span $R_X\\leftarrow R_A\\to R_B$ and the three span maps, with the claimed identities on each component. In particular $p$ is an objectwise weak equivalence, and two-out-of-three makes both $i$ and $s$ objectwise weak equivalences.\n\nFor $t=i$ or $t=s$, write its source span as $U=(U_X\\leftarrow U_A\\hookrightarrow U_B)$. Its maps $t_X,t_A$ are monomorphisms, since a coproduct injection followed by a cofibration is degreewise injective. The relative map $k_t:U_B\\amalg_{U_A}R_A\\to R_B$ is also monic: its map to $D$ is the pushout of the other source span's monomorphism $A'\\hookrightarrow B'$ (for $t=i$) or $A\\hookrightarrow B$ (for $t=s$), followed by the chosen cofibration $D\\to R_B$. A pushout of an injective map is injective degreewise, because only boundary elements are identified with old elements and no two old elements are identified. As $t_A$ is a weak equivalence as well as a monomorphism, it is a trivial cofibration; hence $U_B\\to U_B\\amalg_{U_A}R_A$ is a trivial cofibration by the lifting argument above. Its composite with $k_t$ is $t_B$, a weak equivalence. Thus $k_t$ is a weak equivalence by two-out-of-three, and is therefore a trivial cofibration. Likewise $t_X$ is a trivial cofibration. The induced map on span pushouts factors as\n$$U_X\\amalg_{U_A}U_B\\longrightarrow R_X\\amalg_{U_A}U_B\\cong R_X\\amalg_{R_A}(R_A\\amalg_{U_A}U_B)\\longrightarrow R_X\\amalg_{R_A}R_B.$$\nThe first arrow is a pushout of $t_X$ and the last a pushout of $k_t$, so both are trivial cofibrations. The middle isomorphism follows by giving the same three compatible maps out of either expression. Consequently the pushout maps induced by $i,s$ are weak equivalences. Since $ps=1$, two-out-of-three makes the pushout map induced by $p$ a weak equivalence too, and $pi=f$ proves that induced by $f$ is a weak equivalence. Apply this construction to the map of image spans given by $\\eta_X,\\eta_A,\\eta_B$. Naturality identifies the resulting pushout comparison with the specified component $\\eta_L$, since both agree on each pushout summand. This proves goodness of $L$.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 2.3.29; explicit finite factorization proof of its span comparison, using only the Joyal weak factorization systems. The argument is written out here instead of citing the cyclic generic comparison node."
+   }
+  },
+  {
+   "text": "Goodness is closed under small nonzero limit-ordinal colimits. Let $\\lambda$ be a small nonzero limit ordinal and $(L_\\alpha)_{\\alpha<\\lambda}$ a diagram of good simplicial sets. Its ordinal category is nonempty and filtered: any two indices map to their maximum, and parallel arrows in a poset are equal. It is connected for the same reason. Thus $P,Q$ preserve its colimit, and the natural transformation $(\\eta_{L_\\alpha})$ is an objectwise Joyal weak equivalence by goodness. Apply [lem-coef-joyal-filtered-equivalences] to these two image diagrams. It gives a weak equivalence between their colimits; the preservation isomorphisms identify it with $\\eta_{\\operatorname{colim}L_\\alpha}$, because both maps have the same composite with every structure map by naturality. This proves goodness of the colimit. In particular it applies to continuous chains of monomorphisms and to $\\lambda=\\omega$. A chain with no attachment has its starting object as endpoint; successor endpoints are handled by Step 2. The cited filtered-colimit theorem does not require monomorphism transitions, so no extra preservation hypothesis is imposed on $P,Q$.",
+   "uses": [
+    "lem-coef-joyal-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 3.9.8, printed pp. 134-135: weak categorical equivalences are stable under all small filtered colimits."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to $\\varnothing\\hookrightarrow L$ to obtain subobjects $Z_0=\\varnothing\\hookrightarrow Z_1\\hookrightarrow\\cdots$ with colimit $L$, where stage $n$ attaches the nondegenerate $n$-simplices along their boundaries. The same statement applied to $\\varnothing\\hookrightarrow\\partial\\Delta^n$ constructs that boundary using cells of dimension less than $n$: a nondegenerate simplex of $\\Delta^n$ corresponds to a strictly increasing vertex map, and one belongs to the boundary exactly when its image is a proper subset of $[n]$, so its dimension is less than $n$. For $n=0$ the boundary is empty. A stage attaching a small family $(\\partial\\Delta^n\\to\\Delta^n)_{t\\in T}$ to $X$ can be refined to individual attachments: well-order $T$ with order type $\\tau$ and put $V_\\beta=X\\amalg_{\\coprod_{t<\\beta}\\partial\\Delta^n}\\coprod_{t<\\beta}\\Delta^n$ for $\\beta\\leq\\tau$. Maps from $V_\\beta$ to any simplicial set are exactly a map from $X$ and a map from each included cell agreeing on its boundary. This describes $V_0=X$, identifies each successor as a single-cell pushout and each nonzero limit as the colimit of its predecessors, and identifies $V_\\tau$ with the original simultaneous attachment. These transition maps are monomorphisms: degreewise, each new cell glues in its complement of the boundary without identifying any old elements. This refinement is a construction in simplicial sets; no preservation of these coproducts by $P$ or $Q$ is asserted.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 1.3.8 and Corollary 1.3.10; explicit refinement of each boundary-cell stage by its universal property"
+   }
+  },
+  {
+   "text": "Prove by induction on $n\\geq0$ that every simplicial set with no nondegenerate simplices of dimension greater than $n$ is good; the starting assertion in dimension $-1$ is the empty simplicial set. Assume the assertion in all lower dimensions. Step 4 constructs $\\partial\\Delta^n$ in finitely many stages of cells of dimensions less than $n$. Equivalently it has dimension at most $n-1$, so the inductive hypothesis makes it good (for $n=0$ use the empty-set hypothesis). Let $L$ have dimension at most $n$. In its filtration of Step 4, the stages before the $n$-cell attachment have dimension at most $n-1$, and hence are good; let $X=Z_n$ be the last of them. Refine the $n$-cell attachment to the continuous chain $(V_\\beta)_{\\beta\\leq\\tau}$ of Step 4. Induct on $\\beta$: the base $V_0=X$ is good, a successor is good by Step 2 using goodness of $\\partial\\Delta^n$, $\\Delta^n$ and $V_\\beta$, and every nonzero limit is good by Step 3. The boundary inclusions into the standard simplices are monomorphisms, as are the transition maps by Step 4; the attaching maps from boundaries to the old base need not be monomorphisms. Thus $V_\\tau=Z_{n+1}$ is good. All later stages add no cells and their maps are isomorphisms, since $L$ has no higher nondegenerate simplices; their colimit is $L$. Hence $L\\cong Z_{n+1}$ is good. This proves the dimension induction, including arbitrary small infinite sets of cells in each fixed dimension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 1.3.10, expanded dimension induction using Steps 2-4; the representable hypotheses remain the hypotheses of the item"
+   }
+  },
+  {
+   "text": "For arbitrary small $K$, use its boundary-cell sequence $(Z_n)$ from Step 4. Each $Z_n$ has dimension less than $n$: it is assembled from simplices of dimensions $0,\\ldots,n-1$, and these simplices and their degeneracies contain no higher nondegenerate simplex. Thus Step 5 makes every $Z_n$ good, including $Z_0=\\varnothing$. Its transitions are monomorphisms and its colimit is $K$. Step 3 for the nonzero limit ordinal $\\omega$ gives that $\\eta_K$ is a Joyal weak equivalence. By [lem-coef-joyal-functor-equivalence-test], precomposition by this very map is an equivalence of the entire functor quasicategories into every quasicategory in a sufficiently large universe. This is the conclusion with exactly the categorical-equivalence convention stated in the item.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 1.3.10 and Theorem 3.6.8; conclusion of the cellular reduction underlying Proposition 4.2.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-filtered-equivalences",
+  "lem-coef-infinity-monomorphism-boundary-cells"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Agent expansion of the cellular argument underlying Proposition 4.2.3: Corollary 1.3.10 and Theorem 3.6.8; the pushout comparison is proved explicitly from the Joyal weak factorization systems, and the limit step uses Corollary 3.9.8. Read online, not archived. Individual attachments use only connected-colimit preservation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,12 +157,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-join-cone-calculus",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cellular-natural-equivalence",
+  "worker": "stage1",
+  "summary": "Rebased the retained split onto current shared node metadata and removed the cyclic generic model-colimit dependency. Proved the finite span comparison directly from the Joyal factorization/lifting axioms in Step 2; reused the existing acyclic Joyal filtered-colimit theorem in Step 3. Retained the cellular and dimension induction and the one new convention-comparison node. Statement unchanged; one new unsplit statement and no Mathlib leaves.",
+  "blueprint": "Proof paragraph 2, displayed derived R Hom / R lim calculation: coherent diagram realization through finite-Reedy localization, at the source-attachment join/cone comparison. Cellular extension of the explicitly proved standard-simplex cone comparison; this statement mentions no join or cone. Steps 1-6 carry the cellular extension within the inherited enhancement route; only foundational comparison tools change."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-d243368ec",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-d243368ec (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-joyal-functor-equivalence-test and every cited statement in full: def-cbc-enhanced-diagrams-cones, lem-coef-joyal-model-structure, lem-coef-joyal-filtered-equivalences, and the Mathlib leaf lem-coef-infinity-monomorphism-boundary-cells (SSet.relativeCellComplexOfMono). Also read the unit and chapter records and the parent's citing step. Cisinski is not archived; the item and the new node are marked agent-written and the report has a WANTED line. The item's statement, stmt_deps and unit are identical to the live and side copies, which are still unsplit, so the target is not weakened. Step 2 is a correct, complete written cube-lemma argument: the factorizations are well defined, k_t is monic through the other span's monic leg, two-out-of-three gives the trivial cofibrations, and the pushout map factors as two pushouts of trivial cofibrations. It uses only the factorization and lifting facts stated in the Joyal model-structure node. Step 3 correctly uses a nonzero limit ordinal as a filtered, connected index category. Steps 4–6 give a correct boundary-cell refinement with single-cell pushouts (pushouts over the empty set, so no coproduct or initial-object preservation is needed; this matters because the parent has P(∅)=Δ^0) and a strong dimension induction plus the ω-skeleton step. My own traversal finds 14 reachable nodes and no cycle. The removed lem-coef-model-cofibrant-colimit-comparison and lem-coef-all-cofibrant-left-proper do reach the item, so removing them was needed. All citations are inside unit sk-prop-sf-biduality-general, so no tool_uses are needed. The new node (Cisinski Thm 3.6.8: Joyal weak equivalence iff the whole-Fun precomposition map is an equivalence iff the hFun functor is an equivalence) is true, self-contained, statement-only and searched with three kinds of search. It duplicates no existing node: the quasicategory-characterizations, homotopy-exponentials and shape-categorification nodes differ, and it restates no clause of the item. Its blueprint from/via is correct. No fixes were made."
+ }
 }

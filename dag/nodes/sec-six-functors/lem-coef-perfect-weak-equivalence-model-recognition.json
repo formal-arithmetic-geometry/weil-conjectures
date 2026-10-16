@@ -29,9 +29,111 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C=\\mathrm{Cof}$ and regard $W$ as a full subcategory of the arrow category. It is replete: if $g=bfa^{-1}$ for isomorphisms $a,b$ and $f\\in W$, two-out-of-three gives $g\\in W$. Its given fixed small generating subset and filtered-colimit closure give accessibility with $\\lambda=\\aleph_0$, using the explicit accessibility definition in [lem-coef-accessible-intersection-generators]. To verify retract closure independently, let $f$ be an arrow retract of $w\\in W$, with arrow maps $s:f\\to w$ and $r:w\\to f$ satisfying $rs=1$. Put $e=sr$. The countable chain $w\\xrightarrow e w\\xrightarrow e\\cdots$ has colimit $f$, with all cocone maps $r$: a cocone $(t_n)$ satisfies $t_{n+1}e=t_n$, whence $t_ne=t_n$ and $t_{n+1}=t_n$; its unique factor through $f$ is $t_0s$. This computation works in the arrow category, whose colimits are computed at source and target by their universal properties. All chain objects are in $W$, so filtered-colimit closure gives $f\\in W$.",
+   "uses": [
+    "lem-coef-accessible-intersection-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.2.6.2 and Definition A.2.6.12; explicit split-idempotent chain proof of retract closure."
+   }
+  },
+  {
+   "text": "For any arrow $a:A\\to A'$, apply [lem-coef-accessible-small-object-factorization] with the given locally presentable category and small set $I$. It gives a functorial factorization $a=pi$ with $p\\in I^{\\square}$ and $i$ in the weakly saturated closure $C$ of $I$. Thus $p\\in W$ by hypothesis. Hom-smallness, the existence of small colimits, local presentability and the smallness of $I$ are exactly the hypotheses of the cited statement. No nonemptiness of $I$ is required, and no preservation property of its extra accessible middle-object functor is used.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.15, final paragraph of proof: factor the arbitrary cobase map by the small-object argument; cellular factorization supplied by the cited DAG node."
+   }
+  },
+  {
+   "text": "We prove closure of $C\\cap W$ under arbitrary pushouts, rather than merely pushouts along cofibrations. Let $j:A\\to B$ belong to $C\\cap W$ and let $a:A\\to A'$ be arbitrary. Factor $a=pi$ as in Step 2 with $i:A\\to T$ in $C$ and $p:T\\to A'$ in $W$. Put $D=B\\amalg_A T$ and $B'=B\\amalg_A A'$. Let $j_1:T\\to D$, $j':A'\\to B'$ and $p':D\\to B'$ be the induced maps. By the pushout universal properties, $j_1$ is the pushout of $j$ along $i$, and the square with sides $j_1,j',p,p'$ is a pushout. Hence $j_1\\in C$ by weak saturation and $j_1\\in W$ by the assumed stability of $W$ along $C$. Now $p'$ is the pushout of $p\\in W$ along $j_1\\in C$, so $p'\\in W$ by the same hypothesis. The equation $j'p=p'j_1$ and two-out-of-three imply $j'\\in W$. Also $j'\\in C$ by weak saturation. This proves the required arbitrary pushout closure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.15, final pushout rectangle argument; all inputs provided in Step 2 or in the item hypotheses."
+   }
+  },
+  {
+   "text": "The class $C\\cap W$ contains isomorphisms and is retract closed by Step 1 and the retract closure of $C$. For a small continuous ordinal chain of maps in $C\\cap W$, induct on the ordinal $\\beta$ to show $X_0\\to X_\\beta$ is in $W$. At zero it is an identity; a successor follows from two-out-of-three applied to composition; at a nonzero limit $\\beta$ it is the filtered colimit of the already known arrows $X_0\\to X_\\alpha$, $\\alpha<\\beta$. The constant source diagram has colimit $X_0$, and continuity gives target colimit $X_\\beta$. Therefore filtered-colimit closure proves the limit case. The composite also belongs to $C$ by its weak saturation. Together with Step 3 this proves that $C\\cap W$ is weakly saturated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.15, proof of weak saturation of C intersect W; limit and retract details written out."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-intersection-generators]. Its set-generation hypothesis for $C$ is the definition of $C$ as the weak saturation of $I$. Weak saturation of $C\\cap W$ was proved in Steps 3--4; repleteness and accessibility of $W$ were verified in Step 1; two-out-of-three is assumed. Obtain a small set $J\\subseteq C\\cap W$ whose weakly saturated closure is exactly $D=C\\cap W$. This use is only a theorem about generating sets; it assumes no right-lifting inclusion and supplies no model structure.",
+   "uses": [
+    "lem-coef-accessible-intersection-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.2.6.9, applied after the closure argument of Proposition A.2.6.15."
+   }
+  },
+  {
+   "text": "Here is the lifting calculation for either generating set $K=I$ or $K=J$. Fix a right map $p\\in K^{\\square}$. The left maps lifting against $p$ contain isomorphisms. A square from a pushout of a lifting map restricts to a square from that map; the pushout universal property extends its filler. For a continuous transfinite chain of lifting maps, construct compatible fillers starting with the given map on its first object, extend using the lifting property at each successor, and take the compatible map from the colimit at each limit. At the last object this is the required filler. Closure under arrow retracts follows from [lem-coef-lifting-class-closure], as does retract closure of $K^{\\square}$. Thus every map in $L=\\operatorname{wsat}(K)$ lifts against every map in $R=K^{\\square}$. Conversely $L^{\\square}=K^{\\square}$, since $K\\subseteq L$ and the preceding calculation supplies the reverse inclusion.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary lifting calculation for weak saturation, compare HTT A.1.2 and A.2.6.10; successor and limit filler construction specified explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-small-object-factorization] separately to $K=I$ and $K=J$. Each gives a functorial factorization $f=pi$ with $i\\in L=\\operatorname{wsat}(K)$ and $p\\in R=K^{\\square}$. To prove ${}^{\\square}R=L$, the inclusion from right to left is Step 6. If $f:X\\to Y$ lifts against $R$, use the square with top $i:X\\to Z$, left $f$, right $p:Z\\to Y$, and bottom $1_Y$ to get $d:Y\\to Z$ with $df=i$ and $pd=1_Y$. The arrow morphisms $(1_X,d):f\\to i$ and $(1_X,p):i\\to f$ exhibit $f$ as a retract of $i$, so $f\\in L$. Together with Step 6 this gives both mutually characterized lifting classes and the factorizations: $(C,R_I)$ and $(D,F)$ are functorial weak factorization systems, where $R_I=I^{\\square}$ and $F=J^{\\square}=D^{\\square}$. Their small generating sets are $I$ and $J$.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.10, both small-object factorizations and the explicit retract argument for their left classes."
+   }
+  },
+  {
+   "text": "We identify $R_I=F\\cap W$. Since $R_I=C^{\\square}$ by Step 6, $D\\subseteq C$ gives $R_I\\subseteq D^{\\square}=F$, and the item assumes $R_I\\subseteq W$. Conversely let $q:X\\to Y$ lie in $F\\cap W$. Factor it by the $I$-factorization of Step 7 as $q=pi$ with $i:X\\to Z$ in $C$ and $p:Z\\to Y$ in $R_I\\subseteq W$. Two-out-of-three gives $i\\in W$, hence $i\\in D$. Since $q\\in F=D^{\\square}$, the square with top $1_X$, left $i$, right $q$, bottom $p$ has a filler $d:Z\\to X$ satisfying $di=1_X$ and $qd=p$. The maps $(i,1_Y):q\\to p$ and $(d,1_Y):p\\to q$ exhibit $q$ as an arrow retract of $p$. The right lifting class $R_I$ is retract closed by [lem-coef-lifting-class-closure], so $q\\in R_I$.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.10, final trivial-fibration lifting argument; arrow retraction maps written out."
+   }
+  },
+  {
+   "text": "Put $\\mathrm{Fib}=F=(C\\cap W)^{\\square}$. Steps 7--8 give $(C,\\mathrm{Fib}\\cap W)$ and $(C\\cap W,\\mathrm{Fib})$ as functorial weak factorization systems generated by $I$ and $J$. The category is complete and cocomplete by hypothesis; $W$ has two-out-of-three by hypothesis and is retract closed by Step 1; $C$ is retract closed by its weak saturation and $F$ is retract closed by Step 6. These are exactly the model-category axioms, so they specify the required model structure. Local presentability and the two small generating sets make it combinatorial. The original pushout hypothesis is precisely left properness. The lifting equalities and both factorization assertions have already been proved. All small sets, ordinal colimits and the functorial factorizations furnished by the cited small-object theorem are in the specified universe.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.10 and Proposition A.2.6.15 conclusions, here assembled directly from the verified axioms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-intersection-generators",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-lifting-class-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent proof following HTT A.2.6.15 closure argument and A.2.6.10 lifting/retract argument, with A.2.6.9 as a smaller statement-only small-generators input; online unarchived source."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +183,38 @@
    "results": "{\"t\": \"2026-10-16T16:57:59Z\", \"tool\": \"leanfinder\", \"query\": \"Jeff Smith theorem constructs weak factorization systems from accessible weak equivalences and a set of cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.cm5b\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.cm5a\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\"], \"digest\": \"0c5913ed68f83b8a\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned weak factorization instances and mk' assume a ModelCategory or both weak factorization systems; they do not construct them from a perfect class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect class of weak equivalences and generating cofibrations recognize a left proper combinatorial model structure",
+   "results": "{\"t\": \"2026-10-16T19:16:16Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect class of weak equivalences and generating cofibrations recognize a left proper combinatorial model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.cm4b\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"e04cef332cbfb289\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory.mk and mk' assume model axioms or both WFS; they do not infer a model structure from perfect weak equivalences and a generating set. Read Basic.lean:127-160. The targeted grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recognition of combinatorial model categories from accessible weak equivalences",
+   "results": "{\"t\": \"2026-10-16T19:16:14Z\", \"tool\": \"leansearch\", \"query\": \"Recognition of combinatorial model categories from accessible weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"a3a250c9dfa57646\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory.mk and mk' assume model axioms or both WFS; they do not infer a model structure from perfect weak equivalences and a generating set. Read Basic.lean:127-160. The targeted grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory.mk",
+   "results": "{\"t\": \"2026-10-16T19:16:14Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory.mk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk\"], \"digest\": \"b049b1adcc2d32db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory.mk and mk' assume model axioms or both WFS; they do not infer a model structure from perfect weak equivalences and a generating set. Read Basic.lean:127-160. The targeted grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Smith|recognition|PerfectClass",
+   "results": "{\"t\": \"2026-10-16T19:16:14Z\", \"tool\": \"grep\", \"query\": \"Smith|recognition|PerfectClass\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory.mk and mk' assume model axioms or both WFS; they do not infer a model structure from perfect weak equivalences and a generating set. Read Basic.lean:127-160. The targeted grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -92,5 +222,21 @@
   "group": "N4"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-perfect-weak-equivalence-model-recognition",
+  "worker": "stage1",
+  "summary": "Repaired incorrect lifting classes and removed the cyclic generic Smith citation. Proved retract/transfinite/arbitrary-pushout closure, used the smaller HTT A.2.6.9 small-generators lemma as one new statement-only node, and built the two functorial WFS by existing accessible small-object factorizations and explicit retract arguments. The item statement is unchanged.",
+  "blueprint": "Provides the generic model-recognition infrastructure used under the marked-point model node, supporting the finite-adjunction-diagram realization in prop-coef-integral-exceptional-adjoint, proof paragraph 2 before the displayed derived-limit calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-77e3994bf",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-77e3994bf (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-accessible-intersection-generators, all cited statements (accessible-small-object-factorization; lifting-class-closure, a Mathlib leaf; size and colimit definitions), the possible duplicate lem-coef-smith-model-recognition, and the HTT PDF via pdftotext: Def A.2.6.2, Lemma A.2.6.9 pp.821-823, Prop A.2.6.10, Def A.2.6.12, Prop A.2.6.15 and its proof p.827. The item matches A.2.6.12 and A.2.6.15. Its pushout hypothesis is stronger than HTT's (2), the statement is still true and unchanged, and the conclusion is not weakened. I checked every step. Step 1: the split-idempotent chain gives retract closure, and A.2.6.2 holds with kappa=omega. Step 3: the rectangle from p.827, with both pushouts taken along cofibrations, and two-out-of-three. Step 4: the transfinite induction, where the limit case is a filtered colimit with constant source. Step 5: A.2.6.9 hypotheses (1)-(4) hold. Steps 6-8: the lifting closure and both retract arguments; I checked the commuting squares (1,d),(1,p) and (i,1),(d,1). Step 9: the model axioms, combinatoriality and left properness. The new node agrees with A.2.6.9 hypothesis by hypothesis. It is statement-only, self-contained and searched in Mathlib. It is strictly weaker than the item: in Set with C=W=isomorphisms the node holds but recognition fails. Smith (A.2.6.10) is a different, stronger statement, and citing it would be cyclic: I confirmed it is an ancestor of the item. Route: all cited nodes are in unit sk-prop-sf-biduality-general, with no SGA and no tool_uses. Pre-existing minor point, not changed: the item's stmt_deps lacks def-weil-pbc-category-colimit. No fixes."
+ }
 }

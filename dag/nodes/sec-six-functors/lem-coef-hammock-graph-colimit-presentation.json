@@ -30,9 +30,74 @@
   "lem-coef-proper-word-colimit-invariance",
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each signed word $h$, take the category $Z_h(x,y)$ of [def-coef-zigzag-homotopy-calculus], using only its $+$ and $-$ letters, and set $G(h)=NZ_h(x,y)$. A string of $q$ morphisms is exactly the stated $q+1$-row hammock: its successive vertical maps lie in $T$, and its endpoint maps are identities. For a morphism $f:h'\\to h$ of [lem-coef-proper-word-colimit-invariance], every nonempty fiber is a consecutive block with the sign of its image position. Number source and target vertices starting at zero. At target vertex $i$ retain source vertex $k_i=|\\{j:f(j)\\leq i\\}|$ and its vertical arrows; in particular $k_0=0$ and $k_l=l\\prime$, where $l\\prime$ is the source length. The columns in the fiber at $i$ connect source vertices $k_{i-1}$ and $k_i$. Compose that block, in its arrow direction, and insert an identity at that vertex for an empty fiber. Commutativity of the original squares makes the resulting squares commute; closure of $T$ under composition handles negative blocks and composed vertical maps. If two word maps are composed, the two procedures compose exactly the same ordered blocks, with identities for missing positions, so associativity and units give $G(gf)=G(g)G(f)$ and $G(1)=1$. The same identities show that these operations commute with all nerve row operators. Thus $G$ is the asserted functor to simplicial sets.",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance",
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definitions 4.1 and 5.1–5.3, printed pp.22–24; explicit verification of the fixed-word construction"
+   }
+  },
+  {
+   "text": "An injective word map inserts entirely identity columns and leaves all retained horizontal arrows unchanged. Conversely a hammock of the target shape lies in its image exactly when every omitted column is entirely identity. Indeed, in any identity column the objects on its two sides agree in each row, and its commuting squares force their vertical arrows to agree, so deleting these columns recovers a unique source hammock, including its vertical arrows. This proves degreewise injectivity. Given two injections into the same word, belonging to both images means that the columns outside either image are identities, equivalently that every column outside their intersection is identity. The preceding deletion construction gives precisely the image of the intersection injection. This is both clauses of properness in [lem-coef-proper-word-colimit-invariance]. If the intersection is empty, deletion forces every row to be the same endpoint $x=y$ and all vertical maps to be endpoint identities; otherwise the intersection image is empty, as required.",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 4.4 and Proposition 5.4, printed pp.23–24; identity-column image calculation"
+   }
+  },
+  {
+   "text": "Fix a row degree and allow two reduction moves: delete an entirely identity column, or compose two adjacent columns of the same sign. Both preserve commutativity and membership of leftward and vertical maps in $T$ and strictly decrease word length, so every sequence terminates. Check any two first moves from one diagram. Identical moves agree. Moves on disjoint columns can be performed in either order and give the same diagram. Two compositions sharing a column concern three equally directed columns; composing the remaining pair on either side gives the same triple composite by associativity. A deletion sharing a column with a composition deletes an identity factor, so the composition already gives the diagram obtained by deletion, by the unit law. Two distinct identity deletions commute, even if adjacent. Equality of the vertical data in these comparisons follows from the identity-column square calculation in step 2. These cases exhaust the first-move pairs and give a common further reduct. Now prove uniqueness of a terminal reduct by strong induction on the initial word length. An irreducible diagram has only itself as terminal reduct, including length zero. Otherwise two reduction sequences start with diagrams $D_1,D_2$ of smaller length. Their first moves have a common further reduct $E$ by the cases just checked. Choose a terminal reduct of $E$, which exists by termination. The induction hypothesis for $D_1$ identifies this with the terminal reduct of the first sequence, and the hypothesis for $D_2$ identifies it with that of the second. Thus both sequences have the same terminal reduct, denoted $R(D)$. Irreducibility is exactly alternating directions with no entirely identity column. A length-zero diagram exists exactly for equal endpoints and is the constant identity hammock. Composing a same-sign pair is a surjective word-map relation, while deletion of an identity column is the reverse of an injective word-map relation. Consequently every $D$ represents the same colimit class as $R(D)$.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1 and Proposition 5.5, printed pp.19,24; written-out termination and induction on word length"
+   }
+  },
+  {
+   "text": "Every word map factors into the surjection onto its ordered signed image and the injection of that image into the target word: list the occupied target positions in increasing order. A surjection composes consecutive equal-sign blocks and is a sequence of pair compositions; an injection inserts identity columns. Hence every word-map relation preserves $R$, by step 3, including its reverse. Conversely two diagrams with the same $R$ are connected by their respective finite reductions to that same diagram. By the degreewise quotient-colimit assertion of [lem-coef-proper-word-colimit-invariance], the map $[D]\\mapsto R(D)$ is therefore well-defined, injective and surjective in each row degree; the inverse sends a reduced diagram to its colimit class. To check simplicial structure, let $\\alpha$ be a raw nerve row operator of [def-coef-zigzag-homotopy-calculus]. It sends an identity deletion to an identity deletion and a same-sign composition to that same composition, since restriction to rows and vertical composition preserve the horizontal composites and their squares. Thus applying $\\alpha$ to any reduction sequence gives a sequence of valid reductions, and uniqueness gives $R(\\alpha R(D))=R(\\alpha D)$. Define the row action on reduced diagrams by $R\\alpha$. Then $R\\alpha R\\beta=R\\alpha\\beta$, so the raw nerve identities give all simplicial identities after reduction. The degreewise bijections commute with these operators and constitute the required simplicial-set isomorphism.",
+   "uses": [
+    "lem-coef-proper-word-colimit-invariance",
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definitions 2.1, 5.1, 5.3 and Proposition 5.5, printed pp.19,24; quotient identification and row-operator check"
+   }
+  },
+  {
+   "text": "Let $F:(P,T)\\to(P',T')$ be any functor of pairs. Applied entrywise to unreduced hammocks, it preserves endpoint identities, distinguished arrows, commuting squares and ordered composites. It therefore commutes with each fixed-word structure map and with each raw row operator. It sends each reduction move to a valid reduction move, so uniqueness gives $R(F(R(D)))=R(F(D))$. Define its action on reduced hammocks by $D\\mapsto R(F(D))$; the displayed equality proves compatibility with reduction and with composition of pair functors, even when $F$ sends further nonidentity arrows to identities or identifies endpoints. On the colimit class of every representative $D$, both sides of the naturality square are $R(F(D))$, so the reduction isomorphism is natural. When pairs vary simplicially on a fixed object set, apply this argument to each simplicial structure functor: for a structure functor $F$ and a raw row operator $\\alpha$, the equality just proved gives $R F R\\alpha=R F\\alpha=R\\alpha F=R\\alpha R F$. Thus the two reduced directions commute. Identities and composites of the structure functors satisfy their simplicial identities after reduction because $R F R=R F$. Hence the assertion also respects every simplicial operator in that parameter.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, Section 3.4 and Definitions 5.1–5.3, printed pp.19,21,24; naturality of reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-proper-word-colimit-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Explicit construction and finite reduction argument for Definitions 2.1, 4.1, 4.4, 5.1, 5.3 and Propositions 5.4–5.5; printed pp.19,22–24. Paper read online; no copy is archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +154,101 @@
    "results": "{\"t\": \"2026-10-16T17:10:18Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer|zigzag.{0,20}(nerve|colimit)|properFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"e50bfa334ac78b2b\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Generic enriched functor-category Hom equivalences, simplicial-object colimit existence and ordinary colimit zigzags do not state fixed-shape relative homotopy invariance or the reduction/properness of hammock graphs. Read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:58–89, AlgebraicTopology/SimplicialCategory/SimplicialObject.lean:35–44, CategoryTheory/Enriched/FunctorCategory.lean:48–100, and AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean:39–67."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of fixed-type hammock graph nerves is the reduced hammock simplicial set and is natural in simplicial pairs",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of fixed-type hammock graph nerves is the reduced hammock simplicial set and is natural in simplicial pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveMap\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"b88c7dfd38a7075d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, SSet, colimit, nerve, localization",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, SSet, colimit, nerve, localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'colimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern: Loogle reported unknown identifier colimit; not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Dwyer|fixed.word|zigzag.*colimit",
+   "results": "{\"t\": \"2026-10-16T18:31:34Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer|fixed.word|zigzag.*colimit\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|Dwyer|zigzag.*colimit",
+   "results": "{\"t\": \"2026-10-16T19:17:15Z\", \"tool\": \"grep\", \"query\": \"hammock|Dwyer|zigzag.*colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/IsConnected.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\"], \"digest\": \"e50bfa334ac78b2b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hammock localization as colimit of unreduced fixed length zigzag diagram nerves",
+   "results": "{\"t\": \"2026-10-16T19:17:16Z\", \"tool\": \"leansearch\", \"query\": \"Hammock localization as colimit of unreduced fixed length zigzag diagram nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"CategoryTheory.ShortComplex.colimitCocone\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"CategoryTheory.Limits.Types.zigzag_of_eqvGen_colimitTypeRel\", \"CategoryTheory.ShortComplex.isColimitColimitCocone\", \"CategoryTheory.Functor.Final.zigzag_of_eqvGen_colimitTypeRel\", \"CategoryTheory.ShortComplex.hasColimit_of_hasColimitπ\", \"instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences\"], \"digest\": \"b79d3a34710c49d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerveFunctor\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T19:17:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerveFunctor\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed word hammock diagrams with identity insertion and column composition form a proper simplicial set diagram whose colimit is reduced hammocks",
+   "results": "{\"t\": \"2026-10-16T19:17:26Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed word hammock diagrams with identity insertion and column composition form a proper simplicial set diagram whose colimit is reduced hammocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"CategoryTheory.SimplicialNerve\", \"SSet.horn.isColimit\", \"CategoryTheory.nerve\", \"SSet.S1\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.cechNerveTerminalFrom\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"28fecbf48f882e01\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite signed strings of composable arrows reduce uniquely by composing equal direction blocks and deleting identity columns",
+   "results": "{\"t\": \"2026-10-16T19:17:27Z\", \"tool\": \"leanfinder\", \"query\": \"Finite signed strings of composable arrows reduce uniquely by composing equal direction blocks and deleting identity columns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAddGroup.Red.Step.diamond_aux\", \"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"CategoryTheory.ComposableArrows.mk₅_surjective\", \"FreeGroup.Red.Step.diamond_aux\", \"CategoryTheory.ComposableArrows\", \"SimplexCategoryGenRel.standardσ_comp_standardσ\", \"CategoryTheory.ComposableArrows.mk₄_surjective\", \"Composition.sigma_pi_composition_eq_iff\"], \"digest\": \"bd0e58f05877e69e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "def nerve|def SimplicialNerve|def Hom|diamond_aux|structure ComposableArrows",
+   "results": "{\"t\": \"2026-10-16T19:17:41Z\", \"tool\": \"grep\", \"query\": \"def nerve|def SimplicialNerve|def Hom|diamond_aux|structure ComposableArrows\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"872f566d48be6682\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned nerves, coherent nerve, ordinary colimit zigzags, free-group reductions and simplex normal forms do not construct fixed-word hammocks, prove their properness, or identify their reduced colimit. Read the reported signatures and relevant source definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*nerve|nerve.*localization|Hammock|hammock",
+   "results": "{\"t\": \"2026-10-16T19:38:18Z\", \"tool\": \"grep\", \"query\": \"localization.*nerve|nerve.*localization|Hammock|hammock\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. The semantic signatures concern ordinary nerves, Segal structure, coherent nerve, connectedness and ordinary colimit zigzags, not proper fixed-word hammock diagrams or their reduced colimit. Loogle and grep returned zero hits. Read Nerve.lean:35-94, SimplicialNerve.lean:187-200 and Limits/IsConnected.lean:93-102; no declaration gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "results": "{\"t\": \"2026-10-16T19:38:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. The semantic signatures concern ordinary nerves, Segal structure, coherent nerve, connectedness and ordinary colimit zigzags, not proper fixed-word hammock diagrams or their reduced colimit. Loogle and grep returned zero hits. Read Nerve.lean:35-94, SimplicialNerve.lean:187-200 and Limits/IsConnected.lean:93-102; no declaration gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative category localization is presented by nerves of diagram categories indexed by finite colored ordered sets with arrow composition and identity insertion",
+   "results": "{\"t\": \"2026-10-16T19:38:27Z\", \"tool\": \"leanfinder\", \"query\": \"A relative category localization is presented by nerves of diagram categories indexed by finite colored ordered sets with arrow composition and identity insertion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.representableBy\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"1b133385e879fb90\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. The semantic signatures concern ordinary nerves, Segal structure, coherent nerve, connectedness and ordinary colimit zigzags, not proper fixed-word hammock diagrams or their reduced colimit. Loogle and grep returned zero hits. Read Nerve.lean:35-94, SimplicialNerve.lean:187-200 and Limits/IsConnected.lean:93-102; no declaration gives this statement or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a category with a distinguished subcategory, finite zigzag nerves form a diagram whose colimit consists of unique alternating identity-free representatives",
+   "results": "{\"t\": \"2026-10-16T19:39:02Z\", \"tool\": \"leansearch\", \"query\": \"For a category with a distinguished subcategory, finite zigzag nerves form a diagram whose colimit consists of unique alternating identity-free representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.zigzag_of_eqvGen_colimitTypeRel\", \"CategoryTheory.Functor.Final.zigzag_of_eqvGen_colimitTypeRel\", \"CategoryTheory.zigzag_equivalence\", \"CategoryTheory.nerveEquiv\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Limits.IsColimit.OfNatIso.colimitCocone\", \"CategoryTheory.ShortComplex.hasColimit_of_hasColimitπ\", \"CategoryTheory.Zigzag.setoid\"], \"digest\": \"c8bf817bc928c6de\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no match. The semantic signatures concern ordinary nerves, Segal structure, coherent nerve, connectedness and ordinary colimit zigzags, not proper fixed-word hammock diagrams or their reduced colimit. Loogle and grep returned zero hits. Read Nerve.lean:35-94, SimplicialNerve.lean:187-200 and Limits/IsConnected.lean:93-102; no declaration gives this statement or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-hammock-pair-homotopy-invariance",
@@ -100,5 +256,21 @@
   "group": "Q50"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-hammock-graph-colimit-presentation",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier sandbox against the actual Dwyer–Kan PDF and both cited node statements. Retained the statement, wrote the identity-column recovery argument, supplied a complete strong-induction proof of uniqueness of reduction, factored arbitrary word maps to identify all colimit relations, verified reduced simplicial identities, and corrected naturality to allow functors creating additional identity columns. No auxiliary lemma is hidden behind confluence, and no new nodes are necessary. The independent second reading specifies retained vertex/vertical data for arbitrary word maps and writes the mixed simplicial-operator equality explicitly.",
+  "blueprint": "Technical hammock-pair input under prop-coef-integral-exceptional-adjoint proof paragraph 2 (displayed derived adjunction/inverse-limit calculation): Definitions 4.1/5.1/5.3 and Propositions 5.4/5.5, through the inherited via chain. Steps 1–2 construct the proper graph functor, steps 3–4 give the reduction colimit, and step 5 gives its naturality. Current main-20261015 ancestor statement and proof were read; inherited chapter/unit bindings are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-cab9132c6",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-cab9132c6 (reviewer sub-agent of L); spot-checked: Read the item's full statement and all five steps, the statements of both cited nodes (def-coef-zigzag-homotopy-calculus, lem-coef-proper-word-colimit-invariance; both in unit sk-prop-sf-biduality-general, so no tool uses) and Dwyer–Kan, Calculating simplicial localizations, printed pp.19–24 (2.1, 3.4, 4.1, 4.4, 5.1, 5.3, 5.4, 5.5) from the scan at the node's URL. The paper is still not in literature/, so proof_origin=agent is correct. The statement matches DK 5.4/5.5 with 3.4, hypothesis by hypothesis: wide T as in O-Cat, endpoint identities, leftward and vertical arrows in T, length 0 exactly when x=y. DK number columns in composition order (letter n+1-i) and the item numbers them left to right. Reversing positions is an automorphism of II that keeps maps monotone and sign-preserving, so the colimit is the same. Nothing is weakened. This is not a target node, so no coefficient category or base-change morphism is involved. Step 1: checked the vertex bookkeeping k_i=|{j:f(j)<=i}| (k_0=0, k_l=l', each fibre is one consecutive single-sign block) and functoriality. Step 2: a square with identity horizontal sides forces its two verticals to be equal, which gives injectivity and the image-intersection condition, including the empty intersection. Step 3: checked all first-move overlap cases myself; the Newman-style strong induction is set up properly and is not circular. Step 4: every word map factors as surjection then injection; R(alpha R)=R alpha gives well-defined reduced simplicial operators and the bijection. Step 5: RFR=RF and RFR alpha=RF alpha=R alpha F=R alpha RF are correct. Small cases tested: empty word, a one-letter word, a discrete category, inverse arrows in a groupoid composing to an identity, and a functor collapsing everything to the terminal category (which shows the apply-then-reduce formula is needed). Duplicate check over the 60 hammock nodes: none states this colimit presentation, and the parent lem-coef-hammock-pair-homotopy-invariance uses it as one input, so it is not a restated clause. A Mathlib grep for hammock/Dwyer found nothing, and the recorded searches cover all three kinds. No fixes made."
+ }
 }

@@ -32,9 +32,136 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-accessible-monad-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First distinguish the two localizations. By [lem-coef-dg-model-underlying-localization], the underlying infinity category $U\\mathcal D$ of the enriched localization in the statement is the homotopy coherent localization of the ordinary nerve of $\\mathcal M$ at $W$. All hypotheses of that comparison are exactly those assumed here, with the same enriched model axiom and universes. Apply [lem-coef-combinatorial-localization-presentability] to this ordinary model structure: $U\\mathcal D$ is presentable and has all small colimits. The first assertion of [lem-coef-presentable-infinity-adjoints] supplies all small limits. Put $\\mathcal V=\\mathbf D(\\mathbf Z)$; [lem-coef-projective-chains-monoidal-model] with $R=\\mathbf Z$ supplies its presentably symmetric monoidal model, whose tensor is computed on cofibrant complexes.",
+   "uses": [
+    "lem-coef-dg-model-underlying-localization",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, preliminary identification of the enhancement and underlying presentability; agent-supplied model foundation"
+   }
+  },
+  {
+   "text": "Write $H(A,B)$ for the ordinary Hom complex of $\\mathcal M$. The underlying category is preadditive. If $0$ is an initial object, its identity is its zero endomorphism, so any arrow into it is zero; hence it is also terminal. The tensor and cotensor adjunctions show $H(A,0)=H(0,A)=0$ as complexes: for every complex $K$, maps $K\\to H(A,0)$ correspond to the unique map $K\\otimes A\\to0$, and maps $K\\to H(0,A)$ correspond to the unique map $0\\to A^K$. Use [lem-coef-projective-cochain-monoidal-model] at $R=\\mathbf Z$: complexes have weak equivalences the quasi-isomorphisms, fibrations the degreewise surjections, and cofibrant unit $\\mathbf Z[0]$. Thus the given enriched model axiom says exactly that its Hom comparison is a fibration, trivial if either input map is trivial.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, zero object and interpretation of the enriched mapping axiom"
+   }
+  },
+  {
+   "text": "Let $u:K\\to L$ be a cofibration of complexes, $i:A\\to B$ a cofibration of $\\mathcal M$, and $p:X\\to Y$ a fibration of $\\mathcal M$. Tensor and enriched Hom adjunctions identify diagonal fillers in a square from\n$$(L\\otimes A)\\amalg_{K\\otimes A}(K\\otimes B)\\longrightarrow L\\otimes B$$\nto $p$ with fillers in a square from $u$ to $H(B,X)\\to H(A,X)\\times_{H(A,Y)}H(B,Y)$. The latter Hom map is a trivial fibration if $p$ is trivial, so all such squares lift: the displayed pushout product is a cofibration. If $i$ is trivial, the Hom map is a trivial fibration for every $p$; if $u$ is trivial, it lifts against every fibration of complexes. In either case the pushout product lifts against every $p$ and is a trivial cofibration. Here the lifting characterizations are exactly the given weak factorization systems, and the complex model is [lem-coef-projective-cochain-monoidal-model]. Taking $u:0\\to K$ or $i:0\\to P$ shows that for cofibrant $K,P$, the functors $K\\otimes-$ and $-\\otimes P$ preserve cofibrations and trivial cofibrations, and $K\\otimes P$ is cofibrant.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, tensor pushout-product calculation from the given Hom axiom"
+   }
+  },
+  {
+   "text": "The tensor restricted to cofibrant complexes and cofibrant objects is homotopical separately. To check this without an unquoted Brown lemma, apply [lem-coef-brown-split-factorizations] to a weak equivalence $f$ between cofibrant inputs: $f=pi$ and $ps=1$, with $p$ a trivial fibration and $i,s$ cofibrations. Two-out-of-three makes $i,s$ trivial cofibrations. Either fixed-cofibrant tensor functor $T$ from step 3 sends $i,s$ to weak equivalences. Since $T(p)T(s)=1$, two-out-of-three makes $T(p)$ one, and hence $T(f)$ one. By [lem-coef-dg-model-mapping-comparison], cofibrant inclusions induce enriched localization equivalences, both for $\\mathcal M$ and for complexes with the projective monoidal model of [lem-coef-projective-cochain-monoidal-model]. For the complex model the requisite enriched Hom axiom is the adjoint form of its closed monoidal pushout-product axiom: lifting a generating (trivial) cofibration against the Hom comparison is exactly lifting its pushout product against the given (trivial) fibration. Thus the mapping-comparison theorem applies to complexes as well. Localize the tensor restricted to these cofibrant domains using the multivariable assertion of [lem-coef-enhanced-localization-universal] and compose with inverses of those inclusion equivalences. This constructs $K\\otimes^{\\mathbf L}X$ as an enhanced bifunctor, represented by $QK\\otimes QX$. Its coherent associativity and unit maps descend from the ordinary action associativity and $\\mathbf Z[0]\\otimes P=P$: tensor words in cofibrant inputs remain cofibrant by step 3, and the universal property descends their entire coherence diagrams. No enriched replacement functor is assumed.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, construction of the derived scalar tensor on cofibrant domains"
+   }
+  },
+  {
+   "text": "For cofibrant complex $K$, cofibrant $P\\in\\mathcal M$ and fibrant $I\\in\\mathcal M$, the actual enriched adjunctions are\n$$H(K\\otimes P,I)\\cong\\underline{\\operatorname{Hom}}_{\\mathrm{Ch}}(K,H(P,I))\\cong H(P,I^K).$$\nThe first input $K\\otimes P$ is cofibrant by step 3. Every complex is fibrant by [lem-coef-projective-chains-monoidal-model]. Applying [lem-coef-dg-model-mapping-comparison] to complexes, whose enriched model axiom was checked in step 4, shows that the middle Hom complex computes the derived internal Hom in $\\mathcal V$, since $K$ is cofibrant. The object $I^K$ is fibrant: a lifting square from a trivial cofibration to $I^K\\to0$ transposes to a square from its tensor with $K$ to $I\\to0$, which lifts by step 3. By [lem-coef-dg-model-mapping-comparison] both outer Hom complexes compute the asserted derived mapping objects. The same adjunction on squares shows that $H(P,-):\\mathcal M\\to\\mathrm{Ch}(\\mathbf Z)$ and $(-)^K:\\mathcal M\\to\\mathcal M$ are right Quillen functors. Apply [lem-coef-model-infinity-derived-adjunction] to the two actual adjunctions $-\\otimes P\\dashv H(P,-)$ and $K\\otimes-\\dashv(-)^K$, using the underlying-localization identification in step 1. It gives left adjoints in both variables. Their underlying left functors agree coherently with the underlying functors of step 4 by the ordinary localization universal property, as follows. In either source model category $\\mathcal A$ (complexes or $\\mathcal M$), write $j:\\mathcal A_c\\to\\mathcal A$ for the ordinary cofibrant inclusion and $e:Q\\to1$ for a functorial cofibrant replacement. Naturality gives $e_{X'}Qw=we_X$; two-out-of-three shows that $Q$ sends weak equivalences to weak equivalences. The maps $e:jQ\\to1_{\\mathcal A}$ and $e|_{\\mathcal A_c}:Qj\\to1_{\\mathcal A_c}$ have weak-equivalence components. Thus $j,Q$ induce inverse equivalences of their ordinary coherent localizations, with these actual natural transformations giving both composite comparisons. The comparison in step 1 identifies the full source localization with the underlying enriched one. On $\\mathcal A_c$, both proposed left functors are the localized actual tensor functor with its canonical restriction comparison (step 4 and the cited derived-adjunction theorem). Fully faithful restriction along the ordinary localization, followed by the equivalence induced by $j$, therefore identifies these underlying functors and all their naturality homotopies. Every scalar or object has a cofibrant representative, so this covers all fixed inputs. Moreover, descend the displayed actual natural isomorphisms of Hom complexes by [lem-coef-enhanced-localization-universal], using its opposite and multivariable clauses and the cofibrant/fibrant inclusion equivalences. The result is the coherent enriched tensor adjunction\n$$R\\operatorname{Hom}_{\\mathcal D}(K\\otimes^{\\mathbf L}X,Y)\\simeq R\\underline{\\operatorname{Hom}}_{\\mathcal V}(K,R\\operatorname{Hom}_{\\mathcal D}(X,Y)).$$\nApplying $\\operatorname{Map}_{\\mathcal V}(\\mathbf Z[0],-)$ also gives $\\operatorname{Map}_{U\\mathcal D}(K\\otimes^{\\mathbf L}X,Y)\\simeq\\operatorname{Map}_{\\mathcal V}(K,R\\operatorname{Hom}_{\\mathcal D}(X,Y))$.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model",
+    "lem-coef-dg-model-mapping-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-enhanced-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, enriched tensor--mapping-object adjunction and the two underlying derived adjunctions"
+   }
+  },
+  {
+   "text": "Each fixed-variable derived tensor preserves all small coherent colimits. Here is the argument for either left adjoint $F\\dashv G$ from step 5. If $c=\\operatorname{colim}_J B$ for any small coherent shape $J$, then for every $Y$ the adjunction and the representable colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] give\n$$\\operatorname{Map}(Fc,Y)\\simeq\\operatorname{Map}(c,GY)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}(B_j,GY)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}(FB_j,Y).$$\nThese equivalences are induced by the image cocone. The same cited criterion therefore makes that image cocone colimiting. This argument applies to arbitrary small simplicial shapes, and does not restrict $J$ to an ordinary category or require rectifying it.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, separate small-colimit preservation via the two derived adjunctions"
+   }
+  },
+  {
+   "text": "For a coherent small diagram $A:J\\to U\\mathcal D$ and $Y\\in\\mathcal D$, put $c=\\operatorname{colim}_J A$. Its cocone, followed by contravariant derived Hom, gives the canonical comparison\n$$\\gamma:R\\operatorname{Hom}_{\\mathcal D}(c,Y)\\longrightarrow\\lim_{j\\in J^{\\mathrm{op}}}R\\operatorname{Hom}_{\\mathcal D}(A_j,Y)$$\nin $\\mathcal V$; the limit exists by step 1. For every $K\\in\\mathcal V$, step 5, step 6, and the two representable (co)limit criteria in [lem-coef-infinity-yoneda-presheaf-limits] identify $\\operatorname{Map}_{\\mathcal V}(K,\\gamma)$ with the equivalence\n$$\\operatorname{Map}_{\\mathcal V}(K,R\\operatorname{Hom}(c,Y))\\simeq\\operatorname{Map}_{U\\mathcal D}(K\\otimes^{\\mathbf L}c,Y)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{U\\mathcal D}(K\\otimes^{\\mathbf L}A_j,Y)\\simeq\\operatorname{Map}_{\\mathcal V}(K,\\lim_{j\\in J^{\\mathrm{op}}}R\\operatorname{Hom}(A_j,Y)).$$\nThe Yoneda functor of $\\mathcal V$ is fully faithful by that same node, so $\\gamma$ is an equivalence. Every map in this chain is induced by the given coherent cocone or the natural tensor adjunction: consequently the equivalence is natural in $A,Y$ and retains the coherent structure maps, including higher homotopies.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, derived Hom turns a coherent colimit cocone into a limit cone"
+   }
+  },
+  {
+   "text": "Take $J=\\Delta^{\\mathrm{op}}$. The geometric realization of a simplicial object of $U\\mathcal D$ means its colimit over this indexing category; derived totalization of the resulting cosimplicial mapping-object diagram means its limit over $\\Delta$. Thus step 7 is precisely the asserted realization/totalization equivalence, with the coface and codegeneracy maps that come from the original simplicial object. These are the names for those coherent (co)limits, not a claim about underived totals or ordinary categorical colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, definition of realization and derived totalization for the simplicial specialization"
+   }
+  },
+  {
+   "text": "The zero object from step 2 lets us apply [lem-coef-pointed-model-stability] just for its initial assertion: the ordinary homotopy category of the homotopy coherent localization is the ordinary localization at $W$; no suspension-equivalence or stability conclusion is needed. Via step 1 this is $h(U\\mathcal D)$. Apply [lem-coef-model-localization-detects-weak-equivalences] to the actual ordinary localization $\\mathcal M\\to h(U\\mathcal D)$. It says that an actual map $u$ of $\\mathcal M$ belongs to $W$ if and only if its image is an isomorphism there, without cofibrancy or fibrancy hypotheses on its endpoints. An isomorphism in this homotopy category gives an inverse edge with both inverse equations witnessed by homotopies, which is exactly an equivalence edge in [def-cbc-enhanced-diagrams-cones]; the reverse implication is immediate. This proves saturation for $\\mathcal D$.",
+   "uses": [
+    "lem-coef-pointed-model-stability",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, equivalence detection after the underlying localization comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-dg-model-mapping-comparison",
+  "lem-coef-dg-model-underlying-localization",
+  "lem-coef-enhanced-localization-universal",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-pointed-model-stability",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-projective-chains-monoidal-model",
+  "lem-coef-projective-cochain-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 mapping-complex calculation; explicit dg-model foundation supplied by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -98,10 +225,52 @@
    "results": "{\"t\": \"2026-10-16T16:21:16Z\", \"tool\": \"leanfinder\", \"query\": \"Differential graded model categories have derived tensor hom adjunction and homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\"], \"digest\": \"d9534a104ffbba2a\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reader inspected the returned statements. Ordinary monad algebras, full faithful presentability transfer, ordinary derived categories and ordinary Beck coequalizers do not assert this general foundation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor over D(Z) and homotopy colimits in a dg model localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C],\\n  (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)).HasLeftCalculusOfFractions\", \"doc\": \"The homotopy category of chain complexes with integer indices admits a left calculus of fractions for quasi-isomorphisms. This means that quasi-isomorphisms (morphisms inducing isomorphisms on all hom\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The functor $ Q_h $ from the homotopy category of integer-indexed chain complexes to the derived category is a localization with respect to quasi-isomorphisms. This means $ Q_h $ universally inverts q\"}\n  {\"name\": \"DerivedCategory.Qh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        CategoryTheory.Functor (HomotopyCategory C (ComplexShape.up ℤ)) (DerivedCategory C)\", \"doc\": \"The functor induced by localizing at quasi-isomorphisms, mapping homotopy classes of chain maps in the homotopy category of integer-indexed complexes to the derived category. This functor identifies h\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projectives, and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H \"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"In an abelian category with injective resolutions, the composition of natural transformations between additive functors, when lifted to their right-derived functors mapping to the homotopy category of\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] {ι : Type u_2} (c : ComplexShape ι)\\n  [inst_1 : CategoryTheory.Preadditive C] [inst_2 : CategoryTheory.CategoryWithHomology C]\\n  [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization] [inst_4 : c.QFactorsThroughHomotopy C],\\n  ((Hom\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category and the functor $ Q_h $ to the derived category forms a localization at quasi-isomorphisms. This e\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"The functor from the homotopy category to the derived category satisfies the lifting condition with respect to quasi-isomorphisms, ensuring compatibility between the homotopy category functor composit\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monad, DerivedCategory, HomotopicalAlgebra.ModelCategory",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|derived.*tensor|saturated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dg model localization is tensored over the derived category of complexes and mapping objects turn colimits into limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The functor $ Q_h $ from the homotopy category of integer-indexed chain complexes to the derived category is a localization with respect to quasi-isomorphisms. This means $ Q_h $ universally inverts q\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": CochainComplex C ℤ ⥤ DerivedCategory C\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent colimits in a differential graded model category satisfy a derived mapping complex tensor adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"In an abelian category with injective resolutions, the composition of natural transformations between additive functors, when lifted to their right-derived functors mapping to the homotopy category of\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projectives, and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addi\", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, there exists an induced natural transformation \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      HomotopicalAlgebra.CofibrantObject.ι.comp HomotopicalAlgebra.CofibrantObject.HoCat.resolution ⟶\\n        HomotopicalAlgebra.CofibrantObject.toHoCat\", \"doc\": \"For any cofibrant objects $x, x_1$ in a model category $\\\\mathcal{C}$ and morphism $f : x \\\\to x_1$, the canonical functor to the homotopy category of cofibrant objects satisfies: composing the resoluti\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, a natural transformation $\\\\alpha : F \\\\Rightarrow G$, and an object $X \\\\in \\\\mathcal{C}$ with injective resolution $\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasProjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n          \", \"doc\": \"The left derived functor associated to an additive functor $ F : C \\to D $, constructed by composing the projective resolutions functor on $ C $ with the induced functor between homotopy categories. Fo\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (P : CategoryTheory.Projectiv\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, projective resolutions $P$ and $Q$ of objects $X$ and $Y$ in $\\\\mathcal{C}$, and a morphism $\\\\phi:P\\\\to Q$ inducing a commutative square with th\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|[Dd]g.*[Mm]odel|[Ee]nriched.*[Ll]ocalization",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary derived/homotopy categories, their localizations and composition of derived natural transformations. None states coherent dg-model colimits, a derived D(Z) tensor action or the enriched colimit-to-limit formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -109,5 +278,29 @@
   "group": "Q42"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-model-homotopy-colimits",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Distinguished enriched from ordinary coherent localization through one new statement-only comparison lemma. Derived the scalar tensor and both adjunctions from the pushout-product lifting calculation, Brown split factorizations and existing enriched localization/mapping comparison nodes. Proved separate colimit preservation and the D(Z)-valued colimit-to-limit formula for all coherent small shapes using the existing infinity Yoneda theorem; specialized to realization/totalization and proved saturation via the ordinary homotopy localization.",
+  "blueprint": "Supplies the additional dg-model foundation for the nearest blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (the displayed derived Hom / R lim calculation and naturality of the finite adjunction). The blueprint does not itself contain this general dg-model theorem.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic coherent Yoneda/limit or equivalence calculus applied to the dg-model localization; the coefficient-adjunction unit supplies no such general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d1268cb0a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d1268cb0a (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no changes and no nodes dropped. The item statement is byte-identical to the live side copy (unsplit there), so nothing was weakened. proof_deps equals the union of the steps' uses. Every cited statement is in unit sk-prop-sf-biduality-general except the two definition nodes, which are notions rather than route. I accept the declared tool_use of def-cbc-enhanced-diagrams-cones: it is redundant because that node is a definition, but harmless. No SGA is cited. Source checked: blueprint main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2 (the R Hom / R lim display). It contains no general dg-model theorem, the item is honestly marked as agent-written, and the WANTED line for Higher Algebra (not archived) is kept. Step checks: (1) the new node turns the enriched localization into N(M)[W^-1]; all hypotheses of combinatorial-localization-presentability are present, presentable-infinity-adjoints gives limits, and V is presentable. (2) The zero object follows from preadditivity, and H(A,0)=H(0,A)=0 by testing against every complex through the tensor and cotensor adjunctions; the cochain-model node states the fibrations and the cofibrant unit as claimed. (3) The pushout-product lifting holds in all three triviality cases, including 0⊗A=0. (4) The Brown split factorization with two-out-of-three is correct, and the mapping-comparison node applies to Ch(Z) because its Hom axiom is the adjoint of the pushout-product axiom. (5) H(K⊗P,I)≅Hom(K,H(P,I))≅H(P,I^K) has the needed cofibrant and fibrant inputs, I^K is fibrant, and the jQ/Qj replacement argument identifies the left functors. (6) Colimit preservation follows from the Yoneda cocone criterion, which covers every small simplicial shape. (7) Map_V(K,γ) is an equivalence for every K and the Yoneda embedding of V is fully faithful, so γ is an equivalence in D(Z); the empty, point and two-point shapes were tested. (8) The Δ^op case is only terminology. (9) The pointed-model node's unconditional claim that the homotopy category is the ordinary localization, the detection lemma for arbitrary endpoints, and the fact that an isomorphism in the homotopy category is an equivalence edge give saturation. The new node lem-coef-dg-model-underlying-localization has statement only, is self-contained and fully cited, has correct blueprint from/via, same_as=[], and nine recorded searches. It is true: it is the standard fact that a dg model category presents N(M)[W^-1], checked on Ch(Z) and the zero category. It is strictly below the item and restates none of its clauses. It duplicates none of the nodes I compared: dg-model-mapping-comparison, enhanced-localization-universal, dg-enrichment-rectification, simplicial-model-nerve-localization, model-colimit-localization-comparison, coherent-nerve-comparison, cosimplicial-frame-mapping, dg-derived-quillen-calculus. The full review is in review.md."
+ }
 }

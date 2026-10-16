@@ -6,7 +6,15 @@
    "node": "prop-coef-integral-exceptional-adjoint",
    "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; signed-word finite-diagram induction underlying its mapping-space foundation, Dwyer–Kan Section 4.1 Proposition 4.3 attachment square.",
    "via": [
-    "lem-coef-proper-word-colimit-invariance"
+    "lem-coef-proper-word-colimit-invariance",
+    "lem-coef-homotopy-fractions-hammock-comparison",
+    "lem-coef-special-hammock-reduction",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
    ]
   },
   "same_as": []
@@ -23,34 +31,165 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every morphism f:w→v factors as p:w→m followed by i:m↪v, where m is the word on the ordered image of the position map, p is surjective, and i is the inclusion of that image. The signs are inherited from v and agree with those of w. Every fiber of a monotone map is an interval. Thus, if w is alternating, no fiber can contain two positions: it would also contain an adjacent pair of opposite signs. Every morphism with alternating source is therefore injective; if source and target have length n it is the order bijection, hence the identity of the same signed word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "Let r(w) be the word obtained by replacing each maximal consecutive run of one sign by one letter, and let q_w:w→r(w) send each position to its run index (q_ε is the identity). If w is a nonalternating length-n word, |r(w)|<n. For any sign-preserving monotone surjection p:w→m, each target position has a nonempty interval fiber of its own sign. Expanding these fibers neither changes the ordered list of runs nor their signs. Consequently r(w)=r(m) as signed words and q_m∘p=q_w.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "For two proper injections u:w↪a_n^e and v:w′↪a_n^e, let h:t↪a_n^e be their common-position injection, with h=u∘u′=v∘v′. If E(u)(x)=E(v)(y), the intersection hypothesis supplies z∈E(t) in the same simplicial degree with this common value equal to E(h)(z). Injectivity of E(u) and E(v) gives x=E(u′)(z) and y=E(v′)(z). All three words w,w′,t have length less than n, so their lower-colimit cocone maps κ satisfy κ_w(x)=κ_t(z)=κ_w′(y). This proves independence of representatives for b_e:B_n^e(E)→C_{n-1}(E). Each subword image is stable under simplicial operators, and on it b_e E(u)=κ_w; applying an operator to this identity shows b_e commutes with every operator. Thus the union is a simplicial subset and b_e is a simplicial map. Empty intersections are covered by t=ε and the stated properness hypothesis.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "Fix a simplicial set T and compatible maps f:C_{n-1}(E)→T and g_e:E(a_n^e)→T with g_e|_{B_n^e}=f b_e. For each |w|≤n define a simplicial map h_w:E(w)→T: put h_w=f κ_w if |w|<n, put h_w=g_e for w=a_n^e, and put h_w=f κ_{r(w)} E(q_w) for a nonalternating length-n word. The latter is defined because |r(w)|<n. Each formula is a composite of simplicial maps.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "Check first every arrow j:m→v with |m|<n. If |v|<n, the lower-colimit cocone identity gives h_v E(j)=h_m. If v is nonalternating of length n, both m and r(v) lie in the lower category, so κ_{r(v)} E(q_v∘j)=κ_m and again h_v E(j)=h_m. If v=a_n^e, factor j=i p through its ordered image t. Since |t|≤|m|<n, the image of E(i) lies in B_n^e. Therefore g_e E(i)E(p)=f κ_t E(p)=f κ_m=h_m, as required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "Now let p:w→m be a surjection with |w|=n and |m|<n. Its source cannot be alternating by Step 1. Step 2 gives r(w)=r(m) and q_w=q_m∘p. Since m and r(m) are in the lower category, κ_{r(m)} E(q_m)=κ_m. Thus h_w=f κ_{r(w)} E(q_w)=f κ_m E(p)=h_m E(p). This explicitly proves compatibility with every collapse, including different collapses of the same run.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "For an arbitrary arrow j:w→v with |w|=n and |v|≤n, an injective j must be the identity, because its target has at most n positions. Otherwise its ordered image t has length less than n, and j=i p with p:w→t surjective and i:t↪v. Step 6 gives h_w=h_t E(p); Step 5 gives h_t=h_v E(i). Hence h_w=h_v E(j). Together with Step 5 this checks every arrow of the truncated category, including nonidentity endomorphisms of nonalternating words. The family (h_w) is therefore a simplicial cocone and induces H:C_n(E)→T by the colimit universal property.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "The square commutes: on E(u)(x) in either boundary, the two routes to C_n(E) agree by its cocone identity, and Step 3 makes the upper map well defined. The H of Step 7 restricts to f on C_{n-1}(E) (check all its cocone components) and to g_e on the alternating values. Conversely, a map out of C_n(E) restricts to compatible f,g_+,g_-. These restrictions determine every cocone component: the lower ones by f, the alternating top ones by g_e, and each nonalternating top one by the arrow q_w to r(w) and the cocone identity. Colimit uniqueness then determines the map out of C_n(E). This proves exactly the displayed pushout universal property in simplicial sets, without using an additional assertion about pointwise computation of colimits.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "For a natural transformation η:E⇒E′ between proper functors, naturality on each subword injection gives η_{a_n^e} E(u)=E′(u)η_w, so η_{a_n^e} maps B_n^e(E) into B_n^e(E′). On a representative E(u)(x), both composites from B_n^e(E) to C_{n-1}(E′) equal κ′_w η_w(x), proving compatibility with b_e. The components η_w induce the truncated-colimit maps by the colimit universal property; their defining identities also give compatibility with the bottom and right maps. Hence η induces a morphism of the attachment squares, compatible with composition and identities by the same component identities. No injectivity of η is needed.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  },
+  {
+   "text": "When n=0 the only word is ε, and its only position map is the identity of the empty set. A cocone on this one-object identity diagram is exactly a simplicial map out of E(ε). Thus E(ε) has the universal property of C_0(E), giving the stated canonical identification.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 4, indexing category 4.1, Proposition 4.3 and Definition 4.4, printed pp. 22-23 (PDF pp. 6-7); elementary details supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph, derived coefficient adjunction and R Hom / R lim calculation; elementary signed-word attachment argument supporting its previously split mapping-space foundation. Dwyer–Kan Proposition 4.3 gives the square but omits its verification."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Colimit over finite words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along the union of proper subwords",
-   "results": "{\"t\": \"2026-10-16T17:28:37Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit over finite words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along the union of proper subwords\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.rcons\", \"Monoid.CoprodI.NeWord.toWord\", \"Monoid.CoprodI.Word.Pair.tail\", \"Monoid.CoprodI.NeWord.prod\", \"Monoid.CoprodI.Word.prod\", \"Monoid.CoprodI.NeWord\", \"Monoid.CoprodI.Word.Pair\", \"Monoid.CoprodI.Word.cons\"], \"digest\": \"43a056c09330b8d6\"}",
+   "query": "Colimit over finite signed words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along proper boundaries",
+   "results": "{\"t\": \"2026-10-16T19:16:41Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit over finite signed words with two colours and monotone colour preserving maps is obtained by adjoining alternating words along proper boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.CoprodI.NeWord.toWord\", \"CoxeterSystem.alternatingWord_succ\", \"Monoid.CoprodI.NeWord\", \"Monoid.CoprodI.Word.rcons\", \"Monoid.CoprodI.NeWord.prod\", \"Monoid.PushoutI.NormalWord.toWord\", \"Monoid.PushoutI.NormalWord.rcons\", \"Monoid.CoprodI.Word.Pair.tail\"], \"digest\": \"220d61ed5f352188\"}",
    "date": "2026-10-16",
-   "verdict": "No match: returned Monoid.CoprodI Word/NeWord declarations construct words in free products of monoids; none concerns the category of signed words or its diagram colimits."
+   "verdict": "no match: signed-word category and proper-diagram attachment square are absent from the returned monoid free-product word and Coxeter alternating-word declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram on finite ordered two coloured sets with monotone colour preserving maps has a filtration whose stages are pushouts attaching the two alternating words along proper subwords",
+   "results": "{\"t\": \"2026-10-16T19:17:30Z\", \"tool\": \"leanfinder\", \"query\": \"A diagram on finite ordered two coloured sets with monotone colour preserving maps has a filtration whose stages are pushouts attaching the two alternating words along proper subwords\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightDiagram.diagram\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex\", \"CategoryTheory.SimplicialThickening\", \"CategoryTheory.OrthogonalReflection.succStruct\", \"IsFiltration\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"CategoryTheory.Limits.MultispanShape.ofLinearOrder\"], \"digest\": \"bce4b7d16d0901d6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned LightDiagram and RelativeCellComplex notions concern other diagrams or assume cell attachments; none derives this square."
   },
   {
    "tool": "loogle",
    "query": "\"IsPushout\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-16T17:28:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPushout\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.of_isColimit\", \"CategoryTheory.IsPushout.of_isColimit'\", \"CategoryTheory.IsPushout.isColimit'\", \"CategoryTheory.IsPushout.of_isColimit_cocone\", \"CategoryTheory.IsPushout.of_isColimit_binaryCofan_of_isInitial\", \"CategoryTheory.isPushout_iff_isColimit_binaryCofan_of_isThin\", \"CategoryTheory.IsPushout.preservesColimit_span_iff\"], \"digest\": \"4464da75a3979ece\"}",
+   "results": "{\"t\": \"2026-10-16T19:17:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPushout\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsPushout.isColimit\", \"CategoryTheory.IsPushout.of_isColimit\", \"CategoryTheory.IsPushout.of_isColimit'\", \"CategoryTheory.IsPushout.isColimit'\", \"CategoryTheory.IsPushout.of_isColimit_cocone\", \"CategoryTheory.IsPushout.of_isColimit_binaryCofan_of_isInitial\", \"CategoryTheory.isPushout_iff_isColimit_binaryCofan_of_isThin\", \"CategoryTheory.IsPushout.preservesColimit_span_iff\"], \"digest\": \"4464da75a3979ece\"}",
    "date": "2026-10-16",
-   "verdict": "No match: returned IsPushout.isColimit and its variants express the universal property of an already given pushout, and isColimitOfIsColimitOfIsPushout concerns colimits of already given pushout squares. None proves the signed-word attachment square."
+   "verdict": "no match: read IsPullback/Defs.lean lines 230-285; isColimit and of_isColimit convert an already supplied pushout universal property and do not establish the signed-word cocone."
   },
   {
    "tool": "grep",
    "query": "signed.?word|alternating.?word|boundary.?pushout|proper.?functor",
-   "results": "{\"t\": \"2026-10-16T17:28:30Z\", \"tool\": \"grep\", \"query\": \"signed.?word|alternating.?word|boundary.?pushout|proper.?functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\"], \"digest\": \"a71e6fde01aec962\"}",
+   "results": "{\"t\": \"2026-10-16T19:16:41Z\", \"tool\": \"grep\", \"query\": \"signed.?word|alternating.?word|boundary.?pushout|proper.?functor\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "No match: the only hits concern CoxeterSystem.alternatingWord and its group product/length; there is no signed-word diagram attachment theorem."
+   "verdict": "no match: no hits in the simplicial and homotopical AlgebraicTopology subtree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Attachment pushout for proper simplicial set diagrams indexed by signed finite words",
+   "results": "{\"t\": \"2026-10-16T19:16:42Z\", \"tool\": \"leansearch\", \"query\": \"Attachment pushout for proper simplicial set diagrams indexed by signed finite words\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.AttachCells.mk\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_m\", \"SSet.horn₂₀.isPushout\", \"SSet.horn₂₂.isPushout\", \"SSet.Subcomplex.BicartSq.isPushout\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\", \"HomotopicalAlgebra.nonempty_attachCells_iff\", \"CategoryTheory.Limits.Types.Pushout.cocone\"], \"digest\": \"8472db653b18c3ba\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read AttachCells.lean lines 40-66 and SubcomplexColimits.lean lines 82-100. AttachCells stores a pushout as a hypothesis; BicartSq.isPushout is for subcomplex lattice squares inside one ambient simplicial set. Neither constructs the signed-word colimit square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-proper-word-colimit-invariance",
@@ -58,5 +197,20 @@
   "group": "NW"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-signed-word-boundary-pushout",
+  "worker": "stage1",
+  "summary": "Replaced the earlier attempt with ten elementary steps. Ordered-image factorization and the canonical maximal-run collapse check all morphisms, including noninvertible equal-length endomorphisms. Properness constructs the boundary maps, and the simplicial cocone universal property proves the pushout, naturality and degree zero. The statement is unchanged. Reused definitions only; no new nodes. Re-ran recorded Mathlib searches and checked candidate source statements.",
+  "blueprint": "Realizes the signed-word attachment input under prop-coef-integral-exceptional-adjoint, second proof paragraph, derived coefficient adjunction in the R Hom / R lim calculation, via lem-coef-proper-word-colimit-invariance; no alteration of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-edfd408df",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-edfd408df (reviewer sub-agent of L); spot-checked: Read the item, its parent lem-coef-proper-word-colimit-invariance (Steps 4 and 7 use this item) and the three cited definitions (def-nagata-category, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit), all in full. Source: Dwyer-Kan is not in literature/, so I read the scanned PDF pp. 6-7 (printed pp. 22-23) as rendered images. §4.1 pairs (S,T) with sign-preserving weakly monotone maps are exactly the signed-word category, and (I_n^0, I_n^1) are the two alternating words. Prop. 4.3 is the boundary pushout, left unverified in the source. The item's properness clause matches Def. 4.4(i)+(ii); the item assumes it while Prop. 4.3 does not, it is what makes b_e well defined (Step 3), the statement was imported unchanged, and the parent uses it only for proper functors. All ten steps are correct and elementary. Steps 1-2: interval fibres, alternating source forces injectivity, surjections preserve maximal runs with q_m p = q_w; an exhaustive script over all 10,625 maps between words of length at most 5 found no failure. Step 3: representative independence from properness and injectivity. Steps 4-7: the cocone h_w is checked on every arrow, including non-identity endomorphisms such as the constant map on ++. Step 8: existence and uniqueness of the pushout factorization. Step 9: naturality with no injectivity of eta. Step 10: C_0 = E(eps). A union-find colimit computation for the proper functor of nonempty position subsets, n = 1..4, matched the pushout cardinality and injectivity. No new nodes, no duplicates (rg over dag/nodes), no cycle, no tool_uses, no SGA, no base-change or coefficient-category content. FIX: blueprint.from.via listed only the parent; it now carries the full created.item chain (the parent plus its 8 via nodes) in fixes/dag/nodes/sec-six-functors/lem-coef-signed-word-boundary-pushout.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }
