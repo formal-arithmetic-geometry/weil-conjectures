@@ -312,5 +312,28 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-cfe4633fd (reviewer sub-agent of L); spot-checked: Read the complete item and report, all cited statements, Stacks source locations, and unit/chapter route. All ten proof steps check out; no new nodes, duplicates, cycles, or missing hypotheses found. All 797 finite cyclic-group test squares admitted the required diagonal. Accepted the declared generic pushout tool use. Target coefficient comparisons remain separate obligations. Detailed review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CotorsionOrthogonalityCalculus",
+  "declaration": "CategoryTheory.cotorsion_orthogonality_calculus",
+  "declarations": [
+   "CategoryTheory.ObjectProperty.leftSplittingOrthogonal",
+   "CategoryTheory.ObjectProperty.rightSplittingOrthogonal",
+   "CategoryTheory.cotorsion_orthogonality_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CotorsionOrthogonalityCalculus.lean",
+  "statement": "theorem cotorsion_orthogonality_calculus {C : Type u} [Category.{v} C] [Abelian C] (S : ObjectProperty C) : (S.leftSplittingOrthogonal (0 : C) ∧ S.rightSplittingOrthogonal (0 : C)) ∧ (∀ (X Y : C) (s : X ⟶ Y) (r : Y ⟶ X), s ≫ r = 𝟙 X → (S.leftSplittingOrthogonal Y → S.leftSplittingOrthogonal X) ∧ (S.rightSplittingOrthogonal Y → S.rightSplittingOrthogonal X)) ∧ (∀ T : ShortComplex C, T.ShortExact → (S.leftSplittingOrthogonal T.X₁ → S.leftSplittingOrthogonal T.X₃ → S.leftSplittingOrthogonal T.X₂) ∧ (S.rightSplittingOrthogonal T.X₁ → S.rightSplittingOrthogonal T.X₃ → S.rightSplittingOrthogonal T.X₂)) ∧ (∀ (A B X Y : C) (i : A ⟶ B) (p : X ⟶ Y), Mono i → Epi p → Cotorsion.ExtOneOrthogonal (cokernel i) (kernel p) → ∀ (a : A ⟶ X) (b : B ⟶ Y), a ≫ p = i ≫ b → ∃ d : B ⟶ X, i ≫ d = a ∧ d ≫ p = b)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f9d68f4fc",
+  "group": "NH",
+  "result": "pass",
+  "note": "Delivery matches the node, reuses the canonical ExtOneOrthogonal definition, has no hollow definitions or extra hypotheses, and compiles cleanly via scompile.py."
  }
 }

@@ -24,7 +24,8 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "lem-coef-small-cotorsion-model-recognition"
  ],
  "proof": [
   {
@@ -342,5 +343,23 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-af2e9d69e (reviewer sub-agent of L); spot-checked: Reviewed item, new node, all cited statements and sources, unit/chapter route, edge cases, searches, and repaired Yoneda splice. No mathematical, citation, duplication, or route faults found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCotorsionFoundation",
+  "declaration": "SheafOfModules.flat_cotorsion_foundation",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatCotorsionFoundation.lean",
+  "statement": "theorem flat_cotorsion_foundation {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{u}) (F T : ObjectProperty (ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (hF : ∀ M, F M ↔ IsFlatOnSite (R := R) M) (hT : ∀ N, T N ↔ ∀ M, F M → Cotorsion.ExtOneOrthogonal M N) : (∀ M, F M ↔ ∀ N, T N → Cotorsion.ExtOneOrthogonal M N) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ M N, F M → T N → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) M N n)) ∧ (∀ M N (p : M ⟶ N), Epi p → F M → F N → F (kernel p)) ∧ (∀ M N (i : M ⟶ N), Mono i → T M → T N → T (cokernel i)) ∧ (∀ S : ShortComplex (ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)), S.ShortExact → (F S.X₁ → F S.X₃ → F S.X₂) ∧ (T S.X₁ → T S.X₃ → T S.X₂)) ∧ F.IsStableUnderRetracts ∧ T.IsStableUnderRetracts ∧ (∀ (I : Type u) (M : I → ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)), (∀ i, F (M i)) → F (∐ M)) ∧ (∃ (I : Type u) (S : I → ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj R)), (∀ i, F (S i)) ∧ ∀ N, T N ↔ ∀ i, Cotorsion.ExtOneOrthogonal (S i) N) ∧ (∃ G, F G ∧ ∀ M, ∃ (I : Type u) (p : (∐ fun _ : I ↦ G) ⟶ M), Epi p)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-52a114d56",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, dependencies, sources, universes, edge cases, docstrings, report sections and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library form. No findings or fixes; branch unchanged."
  }
 }
