@@ -25,9 +25,109 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal M^c$ for the full subcategory of cofibrant objects and choose a functorial cofibrant replacement $e:Q\\to\\mathrm{id}$. If $w:X\\to Y$ is a weak equivalence, $e_YQw=we_X$ and two-out-of-three show that $Qw$ is a weak equivalence. Thus both inclusion and $Q$ induce functors on homotopy coherent localizations. Their two composites are equivalent to the identities by the components of $e$, restricted to $\\mathcal M^c$ for the other composite. The localization universal property includes natural transformations, so these are coherent equivalences. Hence\n$$N(\\mathcal M^c)[W_c^{-1}]_\\infty\\simeq N(\\mathcal M)[W^{-1}]_\\infty.$$\nThis also applies to the other model categories below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 1.3.4.16; functorial replacement argument written out"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-combinatorial-presheaf-presentation] to $\\mathcal M$. Obtain a small $D$, a small set $S$ of arrows, $\\mathcal B=L_S\\mathsf U(D)$, and a Quillen equivalence $L:\\mathcal B\\rightleftarrows\\mathcal M:R$. Both $\\mathcal B$ and $\\mathcal M$ have functorial replacements. No simplicial structure or properness of $\\mathcal M$ is required by this presentation theorem.",
+   "uses": [
+    "lem-coef-combinatorial-presheaf-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Theorem 1.1; proof on printed p. 182"
+   }
+  },
+  {
+   "text": "By [lem-coef-model-infinity-derived-adjunction], the Quillen pair gives $\\mathbf LL\\dashv\\mathbf RR$ on homotopy coherent localizations, with its stated replacement formulas for the unit and counit. These are equivalences: for cofibrant $A\\in\\mathcal B$, the fibrant replacement $LA\\to TLA$ is a weak equivalence, so the Quillen-equivalence criterion in [lem-coef-combinatorial-presheaf-presentation] makes its adjunct $A\\to RTLA$ a weak equivalence. For fibrant $Y\\in\\mathcal M$, the weak equivalence $QRY\\to RY$ has cofibrant source; the same criterion makes its adjunct $LQRY\\to Y$ a weak equivalence. These arrows represent the derived unit and counit. Every object has a cofibrant or fibrant replacement, so their components are equivalences everywhere. Thus $\\mathcal B_\\infty\\simeq\\mathcal M_\\infty$.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-combinatorial-presheaf-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.21, with the actual derived unit and counit"
+   }
+  },
+  {
+   "text": "Put $\\mathcal P=\\operatorname{Fun}(N(D)^{\\mathrm{op}},\\mathcal S)$, which is presentable by [lem-coef-space-presheaf-presentability]. The first comparison of [lem-coef-simplicial-presheaf-localization-comparison] sends the small set $S$ to a small set $\\overline S$ of arrows of $\\mathcal P$. Apply the small-set clause of [lem-coef-presentable-infinity-adjoints] to $\\overline S$: the full subcategory $\\mathcal P_{\\overline S\\text{-loc}}$ is presentable. The second comparison of [lem-coef-simplicial-presheaf-localization-comparison] identifies it with $\\mathcal B_\\infty$. Step 3 identifies that with $\\mathcal M_\\infty$. Existence of colimits and generation by a small collection of sufficiently presentable objects are preserved by an equivalence, since it identifies mapping spaces and their universal properties. This proves presentability of the localization in the statement.",
+   "uses": [
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.7.6, localized-presheaf case; Remark 5.5.3.7 and Proposition 5.5.4.15"
+   }
+  },
+  {
+   "text": "Now assume the stated closed symmetric monoidal hypotheses. For cofibrant $K$, closedness makes $K\\otimes-$ and $-\\otimes K$ left adjoints; in particular they send the initial object to an initial object. The pushout product $(0\\to K)\\mathbin{\\square}(A\\to B)$ is consequently $K\\otimes A\\to K\\otimes B$, a cofibration and a trivial cofibration when $A\\to B$ is trivial. Thus both partial tensor functors are left Quillen. With $0\\to A$ and $0\\to B$, the pushout-product axiom gives the cofibrancy of $A\\otimes B$. The unit is cofibrant by hypothesis. Therefore the ordinary symmetric monoidal structure restricts to $\\mathcal M^c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.1.7.6; pushout-product calculation and closed adjunctions written out"
+   }
+  },
+  {
+   "text": "The preservation clause of [lem-coef-model-infinity-derived-adjunction] applied to the two partial left Quillen functors of Step 5 shows that tensor by any cofibrant $K$ carries weak equivalences between cofibrant objects to weak equivalences. Thus $W_c$ is stable under both tensor variables in $\\mathcal M^c$. It contains all isomorphisms and is closed under composition. In the ordinary nerve it is automatically stable under homotopy, since homotopic parallel edges there are equal. These are the precise tensor-stability hypotheses needed for monoidal localization.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.1.7.6; weak-equivalence preservation is the Brown clause of the cited derived-adjunction theorem"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-symmetric-monoidal-localization] to the symmetric monoidal nerve of $\\mathcal M^c$ and the system $W_c$. It yields a symmetric monoidal structure on $N(\\mathcal M^c)[W_c^{-1}]_\\infty$ with the localization functor strong symmetric monoidal. Use the equivalence of Step 1 as a model of $\\mathcal M_\\infty$. Its tensor on represented objects is therefore\n$$qX\\otimes^{\\mathbf L}qY\\simeq q(QX\\otimes QY),\\qquad \\mathbf1\\simeq q(\\mathbf1_{\\mathcal M}).$$\nAll constraints and their higher coherences come from the cited theorem. The arrows $QQ'X\\to QX$ and $QQ'X\\to Q'X$ induced by two replacement transformations are weak equivalences between cofibrant objects; Step 6 makes their tensors with cofibrant objects weak equivalences. Consequently the formula is independent of replacement through these natural equivalences.",
+   "uses": [
+    "lem-coef-relative-symmetric-monoidal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.1.7.4 and Example 4.1.7.6"
+   }
+  },
+  {
+   "text": "Fix a cofibrant $K$. The closed adjunction $K\\otimes-\\dashv\\underline{\\operatorname{Hom}}(K,-)$ is Quillen by Step 5. By [lem-coef-model-infinity-derived-adjunction] it induces a genuine mapping-space adjunction on $\\mathcal M_\\infty$ whose left adjoint sends $qX$ to $q(K\\otimes QX)$. This is the tensor-by-$qK$ functor of Step 7, because $QK\\to K$ is a weak equivalence between cofibrant objects and Step 6 applies. Since $\\mathcal M_\\infty$ is presentable by Step 4, the adjoint criterion of [lem-coef-presentable-infinity-adjoints] shows that this functor preserves every small colimit. The identical argument for $-\\otimes K$, or symmetry, proves preservation in the other variable. Every object is represented up to equivalence by a cofibrant $K$, so this proves separate cocontinuity for all objects, including the empty colimit. All adjunctions and comparisons used are at the mapping-space level.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 1.3.4.26; alternatively the derived mapping-space adjunction and HTT Corollary 5.5.2.9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-combinatorial-presheaf-presentation",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-space-presheaf-presentability",
+  "lem-coef-simplicial-presheaf-localization-comparison",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-relative-symmetric-monoidal-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Synthesis of the small-presentation proof of Proposition 1.3.4.22 and Example 4.1.7.6, using HTT A.3.7.6 and the existing mapping-space adjunction theorem. Primary sources read online; archives requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +170,65 @@
    "results": "{\"t\": \"2026-10-16T12:28:55Z\", \"tool\": \"leanfinder\", \"query\": \"Dwyer Kan simplicial localization of a combinatorial monoidal model category is presentable and tensor is left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorLeftObjFunctorTensorBifunctor\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl\"], \"digest\": \"1c9ee26cbfe0160d\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category obtained by inverting weak equivalences in a combinatorial model category is presentable and has a derived symmetric monoidal tensor product",
+   "results": "{\"t\": \"2026-10-16T13:33:45Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category obtained by inverting weak equivalences in a combinatorial model category is presentable and has a derived symmetric monoidal tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"SSet.Truncated.hoFunctor.monoidal\"], \"digest\": \"d61710804a49c1ed\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CofibrantObject.HoCat in ModelCategory/CofibrantObjectHomotopy.lean:62-72, ordinary presheaf presentability in CategoryTheory/Presentable/Presheaf.lean:90-95 and ordinary monoidal localization in CategoryTheory/Localization/Monoidal/Braided.lean:145-151. None states the homotopy coherent presentable symmetric monoidal localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Presentable\"",
+   "results": "{\"t\": \"2026-10-16T13:35:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Presentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CofibrantObject.HoCat in ModelCategory/CofibrantObjectHomotopy.lean:62-72, ordinary presheaf presentability in CategoryTheory/Presentable/Presheaf.lean:90-95 and ordinary monoidal localization in CategoryTheory/Localization/Monoidal/Braided.lean:145-151. None states the homotopy coherent presentable symmetric monoidal localization."
+  },
+  {
+   "tool": "grep",
+   "query": "combinatorial|presentab.*[Mm]odel|[Mm]odel.*presentab",
+   "results": "{\"t\": \"2026-10-16T13:35:02Z\", \"tool\": \"grep\", \"query\": \"combinatorial|presentab.*[Mm]odel|[Mm]odel.*presentab\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean\"], \"digest\": \"9be97295fb0e09b1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CofibrantObject.HoCat in ModelCategory/CofibrantObjectHomotopy.lean:62-72, ordinary presheaf presentability in CategoryTheory/Presentable/Presheaf.lean:90-95 and ordinary monoidal localization in CategoryTheory/Localization/Monoidal/Braided.lean:145-151. None states the homotopy coherent presentable symmetric monoidal localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A combinatorial symmetric monoidal model category presents a presentable symmetric monoidal infinity category",
+   "results": "{\"t\": \"2026-10-16T13:35:03Z\", \"tool\": \"leansearch\", \"query\": \"A combinatorial symmetric monoidal model category presents a presentable symmetric monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.symmetricCategoryOfFullyFaithful\", \"CategoryTheory.symmetricOfHasFiniteCoproducts\", \"CategoryTheory.symmetricOfHasFiniteProducts\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"CommMonCat.casesOn\", \"CategoryTheory.MonoidalCategoryStruct.noConfusionType\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"CommMonCat\"], \"digest\": \"262093837c69c047\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CofibrantObject.HoCat in ModelCategory/CofibrantObjectHomotopy.lean:62-72, ordinary presheaf presentability in CategoryTheory/Presentable/Presheaf.lean:90-95 and ordinary monoidal localization in CategoryTheory/Localization/Monoidal/Braided.lean:145-151. None states the homotopy coherent presentable symmetric monoidal localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of cofibrant objects of a combinatorial monoidal model category preserves tensor products and all homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T13:35:11Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of cofibrant objects of a combinatorial monoidal model category preserves tensor products and all homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\"], \"digest\": \"8039891a3d179983\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected ordinary CofibrantObject.HoCat in ModelCategory/CofibrantObjectHomotopy.lean:62-72, ordinary presheaf presentability in CategoryTheory/Presentable/Presheaf.lean:90-95 and ordinary monoidal localization in CategoryTheory/Localization/Monoidal/Braided.lean:145-151. None states the homotopy coherent presentable symmetric monoidal localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-combinatorial-localization-presentability",
+  "worker": "stage1",
+  "summary": "Proved presentability via a small simplicial-presheaf presentation, the explicit Quillen-equivalence unit/counit calculation, and the existing small accessible-localization theorem. Proved tensor compatibility by the pushout-product calculation on cofibrant objects, then general relative monoidal localization, and derived partial tensor adjunctions. Four new statement-only foundational nodes; no statement correction and no Mathlib match.",
+  "blueprint": "Realizes the generic model-localization foundation underneath proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent finite-coefficient mapping-complex adjunction before R lim. The main-20261015 ancestor proof and current chapter/unit records were read; its geometric or coefficient route is not replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-bf57c8447",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-bf57c8447 (reviewer sub-agent of L); spot-checked: Independent review completed and written to review.md. The item and all four new nodes match the cited HA, HTT, and Dugger results; every proof step, hypothesis, edge case, route dependency, and Mathlib search was checked. No repairs or accepted tool_uses were needed."
+ }
 }
