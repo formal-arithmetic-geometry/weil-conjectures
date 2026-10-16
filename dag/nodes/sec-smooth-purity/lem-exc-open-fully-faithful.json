@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-open-fully-faithful",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "An open immersion is fully faithful on the derived categories",
@@ -13,34 +13,91 @@
   "place": "node lem-exc-open-fully-faithful, order 1809"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
  ],
  "proof": [
   {
-   "text": "At the sheaf level $g^*g_*\\cong\\operatorname{id}$ for an open immersion, by\nthe description of the inverse and direct images in\n[def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Extension by\nzero along $g$ is exact by [lem-weil-extension-by-zero-exact], so\nits right adjoint $g^*$ carries K-injective complexes to K-injective\ncomplexes; resolving by\n[prop-weil-pbc-kinjective-resolutions-exist] therefore computes\n$Lg^*Rg_*$ by the sheaf-level composite, which is the identity. The\nsecond assertion is the sheaf-level vanishing $g^*i_*=0$, the images of\n$g$ and $i$ being disjoint.",
+   "text": "At the abelian-sheaf level, [def-weil-pbc-inverse-image] gives the adjunction $g^{-1}\\dashv g_*$, while [lem-sc-open-immersion-pushforward-fully-faithful] says that for an open immersion the counit $g^{-1}g_*G\to G$ is an isomorphism for every sheaf $G$ on $V$. The inverse image is exact by [prop-weil-pbc-inverse-image-exact], so [lem-weil-pbc-exact-functor-derived-factorization] identifies its termwise functor on complexes with the derived functor $Lg^*$.",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "lem-weil-extension-by-zero-exact",
-    "prop-weil-pbc-kinjective-resolutions-exist"
+    "lem-sc-open-immersion-pushforward-fully-faithful",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
+    "place": "proof paragraph: the sheaf-level inverse/direct-image adjunction and open-immersion counit"
+   }
+  },
+  {
+   "text": "For a complex $K$ on $V$, choose a quasi-isomorphism $K\to I$ with $I$ K-injective using [prop-weil-pbc-kinjective-resolutions-exist]. The total right derived functor of the direct-image functor exists and is computed on such an $I$ by [lem-weil-pbc-kinjective-total-derived], so $Rg_*K$ is represented by the complex $g_*I$. Moreover [lem-weil-pbc-right-adjoint-preserves-kinjective] applies because $g_*$ is right adjoint to the exact functor $g^{-1}$, and therefore $g_*I$ is K-injective; [lem-weil-pbc-kinjective-hom-derived] supplies the derived-category Hom identification and hence the naturality in $K$.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
+    "place": "proof paragraph: K-injective resolutions and derived direct image"
+   }
+  },
+  {
+   "text": "Applying the termwise representative from the preceding steps gives $Lg^*Rg_*K\\simeq Q(g^{-1}g_*I)$. The counit isomorphism of [lem-sc-open-immersion-pushforward-fully-faithful] is natural in $I$, hence gives an isomorphism of complexes $g^{-1}g_*I\\cong I$; applying the derived localization yields $Lg^*Rg_*K\\cong K$. The resolution-independence and functoriality are those in [lem-weil-pbc-kinjective-total-derived] and [lem-weil-pbc-kinjective-hom-derived], so these isomorphisms assemble to the asserted natural isomorphism $Lg^*Rg_*\\cong\\operatorname{id}$.",
+   "uses": [
+    "lem-sc-open-immersion-pushforward-fully-faithful",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
+    "place": "proof paragraph: first derived identity"
+   }
+  },
+  {
+   "text": "For the scheme-theoretic closed complement $i:Z\\hookrightarrow T$, the disjointness of the ranges and the open-immersion hypothesis give $g^{-1}i_*\\mathcal H=0$ for every sheaf $\\mathcal H$ by [lemma-openclosed-vanishing-lowerstar]. Here $i_*$ on complexes is the termwise closed-immersion direct image (the $i_*$ occurring in the displayed identity), so applying the sheaf-level identity in every degree gives the zero complex. Since $g^{-1}$ is exact and its derived functor is represented termwise by [lem-weil-pbc-exact-functor-derived-factorization], this zero complex represents $Lg^*i_*$. Thus the second displayed identity $Lg^*i_*=0$ follows.",
+   "uses": [
+    "lemma-openclosed-vanishing-lowerstar",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
+    "place": "proof paragraph: sheaf-level vanishing for the disjoint open and closed immersions"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
-  "lem-weil-extension-by-zero-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lemma-openclosed-vanishing-lowerstar",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-open-fully-faithful.md",
-  "place": "## Proof"
+  "place": "corrected proof of the imported node; the imported extension-by-zero/K-injective sentence was replaced by the K-injective derived-adjunction argument"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +126,55 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-open-fully-faithful",
+  "worker": "stage1",
+  "summary": "Audited the imported one-paragraph proof and replaced its incorrect extension-by-zero argument and reversed adjunction claim. The split now derives the first identity from exact inverse image, K-injective resolutions, preservation of K-injectives by the right adjoint, and the existing underived open-immersion counit isomorphism; the second identity is obtained degreewise from the existing disjoint open/closed vanishing lemma.",
+  "blueprint": "Realizes the blueprint proof paragraph at order 1809: the inverse/direct-image adjunction and open-immersion counit, K-injective computation of the derived direct image, the first derived identity, and the disjoint-support vanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-open-immersion-pushforward-fully-faithful",
+    "why": "The underived open-immersion counit isomorphism is a reusable fact from the curve-estimates unit and is the input to the derived full-faithfulness argument."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of inverse image is a generic six-functor fact supplied by the proper-base-change unit."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions is a generic derived-category tool supplied by the curve-estimates unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "The K-injective computation theorem for total right derived functors is a generic tool supplied by the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The preservation of K-injectives by a right adjoint to an exact functor is a generic exchange lemma outside this unit."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowerstar",
+    "why": "The underived vanishing for disjoint open and closed immersions is supplied by the open-closed comparison unit."
+   }
+  ],
+  "statement_change": "Added the inverse/direct-image and open/closed immersion definitions needed to state the displayed derived functors and filled blueprint.same_as with the result of the whole-blueprint search."
+ },
+ "tool_uses": [
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lemma-openclosed-vanishing-lowerstar"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-5e6d898a3",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-5e6d898a3 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, exact master source, and every cited node statement. The corrected four-step proof has the adjunction orientation, exact inverse image, K-injective computation, natural counit, and disjoint open/closed vanishing correct; edge cases and coefficient/category conventions were checked. No new nodes or repairs are required. Review written to review.md."
+ }
 }
