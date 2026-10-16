@@ -309,5 +309,27 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-d47304f1c (reviewer sub-agent of L); spot-checked: The proof and seven steps are mathematically sound, with hypotheses, coefficient category, base changes, edge cases, and cited DAG statements checked. The item still cites broad Stacks Tag 09A9 despite the exact source being Tag 09BM, with affine geometry at Tag 09BK. Corrected JSON is in fixes/dag/nodes/sec-smooth-purity/lem-exc-proetale-closed-exact.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd5bc6fa0",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable node, all eight statement dependencies, sources, exact declarations, report sections, literal signature, universes, canonical direct image, and edge cases. Reproduced scompile.py consumer checks with exit 0 and no warnings. No fixes required; branch unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_lowerStar"
+  ],
+  "statement": "theorem preservesFiniteColimits_lowerStar_of_isCompl\n    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :\n    PreservesFiniteColimits ((i)_*[ModuleCat.{u + 1} R])",
+  "branch": "slopmaster2",
+  "by": "Q07",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The primary declaration supplies finite-colimit preservation; the listed public instance supplies finite-limit preservation for the same canonical lowerStar. Together they are exactly exactFunctor by Mathlib CategoryTheory.exactFunctor_iff. Specialize the existing Ring R theorem to Finite R: it applies to all left R-module-valued sheaves, including infinite module values, with no commutativity, Noetherian, boundedness or constructibility restriction. The binders in the source are {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]. IsCompl expresses precisely the complementary open. This is a stage-2 statement attachment, not a claim of proof closure. The archived source reaches a counit sorry; the current server source obtained by scompile.py --source repairs that counit without changing the recorded signature. No new module or new definition is needed."
  }
 }
