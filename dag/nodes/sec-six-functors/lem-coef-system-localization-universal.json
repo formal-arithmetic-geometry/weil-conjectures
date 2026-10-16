@@ -11,7 +11,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient adjunction: coherent localization of coefficient models; the product-preserving localization used to descend their tensor operations.",
+   "place": "Proof paragraph 2, coherent derived coefficient-adjunction infrastructure: universal localization and finite-product-preserving localization used to descend tensor operations.",
    "via": [
     "lem-coef-relative-symmetric-monoidal-localization",
     "lem-coef-combinatorial-localization-presentability",
@@ -24,16 +24,112 @@
   },
   "same_as": []
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "A functor preserves equivalence edges: apply its simplicial map to an inverse edge and its two inverse-witness triangles. Consequently every functor from $G(\\mathcal E)$ to $G(\\mathcal E')$ preserves the distinguished arrows, since the source system consists precisely of equivalences. Thus the mapping space between these two objects of $\\mathsf{WCat}_\\infty$ is the whole core $\\operatorname{Fun}(\\mathcal E,\\mathcal E')^\\simeq$, with its original composition and higher simplices. This proves that $G$ is fully faithful. This argument makes no assertion that an arbitrary functor from $(\\mathcal C,W)$ to $G(\\mathcal E)$ inverts $W$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.7.1, printed p.485; direct mapping-space calculation."
+   }
+  },
+  {
+   "text": "Fix $(\\mathcal C,W)$ and let $I$ be the small set of its marked edges in the chosen universe. Put $A=\\coprod_{w\\in I}\\Delta^1$ and $B=\\coprod_{w\\in I}J$, where $J$ is the nerve of the groupoid with objects $0,1$ and exactly one morphism between each ordered pair. Map $A$ to $\\mathcal C$ by the edges $w$, and let $i:A\\hookrightarrow B$ select $0\\to1$ in each summand. The groupoid nerve is Kan: a compatible horn specifies the successive arrows, and the missing arrow is determined by composition, using inverses for an outer horn. Both each interval and each $J$ contract to $0$; for $J$ the unique arrows from $0$ give the contraction. The map $i$ therefore induces a bijection of components and isomorphisms of all based homotopy groups. The groupoid-localization node applies, since $B$ is Kan and $i$ is a weak homotopy equivalence. It identifies restriction $\\operatorname{Fun}(B,\\mathcal E)\\to\\operatorname{Fun}(A,\\mathcal E)$ with an equivalence onto the full subcategory of diagrams inverting every edge of $A$, including arbitrary coherent transformations. A diagram on $A$ has this property exactly when its selected edge in each summand is invertible. For $I=\\varnothing$, both $A$ and $B$ are empty and restriction is the identity on the terminal functor category.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01MY",
+    "place": "Proposition 6.3.1.21, applied to the explicit disjoint union of walking-isomorphism inclusions; agent construction realizing HA Proposition 4.1.7.2."
+   }
+  },
+  {
+   "text": "Form the degreewise pushout $P=\\mathcal C\\amalg_A B$ in simplicial sets, without asserting that $P$ is a quasicategory. For every quasicategory $\\mathcal E$, the definition of the internal functor object gives a strict simplicial equality\n$$\\operatorname{Fun}(P,\\mathcal E)=\\operatorname{Fun}(\\mathcal C,\\mathcal E)\\times_{\\operatorname{Fun}(A,\\mathcal E)}\\operatorname{Fun}(B,\\mathcal E).$$\nIndeed, in degree $n$, giving a map from $P\\times\\Delta^n$ is giving maps from $\\mathcal C\\times\\Delta^n$ and $B\\times\\Delta^n$ agreeing on $A\\times\\Delta^n$; all operators act by restriction. The functor objects are quasicategories by the functor-cone-calculus node. Since $i$ is degreewise injective, the exponentiation node makes $\\operatorname{Fun}(B,\\mathcal E)\\to\\operatorname{Fun}(A,\\mathcal E)$ an isofibration. The isofibration-pullback-limit node therefore identifies this strict pullback with the pullback in $\\mathsf{Cat}_\\infty$. Substitute the equivalence onto the full edge-inverting subcategory from step 2. Pulling this full subcategory back selects precisely those functors $\\mathcal C\\to\\mathcal E$ that invert every $w\\in W$, and retains all their transformations: a simplex is admitted exactly when its vertices are admitted. The condition is invariant under equivalence of diagrams, so the same description applies to the categorical pullback, whose comparison equivalence is part of its data. Thus restriction induces an equivalence $\\operatorname{Fun}(P,\\mathcal E)\\simeq\\operatorname{Fun}_W(\\mathcal C,\\mathcal E)$. The structural map $\\mathcal C\\to P$ sends each $w$ to the image of the invertible edge of its $J$-summand, with the two inverse triangles present already in $P$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/033R",
+    "place": "Corollary 4.5.3.28 and Corollary 4.4.5.3 (01F3); degreewise pushout argument written here. No colimit-existence theorem for Cat infinity is used."
+   }
+  },
+  {
+   "text": "Factor $P\\to\\Delta^0$ in the Joyal model structure as a trivial cofibration $r:P\\hookrightarrow Q$ followed by a fibration. The Joyal node supplies this factorization in the fixed universe and says that $Q$ is a quasicategory. For completeness, its definition of categorical equivalence implies the needed full functor-category equivalence, as follows. Fix $\\mathcal E$ and put $X=\\operatorname{Fun}(Q,\\mathcal E)$, $Y=\\operatorname{Fun}(P,\\mathcal E)$ and $R=r^*:X\\to Y$. For every small simplicial set $T$, apply the categorical-equivalence condition to the quasicategory $\\operatorname{Fun}(T,\\mathcal E)$; currying identifies it with an equivalence $h\\operatorname{Fun}(T,X)\\to h\\operatorname{Fun}(T,Y)$. Hence it induces a bijection on equivalence classes of objects, namely $\\pi_0\\operatorname{Fun}(T,X)^\\simeq\\to\\pi_0\\operatorname{Fun}(T,Y)^\\simeq$. Here isomorphisms in the homotopy category of a quasicategory are exactly equivalence edges: composition is represented by an inner $2$-horn filler, so inverse equations give the two inverse triangles. Surjectivity with $T=Y$ gives $S:Y\\to X$ with $RS\\simeq1_Y$. Precompose by $R$; injectivity with $T=X$ gives $SR\\simeq1_X$. Thus $R$ is a functor equivalence, retaining noninvertible transformations as well. Combine it with step 3 to obtain\n$$q^*:\\operatorname{Fun}(Q,\\mathcal E)\\simeq\\operatorname{Fun}_W(\\mathcal C,\\mathcal E),\\qquad q=r\\circ(\\mathcal C\\to P).$$\nThe images of the inverse triangles from step 3 prove that $q$ inverts $W$. Every comparison is restriction, so for $U:\\mathcal E\\to\\mathcal E'$ the equality $U_*q^*=q^*U_*$ holds on each simplex; this gives naturality in the target, including higher simplices. No functorial choice of inverse comparisons is required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Theorem 2.4.6.1; categorical-equivalence and factorization formulation in lem-coef-joyal-model-structure. Explicit two-test-object upgrade as in Kerodon 6.3.1.13 (01MS)."
+   }
+  },
+  {
+   "text": "Taking cores of step 4 gives, for every relative category $Z=(\\mathcal C,W)$, an equivalence\n$$\\operatorname{Map}_{\\mathsf{Cat}_\\infty}(Q,\\mathcal E)\\simeq\\operatorname{Map}_{\\mathsf{WCat}_\\infty}(Z,G\\mathcal E),$$\nnatural in $\\mathcal E$. The core of the full subcategory on $W$-inverting functors is exactly the union of components specified in the statement: conjugation by a natural equivalence preserves the property of inverting an edge. Apply the left-adjoint clause of the pointwise adjoint criterion to $G$. The objects $Q$ represent the required covariant functors for every $Z$, so the criterion assembles them into a coherent left adjoint $L$, with unit $q$, counit and triangle identities. This also supplies coherent functoriality in $Z$; it is not inferred from a bare choice of pushouts. Step 1 gives the asserted fully faithful right adjoint, and step 4 is the stated full coherent functor-category universal property.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.2.4.2 and its opposite, applied to the representability furnished by steps 2-4; compare HA Proposition 4.1.7.2."
+   }
+  },
+  {
+   "text": "For $(\\mathcal C,W)$ and $(\\mathcal D,V)$, simplicial currying gives $\\operatorname{Fun}(\\mathcal C\\times\\mathcal D,\\mathcal E)=\\operatorname{Fun}(\\mathcal C,\\operatorname{Fun}(\\mathcal D,\\mathcal E))$. Restriction along $1\\times q_D$ first identifies $\\operatorname{Fun}(\\mathcal C\\times L\\mathcal D,\\mathcal E)$ with the full subcategory of diagrams inverting every $(1_c,v)$, by step 4 and fullness. Within this category the arrow induced by $w$ is an equivalence exactly when all its components at $d\\in\\mathcal D$ are equivalences, by the pointwise criterion in the functor-cone-calculus node. The equivalence $\\operatorname{Fun}(L\\mathcal D,\\mathcal E)\\simeq\\operatorname{Fun}_V(\\mathcal D,\\mathcal E)$ reflects equivalences, so applying step 4 in the $\\mathcal C$ variable now selects exactly the diagrams inverting every $(w,1_d)$ as well. These two coordinate conditions are equivalent to inverting $W\\times V$: identities belong to both systems, and a product $2$-simplex exhibits $(w,v)$ as $(1,v)\\circ(w,1)$. Thus $q_C\\times q_D$ has precisely the universal property of localization at $W\\times V$, on full functor categories. The two universal properties give inverse comparison functors between $L(\\mathcal C\\times\\mathcal D,W\\times V)$ and $L(\\mathcal C,W)\\times L(\\mathcal D,V)$; full faithfulness of restriction identifies both composites with the identity. The comparison is the one induced by the two projections. Its naturality follows from the coherent adjoint of step 5 and the universal property of products, since each component is the corresponding localized projection.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.1.7.2, finite-product assertion; agent proof by currying the universal property, with the pointwise-equivalence criterion stated explicitly."
+   }
+  },
+  {
+   "text": "The empty product is the terminal category with its identity system. Its identity functor satisfies step 4, since every functor sends identities to equivalences, so localization leaves it terminal. For a finite family, order its factors and induct on their number: the zero-factor case is this terminal comparison, and adjoining the next factor uses the binary comparison of step 6. At every stage the comparison has the localized projections as components. Therefore it is independent, up to the unique coherent product comparison, of the ordering and parenthesization, and is natural for maps of finite families. This proves all finite-product comparisons, including the empty and one-factor cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.1.7.2 and Notation 4.1.7.3; finite induction on the binary universal comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-pointwise-adjoint-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent derived coefficient-adjunction infrastructure: agent proof by the walking-isomorphism pushout in simplicial sets, Joyal fibrant replacement, and currying. HA 4.1.7.2 itself uses marked fibrant replacement; the present node-level construction avoids the cyclic coherent-nerve/model-localization route."
+ },
  "mathlib_match": null,
  "id": "lem-coef-system-localization-universal",
  "title": "Functorial infinity localization preserves finite products",
  "statement": "Use the infinity-category and universe conventions of [def-coef-complete-algebroid], enlarging universes to contain all categories under discussion. A system $W$ on an infinity category $\\mathcal C$ is a collection of arrows containing all equivalences and closed under composition and homotopy. Let $\\mathsf{WCat}_\\infty$ have objects $(\\mathcal C,W)$ and mapping spaces the unions of components of $\\operatorname{Fun}(\\mathcal C,\\mathcal C')^{\\simeq}$ consisting of functors sending $W$ into $W'$; the superscript denotes the maximal infinity groupoid. Composition is induced by composition of functors. Products have underlying category $\\prod_i\\mathcal C_i$ and coordinatewise systems $\\prod_iW_i$, including the terminal category with its identities for the empty product. Write $G:\\mathsf{Cat}_\\infty\\to\\mathsf{WCat}_\\infty$ for $G(\\mathcal E)=(\\mathcal E,\\operatorname{Eq}(\\mathcal E))$, where $\\operatorname{Eq}$ is the collection of equivalences. Then $G$ is fully faithful and has a left adjoint $L$ preserving finite products. Write $L(\\mathcal C,W)=\\mathcal C[W^{-1}]$ and $\\eta_{\\mathcal C,W}:(\\mathcal C,W)\\to G L(\\mathcal C,W)$ for its unit. Its underlying functor $q:\\mathcal C\\to\\mathcal C[W^{-1}]$ inverts $W$, and for every infinity category $\\mathcal E$ restriction gives an equivalence\n$$\\operatorname{Fun}(\\mathcal C[W^{-1}],\\mathcal E)\\simeq\\operatorname{Fun}_W(\\mathcal C,\\mathcal E),$$\nwhere the right side is the full subcategory of functors carrying $W$ to equivalences. In particular the product comparisons $L(\\prod_i(\\mathcal C_i,W_i))\\simeq\\prod_i L(\\mathcal C_i,W_i)$ are natural, including the empty product.",
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones"
  ],
  "source": {
   "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
@@ -67,7 +163,106 @@
    "results": "{\"t\": \"2026-10-16T14:58:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubmonoid.IsLocalizationMap\", \"Submonoid.IsLocalizationMap\", \"AddSubmonoid.isLocalizationMap_top_nat_int\", \"AddSubmonoid.isLocalizationMap_id\", \"Submonoid.isLocalizationMap_id\", \"AddSubmonoid.isLocalizationMap_nat_int\", \"AddSubmonoid.LocalizationMap.isLocalizationMap\", \"Submonoid.LocalizationMap.isLocalizationMap\"], \"digest\": \"7f6d5b897ab742a2\"}",
    "date": "2026-10-16",
    "verdict": "No exact match. Read Mathlib/CategoryTheory/Localization/Prod.lean:15-39 (ordinary categories) and Monoidal/Braided.lean:145-151 (ordinary symmetric localization); these do not state the WCat infinity adjunction or preserve coherent functor infinity categories."
+  },
+  {
+   "tool": "grep",
+   "query": "WCat|marked.*simplicial|IsLocalization.prod",
+   "results": "{\"t\": \"2026-10-16T15:35:32Z\", \"tool\": \"grep\", \"query\": \"WCat|marked.*simplicial|IsLocalization.prod\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Prod.lean\"], \"digest\": \"bbb225230682f6b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial localization of infinity categories at a system of arrows preserves finite cartesian products",
+   "results": "{\"t\": \"2026-10-16T15:35:33Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial localization of infinity categories at a system of arrows preserves finite cartesian products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.preservesFiniteProducts\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.hasFiniteProducts\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization'\", \"CategoryTheory.Localization.preservesProductsOfShape\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization\"], \"digest\": \"abb5345de179224c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflective localization of relative infinity categories and universal functor infinity category equivalence",
+   "results": "{\"t\": \"2026-10-16T15:35:33Z\", \"tool\": \"leansearch\", \"query\": \"Reflective localization of relative infinity categories and universal functor infinity category equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.isEquivalence\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Localization.Construction.objEquiv\", \"CategoryTheory.Functor.IsLocalization.unop\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Localization.isEquivalence\", \"CategoryTheory.Localization.lift\"], \"digest\": \"1012b5d9a907cad4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization.prod",
+   "results": "{\"t\": \"2026-10-16T15:35:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLocalization.prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.prod\"], \"digest\": \"f88463e78f952948\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|QCat|localization",
+   "results": "{\"t\": \"2026-10-16T15:37:07Z\", \"tool\": \"grep\", \"query\": \"quasicategory|QCat|localization\", \"sub\": \"CategoryTheory/Bicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory localization by a pushout adjoining inverse equivalences has the universal property on coherent functor categories",
+   "results": "{\"t\": \"2026-10-16T15:37:08Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory localization by a pushout adjoining inverse equivalences has the universal property on coherent functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization\", \"CategoryTheory.Functor.q_isLocalization\"], \"digest\": \"e0365a0ee5b35dba\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Localization/Prod.lean:15-39 and Predicate.lean:210-245. These state ordinary category localization, not infinity localization or the equivalence of coherent functor infinity categories. ModelCategory/CofibrantObjectHomotopy likewise concerns an ordinary homotopy category. The item has arbitrary quasicategories as inputs; an ordinary-category result is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category obtained by freely inverting specified morphisms has an internal functor category universal property and localization commutes with binary products",
+   "results": "{\"t\": \"2026-10-16T15:54:10Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category obtained by freely inverting specified morphisms has an internal functor category universal property and localization commutes with binary products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.HasProductsOfShapeAux.inverts\", \"CategoryTheory.Localization.HasProductsOfShapeAux.limitFunctor\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_fac\", \"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift\", \"CategoryTheory.Localization.HasProductsOfShapeAux.instCatCommSqFunctorDiscreteLimObjWhiskeringRightLimitFunctor\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\", \"CategoryTheory.Localization.HasProductsOfShapeAux.compLimitFunctorIso\"], \"digest\": \"b01ef0cd28f0e992\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match in this independent second reading. Read Mathlib/CategoryTheory/Localization/Prod.lean:38-41,140-149 and Pi.lean:31-37: these declarations require ordinary Category instances and give ordinary localization. The quasicategory-directory hits describe quasicategories, nerves and a strict bicategory, without this coherent localization adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "WCat|quasicategor|locali[sz]",
+   "results": "{\"t\": \"2026-10-16T15:54:48Z\", \"tool\": \"grep\", \"query\": \"WCat|quasicategor|locali[sz]\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"6c25d6d53d135416\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match in this independent second reading. Read Mathlib/CategoryTheory/Localization/Prod.lean:38-41,140-149 and Pi.lean:31-37: these declarations require ordinary Category instances and give ordinary localization. The quasicategory-directory hits describe quasicategories, nerves and a strict bicategory, without this coherent localization adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory localization at marked edges is a reflection of relative infinity categories and commutes with cartesian products",
+   "results": "{\"t\": \"2026-10-16T16:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory localization at marked edges is a reflection of relative infinity categories and commutes with cartesian products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor\\u2082\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"SSet.QCat\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"SSet.QCat.bicategory\"], \"digest\": \"57ef8c04aeda33d7\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match in this second reading. Read Mathlib/CategoryTheory/Localization/Prod.lean:34-39,140-149 and Pi.lean:31-37: their Category inputs and ordinary functor categories do not specialize to arbitrary quasicategories. The reflective nerve and hoFunctor product results return ordinary homotopy categories; SSet.QCat and its bicategory in AlgebraicTopology/Quasicategory/StrictBicategory.lean:53-70 supply no localization universal property. The focused grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|WCat|localization",
+   "results": "{\"t\": \"2026-10-16T16:58:46Z\", \"tool\": \"grep\", \"query\": \"IsLocalization|WCat|localization\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match in this second reading. Read Mathlib/CategoryTheory/Localization/Prod.lean:34-39,140-149 and Pi.lean:31-37: their Category inputs and ordinary functor categories do not specialize to arbitrary quasicategories. The reflective nerve and hoFunctor product results return ordinary homotopy categories; SSet.QCat and its bicategory in AlgebraicTopology/Quasicategory/StrictBicategory.lean:53-70 supply no localization universal property. The focused grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A marked quasicategory admits localization constructed by simplicial pushout and categorical fibrant replacement with fully faithful restriction on functor categories",
+   "results": "{\"t\": \"2026-10-16T19:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"A marked quasicategory admits localization constructed by simplicial pushout and categorical fibrant replacement with fully faithful restriction on functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.QCat.bicategory\", \"SSet.hoFunctor\", \"SSet.Quasicategory\", \"SSet.Truncated.HomotopyCategory.lift\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\"], \"digest\": \"5a91e19c1e8f4862\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70: QCat is an ordinary full subcategory with a Cat-enriched bicategory; it supplies no localization at specified edges or coherent localization adjunction. The focused source grep had zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|categoricalEquivalence|fibrantReplacement",
+   "results": "{\"t\": \"2026-10-16T19:02:01Z\", \"tool\": \"grep\", \"query\": \"IsLocalization|categoricalEquivalence|fibrantReplacement\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70: QCat is an ordinary full subcategory with a Cat-enriched bicategory; it supplies no localization at specified edges or coherent localization adjunction. The focused source grep had zero hits."
   }
  ],
- "kind": "statement"
+ "kind": "statement",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-system-localization-universal",
+  "worker": "stage1",
+  "summary": "Second-reader repair: replaced the unsupported Cat infinity pushout deduction from colimit-gluing and mapping-excision by a degreewise simplicial pushout, an isofibration categorical pullback, and a Joyal fibrant replacement. Wrote the two-test-object upgrade, narrowed the fully faithful inclusion argument, and expanded the product proof using pointwise equivalences. Reused only independent existing nodes, with no new nodes or statement change beyond correcting doubled TeX escapes.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, coherent derived coefficient-adjunction infrastructure: universal localization and finite-product preservation used to descend tensor operations."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-4c5832cd3",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-4c5832cd3 (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited node statements, the unit, the blueprint ancestor paragraph and both citers. I checked HA 4.1.7.1-4.1.7.3 from the online HA plus the second reading's page check, and read Kerodon 01MY and 033R online. The statement matches HA (G fully faithful, a left adjoint L that preserves finite products, the full Fun_W universal property, the empty product) and is not weakened. Step 1: every functor preserves equivalence edges, so G is fully faithful; elementary. Step 2: J is Kan and i is a weak homotopy equivalence, so the groupoid-localization hypotheses hold; I=empty is covered. Step 3: Fun(P,E) is a strict fiber product, the restriction is an isofibration by exponentiation (i injective), the pullback-limit node makes it a categorical pullback, and the full subcategory pulls back to Fun_W. Step 4: the Joyal factorization plus the two-test-object argument gives a full functor equivalence. Step 5: the left-adjoint clause of the pointwise criterion applies exactly. Step 6: currying and pointwise detection, with (w,v)=(1,v)(w,1) giving W×V. Step 7: induction, including zero and one factors. Small cases checked: empty C, W equal to the equivalences, Δ^1 with all edges marked, empty and one-factor products. There are no new nodes, no duplicate (I checked the enriched, Brown, interface and simplicial-category localization nodes), no SGA citation, and the 55-node closure is acyclic. Accepted tool uses: lem-cbc-simplicial-groupoid-localization and lem-cbc-enhanced-functor-cone-calculus (from sk-prop-sf-cbc, off-route generic simplicial tools). No fixes written."
+ }
 }

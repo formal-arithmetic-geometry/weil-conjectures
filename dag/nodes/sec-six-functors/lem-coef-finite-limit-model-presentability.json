@@ -30,9 +30,49 @@
   "def-nagata-category",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form a finite-limit sketch $S_T$ with underlying category $T$ and with every finite limit cone in $T$ specified. This is small: finite index categories can be encoded using finite sets of objects and arrows; for each such code, diagrams and cones in the small category $T$ form a small set. Taking their union still gives a $\\mathcal U$-small set. Include the empty index category. By the definition of a sketch model in [lem-coef-finite-limit-sketch-models], a model of $S_T$ is exactly a functor $T\\to\\mathbf{Set}_{\\mathcal U}$ preserving finite limits. Both categories have all natural transformations between these functors as morphisms, so their full subcategories of the functor category coincide.",
+   "uses": [
+    "lem-coef-finite-limit-sketch-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/article/CTGDC_1982__23_1_3_0.pdf",
+    "place": "Kelly (1982), Section 9, (9.2), (9.4), (9.7), Theorem (9.8); elementary theory-to-sketch specialization using the existing general sketch-model node."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-finite-limit-sketch-models] to the small sketch $S_T$. Its statement gives all $\\mathcal U$-small limits and colimits and a $\\mathcal U$-small family of models whose Hom functors preserve $\\mathcal U$-small filtered colimits and from which every model is a $\\mathcal U$-small filtered colimit. Under the equality of full subcategories in step 1 these are the required objects and universal properties in $\\operatorname{Lex}(T,\\mathbf{Set}_{\\mathcal U})$. The same cited statement gives pointwise limits and filtered colimits. The identification in step 1 leaves every value at $t\\in T$ and every natural transformation unchanged, so these pointwise formulas are exactly the formulas asserted for $\\operatorname{Lex}$.",
+   "uses": [
+    "lem-coef-finite-limit-sketch-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/article/CTGDC_1982__23_1_3_0.pdf",
+    "place": "Kelly (1982), Section 9, (9.2), (9.4), (9.7), Theorem (9.8); elementary theory-to-sketch specialization using the existing general sketch-model node."
+   }
+  },
+  {
+   "text": "For the final formulation, let $S$ be any small finite-limit sketch as in the statement. This is precisely a small category with a small family of specified finite cones, so it satisfies the hypotheses of [lem-coef-finite-limit-sketch-models] directly. That node supplies the same completeness, cocompleteness, finite-presentability family, and pointwise limit and filtered-colimit conclusions for its models. Thus the sketch formulation follows directly as well; no free-completion theorem is needed in this proof. In the statement the free finite-limit completion is understood as a completion of the sketch respecting its specified cones, not the free completion of its underlying category with those conditions forgotten.",
+   "uses": [
+    "lem-coef-finite-limit-sketch-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/article/CTGDC_1982__23_1_3_0.pdf",
+    "place": "Kelly (1982), (10.1) and Theorem (10.2), printed p. 40, independently verify the sketch formulation and cone-respecting theory completion. The proof step itself directly applies the existing DAG statement lem-coef-finite-limit-sketch-models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-limit-sketch-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, enhancement of the coefficient-adjunction diagram: specialize the existing general sketch-model theorem to the sketch of all finite limit cones of T; sketch clause is already that theorem. Kelly (9.2), (9.4), (9.7), (9.8) checked online; not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +101,66 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"line\": \"10\", \"text\": \"/-! # Presentation of the simplex category by generators and relations.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"line\": \"12\", \"text\": \"We introduce `SimplexCategoryGenRel` as the category presented by generating\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"line\": \"43\", \"text\": \"/-- `FreeSimplexQuiver.δ i` represents the `i`-th face map `.mk n ⟶ .mk (n + 1)`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"line\": \"47\", \"text\": \"/-- `FreeSimplexQuiver.σ i` represents `i`-th degeneracy map `.mk (n + 1) ⟶ .mk n`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"line\": \"73\", \"text\": \"/-- SimplexCategory is the category presented by generators and relation by the simplicial\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean\", \"line\": \"529\", \"text\": \"terms of a complex-number representation of the space. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/EpiMono.lean\", \"line\": \"9\", \"text\": \"/-! # Epi-mono factorization in the simplex category presented by generators and relations\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean\", \"line\": \"358\", \"text\": \"complex-number representation of the space. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"line\": \"401\", \"text\": \"i.e. `face S` is isomorphic to `Δ[m]`, see `stdSimplex.isoOfRepresentableBy`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"line\": \"599\", \"text\": \"  stdSimplex.isoOfRepresentableBy\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"line\": \"600\", \"text\": \"    (stdSimplex.faceRepresentableBy.{u} _ _ (Fin.orderIsoSingleton i))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"line\": \"617\", \"text\": \"  stdSimplex.isoOfRepresentableBy\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"line\": \"618\", \"text\": \"    (stdSimplex.faceRepresentableBy.{u} _ _ (Fin.orderIsoPair i j hij))\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Presentable.lean\", \"line\": \"33\", \"text\": \"    IsFinitelyPresentable.{u} (stdSimplex.{u}.obj n) :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialComplex/Basic.lean\", \"line\": \"62\", \"text\": \"/-- The complex consisting of only the faces present in both of its arguments. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialComplex/Basic.lean\", \"line\": \"68\", \"text\": \"/-- The complex consisting of all faces present in either of its arguments. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialComplex/Basic.lean\", \"line\": \"186\", \"text\": \"/-- The complex consisting of only the faces present in both of its arguments. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialComplex/Basic.lean\", \"line\": \"192\", \"text\": \"/-- The complex consisting of all faces present in either of its arguments. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"14\", \"text\": \"# Naive cotangent complex associated to a presentation.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"60\", \"text\": \"/-- The cotangent complex given by a presentation `R[X] → S` (i.e. a closed embedding `S ↪ Aⁿ`). -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"610\", \"text\": \"  have : Module.FinitePresentation S (LinearMap.range P.toExtension.cotangentComplex) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"615\", \"text\": \"  exact Module.FinitePresentation.fg_ker (N := LinearMap.range P.toExtension.cotangentComplex)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Double.lean\", \"line\": \"157\", \"text\": \"`K : HomologicalComplex C c` to `X ⟶ K.X i` is corepresentable by `double (𝟙 X) hi₀₁`. -/\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/TwoDim.lean\", \"line\": \"546\", \"text\": \"of a complex-number representation of the space. -/\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/TwoDim.lean\", \"line\": \"554\", \"text\": \"evaluated in terms of a complex-number representation of the space. -/\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits define local presentability or prove it for all presheaves; they do not prove it for the full category of finite-limit-preserving functors. The presheaf instance cannot be specialized to this subcategory in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "LimitSketch|FiniteLimitTheory|essentially.algebraic|[Ll]ex.*[Pp]resent|[Pp]resent.*[Ll]ex",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"grep\", \"query\": \"LimitSketch|FiniteLimitTheory|essentially.algebraic|[Ll]ex.*[Pp]resent|[Pp]resent.*[Ll]ex\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"51c1f601df42ce7e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Set valued models of a finite limit sketch are locally finitely presentable with pointwise limits and filtered colimits",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T18:31:47Z\", \"tool\": \"leansearch\", \"query\": \"Set valued models of a finite limit sketch are locally finitely presentable with pointwise limits and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\"], \"digest\": \"5f90df48cb65d55d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyFinitelyPresentable, CategoryTheory.Limits.PreservesFiniteLimits",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T18:31:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsLocallyFinitelyPresentable, CategoryTheory.Limits.PreservesFiniteLimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of finite limit preserving set valued functors on a small finitely complete category is locally finitely presentable",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T18:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"The category of finite limit preserving set valued functors on a small finitely complete category is locally finitely presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.Limits.isIndObject_iff_preservesFiniteLimits\", \"CategoryTheory.instPreservesFilteredColimitsOfSizeObjOppositeFunctorTypeCoyonedaOpOfIsFinitelyPresentable\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimitsOfSize\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"CategoryTheory.Functor.IsFinitelyAccessible\"], \"digest\": \"741edbd18c57259f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Models of finitary essentially algebraic theories are complete cocomplete locally finitely presentable categories",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T18:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"Models of finitary essentially algebraic theories are complete cocomplete locally finitely presentable categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.Types.instIsPresentable\", \"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.FinallySmall.FilteredFinalModel\", \"CategoryTheory.FinallySmall.instIsFilteredFilteredFinalModel\"], \"digest\": \"729481b18ac468ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "grep",
+   "query": "isIndObject_iff_preservesFiniteLimits|IsLocallyFinitelyPresentable|class IsFinitelyPresentable|HasColimits.*Ind|[Ii]nd.*HasColimits",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-16T18:32:19Z\", \"tool\": \"grep\", \"query\": \"isIndObject_iff_preservesFiniteLimits|IsLocallyFinitelyPresentable|class IsFinitelyPresentable|HasColimits.*Ind|[Ii]nd.*HasColimits\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/SmallObject/Construction.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\"], \"digest\": \"5b458213952f26b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftExactFunctor|IsLocallyFinitelyPresentable.*Ind|Ind.*IsLocallyFinitelyPresentable|IsLocallyPresentable.*Ind",
+   "sub": "CategoryTheory/Presentable",
+   "results": "{\"t\": \"2026-10-16T18:33:13Z\", \"tool\": \"grep\", \"query\": \"LeftExactFunctor|IsLocallyFinitelyPresentable.*Ind|Ind.*IsLocallyFinitelyPresentable|IsLocallyPresentable.*Ind\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned hits. IsLocallyFinitelyPresentable is a definition, not a theorem on sketch models. The Ind-object characterization (IndObject.lean:209-216), Ind cocompleteness (Category.lean:285-286), and Ind.leftExactFunctorEquivalence (Category.lean:308-310) cover parts of the theory case, not the full sketch assertion in one line. Presentable/LocallyPresentable.lean:38-65 defines the required generator and cocompleteness conditions. No sketch construction or general sketch-model theorem appeared in either semantic phrasing or the focused greps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-interval-lifting",
@@ -72,5 +168,21 @@
   "group": "Q07"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-limit-model-presentability",
+  "worker": "stage1",
+  "summary": "No closed project Lean declaration found. Reused the already existing, same-unit general theorem lem-coef-finite-limit-sketch-models rather than creating a duplicate. Exhibited the small sketch of all finite limit cones of T, including the empty cone, and identified its full model category literally with Lex; applied every required clause of the cited statement. Proved the final sketch formulation by direct citation rather than relying on the source metadata's imprecise use of Kelly (9.3). Mathematical statement unchanged. No new nodes or Mathlib leaves. Added fresh logged Mathlib searches and verbatim citation witnesses. Second reader corrected the source attribution for the sketch completion to Kelly (10.1)–(10.2), read directly, instead of (9.3).",
+  "blueprint": "The inherited ancestry serves paragraph 2 of prop-coef-integral-exceptional-adjoint, its derived coefficient-adjunction and inverse-limit calculation, through the strict simplicial-category / interval enhancement. Steps 1-3 supply exactly the locally finitely presentable finite-limit-sketch setting and sortwise filtered colimits used by step 1 and step 4 of lem-coef-simplicial-interval-lifting. Same unit sk-prop-sf-biduality-general; no unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-acf03ca4c",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-acf03ca4c (reviewer sub-agent of L); spot-checked: I read the item, its parent lem-coef-simplicial-interval-lifting, the unit sk-prop-sf-biduality-general, and the full statement of the cited same-unit node lem-coef-finite-limit-sketch-models with its definition dependencies. Kelly 1982 is a scan with no text layer, so I rendered the pages and read them. (9.7) and (9.8) are on journal p.36: (9.8) says T-Alg is l.f.p. and reflective in [T,V], and (9.3)/(9.7) complete the underlying category. (10.1), (10.2) and (10.4) are on journal p.40, so the second reader's correction to (10.1)-(10.2) is accurate; (10.2) keeps the specified cones and gives the equivalence of model categories. Step 1 is correctly marked elementary: the sketch of all finite limit cones of T is small after coding finite index categories on finite subsets of N, preservation of finite limits does not depend on that coding, the empty cone is included, and the morphisms are the same, so its models are exactly Lex(T,Set). Step 2 matches the cited node clause by clause: U-small limits and colimits, pointwise limits and filtered colimits, and a small filtered generating family of finitely presentable objects. Step 3 is the cited theorem itself and avoids the wrong completion that forgets the cones; a sketch given on a graph is turned into its free category elementarily. Small cases checked: terminal T, FinSet^op, a sketch with no sorts, discrete sorts, an empty cone, and the fact that only limits and filtered colimits are pointwise. There are no new nodes, no cycle, no SGA, no off-unit tool use, and the statement is unchanged and not weakened. The item duplicates the general node only as a specialization of a node that existed first; citing that node is the prescribed treatment, and a later merge is optional. Minor inherited point: 'finite category' is not cited to def-galois-finite-limits-colimits. No fixes were written."
+ }
 }
