@@ -177,5 +177,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-ab6f0f8d1 (reviewer sub-agent of L); spot-checked: Reviewed full packet, item, cited nodes, unit route, Mathlib statements, and Hovey source. Mathematics and hypotheses check out; the temporary duplicate node was correctly removed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialBoundaryCollapseTest",
+  "declaration": "CategoryTheory.simplicial_boundary_collapse_test",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialBoundaryCollapseTest.lean",
+  "statement": "theorem simplicial_boundary_collapse_test {M : Type v} [Category.{w} M] [ModelCategory M] [HasLimitsOfSize.{max u w, max u w} M] [HasColimitsOfSize.{max u w, max u w} M] [HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (V : SSet.{u} ⥤ M) [PreservesColimitsOfSize.{u, u} V] (hboundary : ∀ n : ℕ, Cofibration (V.map (SSet.boundary.{u} n).ι)) : (∀ {X Y : SSet.{u}} (f : X ⟶ Y), Mono f → Cofibration (V.map f)) ∧ ((∀ n : ℕ, WeakEquivalence (V.map (SSet.stdSimplex.{u}.map (SimplexCategory.const ⦋n⦌ ⦋0⦌ 0)))) → (∀ {X Y : SSet.{u}} (f : X ⟶ Y), Mono f → SSet.Enhanced.IsWeakHomotopyEquivalence f → Cofibration (V.map f) ∧ WeakEquivalence (V.map f)) ∧ (∀ {X Y : SSet.{u}} (f : X ⟶ Y), SSet.Enhanced.IsWeakHomotopyEquivalence f → WeakEquivalence (V.map f)) ∧ (∀ (n : ℕ) (i : Fin (n + 2)), Cofibration (V.map (SSet.horn.{u} (n + 1) i).ι) ∧ WeakEquivalence (V.map (SSet.horn.{u} (n + 1) i).ι)) ∧ ∀ (U : M ⥤ SSet.{u}) (_adj : V ⊣ U), (∀ {A B : M} (p : A ⟶ B), Fibration p → Fibration (U.map p)) ∧ (∀ {A B : M} (p : A ⟶ B), trivialFibrations M p → SSet.modelCategoryQuillen.I.rlp (U.map p)))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93d9617e8",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: ModelCategory plus complete/cocomplete at size max u w and two functorial factorizations; V preserves u-small colimits; boundary hypothesis covers n=0; collapse map is the unique [n]->[0]; weak homotopy equivalences are the dependency's Enhanced.IsWeakHomotopyEquivalence (checked against weakEquivalenceStructure); horns of dimension >=1; Quillen clause under the collapse premise in right-adjoint form (SSet fibrations = J.rlp instance, trivial fibrations = I.rlp per dependency). No Quillen predicate in Mathlib or project. Docstrings have source, blueprint tag and 7 proof steps; proof is sorry only; lean.statement verbatim. nt_compile --json side overlay rc=0, no warnings; pp.explicit check confirmed universes and instances. Observation only: completeness at max u w equals HasLimits when u<=w (covers the citer); stronger for u>w, consistent with the node's universe-enlargement convention."
  }
 }
