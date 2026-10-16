@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-nagata-category",
   "def-weil-pbc-simplicial-set",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones"
  ],
  "proof": [
   {
@@ -275,5 +276,31 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b31d4406e (reviewer sub-agent of L); spot-checked: I read the item statement, all 8 steps, the new node lem-coef-signed-word-boundary-pushout and the full statements of every cited node (Kan-Quillen, Reedy, Brown split factorizations, the colimit, simplicial-set and category definitions). The item statement is unchanged and not weakened; it is not a target node. Source limit: the Dwyer-Kan and Hovey PDFs are cited by URL, are not in literature/, and network is blocked here, so I did not open them. I checked every step and the new statement on my own instead. Steps 1-2: I recomputed the Reedy structures on a discrete pair, a sequence and the span X<-A->B (degrees 0,1,2) and the relative matching maps of a constant fibration (p everywhere, identity at A). Colim therefore preserves (trivial) cofibrations, and the Brown argument (u=pi, ps=1, two-out-of-three) gives the coproduct, pushout and sequence comparisons with the correct latching objects. The existing lem-coef-model-cofibrant-colimit-comparison cannot be cited: my reachability check shows it reaches the item, so citing it would close a cycle. Proving the comparisons inline is therefore justified. Steps 3-5 are correct and elementary: colim over I equals colim of C_n, C_0=E(empty word), pushouts along injections are injective, and subword images intersect as X_S cap X_T = X_(S cap T) by properness. Step 6 is a lexicographic (r,k) induction with both bases; every S cap T has cardinality below r, and the union is a degreewise pushout with monomorphic legs. Steps 7-8 are correct. New node: I verified the attachment pushout with my own proof. Alternating length-n words have no nonidentity outgoing arrows, nonalternating length-n words retract to shorter words, nonidentity arrows factor as a surjection then an injection, and the boundary map is well defined by properness. Tested at n=1, on a constant point, on the discrete-positions functor and on the word ++. It is a statement-only node, self-contained, single-escaped TeX, with three recorded searches and correct created/blueprint fields. lean_audit is absent, which many recent nodes share; not a fault. It is strictly smaller than the item and not a restatement. No duplicate found by rg over dag/nodes. The graph is acyclic, every proof use is in unit sk-prop-sf-biduality-general or is a definition or Mathlib leaf, there are no tool_uses and no SGA. Minor and unchanged: the report's 'five proof steps' line is stale. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProperWordColimitInvariance",
+  "declaration": "SSet.SignedWord.proper_colimit_invariance",
+  "declarations": [
+   "SSet.SignedWord",
+   "SSet.SignedWord.Hom",
+   "SSet.SignedWord.instCategory",
+   "SSet.SignedWord.IsProper",
+   "SSet.SignedWord.proper_colimit_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProperWordColimitInvariance.lean",
+  "statement": "theorem proper_colimit_invariance (E E' : SignedWord ⥤ SSet.{u}) (η : E ⟶ E') (hE : IsProper E) (hE' : IsProper E') (hη : ∀ w : SignedWord, Enhanced.IsWeakHomotopyEquivalence (η.app w)) : Enhanced.IsWeakHomotopyEquivalence (colimMap η)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The signed-word category and properness are introduced explicitly in the node statement and are realized as real helper definitions in this owning module. The sole postponed theorem is the stated invariance theorem. The existing realization-based weak equivalence is reused from def-cbc-enhanced-diagrams-cones, added as an already landed statement dependency; no dependency interface or mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6087e151",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Node diff: only lean and stmt_deps (+landed def-cbc-enhanced-diagrams-cones, has a lean record, no cycle; allowed by brief-stage2 l.140). The Lean matches every clause of the node: SignedWord (length, Fin length -> Bool, empty word included), Hom (monotone, sign-preserving, not necessarily injective), real Category instance, injection = Function.Injective toFun. IsProper has degreewise injectivity for all n and the degreewise range-intersection equality for every injective h with range = range f ∩ range g. That is equivalent to the node's intersection subword: it always exists, also when empty, and is unique up to word isomorphism. Hypotheses hE, hE' and the objectwise Enhanced.IsWeakHomotopyEquivalence; conclusion on colimMap η. The weak-equivalence predicate (bijection on path components plus on HomotopyGroup (Fin r) for r>=1 at every basepoint of the toTop realization) matches the node's definition. No extra assumptions; u free; HasColimitsOfShape found by instance. Docstrings cite Dwyer-Kan 4.1/4.4/4.5 and the blueprint id, with the 8-step proof; only the theorem is sorry (#print axioms); lean.statement verbatim; the report has the Worker report and Second reading by Q55 sections. nt_compile.py --json against the local side overlay: rc 0, no errors or warnings. No findings."
  }
 }
