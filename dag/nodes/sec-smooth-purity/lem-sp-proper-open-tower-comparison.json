@@ -36,7 +36,12 @@
   "def-pc-scheme",
   "def-pc-fibre-product",
   "def-weil-proper-morphism",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-strict-tower-proper-open-calculus"
  ],
  "proof": [
   {
@@ -358,5 +363,32 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-e9f5bbd5b (reviewer sub-agent of L); spot-checked: Read the complete item, all five steps, cited statements, sources, and unit/chapter route. Verified clopen geometry, unbounded diagram resolutions, mate normalization before evaluation, finite-origin hypotheses, and coefficient-category distinctions against archived master targets. No new nodes, circular dependencies, or repairs needed. Concrete checks and accepted tool_uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperOpenTowerComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.properOpenTowerComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenRestrictedExtension",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenRestrictionMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenOpenAdjunct",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenCartesianRestrictionMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenQuotientOrigin",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenScalarOrigin",
+   "AlgebraicGeometry.ProEtale.StrictTower.properOpenTowerComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ProperOpenTowerComparison.lean",
+  "statement": "theorem properOpenTowerComparison [IsNoetherianRing A] (I : Ideal A) [∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))] {U V W Z : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z] (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : ∃! lam : (J A k ⋙ R A p) ⋙ G A i ≅ R A r, lam.hom = properOpenRestrictionMap A k r p i h ∧ (IsPullback k r p i → lam.hom = properOpenCartesianRestrictionMap A k r p i h) ∧ properOpenOpenAdjunct A k r p i lam = gamma A k r p i h ∧ (∀ M : Derived A U, (jAdj A i).unit.app ((R A r).obj M) ≫ (G A i).map ((properOpenOpenAdjunct A k r p i lam).app M) ≫ lam.hom.app M = 𝟙 ((R A r).obj M)) ∧ ∀ (N : Derived A U) (w : ∀ n : ℕ, properOpenQuotientOrigin A I U N n), IsIso ((properOpenOpenAdjunct A k r p i lam).app N) ∧ ∀ n : ℕ, (finiteSource A r i N n (properOpenScalarOrigin A I U N n (w n))).hom ≫ (ev A Z n).map ((properOpenOpenAdjunct A k r p i lam).app N) = (HD A Z (properOpenScalarOrigin A I U N n (w n)).Λ (properOpenScalarOrigin A I U N n (w n)).φ).map ((finiteGamma (properOpenScalarOrigin A I U N n (w n)).Λ k r p i h).hom.app (properOpenScalarOrigin A I U N n (w n)).origin.L) ≫ (finiteTarget A k p N n (properOpenScalarOrigin A I U N n (w n))).hom",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-17f0805c9",
+  "group": "N1",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, canonical constructions, sources, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced cleanly. No delivery errors or fixes; repositories and branch heads unchanged."
  }
 }
