@@ -1,0 +1,105 @@
+{
+ "id": "def-cbc-enhanced-cartesian-fibration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Opening compactification choice; define cocartesian sections and the strict presentation of the presheaf relative exponential needed to make the Grothendieck-presheaf comparison precise.",
+   "via": [
+    "lem-cbc-grothendieck-presheaf-coherent-straightening",
+    "lem-cbc-grothendieck-hypersheaf-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Sections and strict presentations of enhanced cocartesian fibrations",
+ "statement": "Use simplicial sets, quasicategories, internal functor simplicial sets, cores and universes from [def-cbc-enhanced-diagrams-cones], and cartesian and cocartesian fibrations and their edges and fibres from [def-coef-infinity-fibrations]. Opposite simplicial sets reverse the ordering of vertices and interchange the $i$th and $(n-i)$th faces.\n\nFor a map $p:X\\to S$, the simplicial set of sections has $r$-simplices the maps $S\\times\\Delta^r\\to X$ whose composite with $p$ is the projection to $S$, with operators given by precomposition in the second factor. For a cocartesian fibration write $\\Gamma_{\\mathrm{cocart}}(S,X)$ for the full simplicial subset on sections carrying every edge of $S$ to a $p$-cocartesian edge. Thus higher simplices include arbitrary transformations over $S$ between those sections; their components need not be equivalences. Cartesian sections are defined dually. Write $\\mathrm{Cat}_\\infty$ for the homotopy coherent nerve [lem-coef-coherent-nerve-comparison] of the simplicial category whose objects are the quasicategories in a universe containing all the fibres under discussion and whose mapping spaces are the cores of their internal functor simplicial sets, with composition induced by composition of functors; it is formed in a further containing universe, as in Lecture II of the six-functor notes.\n\nLet $C$ be a small ordinary category and let $D$ be a strict functor from $C$ to such quasicategories: simplicial maps $D(f):D(c)\\to D(d)$ for arrows $f:c\\to d$, with $D(\\mathrm{id}_c)=\\mathrm{id}$ and $D(gf)=D(g)D(f)$. Regarding $C$ as a simplicial category with discrete mapping spaces, $D$ is a simplicial functor, and its homotopy coherent nerve is a diagram $N(C)\\to\\mathrm{Cat}_\\infty$, still written $D$. The marked Grothendieck construction $G_C(D)$ is the simplicial set whose $n$-simplices are pairs $(\\sigma,\\tau)$ of a functor $\\sigma:[n]\\to C$ and an $n$-simplex $\\tau$ of $D(\\sigma(0))$; a monotone $\\theta:[m]\\to[n]$ sends $(\\sigma,\\tau)$ to $(\\sigma\\theta,D(\\sigma(0)\\to\\sigma(\\theta(0)))(\\theta^*\\tau))$. Projection to $\\sigma$ is a map $G_C(D)\\to N(C)$ whose fibre over $c$ is $D(c)$. An edge $(f,\\tau)$ is marked when $\\tau$ is degenerate, $\\tau=s_0x$; it then runs from $x$ to $D(f)(x)$. Over each simplex of $N(C)$ this is the mapping simplex of the corresponding composable string, with cocartesian variance; $G_C(D)\\to N(C)$ need not be an inner fibration. For a cocartesian fibration $q:Q\\to N(C)$ of quasicategories, a strict presentation of $q$ by $D$ is a simplicial map $\\varphi:G_C(D)\\to Q$ over $N(C)$ that carries every marked edge to a $q$-cocartesian edge and restricts, for every object $c$, to an equivalence of quasicategories $D(c)\\to Q\\times_{N(C)}\\{c\\}$.",
+ "source": {
+  "document": "https://kerodon.net",
+  "place": "Proposition 7.4.4.1 (Tag 05RX), the category of cocartesian sections. Mapping simplex and its marking: Lurie, Higher Topos Theory, Section 3.2.2, the mapping simplex definition and Notation 3.2.2.3 (printed pp. 179-180), dualized to cocartesian variance. Cat_infinity convention: literature/scholze-six-functor-formalisms.pdf, Lecture II basic fact (7), printed p. 15. WANTED: archived Kerodon and HTT."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration of quasicategories with cartesian and cocartesian edges defined by outer horn lifting",
+   "results": "{\"t\": \"2026-10-16T15:19:00Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration of quasicategories with cartesian and cocartesian edges defined by outer horn lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"f2520afd3eebb371\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:39 defines SSet.Quasicategory only; CategoryWithFibrations.lean:77-85 uses all horns (Kan fibrations). Ordinary IsStronglyCocartesian in CategoryTheory/FiberedCategory/Cocartesian.lean:73 has ordinary categories as inputs, not these relative horn and coherent-section definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CartesianFibration\"",
+   "results": "{\"t\": \"2026-10-16T15:19:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"CartesianFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:39 defines SSet.Quasicategory only; CategoryWithFibrations.lean:77-85 uses all horns (Kan fibrations). Ordinary IsStronglyCocartesian in CategoryTheory/FiberedCategory/Cocartesian.lean:73 has ordinary categories as inputs, not these relative horn and coherent-section definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "CartesianFibration|CocartesianFibration|cartesian.*horn|cocartesian.*horn",
+   "results": "{\"t\": \"2026-10-16T15:19:05Z\", \"tool\": \"grep\", \"query\": \"CartesianFibration|CocartesianFibration|cartesian.*horn|cocartesian.*horn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:39 defines SSet.Quasicategory only; CategoryWithFibrations.lean:77-85 uses all horns (Kan fibrations). Ordinary IsStronglyCocartesian in CategoryTheory/FiberedCategory/Cocartesian.lean:73 has ordinary categories as inputs, not these relative horn and coherent-section definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition cartesian cocartesian fibrations of simplicial sets and outer horn lifting",
+   "results": "{\"t\": \"2026-10-16T15:19:06Z\", \"tool\": \"leansearch\", \"query\": \"Definition cartesian cocartesian fibrations of simplicial sets and outer horn lifting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Quasicategory\", \"SSet.Quasicategory.mk\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"SSet.modelCategoryQuillen.J\"], \"digest\": \"e05c3ca08a55e304\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:39 defines SSet.Quasicategory only; CategoryWithFibrations.lean:77-85 uses all horns (Kan fibrations). Ordinary IsStronglyCocartesian in CategoryTheory/FiberedCategory/Cocartesian.lean:73 has ordinary categories as inputs, not these relative horn and coherent-section definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian edges in an infinity category are defined by a relative right horn lifting property",
+   "results": "{\"t\": \"2026-10-16T15:19:06Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian edges in an infinity category are defined by a relative right horn lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"28c664e4fcf4497a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:39 defines SSet.Quasicategory only; CategoryWithFibrations.lean:77-85 uses all horns (Kan fibrations). Ordinary IsStronglyCocartesian in CategoryTheory/FiberedCategory/Cocartesian.lean:73 has ordinary categories as inputs, not these relative horn and coherent-section definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "InnerFibration|relativeHom|section.*[Qq]uasicategory|[Qq]uasicategory.*section",
+   "results": "{\"t\": \"2026-10-16T16:34:38Z\", \"tool\": \"grep\", \"query\": \"InnerFibration|relativeHom|section.*[Qq]uasicategory|[Qq]uasicategory.*section\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sHom\"",
+   "results": "{\"t\": \"2026-10-16T16:34:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"sHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Std.Internal.UV.System.osHomedir\", \"Lean.Meta.Grind.Arith.Linear.isHomoMulInst\", \"multiplesHom\", \"powersHom\", \"multiplesHom_apply\", \"multiplesHom_symm_apply\", \"powersHom_apply\", \"powersHom_symm_apply\"], \"digest\": \"0d523cee9a486ed1\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sections over a base form a functor infinity category and their cocartesian subcategory computes a limit",
+   "results": "{\"t\": \"2026-10-16T16:34:42Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sections over a base form a functor infinity category and their cocartesian subcategory computes a limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"SSet.Truncated.hasLimits\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"SSet.StrictSegal.isRightKanExtension\"], \"digest\": \"01b80b67196060c7\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dependent simplicial internal hom over a base has covariant functor-category transport by precomposition with contravariant lifts",
+   "results": "{\"t\": \"2026-10-16T16:34:44Z\", \"tool\": \"leanfinder\", \"query\": \"A dependent simplicial internal hom over a base has covariant functor-category transport by precomposition with contravariant lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialObject.whiskering\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.eHomFunctor\", \"CategoryTheory.Functor.ihom_map\", \"CategoryTheory.Functor.homObjFunctor\"], \"digest\": \"098abacdcb67eeb4\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: SSet.InnerFibration at AlgebraicTopology/Quasicategory/InnerFibration.lean:64-70 is only the inner-horn clause, not cocartesian sections or relative exponentials. SimplicialCategory.sHom and sHomFunctor at AlgebraicTopology/SimplicialCategory/Basic.lean:58,70 give ordinary enriched Hom objects, not the parametrized fibration theorem. Types.limitEquivSections at CategoryTheory/Limits/Types/Limits.lean:197 is a bijection of sets for ordinary Type-valued diagrams, not the limit of a quasicategory-valued coherent diagram."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-grothendieck-presheaf-coherent-straightening",
+  "date": "2026-10-16",
+  "group": "NW"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

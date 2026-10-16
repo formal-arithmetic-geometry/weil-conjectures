@@ -22,46 +22,194 @@
   "def-weil-size-convention",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the projection $P:\\mathcal E\\to I$. Composition is $(j\\le k,v)\\circ(i\\le j,u)=(i\\le k,v\\circ\\iota_{jk}(u))$, so the stated strict identities give a category. Put $w_{ij,T}=(i\\le j,\\mathrm{id}_{\\iota_{ij}T})$. For $i\\le j\\le k$, composition with $w_{ij,T}$ identifies arrows $(j,\\iota_{ij}T)\\to(k,U)$ over $j\\le k$ with arrows $(i,T)\\to(k,U)$ over $i\\le k$: both are exactly arrows $\\iota_{ik}T\\to U$ in $\\mathcal C_k$. Thus these are universal cocartesian lifts. Every arrow $(i\\le j,u)$ factors as $w_{ij,T}$ followed by the vertical arrow $u$. It is universal cocartesian precisely when $u$ is invertible: universality of it and of $w$ gives inverse vertical factorizations, and uniqueness makes their composites identities.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; elementary construction and factorization of the total category."
+   }
+  },
+  {
+   "text": "Set $S=N(I^{\\mathrm{op}})$, $B=N(\\mathcal E^{\\mathrm{op}})$, and $p=N(P^{\\mathrm{op}}):B\\to S$. Every inner horn in a category nerve has its unique composition filler, which maps to the specified base simplex, so $p$ is an inner fibration. The opposite of each $w$ is cartesian by the outer-horn definition of [def-coef-infinity-fibrations]: for a last $2$-horn its filler is exactly the unique factorization established in step 1; for a last $3$-horn the only missing triangle holds after postcomposition with that lift, and uniqueness of factorization cancels this postcomposition; for $n\\ge4$ every triangle already lies in the horn, so the nerve simplex is forced. Conversely the $2$-horn property gives existence of the ordinary factorization. For uniqueness, if $a,a^{\\prime}:z\\to x$ have the same base arrow and $ea=ea^{\\prime}$, use a last $3$-horn with vertices $z,x,x,y$ and edges $01=a$, $02=a^{\\prime}$, $12=\\mathrm{id}_x$, $23=e$; the three given faces commute, and a filler forces $a=a^{\\prime}$. Hence the cartesian edges are exactly opposites of the arrows described in step 1 with invertible vertical factor. All required lifts exist. The fibre is $N(\\mathcal C_i^{\\mathrm{op}})$ and transport along $j\\to i$ in $I^{\\mathrm{op}}$ is $\\iota_{ij}^{\\mathrm{op}}:\\mathcal C_i^{\\mathrm{op}}\\to\\mathcal C_j^{\\mathrm{op}}$. The chosen lifts compose strictly; lifting each string therefore gives the coherent transport diagram, with the strict identity and composition data of the original diagram.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; direct horn verification for the opposite total projection."
+   }
+  },
+  {
+   "text": "Construct $Q\\to S$ by its simplices $(\\sigma:\\Delta^n\\to S,h:\\Delta^n\\times_S B\\to\\mathscr A)$, with face and degeneracy operators given by restriction. At $i$ its fibre is the internal functor simplicial set $\\operatorname{Fun}(N(\\mathcal C_i^{\\mathrm{op}}),\\mathscr A)$, since the pullback over the constant vertex is $\\Delta^n\\times N(\\mathcal C_i^{\\mathrm{op}})$. This is the presheaf functor simplicial set in the statement; its categorical properties are supplied by the theorem in the next step.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; explicit relative-exponential object."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-enhanced-relative-exponential] to $p$ from step 2 and the given quasicategory $\\mathscr A$, obtaining the cocartesian fibration $q$. Identify its full coherent transport as follows, without inferring it from edgewise transport alone. For a simplex $\\sigma:[n]\\to I^{\\mathrm{op}}$, write its indices as $i_0\\ge\\cdots\\ge i_n$. The pullback of $B$ is the nerve of the category with objects $(a,T)$, $T\\in\\mathcal C_{i_a}$, and arrows $(a,U)\\to(b,T)$, $a\\le b$, given by $u:\\iota_{i_b i_a}T\\to U$ in $\\mathcal C_{i_a}$. Define $R_\\sigma$ to $\\mathcal C_{i_0}^{\\mathrm{op}}$ on objects by $(a,T)\\mapsto\\iota_{i_a i_0}T$, and on this arrow by $(\\iota_{i_a i_0}u)^{\\mathrm{op}}$. Strict transition composition makes this a functor; it takes distinguished cartesian lifts to identities and all cartesian edges to isomorphisms. Evaluation after $N(R_\\sigma)$ defines a simplicial map $\\Delta^n\\times\\operatorname{PSh}(\\mathcal C_{i_0},\\mathscr A)\\to Q$ over $\\sigma$. For a transformation parameter $\\Delta^r$, its uncurried map is $(z,t)\\mapsto F(N(R_\\sigma)z,t)$ on $(\\Delta^n\\times_S B)\\times\\Delta^r$. The edge criterion of the cited theorem makes every edge in $\\Delta^n\\times\\{F\\}$ of this family cocartesian, for each fixed presheaf $F$. Its value at $a$ is precisely restriction by $\\iota_{i_a i_0}^{\\mathrm{op}}$.\n\nFor every monotone $\\theta:[m]\\to[n]$, the restriction of $R_\\sigma$ satisfies $R_\\sigma\\circ\\theta_B=\\iota_{i_{\\theta(0)}i_0}^{\\mathrm{op}}\\circ R_{\\sigma\\theta}$, on both objects and arrows, where $\\theta_B$ is the map between the pullback total categories. Thus the restricted family is the family for $\\sigma\\theta$ precomposed with restriction from $\\mathcal C_{i_0}$ to $\\mathcal C_{i_{\\theta(0)}}$. This equation includes the face that drops the initial vertex, every other face, and degeneracies, and still holds with each transformation parameter. Let $D$ be the strict functor on $I^{\\mathrm{op}}$ with $D(i)=\\operatorname{PSh}(\\mathcal C_i,\\mathscr A)=\\operatorname{Fun}(N(\\mathcal C_i^{\\mathrm{op}}),\\mathscr A)$ and $D(j\\to i)=\\iota_{ij}^*$, precomposition with $N(\\iota_{ij}^{\\mathrm{op}})$; it is strict because the transitions compose strictly. Taking the diagonal simplices of these families, $(\\sigma,\\tau)\\mapsto$ the $n$-simplex of $Q$ over $\\sigma$ with $h(z)=\\tau(N(R_\\sigma)z,\\mathrm{pr}(z))$, $\\mathrm{pr}:\\Delta^n\\times_S B\\to\\Delta^n$, defines $\\varphi:G_{I^{\\mathrm{op}}}(D)\\to Q$ over $S$; the displayed equation for $\\theta$ is exactly compatibility with the operator $(\\sigma,\\tau)\\mapsto(\\sigma\\theta,D(i_0\\to i_{\\theta(0)})(\\theta^*\\tau))$ of the marked Grothendieck construction. For constant $\\sigma$ at $i$, $R_\\sigma$ is the projection to $\\mathcal C_i^{\\mathrm{op}}$, so $\\varphi$ is the identity of $D(i)=Q\\times_S\\{i\\}$ on fibres (step 3). A marked edge $(\\sigma,s_0F)$ goes to an edge of $\\Delta^1\\times\\{F\\}$, which is cocartesian as shown above. Hence $\\varphi$ is a strict presentation of $q$ by $D$. The marked Grothendieck construction, strict presentations and sections are as in [def-cbc-enhanced-cartesian-fibration]. Smallness follows from the small index poset, small fibre categories, and containing target universe; no completeness or presentability of $\\mathscr A$ is required.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-cbc-enhanced-cartesian-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; HTT Corollary 3.2.2.13 for the fibration, followed by explicit simplexwise families assembled into a strict presentation (HTT 3.2.2 mapping simplex, dual variance)."
+   }
+  },
+  {
+   "text": "There is an isomorphism of simplicial sets $\\Gamma(S,Q)\\cong\\operatorname{Fun}(B,\\mathscr A)$. In degree $r$, a section family $S\\times\\Delta^r\\to Q$ corresponds by the displayed exponential formula to a map $(S\\times\\Delta^r)\\times_S B\\to\\mathscr A$, and the domain is canonically $B\\times\\Delta^r$. The inverse assigns to $F:B\\times\\Delta^r\\to\\mathscr A$ its restrictions over every simplex $\\sigma$ of $S$. These two operations are inverse on the nose and commute with every operator of $\\Delta^r$. In particular arbitrary transformations and all their higher compatibility simplices are retained.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-cbc-enhanced-cartesian-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; degreewise currying, including transformation parameters."
+   }
+  },
+  {
+   "text": "Under the isomorphism of step 5, a section is cocartesian exactly when the associated presheaf inverts every $w_{ij,T}$. Indeed, the edge criterion of [lem-cbc-enhanced-relative-exponential] says that its restriction over an edge of $S$ must send all cartesian edges of the pulled-back $B$ to equivalences. Step 2 identifies these edges as the opposite distinguished lifts with an invertible vertical factor. Functors carry such a vertical isomorphism to an equivalence, so inversion of the distinguished lifts is sufficient; it is necessary by testing those lifts themselves. These are vertex conditions defining full subcategories on both sides. Thus step 5 restricts to an isomorphism $\\operatorname{PSh}_{\\mathrm{inv}}(\\mathcal E,\\mathscr A)\\cong\\Gamma_{\\mathrm{cocart}}(S,Q)$.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-cbc-enhanced-cartesian-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; edge-inversion criterion and restriction to full subcategories."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-cocartesian-sections-limit] to $C=I^{\\mathrm{op}}$, $q$ and the strict presentation $\\varphi$ of $q$ by $D$ from step 4. The resulting enhanced limit $\\operatorname{holim}_{N(I^{\\mathrm{op}})}D$ is precisely the category of systems $F_i$ and equivalences $\\iota_{ij}^*F_j\\simeq F_i$ with the composition and higher compatibility data of the statement: the base edge is $j\\to i$, so the structural equivalence has exactly that direction. This comparison retains arbitrary coherent transformations, evaluations, and all mapping spaces. Composing with step 6 proves an equivalence of enhanced categories.",
+   "uses": [
+    "lem-cbc-cocartesian-sections-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; compatible systems as cocartesian sections, Kerodon Proposition 7.4.4.1."
+   }
+  },
+  {
+   "text": "The functor just obtained is the required restriction functor. Evaluation of the section corresponding to $F$ at $i$ is $F|_{\\mathcal C_i^{\\mathrm{op}}}$, and its structural equivalence at $T$ is $F(w_{ij,T}^{\\mathrm{op}}):F_j(\\iota_{ij}T)\\to F_i(T)$. Conversely the uncurried section evaluates on $(i\\le j,u:\\iota_{ij}T\\to U)$ as $F_j(U)\\to F_j(\\iota_{ij}T)\\to F_i(T)$. The first map is presheaf restriction along $u$ and the second is the specified structural equivalence. The section construction in step 7 and the degreewise inverse in step 5 provide all higher simplices of this assignment, rather than a separate assertion that the arrow formula is coherent. Their inverse identifications retain the same evaluations and structural equivalences, giving the required inverse to restriction.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-cbc-cocartesian-sections-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; identify restriction and its inverse, with the correct contravariant arrow formula."
+   }
+  },
+  {
+   "text": "For a subposet inclusion, restriction is pullback along its nerve: in degree $n$ both relative exponentials have the same maps $\\Delta^n\\times_S B\\to\\mathscr A$ over an included simplex. For a compatible map of diagrams with indexing map $a:I\\to I'$ and functors $H_i:\\mathcal C_i\\to\\mathcal C'_{a(i)}$ satisfying $H_j\\iota_{ij}=\\iota'_{a(i)a(j)}H_i$, the induced total functor sends $(i,T)$ to $(a(i),H_iT)$, the arrow $(i\\le j,u)$ to $(a(i)\\le a(j),H_j(u))$, and each $w_{ij,T}$ to the corresponding distinguished transition. Its opposite therefore preserves cartesian edges by the invertible-vertical-factor description in step 2. For $K\\to S$, precomposition with $K\\times_S B\\to K\\times_{S'}B'$ defines the relative-exponential map $a^*Q'\\to Q$; it commutes with every simplicial operator because both are restriction of the same map. The edge criterion of [lem-cbc-enhanced-relative-exponential] shows it preserves cocartesian edges: a cartesian edge in its domain exponent maps to one in the other exponent, and the given functor takes it to an equivalence. Currying therefore commutes with this map in every transformation degree. Let $\\eta:D'\\circ a^{\\mathrm{op}}\\to D$ be the strict transformation with components $H_i^*:\\operatorname{PSh}(\\mathcal C'_{a(i)},\\mathscr A)\\to\\operatorname{PSh}(\\mathcal C_i,\\mathscr A)$; it is natural because $H_j\\iota_{ij}=\\iota'_{a(i)a(j)}H_i$. The equation $R'_{a\\sigma}\\circ H_\\sigma=H_{i_0}^{\\mathrm{op}}\\circ R_\\sigma$, again from the strict compatibility, gives $g\\circ a^*\\varphi'=\\varphi\\circ G_{I^{\\mathrm{op}}}(\\eta)$ for the precomposition map $g:a^*Q'\\to Q$, where $a^*\\varphi'$ is the pulled-back strict presentation by $D'\\circ a^{\\mathrm{op}}$; for a subposet inclusion, $\\eta$ and $g$ are identities. The two naturality clauses of [lem-cbc-cocartesian-sections-limit], pullback along $N(a^{\\mathrm{op}})$ followed by the map $(g,\\eta)$, identify the resulting map on compatible systems with these fibre restrictions and structural equivalences. This proves the stated naturality, including its higher data. The full-sieve assumption remains among the hypotheses; this presheaf argument does not need it.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-cbc-cocartesian-sections-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Opening compactification choice; naturality of currying, transport, and the section comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-cocartesian-sections-limit",
+  "lem-cbc-enhanced-relative-exponential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice; presheaf straightening foundation supplied through explicit nerve horns and relative exponentials. External categorical sources are read online but not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Presheaves on a Grothendieck construction are coherent sections of the fiber presheaves",
-   "results": "Hits concern presheaf fibers and ordinary sections; no enhanced straightening theorem.",
+   "query": "Presheaves on a Grothendieck construction that invert transition arrows are equivalent to homotopy coherent systems of presheaves on the fibres",
+   "results": "{\"t\": \"2026-10-16T15:11:04Z\", \"tool\": \"leanfinder\", \"query\": \"Presheaves on a Grothendieck construction that invert transition arrows are equivalent to homotopy coherent systems of presheaves on the fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.GrothendieckTopology.pseudofunctorOver\", \"CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α\"], \"digest\": \"fdabb30c345e50a2\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Grothendieck.functor, presheafHomSectionsEquiv",
-   "results": "No hits (unknown identifier for the combined pattern).",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Grothendieck.*construction|presheafHom|coherent",
-   "results": "Grothendieck construction and presheafHom declarations only; no coherent presheaf straightening.",
-   "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
   },
   {
    "tool": "leansearch",
-   "query": "homotopy coherent sections of fiber presheaf diagram",
-   "results": "Hits TopCat.Presheaf, presheafHomSectionsEquiv and sectionsFunctor; these are ordinary presheaf facts.",
+   "query": "Grothendieck construction presheaves homotopy coherent limit restriction equivalences",
+   "results": "{\"t\": \"2026-10-16T15:11:04Z\", \"tool\": \"leansearch\", \"query\": \"Grothendieck construction presheaves homotopy coherent limit restriction equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"CategoryTheory.Pseudofunctor.CoGrothendieck\", \"TopCat.Sheaf.restrictHomEquivHom\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.categoryStruct\", \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorToComma_obj_hom\", \"PresheafOfModules.limitPresheafOfModules_map\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\", \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\"], \"digest\": \"008be6972ff9eafa\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\"",
+   "results": "{\"t\": \"2026-10-16T15:11:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.GrothendieckAddGroup\", \"Algebra.GrothendieckGroup\", \"Algebra.GrothendieckAddGroup.instAddCommGroup\", \"Algebra.GrothendieckAddGroup.instNeg\", \"Algebra.GrothendieckGroup.instCommGroup\", \"Algebra.GrothendieckGroup.instInv\", \"Algebra.GrothendieckAddGroup.of\", \"Algebra.GrothendieckGroup.of\"], \"digest\": \"ffc1f06f157ae5ee\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
+  },
+  {
+   "tool": "grep",
+   "query": "def Grothendieck|Grothendieck.*equivalence|straighten|unstraighten",
+   "results": "{\"t\": \"2026-10-16T15:11:44Z\", \"tool\": \"grep\", \"query\": \"def Grothendieck|Grothendieck.*equivalence|straighten|unstraighten\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Grothendieck.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean\"], \"digest\": \"e400a7b448d5abc6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinity category of functors from a cocartesian Grothendieck construction is the lax limit of the functor categories of its fibres",
+   "results": "{\"t\": \"2026-10-16T15:11:45Z\", \"tool\": \"leanfinder\", \"query\": \"An infinity category of functors from a cocartesian Grothendieck construction is the lax limit of the functor categories of its fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Grothendieck\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.category\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.Limits.fiberwiseColimit\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"bd66697080701d3b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck.functor\"",
+   "results": "{\"t\": \"2026-10-16T15:11:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck.functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.functor\", \"CategoryTheory.Grothendieck.functor_comp_forget\", \"CategoryTheory.Grothendieck.functorFrom\", \"CategoryTheory.Grothendieck.functorFrom_obj\", \"CategoryTheory.Grothendieck.functorFrom_map\"], \"digest\": \"b52ab1b4746ca05e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Grothendieck.functorFrom at Mathlib/CategoryTheory/Grothendieck.lean:605 constructs ordinary functors with equality coherence; it does not cover arbitrary quasicategory targets, mapping spaces or higher composition data. Other hits concern ordinary pseudofunctors, sheaves or Grothendieck groups."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-grothendieck-hypersheaf-sections",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-grothendieck-presheaf-coherent-straightening",
+  "worker": "stage1",
+  "summary": "Explicit opposite total projection and horn checks, relative-exponential fibration and edge criterion, simplexwise precomposition transport with all face/degeneracy equations, degreewise currying, invariant full-subcategory restriction, section-limit comparison and explicit naturality. Three new foundations (one section/transport definition, two statements). Existing infinity-fibration definitions reused; statement and sieve hypotheses retained.",
+  "blueprint": "Realizes the opening sentence Choose a compactification c=(j,p) of thm-cbc-finite-level-proetale: the coherent presheaf straightening prerequisite used in step 2 of lem-cbc-grothendieck-hypersheaf-sections.",
+  "tool_uses": [],
+  "review_fix": "Maintainer reader 2026-10-17: step 4 asserted that the simplexwise families 'supply the coherent transport representation' without the fibrewise comparison theorem, and the definition of transport representation was not precise; the families now assemble into a strict presentation (marked Grothendieck construction, HTT 3.2.2 mapping simplex, dual), and lem-cbc-cocartesian-sections-limit takes that datum as hypothesis. Steps 7 and 9 adjusted accordingly."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NW-0f4929d2d",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-0f4929d2d (reviewer sub-agent of L); spot-checked: Read in full: the item, its 9 steps and the 3 new nodes; the cited nodes def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-weil-size-convention and the parent lem-cbc-grothendieck-hypersheaf-sections; unit sk-prop-sf-cbc and the opening of the main-20261015 thm-cbc-finite-level-proetale proof. The item statement is unchanged and not weakened; the cases I = empty, point, discrete pair and interval come out right. Steps 1-3 and 5-6 are correct: Grothendieck composition, cocartesian lifts with invertible vertical factor, the Lambda^3_3 cancellation and 2-coskeletality, currying, and the edge criterion. lem-cbc-enhanced-relative-exponential agrees with HTT Cor 3.2.2.13 (PDF p.205) for Y=S x A; tested on B empty, S=Delta^0 and B=S; PASS. Fault 1 (C1/E5), step 4: 'these families supply the coherent transport representation D' needs an equivalence Q ~ int D (Kerodon Def 5.6.5.1, Tag 028V). The families only give a map that is the identity on fibres and preserves marked edges, so the step hid the comparison (HTT Prop 3.2.2.7 on mapping simplices, Kerodon 5.6). The strict construction G(D) is not an inner fibration (counterexample D(c0)=Delta^0, D(c1)=Delta^1 at Lambda^2_1). Fault 2 (B3): def-cbc-enhanced-cartesian-fibration defined 'coherent transport representation' only descriptively. Repairs in fixes/: the definition now defines Cat_infinity via the homotopy-coherent nerve (cites lem-coef-coherent-nerve-comparison), the marked Grothendieck construction G_C(D) (HTT mapping simplex, dual variance) and strict presentations. lem-cbc-cocartesian-sections-limit is restated over N(C) with a strict-presentation hypothesis and explicit pullback and (g,eta) naturality (Kerodon 05RX/02TK/028V/0279, HTT 3.2.2.6-3.2.2.7). Step 4 now builds the strict presentation phi(sigma,tau)=tau(N(R_sigma)z,pr z), compatible with the theta-equation, identity on fibres, marked edges cocartesian. Steps 7 and 9 now use that presentation and eta=(H_i^*) with g a^*phi'=phi G(eta), verified on simplices. No duplicates found in the DAG; no tool_uses; no SGA. Two repairable faults, no false or restated statement.; 3 file(s) fixed by the reviewer"
+ }
 }
