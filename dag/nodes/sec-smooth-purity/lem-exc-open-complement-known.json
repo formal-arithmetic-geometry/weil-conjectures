@@ -1,543 +1,561 @@
 {
-  "id": "lem-exc-open-complement-known",
-  "blueprint": {
-    "is": "lem-exc-open-complement-known",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The open-complement condition from the direct-image input",
-  "statement": "Let $k$ be the algebraic closure of a finite field, let $d\\in\\mathbf Z_{\\geq0}$, let $T$ be a finite-type $k$-scheme of Krull dimension at most $d$ [def-weil-finite-type-morphism; def-kun-topological-krull-dimension], and let $j:V\\hookrightarrow T$ be a quasi-compact open immersion [def-weil-open-immersion]. Let $A$ be a finite commutative ring annihilated by a power of a prime $\\ell\\neq\\operatorname{char}(k)$. Then the pair $(V,T)$ satisfies the open-complement condition at $A$ of [def-exc-open-complement-bound] with $c=2d$.\nIndependently of the general argument, the condition holds in dimension zero because an open immersion into a zero-dimensional Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact) is also a closed immersion [def-weil-closed-immersion] and its direct image is exact extension by zero, preserving constructibility. In dimension at most one, [thm-exc-curve-open-dimension-general] and [thm-exc-curve-open-constructible-general] give the independent vanishing and constructibility assertions (with vanishing already for $q>1$).",
-  "source": {
+ "id": "lem-exc-open-complement-known",
+ "blueprint": {
+  "is": "lem-exc-open-complement-known",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The open-complement condition from the direct-image input",
+ "statement": "Let $k$ be the algebraic closure of a finite field, let $d\\in\\mathbf Z_{\\geq0}$, let $T$ be a finite-type $k$-scheme of Krull dimension at most $d$ [def-weil-finite-type-morphism; def-kun-topological-krull-dimension], and let $j:V\\hookrightarrow T$ be a quasi-compact open immersion [def-weil-open-immersion]. Let $A$ be a finite commutative ring annihilated by a power of a prime $\\ell\\neq\\operatorname{char}(k)$. Then the pair $(V,T)$ satisfies the open-complement condition at $A$ of [def-exc-open-complement-bound] with $c=2d$.\nIndependently of the general argument, the condition holds in dimension zero because an open immersion into a zero-dimensional Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact) is also a closed immersion [def-weil-closed-immersion] and its direct image is exact extension by zero, preserving constructibility. In dimension at most one, [thm-exc-curve-open-dimension-general] and [thm-exc-curve-open-constructible-general] give the independent vanishing and constructibility assertions (with vanishing already for $q>1$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
+  "place": "node lem-exc-open-complement-known, order 1923"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-open-immersion",
+  "def-exc-open-complement-bound",
+  "thm-exc-curve-open-dimension-general",
+  "thm-exc-curve-open-constructible-general",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The algebraic closure $k$ is separably closed: every nonconstant polynomial has a root, hence so does every separable one, as required by [def-pc-separably-closed]. Choose $r\\geq1$ such that $\\ell^r A=0$, and set $N=\\ell^r$. Enlarging an initially given exponent to at least one does not change annihilation, including when $A$ is the zero ring. Since $\\ell\\neq\\operatorname{char}(k)$, $N$ is prime to the characteristic. Every section $m$ of every $A$-module sheaf satisfies $Nm=(N1_A)m=0$.",
+   "uses": [
+    "def-pc-separably-closed"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-    "place": "node lem-exc-open-complement-known, order 1923"
+    "place": "Proof, first sentence: separably closed base and coefficient annihilator"
+   }
   },
-  "stmt_deps": [
-    "def-weil-finite-type-morphism",
-    "def-kun-topological-krull-dimension",
-    "def-weil-open-immersion",
-    "def-exc-open-complement-bound",
-    "thm-exc-curve-open-dimension-general",
-    "thm-exc-curve-open-constructible-general",
-    "pqf-def-locnoeth",
-    "def-weil-closed-immersion"
-  ],
-  "proof": [
-    {
-      "text": "The algebraic closure $k$ is separably closed: every nonconstant polynomial has a root, hence so does every separable one, as required by [def-pc-separably-closed]. Choose $r\\geq1$ such that $\\ell^r A=0$, and set $N=\\ell^r$. Enlarging an initially given exponent to at least one does not change annihilation, including when $A$ is the zero ring. Since $\\ell\\neq\\operatorname{char}(k)$, $N$ is prime to the characteristic. Every section $m$ of every $A$-module sheaf satisfies $Nm=(N1_A)m=0$.",
-      "uses": [
-        "def-pc-separably-closed"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-        "place": "Proof, first sentence: separably closed base and coefficient annihilator"
-      }
-    },
-    {
-      "text": "The quasi-compact open immersion $j$ is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. We also need its source to be finite type over $k$, and check this separately. By [def-weil-finite-type-morphism], $T$ has a finite affine open cover with finitely generated $k$-algebras. The inverse image of each member under $j$ is quasi-compact; hence $V$ is quasi-compact, since the finitely many finite subcovers of any open cover combine into a finite subcover. Identify $V$ with its open image in $T$ by [def-weil-open-immersion]. By [lem-pqf-finite-affine-cover-qc-open], this image has a finite cover by affine opens of $T$. Applying [lem-weil-pbc-lft-affine-pairs] to $T\\to\\operatorname{Spec}k$ shows that the coordinate algebra of each member is finitely generated over $k$. This finite affine cover witnesses that $V$ is finite type over $k$.",
-      "uses": [
-        "lem-weil-pbc-qc-open-immersion-finite-type",
-        "def-weil-finite-type-morphism",
-        "def-weil-open-immersion",
-        "lem-pqf-finite-affine-cover-qc-open",
-        "lem-weil-pbc-lft-affine-pairs"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tags 01T0 and 01T2 (lemma-locally-finite-type-characterize); geometry needed for the imported proof constructibility clause"
-      }
-    },
-    {
-      "text": "The identification of $V$ with an open subspace of $T$ in [def-weil-open-immersion] lets us apply [lem-weil-pbc-open-subspace-dimension-monotone] with $U'=V$ and $U=T$. Thus $\\dim V\\leq\\dim T\\leq d$. The same open-subspace inequality will be applied to $V\\times_TU\\subseteq U$ in step 8; the etale dimension comparison needed there is proved separately in step 7.",
-      "uses": [
-        "def-weil-open-immersion",
-        "lem-weil-pbc-open-subspace-dimension-monotone"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/topology.tex",
-        "place": "Remark after Tag 0055 (definition-Krull): dimension of open subspaces"
-      }
-    },
-    {
-      "text": "Apply [thm-exc-direct-image-input-holds] with the separably closed field $k$, the integer $N$ and the finite commutative ring $A$. Clause (1) of [def-exc-direct-image-input] applies to $j$ by step 2: both schemes and the morphism are finite type. It gives constructibility of $R^qj_*F$ for every constructible $A$-module sheaf $F$ and every $q\\geq0$. No exceptional inverse image, purity or preservation theorem is used.",
-      "uses": [
-        "thm-exc-direct-image-input-holds",
-        "def-exc-direct-image-input"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-        "place": "Proof, first three sentences: clause (1) of the direct-image input applied to j"
-      }
-    },
-    {
-      "text": "For $q<0$, apply [lem-weil-pbc-derived-functor-negative-vanishing] with $b=0$, $L=F[0]$ and $v=j_*$. The module-sheaf categories on $V$ and $T$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $j_*$ is additive and left exact by [def-weil-pbc-direct-image]. The conclusion is $R^qj_*F=0$. The zero sheaf is constructible: use the one stratum $T$, with its constant finite zero module, in [def-weil-pbc-constructible-complexes] (or the empty partition when $T$ is empty). Together with step 4 this supplies every integer degree required by the open-complement condition.",
-      "uses": [
-        "lem-weil-pbc-derived-functor-negative-vanishing",
-        "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-        "def-weil-pbc-direct-image",
-        "def-weil-pbc-constructible-complexes"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 05TC (lemma-negative-vanishing), part (1), applied to a sheaf in degree zero"
-      }
-    },
-    {
-      "text": "Fix an affine etale object $u:U\\to T$. We first prove that $U$ is finite type over $k$, rather than assume this for arbitrary etale objects. By [def-weil-etale-morphism], $u$ is locally of finite presentation. The explicit charts in [def-sbc-locally-finite-presentation] cover $U$ by affine opens $E_a=\\operatorname{Spec} B_a$ mapping into affine opens $D_a=\\operatorname{Spec} R_a$ of $T$, with $B_a$ finitely presented, hence finitely generated, over $R_a$. By [lem-weil-pbc-lft-affine-pairs] applied to $T\\to\\operatorname{Spec}k$, each $R_a$ is finitely generated over $k$. If $r_1,\\ldots,r_m$ generate $R_a/k$ and $b_1,\\ldots,b_n$ generate $B_a/R_a$, their images together generate $B_a/k$: expand every coefficient of a polynomial in the $b_i$ as a polynomial in the $r_j$. Thus each $B_a$ is finitely generated over $k$. By [lem-weil-pbc-affine-scheme-qcqs], $U$ is quasi-compact, so finitely many of these $E_a$ cover $U$. This is exactly the finite affine covering criterion of [def-weil-finite-type-morphism] for $U/k$.",
-      "uses": [
-        "def-weil-etale-morphism",
-        "def-sbc-locally-finite-presentation",
-        "lem-weil-pbc-lft-affine-pairs",
-        "lem-weil-pbc-affine-scheme-qcqs",
-        "def-weil-finite-type-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tags 02GI (definition-etale), 01TP (definition-finite-presentation) and 01T2; the affine-neighbourhood restriction in the blueprint vanishing paragraph"
-      }
-    },
-    {
-      "text": "For the same affine etale $U\\to T$, prove $\\dim U\\leq\\dim T$. At $z\\in U$ choose affine neighbourhoods $\\operatorname{Spec}B\\subseteq U$ and $\\operatorname{Spec}R\\subseteq T$ around $z$ and $t=u(z)$ such that $R\\to B$ is etale, as in the affine-chart characterization in [def-weil-etale-morphism]. Write $\\mathfrak q$ for $z$ and $\\mathfrak p$ for its image. Clause (c) of [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{U,z}$ with $B_{\\mathfrak q}$ and $\\mathcal O_{T,t}$ with $R_{\\mathfrak p}$, and [lem-sc-etale-local-dimension] gives equality of their Krull dimensions. Now [lem-pc-scheme-dimension-local-rings] gives $\\dim U=\\sup_{z\\in U}\\dim\\mathcal O_{U,z}\\leq\\sup_{t\\in T}\\dim\\mathcal O_{T,t}=\\dim T\\leq d$. This inequality includes empty $U$, when the first supremum is $-\\infty$. No dimension assertion about a strict henselization is used.",
-      "uses": [
-        "def-weil-etale-morphism",
-        "lem-weil-pbc-affine-open-stalk-localization",
-        "lem-sc-etale-local-dimension",
-        "lem-pc-scheme-dimension-local-rings"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "Tag 07QP (lemma-dimension-etale-extension), with Schemes 01HV and Properties 04MU (lemma-dimension)"
-      }
-    },
-    {
-      "text": "Put $W=V\\times_TU$. By [lem-weil-pbc-open-immersion-base-change] its projection to $U$ is an open immersion, and by [lem-pc-quasi-compact-base-change] that projection is quasi-compact. Since $U$ is affine, the definition of a quasi-compact morphism in [def-weil-finite-type-morphism] says that $W$ is quasi-compact. Identify it with its open image in $U$ using [def-weil-open-immersion]. The finite affine cover supplied by [lem-pqf-finite-affine-cover-qc-open] has coordinate rings finitely generated over $k$ by [lem-weil-pbc-lft-affine-pairs] applied to the finite-type structure map of $U$ established in step 6. Thus $W$ is finite type over $k$ by [def-weil-finite-type-morphism]. The open-subspace inequality [lem-weil-pbc-open-subspace-dimension-monotone] and step 7 give $\\dim W\\leq\\dim U\\leq d$. The empty open is covered by the empty finite family, so no nonemptiness assumption is introduced.",
-      "uses": [
-        "lem-weil-pbc-open-immersion-base-change",
-        "lem-pc-quasi-compact-base-change",
-        "def-weil-finite-type-morphism",
-        "def-weil-open-immersion",
-        "lem-pqf-finite-affine-cover-qc-open",
-        "lem-weil-pbc-lft-affine-pairs",
-        "lem-weil-pbc-open-subspace-dimension-monotone"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/schemes.tex",
-        "place": "Tags 01JY (lemma-base-change-immersion) and 01K5 (lemma-quasi-compact-preserved-base-change); Morphisms 01T2; Topology 0055 following remark"
-      }
-    },
-    {
-      "text": "Fix an arbitrary $A$-module sheaf $M$ on $V$ and an integer $q>2d$, and write $G$ for its underlying abelian sheaf. Since $d\\geq0$, $q$ is positive. The morphism $W=V\\times_TU\\to V$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]. By [lem-weil-pbc-etale-inverse-image-restriction], the restricted abelian sheaf has section groups $G(Z\\to W\\to V)$ on every etale $Z\\to W$. Step 1 kills each such group by the same positive integer $N$, so the restriction is torsion, including for nonconstructible $M$. Apply clause (2) of [def-exc-direct-image-input], proved by [thm-exc-direct-image-input-holds], with $K=k$ and this $W$. Its finite-type and dimension hypotheses are steps 6-8, and its characteristic hypothesis is step 1. Thus $H^q(W,G|_W)=0$ for every affine etale $U\\to T$. By [sbc-lem-higher-direct-image-presheaf], the abelian higher direct image $R^qj_*G$ is the sheafification of $P_q:U\\mapsto H^q(V\\times_TU,G|)$; we have proved that $P_q$ is zero on all affine objects. This is a statement about the cohomology presheaf, not an identification of the sections of its sheafification with those cohomology groups.",
-      "uses": [
-        "lem-weil-pbc-etale-base-change-finite-limits",
-        "lem-weil-pbc-etale-inverse-image-restriction",
-        "def-exc-direct-image-input",
-        "thm-exc-direct-image-input-holds",
-        "sbc-lem-higher-direct-image-presheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 03Q8 (lemma-higher-direct-images); Tag 03S2 restriction formula; item blueprint vanishing paragraph, application of clause (2)"
-      }
-    },
-    {
-      "text": "To conclude that $P_q^\\#=0$, use the affine cover statement [lem-weil-pbc-affine-etale-essentially-small-cover]. For any object $Z$ and any $s\\in P_q(Z)$, choose a cover by affine etale objects $U_i\\to Z$. For any morphism $\\alpha:P_q\\to H$ to an abelian sheaf $H$, naturality gives $\\alpha_Z(s)|_{U_i}=\\alpha_{U_i}(s|_{U_i})=0$, since $P_q(U_i)=0$. The equalizer condition in [def-weil-pbc-abelian-etale-sheaves] makes the restriction maps jointly injective, so $\\alpha_Z(s)=0$. Thus every such $\\alpha$ is zero. Apply this with $H=P_q^\\#$ and the unit $\\theta:P_q\\to P_q^\\#$ of [def-weil-pbc-sheafification]. The identity and the zero endomorphism of $P_q^\\#$ have the same composite with $\\theta$; the uniqueness in that definition implies $\\operatorname{id}_{P_q^\\#}=0$. Therefore $P_q^\\#$, and hence $R^qj_*G$, is the zero abelian sheaf. This proves directly the affine-neighbourhood vanishing used by the imported stalk argument, without invoking an unrecorded strict-local continuity formula.",
-      "uses": [
-        "lem-weil-pbc-affine-etale-essentially-small-cover",
-        "def-weil-pbc-abelian-etale-sheaves",
-        "def-weil-pbc-sheafification"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/topologies.tex",
-        "place": "Tags 021B and 04HR (affine objects cover); Sites 00WH (sheafification universal property); explicit elementary local-zero argument"
-      }
-    },
-    {
-      "text": "Apply [lem-sbc-higher-direct-image-forget-comparison] with $\\Lambda=A$, $h=j$, $F=M$ and the integer $q$. It identifies the underlying abelian sheaf of the module higher direct image $R^qj_*M$ with the zero abelian higher direct image $R^qj_*G$ from steps 9-10. Thus every section group of $R^qj_*M$ has just its zero element; its module structure is uniquely that of the zero module and all restriction maps are the unique zero maps. It is therefore the zero $A$-module sheaf. This holds for every $M$ and every $q>2d$ and uses no assertion that forgetting coefficients preserves injective objects.",
-      "uses": [
-        "lem-sbc-higher-direct-image-forget-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree, including every object) and 072W (lemma-higher-direct-images); acyclic-resolution comparison"
-      }
-    },
-    {
-      "text": "Steps 4 and 5 give the constructibility clause in every integer degree; steps 6-11 give the vanishing clause for every $A$-module sheaf. These are exactly the two clauses of [def-exc-open-complement-bound], with the nonnegative integer $c=2d$. This proves the general assertion. If $T$ or $V$ is empty the same argument applies; in the empty source category the sheaf is zero and all its direct images are zero.",
-      "uses": [
-        "def-exc-open-complement-bound"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-        "place": "Proof, final sentence: the open-complement condition with c=2d"
-      }
-    },
-    {
-      "text": "For the independent dimension-zero argument, $\\operatorname{Spec}k$ is Noetherian: a field has only the ideals $(0)$ and $(1)$ and its spectrum has one point. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. If $\\dim T\\leq0$, [lem-sc-zero-dim-noetherian-finite-discrete] says that $|T|$ is finite discrete, including the empty case. Thus the open image of $j$ is also closed. By [def-weil-open-immersion], it is an open subscheme isomorphic to $V$; its inclusion is also a closed immersion by [def-weil-closed-immersion]: it is a homeomorphism onto a closed subset, and the structure-sheaf map is surjective, being the identity on $V$ and the map to the zero sheaf on the complementary open. Put $W=T\\setminus V$, with its open subscheme structure. The two disjoint open subschemes glue back to $T=V\\amalg W$: maps defined on them glue uniquely, since their intersection is empty.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-sc-zero-dim-noetherian-finite-discrete",
-        "def-weil-open-immersion",
-        "def-weil-closed-immersion"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/properties.tex",
-        "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0); Noetherianity from Morphisms Tag 01T6"
-      }
-    },
-    {
-      "text": "For this clopen decomposition, [lem-weil-pbc-etale-sheaf-clopen-product] identifies abelian sheaves on $T$ with pairs of sheaves on $V,W$. The same identification carries $A$-module sheaves to pairs of $A$-module sheaves: an $A$-action consists of additive endomorphisms indexed by $A$ satisfying the ring identities, and both morphisms and these identities are recovered componentwise. A local section of the constant sheaf $A_T$ is locally represented by elements of $A$, so the actions of those elements define its action locally and glue uniquely; this verifies that the componentwise description is one of $A_T$-modules, not merely additive groups with selected endomorphisms. By the evaluation formula of [def-weil-pbc-direct-image], $j_*M$ corresponds to $(M,0)$: its restriction on $V$ is $M$, and on $W$ all fibre products with $V$ are empty. Kernels and cokernels of maps of pairs are componentwise, so $M\\mapsto(M,0)$ is exact and additive. The categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; [lem-sc-exact-functor-higher-derived-vanishing] therefore gives $R^qj_*M=0$ for $q>0$. To identify degree zero explicitly, choose an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$. Exactness of $j_*$ makes $0\\to j_*F\\to j_*I^0\\to j_*I^1\\to\\cdots$ exact; taking degree-zero cohomology in the resolution formula of [def-weil-pbc-direct-image] gives $R^0j_*F=\\ker(j_*I^0\\to j_*I^1)\\cong j_*F$. Negative degrees vanish by the purely homological argument of step 5, which does not use the general finiteness input. Finally, if $F$ is constructible on $V$, keep its finite stratification and add $W$, on which the extension is the constant zero module. These are locally closed constructible strata of $T$ because $V,W$ are clopen; thus [def-weil-pbc-constructible-complexes] proves constructibility of $j_*F$, and the zero higher images are constructible too. The condition holds with $c=0$, independently of steps 4 and 6-11.",
-      "uses": [
-        "lem-weil-pbc-etale-sheaf-clopen-product",
-        "def-weil-pbc-direct-image",
-        "lem-weil-pbc-module-sheaves-enough-injectives",
-        "lem-sc-exact-functor-higher-derived-vanishing",
-        "def-weil-pbc-constructible-complexes"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Clopen decomposition as in the proof of Tag 0A5B (lemma-constant-smooth-statements); exact-functor consequence in literature/stacks-project/derived.tex, Tag 015F (lemma-right-derived-exact-functor)"
-      }
-    },
-    {
-      "text": "For the independent curve assertion, suppose $\\dim T\\leq1$. The same $k$ is the algebraic closure of a finite field. The prime $\\ell$ is invertible on $T$: its nonzero element in the field $k$ has an inverse, whose image in every $k$-algebra of functions is an inverse. Thus [thm-exc-curve-open-dimension-general] applies to $T,j,A$ and gives $R^qj_*M=0$ already for $q>1$, for every $A$-module sheaf $M$. The companion [thm-exc-curve-open-constructible-general] gives constructibility in every degree. By [def-exc-open-complement-bound], these give the condition with $c=1$, and hence with $c=2d$ whenever $d\\geq1$. For $d=0$ use steps 13-14, whose stronger $c=0$ bound includes $q=1$. This proves the low-dimensional assertions without invoking the general direct-image input or the general affine-neighbourhood vanishing argument.",
-      "uses": [
-        "thm-exc-curve-open-dimension-general",
-        "thm-exc-curve-open-constructible-general",
-        "def-exc-open-complement-bound"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-        "place": "Final sentence of statement: independent dimension-zero and curve computations"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pc-separably-closed",
+  {
+   "text": "The quasi-compact open immersion $j$ is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. We also need its source to be finite type over $k$, and check this separately. By [def-weil-finite-type-morphism], $T$ has a finite affine open cover with finitely generated $k$-algebras. The inverse image of each member under $j$ is quasi-compact; hence $V$ is quasi-compact, since the finitely many finite subcovers of any open cover combine into a finite subcover. Identify $V$ with its open image in $T$ by [def-weil-open-immersion]. By [lem-pqf-finite-affine-cover-qc-open], this image has a finite cover by affine opens of $T$. Applying [lem-weil-pbc-lft-affine-pairs] to $T\\to\\operatorname{Spec}k$ shows that the coordinate algebra of each member is finitely generated over $k$. This finite affine cover witnesses that $V$ is finite type over $k$.",
+   "uses": [
     "lem-weil-pbc-qc-open-immersion-finite-type",
     "def-weil-finite-type-morphism",
     "def-weil-open-immersion",
     "lem-pqf-finite-affine-cover-qc-open",
-    "lem-weil-pbc-lft-affine-pairs",
-    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T0 and 01T2 (lemma-locally-finite-type-characterize); geometry needed for the imported proof constructibility clause"
+   }
+  },
+  {
+   "text": "The identification of $V$ with an open subspace of $T$ in [def-weil-open-immersion] lets us apply [lem-weil-pbc-open-subspace-dimension-monotone] with $U'=V$ and $U=T$. Thus $\\dim V\\leq\\dim T\\leq d$. The same open-subspace inequality will be applied to $V\\times_TU\\subseteq U$ in step 8; the etale dimension comparison needed there is proved separately in step 7.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Remark after Tag 0055 (definition-Krull): dimension of open subspaces"
+   }
+  },
+  {
+   "text": "Apply [thm-exc-direct-image-input-holds] with the separably closed field $k$, the integer $N$ and the finite commutative ring $A$. Clause (1) of [def-exc-direct-image-input] applies to $j$ by step 2: both schemes and the morphism are finite type. It gives constructibility of $R^qj_*F$ for every constructible $A$-module sheaf $F$ and every $q\\geq0$. No exceptional inverse image, purity or preservation theorem is used.",
+   "uses": [
     "thm-exc-direct-image-input-holds",
-    "def-exc-direct-image-input",
+    "def-exc-direct-image-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
+    "place": "Proof, first three sentences: clause (1) of the direct-image input applied to j"
+   }
+  },
+  {
+   "text": "For $q<0$, apply [lem-weil-pbc-derived-functor-negative-vanishing] with $b=0$, $L=F[0]$ and $v=j_*$. The module-sheaf categories on $V$ and $T$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $j_*$ is additive and left exact by [def-weil-pbc-direct-image]. The conclusion is $R^qj_*F=0$. The zero sheaf is constructible: use the one stratum $T$, with its constant finite zero module, in [def-weil-pbc-constructible-complexes] (or the empty partition when $T$ is empty). Together with step 4 this supplies every integer degree required by the open-complement condition.",
+   "uses": [
     "lem-weil-pbc-derived-functor-negative-vanishing",
     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), part (1), applied to a sheaf in degree zero"
+   }
+  },
+  {
+   "text": "Fix an affine etale object $u:U\\to T$. We first prove that $U$ is finite type over $k$, rather than assume this for arbitrary etale objects. By [def-weil-etale-morphism], $u$ is locally of finite presentation. The explicit charts in [def-sbc-locally-finite-presentation] cover $U$ by affine opens $E_a=\\operatorname{Spec} B_a$ mapping into affine opens $D_a=\\operatorname{Spec} R_a$ of $T$, with $B_a$ finitely presented, hence finitely generated, over $R_a$. By [lem-weil-pbc-lft-affine-pairs] applied to $T\\to\\operatorname{Spec}k$, each $R_a$ is finitely generated over $k$. If $r_1,\\ldots,r_m$ generate $R_a/k$ and $b_1,\\ldots,b_n$ generate $B_a/R_a$, their images together generate $B_a/k$: expand every coefficient of a polynomial in the $b_i$ as a polynomial in the $r_j$. Thus each $B_a$ is finitely generated over $k$. By [lem-weil-pbc-affine-scheme-qcqs], $U$ is quasi-compact, so finitely many of these $E_a$ cover $U$. This is exactly the finite affine covering criterion of [def-weil-finite-type-morphism] for $U/k$.",
+   "uses": [
     "def-weil-etale-morphism",
     "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs",
     "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GI (definition-etale), 01TP (definition-finite-presentation) and 01T2; the affine-neighbourhood restriction in the blueprint vanishing paragraph"
+   }
+  },
+  {
+   "text": "For the same affine etale $U\\to T$, prove $\\dim U\\leq\\dim T$. At $z\\in U$ choose affine neighbourhoods $\\operatorname{Spec}B\\subseteq U$ and $\\operatorname{Spec}R\\subseteq T$ around $z$ and $t=u(z)$ such that $R\\to B$ is etale, as in the affine-chart characterization in [def-weil-etale-morphism]. Write $\\mathfrak q$ for $z$ and $\\mathfrak p$ for its image. Clause (c) of [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{U,z}$ with $B_{\\mathfrak q}$ and $\\mathcal O_{T,t}$ with $R_{\\mathfrak p}$, and [lem-sc-etale-local-dimension] gives equality of their Krull dimensions. Now [lem-pc-scheme-dimension-local-rings] gives $\\dim U=\\sup_{z\\in U}\\dim\\mathcal O_{U,z}\\leq\\sup_{t\\in T}\\dim\\mathcal O_{T,t}=\\dim T\\leq d$. This inequality includes empty $U$, when the first supremum is $-\\infty$. No dimension assertion about a strict henselization is used.",
+   "uses": [
+    "def-weil-etale-morphism",
     "lem-weil-pbc-affine-open-stalk-localization",
     "lem-sc-etale-local-dimension",
-    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension), with Schemes 01HV and Properties 04MU (lemma-dimension)"
+   }
+  },
+  {
+   "text": "Put $W=V\\times_TU$. By [lem-weil-pbc-open-immersion-base-change] its projection to $U$ is an open immersion, and by [lem-pc-quasi-compact-base-change] that projection is quasi-compact. Since $U$ is affine, the definition of a quasi-compact morphism in [def-weil-finite-type-morphism] says that $W$ is quasi-compact. Identify it with its open image in $U$ using [def-weil-open-immersion]. The finite affine cover supplied by [lem-pqf-finite-affine-cover-qc-open] has coordinate rings finitely generated over $k$ by [lem-weil-pbc-lft-affine-pairs] applied to the finite-type structure map of $U$ established in step 6. Thus $W$ is finite type over $k$ by [def-weil-finite-type-morphism]. The open-subspace inequality [lem-weil-pbc-open-subspace-dimension-monotone] and step 7 give $\\dim W\\leq\\dim U\\leq d$. The empty open is covered by the empty finite family, so no nonemptiness assumption is introduced.",
+   "uses": [
     "lem-weil-pbc-open-immersion-base-change",
     "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-sheafification",
-    "lem-sbc-higher-direct-image-forget-comparison",
-    "def-exc-open-complement-bound",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-zero-dim-noetherian-finite-discrete",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-sc-exact-functor-higher-derived-vanishing",
-    "thm-exc-curve-open-dimension-general",
-    "thm-exc-curve-open-constructible-general"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
-    "place": "Proof: constructibility from the direct-image input; vanishing by its clause (2) on affine etale neighbourhoods, the sheafified cohomology presheaf, and the module/abelian comparison; independent clopen and curve computations"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "higherDirectImage|openComplementCondition|constructible.*[Ll]ower[Ss]tar|[Ll]ower[Ss]tar.*constructible",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Higher direct images of constructible etale sheaves under an open immersion are constructible and vanish above twice the dimension.",
-      "results": "AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.Scheme.ofRestrict_appLE; AlgebraicGeometry.isOpenImmersion_eq_inf; AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"higherDirectImage\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"ConstructibleSheaf\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a quasi-compact open immersion into a finite type scheme over an algebraically closed field, higher direct images of torsion sheaves vanish above twice the dimension and higher direct images of constructible sheaves are constructible.",
-      "results": "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Etale cohomological dimension of a quasi compact open immersion of finite dimensional schemes over a separably closed field.",
-      "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale; Algebra.FormallyEtale.of_isSeparable_aux; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instIsSmooth",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
-    },
-    {
-      "tool": "grep",
-      "query": "Constructible.*[Dd]erived|[Dd]erived.*Constructible|[Ee]tale.*[Cc]ohomological[Dd]imension",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: zero hits"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\" \"IsOpenImmersion\"",
-      "results": "loogle: Function expected at\n  \"rightDerived\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsOpenImmersion\"",
-      "date": "2026-10-16",
-      "verdict": "invalid query: loogle: Function expected at\n  \"rightDerived\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsOpenImmersion\"; corrected comma-separated query was run separately"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A right derived pushforward along an open embedding of the small etale site preserves constructible torsion sheaves and has finite cohomological dimension",
-      "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; Topology.IsOpenEmbedding.compatiblePreserving; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.Modules.restrictFunctor; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight hits concern structure-sheaf pushforward, ordinary adjunctions and site definitions; none states either clause for higher etale direct images"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\", \"IsOpenImmersion\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: zero hits"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For torsion sheaves on the small etale site, pushforward by a quasi compact open immersion has cohomological amplitude bounded by twice the dimension of the target.",
-      "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight results concern structure-sheaf pushforward and sections on schemes, not higher direct images of torsion etale sheaves"
-    },
-    {
-      "tool": "grep",
-      "query": "etale.*cohomological|cohomological.*etale|constructible.*rightDerived|rightDerived.*constructible",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: zero hits"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1923,
-  "blueprint_uses": [
-    "def-exc-open-complement-bound",
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "thm-exc-curve-open-constructible-general",
-    "thm-exc-curve-open-dimension-general",
-    "thm-exc-direct-image-input-holds"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-exc-open-complement-known",
-    "worker": "stage1",
-    "summary": "Repaired return F1 by removing the unavailable relative-torsion theorem from the proof and expanding its use into affine-etale finite-type geometry, local-ring dimension comparison, the torsion bound of the existing direct-image input, sheafification on an affine cover, and the module/abelian higher-direct-image comparison, all with available source passages. Retained the coefficient-domain correction and independent low-dimensional arguments. Fifteen steps, no new nodes.",
-    "blueprint": "Steps 1-5 realize the constructibility paragraph. Steps 6-11 expand the vanishing paragraph by proving its affine-etale finite-type and dimension assertions and applying clause (2) to the cohomology presheaf. Step 10 proves the local-zero sheafification argument explicitly; it computes the same vanishing as the blueprint stalk-colimit argument without needing strict-local continuity. Step 12 assembles the condition. Steps 13-15 prove the final independent dimension-zero and curve clauses. Chapter and unit routes are retained.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-qc-open-immersion-finite-type",
-        "why": "Generic geometry needed before applying the direct-image input; it does not replace a unit step."
-      },
-      {
-        "node": "lem-pqf-finite-affine-cover-qc-open",
-        "why": "Generic finite affine covering tool for verifying that V is finite type over k."
-      },
-      {
-        "node": "lem-weil-pbc-lft-affine-pairs",
-        "why": "Generic affine-chart criterion ensuring the finite cover of V has finitely generated k-algebras."
-      },
-      {
-        "node": "lem-weil-pbc-open-subspace-dimension-monotone",
-        "why": "Generic topological inequality for V in T and the open W=V times_T U in U; the unit has no dimension comparison theorem."
-      },
-      {
-        "node": "lem-weil-pbc-derived-functor-negative-vanishing",
-        "why": "Generic homological tool supplies negative degrees not stated by the nonnegative direct-image input."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-        "why": "Checks both category hypotheses of the generic negative-degree vanishing lemma."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic Noetherianity tool for the independent dimension-zero argument."
-      },
-      {
-        "node": "lem-sc-zero-dim-noetherian-finite-discrete",
-        "why": "Generic topology of zero-dimensional Noetherian schemes makes the image clopen without invoking the general cohomological bound."
-      },
-      {
-        "node": "lem-weil-pbc-etale-sheaf-clopen-product",
-        "why": "Generic finite-disjoint-union equivalence lets the independent zero-dimensional proof compute j_* as extension by zero."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-        "why": "Checks enough injectives for both categories before applying higher-derived vanishing of an exact functor."
-      },
-      {
-        "node": "lem-sc-exact-functor-higher-derived-vanishing",
-        "why": "Generic homological consequence of the exact extension-by-zero functor, for the independent dimension-zero computation."
-      },
-      {
-        "node": "lem-weil-pbc-affine-scheme-qcqs",
-        "why": "Quasi-compactness of an affine etale object allows a finite subcover of finite-presentation charts in step 6."
-      },
-      {
-        "node": "lem-weil-pbc-affine-open-stalk-localization",
-        "why": "Affine stalk/localization identification needed to apply the existing etale ring-dimension theorem in step 7."
-      },
-      {
-        "node": "lem-sc-etale-local-dimension",
-        "why": "Generic etale ring-localization dimension equality in step 7; the unit has no such local algebra theorem."
-      },
-      {
-        "node": "lem-pc-scheme-dimension-local-rings",
-        "why": "Generic equality of scheme dimension with the supremum of stalk dimensions, turning the step-7 pointwise equality into the required global inequality."
-      },
-      {
-        "node": "lem-weil-pbc-open-immersion-base-change",
-        "why": "Generic geometry identifies the pullback of j as an open immersion in step 8."
-      },
-      {
-        "node": "lem-pc-quasi-compact-base-change",
-        "why": "Generic geometry proves quasi-compactness of that open immersion in step 8."
-      },
-      {
-        "node": "lem-weil-pbc-etale-base-change-finite-limits",
-        "why": "Generic stability of etale morphisms gives W to V etale before using the restriction formula in step 9."
-      },
-      {
-        "node": "lem-weil-pbc-etale-inverse-image-restriction",
-        "why": "Explicit etale restriction formula checks that the same annihilator kills all restricted sections in step 9."
-      },
-      {
-        "node": "sbc-lem-higher-direct-image-presheaf",
-        "why": "Generic Stacks 03Q8 sheafification formula for abelian higher images in step 9; it does not assert erroneous objectwise equality."
-      },
-      {
-        "node": "lem-weil-pbc-affine-etale-essentially-small-cover",
-        "why": "Generic affine cover-density supplies the covers used in step 10; the unit supplies no alternative affine-site theorem."
-      },
-      {
-        "node": "lem-sbc-higher-direct-image-forget-comparison",
-        "why": "Generic coefficient comparison in step 11 transfers the abelian vanishing to the actual A-module higher direct image."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
     "lem-pqf-finite-affine-cover-qc-open",
     "lem-weil-pbc-lft-affine-pairs",
-    "lem-weil-pbc-open-subspace-dimension-monotone",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-zero-dim-noetherian-finite-discrete",
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-sc-exact-functor-higher-derived-vanishing",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-sc-etale-local-dimension",
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JY (lemma-base-change-immersion) and 01K5 (lemma-quasi-compact-preserved-base-change); Morphisms 01T2; Topology 0055 following remark"
+   }
+  },
+  {
+   "text": "Fix an arbitrary $A$-module sheaf $M$ on $V$ and an integer $q>2d$, and write $G$ for its underlying abelian sheaf. Since $d\\geq0$, $q$ is positive. The morphism $W=V\\times_TU\\to V$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]. By [lem-weil-pbc-etale-inverse-image-restriction], the restricted abelian sheaf has section groups $G(Z\\to W\\to V)$ on every etale $Z\\to W$. Step 1 kills each such group by the same positive integer $N$, so the restriction is torsion, including for nonconstructible $M$. Apply clause (2) of [def-exc-direct-image-input], proved by [thm-exc-direct-image-input-holds], with $K=k$ and this $W$. Its finite-type and dimension hypotheses are steps 6-8, and its characteristic hypothesis is step 1. Thus $H^q(W,G|_W)=0$ for every affine etale $U\\to T$. By [sbc-lem-higher-direct-image-presheaf], the abelian higher direct image $R^qj_*G$ is the sheafification of $P_q:U\\mapsto H^q(V\\times_TU,G|)$; we have proved that $P_q$ is zero on all affine objects. This is a statement about the cohomology presheaf, not an identification of the sections of its sheafification with those cohomology groups.",
+   "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-sbc-higher-direct-image-forget-comparison"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-N1-110eeb93b",
-    "group": "N1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-110eeb93b (reviewer sub-agent of L); spot-checked: Read the full item, all 39 cited statements, sources and unit/chapter route. Verified all fifteen steps, coefficient comparison via 03FD/072W, sheafification via 03Q8, and independent zero-dimensional and curve bounds. No new nodes or repairs; all 22 tool uses accepted. Detailed checks are in review.md."
+    "def-exc-direct-image-input",
+    "thm-exc-direct-image-input-holds",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q8 (lemma-higher-direct-images); Tag 03S2 restriction formula; item blueprint vanishing paragraph, application of clause (2)"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be the algebraic closure of a finite field, let $T$ be a\nfinite-type $k$-scheme of dimension at most $d$, let\n$j:V\\hookrightarrow T$ be a\nquasi-compact open immersion,\nand let $A$ be a finite ring annihilated by a power of a prime\n$\\ell\\neq\\operatorname{char}(k)$. Then the pair $(V,T)$ satisfies the\nopen-complement condition of [def-exc-open-complement-bound] with\n$c=2d$.\nIndependently of the general argument, the condition is immediate in\ndimension zero, where an open immersion of a zero-dimensional Noetherian\nscheme is also closed, and it holds in dimension at most one by\n[thm-exc-curve-open-dimension-general], [thm-exc-curve-open-constructible-general].",
-    "proof": [
-      {
-        "text": "The field $k$ is separably closed, so both clauses of the direct-image\nfiniteness input hold over $k$ by\n[thm-exc-direct-image-input-holds]. The constructibility clause is\nits clause (1) applied to the open immersion $j$,\nwhich is of finite type because it is quasi-compact and $T$ is of finite\ntype over $k$.\nFor the vanishing clause, fix a geometric point $\\bar t$ of $T$. The\nstrict-henselization stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula] identifies the\nstalk of the higher direct image with the cohomology of the open\ncomplement over the strict henselization at $\\bar t$,\n\n$$\n\\bigl(R^qj_*M\\bigr)_{\\bar t}\n\\;\\cong\\;H^q\\bigl(V\\times_TT_{(\\bar t)},M\\bigr),\n$$\n\na filtered colimit of the groups $H^q(V\\times_TU,M)$ over the pointed\netale neighbourhoods $U\\to T$ of $\\bar t$; each $V\\times_TU$ is an\nopen subscheme of the etale $T$-scheme $U$, hence a finite-type\n$k$-scheme of dimension at most $d$. As $k$ is separably closed,\nclause (2) of that input gives\n$H^q(V\\times_TU,M)=0$ for $q>2d$ and every torsion sheaf $M$, and\nvanishing is preserved by the filtered colimit. Hence every geometric\nstalk of $R^qj_*M$ vanishes for $q>2d$, and conservativity of\ngeometric stalks ([lemma-weil-pbc-geometric-stalk-conservative]) makes\nthe sheaf itself zero, which is the vanishing clause with $c=2d$.",
-        "uses": [
-          "thm-exc-direct-image-input-holds",
-          "prop-weil-pbc-strict-henselization-stalk-formula",
-          "lemma-weil-pbc-geometric-stalk-conservative"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "To conclude that $P_q^\\#=0$, use the affine cover statement [lem-weil-pbc-affine-etale-essentially-small-cover]. For any object $Z$ and any $s\\in P_q(Z)$, choose a cover by affine etale objects $U_i\\to Z$. For any morphism $\\alpha:P_q\\to H$ to an abelian sheaf $H$, naturality gives $\\alpha_Z(s)|_{U_i}=\\alpha_{U_i}(s|_{U_i})=0$, since $P_q(U_i)=0$. The equalizer condition in [def-weil-pbc-abelian-etale-sheaves] makes the restriction maps jointly injective, so $\\alpha_Z(s)=0$. Thus every such $\\alpha$ is zero. Apply this with $H=P_q^\\#$ and the unit $\\theta:P_q\\to P_q^\\#$ of [def-weil-pbc-sheafification]. The identity and the zero endomorphism of $P_q^\\#$ have the same composite with $\\theta$; the uniqueness in that definition implies $\\operatorname{id}_{P_q^\\#}=0$. Therefore $P_q^\\#$, and hence $R^qj_*G$, is the zero abelian sheaf. This proves directly the affine-neighbourhood vanishing used by the imported stalk argument, without invoking an unrecorded strict-local continuity formula.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021B and 04HR (affine objects cover); Sites 00WH (sheafification universal property); explicit elementary local-zero argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-higher-direct-image-forget-comparison] with $\\Lambda=A$, $h=j$, $F=M$ and the integer $q$. It identifies the underlying abelian sheaf of the module higher direct image $R^qj_*M$ with the zero abelian higher direct image $R^qj_*G$ from steps 9-10. Thus every section group of $R^qj_*M$ has just its zero element; its module structure is uniquely that of the zero module and all restriction maps are the unique zero maps. It is therefore the zero $A$-module sheaf. This holds for every $M$ and every $q>2d$ and uses no assertion that forgetting coefficients preserves injective objects.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree, including every object) and 072W (lemma-higher-direct-images); acyclic-resolution comparison"
+   }
+  },
+  {
+   "text": "Steps 4 and 5 give the constructibility clause in every integer degree; steps 6-11 give the vanishing clause for every $A$-module sheaf. These are exactly the two clauses of [def-exc-open-complement-bound], with the nonnegative integer $c=2d$. This proves the general assertion. If $T$ or $V$ is empty the same argument applies; in the empty source category the sheaf is zero and all its direct images are zero.",
+   "uses": [
+    "def-exc-open-complement-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
+    "place": "Proof, final sentence: the open-complement condition with c=2d"
+   }
+  },
+  {
+   "text": "For the independent dimension-zero argument, $\\operatorname{Spec}k$ is Noetherian: a field has only the ideals $(0)$ and $(1)$ and its spectrum has one point. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. If $\\dim T\\leq0$, [lem-sc-zero-dim-noetherian-finite-discrete] says that $|T|$ is finite discrete, including the empty case. Thus the open image of $j$ is also closed. By [def-weil-open-immersion], it is an open subscheme isomorphic to $V$; its inclusion is also a closed immersion by [def-weil-closed-immersion]: it is a homeomorphism onto a closed subset, and the structure-sheaf map is surjective, being the identity on $V$ and the map to the zero sheaf on the complementary open. Put $W=T\\setminus V$, with its open subscheme structure. The two disjoint open subschemes glue back to $T=V\\amalg W$: maps defined on them glue uniquely, since their intersection is empty.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0); Noetherianity from Morphisms Tag 01T6"
+   }
+  },
+  {
+   "text": "For this clopen decomposition, [lem-weil-pbc-etale-sheaf-clopen-product] identifies abelian sheaves on $T$ with pairs of sheaves on $V,W$. The same identification carries $A$-module sheaves to pairs of $A$-module sheaves: an $A$-action consists of additive endomorphisms indexed by $A$ satisfying the ring identities, and both morphisms and these identities are recovered componentwise. A local section of the constant sheaf $A_T$ is locally represented by elements of $A$, so the actions of those elements define its action locally and glue uniquely; this verifies that the componentwise description is one of $A_T$-modules, not merely additive groups with selected endomorphisms. By the evaluation formula of [def-weil-pbc-direct-image], $j_*M$ corresponds to $(M,0)$: its restriction on $V$ is $M$, and on $W$ all fibre products with $V$ are empty. Kernels and cokernels of maps of pairs are componentwise, so $M\\mapsto(M,0)$ is exact and additive. The categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; [lem-sc-exact-functor-higher-derived-vanishing] therefore gives $R^qj_*M=0$ for $q>0$. To identify degree zero explicitly, choose an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$. Exactness of $j_*$ makes $0\\to j_*F\\to j_*I^0\\to j_*I^1\\to\\cdots$ exact; taking degree-zero cohomology in the resolution formula of [def-weil-pbc-direct-image] gives $R^0j_*F=\\ker(j_*I^0\\to j_*I^1)\\cong j_*F$. Negative degrees vanish by the purely homological argument of step 5, which does not use the general finiteness input. Finally, if $F$ is constructible on $V$, keep its finite stratification and add $W$, on which the extension is the constant zero module. These are locally closed constructible strata of $T$ because $V,W$ are clopen; thus [def-weil-pbc-constructible-complexes] proves constructibility of $j_*F$, and the zero higher images are constructible too. The condition holds with $c=0$, independently of steps 4 and 6-11.",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-sc-exact-functor-higher-derived-vanishing",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Clopen decomposition as in the proof of Tag 0A5B (lemma-constant-smooth-statements); exact-functor consequence in literature/stacks-project/derived.tex, Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "For the independent curve assertion, suppose $\\dim T\\leq1$. The same $k$ is the algebraic closure of a finite field. The prime $\\ell$ is invertible on $T$: its nonzero element in the field $k$ has an inverse, whose image in every $k$-algebra of functions is an inverse. Thus [thm-exc-curve-open-dimension-general] applies to $T,j,A$ and gives $R^qj_*M=0$ already for $q>1$, for every $A$-module sheaf $M$. The companion [thm-exc-curve-open-constructible-general] gives constructibility in every degree. By [def-exc-open-complement-bound], these give the condition with $c=1$, and hence with $c=2d$ whenever $d\\geq1$. For $d=0$ use steps 13-14, whose stronger $c=0$ bound includes $q=1$. This proves the low-dimensional assertions without invoking the general direct-image input or the general affine-neighbourhood vanishing argument.",
+   "uses": [
+    "thm-exc-curve-open-dimension-general",
+    "thm-exc-curve-open-constructible-general",
+    "def-exc-open-complement-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
+    "place": "Final sentence of statement: independent dimension-zero and curve computations"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-separably-closed",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "thm-exc-direct-image-input-holds",
+  "def-exc-direct-image-input",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-etale-local-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sheafification",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "def-exc-open-complement-bound",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sc-exact-functor-higher-derived-vanishing",
+  "thm-exc-curve-open-dimension-general",
+  "thm-exc-curve-open-constructible-general"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-open-complement-known.md",
+  "place": "Proof: constructibility from the direct-image input; vanishing by its clause (2) on affine etale neighbourhoods, the sheafified cohomology presheaf, and the module/abelian comparison; independent clopen and curve computations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|openComplementCondition|constructible.*[Ll]ower[Ss]tar|[Ll]ower[Ss]tar.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constructible etale sheaves under an open immersion are constructible and vanish above twice the dimension.",
+   "results": "AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.Scheme.ofRestrict_appLE; AlgebraicGeometry.isOpenImmersion_eq_inf; AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConstructibleSheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-compact open immersion into a finite type scheme over an algebraically closed field, higher direct images of torsion sheaves vanish above twice the dimension and higher direct images of constructible sheaves are constructible.",
+   "results": "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomological dimension of a quasi compact open immersion of finite dimensional schemes over a separably closed field.",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale; Algebra.FormallyEtale.of_isSeparable_aux; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned geometry, structure-sheaf or general etale definitions do not assert constructible higher etale direct images and the torsion vanishing bound"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible.*[Dd]erived|[Dd]erived.*Constructible|[Ee]tale.*[Cc]ohomological[Dd]imension",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\" \"IsOpenImmersion\"",
+   "results": "loogle: Function expected at\n  \"rightDerived\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsOpenImmersion\"",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: Function expected at\n  \"rightDerived\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsOpenImmersion\"; corrected comma-separated query was run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right derived pushforward along an open embedding of the small etale site preserves constructible torsion sheaves and has finite cohomological dimension",
+   "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; Topology.IsOpenEmbedding.compatiblePreserving; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.Modules.restrictFunctor; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern structure-sheaf pushforward, ordinary adjunctions and site definitions; none states either clause for higher etale direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsOpenImmersion\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For torsion sheaves on the small etale site, pushforward by a quasi compact open immersion has cohomological amplitude bounded by twice the dimension of the target.",
+   "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight results concern structure-sheaf pushforward and sections on schemes, not higher direct images of torsion etale sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomological|cohomological.*etale|constructible.*rightDerived|rightDerived.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1923,
+ "blueprint_uses": [
+  "def-exc-open-complement-bound",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "thm-exc-curve-open-constructible-general",
+  "thm-exc-curve-open-dimension-general",
+  "thm-exc-direct-image-input-holds"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-open-complement-known",
+  "worker": "stage1",
+  "summary": "Repaired return F1 by removing the unavailable relative-torsion theorem from the proof and expanding its use into affine-etale finite-type geometry, local-ring dimension comparison, the torsion bound of the existing direct-image input, sheafification on an affine cover, and the module/abelian higher-direct-image comparison, all with available source passages. Retained the coefficient-domain correction and independent low-dimensional arguments. Fifteen steps, no new nodes.",
+  "blueprint": "Steps 1-5 realize the constructibility paragraph. Steps 6-11 expand the vanishing paragraph by proving its affine-etale finite-type and dimension assertions and applying clause (2) to the cohomology presheaf. Step 10 proves the local-zero sheafification argument explicitly; it computes the same vanishing as the blueprint stalk-colimit argument without needing strict-local continuity. Step 12 assembles the condition. Steps 13-15 prove the final independent dimension-zero and curve clauses. Chapter and unit routes are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic geometry needed before applying the direct-image input; it does not replace a unit step."
+   },
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Generic finite affine covering tool for verifying that V is finite type over k."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine-chart criterion ensuring the finite cover of V has finitely generated k-algebras."
+   },
+   {
+    "node": "lem-weil-pbc-open-subspace-dimension-monotone",
+    "why": "Generic topological inequality for V in T and the open W=V times_T U in U; the unit has no dimension comparison theorem."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic homological tool supplies negative degrees not stated by the nonnegative direct-image input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Checks both category hypotheses of the generic negative-degree vanishing lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity tool for the independent dimension-zero argument."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic topology of zero-dimensional Noetherian schemes makes the image clopen without invoking the general cohomological bound."
+   },
+   {
+    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
+    "why": "Generic finite-disjoint-union equivalence lets the independent zero-dimensional proof compute j_* as extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Checks enough injectives for both categories before applying higher-derived vanishing of an exact functor."
+   },
+   {
+    "node": "lem-sc-exact-functor-higher-derived-vanishing",
+    "why": "Generic homological consequence of the exact extension-by-zero functor, for the independent dimension-zero computation."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Quasi-compactness of an affine etale object allows a finite subcover of finite-presentation charts in step 6."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Affine stalk/localization identification needed to apply the existing etale ring-dimension theorem in step 7."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic etale ring-localization dimension equality in step 7; the unit has no such local algebra theorem."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic equality of scheme dimension with the supremum of stalk dimensions, turning the step-7 pointwise equality into the required global inequality."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic geometry identifies the pullback of j as an open immersion in step 8."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic geometry proves quasi-compactness of that open immersion in step 8."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic stability of etale morphisms gives W to V etale before using the restriction formula in step 9."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Explicit etale restriction formula checks that the same annihilator kills all restricted sections in step 9."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Generic Stacks 03Q8 sheafification formula for abelian higher images in step 9; it does not assert erroneous objectwise equality."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "why": "Generic affine cover-density supplies the covers used in step 10; the unit supplies no alternative affine-site theorem."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic coefficient comparison in step 11 transfers the abelian vanishing to the actual A-module higher direct image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-sc-exact-functor-higher-derived-vanishing",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-etale-local-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-sbc-higher-direct-image-forget-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-110eeb93b",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-110eeb93b (reviewer sub-agent of L); spot-checked: Read the full item, all 39 cited statements, sources and unit/chapter route. Verified all fifteen steps, coefficient comparison via 03FD/072W, sheafification via 03Q8, and independent zero-dimensional and curve bounds. No new nodes or repairs; all 22 tool uses accepted. Detailed checks are in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be the algebraic closure of a finite field, let $T$ be a\nfinite-type $k$-scheme of dimension at most $d$, let\n$j:V\\hookrightarrow T$ be a\nquasi-compact open immersion,\nand let $A$ be a finite ring annihilated by a power of a prime\n$\\ell\\neq\\operatorname{char}(k)$. Then the pair $(V,T)$ satisfies the\nopen-complement condition of [def-exc-open-complement-bound] with\n$c=2d$.\nIndependently of the general argument, the condition is immediate in\ndimension zero, where an open immersion of a zero-dimensional Noetherian\nscheme is also closed, and it holds in dimension at most one by\n[thm-exc-curve-open-dimension-general], [thm-exc-curve-open-constructible-general].",
+  "proof": [
+   {
+    "text": "The field $k$ is separably closed, so both clauses of the direct-image\nfiniteness input hold over $k$ by\n[thm-exc-direct-image-input-holds]. The constructibility clause is\nits clause (1) applied to the open immersion $j$,\nwhich is of finite type because it is quasi-compact and $T$ is of finite\ntype over $k$.\nFor the vanishing clause, fix a geometric point $\\bar t$ of $T$. The\nstrict-henselization stalk formula\n[prop-weil-pbc-strict-henselization-stalk-formula] identifies the\nstalk of the higher direct image with the cohomology of the open\ncomplement over the strict henselization at $\\bar t$,\n\n$$\n\\bigl(R^qj_*M\\bigr)_{\\bar t}\n\\;\\cong\\;H^q\\bigl(V\\times_TT_{(\\bar t)},M\\bigr),\n$$\n\na filtered colimit of the groups $H^q(V\\times_TU,M)$ over the pointed\netale neighbourhoods $U\\to T$ of $\\bar t$; each $V\\times_TU$ is an\nopen subscheme of the etale $T$-scheme $U$, hence a finite-type\n$k$-scheme of dimension at most $d$. As $k$ is separably closed,\nclause (2) of that input gives\n$H^q(V\\times_TU,M)=0$ for $q>2d$ and every torsion sheaf $M$, and\nvanishing is preserved by the filtered colimit. Hence every geometric\nstalk of $R^qj_*M$ vanishes for $q>2d$, and conservativity of\ngeometric stalks ([lemma-weil-pbc-geometric-stalk-conservative]) makes\nthe sheaf itself zero, which is the vanishing clause with $c=2d$.",
+    "uses": [
+     "thm-exc-direct-image-input-holds",
+     "prop-weil-pbc-strict-henselization-stalk-formula",
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenComplementKnown",
+  "declaration": "AlgebraicGeometry.Scheme.hasOpenComplementCondition_of_isAlgClosure_finite_and_lowDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenComplementKnown.lean",
+  "statement": "theorem hasOpenComplementCondition_of_isAlgClosure_finite_and_lowDimension (k : Type u) [Field k] (hk : ∃ k₀ : Subfield k, Finite k₀ ∧ IsAlgClosure k₀ k) {T V : Scheme.{u}} [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (d : ℕ) (hdim : topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (j : V ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (A : Type (u + 1)) [CommRing A] [Finite A] (ℓ : ℕ) (hprime : ℓ.Prime) (hchar : ℓ ≠ ringChar k) (hkill : ∃ n : ℕ, (ℓ ^ n : ℕ) • (1 : A) = 0) : HasOpenComplementCondition A j (2 * d) ∧ (topologicalKrullDim T ≤ 0 → IsClosedImmersion j ∧ PreservesFiniteColimits (Etale.lowerStar (ModuleCat.{u + 1} A) j) ∧ Nonempty (Etale.lowerStar (ModuleCat.{u + 1} A) j ≅ Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j) ∧ (∀ F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A), IsConstructibleEtaleModuleSheaf F → IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} A) j).obj F)) ∧ HasOpenComplementCondition A j 0) ∧ (topologicalKrullDim T ≤ 1 → HasOpenComplementCondition A j 1)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4f635025f",
+  "group": "N3",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all eight statement dependencies, sources, declarations, docstrings, universes, edge cases and pilot gates. Signature matches verbatim; scompile.py passed sandbox and library checks without warnings. No findings; branch and snapshot unchanged."
+ }
 }
