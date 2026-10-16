@@ -61,3 +61,36 @@ Production `dag_queue.Dag.stage2()` reproduces consumer admission before the rep
 The first repair frontier contains integral triangulation and scalar-extension constructibility; linearity follows triangulation, rationalization follows those three, composition and exactness follow rationalization, and the common-stage category follows both. The original consumer becomes eligible after these interfaces are supplied. No failure threshold, waiting flag, skip rule, retry backoff or dispatcher state is changed. Retire the stale consumer claim only after its current worker exits naturally.
 
 Original files have sibling backups ending `.maint-Q22-coefficients-1792136951.bak`. Commit these metadata changes in both the authoritative shared DAG and the side project under their merge locks, using the requested Bin Wu identity, so side sync cannot restore false readiness. No Lean file changed; no compiler or global build is required for this metadata repair.
+
+## Observed completion of maintenance
+
+The original migration is side commit `683f8222da91f31711a368993c50d7ddc3575f61`:
+it changed the integral node from `boundedConstructibleDerivedCompleteIntegral` to
+`sfIntegralConstructible` without migrating the coefficient interface chain.
+
+The metadata repair commits are shared `b3f683253093321b38954002e2f8d50517e49548`
+and side `f487a0c301dfa8a5236f218a01066862dbf928d7`. All seven original records
+and reviews are preserved exactly; all other node fields and dependency edges are
+unchanged. The side and shared repaired records agree, and the local shared clone
+has refreshed to the invalidations. The production queue excludes the consumer and
+offers the two actual prerequisite repairs, claimed by NA (integral triangulation)
+and N9 (scalar-extension constructibility) at 08:00 UTC.
+
+The final consumer worker, local PID 835512, exited naturally at 08:02:43 UTC.
+Only after observing its exit, maintenance used the ordinary claim tool to release
+the obsolete Q22 claim with a dependency-repair reason. No abandonment, completion,
+failure threshold, dispatcher state edit, process signal or restart was used.
+The historical try count reached 10 during the maintenance race; it is retained.
+
+The normal queue writer regenerated `coord/queue.tsv`, `coord/queue.md`, and
+`coord/blueprint-index.tsv`. Original operational files were backed up with
+`.maint-Q22-coefficients-1792136951.bak` or
+`.maint-Q22-coefficients-1792136951-release.bak` suffixes, including the claim,
+delivery log and Q22 return file. Generated queue/log changes are normal operational
+state and are excluded from these metadata commits.
+
+The next compact-support worker should resume only through the normal bottom-up
+queue after the coefficient repairs land. Read the new active `lean` records, not
+the archived `lean_invalidation.previous_lean`. Use the existing compact-support
+tower in `SfIntegralCompactSupportConstructible`; keep the arbitrary-base-field
+statement. Do not restore old records just because their modules compile.
