@@ -3,44 +3,197 @@
  "blueprint": {
   "is": "det-prop-integral-criterion-constant-coefficients",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant versus completed integral coefficients",
- "statement": "Let $X$ be a scheme, $E/\\mathbf Q_\\ell$ finite, and let\n$c\\colon(\\cO_E)_X\\to\\cO_{E,X}=\\varprojlim_n(\\cO_E/\\pi_E^n)_X$ be the map from the constant\nsheaf of rings ([det-prop-sfb-qlbar-colimit-x-integral-limit],\n[def-weil-completed-integral-coefficients]).\n\n1. $c$ is flat, and for every $n$ it induces an isomorphism\n   $(\\cO_E/\\pi_E^n)_X=(\\cO_E)_X/\\pi_E^n\\xrightarrow{\\sim}\\cO_{E,X}/\\pi_E^n$.\n2. Restriction of scalars along $c$ is an equivalence from the derived $\\pi_E$-complete\n   objects of $D(X_{\\mathrm{proét}},\\cO_{E,X})$ onto the derived $\\pi_E$-complete objects of\n   $D(X_{\\mathrm{proét}},(\\cO_E)_X)$, with inverse $L\\mapsto$ derived completion of\n   $\\cO_{E,X}\\otimes^{\\mathbf L}_{(\\cO_E)_X}L$.\n3. It is compatible with reduction: for $K$ over $\\cO_{E,X}$,\n   $K\\otimes^{\\mathbf L}_{\\cO_{E,X}}(\\cO_E/\\pi_E^n)_X$ and\n   $K\\otimes^{\\mathbf L}_{(\\cO_E)_X}(\\cO_E/\\pi_E^n)_X$ agree as complexes of\n   $(\\cO_E/\\pi_E^n)_X$-modules.",
+ "statement": "Let $X$ be a scheme and let $E/\\mathbf Q_\\ell$ be finite, with ring of integers $\\cO_E$ and chosen uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Work on the small pro-étale site of $X$ [def-weil-pbc-proetale-site]. Write $R=(\\cO_E)_X$ and $R_n=(\\cO_E/\\pi_E^n)_X$ for the constant sheaves of rings [def-weil-pbc-constant-sheaf], and put\n$$B=\\cO_{E,X}=\\varprojlim_{n\\geq1}R_n$$\nwith its canonical map $c:R\\to B$; the identification with the pulled-back integral coefficient sheaf is [det-prop-sfb-qlbar-colimit-x-integral-limit]. Use the unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], derived extension of scalars [lem-pur-derived-change-of-rings], and restriction of scalars [def-pc-sheaf-restrict-scalars]. For $S=R$ or $B$, derived $\\pi_E$-completeness means that the canonical map\n$$M\\longrightarrow R\\varprojlim_{n\\geq1}(M\\otimes_S^{\\mathbf L}R_n)$$\nis an isomorphism; for $S=B$ this is [sk-def-pe-derived-completion]. The canonical completion map and sequential derived limit use the functorial strict-tower model fixed in [lem-weil-pbc-constant-completion-equivalence]; its underlying homotopy limit is as in [def-weil-derived-limit].\n\n1. $c$ is flat [def-pc-flat-sheaf-modules], and for every $n\\geq1$ it induces an isomorphism\n$$R_n=R/\\pi_E^nR\\xrightarrow{\\sim}B/\\pi_E^nB.$$\n2. Restriction of scalars along $c$ is an equivalence from the derived $\\pi_E$-complete objects of $D(B)$ onto the derived $\\pi_E$-complete objects of $D(R)$, with inverse $L\\mapsto$ derived completion of $B\\otimes_R^{\\mathbf L}L$.\n3. For every $K\\in D(B)$ and every $n\\geq1$, the canonical finite-reduction comparison is an isomorphism\n$$K\\otimes_B^{\\mathbf L}R_n\\cong (\\operatorname{Res}_c K)\\otimes_R^{\\mathbf L}R_n$$\nin $D(R_n)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-constant-coefficients.md",
   "place": "node det-prop-integral-criterion-constant-coefficients, order None"
  },
  "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "def-weil-completed-integral-coefficients"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-constant-completion-equivalence"
  ],
  "proof": [
   {
-   "text": "(1) This is \\stacks{099L}. Concretely: $\\cO_{E,X}$ is $\\pi_E$-torsion free, being a limit of\nthe sheaves $(\\cO_E/\\pi_E^n)_X$ along which multiplication by $\\pi_E$ is compatible with\nthe injections $\\cO_E/\\pi_E^{n-1}\\xrightarrow{\\pi_E}\\cO_E/\\pi_E^n$. On the pro-étale site\nthe limit along the surjections $(\\cO_E/\\pi_E^{n+1})_X\\to(\\cO_E/\\pi_E^n)_X$ has\n$\\varprojlim^1=0$ and surjective projections (repleteness), so\n$0\\to\\cO_{E,X}\\xrightarrow{\\pi_E^n}\\cO_{E,X}\\to(\\cO_E/\\pi_E^n)_X\\to0$ is exact (it is the\nlimit of the exact sequences\n$0\\to\\cO_E/\\pi_E^{m}\\xrightarrow{\\pi_E^n}\\cO_E/\\pi_E^{m+n}\\to\\cO_E/\\pi_E^n\\to0$). This is\nthe isomorphism modulo $\\pi_E^n$. Flatness: a sheaf $M$ of modules over the constant sheaf\n$(\\cO_E)_X$ is a sheaf with an $\\cO_E$-action, and $M\\otimes_{(\\cO_E)_X}N$ is the\nsheafification of the presheaf $U\\mapsto M(U)\\otimes_{\\cO_E}N(U)$. Since multiplication by\n$\\pi_E$ is injective on $\\cO_{E,X}$, it is injective on every group of sections\n$\\cO_{E,X}(U)$ (sections are left exact). A torsion-free module over the discrete\nvaluation ring $\\cO_E$ is flat. Since $-\\otimes_{(\\cO_E)_X}-$ is right exact, it suffices to\nsee that it preserves monomorphisms $N'\\hookrightarrow N$: these are injective on sections,\nso $\\cO_{E,X}(U)\\otimes_{\\cO_E}N'(U)\\to\\cO_{E,X}(U)\\otimes_{\\cO_E}N(U)$ is injective for every\n$U$, and sheafification preserves injectivity. Hence $\\cO_{E,X}\\otimes_{(\\cO_E)_X}-$ is exact.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $A=\\cO_E$, $t=\\pi_E$ and $I=(t)$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain. Every ideal is therefore generated by one element, so $A$ is Noetherian by [def-weil-pbc-noetherian-ring]. Use the small skeleton of $X_{\\mathrm{proét}}$ specified in [def-weil-pbc-proetale-site], in the larger module universe; this is a small site for the general completion statements below. The identity $I^n=(t^n)$ identifies their finite constant sheaves with $R_n$. By [det-prop-sfb-qlbar-colimit-x-integral-limit], their completed ring sheaf $\\widehat A$ is precisely $B$, including its finite projections and its map from $R$. No Noetherian hypothesis on $X$, and no invertibility of $\\ell$ on $X$, has been introduced.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-proetale-site",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099L, section-derived-completion-noetherian: specialize the constant Noetherian coefficient ring to A = O_E; coefficient DVR fact from the cited node"
+   }
   },
   {
-   "text": "(2) and (3). A ring map $c$ which is flat and an isomorphism modulo $\\pi_E^n$ for all $n$\ninduces, by \\stacks{099I}, an equivalence between derived complete objects as stated. The\nreason: for $K$ over $\\cO_{E,X}$, flatness gives\n$K\\otimes^{\\mathbf L}_{(\\cO_E)_X}(\\cO_E)_X/\\pi_E^n=K\\otimes^{\\mathbf L}_{\\cO_{E,X}}\\cO_{E,X}/\\pi_E^n$\nby (1), which is (3); derived completeness is the condition\n$K\\cong\\operatorname{R\\lim}_nK\\otimes^{\\mathbf L}\\cO/\\pi_E^n$ (derived Nakayama and the\nlimit description of [sk-def-pe-derived-completion]), and both the condition and the\nreductions agree on the two sides. Hence restriction of scalars is fully faithful on\ncomplete objects (Hom between complete objects is the $\\operatorname{R\\lim}$ of Hom between\nreductions, which agree) and essentially surjective (the inverse functor displayed is\ncomplete, and its reductions are those of $L$ by (1)).",
+   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] to $T=X$, $A$ and $I$: $B$ is flat over $R$, and the projection induces $B\\otimes_R^{\\mathbf L}R_n\\simeq R_n$ for every $n\\geq1$. Its degree-zero map identifies $B\\otimes_R R_n=B/t^nB$ with $R_n$; flatness means there is no higher Tor here. For the source quotient, apply exactness of constant module sheaves in [lem-weil-pbc-constant-module-section-properties] to $0\\to A\\xrightarrow{t^n}A\\to A/(t^n)\\to0$: it gives $R/t^nR=R_n$. Both identifications use the quotient maps from $A$, so the induced map $R/t^nR\\to B/t^nB$ is the inverse of the displayed projection isomorphism. This proves clause (1), with its specified canonical map.",
    "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact); for each n use the cofinal filtration by powers of I^n"
+   }
+  },
+  {
+   "text": "With $A$, $I$, $R$, $\\widehat A=B$ as in step 1, apply the finite-reduction clause of [lem-weil-pbc-constant-completion-equivalence] to an arbitrary $K\\in D(B)$. It gives\n$$\\operatorname{Res}_c(K)\\otimes_R^{\\mathbf L}R_n\\simeq K\\otimes_B^{\\mathbf L}R_n$$\nin $D(R_n)$, not merely after forgetting the $R_n$-action. Taking its inverse proves clause (3). The cited statement also says that these comparisons are natural and commute with the maps $R_{n+1}\\to R_n$, so the same identifications hold for the entire reduction tower.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099L (section-derived-completion-noetherian), finite reduction via the flat quotient identification of Tag 093M; the cited general node includes the derived reduction comparison"
+   }
+  },
+  {
+   "text": "The equivalence of [lem-weil-pbc-constant-completion-equivalence], with the same $A$ and principal ideal $I$, is induced by $\\operatorname{Res}_c$. Its last paragraph identifies local/Koszul-derived completeness with the condition that the canonical finite-reduction tower unit is an isomorphism, for both $R$ and $B$. This is precisely the completeness condition in the statement and, on $B$, [sk-def-pe-derived-completion]. Moreover, restriction identifies those tower units and their derived limits. Therefore its equivalence is exactly between the two full subcategories in clause (2); this does not replace quotient-tower completeness by a different notion.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
     "sk-def-pe-derived-completion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L and 099M (lemma-naive-completion), with algebraization.tex Tag 099I (lemma-restriction-derived-complete-equivalence); the cited general node includes comparison of the units"
+   }
+  },
+  {
+   "text": "Write $r=\\operatorname{Res}_c$ and $F=B\\otimes_R^{\\mathbf L}(-)$. On module sheaves the identity morphism of the underlying topos with ring map $c:R\\to B$ gives $B\\otimes_R(-)\\dashv r$ by [lem-weil-pbc-ringed-topoi-module-adjunction]. Restriction is exact: the underlying abelian sheaf and its kernel and cokernel do not change when its scalars are restricted [def-pc-sheaf-restrict-scalars]. Thus [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] identify its everywhere-defined right derived functor with termwise restriction. The everywhere-defined left derived scalar extension is $F$ by [lem-pur-derived-change-of-rings]. The derived adjunction theorem [lem-pc-derived-adjoint-functors] consequently gives natural bijections\n$$\\operatorname{Hom}_{D(B)}(F L,M)\\cong\\operatorname{Hom}_{D(R)}(L,rM)$$\nfor arbitrary unbounded $L$ and $M$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); identity topos map with coefficient map R -> B; derived.tex Tag 09T5 and exact-functor Tag 015F"
+   }
+  },
+  {
+   "text": "Let $C_B$ be derived completion on $D(B)$. Apply [lem-weil-pbc-ringed-koszul-completion-reflector] with the single global section $t$ of $B$. It supplies a complete object $C_BN$ and natural bijections $\\operatorname{Hom}(C_BN,M)\\cong\\operatorname{Hom}(N,M)$ for every complete $M$. By the Koszul/finite-quotient and unit comparison of [lem-weil-pbc-constant-completion-equivalence], this reflector is the derived completion for the finite-reduction tower used here. For complete $L\\in D(R)$ and complete $M\\in D(B)$, its universal property and step 5 give\n$$\\operatorname{Hom}_{D(B)}(C_B F L,M)\\cong\\operatorname{Hom}_{D(B)}(F L,M)\\cong\\operatorname{Hom}_{D(R)}(L,rM).$$\nThus $C_BF$ is left adjoint to the equivalence $r$ of step 4 on the complete subcategories. If $G$ is any quasi-inverse to that equivalence, full faithfulness gives $\\operatorname{Hom}(GL,M)\\cong\\operatorname{Hom}(L,rM)$, naturally in $L,M$. The two representing objects $GL$ and $C_BFL$ are therefore canonically isomorphic, naturally in $L$ (the isomorphism is obtained by evaluating the two Hom bijections on the respective identity maps). Consequently $C_BF$ is the inverse claimed in clause (2), with both compositions naturally isomorphic to the identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099B (lemma-derived-completion), Tag 0A0E (lemma-derived-completion-koszul), and lemma-pushforward-derived-complete-adjoint (Tag 099K); final categorical uniqueness argument written out"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-pe-derived-completion"
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "sk-def-pe-derived-completion",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-constant-coefficients.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099L, section-derived-completion-noetherian, and Tag 099M, lemma-naive-completion; flatness Tag 093M, equivalence Tag 099I, completion reflector Tags 099B/0A0E, and derived adjunction Tag 07A6"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived[Cc]omplet|[Cc]omplet.*[Ss]heaf|[Ss]heaf.*[Cc]omplet",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean; Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean; Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between derived complete sheaves of modules over a constant ring and its adic completion",
+   "results": "AdicCompletion.module; AdicCompletion; Padic.adicCompletionEquiv; AdicCompletion.of_ofAlgEquiv_symm; PadicInt.adicCompletionIntegersEquiv; AdicCompletion.ofLinearEquiv.congr_simp; AdicCompletion.ofAlgEquiv; AdicCompletion.ofAlgEquiv_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.Flat",
+   "results": "AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a site, restriction of scalars from the adic completion of a constant Noetherian ring sheaf induces an equivalence of derived complete module categories and commutes with finite reductions",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.piEquivFin; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.map_exact",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|completion",
+   "results": "no hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat map of sheaves of rings inducing an isomorphism modulo an ideal gives equivalent categories of derived adically complete complexes with inverse completed derived scalar extension",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.flat_of_isNoetherian; AdicCompletion.instIsScalarTower_1; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.congr_symm_apply; AdicCompletion.ofLinearEquiv_apply; AdicCompletion.congr",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_isNoetherian",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictScalars|theorem.*[Cc]omplet|lemma.*[Cc]omplet",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ring completion or restriction-of-scalars definitions do not state the equivalence of derived complete ring-sheaf module categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -55,5 +208,74 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-integral-criterion"
+ "unit": "sk-prop-integral-criterion",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-prop-integral-criterion-constant-coefficients",
+  "worker": "stage1",
+  "summary": "Reused existing general constant-sheaf completion and derived-category results, with no new nodes. Checked the coefficient ring is Noetherian, canonical quotient maps, coefficient-linear reduction and both completeness notions. Identified the inverse by completion and derived scalar-extension adjunctions instead of the imported unsupported Hom/limit argument. Expanded notation without changing any mathematical hypothesis or conclusion.",
+  "blueprint": "Original constant-coefficients proof paragraph (1) is steps 1-2; paragraph (2) and (3) is steps 3-6. This realizes the constant/completed coefficient comparison required by the integral criterion unit; its route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR property of O_E, giving Noetherianity without any hypothesis on X. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "General constant Noetherian completion flatness and canonical finite reductions. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Exactness of constant module sheaves identifies the source quotient. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "General site/Noetherian coefficient comparison, including coefficient-linear reductions and the equivalence of tower and Koszul completeness. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Module scalar-extension/restriction adjunction for the identity topos. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Restriction of scalars descends termwise to the derived category. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact restriction is its everywhere-defined right derived functor. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Everywhere-defined unbounded derived coefficient extension computed by K-flat resolutions. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Derives the scalar-extension/restriction adjunction. No node of the integral-criterion unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Universal property of completion for the single global coefficient pi_E. No node of the integral-criterion unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q10-fe0ff0451",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q10-fe0ff0451 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, current blueprint route, and Stacks source passages. All six steps preserve the hypotheses, coefficient categories, canonical reductions, and unbounded scope. The completion adjunction correctly identifies the inverse. No new nodes, missing dependencies, or cycles; all ten declared tool uses accepted. Detailed checks are in review.md."
+ }
 }

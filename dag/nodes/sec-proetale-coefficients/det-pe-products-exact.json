@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-products-exact",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Products of pro-étale module sheaves are exact",
@@ -15,13 +15,27 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Products of sheaves are computed sectionwise ([det-pe-sections-limits-colimits]). Let $W$\nbe an affine weakly contractible object. By [det-pe-wc-sections-exact] each\n$0\\to A_i(W)\\to B_i(W)\\to C_i(W)\\to0$ is an exact sequence of $\\mathcal R(W)$-modules. A\nproduct of exact sequences of modules is exact: kernels and images are computed\ncoordinatewise, and for surjectivity a tuple $(c_i)\\in\\prod_iC_i(W)$ lifts to\n$(b_i)\\in\\prod_iB_i(W)$ by choosing a preimage $b_i$ of each $c_i$ (axiom of choice). Hence\nthe evaluation at $W$ of the product sequence is exact for every such $W$, and by\n[det-pe-sections-conservative] the product sequence of sheaves is exact.",
+   "text": "Fix an affine weakly contractible object $W$. By [det-pe-sections-limits-colimits], evaluation at $W$ commutes with products, so the evaluation of the product sequence is the product over $i$ of the exact sequences $0\to A_i(W)\to B_i(W)\to C_i(W)\to0$ supplied by [det-pe-wc-sections-exact]. The product sequence of modules is exact coordinatewise: injectivity and the kernel equality are checked coordinate by coordinate, and for any tuple $(c_i)_{i\\in I}$ choose, for each $i$, a preimage $b_i\\in B_i(W)$; then $(b_i)_i$ maps to $(c_i)_i$.",
    "uses": [
     "det-pe-sections-limits-colimits",
-    "det-pe-wc-sections-exact",
+    "det-pe-wc-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md",
+    "place": "paragraph beginning “Products of sheaves are computed sectionwise”"
+   }
+  },
+  {
+   "text": "The evaluated product sequence is therefore exact for every affine weakly contractible $W$. Apply [det-pe-sections-conservative], clause 1, to obtain exactness at the middle sheaf. Applying the same criterion to the sequences $0\to\\prod_i A_i\to\\prod_i B_i$ and $\\prod_i B_i\to\\prod_i C_i\to0$ gives injectivity of the first map and surjectivity of the second (the zero terms evaluate to zero), so $0\to\\prod_iA_i\to\\prod_iB_i\to\\prod_iC_i\to0$ is exact. This is precisely exactness of the product functor.",
+   "uses": [
     "det-pe-sections-conservative"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.proof.md",
+    "place": "paragraph ending “the product sequence of sheaves is exact”"
+   }
   }
  ],
  "proof_deps": [
@@ -36,7 +50,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +65,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-products"
+ "unit": "sk-prop-pe-products",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-products-exact",
+  "worker": "stage1",
+  "summary": "Checked the imported statement and its blueprint proof. No finished declaration with the blueprint tag exists in WeilConjectures. The single imported paragraph is realized by two steps: evaluation at affine weakly contractible objects commutes with products, the resulting product of module short exact sequences is exact coordinatewise using choice, and conservativity detects middle and endpoint exactness. No new node is required because the module product calculation is an elementary coordinatewise argument from the cited section and exactness statements.",
+  "blueprint": "The sole paragraph of det-pe-products-exact.proof.md: its first sentence and the argument through the coordinatewise module product give Step 1; its final conservativity sentence gives Step 2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-66727e882",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-66727e882 (reviewer sub-agent of L); spot-checked: Read the item, complete blueprint proof, chapter route, and all three cited node statements. Both proof steps are valid: sectionwise evaluation and coordinatewise products use choice; conservativity correctly establishes middle exactness and endpoint injectivity/surjectivity via zero-term sequences. Arbitrary, empty, singleton, and zero-module cases check out. No new nodes, duplicates, route violations, SGA citations, or mathematical gaps found. Review written to review.md."
+ }
 }
