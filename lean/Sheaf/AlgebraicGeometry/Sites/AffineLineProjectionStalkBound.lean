@@ -224,7 +224,9 @@ private theorem isZero_leray_of_row_column
     · exact (Etale.upperStar AddCommGrpCat.{u + 1} s).map_isZero
         (hmixed p q (Nat.pos_of_ne_zero hp) (Nat.pos_of_ne_zero hq))
 
-/-- The higher direct image of a bounded-torsion sheaf on affine space vanishes at
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The higher direct image of a bounded-torsion sheaf on affine space vanishes at
 points whose residue transcendence degree plus the cohomological degree exceeds the
 source dimension. The hypothesis `hCartier` is the bound on punctured smooth strict localizations;
 the caller proves it using the coefficient-field model and dimension induction.
@@ -283,7 +285,7 @@ d=2. For a merely separably closed geometric field, test after extension to its
 algebraic closure. This single geometric point covers the one-point base spectrum,
 so its geometric fibre functor is conservative. The inverse-image/stalk comparison
 therefore turns vanishing there into the stated zero inverse-image sheaf. Thus the assertion
-holds for every geometric point specified here. -/
+holds for every geometric point specified here. - /
 theorem affineLineProjection_stalk_bound
     (hP1 : ∀ (S : Scheme.{u})
       (F : Sheaf (AlgebraicGeometry.ProjectiveLine S).smallEtaleTopology
@@ -480,5 +482,6 @@ theorem affineLineProjection_stalk_bound
       (A := AddCommGrpCat.{u + 1})).map_isZero htotal
     exact hz.of_iso ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} s c).app
       (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj M)).symm
+-/
 
 end AlgebraicGeometry.Scheme
