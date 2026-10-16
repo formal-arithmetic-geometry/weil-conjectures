@@ -25,7 +25,9 @@
   "def-kun-derived-tensor",
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-pc-compact-object"
+  "def-pc-compact-object",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude"
  ],
  "proof": [
   {
@@ -291,5 +293,24 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-6d3b4b25b (reviewer sub-agent of L); spot-checked: Read both nodes fully; checked all six steps against cited statements, Bhatt–Scholze §§6.3–6.4, Stacks and the current blueprint. Verified unbounded ordinary-étale scope, nonseparated hypotheses, finite-Tor conditions, edge cases, nonduplication and target coefficient distinctions. No repairs needed. Detailed checks and accepted tool uses are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4cd3288af",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Wrote review.md. Audited the immutable module, all eight statement dependencies, source, exact signature, universes, edge cases, docstrings, and report. scompile.py reproduced clean sandbox and library-path compilation. No repairs needed; repositories and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators",
+  "declaration": "AlgebraicGeometry.Etale.finiteRing_compactGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingEtaleCompactGenerators.lean",
+  "statement": "theorem finiteRing_compactGenerators {k : Type u} [Field k] [IsAlgClosed k] (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓunit : IsUnit (ℓ : k)) {T : Scheme.{u}} (f : T ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] [QuasiCompact f] {C : Type (u + 1)} [CommRing C] [Finite C] (hC : ∃ n : ℕ, (ℓ : C) ^ n = 0) : ∃ (hcoprod : HasCoproducts.{u + 1} (DerivedCategoryModule C T)), LocallySmall.{u + 1} (DerivedCategoryModule C T) ∧ (∀ E : DerivedCategoryModule C T, DerivedCategory.isBoundedConstructible C T E ∧ (∃ r s : ℤ, r ≤ s ∧ DerivedCategory.hasTorAmplitudeIn C T r s E) → @IsCompactObject (DerivedCategoryModule C T) _ _ hcoprod E) ∧ (∃ (S : Type (u + 1)) (E : S → DerivedCategoryModule C T), (∀ s : S, DerivedCategory.isBoundedConstructible C T (E s) ∧ ∃ r t : ℤ, r ≤ t ∧ DerivedCategory.hasTorAmplitudeIn C T r t (E s)) ∧ ∀ (A B : DerivedCategoryModule C T) (h : A ⟶ B), (∀ (s : S) (n : ℤ), Function.Bijective (fun (φ : (E s)⟦n⟧ ⟶ A) ↦ φ ≫ h)) → IsIso h)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading: use the recorded isBoundedConstructible and hasTorAmplitudeIn predicates, with ordered Tor bounds. Coproducts, compactness and the generator set use the module-value indexing universe u+1, not the larger universe u+2 of derived-category objects."
  }
 }
