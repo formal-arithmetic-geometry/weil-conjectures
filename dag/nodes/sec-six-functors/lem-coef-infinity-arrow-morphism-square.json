@@ -25,7 +25,8 @@
   "place": "Theorem 8.3.7.1 (Kerodon Tag 06BZ), applied to the oriented fiber product of the two identity functors of D, which is Arr(D); its Hom-functor square gives the joint endpoint projection. Right-pinched versus unpinched conventions are related by the existing lem-coef-infinity-pinch-comparison (Kerodon 01L5). Kerodon tags, not Stacks tags. Read online 2026-10-16; WANTED: archived source."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -241,5 +242,41 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-fc43a9ce1 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 10 cited statements, the unit route and the citer (lem-coef-infinity-join-cone-calculus step 7, whose path orientation va->bu matches the item). Kerodon 06BZ/01PF/01DP/01L5 are not archived (WANTED recorded, proof_origin=agent). The statement is the standard Hom-in-Arr homotopy-pullback formula and is unchanged and not weakened. It checks on small cases: in an ordinary nerve it gives exactly va=bu; Delta^0 gives contractible spaces; empty D is vacuous. No coefficient category or base-change morphism is involved. Step checks: step 1 unwinds the Fun definition correctly and applies the pinch to Q. In step 2, P_v and Q_u are pullbacks of the n=2 spine trivial fibration, so r and s are trivial fibrations and P_v, Q_u are Kan. In step 3 every horn case holds. Inner horns use the pushout-product with the inner horn as the anodyne factor; L is an outer horn and serves as the mono. The case i=0, m>=2 uses the prism lemma with degenerate vertex edges. The case i=m follows by opposites. The case m=1 uses the componentwise equivalence criterion plus Fun(Delta^2,D)->Fun(L,D) being an isofibration, with opposites for a given target. Step 4: the two-triangle decomposition gives the strict iso U_Q(u,v)=P_v x_C Q_u with endpoint map (r,s); it is genuinely elementary. Step 5: the strict pullback along the Kan fibration p is the homotopy pullback, and passing to A,B through sections of r,s is valid by right properness and independence of replacement; terse but correct. Step 6: pinch naturality under ev_0/ev_1 gives the endpoint compatibility. Step 7: the explicit pasting gives naturality. There are no new nodes. No duplicate after rg over 06BZ, oriented fiber, Arr and times^h and reading the six nearest lem-coef-infinity-* nodes. Acyclic; no SGA. Fix: lem-cbc-simplicial-composition-spine, lem-cbc-invertible-prism-extension and lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) are outside the unit's transitive route and were not declared. I accepted all three as generic tool uses and added split_report.tool_uses to the item in fixes/; nothing else changed. lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2) is inside the route.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee734bfc8",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, both statement dependencies (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-pinch-comparison) and their actual declarations, the Kerodon 06BZ/01PF/01L5 source place, the module and both report sections. Only lean and stmt_deps changed; the added pinch-comparison stmt_dep is landed and used in the signature, and the graph stays acyclic; lean.statement matches the file verbatim. Coordinates checked: upper triangle has edge12=v and vertex0=d0 (long edge va), lower has edge01=u and vertex2=e1 (long edge bu); the path runs va->bu with fixed endpoints; composition spans are pinned and their free legs are weak equivalences; the span presentation is the literal P x_C Fun(D1,C) x_C Q. The comparison is pinned to restriction plus the constant diagonal path; the relative equivalence over any T is true (isofibration lift of the fixed-endpoint path); strict naturality under h,f holds; the joint endpoint equation follows from pinch naturality applied to ev0/ev1, and the pinch map is uniquely determined. Unpinched cross term with the canonical pinch attached is accepted as faithful (node proof step 6). Edge cases (empty D or T, D=Delta0, nerves, empty mapping spaces, one universe) are fine. Gates: no hollow definitions, docstrings present, exactly one sorry, no stronger assumptions, no duplicate. nt_compile.py --json on the snapshot at Sheaf/CategoryTheory/ArrowMorphismSquare.lean: exit 0, no errors (6.6 s)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArrowMorphismSquare",
+  "declaration": "SSet.Enhanced.arrow_morphism_square",
+  "declarations": [
+   "SSet.Enhanced.arrowSquareUpper",
+   "SSet.Enhanced.arrowSquareRestriction",
+   "SSet.Enhanced.arrowSquareFamily",
+   "SSet.Enhanced.arrowSquarePathFamily",
+   "SSet.Enhanced.arrowSquareComparisonAmbient",
+   "SSet.Enhanced.arrowSquareBase",
+   "SSet.Enhanced.arrowSquarePathBase",
+   "SSet.Enhanced.ArrowSquareRelativeEquivalence",
+   "SSet.Enhanced.arrowSquareAmbientMap",
+   "SSet.Enhanced.arrowSquarePathAmbientMap",
+   "SSet.Enhanced.arrowSquarePathEndpoints",
+   "SSet.Enhanced.arrowSquareLeg",
+   "SSet.Enhanced.ArrowSquareCompositionSpan",
+   "SSet.Enhanced.ArrowSquareSpanPresentation",
+   "SSet.Enhanced.arrow_morphism_square"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ArrowMorphismSquare.lean",
+  "statement": "theorem arrow_morphism_square : ∃ c : ∀ (T D : SSet.{u}) [Quasicategory D] (U V : T ⟶ (ihom Δ[1]).obj D), (arrowSquareFamily U V).toSSet ⟶ (arrowSquarePathFamily U V).toSSet, (∀ (T D : SSet.{u}) [Quasicategory D] (U V : T ⟶ (ihom Δ[1]).obj D), c T D U V ≫ (arrowSquarePathFamily U V).ι = arrowSquareComparisonAmbient U V ∧ ArrowSquareRelativeEquivalence (c T D U V)) ∧ (∀ (T T' D E : SSet.{u}) [Quasicategory D] [Quasicategory E] (U V : T ⟶ (ihom Δ[1]).obj D) (U' V' : T' ⟶ (ihom Δ[1]).obj E) (h : T ⟶ T') (f : D ⟶ E) (x : (arrowSquareFamily U V).toSSet ⟶ (arrowSquareFamily U' V').toSSet), x ≫ (arrowSquareFamily U' V').ι = (arrowSquareFamily U V).ι ≫ arrowSquareAmbientMap h f → x ≫ c T' E U' V' ≫ (arrowSquarePathFamily U' V').ι = c T D U V ≫ (arrowSquarePathFamily U V).ι ≫ arrowSquarePathAmbientMap h f) ∧ (∀ (D : SSet.{u}) [Quasicategory D] (u v : ((ihom Δ[1]).obj D) _⦋0⦌), ArrowSquareSpanPresentation D u v ∧ ∃ i : arrowMappingSpace ((ihom Δ[1]).obj D) u v ≅ (arrowSquareFamily (SSet.const (X := Δ[0]) u) (SSet.const v)).toSSet, i.hom ≫ (arrowSquareFamily (SSet.const u) (SSet.const v)).ι ≫ snd _ _ = arrowMappingSpaceInclusion ((ihom Δ[1]).obj D) u v ∧ KanComplex (arrowSquarePathFamily (SSet.const (X := Δ[0]) u) (SSet.const v)).toSSet ∧ IsWeakHomotopyEquivalence ((Classical.choose right_pinch_comparison) ((ihom Δ[1]).obj D) u v ≫ i.hom ≫ c Δ[0] D (SSet.const u) (SSet.const v)) ∧ (Classical.choose right_pinch_comparison) ((ihom Δ[1]).obj D) u v ≫ i.hom ≫ c Δ[0] D (SSet.const u) (SSet.const v) ≫ arrowSquarePathEndpoints (SSet.const u) (SSet.const v) = lift (mappingSpaceMap (evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 0)) u v ≫ (Classical.choose right_pinch_comparison) D ((evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 0)).app _ u) ((evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 0)).app _ v) ≫ arrowMappingSpaceInclusion D _ _) (mappingSpaceMap (evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 1)) u v ≫ (Classical.choose right_pinch_comparison) D ((evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 1)).app _ u) ((evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 1)).app _ v) ≫ arrowMappingSpaceInclusion D _ _))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The coherent composition maps are their fixed-leg triangle spans, with both arrows specified by restriction and the free legs weak equivalences. The relative path pullback is identified with the literal path-space pullback. The canonical two-triangle comparison is an equivalence over every simplicial parameter, strictly natural under parameter maps and simplicial functors; its point fiber uses the existing right-pinched mapping space and both specified endpoint maps. No strict composition operation or arbitrary comparison map is assumed. Second reading adds the landed pinch-comparison node to stmt_deps because its uniquely characterized canonical map occurs in this signature."
  }
 }
