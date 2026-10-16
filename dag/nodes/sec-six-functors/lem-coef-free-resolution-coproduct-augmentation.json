@@ -31,69 +31,112 @@
   "def-weil-pbc-simplicial-set",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The free-category construction on a category with object set $O$ is functorial: a map of categories sends each nonidentity generator to the corresponding generator, or to the identity when its image is an identity. Composition of words gives the counit $\\epsilon$, and replacing each generator by its one-letter outer word gives the comultiplication $\\delta$. The two comonad identities are checked on generators and then on words. Substituting these identities into $d_i=F^i\\epsilon F^{n-i}$ and $s_i=F^i\\delta F^{n-i}$ gives the simplicial identities, so $F_\\bullet C\\to C$ is an augmented simplicial category and the same operators, acting trivially on the $A$ factor, make $R_\\bullet$ a simplicial object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "§2.4, equations defining the free-category comonad; §2.5, the displayed face and degeneracy formulas (printed pp.270–271)."
+   }
+  },
+  {
+   "text": "Fix $x,y\\in O$ and write $X_n=(F^{n+1}C)(x,y)$ and $S=C(x,y)$. For any category $D$, define the map of its underlying reflexive graph $\\gamma_D:D\\to FD$ by $\\gamma_D(1_x)=1_x$ and $\\gamma_D(w)=[w]$ for a nonidentity arrow $w$. This is not asserted to be a functor. For every functor $v:D\\to E$ it satisfies $Fv\\,\\gamma_D=\\gamma_Ev$, including when $v(w)$ is an identity. Set $h_{-1}=\\gamma_C$ and $h_n=\\gamma_{F^{n+1}C}$ on these mapping sets. The counit gives $\\varepsilon_0h_{-1}=1$ and $d_0h_n=1$. Since $d_1:F^2C\\to FC$ is $F\\epsilon_C$, naturality gives $d_1h_0=h_{-1}\\varepsilon_0$. In higher degrees $d_{i+1}=F(d_i)$ and $s_{i+1}=F(s_i)$, so naturality gives $d_{i+1}h_{n+1}=h_nd_i$ and $s_{i+1}h_n=h_{n+1}s_i$ in precisely the ranges in [lem-coef-extra-degeneracy-contraction]. That node supplies a simplicial section and a homotopy to the identity. By [lem-coef-simplicial-realization-cylinder] their realizations are a section and an ordinary homotopy inverse; consequently they induce inverse maps on components and all homotopy groups. Thus $X\\to\\operatorname{const}S$ is a weak homotopy equivalence. Every $h_n$ and $h_{-1}$ fixes the identity arrow; this last property will also contract the identity boundaries of word spaces.",
+   "uses": [
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 2.6, printed p.270; explicit verification of its contracting homotopy, with realization justified by the cited cylinder lemma."
+   }
+  },
+  {
+   "text": "For ordinary categories $A,D$ on $O$, reduce a composable word by deleting identity letters and replacing adjacent letters in the same factor by their composite. Each move strictly decreases length. The only overlapping moves involve three letters in one factor, or an identity next to a composition: associativity and the unit laws give a common further reduction in these cases; disjoint moves commute. Induction on the original word length then shows that two choices of first move have the same terminal reduced word, since their common reduct and both first reducts have smaller length. Hence every arrow of $A*_O D$ has a unique reduced word, alternating nonidentity letters from the two factors; the empty word represents an identity. This proves the normal-form assertion used below directly from the defining word relations, including factors with inverses or other composites equal to identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 1.4(iii), printed p.269; elementary normal-form argument for its alternating-word description."
+   }
+  },
+  {
+   "text": "Put $X=F_\\bullet C$ and $Y=\\operatorname{const}C$. For $Z=X$ or $Y$, let $W_l(Z)(x,y)$ consist of the arrows of $(A*_O Z)(x,y)$ whose reduced words have total length at most $l$. Faces and degeneracies replace each letter by its image and then reduce, so cannot increase this length; thus these are simplicial subsets. Define $P_l(Z)(x,y)$, for $l\\geq1$, as the disjoint union over object paths $x=x_0,\\ldots,x_l=y$ and alternating strings of $A$ and $Z$ of the products of the following $l$ mapping spaces: at an $A$ slot use the constant set of nonidentity arrows $A(x_{j-1},x_j)$, and at a $Z$ slot use all of $Z(x_{j-1},x_j)$, including identities. Let $B_l(Z)\\subseteq P_l(Z)$ be the union of loci where at least one $Z$ slot is an identity (possible only at equal endpoints). It is a simplicial subset. Multiplication sends $B_l(Z)$ to $W_{l-1}(Z)$ because deleting that identity decreases length and every subsequent reduction decreases it further. There is a degreewise pushout square with top row $B_l(Z)\\hookrightarrow P_l(Z)$ and bottom row $W_{l-1}(Z)\\hookrightarrow W_l(Z)$: outside $B_l(Z)$ every letter is nonidentity, so the normal form of Step 3 identifies these tuples bijectively with the reduced words of length exactly $l$; all boundary tuples are identified with their unique lower-length reduced word. These degreewise identifications commute with the simplicial operators just described. In particular the top map is a monomorphism. The augmentation induces a map between these squares for $X$ and $Y$, even when it sends a nonidentity $X$ arrow to an identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(iii), printed p.271; explicit word-length pushout construction expanding the omitted details. Construction and pushout verification are by the word normal form in Step 3."
+   }
+  },
+  {
+   "text": "On $P_l(X)$ define degree-raising maps by applying the maps $h_n$ of Step 2 to every $X$ slot and keeping every $A$ letter, object path and alternating string fixed. Define the section of its augmentation to $P_l(Y)$ by applying $h_{-1}$ in every $C$ slot. All extra-degeneracy equations hold coordinate by coordinate, including products with no $X$ slots and empty summands. These maps restrict to $B_l(X)$ and a section from $B_l(Y)$ because each identity coordinate is fixed by $h_n$ and $h_{-1}$. The same equations therefore hold on this union of identity loci. Apply [lem-coef-extra-degeneracy-contraction] separately to these two augmented simplicial sets. The realization-cylinder statement [lem-coef-simplicial-realization-cylinder] turns the resulting simplicial homotopies into ordinary homotopies, as in Step 2. We obtain weak homotopy equivalences $P_l(X)\\to P_l(Y)$ and $B_l(X)\\to B_l(Y)$. No contraction on reduced coproduct words is asserted: contractions are used only on the tuple spaces and their identity boundaries.",
+   "uses": [
+    "lem-coef-extra-degeneracy-contraction",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(iii), printed p.271, using the contraction of Proposition 2.6; explicit contraction of each attaching space and its identity boundary."
+   }
+  },
+  {
+   "text": "The initial stage $W_0(X)(x,y)\\to W_0(Y)(x,y)$ is an isomorphism: both are a singleton if $x=y$ and empty otherwise. Induct on $l$. In the two pushout squares of Step 4, the boundary inclusions $B_l(Z)\\hookrightarrow P_l(Z)$ are monomorphisms; the boundary and tuple comparisons are weak homotopy equivalences by Step 5, and the lower-stage comparison is one by the induction hypothesis. The pushout assertion of [lem-coef-sset-gluing-filtered-equivalences] gives the comparison at stage $l$. Every simplex of either coproduct is represented by a finite word, so the degreewise colimits over $l\\in\\mathbb N$ are exactly $(A*_O X)(x,y)$ and $(A*_O Y)(x,y)$. The filtered-colimit assertion of the same node now proves that their augmentation is a weak homotopy equivalence. This proves the required conclusion for every $x,y$. If $O$ is empty there are no pairs; identity-only factors and empty mapping spaces are already included in the construction. Neither the induction nor the contractions assume freeness or cofibrancy of $A$ or $C$.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proof of Proposition 2.7(iii), printed p.271; the omitted extension is supplied by the explicit pushout induction and the cited filtered-colimit theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "§§2.4–2.6 and Proposition 2.7(iii), printed pp.270–271"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "cotriple|comonad.*resolution|free.*categor.*resolution|resolution.*free.*categor",
-   "results": "{\"t\": \"2026-10-16T18:31:55Z\", \"tool\": \"grep\", \"query\": \"cotriple|comonad.*resolution|free.*categor.*resolution|resolution.*free.*categor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: zero hits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"SimplicialObject\", \"resolution\"",
-   "results": "{\"t\": \"2026-10-16T18:31:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"resolution\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: zero hits."
-  },
-  {
    "tool": "leansearch",
-   "query": "The cotriple free category resolution augmentation is a weak homotopy equivalence after coproduct with a fixed category",
-   "results": "{\"t\": \"2026-10-16T18:31:56Z\", \"tool\": \"leansearch\", \"query\": \"The cotriple free category resolution augmentation is a weak homotopy equivalence after coproduct with a fixed category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.augment\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"CategoryTheory.CosimplicialObject.Augmented\", \"CategoryTheory.CosimplicialObject.instCategoryAugmented\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"df4fe27cd7362699\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For categories on a fixed object set the augmented free simplicial resolution of one factor remains a weak equivalence after free product with an arbitrary constant category",
-   "results": "{\"t\": \"2026-10-16T18:32:07Z\", \"tool\": \"leanfinder\", \"query\": \"For categories on a fixed object set the augmented free simplicial resolution of one factor remains a weak equivalence after free product with an arbitrary constant category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.weakEquivalence_resolutionMap_iff\"], \"digest\": \"d185f575f659db52\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The augmentation from a cotriple resolution in categories to the resolved category is homotopically invariant under adjoining a fixed category by coproduct",
-   "results": "{\"t\": \"2026-10-16T18:32:26Z\", \"tool\": \"leanfinder\", \"query\": \"The augmentation from a cotriple resolution in categories to the resolved category is homotopically invariant under adjoining a fixed category by coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans_app\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\"], \"digest\": \"79b0aca052ef2f08\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: hits concern abstract cofibrant resolutions, ordinary simplicial augmentations, the homotopy-category product comparison, or abstract product/coproduct stability. None states the mappingwise augmentation theorem for the free-category cotriple after adjoining a fixed category."
+   "query": "free category comonad resolution augmentation weak equivalence after coproduct with arbitrary category",
+   "results": "{\"t\": \"2026-10-16T19:48:41Z\", \"tool\": \"leansearch\", \"query\": \"free category comonad resolution augmentation weak equivalence after coproduct with arbitrary category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceWWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"CategoryTheory.Comonad.mk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.Comonad.cofree_obj_a\", \"CategoryTheory.Comonad.mk.inj\", \"CategoryTheory.instCategoryComonad\"], \"digest\": \"8145e303efaa335d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract model-category replacement and comonad declarations do not state the mappingwise free-category coproduct result."
   },
   {
    "tool": "grep",
-   "query": "Comonad.*(simplicial|resolution)|extraDegeneracy|ExtraDegeneracy|SimplicialObject.*(contract|augment)",
-   "results": "{\"t\": \"2026-10-16T18:56:51Z\", \"tool\": \"grep\", \"query\": \"Comonad.*(simplicial|resolution)|extraDegeneracy|ExtraDegeneracy|SimplicialObject.*(contract|augment)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean\"], \"digest\": \"8991abe5cd47e2a3\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read ExtraDegeneracy.lean lines 122-151, 158-224 and 407-438. These supply a section/homotopy only after an extra degeneracy has been constructed (and homotopyEquiv is for preadditive chain complexes); none constructs the relative free-category resolution or its mappingwise augmentation."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The standard simplicial resolution associated to the free category comonad is a local weak equivalence under coproduct with a discrete category",
-   "results": "{\"t\": \"2026-10-16T18:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"The standard simplicial resolution associated to the free category comonad is a local weak equivalence under coproduct with a discrete category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsConnectedLeftResolutionWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\"], \"digest\": \"3bc9cfbb4dd9b2bc\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the returned declarations are abstract model-category cofibrant replacements and localization results; none states the specified free-category comonad augmentation after adjoining an arbitrary ordinary category."
+   "query": "freeProduct|free_product|cotriple|coproduct.*(weakEquivalence|WeakEquivalence)",
+   "results": "{\"t\": \"2026-10-16T20:09:08Z\", \"tool\": \"grep\", \"query\": \"freeProduct|free_product|cotriple|coproduct.*(weakEquivalence|WeakEquivalence)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\", \"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\", \"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\", \"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\", \"Mathlib/LinearAlgebra/FreeProduct/Basic.lean\"], \"digest\": \"254b41fc9d1df937\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the five hits concern free products of linear algebras, not simplicial categories."
   },
   {
    "tool": "loogle",
-   "query": "\"SimplicialObject.Augmented.ExtraDegeneracy\"",
-   "results": "{\"t\": \"2026-10-16T18:57:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject.Augmented.ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.section_\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\"], \"digest\": \"b676cbbaf9d29122\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read ExtraDegeneracy.lean lines 122-151, 158-224 and 407-438. These supply a section/homotopy only after an extra degeneracy has been constructed (and homotopyEquiv is for preadditive chain complexes); none constructs the relative free-category resolution or its mappingwise augmentation."
+   "query": "\"ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-16T20:09:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"fc8fbaed6331b127\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: ExtraDegeneracy is already the existing cited Mathlib leaf; its section and homotopy require constructed extra-degeneracy data and do not state the coproduct result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In simplicial monoids or categories a coproduct with a constant object preserves a free simplicial resolution weak equivalence",
+   "results": "{\"t\": \"2026-10-16T20:09:10Z\", \"tool\": \"leanfinder\", \"query\": \"In simplicial monoids or categories a coproduct with a constant object preserves a free simplicial resolution weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_epi_on_summand_id_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.mapMono_on_summand_id_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'\"], \"digest\": \"5daceb89c50a80e0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: abstract cofibrant replacements and Dold-Kan summand formulas do not state the free-category coproduct augmentation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-simplicial-free-calculus",
@@ -101,5 +144,20 @@
   "group": "Q04"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-resolution-coproduct-augmentation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six proof steps: free-category comonad, identity-preserving mapping-set contraction, reduced-word normal forms, explicit word-length pushouts, separate contractions of tuple spaces and identity boundaries, and gluing/filtered-colimit induction. Second reading replaced the invalid contraction on reduced words; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the technical augmentation-comparison input in the ancestor proof paragraph: the free-category resolution and its weak-equivalence augmentation after adjoining a fixed ordinary category, used before the hammock-localization comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-e7d1544bd",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-e7d1544bd (reviewer sub-agent of L); spot-checked: I read the item, all six cited nodes and the citing parent in full, and the Dwyer–Kan source, which I fetched from the node's URL and read through its text layer. The places checked are §1.4(iii)-(v) on p.269, §§2.4-2.6 on p.270, and Proposition 2.7(iii) and its proof on p.271. The statement is unchanged. It faithfully specializes DK 2.7(iii) to a constant A and has no missing freeness hypothesis. Step 1: I checked the naturality of the comonad, the case where a generator maps to an identity, the counit and comultiplication identities, and coassociativity. Step 2: gamma is natural, and the step meets every equation and index range of the extra-degeneracy Mathlib leaf; the cylinder node turns the simplicial homotopy into a weak equivalence. Step 3: the rewriting system terminates and its critical pairs resolve, so normal forms are unique, including factors with inverses. Step 4: W_l and B_l are simplicial subsets, B_l lands in W_{l-1}, and since B_l->P_l is injective the set pushout equals W_l in every degree. Step 5: the coordinatewise extra degeneracies preserve the identity loci, and empty or A-only summands are fine; no contraction on reduced words is claimed, which is correct. Step 6: the base case W_0 holds and the gluing hypotheses (monomorphism, three weak equivalences, the directed set N) are met. The delivery creates no new nodes. There is no cycle, and all proof dependencies are in the item's unit, so no tool_uses are needed. The nearby nodes dk-cofibrant-localization-comparison, free-product-nerve-gluing and free-factor-hammock-comparison are not duplicates. Four Mathlib searches are recorded. DK is not archived, so the WANTED line in the report stands. I made no changes."
+ }
 }

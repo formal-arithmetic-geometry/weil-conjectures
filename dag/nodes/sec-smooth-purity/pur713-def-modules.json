@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pur713-def-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Module objects",
@@ -12,13 +12,132 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-modules.md",
   "place": "node pur713-def-modules, order 2477"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "det-def-sfb-module-objects-definition",
+  "pur713-def-ring-object",
+  "pur713-def-coefficient-rings"
+ ],
+ "proof": [
+  {
+   "text": "The commutative ring-object node identifies $\\mathcal R$ with a monoid object in the symmetric monoidal category $\\mathscr C$. Applying the existing module-object definition to this monoid object gives objects $M$ with an action $\\mathcal R\\otimes M\\to M$ satisfying the unit and associativity equations (with the associator and unitor), action-preserving morphisms, and the category $\\mathsf{Mod}_{\\mathcal R}(\\mathscr C)$.",
+   "uses": [
+    "pur713-def-ring-object",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-modules.md",
+    "place": "the definition paragraph, specialized via the existing commutative-ring-object and module-object definitions"
+   }
+  },
+  {
+   "text": "For any scheme $X$, use the symmetric monoidal structure on $\\mathscr C=\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$ specified in [pur713-def-ring-object]. For an arbitrary commutative ring object $\\mathcal R$ in this category, the construction in step 1 is denoted $\\mathsf{Mod}_{\\mathcal R}(X_{\\Proet})$. For the further abbreviation, fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ with its valuation topology, a finite intermediate extension $E/\\mathbf Q_\\ell$, and $T\\in\\{\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ as in [pur713-def-coefficient-rings]. That node supplies $\\mathcal R_{X,T}=p_X^*\\underline T$ as a commutative ring object of exactly this sheaf category. Set $\\mathcal R=\\mathcal R_{X,T}$ in the preceding construction and write $\\mathsf{Mod}(X_{\\Proet},T)$ for the resulting category.",
+   "uses": [
+    "pur713-def-coefficient-rings",
+    "pur713-def-ring-object",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-modules.md",
+    "place": "the final specialization sentence for the small pro-etale sheaf category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pur713-def-ring-object",
+  "det-def-sfb-module-objects-definition",
+  "pur713-def-coefficient-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-modules.md",
+  "place": "definition specialized through the existing commutative-ring-object, module-object, and coefficient-ring nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "module objects over a commutative algebra object in a symmetric monoidal category",
+   "results": "Hits included CategoryTheory.ModObj, CategoryTheory.Mod_, CategoryTheory.Mod_.regular and CategoryTheory.Mod_.instCategory in Mathlib/CategoryTheory/Monoidal/Mod_; these give the generic module-object construction but no pro-etale coefficient specialization.",
+   "date": "2026-10-17",
+   "verdict": "partial match only; no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_ C D A",
+   "results": "0 hits; Loogle reported: Unknown identifier `C`.",
+   "date": "2026-10-17",
+   "verdict": "query error; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleCat|Module.*[Oo]bject|module.*category",
+   "subdirectory": "Algebra/Category",
+   "results": "25 hits, mostly ordinary ModuleCat and sheaf-module files; no declaration of this internal module-object definition with the pro-etale coefficient notation.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "modules over a commutative monoid object in a symmetric monoidal category and their morphisms",
+   "results": "Hits included CategoryTheory.Mod_.instCategory, CategoryTheory.Mod_.regular, CategoryTheory.ModObj and CategoryTheory.IsModHom in Mathlib.CategoryTheory.Monoidal.Mod_; no complete coefficient specialization.",
+   "date": "2026-10-17",
+   "verdict": "partial match only; no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of modules over a commutative ring object in a symmetric monoidal category, specialized to sheaves on a scheme pro-etale site",
+   "results": "Hits included AlgebraicGeometry.Scheme.Modules, CondensedMod, SheafOfModules.instCategory and CategoryTheory.Mod_; these concern ordinary structure-sheaf or condensed modules, not the specified coefficient object on X_Proet.",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_ CategoryTheory.ModObj CategoryTheory.MonObj",
+   "results": "0 hits; query reported an application type mismatch.",
+   "date": "2026-10-17",
+   "verdict": "query error; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Mod_|ModObj|MonObj|module object",
+   "subdirectory": "CategoryTheory/Monoidal",
+   "results": "25 hits including Mathlib/CategoryTheory/Monoidal/Mod.lean and Mon.lean declarations ModObj, MonObj and IsModHom; no project-specific pro-etale coefficient notation.",
+   "date": "2026-10-17",
+   "verdict": "partial match only; no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left action of an internal monoid in a monoidal category defines a category of equivariant morphisms",
+   "results": "{\"t\": \"2026-10-16T20:07:28Z\", \"tool\": \"leanfinder\", \"query\": \"left action of an internal monoid in a monoidal category defines a category of equivariant morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.MonoidalLeftAction\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionLeft\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionObj\", \"CategoryTheory.MonoidalCategory.selfLeftAction\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionHom\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionRight\", \"CategoryTheory.MonoidalCategory.MonoidalLeftActionStruct.actionHomLeft\"], \"digest\": \"ef8818ce1adeb2a5\"}",
+   "date": "2026-10-17",
+   "verdict": "general categorical action infrastructure only; not the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "class ModObj|class IsModHom|structure Mod |def forget",
+   "results": "{\"t\": \"2026-10-16T20:07:46Z\", \"tool\": \"grep\", \"query\": \"class ModObj|class IsModHom|structure Mod |def forget\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Internal/Limits.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\"], \"digest\": \"78ed8bd4535af752\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only; no scheme coefficient specialization",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over a monoid object with tensor product action and equivariant maps form a category",
+   "results": "{\"t\": \"2026-10-16T20:07:47Z\", \"tool\": \"leansearch\", \"query\": \"Internal modules over a monoid object with tensor product action and equivariant maps form a category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep\", \"CategoryTheory.Mod_.instCategory\", \"ModuleCat.MonoidalCategory.tensorObj\", \"SemimoduleCat.MonoidalCategory.tensorHom_def\", \"ModuleCat.MonoidalCategory.tensorObj_def\", \"SemimoduleCat.MonoidalCategory.instMonoidalCategoryStruct\", \"CategoryTheory.Mod_Class\", \"ModuleCat.instMonoidalClosed\"], \"digest\": \"495bcadc373cadd5\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only; no scheme coefficient specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj, CategoryTheory.IsModHom",
+   "results": "{\"t\": \"2026-10-16T20:07:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ModObj, CategoryTheory.IsModHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.instIsModHomId\", \"CategoryTheory.IsModHom\", \"CategoryTheory.instIsModHomInvOfHom\", \"CategoryTheory.instIsModHomComp\", \"CategoryTheory.Mod.scalarRestriction_hom\", \"CategoryTheory.Mod_.scalarRestriction_hom\", \"CategoryTheory.IsModHom.smul_hom\", \"CategoryTheory.IsMod_Hom.smul_hom\"], \"digest\": \"0ffd6c52e0791d06\"}",
+   "date": "2026-10-17",
+   "verdict": "component match only; no scheme coefficient specialization"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -28,5 +147,21 @@
  "blueprint_uses": [],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sp-coefficient-towers"
+ "unit": "sk-def-sp-coefficient-towers",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-modules",
+  "worker": "stage1",
+  "summary": "Reused the existing Mathlib-backed module-object definition, the commutative ring-object definition, and the coefficient-ring construction. The two proof steps specialize these statements to the coefficient ring on the small pro-etale site and introduce the requested notation. No new nodes or Lean attachments were needed.",
+  "blueprint": "Realizes the complete pur713-def-modules definition paragraph: the generic module action, axioms, morphisms and category come from the existing module-object and ring-object nodes, and the final pro-etale notation is the specialization of pur713-def-coefficient-rings.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NA-3c35ede9d",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-3c35ede9d (reviewer sub-agent of L); spot-checked: I read the source main-20261015 pur713-def-modules.md (order 2477) and the item JSON in full. The statement is verbatim the source, not weakened, and the delivery creates no new nodes. Step 1: pur713-def-ring-object (Mathlib leaf CommMon/MonObj) supplies a monoid object with associativity and both unit laws including the associator and unitors. Clauses 1, 2 and 4 of det-def-sfb-module-objects-definition then give exactly the unital associative action, the action-preserving morphisms and Mod_R(C). I checked the Mathlib lines against the server's Mathlib: Mod.lean 59-65, 154-161, 187-188, 227-230, 300-316 and Action/Basic.lean 174-181 all match, with the associator in the stated direction. Step 2: the ring-object node fixes Sh(X_Proet,Ab) with the sheafified tensor over Z and unit Z_X. pur713-def-coefficient-rings has the same hypotheses (ell, Qlbar, finite E, any X, T in {O_E,E,Qlbar}) and gives R_{X,T}=p_X^*T as a commutative ring object of that category. pur713-def-module-category confirms the same small-site notation and Mod(X_Proet,T)=Mod_{R_{X,T}}(Sh(X_Proet,Ab)). No base-change morphism is involved, and the coefficient category is not identified with any other category; no SGA source is cited. There is no cycle: the dependency closure has 275 nodes and does not contain the item. proof_deps equals the union of the uses lists. Edge cases checked: R=Z_X (the action is forced to be lambda), R=0, M=0, X empty, E=Q_ell. Duplicates: sk-/det-def-sfb-module-objects are broader and are reused as dependencies. det-def-sfb-module-objects-sheaves covers only the last clause for a condensed Lambda, and both nodes are imported blueprint nodes, so same_as=[] is defensible. The Mathlib searches cover all three kinds, with the two failed Loogle queries recorded as errors. No fixes and no tool_uses. The item's import flag 'unreachable' is now stale because pur713-def-module-category cites it; clearing it is maintainer housekeeping."
+ }
 }
