@@ -289,11 +289,14 @@ private noncomputable def canonicalComponentArrow (X : Scheme.{u}) (U : X.ProEt)
   (pointComponentsEquiv X U _).symm (ContinuousMap.id _)
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private noncomputable def canonicalComponentArrow_terminal (X : Scheme.{u}) (U : X.ProEt)
     [IsAffine U.left] :
     IsTerminal (CostructuredArrow.mk (S := (profiniteToProEtOf X).op)
       (canonicalComponentArrow X U).op) := by
   sorry
+-/
 
 private noncomputable def kanComparison (X : Scheme.{u}) (E : Type u) [NormedField E] :
     (profiniteToProEtOf X).op.lan.obj (Profinite.continuousCoefficientRingObj E).obj ⟶

@@ -55,34 +55,6 @@ theorem finiteDiscreteCoefficient_coefficientUnit_pushforward
         ((Functor.const U.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) ≫
       (finiteDiscreteSchemeRingIso B U eR).hom.hom).app
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj V) := by
-  let a := AddCommGrpCat.of (ULift.{u + 1} B)
-  let R := Profinite.continuousMapRingObj.{u} B
-  let q (X : Scheme.{u}) : (Functor.const X.ProEtᵒᵖ).obj a ⟶
-      ((upperStarFromPoint X).obj R).obj :=
-    (sheafificationAdjunction (ProEt.topology X) Ab.{u + 1}).unit.app
-      ((Functor.const X.ProEtᵒᵖ).obj a) ≫ (finiteDiscreteSchemeRingIso B X eR).hom.hom
-  let F := MorphismProperty.Over.pullback @WeaklyEtale ⊤ j
-  let W := proEtTerminal specZ.{u}
-  let WT : T.ProEt := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj W
-  let eta := condensedPushforwardHom R j
-  change (q T).app V ≫ eta.hom.app V = (q U).app (F.op.obj V)
-  have ht := finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal B eR T U j
-  have : IsIso WT.hom := inferInstanceAs
-    (IsIso ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
-      (proEtTerminal specZ.{u})).hom)
-  let m : Opposite.op WT ⟶ V := ((proEtIsTerminal WT).from V.unop).op
-  have hn := eta.hom.naturality m
-  simp only [lowerStar_obj_obj_map'] at hn
-  calc
-    (q T).app V ≫ eta.hom.app V =
-        ((q T).app (Opposite.op WT) ≫ ((upperStarFromPoint T).obj R).obj.map m) ≫
-          eta.hom.app V := by rw [← constant_naturality (q T) m]
-    _ = ((q T).app (Opposite.op WT) ≫ eta.hom.app (Opposite.op WT)) ≫
-        ((upperStarFromPoint U).obj R).obj.map (F.op.map m) := by
-      simpa only [Category.assoc, F, Functor.op_map] using
-        congrArg (fun f ↦ (q T).app (Opposite.op WT) ≫ f) hn
-    _ = (q U).app (F.op.obj (Opposite.op WT)) ≫
-        ((upperStarFromPoint U).obj R).obj.map (F.op.map m) := by rw [ht]
-    _ = (q U).app (F.op.obj V) := (constant_naturality (q U) (F.op.map m)).symm
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

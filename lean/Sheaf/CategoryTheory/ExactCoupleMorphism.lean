@@ -30,7 +30,9 @@ namespace CategoryTheory.BigradedExactCouple
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- A bidegree-preserving pair commuting with the three exact-couple maps induces
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- A bidegree-preserving pair commuting with the three exact-couple maps induces
 compatible maps of all pages. For half-plane couples its map on `D^{0,n}` preserves
 the canonical image filtration, and its graded map corresponds to the infinite-page map.
 
@@ -51,7 +53,7 @@ squares are natural in the couple map. The canonical maps onto the graded pieces
 epimorphic, so the graded map corresponds to the infinite-page map under these
 isomorphisms (def-sp-convergence and thm-sp-half-plane-convergence).
 Source: blueprint lem-sp-couple-morphism, Proof; Stacks Tags 011R, 011T and 012F
-(blueprint: lem-sp-couple-morphism). -/
+(blueprint: lem-sp-couple-morphism). - /
 theorem coupleMorphism
     (X Y : BigradedExactCouple C 0)
     (tD : ∀ p q : ℤ, X.D p q ⟶ Y.D p q)
@@ -195,5 +197,6 @@ theorem coupleMorphism
     rw [← he, Category.assoc, Iso.hom_inv_id_assoc, ← Category.assoc, hpage, Category.assoc, he']
   · intro p q
     simp [gr]
+-/
 
 end CategoryTheory.BigradedExactCouple

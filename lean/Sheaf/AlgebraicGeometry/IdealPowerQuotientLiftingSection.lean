@@ -31,10 +31,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option maxHeartbeats 800000 in
 -- Elaborating restricted module maps and their components needs a larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
-/-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
+/ -- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
 Proof: On an affine open write I = (f_1,...,f_t) and F = M~. The condition hann
 identifies A_n with Ann_M(I^n)~: localization commutes with this annihilator because
@@ -65,7 +67,7 @@ for the unit ideal take degree zero and the map corresponding to the section.
 Source: Stacks Project, Properties, Lemma 01PM (affine denominator construction)
 and Lemma 01PQ (finite affine gluing), https://stacks.math.columbia.edu/tag/01PM
 and https://stacks.math.columbia.edu/tag/01PQ.
-(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section). -/
+(blueprint: lem-weil-pbc-ideal-power-quotient-local-lifting-section). - /
 theorem ideal_power_quotient_local_lifting_section
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -211,5 +213,6 @@ theorem ideal_power_quotient_local_lifting_section
   rw [rone, hα]
   exact (congrArg (fun f ↦ f.app (U ⊓ V.1.1)
     (F.presheaf.map (homOfLE inf_le_left).op s)) (hq n m hnm)).symm
+-/
 
 end AlgebraicGeometry.Scheme

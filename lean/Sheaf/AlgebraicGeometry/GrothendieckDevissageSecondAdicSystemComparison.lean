@@ -50,6 +50,8 @@ private theorem quotientSwapMap_projection {X : Scheme.{u}} (I K : X.IdealSheafD
   simp [quotientSwapMap, formalModuleQuotientπ]
 -/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private def quotientSwapIso {X : Scheme.{u}} (I K : X.IdealSheafData)
     (H : X.Modules) (e n : ℕ) :
     formalModuleQuotient I n (formalModuleQuotient K e H) ≅
@@ -66,6 +68,7 @@ private def quotientSwapIso {X : Scheme.{u}} (I K : X.IdealSheafData)
     apply (cancel_epi (formalModuleQuotientπ I n H)).1
     simp only [quotientSwapMap_projection_assoc,
       quotientSwapMap_projection, Category.comp_id]
+-/
 
 /-- The canonical quotient interchange, natural in both positive indices.
 Source: Stacks Project, Tag 088A, the quotient by I^n + K^e

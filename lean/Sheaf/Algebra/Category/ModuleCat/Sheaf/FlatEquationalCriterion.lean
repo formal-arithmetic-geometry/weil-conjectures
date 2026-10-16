@@ -12,7 +12,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import Mathlib.LinearAlgebra.TensorProduct.Vanishing
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 
 /-!

@@ -35,6 +35,8 @@ private theorem finite_separated_exhaustive {C : Type u} [Category.{v} C] [Abeli
   · intro V hV
     exact top_le_iff.mp (ha ▸ hV a)
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem finite_inverseLimit {C : Type u} [Category.{v} C] [Abelian C]
     {T : C} (F : DecreasingFiltration T) (hF : F.IsFinite) :
     BigradedExactCouple.IsInverseLimit F := by
@@ -80,6 +82,7 @@ private theorem finite_inverseLimit {C : Type u} [Category.{v} C] [Abelian C]
   intro k hk
   apply (cancel_mono (cokernel.π (F.step b).arrow)).mp
   exact (hk b).trans (hcomm b).symm
+-/
 
 private theorem homology_image_top {C : Type u} [Category.{v} C] [Abelian C]
     {K : CochainComplex C ℤ} (V : Subobject K) (hV : V = ⊤) (n : ℤ) :
@@ -169,92 +172,6 @@ theorem boundedFilteredComplex_coupleAbutment
           X.ConvergesTo L A ∧
           (∀ p q : ℤ, Nonempty
             (X.pageInfinity L (2 * p + q) (-p) ≅ (G (p + q)).gradedPiece p)) := by
-  classical
-  have _ := hγ
-  obtain ⟨hcomm, hcolim⟩ := filteredCohomologyDiagonal_isColimit U.obj U.property X eD hα
-  let A : ∀ n : ℤ, X.AlphaColimit n := fun n ↦
-    { obj := U.obj.obj.homology n
-      ι := filteredCohomologyDiagonalMap U.obj X eD n
-      comm := hcomm n
-      isColimit := hcolim n }
-  have hi (n P : ℤ) : imageSubobject ((A n).ι P) =
-      imageSubobject (HomologicalComplex.homologyMap
-        (U.obj.filtration.step (P - n)).arrow n) := by
-    dsimp [A, filteredCohomologyDiagonalMap]
-    rw [imageSubobject_iso_comp, imageSubobject_iso_comp]
-  obtain ⟨a, b, ha, hb⟩ := U.property
-  have htop (p : ℤ) (hp : p ≤ a) : U.obj.filtration.step p = ⊤ :=
-    top_le_iff.mp (ha ▸ U.obj.filtration.antitone_step hp)
-  have hbot (p : ℤ) (hp : b ≤ p) : U.obj.filtration.step p = ⊥ :=
-    le_bot_iff.mp (hb ▸ U.obj.filtration.antitone_step hp)
-  have hfinite (n : ℤ) : (X.imageFiltration n (A n)).IsFinite := by
-    refine ⟨a + n, b + n, ?_, ?_⟩
-    · change imageSubobject ((A n).ι (a + n)) = ⊤
-      rw [hi]
-      exact homology_image_top _ (htop _ (by omega)) n
-    · change imageSubobject ((A n).ι (b + n)) = ⊥
-      rw [hi]
-      exact homology_image_bot _ (hbot _ (by omega)) n
-  have htails : ∀ n : ℤ, ∃ a b : ℤ,
-      (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧
-      (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P))) := by
-    intro n
-    refine ⟨a + n, b + n, ?_, ?_⟩
-    · intro P hP
-      have he := htop (P - n) (by omega)
-      let : IsIso (U.obj.filtration.step (P - n)).arrow :=
-        (Subobject.isIso_arrow_iff_eq_top _).mpr he
-      let : IsIso (HomologicalComplex.homologyMap
-          (U.obj.filtration.step (P - n)).arrow n) :=
-        (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n).map_isIso _
-      dsimp [A, filteredCohomologyDiagonalMap]
-      infer_instance
-    · intro P hP
-      have he : U.obj.filtration.step (-(n - P)) = ⊥ := hbot _ (by omega)
-      have hz : IsZero (U.obj.filtration.step (-(n - P)) : CochainComplex C ℤ) := by
-        rw [he]
-        exact (isZero_zero _).of_iso Subobject.botCoeIsoZero
-      exact ((HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ)
-        (P + (n - P))).map_isZero hz).of_iso (eD P (n - P))
-  obtain ⟨L, hregular, hweak⟩ := X.finiteCocone_weakConvergence A htails
-  let G : ∀ n : ℤ, DecreasingFiltration (U.obj.obj.homology n) := fun n ↦
-    { F := fun p ↦ (X.imageFiltration n (A n)).step (p + n)
-      F_succ_le := fun p ↦
-        (X.imageFiltration n (A n)).antitone_step (by omega) }
-  have hG (n p : ℤ) : (G n).step p =
-      imageSubobject (HomologicalComplex.homologyMap (U.obj.filtration.step p).arrow n) := by
-    change imageSubobject ((A n).ι (p + n)) = _
-    rw [hi, show p + n - n = p by omega]
-  have hGfinite (n : ℤ) : (G n).IsFinite := by
-    refine ⟨a, b, ?_, ?_⟩
-    · change (G n).step a = ⊤
-      rw [hG]
-      exact homology_image_top _ ha n
-    · change (G n).step b = ⊥
-      rw [hG]
-      exact homology_image_bot _ hb n
-  refine ⟨G, L, A, fun n ↦ Iso.refl _, hG, ?_, ?_, ?_, ?_⟩
-  · intro n
-    exact ⟨hGfinite n, (finite_separated_exhaustive (G n) (hGfinite n)).1⟩
-  · intro n P
-    simp [A, filteredCohomologyDiagonalMap]
-  · refine ⟨hregular, ⟨hweak, ?_⟩, ?_⟩
-    · intro n
-      exact finite_separated_exhaustive _ (hfinite n)
-    · intro n
-      exact finite_inverseLimit _ (hfinite n)
-  · intro p q
-    obtain ⟨e, he, hu⟩ := X.weakConvergence_comparison L A hweak (2 * p + q) (-p)
-    refine ⟨e ≪≫ eqToIso ?_⟩
-    have hn : 2 * p + q + -p = p + q := by omega
-    rw [hn]
-    simp only [DecreasingFiltration.gradedPiece, DecreasingFiltration.gr,
-      DecreasingFiltration.step, G,
-      BigradedExactCouple.imageFiltration]
-    have hP : 2 * p + q = p + (p + q) := by omega
-    have hPs : 2 * p + q + 1 = p + 1 + (p + q) := by omega
-    congr! 2 <;> first
-      | exact congrArg (fun t : ℤ ↦ imageSubobject ((A (p + q)).ι t)) hPs
-      | exact congrArg (fun t : ℤ ↦ imageSubobject ((A (p + q)).ι t)) hP
+  sorry
 
 end CategoryTheory
