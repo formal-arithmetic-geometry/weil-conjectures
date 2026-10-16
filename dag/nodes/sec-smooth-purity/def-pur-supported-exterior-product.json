@@ -1,131 +1,239 @@
 {
-  "id": "def-pur-supported-exterior-product",
-  "blueprint": {
-    "is": "def-pur-supported-exterior-product",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-supported-exterior-product",
+ "blueprint": {
+  "is": "def-pur-supported-exterior-product",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Exterior product in cohomology with closed support",
+ "statement": "Let $k$ be an algebraically closed field, $A$ a finite commutative ring, and $X,Y$ schemes [def-pc-scheme] separated and of finite type over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $i:Z\\hookrightarrow X$ and $j:W\\hookrightarrow Y$ be closed immersions [def-weil-closed-immersion]. Put $P=X\\times_kY$, with projections $p:P\\to X$, $q:P\\to Y$, and $h=i\\times_kj:Z\\times_kW\\hookrightarrow P$ [def-pc-base-change]. On affine opens $\\operatorname{Spec}B\\subset X$ and $\\operatorname{Spec}C\\subset Y$, if $Z$ and $W$ are cut out by $I\\subset B$ and $J\\subset C$, the product immersion is cut out by the surjection $B\\otimes_k C\\to(B/I)\\otimes_k(C/J)$ with kernel $I\\otimes_k C+B\\otimes_k J$. This also identifies its complement with the union of the inverse images of the two open complements. Work on small representatives of the small etale sites in the universe of [def-weil-size-convention], with ordinary constant-$A$ module derived categories [def-weil-pbc-derived-categories]. For $K\\in D^+(X_{\\mathrm{et}},A)$ and $L\\in D^+(Y_{\\mathrm{et}},A)$ suppose that\n$$F=K\\boxtimes_A^L L:=p^{-1}K\\otimes_A^Lq^{-1}L$$\nis bounded below; the inverse image and derived tensor are those of [def-weil-pbc-inverse-image, def-kun-derived-tensor]. Use the module-valued kernel-of-restriction and its derived functor [def-pur-etale-derived-supported-sections], whose cohomology is [def-pur-support-cohomology]. The supported exterior product is the following specified morphism in the ordinary unbounded derived category $D(A)$ [def-weil-abstract-derived-category]:\n$$\n\\kappa^{Z,W}_{K,L}:R\\Gamma_Z(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\longrightarrow R\\Gamma_{Z\\times_kW}(P,F).\n$$\n\nHere is an explicit construction of the map. For any of the closed immersions $a:D\\hookrightarrow T$ above, with open complement $v:V\\hookrightarrow T$, and any $A$-module $M$, put\n$$C_a(M)=a_*\\underline M_D,\\qquad e_a:\\underline M_T\\longrightarrow C_a(M),$$\nwhere the constant sheaf is [def-weil-pbc-constant-sheaf], the direct image is [def-weil-pbc-direct-image], and $e_a$ is the inverse-image/direct-image unit with the constant inverse-image identification. Equivalently, $e_a$ is the cokernel of $v_!\\underline M_V\\to\\underline M_T$ in the module open-closed sequence [lem-weil-pbc-open-closed-short-exact]. The constant-sheaf adjunction is the sheafification universal property: a map $\\underline M_T\\to G$ is a map $M\\to\\Gamma(T,G)$. The cokernel description and the extension-by-zero adjunction [lem-weil-pbc-extension-by-zero-adjunction] therefore give\n$$\\operatorname{Hom}_T(C_a(M),G)=\\operatorname{Hom}_A(M,\\Gamma_D(T,G)).$$\nFix this adjunction by requiring that precomposition with $e_a$ is the constant-sheaf adjoint of the inclusion $\\Gamma_D(T,G)\\hookrightarrow\\Gamma(T,G)$.\n\nThe stalks of $C_a(M)$ are $M$ on $D$ and zero off $D$: apply the finite stalk formula [lemma-weil-pbc-finite-stalk-formula], closed immersions being finite [lem-weil-pbc-closed-immersion-finite], and [lem-weil-pbc-constant-sheaf-geometric-stalk]. Exact stalks [prop-weil-pbc-geometric-stalks-exact] and their conservativity [lemma-weil-pbc-geometric-stalk-conservative] thus make $C_a$ exact. The identical stalk argument makes $M\\mapsto\\underline M_T$ exact, so the quotient map $e_a$ also descends termwise to derived categories. Apply it termwise to complexes. The total right derived functor of $\\Gamma_D$ is computed on K-injective resolutions by [prop-weil-pbc-kinjective-resolutions-exist, lem-weil-pbc-kinjective-total-derived]; on bounded-below objects use the injective representatives of [lem-weil-pbc-dplus-injective-representative]. Since $C_a$ is exact, [lem-pc-derived-adjoint-functors] gives the adjunction $C_a:D(A)\\rightleftarrows D(T_{\\mathrm{et}},A):R\\Gamma_D$, with $C_a$ the left adjoint. Denote its evaluation counit by $\\epsilon_a$. As a left adjoint, $C_a$ preserves direct sums, so its termwise application commutes with the direct sums in total tensor complexes.\n\nFor modules $M,N$, define\n$$\\theta_{M,N}:C_h(M\\otimes_A N)\\longrightarrow p^{-1}C_i(M)\\otimes_Aq^{-1}C_j(N)$$\nby factoring the constant-section tensor map followed by $p^{-1}e_i\\otimes q^{-1}e_j$ through $e_h$. Sheaf tensor is [def-pur-sheaf-tensor-product]. This factorization is unique: its target is zero on each of $(X\\setminus Z)\\times_kY$ and $X\\times_k(Y\\setminus W)$, whose union is the complement of $Z\\times_kW$, so the map kills the open-extension term in the cokernel defining $e_h$. Extend $\\theta$ to direct-sum total complexes by its map on each bidegree $(r,s)$ summand, with differential $d\\otimes1+(-1)^r1\\otimes d$. Uniqueness of the quotient factorization makes $\\theta$ natural in both modules: both composites for a module map agree after precomposition with the epimorphism $e_h$. In particular $\\theta_{r+1,s}C_h(d_M\\otimes1)=(p^{-1}C_i(d_M)\\otimes1)\\theta_{r,s}$ and $\\theta_{r,s+1}C_h(1\\otimes d_N)=(1\\otimes q^{-1}C_j(d_N))\\theta_{r,s}$; adding the latter with coefficient $(-1)^r$ proves compatibility with the total differential.\n\nUse K-flat resolutions to derive this comparison. The needed compatibility is checked directly on geometric stalks: $C_a(Q)$ has stalk $Q$ or zero, and exact inverse image has stalk the corresponding original stalk [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-global-sections-stalk-comparison]. For a K-flat complex $Q$ of $A$-modules and an acyclic sheaf complex $E$, every stalk of $C_a(Q)\\otimes_AE$ is $Q\\otimes_A E_{\\bar t}$ or zero, hence acyclic. Here tensor commutes with stalks by [lem-pod-etale-stalk-tensor-scalar]. Its fixed-$A$ tensor and the tensor over the constant sheaf $A_T$ agree: sections of $A_T$ are locally represented by elements of $A$, so the two balancing relations agree after sheafification. Geometric stalks commute with direct sums, since the stalk is a filtered colimit of sections and sheafification does not change stalks; hence the same tensor formula holds for direct-sum total complexes. Exact conservative stalks detect acyclicity degree by degree. When each $Q^r$ is flat over $A$, these stalk formulas also show that tensoring any monomorphism of sheaves with $C_a(Q^r)$, or its inverse image, is injective on every stalk and hence is a monomorphism. Thus the resulting complexes have flat terms as required by the cited localization statement. Thus these coefficient complexes, and their inverse images, are K-flat. Resolutions exist by [lem-pc-kflat-resolution], applied also to the one-point site for $A$-modules. The two-variable localization of K-flat complexes [lem-weil-pbc-site-derived-tensor-descent] consequently gives the specified derived comparison\n$$\\theta^L_{M,N}:C_h(M\\otimes_A^LN)\\longrightarrow p^{-1}C_i(M)\\otimes_A^Lq^{-1}C_j(N),\\qquad M,N\\in D(A).$$\n\nWriting $M=R\\Gamma_Z(X,K)$ and $N=R\\Gamma_W(Y,L)$, define $\\kappa^{Z,W}_{K,L}$ to be the adjoint, under $C_h\\dashv R\\Gamma_{Z\\times_kW}$, of\n$$C_h(M\\otimes_A^LN)\\xrightarrow{\\theta^L_{M,N}}p^{-1}C_i(M)\\otimes_A^Lq^{-1}C_j(N)\n\\xrightarrow{p^{-1}\\epsilon_i\\otimes_A^Lq^{-1}\\epsilon_j}p^{-1}K\\otimes_A^Lq^{-1}L.$$\nThis specifies pulling back and tensoring supported sections, derived with K-flat tensor and injective support resolutions, without requiring $M\\otimes_A^LN$ to be bounded below. Its composite with forgetting the output support is the ordinary exterior product [def-kun-kunneth-map] for $S=\\operatorname{Spec}k$ after forgetting both input supports, where $D((\\operatorname{Spec}k)_{\\mathrm{et}},A)$ is identified with $D(A)$ by the exact global-sections equivalence $\\Gamma(\\operatorname{Spec}k,-)$ [lem-weil-pbc-geometric-point-pullback-stalk]; under it $Rf_*K$ for the structure map $f:X\\to\\operatorname{Spec}k$ becomes $R\\Gamma(X,K)$, since $\\Gamma(\\operatorname{Spec}k,f_*I)=\\Gamma(X,I)$ for a K-injective representative $I$, and the constant-sheaf functor becomes the inverse image along $f$: indeed, precomposing the displayed adjoint with $e_h$ replaces $\\theta$ by $p^{-1}e_i\\otimes q^{-1}e_j$, and the normalization of the three adjunctions replaces their counits by the ordinary evaluation maps. Deriving preserves this equality of natural maps by the same K-flat localization. Its cohomology groups use the support functors of [def-pur-support-cohomology].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-supported-exterior-product.md",
+  "place": "node def-pur-supported-exterior-product, order 1938"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "def-pur-etale-derived-supported-sections",
+  "def-pur-support-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pc-derived-adjoint-functors",
+  "def-pur-sheaf-tensor-product",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-global-sections-stalk-comparison",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-kun-kunneth-map",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived exterior product of etale sheaf cohomology with closed supports",
+   "results": "{\"t\": \"2026-10-16T22:46:41Z\", \"tool\": \"leanfinder\", \"query\": \"Derived exterior product of etale sheaf cohomology with closed supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"CategoryTheory.Sheaf.H\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\"], \"digest\": \"d9977c3be6c43a40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Exterior product in cohomology with closed support",
-  "statement": "Let $Z\\subset X,W\\subset Y$ be closed subschemes of\nseparated finite-type\nschemes over an algebraically closed field $k$. Fix a finite\ncommutative coefficient ring $A$, and let $K,L$ be bounded-below\ncomplexes of $A$-module sheaves on their etale sites whose\nderived exterior product\nis bounded below. The *supported exterior product* is the map\n\n$$\n\\kappa^{Z,W}_{K,L}:\nR\\Gamma_Z(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\longrightarrow\nR\\Gamma_{Z\\times W}(X\\times_kY,K\\boxtimes_A^L L).\n$$\n\nIt is obtained by pulling back sections in the two factors and\ntensoring them: their supports meet in $Z\\times W$.\nDerive this pairing with K-flat tensor and injective support\nresolutions. Thus its composition with the map forgetting support\nis the ordinary exterior product,\nand its cohomology uses the\nsupport functors.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-supported-exterior-product.md",
-    "place": "node def-pur-supported-exterior-product, order 1938"
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\"",
+   "results": "{\"t\": \"2026-10-16T22:46:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"support\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_pow\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ\"], \"digest\": \"f47075671f995802\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-kun-derived-tensor",
-    "def-kun-kunneth-map",
-    "def-pur-support-cohomology",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1938,
-  "blueprint_uses": [
-    "def-kun-derived-tensor",
-    "def-kun-kunneth-map",
-    "def-pur-support-cohomology",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-kun-derived-tensor",
-    "def-kun-kunneth-map",
-    "def-pur-support-cohomology",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "supportedExteriorProduct|supportedSections|sectionsWithSupport|cohomologyWithSupport",
+   "results": "{\"t\": \"2026-10-16T22:46:42Z\", \"tool\": \"grep\", \"query\": \"supportedExteriorProduct|supportedSections|sectionsWithSupport|cohomologyWithSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:18-37 and Mathlib/Algebra/Homology/LocalCohomology.lean:18-45; these supply ordinary sheaf Ext cohomology and ideal-supported module local cohomology, respectively, not this map.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SupportedExteriorProduct",
-    "declaration": "AlgebraicGeometry.Etale.supportedExteriorProduct",
-    "declarations": [
-      "AlgebraicGeometry.Etale.supportedSheaf_isMonoidal",
-      "AlgebraicGeometry.Etale.supportedSheaf_monoidalPreadditive",
-      "AlgebraicGeometry.Etale.supportedSheaf_isMonoidalGeneric",
-      "AlgebraicGeometry.Etale.supportedSheaf_monoidalPreadditiveGeneric",
-      "AlgebraicGeometry.Etale.supportedSheafTensorGeneric",
-      "AlgebraicGeometry.Etale.supportedSheafTensorGeneric_additive",
-      "AlgebraicGeometry.Etale.supportedSheafTensorGeneric_obj_additive",
-      "AlgebraicGeometry.Etale.supportedComplexTensorGeneric",
-      "AlgebraicGeometry.Etale.supportedTotalTensorGeneric",
-      "AlgebraicGeometry.Etale.supportedComplexTensorGeneric_eq",
-      "AlgebraicGeometry.Etale.supportedDerivedTensorLocalizationGeneric",
-      "AlgebraicGeometry.Etale.supportedTensorInclusionGeneric",
-      "AlgebraicGeometry.Etale.supportedSheafTensorMapGeneric",
-      "AlgebraicGeometry.Etale.supportedSheafTensor",
-      "AlgebraicGeometry.Etale.supportedComplexTensor",
-      "AlgebraicGeometry.Etale.supportedCoefficients",
-      "AlgebraicGeometry.Etale.supportedCoefficientQuotient",
-      "AlgebraicGeometry.Etale.supportedCoefficients_additive",
-      "AlgebraicGeometry.Etale.supportedCoefficients_exact",
-      "AlgebraicGeometry.Etale.supportedCoefficients_preservesFiniteLimits",
-      "AlgebraicGeometry.Etale.supportedCoefficients_preservesFiniteColimits",
-      "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientAdjunction",
-      "AlgebraicGeometry.Etale.supportedCoefficientAdjunction",
-      "AlgebraicGeometry.Etale.supportedSectionsDerived",
-      "AlgebraicGeometry.Etale.supportedCoefficientDerivedAdjunction",
-      "AlgebraicGeometry.Etale.supportedProductImmersion",
-      "AlgebraicGeometry.Etale.supportedProductImmersion_isClosedImmersion",
-      "AlgebraicGeometry.Etale.constantPresheafTensor",
-      "AlgebraicGeometry.Etale.supportedConstantTensor",
-      "AlgebraicGeometry.Etale.constantExteriorTensor",
-      "AlgebraicGeometry.Etale.supportedFirstCoefficients",
-      "AlgebraicGeometry.Etale.supportedSecondCoefficients",
-      "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensor",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensor",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorComplexHom",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorComplexCondition",
-      "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorComplex",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorComplex",
-      "AlgebraicGeometry.Etale.supportedDerivedTensorMap",
-      "AlgebraicGeometry.Etale.supportedDerivedTensorLocalization",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorDerivedHom",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorDerivedCondition",
-      "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorDerived",
-      "AlgebraicGeometry.Etale.supportedCoefficientTensorDerived",
-      "AlgebraicGeometry.Etale.supportedFirstEvaluation",
-      "AlgebraicGeometry.Etale.supportedSecondEvaluation",
-      "AlgebraicGeometry.Etale.supportedExteriorProduct"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/SupportedExteriorProduct.lean",
-    "statement": "def supportedExteriorProduct (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) : (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶ (supportedSectionsDerived A (supportedProductImmersion f g i j)).obj (externalProduct (ModuleCat.{u + 1} A) f g K L)",
-    "branch": "newtargets-dag",
-    "by": "N4",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "The dependency has no recorded Lean declaration. This module constructs the canonical supported product as the adjoint of the coefficient tensor comparison followed by pulled-back support evaluation counits. All choices are uniquely normalized on ordinary quotient sections and signed total-complex representatives. The unbounded construction restricts to the source bounded-below case."
+  {
+   "tool": "leansearch",
+   "query": "Derived exterior product of etale sheaf cohomology with closed supports",
+   "results": "{\"t\": \"2026-10-16T22:46:43Z\", \"tool\": \"leansearch\", \"query\": \"Derived exterior product of etale sheaf cohomology with closed supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.formallyEtale_iff\", \"Algebra.FormallyEtale.instTensorProduct\", \"extDeriv_fun_add\", \"extDerivWithin_pullback\", \"extDeriv_apply_vectorField_of_pairwise_commute\", \"extDerivWithin_congr\"], \"digest\": \"ef4f2e2458404366\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-5c1afdfc7",
-    "group": "N4",
-    "result": "pass",
-    "note": "Wrote review.md. Checked all three modules, dependencies, canonical maps, witnesses, universes, edge cases, docstrings and verbatim signatures. scompile.py passed all files. Original blueprint Markdown was unavailable; this source-verification limitation is documented. No repairs or branch changes."
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pairing on local sheaf cohomology given by derived sections with supports and external tensor product",
+   "results": "{\"t\": \"2026-10-16T22:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor pairing on local sheaf cohomology given by derived sections with supports and external tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.instAddCommGroupH\"], \"digest\": \"af3109f99672eb92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $Z\\subset X,W\\subset Y$ be closed subschemes of\nseparated finite-type\nschemes over an algebraically closed field $k$. Fix a finite\ncommutative coefficient ring $A$, and let $K,L$ be bounded-below\ncomplexes of $A$-module sheaves on their etale sites whose\nderived exterior product\nis bounded below. The *supported exterior product* is the map\n\n$$\n\\kappa^{Z,W}_{K,L}:\nR\\Gamma_Z(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\longrightarrow\nR\\Gamma_{Z\\times W}(X\\times_kY,K\\boxtimes_A^L L).\n$$\n\nIt is obtained by pulling back sections in the two factors and\ntensoring them: their supports meet in $Z\\times W$.\nDerive this pairing with K-flat tensor and injective support\nresolutions.\n\nIts composition with the map forgetting support is the ordinary exterior\nproduct.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "localCohomology|Sheaf.*[Cc]up|[Cc]up.*Sheaf|[Ss]upport.*[Cc]ohomology",
+   "results": "{\"t\": \"2026-10-16T22:47:49Z\", \"tool\": \"grep\", \"query\": \"localCohomology|Sheaf.*[Cc]up|[Cc]up.*Sheaf|[Ss]upport.*[Cc]ohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"} Read Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:18-37 and Mathlib/Algebra/Homology/LocalCohomology.lean:18-45; these supply ordinary sheaf Ext cohomology and ideal-supported module local cohomology, respectively, not this map.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural cup product pairing from derived local sections with support to derived sections of tensor product",
+   "results": "{\"t\": \"2026-10-16T23:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"Natural cup product pairing from derived local sections with support to derived sections of tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"ModuleCat.Tilde.toOpen\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.LocalGeneratorsData.generators\"], \"digest\": \"e1c3a61050eecd4f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*[Ll]ocal[Cc]ohomology|[Cc]up[Pp]roduct|[Ee]xternal[Pp]roduct|[Ss]upported.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-16T23:04:16Z\", \"tool\": \"grep\", \"query\": \"Sheaf.*[Ll]ocal[Cc]ohomology|[Cc]up[Pp]roduct|[Ee]xternal[Pp]roduct|[Ss]upported.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\"], \"digest\": \"43def9bdef4c38f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-16T23:04:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans\"], \"digest\": \"afdddf2b0b2de5fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1938,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map",
+  "def-pur-support-cohomology",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map",
+  "def-pur-support-cohomology",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedExteriorProduct",
+  "declaration": "AlgebraicGeometry.Etale.supportedExteriorProduct",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedSheaf_isMonoidal",
+   "AlgebraicGeometry.Etale.supportedSheaf_monoidalPreadditive",
+   "AlgebraicGeometry.Etale.supportedSheaf_isMonoidalGeneric",
+   "AlgebraicGeometry.Etale.supportedSheaf_monoidalPreadditiveGeneric",
+   "AlgebraicGeometry.Etale.supportedSheafTensorGeneric",
+   "AlgebraicGeometry.Etale.supportedSheafTensorGeneric_additive",
+   "AlgebraicGeometry.Etale.supportedSheafTensorGeneric_obj_additive",
+   "AlgebraicGeometry.Etale.supportedComplexTensorGeneric",
+   "AlgebraicGeometry.Etale.supportedTotalTensorGeneric",
+   "AlgebraicGeometry.Etale.supportedComplexTensorGeneric_eq",
+   "AlgebraicGeometry.Etale.supportedDerivedTensorLocalizationGeneric",
+   "AlgebraicGeometry.Etale.supportedTensorInclusionGeneric",
+   "AlgebraicGeometry.Etale.supportedSheafTensorMapGeneric",
+   "AlgebraicGeometry.Etale.supportedSheafTensor",
+   "AlgebraicGeometry.Etale.supportedComplexTensor",
+   "AlgebraicGeometry.Etale.supportedCoefficients",
+   "AlgebraicGeometry.Etale.supportedCoefficientQuotient",
+   "AlgebraicGeometry.Etale.supportedCoefficients_additive",
+   "AlgebraicGeometry.Etale.supportedCoefficients_exact",
+   "AlgebraicGeometry.Etale.supportedCoefficients_preservesFiniteLimits",
+   "AlgebraicGeometry.Etale.supportedCoefficients_preservesFiniteColimits",
+   "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientAdjunction",
+   "AlgebraicGeometry.Etale.supportedCoefficientAdjunction",
+   "AlgebraicGeometry.Etale.supportedSectionsDerived",
+   "AlgebraicGeometry.Etale.supportedCoefficientDerivedAdjunction",
+   "AlgebraicGeometry.Etale.supportedProductImmersion",
+   "AlgebraicGeometry.Etale.supportedProductImmersion_isClosedImmersion",
+   "AlgebraicGeometry.Etale.constantPresheafTensor",
+   "AlgebraicGeometry.Etale.supportedConstantTensor",
+   "AlgebraicGeometry.Etale.constantExteriorTensor",
+   "AlgebraicGeometry.Etale.supportedFirstCoefficients",
+   "AlgebraicGeometry.Etale.supportedSecondCoefficients",
+   "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensor",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensor",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorComplexHom",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorComplexCondition",
+   "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorComplex",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorComplex",
+   "AlgebraicGeometry.Etale.supportedDerivedTensorMap",
+   "AlgebraicGeometry.Etale.supportedDerivedTensorLocalization",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorDerivedHom",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorDerivedCondition",
+   "AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorDerived",
+   "AlgebraicGeometry.Etale.supportedCoefficientTensorDerived",
+   "AlgebraicGeometry.Etale.supportedFirstEvaluation",
+   "AlgebraicGeometry.Etale.supportedSecondEvaluation",
+   "AlgebraicGeometry.Etale.supportedExteriorProduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedExteriorProduct.lean",
+  "statement": "def supportedExteriorProduct (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) : (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶ (supportedSectionsDerived A (supportedProductImmersion f g i j)).obj (externalProduct (ModuleCat.{u + 1} A) f g K L)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The dependency has no recorded Lean declaration. This module constructs the canonical supported product as the adjoint of the coefficient tensor comparison followed by pulled-back support evaluation counits. All choices are uniquely normalized on ordinary quotient sections and signed total-complex representatives. The unbounded construction restricts to the source bounded-below case."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5c1afdfc7",
+  "group": "N4",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all three modules, dependencies, canonical maps, witnesses, universes, edge cases, docstrings and verbatim signatures. scompile.py passed all files. Original blueprint Markdown was unavailable; this source-verification limitation is documented. No repairs or branch changes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $Z\\subset X,W\\subset Y$ be closed subschemes of\nseparated finite-type\nschemes over an algebraically closed field $k$. Fix a finite\ncommutative coefficient ring $A$, and let $K,L$ be bounded-below\ncomplexes of $A$-module sheaves on their etale sites whose\nderived exterior product\nis bounded below. The *supported exterior product* is the map\n\n$$\n\\kappa^{Z,W}_{K,L}:\nR\\Gamma_Z(X,K)\\otimes_A^LR\\Gamma_W(Y,L)\n\\longrightarrow\nR\\Gamma_{Z\\times W}(X\\times_kY,K\\boxtimes_A^L L).\n$$\n\nIt is obtained by pulling back sections in the two factors and\ntensoring them: their supports meet in $Z\\times W$.\nDerive this pairing with K-flat tensor and injective support\nresolutions.\n\nIts composition with the map forgetting support is the ordinary exterior\nproduct.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-supported-exterior-product",
+  "worker": "stage1",
+  "summary": "Made the original supported exterior product explicit as the adjoint of the closed-supported coefficient tensor map followed by pulled-back evaluation counits. All ingredients are existing DAG nodes; quotient, stalk, sign, and forgetting-support checks are written out. Keeps the arbitrary finite ring and bounded-below input/output hypotheses, using unbounded D(A) for the tensor source. No new nodes, no Lean attachment, no route changes.",
+  "blueprint": "Current main-20261015 sec-smooth-purity/sk-prop-an/def-pur-supported-exterior-product.md: displayed arrow; pulling back and tensoring sections with intersected supports; K-flat/injective derivation; final forgetting-support compatibility. Historical unit binding sk-prop-a1-kummer is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-856b3850f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-856b3850f (reviewer sub-agent of L); spot-checked: I read the whole delivery against the current blueprint main-20261015 sk-prop-an/def-pur-supported-exterior-product.md (order 2282), the older master version (order 1938) and the statements of all 32 cited nodes. The hypotheses match the source one for one: algebraically closed k, separated finite-type X and Y, closed Z and W, any finite commutative A, K and L bounded below with K⊠L bounded below, and the tensor source in unbounded D(A). Nothing is weakened. Construction checks: (1) the product immersion has kernel I⊗C+B⊗J, and its complement is the union of the two pulled-back opens. (2) C_a=a_*M_D with e_a the cokernel map from lem-weil-pbc-open-closed-short-exact (module clause), and Hom(C_aM,G)=Hom_A(M,Γ_D G) via lem-weil-pbc-extension-by-zero-adjunction, with a normalization that fixes the bijection. (3) A closed immersion has geometric fibres that are one point or empty, so C_a has stalks M or 0 and is exact. The derived adjunction comes from lem-pc-derived-adjoint-functors, with K-injective resolutions for RΓ_D, and on D+ this agrees with Stacks 09XP (etale-cohomology.tex section-cohomology-support). (4) θ factors uniquely because its target vanishes on (X∖Z)×Y and on X×(Y∖W). The naturality identities and the sign (−1)^r are correct. (5) Stalks show the coefficient complexes and their inverse images are K-flat with flat terms, so lem-weil-pbc-site-derived-tensor-descent applies. (6) The transpose has the correct target, and on sections it sends a⊗b to p*a⊗q*b. Forgetting support works by the mate of e_a. Edge cases tested: empty support, full support (gives the ordinary product, as used by lem-pur-kunneth-supported), Spec k, the zero ring, Z/2 over Z/4, nonreduced Z. There are no new nodes. The rg duplicate search found only the ordinary exterior tensors pur7710-*, which are not this map, and def-pur-proetale-supported-exterior-product, the pro-étale analogue, which cites this item. No SGA source is used, there is no cycle, and no tool_uses are needed. FIX: the forgetting-support clause compared with def-kun-kunneth-map in D((Spec k)_et,A) without citing its identification with D(A). I added lem-weil-pbc-geometric-point-pullback-stalk (1), the global-sections equivalence, with the identifications Rf_*K↔RΓ(X,K) and constant sheaf↔f⁻¹, and added it to stmt_deps; only the statement and stmt_deps change. Maintenance note: the maintainer-owned source field still names master order 1938 (current is main-20261015 order 2282), so the report's claim that it was updated is wrong. The unit binding sk-prop-a1-kummer vs sk-prop-an was reported by the worker.; 1 file(s) fixed by the reviewer"
+ }
 }
