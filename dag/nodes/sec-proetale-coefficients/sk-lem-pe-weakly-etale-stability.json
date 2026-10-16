@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-pe-weakly-etale-stability",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stability",
- "statement": "Weakly étale morphisms [sk-def-pe-morphisms] are stable under base change and\ncomposition, and the property is local on source and target for the Zariski topology.\nEvery $X$-morphism between two weakly étale $X$-schemes is weakly étale. Affine pro-étale\nmorphisms are stable under affine base change and composition.",
+ "statement": "Weakly étale morphisms, as defined in [sk-def-pe-morphisms] and [def-weil-weakly-etale-morphism], are stable under base change and\ncomposition, and the property is local on source and target for the Zariski topology.\nEvery $X$-morphism between two weakly étale $X$-schemes is weakly étale. Affine pro-étale\nmorphisms (affine spectra of ind-étale ring maps [def-weil-pbc-ind-etale-algebra]) are stable under affine base change and composition.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-weakly-etale-stability/_section.md",
   "place": "node sk-lem-pe-weakly-etale-stability, order 702",
@@ -19,40 +19,156 @@
   ]
  },
  "stmt_deps": [
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-ind-etale-algebra",
   "sk-def-pe-morphisms"
  ],
  "proof": [
   {
-   "text": "Base change preserves flatness of a morphism and its diagonal. For a composite\n$V\\to U\\to X$, the diagonal factors through $V\\times_UV\\to V\\times_XV$, which is a base\nchange of $\\Delta_{U/X}$; this gives the assertion about composites.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For an $X$-map $h\\colon U\\to V$, the graph $U\\to U\\times_XV$ is a base change of the flat\ndiagonal of $V/X$, and the projection $U\\times_XV\\to V$ is flat because $U/X$ is flat.\nTheir composite is $h$, while $\\Delta_h$ is a base change of $\\Delta_{U/X}$. Zariski\nlocality follows from locality of flatness.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "For ind-étale rings, tensor products commute with filtered colimits, and finite\npresentation lets one choose a finite stage for each étale algebra; this gives base change\nand transitivity. The same arguments show that a filtered colimit of étale algebras has\nflat multiplication map (Stacks, Tag 092A). The ring-theoretic statements are\n[lem-weil-pbc-ind-etale-stability]; the statement about $X$-morphisms between weakly étale\nobjects is [lem-trf-weakly-etale-between-objects].",
+   "text": "Let $f:U\\to X$ be weakly étale and $X^{\\prime}\\to X$ arbitrary. Put $U^{\\prime}=U\\times_X X^{\\prime}$. Both $f$ and $\\Delta_f$ are flat by definition. The universal property of fibre products identifies $U^{\\prime}\\times_{X^{\\prime}}U^{\\prime}$ with $(U\\times_XU)\\times_XX^{\\prime}$, and identifies $\\Delta_{f^{\\prime}}$ with the base change of $\\Delta_f$ along its projection to $U\\times_XU$. Thus base-change stability of flatness applies to both $f^{\\prime}$ and its diagonal, proving that $f^{\\prime}$ is weakly étale.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-trf-weakly-etale-between-objects"
+    "def-weil-weakly-etale-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094U, lemma-base-change-weakly-etale; Tag 01U9, morphisms/lemma-base-change-flat"
+   }
+  },
+  {
+   "text": "Let $V\\xrightarrow{g}U\\xrightarrow{f}X$ be weakly étale. Flatness of $g$ and $f$ gives flatness of $f\\circ g$. Its diagonal factors as $V\\xrightarrow{\\Delta_g}V\\times_UV\\xrightarrow{j}V\\times_XV$. The defining equalities for these fibre products give $V\\times_UV\\simeq(V\\times_XV)\\times_{U\\times_XU}U$, where the maps to $U\\times_XU$ are $g\\times_Xg$ and $\\Delta_f$. Consequently $j$ is a base change of the flat map $\\Delta_f$, while $\\Delta_g$ is flat by hypothesis. Their composite is flat by transitivity. This proves weak étaleness of $f\\circ g$.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094T, lemma-composition-weakly-etale; Tags 01U7 and 01U9"
+   }
+  },
+  {
+   "text": "Flatness is local on source and target directly from its stalkwise definition: restricting either scheme to an open neighbourhood changes neither local ring nor its induced homomorphism. For open subschemes $U_0\\subset U$, $X_0\\subset X$ with $f(U_0)\\subset X_0$, the fibre product $U_0\\times_{X_0}U_0$ identifies with the open subscheme $p_1^{-1}(U_0)\\cap p_2^{-1}(U_0)$ of $U\\times_XU$. Indeed both descriptions represent pairs of maps into $U_0$ agreeing over $X$; they agree over $X_0$ because an open immersion is an inclusion of an open subscheme. Under this identification the restricted diagonal is $\\Delta_f|_{U_0}$. Therefore restrictions of a weakly étale morphism are weakly étale. Conversely, if $X=\\bigcup_aX_a$ and $f^{-1}(X_a)=\\bigcup_bU_{ab}$ with all $U_{ab}\\to X_a$ weakly étale, each $u\\in U$ belongs to one $U_{ab}$, so the local homomorphisms for $f$ at $u$ and for $\\Delta_f$ at $u$ are those for the restricted maps and are flat. Thus $f$ and $\\Delta_f$ are flat everywhere. This proves both Zariski locality assertions without any separatedness assumption.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 094S, lemma-weakly-etale-characterize, open-restriction argument; Tag 01JR, schemes/lemma-open-fibre-product"
+   }
+  },
+  {
+   "text": "Let $a:U\\to X$, $b:V\\to X$ be weakly étale and let $h:U\\to V$ satisfy $b\\circ h=a$. Factor $h$ through its graph $\\gamma_h:U\\to U\\times_XV$ and the second projection $p_2$. The graph is the base change of $\\Delta_b:V\\to V\\times_XV$ along $(h\\circ p_1,p_2):U\\times_XV\\to V\\times_XV$: the pullback condition forces the second component to equal $h$ of the first. Hence $\\gamma_h$ is flat. The projection $p_2$ is a base change of $a$, hence flat, so $h$ is flat. For the diagonal, the square with top $\\Delta_h:U\\to U\\times_VU$, bottom $\\Delta_a:U\\to U\\times_XU$, left identity and right the canonical map is cartesian. To verify this, maps from any test scheme into its pullback are a pair $(u_1,u_2)$ with $h u_1=h u_2$, together with $u$ with $(u_1,u_2)=(u,u)$; the extra equality follows from $h u=h u$, so the datum is exactly $u$. Thus $\\Delta_h$ is a base change of the flat $\\Delta_a$ and is flat. By definition $h$ is weakly étale.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0951, lemma-weakly-etale-permanence, graph argument; diagonal square verified here by the fibre-product universal property"
+   }
+  },
+  {
+   "text": "For $R\\to B$ ind-étale and any $R\\to R^{\\prime}$, the affine fibre-product theorem identifies the base change of $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ with $\\operatorname{Spec}(B\\otimes_RR^{\\prime})\\to\\operatorname{Spec}R^{\\prime}$, with structure map $r^{\\prime}\\mapsto1\\otimes r^{\\prime}$. The base-change clause of ind-étale stability says this ring map is ind-étale. Hence its spectrum is affine pro-étale in the stated sense. For $R\\to B\\to C$ with both maps ind-étale, the composition clause says $R\\to C$ is ind-étale; its spectrum is precisely the composite of the given affine pro-étale maps. These are the two final assertions. The definitions here are the ind-étale/affine-spectrum definitions of sk-def-pe-morphisms, not the assertion that every weakly étale morphism admits a global ind-étale presentation.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097J, lemma-base-change-ind-etale; Tag 097K, lemma-composition-ind-etale; Tag 01I4, schemes/lemma-fibre-product-affine-schemes"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-trf-weakly-etale-between-objects"
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-weakly-etale-morphism",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-ind-etale-stability"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-weakly-etale-stability/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 094T, 094U, 094S and 0951; affine clauses from proetale.tex Tags 097J and 097K. The diagonal pullback in step 4 is verified explicitly."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeaklyEtale|IndEtale",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: weakly étale scheme stability is in Mathlib; no ind-étale affine stability declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly etale scheme morphisms stability under composition and base change",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.stableUnderComposition, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme",
+   "date": "2026-10-16",
+   "verdict": "partial match: weakly étale scheme stability is in Mathlib; no ind-étale affine stability declaration found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.WeaklyEtale",
+   "results": "12 hits; AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtSource, AlgebraicGeometry.WeaklyEtale.instIsZariskiLocalAtTarget, AlgebraicGeometry.WeaklyEtale.instIsMultiplicativeScheme, AlgebraicGeometry.WeaklyEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.WeaklyEtale.instRespectsIsoScheme, AlgebraicGeometry.WeaklyEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.WeaklyEtale, AlgebraicGeometry.WeaklyEtale.flat",
+   "date": "2026-10-16",
+   "verdict": "partial match: weakly étale scheme stability is in Mathlib; no ind-étale affine stability declaration found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly etale morphisms of schemes are stable under composition base change and local on source and target",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-16",
+   "verdict": "partial match: weakly étale scheme stability is in Mathlib; no ind-étale affine stability declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|ind.etale|pro.etale",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind etale ring maps filtered colimits of etale algebras closed under composition and tensor base change",
+   "results": "8 hits; RingHom.Etale.stableUnderComposition, Algebra.Etale.comp, RingHom.Etale.toAlgebra, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.comp, Algebra.Etale.exists_subalgebra_fg, RingHom.etale_algebraMap, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "partial match: weakly étale scheme stability is in Mathlib; no ind-étale affine stability declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*[Ee]tale|[Ee]tale.*ind|[Ee]tale.*filtered",
+   "results": "4 hits; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean",
+   "date": "2026-10-16",
+   "verdict": "no ind-etale stability declaration among the four hits; inspected hits concern induced topologies, etale characterization and an induction step"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeaklyEtale.of_comp\"",
+   "results": "1 hits; AlgebraicGeometry.WeaklyEtale.of_comp",
+   "date": "2026-10-16",
+   "verdict": "exact match for the between-objects clause: WeaklyEtale.of_comp; item also has affine ind-etale clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -70,5 +186,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-lem-pe-weakly-etale-stability"
+ "unit": "sk-lem-pe-weakly-etale-stability",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-pe-weakly-etale-stability",
+  "worker": "stage1",
+  "summary": "Replaced imported uncited sketches by five explicit arguments using existing flatness and ind-étale nodes. No new nodes. Rebound the definition citation to the two existing precise definition nodes, preserving every mathematical clause and removing the inherited cycle through the refinement theorem. The flatness/locality and graph/diagonal arguments are written out, with all non-elementary inputs cited.",
+  "blueprint": "Current main-20261015 companion proof sk-lem-pe-weakly-etale-stability.proof.md: paragraph 1 is realized by steps 1–2; paragraph 2 by steps 3–4; paragraph 3 by step 5. The statement retains every clause of the unit _section.md. The sandbox unit realization assigns this node to the statement and all three proof paragraphs. Authoritative chapter/unit records and bindings were installed by maintenance (side commits 3b6a34a857 and f894d35301; live commit ec7bf11235). The independently reviewed definition sk-def-pe-morphisms is explicitly cited so the realizing nodes reach the unit named in the blueprint route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Step 5 uses arbitrary tensor base change and transitivity of ind-etale ring maps; this is the generic ring theorem expressly named in the current unit companion proof, and the unit has no separate ring-stability child."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-3a47da09e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-3a47da09e (reviewer sub-agent of L); spot-checked: Read the full packet, report, current blueprint route, all cited DAG statements, and Stacks sources at Tags 094S, 094T, 094U, 0951, 01U7, 01U9, 01I4, 01JR, 097J, and 097K. Verified all five proof steps, hypotheses, base-change morphisms, affine tensor maps, edge cases, Mathlib searches, route bindings, citation evidence, and absence of new nodes, duplicates, or cycles. Review written to review.md."
+ }
 }

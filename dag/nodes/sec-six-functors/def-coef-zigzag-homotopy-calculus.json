@@ -26,7 +26,9 @@
  },
  "stmt_deps": [
   "def-nagata-category",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
  ],
  "proof": [],
  "proof_deps": [],
@@ -94,15 +96,51 @@
    "results": "{\"t\": \"2026-10-16T13:46:46Z\", \"tool\": \"leanfinder\", \"query\": \"A localizer has homotopical three arrow calculus when identity insertion functors between categories of zigzags are weak equivalences on classifying spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.HasRightResolutions\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.mk'\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_of_functorial_resolutions\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.mk'\"], \"digest\": \"3c295a46036749a5\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Read CalculusOfFractions.lean:197-212, DerivabilityStructure/Basic.lean:75-79, and LocalizerMorphism.lean:95-96. These concern ordinary localized categories and their exactness; none states fixed-word diagram nerve insertion or the simplicial hammock comparison. Grep hits are Gabriel-Zisman bibliography entries; Loogle has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A wide subcategory of weak equivalences defines categories of fixed-shape zigzags with objectwise weak-equivalence natural transformations; homotopical calculus requires classifying-space equivalences after inserting an identity",
+   "results": "{\"t\": \"2026-10-16T14:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"A wide subcategory of weak equivalences defines categories of fixed-shape zigzags with objectwise weak-equivalence natural transformations; homotopical calculus requires classifying-space equivalences after inserting an identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"HomotopicalAlgebra.instWeakEquivalenceMapFullSubcategoryι\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.instWeakEquivalenceIdOfContainsIdentitiesWeakEquivalences\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesFullSubcategory\"], \"digest\": \"efc80509c397b426\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. CategoryWithWeakEquivalences (Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean:43-45) is only a morphism property, and CategoryTheory.Zigzag (Mathlib/CategoryTheory/IsConnected.lean:314-315) is the reflexive-transitive closure of the unoriented adjacency relation. Neither supplies fixed-word diagram categories, their nerves, or the two identity-insertion conditions. The independent Loogle and source grep queries returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopical.?calculus|homotopy.?calculus|zigzag.*nerve|nerve.*zigzag|hammock",
+   "results": "{\"t\": \"2026-10-16T14:53:06Z\", \"tool\": \"grep\", \"query\": \"homotopical.?calculus|homotopy.?calculus|zigzag.*nerve|nerve.*zigzag|hammock\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. CategoryWithWeakEquivalences (Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean:43-45) is only a morphism property, and CategoryTheory.Zigzag (Mathlib/CategoryTheory/IsConnected.lean:314-315) is the reflexive-transitive closure of the unoriented adjacency relation. Neither supplies fixed-word diagram categories, their nerves, or the two identity-insertion conditions. The independent Loogle and source grep queries returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\", \"Zigzag\"",
+   "results": "{\"t\": \"2026-10-16T14:53:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"Zigzag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. CategoryWithWeakEquivalences (Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean:43-45) is only a morphism property, and CategoryTheory.Zigzag (Mathlib/CategoryTheory/IsConnected.lean:314-315) is the reflexive-transitive closure of the unoriented adjacency relation. Neither supplies fixed-word diagram categories, their nerves, or the two identity-insertion conditions. The independent Loogle and source grep queries returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-special-hammock-reduction",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-coef-zigzag-homotopy-calculus",
+  "worker": "stage1",
+  "summary": "Checked the definition against the Dwyer–Kan source and the project source checkouts; no project declaration states it. The definition is complete once its category, universe/smallness, simplicial-set, ordinary-nerve, geometric-realization, and weak-homotopy-equivalence ingredients are cited from existing nodes. Added those statement dependencies and made no new child nodes.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint, proof paragraph 2: the derived coefficient adjunction calculation uses the relative zigzag/hammock calculus foundation; the item statement follows the cited Dwyer–Kan Sections 5.1–5.2 and Definition 6.1(i) convention."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-554307634",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-554307634 (reviewer sub-agent of L); spot-checked: The definition and Dwyer–Kan source checks pass, including orientations, strict positive indices, W-hypotheses, nerve semantics, dependencies, and small cases. Repair metadata in fixes/dag/nodes/sec-six-functors/def-coef-zigzag-homotopy-calculus.json: created.item incorrectly named lem-coef-special-hammock-reduction and created.group was missing. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

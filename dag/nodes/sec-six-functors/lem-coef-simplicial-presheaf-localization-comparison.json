@@ -33,9 +33,102 @@
   "def-coef-complete-algebroid",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal M=\\mathsf U(D)$. By [lem-coef-simplicial-presheaf-projective-model], the projective model structure is left proper, combinatorial and simplicial with functorial factorizations, and its fibrant objects are the objectwise Kan presheaves. This also supplies the combinatorial simplicial Kan model structure on $\\mathsf{sSet}$. These are the hypotheses needed below; projective cofibrancy is not being identified with objectwise cofibrancy.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.3.2 and Remarks A.3.3.4-A.3.3.5; Example A.3.2.18."
+   }
+  },
+  {
+   "text": "Regard $D^{\\mathrm{op}}$ as a simplicial category with discrete mapping simplicial sets. Such sets are Kan, and $N_{\\mathrm{hc}}(D^{\\mathrm{op}})=N(D^{\\mathrm{op}})=N(D)^{\\mathrm{op}}$: a functor from the thickening of $[n]$ to a category with discrete mapping spaces is just a composable string, all its higher compatibility maps being forced by composition. By the counit clause of [lem-coef-enriched-diagram-rectification], $u:\\mathfrak C[N(D^{\\mathrm{op}})]\\to D^{\\mathrm{op}}$ is a Dwyer--Kan equivalence. Apply its diagram comparison with $K=N(D^{\\mathrm{op}})$ and target $\\mathsf{sSet}$, using the projective structure supplied by [lem-coef-simplicial-presheaf-projective-model]. By [lem-coef-simplicial-model-nerve-localization], the two bifibrant nerves represent $N(\\mathcal M)[W_{\\mathrm{obj}}^{-1}]_\\infty$ and $\\mathcal S$, respectively. Composing the comparisons gives $E:\\mathcal M_\\infty\\simeq\\operatorname{Fun}(N(D)^{\\mathrm{op}},\\mathcal S)=\\mathcal P$. Since the diagram comparison is induced by evaluation, its value at $d$ is passage from the simplicial set $F(d)$ to its space; this specifies the claimed objectwise comparison, on arrows and coherent diagrams as well as on objects.",
+   "uses": [
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4 and Remark 4.2.4.5; Theorem 2.2.5.1. HA Theorem 1.3.4.20 identifies the bifibrant nerves with universal localizations."
+   }
+  },
+  {
+   "text": "To apply the model-localization existence theorem to arbitrary $S$, choose one functorial projective cofibrant replacement $Q$ with natural trivial fibration $q:Q\\to\\operatorname{id}$. For each $f:A\\to B$ in $S$, factor $Qf:QA\\to QB$ as $QA\\xrightarrow{i_f}B_f\\xrightarrow{p_f}QB$, with $i_f$ a cofibration and $p_f$ a trivial fibration. Thus both endpoints of $i_f$ are cofibrant. The squares $i_f\\to Qf\\to f$, with vertical maps $(1,p_f)$ and $(q_A,q_B)$, have objectwise weak-equivalence verticals. The mapping-space comparison of [lem-coef-simplicial-model-nerve-localization] therefore identifies their derived mapping-space tests against any fibrant $Z$. Put $T=\\{i_f:f\\in S\\}$. It is small, has the same fibrant local objects as $S$, and hence has exactly the same local-equivalence class $W_S$. This uses two-out-of-three for equivalences of spaces, and does not assume that $f$ or its endpoints are cofibrant.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3 and Remark A.3.7.5; explicit replacement of arbitrary arrows by cofibrations between cofibrant objects."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-bousfield-model-structure] to $\\mathcal M$ and the small set $T$ from step 3. Its hypotheses of left properness, combinatoriality and simpliciality hold by step 1, and $T$ consists of cofibrations between cofibrant objects. The resulting model has unchanged cofibrations and weak equivalences $W_S$ by step 3, so it is exactly the model denoted $L_S\\mathsf U(D)$ in the statement. Its fibrant objects are precisely the projectively fibrant $S$-local presheaves. Its simplicial enrichment is the original one, and it has functorial factorizations. Denote its coherent localization by $\\mathcal L$.",
+   "uses": [
+    "lem-coef-simplicial-bousfield-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.7.3, especially clauses (1)-(3)."
+   }
+  },
+  {
+   "text": "The identity adjunction of [lem-coef-simplicial-bousfield-model-structure] induces an infinity adjunction $L:\\mathcal M_\\infty\\rightleftarrows\\mathcal L:J$ by [lem-coef-model-infinity-derived-adjunction]. Let $\\mathcal A=(L_S\\mathcal M)^{cf}$ and $\\mathcal B=\\mathcal M^{cf}$. Unchanged cofibrations and the original fibrancy of localized fibrant objects give a full simplicial inclusion $I:\\mathcal A\\hookrightarrow\\mathcal B$. It is the identity on each enriched mapping simplicial set because the localization retains the enrichment. The nerve-localization comparisons of [lem-coef-simplicial-model-nerve-localization] identify $N_{\\mathrm{hc}}(I)$ with $J$: on the ordinary category of localized bifibrant objects both are the original localization of its inclusion into $\\mathcal M$, since the right-derived identity needs no fibrant replacement there. That ordinary bifibrant category localizes equivalently onto $\\mathcal L$ by the same cited theorem, so this agreement determines the functors on $\\mathcal L$, including their coherent naturality. For $X,Y\\in\\mathcal A$, the cited mapping-space formula computes both source and target mapping spaces by $\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)$, and the induced map is the identity. Every object of $\\mathcal L$ has such a bifibrant representative. Therefore $J$ is fully faithful on all mapping spaces, with the coherent compositions supplied by the simplicial inclusion.",
+   "uses": [
+    "lem-coef-simplicial-bousfield-model-structure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.7.6, localized-presheaf part; HA Theorem 1.3.4.20. Derived identity adjunction as in Cisinski Theorem 7.5.30."
+   }
+  },
+  {
+   "text": "For a projectively fibrant presheaf $Z$, step 2 and [lem-coef-simplicial-model-nerve-localization] identify, for each $f:A\\to B$ in $S$, the map $\\operatorname{Map}^h(B,Z)\\to\\operatorname{Map}^h(A,Z)$ with $\\operatorname{Map}_{\\mathcal P}(E(qB),E(qZ))\\to\\operatorname{Map}_{\\mathcal P}(E(qA),E(qZ))$. Here $q$ denotes the original coherent localization, not the cofibrant replacement map of step 3. Consequently $Z$ is $S$-local exactly when $E(qZ)$ is $\\overline S$-local. Every object of $\\mathcal P$ has a projectively fibrant representative by step 2 and the replacement clause of the cited node. If this object is local, so is that representative, since equivalent targets give equivalent mapping spaces. Its projective cofibrant replacement is a trivial fibration to a fibrant object, hence is itself projectively fibrant; it remains local by the same mapping-space invariance. It is therefore bifibrant in $L_S\\mathcal M$, by [lem-coef-simplicial-bousfield-model-structure]. Conversely each localized bifibrant object is an $S$-local projectively fibrant presheaf. The essential image of $EJ$ is thus exactly $\\mathcal P_{\\overline S\\text{-loc}}$. With step 5 this gives the required equivalence $\\mathcal L\\simeq\\mathcal P_{\\overline S\\text{-loc}}$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-bousfield-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.7.6: identify the local full subcategory through derived mapping spaces; essential-image argument written out."
+   }
+  },
+  {
+   "text": "Finally [lem-coef-simplicial-model-nerve-localization], applied first to $\\mathcal M$ and then to $L_S\\mathcal M$, gives the full functor-infinity-category universal properties for $W_{\\mathrm{obj}}$ and $W_S$, respectively. Composing either universal localization map with the equivalence constructed in steps 2 or 6 preserves that property: restriction along an equivalence of target infinity categories is an equivalence on their functor infinity categories. In the second case the functor from the ordinary presheaf category is the localized functor followed by the equivalence onto the local full subcategory; the inclusion of that subcategory into $\\mathcal P$ is the right adjoint $EJ$, not the localization map. The mapping-space comparisons in steps 5-6 and the evaluation comparison in step 2 retain coherent composition. Hence neither of the assertions is merely an equivalence of ordinary homotopy categories.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Remark 1.3.4.16; invariance of the universal property under the established target equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-bousfield-model-structure",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: simplicial-presheaf comparison foundation of the coherent mapping-complex adjunction. Expanded using HTT 4.2.4.4, A.3.3.2-A.3.3.5, A.3.7.3 and proof of A.3.7.6, and HA 1.3.4.20. These external sources were read online but are absent from local literature/; WANTED entries are in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,15 +157,65 @@
    "results": "{\"t\": \"2026-10-16T13:37:13Z\", \"tool\": \"leansearch\", \"query\": \"Fibrant local simplicial presheaves model the full infinity subcategory of space valued presheaves local for a small set of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"ed6652695b220bd6\"}",
    "date": "2026-10-16",
    "verdict": "no match: SSet.QCat (Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-32, read) is a strict bicategory built from homotopy categories of internal Homs. CofibrantObject.HoCat.toLocalization is an ordinary localization. Neither compares Bousfield-local simplicial presheaves with local coherent space-valued presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left Bousfield localization of simplicial presheaves presents the infinity category of local space valued presheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.Reflective CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from the category of small categories to the category of simplicial sets is reflective, with its left adjoint given by the homotopy category functor for 2-truncated simplicial sets. \"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A] [inst_2 : CategoryTheory.HasWeakSheafify J A],\\n  (CategoryTheory.presheafToSheaf J A).IsLocalization J.W\", \"doc\": \"The sheafification functor from presheaves to sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, with respect to a Grothendieck topology $J$, is a localization functor with respect to t\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instWEqualsLocallyBijectiveTypeHomObjForget\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyBijective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C),\\n  J.WEqualsLocallyBijective (Type (max u v))\", \"doc\": \"For the category of types $\\\\mathrm{Type}\\\\, (\\\\max u v)$ equipped with a Grothendieck topology $J$, the locally bijective condition holds: for every type $A$, there exists a covering sieve $S$ on $A$ su\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SingularSet\", \"type\": \"SSet.toTop.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheafification/localization and SSet.QCat do not identify the coherent localization of simplicial presheaves. Read SimplicialNerve.lean:14-34 (comparison still listed as future work), StrictBicategory.lean:15-32, and CofibrantObjectHomotopy.lean:60-123 (ordinary quotient/localization only)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bousfield\", \"SSet\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheafification/localization and SSet.QCat do not identify the coherent localization of simplicial presheaves. Read SimplicialNerve.lean:14-34 (comparison still listed as future work), StrictBicategory.lean:15-32, and CofibrantObjectHomotopy.lean:60-123 (ordinary quotient/localization only)."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|simplicial.*presheaf|presheaf.*localization",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"19\", \"text\": \"A simplicial object in a category `C` is a `C`-valued presheaf on `SimplexCategory`.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheafification/localization and SSet.QCat do not identify the coherent localization of simplicial presheaves. Read SimplicialNerve.lean:14-34 (comparison still listed as future work), StrictBicategory.lean:15-32, and CofibrantObjectHomotopy.lean:60-123 (ordinary quotient/localization only)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial presheaves localize at objectwise weak equivalences to functors valued in spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \": (presheafToSheaf J A).IsLocalization J.W\", \"doc\": \"The sheafification functor from presheaves to sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, with respect to a Grothendieck topology $J$, is a localization functor with respect to t\"}\n  {\"name\": \"CategoryTheory.Functor.IsLocalization.mk\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {L : CategoryTheory.Functor C D}\\n  {W : CategoryTheory.MorphismProperty C} (inverts : W.IsInvertedBy L),\\n  (CategoryTheory.Localization.Construction.lift L inverts).IsEquiv\", \"doc\": \"If the lifted functor from the localization of $\\\\mathcal{C}$ at $W$-morphisms to $\\\\mathcal{D}$, constructed by lifting $L$ which inverts $W$-morphisms, is an equivalence of categories, then $L$ is a l\"}\n  {\"name\": \"CategoryTheory.Localization.Construction.objEquiv\", \"module\": \"Mathlib.CategoryTheory.Localization.Construction\", \"type\": \": C ≃ W.Localization\", \"doc\": \"The equivalence of categories between $\\\\mathcal{C}$ and its localization $\\\\mathcal{C}[W^{-1}]$ at morphism property $W$, established by showing the object mapping component of the localization functor\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : C ⥤ D) [L.IsLocalization (weakEquivalences C)] :\\n  (ι ⋙ L).IsLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.SimplicialObject\", \"type\": \": SimplicialCategory (SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is a simplicial category, enriched over the category of simplicial sets. This means that the hom-objects between\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"SSet.toTop\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.{u} ⥤ TopCat.{u}\", \"doc\": \"The functor from the category of simplicial sets to the category of topological spaces, defined as the left Kan extension of the standard simplex functor (which maps finite ordinals to standard topolo\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheafification/localization and SSet.QCat do not identify the coherent localization of simplicial presheaves. Read SimplicialNerve.lean:14-34 (comparison still listed as future work), StrictBicategory.lean:15-32, and CofibrantObjectHomotopy.lean:60-123 (ordinary quotient/localization only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent localization of presheaves of Kan complexes and localization at a set of morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"module\": \"Mathlib/CategoryTheory/Sites/Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A] [inst_2 : CategoryTheory.HasWeakSheafify J A],\\n  (CategoryTheory.presheafToSheaf J A).IsLocalization J.W\", \"doc\": \"The sheafification functor from presheaves to sheaves on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, with respect to a Grothendieck topology $J$, is a localization functor with respect to t\"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.RightHomotopyRel.FactorsThroughLocalization (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"In a category equipped with weak equivalences, if two morphisms between objects $X$ and $Y$ are right homotopic, then their images under the localization functor with respect to weak equivalences are \"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.LeftHomotopyRel.FactorsThroughLocalization (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"In a category equipped with weak equivalences, any two morphisms that are left homotopic become equal in the localization of the category at the weak equivalences. This means their images coincide in \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      {D : Type u_2} →\\n        [inst_2 : CategoryTheory.Category.{v_2, u_2} D] →\\n          (L : CategoryTheory.Functor C D) →\\n            [inst_3 : L.IsLocalization (HomotopicalAlge\", \"doc\": \"The natural isomorphism between the composition of the canonical functor from the homotopy category of cofibrant objects to the localization category $\\\\mathcal{D}$ and the localization functor, and th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEquivalences C)],\\n  (HomotopicalAlgebra.Cofibrant\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheafification/localization and SSet.QCat do not identify the coherent localization of simplicial presheaves. Read SimplicialNerve.lean:14-34 (comparison still listed as future work), StrictBicategory.lean:15-32, and CofibrantObjectHomotopy.lean:60-123 (ordinary quotient/localization only)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-combinatorial-localization-presentability",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-simplicial-presheaf-localization-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps establish the evaluation comparison, replace arbitrary S by cofibrations, apply model-localization existence, prove full faithfulness via identical enriched maps, and identify the local essential image. Four statement-only foundations were searched in all required modes with two semantic phrasings. No project attachment or Mathlib match; no new node states a local-presheaf comparison clause. Second reading makes the enriched inclusion and its agreement with the right-derived identity explicit.",
+  "blueprint": "Realizes the presheaf-localization comparison below paragraph 2 of prop-coef-integral-exceptional-adjoint, specifically the coherent derived coefficient adjunction before R lim. The ancestor, unit, chapter and coefficient route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-72eeb024b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-72eeb024b (reviewer sub-agent of L); spot-checked: Wrote review.md. Read the complete item, all four new nodes, cited node statements, chapter/unit route, blueprint proof, archived target declarations, and cited HTT/HA source locations. Verified every hypothesis, mapping morphism, coefficient category, proof edge, small case, duplicate search, and Mathlib search record. No repairs or dropped nodes are needed."
+ }
 }
