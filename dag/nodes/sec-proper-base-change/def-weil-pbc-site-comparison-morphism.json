@@ -21,57 +21,10 @@
  ],
  "proof": [
   {
-   "text": "An etale map $f:U\\to T$ is flat and unramified by the etale definition. Its diagonal is therefore an open immersion. An open immersion identifies the source with an open subscheme, so its induced local-ring maps are isomorphisms: transporting the module structure along such an isomorphism identifies tensoring with that local ring with the identity functor, which preserves exact sequences. Thus an open immersion is flat by the local-ring definition of flatness. In particular the diagonal of $f$ is flat, and $f$ is weakly etale by definition. Choose the etale and pro-etale sites with the same bounds inside the larger skeleton universe of the pro-etale-site node. The identity assignment on schemes and $T$-morphisms is consequently a well-defined functor $u_T:T_{\\Et}\\to T_{\\Proet}$; it preserves identities and composition because both categories use scheme morphisms.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-weil-weakly-etale-morphism",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "099R (section-comparison), opening paragraph and site-choice footnote; 094P (more-morphisms-definition-weakly-etale), following sentence"
-   }
-  },
-  {
-   "text": "The object $T\\to T$ is terminal on both sites: from any object its structure morphism is the unique arrow over $T$. For arrows $U\\to V\\leftarrow U'$ in the etale site, its fibre product $P=U\\times_VU'$ is the scheme fibre product by the etale-site statement and is an etale $T$-object. Step 1 makes $P$ a pro-etale object. For any pro-etale $W\\to T$ with compatible arrows to $U,U'$, the scheme fibre-product universal property gives a unique arrow $W\\to P$, automatically over $T$; this is an arrow of the pro-etale site because its morphisms are all $T$-morphisms. Hence the same cone is a fibre-product cone there. Terminal objects and fibre products yield all finite limits: products are fibre products over the terminal object, and the equalizer of $a,b:U\\rightrightarrows V$ is the fibre product of $(a,b):U\\to V\\times_TV$ with the diagonal $V\\to V\\times_TV$. The same cones are preserved by $u_T$, proving finite-limit preservation without citing a restatement of this assertion.",
+   "text": "The existing inclusion `toProEt T` is representably flat, preserves finite limits, and is continuous. For the set-valued presheaf left Kan extension, use the universe-general filtered-colimit argument: `lanEvaluationIsoColim'` identifies evaluation at each pro-etale object with a filtered colimit over `CostructuredArrow (toProEt T).op K`; the Mathlib theorem `filtered_colim_preservesFiniteLimits_of_types` makes each such colimit preserve finite limits. Pointwise evaluation therefore proves finite-limit preservation of `(toProEt T).op.lan`. The constructed sheaf pullback is the composite of sheaf inclusion, this Kan extension, and sheafification; `instPreservesFiniteLimitsSheafSheafPullback` directly composes their finite-limit preservation for this constructed pullback. The definitions `proEtaleSiteComparison` and `proEtaleSiteComparisonModules` are the canonical continuous-site and coefficient adjunctions already provided by the imported comparison definitions.",
    "uses": [
     "def-weil-pbc-etale-site",
     "def-weil-pbc-proetale-site",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "099R (section-comparison), opening paragraph, using 00X6 (sites-proposition-get-morphism), terminal-object and fibre-product hypotheses"
-   }
-  },
-  {
-   "text": "Let $\\{U_i\\to U\\}$ be an etale covering family. The existing fpqc-finer-than-etale statement supplies flatness and, over every affine open $V\\subset U$, finitely many affine opens in the $U_i$ whose images have union exactly $V$. Each covering arrow is etale by the etale-site definition, hence weakly etale by the local-ring argument in step 1. These are precisely the two requirements for a pro-etale covering in the pro-etale-site statement. Thus $u_T$ sends coverings to coverings. Step 2 identifies $u_T(U_i\\times_UU_j)$ with $u_T(U_i)\\times_{u_T(U)}u_T(U_j)$. For a pro-etale sheaf $G$, the diagram testing the sheaf condition for $G\\circ u_T$ on this etale cover is therefore the sheaf-condition diagram of $G$ on its image cover. Its unique gluing proves that restriction is a sheaf. Cover preservation and these fibre-product identifications verify continuity as defined in Stacks 00WV.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-weil-weakly-etale-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "099R (section-comparison), opening paragraph; 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc); 00WV (sites-definition-continuous) and 00WW (sites-lemma-pushforward-sheaf)"
-   }
-  },
-  {
-   "text": "By step 3 restriction along $u_T$ sends sheaves to sheaves. Apply the sheaf adjunction lemma for sets: the sheafification of $u_{T,p}F$, with the displayed comma-category colimit, is left adjoint to restriction. Apply the presheaf pullback lemma with $\\mathcal C=T_{\\Et}$ and $\\mathcal D=T_{\\Proet}$: since the etale-site statement and step 2 give finite limits in $\\mathcal C$, preservation of fibre products by $u_T$, and the terminal object $T/T$ in both categories, $\\mathcal I_W^{op}$ is filtered and $u_{T,p}$ preserves finite limits. Sheafification preserves finite limits by the sheafification-exactness lemma; hence their composite preserves finite limits. This proves that the defined adjunction is a geometric morphism, in the asserted direction.",
-   "uses": [
-    "def-weil-pbc-etale-site",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "lem-weil-pbc-presheaf-pullback-sets-left-exact",
     "lem-weil-pbc-sheafification-sets-exact"
@@ -79,61 +32,21 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Sites Tags 00WX (lemma-adjoint-sheaves), 00X6 (proposition-get-morphism), 00WJ (lemma-sheafification-exact)"
-   }
-  },
-  {
-   "text": "For the module construction first lift the set adjunction to abelian group objects using the product-preserving adjunction lemma, and identify these with abelian sheaves using the sheaf-algebraic-structures lemma. For each $r\\in\\Lambda$, give $\\nu_T^*F$ the scalar endomorphism $\\nu_T^*(\\lambda_r)$, and $\\nu_{T,*}G$ the scalar endomorphism $\\nu_{T,*}(\\lambda_r)$. The scalar laws are $\\lambda_r0=0$, $\\lambda_r+=+\\circ(\\lambda_r\\times\\lambda_r)$, $\\lambda_{r+s}=+\\circ\\langle\\lambda_r,\\lambda_s\\rangle$, $\\lambda_{rs}=\\lambda_r\\lambda_s$, $\\lambda_1=\\mathrm{id}$ and $\\lambda_0=0\\circ!$. Product comparison identifies the image of a pairing with the pairing of its images, so applying either functor to these equations proves every scalar law for the new operations. On either site, these fixed-scalar operations are equivalent to a module action of the constant ring sheaf: the presheaf map $\\Lambda_{\\mathrm{const}}\\times H\\to H$, $(r,x)\\mapsto\\lambda_r(x)$, sheafifies to $\\underline\\Lambda\\times H\\to H$, since sheafification preserves finite products and $H^\\#=H$. The module equations follow by sheafifying the corresponding presheaf equations. Conversely any action of $\\underline\\Lambda$ restricts along the constant presheaf to these operations; uniqueness in the sheafification universal property recovers the original action. The same uniqueness shows that an additive map commuting with all $\\lambda_r$ is $\\underline\\Lambda$-linear. This construction works for every fixed ring, in particular every finite discrete ring.",
-   "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), module paragraph"
-   }
-  },
-  {
-   "text": "Let $L=\\nu_T^*$, $R=\\nu_{T,*}$ and let $\\eta,\\varepsilon$ be the unit and counit of the lifted abelian adjunction. If $\\alpha:LF\\to G$ commutes with every scalar endomorphism, then its transpose $R\\alpha\\circ\\eta_F$ does too: naturality gives $\\eta_F\\lambda_r=RL(\\lambda_r)\\eta_F$, and applying $R$ to $\\alpha L(\\lambda_r)=\\lambda_r\\alpha$ gives the desired equality. Conversely the inverse transpose is $\\varepsilon_G\\circ L\\beta$; applying $L$ to $\\beta\\lambda_r=R(\\lambda_r)\\beta$ gives $L\\beta\\,L\\lambda_r=LR(\\lambda_r)L\\beta$, and naturality gives $\\varepsilon_G LR(\\lambda_r)=\\lambda_r\\varepsilon_G$. Composing these equations proves $(\\varepsilon_G L\\beta)L\\lambda_r=\\lambda_r(\\varepsilon_G L\\beta)$. Hence the abelian Hom bijection restricts to the module Hom bijection. The defined functors therefore form the claimed module adjunction.",
-   "uses": [
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites Tag 00YV (proposition-functoriality-algebraic-structures-topoi), adjointness argument and module paragraph"
+    "place": "Tags 00WX, 00X5 and 00WJ; universe-general filtered-colimit realization in the imported site-pullback API"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
-  "def-weil-unramified-morphism",
-  "def-weil-open-immersion",
-  "def-weil-flat-morphism",
-  "def-weil-weakly-etale-morphism",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-proetale-site",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fpqc-finer-than-etale",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-sheafification-sets-exact"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Section Tag 099R (section-comparison), via Sites 00WX, 00X6 and 00YV"
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 099R, 00WX, 00X5 and 00WJ, with the universe-general filtered-colimit API in the imported library"
  },
  "mathlib_searches": [
   {
@@ -301,5 +214,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Uses the existing Scheme.toProEt inclusion and its continuity and finite-limit instances. Specializes the canonical constructed Mathlib adjunction to sets in the larger site universe, states its left exactness, and specializes the existing upstream comparison adjunction to finite-ring module coefficients. No copied sites or chosen arbitrary maps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-d65cc",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261016T061028-L-327983",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered ProEtaleSiteComparison.lean, its DAG node/change record, and all 17 direct importers matched the stated interface and compiled successfully."
  }
 }

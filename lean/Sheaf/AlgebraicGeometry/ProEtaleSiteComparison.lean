@@ -7,11 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import Mathlib.Algebra.Category.ModuleCat.AB
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 
 /-!
 # The geometric comparison from the pro-etale to the etale site
@@ -71,7 +66,23 @@ theorem preservesFiniteLimits_proEtaleSiteComparison (T : Scheme.{u}) :
     PreservesFiniteLimits
       (Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
         (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)) := by
-  sorry
+  have hlan : PreservesFiniteLimits
+      ((toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+        (T.ProEtᵒᵖ ⥤ Type (u + 1))) := by
+    apply preservesFiniteLimits_of_preservesFiniteLimitsOfSize.{u + 1}
+    intro J _ _
+    apply preservesLimitsOfShape_of_evaluation
+      ((toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+        (T.ProEtᵒᵖ ⥤ Type (u + 1))) J
+    intro K
+    have : IsFiltered (CostructuredArrow (toProEt T).op K) :=
+      IsFiltered.of_equivalence
+        (structuredArrowOpEquivalence (toProEt T) (Opposite.unop K))
+    exact preservesLimitsOfShape_of_natIso
+      (Functor.lanEvaluationIsoColim' (toProEt T).op K).symm
+  let _ := hlan
+  apply Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
+    (toProEt T) (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)
 
 /-- The same canonical comparison adjunction on sheaves of modules over a finite
 (discrete) ring. The functors act on addition, zero, negation and scalar endomorphisms
