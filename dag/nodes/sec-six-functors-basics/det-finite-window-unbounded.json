@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-finite-window-unbounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lower tail vanishing for complexes unbounded below",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$, and $L\\in\\Dic(X,\\Lambda)$ with $H^q(L)=0$ for\n$q>-d_C-1$ (no lower bound). Then $\\Hom(C,L)=0$.",
+ "statement": "Let $X$ be a scheme, let $\\ell$ be a prime, let $E/\\mathbf Q_\\ell$ be a finite extension inside a fixed algebraic closure $\\Qlb$, and let $\\Lambda=E$ or $\\Qlb$. Let $\\Lambda_X=p_X^*\\underline\\Lambda$ be the pulled-back condensed coefficient sheaf [sk-def-sfb-pulled-back-coefficients], and use the ordinary unbounded derived category $D(\\Mod_{\\Lambda_X})=D(X_{\\mathrm{proét}},\\Lambda)$ of its module sheaves [sk-def-sfb-module-objects; def-weil-abstract-derived-category]. Write $\\Cons(X,\\Lambda)$ for the constructible module sheaves: locally on affine opens of $X$ there is a finite stratification by constructible locally closed subschemes [def-constructible-stratification] on each of which the restriction has a finite constant local model [det-def-sfb-constructible-local-model]. Write $\\IndCons(X,\\Lambda)$ for filtered colimits of these sheaves, computed in $\\Mod_{\\Lambda_X}$, and $\\Dic(X,\\Lambda)$ for the full subcategory of $D(\\Mod_{\\Lambda_X})$ whose cohomology sheaves belong to $\\IndCons(X,\\Lambda)$. Let $C\\in\\Cons(X,\\Lambda)$, placed in degree zero, and fix a uniform Ext bound $d_C\\in\\mathbf Z_{\\geq0}$, meaning that $\\Ext^r(C,N)=0$ for every $r>d_C$ and every $N\\in\\Cons(X,\\Lambda)$, with Ext taken in the ambient derived category [def-pc-ext]. If $L\\in\\Dic(X,\\Lambda)$ satisfies $H^q(L)=0$ for every $q>-d_C-1$, with no lower bound on its cohomology, then $\\Hom_{D(\\Mod_{\\Lambda_X})}(C,L)=0$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.md",
   "place": "node det-finite-window-unbounded, order None",
@@ -18,50 +18,151 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-constructible-stratification",
+  "det-def-sfb-constructible-local-model",
+  "def-pc-ext"
+ ],
  "proof": [
   {
-   "text": "*Left completeness.* By [sk-thm-pe-weakly-contractible-basis] and [sk-prop-pe-products], products of\n$\\Lambda_X$-modules are exact and products in $\\D(X_{\\mathrm{proét}},\\Lambda)$ are termwise; by\n[sk-prop-pe-left-complete], $L\\cong R\\varprojlim_n\\tau_{\\geq-n}L$, where\n$R\\varprojlim_nL_n=\\fib\\bigl(\\prod_nL_n\\xrightarrow{1-\\mathrm{shift}}\\prod_nL_n\\bigr)$ for the tower\n$L_n=\\tau_{\\geq-n}L$.",
+   "text": "Choose a complex representing $L$ and set $L_n=\\tau_{\\geq-n}L$ for $n\\in\\mathbf N$, with the canonical maps $t_n:L_{n+1}\\to L_n$. By [det-pe-left-complete-iso], applied with the sheaf of rings $\\mathcal R=\\Lambda_X$, the cone fibre of $1-T$ on $P=\\prod_nL_n$ is isomorphic to $L$, where the $n$th component of $T$ is $t_n\\circ\\mathrm{pr}_{n+1}$. Thus there is a distinguished triangle $L\\to P\\xrightarrow{1-T}P\\to L[1]$. The termwise products used here are products in the derived category by [det-pe-products-derived]; the triangle is the shifted and rotated cone triangle in [def-weil-abstract-derived-category]. No assertion that the product belongs to $\\Dic$ is needed.",
    "uses": [
-    "sk-thm-pe-weakly-contractible-basis"
+    "det-pe-left-complete-iso",
+    "det-pe-products-derived",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Left completeness"
+   }
   },
   {
-   "text": "*Milnor sequence.* Applying $\\Hom(C,-)$, which takes products to products, to the defining triangle\ngives a long exact sequence whose relevant part is\n\n$$\n\\prod_n\\Hom(C,L_n[-1])\\xrightarrow{1-\\mathrm{shift}}\\prod_n\\Hom(C,L_n[-1])\\to\\Hom(C,L)\\to\n\\prod_n\\Hom(C,L_n)\\xrightarrow{1-\\mathrm{shift}}\\prod_n\\Hom(C,L_n),\n$$\n\ni.e. $0\\to\\varprojlim^1_n\\Hom(C,L_n[-1])\\to\\Hom(C,L)\\to\\varprojlim_n\\Hom(C,L_n)\\to0$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Right term.* Each $L_n$ is bounded, lies in $\\Dic(X,\\Lambda)$ ([sk-cor-ambient-ind-derived]), and has\ncohomology in degrees $\\leq-d_C-1$, so $\\Hom(C,L_n)=0$ by [det-finite-window-bounded].",
+   "text": "Apply the exactness of representable Hom on distinguished triangles [lem-weil-pbc-hom-into-triangle-exact], including its rotations, to the triangle of Step 1. The product universal property gives $\\Hom(C,P)=\\prod_n\\Hom(C,L_n)$. Since the shift is an equivalence it preserves this product as well: composing with the projections identifies $\\Hom(C,P[-1])$ with $\\prod_n\\Hom(C,L_n[-1])$. Put $G_n=\\Hom(C,L_n[-1])$. We obtain the exact segment\n$$\\prod_nG_n\\xrightarrow{1-t}\\prod_nG_n\\longrightarrow\\Hom(C,L)\\longrightarrow\\prod_n\\Hom(C,L_n).$$\nHere $(1-t)(x)_n=x_n-t_n[-1]\\circ x_{n+1}$: the formula follows by composing with the $n$th product projection. Thus it suffices to show that the last product is zero and $1-t$ on the first product is surjective; no separate theorem about $\\varprojlim^1$ is being assumed.",
    "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Milnor sequence"
+   }
+  },
+  {
+   "text": "The canonical truncation formulas [def-kun-truncations] give $H^q(L_n)=0$ for $q<-n$ and $H^q(L_n)=H^q(L)$ for $q\\geq-n$. Thus every cohomology sheaf of $L_n$ is either zero or a cohomology sheaf of $L$, and belongs to $\\IndCons$; hence $L_n\\in\\Dic$ by its definition. It is bounded with support in $[-n,-d_C-1]$ (the range may be empty). The bounded lower-tail theorem [det-finite-window-bounded], with the given uniform bound $d_C$, therefore gives $\\Hom(C,L_n)=0$ for every $n$. Consequently the last product in Step 2 is zero.",
+   "uses": [
+    "def-kun-truncations",
     "det-finite-window-bounded"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Right term"
+   }
   },
   {
-   "text": "*Left term.* The fiber of $L_{n+1}\\to L_n$ is $H^{-n-1}(L)[n+1]$, so there is an exact sequence\n\n$$\n\\Hom(C,H^{-n-1}(L)[n])\\to\\Hom(C,L_{n+1}[-1])\\to\\Hom(C,L_n[-1])\\to\\Hom(C,H^{-n-1}(L)[n+1]),\n$$\n\nwhose outer terms are $\\Ext^{n}(C,H^{-n-1}L)$ and $\\Ext^{n+1}(C,H^{-n-1}L)$. For $n>d_C$ both vanish by\n[sk-cor-ind-heart-ii], so the transition maps of the tower $G_n=\\Hom(C,L_n[-1])$ are isomorphisms for\n$n>d_C$.",
-   "uses": [],
-   "elementary": null
+   "text": "For each $n\\geq0$, apply [lem-sf-derived-truncation-triangle] to $K=L_{n+1}$ with $b=-n$. This gives $\\tau_{\\leq-n-1}L_{n+1}\\to L_{n+1}\\to L_n\\to$. The truncation formulas [def-kun-truncations] identify its first term with $H^{-n-1}(L)[n+1]$: it is supported only in degree $-n-1$, where its term is $\\ker(d^{-n-1}:\\operatorname{coker}d^{-n-2}\\to L^{-n})=H^{-n-1}(L)$. The second truncation $\\tau_{\\geq-n}L_{n+1}$ is canonically $L_n$, with its canonical quotient map. Shift the triangle by $[-1]$ and use representable Hom exactness [lem-weil-pbc-hom-into-triangle-exact]. With $B_n=H^{-n-1}(L)$ this yields\n$$\\Hom(C,B_n[n])\\longrightarrow G_{n+1}\\longrightarrow G_n\\longrightarrow\\Hom(C,B_n[n+1]).$$\nHere $B_n\\in\\IndCons$ by the definition of $\\Dic$. If $n>d_C$, the bounded objects $B_n[n]$ and $B_n[n+1]$ belong to $\\Dic$ and are supported in degrees $-n$ and $-n-1$, respectively. Both degrees are at most $-d_C-1$, so [det-finite-window-bounded] gives zero for both outer groups. This is exactly the pair of Ext vanishings $\\Ext^n(C,B_n)=\\Ext^{n+1}(C,B_n)=0$ of the blueprint, obtained here as the single-cohomology special cases of the already cited bounded theorem. Exactness says that $G_{n+1}\\to G_n$ is both injective and surjective.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-truncations",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "det-finite-window-bounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 08J5 (remark-truncation-distinguished-triangle), third displayed triangle; Lemma 0149 (lemma-representable-homological); blueprint proof, Left term"
+   }
   },
   {
-   "text": "*Vanishing of $\\varprojlim^1$.* Let $(y_n)\\in\\prod_nG_n$; we solve $x_n-t(x_{n+1})=y_n$ where\n$t\\colon G_{n+1}\\to G_n$ is the transition. Choose $N>d_C$. Since $t\\colon G_{n+1}\\to G_n$ is bijective for $n\\geq N$,\nidentify all $G_n$ ($n\\geq N$) with $G_N$ along these bijections; the equation becomes $x_n=x_{n+1}+y_n$ in $G_N$, solved by $x_N=0$ and\n$x_{n+1}=x_n-y_n$ for $n\\geq N$. For $n<N$ put $x_n=y_n+t(x_{n+1})$ successively for\n$n=N-1,\\dots,0$. Hence $1-\\mathrm{shift}$ is surjective and $\\varprojlim^1G_n=0$.\n\nTherefore $\\Hom(C,L)=0$.",
+   "text": "Write $u_n:G_{n+1}\\to G_n$ for the maps of Step 4 and choose the natural number $N=d_C+1$. For an arbitrary $y=(y_n)\\in\\prod_nG_n$, define $x_N=0$ and, recursively for $n\\geq N$, define $x_{n+1}=u_n^{-1}(x_n-y_n)$, which exists since $n>d_C$. For $n=N-1,N-2,\\ldots,0$, recursively define $x_n=y_n+u_n(x_{n+1})$. These formulas give $x_n-u_n(x_{n+1})=y_n$ at every index, proving surjectivity of $1-t$. This is a direct calculation in abelian groups, including all finitely many transition maps that need not be invertible.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Vanishing of the derived-limit obstruction, explicit recursion"
+   }
+  },
+  {
+   "text": "In the exact segment of Step 2, the first arrow is surjective by Step 5 and the last term is zero by Step 3. For $f\\in\\Hom(C,L)$, exactness at $\\Hom(C,L)$ lifts $f$ to $g\\in\\prod_nG_n$; surjectivity writes $g=(1-t)x$, whose image is zero by exactness. Thus $f=0$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+    "place": "Final conclusion from the exact segment"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-pe-weakly-contractible-basis",
-  "det-finite-window-bounded"
+  "det-pe-left-complete-iso",
+  "det-pe-products-derived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-kun-truncations",
+  "det-finite-window-bounded",
+  "lem-sf-derived-truncation-triangle"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-unbounded.proof.md",
+  "place": "Left completeness; Milnor sequence; Right term; Left term; Vanishing of the derived-limit obstruction"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftComplete|left_complete|hom.*trunc|trunc.*hom",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "vanishing of Hom from a constructible sheaf to an unbounded below complex",
+   "results": "CochainComplex.isZero_of_isGE, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom_eq_zero, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.isZero_stupidTrunc_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated, CategoryTheory.Pretriangulated",
+   "results": "loogle: unknown identifier 'CategoryTheory.Triangulated'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf with uniformly bounded Ext has no morphisms to an unbounded complex whose cohomology lies below the negative Ext bound",
+   "results": "DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk', DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveDimension|ProjectiveDimension|hom.*eq_zero",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.coyoneda",
+   "results": "loogle: unknown identifier 'CategoryTheory.Pretriangulated.coyoneda'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext vanishing bound implies morphisms from an object of the heart into a left unbounded derived category object vanish",
+   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.hasExt_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.hasProjectiveDimensionLT_iff, DerivedCategory.IsGE",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not give this constructible relative Ext-bound statement; orthogonality and projective-object results have different hypotheses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +178,39 @@
   "sk-thm-pe-weakly-contractible-basis"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-finite-window-unbounded",
+  "worker": "stage1",
+  "summary": "Bound d_C explicitly by its uniform Ext property, and spell out constructible and ind-constructible notions using existing acyclic definition nodes. Follow the left-completeness/Milnor/Ext-stabilization route. Use the bounded lower-tail theorem also for the two single-cohomology shifted layers, and compute truncation stability directly, avoiding imported aggregate-node dependency cycles. Write out the Hom product calculation and the inverse-transition recursion. No new nodes.",
+  "blueprint": "Steps 1, 2, 3, 4, 5-6 realize respectively the five labelled paragraphs of det-finite-window-unbounded.proof.md; they also realize the unbounded portion of sk-lem-finite-window, paragraphs 3-4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic exactness of Hom in a triangulated category, used for the two displayed triangle segments."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic standard truncation triangle, used to identify the consecutive Postnikov layer."
+   },
+   {
+    "node": "def-kun-truncations",
+    "why": "Explicit canonical truncation and shift formulas for complexes in any abelian category; used only as notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sf-derived-truncation-triangle",
+  "def-kun-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-3724da729",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-3724da729 (reviewer sub-agent of L); spot-checked: Read the item, report, required coordination files, unit/chapter route, all cited node statements, and cited sources. The corrected statement is closed and faithful; all six proof steps have valid dependencies, correct truncation shifts, coefficient category, hypotheses, and exactness arguments. Boundary cases and tail recursion were checked. No new nodes, duplicates, cycles, SGA citations, or repairs are required."
+ }
 }
