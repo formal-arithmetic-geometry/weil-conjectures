@@ -208,5 +208,34 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a9394a5b6 (reviewer sub-agent of L); spot-checked: Reviewed item, helper, all proof steps, cited DAG statements, Stacks Tag 0D6I, blueprint route, coefficients, base-change morphism, edge cases, and duplicate candidates. No repairs needed; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da7f4aab4",
+  "group": "NN",
+  "result": "fix",
+  "note": "Read the node, all 8 statement deps and their Lean records, the blueprint source place, def-weil-size-convention, the module, the report (real Worker report and Second reading by NN) and the related pro-etale modules (ProEtaleInverseImage, ProEtaleOperations, BoundedContinuitySections, RightDerivedFunctorOfQuasiIsoResolutions). Clauses match: f qc+qs; R : Sheaf (topology X) RingCat (the second reading's CommRingCat->RingCat change is a correct generalization, consistent with sibling det-pe-bounded-continuity-sections); module direct image = SheafOfModules.pushforward along proEtaleBaseChange (= recorded Over.pullback @WeaklyEtale ⊤ f) over f_*R; Rf_* = recorded rightDerivedFunctorOfQuasiIsoResolutions; conclusion IsIso of the canonical colimit.desc for every q : ℤ. No duplicate notion found. Fixes: (F1) index {I : Type u} was a silent universe restriction against the size convention (filtered colimits formed in V) and the sibling node; changed to {I : Type (u + 1)} and dropped the redundant [HasColimit D] (now inferred). (F2) The postponed helper ringModuleDirectImage_hasKInjectiveResolutions (true: Stacks 07A5/079P; same pattern as landed helpers) and the instance ringModuleSheaves_hasDerivedCategory were added to lean.declarations; the instance got a source/blueprint docstring and the helper a fuller proof docstring. (F3) The theorem docstring now carries the node's 4 proof steps. Removed unused universe w. nt_compile.py: delivered and fixed files rc 0, no messages (the live lakefile sets warn.sorry=false; a deliberate-error test confirms the file is elaborated); #print axioms gives only sorryAx plus the standard axioms. fixes/: complete module, lean-record.json (declarations, note), report.md with a maintainer correction section."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.boundedContinuityDirectImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleBoundedContinuityDirectImage.lean",
+  "statement": "theorem boundedContinuityDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (R : Sheaf (topology X) RingCat.{u + 1}) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (D : I ⥤ CochainComplex (SheafOfModules.{u + 1} R) ℤ) (a : ℤ) (hD : ∀ i : I, ∀ n : ℤ, n < a → IsZero ((D.obj i).X n)) (q : ℤ) : IsIso (colimit.desc ((D ⋙ DerivedCategory.Q) ⋙ ringHigherDirectImage f R q) ((ringHigherDirectImage f R q).mapCocone (DerivedCategory.Q.mapCocone (colimit.cocone D))))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleSheaves_hasDerivedCategory",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleDirectImage_additive",
+   "AlgebraicGeometry.Scheme.ProEt.ringModuleDirectImage_hasKInjectiveResolutions",
+   "AlgebraicGeometry.Scheme.ProEt.ringDerivedDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.ringHigherDirectImage",
+   "AlgebraicGeometry.Scheme.ProEt.boundedContinuityDirectImage"
+  ],
+  "note": "Module direct image over f_*R is SheafOfModules.pushforward along proEtaleBaseChange (= MorphismProperty.Over.pullback @WeaklyEtale ⊤ f, the base change u of det-pe-topos-functoriality-inverse-image) with identity coefficient map; R f_* is the recorded rightDerivedFunctorOfQuasiIsoResolutions (def-sfb-right-derived-functor). ringModuleDirectImage_hasKInjectiveResolutions is the named postponed helper (K-injective resolutions for arbitrary RingCat coefficient sheaves on the pro-etale site, Stacks 07A5/079P) needed by that interface; stage 3 proves it with the item. Maintainer fix: the index category is V-small, I : Type (u + 1) as in def-weil-size-convention and det-pe-bounded-continuity-sections (was Type u), and the redundant [HasColimit D] hypothesis is dropped (the colimit is inferred).",
+  "fixed_by": "NT-stage2-cc-da7f4aab4"
  }
 }
