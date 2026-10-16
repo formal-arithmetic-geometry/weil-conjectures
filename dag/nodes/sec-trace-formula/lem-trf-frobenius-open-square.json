@@ -20,7 +20,9 @@
   "def-pc-fibre-product",
   "def-weil-absolute-frobenius-scheme",
   "def-weil-frobenius-substitution",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-relative-frobenius-geometric-fiber",
+  "def-weil-frobenius-detailed"
  ],
  "proof": [
   {
@@ -240,5 +242,24 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-64c2f9e4b (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, original blueprint and source passages. All five steps are valid, including the explicit base-change lift and semilinear Galois equations. Checked edge cases, duplicate candidates, target coefficient distinctions and acyclicity. No new nodes or repairs needed; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-98b96258b",
+  "group": "N8",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement dependencies, source alignment, canonical maps, hypotheses, conclusions, edge cases, universes, docstrings, and verbatim signature. Immutable module compiled successfully through scompile.py in sandbox and library modes. No delivery errors; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusOpenSquare",
+  "declaration": "WeilConjectures.FiniteFieldDatum.frobenius_open_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusOpenSquare.lean",
+  "statement": "theorem frobenius_open_square (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀))) (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] (m : ℕ) : IsPullback (End.of (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map (Over.homMk (X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) D.a) (D.model_frobenius_over X₀.hom))).left) ^ m) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left) (End.of (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map (Over.homMk (Y₀.left.iterateFrobenius D.prime (D.model_characteristic Y₀.hom) D.a) (D.model_frobenius_over Y₀.hom))).left) ^ m) ∧ IsPullback (End.of (D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _)) ^ m) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left) (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left) (End.of (D.galoisMap Y₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ∧ (End.of (D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ≫ pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) = pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ (End.of (Spec.map (CommRingCat.ofHom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m) ∧ (End.of (D.galoisMap Y₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _)) ^ m) ≫ pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) = pullback.snd Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ (End.of (Spec.map (CommRingCat.ofHom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _ (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed unrestricted model_characteristic, model_frobenius_over and galoisMap interfaces. The relative Frobenius is the actual Over.pullback map of the recorded absolute Frobenius, without a finite-type assumption. Two already landed definition nodes are added to stmt_deps for these canonical interfaces."
  }
 }
