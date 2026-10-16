@@ -26,9 +26,145 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use functional composition. Fix the small colimits in [def-weil-pbc-category-colimit] and its dual in the opposite category: a limit is an object with compatible projections through which each compatible family factors uniquely. A pushout is the colimit of a span; a pullback is its opposite construction. A natural transformation induces maps of these objects by the universal properties, and those induced maps respect identities and compositions because they do so on every coprojection or projection. All indexing categories in the statement are small since $J$ is small. In the latching category at $j$ every domain has degree $<d(j)$; in the matching category every codomain has degree $<d(j)$. Write $J_{<n}$ for the full subcategory of objects of degree $<n$, and write each arrow uniquely as $a=a^+a^-$ with the middle object of degree at most both endpoint degrees. Thus $J_{<n}$ inherits the same factorization and the boundary diagrams at a degree-$n$ object are already defined on $J_{<n}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definitions 5.2.1-5.2.2, printed p. 124; Stacks 002F (categories.tex, definition-colimit) and its opposite 002E (definition-limit) for the universal properties."
+   }
+  },
+  {
+   "text": "Here is the degree-extension argument, including composition. For a diagram $X$ on $J_{<n}$ and each $j$ of degree $n$, define $c_j:L_jX\\to M_jX$ by requiring its composite from the coprojection belonging to $u:i\\to j$ in $J^+$ to the projection belonging to $v:j\\to k$ in $J^-$ to be $X(vu):X_i\\to X_k$. Both $i,k$ have lower degree. Functoriality of $X$ gives compatibility with all commuting triangles, so the two universal properties in [def-weil-pbc-category-colimit], the second applied in the opposite category, give exactly one $c_j$. Given $L_jX\\xrightarrow{a_j}E_j\\xrightarrow{b_j}M_jX$ with $b_ja_j=c_j$, define the maps for pure incoming arrows by $a_j$ after the corresponding coprojection, and those for pure outgoing arrows by the corresponding projection after $b_j$. Keep existing maps on lower objects; for every general arrow use its inverse-then-direct factorization. Identity factors mean the identity map. Pure direct compositions hold by the relations of the latching cocone, and pure inverse compositions by the matching cone. To check an arbitrary composite, concatenate its two inverse-direct words and factor the middle direct-then-inverse pair. If that middle object has degree $<n$, its relation is already the functor law of $X$. If it has degree $n$ and both arrows are nonidentity, its two endpoints have lower degree and its relation is precisely the $(u,v)$ component of $b_ja_j=c_j$. If one arrow is an identity there is nothing to check. After replacing this pair by its inverse-direct factorization, the remaining adjacent inverse factors compose, as do the remaining direct factors. Their resulting factorization is the unique factorization of the total composite. This proves the functor law, even for nonidentity arrows between different degree-$n$ objects and for nonidentity endomorphisms factoring through lower degree. Conversely every extension supplies $a_j,b_j$ with these equations by its incoming and outgoing structure maps. Both constructions recover every arrow by its unique factorization and hence are inverse.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Remark 5.2.3, printed pp. 124-125; the omitted functor-law check is expanded using unique inverse-then-direct factorization."
+   }
+  },
+  {
+   "text": "For diagrams already extended as in step 2, a family $t_j:X_j\\to Y_j$ in degree $n$ extends a lower-degree natural transformation $t$ exactly when $t_ja_j^X=a_j^YL_jt$ and $b_j^Yt_j=M_jt\\,b_j^X$. These equations are exactly naturality for the pure incoming and outgoing arrows. They imply naturality for every arrow by its inverse-direct factorization; conversely naturality on the pure arrows gives the equations by the universal properties of [def-weil-pbc-category-colimit] and its opposite. For a lower-degree natural transformation $t:X\\to Y$, the boundary map of step 2 satisfies $M_jt\\,c_j^X=c_j^Y L_jt$: its component from an incoming $u:i\\to j$ to an outgoing $v:j\\to k$ is the naturality equation $t_kX(vu)=Y(vu)t_i$. Now fix $f:X\\to Y$ and let a partial factorization $X\\xrightarrow{i}Z\\xrightarrow{p}Y$ of $f$ be given on $J_{<n}$. Put $P_j=X_j\\amalg_{L_jX}L_jZ$ and $Q_j=Y_j\\times_{M_jY}M_jZ$. There is a canonical map $P_j\\to Q_j$: on $X_j$ it has components $f_j$ and $X_j\\to M_jX\\xrightarrow{M_ji}M_jZ$, and on $L_jZ$ it has components $L_jZ\\xrightarrow{L_jp}L_jY\\to Y_j$ and $c_j^Z$. Here $a_j^X:L_jX\\to X_j$ and $b_j^X:X_j\\to M_jX$ denote the boundary maps, and likewise for $Y$. On the pushout overlap $L_jX$, equality of the $Y_j$ components is $f_ja_j^X=a_j^YL_jf=a_j^YL_jp\\,L_ji$, and equality of the $M_jZ$ components is $M_ji\\,b_j^Xa_j^X=M_ji\\,c_j^X=c_j^ZL_ji$. To land in the pullback, the required equality on $X_j$ is $b_j^Yf_j=M_jf\\,b_j^X=M_jp\\,M_ji\\,b_j^X$, and on $L_jZ$ it is $b_j^Ya_j^YL_jp=c_j^YL_jp=M_jp\\,c_j^Z$. The displayed naturality of $c_j$ proves the two identities involving it; naturality of $f$ and $pi=f$ on lower degrees prove the others. Thus the pushout and pullback universal properties give the asserted map. A factorization $P_j\\to Z_j\\to Q_j$ therefore supplies the boundary maps of $Z$, $i_j$ and $p_j$. Its composite ensures both $b_j^Za_j^Z=c_j^Z$ and $p_ji_j=f_j$, and its coprojection/projection equations are exactly the two naturality equations just proved. Conversely those equations recover this factorization. Thus partial factorizations extend by exactly the displayed formula in the statement.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Remark 5.2.3 and proof of Theorem 5.2.5, printed pp. 125-126; all four components of the extension map are specified."
+   }
+  },
+  {
+   "text": "We first prove the objectwise assertion for relative left maps, for either ground left class $\\mathcal L=C$ or $C\\cap W$. These are left lifting classes by the two assumed WFS. Restrict $f:X\\to Y$ to the small direct category $D_j=(J^+/j)\\setminus\\{1_j\\}$ using its domain projection, with degree $e(u:i\\to j)=d(i)$; a nonidentity commuting-triangle arrow strictly raises this degree. At an object $(u:i\\to j)$, its nonidentity incoming slice is isomorphic to $(J^+/i)\\setminus\\{1_i\\}$: an arrow there is $h:k\\to i$ and its remaining label is necessarily $uh:k\\to j$. This composite is nonidentity because degree strictly increases; morphisms are exactly the same commuting triangles. Hence the relative latching map of the restriction at $u$ identifies with $\\lambda_i(f):X_i\\amalg_{L_iX}L_iY\\to Y_i$. If all these maps lie in $\\mathcal L$, [lem-coef-small-direct-colimit-lifting] gives $L_jf:L_jX\\to L_jY$ in $\\mathcal L$. That node allows infinitely many objects and arrows, as may occur in $D_j$. Its pushout $X_j\\to X_j\\amalg_{L_jX}L_jY$ is in $\\mathcal L$, and its composite with $\\lambda_j(f)$ is $f_j$. Pushout and composition closure are exactly [lem-coef-lifting-class-closure]. Therefore relative $C$ maps are objectwise cofibrations and relative $C\\cap W$ maps are objectwise trivial cofibrations.",
+   "uses": [
+    "lem-coef-small-direct-colimit-lifting",
+    "lem-coef-lifting-class-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 5.1.4, Corollary 5.1.5 and Remark 5.1.7, printed pp. 121-123, applied to the direct latching slice without a finiteness assumption."
+   }
+  },
+  {
+   "text": "The relative $C\\cap W$ class is exactly the intersection of the relative $C$ class with objectwise $W$. One containment follows from step 4. For the other, suppose $f$ is relative $C$ and objectwise $W$, and induct on $d(j)$. Assume every lower-degree $\\lambda_i(f)$ is in $C\\cap W$. The slice identification in step 4 and [lem-coef-small-direct-colimit-lifting], applied to the left lifting class $C\\cap W={}^{\\square}F$, make $L_jf$ a trivial cofibration. By pushout closure in [lem-coef-lifting-class-closure], $X_j\\to P_j=X_j\\amalg_{L_jX}L_jY$ is a trivial cofibration. Since $f_j$ is its composite with $\\lambda_j(f)$ and $f_j\\in W$, two-out-of-three makes $\\lambda_j(f)\\in W$. It is already in $C$, so is trivial. In degree zero the slice is empty and $L_jf$ is the identity of an initial object, which belongs to the left lifting class by the identity clause of the same closure node. This starts the induction for all natural-number degrees.",
+   "uses": [
+    "lem-coef-small-direct-colimit-lifting",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.1.3 proof and Theorem 5.2.5, printed pp. 122-126: the equivalence between relative trivial cofibrations and cofibrations that are objectwise weak equivalences."
+   }
+  },
+  {
+   "text": "Apply steps 4-5 in $\\mathcal M^{\\mathrm{op}}$ and $J^{\\mathrm{op}}$. The ground WFS interchange: the opposite of $(C,F\\cap W)$ is $(F^{\\mathrm{op}}\\cap W^{\\mathrm{op}},C^{\\mathrm{op}})$, and the opposite of $(C\\cap W,F)$ is $(F^{\\mathrm{op}},C^{\\mathrm{op}}\\cap W^{\\mathrm{op}})$. Factorizations and lifts reverse literally, so these are WFS with functorial factorizations; weak-equivalence retracts and two-out-of-three also reverse. The Reedy structure on $J^{\\mathrm{op}}$ has positive arrows $(J^-)^{\\mathrm{op}}$ and negative arrows $(J^+)^{\\mathrm{op}}$, with the same degree. The opposite of its relative latching map for $f^{\\mathrm{op}}:Y\\to X$ is $\\rho_j(f):X_j\\to Y_j\\times_{M_jY}M_jX$. Accordingly the conclusions proved with [lem-coef-small-direct-colimit-lifting] and [lem-coef-lifting-class-closure] give: relative $F$ maps are objectwise fibrations, relative $F\\cap W$ maps are objectwise trivial fibrations, and the latter class is precisely relative $F$ intersected with objectwise $W$. This also proves, rather than assumes, the corresponding pullback and composition closure used by this dual calculation.",
+   "uses": [
+    "lem-coef-small-direct-colimit-lifting",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definitions 5.2.1-5.2.2 and proof of Theorem 5.2.5, printed pp. 124-126: the opposite construction, with relative matching maps written explicitly."
+   }
+  },
+  {
+   "text": "Construct both factorizations by induction. At degree zero, $P_j=X_j$ and $Q_j=Y_j$ in step 3, since both boundary categories are empty. Factor this map in the ground WFS $(C,F\\cap W)$, respectively $(C\\cap W,F)$. Assuming $Z,i,p$ have been defined on $J_{<n}$, form the map $P_j\\to Q_j$ of step 3 at each degree-$n$ object and factor it in the same ground WFS. The extension verification in steps 2-3 gives a compatible functor and natural transformations on $J_{<n+1}$. Its relative latching map for $i$ is the chosen map $P_j\\to Z_j$, and its relative matching map for $p$ is the chosen map $Z_j\\to Q_j$. For a square $(u,v):f\\to f'$ of transformations, lower-degree comparison maps induce $P_j\\to P'_j$ and $Q_j\\to Q'_j$ by [def-weil-pbc-category-colimit] and its opposite. The ground factorization functor supplies $Z_j\\to Z'_j$, compatible with both boundary maps. Step 3 proves its naturality on all arrows. For identity and composite squares, the maps on $P_j,Q_j$ are identities and composites by uniqueness on their coprojections/projections; the identity and composition laws of the ground factorization functor give the same laws on $Z_j$. Thus both diagram factorizations are functorial. Every object has finite degree, and every arrow and composable pair has endpoints in some $J_{<n}$. The compatible union over all $n$ therefore defines the whole functor and transformations, with the functor and naturality laws already checked on a sufficiently large stage. No colimit of a class-sized family or termination at a finite bound is assumed.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.5, printed p. 126; ground factorization and its functoriality expanded for natural-number degrees."
+   }
+  },
+  {
+   "text": "Prove the two lifting assertions directly. Let $f:A\\to B$ be relative $C$ and $p:U\\to V$ relative $F\\cap W$, or let $f$ be relative $C\\cap W$ and $p$ relative $F$. For a square with horizontal maps $a:A\\to U$, $b:B\\to V$ satisfying $pa=bf$, suppose a natural lift $h$ has been chosen on $J_{<n}$. At $j$ of degree $n$ form a square with left edge $\\lambda_j(f):A_j\\amalg_{L_jA}L_jB\\to B_j$ and right edge $\\rho_j(p):U_j\\to V_j\\times_{M_jV}M_jU$. Its top map is $a_j$ on $A_j$ and the map $L_jB\\xrightarrow{L_jh}L_jU\\to U_j$ on $L_jB$. Its bottom map has components $b_j$ and $B_j\\to M_jB\\xrightarrow{M_jh}M_jU$. These are defined by [def-weil-pbc-category-colimit] and its opposite. Write $u:i\\to j$ for a pure incoming arrow and $v:j\\to k$ for a pure outgoing arrow; both $i,k$ have lower degree. The top map agrees on the incoming $A_i$ because $U(u)h_if_i=U(u)a_i=a_jA(u)$. The bottom map takes values in the pullback because $p_kh_kB(v)=b_kB(v)=V(v)b_j$. On $A_j$, commutation in the $V_j$ component is $p_ja_j=b_jf_j$; in the matching component indexed by $v$ it is $U(v)a_j=a_kA(v)=h_kf_kA(v)=h_kB(v)f_j$. On the incoming $B_i$, the $V_j$ equation is $p_jU(u)h_i=V(u)p_ih_i=V(u)b_i=b_jB(u)$, and the matching equation is $U(v)U(u)h_i=U(vu)h_i=h_kB(vu)=h_kB(v)B(u)$. Here $vu:i\\to k$ is an arrow of the full lower-degree subcategory, even when it is mixed, so the middle equality uses exactly the already chosen naturality of $h$. Equality on every coprojection and projection proves commutation of the entire square. The selected ground WFS supplies a diagonal $h_j:B_j\\to U_j$. Its two equations say $h_jf_j=a_j$, $p_jh_j=b_j$ and the incoming/outgoing naturality equations of step 3. Thus it extends the lift. Start with the empty stage and take the compatible union over $n$ as in step 7. The resulting transformation is a diagonal in the original square.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.5, printed pp. 125-126; the source leaves most lifting details to the reader, and the square and its equations are supplied here."
+   }
+  },
+  {
+   "text": "All four relative classes are retract closed. By [lem-coef-lifting-class-closure], the ground lifting classes $C,F\\cap W,C\\cap W,F$ are retract closed. For the right classes this follows by applying the same statement to right lifting classes, or to left lifting classes in the opposite category. For each $j$, $f\\mapsto\\lambda_j(f)$ and $f\\mapsto\\rho_j(f)$ are functors on arrow categories: the induced maps are those from colimits, limits, pushouts and pullbacks, with identity/composition verified as in step 1 using [def-weil-pbc-category-colimit]. Consequently an arrow retract of diagrams induces a retract of each relative map, proving the claim. Steps 7-8 now give WFS with exact lifting classes, not merely factorizations and one-sided lifting. Explicitly, for either pair $(\\mathcal A,\\mathcal B)$ of relative classes, factor $f:A\\to B$ as $A\\xrightarrow{i}Z\\xrightarrow{p}B$. If $f$ lifts left against $\\mathcal B$, lift against $p$ to get $s:B\\to Z$ with $sf=i$ and $ps=1_B$. The arrow maps $(1_A,s)$ and $(1_A,p)$ make $f$ a retract of $i$, hence in $\\mathcal A$. If $f$ lifts right against $\\mathcal A$, lift against $i$ to get $r:Z\\to A$ with $ri=1_A$ and $fr=p$. The arrow maps $(i,1_B)$ and $(r,1_B)$ make $f$ a retract of $p$, hence in $\\mathcal B$. Step 8 supplies the other two containments.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "End of proof of Theorem 5.2.5 and the retract argument of Lemma 1.1.9, printed pp. 5 and 126; both arrow retractions are written out."
+   }
+  },
+  {
+   "text": "The functor category is complete and cocomplete by the following explicit pointwise construction. For any small diagram of $J$-diagrams take the ground limit or colimit at each $j$. Every arrow of $J$ induces a map between these objects by the compatible component maps; uniqueness on projections/coprojections proves the functor laws. A compatible family of transformations to or from this diagram induces unique component maps, and the same uniqueness proves their naturality. This is the required cone or cocone universal property, using [def-weil-pbc-category-colimit] and its opposite. Objectwise weak equivalences satisfy two-out-of-three and retract closure by evaluation. Steps 5-6 identify the trivial relative classes with weak equivalences intersected with the ordinary relative classes. Step 9 and the functorial factorizations of step 7 are therefore precisely the two model WFS. This proves the asserted model structure and both trivial-map characterizations. Step 4 and its dual step 6 prove all four objectwise assertions. Apply them to the map from the pointwise initial diagram and the map to the pointwise terminal diagram to obtain objectwise cofibrancy and fibrancy, respectively.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 5.2.5, printed pp. 125-126, assembled from the preceding constructions; pointwise universal properties are verified explicitly."
+   }
+  },
+  {
+   "text": "A prescribed degree-zero factorization in either ground WFS may replace the degree-zero choices in step 7: both boundaries there are empty, so these are the only initial data the induction needs. Every later step uses the already fixed lower data and leaves them unchanged. Functoriality holds on a family of such prescriptions when the prescriptions themselves are functorial; arbitrary objectwise prescriptions do not assert a functorial choice as the input varies. For $\\Delta$ of [def-weil-pbc-simplicial-set], factor an order-preserving $a:[m]\\to[n]$ by listing its image $y_0<\\cdots<y_r$, sending $i$ to the unique index $t$ with $a(i)=y_t$, and sending $t$ to $y_t$. This is a surjection followed by an injection. Any such factorization has this image and this ordered enumeration, so it is unique. A nonidentity surjection strictly lowers $m$ and a nonidentity injection strictly raises it. Opposites exchange these two classes and reverse the word, giving the Reedy structure of $\\Delta^{\\mathrm{op}}$ with the same degree. The opposite ground model construction was verified in step 6, so all extension and model assertions apply there as well. For empty $J$ the diagram category has one object and one map; boundaries and inductions are empty, and both factorizations and lifts are the unique data. For a singleton category the two relative maps are just the component map, recovering the original model category.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 5.2.1, Remark 5.2.3 and the prescribed-degree-zero construction in Theorem 5.2.8, printed pp. 124-128; elementary ordered-image factorization of simplex maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-small-direct-colimit-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, stable flat-model mapping-space foundation: explicit degree induction following Hovey 5.2.3 and 5.2.5 read online, with omitted extension, lifting, functoriality and retract details supplied. The online Hovey document is not archived in literature/; WANTED is recorded in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,15 +200,136 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (I : CategoryTheory.MorphismProperty C) →\\n      (κ : Cardinal.{w}) →\\n        [inst_1 : Fact κ.IsRegular] →\\n          [inst_2 : OrderBot κ.ord.ToType] →\\n            [I.IsCardinalForSmallObjectArgument κ] → I.rlp.llp.FunctorialFactorizat\", \"doc\": \"This definition constructs a functorial factorization system in the context of the small object argument. Given a morphism property $I$ and a regular cardinal $\\\\kappa$, it specifies: (1) a functor $Z:\"}\n  {\"name\": \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [I.IsCardinalForSmallObjectArgument κ],\\n  I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"Given a category $\\\\mathcal{C}$, a morphism property $P$ in $\\\\mathcal{C}$, and a regular cardinal $\\\\kappa$, this proposition defines a condition on morphisms in $\\\\mathcal{C}$ required for the small obj\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"module\": \"Mathlib/CategoryTheory/SmallObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C)\\n  [I.HasSmallObjectArgument], I.rlp.llp.HasFunctorialFactorization I.rlp\", \"doc\": \"For any morphism in a category with hom-sets in universe $\\\\max(u, v+1)$, there exists a functorial assignment of factorizations into a morphism with the left lifting property against $I$-right lifting\"}\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData_i_app\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ]\\n  (f : CategoryTheory.Arrow C),\\n  (CategoryTheory.SmallObject.functorialF\", \"doc\": \"For any category $\\\\mathcal{C}$, morphism property $I$, regular cardinal $\\\\kappa$, and arrow $f : X \\\\to Y$ in the arrow category $\\\\text{Arrow}(\\\\mathcal{C})$, the component of the natural transformation\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.factorizationData\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Factorization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {W₁ W₂ : CategoryTheory.MorphismProperty C} → W₁.FunctorialFactorizationData W₂ → W₁.FactorizationData W₂\", \"doc\": \"For a category $\\\\mathcal{C}$ with morphism properties $W_1$ and $W_2$ equipped with a functorial factorization system, this definition assigns to each morphism $f : X \\\\to Y$ an intermediate object $Z(\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory\", \"module\": \"Mathlib/CategoryTheory/MorphismProperty/Factorization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {W₁ W₂ : CategoryTheory.MorphismProperty C} →\\n      W₁.FunctorialFactorizationData W₂ →\\n        (J : Type u_2) →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} J] →\\n            (W₁.functorCategory J).FunctorialFactorizati\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with morphism properties $W_1$ and $W_2$ and a small category $\\\\mathcal{J}$, this defines a functorial factorization system in the functor category $[\\\\mathcal{J\"}\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData_Z_map\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ]\\n  {X Y : CategoryTheory.Arrow C} (φ : X ⟶ Y),\\n  (CategoryTheory.SmallObje\", \"doc\": \"In the context of the small object argument with a regular cardinal $\\\\kappa$ and a morphism property $I$, the action of the functor $Z$ (from the arrow category of $\\\\mathcal{C}$ to $\\\\mathcal{C}$) on a\"}\n  {\"name\": \"CategoryTheory.SmallObject.functorialFactorizationData_Z_obj\", \"module\": \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (I : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [inst_2 : OrderBot κ.ord.ToType] [inst_3 : I.IsCardinalForSmallObjectArgument κ]\\n  (f : CategoryTheory.Arrow C),\\n  (CategoryTheory.SmallObject.functorialF\", \"doc\": \"In the context of the small object argument with a regular cardinal $\\\\kappa$, for any morphism $f$ in the arrow category of a category $\\\\mathcal{C}$ equipped with a morphism property $I$ satisfying ca\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: ReedyStructure defines only the indexing structure. Reedy/Basic.lean:21-24 explicitly lists the Reedy diagram model structure as TODO. Objectwise functor-category factorizations do not impose relative latching/matching conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|latching|matching",
+   "results": "{\"t\": \"2026-10-16T13:36:03Z\", \"tool\": \"grep\", \"query\": \"Reedy|latching|matching\", \"sub\": \"Mathlib/AlgebraicTopology/Reedy\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy diagram model structures with relative latching cofibrations and matching fibrations",
+   "results": "{\"t\": \"2026-10-16T13:36:04Z\", \"tool\": \"leansearch\", \"query\": \"Reedy diagram model structures with relative latching cofibrations and matching fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.instModelCategoryOpposite\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.mk\"], \"digest\": \"1f6d13c3caa3d589\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "loogle",
+   "query": "Reedy model structure latching matching functor category",
+   "results": "{\"t\": \"2026-10-16T13:36:04Z\", \"tool\": \"loogle\", \"query\": \"Reedy model structure latching matching functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:12: expected end of input\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy diagram model structures and degreewise extensions in a model category",
+   "results": "{\"t\": \"2026-10-16T13:36:08Z\", \"tool\": \"leanfinder\", \"query\": \"Reedy diagram model structures and degreewise extensions in a model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.mk'\"], \"digest\": \"fba19f77ef7ab0e6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy",
+   "results": "{\"t\": \"2026-10-16T13:36:25Z\", \"tool\": \"grep\", \"query\": \"Reedy\", \"sub\": \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "loogle",
+   "query": "ReedyStructure",
+   "results": "{\"t\": \"2026-10-16T13:36:26Z\", \"tool\": \"loogle\", \"query\": \"ReedyStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ReedyStructure'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|latching|matching",
+   "results": "{\"t\": \"2026-10-16T13:39:03Z\", \"tool\": \"grep\", \"query\": \"Reedy|latching|matching\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\"",
+   "results": "{\"t\": \"2026-10-16T13:39:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reedy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Language.instToSnapshotTreeDynamicSnapshot\", \"Lean.Core.CoreM.parIterGreedy\", \"Lean.Core.CoreM.parIterGreedyWithCancel\", \"Lean.Meta.MetaM.parIterGreedy\", \"Lean.Meta.MetaM.parIterGreedyWithCancel\", \"Lean.Elab.Term.TermElabM.parIterGreedy\", \"Lean.Elab.Tactic.TacticM.parIterGreedy\", \"Lean.Elab.Term.TermElabM.parIterGreedyWithCancel\"], \"digest\": \"7b07fbcaebad8dcc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor categories indexed by small categories with unique inverse direct factorization admit functorial model factorizations with relative boundary maps",
+   "results": "{\"t\": \"2026-10-16T13:39:14Z\", \"tool\": \"leanfinder\", \"query\": \"Functor categories indexed by small categories with unique inverse direct factorization admit functorial model factorizations with relative boundary maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory.Z\", \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationFunctorFunctorCategory\", \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory.Z_obj_obj\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.MorphismProperty.functorialFactorizationData\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.Z\"], \"digest\": \"0ef62e2d920bacb5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|relativeLatching|llp.*colimit|colimit.*llp",
+   "results": "{\"t\": \"2026-10-16T13:40:06Z\", \"tool\": \"grep\", \"query\": \"latching|relativeLatching|llp.*colimit|colimit.*llp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\"], \"digest\": \"f9827c340f3f7fe6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits of maps of small direct diagrams with relative latching maps in a left lifting class remain in that left lifting class",
+   "results": "{\"t\": \"2026-10-16T13:40:06Z\", \"tool\": \"leansearch\", \"query\": \"Colimits of maps of small direct diagrams with relative latching maps in a left lifting class remain in that left lifting class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.MorphismProperty.llp_isStableUnderCobaseChange\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument\", \"CategoryTheory.MorphismProperty.colimitsOfShape.mk\", \"CategoryTheory.MorphismProperty.llp_isStableUnderCoproductsOfShape\", \"CategoryTheory.MorphismProperty.colimitsOfShape\", \"CategoryTheory.liftedColimitIsColimit\"], \"digest\": \"1a2fa3766702ef69\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.llp, \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T13:40:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty.llp, \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\"], \"digest\": \"1101dc8f9c3c0fcd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any small direct category a map of diagrams with relative latching maps in the left class of a weak factorization system induces a left class map on colimits",
+   "results": "{\"t\": \"2026-10-16T13:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"For any small direct category a map of diagrams with relative latching maps in the left class of a weak factorization system induces a left class map on colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.colimitsOfShape.mk'\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.MorphismProperty.transfiniteCompositions_pushouts_coproducts_le_llp_rlp\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_toSucc\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.llp\"], \"digest\": \"7854bae7ef57b69a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|Reedy|relativeLatching",
+   "results": "{\"t\": \"2026-10-16T13:40:25Z\", \"tool\": \"grep\", \"query\": \"latching|Reedy|relativeLatching\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm/PositiveVector.lean\", \"Mathlib/Tactic/Linarith/Frontend.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\"], \"digest\": \"991e7767f2ddd21d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative latching left lifting property for a natural transformation on a small direct category implies the left lifting property for its colimit map without finite size or a weak factorization assumption",
+   "results": "{\"t\": \"2026-10-16T13:40:27Z\", \"tool\": \"leanfinder\", \"query\": \"A relative latching left lifting property for a natural transformation on a small direct category implies the left lifting property for its colimit map without finite size or a weak factorization assumption\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot\", \"CategoryTheory.SmallObject.llp_rlp_ιObj\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.SmallObject.rlp_πObj\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLift\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"CategoryTheory.MorphismProperty.le_llp_rlp\"], \"digest\": \"03c5e1c665cafa63\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ground WFS, ordinary factorization, products or transfinite cell compositions. Read Reedy/Basic.lean:21-24 (diagram model construction TODO), ModelCategory/Basic.lean:45-88 and Factorization.lean:246-252 (objectwise factorization only). Loogle parse errors and the initial greps with a duplicated Mathlib prefix are inconclusive; the corrected full-source and AlgebraicTopology greps and quoted Reedy query were run afterwards."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-cosimplicial-frame-mapping",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-reedy-model-structure",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved degree extension by unique inverse-direct words, derived relative trivial-map and objectwise properties using one new small-direct-colimit lifting tool, and constructed both functorial factorizations and lifting/retract arguments explicitly. Checked arbitrary small indexing, unbounded natural degrees, same-degree mixed arrows, empty boundaries, simplex opposites and prescribed degree zero. No Lean attachment exists. The finite direct WFS node is insufficient at this size and is not cited.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2, the derived coefficient adjunction in the displayed R Hom / R lim calculation, via the recorded cosimplicial-frame and flat-model ancestry. Hovey Remark 5.2.3 and Theorem 5.2.5 supply the technical Reedy construction used by frames; the chapter and unit route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-7a95aa1d1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-7a95aa1d1 (reviewer sub-agent of L); spot-checked: Read the mathematics in full. Verified all eleven steps, the new direct-colimit lifting lemma, cited sources, infinite-index cases, opposites, duplicate candidates, and dependency acyclicity. No repairs needed. Concrete checks and target-scope limits are recorded in review.md."
+ }
 }
