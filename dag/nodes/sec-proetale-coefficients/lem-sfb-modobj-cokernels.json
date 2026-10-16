@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-cokernels",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cokernels of module objects are computed in $\\mathcal C$",
@@ -17,30 +17,154 @@
  ],
  "proof": [
   {
-   "text": "Since $\\mathcal R\\otimes-$ preserves cokernels and $\\mathcal R\\otimes0=0$, the morphism\n$\\mathcal R\\otimes\\pi$ is a cokernel of $\\mathcal R\\otimes f$. Moreover\n$\\pi\\gamma_N(\\mathcal R\\otimes f)=\\pi f\\gamma_M=0$. So $\\pi\\gamma_N$ factors uniquely through\n$\\mathcal R\\otimes\\pi$, which gives $\\gamma_Q$.",
+   "text": "Write $T=\\mathcal R\\otimes-$, and compose maps from right to left. A cokernel of $u$ means a coequalizer of $u$ and the zero morphism: its projection $q$ satisfies $qu=0$, and every $v$ with $vu=0$ has a unique factorization through $q$. Additivity gives $T(0)=0$, since $T(0)=T(0+0)=T(0)+T(0)$. The coequalizer diagram is finite, so the hypothesis that $T$ preserves finite colimits says directly that $T\\pi$ is a coequalizer of $Tf$ and $T(0)=0$, hence a cokernel of $Tf$. Apply the same hypothesis to this coequalizer: $T^2\\pi$ is a cokernel of $T^2f$. Only these existing coequalizers are used; no other cokernels in $\\mathcal C$ are assumed.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "first paragraph, preservation of the cokernel; second paragraph, tensoring twice"
+   }
   },
   {
-   "text": "For the unit axiom, precompose with $\\mathbf 1\\otimes\\pi$. This is an epimorphism, since it\nagrees with $\\pi$ up to the unitors. Then\n$$\n\\gamma_Q(\\eta\\otimes Q)(\\mathbf 1\\otimes\\pi)=\\gamma_Q(\\mathcal R\\otimes\\pi)(\\eta\\otimes N)\n=\\pi\\gamma_N(\\eta\\otimes N)=\\pi\\lambda_N=\\lambda_Q(\\mathbf 1\\otimes\\pi).\n$$\nFor associativity, precompose with $(\\mathcal R\\otimes\\mathcal R)\\otimes\\pi$. Through the\nassociator it is identified with $\\mathcal R\\otimes(\\mathcal R\\otimes\\pi)$, which is an\nepimorphism because $\\mathcal R\\otimes-$ preserves epimorphisms. After this\nprecomposition, both sides become $\\pi\\gamma_N(\\mu\\otimes N)\n=\\pi\\gamma_N(\\mathcal R\\otimes\\gamma_N)\\alpha$, by the module axioms for $N$.",
+   "text": "Each of $\\pi,T\\pi,T^2\\pi$ is an epimorphism by the uniqueness just recalled: if $a q=b q$ for one of these cokernel projections $q$ of $u$, the common map $v=aq=bq$ satisfies $vu=0$, and $a,b$ are both its factorization through $q$, so $a=b$. Also $\\mathbf1\\otimes\\pi=\\lambda_Q^{-1}\\pi\\lambda_N$ by naturality of the left unitor, hence it is an epimorphism by this same cancellation and invertibility of the unitors. Put $a=(\\mathcal R\\otimes\\mathcal R)\\otimes\\pi$. Naturality gives $\\alpha_{\\mathcal R,\\mathcal R,Q}a=T^2\\pi\\,\\alpha_{\\mathcal R,\\mathcal R,N}$, so $a$ is an epimorphism too. This uses no assertion that $T$ preserves arbitrary epimorphisms.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "second paragraph, the three cancellation maps"
+   }
   },
   {
-   "text": "Let $g\\colon N\\to L$ be a morphism of module objects with $gf=0$, and let\n$h\\colon Q\\to L$ be its factorization in $\\mathcal C$, so $h\\pi=g$. Then\n$$\nh\\gamma_Q(\\mathcal R\\otimes\\pi)=h\\pi\\gamma_N=g\\gamma_N=\\gamma_L(\\mathcal R\\otimes g)\n=\\gamma_L(\\mathcal R\\otimes h)(\\mathcal R\\otimes\\pi).\n$$\nSince $\\mathcal R\\otimes\\pi$ is an epimorphism, $h$ is a morphism of module objects. It is\nunique because $\\pi$ is an epimorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "The morphism axiom of [sk-def-sfb-module-objects] for $f$ and the cokernel equation give $\\pi\\gamma_N Tf=\\pi f\\gamma_M=0$. The universal property of $T\\pi$ from step 1 therefore supplies a unique map $\\gamma_Q:TQ\\to Q$ with $\\gamma_Q T\\pi=\\pi\\gamma_N$. This proves uniqueness among all maps satisfying the displayed equation, before any module axioms are imposed.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "first paragraph, construction and uniqueness of the action map"
+   }
+  },
+  {
+   "text": "For the unit axiom, naturality of tensoring with $\\eta$ and the defining equation in step 3 give\n$$\\gamma_Q(\\eta\\otimes Q)(\\mathbf1\\otimes\\pi)=\\gamma_Q T\\pi(\\eta\\otimes N)=\\pi\\gamma_N(\\eta\\otimes N)=\\pi\\lambda_N=\\lambda_Q(\\mathbf1\\otimes\\pi).$$\nThe third equality is the unit axiom for $N$ in [sk-def-sfb-module-objects], and the last is naturality of $\\lambda$. Cancel $\\mathbf1\\otimes\\pi$ by step 2 to get $\\gamma_Q(\\eta\\otimes Q)=\\lambda_Q$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "second paragraph, unit axiom"
+   }
+  },
+  {
+   "text": "For associativity put $\\alpha_X=\\alpha_{\\mathcal R,\\mathcal R,X}$ and use $a$ from step 2. Bifunctoriality, step 3 and naturality give\n$$\\gamma_Q(\\mu\\otimes Q)a=\\gamma_Q T\\pi(\\mu\\otimes N)=\\pi\\gamma_N(\\mu\\otimes N),$$\nwhereas\n$$\\begin{aligned}\n\\gamma_Q T\\gamma_Q\\alpha_Q a\n&=\\gamma_Q T\\gamma_Q T^2\\pi\\alpha_N\n=\\gamma_Q T(\\gamma_Q T\\pi)\\alpha_N\\\\\n&=\\gamma_Q T(\\pi\\gamma_N)\\alpha_N\n=\\pi\\gamma_N T\\gamma_N\\alpha_N\n=\\pi\\gamma_N(\\mu\\otimes N).\n\\end{aligned}$$\nThe final equality is the associativity axiom for $N$ from [sk-def-sfb-module-objects]. Cancel $a$ to obtain $\\gamma_Q(\\mu\\otimes Q)=\\gamma_Q T\\gamma_Q\\alpha_Q$. Together with step 4 this makes $(Q,\\gamma_Q)$ a module object.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "second paragraph, associativity axiom with both sides expanded"
+   }
+  },
+  {
+   "text": "The equation $\\gamma_Q T\\pi=\\pi\\gamma_N$ from step 3 is exactly the module-morphism equation of [sk-def-sfb-module-objects] for $\\pi:N\\to(Q,\\gamma_Q)$. Zero underlying maps are module morphisms, since $0\\gamma_M=0=\\gamma_N T(0)$, so $\\pi f=0$ is also the zero equation in the module category. For any module object $L$ and module morphism $g:N\\to L$ satisfying $gf=0$, the given underlying cokernel supplies a unique map $h:Q\\to L$ in $\\mathcal C$ satisfying $h\\pi=g$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "third paragraph, cocone and underlying factorization"
+   }
+  },
+  {
+   "text": "Using the module-morphism equation for $g$ from [sk-def-sfb-module-objects] and step 3, compute\n$$h\\gamma_Q T\\pi=h\\pi\\gamma_N=g\\gamma_N=\\gamma_L Tg=\\gamma_L Th\\,T\\pi.$$\nCancel $T\\pi$ using step 2: $h\\gamma_Q=\\gamma_L Th$, so $h$ is a module morphism. If another module morphism $k$ satisfies $k\\pi=g$, cancellation of $\\pi$ gives $k=h$ on underlying maps; module morphisms are precisely the underlying maps satisfying the equation in [sk-def-sfb-module-objects], so they are equal as module morphisms. This is the cokernel universal property in $\\Mod_{\\mathcal R}(\\mathcal C)$.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+    "place": "third paragraph, linearity and uniqueness of the factorization"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sfb-module-objects"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-cokernels.proof.md",
+  "place": "all three paragraphs; expanded universal-property arguments and corrected the epimorphism-preservation inference"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Limits.CokernelCofork",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel|createsColimit",
+   "results": "Command printed OK 0 hits, but this requested directory does not exist in the pinned checkout. Discarded as absence evidence; repeated on CategoryTheory/Monoidal/Mod.lean and CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: nonexistent directory; corrected searches below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernels of module objects over a monoid object in a preadditive monoidal category are created by the forgetful functor when tensoring with the monoid preserves finite colimits",
+   "results": "ModuleCat.hasCokernels_moduleCat, ModuleCat.cokernelIsColimit, ModuleCat.cokernelCocone, FGModuleCat.instPreservesFiniteColimitsModuleCatForget₂, ModuleCat.instHasFiniteColimits, FGModuleCat.forget₂CreatesColimit, FGModuleCat.instCreatesColimitsOfShapeModuleCatForget₂, ModuleCat.instHasCoequalizers. Read Algebra/Category/ModuleCat/Kernels.lean:28-92: ordinary modules over a ring; not the abstract module-object theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cokernel of a morphism of module objects carries a unique induced module action and is a cokernel in the category of module objects",
+   "results": "ModuleCat.cokernel_π_ext, ModuleCat.cokernelIsColimit, ModuleCat.cokernel_π_cokernelIsoRangeQuotient_hom_apply, CategoryTheory.Limits.cokernel, ModuleCat.range_mkQ_cokernelIsoRangeQuotient_inv_apply, ModuleCat.hasCokernels_moduleCat, TopModuleCat.isColimitCoker, Module.Presentation.nonempty_cokernelData. Read Algebra/Category/ModuleCat/Kernels.lean:28-92: ordinary modules over a ring; not the abstract module-object theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod",
+   "results": "CategoryTheory.Mod, CategoryTheory.Mod.regular, CategoryTheory.Mod_.regular, CategoryTheory.Mod.instInhabited, CategoryTheory.Mod.X, CategoryTheory.Mod.instCategory, CategoryTheory.Mod.Hom, CategoryTheory.Mod_.Hom; also the basic Mod.Hom/id/mk/forget declarations. Read Mathlib/CategoryTheory/Monoidal/Mod.lean; defines module objects and their category, not cokernels.",
+   "date": "2026-10-16",
+   "verdict": "no match: definitions only"
+  },
+  {
+   "tool": "grep",
+   "query": "CreatesColimit|Cokernel|colimit",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from modules over a monoid object creates coequalizers preserved by tensoring with the monoid",
+   "results": "Rep.instPreservesColimitsModuleCatForget₂, CategoryTheory.ModObj.regular, CategoryTheory.Mod_.regular, π_tensor_id_preserves_coequalizer_inv_desc, Bimod.tensorBimod, id_tensor_π_preserves_coequalizer_inv_desc, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, FGModuleCat.instCreatesColimitsOfShapeModuleCatForget₂. Read Monoidal/Bimod.lean:25-65: tensor/coequalizer identities do not construct the quotient module action or prove its axioms.",
+   "date": "2026-10-16",
+   "verdict": "no match: specialized representations/modules or tensor identities"
+  },
+  {
+   "tool": "grep",
+   "query": "(Mod\\.|ModObj).*([Cc]okernel|[Cc]olimit)|([Cc]okernel|[Cc]olimit).*(Mod\\.|ModObj)",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelIsColimit|hasCokernels_moduleCat|PreservesColimits",
+   "results": "Command printed 5 hits with malformed filename fields 62, 77, 91, 92, 98 (single-file rg output). Read Algebra/Category/ModuleCat/Kernels.lean:62-92: ModuleCat.cokernelIsColimit and ModuleCat.hasCokernels_moduleCat concern ordinary modules over a ring.",
+   "date": "2026-10-16",
+   "verdict": "no match: concrete ring modules, not module objects in an arbitrary monoidal category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -58,5 +182,20 @@
   "CategoryTheory.Mod.isColimitCokernelCofork"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-cokernels",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Expanded the cokernel construction, cancellation, unit, associativity, and factorization into seven explicit elementary steps using only the module definition and the assumed universal properties. Replaced the unsupported assertion about preserving arbitrary epimorphisms by preservation of this cokernel twice. No new nodes are required. Searched project Lean and Mathlib; no exact attachment or Mathlib match for all clauses.",
+  "blueprint": "Steps 1 and 3 realize proof paragraph 1; steps 1, 2, 4 and 5 realize paragraph 2; steps 6 and 7 realize paragraph 3. The main-20261015 chapter and unit _section.md files were read; their DAG chapter/unit records are absent for this newly imported unit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-096dd0a7a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-096dd0a7a (reviewer sub-agent of L); spot-checked: Read the full item, cited definition, current blueprint sources and unit/chapter route. All seven steps are valid; preserving the cokernel twice justifies associativity cancellation without assuming preservation of arbitrary epimorphisms. Edge cases and existing DAG generalizations checked. No new nodes or repairs needed. Detailed checks are in review.md."
+ }
 }
