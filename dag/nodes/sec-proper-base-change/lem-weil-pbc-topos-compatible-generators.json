@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-topos-compatible-generators",
+ "kind": "statement",
+ "title": "Compatible finite-limit generators for two sheaf topoi",
+ "statement": "For small sites $({\\mathcal C},J)$ and $({\\mathcal D},K)$ and a left-exact functor $L:\\operatorname{Sh}(\\mathcal D,K)\\to\\operatorname{Sh}(\\mathcal C,J)$, there are small finite-limit categories $\\mathcal C',\\mathcal D'$ and fully faithful finite-limit-preserving generator functors $G:\\mathcal C'\\to\\operatorname{Sh}(\\mathcal C,J)$ and $E:\\mathcal D'\\to\\operatorname{Sh}(\\mathcal D,K)$, together with a finite-limit-preserving $v:\\mathcal D'\\to\\mathcal C'$ and an isomorphism $vG\\cong EL$; both generator functors contain the sheafified representables. This uses [def-weil-pbc-sheafification] and [lem-weil-pbc-site-sheaf-sets-limits-sectionwise].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CI and 03A2, finite-limit closure of a set of generators."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For an arbitrary u-small family X in a locally u-small category with finite limits, take Mathlib ObjectProperty.limitsClosure of ofObj X for the empty diagram and WalkingCospan. LimitsClosure supplies essential smallness. The full subcategory has terminal objects and pullbacks and hence finite limits; its inclusion preserves them. Pass to equivSmallModel, transferring finite limits across the equivalence. Each X i belongs to this closure by le_limitsClosure. The sheaf categories have the needed finite limits by the cited instance.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the construction first to the sheafified representables of D, then to the disjoint union of the sheafified representables of C and the images L(E d). The essential-image liftFunctor produces v with liftFunctorCompIso vG ≅ EL. The composite EL preserves finite limits, hence so does vG, and full faithfulness of G reflects them to v. The two inclusions of the disjoint union retain the representables.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2 worker",
+  "document": "lean/Sheaf/CategoryTheory/ToposCompatibleGenerators.lean",
+  "place": "Compiled proof in the delivered module; second reading Q2 corrected the dependency and search records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small finite limit closed full subcategory containing a family of objects in a locally small category",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"leansearch\", \"query\": \"small finite limit closed full subcategory containing a family of objects in a locally small category\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limitsClosure\"",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"limitsClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.limitsClosure\", \"CategoryTheory.ObjectProperty.strictLimitsClosureStep\", \"CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsLimitsClosure\", \"CategoryTheory.ObjectProperty.limitsClosure.of_mem\", \"CategoryTheory.ObjectProperty.instIsClosedUnderLimitsOfShapeLimitsClosure\", \"CategoryTheory.ObjectProperty.instNonemptyLimitsClosure\", \"CategoryTheory.ObjectProperty.instNonemptyStrictLimitsClosureStep\", \"CategoryTheory.ObjectProperty.le_limitsClosure\"], \"digest\": \"aee73c1702b21f34\"}",
+   "date": "2026-10-15",
+   "verdict": "Mathlib limitsClosure and its essential-smallness instances implement the closure step; reused directly in the delivered proof. No exact simultaneous-generator theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "limitsClosure|liftFunctorCompIso",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"grep\", \"query\": \"limitsClosure|liftFunctorCompIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ClosureShift.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\"], \"digest\": \"c847b5d2f95f25b1\"}",
+   "date": "2026-10-15",
+   "verdict": "Mathlib limitsClosure and its essential-smallness instances implement the closure step; reused directly in the delivered proof. No exact simultaneous-generator theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSitePresentation",
+  "group": "Q2",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: finite-limit replacement sites in the proof of flatness of pulled-back terms (05VD).",
+   "via": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposCompatibleGenerators",
+  "file": "lean/Sheaf/CategoryTheory/ToposCompatibleGenerators.lean",
+  "declaration": "CategoryTheory.topos_compatibleGenerators",
+  "statement": "theorem topos_compatibleGenerators\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (L : Sheaf K (Type u) ⥤ Sheaf J (Type u)) [PreservesFiniteLimits L] :\n    ∃ (C' D' : Type u) (_ : SmallCategory C') (_ : SmallCategory D')\n      (_ : HasFiniteLimits C') (_ : HasFiniteLimits D')\n      (G : C' ⥤ Sheaf J (Type u)) (E : D' ⥤ Sheaf K (Type u)) (v : D' ⥤ C'),\n      G.Full ∧ G.Faithful ∧ PreservesFiniteLimits G ∧\n      E.Full ∧ E.Faithful ∧ PreservesFiniteLimits E ∧ PreservesFiniteLimits v ∧\n      Nonempty (v ⋙ G ≅ E ⋙ L) ∧\n      (∀ U : C, ∃ c, Nonempty\n        (G.obj c ≅ (presheafToSheaf J (Type u)).obj (yoneda.obj U))) ∧\n      (∀ U : D, ∃ d, Nonempty\n        (E.obj d ≅ (presheafToSheaf K (Type u)).obj (yoneda.obj U)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and remaining transport obligation with their DAG nodes, source constructions, compile results and axiom checks; no direct importers."
+ }
+}

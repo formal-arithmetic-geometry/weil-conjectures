@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-ringed-topos-square-transport",
+ "kind": "statement",
+ "title": "Transport of ringed-topos and module data across a fixed geometric square",
+ "statement": "Let $(\\mathcal C,J),(\\mathcal D,K),(\\mathcal C^{\\prime},J^{\\prime}),(\\mathcal D^{\\prime},K^{\\prime})$ be small sites [def-weil-pbc-sites-and-cohomology]. Let $A,B$ be commutative ring sheaves on the first two sites and let $f$ be a ringed-topos morphism from $(J,A)$ to $(K,B)$ [def-weil-pbc-ringed-topos-morphism]. Fix equivalences $G:\\operatorname{Sh}(J)\\simeq\\operatorname{Sh}(J^{\\prime})$, $E:\\operatorname{Sh}(K)\\simeq\\operatorname{Sh}(K^{\\prime})$, an adjunction $H:\\operatorname{Sh}(K^{\\prime})\\rightleftarrows\\operatorname{Sh}(J^{\\prime}):R$ with $H$ preserving finite limits, and a natural isomorphism $\\alpha:E^{-1}\\mathbin{\\cdot}f^{-1}\\cong H\\mathbin{\\cdot}G^{-1}$, using diagram-order composition. There exist commutative ring sheaves $A^{\\prime},B^{\\prime}$ and ringed-topos morphisms $g:(J,A)\\to(J^{\\prime},A^{\\prime})$, $e:(K,B)\\to(K^{\\prime},B^{\\prime})$, $h:(J^{\\prime},A^{\\prime})\\to(K^{\\prime},B^{\\prime})$ with $g_*=G_*$, $e_*=E_*$, $h_*=R$, isomorphisms $a:|A^{\\prime}|\\cong g_*|A|$, $b:|B^{\\prime}|\\cong e_*|B|$, and $\\beta:e^{-1}\\mathbin{\\cdot}f^{-1}\\cong h^{-1}\\mathbin{\\cdot}g^{-1}$. Their structural maps satisfy $g^\\sharp=g^{-1}(a)\\,;\\,\\epsilon_g(A)$, $e^\\sharp=e^{-1}(b)\\,;\\,\\epsilon_e(B)$ and $f^{-1}(e^\\sharp)\\,;\\,f^\\sharp=\\beta_{B^{\\prime}}\\,;\\,g^{-1}(h^\\sharp)\\,;\\,g^\\sharp$. Each morphism includes its additive induced direct-image functor on module sheaves [def-weil-sheaf-of-modules-category], its underlying-sheaf comparison and the adjunction scalar-action identity of the ringed-topos interface. No sites, generators or continuity assertions are constructed here.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CR, ring and module transport after the site square is fixed."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport A and B as internal commutative rings along the finite-product-preserving equivalences G and E, using the finite-product ring-functor theorem and the internal-ring/sheaf correspondence. The canonical underlying isomorphisms a,b give structural maps r_g,r_e by the equivalence counits. Naturality at the operations makes them ring maps; equivalence counits make them isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-product-ring-functor",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put t=f.inverse.map r_e followed by f.ringMap. Full faithfulness of G.inverse lifts alpha.inv at B-prime followed by t and r_g inverse uniquely to r_h:H(B-prime)→A-prime. Naturality of alpha and the ring-operation equations imply preservation of zero, one, addition and multiplication after G.inverse; faithfulness reflects these equations. The defining equation, composed with alpha.hom and r_g, is the required final equality. Use the given H,R,adjH for h, and the equivalence adjunctions for g,e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each adjunction L ⊣ V and structural map r:L(B)→A, let s:B→V(A) be its adjunct. On the set sheaf V(M), define the additive operations by V and inverse finite-product comparisons. Define scalar multiplication as B×V(M)→V(A)×V(M)→V(A×M)→V(M), using s in the first arrow. Operation naturality of unit and counit makes s a ring map. The module identities follow from those on M under product comparison; restriction maps are linear and the underlying set sheaf proves sheafhood. Apply V to module morphisms; naturality proves linearity, composition and additivity. The two projection equations for the product comparison and the Hom adjunction show that the adjunct of s(a) acting on x is r(L(a)) acting on the adjunct of x. The addition equation then gives module_linear for z=a*x+y. This is the usual induced module construction, described explicitly in the Lean docstring, rather than a new existence choice.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-product-ring-functor",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2 worker",
+  "document": "lean/Sheaf/CategoryTheory/RingedToposSquareTransport.lean",
+  "place": "Unproved fixed-square transport theorem; the declaration docstring gives the explicit ring-map and module-action constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport commutative ring sheaves and module sheaves along an equivalence of sheaf categories",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"leansearch\", \"query\": \"transport commutative ring sheaves and module sheaves along an equivalence of sheaf categories\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit preserving geometric morphism transports ring objects and induces a direct image functor on sheaves of modules",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"A finite limit preserving geometric morphism transports ring objects and induces a direct image functor on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\"], \"digest\": \"73ab1edaa3d687cb\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "RingObj.*(map|Functor)|map.*RingObj|map.*CommRingObj",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"grep\", \"query\": \"RingObj.*(map|Functor)|map.*RingObj|map.*CommRingObj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean\"], \"digest\": \"50ec23c052106c5b\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSitePresentation",
+  "group": "Q2",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: finite-limit replacement sites in the proof of flatness of pulled-back terms (05VD).",
+   "via": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposSquareTransport",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposSquareTransport.lean",
+  "declaration": "CategoryTheory.ringedTopos_squareTransport",
+  "statement": "theorem ringedTopos_squareTransport\n    {C D C' D' : Type u}\n    [SmallCategory C] [SmallCategory D] [SmallCategory C'] [SmallCategory D']\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {J' : GrothendieckTopology C'} {K' : GrothendieckTopology D'}\n    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})\n    (f : RingedToposMorphism\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B))\n    (G : Sheaf J (Type u) ≌ Sheaf J' (Type u))\n    (E : Sheaf K (Type u) ≌ Sheaf K' (Type u))\n    (H : Sheaf K' (Type u) ⥤ Sheaf J' (Type u))\n    (R : Sheaf J' (Type u) ⥤ Sheaf K' (Type u))\n    (adjH : H ⊣ R) (hH : PreservesFiniteLimits H)\n    (α : E.inverse ⋙ f.inverse ≅ H ⋙ G.inverse) :\n    ∃ (A' : Sheaf J' CommRingCat.{u}) (B' : Sheaf K' CommRingCat.{u})\n      (g : RingedToposMorphism\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)\n        ((sheafCompose J' (forget₂ CommRingCat RingCat)).obj A'))\n      (e : RingedToposMorphism\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)\n        ((sheafCompose K' (forget₂ CommRingCat RingCat)).obj B'))\n      (h : RingedToposMorphism\n        ((sheafCompose J' (forget₂ CommRingCat RingCat)).obj A')\n        ((sheafCompose K' (forget₂ CommRingCat RingCat)).obj B'))\n      (a : (sheafCompose J' (forget CommRingCat)).obj A' ≅\n        g.direct.obj ((sheafCompose J (forget CommRingCat)).obj A))\n      (b : (sheafCompose K' (forget CommRingCat)).obj B' ≅\n        e.direct.obj ((sheafCompose K (forget CommRingCat)).obj B))\n      (alpha : e.inverse ⋙ f.inverse ≅ h.inverse ⋙ g.inverse),\n      g.direct = G.functor ∧ e.direct = E.functor ∧ h.direct = R ∧\n      g.ringMap = g.inverse.map a.hom ≫\n        g.adj.counit.app ((sheafCompose J (forget CommRingCat)).obj A) ∧\n      e.ringMap = e.inverse.map b.hom ≫\n        e.adj.counit.app ((sheafCompose K (forget CommRingCat)).obj B) ∧\n      f.inverse.map e.ringMap ≫ f.ringMap =\n        alpha.hom.app ((sheafCompose K' (forget CommRingCat)).obj B') ≫\n          g.inverse.map h.ringMap ≫ g.ringMap",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and remaining transport obligation with their DAG nodes, source constructions, compile results and axiom checks; no direct importers."
+ }
+}

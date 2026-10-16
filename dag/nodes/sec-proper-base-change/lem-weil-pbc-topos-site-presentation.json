@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-topos-site-presentation",
+ "kind": "statement",
+ "title": "Presentation of a geometric morphism by a continuous finite-limit site functor",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small categories with precoverages $J,K$ containing isomorphisms, stable under composition and base change and admitting pullbacks [def-weil-pbc-sites-and-cohomology]. Let $L:\\operatorname{Sh}(\\mathcal D,K)\\rightleftarrows\\operatorname{Sh}(\\mathcal C,J):R$ be an adjunction with $L$ preserving finite limits. Then there exist small finite-limit categories $\\mathcal C^{\\prime},\\mathcal D^{\\prime}$, precoverages $J^{\\prime},K^{\\prime}$ satisfying those four axioms, equivalences $g:\\operatorname{Sh}(\\mathcal C,J)\\simeq\\operatorname{Sh}(\\mathcal C^{\\prime},J^{\\prime})$ and $e:\\operatorname{Sh}(\\mathcal D,K)\\simeq\\operatorname{Sh}(\\mathcal D^{\\prime},K^{\\prime})$, and a finite-limit-preserving continuous functor $v:\\mathcal D^{\\prime}\\to\\mathcal C^{\\prime}$ sending every covering presieve to a covering presieve. There is a natural isomorphism $R\\mathbin{\\cdot}e_*\\cong g_*\\mathbin{\\cdot}v_*$, where $\\cdot$ denotes composition in diagram order and $v_*$ is precomposition on sheaves along $v^{\\mathrm{op}}$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03A2 (lemma-morphism-topoi-comes-from-morphism-sites) and Remark 03CJ, simultaneous replacement by finite-limit sites."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply compatible generators and the epimorphic-precoverage comparison on both sides, obtaining G,E,v and a:vG≅EL. To see that v preserves covers, take two maps out of G(vT) equal after the image family; precompose by a inverse and transpose through L ⊣ R. The resulting maps out of E(T) are equal by joint cancellation of the original cover. The Hom bijection and a then reflect equality. Preservation of finite limits and covers gives continuity by Mathlib Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy.",
+   "uses": [
+    "lem-weil-pbc-topos-compatible-generators",
+    "lem-weil-pbc-site-of-sheaf-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For X and T define Hom(E(T),R(X)) ≃ Hom(G(v(T)),X) by adjunction followed by composition with a at T; its inverse composes with a inverse before transposing. Adjunction naturality in each variable and naturality of a give the two naturality equations. Assemble the bijections into a natural isomorphism of nerves, conjugate by the two comparison nerve isomorphisms, and cancel the fully faithful inclusion of sheaves into presheaves using Mathlib Functor.fullyFaithfulCancelRight. No Yoneda hom-bijection node or site inverse-image/tensor theorem is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-of-sheaf-generators",
+  "lem-weil-pbc-topos-compatible-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2 worker",
+  "document": "lean/Sheaf/CategoryTheory/ToposSitePresentation.lean",
+  "place": "Compiled proof in the delivered module; second reading Q2 corrected the dependency and search records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a geometric morphism admits a presentation by a continuous finite limit preserving functor between small sites",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"leansearch\", \"query\": \"a geometric morphism admits a presentation by a continuous finite limit preserving functor between small sites\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "topos|topoi|geometric morphism",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"grep\", \"query\": \"topos|topoi|geometric morphism\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/Grothendieck.lean\", \"Mathlib/CategoryTheory/Sites/Grothendieck.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\"], \"digest\": \"04e538544ed288ea\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSitePresentation",
+  "group": "Q2",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: finite-limit replacement sites in the proof of flatness of pulled-back terms (05VD).",
+   "via": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposSitePresentation",
+  "file": "lean/Sheaf/CategoryTheory/ToposSitePresentation.lean",
+  "declaration": "CategoryTheory.topos_sitePresentation",
+  "statement": "theorem topos_sitePresentation\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : Precoverage C) (K : Precoverage D)\n    [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks]\n    (L : Sheaf K.toGrothendieck (Type u) ⥤ Sheaf J.toGrothendieck (Type u))\n    (R : Sheaf J.toGrothendieck (Type u) ⥤ Sheaf K.toGrothendieck (Type u))\n    (adj : L ⊣ R) [PreservesFiniteLimits L] :\n    ∃ (C' D' : Type u) (_ : SmallCategory C') (_ : SmallCategory D')\n      (J' : Precoverage C') (K' : Precoverage D')\n      (_ : J'.HasIsos) (_ : J'.IsStableUnderComposition)\n      (_ : J'.IsStableUnderBaseChange) (_ : J'.HasPullbacks)\n      (_ : K'.HasIsos) (_ : K'.IsStableUnderComposition)\n      (_ : K'.IsStableUnderBaseChange) (_ : K'.HasPullbacks)\n      (_ : HasFiniteLimits C') (_ : HasFiniteLimits D')\n      (g : Sheaf J.toGrothendieck (Type u) ≌ Sheaf J'.toGrothendieck (Type u))\n      (e : Sheaf K.toGrothendieck (Type u) ≌ Sheaf K'.toGrothendieck (Type u))\n      (v : D' ⥤ C') (_ : PreservesFiniteLimits v)\n      (_ : v.IsContinuous K'.toGrothendieck J'.toGrothendieck),\n      (∀ (T : D') (S : Presieve T), S ∈ K' T → S.map v ∈ J' (v.obj T)) ∧\n      Nonempty (R ⋙ e.functor ≅ g.functor ⋙\n        v.sheafPushforwardContinuous (Type u) K'.toGrothendieck J'.toGrothendieck)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and remaining transport obligation with their DAG nodes, source constructions, compile results and axiom checks; no direct importers."
+ }
+}

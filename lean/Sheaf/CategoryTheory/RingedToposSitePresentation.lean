@@ -7,13 +7,11 @@ module
 
 public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.SheafSubcategoryComparison
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.ToposSitePresentation
+import Sheaf.CategoryTheory.RingedToposSquareTransport
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Presenting a morphism of ringed topoi by a morphism of sites
@@ -46,35 +44,20 @@ image comparison `alpha` identifies the structural ring maps of the composite mo
 Its adjoint mate gives the corresponding direct image comparison.
 
 Proof:
-1. In the sheaves on `D`, start with the sheafified representables, the terminal sheaf
-   and `B`. Close this set of objects under chosen pullbacks, iterating over the natural
-   numbers. At each stage the arrows form a set. Every finite diagram occurs at some stage;
-   the resulting full small category `D'` has terminal objects and pullbacks, hence finite
-   limits (equalizers are pullbacks of diagonals).
-2. Give `D'` the epimorphic covering families. The sheaf subcategory comparison theorem
-   gives the equivalence `e`, with sections at `T` equal to `Hom(T,-)`. In the sheaves on
-   `C`, repeat the construction including `A` and every `f.inverse.obj T` for `T` in `D'`.
-   This gives `C'` and `g` with the same Hom formula.
-3. Restrict `f.inverse` to obtain `v : D' ⥤ C'`. Ambient finite limits compute those of
-   the full subcategories, so `v` preserves finite limits, including the terminal object.
-4. A left adjoint preserves colimits. Coproducts of sheaves are sheafified presheaf
-   coproducts; epimorphisms of sheaves are coequalizers of their kernel pairs. Therefore
-   `f.inverse` sends epimorphic families to epimorphic families. Choose the covering
-   precoverages to include their images; this changes neither topology nor sheaves.
-   Pullback comparisons are isomorphisms by step 3. Thus `v` is Stacks-continuous.
-5. The left-exact site inverse-image theorem supplies `h`, with direct image given by
-   precomposition with `v` and finite-limit-preserving inverse image.
-6. The Hom formulas and the original adjunction give, naturally in both arguments,
-   `(h_* g_* F)(T) = Hom(f.inverse.obj T,F) ≃ Hom(T,f.direct.obj F)`.
-   This is the direct image comparison. Uniqueness of adjoints, or the Yoneda Hom
-   bijection, gives its inverse-image mate `alpha`, compatibly with both adjunctions.
-7. Finite-product-preserving functors transport ring operations and their equations;
-   natural transformations commute with them. Transport `A` and `B` by `g_*` and `e_*`.
-   Their structural maps are the counits, giving `a` and `b` and the displayed equations.
-   Define the direct-image ring map of `h` by `e_*` of the adjunct of `f.ringMap`, followed
-   by the direct image comparison in step 6. Take its adjunct for `h.ringMap`. The final
-   equation follows from this definition and the mate identities. All module direct
-   images are the induced ones, so the three morphisms have the existing interface. -/
+1. `topos_sitePresentation` applies the finite-limit generator closure and comparison
+   constructions to `f.inverse`. It supplies the two small finite-limit sites, strong
+   precoverages, equivalences, a continuous finite-limit-preserving functor `v`, and
+   the direct-image comparison with the original adjunction.
+2. Set `H = (E.inverse ⋙ f.inverse) ⋙ G.functor` and let `R` be the continuous site
+   pushforward. Conjugating the original adjunction by the equivalence counits gives
+   `H ⊣ R`; the displayed `alpha` is its inverse-image comparison.
+3. Apply `ringedTopos_squareTransport` to this fixed geometric square. That theorem
+   transports the commutative ring sheaves and supplies all three ringed-topos
+   morphisms, their induced module direct images, the canonical counit equations,
+   and the final structural-map equality.
+4. Rewrite the direct functors of the two equivalences using the equalities supplied
+   by the transport theorem; their equivalence instances then follow by synthesis.
+-/
 theorem ringedTopos_sitePresentation
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : Precoverage C) (K : Precoverage D)
@@ -121,6 +104,31 @@ theorem ringedTopos_sitePresentation
       f.inverse.map e.ringMap ≫ f.ringMap =
         alpha.hom.app ((sheafCompose K'.toGrothendieck (forget CommRingCat)).obj B') ≫
           g.inverse.map h.ringMap ≫ g.ringMap := by
-  sorry
+  have : PreservesFiniteLimits f.inverse := f.leftExact
+  obtain ⟨C', D', hC', hD', J', K', hJiso, hJcomp, hJbase, hJpb,
+      hKiso, hKcomp, hKbase, hKpb, hlimC', hlimD', G, E, v, hvlim, hvcont,
+      hcover, ⟨θ⟩⟩ := topos_sitePresentation J K f.inverse f.direct f.adj
+  let H := (E.inverse ⋙ f.inverse) ⋙ G.functor
+  let R := v.sheafPushforwardContinuous (Type u) K'.toGrothendieck J'.toGrothendieck
+  let ξ : G.inverse ⋙ (f.direct ⋙ E.functor) ≅ R :=
+    Functor.isoWhiskerLeft G.inverse θ ≪≫
+      (Functor.associator G.inverse G.functor R).symm ≪≫
+        Functor.isoWhiskerRight G.counitIso R ≪≫ Functor.leftUnitor R
+  let adjH : H ⊣ R :=
+    ((E.symm.toAdjunction.comp f.adj).comp G.toAdjunction).ofNatIsoRight ξ
+  have : PreservesFiniteLimits (E.inverse ⋙ f.inverse) := comp_preservesFiniteLimits _ _
+  have hH : PreservesFiniteLimits H := comp_preservesFiniteLimits _ _
+  let α : E.inverse ⋙ f.inverse ≅ H ⋙ G.inverse :=
+    (Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ G.unitIso ≪≫
+      (Functor.associator _ _ _).symm
+  obtain ⟨A', B', g, e, h, a, b, alpha, hg, he, hh, hga, heb, halpha⟩ :=
+    ringedTopos_squareTransport A B f G E H R adjH hH α
+  refine ⟨C', D', hC', hD', J', K', hJiso, hJcomp, hJbase, hJpb,
+    hKiso, hKcomp, hKbase, hKpb, hlimC', hlimD', A', B', g, e, h, v, hvlim,
+    hvcont, a, b, alpha, ?_, ?_, hcover, hh, hga, heb, halpha⟩
+  · rw [hg]
+    infer_instance
+  · rw [he]
+    infer_instance
 
 end CategoryTheory

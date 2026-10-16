@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-site-of-sheaf-generators",
+ "kind": "statement",
+ "title": "Epimorphic covering presieves on a finite-limit sheaf generator category",
+ "statement": "Let $\\mathcal C,\\mathcal E$ be small categories, let $J$ be a precoverage on $\\mathcal C$ containing isomorphisms, stable under composition and base change and admitting pullbacks [def-weil-pbc-sites-and-cohomology], and suppose $\\mathcal E$ has finite limits. Let $F:\\mathcal E\\to\\operatorname{Sh}(\\mathcal C,J)$ be fully faithful and preserve finite limits. Assume that for every $U\\in\\mathcal C$ some $F(E)$ is isomorphic to the sheafified representable $h_U^\\#$. Then there is a precoverage $K$ on $\\mathcal E$ with the same four axioms and an equivalence $e:\\operatorname{Sh}(\\mathcal C,J)\\simeq\\operatorname{Sh}(\\mathcal E,K)$ such that $e_*$ followed by inclusion into presheaves is naturally isomorphic to $X\\mapsto(E\\mapsto\\operatorname{Hom}(F(E),X))$ [lem-weil-pbc-sheaf-subcategory-comparison]. For every indexed arrow family $R$ into $T$, its support presieve belongs to $K(T)$ if and only if the family $F(R_i)\\to F(T)$ is jointly epimorphic, meaning maps from $F(T)$ to any sheaf are equal whenever their composites with all family arrows agree.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03A1 and 03CI, comparison lemma with epimorphic covering families."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-subcategory-comparison",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheaf-subcategory comparison theorem for the full finite-limit generator functor. Its epimorphic indexed families are represented by pre-zero hypercovers; support equality makes the epimorphic-family predicate invariant under the chosen representative.",
+   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison theorem gives a precoverage whose members are exactly the supports of its chosen covering families, representing every jointly epimorphic family. Support equality transfers joint cancellation. Its covering-class axioms give isomorphisms and chosen base changes. Composition follows by cancelling first the outer family and then each inner family. For an arbitrary pullback family, map each chosen covering pullback into the corresponding arbitrary pullback; cancellation on the chosen family implies cancellation on the latter. Finite limits in E supply all pullbacks. The specified nerve isomorphism is retained from the comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-subcategory-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q2 worker",
+  "document": "lean/Sheaf/CategoryTheory/SiteOfSheafGenerators.lean",
+  "place": "Compiled proof in the delivered module; second reading Q2 corrected the dependency and search records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "comparison equivalence for sheaves on a full subcategory of sheaves containing representables with epimorphic covers",
+   "results": "{\"t\": \"2026-10-15T22:02:23Z\", \"tool\": \"leansearch\", \"query\": \"comparison equivalence for sheaves on a full subcategory of sheaves containing representables with epimorphic covers\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphic covering families on a full subcategory of sheaves give a Grothendieck topology and comparison equivalence",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"epimorphic covering families on a full subcategory of sheaves give a Grothendieck topology and comparison equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff\", \"CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense\", \"CategoryTheory.MorphismProperty.grothendieckTopology_eq_toGrothendieck_pretopology\", \"CategoryTheory.Precoverage.toGrothendieck_toPretopology_eq_toGrothendieck\", \"CategoryTheory.GrothendieckTopology.le_canonical\", \"CategoryTheory.le_topology_of_closedSieves_isSheaf\", \"CategoryTheory.Pretopology.toGrothendieck_toCoverage\", \"CategoryTheory.Presieve.isSheaf_pretopology\"], \"digest\": \"cd4dc56998c58735\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDenseSubsite|IsCoverDense|jointly.*epi",
+   "results": "{\"t\": \"2026-10-15T22:02:22Z\", \"tool\": \"grep\", \"query\": \"IsDenseSubsite|IsCoverDense|jointly.*epi\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\"], \"digest\": \"a18fe16ccbc2c12b\"}",
+   "date": "2026-10-15",
+   "verdict": "No exact replacement; inspected the returned generic APIs and specialized site/module constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSitePresentation",
+  "group": "Q2",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first strict-tower pullback functor: finite-limit replacement sites in the proof of flatness of pulled-back terms (05VD).",
+   "via": [
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteOfSheafGenerators",
+  "file": "lean/Sheaf/CategoryTheory/SiteOfSheafGenerators.lean",
+  "declaration": "CategoryTheory.siteOfSheafGenerators",
+  "statement": "theorem siteOfSheafGenerators\n    {C E : Type u} [SmallCategory C] [SmallCategory E] [HasFiniteLimits E]\n    (J : Precoverage C)\n    [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (F : E ⥤ Sheaf J.toGrothendieck (Type u))\n    [F.Full] [F.Faithful] [PreservesFiniteLimits F]\n    (hrep : ∀ U : C, ∃ A : E,\n      Nonempty (F.obj A ≅ (presheafToSheaf J.toGrothendieck (Type u)).obj (yoneda.obj U))) :\n    ∃ (K : Precoverage E) (_ : K.HasIsos) (_ : K.IsStableUnderComposition)\n      (_ : K.IsStableUnderBaseChange) (_ : K.HasPullbacks)\n      (e : Sheaf J.toGrothendieck (Type u) ≌ Sheaf K.toGrothendieck (Type u)),\n      Nonempty (e.functor ⋙ sheafToPresheaf K.toGrothendieck (Type u) ≅\n        sheafSubcategoryNerve F) ∧\n      ∀ T (R : PreZeroHypercover.{u} T), R.presieve₀ ∈ K T ↔\n        ⟨T, R⟩ ∈ sheafSubcategoryEpimorphicFamilies.{u, u, 0} F",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4c3ef",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261016T054838-L-157952",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and remaining transport obligation with their DAG nodes, source constructions, compile results and axiom checks; no direct importers."
+ }
+}
