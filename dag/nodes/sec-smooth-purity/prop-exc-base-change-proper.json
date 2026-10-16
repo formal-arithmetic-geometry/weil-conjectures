@@ -3,59 +3,287 @@
  "blueprint": {
   "is": "prop-exc-base-change-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change for a proper morphism, against an open immersion",
- "statement": "Let $f:X\\to Y$ be proper, carrying the ambient exceptional right adjoint\ndatum of [def-weil-ambient-exceptional-adjoint], let\n$g:Y'\\hookrightarrow Y$ be an open immersion with closed complement\n$i:Z\\hookrightarrow Y$, and form the Cartesian squares with\n$X'=f^{-1}(Y')$, $g':X'\\hookrightarrow X$, $f'=f|_{X'}$ and\n$i':f^{-1}(Z)\\hookrightarrow X$. Then for every object $K$ the\nbase-change comparison\n\n$$\n\\beta:\\ Lg'^*Rf^{\\times}K\\xrightarrow{\\ \\sim\\ }Rf'^{\\times}Lg^*K\n$$\n\nis an isomorphism. On the blueprint's coefficient class\n[def-sf-fullcd-used-class] the ambient datum displayed as the hypothesis\nis the theorem [cor-sf-ambient-adjoint-discharge], and the argument below\nis object-wise, so on that class the comparison is an isomorphism for every\n$K$ of the class without hypothesis; the datum is retained for the complexes\noutside it, [rem-sf-class-adjoint-residue].",
+ "statement": "Fix the finite coefficient $A=A_{E,n}$ and the scheme-base data of [def-weil-ambient-exceptional-adjoint]. Let $f:X\\to Y$ be proper [def-weil-proper-morphism] and carry that ambient exceptional right adjoint datum. Let $g:Y'\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion]. Form the Cartesian square [def-pc-fibre-product] with $X'=X\\times_Y Y'$, $g':X'\\hookrightarrow X$ and $f':X'\\to Y'$. On the ordinary unbounded derived categories of pro-etale $A$-module sheaves [def-weil-pbc-proetale-operations], normalize $Rf^\\times$ as the right adjoint of $Rf_*$ using the proper compactification $(\\operatorname{id}_X,f)$ and the comparisons in the given datum. Then $Rf'_*$ admits the corresponding right adjoint $Rf'^\\times$, and for every $K\\in D(Y_{\\mathrm{proet}},A)$ the canonical comparison\n$$\\beta_K:Lg'^*Rf^\\times K\\longrightarrow Rf'^\\times Lg^*K$$\nis an isomorphism. To specify its normalization, write $\\Gamma:g_!Rf'_*\\xrightarrow{\\sim}Rf_*g'_!$ for the derived proper/open map induced on K-injective representatives by the sheaf map [lem-exc-proetale-proper-open-sheaf-comparison]. The comparison $\\beta_K$ is the $Rf'_*\\dashv Rf'^\\times$ transpose of the $g_!\\dashv g^*$ transpose of\n$$g_!Rf'_*g'^*Rf^\\times K\\xrightarrow{\\Gamma}Rf_*g'_!g'^*Rf^\\times K\\xrightarrow{Rf_*\\varepsilon_{g'}}Rf_*Rf^\\times K\\xrightarrow{\\varepsilon_f}K.$$\nAll open pullbacks here are exact, so $Lg^*=g^*$ and $Lg'^*=g'^*$.\n\nIndependently of this optional ambient datum, let $X,Y$ be finite-type schemes over $k=\\overline{\\mathbf F}_q$ with the coefficients of [def-sf-fullcd-used-class], let $f$ be proper and $g$ an open immersion as above. For every bounded-below complex $K$ of etale origin [def-sf-etale-origin-subcategory], the analogous canonical comparison for the relative exceptional inverse image of [def-weil-exceptional-inverse-image] is an isomorphism:\n$$g'^*Rf^!K\\xrightarrow{\\sim}Rf'^!g^*K.$$\nHere the relative adjunction is [thm-sf-ambient-adjoint-class]; no existence of the unrestricted pro-etale ambient datum is inferred from this clause [cor-sf-ambient-adjoint-discharge].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-exc-base-change-proper.md",
   "place": "node prop-exc-base-change-proper, order 1814"
  },
  "stmt_deps": [
   "def-weil-ambient-exceptional-adjoint",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-operations",
   "def-sf-fullcd-used-class",
+  "def-sf-etale-origin-subcategory",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
   "cor-sf-ambient-adjoint-discharge",
-  "def-weil-pbc-derived-categories"
+  "lem-exc-proetale-proper-open-sheaf-comparison"
  ],
  "proof": [
   {
-   "text": "Step 1: the target triangle. The closed-support triangle of\n[lem-exc-closed-support-triangle] for the pair $(i,g)$ on $Y$ is\n\n$$\ni_*Ri^!K\\longrightarrow K\\longrightarrow Rg_*Lg^*K\\xrightarrow{+1}.\n$$",
+   "text": "Let $c=(j,p)$ be the distinguished compactification of the ambient datum and $c_0$ its FullCD bound. Since $f$ is proper and $p$ is separated, [lem-weil-pbc-proper-to-separated] makes $j:X\\to\\overline X$ proper. Thus $j$ is a refinement $(\\operatorname{id}_X,f)\\to(j,p)$ in [def-weil-compactifications-refinements]. The comparisons and their unit/counit equations in [def-weil-ambient-exceptional-adjoint] identify the proper normalization $Rf_*$ with $Rp_*j_!$ and the given right adjoint with $Rf^\\times$. For a module sheaf $F$, exactness of $j_!$ [lem-weil-extension-by-zero-exact] and clause 1 of [def-weil-full-cohomological-dimension] give\n$$R^qf_*F=\\mathcal H^q(Rp_*(j_!F[0]))=0\\quad(q>c_0).$$\nThis bound applies to every pro-etale module sheaf, since FullCD in the assumed datum has exactly that quantifier.",
    "uses": [
-    "lem-exc-closed-support-triangle"
+    "lem-weil-pbc-proper-to-separated",
+    "def-weil-compactifications-refinements",
+    "def-weil-ambient-exceptional-adjoint",
+    "lem-weil-extension-by-zero-exact",
+    "def-weil-full-cohomological-dimension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Step 2 repaired: the conditional finite-CD input at the proper normalization"
+   }
   },
   {
-   "text": "Step 2: applying the exact right adjoint. The compact-support direct\nimage is exact by [lem-compact-support-direct-image-triangulated]; a right adjoint of an exact functor\nis exact, so $Rf^{\\times}$ carries the triangle into\n\n$$\nRf^{\\times}i_*Ri^!K\\longrightarrow Rf^{\\times}K\n\\longrightarrow Rf^{\\times}Rg_*Lg^*K\\xrightarrow{+1}.\n$$",
+   "text": "Properness is stable under base change [lem-weil-pbc-proper-base-change], so $f'$ is proper; [lem-weil-pbc-open-immersion-base-change] makes $g'$ open. Apply [lem-exc-proetale-proper-open-sheaf-comparison] to $(p,r,i,k)=(f,f',g,g')$ to obtain its specified sheaf isomorphism $\\gamma:g_!f'_*\\xrightarrow{\\sim}f_*g'_!$. In particular the map used is the open-adjunction transpose of restriction, not an arbitrarily chosen isomorphism of the two sheaves.",
    "uses": [
-    "lem-compact-support-direct-image-triangulated"
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-exc-proetale-proper-open-sheaf-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Steps 3–4 repaired: the pro-etale degree-zero support comparison"
+   }
   },
   {
-   "text": "Step 3: dual base change in the two squares. The dual base-change\nisomorphism [prop-exc-ambient-dual-base-change], applied to the\nCartesian squares of $i$ and of $g$ along $f$, identifies the outer\nterms with\n\n$$\ni'_*Rf^{\\times}_{Z}Ri^!K,\n\\qquad\nRg'_*Rf'^{\\times}Lg^*K,\n$$\n\nwhere $f_Z:f^{-1}(Z)\\to Z$ is the restriction of $f$.\nStep 4: restriction to the open. Apply $Lg'^*$ to the resulting\ntriangle. By [lem-exc-open-fully-faithful] the first term is killed\n($Lg'^*i'_*=0$, the images of $g'$ and $i'$ being complementary)\nand the last term becomes $Rf'^{\\times}Lg^*K$\n($Lg'^*Rg'_*\\cong\\operatorname{id}$). A distinguished triangle whose\nfirst term vanishes exhibits its second-to-third map as an isomorphism;\nthat map is $Lg'^*Rf^{\\times}K\\to Rf'^{\\times}Lg^*K$, the pullback of the\nrestriction map of the triangle, which is the base-change comparison\n$\\beta$ (its adjoint under $Rf'_!\\dashv Rf'^{\\times}$ is the composite\nwith the counit). Hence $\\beta$ is an isomorphism.",
+   "text": "The small-site module categories are Grothendieck, and every complex $M$ on $X'$ has a functorial K-injective resolution $M\\to J$ with injective terms, by [prop-pur-kinjective-resolutions-exist]. Using the all-sheaf finite-CD bound from Step 1, apply [lem-exc-proetale-cartesian-open-injective-acyclic] to each $J^a$ to see that $g'_!J^a$ is $f_*$-acyclic. By exactness of open extension [lem-weil-extension-by-zero-exact], $g'_!J$ represents $g'_!M$. Step 1's uniform bound and [lem-kun-finite-cd-acyclic-complex] therefore identify $Rf_*g'_!M$ with $f_*g'_!J$. The definition of derived direct image [def-weil-pbc-proetale-operations] computes $Rf'_*M$ by $f'_*J$. Exact $g_!$ and Step 2 now give\n$$\\Gamma_M:g_!Rf'_*M\\xrightarrow{\\sim}Rf_*g'_!M.$$\nIts representative is $g_!f'_*J\\xrightarrow{\\gamma_J}f_*g'_!J\\to f_*I$ for a K-injective resolution $g'_!J\\to I$. The natural acyclic-complex comparison in the cited finite-CD theorem makes this independent of resolutions and natural in $M$; it identifies the termwise maps of acyclic complexes with their derived maps.\nTo verify its open-adjunction normalization, restrict the chosen resolution $g'_!J\\to I$ to $X'$. By [lem-weil-extension-by-zero-adjunction], $g'^*$ is right adjoint to the exact functor $g'_!$; hence [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $g'^*I$ K-injective. The induced map $J\\to g'^*I$ is a quasi-isomorphism between K-injectives. Restricting direct image gives the degreewise identity $g^*f_*I=f'_*g'^*I$ by the section formula in [def-weil-pbc-proetale-operations]. Thus the derived open-restriction isomorphism $\\lambda_M:g^*Rf_*g'_!M\\xrightarrow{\\sim}Rf'_*M$ is inverse to the map computed by $f'_*J\\to f'_*g'^*I$. Restriction of $\\gamma_J$ in Step 2 is the identity under its specified $\\lambda_J$, so restriction of the displayed representative of $\\Gamma_M$ is exactly this map. Consequently $\\lambda_M\\circ g^*\\Gamma_M=1$ under $g^*g_!\\cong1$, and $\\Gamma_M=\\varepsilon_g\\circ g_!(\\lambda_M^{-1})$. The construction of this open-restriction isomorphism $\\lambda$ uses no finite-CD bound or exceptional adjoint; it is available independently for the coefficient-class argument.",
    "uses": [
-    "prop-exc-ambient-dual-base-change",
-    "lem-exc-open-fully-faithful"
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-exc-proetale-cartesian-open-injective-acyclic",
+    "lem-weil-extension-by-zero-exact",
+    "lem-kun-finite-cd-acyclic-complex",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Steps 2–4 repaired: deriving the support comparison without using an etale triangle"
+   }
+  },
+  {
+   "text": "For $M\\in D(X'_{\\mathrm{proet}},A)$ and $K\\in D(Y_{\\mathrm{proet}},A)$, the open adjunctions [prop-exc-open-adjoint], the given proper adjunction [def-weil-ambient-exceptional-adjoint], and $\\Gamma$ yield natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}_{X'}(M,g'^*Rf^\\times K)\n&\\cong\\operatorname{Hom}_{X}(g'_!M,Rf^\\times K)\\\\\n&\\cong\\operatorname{Hom}_{Y}(Rf_*g'_!M,K)\\\\\n&\\xrightarrow{t\\mapsto t\\circ\\Gamma_M}\\operatorname{Hom}_{Y}(g_!Rf'_*M,K)\\\\\n&\\cong\\operatorname{Hom}_{Y'}(Rf'_*M,g^*K).\n\\end{aligned}$$\nThese four bijections fix both the direction and normalization of the comparison.",
+   "uses": [
+    "prop-exc-open-adjoint",
+    "def-weil-ambient-exceptional-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Step 4: the explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Supply the right adjoint for $f'$ rather than assuming ambient data for it. Open localization [lem-weil-proetale-weakly-etale-localization] gives $g^*g_*N\\cong N$ on module sheaves: after restriction to $Q\\to Y'$, $(Y'\\times_YQ)=Q$, with identical restriction maps and module actions. Choose a K-injective resolution using [prop-pur-kinjective-resolutions-exist]. Then [def-weil-pbc-proetale-operations] computes $Rg_*N$ by $g_*J$, so exact $g^*$ gives $g^*Rg_*N\\cong N$ degreewise. Set $H=g'^*Rf^\\times Rg_*$. Step 4 at $K=Rg_*N$, followed by this counit, gives natural bijections\n$$\\operatorname{Hom}_{X'}(M,HN)\\cong\\operatorname{Hom}_{Y'}(Rf'_*M,N).$$\nUse [lem-weil-pbc-adjunction-of-natural-bijection] to give $Rf'_*\\dashv H$ its specified unit and counit, and choose this $H$ as $Rf'^\\times$. This does not assert a FullCD/refinement datum for $f'$ over $S$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Step 3 repaired: existence of the restricted right adjoint"
+   }
+  },
+  {
+   "text": "Compose Step 4 with $Rf'_*\\dashv Rf'^\\times$. Yoneda [lem-galois-yoneda-fully-faithful] turns the resulting natural bijection of representable functors into an isomorphism $\\beta_K:g'^*Rf^\\times K\\to Rf'^\\times g^*K$: applying the same construction to the inverse bijection gives its inverse. To compute its actual map, evaluate at $M=g'^*Rf^\\times K$ and $1_M$. The successive transposes in Step 4 are $\\varepsilon_{g'}$, then $\\varepsilon_f\\circ Rf_*\\varepsilon_{g'}$, then precomposition with $\\Gamma_M$, and then the $g_!\\dashv g^*$ transpose. The final transpose under $Rf'_*\\dashv Rf'^\\times$ is precisely the normalization in the statement, by [lem-weil-pbc-adjunction-of-natural-bijection]. Naturality of the Hom bijections proves naturality in $K$. Any other choice of right adjoint is identified by the same natural representables and hence has this comparison. This proves the arbitrary-open ambient assertion.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Step 4: Yoneda and identification of the specified map"
+   }
+  },
+  {
+   "text": "For the independent finite-field clause, $X,Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field has only the ideals zero and one. The opens $X',Y'$ are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so $g,g'$ are quasi-compact and then finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. To check finite type over $k$ directly from [def-weil-finite-type-morphism], take a finite affine cover of $Y$ by finitely generated $k$-algebras $B_i$ and finite affine covers of each inverse image in $Y'$ by finitely generated $B_i$-algebras $C_{ij}$. The union of the generators of $B_i$ over $k$ and $C_{ij}$ over $B_i$ generates $C_{ij}$ over $k$. Their finitely many affines cover $Y'$. Do this also for $X'$. Both proper compactifications $(\\operatorname{id},f)$ and $(\\operatorname{id},f')$ thus have finite-dimensional sources [lem-kun-dimension-finite-type]; use dimension bound zero on an empty source. Hence [thm-sf-ambient-adjoint-class] applies to both proper maps.\n\nWrite a test object as $M\\cong\\nu_{X'}^*M_0$, $M_0\\in D^+(X'_{\\mathrm{et}},A)$. Exact comparison and open extension [lem-sf-comparison-pullback-exact, lem-weil-extension-by-zero-exact] allow termwise use of [lem-cbc-proetale-extension-zero-comparison], giving an etale-origin witness $g'_!M\\cong\\nu_X^*g'^{\\mathrm{et}}_!M_0$. Let $b_f:Rf_*\\nu_X^*\\xrightarrow{\\sim}\\nu_Y^*Rf_{\\mathrm{et},*}$ and $b_{f'}$ be [lem-sf-class-compact-support-comparison] at the proper compactifications, and let $e_g:\\nu_Y^*g^{\\mathrm{et}}_!\\xrightarrow{\\sim}g_!\\nu_{Y'}^*$, $e_{g'}$ be the open comparisons. All schemes are Noetherian, so [lem-amb-unbounded-proper-open-interchange] supplies $\\Gamma^{\\mathrm{et}}$. Define the bounded-class comparison by the explicit invertible composite\n$$\\begin{aligned}\ng_!Rf'_*\\nu_{X'}^*M_0\n&\\xrightarrow{g_!b_{f'}}g_!\\nu_{Y'}^*Rf'_{\\mathrm{et},*}M_0\n\\xrightarrow{e_g^{-1}}\\nu_Y^*g^{\\mathrm{et}}_!Rf'_{\\mathrm{et},*}M_0\\\\\n&\\xrightarrow{\\nu_Y^*\\Gamma^{\\mathrm{et}}}\\nu_Y^*Rf_{\\mathrm{et},*}g'^{\\mathrm{et}}_!M_0\n\\xrightarrow{b_f^{-1}}Rf_*\\nu_X^*g'^{\\mathrm{et}}_!M_0\n\\xrightarrow{Rf_*e_{g'}}Rf_*g'_!\\nu_{X'}^*M_0.\n\\end{aligned}$$\nFor a witness $\\alpha:\\nu_{X'}^*M_0\\to M$, precompose by $g_!Rf'_*(\\alpha^{-1})$ and postcompose by $Rf_*g'_!\\alpha$. Full faithfulness [thm-weil-pbc-site-comparison] lifts each morphism between witnesses uniquely; naturality of the displayed composite therefore proves independence of witness and naturality in $M$. This entire comparison uses etale-origin objects only.\nThe composite just specified has the required pro-etale open-adjunction normalization. Here is the comparison of maps. Properness gives the quasi-compact and quasi-separated hypotheses of [lem-weil-pbc-comparison-direct-image-canonical-mate] for $f,f'$. Its map $b_{u}:\\nu^*Ru_{\\mathrm{et},*}\\to Ru_*\\nu^*$ is the inverse of the notation $b_u$ used above, and it satisfies $\\varepsilon_u^p\\circ u_p^*b_u\\circ a_u=\\nu^*\\varepsilon_u^e$. The pullback comparisons $a_u$ commute with the Cartesian square by [lem-weil-pbc-comparison-pullback]. The open-extension comparisons are their adjoint comparisons, as in [lem-cbc-proetale-extension-zero-comparison]. Apply the two pasting identities of [lem-weil-pbc-mate-pasting] first to these direct-image comparison squares and then to the two open adjunctions. They identify the open transpose of the five-arrow composite with the comparison pullback of the open transpose of $\\Gamma^{\\mathrm{et}}$; the displayed counit equation specifies each direct-image mate. By the Cartesian normalization in [lem-amb-unbounded-proper-open-interchange], that etale transpose is $(\\lambda^{\\mathrm{et}})^{-1}$. Thus, after the canonical pullback and direct-image identifications, the five-arrow composite $C_M$ satisfies $\\lambda_M\\circ g^*C_M=1$, with the open-restriction $\\lambda_M$ constructed in Step 3. The sheaf/pullback section identifications apply to the same localized test objects, so this equation has the indicated pro-etale target. The open-adjunction bijection now gives $C_M=\\varepsilon_g\\circ g_!(\\lambda_M^{-1})$. Therefore this relative-class comparison is the canonical proper/open map; when the optional datum holds it also agrees with Step 3's map on this class.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-finite-type-morphism",
+    "lem-kun-dimension-finite-type",
+    "thm-sf-ambient-adjoint-class",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "lem-amb-unbounded-proper-open-interchange",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Independent coefficient-class clause: current detailed relative-adjoint and comparison interfaces"
+   }
+  },
+  {
+   "text": "Choose $K\\cong\\nu_Y^*K_0$ with $K_0\\in D^+(Y_{\\mathrm{et}},A)$. The comparison unit [thm-weil-pbc-site-comparison] and formula [thm-sf-ambient-adjoint-class] give $Rf^!K\\cong\\nu_X^*f_{\\mathrm{et}}^\\times K_0$. Open restriction commutes with $\\nu^*$: on a pro-etale test object $T\\to X'$ the section formula [lem-cbc-comparison-pullback-sections] gives $\\Gamma(T_{\\mathrm{et}},(T\\to X)_{\\mathrm{et}}^{-1}F)$ on both sides; the section pullbacks giving restriction maps and the constant-$A$ actions agree. Applying the same calculation to $Y'$ and then termwise using exactness [lem-sf-comparison-pullback-exact, def-weil-pbc-proetale-operations] gives witnesses\n$$B=g'^*Rf^!K\\cong\\nu_{X'}^*g'^{\\mathrm{et},*}f_{\\mathrm{et}}^\\times K_0,\\qquad\n C=Rf'^!g^*K\\cong\\nu_{X'}^*f'^{\\times}_{\\mathrm{et}}g^{\\mathrm{et},*}K_0.$$\nHere the etale adjoint values are bounded below, with the following check rather than an appeal to an unstated clause. The theorem [thm-sf-ambient-adjoint-class] puts $\\nu_X^*f_{\\mathrm{et}}^\\times K_0=Rf^!K$ in $D^+$. Exact comparison pullback commutes with cohomology [lem-sf-comparison-pullback-exact]. If an etale cohomology sheaf $F$ below this lower bound has $\\nu_X^*F=0$, the unit [thm-weil-pbc-site-comparison] applied to $F[0]$ gives $F[0]\\cong R\\nu_{X,*}\\nu_X^*(F[0])=0$, hence $F=0$. Thus $f_{\\mathrm{et}}^\\times K_0$ is bounded below. Applying these sentences with $X',Y',f',g^{\\mathrm{et},*}K_0$ proves the bound for the other etale adjoint value. Exact restriction preserves both lower bounds. Thus both $B,C$ belong to the witnessed full category [def-sf-etale-origin-subcategory]. For every object $M$ of this category, Step 7 gives an etale-origin witness for $g'_!M$ and its specified comparison $\\Gamma_M$. The open adjunctions [prop-exc-open-adjoint] and relative adjunctions [thm-sf-ambient-adjoint-class] yield\n$$\\begin{aligned}\n\\operatorname{Hom}_{X'}(M,B)&\\cong\\operatorname{Hom}_{X}(g'_!M,Rf^!K)\n\\cong\\operatorname{Hom}_{Y}(Rf_*g'_!M,K)\\\\\n&\\xrightarrow{t\\mapsto t\\circ\\Gamma_M}\\operatorname{Hom}_{Y}(g_!Rf'_*M,K)\n\\cong\\operatorname{Hom}_{Y'}(Rf'_*M,g^*K)\n\\cong\\operatorname{Hom}_{X'}(M,C).\n\\end{aligned}$$\nEach relative adjunction has a bounded-below etale-origin source ($M$ or $g'_!M$) and bounded-below target ($g^*K$ or $K$). Yoneda [lem-galois-yoneda-fully-faithful] in this full category gives an isomorphism $B\\to C$. Evaluating at $M=B$ and $1_B$ gives successively $\\varepsilon_{g'}$, $\\varepsilon_f\\circ Rf_*\\varepsilon_{g'}$, precomposition with $\\Gamma_B$, its open transpose, and its relative proper transpose: this is exactly the displayed relative canonical comparison. This also proves naturality. An input sheaf in [def-sf-fullcd-used-class] supplies such a witness in degree zero, so this includes the source's coefficient-sheaf clause. No unrestricted ambient datum is inferred.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "lem-cbc-comparison-pullback-sections",
+    "lem-sf-comparison-pullback-exact",
+    "def-weil-pbc-proetale-operations",
+    "def-sf-etale-origin-subcategory",
+    "prop-exc-open-adjoint",
+    "lem-galois-yoneda-fully-faithful",
+    "def-sf-fullcd-used-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+    "place": "Independent coefficient-class clause: witnessing the representing objects and the relative canonical mate"
+   }
   }
  ],
  "proof_deps": [
-  "lem-exc-closed-support-triangle",
-  "lem-compact-support-direct-image-triangulated",
-  "prop-exc-ambient-dual-base-change",
-  "lem-exc-open-fully-faithful"
+  "lem-weil-pbc-proper-to-separated",
+  "def-weil-compactifications-refinements",
+  "def-weil-ambient-exceptional-adjoint",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-full-cohomological-dimension",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-exc-proetale-proper-open-sheaf-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-exc-proetale-cartesian-open-injective-acyclic",
+  "lem-kun-finite-cd-acyclic-complex",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-exc-open-adjoint",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-finite-type-morphism",
+  "lem-kun-dimension-finite-type",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-comparison-pullback-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-amb-unbounded-proper-open-interchange",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-comparison-pullback-sections",
+  "def-sf-etale-origin-subcategory",
+  "def-sf-fullcd-used-class"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/prop-exc-base-change-proper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-exc-base-change-proper.proof.md",
+  "place": "Repair of mixed-site Steps 1–4 by sheaf support, finite-CD derivation, and explicit adjunction transposes; independent class clause uses current detailed relative-adjoint theorem and Stacks 0F7B only on etale sites"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism open immersion exceptional inverse image base change comparison arbitrary open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isoImage_inv_ι_assoc, AlgebraicGeometry.IsOpenImmersion.app_eq_invApp_app_of_comp_eq_aux, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of compact support pushforward commutes with open restriction",
+   "results": "8 hits: TopologicalSpace.Opens.adjunction_counit_map_functor, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, CondensedSet.compactlyGeneratedAdjunction, TopologicalSpace.CompactOpens.toCompacts_map, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, Topology.IsInducing.adjunctionNhds",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "baseChange, IsOpenImmersion",
+   "results": "loogle: unknown identifier 'baseChange'; 0 hits:",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*base.?change|base.?change.*exceptional",
+   "results": "0 hits:",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint|Adjunction.*open|IsOpenImmersion",
+   "results": "0 hits:",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image under a proper morphism commutes with pullback along an arbitrary open immersion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.IsOpenImmersion.lift",
+   "date": "2026-10-16",
+   "verdict": "no match: Mathlib hits concern scheme opens, generic adjunctions, or pullback existence, not this exceptional derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of extension by zero of an injective sheaf on an open inverse image is acyclic",
+   "results": "{\"t\": \"2026-10-16T13:41:43Z\", \"tool\": \"leanfinder\", \"query\": \"Proper direct image of extension by zero of an injective sheaf on an open inverse image is acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.Sheaf.IsLocallyInjective\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"CategoryTheory.Sheaf.isLocallyInjective_iff_injective\"], \"digest\": \"8e74bd67ac1da569\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"acyclic\"",
+   "results": "{\"t\": \"2026-10-16T13:41:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"acyclic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|proper.*acyclic|acyclic.*proper",
+   "results": "{\"t\": \"2026-10-16T13:41:44Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extendByZero|proper.*acyclic|acyclic.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Pi.lean\", \"Mathlib/LinearAlgebra/Pi.lean\", \"Mathlib/LinearAlgebra/InvariantBasisNumber.lean\", \"Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean\", \"Mathlib/Algebra/Group/Pi/Lemmas.lean\"], \"digest\": \"4e558e128f974e61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image along a universally closed scheme morphism commutes with extension by zero along an arbitrary open subtopos",
+   "results": "{\"t\": \"2026-10-16T13:42:23Z\", \"tool\": \"leanfinder\", \"query\": \"Direct image along a universally closed scheme morphism commutes with extension by zero along an arbitrary open subtopos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"AlgebraicGeometry.Scheme.Hom.map_appLE_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE'\", \"AlgebraicGeometry.Scheme.Hom.appLE_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\"], \"digest\": \"529991acde0ae24f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Cartesian square with proper vertical morphisms and open horizontal immersions, extension by zero of an injective proetale module sheaf is acyclic for direct image",
+   "results": "{\"t\": \"2026-10-16T13:42:23Z\", \"tool\": \"leansearch\", \"query\": \"For a Cartesian square with proper vertical morphisms and open horizontal immersions, extension by zero of an injective proetale module sheaf is acyclic for direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeSndIsOpenImmersion\"], \"digest\": \"8cd432a108ee2773\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are structure-sheaf restriction, generic injective/derived statements, or extension of functions, not proper/open support for pro-etale module sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -93,5 +321,32 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-exc-base-change-proper",
+  "worker": "stage1",
+  "summary": "Second reading repairs C3/C4/E1: the closed-support triangle is etale, not pro-etale; the cited dual-mate theorem assumes adjoint data not supplied for the restricted maps; its class discharge is not the unrestricted datum. Preserve arbitrary opens, expose two strictly sheaf-level pro-etale support inputs, derive their unbounded comparison under the assumed finite-CD bound, construct the restricted right adjoint and calculate the canonical mate. Prove the bounded-below etale-origin clause separately by the existing etale comparison and relative-adjoint interfaces.",
+  "blueprint": "Current main-20261015 prop proof Steps 1–4 have a mixed-site typing gap after the closed-support node was correctly specialized to etale sites. Replace that invalid invocation by its proper/open sheaf-support and Hom-adjunction realization, retaining the arbitrary-open conclusion. The current unit localizing Brown theorem is not a theorem on all pro-etale objects; the current detailed thm-sf-ambient-adjoint-class explicitly remains relative on D+ etale-origin objects. The independent clause uses that exact detailed interface, not an extension of the localizing adjunction to the whole pro-etale category. No unit or chapter statement is changed.",
+  "statement_change": {
+   "reason": "STATEMENT-DISPUTED: the source coefficient-class sentence incorrectly claims unrestricted ambient discharge; current discharge theorem explicitly refutes it (proper elliptic curve over an algebraic closure with finite coefficients prime to the characteristic). Interpret this clause by the current relative exceptional functor; retain every arbitrary-open case in the conditional assertion and specify its mate.",
+   "old_statement": "Let $f:X\\to Y$ be proper, carrying the ambient exceptional right adjoint\ndatum of [def-weil-ambient-exceptional-adjoint], let\n$g:Y'\\hookrightarrow Y$ be an open immersion with closed complement\n$i:Z\\hookrightarrow Y$, and form the Cartesian squares with\n$X'=f^{-1}(Y')$, $g':X'\\hookrightarrow X$, $f'=f|_{X'}$ and\n$i':f^{-1}(Z)\\hookrightarrow X$. Then for every object $K$ the\nbase-change comparison\n\n$$\n\\beta:\\ Lg'^*Rf^{\\times}K\\xrightarrow{\\ \\sim\\ }Rf'^{\\times}Lg^*K\n$$\n\nis an isomorphism. On the blueprint's coefficient class\n[def-sf-fullcd-used-class] the ambient datum displayed as the hypothesis\nis the theorem [cor-sf-ambient-adjoint-discharge], and the argument below\nis object-wise, so on that class the comparison is an isomorphism for every\n$K$ of the class without hypothesis; the datum is retained for the complexes\noutside it, [rem-sf-class-adjoint-residue].",
+   "new_statement": "Fix the finite coefficient $A=A_{E,n}$ and the scheme-base data of [def-weil-ambient-exceptional-adjoint]. Let $f:X\\to Y$ be proper [def-weil-proper-morphism] and carry that ambient exceptional right adjoint datum. Let $g:Y'\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion]. Form the Cartesian square [def-pc-fibre-product] with $X'=X\\times_Y Y'$, $g':X'\\hookrightarrow X$ and $f':X'\\to Y'$. On the ordinary unbounded derived categories of pro-etale $A$-module sheaves [def-weil-pbc-proetale-operations], normalize $Rf^\\times$ as the right adjoint of $Rf_*$ using the proper compactification $(\\operatorname{id}_X,f)$ and the comparisons in the given datum. Then $Rf'_*$ admits the corresponding right adjoint $Rf'^\\times$, and for every $K\\in D(Y_{\\mathrm{proet}},A)$ the canonical comparison\n$$\\beta_K:Lg'^*Rf^\\times K\\longrightarrow Rf'^\\times Lg^*K$$\nis an isomorphism. To specify its normalization, write $\\Gamma:g_!Rf'_*\\xrightarrow{\\sim}Rf_*g'_!$ for the derived proper/open map induced on K-injective representatives by the sheaf map [lem-exc-proetale-proper-open-sheaf-comparison]. The comparison $\\beta_K$ is the $Rf'_*\\dashv Rf'^\\times$ transpose of the $g_!\\dashv g^*$ transpose of\n$$g_!Rf'_*g'^*Rf^\\times K\\xrightarrow{\\Gamma}Rf_*g'_!g'^*Rf^\\times K\\xrightarrow{Rf_*\\varepsilon_{g'}}Rf_*Rf^\\times K\\xrightarrow{\\varepsilon_f}K.$$\nAll open pullbacks here are exact, so $Lg^*=g^*$ and $Lg'^*=g'^*$.\n\nIndependently of this optional ambient datum, let $X,Y$ be finite-type schemes over $k=\\overline{\\mathbf F}_q$ with the coefficients of [def-sf-fullcd-used-class], let $f$ be proper and $g$ an open immersion as above. For every bounded-below complex $K$ of etale origin [def-sf-etale-origin-subcategory], the analogous canonical comparison for the relative exceptional inverse image of [def-weil-exceptional-inverse-image] is an isomorphism:\n$$g'^*Rf^!K\\xrightarrow{\\sim}Rf'^!g^*K.$$\nHere the relative adjunction is [thm-sf-ambient-adjoint-class]; no existence of the unrestricted pro-etale ambient datum is inferred from this clause [cor-sf-ambient-adjoint-discharge].",
+   "citers": [
+    {
+     "node": "cor-exc-base-change-open-immersion-general",
+     "holds": true,
+     "reason": "The conditional proper/open comparison is retained for arbitrary opens, with the right adjoint for f-prime constructed explicitly; bounded-class consumers retain the independent relative comparison."
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-e12671fb2",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-e12671fb2 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, current blueprint/unit route, report, and source locations. Verified hypotheses, arbitrary opens, unbounded pro-etale scope, canonical mate normalization, K-injective and finite-CD arguments, relative etale-origin clause, duplicates, Mathlib searches, and edge cases. Review written to review.md; no Lean/build/git/ssh/live project access used."
+ }
 }
