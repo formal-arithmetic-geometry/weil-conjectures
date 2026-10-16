@@ -228,5 +228,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-c8945f95f (reviewer sub-agent of L); spot-checked: I read all of it: the item with its 4 steps, the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-coef-infinity-slice-right-fibration, lem-cbc-right-fibration-space-fiber), the citer lem-coef-infinity-pointwise-cocartesian-transport, the unit record and the main-20261015 proof of prop-coef-integral-exceptional-adjoint. The statement is HTT Lemma 2.4.4.1 with exactly its hypotheses (inner fibration of quasicategories, two vertices), and the right-pinched mapping space matches HTT's Hom^R. HTT is not archived in literature/, and the report records it as WANTED. Step 1: the postcomposition map is simplicial. Step 2: checked face by face; the faces d_j (j<=n, j!=i) plus the constant face d_{n+1} form exactly the horn Lambda^{n+1}_i, which is inner because 0<i<=n<n+1. The pieces agree where they meet: d_j and d_{n+1} share the initial face, which is constant at x. The filler keeps the last vertex y. Checked n=1,i=1 (Lambda^2_1) and i=n. Step 3 uses the last clause of the slice lemma with K=Delta^0 (the fibre is exactly Map_B(px,py) and is Kan). Step 4 uses the first assertion of the right-fibration-over-Kan lemma, and its hypotheses are exactly Steps 2 and 3. Its 'small' condition is ordinary universe bookkeeping and adds no hypothesis. Edge cases checked: empty fibres, p=id, B a point, nerves of ordinary categories, x=y. Searches by rg and blueprint grep found no duplicate; near misses checked and found different. No cycle: the closures of the cited nodes do not contain the item. No new nodes, so no restated clause. I accept the declared tool use of lem-cbc-right-fibration-space-fiber (sk-prop-sf-cbc): it is a generic black box, no same-unit node gives it, and same-unit nodes already use it as a tool. No target, coefficient category or base-change morphism is involved, and no SGA source is used. The Mathlib searches cover all three kinds, and Mathlib has only the definitions. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InnerMappingFiber",
+  "declaration": "SSet.Enhanced.innerFibration_mappingSpaceMap_isKanFibration",
+  "file": "lean/Sheaf/CategoryTheory/InnerMappingFiber.lean",
+  "statement": "theorem innerFibration_mappingSpaceMap_isKanFibration {E B : SSet.{u}} (p : E ⟶ B) [SSet.InnerFibration p] [SSet.Quasicategory E] [SSet.Quasicategory B] (x y : E _⦋0⦌) : SSet.modelCategoryQuillen.J.rlp (mappingSpaceMap p x y)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ace201e9d",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Statement matches node and HTT 2.4.4.1: E,B : SSet.{u}, p with [SSet.InnerFibration p], [Quasicategory E/B], x y : E _⦋0⦌; mappingSpaceMap is the recorded right-pinched construction (initial face constant at x, last vertex y, appendLast operators); J.rlp = all horns Λ[n+1,i] incl. outer = Kan fibration. No extra hypotheses, edge cases covered (x=y, empty spaces, p=id, B=Δ^0, n=1), no duplicate, no hollow def, proof sorry. Fixes in fixes/InnerMappingFiber.lean: (H9) removed unused import Sheaf.CategoryTheory.JoinSliceRightFibration (proof-only dependency); (H8) theorem docstring now carries the node's four proof steps. Signature byte-identical, so lean.statement stays verbatim. nt_compile.py --json: delivered and fixed files both rc 0, no messages."
  }
 }

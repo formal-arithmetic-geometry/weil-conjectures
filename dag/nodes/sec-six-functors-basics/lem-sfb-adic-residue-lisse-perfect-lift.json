@@ -32,7 +32,15 @@
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
   "def-weil-finitely-generated-module",
   "lem-pur-derived-change-of-rings",
-  "def-pc-perfect-ring-complex"
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "lem-pur-site-constant-module-hom",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-strict-perfect-coefficient-package"
  ],
  "proof": [
   {
@@ -375,5 +383,32 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-8ffd0ee0e (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statements of all 25 proof_deps and the 3 new nodes in full. Stacks sources checked: proetale.tex 09C1, 09C2 (l.5788), 09C3, 09C5 (l.5988), 09C6 (l.6071), 09C7 and 09AL; etale-cohomology.tex 09BI; tag/label pairs confirmed in tags/tags. I also read Bhatt–Scholze 6.6.6–6.6.8, 6.6.10 and 6.6.11, and the main-20261015 unit sk-lem-integral-models, whose step (3) cites 09C2/09C7, so the item is on the unit's route. There is no SGA citation. The item statement is unchanged and true; I tested J=0, J=A, X empty and A=Q[[t]]. It stays in D(Mod B_X) with B_X the completed coefficient sheaf, the same category the parent lem-sfb-adic-stratified-perfect uses. Constant and completed coefficients are only related through lem-weil-pbc-constant-completion-equivalence, whose exact text I checked. The item is not a duplicate of lem-weil-pbc-residue-lisse-perfect-lift, because that node's adic coefficient datum requires every A/J^n to be finite and perfect over A. All 8 steps hold against the cited statements: 09C2 markings; the clopen component reduction; nilpotent lissity plus stalk normalizations; 09AW with separate weakly-contractible trivializations; completeness of T and H through the e-image limits and the Roos triangle; the K-projective Hom identification; the ML stable-image recursion plus the Milnor epimorphism giving a genuine B-linear g; and the complete-cone argument. One gap is elementary and needed no change: the ML node asks for weak contractibility for W's own site, while the cover gives it for Y_proet. The localization equivalence cited in step 4 makes the two agree (apply j_! and take the identity component). New nodes: finite-reductions follows 09C2 with 09AL full faithfulness on D_c^+, and the étale and pro-étale Tor amplitudes agree via flat pullback and ν_*ν^*=id. Connected-perfect-constant is 09BI; its W-clause holds by splitting the pulled-back cover into a finite clopen partition, matching BS 6.6.7. The ML node is 09C5, with all degrees by shifting. All three are statement-only, self-contained, carry a correct blueprint.from/via and three search kinds, and are neither restatements nor duplicates; I searched the DAG by tag and label. There is no cycle. I accept all 16 declared tool_uses as generic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicResidueLissePerfectLift",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidueLissePerfectLift",
+  "statement": "theorem adicResidueLissePerfectLift (X : Scheme.{u}) [IsNoetherian X] {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A] (J : Ideal A) [IsAdicComplete J A] (M : CategoryTheory.ConstantCompletion.D (CategoryTheory.ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} X) A J)) (_hcomplete : CategoryTheory.ConstantCompletion.IsComplete (CategoryTheory.ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} X) A J 0) M) (C : CategoryTheory.ConstantCompletion.D (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0)) (_hbounded : ∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q → IsZero ((adicResidueCohomology.{max v (u + 1)} (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0) q).obj C)) (_hlisse : ∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules (smallModelComparisonEtaleTopology.{u, v} X) (A ⧸ J ^ (0 + 1)) ((adicResidueCohomology.{max v (u + 1)} (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0) q).obj C)) (a b : ℤ) (_hab : a ≤ b) (_htor : ∀ P : CategoryTheory.ConstantCompletion.Cx (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0), CochainComplex.IsKFlatIndependentCoefficients (J := smallModelComparisonEtaleTopology.{u, v} X) (R := CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0) P → Nonempty ((CategoryTheory.ConstantCompletion.Q (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0)).obj P ≅ C) → ∀ (N : CategoryTheory.ConstantCompletion.Mod (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0)) (q : ℤ), q < a ∨ b < q → IsZero (adicResidueTensorCohomology.{max v (u + 1)} (CategoryTheory.ConstantCompletion.finite (smallModelComparisonEtaleTopology.{u, v} X) A J 0) P N q)) (_hres : Nonempty ((CategoryTheory.ConstantCompletion.extend (CategoryTheory.ConstantCompletion.projection (coefficientProEtaleModelTopology.{u, v} X) A J 0)).obj M ≅ (adicResidueComparison.{u, v} X (A ⧸ J ^ (0 + 1))).obj C)) : ∃ S : Sieve ((AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).obj (⊤_ X.ProEt)), S ∈ coefficientProEtaleModelTopology.{u, v} X _ ∧ ∀ (U : coefficientProEtaleSiteModel.{u, v} X) (f : U ⟶ (AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).obj (⊤_ X.ProEt)), S f → ∃ (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ) (c d : ℤ), P.IsStrictlyGE c ∧ P.IsStrictlyLE d ∧ (∀ q : ℤ, Module.Finite A (P.X q) ∧ Module.Projective A (P.X q)) ∧ Nonempty ((adicResidueRestriction.{max v (u + 1)} (CategoryTheory.ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} X) A J) U).obj M ≅ (adicResidueRestriction.{max v (u + 1)} (CategoryTheory.ConstantCompletion.completed (coefficientProEtaleModelTopology.{u, v} X) A J) U).obj (adicResidueConstantPerfect.{u, v} X J P))",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/Paper/AdicResidueLissePerfectLift.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidueComparisonData",
+   "AlgebraicGeometry.Scheme.adicResidueComparison",
+   "AlgebraicGeometry.Scheme.adicResidueConstantPerfect",
+   "AlgebraicGeometry.Scheme.adicResidueCohomology",
+   "AlgebraicGeometry.Scheme.adicResidueRestriction",
+   "AlgebraicGeometry.Scheme.adicResidueTensorCohomology",
+   "AlgebraicGeometry.Scheme.adicResidueLissePerfectLift"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20c8774e6",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, Stacks 09C6, report (Worker report + Second reading by Q17 present), both delivered modules, and the exact declarations used (ConstantCompletion completed/projection/IsComplete/extend/derivedPull/constantMap, ringedKoszulTensor, IsKFlatIndependentCoefficients, IsLocallyConstantFiniteTypeModules, strictPerfectConstantSheaf, ringedDerivedRestriction, IsPerfectRingComplex). All 13 hypothesis/conclusion clauses match. B_X is the genuine limit; completeness is for the kernel ideal = JB_X; C is bounded etale A/J with lisse f.g. cohomology; Tor test over K-flat reps and all N; residue iso via universal derived extension and derived pullback (no arbitrary maps); covering sieve with bounded finite-projective P and termwise B_X tensor P on each member. Edge cases (empty X, J=0, J=A, a=b, universes u,v independent with A in max v (u+1)) fine. The dependency repair of def-weil-pbc-site-comparison-morphism is a real AsSmall transport, only lean changed, and its two sorry instances (continuity, finite limits) are in the node statement. 8 added stmt_deps are landed nodes. lean.statement verbatim in both nodes. No hollow defs; docstrings with all 8 steps. nt_compile.py --json on both files: rc 0, no errors. Observations only: stale Worker report text; the old proEtaleSiteComparison declarations are no longer listed in the node record."
  }
 }

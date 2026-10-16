@@ -192,28 +192,33 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-f86972310 (reviewer sub-agent of L); spot-checked: Read all six steps, all seventeen cited statements, sources, and unit/chapter route. Inclusion, continuity, comma indexing, scalar actions and module adjunction check out; no new nodes or repairs. Verified the exact master condensed coefficients and base-change direction without treating this supporting definition as a derived comparison theorem. Existing dependency cycles are documented in review.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a674feeff",
-  "group": "NB",
+  "reviewer": "NT-stage2-cc-20c8774e6",
+  "group": "Q17",
   "result": "pass",
-  "note": "Wrote review.md. Checked source, all statement dependencies, canonical constructions, universes, edge cases, docstrings, report sections, and verbatim signature. Per-file scompile.py reproduced cleanly in both checks. No findings; branch and project clones unchanged."
+  "note": "Read node, Stacks 09C6, report (Worker report + Second reading by Q17 present), both delivered modules, and the exact declarations used (ConstantCompletion completed/projection/IsComplete/extend/derivedPull/constantMap, ringedKoszulTensor, IsKFlatIndependentCoefficients, IsLocallyConstantFiniteTypeModules, strictPerfectConstantSheaf, ringedDerivedRestriction, IsPerfectRingComplex). All 13 hypothesis/conclusion clauses match. B_X is the genuine limit; completeness is for the kernel ideal = JB_X; C is bounded etale A/J with lisse f.g. cohomology; Tor test over K-flat reps and all N; residue iso via universal derived extension and derived pullback (no arbitrary maps); covering sieve with bounded finite-projective P and termwise B_X tensor P on each member. Edge cases (empty X, J=0, J=A, a=b, universes u,v independent with A in max v (u+1)) fine. The dependency repair of def-weil-pbc-site-comparison-morphism is a real AsSmall transport, only lean changed, and its two sorry instances (continuity, finite limits) are in the node statement. 8 added stmt_deps are landed nodes. lean.statement verbatim in both nodes. No hollow defs; docstrings with all 8 steps. nt_compile.py --json on both files: rc 0, no errors. Observations only: stale Worker report text; the old proEtaleSiteComparison declarations are no longer listed in the node record."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleSiteComparison",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleSiteComparison",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSmallModelComparison",
+  "declaration": "AlgebraicGeometry.Scheme.smallModelProEtaleComparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleSiteComparison",
-   "AlgebraicGeometry.Scheme.preservesFiniteLimits_proEtaleSiteComparison",
-   "AlgebraicGeometry.Scheme.proEtaleSiteComparisonModules"
+   "AlgebraicGeometry.Scheme.smallModelComparisonEtaleSite",
+   "AlgebraicGeometry.Scheme.smallModelComparisonEtaleTopology",
+   "AlgebraicGeometry.Scheme.smallModelComparisonInclusion",
+   "AlgebraicGeometry.Scheme.smallModelComparisonInclusion_isContinuous",
+   "AlgebraicGeometry.Scheme.smallModelComparisonPullback",
+   "AlgebraicGeometry.Scheme.smallModelComparisonPushforward",
+   "AlgebraicGeometry.Scheme.smallModelProEtaleComparison",
+   "AlgebraicGeometry.Scheme.smallModelComparisonPullback_preservesFiniteLimits"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSiteComparison.lean",
-  "statement": "def proEtaleSiteComparison (T : Scheme.{u}) : Functor.sheafPullbackConstruction.sheafPullback (toProEt T) (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣ (toProEt T).sheafPushforwardContinuous (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSmallModelComparison.lean",
+  "statement": "abbrev smallModelProEtaleComparison (X : Scheme.{u})",
   "branch": "newtargets-dag",
-  "by": "NB",
-  "date": "2026-10-15",
+  "by": "Q17",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the existing Scheme.toProEt inclusion and its continuity and finite-limit instances. Specializes the canonical constructed Mathlib adjunction to sets in the larger site universe, states its left exactness, and specializes the existing upstream comparison adjunction to finite-ring module coefficients. No copied sites or chosen arbitrary maps."
+  "note": "§1(B): the recorded geometric adjunction is on the original sites, and its module specialization assumes finite coefficients. ConstantCompletion requires small models in the coefficient universe. This module supplies the identical inclusion, continuous geometric adjunction and left exactness on coefficient-sized AsSmall models, using the published coefficientProEtaleSiteModel. All objects, sections and covering sieves are retained by the canonical equivalences. The original comparison stays publicly imported; coefficients and scheme size have independent parameters."
  },
  "reviewed_proof": {
   "date": "2026-10-16",

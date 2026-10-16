@@ -279,5 +279,24 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d6fb729ff (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the free-calculus node and the citer interval-cell-stability in full, and checked both sources (fetched read-only, not archived). Bergner math/0406507 Lemma 3.4, printed p.11, says 'SC_X is proper [4, 7.3]'. The item's statement is exactly Dwyer–Kan 7.3(ii), with the cofibrations of 7.1(iii) and the free-map retracts of 7.4–7.6; no hypothesis is added and nothing is weakened. Steps 2–4 match DK 2.7(i)–(iii): the word normal form, then the degreewise-free diagonal, then the F_• resolution through free-resolution-coproduct-augmentation, which applies to ordinary X_q,Z_q with no freeness hypothesis (I checked that delta is natural). Steps 5–7 are DK 8.2 and 8.1. The row extra-degeneracy identities hold on labels when checked against Mathlib ExtraDegeneracy.lean:72-83, including the composition order and the cases i=n+1 and d_1h_0. The non-natural row contractions are used only through the natural augmentation in the diagonal theorem. Step 1's domain-fixing retract (pushout along b; r is valid since r_0 j_0 = i b) and step 8's retract closure are correct. Edge cases: empty O, identity-only categories, empty F, empty mapping sets. A computed closure shows no cycle; free-calculus does reach the item, so not citing it is right. All cited nodes are in the same unit, so there are no tool_uses, and no SGA is cited. The DAG scan found no duplicate, and there are no new nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FixedObjectScatLeftProper",
+  "declaration": "fixed_object_scat_left_proper",
+  "file": "lean/Sheaf/AlgebraicTopology/FixedObjectScatLeftProper.lean",
+  "statement": "theorem fixed_object_scat_left_proper (O : Type u) [m : ModelCategory (Fixed O)] (hweak : m.categoryWithWeakEquivalences.weakEquivalences = fixedWeakEquivalences O) (hcof : m.categoryWithCofibrations.cofibrations = fixedCofibrations O) : ∀ {A B C : Fixed O} (u : A ⟶ B) (i : A ⟶ C), fixedWeakEquivalences O u → fixedCofibrations O i → fixedWeakEquivalences O (pushout.inr u i)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The model structure is supplied by a ModelCategory instance whose weak-equivalence and cofibration classes are identified with the dependency definitions fixedWeakEquivalences and fixedCofibrations; ModelCategory supplies finite colimits for the pushout."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-823c7de9b",
+  "group": "Q08",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and the Bergner/Dwyer-Kan source: O : Type u with Fixed O = EnrichedCategory SSet.{u} O and FixedHom (identity on objects); [m : ModelCategory (Fixed O)] with hweak/hcof identifying its classes with the dependency's fixedWeakEquivalences and fixedCofibrations (fixedCofibrations is the LLP against objectwise trivial Kan fibrations); conclusion fixedWeakEquivalences O (pushout.inr u i), the canonical C -> B ⊔_A C in Fixed O; no Kan, fibrancy or universe restriction. Not vacuous: a test compile instantiates m, hweak, hcof from simplicial_interval_lifting. #print axioms gives sorryAx only beyond the standard axioms. lean.statement equals the signature verbatim; the node differs from the live one only in lean; no duplicate declaration found; the report has a Worker report and a Second reading by Q08. Edge cases (empty O, one object, empty mapping sets, identity maps) covered. The delivered file compiles through nt_compile --json with no errors or warnings. Single finding (H8, source-place docstring): the module and theorem docstrings attribute 'Lemma 3.4' to Dwyer-Kan; it is Bergner math/0406507 Lemma 3.4 (p. 11), which cites Dwyer-Kan Prop. 7.3. fixes/FixedObjectScatLeftProper.lean corrects both attributions with the signature unchanged and compiles cleanly; no record fix needed."
  }
 }
