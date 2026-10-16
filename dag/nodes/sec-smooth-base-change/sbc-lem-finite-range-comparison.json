@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Construct $t_D^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\tau_{\\le q}K})$ and $t_E^{p,q}=\\mathcal H^{p+q}(\\Ex_{\\square,\\mathcal H^q(K)[-q]})$. By [lem-weil-pbc-truncation-couple-morphism], both truncation couples are exact and these maps commute with all three structure maps, including the boundary. They therefore satisfy the exact-couple-morphism hypotheses of [lem-sp-couple-morphism], which gives compatible maps on every spectral-sequence page, not merely unrelated maps between entries. Clause (3) of [lem-weil-pbc-truncation-couple-morphism] identifies the initial components with the stated degree-$p$ exchange maps of $\\mathcal H^q(K)$. Thus this constructed morphism is the $\\varphi$ in the hypothesis.",
+   "text": "Use lem-weil-pbc-truncation-couple-morphism to obtain the two exact couples with all ten data identifications and the three exchange squares. Conjugate tD and tE by the recorded D and E equalities; family_conj converts the heterogeneous structure-map identifications into these conjugation formulas. The squares then give the hypotheses of lem-sp-couple-morphism, whose pages have initial map the transported tE and whose successor maps satisfy the kernel and cokernel squares.",
    "uses": [
     "lem-weil-pbc-truncation-couple-morphism",
     "lem-sp-couple-morphism"
@@ -33,9 +33,10 @@
    }
   },
   {
-   "text": "The bound $\\mathcal H^q(K)=0$ outside $[a,b]$ implies the lower bound $q<a$ required by [lemma-weil-pbc-exact-couple-abutment]. Apply that lemma to the two couples and the map just constructed. Its clause (1) verifies $D^{p,q}=0$ for $q<a$ and $E_2^{p,q}=0$ unless $p\\ge0$ and $q\\ge a$, exactly the half-plane hypotheses required by [lem-sp-couple-morphism]. It supplies finite canonical abutment filtrations and existing limiting pages. Clause (2) supplies the isomorphisms $\\iota_n:D^{0,n}\\to\\mathcal H^n(\\Phi K)$ and $\\iota'_n:D'^{0,n}\\to\\mathcal H^n(\\Psi K)$ carrying these finite filtrations to the image filtrations on the desired abutments. Only finitely many $q\\in[a,b]$ can contribute in total degree $n$; if $n<a$, all those terms are zero.",
+   "text": "The hypothesis on cohomology outside [a,b] gives vanishing below a. Apply lemma-weil-pbc-exact-couple-abutment to the recorded couples. Its four half-plane bounds permit the convergence clause of lem-sp-couple-morphism, giving one pair of limiting subobjects and the globally indexed limiting maps required in the conclusion. For each cohomological degree n, apply the abutment theorem again for its own finite filtrations, their canonical identifications, and the exchange-induced graded comparison. Neither the upper bound b nor a <= b is needed for this argument.",
    "uses": [
-    "lemma-weil-pbc-exact-couple-abutment"
+    "lemma-weil-pbc-exact-couple-abutment",
+    "lem-sp-couple-morphism"
    ],
    "elementary": false,
    "source": {
@@ -44,9 +45,10 @@
    }
   },
   {
-   "text": "Apply [lem-sp-page-induction] to the spectral-sequence morphism of Step 1, in the abelian category $\\Ab(Y'_{\\Et})$: the hypothesis supplies isomorphisms on every $E_2$ component, and Step 2 supplies the existing limiting pages. Hence every finite-page component and every $E_\\infty$ component is an isomorphism. Explicitly, the page induction starts with $\\varphi_2$; at a successor the componentwise inverse of $\\varphi_r$ commutes with the differential because $\\varphi_r d_r=d'_r\\varphi_r$, so it is an inverse map of page complexes. Homology and the compatible page-to-page isomorphisms give an inverse for $\\varphi_{r+1}$. The cycle and boundary subobjects defining the limiting pages are carried isomorphically by these maps. This direct page-comparison lemma has no directed-colimit hypotheses and needs no singleton-index construction.",
+   "text": "Prove page induction directly in the exact-couple page API (private helpers page_kernel_isIso, page_maps_isIso, limit_transport, restriction_iso, and limit_map_isIso). At a successor the isomorphisms on page objects induce an isomorphism on outgoing kernels; the incoming differential and its kernel lift then give an isomorphism on cokernels, which is the next page map by the quotient square. Both the page maps and their inverses satisfy differential and successor-projection compatibility. Use the existing exactCoupleFiniteTransport theorem of lem-sp-derived-couple-functoriality in both directions to preserve the recursive finite cycles and boundaries. Reuse transport_square from Sheaf.CategoryTheory.ExactFunctorHalfPlane with the identity functor for the elementary equality reindexing, and the factors_iff_image_le helper from DerivedCoupleFunctoriality when passing to limiting cycles. The greatest-lower-bound and least-upper-bound properties give preservation of limiting cycles and boundaries. Restrict the initial map and its inverse to get inverse maps on those subobjects. The two limiting cokernel squares identify any supplied limiting map with the induced cokernel isomorphism. Apply this to the global limiting map and to each degree-specific abutment limiting map. This is the usual page-comparison argument, using the existing finite transport theorem and local isomorphism helpers without converting the couples to Mathlib spectral sequences.",
    "uses": [
-    "lem-sp-page-induction"
+    "lem-sp-couple-morphism",
+    "lem-sp-derived-couple-functoriality"
    ],
    "elementary": false,
    "source": {
@@ -55,7 +57,7 @@
    }
   },
   {
-   "text": "For fixed $n$, clause (3) of [lemma-weil-pbc-exact-couple-abutment] gives $\\iota'_n\\circ t_D^{0,n}=\\mathcal H^n(\\Ex_{\\square,K})\\circ\\iota_n$. Its clause (4) says that $u_n=\\mathcal H^n(\\Ex_{\\square,K})$ respects every step of the image filtrations and that its graded maps are precisely $\\varphi_\\infty^{p,n-p}$ under the canonical identifications. Thus $u_n$ is a morphism of the finite filtered abutments of Step 2, and all its graded maps are isomorphisms by Step 3. All hypotheses of [lem-sp-finite-filtration-induction] are now supplied, so $u_n$ is an isomorphism for each $n$ (no strictness hypothesis is needed).",
+   "text": "In degree n, use the abutment theorem to obtain the two finite image filtrations U and V on the actual cohomology objects, the restrictions of cohomology of exchange, and its graded maps. The private finite_image helper transports finite bounds along the canonical abutment isomorphisms. The canonical graded comparison square expresses each graded map as the limiting isomorphism of Step 3 conjugated by the two comparison isomorphisms. The private filtered_iso_of_graded helper identifies the supplied restriction and graded maps with those in lem-sp-finite-filtration-induction by monomorphism and cokernel-epimorphism cancellation, then applies that theorem. This proves that every cohomology map of the same exchange component is invertible.",
    "uses": [
     "lemma-weil-pbc-exact-couple-abutment",
     "lem-sp-finite-filtration-induction"
@@ -82,16 +84,16 @@
  "proof_deps": [
   "def-weil-pbc-derived-exchange",
   "lem-sp-couple-morphism",
+  "lem-sp-derived-couple-functoriality",
   "lem-sp-finite-filtration-induction",
-  "lem-sp-page-induction",
   "lem-weil-pbc-derived-stalk-conservative",
   "lem-weil-pbc-truncation-couple-morphism",
   "lemma-weil-pbc-exact-couple-abutment"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent C3",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-lem-finite-range-comparison.md",
-  "place": "Proof paragraph, expanded by existing exact-couple and page-comparison statements; master identification read from MorphismDefs.lean"
+  "place": "Finite-range comparison proof, implemented in Lean using the existing truncation-couple and abutment statements; page isomorphisms and limiting-map uniqueness are proved locally. Finite cycle/boundary transport and image factorization reuse exactCoupleFiniteTransport and factors_iff_image_le in Sheaf.CategoryTheory.DerivedCoupleFunctoriality, exposed in place. Equality reindexing reuses the public transport_square from Sheaf.CategoryTheory.ExactFunctorHalfPlane at the identity functor; its duplicate in DerivedCoupleFunctoriality is removed. H10 repair at returned head 182318d4b: preserve the same proof and all signatures, but name successive remainders while extracting the dependent abutment witnesses in hcoh. This avoids the expensive single nested elimination; the complete module compiles within the unchanged 60-second limit."
  },
  "mathlib_searches": [
   {
@@ -342,5 +344,15 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-76f28",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261016T075723-L-1295295",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged finite-range theorem with its node, proof dependencies, delivered proof, interface records, compilation results, and axiom audits."
  }
 }

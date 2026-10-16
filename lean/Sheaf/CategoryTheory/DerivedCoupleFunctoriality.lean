@@ -6,6 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.ExactFunctorHalfPlane
 
 /-!
 # Functoriality of derived exact couples
@@ -38,15 +39,6 @@ structure CoupleMorphism {s : ℕ} (X Y : BigradedExactCouple C s) where
     tE p q ≫ Y.f p q = X.f p q ≫ tD (p + 2) (q - 1)
   g_comm : ∀ p q : ℤ,
     tD p q ≫ Y.g p q = X.g p q ≫ tE (p + s) (q - s)
-
-private theorem transport_square {C : Type u} [Category.{v} C]
-    {F G : ℤ → ℤ → C} (t : ∀ p q, F p q ⟶ G p q)
-    {p q p' q' : ℤ} (hp : p = p') (hq : q = q') :
-    eqToHom (congrArg₂ F hp hq) ≫ t p' q' =
-      t p q ≫ eqToHom (congrArg₂ G hp hq) := by
-  subst p'
-  subst q'
-  simp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the alpha image and passage to differential homology preserve
@@ -103,7 +95,9 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
     dsimp [dInto]
     have hp : p - (s : ℤ) - 2 + 2 + s = p := by omega
     have hq : q + (s : ℤ) + 1 - 1 - s = q := by omega
-    rw [Category.assoc, transport_square tE hp hq, ← Category.assoc, ← hd,
+    have ht := transport_square (𝟭 C) tE hp hq
+    simp only [Functor.id_map] at ht
+    rw [Category.assoc, ht, ← Category.assoc, ← hd,
       Category.assoc]
   let k := fun p q ↦ kernel.map (X.d p q) (Y.d p q) (tE p q)
     (tE (p + 2 + s) (q - 1 - s)) (hd p q).symm
@@ -134,7 +128,10 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
     rw [← Category.assoc]
     rw [image.map_homMk'_ι]
     simp only [Category.assoc]
-    rw [transport_square tD (by omega) (by omega)]
+    have ht := transport_square (𝟭 C) tD
+      (show (p + 1) - 1 = p by omega) (show (q - 1) + 1 = q by omega)
+    simp only [Functor.id_map] at ht
+    rw [ht]
   refine ⟨a, b, ?_, ?_, ?_, hi, fun p q ↦ ⟨k p q, hk p q, hb p q⟩⟩
   · intro p q
     have hx := (Classical.choice X.derivedMaps_exists).alpha_comm p q
@@ -182,9 +179,10 @@ private theorem derivedCoupleMorphismStep {C : Type u} [Category.{v} C] [Abelian
     have hfactor : factorThruImage (X.alpha (p + 1) (q - 1)) ≫ a p q =
         tD (p + 1) (q - 1) ≫ factorThruImage (Y.alpha (p + 1) (q - 1)) :=
       image.factor_map (Arrow.homMk' _ _ (ha (p + 1) (q - 1)))
-    have ht := transport_square b
+    have ht := transport_square (𝟭 C) b
       (show (p + 1) + (s : ℤ) = p + (s + 1 : ℕ) by omega)
       (show (q - 1) - (s : ℤ) = q - (s + 1 : ℕ) by omega)
+    simp only [Functor.id_map] at ht
     apply (cancel_epi (factorThruImage (X.alpha (p + 1) (q - 1)))).mp
     rw [← Category.assoc, hfactor, Category.assoc, hy,
       ← Category.assoc (factorThruImage (X.alpha (p + 1) (q - 1)))
@@ -256,7 +254,7 @@ to prove the successor projection square. This completes the simultaneous induct
 Source: Stacks Project, Definition 12.21.3 and Lemma 12.21.2, Tags 011S, 011R,
 and blueprint def-sp-convergence
 (blueprint: lem-sp-derived-couple-functoriality). -/
-private theorem exactCoupleFiniteTransport {C : Type u} [Category.{v} C] [Abelian C]
+theorem exactCoupleFiniteTransport {C : Type u} [Category.{v} C] [Abelian C]
     (X Y : BigradedExactCouple C 0)
     (t : ∀ p q : ℤ, X.E p q ⟶ Y.E p q)
     (e : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).E p q ⟶ (Y.pageCouple r).E p q)
@@ -336,7 +334,11 @@ private theorem exactCoupleFiniteTransport {C : Type u} [Category.{v} C] [Abelia
       have hin : (X.pageCouple r).dInto p q ≫ e r p q =
           e r (p - r - 2) (q + r + 1) ≫ (Y.pageCouple r).dInto p q := by
         dsimp only [dInto]
-        rw [Category.assoc, transport_square (e r) (by omega) (by omega),
+        have ht := transport_square (𝟭 C) (e r)
+          (show p - (r : ℤ) - 2 + 2 + r = p by omega)
+          (show q + (r : ℤ) + 1 - 1 - r = q by omega)
+        simp only [Functor.id_map] at ht
+        rw [Category.assoc, ht,
           ← Category.assoc, ← hd, Category.assoc]
       have him : (imageSubobject ((Y.pageCouple r).dInto p q)).Factors
           ((imageSubobject ((X.pageCouple r).dInto p q)).arrow ≫ e r p q) := by
@@ -382,7 +384,10 @@ private theorem morphism_d {s : ℕ} {X Y : BigradedExactCouple C s}
   dsimp [d]
   rw [← Category.assoc, T.f_comm, Category.assoc, T.g_comm, Category.assoc]
 
-private theorem factors_iff_image_le {A B : C} (P : Subobject B) (f : A ⟶ B) :
+/-- Factoring through a subobject is equivalent to containment of the image.
+Source: Stacks Project, Homological Algebra, Tag 011R
+(blueprint: lem-sp-derived-couple-functoriality). -/
+theorem factors_iff_image_le {A B : C} (P : Subobject B) (f : A ⟶ B) :
     P.Factors f ↔ imageSubobject f ≤ P := by
   constructor
   · intro h
