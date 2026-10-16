@@ -447,5 +447,27 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-9e31af040 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but both new nodes have incomplete stage-1 metadata: created lacks by/date/group, merged_into is missing, and lean_audit is missing. Corrected whole JSON files are in fixes/dag/nodes/sec-smooth-purity/ for both nodes.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e273a47fc",
+  "group": "NW",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean module, docstrings, edge cases, report sections, and exact signature. scompile.py local and server confirmation passed; no substantive or mechanical errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeHigherDirectImageContinuity",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImage_relative_continuity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeHigherDirectImageExchange",
+   "AlgebraicGeometry.Etale.higherDirectImage_relative_continuity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeHigherDirectImageContinuity.lean",
+  "statement": "theorem higherDirectImage_relative_continuity {I : Type u} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I] (DV DB : Iᵒᵖ ⥤ Scheme.{u}) (η : DV ⟶ DB) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DV.map a)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (DB.map a)] [∀ i : Iᵒᵖ, QuasiCompact (η.app i)] [∀ i : Iᵒᵖ, QuasiSeparated (η.app i)] (cV : Cone DV) (hcV : IsLimit cV) (cB : Cone DB) (hcB : IsLimit cB) (v : cV.pt ⟶ cB.pt) (hu : ∀ i : Iᵒᵖ, cV.π.app i ≫ η.app i = v ≫ cB.π.app i) (F : ∀ i : I, Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : I} (a : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (DV.map a.op)).obj (F i) ⟶ F j) (hφid : ∀ i : I, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (DV.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (DV.obj (op i))).hom.app (F i)) (hφcomp : ∀ (i j k : I) (a : i ⟶ j) (b : j ⟶ k), φ (a ≫ b) = (upperStarComp AddCommGrpCat.{u + 1} (DV.map b.op) (DV.map a.op) (DV.map (a ≫ b).op) (DV.map_comp b.op a.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (DV.map b.op)).map (φ a) ≫ φ b) (A : I ⥤ Sheaf cV.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eA : ∀ i : I, A.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (cV.π.app (op i))).obj (F i)) (hA : ∀ (i j : I) (a : i ⟶ j), A.map a = (eA i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (cV.π.app (op j)) (DV.map a.op) (cV.π.app (op i)) (cV.w a.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (cV.π.app (op j))).map (φ a) ≫ (eA j).inv) (cA : Cocone A) (hcA : IsColimit cA) (q : ℕ) (H : I ⥤ Sheaf cB.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eH : ∀ i : I, H.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (cB.π.app (op i))).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf (DB.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (η.app (op i))).obj ((DerivedCategory.Plus.singleFunctor (Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (F i))))) (hH : ∀ (i j : I) (a : i ⟶ j), H.map a = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (cB.π.app (op j)) (DB.map a.op) (cB.π.app (op i)) (cB.w a.op).symm).hom.app ((DerivedCategory.Plus.homologyFunctor (Sheaf (DB.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} (η.app (op i))).obj ((DerivedCategory.Plus.singleFunctor (Sheaf (DV.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (F i)))) ≫ (upperStar AddCommGrpCat.{u + 1} (cB.π.app (op j))).map (relativeHigherDirectImageExchange ⟨η.naturality a.op⟩ (F i) (F j) (φ a) q) ≫ (eH j).inv) (cH : Cocone H) (hcH : IsColimit cH) (legs : H ⟶ (Functor.const I).obj ((DerivedCategory.Plus.homologyFunctor (Sheaf cB.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} v).obj ((DerivedCategory.Plus.singleFunctor (Sheaf cV.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj cA.pt)))) (hlegs : ∀ i : I, legs.app i = (eH i).hom ≫ relativeHigherDirectImageExchange ⟨hu (op i)⟩ (F i) cA.pt ((eA i).inv ≫ cA.ι.app i) q) : IsIso (hcH.desc { pt := (DerivedCategory.Plus.homologyFunctor (Sheaf cB.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} v).obj ((DerivedCategory.Plus.singleFunctor (Sheaf cV.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj cA.pt)) ι := legs })",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

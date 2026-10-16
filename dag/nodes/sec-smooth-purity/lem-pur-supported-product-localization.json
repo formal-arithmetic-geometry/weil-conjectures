@@ -28,7 +28,8 @@
   "def-weil-closed-immersion",
   "def-pc-base-change",
   "def-weil-abstract-derived-category",
-  "lem-pur-support-restriction-triangle"
+  "lem-pur-support-restriction-triangle",
+  "def-pur-supported-localization-comparisons"
  ],
  "proof": [
   {
@@ -402,5 +403,43 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-e90ee5345 (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements, source passages, and unit/chapter route. Supported-Hom construction, localization boundaries, coefficient hypotheses, and both shift signs check out; no new nodes, duplicates, or dependency cycles found. Corrected step 7’s Stacks 06YU label from section-derived-tor to definition-derived-tor. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-832eb95ba",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, boundary signs, universes, edge cases, docstrings and declaration records. All three modules passed per-file scompile.py reproduction without warnings or errors. No repairs or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedProductLocalization",
+  "declaration": "AlgebraicGeometry.Etale.supportedProductLocalizationFirst",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedFirstLocalizationSource",
+   "AlgebraicGeometry.Etale.supportedFirstLocalizationTarget",
+   "AlgebraicGeometry.Etale.supportedFirstLocalizationComponent₁",
+   "AlgebraicGeometry.Etale.supportedFirstLocalizationComponent₂",
+   "AlgebraicGeometry.Etale.supportedFirstLocalizationComponent₃",
+   "AlgebraicGeometry.Etale.supportedProductLocalizationFirst",
+   "AlgebraicGeometry.Etale.supportedSecondLocalizationSource",
+   "AlgebraicGeometry.Etale.supportedSecondLocalizationTarget",
+   "AlgebraicGeometry.Etale.supportedSecondLocalizationComponent₁",
+   "AlgebraicGeometry.Etale.supportedSecondLocalizationComponent₂",
+   "AlgebraicGeometry.Etale.supportedSecondLocalizationComponent₃",
+   "AlgebraicGeometry.Etale.supportedProductLocalizationSecond",
+   "AlgebraicGeometry.Etale.supportedExternalProductMap",
+   "AlgebraicGeometry.Etale.supportedProductLocalization_naturality",
+   "AlgebraicGeometry.Etale.supportedProductLocalization_openFirst",
+   "AlgebraicGeometry.Etale.supportedProductLocalization_openSecond",
+   "AlgebraicGeometry.Etale.supportedProductLocalization_openRows"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedProductLocalization.lean",
+  "statement": "theorem supportedProductLocalizationFirst (k : Type u) [Field k] [IsAlgClosed k] (A : Type (u + 1)) [CommRing A] [Finite A] {X Y B C D : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g] (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y) [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) (_hF : ∃ n : ℤ, (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj).IsGE n) : supportedFirstLocalizationSource A f g b c d K.obj L.obj ∈ distTriang (DerivedCategory (ModuleCat.{u + 1} A)) ∧ supportedFirstLocalizationTarget A f g b c d K.obj L.obj ∈ distTriang (DerivedCategory (ModuleCat.{u + 1} A)) ∧ ∃ m : supportedFirstLocalizationSource A f g b c d K.obj L.obj ⟶ supportedFirstLocalizationTarget A f g b c d K.obj L.obj, m.hom₁ = supportedFirstLocalizationComponent₁ A f g b c d K.obj L.obj ∧ m.hom₂ = supportedFirstLocalizationComponent₂ A f g b c d K.obj L.obj ∧ m.hom₃ = supportedFirstLocalizationComponent₃ A f g b c d K.obj L.obj",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The first-variable and second-variable conclusions and the two forms of naturality are the six theorem declarations in this module. All six specified components are actual supportedExteriorProduct maps, with canonical geometric transport for the open third terms. Tensor CommShift instances retain both cochain sign conventions. The openRows theorem additionally fixes all three row-restriction components and asserts their boundary square, completing the open naturality clause."
  }
 }
