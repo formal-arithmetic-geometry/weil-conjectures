@@ -1,6 +1,6 @@
 # Work queue
 
-36 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (36)
+## Stage 3: modules to prove (39)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -26,20 +26,23 @@
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPivotCover` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedLfpCoefficientModel` | 6 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarLfpMatrixRefinement` | 6 | 1 | proof |
-| `Sheaf.Paper.CondensedQcqsPushforwardLocalComparison` | 6 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover` | 7 | 1 | proof |
 | `Sheaf.Paper.CondensedConstructibleOneStep` | 7 | 1 | proof |
-| `Sheaf.Paper.CondensedLocalPieceCostalkModel` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralConstructibleSheafHom` | 7 | 1 | proof |
+| `Sheaf.Paper.LatticeSheafLocallyConstant` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
+| `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit` | 9 | 1 | proof |
+| `Sheaf.NumberTheory.Padics.CoefficientExtensionFinite` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
