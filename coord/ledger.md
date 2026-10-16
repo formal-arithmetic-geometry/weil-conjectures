@@ -15596,3 +15596,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: merged deliver/A2/Sheaf.Paper.IntegralResidueScalarGeometryBridge (stage 3; reviewer PASS; first push; landing 20261016T221552-L-1610642 (interface); batch 20261016T221550; modules 3; new nodes 2)
 - 22:15 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FormalFunctionsAffinePushforwardSections (stage 3; reviewer PASS; first push; landing 20261016T221553-L-1610756 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:15 L: merged deliver/A3/Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport (stage 3; reviewer PASS; first push; landing 20261016T221553-L-1610887 (interface); batch 20261016T221550; modules 4; new nodes 3)
+- 22:15 L: merged deliver/B2/Sheaf.CategoryTheory.ModuleInverseImageAdjunction (stage 3; reviewer PASS; first push; landing 20261016T221554-L-1610987 (proof); batch 20261016T221550; modules 1; new nodes 0)
