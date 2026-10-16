@@ -258,31 +258,27 @@
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7a5d420eb",
-  "group": "Q04",
-  "result": "fix",
-  "note": "Review written to review.md; complete replacements supplied under fixes/. Mathematics and dependency interfaces agree with the sources. Removed an inline proof and corrected the report’s empty-scheme identity case. Original and fixed deliveries both passed per-file scompile.py checks without diagnostics. No project clone or branch was changed."
+  "reviewer": "NT-stage2-Codex-16a171b8b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
  },
  "lean": {
-  "module": "Sheaf.Paper.PurityNormalBundle",
-  "declaration": "AlgebraicGeometry.PurityNormalBundle.normalCone",
+  "module": "Sheaf.Paper.PurityNormalCone",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.purityNormalProjection",
   "declarations": [
-   "AlgebraicGeometry.PurityNormalBundle.algebraObject",
-   "AlgebraicGeometry.PurityNormalBundle.over",
-   "AlgebraicGeometry.PurityNormalBundle.normalCone",
-   "AlgebraicGeometry.PurityNormalBundle.projection",
-   "AlgebraicGeometry.PurityNormalBundle.augmentationToBase",
-   "AlgebraicGeometry.PurityNormalBundle.zeroSection",
-   "AlgebraicGeometry.PurityNormalBundle.zeroSection_spec",
-   "AlgebraicGeometry.PurityNormalBundle.regular_spec",
-   "AlgebraicGeometry.PurityNormalBundle.vectorBundle",
-   "AlgebraicGeometry.PurityNormalBundle.vectorBundle_zeroSection"
+   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_kernel",
+   "AlgebraicGeometry.Scheme.Hom.purityNormalProjection",
+   "AlgebraicGeometry.Scheme.Hom.purityNormalProjection_eq",
+   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_affineChart",
+   "AlgebraicGeometry.Scheme.Hom.purityNormalCone_comparison"
   ],
-  "file": "lean/Sheaf/Paper/PurityNormalBundle.lean",
-  "statement": "def normalCone : Scheme.{u}",
+  "file": "lean/Sheaf/Paper/PurityNormalCone.lean",
+  "statement": "def purityNormalProjection {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : i.ker.normalCone ⟶ Z",
   "branch": "newtargets-dag",
-  "by": "Q04",
+  "by": "Q31",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": "§1(B): retain and import the recorded PurityNormalBundle relative-spectrum cone, conormal algebra and regular vector bundle. The missing interface is its identification with the published extended-Rees quotient used in DNC geometry. This module supplies that comparison, preserving projection and augmentation, and the unique closed-immersion factorization of the Rees projection. No second conormal or vector-bundle definition is introduced."
  }
 }

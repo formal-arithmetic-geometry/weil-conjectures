@@ -67,12 +67,29 @@
   "sbc-thm-etale-local-normal-form"
  ],
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.DeformationToNormalCone",
-  "declaration": "AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData",
-  "branch": "slopmaster2",
-  "line": 168,
-  "sorry_free": false,
-  "body_lines": 1
+  "module": "Sheaf.Paper.PurityDncComparisons",
+  "declaration": "WeilConjectures.PurityFiniteSetting.Dnc.sectionBaseChange",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.Dnc.invertibleExponent",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sectionBaseChange",
+   "WeilConjectures.PurityFiniteSetting.Dnc.compactifiable",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sourceSection",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sourceEtale",
+   "WeilConjectures.PurityFiniteSetting.Dnc.normalCompactifiable",
+   "WeilConjectures.PurityFiniteSetting.Dnc.normalQuasiCompact",
+   "WeilConjectures.PurityFiniteSetting.Dnc.normalSection",
+   "WeilConjectures.PurityFiniteSetting.Dnc.normalEtale",
+   "WeilConjectures.PurityFiniteSetting.Dnc.familyEtale",
+   "WeilConjectures.PurityFiniteSetting.Dnc.fibreOne",
+   "WeilConjectures.PurityFiniteSetting.Dnc.fibreZero"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDncComparisons.lean",
+  "statement": "def sectionBaseChange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y X' Y' : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [HasCompactification f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] {b : Y' ⟶ Y} {f' : X' ⟶ Y'} {a : X' ⟶ X} [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback a f' f b) (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ a = b ≫ s) : (Etale.upperStar (ModuleCat.{u + 1} Λ) b).leftDerivedFunctor.obj (Etale.sectionInvariant Λ f s) ≅ Etale.sectionInvariant Λ f' s'",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The old arbitrary NormalConeData interface was unusable. Reuse the current actual extended-Rees geometry and construct the canonical section base-change and fibre maps from the adjunction mate, with the finite-type domain derived."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData"
@@ -108,5 +125,13 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-geometry"
+ "unit": "sk-lem-geometry",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-16a171b8b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
+ }
 }

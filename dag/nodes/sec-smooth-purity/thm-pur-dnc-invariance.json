@@ -25,7 +25,8 @@
   "def-weil-exceptional-inverse-image",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism"
+  "def-weil-finite-type-morphism",
+  "def-pur-finite-section-comparison"
  ],
  "proof": [
   {
@@ -376,5 +377,30 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-70dd9c50e (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit, source route, all cited node statements, cited Stacks locations, hypotheses, five proof steps, domain correction, base change, uniqueness, edge cases, and duplicate/cycle checks. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-16a171b8b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityDncInvariance",
+  "declaration": "WeilConjectures.PurityFiniteSetting.Dnc.existsUnique_dncInvariance",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.Dnc.pullComparison",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sourceComparison",
+   "WeilConjectures.PurityFiniteSetting.Dnc.normalComparison",
+   "WeilConjectures.PurityFiniteSetting.Dnc.existsUnique_dncInvariance"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDncInvariance.lean",
+  "statement": "theorem existsUnique_dncInvariance (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (d : ℕ) (g : V ⟶ B) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) : ∃! α : sourceSection P d g aB s ≅ normalSection P d g aB s hs, ∀ (B' : Scheme.{u}) (aB' : B' ⟶ Spec (.of P.field.k)) [IsSeparated aB'] [LocallyOfFiniteType aB'] [QuasiCompact aB'] (b : B' ⟶ B) (_hb : b ≫ aB = aB') (C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (e : (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace.map (ULift.{u} (Fin 1)) b)).leftDerivedFunctor.obj (familyEtale P d g aB s hs) ≅ (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) (AffineSpace (ULift.{u} (Fin 1)) B' ↘ B')).leftDerivedFunctor.obj C₀), (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso α = (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso (sourceComparison P d g aB s) ≪≫ pullComparison P b (sourceEtale P d g aB s) ≪≫ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B').mapDerivedCategory.mapIso (Etale.sectionRestrictionIso _ b _ (AffineSpace.oneSection_comp_map b) (AffineSpace.oneSection_comp_over _ B') (fibreOne P d g aB s hs) e ≪≫ (Etale.sectionRestrictionIso _ b _ (AffineSpace.zeroSection_comp_map b) (AffineSpace.zeroSection_comp_over _ B') (fibreZero P d g aB s hs) e).symm) ≪≫ ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso (normalComparison P d g aB s hs) ≪≫ pullComparison P b (normalEtale P d g aB s hs)).symm",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Actual pro-etale section objects, with canonical mate fibre comparisons and normalization/naturality over every separated finite-type k-base change."
  }
 }

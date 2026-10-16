@@ -1,0 +1,102 @@
+{
+ "id": "def-pur-finite-section-comparison",
+ "kind": "definition",
+ "title": "Canonical finite section comparison with its etale presentation",
+ "statement": "Use the fixed finite purity coefficients [def-pur-conventions] A=A_{E,n}. For a compactifiable separated finite-type morphism g:V→B of finite-type k-schemes, let Rg! be the transported constructible exceptional inverse image [def-weil-exceptional-inverse-image], and use the actual derived pullback [def-weil-derived-pullback-tensor-hom]. In the sheaf-of-A-modules realization, put C_pro(g,s)=Ls* Rg! A_B for any s:B→V, the finite realization of [def-pur-section-invariant]. Its ordinary-etale presentation is C_et(g,s)=Ls* g^× A_B. Define the canonical comparison σ:C_pro(g,s)≅ν_B* C_et(g,s) using the actual etale/pro-etale comparison morphisms [def-weil-pbc-site-comparison-morphism]: first identify Rν_* A_pro with A_et by applying Rν_* to ν* A_et≅A_pro and inverting the comparison adjunction unit at A_et; apply g^× and ν_V*, then derive the canonical commutation s*ν_V*≅ν_B*s*. The positive finite coefficient quotient is finite, the coefficient unit is bounded below, and the etale exceptional right adjoint preserves bounded-below objects over a Noetherian target; these supply the required interfaces, rather than extra assumptions. Every construction is the actual published functor or its derived comparison, and no isomorphism is chosen from an unspecified nonempty set.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/thm-pur-dnc-invariance.md",
+  "place": "canonical fibre comparisons and finite etale/pro-etale transport of the section invariant"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Canonical comparison between pro-etale section dualizing object and the etale section dualizing object pulled back along the comparison morphism",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "Unavailable; no conclusion drawn. Loogle, LeanFinder, local and server source searches used instead."
+  },
+  {
+   "tool": "Loogle",
+   "query": "sectionInvariant, comparisonUpperStar",
+   "results": "0 hits; unknown identifier 'sectionInvariant'",
+   "date": "2026-10-16",
+   "verdict": "No exact section comparison found."
+  },
+  {
+   "tool": "grep Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search",
+   "query": "sectionInvariant.*[Cc]omparison|[Cc]omparison.*sectionInvariant; section comparison",
+   "results": "No matches in the named local sources or DAG; blueprint search: 0 nodes. Current server has the primitive comparison and canonical base-change maps, but no assembled pro-etale section comparison.",
+   "date": "2026-10-16",
+   "verdict": "Assemble the missing canonical comparison from the recorded primitives; do not duplicate those primitives."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-dnc-invariance",
+  "date": "2026-10-16",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-dnc-invariance",
+   "place": "reading the actual section invariants through their finite etale/pro-etale comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-dnc",
+ "lean": {
+  "module": "Sheaf.Paper.PurityDncFiniteRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.Dnc.sectionComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.Dnc.etaleUnitPlus",
+   "WeilConjectures.PurityFiniteSetting.Dnc.comparisonUnit",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sectionComparison"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDncFiniteRealization.lean",
+  "statement": "def sectionComparison (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) : P.sectionInvariant g aB s ≅ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.obj (Etale.sectionInvariant P.Coefficient g s)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Explicit finite sheaf realization and canonical comparison, using the comparison adjunction unit; no bare Nonempty choice."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-16a171b8b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-16a171b8b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
+ }
+}
