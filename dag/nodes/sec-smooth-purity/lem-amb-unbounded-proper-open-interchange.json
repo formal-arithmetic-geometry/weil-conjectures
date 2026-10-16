@@ -39,9 +39,208 @@
   "def-weil-pbc-etale-shriek-base-change-map",
   "lem-cbc-extension-zero-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\theta_Q:i_!r_*\\cong p_*k_!$ for the sheaf identification in the statement. Indeed, properness includes separatedness and finite type, so the proper-support composition theorem applies to both paths $ir=pk$; its proper and open specializations identify both sides with the same subsheaf of $(ir)_*$. For an open immersion, the diagonal is an isomorphism, so it is separated; on an affine target, principal affine opens contained in the image cover the source and their coordinate rings are one-element localizations, hence finitely generated algebras. Thus the open edges are locally of finite type as required. Its naturality makes $\\theta_Q$ an isomorphism of complexes on applying it termwise. Choose a K-injective representative $J$ of $K$ and a quasi-isomorphism $\\rho:k_!J\\to I$ with $I$ K-injective. Define $\\Gamma_{Q,K}$ to be the class of $p_*\\rho\\circ\\theta_{Q,J}$. The source is $Di_!Rr_*K$ and the target is $Rp_*Dk_!K$, by K-injective computation and exactness of extension by zero. This is independent of the resolutions and natural in $K$: a morphism of derived inputs has a unique homotopy-class representative $f:J\\to J'$; the derived map induced by $k_!f$ has a unique representative $g:I\\to I'$ with $g\\rho=\\rho'k_!f$ up to homotopy. Naturality of $\\theta_Q$ gives the required commuting square after $p_*$. Additive functors preserve a homotopy $dh+hd$ termwise, so these equalities hold in the derived category. For a change of resolutions, $f$ and $g$ are homotopy equivalences, giving the same map under the canonical identifications.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open: construction in the first paragraph; resolution independence via Tags 070I and 070K"
+   }
+  },
+  {
+   "text": "There is a finite cohomological-dimension bound for $p_*$ on all constant-$A$ module sheaves. The assumed finite affine cover of $Z$ is a finite cover by quasi-compact spaces, so $Z$ is quasi-compact. Since $p$ is of finite type, the fibre-dimension-bound theorem gives an integer $d\\geq0$ bounding the dimensions of all fibres of $p$. Choose $N\\geq1$ with $N1_A=0$ (the additive order of $1_A$, and $N=1$ for the zero ring). Every $A$-module sheaf has torsion underlying abelian sheaf, since $Nm=(N1_A)m=0$. The proper torsion bound gives $R^qp_*U(M)=0$ for $q>2d$. The bounded-below module/abelian direct-image comparison, applied to the single sheaf $M$ and then to degree-$q$ cohomology, identifies this with the underlying abelian sheaf of $R^qp_*M$; hence $R^qp_*M=0$ for $q>2d$. This use of the bounded-below comparison is only for sheaves in degree zero, not for unbounded complexes. Module sheaf categories are Grothendieck abelian and $p_*$ is additive and left exact, so the finite-cd acyclic-complex theorem applies with bound $2d$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-proper-morphism",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-pbc-direct-image",
+    "lem-kun-finite-cd-acyclic-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proof of case (b), finite-cd reduction; Tags 0A3V (lemma-morphism-finite-type-bounded-dimension), 095U (lemma-cohomological-dimension-proper), 07K7 (lemma-unbounded-right-derived)"
+   }
+  },
+  {
+   "text": "Choose $J$ in Step 1 to be K-injective with every term injective, using the injective-term K-injective resolution theorem in the Grothendieck category of module sheaves. For every degree $n$, the open-extended-injective acyclicity lemma applied to precisely $(p,r,i,k)$ gives $R^qp_*(k_!J^n)=0$ for $q>0$; it requires neither a cartesian square nor a dimension bound. Thus $k_!J$ is an unbounded complex of $p_*$-acyclic objects. The finite-cd theorem from Step 2 says that its canonical map to its total derived image is an isomorphism, and this map is represented by $p_*\\rho:p_*k_!J\\to p_*I$. Therefore $\\Gamma_{Q,K}$ is an isomorphism. An arbitrary K-injective representative is homotopy equivalent to the chosen injective-term one; $r_*$, $i_!$ and $k_!$ preserve this homotopy equivalence termwise. Resolution independence from Step 1 then gives the asserted formula and isomorphism for every K-injective representative. No boundedness of $K$ has been used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-cbc-open-extended-injective-proper-acyclic",
+    "lem-kun-finite-cd-acyclic-complex",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proof of case (b); Tag 079P (theorem-K-injective-embedding-grothendieck); Tag 07K7"
+   }
+  },
+  {
+   "text": "For cartesian $Q$ verify the open-adjunction normalization, including its direction. The sheaf adjunction $i_!\\dashv i^*$ descends termwise to the homotopy categories and then to derived categories, since both functors are exact; the triangle identities descend with the units and counits. The open unit $1\\to i^*Di_!$ is an isomorphism: on any etale object over the open, the extension-by-zero presheaf and all its covering restrictions are just the original sheaf. Open inverse image is restriction, compatibly with modules. Also $k^*$ takes K-injectives to K-injectives, being right adjoint to the exact functor $k_!$. On $k_!J\\xrightarrow{\\rho}I$, let $\\eta_k:J\\xrightarrow{\\sim}k^*k_!J$ be the open unit and put $v=k^*\\rho\\circ\\eta_k:J\\to k^*I$. This is a quasi-isomorphism between K-injectives, hence $r_*v$ is a homotopy equivalence. In the formula for $\\lambda_Q$, the exchange evaluated on $I$ is represented by $\\operatorname{Ex}^0_{p,i,I}:i^*p_*I\\to r_*k^*I$, and $\\lambda_Q$ is $(r_*v)^{-1}\\operatorname{Ex}^0_{p,i,I}$. This follows directly by taking the mate of the termwise counit in the definition of the unbounded exchange (the same calculation is written in Step 8). By restriction of sections and the definition of $\\theta_Q$ as equality of underlying sections, $\\operatorname{Ex}^0_{p,i,k_!J}\\circ i^*\\theta_{Q,J}\\circ\\eta_i=r_*\\eta_k$. Naturality with respect to $\\rho$ therefore gives $\\operatorname{Ex}^0_{p,i,I}\\circ i^*\\Gamma_{Q,K}\\circ\\eta_i=r_*v$. Hence $\\lambda_Q\\circ i^*\\Gamma_{Q,K}\\circ\\eta_i=1$. Since $\\Gamma_Q$ and $\\eta_i$ are isomorphisms, this says exactly that the adjunct of $\\Gamma_Q$ is $\\lambda_Q^{-1}$, and the inverse adjunction formula gives $\\Gamma_Q=\\varepsilon_i\\circ Di_!(\\lambda_Q^{-1})$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-underived-exchange",
+    "lem-cbc-proper-support-sheaf-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, first paragraph, cartesian open specialization; agent verification of the adjunct using the mate formula of Tag 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "The composites of the proper edges are proper by proper-composition stability. For vertical pasting choose $J$ K-injective on the top left, and $\\rho:k_{1!}J\\to I$ with $I$ K-injective on the top right. Direct images preserve K-injectives: they are right adjoints to exact constant-coefficient inverse images. Thus $r_{1,*}J$ and $p_{1,*}I$ compute the iterated derived direct images without another replacement. The map $a=p_{1,*}\\rho\\circ\\theta_{Q_1,J}:i_{1!}r_{1,*}J\\to p_{1,*}I$ is a quasi-isomorphism by Step 3, so it can itself be used as the K-injective resolution for computing $\\Gamma_{Q_2}$ at $r_{1,*}J$. The resulting map is $p_{2,*}a\\circ\\theta_{Q_2,r_{1,*}J}$. For clarity, under the resolution $a$ the object $Rp_{2,*}(i_{1!}r_{1,*}J)$ is represented by $p_{2,*}p_{1,*}I$. The map $Rp_{2,*}\\Gamma_{Q_1}$ is then represented by the identity of $p_{2,*}p_{1,*}I$: the square comparing $a$ with the identity resolution of $p_{1,*}I$ has top map $a$ and bottom map $1$. Consequently the claimed two-factor composite is precisely $p_{2,*}a\\circ\\theta_{Q_2,r_{1,*}J}$. Expanding $a$ gives $p_{2,*}p_{1,*}\\rho\\circ p_{2,*}\\theta_{Q_1,J}\\circ\\theta_{Q_2,r_{1,*}J}$. The last two factors identify the same underlying sections in the common subsheaf of $(i_2r_2r_1)_*J$; associativity of sheaf composition therefore makes them $\\theta_{Q_2Q_1,J}$. The remaining factor is precisely the representative for the outer rectangle. The derived direct-image composition isomorphisms have this resolution normalization, so inserting them gives the stated vertical equation.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C, lemma-shriek-proper-and-open-compose, complete K-injective calculation; Tag 08BJ for preservation of K-injectives"
+   }
+  },
+  {
+   "text": "For horizontal pasting take $J$ K-injective on $U$, $\\rho:k_!J\\to I$ K-injective on the middle top scheme, and $\\sigma:l_!I\\to H$ K-injective on the right top scheme. Since $l_!$ is exact, $u=\\sigma\\circ l_!\\rho:l_!k_!J\\to H$ is a quasi-isomorphism. The two consecutive interchange maps are represented by $j_!(p_*\\rho\\circ\\theta_{Q_1,J})$ followed by $q_*\\sigma\\circ\\theta_{Q_2,I}$. Naturality of $\\theta_{Q_2}$ moves $\\rho$ through this expression, giving $q_*\\sigma\\circ q_*l_!\\rho\\circ\\theta_{Q_2,k_!J}\\circ j_!\\theta_{Q_1,J}$. The two $\\theta$ factors identify sections in the same proper-support subsheaf of the common composite direct image, so their product is $\\theta_{Q_2Q_1,J}$. Thus the composite is $q_*u\\circ\\theta_{Q_2Q_1,J}$, the outer comparison computed with the resolution $u$. The canonical open-extension composition maps identify $j_!i_!$ with $(ji)_!$ and $l_!k_!$ with $(lk)_!$, yielding exactly the horizontal equation in the statement.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D, lemma-shriek-proper-and-open-compose-horizontal, including the composite resolution"
+   }
+  },
+  {
+   "text": "If the proper edges are identities, commutativity identifies the two open edges. The representative of Step 1 is then just the resolution $i_!J\\to I$, hence gives the identity of $Di_!K$ under its derived identification. If the open edges are identities, the proper edges agree; choose $I=J$ and $\\rho=1_J$, so the representative is the identity on $p_*J$. These give the asserted identity comparisons with the same normalization as the composition maps.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C and 0F7D, identity specializations"
+   }
+  },
+  {
+   "text": "Record explicitly the complex model for the exchange used in the final diagram. For a cartesian square with proper or arbitrary vertical map $h$, base map $b$, top projection $a$ and new vertical map $h_1$, let $L$ be K-injective and let $t:a^*L\\to L_1$ be a K-injective resolution. Then the unbounded exchange of the statement is represented by $h_{1,*}t\\circ\\operatorname{Ex}^0_{h,b,L}:b^*h_*L\\to h_{1,*}L_1$. To check this, the derived adjunction $h^*\\dashv Rh_*$ computed with $L$ has counit represented by the ordinary termwise counit $h^*h_*L\\to L$: this follows from the termwise Hom adjunction and the bijection from homotopy maps into a K-injective to derived maps. The defining mate of the unbounded exchange is therefore represented by $h_1^*b^*h_*L\\cong a^*h^*h_*L\\to a^*L\\xrightarrow{t}L_1$. Applying the termwise adjunction $h_1^*\\dashv h_{1,*}$ to this map gives exactly $h_{1,*}t\\circ\\operatorname{Ex}^0_{h,b,L}$. Localization preserves these unit, counit and naturality equations. All calculations are $A$-linear: the module inverse-image adjunction has the same underlying maps as the abelian adjunction. This proves the formula for arbitrary unbounded $L$ without invoking the bounded-below-only termwise-exchange lemma.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "def-weil-pbc-underived-exchange",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change (sites-cohomology.tex); agent expansion of the mate on K-injective complexes"
+   }
+  },
+  {
+   "text": "Finally consider arbitrary base change by $b:Z_1\\to Z$. Properness and openness are preserved under base change. The new schemes remain Noetherian: $W_1$ is open in $Z_1$, $V_1$ is proper and hence finite type over $Z_1$, and $U_1$ is proper and finite type over $W_1$. Choose $J,I,\\rho$ as in Step 1, a K-injective resolution $j:d^*J\\to J_1$, and a K-injective resolution $t:a^*I\\to I_1$. Put $s=k_{1!}j:k_{1!}d^*J\\to k_{1!}J_1$ and $w=t\\circ a^*\\rho\\circ e_{k,J}^{-1}:k_{1!}d^*J\\to I_1$. Both $s,w$ are quasi-isomorphisms, by exact pullback and exact extension by zero. The K-injective Hom bijection gives a chain map $v:k_{1!}J_1\\to I_1$ with $vs\\simeq w$, unique up to homotopy; two-out-of-three says $v$ is a quasi-isomorphism. Compute $\\Gamma_{Q_1}$ with this $v$. Before resolutions the following equality of maps of complexes holds:\n$$p_{1,*}e_{k,J}\\circ\\operatorname{Ex}^0_{p,b,k_!J}\\circ b^*\\theta_{Q,J}=\\theta_{Q_1,d^*J}\\circ i_{1!}\\operatorname{Ex}^0_{r,c,J}\\circ e_{i,r_*J}.$$\nIndeed the proper-support identifications are equalities of subsheaves of the common composite direct image and commute with pullback. On their ambient direct images both paths restrict the same section along the projection for the base change of $pk=ir$; this is also the two pasting formulas for adjunction mates. Now apply $p_{1,*}v\\circ p_{1,*}k_{1!}j$ to the displayed equality. Naturality of $\\theta_{Q_1}$ moves $j$ to $i_{1!}r_{1,*}j$ on its right-hand side. On its left-hand side, the equation $v\\circ k_{1!}j\\simeq t\\circ a^*\\rho\\circ e_k^{-1}$ and naturality of the underived exchange replace the resulting path by $p_{1,*}t\\circ\\operatorname{Ex}^0_{p,b,I}\\circ b^*(p_*\\rho\\circ\\theta_{Q,J})$. Step 8 identifies this as $(Rp_{1,*}e_k)\\circ(\\operatorname{Ex}_{p,b}Dk_!)\\circ(b^*\\Gamma_Q)$ after identifying $I_1$ as a representative of $Dk_{1!}d^*K$ via $v$. On the right, Step 8 identifies $r_{1,*}j\\circ\\operatorname{Ex}^0_{r,c,J}$ as $\\operatorname{Ex}_{r,c}$, and $p_{1,*}v\\circ\\theta_{Q_1,J_1}$ as $\\Gamma_{Q_1}$. This is precisely the required base-change equation. Homotopies are preserved by all the termwise functors, so the equation holds in the derived category. To identify the specified degreewise maps, let $j$ be either open edge and write $b,c,j_1$ for its base-change diagram. Take the adjunct of the defining conjugate comparison $\\beta:j_{1!}c^*\\to b^*j_!$ under $j_{1!}\\dashv j_1^*$. Substitution of the underived exchange formula and of the composite unit from the definition cancels the inverse-image/direct-image counit against its unit by the triangle identity; the resulting map is $c^*\\eta_j:c^*\\to c^*j^*j_!\\cong j_1^*b^*j_!$. This is precisely the mate whose inverse is $e_j$ in the extension-zero base-change lemma. Thus $e_i,e_k$ are the inverses of the degreewise maps specified in the statement, including their normalization. This argument uses no invertibility, constructibility or bound on the dimensions of the schemes; the fibre bound in Step 2 was deduced from properness over the given quasi-compact base.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-cbc-proper-support-sheaf-composition",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-etale-shriek-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change: both explicit complex diagrams; Tag 0F55 (lemma-base-change-f-shriek-separated) for the degreewise equality; Tags 0E46 and 0E47 for exchange pasting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-proper-morphism",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-open-extended-injective-proper-acyclic",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (case b), 0F7C, 0F7D and 0F7F; cartesian open-adjunction normalization and unbounded mate model expanded from the stated adjunctions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -283,15 +482,381 @@
     "digest": "4f53cda18c2baa0c"
    },
    "verdict": "no match: successful Loogle search returned zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|proper.*(exchange|interchange)",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T01:53:53Z",
+    "tool": "grep",
+    "query": "extensionByZero|lowerShriek|proper.*(exchange|interchange)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "no match: grep hits concern scheme morphism properties and underived structure-sheaf pushforward, not this etale derived interchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward and open extension by zero canonical interchange for unbounded etale module complexes",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T01:53:53Z",
+    "tool": "leansearch",
+    "query": "Proper pushforward and open extension by zero canonical interchange for unbounded etale module complexes",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image commutes with extension by zero for unbounded complexes of torsion etale sheaves",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T01:53:54Z",
+    "tool": "leanfinder",
+    "query": "Proper direct image commutes with extension by zero for unbounded complexes of torsion etale sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "localCohomology.diagram",
+     "HomologicalComplex.extend_exactAt",
+     "HomologicalComplex.extend_exactAt_iff",
+     "HomologicalComplex.instIsStrictlySupportedExtend",
+     "HomologicalComplex.isSupported_iff",
+     "HomologicalComplex.map_isStrictlySupported",
+     "HomologicalComplex.extend.rightHomologyData_Q",
+     "HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff"
+    ],
+    "digest": "0630a31bc4400fa8"
+   },
+   "verdict": "no match: no matching declaration; semantic hits concern extension of the index shape of a complex, local cohomology, underived structure-sheaf restriction or pushforward, or sheaf-to-presheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open|open.*proper|pushforwardComp",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T01:54:05Z",
+    "tool": "grep",
+    "query": "proper.*open|open.*proper|pushforwardComp",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/Open.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean"
+    ],
+    "digest": "f5452675d6490703"
+   },
+   "verdict": "no match: grep hits concern scheme morphism properties and underived structure-sheaf pushforward, not this etale derived interchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical natural isomorphism between open extension by zero after proper derived direct image and proper derived direct image after open extension by zero for etale sheaves, compatible with composition and pullback",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T01:54:06Z",
+    "tool": "leanfinder",
+    "query": "A canonical natural isomorphism between open extension by zero after proper derived direct image and proper derived direct image after open extension by zero for etale sheaves, compatible with composition and pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom",
+     "AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+     "TopCat.Sheaf.pushforwardForgetIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv"
+    ],
+    "digest": "5aab9686e27d6568"
+   },
+   "verdict": "no match: no matching declaration; semantic hits concern extension of the index shape of a complex, local cohomology, underived structure-sheaf restriction or pushforward, or sheaf-to-presheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*[zZ]ero|[zZ]ero.*extension|shriek|Shriek",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T02:05:49Z",
+    "tool": "grep",
+    "query": "extension.*[zZ]ero|[zZ]ero.*extension|shriek|Shriek",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+     "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+     "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+     "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+     "Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Gal.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Discriminant.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Basic.lean"
+    ],
+    "digest": "aa3476fc1d7aeec6"
+   },
+   "verdict": "no match among returned hits: cyclotomic and multiplicative-character extension terminology, or extension-closed triangulated subcategories and small-object extensions; this limited grep is not used alone as evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a torsion sheaf complex commutes with the left adjoint to restriction along open immersions in a commutative proper square",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T02:05:49Z",
+    "tool": "leanfinder",
+    "query": "Derived direct image of a torsion sheaf complex commutes with the left adjoint to restriction along open immersions in a commutative proper square",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "SheafOfModules.sheafificationCompPullback",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+     "SheafOfModules.pushforwardNatIso"
+    ],
+    "digest": "17d9ccd20cf0a117"
+   },
+   "verdict": "no match: read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, sheafificationCompPullback at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:118 and pushforwardPushforwardAdj at Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:274; the hits are underived restriction/pushforward or sheafification adjunctions, without the proper/open derived interchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerStar\"",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T02:05:49Z",
+    "tool": "loogle",
+    "query": "\"lowerStar\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "no match: successful Loogle name-fragment search returned zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.{0,20}zero|zero.{0,20}extension|shriek",
+   "date": "2026-10-16",
+   "results": {
+    "t": "2026-10-16T02:07:11Z",
+    "tool": "grep",
+    "query": "extension.{0,20}zero|zero.{0,20}extension|shriek",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/ObjectProperty/Extensions.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Generators.lean",
+     "Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean"
+    ],
+    "digest": "10bbb43095fffacc"
+   },
+   "verdict": "no match among returned hits: cyclotomic and multiplicative-character extension terminology, or extension-closed triangulated subcategories and small-object extensions; this limited grep is not used alone as evidence of absence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-amb-unbounded-compact-support-comparisons",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-an"
+ "unit": "sk-prop-an",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-amb-unbounded-proper-open-interchange",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0F7B case (b) and 0F7C/0F7D/0F7F into nine steps using existing DAG nodes only. Proved the finite-cd reduction for finite-ring module sheaves, arbitrary-K-injective normalization, the cartesian adjunct formula, both pasting formulas, identities, and the full base-change comparison via a common K-injective resolution. No statement change and no new nodes.",
+  "blueprint": "Realizes thm-amb-vector-bundle-purity proof paragraph 2 (restriction to a trivializing open and comparison with the affine-space counit), through the compact-support comparison child; supports sk-prop-an Steps 6 and 7 without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Generic Extension by zero commutes with arbitrary base change used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Generic Composition of open immersions used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-cbc-open-extended-injective-proper-acyclic",
+    "why": "Generic Open extension of an injective sheaf is acyclic for the proper right-hand map used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Generic Composition and pullback of the underived sheaf of sections with proper support used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic Uniform dimension bound for fibres of a finite-type morphism used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Generic Finite cohomological dimension permits unbounded acyclic-complex computation used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Generic Proper direct-image bound for arbitrary torsion etale sheaves used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic Functorial K-injective resolutions with injective terms used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic Extension by zero is left adjoint to restriction (étale site) used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic Canonical derived direct image comparison for forgotten module coefficients used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic Sheaves of Lambda-modules on the small etale site form a Grothendieck abelian category used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Properness is stable under base change used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic Properness is stable under composition used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions used in the explicit proper/open comparison calculation; this unit supplies the purity application, not this sheaf, derived-category or scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-open-extended-injective-proper-acyclic",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-cf6a12a33",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-cf6a12a33 (reviewer sub-agent of L); spot-checked: Read all nine steps and 41 cited node statements; checked Stacks 0F7B–0F7F, finite-cd hypotheses, unbounded module computation, and exact base-change normalization. No new nodes, duplicate replacement, cycle back to the item, or mathematical fault found. Accepted all 28 generic tool uses. Detailed review written to review.md; no repairs needed."
+ }
 }
