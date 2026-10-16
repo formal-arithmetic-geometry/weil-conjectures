@@ -29,9 +29,103 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a universe containing the small sets $K$ and $I$. For any diagram $a:L\\to\\mathcal E$, write $J_a$ for the join slice of [lem-coef-join-slice-cocone-comparison]. Its vertices are maps $L^{\\triangleright}\\to\\mathcal E$ extending $a$. The comparison identifies initial vertices with colimiting coherent cocones and identifies its fixed-apex fibers with the spaces of coherent cocones, naturally under restriction. Represent each prescribed local cocone by an initial vertex $q_i$ of $J_{p|K_i}$, keeping its apex equal to $c_i$: essential surjectivity of the comparison on that fixed-apex Kan fiber supplies the representative and an equivalence to the prescribed cocone. Equivalences preserve initiality because they induce equivalences on mapping spaces. These equivalences allow transport back to the prescribed cocones at the end. Likewise choose a global colimiting join cocone $\\lambda$ on $p$ with apex $C=\\operatorname{colim}_Kp$, which exists by the assumed small-colimit completeness. All shapes used below are small; no colimit over a category of all small diagrams is taken.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, Corollary 4.2.1.7, and the setup of Proposition 4.2.3.4, printed pp. 241-242, 249."
+   }
+  },
+  {
+   "text": "We will use the following elementary boundary calculation. If $D$ is a quasicategory and $s:\\Delta^n\\to D$ has initial first vertex, then $J_s\\to J_{s|\\partial\\Delta^n}$ is a trivial Kan fibration, including $n=0$. Indeed a lift against $\\partial\\Delta^m\\subseteq\\Delta^m$ amounts to extending a map from $(\\partial\\Delta^n\\star\\Delta^m)\\cup(\\Delta^n\\star\\partial\\Delta^m)=\\partial\\Delta^{n+m+1}$ to $\\Delta^{n+m+1}$; its first vertex is $s(0)$. Pass to opposites, using the opposite quasicategory and reversed mapping-space equivalences in [lem-coef-infinity-relative-cone-equivalence]. The boundary now has last vertex terminal, so [lem-cbc-terminal-boundary-extension] supplies the extension. This gives every boundary lift, including $m=0$, exactly as required in [def-weil-pbc-trivial-kan-fibration]. The same terminal-boundary criterion in opposites says directly that any $\\partial\\Delta^n\\to D$ with initial first vertex extends when $n\\geq1$.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-cbc-terminal-boundary-extension",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.3.3, printed p. 249; its proof is the displayed join-boundary identification."
+   }
+  },
+  {
+   "text": "Define a small simplicial subset $H\\subseteq K\\star N(I)$ as follows. It contains the pure copies of $K$ and $N(I)$; a mixed simplex $\\sigma\\star(i_0\\leq\\cdots\\leq i_r)$ belongs to $H$ precisely when $\\sigma\\in K_{i_0}$. Removing an initial-block vertex preserves this condition since $K_{i_0}$ is a simplicial subset; removing the first final-block vertex preserves it since $K_{i_0}\\subseteq K_{i_1}$. Degeneracies preserve it as well. For $Y\\subseteq N(I)$ let $H_Y$ consist of $K$ and the simplices with final block in $Y$. Well-order the cells in each dimension and filter $N(I)$ by its nondegenerate simplices after their boundaries, using [lem-coef-infinity-monomorphism-boundary-cells]. For a new vertex $i$ the new part is $K_i^{\\triangleright}$ attached along $K_i$; extend $p$ by the chosen $q_i$. For a new positive-dimensional simplex $i_0<\\cdots<i_n$, the new part is $K_{i_0}\\star\\Delta^n$ attached along $K_{i_0}\\star\\partial\\Delta^n$. The already specified map is a boundary in the quasicategory $D=J_{p|K_{i_0}}$, whose first vertex is $q_{i_0}$, initial by step 1. The boundary extension from step 2 fills it. Continue over the small skeletal filtration, taking unions at limit stages. This constructs $q:H\\to\\mathcal E$ restricting to $p$ on $K$ and to $q_i$ on every $K_i^{\\triangleright}$. Set $c=q|_{N(I)}$. In particular, the mixed simplices for $i\\leq j$ exhibit $c_i\\to c_j$ as the map induced by the colimiting cocone $q_i$ and the restriction of $q_j$; higher chains give their coherent compatibilities. More explicitly, write $e_i$ for the equivalence in the fixed-apex cocone space between the comparison of $q_i$ and the prescribed cocone. The edge $i\\leq j$ gives a coherent triangle from the comparison of $q_i$, via $c_i\\to c_j$, to the restriction of the comparison of $q_j$. Concatenate its compatibility path with $e_i^{-1}$ at the source and $e_j|_{K_i}$ at the target. This gives compatibility with the prescribed cocones. The higher simplices of $q$ and the same equivalences supply the higher compatibilities; the apex diagram $c$ is unchanged.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 4.2.3.1 and Proposition 4.2.3.4, construction in its proof, printed pp. 248-250."
+   }
+  },
+  {
+   "text": "For this $q$, restriction $R:J_q\\to J_p$ is a trivial Kan fibration over $\\mathcal E$. Use the same filtration $H_Y$ as in step 3. At a cell $i_0<\\cdots<i_n$, the already chosen map on $K_{i_0}\\star\\Delta^n$ is a simplex $s:\\Delta^n\\to D=J_{p|K_{i_0}}$ with initial first vertex $q_{i_0}$. Restriction on join slices across that cell is the pullback of $J_s\\to J_{s|\\partial\\Delta^n}$ in $D$. By the defining simplices of the join slice in [lem-coef-join-slice-cocone-comparison], both lifting problems specify the same map on $K_{i_0}\\star(\\Delta^n\\star\\Delta^m)$ and the same prescribed boundary. Step 2 makes it a trivial Kan fibration; $n=0$ treats the vertex cells. A boundary lift across the entire tower is obtained recursively by these cell lifts, keeping the previously specified lift at every successor and taking its union at limits. Thus the definition of trivial Kan fibration applies to $R$ itself. Lift the vertex $\\lambda\\in J_p$ along $R$ to a join cocone $\\widetilde\\lambda$ on $q$; since $R$ is over $\\mathcal E$, its apex is the same $C$. For any apex $T$, the pullback $R_T$ on strict fibers is also a trivial Kan fibration (the same lifting square with constant apex). By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is a homotopy equivalence. By the fixed-apex and naturality assertions of [lem-coef-join-slice-cocone-comparison], restriction therefore gives an equivalence of coherent cocone spaces $\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT)$, compatible with postcomposition by maps out of $C$. Since composition with $\\lambda$ identifies the latter space with $\\operatorname{Map}_{\\mathcal E}(C,T)$ by [lem-cbc-enhanced-functor-cone-calculus], composition with $\\widetilde\\lambda$ identifies the former with that mapping space. Consequently $\\widetilde\\lambda$ is colimiting for $q$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.4, second assertion and its proof, printed pp. 250-251; fixed-apex interpretation by Corollary 4.2.1.7."
+   }
+  },
+  {
+   "text": "For a simplex $\\sigma$ of $K$, let $I_\\sigma=\\{i\\in I:\\sigma\\in K_i\\}$ with its induced order. It is nonempty because the $K_i$ cover $K$, and it is upward closed because the cover is monotone. Given two members, any upper bound in $I$ is again a member. In a poset parallel arrows are equal, so its identity arrow coequalizes every parallel pair. Thus [lem-cbc-filtered-nerve-weak-contractibility] shows $N(I_\\sigma)$ is weakly contractible. Now well-order the cells in each dimension and filter $K$ by nondegenerate simplices after their boundaries. For a subcomplex $L\\subseteq K$ form $H(L)$ using the same mixed-simplex rule with initial block in $L$, retaining all of $N(I)$. We have $H(\\varnothing)=N(I)$ and $H(K)=H$. Adding a nondegenerate $m$-simplex $\\sigma$ of $K$ attaches $\\Delta^m\\star N(I_\\sigma)$ along $\\partial\\Delta^m\\star N(I_\\sigma)$. To check the pushout, a mixed simplex with new initial block is uniquely a simplex of the characteristic $\\Delta^m$ together with a chain all of whose entries contain $\\sigma$; a boundary initial block is already in $H(L)$, and the pure final block is already in $N(I)$. Characteristic-map identifications on faces are made by that attaching map. If the initial block is degenerate, membership in each $K_i$ is equivalent to membership of its nondegenerate ancestor (apply degeneracies in one direction and a degeneracy's face retraction in the other); the mixed simplex is then degenerate in $H$. There are therefore no extra degenerate-initial-block cells. The cited boundary-cell decomposition supplies all the nondegenerate cells. Each attaching inclusion is right anodyne by [lem-coef-contractible-join-right-anodyne]. Closure under pushouts and transfinite compositions in [def-coef-infinity-right-anodyne] now shows $N(I)\\hookrightarrow H$ is right anodyne.",
+   "uses": [
+    "lem-cbc-filtered-nerve-weak-contractibility",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-contractible-join-right-anodyne",
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.8, its nondegenerate-simplex attaching argument, and Remark 4.2.3.9, printed pp. 252-253; inclusions eliminate the extra degenerate-lift case."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-anodyne-cocones] to $N(I)\\hookrightarrow H$, $q$, and any vertex $T$ of $\\mathcal E$. It identifies the space of cocones on $q$ with that on $c=q|_{N(I)}$, naturally in $T$ and compatibly with postcomposition. Restrict $\\widetilde\\lambda$ to get a compatible cocone $\\nu$ on $c$ with apex $C$. Steps 4 and 5 give equivalences induced by composition with this very cocone, $\\operatorname{Map}_{\\mathcal E}(C,T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(c,\\Delta_{N(I)}T)$. The cocone/initial-object criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\nu$ is colimiting. Hence its apex $C$ realizes $\\operatorname{colim}_{i\\in I}c_i\\simeq\\operatorname{colim}_Kp$. If $K=\\varnothing$, all $K_i$ are empty and the construction gives $H=N(I)$: steps 2-4 apply to the chosen initial objects $c_i$, while step 5 has no cells and the final inclusion is the identity. Thus this case is covered without an unstated nonemptiness hypothesis on $K$ or on the $K_i$.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.2.3.10 and Remark 4.2.3.9, printed p. 253, with the cocone-space form of finality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-cbc-terminal-boundary-extension",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-filtered-nerve-weak-contractibility",
+  "lem-coef-contractible-join-right-anodyne",
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit reconstruction of HTT 4.2.3.4 and 4.2.3.8-4.2.3.10, with the fixed-apex comparison 4.2.1.5/4.2.1.7; HTT is not archived locally, so marked agent per the standing brief."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +175,73 @@
    "results": "{\"t\": \"2026-10-16T19:43:36Z\", \"tool\": \"leansearch\", \"query\": \"Coherent colimits can be assembled over a directed union of simplicial indexing subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\"], \"digest\": \"5239f77356483c54\"}",
    "date": "2026-10-16",
    "verdict": "Second reading: no match. Hits concern ordinary CategoryTheory Hom-set compactness, ordinary Ind objects, or the ambient category SSet; none states the coherent infinity-category assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit over a directed union of simplicial subsets equals the iterated colimit of the restricted coherent diagrams",
+   "results": "{\"t\": \"2026-10-16T20:11:50Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit over a directed union of simplicial subsets equals the iterated colimit of the restricted coherent diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"SimplicialObject.Splitting.isColimit'\"], \"digest\": \"3fe77b451c3a651a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected semantic signatures; SSet.Subcomplex colimits describe colimits in the ordinary category of simplicial sets, and ordinary CategoryTheory/Scheme directed-colimit results use Hom sets. None assembles arbitrary coherent diagrams in quasicategories. Quasicategory grep has zero hits; the second phrasing also returns only ambient SSet results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"directed\"",
+   "results": "{\"t\": \"2026-10-16T20:11:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"directed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instCreatesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.hasColimit_of_locallyDirected\", \"CategoryTheory.CardinalDirectedPoset.instHasCardinalFilteredColimits\"], \"digest\": \"bf2ed78184f60bf0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected semantic signatures; SSet.Subcomplex colimits describe colimits in the ordinary category of simplicial sets, and ordinary CategoryTheory/Scheme directed-colimit results use Hom sets. None assembles arbitrary coherent diagrams in quasicategories. Quasicategory grep has zero hits; the second phrasing also returns only ambient SSet results."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|directed|cofinal",
+   "results": "{\"t\": \"2026-10-16T20:11:51Z\", \"tool\": \"grep\", \"query\": \"colimit|directed|cofinal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected semantic signatures; SSet.Subcomplex colimits describe colimits in the ordinary category of simplicial sets, and ordinary CategoryTheory/Scheme directed-colimit results use Hom sets. None assembles arbitrary coherent diagrams in quasicategories. Quasicategory grep has zero hits; the second phrasing also returns only ambient SSet results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent colimits assemble over a directed union of simplicial indexing subsets",
+   "results": "{\"t\": \"2026-10-16T20:11:51Z\", \"tool\": \"leansearch\", \"query\": \"Coherent colimits assemble over a directed union of simplicial indexing subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\"], \"digest\": \"fc6059c94fbfbec7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected semantic signatures; SSet.Subcomplex colimits describe colimits in the ordinary category of simplicial sets, and ordinary CategoryTheory/Scheme directed-colimit results use Hom sets. None assembles arbitrary coherent diagrams in quasicategories. Quasicategory grep has zero hits; the second phrasing also returns only ambient SSet results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a simplicial indexing set is the filtered union of subcomplexes then the colimit of their local colimits is the colimit of the original infinity categorical diagram",
+   "results": "{\"t\": \"2026-10-16T20:19:28Z\", \"tool\": \"leanfinder\", \"query\": \"If a simplicial indexing set is the filtered union of subcomplexes then the colimit of their local colimits is the colimit of the original infinity categorical diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"SSet.range_eq_iSup_of_isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.hasDimensionLT_of_isColimit\"], \"digest\": \"269fab0d2b5c7b61\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected semantic signatures; SSet.Subcomplex colimits describe colimits in the ordinary category of simplicial sets, and ordinary CategoryTheory/Scheme directed-colimit results use Hom sets. None assembles arbitrary coherent diagrams in quasicategories. Quasicategory grep has zero hits; the second phrasing also returns only ambient SSet results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent colimits assemble over a directed union of simplicial indexing subsets",
+   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"leansearch\", \"query\": \"Coherent colimits assemble over a directed union of simplicial indexing subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\"], \"digest\": \"fc6059c94fbfbec7\"}",
+   "date": "2026-10-16",
+   "verdict": "Renewed review: no match. Read the returned signatures: SSet.Subcomplex.MulticoequalizerDiagram.isColimit and SSet.hasColimits concern ordinary colimits in the ambient category of simplicial sets. Scheme gluing and CardinalDirectedPoset colimits have ordinary Hom sets. They do not assemble coherent diagrams in an arbitrary quasicategory. Scoped Quasicategory grep has zero hits; LeanSearch supplies the alternative phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a simplicial indexing set is the filtered union of subcomplexes then the colimit of their local colimits is the colimit of the original infinity categorical diagram",
+   "results": "{\"t\": \"2026-10-16T21:24:31Z\", \"tool\": \"leanfinder\", \"query\": \"If a simplicial indexing set is the filtered union of subcomplexes then the colimit of their local colimits is the colimit of the original infinity categorical diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.horn.isColimit\", \"SSet.hasColimits\", \"SSet.range_eq_iSup_of_isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.hasDimensionLT_of_isColimit\"], \"digest\": \"269fab0d2b5c7b61\"}",
+   "date": "2026-10-16",
+   "verdict": "Renewed review: no match. Read the returned signatures: SSet.Subcomplex.MulticoequalizerDiagram.isColimit and SSet.hasColimits concern ordinary colimits in the ambient category of simplicial sets. Scheme gluing and CardinalDirectedPoset colimits have ordinary Hom sets. They do not assemble coherent diagrams in an arbitrary quasicategory. Scoped Quasicategory grep has zero hits; LeanSearch supplies the alternative phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"directed\"",
+   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"colimit\\\", \\\"directed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instCreatesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.hasColimit_of_locallyDirected\", \"CategoryTheory.CardinalDirectedPoset.instHasCardinalFilteredColimits\"], \"digest\": \"bf2ed78184f60bf0\"}",
+   "date": "2026-10-16",
+   "verdict": "Renewed review: no match. Read the returned signatures: SSet.Subcomplex.MulticoequalizerDiagram.isColimit and SSet.hasColimits concern ordinary colimits in the ambient category of simplicial sets. Scheme gluing and CardinalDirectedPoset colimits have ordinary Hom sets. They do not assemble coherent diagrams in an arbitrary quasicategory. Scoped Quasicategory grep has zero hits; LeanSearch supplies the alternative phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|directed|cofinal",
+   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"grep\", \"query\": \"colimit|directed|cofinal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Renewed review: no match. Read the returned signatures: SSet.Subcomplex.MulticoequalizerDiagram.isColimit and SSet.hasColimits concern ordinary colimits in the ambient category of simplicial sets. Scheme gluing and CardinalDirectedPoset colimits have ordinary Hom sets. They do not assemble coherent diagrams in an arbitrary quasicategory. Scoped Quasicategory grep has zero hits; LeanSearch supplies the alternative phrasing."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -92,5 +249,49 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-directed-cover-colimit-assembly",
+  "worker": "stage1",
+  "summary": "Read HTT decomposition of diagrams online, reconstructed the mixed simplicial set, proved coherent assembly and cocone-space comparison by boundary lifts, and proved the directed-support inclusion right anodyne by explicit cells. Added only the generic sharp/fat slice comparison and contractible-join anodyne lemma. Checked empty shapes and all cited hypotheses; no finished project declaration and no Mathlib match.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the existing ancestry: filtered-subdiagram reconstruction needed in HTT Lemma 5.5.4.14. Neither the finite-coefficient adjunction route nor the general-biduality unit is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Cocone quasicategories, mapping-space equivalences and the initial-object colimit criterion are generic infinity-category tools; this unit has no substitute."
+   },
+   {
+    "node": "lem-cbc-terminal-boundary-extension",
+    "why": "The boundary characterization of a terminal vertex, applied in the opposite, proves the exact initial-simplex lifting calculation; no node of this unit states that criterion."
+   },
+   {
+    "node": "def-weil-pbc-trivial-kan-fibration",
+    "why": "The generic boundary-lifting definition, including dimension zero, is used in steps 2 and 4."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Turns the proved trivial fibration of fixed-apex fibers into an equivalence of spaces; generic simplicial tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-cbc-filtered-nerve-weak-contractibility",
+    "why": "Supplies weak contractibility of each small directed support poset nerve; generic simplicial tool, not a coefficient-specific route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-terminal-boundary-extension",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-filtered-nerve-weak-contractibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-2896d7c9c",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-2896d7c9c (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Proof uses equal proof_deps. The split follows HTT Prop 4.2.3.4, Prop 4.2.3.8 and Cor 4.2.3.10 in the directed-union case of Rem 4.2.3.9. Step 2: checked the boundary identity (∂Δ^n⋆Δ^m)∪(Δ^n⋆∂Δ^m)=∂Δ^{n+m+1}, including n=0 and m=0; the filler comes from the opposite dual via relative-cone-equivalence (4) and terminal-boundary-extension, so marking it elementary is fine. Step 3: H is closed under faces because deleting i_0 lands in K_{i_0}⊆K_{i_1}, and each cell is K_{i_0}⋆Δ^n attached along K_{i_0}⋆∂Δ^n, with an initial first vertex q_{i_0}. Step 4: attaching a cell changes the slice by a pullback of J_s→J_{s|∂}, so R is a trivial fibration and λ̃ is colimiting. Step 5: each I_σ is nonempty, upward closed and directed, so N(I_σ) is weakly contractible; each attachment is Δ^m⋆N(I_σ) along ∂Δ^m⋆N(I_σ), and degenerate initial blocks are handled by Eilenberg–Zilber. Step 6: anodyne-cocones plus the cone criterion. The K=∅ case is covered. New node lem-coef-contractible-join-right-anodyne is HTT Lemma 4.2.3.6 and true; tested on Λ^1_1, Λ^2_2 and two glued edges, and B=∅ is rightly excluded. New node lem-coef-join-slice-cocone-comparison is HTT 4.2.1.5–4.2.1.8; P_a is exactly the fat slice and the cocone category of def-cbc; tested for L=∅ and L=Δ^0. Neither new node duplicates the existing nodes cone-mono-right-anodyne, blunt-sharp-join-equivalence, slice-right-fibration, slice-arrow-equivalence, join-cone-calculus or join-slice-diagram-isomorphisms, and neither restates a clause of the item. Both pass B1–B7 with all three search kinds recorded. The five declared tool_uses are accepted as generic black boxes: cone-calculus, terminal-boundary-extension, trivial-kan-fibration, trivial-kan-homotopy-equivalence, filtered-nerve-weak-contractibility. There is no cycle and no SGA. HTT is not archived in literature/, so proof_origin=agent with a WANTED line is correct. No fixes were made."
+ }
 }
