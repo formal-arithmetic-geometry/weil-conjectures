@@ -28,9 +28,96 @@
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form $\\tau:\\mathcal M_{\\mathrm{triv}}\\to\\mathcal M$. By [lem-coef-inert-operad-color-reconstruction] this is a map of small generalized operads, identity on the Kan zero-fiber, and $E:\\operatorname{Alg}_{\\mathcal M_{\\mathrm{triv}}}(\\mathcal V)\\simeq\\operatorname{Fun}(\\mathcal M_{[1]},\\mathcal V)$ identifies $E\\tau^*$ with $U$. This uses the actual coherent equivalence on the inert diagrams, not just a correspondence on objects.",
+   "uses": [
+    "lem-coef-inert-operad-color-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng Definition 3.4.1 and Proposition 3.4.5, pp.615–616; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-generalized-active-extension-criterion] to $u=\\tau$. Each active slice $K_c$ is small, since both operads are small. Every diagram $D_{A,c}$ therefore has a colimit in $\\mathcal V$. Tensoring on the left and right preserves this colimit by the hypotheses, and their composite $L\\otimes(-)\\otimes R$ does so too. All zero-fiber hypotheses were verified in step 1. Obtain $\\tau_!\\dashv\\tau^*$, with natural mapping-space adjunction. Thus $F=\\tau_!E^{-1}$ is left adjoint to $U$, with the transported coherent unit and counit.",
+   "uses": [
+    "lem-coef-inert-operad-color-reconstruction",
+    "lem-coef-generalized-active-extension-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng Propositions A.4.3–A.4.4, Corollary A.4.5 and Theorem A.4.6, pp.705–706; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  },
+  {
+   "text": "Fix a small sifted shape $K$. By [lem-coef-infinity-sifted-colimit-calculus] it is weakly contractible and separately colimit-preserving tensor products preserve $K$-colimits jointly. Inducting on the number of factors gives this for every positive finite tensor product. A zero-fold tensor is constant at $\\mathbf1$; its $K$-colimit is $\\mathbf1$ by the weakly contractible constant-diagram assertion of [lem-coef-infinity-coslice-colimit-formula]. Under the Segal equivalences of [def-coef-monoidal-infinity-category], every fiber $\\mathcal V^\\otimes_{[n]}\\simeq\\mathcal V^n$ has $K$-colimits componentwise. Transport along a base map $[n]\\to[m]$ opposite to $f:[m]\\to[n]$ has as its $j$th output the tensor of entries $f(j-1)+1,\\ldots,f(j)$: factor the map into an inert restriction to the chosen subinterval and an endpoint-preserving active map, then use the tensor transport in the monoidal definition. If the endpoints coincide the output is the empty tensor. The preceding calculation proves that every such transport preserves $K$-colimits, including all empty-block and $[0]$ cases.",
+   "uses": [
+    "lem-coef-infinity-sifted-colimit-calculus",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng Lemma A.5.1 and proof of Corollary A.5.4, pp.707–709; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-section-colimits] to $\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$, $T=\\mathcal M$, and $g=p$. Step 3 verifies its fiber-colimit, transport-preservation and weak-contractibility hypotheses. Take its specified edge set $H$ to be the inert cocartesian edges of $\\mathcal M$. The full subcategory carrying $H$ to cocartesian edges is precisely $\\operatorname{Alg}_{\\mathcal M}(\\mathcal V)$, so it is closed under these section-category colimits. A colimit in a full subcategory closed under ambient colimits satisfies the same universal mapping-space property. Evaluation at every color therefore sends these colimits to colimits in $\\mathcal V$. Colimits in $\\operatorname{Fun}(\\mathcal M_{[1]},\\mathcal V)$ are also pointwise: apply the same section lemma to the product cocartesian fibration $\\mathcal M_{[1]}\\times\\mathcal V\\to\\mathcal M_{[1]}$ with identity transports. Thus $U$ preserves all small sifted colimits.",
+   "uses": [
+    "lem-coef-cocartesian-section-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng Theorem A.5.3 and Corollary A.5.4, pp.708–709; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  },
+  {
+   "text": "To show $U$ conservative, let $h:A\\to B$ be an algebra transformation whose restriction to colors is an equivalence. The vertexwise criterion in [lem-cbc-enhanced-functor-cone-calculus] makes every color component an equivalence. For $x\\in\\mathcal M_{[n]}$, naturality with the chosen inert projections identifies $h_x$ under the monoidal Segal equivalence with the tuple $(h_{x_1},\\ldots,h_{x_n})$, so it is an equivalence; for $n=0$ the target fiber is terminal and the same assertion holds for the empty tuple. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $\\operatorname{Fun}(\\mathcal M,\\mathcal V^\\otimes)\\to\\operatorname{Fun}(\\mathcal M,\\Delta^{\\mathrm{op}})$. A vertical transformation with equivalence components has cocartesian components over identities, hence is cocartesian in this functor fibration and is an equivalence in its fiber: its cocartesian mapping-space property over an identity makes precomposition an equivalence for every target; lifting the identity of the source gives a right inverse, and injectivity up to homotopy with target the target gives the other inverse identity. This fiber is the section category. Its full algebra subcategory reflects equivalences, so $h$ is an equivalence of algebras.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng Lemma A.5.5, p.709; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  },
+  {
+   "text": "The simplex shape $\\Delta^{\\mathrm{op}}$ is sifted by [lem-coef-infinity-sifted-colimit-calculus]. Hence step 4 gives geometric realizations in the algebra category and preservation by $U$; step 5 gives conservativity, and step 2 supplies $F\\dashv U$. Apply [lem-coef-infinity-monadic-bar] to this adjunction. Its coherent comparison is an equivalence over the color-diagram category to algebras for $UF$, with unit the adjunction unit and multiplication $U\\epsilon F$. These are exactly the monad and comparison asserted in the item. Every step used only small colimits and separate tensor preservation, so no presentability of $\\mathcal V$ has entered.",
+   "uses": [
+    "lem-coef-infinity-sifted-colimit-calculus",
+    "lem-coef-infinity-monadic-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting operadic foundation: Gepner–Haugseng proof of Corollary A.5.6, pp.709–710; online source https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-inert-operad-color-reconstruction",
+  "lem-coef-generalized-active-extension-criterion",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-section-colimits",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-monadic-bar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting foundation for paragraph 2; proof follows the online Gepner–Haugseng Corollary A.5.6 route via Proposition 3.4.5, conditional active extension and Theorem A.5.3. Full source archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,10 +160,45 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized nonsymmetric infinity operad algebras form a monadic adjunction over color diagrams",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Kleisli.Adjunction.adj\", \"module\": \"Mathlib/CategoryTheory/Monad/Kleisli\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (T : CategoryTheory.Monad C) →\\n      CategoryTheory.Kleisli.Adjunction.toKleisli T ⊣ CategoryTheory.Kleisli.Adjunction.fromKleisli T\", \"doc\": \"For a monad $ T $ on a category $ \\\\mathcal{C} $, the functor $ \\\\text{toKleisli} \\\\, T: \\\\mathcal{C} \\\\to \\\\mathcal{C}_T $ embedding $ \\\\mathcal{C} $ into its Kleisli category $ \\\\mathcal{C}_T $ is left adjo\"}\n  {\"name\": \"CategoryTheory.Monad.adj\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v₁, u₁} C] → (T : CategoryTheory.Monad C) → T.free ⊣ T.forget\", \"doc\": \"For a monad $ T $ on a category $ \\\\mathcal{C} $, the free functor $ \\\\text{free}: \\\\mathcal{C} \\\\to \\\\mathcal{C}^T $ (mapping objects to free $ T $-algebras) is left adjoint to the forgetful functor $ \\\\te\"}\n  {\"name\": \"CategoryTheory.Monad.comparison\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {L : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor D C} → (h : L ⊣ R) → CategoryTheory.Functor D h.toMonad.Algebra\", \"doc\": \"Given adjoint functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ R : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ with adjunction $ h : L \\\\dashv R $, the comparison functor constructs a functor from $ \\\\mathcal{D} $ \"}\n  {\"name\": \"CategoryTheory.Monad.instIsRightAdjointAlgebraForget\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (T : CategoryTheory.Monad C), T.forget.IsRightAdjoint\", \"doc\": \"The forgetful functor from the Eilenberg-Moore category of T-algebras to the base category $\\\\mathcal{C}$ is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (T : CategoryTheory.Monad C) → CategoryTheory.MonadicRightAdjoint T.forget\", \"doc\": \"For any monad $ T $ on a category $ \\\\mathcal{C} $, the forgetful functor from the Eilenberg-Moore category of $ T $-algebras to $ \\\\mathcal{C} $ is a monadic right adjoint. This means the adjunction be\"}\n  {\"name\": \"CategoryTheory.Adjunction.toMonad\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {L : CategoryTheory.Functor C D} → {R : CategoryTheory.Functor D C} → (L ⊣ R) → CategoryTheory.Monad C\", \"doc\": \"Given an adjunction between functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ R : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the composition $ R \\\\circ L $ forms a monad on $ \\\\mathcal{C} $. The monad has unit giv\"}\n  {\"name\": \"CategoryTheory.Adjunction.toMonad_μ\", \"module\": \"Mathlib/CategoryTheory/Monad/Adjunction\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R),\\n  h.toMonad.μ = CategoryTheory.Functor.whiskerRight (L.whiskerLeft h.counit) R\", \"doc\": \"The multiplication $\\\\mu$ of the monad induced by an adjunction $L \\\\dashv R$ is equal to the whiskering of the counit of the adjunction with the functors $L$ and $R$.\"}\n  {\"name\": \"CategoryTheory.Monad.adj_counit\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (T : CategoryTheory.Monad C),\\n  T.adj.counit = { app := fun Y => { f := Y.a, h := ⋯ }, naturality := ⋯ }\", \"doc\": \"The counit of the adjunction between the free functor $\\\\text{free}: \\\\mathcal{C} \\\\to \\\\mathcal{C}^T$ and the forgetful functor $\\\\text{forget}: \\\\mathcal{C}^T \\\\to \\\\mathcal{C}$ is a natural transformation \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, strict monads/Kan extensions, nerves, or strict Segal simplicial sets; none is a theorem about homotopy coherent generalized operadic algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonadicRightAdjoint",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MonadicRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"A right adjoint functor `R : D ⥤ C` is *monadic* if the comparison functor `Monad.comparison R`\\nfrom `D` to the category of Eilenberg-Moore algebras for the adjunction is an equivalence.\\n\"}\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (T : CategoryTheory.Monad C) : CategoryTheory.MonadicRightAdjoint T.forget\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.monadicLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [CategoryTheory.MonadicRightAdjoint R] : CategoryTheory.Functor C D\", \"doc\": \"The left adjoint functor to `R` given by `[MonadicRightAdjoint R]`. \"}\n  {\"name\": \"CategoryTheory.MonadicRightAdjoint.L\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} (R : CategoryTheory.Functor D C) [self : CategoryTheory.MonadicRightAdjoint R] : CategoryTheory.Functor C D\", \"doc\": \"a choice of left adjoint for `R` \"}\n  {\"name\": \"CategoryTheory.instIsRightAdjointOfMonadicRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [CategoryTheory.MonadicRightAdjoint R] : R.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.monadicOfReflective\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor D C} [CategoryTheory.Reflective R] : CategoryTheory.MonadicRightAdjoint R\", \"doc\": \"Any reflective inclusion has a monadic right adjoint.\\ncf Prop 5.3.3 of [Riehl][riehl2017] \"}\n  {\"name\": \"CategoryTheory.monadicAdjunction\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [CategoryTheory.MonadicRightAdjoint R] : CategoryTheory.monadicLeftAdjoint R ⊣ R\", \"doc\": \"The adjunction `monadicLeftAdjoint R ⊣ R` given by `[MonadicRightAdjoint R]`. \"}\n  {\"name\": \"CategoryTheory.MonadicRightAdjoint.adj\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {R : CategoryTheory.Functor D C} [self : CategoryTheory.MonadicRightAdjoint R] : CategoryTheory.MonadicRightAdjoint.L R ⊣ R\", \"doc\": \"`R` is a right adjoint \"}\n  {\"name\": \"CategoryTheory.MonadicRightAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor D C} (L : CategoryTheory.Functor C D) (adj : L ⊣ R) (eqv : (CategoryTheory.Monad.comparison adj).IsEquivalence) : CategoryTheory.MonadicRightAdjoint R\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.instIsEquivalenceAlgebraToMonadMonadicAdjunctionComparison\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [CategoryTheory.MonadicRightAdjoint R] : (CategoryTheory.Monad.comparison (CategoryTheory.monadicAdjunction R)).IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonadicRightAdjoint.eqv\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {R : CategoryTheory.Functor D C} [self : CategoryTheory.MonadicRightAdjoint R] : (CategoryTheory.Monad.comparison CategoryTheory.MonadicRightAdjoint.adj).IsEquivalence\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.monadicCreatesLimits\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [CategoryTheory.MonadicRightAdjoint R] : CategoryTheory.CreatesLimitsOfSize.{v, u, v₂, v₁, u₂, u₁} R\", \"doc\": \"Any monadic functor creates limits. \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, strict monads/Kan extensions, nerves, or strict Segal simplicial sets; none is a theorem about homotopy coherent generalized operadic algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "operad.*monad|monad.*operad",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, strict monads/Kan extensions, nerves, or strict Segal simplicial sets; none is a theorem about homotopy coherent generalized operadic algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent operadic algebras forgetful functor is monadic and preserves sifted colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(T : Monad C) : MonadicRightAdjoint T.forget\", \"doc\": \"For any monad $ T $ on a category $ \\\\mathcal{C} $, the forgetful functor from the Eilenberg-Moore category of $ T $-algebras to $ \\\\mathcal{C} $ is a monadic right adjoint. This means the adjunction be\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimits\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfSize.{v, u} (T : C ⥤ C)] : CreatesColimitsOfSize.{v, u} (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a monad $T$ on $\\\\mathcal{C}$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of a specified size, then the forgetful functor $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"[PreservesColimitsOfShape J (T : C ⥤ C)] : CreatesColimitsOfShape J (forget T)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a monad $T$ on $\\\\mathcal{C}$, and a small category $J$, if the underlying endofunctor $T : \\\\mathcal{C} \\\\to \\\\mathcal{C}$ preserves colimits of shape $J$, then the forget\"}\n  {\"name\": \"CategoryTheory.Monad.forgetCreatesColimit\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"(D : J ⥤ Algebra T) [PreservesColimit (D ⋙ forget T) (T : C ⥤ C)]\\n  [PreservesColimit ((D ⋙ forget T) ⋙ ↑T) (T : C ⥤ C)] : CreatesColimit D (forget T)\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \": IsColimit (liftedCocone c t)\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then any colimit cocone in $ \\\\mathcal{C} $ can be uniquely \"}\n  {\"name\": \"GrpCat.FilteredColimits.forget₂Mon_preservesFilteredColimits\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": PreservesFilteredColimits.{u} (forget₂ GrpCat.{u} MonCat.{u})\", \"doc\": \"The canonical forgetful functor from the category of groups to the category of monoids preserves filtered colimits. This means that for any filtered diagram in the category of groups, the colimit comp\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.liftedCoconeIsColimit_desc_f\", \"module\": \"Mathlib.CategoryTheory.Monad.Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} {J : Type u}\\n  [inst_1 : CategoryTheory.Category.{v, u} J] {D : CategoryTheory.Functor J T.Algebra}\\n  (c : CategoryTheory.Limits.Cocone (D.comp T.forget)) (t : CategoryTheory.Limits.IsColimit c)\\n  [inst_2 : Cate\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $, if the forgetful functor $ U: T\\\\text{-}\\\\mathbf{Alg} \\\\to \\\\mathcal{C} $ preserves colimits, then for any colimit cocone $ c $ in $ \\\\mathcal{C} $, the m\"}\n  {\"name\": \"Action.instPreservesColimitsOfShapeForgetOfHasColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Action.Limits\", \"type\": \"{J : Type*} [Category* J] [HasColimitsOfShape J V] : PreservesColimitsOfShape J (Action.forget V G)\", \"doc\": \"If a category $\\\\mathcal{V}$ has colimits of shape $J$, then the forgetful functor from the category of $G$-actions on $\\\\mathcal{V}$ to $\\\\mathcal{V}$ preserves colimits of shape $J$.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, strict monads/Kan extensions, nerves, or strict Segal simplicial sets; none is a theorem about homotopy coherent generalized operadic algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinity categorical Barr Beck for algebras over a generalized operad",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monad.beckAlgebraCoequalizer\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      (X : T.Algebra) → CategoryTheory.Limits.IsColimit (CategoryTheory.Monad.beckAlgebraCofork X)\", \"doc\": \"For a monad $ T $ on a category $ \\\\mathcal{C} $ and a $ T $-algebra $ (A, \\\\theta) $, the Beck algebra cofork formed by the parallel pair $ \\\\mu_{T(A)}: T(T(A)) \\\\to T(A) $ and $ T(\\\\theta): T(T(A)) \\\\to T\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesColimits.γ\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          {D : CategoryTheory.Functor J T.Algebra} → (D.comp T.forget).comp T.toFunctor ⟶ D.comp T.forget\", \"doc\": \"A natural transformation $\\\\gamma$ between the functors $(D \\\\circ \\\\text{forget} \\\\, T) \\\\circ T$ and $D \\\\circ \\\\text{forget} \\\\, T$, where each component $\\\\gamma_j$ is the structure morphism $\\\\theta: T(A) \"}\n  {\"name\": \"CategoryTheory.Monad.beckSplitCoequalizer\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} → (X : T.Algebra) → CategoryTheory.IsSplitCoequalizer (T.map X.a) (T.μ.app X.A) X.a\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $ and a $ T $-algebra $ (X, \\\\theta) $, this constructs a split coequalizer diagram involving the unit $ \\\\eta $ of the monad. Specifically, the coequaliz\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesLimits.γ\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} →\\n      {J : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} J] →\\n          (D : CategoryTheory.Functor J T.Algebra) → D.comp (T.forget.comp T.toFunctor) ⟶ D.comp T.forget\", \"doc\": \"Given a monad $ T $ on a category $ \\\\mathcal{C} $ and a diagram $ D: \\\\mathcal{J} \\\\to T\\\\text{-}\\\\mathbf{Alg} $ in the Eilenberg-Moore category of $ T $-algebras, this natural transformation $ \\\\gamma $ c\"}\n  {\"name\": \"CategoryTheory.Monad.free\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] → (T : CategoryTheory.Monad C) → CategoryTheory.Functor C T.Algebra\", \"doc\": \"The functor from category $\\\\mathcal{C}$ to the Eilenberg-Moore category of $T$-algebras that sends each object $X$ to the free $T$-algebra $(T(X), \\\\mu_X)$, where $\\\\mu_X: T(T(X)) \\\\to T(X)$ is the monad\"}\n  {\"name\": \"CategoryTheory.Monad.ForgetCreatesLimits.γ_app\", \"module\": \"Mathlib/CategoryTheory/Monad/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} {J : Type u}\\n  [inst_1 : CategoryTheory.Category.{v, u} J] (D : CategoryTheory.Functor J T.Algebra) (j : J),\\n  (CategoryTheory.Monad.ForgetCreatesLimits.γ D).app j = (D.obj j).a\", \"doc\": \"For a diagram $ D: \\\\mathcal{J} \\\\to T\\\\text{-}\\\\mathbf{Alg} $ in the Eilenberg-Moore category of $ T $-algebras, the component of the natural transformation $ \\\\gamma $ at each object $ j \\\\in \\\\mathcal{J} \"}\n  {\"name\": \"CategoryTheory.Monad.FreeCoequalizer.bottomMap\", \"module\": \"Mathlib/CategoryTheory/Monad/Coequalizer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {T : CategoryTheory.Monad C} → (X : T.Algebra) → T.free.obj (T.obj X.A) ⟶ T.free.obj X.A\", \"doc\": \"The morphism in the free $T$-algebra category induced by the monad multiplication $\\\\mu_{T(X)}: T(T(X)) \\\\to T(X)$, where $X$ is a $T$-algebra. This map satisfies the associativity condition $\\\\mu_X \\\\cir\"}\n  {\"name\": \"CategoryTheory.Monad.Algebra.unit\", \"module\": \"Mathlib/CategoryTheory/Monad/Algebra\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {T : CategoryTheory.Monad C} (self : T.Algebra),\\n  CategoryTheory.CategoryStruct.comp (T.η.app self.A) self.a = CategoryTheory.CategoryStruct.id self.A\", \"doc\": \"For any category $\\\\mathcal{C}$, monad $T$ on $\\\\mathcal{C}$, and $T$-algebra $(A, \\\\theta)$, the composition of the unit natural transformation $\\\\eta_A : A \\\\to T(A)$ with the algebra structure morphism \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categories, strict monads/Kan extensions, nerves, or strict Segal simplicial sets; none is a theorem about homotopy coherent generalized operadic algebras."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -84,5 +206,29 @@
   "group": "Q55"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-generalized-operadic-monadicity",
+  "worker": "stage1",
+  "summary": "Kept the statement and no-presentability scope. Built the free adjoint using inert reconstruction and a conditional generalized active-slice criterion, proved sifted-colimit preservation from the existing section theorem, checked conservativity on all fibers including degree zero, and applied coherent monadic bar. Avoided circular use of the operadic presentability package. Two new statement-only inputs, no Mathlib leaves.",
+  "blueprint": "Supports paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent finite-coefficient mapping-complex adjunction; realizes the operadic-monadicity foundation identified by the inherited blueprint.from.place. No change to the unit-level duality route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 5 uses its vertexwise equivalence criterion for coherent transformations. This is a generic functor-category tool, not a replacement for the unit biduality route; no operadic-specific node in this unit supplies that arbitrary functor-category statement under these hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NM-179a3165d",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-179a3165d (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. I could not open the Gepner-Haugseng source: it is not in literature/ and reviewers have no network. The source stays WANTED and proof_origin is agent, so the steps were checked directly against the cited DAG statements instead. Item statement: unchanged and not weakened (Kan zero-fiber, small colimits preserved separately by tensor, no presentability). Step 1: U equals E after tau^* exactly, since the [1]-fiber of M_triv is M_[1]. Step 2: all of the criterion's hypotheses hold for tau (small K_c, colimits exist, L⊗-⊗R preserves them, the zero-fiber conditions hold), and F = tau_! E^{-1}. Step 3: the sifted-calculus and coslice nodes say what the step uses, and the n=0 and empty-block cases are covered. Step 4: the hypotheses of the cocartesian-section lemma hold; with H = inert edges the subcategory is exactly Alg, and colimits in Fun(M_[1],V) are pointwise. Step 5: equivalences are detected through the Segal equivalence, and the cocartesian-over-identity argument uses the pointwise-transport statement; the tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. Step 6: the monadic-bar hypotheses are met. New node 1 (reconstruction): I checked myself that M_triv is a generalized operad (inner fibration, inert lifts stay cocartesian, relative-limit axiom holds for non-inert phi), and tested it on M=Delta^op and empty M. New node 2 (active-extension criterion): tested with u=id and with A_[1] empty, and the extra zero-fiber hypotheses only make it weaker. Duplicates: the existing candidates (cocomplete-extensions, free-cocone-criterion, active-slice-formula, colorwise-sifted-colimits) all reach the item through lem-coef-operadic-algebra-presentability, so citing them would make a cycle. The ordinary-operad criterion does not cover generalized operads; the new criterion generalizes it, a merge candidate for later. No cycle after the delivery, no SGA, no fixes made."
+ }
 }

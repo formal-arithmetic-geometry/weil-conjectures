@@ -31,9 +31,104 @@
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-model-weak-equivalences-accessible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a small set $I$ generating the cofibration/trivial-fibration system of $\\mathcal M$, so $I^{\\square}=F_{\\mathcal M}\\cap W_{\\mathcal M}$, and a small set $J$ generating the trivial-cofibration/fibration system of $\\mathcal N$, so $J^{\\square}=F_{\\mathcal N}$. The model conventions in [lem-coef-simplicial-model-nerve-localization] identify the corresponding left classes with $C_{\\mathcal M}$ and $C_{\\mathcal N}\\cap W_{\\mathcal N}$. Every member of $I$ or $J$ belongs to its corresponding left class by the definition of the right lifting class. These left classes contain every isomorphism (a square with invertible left map $i$ has filler $ui^{-1}$), are closed under pushouts and arrow retracts by [lem-coef-lifting-class-closure], and are closed under small continuous transfinite compositions by [lem-coef-transfinite-left-lifting]. Consequently they contain the weak saturations of $I$ and $J$. Apply [lem-coef-accessible-small-object-factorization] separately to $(\\mathcal M,I)$ and $(\\mathcal N,J)$; all Hom sets and colimits are small relative to the fixed universe. This gives functorial factorizations with middle-object functors $E_I,E_J$, preserving small $\\kappa_Q$-filtered and $\\kappa_T$-filtered colimits, respectively, for infinite regular $\\kappa_Q,\\kappa_T$. Their right maps are, respectively, trivial fibrations and fibrations, and their left maps are, respectively, cofibrations and trivial cofibrations.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 2.3(i), expanded through Proposition 7.1, printed pp. 180 and 193; both accessible factorizations are the existing small-object input."
+   }
+  },
+  {
+   "text": "Set $Q_0X=E_I(0\\to X)$ and $TY=E_J(Y\\to1)$. The natural factor maps give $0\\to Q_0X$ a cofibration and $Q_0X\\to X$ a trivial fibration, and give $Y\\to TY$ a trivial cofibration and $TY\\to1$ a fibration. They therefore give exactly the functorial replacements required. The identity/composition and naturality equations in [lem-coef-accessible-small-object-factorization] make these object assignments functors with the stated natural maps. For any nonempty filtered category, a constant diagram at an object $A$ has colimit $A$: any two components of a cocone agree because the indices have a common receiving object, and hence cocones are exactly single maps out of $A$. Arrow colimits are computed on endpoints, as in the same cited node. Thus the functors $X\\mapsto(0\\to X)$ and $Y\\mapsto(Y\\to1)$ preserve small filtered colimits. Composing with $E_I,E_J$ shows that $Q_0$ preserves small $\\kappa_Q$-filtered colimits and $T$ preserves small $\\kappa_T$-filtered colimits. This uses constancy over filtered indices, not preservation of arbitrary colimits by the terminal-arrow functor.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 2.3(i) from Proposition 7.1; restriction of the two arrow factorizations to initial and terminal arrows."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-model-weak-equivalences-accessible] to $\\mathcal M$. Its combinatorial hypothesis is precisely the assumed local presentability and set generation of the two model weak factorization systems; no simplicial enrichment is required. Its conclusion and its definition of accessible subcategory give an infinite regular $\\kappa_W$ for which the weak-equivalence full subcategory of $\\mathcal M^{[1]}$ is closed under small $\\kappa_W$-filtered colimits computed in the ambient arrow category. Since arrow colimits are computed on endpoints, a natural transformation of diagrams that is objectwise a weak equivalence has weak-equivalence colimit whenever its small indexing category is $\\kappa_W$-filtered.",
+   "uses": [
+    "lem-coef-model-weak-equivalences-accessible",
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 2.3(ii) and Proposition 7.3, printed pp. 180 and 194; the ambient arrow-closure theorem is the existing input."
+   }
+  },
+  {
+   "text": "Choose an infinite regular $\\kappa$ and a small family $\\mathcal G$ of $\\kappa$-presentable objects generating $\\mathcal M$ under small $\\kappa$-filtered colimits; these exist by local presentability. Apply [lem-coef-object-presentability-rank] in $\\mathcal N$ to each object $LG$, $G\\in\\mathcal G$. Its hypotheses hold because $\\mathcal N$ is locally presentable. Choose an infinite regular rank $\\tau_G$ for each $LG$. Apply [lem-coef-small-family-regular-bound] to the small family of underlying initial-ordinal sets of the cardinals $\\tau_G$, together with the initial ordinal of $\\kappa$. This gives an infinite regular $\\beta$ strictly larger than every $\\tau_G$ and than $\\kappa$: each of these sets injects into their disjoint union. If $\\eta\\leq\\beta$ then every $\\beta$-filtered category is $\\eta$-filtered, directly from the definition. Hence every $G$ and every $LG$ is $\\beta$-presentable. Choice here is only over the small family $\\mathcal G$ and stays in the fixed universe.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, condition (5), printed p. 183, citing Adamek-Rosicky Proposition 1.66; first part of an explicit proof using ranks of images of a small generating family."
+   }
+  },
+  {
+   "text": "Let $D:K\\to\\mathcal N$ be any small $\\beta$-filtered diagram and let $c:\\operatorname{colim}_K RD\\to R(\\operatorname{colim}_K D)$ be the map induced by applying $R$ to its colimit injections. For every $G\\in\\mathcal G$, presentability and the ordinary adjunction give natural bijections\n$$\\operatorname{Hom}_{\\mathcal M}(G,\\operatorname{colim}RD)\\cong\\operatorname{colim}\\operatorname{Hom}_{\\mathcal M}(G,RD_k)\\cong\\operatorname{colim}\\operatorname{Hom}_{\\mathcal N}(LG,D_k)\\cong\\operatorname{Hom}_{\\mathcal N}(LG,\\operatorname{colim}D)\\cong\\operatorname{Hom}_{\\mathcal M}(G,R\\operatorname{colim}D).$$\nTheir composite is $\\operatorname{Hom}(G,c)$: on a representative $a:G\\to RD_k$, naturality of adjunction sends it to $R(\\iota_k)a$. Here is the full detection argument. If $f:A\\to B$ induces bijections on Hom from every $G$, present $B$ as a colimit of generators $G_j$. Each injection $b_j:G_j\\to B$ lifts uniquely to $a_j:G_j\\to A$. Injectivity of Hom from $G_j$ makes these lifts compatible with all diagram arrows. They induce $h:B\\to A$, and $fh=1_B$ follows on the colimit injections. Present $A$ by generators as well. For each injection $a'_j:G'_j\\to A$, the equality $fhfa'_j=fa'_j$ and injectivity on $G'_j$ give $hfa'_j=a'_j$; thus $hf=1_A$. Apply this to $c$. It follows that $R$ preserves small $\\beta$-filtered colimits. This is an ordinary Hom argument and does not use a simplicial mapping-space theorem or assume accessibility of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, condition (5), printed p. 183; explicit adjunction and generating-colimit argument replacing the bare reference to Adamek-Rosicky Proposition 1.66."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-functor-presentability-ranks] to $H=\\mathrm{id}_{\\mathcal M}$ with $\\mathcal A=\\mathcal D=\\mathcal M$ and $\\alpha=\\aleph_0$. The identity preserves every colimit, so the required accessibility hypothesis holds. The node gives a regular $\\rho$ and arbitrarily large infinite regular sharp upper ranks at which $\\mathcal M$ is locally presentable. Use its existence clause with $\\sigma=\\rho$ to choose such a rank $\\lambda$ larger than $\\rho,\\beta,\\kappa_Q,\\kappa_T,\\kappa_W$. A finite maximum of these small cardinal bounds is still a small bound. Then $\\mathcal M$ is locally $\\lambda$-presentable. A small $\\lambda$-filtered diagram is also $\\beta$-, $\\kappa_Q$-, $\\kappa_T$- and $\\kappa_W$-filtered, since each diagram with fewer than any of those cardinals' morphisms has fewer than $\\lambda$ morphisms. Therefore the already chosen $Q_0,T,R$ preserve these colimits, and such colimits of weak equivalences in $\\mathcal M$ are weak equivalences. No assertion that local $\\kappa$-presentability persists at every larger regular cardinal is used.",
+   "uses": [
+    "lem-coef-accessible-functor-presentability-ranks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, simultaneous choice in conditions (1)-(5), printed p. 183; suitable ordinary presentability enlargement uses the existing rank theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-presentable-canonical-density] to $\\mathcal M$ at the rank $\\lambda$ from Step 6. It says that the full subcategory $\\mathcal P_\\lambda$ of all $\\lambda$-presentable objects is essentially small, and that its canonical comma diagrams are $\\lambda$-filtered and colimiting. Choose one actual object from each isomorphism class in $\\mathcal P_\\lambda$ and take the full subcategory $\\mathcal M_\\lambda$ on those representatives. It is small: its objects form a small set and its Hom sets are small. For any $X$, the comma category $(\\mathcal M_\\lambda\\downarrow X)$ is small too, since its objects form the disjoint union of the small sets $\\operatorname{Hom}(A,X)$ over the small set of representatives. The inclusion into $(\\mathcal P_\\lambda\\downarrow X)$ is fully faithful and essentially surjective: given $u:P\\to X$, an isomorphism $a:A\\to P$ from a representative gives the isomorphic object $ua:A\\to X$. Transporting cocones along these isomorphisms shows explicitly that the former comma category is $\\lambda$-filtered and its value diagram has colimit $X$: a cocone on fewer than $\\lambda$ arrows in the former is obtained in the latter and its apex replaced by a representative, and any cocone from the value diagram extends uniquely to the latter by the same isomorphisms. Thus every object is a small $\\lambda$-filtered colimit of objects of $\\mathcal M_\\lambda$. Together with Step 6 and the replacements of Step 2, this establishes every clause of the statement.",
+   "uses": [
+    "lem-coef-presentable-canonical-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Remark 2.5 (printed p. 181) and Proposition 3.2 proof, condition (1) (printed p. 183); small full representatives and small comma diagrams made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-functor-presentability-ranks",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-weak-equivalences-accessible",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-presentable-canonical-density",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational small model-presentation input to the coherent finite adjunction before derived limit; expands the cardinal choice of Dugger Proposition 3.2 using existing DAG inputs. Dugger read online; not archived in literature/, WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,14 +178,71 @@
    "results": "{\"t\": \"2026-10-16T20:39:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"isCardinalAccessible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.instIsCardinalAccessibleId\", \"CategoryTheory.Functor.instIsCardinalAccessibleOfPreservesColimitsOfSize\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.Functor.instIsCardinalAccessibleObjConst\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\"], \"digest\": \"36377be05d921016\"}",
    "date": "2026-10-16",
    "verdict": "no match: independently read Mathlib/CategoryTheory/Presentable/Basic.lean:110-151 and Presentable/Adjunction.lean:43-95. These assume accessibility, or choose a cardinal for an already accessible functor; none constructs the model replacement functors, proves weak-equivalence closure, and chooses the common cardinal in this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Combinatorial model categories have a common regular cardinal for weak equivalences, cofibrant and fibrant replacements, presentable generators and a right adjoint preserving filtered colimits",
+   "results": "{\"t\": \"2026-10-16T21:23:06Z\", \"tool\": \"leanfinder\", \"query\": \"Combinatorial model categories have a common regular cardinal for weak equivalences, cofibrant and fibrant replacements, presentable generators and a right adjoint preserving filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.CategoryWithFibrations\"], \"digest\": \"bdf6f0bb6d70954b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyPresentable, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-16T21:23:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsLocallyPresentable, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "combinatorial|accessible|presentable|filtered",
+   "results": "{\"t\": \"2026-10-16T21:23:48Z\", \"tool\": \"grep\", \"query\": \"combinatorial|accessible|presentable|filtered\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common regular cardinal for locally presentable model categories makes weak equivalences and replacement functors and a right adjoint preserve filtered colimits",
+   "results": "{\"t\": \"2026-10-16T21:23:48Z\", \"tool\": \"leansearch\", \"query\": \"A common regular cardinal for locally presentable model categories makes weak equivalences and replacement functors and a right adjoint preserve filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible_of_essentiallySmall\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.IsLocallyPresentable.mk\", \"CategoryTheory.MorphismProperty.smallObjectκ_isRegular\"], \"digest\": \"8d058e701fc0ad25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessible functorial small object factorizations and weak equivalences in a locally presentable model category preserve sufficiently filtered colimits",
+   "results": "{\"t\": \"2026-10-16T21:24:15Z\", \"tool\": \"leanfinder\", \"query\": \"Accessible functorial small object factorizations and weak equivalences in a locally presentable model category preserve sufficiently filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument'\", \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\"], \"digest\": \"feea7dc1d03a9530\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint|isRightAdjoint|IsAccessible|exists_cardinal",
+   "results": "{\"t\": \"2026-10-16T21:24:15Z\", \"tool\": \"grep\", \"query\": \"rightAdjoint|isRightAdjoint|IsAccessible|exists_cardinal\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"1185510e85cad3ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/Basic.lean and Presentable/Adjunction.lean:40-95, Presentable/Basic.lean:110-151, Presentable/Dense.lean:60-73, and SmallObject/IsCardinalForSmallObjectArgument.lean:460-473. Model-category hits provide finite colimits and lifting axioms; the small-object hits provide functorial factorization under cardinal hypotheses; the accessibility hits assume or define preservation and the adjunction hits assume an accessible full faithful right adjoint. No declaration states the complete simultaneous model-category cardinal choice. Existing Mathlib-backed rank, bound and density DAG leaves are reused."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dugger-localization-criterion",
   "date": "2026-10-17",
   "group": "Q02"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dugger-cardinal-choice",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and split the simultaneous cardinal choice in seven steps, reusing all non-elementary inputs already in the DAG. Constructed accessible replacements from the two small-object factorizations, used ambient weak-equivalence closure, proved right-adjoint preservation by a small generating family and ordinary Hom adjunction, and chose a suitable sharp upper presentability rank before passing to a small full representative subcategory. No new nodes or Lean attachments.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, the finite-coefficient mapping-complex adjunction before R lim, as recorded in blueprint.from. The current main-20261015 proof is in the separate prop-coef-integral-exceptional-adjoint.proof.md file under sk-thm-sf-package and agrees with the historical master paragraph; this is the foundational small model-category presentation input through the inherited via chain. No unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-2f9b71e50",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-2f9b71e50 (reviewer sub-agent of L); spot-checked: All seven steps are correct and every hypothesis is checked; no new nodes. The only fault was wrong printed page numbers in the source places, now corrected in fixes/dag/nodes/sec-six-functors/lem-coef-dugger-cardinal-choice.json; statement, steps and uses are unchanged. Source: Dugger's PDF, fetched to /tmp. Prop 2.3 is on p.180, Rem 2.5 on p.181, Prop 3.2 on p.182, its conditions (1)-(5) on p.183, and Props 7.1/7.3 on pp.193-194. The item has exactly Dugger's five conditions for a Quillen pair; dropping left properness is a generalization, since it is only needed to form M/S. Steps: (1) the generating sets give I^□=F∩W and J^□=F; the left classes contain isomorphisms (filler written out) and are closed under pushout, retract (Mathlib llp leaf) and transfinite composition, so they contain the weak saturations. (2) Q_0X=E_I(0→X) and TY=E_J(Y→1) point in the right directions, are natural by the cited equations, and preserve colimits because constant diagrams over filtered indices have their value as colimit. (3) Weak-equivalence closure uses the ambient arrow-category clause. (4) The rank leaf for each LG plus the disjoint-union bound give β above every τ_G and κ. (5) The Hom composite equals Hom(G,c), checked on representatives; the generator detection argument proves fh=1 and hf=1. (6) The rank enlargement applied to id_M gives λ above every earlier bound with M locally λ-presentable. (7) Canonical density at λ plus representatives give a small M_λ with λ-filtered comma categories. All nine cited nodes are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. No cycle; the parent lem-coef-dugger-localization-criterion uses only what the item supplies. A DAG-wide rg found no duplicate (nearby candidates such as cofibrant-density and bounded-resolutions state other things). Small cases tested: terminal category, Set with identity adjunction, 0≠1, empty index excluded. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
