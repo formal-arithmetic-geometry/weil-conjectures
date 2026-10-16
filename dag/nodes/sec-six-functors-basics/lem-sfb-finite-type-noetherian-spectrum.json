@@ -21,9 +21,93 @@
  "stmt_deps": [
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use the descending-closed-chain form of Noetherianity, equivalent to the stated ascending-open-chain form by complements. Three elementary consequences will be used explicitly. A closed subspace of a Noetherian space is Noetherian, since its closed subsets are closed in the ambient space. A space which is the union of two Noetherian subspaces is Noetherian: restrict a descending chain of closed subsets to the two subspaces, take the maximum of their stabilization indices, and take their union. Finally, induction on closed subsets of a Noetherian space is valid: a nonempty collection of counterexamples without a minimal member would, by recursively choosing a strictly smaller member, give a strictly descending chain of closed subsets, contrary to the hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Noetherian spaces, definition-noetherian and lemma-Noetherian (Tag 0052); the chain and induction arguments are written here."
+   }
+  },
+  {
+   "text": "First prove the one-variable assertion for an arbitrary ring $R$ with Noetherian spectrum. Put $X=\\operatorname{Spec}R$, $Y=\\operatorname{Spec}R[T]$, and let $\\pi:Y\\to X$ be contraction along the constant-polynomial map. This is continuous because $\\pi^{-1}(V(J))=V(JR[T])$ for every ideal $J\\subseteq R$, directly by membership of constants in a prime. For each closed subset $Z\\subseteq X$, the inductive claim $P(Z)$ is that $\\pi^{-1}(Z)$, with its subspace topology, is Noetherian. Assume $P(Z')$ for every proper closed subset $Z'\\subsetneq Z$. If $Z=\\varnothing$ the claim holds. If $Z$ is nonempty and reducible, write $Z=Z_1\\cup Z_2$ with both $Z_i$ proper closed subsets of $Z$, hence of $X$. The induction hypothesis applies to both inverse images, and the union argument in step 1 proves $P(Z)$. It remains to prove $P(Z)$ for nonempty irreducible $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Paragraph (2), affine-chart Noetherianity input; agent proof, induction claim and its empty/reducible cases."
+   }
+  },
+  {
+   "text": "Write the remaining nonempty irreducible closed subset as $Z=V(J)$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}(R/J)$ is homeomorphic to $Z$. It is irreducible, so its entire space is an irreducible component. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], that component is $V(\\mathfrak q)$ for a minimal prime $\\mathfrak q\\subset R/J$. Pull $\\mathfrak q$ back to the prime $\\mathfrak p\\subset R$; the quotient prime correspondence in the first cited statement gives $Z=V(\\mathfrak p)$. Put $C=R/\\mathfrak p$, an integral domain: the quotient is nonzero and a product of two nonzero classes cannot be zero by primality of $\\mathfrak p$. The coefficientwise surjection $R[T]\\to C[T]$ has kernel $\\mathfrak pR[T]$: a polynomial lies in that kernel exactly when all its finitely many coefficients lie in $\\mathfrak p$, and such a polynomial is the sum of those coefficients times powers of $T$. Apply the same quotient-spectrum statement to this surjection. It identifies $\\pi^{-1}(Z)=V(\\mathfrak pR[T])$ homeomorphically with $\\operatorname{Spec}C[T]$. In these identifications the contraction maps to $Z=\\operatorname{Spec}C$ agree, since they take the same constant coefficients to the same prime ideals.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E5 (lemma-spec-closed) and 00ES (lemma-irreducible, part (3)); polynomial quotient identification written coefficientwise."
+   }
+  },
+  {
+   "text": "Here is the algebraic argument needed over this domain $C$; it requires no Noetherian-ring hypothesis. Let $I\\subseteq C[T]$ be any nonzero ideal. Choose a nonzero $f\\in I$ of least degree $n$, and let $a\\ne0$ be its leading coefficient. In the localization $C_a$ of [def-weil-ring-localization-away], put $h=a^{-1}f$, which is monic of degree $n$. By [lem-weil-pbc-monic-quotient-free], the classes of $1,T,\\ldots,T^{n-1}$ form a $C_a$-basis of $C_a[T]/(h)$. Thus any $g\\in I$ has an expression $g=qh+r$ in $C_a[T]$, with $r=0$ or $\\deg r<n$: represent the class of $g$ in that basis, and the difference is in the kernel $(h)$ of the quotient map. Multiply $g-qa^{-1}f=r$ by a sufficiently large $a^N$ so that every coefficient of $a^Nr$ and $a^{N-1}q$ belongs to $C$: choose $N\\ge1$ larger than the finitely many denominator exponents. Then\n$$a^Nr=a^Ng-(a^{N-1}q)f\\in I\\subseteq C[T].$$\nLocalization is injective because $C$ is a domain and $a\\ne0$, by the fraction equality in the localization definition. Therefore a nonzero $r$ would give a nonzero polynomial $a^Nr\\in I$ of degree less than $n$, contrary to minimality. Hence $r=0$. Every image of $g\\in I$ is divisible by $h$, and $h=a^{-1}f$ itself belongs to the extended ideal, so $IC_a[T]=(h)$. If $n=0$ the quotient basis is empty and $r$ is already zero. The argument is carried by this step and is not a new node.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization); Tag 04GG (lemma-characterize-henselian), finite free monic-quotient fact used by the cited node. Agent minimal-degree argument, written out."
+   }
+  },
+  {
+   "text": "Take an arbitrary descending chain $F_1\\supseteq F_2\\supseteq\\cdots$ of closed subsets of $\\operatorname{Spec}C[T]$. For each $i$ let $I_i$ be the intersection of all prime ideals belonging to $F_i$, taking the whole ring if $F_i=\\varnothing$. Then $I_i$ is an ideal, $I_i\\subseteq I_{i+1}$, and $V(I_i)=F_i$. Indeed, write $F_i=V(K_i)$; every prime in $F_i$ contains $I_i$ by definition, while $K_i\\subseteq I_i$ implies $V(I_i)\\subseteq V(K_i)$. The increasing union $I=\\bigcup_i I_i$ is an ideal. If $I=0$, every $I_i=0$ and the chain is constant. Otherwise take $f,a,h$ from step 4, and choose $i_0$ with $f\\in I_{i_0}$. For every $i\\ge i_0$, the extended ideal $I_iC_a[T]$ contains $h$ and is contained in $IC_a[T]=(h)$, so it equals $(h)$. Coefficientwise localization identifies $(C[T])_a$ with $C_a[T]$: a polynomial with fraction coefficients has a common denominator $a^N$, and equality follows coefficientwise from the fraction relation proved for this localization in step 4. By [lem-weil-pbc-spec-localization-away-basic-open](ii), $\\operatorname{Spec}C_a[T]$ is the open $D(a)\\subseteq\\operatorname{Spec}C[T]$. A localized prime contains $I_iC_a[T]$ exactly when its contracted prime contains $I_i$. Consequently all the restrictions $F_i\\cap D(a)$ agree for $i\\ge i_0$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E4 (lemma-standard-open); agent increasing-ideal and least-degree stabilization argument."
+   }
+  },
+  {
+   "text": "The complementary closed subset $V(a)\\subseteq\\operatorname{Spec}C$ is proper because the zero prime of the domain $C$ does not contain $a\\ne0$. Under $\\operatorname{Spec}C=Z$ its image is a proper closed subset $Z'\\subsetneq Z$, hence closed in $X$. The induction hypothesis $P(Z')$ says that $\\pi^{-1}(Z')$ is Noetherian. Under step 3's identification this is exactly $V(a)\\subseteq\\operatorname{Spec}C[T]$: both consist of primes whose contraction contains $a$. Thus the restricted chain $F_i\\cap V(a)$ stabilizes, say for $i\\ge i_1$. Step 5 and the cover $\\operatorname{Spec}C[T]=D(a)\\cup V(a)$ now give $F_i=F_{\\max(i_0,i_1)}$ for all larger $i$. The case $I=0$ was already constant. Every descending closed chain therefore stabilizes, establishing $P(Z)$ in the irreducible case. The induction of step 2 gives $P(X)$, that is, $\\operatorname{Spec}R[T]$ is Noetherian. Only topological Noetherianity of $\\operatorname{Spec}R$ was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Paragraph (2), affine-chart Noetherianity input; agent proof, closed complement and completion of the explicitly stated induction."
+   }
+  },
+  {
+   "text": "Apply the one-variable result repeatedly, starting with $R$ and adjoining $x_1,\\ldots,x_d$. Ordinary induction on $d$ shows that $\\operatorname{Spec}R[x_1,\\ldots,x_d]$ is Noetherian; the zero-variable case is the given $\\operatorname{Spec}R$. By finite generation in the hypothesis, there is a surjection $R[x_1,\\ldots,x_d]\\to B$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}B$ is homeomorphic to the closed subset defined by its kernel. It is Noetherian by the closed-subspace chain argument of step 1. If $B=0$ the closed subspace is empty. If $R=0$, a unital $R$-algebra is also zero. Thus all the permitted zero-ring cases are included, proving exactly the stated conclusion.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E5 (lemma-spec-closed); agent finite-variable induction and finite-type quotient step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+  "place": "Paragraph (2), through its affine-chart Noetherian-spectrum input; independent one-variable minimal-degree argument and Noetherian induction because the original Ohm–Pendleton paper is unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +171,73 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "No match: PrimeSpectrum.instNoetherianSpace and Algebra.FiniteType.isNoetherianRing require IsNoetherianRing R, whereas the node assumes only NoetherianSpace (PrimeSpectrum R). No declaration for polynomial extension under this weaker hypothesis was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type algebra over a ring with Noetherian spectrum has Noetherian spectrum",
+   "results": "{\"t\": \"2026-10-16T20:48:17Z\", \"tool\": \"leanfinder\", \"query\": \"finite type algebra over a ring with Noetherian spectrum has Noetherian spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"Algebra.FinitePresentation.of_finiteType\"], \"digest\": \"00c01031814fb3ab\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace, PrimeSpectrum",
+   "results": "{\"t\": \"2026-10-16T20:48:18Z\", \"tool\": \"loogle\", \"query\": \"NoetherianSpace, PrimeSpectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'NoetherianSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the unqualified identifier; this query is inconclusive."
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSpace|noetherianSpace",
+   "results": "{\"t\": \"2026-10-16T20:48:18Z\", \"tool\": \"grep\", \"query\": \"NoetherianSpace|noetherianSpace\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\"], \"digest\": \"7494d416a6d005b3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over a ring whose prime spectrum is Noetherian has Noetherian prime spectrum",
+   "results": "{\"t\": \"2026-10-16T20:48:18Z\", \"tool\": \"leansearch\", \"query\": \"A finite type algebra over a ring whose prime spectrum is Noetherian has Noetherian prime spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"Algebra.FiniteType.isNoetherianRing\", \"PrimeSpectrum.instNoetherianSpace\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"Algebra.EssFiniteType.isNoetherianRing\", \"AlgebraicGeometry.isNoetherian_Spec\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\"], \"digest\": \"df3675dc42130633\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite generated algebra preserves Noetherian Zariski topology when base spectrum is Noetherian",
+   "results": "{\"t\": \"2026-10-16T20:48:30Z\", \"tool\": \"leanfinder\", \"query\": \"finite generated algebra preserves Noetherian Zariski topology when base spectrum is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.finite_primeSpectrum\", \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\"], \"digest\": \"808dab2e37b66a0b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring over a ring with Noetherian prime spectrum",
+   "results": "{\"t\": \"2026-10-16T20:48:31Z\", \"tool\": \"leansearch\", \"query\": \"polynomial ring over a ring with Noetherian prime spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isNoetherianRing_fin\", \"Polynomial.isNoetherianRing\", \"MvPolynomial.isNoetherianRing\", \"AlgebraicGeometry.isNoetherian_Spec\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.isNoetherianRing_fin_0\", \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"Polynomial.instIsJacobsonRing\"], \"digest\": \"fbc694cb601d9c06\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace, Polynomial",
+   "results": "{\"t\": \"2026-10-16T20:48:32Z\", \"tool\": \"loogle\", \"query\": \"NoetherianSpace, Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'NoetherianSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the unqualified identifier; this query is inconclusive."
+  },
+  {
+   "tool": "grep",
+   "query": "radical.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-16T20:48:32Z\", \"tool\": \"grep\", \"query\": \"radical.*[Ff]inite\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NoetherianSpace\", \"PrimeSpectrum\"",
+   "results": "{\"t\": \"2026-10-16T20:55:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"NoetherianSpace\\\", \\\"PrimeSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PrimeSpectrum.instNoetherianSpace\"], \"digest\": \"11d63a204854b62a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the returned spectrum and finite-type Noetherianity results require IsNoetherianRing R. PrimeSpectrum/Noetherian.lean:28-31 and FiniteType.lean:187-194 were read. The quasi-finite result assumes a finite base spectrum and a quasi-finite algebra, so does not apply to arbitrary finite-type algebras. No polynomial-spectrum theorem under the weaker topological hypothesis was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-local-monodromy-realization",
@@ -98,5 +245,21 @@
   "group": "Q17"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-coefficient-heart"
+ "unit": "sk-lem-coefficient-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-finite-type-noetherian-spectrum",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Supplied a seven-step proof by Noetherian induction on closed subsets of the base, reducing the irreducible case to a domain. A least-degree polynomial makes any nonzero ideal generically principal after its leading coefficient is inverted; the closed complement is handled by the stated induction hypothesis. Iteration and the finite-type quotient finish. All five substantive inputs are existing Mathlib/definition nodes, so no new nodes are created. Original Ohm–Pendleton source remains WANTED and proof_origin is agent.",
+  "blueprint": "Realizes paragraph (2) of det-lem-coefficient-heart-closure, specifically topological Noetherianity of affine finite-presentation etale refinements used by lem-sfb-etale-local-monodromy-realization. Does not replace the unit monodromy or coefficient route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-dec5100d6",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-dec5100d6 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and changed nothing. It is one commit with two files: the item and its report. It creates no new nodes. The statement is the Ohm–Pendleton theorem (Thm 2.5/Cor 2.6): a finite-type algebra over a ring with Noetherian Spec has Noetherian Spec. It is true, nothing is weakened, and zero rings and d=0 are included. The paper is absent from the local literature, and the item correctly marks it WANTED with proof_origin agent. The parent lem-sfb-etale-local-monodromy-realization (step index 5) uses it with exactly these hypotheses. Mathlib only has PrimeSpectrum.instNoetherianSpace, which needs IsNoetherianRing (RingTheory/Spectrum/Prime/Noetherian.lean:28-30), so 'no match' is right. A regex search over every statement in dag/nodes found no duplicate. Step 1: the Noetherian-space facts are elementary and correct (Stacks 0052, topology.tex:1253). Step 2: the Noetherian induction claim P(Z) on closed subsets of the base is stated explicitly, so D4 is met. Step 3: it uses only the statements of the quotient-spectrum and minimal-prime-component Mathlib leaves to get Z=V(p) and pi^{-1}(Z)≅Spec C[T], where ker(R[T]→(R/p)[T])=pR[T]. Step 4: I checked the least-degree argument. a^N r = a^N g − (a^{N−1}q)f lies in I, so r=0 by minimality and because the domain has no zero divisors. Hence I·C_a[T]=(h), with division taken from the power basis of the monic quotient; n=0 is covered. Step 5: the increasing ideals I_i are radicals with V(I_i)=F_i, and the chain stabilizes on D(a) through clause (ii) of the basic-open leaf. Step 6: V(a) is a proper closed set, P(Z') covers it, and D(a)∪V(a) covers the space. That a depends on the chain is harmless. Step 7: induction on the number of variables plus a closed subspace finishes. Small cases tested: a non-discrete rank-one valuation ring, a field, an infinite square-zero thickening, ideals with infinitely many generators, R=0, B=0, d=0. All five cited nodes are Mathlib leaves, so there is no route issue and no tool_uses; there is no cycle and no SGA. The step tags (0052, 00E0, 00E4, 00E5, 00ES, 00CO, 04GG) exist with the stated labels."
+ }
 }
