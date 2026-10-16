@@ -3,40 +3,304 @@
  "blueprint": {
   "is": "prop-sf-dualizable-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom through the coefficient dual",
- "statement": "In the setting of [def-sf-datum], let $K\\in D^b_{ctf}(X,\\Lambda)$ be\nquasi-isomorphic, locally on the site of $X$, to a bounded complex of finite\nprojective $\\Lambda_X$-modules. Then\n$K^\\vee\\otimes^L_{\\Lambda_X}M\\to R\\mathcal H om_X(K,M)$ is an\nisomorphism for every $M\\in D^b_{ctf}(X,\\Lambda)$.",
+ "statement": "Let $p,\\ell$ be distinct primes, let $a,n\\geq1$ be integers, put $q=p^a$, let $k_0=\\mathbf F_q$ and $k=\\overline{\\mathbf F}_q$, and let $E/\\mathbf Q_\\ell$ be a finite extension with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Fix a six-functor datum [def-sf-datum] on separated finite-type $k$-schemes, with the coefficient categories, tensor and internal Hom of [def-weil-derived-pullback-tensor-hom], and let $X$ be a scheme in this datum. Write $\\Lambda_X$ for its coefficient unit (the constant finite coefficient sheaf at finite level and the completed coefficient sheaf at integral level, with rational and common-stage images at the field levels). Let $K\\in D^b_{ctf}(X,\\Lambda)$ be quasi-isomorphic, locally on the coefficient site of $X$, to a bounded complex of finite projective $\\Lambda_X$-modules: the local terms are direct summands of finite sums of the coefficient unit, with the localized and common-stage interpretations of [def-weil-site-perfect-complex]. Put $K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$. Then for every $M\\in D^b_{ctf}(X,\\Lambda)$ the canonical evaluation comparison\n$$\nK^\\vee\\otimes^L_{\\Lambda_X}M\\longrightarrow R\\mathcal Hom_X(K,M)\n$$\nis an isomorphism.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
   "place": "node prop-sf-dualizable-hom, order 2174"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-site-perfect-complex"
  ],
  "proof": [
   {
-   "text": "Choose locally a bounded complex $P^\\bullet$ of finite projective\n$\\Lambda_X$-modules with a quasi-isomorphism $P^\\bullet\\to K$, and let\n$I(M)$ be a functorial K-injective replacement of $M$. Since the terms of\n$P^\\bullet$ are projective, $R\\mathcal H om_X(K,M)$ is represented by\n$\\mathcal H om^\\bullet_X(P^\\bullet,I(M))$, and termwise\n$\\mathcal H om_X(P^j,I(M)^k)=P^{j\\vee}\\otimes_{\\Lambda_X}I(M)^k$ by\n[lem-sf-hom-finite-projective], the identification being compatible\nwith differentials. Hence\n$R\\mathcal H om_X(K,M)\\cong P^{\\bullet\\vee}\\otimes_{\\Lambda_X}I(M)\\cong K^\\vee\\otimes^L_{\\Lambda_X}M$, which is the displayed isomorphism, the\n$K^\\vee$-side of both objects being the coefficient dual of\n[def-weil-derived-pullback-tensor-hom].",
+   "text": "Write $K^\\vee=R\\mathcal Hom(K,\\Lambda_X)$ and let $\\theta_{K,M}:K^\\vee\\otimes^L M\\to R\\mathcal Hom(K,M)$ be the adjunct of evaluation, with the symmetry placing $K$ next to its dual. First work at finite coefficients. Choose a covering on which $K$ has a bounded finite-projective representative $P$, with $P^r=0$ outside $[a,b]$. By the definition of each finite-projective term, choose its finite free retraction; only finitely many nonzero terms require choices. These are degreewise splittings, not chain splittings. Restriction is exact, derived internal Hom commutes with slice restriction, and derived tensor commutes with the corresponding ringed-topos pullback. Thus the restriction of $\\theta$ is the same evaluation comparison on the localized site. It suffices to calculate there; retain $R=\\Lambda_X|_U$ for its ring sheaf.",
    "uses": [
-    "lem-sf-hom-finite-projective",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 07A4 (lemma-pullback-tensor-product), and 08JJ (lemma-dual-perfect-complex), local reduction"
+   }
+  },
+  {
+   "text": "For each term $E=P^r$, choose $E\\xrightarrow{i}R^{\\oplus m}\\xrightarrow{p}E$ with $pi=1$. Its dual is a retract of $(R^{\\oplus m})^\\vee=R^{\\oplus m}$ by dualizing $i,p$. Consequently both $E$ and $E^\\vee$ are flat: tensor with either is a direct summand of the exact finite-sum functor $B\\mapsto B^{\\oplus m}$. Likewise $\\mathcal Hom_R(E,-)$ is a direct summand of $\\mathcal Hom_R(R^{\\oplus m},-)=(-)^{\\oplus m}$ and is exact. The ordinary evaluation isomorphism $B\\otimes E^\\vee\\to\\mathcal Hom_R(E,B)$ is precisely the one of the cited finite-projective evaluation lemma, which permits arbitrary module sheaves $B$. All these conclusions use only the displayed retraction, so also apply when $m=0$.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), last paragraph: finite free case and direct summands"
+   }
+  },
+  {
+   "text": "Put $D=\\mathcal Hom_R^\\bullet(P,R[0])$, so $D^i=\\mathcal Hom_R(P^{-i},R)$ and $d_D^i=(-1)^{i+1}(-\\circ d_P^{-i-1})$. Step 2 verifies the exact-term hypothesis of the bounded-Hom lemma. For any representative $F$ of $M|_U$, that lemma applied to $F\\to I(F)$ shows that $\\mathcal Hom^\\bullet(P,F)$ represents $R\\mathcal Hom(P,M|_U)$; applied to $R[0]\\to I(R[0])$ it shows that $D$ represents $(K^\\vee)|_U$. Neither $F$ nor $I(F)$ is required to have constructible terms. The complex $D$ is bounded in $[-b,-a]$ with flat terms by step 2, hence is K-flat by the cited bounded-above flat criterion. Choose a K-flat flat-term resolution $Q\\to F$. The cone of $D\\otimes Q\\to D\\otimes F$ is canonically isomorphic to $D\\otimes\\operatorname{Cone}(Q\\to F)$, by the total differential formula (multiply the shifted summand of degree $i$ in $D$ by $(-1)^i$), and is acyclic by the definition of K-flatness of $D$. The K-flat descent theorem computes the ordinary derived tensor by $D\\otimes Q$; hence $\\operatorname{Tot}(D\\otimes_R F)$ computes it as well.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JH (lemma-Rhom-strictly-perfect), 06YQ (lemma-bounded-flat-K-flat), 06YU (definition-derived-tor)"
+   }
+  },
+  {
+   "text": "In total degree $n$, both complexes involve only $a\\leq r\\leq b$: the source is $\\bigoplus_{i+j=n}(P^{-i})^\\vee\\otimes_R F^j$, and the target is $\\prod_r\\mathcal Hom_R(P^r,F^{r+n})$. The product has only finitely many possibly nonzero factors. On the summand $D^i\\otimes F^j$ define $e^n(\\phi\\otimes m)$ to have its sole nonzero component at $r=-i$, sending $x$ to $(-1)^{ij}\\phi(x)m$. Each diagonal component is the ordinary evaluation isomorphism of step 2, composed with symmetry and multiplication by $(-1)^{ij}$. Taking their finite direct sum gives an isomorphism $e^n$; its inverse applies the inverse evaluation separately in each component and the same sign. No infinite-product/direct-sum interchange occurs.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), the two displayed total complexes and final evaluation map"
+   }
+  },
+  {
+   "text": "The maps $e^n$ form a chain map. For $\\phi\\in D^i$ and $m\\in F^j$, the $d_F$ component of $e(d(\\phi\\otimes m))$ has coefficient $(-1)^i(-1)^{i(j+1)}=(-1)^{ij}$, as in $d_{\\mathrm{Hom}}e$. The precomposition-by-$d_P$ component has coefficient $(-1)^{i+1+(i+1)j}=(-1)^{ij+i+j+1}$, which equals the coefficient $-(-1)^{i+j}(-1)^{ij}$ from the Hom differential. Thus $e$ is a chain isomorphism. To identify the map, use the tensor-Hom adjunction with evaluation $\\mathcal Hom^\\bullet(P,F)\\otimes P\\to F$. The transpose of $D\\otimes F\\to\\mathcal Hom^\\bullet(P,F)$ moves $P^r$ past $F^j$ in $D^i\\otimes F^j\\otimes P^r$, producing $(-1)^{rj}$, and then evaluates $D^i\\otimes P^r\\to R[0]$. The evaluation is zero unless $r=-i$, when $(-1)^{rj}=(-1)^{ij}$. This is exactly the displayed formula for $e$, so its derived image is the specified $\\theta_{K,M}|_U$. This also proves compatibility with restriction and with morphisms of $M$, because the formula uses only composition, evaluation, and the coefficient action.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), evaluation comparison; signed differential calculation supplied here"
+   }
+  },
+  {
+   "text": "This proves the finite-level comparison on every member of the chosen covering. Its cone restricts to an acyclic complex there, because restriction is exact. Each cohomology sheaf of the cone is therefore zero locally: every section restricts to zero on a covering and is zero by the separatedness axiom for a sheaf. All its cohomology sheaves vanish, so the cone is zero in the derived category and the global $\\theta_{K,M}$ is an isomorphism. This argument uses a cover of the site and does not replace site-perfectness by stalkwise perfectness.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), locality of the evaluation comparison"
+   }
+  },
+  {
+   "text": "At the integral stage use the completed coefficient sheaf specified in the definitions. Every reduction $K_n$ is site-perfect: apply reduction to the local representative and its degreewise finite-free retractions. The same interval $[a,b]$ works on each chosen covering object; no bound independent of the covering is needed. By the coefficient-comparison lemma, reduction of the actual map $\\theta_{K,M}$ is the finite-level map $\\theta_{K_n,M_n}$, including the identification of the coefficient dual and evaluation. Each is an isomorphism by steps 1--6. Both endpoints lie in the stated integral category of the six-functor datum; hence so does a cone $C$ by the integral triangulated-subcategory theorem. Derived reduction is exact, so every reduction $C_n$ is zero. By derived completeness, $C$ occurs in its Roos triangle $C\\to\\prod_n C_n\\xrightarrow{1-s}\\prod_n C_n\\to C[1]$. Both products are zero; thus $C=0$ and the integral comparison is invertible. In particular this argument uses the completed tensor of the datum; it never identifies that tensor with an uncompleted tensor without proof.",
+   "uses": [
+    "def-sf-datum",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex",
+    "lem-fix-operation-reduction",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-complete",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
+    "place": "Coefficient clauses of sk-def-sf-operations; integral reduction and completeness argument supplementing the local proof"
+   }
+  },
+  {
+   "text": "At a rational stage, the local model has terms that are direct summands of finite sums of the coefficient unit in the scalar-localized category, by the site-perfect definition. This does not require an integral perfect lattice. First justify slice restriction for these coefficient operations. Ordinary derived Hom commutes with slice restriction by the cited ringed-Hom theorem. Restriction of sheaves is exact and computed by evaluation on objects over $U$; consequently it commutes with sectionwise countable products and with the finite matrices defining cones. Restrict the K-flat resolutions in the definition of integral tensor; the ringed-topos theorem makes the restrictions K-flat. Thus the Roos complex defining the completed tensor restricts to the Roos complex of the restricted finite tensors. Their maps, evaluation and its transpose restrict by the same formulas. Taking scalar localization gives these identifications for rational operations. No assertion about inverse image for an arbitrary scheme morphism is needed here.\n\nFor fixed local $M$, let $\\mathcal S$ consist of the first variables for which $\\theta_{-,M}$ is invertible. The unit is in $\\mathcal S$ by the unit adjunction, and finite sums and retracts are in $\\mathcal S$ by additivity and naturality: apply both functors to inclusion and retraction, whose composite is the identity. Both contravariant functors $R\\mathcal Hom(-,\\Lambda_X)\\otimes^L M$ and $R\\mathcal Hom(-,M)$ are exact. The Hom theorem supplies exactness of Hom. Total tensor carries a cone to the cone of the induced tensor map (on a shifted summand the usual comparison multiplies by the sign of the degree in the other factor); hence the finite tensors are exact. Countable products are exact, and the same cone matrices show that the Roos construction of completed tensor is exact. Scalar localization is exact. Evaluation forms a morphism of the resulting triangles: before localization this is the natural evaluation chain map of step 5, and localization preserves its equations. The triangle two-out-of-three lemma therefore makes $\\mathcal S$ closed under shifts and extensions. For a bounded local model $P$ in degrees $[a,b]$, start with $\\sigma_{\\geq b+1}P=0$ and descend using the degreewise split cone triangles\n$$\n\\sigma_{\\geq r+1}P\\longrightarrow\\sigma_{\\geq r}P\\longrightarrow P^r[-r]\\longrightarrow(\\sigma_{\\geq r+1}P)[1].\n$$\nEach $P^r[-r]$ is in $\\mathcal S$, so induction proves invertibility of the actual rational comparison on the chosen cover. Global detection in a scalar localization needs the following separate argument.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-integral-derived-operations",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "lem-fix-operation-reduction",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Unit sk-prop-sf-dualizable-biduality, finite-free/retract and bounded-complex argument; formal coefficient-stage extension"
+   }
+  },
+  {
+   "text": "For rational global detection, choose an integral representative $C$ of a cone of $\\theta$ in the scalar-localized category. More explicitly, write the rational map as an integral numerator divided by a power of $\\varpi_E$ and take the cone of that numerator: multiplying by an invertible scalar does not change whether its cone is zero. The integral endpoints and their cone are in $D^b_c(X,\\mathcal O_E)$ by the coefficient definitions and the integral triangulated-subcategory theorem. The finite-type definition gives a finite affine open cover of $X$; on each such affine, the definition of a pro-etale covering refines our model cover by finitely many affine opens of its members. Collecting these gives a finite covering $\\{U_j\\to X\\}_{j=1}^t$ on which step 8 applies. If $X$ is empty there is nothing to detect. In the scalar localization, $C|_{U_j}=0$. Its identity therefore maps to zero in $\\operatorname{End}(C|_{U_j})\\otimes_{\\mathcal O_E}E$. The tensor-localization isomorphism and the definition of module localization say exactly that $\\varpi_E^{N_j}\\operatorname{id}_{C|_{U_j}}=0$ for some $N_j\\geq0$. With $N=\\max_jN_j$, exact restriction and the sheaf separatedness axiom imply $\\varpi_E^N H^d(C)=0$ globally for every $d$.\n\nHere $C$ has bounded cohomology, and this follows from the coefficient definitions rather than being an extra hypothesis: its reductions have a common support interval $[u,v]$. Exact countable products imply that the product of their scalar restrictions also has cohomology in $[u,v]$. The long exact sequence of the Roos triangle for the derived-complete $C$ therefore puts $H^d(C)$ in $[u,v+1]$. Apply the canonical truncation triangles to $C$ in this finite interval. In any triangle $A\\xrightarrow{i}B\\xrightarrow{p}D\\to A[1]$, if $\\varpi_E^e\\operatorname{id}_A=0$ and $\\varpi_E^f\\operatorname{id}_D=0$, then $p\\circ(\\varpi_E^f\\operatorname{id}_B)=0$, so exactness of $\\operatorname{Hom}(B,-)$ gives $\\varpi_E^f\\operatorname{id}_B=i\\circ h$; multiplying by $\\varpi_E^e$ gives $\\varpi_E^{e+f}\\operatorname{id}_B=0$. Starting with $\\tau_{\\leq u-1}C=0$ and adjoining $H^d(C)[-d]$, killed by $\\varpi_E^N$, the truncation triangles give $\\varpi_E^{N(v-u+2)}\\operatorname{id}_C=0$. Inverting $\\varpi_E$ makes $C$ zero. Thus the global rational comparison is invertible. This argument uses finite covers and a uniform cohomological bound; it does not identify rational local vanishing with integral sheaf vanishing.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Local bounded-complex proof; scalar-localized local-to-global detection expanded here using the coefficient definitions"
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, the definition of site-perfectness gives $K$ as the common-stage image of a site-perfect object over some finite coefficient extension. The common-stage definition likewise represents $M$ over a finite extension. Choose their compositum $L$, a finite common coefficient field, and extend both representatives to $L$. Exact scalar extension preserves the unit, finite sums, retractions and the finite cone construction of the local perfect model. Hence the representative of $K$ at this common field is still site-perfect. The coefficient comparisons identify the scalar-extended dual, tensor and internal Hom, and preserve evaluation; therefore they identify the representative of $\\theta$ with the rational comparison over $L$ proved invertible in steps 8--9. That inverse over $L$ represents an inverse in the common-stage category, since its two inverse equations remain equations after passing to the common-stage morphism classes. Together with steps 1--7 this proves the assertion at every allowed coefficient stage.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/_section.md",
+    "place": "Coefficient-stage conventions inherited from sk-def-sf-operations; finite common-field passage"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-hom-finite-projective",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-site-perfect-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-sf-datum",
+  "lem-fix-operation-reduction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-localization-module-tensor",
+  "def-weil-pbc-module-localization",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-exact-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08JJ (lemma-dual-perfect-complex), local bounded finite-projective proof; signs and coefficient-stage details expanded from the blueprint"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex of sheaves of modules its derived dual tensor any complex is the derived internal Hom",
+   "results": "Ext; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.ProjectiveResolution.isoExt; CategoryTheory.Sheaf.H; CategoryTheory.isZero_Tor_succ_of_projective",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.ihomObjIsoTensor",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalClosed.ihomObjIsoTensor'",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect complex sheaves derived dual tensor internal Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomObjIsoTensor|perfect.*[Hh]om|dual.*[Tt]ensor.*[Hh]om",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a locally bounded finite projective complex is tensor product with its dual",
+   "results": "Ext; CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; CategoryTheory.ProjectiveResolution.isoExt; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; LightCondensed.internallyProjective_iff_tensor_condition; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|ihom.*[Tt]ensor|perfect",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"tensor\"",
+   "results": "CategoryTheory.ihom.instIsLeftAdjointTensorLeft; CategoryTheory.ihom.instIsLeftAdjointTensorRightOfClosed",
+   "date": "2026-10-16",
+   "verdict": "no match for the stated local finite-projective hypothesis and the canonical derived evaluation map on sheaf coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite locally free sheaves has internal derived Hom equal to tensoring with its dual",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; CategoryTheory.Sheaf.H; LightCondensed.ihomPoints; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "The hits provide ordinary closed/rigid category structure, not the locally site-perfect derived evaluation theorem with these coefficient stages."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\"",
+   "results": "CategoryTheory.ExactPairing.termε_; CategoryTheory.ExactPairing.termη_; CategoryTheory.ExactPairing; CategoryTheory.exactPairingUnit; CategoryTheory.exactPairingCongrLeft; CategoryTheory.exactPairingCongrRight; CategoryTheory.exactPairingCongr; CategoryTheory.ExactPairing.coevaluation",
+   "date": "2026-10-16",
+   "verdict": "The hits provide ordinary closed/rigid category structure, not the locally site-perfect derived evaluation theorem with these coefficient stages."
+  },
+  {
+   "tool": "grep",
+   "query": "HasLeftDual|ExactPairing|evaluation.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "The hits provide ordinary closed/rigid category structure, not the locally site-perfect derived evaluation theorem with these coefficient stages."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -63,5 +327,109 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-dualizable-biduality"
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-sf-dualizable-hom",
+  "worker": "stage1",
+  "summary": "Expanded the imported contextual statement into its explicit six-functor datum and coefficient notation without changing its mathematical content; replaced the imported one-paragraph sketch by a local bounded-Hom calculation with explicit Koszul sign and canonical-map identification, local-to-global detection, and separate completed integral and rational/common-stage arguments. Reused existing generic nodes throughout: no new nodes. Rejected the near Lean attachment because it assumes dualizability and concludes only existence of an isomorphism. Second reading supplies slice restriction for completed operations, an explicit finite-cover/uniform-power argument for rational local detection, and a separate common-field step.",
+  "blueprint": "Realizes the item proof: local P and K-injective models in steps 1--3, termwise Hom-dual-tensor identification and differential compatibility in steps 4--5, the implicit locality step in step 6, and the coefficient-stage meaning inherited from sk-def-sf-operations in steps 7--10. The unit route (finite free, retract, bounded complex) is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-internal-hom-evaluation",
+    "why": "Ordinary evaluation for a sheaf retract of a finite free module, valid for arbitrary target module sheaves; supplies the termwise calculation in the unit, not a replacement route."
+   },
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Finite-filtration theorem for Hom complexes with exact termwise Hom; justifies the unit's passage from a bounded local model to derived Hom."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Bounded-above flat complexes are K-flat on any ringed site; justifies the local dual tensor representative."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Canonical computation of derived tensor using K-flat flat-term representatives."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of slice restriction, used for local calculation and local cohomology-sheaf detection."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Derived internal Hom commutes with slice restriction and takes triangles to triangles."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Monoidality of derived pullback for ringed topoi, applied to slice restriction."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Identifies finite reductions and scalar extensions of the actual dual/evaluation map, retaining the completed tensor at integral coefficients."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Ensures the cone of the integral comparison is derived complete, so reduction detects its vanishing."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exactness of the derived reduction functor, used on the integral comparison cone."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions for arbitrary complexes on a ringed site."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact termwise countable products in the pro-etale module category justify that the Roos construction commutes with finite mapping cones."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Exact scalar extension preserves the rational finite-filtration argument and the common coefficient field."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-tensor",
+    "why": "Interprets a vanishing localized identity as a power-torsion identity, for rational local detection."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Bounds the cohomology of a derived-complete representative from its uniformly bounded reductions."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Reconstructs a bounded integral cone from its cohomology terms to pass from power-torsion cohomology to a power-torsion identity."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Factors the power of the scalar on a triangle middle term through its first term; supplies the explicit annihilation induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-fix-operation-reduction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-a08b3115c",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a08b3115c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source locations. Verified all ten steps, canonical evaluation signs, completed/rational coefficient arguments, edge cases, duplicate candidates and dependency acyclicity. Accepted all 17 declared tool uses. No new nodes or repairs; detailed checks are in review.md."
+ }
 }
