@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pur-smb-extraordinary",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth base change for the exceptional inverse image",
@@ -16,38 +16,218 @@
   "def-pur-conventions",
   "def-weil-ambient-exceptional-adjoint",
   "cor-sf-ambient-adjoint-discharge",
-  "def-exchange-projection",
   "def-sbc-smooth-morphisms",
   "def-weil-exceptional-inverse-image",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-cbc-exchange-map",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "Choose the etale-origin representative of $K$. The comparison\nof actual adjoints in [thm-sf-ambient-adjoint-class] identifies\nthe two exceptional inverse images with the pro-etale realizations\nof the corresponding ordinary etale ambient right adjoints.\nOn those ordinary derived categories, the canonical map is\n[prop-asd-smooth-base-change], and is an isomorphism for arbitrary\n$v$. Its construction transposes the compact-support base-change\nmap followed by the counit; it uses the explicit projective-line\nadjunction and etale charts, without a chosen smooth orientation.\nBy [thm-cbc-finite-level-proetale], compact-support base change\ntransports to the stated site. The adjunction bijections and counits\ntransport by [thm-sf-ambient-adjoint-class], so the realized map\nis precisely the comparison in the statement, not merely an\nisomorphism between its source and target.\nFinally [thm-weil-pbc-site-comparison] preserves the proved\nisomorphism on these etale-origin objects. This argument makes no\nassertion about arbitrary pro-etale complexes outside that class.",
+   "text": "Work at the finite stage $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, with $n\\geq1$ and $\\ell\\ne p$, as stipulated in the current [def-pur-conventions]. Its finite-coefficient clause makes the constructions here finite-level ones; the integral, rational and algebraically closed versions are separate coefficient transports. Its functor clause specifies separated finite-type $k$-morphisms between finite-type $k$-schemes and refers to [def-weil-exceptional-inverse-image] for the actual functor and adjunction domains. The latter definition has precisely this standing domain, with $k$ the fixed algebraic closure of the finite field. We use those domains, without taking any preservation or invertibility assertion from the conventions definition. Thus all four schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. Choose a compactification $c=(j,p)$ used in that construction for $f$, and use its base change $c'=(j',p')$ for $f'$, as in [def-cbc-compact-support-square]. This definition states that $c'$ is a compactification. The compactification comparisons and their compatibility with the Hom bijections in [thm-sf-ambient-adjoint-class], clause (3), identify these choices with those in the exceptional functors. Their total spaces are finite type over $k$: the proper part is of finite type, and finite generating sets for two successive algebra extensions generate the composite. Their dimensions therefore have finite bounds by [lem-kun-dimension-finite-type], as required by [thm-sf-ambient-adjoint-class]. Clause (1) of [lem-sbc-smooth-relative-dimension-permanence] gives that $f'$ is smooth of pure relative dimension $d$. The class-restricted adjunctions in [cor-sf-ambient-adjoint-discharge] consequently apply to the coefficients here; no unrestricted pro-etale adjoint datum is being used.",
    "uses": [
+    "def-pur-conventions",
+    "def-weil-exceptional-inverse-image",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-sbc-smooth-relative-dimension-permanence",
     "thm-sf-ambient-adjoint-class",
-    "prop-asd-smooth-base-change",
-    "thm-cbc-finite-level-proetale",
-    "thm-weil-pbc-site-comparison"
+    "cor-sf-ambient-adjoint-discharge",
+    "def-cbc-compact-support-square"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Opening sentence: establish the finite-coefficient and bounded-class domains before choosing an etale-origin representative."
+   }
+  },
+  {
+   "text": "Write $C_T=\\nu_T^*$. Since $K$ is bounded constructible, clause (ii) of [lem-sf-proetale-constructible-origin] supplies $G\\in D^b_c(Y_{\\mathrm{et}},A)$ and $\\alpha:C_YG\\xrightarrow{\\sim}K$. Ordinary etale inverse images $v_e^*$ and $u_e^*$ are exact by [prop-weil-pbc-inverse-image-modules-exact], so they preserve every cohomological lower bound; in particular $v_e^*G$ is bounded below. At finite constant coefficients, [def-weil-derived-pullback-tensor-hom] computes pro-etale derived pullback termwise by inverse image. Apply [lem-weil-pbc-comparison-pullback] termwise: it gives $C_{Y'}v_e^*G\\cong Lv^*C_YG\\cong Lv^*K$, naturally in $G$, and gives $Lu^*C_XM\\cong C_{X'}u_e^*M$ for every bounded-below etale complex $M$. These comparisons respect the chosen Cartesian square, as stated in that lemma.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Opening sentence: choose a representative, retaining its isomorphism and its pullbacks."
+   }
+  },
+  {
+   "text": "The natural unit isomorphism $G\\xrightarrow{\\sim}R\\nu_{Y,*}C_YG$ of [thm-weil-pbc-site-comparison], together with $\\alpha$, identifies $R\\nu_{Y,*}K$ with $G$. Put $M=f^\\times G$. The finite formula in [def-weil-exceptional-inverse-image] therefore gives $Rf^!K\\cong C_XM$. Put $M'=f'^\\times v_e^*G$. Applying the same defining finite formula to the representative $v_e^*G$ and its unit $v_e^*G\\xrightarrow{\\sim}R\\nu_{Y',*}C_{Y'}v_e^*G$ gives $Rf'^!Lv^*K\\cong C_{X'}M'$. Clause (2) of [thm-sf-ambient-adjoint-class] says that the transported composite $R_c$ preserves bounded-below objects. Hence $C_XM\\cong R_cK$ is bounded below. To infer the same for $M$, use [lem-sf-comparison-pullback-exact]: $\\mathcal H^i(C_XM)=C_X\\mathcal H^i(M)$. Below a lower bound the left side is zero. For the degree-zero sheaf $H=\\mathcal H^i(M)$, faithfulness of $C_X$ on $D^+$ implies $1_H=0$, since its image is the identity of the zero object. Thus $H=0$, and $M$ is bounded below. For $M'$, clause (2) applied to $Lv^*K\\cong C_{Y'}v_e^*G$ gives a lower bound for $C_{X'}M'$. Exactness gives $\\mathcal H^i(C_{X'}M')=C_{X'}\\mathcal H^i(M')$; in degrees below that bound, faithfulness on the degree-zero sheaf again gives $1_{\\mathcal H^i(M')}=0$. Hence $M'$ is bounded below as well. This verifies the $D^+$ domains rather than attributing preservation by $f^\\times$ itself directly to the statement of the class theorem. Combining these identifications with step 2 gives\n$$Lu^*Rf^!K\\cong C_{X'}u_e^*f^\\times G,\\qquad Rf'^!Lv^*K\\cong C_{X'}f'^\\times v_e^*G.$$",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Comparison of actual adjoints with ordinary etale right adjoints; keep all objects in the bounded-below comparison class."
+   }
+  },
+  {
+   "text": "Apply [prop-asd-smooth-base-change] to the ordinary etale complex $G$ and the given square. Its hypotheses are met: $A$ is finite and killed by a power of $\\ell$ invertible on all the schemes, $f$ is smooth separated of pure relative dimension $d$ and has the compactification used above, and $v$ is a morphism of Noetherian schemes. It supplies the specific isomorphism $\\beta^e:u_e^*f^\\times G\\xrightarrow{\\sim}f'^\\times v_e^*G$, defined as the transpose of $v_e^*\\varepsilon^e_G\\circ(\\operatorname{Ex}_!^e(M))^{-1}$. Denote by $\\gamma$ the conjugate of $C_{X'}\\beta^e$ under the two identifications of step 3. We next identify $\\gamma$ with the canonical comparison in the statement.",
+   "uses": [
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "On ordinary derived categories the canonical map is prop-asd-smooth-base-change; retain its counit-transpose characterization."
+   }
+  },
+  {
+   "text": "Let $F_f^e=Rf_!^{\\mathrm{et}}$ and $F_f^p=Rf_!^{\\mathrm{proet}}$. Denote the natural comparison of [lem-sf-class-compact-support-comparison] by $a_f:F_f^pC_X\\xrightarrow{\\sim}C_YF_f^e$, evaluated on bounded-below etale complexes, and denote the comparison for the base-changed compactification by $a_{f'}:F_{f'}^pC_{X'}\\xrightarrow{\\sim}C_{Y'}F_{f'}^e$. With the identifications of step 3 understood, the pro-etale counit on $K=C_YG$ is\n$$\\varepsilon^p_K=C_Y(\\varepsilon^e_G)\\circ a_f(M).$$\nIndeed the bounded-class Hom bijection of [thm-sf-ambient-adjoint-class] is the etale adjunction transported through the compact-support comparison and the fully faithful $C_T$, as specified in [def-weil-exceptional-inverse-image]. The identity of $C_Xf^\\times G$ corresponds to the identity of $f^\\times G$, whose etale transpose is $\\varepsilon^e_G$; substituting the comparison $a_f$ gives exactly this formula. For $f'$, the identity of $C_{X'}M'$ corresponds to $1_{M'}$ and then to the etale counit $\\varepsilon^{e,f'}_{v_e^*G}$, so $\\varepsilon^{p,f'}_{Lv^*K}=C_{Y'}(\\varepsilon^{e,f'}_{v_e^*G})\\circ a_{f'}(M')$. This is a calculation with the defining adjunction bijections, not an assertion of an adjunction on all pro-etale objects.",
+   "uses": [
+    "lem-sf-class-compact-support-comparison",
+    "thm-sf-ambient-adjoint-class",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "The adjunction bijections and counits transport: write the counit formula by transposing the identity."
+   }
+  },
+  {
+   "text": "Let $t=\\operatorname{Ex}_!^p(C_XM):Lv^*F_f^pC_XM\\xrightarrow{\\sim}F_{f'}^pLu^*C_XM$. The theorem [thm-cbc-finite-level-proetale] says that this is the transported finite compact-support exchange of [def-cbc-exchange-map], and is invertible on the etale-origin bounded-below input $C_XM$. For the proper parts $p,p'$ of the chosen compactifications, [lem-weil-pbc-transport-identifies-exchange] identifies the direct-image unit--square--counit exchange with its etale counterpart. Its quasi-compact and quasi-separated hypotheses hold because these maps are proper. The compactification formula of [def-cbc-exchange-map] composes that exchange with the specified extension-by-zero identification; [thm-cbc-finite-level-proetale] states that this whole composite is transported to the pro-etale exchange. Consequently its comparison with the etale compact-support exchange is, after the pullback identifications of [lem-weil-pbc-comparison-pullback],\n$$a_{f'}(u_e^*M)\\circ t=C_{Y'}(\\operatorname{Ex}_!^e(M))\\circ Lv^*a_f(M).$$\nSubstitute this equation and the counit formula of step 5 into the defining transpose of the exceptional comparison:\n$$F_{f'}^pLu^*Rf^!K\\xrightarrow{t^{-1}}Lv^*F_f^pRf^!K\\xrightarrow{Lv^*\\varepsilon^p_K}Lv^*K.$$\nUnder $a_{f'}$ this composite is exactly $C_{Y'}\\bigl(v_e^*\\varepsilon^e_G\\circ(\\operatorname{Ex}_!^e(M))^{-1}\\bigr)$: explicitly, invert the displayed exchange equation to obtain $Lv^*a_f(M)\\circ t^{-1}=(C_{Y'}\\operatorname{Ex}_!^e(M))^{-1}\\circ a_{f'}(u_e^*M)$, and cancel the adjacent comparison isomorphisms. By [prop-asd-smooth-base-change] the resulting etale arrow is the transpose of $\\beta^e$. Here its source input $Lu^*Rf^!K\\cong C_{X'}u_e^*M$ is bounded below and of etale origin by steps 2-3, and its target $Lv^*K$ is bounded below. The transported adjunction bijection of [thm-sf-ambient-adjoint-class] therefore applies and sends both the canonical comparison and $\\gamma$ to the very same arrow. Injectivity of that bijection proves equality of the two morphisms. The witness $\\alpha$ can be reinserted on both sides by naturality; independence of isomorphic witnesses is part of the cited compact-support and adjunction comparisons.",
+   "uses": [
+    "thm-cbc-finite-level-proetale",
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "prop-asd-smooth-base-change",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Transport of compact-support base change and transposition: prove equality with the specified pro-etale map, not merely an isomorphism of endpoints."
+   }
+  },
+  {
+   "text": "A functor carries an inverse pair of arrows to an inverse pair. Thus $C_{X'}\\beta^e$ is invertible, and so is its conjugate $\\gamma$. Step 6 identifies this conjugate with the canonical comparison, proving the assertion. None of the steps imposes smoothness or properness on $v$; its only restrictions are the standing schemes and coefficient domain. The same computation covers $d=0$, $K=0$, $v$ an identity, and empty source or base, since it uses functors, their natural isomorphisms, and adjunction bijections without choosing a point or a nonempty cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Final sentence: preserve the isomorphism under comparison pullback and conclude for the canonical map."
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-smooth-relative-dimension-permanence",
   "thm-sf-ambient-adjoint-class",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-cbc-compact-support-square",
+  "lem-sf-proetale-constructible-origin",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-comparison-pullback-exact",
   "prop-asd-smooth-base-change",
+  "lem-sf-class-compact-support-comparison",
   "thm-cbc-finite-level-proetale",
-  "thm-weil-pbc-site-comparison"
+  "def-cbc-exchange-map",
+  "lem-weil-pbc-transport-identifies-exchange"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-cohsm/lem-pur-smb-extraordinary.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+  "place": "Whole proof: detailed finite-coefficient comparison, with the canonical-map identity proved by counit transposition; current unit sk-prop-cohsm (G12)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extraordinary|[Uu]pperShriek|[Ss]hriek",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change isomorphism for exceptional inverse image on derived categories of etale sheaves",
+   "results": "Algebra.Smooth.baseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; Algebra.IsStandardSmooth.baseChange; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; RingHom.isStandardSmooth_isStableUnderBaseChange; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; RingHom.Smooth.isStableUnderBaseChange; RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+   "results": "AlgebraicGeometry.Scheme.Hom.opensFunctorAdjunction; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.Scheme.kerAdjunction; AlgebraicGeometry.algΓAlgSpecAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of schemes with finite torsion coefficients invertible on the base, extraordinary inverse image commutes with arbitrary base change",
+   "results": "AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley comparison for exceptional pullback of a cohomologically smooth morphism is invertible on derived etale sheaves",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|six.functor|dualizingComplex|smoothBaseChange",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern smooth-morphism permanence, ordinary sheaf pullback, or unrelated adjunctions; none states the exceptional inverse-image canonical base-change theorem on the specified sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley mate of compactly supported direct image and its right adjoint is an isomorphism for smooth maps of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary module pullback/restriction adjunctions do not state the exceptional derived comparison; AlgebraicGeometry grep has no hit."
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|lowerShriek|exceptionalInverse|dualizing",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "No match: ordinary module pullback/restriction adjunctions do not state the exceptional derived comparison; AlgebraicGeometry grep has no hit."
+  },
+  {
+   "tool": "grep",
+   "query": "purity conventions|exceptional inverse image|Tate twist",
+   "results": "Zero hits under Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category bounds and finite cofiltered-system results do not state exceptional inverse-image base change; the Loogle pattern has an unknown identifier and supplies no matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "PurityFiniteSetting, exceptional inverse image, Tate twist",
+   "results": "Zero hits; loogle: unknown identifier 'PurityFiniteSetting'.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category bounds and finite cofiltered-system results do not state exceptional inverse-image base change; the Loogle pattern has an unknown identifier and supplies no matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "purity conventions finite coefficient stage derived exceptional inverse image",
+   "results": "CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.Functor.toEventualRanges_finite; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic derived-category bounds and finite cofiltered-system results do not state exceptional inverse-image base change; the Loogle pattern has an unknown identifier and supplies no matching declaration."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -87,5 +267,119 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-cohsm"
+ "unit": "sk-prop-cohsm",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-smb-extraordinary",
+  "worker": "stage1",
+  "summary": "Kept the statement and its finite-level meaning under the purity conventions. Expanded the imported paragraph into seven steps: verified geometric and comparison domains, chose an etale-origin witness, identified both exceptional functors, applied the existing etale theorem, computed the transported counits, and proved the exchange-transpose identity identifying the canonical morphism. Reused all necessary existing facts; created no nodes. Replaced the unnecessary separated-base-map exchange-definition dependency with the arbitrary-base-map compact-support definition. Repair of landing refusal: re-read the changed current def-pur-conventions, made its finite-level functor domains explicit in step 1, and replaced the stale convention quotation with its current verbatim statement. Checked all 26 citation pairs against the current DAG; clarified that the direct-image transport lemma in step 6 is applied to the proper parts of the compactifications.",
+  "blueprint": "The full current node proof is realized in order: opening etale-origin and adjoint comparison (steps 1-3), ordinary etale isomorphism (4), compact-support/counit/adjunction transport (5-6), and preservation of the isomorphism (7). This is current unit sk-prop-cohsm (G12), corresponding to Step 5/(c) of the recorded historical unit; no orientation or later smooth-purity theorem is used.",
+  "tool_uses": [
+   {
+    "node": "def-pur-conventions",
+    "why": "Fixes the finite coefficient stage and the meaning of the purity notation; this is the standing convention used by the unit."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Defines the precise finite constructible exceptional functor and its transported adjunction, without an ambient pro-etale adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes each standing finite-type field-base scheme Noetherian, as required by the ordinary etale base-change input; this geometric fact is not supplied by the unit."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies the finite dimension bound on a compactification required by the bounded-class adjunction; the unit does not supply a dimension theorem."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Ensures the base-changed vertical map is smooth of the same relative dimension for arbitrary horizontal v; this is a geometric permanence tool."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Provides the actual bounded-class adjunction and lower bounds used to transport the counit and transpose."
+   },
+   {
+    "node": "cor-sf-ambient-adjoint-discharge",
+    "why": "Makes the bounded-class interpretation of exceptional adjunction explicit, as required by the item."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies the bounded ordinary etale representative of K needed by the blueprint comparison route; the unit does not state this site equivalence."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Gives exact ordinary etale pullback for arbitrary scheme morphisms, retaining lower bounds on the comparison inputs."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Identifies finite pro-etale derived pullback with termwise inverse image, so the sheaf comparison applies to the actual pullback functor."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Identifies the etale and pro-etale pullbacks naturally and coherently for the given Cartesian square."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Gives the unit isomorphism and full faithfulness on D+, used to identify representatives and reflect the lower-bound vanishing of sheaves."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Gives exactness and the cohomology comparison for all complexes, needed to reflect lower bounds before invoking D+ full faithfulness."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "The current blueprint proof explicitly takes the ordinary etale canonical base-change theorem as its input; this item realizes its bounded-class pro-etale form."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Identifies compact support on the two sites on bounded-below etale-origin objects, needed for the explicit counit formula."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "The unit cites compact-support base change; this is its finite pro-etale form including the transported exchange map."
+   },
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "Specifies the compactification exchange that is transported in the finite pro-etale base-change theorem; it allows arbitrary horizontal v."
+   },
+   {
+    "node": "def-cbc-compact-support-square",
+    "why": "Specifies the base-changed compactification used simultaneously for compact support, its exchange, and the transported adjoints."
+   },
+   {
+    "node": "lem-weil-pbc-transport-identifies-exchange",
+    "why": "Identifies the specified etale and pro-etale direct-image exchanges for the proper parts of the compactifications used in step 6; combined with the cited transported compact-support formula it checks the canonical map, and the unit has no separate such comparison statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "thm-sf-ambient-adjoint-class",
+  "cor-sf-ambient-adjoint-discharge",
+  "lem-sf-proetale-constructible-origin",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "prop-asd-smooth-base-change",
+  "lem-sf-class-compact-support-comparison",
+  "thm-cbc-finite-level-proetale",
+  "def-cbc-exchange-map",
+  "def-cbc-compact-support-square",
+  "lem-weil-pbc-transport-identifies-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-435aeba21",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-435aeba21 (reviewer sub-agent of L); spot-checked: I read the item, the current main-20261015 blueprint statement, proof and unit (sk-prop-cohsm, G12), and the statements of all 10 statement dependencies and all 19 proof dependencies. I also read the proof of thm-cbc-finite-level-proetale to pin down what 'transported exchange' means. The statement is unchanged from the current blueprint. It is at the finite stage A=O_E/ϖ^n with f separated, finite type, smooth of pure dimension d, v arbitrary and K in D^b_ctf. It agrees with G12, nothing is weakened, and no coefficient category is identified with another. It is true on d=0, v=id, K=0 and empty X or Y'. Step 1: the Noetherian and finite-dimension checks are valid (proper X̄ is finite type over k), the base-changed compactification comes from def-cbc-compact-support-square, and f' is smooth of dimension d by clause (1) of the permanence lemma. Step 2: the étale-origin representative comes from clause (ii) of lem-sf-proetale-constructible-origin, inverse image is exact, and the pullback comparison is applied termwise. Step 3: Rf^!K is C_X f^×G by the defining finite formula and the site-comparison unit. The lower bound on M is correctly reflected through exactness and full faithfulness on D^+ applied to degree-0 sheaves. Step 4: every hypothesis of prop-asd-smooth-base-change is verified, and it gives the specific transpose β^e. Step 5: I recomputed the counit formula ε^p_K = C_Y(ε^e_G)∘a_f(M) from the transported adjunction stated in def-weil-exceptional-inverse-image. Step 6: both sides of the exchange equation have the same type, and it is the transport stated by thm-cbc-finite-level-proetale. Its proof defines that exchange as T∘A(E)∘S^{-1}, and the proper part is identified by lem-weil-pbc-transport-identifies-exchange (p and p' are proper, hence qcqs). I recomputed the transpose: it equals the image of β^e, so injectivity of the bijection identifies the canonical map with γ. Step 7 is elementary. There are no new nodes, proof_deps equals the union of step uses, every cited id exists and is unmerged, and there is no cycle. Off-unit statements are all declared in tool_uses and accepted as generic comparison and geometry tools. The entries for definitions and the Mathlib leaf are unnecessary but harmless. No SGA source is used. No fixes were written."
+ }
 }
