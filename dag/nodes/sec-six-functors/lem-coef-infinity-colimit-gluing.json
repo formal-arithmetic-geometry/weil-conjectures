@@ -241,5 +241,37 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-93d9a111d (reviewer sub-agent of L); spot-checked: Read both nodes and all six proof steps in full; checked HTT 4.4.2.2–3, exact Kerodon foundations, cited statements, route, duplicates, edge cases and archived target declarations. Mathematics accepted. Corrected the new node’s incomplete created record and missing initial lean_audit in fixes/. Detailed checks and accepted cone-calculus tool use are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9ced7af25",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement, dependencies, source, edge cases, docstrings, helpers, and compiler evidence checked; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityColimitGluing",
+  "declaration": "SSet.Enhanced.infinity_colimit_gluing",
+  "declarations": [
+   "SSet.Enhanced.gluingCoconeApex",
+   "SSet.Enhanced.gluingCoconeRestrict",
+   "SSet.Enhanced.gluingCoconeRestrictD",
+   "SSet.Enhanced.gluingSpanIndex",
+   "SSet.Enhanced.gluingSpanVertex",
+   "SSet.Enhanced.gluingCoconeArrow",
+   "SSet.Enhanced.gluingComparisonSpace",
+   "SSet.Enhanced.GluingSpan",
+   "SSet.Enhanced.GluingSpan.apexDiagram",
+   "SSet.Enhanced.GluingInducedCocone",
+   "SSet.Enhanced.infinity_colimit_gluing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityColimitGluing.lean",
+  "statement": "theorem infinity_colimit_gluing {A B D K C : SSet.{u}} [Quasicategory C] (j : A ⟶ B) (i : A ⟶ D) (b : B ⟶ K) (d : D ⟶ K) (hpush : IsPushout j i b d) (hmono : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) (p : K ⟶ C) (cA : (coconeCategory (j ≫ b ≫ p)) _⦋0⦌) (cB : (coconeCategory (b ≫ p)) _⦋0⦌) (cD : (coconeCategory (d ≫ p)) _⦋0⦌) (hA : IsColimiting (j ≫ b ≫ p) cA) (hB : IsColimiting (b ≫ p) cB) (hD : IsColimiting (d ≫ p) cD) : IsContractible (gluingComparisonSpace j i b d hpush.w p cA cB cD) ∧ Nonempty (GluingSpan j i b d hpush.w p cA cB cD) ∧ ∀ (s : GluingSpan j i b d hpush.w p cA cB cD) (μ : (coconeCategory s.apexDiagram) _⦋0⦌), IsColimiting s.apexDiagram μ → ∃ c : (coconeCategory p) _⦋0⦌, IsColimiting p c ∧ c.1.1 = μ.1.1 ∧ Nonempty (GluingInducedCocone s μ c)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The theorem uses the recorded enhanced cocone and colimit definitions. Helpers construct the canonical restrictions and explicitly retain the coherent span and induced-cocone compatibility data. No dependency is restated and no statement is changed."
  }
 }
