@@ -7,8 +7,8 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.PopescuLiftChartPartialFlat
-import Sheaf.RingTheory.PopescuLiftChartMapsFlat
+import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
+import Sheaf.RingTheory.PopescuLiftChartComparison
 
 /-! # Flat local maps on the prepared Popescu charts
 
@@ -101,24 +101,6 @@ theorem popescu_lift_chart_flat (R : Type a) (Cbar : Type c)
     let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q
     (Localization.localRingHom (PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD).asIdeal
       qD.asIdeal (algebraMap R d.liftingAlgebra) rfl).Flat := by
-  let J := Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)
-  let qD := PrimeSpectrum.comap (Ideal.Quotient.mk J) q
-  have hpi : algebraMap R d.liftingAlgebra π ∈ qD.asIdeal := by
-    change Ideal.Quotient.mk J (algebraMap R d.liftingAlgebra π) ∈ q.asIdeal
-    rw [Ideal.Quotient.eq_zero_iff_mem.mpr
-      (Ideal.subset_span (Set.mem_singleton _))]
-    exact q.asIdeal.zero_mem
-  have hk' : ULift.up (Ideal.Quotient.mk d.definingIdeal
-      (d.includeX (d.a k))) ∉ qD.asIdeal := by
-    intro h
-    apply hk
-    change Ideal.Quotient.mk J
-      (ULift.up (Ideal.Quotient.mk d.definingIdeal (d.includeX (d.a k)))) ∈ q.asIdeal at h
-    rw [← polynomial_value π d c hc (d.a k)] at h
-    exact h
-  have hp := PopescuLiftPresentation.partial_chart_flat_repair π d hd k qD hpi hk'
-  have hm := PopescuLiftPresentation.chart_maps_flat_of_partial
-    π d hd hAnnR qD k hk' hp
-  simpa [qD, J] using hm
+  sorry
 
 end Algebra

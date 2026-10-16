@@ -15649,8 +15649,9 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.FormalComparisonFlatTransportSquare (stage 3; reviewer PASS; first push; landing 20261016T221622-L-1618176 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/Q4/Sheaf.AlgebraicGeometry.AffineQCohTorAmplitudeDetection (stage 3; reviewer PASS; first push; landing 20261016T221622-L-1618279 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/R3/Sheaf.Paper.FiniteDiscreteCoefficientSections (stage 3; reviewer PASS; first push; landing 20261016T221623-L-1618381 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/R4/Sheaf.RingTheory.PopescuLiftChartFlat (stage 3; reviewer PASS; first push; landing 20261016T221623-L-1618484 (interface); batch 20261016T221550; modules 3; new nodes 2)
 - 22:16 L: merged deliver/S2/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility (stage 3; reviewer PASS; first push; landing 20261016T221624-L-1618633 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/S3/Sheaf.CategoryTheory.CoproductTruncationCouple (stage 3; reviewer PASS; first push; landing 20261016T221624-L-1618750 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/S4/Sheaf.AlgebraicGeometry.CoherentKernelIdealProductCompletionZero (stage 3; reviewer PASS; first push; landing 20261016T221625-L-1618851 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/T2/Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent (stage 3; reviewer PASS; first push; landing 20261016T221625-L-1618966 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/T2-directImage-bounded-coherent-support-import.md)
+
+- 06:41 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
