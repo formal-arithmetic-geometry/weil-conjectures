@@ -2,7 +2,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageMap
-import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
+import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeCounitFactor
+import Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
@@ -23,6 +24,15 @@ namespace AlgebraicGeometry
 attribute [local irreducible] derivedPullback perfectHomComposition
 attribute [local instance] Functor.additive_of_preserves_binary_products
 attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+private theorem combineComponents {𝒟 : Type*} [Category 𝒟]
+    {R P Q G H : 𝒟} (stage : R ⟶ G) (eta : R ⟶ Q) (t : P ≅ Q)
+    (d : P ⟶ G) (chi : G ⟶ H) (w : Q ⟶ H)
+    (hf : stage = eta ≫ t.inv ≫ d) (hp : d ≫ chi = t.hom ≫ w) :
+    stage ≫ chi = eta ≫ w := by
+  rw [hf]
+  simp only [Category.assoc]
+  rw [hp, Iso.inv_hom_id_assoc]
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
@@ -127,6 +137,19 @@ theorem perfectOverlapProjectionCompositionComponent
         χ'.hom.app
           (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B
           else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) =
-      η'.hom.app (F a) ≫ (derivedPullback m).map (σ' a).hom := by sorry
+      η'.hom.app (F a) ≫ (derivedPullback m).map (σ' a).hom := by
+  intro W s r m eY eK hmap data F apex η σ σ' η' χ' hσ hη hχ a
+  have hfactor := perfectOverlapCompositeCounitFactor f gk g hgf pX pK pY b q
+    hg hf l U V A B E φU φV hmap a
+  have hprojection := perfectOverlapTailProjectionComponent f gk g hgf pX pK pY b q
+    hg hf l U V A B E φU φV hmap a
+  dsimp only [η, r, m, s, W] at hη
+  dsimp only [σ, s, W] at hσ
+  dsimp only [s, W] at hχ
+  erw [← hη] at hfactor
+  erw [← hσ, ← hχ] at hprojection
+  exact combineComponents _ _
+    ((perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).app (F a))
+    _ _ _ hfactor hprojection
 
 end AlgebraicGeometry

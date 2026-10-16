@@ -1,0 +1,123 @@
+{
+ "id": "def-pc-perfect-overlap-stage-transport",
+ "kind": "definition",
+ "title": "Derived transport with cartesian stage interfaces",
+ "statement": "For the two cartesian squares and a compatible map r of their source overlaps and m of their cartesian pullbacks, construct the fixed derived transport as a natural isomorphism from derived pullback along r followed by the g-stage functor to the f-stage functor followed by derived pullback along m. The forward stage functors are exactly pullback along the inverse cartesian isomorphisms, so the data are the existing constructed derived transport with those two endpoint functors rewritten by their proved equations.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Restriction compatibility; fixed derived-pullback composition in Tag 0D5S."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-overlap-core-comparisons-api",
+  "def-pc-perfect-overlap-stage-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite each forward cartesian stage functor by perfectOverlapStageEquivalence_functor_eq. The desired type is then exactly the type of perfectOverlapDerivedPullbackTransport for r, the two cartesian isomorphisms, m and the supplied commuting equation. Use that explicit isomorphism. No new existence witness or unproved data is used.",
+   "uses": [
+    "def-pc-perfect-overlap-core-comparisons-api",
+    "def-pc-perfect-overlap-stage-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-overlap-core-comparisons-api",
+  "def-pc-perfect-overlap-stage-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "D4",
+  "date": "2026-10-16",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Steps of the parent component proof; composition in Tag 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of pullback composition with a commuting square and restrictions to nested open subschemes",
+   "results": "Restriction coherence lemmas, including pullbackRestrictIsoRestrict component formulas; no direct fixed derived-comparison equation.",
+   "date": "2026-10-16",
+   "verdict": "Use the project fixed-comparison API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality and whiskering API; no exact project stage-map formula.",
+   "date": "2026-10-16",
+   "verdict": "Naturality supplies the elementary rearrangements."
+  },
+  {
+   "tool": "grep",
+   "query": "mapIso_trans|inv_hom_id_app_assoc|compositionTo_prism",
+   "results": "Functor-map composition and inverse cancellation APIs; the project has the required compositionTo_prism and projection prism.",
+   "date": "2026-10-16",
+   "verdict": "Reuse those project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and composition of natural isomorphisms of functors, and cancellation of inverse components",
+   "results": "Eight hits, including CategoryTheory.NatIso.naturality_1, naturality_2', cancel_natIso_hom_right_assoc, and cancel_natIso_inv_right. These give elementary rearrangements, not the project-specific restricted pullback comparison.",
+   "date": "2026-10-16",
+   "verdict": "Use these elementary coherence laws with the existing project constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent",
+  "date": "2026-10-16",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: the component equation relating prescribed overlap transport to the cartesian base-change comparison, within the core realization construction.",
+   "via": [
+    "lem-pc-perfect-overlap-projection-composition-component",
+    "lem-pc-perfect-overlap-composite-object-pin",
+    "lem-pc-perfect-overlap-object-realization-core-of-data",
+    "lem-pc-perfect-overlap-object-realization-core-data",
+    "lem-pc-perfect-overlap-object-realization",
+    "lem-pc-perfect-overlap-hom-presentation",
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapStageTransport.lean",
+  "declaration": "AlgebraicGeometry.perfectOverlapStageTransport",
+  "statement": "def perfectOverlapStageTransport {X Y K C T S : Scheme.{u}} (g : X ⟶ Y) (f : K ⟶ Y) (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S) (b : C ⟶ S) (q : T ⟶ S) (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q) (U V : Y.Opens) (r : (g ⁻¹ᵁ (U ⊓ V)).toScheme ⟶ (f ⁻¹ᵁ (U ⊓ V)).toScheme) (m : pullback ((U ⊓ V).ι ≫ pY) b ⟶ pullback ((U ⊓ V).ι ≫ pY) q) (hmap : ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert hg).isoPullback.inv ≫ r = m ≫ ((isPullback_morphismRestrict f (U ⊓ V)).paste_vert hf).isoPullback.inv) : derivedPullback r ⋙ (perfectOverlapStageEquivalence g pX pY b hg U V).functor ≅ (perfectOverlapStageEquivalence f pK pY q hf U V).functor ⋙ derivedPullback m",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T043121-L-2930776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

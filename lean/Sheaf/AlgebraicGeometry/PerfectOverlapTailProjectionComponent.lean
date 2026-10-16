@@ -1,0 +1,115 @@
+/- Copyright (c) 2026 The SHEAF contributors. -/
+module
+
+public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageTail
+public import Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
+import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
+import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
+
+/-! # A component of composite overlap compatibility
+Source: Stacks Project, Tags 08DW and 0D5S.
+-/
+
+@[expose] public section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option synthInstance.maxSize 2048
+universe u w
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry
+attribute [local irreducible] derivedPullback perfectHomComposition
+attribute [local instance] Functor.additive_of_preserves_binary_products
+attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverModuleAbelian
+variable [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
+  HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
+
+/-- Projection compatibility for the tail, before insertion of the site counit.
+Source: Stacks Project, Tags 08DW and 0D5S, composition comparisons in Tag 09RE.
+
+Proof: First rewrite the endpoint stage functors by their proved equations,
+so the stage transport is the fixed derived transport. Fix either Boolean branch,
+with its open L and local object M. Expand
+only the constructed tail and factor the g-stage object comparison using
+`perfectOverlapStageObjectIso_hom_factor`. Expand the nested pullback square.
+Naturality of the inclusion-pullback isomorphism moves the local composition
+through the first inclusion, cancelling the adjacent inverse-forward pair.
+Put jX and jK for the nested open inclusions, rL for the restricted gk, and
+fL and gL for the restrictions to L. Cancellation of L's open immersion gives
+r followed by jK equal to jX followed by rL, and restricted composition gives
+rL followed by fL equal to gL. Apply `compositionTo_prism` to these arrows.
+Its three reflexive named composites reduce to the fixed composition family,
+and the remaining local named composite is kappa by
+`perfectOverlapCompositeLocalIso_eq_compositionTo`. Apply the cartesian
+projection prism `perfectOverlapProjectionCompositeAbstract` to the resulting
+composite, using `perfectOverlapStageSchemeIso_inv_projection` for its two
+projection equations. Finally use naturality of the derived transport for
+the K-inclusion comparison and for the composition of jK with fL. Expanding
+the f-stage object comparison and associating the factors identifies the
+right side with transport followed by pullback of sigma. This argument uses
+only isomorphisms, so includes empty or equal opens and unbounded M.
+(blueprint: lem-pc-perfect-overlap-tail-projection-component). -/
+theorem perfectOverlapTailProjectionComponent
+    {X Y K C T S : Scheme.{u}}
+    (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)
+    (pX : X ⟶ C) (pK : K ⟶ T) (pY : Y ⟶ S)
+    (b : C ⟶ S) (q : T ⟶ S)
+    (hg : IsPullback g pX pY b) (hf : IsPullback f pK pY q)
+    (l : Over.mk b ⟶ Over.mk q)
+    (U V : Y.Opens)
+    (A : schemeDerivedCategory U.toScheme) (B : schemeDerivedCategory V.toScheme)
+    (E : schemeDerivedCategory X)
+    (φU : (derivedPullback (g ∣_ U)).obj A ≅
+      (schemeOpenRestriction X (g ⁻¹ᵁ U)).mapDerivedCategory.obj E)
+    (φV : (derivedPullback (g ∣_ V)).obj B ≅
+      (schemeOpenRestriction X (g ⁻¹ᵁ V)).mapDerivedCategory.obj E) :
+  let W := U ⊓ V
+  let s := W.ι ≫ pY
+  let r := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W)
+    (by rw [← Scheme.Hom.comp_preimage, hgf])
+  let m := baseChangeMap s l
+  let eY := ((isPullback_morphismRestrict g W).paste_vert hg).isoPullback
+  let eK := ((isPullback_morphismRestrict f W).paste_vert hf).isoPullback
+  ∀ hmap : eY.inv ≫ r = m ≫ eK.inv,
+  let data := transportDataOfComposite f gk g hgf U V A B E φU φV
+  let F : Bool → schemeDerivedCategory (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V).toScheme := fun a ↦
+    if a then
+      (schemeOpenOverlapRestriction K
+        (homOfLE (inf_le_right : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ V))).mapDerivedCategory.obj
+        ((derivedPullback (f ∣_ V)).obj B)
+    else
+      (schemeOpenOverlapRestriction K
+        (homOfLE (inf_le_left : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ U))).mapDerivedCategory.obj
+        ((derivedPullback (f ∣_ U)).obj A)
+  let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+  let η := perfectOverlapNaturalComparisonOfSquare g f pX pK pY b q hg hf U V r m hmap
+  let σ : ∀ a : Bool,
+      (perfectOverlapStageEquivalence f pK pY q hf U V).functor.obj (F a) ≅
+        (derivedPullback (pullback.fst s q)).obj
+          (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B
+          else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) := fun a ↦
+    Bool.casesOn a
+      ((perfectOverlapStageObjectIso f pK pY q hf U V U inf_le_left).app A)
+      ((perfectOverlapStageObjectIso f pK pY q hf U V V inf_le_right).app B)
+  let D : ∀ a : Bool,
+      (perfectOverlapStageEquivalence g pX pY b hg U V).functor.obj
+          ((derivedPullback r).obj (F a)) ⟶
+        (derivedPullback (pullback.fst s b)).obj
+          (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B
+          else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) := fun a ↦
+    Bool.casesOn a
+      (perfectOverlapCompositeStageTailAt f gk g hgf pX pY b hg U V U inf_le_left A)
+      (perfectOverlapCompositeStageTailAt f gk g hgf pX pY b hg U V V inf_le_right B)
+  ∀ a : Bool,
+    D a ≫ (perfectHomComparison s l).hom.app
+        (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B
+        else (derivedPullback (Y.homOfLE (inf_le_left : W ≤ U))).obj A) =
+      (perfectOverlapStageTransport g f pX pK pY b q hg hf U V r m hmap).hom.app (F a) ≫
+        (derivedPullback m).map (σ a).hom
+    := by sorry
+
+end AlgebraicGeometry
