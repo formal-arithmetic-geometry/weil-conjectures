@@ -27,60 +27,222 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=F\\cap W$. Two-out-of-three makes $W$ closed under composition, so $T$ contains all isomorphisms and is closed under composition and arbitrary base change. Products exist because they are pullbacks of maps to $1$; their projections lie in $F$. For any $f:X\\to Y$, factor its graph $(1_X,f):X\\to X\\times Y$ as $X\\xrightarrow{s}Z\\xrightarrow{r}X\\times Y$, with $s\\in W$, $r\\in F$. Set $p=\\operatorname{pr}_Xr$ and $q=\\operatorname{pr}_Yr$. Then $ps=1_X$, $qs=f$, and $p,q\\in F$. Since $s\\in W$ and $ps=1_X$, also $p\\in W$, hence $p\\in T$. If $f\\in W$, then $q\\in T$ as well. This is the required split factorization of weak equivalences, proved directly without a functorial choice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.13, graph-factorization proof; Definition 7.2.20."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-trivial-fibration-fraction-model] to $(\\mathcal C,W,T)$: Step 1 verifies its split-factorization hypothesis, and the remaining denominator hypotheses are precisely composition and pullback stability of $F\\cap W$. It supplies an essentially surjective $q:N\\mathcal C\\to\\mathcal L$ inverting $W$, its full coherent functor-category universal property, and the model $NR_T(x,y)$ for every localized mapping space. Thus localization existence is a cited non-elementary input. We shall use this same fraction-model theorem again in a fibrant slice, rather than assuming any preservation of limits by $q$.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 7.1.2, Proposition 7.1.3; Theorem 7.2.8, formula (7.2.10.3), Corollary 7.2.18."
+   }
+  },
+  {
+   "text": "For each object $B$, let $\\mathcal C_F/B$ be the full subcategory of the ordinary slice on arrows $E\\to B$ in $F$, with weak equivalences and fibrations detected on their underlying arrows in $\\mathcal C$. Its terminal object is $1_B$; every map to it is a fibration. Pullbacks along fibrations and trivial fibrations are inherited from $\\mathcal C$. For a map $E\\to E'$ over $B$, factor its underlying map as $E\\xrightarrow{w}H\\xrightarrow{p}E'$; give $H$ the structure map $H\\xrightarrow{p}E'\\to B$. This map is in $F$, so this is a factorization in $\\mathcal C_F/B$. Hence this category satisfies exactly the same Brown hypotheses and the graph construction of Step 1 applies inside it. No slice object lacking a fibrant structure map has been admitted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.15, fibrant slice category in its proof."
+   }
+  },
+  {
+   "text": "For any $v:B'\\to B$, pullback defines a functor $v^*:\\mathcal C_F/B\\to\\mathcal C_F/B'$ and carries underlying trivial fibrations to trivial fibrations. Given a weak equivalence $a$ in the source slice, its graph factorization there is $a=q s$ with $p s=1$ and $p,q$ underlying trivial fibrations. Thus $v^*(p)$ and $v^*(q)$ belong to $W$, and $v^*(p)v^*(s)=1$ implies $v^*(s)\\in W$ by two-out-of-three. It follows that $v^*(a)\\in W$. This proves base-change invariance of weak equivalences between fibrations over a fixed base, using only Step 3 and the written graph argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.15, via Proposition 7.4.13 and Corollary 7.4.14."
+   }
+  },
+  {
+   "text": "First prove right properness for a section $j:B'\\to B$ of a trivial fibration $t:B\\to B'$. Let $p:E\\to B$ be in $F$, and form $E_0=B\\times_{B'}E$ using $t$ and $tp$. Its projection $t_0:E_0\\to E$ is a trivial fibration, and $r_0:E_0\\to B$ is a fibration. The map $i:E\\to E_0$ with coordinates $(p,1_E)$ satisfies $t_0i=1_E$, so $i\\in W$. It is a map from $(E,p)$ to $(E_0,r_0)$ in $\\mathcal C_F/B$. Step 4 applied along $j$ makes $j^*i$ a weak equivalence. Since $tj=1_{B'}$, $j^*E_0$ identifies canonically with $E$, and under that identification $j^*i$ is precisely the projection $B'\\times_BE\\to E$. Hence that projection is in $W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.16, section-of-trivial-fibration case, with both pullbacks constructed."
+   }
+  },
+  {
+   "text": "Now let $v:B'\\to B$ be any map in $W$. Step 1 gives $v=q s$ with $q:Z\\to B$ and $t:Z\\to B'$ in $T$, and $ts=1_{B'}$. For $p:E\\to B$ in $F$, put $E_Z=Z\\times_BE$. The map $E_Z\\to E$ is in $T$ by base change of $q$. Step 5, with the section $s$ of $t$, says $B'\\times_Z E_Z\\to E_Z$ lies in $W$. Its composite with $E_Z\\to E$ is the projection $B'\\times_BE\\to E$ after the canonical iterated-pullback identification. Closure of $W$ under composition proves right properness for arbitrary weak equivalences and $F$-legs. This is a property in the ordinary category, not the desired infinity-localization conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.4.16, reduction by Brown split factorization."
+   }
+  },
+  {
+   "text": "Fix $x$ and abbreviate $R_x(y)=R_T(x,y)$, with objects $(t:u\\to x,f:u\\to y)$ and arrows the commuting maps of spans specified in [lem-coef-trivial-fibration-fraction-model]. Write $\\mathcal T_x$ for the full subcategory of $\\mathcal C/x$ on $t\\in T$. Sending a span to $t$ identifies $R_x(1)$ with $\\mathcal T_x$, since its right leg is unique. This category has terminal object $1_x$: the unique map from $t:u\\to x$ to $1_x$ is $t$ itself. The natural transformation from its identity functor to the constant functor at $1_x$ contracts its nerve, by [lem-coef-nerve-natural-homotopy-equivalence]. The fraction model therefore makes $\\operatorname{Map}_{\\mathcal L}(qx,q1)$ contractible. Essential surjectivity of $q$ and invariance of mapping spaces under equivalence give this for every object of $\\mathcal L$, so $q1$ is terminal.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model",
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.6, terminal object; direct contraction of the denominator nerve."
+   }
+  },
+  {
+   "text": "Let $P=A\\times_C B$, with $p:A\\to C$ in $F$, and write $b:B\\to C$ for the other leg. Postcomposition gives functors $U:R_x(A)\\to R_x(C)$ and $V:R_x(B)\\to R_x(C)$. There is a canonical isomorphism $R_x(P)\\cong R_x(A)\\times_{R_x(C)}R_x(B)$: a pair of spans with equal images has the same $(u,t)$ and compatible maps $u\\to A,B$, hence a unique map $u\\to P$; a morphism of pairs is a common arrow $h:u\\to u'$, commuting with $t,t'$ and with both maps to $A$ and $B$. The induced maps $k:u\\to P$ and $k':u'\\to P$ satisfy $k'h=k$ because both projections agree; conversely such a morphism of spans into $P$ gives precisely that pair. These assignments preserve identities and composition because their underlying arrow is $h$. Moreover $V$ is a discrete fibration. For an arrow $h:(u_0,t_0,c_0)\\to(u_1,t_1,c_1)$ in $R_x(C)$ and an object $(u_1,t_1,b_1)$ over its target, its unique lift has source $(u_0,t_0,b_1h)$ and underlying map $h$, because $b b_1h=c_1h=c_0$. These constructions use just spans, postcomposition and the displayed ordinary pullback.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.2.25, square (7.2.25.4), made explicit for ordinary span categories."
+   }
+  },
+  {
+   "text": "For $a=(t:u\\to x,c:u\\to C)$ in $R_x(C)$, form $u_A=u\\times_C A$. Its projection $p_a:u_A\\to u$ is in $F$, so $tp_a:u_A\\to x$ is an object of $\\mathcal C_F/x$. An object of $(U\\downarrow a)$ is exactly a span $(s:v\\to x,f:v\\to A)$ with $s\\in T$, together with $h:v\\to u$ satisfying $th=s$ and $ch=pf$. The pair $(h,f)$ is a unique map $v\\to u_A$ over $x$. This gives an isomorphism from $(U\\downarrow a)$ to the fraction category from the terminal object $1_x$ to $(u_A,tp_a)$ inside $\\mathcal C_F/x$; a comma morphism from $(v,s,f,h)$ to $(v',s',f',h')$ is an arrow $k:v\\to v'$ with $s'k=s$, $f'k=f$ and $h'k=h$. These last two equations are exactly that the induced maps $v\\to u_A$ and $v'\\to u_A$ commute with $k$, by the two pullback projections. This is precisely a morphism of the slice fraction categories, and the assignments are inverse and preserve composition. Step 3 verifies the Brown hypotheses there, so Step 1 in that slice verifies the hypotheses of [lem-coef-trivial-fibration-fraction-model]. Its nerve thus models the mapping space from $1_x$ to $(u_A,tp_a)$ in the slice's localization.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.2.25, proof after (7.2.25.7), interpreting comma categories by fractions in the fibrant slice."
+   }
+  },
+  {
+   "text": "If $a_0\\to a_1$ is an arrow of $R_x(C)$ with underlying $h:u_0\\to u_1$, then $t_1h=t_0$ and $t_0,t_1\\in T$ imply $h\\in W$. The induced $h_A:u_{0,A}\\to u_{1,A}$ is its pullback along the fibration $u_{1,A}\\to u_1$. Step 6 gives $h_A\\in W$. It is a map of objects in $\\mathcal C_F/x$ and is inverted by that slice's localization. Postcomposing with an equivalence is an equivalence of mapping spaces (compose with an inverse and its two inverse homotopies). The naturality clause of [lem-coef-trivial-fibration-fraction-model] and the explicit identification in Step 9 therefore show that $N(U\\downarrow a_0)\\to N(U\\downarrow a_1)$ is a weak homotopy equivalence. These are exactly the comma-category transition maps, with their orientation checked.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.2.25, final paragraph: weak equivalence of the two pulled-back objects in the fibrant slice."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-quillen-b-discrete-fibration-base-change] to $U,V$ of Step 8. Step 10 proves its comma-category hypothesis and Step 8 proves the discrete-fibration hypothesis. Consequently the strict square of fraction-category nerves with upper left corner $NR_x(P)$ is homotopy Cartesian. The natural mapping-space comparisons of [lem-coef-trivial-fibration-fraction-model] identify this square of weak homotopy types with the square obtained by applying $\\operatorname{Map}_{\\mathcal L}(qx,-)$ to the actual cone $qP\\to(qA\\to qC\\leftarrow qB)$. These comparisons respect the projection maps and the specified commutative-square coherence, not just its four vertices. Every object of $\\mathcal L$ is equivalent to a $qx$, so [lem-coef-infinity-terminal-pullback-criterion] proves that this cone is limiting. This establishes the original pullback clause by checking the general Quillen B criterion, rather than citing a new Brown pullback-excision statement.",
+   "uses": [
+    "lem-coef-quillen-b-discrete-fibration-base-change",
+    "lem-coef-trivial-fibration-fraction-model",
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.2.25 proof, dual Proposition 4.6.11; Proposition 7.5.6."
+   }
+  },
+  {
+   "text": "We must also construct limits for cospans whose arrows only exist after localization. First replace their three vertices by equivalent objects $qA,qC,qB$, using essential surjectivity from [lem-coef-trivial-fibration-fraction-model]. Its fraction formula writes the two arrows, up to homotopy with fixed endpoints, as $q(f)q(t)^{-1}$ and $q(g)q(s)^{-1}$ for actual spans $A\\xleftarrow{t}U\\xrightarrow{f}C$ and $B\\xleftarrow{s}V\\xrightarrow{g}C$, with $t,s\\in T$. The maps $q(t),1_{qC},q(s)$ and these homotopies give an equivalence from the image of the ordinary cospan $U\\xrightarrow{f}C\\xleftarrow{g}V$ to the chosen localized cospan; the pointwise-equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] verifies this as an equivalence of coherent diagrams. Factor $f:U\\xrightarrow{w}U'\\xrightarrow{r}C$ with $w\\in W$, $r\\in F$, and form the actual object $P'=U'\\times_CV$. Step 11 supplies a limiting cone on $(qU'\\to qC\\leftarrow qV)$. The transformation with components $q(w),1,1$ is another equivalence of cospans. Choose an inverse of the second equivalence of cospans and postcompose the cone transformation with it, obtaining a cone with the same apex $qP'$ on $(qU\\to qC\\leftarrow qV)$. Postcompose that cone transformation with the first displayed equivalence to obtain a cone on the chosen localized cospan. For every test object, the resulting mapping-space comparison is the comparison of Step 11 followed by the equivalences induced by these equivalences of cospans; it is therefore an equivalence. The invariance clause of [lem-coef-infinity-terminal-pullback-criterion] proves that the resulting cone is limiting. Thus every localized cospan has a limiting cone, with the replacement cospan and its apex explicitly constructed. Together with Step 7, the finite-limit clause of that criterion supplies all finite simplicial limits.",
+   "uses": [
+    "lem-coef-trivial-fibration-fraction-model",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-terminal-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.6, final paragraph: fraction representation of arbitrary localized arrows and Theorem 7.3.27."
+   }
+  },
+  {
+   "text": "Finally, a commutative map between two of the original ordinary pullback squares gives by postcomposition a map of the four fraction categories in Step 8; the pullback identification there respects this map on objects and morphisms. The Quillen B comparison and the fraction-model comparison are natural by [lem-coef-quillen-b-discrete-fibration-base-change] and [lem-coef-trivial-fibration-fraction-model]. Hence the mapping-space pullback comparisons in Step 11 are natural as comparisons of cones. Applying $q$ to the original map of squares is already the required coherent transformation; no natural choice of a Brown factorization is needed. The full space of limiting cones on a fixed diagram is contractible by [lem-cbc-enhanced-functor-cone-calculus], so the descriptions as limiting cones have their coherent compatibilities. This proves the stated naturality for actual pullback squares, independently of the choices used only to show existence of limits on other cospans.",
+   "uses": [
+    "lem-coef-quillen-b-discrete-fibration-base-change",
+    "lem-coef-trivial-fibration-fraction-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Naturality of the comparison in Theorem 7.2.25, and contractibility of the space of limiting cones."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-quillen-b-discrete-fibration-base-change",
+  "lem-coef-trivial-fibration-fraction-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, displayed derived coefficient-adjunction calculation. Agent expansion of the ordinary fibrant-category infrastructure following the route of Cisinski Proposition 7.5.6 and the proof of Theorem 7.2.25, read online; no local archival PDF is available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Localization of a Brown category of fibrant objects sends pullbacks along fibrations to pullbacks of infinity categories",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [(HomotopicalAlgebra.trivialCofibrations C).IsWeakFactorizationSys\", \"doc\": \"In a category equipped with fibrations, every base change (pullback) of a fibration is again a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X₁ X₂ Y₁ Y₂ : C} (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)\\n  [(HomotopicalAlg\", \"doc\": \"In a category equipped with a weak factorization system consisting of trivial cofibrations and fibrations, if $ f_1 $ and $ f_2 $ are fibrations and the binary products $ X_1 \\times X_2 $ and $ Y_1 \\tim\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z) [inst_2 : CategoryTheory.Limits.HasPullback f g]\\n  [(HomotopicalAlgebra.fibrations C).IsStableUnderBaseChange] [hg : HomotopicalAlgebra.Fibration g],\\n\", \"doc\": \"If the class of fibrations in a category is stable under base change and a morphism $ g $ is a fibration, then the first projection from the pullback of $ f $ and $ g $ is also a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g] [(HomotopicalAlgebra.trivialFibrations\", \"doc\": \"In a category with fibrations and weak equivalences where trivial fibrations are stable under base change, if a morphism $ g $ is a trivial fibration (i.e., both a fibration and a weak equivalence), t\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g] [(HomotopicalAlgebra.trivialFibrations\", \"doc\": \"In a category where trivial fibrations are stable under base change, if $ f $ is a trivial fibration (both a fibration and a weak equivalence) and $ g $ is any morphism with codomain matching $ f $, t\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z) [inst_2 : CategoryTheory.Limits.HasPullback f g]\\n  [(HomotopicalAlgebra.fibrations C).IsStableUnderBaseChange] [hf : HomotopicalAlgebra.Fibration f],\\n\", \"doc\": \"If the class of fibrations in a category is stable under base change and $ f $ is a fibration, then the second projection morphism of the pullback of $ f $ along any morphism $ g $ is also a fibration\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] → [CategoryTheory.Limits.HasTerminal C] → Type u\", \"doc\": \"The full subcategory of a category with cofibrations consisting of objects $X$ for which the unique morphism from $X$ to the terminal object is a fibration.\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: Brown split factorizations and ordinary homotopy-category localization do not assert preservation of coherent limiting cones by the infinity localization of a category of fibrant objects."
+   "query": "The infinity localization of a Brown category of fibrant objects has finite limits and sends pullbacks along fibrations to limiting coherent squares without cofibrations",
+   "results": "{\"t\": \"2026-10-16T20:48:15Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity localization of a Brown category of fibrant objects has finite limits and sends pullbacks along fibrations to limiting coherent squares without cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\"], \"digest\": \"39c9e7349ab0c6c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FibrantObjectHomotopy.lean:34 requires ModelCategory and gives an ordinary quotient/localization; Localization/FiniteProducts.lean:116-123 is ordinary finite-product preservation, without coherent pullbacks. FibrantObject is an object-property definition, not this theorem."
   },
   {
    "tool": "loogle",
-   "query": "\"FibrantObject\", \"IsPullback\"",
-   "results": "[loogle] OK 0 hit(s)\n",
-   "date": "2026-10-16",
-   "verdict": "no match: Brown split factorizations and ordinary homotopy-category localization do not assert preservation of coherent limiting cones by the infinity localization of a category of fibrant objects."
+   "query": "\"FibrantObject\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-16T20:48:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"FibrantObject\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.HoCat.toHoCatCompToLocalizationIso\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\"], \"digest\": \"ef58567089cc1a90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FibrantObjectHomotopy.lean:34 requires ModelCategory and gives an ordinary quotient/localization; Localization/FiniteProducts.lean:116-123 is ordinary finite-product preservation, without coherent pullbacks. FibrantObject is an object-property definition, not this theorem."
   },
   {
    "tool": "grep",
-   "query": "[Bb]rown|[Ff]ibrant|[Ll]ocalization|[Pp]ullback",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Localization.Quotient\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"20\", \"text\": \"type `RightHomotopyClass X Y`. We show that if `Y` is a fibrant\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"79\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"81\", \"text\": \"  h := pullback.lift h.h h'.h (by simp)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"159\", \"text\": \"when `Y` is fibrant. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"line\": \"12\", \"text\": \"# Fibrant and cofibrant objects in a model category\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"line\": \"15\", \"text\": \"instance, it is possible to define the property `IsCofibrant X` for\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"line\": \"17\", \"text\": \"(Fibrant objects are defined similarly.)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"line\": \"33\", \"text\": \"/-- An object `X` is cofibrant if `⊥_ C ⟶ X` is a cofibration. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean\", \"line\": \"34\", \"text\": \"abbrev IsCofibrant (X : C) : Prop := Cofibration (initial.to X)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.ModelCategory.FibrantObjectHomotopy\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Constructor\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"line\": \"14\", \"text\": \"We show that the inclusion of the full subcategory of fibrant objects\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"line\": \"34\", \"text\": \"namespace FibrantObject\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"line\": \"63\", \"text\": \"end FibrantObject\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"line\": \"13\", \"text\": \"# The factorization lemma by K. S. Brown\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"line\": \"16\", \"text\": \"cofibrant objects can be factored as `i ≫ p`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"line\": \"20\", \"text\": \"`CofibrantBrownFactorization f` with the data\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"line\": \"26\", \"text\": \"between fibrant objects.)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"84\", \"text\": \"noncomputable def trans (P' : PrepathObject A) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"86\", \"text\": \"  P := pullback P.p₁ P'.p₀\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"87\", \"text\": \"  p₀ := pullback.fst _ _ ≫ P.p₀\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"line\": \"88\", \"text\": \"  p₁ := pullback.snd _ _ ≫ P'.p₁\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: Brown split factorizations and ordinary homotopy-category localization do not assert preservation of coherent limiting cones by the infinity localization of a category of fibrant objects."
+   "query": "Brown.*[Ll]ocal|[Ll]ocal.*Brown|[Ff]ibrant.*[Ll]imit|[Ll]ocalization.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-16T20:48:13Z\", \"tool\": \"grep\", \"query\": \"Brown.*[Ll]ocal|[Ll]ocal.*Brown|[Ff]ibrant.*[Ll]imit|[Ll]ocalization.*[Pp]ullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FibrantObjectHomotopy.lean:34 requires ModelCategory and gives an ordinary quotient/localization; Localization/FiniteProducts.lean:116-123 is ordinary finite-product preservation, without coherent pullbacks. FibrantObject is an object-property definition, not this theorem."
   },
   {
    "tool": "leansearch",
-   "query": "Infinity localization of category of fibrant objects preserves homotopy pullbacks along fibrations",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": HoCat C ⥤ D\", \"doc\": \"The functor from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to the localization $\\\\mathcal{D}$ (obtained by inverting weak equivalences in $\\\\mathcal{C}$), constructed \"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"HomotopicalAlgebra.Fibration.recOn\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : C} →\\n      {f : X ⟶ Y} →\\n        [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n          {motive : HomotopicalAlgebra.Fibration f → Sort u_1} →\\n            (t : HomotopicalAlgebra.Fibration f) → ((mem : HomotopicalAlg\", \"doc\": \"An inductive definition of a category equipped with a class of cofibrations, where objects are in Type u and morphisms between objects form types in Type (max u (v + 1)).\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : C ⥤ D) [L.IsLocalization (weakEquivalences C)] :\\n  (ι ⋙ L).IsLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"HomotopicalAlgebra.isFibrant_of_fibration\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\", \"type\": \"[(fibrations C).IsStableUnderComposition] {X Y : C} (p : X ⟶ Y) [Fibration p] [hY : IsFibrant Y] : IsFibrant X\", \"doc\": \"In a category with cofibrations where fibrations are stable under composition, if there exists a fibration $ p : X \\to Y $ and the target object $ Y $ is fibrant, then the source object $ X $ is also f\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (homRel C).FactorsThroughLocalization (weakEquivalences (CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"{D : Type*} [Category* D] (L : CofibrantObject.HoCat C ⥤ D) [L.IsLocalization (weakEquivalences _)] :\\n  IsIso (Functor.whiskerRight HoCat.ιCompResolutionNatTrans L)\", \"doc\": \"For any category $\\\\mathcal{D}$ and a localization functor $L$ from the homotopy category of cofibrant objects in a model category $\\\\mathcal{C}$ to $\\\\mathcal{D}$ with respect to weak equivalences, the \"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderBaseChange\", \"doc\": \"In a category equipped with fibrations, every base change (pullback) of a fibration is again a fibration.\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: Brown split factorizations and ordinary homotopy-category localization do not assert preservation of coherent limiting cones by the infinity localization of a category of fibrant objects."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Cisinski Brown fibration category localization has finite homotopy limits computed by fibrant pullbacks",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject A)\\n  [inst_2 : CategoryTheory.Limits.HasBinaryProduct A A] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryThe\", \"doc\": \"The underlying object $P$ of a path object in a category with weak equivalences and fibrations is fibrant, meaning the unique morphism from $P$ to the terminal object is a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  (X Y : C) [(HomotopicalAlgebra.fibrations C).IsStableUnderBaseChange] [inst_3 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_4 : CategoryTheory.Limits.HasBinaryProduct X Y] [hY : H\", \"doc\": \"If $ Y $ is a fibrant object in a category with cofibrations, then the first projection morphism $ X \\times Y \\to X $ from the binary product is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationSndOfIsFibrant\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  (X Y : C) [(HomotopicalAlgebra.fibrations C).IsStableUnderBaseChange] [inst_3 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_4 : CategoryTheory.Limits.HasBinaryProduct X Y] [hX : H\", \"doc\": \"Given a category with cofibrations, terminal object, and binary products, if an object $X$ is fibrant (i.e., its unique morphism to the terminal object is a fibration), then the second projection morp\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1a\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteLimits C\", \"doc\": \"Any model category has finite limits, i.e., it contains all finite limits such as terminal objects, binary products, and pullbacks as part of its defining axioms.\"}\n  {\"name\": \"HomotopicalAlgebra.IsFibrant\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] → [CategoryTheory.Limits.HasTerminal C] → C → Prop\", \"doc\": \"An object $X$ in a category with cofibrations is fibrant if the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.isFibrant_of_fibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasTerminal C] [(HomotopicalAlgebra.fibrations C).IsStableUnderComposition] {X Y : C}\\n  (p : X ⟶ Y) [HomotopicalAlgebra.Fibration p] [hY : Homotopic\", \"doc\": \"In a category with cofibrations where fibrations are stable under composition, if there exists a fibration $ p : X \\to Y $ and the target object $ Y $ is fibrant, then the source object $ X $ is also f\"}\n  {\"name\": \"HomotopicalAlgebra.fibrantObjects\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [CategoryTheory.Limits.HasTerminal C] → CategoryTheory.ObjectProperty C\", \"doc\": \"The property of an object $X$ in a category with cofibrations where the unique morphism from $X$ to the terminal object is a fibration.\"}\n",
-   "date": "2026-10-16",
-   "verdict": "no match: Brown split factorizations and ordinary homotopy-category localization do not assert preservation of coherent limiting cones by the infinity localization of a category of fibrant objects."
-  },
-  {
-   "tool": "grep",
-   "query": "[Ll]ocalization.*[Ll]eft[Ee]xact|[Ff]ibrant.*[Ll]imit|[Ll]ocalization.*[Ff]inite[Ll]imit",
-   "results": "[grep] OK 0 hit(s)",
-   "date": "2026-10-16",
-   "verdict": "no match: no pinned Mathlib declaration matched the finite-limit or left-exact localization pattern."
+   "query": "Localization of a fibration category preserves terminal objects and homotopy pullbacks and admits all finite coherent limits",
+   "results": "{\"t\": \"2026-10-16T20:48:14Z\", \"tool\": \"leansearch\", \"query\": \"Localization of a fibration category preserves terminal objects and homotopy pullbacks and admits all finite coherent limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.preservesFiniteProducts\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.hasFiniteProducts\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Localization.instHasFiniteProductsLocalization\"], \"digest\": \"e219192292d3dfe8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FibrantObjectHomotopy.lean:34 requires ModelCategory and gives an ordinary quotient/localization; Localization/FiniteProducts.lean:116-123 is ordinary finite-product preservation, without coherent pullbacks. FibrantObject is an object-property definition, not this theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-quillen-right-proper",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-fibrant-localization-pullbacks",
+  "worker": "stage1",
+  "summary": "Repair replaces the unproved Brown-excision assertion by graph factorizations, fibrant-slice base-change invariance, an explicit proof of Brown right properness, an explicit isomorphism of fraction and comma categories, and the general Quillen B criterion. Generic two-arrow fractions supply the non-elementary universal localization and its mapping spaces. Arbitrary localized cospans are represented by fractions before the actual replacement pullback is constructed. No functorial factorization is assumed.",
+  "blueprint": "Foundational coherent-localization input below proof paragraph 2 of prop-coef-integral-exceptional-adjoint, serving its displayed derived coefficient-adjunction calculation. New nodes are general right-fraction, Quillen B and quasicategorical limit tools; Brown specialization and cone naturality are proved in the item.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise equivalence and contractibility of terminal coherent cones; used to transport a constructed cone through equivalences of localized cospans and express its naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-7ebf49a3f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-7ebf49a3f (reviewer sub-agent of L); spot-checked: I could not read the source at its cited places. Cisinski's CatLR.pdf is not in literature/ (WANTED is recorded, proof_origin=agent) and this service blocks network access, so I checked every step and every new statement mathematically, on my own argument, without the theorem numbers. Item statement: unchanged; it is the Brown category-of-fibrant-objects theorem with every hypothesis present. All 13 steps check. Step 1 (graph factorization, p in T and q in T when f is in W). Steps 3-6 (fibrant slice, Ken-Brown base-change invariance, right properness via E0=B x_{B'} E; I verified j*i = projection on elements). Step 7 (R_x(1)=T_x has terminal object 1_x, then the nerve lemma). Step 8 (R_x(P) is the strict fibre product; V is a discrete fibration with lifts having a specified target, the orientation Quillen B needs). Step 9 ((U|a) is isomorphic to the slice fraction category from 1_x to (u_A, t p_a), on objects and morphisms). Step 10 (h in W by two-out-of-three; h_A is a base change of h along an F-map, so in W by Step 6; the transition is postcomposition with q(h_A)). Steps 11-13 (Quillen B, then the mapping-space criterion, the arbitrary-cospan transport with P'=U' x_C V where U'->C is in F, and naturality without functorial choices). proof_deps equals the union of step uses, and no proof dependency reaches the item. New nodes are true and general, not clauses of the item. Fraction model: L(A,W)=L(A,T) through the split factorization, plus the cocycle/colimit formula; tested on isomorphisms, on all arrows with a terminal object, and on FinSet with T = projections S x 2^n -> S, which shows span morphisms must be arbitrary, as the node states. Quillen B: (pi|d) is isomorphic to (U|Vd), then Thomason plus local systems; the D={d1} counterexample over [1] confirms the discrete-fibration hypothesis is needed. Terminal/pullback criterion: true. Duplicates: lem-coef-infinity-finite-shape-generation (not mentioned in the report) states the finite-limit clause, and mapping-excision, limits-products-pullbacks, hammock, system/enhanced-localization and join-cone-calculus overlap other parts; all of them reach the item through kan-quillen-right-proper, so the overlap is forced and acceptable. No other Quillen-B or fraction duplicate exists. The tool use lem-cbc-enhanced-functor-cone-calculus is accepted. No SGA. No fixes. Minor: the item's source.place still says Thm 7.5.18/Cor 7.5.20, although the second reading claims Prop 7.5.6 was made primary; I left it because the numbering cannot be checked here. Caution: later splits of the fraction-model and Quillen-B nodes must avoid kan-quillen-right-proper and the existing localization nodes to stay acyclic."
+ }
 }
