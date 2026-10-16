@@ -194,5 +194,31 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-0e4b3ca6b (reviewer sub-agent of L); spot-checked: I read all five steps and the three cited statements in full: lem-coef-coherent-nerve-comparison, lem-coef-infinity-full-essential-image and def-cbc-enhanced-diagrams-cones. I also read the parent's Step 3 use of the item, the unit sk-prop-sf-biduality-general and paragraph 2 of the ancestor proof prop-coef-integral-exceptional-adjoint (main-20261015). The statement is unchanged and true. I checked it independently: a fully faithful J makes Fun(A,X)->Fun(A,Y) fully faithful, with replete essential image. Small cases checked: j=id, I empty, T empty with I nonempty, I=Delta^0, and j not injective on objects. HTT A.3.4.11 could not be opened: it is not in literature/ and network access is blocked. The proof does not depend on HTT, because it runs entirely through DAG nodes. Steps 1-4 are correct. Step 1 uses the functorial replacement, two-out-of-three and the natural mapping-space comparison. Step 2 meets the hypotheses of the full-essential-image node exactly. Step 3 rests on the coherent-nerve node's identification of h sCat with h Cat_inf, so morphisms are functors modulo natural equivalence. Step 4: I checked the vertices of the transformation, its inverse and both triangle witnesses on A x Delta^n, so the equivalence factors through Fun(A,Y0); whiskering and the image directions are also correct. Faults repaired: (1) E5/C1: the converse in Step 5 (an isomorphism in hY gives an equivalence with its inverse-triangle witnesses) was only asserted. I wrote it out by inner-horn filling (Lambda^2_1, then Lambda^3_2 with d3=sigma, d1=tau, d0=s1 g) and cited Scholze, Lecture II, basic facts (2)-(3), p.14, which I read; uses are unchanged. (2) proof_origin.by changed from document to agent: HTT is not in literature/ and the proof is not HTT's chunk proof. Other checks: no cycle; the route stays inside the unit, with only a definition node from outside; tool_uses is empty; there are no new nodes; and no duplicate was found among the Bergner and essential-image nodes. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-fully-faithful-homotopy-image.json, and review.md was written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialFullyFaithfulHomotopyImage",
+  "declaration": "CategoryTheory.simplicial_fully_faithful_homotopy_image",
+  "declarations": [
+   "CategoryTheory.bergnerWeakEquivalences",
+   "CategoryTheory.BergnerHomotopyCategory",
+   "CategoryTheory.bergnerHomotopyFunctor",
+   "CategoryTheory.InEssentialImage",
+   "CategoryTheory.IsInBergnerEssentialImage",
+   "CategoryTheory.simplicial_fully_faithful_homotopy_image"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialFullyFaithfulHomotopyImage.lean",
+  "statement": "theorem simplicial_fully_faithful_homotopy_image (I T T' : CoherentNerve.SCat.{u}) (j : T ⟶ T') (hlocal : ∀ x y : T, SSet.Enhanced.IsWeakHomotopyEquivalence (j.map x y)) : Function.Injective (fun a : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T) => a ≫ bergnerHomotopyFunctor.map j) ∧ ∀ a : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T'), (IsInBergnerEssentialImage I T T' j a ↔ ∃ c : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T), a = c ≫ bergnerHomotopyFunctor.map j)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f8ba6fbc",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Commit 8f8ba6fb adds only the module, the node lean record (statement/deps/proof unchanged) and the report with Worker report + Second reading by Q33. Checked against node and HTT A.3.4.11 as recorded: SCat.{u} objects exact; hsCat = Mathlib MorphismProperty.Localization at the dependency's DwyerKanEquivalence (real data, no duplicate found in side/newtargets/Mathlib); pi0 isomorphism via the existing IsPiZeroIso; hlocal exact with no extra assumptions; injectivity on all localized Homs; image iff over arbitrary localized c. The IsInBergnerEssentialImage presentation (DK w, v, strict b) always exists by cofibrant/fibrant replacement and is presentation-independent because pi0 sends DK equivalences to equivalences, so it is exact. Edge cases (empty I/T, j=id, non-injective j, empty mapping sets, single universe u) OK. Gates: sorry only, source/blueprint docstrings, 5-step proof docstring, lean.statement verbatim, no pro-etale. nt_compile --json against the side overlay: clean, 1.2 s, no warnings."
  }
 }

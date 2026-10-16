@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-nagata-category",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-coef-finite-limit-sketch-models"
  ],
  "proof": [
   {
@@ -184,5 +185,26 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-acf03ca4c (reviewer sub-agent of L); spot-checked: I read the item, its parent lem-coef-simplicial-interval-lifting, the unit sk-prop-sf-biduality-general, and the full statement of the cited same-unit node lem-coef-finite-limit-sketch-models with its definition dependencies. Kelly 1982 is a scan with no text layer, so I rendered the pages and read them. (9.7) and (9.8) are on journal p.36: (9.8) says T-Alg is l.f.p. and reflective in [T,V], and (9.3)/(9.7) complete the underlying category. (10.1), (10.2) and (10.4) are on journal p.40, so the second reader's correction to (10.1)-(10.2) is accurate; (10.2) keeps the specified cones and gives the equivalence of model categories. Step 1 is correctly marked elementary: the sketch of all finite limit cones of T is small after coding finite index categories on finite subsets of N, preservation of finite limits does not depend on that coding, the empty cone is included, and the morphisms are the same, so its models are exactly Lex(T,Set). Step 2 matches the cited node clause by clause: U-small limits and colimits, pointwise limits and filtered colimits, and a small filtered generating family of finitely presentable objects. Step 3 is the cited theorem itself and avoids the wrong completion that forgets the cones; a sketch given on a graph is turned into its free category elementarily. Small cases checked: terminal T, FinSet^op, a sketch with no sorts, discrete sorts, an empty cone, and the fact that only limits and filtered colimits are pointwise. There are no new nodes, no cycle, no SGA, no off-unit tool use, and the statement is unchanged and not weakened. The item duplicates the general node only as a specialization of a node that existed first; citing that node is the prescribed treatment, and a later merge is optional. Minor inherited point: 'finite category' is not cited to def-galois-finite-limits-colimits. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteLimitModelPresentability",
+  "declaration": "CategoryTheory.finiteLimitModelPresentability",
+  "declarations": [
+   "CategoryTheory.finiteLimitModelPresentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteLimitModelPresentability.lean",
+  "statement": "theorem finiteLimitModelPresentability (T : Type u) [Category.{u, u} T] [HasFiniteLimits T] : HasLimitsOfSize.{u, u} (LeftExactFunctor T (Type u)) ∧ HasColimitsOfSize.{u, u} (LeftExactFunctor T (Type u)) ∧ IsLocallyFinitelyPresentable.{u} (LeftExactFunctor T (Type u)) ∧ (∀ (t : T), PreservesLimitsOfSize.{u, u} (LeftExactFunctor.forget T (Type u) ⋙ (evaluation T (Type u)).obj t)) ∧ (∀ (J : Type u) [Category.{u, u} J] [IsFiltered J] (t : T), PreservesColimitsOfShape J (LeftExactFunctor.forget T (Type u) ⋙ (evaluation T (Type u)).obj t)) ∧ (∀ (A : Type u) [Category.{u, u} A] (S : FiniteLimitSketch A), HasLimitsOfSize.{u, u} S.Models ∧ HasColimitsOfSize.{u, u} S.Models ∧ IsLocallyFinitelyPresentable.{u} S.Models ∧ (∀ (a : A), PreservesLimitsOfSize.{u, u} (S.modelProperty.ι ⋙ (evaluation A (Type u)).obj a)) ∧ (∀ (J : Type u) [Category.{u, u} J] [IsFiltered J] (a : A), PreservesColimitsOfShape J (S.modelProperty.ι ⋙ (evaluation A (Type u)).obj a)))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f388954f4",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Item statement matches the node clause by clause: LeftExactFunctor T (Type u), HasLimitsOfSize/HasColimitsOfSize.{u,u}, IsLocallyFinitelyPresentable.{u}, pointwise limits and pointwise colimits over filtered J : Type u via forget ⋙ evaluation, and an arbitrary-sketch conjunct with the same five clauses. The dependency lem-coef-finite-limit-sketch-models is stated in the same delivery under the nothing-waits rule: real FiniteLimitSketch data (FinCategory shapes, no limit condition built in), modelProperty, Models full subcategory, and a theorem with LocallySmall plus all node clauses. Records: the item changes only in lean and stmt_deps (+sketch node, already a proof dep, no cycle); the dependency changes only in lean, with a note; both statements verbatim; JSON layout ok. Edge cases checked: empty cone, no cones, empty index or category, diagonal cone, empty finite limit, nonempty filtered J. No hollow definitions, sorry only. nt_compile --json on both siblings: rc 0, no diagnostics (a broken copy gave an error, so the compile is real). FIX: the dependency module and theorem docstrings did not name the node's source, Adamek-Rosicky 1994 Ch.1 Cor. 1.52; fixes/FiniteLimitSketchModels.lean adds it, code unchanged, compiles clean. The stale Worker report is explained in the Second reading."
  }
 }

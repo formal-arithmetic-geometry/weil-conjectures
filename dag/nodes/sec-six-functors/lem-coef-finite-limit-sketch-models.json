@@ -239,5 +239,31 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-bc1ea56a9 (reviewer sub-agent of L); spot-checked: I read the item, both new leaves and every cited statement in full. The item statement is unchanged and correct. I tested it on no cones (gives all functors), an empty cone (forces a singleton), and a diagonal cone over (a,a) (forces at most one element). The last case shows coproducts of models are not pointwise; the statement claims pointwise only for limits and filtered colimits, so it does not overclaim. Steps: S1 cites the presheaf leaf at C=A^op and gets Hom-smallness as a subset of a small product. S2 and S6 are correctly elementary (Set limit/colimit formulas and limit interchange, empty I or J included). S3 uses Yoneda (Stacks 001P, yonedaEquiv) on A^op. Its orientation is right: j->h_{D(j)} is a J^op-diagram and s_D: Q_D->h_a. Precomposition by s_D is the cone comparison, so models are exactly Mathlib's isLocal objects (Local.lean:46). S4 and S7 use 002W (categories.tex:2182: I filtered, J finite), and both hypotheses hold, the empty J case included. S5 meets every hypothesis of the orthogonality leaf. New leaves: lem-coef-presheaf-local-finite-presentability matches Presheaf.lean:77 at A=Type u, kappa=aleph0, with the Type.lean:158 instance and Type pullbacks; IsLocallyFinitelyPresentable is the aleph0 abbreviation at LocallyPresentable.lean:64-65. lem-coef-finite-orthogonality-presentability matches OrthogonalReflection.lean:472-479; the conclusion keeps kappa, and W=ofHoms S gives smallness (IsSmall.lean:39). Neither is a duplicate: the existing presheaf leaves give only some kappa, the saturated-arrow node is about infinity-categories, and lem-coef-finite-limit-model-presentability depends on the item. Neither restates a clause of the item. Blueprint searches (main-20261015 and master) and a DAG rg found no same_as. No cycle, route unchanged, no SGA, no tool_uses needed, no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteLimitSketchModels",
+  "declaration": "CategoryTheory.finiteLimitSketchModels_presentability",
+  "declarations": [
+   "CategoryTheory.FiniteLimitSketch",
+   "CategoryTheory.FiniteLimitSketch.modelProperty",
+   "CategoryTheory.FiniteLimitSketch.Models",
+   "CategoryTheory.finiteLimitSketchModels_presentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteLimitSketchModels.lean",
+  "statement": "theorem finiteLimitSketchModels_presentability (A : Type u) [Category.{u, u} A] (S : FiniteLimitSketch A) : LocallySmall.{u} S.Models ∧ HasLimitsOfSize.{u, u} S.Models ∧ HasColimitsOfSize.{u, u} S.Models ∧ IsLocallyFinitelyPresentable.{u} S.Models ∧ (∀ (a : A), PreservesLimitsOfSize.{u, u} (S.modelProperty.ι ⋙ (evaluation A (Type u)).obj a)) ∧ (∀ (J : Type u) [Category.{u, u} J] [IsFiltered J] (a : A), PreservesColimitsOfShape J (S.modelProperty.ι ⋙ (evaluation A (Type u)).obj a))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The genuine proof-dependency node has no recorded Lean declaration; supplied under the 2026-10-16 nothing-waits authorization so the consumer can state its arbitrary-sketch clause. Defines its specified-cone sketch and model notions and states exactly its general theorem.",
+  "fixed_by": "NT-stage2-cc-f388954f4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f388954f4",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Item statement matches the node clause by clause: LeftExactFunctor T (Type u), HasLimitsOfSize/HasColimitsOfSize.{u,u}, IsLocallyFinitelyPresentable.{u}, pointwise limits and pointwise colimits over filtered J : Type u via forget ⋙ evaluation, and an arbitrary-sketch conjunct with the same five clauses. The dependency lem-coef-finite-limit-sketch-models is stated in the same delivery under the nothing-waits rule: real FiniteLimitSketch data (FinCategory shapes, no limit condition built in), modelProperty, Models full subcategory, and a theorem with LocallySmall plus all node clauses. Records: the item changes only in lean and stmt_deps (+sketch node, already a proof dep, no cycle); the dependency changes only in lean, with a note; both statements verbatim; JSON layout ok. Edge cases checked: empty cone, no cones, empty index or category, diagonal cone, empty finite limit, nonempty filtered J. No hollow definitions, sorry only. nt_compile --json on both siblings: rc 0, no diagnostics (a broken copy gave an error, so the compile is real). FIX: the dependency module and theorem docstrings did not name the node's source, Adamek-Rosicky 1994 Ch.1 Cor. 1.52; fixes/FiniteLimitSketchModels.lean adds it, code unchanged, compiles clean. The stale Worker report is explained in the Second reading."
  }
 }
