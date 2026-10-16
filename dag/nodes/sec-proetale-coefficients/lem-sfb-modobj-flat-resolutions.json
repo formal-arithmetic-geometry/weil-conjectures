@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-modobj-flat-resolutions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Functorial flat resolutions of module objects",
@@ -17,43 +17,116 @@
  ],
  "proof": [
   {
-   "text": "The category $\\Mod_{\\mathcal R}(\\mathcal C)$ is abelian ([lem-sfb-modobj-abelian]) and\nsymmetric monoidal ([def-sfb-modobj-symmetric-tensor]).",
+   "text": "Because $\\mathcal C$ is closed, tensoring with any fixed object is a left adjoint and therefore preserves colimits; in particular $\\mathcal R\\otimes-$ preserves finite colimits. Thus [lem-sfb-modobj-abelian] applies, and [def-sfb-modobj-symmetric-tensor] supplies the symmetric monoidal structure on $\\Mod_{\\mathcal R}(\\mathcal C)$.",
    "uses": [
     "lem-sfb-modobj-abelian",
-    "def-sfb-modobj-symmetric-tensor"
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "Let $F$ be flat in $\\mathcal C$. Then $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}M\\cong\nF\\otimes(\\mathcal R\\otimes_{\\mathcal R}M)\\cong F\\otimes M$, naturally in $M$. So after the\nforgetful functor, $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}-$ becomes $F\\otimes-$, which\nis exact. The forgetful functor is faithful and exact\n([lem-sfb-modobj-forget-faithful], [lem-sfb-modobj-forget-left-exact],\n[lem-sfb-modobj-forget-right-exact]), so it reflects exactness, and\n$(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}-$ is exact. By the symmetry, so is\n$-\\otimes_{\\mathcal R}(\\mathcal R\\otimes F)$. Hence the free module $\\mathcal R\\otimes F$ is\nflat.",
+   "text": "Let $F$ be flat in $\\mathcal C$. The coequalizer description of the relative tensor product ([def-sfb-modobj-relative-tensor]) and the associativity and unit isomorphisms give a natural isomorphism $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}M\\cong F\\otimes(\\mathcal R\\otimes_{\\mathcal R}M)\\cong F\\otimes M$. Hence, after applying the forgetful functor, tensoring over $\\mathcal R$ with the free module $\\mathcal R\\otimes F$ is the exact functor $F\\otimes-$. The forgetful functor is faithful and preserves finite limits and colimits ([lem-sfb-modobj-forget-faithful], [lem-sfb-modobj-forget-left-exact], [lem-sfb-modobj-forget-right-exact]); the kernel and cokernel lemmas ([lem-sfb-modobj-kernels], [lem-sfb-modobj-cokernels]) identify these module-category limits and colimits with the underlying ones. It also reflects isomorphisms: if the underlying map of a module morphism is an isomorphism, its underlying inverse is module-linear by composing the module-linearity equation with that inverse. Hence exactness of the underlying sequence is equivalent to exactness in the module category. Therefore $(\\mathcal R\\otimes F)\\otimes_{\\mathcal R}-$ is exact, and symmetry from [def-sfb-modobj-symmetric-tensor] gives exactness of $-\\otimes_{\\mathcal R}(\\mathcal R\\otimes F)$. Thus $\\mathcal R\\otimes F$ is flat.",
    "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-symmetric-tensor",
     "lem-sfb-modobj-forget-faithful",
     "lem-sfb-modobj-forget-left-exact",
-    "lem-sfb-modobj-forget-right-exact"
+    "lem-sfb-modobj-forget-right-exact",
+    "lem-sfb-modobj-kernels",
+    "lem-sfb-modobj-cokernels"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "second paragraph"
+   }
   },
   {
-   "text": "The map $\\gamma_M(\\mathcal R\\otimes\\pi_M)$ is $\\mathcal R$-linear by associativity of\n$\\gamma_M$, and it is natural in $M$. It is an epimorphism:\n- $\\mathcal R\\otimes\\pi_M$ is an epimorphism because $\\mathcal R\\otimes-$ is right exact;\n- $\\gamma_M$ is a split epimorphism with section $(\\eta\\otimes M)\\lambda_M^{-1}$, by the\n  unit law.",
-   "uses": [],
-   "elementary": null
+   "text": "For each $M$, define $q_M=\\gamma_M\\circ(\\mathcal R\\otimes\\pi_M)$. The associativity law for the action makes $q_M$ $\\mathcal R$-linear, and naturality of $\\pi$ and of the action makes $q$ natural in $M$. Since $\\mathcal C$ is closed, $\\mathcal R\\otimes-$ preserves colimits and hence sends the epimorphism $\\pi_M$ to an epimorphism. The action map $\\gamma_M$ is split epic with section $(\\eta\\otimes M)\\lambda_M^{-1}$ by the unit law. Thus $q_M$ is a composite of epimorphisms, hence an epimorphism. By the preceding step, each source $\\mathcal R\\otimes P(M)$ is flat, so $q$ is the required functorial flat resolution.",
+   "uses": [
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+    "place": "third paragraph"
+   }
   }
  ],
  "proof_deps": [
   "lem-sfb-modobj-abelian",
   "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-relative-tensor",
   "lem-sfb-modobj-forget-faithful",
   "lem-sfb-modobj-forget-left-exact",
-  "lem-sfb-modobj-forget-right-exact"
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
+  "place": "## Proof (expanded from blueprint route)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functorial flat resolutions in module objects over a commutative monoid object",
+   "results": "Module.Flat, Module.Flat.of_free, ModuleCat.projectiveResolution and related module flatness declarations in Mathlib/RingTheory/Flat/Basic and Mathlib/Algebra/Category/ModuleCat/LeftResolution",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary module flatness/projective resolutions do not state the categorical module-object lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.HasFunctorialFlatResolution, CategoryTheory.Mod, tensor",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Abelian.HasFunctorialFlatResolution'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasFunctorialFlatResolution|FunctorialFlatResolution|relative tensor [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "free module objects over a commutative monoid inherit functorial flat resolutions",
+   "results": "Module.Flat.of_free, ModuleCat.free, ModuleCat.instProjectiveObjFree and related ordinary module declarations",
+   "date": "2026-10-16",
+   "verdict": "no match: no categorical module-object functorial-resolution theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free module R tensor F is flat when F is flat",
+   "results": "Module.Flat.of_free, Module.Flat.instTensorProduct, Module.Flat.baseChange and related ordinary module results",
+   "date": "2026-10-16",
+   "verdict": "no match: these concern ordinary semiring modules, not relative tensor module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFlat, TensorProduct, ModuleCat.hasFunctorialFlatResolution",
+   "results": "0 hits; unknown identifier 'IsFlat'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlat|hasFunctorialFlatResolution [Mathlib/Algebra]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -75,5 +148,20 @@
   "CategoryTheory.Mod.hasFunctorialFlatResolution"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-modobj-flat-resolutions",
+  "worker": "stage1",
+  "summary": "Audited the imported three-paragraph proof. Added the closedness-to-colimit hypothesis needed for the abelian/module structure, made the relative-tensor identification and exactness reflection explicit using the cited forgetful-functor statements, and completed the naturality, linearity, and epimorphism argument for the resolution map. No new child node was needed: the remaining categorical facts are elementary consequences of the hypotheses and definitions.",
+  "blueprint": "Steps realize the first, second, and third paragraphs of lem-sfb-modobj-flat-resolutions.proof.md, with the third paragraph expanded to justify right exactness, the split section, and naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-c4c5445b7",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-c4c5445b7 (reviewer sub-agent of L); spot-checked: Read the item, blueprint proof, all cited node statements and sources, route, and delivery materials. Step 2 incorrectly claimed that faithfulness plus preservation of finite limits and colimits reflects exactness. I wrote a corrected DAG JSON adding the existing kernel/cokernel lemmas and the missing conservativity argument for the forgetful functor. Review: review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
