@@ -1,0 +1,109 @@
+{
+ "id": "lem-coef-dg-quotient-hom-cone",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: mapping-complex coefficient adjunction before the derived inverse limit; generic dg quotient calculation used to identify projective mapping complexes with localized ones.",
+   "via": [
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived Hom formula for a dg quotient",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $\\mathcal C$ be a small dg category over $\\mathbf Z$, meaning a set of objects, cochain complexes $\\mathcal C(X,Y)$, closed degree-zero units and associative unital chain-map composition. Let $\\mathcal A\\subset\\mathcal C$ be a full dg subcategory (a subset of the objects, with unchanged mapping complexes). Use cochains and their derived category as in [def-weil-abstract-derived-category], and derived enrichment as in [lem-coef-dg-enrichment-rectification]. The dg quotient $j:\\mathcal C\\to\\mathcal C/\\mathcal A$ exists: it has, up to equivalence, the images of the objects of $\\mathcal C$ and is universal among derived enriched functors making every object of $\\mathcal A$ contractible (its identity zero in $H^0$), including the enhanced functor categories and their transformations. For $X,Y\\in\\mathcal C$, put $h_Y(A)=\\mathcal C(A,Y)$ and $h^X(A)=\\mathcal C(X,A)$, respectively right and left dg $\\mathcal A$-modules with actions by composition. A right module consists of complexes $G(A)$ and unital associative chain-map actions $G(B)\\otimes\\mathcal A(A,B)\\to G(A)$; a left module consists of complexes $F(A)$ and actions $\\mathcal A(A,B)\\otimes F(A)\\to F(B)$ with the same unit and associativity requirements. There is a natural cofiber sequence in $\\mathbf D(\\mathbf Z)$\n$$h_Y\\otimes^{\\mathbf L}_{\\mathcal A}h^X\\longrightarrow\\mathcal C(X,Y)\\longrightarrow(\\mathcal C/\\mathcal A)(jX,jY).$$\nThe first arrow is evaluation by composition and the second is induced by $j$. Here the underived tensor of a right module $G$ and left module $F$ is the quotient complex of $\\bigoplus_{A\\in\\mathcal A}G(A)\\otimes F(A)$ by the relations $(ga)\\otimes f=g\\otimes(af)$; $\\otimes^{\\mathbf L}_{\\mathcal A}$ is its derived tensor, computed on semi-free replacements, and depends only on the objectwise quasi-isomorphism classes of both inputs. A semi-free module is an increasing union starting at zero of dg submodules with coproducts of shifted representables as successive quotients. The displayed cofiber is the class of the mapping cone; its identification with the quotient mapping object is compatible with the quotient map and natural in both variables. No flatness of the original mapping complexes over $\\mathbf Z$ is assumed.\n\nIf $\\mathcal C$ is pretriangulated, meaning its representable dg modules are closed up to homotopy equivalence under zero, shifts and mapping cones, and $\\mathcal A$ contains zero and is closed under shifts and cones, then $j$ presents the enhanced localization at closed degree-zero maps whose cones are homotopy equivalent to objects of $\\mathcal A$. Enhanced localization means universality for inverting these maps on enriched functor categories, including all coherent transformations as in [lem-coef-enhanced-localization-universal].",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0210114",
+  "place": "Drinfeld, DG quotients of DG categories, sections 1.3.1-1.3.3 (canonical cone formula), 1.6.2 (universal property), 2.4 (pretriangulated categories), 3.1 and 3.5-3.6 (flat replacement before adjoining contractions), 14.3 and 14.8 (tensor and semi-free resolutions); compare Keller, On differential graded categories, section 4.4, Theorems 4.7-4.8 and refined universal properties, printed pp. 16-17. Read online; no Stacks tag states this general dg-quotient formula."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-coef-dg-enrichment-rectification",
+  "lem-coef-enhanced-localization-universal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Drinfeld quotient of differential graded categories adjoining a contracting homotopy to objects with a length filtration on morphism complexes",
+   "results": "{\"t\": \"2026-10-16T12:17:01Z\", \"tool\": \"leanfinder\", \"query\": \"Drinfeld quotient of differential graded categories adjoining a contracting homotopy to objects with a length filtration on morphism complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"HomotopyCategory\", \"HomotopyCategory.quotient\", \"HomotopyCategory.singleFunctors\", \"instCategoryHomotopyCategory\", \"AlgebraicTopology.DoldKan.N₂\", \"CategoryTheory.Preadditive.DoldKan.N\", \"HomotopyCategory.singleFunctor\"], \"digest\": \"9517abeb9bd20e04\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and DerivedCategory/KProjective.lean:39-65, CategoryTheory/Preadditive/Projective/Resolution.lean:35-68, and CategoryTheory/Monoidal/Center.lean:70-115. These concern ordinary complexes in an abelian category, nonnegative ordinary projective resolutions, or the unrelated Drinfeld center. None gives semi-free dg-category modules, their graded-action Hom complexes, or dg quotients. The strict EnrichedCategory definition (Enriched/Basic.lean:58-68) contains no derived quotient or module resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quotient\", \"EnrichedCategory\"",
+   "results": "{\"t\": \"2026-10-16T12:16:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quotient\\\", \\\"EnrichedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and DerivedCategory/KProjective.lean:39-65, CategoryTheory/Preadditive/Projective/Resolution.lean:35-68, and CategoryTheory/Monoidal/Center.lean:70-115. These concern ordinary complexes in an abelian category, nonnegative ordinary projective resolutions, or the unrelated Drinfeld center. None gives semi-free dg-category modules, their graded-action Hom complexes, or dg quotients. The strict EnrichedCategory definition (Enriched/Basic.lean:58-68) contains no derived quotient or module resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "Drinfeld|dg.?quotient|DGCategory|differential graded categor|semi.?free",
+   "results": "{\"t\": \"2026-10-16T12:16:58Z\", \"tool\": \"grep\", \"query\": \"Drinfeld|dg.?quotient|DGCategory|differential graded categor|semi.?free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Center.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\"], \"digest\": \"a5ff1876352e9e64\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and DerivedCategory/KProjective.lean:39-65, CategoryTheory/Preadditive/Projective/Resolution.lean:35-68, and CategoryTheory/Monoidal/Center.lean:70-115. These concern ordinary complexes in an abelian category, nonnegative ordinary projective resolutions, or the unrelated Drinfeld center. None gives semi-free dg-category modules, their graded-action Hom complexes, or dg quotients. The strict EnrichedCategory definition (Enriched/Basic.lean:58-68) contains no derived quotient or module resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping complex in a dg quotient is the cone of the derived tensor of restricted representable modules mapping to the original Hom complex",
+   "results": "{\"t\": \"2026-10-16T12:19:56Z\", \"tool\": \"leansearch\", \"query\": \"Mapping complex in a dg quotient is the cone of the derived tensor of restricted representable modules mapping to the original Hom complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.inr_snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone.mapTrianglehIso\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"HomologicalComplexUpToQuasiIso\"], \"digest\": \"6d093a7b90693125\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and DerivedCategory/KProjective.lean:39-65, CategoryTheory/Preadditive/Projective/Resolution.lean:35-68, and CategoryTheory/Monoidal/Center.lean:70-115. These concern ordinary complexes in an abelian category, nonnegative ordinary projective resolutions, or the unrelated Drinfeld center. None gives semi-free dg-category modules, their graded-action Hom complexes, or dg quotients. The strict EnrichedCategory definition (Enriched/Basic.lean:58-68) contains no derived quotient or module resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "EnrichedCategory|DGCategory|dg[Cc]at|QuasiEquivalence",
+   "results": "{\"t\": \"2026-10-16T12:19:56Z\", \"tool\": \"grep\", \"query\": \"EnrichedCategory|DGCategory|dg[Cc]at|QuasiEquivalence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FunctorHom.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"4cb075339c97cd42\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and DerivedCategory/KProjective.lean:39-65, CategoryTheory/Preadditive/Projective/Resolution.lean:35-68, and CategoryTheory/Monoidal/Center.lean:70-115. These concern ordinary complexes in an abelian category, nonnegative ordinary projective resolutions, or the unrelated Drinfeld center. None gives semi-free dg-category modules, their graded-action Hom complexes, or dg quotients. The strict EnrichedCategory definition (Enriched/Basic.lean:58-68) contains no derived quotient or module resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?free|dg.?quotient|homotopically.?projective|dg.?module",
+   "results": "{\"t\": \"2026-10-16T12:46:17Z\", \"tool\": \"grep\", \"query\": \"semi.?free|dg.?quotient|homotopically.?projective|dg.?module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.IsKProjective\"",
+   "results": "{\"t\": \"2026-10-16T12:46:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.isKProjective_shift_iff\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.mk\"], \"digest\": \"be776532da0100e0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules",
+   "results": "{\"t\": \"2026-10-16T12:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"Derived quotient by acyclic dg modules computes mapping complexes from homotopically projective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.Qh_map_bijective\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"DerivedCategory.Q\", \"DerivedCategory.Qh\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomotopyEquiv.isKProjective\"], \"digest\": \"868de05f7dcce0f8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:29-54 and Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean:39-65. These concern ordinary cochain complexes in an abelian category, not graded modules over a dg category, semi-free representable filtrations, or enhanced dg quotients. CochainComplex.isKProjective_of_projective moreover requires a bounded-above complex of projective objects. The dg-module/quotient vocabulary grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-dg-module-projective-resolution",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

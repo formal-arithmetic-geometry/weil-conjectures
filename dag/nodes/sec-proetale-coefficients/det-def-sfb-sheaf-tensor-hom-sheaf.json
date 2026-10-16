@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-sheaf-tensor-hom-sheaf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The internal hom into a sheaf is a sheaf",
@@ -15,36 +15,169 @@
  "stmt_deps": [
   "det-def-sfb-sheaf-tensor-presheaf"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/CategoryTheory/Sites/Monoidal.lean",
+  "place": "CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, lines 104-111; functorEnrichedHomCoyonedaObjEquiv and functorEnrichedHomCoyonedaObjEquiv_naturality, lines 51-102, identify the natural-family Hom formula and its restriction maps."
+ },
+ "mathlib_searches": [
   {
-   "text": "Let $R$ be a covering sieve on $U$, viewed as a full subcategory of $C/U$ closed under\nprecomposition. We must show that $[F,G](U)\\to\\lim_{(v\\colon V\\to U)\\in R}[F,G](V)$ is an\nisomorphism. By Yoneda in $\\mathcal A$ it suffices to show that it induces a bijection on\n$\\Hom_{\\mathcal A}(A,-)$ for every object $A$.\n\nBy the Hom formula of [det-def-sfb-sheaf-tensor-presheaf], $\\Hom_{\\mathcal A}(A,[F,G](U))$ is\nthe set of natural families $\\varphi_v\\colon F(V)\\otimes A\\to G(V)$ indexed by all of $C/U$. An\nelement of $\\Hom_{\\mathcal A}(A,\\lim_R[F,G](V))$ is a compatible family, indexed by $v\\in R$, of\nnatural families over $C/V$; since $R$ is a sieve, every $W\\to V\\to U$ lies in $R$, and\ncompatibility says the value at $W\\to V$ depends only on $W\\to U$. So this set is the set of\nnatural families $\\varphi_w$ indexed by $w\\in R$ only, and the map in question is restriction of\nfamilies from $C/U$ to $R$.",
-   "uses": [
-    "det-def-sfb-sheaf-tensor-presheaf"
-   ],
-   "elementary": false
+   "tool": "loogle",
+   "query": "Presheaf.IsSheaf, ihom",
+   "results": "{\"t\": \"2026-10-16T11:59:27Z\", \"tool\": \"loogle\", \"query\": \"Presheaf.IsSheaf, ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Presheaf.IsSheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: service reported unknown identifier 'Presheaf.IsSheaf'; superseded by the successful fully qualified declaration-name query."
   },
   {
-   "text": "*Injectivity.* Let $\\varphi,\\varphi'$ be natural families over $C/U$ that agree on $R$, and let\n$v\\colon V\\to U$ be arbitrary. The pullback sieve $v^*R$ covers $V$, and for $w\\colon W\\to V$ in\n$v^*R$ we have $v\\circ w\\in R$, so by naturality\n$G(w)\\circ\\varphi_v=\\varphi_{vw}\\circ(F(w)\\otimes A)=\\varphi'_{vw}\\circ(F(w)\\otimes A)=G(w)\\circ\\varphi'_v$.\nSince $G$ is a sheaf, $G(V)\\to\\lim_{w\\in v^*R}G(W)$ is an isomorphism, in particular a\nmonomorphism, so $\\varphi_v=\\varphi'_v$.",
-   "uses": [],
-   "elementary": null
+   "tool": "grep",
+   "query": "isSheaf.*[Ii][Hh]om|[Ii][Hh]om.*isSheaf|isSheaf.*[Hh]om|[Hh]om.*isSheaf",
+   "results": "{\"t\": \"2026-10-16T11:59:27Z\", \"tool\": \"grep\", \"query\": \"isSheaf.*[Ii][Hh]om|[Ii][Hh]om.*isSheaf|isSheaf.*[Hh]om|[Hh]om.*isSheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Topos/Sheaf.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Subsheaf.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\"], \"digest\": \"7f634f3dd0f117d9\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
   },
   {
-   "text": "*Surjectivity.* Let $(\\varphi_w)_{w\\in R}$ be natural. For arbitrary $v\\colon V\\to U$, the maps\n$\\varphi_{vw}\\circ(F(w)\\otimes A)\\colon F(V)\\otimes A\\to G(W)$, $w\\in v^*R$, are compatible with\nrestriction along $v^*R$, by naturality of $\\varphi$. As $G(V)\\cong\\lim_{w\\in v^*R}G(W)$, there is\na unique $\\tilde\\varphi_v\\colon F(V)\\otimes A\\to G(V)$ with\n$G(w)\\circ\\tilde\\varphi_v=\\varphi_{vw}\\circ(F(w)\\otimes A)$ for all $w\\in v^*R$. If $v\\in R$, then\n$v^*R$ is the maximal sieve and $\\tilde\\varphi_v=\\varphi_v$ by uniqueness (take $w=\\mathrm{id}$).\nNaturality of $\\tilde\\varphi$: for $u\\colon V'\\to V$, both $G(u)\\circ\\tilde\\varphi_v$ and\n$\\tilde\\varphi_{vu}\\circ(F(u)\\otimes A)$ have the same restriction\n$\\varphi_{vuw'}\\circ(F(uw')\\otimes A)$ to every $w'\\in(vu)^*R$, so they agree, again because $G$\nis a sheaf. Hence $\\tilde\\varphi$ is a natural family over $C/U$ extending $\\varphi$.",
-   "uses": [],
-   "elementary": null
+   "tool": "leanfinder",
+   "query": "The internal hom presheaf from any presheaf to a sheaf valued in a closed symmetric monoidal category is a sheaf",
+   "results": "{\"t\": \"2026-10-16T11:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"The internal hom presheaf from any presheaf to a sheaf valued in a closed symmetric monoidal category is a sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.presheafHom_isSheafFor\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafHom\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.sheafHom'\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"], \"digest\": \"b7cb6cffca81f1de\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal hom presheaf into a sheaf is a sheaf for a closed symmetric monoidal coefficient category",
+   "results": "{\"t\": \"2026-10-16T11:59:27Z\", \"tool\": \"leansearch\", \"query\": \"Internal hom presheaf into a sheaf is a sheaf for a closed symmetric monoidal coefficient category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.ihom\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.internalHom\", \"CategoryTheory.MonoidalClosed.closed\", \"CategoryTheory.Pseudofunctor.sheafHom\"], \"digest\": \"50cd747040fb9821\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFunctorEnrichedHom|functorEnrichedHom|end_",
+   "results": "{\"t\": \"2026-10-16T11:59:50Z\", \"tool\": \"grep\", \"query\": \"HasFunctorEnrichedHom|functorEnrichedHom|end_\", \"sub\": \"CategoryTheory/Monoidal/Closed/FunctorCategory.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no hits in this path/query; not evidence of absence. The guessed FunctorCategory.lean path does not exist; the successful directory search found FunctorCategory/Basic.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFunctorEnrichedHom|functorEnrichedHom|hasEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T12:00:01Z\", \"tool\": \"grep\", \"query\": \"HasFunctorEnrichedHom|functorEnrichedHom|hasEnrichedHom\", \"sub\": \"CategoryTheory/Monoidal/Closed/FunctorCategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\"], \"digest\": \"a432f38bb7145841\"}",
+   "date": "2026-10-16",
+   "verdict": "supporting definitions: FunctorCategory/Basic.lean uses the enriched Hom as the presheaf internal Hom."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T12:00:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\"], \"digest\": \"fce5a95d43438933\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T12:00:02Z\", \"tool\": \"grep\", \"query\": \"lemma isSheaf_functorEnrichedHom\", \"sub\": \"CategoryTheory/Sites/Monoidal.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"104\"], \"digest\": \"e194b49d742e610d\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "class HasFunctorEnrichedHom|instance|functorEnrichedHom_obj",
+   "results": "{\"t\": \"2026-10-16T12:00:12Z\", \"tool\": \"grep\", \"query\": \"class HasFunctorEnrichedHom|instance|functorEnrichedHom_obj\", \"sub\": \"CategoryTheory/Enriched/FunctorCategory.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"240\", \"300\", \"303\", \"351\", \"369\"], \"digest\": \"abd87f3da7e4a119\"}",
+   "date": "2026-10-16",
+   "verdict": "supporting source inspected; the single-file grep output does not preserve its filename. The later directory search locates the definition at Enriched/FunctorCategory.lean:295."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isSheaf_functorEnrichedHom|hasFunctorEnrichedHom_of|hasEnrichedHom_of",
+   "results": "{\"t\": \"2026-10-16T12:00:12Z\", \"tool\": \"grep\", \"query\": \"lemma isSheaf_functorEnrichedHom|hasFunctorEnrichedHom_of|hasEnrichedHom_of\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"f6eb9a1dad4a0c62\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104; statement and hypotheses read at lines 36-47 and 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFunctorEnrichedHom|hasFunctorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T12:00:22Z\", \"tool\": \"grep\", \"query\": \"HasFunctorEnrichedHom|hasFunctorEnrichedHom\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"099ee4cd6721404f\"}",
+   "date": "2026-10-16",
+   "verdict": "supporting definition at Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:295, with objectwise end construction read at lines 308-312."
+  },
+  {
+   "tool": "grep",
+   "query": "hasEnd|hasLimits|hasLimit",
+   "results": "{\"t\": \"2026-10-16T12:00:22Z\", \"tool\": \"grep\", \"query\": \"hasEnd|hasLimits|hasLimit\", \"sub\": \"CategoryTheory/Limits/Shapes/End.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"209\", \"211\", \"245\", \"261\", \"274\"], \"digest\": \"446f5fee413cbe05\"}",
+   "date": "2026-10-16",
+   "verdict": "supporting source inspected: HasEnd at Limits/Shapes/End.lean:209 is a multiequalizer existence condition; single-file output does not preserve its filename."
+  },
+  {
+   "tool": "grep",
+   "query": "isGrothendieckAbelian_hasLimits|hasLimits|HasLimitsOfSize",
+   "results": "{\"t\": \"2026-10-16T12:00:35Z\", \"tool\": \"grep\", \"query\": \"isGrothendieckAbelian_hasLimits|hasLimits|HasLimitsOfSize\", \"sub\": \"CategoryTheory/Abelian/GrothendieckCategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean\"], \"digest\": \"e6856d3d2b4c21ae\"}",
+   "date": "2026-10-16",
+   "verdict": "supporting instance IsGrothendieckAbelian.hasLimits at Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean:102."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched hom functor between presheaves satisfies the sheaf condition when the target is a sheaf",
+   "results": "{\"t\": \"2026-10-16T12:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched hom functor between presheaves satisfies the sheaf condition when the target is a sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.presheafHom_isSheafFor\", \"CategoryTheory.sheafHom\", \"CategoryTheory.sheafHom'\", \"CategoryTheory.Functor.IsCoverDense.homOver\", \"CategoryTheory.sheafHom'Iso\", \"CategoryTheory.Functor.IsCoverDense.sheafCoyonedaHom\"], \"digest\": \"8b98ef4bfb86f4ca\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom at Mathlib/CategoryTheory/Sites/Monoidal.lean:104; read hypotheses at 39-46 and the full declaration and proof at 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T12:23:06Z\", \"tool\": \"grep\", \"query\": \"isSheaf_functorEnrichedHom\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"b4c2da320a4e3878\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom at Mathlib/CategoryTheory/Sites/Monoidal.lean:104; read hypotheses at 39-46 and the full declaration and proof at 104-111."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T13:02:10Z\", \"tool\": \"grep\", \"query\": \"lemma isSheaf_functorEnrichedHom\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"f6eb9a1dad4a0c62\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111; read variables at lines 39-46 and the end and restriction definitions at Enriched/FunctorCategory.lean:295-312."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf internal hom with arbitrary source and sheaf target is a sheaf",
+   "results": "{\"t\": \"2026-10-16T13:02:11Z\", \"tool\": \"leansearch\", \"query\": \"A presheaf internal hom with arbitrary source and sheaf target is a sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.sheafHom\", \"TopCat.Presheaf.toType_isSheaf\", \"CategoryTheory.Pseudofunctor.sheafHom\", \"CategoryTheory.presheafHom_isSheafFor\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\"], \"digest\": \"8f8de497135f9642\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111; read variables at lines 39-46 and the end and restriction definitions at Enriched/FunctorCategory.lean:295-312."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isSheaf_functorEnrichedHom",
+   "results": "{\"t\": \"2026-10-16T13:02:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\"], \"digest\": \"fce5a95d43438933\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111; read variables at lines 39-46 and the end and restriction definitions at Enriched/FunctorCategory.lean:295-312."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For presheaves in a monoidal closed category, the internal hom with sheaf target is a sheaf",
+   "results": "{\"t\": \"2026-10-16T13:02:13Z\", \"tool\": \"leanfinder\", \"query\": \"For presheaves in a monoidal closed category, the internal hom with sheaf target is a sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.sheafHom\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.presheafHom_isSheafFor\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.sheafHom'\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\"], \"digest\": \"1224956c9d561146\"}",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111; read variables at lines 39-46 and the end and restriction definitions at Enriched/FunctorCategory.lean:295-312."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf_.*Enriched|IsSheaf\\.hom",
+   "results": "{\"t\": \"2026-10-16T13:16:24Z\", \"tool\": \"grep\", \"query\": \"isSheaf_.*Enriched|IsSheaf\\\\.hom\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\"], \"digest\": \"dbe86276870a9cdc\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reading match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111. Read the full theorem and hypotheses, the currying equivalence and restriction naturality at 51-102, and the slice-end definition at Enriched/FunctorCategory.lean:295-312."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent for enriched natural transformations: hom from a fixed presheaf into a sheaf satisfies the sheaf axiom",
+   "results": "{\"t\": \"2026-10-16T13:16:26Z\", \"tool\": \"leanfinder\", \"query\": \"Descent for enriched natural transformations: hom from a fixed presheaf into a sheaf satisfies the sheaf axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.presheafHom_isSheafFor\", \"CategoryTheory.PresheafHom.IsSheafFor.app_cond\", \"CategoryTheory.PresheafHom.IsSheafFor.exists_app\", \"CategoryTheory.PresheafHom.IsSheafFor.app\", \"CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows\", \"CategoryTheory.Functor.IsCoverDense.homOver\"], \"digest\": \"bba2741ce5495096\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reading match: CategoryTheory.Presheaf.isSheaf_functorEnrichedHom, Mathlib/CategoryTheory/Sites/Monoidal.lean:104-111. Read the full theorem and hypotheses, the currying equivalence and restriction naturality at 51-102, and the slice-end definition at Enriched/FunctorCategory.lean:295-312."
   }
  ],
- "proof_deps": [
-  "det-def-sfb-sheaf-tensor-presheaf"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-hom-sheaf.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Presheaf.isSheaf_functorEnrichedHom",
+  "file": "Mathlib/CategoryTheory/Sites/Monoidal.lean",
+  "line": 104,
+  "how": "exact specialization: lines 104-111 assert Presheaf.IsSheaf J (functorEnrichedHom A F G) for arbitrary presheaf F and sheaf G, under MonoidalCategory A and MonoidalClosed A (lines 39-46). Enriched/FunctorCategory.lean:51-73,295-311 defines this functor by the end of coefficient-category internal Homs on Under (op U), equivalently the opposite of C/U, with restriction along Under.map. Monoidal.lean:51-87 gives precisely the natural-family Hom formula in det-def-sfb-sheaf-tensor-presheaf, and lines 91-102 verify compatibility with restriction in U. HasFunctorEnrichedHom is the existence of these already-defined ends; the essentially-small-site convention and Grothendieck completeness supply them (IsGrothendieckAbelian.hasLimits, Abelian/GrothendieckCategory/Basic.lean:102-104). The blueprint unit explicitly uses limits of the size of C; the project realization spells out the universe convention at WeilConjectures/CategoryTheory/GrothendieckAbelian/Monoidal/Defs.lean:25-28,49-54,79-82. No sheaf condition on F, enough-points, concreteness, or exactness assumption is needed."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -56,5 +189,20 @@
   "det-def-sfb-sheaf-tensor-presheaf"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-sheaf-tensor-hom-sheaf",
+  "worker": "stage1",
+  "summary": "Read the current blueprint statement, full sieve-gluing proof, its presheaf-internal-Hom dependency and unit/chapter text. No exact project declaration was found in slopmaster2. LeanFinder, LeanSearch and a corrected Loogle query locate the exact general Mathlib theorem; checked its statement, slice-end construction and size hypotheses. Classified the item itself as a Mathlib leaf, preserving its statement and statement dependency, with no new nodes and no proof steps.",
+  "blueprint": "The whole proof in det-def-sfb-sheaf-tensor-hom-sheaf.proof.md (Hom formula, injectivity and surjectivity) is supplied by Mathlib isSheaf_functorEnrichedHom. This realizes the final sentence of the Presheaves paragraph in sk-def-sfb-sheaf-tensor.proof.md: if G is a sheaf then [F,G] is a sheaf. Blueprint duplicate searches found no separate equivalent node. As an imported node blueprint.from remains null."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q61-de419752a",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q61-de419752a (reviewer sub-agent of L); spot-checked: Read the item, dependency, full blueprint proof, unit route, and exact Mathlib sources. CategoryTheory.Presheaf.isSheaf_functorEnrichedHom (Sites/Monoidal.lean:104-111), with the end/restriction identifications at lines 51-102 and Enriched/FunctorCategory.lean:295-312, exactly supplies the claim under weaker hypotheses. All three proof stages, variance, base-change restriction, size limits, edge cases, duplicate checks, route lock, and delivery-error checks pass. No new nodes or repairs are needed; review.md records the checks and accepts the dependency’s small-limits tool use."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-topos-functoriality-inverse-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The geometric morphism attached to a morphism of schemes",
@@ -12,53 +12,129 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
   "place": "node det-pe-topos-functoriality-inverse-image, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-finite-lower-star-comp",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
  "proof": [
   {
-   "text": "*1.* If $V\\to Y$ is weakly étale, its base change $V\\times_YX\\to X$ is weakly étale, so\n$u$ is well defined. Base change carries $\\mathrm{id}_Y$ to $\\mathrm{id}_X$ and\n$V_1\\times_{V}V_2$ to $(V_1\\times_YX)\\times_{V\\times_YX}(V_2\\times_YX)$, so it preserves the\nterminal object and fibre products, hence all finite limits. Pro-étale coverings are\nstable under base change along $X\\to Y$: fpqc coverings are stable under arbitrary base\nchange of schemes (Stacks Project, Topologies, fpqc coverings), and weakly étale morphisms are stable under base\nchange, as in part 1 of [det-pe-topos-functoriality-site].",
+   "text": "*1.* Base change is a continuous functor of the small pro-étale sites by [def-sfb-finite-lower-star]; this assertion about the sites is independent of its abelian coefficient category. In particular it sends coverings to coverings. The sites also have terminal objects and all fibre products: their morphisms are weakly étale by [def-weil-pbc-small-proetale-site], so for $V_1\\to V\\leftarrow V_2$ the projection $V_1\\times_VV_2\\to V_2$ is weakly étale by base change, and its composite to the base scheme is weakly étale by composition. Thus the scheme fibre product lies in the small site. The fibre-product universal property gives $u(Y)\\cong X$ and $u(V_1\\times_VV_2)\\cong u(V_1)\\times_{u(V)}u(V_2)$, with the same projections. Terminal objects and fibre products generate finite limits, proving clause 1. Use the small sites and larger sheaf universe of [def-weil-pbc-small-proetale-site].",
    "uses": [
-    "det-pe-topos-functoriality-site"
+    "def-sfb-finite-lower-star",
+    "def-weil-pbc-small-proetale-site",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
+    "place": "## Proof, paragraph *1*"
+   }
   },
   {
-   "text": "*2.* Since $u$ preserves coverings and fibre products, $G\\circ u$ satisfies the sheaf\ncondition for every sheaf $G$, as in [def-sfb-finite-lower-star]. The left Kan extension\nalong $u^{\\mathrm{op}}$ is left adjoint to restriction $G\\mapsto G\\circ u$ on presheaves,\nand sheafification is left adjoint to the inclusion of sheaves; composing these\nadjunctions gives $\\Hom(f^{-1}F,G)\\cong\\Hom(\\operatorname{Lan}F,G)\\cong\\Hom(F,G\\circ u)$.",
+   "text": "*2.* For a set-valued sheaf $G$ on $X_{\\mathrm{proét}}$, its sheaf equalizer for the covering $\\{u(V_i)\\to u(V)\\}$ is precisely the equalizer for $G\\circ u$ and $\\{V_i\\to V\\}$, using the fibre-product comparisons of step 1. Hence restriction takes sheaves to sheaves. Apply [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] with $\\mathcal C=Y_{\\mathrm{proét}}$, $\\mathcal D=X_{\\mathrm{proét}}$ and coefficients sets. Its presheaf functor is $\\operatorname{Lan}_{u^{\\mathrm{op}}}$: at $T$ its colimit has indices $(V,T\\to u(V))$ with the opposite of the morphism direction over $Y$. Sheafification then gives the stated $f^{-1}$ and the natural adjunction $\\operatorname{Hom}(f^{-1}F,G)\\cong\\operatorname{Hom}(F,f_*G)$. The same cited statement supplies the constructed adjunction for abelian sheaves, taking these colimits in abelian groups.",
    "uses": [
-    "def-sfb-finite-lower-star"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
+    "place": "## Proof, paragraph *2*"
+   }
   },
   {
-   "text": "*3.* As a left adjoint $f^{-1}$ preserves colimits. For finite limits: the category\n$(u\\downarrow T)$ indexing the pointwise Kan extension at $T\\in X_{\\mathrm{proét}}$ has\nobjects $(V,T\\to u(V))$; since $Y_{\\mathrm{proét}}$ has finite limits and $u$ preserves\nthem, the opposite of this category is filtered (it has the object $(Y,T\\to X)$, and\ncones over finite diagrams are given by limits in $Y_{\\mathrm{proét}}$). Hence\n$\\operatorname{Lan}_{u^{\\mathrm{op}}}F(T)=\\varinjlim F(V)$ is a filtered colimit, which\ncommutes with finite limits of sets. Sheafification is left exact. So $f^{-1}$ preserves\nfinite limits.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*4.* A functor preserving finite products preserves abelian group objects, so $f^{-1}$\ncarries abelian sheaves to abelian sheaves, and its restriction is left adjoint to $f_*$\non abelian sheaves. It preserves kernels (finite limits) and cokernels (as a left adjoint),\nhence is exact.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*5.* $(g\\circ f)_*G=G\\circ u_{g\\circ f}$ and $g_*f_*G=G\\circ u_f\\circ u_g$; the canonical\nisomorphisms $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$ give a natural isomorphism\n$u_f\\circ u_g\\cong u_{g\\circ f}$, whence $(g\\circ f)_*\\cong g_*\\circ f_*$ (compare\n[def-sfb-finite-lower-star-comp]). Left adjoints of isomorphic functors are canonically\nisomorphic, so $(g\\circ f)^{-1}\\cong f^{-1}\\circ g^{-1}$, compatibly with the adjunctions.",
+   "text": "*3.* The adjunction of step 2 and [lem-weil-pbc-left-adjoint-preserves-colimits] show that $f^{-1}$ preserves all colimits. For finite limits use [lem-weil-pbc-presheaf-pullback-sets-left-exact](2): its hypotheses hold by step 1, so $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ preserves finite limits of set-valued presheaves. Concretely its index at $T$ is the opposite of the category of pairs $(V,T\\to u(V))$; it is filtered by the cited statement. Inclusion of set-valued sheaves into presheaves preserves limits by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and set-valued sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact]. Their composite $f^{-1}$ therefore preserves finite limits. This is exactly the left-exact adjunction required for the asserted geometric morphism.",
    "uses": [
-    "def-sfb-finite-lower-star-comp"
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-sheafification-sets-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
+    "place": "## Proof, paragraph *3*"
+   }
+  },
+  {
+   "text": "*4.* On abelian sheaves, the construction of step 2 is the pullback of [def-sfb-finite-upper-star] with coefficient category abelian groups. Apply [lem-weil-pbc-site-pullback-abelian-underlying] to $u$: continuity is step 1, and finite-limit preservation of the constructed set pullback is step 3. It identifies the underlying set sheaf of this abelian pullback with $f^{-1}$ applied to the underlying set sheaf. Thus this is precisely the operation specified in clause 4, including its group operations. The lemma [lem-sfb-finite-upper-star-exact], specialized to abelian groups, states that this abelian pullback preserves finite limits and is exact (its right exactness comes from the abelian adjunction of step 2). In particular it preserves kernels and cokernels, proving clause 4.",
+   "uses": [
+    "def-sfb-finite-upper-star",
+    "lem-weil-pbc-site-pullback-abelian-underlying",
+    "lem-sfb-finite-upper-star-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
+    "place": "## Proof, paragraph *4*"
+   }
+  },
+  {
+   "text": "*5.* For $g:Y\\to Z$, the fibre-product universal property gives a natural isomorphism $a_W:(W\\times_ZY)\\times_YX\\xrightarrow{\\sim}W\\times_ZX$, characterized by its projections to $W$ and $X$. For a sheaf $G$ on $X_{\\mathrm{proét}}$, restriction $G(a_W)$ is an isomorphism $(g\\circ f)_*G(W)\\to g_*f_*G(W)$. It is natural in both $W$ and $G$, since the defining projections commute with their morphisms. Write this pushforward isomorphism as $\\alpha:(g\\circ f)_*\\xrightarrow{\\sim}g_*f_*$. By the adjunctions of step 2 and [def-weil-pbc-composite-adjunction], $f^{-1}g^{-1}$ is left adjoint to $g_*f_*$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=(g\\circ f)^{-1}$, $R_1=(g\\circ f)_*$, $L_2=f^{-1}g^{-1}$, $R_2=g_*f_*$ and $\\delta=\\alpha^{-1}$. It gives a canonical isomorphism $c:(g\\circ f)^{-1}\\xrightarrow{\\sim}f^{-1}g^{-1}$ satisfying $R_1(c_F)\\eta_{1,F}=\\delta_{L_2F}\\eta_{2,F}$. This explicit unit equation proves compatibility with the adjunctions and hence the asserted composition of geometric morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
+    "place": "## Proof, paragraph *5*"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-topos-functoriality-site",
+  "def-pc-fibre-product",
   "def-sfb-finite-lower-star",
-  "def-sfb-finite-lower-star-comp"
+  "def-sfb-finite-upper-star",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-small-proetale-site",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-pullback-abelian-underlying",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-weakly-etale-composition-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-inverse-image.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous finite limit preserving functor of sites defines a geometric morphism with left exact sheafified left Kan extension inverse image and composition isomorphisms.",
+   "results": "8 actual hits: CategoryTheory.GrothendieckTopology.sheafifyCompIso, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.Functor.sheafAdjunctionContinuous. Read Mathlib/CategoryTheory/Sites/Pullback.lean:42–102 and CategoryTheory/Functor/Flat.lean:327–350.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients match existing cited leaves; no single declaration states the scheme-specific five-clause item including its canonical composition map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionContinuous\"",
+   "results": "2 actual hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionContinuous. Read Mathlib/CategoryTheory/Sites/Pullback.lean:42–102 and CategoryTheory/Functor/Flat.lean:327–350.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients match existing cited leaves; no single declaration states the scheme-specific five-clause item including its canonical composition map"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionContinuous|lan_preservesFiniteLimits_of_preservesFiniteLimits [Mathlib/CategoryTheory]",
+   "results": "7 actual hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean. Read Mathlib/CategoryTheory/Sites/Pullback.lean:42–102 and CategoryTheory/Functor/Flat.lean:327–350.",
+   "date": "2026-10-16",
+   "verdict": "partial ingredients match existing cited leaves; no single declaration states the scheme-specific five-clause item including its canonical composition map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -73,5 +149,29 @@
   "def-sfb-finite-lower-star-comp"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-topos-functoriality-inverse-image",
+  "worker": "stage1",
+  "summary": "Five blueprint clauses proved using the site continuity statement, fibre-product universal properties, general set-valued Kan-extension and sheafification leaves, the abelian underlying-sheaf comparison and abelian exactness, and the explicit mate of the natural pushforward composition isomorphism. No new nodes; second reading repaired the invalid specialization from abelian coefficients to sets.",
+  "blueprint": "The five steps realize blueprint proof paragraphs *1* through *5* in order.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-underlying",
+    "why": "Clause 4 must identify the abelian construction with the inverse image on underlying sets. The unit exactness lemma only treats abelian coefficients and states no such comparison; this is a generic site-theoretic tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-pullback-abelian-underlying"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-e5f8fbc66",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-e5f8fbc66 (reviewer sub-agent of L); spot-checked: Read all five proof steps, cited statements, local sources, and unit/chapter route. Checked coefficients, Kan-extension variance, composition mate, edge cases, and acyclicity. Accepted the underlying-sets comparison tool. Corrected proof authorship metadata and added three actual Mathlib search records. Whole corrected JSON and detailed review.md written; statement unchanged, no new nodes.; 1 file(s) fixed by the reviewer"
+ }
 }
