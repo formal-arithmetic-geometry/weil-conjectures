@@ -27,7 +27,8 @@
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
   "def-pc-base-change",
-  "def-sbc-affine-space"
+  "def-sbc-affine-space",
+  "def-asd-vector-bundle-zero-section"
  ],
  "proof": [],
  "proof_deps": [],
@@ -131,5 +132,30 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-2a0267623 (reviewer sub-agent of L); spot-checked: Read the full item, all thirteen dependency statements, master sources, and unit/chapter route. Verified Spec Sym variance, augmentation direction, closedness, étale fibre-product trivializations, edge cases, and reuse candidates. No new nodes, dependency cycle, target weakening, or repairs needed. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9e4e511b3",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Audited the immutable node, all dependencies, source, Lean module, docstrings, report sections, edge cases, searches, and exact declarations. scompile.py passed sandbox and library compilation with no errors or warnings; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityVectorBundleZeroSection",
+  "file": "lean/Sheaf/Paper/PurityVectorBundleZeroSection.lean",
+  "declaration": "AlgebraicGeometry.PurityVectorBundle",
+  "declarations": [
+   "AlgebraicGeometry.PurityVectorBundle",
+   "AlgebraicGeometry.PurityVectorBundle.zeroSection",
+   "AlgebraicGeometry.PurityVectorBundle.zeroSection_spec",
+   "AlgebraicGeometry.PurityVectorBundle.Trivialization"
+  ],
+  "statement": "structure PurityVectorBundle (P : WeilConjectures.PurityFiniteSetting.{u}) (Z : Scheme.{u}) (hZ : Z ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated hZ] [LocallyOfFiniteType hZ] [QuasiCompact hZ] (c : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the landed def-asd-vector-bundle-zero-section relative-Spec construction, augmentation and affine charts. Adds the chosen arbitrary total scheme and over-base isomorphism and the etale trivialization type required here. The Noetherian instance of the existing construction is derived from finite type over the fixed field, not assumed."
  }
 }

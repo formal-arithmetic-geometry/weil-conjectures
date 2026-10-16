@@ -329,5 +329,28 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-3eb2d6127 (reviewer sub-agent of L); spot-checked: Read all seven proof steps, every cited statement and source place, and the unit/chapter route. Tensor and triangle comparisons preserve ordinary étale A-coefficients; residue tests have the required hypotheses. Confirmed the reported c≥0 source correction. No duplicates, cycles, new nodes, or remaining repairs. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4099f6ada",
+  "group": "N7",
+  "result": "pass",
+  "note": "Immutable node and Lean signature match; canonical helper is valid; dependencies, hypotheses, universes, edge cases, docstrings, report sections, and per-file scompile all pass."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.closedImmersion_rightAdjoint_torAmplitude",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteCoefficientClosedExceptionalInverseImage",
+   "AlgebraicGeometry.Etale.closedImmersion_rightAdjoint_torAmplitude"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSupportTorAmplitude.lean",
+  "statement": "theorem closedImmersion_rightAdjoint_torAmplitude (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (_hij : Set.range i.base = (Set.range j.base)ᶜ) (a b c : ℤ) (_hc : 0 ≤ c) (_hcd : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (q : ℤ), c < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj ((R(lowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) j)).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj M)))) (_hcons : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (q : ℤ), @Scheme.IsConstructibleEtaleModuleSheaf U (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n hn) M → @Scheme.IsConstructibleEtaleModuleSheaf T (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n hn) ((_root_.DerivedCategory.homologyFunctor _ q).obj ((R(lowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) j)).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj M)))) (K : DerivedCategoryModule (Padic.coefficientExtensionRing l E n) T) (_hK : @DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n hn) T K) (_hTor : DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) T a b K) : @DerivedCategory.isBoundedConstructible (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n hn) Z ((finiteCoefficientClosedExceptionalInverseImage l E n hn i).obj K) ∧ DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Z a (b + c + 1) ((finiteCoefficientClosedExceptionalInverseImage l E n hn i).obj K)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded finite p-adic coefficient quotient directly. The auxiliary functor is the actual ambient right adjoint, with its Finite proof supplied by Padic.finite_coefficientExtensionRing; no extra finiteness hypothesis is imposed. Constructibility is the recorded finite-value stratification predicate throughout. All variables and universes are explicit; no interval-order, Noetherian, invertibility, or finite-type assumption is added."
  }
 }

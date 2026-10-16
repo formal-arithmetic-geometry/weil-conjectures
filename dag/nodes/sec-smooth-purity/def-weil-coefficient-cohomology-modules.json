@@ -28,7 +28,12 @@
   "def-weil-finitely-generated-module",
   "def-weil-vector-space-scalar-extension",
   "def-weil-finite-dimensional-complex-scalar-extension",
-  "lem-weil-cohomology-commutes-scalar-extension"
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-point-fd-complexes",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "def-weil-point-fd-qlbar-category"
  ],
  "proof": [],
  "proof_deps": [],
@@ -81,5 +86,37 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1c6392c79",
+  "group": "N7",
+  "result": "pass",
+  "note": "Audited the immutable node, all dependencies, source place, eight Lean modules, declarations, docstrings, edge cases, report sections, and scompile evidence. No substantive mismatch or repair needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientCohomologyModules",
+  "declaration": "DerivedCategory.coefficientCohomologyModules",
+  "declarations": [
+   "DerivedCategory.coefficientFiniteCohomology",
+   "DerivedCategory.coefficientFgCohomology",
+   "DerivedCategory.coefficientFdCohomology",
+   "DerivedCategory.coefficientFiniteCohomology_finite",
+   "DerivedCategory.coefficientFgCohomology_finite",
+   "DerivedCategory.coefficientFdCohomology_finite",
+   "DerivedCategory.coefficientQbarCohomology",
+   "DerivedCategory.coefficientQbarCohomology_finite",
+   "DerivedCategory.coefficientQbarCohomology_map_stage",
+   "DerivedCategory.coefficientCohomologyChangeStage",
+   "DerivedCategory.coefficientQbarCohomology_changeStage",
+   "DerivedCategory.coefficientCohomologyModules"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientCohomologyModules.lean",
+  "statement": "def coefficientCohomologyModules (D : WeilConjectures.FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (n : ℕ) (_hn : 1 ≤ n) (i : ℤ) : ((pointFiniteCohomology (Padic.coefficientExtensionRing c.l E.val n)).FullSubcategory ⥤ ModuleCat.{u} (Padic.coefficientExtensionRing c.l E.val n)) × ((pointFgComplete (Padic.coefficientExtensionIntegers c.l E.val) (Padic.coefficientExtensionIdeal c.l E.val 1)).FullSubcategory ⥤ ModuleCat.{u} (Padic.coefficientExtensionIntegers c.l E.val)) × ((pointFiniteDimensional E.val).FullSubcategory ⥤ ModuleCat.{u} E.val) × (PointFdQbar c.l c.Qbar ⥤ ModuleCat.{u} c.Qbar)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-16",
+  "existing": false
+ }
 }

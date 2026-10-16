@@ -197,5 +197,28 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-70eae6edd (reviewer sub-agent of L); spot-checked: Read the item, all thirteen cited statements, sources, and unit/chapter route in full. Verified weakly étale base change, finite-discrete-module comparison, witness orientation, inverse equations, naturality, and edge cases. No new nodes or repairs; accepted the declared comparison-pullback tool use. Dependency closure is acyclic. Condensed target comparisons remain separate obligations. Detailed review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c250de512",
+  "group": "NE",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, canonical constructions, source passages, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim signature. Immutable module passed per-file scompile checks without diagnostics. No changes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FullCDClassRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleOrigin_restriction_to_proetale_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleOriginRestrictionWitnessIso",
+   "AlgebraicGeometry.ProEtale.etaleOrigin_restriction_to_proetale_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/FullCDClassRestriction.lean",
+  "statement": "lemma etaleOrigin_restriction_to_proetale_base_change (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) (Xbar : Scheme.{u}) [Xbar.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Xbar ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Xbar ↘ Spec (CommRingCat.of D.k))] (Y : Scheme.{u}) (f : Xbar ⟶ Y) (V : Y.ProEt) (F : Sheaf (Scheme.ProEt.topology Xbar) (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (_hF : (comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) Xbar).essImage F) : IsPullback (pullback.fst f V.hom) (pullback.snd f V.hom) f V.hom ∧ WeaklyEtale (pullback.fst f V.hom) ∧ (comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback f V.hom)).essImage ((ProEtale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst f V.hom)).obj F) ∧ (∀ (G : Sheaf Xbar.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (_α : (comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) Xbar).obj G ≅ F), Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst f V.hom)).obj F ≅ (comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback f V.hom)).obj ((Etale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst f V.hom)).obj G))) ∧ (∀ (G G' : Sheaf Xbar.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) (a : G ⟶ G'), (ProEtale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst f V.hom)).map ((comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) Xbar).map a) ≫ (etaleOriginRestrictionWitnessIso (pullback.fst f V.hom) G' (Iso.refl _)).hom = (etaleOriginRestrictionWitnessIso (pullback.fst f V.hom) G (Iso.refl _)).hom ≫ (comparisonUpperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback f V.hom)).map ((Etale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) (pullback.fst f V.hom)).map a))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The class uses the recorded Functor.essImage specialization. The auxiliary witness isomorphism has real data: inverse image of alpha inverse followed by the inverse of comparisonCoefficientPullbackIso. The theorem includes the cartesian and weakly-etale clauses, arbitrary witnesses, arbitrary-scheme essential-image membership, and naturality of this same constructed isomorphism."
  }
 }
