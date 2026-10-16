@@ -29,9 +29,114 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the generalized Segal equivalence and incidence-diagram axiom stated in [lem-coef-operadic-algebra-presentability]. Since both $Q_{[0]}$ and $Q_{[1]}$ are spaces, its iterated fiber products show that every $Q_{[n]}$ is a space: an inverse to an edge is obtained componentwise, with the same vertex identifications inverted. Thus every source change over an identity is invertible, as required in the definition of $\\operatorname{Op}_Q(C)$. Such a triangle has the same source arity and the same base arrow at both ends. Consequently the operation space is the disjoint union of its parts indexed by the active base arrows $\\alpha:[n]\\to[k]$. This assertion is about the coherent groupoids themselves, with higher simplices retained, rather than their sets of components.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(ii), 3.1.13(ii); Erratum, paragraph preceding Corollary E.0.1 (source changes lie over identities)."
+   }
+  },
+  {
+   "text": "Fix $k\\geq1$ and an active base arrow $\\alpha:[n]\\to[k]$. Put $t_j=\\alpha^{\\mathrm{op}}(j)$ and $n_i=t_i-t_{i-1}$. Then $0=t_0\\leq\\cdots\\leq t_k=n$. Let $\\sigma_i:[n]\\to[n_i]$ be the inert arrow whose opposite includes the interval $[t_{i-1},t_i]$, and let $\\beta_i:[n_i]\\to[1]$ be active. Direct evaluation at $0,1$ gives $\\rho_i\\alpha=\\beta_i\\sigma_i$. For $a:D\\to C$ choose a cocartesian lift $D\\to D_i$ of $\\sigma_i$. The mapping-square characterization in [lem-coef-infinity-cocartesian-mapping-criterion], taken over the base factorization $\\beta_i\\sigma_i$, identifies maps $D_i\\to C_i$ over $\\beta_i$ with maps $D\\to C_i$ over $\\rho_i\\alpha$. Hence $D\\xrightarrow{a}C\\to C_i$ factors as a contractibly determined $b_i:D_i\\to C_i$. This gives the asserted restriction map $R:\\operatorname{Op}_Q(C)\\to\\prod_i\\operatorname{Op}_Q(C_i)$, including its action on coherent triangles and higher simplices: it is induced by these mapping-space equivalences, not by independent choices on points. The required inert lifts exist by [lem-coef-operadic-algebra-presentability].",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(i), 3.1.13(i); inert block factorization in the product assertion of the proof of E.0.1. Cocartesian factorization is HTT Proposition 2.4.4.3, opposite dual."
+   }
+  },
+  {
+   "text": "For $k=0$, an active $[n]\\to[0]$ would have to send the sole vertex of $[0]$ simultaneously to $0$ and $n$ in $[n]$, so $n=0$ and the base arrow is the identity. Thus $\\operatorname{Op}_Q(C)$ is the space of arrows $D\\to C$ in the space $Q_{[0]}$. In the path-space convention of [def-cbc-enhanced-diagrams-cones] this is the space of paths with fixed final endpoint and varying initial endpoint. It contracts to the constant path at $C$: shorten a path by moving its initial endpoint towards its fixed final endpoint. Equivalently its coherent arrow groupoid has terminal object $\\mathrm{id}_C$, with the triangle from $a:D\\to C$ to $\\mathrm{id}_C$ supplied by $a$ itself and its identity homotopy. The possible triangle witnesses form the path space ending at the specified $a$, so are contractible too. This proves exactly the empty-product clause; it does not assert that $Q_{[0]}$ itself is contractible.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proof of E.0.1, product assertion at the empty tuple; explicit endpoint/path contraction."
+   }
+  },
+  {
+   "text": "To compute a homotopy fiber of $R$ for $k\\geq1$, fix a tuple $b_i:D_i\\to C_i$, with input arities $n_i\\geq0$. Write $V_j\\in Q_{[0]}$ for the $j$th vertex projection of $C$, $0\\leq j\\leq k$. The endpoint projections of $C_i$ are identified with $V_{i-1},V_i$ by the chosen inert projection diagram. Project $b_i$ to each of these vertices and factor through the corresponding endpoint projection of $D_i$. By [lem-coef-infinity-cocartesian-mapping-criterion] each factorization has contractible choice. This gives maps $u_i^-:s(D_i)\\to V_{i-1}$ and $u_i^+:t(D_i)\\to V_i$ in $Q_{[0]}$, together with their composition homotopies. Here $s(D_i),t(D_i)$ denote the first and last vertex; if $n_i=0$ they are the same object. All these maps are equivalences because $Q_{[0]}$ is a space. The endpoint identifications and inert projections used here are precisely those of [lem-coef-operadic-algebra-presentability], including projections to $[0]$.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 3.1.13, the inert incidence diagram to [0] and [1]; expansion of the sentence using the space assumption on the zero fiber in E.0.1."
+   }
+  },
+  {
+   "text": "At the junction of blocks $i$ and $i+1$, glue their endpoint objects by an equivalence $e_i:t(D_i)\\to s(D_{i+1})$ and a homotopy $u_{i+1}^-e_i\\simeq u_i^+$. The space of such data is contractible: it is the homotopy fiber at $u_i^+$ of postcomposition by the equivalence $u_{i+1}^-$. An inverse to this postcomposition map is postcomposition by an inverse of $u_{i+1}^-$; the associative and unital composition homotopies of [lem-coef-infinity-mapping-composition] verify the two inverse equations. Hence postcomposition by $u_{i+1}^-$ is a weak homotopy equivalence, and [lem-coef-spaces-homotopy-fiber-detection], applied with both $u$ and $r$ equal to this postcomposition map and with $q=v$ the identity of its target, shows that each of its homotopy fibers is equivalent to a homotopy fiber of the identity, hence contractible. This also specifies all higher identifications, rather than choosing an equality of vertices. Put $n=\\sum_i n_i$. Regroup the source Segal equivalence of [lem-coef-operadic-algebra-presentability] into these blocks: both $Q_{[n]}$ and $Q_{[n_1]}\\times_{Q_{[0]}}\\cdots\\times_{Q_{[0]}}Q_{[n_k]}$ are the limit of the same diagram of $n$ unit edges and their $n+1$ vertices. A zero-length block contributes just its vertex and identity identifications, so contributes no extra edge. A cone on either diagram is the same list of edges and vertex identifications; restricting and concatenating these lists are inverse, also on coherent families. Therefore the glued blocks lift, with contractible space of choices, to $D\\in Q_{[n]}$ with its inert block restrictions identified with the specified $D_i$. The junction homotopies ensure that the two descriptions of the map from each shared vertex to $V_i$ agree coherently.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(ii) and 3.1.13(ii), regrouped Segal equivalence; explicit endpoint gluing behind the E.0.1 product assertion."
+   }
+  },
+  {
+   "text": "Let $\\alpha:[n]\\to[k]$ have $\\alpha^{\\mathrm{op}}(j)=n_1+\\cdots+n_j$. For the $D$ obtained in step 5, form maps $D\\to C_i$ over $\\rho_i\\alpha$ by its inert block projections followed by $b_i$. Their endpoint composites agree, with the homotopies fixed in step 5, with the maps $D\\to V_j$ obtained from the corresponding source vertex and its map to $V_j$. Thus these maps are a point of the entire incidence limit in [lem-coef-operadic-algebra-presentability], not just a tuple of maps to the colors. Its mapping-space axiom gives\n$$\\operatorname{Map}_Q^\\alpha(D,C)\\simeq\\lim_{\\gamma\\in I_k}\\operatorname{Map}_Q^{\\gamma\\alpha}(D,C_\\gamma).$$\nThe homotopy fiber over that incidence datum is contractible. Hence it supplies an active arrow $a:D\\to C$ together with the identifications of its restrictions with every $b_i$, with contractible choice of all those data. Conversely an arrow $a$ with these restriction identifications supplies exactly the vertex factorizations, junction homotopies, source Segal lift and incidence lift just listed: use the mapping-space equivalences of [lem-coef-infinity-cocartesian-mapping-criterion] to recover each endpoint factorization. These two descriptions are inverse because restriction and extension are inverse equivalences at each of the specified mapping-space and Segal comparisons. This computation also applies to a family of triangles or higher simplices, since the fibers and limits used throughout are homotopy fibers and coherent limits. It therefore computes the full homotopy fiber of $R$, including its higher homotopy, and shows that it is contractible. More explicitly, forget the successive choices in reverse order of construction: first the incidence lift, then the source lift, then the junction data, and finally the endpoint factorizations. Each forgetful map has the contractible homotopy fibers described in steps 4-6. Apply [lem-coef-spaces-homotopy-fiber-detection] at each stage, comparing the forgetful map to the identity of its base, to make it an equivalence. Their composite identifies the entire space of lifting data with a point. This justifies the assertion about successive contractible choices without requiring the forgetful maps to be fibrations.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.1(iii), 3.1.13(iii); expansion of the incidence/mapping-space part of the product assertion in the proof of E.0.1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-spaces-homotopy-fiber-detection] to $u=R:E\\to B$, where $E=\\operatorname{Op}_Q(C)$ and $B=\\prod_i\\operatorname{Op}_Q(C_i)$, with $r=R$, $q=\\mathrm{id}_B$ and $v=\\mathrm{id}_B$. The maps on fibers compare the contractible fibers just computed with the contractible fibers of $\\mathrm{id}_B$, so are equivalences. All objects here are spaces by step 1 and the definition of the operation groupoids, and all are small in the stipulated universe. The node requires no Kan-fibration hypothesis on $R$, since its fibers are homotopy fibers. Thus $R$ is an equivalence. If $B$ is empty there are no fibers to test and the same criterion applies; the constructed map to the empty space forces $E$ empty.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proof of E.0.1, product assertion; homotopy-fiber test for the constructed restriction map."
+   }
+  },
+  {
+   "text": "The base calculation in step 2 gives $n_i=t_i-t_{i-1}$ and $\\sum_i n_i=t_k-t_0=n$. Conversely any tuple of nonnegative arities defines the unique active base arrow by the partial sums used in step 6. Thus the equivalence is on all arities, with exactly the stated sum grading; zero-length blocks have been retained throughout, and no triangle over a base identity changes the arity. For an inert-preserving map $f:Q\\to Q'$, use the images of the chosen inert projections as those of $f(C)$ and $f(D)$. Applying $f$ to $D\\to D_i\\xrightarrow{b_i}C_i$ gives the defining factorization for the restriction of $f(a)$. The cocartesian mapping-space equivalences of [lem-coef-infinity-cocartesian-mapping-criterion] identify its factor with $f(b_i)$, together with the contractible factorization homotopies and their higher compatibilities. These are comparisons of coherent mapping-space maps, so apply on all parameter simplices and on composites of $f$. Hence $R_{Q',f(C)}\\operatorname{Op}_f$ is naturally equivalent to $(\\prod_i\\operatorname{Op}_f)R_{Q,C}$. Changing any chosen inert lifts gives the same comparison by their cocartesian universal properties. This proves the required naturality of the equivalence, and step 3 supplies it for $k=0$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definitions 2.4.2 and 3.1.17; naturality of the inert product comparison in the proof of E.0.1; explicit arity calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Erratum proof of Corollary E.0.1 and Definitions 2.4.1, 3.1.13, read online 2026-10-17. Expanded coherent endpoint-gluing and incidence argument; source not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +193,45 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) : Type u\", \"doc\": \"A simplicial set `X` satisfies the strict Segal condition if its simplices\\nare uniquely determined by their spine. \"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) : X.IsStrictSegal\", \"doc\": \"The unique existence of an inverse to `spine X n` forall `n : ℕ` implies\\nthe mere existence of such an inverse. \"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) [X.IsStrictSegal] : X.StrictSegal\", \"doc\": \"Given `IsStrictSegal X`, a choice of inverse to `spine X n` for all `n : ℕ`\\ndetermines an inhabitant of `StrictSegal X`. \"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"Simplices in the nerve of categories are uniquely determined by their spine.\\nIndeed, this property describes the essential image of the nerve functor. \"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set `X`, this constructs a `StrictSegal` structure for `X` from\\n`StrictSegalCore` structures for all `n : ℕ`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) {n : ℕ} : X.Path n → X.obj (Opposite.op { len := n })\", \"doc\": \"The inverse to `spine X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.spine n (sx.spineToSimplex f) = f\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) (n : ℕ) : X.obj (Opposite.op { len := n }) ≃ X.Path n\", \"doc\": \"The fields of `StrictSegal` define an equivalence between `X _⦋n⦌`\\nand `Path X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.obj (Opposite.op { len := 1 })\", \"doc\": \"In the presence of the strict Segal condition, a path of length `n` can be\\n\\\"composed\\\" by taking the diagonal edge of the resulting `n`-simplex. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (Δ : X.obj (Opposite.op { len := n })) : sx.spineToSimplex (X.spine n Δ) = Δ\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : X.spine n ∘ self.spineToSimplex = id\", \"doc\": \"`spineToSimplex` is a right inverse to `spine X n`. \"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : self.spineToSimplex ∘ X.spine n = id\", \"doc\": \"`spineToSimplex` is a left inverse to `spine X n`. \"}\n",
    "date": "2026-10-17",
    "verdict": "No match: SSet.StrictSegal and its spine maps concern simplices of a single strict Segal simplicial set; they do not state a result about generalized operads or their active-operation spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal decomposition of spaces of active operations in generalized nonsymmetric infinity operads",
+   "results": "Eight hits: SSet.StrictSegalCore, SSet.StrictSegal, SSet.StrictSegal.ofCore, SSet.Truncated.StrictSegal, SSet.StrictSegal.spineToSimplex, SSet.IsStrictSegal, SSet.StrictSegalCore.concat, SSet.StrictSegal.truncation. All in AlgebraicTopology/SimplicialSet/StrictSegal.",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180: these are bijections between simplices and spines of a strict Segal simplicial set, not homotopy-coherent operation spaces in a generalized infinity operad. The other hits concern ordinary products, paths, splitting or bibliography; none specializes to the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing composable input blocks and their operations using Segal equivalences and groupoidal vertex fibers",
+   "results": "Eight hits: SSet.StrictSegalCore.concat, SSet.StrictSegalCore.map_mkOfSucc_zero_concat, SSet.StrictSegalCore.δ₀_concat, SSet.StrictSegalCore.spineToSimplex_succ, SSet.Truncated.Path.mk₂_arrow, SSet.Truncated.Path.mk₂, CategoryTheory.Nerve.strictSegal, SSet.StrictSegalCore.spineToSimplexAux. StrictSegal or Path modules.",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180: these are bijections between simplices and spines of a strict Segal simplicial set, not homotopy-coherent operation spaces in a generalized infinity operad. The other hits concern ordinary products, paths, splitting or bibliography; none specializes to the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.StrictSegal",
+   "results": "Twelve hits: SSet.StrictSegal and its isStrictSegal, ofIsStrictSegal, ofCore, spineToSimplex, spine_spineToSimplex_apply, spineEquiv, spineToDiagonal, spineToSimplex_spine_apply, spine_spineToSimplex, spineToSimplex_spine; CategoryTheory.Nerve.strictSegal. Module Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal.",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180: these are bijections between simplices and spines of a strict Segal simplicial set, not homotopy-coherent operation spaces in a generalized infinity operad. The other hits concern ordinary products, paths, splitting or bibliography; none specializes to the item."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Operad|Segal.*product",
+   "results": "Two bibliography-only hits: Mathlib/Algebra/NonAssoc/PreLie/Basic.lean:39 and Mathlib/CategoryTheory/Distributive/Monoidal.lean:55.",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180: these are bijections between simplices and spines of a strict Segal simplicial set, not homotopy-coherent operation spaces in a generalized infinity operad. The other hits concern ordinary products, paths, splitting or bibliography; none specializes to the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Active operation spaces in a generalized nonsymmetric infinity operad decompose as products under inert projections",
+   "results": "Eight hits: Pi.comul_comp_proj (RingTheory.Coalgebra.Basic), Prod.infinite_of_left (Data.Fintype.EquivFin), MeasurableSpace.pi_eq_generateFrom_projections (MeasureTheory.MeasurableSpace.Pi), TopCat.piIsoPi_inv_π (Topology.Category.TopCat.Limits.Products), MeasurableSpace.pi (MeasureTheory.MeasurableSpace.Constructions), Profinite.NobelingProof.GoodProducts.union_succ, CategoryTheory.Limits.π_comp_opProductIsoCoproduct_hom (CategoryTheory.Limits.Shapes.Opposites.Products), SimplicialObject.Splitting.decomposition_id (AlgebraicTopology.DoldKan.SplitSimplicialObject).",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180: these are bijections between simplices and spines of a strict Segal simplicial set, not homotopy-coherent operation spaces in a generalized infinity operad. The other hits concern ordinary products, paths, splitting or bibliography; none specializes to the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-localization-operation-criterion",
@@ -111,5 +251,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-operation-segal-product",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause. Expanded the erratum product assertion into a coherent restriction map, contractible endpoint gluing, block regrouping of the source Segal equivalence, and lifting through the target incidence mapping-space equivalence. Proved the empty-output case separately; retained nullary blocks, arity grading and map naturality. Reused existing universal mapping and homotopy-fiber nodes; no new nodes or Mathlib leaves. Reran five logged Mathlib searches and read the strict-Segal candidate source.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coefficient mapping-complex adjunction before derived inverse limit (current main-20261015 sk-thm-sf-package proof, second paragraph and displayed calculation). This item fills the inert product-decomposition argument inside the existing many-object operad/localization subroute, specifically Erratum E.0.1. Steps 1-2 set up the operation groupoids and restriction, 3 treats the empty tuple, 4-7 expand the product assertion through vertex gluing and incidence, and 8 records grading and naturality. No unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-6e5703f38",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6e5703f38 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full. Source: Gepner–Haugseng arXiv:1312.3178, which I read from the PDF because the HTML page has no appendices. In Appendix E, the proof of Cor. E.0.1 says 'as M[0] is a space we have an equivalence M_triv,act/C ≃ ∏_i M_triv,act/C_i', with M[0] and M[1] spaces. The preceding paragraph shows that source changes lie over identities. Definition 3.1.13 (i)–(iii) matches lem-coef-operadic-algebra-presentability (i)–(iii). The statement is faithful and nothing is weakened. I checked it independently: the Segal regrouping plus the incidence limit leave a contractible based-path gluing at the inner vertices. I tested k=0 (only n=0 is possible; Op(C) is the homotopy fiber of the identity), k=1, all-nullary blocks, the block pattern (0,2,0), Q=Δ^op (endpoint-preserving maps correspond to arity tuples), Δ_X^op with non-discrete X, and an empty right-hand side. In step 2, ρ_iα=β_iσ_i, and the homotopy pullback square's fibers line up over the discrete base. Steps 6 and 7 apply the fiber-detection node with q=v=id in the correct orientation; the empty case is allowed. In step 8, inert-preserving maps keep activity and cocartesian lifts. There are no new nodes. I found no duplicate after an rg search for active-operation, Op and inert-projection nodes and reading 5 near candidates. Every cited statement is in unit sk-prop-sf-biduality-general and def-cbc is a definition, so there is no route departure and no tool_uses. There is no cycle and no SGA. One fault (C1) is repaired in fixes/: step 5 inferred contractible homotopy fibers from postcomposition being an equivalence without a node. It now cites lem-coef-spaces-homotopy-fiber-detection (u=r=postcomposition, q=v=id); proof_deps is unchanged. Also, the report says created.item was changed to the item itself, but the JSON correctly keeps the parent lem-coef-operadic-localization-operation-criterion. That matches blueprint via, so no change is needed.; 1 file(s) fixed by the reviewer"
  }
 }

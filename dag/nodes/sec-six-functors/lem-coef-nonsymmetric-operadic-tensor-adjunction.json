@@ -27,11 +27,117 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category",
-  "lem-coef-nonsymmetric-operads-presentability"
+  "lem-coef-nonsymmetric-operads-presentability",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-operadic-model-structures"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-categorical-pattern-model-calculus] to the categorical pattern of [def-coef-categorical-pattern-fibrancy] with $B=N(\\Delta^{\\mathrm{op}})$, $S$ the inert arrows and, for each $n\\geq0$, the cone from $[n]$ to its $n$ inert projections $[1]$. The leaves form the discrete $n$-element simplicial set, empty at $n=0$. The fiber-limit condition is $\\mathcal O_{[n]}\\simeq\\mathcal O_{[1]}^n$. In the relative mapping-space pullback, the base mapping spaces are discrete sets of base arrows; its fiber over $\\phi:[m]\\to[n]$ is exactly the product formula in [lem-coef-nonsymmetric-operads-presentability]. Thus these are the ordinary operadic fibrant objects, including the terminal $[0]$-fiber and empty mapping product. [lem-coef-marked-operadic-model-structures] identifies this model's associated infinity category with the stated operad category. All objects are cofibrant since initial maps are monomorphisms. The point model of [lem-coef-marked-point-cartesian-model] has $C^\\natural$ as a cofibrant-fibrant representative of $C$ and associated infinity category $\\operatorname{Cat}_\\infty$. Write $\\mathsf K$ and $\\mathsf M_P$ for these two models. By [lem-coef-simplicial-model-nerve-localization] their coherent nerves of bifibrant objects agree with their coherent localizations; this also identifies their enriched sharp mapping complexes with localized mapping spaces.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-nonsymmetric-operads-presentability",
+    "lem-coef-marked-operadic-model-structures",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Example 3.2.4(i), Corollary 3.2.6 and Definition 3.2.7, pp.607–608"
+   }
+  },
+  {
+   "text": "For $\\mathcal O$ with its inert marking form $X=C^\\natural\\times\\mathcal O$ over $\\Delta^{\\mathrm{op}}$ and take a functorial fibrant replacement $X\\xrightarrow{\\sim}RX$ in the model category of step 1. This constructs $C\\odot\\mathcal O$. The marking on $X$ is exactly the conjunction specified in the statement. Each fixed-input product functor is left Quillen by the pushout-product axiom in [lem-coef-categorical-pattern-model-calculus], since the other input is cofibrant. Apply [lem-coef-model-infinity-derived-adjunction] to its ordinary right adjoint in each variable. These derived functors are computed on the displayed product, and localizing its replacement map gives an equivalence $qX\\simeq qRX$. Any other weak-equivalence map from $X$ to a fibrant object gives the same localized object. The external product preserves weak equivalences in either cofibrant input, so its localization is a bifunctor; the functor-category universal property of localization makes its coherences and the replacement comparisons natural, rather than unrelated choices on objects. The right adjoint to $(-)\\times\\mathcal O:\\mathsf K\\to\\mathsf M_P$ is the marked Hom $\\mathcal H_B(\\mathcal O,-)$; the right adjoint to $C^\\natural\\times(-):\\mathsf M_P\\to\\mathsf M_P$ is the cotensor by $C^\\natural$. These are the two adjunctions explicitly supplied by the marked enrichment. The localization universal property used here, on entire functor infinity categories, is [lem-coef-simplicial-model-nerve-localization]; applying it in each variable to this weak-equivalence-preserving product gives its coherent bifunctor and natural replacement comparison.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Remark 3.2.12 and proof of Lemma 3.6.8, pp.609,619"
+   }
+  },
+  {
+   "text": "For fibrant $\\mathcal Q$, the right adjoint to $(-)\\times\\mathcal O$ is the marked internal Hom $H(\\mathcal O,\\mathcal Q)$ of [lem-coef-categorical-pattern-model-calculus]. Its underlying $n$-simplices are maps $(\\Delta^n)^b\\times\\mathcal O\\to\\mathcal Q$ over the base. The marking condition only requires the restriction at each vertex of $\\Delta^n$ to preserve inert edges. Therefore its underlying simplicial set is the full functor subcategory on the inert-preserving functors, namely $\\operatorname{Alg}_{\\mathcal O}(\\mathcal Q)$, including all coherent transformations. Apply that node's enriched fibration axiom to $\\varnothing\\to\\mathcal O$ and $\\mathcal Q\\to *_{/B}$. The resulting map $H(\\mathcal O,\\mathcal Q)\\to *$ is a fibration in $\\mathsf K$. Its fibrant-object description in [lem-coef-marked-point-cartesian-model] makes $H$ categorical-fibrant with exactly its equivalences marked. The full-subcategory convention used in the simplex identification is [def-cbc-enhanced-diagrams-cones]. The derived right adjoint of [lem-coef-model-infinity-derived-adjunction] consequently has this infinity category as its value. Its mapping-space adjunction gives exactly the displayed equivalence, naturally in $C$ and $\\mathcal Q$. Precomposition in $\\mathcal O$ commutes with the product–Hom adjunction: both adjuncts evaluate $(c,o)$ at the value of the same functor. Thus this is also coherent in $\\mathcal O$, using the localized bifunctor of step 2.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Remark 3.2.12; Lemma 3.6.8 and Definition 3.6.12, pp.609,619–620"
+   }
+  },
+  {
+   "text": "Fix either $\\mathcal O$ or $C$ and denote the corresponding derived product functor by $L$, its derived right adjoint from step 2 by $R$. The source admits small colimits: for operads this is [lem-coef-nonsymmetric-operads-presentability]; for $\\operatorname{Cat}_\\infty$ apply [lem-coef-simplicial-model-coherent-diagrams] to the combinatorial simplicial model $\\mathsf{Cat}^+$ of step 1. For a small diagram $D:J\\to\\operatorname{dom}(L)$ with colimit $d$ and any target $Q$, the coherent adjunction and [lem-coef-infinity-yoneda-presheaf-limits] give\n$$\\operatorname{Map}(Ld,Q)\\simeq\\operatorname{Map}(d,RQ)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}(D_j,RQ)\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}(LD_j,Q).$$\nThese are the maps induced by the image cocone, hence the same node's colimit criterion proves that cocone colimiting. This proves separate preservation, also for the empty diagram; no claim that the literal product is already an operad is used. The passage from the localization convention of the derived adjunction to the coherent-nerve convention of the diagram-model theorem is the natural equivalence in [lem-coef-simplicial-model-nerve-localization].",
+   "uses": [
+    "lem-coef-nonsymmetric-operads-presentability",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proof of Lemma 3.6.8, p.619; mapping-space argument written out"
+   }
+  },
+  {
+   "text": "For $\\mathcal U\\in\\mathcal U'$ keep the fixed ordinary-operad pattern of step 1. Its base, cone family and all finite cone shapes belong to $\\mathcal U$. By [lem-coef-finite-pattern-universe-comparison], smaller objects have the same cofibrations and weak equivalences in the larger model, and a common smaller fibrant replacement. To check preservation of a $\\mathcal U$-small simplicial colimit, present its coherent diagram by a strict enriched diagram $F:I\\to\\mathsf M_P$ as in [lem-coef-simplicial-model-coherent-diagrams], with $I$ a $\\mathcal U$-small fibrant simplicial category. Choose a projectively cofibrant replacement $QF$ in the smaller universe. Its cell presentation uses $F_i(a)\\to F_i(b)$ for the generating cofibrations $a\\to b$ of $\\mathsf M_P$. The generators are the same in both universes. The free diagram still has value $I(i,j)\\otimes a$, so every cell, coproduct, transfinite composition and retract in this smaller presentation is also a projective cofibration in the larger diagram model. Thus $QF$ remains projectively cofibrant there; its objectwise weak equivalence to $F$ also remains one. The ordinary enriched colimit $\\operatorname{colim}^{\\mathrm{enr}}_I QF$ is computed by coproducts and coequalizers of the same smaller sets, which retain their universal property against larger sets: a map from their quotient is exactly a compatible family of maps from the summands. It is therefore the same marked simplicial object in both universes. Apply the common fibrant replacement. The colimit comparison of [lem-coef-simplicial-model-coherent-diagrams], applied in each universe, identifies this one cocone with the colimit in each operad infinity category. This proves the claimed preservation by universe inclusion, for arbitrary smaller simplicial shapes and including the empty shape. The index $u:\\mathfrak C[J]\\to I$ remains a Dwyer--Kan equivalence after enlargement: its category of components is identical, and all its mapping simplicial sets and their homotopy groups are identical smaller sets. The objectwise sharp mapping complexes and their compositions are unchanged under inclusion, by their formula in [lem-coef-categorical-pattern-model-calculus]. The coherent-nerve and localization identification in [lem-coef-simplicial-model-nerve-localization] therefore identifies the diagram and cocone in the two comparisons with the actual universe inclusion, rather than merely identifying their apices.",
+   "uses": [
+    "lem-coef-finite-pattern-universe-comparison",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Corollary 3.2.6 and finite-cone model construction; universe comparison expanded from Higher Algebra B.0.20 proof and the strict diagram colimit construction"
+   }
+  },
+  {
+   "text": "Work in $\\mathcal U'$ with $C$ and $\\mathcal Q$ of that size and the smaller $\\mathcal O$ viewed there. [lem-coef-categorical-pattern-model-calculus] gives the marked pattern model there and the product--Hom and product--cotensor adjunctions. Every object is cofibrant, so [lem-coef-model-infinity-derived-adjunction] computes both left derived functors by the marked product and a fibrant replacement. The internal-Hom simplex description still says that each parameter vertex preserves inert edges, hence its underlying infinity category is $\\operatorname{Alg}_{\\mathcal O}(\\mathcal Q)$ with all transformations. These adjunctions give the displayed mapping-space equivalence in $\\mathcal U'$. For either fixed-input derived product $L'$ with right adjoint $R'$, and any smaller-indexed diagram $D$ with colimit $d$ in its containing-universe source, the image cocone gives\n$$\\operatorname{Map}(L'd,Q)\\simeq\\operatorname{Map}(d,R'Q)\\simeq\\lim_j\\operatorname{Map}(D_j,R'Q)\\simeq\\lim_j\\operatorname{Map}(L'D_j,Q).$$\nThe colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] makes that image cocone colimiting. Source colimits exist by [lem-coef-simplicial-model-coherent-diagrams] applied to the containing-universe models. Their localizations and coherent nerves agree by [lem-coef-simplicial-model-nerve-localization]. Step 5 identifies the colimit of a smaller operad diagram with its containing-universe colimit, so this calculation also applies to the original smaller operad cocone when $C$ is larger. If both inputs are smaller, the marked product is smaller, and [lem-coef-finite-pattern-universe-comparison] identifies its two fibrant replacements. All mapping spaces here are formed in the containing universe, as asserted.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-simplicial-model-coherent-diagrams",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-finite-pattern-universe-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Remark 3.2.12 and proof of Lemma 3.6.8, with universes enlarged"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-categorical-pattern-model-calculus",
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-nonsymmetric-operads-presentability",
+  "lem-coef-marked-operadic-model-structures",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-model-infinity-derived-adjunction",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-finite-pattern-universe-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Gepner-Haugseng (2015), Corollary 3.2.6, Remark 3.2.12 and Lemma 3.6.8 proof, read online in the named PDF; universe comparison expanded from Higher Algebra B.1.1, B.1.6, B.2.4, proof of B.0.20 and the existing coherent-diagram model theorem. Shared source archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +180,80 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|categorical.?pattern|marked.?simplicial",
+   "results": "{\"t\": \"2026-10-16T21:48:50Z\", \"tool\": \"grep\", \"query\": \"operad|categorical.?pattern|marked.?simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\"], \"digest\": \"982cc56bbcd25910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned simplicial-set, QCat, ordinary closed monoidal category and model-category declarations; none constructs a categorical-pattern model structure or the derived nonsymmetric-operad tensor. The grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor and algebra adjunction for nonsymmetric infinity operads with derived marked product",
+   "results": "{\"t\": \"2026-10-16T21:48:50Z\", \"tool\": \"leansearch\", \"query\": \"Tensor and algebra adjunction for nonsymmetric infinity operads with derived marked product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.adjunction\", \"CategoryTheory.instIsLeftAdjointTensorLeft\", \"CategoryTheory.exp.adjunction\", \"CategoryTheory.Types.tensorProductAdjunction\", \"CategoryTheory.tensorRightAdjunction\", \"instAlgebra\", \"instInhabitedTensorAlgebra\", \"Algebra.TensorProduct.congr_apply\"], \"digest\": \"6245e6cb240035c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned simplicial-set, QCat, ordinary closed monoidal category and model-category declarations; none constructs a categorical-pattern model structure or the derived nonsymmetric-operad tensor. The grep operad hits are bibliography only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"operad\"",
+   "results": "{\"t\": \"2026-10-16T21:48:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned simplicial-set, QCat, ordinary closed monoidal category and model-category declarations; none constructs a categorical-pattern model structure or the derived nonsymmetric-operad tensor. The grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonsymmetric infinity operads have a tensor with quasicategories left adjoint to the infinity category of inert preserving algebra functors",
+   "results": "{\"t\": \"2026-10-16T21:48:52Z\", \"tool\": \"leanfinder\", \"query\": \"Nonsymmetric infinity operads have a tensor with quasicategories left adjoint to the infinity category of inert preserving algebra functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.QCat.bicategory\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"SSet.Truncated.hoFunctor.monoidal\", \"SSet.instMonoidalClosed\"], \"digest\": \"13f05c334f751314\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned simplicial-set, QCat, ordinary closed monoidal category and model-category declarations; none constructs a categorical-pattern model structure or the derived nonsymmetric-operad tensor. The grep operad hits are bibliography only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical pattern model structure marked simplicial sets operad",
+   "results": "{\"t\": \"2026-10-16T22:33:36Z\", \"tool\": \"leanfinder\", \"query\": \"categorical pattern model structure marked simplicial sets operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.Augmented\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.StrictSegal\", \"CategoryTheory.SimplicialCategory\"], \"digest\": \"43abaa0866040cc8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "marked operadic model structure internal Hom inert preserving transformations",
+   "results": "{\"t\": \"2026-10-16T22:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"marked operadic model structure internal Hom inert preserving transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialNerve\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"Mathlib.Tactic.Monoidal.instMkMor₁MonoidalM\", \"SSet.ι₀_comp\", \"CategoryTheory.SimplicialCategory.sHomFunctor\"], \"digest\": \"e2f9967a2eb67858\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?pattern|marked.?simplicial|[Uu]niverse.*[Mm]odel",
+   "results": "{\"t\": \"2026-10-16T22:38:10Z\", \"tool\": \"grep\", \"query\": \"categorical.?pattern|marked.?simplicial|[Uu]niverse.*[Mm]odel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Immersion.lean\"], \"digest\": \"fd1ba38adf45fbc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MarkedSSet\"",
+   "results": "{\"t\": \"2026-10-16T22:38:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"MarkedSSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrant replacement in a marked simplicial categorical pattern model category is preserved under universe enlargement when its cones are finite",
+   "results": "{\"t\": \"2026-10-16T22:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrant replacement in a marked simplicial categorical pattern model category is preserved under universe enlargement when its cones are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.ι\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.mk\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\"], \"digest\": \"bcd3e5383e9d8284\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite cone categorical pattern model structure common fibrant replacement across universes",
+   "results": "{\"t\": \"2026-10-16T22:39:42Z\", \"tool\": \"leansearch\", \"query\": \"Finite cone categorical pattern model structure common fibrant replacement across universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.ModelCategory.mk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.FibrantObject\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"6da82e5603a46df0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked categorical-pattern model or nonsymmetric infinity-operad tensor declaration; inspected general simplicial and ordinary model-category candidates."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -97,5 +273,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-nonsymmetric-operadic-tensor-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the derived marked tensor and both fixed-input derived adjunctions, identified the full algebra infinity category, proved separate colimit preservation by mapping spaces, and compared strict-diagram colimits under universe enlargement. Second reading removed the duplicate general pattern-model foundation and reused the now-independent existing pattern calculus. One new statement-only finite-pattern universe-comparison input; zero Mathlib leaves. Item statement unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-coefficient mapping-complex adjunction before R lim: the operadic tensor/algebra foundation below lem-coef-enriched-category-tensor-calculus."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NS-1123e549f",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-1123e549f (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps, the new node lem-coef-finite-pattern-universe-comparison, and the full statements of all 13 cited nodes. Source checked against Gepner–Haugseng (arXiv 1312.3178), fetched read-only and run through pdftotext: Ex 3.2.4(i) (pattern O^ns with discrete K_[n] = the inert maps [n]->[1]), Thm 3.2.5/Cor 3.2.6, Def 3.2.7, Rem 3.2.12, Lemma 3.6.8 and its proof (left Quillen bifunctor from HA B.2.5, then the mapping-space chain), and Def 3.6.12. The item statement agrees with these: the tensor is the derived marked product C^natural x O, Alg is the full functor category with all transformations, and the universe clause is agent-written. Statement unchanged. Step 1: matched the discrete-leaf cones to the presentability product formula; the base map Hom([n],[m]) -> prod Hom([1],[m]) is injective, and the n=0 case is terminal. Step 2: pushout-product with an empty factor gives left Quillen in each variable; the right adjoints are H_B(O,-) and the cotensor; derived functors and coherence come from the cited derived-adjunction and nerve-localization nodes. Step 3: flat parameter simplices give the full inert-preserving subcategory; the enriched axiom with empty->O and Q->terminal gives fibrancy in K; C=Delta^1 sees transformations, not just the core. Step 4 is the GH 3.6.8 chain with the Yoneda colimit criterion, empty diagram included. Step 5: the U-small projective cell presentation, weak equivalences, enriched colimit and common fibrant replacement persist in U', and the DK index and Map^sharp complexes are unchanged; correct. Step 6 is the U' instance. New node: true (standard marked generating cofibrations; fibrancy and weak equivalences absolute via pattern-anodyne replacement plus the B.2.4 homotopy-inverse criterion; small-object replacement restricts). Needed: the existing marked-point model covers only the point pattern, and rg over the whole DAG found no duplicate. Not a restatement of an item clause. B1–B9 satisfied, four search kinds logged. No cycle: the closure of every dependency avoids the item. All cited statements are in the unit, so there are no tool_uses. FIX (B3): the item statement uses marked products and 'the nonsymmetric-operad model structure' without citing them; added lem-coef-marked-point-cartesian-model and lem-coef-marked-operadic-model-structures to stmt_deps in fixes/dag/nodes/sec-six-functors/lem-coef-nonsymmetric-operadic-tensor-adjunction.json. Statement text and all other fields unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
