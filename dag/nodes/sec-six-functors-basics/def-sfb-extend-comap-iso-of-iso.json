@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-extend-comap-iso-of-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars and extension of scalars along isomorphisms",
@@ -17,24 +17,131 @@
  ],
  "proof": [
   {
-   "text": "Along an isomorphism of monoid objects, extension of scalars is restriction of scalars along the\ninverse ([sk-def-sfb-change-of-scalars]): $\\operatorname{Ext}_b\\cong\\operatorname{Res}_{b^{-1}}$,\n$\\operatorname{Ext}_a\\cong\\operatorname{Res}_{a^{-1}}$. Restriction of scalars turns composites\ninto composites in the opposite order, so the left side is\n$\\operatorname{Res}_{b^{-1}\\circ\\psi}$ and the right side is\n$\\operatorname{Res}_{\\varphi\\circ a^{-1}}$, and $b^{-1}\\circ\\psi=\\varphi\\circ a^{-1}$ by the\ncommutativity of the square.",
+   "text": "Apply clause 5 of [sk-def-sfb-change-of-scalars] to $b\\colon S\\to S'$ and to $a\\colon R\\to R'$. The hypotheses of its clauses 2 and 3 hold by the assumptions on $\\mathcal C$; the source monoids $S$ and $R$ are commutative and both maps are invertible. This gives natural isomorphisms $e_b\\colon\\operatorname{Ext}_b\\xrightarrow{\\sim}\\operatorname{Res}_{b^{-1}}$ and $e_a\\colon\\operatorname{Ext}_a\\xrightarrow{\\sim}\\operatorname{Res}_{a^{-1}}$. Thus applying $\\operatorname{Res}_\\psi$ to $e_b$ compares the left side of the desired isomorphism with $\\operatorname{Res}_\\psi\\circ\\operatorname{Res}_{b^{-1}}$, while evaluating $e_a$ on $\\operatorname{Res}_\\varphi$ compares the right side with $\\operatorname{Res}_{a^{-1}}\\circ\\operatorname{Res}_\\varphi$. These four functors all have source $\\Mod_S(\\mathcal C)$ and target $\\Mod_{R'}(\\mathcal C)$.",
    "uses": [
     "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "First sentence: extension along each of the two isomorphisms is restriction along its inverse."
+   }
+  },
+  {
+   "text": "Precompose $\\psi\\circ a=b\\circ\\varphi$ by $a^{-1}$ and postcompose by $b^{-1}$. Associativity and the two inverse identities give the equality $h\\colon b^{-1}\\circ\\psi=\\varphi\\circ a^{-1}$ of morphisms $R'\\to S$. Neither $\\varphi$ nor $\\psi$ needs to be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "Last clause: derive the inverse-square equality from commutativity."
+   }
+  },
+  {
+   "text": "For an $S$-module $M$ with action $\\gamma_M$, [def-sfb-modobj-restriction] gives the action of $\\operatorname{Res}_\\psi\\operatorname{Res}_{b^{-1}}M$ as $\\gamma_M\\circ(b^{-1}\\otimes\\mathrm{id}_M)\\circ(\\psi\\otimes\\mathrm{id}_M)=\\gamma_M\\circ((b^{-1}\\circ\\psi)\\otimes\\mathrm{id}_M)$. The action of $\\operatorname{Res}_{a^{-1}}\\operatorname{Res}_\\varphi M$ is $\\gamma_M\\circ(\\varphi\\otimes\\mathrm{id}_M)\\circ(a^{-1}\\otimes\\mathrm{id}_M)=\\gamma_M\\circ((\\varphi\\circ a^{-1})\\otimes\\mathrm{id}_M)$. Tensor functoriality gives these equalities, and $h$ from step 2 identifies the final actions. By the module-morphism definition in [det-def-sfb-module-objects-definition], the underlying identity $\\mathrm{id}_M$ and its inverse are therefore $R'$-linear. They define an isomorphism $k_M$ from the first restricted module to the second. Both composite restrictions leave every underlying arrow $u\\colon M\\to N$ unchanged, so naturality reads $u\\circ\\mathrm{id}_M=\\mathrm{id}_N\\circ u$. Hence the $k_M$ form a natural isomorphism $k$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "Middle sentence: expand both composite restrictions on actions and arrows; identify them using the inverse-square equality."
+   }
+  },
+  {
+   "text": "For every $M\\in\\Mod_S(\\mathcal C)$ set $H_M=e_{a,\\operatorname{Res}_\\varphi M}^{-1}\\circ k_M\\circ\\operatorname{Res}_\\psi(e_{b,M})$. This has source $\\operatorname{Res}_\\psi\\operatorname{Ext}_bM$ and target $\\operatorname{Ext}_a\\operatorname{Res}_\\varphi M$, as checked in step 1. Its inverse is $\\operatorname{Res}_\\psi(e_{b,M}^{-1})\\circ k_M^{-1}\\circ e_{a,\\operatorname{Res}_\\varphi M}$; the two composites cancel to identities by functoriality and the inverse identities of the three factors. Put $L=\\operatorname{Res}_\\psi\\circ\\operatorname{Ext}_b$ and $T=\\operatorname{Ext}_a\\circ\\operatorname{Res}_\\varphi$. For $u\\colon M\\to N$, naturality of $e_a$, then of $k$, then of $e_b$ gives $T(u)\\circ H_M=e_{a,\\operatorname{Res}_\\varphi N}^{-1}\\circ(\\operatorname{Res}_{a^{-1}}\\operatorname{Res}_\\varphi)(u)\\circ k_M\\circ\\operatorname{Res}_\\psi(e_{b,M})=e_{a,\\operatorname{Res}_\\varphi N}^{-1}\\circ k_N\\circ\\operatorname{Res}_\\psi(e_{b,N})\\circ L(u)=H_N\\circ L(u)$. This constructs the asserted natural isomorphism, rather than merely identifying its two functors up to unnamed comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+    "place": "Entire proof: compose the two extension comparisons with the identity comparison of the composite restrictions."
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-restriction",
+  "det-def-sfb-module-objects-definition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-extend-comap-iso-of-iso.proof.md",
+  "place": "Entire proof paragraph, expanded into the two extension comparisons, the inverse-square equation, the action computation and the explicit composite natural isomorphism."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalarsComap|extendScalarsIsoComapInv|comapComp",
+   "results": "4 hits; Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Pi/Basic.lean. Searched CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits are Pi-category and graded-object reindexing comparisons, not extension of scalars of internal modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"comap\"",
+   "results": "0 hits; none.",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with extension of scalars along isomorphisms of monoid objects in a monoidal category",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, CategoryTheory.Mod_.comap, ModuleCat.restrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.instReflectsIsomorphismsRestrictScalars.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: internal scalar restriction alone and ordinary ModuleCat change-of-rings results do not supply extension of scalars and this square comparison in an arbitrary monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of monoid objects with vertical isomorphisms, restriction of scalars commutes with extension of scalars along those isomorphisms",
+   "results": "8 hits; CategoryTheory.Mod_.scalarRestriction_hom, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: internal scalar restriction alone and ordinary ModuleCat change-of-rings results do not supply extension of scalars and this square comparison in an arbitrary monoidal category"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extension.*scalars|comap",
+   "results": "5 hits; Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean. Searched CategoryTheory/Monoidal. Read Mathlib/CategoryTheory/Monoidal/Mod.lean:351-419, especially scalarRestriction:363 and comap:403-410; only restriction is constructed.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the scalar restriction definition is the existing def-sfb-modobj-restriction Mathlib leaf; internal extension and the square comparison are absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap",
+   "results": "4 hits; CategoryTheory.Mod.comap, CategoryTheory.Mod.comap_obj_X, CategoryTheory.Mod.comap_obj_mod, CategoryTheory.Mod.comap_map_hom.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: internal scalar restriction alone and ordinary ModuleCat change-of-rings results do not supply extension of scalars and this square comparison in an arbitrary monoidal category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of internal modules along an isomorphism is restriction along its inverse, and commutes with scalar restriction in a commuting square",
+   "results": "8 hits; IsBaseChange.ofEquiv, LinearEquiv.baseChange_inv, LinearEquiv.baseChange_symm, IsBaseChange.of_comp, IsBaseChange.comp, IsBaseChange.comp_iff, IsBaseChange.of_equiv, IsBaseChange.linearMapLeftRight.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary tensor base-change predicates and LinearEquiv results do not supply this internal-module functor isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "comap.*(Iso|[Cc]omp)|[Ii]so.*comap|extendScalars",
+   "results": "0 hits; none. Searched CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "No match: the pinned internal-module Mathlib directory has no composite/inverse restriction comparison or extension-of-scalars declaration; the direct action calculation in step 3 is retained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebra objects in a tensor category, a square of algebra maps with two opposite sides invertible induces an isomorphism between induction then restriction and restriction then induction",
+   "results": "8 hits; AlgCat.hom_inv_rightUnitor, Algebra.TensorProduct.map_restrictScalars_comp_includeRight, AlgCat.hom_inv_leftUnitor, ModuleCat.restrictScalarsComp'_inv_app, AlgCat.instMonoidalCategory, Rep.coinvariantsTensorIndNatIso, Algebra.TensorProduct.liftEquiv_symm_apply_coe, MvPolynomial.algebraTensorAlgEquiv_symm_comp_aeval.",
+   "date": "2026-10-16",
+   "verdict": "No match: the returned AlgCat unitors, ordinary tensor-product maps, ordinary ModuleCat composite restriction and representation induction do not state a square comparison for module objects in arbitrary C."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"Iso\"",
+   "results": "12 hits; Submodule.orderIsoMapComap, Submodule.orderIsoMapComapOfBijective, Submodule.orderIsoMapComap_apply', Submodule.orderIsoMapComap_symm_apply, Submodule.orderIsoMapComapOfBijective_apply, Submodule.orderIsoMapComap_symm_apply', Submodule.orderIsoMapComap_apply, Submodule.orderIsoMapComapOfBijective_symm_apply.",
+   "date": "2026-10-16",
+   "verdict": "No match: the twelve returned declarations concern submodule order isomorphisms, non-zero-divisors and quotient groups, not this internal-module comparison."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -54,5 +161,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-extend-comap-iso-of-iso",
+  "worker": "stage1",
+  "summary": "Preserved the exact imported statement and all hypotheses. Expanded the single imported paragraph into four sourced steps, using the existing scalar-change clause 5 and the existing restriction and module-morphism definitions. The composite-restriction calculation, inverse-square equation, identity comparison, inverse and naturality are explicit elementary steps. No new nodes, Mathlib leaves or Lean attachments. All searches were run with msearch.py and read; the internal-module comparison is not an ordinary ModuleCat specialization.",
+  "blueprint": "Realizes the formal-input paragraph (step 1) of sk-def-sfb-coefficient-comparisons at its citation of def-sfb-extend-comap-iso-of-iso. Within this node's proof, the first sentence is step 1, the inverse-square clause is step 2, the composite-restriction sentence is step 3, and step 4 pastes those comparisons. Whole-blueprint searches for scalars, extend-comap, restriction of scalars turns, and comapComp found no second node stating this square comparison. This imported node has blueprint.from = null; no created ancestry is needed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-74e224ecd",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-74e224ecd (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint sources, unit/chapter route, and master construction. All four steps are correctly typed and justified; inverse directions, module actions, naturality, and edge cases check out. No new nodes, duplicates, cycles, route departures, or repairs. Detailed checks are in review.md."
+ }
 }
