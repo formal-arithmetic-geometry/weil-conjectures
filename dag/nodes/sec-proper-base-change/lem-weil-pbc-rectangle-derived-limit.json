@@ -188,5 +188,27 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-ded8bb0f7 (reviewer sub-agent of L); spot-checked: Read the complete item, report, blueprint/unit route, all cited node statements, and Stacks sources (08TC, 0941, 07KX/07KY). Verified coefficient-category typing, functorial Roos projections, rectangle equality, hypotheses, edge cases, searches, duplicate checks, and the explicit component-typing correction. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a4abd77f9",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Audited node, source, dependencies, Lean declarations, universes, edge cases, docstrings, report sections, and exact signature. Reproduced scompile.py successfully (exit 0); no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcRectangleDerivedLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.pbcRectangleDerivedLimit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pbcRoosProjection",
+   "AlgebraicGeometry.ProEtale.pbcRectangleDerivedLimit"
+  ],
+  "file": "lean/Sheaf/Paper/PbcRectangleDerivedLimit.lean",
+  "statement": "theorem pbcRectangleDerivedLimit (T : Scheme.{u}) {R : Type u} [CommRing R] (d : Scheme.AdicCoefficientDatum R) (A B C D : DerivedCategory (Scheme.CompletedAdicTowers T d)) (h : A ⟶ B) (v : A ⟶ C) (h' : C ⟶ D) (v' : B ⟶ D) (hrectangle : h ≫ v' = v ≫ h') (F : DerivedCategory (Scheme.CompletedAdicTowers T d) ⥤ DerivedCategory (Scheme.CompletedAdicModules T d)) [F.CommShift ℤ] [F.IsTriangulated] (p : F ⟶ pbcTowerProduct T d) (δ : pbcTowerProduct T d ⟶ F ⋙ shiftFunctor (DerivedCategory (Scheme.CompletedAdicModules T d)) (1 : ℤ)) (_hRoos : ∀ M : DerivedCategory (Scheme.CompletedAdicTowers T d), IsDerivedLimitTriangle (fun n : ℕ ↦ ((pbcDerivedEvaluation T d).obj M).map (homOfLE (Nat.le_succ n)).op) (F.obj M) (p.app M) (δ.app M)) : (F.map h ≫ F.map v' = F.map v ≫ F.map h') ∧ ∀ n : ℕ, ((F.map h ≫ F.map v') ≫ pbcRoosProjection T d F p D n = pbcRoosProjection T d F p A n ≫ ((pbcDerivedEvaluation T d).map h).app (op n) ≫ ((pbcDerivedEvaluation T d).map v').app (op n)) ∧ (pbcRoosProjection T d F p A n ≫ ((pbcDerivedEvaluation T d).map h).app (op n) ≫ ((pbcDerivedEvaluation T d).map v').app (op n) = pbcRoosProjection T d F p A n ≫ ((pbcDerivedEvaluation T d).map v).app (op n) ≫ ((pbcDerivedEvaluation T d).map h').app (op n)) ∧ (pbcRoosProjection T d F p A n ≫ ((pbcDerivedEvaluation T d).map v).app (op n) ≫ ((pbcDerivedEvaluation T d).map h').app (op n) = (F.map v ≫ F.map h') ≫ pbcRoosProjection T d F p D n)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

@@ -289,5 +289,32 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-d6c9bbef3 (reviewer sub-agent of L); spot-checked: Mathematics, hypotheses, Tor indexing, filtration, naturality, sources, route, and edge cases pass. The new unsplit node omitted required created.by/date metadata; corrected whole JSON is under fixes/dag/nodes/sec-smooth-purity/lem-kun-bounded-tensor-tor-spectral-sequence.json. Accepted the generic cross-unit flat-resolution comparison tool use; no nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-13ded875d",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, exact Lean declarations, naturality, universes, edge cases, docstrings, and verbatim statement field. Immutable module compiled cleanly through scompile.py. No delivery faults or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.IntegralBoundedKunnethExact",
+  "declaration": "DerivedCategory.integral_bounded_kunneth_exact",
+  "declarations": [
+   "DerivedCategory.IntegralModuleCat",
+   "DerivedCategory.integralKunnethTensorTerm",
+   "DerivedCategory.integralKunnethTorTerm",
+   "DerivedCategory.integralKunnethTensorMap",
+   "DerivedCategory.integralKunnethTorMap",
+   "DerivedCategory.integral_bounded_kunneth_exact"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/IntegralBoundedKunnethExact.lean",
+  "statement": "theorem integral_bounded_kunneth_exact (r : ℤ) : ∃ ι : ∀ C D : Bounded IntegralModuleCat.{u}, integralKunnethTensorTerm r C D ⟶ (homologyFunctor IntegralModuleCat.{u} r).obj (C.obj ⊗ D.obj), ∃ π : ∀ C D : Bounded IntegralModuleCat.{u}, (homologyFunctor IntegralModuleCat.{u} r).obj (C.obj ⊗ D.obj) ⟶ integralKunnethTorTerm r C D, (∀ C D : Bounded IntegralModuleCat.{u}, Function.Injective (ι C D) ∧ Function.Exact (ι C D) (π C D) ∧ Function.Surjective (π C D)) ∧ (∀ (C C' D D' : Bounded IntegralModuleCat.{u}) (f : C ⟶ C') (g : D ⟶ D'), integralKunnethTensorMap r f g ≫ ι C' D' = ι C D ≫ (homologyFunctor IntegralModuleCat.{u} r).map (f.hom ⊗ₘ g.hom)) ∧ (∀ (C C' D D' : Bounded IntegralModuleCat.{u}) (f : C ⟶ C') (g : D ⟶ D'), (homologyFunctor IntegralModuleCat.{u} r).map (f.hom ⊗ₘ g.hom) ≫ π C' D' = π C D ≫ integralKunnethTorMap r f g)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Abelian groups in arbitrary universe u are encoded by ModuleCat.{u} (ULift.{u} ℤ), with the unique integral action. The tensor is the existing upstream K-flat derived monoidal tensor. The auxiliary definitions are the two direct sums and their canonical maps; the theorem gives a jointly natural family of short exact sequences, without finite generation or a chosen splitting."
  }
 }
