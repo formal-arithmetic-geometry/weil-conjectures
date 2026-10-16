@@ -195,6 +195,18 @@ noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
     (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm
     (boundedConstructibleLowerStarCompatibility Λ ℓ f).symm
 
+/-- The derived pullback `Lf^*` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleLowerStar`. -/
+instance isLeftAdjoint_boundedConstructibleUpperStar :
+    (boundedConstructibleUpperStar Λ ℓ f).IsLeftAdjoint :=
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isLeftAdjoint
+
+/-- The derived pushforward `Rf_*` on bounded constructible complexes is a right adjoint, its
+left adjoint being `boundedConstructibleUpperStar`. -/
+instance isRightAdjoint_boundedConstructibleLowerStar :
+    (boundedConstructibleLowerStar Λ ℓ f).IsRightAdjoint :=
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isRightAdjoint
+
 end UpperLowerStar
 
 /-! ### The extension by zero along an open immersion -/
@@ -241,6 +253,18 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctio
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).symm
     (boundedConstructibleUpperStarCompatibility Λ ℓ j).symm
+
+/-- The extension by zero `j_!` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleUpperStar`. -/
+instance isLeftAdjoint_boundedConstructibleOpenImmersionLowerShriek :
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).IsLeftAdjoint :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).isLeftAdjoint
+
+/-- The derived pullback `j^*` along an open immersion on bounded constructible complexes is a
+right adjoint, its left adjoint being `boundedConstructibleOpenImmersionLowerShriek`. -/
+instance isRightAdjoint_boundedConstructibleUpperStar_of_isOpenImmersion :
+    (boundedConstructibleUpperStar Λ ℓ j).IsRightAdjoint :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).isRightAdjoint
 
 end OpenImmersion
 
