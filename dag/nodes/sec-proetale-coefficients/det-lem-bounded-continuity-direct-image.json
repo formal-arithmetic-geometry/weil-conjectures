@@ -111,5 +111,28 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-37fe7128f (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, and current blueprint sources and route. The sole step validly reuses the existing same-unit theorem, preserving arbitrary ring-sheaf coefficients, the common lower bound, and the canonical colimit map. Checked edge cases, duplicates, acyclicity, searches, and exact target-source coefficient categories and base-change directions. No new nodes or repairs; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedContinuityDirectImage",
+  "declaration": "AlgebraicGeometry.ProEtale.boundedContinuityDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.moduleComplexHigherDirectImage",
+   "AlgebraicGeometry.ProEtale.boundedContinuityDirectImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedContinuityDirectImage.lean",
+  "statement": "theorem boundedContinuityDirectImage {Y Z : Scheme.{u}} (g : Y ⟶ Z) [QuasiCompact g] [QuasiSeparated g] (A : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1}) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (SheafOfModules.{u + 1} A) ℤ) (a : ℤ) (hK : ∀ (i : I) (n : ℤ), n < a → IsZero ((K.obj i).X n)) (q : ℤ) : IsIso (colimit.post K (moduleComplexHigherDirectImage g A q))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper constructs the underlying abelian-sheaf higher direct image by the recorded universal right-derived functor of the canonical lowerStar. The canonical map is colimit.post on the original module-complex diagram, whose colimit is termwise. No coefficient commutativity or pullback hypothesis, or extra resolution hypothesis, is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-240599819",
+  "group": "NL",
+  "result": "pass",
+  "note": "All node clauses match the Lean: qc/qs g:Y⟶Z; arbitrary A : Sheaf (ProEt.topology Y) RingCat.{u+1}; filtered I : Type (u+1); K a diagram of complexes of A-module sheaves with uniform termwise vanishing below a; every q:ℤ; IsIso of colimit.post K (moduleComplexHigherDirectImage g A q) in abelian sheaves on Z_proet. Helper is a genuine derived construction (forget scalars, recorded rightDerivedFunctorOfQuasiIsoResolutions of upstream lowerStar g, homology q); its abelian-sheaf reading matches the node and its duplicate and agrees with the module version on bounded-below complexes (Stacks 03FD/0D6J). Site universes kept, no extra hypotheses. Edge cases covered. Docstrings, verbatim statement and node fields checked (only lean changed). No duplicate definition in Mathlib or side lean/Sheaf. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings. No findings."
  }
 }
