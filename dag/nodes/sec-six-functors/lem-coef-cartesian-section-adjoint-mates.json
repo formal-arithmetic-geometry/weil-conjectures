@@ -25,9 +25,136 @@
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with dg models of the enhanced categories in [lem-coef-semilinear-derived-sections], using the derived dg functor categories of [lem-coef-derived-enriched-yoneda] and allowing quasi-functors (functors after dg replacements), rather than demanding a strict dg right adjoint on the original complex model. For one level omit the subscript. For $Y\\in\\mathbf D$ form the right $\\mathbf C$-module $P_Y(X)=\\operatorname{Map}_{\\mathbf D}(FX,Y)$. Choose a representative $Z_Y$ of the object $G Y$ and a closed degree-zero representative $e_Y:FZ_Y\\to Y$ of the specified ordinary counit. Composition with $e_Y$ after $F$ gives a module map $h_{Z_Y}\\to P_Y$. For every integer $r$ its map on $H^r$ is the ordinary counit adjunction bijection applied to $X[-r]$: indeed $H^r\\operatorname{Map}(X,Z_Y)=\\operatorname{Hom}(X[-r],Z_Y)$, and enhanced exactness identifies $F(X[-r])$ with $FX[-r]$. Thus this is an objectwise quasi-isomorphism for every $X$. All shifts lie in $\\mathbf C$ by stability. This uses the ordinary right-adjoint hypothesis on all objects, not only degree-zero maps between unshifted inputs.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-abstract-derived-category",
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "The assignment $Y\\mapsto P_Y$ is already an enhanced functor, with action given by postcomposition. Its values are quasi-representable by step 1. Apply [lem-coef-derived-enriched-yoneda] to factor it through $\\mathbf C$ and obtain an enhanced functor $\\widetilde G$ with a coherent module equivalence $\\operatorname{Map}_{\\mathbf C}(-,\\widetilde GY)\\simeq P_Y$. Its universal elements give an enhanced counit $e:F\\widetilde G\\to\\mathrm{id}$. Evaluation at identities gives the unit and inverse transposition maps: $\\Psi(g)=e_Y\\circ F(g)$, $\\Phi(h)=\\widetilde G(h)\\circ\\eta_X$. More explicitly $\\eta_X$ is the image of $\\mathrm{id}_{FX}$ under the inverse module equivalence. The equalities $e_{FX}F\\eta_X\\simeq\\mathrm{id}_{FX}$ and $\\widetilde G(e_Y)\\eta_{\\widetilde GY}\\simeq\\mathrm{id}_{\\widetilde GY}$ follow by applying this equivalence and its inverse to the universal elements. They are coherent homotopies, including naturality, because the equivalence is an equivalence of enhanced module-valued functors. Applying the inverse equivalence on full transformation objects in [lem-coef-derived-enriched-yoneda] to these homotopies gives homotopies of the represented functors, including their higher boundaries. Under the ordinary adjunction the represented objects identify with the specified $G Y$ by the unique counit-preserving isomorphism; that isomorphism is natural since both sides represent the same ordinary Hom functor. The units then agree as well since both transpose $\\mathrm{id}_{FX}$. We henceforth use $G_n$ for these enhanced realizations with these identifications.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "Construct the enhanced mate by the actual composite\n$$b_{m,n}=G_n(T^D_{m,n}\\epsilon_m)\\circ G_n(q_{m,n,G_m}^{-1})\\circ\\eta_{n,T^C_{m,n}G_m}.$$\nEvery factor is enhanced by step 2 or the hypotheses. Its $H^0$ is exactly [def-weil-pbc-adjunction-mate] applied to the square in the statement, so equals the specified $b_{m,n}$. By hypothesis its component at every $Y$ is invertible in $H^0\\mathbf C_n$. Choose a closed representative of its inverse: the two inverse equations in $H^0$ are boundaries, hence supply homotopies to the identities. Thus these components are enhanced equivalences; a transformation with equivalence components is an equivalence of enhanced functors. The latter assertion can also be checked after Yoneda: take inverse module equivalences and corestrict them using [lem-coef-derived-enriched-yoneda]. No invertibility is inferred from invertibility of $q$ alone.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "Check the mate cocycle before forming sections. Write $S_{a,b}=T^C_{a,b}$ and $T_{a,b}=T^D_{a,b}$, suppressing the given associativity comparisons. For $k\\ge m\\ge n$, the transpose under $F_n\\dashv G_n$ of\n$$b_{m,n,T_{k,m}Y}\\circ S_{m,n}(b_{k,m,Y})$$\nis, by substituting the formula of step 3 and cancelling the adjacent unit/counit by the triangle homotopy,\n$$F_nS_{m,n}S_{k,m}G_kY\\xrightarrow{q_{m,n}^{-1}}T_{m,n}F_mS_{k,m}G_kY\\xrightarrow{T_{m,n}q_{k,m}^{-1}}T_{m,n}T_{k,m}F_kG_kY\\xrightarrow{T_{m,n}T_{k,m}\\epsilon_k}T_{m,n}T_{k,m}Y.$$\nThe coherence of $q$ identifies this with the transpose defining $b_{k,n,Y}$. For identity indices the unital coherence identifies $S_{n,n},T_{n,n},q_{n,n}$ with identities, and the formula is $b_{n,n,Y}=G_n(\\epsilon_{n,Y})\\eta_{n,G_nY}\\simeq\\mathrm{id}_{G_nY}$, the second finite triangle homotopy. These calculations apply to the entire given coherent associativity diagrams: composition with the unit and counit defines maps on their complexes of transformations, and transposition is an equivalence there by step 2. Apply that equivalence to each higher coherence of $q$; its inverse supplies a compatible higher coherence for $b$. Uniqueness here is the contractible fiber of an equivalence of mapping spaces, as in [lem-coef-derived-enriched-yoneda], rather than uniqueness of a degree-zero morphism. Therefore all index strings, not just triples, are coherent.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "Write $u_{m,n}:S_{m,n}M_m\\simeq M_n$ and $v_{m,n}:T_{m,n}N_m\\simeq N_n$ for cartesian structures. Define\n$$u^F_{m,n}=F_n(u_{m,n})\\circ q_{m,n,M_m},\\qquad v^G_{m,n}=G_n(v_{m,n})\\circ b_{m,n,N_m}.$$\nThese have the required sources and targets. All factors are equivalences, so both resulting sections are cartesian. Naturality supplies the same construction on section morphisms and higher homotopies. The coherence of $q$, step 4, and the original coherences of $u,v$ supply their composition laws. This is the coherent section model of [lem-coef-semilinear-derived-sections]; take its strict realization only after constructing these functors. No uniform boundedness, flatness of a quotient, or preservation of K-injectives by evaluation is required.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "For an input $X\\in\\mathbf C_m$ and $Y\\in\\mathbf D_m$, the two mate identities are\n$$G_n(q_{m,n,X})\\,b_{m,n,F_mX}\\,S_{m,n}(\\eta_{m,X})\\simeq\\eta_{n,S_{m,n}X},$$\n$$\\epsilon_{n,T_{m,n}Y}\\,F_n(b_{m,n,Y})\\,q_{m,n,G_mY}\\simeq T_{m,n}(\\epsilon_{m,Y}).$$\nFor the second identity, transposing the formula of step 3 cancels $F_n\\eta_n$ with $\\epsilon_nF_n$, leaving $T\\epsilon_m\\,q^{-1}$; compose with $q$. For the first, use naturality of $\\eta_n$ and of $q$ to rewrite its left side as\n$$G_n\\!\\left(q_{m,n,X}\\circ T_{m,n}(\\epsilon_{m,F_mX}\\circ F_m\\eta_{m,X})\\circ q_{m,n,X}^{-1}\\right)\\,\\eta_{n,S_{m,n}X},$$\nwhich is the right side by the finite triangle homotopy. Composing these identities with $u_{m,n},v_{m,n}$ and using naturality proves that $(\\eta_{n,M_n})_n$ and $(\\epsilon_{n,N_n})_n$ are maps of the sections constructed in step 5. Apply the same transposition maps to higher index strings as in step 4, so the homotopies are compatible with all transition coherences. This explicitly constructs section units and counits; it does not attempt to lift unrelated transformations of ordinary homotopy categories.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "The transposes on coherent section morphisms are $h\\mapsto G(h)\\eta_M$ and $g\\mapsto\\epsilon_NF(g)$, since the factors are section maps by steps 5-6. The first composite reduces as\n$$\\epsilon_NF(G(h)\\eta_M)\\simeq h\\,\\epsilon_{FM}F\\eta_M\\simeq h,$$\nand the second as\n$$G(\\epsilon_NF(g))\\eta_M\\simeq G\\epsilon_N\\,\\eta_{GN}\\,g\\simeq g.$$\nThe first homotopies use naturality, the second the finite triangle homotopies constructed from the module equivalence in step 2. They are homotopies of section maps by step 6 and its higher compatibility. Thus these formulas are inverse on the full mapping objects of sections and give the claimed adjunction. This proves its triangle identities as actual coherent section identities, without inferring an identity of sections from equality of their evaluations.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "Apply the same formulas to the levelwise mapping complexes. To verify coefficient compatibility, write $h$ for the variable in the derived mapping complex $\\operatorname{Map}(F_mX,Y)$. Interpret the following as identities of morphisms of derived complexes, with their coherent homotopies, using the enhanced functor maps of step 2; strict dg models can be chosen after the replacements in [lem-coef-derived-enriched-yoneda]. After coefficient extension its source is identified using $q^{-1}_{m,n,X}$. Naturality of $b$ and the first identity of step 6 give\n$$\\begin{aligned}\nb_{m,n,Y}\\,S_{m,n}(G_m(h)\\eta_{m,X})\n&\\simeq G_n(T_{m,n}h)\\,b_{m,n,F_mX}\\,S_{m,n}\\eta_{m,X}\\\\\n&\\simeq G_n(T_{m,n}h\\circ q^{-1}_{m,n,X})\\,\\eta_{n,S_{m,n}X}.\n\\end{aligned}$$\nAfter the cartesian identifications this says exactly that $\\Phi_m$ and $\\Phi_n$ commute with the two transitions. All units and counits have degree zero, so the calculation respects differentials and introduces no extra graded signs. Step 4 supplies its higher index compatibilities. The inverse $\\Psi$ is compatible too: compose the displayed coherent identity with the inverse module equivalences of step 2 (equivalently use the second identity of step 6). Thus $\\Phi$ and $\\Psi$ are inverse equivalences of the whole coherent inverse systems $\\mathcal H_D(FM,N)$ and $\\mathcal H_C(M,GN)$, not merely isomorphisms on their cohomology groups.",
+   "uses": [
+    "lem-coef-derived-enriched-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "For strict realization of the mapping systems, apply [lem-coef-semilinear-derived-sections] to the one-object point site with the constant ring sequence $\\mathbf Z$. Module sheaves on this site are abelian groups, so its strict semilinear sequences are precisely $\\operatorname{Tow}(\\operatorname{Ab})$. Its enhanced localization of sequence complexes is equivalent to coherent sequences of complexes; this equivalence retains all evaluation functors and detects equivalences there. It sends the coherent mapping-system equivalence of step 8, together with its inverse and homotopies, to an isomorphism in $D(\\operatorname{Tow}(\\operatorname{Ab}))$. No inverse limit is used in this construction.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  },
+  {
+   "text": "Finally take a coherent transformation $a_n:F_n\\to F'_n$ compatible with their coefficient squares. Its adjoint transformation $G'_n\\to G_n$ is the explicit composite\n$$G'_n\\xrightarrow{\\eta_n}G_nF_nG'_n\\xrightarrow{G_n(a_n)}G_nF'_nG'_n\\xrightarrow{G_n(\\epsilon'_n)}G_n.$$\nWrite this mate as $c_n:G'_n\\to G_n$. Its defining counit identity is\n$$\\epsilon_{n,Y}F_n(c_{n,Y})\\simeq\\epsilon'_{n,Y}a_{n,G'_nY}.$$\nFor one coefficient transition abbreviate $S=T^C_{m,n}$ and $T=T^D_{m,n}$. The two maps $c_{n,TY}b'_{m,n,Y}$ and $b_{m,n,Y}S(c_{m,Y})$ from $SG'_mY$ to $G_nTY$ have transposes respectively\n$$T(\\epsilon'_{m,Y})(q'_{m,n,G'_mY})^{-1}a_{n,SG'_mY},\\qquad T(\\epsilon'_{m,Y}a_{m,G'_mY})(q_{m,n,G'_mY})^{-1}.$$\nFor the first formula use the counit identity, naturality of $a$ across $b'$, and the second identity of step 6 for $b'$. For the second use that identity for $b$, naturality of $q^{-1}$ across $c_m$, and the counit identity at $m$. The coefficient square $a_{n,SX}q_{m,n,X}=q'_{m,n,X}T(a_{m,X})$ identifies the displayed transposes. The equivalence of full transformation objects from step 2 therefore supplies their coherent equality, including its higher index compatibilities. For an identity $a$, its counit identity is that of $\\mathrm{id}_G$, so its mate is the identity. For $a:F\\to F'$ and $a':F'\\to F''$, set $c=a^*$ and $c'=(a')^*$. Naturality and the two counit identities give\n$$\\epsilon_YF(c_Yc'_Y)\\simeq\\epsilon'_Ya_{G'Y}F(c'_Y)\\simeq\\epsilon'_YF'(c'_Y)a_{G''Y}\\simeq\\epsilon''_Ya'_{G''Y}a_{G''Y}.$$\nThis characterizes the mate of $a'a$ and proves $(a'a)^*\\simeq a^*(a')^*$ on the full transformation objects. For a composite of left adjoints $L F$, use the right adjoint $G R$; its unit is $G\\eta^L_F\\circ\\eta^F$ and its counit is $\\epsilon^L\\circ L\\epsilon^F_R$. For a third coefficient diagram with transitions $U$ and $L_n\\dashv R_n$, the composite comparison is $q^{LF}_{m,n}=L_n(q^F_{m,n})q^L_{m,n,F_m}$. Its right mate is\n$$b^{GR}_{m,n}=G_n(b^R_{m,n})b^G_{m,n,R_m}.$$\nIndeed its transpose under $L_nF_n\\dashv G_nR_n$ is\n$$T^E_{m,n}(\\epsilon^L_m\\circ L_m\\epsilon^F_{m,R_m})\\circ(q^{LF}_{m,n,G_mR_m})^{-1},\\qquad T^E_{m,n}=U_{m,n}.$$\nTo obtain this expression, apply the counit identity of step 6 first to $b^G$, move $b^R$ across $\\epsilon^F$ by naturality, and apply that identity to $b^R$; the remaining two inverse comparisons are the inverse of the displayed $q^{LF}$. This is exactly the defining transpose of the composite coefficient mate. The representing-module equivalence then gives its comparison with any separately chosen right adjoint. Applying the inverse equivalence of full transformation objects to the coherence homotopies for the input comparisons gives the corresponding higher homotopies for these mates; their boundaries agree because this inverse preserves composition. This includes composition comparisons. Tensor evaluation and tensor-Hom transposition formed from the already enhanced operations and these units/counits are compositions of coherent functors and transformations. The section model of [lem-coef-semilinear-derived-sections] preserves precisely these operations, so their section evaluations and transposes are the stated ones. This asserts naturality for enhanced input transformations only.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Proof paragraphs 2-3: enriched adjunction, coefficient transposes, units and counits; agent-supplied details for the general enhanced section assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-enriched-yoneda",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+  "place": "Proof paragraphs 2-3 motivate the assertion; the proof supplies the additional enhanced adjoint recognition, coherent mate descent and mapping-system details."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,15 +211,51 @@
    "date": "2026-10-16",
    "results": "12 hits: CategoryTheory.Functor.adjunction, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Functor.preservesEpimorphisms_of_adjunction, CategoryTheory.Functor.preservesMonomorphisms_of_adjunction, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1",
    "verdict": "no match: localization hits give ordinary derived categories; adjunction hits concern ordinary localizations or cone categories; none gives varying-ring enhanced sections or enriched adjoint descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"Section\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: derived/localized ordinary adjunctions, over-category section adjunction and ordinary mateEquiv do not give dg right-adjoint recognition, cartesian coherent descent or enriched mapping systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact enhanced functors with right adjoints on homotopy categories assemble into adjunctions of cartesian sections using invertible coefficient base change mates",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived, CategoryTheory.Functor.monoidalClosed_closed_adj, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app",
+   "date": "2026-10-16",
+   "verdict": "no match: derived/localized ordinary adjunctions, over-category section adjunction and ordinary mateEquiv do not give dg right-adjoint recognition, cartesian coherent descent or enriched mapping systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible adjunction between stable differential graded categories descends to the limit of categories along invertible right adjoint mates and preserves derived Hom complexes",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-16",
+   "verdict": "no match: derived/localized ordinary adjunctions, over-category section adjunction and ordinary mateEquiv do not give dg right-adjoint recognition, cartesian coherent descent or enriched mapping systems."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-finite-adjunction-diagram-realization",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "worker": "stage1",
+  "summary": "Retained the statement. Constructed each enhanced right adjoint by shifted ordinary counit representability, using one new general derived enriched Yoneda input. Proved coherent mate pasting, cartesian transition formulas, units/counits, full mapping-system transposition, strict Ab-tower realization and naturality explicitly. No attachment or Mathlib match for the enhanced assertion.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 middle finite enriched adjunction and last paragraph units/counits: steps 1-2 give enhanced finite adjoints; 3-7 construct the coherent section adjunction; 8-9 give the mapping-system equivalence before inverse limit; 10 treats the composition and tensor transposes."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-e81b4e1c5",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-e81b4e1c5 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, unit route, blueprint and source materials in full. Verified hypotheses, mate directions, coefficient categories, enhanced coherence, edge cases, duplicate searches, and all ten proof steps. Review written to review.md; no repairs needed."
+ }
 }
