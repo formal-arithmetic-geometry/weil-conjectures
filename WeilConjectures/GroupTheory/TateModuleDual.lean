@@ -79,9 +79,9 @@ lemma coordTorsion_add (t t' : tateModule ℓ M) (n : ℕ) :
     coordTorsion (t + t') n = coordTorsion t n + coordTorsion t' n :=
   rfl
 
+omit [Fact ℓ.Prime] in
 /-- The values `ψ n (t n)` of a compatible family of characters on the coordinates of an element
 of the Tate module are compatible under reduction. -/
-omit [Fact ℓ.Prime] in
 lemma castHom_apply_coordTorsion_succ (ψ : torsionDualLimit ℓ M) (t : tateModule ℓ M) (n : ℕ) :
     ZMod.castHom (pow_dvd_pow ℓ (Nat.le_add_right n 1)) (ZMod (ℓ ^ n))
         ((ψ : ∀ n : ℕ, AddSubgroup.torsionBy M ((ℓ : ℤ) ^ n) →+ ZMod (ℓ ^ n)) (n + 1)
