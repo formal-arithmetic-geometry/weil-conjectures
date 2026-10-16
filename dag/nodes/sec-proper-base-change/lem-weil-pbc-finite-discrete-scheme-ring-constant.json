@@ -1,143 +1,155 @@
 {
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "id": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "kind": "statement",
-  "title": "Constant coefficient rings under scheme inverse image",
-  "statement": "For every commutative topological ring B and scheme T, a monoidal isomorphism between the sheafified constant ULift B ring on profinite sets and its condensed continuous-function ring induces a monoidal isomorphism between the sheafified constant ULift B ring on T-pro-etale and the pulled-back condensed coefficient ring [def-weil-pbc-proetale-modules]. No finiteness, nonzero-ring or nonempty-scheme condition is required for this pullback step.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 5.3; uniqueness of monoidal left adjoints and the constant-sheaf adjunction"
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+ "kind": "statement",
+ "title": "Constant coefficient rings under scheme inverse image",
+ "statement": "For every commutative topological ring B and scheme T, a monoidal isomorphism between the sheafified constant ULift B ring on profinite sets and its condensed continuous-function ring induces a monoidal isomorphism between the sheafified constant ULift B ring on T-pro-etale and the pulled-back condensed coefficient ring [def-weil-pbc-proetale-modules]. No finiteness, nonzero-ring or nonempty-scheme condition is required for this pullback step.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3; uniqueness of monoidal left adjoints and the constant-sheaf adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at a terminal object is right adjoint to the constant-sheaf functor. Pushforward composed with these sections is sections at the image terminal object. This natural isomorphism is monoidal.",
+   "uses": [],
+   "elementary": true
   },
-  "stmt_deps": [
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-derived-exchange"
-  ],
-  "proof": [
-    {
-      "text": "Evaluation at a terminal object is right adjoint to the constant-sheaf functor. Pushforward composed with these sections is sections at the image terminal object. This natural isomorphism is monoidal.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Conjugate the monoidal sections comparison under the two constant-sheaf adjunctions and the inverse-image adjunction. Apply first to profiniteToProEt and then to the scheme structural map. The pullback of the terminal pro-etale object is terminal, by invertibility of its structural map.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "Apply the resulting monoidal natural isomorphism to ULift B. Explicitly identify monoid structures for constant ring presheaves, sheafification, and composition, using monObjObj_comp. Map the given coefficient-ring isomorphism along upperStarFromPoint and compose the ring-object morphisms.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 5.3; uniqueness of monoidal left adjoints and the constant-sheaf adjunction",
-    "note": "B3: concrete coefficient realization and existing library APIs."
+  {
+   "text": "Conjugate the monoidal sections comparison under the two constant-sheaf adjunctions and the inverse-image adjunction. Apply first to profiniteToProEt and then to the scheme structural map. The pullback of the terminal pro-etale object is terminal, by invertibility of its structural map.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
-      "date": "2026-10-16",
-      "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
-      "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Functor.Full\", \"essImage\"",
-      "date": "2026-10-16",
-      "results": "CategoryTheory.Functor.Full.toEssImage.",
-      "verdict": "Generic essential-image infrastructure only."
-    },
-    {
-      "tool": "grep",
-      "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
-      "date": "2026-10-16",
-      "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
-      "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
-    },
-    {
-      "tool": "LeanSearch",
-      "query": "Sheafification of the constant finite discrete ring presheaf is the condensed ring of continuous functions",
-      "date": "2026-10-16",
-      "results": "UNAVAILABLE: service unavailable: Internal Server Error",
-      "verdict": ""
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Inverse image from etale to proetale sheaves induces a fully faithful functor on bounded below derived categories",
-      "date": "2026-10-16",
-      "results": "8 hits: DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, DerivedCategory.instFullSingleFunctor, DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.fullyFaithfulSheafCompose, HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient, AlgebraicGeometry.Scheme.instFullEtaleOverForget, lightProfiniteToLightCondSetFullyFaithful",
-      "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constantSheaf\", \"sheafPullback\"",
-      "date": "2026-10-16",
-      "results": "0 hits: ",
-      "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pullback of the constant sheaf along a morphism of sites commutes with the constant sheaf functor as monoidal functors",
-      "date": "2026-10-16",
-      "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackIso, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
-      "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
-    "date": "2026-10-16",
-    "group": "A3"
+  {
+   "text": "Apply the resulting monoidal natural isomorphism to ULift B. Explicitly identify monoid structures for constant ring presheaves, sheafification, and composition, using monObjObj_comp. Map the given coefficient-ring isomorphism along upperStarFromPoint and compose the ring-object morphisms.",
+   "uses": [],
+   "elementary": true
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-extension",
-      "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Constant coefficient rings under scheme inverse image",
-      "via": [
-        "lem-weil-pbc-finite-discrete-exchange-comparison",
-        "lem-weil-pbc-integral-finite-exchange-comparison",
-        "new-proper-continuous-basechange-app",
-        "nt-target-proetale-e"
-      ]
-    },
-    "same_as": []
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.FiniteDiscreteSchemeRing",
-    "file": "lean/Sheaf/Paper/FiniteDiscreteSchemeRing.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRing_constant",
-    "statement": "theorem finiteDiscreteSchemeRing_constant (T : Scheme.{u})\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (heR : IsMonHom eR.hom) :\n    ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (ProEt.topology T)\n      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n        condensedRingObj (Profinite.continuousMapRingObj.{u} B) T,\n      IsMonHom e.hom",
-    "branch": "sheaf-dag",
-    "by": "A3",
-    "date": "2026-10-16"
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-7a03c",
-    "group": "A3",
-    "result": "pass",
-    "landing": "20261016T054832-L-154891",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-7a03c",
-    "group": "A3",
-    "result": "pass",
-    "landing": "20261016T054832-L-154891",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+  {
+   "text": "D3: terminal object and coefficient comparison are specified by proved equalities to their original explicit constructions. The chosen witnesses are unique by equality; no arbitrary existence data is used.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3; uniqueness of monoidal left adjoints and the constant-sheaf adjunction",
+  "note": "B3: concrete coefficient realization and existing library APIs. D3: terminal object and coefficient comparison are specified by proved equalities to their original explicit constructions. The chosen witnesses are unique by equality; no arbitrary existence data is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
+   "date": "2026-10-16",
+   "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
+   "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Full\", \"essImage\"",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.Full.toEssImage.",
+   "verdict": "Generic essential-image infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
+   "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "Sheafification of the constant finite discrete ring presheaf is the condensed ring of continuous functions",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image from etale to proetale sheaves induces a fully faithful functor on bounded below derived categories",
+   "date": "2026-10-16",
+   "results": "8 hits: DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, DerivedCategory.instFullSingleFunctor, DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.fullyFaithfulSheafCompose, HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient, AlgebraicGeometry.Scheme.instFullEtaleOverForget, lightProfiniteToLightCondSetFullyFaithful",
+   "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"sheafPullback\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the constant sheaf along a morphism of sites commutes with the constant sheaf functor as monoidal functors",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackIso, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "verdict": "Second reading: no monoidal constant-sheaf pullback identification found; use the existing conjugate-adjunction and monoidal APIs as in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Constant coefficient rings under scheme inverse image",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteSchemeRing",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteSchemeRing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRing_constant",
+  "statement": "theorem finiteDiscreteSchemeRing_constant (T : Scheme.{u})\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}\n      (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj\n        (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)\n    (heR : IsMonHom eR.hom) :\n    ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (ProEt.topology T)\n      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n        condensedRingObj (Profinite.continuousMapRingObj.{u} B) T,\n      IsMonHom e.hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRing_constant",
+   "AlgebraicGeometry.ProEtale.proEtTerminal_exists",
+   "AlgebraicGeometry.ProEtale.proEtTerminal_eq",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRingIso_exists",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteSchemeRingIso_eq"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "XREPAIR-f51ccf77cd4e9fca",
+  "group": "XRf51ccf77cd4e9fca",
+  "result": "pass",
+  "landing": "20261016T183348-L-2671792",
+  "kind": "interface",
+  "note": "\nREADY: Fixed both consumer timeouts using the coefficient defining-equation API. All 10 affected modules compile individually within 60 seconds. Updated report and change record; existing terminal `sorry` unchanged.\nTIMEOUT\nTIMEOUT\nREADY: Fixed both consumer conversions using the proved mate equation. Six modified consumers pass local single-file checks within 60 seconds; terminal sorry unchanged. Fresh-tip verification remains for the independent reader.\nDELIVERED: checks and fix"
+ }
 }

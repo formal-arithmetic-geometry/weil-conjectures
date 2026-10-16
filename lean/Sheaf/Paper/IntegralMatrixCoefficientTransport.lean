@@ -323,8 +323,9 @@ theorem nonempty_integralMatrixCoefficientTransport (ℓ : ℕ) [Fact ℓ.Prime]
   have heSquare : ((ProEtale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app S) ≫
       (ProEtale.lowerStar AddCommGrpCat.{u + 1} g).map e =
         chartComparison X E ≫ continuousFunctionPushforward g E := by
-    simpa only [e, S, A, Functor.map_comp, ← Category.assoc, condensedPushforwardHom,
-      Adjunction.unitAlgHom, condensedRingObj, upperStarFromPoint, Functor.comp_obj] using
+    simpa only [e, S, A, Functor.map_comp, ← Category.assoc,
+      ← unitAlgHom_comp_map_condensedPullbackHom, Adjunction.unitAlgHom, condensedRingObj,
+      upperStarFromPoint, Functor.comp_obj] using
         continuousChart_scheme_naturality g E
   clear_value e
   let eX := Mod.regularExtensionIso φ

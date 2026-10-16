@@ -53,6 +53,8 @@ private theorem regular_pullback_hom (ℓ : ℕ) [Fact ℓ.Prime]
     (condensedRingObj (integralCoeff ℓ E) X)
     (condensedPullbackHom (integralCoeff ℓ E) f) p
 
+attribute [local irreducible] condensedPushforwardHom
+
 private theorem regular_pullback_naturality (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : Y ⟶ X)
@@ -64,7 +66,7 @@ private theorem regular_pullback_naturality (ℓ : ℕ) [Fact ℓ.Prime]
           ((integralRegularPullbackIso ℓ E f).inv ≫
             (integralMatrixPullback ℓ E f).map p ≫
               (integralRegularPullbackIso ℓ E f).hom).hom := by
-  rw [regular_pullback_hom]
+  rw [regular_pullback_hom, ← unitAlgHom_comp_map_condensedPullbackHom]
   let α := condensedPullbackHom (integralCoeff ℓ E) f
   let adj := ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f
   change p.hom ≫ (adj.unit.app _ ≫ (ProEtale.lowerStar Ab.{u + 1} f).map α) =

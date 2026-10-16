@@ -128,7 +128,7 @@ private lemma boundedCoefficient_scheme_naturality (ℓ : ℕ) [Fact ℓ.Prime]
   conv_rhs => rw [adjY.homEquiv_naturality_right]
   simp only [adjY, Adjunction.comp_homEquiv]
   erw [Equiv.trans_apply]
-  simp only [condensedPushforwardHom, Adjunction.unitAlgHom, Category.assoc]
+  simp only [← unitAlgHom_comp_map_condensedPullbackHom, Category.assoc]
   erw [hleft, pointUpperStarLowerStarAdjunction.homEquiv_naturality_right]
   ext S a
   cases a with
@@ -325,6 +325,7 @@ theorem condensedQbar_scalar_pullback (ℓ : ℕ) [Fact ℓ.Prime]
   simp only [α, IsIso.hom_inv_id_assoc]
   apply (adj.homEquiv _ _).injective
   rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+  rw [← unitAlgHom_comp_map_condensedPullbackHom] at hn
   exact hn
 
 end AlgebraicGeometry.ProEtale

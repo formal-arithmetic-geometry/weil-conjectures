@@ -594,7 +594,8 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option backward.isDefEq.respectTransparency false in
+attribute [local irreducible] condensedPushforwardHom
+
 /-- The canonical continuous chart commutes with weakly etale inverse image.
 Source: Bhatt--Scholze Section 6.8; the adjoint form of
 continuousChart_scheme_naturality. Transpose by the inverse-image adjunction.
@@ -622,8 +623,10 @@ lemma continuousChart_pullback (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f]
   erw [hu]
   erw [adj.homEquiv_naturality_right]
   change chartComparison X E ≫ _ =
-    condensedPushforwardHom (Profinite.continuousMapRingObj E) f ≫
-      (lowerStar Ab.{u + 1} f).map (chartComparison Y E)
+    (adj.unit.app _ ≫ (lowerStar Ab.{u + 1} f).map
+      (condensedPullbackHom (Profinite.continuousMapRingObj E) f)) ≫
+        (lowerStar Ab.{u + 1} f).map (chartComparison Y E)
+  rw [← Adjunction.unitAlgHom, unitAlgHom_comp_map_condensedPullbackHom]
   rw [CondensedRing.continuousChart_scheme_naturality]
   congr 1
   ext U : 3

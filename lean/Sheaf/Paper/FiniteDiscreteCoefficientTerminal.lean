@@ -153,9 +153,7 @@ private theorem coefficient_unit_comp
       (eqToHom (congrArg (lowerStar Ab.{u + 1}) (comp_toSpecZ j).symm)).app _ ≫
         (lowerStarComp Ab.{u + 1} j (toSpecZ T)).inv.app
           ((toSpecZ U)^*[Ab.{u + 1}].obj (pointUpperStar.obj R)) := by
-  first
-  | rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
-  | rw [condensedPushforwardHom, condensedPullbackHom_eq]
+  rw [condensedPushforwardHom_def, condensedPullbackHom_eq]
   exact unit_comp_lowerStar_map_unit_comp_upperStarComp Ab.{u + 1}
     j (toSpecZ U) (toSpecZ T) (comp_toSpecZ j) (pointUpperStar.obj R)
 
@@ -259,9 +257,7 @@ theorem finiteDiscreteCoefficient_coefficientUnit_pushforward_terminal
         ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).op.obj
           (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
           (proEtTerminal specZ.{u})))) := by
-  first
-  | rw [finiteDiscreteSchemeRingIso_eq, finiteDiscreteSchemeRingIso_eq]
-  | dsimp only [finiteDiscreteSchemeRingIso]
+  rw [finiteDiscreteSchemeRingIso_eq, finiteDiscreteSchemeRingIso_eq]
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
   exact constantScheme_pushforward (AddCommGrpCat.of (ULift.{u + 1} B))
     (Profinite.continuousMapRingObj.{u} B) eR.hom T U j
