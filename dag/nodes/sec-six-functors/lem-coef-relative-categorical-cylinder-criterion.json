@@ -31,9 +31,82 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}_{f_A}(B,Q)$. By [lem-coef-infinity-isofibration-exponentiation], restriction $\\operatorname{Fun}(B,Q)\\to\\operatorname{Fun}(A,Q)$ is an isofibration between quasicategories, hence an inner fibration. Its degreewise fiber at the vertex $f_A$ is exactly $D$: a simplex in the fiber is a map $B\\times\\Delta^r\\to Q$ restricting to the constant $r$-simplex at $f_A$. This fiber is a quasicategory. Indeed, a horn in the fiber gives an inner-horn lifting square for restriction with bottom map the constant simplex at $f_A$; a filler is again in the fiber. Let $J=N(\\mathcal J)$ be the two-object indiscrete groupoid nerve in [lem-coef-quasicategory-invertible-interval]. For any simplicial map $J\\to T$, the images of the edges $01$ and $10$ and of the $2$-simplices $010$ and $101$ give an edge, its inverse, and both inverse triangles in $T$: the long edges of those two triangles are the degenerate edges $00$ and $11$. Thus such a map gives an equivalence edge with exactly the convention of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-quasicategory-invertible-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01GQ",
+    "place": "Proposition 4.1.4.6 (01GQ), as cited in Theorem 4.6.3.8 (01KA); relative fiber identification and inverse triangles are written explicitly. Restriction isofibration: Corollary 4.4.5.3 (01F3)."
+   }
+  },
+  {
+   "text": "First assume that $F:\\overline B\\to Q$ extends both $f_0$ and $f_1$. In the Joyal model structure of [lem-coef-joyal-model-structure], factor $\\pi$ as $\\overline B\\xrightarrow{j}E\\xrightarrow{p}B$, with $j$ a trivial cofibration and $p$ a fibration. Since $\\pi$ and $j$ are weak equivalences, two-out-of-three makes $p$ a weak equivalence, hence a trivial fibration. The weak factorization systems in that node therefore give: $p$ lifts against every monomorphism, while $j$ lifts against every fibration. The map $Q\\to *$ is a fibration because $Q$ is a quasicategory. The square with top $F$, left $j$, and right $Q\\to *$ has a filler $F':E\\to Q$ with $F'j=F$. Set $t_\\varepsilon=js_\\varepsilon$; then $pt_\\varepsilon=\\operatorname{id}_B$, the restrictions of $t_0,t_1$ to $A$ agree, and $F't_\\varepsilon=f_\\varepsilon$. These operations take place in the input universe by the factorization assertion of the cited model-structure node. No quasicategory hypothesis on $B$, $\\overline B$ or $E$ is used.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KA",
+    "place": "Theorem 4.6.3.8 (01KA), proof of (2) implies (3): replace the categorical equivalence by a trivial-cofibration/fibration factorization; two-out-of-three and terminal fibrancy give the stated lifts."
+   }
+  },
+  {
+   "text": "Consider the simplicial subset $P=(B\\times\\{0,1\\})\\cup(A\\times J)$ of $B\\times J$, where $\\{0,1\\}\\subset J$ consists of the two constant vertices and their degeneracies. Define $a:P\\to E$ to be $t_0,t_1$ on the two copies of $B$, and to be $t_0|_A\\circ\\operatorname{pr}_A$ on $A\\times J$. These formulas agree on the intersections $A\\times\\{0,1\\}$ because $t_0|_A=t_1|_A$, so they define a simplicial map degree by degree. Moreover $pa=\\operatorname{pr}_B|_P$. The inclusion $P\\hookrightarrow B\\times J$ is degreewise injective, so the trivial fibration $p$ constructed in step 2 has a lift $L:B\\times J\\to E$ with $L|_P=a$ and $pL=\\operatorname{pr}_B$, by the weak factorization system of [lem-coef-joyal-model-structure]. The composite $F'L$ restricts to $f_0,f_1$ at $0,1$ and to $f_A\\circ\\operatorname{pr}_A$ on $A\\times J$. Currying therefore gives a map $J\\to D$ with endpoints $f_0,f_1$. Its edges and $2$-simplices $01,10,010,101$ supply the inverse-and-two-triangle equivalence as in step 1. This proves the extension-to-equivalence implication, and in fact produces a $J$-map in the strict relative fiber.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-quasicategory-invertible-interval",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KA",
+    "place": "Theorem 4.6.3.8 (01KA), trivial-fibration lifting argument; here applied directly to the explicit relative J-prism to exhibit the equivalence edge, instead of appealing to a homotopy-class quotient."
+   }
+  },
+  {
+   "text": "Conversely, suppose there is an equivalence edge $\\eta:f_0\\to f_1$ in $D$. The section $s_0$ is degreewise injective, since $\\pi s_0=\\operatorname{id}_B$. Since $\\pi$ is a weak equivalence, two-out-of-three in [lem-coef-joyal-model-structure] makes $s_0$ a weak equivalence; it is thus a trivial cofibration. Lift $f_0$ against the fibration $Q\\to *$ to obtain $G:\\overline B\\to Q$ with $Gs_0=f_0$. Put $g_1=Gs_1$; it restricts to $f_A$ on $A$. Apply the already proved steps 2-3 to $G$ and its endpoints $f_0,g_1$ to get a $J$-map between those vertices of $D$. Its two inverse triangles give an isomorphism $a:f_0\\cong g_1$ in $hD$, the category presented by vertices, edges and $2$-simplex composition relations in [lem-coef-quasicategory-invertible-interval]. Likewise the two inverse triangles of $\\eta$ give an isomorphism $b:f_0\\cong f_1$ in $hD$. The ordinary composite $b\\circ a^{-1}$ is an isomorphism from $g_1$ to $f_1$. Since $D$ is a quasicategory by step 1, [lem-coef-quasicategory-invertible-interval] now gives a map $v:J\\to D$ with endpoints $g_1,f_1$. In uncurried form it is $V:B\\times J\\to Q$ with $V|_{B\\times\\{0\\}}=g_1$, $V|_{B\\times\\{1\\}}=f_1$ and $V|_{A\\times J}=f_A\\circ\\operatorname{pr}_A$. This use of steps 2-3 is one-way: those steps were proved without assuming the present converse.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-quasicategory-invertible-interval",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KA",
+    "place": "Corollary 4.6.3.11 (01KD), converse direction proved by first extending one endpoint and correcting the other by a strict relative equivalence; invertible interval: Cisinski Theorem 1.6.6 and Section 3.5."
+   }
+  },
+  {
+   "text": "Let $C=B\\amalg_A B$ and write $k:C\\hookrightarrow\\overline B$ for the monomorphism given in the statement. On $C\\times J$, define $T$ to be $f_0\\circ\\operatorname{pr}_B$ on the first copy $B\\times J$ and to be $V$ from step 4 on the second. The two formulas agree on $A\\times J$, so define a simplicial map on the degreewise pushout; degreewise product with $J_r$ carries this pushout to the corresponding pushout of sets. Currying gives a simplicial map $J\\to\\operatorname{Fun}(C,Q)$ whose initial vertex is $Gk$ and whose final vertex is the glued diagram $u=(f_0,f_1):C\\to Q$. The images of $01,10,010,101$ again show that its edge from $Gk$ to $u$ is an equivalence, without any pointwise-equivalence criterion or relative quotient identification. By [lem-coef-infinity-isofibration-exponentiation], restriction $k^*:\\operatorname{Fun}(\\overline B,Q)\\to\\operatorname{Fun}(C,Q)$ is an isofibration. Lift this equivalence edge with specified source $G$ using the equivalence-lifting clause of that node. Its final vertex is a map $\\overline f:\\overline B\\to Q$ with $\\overline f k=u$ exactly, hence $\\overline f s_0=f_0$ and $\\overline f s_1=f_1$. This proves the converse for the prescribed cylinder. If $A=\\varnothing$, the fiber condition in step 1 is empty and $D=\\operatorname{Fun}(B,Q)$, giving the stated special case.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-quasicategory-invertible-interval",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KA",
+    "place": "Corollary 4.6.3.11 (01KD) and Theorem 4.6.3.8 (01KA), the endpoint correction made explicit using Corollary 4.4.5.3 (01F3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-quasicategory-invertible-interval"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01KA",
+  "place": "Theorem 4.6.3.8, Corollary 4.6.3.11 (01KD). Agent-written variant using existing Joyal weak factorization systems and restriction isofibrations: explicit relative J-prism for necessity and equivalence lifting for sufficiency. Online sources read 2026-10-17; not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +163,73 @@
    "results": "{\"t\": \"2026-10-16T20:09:13Z\", \"tool\": \"grep\", \"query\": \"relative.*homotop|homotop.*relative|isIso.*[Hh]omotop|[Hh]omotop.*isIso\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"9afbc9ea6e5baf8d\"}",
    "date": "2026-10-16",
    "verdict": "No match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120. It defines interval homotopies and their quotient, with no equivalence-edge or arbitrary categorical-cylinder criterion. ModelCategory/LeftHomotopy and RightHomotopy concern abstract cylinder/path homotopies; FundamentalGroupoid/InducedMaps is about topological maps."
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?cylinder|relative.*homotop|homotop.*relative",
+   "results": "{\"t\": \"2026-10-16T20:37:39Z\", \"tool\": \"grep\", \"query\": \"categorical.?cylinder|relative.*homotop|homotop.*relative\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"75f5897a6aa1653d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural equivalences of quasicategory diagrams fixing a subcomplex are detected by categorical mapping cylinder extensions",
+   "results": "{\"t\": \"2026-10-16T20:37:39Z\", \"tool\": \"leansearch\", \"query\": \"Natural equivalences of quasicategory diagrams fixing a subcomplex are detected by categorical mapping cylinder extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithInitial.coconeEquiv\", \"ComplexShape.Embedding.homEquiv\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.ShortComplex.HomotopyEquiv.ext\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"CategoryTheory.TwoSquare.lanBaseChange\", \"CategoryTheory.Limits.IsColimit.extendIsoEquiv\"], \"digest\": \"1bbe4136389d50ce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cylinder\", \"LeftHomotopy\"",
+   "results": "{\"t\": \"2026-10-16T20:37:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cylinder\\\", \\\"LeftHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Precylinder.LeftHomotopy.refl\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.refl\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.symm\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.leftHomotopyRel\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.h\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.symm\"], \"digest\": \"9b5144c9c4cc56c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps into a quasicategory agreeing on a simplicial subset are equivalent relative to that subset exactly when they extend over any categorical mapping cylinder",
+   "results": "{\"t\": \"2026-10-16T20:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"Two maps into a quasicategory agreeing on a simplicial subset are equivalent relative to that subset exactly when they extend over any categorical mapping cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.mk.inj\", \"SSet.RelativeMorphism.Homotopy.ofEq\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.RelativeMorphism.Homotopy.ext_iff\", \"SSet.RelativeMorphism.ext\", \"SSet.RelativeMorphism.Homotopy.ext\", \"SSet.Quasicategory.hornFilling\", \"SSet.RelativeMorphism.ext_iff\"], \"digest\": \"10bb96ab25dbef56\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ll]eft[Hh]omotopy|[Hh]omotopy.*[Ii]so|categoricalEquivalence",
+   "results": "{\"t\": \"2026-10-16T20:38:08Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ll]eft[Hh]omotopy|[Hh]omotopy.*[Ii]so|categoricalEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"f2c67b79c5b10a87\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good cylinder object under A computes invertible transformations between B indexed quasicategory diagrams with their restriction to A held fixed",
+   "results": "{\"t\": \"2026-10-16T20:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"A good cylinder object under A computes invertible transformations between B indexed quasicategory diagrams with their restriction to A held fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder\", \"HomotopicalAlgebra.Cylinder.instIsGoodSymmOfRespectsIsoCofibrations\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.toIsGood\", \"HomotopicalAlgebra.Precylinder.I\"], \"digest\": \"306bfc21c455f42b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:83-120, ModelCategory/Cylinder.lean:45-115 and ModelCategory/LeftHomotopy.lean:230-280. RelativeMorphism gives Delta1 homotopies, not invertible edges in a relative quasicategory; abstract good cylinders and homotopy calculus do not identify such edges with extensions over Joyal cylinders. FundamentalGroupoid hits concern topological homotopies. No exact or one-line specialization match."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|Isofibration|CategoricalEquivalence",
+   "results": "{\"t\": \"2026-10-16T20:48:55Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|Isofibration|CategoricalEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: read Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:63-103. These are inner-fibration and terminal-fibrancy statements; they do not identify strict relative equivalences with arbitrary cylinder extensions. Other returned files concern nerves, the quasicategory definition and two-truncated homotopy categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the Joyal model category, homotopy relative to a subobject is an isomorphism in the homotopy category of the strict fiber of a simplicial mapping object",
+   "results": "{\"t\": \"2026-10-16T20:49:03Z\", \"tool\": \"leanfinder\", \"query\": \"In the Joyal model category, homotopy relative to a subobject is an isomorphism in the homotopy category of the strict fiber of a simplicial mapping object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"HomotopicalAlgebra.LeftHomotopyRel.rightHomotopy\", \"HomotopicalAlgebra.leftHomotopyRel_iff_rightHomotopyRel\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"HomotopicalAlgebra.RightHomotopyClass.mk_eq_mk_iff\"], \"digest\": \"4806169634adc651\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match or one-line specialization: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:29-76 and SimplicialSet/HomotopyCat.lean:300-329. The former compares equality of morphisms in an abstract model homotopy category with right homotopy; the latter describes the edge-generated morphism property in a two-truncated homotopy category. Neither supplies the relative Joyal mapping-object identification or the prescribed-cylinder extension criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CofibrantObject.toHoCat_map_eq_iff\"",
+   "results": "{\"t\": \"2026-10-16T20:49:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"CofibrantObject.toHoCat_map_eq_iff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\"], \"digest\": \"05696edfb43be849\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match or one-line specialization: the single declaration, read at Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:72-76, states equality of morphisms in the abstract model homotopy category iff right homotopy. It does not state isomorphism of diagrams in a strict relative functor quasicategory or extension over a prescribed Joyal cylinder."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-join-slice-diagram-isomorphisms",
@@ -101,5 +237,21 @@
   "group": "N2"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-categorical-cylinder-criterion",
+  "worker": "stage1",
+  "summary": "Proved the cylinder criterion without new nodes. The relative functor fiber is a quasicategory by restriction isofibration. A Joyal trivial-fibration replacement lifts an explicit relative J-prism, giving the necessity and its strict inverse triangles. For sufficiency extend one endpoint, compare its other endpoint inside the strict relative fiber, glue a J-map on the endpoint pushout and lift the resulting equivalence through restriction. Statement unchanged. No use of the criterion itself or a model homotopy-class identification.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: categorical diagram comparisons in the supporting join-slice argument, the equivalence-to-extension criterion cited as Kerodon 01KD in lem-coef-join-slice-diagram-isomorphisms. Steps 1-3 establish extension implies strict relative equivalence; steps 4-5 establish strict relative equivalence implies extension for the prescribed cylinder.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-eb57ac74c",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-eb57ac74c (reviewer sub-agent of L); spot-checked: I read the item, its five proof steps, the full statements of all four cited nodes, the citer lem-coef-join-slice-diagram-isomorphisms, the unit sk-prop-sf-biduality-general and paragraph 2 of the ancestor proof prop-coef-integral-exceptional-adjoint (main-20261015). The delivery creates no new nodes and leaves the statement unchanged. The statement matches Kerodon 01K5, the definition of a relative categorical mapping cylinder (B⨿_A B → B̄ mono, π a categorical equivalence, πs_ε=id). It also matches Kerodon 01KD, phrased with an equivalence edge in the strict fiber Fun_{f_A}(B,Q), which is the form the citer uses (A=∅ with B=J, and A={*}⊂J⋆Δ^0). Step 1: restriction is an isofibration by the exponentiation node; its fiber over f_A is D, and D is a quasicategory because a filler over the degenerate bottom simplex stays in the fiber. The J-simplices 010 and 101 give both inverse triangles. Step 2: factor π=pj in the Joyal structure; p is a trivial fibration by two-out-of-three, Q→* is a fibration, and F extends to F'. Step 3: the pieces of P=B×{0,1}∪A×J agree on A×{0,1}, pa=pr_B, and the lift L gives a J-map that lies in D. Step 4: s_0 is a trivial cofibration, which gives G and g_1=Gs_1 with g_1|_A=f_A. Steps 2–3 give f_0≅g_1, and composing with η in hD plus the interval node gives V. This is not circular. Step 5: C×J is the degreewise pushout. The J-map runs from Gk=(f_0,g_1) to u=(f_0,f_1), and lifting through the isofibration k^* gives f̄ with f̄k=u. Edge cases checked: A=∅, A=B, B=∅, f_0=f_1, and Δ^1 with endpoints 0 and 1 (no extension, as expected). There is no cycle (closure of 30 nodes). The three theorem nodes are in the item's unit and the definition is a notion, so tool_uses is empty and no SGA is used. A DAG grep for 01KD, 01K5, 01KA and 'mapping cylinder' finds no duplicate. I agree with the Mathlib no-match verdict. Kerodon is not archived; WANTED is recorded and the proof is marked agent-written. No changes made."
+ }
 }

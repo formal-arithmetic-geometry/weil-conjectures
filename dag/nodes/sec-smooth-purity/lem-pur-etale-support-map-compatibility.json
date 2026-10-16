@@ -36,9 +36,179 @@
   "def-kun-projection-formula-map",
   "lem-pur-etale-open-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the geometry needed below. Proper base change preserves properness, and separated finite-type base change preserves separatedness and finite type; base change also preserves etaleness and open immersions. Thus c' is a compactification of e'. Its ambient scheme and V' are Noetherian by finite type over T'. The same argument makes the ambient scheme of c Noetherian. No separatedness or finite-type hypothesis on g is used. For an etale W over T and a lift s:W\\to V, its graph is open and closed in V\\times_TW by the etale-section lemma. Its image in \\overline V\\times_TW is still open, and is closed because it is a section of the separated morphism r_W; this uses the closed-section lemma, not a finiteness assertion about r. On the disjoint open cover consisting of that graph and its complement, glue m\\in M(W,s) with zero. This is a section of j_!M on \\overline V\\times_TW: its restriction to the boundary is zero, and its support is closed inside that graph. Pullback of the graph for s along a map W_1\\to W is the graph for s|_{W_1}. Consequently these assignments commute with restrictions and are A-linear, and the sum-presheaf construction and the universal property of module sheafification give a natural sheaf map a_M:e_{\\Sigma!}M\\to r_*j_!M. The support-composition theorem identifies r_*j_!M with e^{\\mathrm{supp}}_!M as a subsheaf of e_*M, by keeping the section itself. The canonical sum/proper-support identification in the quasi-finite comparison identifies its summand (s,m) with precisely this zero-extended graph section (the construction in Tag 0F4L). Hence a is that sheaf identification, in particular an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-separated-base-change",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y, 0GKM; etale-cohomology.tex Tag 0F4L, graph-section construction; Schemes closed-section lemma"
+   }
+  },
+  {
+   "text": "Write t_M=(c_e^c(M))^{-1}. On a complex P on V, apply a termwise and then the derived-functor comparison q_{j_!P}:Q(r_*j_!P)\\to Rr_*Q(j_!P). This gives t: S_e\\to F_e^c: it is the canonical comparison of the quasi-finite theorem, with its sheaf proper-support identification from Step 1. Set d_M:r^*S_eM\\to Dj_!M to be its adjoint under r^*\\dashv Rr_*. Crucially, d is the descent of the termwise sheaf map d^0_P=\\varepsilon^0_{r,j_!P}\\circ r^*a_P. To verify the assertion on an arbitrary unbounded P, choose j_!P\\xrightarrow{\\iota}I K-injective. The map t_P is represented by r_*\\iota\\circ a_P, and its adjoint is represented by \\varepsilon^0_{r,I}\\circ r^*(r_*\\iota\\circ a_P)=\\iota\\circ\\varepsilon^0_{r,j_!P}\\circ r^*a_P, by naturality of the sheaf counit. In the derived category Q\\iota is invertible. The termwise adjunction on homotopy categories and the bijection of maps into K-injectives justify this computation. Exactness of r^*, e_{\\Sigma!} and j_! implies that the two functors on either side of d^0 preserve quasi-isomorphisms; localization therefore gives the asserted d, naturally in M. In particular d evaluates the graph sections of Step 1; it is not an arbitrarily chosen isomorphism between functors.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM canonical derived comparison, expanded by the termwise adjunction and K-injective construction"
+   }
+  },
+  {
+   "text": "The inverse sum-extension base-change maps b_e and b_j have the following specific effect. If (s,m) is a summand over an etale W\\to T, its pullback over W\\times_TT' is the summand of the pulled-back lift s' with value h^*m. For j the same statement says that the pulled-back zero extension is zero extension on the pulled-back open. This follows from the defining conjugate formula for beta=b^{-1}: its unit restricts a section to the pullback object, its underived exchange is restriction along the fibre-product identification, and its final counit evaluates the same lift. The etale-local underived-exchange lemma and the etale restriction/unit lemma identify these two restrictions explicitly. This calculation gives beta(s',h^*m)=g^*(s,m), hence gives the displayed rule for its inverse, whose existence is the module base-change theorem. It suffices to compute on these local representatives: an inverse-image sheaf is sheafification of the inverse-image presheaf, whose elements are locally represented by a source section. Thus the argument does not claim that all lifts over an arbitrary T'-object descend to T. Pulling back a graph-supported section in Step 1 gives a section on the pulled-back graph with the same value and zero on its complement, since both pieces are open and closed. Evaluating these sections gives the sheaf identity b_j\\circ\\bar h^*d^0_M=d'^0_{h^*M}\\circ r'^*b_e, with the pullback-composition identification r'^*g^*=\\bar h^*r^* understood. The same degreewise equality descends to an equality of derived natural transformations by exactness and the localization uniqueness statement.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L construction of compact-support exchange; etale-cohomology.tex Tag 03S6, with its conjugate map and graph representatives"
+   }
+  },
+  {
+   "text": "Precompose the desired exchange identity with g^*t_M. It is equivalent to C^c_{e,g}\\circ g^*t_M=t'_{h^*M}\\circ b_e. Transpose both sides under r'^*\\dashv Rr'_*. By the definition of Ex_r as the mate of pullback composition, the transpose of the left side is b_j\\circ\\bar h^*d_M. Indeed the mate equation is \\varepsilon_{r'}\\circ r'^*\\operatorname{Ex}_r=\\bar h^*\\varepsilon_r after pullback composition; naturality moves g^*t through this equation. The transpose of the right side is d'_{h^*M}\\circ r'^*b_e. These are equal by Step 3. Injectivity of the adjunction Hom bijection proves the equivalent identity, and cancellation of t and t' proves (1). All maps have been identified before taking cohomology; no faithfulness of stalks on derived morphisms is used.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L proper-exchange/open-extension construction, with the explicit defining mate equation"
+   }
+  },
+  {
+   "text": "Construct the sum projection map at sheaf level by (s,m)\\otimes k\\mapsto(s,m\\otimes s^*k). Balancing and additivity hold on each summand and restriction sends s to the restricted lift, so this defines a morphism after tensor sheafification and sum sheafification. The sum-stalk formula, the inverse-image stalk formula and the tensor-stalk formula identify it at a geometric point \\bar t with the map (\\bigoplus_{\\bar v\\mapsto\\bar t}M_{\\bar v})\\otimes_A K_{\\bar t}\\to\\bigoplus_{\\bar v\\mapsto\\bar t}(M_{\\bar v}\\otimes_AK_{\\bar t}) sending m\\otimes k in a summand to m\\otimes k in that summand. Its inverse sends each summand tensor to the tensor with the corresponding sum inclusion; the tensor universal property proves that these are inverses. Stalk conservativity therefore makes the sheaf map an isomorphism. To derive it on the full unbounded categories, use flat-term K-flat representatives P,Q. Sum extension preserves flatness: tensoring e_{\\Sigma!}P^n with a short exact sequence is, by the just-proved sheaf identity, e_{\\Sigma!} of tensoring P^n with its exact inverse image. It also preserves K-flatness, since for every acyclic complex H on T the same degreewise identity gives e_{\\Sigma!}P\\otimes H=e_{\\Sigma!}(P\\otimes e^*H), an acyclic complex by exactness of e^* and e_{\\Sigma!}. The identity commutes with the direct-sum totalization: sum extension preserves direct sums, directly from its sheafified-sum definition (a map out of either iterated sum is exactly a family of maps out of its summands). Inverse image preserves flat K-flat representatives by the derived tensor-pullback theorem. The tensor descent theorem thus gives exactly the natural isomorphism p^\\Sigma in the statement. This also covers an empty fibre and the zero ring: all maps there are the unique maps between zero modules. The two input sites need not coincide: use the flat K-flat localization equivalence separately for V and T, then apply uniqueness of localization of natural transformations first in the V-variable and then in the T-variable. This yields the required natural bifunctor and comparison on D(V) times D(T).",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-amb-etale-sum-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pc-kflat-resolution",
+    "lem-amb-etale-adjoint-locality",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF (lemma-f-shriek-projection), its tensor-generator and stalk proof; derived passage as in Tag 0GL5"
+   }
+  },
+  {
+   "text": "For the sheaf maps of Steps 1, 2 and 5, the following evaluation identity holds after pullback tensor comparison: gamma_j\\circ(d^0_M\\otimes1)=d^0_{M\\otimes e^*K}\\circ r^*p^\\Sigma_{M,K}. Check it on a local pullback of the tensor generator (s,m)\\otimes k. On the graph of s the left side evaluates m and then tensors with the restriction of k, yielding m\\otimes s^*k; off the graph it is zero. The right side first forms the generator (s,m\\otimes s^*k) and then zero-extends and evaluates it, giving those same two restrictions. Equality follows by the sheaf axiom on the disjoint graph/complement cover, by linearity on finite sums, and by the universal properties of inverse image and sheafification. For flat K-flat P,Q the computation is a degreewise equality of maps of total tensor complexes: all maps have degree zero and preserve tensor-factor order, so each differential d_P\\otimes1+(-1)^p1\\otimes d_Q is respected with the same sign on both sides. Step 5 makes S_eP K-flat; the same K-flatness argument for open extension, or its case in the open-tensor theorem, applies to j_!P. The derived tensor-pullback and open-tensor theorems identify these chain maps with the specified derived gamma_j and pullback tensor comparison. Tensor descent and Step 2 therefore give the derived equality gamma_j\\circ(d_M\\otimes1)=d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma_{M,K} for arbitrary M,K. More explicitly, equality on flat K-flat models extends first in the V-variable and then in the T-variable, using the resolving-class equivalence and localization uniqueness in each variable; no identification of the two sites is required.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF tensor-generator formula; Tag 0GL5 open tensor factor; etale-cohomology.tex Tag 0F4L graph evaluation"
+   }
+  },
+  {
+   "text": "Precompose the proposed projection identity with t_M\\otimes1_K. It is equivalent to P^c_{e,M,K}\\circ(t_M\\otimes1_K)=t_{M\\otimes^Le^*K}\\circ p^\\Sigma_{e,M,K}. Transpose under r^*\\dashv Rr_*. The projection-map definition gives the transpose of the left side as gamma_j\\circ((\\varepsilon_{r,Dj_!M}\\circ r^*t_M)\\otimes1)=gamma_j\\circ(d_M\\otimes1), using naturality of the pullback tensor comparison. The transpose of the right side is d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma. These are equal by Step 6. The adjunction bijection proves the equivalent identity, and cancellation of the isomorphism t proves (2). This is the counit-defined projection morphism, with precisely the order of factors in the statement; there is no choice of a projection isomorphism by abstract endpoints.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL5 compactification projection construction and the counit-defined projection transpose"
+   }
+  },
+  {
+   "text": "Every previous calculation was performed for the given compactification c, with no use of r being finite. Under a proper-refinement comparison rho:F_e^c\\to F_e^d, the quasi-finite comparison theorem says c_e^d\\circ rho=c_e^c, hence rho\\circ t^c=t^d. Step 4 writes each compactification exchange as t'\\circ b_e\\circ g^*c_e, and Step 7 writes each projection as t\\circ p^\\Sigma\\circ(c_e\\otimes1). Substituting rho\\circ t^c=t^d and its base-changed version into these two expressions proves refinement compatibility by associativity of composition. Naturality in M,K holds because a,d,b,p and the adjunction bijections used above are natural; the identities thus hold as identities of derived natural transformations. This proves the final clause as well as both numbered clauses.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKM canonical compactification comparison; Tags 0F7L and 0GL5, refinement independence via the proved formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-projection-formula-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-sum-stalks",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-pc-kflat-resolution",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F4Y, 0GKM, 0F7L, 0GKF, 0GL5 and etale-cohomology.tex Tags 03S6, 0F4L; explicit graph-evaluation and adjunction-transpose proof, not a quotation of an omitted coherence argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -151,10 +321,45 @@
    "results": "{\"t\": \"2026-10-16T19:48:35Z\", \"tool\": \"grep\", \"query\": \"compactSupport|compact_support|lowerShriek|extensionByZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"Mathlib/MeasureTheory/Function/ContinuousMapDense.lean\", \"Mathlib/MeasureTheory/Function/LocallyIntegrable.lean\"], \"digest\": \"a32a8ed11fff0a88\"}",
    "date": "2026-10-17",
    "verdict": "no match: the reported hits concern compact support of functions in topology and measure theory, rather than etale sheaf compact support"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|sumExtension|extensionByZero|shriek",
+   "results": "{\"t\": \"2026-10-16T20:13:55Z\", \"tool\": \"grep\", \"query\": \"lowerShriek|sumExtension|extensionByZero|shriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern geometric etaleness, cotangent modules or Zariski structure-sheaf adjunctions, not compactified etale proper-support comparison and its specified derived maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compactification direct image with proper support for an etale morphism agrees with sum extension compatibly with base change and tensor products",
+   "results": "{\"t\": \"2026-10-16T20:13:55Z\", \"tool\": \"leansearch\", \"query\": \"Derived compactification direct image with proper support for an etale morphism agrees with sum extension compatibly with base change and tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"IsBaseChange.directSumPow\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.FormallyEtale.instTensorProduct\"], \"digest\": \"29ad10e2d367d1fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern geometric etaleness, cotangent modules or Zariski structure-sheaf adjunctions, not compactified etale proper-support comparison and its specified derived maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"projection\"",
+   "results": "{\"t\": \"2026-10-16T20:13:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"projection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern geometric etaleness, cotangent modules or Zariski structure-sheaf adjunctions, not compactified etale proper-support comparison and its specified derived maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison between derived compact support for a separated etale morphism and sum extension preserves base change and the tensor projection map",
+   "results": "{\"t\": \"2026-10-16T20:13:57Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical comparison between derived compact support for a separated etale morphism and sum extension preserves base change and the tensor projection map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Etale.baseChange\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"5ce0ea3d773b7dec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern geometric etaleness, cotangent modules or Zariski structure-sheaf adjunctions, not compactified etale proper-support comparison and its specified derived maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along etale morphisms is a module functor for pullback; its identification with compactified derived pushforward respects Beck Chevalley maps and tensor projection morphisms",
+   "results": "{\"t\": \"2026-10-16T20:14:44Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero along etale morphisms is a module functor for pullback; its identification with compactified derived pushforward respects Beck Chevalley maps and tensor projection morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\"], \"digest\": \"1d9cd361ccaa67ee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern geometric etaleness, cotangent modules or Zariski structure-sheaf adjunctions, not compactified etale proper-support comparison and its specified derived maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-co-smooth-etale-locality",
@@ -162,5 +367,199 @@
   "group": "N9"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-cohsm"
+ "unit": "sk-prop-cohsm",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-support-map-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded the canonical support comparison into graph evaluation, proved exchange and projection compatibilities by their actual adjunction transposes on unbounded complexes, and obtained arbitrary-compactification refinement compatibility by conjugation. Reused existing statements throughout; no new nodes, no SGA, no change to the statement.",
+  "blueprint": "lem-pur-co-smooth-etale-locality.proof.md Step 1 (base-change-stable etale normalization) is realized by Steps 1–4 and 8; Step 3 (the actual counit-defined tensor map) by Steps 2 and 5–8.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic Compact supports on the ordinary etale category used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic The projection-formula morphism used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "Generic Unbounded derived exchange morphism used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-weil-pbc-etale-shriek-base-change-map",
+    "why": "Generic Base change morphism for etale extension by zero used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Generic Extension by zero along an etale map used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-weil-pbc-inverse-image",
+    "why": "Generic Inverse image and the derived adjunction used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Generic Sheafification of a presheaf of modules over a sheaf of rings used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic Geometric stalks of etale sum extension used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Generic Composition and pullback of the underived sheaf of sections with proper support used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic Separated finite-type morphisms are stable under base change used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Generic Quasi-finite compact support is exact and agrees with compactifications used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic The base-change functor between small etale sites commutes with finite limits used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Generic A section of a separated etale morphism is an open and closed immersion used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic Etale extension by zero commutes with base change for module sheaves used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-etale-underived-exchange-restriction",
+    "why": "Generic Underived exchange along an etale morphism is the restriction identification used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Properness is stable under base change used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic A section of a separated morphism is a closed immersion used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic Separated morphisms are stable under base change (Stacks 01KU (3)) used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used only for graph construction, exact derived adjunction or tensor computations; it does not replace the etale-normalization route of sk-prop-cohsm."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "def-kun-projection-formula-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-sum-stalks",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-pc-kflat-resolution",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-b4651a2bd",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-b4651a2bd (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item and its 8 steps, all 35 proof-dep and 18 stmt-dep statements, the parent lem-pur-co-smooth-etale-locality (its Steps 2, 4 and 6 cite this item), the blueprint proof of lem-pur-co-smooth-etale-locality, the sk-prop-cohsm unit and its route, the full proof of lem-sfb-quasifinite-compact-support-exact, and Stacks 0F4L, 0F4Y, 0GKM, 0F7L, 0GKF, 0GL5 and 03S6. The hypotheses (A finite, e separated etale of finite type, Noetherian schemes, T' Noetherian) match lem-sfb. I checked the types and directions of C=Rr'_*(b_j)Ex_r, b=beta^{-1}, P=Rr_*(gamma)pi and p^Sigma, and they agree with how the parent uses (1) and (2). Step 1: the graph is clopen in Vbar_W because it is a section of the separated map r_W, so no finiteness of r is needed, and its zero extension lies in r_*j_!=e^supp_!. Step 2: I recomputed the counit transpose. Step 3: I checked beta on generators through the conjugate formula. Step 4: I recomputed the mate transpose. Steps 5-6: sum extension preserves flat K-flat complexes, and descent is done one variable at a time across the two sites. Step 7: I recomputed the projection transpose. Step 8: refinement independence follows by substitution. Cases tested: e=id, the fold map T+T->T, an open immersion, a nonfinite compactification of Spec k, V empty, A=0. No SGA is cited and there are no new nodes. The only off-route statements are lem-sfb-quasifinite-compact-support-exact and lem-pod-etale-stalk-tensor-scalar; I accepted both as tool uses, and the other declared tool uses are on route, definitions or leaves. Observations, not faults: (1) lem-sfb's statement says only 'canonical'. That its maps are the derived unit and the 0F4L graph map is in its proof (Steps 3 and 7), so I recommend sharpening its statement. (2) Clause (1) overlaps the SGA-sourced lem-asd-etale-compact-support-normalization. No fixes."
+ }
 }
