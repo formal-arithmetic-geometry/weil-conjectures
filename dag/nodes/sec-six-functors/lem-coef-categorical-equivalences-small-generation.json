@@ -343,5 +343,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CategoricalEquivalencesSmallGeneration",
+  "declaration": "SSet.exists_categorical_equivalences_small_generation",
+  "file": "lean/Sheaf/AlgebraicTopology/CategoricalEquivalencesSmallGeneration.lean",
+  "statement": "theorem exists_categorical_equivalences_small_generation : ∃ (I : Type u) (E₀ : I → Arrow SSet.{u}), (∀ (i : I) (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (E₀ i).hom)).app C)).toFunctor).IsEquivalence) ∧ ∀ (f : Arrow SSet.{u}), (∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map f.hom)).app C)).toFunctor).IsEquivalence) → ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (D : J ⥤ Arrow SSet.{u}) (c : Cocone D), (∀ j : J, ∃ i : I, D.obj j = E₀ i) ∧ Nonempty (IsColimit c) ∧ Nonempty (c.pt ≅ f)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34ec0529b",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps (enhanced-diagrams-cones, size convention, Joyal model structure), module, report (Worker report + Second reading by Q53 present). Clause-by-clause: hFun test verbatim from SSet.exists_joyal_model_structure (MonoidalClosed.pre direction checked: Fun(L,C)->Fun(K,C)); SSet.{u} with tests at max u v, no universe equality; small family I:Type u with E0 ⊆ E; every f in E gets J:Type u, SmallCategory, IsFiltered (includes Nonempty), D with values literally in range E0, colimit cocone and iso in Arrow. No endpoint hypotheses. Edge cases id_∅, ∅→Δ0, empty test, all u/v orderings OK. No definitions, one sorry theorem, source/blueprint docstrings and 9 proof steps, proof-dep imports non-public per rule 7, lines ≤100, autoImplicit off, node unchanged except lean, lean.statement verbatim. nt_compile.py --json: rc 0, 29 deps + item, no errors/warnings. No findings."
  }
 }
