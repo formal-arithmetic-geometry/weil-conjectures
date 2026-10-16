@@ -34,7 +34,11 @@
   "def-weil-pbc-cohomology-pullback",
   "def-weil-etale-morphism",
   "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-exact-functor-complex-cohomology"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-sc-raw-restricted-cohomology-class",
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison"
  ],
  "proof": [
   {
@@ -493,5 +497,33 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-b3a65f244 (reviewer sub-agent of L); spot-checked: Read the complete delivery, required instructions, unit/chapter route, all six proof steps and 36 cited node statements, and the cited Stacks source passages. Verified exact base-change mate, coefficient category, hypotheses, chart calculations, naturality, edge cases, Mathlib searches, and no duplicate/new-node issues. Wrote review.md; no repairs required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-693367176",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Wrote review.md. Canonical constructions, all statement clauses and naturalities, 20 dependencies, universes, edge cases, docstrings, and verbatim signature checked. Immutable module reproduced cleanly through scompile.py in sandbox and library forms. No fixes required; no repository or branch changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommutativeExchangeChart",
+  "declaration": "AlgebraicGeometry.Etale.commutativeExchangeChart",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exchangeChartTheta",
+   "AlgebraicGeometry.Etale.exchangeChartHigherMap",
+   "AlgebraicGeometry.Etale.exchangeChartValue",
+   "AlgebraicGeometry.Etale.exchangeChartMorphism",
+   "AlgebraicGeometry.Etale.exchangeChartCoefficientMap",
+   "AlgebraicGeometry.Etale.exchangeChartPullback",
+   "AlgebraicGeometry.Etale.commutativeExchangeChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeExchangeChart.lean",
+  "statement": "theorem commutativeExchangeChart {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : CommSq g' f' f g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : (∀ (U : Y.Etale) (x : rawAffineRestrictedCohomology f q F U), exchangeChartValue sq F q U x = exchangeChartTheta f' _ q (g.Etale.obj U) (exchangeChartPullback sq F q U x)) ∧ (∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : F ⟶ G) (U : Y.Etale) (x : rawAffineRestrictedCohomology f q F U), exchangeChartValue sq G q U (rawRestrictedCohomologyComparison f q G U (rawRestrictedCohomologyClass f q F U x ≫ (shiftFunctor _ (q : ℤ)).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) = ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f').map ((DerivedCategory.Plus.singleFunctor _ 0).map (((g')^*[AddCommGrpCat.{u + 1}]).map φ)))).hom.app (op (g.Etale.obj U)) (exchangeChartValue sq F q U x)) ∧ (∀ (U V : Y.Etale) (i : V ⟶ U) (x : rawAffineRestrictedCohomology f q F U), exchangeChartValue sq F q V (rawRestrictedCohomologyComparison f q F V ((abelianHigherDirectImageRawPresheaf f q F).map i.op (rawRestrictedCohomologyClass f q F U x))) = ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f').obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (((g')^*[AddCommGrpCat.{u + 1}]).obj F)))).obj.map (g.Etale.map i).op (exchangeChartValue sq F q U x))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All maps are constructed: chart theta uses the canonical inverse evaluation and adjunction class map; E is homology of derivedBaseChangeMapPlus; the unit is the actual sheaf adjunction unit; chart pullback uses the actual fibre-product map and derived global sections. The three clauses include coefficient and test-object naturality. No statement correction."
  }
 }
