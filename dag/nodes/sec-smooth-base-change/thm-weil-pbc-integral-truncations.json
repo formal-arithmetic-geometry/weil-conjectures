@@ -105,5 +105,38 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCanonicalTruncations",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_integral_truncations",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcAmbientTStructure",
+   "AlgebraicGeometry.Scheme.pbcIntegralCanonicalTruncations_mem",
+   "AlgebraicGeometry.Scheme.pbcIntegralTruncLE",
+   "AlgebraicGeometry.Scheme.pbcIntegralTruncGE",
+   "AlgebraicGeometry.Scheme.pbc_integral_truncation_properties",
+   "AlgebraicGeometry.Scheme.pbcCanonicalReductionDiagram",
+   "AlgebraicGeometry.Scheme.PbcTruncationTorCompatible",
+   "AlgebraicGeometry.Scheme.pbc_flat_cohomology_torCompatible",
+   "AlgebraicGeometry.Scheme.pbc_torCompatible_iff_flat_cohomology",
+   "AlgebraicGeometry.Scheme.pbcCompletedCountableAB4Star",
+   "AlgebraicGeometry.Scheme.pbcCompletedDerivedCountableProducts",
+   "AlgebraicGeometry.Scheme.pbc_integral_truncations"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCanonicalTruncations.lean",
+  "statement": "theorem pbc_integral_truncations (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) (_hTor : PbcTruncationTorCompatible T (pbcIntegralDatum l E) K.obj) (m : ℤ) : IsDerivedLimit (K := fun n ↦ ((pbcAmbientTStructure T l E).truncLE m).obj ((pbcCanonicalReductionDiagram T (pbcIntegralDatum l E) K.obj).obj (op n))) (fun n ↦ ((pbcAmbientTStructure T l E).truncLE m).map ((pbcCanonicalReductionDiagram T (pbcIntegralDatum l E) K.obj).map (homOfLE (Nat.le_succ n)).op)) (((pbcAmbientTStructure T l E).truncLE m).obj K.obj) ∧ IsDerivedLimit (K := fun n ↦ ((pbcAmbientTStructure T l E).truncGE (m + 1)).obj ((pbcCanonicalReductionDiagram T (pbcIntegralDatum l E) K.obj).obj (op n))) (fun n ↦ ((pbcAmbientTStructure T l E).truncGE (m + 1)).map ((pbcCanonicalReductionDiagram T (pbcIntegralDatum l E) K.obj).map (homOfLE (Nat.le_succ n)).op)) (((pbcAmbientTStructure T l E).truncGE (m + 1)).obj K.obj) ∧ ∀ n : ℕ, (∃ e : (pbcCompletedReduction T (pbcIntegralDatum l E) n).obj (((pbcAmbientTStructure T l E).truncLE m).obj K.obj) ≅ (DerivedCategory.TStructure.t.truncLE m).obj ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K.obj), e.hom ≫ (DerivedCategory.TStructure.t.truncLEι m).app ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K.obj) = (pbcCompletedReduction T (pbcIntegralDatum l E) n).map (((pbcAmbientTStructure T l E).truncLEι m).app K.obj)) ∧ (∃ e : (pbcCompletedReduction T (pbcIntegralDatum l E) n).obj (((pbcAmbientTStructure T l E).truncGE (m + 1)).obj K.obj) ≅ (DerivedCategory.TStructure.t.truncGE (m + 1)).obj ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K.obj), (pbcCompletedReduction T (pbcIntegralDatum l E) n).map (((pbcAmbientTStructure T l E).truncGEπ (m + 1)).app K.obj) ≫ e.hom = (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj K.obj))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "No usable recorded declaration was available. This module gives actual ambient canonical truncation restrictions, the normalized reduction diagram with its canonical transitions, the higher-Tor compatibility predicate, the conditional Roos-limit and normalized reduction formulas, cohomology and the canonical triangle. Supporting declarations are listed below. The second reading also records the source hypothesis equivalence with flat cohomology on the integral category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4473e08eb",
+  "group": "NA",
+  "result": "pass",
+  "note": "Reviewed all clauses, dependencies, sources, docstrings, universes, edge cases and verbatim signatures. All three immutable Lean modules compile cleanly through scompile.py. No outstanding delivery faults; findings recorded in review.md."
+ }
 }
