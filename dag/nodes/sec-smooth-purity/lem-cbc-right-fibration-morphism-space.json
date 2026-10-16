@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint.",
+   "place": "Opening sentence, Choose a compactification c=(j,p): the inherited coherent cone-comparison foundation; strict versus homotopy fibers of its right-fibration lift space. The current main-20261015 blueprint has no separate right-fibration statement.",
    "via": [
     "lem-cbc-enhanced-functor-cone-calculus",
     "lem-cbc-cofiltered-coherent-equivalence-diagrams",
@@ -17,10 +17,103 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Fix $x,y\\in B$ and $e'\\in E_y$. By [lem-coef-infinity-pinch-comparison], the arrow mapping space $A=U_B(x,y)$ is Kan and the right-pinch inclusion $j_B:\\operatorname{Map}_B(x,y)\\to A$ is a natural homotopy equivalence. By [lem-coef-infinity-right-fibration-fibers], $E_x$ is Kan (apply it with both right fibrations equal to $p$). Define $L$ in degree $n$ to consist of pairs $(a,h)$, where $a:\\Delta^1\\times\\Delta^n\\to B$ is an $n$-simplex of $A$ and $h:\\Delta^1\\times\\Delta^n\\to E$ satisfies $ph=a$ and $h|_{\\{1\\}\\times\\Delta^n}=e'$. Restriction defines simplicial maps $r:L\\to A$, $(a,h)\\mapsto a$, and $s:L\\to E_x$, $(a,h)\\mapsto h|_{\\{0\\}\\times\\Delta^n}$. All equalities at endpoints mean constant simplices, not merely their vertices, as in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10 and the explicit arrow-space construction; Kan fibers are the cited existing right-fibration-fibers statement."
+   }
+  },
+  {
+   "text": "The inclusion $\\{1\\}=\\Lambda_1^1\\hookrightarrow\\Delta^1$ is one of the generating right horns. Apply [lem-coef-infinity-right-fibration-exponentiation] to $p$ and this inclusion. Its trivial Kan fibration $\\rho$ pulls back along $A\\to\\operatorname{Fun}(\\Delta^1,B)\\times_B E$, $a\\mapsto(a,e')$, to exactly $r:L\\to A$. To lift a boundary against $r$, lift its $h$-coordinate against $\\rho$ with the prescribed $a$-coordinate, so $r$ is a trivial Kan fibration. By [lem-weil-pbc-trivial-kan-lifts-monomorphisms], $r$ lifts every degreewise injection. Fill a projected horn in the Kan space $A$, then lift that horn against $r$; thus $L$ is Kan and $r$ is a Kan fibration. By [lem-cbc-kan-fibration-fiber-criterion], $r$ is a weak equivalence and every fiber $r^{-1}(a)$ is contractible. For a vertex $a:x\\to y$, this fiber is precisely the whole space of lifts with target $e'$, and $s$ records their sources in $E_x$.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4 with the final-vertex horn; boundary lifting and the cited trivial-Kan criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to $\\varnothing\\hookrightarrow A$ to choose a section $\\sigma:A\\to L$ of $r$. Define $\\operatorname{Sec}(r)_n$ to be maps $u:A\\times\\Delta^n\\to L$ with $ru=\\operatorname{pr}_A$. A boundary in this section simplicial set is a partial map on $A\\times\\partial\\Delta^n$; the same lifting lemma extends it across the degreewise injection into $A\\times\\Delta^n$, including $n=0$. Hence $\\operatorname{Sec}(r)\\to\\Delta^0$ lifts all boundaries, lifts all horns by that lemma, and is contractible by [lem-cbc-kan-fibration-fiber-criterion]. Put $t_A=s\\sigma$ and $t_{e'}=t_Aj_B$. At a vertex $a$, this map sends $a$ to the source $a^*e'$ of the chosen lift. Since the choices are sections on the entire simplicial set $A$, their contractible space retains every higher compatibility, rather than selecting unrelated lifts for individual edges.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Section space of the explicit trivial Kan fibration; the parameterized extension argument is written out."
+   }
+  },
+  {
+   "text": "Write $E_{e'}^{\\mathrm{arr}}=\\operatorname{Fun}(\\Delta^1,E)\\times_{\\operatorname{ev}_1,E}\\{e'\\}$. Degree by degree there is an equality $L=E_x\\times_E E_{e'}^{\\mathrm{arr}}$: an arrow in $E$ with target constantly $e'$ and source in $E_x$ projects to exactly an element of $U_B(x,y)$. By [lem-coef-infinity-arrow-target-right-fibration], source evaluation $E_{e'}^{\\mathrm{arr}}\\to E$ is a right fibration. A lifting problem for its pullback $s:L\\to E_x$ lifts by applying that statement with the prescribed base simplex in $E_x$, so $s$ is a right fibration. Apply [lem-cbc-right-fibration-space-fiber] to $s$ with its Kan base $E_x$. Its strict fiber over $e$ is exactly $U_E(e,e')$, and its constant-path inclusion gives a natural equivalence $U_E(e,e')\\to\\operatorname{hofib}_e(s)$.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13 pulled back to the source fiber; the general space-fiber comparison is cited separately."
+   }
+  },
+  {
+   "text": "Since $r\\sigma=\\mathrm{id}_A$ and $r$ is a weak equivalence, $\\sigma:A\\to L$ is a weak equivalence. The square with top map $\\sigma$, vertical maps $t_A$ and $s$, and bottom map $\\mathrm{id}_{E_x}$ commutes strictly. Apply [lem-coef-spaces-homotopy-fiber-detection]: its forward implication gives $\\operatorname{hofib}_e(t_A)\\simeq\\operatorname{hofib}_e(s)$ for every $e\\in E_x$. Apply that statement once more to the square with top map $j_B$, vertical maps $t_{e'}=t_Aj_B$ and $t_A$, and bottom identity. The top map is a homotopy equivalence by [lem-coef-infinity-pinch-comparison], so $\\operatorname{hofib}_e(t_{e'})\\simeq\\operatorname{hofib}_e(t_A)$. Together with step 4 and the natural pinch equivalence $\\operatorname{Map}_E(e,e')\\simeq U_E(e,e')$, this is the asserted equivalence. The homotopy fibers here use paths from the image to $e$ exactly as in [def-cbc-enhanced-diagrams-cones]; no simplicial path-reversal map is asserted.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZN",
+    "place": "The cited existing homotopy-fiber-detection statement, twice with identity base; pinch comparison is Proposition 4.6.5.10."
+   }
+  },
+  {
+   "text": "For a base change $f:B'\\to B$ and vertices $x',y'$ over $x,y$, put $E'=B'\\times_BE$ and use the point of $E'_{y'}$ induced by $e'$. Set $A'=U_{B'}(x',y')$. The degreewise formulas in step 1 identify $E'_{x'}=E_x$ and $L'=A'\\times_A L$: the base arrow in $B'$ supplies the missing coordinate of a lifted arrow in $E'$. A section $\\sigma$ therefore induces $\\sigma'(a')=(a',\\sigma(fa'))$, and $s'\\sigma'=s\\sigma f$ strictly. For sections chosen independently, a boundary of comparisons is a map $A'\\times\\partial\\Delta^n\\to L'$ over $A'$. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to the inclusion $A'\\times\\partial\\Delta^n\\hookrightarrow A'\\times\\Delta^n$ to extend it; this also works after multiplying both sides by any parameter simplicial set $K$. These extensions give the higher comparisons in the section space of step 3. The pinch maps commute with $f$ by [lem-coef-infinity-pinch-comparison]. The constant-path comparison of [lem-cbc-right-fibration-space-fiber] and the homotopy-fiber maps of [lem-coef-spaces-homotopy-fiber-detection] commute with these coordinate maps. Varying $e$ uses the same homotopy-fiber families; varying $e'$ is included by pulling $\\rho$ back along $A\\times E_y\\to\\operatorname{Fun}(\\Delta^1,B)\\times_B E$, $(a,v)\\mapsto(a,v)$, to a trivial Kan fibration $r_{\\mathrm{tot}}:L_{\\mathrm{tot}}\\to A\\times E_y$. A boundary in its section space is a map $(A\\times E_y)\\times\\partial\\Delta^n\\to L_{\\mathrm{tot}}$ over $A\\times E_y$; the cited monomorphism-lifting lemma extends it to $(A\\times E_y)\\times\\Delta^n$. A section therefore gives transport on the entire family $A\\times E_y$, and its restrictions give the choices for each $e'$ with all compatibilities. These constructions prove pullback compatibility and naturality on all simplices, with the contractible choices understood as in step 3.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Explicit pullback and parameterized-section calculation, with natural pinch and fiber comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0154",
+  "place": "Explicit arrow-lift-space argument from final-vertex exponentiation; all non-elementary inputs are cited as node statements."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +163,57 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"transport.*[Mm]apping|[Mm]apping.*transport|right.fibration.*[Mm]ap|homotopy[Ff]ib\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: Grothendieck and HasFibers describe ordinary fibered categories and hom sets, not quasicategorical mapping spaces with higher homotopies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial right fibration induces a trivial Kan fibration on spaces of extensions along a right anodyne inclusion",
+   "results": "{\"t\": \"2026-10-16T17:16:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial right fibration induces a trivial Kan fibration on spaces of extensions along a right anodyne inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"36383411c52ee7d3\"}",
+   "date": "2026-10-16",
+   "verdict": "No match for the mapping-space formula; strict-Segal Kan extensions and all-horn fibration definitions are different statements."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-right-fibration-morphism-space",
+  "worker": "stage1",
+  "summary": "Second reader replaced the two proposed foundations by a direct coherent arrow-lift-space proof and one strictly smaller general right-fibration-over-a-space lemma. Existing exponentiation, Mathlib boundary-lifting, pinch, and homotopy-fiber-detection nodes supply all other inputs. The item statement is unchanged.",
+  "blueprint": "Opening sentence, Choose a compactification c=(j,p): the inherited coherent cone-comparison foundation; strict versus homotopy fibers of its right-fibration lift space. The current main-20261015 blueprint has no separate right-fibration statement. Current source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-right-fibration-exponentiation",
+    "why": "Generic extension-space theorem: supplies the coherent trivial Kan fibration of lifts; the compact-support unit contains no such simplicial theorem."
+   },
+   {
+    "node": "lem-coef-infinity-right-fibration-fibers",
+    "why": "Generic Kan-fiber theorem for right fibrations; used only for E_x, not coefficient adjunctions."
+   },
+   {
+    "node": "lem-coef-infinity-arrow-target-right-fibration",
+    "why": "Generic arrow-source projection theorem, used to identify the map s of lift spaces."
+   },
+   {
+    "node": "lem-coef-infinity-pinch-comparison",
+    "why": "Generic natural comparison of the specified pinched and arrow mapping models."
+   },
+   {
+    "node": "lem-coef-spaces-homotopy-fiber-detection",
+    "why": "Generic invariance of homotopy fibers under equivalences of spaces; the compact-support unit has no such comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-cbc-right-fibration-space-fiber and the statements of all 8 cited nodes, plus unit sk-prop-sf-cbc and the main-20261015 blueprint proof of thm-cbc-finite-level-proetale. The item's statement and stmt_deps are byte-identical to the base copy, and live still has the item unsplit. Sources checked online: Kerodon 01NV (Cor 4.4.3.8, a right fibration over a Kan base is a Kan fibration), 0154 (Prop 4.2.5.4, right fibration plus right anodyne gives a trivial Kan fibration) and 0106 (Prop 3.4.0.7, strict fiber to homotopy fiber is a weak equivalence when one leg is a Kan fibration). Step checks: (2) Lambda^1_1={1} is a right horn; pulling back rho along a->(a,e') gives exactly r, which is trivial Kan, so the lift fibers are contractible and nonempty. (3) The section space is trivial Kan over a point by lifting against A x boundary into A x simplex, using the Mathlib leaf SSet.rlp_monomorphisms. (4) L equals E_x x_E E^arr_{e'} degreewise, s is a right fibration over the Kan base E_x, and its strict fiber is U_E(e,e'). (5) Both uses of fiber detection have all spaces Kan, sigma is a weak equivalence by 2-out-of-3, and path orientation is kept throughout. (6) E'_{x'}=E_x and L'=A' x_A L, with s'sigma'=s sigma f strictly. The new node is true and correctly sourced. I tested it on empty X, a point base and a discrete base; {0}->Delta^1 shows the Kan-base hypothesis is needed. It is not a duplicate of right-fibration-fibers, right-fibration-contractible-fibers, kan-fibration-fiber-criterion or homotopy-fiber-detection, and it does not restate a clause of the item. Nothing cited depends back on the item. I accept the 5 declared tool_uses (generic simplicial results from sk-prop-sf-biduality-general). No fixes."
+ }
 }
