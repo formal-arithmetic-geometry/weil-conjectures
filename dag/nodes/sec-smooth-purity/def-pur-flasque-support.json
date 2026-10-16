@@ -3,26 +3,311 @@
  "blueprint": {
   "is": "def-pur-flasque-support",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Supported sections and flasque objects",
- "statement": "Let $s:Z\\hookrightarrow X$ be a\nclosed immersion, and\nlet $j:U\\hookrightarrow X$ be its open complement. Work with\n$\\Lambda$-module sheaves on the\nsmall pro-etale sites in the\nfinite coefficient conventions.\nFor a sheaf $M$ define its subsheaf of sections supported on $Z$ by\n\n$$\n\\mathcal G_ZM=\\ker(M\\longrightarrow j_*j^*M).\n$$\n\nRegarded as a sheaf on $Z$, it is\n$s^!M:=s^{-1}\\mathcal G_ZM$; thus $s_*s^!M=\\mathcal G_ZM$.\nHere $s^!$ is a left exact functor, distinct from the ordinary\nrestriction $s^{-1}$. A sheaf $I$ is *flasque for this pair*\nif $I\\to j_*j^*I$ is an epimorphism.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $s:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $j:U\\hookrightarrow X$ be the complementary open immersion [def-weil-open-immersion]. Fix a finite commutative ring $\\Lambda$ (in particular the finite ring $A_{E,n}$ fixed by [def-pur-conventions]). Work in the abelian categories of all sheaves of modules over the constant coefficient sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-proetale-modules], with the identified coefficient inverse images [def-weil-pbc-proetale-operations]. No constructibility condition is imposed on these sheaves. Write $j^*,s^{-1}$ for the underived module inverse images and $j_*,s_*$ for the underived direct images.\n\nLet $\\eta_{j,M}:M\\to j_*j^*M$ be the unit of $j^*\\dashv j_*$. Define the sheaf of sections supported on $Z$ by\n$$\n \\mathcal G_ZM=\\ker(\\eta_{j,M}).\n$$\nExplicitly, for an object $V\\to X$ of the site,\n$$\n (\\mathcal G_ZM)(V)=\\{m\\in M(V):m|_{V\\times_XU}=0\\}.\n$$\nIts restriction maps are those of $M$. On a morphism $f:M\\to N$, use the restriction of $f$ to these kernels; naturality of $\\eta_j$ makes this a functor. Define\n$$\n s^!M=s^{-1}\\mathcal G_ZM,\n$$\nand on morphisms use $s^{-1}(\\mathcal G_Zf)$. This is exactly the sheaf construction $s^!_0$ of [def-exc-proetale-sections-with-support]. The functors $\\mathcal G_Z$ and $s^!$ are left exact. The notation $s^!$ denotes the closed inverse image of the supported kernel; it may coincide with ordinary restriction $s^{-1}$ for particular pairs, for example $Z=X$.\n\nIf $j$ is quasi-compact [def-weil-finite-type-morphism], the canonical unit of the closed inverse-image/direct-image adjunction gives a natural isomorphism\n$$\n \\mathcal G_ZM\\xrightarrow{\\sim}s_*s^!M.\n$$\nThus in that case $\\mathcal G_ZM$ is the closed direct image of the indicated sheaf on $Z$. For an arbitrary complementary open immersion this canonical comparison need not be an isomorphism, even with a nonzero finite coefficient ring and an affine base scheme.\n\nA sheaf $I$ is called *flasque for this pair* if the unit $\\eta_{j,I}:I\\to j_*j^*I$ is an epimorphism in the abelian category of module sheaves, equivalently if its sheaf cokernel is zero. This is the pair-specific condition, with no assertion that the map on sections over every object is surjective.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
   "place": "node def-pur-flasque-support, order 1929"
  },
  "stmt_deps": [
+  "def-exc-proetale-sections-with-support",
+  "def-pc-scheme",
   "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Kernels of module-sheaf maps are computed sectionwise by [def-weil-sheaf-of-modules-category]. The actual open inverse image of [def-weil-proetale-inverse-image] is identified with restriction by the following indexing-category calculation. For an object $W\\to U$, the pair $(W\\to X,\\ W\\xrightarrow{\\sim}U\\times_XW)$ is initial in its indexing category $\\mathcal I_W$: for any $(V,\\phi:W\\to U\\times_XV)$ the unique arrow out of this pair is the projection $W\\xrightarrow{\\phi}U\\times_XV\\to V$. Uniqueness uses that an open immersion is a monomorphism, as stated in clause (4) of [lem-weil-proetale-weakly-etale-localization]. It is therefore terminal in $\\mathcal I_W^{\\mathrm{op}}$, so the displayed colimit is $M(W\\to X)$. These evaluations form a sheaf by the canonical site equivalence in clauses (1)-(3) of [lem-weil-proetale-weakly-etale-localization]. For the chosen small skeleton, choose an $X$-isomorphism $a:W\\xrightarrow{\\sim}T$ to a representative $T\\to X$. Its inverse and the map $W\\to U$ give $\\phi_T:W\\xrightarrow{\\sim}U\\times_XT$. For any index $(V,\\phi)$ the unique arrow $(T,\\phi_T)\\to(V,\\phi)$ is $\\operatorname{pr}_V\\phi a^{-1}$; the defining equality follows after composing with $a$, and uniqueness follows from the two projections of the fibre product. Thus this index is initial even on the skeleton, and the colimit is $M(T)$, identified with $M(W)$ by restriction along $a$. For $b:W^{\\prime}\\to W$, representatives $a^{\\prime}:W^{\\prime}\\xrightarrow{\\sim}T^{\\prime}$ give the arrow $a b(a^{\\prime})^{-1}:T^{\\prime}\\to T$; functoriality of $M$ makes this identification commute with restriction along $b$. Consequently the evaluated presheaf is the restriction sheaf already identified above, so sheafification changes nothing. Its coefficient identification is clause (2). The direct-image formula of [def-weil-proetale-inverse-image] now gives $(j_*j^*M)(V)=M(V\\times_XU)$. The unit sends a section to the colimit generator indexed by $(V,\\mathrm{id}_{U\\times_XV})$; its identification with the terminal-index value is precisely restriction $M(V)\\to M(V\\times_XU)$. The identified-coefficient module adjunction in [def-weil-pbc-proetale-operations] has this underlying unit. Hence its kernel is the displayed subsheaf. Naturality $\\eta_{j,N}f=(j_*j^*f)\\eta_{j,M}$ makes $f$ carry each kernel into the next. Restriction preserves identity maps and composition, and applying $s^{-1}$ gives the functor on $Z$, with exactly the object and morphism formulas of [def-exc-proetale-sections-with-support].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image",
+    "def-exc-proetale-sections-with-support",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; proetale.tex Tag 09BN, lemma-open-immersion; explicit kernel and naturality calculation"
+   }
+  },
+  {
+   "text": "On an object $W\\to U$, the map $W\\times_XU\\to W$ is an isomorphism. The section formula in step 1 gives $(\\mathcal G_ZM)(W)=\\ker(\\mathrm{id}_{M(W)})=0$. By the restriction identification in [lem-weil-proetale-weakly-etale-localization] this says $j^*\\mathcal G_ZM=0$. Assume now that the complementary open immersion $j$ is quasi-compact. The canonical-unit clause of [lem-exc-proetale-closed-essential-image] applies to this module sheaf, without a constructibility hypothesis, and gives $\\mathcal G_ZM\\xrightarrow{\\sim}s_*s^{-1}\\mathcal G_ZM=s_*s^!M$. This is the inverse of the identification written as $s_*s^!M=\\mathcal G_ZM$ in the blueprint; equality is understood up to this specified natural isomorphism. This proves the positive comparison under the stated hypothesis. Steps 5–7 give an explicit counterexample to removing that hypothesis for all pairs; the correction is not inferred merely from the hypothesis of the cited theorem.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-exc-proetale-closed-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; applying the existing canonical-unit theorem to the kernel"
+   }
+  },
+  {
+   "text": "For a left exact sequence $0\\to M'\\xrightarrow{a}M\\xrightarrow{b}M''$, the sectionwise kernel description of [def-weil-sheaf-of-modules-category] identifies $M'(V)$ with $\\ker b_V$ for every object $V$. The restriction of $a_V$ to supported sections is injective. If $m\\in(\\mathcal G_ZM)(V)$ has $b_V(m)=0$, write $m=a_V(m')$ uniquely. Restricting to $V_U=V\\times_XU$ gives $a_{V_U}(m'|_{V_U})=m|_{V_U}=0$; since $a_{V_U}$ is injective, $m'|_{V_U}=0$. Thus $m'$ is supported, proving $0\\to\\mathcal G_ZM'\\to\\mathcal G_ZM\\to\\mathcal G_ZM''$ left exact. The zero sheaf maps to zero by the same formula, and restriction of morphisms to the kernels gives $\\mathcal G_Z(f+g)=\\mathcal G_Zf+\\mathcal G_Zg$, so this functor is additive. Apply the exact constant-coefficient inverse image $s^{-1}$ of [prop-weil-pbc-proetale-constant-exact] to obtain left exactness of $s^!$. This argument does not require $j$ quasi-compact or surjectivity of any section map.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (sectionwise kernels); Tag 04JC, lemma-flat-pullback-exact (inverse image); elementary kernel calculation"
+   }
+  },
+  {
+   "text": "The condition on $I$ is the stated definition: the cokernel of its open unit is zero in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. A sheaf cokernel is sheafified, so this condition does not identify epimorphy with surjectivity on every object. As edge checks, if $Z=\\varnothing$ then $j=\\mathrm{id}$ and $\\mathcal G_Z=0$, while pair-flasqueness is automatic; if $Z=X$ then $U=\\varnothing$, $\\mathcal G_Z=\\mathrm{id}$ and $s^!=s^{-1}=\\mathrm{id}$, and pair-flasqueness is again automatic.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; epimorphism criterion and the two identity/empty-complement calculations"
+   }
+  },
+  {
+   "text": "To test the unrestricted comparison, choose any field $k$ of characteristic $p$ and any nonzero finite commutative coefficient ring $\\Lambda$ (one may take $k=\\overline{\\mathbf F}_p$ and the allowed ring $A_{E,1}$ with $\\ell\\ne p$). Put $R=\\prod_{n\\ge1}k$, let $e_n$ be its coordinate idempotents, let $J=\\bigoplus_{n\\ge1}k$ be the ideal of finite-support sequences, and set $X=\\operatorname{Spec}R$, $Z=\\operatorname{Spec}(R/J)$ and $X_n=D(e_n)$. The ring $e_nR$ is $k$, so $X_n\\cong\\operatorname{Spec}k$ is clopen. The $X_n$ are pairwise disjoint, and $U=X\\setminus Z=\\bigcup_nX_n$: a prime not containing $J$ omits some $e_n$ and then contains $1-e_n$, hence is the coordinate prime for $n$. No finite subfamily covers $U$, so the complementary $j:U\\to X$ is not quasi-compact, since $X$ is affine. All these are allowed schemes and finite coefficients; the definition imposes no finite-type or constructibility hypothesis. For a pro-etale object $V\\to X$ put $V_n=V\\times_XX_n$ and define the module sheaf $H_n$ by $H_n(V)=\\Lambda_{X_n}(V_n)$, with restriction and scalar action from $\\Lambda_{X_n}$; this is the underived direct image along $X_n\\hookrightarrow X$ of [def-weil-proetale-inverse-image], with its module action. Let $P=\\prod_nH_n$, computed sectionwise by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Define a submodule sheaf $S\\subset P$ by declaring that a tuple is in $S(V)$ if some covering of $V$ makes all but finitely many of its coordinates zero on each member (the finite set may depend on that member). This condition is preserved under restriction. The zero tuple satisfies it. For addition take the fibre-product common refinement of two witnessing covers; the union of the two finite supports bounds the sum on each member, and scalar multiplication cannot enlarge a support. A matching family glues in $P$ and satisfies the condition on the composite of the original cover and its witnessing covers, so $S$ is a sheaf. Each finite sum of the $H_n$ embeds in $S$. A family of module maps $H_n\\to T$ extends uniquely to $S\\to T$ by taking the finite sum on each witnessing cover and gluing; on an overlap take the union of the two finite index sets; insert zero coordinates to express both tuples over this union. Their coordinates agree in $P$, so applying the given maps and adding gives equal sections of $T$. This also proves independence of the witnessing cover after common refinement. Thus $S$ is the coproduct $\\bigoplus_nH_n$. Finally set $F=\\operatorname{coker}(S\\hookrightarrow P)$ in the abelian module-sheaf category [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits) and 03CO (lemma-limits-colimits-abelian-sheaves); agent counterexample to the unrestricted blueprint comparison: explicit affine pair and product/coproduct construction"
+   }
+  },
+  {
+   "text": "For this pair $s^{-1}H_n=0$. Indeed, in the inverse-image indexing formula of [def-weil-proetale-inverse-image], replace any index $(V,\\phi:W\\to Z\\times_XV)$ by $V'=V\\times_X(X\\setminus X_n)$. Since $Z$ is disjoint from $X_n$, $Z\\times_XV'=Z\\times_XV$, so $\\phi$ factors through the new index. The arrow $V'\\to V$ gives the restriction $H_n(V)\\to H_n(V')=0$ in the opposite-index colimit. Every colimit generator therefore becomes zero, and its sheafification is zero. The identified-coefficient module inverse image has this same underlying abelian inverse image. The closed-immersion instance of [lem-weil-pbc-proetale-immersion-limit-preservation] applies without a quasi-compact-complement hypothesis and gives $s^{-1}P=\\prod_ns^{-1}H_n=0$; its coefficient-ring-isomorphism requirement is precisely the finite constant coefficient identification already in [prop-weil-pbc-proetale-constant-exact]. Also $s^{-1}S=0$: by the adjunction of [def-weil-pbc-proetale-operations], maps from $s^{-1}S$ to a sheaf $N$ are maps $S\\to s_*N$, hence families of maps $H_n\\to s_*N$, hence families of maps $s^{-1}H_n\\to N$; this is a singleton for every $N$, so $s^{-1}S$ is the zero object. Exactness of [prop-weil-pbc-proetale-constant-exact], applied to $S\\to P\\to F\\to0$, yields $s^{-1}F=0$. On the localized site over $X_n$, every $H_m$ with $m\\ne n$ is zero and $H_n$ is the constant rank-one module sheaf. For an object over $X_n$, every tuple in $P$ has at most the $n$th coordinate, so it already belongs to $S$; hence $S\\to P$ restricts to the identity there. Exactness of the open inverse image, another instance of [prop-weil-pbc-proetale-constant-exact], now gives $F|_{X_n}=0$. By [lem-weil-proetale-weakly-etale-localization] open inverse image is this restriction. The opens $X_n$ cover $U$ in the pro-etale topology of [def-weil-pbc-proetale-site]: every affine open in the disjoint union $U$ meets only finitely many of them. The sheaf condition therefore gives $j^*F=0$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), clause (1), and Tag 09BN (lemma-open-immersion); agent counterexample, computation of the two inverse images; exact finite constant inverse image via sites-modules.tex Tag 04JC"
+   }
+  },
+  {
+   "text": "For any affine object $V\\to X$, a tuple in $S(V)$ has only finitely many nonzero coordinates globally. In fact its witnessing pro-etale covering has, by the covering definition in [def-weil-pbc-proetale-site], finitely many affine opens in its members whose images cover $V$. Restrict to these affine opens. Each tuple has finite coordinate support there; the union $B$ of these finitely many finite supports is finite. For $n\\notin B$ its $H_n$-coordinate restricts to zero on this finite covering of $V$, hence is zero by the sheaf condition. Apply this to the affine object $X$. The section $t=(1,1,\\ldots)\\in P(X)$, whose $n$th coordinate is the constant section $1$ on $X_n$, does not belong to $S(X)$: every $X_n$ is nonempty and $1\\ne0$ in $\\Lambda$. Let $q:P\\to F$ be the cokernel. Since $S\\hookrightarrow P$ is monic in the abelian category and kernels are sectionwise [def-weil-sheaf-of-modules-category], $\\ker q_X=S(X)$, so $q_X(t)\\ne0$. In particular $F\\ne0$. Step 6 gives $j^*F=s^{-1}F=0$, and the direct image of a zero sheaf is zero by the formula of [def-weil-proetale-inverse-image]. Thus the definitions in step 1 give $\\mathcal G_ZF=F$ and $s^!F=s^{-1}F=0$. The canonical comparison is $F\\to s_*0=0$, which is not an isomorphism. This disproves exactly the unrestricted support identification in the imported source and justifies the corrected quasi-compact-complement scope in step 2. It makes no claim that every non-quasi-compact pair fails.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
+    "place": "Sentence “thus s_*s^!M=G_ZM”: explicit agent counterexample to its unrestricted scope; finite affine refinement from proetale.tex definition-proetale-covering and sectionwise kernels from sites-modules.tex Tag 03DA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-proetale-inverse-image",
+  "def-exc-proetale-sections-with-support",
+  "def-weil-pbc-proetale-operations",
+  "lem-exc-proetale-closed-essential-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/def-pur-flasque-support.md",
+  "place": "Definition paragraphs, explicit verification of the two asserted properties, and an agent counterexample to the unrestricted comparison; Stacks Tags 03DA, 03DB, 03CO, 04JC, 09AA, 09AH and 09BN through existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes define sections supported on the closed subscheme as the kernel of restriction to the open complement, and the underived exceptional inverse image of module sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp",
+   "date": "2026-10-15",
+   "verdict": "no match: general kernels, ideal sheaves or presentations do not define this pro-etale supported-section functor and pair-flasqueness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.kernel, CategoryTheory.Sheaf",
+   "results": "loogle: unknown identifier 'CategoryTheory.kernel'; 0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "invalid pattern: unknown identifier; retried using CategoryTheory.Limits.kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedSections|extraordinary|flasque",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: general kernels, ideal sheaves or presentations do not define this pro-etale supported-section functor and pair-flasqueness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the adjunction unit from a sheaf to the pushforward of its restriction to an open subscheme defines sections supported on the closed complement",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.kerAdjunction_unit_app",
+   "date": "2026-10-15",
+   "verdict": "no match: general kernels, ideal sheaves or presentations do not define this pro-etale supported-section functor and pair-flasqueness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, CategoryTheory.Sheaf",
+   "results": "12 hits: SheafOfModules.Presentation.ofIsIso_relations, SheafOfModules.Presentation.mk, SheafOfModules.Presentation.relations, SheafOfModules.Presentation.IsFinite.isFiniteType_relations, SheafOfModules.Presentation.IsFinite.finite_relations, SheafOfModules.Presentation.IsFinite.mk, SheafOfModules.Presentation.mapRelations, SheafOfModules.relationsOfIsCokernelFree",
+   "date": "2026-10-15",
+   "verdict": "no match: general kernels, ideal sheaves or presentations do not define this pro-etale supported-section functor and pair-flasqueness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections with closed support and the exceptional inverse image of sheaves for a closed immersion",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "support|flasque",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match: general kernels, ideal sheaves or presentations do not define this pro-etale supported-section functor and pair-flasqueness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of the natural transformation from the identity functor to a sheaf restriction followed by direct image along an open immersion; sections supported away from the open subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Hom.ker",
+   "date": "2026-10-15",
+   "verdict": "no match: scheme ideal-sheaf kernels and Zariski restriction do not state this pro-etale construction or the pair-specific epimorphism condition"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedAway|closedUpperShriek|IsFlasque",
+   "results": "0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "no match for the supported-section/closed-inverse-image names or IsFlasque in Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedAway|closedUpperShriek|IsPairFlasque|isFlasque",
+   "results": "5 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: the hits define topological flasqueness using all open restrictions, not epimorphy of the pro-etale open-unit for one pair"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf kernel of the restriction map to an open complement and the closed exceptional inverse image",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves on a scheme pro-etale site, sections supported on a closed subscheme are the kernel of the open restriction adjunction unit; pair flasque means that unit is epi",
+   "results": "8 hits: AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.kerAdjunction_unit_app, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.kerAdjunction_counit_app, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.kerFunctor_map",
+   "date": "2026-10-15",
+   "verdict": "no match: ideal sheaves of schemes, generic image epimorphisms, and local injectivity do not state the complete supported-section construction and pair-specific condition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel, CategoryTheory.Sheaf",
+   "results": "12 hits: SheafOfModules.Presentation.ofIsIso_relations, SheafOfModules.Presentation.mk, SheafOfModules.Presentation.relations, SheafOfModules.Presentation.IsFinite.isFiniteType_relations, SheafOfModules.Presentation.IsFinite.finite_relations, SheafOfModules.Presentation.IsFinite.mk, SheafOfModules.Presentation.mapRelations, SheafOfModules.relationsOfIsCokernelFree",
+   "date": "2026-10-15",
+   "verdict": "no match: module-sheaf presentations and relations do not construct this supported-section functor or define pair-flasqueness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf is flasque relative to an open closed pair when the unit to the direct image of its restriction to the open part is an epimorphism",
+   "results": "8 hits: CategoryTheory.instEpiSheafTypeToImage, CategoryTheory.Sheaf.IsLocallyInjective, CategoryTheory.Sheaf.instEpiAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.locallyInjective, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, TopCat.Presheaf.isLocallySurjective_iff, TopCat.subpresheafToTypes.isSheaf",
+   "date": "2026-10-15",
+   "verdict": "no match: ideal sheaves of schemes, generic image epimorphisms, and local injectivity do not state the complete supported-section construction and pair-specific condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an adjunction on categories of module sheaves, define the supported subfunctor as the kernel of the unit of restriction to an open subscheme; relative flasqueness is epimorphy of that unit",
+   "results": "8 hits: PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, PresheafOfModules.sheafificationAdjunction, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, PresheafOfModules.Sheafify.instNonemptySMulCandidate, PresheafOfModules.sheafification",
+   "date": "2026-10-15",
+   "verdict": "no match: adjunctions for sheafification or Zariski structure-sheaf modules do not define the supported-section functor and pair-flasque predicate on the small pro-etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|supported.*[Ss]ection|[Pp]air.*[Ff]lasque|[Ff]lasque",
+   "results": "5 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: TopCat.Presheaf.IsFlasque requires epimorphy of every open restriction, not the single pro-etale open-unit of this pair"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the inverse image on pro-etale sheaves of modules over a constant ring preserves all small limits, in particular arbitrary products",
+   "results": "{\"t\": \"2026-10-15T23:16:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion of schemes the inverse image on pro-etale sheaves of modules over a constant ring preserves all small limits, in particular arbitrary products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeLocallyRingedSpaceWalkingCospanCospanForgetToLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeTopCatWalkingCospanCospanForgetToTop\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeLocallyRingedSpaceWalkingCospanCospanForgetToLocallyRingedSpace_1\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget_1\", \"AlgebraicGeometry.IsOpenImmersion.instPreservesLimitSchemeWalkingCospanCospanForget\"], \"digest\": \"6dcd3432e8ee78fe\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned scheme ideal kernels, ordinary scheme/module limits, or no pro-etale support names; the generic closed-inverse-image fact is supplied by an existing DAG node, not a new Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreservesLimits, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-15T23:16:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.PreservesLimits, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.PreservesLimits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern as returned; retried with CategoryTheory.Limits.PreservesLimits"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimits.*upperStar|preservesLimits.*upperStar|closed.*[Ii]mmersion.*[Ll]imit",
+   "results": "{\"t\": \"2026-10-15T23:16:27Z\", \"tool\": \"grep\", \"query\": \"PreservesLimits.*upperStar|preservesLimits.*upperStar|closed.*[Ii]mmersion.*[Ll]imit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"f4e24eb1fe0b0f76\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned scheme ideal kernels, ordinary scheme/module limits, or no pro-etale support names; the generic closed-inverse-image fact is supplied by an existing DAG node, not a new Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of pro-etale sheaves along a closed immersion commutes with arbitrary products",
+   "results": "{\"t\": \"2026-10-15T23:16:28Z\", \"tool\": \"leansearch\", \"query\": \"The inverse image of pro-etale sheaves along a closed immersion commutes with arbitrary products\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For pro-etale module sheaves the kernel of restriction to a non-quasi-compact open complement need not be the direct image of its closed inverse image: a quotient of a product by a direct sum of clopen supported sheaves",
+   "results": "{\"t\": \"2026-10-15T23:17:12Z\", \"tool\": \"leanfinder\", \"query\": \"For pro-etale module sheaves the kernel of restriction to a non-quasi-compact open complement need not be the direct image of its closed inverse image: a quotient of a product by a direct sum of clopen supported sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply\", \"AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"6974be81443a2509\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned scheme ideal kernels, ordinary scheme/module limits, or no pro-etale support names; the generic closed-inverse-image fact is supplied by an existing DAG node, not a new Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimits, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-15T23:17:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.PreservesLimits, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"CategoryTheory.preservesLimitsOfShape_presheafToSheaf\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_affineEtaleTopology\", \"AlgebraicGeometry.Scheme.isGrothendieckAbelian_sheaf_smallEtaleTopology\"], \"digest\": \"a1f556f81e1a3199\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned generic sheafification/etale category results; the returned sheafification limit theorem assumes a finite indexing category (LeftExact.lean:255), not the needed arbitrary pro-etale closed inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|supportedAway|closedUpperShriek|[Pp]ro[Ee]tale",
+   "results": "{\"t\": \"2026-10-15T23:17:13Z\", \"tool\": \"grep\", \"query\": \"sectionsWithSupport|supportedAway|closedUpperShriek|[Pp]ro[Ee]tale\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned scheme ideal kernels, ordinary scheme/module limits, or no pro-etale support names; the generic closed-inverse-image fact is supplied by an existing DAG node, not a new Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitsOfShape_presheafToSheaf|preservesFiniteLimits_presheafToSheaf",
+   "results": "{\"t\": \"2026-10-15T23:20:38Z\", \"tool\": \"grep\", \"query\": \"preservesLimitsOfShape_presheafToSheaf|preservesFiniteLimits_presheafToSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\"], \"digest\": \"68b4994e4357d0a3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: returned generic sheafification/etale category results; the returned sheafification limit theorem assumes a finite indexing category (LeftExact.lean:255), not the needed arbitrary pro-etale closed inverse image"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +335,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-pur-flasque-support",
+  "worker": "stage1",
+  "summary": "Repaired E7/E1 with an explicit non-quasi-compact affine counterexample, rather than inferring falsehood from the scope of 09AH: on Spec(product k), the quotient of the product of clopen singleton sheaves by their sheaf coproduct is nonzero but both open and closed inverse images vanish. The arbitrary-pair comparison is therefore false. Added complete counterexample steps using the existing immersion-limit-preservation and module-limits/colimits nodes; no new node or Mathlib leaf. Retained arbitrary kernel, left exactness and pair-flasqueness, and the proven quasi-compact comparison. Report specifies the scope correction for each downstream user and the ambient-support formulations valid for arbitrary pairs.",
+  "blueprint": "Steps 1–4 realize the construction, left exactness and flasque condition in the definition. Steps 5–7 disprove the unrestricted “thus s_*s^!M=G_ZM” sentence on an explicit allowed affine pair and justify the stated correction; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of open pro-etale restriction with localized-site evaluation; needed to evaluate the kernel, with no replacement of the unit computation."
+   },
+   {
+    "node": "lem-exc-proetale-closed-essential-image",
+    "why": "Generic closed-support canonical unit theorem, applied only with its quasi-compact-complement hypothesis; the item defines the kernel and does not reprove this tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exact constant-coefficient inverse image, applied after an explicit elementary left-exactness calculation for the kernel."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "The counterexample needs countable-product preservation of closed inverse image without quasi-compactness; this generic immersion theorem is not supplied by the Kummer unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "The counterexample uses sectionwise products in arbitrary module-sheaf categories and existence of coproducts; this generic tool is not a step of the Kummer calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-exc-proetale-closed-essential-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-c1f1d907e",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-c1f1d907e (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All seven steps check out; the affine product/coproduct counterexample establishes the reported E7/E1 source correction. No target is weakened. Accepted five generic tool uses; no new nodes or fixes. Concrete checks and inherited snapshot limitations are recorded in review.md."
+ }
 }
