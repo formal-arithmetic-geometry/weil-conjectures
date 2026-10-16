@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-module-lower-star-comp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Composition isomorphism of pushforwards of module objects",
@@ -13,34 +13,146 @@
   "place": "node def-sfb-module-lower-star-comp, order 1690"
  },
  "stmt_deps": [
-  "def-sfb-module-lower-star"
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-pushforward-comp-monoidal"
  ],
  "proof": [
   {
-   "text": "Let $c\\colon g^{\\Ab}_*f^{\\Ab}_*\\Lambda_X\\xrightarrow{\\sim}(g\\circ f)^{\\Ab}_*\\Lambda_X$\nbe the composition isomorphism at $\\Lambda_X$. Transport commutes with restriction of\nscalars, so\n\n$$\ng_*\\circ f_*\n=\\operatorname{Res}_{\\eta_g}\\circ\\operatorname{mapMod}(g^{\\Ab}_*)\\circ\n\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\n\\cong\\operatorname{Res}_{\\eta_g}\\circ\\operatorname{Res}_{g^{\\Ab}_*\\eta_f}\\circ\n\\operatorname{mapMod}(g^{\\Ab}_*)\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\n$$\n\n([sk-def-sfb-transport]). The composition isomorphism of pushforwards of abelian\nsheaves is monoidal ([lem-sfb-pushforward-comp-monoidal]), so it lifts to an\nisomorphism\n$\\operatorname{mapMod}(g^{\\Ab}_*)\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\cong\n\\operatorname{Res}_c\\circ\\operatorname{mapMod}((g\\circ f)^{\\Ab}_*)$. Restrictions of\nscalars compose ([sk-def-sfb-change-of-scalars]), and the composite ring morphism is\n$c\\circ g^{\\Ab}_*\\eta_f\\circ\\eta_g=\\eta_{g\\circ f}$ by the compatibility of $\\eta$\nwith composition ([sk-prop-sfb-cartesian-coefficients]). Hence\n$g_*\\circ f_*\\cong\\operatorname{Res}_{\\eta_{g\\circ f}}\\circ\n\\operatorname{mapMod}((g\\circ f)^{\\Ab}_*)=(g\\circ f)_*$, and on underlying sheaves\nthis isomorphism is the composition isomorphism.",
+   "text": "Write $P=f_*^{\\Ab}$, $Q=g_*^{\\Ab}$, $H=(g\\circ f)_*^{\\Ab}$ and $R_T=\\Lambda_T$ for $T=X,Y,Z$. For a module $M$ write $\\gamma_M:R_X\\otimes M\\to M$ for its action. The underlying sheaves of $g_*f_*M$ and $(g\\circ f)_*M$ are $QPM$ and $HM$ by [def-sfb-module-lower-star]. Let $c:QP\\xrightarrow{\\sim}H$ be the monoidal natural isomorphism of [lem-sfb-pushforward-comp-monoidal], applied with $\\mathcal A=\\Ab$ (explicitly included among its instances). Denote the lax monoidal tensor maps by $m^P,m^Q,m^H$ and put $m^{QP}_{A,B}=Q(m^P_{A,B})\\circ m^Q_{PA,PB}$. We construct the required component using the sheaf map $c_M$.",
    "uses": [
-    "sk-def-sfb-transport",
+    "def-sfb-module-lower-star",
     "lem-sfb-pushforward-comp-monoidal",
-    "sk-def-sfb-change-of-scalars",
-    "sk-prop-sfb-cartesian-coefficients"
+    "sk-def-sfb-module-objects"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+    "place": "Composition-isomorphisms bullet; underlying functor in the pushforward bullet"
+   }
+  },
+  {
+   "text": "Expand the action on $g_*f_*M$ using the action formula of [def-sfb-module-lower-star]. Set $\\delta=Q(\\eta_f)\\circ\\eta_g:R_Z\\to QPR_X$. Its action $a_M:R_Z\\otimes QPM\\to QPM$ is\n$$a_M=Q\\bigl(P(\\gamma_M)\\circ m^P_{R_X,M}\\circ(\\eta_f\\otimes1_{PM})\\bigr)\\circ m^Q_{R_Y,PM}\\circ(\\eta_g\\otimes1_{QPM})\n=QP(\\gamma_M)\\circ m^{QP}_{R_X,M}\\circ(\\delta\\otimes1_{QPM}).$$\nThe equality is functoriality of $Q$ and the naturality identity\n$$Q(\\eta_f\\otimes1_{PM})\\circ m^Q_{R_Y,PM}=m^Q_{PR_X,PM}\\circ(Q(\\eta_f)\\otimes1_{QPM}).$$\nThis also explains directly, on actions, the transport/restriction interchange implicit in the imported proof; no separate interchange theorem is assumed. The transport action is exactly that of [sk-def-sfb-transport], clause 1.",
+   "uses": [
+    "def-sfb-module-lower-star",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star.md",
+    "place": "Displayed action formula, expanded twice"
+   }
+  },
+  {
+   "text": "Let $b_M=H(\\gamma_M)\\circ m^H_{R_X,M}\\circ(\\eta_{g\\circ f}\\otimes1_{HM})$ be the action on $(g\\circ f)_*M$ from [def-sfb-module-lower-star]. Naturality of $c$ at $\\gamma_M$ and its monoidality ([lem-sfb-pushforward-comp-monoidal]) give\n$$\\begin{aligned}\nc_M\\circ a_M\n&=H(\\gamma_M)\\circ c_{R_X\\otimes M}\\circ m^{QP}_{R_X,M}\\circ(\\delta\\otimes1)\\\\\n&=H(\\gamma_M)\\circ m^H_{R_X,M}\\circ(c_{R_X}\\otimes c_M)\\circ(\\delta\\otimes1)\\\\\n&=H(\\gamma_M)\\circ m^H_{R_X,M}\\circ((c_{R_X}\\circ\\delta)\\otimes c_M)\\\\\n&=b_M\\circ(1_{R_Z}\\otimes c_M).\n\\end{aligned}$$\nThe last equality uses precisely $c_{R_X}\\circ\\delta=\\eta_{g\\circ f}$ from [lem-sfb-eta-comp], with its pushforwards interpreted as abelian-sheaf pushforwards. Thus $c_M$ is an $R_Z$-module morphism by the definition in [sk-def-sfb-module-objects], clause 2.",
+   "uses": [
+    "def-sfb-module-lower-star",
+    "lem-sfb-pushforward-comp-monoidal",
+    "lem-sfb-eta-comp",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp.md",
+    "place": "Displayed composition identity, combined with the tensor compatibility in lem-sfb-pushforward-comp-monoidal"
+   }
+  },
+  {
+   "text": "The inverse sheaf map is linear as well: the equality in step 3, precomposed with $1_{R_Z}\\otimes c_M^{-1}$ and postcomposed with $c_M^{-1}$, gives\n$$c_M^{-1}\\circ b_M=a_M\\circ(1_{R_Z}\\otimes c_M^{-1}).$$\nThe two composites are identities because their underlying sheaf maps are identities; module morphisms consist of their underlying maps with a linearity condition ([sk-def-sfb-module-objects], clause 2). For a module morphism $u:M\\to N$, both pushforwards act on its underlying map by $QP(u)$ and $H(u)$, since transport commutes with forgetful functors ([sk-def-sfb-transport], clause 1), and restriction of scalars is the identity on underlying objects and morphisms ([sk-def-sfb-change-of-scalars], clause 1), as used in [def-sfb-module-lower-star]. Naturality of the sheaf isomorphism $c$ says $H(u)\\circ c_M=c_N\\circ QP(u)$; this is the required naturality in the module category. The linear maps $c_M$ and $c_M^{-1}$ therefore define the natural isomorphism, with exactly the required underlying sheaf isomorphism.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-transport",
+    "def-sfb-module-lower-star",
+    "lem-sfb-pushforward-comp-monoidal",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+    "place": "Composition-isomorphisms bullet: the first lifts the composition isomorphism of pushforwards of abelian sheaves"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-transport",
+  "def-sfb-module-lower-star",
   "lem-sfb-pushforward-comp-monoidal",
-  "sk-def-sfb-change-of-scalars",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-transport",
+  "lem-sfb-eta-comp",
+  "sk-def-sfb-change-of-scalars"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-lower-star-comp.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+  "place": "Explicit action calculation elaborating the pushforward and composition-isomorphisms bullets; the item source states the construction without a proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapModCompIso|mapModComapIso|pushforwardComp|pushforward.*[Cc]omp|comapComp",
+   "results": "25 hits; Pi.comapComp, Over sheaf pushforward comparisons and LocallyCartesianClosed.ExponentiableMorphism.pushforwardComp. Read the latter at ExponentiableMorphism.lean:194-199: right adjoints between slice categories. No mapMod comparison declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match: slice-category pushforwards and Pi reindexing are different constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMod, CategoryTheory.Mod.comap",
+   "results": "Loogle returned zero hits and unknown identifier CategoryTheory.Functor.mapMod.",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid expected name; retried with SheafOfModules.pushforwardComp"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of pushforward functors for sheaves of modules on ringed sites",
+   "results": "SheafOfModules.pushforwardComp, pushforward_assoc, pushforwardNatTrans_comp, pushforward and underlying-map lemma, plus AlgebraicGeometry.Scheme.Modules.pushforwardComp and TopCat.Sheaf.pushforward. Read SheafOfModules.pushforwardComp at Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139-151.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: SheafOfModules requires comparison with internal module objects; Scheme.Modules uses the structural sheaf and Zariski site, not arbitrary condensed coefficients on the pro-etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism of pushforwards of modules over a sheaf of commutative rings on a ringed site, with underlying sheaf the composition isomorphism of direct images",
+   "results": "SheafOfModules.pushforwardComp and pushforwardNatIso, plus component, identity and associativity lemmas in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Read pushforwardComp at lines 139-151.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: the realization of module sheaves and the specified functors must be compared; this is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModCompIso|mapModComapIso|pushforwardComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139 pushforwardComp; :146-151 underlying-component lemmas. Other hits are presheaf analogues; no mapModCompIso or mapModComapIso. Read lines 32-50 and 132-151.",
+   "date": "2026-10-16",
+   "verdict": "candidate only: SheafOfModules construction requires comparison with the internal module-object construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp and its identity/associativity and underlying-component lemmas, Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous. Read lines 139-151.",
+   "date": "2026-10-16",
+   "verdict": "candidate, not a one-line match: uses SheafOfModules over a RingCat-valued sheaf and continuous site functors; the item uses internal module objects in abelian sheaves with the specified lax monoidal transport and coefficient maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between composite lax monoidal functors and another functor induces an isomorphism on module objects after restriction of scalars",
+   "results": "CategoryTheory.Mod_.scalarRestriction_hom, comap_obj_mod, scalarRestriction, comap; ModuleCat.restrictScalarsId and restrictScalarsComp variants. Read Mod_.lean, which is a deprecated import of Monoidal/Mod.lean, and the latter module action definitions.",
+   "date": "2026-10-16",
+   "verdict": "no match: restriction of scalars is present, but the hits do not construct the required lift of the specified pro-etale composition isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of lax monoidal functors induces a natural isomorphism between functors on internal modules compatible with a fixed coefficient ring map",
+   "results": "Independent second-reader search: 8 hits, including CategoryTheory.LaxMonoidalFunctor.isoMk and isoMk_hom, Mod_.scalarRestriction_hom and scalarRestriction, internal-algebra equivalence and representation linearization lemmas. Read NaturalTransformation.lean and Monoidal/Mod.lean; none constructs the coefficient-compatible comparison on internal module objects.",
+   "date": "2026-10-16",
+   "verdict": "no exact match: isoMk constructs an isomorphism of lax monoidal functors; scalarRestriction constructs the restricted module, not the required natural isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|mapModule|[Mm]odule.*[Nn]atIso|[Nn]atIso.*[Mm]odule",
+   "results": "Independent second-reader source search in Mathlib/CategoryTheory/Monoidal: exactly one hit, Mon.lean:856, a TODO comment for mapMod F A. No declaration found by this search.",
+   "date": "2026-10-16",
+   "verdict": "no match: only a TODO comment; the existing SheafOfModules.pushforwardComp candidate still requires a comparison of constructions"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -59,5 +171,26 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-lower-star-comp",
+  "worker": "stage1",
+  "summary": "Checked the current main-20261015 statement and unit; no matching finished slopmaster2 declaration. Replaced the imported functor-transport shorthand by the explicit module-action calculation, linear inverse and naturality. Replaced the incorrect citation of sk-prop-sfb-cartesian-coefficients for the eta composition law by the existing lem-sfb-eta-comp. No new nodes; no hypotheses or conclusions changed. Mathlib SheafOfModules.pushforwardComp concerns another realization of module sheaves and is a candidate rather than a one-line match for the specified module-object functors.",
+  "blueprint": "Realizes the entire item statement, especially the prescribed underlying composition isomorphism, and the first composition-isomorphisms clause of sk-def-sfb-module-pushforward-pullback. Step 2 expands the imported transport/restriction interchange; step 3 expands monoidality and eta composition; step 4 supplies the inverse and naturality."
+ },
+ "mathlib_candidate": {
+  "declaration": "SheafOfModules.pushforwardComp",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+  "line": 139,
+  "reason": "Its objects are SheafOfModules over a RingCat-valued sheaf and its pushforwards use continuous site functors. A comparison with internal modules in abelian sheaves and the specified mapMod/eta pushforwards is required before it applies to the item."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-ccf8cce33",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-ccf8cce33 (reviewer sub-agent of L); spot-checked: Read the item, all six cited statements, current blueprint sources, unit/chapter route, and full report. Verified all four action, linearity, inverse, and naturality steps; checked edge cases, reuse candidates, and dependency acyclicity. No repairs needed. review.md records source locations and the inherited missing unit/chapter metadata."
+ }
 }
