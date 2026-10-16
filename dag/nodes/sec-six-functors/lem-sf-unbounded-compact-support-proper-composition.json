@@ -24,9 +24,107 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-kinjective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Check the geometric and coefficient hypotheses first. A field is Noetherian since its only ideals are zero and the unit ideal. By [lem-weil-pbc-finite-type-over-noetherian], $X,Y,S$ are Noetherian, and so is every ambient compactification scheme: its proper structural map is of finite type over its Noetherian target. Properness includes separatedness and finite type [def-weil-proper-morphism]. The separatedness and local finite type of $gf$ follow from [lem-weil-pbc-proper-fp-permanence](e); quasi-compactness follows by taking a finite affine cover of $g^{-1}(W)$ for an affine $W\\subset S$ and then finite affine covers of its inverse images under $f$ [def-weil-finite-type-morphism]. The compactifications in the statement therefore have exactly the type required by [def-amb-etale-compact-support]. A finite ring is a torsion ring: its additive group has finite exponent. In particular, the unbounded, finite-ring assertion of [lem-amb-unbounded-proper-open-interchange] applies; no invertible prime is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism",
+    "def-amb-etale-compact-support",
+    "lem-amb-unbounded-proper-open-interchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7H, section-derived-lower-shriek-compactification, torsion-ring paragraph; Tag 0F7B, lemma-shriek-proper-and-open, case (b)"
+   }
+  },
+  {
+   "text": "Let $u:c_1\\to c_2$ be a refinement for $h:T\\to B$. Apply [lem-amb-unbounded-proper-open-interchange] to the square with top $j_1:T\\hookrightarrow\\overline T_1$, bottom $j_2:T\\hookrightarrow\\overline T_2$, left proper map $1_T$ and right proper map $u$. The square need not be cartesian. Its map, after identifying $R1_{T,*}$ with the identity, is an isomorphism $\\gamma_u:j_{2,!}\\to Ru_*j_{1,!}$. On a K-injective representative $J$, the cited statement specifies exactly $j_{2,!}J\\cong u_*j_{1,!}J\\to u_*I$ for a K-injective resolution $j_{1,!}J\\to I$; the sheaf identification is the identity on $T$. Thus it is the map specified in the item, not merely an unspecified isomorphism between its source and target. Put $F_c=Rr_*j_!$ and define\n$$C_u:F_{c_2}\\xrightarrow{Rr_{2,*}\\gamma_u}Rr_{2,*}Ru_*j_{1,!}\\xrightarrow{\\kappa^{-1}}F_{c_1}.$$\nHere $r_2u=r_1$ and $\\kappa$ is the canonical natural comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the constant-$A$ ringed small etale topoi. Every factor is invertible and natural on the entire unbounded category.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, K-injective construction; Tag 0F7I, lemma-shriek-well-defined, refinement construction"
+   }
+  },
+  {
+   "text": "For $u:c_1\\to c_2$ and $v:c_2\\to c_3$, the vertical-pasting and identity assertions of [lem-amb-unbounded-proper-open-interchange], with all left proper maps identities, give $\\gamma_{vu}=(Rv_*\\gamma_u)\\gamma_v$ and $\\gamma_{1}=1$, with the specified direct-image compositors inserted. Whiskering by the proper structural direct image, as in step 2, gives $C_{vu}=C_uC_v$ and $C_1=1$. The cofilteredness statement [lem-cbc-compactifiable-cofiltered] supplies both common refinements and equalizers of parallel arrows. For $d\\xrightarrow{u_1}c_1$, $d\\xrightarrow{u_2}c_2$, set $I_{12}=C_{u_2}^{-1}C_{u_1}:F_{c_1}\\to F_{c_2}$. For two such choices, first dominate their refinement objects and then equalize the resulting two pairs of arrows to $c_1,c_2$. The equation $C_{vu}=C_uC_v$ makes both expressions equal, since the extra invertible factor from the common dominating object cancels. For three compactifications choose a single dominating object and write all three comparisons this way. Direct cancellation gives $I_{23}I_{12}=C_{u_3}^{-1}C_{u_2}C_{u_2}^{-1}C_{u_1}=I_{13}$. Also $I_{11}=1$ and $I_{21}=I_{12}^{-1}$. These equations prove choice independence and the cocycle condition for the actual maps of step 2, and justify the notation $Rh_!$.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C, lemma-shriek-proper-and-open-compose; Tag 0F7I, lemma-shriek-well-defined, final two paragraphs"
+   }
+  },
+  {
+   "text": "Because $f$ is proper, $(1_X,f)$ is a compactification. For an identity open immersion every object of the small etale site factors through the open. The presheaf formula in [def-weil-pbc-extension-by-zero] is therefore already the original sheaf, with its original restrictions and maps, so $(1_X)_!=1$ naturally, also degreewise on complexes. The candidate of [def-amb-etale-compact-support] for $(1_X,f)$ is consequently exactly $Rf_*$. The comparisons $I$ of step 3 identify every other $Rf_!^c$ with this candidate. This defines the required normalization $Rf_!\\cong Rf_*$; its value at the trivial compactification is the identity by $I_{11}=1$.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7H, section-derived-lower-shriek-compactification, definition applied to the trivial compactification"
+   }
+  },
+  {
+   "text": "Construct the composition comparison on compatible models. Fix $d=(i:Y\\hookrightarrow\\overline Y,s:\\overline Y\\to S)$ for $g$ and any compactification of $gf$. By [lem-cbc-compactifiable-compatible-tower], choose $e=(a:X\\hookrightarrow\\overline X,p:\\overline X\\to\\overline Y)$ compactifying $if$. Its statement supplies $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $q:V\\to Y$ and $j:X\\hookrightarrow V$ with $pb=iq$, $bj=a$, $qj=f$, and all the required proper/open properties. The square with horizontal maps $b,i$ has the unbounded interchange isomorphism $\\Gamma:i_!Rq_*\\to Rp_*b_!$ of [lem-amb-unbounded-proper-open-interchange]. Whisker it by $Rs_*$ and $j_!$. The canonical direct-image composition of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the degreewise open composition of [lem-cbc-extension-zero-composition] give the natural isomorphism\n$$D_{d,e}: (Rs_*i_!)(Rq_*j_!)\\xrightarrow{Rs_*\\Gamma j_!}Rs_*Rp_*b_!j_!\\xrightarrow{\\sim}R(sp)_*a_!.$$\nThese are exactly the candidates of [def-amb-etale-compact-support] for $g,f,gf$. Use step 4 and $I_{(1_X,f),(j,q)}$ to identify the second input candidate with $Rf_*$. Finally use the comparisons of step 3 for $g$ and $gf$. This gives $\\alpha_{g,f}:Rg_!Rf_*\\xrightarrow{\\sim}R(gf)_!$ with precisely the proper/open composition normalization in the statement.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, compatible compactifications and first displayed computation"
+   }
+  },
+  {
+   "text": "Verify compatibility with refinement of a whole tower. Any two towers have a common refining tower by [lem-cbc-compactifiable-compatible-tower], so consider a tower indexed by $1$ mapping to one indexed by $2$. The cited statement supplies proper maps $u:\\overline Y_1\\to\\overline Y_2$, $v:\\overline X_1\\to\\overline X_2$, $w:V_1\\to V_2$ with $ui_1=i_2$, $va_1=a_2$, $wj_1=j_2$, $vb_1=b_2w$, $p_2v=up_1$, $q_2w=q_1$, and $s_2u=s_1$. For this calculation abbreviate $I_i=i_{i!}$, $J_i=j_{i!}$, $B_i=b_{i!}$, $P_i=Rp_{i*}$, $L_i=Rq_{i*}$, $M=Ru_*$, $H=Rv_*$ and $H'=Rw_*$. Write $\\gamma_A:J_2\\to H'J_1$, $\\gamma_D:I_2\\to MI_1$, $\\gamma_E:B_2J_2\\to HB_1J_1$, $\\gamma_F:B_2H'\\to HB_1$ for the interchange maps of the four refinement squares, and $\\gamma_B:I_2L_2\\to P_2B_2$, $\\gamma_C:I_1L_1\\to P_1B_1$ for the two model squares. Every square has proper verticals and open horizontals; the refinement squares need not be cartesian. The two pasting laws in [lem-amb-unbounded-proper-open-interchange] say\n$$\\gamma_E=(\\gamma_FJ_1)(B_2\\gamma_A),\\qquad(M\\gamma_C)(\\gamma_DL_1)=(P_2\\gamma_F)(\\gamma_BH').$$\nNaturality of $\\gamma_B$ at $\\gamma_A$ says\n$$(P_2B_2\\gamma_A)(\\gamma_BJ_2)=(\\gamma_BH'J_1)(I_2L_2\\gamma_A).$$\nSubstitute these equalities to obtain\n$$(P_2\\gamma_E)(\\gamma_BJ_2)=(M\\gamma_CJ_1)(\\gamma_DL_1J_1)(I_2L_2\\gamma_A).$$\nComposition is read right to left. Applying $Rs_{2,*}$ and inserting the canonical direct-image compositors of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the open compositors of [lem-cbc-extension-zero-composition] identifies this with\n$$C_{gf}D_2=D_1(C_gF_{f,1})(F_{g,2}C_f).$$\nHere $F_{f,i}=L_iJ_i$, $F_{g,i}=Rs_{i,*}I_i$, $D_i=D_{d_i,e_i}$, and $C_f,C_g,C_{gf}$ are precisely the comparisons from model $2$ to model $1$ constructed in step 2. Thus the composition map intertwines all three specified refinement comparisons. Compare two towers through their common refining tower and cancel invertible comparisons using the cocycle in step 3. The normalized map of step 5 is independent of all tower and compactification choices. All its factors are natural transformations on unbounded derived categories, so naturality in the input complex is also established; no boundedness or constructibility hypothesis entered the argument.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, comparison of two towers and squares A--F; Tags 0F7C and 0F7D, vertical and horizontal proper/open pasting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-finite-type-morphism",
+  "def-amb-etale-compact-support",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-compactifiable-cofiltered",
+  "def-weil-pbc-extension-by-zero",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7H (section-derived-lower-shriek-compactification), 0F7I (lemma-shriek-well-defined) and 0F7J (lemma-shriek-composition), with 0F7B case (b), 0F7C and 0F7D for the specified maps and pasting; specialize the first morphism to proper."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -90,15 +188,118 @@
    "results": "17 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean. Read Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:101-145 and Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:64-122. These give induced maps and a comparison under derivability hypotheses, not the geometric compactification comparison.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded ordinary etale compact support composition with proper direct image",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, CompactlySupportedContinuousMap.comp, AlgebraicGeometry.IsProper.comp_iff, CompactlySupportedContinuousMap.compLinearMap, ExistsContDiffBumpBase.u_compact_support, HasCompactSupport.comp₂_left, RingHom.Etale.stableUnderComposition, HasCompactMulSupport.comp_left. The displayed types concern scheme morphism properties or compactly supported functions; none states the unbounded etale functor comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerShriek, rightDerivedLowerStar, composition",
+   "results": "0 hits: . loogle: unknown identifier 'rightDerivedLowerShriek'. Query rejected for an unknown project-only identifier; repeated below with generic rightDerived names.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|proper.*composition",
+   "results": "0 hits: . The requested subdirectory does not exist in Mathlib; this empty output is not evidence of absence. Repeated below in CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded etale compact support composition with proper derived direct image",
+   "results": "8 hits: HasCompactSupport.comp_homeomorph, HasCompactSupport.comp_isClosedEmbedding, HasCompactMulSupport.comp_isClosedEmbedding, ofCompactSupport, CompactlySupportedContinuousMap.comp, Function.support_comp_eq_preimage, AlgebraicGeometry.IsProper.comp_iff, ZeroAtInftyContinuousMap.comp. The displayed types concern scheme morphism properties or compactly supported functions; none states the unbounded etale functor comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical refinement comparisons and proper pushforward composition of derived etale extension by zero functors on unbounded complexes",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, DerivedCategory.singleFunctors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors. Read ExactFunctor.lean:40-110: exact-functor localization and cohomological derived functors do not state the geometric compactification comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc. Read RightDerived.lean:100-145 and PointwiseRightDerived.lean:60-122: these construct generic derived transformations/comparisons and require derivability hypotheses, rather than asserting the etale proper/open interchange and refinement coherence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|extensionByZero|compactSupport",
+   "results": "0 hits: . Searched Mathlib/CategoryTheory; no geometric lower-shriek or extension-by-zero declaration matched.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-delta-proper-pushforward",
   "by": "worker",
   "date": "2026-10-15"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sf-unbounded-compact-support-proper-composition",
+  "worker": "stage1",
+  "summary": "Split the unbounded proper compact-support composition into six steps following Stacks 0F7H--0F7J. Reused the existing unbounded ordinary etale proper/open calculus and geometric refinement/tower statements; created no duplicate nodes. Verified the precise K-injective map, refinement identity/composition and common-refinement cocycle, proper normalization via the trivial compactification, and tower-refinement compatibility by explicit pasting equations. Statement unchanged; no Lean attachment covers all its clauses.",
+  "blueprint": "Realizes the first paragraph of lem-weil-delta-proper-pushforward: the composition of ambient right adjoints requires the normalized unbounded compact-support composition, and the proper coincidence Rf_!=Rf_*; the containing unit has no proof steps and this is not its key node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of finite-type schemes and proper compactification ambients checks the exact hypotheses of the ordinary etale interchange tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition of separated and locally finite-type morphisms verifies the composite compactification setup."
+   },
+   {
+    "node": "lem-amb-unbounded-proper-open-interchange",
+    "why": "Generic finite-ring unbounded ordinary etale proper/open calculus, including the K-injective normalization and both pasting laws, is needed before taking right adjoints in the blueprint ancestor; the biduality unit has no other statement providing it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary unbounded ringed-topos derived composition identifies the proper factors without changing to a pro-etale or bounded-below category."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic geometric common refinements and equalizers establish the choice-independent comparison cocycle; they replace no biduality step."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Generic geometry supplies compatible compactifications and common refining towers, including the intermediate proper refinement w required for composition independence."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Generic extension-by-zero composition is applied degreewise to join the two open factors of a compatible tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-0e8e96685",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-0e8e96685 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, cited statements, unit/chapter route, and source passages. Verified the unbounded torsion-ring scope, canonical refinement maps, cocycle, proper normalization, and tower compatibility; checked archived master target categories and morphisms. No repairs needed. Seven declared tool uses accepted; detailed checks recorded in review.md."
+ }
 }
