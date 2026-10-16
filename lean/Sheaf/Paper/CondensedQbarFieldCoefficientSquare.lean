@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.CondensedQbarCoefficientConstruction
 public import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 import Sheaf.Paper.CondensedQbarFieldPointCoefficientValue
-import Sheaf.Paper.ProfinitePointPullback
+import Sheaf.Paper.CondensedCoefficientPointUnitPasting
 
 /-! # The coefficient square for geometric field evaluation
 
@@ -17,10 +17,16 @@ Source: RefactorInstruction, Section 4, coefficient realization and geometric fi
 
 @[expose] public section
 
+
+
 universe u
 open CategoryTheory Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
+
+private theorem hom_ext {A B : Ab.{u + 1}} {f g : A ⟶ B}
+    (h : ∀ a : A, f.hom a = g.hom a) : f = g :=
+  AddCommGrpCat.hom_ext (AddMonoidHom.ext h)
 
 /-- The geometric evaluation comparison has the same bounded-coefficient coordinates
 on both algebraically closed fields.
@@ -63,6 +69,24 @@ theorem condensedQbar_field_coefficient_square (ℓ : ℕ) [Fact ℓ.Prime]
     inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K ℓ).hom.hom ≫
       (geometricFieldEvaluationComparison f Ab).app A =
     inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K' ℓ).hom.hom ≫
-      E'.map (inv (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f)) := by sorry
+      E'.map (inv (condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f)) := by
+  dsimp only
+  apply hom_ext
+  intro r
+  obtain ⟨r⟩ := r
+  have hr : _root_.IsIntegral ℚ_[ℓ] r := Algebra.IsIntegral.isIntegral r
+  let S := Profinite.of (ULift.{u, 0} PUnit.{1})
+  let a : PadicAlgCl.finiteIntermediateFieldValued ℓ S :=
+    ⟨ContinuousMap.const _ r,
+      ⟨IntermediateField.adjoin ℚ_[ℓ] {r}, IntermediateField.adjoin.finiteDimensional hr,
+        fun _ ↦ IntermediateField.subset_adjoin ℚ_[ℓ] _ (Set.mem_singleton r)⟩⟩
+  exact CondensedCoefficientUnit.terminal_transport K K' i
+    (Profinite.padicAlgClRingObj ℓ) (ULift.up a)
+    ((inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K ℓ).hom.hom).hom
+      (ULift.up r))
+    (condensedQbar_field_point_coefficient_value ℓ K a)
+    ((inv (CondensedQbarGeometricEvaluation.fieldCoefficientIso K' ℓ).hom.hom).hom
+      (ULift.up r))
+    (condensedQbar_field_point_coefficient_value ℓ K' a)
 
 end AlgebraicGeometry.ProEtale

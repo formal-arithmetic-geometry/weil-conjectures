@@ -15559,3 +15559,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/A2/Sheaf.Paper.IntegralResidueScalarRouteModel (stage 3; reviewer PASS; first push; landing 20261016T160130-L-889390 (interface); batch 20261016T160129; modules 2; new nodes 1)
 - 16:06 L: merged deliver/E1/Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare (stage 3; reviewer PASS; first push; landing 20261016T160648-L-933634 (interface); batch 20261016T160646; modules 3; new nodes 2)
 - 16:15 L: merged deliver/A4/Sheaf.Paper.FiniteDiscreteCoefficientDirectImageConjugation (stage 3; reviewer PASS; first push; landing 20261016T161556-L-1021334 (proof); batch 20261016T161554; modules 1; new nodes 0)
+- 16:57 L: merged deliver/C4/Sheaf.Paper.CondensedQbarFieldCoefficientSquare (stage 3; reviewer PASS; first push; landing 20261016T165726-L-1400418 (interface); batch 20261016T165723; modules 2; new nodes 1)
