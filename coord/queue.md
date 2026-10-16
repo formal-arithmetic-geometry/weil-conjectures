@@ -17,13 +17,14 @@
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralImage` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralSingle` | 4 | 1 | proof |
-| `Sheaf.Paper.ContinuousIntegralExchangeEquality` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralConstructibleKernels` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
+| `Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct` | 5 | 1 | proof |
+| `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleSiteComparison` | 6 | 1 | proof |
@@ -36,21 +37,20 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModel` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
-| `Sheaf.Paper.CondensedStratumModelInductionStepNonempty` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCore` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedFiniteFreeHomEvaluation` | 9 | 1 | proof |
+| `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
+| `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.SupportDimension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteTypeResidueTrdeg` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergCanonicalTruncationComparison` | 12 | 1 | proof |
-| `Sheaf.CategoryTheory.SpectralObjectPageTwoMap` | 12 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.GoodTruncationTotalBoundaryImage` | 19 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 39 | 1 | proof |
 
 Also listed above and claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
