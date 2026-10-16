@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 
 /-!
@@ -55,20 +54,15 @@ All schemes are separated and of finite type over a field `k` of characteristic 
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange`: the
-  canonical exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` for a commutative square of open
-  immersions, and its three steps; for a cartesian square, its inverse
-  `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting`:
   the morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.ofIsPullback sq}` for a compactification `c`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange` and
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl`: the morphism
   `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` for `E`- and `ℚ̄_ℓ`-sheaves.
 
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange`: base
-  change for extension by zero.
+The extension-by-zero exchange morphism and its inverse
+`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso` are in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange`.
 
 -/
 
@@ -94,110 +88,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 include ℓ k
-
-section OpenImmersion
-
-variable {X Z X' Z' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
-  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
-  (j : X ⟶ Z) (g : Z' ⟶ Z) (j' : X' ⟶ Z') (g' : X' ⟶ X)
-  [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
-
-
-
-/-- The *unit insertion* step of the extension-by-zero exchange morphism on bounded
-constructible complexes: the natural transformation
-`Lg'^* ⋙ j'_! ⟶ (j_! ⋙ Lj^*) ⋙ (Lg'^* ⋙ j'_!)` obtained by inserting the unit of the adjunction
-`j_! ⊣ Lj^*`. -/
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep :
-    boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' ⟶
-      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
-        boundedConstructibleUpperStar Λ ℓ j) ⋙
-        (boundedConstructibleUpperStar Λ ℓ g' ⋙
-          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') :=
-  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit
-    (boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j')
-
-variable {j g j' g'} in
-/-- The *square transport* step of the extension-by-zero exchange morphism on bounded
-constructible complexes: `Functor.squareTransport` applied to the pullback comparison
-`Lj^* ∘ Lg'^* ≅ Lg^* ∘ Lj'^*` of the square, under `j_!` on the left and `j'_!` on the
-right. -/
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep
-    (sq : CommSq g' j' j g) :
-    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ j) ⋙
-        (boundedConstructibleUpperStar Λ ℓ g' ⋙
-          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') ≅
-      (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
-        boundedConstructibleUpperStar Λ ℓ g) ⋙
-        (boundedConstructibleUpperStar Λ ℓ j' ⋙
-          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') :=
-  Functor.squareTransport (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j)
-    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j')
-    (boundedConstructiblePullbackSquareComparison Λ ℓ sq.flip)
-
-/-- The *counit contraction* step of the extension-by-zero exchange morphism on bounded
-constructible complexes: the natural transformation
-`(j_! ⋙ Lg^*) ⋙ (Lj'^* ⋙ j'_!) ⟶ j_! ⋙ Lg^*` obtained by contracting the counit of the
-adjunction `j'_! ⊣ Lj'^*`. -/
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep :
-    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ g) ⋙
-        (boundedConstructibleUpperStar Λ ℓ j' ⋙
-          boundedConstructibleOpenImmersionLowerShriek Λ ℓ j') ⟶
-      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
-        boundedConstructibleUpperStar Λ ℓ g :=
-  Functor.whiskerLeft
-    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ g)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').counit ≫
-    (Functor.rightUnitor _).hom
-
-variable {j g j' g'}
-
-/-- The canonical exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` on bounded constructible
-complexes for a commutative square
-```
-X' --g'--> X
-|          |
-j'         j
-v          v
-Z' --g---> Z
-```
-of schemes with `j` and `j'` open immersions, assembled as the composite of the unit insertion,
-the square transport, and the counit contraction. -/
-@[no_expose]
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
-    boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' ⟶
-      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
-        boundedConstructibleUpperStar Λ ℓ g :=
-  boundedConstructibleOpenImmersionLowerShriekBaseChangeUnitStep Λ ℓ j j' g' ≫
-    (boundedConstructibleOpenImmersionLowerShriekBaseChangeSquareStep Λ ℓ sq).hom ≫
-      boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitStep Λ ℓ j g j'
-
-/-- **Base change for extension by zero** on bounded constructible complexes: for a *cartesian*
-square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is
-an isomorphism.
-
-Mathematically, since the square is cartesian, `X'` is the preimage of the open subscheme
-`X ⊆ Z` under `g`, and on stalks at points of `Z'_proét` both sides are the pulled-back stalk at
-points of `X'` and vanish outside `X'`. -/
-theorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
-    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq) :=
-  sorry
-
-/-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` on bounded
-constructible complexes for a cartesian square of open immersions: the inverse of the canonical
-exchange morphism, which is an isomorphism by base change for extension by zero. -/
-noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
-    (sq : IsPullback g' j' j g) :
-    boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ g ≅
-      boundedConstructibleUpperStar Λ ℓ g' ⋙
-        boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' :=
-  have := isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq
-  (asIso (boundedConstructibleOpenImmersionLowerShriekBaseChange Λ ℓ sq.toCommSq)).symm
-
-end OpenImmersion
 
 /-! ### The compact-support base-change morphism for a compactification -/
 
