@@ -1,0 +1,117 @@
+{
+ "id": "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+ "kind": "statement",
+ "title": "Coproduct preservation for proper étale derived direct image",
+ "statement": "Let A be a Grothendieck abelian category and let g : Z → Y be a proper morphism of schemes. Then the total right derived direct image Rg_* on the unbounded derived categories of A-valued sheaves on the small étale sites preserves coproducts of every set-indexed family.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
+  "place": "Proof, first paragraph: proper derived direct image preserves arbitrary coproducts before Brown representability",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0F5Y",
+    "place": "Proposition 19.15.2, injectives-proposition-brown"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "On every quasi-compact étale open of Y, properness gives a finite cohomological-amplitude bound for g and the higher direct images commute with filtered colimits of sheaves. Thus the finite-amplitude K-injective computation of the total right derived functor identifies its coproduct comparison with an isomorphism on each such open. Restriction to these opens is exact and jointly detects isomorphisms, so the local comparisons assemble to the global coproduct comparison.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
+  "place": "Proof, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper etale derived direct image coproducts Grothendieck abelian coefficient",
+   "results": "No exact generic-coefficient theorem found; only finite-coefficient proper direct-image results.",
+   "verdict": "no exact match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism right derived etale direct image preserves coproducts for Grothendieck abelian coefficients",
+   "results": "No exact generic-coefficient theorem found; only finite-coefficient proper direct-image results.",
+   "verdict": "no exact match",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimitsOfShape (Discrete I) rightDerivedFunctor",
+   "results": "Generic right-derived-functor coproduct lemmas found, but no proper étale instance for arbitrary Grothendieck coefficients.",
+   "verdict": "generic tools only",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*rightDerived.*Coproduct|rightDerivedLowerStar.*preservesCoproducts",
+   "results": "Local search found finite-coefficient theorems only; no arbitrary-coefficient theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-17"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek",
+  "date": "2026-10-17",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Proof, first paragraph: proper derived direct image preserves coproducts before Brown representability"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperEtaleDerivedLowerStarCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperEtaleDerivedLowerStarCoproducts.lean",
+  "declaration": "AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck",
+  "statement": "theorem proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g] : ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((g)_*[A]).rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261016T221610-L-1615266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261016T221610-L-1615266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

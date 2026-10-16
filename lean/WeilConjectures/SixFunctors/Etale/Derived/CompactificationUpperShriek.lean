@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.Grothendieck
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.AlgebraicGeometry.ProperEtaleDerivedLowerStarCoproducts
 
 /-!
 
@@ -50,10 +53,9 @@ below objects in general, so it does not restrict to `D⁺`.
 
 ## Implementation notes
 
-* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` is `sorry` by design: this file only
-  *states* that `Rg_*` has a right adjoint for `g` proper, the proof is left to a later file.
-  The adjoint exists by Brown representability, `Rg_*` being, for `g` proper, a colimit
-  preserving functor between compactly generated triangulated categories.
+* `isLeftAdjoint_rightDerivedLowerStar_of_isProper` applies Brown representability to the
+  coproduct-preservation theorem
+  `proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck`.
 * `Rg^!` for proper `g` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint
   extracted from the instance, not a construction. Only the adjunction
   `Adjunction.ofIsLeftAdjoint` should be used about it. The composite `Rf^!` is a construction
@@ -97,8 +99,23 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]
 /-- For a proper morphism `g : Z ⟶ Y`, the derived pushforward `Rg_* : D(Z_ét) ⥤ D(Y_ét)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g`. -/
 instance isLeftAdjoint_rightDerivedLowerStar_of_isProper :
-    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint :=
-  sorry
+    ((g)_*[A]).rightDerivedFunctor.IsLeftAdjoint := by
+  let : Limits.HasColimitsOfSize.{u + 1, u + 1}
+      (Sheaf Z.smallEtaleTopology A) := IsGrothendieckAbelian.hasColimits _
+  let : Limits.HasColimitsOfSize.{u + 1, u + 1}
+      (Sheaf Y.smallEtaleTopology A) := IsGrothendieckAbelian.hasColimits _
+  let : Limits.HasCoproducts.{u + 1}
+      (DerivedCategory (Sheaf Z.smallEtaleTopology A)) := derived_hasCoproducts
+  let : Limits.HasCoproducts.{u + 1}
+      (DerivedCategory (Sheaf Y.smallEtaleTopology A)) := derived_hasCoproducts
+  let adj := mapDerivedUpperStarLowerStarAdjunction A g
+  let : ((g)_*[A]).rightDerivedFunctor.CommShift ℤ := adj.rightAdjointCommShift ℤ
+  have := adj.commShift_of_leftAdjoint ℤ
+  let : ((g)_*[A]).rightDerivedFunctor.IsTriangulated := adj.isTriangulated_rightAdjoint
+  let : ∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J)
+      ((g)_*[A]).rightDerivedFunctor := fun J ↦
+    proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck A g J
+  exact DerivedCategory.isLeftAdjoint_of_preservesCoproducts ((g)_*[A]).rightDerivedFunctor
 
 end Proper
 
