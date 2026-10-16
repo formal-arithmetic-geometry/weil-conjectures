@@ -249,5 +249,39 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-7764dd8ab (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Low’s comparisons/asphericity results, all nine proof steps, endpoint naturality, normalization, small cases, duplicates, and exact master target categories/morphisms. Dependency closure is acyclic. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b046c6351",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read the node, all 3 stmt-dep records and Lean modules (ReedyModelStructure leftClass/rightClass/model_structure/simplex_reedy_structure; SpecialHammockReduction SpecialThreeArrow/Hom/Actual/Pullback/Pushout; KanQuillenRightProper weakEquivalenceStructure; largeNerve), the delivered module, node copy and report. Node fields unchanged except lean; dependency records identical to side; lean.statement verbatim. Clause check: model-category convention matches the dependency (complete, cocomplete, functorial factorizations); Reedy classes correct (monos for Δ latching, monos.op for Δop matching); trivial (co)fibration components for all degrees; Hom bisimplicial diagram and I(P,Q) square Q(β)h=h'P(α) correct; general model-free natural zigzag with degree-zero vertex for all D; actual forgetting functor with weak-equivalence nerve; displayed zigzag; endpoint naturality in Ho(sSet) with correct covering directions, quantified over the essentially unique pullback/pushout actions (true by Step 7); degree-zero normalization with both identity hypotheses. Universes independent, only ULift/largeNerve lifts; no extra hypotheses, no hollow defs, two sorry theorems, docstrings with source and blueprint. nt_compile.py --json: module 3.0 s, exit 0, no errors or warnings. Non-blocking notes: worker-report section thin but superseded; resolutionLargeNerveMap duplicates the downstream frameLargeNerveMap, which cannot be imported here without a cycle."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpecialResolutionZigzagNerve",
+  "file": "lean/Sheaf/CategoryTheory/SpecialResolutionZigzagNerve.lean",
+  "declaration": "CategoryTheory.specialResolutionZigzagNerve",
+  "statement": "theorem specialResolutionZigzagNerve {C : Type u} [Category.{v} C] [ModelCategory C] [HasLimits C] [HasColimits C] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] {x y : C} (P : SimplexCategory ⥤ C) (Q : SimplexCategoryᵒᵖ ⥤ C) (p : P ⟶ (Functor.const SimplexCategory).obj x) (i : (Functor.const SimplexCategoryᵒᵖ).obj y ⟶ Q) (_hP : HomotopicalAlgebra.Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations C) (initial.to P)) (_hQ : HomotopicalAlgebra.Reedy.rightClass (monomorphisms SimplexCategory).op (fibrations C) (terminal.from Q)) (hp : ∀ m : ℕ, trivialFibrations C (p.app ⦋m⦌)) (hi : ∀ n : ℕ, trivialCofibrations C (i.app (Opposite.op ⦋n⦌))) : SSet.Enhanced.IsWeakHomotopyEquivalence (resolutionLargeNerveMap.{v, 0, max u v, v, max u v} (specialResolutionIndexToThreeArrow p i hp hi)) ∧ (∃ E : SSet.{max u v}, ∃ a : E ⟶ SSet.uliftFunctor.{max u v}.obj (resolutionDiagonalFunctor.obj (specialResolutionHomDiagram P Q)), ∃ b : E ⟶ HomotopicalAlgebra.FiniteReedy.largeNerve.{max u v, v, max u v} (SpecialThreeArrow x y), SSet.Enhanced.IsWeakHomotopyEquivalence a ∧ SSet.Enhanced.IsWeakHomotopyEquivalence b) ∧ (∀ {x' y' : C} (c : x' ⟶ x) (d : y ⟶ y') (P' : SimplexCategory ⥤ C) (Q' : SimplexCategoryᵒᵖ ⥤ C) (p' : P' ⟶ (Functor.const SimplexCategory).obj x') (i' : (Functor.const SimplexCategoryᵒᵖ).obj y' ⟶ Q') (hP' : HomotopicalAlgebra.Reedy.leftClass (monomorphisms SimplexCategory) (cofibrations C) (initial.to P')) (hQ' : HomotopicalAlgebra.Reedy.rightClass (monomorphisms SimplexCategory).op (fibrations C) (terminal.from Q')) (hp' : ∀ m : ℕ, trivialFibrations C (p'.app ⦋m⦌)) (hi' : ∀ n : ℕ, trivialCofibrations C (i'.app (Opposite.op ⦋n⦌))) (r : P' ⟶ P) (s : Q ⟶ Q') (hc : r ≫ p = p' ≫ (Functor.const SimplexCategory).map c) (hd : i ≫ s = (Functor.const SimplexCategoryᵒᵖ).map d ≫ i') (A : SpecialHammockPullback c y) (B : SpecialHammockPushout x' d), SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{v, 0, v, 0, max u v} (resolutionIndexMap (specialResolutionHomMap r s))) ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{v, 0, max u v, v, max u v} (specialResolutionIndexToThreeArrow p' i' hp' hi')) = SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{v, 0, max u v, v, max u v} (specialResolutionIndexToThreeArrow p i hp hi)) ≫ SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.Q.map (resolutionLargeNerveMap.{max u v, v, max u v, v, max u v} (A.functor ⋙ B.functor))) ∧ (∀ (hP0 : P.obj ⦋0⦌ = x) (hQ0 : Q.obj (Opposite.op ⦋0⦌) = y), p.app ⦋0⦌ = eqToHom hP0 → i.app (Opposite.op ⦋0⦌) = eqToHom hQ0.symm → ∀ f : x ⟶ y, HEq ((specialResolutionIndexToThreeArrow p i hp hi).obj (ResolutionIndex.mk 0 0 (eqToHom hP0 ≫ f ≫ eqToHom hQ0.symm))) (specialThreeArrowActual f))",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ResolutionIndex",
+   "CategoryTheory.ResolutionIndexHom",
+   "CategoryTheory.resolutionIndexCategory",
+   "CategoryTheory.resolutionIndexMap",
+   "CategoryTheory.resolutionDiagonalFunctor",
+   "CategoryTheory.resolutionIndexNerveFunctor",
+   "CategoryTheory.resolutionLargeNerveMap",
+   "CategoryTheory.specialResolutionHomDiagram",
+   "CategoryTheory.specialResolutionHomMap",
+   "CategoryTheory.specialResolutionHomFunctorMap",
+   "CategoryTheory.specialResolutionIndexToThreeArrow",
+   "CategoryTheory.resolutionDiagonalIndexComparison",
+   "CategoryTheory.specialResolutionZigzagNerve"
+  ],
+  "note": "Two statements encode the full node: resolutionDiagonalIndexComparison is the model-free natural comparison with its zero-index lift; specialResolutionZigzagNerve gives the canonical index-forgetting equivalence, resulting zigzag, endpoint naturality and normalization. All auxiliary constructions are real data of this same comparison. Object and hom universes are independent, enlarged only with the existing largeNerve and ULift constructions."
  }
 }
