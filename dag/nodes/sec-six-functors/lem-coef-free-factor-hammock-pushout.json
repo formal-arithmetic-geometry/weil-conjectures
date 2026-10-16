@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: mapping-space foundation through finite-adjunction diagrams and cosimplicial frames; Comparison Lemma 2.3, Section 5.8(i): Proposition 3.2 pushout over the common object set and adjoining a free complementary factor.",
+   "place": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph and displayed derived Hom inverse-limit calculation; its mapping-space foundation through finite-adjunction diagrams and cosimplicial frames uses DK Comparison Lemma 2.3, Section 5.8(i), Proposition 3.2 pushout over the common object set and adjoining a free complementary factor.",
    "via": [
     "lem-coef-free-factor-hammock-comparison",
     "lem-coef-dk-cofibrant-localization-comparison",
@@ -21,70 +21,155 @@
  },
  "kind": "statement",
  "title": "Hammock localization of a free factor is a pushout",
- "statement": "Use small simplicial categories and mappingwise weak homotopy equivalences as in [lem-coef-coherent-nerve-comparison]. For a small category $A$ and wide subcategory $U$, let $H(A,U)$ be the reduced-hammock simplicial category: a $k$-simplex is a commutative rectangle with $k+1$ rows, fixed endpoints and identity endpoint vertical arrows, all downward vertical arrows in $U$, uniform horizontal direction in each column, and all leftward arrows in $U$. Adjacent column directions alternate and no column is all identities. Row deletion or repetition and concatenation are followed by reduction, deleting identity columns and composing adjacent equally directed columns; length zero is allowed precisely for equal endpoints. Let $O$ be a small set, let $D,W$ be free categories on $O$, and put $C=D*_O W$, the coproduct over the discrete category on $O$. Then there are canonical isomorphisms\n$$H(C,W)\\cong D*_O H(W,W),\\qquad C[W^{-1}]\\cong D*_O W[W^{-1}].$$\nHere ordinary localization adjoins formal inverses subject to the composition and inverse relations, and ordinary categories are viewed as discrete simplicial categories. Under these isomorphisms the row-product comparison is $D*_O(H(W,W)\\to W[W^{-1}])$. The pushout identifications are natural for functors preserving both specified factors.",
+ "statement": "Use small simplicial categories and mappingwise weak homotopy equivalences as in [lem-coef-coherent-nerve-comparison]. For a small category $A$ and wide subcategory $U$, let $H(A,U)$ be the reduced-hammock simplicial category: a $k$-simplex is a commutative rectangle with $k+1$ rows, fixed endpoints and identity endpoint vertical arrows, all downward vertical arrows in $U$, uniform horizontal direction in each column, and all leftward arrows in $U$. Adjacent column directions alternate and no column is all identities. Row deletion or repetition and concatenation are followed by reduction, deleting identity columns and composing adjacent equally directed columns; length zero is allowed precisely for equal endpoints. Use coproducts of fixed-object simplicial categories, computed degreewise, as in [lem-coef-fixed-object-simplicial-free-calculus]. Let $O$ be a small set, let $D,W$ be free categories on $O$ (their arrows are finite composable paths in chosen directed generator graphs, with empty paths as identities), and put $C=D*_O W$, the coproduct over the discrete category on $O$. Then there are canonical isomorphisms\n$$H(C,W)\\cong D*_O H(W,W),\\qquad C[W^{-1}]\\cong D*_O W[W^{-1}].$$\nHere ordinary localization adjoins formal inverses subject to the composition and inverse relations, and ordinary categories are viewed as discrete simplicial categories. Under these isomorphisms the row-product comparison is $D*_O(H(W,W)\\to W[W^{-1}])$. The pushout identifications are natural for functors preserving both specified factors.",
  "source": {
   "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
   "place": "Dwyer–Kan, Calculating simplicial localizations, Proposition 3.2, printed p.20; its unique alternating-factor proof is used in the reduction preceding Section 5.8. No Stacks tag states this pushout result."
  },
  "stmt_deps": [
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-fixed-object-simplicial-free-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_k=H(W,W)_k$ and $P=D*_O H(W,W)$. The fixed-object convention in [lem-coef-fixed-object-simplicial-free-calculus] gives $P_k=D*_O B_k$. Apply [lem-coef-free-factor-category-normal-form] both to $C=D*_O W$ and to $P_k$: their arrows have unique alternating factor words, and in the latter the $B_k$-factor is an arbitrary category, so identity composites must be reduced again. The inclusions of $W$ into $C$ induce $H(W,W)\\to H(C,W)$ by the functoriality in [lem-coef-hammock-graph-colimit-presentation]. The functor $D\\to H(C,W)$ sends an arrow to its single rightward column, constant in all rows; composing such columns is their composition in $D$, by the hammock reduction rule. These two functors agree on the discrete category on $O$. Thus the coproduct gives a canonical simplicial functor $\\Phi:P\\to H(C,W)$.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-free-factor-category-normal-form",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 3.2, printed pp.20–21; Definition 2.1 and Proposition 5.5"
+   }
+  },
+  {
+   "text": "Here is the square calculation needed to construct an inverse. Write concatenation of arrows in travel order. In a rightward hammock column let its row arrows be $f_i:x_i\\to y_i$ and its vertical arrows be $a_i:x_i\\to x_{i+1}$ and $b_i:y_i\\to y_{i+1}$ in $W$. Commutativity says $f_i b_i=a_i f_{i+1}$. Multiplying by a $W$-arrow affects only the first or last $W$-letter of a reduced factor word. Since $W$ is free, a composite of nonidentity $W$-arrows is nonidentity. The normal form of [lem-coef-free-factor-category-normal-form] therefore implies either that every $f_i$ lies in $W$, or that every row has the form $u_{i,0}d_1u_1d_2\\cdots u_{r-1}d_ru_{i,r}$ with the same nonidentity $D$-arrows $d_j$ and the same intervening nonidentity $W$-arrows $u_j$ in every row. The end $W$-arrows are allowed to be identities, and satisfy $u_{i,0}=a_i u_{i+1,0}$ and $u_{i,r}b_i=u_{i+1,r}$. Thus every internal factor boundary is a fixed object with identity vertical arrows; the two end blocks are genuine $W$-only rightward columns. This also handles the case of a single $D$-block with no intervening $W$-letter.",
+   "uses": [
+    "lem-coef-free-factor-category-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof of Proposition 3.2, printed p.21: explicit use of unique alternating factorization in each commutative square"
+   }
+  },
+  {
+   "text": "Take an unreduced hammock of any fixed signed type, in the precise sense of [lem-coef-hammock-graph-colimit-presentation]. Expand each rightward column by the preceding calculation, inserting identity end $W$-columns when necessary. All new $D$-columns are constant across rows; all other new columns lie in $W$. Every original leftward column already lies in $W$. Between successive constant $D$-columns, collect the entire consecutive $W$-only diagram and reduce it to a simplex of $H(W,W)$, with fixed endpoints because the adjacent $D$-columns have identity vertical arrows. Read the result as a composable word of $D$-arrows and $B_k$-arrows, and reduce it in $P_k$ using [lem-coef-free-factor-category-normal-form]. Denote its value by $\\Psi_k$. An all-$W$ diagram gives its own simplex in $B_k$; the length-zero diagram gives the empty word. This construction retains a sequence of $W$-hammock factors between $D$-factors, rather than incorrectly treating the whole diagram as one $W$-hammock.",
+   "uses": [
+    "lem-coef-free-factor-category-normal-form",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof of Proposition 3.2, printed p.21, with the unreduced diagrams of Definition 5.1"
+   }
+  },
+  {
+   "text": "Check that $\\Psi_k$ is unchanged by the column operations of [lem-coef-hammock-graph-colimit-presentation]. Inserting or deleting an entirely identity column inserts or removes a unit in a $W$-block. Combining two leftward columns is composition of those columns inside the same $W$-block. Combining two rightward columns first concatenates their factor lists; the end $W$-block of the first and the initial $W$-block of the second compose inside $B_k$. If this is an identity, the newly adjacent $D$-letters compose in $D$ and the resulting word is reduced again, precisely as in [lem-coef-free-factor-category-normal-form]. Row by row the expanded list is the concatenation of the two original arrow words, so its reduced form is the normal form of their composite. Uniqueness of that form gives exactly the constant $D$-blocks and end $W$-columns obtained by applying step 2 to the composed column. These are all the generators of the fixed-word transition maps, so the colimit identification in [lem-coef-hammock-graph-colimit-presentation] makes $\\Psi_k$ well defined on $H(C,W)_k$. Horizontal concatenation concatenates the displayed factor words, and length zero gives a unit; hence $\\Psi_k$ is a functor fixing $O$.",
+   "uses": [
+    "lem-coef-free-factor-category-normal-form",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definitions 2.1 and 5.3, Proposition 5.5, and the factorization in the proof of Proposition 3.2"
+   }
+  },
+  {
+   "text": "Expanding a column and then composing its same-direction subcolumns reconstructs that column. Reducing the intermediate $W$-blocks is also a permitted reduction in $H(C,W)$. Consequently $\\Phi_k\\Psi_k$ fixes every hammock. In the reverse order $\\Psi_k\\Phi_k$ fixes every $D$-arrow and every $B_k$-arrow: a constant $D$-column has empty end blocks and a $W$-hammock has no $D$-blocks. By the coproduct word presentation of [lem-coef-free-factor-category-normal-form], it fixes every arrow of $P_k$. Finally, deleting rows composes the vertical arrows in the equations of step 2 and deleting or repeating rows leaves the $D$-letters constant. The induced operations on each $W$-block are exactly those of [lem-coef-hammock-graph-colimit-presentation]. Some blocks may become identities after row deletion; the induced functor on the coproduct then reduces their images, as explicitly asserted in the normal-form lemma. Thus the inverse functors commute with all faces and degeneracies, giving $H(C,W)\\cong D*_O H(W,W)$.",
+   "uses": [
+    "lem-coef-free-factor-category-normal-form",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 3.2, printed pp.20–21, and the row operators in Definitions 2.1 and 5.1"
+   }
+  },
+  {
+   "text": "Set $L=D*_O W[W^{-1}]$. Map $C\\to L$ by the inclusion of $D$ and the localization map on $W$; its restriction to $W$ is invertible, so the formal-inverse presentation in the statement extends it to $\\alpha:C[W^{-1}]\\to L$, sending $w^{-1}$ to the inverse of the image of $w$. Conversely, the inclusion $D\\to C[W^{-1}]$ and the functor $W[W^{-1}]\\to C[W^{-1}]$ which sends $w^{-1}$ to that same formal inverse determine $\\beta:L\\to C[W^{-1}]$. The composition and inverse relations hold because they hold in the target localized categories. The composite $\\beta\\alpha$ fixes the generators consisting of $C$-arrows and the formal inverses of $W$-arrows. The composite $\\alpha\\beta$ fixes the $D$-factor and every generator $w,w^{-1}$ of the other factor. The coproduct presentation in [lem-coef-free-factor-category-normal-form] and the stated presentation of ordinary localization then show both composites are identities. This proves the canonical ordinary-category isomorphism $C[W^{-1}]\\cong D*_O W[W^{-1}]$.",
+   "uses": [
+    "lem-coef-free-factor-category-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "The ordinary-localization counterpart of Proposition 3.2, used in Section 5.8(i), printed p.25; direct verification on formal generators and relations"
+   }
+  },
+  {
+   "text": "For the row-product comparison, multiply each expanded row in the ordinary localization, replacing every leftward $W$-arrow by its inverse. Commutativity of a square says that these row products differ by the vertical arrows at its ends; along a whole row the internal vertical arrows cancel in successive squares, and the endpoint vertical arrows are identities. Thus every row gives the same product, and row deletion/repetition is compatible with it. On a constant $D$-column this product is that $D$-arrow, and on a $W$-block it is the row product $H(W,W)\\to W[W^{-1}]$. Since the functor $\\Phi$ and the ordinary isomorphism have exactly these restrictions, the comparison is $D*_O(H(W,W)\\to W[W^{-1}])$. For a factor-preserving functor, its images commute strictly with the factor inclusions, with formal inverses, and with the induced hammock functors of [lem-coef-hammock-graph-colimit-presentation]. The coproduct universal property therefore makes the square for $\\Phi$ commute, and the inverse isomorphism is natural as well. The square for the ordinary isomorphism commutes on $D$, $W$ and $W$-inverses, hence on every arrow. This argument allows letters to map to identities and allows a common nonidentity object map; it requires no preservation of chosen generators.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Definition 2.1, Proposition 3.2 and induced functors in Section 3.4, printed pp.19–21; direct row-product and generator check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-free-factor-category-normal-form",
+  "lem-coef-hammock-graph-colimit-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Proposition 3.2, printed pp.20–21, and its use in Section 5.8(i), printed p.25. Source read online; not archived under literature/. The square expansion, compatibility with reductions, and formal-inverse argument supply details of the short published proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Hammock localization of a free coproduct at a free factor is a pushout over the object set and ordinary localization is the corresponding pushout",
-   "results": "{\"t\": \"2026-10-16T18:48:20Z\", \"tool\": \"leanfinder\", \"query\": \"Hammock localization of a free coproduct at a free factor is a pushout over the object set and ordinary localization is the corresponding pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.step\", \"CategoryTheory.OrthogonalReflection.D₂.hasColimitsOfShape\", \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\", \"CategoryTheory.SmallObject.functorObj_isPushout\", \"CategoryTheory.OrthogonalReflection.toStep\", \"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₁\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj_isColimit₂\"], \"digest\": \"ca3167b62ea00a79\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve, free-groupoid, and ordinary-localization constructions do not state the reduced-hammock assertion. Actual hits and digest copied from msearch log."
+   "query": "Hammock localization of a free coproduct at one factor is the pushout of the other factor and the hammock localization of that factor",
+   "results": "{\"t\": \"2026-10-16T21:27:26Z\", \"tool\": \"leanfinder\", \"query\": \"Hammock localization of a free coproduct at one factor is the pushout of the other factor and the hammock localization of that factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.step\", \"CategoryTheory.OrthogonalReflection.D₂.hasColimitsOfShape\", \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\", \"CategoryTheory.OrthogonalReflection.toStep\", \"CategoryTheory.SmallObject.functorObj_isPushout\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.OrthogonalReflection.fromStep\", \"CategoryTheory.IsPushout.of_coprod_inl_with_id\"], \"digest\": \"847998135143d2d8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the grep and Loogle searches return no hammock result. Semantic hits concern generic categorical pushouts, simplex factorization or ordinary localization, not reduced-hammock factorization. Read Localization/Construction.lean:1–100 (ordinary inversion) and the returned signatures of IsPushout.of_coprod_inl_with_id, AttachCells.pushouts_coproducts and Nerve.strictSegal; none states either the hammock pushout or its natural row-product comparison."
   },
   {
    "tool": "leanfinder",
-   "query": "For a coproduct of free categories D and W, hammock localization is the pushout of D and the hammock localization of W",
-   "results": "{\"t\": \"2026-10-16T16:57:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a coproduct of free categories D and W, hammock localization is the pushout of D and the hammock localization of W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.D₂\", \"CategoryTheory.OrthogonalReflection.step\", \"CategoryTheory.OrthogonalReflection.toStep\", \"CategoryTheory.OrthogonalReflection.D₂.hasColimitsOfShape\", \"CategoryTheory.MorphismProperty.HasLocalization.hD\", \"CategoryTheory.OrthogonalReflection.fromStep\", \"CategoryTheory.OrthogonalReflection.leftBousfieldW_isLocal_toSucc\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\"], \"digest\": \"a2dcd7969b70e1e6\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve, free-groupoid, and ordinary-localization constructions do not state the reduced-hammock assertion. Actual hits and digest copied from msearch log."
+   "query": "Reduced rectangular zigzags in D coproduct W decompose into constant D arrows and W hammocks naturally in every simplicial degree",
+   "results": "{\"t\": \"2026-10-16T21:27:26Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced rectangular zigzags in D coproduct W decompose into constant D arrows and W hammocks naturally in every simplicial degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"AlgebraicTopology.DoldKan.hσ'\", \"CategoryTheory.nerve.nonempty_compStruct_iff\", \"CategoryTheory.Nerve.strictSegal\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"SimplicialObject.Splitting.φ\", \"AlgebraicTopology.DoldKan.MorphComponents.φ\", \"CategoryTheory.nerve.homEquiv_comp\"], \"digest\": \"87994521eea40d40\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the grep and Loogle searches return no hammock result. Semantic hits concern generic categorical pushouts, simplex factorization or ordinary localization, not reduced-hammock factorization. Read Localization/Construction.lean:1–100 (ordinary inversion) and the returned signatures of IsPushout.of_coprod_inl_with_id, AttachCells.pushouts_coproducts and Nerve.strictSegal; none states either the hammock pushout or its natural row-product comparison."
   },
   {
    "tool": "loogle",
-   "query": "\"hammock\", \"pushout\", \"Localization\"",
-   "results": "{\"t\": \"2026-10-16T18:48:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\", \\\"pushout\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve, free-groupoid, and ordinary-localization constructions do not state the reduced-hammock assertion. Actual hits and digest copied from msearch log."
+   "query": "\"hammock\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-16T21:27:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the grep and Loogle searches return no hammock result. Semantic hits concern generic categorical pushouts, simplex factorization or ordinary localization, not reduced-hammock factorization. Read Localization/Construction.lean:1–100 (ordinary inversion) and the returned signatures of IsPushout.of_coprod_inl_with_id, AttachCells.pushouts_coproducts and Nerve.strictSegal; none states either the hammock pushout or its natural row-product comparison."
   },
   {
    "tool": "grep",
-   "query": "hammock.*pushout|localization.*pushout|FreeCategory",
-   "results": "{\"t\": \"2026-10-16T18:48:09Z\", \"tool\": \"grep\", \"query\": \"hammock.*pushout|localization.*pushout|FreeCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"Mathlib/RingTheory/Localization/BaseChange.lean\"], \"digest\": \"f07142a2a8d2572e\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve, free-groupoid, and ordinary-localization constructions do not state the reduced-hammock assertion. Actual hits and digest copied from msearch log."
+   "query": "[Hh]ammock|[Ff]ree.*[Ff]actor.*[Ll]ocaliz",
+   "results": "{\"t\": \"2026-10-16T21:27:25Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|[Ff]ree.*[Ff]actor.*[Ll]ocaliz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the grep and Loogle searches return no hammock result. Semantic hits concern generic categorical pushouts, simplex factorization or ordinary localization, not reduced-hammock factorization. Read Localization/Construction.lean:1–100 (ordinary inversion) and the returned signatures of IsPushout.of_coprod_inl_with_id, AttachCells.pushouts_coproducts and Nerve.strictSegal; none states either the hammock pushout or its natural row-product comparison."
   },
   {
    "tool": "leansearch",
-   "query": "Dwyer Kan hammock pushout for a free product over a common object set",
-   "results": "{\"t\": \"2026-10-16T18:48:10Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan hammock pushout for a free product over a common object set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutObjIso\", \"CategoryTheory.Limits.pullback.desc'\", \"CategoryTheory.Limits.PushoutCocone.mk\", \"CategoryTheory.Limits.Types.Pushout'\", \"CategoryTheory.Limits.PushoutCocone.IsColimit.desc\", \"CategoryTheory.Limits.Types.Pushout.cocone\", \"CategoryTheory.Limits.pushoutAssocIsPushout\", \"CategoryTheory.Under.pushoutComp\"], \"digest\": \"be7453a87aa0c74c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve, free-groupoid, and ordinary-localization constructions do not state the reduced-hammock assertion. Actual hits and digest copied from msearch log."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Free simplicial category extension on a graph preserves weak equivalences of enriched hom spaces",
-   "results": "{\"t\": \"2026-10-16T19:43:22Z\", \"tool\": \"leanfinder\", \"query\": \"Free simplicial category extension on a graph preserves weak equivalences of enriched hom spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.toSimplexCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialThickening.functor_id\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"SSet.Truncated.HomotopyCategory.lift_map_homMk\"], \"digest\": \"2be47748b7b2822f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: independent second reading; path/free-groupoid and model-category declarations do not state this reduced-hammock assertion."
+   "query": "Dwyer Kan hammock localization preserves the free product decomposition when inverting one free factor",
+   "results": "{\"t\": \"2026-10-16T21:27:26Z\", \"tool\": \"leansearch\", \"query\": \"Dwyer Kan hammock localization preserves the free product decomposition when inverting one free factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.preservesFiniteProducts\", \"CategoryTheory.Localization.preservesProductsOfShape\", \"CategoryTheory.Localization.hasProductsOfShape\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Localization.Construction.fac\", \"CategoryTheory.Localization.hasFiniteProducts\"], \"digest\": \"acaf013c03b76ddd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the grep and Loogle searches return no hammock result. Semantic hits concern generic categorical pushouts, simplex factorization or ordinary localization, not reduced-hammock factorization. Read Localization/Construction.lean:1–100 (ordinary inversion) and the returned signatures of IsPushout.of_coprod_inl_with_id, AttachCells.pushouts_coproducts and Nerve.strictSegal; none states either the hammock pushout or its natural row-product comparison."
   },
   {
    "tool": "grep",
-   "query": "[Hh]ammock|[Ff]ree.*[Ss]implicial|[Zz]igzag.*[Cc]ontract",
-   "results": "{\"t\": \"2026-10-16T19:43:16Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|[Ff]ree.*[Ss]implicial|[Zz]igzag.*[Cc]ontract\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: independent second reading; path/free-groupoid and model-category declarations do not state this reduced-hammock assertion."
+   "query": "[Hh]ammock|Dwyer.Kan.*[Ll]ocal",
+   "results": "{\"t\": \"2026-10-16T22:24:31Z\", \"tool\": \"grep\", \"query\": \"[Hh]ammock|Dwyer.Kan.*[Ll]ocal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: the independent second-reader grep of CategoryTheory returns zero hammock or Dwyer–Kan localization declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-comparison",
@@ -104,5 +189,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-factor-hammock-pushout",
+  "worker": "stage1",
+  "summary": "Repaired the earlier unaccepted attempt: use one statement-only normal-form theorem for arbitrary fixed-object category coproducts, with functoriality by image followed by reduction; explicitly factor W-vertical squares, construct the inverse hammock functor and verify every column reduction, simplicial operator, inverse and comparison. Corrected the direction of the ordinary-localization functor. Original conclusion and hypotheses are retained, with inline free-category and degreewise-coproduct conventions. Fresh searches run through msearch and citation quotes checked against complete statements. Second reading: supplied the ordinary-category definition dependency, made the rightward-composition check explicit row by row, and corrected the top source location to pp.20–21 and Section 5.8(i); statements and dependency route retained.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, current main-20261015 blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, second paragraph and displayed derived Hom inverse-limit calculation (also the historical master proof paragraph 2): the finite-adjunction-diagram/mapping-space chain uses DK Comparison Lemma 2.3. Steps 1–5 supply Proposition 3.2 and step 6 its ordinary-localization counterpart used by DK 5.8(i); step 7 supplies their natural comparison. Historical ancestry and via lists are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-c1e54fd17",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c1e54fd17 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the new node lem-coef-free-factor-category-normal-form, and the full statements of every cited node: coherent-nerve-comparison, fixed-object-simplicial-free-calculus, hammock-graph-colimit-presentation and def-nagata-category. I also read the consumer free-factor-hammock-comparison and the base statement of the item. The delivered statement only adds two clarifications to the base: the inline definition of free categories and the degreewise-coproduct citation. I checked Dwyer–Kan, Calculating simplicial localizations, at the node URL (read-only text layer): Def 2.1, Comparison Lemma 2.3 (D and W free), Prop 3.2 on p.20, its proof on p.21 (unique alternating factorization), 3.4, 5.1/5.3, Prop 5.5 and 5.8(i) on p.25. The item is Prop 3.2 under the free hypotheses of 2.3, plus the ordinary-localization isomorphism and the comparison that 5.8(i) uses. Step 2 checked: in a free W, u b = id forces u = b = id, so uniqueness of the reduced word keeps the D-letters and internal W-letters fixed in every row and gives u_{i,0} = a_i u_{i+1,0} and u_{i,r} b_i = u_{i+1,r}. Step 4 checked: when two rightward columns are composed, the merged end block telescopes to a column that is constant in i, so it is the identity in all rows or in none, and in the identity case the adjacent D-letters merge. This matches the normal form of the composite. Steps 3, 5, 6 and 7 use exactly what the cited statements say; the steps marked elementary are elementary. The new node is true: it is the standard normal form for free products of categories, the rewriting system terminates and is confluent, and the functor clause correctly reduces image letters. It is statement-only and strictly smaller than the item. An rg duplicate search found no duplicate; the closest nodes, free-resolution-coproduct-augmentation and free-product-nerve-gluing, give the coproduct as a quotient of words without uniqueness. Everything cited is in unit sk-prop-sf-biduality-general, there are no tool_uses, no SGA, no cycle, and proof_deps equals the union of step uses. Edge cases tested: O empty, factors with no generators, k = 0, a loop example with d w and w² that is consistent, and a face that collapses a W-block. One fix: the item's source.place said Prop 3.2 is used in the reduction preceding Section 5.8; corrected to Prop 3.2 on p.20, its proof on p.21 and its use in 5.8(i) on p.25 (whole file in fixes/). Also noted: the item file dropped the base's lean_audit key, which is not a split-owned field.; 1 file(s) fixed by the reviewer"
  }
 }
