@@ -30,9 +30,122 @@
   "lem-pur-derived-change-of-rings",
   "lem-pc-derived-adjoint-functors"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_q=(A_q)_{\\mathcal T}$, with its quotient ring maps. These are sheaves of commutative rings on the same small site. The strict semilinear system category $\\mathscr S(B)$ of [lem-pur-system-level-left-extension] is exactly $\\mathsf S_A(\\mathcal T)$: its objects, morphisms and scalar restrictions are the ones specified in the statement. That node gives an abelian category, componentwise cohomology, exact evaluations and joint detection of isomorphisms. In particular a chain map of systems is a quasi-isomorphism exactly when every evaluated map is one, since its cohomology maps are evaluated componentwise. This applies to all unbounded complexes; there is no normalization condition.",
+   "uses": [
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21: modules on the projective-system topos; specialize the existing general sheaf-ring system lemma only for its ambient abelian-category and evaluation assertions."
+   }
+  },
+  {
+   "text": "For $q\\le n$ apply [lem-weil-pbc-ringed-topoi-module-adjunction] to the identity topos and $B_n\\to B_q$. Given $h:F\\to M_n$, define the $q$th component $F\\otimes_{B_n}B_q\\to M_q$ by $x\\otimes a\\mapsto a\\,\\tau_{nq}^M(h(x))$, where $\\tau_{nq}^M:M_n\\to\\operatorname{Res}_{nq}M_q$ is the iterated transition. Above $n$ use the unique map from zero. These maps are balanced and commute with restrictions, hence define sheaf morphisms. Their transition squares commute because the two paths send $x\\otimes a$ to the reduction of $a$ times $\\tau_{nq}^M h(x)$. Conversely a system morphism $E_nF\\to M$ is forced to have precisely these components by its component at $n$, using $F\\otimes_{B_n}B_n\\cong F$. Thus evaluation at $n$ and this construction are mutually inverse natural Hom bijections. This proves $E_n\\dashv e_n$, including the given action on maps. Its unit is $F\\to(E_nF)_n$, $x\\mapsto x\\otimes1$, and its counit at $q\\le n$ is the tensor-adjoint of $\\tau_{nq}^M$, with zero source above $n$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, formula for e_n!; tensor adjunction is Stacks Tag 03D7 (sites-modules.tex, lemma-adjoint-pullback-pushforward-modules)."
+   }
+  },
+  {
+   "text": "Apply $E_n$ termwise to complexes. It is additive, so it preserves chain homotopies, shifts and the cone formula: the cone has entries $L^r\\oplus K^{r+1}$ and a matrix differential, and an additive functor preserves that direct sum and each matrix entry. Consequently the functor $F_n:K(B_n)\\to D(\\mathsf S_A(\\mathcal T))$, $P\\mapsto Q(E_nP)$, is exact. Take the resolving class $\\mathcal P_n$ to be the flat-term K-flat complexes. Every complex has a resolution from this class by [lem-pc-kflat-resolution]. For a quasi-isomorphism $s:P\\to P'$ between its objects, [lem-pur-derived-change-of-rings](1) makes $s\\otimes1_{B_q}$ a quasi-isomorphism for every $q\\le n$; above $n$ the map is $0\\to0$. Step 1 therefore makes $E_ns$ a quasi-isomorphism of systems. All hypotheses of [lem-pur-left-derived-from-kflat-class] hold. It gives the everywhere-defined total left derived functor $LE_n$, with canonical comparison $LE_n(QP)\\cong Q(E_nP)$ on $\\mathcal P_n$. For a resolution $P\\to N$, invert its derived image to obtain $LE_nN\\cong Q(E_nP)$. The comparison is natural, so the displayed tensor maps and differentials compute the functor on these representatives. Finally [lem-pur-derived-change-of-rings](2) identifies its $q$th component with $N\\otimes^L_{B_n}B_q$ for $q\\le n$; components above $n$ are zero.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual part, and Tag 05SE for exactness; flat resolutions and scalar invariance are sites-cohomology.tex Tags 06YS and 06YT. The finite-cone computation and componentwise system application are written out here."
+   }
+  },
+  {
+   "text": "Exact evaluation has the termwise derived functor by [lem-weil-pbc-exact-functor-derived-factorization]; [lem-weil-pbc-exact-functor-derived-functor] identifies this with its everywhere-defined right derived functor, so the ind-system of $e_n$ at every complex $K$ has the invertible identity-stage comparison $p_{\\mathrm{id}}:Q(e_nK)\\to Re_n(QK)$. For $E_n$, the quasi-isomorphisms of $K(B_n)$ form a saturated multiplicative system by [lem-pur-quasi-isos-saturated-triangulated], and step 3 verified that every complex has a resolution in $\\mathcal P_n$ and that $QE_n$ inverts quasi-isomorphisms inside $\\mathcal P_n$. Hence [lem-pur-resolving-class-essential-constancy] makes the pro-system $(QE_nP')_{P'\\to N}$ essentially constant at every complex $N$, with invertible identity leg $u_{\\mathrm{id}}:LE_n(QP)\\to QE_nP$ when $P\\in\\mathcal P_n$; by [lem-pur-left-derived-defined-pointwise-kan-bridge] this cone is a pointwise right Kan extension, so its value and identity leg are the $LE_n$ and comparison of step 3. Apply [lem-pc-derived-adjoint-functors] to the adjunction of step 2 and these everywhere-defined derived functors. This gives the required unbounded Hom adjunction, natural in both derived arguments. Its bijection is the canonical one of [lem-pc-pre-derived-adjoint-functors-general], characterized by $e(p_s\\circ Q(f)\\circ Q(t)^{-1})=Q(s)^{-1}\\circ Q(a_h(f))\\circ u_t$, where $a_h$ is the termwise homotopy adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] induced by step 2. Take a flat-term K-flat $P$, $t=\\mathrm{id}_P$, $s=\\mathrm{id}_{E_nP}$ and $f=\\eta_P:P\\to e_nE_nP$, $x\\mapsto x\\otimes1$. Since $a_h(\\eta_P)=\\mathrm{id}_{E_nP}$, the formula sends $p_{\\mathrm{id}}\\circ Q(\\eta_P)$ to $u_{\\mathrm{id}}$. Thus, after identifying $LE_n(QP)$ with $QE_nP$ by $u_{\\mathrm{id}}$, the derived unit $\\eta^n_{QP}$ is represented by $P\\to P\\otimes_{B_n}B_n$, $x\\mapsto x\\otimes1$; naturality of the bijection transports this along any resolution $P\\to N$. More generally, for a chain map $g:P\\to e_nK$ the transpose of $Q(g)$ is represented by the strict system map $E_nP\\to K$ which step 2 assigns to $g$. Taking for $g$ a K-flat resolution $P\\to K_n$, with $t=g$, gives the derived counit at $QK$ as the system map corresponding to $P\\to K_n$, precomposed with $u_g$. This verifies the asserted normalization.\n\nFor later use apply the ordinary module adjunction to $B_m\\to B_n$. Its right adjoint $R_{mn}=\\operatorname{Res}_{B_m\\to B_n}$ is exact: by [def-pc-sheaf-restrict-scalars] its underlying abelian sheaf is unchanged, and the sectionwise kernel and sheafified cokernel formulas of [def-weil-sheaf-of-modules-category] are unchanged. The same exact-functor theorem, [lem-pur-derived-change-of-rings](2) (whose left derived functor is again everywhere defined by [lem-pur-resolving-class-essential-constancy] applied to the K-flat class, with invertible identity leg at a K-flat $P$), and [lem-pc-derived-adjoint-functors] give $C_{mn}\\dashv R_{mn}$ on the unbounded categories. Its unit on a flat-term K-flat $P$ is the ordinary coefficient map $P\\to R_{mn}(P\\otimes_{B_m}B_n)$: the identity of $P\\otimes_{B_m}B_n$ has ordinary tensor-adjunct $x\\mapsto x\\otimes1$, and the formula of [lem-pc-pre-derived-adjoint-functors-general] with $s$, $t$ identities shows that the canonical derived Hom bijection agrees with this correspondence through the invertible comparison on $P$. Concretely, the same formula with $t=s$ gives the counit below. Concretely, if $H$ is a complex over $B_n$ and $s:P\\to R_{mn}H$ is a flat-term K-flat resolution over $B_m$, the derived counit is represented by $P\\otimes_{B_m}B_n\\to H$, $x\\otimes a\\mapsto a\\,s(x)$. Composing $P\\to R_{mn}(P\\otimes_{B_m}B_n)$ with the restriction of this map gives $s$, since $x\\mapsto x\\otimes1\\mapsto s(x)$. Inverting $s$ therefore gives the right triangle identity and fixes the coefficient-unit normalization used below.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 09T5 (lemma-derived-adjoint-functors), including its canonical adjunction via lemma-pre-derived-adjoint-functors; sites-modules.tex Tag 03D7 for the coefficient adjunction. Unit and counit representatives are checked explicitly. Representative transposes follow the explicit pre-derived adjunction formula (Tag 0FND, lemma-pre-derived-adjoint-functors) and 05S9 essential constancy from the resolving class (Tag 06XN)."
+   }
+  },
+  {
+   "text": "Write $\\tau_{mn}:e_m\\to R_{mn}e_n$ for the natural transformation induced by iterated strict transitions; it descends to the derived categories since both functors preserve quasi-isomorphisms. Define $d_N:C_{mn}N\\to e_nLE_mN$ to be the $C_{mn}\\dashv R_{mn}$-transpose of\n$$N\\xrightarrow{\\eta^m_N}e_mLE_mN\\xrightarrow{\\tau_{mn,LE_mN}}R_{mn}e_nLE_mN.$$\nDefine $\\sigma_{mn,N}:LE_nC_{mn}N\\to LE_mN$ to be the $LE_n\\dashv e_n$-transpose of $d_N$. Both adjunction bijections are natural by step 4, so this defines a natural transformation on the derived categories, rather than a choice of maps between individual evaluations.\n\nTo compute it choose a flat-term K-flat resolution $P$ over $B_m$. By [lem-weil-pbc-ringed-pullback-preserves-kflat], applied to the identity topos and $B_m\\to B_n$, $P\\otimes_{B_m}B_n$ is flat-term K-flat over $B_n$. Thus step 3 simultaneously represents the source by $E_n(P\\otimes_{B_m}B_n)$ and the target by $E_mP$. The composite whose transpose defines $d_N$ is the quotient map $P\\to R_{mn}(P\\otimes_{B_m}B_n)$, by the unit computation in step 4 and the transition of $E_mP$. Its coefficient transpose is the identity of $P\\otimes_{B_m}B_n$. By the representative-transpose formula of step 4 ([lem-pc-pre-derived-adjoint-functors-general], with identity denominators on the flat-term K-flat $P\\otimes_{B_m}B_n$), the $LE_n\\dashv e_n$ transpose is the strict system map of step 2, which therefore has component, for $q\\le n$,\n$$(P\\otimes_{B_m}B_n)\\otimes_{B_n}B_q\\longrightarrow P\\otimes_{B_m}B_q,\\qquad (x\\otimes a)\\otimes b\\longmapsto x\\otimes\\overline a b.$$\nThis is the canonical tensor associator; for $q>n$ the source is zero and its component is zero. It is a map of strict system complexes: below $n$ the square is coefficient reduction of this same formula, at the boundary the source transition comes from zero, and above it both source components are zero. Tensor associativity here is the explicit balanced map displayed above and its inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$; the sheaf tensor definition [def-pur-sheaf-tensor-product] makes these inverse formulas sheaf morphisms. Hence the computation includes differentials, maps and the asserted system transitions.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21, explicit e_n! formula; the natural truncation map and its adjunction normalization are written out here. K-flat scalar extension is Stacks Tag 0G7E (sites-cohomology.tex, lemma-pullback-K-flat)."
+   }
+  },
+  {
+   "text": "Check the index identities on the same representatives. If $m=n$, the source and target in step 5 are $E_mP$ after the unit tensor identifications and every nonzero component is the identity, so $\\sigma_{mm}=1$. For $l\\ge m\\ge n$ choose a flat-term K-flat $P$ over $B_l$. Repeated use of [lem-weil-pbc-ringed-pullback-preserves-kflat] shows that $P\\otimes_{B_l}B_m$ and its scalar extension to $B_n$ compute the successive derived coefficient changes. The balanced tensor associator identifies $C_{mn}C_{lm}N$ with $C_{ln}N$: on representatives its map is $(x\\otimes a)\\otimes b\\mapsto x\\otimes\\overline a b$, with inverse given by inserting $1$. At $q\\le n$, both the composite\n$$LE_nC_{mn}C_{lm}N\\xrightarrow{\\sigma_{mn,C_{lm}N}}LE_mC_{lm}N\\xrightarrow{\\sigma_{lm,N}}LE_lN$$\nand $\\sigma_{ln,N}$ agree after the displayed coefficient associator. Explicitly, on a local generator $((x\\otimes a)\\otimes b)\\otimes c$ of the source at level $q$, with $a\\in B_m$, $b\\in B_n$ and $c\\in B_q$, the composite sends it first to $(x\\otimes a)\\otimes\\overline b c$ and then to $x\\otimes\\overline a\\,\\overline b c$. The direct map first combines $a,b$ to $\\overline a b$ in $B_n$ and then gives $x\\otimes\\overline a\\,\\overline b c$ in $P\\otimes_{B_l}B_q$ as well. Here each bar denotes the specified ring map into the ring where that product is taken. At $q>n$ both maps have zero source. Thus they agree as actual strict system chain maps. For a fourth ring and a further coefficient $d$, every iterated associator sends $(((x\\otimes a)\\otimes b)\\otimes c)\\otimes d$ to $x\\otimes\\overline a\\,\\overline b\\,\\overline c d$; this proves associator coherence on generators, and hence on the sheafified tensors. Inserting $1$ gives the unit identities. Naturality and resolution independence from steps 3 and 5 make these identities hold on the derived functors. No flatness of any quotient $B_m\\to B_n$ was used.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, explicit extension formula: identity and transitivity of truncation inclusions, with the balanced tensor calculation written out here; Stacks Tag 0G7E ensures each successive representative computes the derived tensor."
+   }
+  },
+  {
+   "text": "Let $f:LE_mN\\to M$ have adjunct $h=e_m(f)\\eta^m_N:N\\to e_mM$. By the definitions of $\\sigma$ and $d$ in step 5, the $LE_n\\dashv e_n$-adjunct of $f\\sigma_{mn,N}$ is $e_n(f)d_N$. Transposing this under $C_{mn}\\dashv R_{mn}$ gives\n$$R_{mn}e_n(f)\\,\\tau_{mn,LE_mN}\\,\\eta^m_N\n =\\tau_{mn,M}\\,e_m(f)\\,\\eta^m_N\n =\\tau_{mn,M}h,$$\nwhere the first equality is the naturality square of $\\tau_{mn}$ for the derived morphism $f$. Conversely the coefficient-adjunct of $\\tau_{mn,M}h$ is $t^M_{mn}\\,C_{mn}(h)$, directly from naturality of that adjunction's Hom bijection, with $t^M_{mn}$ the adjunct of $\\tau_{mn,M}$ as in the statement. This proves the required precomposition formula for every derived system $M$ and every derived map $h$, including morphisms not represented by a single strict map. It also proves its naturality in both variables. All identities in this step are substitutions into the adjunctions already constructed and the naturality square just displayed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, derived evaluation adjunction: explicit formal mate calculation for the truncation map; no further result or source is invoked."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-derived-adjoint-functors",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, followed for the extension formula and adjunction; explicit K-flat construction, truncation transformations, index coherence and mate computation supplied here using the cited Stacks lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -96,10 +209,73 @@
    "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
    "date": "2026-10-16",
    "verdict": "no match: read CategoryTheory/Adjunction/Evaluation.lean:36-72; evaluationAdjunctionRight treats a fixed target category, without changing-ring tensor extensions or derived adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight; CategoryTheory.evaluationAdjunctionRight_unit_app; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionLeft_unit_app_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-16",
+   "verdict": "no match: Evaluation.lean:38-71 treats functor categories with one fixed value category, not derived systems over changing sheaf rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived left adjoint of level evaluation in a varying coefficient ring system of sheaves",
+   "results": "CategoryTheory.evaluationLeftAdjoint; CategoryTheory.evaluationIsLeftAdjoint; CategoryTheory.constantSheafAdj; CategoryTheory.evaluationAdjunctionRight; SheafOfModules.evaluation; CategoryTheory.constantSheafΓAdj; CategoryTheory.evaluationIsRightAdjoint; smoothSheafCommRing.evalHom",
+   "date": "2026-10-16",
+   "verdict": "no match: Evaluation.lean:38-71 and Sheaf.lean:85 supply ordinary fixed-category or site-object evaluation, not this unbounded varying-ring system adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation|[Ss]emilinear.*[Ss]ection",
+   "results": "Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean; Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean; Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean; Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean; Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean; Mathlib/Condensed/Discrete/LocallyConstant.lean; Mathlib/Order/ConditionallyCompleteLattice/Basic.lean; Mathlib/Analysis/InnerProductSpace/Reproducing.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Evaluation.lean:38-71 and Sheaf/Free.lean:19-24: fixed-value evaluation adjunction and a TODO; remaining hits concern unrelated semilinear sets, rigid duals or constant sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived adjunction between evaluation of inverse systems of module sheaves over varying rings and extension from one level",
+   "results": "CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; SheafOfModules.PullbackConstruction.adjunction; Condensed.freeForgetAdjunction; LightCondensed.freeForgetAdjunction; Condensed.profiniteSolidCounit; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; PresheafOfModules.sheafificationAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Sheaf/PullbackContinuous.lean:50-98: ordinary sheaf pullback and sheafification adjunctions; condensed locally constant/free adjunctions do not give derived level extension."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|Adjunction|totalLeftDerived",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: Read Presheaf/Abelian.lean:25-40 and Presheaf/ColimitFunctor.lean:365-383: componentwise abelian structures and an ordinary colimit adjunction, not derived evaluation extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left extension by zero from a single index of an inverse sequence of rings computed using K flat tensor resolutions, adjoint to evaluation",
+   "results": "Ext; comonadicExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; localCohomology.diagram; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; Module.Flat.exists_factorization_of_comp_eq_zero_of_free; Module.Flat.tfae_equational_criterion",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext and localCohomology.diagram concern different constructions; ModuleCat/ChangeOfRings.lean scalar unit/counit formulas are ordinary ring-module adjunctions, not the sheaf-system derived result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total left derived functor of extension of scalars for modules over a ring diagram, adjoint to component projection",
+   "results": "ModuleCat.instIsLeftAdjointExtendScalars; Ext; ModuleCat.instIsRightAdjointCoextendScalars; CategoryTheory.Functor.mapExtLinearMap; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; localCohomology.diagram; CategoryTheory.Tor; CategoryTheory.Tor' (8 hits)",
+   "date": "2026-10-16",
+   "verdict": "No exact match: ordinary scalar extension, Ext/Tor, and exact derived functors do not give extension from one index in a varying-ring sheaf system."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"Adjunction\"",
+   "results": "0 hits (0 hits)",
+   "date": "2026-10-16",
+   "verdict": "No declarations returned for this pattern; this search alone is not a completeness claim."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived|[Ee]valuation.*[Ee]xtend|[Ee]xtend.*[Ee]valuation",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/RingTheory/Valuation/ValuationRing.lean (5 hits)",
+   "date": "2026-10-16",
+   "verdict": "Read CategoryTheory/Functor/Derived/Adjunction.lean:14-28,95-166: a general derived-adjunction construction with additional absolute-derived hypotheses, not the system category, level extension or its strict K-flat model. The valuation-ring hit is unrelated."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-coefficient-system-derived-comparison",
   "by": "worker",
@@ -115,5 +291,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the underived adjunction by its balanced tensor formulas, constructed the total left derived functor with the existing resolving-class theorem and flat-term K-flat resolutions, identified the unbounded adjunction and its canonical unit, and defined sigma by adjunction before computing its strict components and proving identity, composition and the Hom mate formula. Reused existing general system and homological-algebra nodes; no new nodes or attachments. Second reading expanded the coefficient-unit normalization and the three-index composition calculation on local tensor generators; statement and dependencies unchanged.",
+  "blueprint": "Nearest ancestor def-weil-exceptional-inverse-image, current main-20261015 adic-stage paragraph: compatible finite-level functors before derived inverse limits; via lem-pur-coefficient-system-derived-comparison. The seven steps construct the level-evaluation extension and its coherent transition maps needed by that comparison. No purity route or unit-level step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor/restriction adjunction on the identity ringed topos supplies the ordinary scalar Hom bijections; no finite-level geometric or purity argument is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions on a ringed site supply the resolving class in step 3; this unit provides no replacement resolution theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derived theorem identifies exact evaluation and scalar restriction with their everywhere-defined right derived functors in step 4."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic unbounded derived-adjunction theorem supplies the evaluation and coefficient adjunctions in step 4; it implements the evaluation construction below the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed pullback preservation of flat-term K-flat complexes makes successive scalar extensions compute derived coefficient change in steps 5 and 6 without assuming flat quotient maps."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic explicit formula of the canonical derived Hom bijection on fraction representatives fixes the unit/counit and transposes on strict K-flat models in steps 4-5; no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise adjunction on homotopy categories supplies a_h in the pre-derived formula for the tensor/evaluation adjunctions in step 4."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NR-1950a31d0",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-1950a31d0 (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 7 steps; no new nodes), every cited statement, Zheng Construction 4.1 on printed p. 21 (e_{n!} with (e_{n!}F)_q = Λ_q⊗F for q≤n and 0 above, and the derived pair (Le_{n!}, e_n^{-1}); the indices shift from n≥0 to n≥1), and how the parent lem-pur-coefficient-system-derived-comparison uses the item in steps 2-4. The statement is unchanged and matches the source. The coefficient category is the same as 𝒮(B) of lem-pur-system-level-left-extension with B_q=(A_q)_T. Small cases checked: Z_p with λ=p; Z/2 over Z/4, where every Tor_i is nonzero, so the unbounded K-flat model is needed; m=n gives σ_mm=1; at the boundary q=n,n+1 and for q>n the source is zero. Step 2 (underived adjunction, components forced by level n), step 3 (P_n hypotheses through derived-change-of-rings (1) and step 1), step 6 (generator computation x⊗ā b̄ c) and step 7 (formal mate computation) are correct. One fault, C3/C4: step 4 took the strict normalization of the derived unit and counit, and of the C_mn⊣R_mn unit and counit, from the construction rather than from the statement of lem-pc-derived-adjoint-functors, which says only 'canonical bijection'. Step 5's representative transpose relies on the same normalization, and the σ component clause of the statement depends on it. Fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-coefficient-evaluation-derived-left-adjoint.json, following the reviewed precedent lem-weil-derived-scalar-extension-restriction-adjunction: step 4 now cites lem-pur-quasi-isos-saturated-triangulated, lem-pur-resolving-class-essential-constancy, lem-pur-left-derived-defined-pointwise-kan-bridge, lem-pc-pre-derived-adjoint-functors-general and lem-weil-pbc-termwise-adjunction-homotopy; step 5 cites the pre-derived formula; proof_deps was recomputed. Tool uses: I accept the five the delivery declared plus two I added, pre-derived-general and termwise-adjunction-homotopy (both already accepted for the precedent). The graph stays acyclic, no SGA is cited, and no duplicate or restated new node was created. lem-pur-system-level-left-extension overlaps the existence half of the item, but the item's strict model, σ and mate formula are additional content the parent needs.; 1 file(s) fixed by the reviewer"
  }
 }
