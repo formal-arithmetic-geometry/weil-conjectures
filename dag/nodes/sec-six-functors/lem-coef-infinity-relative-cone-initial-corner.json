@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "lem-coef-infinity-relative-initial-boundary"
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-isofibration-exponentiation"
  ],
  "proof": [
   {
@@ -270,5 +271,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeConeInitialCorner",
+  "declaration": "SSet.Enhanced.relative_cone_initial_corner",
+  "file": "lean/Sheaf/CategoryTheory/RelativeConeInitialCorner.lean",
+  "statement": "theorem relative_cone_initial_corner : ∀ {C D K : SSet.{u}} [Quasicategory C] [Quasicategory D] (p : C ⟶ D), IsIsofibration p → IsIsofibration (exponentialCorner (rightJoinConeInclusion K) p) ∧ IsIsofibration (exponentialCorner (leftJoinConeInclusion K) p) ∧ (∀ (u : rightJoinCone K ⟶ C), IsRelativeColimitDiagram p u ↔ IsRelativeInitial (exponentialCorner (rightJoinConeInclusion K) p) (diagramVertex u)) ∧ (∀ (u : leftJoinCone K ⟶ C), IsRelativeLimitDiagram p u ↔ IsRelativeFinal (exponentialCorner (leftJoinConeInclusion K) p) (diagramVertex u))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e8e8d750",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsIsofibration p (source-fixed equivalence lifting, contains both quasicategory facts), exponentialCorner along rightJoinConeInclusion/leftJoinConeInclusion with pullback codomain Fun(K,C)x_{Fun(K,D)}Fun(L,D), both corner isofibrations, IsRelativeColimitDiagram<->IsRelativeInitial (outgoing spaces) and IsRelativeLimitDiagram<->IsRelativeFinal (incoming spaces), no existence assumptions. Prop-valued Quasicategory binders duplicate facts inside IsIsofibration and add no hypothesis; single universe u is the dependency convention. Edge cases (K/C/D empty, empty mapping spaces) covered. Theorem only, sorry proof, source and blueprint docstrings with the six proof steps, proof-only imports non-public. lean.statement verbatim; stmt_deps addition of isofibration-exponentiation justified and acyclic; dependency nodes unchanged. No duplicate found. nt_compile.py --json at Sheaf/CategoryTheory/RelativeConeInitialCorner.lean: 29 side deps then item 1.2 s, rc 0, no errors or warnings. No fixes needed."
  }
 }

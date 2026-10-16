@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-affine-locally-constructible-proetale-modules",
+ "kind": "definition",
+ "title": "Affine-local constructibility of pro-etale modules over discrete Noetherian rings",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $R$ a discrete commutative Noetherian ring [def-weil-pbc-noetherian-ring]. On the small pro-etale site of $X$ [def-weil-pbc-proetale-site], use the constant ring sheaf $\\underline R_X$ [def-weil-pbc-constant-sheaf] and its module sheaves [def-weil-sheaf-of-modules-category]. A module sheaf $F$ is affine-locally constructible if for every affine open $U\\subseteq X$ there is a finite locally closed scheme stratification $S$ of $U$ [def-constructible-stratification], with each part constructible in $U$ [def-weil-constructible-subset], such that for each stratum immersion $i_a:Z_a\\to U\\to X$ its module inverse image $i_a^*F$ [def-weil-proetale-inverse-image] is locally isomorphic, on the localized ringed sites, to constant sheaves of finitely presented $R$-modules [def-sc-finitely-presented-module]. Explicitly, for every object $V$ of $(Z_a)_{\\mathrm{proet}}$ there is a covering sieve $T$ on $V$ such that for every $W\\to V$ in $T$ there is a finitely presented $R$-module $M$ and a module-sheaf isomorphism $(i_a^*F)|_W\\simeq\\underline M|_W$. The constant module on the localized ringed site is the existing simultaneous constant-ring/module sheafification construction [def-weil-proetale-locally-constant-sheaf]. No finiteness of the underlying sets and no invertibility assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-proetale-inverse-image",
+  "def-sc-finitely-presented-module",
+  "def-weil-proetale-locally-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AJ, definition-constructible; Tag 00IK, algebra.tex, finite type equals finite presentation over a Noetherian ring."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine locally constructible pro etale sheaves of modules over a noetherian ring",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Modules; SheafOfModules.mk; ModuleCat.tildeInModuleCat; AlgebraicGeometry.Scheme.PresheafOfModules; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; RingHom.Etale.propertyIsLocal; SheafOfModules.LocalGeneratorsData.ctorIdx; SheafOfModules.LocalGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "No match: general ringed-site module sheaves and finite-generation data do not give affine-local stratified pro-etale constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale module sheaf is constructible if every affine open admits a finite partition into constructible locally closed strata with locally constant finitely presented module values",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+   "date": "2026-10-16",
+   "verdict": "No match: local presentation of a ringed-site sheaf is distinct from stratified locally constant coefficient-module models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Serre\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "No constructible module-sheaf predicate or theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "AffineLocallyConstructible|[Cc]onstructible.*[Pp]ro[Ee]tale|[Pp]ro[Ee]tale.*[Cc]onstructible",
+   "results": "[grep] OK 0 hit(s) in Mathlib. rg in WeilConjectures and lean/Sheaf finds finite-coefficient global pro-etale predicates IsConstructibleProEtaleModuleSheaf, IsConstructibleProEtaleCoefficientModuleSheaf, IsConstructibleProEtaleFixedModuleSheaf; the arbitrary-ring affine-local predicate exists only for etale modules (ConstructibleNoetherianEtaleModules).",
+   "date": "2026-10-16",
+   "verdict": "No match: existing intrinsic pro-etale predicates require finite coefficients and a global finite partition. Reuse the existing strata, pullback, and localized constants, and add only this missing affine-local predicate."
+  },
+  {
+   "tool": "blueprint_refs.py search; rg dag/nodes",
+   "query": "constructible proetale; affine-local constructible Noetherian pro-etale",
+   "results": "0 blueprint nodes match 'constructible proetale'. DAG search finds def-pe-etale-constructible-module (etale), def-weil-proetale-constructible-sheaf (finite ring/global), and def-sfb-constructible-module (condensed coefficients/global). None gives the arbitrary discrete Noetherian affine-local pro-etale notion.",
+   "date": "2026-10-16",
+   "verdict": "No existing definition node of this notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-noetherian-constructible-serre",
+  "date": "2026-10-16",
+  "group": "Q129"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The discrete Noetherian weak-Serre input to integral models, realized by lem-sfb-discrete-noetherian-constructible-serre; its statement needs the affine-local intrinsic pro-etale constructibility predicate.",
+   "via": [
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineLocallyConstructibleProEtaleModules",
+  "declaration": "AlgebraicGeometry.Scheme.IsAffineLocallyConstructibleProEtaleModuleSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocallyConstructibleProEtaleModules.lean",
+  "statement": "def IsAffineLocallyConstructibleProEtaleModuleSheaf (X : Scheme.{u}) (R : Type u) [CommRing R] [IsNoetherianRing R] (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15b193fd5",
+  "group": "Q129",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15b193fd5",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item, 14 stmt_deps, new def node, both modules, report, upstream decls (LocallyClosedStratification/Stratification, proEtaleConstantRing, proEtaleConstantModulePullback, proEtaleConstantModuleSheafOver, landed Etale.constructibleNoetherianModules) and Stacks 03RZ(3), 09B5, 03RW(3), 09AJ, 00IK. All hypotheses/clauses match: arbitrary Scheme, CommRing+IsNoetherianRing without finiteness, constant-ring module sheaves on Mathlib small etale and ProEt sites, affine-local finite constructible locally closed stratification with immersions, inverse image along S.immersion a ≫ U.ι, local constant f.p. models (etale reuse of landed Module.Finite predicate equivalent over Noetherian R), zero/kernel+cokernel/ShortExact extension clauses. Universes: etale R in u+1, pro-etale R in u per recorded interfaces, documented, no site universe equality. Edge cases empty X/U, n=0, zero ring, Z, non-qc X ok. Item node changed only in lean and stmt_deps (+new def node, +landed def-pe-etale-constructible-module); lean.statement verbatim; new node fields per §5, not a duplicate, real Prop. Only sorry bodies; source/blueprint docstrings with six proof steps; report has Worker report and Second reading by Q129. nt_compile.py --json on both files: rc 0, no errors, no warnings beyond sorry. No findings."
+ }
+}

@@ -31,7 +31,9 @@
   "def-weil-constructible-subset",
   "def-weil-pbc-inverse-image",
   "def-weil-proetale-inverse-image",
-  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf",
+  "def-pe-etale-constructible-module",
+  "def-sfb-affine-locally-constructible-proetale-modules"
  ],
  "proof": [
   {
@@ -254,5 +256,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre",
+  "declaration": "AlgebraicGeometry.etale_discreteNoetherian_constructible_serre",
+  "declarations": [
+   "AlgebraicGeometry.etale_discreteNoetherian_constructible_serre",
+   "AlgebraicGeometry.proEtale_discreteNoetherian_constructible_serre"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteNoetherianConstructibleSerre.lean",
+  "statement": "theorem etale_discreteNoetherian_constructible_serre (X : Scheme.{u}) (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] : Etale.constructibleNoetherianModules X R (0 : ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))) ∧ (∀ (F G : ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))) (f : F ⟶ G), Etale.constructibleNoetherianModules X R F → Etale.constructibleNoetherianModules X R G → Etale.constructibleNoetherianModules X R (kernel f) ∧ Etale.constructibleNoetherianModules X R (cokernel f)) ∧ (∀ S : ShortComplex (ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))), S.ShortExact → Etale.constructibleNoetherianModules X R S.X₁ → Etale.constructibleNoetherianModules X R S.X₃ → Etale.constructibleNoetherianModules X R S.X₂)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The two declarations give the displayed closure properties on the two sites. Reuses the landed affine-local etale predicate (finite type equals finite presentation over Noetherian R); the new definition node supplies the arbitrary-Noetherian intrinsic pro-etale predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15b193fd5",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item, 14 stmt_deps, new def node, both modules, report, upstream decls (LocallyClosedStratification/Stratification, proEtaleConstantRing, proEtaleConstantModulePullback, proEtaleConstantModuleSheafOver, landed Etale.constructibleNoetherianModules) and Stacks 03RZ(3), 09B5, 03RW(3), 09AJ, 00IK. All hypotheses/clauses match: arbitrary Scheme, CommRing+IsNoetherianRing without finiteness, constant-ring module sheaves on Mathlib small etale and ProEt sites, affine-local finite constructible locally closed stratification with immersions, inverse image along S.immersion a ≫ U.ι, local constant f.p. models (etale reuse of landed Module.Finite predicate equivalent over Noetherian R), zero/kernel+cokernel/ShortExact extension clauses. Universes: etale R in u+1, pro-etale R in u per recorded interfaces, documented, no site universe equality. Edge cases empty X/U, n=0, zero ring, Z, non-qc X ok. Item node changed only in lean and stmt_deps (+new def node, +landed def-pe-etale-constructible-module); lean.statement verbatim; new node fields per §5, not a duplicate, real Prop. Only sorry bodies; source/blueprint docstrings with six proof steps; report has Worker report and Second reading by Q129. nt_compile.py --json on both files: rc 0, no errors, no warnings beyond sorry. No findings."
  }
 }
