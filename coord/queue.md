@@ -1,6 +1,6 @@
 # Work queue
 
-35 items; claim with `tools/claim.py next <group> [--stage N]`.
+33 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (35)
+## Stage 3: modules to prove (33)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -19,7 +19,6 @@
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
-| `Sheaf.Paper.ContinuousConstructibleIntegralGluing` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralStratum` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 5 | 1 | proof |
@@ -35,15 +34,14 @@
 | `Sheaf.Paper.IntegralMatrixAnalyticCover` | 7 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueComparisons` | 7 | 1 | proof |
 | `Sheaf.Paper.LatticeSheafLocallyConstant` | 7 | 2 | proof |
+| `WeilConjectures.ConstructibleSheaf.Noetherian` | 7 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
-| `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentationFinite` | 10 | 1 | proof |
 | `Sheaf.Paper.KFlatRingedToposPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeCounitFactor` | 41 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
