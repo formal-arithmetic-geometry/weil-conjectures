@@ -22,9 +22,75 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the nerve and realization conventions of [def-cbc-enhanced-diagrams-cones]. Fix a finite simplicial subset $A\\subseteq N(I)$, meaning finitely many nondegenerate simplices. Its set $V$ of vertices and set $E$ of nonidentity edges are finite. Choose a common target $k_0$ and arrows $v\\to k_0$ for every $v\\in V$: start with any object of $I$ and adjoin the finitely many vertices one at a time using the common-successor hypothesis, postcomposing the previously chosen arrows. Now enumerate $E$. Maintain a target $k$ and arrows $u_v:v\\to k$ satisfying $u_w\\circ e=u_v$ for the edges $e:v\\to w$ already processed. At the next edge the arrows $u_w\\circ e,u_v:v\\to k$ are parallel. Choose $h:k\\to k^{\\prime}$ coequalizing them and replace every $u_v$ by $h\\circ u_v$. This imposes the new equality and preserves all preceding equalities by associativity. Finite induction gives arrows $u_v:v\\to k$ compatible with every edge of $A$; identity edges satisfy the equality automatically. If $A$ is empty, simply choose an object $k$ using nonemptiness.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AZ, definition-codirected, opposite convention; agent finite-induction expansion of the three hypotheses, not an appeal to a theorem about nerves"
+   }
+  },
+  {
+   "text": "Construct an actual contraction of the inclusion $|A|\\to|N(I)|$. For a simplex $\\sigma=(i_0\\xrightarrow{f_1}\\cdots\\xrightarrow{f_n}i_n)$ of $A$ and barycentric coordinates $a=(a_0,\\ldots,a_n)$, set\n$$H([\\sigma,a],t)=[(i_0\\xrightarrow{f_1}\\cdots\\xrightarrow{f_n}i_n\\xrightarrow{u_{i_n}}k),((1-t)a_0,\\ldots,(1-t)a_n,t)].$$\nDeleting an initial or internal vertex commutes with this formula by composition in $I$. Deleting the final vertex of $\\sigma$ commutes because $u_{i_n}\\circ f_n=u_{i_{n-1}}$, proved in step 1. Repeated vertices insert identities, so degeneracy identifications commute too. Thus the formula respects every generator of the realization equivalence relation in [def-cbc-enhanced-diagrams-cones]. On each simplex times the interval the formula is continuous in the barycentric coordinates. The realization projection $\\coprod_{n,\\sigma\\in A_n}|\\Delta^n|\\to|A|$ is a quotient map by definition. Apply [lem-cbc-quotient-cylinder-continuity] with this projection and $T=[0,1]$ (the usual closed real interval is locally compact; its neighborhoods contain closed subinterval neighborhoods). Continuity of the pullback is precisely continuity on each summand. Therefore $H$ is continuous jointly in both variables, with $H(-,0)$ the inclusion and $H(-,1)$ constant at $k$. The construction contracts the inclusion, and makes no claim that $A$ itself is contractible.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Proof opening choice independence; agent explicit barycentric contraction of a finite nerve piece, with quotient-cylinder continuity"
+   }
+  },
+  {
+   "text": "The realization is nonempty because any object of $I$ is a vertex. Every point $[\\sigma,a]$ has a path to a vertex of $\\sigma$, by linear interpolation of its barycentric coordinates to that vertex. For two vertices $i,j$, choose arrows $i\\to k$ and $j\\to k$ as in the hypothesis; their realized edges give paths from both vertices to $k$. Hence $|N(I)|$ is path connected, so its map to a point induces a bijection on components, in the sense of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Proof opening choice independence; agent nonemptiness and component calculation"
+   }
+  },
+  {
+   "text": "Fix any basepoint $x\\in|N(I)|$, an integer $n\\geq1$, and a based continuous map $a:(S^n,s_0)\\to(|N(I)|,x)$. By [lem-cbc-realization-compact-finite-support], $a$ factors continuously through $|A|$ for a finite simplicial subset $A$. Composing with step 2 gives a continuous homotopy $G:S^n\\times[0,1]\\to|N(I)|$ from $a$ to the constant map at $k$. To obtain a based nullhomotopy without assuming the apex equals $x$, extend $a$ to the closed unit ball by $F(rs)=G(s,1-r)$ for $0<r\\leq1$ and $F(0)=k$. This is continuous away from zero. For an open neighborhood $U$ of $k$, the open set $G^{-1}(U)$ contains $S^n\\times\\{1\\}$; using compactness of $S^n$ (included in the cited finite-support statement), finitely many product neighborhoods give $\\varepsilon>0$ with $G(S^n\\times(1-\\varepsilon,1])\\subseteq U$. Hence $F$ is continuous at zero as well. The formula $B(s,t)=F((1-t)s+t s_0)$ is now a continuous nullhomotopy of $a$ fixing $s_0$, since the ball is convex and $F(s_0)=a(s_0)=x$. Thus every based homotopy group vanishes. Together with step 3, the definition of weak homotopy equivalence in [def-cbc-enhanced-diagrams-cones] proves $N(I)\\to\\Delta^0$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-cbc-realization-compact-finite-support",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Proof opening choice independence; agent compact finite support and explicit based sphere contraction through a ball"
+   }
+  },
+  {
+   "text": "If $I$ satisfies the dual hypotheses, its opposite $I^{\\mathrm{op}}$ satisfies exactly the three filtered hypotheses already treated. There is a homeomorphism $R:|N(I)|\\to|N(I^{\\mathrm{op}})|$ sending a chain $i_0\\to\\cdots\\to i_n$ with coordinates $(a_0,\\ldots,a_n)$ to the reversed opposite chain $i_n\\to\\cdots\\to i_0$ with coordinates $(a_n,\\ldots,a_0)$. Write $r_n$ for reversal of an $n$-chain and $\\rho_n(a_0,\\ldots,a_n)=(a_n,\\ldots,a_0)$. For $n\\geq1$ and $0\\leq j\\leq n$, deletion or composition at position $j$ gives $r_{n-1}d_j=d_{n-j}r_n$. For $n\\geq0$ and $0\\leq j\\leq n$, duplicating vertex $j$ gives $r_{n+1}s_j=s_{n-j}r_n$. On coordinates, $\\rho_n\\delta_j=\\delta_{n-j}\\rho_{n-1}$ for insertion of a zero, and $\\rho_n\\sigma_j=\\sigma_{n-j}\\rho_{n+1}$ for addition of adjacent coordinates. These four identities respect the face and degeneracy relations defining the quotient in [def-cbc-enhanced-diagrams-cones], so $R$ is well defined. Each $\\rho_n$ is continuous, hence the quotient topology makes $R$ continuous; reversing twice is the identity, giving a homeomorphism. For any two points $x,y$, compose a path from $R(x)$ to $R(y)$ with $R^{-1}$. For a based sphere map $a$ at $x$, apply the filtered case to $R\\circ a$ based at $R(x)$ and compose its based nullhomotopy with $R^{-1}$; this fixes $x$ throughout. Thus the realization of $N(I)$ is path connected and every based homotopy group vanishes. This proves the cofiltered assertion. No simplicial isomorphism between the two nerves is asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AZ, definition-codirected, for the dual index hypotheses; agent explicit coordinate-reversal homeomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-quotient-cylinder-continuity",
+  "lem-cbc-realization-compact-finite-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Proof opening compactification choice, expanded to finite compatible cones and barycentric contractions; no archived Kerodon is available locally. Online Kerodon 02PH and 02PV confirm the theorem, but their Kan-replacement proof is not used as an uncited black box."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,15 +147,87 @@
    "results": "{\"t\": \"2026-10-16T08:21:10Z\", \"tool\": \"grep\", \"query\": \"(classifying|realization|nerve).*(directed|filtered|contractib)|(localiz|groupoid).*(quasicategor|KanComplex)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\", \"Mathlib/CategoryTheory/Filtered/Small.lean\"], \"digest\": \"726206dcdfb5a9d7\"}",
    "date": "2026-10-16",
    "verdict": "no match: nerve quasicategory and strict-Segal declarations assert horn filling or categorical composition, not weak contractibility. The four grep hits use realization for a small filtered closure, not geometric realization of a nerve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of a small nonempty filtered category is weakly contractible",
+   "results": "{\"t\": \"2026-10-16T10:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of a small nonempty filtered category is weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"527e08744c824572\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\", \"IsFiltered\"",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"IsFiltered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "grep",
+   "query": "nerve.*filtered|filtered.*nerve|nerve.*contract|contract.*nerve",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"grep\", \"query\": \"nerve.*filtered|filtered.*nerve|nerve.*contract|contract.*nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The classifying space of a directed category has trivial homotopy groups",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"leansearch\", \"query\": \"The classifying space of a directed category has trivial homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"SimplyConnectedSpace.casesOn\", \"FundamentalGroupoid.ctorIdx\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"SSet.isTerminalHoFunctorDeltaZero\", \"HomotopyCategory\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIso\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget\"], \"digest\": \"55023bc9bf5d9155\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of a small nonempty filtered category is weakly contractible",
+   "results": "{\"t\": \"2026-10-16T10:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of a small nonempty filtered category is weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"527e08744c824572\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\", \"IsFiltered\"",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\", \\\"IsFiltered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "grep",
+   "query": "nerve.*filtered|filtered.*nerve|nerve.*contract|contract.*nerve",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"grep\", \"query\": \"nerve.*filtered|filtered.*nerve|nerve.*contract|contract.*nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The classifying space of a directed category has trivial homotopy groups",
+   "results": "{\"t\": \"2026-10-16T10:58:17Z\", \"tool\": \"leansearch\", \"query\": \"The classifying space of a directed category has trivial homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace\", \"SimplyConnectedSpace.casesOn\", \"FundamentalGroupoid.ctorIdx\", \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"SSet.isTerminalHoFunctorDeltaZero\", \"HomotopyCategory\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIso\", \"classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget\"], \"digest\": \"55023bc9bf5d9155\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the nerve/quasicategory and strict-Segal results do not assert weak contractibility. Read SingularSet.lean and TopAdj.lean for the realization API; no project declaration matched either the id or filtered-nerve terminology."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-cofiltered-coherent-equivalence-diagrams",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-filtered-nerve-weak-contractibility",
+  "worker": "stage1",
+  "summary": "No matching project declaration was found. Kept the statement unchanged. Wrote the finite compatibility induction, explicit barycentric homotopy, component calculation, compact-support reduction, based nullhomotopy through a ball, and coordinate reversal for the opposite. Added only a general compact-support lemma (unsplit, archive wanted) and an exact Mathlib continuity tool. No SGA sources or Lean writing/building.",
+  "blueprint": "Realizes the proof opening compactification choice of thm-cbc-finite-level-proetale through the existing compact-support-extension/cofiltered-equivalence ancestry; neither chapter nor unit route is changed. The ordinary filtered nerve is the choice-index homotopy-type input, not the base-change theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-902f0d861",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-902f0d861 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics; verified all five steps, both new nodes, cited sources, edge cases, dependencies, duplicate candidates, and route/target typing. No repairs needed. Concrete checks recorded in review.md; no comparison theorem inferred from a seeded route."
+ }
 }
