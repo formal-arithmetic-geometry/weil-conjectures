@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-nagata-refinement-common-dense",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The closure of the diagonal is a common dense refinement",
@@ -14,52 +14,208 @@
  },
  "stmt_deps": [
   "det-nagata-definition-refinement",
-  "def-nagata-dense-compactification"
+  "def-nagata-dense-compactification",
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
  ],
  "proof": [
   {
-   "text": "*Step 1: $\\delta$ is a quasi-compact immersion.* Let\n$P^\\circ=\\mathrm{pr}_1^{-1}(j_1(X))=X\\times_S\\overline X_2$, an open of $P$.\nThe map $\\delta$ lands in $P^\\circ$, and as a map to\n$X\\times_S\\overline X_2$ it is the graph $\\Gamma=(\\mathrm{id}_X,j_2)$ of\n$j_2:X\\to\\overline X_2$. Since $\\overline X_2\\to S$ is proper, hence\nseparated, the graph $\\Gamma$ is a closed immersion (it is the base change\nof the diagonal of $\\overline X_2/S$ along $j_2\\times\\mathrm{id}$). The\nopen immersion $P^\\circ\\hookrightarrow P$ is the base change of $j_1$, which\nis quasi-compact ([lemma-nagata-open-immersion-qc-over-separated-target]:\n$p_1\\circ j_1=f$ is quasi-compact and $p_1$ is separated). Hence\n$\\delta=(P^\\circ\\hookrightarrow P)\\circ\\Gamma$ is a quasi-compact immersion.",
+   "text": "Put $P=\\overline X_1\\times_S\\overline X_2$. Its first projection is the base change of the proper map $p_2$ along $p_1$, so it is proper by [lem-weil-pbc-proper-base-change]. Its composite with $p_1$ is proper by [lem-weil-pbc-proper-composition]. Thus $P\\to S$ is proper, in particular separated by [def-weil-proper-morphism].",
    "uses": [
-    "lemma-nagata-open-immersion-qc-over-separated-target"
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper), 01W3 (lemma-composition-proper), Definition Tag 01W1 (definition-proper)"
+   }
   },
   {
-   "text": "*Step 2: the closure.* $P$ is proper over $S$ (base change of $p_2$ along\n$p_1$, followed by $p_1$), hence quasi-separated. By\n[lemma-nagata-immersion-open-in-scheme-image], $\\delta$ factors through its\nscheme-theoretic image $Z$ as a quasi-compact open immersion $j:X\\to Z$\nwhich is scheme-theoretically dense. $Z$ is closed in $P$, so $Z\\to S$ is\nproper. Thus $c$ is a dense compactification, and $q_k\\circ j=\n\\mathrm{pr}_k\\circ\\delta=j_k$. Each $q_k$ is an $S$-morphism.",
+   "text": "For $k\\in\\{1,2\\}$ put $\\ell=3-k$ and $P_k^\\circ=\\mathrm{pr}_k^{-1}(j_k(X))$. The base change of the open immersion $j_k$ is open by [lem-weil-pbc-open-immersion-base-change], and the fibre-product universal property [def-pc-fibre-product] identifies $P_k^\\circ$ with $X\\times_S\\overline X_\\ell$. In these coordinates $\\delta$ is $\\Gamma_k=(\\mathrm{id}_X,j_\\ell)$. The square with top map $\\Gamma_k:X\\to X\\times_S\\overline X_\\ell$, left map $j_\\ell$, bottom map $\\Delta_{p_\\ell}:\\overline X_\\ell\\to\\overline X_\\ell\\times_S\\overline X_\\ell$, and right map $(j_\\ell\\mathrm{pr}_X,\\mathrm{pr}_\\ell)$ is cartesian: for any test scheme $T$, a map into its pullback is a triple $a:T\\to X$, $b:T\\to\\overline X_\\ell$, $c:T\\to\\overline X_\\ell$ satisfying $j_\\ell a=c=b$, so is uniquely the triple determined by $a$. Since $p_\\ell$ is proper, its diagonal is a closed immersion by [def-weil-proper-morphism]; [lem-weil-pbc-closed-immersion-base-change] therefore makes each $\\Gamma_k$ a closed immersion. In particular $\\delta$ factors as $\\Gamma_1$ followed by the open immersion $P_1^\\circ\\to P$, so it is an immersion by [def-weil-closed-immersion].",
    "uses": [
-    "lemma-nagata-immersion-open-in-scheme-image"
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Schemes Tag 01JY (lemma-base-change-immersion); separatedness is Schemes Definition Tag 01KK, and Morphisms Tag 01QR (lemma-base-change-closed-immersion)"
+   }
   },
   {
-   "text": "*Step 3: inverse image of $X$.* The scheme-theoretic image of a quasi-compact\nmorphism commutes with restriction to opens of the target\n([lemma-nagata-scheme-image-restrict-open]). Hence\n$Z\\cap P^\\circ$ is the scheme-theoretic image of\n$\\Gamma:X\\to P^\\circ$. Since $\\Gamma$ is a closed immersion, its\nscheme-theoretic image is $\\Gamma(X)$ itself. Therefore\n\n$$\nq_1^{-1}(j_1(X))=Z\\cap\\mathrm{pr}_1^{-1}(j_1(X))=Z\\cap P^\\circ=\\Gamma(X)=j(X).\n$$\n\nThe same argument with the roles of the factors exchanged gives\n$q_2^{-1}(j_2(X))=j(X)$. So $q_1,q_2$ are refinements $c\\to c_1$,\n$c\\to c_2$.",
+   "text": "The input open immersion $j_1$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target] in its current form: the composite $p_1j_1=f$ is quasi-compact because $f$ is of finite type by [def-weil-finite-type-morphism], and $p_1$ is quasi-separated. Indeed, $p_1$ is proper by [def-nagata-compactification], hence separated by [def-weil-proper-morphism]; its diagonal is a closed immersion, whose inverse image of any affine $\\operatorname{Spec}A$ is $\\operatorname{Spec}(A/I)$ by [def-weil-closed-immersion], hence is quasi-compact. Thus [def-weil-quasi-separated-morphism] applies. Its base change $u:P_1^\\circ\\to P$ is quasi-compact by [lem-pc-quasi-compact-base-change]. For each affine open $V\\subseteq P$, the open $u^{-1}(V)$ is quasi-compact by [def-weil-finite-type-morphism]. Since $\\Gamma_1$ is a closed immersion, $\\delta^{-1}(V)=\\Gamma_1^{-1}(u^{-1}(V))$ is homeomorphic to a closed subspace of $u^{-1}(V)$ by [def-weil-closed-immersion]. A closed subspace of a quasi-compact space is quasi-compact: adjoin its open complement to any open cover, take a finite subcover, and discard the complement. Thus $\\delta$ is quasi-compact, and Step 2 made it an immersion.",
    "uses": [
-    "lemma-nagata-scheme-image-restrict-open"
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-weil-finite-type-morphism",
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism",
+    "lem-pc-quasi-compact-base-change"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Current blueprint update of lemma-nagata-open-immersion-qc-over-separated-target (quasi-compact composite and quasi-separated target); Stacks Tags 01K5 and 03GI for base-change and permanence, plus the elementary closed-subspace argument"
+   }
   },
   {
-   "text": "*Step 4: finite families.* For a family $c_1,\\ldots,c_n$ with $n\\geq1$,\nargue by induction: for $n=1$ apply the construction to $c_1,c_1$ (or take\nthe dense refinement of $c_1$ by schematic closure); given a common dense\nrefinement $c'$ of $c_1,\\ldots,c_{n-1}$, Steps 1–3 applied to $c',c_n$ give a\ndense $c$ with refinements $c\\to c'$ and $c\\to c_n$, and composing $c\\to c'$\nwith $c'\\to c_k$ gives refinements $c\\to c_k$, since refinements compose\n([det-nagata-definition-refinement]).",
+   "text": "Apply [lemma-nagata-immersion-open-in-scheme-image] to the quasi-compact immersion $\\delta$. It gives the factorization $X\\xrightarrow{j}Z\\xrightarrow{i}P$, with $j$ a quasi-compact, scheme-theoretically dense open immersion. The map $i$ is closed by the definition of the scheme-theoretic image [def-nagata-scheme-theoretic-image]. Since $P\\to S$ is proper by Step 1, [lem-weil-pbc-closed-immersion-proper](c) makes $Z\\to S$ proper. The equations $q_kj=\\mathrm{pr}_kij=\\mathrm{pr}_k\\delta=j_k$ and $p_kq_kj=f$ follow from the projections of the fibre product. Thus these maps give a compactification by [def-nagata-compactification] and a dense one by [def-nagata-dense-compactification].",
+   "uses": [
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-nagata-scheme-theoretic-image",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-pc-fibre-product",
+    "def-nagata-compactification",
+    "def-nagata-dense-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG (lemma-quasi-compact-immersion), Tag 01R7 (definition-scheme-theoretic-image), and Tag 01W5 (lemma-closed-immersion-proper)"
+   }
+  },
+  {
+   "text": "For $k=1,2$ set $Z_k^\\circ=Z\\times_P P_k^\\circ=q_k^{-1}(j_k(X))$. The closed graph $\\Gamma_k:X\\to P_k^\\circ$ from Step 2 factors through $Z_k^\\circ$, because $ij=\\delta$. This factor identifies $X$ with a closed subscheme of $Z_k^\\circ$: locally, if the two closed subschemes of an affine open of $P_k^\\circ$ have ideals $I$ for $Z_k^\\circ$ and $J$ for $\\Gamma_k$, the factorization says $I\\subseteq J$, and the map between them is $A/I\\twoheadrightarrow A/J$. This is the affine characterization in [def-weil-closed-immersion]. On the other hand $j(X)\\subseteq Z_k^\\circ$ is open and scheme-theoretically dense: restricting the injection $\\mathcal O_Z\\to j_*\\mathcal O_X$ of [def-nagata-scheme-theoretically-dense-open] to $Z_k^\\circ$ gives $\\mathcal O_{Z_k^\\circ}\\hookrightarrow (j|_{Z_k^\\circ})_*\\mathcal O_X$, since $j^{-1}(Z_k^\\circ)=X$. The ideal sheaf of the closed copy of $X$ is the kernel of this same map, hence zero. Thus this closed immersion is an isomorphism and $Z_k^\\circ=j(X)$ as open subschemes, with their scheme structures. In particular $q_k^{-1}(j_k(X))=j(X)$ for both indices.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-nagata-scheme-theoretically-dense-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Injectivity criterion in [def-nagata-scheme-theoretically-dense-open]; elementary restriction-and-kernel argument for the closed graphs"
+   }
+  },
+  {
+   "text": "Each $q_k$ is an $S$-morphism, since $p_kq_k$ is the restriction to $Z$ of the structure morphism of $P$. Step 4 gives $q_kj=j_k$ and Step 5 gives the inverse-image identity required in [det-nagata-definition-refinement]. For each input $k$, the open map $j_k$ is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target] in its current form: its composite with the proper map $p_k$ is the finite-type, hence quasi-compact, map $f$ by [def-weil-finite-type-morphism], and $p_k$ is quasi-separated because [def-nagata-compactification] makes it proper, [def-weil-proper-morphism] makes it separated, and its diagonal has affine inverse images $\\operatorname{Spec}(A/I)$ by [def-weil-closed-immersion], which are quasi-compact, giving [def-weil-quasi-separated-morphism]. The new open map is quasi-compact by Step 4. Therefore $q_1,q_2$ are refinements in exactly the stated sense, even if either input compactification has extra components outside $X$.",
+   "uses": [
+    "det-nagata-definition-refinement",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-weil-finite-type-morphism",
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md",
+    "place": "Current blueprint update of lemma-nagata-open-immersion-qc-over-separated-target; Stacks Tags 03GI and 01K5 for quasi-compact permanence, with the proper/separated-to-quasi-separated check written explicitly"
+   }
+  },
+  {
+   "text": "For the finite-family assertion induct on a positive number $n$ of compactifications. For $n=1$, apply Steps 1–6 to $(c_1,c_1)$; this yields a dense compactification refining $c_1$, regardless of whether $c_1$ was dense. If $n>1$ and a dense compactification $d$ refines $c_1,\\ldots,c_{n-1}$, apply the pairwise construction already proved in Steps 1–6 to $(d,c_n)$. It yields a dense $e$ with refinements $a:e\\to d$ and $b:e\\to c_n$. For a previously constructed refinement $r_k:d\\to c_k$, the composite $r_ka$ is over $S$, restricts to $j_k$ on $X$, and satisfies $(r_ka)^{-1}(j_k(X))=a^{-1}(j_d(X))=j_e(X)$. These are precisely the composition equations in [det-nagata-definition-refinement]. Thus $e$ refines every member. Enumerating any finite nonempty index set gives the claimed assertion; no empty-family existence assertion is used.",
    "uses": [
     "det-nagata-definition-refinement"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md",
+    "place": "Current blueprint, finite-family consequence, realized by positive finite induction"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
   "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-weil-finite-type-morphism",
+  "def-nagata-compactification",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-quasi-compact-base-change",
   "lemma-nagata-immersion-open-in-scheme-image",
-  "lemma-nagata-scheme-image-restrict-open",
+  "def-nagata-scheme-theoretic-image",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-nagata-dense-compactification",
+  "def-nagata-scheme-theoretically-dense-open",
   "det-nagata-definition-refinement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md",
-  "place": "## Proof"
+  "place": "Pairwise scheme-image construction and finite-family consequence, with Stacks Tags 01W3, 01W4, 01W5, 01JY, 01QR, 01RG, 01RE, 01K5 and 03GI supplying the arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic image of the diagonal graph of two compactifications is a common schematically dense refinement, and finite nonempty families have common dense refinements",
+   "results": "Eight hits about affine-transition limits, dominance and quasi-separatedness; none states compactification refinements or the finite dense conclusion.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|common_refinement|common.*dense",
+   "results": "Zero hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification",
+   "results": "Loogle reports unknown identifier 'AlgebraicGeometry.Compactification'; zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any finite nonempty family of compactifications of a scheme morphism has a common scheme theoretically dense refinement",
+   "results": "Eight hits: QuasiCompactCover.of_finite, affine-transition limits, IsDominant.mk, OpenCover.compactSpace, Scheme.instIsDominantToImageOfQuasiCompact, QuasiCompact.compactSpace_of_compactSpace, OpenCover.finiteSubcover, isCompactOpen_iff_eq_finset_affine_union. These do not state the item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage|isOpenImmersionToImage|IsSchemeTheoreticallyDominant",
+   "results": "25 hits in Mathlib/AlgebraicGeometry, including IdealSheaf/Subscheme.lean:713,727-729, Hom.toImage, quasi-compactness and dominance; Morphisms/Immersion.lean:246,263 gives the open factor. No compactification/refinement statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.toImage",
+   "results": "12 hits including Scheme.Hom.toImage, Scheme.instQuasiCompactToImage, IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, IsClosedImmersion.instIsIsoSchemeToImage, and Scheme.Hom.toImage_app_injective. Read IdealSheaf/Subscheme.lean:709-772, Morphisms/Immersion.lean:246-274 and Morphisms/SchemeTheoreticallyDominant.lean:38ff. They give ingredients already represented in the DAG, not the finite-family common-refinement theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of the graph in a product of proper schemes gives a common compactification with cartesian open immersion squares",
+   "results": "Eight hits include IsProper.instFstScheme, IsProper.instSndScheme and IsImmersion.isPullback_toImage_liftCoborder; these cover ingredients, not the complete statement.",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification|IsCofiltered.*compact|exists_common_refinement",
+   "date": "2026-10-17",
+   "results": "25 returned hits concern topological one-point/Stone-Cech compactifications; none is an algebraic scheme common-refinement statement. The complete actual output is retained in searches.jsonl.",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite collection of proper scheme compactifications is dominated by a schematically dominant open compactification with cartesian boundary squares",
+   "date": "2026-10-17",
+   "results": "Independent semantic search output retained verbatim in searches.jsonl; read for a finite-family common-refinement declaration. No exact whole-item match.",
+   "verdict": "no match for the whole item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -77,5 +233,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
+ "unit": "sk-prop-nagata-sketch-comp-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-nagata-refinement-common-dense",
+  "worker": "stage1",
+  "summary": "Q53 checked the main-20261015 statement and the pairwise Lean declarations. They cover the pair but no finite dense-family declaration was found, so no whole-item attachment is asserted. Expanded all graph and properness inputs using existing DAG nodes, proved the boundary identity by restricting the dense-open sheaf injection and killing the closed graph ideal, and wrote the singleton base and positive induction. No new nodes.",
+  "blueprint": "Realizes the pairwise closure-of-diagonal construction of det-nagata-refinement-common-dense and its final finite-family sentence; unit sk-prop-nagata-sketch-comp-category step (i), with the stronger boundary equality required by the current refinement definition."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-257f568ce",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-257f568ce (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited node's statement and blueprint_update, the unit, the chapter and the main-20261015 statement and proof files. The statement matches the blueprint word for word. No new nodes; proof_deps equals the union of the step uses. Step 1: pr_1 is the base change of p_2 along p_1 (01W4), and its composite with p_1 is proper (01W3). Step 2: the square from Γ_k to the diagonal of p_ℓ is cartesian, which I checked through the universal property, so Γ_k is a closed immersion (01QR) and δ is an immersion. Step 3: j_1 is quasi-compact under both the printed and the updated form of lemma-nagata-open-immersion-qc-over-separated-target, and the closed-in-quasi-compact argument is elementary. Step 4: uses only the statement of lemma-nagata-immersion-open-in-scheme-image (Stacks 01RG, morphisms.tex l.1139). The scheme-image node's wrong 'largest' phrase is irrelevant, since only the closed factor is used. Properness comes from closed-immersion-proper(c), and density is ker=0, which is injectivity for quasi-compact j. Step 5: on each affine chart I⊆J, so X→Z_k° is a closed immersion equal to j restricted; restricting the dense injection O_Z→j_*O_X kills its ideal, nilpotents included. This replaces the blueprint's lemma-nagata-scheme-image-restrict-open and realizes the unit sketch sentence; it is not a route departure. Steps 6–7: all three refinement conditions plus the quasi-compactness requirement are met; the positive induction has base case (c_1,c_1), and I checked the composition inverse-image equation. Edge cases checked: X empty, a non-dense singleton, a disjoint proper component, nilpotents. Route: the lemma-nagata nodes are in sk-lem-nagata-sketch-closure, which the unit cites; no tool_uses needed. Not a duplicate: prop-nagata-compactification-category(i) uses the weaker refinement notion. Not a target node, so the base-change and coefficient-category check does not apply. Cosmetic only: the report wrongly says the blueprint node has no proof file, and the source fields of Steps 2 and 3 have document/tag mismatches. No fixes."
+ }
 }
