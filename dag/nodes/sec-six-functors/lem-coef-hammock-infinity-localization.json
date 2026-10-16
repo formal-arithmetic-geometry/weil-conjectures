@@ -34,7 +34,8 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
  ],
  "proof": [
   {
@@ -262,5 +263,51 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-4b3e0e9b0 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; checked all nine steps, four new nodes, edge cases, duplicates, ancestry, target morphisms and coefficient categories. No repairs needed. Accepted tool use: lem-cbc-simplicial-groupoid-localization. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b42f9ca3",
+  "group": "N5",
+  "result": "pass",
+  "note": "Reviewed the immutable packet, node, dependencies, source references, complete Lean module and report; checked hypotheses, conclusions, edge cases, universes, docstrings, declarations, no hollow definitions/pro-etale substitute, and reproduced scompile successfully for sandbox and library."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockInfinityLocalization",
+  "declaration": "CategoryTheory.hammockLocalization_universal",
+  "statement": "theorem hammockLocalization_universal {C : Type u} [Category.{v} C] (W : MorphismProperty C) [W.IsMultiplicative] : ∃ H : HammockLocalization W, (Nonempty (FibrantHammockReplacement H)) ∧ ∃ j : C ⥤ HammockObjects C H.enrichment, IsHammockActualFunctor H j ∧ ∀ R : FibrantHammockReplacement H, ∃ q : nerve C ⟶ SimplicialNerve (HammockObjects C R.enrichment), IsHammockNerveMap R j q ∧ SSet.Quasicategory (SimplicialNerve (HammockObjects C R.enrichment)) ∧ IsHammockInfinityLocalization.{u, v, w} W q ∧ ∃ M : HammockMappingComparison H R q, HammockNaturality H R q M",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/HammockInfinityLocalization.lean",
+  "declarations": [
+   "CategoryTheory.HammockChain",
+   "CategoryTheory.HammockStep",
+   "CategoryTheory.hammockChainQuiver",
+   "CategoryTheory.hammockEndpoint",
+   "CategoryTheory.HammockReduction",
+   "CategoryTheory.HammockReduces",
+   "CategoryTheory.ReducedHammock",
+   "CategoryTheory.hammockRows",
+   "CategoryTheory.hammockActualPath",
+   "CategoryTheory.HammockLocalization",
+   "CategoryTheory.HammockObjects",
+   "CategoryTheory.hammockObjectsCategory",
+   "CategoryTheory.hammockObjectsSimplicial",
+   "CategoryTheory.FibrantHammockReplacement",
+   "CategoryTheory.IsHammockActualFunctor",
+   "CategoryTheory.hammockCoherentNerveMap",
+   "CategoryTheory.hammockInvertingDiagrams",
+   "CategoryTheory.IsHammockInfinityLocalization",
+   "CategoryTheory.IsHammockNerveMap",
+   "CategoryTheory.hammockMapColumns",
+   "CategoryTheory.hammockMapPath",
+   "CategoryTheory.HammockMappingComparison",
+   "CategoryTheory.IsHammockMap",
+   "CategoryTheory.HammockNaturality",
+   "CategoryTheory.hammockLocalization_universal"
+  ],
+  "note": "Second reading retained the source statement and added its already-landed enhanced-category dependency. The selected mapping comparison retains every enriched vertex; naturality now relates that same comparison, the columnwise enriched map, and the localized functor by a coherent mapping-space square. Only the final theorem is postponed."
  }
 }
