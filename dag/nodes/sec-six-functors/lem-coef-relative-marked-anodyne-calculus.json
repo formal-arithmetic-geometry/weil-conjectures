@@ -32,9 +32,231 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the elementary horn reductions used below. For any inner fibration $p:E\\to B$, a pullback $E\\times_B B'\\to B'$ is inner: compose an inner-horn square with $B'\\to B$, take its filler in $E$, and pair that filler with the already specified simplex in $B'$. If the image of an edge in $E$ is $p$-cartesian, the same pairing fills every final horn for that edge in the pullback. Thus cartesian edges are preserved by pullback; reflection is not asserted here. The same construction pulls a cartesian lift with prescribed target back along a specified edge of $B'$, proving that a pullback of a cartesian fibration is cartesian. A fiber of an inner fibration is a quasicategory, since an inner horn in it lies over the constant simplex of $B$. If $B$ is a quasicategory, fill the image of an inner horn in $B$ and then lift it, so $E$ is a quasicategory. In particular $E_\\beta=E\\times_B\\Delta^m$ is a quasicategory for every simplex $\\beta:\\Delta^m\\to B$: an inner horn in $\\Delta^m=N([m])$ determines a nondecreasing chain of vertices and is filled by that chain. All these statements use the arbitrary-simplicial-set horn definitions, not the quasicategory-only wording of the fibration definition.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 2.4.1.1, 2.4.2.1; Remark 2.4.1.4; Proposition 2.4.1.3(2); Proposition 2.4.2.3(2)."
+   }
+  },
+  {
+   "text": "We will use a cartesian triangle rule only when both total space and base are quasicategories. For a triangle with consecutive edges $g:x\\to x'$, $e':x'\\to y$ and long edge $e:x\\to y$, if $e'$ is cartesian, then $g$ is cartesian if and only if $e$ is cartesian. To obtain this from [lem-coef-infinity-cocartesian-composition-initiality], take opposites: the simplex operator $\\theta:[a]\\to[b]$ becomes $i\\mapsto b-\\theta(a-i)$, exchanging the $i$th and $(n-i)$th horns. Thus inner fibrations and quasicategories remain so, and final-horn cartesian edges become initial-horn cocartesian edges. The opposite triangle has consecutive edges $(e')^{\\mathrm{op}},g^{\\mathrm{op}}$, so the cited composition equivalence gives exactly the rule. Also, an equivalence edge of the total quasicategory is cartesian for any inner fibration to a quasicategory: every required final-horn square fills by [lem-cbc-inner-fibration-equivalence-outer-horn-lift]. In particular degenerate edges are cartesian in this quasicategory setting.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7; equivalence-edge lifting in Proposition 2.4.1.5 and Corollary 2.4.1.6, with the former direction supplied by the existing relative outer-horn lemma."
+   }
+  },
+  {
+   "text": "Here is the comparison needed for an arbitrary base. Let $p:E\\to B$ be inner, let $e:x\\to y$ lie over $\\alpha:s\\to t$, and suppose there is a $p$-cartesian edge $e':x'\\to y$ over the same $\\alpha$. Call $e$ locally cartesian if $(e,\\operatorname{id}_{\\Delta^1})$ is cartesian in $E_\\alpha\\to\\Delta^1$. Use the final-horn condition of $e'$ in dimension two, with long edge $e$ and base simplex $s_0\\alpha$ (vertices $s,s,t$), to obtain a triangle with consecutive edges $g:x\\to x'$, $e'$, and long edge $e$, with $g$ in the fiber $E_s$. If $e$ is locally cartesian, this triangle pulled to $E_\\alpha\\to\\Delta^1$ has both $e,e'$ cartesian. Its total space and base are quasicategories by Step 1. The triangle rule of Step 2 makes $g$ cartesian there. Pull it further to the vertex $0$ of $\\Delta^1$: $g$ is cartesian for $E_s\\to\\Delta^0$. This is exactly the absolute final-outer-horn property, so [lem-cbc-equivalence-outer-horn-filling] makes $g$ an equivalence in $E_s$. This proves the fiber-equivalence claim with its precise fiber, rather than treating equivalence in $E_\\alpha$ as equivalence in $E_s$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 3.1.1.6; Remark 2.4.2.13; comparison triangle and equivalence in the source fiber."
+   }
+  },
+  {
+   "text": "Continue with the comparison triangle in Step 3 and its fiber equivalence $g$. Consider any final-horn square for $e$, with base $\\beta:\\Delta^n\\to B$, $n\\geq2$. Its final base edge is $\\alpha$. In $E_\\beta\\to\\Delta^n$, lift the comparison triangle using the vertex map $[2]\\to[n]$ with values $(n-1,n-1,n)$. Its first edge is the image of $g$ under the inclusion of the fiber at $n-1$. That inclusion preserves the two inverse triangles, so this first edge is an equivalence in the quasicategory $E_\\beta$. By the relative equivalence outer-horn lemma it is cartesian for $E_\\beta\\to\\Delta^n$. The last edge, coming from $e'$, is cartesian by Step 1. The triangle rule therefore makes the long edge, coming from $e$, cartesian in $E_\\beta$. It fills the specified horn, and projection gives a filler in $E$. Since the horn was arbitrary, $e$ is $p$-cartesian. We have proved: local cartesianness plus a global cartesian lift over the same edge with the same target implies global cartesianness. No supply of other cartesian lifts, and no quasicategory hypothesis on $B$, was used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.2.13, with the reduction to each base simplex and the final-horn argument written out."
+   }
+  },
+  {
+   "text": "Apply Steps 1 and 4 to a cartesian fibration $q:Z\\to S$ and $a:T\\to S$. The pullback $q_T:T\\times_S Z\\to T$ is cartesian by Step 1, and it preserves cartesian edges. Conversely, if an edge $h$ in the pullback is cartesian, pull it to its own base edge $\\delta:\\Delta^1\\to T$. The degreewise identity $(T\\times_S Z)\\times_T\\Delta^1=Z\\times_S\\Delta^1$, using $a\\delta$ on the right, says that its image $e$ in $Z$ is locally $q$-cartesian. Choose a global $q$-cartesian lift of $q(e)$ with target the target of $e$; this uses the defining lift-existence hypothesis for $q$. Step 4 makes $e$ globally cartesian. Thus the cartesian edges of the pullback are exactly those mapping to cartesian edges of $Z$. This proves the reflection direction that a direct pullback-of-fillers argument alone cannot give.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.2.3(2); Remark 2.4.1.12; Remark 2.4.2.13. Elementary application of Steps 1 and 4."
+   }
+  },
+  {
+   "text": "The natural marking for a cartesian fibration over an arbitrary $S$ contains all degenerate edges. Indeed, a degenerate edge at $z\\in Z_s$ lies over the constant edge at $s$. Over that edge the pullback is $Z_s\\times\\Delta^1$. Its edge $(\\operatorname{id}_z,[0,1])$ is cartesian for projection to $\\Delta^1$: project a final-horn square to the quasicategory $Z_s$, fill its horn ending in the equivalence $\\operatorname{id}_z$ by [lem-cbc-equivalence-outer-horn-filling], and pair with the prescribed base simplex. Thus the edge is locally cartesian. A global cartesian lift over the same constant edge with target $z$ exists, so Step 4 proves that the original degenerate edge is cartesian. Hence $Z^\\natural$ is a marked set. A marked object over $S$ is the same as a marked map to $S^\\sharp$, since the latter puts no restriction on images of marked edges.",
+   "uses": [
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.8; arbitrary-base degeneracy check using Remark 2.4.2.13 and the absolute outer-horn criterion."
+   }
+  },
+  {
+   "text": "Suppose $p:V\\to S^\\sharp$ lifts every marked-anodyne map. Family (i) of [lem-coef-marked-anodyne-lifting-calculus] makes the underlying map inner. Family (ii) for $n\\geq2$ makes each marked edge cartesian, and its $n=1$ map $\\{1\\}^\\sharp\\to(\\Delta^1)^\\sharp$ supplies a marked cartesian lift of every base edge with prescribed target. Thus the underlying map is a cartesian fibration. To prove that every cartesian edge $e:x\\to y$ is marked, choose such a marked cartesian lift $e':x'\\to y$ with the same base edge. Step 3 applies (global implies local by Step 1) and gives a triangle $(g,e',e)$ with $g$ an equivalence in $V_s$. By [lem-cbc-enhanced-functor-cone-calculus] the core $K=(V_s)^\\simeq$ is Kan. Apply the lifting property to $K^\\flat\\to K^\\sharp$ with base map constant at $s$ and upper map the core inclusion into $V$. It forces every edge of $K$, in particular $g$, to be marked. Family (iii), applied to this triangle with its two consecutive edges $g,e'$ already marked, forces $e$ to be marked. Therefore $V$ has exactly its cartesian edges marked.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, only-if proof; Remark 3.1.1.10. The comparison uses Steps 1 and 3, not an unquoted marking criterion."
+   }
+  },
+  {
+   "text": "Conversely let $q:Z\\to S$ be cartesian with its natural marking. Family (i) lifts by innerness. Family (ii) lifts by the final-horn definition for $n\\geq2$ and by the specified-target cartesian lifts for $n=1$. For family (iii), its base map is a simplex $\\Delta^2\\to S$. Pull back to this simplex. The total space is a quasicategory by Step 1; Step 5 identifies the pulled-back marking with its cartesian edges. The triangle rule of Step 2 makes the long edge cartesian when the two consecutive edges are cartesian. Step 5 then identifies its image as a marked edge in $Z$, providing the required marking extension. For family (iv), pull back along its arbitrary base map $K\\to S$ to $Z_K\\to K$. Since $K$ is Kan, it is a quasicategory and every edge is an equivalence by [lem-cbc-equivalence-outer-horn-filling]. The total space $Z_K$ is a quasicategory by Step 1. The given map $K\\to Z$ becomes a section $K\\to Z_K$; it preserves inverse-triangle witnesses, so every image edge is an equivalence in $Z_K$. The relative outer-horn lemma makes these edges cartesian for $Z_K\\to K$, and Step 5 reflects them to cartesian edges of $Z$. This fills the marking extension $K^\\flat\\to K^\\sharp$. The base map $K\\to S$ has not been assumed constant.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-equivalence-outer-horn-filling",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.1.6, converse proof, including the reductions to Delta^2 and to the arbitrary Kan base K."
+   }
+  },
+  {
+   "text": "For a fixed right map, the class of left maps it lifts is closed under the three operations defining marked anodyne maps. A square out of a pushout is solved on the attached map and glued by the pushout property. For a continuous transfinite composite choose successive extensions, and at a limit ordinal take their compatible union by the colimit property. A square on a retract is included in the larger square, filled there and projected by the retraction. Applying this to Step 8 extends its lifting property from the four families to all marked-anodyne maps. Together with Step 7 this proves the relative lifting equivalence.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.1.1 and Proposition 3.1.1.6; explicit weak-saturation argument."
+   }
+  },
+  {
+   "text": "Fix $U\\to S$ and $q:Z\\to S$ cartesian. Form the marked relative internal Hom\n$$H=(Z^\\natural)^U\\times_{(S^\\sharp)^U}(\\Delta^0)^\\sharp,$$\nwhere the point selects the given map $U\\to S$. Pullbacks of marked sets have degreewise underlying pullbacks, with an edge marked when each projection is marked; this formula satisfies the universal property by testing edges. By the internal-Hom adjunction in [lem-coef-marked-point-cartesian-model], the underlying simplicial set of $H$ is $\\operatorname{Map}^\\flat_S(U,Z^\\natural)$, and its all-marked-edge simplicial subset is $\\operatorname{Map}^\\sharp_S(U,Z^\\natural)$. For any marked-anodyne $i:A\\to B$, a square $A\\to H$ over the terminal point adjoints to a lifting problem for $q$ against\n$$i\\square(\\varnothing\\to U)=i\\times U,$$\nwhose base map is $U\\times B\\to U\\to S$. This left map is marked anodyne by the pushout-product assertion of [lem-coef-marked-anodyne-lifting-calculus], and $q$ lifts it by Step 9. Thus $H\\to*$ lifts all marked-anodyne maps. The point recognition statement of that same cited node gives $H=C^\\natural$ for a quasicategory $C$. Consequently the relative flat mapping object is a quasicategory, and the relative sharp mapping object is exactly its core and is Kan. This uses the point theorem on the marked set $H$ that has just been shown fibrant, not on $Z$ over a nonterminal base.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1; Proposition 3.1.2.3; marked internal-Hom adjunction and the point recognition theorem."
+   }
+  },
+  {
+   "text": "For later restriction tests, the fully marked positive-index horns $h_{k,n}:(\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp$, $0<k\\leq n$, are marked anodyne. If $n\\geq3$, the horn contains every edge; attach its missing simplex using family (i) when $k<n$ or (ii) when $k=n$, retaining all source markings by pushout. For $n=2,k=1$, first fill the minimal inner horn retaining its two marked consecutive edges, and then use family (iii) to mark the long edge. For $n=2,k=2$, first use family (ii), retaining the marked long and final edges; then [lem-coef-marked-triangle-cancellation] marks the remaining first edge. For $n=1,k=1$, the map is family (ii) itself. These constructions give exactly the fully marked codomain, with no claim that every fully marked horn is anodyne.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-triangle-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.1.3.6, positive sharp-horn attachments; Corollary 3.1.1.7 for the two-dimensional final horn."
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow V$ be a marked map over $S$ injective on underlying simplices, and let $r$ be restriction on the sharp mapping objects. A square against a positive-index horn $\\Lambda_k^n\\hookrightarrow\\Delta^n$ for $r$ adjoints to a square for $q:Z^\\natural\\to S^\\sharp$ with left map $j\\square h_{k,n}$; its bottom map is induced by $V\\to S$ and ignores the simplex coordinate. Step 11 and the pushout-product theorem make this left map marked anodyne, and Step 9 fills it. Thus $r$ is a right fibration. Its target is Kan by Step 10. Applying [lem-cbc-right-fibration-space-fiber] gives all missing index-zero horn lifts, hence $r$ is a Kan fibration. This checks the Kan-base hypothesis of that lemma explicitly.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.1.3.6 and the right-fibration-over-a-Kan-base theorem (dual of Lemma 2.1.3.3)."
+   }
+  },
+  {
+   "text": "If $j$ is marked anodyne, a boundary lifting problem for $r$ adjoints instead to a square for $q$ with left map\n$$j\\square\\bigl((\\partial\\Delta^n)^\\sharp\\hookrightarrow(\\Delta^n)^\\sharp\\bigr).$$\nThe boundary map is degreewise injective, so the pushout-product theorem makes this map marked anodyne. Step 9 fills the square. This holds also for $n=0$, whose boundary is empty, giving extension of a vertex of the mapping object. By the boundary-lifting characterization in [lem-coef-kan-quillen-right-proper], $r$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.4; trivial-Kan-fibration boundary criterion."
+   }
+  },
+  {
+   "text": "For completeness, derive the cartesian-equivalence fact needed for the Joyal assertion from existing triangle lemmas. Let $p:E\\to B$ be an inner fibration between quasicategories and $e:x\\to y$ cartesian with $p(e)$ an equivalence. Choose an inverse $v:p(y)\\to p(x)$ with both inverse triangles. The final-horn lifting property of $e$ over the triangle with consecutive edges $(v,p(e))$ and long edge $\\operatorname{id}_{p(y)}$ gives $r:y\\to x$ over $v$ and a triangle $er=\\operatorname{id}_y$. The identity of $y$ is cartesian by Step 2. Applying the triangle rule to $(r,e,\\operatorname{id}_y)$ makes $r$ cartesian. Use its final-horn property over the other inverse triangle, with consecutive edges $(p(e),v)$ and long edge $\\operatorname{id}_{p(x)}$, to get $s:x\\to y$ and $rs=\\operatorname{id}_x$. In the category $hE$ of [lem-coef-homotopy-category-triangle-calculus], these triangles give $[e][r]=1$ and $[r][s]=1$. Hence $[e]=[e][r][s]=[s]$ and $[r][e]=1$. The same cited lemma realizes the latter equality by a two-simplex with edges $(e,r,\\operatorname{id}_x)$. Together with the first triangle this makes $e$ an equivalence. The converse, that an equivalence is cartesian, was supplied by the relative outer-horn lemma in Step 2. This is a proof of the needed fact inside the item, not a new node restating its Joyal clause.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5; proof here by specified inverse triangles, relative final-horn lifts and cartesian cancellation."
+   }
+  },
+  {
+   "text": "Now suppose $S$ is a quasicategory. Step 1 makes $Z$ a quasicategory. To check the source-equivalence-lifting criterion of [lem-coef-joyal-quasicategory-characterizations], fix $z\\in Z$ and an equivalence $\\alpha:q(z)\\to t$. Choose an inverse $\\beta:t\\to q(z)$ and a specified triangle $\\beta\\alpha=\\operatorname{id}_{q(z)}$. Take a cartesian lift $b:w\\to z$ over $\\beta$ with target $z$. Step 14 makes $b$ an equivalence. Its final-horn property, applied over that specified triangle with long edge $\\operatorname{id}_z$ and final edge $b$, gives $a:z\\to w$ with $q(a)=\\alpha$ and triangle $ba=\\operatorname{id}_z$. Since $[b]$ is invertible in $hZ$, this forces $[a]=[b]^{-1}$; the triangle-realization assertion of [lem-coef-homotopy-category-triangle-calculus] gives the two inverse witnesses for $a$. Thus $a$ is an equivalence with the prescribed source and exact base edge. The inner-fibration hypothesis already holds, so characterization (1) of the cited Joyal theorem makes $q$ a Joyal fibration. The argument explicitly converts target-prescribed cartesian lifts into source-prescribed equivalence lifts.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5; Corollary 2.4.6.5; the existing Joyal quasicategory fibration characterization (1)."
+   }
+  },
+  {
+   "text": "Every step is performed in the input universe. Fibers and pullbacks are degreewise subsets of products of small sets; marked internal Homs have degrees subsets of sets of maps between fixed small simplicial sets. The cores used in Step 7 are simplicial subsets of small fibers. All horn and boundary domains are finite; the Kan-complex generators can be replaced by the small set of countable Kan complexes supplied by [lem-coef-marked-anodyne-lifting-calculus]. The transfinite extension argument of Step 9 is along the small chains in the definition of weak saturation, not a construction indexed by all objects over $S$. The chosen inverse edges, triangles and fillers stay in the sets already under discussion. Thus none of the arguments uses a relative marked model structure or a universe beyond the stated conventions, and the assertions hold in each such universe.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.1.3; universe bookkeeping for the relative marked internal Hom and horn arguments above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-triangle-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 3.1.1.6 and Remark 3.1.1.10; Proposition 3.1.2.3; Remark 3.1.3.1 and Lemma 3.1.3.6; Remark 2.4.2.13; Proposition 2.4.1.5 and Corollary 2.4.6.5. Read online; not archived in literature/. The relative internal-Hom and local-to-global horn arguments are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +299,87 @@
    "results": "{\"t\": \"2026-10-16T20:04:29Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial sets: lifting property over a base and functor simplicial mapping space into a Cartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.uliftFunctor\", \"CategoryTheory.SimplicialCategory.sHom\"], \"digest\": \"4064b0fa6a060684\"}",
    "date": "2026-10-16",
    "verdict": "No match: CategoryWithFibrations.lean defines the all-horn Kan lifting class, and SimplicialCategory/Basic.lean:57 defines sHom only; neither is a relative marked lifting theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*equivalence|equivalence.*cartesian|cartesianEdge",
+   "results": "{\"t\": \"2026-10-16T22:25:13Z\", \"tool\": \"grep\", \"query\": \"cartesian.*equivalence|equivalence.*cartesian|cartesianEdge\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An edge of an inner fibration of infinity categories is invertible precisely when Cartesian over an invertible base edge",
+   "results": "{\"t\": \"2026-10-16T22:25:14Z\", \"tool\": \"leansearch\", \"query\": \"An edge of an inner fibration of infinity categories is invertible precisely when Cartesian over an invertible base edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.mk\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsCartesian\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso_inv\", \"CategoryTheory.Functor.IsCartesian.of_comp_iso\", \"CategoryTheory.Functor.IsStronglyCartesian.of_isIso\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\"], \"digest\": \"1816056944e8dbcb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cartesian\"",
+   "results": "{\"t\": \"2026-10-16T22:25:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration of quasicategories, an edge is an equivalence if and only if it is Cartesian and its image is an equivalence",
+   "results": "{\"t\": \"2026-10-16T22:25:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration of quasicategories, an edge is an equivalence if and only if it is Cartesian and its image is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory\"], \"digest\": \"ac64ed838bd79f7f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.?anodyne|marked.?simplicial|CartesianFibration",
+   "results": "{\"t\": \"2026-10-16T22:25:55Z\", \"tool\": \"grep\", \"query\": \"marked.?anodyne|marked.?simplicial|CartesianFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial internal Hom over a base has equivalences marked when the target is a naturally marked Cartesian fibration",
+   "results": "{\"t\": \"2026-10-16T22:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial internal Hom over a base has equivalences marked when the target is a naturally marked Cartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.instMonoidalClosed\", \"SSet.unitHomEquiv\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.ι₁\", \"SSet.stdSimplex.objEquiv\"], \"digest\": \"bde9fe978f0b0737\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration between infinity categories a Cartesian morphism over an isomorphism is invertible",
+   "results": "{\"t\": \"2026-10-16T22:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration between infinity categories a Cartesian morphism over an isomorphism is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCartesian.of_isIso\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso\", \"CategoryTheory.Functor.IsStronglyCartesian.domainIsoOfBaseIso_inv\", \"CategoryTheory.Functor.IsStronglyCartesian.domainUniqueUpToIso_inv_isHomLift\", \"CategoryTheory.Functor.IsCartesian.of_comp_iso\"], \"digest\": \"9b024f8b5867a6d4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_base_isIso|of_isIso",
+   "results": "{\"t\": \"2026-10-16T22:28:17Z\", \"tool\": \"grep\", \"query\": \"isIso_of_base_isIso|of_isIso\", \"sub\": \"CategoryTheory/FiberedCategory/Cartesian.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"349\", \"353\"], \"digest\": \"7963b9a88e2c4970\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-93 (unmarked all-horn Kan fibrations), Quasicategory/Basic.lean:37-47 (inner-horn definition), FiberedCategory/Cartesian.lean:339-365 (ordinary-category strongly Cartesian arrows), and SimplicialCategory/Basic.lean:46-57 (sHom definition). None states relative marked lifting, relative mapping cores, or the quasicategory Cartesian-edge criterion. The grep with a single file argument printed line numbers as its file fields; its two actual declarations were read at Cartesian.lean:349 and :353 and are ordinary-category statements."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|markedAnodyne|CartesianFibration|isCartesianEdge",
+   "results": "{\"t\": \"2026-10-16T22:41:57Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|markedAnodyne|CartesianFibration|isCartesianEdge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match in independent second reading. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-93: I and J are unmarked boundaries and all horns, and fibrations_eq is the all-horn right-lifting class, not marked Cartesian fibrancy or a relative section-mapping theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:29-33: CategoryTheory.Nerve.quasicategory only gives the elementary nerve fact used in Step 1. The remaining hits concern coskeletons, cofibrations or abstract fibrant objects; the whole-Mathlib marked-object grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-16T22:41:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"2ff5b9da174778cd\"}",
+   "date": "2026-10-16",
+   "verdict": "No match in independent second reading. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-93: I and J are unmarked boundaries and all horns, and fibrations_eq is the all-horn right-lifting class, not marked Cartesian fibrancy or a relative section-mapping theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:29-33: CategoryTheory.Nerve.quasicategory only gives the elementary nerve fact used in Step 1. The remaining hits concern coskeletons, cofibrations or abstract fibrant objects; the whole-Mathlib marked-object grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial mapping spaces of sections of a Cartesian fibration are Kan complexes and restriction along inclusions is a fibration",
+   "results": "{\"t\": \"2026-10-16T22:42:01Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial mapping spaces of sections of a Cartesian fibration are Kan complexes and restriction along inclusions is a fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.cosk\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Nerve.quasicategory\", \"HomotopicalAlgebra.FibrantObject.ι\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"dc07ab1ecf1bd390\"}",
+   "date": "2026-10-16",
+   "verdict": "No match in independent second reading. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-93: I and J are unmarked boundaries and all horns, and fibrations_eq is the all-horn right-lifting class, not marked Cartesian fibrancy or a relative section-mapping theorem. Read Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean:29-33: CategoryTheory.Nerve.quasicategory only gives the elementary nerve fact used in Step 1. The remaining hits concern coskeletons, cofibrations or abstract fibrant objects; the whole-Mathlib marked-object grep returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-relative-cartesian-model",
@@ -100,5 +399,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-marked-anodyne-calculus",
+  "worker": "stage1",
+  "summary": "Replaced the incomplete earlier attempt by sixteen explicit steps. Proved local-to-global cartesian-edge comparison and pullback reflection using fiber equivalences and simplexwise horn tests; checked all four marked generator families over arbitrary bases; obtained the relative flat quasicategory and sharp core by fibrancy of the relative marked internal Hom over a point; treated positive sharp horns and boundary restriction problems separately; derived cartesian equivalence detection by inverse triangles and verified exact source-equivalence lifts for the Joyal assertion. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint in the main-20261015 blueprint, the displayed finite-coefficient derived mapping-complex adjunction before the derived inverse limit. These are the relative marked simplicial foundations carried by lem-coef-marked-relative-cartesian-model below lem-coef-algebroid-external-product, at the inherited blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic equivalence-edge outer-horn criterion, used on quasicategory fibers; no statement in this unit supplies that absolute criterion."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic relative equivalence outer-horn lifting for inner fibrations between quasicategories; used after explicit pullback to a simplex or Kan base."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic theorem that the core of a quasicategory is Kan, used for the source-fiber marking generator."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic right-fibration-over-a-Kan-base horn theorem, used to fill index-zero horns in the restriction mapping space."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-space-fiber"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N7-e40a14b3b",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-e40a14b3b (reviewer sub-agent of L); spot-checked: I read the item, its 16 steps and the full statements of all 14 cited nodes. Sources: HTT 3.1.1.6, 2.4.1.5, 2.4.6.5, 3.1.3.1/3.1.3.6 and 2.4.2.3. HTT is not archived, so this is checked from my own reading of these results; the WANTED line is recorded and proof_origin is 'agent'. The statement keeps HTT's hypotheses, with an arbitrary base S and quasicategories required only for the Joyal clause. Every step uses only what its cited node states. Checks: (1) the triangle rule (step 2) follows from the cocartesian composition clause by passing to the opposite; (2) in the local-to-global argument (steps 3-4), the comparison triangle lies over s0α = β(n-1,n-1,n), and the fibre equivalence g is obtained by pulling back to the vertex 0 of Δ^1; (3) family (iv) is treated over an arbitrary base K→S; (4) all fully marked positive horns were checked, including (2,1), (2,2) and (1,1), with cases n≥3 handled by pushouts; (5) the relative mapping object H, and its fully marked part, match Map^♭_S and Map^♯_S, and point recognition is applied to H; (6) the right-fibration-over-Kan-base hypotheses hold in step 12; (7) the inverse-triangle argument of steps 14-15 is correct. Edge cases tested: empty S, S a point, empty Z, empty U, a non-quasicategory base Λ^2_0, n=1 horns, n=0 boundary. Mechanical checks: proof_deps equals the union of the step uses, no cycle, no missing or merged citations. Not a duplicate: lem-coef-infinity-marked-cocartesian-lifting is the opposite variance over a quasicategory base only. No new nodes, not a Mathlib leaf, and the item does not restate a clause of its parent. I accept the four declared tool uses from unit sk-prop-sf-cbc (equivalence outer-horn filling, relative equivalence outer-horn lift, the core of a quasicategory is Kan, right fibration over a Kan base) as generic black-box tools. No fixes were made. The source.place still mentions an old sandbox PDF; the field is protected and this does not affect the mathematics."
  }
 }
