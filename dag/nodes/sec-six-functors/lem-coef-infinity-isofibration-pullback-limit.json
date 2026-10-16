@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-isofibration-exponentiation"
+  "lem-coef-infinity-isofibration-exponentiation",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -285,5 +286,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-770ec957c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Kerodon 033R/032Y: 3 quasicategory instances, p with IsIsofibration (recorded dep def), g unrestricted; Quasicategory (pullback g p); for all Q:SSet.{u} [Quasicategory Q], IsWeakHomotopyEquivalence of the comparison from core Fun(Q,D) to simplicialHomotopyPullback of the core maps (ev0/ev1 order as node, path in core), built from the recorded homotopyPullbackComparison (constant path). Single universe u, no nonemptiness or extra hypothesis. Helpers coreMap/pullbackCoreComparison have real data, no sorry, source+blueprint docstrings, not duplicates (searched side lean/Sheaf and Mathlib). Only the item node changed (lean, plus stmt_deps gaining landed def-coef-infinity-relative-cone, allowed by brief l.140); lean.statement verbatim. nt_compile.py --json on the snapshot file: rc 0, compiled 1.6 s, no errors. Edge cases empty E/T/D/Q/B and p=id are covered. Only a cosmetic report text artifact."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IsofibrationPullbackLimit",
+  "declaration": "SSet.Enhanced.isofibration_pullback_limit",
+  "declarations": [
+   "SSet.Enhanced.coreMap",
+   "SSet.Enhanced.pullbackCoreComparison",
+   "SSet.Enhanced.isofibration_pullback_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IsofibrationPullbackLimit.lean",
+  "statement": "theorem isofibration_pullback_limit {E B T : SSet.{u}} [Quasicategory E] [Quasicategory B] [Quasicategory T] (p : E ⟶ B) (g : T ⟶ B) (hp : IsIsofibration p) : Quasicategory (pullback g p) ∧ (∀ (Q : SSet.{u}) [Quasicategory Q], IsWeakHomotopyEquivalence (pullbackCoreComparison p g Q))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module records the restriction of maps to cores and the canonical constant-path comparison as helper declarations, then states the strict-pullback theorem. The comparison uses the existing path-space construction; the theorem proof remains sorry for stage 2."
  }
 }

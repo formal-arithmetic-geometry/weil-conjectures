@@ -291,5 +291,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf48e1f43",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: IsLocallyPresentable.{v} A/D, regular alpha, H.IsCardinalAccessible alpha; exists regular rho >= alpha such that for every regular tau with rho<tau and a^b<tau (a<tau,b<rho), A and D are IsCardinalLocallyPresentable at tau and H preserves tau-presentables; the general clause has regular sigma>=rho, any bound, and an existential regular tau above bound and sigma with the sigma power inequality and the same properties. Mathlib definitions checked (LocallyPresentable.lean:41,80; CardinalFilteredPresentation.lean:78,153; Basic.lean:54,149). Mathematically true (HTT 5.4.2.13, A.2.6.3). Universes u1,u2 independent, Cardinal.{v}=Hom universe. Edge cases (empty family, bound 0, b=0, aleph0) covered. lean.statement verbatim; node otherwise unchanged; stmt_dep colimit recorded; docstrings carry source, blueprint tag and 9 steps; sorry only; no defs. nt_compile rc=0 clean (control run shows diagnostics are reported; axioms include sorryAx). Report has both required sections; only a cosmetic substitution artifact in HTT numbers in report.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleFunctorPresentabilityRanks",
+  "declaration": "CategoryTheory.accessible_functor_presentability_ranks",
+  "file": "lean/Sheaf/CategoryTheory/AccessibleFunctorPresentabilityRanks.lean",
+  "statement": "theorem accessible_functor_presentability_ranks {A : Type u₁} {D : Type u₂} [Category.{v} A] [Category.{v} D] [IsLocallyPresentable.{v} A] [IsLocallyPresentable.{v} D] (alpha : Cardinal.{v}) [Fact alpha.IsRegular] (H : A ⥤ D) [H.IsCardinalAccessible alpha] : ∃ (rho : Cardinal.{v}) (_ : Fact rho.IsRegular), alpha ≤ rho ∧ (∀ (tau : Cardinal.{v}) [Fact tau.IsRegular], (rho < tau ∧ (∀ (a b : Cardinal.{v}), a < tau → b < rho → a ^ b < tau)) → IsCardinalLocallyPresentable A tau ∧ IsCardinalLocallyPresentable D tau ∧ ∀ (P : A), IsCardinalPresentable P tau → IsCardinalPresentable (H.obj P) tau) ∧ (∀ (sigma : Cardinal.{v}) [Fact sigma.IsRegular], rho ≤ sigma → ∀ (bound : Cardinal.{v}), ∃ (tau : Cardinal.{v}) (hTau : Fact tau.IsRegular), bound < tau ∧ sigma < tau ∧ (∀ (a b : Cardinal.{v}), a < tau → b < sigma → a ^ b < tau) ∧ @IsCardinalLocallyPresentable A inferInstance tau hTau ∧ @IsCardinalLocallyPresentable D inferInstance tau hTau ∧ ∀ (P : A), @IsCardinalPresentable A inferInstance P tau hTau → @IsCardinalPresentable D inferInstance (H.obj P) tau hTau)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
