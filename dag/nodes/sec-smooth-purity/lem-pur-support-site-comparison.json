@@ -32,7 +32,8 @@
   "def-weil-proper-morphism",
   "def-weil-closed-immersion",
   "def-pc-base-change",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pur-proetale-supported-exterior-product"
  ],
  "proof": [
   {
@@ -405,5 +406,46 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-61a08ab52 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all eight proof steps check out. Repaired one C8 recording fault by declaring 15 accepted generic tool uses in the corrected JSON. Statements and proofs remain unchanged. Detailed source, coefficient-category, edge-case, duplicate and cycle checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-712728d22",
+  "group": "NY",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Reused the existing etale open-restriction map to resolve H4/H9 and removed the inline proof for H6. Mathematical statement preserved; both corrected modules compile without errors or warnings. Branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.supportComparison_exterior",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleSupportKernel",
+   "AlgebraicGeometry.ProEtale.supportComparisonUnit_existsUnique",
+   "AlgebraicGeometry.ProEtale.supportComparisonUnit",
+   "AlgebraicGeometry.ProEtale.supportComparison",
+   "AlgebraicGeometry.ProEtale.supportComparison_isIso",
+   "AlgebraicGeometry.ProEtale.supportComparisonUnbounded",
+   "AlgebraicGeometry.ProEtale.etaleSupportForget",
+   "AlgebraicGeometry.ProEtale.proEtaleSupportForget",
+   "AlgebraicGeometry.ProEtale.supportComparison_forget",
+   "AlgebraicGeometry.ProEtale.fullSupportForget_isIso",
+   "AlgebraicGeometry.ProEtale.supportDerivedPullbackIso",
+   "AlgebraicGeometry.ProEtale.supportBifunctorIso",
+   "AlgebraicGeometry.ProEtale.supportExteriorCoefficientIso",
+   "AlgebraicGeometry.ProEtale.supportComparison_exterior",
+   "AlgebraicGeometry.ProEtale.supportOpenConstantIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.supportOpenConstantIso",
+   "AlgebraicGeometry.ProEtale.supportOpenDerivedConstantIso",
+   "AlgebraicGeometry.ProEtale.supportOpenRestriction",
+   "AlgebraicGeometry.ProEtale.supportOpenRestrictionOverField",
+   "AlgebraicGeometry.ProEtale.supportComparison_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportSiteComparison.lean",
+  "statement": "theorem supportComparison_exterior [Finite A] (k : Type u) [Field k] [IsAlgClosed k] {X Y Z W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) (F : DerivedCategory.Plus (Sheaf (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k))).smallEtaleTopology (ModuleCat.{u + 1} A))) (eF : F.obj ≅ Etale.externalProduct (ModuleCat.{u + 1} A) (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj) : Etale.supportedExteriorProduct A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j K.obj L.obj ≫ (etaleSupportKernel A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j)).rightDerivedFunctor.map eF.inv ≫ supportComparisonUnbounded A (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) F ≫ (supportSections (Etale.supportedProductImmersion (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j) A).rightDerivedFunctor.map ((comparisonUpperStar (ModuleCat.{u + 1} A) (pullback (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)))).mapDerivedCategory.map eF.hom ≫ (supportExteriorCoefficientIso A (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) K.obj L.obj).hom) = tensorHom (supportComparisonUnbounded A i K) (supportComparisonUnbounded A j L) ≫ supportedExteriorProductOverField A k (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) i j ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K.obj) ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj L.obj)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-712728d22"
  }
 }
