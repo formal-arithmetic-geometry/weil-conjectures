@@ -298,5 +298,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentablePresentationComparison",
+  "declaration": "CategoryTheory.presentable_presentation_comparison",
+  "file": "lean/Sheaf/CategoryTheory/PresentablePresentationComparison.lean",
+  "statement": "theorem presentable_presentation_comparison {C : Type u} [Category.{v} C] [IsLocallyPresentable.{v} C] (σ τ : Cardinal.{v}) [Fact σ.IsRegular] [Fact τ.IsRegular] (hστ : σ < τ) (hpower : ∀ (a b : Cardinal.{v}), a < τ → b < σ → a ^ b < τ) {A B : Type v} [PartialOrder A] [PartialOrder B] [IsCardinalFiltered A τ] [IsCardinalFiltered B τ] (X : A ⥤ C) (Y : B ⥤ C) (hX : ∀ a, IsCardinalPresentable (X.obj a) τ) (hY : ∀ b, IsCardinalPresentable (Y.obj b) τ) (cX : Cocone X) (cY : Cocone Y) (hcX : IsColimit cX) (hcY : IsColimit cY) (hiso : Nonempty (cX.pt ≅ cY.pt)) (A₀ : Set A) (B₀ : Set B) (hA₀ : Cardinal.mk A₀ < τ) (hB₀ : Cardinal.mk B₀ < τ) : ∃ (A₁ : Set A) (B₁ : Set B), A₀ ⊆ A₁ ∧ B₀ ⊆ B₁ ∧ Cardinal.mk A₁ < τ ∧ Cardinal.mk B₁ < τ ∧ IsCardinalFiltered A₁ σ ∧ IsCardinalFiltered B₁ σ ∧ ∃ (dX : Cocone ((OrderHom.Subtype.val A₁).toFunctor ⋙ X)) (dY : Cocone ((OrderHom.Subtype.val B₁).toFunctor ⋙ Y)), Nonempty (IsColimit dX) ∧ Nonempty (IsColimit dY) ∧ Nonempty (dX.pt ≅ dY.pt)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b54a737dd",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Node clauses match the Lean one by one: one small universe v for indices, cardinals and Hom sets (IsLocallyPresentable.{v}, elaborated as {u_1,u_1,u_2}); regular sigma<tau with the literal power condition; tau-filtered posets via IsCardinalFiltered; tau-presentable objects; arbitrary colimit cocones with Nonempty iso; tau-small A0/B0; conclusion with subsets, size bounds, inherited-order sigma-filteredness, colimit cocones on OrderHom.Subtype.val restrictions and Nonempty iso, no extra leg conditions. Consistent with the landed consumer accessible_subdiagram_criterion. Node changed only in its lean field; lean.statement is verbatim in the file; stmt_deps correct. Report has Worker report and Second reading by Q103. Docstrings carry HTT A.2.6.6 pp.819-820, the blueprint id and the 10 proof steps. Only proof is sorry; no definitions; no duplicate found. nt_compile.py --json: rc 0, no errors or warnings; #check shows every variable and universe bound. Edge cases (empty subsets, sigma=aleph0, finite posets, non-mono transitions) covered. No findings."
  }
 }
