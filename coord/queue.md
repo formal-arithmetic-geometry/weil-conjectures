@@ -1,6 +1,6 @@
 # Work queue
 
-36 items; claim with `tools/claim.py next <group> [--stage N]`.
+35 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (36)
+## Stage 3: modules to prove (35)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -39,7 +39,6 @@
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverLimitGeneration` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
-| `Sheaf.NumberTheory.Padics.LatticeStabilizerOpen` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckHypercoverBottomColimit` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyGluing` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed` | 9 | 1 | proof |
