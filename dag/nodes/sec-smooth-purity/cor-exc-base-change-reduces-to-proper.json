@@ -3,43 +3,121 @@
  "blueprint": {
   "is": "cor-exc-base-change-reduces-to-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change for a general morphism reduces to the proper part",
- "statement": "Let $f:X\\to Y$ be separated finite type with a\ncompactification\n$X\\xrightarrow{j_0}\\overline X\\xrightarrow{p}Y$, and let $g:Y'\\to Y$\nbe arbitrary. If the base-change comparison\n$L\\overline g^*Rp^{\\times}\\to R(p')^{\\times}Lg^*$ is an isomorphism for\nthe proper morphism $p$, then the base-change comparison\n$Lg'^*Rf^{\\times}\\to Rf'^{\\times}Lg^*$ is an isomorphism for $f$.\nConsequently the comparison for a general separated finite-type morphism\nis reduced to its proper part, the open part being free. The ambient\nexceptional right adjoint datum that the identity $Rf^{\\times}\\cong j_0^*Rp^{\\times}$ uses is, on the blueprint's coefficient class\n[def-sf-fullcd-used-class], the theorem\n[cor-sf-ambient-adjoint-discharge], so the reduction is unconditional\nthere.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a uniformizer $\\varpi_E$, and $n\\geq1$, and put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties], with a chosen compactification $X\\xrightarrow{j_0}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. Let $g:Y'\\to Y$ be any scheme morphism and form the Cartesian base changes [def-pc-fibre-product]\n$$\n\\overline X'=\\overline X\\times_Y Y',\\qquad X'=X\\times_Y Y',\\qquad\nX'\\xrightarrow{j_0'}\\overline X'\\xrightarrow{p'}Y',\n$$\nwith projections $\\overline g:\\overline X'\\to\\overline X$ and $g':X'\\to X$, and $f'=p'j_0'$. Work with constant $A$-module sheaves on the small pro-etale sites and their ordinary unbounded derived categories and operations [def-weil-pbc-proetale-operations, def-weil-derived-pullback-tensor-hom]. Suppose the chosen compactifications of $f$ and $f'$ carry ambient exceptional right adjoint data [def-weil-ambient-exceptional-adjoint], taken over the respective scheme bases $Y$ and $Y'$. Write $Rf_!^c=Rp_*j_{0!}$ and $Rf'_!^{c'}=Rp'_*j'_{0!}$ for the chosen compactification functors and $Rf^\\times,Rf'^\\times$ for their supplied right adjoints. Also specify the proper adjunctions $Rp_*\\dashv Rp^\\times$ and $Rp'_*\\dashv Rp'^\\times$ involved in the proper comparison.\n\nThe comparisons are specified as follows, using the mate bijection [def-weil-pbc-adjunction-mate]. Let\n$$\\delta_p:Rp'_*L\\overline g^*\\longrightarrow Lg^*Rp_*$$\nbe the reverse direct-image comparison whose mate is the proper comparison\n$$\\beta_p:L\\overline g^*Rp^\\times\\longrightarrow Rp'^\\times Lg^*.$$\nEquivalently, specifying $\\beta_p$ specifies $\\delta_p$ by the inverse mate bijection; no invertibility of $\\delta_p$ is assumed. Let\n$$\\alpha:Lg'^*Lj_0^*\\xrightarrow{\\sim}Lj_0'^*L\\overline g^*$$\nbe the canonical pullback-composition isomorphism [lem-weil-pbc-proetale-derived-pullback-composition]. Let $\\gamma:j'_{0!}Lg'^*\\to L\\overline g^*j_{0!}$ be its inverse mate for the open adjunctions $j_{0!}\\dashv Lj_0^*$ and $j'_{0!}\\dashv Lj_0'^*$ [prop-exc-open-adjoint]. Define $\\beta_f:Lg'^*Rf^\\times\\to Rf'^\\times Lg^*$ to be the mate, for the supplied compact-support adjunctions, of\n$$\n\\delta_f:Rp'_*j'_{0!}Lg'^*\n\\xrightarrow{Rp'_*\\gamma}Rp'_*L\\overline g^*j_{0!}\n\\xrightarrow{\\delta_pj_{0!}}Lg^*Rp_*j_{0!}.\n$$\nThus these are the adjunction comparisons for the proper square and its paste with the open square, with their maps fixed rather than merely unspecified natural transformations. If $\\beta_p$ is an isomorphism, then $\\beta_f$ is an isomorphism. This is a conditional statement about the supplied ambient adjunctions, with no unconditional ambient-datum assertion.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
   "place": "node cor-exc-base-change-reduces-to-proper, order 1812"
  },
  "stmt_deps": [
-  "def-sf-fullcd-used-class",
-  "cor-sf-ambient-adjoint-discharge",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
   "def-weil-compactifications-refinements",
-  "def-weil-pbc-derived-categories"
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-exc-open-adjoint"
  ],
  "proof": [
   {
-   "text": "The compact-support functor is $Rf_!=Rp_!j_{0!}=Rp_*j_{0!}$, so by\nuniqueness of right adjoints — the uniqueness invoked in the ambient\ndatum of [def-weil-ambient-exceptional-adjoint] — the ambient right\nadjoint is\n$Rf^{\\times}\\cong j_0^*Rp^{\\times}$, and likewise\n$Rf'^{\\times}\\cong j_0'^*R(p')^{\\times}$ for the base change. The\nbase-change comparison for $f$ is therefore, by pullback composition\n([def-weil-pbc-inverse-image]), the comparison for $p$ conjugated\nby the isomorphisms $Lg'^*j_0^*\\cong j_0'^*L\\overline g^*$; it is an\nisomorphism whenever the comparison for $p$ is.",
+   "text": "By [def-weil-ambient-exceptional-adjoint], the chosen left adjoints are $F=Rp_*j_{0!}$ and $F'=Rp'_*j'_{0!}$; this formula is stated over a scheme base, so it applies with bases $Y$ and $Y'$ even when $g$ is arbitrary. For $j_0$, [prop-exc-open-adjoint] supplies $j_{0!}\\dashv Lj_0^*$; compose it with the supplied $Rp_*\\dashv Rp^\\times$. For $j_0'$, the same cited statement, applied to that open immersion and the same finite ring $A$, supplies $j'_{0!}\\dashv Lj_0'^*$; compose it with $Rp'_*\\dashv Rp'^\\times$. The theorem [lem-cat-right-adjoint-composition] gives canonical isomorphisms\n$$\\rho:Rf^\\times\\xrightarrow{\\sim}Lj_0^*Rp^\\times,\\qquad\n\\rho':Rf'^\\times\\xrightarrow{\\sim}Lj_0'^*Rp'^\\times.$$\nIts unit/counit clause says these identifications preserve the supplied adjunctions, which is needed when comparing their mates.",
    "uses": [
     "def-weil-ambient-exceptional-adjoint",
-    "def-weil-pbc-inverse-image"
+    "prop-exc-open-adjoint",
+    "lem-cat-right-adjoint-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
+    "place": "Proof, first sentence: compact-support factorization and uniqueness of right adjoints"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-derived-pullback-composition] to $(h,k)=(g',j_0)$ and $(h,k)=(j_0',\\overline g)$, with the constant coefficient sheaves $A$ and their canonical inverse-image identifications. These identifications are the finite constant-coefficient ones of [def-weil-derived-pullback-tensor-hom]; both composite coefficient maps send a constant $a$ to the same constant $a$. The upper square gives $j_0g'=\\overline g j_0'$. If $c_{h,k}:L(kh)^*\\to Lh^*Lk^*$ denotes the cited composition isomorphism, then\n$$\\alpha=c_{j_0',\\overline g}\\circ c_{g',j_0}^{-1}:Lg'^*Lj_0^*\\xrightarrow{\\sim}Lj_0'^*L\\overline g^*.$$\nThis writes the two well-typed compositions explicitly and proves the claimed natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
+    "place": "Proof, second sentence: the pullback-composition isomorphism for the upper square"
+   }
+  },
+  {
+   "text": "Write $J=j_{0!}$, $J'=j'_{0!}$, $H=Lg'^*$, $\\overline H=L\\overline g^*$, $G=Lg^*$, $P=Rp_*$, $P'=Rp'_*$, $Q=Rp^\\times$, and $Q'=Rp'^\\times$. The inverse mate formula of [def-weil-pbc-adjunction-mate] specifies the open comparison on every object $K$ as\n$$\\gamma_K=\\varepsilon^{J'}_{\\overline HJK}\\circ J'(\\alpha_{JK})\\circ J'H(\\eta^J_K).$$\nConsequently its mate is precisely $\\alpha$, and the mate of $\\delta_p:P'\\overline H\\to GP$ is $\\beta_p:\\overline HQ\\to Q'G$. Apply clause (2) of [lem-weil-pbc-mate-pasting] with $(L_1,L_2,L_3,L_4)=(J,J',P,P')$, horizontal functors $(H,\\overline H,G)$, and squares $(\\gamma,\\delta_p)$. The pasted square is exactly $\\delta_f=(\\delta_pJ)\\circ(P'\\gamma)$. Its mate for the composite adjunctions is therefore\n$$\\widetilde\\beta_f=(Lj_0'^*\\beta_p)\\circ(\\alpha Rp^\\times):Lg'^*Lj_0^*Rp^\\times\\longrightarrow Lj_0'^*Rp'^\\times Lg^*.$$\nThe unit/counit-preserving identifications of Step 1 identify this mate with the specified $\\beta_f$; equivalently, clause (3) of the same pasting theorem gives the component equation\n$$\\rho'_{Lg^*L}\\circ\\beta_{f,L}=\\widetilde\\beta_{f,L}\\circ Lg'^*(\\rho_L)\\qquad(L\\in D(Y_{\\mathrm{proet}},A)).$$\nThis is the required equality of the canonical comparison maps, not merely an isomorphism between their sources and targets.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
+    "place": "Proof, second sentence: identification of the comparison for f with the pasted proper and open comparisons; explicit mate calculation"
+   }
+  },
+  {
+   "text": "For every $L$, the displayed equation in Step 3 reads\n$$\\beta_{f,L}=(\\rho'_{Lg^*L})^{-1}\\circ Lj_0'^*(\\beta_{p,L})\\circ\\alpha_{Rp^\\times L}\\circ Lg'^*(\\rho_L).$$\nThe maps $\\rho$, $\\rho'$ and $\\alpha$ are natural isomorphisms. The hypothesis makes $\\beta_{p,L}$ invertible. A functor sends an inverse pair to an inverse pair, since $F(u)F(u^{-1})=F(1)=1$ and $F(u^{-1})F(u)=1$; thus the two whiskered maps are invertible. The inverse of the displayed composite is obtained by reversing the four factors and inverting each. Hence every component of $\\beta_f$ is an isomorphism, as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
+    "place": "Proof, final clause: conjugation and application of a functor preserve isomorphisms"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-ambient-exceptional-adjoint",
-  "def-weil-pbc-inverse-image"
+  "prop-exc-open-adjoint",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/cor-exc-base-change-reduces-to-proper.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change for an exceptional right adjoint reduces to the proper morphism in a compactification",
+   "results": "Eight unrelated hits about exponentiable morphisms and adjunctions; no exceptional right-adjoint base-change theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, rightAdjointUniq, inverse image base change",
+   "results": "0 hits; loogle reports unknown identifier rightAdjointUniq.",
+   "date": "2026-10-16",
+   "verdict": "no match; query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|rightAdjointUniq|compactification in Mathlib/AlgebraicGeometry",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change comparison for exceptional inverse image under a compactification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -73,5 +151,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-existence"
+ "unit": "sk-prop-sf-existence",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "cor-exc-base-change-reduces-to-proper",
+  "worker": "stage1",
+  "summary": "Second-reader repair: retain only the conditional ambient-adjunction reduction; fix coefficient and scheme-base scope, explicitly supply the proper adjunctions inherent in the original comparison, specify comparisons by their mate bijection, and prove their pasting formula. Reuse the existing pro-etale derived pullback-composition theorem and Mathlib mate-pasting theorem; remove the new ill-typed duplicate node.",
+  "blueprint": "Realizes both sentences of the blueprint proof: Step 1 factors compact support and identifies its right adjoints with compatible units/counits; Step 2 constructs the upper-square comparison by two applications of existing derived pullback composition; Step 3 expands the previously implicit mate-pasting argument; Step 4 proves invertibility. The imported unconditional ambient-datum claim is disputed in report.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic composition of derived pullbacks on ringed pro-etale topoi, specialized twice to the upper square; no node in this unit states it. This is a tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-c24d8440e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-c24d8440e (reviewer sub-agent of L); spot-checked: Read the complete delivery, DAG/unit/chapter route, cited nodes, master sources, and report. Verified all four proof steps, typing, coefficient category, adjunction/mate directions, edge cases, duplicate removal, and the documented ambient-adjoint source error. Review written to review.md."
+ }
 }
