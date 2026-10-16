@@ -29,9 +29,176 @@
   "def-weil-karoubi-envelope",
   "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix objects $X=(E,K)$ and $Y=(F,L)$. Write $x_M=U_{M/E}K$, $y_M=U_{M/F}L$, and $\\alpha^X_{N,M}=a^A_{N,M,E,K}$ (and similarly for $Y$). On $H_M(X,Y)=\\operatorname{Hom}_{\\mathcal A_M}(x_M,y_M)$ put $t^A_{N,M}(u)=\\alpha^Y_{N,M}U_{N/M}(u)(\\alpha^X_{N,M})^{-1}$. Normalization gives $t^A_{M,M}=1$. For $M\\subseteq N\\subseteq H$, the pentagon says\n$$\\alpha^X_{H,N}U_{H/N}(\\alpha^X_{N,M})=\\alpha^X_{H,M}a^A_{H,N,M,x_M}.$$\nSubstitution into $t^A_{H,N}t^A_{N,M}(u)$ gives\n$$\\alpha^Y_{H,M}a^A_{H,N,M,y_M}U_{H/N}U_{N/M}(u)(a^A_{H,N,M,x_M})^{-1}(\\alpha^X_{H,M})^{-1}=t^A_{H,M}(u),$$\nwhere the equality is the naturality equation for $a^A_{H,N,M}$. Thus transport is transitive. These computations use only the assumed pentagon and naturality, and apply verbatim to $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Common-stage calculus: associator normalization and successive transport; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "The groups $H_M(X,Y)$ and bilinear composition are supplied by preadditivity. Since $U_{N/M}$ is additive and composition is bilinear,\n$$t^A_{N,M}(u+v)=t^A_{N,M}(u)+t^A_{N,M}(v),\\quad t^A_{N,M}(0)=0.$$\nFor composable maps $u:x_M\\to y_M$ and $v:y_M\\to z_M$, cancellation of the two middle associators gives\n$$t^A_{N,M}(vu)=t^A_{N,M}(v)t^A_{N,M}(u),\\qquad t^A_{N,M}(1_{x_M})=1_{x_N}.$$\nThe same statements hold for $B$.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Common-stage calculus: additive transport, identities and composition; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "The overfields $M\\supseteq E,F$ form a nonempty directed poset: $EF$ is one and the compositum of any two is another. Steps 1 and 2 therefore give a directed system of abelian groups $H_M(X,Y)$. Its directed colimit has exactly the representatives and eventual-equality rule in the statement, by the concrete description of [def-weil-directed-colimit-abelian-groups]. In particular eventual equality is an equivalence relation and the Hom quotient is an abelian group. Its addition is $[M,u]+[N,v]=[H,t_{H,M}u+t_{H,N}v]$ for $H\\supseteq M,N$, its inverse is $[M,-u]$, and its zero is $[M,0]$. Smallness of the index and the stipulated universe bound ensure these are Hom sets. This reasoning applies separately to $A$ and $B$.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Finite common-stage principle: Hom sets, eventual equality and sums; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Define $[N,v][M,u]=[H,t_{H,N}(v)t_{H,M}(u)]$ for $H\\supseteq M,N$. If any representative or $H$ changes, choose one upper bound of the finitely many stages and of the witnesses for the changed representatives. Such an upper bound exists by applying directedness repeatedly. Step 1 identifies iterated transport with direct transport, and Step 2 identifies transported composites with composites of transported maps; at this upper bound both proposed answers are literally equal. Thus composition descends. The identity at $(E,K)$ is $[E,1_K]$: its transport to $H$ is $1_{U_{H/E}K}$, so both identity equations hold. Represent three composable classes at one upper bound. Associativity there gives $[H,w(vu)]=[H,(wv)u]$, proving associativity in the quotient. Similarly the two bilinearity equations hold at that upper bound, by preadditivity at the stage. Thus both pair constructions are preadditive categories.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Common-stage calculus: representative-independent composition and category laws; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "To obtain a zero object, take $(E,0_E)$ at any stage (there is one since the index is nonempty). For an additive transition, $1_{U_{M/E}0_E}=U_{M/E}(1_{0_E})=U_{M/E}(0)=0$. An object $Z$ with $1_Z=0$ has exactly one arrow to or from any object, since $f=f1_Z=f0=0$ and $g=1_Zg=0g=0$. Consequently all the Hom classes to and from $(E,0_E)$ are zero. For $X=(E,K)$ and $Y=(F,L)$ choose $M\\supseteq E,F$ and set $Q=(M,U_{M/E}K\\oplus U_{M/F}L)$. Represent its two inclusions and projections at $M$ by those of the displayed stage biproduct. At $M$ they obey $p_ri_s=\\delta_{rs}$ and $i_1p_1+i_2p_2=1_Q$, so the same equalities hold for their classes. This is precisely the biproduct criterion in [def-weil-additive-category]. Hence $P_A,P_B$ are additive categories.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-additive-category",
+    "def-weil-preadditive-category",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Pair construction: zero objects and finite biproducts; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "For the functor formula write $b_M^X=b_{M/E,K}$, and use $\\alpha^{A,X}_{N,M}$ and $\\alpha^{B,\\Phi X}_{N,M}$ for the two associators, the latter evaluated on $\\Phi_EK$. Define\n$$D_M(u)=(b_M^Y)^{-1}\\Phi_M(u)b_M^X.$$\nThe tower equation, evaluated at $K$, is exactly\n$$b_N^X\\alpha^{B,\\Phi X}_{N,M}=\\Phi_N(\\alpha^{A,X}_{N,M})b_{N/M,x_M}V_{N/M}(b_M^X).$$\nInsert this equality and its inverse for $X,Y$ into $D_N(t^A_{N,M}u)$; cancellation gives\n$$\\alpha^{B,\\Phi Y}_{N,M}V_{N/M}((b_M^Y)^{-1})(b_{N/M,y_M})^{-1}\\Phi_N(U_{N/M}u)b_{N/M,x_M}V_{N/M}(b_M^X)(\\alpha^{B,\\Phi X}_{N,M})^{-1}.$$\nNaturality of $b_{N/M}$ replaces the middle three factors by $V_{N/M}(\\Phi_Mu)$, leaving exactly $t^B_{N,M}(D_Mu)$. This proves the required transport compatibility without strictifying either diagram.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Pseudocone functor formula: compatibility with a larger common field; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "If $[M,u]=[N,v]$, choose an upper bound $H$ witnessing $t^A_{H,M}u=t^A_{H,N}v$. Step 6 gives $t^B_{H,M}D_Mu=D_H(t^A_{H,M}u)=D_H(t^A_{H,N}v)=t^B_{H,N}D_Nv$. Hence the formula on classes is independent of all representatives. At one common stage,\n$$D_M(vu)=(b_M^Z)^{-1}\\Phi_M(v)\\Phi_M(u)b_M^X=D_M(v)D_M(u),$$\nand $D_M(u+v)=D_Mu+D_Mv$ by additivity and bilinearity. Finally $D_E(1_K)=1_{\\Phi_EK}$ because $b_{E/E}=1$. Therefore the object and arrow formulas in the statement define an additive functor.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "def-weil-pbc-additive-functor",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Pseudocone functor formula: quotient descent and additive functor laws; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Let $\\Psi,c,\\eta$ be as in the statement. The component at $X=(E,K)$ is $[E,\\eta_{E,K}]$. At a common stage $M$, its representative is $V_{M/E}(\\eta_{E,K})$, since the repeated-field associators are identities. Write $\\eta_M(x_M)$ for $\\eta_{M,U_{M/E}K}$. The assumed compatibility gives\n$$V_{M/E}(\\eta_{E,K})=(c_M^X)^{-1}\\eta_M(x_M)b_M^X.$$\nFor $u:x_M\\to y_M$, substitution at source and target and stage naturality give\n$$V_{M/F}(\\eta_{F,L})D_M^\\Phi(u)=(c_M^Y)^{-1}\\eta_M(y_M)\\Phi_M(u)b_M^X=(c_M^Y)^{-1}\\Psi_M(u)\\eta_M(x_M)b_M^X=D_M^\\Psi(u)V_{M/E}(\\eta_{E,K}).$$\nThis is naturality for every class $[M,u]$, so these components define the asserted natural transformation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Compatible transformations: naturality on common-field representatives; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Identity transformations satisfy the compatibility equation because both sides are $b_{F/E}$, and their descended components $[E,1_{\\Phi_EK}]$ are identities. If $\\eta:\\Phi\\Rightarrow\\Psi$ and $\\delta:\\Psi\\Rightarrow\\Omega$ have comparisons $b,c,r$, then\n$$(\\delta_F\\eta_F)U_{F/E}\\,b_{F/E}=\\delta_FU_{F/E}\\,c_{F/E}\\,V_{F/E}\\eta_E=r_{F/E}\\,V_{F/E}(\\delta_E\\eta_E).$$\nThus their composite is compatible, and its descended component is $[E,\\delta_{E,K}\\eta_{E,K}]=[E,\\delta_{E,K}][E,\\eta_{E,K}]$. Any equality between compatible transformations is componentwise an equality at each $E,K$ and remains an equality of these classes. In particular composites occurring in equations are preserved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Compatible transformations: identities, vertical composition and equations; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "For composition of functor families let $\\Theta_E:\\mathcal B_E\\to\\mathcal C_E$ have comparisons $d_{F/E}:W_{F/E}\\Theta_E\\xrightarrow{\\sim}\\Theta_FV_{F/E}$. The composite comparisons are\n$$e_{F/E}=\\Theta_F(b_{F/E})\\,d_{F/E,\\Phi_E}.$$\nThey are identities for $F=E$. Expand $e_{G/E}(a^C_{G,F,E}\\Theta_E\\Phi_E)$. First the tower for $d$, then that for $b$, rewrite it as\n$$(\\Theta_G\\Phi_G a^A_{G,F,E})(\\Theta_G b_{G/F}U_{F/E})(\\Theta_GV_{G/F}b_{F/E})(d_{G/F}V_{F/E}\\Phi_E)(W_{G/F}d_{F/E}\\Phi_E).$$\nNaturality of $d_{G/F}$ at the morphism $b_{F/E}$ replaces the middle pair $\\Theta_GV_{G/F}b_{F/E}\\cdot d_{G/F}V_{F/E}\\Phi_E$ by $d_{G/F}\\Phi_FU_{F/E}\\cdot W_{G/F}\\Theta_F b_{F/E}$. The resulting expression is precisely\n$$(\\Theta_G\\Phi_G a^A_{G,F,E})(e_{G/F}U_{F/E})(W_{G/F}e_{F/E}).$$\nSo the composite family is coherent. The identity family has comparisons $1$, and its tower reduces to the equality of the diagram's associator with itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Pair universal construction: composite comparisons and their tower equation; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "For $u$ at $M$, applying the two descended functors successively gives\n$$(d_M^Y)^{-1}\\Theta_M((b_M^Y)^{-1}\\Phi_M(u)b_M^X)d_M^X=(e_M^Y)^{-1}(\\Theta_M\\Phi_M)(u)e_M^X.$$\nTheir object formulas also agree. Thus descent preserves composition of functor families, while the identity family sends $[M,u]$ to itself. Whiskering a compatible transformation by a coherent family has, at $(E,K)$, the ordinary stage component $\\Theta_E(\\eta_{E,K})$ or $\\zeta_{E,\\Phi_EK}$: this follows directly by evaluating the descended arrow formula at $M=E$, where the comparisons are identities. For left whiskering, its compatibility equation follows from the explicit chain\n$$(\\Theta_F\\eta_F U)\\,\\Theta_F(b)d_{\\Phi_E}=\\Theta_F(cV\\eta_E)d_{\\Phi_E}=\\Theta_F(c)d_{\\Psi_E}W(\\Theta_E\\eta_E),$$\nwhere $U=U_{F/E}$, $V=V_{F/E}$, $W=W_{F/E}$, $b=b_{F/E}$, $c=c_{F/E}$, and $d=d_{F/E}$. The first equality is compatibility of $\\eta$, the second is naturality of $d$. For right whiskering, if $\\zeta:\\Theta\\Rightarrow\\Omega$ has comparisons $d,r$, the chain is\n$$\\zeta_F\\Phi_FU\\,\\Theta_F(b)d_{\\Phi_E}=\\Omega_F(b)\\zeta_FV\\Phi_E d_{\\Phi_E}=\\Omega_F(b)r_{\\Phi_E}W(\\zeta_E\\Phi_E).$$\nHere the first equality is naturality of $\\zeta_F$ at $b$ and the second is its compatibility equation. Hence equations involving those whiskerings also remain componentwise equations after descent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Pair universal construction: preservation of composition and whiskering; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "Let $\\Phi:P_A\\to P_B$ be the functor just constructed. On a Karoubi object $(P,p)$ put $\\widehat\\Phi(P,p)=(\\Phi P,\\Phi p)$, and send a Karoubi arrow $u$ to $\\Phi u$. These are defined because $(\\Phi p)^2=\\Phi(p^2)=\\Phi p$ and, whenever $u=qup$, $\\Phi u=\\Phi q\\,\\Phi u\\,\\Phi p$. The identity in the envelope is $p$, whose image is $\\Phi p$, the identity of the image object. Composition and addition are inherited from $P_A,P_B$, so functoriality and additivity follow from $\\Phi(vu)=\\Phi v\\,\\Phi u$ and $\\Phi(u+v)=\\Phi u+\\Phi v$. This proves the extension formula directly from [def-weil-karoubi-envelope], with no idempotent-completeness assumption.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Karoubi universal construction: extension on objects and arrows; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "For a descended transformation $\\eta:\\Phi\\Rightarrow\\Psi$ define $\\widehat\\eta_{(P,p)}=\\Psi p\\,\\eta_P\\,\\Phi p$. Naturality at $p$ gives $\\Psi p\\,\\eta_P=\\eta_P\\,\\Phi p$, and idempotence implies\n$$\\Psi p\\,\\widehat\\eta_{(P,p)}\\,\\Phi p=\\widehat\\eta_{(P,p)}.$$\nThus this is a Karoubi morphism. For $u:(P,p)\\to(Q,q)$, the relation $u=qup$ implies $up=u=qu$ (multiply by $p$ or $q$). Consequently\n$$\\Psi u\\,\\widehat\\eta_{(P,p)}=\\Psi u\\,\\eta_P\\,\\Phi p=\\eta_Q\\,\\Phi u=\\widehat\\eta_{(Q,q)}\\,\\Phi u,$$\nusing naturality at $u$, and $up=u=qu$. This proves naturality in the envelope. When $p=1_P$ the component is $\\eta_P$, so it is the stated extension.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Karoubi universal construction: sandwiched transformation and naturality; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  },
+  {
+   "text": "The Karoubi identity transformation has component $\\Phi p\\,1_{\\Phi P}\\,\\Phi p=\\Phi p$, exactly the identity at $(\\Phi P,\\Phi p)$. If $\\delta:\\Psi\\Rightarrow\\Omega$, naturality at $p$ and $p^2=p$ give\n$$(\\Omega p\\,\\delta_P\\,\\Psi p)(\\Psi p\\,\\eta_P\\,\\Phi p)=\\Omega p\\,(\\delta_P\\eta_P)\\,\\Phi p.$$\nThus composition and every componentwise equation of transformations are preserved. For functors, both $\\widehat\\Theta\\widehat\\Phi$ and $\\widehat{\\Theta\\Phi}$ send $(P,p)$ to $(\\Theta\\Phi P,\\Theta\\Phi p)$ and an arrow $u$ to $\\Theta\\Phi u$; the identity functor is likewise unchanged. If additivity of the envelope categories is needed explicitly, their Hom groups are the subgroups $\\{u:u=qup\\}$, their zero is $(0,0)$, and the biproduct of $(P,p),(Q,q)$ is $(P\\oplus Q,\\operatorname{diag}(p,q))$. Its inclusions and projections are the stage biproduct maps multiplied by $p$ and $q$; their mixed products are zero and their two diagonal products sum to $\\operatorname{diag}(p,q)$, the required identity. This completes all the claims.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "def-weil-preadditive-category",
+    "def-weil-additive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Karoubi universal construction: identities, composition, equations and additivity; independent calculation by the worker (cited blueprint file unavailable on this machine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-size-convention",
+  "def-weil-additive-category",
+  "def-weil-karoubi-envelope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Independent proof from the explicit normalized associators and tower equations in this node; requested sketch32/sketch42 files are unavailable locally (WANTED in report.md). No external coherence or pseudocolimit theorem is assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -172,15 +339,65 @@
    "results": "Independent second reading: 12 hits; top: CategoryTheory.Pseudofunctor.Grothendieck, CategoryTheory.Pseudofunctor.Grothendieck.base, CategoryTheory.Pseudofunctor.Grothendieck.category, CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct, CategoryTheory.Pseudofunctor.Grothendieck.Hom, CategoryTheory.Pseudofunctor.Grothendieck.forget, CategoryTheory.Pseudofunctor.Grothendieck.instInhabitedHom, CategoryTheory.Pseudofunctor.Grothendieck.forget_obj. Read Grothendieck.lean:75-115, Localization/Construction.lean:250-280, Localization/Predicate.lean:305-337, and Idempotents/FunctorExtension.lean:175-225. Grothendieck retains a base arrow, localization assumes an already identified localization, and Karoubi extension assumes a functor already constructed. None states the common-upper-field quotient category or its coherent descent.",
    "date": "2026-10-15",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|PseudoColimit|common.stage|functorExtension₂",
+   "results": "5 hits; top: Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean, Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean. Read Idempotents/FunctorExtension.lean:175–225 and Grothendieck.lean:70–125: functorExtension₂ supplies only Karoubi extension, while Grothendieck retains a base arrow. Neither states the common-upper-bound quotient and coherent descent as one specialization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudonatural transformations of filtered diagrams of categories descend to the common upper bound quotient category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent functors and natural transformations between directed diagrams of additive categories induce functors on the category of pairs with morphisms modulo eventual equality",
+   "results": "8 hits; top: CategoryTheory.SmallObject.SuccStruct.ofCocone, CategoryTheory.Functor.IsLocallyDirected, CategoryTheory.Functor.inducedFunctor_additive, CategoryTheory.Functor.toEventualRanges, CategoryTheory.Functor.exists_map_eq_of_isLocallyDirected, CategoryTheory.Functor.IsLocallyDirected.cond, CategoryTheory.Functor.instAdditiveObjEvaluation, CategoryTheory.instPreadditiveInd. Read Idempotents/FunctorExtension.lean:175–225 and Grothendieck.lean:70–125: functorExtension₂ supplies only Karoubi extension, while Grothendieck retains a base arrow. Neither states the common-upper-bound quotient and coherent descent as one specialization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudonatural|Pseudonatural|Grothendieck|def functorExtension₂|NatTransExtension",
+   "results": "25 hits; top: Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/Generator/Abelian.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Grothendieck.lean, Mathlib/CategoryTheory/Grothendieck.lean. Read Idempotents/FunctorExtension.lean:175–225 and Grothendieck.lean:70–125: functorExtension₂ supplies only Karoubi extension, while Grothendieck retains a base arrow. Neither states the common-upper-bound quotient and coherent descent as one specialization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered pseudocolimit of categories whose arrows are maps at a common index modulo eventual equality, and its induced functor from a pseudonatural map",
+   "results": "8 hits; top: CategoryTheory.Limits.ColimitPresentation.bind, CategoryTheory.Limits.ColimitPresentation.bind_diag_obj, CategoryTheory.Limits.IndObjectPresentation.ofCocone_F, CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom, CategoryTheory.Limits.ColimitPresentation.bind_diag_map, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp, CategoryTheory.Limits.fiberwiseColimit, CategoryTheory.NonemptyParallelPairPresentationAux.isColimit₂. Read Idempotents/FunctorExtension.lean:175–225 and Grothendieck.lean:70–125: functorExtension₂ supplies only Karoubi extension, while Grothendieck retains a base arrow. Neither states the common-upper-bound quotient and coherent descent as one specialization.",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the whole item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-rem-rest"
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sbc-coherent-pair-functor-descent",
+  "worker": "stage1",
+  "summary": "Proved the entire explicit construction by transport calculations: the pentagon gives transitive Hom transport, the existing directed-group-colimit leaf supplies the Hom groups, and common-stage calculations give the category, biproducts, coherent functor descent and compatible transformations. Expanded the composite-comparison tower and Karoubi sandwich calculations. No new nodes and no change to the statement. The cited sketch sources are absent locally; proof is agent-written and the report records WANTED entries. No project Lean declaration or one-line Mathlib realization states the whole item.",
+  "blueprint": "Realizes the parent smooth Qbar coefficient theorem's compatibility with common-stage calculus and independence of common stage. Steps 1–5 realize sketch32 finite common-stage principle/pair category; steps 6–11 realize sketch42 prop:pseudocone-functor and thm:pair-universal; steps 12–14 realize thm:karoubi-universal, without any triangulated exactness assertion. These are source locators retained from the import, not claims that unavailable source text was inspected."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-98e442c17",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-98e442c17 (reviewer sub-agent of L); spot-checked: Read the full node, cited statements, unit/chapter route, master sketch sources, and archived target context. All 14 proof steps check: transport coherence, directed Hom colimits, additive pair categories, comparison-based functor descent, transformations, composition, whiskering, and Karoubi extension. Tested units, repeated fields, zero maps/objects, p=0/1, nonfaithful transitions, and eventual equality. No DAG repair is needed. The report incorrectly says the cited sketch files are absent; they are present and were read, but this does not affect the mathematics."
+ }
 }
