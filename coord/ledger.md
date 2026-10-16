@@ -15331,3 +15331,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 09:19 L: batch 20261016T011139 dependency take-out
 - 01:37 L: returned deliver/XR65519786246dce9c/Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux (reviewer RETURN: (reviewer X-b3aeb, head b3aeb0542) A3 — Unnecessary forced adaptation: original HomComparison compiles cleanly against t)
+- 01:52 L: returned deliver/E3/WeilConjectures.AlgebraicGeometry.Sites.SupportDimension (reviewer RETURN: (the landing tools, head d233c302c) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
