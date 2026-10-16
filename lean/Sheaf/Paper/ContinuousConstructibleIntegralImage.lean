@@ -6,6 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.Paper.IntegralConstructibleSerre
 
 /-! # Triangulated closure of the integral scalar-extension image
 

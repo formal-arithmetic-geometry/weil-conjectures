@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 
 /-! # Integral models for constructible sheaves in degree zero
 

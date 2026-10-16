@@ -4,6 +4,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Sheaf.AlgebraicGeometry.HypercoverFreeAbelianPositive
 
 /-! Intermediate degree component for `lem-weil-pbc-hypercover-free-resolution`. -/
 

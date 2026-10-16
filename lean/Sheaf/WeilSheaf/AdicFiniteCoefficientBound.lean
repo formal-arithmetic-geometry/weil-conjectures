@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 
 /-!
 # Passing a finite-coefficient bound to the constant adic sheaf

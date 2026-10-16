@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.Paper.FiniteSplitReplacementAttachmentConstruction
+import Sheaf.Paper.FiniteSplitReplacementStage
+import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 
 /-! Split hypercover data on the explicitly constructed simplicial attachment. -/
 @[expose] public section

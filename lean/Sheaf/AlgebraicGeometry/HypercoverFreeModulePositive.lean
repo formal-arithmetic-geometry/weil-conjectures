@@ -6,6 +6,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+import Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison
+import Sheaf.CategoryTheory.MatchingObjectCoskeleton
 
 /-! Intermediate degree component for `lem-weil-pbc-hypercover-free-resolution`. -/
 
