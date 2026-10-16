@@ -18,7 +18,8 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-sf-comparison-derived-pullback",
   "def-kun-tor-amplitude",
-  "def-weil-proetale-tor-amplitude"
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-proetale-modules"
  ],
  "proof": [
   {
@@ -283,5 +284,24 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-96f517de7 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint routes and source passages. All six steps pass, including bounded flat truncation and unbounded tensor comparison. Checked edge cases, duplicates, cycles and master target coefficient categories. Accepted eight declared tool uses; no repairs or new nodes. Findings recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4d8060a7f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all seven dependencies, sources, exact declarations, universes, edge cases, docstrings, and report sections. Signature matches verbatim; per-file scompile.py reproduction passed without errors or warnings. No fixes required; branch untouched."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComparisonTorInterval",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_torAmplitudeIn_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonTorInterval.lean",
+  "statement": "theorem comparison_torAmplitudeIn_iff (A : Type u) [CommRing A] [Finite A] (T : Scheme.{u}) (a b : ℤ) (_hab : a ≤ b) (K : _root_.DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} A) T a b K.obj ↔ Scheme.HasProEtaleTorAmplitude T A ((finiteCoefficientIntrinsicRealization T A).mapDerivedCategory.obj ((siteComparisonDerivedPullbackPlus T (ULift.{u + 1, u} A)).obj K).obj) a b",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading: use the recorded etale hasTorAmplitudeIn and intrinsic HasProEtaleTorAmplitude, with canonical finiteCoefficientIntrinsicRealization after the recorded siteComparisonDerivedPullbackPlus. The ULift of the finite coefficient ring is exactly the coefficient convention of proEtaleDerivedCategory; no constructibility or etale-origin test restriction."
  }
 }
