@@ -41,7 +41,12 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-closed-immersion",
   "prop-weil-pbc-comparison-direct-image",
-  "lem-cbc-proetale-extension-zero-comparison"
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
@@ -551,5 +556,42 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-7b63271f4 (reviewer sub-agent of L); spot-checked: Read the complete item, all eleven steps, cited statements and sources. Verified clopen geometry, mate normalization, finite-origin evaluation, scalar restriction, and coherence before evaluation. No new nodes, circular dependency involving the item, or required repairs. Concrete source checks, edge cases, and accepted tool_uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.normalizedProperOpenCalculus",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.pi_components",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_cartesian",
+   "AlgebraicGeometry.ProEtale.StrictTower.beta_id",
+   "AlgebraicGeometry.ProEtale.StrictTower.beta_comp",
+   "AlgebraicGeometry.ProEtale.StrictTower.beta_open_comp",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal",
+   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange",
+   "AlgebraicGeometry.ProEtale.StrictTower.secondWitness",
+   "AlgebraicGeometry.ProEtale.StrictTower.finiteGamma",
+   "AlgebraicGeometry.ProEtale.StrictTower.finiteSource",
+   "AlgebraicGeometry.ProEtale.StrictTower.finiteTarget",
+   "AlgebraicGeometry.ProEtale.StrictTower.gamma_evaluation",
+   "AlgebraicGeometry.ProEtale.StrictTower.gamma_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.normalizedProperOpenCalculus",
+   "AlgebraicGeometry.ProEtale.StrictTower.gamma_identities"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTowerProperOpenCalculus.lean",
+  "statement": "theorem normalizedProperOpenCalculus : (∀ {A C E B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F) (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact i] [QuasiCompact j] [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂] (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j) (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j) (M : Derived B A), (J B j).map ((rComp B r₁ r₂).hom.app M) ≫ (gamma B k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app M ≫ (rComp B p₁ p₂).inv.app ((J B k).obj M) = (gamma B i r₂ p₂ j h₂).app ((R B r₁).obj M) ≫ (R B p₂).map ((gamma B k r₁ p₁ i h₁).app M)) ∧ (∀ {A C E B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F) (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F) [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact l] [QuasiCompact i] [QuasiCompact j] [IsProper r] [IsProper p] [IsProper q] (h₁ : k ≫ p = r ≫ i) (h₂ : l ≫ q = p ≫ j) (h : (k ≫ l) ≫ q = r ≫ (i ≫ j)) (M : Derived B A), (jComp B i j).hom.app ((R B r).obj M) ≫ (gamma B (k ≫ l) r q (i ≫ j) h).app M ≫ (R B q).map ((jComp B k l).inv.app M) = (J B j).map ((gamma B k r p i h₁).app M) ≫ (gamma B l p q j h₂).app ((J B k).obj M)) ∧ (∀ {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T) (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁) (a : W₁ ⟶ W) (b : T₁ ⟶ T) (c : S₁ ⟶ S) (d : V₁ ⟶ V) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion k₁] [IsOpenImmersion i₁] [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁] [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁] (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁) (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ b) (wp : a ≫ p = p₁ ≫ b) (wr : d ≫ r = r₁ ≫ c) (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b) (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c) (M : Derived B V), (G B b).map ((gamma B k r p i h).app M) ≫ (exchange B a p₁ p b wp).app ((J B k).obj M) ≫ (R B p₁).map ((beta B d k₁ k a wk sk).hom.app M) = (beta B c i₁ i b wi si).hom.app ((R B r).obj M) ≫ (J B i₁).map ((exchange B d r₁ r c wr).app M) ≫ (gamma B k₁ r₁ p₁ i₁ h₁).app ((G B d).obj M))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The complete statement is distributed over the listed actual constructions, beta normalization and evaluation, clopen alpha and its pasting identities, gamma_evaluation, gamma_isIso, normalizedProperOpenCalculus and gamma_identities. All transformations have the prescribed transpose, section or derived-unit normalization; no arbitrary natural transformation or evaluation-faithfulness premise is supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ee18e5df3",
+  "group": "N4",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
  }
 }

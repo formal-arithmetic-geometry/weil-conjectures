@@ -253,29 +253,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-a93ce76e4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source passages. All five steps preserve hypotheses, coefficient typing, canonical-map orientation, and unbounded derived descent. No new nodes, duplicates, cycles, or repairs found. Accepted all five proposed tool_uses; concrete checks are recorded in review.md."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SfFiniteOpenExtensionBaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.sfFixedDerivedOpenExtensionBaseChangeIso",
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.singleBeta",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.sfFixedPullbackSquareIso",
-   "AlgebraicGeometry.ProEtale.sfFixedDerivedBaseChange",
-   "AlgebraicGeometry.ProEtale.sfFixedOpenExtensionBaseChange",
-   "AlgebraicGeometry.ProEtale.sfFixedOpenExtensionBaseChange_isIso",
-   "AlgebraicGeometry.ProEtale.sfFixedDerivedOpenExtensionBaseChangeIso"
+   "AlgebraicGeometry.ProEtale.StrictTower.moduleSquareG",
+   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInvApp",
+   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInvApp_naturality",
+   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInv",
+   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInv_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.singleBeta"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/SfFiniteOpenExtensionBaseChange.lean",
-  "statement": "def sfFixedDerivedOpenExtensionBaseChangeIso (A : Type u) [CommRing A] [Finite A] {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g) : (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory ⋙ sfFixedDerivedPullback A g ≅ sfFixedDerivedPullback A gU ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j').mapDerivedCategory",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenBaseChangeNormalized.lean",
+  "statement": "def singleBeta [Finite B] {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) (hsq : IsPullback a j' j g) : (moduleJ B j).mapDerivedCategory ⋙ (modulePullback B g).mapDerivedCategory ≅ (modulePullback B a).mapDerivedCategory ⋙ (moduleJ B j').mapDerivedCategory",
   "branch": "newtargets-dag",
-  "by": "NY",
+  "by": "N4",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B): the recorded upstream module imports the legacy pro-etale definitions, which duplicate names from the recorded intrinsic finite-coefficient modules. This module states the same canonical extension-by-zero exchange in the compatible finite-coefficient interface. Its inverse-image and direct-image squares are actual mates, its underived extension exchange is their conjugate, and its degreewise derived isomorphism is in the node direction. Returned compilation repair: directly imports SfIntrinsicRealizationTransport for sfFixedDerivedPullback and the finite-coefficient UpperLowerStar.Iso module for upperStarCompIso; no exceptional-functor import is needed."
+  "note": "Section 1(B): importing the recorded legacy UpperLowerStar/OpenImmersion modules together with the current finite-coefficient framework duplicates their public declarations. This module states the same unbounded finite-constant-coefficient open base-change isomorphism in the constant ring-sheaf module coordinates used by the item. Its inverse is precisely the open-unit transpose; the finite fixed-ring sheaf presentation is canonically identified by coefficient realization, so no cartesian case, complex or normalization is lost."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-579de47d0",
-  "group": "NY",
+  "reviewer": "NT-stage2-Codex-ee18e5df3",
+  "group": "N4",
   "result": "pass",
-  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
  }
 }
