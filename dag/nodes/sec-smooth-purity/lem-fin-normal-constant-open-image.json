@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-normal-constant-open-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A constant sheaf across a dense normal open",
@@ -19,40 +19,142 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-open-immersion",
+  "pqf-def-locnoeth",
+  "def-constructible-constant",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "It suffices to evaluate on affine etale objects $W\\to Y$.\nBy [lem-fin-etale-normal-components], they are finite\ndisjoint unions of open-and-closed components, each integral\nin the sense of\n[def-sbc-normal-dominant-galois].\nEvery such component meets $W\\times_YV$: its nonempty\nimage is open in the integral $Y$ by\n[lem-weil-pbc-flat-lfp-open], hence meets $V$.\nIts intersection with $W\\times_YV$ is a nonempty open\nof an irreducible scheme and is therefore irreducible.\nThus restriction gives a bijection of the connected\ncomponents of $W$ and $W\\times_YV$.",
+   "text": "Write $\\Lambda$ for the commutative coefficient ring of $M$ and put $F=\\underline M_Y$ in the category of sheaves of $\\Lambda$-modules on $Y_{\\mathrm{Et}}$, as in [def-constructible-constant]. By [def-sbc-normal-dominant-galois], normality of $Y$ says that each local ring $\\mathcal O_{Y,y}$ is a domain integrally closed in its fraction field. Thus $Y$ is integral with integrally closed local rings, and $v$ is a nonempty open immersion, exactly as required for the normal-open unit theorem. No additional hypothesis on $M$ or $v$ is introduced.",
    "uses": [
-    "lem-fin-etale-normal-components",
-    "def-sbc-normal-dominant-galois",
-    "lem-weil-pbc-flat-lfp-open"
+    "def-constructible-constant",
+    "def-sbc-normal-dominant-galois"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z5, label lemma-push-constant-sheaf-from-open, hypotheses of (2)"
+   }
   },
   {
-   "text": "Sections of a constant finite sheaf on a scheme are\nlocally constant functions on its underlying space:\na section selects an open-and-closed partition labelled\nby the finite set, as is seen by gluing a trivializing\netale cover. Consequently restriction is the identity\n$M^{\\pi_0(W)}\\to M^{\\pi_0(W\\times_YV)}$ under the\ncomponent bijection. By the section formula for\n[def-weil-pbc-direct-image], this is exactly the map\nin the statement. The identifications respect restriction\nmaps, hence define a sheaf isomorphism. Compare\n[Stacks\nProject, Tag 09Z5](https://stacks.math.columbia.edu/tag/09Z5).",
+   "text": "Apply [lem-weil-pbc-normal-constant-generic-open-unit] with $j=v$ and the given $\\Lambda$-module $M$. It gives an isomorphism $\\eta_v(F):F\\xrightarrow{\\sim}v_*v^{-1}F$, where $\\eta_v$ is the adjunction unit of [def-weil-pbc-inverse-image]. The cited theorem is for arbitrary modules and does not require Noetherianity, so in particular applies to the finite module and Noetherian scheme in this item.",
    "uses": [
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-normal-constant-generic-open-unit",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z5, label lemma-push-constant-sheaf-from-open, assertion (2); existing module-valued unit formulation"
+   }
+  },
+  {
+   "text": "Use the pullback-of-constants isomorphism of [lemma-constructible-pullback-constant] in module coefficients. To specify its canonical comparison $\\gamma_v:v^{-1}F\\to\\underline M_V$, the adjunctions in [def-weil-pbc-inverse-image] and [def-constructible-constant], and the section formula of [def-weil-pbc-direct-image], give, naturally in any module sheaf $G$ on $V$, $\\operatorname{Hom}(v^{-1}F,G)\\cong\\operatorname{Hom}(F,v_*G)\\cong\\operatorname{Hom}_{\\Lambda}(M,\\Gamma(Y,v_*G))=\\operatorname{Hom}_{\\Lambda}(M,\\Gamma(V,G))\\cong\\operatorname{Hom}(\\underline M_V,G)$. Define $\\gamma_v$ by the element corresponding to $\\mathrm{id}_{\\underline M_V}$. The reverse bijections define its inverse: naturality shows that each composite corresponds to the identity of its source. In particular, the adjoint of $\\gamma_v$ is $c=v_*(\\gamma_v)\\circ\\eta_v(F)$, and the constant-sheaf adjunction sends $c$ to $M\\to\\Gamma(V,\\underline M_V)$, $m\\mapsto$ the constant section with value $m$. By the same adjunction this characterizes the canonical map of the statement. Direct image is a functor by [def-weil-pbc-direct-image], so $v_*(\\gamma_v^{-1})$ is inverse to $v_*(\\gamma_v)$: their composites are the images of the corresponding identity maps. The inverse of $c$ is therefore $\\eta_v(F)^{-1}\\circ v_*(\\gamma_v^{-1})$, proving the required isomorphism of module sheaves on the small etale site.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-constructible-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-constructible-pullback-constant.md",
+    "place": "Statement and proof: canonical comparison of the two left adjoints to global sections; composition with the open-immersion unit"
+   }
   }
  ],
  "proof_deps": [
-  "lem-fin-etale-normal-components",
+  "def-constructible-constant",
   "def-sbc-normal-dominant-galois",
-  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-normal-constant-generic-open-unit",
+  "def-weil-pbc-inverse-image",
+  "lemma-constructible-pullback-constant",
   "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-constant-open-image.md",
-  "place": "## Proof"
+  "place": "Replacement of the two imported proof paragraphs by the existing general module-valued Tag 09Z5 open-unit result, followed by the canonical pullback-of-constants comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constantSheaf|normal.*[Cc]onstant|[Cc]onstant.*normal",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, AlgebraicGeometry.IsOpenImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit from a constant etale sheaf to the pushforward from a nonempty open of a normal integral scheme is an isomorphism",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Equivalence.sheafCongr_unitIso; pushforward unit formulas and structure-sheaf module restriction results do not give this constant small-etale sheaf theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal integral scheme the constant sheaf is the direct image of its restriction to a nonempty open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, ModuleCat.Tilde.res_const, AlgebraicGeometry.StructureSheaf.toOpen_eq_const, AlgebraicGeometry.Scheme.Opens.topIso",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral scheme and a dense open immersion j, the adjunction unit of a constant sheaf of modules is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; the Scheme.Modules restriction results concern sheaves of structure-sheaf modules, not constant coefficient modules on the small etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "12 hits: CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf; read Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66-73: construction and global-section adjunction only, no normal-open unit theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal|IsIntegrallyClosed|IsIso",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant|constantSheaf",
+   "results": "0 hits: ; no normal-open unit theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant étale module sheaf is recovered by restriction to a dense open subscheme of a normal scheme and direct image",
+   "results": "8 hits: ModuleCat.Tilde.exists_const, ModuleCat.Tilde.res_const, AlgebraicGeometry.StructureSheaf.exists_const, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; structure-sheaf sections and normalization, not constant etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"unit\"",
+   "results": "3 hits: CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w; no normal-open unit theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -83,5 +185,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-fin-normal-constant-open-image",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Reused the existing stronger module-valued normal-open unit theorem rather than duplicating its conclusion or rebuilding the component proof. Checked normality and open-immersion hypotheses, then identified the canonical map by pullback of constants and direct image of an isomorphism. Added the missing statement dependencies. No new nodes or Mathlib leaves; the project theorem in the specified Lean checkout has sorry and is not an attachment. Second reader made the canonical comparison explicit through the adjunction Hom bijections and added the two definition citations it uses.",
+  "blueprint": "The first imported paragraph establishes the normal-open situation and the second concludes the constant-sheaf comparison. Steps 1-2 replace the component calculation by the already existing general Tag 09Z5 module-valued unit theorem; Step 3 realizes the second paragraph’s identification of the canonical direct-image map. This is a change below the node level, not a change of the affine-line/Kummer unit statement or its steps.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-constant-generic-open-unit",
+    "why": "General module-valued Tag 09Z5 nonempty-open unit theorem, used as an existing black box; the affine-line/Kummer unit supplies no normal-open sheaf theorem and no unit-level step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-constant-generic-open-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-7e7187b93",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-7e7187b93 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements, sources and unit/chapter route in full. All three steps preserve module coefficients and identify the canonical map correctly. Accepted the existing normal-open unit theorem as a generic tool. Edge cases and dependency-cycle checks pass; no new nodes or repairs. Written review.md."
+ }
 }
