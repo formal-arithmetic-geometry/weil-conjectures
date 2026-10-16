@@ -1,53 +1,101 @@
 {
-  "id": "def-sfb-modobj-transport",
-  "kind": "definition",
-  "title": "Transport of module objects along a lax monoidal functor",
-  "statement": "Let $F\\colon\\mathcal C\\to\\mathcal D$ be a lax monoidal functor between monoidal categories,\nwith structure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$ and\n$\\varepsilon^F\\colon\\mathbf 1\\to F\\mathbf 1$. Let $\\mathcal R$ be a monoid object of\n$\\mathcal C$ ([sk-def-sfb-ring-object]). Then $F\\mathcal R$ is a monoid object of\n$\\mathcal D$, with multiplication $F(\\mu)\\circ\\mu^F_{\\mathcal R,\\mathcal R}$ and unit\n$F(\\eta)\\circ\\varepsilon^F$. For an $\\mathcal R$-module object $M$\n([sk-def-sfb-module-objects]), the morphism\n$$\nF\\mathcal R\\otimes FM\\xrightarrow{\\mu^F_{\\mathcal R,M}}F(\\mathcal R\\otimes M)\n\\xrightarrow{F\\gamma_M}FM\n$$\nmakes $FM$ an $F\\mathcal R$-module object. For an $\\mathcal R$-linear map $f$, the map\n$Ff$ is $F\\mathcal R$-linear. This defines the functor\n$$\n\\operatorname{mapMod}(F)\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{F\\mathcal R}(\\mathcal D),\n$$\nwhich commutes with the forgetful functors.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport.md",
-    "place": "node def-sfb-modobj-transport, order 1598"
+ "id": "def-sfb-modobj-transport",
+ "kind": "definition",
+ "title": "Transport of module objects along a lax monoidal functor",
+ "statement": "Let $F\\colon\\mathcal C\\to\\mathcal D$ be a lax monoidal functor between monoidal categories,\nwith structure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$ and\n$\\varepsilon^F\\colon\\mathbf 1\\to F\\mathbf 1$. Let $\\mathcal R$ be a monoid object of\n$\\mathcal C$ ([sk-def-sfb-ring-object]). Then $F\\mathcal R$ is a monoid object of\n$\\mathcal D$, with multiplication $F(\\mu)\\circ\\mu^F_{\\mathcal R,\\mathcal R}$ and unit\n$F(\\eta)\\circ\\varepsilon^F$. For an $\\mathcal R$-module object $M$\n([sk-def-sfb-module-objects]), the morphism\n$$\nF\\mathcal R\\otimes FM\\xrightarrow{\\mu^F_{\\mathcal R,M}}F(\\mathcal R\\otimes M)\n\\xrightarrow{F\\gamma_M}FM\n$$\nmakes $FM$ an $F\\mathcal R$-module object. For an $\\mathcal R$-linear map $f$, the map\n$Ff$ is $F\\mathcal R$-linear. This defines the functor\n$$\n\\operatorname{mapMod}(F)\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{F\\mathcal R}(\\mathcal D),\n$$\nwhich commutes with the forgetful functors.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport.md",
+  "place": "node def-sfb-modobj-transport, order 1598"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "A lax monoidal functor sends monoid objects to monoid objects. The monoid axioms for\n$F\\mathcal R$ follow from those of $\\mathcal R$, naturality of $\\mu^F$, and the\nassociativity and unitality axioms of the lax structure.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "sk-def-sfb-ring-object",
-    "sk-def-sfb-module-objects"
+  {
+   "text": "Unit law for $FM$: by naturality of $\\mu^F$ and lax unitality\n$F(\\lambda_M)\\mu^F_{\\mathbf 1,M}(\\varepsilon^F\\otimes FM)=\\lambda_{FM}$,\n$$\nF(\\gamma_M)\\mu^F(F\\eta\\,\\varepsilon^F\\otimes FM)\n=F(\\gamma_M(\\eta\\otimes M))\\mu^F(\\varepsilon^F\\otimes FM)\n=F(\\lambda_M)\\mu^F(\\varepsilon^F\\otimes FM)=\\lambda_{FM}.\n$$\nAssociativity of the action follows in the same way, from naturality of $\\mu^F$, the\nassociativity axiom of the lax structure, and associativity of $\\gamma_M$. Linearity of\n$Ff$ is naturality of $\\mu^F$ applied to $\\gamma_N(\\mathcal R\\otimes f)=f\\gamma_M$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1598,
+ "blueprint_uses": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.mapMod"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.mapMod"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "CategoryTheory.Functor.mapMod",
+   "CategoryTheory.Functor.modObjObj",
+   "CategoryTheory.Functor.act_mapMod_obj"
   ],
-  "proof": [
+  "note": "attached by the lead's tool attach.py 2026-10-16 10:29 UTC for group N2, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_7d675a26.jsonl.gz: Assuming only monoidal categories, lax monoidal F, a monoid A and its modules, modObjObj constructs the transported module over F"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
     {
-      "text": "A lax monoidal functor sends monoid objects to monoid objects. The monoid axioms for\n$F\\mathcal R$ follow from those of $\\mathcal R$, naturality of $\\mu^F$, and the\nassociativity and unitality axioms of the lax structure.",
-      "uses": [],
-      "elementary": null
+     "name": "CategoryTheory.Functor.mapMod",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod",
+     "lines": [
+      160,
+      172
+     ],
+     "kind": "def",
+     "sorry": false
     },
     {
-      "text": "Unit law for $FM$: by naturality of $\\mu^F$ and lax unitality\n$F(\\lambda_M)\\mu^F_{\\mathbf 1,M}(\\varepsilon^F\\otimes FM)=\\lambda_{FM}$,\n$$\nF(\\gamma_M)\\mu^F(F\\eta\\,\\varepsilon^F\\otimes FM)\n=F(\\gamma_M(\\eta\\otimes M))\\mu^F(\\varepsilon^F\\otimes FM)\n=F(\\lambda_M)\\mu^F(\\varepsilon^F\\otimes FM)=\\lambda_{FM}.\n$$\nAssociativity of the action follows in the same way, from naturality of $\\mu^F$, the\nassociativity axiom of the lax structure, and associativity of $\\gamma_M$. Linearity of\n$Ff$ is naturality of $\\mu^F$ applied to $\\gamma_N(\\mathcal R\\otimes f)=f\\gamma_M$.",
-      "uses": [],
-      "elementary": null
+     "name": "CategoryTheory.Functor.modObjObj",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod",
+     "lines": [
+      145,
+      157
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.act_mapMod_obj",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod",
+     "lines": [
+      199,
+      201
+     ],
+     "kind": "theorem",
+     "sorry": false
     }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-transport/def-sfb-modobj-transport.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_not_found"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1598,
-  "blueprint_uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-ring-object"
-  ],
-  "blueprint_lean": [
-    "CategoryTheory.Functor.mapMod"
-  ],
-  "blueprint_lean_not_found": [
-    "CategoryTheory.Functor.mapMod"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015"
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
 }
