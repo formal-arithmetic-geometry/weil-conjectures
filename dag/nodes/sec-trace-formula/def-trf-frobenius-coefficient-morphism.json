@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-trf-frobenius-coefficient-morphism",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-weil"
+  ]
  },
  "kind": "definition",
  "title": "Frobenius coefficient morphisms",
- "statement": "Fix the global finite-field datum and the coefficient conventions of\n[def-trf-coefficient-conventions], let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let $\\Phi$ be\nthe $q$-power scheme Frobenius of [def-trf-scheme-frobenius], with\niterates $\\Phi^m$. Let $K\\in D^b_{ctf}(X,A)$.\n\n1. A *Frobenius coefficient morphism* on $K$ is an arbitrary morphism\n$$\n\\psi:L\\Phi^*K\\longrightarrow K\n$$\nin the derived category of $X$; no invertibility is required.\n1. Its *iterates* $\\psi_m:L\\Phi^{m*}K\\to K$, $m\\geq1$, are defined\nrecursively by $\\psi_1=\\psi$ and\n$$\n\\psi_m:\\;L\\Phi^{m*}K\\xrightarrow{\\ \\sim\\ }\nL\\Phi^*L\\Phi^{(m-1)*}K\n\\xrightarrow{\\ L\\Phi^*\\psi_{m-1}\\ }L\\Phi^*K\n\\xrightarrow{\\ \\psi\\ }K,\n$$\nwhere the first arrow is the composition isomorphism of derived\npullback for $\\Phi^m=\\Phi^{m-1}\\circ\\Phi$; thus $\\psi_m$ is the\ncomposite of the pulled-back copies $L\\Phi^{i*}\\psi$,\n$0\\leq i\\leq m-1$, exactly as for the iterated Weil isomorphism of\n[def-trf-iterated-weil-map].\n1. Its *graph map* in degree $m$ is the graph correspondence of\n[def-trf-graph-correspondence] attached to $(h,v)=(\\Phi^m,\\psi_m)$:\n$$\nc_m=(c_1,c_2)=(\\operatorname{id}_X,\\Phi^m),\\qquad u=\\psi_m:\nLc_2^*K=L\\Phi^{m*}K\\longrightarrow K=Rc_1^!K .\n$$\n1. Its *global operator* in degree $m$ is\n$$\nF_{c,m}(\\psi)=T_{c_m}(\\psi_m):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\nthe global operator of [def-trf-global-operator] of the graph map. It\nis defined because the ordinary leg $c_2=\\Phi^m$ is finite\n([def-trf-scheme-frobenius]), hence proper\n([def-weil-scheme-morphism-properties]), and the exceptional leg\n$c_1=\\operatorname{id}_X$ is admissible with $Rc_1^!=\\operatorname{id}$.\n\n*Example.* For a strict Weil complex $(K,\\varphi)$ of\n[def-trf-strict-weil-complex], the scheme-Frobenius map\n$u_1=\\varphi\\circ\\kappa_K:L\\Phi^*K\\xrightarrow{\\sim}K$ of\n[def-trf-iterated-weil-map] is an (invertible) Frobenius coefficient\nmorphism; the notion above drops the invertibility, and the iterates,\ngraph map and global operator are given by the same composites.",
+ "statement": "Fix the global finite-field datum and the coefficient conventions of\n[def-trf-coefficient-conventions], let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let $\\Phi$ be\nthe $q$-power scheme Frobenius of [def-trf-scheme-frobenius], with\niterates $\\Phi^m$. Let $K\\in D^b_{ctf}(X,A)$.\n\n1. A *Frobenius coefficient morphism* on $K$ is an arbitrary morphism\n$$\n\\psi:L\\Phi^*K\\longrightarrow K\n$$\nin the derived category of $X$; no invertibility is required.\n1. Its *iterates* $\\psi_m:L\\Phi^{m*}K\\to K$, $m\\geq1$, are defined\nrecursively by $\\psi_1=\\psi$ and, for $m\\geq2$,\n$$\n\\psi_m:\\;L\\Phi^{m*}K\\xrightarrow{\\ \\sim\\ }\nL\\Phi^*L\\Phi^{(m-1)*}K\n\\xrightarrow{\\ L\\Phi^*\\psi_{m-1}\\ }L\\Phi^*K\n\\xrightarrow{\\ \\psi\\ }K,\n$$\nwhere the first arrow is the composition isomorphism of derived\npullback of [lem-weil-pbc-proetale-derived-pullback-composition] for $\\Phi^m=\\Phi^{m-1}\\circ\\Phi$; thus $\\psi_m$ is the\ncomposite of the pulled-back copies $L\\Phi^{i*}\\psi$,\n$0\\leq i\\leq m-1$, exactly as for the iterated Weil isomorphism of\n[def-trf-iterated-weil-map].\n1. Its *graph map* in degree $m$ is the graph correspondence of\n[def-trf-graph-correspondence] attached to $(h,v)=(\\Phi^m,\\psi_m)$:\n$$\nc_m=(c_1,c_2)=(\\operatorname{id}_X,\\Phi^m),\\qquad u=\\psi_m:\nLc_2^*K=L\\Phi^{m*}K\\longrightarrow K=Rc_1^!K .\n$$\n1. Its *global operator* in degree $m$ is\n$$\nF_{c,m}(\\psi)=T_{c_m}(\\psi_m):R\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\nthe global operator of [def-trf-global-operator] of the graph map. It\nis defined because $\\Phi$ is finite by [def-trf-scheme-frobenius],\nso the ordinary leg $c_2=\\Phi^m$ is finite by repeated application of\n[lem-weil-pbc-finite-composition], hence proper by\n[lem-weil-pbc-finite-proper]. The exceptional leg\n$c_1=\\operatorname{id}_X$ is admissible in the constructible sense of\n[def-trf-admissibility]; the identity compact-support comparison and\nexceptional adjunction of [sk-d-six] identify $Rc_1^!$ with\n$\\operatorname{id}$. All equalities involving $Rc_1^!K=K$ above are\nread through this canonical identity comparison.\n\n*Example.* For a strict Weil complex $(K,\\varphi)$ of\n[def-trf-strict-weil-complex], the scheme-Frobenius map\n$u_1=\\varphi\\circ\\kappa_K:L\\Phi^*K\\xrightarrow{\\sim}K$ of\n[def-trf-iterated-weil-map] is an (invertible) Frobenius coefficient\nmorphism; the notion above drops the invertibility, and the iterates,\ngraph map and global operator are given by the same composites.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/def-trf-frobenius-coefficient-morphism.md",
   "place": "node def-trf-frobenius-coefficient-morphism, order 2296"
@@ -19,14 +21,90 @@
   "def-trf-graph-correspondence",
   "def-trf-global-operator",
   "def-weil-scheme-morphism-properties",
-  "def-trf-strict-weil-complex"
+  "def-trf-strict-weil-complex",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "def-trf-admissibility",
+  "sk-d-six"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(coefficient|pullback)|coefficient.*Frobenius|graphCorrespondence|globalOperator",
+   "results": "RegularCategory.frobeniusMorphism and Witt-vector Frobenius coefficient text, unrelated to the pro-etale derived-category construction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius coefficient morphism derived pullback iterate graph compact support cohomology",
+   "results": "Ring-theoretic Frobenius/perfection identities, compactly supported continuous maps or group cohomology; no pro-etale graph operator.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary Frobenius pullback morphism on a bounded constructible derived complex over a finite field, its iterates and its compactly supported graph correspondence operator",
+   "results": "Scheme.Modules pullback adjunction and SheafOfModules.pullbackComp; these are module-sheaf operations, not the finite-coefficient derived graph construction.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"Algebra\"",
+   "results": "Algebra-category limits and monad-algebra functors; no definition giving the four clauses.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Algebra|def.*iterate|def.*Algebra",
+   "results": "CategoryTheory.Endofunctor.Algebra and its structure morphism; Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39–43 inspected. This gives only an arbitrary F(K) to K map, without scheme Frobenius, pullback composition comparisons, graph or compact-support operator.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported cohomology endomorphism induced by graph of scheme Frobenius with arbitrary coefficient map",
+   "results": "Ring-theoretic Frobenius/perfection identities, compactly supported continuous maps or group cohomology; no pro-etale graph operator.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "CategoryTheory.Endofunctor.Algebra and its structure morphism; Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39–43 inspected. This gives only an arbitrary F(K) to K map, without scheme Frobenius, pullback composition comparisons, graph or compact-support operator.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra for an endofunctor is an object K with a morphism F K to K; iterating the morphism by applying the endofunctor",
+   "results": "CategoryTheory.Endofunctor.Algebra and its structure morphism; Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39–43 inspected. This gives only an arbitrary F(K) to K map, without scheme Frobenius, pullback composition comparisons, graph or compact-support operator.",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole definition; partial analogue only"
+  },
+  {
+   "tool": "grep",
+   "query": "coeffIterate|WeilComplex|Frobenius.*pullback|pullback.*Frobenius",
+   "results": "5 hits, all Mathlib/CategoryTheory/RegularCategory/Basic.lean:180–204, concerning the regular-category Frobenius morphism and pullback; no sheaf complex, coefficient iterate or compact-support operator.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of compactly supported cohomology obtained from a noninvertible morphism from Frobenius pullback of a sheaf complex to itself",
+   "results": "8 hits: CompHausLike.LocallyConstantModule functor maps, continuous group cohomology, groupCohomology.resNatTrans and LightCondensed.ihom_map_val_app. None states a Frobenius graph correspondence operator on constructible derived complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -53,5 +131,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-weil"
+ "unit": "sk-d-weil",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-frobenius-coefficient-morphism",
+  "worker": "stage1",
+  "summary": "Audited this definition against the current blueprint and all seven imported dependencies. Kept the arbitrary (possibly noninvertible) coefficient map, positive recursion, graph and global operator unchanged mathematically. Added existing nodes for derived pullback composition, composition of finite maps, finite implies proper, constructible admissibility and the identity exceptional comparison. No new nodes and no theorem proof are needed for a definition. The upstream WeilComplex data cover part of the item, but coeffIterate_one is sorry and the strict-Weil Galois comparison example is not supplied by those declarations, so no exact attachment is claimed. Second reading clarified that the recursive formula is for m >= 2, independently reran grep and LeanFinder searches, and rechecked every clause against the current blueprint and dependency statements.",
+  "blueprint": "Current definition clauses 1–4 and example; unit sk-d-weil paragraphs defining arbitrary coefficient maps, iterates and graph/global operators. sk-d-weil is the broader same-notion interface, not a replacement for the detailed positive recursion and strict-Weil example."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-a90fd4b1e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-a90fd4b1e (reviewer sub-agent of L); spot-checked: I read the full item against main-20261015 sk-d-weil/def-trf-frobenius-coefficient-morphism.md (order 2640). Its text is the same as the master snapshot. The delivery changes no mathematics: it limits the recursion to m>=2 and adds four precise citations, replacing the collector def-weil-scheme-morphism-properties for finite=>proper. Clause 2: lem-weil-pbc-proetale-derived-pullback-composition (Stacks 0D6D, sites-cohomology.tex l.3658) with h=Phi, k=Phi^(m-1) gives L(Phi^m)^* ≅ LPhi^* L(Phi^(m-1))^* in the stated direction, and the types of LPhi^*psi_(m-1) and then psi check. Clause 3: Phi^m is finite by 01WK (Finite.lean:84), proper by 01WN (Proper.lean:69), hence a separated finite-type k-endomorphism, as def-trf-graph-correspondence requires. Clause 4: def-trf-global-operator needs only proper c_2; id is exceptionally admissible by def-trf-admissibility; R(id)^! ≅ id is the adjoint identity comparison stated in sk-d-six (also prop-functor-package item 3). Example: u_1 = phi∘kappa^(1)_K from def-trf-iterated-weil-map is an invertible psi; the example claims no psi_m = u_m cocycle. Phi is the base-changed q-power scheme Frobenius, kept distinct from g_gamma. The coefficient category is D^b_ctf(X,A) inside D(X_proet,A), and the target is not weakened. Edge cases m=1, m=2, K=0, psi=0, X=Spec k, X empty and nonreduced X_0 all pass. There are no new nodes. The only other definition is sk-d-weil (broader), correctly recorded in same_as. No tool_uses are needed (definition), no SGA source is cited, and fixes/ is empty. Process note: by mistake I ran one read-only git log in the snapshot; it wrote nothing."
+ }
 }

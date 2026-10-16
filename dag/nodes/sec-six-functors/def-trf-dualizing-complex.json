@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-trf-dualizing-complex",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-fix-six-functor-datum"
+  ]
  },
  "kind": "definition",
  "title": "Dualizing complex and Verdier dual",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, put $s=\\Spec k$, and let $Y$ be a\nseparated finite-type\n$k$-scheme whose\nstructure morphism\n$a_Y:Y\\to s$ is\nexceptionally admissible in the sense of [def-trf-admissibility] (which\nholds for every such $Y$; no ambient datum is assumed). Put\n\n$$\n\\omega_{Y,A}:=Ra_Y^!A_s,\\qquad\nD_YM:=R\\mathcal Hom_A\\bigl(M,\\omega_{Y,A}\\bigr)\n\\qquad\n\\bigl(M\\in D^b_{ctf}(Y,A)\\bigr),\n$$\n\nusing the exceptional inverse\nimage of $a_Y$ and the\nderived internal Hom and\ntensor; here $D^b_{ctf}(Y,A)$ is the\nfinite-Tor subcategory of the\nbounded constructible\nderived category. The *evaluation* is the canonical map\n\n$$\n\\operatorname{ev}_M:D_YM\\otimes_A^LM\\longrightarrow\\omega_{Y,A}\n$$\n\nobtained from the tensor–internal-Hom adjunction: it is the transpose of\nthe identity of $D_YM$ under the\nadjunction isomorphism\n\n$$\n\\Hom_{D(Y,A)}\n\\bigl(D_YM\\otimes_A^LM,\\omega_{Y,A}\\bigr)\n\\cong\n\\Hom_{D(Y,A)}\n\\bigl(D_YM,R\\mathcal Hom_A(M,\\omega_{Y,A})\\bigr).\n$$\n\nHere $\\omega_{Y,A}$ is the *dualizing complex* of $Y$ over $A$\nand $D_Y$ the *Verdier dual* functor.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]\nand the coefficient\nconventions [def-trf-coefficient-conventions], $A=A_{E,n}$, put $s=\\Spec k$, and let $Y$ be a\nseparated [def-weil-proper-morphism] finite-type\n[def-weil-finite-type-morphism] $k$-scheme whose\nstructure morphism\n$a_Y:Y\\to s$ is\nexceptionally admissible in the sense of [def-trf-admissibility] (which\nholds for every such $Y$; no ambient datum is assumed). Put\n\n$$\n\\omega_{Y,A}:=Ra_Y^!A_s,\\qquad\nD_YM:=R\\mathcal Hom_A\\bigl(M,\\omega_{Y,A}\\bigr)\n\\qquad\n\\bigl(M\\in D^b_{ctf}(Y,A)\\bigr),\n$$\n\nusing the constructible exceptional inverse\nimage of $a_Y$ [def-weil-exceptional-inverse-image] and the\nderived internal Hom and tensor\n[def-weil-derived-pullback-tensor-hom]. Here $A_s$ is the constant\ncoefficient sheaf, $D(Y,A)=D(Y_{\\mathrm{proet}},A)$ is the ambient\nderived category on the small pro-etale site of $Y$\n[def-weil-pbc-proetale-site], and $D^b_{ctf}(Y,A)$ is the\nfinite-Tor subcategory [def-weil-finite-tor-amplitude] of the\nbounded constructible derived category\n[def-weil-finite-torsion-constructibility]. Regard $D_Y$ here as the\ncontravariant functor from $D^b_{ctf}(Y,A)$ to $D(Y,A)$; on a morphism\n$u:M\\to N$ it acts by $R\\mathcal Hom_A(u,\\operatorname{id}_{\\omega_{Y,A}})$. The *evaluation* is the canonical map\n\n$$\n\\operatorname{ev}_M:D_YM\\otimes_A^LM\\longrightarrow\\omega_{Y,A}\n$$\n\nobtained from the tensor–internal-Hom adjunction\n(the natural currying isomorphism of\n[lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by\nthe derived-Hom identification of [lem-pur-rhom-global-sections]): it is the transpose of\nthe identity of $D_YM$ under the\nadjunction isomorphism\n\n$$\n\\Hom_{D(Y,A)}\n\\bigl(D_YM\\otimes_A^LM,\\omega_{Y,A}\\bigr)\n\\cong\n\\Hom_{D(Y,A)}\n\\bigl(D_YM,R\\mathcal Hom_A(M,\\omega_{Y,A})\\bigr).\n$$\n\nHere $\\omega_{Y,A}$ is the *dualizing complex* of $Y$ over $A$\nand $D_Y$ the *Verdier dual* functor.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/def-trf-dualizing-complex.md",
   "place": "node def-trf-dualizing-complex, order 2225"
@@ -20,14 +22,82 @@
   "def-weil-finite-field-fiber",
   "def-weil-finite-tor-amplitude",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|verdierDual|Verdier dual|dualizing complex",
+   "results": "0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the stated finite-coefficient pro-etale dualizing complex, Verdier dual and evaluation together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dualizing complex of a scheme is the exceptional pullback of the coefficient ring and Verdier duality is derived internal Hom into this complex",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Spec.full, SheafOfModules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Spec.reflective, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.IdealSheafData.comapIso",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the stated finite-coefficient pro-etale dualizing complex, Verdier dual and evaluation together"
+  },
+  {
+   "tool": "loogle",
+   "query": "dualizingComplex",
+   "results": "0 hit(s): ; loogle: unknown identifier 'dualizingComplex'",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the stated finite-coefficient pro-etale dualizing complex, Verdier dual and evaluation together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual on the pro etale derived category defined by derived internal Hom into the exceptional inverse image of the coefficient unit, with evaluation map",
+   "results": "8 hit(s): Ext, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid, LightCondensed.ihomPoints, CategoryTheory.Sheaf.H, localCohomology.diagram, Condensed.profiniteSolidification",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the stated finite-coefficient pro-etale dualizing complex, Verdier dual and evaluation together"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev",
+   "results": "12 hit(s): CategoryTheory.ihom.ev, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app, CategoryTheory.MonoidalClosed.whiskerLeft_curry_ihom_ev_app_assoc, CategoryTheory.MonoidalClosed.uncurry_pre",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: generic closed-monoidal evaluation only; no pro-etale exceptional inverse image or dualizing object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizing object is the extraordinary inverse image of the monoidal unit and its internal Hom defines a contravariant duality functor with the canonical tensor evaluation counit",
+   "results": "8 hit(s): CategoryTheory.HasRightDual, CategoryTheory.Exponentiable, CategoryTheory.HasLeftDual, CategoryTheory.Closed, CategoryTheory.InternallyProjective, CategoryTheory.exp.ev, CategoryTheory.HasRightDual.rightDual, CategoryTheory.exp.adjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: none defines the stated finite-coefficient pro-etale dualizing complex, Verdier dual and evaluation together"
+  },
+  {
+   "tool": "grep",
+   "query": "def ev|uncurry_id_eq_ev|def adjunction",
+   "results": "8 hit(s): Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; directory Mathlib/CategoryTheory/Monoidal/Closed",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: generic closed-monoidal evaluation only; no pro-etale exceptional inverse image or dualizing object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaves of modules on a site: the tensor product is left adjoint to internal Hom, whose counit evaluates a morphism on its argument",
+   "results": "8 hit(s): LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, LightCondensed.ihomPoints, LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no exact match for this definition: returned general sheaf adjunctions, light condensed structures or unrelated uses of dualizing/Verdier; no finite-coefficient pro-etale exceptional dualizing object"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|verdier|extraordinary|exceptional.*inverse",
+   "results": "25 hit(s): Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Data/Set/Defs.lean, Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match for this definition: returned general sheaf adjunctions, light condensed structures or unrelated uses of dualizing/Verdier; no finite-coefficient pro-etale exceptional dualizing object"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -64,5 +134,20 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-kunneth-verdier"
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-dualizing-complex",
+  "worker": "stage1",
+  "summary": "Definition-only split, with no new nodes. Read both current and older blueprint texts and all notion statements. Made coefficient, scheme-property, site and operation dependencies explicit, and cited the two existing ringed-site statements that give the displayed tensor–Hom bijection. Specified the contravariant action and ambient target without importing a preservation or biduality claim. Ran all four Mathlib search kinds, including a second semantic phrasing; generic evaluation does not provide the exceptional inverse image. The related source Lean definitions do not supply a closed exact attachment for every clause under the item hypotheses.",
+  "blueprint": "Realizes the definition preceding the Künneth–Verdier comparison: the two displayed assignments and the evaluation as transpose of the identity. In unit sk-thm-sf-kunneth-verdier this supplies omega_Y and D_YN used in step 3 (kappa); no unit proof or route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-a438e6fe5",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a438e6fe5 (reviewer sub-agent of L); spot-checked: Read in full: the item, both blueprint texts (master order 2225 and main-20261015 order 2569, identical apart from the order number) and all 12 stmt_deps statements. The delivered statement keeps the source's data and only adds citations, the ambient codomain D(Y,A) and the action RHom(u,id_ω), so no target is weakened. The exceptional functor is the constructible Ra_Y^! = ν^* a^× Rν_* of def-weil-exceptional-inverse-image on finite-coefficient pro-étale D^+/D^b_c. A_s is in D^b_ctf, there is no ambient datum, and this agrees with def-trf-admissibility including its main-20261015 update. Citing def-weil-proper-morphism and def-weil-finite-type-morphism directly is a valid sharpening of def-weil-scheme-morphism-properties. The evaluation is well defined: currying H(P,H(M,ω)) ≅ H(P⊗M,ω) by lem-weil-pbc-ringed-internal-hom-exact-restriction (Stacks 08J9), then H^0 global sections ≅ Hom by lem-pur-rhom-global-sections (08JA), on a small site (V-small skeleton). Both are notion-level prerequisites, not proof steps, so no tool_use is needed. The stmt_deps closure is acyclic. Small cases checked: Y=s, M=0, M=A_Y, Y empty, n=1, singular Y. Mathlib searches cover all kinds. The slopmaster2 Duality.lean:89-105 definitions need a HasBoundedBelowUpperShriek instance and have no evaluation, so they are not an attachment. One repair: def-fix-six-functor-datum states the same ω_{X,Λ}=Ra_X^!Λ and D_X=RHom(-,ω), but the item's blueprint.same_as was [], so I set it to [\"def-fix-six-functor-datum\"] in fixes/dag/nodes/sec-six-functors/def-trf-dualizing-complex.json. Minor: the report gives the slopmaster2 path as weil-src-slopmaster2; the file is under weil-conjectures-slopmaster2.; 1 file(s) fixed by the reviewer"
+ }
 }
