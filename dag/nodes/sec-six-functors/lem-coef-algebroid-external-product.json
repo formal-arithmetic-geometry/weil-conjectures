@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Proposition 4.3.11 and Corollary 4.3.13; explicit external product in Haugseng Corollary 3.2 and Observation 3.9",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: coherent enriched tensor product; Gepner-Haugseng Proposition 4.3.11 and Corollary 4.3.13(2), with the external construction in Haugseng Corollary 3.2 and internalization in Corollary 3.5 and Observation 3.6.",
    "via": [
     "lem-coef-enriched-category-tensor-calculus",
     "lem-coef-enhanced-localization-universal",
@@ -25,9 +25,77 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a map $f:X\\to Y$ of spaces, restriction along $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$ gives $f^*$ on algebroids [def-coef-complete-algebroid]. A lax monoidal functor is an operad functor $H^\\otimes:\\mathcal V^\\otimes\\to\\mathcal W^\\otimes$ over $\\Delta^{\\mathrm{op}}$ preserving inert cocartesian arrows; postcomposition gives $H_*$. Precomposition and postcomposition commute, including on functor simplices, so these define $F(X,\\mathcal V)=\\operatorname{Alg}_{\\Delta_X^{\\mathrm{op}}}(\\mathcal V)$ on $\\mathrm{Spc}^{\\mathrm{op}}\\times\\operatorname{MonCat}_\\infty^{\\mathrm{lax}}$. For fixed $X$, projecting a functor to $(\\mathcal V\\times\\mathcal W)^\\otimes=\\mathcal V^\\otimes\\times_{\\Delta^{\\mathrm{op}}}\\mathcal W^\\otimes$ to its two components identifies $F(X,\\mathcal V\\times\\mathcal W)$ with $F(X,\\mathcal V)\\times F(X,\\mathcal W)$: the inert condition is componentwise. Into the terminal monoidal operad $\\Delta^{\\mathrm{op}}$ there is exactly the structural functor, hence $F(X,*)\\simeq *$.",
+   "uses": [
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 2.1-2.2; product-preservation hypothesis in Corollary 3.2"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-mixed-grothendieck-products] to this $F$, with $\\mathcal A=\\mathrm{Spc}$ and $\\mathcal B=\\operatorname{MonCat}_\\infty^{\\mathrm{lax}}$, whose binary products are cartesian products. The fixed-object-space identification in step 1 says that each $F(X,-)$ preserves binary products, so the lemma gives binary products in the mixed total category and both projections preserve them. Its mixed total category is the category of varying-enrichment algebroids: a map over $(f,H)$ is an algebra map $H_*A\\to f^*B$. The lemma also gives its cocartesian projection $p$ to $\\mathcal B$, with postcomposition transport; its fiber over $\\mathcal V$ is exactly $\\operatorname{Algd}(\\mathcal V)$ by [def-coef-complete-algebroid], so it classifies this functor. For $A$ over $(X,\\mathcal V)$ and $B$ over $(Y,\\mathcal W)$, the product formula is the pair of their restrictions to $X\\times Y$. Since $(X\\times Y)^{n+1}\\simeq X^{n+1}\\times Y^{n+1}$ naturally in $[n]$, the defining left fibrations satisfy $\\Delta_{X\\times Y}^{\\mathrm{op}}\\simeq\\Delta_X^{\\mathrm{op}}\\times_{\\Delta^{\\mathrm{op}}}\\Delta_Y^{\\mathrm{op}}$. The resulting product is exactly the pair functor $A\\times_{\\Delta^{\\mathrm{op}}}B$ to the product monoidal operad; it sends inert arrows to cocartesian arrows componentwise. At $[1]$ it has mapping object $(A(x,x'),B(y,y'))$, and its object space is $X\\times Y$. The total category also has a terminal object: take the unique object $t$ of $F(*,*)$ from step 1, with object space a point and terminal enrichment. For any $(X,\\mathcal V,A)$, the mixed mapping-space formula from the lemma reduces the mapping space to a mapping space in the terminal category $F(X,*)\\simeq *$, and the space of base maps to the two terminal bases is contractible, so the total mapping space is contractible. Thus the binary products and this terminal object give finite products, with the terminal object projecting to the terminal bases.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-mixed-grothendieck-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 3.1 applied in Corollary 3.2; the displayed external-product formula"
+   }
+  },
+  {
+   "text": "For lax monoidal $H:\\mathcal V\\to\\mathcal V'$ and $K:\\mathcal W\\to\\mathcal W'$, postcomposition gives the identity of pair functors\n$$(H\\times K)_*(A\\boxtimes B)\\simeq H_*A\\boxtimes K_*B.$$\nOn a simplex both sides are the ordered pair $(H^\\otimes A,K^\\otimes B)$ with the same object map, so this identification is natural on the full functor categories. The cocartesian lifts of $p$ from step 2 are postcomposition, hence their products are again cocartesian by this identity; changing a lift by an equivalence preserves this property. The empty product of arrows is the identity of the terminal total object from step 2, hence is cocartesian as well. The projection $p$ preserves binary products by [lem-coef-mixed-grothendieck-products] and preserves the terminal object by the construction in step 2, so it preserves finite products. Thus [lem-coef-cartesian-monoidal-straightening] applies and supplies all lax symmetric monoidal coherences of $\\operatorname{Algd}(-)$, with binary comparison $\\boxtimes$ and nullary comparison selecting the one-object algebroid in the terminal enrichment. This proves the claimed lax monoidality under lax changes of enrichment.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-mixed-grothendieck-products",
+    "lem-coef-cartesian-monoidal-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2209.12569v2",
+    "place": "Theorem 2.1 and Remark 2.2; matches Gepner-Haugseng Proposition 4.3.11"
+   }
+  },
+  {
+   "text": "Suppose now that $\\mathcal V$ is symmetric monoidal. For each finite set $I$ put $\\mu_I((v_i))=\\bigotimes_{i\\in I}v_i$, including $\\mu_\\varnothing=\\mathbf1$. These are strong monoidal functors $\\mathcal V^I\\to\\mathcal V$: the interchange is the canonical reindexing\n$$\\bigotimes_{j=1}^n\\bigotimes_{i\\in I}v_{ij}\\simeq\\bigotimes_{i\\in I}\\bigotimes_{j=1}^n v_{ij}.$$\nFor coherence, consider an array $(v_{ij})$ as an object over the pointed set with non-basepoint elements $(i,j)$. Tensoring first within rows and then over rows, or first within columns and then over columns, is cocartesian pushforward along two factorizations of its fold map to $\\langle1\\rangle$. Composition of cocartesian pushforwards identifies both with pushforward along that fold map. The pointed smash-product functor indexes these arrays functorially; a partition or permutation gives the corresponding pointed map. Applying the same composition equivalences to every composable string of these maps gives their higher compatibilities, including empty rows and columns, directly from the cocartesian-fibration structure. Restrict the column variable along the usual $\\Delta^{\\mathrm{op}}\\to N(\\mathrm{Fin}_*)$ selecting the ordered monoidal operations. This gives the strong monoidal structures on $\\mu_I$ and their compatible partition and permutation maps. Compose the finite-arity structure functors from [lem-coef-cartesian-monoidal-straightening] with $(\\mu_I)_*$. For a partition $I=\\coprod_{j\\in J}I_j$, composition is identified with the $I$-ary operation by the lax-monoidal block compatibility followed by $\\mu_J\\circ\\prod_j\\mu_{I_j}\\simeq\\mu_I$; permutations use the same reindexing. These are equivalences, so these operations give the Segal symmetric monoidal structure on $\\operatorname{Algd}(\\mathcal V)$. Its binary operation is $\\mu_*(A\\boxtimes B)$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-cartesian-monoidal-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 3.5 and Observation 3.6, with the finite-arity interchange written out; Gepner-Haugseng Corollary 4.3.13(2)"
+   }
+  },
+  {
+   "text": "The nullary external product in step 3 has object space $*$ and its unique mapping object is the unit of the terminal monoidal category. Applying $(\\mu_\\varnothing)_*$ gives the one-object $\\mathcal V$-algebroid with mapping object $\\mathbf1$. Its product with $A$ has object space $*\\times X\\simeq X$ and mapping objects $\\mathbf1\\otimes A(x,x')\\simeq A(x,x')$; in the other order they are $A(x,x')\\otimes\\mathbf1\\simeq A(x,x')$. These identifications are the two unitor operations already present in the nullary/block compatibility of step 4, hence identify this algebroid as the unit with its specified coherences.",
+   "uses": [
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 3.6; nullary case of the internalized product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-mixed-grothendieck-products",
+  "lem-coef-cartesian-monoidal-straightening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Definitions 2.1-2.2, Proposition 3.1, Corollaries 3.2 and 3.5 and Observation 3.6; generic monoidal straightening from Ramzi arXiv:2209.12569v2 Theorem 2.1. Primary sources read online; proof details and finite-arity interchange supplied by the second reader."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,15 +138,79 @@
    "results": "{\"t\": \"2026-10-16T12:28:54Z\", \"tool\": \"leanfinder\", \"query\": \"Many object associative algebras in product monoidal categories have coherent external products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.prodCompExternalProduct\", \"CategoryTheory.MonoidalCategory.prodMonoidal_associator\", \"CategoryTheory.Pi.isoApp_associator\", \"CategoryTheory.Pi.monoidalCategoryStruct\", \"CategoryTheory.Pi.associator_hom_apply\", \"CategoryTheory.MonoidalCategory.prodMonoidal\", \"CategoryTheory.Pi.associator_inv_apply\", \"CategoryTheory.MonoidalCategory.DayConvolution.associatorCorepresentingIso\"], \"digest\": \"09cdc15d8e9bd6b8\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External products of infinity algebroids over varying monoidal categories give a lax monoidal Algd functor and symmetric internal tensor",
+   "results": "HomologicalComplex.Monoidal.inducingFunctorData; AlgCat.instMonoidalCategory.tensorObj; AlgCat.instSymmetricCategory; ModuleCat.MonModuleEquivalenceAlgebra.functor; AlgCat.instMonoidalCategoryStruct; AlgCat.instMonoidalCategory; AlgCat.instMonoidalCategory.tensorObj_carrier; AlgCat.instBraidedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: these are ordinary homological or algebra-category monoidal structures, not operadic infinity algebroids."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched, CategoryTheory.MonoidalCategory.externalProduct, CategoryTheory.LaxMonoidalFunctor",
+   "results": "none (unknown identifier CategoryTheory.Enriched)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|[Ee]nrichedCat|[Ee]nrich.*[Pp]rod (Mathlib/CategoryTheory)",
+   "results": "Mathlib/CategoryTheory/Bicategory/CatEnriched.lean; Mathlib/CategoryTheory/Enriched/Basic.lean; Mathlib/CategoryTheory/Enriched/EnrichedCat.lean; Mathlib/CategoryTheory/Enriched/FunctorCategory.lean; Mathlib/CategoryTheory/Enriched/Opposite.lean (ordinary enriched categories only)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Products of algebroids in product monoidal infinity categories and coherent symmetric monoidal internalization",
+   "results": "CategoryTheory.Functor.Monoidal.prod'; CategoryTheory.MonoidalCategory.prodMonoidal; CategoryTheory.Pi.monoidalCategory; CategoryTheory.Pi.symmetricCategory; CategoryTheory.Pi.monoidalPi; CategoryTheory.Pi.monoidalPi'; CategoryTheory.Functor.instMonoidalProdProd; AlgCat.instMonoidalCategoryStruct",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary product monoidal infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of enriched categories has pairs of objects and tensor product hom objects with symmetric coherent composition",
+   "results": "{\"t\": \"2026-10-16T13:56:08Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of enriched categories has pairs of objects and tensor product hom objects with symmetric coherent composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.EnrichedCat.str\", \"CategoryTheory.eComp\", \"CategoryTheory.EnrichedCat\", \"CategoryTheory.EnrichedCat.of\", \"CategoryTheory.Enriched.HasConicalProducts\", \"CategoryTheory.EnrichedCategory.comp\", \"CategoryTheory.EnrichedCategory.Hom\"], \"digest\": \"e8d9ef79a9c048eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat.bicategory, eComp, enriched products and ordinary monoidal constructions do not state this varying-enrichment infinity-operadic tensor theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Enriched\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-16T13:56:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat.bicategory, eComp, enriched products and ordinary monoidal constructions do not state this varying-enrichment infinity-operadic tensor theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|prod|monoidal",
+   "results": "{\"t\": \"2026-10-16T13:56:09Z\", \"tool\": \"grep\", \"query\": \"tensor|prod|monoidal\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/EnrichedCat.lean\", \"Mathlib/CategoryTheory/Enriched/EnrichedCat.lean\", \"Mathlib/CategoryTheory/Enriched/EnrichedCat.lean\"], \"digest\": \"094f440069a589ae\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: EnrichedCat.bicategory, eComp, enriched products and ordinary monoidal constructions do not state this varying-enrichment infinity-operadic tensor theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-algebroid-external-product",
+  "worker": "Q07 repair worker",
+  "summary": "Repair of E2/C4 return: the mixed Grothendieck helper now states only binary products with the canonical comparison hypothesis explicit. Step 2 constructs the total terminal object directly from F(X,*) equivalent to the terminal category, and step 3 combines this with binary-product preservation before applying monoidal straightening. Updated citation quotes and rechecked all five steps; the item statement is unchanged. Independent second reading corrects the item source locator and expands the row/column cocartesian-pushforward construction in step 4; reruns all three search methods for both new helpers.",
+  "blueprint": "Realizes the inherited ancestor proof paragraph 2 through the external-product coherence needed for enriched tensor calculus. The statement is unchanged. Neither completion nor colimit preservation is used."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-dd6e7536d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-dd6e7536d (reviewer sub-agent of L); spot-checked: The mathematics and all three nodes pass the full source, hypothesis, route, edge-case, duplication, and Mathlib-search checks. One repairable citation fault remains: the item’s top-level source.place incorrectly cites Haugseng Observation 3.9, which concerns colimit preservation. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-algebroid-external-product.json, citing Corollary 3.2, Corollary 3.5, and Observation 3.6.; 1 file(s) fixed by the reviewer"
+ }
 }
