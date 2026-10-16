@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+ "kind": "statement",
+ "title": "Tensor colimits with independent site and coefficient universes",
+ "statement": "Let $(C,J)$ be a site essentially small in a coefficient universe $w$, let $R$ be a sheaf of commutative rings in that universe, and let $M$ be a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. The functor $N\\mapsto M\\otimes_R N$, with the sheafified sectionwise tensor product [def-pur-sheaf-tensor-product], preserves colimits of every diagram whose object and morphism types lie in universe $w$. The object and morphism universes of the site may differ from $w$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EP (sites-modules-lemma-tensor-commute-colimits), item (2)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Let a be module sheafification and let epsilon be its invertible counit on sheaves [def-weil-presheaf-modules-sheafification]. The monoidal tensorator and epsilon_M give a natural isomorphism a followed by tensorLeft M with presheaf tensorLeft M.val followed by a. This is the explicit composition of the mapped counit and Functor.Monoidal.commTensorLeft.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The presheaf tensor functor preserves coefficient-sized colimits by Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal, lines 237-241; sheafification preserves them as a left adjoint. Therefore their composite, and the naturally isomorphic precomposition of tensorLeft M with a, preserve them.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply CategoryTheory.Adjunction.preservesColimitsOfSize_iff in Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits, lines 56-62, to the reflective sheafification adjunction. Its right adjoint is fully faithful, so preservation after precomposition with a implies preservation by tensorLeft M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "As a shared proved corollary, tensorLeft_additive_independent shrinks tensor colimit preservation to finite diagrams, obtains binary biproduct preservation from binary coproduct preservation, and applies Functor.additive_of_preservesBinaryBiproducts. The independent-coefficient zero-morphism theorem supplies its zero preservation. The parent cone proof and bounded-flat criterion import and reuse this one declaration instead of separately proving identical private lemmas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The shared explicit site tensor comparisons siteTensorRightIso, tensorRightPresentation and siteSheafTensorRightIso identify the sectionwise construction, its sheafification, and tensorRight using identities on tensor generators and the monoidal sheafification counit. Both the parent cone proof and bounded-flat criterion reuse these single constructions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EP (sites-modules-lemma-tensor-commute-colimits), item (2); the argument is detailed in the proof steps; shared tensor-additivity corollary derived from preservation of binary coproducts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a sheaf of modules preserves colimits on a ringed site",
+   "results": "8 hits on sheaf monoidal structures and existence of module colimits; no exact independent-universe preservation theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.preservesColimitsOfSize_iff",
+   "results": "1 hit, the reflective-adjunction reduction used in the proof",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorLeft.*[Pp]reservesColimits|[Pp]reservesColimits.*tensorLeft",
+   "results": "18 hits, including sectionwise presheaf tensor colimits in Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:238; not the sheaf assertion",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a sheaf of modules preserves colimits on a ringed site",
+   "results": "Service unavailable: Internal Server Error. The attempt is logged in searches.jsonl; no mathematical verdict is asserted.",
+   "date": "2026-10-16",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KFlatRingedToposPullback",
+  "date": "2026-10-16",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first displayed inverse-image functor: tensor additivity and tensor-colimit arguments for the flat K-flat resolving class.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients",
+  "file": "lean/Sheaf/Algebra/Homology/TensorColimitsIndependentCoefficients.lean",
+  "declaration": "SheafOfModules.tensorLeft_preservesColimits_independentCoefficients",
+  "statement": "theorem tensorLeft_preservesColimits_independentCoefficients\n    (M : SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :\n    letI := isMonoidal_W_independentCoefficients R\n    letI := monoidalCategory R\n    PreservesColimitsOfSize.{w, w} (tensorLeft M)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-16",
+  "declarations": [
+   "SheafOfModules.tensorLeft_preservesColimits_independentCoefficients",
+   "SheafOfModules.tensorLeft_additive_independent",
+   "SheafOfModules.siteTensorRightIso",
+   "SheafOfModules.tensorRightPresentation",
+   "SheafOfModules.siteSheafTensorRightIso"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+ }
+}

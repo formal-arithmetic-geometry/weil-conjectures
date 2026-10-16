@@ -27,156 +27,57 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-ringed-topos-flat-module-pullback] to each $K^q$. Thus every $u^*K^q$ is flat. It remains to prove K-flatness.",
+   "text": "Choose q:L to P with L flat termwise and K-flat, q a quasi-isomorphism, and uStar(L) K-flat, using [lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution]. This step does not use K-flatness of P.",
    "uses": [
-    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+    "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat), opening sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Record two filtered-colimit consequences used below. By [lem-pc-module-filtered-colimits-tensor], cohomology commutes with sequential degreewise colimits (exact colimits commute with kernels and images), and total tensor commutes with these colimits. Thus a sequential colimit of K-flat complexes is K-flat: for an acyclic $F$, each $\\operatorname{Tot}(F\\otimes P_n)$ has zero cohomology, and so does its colimit. Likewise a sequential colimit of flat module sheaves is flat: put the variable modules and the fixed tensor factor in degree zero in the cited tensor comparison, and take the colimit of the short exact sequences obtained by tensoring an arbitrary short exact sequence with the flat modules. The reversed order of total tensor is identified explicitly by the degreewise swap $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on degrees $(p,q)$; its signs commute with the total differential. Thus the cited colimit formula, written with the colimit in the first factor, also applies to the second factor used in the K-flat definition.",
+   "text": "Tensoring preserves colimits and hence is additive in each variable by [lem-weil-pbc-independent-sheaf-tensor-colimits]. Mathlib mapBifunctorMappingCone₂Iso identifies tensor(A,Cone q) with the cone of the tensor map. The triangulated subcategory of acyclic complexes gives cone two-out-of-three. Consequently Cone q is K-flat when L and P are K-flat [def-pc-kflat-complex]. The proof implements this comparison and both needed directions of two-out-of-three.",
    "uses": [
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof: colimit arguments; Tag 06YR (lemma-colimit-K-flat) and Modules on Sites Tag 03EU (lemma-colimits-flat), proved here from the cited statement"
-   }
-  },
-  {
-   "text": "Every bounded-above flat-term complex $P$ on either site is K-flat. For an arbitrary acyclic complex $F$, its good truncations $\\tau_{\\le m}F$ are bounded above and acyclic, and their degreewise colimit, for $m\\ge0$, is $F$: in each fixed degree the truncation is eventually identical to $F$. Apply [lem-pc-bounded-above-flat-tensor-acyclic] to $(\\tau_{\\le m}F,P)$, and use [lem-pc-module-filtered-colimits-tensor] to conclude that $\\operatorname{Tot}(F\\otimes P)$ is acyclic.",
-   "uses": [
-    "lem-pc-bounded-above-flat-tensor-acyclic",
-    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "def-pc-kflat-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof: bounded-flat input; Tag 06YQ (lemma-bounded-flat-K-flat), truncation reduction"
-   }
+   "elementary": true
   },
   {
-   "text": "For a degreewise short exact sequence $0\\to A\\to B\\to C\\to0$ with flat terms in $C$, K-flatness satisfies two out of three. Indeed [lem-weil-pbc-site-flat-quotient-tensor-ses] gives short exact sequences after tensoring each degree with every $F^p$. Their finite direct sums are short exact; the full direct sums along $p+q=n$ are filtered colimits of these finite sums, so are short exact by [lem-pc-module-filtered-colimits-tensor]. The resulting sequence of total tensor complexes is therefore short exact. For acyclic $F$, the long exact sequence of [lem-weil-pbc-complex-ses-homology-long-exact] shows that if two total tensors are acyclic, so is the third. This is the required assertion by [def-pc-kflat-complex].",
+   "text": "The cone of a quasi-isomorphism is acyclic by CochainComplex.mappingCone.quasiIso_iff_acyclic. A cone term is the biproduct L^(n+1) plus P^n. Flatness [def-pc-flat-sheaf-modules] is invariant under isomorphism and finite biproducts: the explicit site tensor functor is naturally isomorphic to localized tensorRight, and the latter on a biproduct is the finite colimit of its two exact summands. This proves that every cone term is flat.",
    "uses": [
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-pc-module-filtered-colimits-tensor",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "def-pc-kflat-complex"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof: uses of Tag 0G7B (lemma-K-flat-two-out-of-three-ses), argument written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Module pullback commutes with sequential degreewise colimits. The natural bijections in [lem-weil-pbc-ringed-topoi-module-adjunction] give, for every target module $H$, $\\operatorname{Hom}(u^*(\\varinjlim E_n),H)\\cong\\operatorname{Hom}(\\varinjlim E_n,u_*H)\\cong\\varprojlim\\operatorname{Hom}(E_n,u_*H)\\cong\\varprojlim\\operatorname{Hom}(u^*E_n,H)$. This is exactly the universal property of the colimit cocone $(u^*E_n\\to u^*(\\varinjlim E_n))$. The comparisons commute with the differentials because they commute with all module morphisms. Also, pullback preserves a short exact sequence $0\\to F\\to G\\to H\\to0$ when $H$ is flat. To check this without an additional lemma, first apply the same adjunction to the ringed-topos map $(u,\\mathrm{id}_{u^{-1}\\mathcal O})$: its module pullback is $u^{-1}$, so it preserves cokernels as a left adjoint; it preserves kernels because these are finite limits of underlying sheaves and $u^{-1}$ preserves finite limits. Thus $0\\to u^{-1}F\\to u^{-1}G\\to u^{-1}H\\to0$ is exact. By [lem-weil-pbc-ringed-topos-flat-module-pullback] for this identity coefficient map, $u^{-1}H$ is flat over $u^{-1}\\mathcal O$. Apply [lem-weil-pbc-site-flat-quotient-tensor-ses] with tensor factor $\\mathcal O\\prime$ to obtain $0\\to u^*F\\to u^*G\\to u^*H\\to0$.",
+   "text": "Apply [lem-weil-pbc-ringed-topos-acyclic-kflat-pullback] to the acyclic, K-flat, flat-term cone. Additive functors commute with mapping cones by Mathlib mappingCone.mapHomologicalComplexIso. Thus the cone of uStar(q) is K-flat. Cone two-out-of-three with uStar(L) proves that uStar(P) is K-flat.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback",
-    "lem-weil-pbc-site-flat-quotient-tensor-ses"
+    "lem-weil-pbc-ringed-topos-acyclic-kflat-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof: displayed pullback-colimit equality; Modules on Sites Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); elementary argument for Modules on Sites Tag 0G6R (lemma-pullback-ses)"
-   }
+   "elementary": true
   },
   {
-   "text": "Use [lem-pc-flat-truncation-tower] for $G=K$ to choose compatible epimorphic quasi-isomorphisms $E_n\\to\\tau_{\\le n}K$ with each $E_n$ bounded above and flat-term. Put $L=\\varinjlim_n E_n$ and let $q:L\\to K$ be the induced map. Exact filtered colimits [lem-pc-module-filtered-colimits-tensor] imply that $q$ is termwise epimorphic and $H^i(q)$ is an isomorphism for every $i$: take colimits of the epimorphisms to the truncations and of their cohomology isomorphisms, using $\\varinjlim_n\\tau_{\\le n}K=K$. By steps 2 and 3, $L$ is K-flat and flat-term.",
+   "text": "For each term, apply [lem-weil-pbc-ringed-topos-flat-module-pullback]. The given AlgebraicInverseImage is converted to the equal-coefficient AlgebraicInverseImageOfUniverses using the natural ULift-trivial isomorphisms; all its graph compatibility fields follow from those of I. At equal coefficient and module universes, changeOfRings and changeOfRingsOfUniverses agree definitionally. This yields flatness of every image term.",
    "uses": [
-    "lem-pc-flat-truncation-tower",
-    "lem-pc-module-filtered-colimits-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, first diagram and the short exact sequence; Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero)"
-   }
-  },
-  {
-   "text": "Put $M=\\ker(q:L\\to K)$. The sequence $0\\to M\\to L\\to K\\to0$ is degreewise short exact. Since $L^i$ and $K^i$ are flat, [lem-weil-pbc-site-flat-quotient-tensor-ses] gives flatness of $M^i$. Step 4 gives K-flatness of $M$, since $L$ and $K$ are K-flat and the quotient has flat terms. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact], together with the isomorphisms $H^i(q)$ of step 6, gives $H^i(M)=0$ for all $i$.",
-   "uses": [
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, first paragraph: properties of the kernel complex"
-   }
-  },
-  {
-   "text": "The complex $u^*L$ is K-flat. Each $u^*E_n$ remains bounded above because pullback takes zero to zero (it is a left adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction]); its terms are flat by [lem-weil-pbc-ringed-topos-flat-module-pullback]. Step 3 gives K-flatness of each $u^*E_n$, step 2 gives K-flatness of their colimit, and step 5 identifies that colimit with $u^*L$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "lem-weil-pbc-ringed-topos-flat-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, first paragraph: K-flatness of the pulled-back resolution colimit; read bounded above in place of the source typo bounded below"
-   }
-  },
-  {
-   "text": "Prove the remaining acyclic case independently: let $A$ be any acyclic K-flat flat-term complex on the source site. By [lem-weil-pbc-site-acyclic-kflat-cycles-flat], $Z^n(A)$ is flat. Hence $\\tau_{\\le n}A$ has flat terms: its degree-$n$ term is $Z^n(A)$, its lower terms are those of $A$, and its higher terms are zero. Choose a compatible tower $E_n\\to\\tau_{\\le n}A$ by [lem-pc-flat-truncation-tower], and define $B_n$ as its degreewise kernel. Each $B_n$ is bounded above, since both $E_n$ and the target are, and has flat terms by [lem-weil-pbc-site-flat-quotient-tensor-ses], applied degreewise with flat middle and quotient.",
-   "uses": [
-    "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
-    "lem-pc-flat-truncation-tower",
-    "lem-weil-pbc-site-flat-quotient-tensor-ses"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, acyclic-case paragraph, through the sequences defining the kernels"
-   }
-  },
-  {
-   "text": "For this tower put $L_A=\\varinjlim E_n$ and $B=\\varinjlim B_n$. Exact filtered colimits [lem-pc-module-filtered-colimits-tensor] give $0\\to B\\to L_A\\to A\\to0$ and identify $B$ with the kernel; this uses the compatible maps $B_n\\to B_{n+1}$ induced by the commuting tower squares. By [lem-weil-pbc-ringed-topos-flat-module-pullback], each $u^*B_n$ is flat-term and still bounded above. Steps 2, 3, and 5 imply $u^*B=\\varinjlim u^*B_n$ is K-flat. The same reasoning for $E_n$ gives K-flatness of $u^*L_A$. Apply the flat-quotient exactness argument of step 5 degreewise to the sequence just obtained: its quotient $A$ is flat-term. Thus $0\\to u^*B\\to u^*L_A\\to u^*A\\to0$ is short exact. Its quotient has flat terms by the flat-pullback lemma, so step 4 proves $u^*A$ is K-flat.",
-   "uses": [
-    "lem-pc-module-filtered-colimits-tensor",
-    "lem-weil-pbc-ringed-topos-flat-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, final acyclic-case paragraph, kernel colimit and conclusion; bounded above replaces bounded below"
-   }
-  },
-  {
-   "text": "Apply the acyclic case proved in steps 9 and 10 to $A=M$ of step 7. This gives K-flatness of $u^*M$. Apply the flat-quotient exactness argument of step 5 degreewise to $0\\to M\\to L\\to K\\to0$, using flatness of $K^i$. The resulting short exact sequence $0\\to u^*M\\to u^*L\\to u^*K\\to0$ has flat terms in its quotient by step 1. Its first two complexes are K-flat by steps 10 and 8, so step 4 gives K-flatness of $u^*K$. Together with step 1 this proves both conclusions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E proof, reduction to the acyclic case and final conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topos-flat-module-pullback",
-  "lem-pc-module-filtered-colimits-tensor",
-  "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-tensor-acyclic",
-  "lem-weil-pbc-site-flat-quotient-tensor-ses",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-flat-truncation-tower",
-  "lem-weil-pbc-site-acyclic-kflat-cycles-flat"
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topos-acyclic-kflat-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-ringed-topos-pullback-adapted-flat-resolution"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0G7E (sites-cohomology-lemma-pullback-K-flat), with its bounded-below typos corrected to bounded above"
+  "place": "Tag 0G7E (lemma-pullback-K-flat): flat resolution and acyclic reduction; mapping cones replace the kernel and short-exact-sequence assembly"
  },
  "mathlib_searches": [
   {
@@ -328,5 +229,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The apparent existing match ringedPullbackPreservesKFlat does not elaborate even with the current generalized KFlat overlay: its target IsFlat implicit ring cannot be inferred. State the exact 0G7E assertion with the currently recorded IsFlatOnSite and explicit source/target rings; do not import the unusable module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
  }
 }

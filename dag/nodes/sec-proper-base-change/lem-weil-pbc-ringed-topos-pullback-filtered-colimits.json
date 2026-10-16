@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
+ "kind": "statement",
+ "title": "The specified ringed-topos module pullback preserves filtered colimits",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites essentially small in a coefficient universe $w$. Let $u^{-1}\\dashv u_*$ be a morphism of their sheaf topoi, with $u^{-1}$ preserving finite limits. Let $R$ on $C$ and $R_I,S$ on $D$ be sheaves of commutative rings in universe $w$, fix an algebraic inverse-image presentation $I$ of $R_I=u^{-1}R$ and its module inverse image [def-weil-pbc-algebraic-inverse-image], and fix a ring map $c:R_I\\to S$. Let $u^*:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category] be identified on objects and morphisms with $M\\mapsto S\\otimes_{R_I}I(M)$ [def-pur-sheaf-tensor-product]. For every filtered category $A$ whose object and morphism types lie in universe $w$, the functor $u^*$ preserves colimits of shape $A$. The site universes may differ independently from $w$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (sites-modules-lemma-adjoint-pullback-pushforward-modules), colimit consequence of the tensor-formula adjunction; Tag 03EP"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The functor from module sheaves to abelian sheaves preserves colimits: express a module colimit by module sheafification and use its invertible counit. This is the proved source-library instance SheafOfModules.preservesColimitsOfShape_toSheaf in WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, lines 43-60.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forgetting abelian sheaves to set sheaves preserves filtered colimits. The presheaf forgetful functor does so sectionwise. Its compatibility with sheafification identifies the sheafified presheaf colimit with the desired underlying sheaf colimit. Transport this compatibility from the small model of the site in universe w, with the structured-arrow limit instances from relative essential smallness. Forgetting module structure to set sheaves reflects isomorphisms; since it preserves these colimits, it reflects them as well.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The natural underlying-sheaf isomorphism of I [def-weil-pbc-algebraic-inverse-image] identifies its composite with the target forgetful functor with source forgetting followed by uInv. The latter preserves filtered colimits by steps 1-2 and the given adjunction. Reflection of colimits by target forgetting now proves preservation by I.modules.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scalar extension is left adjoint to restriction. Use [lem-weil-pbc-scalar-extension-hom] sectionwise: evaluate a map on 1 tensor m; the inverse sends s tensor m to s times g(m). The tensor restriction formula and naturality of module maps show that these define inverse presheaf morphisms. The module sheafification adjunction descends the equivalence to sheaves. Pre- and postcomposition naturality are checked on 1 tensor m, and therefore give the scalar-extension adjunction. Its left adjoint preserves all colimits.",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two preservation results. The supplied object and morphism identifications produce a natural isomorphism from I.modules followed by the explicit scalar-extension functor to uStar, with components eqToIso(hobj M).symm. The hmap equation proves its naturality. Transfer colimit preservation along this isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-scalar-extension-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (sites-modules-lemma-adjoint-pullback-pushforward-modules), colimit consequence of the tensor-formula adjunction; Tag 03EP; independent-universe proof using underlying filtered colimits and explicit scalar-extension adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Module pullback along an algebraic inverse image of topoi preserves filtered colimits",
+   "results": "8 hits: ModuleCat forgetful filtered-colimit preservation/reflection, presheaf pullback, and ring colimit results; no exact theorem for the specified algebraic inverse image",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits on continuous site-functor pullback adjunctions and their coherence; not the supplied arbitrary sheaf-topos inverse image",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage.*[Cc]olimit|[Cc]olimit.*AlgebraicInverseImage",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module pullback along an algebraic inverse image of topoi preserves filtered colimits",
+   "results": "Service unavailable: Internal Server Error. The attempt is logged in searches.jsonl; no mathematical verdict is asserted.",
+   "date": "2026-10-16",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KFlatRingedToposPullback",
+  "date": "2026-10-16",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first displayed inverse-image functor: filtered-colimit preservation needed to pull back the resolving towers.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedToposPullbackFilteredColimits",
+  "file": "lean/Sheaf/Algebra/Homology/RingedToposPullbackFilteredColimits.lean",
+  "declaration": "SheafOfModules.preservesFilteredColimits_ringedToposPullback",
+  "statement": "theorem preservesFilteredColimits_ringedToposPullback\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{w}} {S RI : Sheaf JD CommRingCat.{w}}\n    (uInv : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w)))\n    (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤\n      ringedSiteModules.{w} ((sheafCompose JD\n        (forget₂ CommRingCat.{w} RingCat.{w})).obj S))\n    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R),\n      uStar.obj M = changeOfRings c (I.modules.obj M))\n    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),\n      uStar.map a = eqToHom (hobj M) ≫\n        changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)\n    (K : Type w) [Category.{w} K] [IsFiltered K] :\n    PreservesColimitsOfShape K uStar",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+ }
+}

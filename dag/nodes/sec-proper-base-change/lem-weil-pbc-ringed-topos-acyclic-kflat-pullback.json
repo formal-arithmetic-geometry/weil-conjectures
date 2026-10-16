@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-ringed-topos-acyclic-kflat-pullback",
+ "kind": "statement",
+ "title": "Ringed-topos pullback in the acyclic K-flat case",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites essentially small in a fixed coefficient universe, let $R$ on $C$ and $S$ on $D$ be sheaves of commutative rings, and let $u^{-1}\\dashv u_*$ be a morphism of their sheaf topoi, with $u^{-1}$ preserving finite limits. Fix its algebraic inverse image on ring and module sheaves and a ring homomorphism $c:u^{-1}R\\to S$. Write $u^*$ for the additive module pullback, inverse image followed by extension of scalars [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product], applied termwise to cochain complexes [def-pc-cochain-complex-modules]. If $P$ is acyclic (all its cohomology objects vanish), K-flat [def-pc-kflat-complex], and flat in every degree [def-pc-flat-sheaf-modules], then $u^*P$ is K-flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (sites-cohomology-lemma-pullback-K-flat), acyclic case; direct good-truncation variant using Tag 0G7C"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "The acyclic K-flat cycles criterion [lem-weil-pbc-site-acyclic-kflat-cycles-flat] gives flat cycles in every degree. The good truncation at n has the original terms below n, this flat cycle sheaf at n, and zero terms above n. Its terms are therefore flat and it is bounded above.",
+   "uses": [
+    "lem-weil-pbc-site-acyclic-kflat-cycles-flat",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flat-module pullback [lem-weil-pbc-ringed-topos-flat-module-pullback] to the terms of each good truncation. Additivity preserves the zero terms, so its image remains bounded above. Apply the proved independent-universe bounded-above flat criterion [lem-weil-pbc-independent-bounded-flat-kflat] directly to that image.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The good truncations indexed by natural numbers have degreewise colimit P: they are eventually equal to P in any fixed degree. The specified module pullback preserves this colimit by [lem-weil-pbc-ringed-topos-pullback-filtered-colimits]. Filtered-colimit closure of K-flatness [lem-pc-module-filtered-colimits-tensor] now gives the conclusion. This avoids a second replacement tower and avoids flat-quotient short exact sequences.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
+  "lem-weil-pbc-site-acyclic-kflat-cycles-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (sites-cohomology-lemma-pullback-K-flat), acyclic case; direct good-truncation variant using Tag 0G7C; the argument is detailed in the proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic K-flat complex of flat sheaves has K-flat pullback along a morphism of ringed topoi",
+   "results": "8 hits concerning flat site functors and ordinary modules, not acyclic K-flat sheaf complexes",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlatIndependentCoefficients",
+   "results": "0 hits: identifier not in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*[Kk][Ff]lat.*pullback|pullback.*acyclic.*[Kk][Ff]lat",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An acyclic K-flat complex of flat sheaves has K-flat pullback along a morphism of ringed topoi",
+   "results": "Service unavailable: Internal Server Error. The attempt is logged in searches.jsonl; no mathematical verdict is asserted.",
+   "date": "2026-10-16",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KFlatRingedToposPullback",
+  "date": "2026-10-16",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first displayed inverse-image functor: preservation on the acyclic flat K-flat cones used to compare a complex with a resolving model.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedToposAcyclicKFlatPullback",
+  "file": "lean/Sheaf/Algebra/Homology/RingedToposAcyclicKFlatPullback.lean",
+  "declaration": "SheafOfModules.isKFlat_ringedToposPullback_of_acyclic",
+  "statement": "theorem isKFlat_ringedToposPullback_of_acyclic\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{w}} {S RI : Sheaf JD CommRingCat.{w}}\n    (uInv : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w)))\n    (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤\n      ringedSiteModules.{w} ((sheafCompose JD\n        (forget₂ CommRingCat.{w} RingCat.{w})).obj S))\n    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R),\n      uStar.obj M = changeOfRings c (I.modules.obj M))\n    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),\n      uStar.map a = eqToHom (hobj M) ≫\n        changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)\n    [uStar.Additive]\n    (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC\n      (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (hacyclic : P.Acyclic) (hP : P.IsKFlatIndependentCoefficients)\n    (hflat : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) :\n    CochainComplex.IsKFlatIndependentCoefficients\n      ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-16"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+ }
+}

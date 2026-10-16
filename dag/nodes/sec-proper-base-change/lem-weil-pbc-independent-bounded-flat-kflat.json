@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-independent-bounded-flat-kflat",
+ "kind": "statement",
+ "title": "Bounded-above flat complexes are K-flat at independent universes",
+ "statement": "Let $(C,J)$ be a site essentially small in a coefficient universe $w$, let $R$ be a sheaf of commutative rings in universe $w$, and let $P$ be a cochain complex of sheaves of $R$-modules [def-weil-sheaf-of-modules-category]. If $P^i=0$ for $i>n$ for some integer $n$, and each $P^i$ is flat for the sheafified sectionwise tensor product [def-pur-sheaf-tensor-product], then $P$ is K-flat: the direct-sum total tensor complex of every acyclic complex with $P$ is acyclic [def-pc-kflat-complex]. Site object and morphism universes may differ independently from $w$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ (Lemma 21.17.8)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The sheafification counit and its monoidal tensor comparison identify siteSheafTensorRight M with tensorRight M. The braiding identifies tensorRight M with tensorLeft M. Hence site-flat terms are flat in the categorical sense. Tensor-colimit preservation [lem-weil-pbc-independent-sheaf-tensor-colimits] gives tensor additivity, monoidal preadditivity, and the graded tensor associativity instances.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filtered colimits of abelian groups are exact, also after shrinking from universe w to universe 0. Transfer exact sequential colimits to sheaf modules using HasExactColimitsOfShape.domain_of_functor and the forgetful functor to abelian sheaves. This uses the proved source-library module-sheaf colimit-preservation instance, not a Grothendieck-generator construction.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply CochainComplex.kFlat_of_isStrictlyLE_of_flat in lean/WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean, lines 338-353. Its proof writes P as the filtered colimit of its finite flat stupid truncations, so total tensoring with P preserves quasi-isomorphisms. All its monoidal and exact-colimit hypotheses have been supplied above.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary acyclic complex Z, the zero map from the zero complex to Z is a quasi-isomorphism. Tensoring it with P is therefore a quasi-isomorphism. Its source is zero because tensoring is additive. Vanishing homology of its target is precisely the required total-tensor acyclicity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YQ (Lemma 21.17.8); source-library bounded-flat criterion with independent-universe sheaf tensor and exact-colimit instances"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of flat sheaves of modules is K-flat",
+   "results": "8 hits on ordinary module flatness and tensor exactness; no exact theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.kFlat_of_isStrictlyLE_of_flat",
+   "results": "0 hits: identifier is in the source library, not Mathlib; the proved source-library declaration is used directly",
+   "date": "2026-10-16",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_of_isStrictlyLE|bounded.*[Ff]lat.*[Kk][Ff]lat",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of flat sheaves of modules is K-flat",
+   "results": "Service unavailable: Internal Server Error. The attempt is logged in searches.jsonl; no mathematical verdict is asserted.",
+   "date": "2026-10-16",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KFlatRingedToposPullback",
+  "date": "2026-10-16",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first displayed inverse-image functor: the bounded flat pieces of the K-flat resolving towers and acyclic truncations.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFlatIndependentCoefficients.lean",
+  "declaration": "SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite",
+  "statement": "theorem isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite\n    (P : CochainComplex 𝒜 ℤ) (n : ℤ) [P.IsStrictlyLE n]\n    (hflat : ∀ i, IsFlatOnSite (J := J) (R := R) (P.X i)) :\n    P.IsKFlatIndependentCoefficients",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-16"
+ },
+ "note": "This is the independent-universe form of lem-pc-bounded-above-flat-kflat-site. Its existing Lean theorem requires site and coefficient universes to coincide and legacy IsFlat; it cannot be applied to the arbitrary universes of the consumer. The proof reuses the proved generic source-library bounded-flat theorem rather than duplicating the spectral-sequence argument.",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-fc1c2",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261016T064223-L-582607",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with the DAG records, published interface, and Stacks proof; verified compilation and axioms."
+ }
+}
