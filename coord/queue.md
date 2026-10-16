@@ -1,6 +1,6 @@
 # Work queue
 
-77 items; claim with `tools/claim.py next <group> [--stage N]`.
+78 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (77)
+## Stage 3: modules to prove (78)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -48,6 +48,7 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh` | 11 | 1 | proof |
 | `Sheaf.Paper.ContinuousLatticeIntersectionSplitData` | 11 | 1 | proof |
+| `Sheaf.Paper.ContinuousModuleEncodingSliceFreeness` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
