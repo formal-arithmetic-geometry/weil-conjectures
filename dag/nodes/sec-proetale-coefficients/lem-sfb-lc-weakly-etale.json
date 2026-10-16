@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-lc-weakly-etale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\Spec LC(S,\\Z)$ is weakly étale over $\\Spec\\Z$",
@@ -13,29 +13,149 @@
   "place": "node lem-sfb-lc-weakly-etale, order 1534"
  },
  "stmt_deps": [
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-affine-spectrum"
  ],
  "proof": [
   {
-   "text": "A locally constant function on the compact space $S$ takes finitely many\nvalues. It therefore factors through a finite quotient of $S$. Let $S_i$ run\nover the finite quotients of $S$; they form a cofiltered system. Then\n$$\nLC(S,\\Z)=\\colim_i\\Z^{S_i}\n$$\nis a filtered colimit of finite products of copies of $\\Z$.",
+   "text": "Put $B=LC(S,\\Z)$. Let $\\mathcal P$ be the set of finite partitions of $S$ into nonempty clopen subsets, ordered by refinement, with an arrow from a coarser to a finer partition. For $S=\\varnothing$ include its empty partition. This is a small nonempty directed poset: $\\{S\\}$ is a partition when $S\\ne\\varnothing$, and the nonempty intersections of blocks of two partitions form a common refinement. Set $B_P=\\Z^P$ and send $a\\in B_P$ to the function $j_P(a)$ whose value on the block $U\\in P$ is $a(U)$. These are injective unital ring maps, since every block is nonempty, including the unique map between zero rings when $S$ is empty. Refinement $Q\\ge P$ induces $B_P\\to B_Q$ by repeating a value on all subblocks; these maps commute with the $j_P$. For $f\\in B$, its nonempty fibres form a disjoint open cover of $S$. Compactness gives a finite subcover, hence there are finitely many nonempty fibres, each also closed because its complement is a union of other open fibres. Thus $f$ is in the image of some $j_P$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
+    "place": "First paragraph: finite values and factorization through finite quotients, made explicit by clopen partitions"
+   }
   },
   {
-   "text": "Each $\\Z^{S_i}$ is flat over $\\Z$. The multiplication map\n$\\Z^{S_i}\\otimes_\\Z\\Z^{S_i}=\\Z^{S_i\\times S_i}\\to\\Z^{S_i}$ is the projection\nonto the diagonal factor, so it is flat as well. Flatness passes to filtered\ncolimits of ring maps. Moreover, tensor products commute with filtered\ncolimits. Hence $LC(S,\\Z)$ is flat over $\\Z$, and the multiplication map\n$LC(S,\\Z)\\otimes_\\Z LC(S,\\Z)\\to LC(S,\\Z)$ is flat. This is the definition of\nweakly étale.",
-   "uses": [],
-   "elementary": null
+   "text": "The cocone $(B,j_P)$ is the filtered colimit of the $B_P$ in commutative $\\Z$-algebras, using the universal property in [def-weil-pbc-category-colimit]. Indeed, for any compatible family $h_P:B_P\\to C$, define $h(f)=h_P(a)$ when $f=j_P(a)$. If $f=j_Q(b)$ too, then on a common refinement $R$ the two tuples agree, by injectivity of $j_R$, so compatibility makes the value independent of the representation. Represent two functions at a common refinement to check preservation of addition and multiplication; the constants check the unit and the $\\Z$-algebra structure. Every function has a representative by step 1, so this is the unique algebra map satisfying $h\\circ j_P=h_P$. Hence $B\\cong\\varinjlim_{P\\in\\mathcal P}B_P$, with a small filtered index category even when $S$ is empty.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
+    "place": "First displayed formula: explicit colimit universal property"
+   }
+  },
+  {
+   "text": "The identity of $\\Spec\\Z$ is étale in [def-weil-etale-morphism]: it has the affine presentation with no generators or relations, its local-ring maps are identities (tensoring along one is the identity exact functor), and its diagonal is the identity open immersion. Apply [lem-weil-pbc-etale-algebra-finite-product] to the finite family with every factor equal to $\\Z$. It gives that $\\Spec B_P\\to\\Spec\\Z$ is étale, including the empty product, which is the zero ring. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], each $B_P$ is an étale $\\Z$-algebra of finite presentation. The maps here are induced by the constant-function algebra maps, exactly the maps used in step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2, lemma-etale (11); affine criterion Tag 02GJ, morphisms.tex lemma-etale-characterize (1) iff (2)"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 give a presentation of $B$ as a small filtered colimit of finitely presented étale $\\Z$-algebras. Therefore $\\Z\\to B$ is ind-étale by [def-weil-pbc-ind-etale-algebra]. This uses precisely the constant-function $\\Z$-algebra structure on $LC(S,\\Z)$, and does not assert that $B$ itself is finitely presented.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097I, definition-ind-etale"
+   }
+  },
+  {
+   "text": "Apply the assertion “An ind-etale map is weakly etale” of [lem-weil-pbc-ind-etale-stability] to $\\Z\\to B$. By the affine scheme/ring equivalence explicitly contained in [def-weil-pbc-ind-etale-algebra], this says that the induced morphism $\\Spec B\\to\\Spec\\Z$ is weakly étale, with the scheme meaning fixed by [def-weil-weakly-etale-morphism]. In particular both the structure map and its diagonal are flat; the conclusion is not merely flatness of $B$ over $\\Z$. Since the algebra map sends an integer to its constant function, its spectrum is the structure morphism in the statement. This also covers $S=\\varnothing$, when $B=0$ and the source scheme is empty.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097N, lemma-ind-etale-implies; weakly étale definitions Tags 092B (more-algebra.tex) and 094P (more-morphisms.tex)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-lc-weakly-etale.proof.md",
+  "place": "First-paragraph finite-quotient presentation; second-paragraph flatness conclusion obtained through the existing ind-etale stability theorem (Stacks 097N and 092N)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weaklyEtale|weakly_etale",
+   "results": "15 hits, consisting of the scheme weakly-etale class and proetale-site definitions, Algebra.WeaklyEtale and its ulift_iff; no locally-constant-function theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant functions on a profinite space form a weakly etale algebra",
+   "results": "LocallyConstant; Profinite.NobelingProof.Nobeling_aux; LocallyConstant.freeOfProfinite; Condensed.lanSheafProfinite; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; Profinite.exists_locallyConstant_fin_two; Profinite.exists_locallyConstant; LightCondensed.locallyConstantPresheaf. Freeness concerns only underlying modules, not flatness of the diagonal.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, Algebra.WeaklyEtale",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the ring of locally constant integer valued functions on a profinite space is weakly etale over the integers",
+   "results": "RingHom.Etale.toAlgebra; RingHom.etale_algebraMap; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; RingHom.Etale.ofLocalizationSpanTarget; RingHom.Etale.propertyIsLocal; RingHom.Etale.ofLocalizationSpan; Algebra.etaleLocus_eq_univ_iff_etale; Algebra.IsEtaleAt.comp. None states the weakly-etale locally-constant-function assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"etale\"",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*[Ee]tale|[Ee]tale.*LocallyConstant|indEtale|ind_etale",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of finite products of a commutative ring is a weakly etale algebra",
+   "results": "Algebra.FormallyEtale.instForallOfFinite; Algebra.Etale.exists_subalgebra_fg; Algebra.FormallyEtale.pi_iff; RingHom.Etale.toAlgebra; Algebra.Etale.comp; Algebra.Etale.finitePresentation; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. Finite product results cover only a stage, not its filtered colimit.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|WeaklyEtale",
+   "results": "Restricted to RingTheory/Etale: five hits in Mathlib/RingTheory/Etale/Weakly.lean, for Algebra.WeaklyEtale and its ulift_iff; no locally constant function result.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any compact topological space X and commutative ring R, Spec of the ring of locally constant functions X to R is weakly etale over Spec R",
+   "results": "Eight hits: Algebra.etaleLocus; RingHom.Etale.toAlgebra; Algebra.mem_etaleLocus_iff; Algebra.etaleLocus_eq_univ_iff_etale; Algebra.basicOpen_subset_etaleLocus_iff; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.etaleLocus_eq_univ_iff; RingHom.Etale.propertyIsLocal. Their returned types describe etale loci, the ring/algebra bridge, or local etaleness, and none states the compact locally constant function result.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -52,5 +172,29 @@
   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-lc-weakly-etale",
+  "worker": "stage1",
+  "summary": "Expanded the finite-clopen-partition system and its colimit universal property, including the empty space. Reused the existing finite-product etale Mathlib leaf and affine etale criterion, then the existing ind-etale stability result and its explicitly stated affine weak-etale equivalence. No new nodes and no statement change. Exact upstream scheme instance is sorry; the proved project theorem LocallyConstant.weaklyEtale is a supporting ring statement, not an exact attachment for the scheme item.",
+  "blueprint": "Steps 1-2 realize the first paragraph and its displayed colimit. Steps 3-5 realize the second paragraph via finite etale stages and Stacks 097N, preserving unit part 1 (profinite sets as pro-etale schemes).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Uses only the generic implication ind-etale implies weakly etale (Stacks 097N) for the finite-quotient presentation, below the unit route; no result of the pullback-from-point unit supplies this algebraic flat-diagonal implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q48-d7dad3704",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-d7dad3704 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route and source passages. All five steps hold, including empty S and diagonal flatness via Stacks 097N/092N. Accepted the declared ind-étale stability tool use. No new nodes, circular dependencies, target weakening or SGA citations. Detailed checks written to review.md."
+ }
 }
