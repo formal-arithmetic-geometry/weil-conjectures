@@ -29,9 +29,116 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i_0:E_0\\hookrightarrow E$ and $i_1:E_1\\hookrightarrow E$. A simplex of $\\Delta^1$ is uniquely determined by its ordered vertices. Therefore a simplex of $E$ whose vertices all lie over $i$ lies in the strict fiber $E_i$; thus these fibers are full subcategories. The definition of a cartesian or cocartesian fibration supplies a quasicategory $E$, so [lem-cbc-enhanced-functor-cone-calculus] makes both fibers, and the functor categories used below, quasicategories. We may use canonical composition and the homotopy category of each such functor category as provided by [lem-coef-infinity-mapping-composition]. For the cartesian tests below, use the opposite construction and natural mapping-space equivalences of [lem-coef-infinity-relative-cone-equivalence](4). Order reversal sends $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, and the last edge $\\{n-1,n\\}$ to the first edge $\\{0,1\\}$. Thus $p^{\\mathrm{op}}$ is an inner fibration and an edge is $p$-cartesian exactly when its opposite is $p^{\\mathrm{op}}$-cocartesian. The natural equivalences $\\operatorname{Map}_{E^{\\mathrm{op}}}(r,s)\\simeq\\operatorname{Map}_E(s,r)$ identify precomposition with an opposite edge with postcomposition by the original edge, up to the canonical composition homotopy.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Proof, the two fiber inclusions; their fullness is checked degreewise. No reflective-subcategory theorem is assumed here."
+   }
+  },
+  {
+   "text": "For $x\\in E_0$, choose a $p$-cocartesian lift $u_x:x\\to d_x$ of $0\\to1$, using [def-coef-infinity-fibrations]; for $x\\in E_1$ take $d_x=x$ and $u_x=1_x$. For $d\\in E_1$, both bottom entries in the mapping square for $u_x$ are one-point spaces. The cocartesian criterion [lem-coef-infinity-cocartesian-mapping-criterion] gives equivalences $\\operatorname{Map}_E(d_x,d)\\to\\operatorname{Map}_E(x,d)$ when $x\\in E_0$. When $x\\in E_1$, the same assertion follows from the identity-composition homotopy of [lem-coef-infinity-mapping-composition]. These are pointwise $E_1$-reflections. Dually, for $x\\in E_1$ choose a cartesian lift $v_x:c_x\\to x$ with $c_x\\in E_0$, and for $x\\in E_0$ take $c_x=x$, $v_x=1_x$. For $c\\in E_0$, the bottom mapping spaces for $v_x$ are again points. For $x\\in E_1$, apply [lem-coef-infinity-cocartesian-mapping-criterion] to $v_x^{\\mathrm{op}}$ in $p^{\\mathrm{op}}$, testing at $c$; its bottom spaces are points, and the natural opposite mapping equivalences of step 1 identify its top map with postcomposition by $v_x$. For $x\\in E_0$, use the identity-composition homotopy. This gives equivalences $\\operatorname{Map}_E(c,c_x)\\to\\operatorname{Map}_E(c,x)$. These are pointwise $E_0$-coreflections. All choices have been made only over objects that exist; neither fiber is assumed nonempty.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Proof, reflection and coreflection of the two fibers, expanding Corollary 6.2.5.2 by the mapping criteria."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-reflection-assembly] to the two full inclusions and the universal arrows of step 2. Obtain $A:E\\to E_1$ with $a:\\mathrm{id}_E\\to i_1A$ exhibiting a coherent adjunction $A\\dashv i_1$, and $B:E\\to E_0$ with $b:i_0B\\to\\mathrm{id}_E$ exhibiting $i_0\\dashv B$. The node also asserts the pointwise universal precomposition property of every $a_x$ and the pointwise universal postcomposition property of every $b_x$. These properties, not any particular initially chosen lifts, are what the next step uses.",
+   "uses": [
+    "lem-coef-infinity-reflection-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Proof, Lemma 6.2.2.23 and Proposition 6.2.2.24 and their coreflective duals."
+   }
+  },
+  {
+   "text": "Set $L=Ai_0$ and $R'=Bi_1$. Restrict $a$ to $E_0$ to obtain $k:\\Delta^1\\times E_0\\to E$, and restrict $b$ to $E_1$ to obtain $h':\\Delta^1\\times E_1\\to E$. The endpoint values are exactly $(i_0,i_1L)$ and $(i_0R',i_1)$. Their composites with $p$ agree with interval projection on vertices and hence on every simplex, by the vertex description of $\\Delta^1$ in [def-cbc-enhanced-diagrams-cones]. To test $a_y:y\\to i_1Ly$ for $y\\in E_0$, use [lem-coef-infinity-cocartesian-mapping-criterion]. For test objects in $E_1$, the bottom spaces are points and the top map is the universal equivalence from step 3. For test objects in $E_0$, the left spaces of the square are empty and the lower right space is a point, so the homotopy pullback is empty. Thus $k$ has horn-cocartesian components. To test $b_z:i_0R'z\\to z$ for $z\\in E_1$, apply the same cocartesian criterion to $b_z^{\\mathrm{op}}$ for $p^{\\mathrm{op}}:E^{\\mathrm{op}}\\to(\\Delta^1)^{\\mathrm{op}}$. For a test object $c\\in E_0$, the bottom spaces are points; by the natural opposite mapping equivalences of step 1, the top map is the universal equivalence $\\operatorname{Map}_E(c,i_0R'z)\\to\\operatorname{Map}_E(c,z)$ of step 3. For a test object $c\\in E_1$, its upper left and lower left entries are empty and its lower right entry is a point. Thus $b_z^{\\mathrm{op}}$ is horn-cocartesian; the explicit horn reversal in step 1 makes $b_z$ horn-cartesian. Hence $h'$ has horn-cartesian components. The empty assertions follow degreewise from the absence of a base edge $1\\to0$, so no nonempty mapping-space hypothesis is hidden.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FM",
+    "place": "Remark 6.2.5.3, restrictions of reflection and coreflection functors; both horn edge predicates are checked rather than inferred by an uncited duality."
+   }
+  },
+  {
+   "text": "Write $u:\\mathrm{id}_{E_0}\\to Bi_0$, $v:i_0B\\to\\mathrm{id}_E$ for the unit and counit of $i_0\\dashv B$, and $a:\\mathrm{id}_E\\to i_1A$, $w:Ai_1\\to\\mathrm{id}_{E_1}$ for those of $A\\dashv i_1$ from step 3. Set\n$$\\eta'=(Ba i_0)\\circ u,\\qquad \\epsilon'=w\\circ(Av i_1).$$\nWhiskering is precomposition or postcomposition of the defining simplicial maps. Compose these edges in the functor quasicategories using [lem-cbc-enhanced-functor-cone-calculus], [lem-cbc-simplicial-composition-spine] and [lem-coef-infinity-mapping-composition]. In their homotopy categories, naturality of $v$ for $a i_0$ and of $a$ for $v i_1$ gives respectively\n$$\\begin{aligned}\n\\epsilon'L\\circ L\\eta'&=wAi_0\\circ Av i_1Ai_0\\circ Ai_0Ba i_0\\circ Ai_0u\n\\simeq wAi_0\\circ Aa i_0\\circ Av i_0\\circ Ai_0u\\simeq1_L,\\\\\nR'\\epsilon'\\circ\\eta'R'&=Bi_1w\\circ Bi_1Av i_1\\circ Ba i_0Bi_1\\circ uBi_1\n\\simeq Bi_1w\\circ Ba i_1\\circ Bv i_1\\circ uBi_1\\simeq1_{R'}.\n\\end{aligned}$$\nThe final cancellations are the two pairs of supplied triangle identities. The naturality squares are maps on $\\Delta^1\\times\\Delta^1$ times the entire source category, obtained by evaluating the coherent transformations, so these calculations occur in the functor quasicategories. The cited spine and mapping-composition statements give representatives and triangle witnesses there. This constructs the coherent adjunction $L=Ai_0\\dashv Bi_1=R'$ directly.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Proof, composition of the two inclusion adjunctions; the elementary composite unit/counit and both triangle calculations are written out (Remark 6.2.1.8)."
+   }
+  },
+  {
+   "text": "Both $h'$ and the given $h$ are coherent cartesian transport witnesses for the same edge of the cartesian fibration $p$. Thus [lem-coef-infinity-transport-uniqueness] gives an equivalence $s:R'\\to R$ with inverse $t:R\\to R'$ and inverse homotopies. Define the transformations $\\eta=(sL)\\eta'$ and $\\epsilon=\\epsilon'(Lt)$ by composition in the functor quasicategories. The existence and coherent composition of these transformations uses [lem-cbc-enhanced-functor-cone-calculus] and [lem-cbc-simplicial-composition-spine]. In the homotopy categories of these functor quasicategories, [lem-coef-infinity-mapping-composition] and the given natural transformations give\n$$\\epsilon L\\circ L\\eta=\\epsilon'L\\circ LtL\\circ LsL\\circ L\\eta'\\simeq\\epsilon'L\\circ L\\eta'\\simeq1_L.$$\nFor the other triangle, naturality of $s$ first for $Lt$ and then for $\\epsilon'$, followed by naturality of $\\eta'$ for $t$, gives\n$$\\begin{aligned}\nR\\epsilon\\circ\\eta R\n&=R\\epsilon'\\circ RLt\\circ sLR\\circ\\eta'R\\\\\n&\\simeq s\\circ R'\\epsilon'\\circ R'Lt\\circ\\eta'R\\\\\n&\\simeq s\\circ R'\\epsilon'\\circ\\eta'R'\\circ t\\simeq s\\circ t\\simeq1_R.\n\\end{aligned}$$\nEach naturality homotopy is obtained by applying the coherent transformation to the indicated transformation (the map on $\\Delta^1\\times\\Delta^1$ and the whole source category); the face/degeneracy coherence of the cited spine node composes them. The composition node for mapping spaces then realizes these equalities by triangle witnesses in the functor quasicategories. In particular this is not a deduction of coherence from objectwise triangles in $hE_0$ or $hE_1$.",
+   "uses": [
+    "lem-coef-infinity-transport-uniqueness",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FN",
+    "place": "Contravariant transport identifies the right adjoint; the conjugation by the natural equivalence is written out, including both triangles."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-adjunction-mapping-equivalence] to the actual transformations $\\eta,\\epsilon$ constructed in step 6. Its two triangle hypotheses have been verified in the functor quasicategories, so it yields the equivalence $\\operatorname{Map}_{E_1}(Ly,z)\\to\\operatorname{Map}_{E_0}(y,Rz)$ represented by $v\\mapsto R(v)\\circ\\eta_y$, coherently natural in both variables. Together with $k$ from step 4 this proves every clause of the item for the specified $R$.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02F1",
+    "place": "Proposition 6.2.1.17, including the unit formula and coherent mapping-space naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-reflection-assembly",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-transport-uniqueness",
+  "lem-coef-infinity-adjunction-mapping-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, foundation for coherent derived coefficient adjunction. The split follows the online proof of Kerodon 02FN with explicit full-fiber, mapping-square and conjugation arguments; online sources are not archived in literature/ and are requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +160,45 @@
    "results": "{\"t\": \"2026-10-16T19:58:11Z\", \"tool\": \"grep\", \"query\": \"bicartesian|adjunction|adjoint\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: read candidate signatures; ordinary CategoryTheory fibered categories/adjunctions and the nerve/hoFunctor adjunction do not state this quasicategorical assertion. QCat.bicategory (StrictBicategory.lean:49-70) only constructs a bicategory; no interval transport theorem. AlgebraicTopology grep has no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian and cocartesian interval fibrations determine adjunctions of infinity categories",
+   "results": "{\"t\": \"2026-10-16T22:22:30Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian and cocartesian interval fibrations determine adjunctions of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Fibration\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.cofibrations_op\", \"CategoryTheory.Over.toOverSectionsAdj\", \"HomotopicalAlgebra.fibrations_eq_unop\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"CategoryTheory.adjunctionOfCostructuredArrowTerminals\"], \"digest\": \"fea17ccf04a7e865\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary fibered-category and nerve adjunctions do not assert bicartesian transport adjunctions of quasicategories. The general bicategorical composition result is only one ingredient, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bicartesian fibration of quasicategories over the interval gives adjoint transport functors with coherent unit and counit",
+   "results": "{\"t\": \"2026-10-16T22:22:32Z\", \"tool\": \"leanfinder\", \"query\": \"A bicartesian fibration of quasicategories over the interval gives adjoint transport functors with coherent unit and counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.Bicategory.LeftLift.IsKan.adjunction\", \"CategoryTheory.CosimplicialObject.cechConerveAdjunction\", \"SSet.coskAdj\", \"CategoryTheory.Bicategory.LeftLift.IsAbsKan.adjunction\"], \"digest\": \"5ddabf564f7cdbe5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary fibered-category and nerve adjunctions do not assert bicartesian transport adjunctions of quasicategories. The general bicategorical composition result is only one ingredient, not the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "{\"t\": \"2026-10-16T22:22:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.comp_map_bijective_iff\", \"CategoryTheory.Adjunction.left_triangle_components\", \"CategoryTheory.Adjunction.map_comp_bijective_iff\", \"CategoryTheory.Adjunction.right_triangle_components\", \"CategoryTheory.Adjunction.compCoyonedaIso\", \"CategoryTheory.Adjunction.compUliftCoyonedaIso\", \"CategoryTheory.Adjunction.left_triangle_components_assoc\"], \"digest\": \"6490b94c35a96900\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary fibered-category and nerve adjunctions do not assert bicartesian transport adjunctions of quasicategories. The general bicategorical composition result is only one ingredient, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Covariant and contravariant transport along an interval in a simultaneously cartesian and cocartesian infinity category fibration are adjoint",
+   "results": "{\"t\": \"2026-10-16T22:22:36Z\", \"tool\": \"leanfinder\", \"query\": \"Covariant and contravariant transport along an interval in a simultaneously cartesian and cocartesian infinity category fibration are adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"HasFibers.inducedMap_comp\", \"HasFibers.inducedMap_comp_assoc\"], \"digest\": \"ca2bd85dad6d3338\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary fibered-category and nerve adjunctions do not assert bicartesian transport adjunctions of quasicategories. The general bicategorical composition result is only one ingredient, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|adjoint|bicartesian",
+   "results": "{\"t\": \"2026-10-16T22:22:36Z\", \"tool\": \"grep\", \"query\": \"adjunction|adjoint|bicartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the focused Quasicategory grep returned no adjunction or bicartesian-transport result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-local-adjoint-criterion",
@@ -76,5 +218,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-bicartesian-interval-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded the bicartesian direction through the two full fiber inclusion adjunctions, checked their transport witnesses by mapping squares, compared the restricted coreflector with the specified R by coherent transport uniqueness, wrote out conjugation of the triangles, and cited a general mapping-space adjunct theorem. Added three strictly foundational statement-only nodes; the second reading inlined composition of adjunctions and reused the existing opposite mapping-space equivalences for the cartesian tests after DAG, blueprint, Lean and logged Mathlib searches. Statement unchanged; no Lean written or compiled.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, mapping-complex adjunction and its compatible units/counits before derived inverse limit; this item supplies its foundational coherent transport adjunction beneath the local-adjoint criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NB-0d22932ca",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0d22932ca (reviewer sub-agent of L); spot-checked: I read all seven proof steps, the three new nodes (reflection-assembly, transport-uniqueness, adjunction-mapping-equivalence) and the statements of all seven cited nodes in full. I checked the Kerodon sources online, since they are not archived in literature/. 02FN (Prop 6.2.5.4) is the route of steps 2-6: E0 coreflective, E1 reflective, the two adjunctions composed, the coreflection restricted. 02FD/02FE (Lemma 6.2.2.23, Prop 6.2.2.24) support reflection-assembly and 019X (Prop 5.2.2.17) supports transport-uniqueness. 02F1 (Prop 6.2.1.17) gives only an hKan isomorphism for each pair of objects; the bifunctor-naturality clause of adjunction-mapping-equivalence is true and standard, but whoever splits that node must source it. That clause is at the same precision as the already-reviewed local- and pointwise-adjoint-criterion nodes, and the item's unchanged statement needs it. Step checks: fibers are full because Delta^1 is a poset nerve. The op horn reversal and relative-cone-equivalence(4) turn the cartesian tests into cocartesian ones. In the right-pinched model the base mapping spaces Map(1,1) and Map(0,1) of Delta^1 are points and Map(1,0) is empty, so both cocartesian-criterion tests in steps 2 and 4 hold for every test object, including the empty cases. I rederived both composite-adjunction triangles in step 5 from naturality of v against a i0 and of a against v i1, and both conjugated triangles in step 6, checking the type of each of the three interchanges. Step 7 applies the adjunct node with exactly the eta and epsilon of step 6 and the item's formula. The item statement is unchanged and not weakened. Small cases: empty E, singleton fibers, Delta^1 x C, nerves of ordinary adjunctions, an empty full subcategory, an empty fiber. Cycles: computed over the whole snapshot DAG, no cited node reaches the item. Its existing near-duplicates (pointwise-cocartesian-transport, pointwise-adjoint-criterion, full-essential-image, space-transport-classification) all reach it, so they cannot replace the new nodes. No new node restates the item. Mathlib: no leaf; the recorded candidates are ordinary-category results. No SGA. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (functor categories are quasicategories) and lem-cbc-simplicial-composition-spine (composition coherence in them), both from unit sk-prop-sf-cbc, which is off this unit's route. In-unit nodes already record the same two as tool uses. FIX: in reflection-assembly, added 'Let C be a quasicategory' and renamed the dual unit d:id_D->Bi to e, because it clashed with the object variable d in D in the same sentence. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-reflection-assembly.json.; 1 file(s) fixed by the reviewer"
  }
 }

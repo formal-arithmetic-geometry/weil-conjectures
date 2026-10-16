@@ -28,55 +28,175 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Pull back to $q:X=T\\times_SE\\to T$, and put $\\Gamma=\\operatorname{Fun}_T(T,X)=\\operatorname{Fun}_S(T,E)$. Inner-horn fillers and cocartesian lifts for $q$ are obtained by using those for $p$ and retaining the prescribed $T$-coordinate, so $q$ is a cocartesian fibration and $X$ is a quasicategory. The fiber is $X_t=E_{g(t)}$. Use [lem-coef-infinity-cocartesian-mapping-criterion] to pass between the horn and mapping-space conventions before applying [lem-coef-infinity-pointwise-cocartesian-transport]. That theorem gives a cocartesian fibration $q_J:\\operatorname{Fun}(J,X)\\to\\operatorname{Fun}(J,T)$. Pull it back along the constant-diagram functor $\\Delta_J:T\\to\\operatorname{Fun}(J,T)$, obtaining\n$$d:D=T\\times_{\\operatorname{Fun}(J,T)}\\operatorname{Fun}(J,X)\\longrightarrow T.$$\nAgain the same relative horn fillers and lifts prove this is a cocartesian fibration, with fiber $D_t=\\operatorname{Fun}(J,X_t)$ and transport $\\operatorname{Fun}(J,w_!)$. The relative diagonal $F:X\\to D$ sends $x$ to its constant $J$-diagram. A cocartesian edge is sent to a transformation with cocartesian components, so $F$ preserves cocartesian edges by the pointwise theorem. Applying that theorem also with shape $T$ shows that $\\Gamma$ is a quasicategory, being the strict fiber over $1_T$ of an inner fibration between quasicategories. Currying is the degreewise identity on maps $J\\times T\\times\\Delta^n\\to X$ over $T$ and identifies $\\operatorname{Fun}_T(T,D)$ with $\\operatorname{Fun}(J,\\Gamma)$. No limit preservation by a transport is used here.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.1, cocartesian dual; construction by pullback and simplicial currying"
+   }
+  },
+  {
+   "text": "For each vertex $t$, every diagram $B:J\\to X_t$ has a limit cone $\\epsilon_B:\\Delta_J l_B\\to B$ by hypothesis. The cone criterion of [lem-cbc-enhanced-functor-cone-calculus] says precisely that\n$$\\operatorname{Map}_{X_t}(x,l_B)\\xrightarrow{\\epsilon_B\\circ\\Delta_J(-)}\\operatorname{Map}_{\\operatorname{Fun}(J,X_t)}(\\Delta_Jx,B)$$\nis an equivalence for every $x$. Apply [lem-coef-parametric-universal-arrows] to $\\Delta_J:X_t\\to D_t$ and the whole full subcategory $D_t$. It assembles these universal arrows into a coherent right adjoint $R_t$ and counit. Thus the fiber adjunctions needed below exist without postulating functorial choices of fiber limits. Their units are the adjuncts of identities; the universal-arrow equivalences identify the two unit/counit composites with identities and supply the triangle homotopies.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Section 7.3.2: fiberwise adjunction input; agent application of universal arrows to the diagonal"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-relative-right-adjoint] to $F:X\\to D$ over $T$. Both maps to $T$ are cocartesian fibrations, $F$ preserves their cocartesian edges by step 1, and its fiber right adjoints are supplied by step 2. Obtain $R:D\\to X$ with unit $\\eta$ and counit $\\epsilon$ and triangle homotopies, all over $1_T$. Postcomposition therefore gives functors $F_*:\\Gamma\\to\\operatorname{Fun}_T(T,D)$ and $R_*$ in the reverse direction, with the same sectionwise unit, counit and homotopies. The maps on section mapping spaces are explicitly $a\\mapsto R_*(a)\\eta_A$ and $b\\mapsto\\epsilon_B F_*(b)$. Naturality and the two triangle homotopies show that these composites are homotopic to the identities, using the associative/unital mapping-space composition of [lem-coef-infinity-mapping-composition]. Thus they are inverse equivalences. Under currying, $F_*$ is $\\Delta_J:\\Gamma\\to\\operatorname{Fun}(J,\\Gamma)$. For $B:J\\to\\Gamma$, let $\\widetilde B:T\\to D$ be its curried section and put $L=R\\widetilde B$. The counit gives a cone $\\lambda:\\Delta_JL\\to B$; the section mapping-space equivalence and [lem-cbc-enhanced-functor-cone-calculus] make it a limit cone in $\\Gamma$. On evaluation at $t$, it is the counit of the fiber adjunction, hence a limit cone on $B_t$ in $X_t$.",
+   "uses": [
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 7.3.2.6, cocartesian/right-adjoint dual, and Proposition 7.3.2.5; explicit restriction of the adjunction to sections"
+   }
+  },
+  {
+   "text": "Evaluation at vertices detects equivalence edges of $\\Gamma$. Indeed a section transformation $u$ with equivalence components is an equivalence in $\\operatorname{Fun}(T,X)$ by [lem-cbc-enhanced-functor-cone-calculus]. For the inner fibration $q_T:\\operatorname{Fun}(T,X)\\to\\operatorname{Fun}(T,T)$ from [lem-coef-infinity-pointwise-cocartesian-transport], its base edge is the identity at $1_T$. Precomposition with $u$ is an equivalence on mapping spaces (compose with an inverse, using [lem-coef-infinity-mapping-composition]), and precomposition with its base identity is an equivalence. The square in [lem-coef-infinity-cocartesian-mapping-criterion] is consequently a homotopy pullback, so $u$ is $q_T$-cocartesian. Its initial-outer-horn fillers over the constant simplex at $1_T$ are fillers inside the fiber $\\Gamma$. The converse outer-horn criterion [lem-cbc-equivalence-outer-horn-filling] makes $u$ an equivalence in $\\Gamma$ itself. The reverse implication follows by evaluating its inverse and its two inverse triangles.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, dual, and the equivalence outer-horn criterion; elementary application to the strict section fiber"
+   }
+  },
+  {
+   "text": "For any other cone $\\mu:\\Delta_J A\\to B$ in $\\Gamma$, the limiting cone $\\lambda$ of step 3 provides a comparison $u:A\\to L$ together with a coherent identification $\\lambda\\Delta_Ju\\simeq\\mu$. If every $\\mu_t$ is limiting, then $u_t$ is an equivalence: it is a morphism between terminal objects in the fiber cone category, whose terminal-object subcategory is a contractible Kan complex by [lem-cbc-enhanced-functor-cone-calculus]. Step 4 makes $u$ an equivalence of sections. The induced equivalence of cones makes $\\mu$ limiting, since its cone mapping spaces are identified with those of $\\lambda$. Conversely, if $\\mu$ is limiting, contractibility of the terminal-object subcategory of the cone category gives an equivalence of cones $\\mu\\simeq\\lambda$; evaluating that equivalence shows that each $\\mu_t$ is limiting. Hence a cone in $\\Gamma$ is limiting if and only if its vertex evaluations are limiting.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Section 3.2.2, pointwise-limit criterion; agent deduction from the section adjunction and uniqueness of limits"
+   }
+  },
+  {
+   "text": "Now let $B:J\\to\\operatorname{Sect}_W(g^*E)$ and take the cone $\\lambda$ just constructed in $\\Gamma$. Fix $w:t\\to t'$ in $W$ and write $w_!$ for $g(w)_!$. The restriction of $B$ to this edge is a coherent transformation covering $g(w)$; [lem-coef-infinity-pointwise-cocartesian-transport] factors it through its cocartesian transport, giving\n$$\\theta:w_!B_t\\longrightarrow B_{t'}.$$\nFor every vertex $j$ of $J$, the edge $B_j(w)$ is $p$-cocartesian by the marking condition. Its factorization through a chosen cocartesian lift has an equivalence as its vertical comparison: the two cocartesian lifts are initial in the lift category of [lem-coef-infinity-cocartesian-composition-initiality], and the universal comparison of their targets is an equivalence in $E_{g(t')}$. Thus all components of $\\theta$ are equivalences, and [lem-cbc-enhanced-functor-cone-calculus] makes $\\theta$ an equivalence of $J$-diagrams. By the hypothesis on this marked edge, $w_!\\lambda_t$ is a limit cone on $w_!B_t$. Postcompose with $\\theta$ to obtain a limit cone on $B_{t'}$ with apex $w_!L(t)$: in the cone mapping-space criterion, postcomposition with the diagram equivalence identifies the right sides, so universality is retained. This uses preservation only for the chosen $w\\in W$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Section 3.2.2: inert-edge check, abstracted to a marked edge; componentwise cocartesian transport and the stated preservation hypothesis"
+   }
+  },
+  {
+   "text": "Factor the edge $L(w)$ through a chosen $p$-cocartesian lift $c:L(t)\\to w_!L(t)$, writing the vertical comparison as $v:w_!L(t)\\to L(t')$ with a coherent triangle $L(w)\\simeq vc$. Existence with its coherent data is the mapping-fiber assertion of [lem-coef-infinity-pointwise-cocartesian-transport], also applied to the cone diagram; its compatibility with precomposition identifies the induced map of cones with\n$$\\bigl(w_!L(t),\\theta\\circ w_!\\lambda_t\\bigr)\\longrightarrow\\bigl(L(t'),\\lambda_{t'}\\bigr).$$\nThis is exactly the naturality square of the section cone $\\lambda$ on $w$, including its $J$-coherences. Both cones are limiting by step 6 and step 3. Their comparison is an equivalence of cones by [lem-cbc-enhanced-functor-cone-calculus], hence $v$ is an equivalence in the fiber. An equivalence over an identity is $p$-cocartesian by [lem-coef-infinity-cocartesian-mapping-criterion]: both horizontal precomposition maps in its square are equivalences. The cocartesian cancellation/composition clause of [lem-coef-infinity-cocartesian-composition-initiality] applied to $c,v,L(w)$ proves that $L(w)$ is $p$-cocartesian. Thus $L$ lies in the marked full subcategory. The same reasoning applies to any pointwise limiting cone on $B$, not merely the chosen cone.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Section 3.2.2: marked-arrow preservation; explicit universal cone comparison rather than an assumed commuting transport"
+   }
+  },
+  {
+   "text": "Because the marked category is full in $\\Gamma$, its cone category on $B$ is the full subcategory of the ambient cone category on cones with marked apex. The ambient limiting cone $\\lambda$ has marked apex by step 7, so its mapping spaces from these cones remain contractible; it is limiting in the marked category. If a marked cone has limiting evaluations, step 5 makes it ambient limiting and hence marked limiting. Conversely, a cone limiting in the marked category is equivalent there to $\\lambda$, by the terminal-object assertion of [lem-cbc-enhanced-functor-cone-calculus]; evaluation of this equivalence makes all its evaluations limiting. Finally any ambient limiting cone on $B$ is pointwise limiting by step 5, and step 7 makes its apex marked. Fullness retains every transformation and higher simplex of its universal property. Therefore inclusion creates these limits, with the usual contractible choice of a lift, and evaluation jointly detects them. When $J=\\varnothing$, $D_t=\\operatorname{Fun}(\\varnothing,X_t)=*$ and $R_t$ selects the terminal object supplied by the hypothesis; steps 1-7 still apply, and step 6 uses preservation of terminal objects exactly on marked edges. When $T=\\varnothing$, the section category is $*$ and the evaluation criterion is vacuous and valid. No weak-contractibility assumption on $J$ and no preservation assumption on unmarked transports entered any step.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollaries 3.2.2.3-3.2.2.5: full-subcategory limit conclusion, with arbitrary markings and the empty shape checked directly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Supporting marked-section foundation for coherent finite-coefficient adjunctions; proof via the diagonal and HA Proposition 7.3.2.6, rather than a symmetric-operad specialization."
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "Limits of sections of a cocartesian fibration are pointwise and preserve marked cocartesian arrows whose transport preserves limits",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesPointwiseRightKanExtensionAtOfPreservesLimit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Preserves\", \"type\": \"(c : C) [Limits.PreservesLimit (StructuredArrow.proj c L ⋙ F) G] : G.PreservesPointwiseRightKanExtensionAt F L c\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and $L : \\\\mathcal{C} \\\\to \\\\mathcal{E}$, if the composition $G \\\\c\"}\n  {\"name\": \"CategoryTheory.Limits.Types.limitEquivSections\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Limits\", \"type\": \": limit F ≃ F.sections\", \"doc\": \"There is a canonical bijection between the limit of a functor $ F : \\\\mathcal{J} \\\\to \\\\mathbf{Type} $ and the set of sections of $ F $. This equivalence maps each element of the limit to a section via c\"}\n  {\"name\": \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Limits\", \"type\": \": (lim : (J ⥤ Type max u v) ⥤ _) ≅ Functor.sectionsFunctor _\", \"doc\": \"For any small category $\\\\mathcal{J}$, there is a natural isomorphism between the limit functor $\\\\lim : [\\\\mathcal{J} \\\\to \\\\mathbf{Type}] \\\\to \\\\mathbf{Type}$ and the sections functor $\\\\mathrm{Sections} : \"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"[p.IsStronglyCocartesian f φ] : p.IsCocartesian f φ\", \"doc\": \"If a morphism $ g $ in $ \\\\mathcal{X} $ is strongly cocartesian over a morphism $ f $ in $ \\\\mathcal{S} $ with respect to a functor $ F: \\\\mathcal{X} \\\\to \\\\mathcal{S} $, then $ g $ is cocartesian over $ f\"}\n  {\"name\": \"CategoryTheory.Limits.isLimitOfPreserves\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Basic\", \"type\": \"(F : C ⥤ D) {c : Cone K} (t : IsLimit c) [PreservesLimit K F] : IsLimit (F.mapCone c)\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserves the limit of a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, then for any limit cone $ c $ over $ K $, the image cone $ F \\\\circ c $ is a limit\"}\n  {\"name\": \"CategoryTheory.preservesLimit_of_createsLimit_and_hasLimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Creates\", \"type\": \"(K : J ⥤ C) (F : C ⥤ D) [CreatesLimit K F] [HasLimit (K ⋙ F)] : PreservesLimit K F\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ creates a limit for a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, and the composition $ K \\\\circ F $ has a limit in $ \\\\mathcal{D} $, then $ F $ preserv\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \": b ⟶ b'\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, this is the unique morphism $\\\\chi : b \\\\to b'$ in $\\\\mathcal{X}$ l\"}\n  {\"name\": \"CategoryTheory.Functor.preservesPointwiseLeftKanExtensionAtOfPreservesColimit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Preserves\", \"type\": \"(c : C) [Limits.PreservesColimit (CostructuredArrow.proj L c ⋙ F) G] : G.PreservesPointwiseLeftKanExtensionAt F L c\", \"doc\": \"Given categories $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}, \\\\mathcal{D}$, functors $F: \\\\mathcal{B} \\\\to \\\\mathcal{D}$, $G: \\\\mathcal{A} \\\\to \\\\mathcal{B}$, $H: \\\\mathcal{A} \\\\to \\\\mathcal{C}$, and an object $c \\\\\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
-  },
-  {
    "tool": "leanfinder",
-   "query": "A category of marked sections over a quasicategory has fiberwise limits when transports on the marked edges preserve limits",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DeltaGenerated.hasLimits\", \"module\": \"Mathlib/Topology/Category/DeltaGenerated\", \"type\": \"CategoryTheory.Limits.HasLimits DeltaGenerated\", \"doc\": \"The category of delta-generated topological spaces admits all limits, meaning that for any diagram indexed by a small category, the limit of the diagram exists within this category.\"}\n  {\"name\": \"SSet.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasLimits SSet\", \"doc\": \"The category of simplicial sets has all limits, meaning that for every diagram $D : \\\\mathcal{J} \\\\to \\\\text{SSet}$ where $\\\\mathcal{J}$ is a category of the same size as $\\\\text{SSet}$, the limit of $D$ e\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.hasLimit\", \"module\": \"Mathlib/CategoryTheory/Limits/Comma\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{w', w} J] {A : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] {X : T} {G : CategoryTheory.Functor A T}\\n  (F : CategoryTheory.Functor J (CategoryTheory.StructuredArrow X G))\\n  [i₁ : C\", \"doc\": \"Given a functor $ F $ to the structured arrow category $ \\\\text{StructuredArrow}(S, T) $, if the composition $ F $ with the projection functor $ \\\\text{proj} $ has a limit in $ \\\\mathcal{C} $ and this li\"}\n  {\"name\": \"SSet.Truncated.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"∀ {n : ℕ}, CategoryTheory.Limits.HasLimits (SSet.Truncated n)\", \"doc\": \"For any natural number $ n $, the category of $ n $-truncated simplicial sets has all limits. This means that for every diagram $ D : \\\\mathcal{J} \\\\to \\\\text{Truncated}(n) $ where $ \\\\mathcal{J} $ is a c\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.hasLimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Limits/Comma\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{w', w} J] {A : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] {X : T} {G : CategoryTheory.Functor A T}\\n  [CategoryTheory.Limits.HasLimitsOfShape J A] [CategoryTheory.Limits.Preserves\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits of shape $J$ and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves these limits, then the structured arrow category $\\\\text{StructuredArrow}(X, G)$, consi\"}\n  {\"name\": \"SSet.hoFunctor.preservesTerminal'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Limits.PreservesLimitsOfShape (CategoryTheory.Discrete PEmpty.{1}) SSet.hoFunctor\", \"doc\": \"The homotopy category functor for simplicial sets preserves terminal objects.\"}\n  {\"name\": \"SSet.instFinitePullback\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteProd\", \"type\": \"∀ {X₂ X₃ X₄ : SSet} [X₂.Finite] [X₃.Finite] (r : X₂ ⟶ X₄) (b : X₃ ⟶ X₄), (CategoryTheory.Limits.pullback r b).Finite\", \"doc\": \"The pullback of two finite simplicial sets along morphisms to a common target simplicial set is itself a finite simplicial set. Specifically, given finite simplicial sets $X_2$ and $X_3$ with morphism\"}\n  {\"name\": \"CategoryTheory.Comma.hasLimitsOfShape\", \"module\": \"Mathlib/CategoryTheory/Limits/Comma\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{w', w} J] {A : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} A]\\n  {B : Type u₂} [inst_2 : CategoryTheory.Category.{v₂, u₂} B] {T : Type u₃}\\n  [inst_3 : CategoryTheory.Category.{v₃, u₃} T] {L : CategoryTheory.Functor A T} {R : CategoryTheory.Funct\", \"doc\": \"Given functors $ L : A \\to T $ and $ R : B \\to T $, if categories $ A $ and $ B $ have all limits of shape $ J $, and the functor $ R $ preserves limits of shape $ J $, then the comma category $ \\text{Co\"}",
+   "query": "Limits of coherent sections of a cocartesian fibration are computed in each fiber",
+   "results": "{\"t\": \"2026-10-16T22:23:26Z\", \"tool\": \"leanfinder\", \"query\": \"Limits of coherent sections of a cocartesian fibration are computed in each fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux\", \"CategoryTheory.GrothendieckTopology.preservesLimit_diagramFunctor\", \"CategoryTheory.CategoryOfElements.CreatesLimitsAux.isLimit\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux\", \"CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_diagramFunctor\", \"CategoryTheory.GrothendieckTopology.preservesLimits_diagramFunctor\", \"CategoryTheory.CategoryOfElements.CreatesLimitsAux.liftedConeElement'\"], \"digest\": \"c50930c693bb8f8e\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.CreatesLimits, CategoryTheory.Functor.IsFibered",
-   "results": "[loogle] OK 0 hit(s)",
-   "date": "2026-10-17",
-   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
   },
   {
    "tool": "grep",
    "query": "[Cc]ocartesian|[Cc]oCartesian|[Mm]arked.*[Ss]ection",
-   "results": "[grep] OK 0 hit(s)",
+   "results": "{\"t\": \"2026-10-16T22:23:24Z\", \"tool\": \"grep\", \"query\": \"[Cc]ocartesian|[Cc]oCartesian|[Mm]arked.*[Ss]ection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
    "date": "2026-10-17",
-   "verdict": "no match: the hits are definitions or theorems for ordinary categories, strict monads, simplicial sets, or their ordinary category of quasicategories; none states this theorem about coherent infinity categories."
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise limits of infinity category sections over a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-16T22:23:25Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise limits of infinity category sections over a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pointwiseIsColimit\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Limits.pointwiseCocone\", \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\", \"CategoryTheory.Limits.Types.limitCone\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtension\"], \"digest\": \"bf6c2f18cc42a969\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CreatesLimits, CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-16T22:23:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CreatesLimits, CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
   },
   {
    "tool": "leanfinder",
-   "query": "Limits in sections of a Grothendieck cocartesian fibration and evaluation at objects",
-   "results": "{\"t\": \"2026-10-16T20:01:46Z\", \"tool\": \"leanfinder\", \"query\": \"Limits in sections of a Grothendieck cocartesian fibration and evaluation at objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.Small.limitConeIsLimit_lift\", \"PresheafOfModules.evaluationJointlyReflectsLimits\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"PresheafOfModules.isLimitLimitCone\", \"CategoryTheory.CategoryOfElements.CreatesLimitsAux.π_liftedConeElement'\", \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\", \"CategoryTheory.Limits.hasLimitCompEvaluation\"], \"digest\": \"3969dffb540ac212\"}",
+   "query": "A relative right adjoint to the diagonal constructs limits in categories of sections with cocartesian edge conditions",
+   "results": "{\"t\": \"2026-10-16T22:23:25Z\", \"tool\": \"leanfinder\", \"query\": \"A relative right adjoint to the diagonal constructs limits in categories of sections with cocartesian edge conditions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftRightAdjoint.constructRightAdjoint\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjointObj\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_of_isLimit\", \"CategoryTheory.rightAdjointOfCostructuredArrowTerminals\", \"CategoryTheory.Limits.IsLimit.ofRightAdjoint\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_limit\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv\", \"CategoryTheory.Limits.isLimitConeOfAdj\"], \"digest\": \"40c5feeadbed4381\"}",
    "date": "2026-10-17",
-   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
   },
   {
    "tool": "grep",
-   "query": "Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered",
-   "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
+   "query": "pointwiseIsLimit|evaluationJointlyReflectsLimits|limitObjIsoLimitCompEvaluation",
+   "results": "{\"t\": \"2026-10-16T22:23:24Z\", \"tool\": \"grep\", \"query\": \"pointwiseIsLimit|evaluationJointlyReflectsLimits|limitObjIsoLimitCompEvaluation\", \"sub\": \"CategoryTheory/Limits/FunctorCategory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FunctorCategory/BinaryBiproducts.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Terminal.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Kernels.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\"], \"digest\": \"406a0a4f90cf617a\"}",
    "date": "2026-10-17",
-   "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+   "verdict": "no match: returned hits concern ordinary categories and Hom-set universal properties, not coherent section quasicategories. Read Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:35-54,78-99,232-236 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:40-74; their Category instances and strict Hom equalities do not state this infinity-categorical theorem. Second LeanFinder phrasing returned ordinary adjoint-lifting and adjunction/limit results; read CategoryTheory/Adjunction/Lifting/Right.lean:20-73. No one-line specialization gives coherent relative section limits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -96,5 +216,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-sections-pointwise-limits",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and clause. Constructed fiberwise limits using the relative diagonal and existing fiberwise-right-adjoint assembly, proved conservativity in the strict section fiber, and wrote out the marked-edge comparison of transported limit cones. Reused all generic foundations already in the DAG; no new nodes. Repeated Mathlib searches and checked source hits. No attachment was found.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint: coherent finite-coefficient adjunction before R lim, represented by the imported operational supporting chain through lem-coef-operadic-algebra-presentability. The current main-20261015 ancestor states the integral adjunction but has no literal proof paragraph 2; the inherited reference identifies the prior expanded proof and is retained. Steps 1-5 supply general fiberwise section limits, steps 6-8 impose the inert/marked-edge condition needed by operadic-algebra limits.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone mapping-space criterion, componentwise equivalences and uniqueness of terminal cones; no in-unit node supplies that complete coherent calculus."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Generic equivalence outer-horn criterion proves that a pointwise equivalence is invertible in the strict section fiber; no in-unit statement supplies this converse outer-horn criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-810400a8f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-810400a8f (reviewer sub-agent of L); spot-checked: I read the item, all ten cited node statements, the parent's step that uses the item (lem-coef-operadic-algebra-presentability) and the unit record; there are no new nodes and no fixes. The statement is true as written. I checked the direction of variance on S=T=Delta^1: for a cocartesian fibration, limits of sections are computed pointwise with no preservation by the transport, and preservation is needed exactly on marked edges. I also checked J empty, T empty and the worker's example where the transport is constant at 0, which does not preserve the terminal object. Each step uses what its cited node states. Step 1 converts between the horn and mapping-space notions of cocartesian with the mapping criterion, and the diagonal preserves cocartesian edges because those are componentwise. In step 3, the relative right adjoint (the opposite of HA 7.3.2.6) needs cocartesian fibrations, a functor preserving cocartesian edges and fiber right adjoints, and nothing more. Step 4 shows that pointwise equivalences are equivalences in the section fiber, by cocartesian-over-identity plus the converse outer-horn criterion. It is marked elementary although it combines five cited statements, which is borderline but every input is cited. Steps 6-7 use preservation only for w in W, then the equivalence of the target comparison and the 2-out-of-3 clause of composition-initiality. Searching dag/nodes found no duplicate (the Yoneda presheaf limits, relative colimit completion and section-colimit nodes all state something else). The graph has no cycle and no SGA source is cited. HA and HTT are not in literature/; the report has WANTED lines for them and proof_origin is agent. I accept both split_report.tool_uses (lem-cbc-enhanced-functor-cone-calculus and lem-cbc-equivalence-outer-horn-filling) as generic quasicategory tools; the cone calculus is already recorded as a tool use on lem-coef-cocartesian-relative-right-adjoint. Details are in review.md."
  }
 }

@@ -28,9 +28,84 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-edge-homotopy-quotient-calculus] to $D$, writing $H=H_L(D)$ and $q(f)$ for its edge classes. The hypotheses are exactly that $D$ fills inner horns. In particular the $2$-horn gives the chosen composite, while the two inner $3$-horns are available for the category laws and triangle criterion in the cited statement. This quotient of single edges is a separate category from the presented $hD$; we construct their comparison below.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Lines 54-79,203-225,295-311: specialize the 2-truncated edge quotient to D."
+   }
+  },
+  {
+   "text": "Map each vertex of the presented $hD$ to the same vertex of $H$, and a word $(f_1,\\ldots,f_n)$ to $q(f_n)\\circ\\cdots\\circ q(f_1)$; the empty word goes to the identity. The identity and triangle clauses of [lem-coef-edge-homotopy-quotient-calculus] show that the two kinds of generating relation have equal images. Prepending or appending words preserves these equalities by the category laws in $H$. Hence this map is well defined on the congruence quotient and respects concatenation, giving a functor $F:hD\\to H$ with $F([f])=q(f)$.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Lines 220-225,252,295-311; direct quotient-of-words construction using the cited category."
+   }
+  },
+  {
+   "text": "Define $G$ on objects to be the identity and put $G(q(f))=[f]$. If $f\\sim_L f'$, its witnessing triangle has boundary $(f,1_y,f')$, so the defining relations of $hD$ give $[f']=[1_y]\\circ[f]=[f]$. This proves that $G$ is well defined on each quotient of edges, using the exact relation in [lem-coef-edge-homotopy-quotient-calculus]. Its identity is preserved since $[1_x]=1_x$. For composition choose an inner $2$-horn filler with successive edges $f,g$ and long edge $k$. The cited construction of $H$ makes $q(g)\\circ q(f)=q(k)$, and the defining triangle relation in $hD$ makes $[g]\\circ[f]=[k]$. Thus $G$ respects composition and is a functor.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Lines 78-79,213-225,252: quotient descent and verification on a chosen composite triangle; direct argument."
+   }
+  },
+  {
+   "text": "For each edge $f$, one has $GF([f])=[f]$ and $FG(q(f))=q(f)$. Every morphism of $hD$ is represented by a finite word, so functoriality proves $GF$ is the identity on morphisms by induction on word length, starting with the empty word. Every morphism of $H$ is an equivalence class of a single edge by its quotient definition in [lem-coef-edge-homotopy-quotient-calculus], so $FG$ is also the identity on all morphisms. Both composites are the identity on objects. For an arbitrary $\\alpha:x\\to y$ in $hD$, choose an edge representative $f$ of the quotient class $F(\\alpha)$; then $\\alpha=GF(\\alpha)=G(q(f))=[f]$. This proves the first assertion.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Lines 213,240-245: quotient representatives; direct inverse-functor and word-induction calculation."
+   }
+  },
+  {
+   "text": "If $[g]\\circ[f]=[h]$ in $hD$, apply $F$ to get $q(g)\\circ q(f)=q(h)$ in $H$. The triangle criterion of [lem-coef-edge-homotopy-quotient-calculus] supplies a $2$-simplex whose prescribed short edges are $f,g$ and whose long edge is exactly $h$. Conversely, any such simplex imposes $[g]\\circ[f]=[h]$ among the defining relations of $hD$. This proves the second assertion; it does not replace a boundary edge by a merely homotopic edge.",
+   "uses": [
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Lines 295-297: triangle criterion applied after the constructed comparison functor."
+   }
+  },
+  {
+   "text": "All the categories and quotients above are formed from the sets of vertices, edges, triangles and finite edge words in the input universe; quotienting those sets preserves that universe. The lemma applies with no distinctness requirement on vertices and no nondegeneracy requirement on edges, so it includes degenerate edges. If $D$ is empty, both categories have no objects and all vertex-indexed assertions are vacuous. The empty word at any existing vertex represents the degenerate identity edge by step 4, including the one-vertex case. Thus no nonemptiness hypothesis or universe enlargement has entered the proof.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Universe-polymorphic constructions throughout TwoTruncated.lean; direct size, empty-word and degenerate-input verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-edge-homotopy-quotient-calculus",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 supporting coherent-category foundations. Explicit comparison of path/triangle presentation with the Mathlib left-homotopy quotient; compare Cisinski Theorem 1.6.6, printed pp.24-25, read online but not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +155,108 @@
    "results": "{\"t\": \"2026-10-16T20:11:01Z\", \"tool\": \"grep\", \"query\": \"HomotopyCategory₂.*HomotopyCategory|HomotopyCategory.*HomotopyCategory₂|equivHomotopyCategory|homotopyCategoryEquiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"f8e1fd4c56ce41e4\"}",
    "date": "2026-10-17",
    "verdict": "no match: TwoTruncated.lean:245,283-298 gives homMk_surjective and CompStruct.nonempty_iff for HomotopyCategory₂, whose arrows are homotopy classes of edges. The item uses HomotopyCategory, the category generated by edges modulo triangle relations (HomotopyCat.lean:19-36,287-306). TwoTruncated.lean:21-28 explicitly marks their comparison as TODO. The second semantic phrasing returns quotientFunctor and HoRel₂, not the comparison or the converse triangle criterion for that presentation. This requires constructing a comparison, not a one-line specialization; retain these declarations as implementation candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism in the edge and triangle presentation of a quasicategory homotopy category is represented by an edge; triangle composition relations characterize equality",
+   "results": "{\"t\": \"2026-10-16T20:55:17Z\", \"tool\": \"leanfinder\", \"query\": \"Every morphism in the edge and triangle presentation of a quasicategory homotopy category is represented by an edge; triangle composition relations characterize equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Truncated.HomotopyCategory.congr_arrowMk_homMk\", \"SSet.OneTruncation₂.reflQuiver_Hom\", \"SSet.Truncated.Edge.CompStruct.comp_unique\"], \"digest\": \"2df62eef2cf82f94\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Truncated.HomotopyCategory.homMk_surjective, SSet.Truncated.Edge.CompStruct.nonempty_iff",
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"loogle\", \"query\": \"SSet.Truncated.HomotopyCategory.homMk_surjective, SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.Truncated.HomotopyCategory.homMk_surjective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "grep",
+   "query": "HomotopyCategory|homMk_surjective|CompStruct.nonempty_iff|triangle",
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"grep\", \"query\": \"HomotopyCategory|homMk_surjective|CompStruct.nonempty_iff|triangle\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"c7525571030c6ac5\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism of a quasicategory homotopy category is represented by an edge and composition equality is generated by 2-simplex triangles",
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"leansearch\", \"query\": \"Every morphism of a quasicategory homotopy category is represented by an edge and composition equality is generated by 2-simplex triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.homMk\", \"SSet.Truncated.instCategoryHomotopyCategory\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"SSet.Truncated.HomotopyCategory\", \"SSet.Truncated.HomotopyCategory₂.Hom\"], \"digest\": \"046b5e70ecd0b571\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a free category quotient by a congruence generated by relations, equality of morphisms is equivalent to a finite zigzag of contextual generating relation replacements",
+   "results": "{\"t\": \"2026-10-16T20:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"In a free category quotient by a congruence generated by relations, equality of morphisms is equivalent to a finite zigzag of contextual generating relation replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quotient.functor_homRel_eq_compClosure_eqvGen\", \"CategoryTheory.Cat.FreeReflRel\", \"CategoryTheory.Quotient.functor_map_eq_iff\", \"CategoryTheory.Quotient\", \"CategoryTheory.MorphismProperty.HasQuotient.iff_of_eqvGen\", \"CategoryTheory.Congruence\", \"CategoryTheory.Zigzag\", \"CategoryTheory.Quotient.sound\"], \"digest\": \"dc51b3ac1004e408\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Quotient.eq_iff, Relation.ReflTransGen",
+   "results": "{\"t\": \"2026-10-16T20:57:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Quotient.eq_iff, Relation.ReflTransGen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Quotient.eq_iff'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "grep",
+   "query": "Quotient.eq_iff|ReflTransGen|FreeRefl|HoRel",
+   "results": "{\"t\": \"2026-10-16T20:57:31Z\", \"tool\": \"grep\", \"query\": \"Quotient.eq_iff|ReflTransGen|FreeRefl|HoRel\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/IsConnected.lean\", \"Mathlib/CategoryTheory/IsConnected.lean\", \"Mathlib/CategoryTheory/IsConnected.lean\", \"Mathlib/CategoryTheory/IsConnected.lean\", \"Mathlib/CategoryTheory/IsConnected.lean\", \"Mathlib/CategoryTheory/ConnectedComponents.lean\", \"Mathlib/CategoryTheory/ConnectedComponents.lean\", \"Mathlib/CategoryTheory/ConnectedComponents.lean\"], \"digest\": \"ef4d3e067e276907\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality in a quotient category is generated by a finite chain of relation steps",
+   "results": "{\"t\": \"2026-10-16T20:57:31Z\", \"tool\": \"leansearch\", \"query\": \"Equality in a quotient category is generated by a finite chain of relation steps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Quotient.ext\", \"CategoryTheory.Quotient.ext_iff\", \"CategoryTheory.Quotient\", \"CategoryTheory.Quotient.category\", \"CategoryTheory.ConnectedComponents\", \"CategoryTheory.Quotient.casesOn\", \"CategoryTheory.Quotient.noConfusion\", \"CategoryTheory.MorphismProperty.quotient\"], \"digest\": \"71a6a1d202a8a940\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the item: generic category quotient equality and path congruences do not supply the comparison with single-edge homotopy classes; inspected returned sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a 2-truncated quasicategory left homotopy of edges is an equivalence relation, and quotient edges form a category with composition represented exactly by triangles",
+   "results": "{\"t\": \"2026-10-16T21:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a 2-truncated quasicategory left homotopy of edges is an equivalence relation, and quotient edges form a category with composition represented exactly by triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory\", \"SSet.Truncated.HomotopyCategory.homMk\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.Truncated.HomotopyCategory₂\"], \"digest\": \"060f8bfcfe8ad830\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompStruct.nonempty_iff\"",
+   "results": "{\"t\": \"2026-10-16T21:21:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompStruct.nonempty_iff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Truncated.Edge.CompStruct.nonempty_iff\"], \"digest\": \"a53ea3afcada0926\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "instSetoidEdge|instCategoryHomotopyCategory₂|homMk_surjective|nonempty_iff|abbrev HomotopicL",
+   "results": "{\"t\": \"2026-10-16T21:21:57Z\", \"tool\": \"grep\", \"query\": \"instSetoidEdge|instCategoryHomotopyCategory₂|homMk_surjective|nonempty_iff|abbrev HomotopicL\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"70b0eb48393c1b01\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Edges modulo left homotopy form a category for a 2-truncated quasicategory and a composite equation is equivalent to a triangle",
+   "results": "{\"t\": \"2026-10-16T21:21:57Z\", \"tool\": \"leansearch\", \"query\": \"Edges modulo left homotopy form a category for a 2-truncated quasicategory and a composite equation is equivalent to a triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.OneTruncation₂.HoRel₂.mk\", \"SSet.OneTruncation₂.HoRel₂.of_compStruct\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.instCategoryHomotopyCategory\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL.trans\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\"], \"digest\": \"2e09a9b643c2d32d\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "instance : Category|lemma homMk_id|Quasicategory₂|quasicategory₂",
+   "results": "{\"t\": \"2026-10-16T21:22:27Z\", \"tool\": \"grep\", \"query\": \"instance : Category|lemma homMk_id|Quasicategory₂|quasicategory₂\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"35cbab0b3dd0641b\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "instance : Category \\(HomotopyCategory₂|lemma homMk_id|instance : CategoryStruct|instance instSetoidEdge",
+   "results": "{\"t\": \"2026-10-16T21:23:53Z\", \"tool\": \"grep\", \"query\": \"instance : Category \\\\(HomotopyCategory₂|lemma homMk_id|instance : CategoryStruct|instance instSetoidEdge\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"e176c9ba6876e9a9\"}",
+   "date": "2026-10-17",
+   "verdict": "partial match: the edge-quotient calculus is present in TwoTruncated.lean:203-311, but its comparison with HomotopyCategory is explicitly TODO at line 28. The item requires the explicit F,G comparison, so is split; see the separate Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quasicategory-invertible-interval",
@@ -103,5 +276,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-homotopy-category-triangle-calculus",
+  "worker": "stage1",
+  "summary": "Kept the original statement and explicitly constructed inverse functors between the edge-word/triangle presentation and the left-homotopy quotient. The new supporting node is a Mathlib leaf with one declaration per clause; the item proves the comparison Mathlib currently leaves TODO. No unquoted mapping-space faithfulness, zigzag compression or inner-horn theorem is invoked. Report notes a concurrent existing duplicate of the item for maintainer consolidation.",
+  "blueprint": "Realizes the supporting homotopy-category triangle calculus in prop-coef-integral-exceptional-adjoint paragraph 2, under the Joyal interval-extension branch: first compare the two categories, then represent arrows and realize composition equations."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NP-157daac1b",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-157daac1b (reviewer sub-agent of L); spot-checked: I read all six item steps and the new Mathlib leaf against Mathlib TwoTruncated.lean (read in full) and found no mathematical fault. HomotopicL at 78-79 is the triangle (f,1_y,f'), which matches step 3. The other clauses are instSetoidEdge 203, Hom/CategoryStruct 213-225, Category 300, homMk_id 252 and CompStruct.nonempty_iff 295. Quasicategory₂ fill21/31/32 at 54-71 are exactly the Λ²₁, Λ³₁ and Λ³₂ inner horns. F: hD→H is well defined because degenerate edges go to identities and triangles go to composites (iff). G(q f)=[f] is well defined because the (f,1_y,f') triangle gives [f']=[f], and it preserves composition through the chosen filler. GF=id and FG=id hold on generators. Arrows are represented by single edges, and the triangle criterion comes from F plus the iff with the exact boundary edges. Small cases checked: empty, Δ⁰, nerves (where ∼L is equality), homotopic edges in a Kan complex, and degenerate edges. def-cbc-enhanced-diagrams-cones supplies all the notions. proof_deps equal the union of the step uses, and there is no cycle. The node is a foundational tool under prop-coef-integral-exceptional-adjoint paragraph 2, with no target node, base change or coefficient category involved. The leaf is strictly smaller than the item and does not restate an item clause: Mathlib line 28 leaves the word comparison TODO. An rg duplicate search found no node stating it. Cisinski §1.6 is not archived, so I did not verify its pages; the agent-written proof does not depend on it. The NR node lem-coef-quasicategory-edge-triangle-presentation states the same theorem. In this snapshot it is already split and cites this item, so it needs maintainer consolidation but is not a fault of this delivery. FIX: in the leaf I rewrote only mathlib_match.how. It now names Quasicategory.hornFilling (Basic.lean:44) and horn₂₁.isPushout/horn₃₁.exists_desc/horn₃₂.exists_desc (HornColimits.lean:87/332/420) as the source of fill21/31/32, since Mathlib has no Quasicategory₂ instance for the truncation. It also names comp_unique (169) and homotopyCategory₂_fac (274) for the two independence clauses. No tool_uses and no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

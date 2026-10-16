@@ -28,9 +28,79 @@
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(\\Delta^{\\mathrm{op}})$ and let $S$ be its inert edges; $S$ contains the degenerate edges. For each $n\\geq0$ let $K_n$ be the discrete category with objects $1,\\ldots,n$ and take the cone $p_n:K_n^{\\triangleleft}\\to B$ with apex $[n]$, other vertices $[1]$, and edges $\\rho_i$. For $n=0$ it is just the vertex $[0]$, an empty $K_0$, which [def-coef-categorical-pattern-fibrancy] allows. These are small quasicategories and form a small family; identities and every $\\rho_i$ lie in $S$. Thus $\\mathfrak P=(B,S,\\{p_n\\})$ is a categorical pattern in the sense of [def-coef-categorical-pattern-fibrancy], with all $2$-simplices scaled. Let $\\mathcal M$ be the left proper combinatorial simplicial model structure on $\\mathsf M_{\\mathfrak P}$ given by [lem-coef-categorical-pattern-model-calculus]. Its cofibrations are the maps injective on simplices, so all its objects are cofibrant.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Definition 3.2.1, Example 3.2.4(i) and Theorem 3.2.5 (arXiv 1312.3178, Section 3.2)"
+   }
+  },
+  {
+   "text": "By [lem-coef-categorical-pattern-model-calculus] the fibrant objects of $\\mathcal M$ are exactly the $\\mathfrak P$-fibered objects of [def-coef-categorical-pattern-fibrancy]; unpack its conditions for these discrete $K_n$. Condition (i) is the specified inner fibration, and (ii) gives exactly the inert cocartesian lifts and says that the marking is exactly the inert cocartesian edges. The classifying functor in (iii) has values $\\mathcal O_{[n]}$ at its apex and $\\mathcal O_{[1]}$ at each other vertex, and arrows given by inert transport, by [lem-coef-cocartesian-straightening]. A limit over $n$ discrete vertices is their product; the finite products in $\\operatorname{Cat}_\\infty$ are the stated products of infinity categories. Hence (iii) is precisely $\\mathcal O_{[n]}\\simeq\\mathcal O_{[1]}^n$. A cocartesian section over $K_n^{\\triangleleft}$ is an object $C\\in\\mathcal O_{[n]}$ with cocartesian edges $C\\to C_i$ over $\\rho_i$, and any two such choices are equivalent. Condition (iv) asks that, for $X\\in\\mathcal O_{[m]}$, the square with top $\\operatorname{Map}(X,C)\\to\\prod_i\\operatorname{Map}(X,C_i)$ and bottom $\\operatorname{Map}([m],[n])\\to\\prod_i\\operatorname{Map}([m],[1])$ be a homotopy pullback. A square of spaces is a homotopy pullback exactly when the induced map of homotopy fibers of its vertical maps over every base point of the lower left corner is an equivalence; over $\\phi:[m]\\to[n]$ the left fiber is $\\operatorname{Map}^{\\phi}(X,C)$ and, since homotopy fibers commute with products, the right fiber over $(\\rho_i\\phi)_i$ is $\\prod_i\\operatorname{Map}^{\\rho_i\\phi}(X,C_i)$. So (iv) is exactly the product comparison of mapping fibers in the item (the formulation of Remark 3.1.4). These identifications work in both directions. For $n=0$, (iii) gives a terminal $\\mathcal O_{[0]}$ and (iv) gives the mapping fiber equivalent to the empty product point. Consequently the fibrant objects of $\\mathcal M$ are exactly the specified operads with all and only inert cocartesian edges marked.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Definition 3.1.3, Remark 3.1.4, Definition 3.2.3, Example 3.2.4(i), Corollary 3.2.6 (arXiv 1312.3178)"
+   }
+  },
+  {
+   "text": "Use the simplicial category of fibrant objects of $\\mathcal M$ to model $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$, as in Definition 3.2.7. This identifies the intended coherent infinity category, including its morphisms: a marked map over $B$ preserves precisely inert operad edges, while an $r$-simplex in the enriched Hom is a coherent family parameterized by $(\\Delta^r)^\\sharp$, namely a marked map $(\\mathcal O,T)\\times(\\Delta^r)^\\sharp\\to(\\mathcal P,U)$ over $B$, the $r$-simplices of $\\operatorname{Map}^{\\sharp}_B$ in [lem-coef-categorical-pattern-model-calculus], whose composition is composition of these families. On each source vertex a parameter arrow is cocartesian over an identity. To check that it is an equivalence, apply [lem-coef-infinity-cocartesian-mapping-criterion]: precomposition with this arrow $e:x\\to y$ is an equivalence on every mapping space because the bottom map of its homotopy pullback square is the identity. For target $x$ choose $r:y\\to x$ with $re\\simeq1_x$; for target $y$, injectivity on components then gives $er\\simeq1_y$ since $(er)e\\simeq e$. By [lem-coef-infinity-pointwise-equivalences], these objectwise equivalences are equivalence edges in the functor infinity category. Conversely, for a coherent family over $B$ whose vertices preserve inert edges and whose parameter edges are objectwise equivalences, the mapping criterion says that each parameter edge over an identity is cocartesian: both horizontal maps of its square are equivalences. A mixed marked edge in $\\mathcal O\\times\\Delta^r$ is the third edge of the triangle obtained by first traversing its source-operad edge at the initial parameter vertex and then its parameter edge at the terminal source vertex. The first image is cocartesian because that vertex functor preserves inert edges; the second is cocartesian by the preceding criterion. Their composite is cocartesian by [lem-coef-infinity-cocartesian-composition-initiality]. Its base arrow is inert, so this mixed edge is marked in the target. This proves the converse marking condition for every simplex; faces and degeneracies are restrictions of the same families. The enriched compositions give their coherent composition. This is the space of inert-preserving functors and their equivalences, with higher coherences, not the discrete set of such functors. Since every object is cofibrant, $\\mathcal M^f=\\mathcal M^{cf}$, and the coherent nerve of this simplicial category is the intended model of $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Definition 3.2.7 (arXiv 1312.3178); explicit interpretation of its simplicial category of fibrant objects"
+   }
+  },
+  {
+   "text": "Apply the first, nonmonoidal assertion of [lem-coef-combinatorial-localization-presentability] to $\\mathcal M$: its required local presentability and set-generated functorial weak factorization systems are supplied by combinatoriality in [lem-coef-categorical-pattern-model-calculus] (combinatorial as specified in [lem-coef-marked-point-cartesian-model]: locally presentable with both weak factorization systems generated by sets, functorial factorizations being part of its notion of model structure, exactly the hypotheses of the localization node). Its homotopy coherent localization is therefore presentable. By [lem-coef-simplicial-model-nerve-localization], that same localization is modeled by $N_{\\mathrm{hc}}(\\mathcal M^{cf})$, which step 3 identifies with $\\operatorname{Opd}^{\\mathrm{ns}}_\\infty$. Presentability of this infinity category means precisely accessibility and existence of every small simplicial colimit by [def-coef-presentable-infinity-category]. All model-category objects and all indexing diagrams here are small in the fixed smaller universe; the category of them lies in the ambient larger universe.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Section 3.2 opening paragraph and Definition 3.2.7, printed pp.606,608; general combinatorial-localization presentability and simplicial-model comparison supplied by the cited existing nodes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Section 3.2, especially Example 3.2.4(i), Theorem 3.2.5, Corollary 3.2.6, Definition 3.2.7. Online source read, shared archive unavailable; specialization and application of the existing general model-localization theorems written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +157,38 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad|[Cc]ategorical[Pp]attern",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"grep\", \"query\": \"[Oo]perad|[Cc]ategorical[Pp]attern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet.QCat in StrictBicategory.lean:48-55, SSet.modelCategoryQuillen.cofibrations_eq and fibrations_eq in CategoryWithFibrations.lean:87-89, HomotopicalAlgebra.ModelCategory in ModelCategory/Basic.lean:51-68, and IsAccessibleCategory in Presentable/LocallyPresentable.lean:87-90. These concern an ordinary category of quasicategories, the unmarked Kan model, model-category axioms, or ordinary accessibility; none constructs the categorical-pattern model or proves presentability of the infinity category of operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity category of nonsymmetric infinity operads is accessible and admits all small colimits",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity category of nonsymmetric infinity operads is accessible and admits all small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimitsOfShape\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.Cat.instHasColimits\"], \"digest\": \"8f88819ec3030d17\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet.QCat in StrictBicategory.lean:48-55, SSet.modelCategoryQuillen.cofibrations_eq and fibrations_eq in CategoryWithFibrations.lean:87-89, HomotopicalAlgebra.ModelCategory in ModelCategory/Basic.lean:51-68, and IsAccessibleCategory in Presentable/LocallyPresentable.lean:87-90. These concern an ordinary category of quasicategories, the unmarked Kan model, model-category axioms, or ordinary accessibility; none constructs the categorical-pattern model or proves presentability of the infinity category of operads."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity category of planar operads is presentable",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"leansearch\", \"query\": \"The infinity category of planar operads is presentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPresentable\", \"CategoryTheory.Types.instIsPresentable\", \"CategoryTheory.ObjectProperty.isFinitelyPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\"], \"digest\": \"e3119c6e83617c19\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet.QCat in StrictBicategory.lean:48-55, SSet.modelCategoryQuillen.cofibrations_eq and fibrations_eq in CategoryWithFibrations.lean:87-89, HomotopicalAlgebra.ModelCategory in ModelCategory/Basic.lean:51-68, and IsAccessibleCategory in Presentable/LocallyPresentable.lean:87-90. These concern an ordinary category of quasicategories, the unmarked Kan model, model-category axioms, or ordinary accessibility; none constructs the categorical-pattern model or proves presentability of the infinity category of operads."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsAccessibleCategory, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsAccessibleCategory, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet.QCat in StrictBicategory.lean:48-55, SSet.modelCategoryQuillen.cofibrations_eq and fibrations_eq in CategoryWithFibrations.lean:87-89, HomotopicalAlgebra.ModelCategory in ModelCategory/Basic.lean:51-68, and IsAccessibleCategory in Presentable/LocallyPresentable.lean:87-90. These concern an ordinary category of quasicategories, the unmarked Kan model, model-category axioms, or ordinary accessibility; none constructs the categorical-pattern model or proves presentability of the infinity category of operads."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -110,5 +208,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-nonsymmetric-operads-presentability",
+  "worker": "stage1",
+  "summary": "Retained the full ordinary nonsymmetric infinity-operad statement, including mapping-fiber relative limits and arity zero. Specialized the existing categorical-pattern fibrancy definition and model theorem (def-coef-categorical-pattern-fibrancy, lem-coef-categorical-pattern-model-calculus; acyclic with respect to this item) to the nonsymmetric pattern, unpacked its limit and relative-limit conditions explicitly, and used the existing simplicial-model localization comparison and combinatorial-localization presentability. The existing operadic model theorem lem-coef-marked-operadic-model-structures is downstream of this item, so citing it would be circular. Maintainer review replaced the delivered duplicate general pattern node by this existing pair.",
+  "blueprint": "Realizes the operad-base presentability foundation of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient coherent mapping-complex adjunction before R lim), through the retained seven-node blueprint.from.via chain. Steps 1-3 realize the Section 3.2 model of the base, and step 4 its presentability. The blueprint statement and unit route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N3-2fc6f6677",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-2fc6f6677 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. I fetched the source, Gepner–Haugseng arXiv:1312.3178, and read Def 3.1.3, Rem 3.1.4, Def 3.2.1–3.2.3, Ex 3.2.4(i), Thm 3.2.5, Cor 3.2.6 and Def 3.2.7. The item's statement matches Def 3.1.3 together with the fiberwise π-limit form of Rem 3.1.4, including the empty product for n=0. It is unchanged and not weakened. Fault C5 (duplicate): the new node lem-coef-categorical-pattern-model restates the existing base nodes def-coef-categorical-pattern-fibrancy and lem-coef-categorical-pattern-model-calculus (both created 2026-10-17 by NC, same unit). They give the same fully-scaled pattern data and fibrancy conditions (i)–(iv), and a left proper combinatorial simplicial model structure with injective cofibrations, Map^♯ by (Δ^n)^♯ and Kan mapping objects. The report never mentions them, and their closures are acyclic with respect to the item. I dropped the new node and repointed steps 1–4 to these two nodes, with combinatorial read through lem-coef-marked-point-cartesian-model, which is now cited. Step 2 now writes out how the homotopy-pullback form of condition (iv) becomes the product of mapping fibers. proof_deps and the source were updated. Steps 2–4 are otherwise checked: straightening gives the products in Cat_∞, the mapping-criterion inverse argument and the mixed-edge 2-simplex factorization are correct, and the hypotheses of the localization-presentability and simplicial-nerve nodes are met. There are no cycles and no tool_uses. Minor: the report claims to have corrected created.item, but the file was not changed, and the existing value (the parent, Q55) is correct.; 1 file(s) fixed by the reviewer"
  }
 }

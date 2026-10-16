@@ -29,9 +29,130 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the nerve definition in [def-cbc-enhanced-diagrams-cones], simplices of $N(A)$ are weakly increasing finite vertex lists. Such a list is uniquely obtained from its strictly increasing list of distinct vertices by repeating consecutive vertices: the repetition map sends each position to its constant block. Thus the nondegenerate simplices are exactly the strictly increasing lists, their faces delete vertices, and their degeneracies repeat vertices. A simplicial subset contains a list exactly when it contains its distinct-vertex list: one direction uses degeneracies, the other uses the face selecting one vertex of each block. We can therefore describe all the subsets and their intersections below by finite nonempty vertex sets, ordered by the given linear order.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "For every $S$ with $B\\subseteq S\\subseteq A_0$, put $K_S=N(A_0)\\cup N(S\\cup\\{\\infty\\})\\subseteq N(A)$. Its nondegenerate simplices are the finite chains not containing $\\infty$, together with those whose vertices other than $\\infty$ all lie in $S$. Hence $K_B=U$ and $K_{A_0}=N(A)$. If $A_0=B$ these equalities already give the extension $\\bar h=h$. In particular, if $A_0=B=\\varnothing$, both $U$ and $N(A)$ are the one-point nerve on $\\infty$; no new vertex or dimension-zero lifting problem occurs.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Assume $a\\in A_0\\setminus S$. Cofinality supplies $b\\in B$ with $a\\leq b$, and $a\\notin B$ makes this inequality strict: $a<b$. Fix one such $b$. Consider the nondegenerate simplices of $K_{S\\cup\\{a\\}}$ outside $K_S$. They contain both $a$ and $\\infty$, and all their other vertices lie in $S$. Pair them as follows. A lower simplex $\\tau$ is one of these chains not containing $b$; its paired upper simplex $\\sigma$ is the strictly increasing list obtained by inserting $b$. Every missing simplex either is a unique lower simplex or contains $b$ and is the upper simplex paired with its face deleting $b$. This is a disjoint exhaustive pairing.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Let $r=\\dim\\tau\\geq1$. Then $\\dim\\sigma=r+1$, and the position $k$ of the inserted $b$ in $\\sigma$ satisfies $0<k<r+1$: $a$ occurs before $b$, and $\\infty$ occurs after $b$. The missing face is $d_k\\sigma=\\tau$. The face deleting $\\infty$ lies in $N(A_0)$, and the face deleting $a$ lies in $N(S\\cup\\{\\infty\\})$, so both are already in $K_S$. Every other face apart from $d_k$ retains $a,b,\\infty$ and is the upper simplex paired with the chain obtained by deleting that same vertex from $\\tau$. Its lower simplex has dimension $r-1$. These cases exhaust all codimension-one faces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Define $H_1=K_S$ and, for $r\\geq1$, let $H_{r+1}$ be $H_r$ together with all paired upper simplices whose lower simplex has dimension $r$, and all their faces and degeneracies. Inductively $H_r$ contains precisely $K_S$ and the two members of every pair with lower dimension less than $r$, and their degeneracies. Indeed the face calculation in the preceding step places every face of each new upper simplex except $\\tau$ in $H_r$. Its remaining new face is exactly its paired lower simplex. Both new members contain $a,\\infty$, so neither is in $K_S$; neither is a member of an earlier pair. The explicit constant-block description of degeneracies in step 1 proves the same assertion in every simplicial degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "The simplex map $\\Delta^{r+1}\\to N(A)$ specified by an upper chain $\\sigma$ is injective in every degree: its distinct ordered vertices determine any weakly increasing index list uniquely. Its inverse image of $H_r$ is exactly $\\Lambda_k^{r+1}$. All faces other than $d_k$ belong to $H_r$ by step 4. The only simplices outside that horn have distinct-vertex support either all vertices of $\\sigma$ or all except $b$; they are exactly degeneracies of $\\sigma$ or $\\tau$, which are outside $H_r$ by step 5. Thus this assertion is an equality of simplicial subsets, including degenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Distinct upper chains of the same rank $r$ intersect only in $H_r$. To see this, an intersection simplex outside $H_r$ would have support equal to the entire upper chain or to its lower chain by step 6. Equal-size upper chains containing one another are equal. If a lower chain $\\tau$ of size $r+1$ is contained in another upper chain of size $r+2$, that upper chain contains $b$ as well, so it must be $\\tau\\cup\\{b\\}$, the same paired upper chain. These are all possibilities for an intersection outside the horn. Consequently $H_{r+1}$ is the degreewise gluing of $H_r$ with these copies of $\\Delta^{r+1}$ along their specified inner horns, with no further identifications among new simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Given a simplicial map $g_r:H_r\\to\\mathcal C$, restrict it to each horn in step 6. The defining quasicategory condition in [def-cbc-enhanced-diagrams-cones] supplies a filler $\\Delta^{r+1}\\to\\mathcal C$, since $0<k<r+1$. Choose fillers for this small family. By step 7 they agree with $g_r$ on every intersection, hence define a simplicial map $g_{r+1}:H_{r+1}\\to\\mathcal C$ with restriction exactly $g_r$. Faces and degeneracies commute with this glued map because they do on each piece. Starting with any $g_1:K_S\\to\\mathcal C$, repeat this construction for $r=1,2,\\ldots$. The compatible maps have a degreewise union; every missing simplex is a member of a finite-dimensional pair, so $\\bigcup_{r\\geq1}H_r=K_{S\\cup\\{a\\}}$. This constructs an extension of $g_1$ across the addition of one vertex, fixing all its original simplices. No categorical colimit theorem is used: the union map is a function on each simplicial degree, with operators checked on a stage containing the input.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-well-ordering-theorem], choose a well-order $(a_\\alpha)_{\\alpha<\\theta}$ of the small set $A_0\\setminus B$ (this auxiliary well-order need not agree with the original linear order), and choose $b_a\\in B$ with $a<b_a$ for each $a\\notin B$. These are ordinary classical set choices. Put $S_\\alpha=B\\cup\\{a_\\beta:\\beta<\\alpha\\}$ for $\\alpha\\leq\\theta$. The successor construction in steps 3-8 applies to $a=a_\\alpha$ because $b_{a_\\alpha}\\in B\\subseteq S_\\alpha$. At every nonzero limit $\\lambda\\leq\\theta$, $K_{S_\\lambda}=\\bigcup_{\\alpha<\\lambda}K_{S_\\alpha}$ in every degree: a finite list uses finitely many added vertices, and their finitely many indices are all below some $\\alpha<\\lambda$. This also proves that the union of any compatible family of maps on the earlier stages is a well-defined simplicial map on $K_{S_\\lambda}$, fixing every earlier value.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-transfinite-recursion] first for the natural-number construction in step 8 and then for the well-order $\\{\\alpha:\\alpha\\leq\\theta\\}$ in step 9. Here is a total deterministic rule to which its statement applies. Fix once and for all a filler for every inner-horn map into $\\mathcal C$, using the quasicategory condition of [def-cbc-enhanced-diagrams-cones] and classical choice. Let $X=\\coprod_{n\\geq0}N(A)_n$ and $Y=\\coprod_{n\\geq0}\\mathcal C_n$, tagging each simplex with its degree, and take the value set to be $\\mathcal V=\\mathcal P(X\\times Y)$. Every degreewise map on a simplicial subset of $N(A)$ has its graph in this set. Call an earlier family admissible if each value is the graph of a degree-preserving simplicial map on its prescribed domain, each restricts to the prescribed initial map, and the maps agree by restriction whenever their domains are nested. On inadmissible inputs let the rule return $\\varnothing\\in\\mathcal V$. On admissible inputs in the natural-number recursion, return $g_1$ at the first stage and use the fixed fillers and the degreewise gluing of step 8 thereafter. Induction on the rank shows that each actual value is a simplicial map on $H_r$ extending the preceding values: this holds for $g_1$, and steps 6-8 prove it at each successor. Its union is therefore the deterministic one-vertex extension of step 8. For the outer recursion return $h$ at $\\alpha=0$, apply that one-vertex extension to $g_\\beta$ at $\\alpha=\\beta+1$, and use the union of earlier maps at nonzero limits. Transfinite induction verifies admissibility of the actual values: the base has domain $K_B=U$; a successor has domain $K_{S_{\\beta+1}}$ and fixes $g_\\beta$ by step 8, hence fixes every earlier map; at a limit the domain is exactly $K_{S_\\alpha}$ by the finite-support calculation of step 9, and the union is simplicial and fixes every earlier value. Thus every application of the recursion rule returns the asserted map. In particular $g_\\theta$ has domain $K_{A_0}=N(A)$ and restricts exactly to $g_0=h$. Set $\\bar h=g_\\theta$. Only inner-horn fillers in $\\mathcal C$ were required, so no filteredness or colimit-existence hypothesis on $\\mathcal C$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-transfinite-recursion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.6.2, printed p. 444 (PDF page 462), and its strict extension applications in Lemma 5.4.6.3, pp. 445-446. Agent-written explicit inner-horn proof; the online source is not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-well-ordering-theorem"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, inherited accessible-infinity-pullback/common-image branch recorded in blueprint.from; explicit vertex-by-vertex inner-horn construction proving the strict extension form of online HTT Lemma 5.4.6.2. The HTT reference is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -95,10 +216,73 @@
    "results": "{\"t\": \"2026-10-16T21:40:40Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial map to an inner Kan simplicial set extends a cone from an unbounded suborder to the full ordinal nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.mk\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion_left\"], \"digest\": \"827b190c7e3fbcb2\"}",
    "date": "2026-10-17",
    "verdict": "No match: inspected hits concern nerves, their degeneracies, strict Segal or coskeletal simplicial objects, and individual inner-horn fillers. None states extension from the specified union to a linear-order cone in an arbitrary quasicategory; the resolving Loogle extension query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a simplicial map from the nerve of a linear order and a cone on a cofinal subset to the whole cone in a quasicategory",
+   "results": "{\"t\": \"2026-10-16T22:22:49Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a simplicial map from the nerve of a linear order and a cone on a cofinal subset to the whole cone in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.functor_map\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerveMap\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\"], \"digest\": \"64fad8b8629cb562\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|anodyne|hornFilling",
+   "results": "{\"t\": \"2026-10-16T22:23:08Z\", \"tool\": \"grep\", \"query\": \"cofinal|anodyne|hornFilling\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"b6de6fe1a4bd536b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a quasicategory a coherent cone on a cofinal subset of a linear order extends to the whole order",
+   "results": "{\"t\": \"2026-10-16T22:23:08Z\", \"tool\": \"leansearch\", \"query\": \"In a quasicategory a coherent cone on a cofinal subset of a linear order extends to the whole order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.isColimitCoconeOfLEOfCocone\", \"CategoryTheory.Functor.Final.extendCocone\", \"CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone\", \"CategoryTheory.Limits.Cocone.extend_pt\", \"CategoryTheory.Functor.Final.extendCocone_obj_pt\", \"CategoryTheory.Limits.Cocones.extendComp\", \"CategoryTheory.Limits.Cocone.extend\", \"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\"], \"digest\": \"6a76bbb8ef8a7a63\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, \"extension\"",
+   "results": "{\"t\": \"2026-10-16T22:23:08Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of an order nerve together with the cone on an unbounded subset into the nerve with a new top vertex is inner anodyne",
+   "results": "{\"t\": \"2026-10-16T22:23:54Z\", \"tool\": \"leanfinder\", \"query\": \"The inclusion of an order nerve together with the cone on an unbounded subset into the nerve with a new top vertex is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"PartialOrder.mem_nerve_degenerate_of_eq\"], \"digest\": \"187799c755d8f932\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "grep",
+   "query": "extendCocone|lemma Quasicategory.hornFilling|mem_nerve_degenerate_of_eq|isStableUnderTransfiniteCompositionOfShape_llp",
+   "results": "{\"t\": \"2026-10-16T22:25:14Z\", \"tool\": \"grep\", \"query\": \"extendCocone|lemma Quasicategory.hornFilling|mem_nerve_degenerate_of_eq|isStableUnderTransfiniteCompositionOfShape_llp\", \"sub\": \"CategoryTheory/Limits/Final.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"225\", \"247\", \"249\", \"250\", \"284\"], \"digest\": \"5e0d9a92af4b2aae\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read the returned hits; quasicategory hornFilling supplies individual horns, ordinary-category Final.extendCocone has a Category-valued target, nerve/strict-Segal results describe ordinary nerves, and Quillen J uses all horns. None gives extension across the specified union for an arbitrary quasicategory. Source read: Quasicategory/Basic.lean:34-50; Quasicategory/Nerve.lean:30-32; SimplicialSet/CategoryWithFibrations.lean:35-55; CategoryTheory/Limits/Final.lean:89-90,181,225-241."
+  },
+  {
+   "tool": "grep",
+   "query": "InnerAnodyne|inner.anodyne|inner.*horn|extension.*nerve",
+   "results": "{\"t\": \"2026-10-16T22:33:32Z\", \"tool\": \"grep\", \"query\": \"InnerAnodyne|inner.anodyne|inner.*horn|extension.*nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Path.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"db139f7c3df8e794\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: read AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:39-58,103-145, AnodyneExtensions/Pairing.lean:54-114, and Quasicategory/Basic.lean:34-50. These give abstract inner-anodyne closure, a supplied regular inner pairing, or one horn filler. None constructs the required pairing or extension for a cofinal suborder. The transfinite-composition search hits likewise require an already supplied cell decomposition; Quillen J uses all horns. The item is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial inclusion obtained by adjoining a terminal cone over an unbounded subset of a total order has the left lifting property against all inner fibrations",
+   "results": "{\"t\": \"2026-10-16T22:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial inclusion obtained by adjoining a terminal cone over an unbounded subset of a total order has the left lifting property against all inner fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.I\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.MorphismProperty.transfiniteCompositionsOfShape_le_llp_rlp\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingProperty_ι_app_bot\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"7a11a3dfbd27fb9a\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: read AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:39-58,103-145, AnodyneExtensions/Pairing.lean:54-114, and Quasicategory/Basic.lean:34-50. These give abstract inner-anodyne closure, a supplied regular inner pairing, or one horn filler. None constructs the required pairing or extension for a cofinal suborder. The transfinite-composition search hits likewise require an already supplied cell decomposition; Quillen J uses all horns. The item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-16T22:34:22Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: read AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:39-58,103-145, AnodyneExtensions/Pairing.lean:54-114, and Quasicategory/Basic.lean:34-50. These give abstract inner-anodyne closure, a supplied regular inner pairing, or one horn filler. None constructs the required pairing or extension for a cofinal suborder. The transfinite-composition search hits likewise require an already supplied cell decomposition; Quillen J uses all horns. The item is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cofinal-common-image",
@@ -118,5 +302,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-linear-cofinal-cone-extension",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the strict extension directly by inserting one chosen cofinal vertex in each missing cone chain, checked the exact horn intersections and disjoint new cells, then constructed the extension along a small well-order of the missing vertices. Only the existing horn/nerve definition and Mathlib transfinite-recursion leaf are used. No new nodes. Checked empty and maximal cofinal subsets and arbitrary insertion positions; recorded fresh logged Mathlib searches. Independent second reading made the total recursion rule and its graph value set precise, including the admissibility conditions and base/successor/limit verification; added independent logged searches. The auxiliary well-order now cites the existing Mathlib well-ordering leaf rather than being left as an uncited classical theorem.",
+  "blueprint": "Realizes the linear-order cone extension used in lem-coef-infinity-cofinal-common-image (HTT Lemma 5.4.6.3), inherited through the accessible-infinity-pullback branch of prop-coef-integral-exceptional-adjoint proof paragraph 2. This is a foundational auxiliary in the recorded via chain, not a literal assertion of that blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-551a6c1a2",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-551a6c1a2 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item, all ten steps, the full statements of the three cited nodes (def-cbc-enhanced-diagrams-cones, and the Mathlib leaves lem-weil-pbc-transfinite-recursion and lem-weil-pbc-well-ordering-theorem) and the parent lem-coef-infinity-cofinal-common-image, which uses the item. The statement is true and not weakened: U is included in N(A) by a monomorphism that is a Joyal equivalence (HTT 5.4.6.2), so a strict extension to any quasicategory exists. The delivery proves this directly by inner-horn filling; HTT is not archived, the delivery records it as WANTED and marks the proof agent-written. Step checks: (3) a not in B makes a<b strict, and inserting b pairs the missing chains with no overlaps and no gaps. (4) b sits at an interior index; deleting a or infinity gives an old simplex, and deleting any other vertex gives an earlier pair. (5)-(7) the induction is set up explicitly, the inverse image is exactly the horn including degenerate simplices, and pieces of the same rank meet only inside H_r. (8) the cited quasicategory clause gives the fillers. (9)-(10) the well-order and transfinite recursion fit the statements of the two Mathlib leaves, limit stages work by finite support, and the result restricts exactly to h. Edge cases checked: A0=B=empty, A0=B, and an empty target. Small cases checked by hand: {a<b} with B={b}, and {a1<a2<b} with a non-monotone insertion order (inner horns 2-horn index 1 and 3-horn index 2). The parent's two uses (B containing the maximum, and the even ordinals below a limit) satisfy the hypotheses. No new nodes. An rg search of dag/nodes found no duplicate. blueprint.from and its via list are consistent. No cycle, no SGA source, no tool_uses needed."
  }
 }
