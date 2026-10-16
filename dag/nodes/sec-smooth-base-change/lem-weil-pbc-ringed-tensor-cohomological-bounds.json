@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Proof, Step 1: the claims that tensoring the lower truncation has no cohomology above m and that the higher-Tor vanishing makes the tensored upper truncation have no cohomology below m+1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomological bounds for derived extension of ring-sheaf scalars",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], and let $R\\to S$ be a morphism of sheaves of commutative rings on $\\mathcal C$. Use the abelian categories of sheaves of modules [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], and the standard cohomological bounds [def-sbc-standard-tstructure-derived-category]. Write $F(M)=M\\otimes_R^LS$ for derived extension of scalars, computed using K-flat resolutions [lem-pur-derived-change-of-rings]. For a sheaf of $R$-modules $N$ and $p>0$ define the sheaf $\\operatorname{Tor}_p^R(N,S)=\\mathcal H^{-p}(N[0]\\otimes_R^LS)$.\n\nFor every $a\\in\\mathbf Z$:\n\n(a) If $M\\in D(\\operatorname{Mod}(R))$ has $\\mathcal H^i(M)=0$ for $i>a$, then $\\mathcal H^i(F(M))=0$ for $i>a$.\n\n(b) If $M\\in D(\\operatorname{Mod}(R))$ has $\\mathcal H^i(M)=0$ for $i<a$, and $\\operatorname{Tor}_p^R(\\mathcal H^q(M),S)=0$ for every $q\\ge a$ and $p>0$, then $\\mathcal H^i(F(M))=0$ for $i<a$.\n\nNo upper cohomological bound is assumed in (b), and no boundedness, finite generation, flatness of $S$ over $R$, or existence of points of the site is assumed beyond the hypotheses just stated.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor), for derived sheaf tensor; Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero), for compatible bounded-above flat resolutions of upper truncations, lines 3168-3197. Agent cohomological-bounds consequence; this is not a claim that either cited tag states (a) or (b) verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left derived tensor functor preserves complexes with cohomology in degrees at most m and preserves a lower bound when all cohomology modules have vanishing higher Tor with the coefficient algebra",
+   "results": "8 hits: CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, Rep.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product preserves a lower cohomological bound if the cohomology modules are Tor acyclic for tensoring with the second factor",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CategoryTheory.Tor'_obj_obj, Module.Flat.iff_preservesFiniteLimits_tensorLeft, HomologicalComplex.tensorObj",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGE\", \"tensor\"",
+   "results": "2 hits: Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Aa]cyclic|[Aa]cyclic.*Tor|[Ii]sGE.*tensor|tensor.*[Ii]sGE|[Ii]sLE.*tensor|tensor.*[Ii]sLE",
+   "results": "11 hits: Mathlib/Algebra/Homology/CochainComplexOpposite.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean (subdirectory Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of rings on a site, derived extension of scalars is right t exact; a connective complex with coefficient-acyclic cohomology stays connective after derived extension of scalars",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Ext, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|derived.*[Tt]ensor|[Tt]ensor.*derived|[Tt]or",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean (subdirectory Algebra/Homology/DerivedCategory)",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not assert cohomological bounds for derived scalar extension of ring-sheaf complexes with coefficient-acyclic cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Aa]cyclic|[Aa]cyclic.*leftDerived|[Tt]ensor.*[Tt]Exact|[Tt]Exact.*[Tt]ensor",
+   "results": "14 hits: Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean, Mathlib/RingTheory/Ideal/Quotient/Index.lean, Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search; projective-object vanishing and cohomological-bound characterizations do not state a lower-bound theorem for unbounded ring-sheaf complexes with Tor-acyclic cohomology; grep hits are imports of ordinary tensor right-exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclic objects for a right exact functor have vanishing positive left derived functors, and the total left derived functor preserves the lower bound of a complex with acyclic homology objects",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsHomologicalHomologyFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search; projective-object vanishing and cohomological-bound characterizations do not state a lower-bound theorem for unbounded ring-sheaf complexes with Tor-acyclic cohomology; grep hits are imports of ordinary tensor right-exactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"isZero\"",
+   "results": "1 hits: CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ",
+   "date": "2026-10-16",
+   "verdict": "no match: second-reader search; projective-object vanishing and cohomological-bound characterizations do not state a lower-bound theorem for unbounded ring-sheaf complexes with Tor-acyclic cohomology; grep hits are imports of ordinary tensor right-exactness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "prop-weil-pbc-levelwise-truncations",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest"
+}
