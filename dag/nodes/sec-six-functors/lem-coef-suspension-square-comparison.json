@@ -230,5 +230,48 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-125d3dd02 (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources. All eight steps and the new Kan-extension lemma check out; finite-poset and adjunction tests pass. Verified target coefficient categories and base-change direction against master sources. No repairs or accepted tool_uses; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SuspensionSquareComparison",
+  "declaration": "SSet.Enhanced.SuspensionComparison.suspensionSquareComparison",
+  "declarations": [
+   "SSet.Enhanced.SuspensionComparison.square",
+   "SSet.Enhanced.SuspensionComparison.corner",
+   "SSet.Enhanced.SuspensionComparison.puncture",
+   "SSet.Enhanced.SuspensionComparison.sweep",
+   "SSet.Enhanced.SuspensionComparison.boundary",
+   "SSet.Enhanced.SuspensionComparison.conePath",
+   "SSet.Enhanced.SuspensionComparison.SquareCone",
+   "SSet.Enhanced.SuspensionComparison.SquareCocone",
+   "SSet.Enhanced.SuspensionComparison.Edge",
+   "SSet.Enhanced.SuspensionComparison.HasFiniteColimits",
+   "SSet.Enhanced.SuspensionComparison.HasFiniteLimits",
+   "SSet.Enhanced.SuspensionComparison.IsZeroObject",
+   "SSet.Enhanced.SuspensionComparison.component",
+   "SSet.Enhanced.SuspensionComparison.atCorner",
+   "SSet.Enhanced.SuspensionComparison.SuspensionData",
+   "SSet.Enhanced.SuspensionComparison.LoopData",
+   "SSet.Enhanced.SuspensionComparison.transportCone",
+   "SSet.Enhanced.SuspensionComparison.ConeTransformation",
+   "SSet.Enhanced.SuspensionComparison.CanonicalConeEdge",
+   "SSet.Enhanced.SuspensionComparison.CanonicalConeTransformation",
+   "SSet.Enhanced.SuspensionComparison.ComparisonData",
+   "SSet.Enhanced.SuspensionComparison.suspensionSquareComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SuspensionSquareComparison.lean",
+  "statement": "theorem suspensionSquareComparison (C D : SSet.{u}) [C.Quasicategory] [D.Quasicategory] (hC : HasFiniteColimits C) (hD : HasFiniteLimits D) (z : C _⦋0⦌) (hz : IsZeroObject C z) (F : C ⟶ D) (hF : IsZeroObject D (F.app _ z)) (t : square ⟶ C) (tc : SquareCocone t) (ht : IsColimiting (boundary t false) tc.cocone) : ∃ s : SuspensionData t z, ∃ d : ComparisonData F t z s, ∃ (θ : D _⦋1⦌) (h₁ h₂ : D _⦋2⦌), D.δ 1 θ = d.pullbackCone.1.1 ∧ D.δ 0 θ = (atCorner d.loops.family 0 0).app _ (corner 0 0) ∧ D.δ 2 h₁ = d.a.edge.1.1 ∧ D.δ 0 h₁ = θ ∧ D.δ 1 h₁ = (evaluation square D (corner 0 0)).app _ d.eta.edge.1.1 ∧ D.δ 2 h₂ = θ ∧ D.δ 0 h₂ = d.loopSuspendedComparison.edge.1.1 ∧ D.δ 1 h₂ = d.induced.edge.1",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical comparisons are now dependent universal-property interfaces: CanonicalConeEdge requires cone-category endpoints and a limiting target; CanonicalConeTransformation extends the full coherent endpoint conditions with a limiting target. Suspension, loop, eta, a, induced, and loopSuspendedComparison are all represented by these interfaces; no arbitrary comparison maps or unconstrained predicates. The looped-square comparison represents the loop of the suspended comparison under the canonical limit identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fde830d07",
+  "group": "NP",
+  "result": "pass",
+  "note": "Matched all 13 node clauses to the Lean: quasicategories; mapping-space finite colimits in C and limits in D, empty shape included; zero object via IsInitial and IsTerminal; reduced F; coherent pushout square, with the cocone input uniquely determined by t; existential SuspensionData and LoopData with consistent external and internal coordinates; canonical eta, a, induced u and loopSuspendedComparison into limiting cones; theta with 2-simplices for theta a ~ eta_W and (Omega a_(Sigma tau)) theta ~ u, correct face orientation, no eta invertibility assumed. Only the lean field changed from the base; lean.statement is verbatim and all 22 declarations are listed; no hollow definitions; the only proof is sorry; docstrings carry the source, blueprint id and all 8 proof steps; imports follow the brief; worker report and NP second reading are present and real. nt_compile.py --json compiled the module clean in 4.4 s with no errors or warnings. Non-blocking: unused helper structure Edge; HasFiniteColimits and HasFiniteLimits are definitionally equal to FinitePosetKan.HasFinite, a proof-dependency helper rather than a DAG notion; report text says 'the project server' in place of HA 1.4.2.12 and 1.4.2.15, a sanitiser artifact."
  }
 }
