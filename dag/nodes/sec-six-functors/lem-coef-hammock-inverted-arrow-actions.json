@@ -220,5 +220,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80e9db097",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read the brief, the packet, the item node, the dependency's PresentationData and the reduction definitions it reuses (HammockInfinityLocalization), IsWeakHomotopyEquivalence, and the module and report. Both actions append or prepend hammockActualPath f with the correct path direction (z->x->y and x->y->z); unique reducts make them canonical, and they exist as simplicial maps. The weak-equivalence predicate is exactly the node's (realization pi_0 plus all pi_r, r>=1, at every basepoint). W is only IsMultiplicative; there are no extra assumptions and no universe restriction. Arbitrary PresentationData adds no hypothesis and exists by the dependency. Edge cases checked: identity arrow, x=y, marked non-identity endomorphism, empty mapping spaces, n=0. lean.statement matches the signature verbatim; the node changes only its lean field; there are no definitions, and the proof is sorry only. Docstrings carry the source, the blueprint id and all five proof steps, and the report has a real Worker report and Second reading by N5. nt_compile --json against the local side overlay: exit 0, 1.2 s, no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HammockInvertedArrowActions",
+  "declaration": "SSet.Hammock.hammock_inverted_arrow_actions",
+  "file": "lean/Sheaf/CategoryTheory/HammockInvertedArrowActions.lean",
+  "statement": "theorem hammock_inverted_arrow_actions {C : Type u} [Category.{v} C] (W : MorphismProperty C) [W.IsMultiplicative] {x y : C} (f : x ⟶ y) (hf : W f) (z : C) (Pzx : PresentationData W z x) (Pzy : PresentationData W z y) (Pyz : PresentationData W y z) (Pxz : PresentationData W x z) : ∃ (post : Pzx.H ⟶ Pzy.H) (pre : Pyz.H ⟶ Pxz.H), (∀ (n : ℕ) (s : Pzx.H _⦋n⦌), HammockReduces ((Pzx.simplices n s).val.comp (hammockActualPath W n f)) (Pzy.simplices n (post.app _ s)).val) ∧ (∀ (n : ℕ) (s : Pyz.H _⦋n⦌), HammockReduces ((hammockActualPath W n f).comp (Pyz.simplices n s).val) (Pxz.simplices n (pre.app _ s)).val) ∧ Enhanced.IsWeakHomotopyEquivalence post ∧ Enhanced.IsWeakHomotopyEquivalence pre",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the dependency PresentationData directly. Both induced action maps are specified in every degree by concatenating hammockActualPath and reducing; they are not arbitrary maps between the mapping simplicial sets. No freeness, fractions, saturation, nonemptiness or universe equality is assumed."
  }
 }
