@@ -12,44 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Form the tensor product of the residue fields of v and w over their common base residue field. It is nonzero because tensoring vector spaces over a field is faithful. Choose a prime and an algebraic closure of its residue field. The resulting geometric point factors through both v and w.",
+   "text": "Apply Mathlib Scheme.Pullback.exists_preimage_pullback to find a point z of C_i times_X C_j above v,w. Take Omega to be an algebraic closure of its residue field. The composite Spec(Omega) to Spec(kappa(z)) to the fibre product followed by either projection gives morphisms a,d with equal composites to X; Scheme.fromSpecResidueField_apply proves their marked-point images are v,w. This proves the common-geometric-point construction without any new lemma.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Pull back both presentations to that geometric field. The inverse-image composition comparison and canonical coefficient comparison identify the two resulting modules. Pullback preserves finite biproducts and cokernels.",
+   "text": "Obtain compatible additive finite-colimit-preserving evaluation functors F and G and regular-module linear equivalences from the geometric evaluation theorem. Construct finite-free coordinates with F.mapBiproduct, ModuleCat.biproductIsoPi, and the regular equivalence in each coordinate. Prove the projection formula, then that the inverse sends a standard single-coordinate vector to the image of its biproduct inclusion. Apply LinearMap.toMatrix′ to reduce the entire evaluated finite-free map to its regular-module components; the geometric theorem’s scalar equations identify each component with the canonical continuous presentation matrix evaluated at v or w. Thus the finite-free coordinates and both mulVec equations are proved directly.",
    "uses": [
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-condensed-field-presentation-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate at the final object. Covers of the algebraically closed field split, so evaluation preserves the cokernels. It sends coefficients to E and the presentation maps to the pointwise matrices, by the adjoint test characterization of the continuous realization.",
-   "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "lem-weil-pbc-condensed-field-continuous-realization",
-    "def-weil-pbc-condensed-field-presentation-matrix"
-   ],
-   "elementary": false
+   "text": "Map the two supplied cokernel presentation isomorphisms by F and G. Their comparison on the pullbacks of P identifies the two evaluated cokernels, using PreservesCokernel.iso on both sides.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The two matrices have isomorphic finite-dimensional E-vector space cokernels. Rank-nullity gives the displayed equality, including zero rows or columns.",
+   "text": "For each evaluated finite-free map, transport its range by the coordinate linear equivalences and use their mulVec equation to identify its range dimension with the displayed matrix rank. ModuleCat.cokernelIsoRangeQuotient identifies its cokernel with the target modulo that range. Submodule.finrank_quotient_add_finrank and the target coordinate equivalence give n minus matrix rank. Apply finrank invariance to the cokernel isomorphism to conclude.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "lem-weil-pbc-condensed-field-continuous-realization",
-  "def-weil-pbc-condensed-field-presentation-matrix"
+  "lem-weil-pbc-condensed-field-presentation-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Common-fibre coranks of two finite presentations"
+  "place": "Example 3.1; agent rank/descent argument in original node, Common-fibre coranks of two finite presentations",
+  "note": "B3: construct the common geometric point from Mathlib; isolate only scalar geometric evaluation; prove all finite-biproduct coordinates and matrix equations, categorical cokernel transport, range-coordinate comparison and quotient rank-nullity directly in Lean. Existing signature unchanged."
  },
  "mathlib_searches": [
   {
@@ -167,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-0b366",
-  "group": "F1",
+  "reviewer": "X-4cdca",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261016T005128-L-4190704",
+  "landing": "20261016T025203-L-1450439",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+  "note": "independent Codex review: Unchanged corank signature and delivered evaluation signature matched their DAG nodes; proof route, metadata and remaining obligation agree. Both modules and sole direct importer compile cleanly; axiom probes show only standard axioms and expected sorryAx."
  }
 }

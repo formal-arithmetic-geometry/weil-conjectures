@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Common-fibre coranks of two finite presentations"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-field-presentation-corank",
+   "place": "Geometric evaluation and canonical pointwise matrix identification, with a fixed common geometric point",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-condensed-field-presentation-evaluation",
+ "title": "Compatible geometric evaluations and regular-module scalars",
+ "statement": "Let E be a totally disconnected normed field, X,V,W schemes, p:V to X and g:W to X morphisms, and a:Spec(Omega) to V and d:Spec(Omega) to W morphisms for an algebraically closed field Omega, with a composed with p equal to d composed with g. Fix z in Spec(Omega). Put R equal to the condensed E coefficient ring on X, Ri=p inverse image R and Rj=g inverse image R. There exist additive finite-colimit-preserving functors F:Mod(Ri) to E-vector spaces and G:Mod(Rj) to E-vector spaces, and a natural isomorphism between pullback_p followed by F and pullback_g followed by G. There are E-linear equivalences b:F(regular Ri) to E and c:G(regular Rj) to E. For every endomorphism f of regular Ri, b(F(f)(b inverse of 1)) is the value at a(z) of the continuous coefficient obtained by conjugating the underlying endomorphism by condensedFieldPullbackRealization and applying its global sections to 1; the corresponding G statement holds at d(z). The coefficients and realization are those of [def-weil-pbc-condensed-field-presentation-matrix]. No chosen module, finite presentation, matrix rank or corank equality appears in this theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Extend scalars along the canonical coefficient isomorphism for p or g, then apply module inverse image along a or d. Both routes land over the condensed coefficient ring on Spec(Omega). Evaluate the underlying abelian sheaf and its internal action at the terminal object. The continuous realization identifies the scalar ring with ULift E because Spec(Omega) has one point. Define the ordinary E-action by applying the internal action to ULift(e) tensor m; the tensor universal property, internal unit and associativity equations, and internal linearity diagrams supply the module and functor laws. All covers of an algebraically closed field split, so abelian evaluation preserves cokernels. Finite colimits of internal modules are computed on underlying sheaves, and ordinary module forgetful functors reflect them, yielding preservation of finite colimits. Inverse image and coefficient change preserve finite colimits and are additive. The module inverse-image composition and coefficient comparisons, together with had, give the natural comparison on every module over X.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-geometric-field-proetale-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The regular coefficient module evaluates to E, with its ordinary scalar action obtained by evaluating the internal module action on pure tensors. This gives b and c. An endomorphism of the regular module is multiplication by its value on 1. The canonical continuous realization characterizes this coefficient as the conjugated regular-module endomorphism on global sections applied to 1. Its geometric pullback is the value of that function at a(z) or d(z). This proves the two scalar formulas. Arbitrary finite-free coordinates and the full matrix equations are proved in the parent, using only additivity and biproduct inclusions and projections.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "def-weil-pbc-condensed-field-presentation-matrix"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-condensed-field-presentation-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Common-fibre coranks of two finite presentations",
+  "note": "B3: only geometric evaluation functors and their regular-module scalar comparison remain. The parent proves the common-point construction, all finite-free coordinates and matrix compatibility, cokernel transport and rank-nullity directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a geometric point gives a vector space functor on internal sheaf modules, preserving cokernels and compatible with finite free matrices",
+   "date": "2026-10-16",
+   "results": "SheafOfModules.evaluation, SheafOfModules.forgetToSheafModuleCat, PresheafOfModules.evaluation, SheafOfModules.freeFunctor.",
+   "verdict": "These concern ordinary sheaves of modules. None supplies the internal-Mod coefficient and matrix comparison needed here."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.cokernelIsoRangeQuotient",
+   "date": "2026-10-16",
+   "results": "ModuleCat.cokernelIsoRangeQuotient and its quotient-projection equations.",
+   "verdict": "Used for the proved rank-nullity assembly in the parent, not a substitute for geometric evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafSections; geometric_field_proetale_evaluation; internalModuleAb_equivalence; exists_preimage_pullback; continuousFieldPresentationMatrix",
+   "date": "2026-10-16",
+   "results": "GeometricFieldProEtaleEvaluation provides exact ordinary module evaluation. InternalModuleAbEquivalence realizes internal modules in abelian groups. CondensedFieldPresentationMatrix fixes coordinates; Mathlib PullbackCarrier provides common points.",
+   "verdict": "No existing declaration combines internal module evaluation, pullback coherence, and the required canonical matrix-coordinate equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point evaluation of internal sheaf modules preserves cokernels and identifies regular module endomorphisms with scalar evaluation",
+   "date": "2026-10-16",
+   "results": "Service unavailable: Internal Server Error. No absence verdict is drawn from this unavailable search.",
+   "available": false
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelIsoRangeQuotient|def evaluation|def mapMod in Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, ModuleCat/Kernels.lean, CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "results": "ModuleCat/Kernels.lean:122 supplies cokernelIsoRangeQuotient, with projection equations at lines 128 and 133. No internal-module geometric evaluation interface is supplied by these Mathlib modules.",
+   "verdict": "The quotient-cokernel theorem is used in the parent. The remaining geometric internal-module evaluation and scalar comparison need a new statement."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Cc]olimit|[Cc]olimit.*evaluation|mapMod",
+   "digest": "4cb0ad6d821005e8",
+   "date": "2026-10-16",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean",
+   "verdict": "Second reading: Source hits concern ordinary module presheaves. The parent already proves the finite-biproduct and matrix argument; internal sheaf-module evaluation and its canonical comparison remain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive evaluation functor from internal modules in abelian sheaves to modules over the ring of sections preserves colimits when the site object is weakly contractible",
+   "digest": "6b32db3019b1d65c",
+   "date": "2026-10-16",
+   "results": "PresheafOfModules.evaluation_preservesColimitsOfSize; PresheafOfModules.evaluation_preservesColimitsOfShape; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; PresheafOfModules.evaluation_preservesColimit; PresheafOfModules.toPresheaf_preservesColimit; instHasColimitsCondensedMod; PresheafOfModules.toPresheaf_preservesColimitsOfShape; PresheafOfModules.toPresheaf_preservesColimitsOfSize",
+   "verdict": "Second reading: The hits are PresheafOfModules evaluation and colimit APIs. They require an ordinary module-presheaf encoding and do not supply the internal-module geometric pullback and scalar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.evaluation",
+   "digest": "da5a88277cf9d9dd",
+   "date": "2026-10-16",
+   "results": "PresheafOfModules.evaluation; PresheafOfModules.instAdditiveModuleCatCarrierObjOppositeRingCatEvaluation; PresheafOfModules.evaluation_obj; PresheafOfModules.evaluation_map; PresheafOfModules.restriction; PresheafOfModules.restriction_app; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; PresheafOfModules.evaluation_preservesColimitsOfSize",
+   "verdict": "Second reading: Ordinary presheaf evaluation is additive and preserves finite colimits; it does not itself construct the required internal sheaf-module encoding or pullback scalar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldPresentationCorank",
+  "date": "2026-10-16",
+  "group": "B3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldPresentationEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldPresentationEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_condensedField_compatible_evaluations",
+  "statement": "theorem exists_condensedField_compatible_evaluations\n    (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]\n    (X V W : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (p : V ⟶ X) (g : W ⟶ X)\n    (a : Spec (.of Ω) ⟶ V) (d : Spec (.of Ω) ⟶ W)\n    (had : a ≫ p = d ≫ g) (z : Spec (.of Ω)) :\n    let R := condensedRingObj (Profinite.continuousCoefficientRingObj E) X\n    let Ri := (upperStar AddCommGrpCat.{u + 1} p).obj R\n    let Rj := (upperStar AddCommGrpCat.{u + 1} g).obj R\n    ∃ (F : Mod (Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) Ri ⥤\n        ModuleCat.{u + 1} E)\n      (G : Mod (Sheaf (Scheme.ProEt.topology W) AddCommGrpCat.{u + 1}) Rj ⥤\n        ModuleCat.{u + 1} E),\n      F.Additive ∧ G.Additive ∧ PreservesFiniteColimits F ∧ PreservesFiniteColimits G ∧\n      Nonempty (((upperStar AddCommGrpCat.{u + 1} p).mapMod R) ⋙ F ≅\n        ((upperStar AddCommGrpCat.{u + 1} g).mapMod R) ⋙ G) ∧\n      ∃ (b : F.obj (Mod.regular Ri) ≃ₗ[E] E)\n        (c : G.obj (Mod.regular Rj) ≃ₗ[E] E),\n        (∀ f : Mod.regular Ri ⟶ Mod.regular Ri,\n          b (F.map f (b.symm 1)) =\n            (((inv (condensedFieldPullbackRealization E p) ≫ f.hom ≫\n              condensedFieldPullbackRealization E p).hom.app\n                (Opposite.op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down (a z)) ∧\n        (∀ f : Mod.regular Rj ⟶ Mod.regular Rj,\n          c (G.map f (c.symm 1)) =\n            (((inv (condensedFieldPullbackRealization E g) ≫ f.hom ≫\n              condensedFieldPullbackRealization E g).hom.app\n                (Opposite.op (Scheme.ProEt.mk (𝟙 W)))) (ULift.up 1)).down (d z))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4cdca",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T025203-L-1450439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-4cdca",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261016T025203-L-1450439",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged corank signature and delivered evaluation signature matched their DAG nodes; proof route, metadata and remaining obligation agree. Both modules and sole direct importer compile cleanly; axiom probes show only standard axioms and expected sorryAx."
+ }
+}
