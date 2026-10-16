@@ -281,5 +281,23 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-8c9bc895d (reviewer sub-agent of L); spot-checked: Read the item, all six steps, cited statements and source passages in full. Verified module-valued Leray normalization, current Künneth comparisons, exchange-mate transposes, hypotheses and edge cases against Stacks 00U3, 0D6E, 0DV0, 01WC, 07A4 and 0F14. No new nodes, duplicates, cycles or repairs required. Accepted generic tool uses and detailed checks are recorded in review.md; no target-category bridge is inferred."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KunBcKunnethCompat",
+  "declaration": "AlgebraicGeometry.Etale.kun_bc_kunneth_compat",
+  "file": "lean/Sheaf/Paper/KunBcKunnethCompat.lean",
+  "statement": "theorem kun_bc_kunneth_compat {k : Type u} [Field k] [IsSepClosed k] (n : ℕ) (hn : 0 < n) [Invertible (n : k)] {X U Y Z W : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aU : U ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aU] [QuasiCompact aU] [IsHProjective aY] (j : U ⟶ X) (q : Z ⟶ X) (r : Z ⟶ Y) (s : W ⟶ Y) (p : W ⟶ U) (h : W ⟶ Z) (hj : aU = j ≫ aX) (hq : p ≫ j = h ≫ q) (hr : h ≫ r = s) [IsOpenImmersion j] (hz : IsPullback q r aX aY) (hw : IsPullback p s aU aY) (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n)))) : constantKunnethGlobalSectionsMap (ULift.{u + 1} (ZMod n)) r q aY aX hz.w ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F)) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) Z).map ((exactDerivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) (CommSq.mk hq)).app ((DerivedCategory.singleFunctor _ 0).obj F)) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) h).hom.app ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) p).mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj F)) = MonoidalCategoryStruct.tensorHom (𝟙 _) ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))) j).hom.app ((DerivedCategory.singleFunctor _ 0).obj F)) ≫ constantKunnethGlobalSectionsMap (ULift.{u + 1} (ZMod n)) s p aY aU hw.w ((DerivedCategory.singleFunctor _ 0).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29a5a20c6",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, canonical map constructions, source passages, universes, edge cases, docstrings, and report sections. All three delivered Lean modules reproduced cleanly through scompile.py. No corrections needed; branch head unchanged."
  }
 }
