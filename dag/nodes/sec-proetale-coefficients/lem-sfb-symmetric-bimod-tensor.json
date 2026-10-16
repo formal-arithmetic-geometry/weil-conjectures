@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-symmetric-bimod-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Tensor products of symmetric bimodules are symmetric",
@@ -17,25 +17,99 @@
  ],
  "proof": [
   {
-   "text": "Let $\\pi\\colon P\\otimes Q\\to P\\otimes_AQ$ be the projection. Since $-\\otimes A$ preserves\ncoequalizers, $\\pi\\otimes A$ is an epimorphism. So it suffices to compare the right action\nof $P\\otimes_AQ$ with the braiding followed by its left action after precomposing with\n$\\pi\\otimes A$.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $T=P\\otimes_A Q$, and let $\\pi:P\\otimes Q\\to T$ be its coequalizer projection. Write $\\alpha_{U,V,W}:(U\\otimes V)\\otimes W\\to U\\otimes(V\\otimes W)$, and read composites right to left. Since $-\\otimes A$ preserves this coequalizer, $q=\\pi\\otimes A$ is the coequalizer projection of the two defining arrows tensored with $A$. By the universal property in [def-weil-pbc-category-colimit], applied to the parallel-pair diagram, write the tensored parallel arrows as $f,g:D\\rightrightarrows (P\\otimes Q)\\otimes A$. The colimiting cocone has components $q$ and $qf=qg$. If $uq=vq$, then also $uqf=vqf$; hence $u$ and $v$ factor the same cocone on both objects, and uniqueness gives $u=v$. Thus $q$ is epi, and it suffices to prove $\\rho_T q=\\gamma_T\\beta_{T,A}q$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-symmetric-bimod-tensor.proof.md",
+    "place": "first paragraph; coequalizer cancellation expanded from its universal property"
+   }
   },
   {
-   "text": "On $(P\\otimes Q)\\otimes A$ the right action is $\\pi\\circ(P\\otimes\\rho_Q)\\alpha$. Since $Q$\nis symmetric, $\\rho_Q=\\gamma_Q\\beta_{Q,A}$. By the coequalizer relation,\n$\\pi\\circ(P\\otimes\\gamma_Q)\\alpha=\\pi\\circ(\\rho_P\\otimes Q)$. Since $P$ is symmetric,\n$\\rho_P=\\gamma_P\\beta_{P,A}$. Together:\n$$\n\\pi(P\\otimes\\rho_Q)\\alpha\n=\\pi(\\gamma_P\\otimes Q)(\\beta_{P,A}\\otimes Q)\\alpha^{-1}(P\\otimes\\beta_{Q,A})\\alpha .\n$$\nBy the hexagon identity, $(\\beta_{P,A}\\otimes Q)\\alpha^{-1}(P\\otimes\\beta_{Q,A})\\alpha$ is\n$\\alpha^{-1}\\beta_{P\\otimes Q,A}$. So the right action is\n$\\pi(\\gamma_P\\otimes Q)\\alpha^{-1}\\beta_{P\\otimes Q,A}$. By naturality of $\\beta$, this is\nthe left action of $P\\otimes_AQ$ precomposed with $\\beta_{P\\otimes_AQ,A}(\\pi\\otimes A)$.",
+   "text": "The induced actions in the statement satisfy\n$$\\rho_T(\\pi\\otimes A)=\\pi(P\\otimes\\rho_Q)\\alpha_{P,Q,A},\\qquad\n\\gamma_T(A\\otimes\\pi)=\\pi(\\gamma_P\\otimes Q)\\alpha^{-1}_{A,P,Q}.$$\nThe definition of symmetric in [lem-sfb-modobj-symmetric-bimodules] gives $\\rho_Q=\\gamma_Q\\beta_{Q,A}$ and $\\rho_P=\\gamma_P\\beta_{P,A}$; only this definition is used, not the assertion about modules over a commutative monoid. The defining coequalizer relation is $\\pi(P\\otimes\\gamma_Q)\\alpha_{P,A,Q}=\\pi(\\rho_P\\otimes Q)$. Substituting these equalities and using functoriality of tensor yields\n$$\\begin{aligned}\n\\rho_T q\n&=\\pi(P\\otimes\\gamma_Q)(P\\otimes\\beta_{Q,A})\\alpha_{P,Q,A}\\\\\n&=\\pi(\\rho_P\\otimes Q)\\alpha^{-1}_{P,A,Q}(P\\otimes\\beta_{Q,A})\\alpha_{P,Q,A}\\\\\n&=\\pi(\\gamma_P\\otimes Q)(\\beta_{P,A}\\otimes Q)\\alpha^{-1}_{P,A,Q}(P\\otimes\\beta_{Q,A})\\alpha_{P,Q,A}.\n\\end{aligned}$$",
+   "uses": [
+    "lem-sfb-modobj-symmetric-bimodules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-symmetric-bimod-tensor.proof.md",
+    "place": "second paragraph, substitutions and coequalizer relation"
+   }
+  },
+  {
+   "text": "The reverse hexagon axiom for $P,Q,A$, with composites read right to left as in Step 1, is\n$$\\alpha^{-1}_{A,P,Q}\\beta_{P\\otimes Q,A}\\alpha^{-1}_{P,Q,A}\n=(\\beta_{P,A}\\otimes Q)\\alpha^{-1}_{P,A,Q}(P\\otimes\\beta_{Q,A}).$$\nPrecomposing both sides with $\\alpha_{P,Q,A}$ and cancelling $\\alpha^{-1}_{P,Q,A}\\alpha_{P,Q,A}$ gives\n$$(\\beta_{P,A}\\otimes Q)\\alpha^{-1}_{P,A,Q}(P\\otimes\\beta_{Q,A})\\alpha_{P,Q,A}\n=\\alpha^{-1}_{A,P,Q}\\beta_{P\\otimes Q,A}.$$\nSubstitute this into Step 2. By the defining left-action equation there, and the naturality axiom $\\beta_{T,A}(\\pi\\otimes A)=(A\\otimes\\pi)\\beta_{P\\otimes Q,A}$, the result is\n$$\\begin{aligned}\n\\rho_T q\n&=\\pi(\\gamma_P\\otimes Q)\\alpha^{-1}_{A,P,Q}\\beta_{P\\otimes Q,A}\\\\\n&=\\gamma_T(A\\otimes\\pi)\\beta_{P\\otimes Q,A}\\\\\n&=\\gamma_T\\beta_{T,A}q.\n\\end{aligned}$$\nCancellation by Step 1 proves $\\rho_T=\\gamma_T\\beta_{T,A}$, the required symmetry equation. Only the hexagon and naturality axioms of the given braided category, not symmetry of its braiding, are used.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-symmetric-bimod-tensor.proof.md",
+    "place": "second paragraph, hexagon and braiding naturality"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-modobj-symmetric-bimodules"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-symmetric-bimod-tensor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-symmetric-bimod-tensor.proof.md",
+  "place": "first and second proof paragraphs"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor products of symmetric bimodules are symmetric in a braided monoidal category with coequalizers",
+   "results": "Bimod.TensorBimod.X, Bimod.tensorBimod_X, Bimod.tensorBimod (Mathlib.CategoryTheory.Monoidal.Bimod); ModuleCat and SemimoduleCat symmetricCategory; tensorμ and tensorδ. The bimodule source defines the relative tensor but has no IsSymmetric declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product of symmetric bimodules is symmetric",
+   "results": "LinearMap.IsSymm.tmul and LinearMap.BilinMap.tmul_isSymm concern bilinear forms; Bimod.tensorBimod constructs the tensor bimodule (Mathlib.CategoryTheory.Monoidal.Bimod:356); ModuleCat.MonoidalCategory.symmetricCategory concerns the ambient module category. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bimod\", \"symmetric\"",
+   "results": "0 hits; service returned OK.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSymmetric|tensorBimod|symmetric",
+   "results": "Searched CategoryTheory/Monoidal/Bimod.lean. Actual hits are lines 187 (namespace TensorBimod), 347 (end TensorBimod), 356 (tensorBimod), 357 (underlying object), 358 (left action). Read lines 187–288 and 349–365: tensor construction and induced-action equations, no symmetry predicate or theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the relative tensor product of two bimodule objects whose right action is braiding followed by left action has the same property",
+   "results": "Bimod.tensorBimod_actLeft, Bimod.tensorBimod_actRight, TensorBimod.right_assoc', one_act_left', actRight_one', tensorBimod_X, whisker_exchange_bimod, TensorBimod.π_tensor_id_actRight. These give the actions or bimodule axioms, not equality with the braiding followed by left action.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "braided category relative tensor of central bimodule actions remains central",
+   "results": "8 hits: CategoryTheory.Center.tensorObj, braidedCategoryCenter, ofBraided_μ_f, tensorHom, ofBraided_δ_f, instMonoidalOfBraided, ofBraidedObj, braiding. These concern Drinfeld-center objects with half-braidings and the ordinary tensor, not the relative tensor of symmetric A-A-bimodules. No whole-item match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSymmetric|fullyFaithfulToBimod",
+   "results": "Searched Mathlib CategoryTheory via msearch.py; service returned OK, 0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -55,5 +129,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-category"
+ "unit": "sk-prop-sfb-module-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-symmetric-bimod-tensor",
+  "worker": "stage1",
+  "summary": "Independent second reading confirmed the unchanged statement and all three proof steps against the current blueprint, both cited statements, Stacks 002F (definition-colimit), and read-only categorical sources. Expanded cancellation on both components of the parallel-pair cocone and wrote the reverse hexagon before cancelling the correctly indexed associator. No new nodes or Mathlib leaves; citations remain verbatim.",
+  "blueprint": "Step 1 realizes the first proof paragraph; Steps 2 and 3 realize the substitutions and the hexagon/naturality calculation of the second proof paragraph of lem-sfb-symmetric-bimod-tensor.proof.md.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-e120934ed",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-e120934ed (reviewer sub-agent of L); spot-checked: Read the complete item, report, DAG route, cited nodes, blueprint sources, Mathlib bimodule and braided-category sources, and delivery-errors A–F. The statement matches main-20261015 with all hypotheses intact, including arbitrary monoid A. All three proof steps are valid; cancellation, induced actions, hexagon, naturality, domains, edge cases, route, searches, and duplicate checks pass. Review written to review.md. No fixes or dropped nodes."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-milnor-sequence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of the sequential derived limit",
@@ -12,32 +12,121 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.md",
   "place": "node det-pe-milnor-sequence, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-inverse-limit"
+ ],
  "proof": [
   {
-   "text": "For a map of complexes $\\varphi\\colon A\\to B$, the triangle\n$\\operatorname{Cone}(\\varphi)[-1]\\to A\\xrightarrow{\\varphi}B\\to\\operatorname{Cone}(\\varphi)$\ngives the long exact sequence\n\n$$\n\\cdots\\to H^{q-1}(A)\\xrightarrow{H^{q-1}\\varphi}H^{q-1}(B)\\to\nH^q(\\operatorname{Cone}(\\varphi)[-1])\\to H^q(A)\\xrightarrow{H^q\\varphi}H^q(B)\\to\\cdots,\n$$\n\nhence the short exact sequence\n$0\\to\\coker H^{q-1}\\varphi\\to H^q(\\operatorname{Cone}(\\varphi)[-1])\\to\\ker H^q\\varphi\\to0$.\nApply this with $A=B=\\prod_nK_n$ and $\\varphi=1-T$. By [det-pe-products-derived],\n$H^q(\\prod_nK_n)=\\prod_nH^q(K_n)$, and under this identification $H^q(1-T)$ is $1-T$ for\nthe tower $(H^q(K_n))_n$. Its kernel consists of the families $(h_n)$ with\n$h_n=t_n(h_{n+1})$, i.e. it is $\\varprojlim_nH^q(K_n)$ (limits of sheaves being computed\nsectionwise). This proves 1.",
+   "text": "Work in the abelian category of sheaves of $\\mathcal R$-modules [def-weil-sheaf-of-modules-category], with the usual universe convention for the pro-etale site. For a map of complexes $\\varphi:A\\to B$, put $D=\\operatorname{Cone}(\\varphi)[-1]$. The cone triangle $A\\xrightarrow{\\varphi}B\\to\\operatorname{Cone}(\\varphi)\\to A[1]$ is distinguished by [def-weil-abstract-derived-category]. Its cohomology sequence [lem-sf-derived-homology-long-exact], using $H^{q-1}(\\operatorname{Cone}(\\varphi))=H^q(D)$, contains\n$$\nH^{q-1}(A)\\xrightarrow{H^{q-1}\\varphi}H^{q-1}(B)\\xrightarrow{\\beta}H^q(D)\\xrightarrow{\\gamma}H^q(A)\\xrightarrow{H^q\\varphi}H^q(B).\n$$\nExactness identifies $\\operatorname{coker}(H^{q-1}\\varphi)$ with $\\operatorname{im}\\beta=\\ker\\gamma$ and $\\operatorname{im}\\gamma$ with $\\ker(H^q\\varphi)$; hence it gives the required short exact sequence with these two end terms. All kernels, cokernels and images here are in the sheaf category, not cokernels of sections.\n\nApply this to $A=B=\\prod_nK_n$ and $\\varphi=1-T$. The product/cohomology identification is supplied by [det-pe-products-derived]. To verify explicitly that the canonical comparison induced by projections is an isomorphism, use exactness of products [det-pe-products-exact]. Put $Z_n^q=\\ker d_n^q$ and $B_n^q=\\operatorname{im}d_n^{q-1}$. Products preserve kernels; applying exactness to $0\\to\\ker d_n^{q-1}\\to K_n^{q-1}\\to B_n^q\\to0$ shows that the boundaries of the product complex are $\\prod_nB_n^q$. Applying it to $0\\to B_n^q\\to Z_n^q\\to H^q(K_n)\\to0$ identifies its cohomology with $\\prod_nH^q(K_n)$ by the coordinate projections. Its $n$-th component is therefore $H^q(\\pi_n)$, so\n$$\nH^q(\\pi_n)H^q(1-T)=H^q(\\pi_n)-H^q(t_n)H^q(\\pi_{n+1}).\n$$\nThus $H^q(1-T)$ identifies with $1-T$ on $\\prod_nH^q(K_n)$. By [def-pur-sheaf-inverse-limit], reindexed from $r\\geq1$ to $n\\geq0$, its kernel has sections $(h_n)$ satisfying $h_n=H^q(t_n)(h_{n+1})$, with componentwise restrictions, and is $\\varprojlim_nH^q(K_n)$. This proves clause 1.\n\nFor naturality, a morphism of towers $(f_n):(K_n,t_n)\\to(K'_n,t'_n)$ satisfies $f_nt_n=t'_nf_{n+1}$, so $F=\\prod_nf_n$ satisfies $F(1-T)=(1-T')F$. Write $D^q=A^q\\oplus B^{q-1}$, with differential $(a,b)\\mapsto(d_Aa,-d_Bb-\\varphi a)$, using the cone and shift formulas in [def-weil-abstract-derived-category]. The induced cone map is $(a,b)\\mapsto(Fa,Fb)$. For the cited cone triangle with last map $-p$, the maps adjacent to $H^q(D)$ are induced by the inclusion $b\\mapsto(0,b)$ and the negative projection $(a,b)\\mapsto-a$, respectively. The cone map commutes with both maps, since $(Fa,Fb)$ has second coordinate $Fb$ and negative first coordinate $-Fa=F(-a)$. Passing to cohomology and then factoring through the above cokernel and kernel therefore gives a commuting diagram of short exact sequences. The coordinate projections commute with $F$, so the product and inverse-limit identifications in that diagram are natural as well.",
    "uses": [
-    "det-pe-products-derived"
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "det-pe-products-derived",
+    "def-pur-sheaf-inverse-limit",
+    "det-pe-products-exact"
    ],
    "elementary": false
   },
   {
-   "text": "For 2, $\\prod_nM_n$ is concentrated in degree $0$, so $\\operatorname{Cone}(1-T)[-1]$ is the\ntwo-term complex $\\prod_nM_n\\xrightarrow{1-T}\\prod_nM_n$ in degrees $0$ and $1$. Its\n$H^0$ is $\\ker(1-T)=\\varprojlim_nM_n$, its $H^1$ is $\\coker(1-T)$, and all other\ncohomology vanishes. Statement 3 is 1 combined with 2 applied to the tower\n$(H^{q-1}(K_n))_n$.",
-   "uses": [],
-   "elementary": null
+   "text": "For clause 2, $P=\\prod_nM_n$ is concentrated in degree $0$. By the cone and shift formulas of [def-weil-abstract-derived-category], $\\operatorname{Cone}(1-T)[-1]$ has $P$ in degrees $0,1$, zero in every other degree, and differential $-(1-T):P\\to P$. Multiplication by $-1$ in degree $1$ identifies it with the two-term complex having differential $1-T$. Therefore $H^0=\\ker(1-T)$, $H^1=\\operatorname{coker}(1-T)$ and $H^p=0$ for $p\\notin\\{0,1\\}$. The sectionwise formula of [def-pur-sheaf-inverse-limit] identifies this kernel with $\\varprojlim_nM_n$. The notation $R^p\\varprojlim$ in the statement is defined as this cohomology, so clause 2 follows without an additional assertion about derived functors. Finally apply clause 2 to $M_n=H^{q-1}(K_n)$ and its induced transition maps, and substitute its $R^1\\varprojlim=\\operatorname{coker}(1-T)$ into clause 1 to obtain clause 3.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-pe-products-derived"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "det-pe-products-derived",
+  "def-pur-sheaf-inverse-limit",
+  "det-pe-products-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definitions definition-cone (Tag 014E), definition-distinguished-triangle (Tag 014Q), definition-homological (Tag 0147), definition-unbounded-derived-category (Tag 05RU); Lemma lemma-cohomology-homological (Tag 05RS). The argument realizes clauses 1–3 of the blueprint item, whose Markdown contains no separate proof."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Milnor short exact sequence for cohomology of a derived inverse limit defined as the cone of one minus shift on a product of complexes",
+   "results": "CochainComplex.mappingCone.triangle; CochainComplex.mappingCone; no theorem specialized to pro-etale sheaf towers",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.HomologySequence, Cone, homology, limit",
+   "results": "Loogle returned unknown identifier 'DerivedCategory.HomologySequence'; this query gives no evidence of absence. Replaced by the successful second-reader query below.",
+   "date": "2026-10-16",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact cohomology sequence for the cone of a map of complexes and cohomology of products",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh and mapping-cone API; no Milnor theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|mappingCone|HomologySequence|derived limit (Mathlib/Algebra/Homology)",
+   "results": "Mathlib mapping-cone and HomologySequence declarations, but no Milnor inverse-limit theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lim.?1|Milnor|Roos|homotopyLimit",
+   "results": "0 hits: ; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"triangle\"",
+   "results": "12 hits: CochainComplex.mappingCone.triangle, CochainComplex.mappingCone.triangle_obj₁, CochainComplex.mappingCone.triangle_obj₂, CochainComplex.mappingCone.triangle_obj₃, CochainComplex.mappingCone.triangleh, CochainComplex.mappingCone.triangle_mor₁, CochainComplex.mappingCone.triangle_mor₂, HomotopyCategory.mappingCone_triangleh_distinguished; ",
+   "date": "2026-10-16",
+   "verdict": "no exact Milnor theorem; general cone/Ext API only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of a sequential homotopy inverse limit is an extension of a kernel by a cokernel",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂', CategoryTheory.Abelian.Ext.covariant_sequence_exact₃', CategoryTheory.Abelian.Ext.covariant_sequence_exact₁', CategoryTheory.Abelian.Ext.covariantSequence_exact, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁', CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃', CategoryTheory.Abelian.Ext.contravariantSequence_exact, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁; ",
+   "date": "2026-10-16",
+   "verdict": "no exact Milnor theorem; general cone/Ext API only"
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|Roos|derivedLimit|homotopyLimit|homotopyInverseLimit",
+   "results": "1 hits: Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match; general homological-functor or unrelated declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopy\", \"limit\"",
+   "results": "3 hits: CategoryTheory.PreOneHypercover.Homotopy.isLimitMultifork, CategoryTheory.PreOneHypercover.Homotopy.isLimitMultiforkEquiv, CategoryTheory.PreOneHypercover.Homotopy.mapMultiforkOfIsLimit_eq",
+   "date": "2026-10-16",
+   "verdict": "no exact match; general homological-functor or unrelated declarations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse sequence of cochain complexes with exact products the homotopy limit has a Milnor exact sequence",
+   "results": "8 hits: CochainComplex.instHasHomotopyCofiberOfHasBinaryBiproductXHAddOfNat, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_exact₃, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CochainComplex.cm5b.homotopyEquiv, CategoryTheory.Functor.homologySequenceComposableArrows₅_exact, CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-16",
+   "verdict": "no exact match; general homological-functor or unrelated declarations only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -50,5 +139,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-pe-milnor"
+ "unit": "sk-prop-pe-milnor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-milnor-sequence",
+  "worker": "stage1",
+  "summary": "Second reading checked all three clauses against the current blueprint and all six cited interfaces against their statements and sources. Retained the explicit product/cohomology, kernel/cokernel and two-term calculations; fixed the cone-naturality sign convention and inaccurate proof provenance. No new nodes.",
+  "blueprint": "Clause 1 of det-pe-milnor-sequence.md: cone long exact sequence, coordinatewise cohomology comparison, kernel as inverse limit, and naturality (step 1). Clauses 2 and 3: degree-zero two-term calculation and substitution into clause 1 (step 2). The item Markdown has no proof heading; this supplies the long-exact-sequence argument in the first sentence of sk-prop-pe-milnor.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-7759468d4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-7759468d4 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, every cited node and source, all proof steps, hypotheses, naturality, cone signs, coefficient category, edge cases, and Mathlib searches. No mathematical or DAG faults found; review.md records the checks and accepted tool uses."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-integers-to-subfield-point",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The inclusion of condensed rings $\\underline{\\mathcal O}_E\\to\\underline E$",
@@ -18,12 +18,16 @@
  ],
  "proof": [
   {
-   "text": "The condensed ring construction is functorial in continuous ring maps\n[sk-def-sfb-condensed-ring]. Forgetting from sheaves of rings to sheaves of abelian groups\nsends morphisms of sheaves of rings to morphisms of ring objects, because the\nmultiplication of the ring object is induced by the sectionwise multiplication\n[sk-def-sfb-ring-object].",
+   "text": "Because $E$ is an embedded subfield of $\\Qlb$, [sk-def-sfb-condensed-ring] gives its restricted topology and the condensed rings $\\underline E$ and $\\underline{\\cO}_E$, where $\\cO_E=\\{x\\in E:|x|\\le1\\}$. Its final clause states that postcomposition with the continuous inclusion $i:\\cO_E\\hookrightarrow E$ gives a morphism of condensed rings $\\underline{\\cO}_E\\to\\underline E$. On each profinite $S$ this sends $a$ to $i\\circ a$, displayed as $f\\mapsto f$ after identifying an element of $\\cO_E$ with its image in $E$. For a restriction along $u:S'\\to S$, $i\\circ(a\\circ u)=(i\\circ a)\\circ u$. The section maps preserve addition, multiplication, zero and unit because $i$ is a ring homomorphism and the operations are pointwise. The underlying abelian sheaf map is therefore a morphism of ring objects of $\\Sh(*_{\\mathrm{proét}},\\Ab)$ by clause 3 of [sk-def-sfb-ring-object].",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "sk-def-sfb-ring-object"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-integers-to-subfield-point.proof.md",
+    "place": "Entire proof: continuous-ring-map functoriality and preservation of ring-object morphisms by forgetting to abelian sheaves"
+   }
   }
  ],
  "proof_deps": [
@@ -32,12 +36,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-integers-to-subfield-point.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-integers-to-subfield-point.proof.md",
+  "place": "Entire proof paragraph, with section formula and restriction naturality written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension E of the l-adic numbers, the inclusion of its ring of integers induces a morphism of condensed rings and of tensor ring objects in condensed abelian groups",
+   "results": "{\"t\": \"2026-10-16T13:09:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite extension E of the l-adic numbers, the inclusion of its ring of integers induces a morphism of condensed rings and of tensor ring objects in condensed abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.FiniteAdeleRing.algebraMap\", \"BDeRhamPlus\", \"PadicInt.coe_adicCompletionIntegersEquiv_apply\", \"PadicInt.adicCompletionIntegersEquiv\", \"Padic.adicCompletionEquiv\", \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply\"], \"digest\": \"4d250127e6b7bbe4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern finite adeles, completions and padic comparison equivalences rather than condensed ring-object morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.commRingYoneda",
+   "results": "{\"t\": \"2026-10-16T13:09:48Z\", \"tool\": \"loogle\", \"query\": \"TopCat.commRingYoneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"TopCat.commRingYoneda\"], \"digest\": \"1066a71c1da3f537\"}",
+   "date": "2026-10-16",
+   "verdict": "partial only: TopCat.commRingYoneda, read at Mathlib/Topology/Sheaves/CommRingCat.lean:237-253, gives ring-valued presheaf functoriality on TopCat, not the condensed sheaf and tensor ring-object clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|continuousFunctions|continuousMapRingObj",
+   "results": "{\"t\": \"2026-10-16T13:09:47Z\", \"tool\": \"grep\", \"query\": \"commRingYoneda|continuousFunctions|continuousMapRingObj\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\"], \"digest\": \"1f5995ec4570e9dd\"}",
+   "date": "2026-10-16",
+   "verdict": "partial only: five displayed hits in Mathlib/Topology/Sheaves/CommRingCat.lean; read lines 208-253, including continuousFunctions.map at line 224 and commRingYoneda at line 237; these give component ring maps and presheaf functoriality, not the full item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous inclusion of a topological subring induces by postcomposition a morphism of condensed rings on profinite sets",
+   "results": "{\"t\": \"2026-10-16T13:09:47Z\", \"tool\": \"leansearch\", \"query\": \"A continuous inclusion of a topological subring induces by postcomposition a morphism of condensed rings on profinite sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.continuousFunctions.map\", \"UniformSpace.Completion.mapRingHom\", \"ContinuousMap.inclusion\", \"UniformSpace.Completion.coe_mapRingHom\", \"TopologicalSpace.Opens.inclusion'\", \"Subring.subtype\", \"continuousSubring\", \"profiniteToCondensed\"], \"digest\": \"d2019f50b33b49bd\"}",
+   "date": "2026-10-16",
+   "verdict": "partial only: TopCat.continuousFunctions.map supplies the component ring homomorphism (Mathlib/Topology/Sheaves/CommRingCat.lean:224-231); other hits concern subrings, completions and condensed sets, without the sheaf ring-object morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition with a continuous ring homomorphism defines a natural morphism of condensed rings on the coherent site of profinite sets and preserves their tensor ring object structures",
+   "results": "{\"t\": \"2026-10-16T13:10:22Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition with a continuous ring homomorphism defines a natural morphism of condensed rings on the coherent site of profinite sets and preserves their tensor ring object structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondensed.ihomPoints\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"1bf4afe0b4a567d7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: free/solid condensed modules and the tensor structure on light condensed modules do not state this inclusion; read Mathlib/Condensed/Solid.lean:38-48 and Condensed/Light/Monoidal.lean:38-66"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapRing|CondensedRing|commRingYoneda|RingObj",
+   "results": "{\"t\": \"2026-10-16T13:10:18Z\", \"tool\": \"grep\", \"query\": \"continuousMapRing|CondensedRing|commRingYoneda|RingObj\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in Mathlib/Condensed for the ring-object and continuous-map-ring patterns"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a continuous inclusion of topological rings gives a morphism of condensed rings and a morphism of tensor ring objects in condensed abelian groups",
+   "results": "{\"t\": \"2026-10-16T13:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a continuous inclusion of topological rings gives a morphism of condensed rings and a morphism of tensor ring objects in condensed abelian groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_comp\", \"CondensedMod\", \"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.ihom_map_val_app\", \"CondensedMod.hom_naturality_apply\"], \"digest\": \"8e2345582f3108dc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internally projective light condensed modules, free/solid modules and component naturality do not state this coefficient inclusion or its tensor ring-object morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|continuousFunctions",
+   "results": "{\"t\": \"2026-10-16T13:36:11Z\", \"tool\": \"grep\", \"query\": \"commRingYoneda|continuousFunctions\", \"sub\": \"Topology/Sheaves/CommRingCat.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"19\", \"161\", \"208\", \"211\", \"215\"], \"digest\": \"cbde4e7e48338473\"}",
+   "date": "2026-10-16",
+   "verdict": "partial only: read Mathlib/Topology/Sheaves/CommRingCat.lean:208-253, including continuousFunctions.map at 224 and commRingYoneda at 237; component ring homomorphisms and presheaf functoriality do not give the full condensed-sheaf tensor ring-object assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -57,5 +118,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-thm-sfb-rationalization-comparison"
+ "unit": "sk-thm-sfb-rationalization-comparison",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-integers-to-subfield-point",
+  "worker": "stage1",
+  "summary": "Checked the unchanged current-blueprint definition and its separate proof against both existing dependency statements and read-only project source trees. Made the postcomposition formula, restriction naturality and pointwise ring preservation explicit, with a sourced construction step. Retained six verified logged Mathlib searches and added two logged resume searches; no exact finished attachment, full Mathlib match or new nodes. Rechecked verbatim citations and the current acyclic 42-node closure.",
+  "blueprint": "Realizes the complete proof paragraph: functoriality of the condensed-ring construction for the continuous inclusion, followed by forgetting to abelian sheaves while preserving the ring-object morphism."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-caa3be44b",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-caa3be44b (reviewer sub-agent of L); spot-checked: Reviewed the item, both cited node statements, blueprint proof/source, chapter and unit route, edge cases, coefficient category, target source bindings, Mathlib searches, duplicates, and acyclicity. The single proof step is complete and correctly sourced; no repairs or new nodes are needed. Wrote review.md."
+ }
 }

@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-pe-weak-contractible-equivalences",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-pe-weak-contractible"
+  ]
  },
  "kind": "statement",
  "title": "Equivalent forms of weak contractibility",
@@ -14,38 +16,167 @@
  },
  "stmt_deps": [
   "det-pe-topos-functoriality-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "sk-def-pe-wlocal",
   "det-pe-wcb-projective"
  ],
  "proof": [
   {
-   "text": "*2 $\\Leftrightarrow$ 3.* By the Yoneda lemma $\\Hom(h_W,G)=G(W)$ naturally in $G$, so a lift\nof $y\\colon h_W\\to G$ along $F\\to G$ is exactly an element of $F(W)$ mapping to $y\\in G(W)$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [det-pe-topos-functoriality-site](2), $h_W$ is a sheaf. Sheaves form a full subcategory of presheaves by [def-weil-pbc-sites-and-cohomology]. Applying [lem-galois-yoneda-hom-bijection] to the underlying presheaves gives $\\operatorname{Hom}(h_W,F)\\cong F(W)$ and $\\operatorname{Hom}(h_W,G)\\cong G(W)$. For $\\alpha:F\\to G$ and $s:h_W\\to F$, naturality in the presheaf gives $\\operatorname{Yoneda}(\\alpha\\circ s)=\\alpha_W(\\operatorname{Yoneda}(s))$. Thus for each $y:h_W\\to G$, the equation $\\alpha\\circ s=y$ is equivalent to $\\alpha_W(\\operatorname{Yoneda}(s))=\\operatorname{Yoneda}(y)$, proving $2\\Leftrightarrow3$.",
+   "uses": [
+    "det-pe-topos-functoriality-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+    "place": "First paragraph, 2 iff 3; Stacks categories.tex Tag 001P, lemma-yoneda"
+   }
   },
   {
-   "text": "*1 $\\Rightarrow$ 2.* Given an epimorphism $F\\to G$ and $y\\colon h_W\\to G$, the pullback\n$F\\times_Gh_W\\to h_W$ is an epimorphism, since epimorphisms in a topos are stable under\npullback. A section of it composed with the projection to $F$ is a lift of $y$.",
-   "uses": [],
-   "elementary": null
+   "text": "Assume condition 1. Given an epimorphism $\\alpha:F\\to G$ and $y:h_W\\to G$, define $P(V)=\\{(a,t)\\in F(V)\\times h_W(V):\\alpha_V(a)=y_V(t)\\}$, with coordinatewise restrictions. Naturality preserves the defining equality. For a matching family in $P$, glue its two coordinates uniquely in the sheaves $F$ and $h_W$ using [def-weil-pbc-sites-and-cohomology]; the two resulting sections of $G$ agree locally and hence agree by separatedness. Therefore the glued pair lies in $P$, uniquely, so $P$ is a sheaf. Its coordinate projections are sheaf morphisms; any pair of morphisms to $F$ and $h_W$ with equal composites to $G$ factors uniquely by pairing the components. Thus $P$ is the pullback $F\\times_Gh_W$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+    "place": "Second paragraph, 1 implies 2: explicit construction of the pullback sheaf"
+   }
   },
   {
-   "text": "*2 $\\Rightarrow$ 1.* Apply 2 to the epimorphism $F\\to h_W$ and the map\n$\\mathrm{id}\\colon h_W\\to h_W$.\n\nThe last assertion is part 1 of [det-pe-wcb-projective].",
+   "text": "For $t\\in h_W(V)$, apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to $\\alpha$ and $y_V(t)\\in G(V)$. On some covering $\\{V_i\\to V\\}$ there are $a_i\\in F(V_i)$ with $\\alpha(a_i)=y_V(t)|_{V_i}=y_{V_i}(t|_{V_i})$. Thus $(a_i,t|_{V_i})\\in P(V_i)$ lifts $t|_{V_i}$. The converse direction of the same criterion shows that the projection $p:P\\to h_W$ is an epimorphism. This proves exactly the pullback stability needed in the blueprint without invoking a further topos theorem.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+    "place": "Second paragraph, 1 implies 2: pullback projection epimorphic; Stacks sites.tex Tags 00WM and 00WN, definition-sheaves-injective-surjective and lemma-mono-epi-sheaves"
+   }
+  },
+  {
+   "text": "By condition 1 the epimorphism $p$ constructed in steps 2–3 has a section $r:h_W\\to P$. Let $q:P\\to F$ be the other projection. Then $\\alpha\\circ q\\circ r=y\\circ p\\circ r=y$, so $q\\circ r$ is the required lift. This proves $1\\Rightarrow2$. Conversely, condition 2 applied to an epimorphism $F\\to h_W$ and $\\mathrm{id}_{h_W}$ supplies a section, proving $2\\Rightarrow1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+    "place": "Second and third paragraphs: composing the section with the projection, and lifting the identity"
+   }
+  },
+  {
+   "text": "For an affine object $W=\\operatorname{Spec}D$ with $D$ w-contractible, clause 1 of [det-pe-wcb-projective] says exactly that every epimorphism $F\\to h_W$ has a section. Thus condition 1 holds and the equivalences proved above give all three conditions. This proves the final assertion and agrees with the weak-contractibility terminology in the statement.",
    "uses": [
     "det-pe-wcb-projective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+    "place": "Final sentence: w-contractible affines satisfy condition 1"
+   }
   }
  ],
  "proof_deps": [
+  "det-pe-topos-functoriality-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "det-pe-wcb-projective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-weak-contractible/det-pe-weak-contractible-equivalences.proof.md",
+  "place": "All three equivalence paragraphs and final assertion, expanded by the local-surjectivity criterion of Stacks Tag 00WN"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T13:04:42Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|yonedaLemma\", \"sub\": \"Mathlib/CategoryTheory/Yoneda.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid source directory: msearch already prefixes Mathlib/; zero hits are not evidence of absence; superseded by the corrected CategoryTheory grep"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*pullback|pullback.*stable|epi.*pullback|pullback.*epi",
+   "results": "{\"t\": \"2026-10-16T13:04:42Z\", \"tool\": \"grep\", \"query\": \"stable.*pullback|pullback.*stable|epi.*pullback|pullback.*epi\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid source directory: msearch already prefixes Mathlib/; zero hits are not evidence of absence; superseded by the corrected CategoryTheory grep"
+  },
+  {
+   "tool": "leansearch",
+   "query": "epimorphisms in a topos are stable under pullback",
+   "results": "{\"t\": \"2026-10-16T13:04:43Z\", \"tool\": \"leansearch\", \"query\": \"epimorphisms in a topos are stable under pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.epi_pullback_of_epi_f\", \"CategoryTheory.Regular.regularEpiIsStableUnderBaseChange\", \"CategoryTheory.Abelian.epi_pullback_of_epi_g\", \"CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.monomorphisms\", \"CategoryTheory.MorphismProperty.pullbacks_le\", \"CategoryTheory.Abelian.epi_snd_of_isLimit\"], \"digest\": \"e5af2030464bf73b\"}",
+   "date": "2026-10-16",
+   "verdict": "related pullback-stability results, including abelian and regular-epimorphism variants; no hit states the complete equivalences and w-contractible-affine assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma",
+   "results": "{\"t\": \"2026-10-16T13:04:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yonedaEquiv, CategoryTheory.yonedaLemma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no hits for the conjunction of these identifiers; this does not test the individual Yoneda declarations, which were found and read separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi, pullback, Grothendieck topos",
+   "results": "{\"t\": \"2026-10-16T13:04:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Epi, pullback, Grothendieck topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported an unknown identifier; no conclusion about availability of the theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalent characterizations of a weakly contractible object: representable sheaf sections lift epimorphisms, projective representable, every epi onto representable splits",
+   "results": "{\"t\": \"2026-10-16T13:04:44Z\", \"tool\": \"leanfinder\", \"query\": \"equivalent characterizations of a weakly contractible object: representable sheaf sections lift epimorphisms, projective representable, every epi onto representable splits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Projective\", \"CategoryTheory.ProjectivePresentation\", \"CategoryTheory.isProjective\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_coyoneda_obj\", \"CategoryTheory.EnoughProjectives\", \"CategoryTheory.Projective.hasLiftingProperty_of_isZero\", \"CategoryTheory.Projective.instHasLiftingPropertyOfEpi\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_preadditiveCoyoneda_obj\"], \"digest\": \"1d7c790147603065\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item (including w-contractible affines); related general ingredients are reused via existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda lemma Hom representable presheaf to F equals F evaluated at object",
+   "results": "{\"t\": \"2026-10-16T13:04:46Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda lemma Hom representable presheaf to F equals F evaluated at object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RepresentableBy.homEquiv\", \"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.Functor.IsRepresentedBy.representableBy_homEquiv_apply\", \"CategoryTheory.yonedaEquiv\", \"CategoryTheory.Functor.RepresentableBy.homEquiv_eq\", \"CategoryTheory.Functor.RepresentableBy.isRepresentedBy\", \"CategoryTheory.Functor.reprx\", \"CategoryTheory.Functor.reprW_hom_app\"], \"digest\": \"a7d1cdc0f1999829\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item (including w-contractible affines); related general ingredients are reused via existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "yonedaEquiv|projective_iff|WContractible|WeaklyContractible",
+   "results": "{\"t\": \"2026-10-16T13:16:32Z\", \"tool\": \"grep\", \"query\": \"yonedaEquiv|projective_iff|WContractible|WeaklyContractible\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\"], \"digest\": \"56c11e0e4de4731c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item (including w-contractible affines); related general ingredients are reused via existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Projective",
+   "results": "{\"t\": \"2026-10-16T13:16:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Projective\", \"CategoryTheory.Projective.inst\", \"CategoryTheory.Limits.IsZero.projective\", \"CategoryTheory.Projective.projective_over\", \"CategoryTheory.ProjectivePresentation.projective\", \"CategoryTheory.Projective.of_iso\", \"CategoryTheory.Projective.zero_projective\", \"CategoryTheory.Retract.projective\"], \"digest\": \"48f4f341d08d2706\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item (including w-contractible affines); related general ingredients are reused via existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object is projective if and only if every epimorphism with that object as codomain is split, in a category with pullbacks",
+   "results": "{\"t\": \"2026-10-16T13:26:55Z\", \"tool\": \"leanfinder\", \"query\": \"An object is projective if and only if every epimorphism with that object as codomain is split, in a category with pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.projective_iff_llp_epimorphisms_zero\", \"CategoryTheory.isProjective\", \"CategoryTheory.Projective\", \"CategoryTheory.projective_iff_llp_epimorphisms_of_isZero\", \"CategoryTheory.Projective.factors\", \"CategoryTheory.Projective.factorThru\", \"CategoryTheory.ProjectivePresentation.projective\", \"CategoryTheory.Projective.projective_iff_preservesEpimorphisms_coyoneda_obj\"], \"digest\": \"c66f0b55d3d8903c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader semantic search: returned Projective, its factors API, coyoneda preservation and zero-object lifting-property results. The zero-object results do not apply to sheaves of sets in general; none states the whole item, especially its w-contractible-affine clause."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*iff|splitEpi.*[Pp]rojective|[Pp]rojective.*splitEpi",
+   "results": "{\"t\": \"2026-10-16T13:26:50Z\", \"tool\": \"grep\", \"query\": \"projective.*iff|splitEpi.*[Pp]rojective|[Pp]rojective.*splitEpi\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/LiftingProperties.lean\"], \"digest\": \"bcec2d3737b53efc\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader Mathlib grep: found the coyoneda/projectivity equivalence and preadditive/abelian variants. Read Projective/Basic.lean:45–56 and 141–149; these supply general ingredients, not the complete item. No new supporting node is necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "class Projective|projective_iff_preservesEpimorphisms_coyoneda_obj",
+   "results": "{\"t\": \"2026-10-16T13:36:01Z\", \"tool\": \"grep\", \"query\": \"class Projective|projective_iff_preservesEpimorphisms_coyoneda_obj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\", \"Mathlib/CategoryTheory/Preadditive/Yoneda/Projective.lean\"], \"digest\": \"efd5d10703c2ec2a\"}",
+   "date": "2026-10-16",
+   "verdict": "The projectivity class and coyoneda equivalence are in Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean:48 and :141. Read lines 40–60 and 135–151: these general categorical ingredients do not state the affine w-contractibility assertion, so the complete item remains split using the existing DAG ingredients."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -59,5 +190,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-weak-contractible"
+ "unit": "sk-def-pe-weak-contractible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-weak-contractible-equivalences",
+  "worker": "stage1",
+  "summary": "Preserved the statement and the current blueprint route. Cited existing natural Yoneda evaluation and the set-sheaf local-surjectivity criterion, and explicitly constructed and checked the pullback sheaf, its epimorphic projection and the resulting lift. The final affine clause uses the existing w-contractible projectivity statement. No new nodes are needed.",
+  "blueprint": "Step 1 realizes paragraph 1 (2 iff 3); steps 2–4 realize paragraphs 2 and 3 (1 implies 2, 2 implies 1); step 5 realizes the final affine assertion. The overlapping definition sk-def-pe-weak-contractible is recorded in same_as, not used to prove its own equivalences."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-ec1e92544",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-ec1e92544 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, current blueprint route, Stacks 001P/00VM/00WM/00WN, and relevant Mathlib sources. All five steps and edge cases check; no new nodes, circular dependencies, or weakened hypotheses. Accept tool_uses: det-pe-wcb-projective for the blueprint-required affine conclusion. Full checks recorded in review.md."
+ }
 }
