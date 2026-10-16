@@ -7,11 +7,15 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 import WeilConjectures.ConstructibleSheaf.FreeLifting
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.CategoryTheory.CoefficientPushCopowerCriterion
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis
+import Sheaf.AlgebraicGeometry.CondensedSubfieldBoundedCopowers
 
 /-!
 
@@ -38,9 +42,8 @@ coefficient changes. This file supplies the coefficient-specific input:
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
   (Shriek);
-* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
-  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
-  isomorphism on all unbounded objects for every `f` with a compactification.
+* for `E ⊆ Ω` and proper `f`, (Push) is an isomorphism at bounded-below objects, by
+  the scalar-basis decomposition and uniformly bounded-below coproduct continuity.
 
 ## Coefficient-specific input
 
@@ -57,12 +60,12 @@ coefficient changes. This file supplies the coefficient-specific input:
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
-  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
-  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
-  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
-  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
-  made here.
+* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE`:
+  for `E ⊆ Ω` and `f` proper, (Push) is invertible at bounded-below complexes. Restriction
+  of scalars reflects isomorphisms; the unit-mate identity identifies the restricted
+  comparison with the coproduct comparison for copies with a common lower bound.
+  This is the scope needed by the bounded constructible consumer. The formerly disputed
+  ambient instance and its all-unbounded (Shriek) example have been retired.
 
 -/
 
@@ -1338,34 +1341,149 @@ by
   let eY := Mod.mapFreeRestrictedRegularIso (upperStarFromPoint Y) a n e
   exact derivedPushHom_of_finiteFree a f n eY
 
-/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
-then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
-extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
-/- STATEMENT-DISPUTED: the asserted all-unbounded scope is stronger than the available
-bounded-below continuity input. The proposed ambient right adjoint is not supplied by
-ModuleObject.Derived.UpperShriek, which constructs an adjoint only on bounded constructible
-categories with additional geometric hypotheses. AmbientCounterexampleCoproducts disproves the
-analogous ambient coproduct claim for ordinary coefficient sheaves; transferring that example
-to these exact internal condensed modules remains to be formalized. The finite-basis argument
-above is valid, but an infinite basis additionally needs the copower comparison isolated in
-CategoryTheory.Adjunction.isIso_iff_unitCoproductComparison. No claim of a Lean-certified
-counterexample to this exact coefficient instance is made here. -/
-instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
-    (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
-  sorry
+-- Keep the chosen derived adjunction and sheaf pullbacks folded during the unit comparisons.
+-- Unfold the canonical comparison only for the explicit mate calculation below.
+attribute [local irreducible] derivedPushHom derivedComapLowerStarIso
+  Mod.derivedExtendMapDerivedCategoryAdjunction upperStarFromPoint ProEtale.upperStar
+
+/-- Exact restriction detects derived isomorphisms through its homology comparison. -/
+private theorem reflectsDerivedIsomorphisms
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B] (F : A ⥤ B)
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.ReflectsIsomorphisms] : F.mapDerivedCategory.ReflectsIsomorphisms := by
+  refine ⟨fun g _ ↦ ?_⟩
+  rw [DerivedCategory.isIso_iff]
+  intro n
+  have : IsIso (F.map ((DerivedCategory.homologyFunctor _ n).map g)) :=
+    (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) g).2
+      (by rw [Functor.comp_map]; infer_instance)
+  exact isIso_of_reflects_iso _ F
+
+/-- Central scalar compatibility supplies the square in the unit/copower criterion. -/
+private theorem centralUnitCopower
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {L : A ⥤ B} {U : B ⥤ A} (adj : L ⊣ U)
+    {L' : A' ⥤ B'} {U' : B' ⥤ A'} (adj' : L' ⊣ U')
+    {G : A ⥤ A'} {G' : B ⥤ B'} [U'.ReflectsIsomorphisms]
+    (β : G ⋙ L' ⟶ L ⋙ G') (hκ : IsIso (mateEquiv adj adj' β))
+    (M : A) (I : Type*) [HasCoproduct (fun _ : I ↦ M)]
+    [HasCoproduct (fun _ : I ↦ G.obj M)]
+    (τ : I → CatCenter B) (τ' : I → CatCenter B')
+    (hs : ∀ i K, G'.map ((τ i).app K) = (τ' i).app (G'.obj K))
+    (hC : IsIso (Sigma.desc fun i ↦
+      (show M ⟶ U.obj (L.obj M) from adj.unit.app M) ≫ U.map ((τ i).app (L.obj M))))
+    (hD : IsIso (Sigma.desc fun i ↦
+      (show G.obj M ⟶ U'.obj (L'.obj (G.obj M)) from adj'.unit.app (G.obj M)) ≫
+        U'.map ((τ' i).app (L'.obj (G.obj M)))))
+    (hc : IsIso (Sigma.desc fun i : I ↦ G.map (Sigma.ι (fun _ : I ↦ M) i))) :
+    IsIso (β.app M) := by
+  have := hC
+  have := hD
+  apply (Adjunction.isIso_iff_unitCoproductComparison adj adj' β hκ M I
+    (fun i ↦ (τ i).app _) (fun i ↦ (τ' i).app _) (fun i ↦ ?_)).2 hc
+  exact ((τ' i).naturality (β.app M)).symm.trans
+    (congrArg (fun g ↦ β.app M ≫ g) (hs i (L.obj M))).symm
+
+/-- Explicit copower families avoid expanding the concrete unit maps during elaboration. -/
+private theorem centralUnitCopowerExplicit
+    {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
+    {L : A ⥤ B} {U : B ⥤ A} (adj : L ⊣ U)
+    {L' : A' ⥤ B'} {U' : B' ⥤ A'} (adj' : L' ⊣ U')
+    {G : A ⥤ A'} {G' : B ⥤ B'} [U'.ReflectsIsomorphisms]
+    (β : G ⋙ L' ⟶ L ⋙ G') (hκ : IsIso (mateEquiv adj adj' β))
+    (M : A) (I : Type*) [HasCoproduct (fun _ : I ↦ M)]
+    [HasCoproduct (fun _ : I ↦ G.obj M)]
+    (τ : I → CatCenter B) (τ' : I → CatCenter B')
+    (hs : ∀ i K, G'.map ((τ i).app K) = (τ' i).app (G'.obj K))
+    (hC : IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦
+      adj.unit.app M ≫ U.map ((τ i).app (L.obj M))))
+    (hD : IsIso (Sigma.desc (f := fun _ : I ↦ G.obj M) fun i ↦
+      adj'.unit.app (G.obj M) ≫
+        U'.map ((τ' i).app (L'.obj (G.obj M)))))
+    (hc : IsIso (Sigma.desc fun i : I ↦ G.map (Sigma.ι (fun _ : I ↦ M) i))) :
+    IsIso (β.app M) := by
+  exact centralUnitCopower adj adj' β hκ M I τ τ' hs hC hD hc
+
+/-- Derived module categories have the coproducts supplied by the Grothendieck structure. -/
+private theorem coefficientDerivedCoproducts (Λ : Sheaf
+    (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (Z : Scheme.{u}) : HasCoproducts.{u + 1}
+      (DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
+        (condensedRingObj Λ Z))) := by
+  let C := Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)
+  have : HasColimitsOfSize.{u + 1, u + 1} C :=
+    CategoryTheory.IsGrothendieckAbelian.hasColimits C
+  have : HasCoproducts.{u + 1} C := fun J ↦
+    HasColimitsOfShape.of_small.{u + 1, u + 1} C (Discrete J)
+  exact CategoryTheory.derived_hasCoproducts
+
+set_option maxHeartbeats 400000 in
+-- The explicit mate and coproduct comparison are elaborated in several large derived categories.
+/-- **(Push)** for `E ⊆ ℚ̄_ℓ` is invertible at every bounded-below complex when `f` is proper.
+Source: the finite-support coefficient model and bounded-below coproduct continuity.
+(blueprint: lem-weil-pbc-condensed-qbar-bounded-push)
+
+Proof: choose the compatible scalar-basis decompositions of both extension units. The mate
+of the canonical push comparison is the inverse restriction/pushforward isomorphism.
+Restriction reflects derived isomorphisms, by exactness and the homology criterion.
+The unit-mate calculation identifies the restricted component, conjugated by the two basis
+isomorphisms, with the copower comparison followed by invertible factors. The copies of the
+input complex have the same lower bound. Bounded-below copower continuity for the proper,
+hence qcqs, map makes this comparison invertible. Reflection gives the conclusion.
+This does not assert an isomorphism of functors on the ambient unbounded categories. -/
+theorem isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE [IsProper f]
+    (E : FiniteIntermediateField ℓ)
+    (M : DerivedCategory
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
+    (N : ℤ) [M.IsGE N] :
+    IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app M) := by
+  classical
+  obtain ⟨I, τ, hunit, hscalar⟩ := condensedQbar_derived_scalar_basis.{u} ℓ E
+  have : HasCoproduct (fun _ : I ↦ M) :=
+    (coefficientDerivedCoproducts (Profinite.continuousMapRingObj E) X I).has_colimit _
+  have : HasCoproduct (fun _ : I ↦ R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj M) :=
+    (coefficientDerivedCoproducts (Profinite.continuousMapRingObj E) Y I).has_colimit _
+  have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+      (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y)).ReflectsIsomorphisms :=
+    Mod.restrictionReflectsIsomorphisms (coefficientMap
+        (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y)
+  have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+      (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+          Y)).mapDerivedCategory.ReflectsIsomorphisms :=
+    reflectsDerivedIsomorphisms _
+  have hκ : IsIso
+      (mateEquiv (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y))
+          (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f)) := by
+    unfold derivedPushHom
+    exact Adjunction.isIso_mate_pushHomOfComapIso
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y))
+      (derivedComapLowerStarIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f)
+  refine centralUnitCopowerExplicit
+    (G := R((f)_*⟦Profinite.continuousMapRingObj E⟧))
+    (G' := R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Y))
+    (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) hκ M I
+    (τ X) (τ Y) ?_ ?_ ?_ ?_
+  · exact fun i K ↦ hscalar f i K
+  · exact hunit X M
+  · exact hunit Y (R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj M)
+  · exact condensedSubfield_bounded_copower_comparison.{u} ℓ E f I M N
 
 variable [HasCompactification f]
 
 /-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
 example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  inferInstance
-
-/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
-the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
-example (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
   inferInstance
 
 end Push

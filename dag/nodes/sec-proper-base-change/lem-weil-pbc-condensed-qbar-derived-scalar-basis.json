@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+ "kind": "statement",
+ "title": "Scalar-basis decomposition of finite-to-Qbar derived extension units",
+ "statement": "Fix a prime ell and a finite intermediate field E of its algebraic closure. Use the finite-subextension-valued condensed algebraic-closure coefficient ring and its pullback to every scheme Z from def-weil-pbc-condensed-e-module-category. There exist one small indexing type I and, on the unbounded derived Omega-module category of each Z, central natural endomorphisms tau(Z,i). For every derived E-module M and every chosen I-copower of M, the map from that copower to the restriction of derived scalar extension of M, with i-th leg the extension adjunction unit followed by restriction of tau(Z,i), is invertible. For every scheme morphism f:X→Y, derived Omega-direct-image carries tau(X,i) at every M to tau(Y,i) at its image. This is an algebraic scalar compatibility statement; it asserts no preservation of infinite coproducts by direct image.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "Finite-basis restricted-regular-module and extension-unit calculation; infinite-basis extension for the finite-support ring model, as planned in steps 1–3 of prop-weil-pbc-qbar-condensed-basechange-compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic E-basis of Omega. A finite-field-valued continuous function takes values in a finite-dimensional E-subspace after forming the compositum with E. Its finitely many Hamel coordinates are continuous by finite-dimensional topological linear algebra. Finite covers preserve finite support. Hence restriction of the regular condensed Omega-module is the coproduct of regular E-modules, with basis-vector summand maps.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this decomposition to each scheme along the monoidal inverse-image functor. Tensor with M and identify each summand map with the extension unit followed by its basis scalar. Exact coproducts make extension exact and descend this decomposition termwise to the unbounded derived category. The coproduct assertion is independent of the chosen coproduct by uniqueness of colimits.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar endomorphisms are central. Pullback carries the same global coefficient scalars to each other, by its monoidal unit and coefficient square. Transpose this identity through the derived pullback/direct-image adjunction to obtain scalar compatibility of direct image. No direct-image preservation of infinite sums is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "lem-weil-pbc-profinite-point-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasis.lean",
+  "place": "F3 scalar-basis and bounded-below coproduct route, 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with coproducts of uniformly bounded below condensed coefficient complexes",
+   "results": "8 hits concerning condensed discrete colimits and exact colimits, no complete match. Existing project condensed_qcqs_pushforward_continuity supplies filtered continuity.",
+   "date": "2026-10-16",
+   "verdict": "Reuse project continuity; no Mathlib complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sigmaComparison\"",
+   "results": "12 hits, including sigmaComparison, ι_comp_sigmaComparison, PreservesCoproduct.of_iso_comparison and instIsIsoSigmaComparison. These supply the comparison API.",
+   "date": "2026-10-16",
+   "verdict": "Use the existing API; no coefficient comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitCoproductComparison|sigmaComparison|isIso_πTruncGE",
+   "results": "25 Mathlib hits, including isIso_πTruncGE_iff, sigmaComparison and its coprojection formula. Project search found CoefficientPushCopowerCriterion and CondensedQcqsPushforwardContinuity.",
+   "date": "2026-10-16",
+   "verdict": "Use these declarations; none gives the remaining scalar-basis input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic basis of an algebraic closure gives a direct sum decomposition of extension of scalars in condensed modules",
+   "results": "8 hits: LocallyConstant.freeOfProfinite, Nobeling_aux, Condensed.profiniteFree, profiniteSolid, free, finFree, and two LightCondMod discrete module equivalences. None describes this finite-subextension-valued continuous coefficient ring or its derived unit.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; the finite-support coordinate construction is still required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic basis of an algebraic closure gives a direct sum decomposition of extension of scalars in condensed modules",
+   "results": "8 hits, including Algebra.TensorProduct.basisAux (Mathlib.RingTheory.TensorProduct.Free), DirectSum.IsInternal.collectedBasis (Mathlib.Algebra.DirectSum.Module), Condensed.instAB4CondensedMod (Mathlib.Condensed.AB), and algebraicClosure.isAlgebraic. No result constructs the finite-subextension-valued condensed coefficient decomposition or its derived unit.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; retain the stated project proof route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "group": "F3",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: finite-to-Qbar coefficient comparisons on bounded constructible complexes.",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedQbarScalarBasis",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedQbarScalarBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedQbar_derived_scalar_basis",
+  "statement": "theorem condensedQbar_derived_scalar_basis :\n    ∃ (I : Type (u + 1))\n      (τ : ∀ Z : Scheme.{u}, I → CatCenter (DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z)))),\n      (∀ (Z : Scheme.{u}) (M : DerivedCategory\n        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj E) Z)))\n        [HasCoproduct (fun _ : I ↦ M)],\n        IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i ↦\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).unit.app M ≫\n          (Mod.comap (coefficientMap\n            (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).mapDerivedCategory.map\n              ((τ Z i).app ((Mod.extendScalars (coefficientMap\n                (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).leftDerivedFunctor.obj M)))) ∧\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (i : I)\n        (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))),\n        R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map ((τ X i).app M) =\n          (τ Y i).app (R((f)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj M))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with all four node records, retained interfaces, declared API retirement, forced adaptation errors, axiom audit, and direct-importer compilation."
+ }
+}

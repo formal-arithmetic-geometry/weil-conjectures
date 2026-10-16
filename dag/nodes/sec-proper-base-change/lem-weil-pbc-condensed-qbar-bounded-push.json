@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-bounded-push",
+ "kind": "statement",
+ "title": "Finite-to-Qbar push comparison at bounded-below complexes",
+ "statement": "Fix a prime ell and a finite intermediate field E, with finite-subextension-valued condensed algebraic-closure coefficients. Let f:X→Y be proper and let M in the ordinary uncompleted derived internal E-module category of X have a lower cohomological bound N. The component at M of the canonical derivedPushHom coefficient-change transformation from derived E-direct-image followed by extension to Omega to extension followed by derived Omega-direct-image is invertible. No assertion on all unbounded inputs, or on ambient exceptional adjoints, is made.",
+ "source": {
+  "document": "lean/Sheaf/Paper/CondensedQbarBaseChangeCompatibility.lean",
+  "place": "Proof plan steps 1–4: scalar-compatible basis decompositions and uniformly bounded-below coproduct continuity for proper pushforward."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Grothendieck derived module categories have the required copowers. Choose the compatible scalar-basis decomposition of both extension units. Restriction reflects isomorphisms on derived categories because it is exact and reflects homology isomorphisms. The mate of derivedPushHom is the inverse restriction/pushforward isomorphism.",
+   "uses": [
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar compatibility and central naturality give the scalar square required by isIso_iff_unitCoproductComparison. Apply that criterion with the two basis-unit isomorphisms and the invertible mate. It reduces the desired component to the copower comparison for copies of M.",
+   "uses": [
+    "lem-weil-pbc-coefficient-push-copower-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper maps are qcqs. All copies of M have the same bound N, so condensedSubfield_bounded_copower_comparison makes the remaining comparison invertible.",
+   "uses": [
+    "lem-weil-pbc-condensed-subfield-bounded-copowers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis",
+  "lem-weil-pbc-coefficient-push-copower-criterion",
+  "lem-weil-pbc-condensed-subfield-bounded-copowers"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "F3 scalar-basis and bounded-below coproduct route, 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with coproducts of uniformly bounded below condensed coefficient complexes",
+   "results": "8 hits concerning condensed discrete colimits and exact colimits, no complete match. Existing project condensed_qcqs_pushforward_continuity supplies filtered continuity.",
+   "date": "2026-10-16",
+   "verdict": "Reuse project continuity; no Mathlib complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sigmaComparison\"",
+   "results": "12 hits, including sigmaComparison, ι_comp_sigmaComparison, PreservesCoproduct.of_iso_comparison and instIsIsoSigmaComparison. These supply the comparison API.",
+   "date": "2026-10-16",
+   "verdict": "Use the existing API; no coefficient comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitCoproductComparison|sigmaComparison|isIso_πTruncGE",
+   "results": "25 Mathlib hits, including isIso_πTruncGE_iff, sigmaComparison and its coprojection formula. Project search found CoefficientPushCopowerCriterion and CondensedQcqsPushforwardContinuity.",
+   "date": "2026-10-16",
+   "verdict": "Use these declarations; none gives the remaining scalar-basis input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper derived pushforward commutes with extension from a finite p-adic field to its algebraic closure on bounded below complexes",
+   "results": "8 hits, including PadicAlgCl.instCoePadic (Mathlib.NumberTheory.Padics.Complex), AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), and AlgebraicGeometry.IsProper.isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Proper). No coefficient-change theorem in the specified condensed derived categories.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; retain the stated project proof route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "group": "F3",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: finite-to-Qbar coefficient comparisons on bounded constructible complexes.",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE",
+  "statement": "theorem isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE [IsProper f]\n    (E : FiniteIntermediateField ℓ)\n    (M : DerivedCategory\n      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))\n    (N : ℤ) [M.IsGE N] :\n    IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with all four node records, retained interfaces, declared API retirement, forced adaptation errors, axiom audit, and direct-importer compilation."
+ }
+}

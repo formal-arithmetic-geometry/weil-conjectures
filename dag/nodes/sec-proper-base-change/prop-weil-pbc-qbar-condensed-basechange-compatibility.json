@@ -26,17 +26,14 @@
  ],
  "proof": [
   {
-   "text": "Apply the imported instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper, from Colimit.Compatibility, to f and f′. The latter is proper by the chosen pullback identification and Mathlib pullback stability. ObjectProperty.isIso_hom_iff transfers each component to the bounded constructible category. The all-unbounded coefficient-change instance is an existing open upstream input, not proved by this delivery.",
+   "text": "The chosen pullback makes f′ proper. For each bounded constructible K, extract its lower bound from the boundedness property and apply isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE. ObjectProperty.isIso_hom_iff transfers this particular ambient component to the constructible full subcategory. No all-unbounded coefficient comparison is used.",
    "uses": [
-    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-condensed-qbar-bounded-push",
     "def-weil-pbc-condensed-e-module-category",
-    "def-weil-pbc-qbar-condensed-comparisons"
+    "def-weil-pbc-qbar-condensed-comparisons",
+    "lem-weil-pbc-proper-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
-    "place": "isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper (existing unproved instance)"
-   }
+   "elementary": false
   },
   {
    "text": "The source comparison is the composite of the pull comparison isomorphism and the pushforward comparison for f; the target comparison is the composite of the pushforward comparison for f' and the pull comparison for g'. Since functors preserve isomorphisms and isomorphisms compose, both are isomorphisms.",
@@ -54,15 +51,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
   "def-weil-pbc-condensed-e-module-category",
   "def-weil-pbc-qbar-condensed-comparisons",
+  "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-qbar-condensed-exchange-equality"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "existing proper coefficient-change API plus literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
-  "place": "Existing imported proper coefficient-change instance (still an open upstream input), proper pullback stability, composition of restricted isomorphisms, and the separate exchange-coherence lemma"
+  "document": "lean/Sheaf/Paper/CondensedQbarBaseChangeCompatibility.lean",
+  "place": "F3: apply bounded coefficient comparison at each constructible input, then use the existing composition and exchange-equality proof. Statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -174,13 +172,13 @@
   "note": "Wrote review.md. Checked all six statement dependencies, exact framework declarations, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, and verbatim statement field. Immutable module compiled cleanly through scompile.py (9.8 s sandbox, 34.6 s library). No repairs needed; branch unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-98346",
-  "group": "C1",
+  "reviewer": "X-2a861",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261015T154155-L-159521",
+  "landing": "20261016T093726-L-2050850",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules and DAG records matched against packet statements, compiled modules, and the required direct importer"
+  "note": "independent Codex review: Matched delivered Lean with all four node records, retained interfaces, declared API retirement, forced adaptation errors, axiom audit, and direct-importer compilation."
  }
 }

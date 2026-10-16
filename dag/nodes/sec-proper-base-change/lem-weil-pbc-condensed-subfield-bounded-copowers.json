@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-condensed-subfield-bounded-copowers",
+ "kind": "statement",
+ "title": "Condensed qcqs direct image preserves copowers of a bounded-below complex",
+ "statement": "Fix a prime ell and a finite intermediate field E, with the internal condensed coefficient module categories of def-weil-pbc-condensed-e-module-category. Let f:X→Y be quasi-compact and quasi-separated. Let I be any small type and M a derived E-module on X whose cohomology vanishes below N. Whenever the I-copowers of M and Rf_*M are chosen, the canonical map from the copower of Rf_*M to Rf_* of the copower of M, whose legs are Rf_* of the coprojections, is invertible. The empty indexing type is included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), applied to the filtered diagram of finite subcoproducts of a strictly bounded-below representative."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a strictly bounded-below complex K representing M. Every finite subcoproduct has the same strict lower bound, by degreewise coproducts. Its projection to good truncation at N is an isomorphism, so the truncated filtered-colimit cocone is a colimit of the original finite-subcoproduct diagram.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply condensed_qcqs_pushforward_continuity to this diagram in each homology degree. This says the image of that colimit cocone under Q followed by Rf_* and H^q is a colimit. An additive functor preserving the filtered colimit of finite subcoproducts preserves their coproduct, by the proved universal-property helper. Transport through Q and the representative isomorphism to M.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Homology preserves coproducts in the Grothendieck derived category. On each coprojection, the composite of its coproduct comparison with homology of the Rf_* coproduct comparison is the comparison for Rf_* followed by H^q. Both outer comparisons are invertible, hence so is homology of the desired comparison. The derived homology criterion concludes. This complete Lean proof also covers empty I since its finite-subset category is still filtered.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/CondensedSubfieldBoundedCopowers.lean",
+  "place": "F3 scalar-basis and bounded-below coproduct route, 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with coproducts of uniformly bounded below condensed coefficient complexes",
+   "results": "8 hits concerning condensed discrete colimits and exact colimits, no complete match. Existing project condensed_qcqs_pushforward_continuity supplies filtered continuity.",
+   "date": "2026-10-16",
+   "verdict": "Reuse project continuity; no Mathlib complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sigmaComparison\"",
+   "results": "12 hits, including sigmaComparison, ι_comp_sigmaComparison, PreservesCoproduct.of_iso_comparison and instIsIsoSigmaComparison. These supply the comparison API.",
+   "date": "2026-10-16",
+   "verdict": "Use the existing API; no coefficient comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitCoproductComparison|sigmaComparison|isIso_πTruncGE",
+   "results": "25 Mathlib hits, including isIso_πTruncGE_iff, sigmaComparison and its coprojection formula. Project search found CoefficientPushCopowerCriterion and CondensedQcqsPushforwardContinuity.",
+   "date": "2026-10-16",
+   "verdict": "Use these declarations; none gives the remaining scalar-basis input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image preserves coproducts of copies of a uniformly bounded below complex",
+   "results": "8 hits, including CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive (Mathlib.CategoryTheory.Preadditive.AdditiveFunctor), CategoryTheory.Limits.PreservesCoproduct.iso (Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products), and CategoryTheory.Functor.mapDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor). No bounded-below derived-direct-image continuity theorem.",
+   "date": "2026-10-16",
+   "verdict": "No complete match; retain the stated project proof route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "group": "F3",
+  "date": "2026-10-16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof paragraph 1: finite-to-Qbar coefficient comparisons on bounded constructible complexes.",
+   "via": [
+    "prop-weil-pbc-qbar-condensed-basechange-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedSubfieldBoundedCopowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedSubfieldBoundedCopowers.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedSubfield_bounded_copower_comparison",
+  "statement": "theorem condensedSubfield_bounded_copower_comparison\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (I : Type (u + 1))\n    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)))\n    (N : ℤ) [M.IsGE N]\n    [HasCoproduct (fun _ : I ↦ M)]\n    [HasCoproduct (fun _ : I ↦\n      R((f)_*⟦Profinite.continuousMapRingObj E⟧).obj M)] :\n    IsIso (Sigma.desc fun i : I ↦\n      R((f)_*⟦Profinite.continuousMapRingObj E⟧).map\n        (Sigma.ι (fun _ : I ↦ M) i))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-2a861",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T093726-L-2050850",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with all four node records, retained interfaces, declared API retirement, forced adaptation errors, axiom audit, and direct-importer compilation."
+ }
+}
