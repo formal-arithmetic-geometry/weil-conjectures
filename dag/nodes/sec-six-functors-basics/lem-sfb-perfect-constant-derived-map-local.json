@@ -27,7 +27,9 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-ringed-derived-restriction"
  ],
  "proof": [
   {
@@ -198,5 +200,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ed3b1c24",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Item Lean matches node and Stacks 09BE clause by clause (site via IsSiteForCoverings, IsTerminal X, CommRing R at the recorded max u v coefficient convention, IsPerfectRingComplex P, arbitrary L, actual covering Presieve.ofArrows in J X that may be empty, per-i alpha with the equality in the slice derived category via overFunctor.mapDerivedCategory); no extra hypotheses; universes u v wR wS wU bound. New node def-sfb-site-derived-constant-module-functor has real data (mapDerivedCategory of the recorded constant-module functor, exactness a named theorem), correct fields, not a duplicate (pur7710 nodes are scheme-specific and have no Lean). The 1(B) generalization of def-weil-pbc-ringed-derived-restriction is justified (old record needs SmallCategory and one universe), changes only lean and has a note. Item changes only lean and stmt_deps (landed or new nodes). Docstrings, line widths, proof-dependency imports and sorry-only proofs OK. All 3 modules compiled clean with nt_compile.py --json (2.8/2.6/3.2 s, no messages; the tool's error reporting was confirmed with a probe)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PerfectConstantDerivedMapLocal",
+  "declaration": "CategoryTheory.exists_perfect_constant_derived_map_local",
+  "declarations": [
+   "CategoryTheory.exists_perfect_constant_derived_map_local"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PerfectConstantDerivedMapLocal.lean",
+  "statement": "theorem exists_perfect_constant_derived_map_local {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (X : C) (_hX : IsTerminal X) (R : Type (max u v)) [CommRing R] [HasDerivedCategory.{wR, max u v, (max u v) + 1} (ModuleCat.{max u v} R)] [siteModuleHasDerivedCategory.{u, v, wS} ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R))] [∀ U : C, siteModuleHasDerivedCategory.{max u v, v, wU} (((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)).over U)] (P L : DerivedCategory.{wR, max u v, (max u v) + 1} (ModuleCat.{max u v} R)) (_hP : DerivedCategory.IsPerfectRingComplex.{max u v, wR} P) (φ : (siteDerivedConstantModuleFunctor.{u, v, wR, wS} J.toGrothendieck R).obj P ⟶ (siteDerivedConstantModuleFunctor.{u, v, wR, wS} J.toGrothendieck R).obj L) : ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ X), Presieve.ofArrows U f ∈ J X ∧ ∀ i : I, ∃ α : P ⟶ L, (ringedDerivedRestrictionSized.{u, v, wS, wU} ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i)).map φ = (ringedDerivedRestrictionSized.{u, v, wS, wU} ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i)).map ((siteDerivedConstantModuleFunctor.{u, v, wR, wS} J.toGrothendieck R).map α)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

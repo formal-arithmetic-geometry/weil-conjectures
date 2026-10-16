@@ -88,24 +88,21 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "module": "Sheaf.CategoryTheory.RingedDerivedRestriction",
-  "declaration": "CategoryTheory.ringedDerivedRestriction",
+  "module": "Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral",
+  "declaration": "CategoryTheory.ringedDerivedRestrictionGeneral",
   "declarations": [
-   "CategoryTheory.ringedSiteDerived",
-   "CategoryTheory.ringedOverFunctor_additive",
-   "CategoryTheory.ringedOverFunctor_preservesFiniteLimits",
-   "CategoryTheory.ringedOverFunctor_preservesFiniteColimits",
-   "CategoryTheory.ringedDerivedRestriction",
-   "CategoryTheory.ringedOverRingIso",
-   "CategoryTheory.ringedRestrictionRingComplexIso",
-   "CategoryTheory.ringedDerivedRingRestrictionIso"
+   "CategoryTheory.ringedOverFunctor_exactGeneral",
+   "CategoryTheory.ringedDerivedRestrictionGeneral",
+   "CategoryTheory.ringedDerivedRingRestrictionIsoGeneral",
+   "CategoryTheory.ringedDerivedRestrictionSized"
   ],
-  "file": "lean/Sheaf/CategoryTheory/RingedDerivedRestriction.lean",
-  "statement": "def ringedDerivedRestriction (U : C) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [hU : HasDerivedCategory.{w'} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] : ringedSiteDerived O ⥤ ringedSiteDerived (O.over U)",
+  "file": "lean/Sheaf/CategoryTheory/RingedDerivedRestrictionGeneral.lean",
+  "statement": "def ringedDerivedRestrictionGeneral (U : C) [HasSheafify (J.over U) AddCommGrpCat.{m}] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{m}] [HasDerivedCategory.{w} (SheafOfModules.{m} R)] [HasDerivedCategory.{w'} (SheafOfModules.{m} (R.over U))] : DerivedCategory (SheafOfModules.{m} R) ⥤ DerivedCategory (SheafOfModules.{m} (R.over U))",
   "branch": "newtargets-dag",
-  "by": "NE",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q80",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Section 1(B): the recorded restriction functor identifies site object/Hom and coefficient universes through SmallCategory. It cannot express this item on a site with independent object and Hom sizes. The new module publicly retains the recorded module and supplies the identical exact overFunctor localization with independent site, ring, module and localization universes, plus its canonical degree-zero ring comparison. Apply it to the underlying ring sheaf of a commutative ring sheaf to recover exactly the dependency statement. The sized wrapper supplies canonical sheafification instances at max u v before consumer instance inference; no mathematical hypothesis or construction changes."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -116,11 +113,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-dae1d157f",
-  "group": "NE",
+  "reviewer": "NT-stage2-cc-2ed3b1c24",
+  "group": "Q80",
   "result": "pass",
-  "note": "Wrote review.md. Checked source correspondence, all dependencies and eight Lean modules, canonical constructions, edge cases, universes, records and docstrings. Immutable files match the commit; server-only compilation passed. No delivery errors found."
+  "note": "Item Lean matches node and Stacks 09BE clause by clause (site via IsSiteForCoverings, IsTerminal X, CommRing R at the recorded max u v coefficient convention, IsPerfectRingComplex P, arbitrary L, actual covering Presieve.ofArrows in J X that may be empty, per-i alpha with the equality in the slice derived category via overFunctor.mapDerivedCategory); no extra hypotheses; universes u v wR wS wU bound. New node def-sfb-site-derived-constant-module-functor has real data (mapDerivedCategory of the recorded constant-module functor, exactness a named theorem), correct fields, not a duplicate (pur7710 nodes are scheme-specific and have no Lean). The 1(B) generalization of def-weil-pbc-ringed-derived-restriction is justified (old record needs SmallCategory and one universe), changes only lean and has a note. Item changes only lean and stmt_deps (landed or new nodes). Docstrings, line widths, proof-dependency imports and sorry-only proofs OK. All 3 modules compiled clean with nt_compile.py --json (2.8/2.6/3.2 s, no messages; the tool's error reporting was confirmed with a probe)."
  }
 }

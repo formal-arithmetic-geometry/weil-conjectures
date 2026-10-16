@@ -24,7 +24,8 @@
   "place": "Proposition 5.2.4.2 and its opposite; Definition 5.2.2.7 and Proposition 5.2.2.8; section 5.2.7 for fully faithful adjunctions Read online; not archived in literature/. No matching Stacks tag for this assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-adjunction-data"
  ],
  "proof": [
   {
@@ -218,5 +219,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2cd013b9a",
+  "group": "NV",
+  "result": "fix",
+  "note": "Read item node, def-cbc-enhanced-diagrams-cones (EnhancedDiagramsCones: mappingSpace, comma/commaSubcomplex, IsFunctorEquivalence), new node def-coef-coherent-adjunction-data and every field of the existing CoherentAdjunction (unit/counit endpoints, triangle orientations, universal comma vertices), arrowEndpoints, the report (Worker report + Second reading by NV present) and the citers' uses. Universes (SSet.{max (u+1) v}, small Kan models), right/left representability in the right/left-fibration models, the bifunctor correspondence over C×D and the forall-d-exists-r quantifiers are correct; no hollow definitions, docstrings OK, only sorry, the new node reuses the existing structure. Finding H3: the delivered (exists R, Adj ∧ BifEquiv) ↔ repr made the necessity direction require an extra bifunctor equivalence the node does not assume (necessity from the adjunction alone; bifunctor equivalence only for the assembled adjoint), and the same in the dual. FIX: fixes/InfinityPointwiseAdjointCriterion.lean states (exists R, Adj F R) ↔ repr together with repr → exists R, Adj ∧ BifEquiv, and the dual likewise (strictly implies the delivered statement); docstring updated; lean-record.json updates lean.note. nt_compile --json: delivered and fixed modules rc 0, no errors; control error detected rc 1. No build, no repository writes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPointwiseAdjointCriterion",
+  "declaration": "SSet.Enhanced.infinity_pointwise_adjoint_criterion",
+  "declarations": [
+   "SSet.Enhanced.HasSmallMappingSpaces",
+   "SSet.Enhanced.mappingCommaProjection",
+   "SSet.Enhanced.MappingPresheafRepresentedBy",
+   "SSet.Enhanced.mappingBifunctorTotal",
+   "SSet.Enhanced.mappingBifunctorProjection",
+   "SSet.Enhanced.MappingBifunctorsEquivalent",
+   "SSet.Enhanced.infinity_pointwise_adjoint_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPointwiseAdjointCriterion.lean",
+  "statement": "theorem infinity_pointwise_adjoint_criterion (C D E : SSet.{max (u + 1) v}) [Quasicategory C] [Quasicategory D] [Quasicategory E] (_hC : HasSmallMappingSpaces.{u, v} C) (_hD : HasSmallMappingSpaces.{u, v} D) (_hE : HasSmallMappingSpaces.{u, v} E) (F : C ⟶ D) (i : E ⟶ C) : ((∃ R : D ⟶ C, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F R)) ↔ ∀ d : D _⦋0⦌, ∃ r : C _⦋0⦌, MappingPresheafRepresentedBy F d r true) ∧ ((∀ d : D _⦋0⦌, ∃ r : C _⦋0⦌, MappingPresheafRepresentedBy F d r true) → ∃ R : D ⟶ C, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F R) ∧ MappingBifunctorsEquivalent F R) ∧ ((∃ L : C ⟶ E, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L i)) ↔ ∀ c : C _⦋0⦌, ∃ l : E _⦋0⦌, MappingPresheafRepresentedBy i c l false) ∧ ((∀ c : C _⦋0⦌, ∃ l : E _⦋0⦌, MappingPresheafRepresentedBy i c l false) → ∃ L : C ⟶ E, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L i) ∧ MappingBifunctorsEquivalent L i)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Both variances. Each criterion is stated as an iff between existence of a coherent adjoint (CoherentAdjunction alone, so necessity needs nothing more) and pointwise representability, plus the sufficiency clause that the representing objects assemble to an adjoint with a natural equivalence of mapping-space bifunctors. Representability and the bifunctor equivalence are in their equivalent right/left-fibration and correspondence models. Small mapping spaces are small Kan models, not degreewise smallness. The two universe levels explicitly render the size convention in the statement. Published coherent-adjunction data are reused, with their definition extracted to an existing binding to avoid a dependency on the downstream Quillen theorem.",
+  "fixed_by": "NT-stage2-cc-2cd013b9a"
  }
 }

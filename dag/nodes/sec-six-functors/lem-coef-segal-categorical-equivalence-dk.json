@@ -164,5 +164,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68a0dfc02",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: Reedy fibrancy via the recorded Reedy.matchingFrom with (monomorphisms SimplexCategory).op, Segal maps (Mathlib spine per inner degree) weak equivalences for n>=2 using Enhanced.IsWeakHomotopyEquivalence, strict-fibre mapping spaces of (d1,d0), F(n), E = nerve of Codiscrete (ULift Bool), endpoint and arrow maps, categorical homotopy H : A ⊗ E ⟶ B with both endpoint equations, hypotheses hU hV hgf hfg and nothing else, all three conclusions. hV is Mathlib's hoFunctor of the inner-degree-0 row; the postponed homotopyCategory_homs identifies its hom-sets with π0 of the strict fibres. That theorem is true (lifting argument checked), is the node's own clause, has source and proof docstrings, and matches the content of the unsplit DAG node lem-coef-segal-homotopy-category-components. H4: the only other Segal Lean (HomotopySegal, levelwise Kan, homotopy fibres) is a different notion; Mathlib has none. No hollow definition; sorry only in the two theorem bodies. Docstrings carry source and blueprint id, and the main docstring has the 4 proof steps. Only the node's lean field changed; lean.statement verbatim; both report sections real; no line over 100 characters. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings (the wrapper hides sorry warnings). A probe module's rfl convention checks passed, #check matches the record, and the axioms are the standard ones plus sorryAx. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalCategoricalEquivalence",
+  "declaration": "SSet.Segal.categorical_equivalence_dk",
+  "declarations": [
+   "SSet.Segal.Space",
+   "SSet.Segal.row",
+   "SSet.Segal.rowMap",
+   "SSet.Segal.spineSpace",
+   "SSet.Segal.segalMap",
+   "SSet.Segal.IsReedyFibrant",
+   "SSet.Segal.IsSegal",
+   "SSet.Segal.mappingFiberSubcomplex",
+   "SSet.Segal.mappingFiber",
+   "SSet.Segal.mappingFiberMap",
+   "SSet.Segal.homotopyCategory",
+   "SSet.Segal.object",
+   "SSet.Segal.fiberEdge",
+   "SSet.Segal.edgeClass",
+   "SSet.Segal.equivalenceSubcomplex",
+   "SSet.Segal.homotopyFunctor",
+   "SSet.Segal.discreteSpace",
+   "SSet.Segal.discreteSpaceMap",
+   "SSet.Segal.F",
+   "SSet.Segal.WalkingIso",
+   "SSet.Segal.E",
+   "SSet.Segal.endpoint",
+   "SSet.Segal.intervalArrow",
+   "SSet.Segal.toFZero",
+   "SSet.Segal.cylinderEndpoint",
+   "SSet.Segal.AreCategoricallyHomotopic",
+   "SSet.Segal.homotopyCategory_homs",
+   "SSet.Segal.categorical_equivalence_dk"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalCategoricalEquivalence.lean",
+  "statement": "theorem categorical_equivalence_dk {U V : Space.{u}} (hU : IsSegal U) (hV : IsSegal V) (f : U ⟶ V) (g : V ⟶ U) (hgf : AreCategoricallyHomotopic (f ≫ g) (𝟙 U)) (hfg : AreCategoricallyHomotopic (g ≫ f) (𝟙 V)) : (∀ x y : (U.obj (op ⦋0⦌)) _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (mappingFiberMap f x y)) ∧ (homotopyFunctor f).IsEquivalence ∧ (∀ y : (V.obj (op ⦋0⦌)) _⦋0⦌, ∃ x : (U.obj (op ⦋0⦌)) _⦋0⦌, Nonempty (object V ((f.app (op ⦋0⦌)).app _ x) ≅ object V y))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "All helpers render notions explicitly introduced by this node. The homotopy category uses Mathlib’s edge-path/triangle presentation; homotopyCategory_homs states exactly its identification with π₀ of the strict mapping fibers, the introductory hom-set clause of this same DAG node. All definition data are explicit; only that clause and the final theorem are postponed."
  }
 }

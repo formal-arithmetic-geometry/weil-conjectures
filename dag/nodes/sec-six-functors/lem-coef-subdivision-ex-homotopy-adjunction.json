@@ -177,5 +177,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d29f0e13",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, Kerodon 00Z6/00Z5 places, module, report, node copy. Lean matches every clause: Ex-Kan for all Kan Y; iff on adjoint representatives; equivalence pi0(ihom (sd A) Y) ≃ pi0(ihom A (ex Y)) fixed by sdExAdjunction.homEquiv on every representative (not arbitrary); naturality in all a : A'⟶A and in b : Y⟶Y' between Kan targets. Uses recorded Mathlib sd/ex/sdExAdjunction (same as face-poset dep), SSet.π₀ (EqvGen of edge relation = node's edge-generated relation), KanComplex (IsFibrant: all horns, no dim-0 condition), Enhanced.diagramVertex. Single universe u bound; no extra hypotheses. Edge cases empty A/Y, point, outer horns OK. No definitions, so nothing hollow or duplicated; docstrings have source place, blueprint id and the 4 proof steps; one sorry; lean.statement verbatim in file; report has Worker report and Second reading by NY. nt_compile.py side overlay: item compiled clean in 1.2 s after deps. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SubdivisionExHomotopyAdjunction",
+  "declaration": "SSet.SubdivisionExHomotopyAdjunction.subdivision_ex_homotopy_adjunction",
+  "file": "lean/Sheaf/AlgebraicTopology/SubdivisionExHomotopyAdjunction.lean",
+  "statement": "theorem subdivision_ex_homotopy_adjunction : (∀ Y : SSet.{u}, KanComplex Y → KanComplex (ex.obj Y)) ∧ (∀ (A Y : SSet.{u}), KanComplex Y → ∀ (f g : sd.obj A ⟶ Y), π₀.mk (Enhanced.diagramVertex f) = π₀.mk (Enhanced.diagramVertex g) ↔ π₀.mk (Enhanced.diagramVertex ((sdExAdjunction.homEquiv A Y) f)) = π₀.mk (Enhanced.diagramVertex ((sdExAdjunction.homEquiv A Y) g))) ∧ ∃ (e : ∀ (A Y : SSet.{u}), KanComplex Y → π₀ ((ihom (sd.obj A)).obj Y) ≃ π₀ ((ihom A).obj (ex.obj Y))), (∀ (A Y : SSet.{u}) (hY : KanComplex Y) (f : sd.obj A ⟶ Y), e A Y hY (π₀.mk (Enhanced.diagramVertex f)) = π₀.mk (Enhanced.diagramVertex ((sdExAdjunction.homEquiv A Y) f))) ∧ (∀ (A A' Y : SSet.{u}) (hY : KanComplex Y) (a : A' ⟶ A) (f : sd.obj A ⟶ Y), e A' Y hY (π₀.mk (Enhanced.diagramVertex (sd.map a ≫ f))) = π₀.mk (Enhanced.diagramVertex (a ≫ (sdExAdjunction.homEquiv A Y) f))) ∧ (∀ (A Y Y' : SSet.{u}) (hY : KanComplex Y) (hY' : KanComplex Y') (b : Y ⟶ Y') (f : sd.obj A ⟶ Y), e A Y' hY' (π₀.mk (Enhanced.diagramVertex (f ≫ b))) = π₀.mk (Enhanced.diagramVertex ((sdExAdjunction.homEquiv A Y) f ≫ ex.map b)))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses Mathlib π₀ of the recorded internal functor simplicial sets and Enhanced.diagramVertex, with no new quotient or helper definitions. Includes the explicit iff on representatives and naturality in both variables. The equivalence is fixed by its value on every representative."
  }
 }
