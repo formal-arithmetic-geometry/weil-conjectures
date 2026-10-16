@@ -29,9 +29,79 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix a universe containing the simplicial sets in use. By [lem-coef-infinity-isofibration-exponentiation], restriction $\\operatorname{Fun}(K,C)\\to\\operatorname{Fun}(\\varnothing,C)=\\Delta^0$ is an isofibration between quasicategories for every quasicategory $C$ and small $K$: take the degreewise injective inclusion $\\varnothing\\hookrightarrow K$ in its particular assertion. Thus $C^K=\\operatorname{Fun}(K,C)$ is a quasicategory, including when $K$ or $C$ is empty. In particular put $D=C^B$, $E=C^A$ and $p=u^*:D\\to E$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Internal-Hom fibrancy; compare Corollary 3.6.7. Agent-written specialization of the cited statement."
+   }
+  },
+  {
+   "text": "Assume (iii), and fix a test quasicategory $C$. For every small simplicial set $K$ there are simplicial isomorphisms $\\operatorname{Fun}(K,C^B)\\cong\\operatorname{Fun}(B,C^K)$ and $\\operatorname{Fun}(K,C^A)\\cong\\operatorname{Fun}(A,C^K)$. Explicitly an $n$-simplex is a map $K\\times B\\times\\Delta^n\\to C$, respectively $K\\times A\\times\\Delta^n\\to C$; interchanging the first two factors gives the isomorphisms and commutes with all simplicial operators. Under these isomorphisms postcomposition by $p$ is restriction along $u$ into $C^K$. Step 1 makes $C^K$ an allowed test in (iii). Consequently $F_K=h\\operatorname{Fun}(K,p):h\\operatorname{Fun}(K,D)\\to h\\operatorname{Fun}(K,E)$ is an equivalence of ordinary categories for every $K$, including $K=E,D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written currying calculation for Theorem 3.6.8(iii) implies (ii); the statement of the model-structure node specifies h."
+   }
+  },
+  {
+   "text": "Use essential surjectivity of $F_E$ to choose a vertex $s:E\\to D$ and an isomorphism $\\alpha:ps\\cong1_E$ in $h\\operatorname{Fun}(E,E)$. Precomposing $\\alpha$ with $p$ gives $\\alpha p:psp\\cong p$ in $h\\operatorname{Fun}(D,E)$. Fullness of $F_D$ lifts $\\alpha p$ and its inverse to arrows $\\beta:sp\\to1_D$ and $\\gamma:1_D\\to sp$ in $h\\operatorname{Fun}(D,D)$. Their composites map to identities, so faithfulness gives $\\gamma\\beta=1_{sp}$ and $\\beta\\gamma=1_{1_D}$. Thus $sp\\cong1_D$. Both functor simplicial sets here are quasicategories by Step 1. Apply [lem-coef-quasicategory-invertible-interval] to their pairs of isomorphic vertices. It gives maps $J\\to\\operatorname{Fun}(E,E)$ and $J\\to\\operatorname{Fun}(D,D)$ with endpoints $(ps,1_E)$ and $(sp,1_D)$. In $J$, the arrows $0\\to1$ and $1\\to0$ and the two triangles with vertex lists $(0,1,0)$ and $(1,0,1)$ witness both inverse equations. Their images therefore give equivalence edges with the same endpoints. These are exactly the coherent natural equivalences required by [def-cbc-enhanced-diagrams-cones]. The simplicial map $s$ is a quasi-inverse of the actual $p=u^*$, proving (ii).",
+   "uses": [
+    "lem-coef-quasicategory-invertible-interval",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written explicit inverse construction using the invertible interval; compare Remark 3.6.5 and Theorem 3.6.8. No cartesian-model or Brown lemma is used."
+   }
+  },
+  {
+   "text": "Conversely assume (ii) and write $s:E\\to D$ for a coherent quasi-inverse of $p$. To see directly that a coherent equivalence $H:f\\to g$ induces a natural isomorphism $hf\\cong hg$, evaluate its edge and inverse edge at each vertex $x$. Evaluating their two inverse triangles gives mutually inverse arrows $H_x$ in $h$ of the target. For each edge $a:x\\to y$ of the source, $H$ restricts to a map $\\Delta^1\\times\\Delta^1$ into the target. The two triangular faces give $[g(a)][H_x]=[H_y][f(a)]$. This proves naturality on edge generators; composition and the triangle relations defining $h$ extend it to every arrow. Apply this calculation to the two equivalences $sp\\simeq1_D$ and $ps\\simeq1_E$. Their components and naturality make $hs$ a quasi-inverse to $hp$, proving (iii).",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written generators-and-triangles calculation for Theorem 3.6.8(ii) implies (iii)."
+   }
+  },
+  {
+   "text": "By [lem-coef-joyal-model-structure], a weak equivalence is exactly a categorical equivalence, and its definition is the equivalence of $h\\operatorname{Fun}(B,C)\\to h\\operatorname{Fun}(A,C)$ for every test quasicategory $C$. Therefore (i) and (iii) are identical conditions. Steps 2--4 identify (iii) with (ii), completing all implications. All constructions take place in a universe containing $A,B,C$ and its internal Homs; that universe is closed under the products and sets of maps used in currying. Hence $D,E,C^D,C^E$ are legitimate small tests there. Repeat for every sufficiently large testing universe. The weak-equivalence testing condition in the model-structure statement already uses this convention, so the quantifiers agree and the equivalence data is for the specified restriction map in every such universe.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written assembly and universe check for Theorem 3.6.8(i)--(iii)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-quasicategory-invertible-interval"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 3.6.8(i)--(iii), Remark 3.6.5, printed pp.114--116, read online. The proof here is an agent-written currying and invertible-interval argument, rather than the source Brown-lemma proof. PDF not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +144,52 @@
    "results": "{\"t\": \"2026-10-16T16:49:07Z\", \"tool\": \"grep\", \"query\": \"Fun.*[Ee]quivalence|[Ee]quivalence.*Fun|[Ii]hom\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the hits are generic model-category facts, ordinary homotopy-category constructions, or quasicategory horn fillers. Read Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean:40-67, Quasicategory/Basic.lean:34-42 and SimplicialSet/NerveAdjunction.lean:445-469. None identifies the Joyal weak equivalences with equivalences on the entire internal functor quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial sets is a Joyal weak equivalence iff precomposition induces an equivalence of functor quasicategories into every quasicategory",
+   "results": "{\"t\": \"2026-10-16T20:48:59Z\", \"tool\": \"leanfinder\", \"query\": \"A map of simplicial sets is a Joyal weak equivalence iff precomposition induces an equivalence of functor quasicategories into every quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.hoFunctor\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"218d23c274fbe1a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary category equivalences, inner-horn fillers, Kan-Quillen or generic model-category declarations do not supply this Joyal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Quasicategory Fun equivalence weak equivalence",
+   "results": "{\"t\": \"2026-10-16T20:48:59Z\", \"tool\": \"loogle\", \"query\": \"Quasicategory Fun equivalence weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Quasicategory`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle rejected the unqualified identifier Quasicategory; replaced by the successful quoted SSet/Quasicategory query below."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|Fun.*Equiv",
+   "results": "{\"t\": \"2026-10-16T20:48:59Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalEquivalence|Fun.*Equiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"c1960ab066d6ea97\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary category equivalences, inner-horn fillers, Kan-Quillen or generic model-category declarations do not supply this Joyal theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between quasicategories admitting equivalences on homotopy categories of all functor categories has a coherent quasi-inverse",
+   "results": "{\"t\": \"2026-10-16T20:52:19Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between quasicategories admitting equivalences on homotopy categories of all functor categories has a coherent quasi-inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\", \"SSet.hoFunctor\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory.functor_ext\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_comp_functor\"], \"digest\": \"48b353770a83acac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary category equivalences, inner-horn fillers, Kan-Quillen or generic model-category declarations do not supply this Joyal theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joyal categorical equivalence internal functor quasicategories coherent inverse",
+   "results": "{\"t\": \"2026-10-16T20:52:20Z\", \"tool\": \"leansearch\", \"query\": \"Joyal categorical equivalence internal functor quasicategories coherent inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.functorialityEquivalence_inverse\", \"CategoryTheory.Functor.inv\", \"CategoryTheory.Equivalence.symm\", \"CategoryTheory.Equivalence.changeInverse\", \"CategoryTheory.Equivalence.instIsDenseSubsiteCoherentTopologyInverse\", \"CategoryTheory.Equivalence.isEquivalence_inverse\", \"CategoryTheory.Equivalence.inverse\", \"CategoryTheory.Equivalence.fullyFaithfulInverse\"], \"digest\": \"c69fc964becbdb16\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary category equivalences, inner-horn fillers, Kan-Quillen or generic model-category declarations do not supply this Joyal theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-16T20:52:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"1f27f0f0176f40b2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary category equivalences, inner-horn fillers, Kan-Quillen or generic model-category declarations do not supply this Joyal theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cellular-natural-equivalence",
@@ -85,5 +197,21 @@
   "group": "Q16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-functor-equivalence-test",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replaced the earlier draft false assertion that exponentiating a trivial fibration in the source gives a trivial fibration. Currying the hFun tests supplies postcomposition equivalences; essential surjectivity and full faithfulness construct a simplicial inverse, and the existing invertible-interval lemma converts its two isomorphisms to coherent equivalences. Explicit edge-square naturality proves the reverse implication. No new node is required.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, derived Hom/limit adjunction: foundation through finite diagram realization, join/cone gluing and cellular extension. This node identifies exactly the hFun testing convention with the whole functor-quasicategory convention used before that cellular induction. It does not replace a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-609d5cc82",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-609d5cc82 (reviewer sub-agent of L); spot-checked: Read the whole item, the full statements of all four cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-isofibration-exponentiation, lem-coef-joyal-model-structure, lem-coef-quasicategory-invertible-interval), the step in the parent lem-coef-infinity-cellular-natural-equivalence that uses the item, and the unit record. The statement is unchanged and is the standard Joyal test (i)<=>(ii)<=>(iii). Every notion it uses is defined in its two statement dependencies, and its universe quantifiers match the model-structure node word for word. Step 1: the exponentiation node's 'in particular' clause with the empty source A gives Fun(K,C) as a quasicategory (Fun(empty,C)=Delta^0). I also checked this through the corner map with C->Delta^0. Step 2: currying is the explicit internal-Hom adjunction that the exponentiation node itself writes out. I checked that postcomposition by p matches restriction along u after swapping factors. C^D and C^E are small in C's universe, so (iii) applies to them. Step 3: essential surjectivity and full faithfulness give s with ps and sp isomorphic to the identities in h. The invertible-interval statement then gives maps from J, and the triangles (0,1,0) and (1,0,1) have degenerate long edges, so their images are equivalence edges in the exact sense of def-cbc. Step 4: I checked the square Delta^1 x Delta^1 coordinate by coordinate; naturality on edges extends to all arrows of h. Step 5: (i)<=>(iii) holds by definition. Edge cases tested: u=id; empty set -> point with C empty (all three conditions fail); C empty; empty K; nerves. All used nodes are split, reviewed and unmerged. Apart from the definition def-cbc, every cited node is in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle: a traversal of 31 nodes does not reach the item. No SGA source is used. There are no new nodes. Duplicate check: lem-coef-joyal-quasicategory-characterizations(2) does not give the item without the extra fact that Fun(-,C) preserves Joyal weak equivalences. lem-coef-joyal-homotopy-exponentials and lem-coef-categorical-equivalences-small-generation state different things. The item does not restate a clause of its parent. Caveat: the Cisinski PDF is not in literature/ and I could not open it, so the statement was checked mathematically, not against the printed theorem. The proof is marked as agent-written and is complete without the PDF. The source places are slightly inconsistent ('Corollary 3.6.4' and pp.115-116 in source, versus Corollary 3.6.7 and pp.114-116 in proof_origin and the report). This is cosmetic and was left as is. No fixes were written."
+ }
 }
