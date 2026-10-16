@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ContinuousCoefficientRealizations
 public import Mathlib.Data.Matrix.Basic
+import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
 
 /-! # Continuous functions for integral matrix charts
 

@@ -7,6 +7,8 @@ import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
 import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons
 import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
+import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
+import Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 
 /-! # A component of composite overlap compatibility
 Source: Stacks Project, Tags 08DW and 0D5S.
