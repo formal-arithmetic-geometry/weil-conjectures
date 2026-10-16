@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.ModulePullbackTensorIsoE
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Tensor pullback on arbitrary ringed topoi
 
@@ -294,7 +295,8 @@ theorem module_pullback_tensor_iso
   rcases hTdata with ⟨T, hT, hTmap, hamq⟩
   rcases hamq with ⟨am, q, hq, ham⟩
   refine ⟨I, eI, hI, T, hT, hTmap, q, hq, ?_⟩
-  exact module_pullback_tensor_iso_tail J K L R S A c I eI T hT q hq
+  exact module_pullback_tensor_iso_tail J K L V _adj R S A eR c I eI hI T hT hTmap
+    q hq P eP hP am ham
 
 
 end SheafOfModules
