@@ -1,0 +1,95 @@
+{
+ "id": "lem-nagata-one-affine-subring-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-nagata-affine-gluing-coefficient-stage",
+   "place": "Statement, finite coefficient closure: replace the invalid termination inference by the single-affine-open induction step in the finite-cover gluing argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "One-affine-open extension of exhaustive finite subring models",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme, $V\\subseteq X$ a quasi-compact open, and $U\\subseteq X$ an affine open with $X=V\\cup U$ [def-pc-scheme, def-weil-quasi-separated-morphism]. Fix a selected finite affine gluing record $\\mathsf H$ [def-nagata-finite-affine-gluing-presentation], enlarged and marked as in [def-nagata-finite-affine-subring-model], whose main affine charts are a finite affine cover of $V$ together with $U$. All other marked affine opens lie inside one of these main charts. Assign each auxiliary affine open to a main chart containing it. Write $\\mathsf H_V$ for the subrecord on the main charts covering $V$ and the auxiliary affines assigned to those charts, with the maps, covers and equations involving those charts. Require this to be a finite gluing record for $V$; additional basic-open refinements may be fixed in advance to achieve this. Every marked affine open not in $\\mathsf H_V$ is assigned to, and contained in, $U$, even when it also happens to lie in $V$. Maps from old marked opens to the new chart are requirements of $\\mathsf H$, not assumed data of $\\mathsf H_V$.\n\nSuppose $I$ is a nonempty directed preorder (a reflexive transitive relation in which every two indices have a common upper bound) and $(B^i)_{i\\in I}$ is a family of finite affine subring models of $\\mathsf H_V$, with $B^i_P\\subseteq B^j_P$ for $i\\leq j$, and\n$$\\bigcup_{i\\in I}B^i_P=\\Gamma(P,\\mathcal O_X)$$\nfor every marked affine $P$ of $\\mathsf H_V$. Maps in this system are the actual inclusions and the restrictions specified by the model definition. No model for $X$ or for its new overlap with $U$ is assumed.\n\nFor every $i_0\\in I$ and every finite seed $(E_P)_P$ in all the marked affine rings of $\\mathsf H$, there exists a finite affine subring model $C$ of $\\mathsf H$ such that\n$$E_P\\subseteq C_P\\quad\\text{for every marked affine }P,\\qquad B^{i_0}_P\\subseteq C_P\\quad\\text{for every }P\\text{ in }\\mathsf H_V.$$\nThe model $C$ realizes the original marked covers and basic-open identifications, including those inside $U\\cap V$, and all its maps are restrictions of the original maps. This assertion adds one affine open to a supplied compatible exhaustive system on $V$; it does not assume or assert absolute approximation for an arbitrary $X$ without that input.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RN (lemma-approximate), proof after reduction to X = U union V; Tag 01Z7 (lemma-quasi-affine-finite-type-over-Z), including optional prescribed finite elements; the finite marked-atlas and image-subring form also uses Tag 01ZM (lemma-descend-finite-presentation) after the one-open extension has been built, and Morphisms Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image). These refinements are part of this statement, not claimed to follow from 07RN by one-line specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-nagata-finite-affine-gluing-presentation",
+  "def-nagata-finite-affine-subring-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend compatible finite type subring models of affine charts of a quasi compact open across one more affine open by fiber product rings and quasi affine finite type subalgebras",
+   "results": "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.exists_isAffineOpen_preimage_eq; AlgebraicGeometry.of_affine_open_cover; AlgebraicGeometry.Scheme.AffineCover.X; AlgebraicGeometry.Scheme.AffineCover.obj; AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give affine covers or descend an affine cover along an already supplied limit system; none extends a system across an additional affine open with prescribed coefficient seeds and image subrings"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Subalgebra.FG",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give affine covers or descend an affine cover along an already supplied limit system; none extends a system across an additional affine open with prescribed coefficient seeds and image subrings"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberProduct|exists.*[Ss]ubalgebra|quasi.affine.*finite",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give affine covers or descend an affine cover along an already supplied limit system; none extends a system across an additional affine open with prescribed coefficient seeds and image subrings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation extension of a given system across an affine open preserving finite affine chart subrings",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.IsLocallyNoetherian.mk; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.noetherianSpace_of_isAffineOpen; AlgebraicGeometry.instIsLocallyNoetherianToScheme",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give affine covers or descend an affine cover along an already supplied limit system; none extends a system across an additional affine open with prescribed coefficient seeds and image subrings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a directed finite type approximation of an open V in a quasi separated scheme X equal to V union an affine U extend the approximation preserving finite affine charts and coefficient seeds",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover; AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀; AlgebraicGeometry.Scheme.directedAffineCover_I₀; AlgebraicGeometry.Scheme.directedAffineCover; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_X",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits give affine covers or descend an affine cover along an already supplied limit system; none extends a system across an additional affine open with prescribed coefficient seeds and image subrings"
+  },
+  {
+   "tool": "grep",
+   "query": "Subring.*[Ff]inite|[Ff]inite.*Subring|NoetherianApproximation",
+   "results": "14 hits; Mathlib/Topology/Algebra/RestrictedProduct/TopologicalSpace.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean; Mathlib/Analysis/Normed/Lp/lpSpace.lean; Mathlib/RingTheory/IntegralClosure/IsIntegral/Basic.lean; Mathlib/RingTheory/LittleWedderburn.lean; Mathlib/RingTheory/LittleWedderburn.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Frobenius.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the second-reader hits concern noetherianity predicates, affine covers along an existing limit, or a finite-type germ lift; none defines this marked subring predicate or extends the old model system with seeds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of a quasi compact quasi separated scheme extending a compatible inverse system on an open subscheme",
+   "results": "8 hits; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.IsNoetherian.noetherianSpace; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace; AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.IsNoetherian",
+   "date": "2026-10-16",
+   "verdict": "no match: the second-reader hits concern noetherianity predicates, affine covers along an existing limit, or a finite-type germ lift; none defines this marked subring predicate or extends the old model system with seeds"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subring, AlgebraicGeometry.Scheme",
+   "results": "1 hits; AlgebraicGeometry.exists_lift_of_germInjective_aux",
+   "date": "2026-10-16",
+   "verdict": "no match: the second-reader hits concern noetherianity predicates, affine covers along an existing limit, or a finite-type germ lift; none defines this marked subring predicate or extends the old model system with seeds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "def-nagata-affine-gluing-coefficient-stage",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-approximation"
+}
