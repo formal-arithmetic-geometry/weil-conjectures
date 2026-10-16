@@ -15563,3 +15563,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:13 L: returned deliver/D3/Sheaf.Paper.FiniteDiscreteCoefficientSections (reviewer RETURN: (reviewer X-f8441, head f8441b42a) 5 / reader gate: `Sheaf/Paper/ContinuousChartSchemeNaturality.lean` does not compile )
 
 - 01:27 L: batch 20261016T171803 dependency take-out
+- 17:35 L: returned deliver/B2/Sheaf.Paper.IntegralResiduePullFlatModel (reviewer RETURN: (the landing tools, head f5118d17e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
