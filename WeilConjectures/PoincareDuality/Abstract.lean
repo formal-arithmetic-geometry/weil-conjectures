@@ -79,6 +79,12 @@ namespace Adjunction
 
 section ProjectionMorphism
 
+/-!
+In the application, `adj : F ⊣ G` is the derived adjunction `Lg^* ⊣ Rg_*` along the proper half
+`g` of a compactification, and `projectionMorphism` is
+`ProEtale.CondensedRing.properProjectionMorphism`.
+-/
+
 variable {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
 
 /-- The projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` of an adjunction `F ⊣ G` with `F` oplax
@@ -100,6 +106,12 @@ lemma projectionMorphism_natural_right (A : C) {B B' : D} (h : B ⟶ B') :
 end ProjectionMorphism
 
 section ProjectionComparison
+
+/-!
+In the application, `adj : P ⊣ S` is the derived adjunction `Dj_! ⊣ Lj^*` along the open
+immersion half `j` of a compactification (for which `Lj^* = Rj^!`), and `projectionComparison` is
+`ProEtale.CondensedRing.openImmersionProjectionComparison`.
+-/
 
 variable {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.LaxMonoidal]
 
@@ -137,6 +149,27 @@ end Adjunction
 /-! ### Verdier exchange, trace and Poincaré duality -/
 
 namespace Verdier
+
+/-!
+In the application to a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, `C` is
+`Dᵇc(X)`, `D` is `Dᵇc(Y)`, and the data below are:
+
+* `adj : F ⊣ G` is `Lf^* ⊣ Rf_*`,
+  `ProEtale.CondensedRing.boundedConstructibleUpperStarLowerStarAdjunction`;
+* `adj' : P ⊣ S` is `Rf_! ⊣ Rf^!`,
+  `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`;
+* `pf` is the exceptional projection morphism `PF^!_{f,K,B} : Rf_! K ⊗ᴸ B ⟶ Rf_! (K ⊗ᴸ Lf^* B)`,
+  `ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism`.
+
+The morphism `pf` is an input rather than being built from `adj` and `adj'`: neither
+`Adjunction.projectionMorphism` (which concerns `G = Rf_*`, not `P = Rf_!`) nor
+`Adjunction.projectionComparison` (which goes the other way and involves `S = Rf^!`, not
+`F = Lf^*`) produces it for a general `f`, and the two adjunctions alone give no canonical such
+morphism. In the application it depends on a compactification `f = g ∘ j`, with `j` an open
+immersion and `g` proper: it is the composite of `projectionMorphism` for `Lg^* ⊣ Rg_*`, the
+inverse of `projectionComparison` for `Dj_! ⊣ Lj^*`, and `Lj^* Lg^* ≅ Lf^*`
+(`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification`).
+-/
 
 variable [MonoidalClosed C] [MonoidalClosed D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
@@ -196,6 +229,12 @@ end Exchange
 
 section Poincare
 
+/-!
+In the application, `f = p : X ⟶ S` is smooth of pure relative dimension `d`, `T` is the Tate
+twist `ℚ̄_ℓ,X(d)[2d]`, and `pur : Rp^! ℚ̄_ℓ,S ≅ ℚ̄_ℓ,X(d)[2d]` is the purity isomorphism
+`ProEtale.CondensedRing.boundedConstructibleSmoothPurityIso`.
+-/
+
 variable {T : C} (pur : S.obj (𝟙_ D) ≅ T)
 
 /-- The **trace** `Tr : P T ⟶ 𝟙`, i.e. `Rf_! Λ(d)[2d] ⟶ Rf_! Rf^! Λ ⟶ Λ`: the inverse of the
@@ -251,6 +290,11 @@ end Poincare
 
 section Biduality
 
+/-!
+In the application, `ω` is the dualizing complex `ω_X = Ra^! Λ_S` of the structure morphism
+`a : X ⟶ S`, `ProEtale.CondensedRing.dualizingComplex`.
+-/
+
 variable [BraidedCategory C] (ω : C)
 
 /-- The **double-dual morphism** `δ_K : K ⟶ D D K`, where `D = RHom(-, ω)`: the transpose of
@@ -262,6 +306,12 @@ noncomputable def bidualityMap (K : C) : K ⟶ (ihom ((ihom K).obj ω)).obj ω :
 end Biduality
 
 section AbsoluteExchange
+
+/-!
+In the application, `ωX` and `ωY` are the dualizing complexes `ω_X` and `ω_Y`
+(`ProEtale.CondensedRing.dualizingComplex`) of the structure morphisms `a_X : X ⟶ S` and
+`a_Y : Y ⟶ S`, and `γ : Rf^! ω_Y ≅ ω_X` is a chosen identification.
+-/
 
 variable (ωX : C) (ωY : D) (γ : S.obj ωY ≅ ωX)
 
