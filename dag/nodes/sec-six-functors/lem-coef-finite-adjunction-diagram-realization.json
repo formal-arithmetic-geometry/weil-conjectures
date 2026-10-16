@@ -35,9 +35,186 @@
   "thm-weil-pbc-site-comparison",
   "def-weil-derived-pullback-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathbf C_{W,n}$ equal to the full enhanced subcategory on $D^b_{ctf}(W,A_n)$. The coefficient extensions preserve these subcategories: for $A=A_m$, $B=A_n$, and $K\\in D^b_{ctf}(W,A)$, the constant $B_W$ is bounded constructible as an $A_W$-module, so finite-Tor tensor constructibility gives bounded constructibility of $K\\otimes_A^L B$. Constructibility with its $B$-action is detected on the underlying finite locally constant sheaves after a finite stratification. For every degree-zero $B_W$-module $V$, tensor associativity gives $(K\\otimes_A^L B)\\otimes_B^L V\\cong K\\otimes_A^L\\operatorname{Res}_{m,n}V$, so the Tor interval of $K$ is retained. Apply the semilinear localization theorem to the small pro-etale site and $B_n=(A_n)_W$. It identifies $\\mathscr N_W$ with cartesian sections whose levels lie in these subcategories. Construct open extension and separately derived proper direct image on its section models, and set $\\mathcal F_f=Rp_*j_!$. Their evaluated functors, transitions, units and counits are the specified finite operations by the geometric-operation clause of that theorem. In particular this defines a functor before taking a limit. One does not evaluate a semilinear K-injective replacement and assume that the result is K-injective.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Coherent refinement of the finite-operation models underlying paragraphs 1-2."
+   }
+  },
+  {
+   "text": "Write $\\overline X$ for the compactification domain of $p$. It is a finite-type $k$-scheme because $p$ is proper and $Y$ is finite type. Choose $d\\ge0$ with $\\dim\\overline X\\le d$ by finite-dimensionality of finite-type schemes; take $d=0$ if $\\overline X$ is empty. For each $n$, choose a finite Tor interval $[a_n,b_n]$ for $M_n$. Extension by zero preserves bounded constructibility and this interval; proper direct-image preservation applied to $p$ gives Tor interval $[a_n,b_n+2d]$. Thus every evaluated output of $\\mathcal F_f$ is in $D^b_{ctf}(Y,A_n)$. For $m\\ge n$, its normalization map is the composite $Q_YRf_{!,m}M_m\\xrightarrow{q_{m,n}}Rf_{!,n}Q_XM_m\\to Rf_{!,n}M_n$. Both arrows are isomorphisms: the first by compact-support coefficient change and the second by normalization of $M$. The coefficient comparison is the enhanced counit-defined comparison from step 1, so its quotient coherences hold there.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "cor-sf-direct-image-ctf-proetale",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-kun-dimension-finite-type",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Finite compact-support preservation and coefficient comparison used in paragraph 3."
+   }
+  },
+  {
+   "text": "At every finite level, $Rf_n^!$ is the right adjoint to $Rf_{!,n}$ on the finite-Tor constructible subcategories. The specified exceptional functor preserves that subcategory. All inputs have bounded etale-origin witnesses; the compact-support comparison identifies the left functors, and full faithfulness of the derived site comparison transports the adjunction. The coefficient squares for the left functors have the enhanced models of step 1. The finite exceptional lemma says that their mates $b_{m,n}$ are invertible and identifies their units and counits. Apply adjoint-mate descent to these squares. This constructs $\\mathcal E_f:\\mathscr N_Y\\to\\mathscr N_X$, its maps and the coherent units and counits. The transition is explicitly $Q_XRf_m^!N_m\\xrightarrow{b_{m,n,N_m}}Rf_n^!Q_YN_m\\to Rf_n^!N_n$. Thus every normalization map is invertible, and the output is levelwise finite-Tor constructible. No bound common to the inputs at different levels is used.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-preservation-class",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-coef-finite-exceptional",
+    "lem-coef-cartesian-section-adjoint-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraph 1: finite adjunction; paragraph 3: coefficient mates and their units/counits."
+   }
+  },
+  {
+   "text": "For each $W$, choose $d_W\\ge0$ with $\\dim W\\le d_W$ by finite-dimensionality, with $d_W=0$ for the empty scheme. Apply steps 1-3 to the structure morphism $a_W$ and the normalized coefficient-unit system; its normalization is $A_m\\otimes^L_{A_m}A_n\\cong A_n$. This gives $\\Omega_W=\\mathcal E_{a_W}(A_n)_n$. Its transition adjoints are exactly the counit-defined maps $u_{W,A_m,A_n}$ of finite dualizing coefficient change, because these maps are the mate of the same compact-support quotient comparison at the coefficient unit. Hence the identity and quotient cocycle are the specified ones, not newly chosen evaluations. Choose this simultaneous strict model for the dualizing tower in the construction of the integral dualizing proposition. By that proposition its total limit is $\\omega_{W,R}$ with those finite projections. This uses its value-at-the-unit construction, not an integral exceptional functor or integral adjunction for arbitrary inputs.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "prop-coef-integral-dualizing",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraph 1: normalization of the finite exceptional tower; last paragraph: value at the structure morphism and coefficient unit."
+   }
+  },
+  {
+   "text": "Define $\\mathcal D_W(M)=\\mathcal I_W(M,\\Omega_W)$ using the simultaneous tensor-Hom calculus. Its level is $D_{W,n}M_n$. Finite Verdier preservation, transported with the evaluation-defined duality site comparison, gives finite-Tor constructibility of every level. The normalization map is the evaluation-defined duality coefficient map $Q(D_{W,m}M_m)\\to D_{W,n}(Q M_m)\\to D_{W,n}M_n$; the second arrow uses the inverse of the normalization identification in the contravariant variable. Finite Verdier coefficient change makes the first arrow an isomorphism and preserves the evaluation pairings and quotient cocycles. These are the comparisons of the internal-Hom system, so $\\mathcal D_W(M)$ is in $\\mathscr N_W$. Derived pullback likewise acts on these section models, preserves normalization by tensor associativity, and preserves the finite-Tor constructible domains by finite pullback preservation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-verdier-preservation-strata",
+    "lem-weil-finite-duality-site-comparison",
+    "cor-coef-finite-verdier",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraphs 1 and 3: dual formula and evaluation-preserving duality coefficient change."
+   }
+  },
+  {
+   "text": "The compact-support composition comparison for $a_X=a_Yf$ has its simultaneous derived model from step 1. Its evaluations are the canonical finite composition isomorphisms, so it is an isomorphism of sections. Taking right-adjoint mates gives $\\mathcal E_f\\Omega_Y\\cong\\Omega_X$. For $P=\\mathcal D_YN$, finite-Tor tensor closure shows that both $P\\otimes N$ and $f^*P\\otimes\\mathcal E_fN$ are levelwise finite-Tor constructible, with intervals given by the sums of those of their factors. Their normalization follows from tensor associativity and the input normalization equivalences on the section models. Thus these tensors belong to the domains on which $\\mathcal E_f$ and the section adjunction have been constructed. Form the projection comparison on the same models. It is invertible since $P_n$ is finite-Tor constructible and every evaluated compact-support projection map is invertible. Transpose the composite $\\mathcal F_f(f^*P\\otimes\\mathcal E_fN)\\cong P\\otimes\\mathcal F_f\\mathcal E_fN\\xrightarrow{1\\otimes\\epsilon_N}P\\otimes N$ to obtain $f^*P\\otimes\\mathcal E_fN\\to\\mathcal E_f(P\\otimes N)$. Follow this by $\\mathcal E_f$ of the evaluation $P\\otimes N\\to\\Omega_Y$ and by $\\mathcal E_f\\Omega_Y\\cong\\Omega_X$. Tensor-Hom transposition gives an actual section map $\\mathcal E_fN\\to\\mathcal I_X(f^*\\mathcal D_YN,\\Omega_X)=\\mathcal D_Xf^*\\mathcal D_YN$. Every arrow was formed from section operations, evaluation and the section counit. To verify invertibility of this particular map, fix $n$ and work on the etale site using the comparisons of steps 3 and 5. Apply the internal-adjunction theorem at $\\omega_Y$ and $E_f\\omega_Y\\cong\\omega_X$ to obtain $Rf_*D_XK\\cong D_YF_fK$. The hypotheses of that theorem are checked in step 8. Biduality and ordinary pullback/direct-image adjunction now give, naturally for every finite-Tor constructible $K$, $$\\operatorname{Hom}_X(K,D_Xf^*D_YN)\\cong\\operatorname{Hom}_X(f^*D_YN,D_XK)\\cong\\operatorname{Hom}_Y(D_YN,Rf_*D_XK)\\cong\\operatorname{Hom}_Y(D_YN,D_YF_fK)\\cong\\operatorname{Hom}_Y(F_fK,N).$$ Every dual to which biduality is applied is finite-Tor constructible by steps 2 and 5. The last Hom is $\\operatorname{Hom}_X(K,E_fN)$ by step 3. Under these bijections a map $h:K\\to E_fN$ is sent to the tensor-Hom transpose of the pairing formed by inverse projection, $1\\otimes(F_fh)$, the counit, and $D_YN\\otimes N\\to\\omega_Y$: the pullback adjunction transposes the first arrow, and the internal adjunction at $\\omega_Y$ transposes the last two. This is exactly the composite of $h$ with the section map constructed above. Hence postcomposition with its evaluation induces a bijection on every such Hom; Yoneda makes that evaluation an isomorphism. Bounded full faithfulness and duality site comparison give the pro-etale assertion. This also identifies the map with the canonical right-adjoint isomorphism in the finite exceptional lemma, without using that lemma's proof as its statement. Evaluation detects equivalences, so the displayed map is a natural isomorphism of derived systems. Its evaluation and transpose identities hold already for the section maps, since it is their tensor-Hom transpose; no faithfulness of evaluation on morphisms is used.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "fix-prop-projection-formula",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-exceptional",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "thm-fix-general-biduality",
+    "prop-asd-internal-adjunction",
+    "lem-weil-finite-duality-site-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-tensor-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraphs 1-3: explicit tensor-Hom/counit construction of the finite dual formula, now before inverse limits."
+   }
+  },
+  {
+   "text": "For the normalized inputs $M,N$, apply the mapping-complex clause of adjoint-mate descent. In each coefficient it transposes by $h\\mapsto\\mathcal E_f(h)\\circ\\eta_M$ and has inverse $g\\mapsto\\epsilon_N\\circ\\mathcal F_f(g)$. These are actual maps of coherent inverse systems of mapping complexes; strict realization gives $\\mathcal A_{M,N}$ in $D(\\operatorname{Tow}(\\operatorname{Ab}))$. The system tensor-Hom calculus identifies these mapping systems with the stated $\\mathcal H_Y,\\mathcal H_X$. The two composites are identities by the section triangle identities, before total inverse limit. This is the requested specified transformation and inverse.",
+   "uses": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraph 2: enriched mapping-complex adjunction, with explicit inverse before R lim."
+   }
+  },
+  {
+   "text": "The levelwise transpose is the canonical enriched etale adjunction: the internal adjunction identifies $Rf_*R\\mathcal Hom(M,f^\\times N)$ with $R\\mathcal Hom(Rf_!M,N)$, and derived direct-image composition identifies its global sections with $R\\operatorname{Hom}_X(M,f^\\times N)$. Compact-support site comparison and derived full faithfulness identify these maps, including their counits, with the finite pro-etale maps used above. The hypotheses of the internal adjunction apply: the finite coefficient ring is a finite quotient of the valuation ring of a finite local-field extension; $X,Y$ are Noetherian since they are finite type over a field; and the chosen compactification is an open immersion followed by a proper finite-type map. Its input complexes are bounded at each level and of etale origin. The finite exceptional unit/counit identities then identify the units and counits with the specified finite ones.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-proetale-constructible-origin",
+    "lem-coef-finite-exceptional",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraph 2, enriched adjunction transported from the etale site; paragraph 3, units/counits."
+   }
+  },
+  {
+   "text": "On the domain of integral inputs whose reductions belong to $\\mathscr N_X$, let $\\rho_{m,n}:M_m\\to\\operatorname{Res}_{m,n}M_n$ be the strict reduction transition, and let $c_{m,n}:F_m\\operatorname{Res}_{m,n}\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}F_n$ be compact-support restriction of scalars. The transition of the underlying output tower is $$F_mM_m\\xrightarrow{F_m(\\rho_{m,n})}F_m\\operatorname{Res}_{m,n}M_n\\xrightarrow{c_{m,n,M_n}}\\operatorname{Res}_{m,n}F_nM_n.$$ Its scalar-extension adjoint is $Q_YF_mM_m\\xrightarrow{q_{m,n}}F_nQ_XM_m\\to F_nM_n$: $q_{m,n}$ is the adjunction mate of $c_{m,n}$, since both are the direct-image counit transpose, composed with the termwise equality for $j_!$. Thus this is precisely the transition in step 2, and also the transition in the definition of integral compact support. The models of step 1 form these mates as system maps. Applying $\\mathcal L_Y=R\\lim\\circ U_Y$ therefore gives $\\mathcal L_Y\\mathcal F_f\\mathcal R_X$ with the specified finite projections and action on morphisms. This is an identification of the chosen constructions on their stated domain. Step 4 supplies the dualizing total-limit identification.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+    "place": "Paragraph 2, finite compact-support tower before R lim, and last paragraph, dualizing total limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-finite-verdier",
+  "cor-sf-direct-image-ctf-proetale",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "fix-prop-projection-formula",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-dualizing",
+  "lem-coef-finite-exceptional",
+  "lem-coef-semilinear-derived-sections",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-open-ctf",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-verdier-preservation-strata",
+  "prop-asd-internal-adjunction",
+  "prop-coef-integral-dualizing",
+  "thm-fix-general-biduality",
+  "thm-sf-comp-composition",
+  "thm-sf-preservation-class",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-exceptional.md",
+  "place": "Proof paragraphs 1-3, with the coherent semilinear-section refinement separated into two additional general categorical tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,15 +285,149 @@
    "results": "0 hits; Mathlib subdirectory CategoryTheory",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial exceptional inverse image and compactly supported direct image on normalized adic coefficient systems have a finite level enriched derived Hom adjunction",
+   "results": "8 hits: localCohomology.diagram, Condensed.profiniteSolidification, Condensed.profiniteSolid, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "12 hits: PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunctionUnit_app, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, PresheafOfModules.colimitAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enriched derived Hom adjunction for finite etale exceptional operations on normalized inverse coefficient systems",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.Adjunction.derivedε",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support and Verdier dual extraordinary pullback as actual derived functors on towers of sheaf modules with ring quotients and coherent transposes",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|laxLimit|cartesianSection|homotopyCoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-coef-integral-exceptional-adjoint",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-finite-adjunction-diagram-realization",
+  "worker": "stage1",
+  "summary": "Constructed the functors and transposes through enhanced semilinear sections, with a separate general adjoint-mate descent lemma; reused existing finite coefficient, preservation, site-comparison, projection and composition nodes. Avoided objectwise K-injective evaluation and arbitrary functorial lifts. No item statement change. New technical lemmas are statement-only obligations, not claims already in the cited Stacks tags. Second reading makes dimension bounds and restriction/scalar-extension transition mates explicit; verifies the constructed dual-formula map by internal adjunction and biduality rather than a hidden proof.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 1 (normalized finite exceptional tower and dual formula), paragraph 2 (middle finite enriched comparison before R lim), and final value-at-unit identification. The detailed finite proof is lem-coef-finite-exceptional paragraphs 1-3.",
+  "tool_uses": [
+   {
+    "node": "cor-sf-direct-image-ctf-proetale",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-weil-finite-duality-site-comparison",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-weil-verdier-preservation-strata",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-sf-direct-image-ctf-proetale",
+  "fix-prop-projection-formula",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-trf-open-ctf",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-verdier-preservation-strata",
+  "prop-asd-internal-adjunction",
+  "thm-sf-comp-composition",
+  "thm-sf-preservation-class",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-435524c1e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-435524c1e (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources, and route. Repaired one C1 citation gap using existing lem-sf-tensor-ctf, explicitly checking coefficient-extension and tensor domains in steps 1 and 6. Statements unchanged; no new nodes. Source checks, edge cases, accepted tool uses, and corrected-file details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
