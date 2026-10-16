@@ -1,324 +1,378 @@
 {
-  "id": "prop-pur-dnc-family-constancy",
-  "blueprint": {
-    "is": "prop-pur-dnc-family-constancy",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The deformation family is constant along the affine line",
-  "statement": "In the finite-coefficient purity conventions [def-pur-conventions], put $\\Lambda=A_{E,n}$. Let $V,B$ be separated finite-type $k$-schemes [def-weil-proper-morphism, def-weil-finite-type-morphism], let $d\\geq0$, and let $g:V\\to B$ be smooth of pure relative dimension $d$ [def-sbc-smooth-morphisms], with a closed section $s:B\\hookrightarrow V$ [def-weil-closed-immersion], $g\\circ s=\\operatorname{id}_B$. Form the deformation family $F$ of [def-pur-dnc-section-family] and the section invariant $C(g,s)$ of [def-pur-section-invariant]. Let $a:\\mathbf A^1_B\\to B$ be the projection and $i_1:B\\to\\mathbf A^1_B$ its section $t=1$. Locally constant sheaves mean [def-weil-proetale-locally-constant-sheaf]; rank one means locally isomorphic to the constant module sheaf $\\Lambda$. Twists are those of [def-coefficient-twists-detailed].\n\n1. *the family is a shift of a lisse line.* The family object\nis a shift of a finite locally constant rank-one sheaf,\n$$\nF\\simeq\\mathcal L_F(d)[2d],\n$$\nand likewise $C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$; in\nparticular no descent of an object or of a morphism of a derived\ncategory is needed below.\n1. *constancy along the affine line.* There is a canonical\nisomorphism\n$$\n\\kappa:\\;F\\;\\xrightarrow{\\ \\sim\\ }\\;a^*C(g,s).\n$$\nUnder the canonical identifications $i_1^*a^*C(g,s)\\simeq C(g,s)\\simeq i_1^*F$ of\n[lem-pur-dnc-section-geometry](1), the family object is the\npullback of its own fibre at $t=1$: the deformation family is\nconstant along $\\mathbf A^1_B$ over $B$.\n1. *normalization and uniqueness.* $\\kappa$ is the unique\nisomorphism $F\\to a^*C(g,s)$ which at the section $t=1$\nrestricts to the identity of $C(g,s)$ under the identification\n$i_1^*F\\simeq C(g,s)$ of\n[lem-pur-dnc-section-geometry](1).\n1. *locality and base change.* $\\kappa$ is compatible with\netale localization on $B$ and with arbitrary base change\n$B'\\to B$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-    "place": "node prop-pur-dnc-family-constancy, order 2001"
-  },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-sbc-smooth-morphisms",
-    "def-weil-closed-immersion",
-    "def-pur-dnc-section-family",
-    "def-pur-section-invariant",
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-coefficient-twists-detailed",
-    "lem-pur-dnc-section-geometry"
-  ],
-  "proof": [
-    {
-      "text": "Use the finite coefficient ring $\\Lambda=A_{E,n}$ throughout. By [lem-pur-dnc-section-geometry](2), choose an etale covering $\\{B_i\\to B\\}$ with relative coordinates of the pair near the section and with the induced DNC coordinates $u_j=x_j/t$. Refine the cover by affine etale neighborhoods $B_i$ of finite type over $B$, and write $U=\\coprod_i B_i$. Each $B_i$ is separated finite type over $k$. The map $U\\to B$ is surjective etale; no finite-type hypothesis on $U$ is needed in the concentration lemma used in Step 3. The coordinates are etale maps of neighborhoods of the section, not assertions that the whole $V\\times_B B_i$ is affine space. They give maps to the standard pair $(\\mathbf A^d_{B_i},0)$ and, on its deformation, to the standard family $\\mathbf A^d_{B_i}\\times_{B_i}\\mathbf A^1_{B_i}$; the section has $x_j=0$ and $u_j=0$. The DNC morphism is smooth of pure dimension $d$. By [thm-pur-cohomological-smoothness](2), its dualizing object, and that of $g$, are invertible. The definitions [def-pur-dnc-section-family] and [def-pur-section-invariant] identify $F=L\\widetilde s^*\\omega_{\\widetilde g}$ and $C(g,s)=Ls^*\\omega_g$.",
-      "uses": [
-        "lem-pur-dnc-section-geometry",
-        "thm-pur-cohomological-smoothness",
-        "def-pur-dnc-section-family",
-        "def-pur-section-invariant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, Step 1: smoothness, coordinates and the already defined family object"
-      }
-    },
-    {
-      "text": "Write $F_i=F|_{\\mathbf A^1_{B_i}}$ and $C_i=C(g,s)|_{B_i}$. Here is the dualizing comparison needed for the coordinate calculation. For an etale coordinate map $e:W\\to X$, [lem-pur-co-smooth-etale-locality] gives cohomological smoothness and $\\omega_e\\simeq\\Lambda_W$. For the smooth standard projection $p$, clauses (1), (2), and (3) of [thm-pur-cohomological-smoothness] verify respectively the tensor-formula, invertibility, and base-change requirements of [def-pur-co-smoothness], so $p$ is cohomologically smooth. Apply [lem-pur-co-smooth-composition] to $e$ and $p$ to obtain $\\omega_{pe}\\simeq Le^*\\omega_p$. The same formula for the open inclusion of a coordinate neighborhood into $V$ or into its deformation shows that pulling back to the section computes the original section invariant; the section factors through that neighborhood. Thus this calculation does not require an isomorphism of the entire pairs. The standard-pair calculation of [lem-pur-dnc-section-geometry](4), or equivalently [cor-pur-vector-bundle-purity] for the standard projection, now gives isomorphisms $\\alpha_i:F_i\\xrightarrow{\\sim}\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$ and $\\beta_i:C_i\\xrightarrow{\\sim}\\Lambda_{B_i}(d)[2d]$. The base-change compatibility of [cor-pur-vector-bundle-purity], applied to the trivial rank-$d$ bundle along $a_i$ and then pulled back to its zero section, also identifies $a_i^*(\\Lambda_{B_i}(d)[2d])\\simeq\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$. This is the identification used in Step 4. The comparison of $F$ and $C$ with their restrictions after $B_i\\to B$ is the arbitrary-base-change comparison of [thm-pur-cohomological-smoothness](3). Ordinary constant-coefficient inverse image is exact and termwise on complexes by [def-weil-derived-pullback-tensor-hom].",
-      "uses": [
-        "lem-pur-co-smooth-etale-locality",
-        "lem-pur-co-smooth-composition",
-        "def-pur-co-smoothness",
-        "lem-pur-dnc-section-geometry",
-        "cor-pur-vector-bundle-purity",
-        "thm-pur-cohomological-smoothness",
-        "def-weil-derived-pullback-tensor-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, Steps 1 and 2: source-etale comparison and the standard-pair Thom calculation"
-      }
-    },
-    {
-      "text": "By [lem-pur-twist-sheaf-locally-free](3), the finite-level twist $\\Lambda(1)$ is a finite locally constant line; its tensor powers and duals, used in [def-coefficient-twists-detailed], are again lines: on any cover trivializing the line these operations are just tensor powers and the dual of the free rank-one module. Consequently the local models of Step 2 are sheaves in degree $r=-2d$. Apply [lem-pur-concentrated-complex-shift](2) to $K=F$ and the surjective etale cover $\\mathbf A^1_U\\to\\mathbf A^1_B$ with local sheaf $\\Lambda(d)$, and to $K=C(g,s)$ and $U\\to B$. It gives vanishing outside degree $-2d$ and finite local constancy of $M_F=\\mathcal H^{-2d}(F)$ and $M_1=\\mathcal H^{-2d}(C(g,s))$. These sheaves have rank one: their restrictions in Step 2 are $\\Lambda(d)$, so further local trivializations are free of rank one. Part (1) of the same lemma gives $F\\simeq M_F[2d]$ and $C(g,s)\\simeq M_1[2d]$. Set $\\mathcal L_F=M_F(-d)$ and $\\mathcal L_1=M_1(-d)$. Cancellation of a line with its dual is the evaluation isomorphism, checked on a trivializing cover. Hence $F\\simeq\\mathcal L_F(d)[2d]$ and $C(g,s)\\simeq\\mathcal L_1(d)[2d]$, proving clause (1).",
-      "uses": [
-        "lem-pur-twist-sheaf-locally-free",
-        "def-coefficient-twists-detailed",
-        "lem-pur-concentrated-complex-shift"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, Step 1: reduction to actual sheaves by concentration in a single degree"
-      }
-    },
-    {
-      "text": "Let $\\theta_i:i_1^*F_i\\xrightarrow{\\sim}C_i$ be the fibre identification of [lem-pur-dnc-section-geometry](1). From Step 2 set $\\lambda_i=(a_i^*\\beta_i)^{-1}\\circ\\alpha_i:F_i\\xrightarrow{\\sim}a_i^*C_i$, using the canonical identification $a_i^*(\\Lambda_{B_i}(d)[2d])\\simeq\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$ established in Step 2. Put $h_i=(i_1^*\\lambda_i)\\circ\\theta_i^{-1}\\in\\operatorname{Aut}(C_i)$ and $\\kappa_i=a_i^*(h_i^{-1})\\circ\\lambda_i$. Since $i_1^*a_i^*=\\operatorname{id}$, we have $i_1^*\\kappa_i=h_i^{-1}(h_i\\theta_i)=\\theta_i$. All maps used are isomorphisms. This normalization is composition with an automorphism and its inverse; no choice of a scalar on a connected component, and no additional trivialization of $C_i$, is required.",
-      "uses": [
-        "lem-pur-dnc-section-geometry"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, Step 2: explicit normalization of local comparisons at t=1"
-      }
-    },
-    {
-      "text": "These local comparisons also realize the punctured comparison used by the unit. Let $j:\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$. By [lem-pur-dnc-section-geometry](3) there is a canonical $\\kappa^\\circ:j^*F\\xrightarrow{\\sim}j^*a^*C(g,s)$; its restriction to $t=1$ is the same fibre identification $\\theta$ of part (1), since both are the base-change identification on the fibre $(V,s)$. On $\\mathbf G_{m,B_i}$ compare $j^*\\kappa_i$ with $\\kappa^\\circ|_{\\mathbf G_{m,B_i}}$. Step 3 writes their source and target as sheaves with the common shift $[2d]$. Removing that shift, the full faithfulness of the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful] (Stacks Tag 06XS, lemma-negative-exts (2)) identifies both maps with morphisms of finite locally constant sheaves. They agree at $t=1$ by Step 4. The second assertion of [lem-pur-lisse-uniqueness] therefore makes them equal on $\\mathbf G_{m,B_i}$.",
-      "uses": [
-        "lem-pur-dnc-section-geometry",
-        "lem-weil-pbc-derived-single-fully-faithful",
-        "lem-pur-lisse-uniqueness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Unit sk-thm-dnc, Step 2; item Proof, Steps 2 and 3: punctured comparison and sheaf-level rigidity"
-      }
-    },
-    {
-      "text": "Apply [prop-pur-a1-invariance] with $Y=B$, $C=C(g,s)$, $\\theta:i_1^*F\\xrightarrow{\\sim}C(g,s)$ from Step 4, and the cover $\\{B_i\\to B\\}$ of Step 1. The required local shape is Step 3, with $m_i=d$ and $n_i=2d$. The normalized local comparisons are Step 4. All bases and cover members are separated finite type, and $F,C$ lie in the stated finite-Tor constructible categories by their defining setup. The gluing assertion gives $\\kappa:F\\xrightarrow{\\sim}a^*C(g,s)$ restricting to the $\\kappa_i$, and its uniqueness assertion says it is the only isomorphism with $i_1^*\\kappa=\\theta$. Thus it is independent of the chosen cover, coordinates and initial local comparisons. This proves clauses (2) and (3). In terms of Step 3, this gluing is gluing maps of sheaves with a common shift; it does not assert descent for arbitrary objects or morphisms of derived categories. By Step 5 it extends $\\kappa^\\circ$.",
-      "uses": [
-        "prop-pur-a1-invariance"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, Step 3: gluing and uniqueness; unit sk-thm-dnc, Step 3 before restricting to t=0"
-      }
-    },
-    {
-      "text": "Let $b:B'\\to B$ be any base change, and write $b_1:\\mathbf A^1_{B'}\\to\\mathbf A^1_B$. By [lem-pur-dnc-section-geometry](5), the primed deformation family, its fibre at one and its punctured comparison identify with the pullbacks of $F,C(g,s),\\theta,\\kappa^\\circ$. Pull back the isomorphism of Step 6 to obtain $b_1^*\\kappa:F'\\xrightarrow{\\sim}a'^*C(g',s')$; it restricts to $\\theta'$ at one and to $\\kappa^{\\circ\\prime}$ on the punctured line. By [def-weil-derived-pullback-tensor-hom], this inverse image is exact and computed termwise. A finite locally constant line stays such after inverse image: pull back a covering trivializing it; on that covering its pullback is the constant free rank-one module, so the definition [def-weil-proetale-locally-constant-sheaf] applies. Thus the primed source and target are again finite locally constant sheaves with the common shift $[2d]$. If $\\eta:F'\\xrightarrow{\\sim}a'^*C(g',s')$ is any normalized comparison, the full faithfulness of [lem-weil-pbc-derived-single-fully-faithful] makes its comparison with $b_1^*\\kappa$ a comparison of sheaf maps after removing the shift. The second assertion of [lem-pur-lisse-uniqueness] makes them equal on $\\mathbf G_{m,B'}$, since they agree at one; its first assertion then makes them equal on $\\mathbf A^1_{B'}$. Hence $b_1^*\\kappa$ is exactly the canonical normalized comparison for the primed family. This argument uses the already constructed pullback, rather than imposing a finite-type hypothesis on $b$ in order to reapply the gluing proposition. For a composite of base changes the two comparisons coincide because each is the same normalized comparison. Etale localization is a special case. This proves clause (4).",
-      "uses": [
-        "lem-pur-dnc-section-geometry",
-        "def-weil-derived-pullback-tensor-hom",
-        "def-weil-proetale-locally-constant-sheaf",
-        "lem-weil-pbc-derived-single-fully-faithful",
-        "lem-pur-lisse-uniqueness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-        "place": "Proof, last sentence: base change; expanded using the unit punctured trivialization and uniqueness"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "prop-pur-dnc-family-constancy",
+ "blueprint": {
+  "is": "prop-pur-dnc-family-constancy",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The deformation family is constant along the affine line",
+ "statement": "In the finite-coefficient purity conventions [def-pur-conventions], put $\\Lambda=A_{E,n}$. Let $V,B$ be separated finite-type $k$-schemes [def-weil-proper-morphism, def-weil-finite-type-morphism], let $d\\geq0$, and let $g:V\\to B$ be smooth of pure relative dimension $d$ [def-sbc-smooth-morphisms], with a closed section $s:B\\hookrightarrow V$ [def-weil-closed-immersion], $g\\circ s=\\operatorname{id}_B$. Form the deformation family $F$ of [def-pur-dnc-section-family] and the section invariant $C(g,s)$ of [def-pur-section-invariant]. Let $a:\\mathbf A^1_B\\to B$ be the projection and $i_1:B\\to\\mathbf A^1_B$ its section $t=1$. Locally constant sheaves mean [def-weil-proetale-locally-constant-sheaf]; rank one means locally isomorphic to the constant module sheaf $\\Lambda$. Twists are those of [def-coefficient-twists-detailed].\n\n1. *the family is a shift of a lisse line.* The family object\nis a shift of a finite locally constant rank-one sheaf,\n$$\nF\\simeq\\mathcal L_F(d)[2d],\n$$\nand likewise $C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$; in\nparticular no descent of an object or of a morphism of a derived\ncategory is needed below.\n1. *constancy along the affine line.* There is a canonical\nisomorphism\n$$\n\\kappa:\\;F\\;\\xrightarrow{\\ \\sim\\ }\\;a^*C(g,s).\n$$\nUnder the canonical identifications $i_1^*a^*C(g,s)\\simeq C(g,s)\\simeq i_1^*F$ of\n[lem-pur-dnc-section-geometry](1), the family object is the\npullback of its own fibre at $t=1$: the deformation family is\nconstant along $\\mathbf A^1_B$ over $B$.\n1. *normalization and uniqueness.* $\\kappa$ is the unique\nisomorphism $F\\to a^*C(g,s)$ which at the section $t=1$\nrestricts to the identity of $C(g,s)$ under the identification\n$i_1^*F\\simeq C(g,s)$ of\n[lem-pur-dnc-section-geometry](1).\n1. *locality and base change.* $\\kappa$ is compatible with\netale localization on $B$ and with arbitrary base change\n$B'\\to B$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
+  "place": "node prop-pur-dnc-family-constancy, order 2001"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pur-dnc-section-family",
+  "def-pur-section-invariant",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-coefficient-twists-detailed",
+  "lem-pur-dnc-section-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite coefficient ring $\\Lambda=A_{E,n}$ throughout. By [lem-pur-dnc-section-geometry](2), choose an etale covering $\\{B_i\\to B\\}$ with relative coordinates of the pair near the section and with the induced DNC coordinates $u_j=x_j/t$. Refine the cover by affine etale neighborhoods $B_i$ of finite type over $B$, and write $U=\\coprod_i B_i$. The cover members may be chosen affine open neighborhoods in the coordinate bases, hence separated finite type over $k$, as in the source proof Step 3. The map $U\\to B$ is surjective etale; no finite-type hypothesis on $U$ is needed in the concentration lemma used in Step 3. The coordinates are etale maps of neighborhoods of the section, not assertions that the whole $V\\times_B B_i$ is affine space. They give maps to the standard pair $(\\mathbf A^d_{B_i},0)$ and, on its deformation, to the standard family $\\mathbf A^d_{B_i}\\times_{B_i}\\mathbf A^1_{B_i}$; the section has $x_j=0$ and $u_j=0$. The DNC morphism is smooth of pure dimension $d$. By [thm-pur-cohomological-smoothness](2), its dualizing object, and that of $g$, are invertible. The current family-object formula of [def-pur-dnc-section-family] is $F=L\\widetilde s^*\\omega_{\\widetilde g}$, on $\\mathbf A^1_B$, and [def-pur-section-invariant] defines $C(g,s)=Ls^*\\omega_g$ on $B$. The first formula is used only to identify the object whose local models are calculated in Step 2; the concentration and rank-one assertions are proved in Step 3, rather than taken from the definition. Base change of the etale cover to the affine line is again an etale cover by [lem-weil-pbc-etale-covering-base-change]; both this cover and the original one are pro-etale covers by [lem-pur-etale-proetale-cover].",
+   "uses": [
     "lem-pur-dnc-section-geometry",
     "thm-pur-cohomological-smoothness",
     "def-pur-dnc-section-family",
     "def-pur-section-invariant",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-pur-etale-proetale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Proof, main-20261015, Step 1: smoothness, coordinates and the already defined family object"
+   }
+  },
+  {
+   "text": "Write $F_i=F|_{\\mathbf A^1_{B_i}}$ and $C_i=C(g,s)|_{B_i}$. Here is the dualizing comparison needed for the coordinate calculation. For an etale coordinate map $e:W\\to X$, [lem-pur-co-smooth-etale-locality] gives cohomological smoothness and $\\omega_e\\simeq\\Lambda_W$. For the smooth standard projection $p$, clauses (1), (2), and (3) of [thm-pur-cohomological-smoothness] verify respectively the tensor-formula, invertibility, and base-change requirements of [def-pur-co-smoothness], so $p$ is cohomologically smooth. Those same three clauses applied to $g$ and to the smooth DNC projection show that they too are cohomologically smooth; thus the composition formula below also applies to the open coordinate inclusions into their sources. Apply [lem-pur-co-smooth-composition] to $e$ and $p$ to obtain $\\omega_{pe}\\simeq Le^*\\omega_p$. The same formula for the open inclusion of a coordinate neighborhood into $V$ or into its deformation shows that pulling back to the section computes the original section invariant; the section factors through that neighborhood. Thus this calculation does not require an isomorphism of the entire pairs. The standard-pair calculation of [lem-pur-dnc-section-geometry](4), or equivalently [cor-pur-vector-bundle-purity] for the standard projection, now gives isomorphisms $\\alpha_i:F_i\\xrightarrow{\\sim}\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$ and $\\beta_i:C_i\\xrightarrow{\\sim}\\Lambda_{B_i}(d)[2d]$. The base-change compatibility of [cor-pur-vector-bundle-purity], applied to the trivial rank-$d$ bundle along $a_i$ and then pulled back to its zero section, also identifies $a_i^*(\\Lambda_{B_i}(d)[2d])\\simeq\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$. This is the identification used in Step 4. The comparison of $F$ and $C$ with their restrictions after $B_i\\to B$ is the arbitrary-base-change comparison of [thm-pur-cohomological-smoothness](3). Ordinary constant-coefficient inverse image is exact and termwise on complexes by [def-weil-derived-pullback-tensor-hom].",
+   "uses": [
     "lem-pur-co-smooth-etale-locality",
     "lem-pur-co-smooth-composition",
     "def-pur-co-smoothness",
+    "lem-pur-dnc-section-geometry",
     "cor-pur-vector-bundle-purity",
-    "def-weil-derived-pullback-tensor-hom",
+    "thm-pur-cohomological-smoothness",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Proof, main-20261015, Steps 1 and 2: source-etale comparison and the standard-pair Thom calculation"
+   }
+  },
+  {
+   "text": "By [lem-pur-twist-sheaf-locally-free](3), the finite-level twist $\\Lambda(1)$ is a finite locally constant line; its tensor powers and duals, used in [def-coefficient-twists-detailed], are again lines: on any cover trivializing the line these operations are just tensor powers and the dual of the free rank-one module. Consequently the local models of Step 2 are sheaves in degree $r=-2d$. Apply [lem-pur-concentrated-complex-shift](2) to $K=F$ and the surjective etale cover $\\mathbf A^1_U\\to\\mathbf A^1_B$ with local sheaf $\\Lambda(d)$, and to $K=C(g,s)$ and $U\\to B$. It gives vanishing outside degree $-2d$ and finite local constancy of $M_F=\\mathcal H^{-2d}(F)$ and $M_1=\\mathcal H^{-2d}(C(g,s))$. These sheaves have rank one: their restrictions in Step 2 are $\\Lambda(d)$, so further local trivializations are free of rank one. Part (1) of the same lemma gives $F\\simeq M_F[2d]$ and $C(g,s)\\simeq M_1[2d]$. Set $\\mathcal L_F=M_F(-d)$ and $\\mathcal L_1=M_1(-d)$. Cancellation of a line with its dual is the evaluation isomorphism, checked on a trivializing cover. Hence $F\\simeq\\mathcal L_F(d)[2d]$ and $C(g,s)\\simeq\\mathcal L_1(d)[2d]$, proving clause (1).",
+   "uses": [
     "lem-pur-twist-sheaf-locally-free",
     "def-coefficient-twists-detailed",
-    "lem-pur-concentrated-complex-shift",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-lisse-uniqueness",
-    "prop-pur-a1-invariance",
-    "def-weil-proetale-locally-constant-sheaf"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.md",
-    "place": "Proof, Steps 1-3 and last sentence, with explicit normalization and base-change uniqueness; unit sk-thm-dnc Steps 1-3"
+    "lem-pur-concentrated-complex-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Proof, main-20261015, Step 1: reduction to actual sheaves by concentration in a single degree"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "deformationTo|deformation_to|sectionInvariant|dualizing",
-      "results": "0 hit(s): ",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Deformation to the normal cone of a section of a smooth morphism: the section pullback of the relative dualizing complex is constant along the affine line, uniquely normalized at one",
-      "results": "8 hit(s): AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern normalization and affine inverse limits, condensed locally constant functions, or unrelated homotopy invariance, not the DNC dualizing family"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Scheme, \"dualizing\"",
-      "results": "0 hit(s): ",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits for the searched scheme/dualizing or affine-space/local-constancy pair"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The pullback of the dualizing complex along a smooth section is invariant under deformation to the normal cone",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An étale locally trivial family of rank one locally constant sheaves on the affine line is uniquely the pullback of its fibre at one",
-      "results": "8 hit(s): CompHausLike.LocallyConstant.presheaf_ext, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.AffineSpace.homOverEquiv, CompHausLike.LocallyConstant.counitAppAppImage, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern normalization and affine inverse limits, condensed locally constant functions, or unrelated homotopy invariance, not the DNC dualizing family"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizing|deformation.*normal|normal.*cone|homotopy.*invari",
-      "results": "25 hit(s): Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvarianceTopCat.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern normalization and affine inverse limits, condensed locally constant functions, or unrelated homotopy invariance, not the DNC dualizing family"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"AffineSpace\", \"locallyConstant\"",
-      "results": "0 hit(s): ",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits for the searched scheme/dualizing or affine-space/local-constancy pair"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizingComplex|sectionInvariant|DeformationToNormalCone|deformationToNormalCone",
-      "results": "0 hit(s): ",
-      "date": "2026-10-16",
-      "verdict": "no match: the semantic hits are ordinary structure-sheaf and module-pullback identities; the grep and Loogle queries returned no declarations for a DNC dualizing family"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth scheme morphism with a section, its relative dualizing sheaf pulled back to the section is a locally constant invertible module shifted by twice the relative dimension",
-      "results": "8 hit(s): ModuleCat.Tilde.res_const, AlgebraicGeometry.StructureSheaf.comap_const, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality",
-      "date": "2026-10-16",
-      "verdict": "no match: the semantic hits are ordinary structure-sheaf and module-pullback identities; the grep and Loogle queries returned no declarations for a DNC dualizing family"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"dualizing\", \"Scheme\"",
-      "results": "0 hit(s): ",
-      "date": "2026-10-16",
-      "verdict": "no match: the semantic hits are ordinary structure-sheaf and module-pullback identities; the grep and Loogle queries returned no declarations for a DNC dualizing family"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2001,
-  "blueprint_uses": [
-    "cor-pur-vector-bundle-purity",
-    "def-pur-co-smoothness",
-    "def-pur-conventions",
-    "def-pur-dnc-section-family",
-    "def-weil-derived-tensor",
-    "lem-pur-concentrated-complex-shift",
+  {
+   "text": "Let $\\theta_i:i_1^*F_i\\xrightarrow{\\sim}C_i$ be the fibre identification of [lem-pur-dnc-section-geometry](1). From Step 2 set $\\lambda_i=(a_i^*\\beta_i)^{-1}\\circ\\alpha_i:F_i\\xrightarrow{\\sim}a_i^*C_i$, using the canonical identification $a_i^*(\\Lambda_{B_i}(d)[2d])\\simeq\\Lambda_{\\mathbf A^1_{B_i}}(d)[2d]$ established in Step 2. Put $h_i=(i_1^*\\lambda_i)\\circ\\theta_i^{-1}\\in\\operatorname{Aut}(C_i)$ and $\\kappa_i=a_i^*(h_i^{-1})\\circ\\lambda_i$. Since $i_1^*a_i^*=\\operatorname{id}$, we have $i_1^*\\kappa_i=h_i^{-1}(h_i\\theta_i)=\\theta_i$. All maps used are isomorphisms. This normalization is composition with an automorphism and its inverse; no choice of a scalar on a connected component, and no additional trivialization of $C_i$, is required. The composition identifications used here are those of [lem-weil-pbc-proetale-derived-pullback-composition], specialized to $a_i\\circ i_1=\\operatorname{id}_{B_i}$.",
+   "uses": [
     "lem-pur-dnc-section-geometry",
-    "prop-pur-a1-invariance",
-    "thm-pur-cohomological-smoothness"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-pur-co-smoothness"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Proof, main-20261015, Step 2: explicit normalization of local comparisons at t=1"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-dnc",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "prop-pur-dnc-family-constancy",
-    "worker": "stage1",
-    "summary": "Restored the pure-relative-dimension hypothesis of the unit and made the finite-level and finite-type framework explicit; split the imported proof into seven steps, reusing the existing geometry, duality, concentration, twist, rigidity and gluing nodes. Expanded source-etale dualizing comparison, gave the normalization formula, and proved arbitrary-base-change compatibility by pullback and sheaf rigidity. No new nodes. Second reading supplied the cohomological-smoothness definition check for the standard projection and justified the twist-pullback identification by the cited purity base-change statement.",
-    "blueprint": "Steps 1-3 realize item Proof Step 1 and unit Step 1; Steps 2 and 4 realize item Proof Step 2; Step 5 realizes unit Step 2; Step 6 realizes item Proof Step 3 and unit Step 3 gluing; Step 7 expands the final base-change assertion. This is not the unit key node; restriction to t=0 remains thm-pur-dnc-invariance.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-twist-sheaf-locally-free",
-        "why": "Only its finite-level assertion (3) is used to see that Lambda(d) is a finite locally constant line; it is a coefficient tool, not a replacement for any DNC unit step."
-      }
-    ]
+  {
+   "text": "These local comparisons also realize the punctured comparison used by the unit. Let $j:\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$. By [lem-pur-dnc-section-geometry](3) there is a canonical $\\kappa^\\circ:j^*F\\xrightarrow{\\sim}j^*a^*C(g,s)$; its restriction to $t=1$ is the same fibre identification $\\theta$ of part (1), since both are the base-change identification on the fibre $(V,s)$. On $\\mathbf G_{m,B_i}$ compare $j^*\\kappa_i$ with $\\kappa^\\circ|_{\\mathbf G_{m,B_i}}$. Step 3 writes their source and target as sheaves with the common shift $[2d]$. Removing that shift, the full faithfulness of the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful] (Stacks Tag 06XS, lemma-negative-exts (2)) identifies both maps with morphisms of finite locally constant sheaves. They agree at $t=1$ by Step 4. The second assertion of [lem-pur-lisse-uniqueness] therefore makes them equal on $\\mathbf G_{m,B_i}$.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-lisse-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Unit sk-thm-dnc, Step 2; item Proof, main-20261015, Steps 2 and 3: punctured comparison and sheaf-level rigidity"
+   }
   },
-  "tool_uses": [
-    "lem-pur-twist-sheaf-locally-free"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-N8-7692c4d6e",
-    "group": "N8",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-7692c4d6e (reviewer sub-agent of L); spot-checked: Read the full item, seven steps, all cited statements and source passages. Checked finite coefficients, exceptional base change, normalization, sheaf rigidity, gluing hypotheses, route, dependency cycles, duplicates and edge cases. Accepted the finite-twist tool use. No repairs or new nodes needed; detailed checks are in review.md."
+  {
+   "text": "Apply [prop-pur-a1-invariance] with $Y=B$, $C=C(g,s)$, $\\theta:i_1^*F\\xrightarrow{\\sim}C(g,s)$ from Step 4, and the cover $\\{B_i\\to B\\}$ of Step 1. The required local shape is Step 3, with $m_i=d$ and $n_i=2d$. The normalized local comparisons are Step 4. All bases and cover members are separated finite type, and $F,C$ lie in the stated finite-Tor constructible categories by their defining setup. The gluing assertion gives $\\kappa:F\\xrightarrow{\\sim}a^*C(g,s)$ restricting to the $\\kappa_i$, and its uniqueness assertion says it is the only isomorphism with $i_1^*\\kappa=\\theta$. Thus it is independent of the chosen cover, coordinates and initial local comparisons. This proves clauses (2) and (3). In terms of Step 3, this gluing is gluing maps of sheaves with a common shift; it does not assert descent for arbitrary objects or morphisms of derived categories. By Step 5 it extends $\\kappa^\\circ$.",
+   "uses": [
+    "prop-pur-a1-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Proof, main-20261015, Step 3: gluing and uniqueness; unit sk-thm-dnc, Step 3 before restricting to t=0"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso",
-    "statement": "theorem existsUnique_familyObject_iso\n    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj\n      (D.familyObject Λ) ≅ sectionInvariant Λ g s) :\n    ∃! κ : D.familyObject Λ ≅\n        (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s),\n      (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫\n        (leftDerivedUpperStarCompSectionIso _ _ _\n          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).hom.app _ = θ.hom",
-    "branch": "slopmaster2",
-    "by": "Q34",
-    "date": "2026-10-15",
-    "existing": true,
-    "note": "Finite coefficient specialization Λ=A_{E,n}, with the concrete normalized Kummer Tate twist. The five declarations together give both lisse-line statements, constancy, normalization/uniqueness, and arbitrary base change. The finite-stage pro-etale category is read through its etale-origin presentation: see WeilConjectures.SixFunctors.ProEtale.Derived.Constructible and the fully faithful comparison in Derived.Comparison; comparison commutes canonically with pullback. The theorem is applied to the actual extended-Rees deformation datum constructed in WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates.nonempty_deformationToNormalConeData, and to the canonical fibre comparison, not to a freely chosen replacement of either object."
+  {
+   "text": "We record the comparison with the ordinary etale site needed only for unrestricted base change. For any scheme morphism $f:X\\to S$, the definitions [def-weil-pbc-direct-image], [def-weil-proetale-inverse-image], and [def-weil-pbc-site-comparison-morphism] give $f_{\\mathrm{et},*}\\nu_{X,*}=\\nu_{S,*}f_{\\mathrm{proet},*}$: at an etale object $U\\to S$ both evaluate a pro-etale sheaf $H$ at $U\\times_S X$. By [def-weil-pbc-inverse-image] and the adjunctions in those definitions, for any etale module sheaf $G$ and pro-etale module sheaf $H$ we consequently have natural bijections $\\operatorname{Hom}(f_{\\mathrm{proet}}^*\\nu_S^*G,H)=\\operatorname{Hom}(G,\\nu_{S,*}f_{\\mathrm{proet},*}H)=\\operatorname{Hom}(G,f_{\\mathrm{et},*}\\nu_{X,*}H)=\\operatorname{Hom}(\\nu_X^*f_{\\mathrm{et}}^*G,H)$. Their identity elements give mutually inverse canonical comparisons $f_{\\mathrm{proet}}^*\\nu_S^*\\cong\\nu_X^*f_{\\mathrm{et}}^*$. They respect the fixed scalar actions, since all the displayed functors act on those actions, and are natural in maps of sheaves. The composition comparisons [lem-weil-pbc-proetale-derived-pullback-composition, lem-weil-pbc-sets-etale-inverse-image-composition-units] identify successive pullbacks. Their compatibility with this site comparison follows directly by adjunction: for two successive morphisms, either comparison is adjunct to the identity of the common composite right adjoint, so the two comparisons agree. For the identity morphism that adjunct is the identity, and the same Hom bijections send adjunction units to adjunction units. Taking a morphism and its section therefore respects the section identity on both sites. This is a formal adjunction calculation, with no geometric finiteness hypothesis.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Final base-change assertion: explicit comparison of ordinary and pro-etale inverse images by their adjunctions"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-0a515be33",
-    "group": "Q34",
-    "result": "pass",
-    "note": "Audited the immutable node, all dependencies, source blueprint, published declarations, docstrings, edge cases, finite-stage interpretation, and exact normalized/base-change signatures. scompile.py passed with local overlay and server confirmation; no substantive or mechanical defect found."
+  {
+   "text": "**Arbitrary-base rigidity claim.** For every scheme $S$, put $X=\\mathbf A^1_S$, let $p:X\\to S$ be the projection, and let $e:S\\to X$ be the unit section. If $M$ is a finite locally constant pro-etale $\\Lambda$-module sheaf on $S$, then every endomorphism $h:p^*M\\to p^*M$ with $e^*h=\\operatorname{id}_M$ is the identity. No separatedness, finite-type, quasi-compactness, or flatness hypothesis on $S$ is part of this claim. By [lem-sf-proetale-locally-constant-origin](b), $M\\simeq\\nu_S^*G$ for a finite locally constant etale module sheaf $G$. Step 7, applied to $p$, gives $p^*M\\simeq\\nu_X^*p_{\\mathrm{et}}^*G$. The full faithfulness of [thm-weil-pbc-site-comparison] on bounded-below derived categories, together with [lem-weil-pbc-derived-single-fully-faithful] for degree-zero objects, identifies endomorphisms of $p^*M$ with endomorphisms of $p_{\\mathrm{et}}^*G$, and identifies their restrictions along $e$.\n\nPut $H=\\mathcal Hom_{\\Lambda_S}(G,G)$ using [def-pur-sheaf-hom]. There is a canonical isomorphism $p^{-1}H\\simeq\\mathcal Hom(p_{\\mathrm{et}}^*G,p_{\\mathrm{et}}^*G)$: on an etale cover trivializing $G$ with finite module value $N$, both sheaves are the constant sheaf with value $\\operatorname{End}_\\Lambda(N)$, and the canonical map sends an endomorphism to its pullback. For a finite constant module $N$, choose a finite presentation $\\Lambda^r\\to\\Lambda^s\\to N\\to0$; this exists because a finite generating set for $N$ has a kernel contained in the finite set $\\Lambda^s$, hence finitely generated. The sheaf of maps $N\\to N$ is the kernel of the corresponding map $\\underline N^s\\to\\underline N^r$; inverse image preserves this finite limit and constant modules. Naturality in the presentation and the trivialization globalizes the comparison. The base changes of the etale trivializing cover cover $X$ by [lem-weil-pbc-etale-covering-base-change].\n\nThus $h$ corresponds to a section $z\\in\\Gamma(X,p^{-1}H)$. The geometric fibres of $p$ are $\\operatorname{Spec}(\\Omega[t])$ by [def-sbc-affine-space], and are connected because $\\Omega[t]$ is a domain and its zero prime is dense. Apply [lem-weil-pbc-etale-connected-fibres-section-compatible] to $z$: it gives $p_1^*z=p_2^*z$ on $X\\times_S X$, with no finiteness assumptions. Pull back along $r=(\\operatorname{id}_X,e\\circ p):X\\to X\\times_S X$. Since $p_1r=\\operatorname{id}_X$ and $p_2r=e\\circ p$, the unit-compatible comparisons [lem-weil-pbc-sets-etale-inverse-image-composition-units] give $z=p^*e^*z$, hence $h=p^*e^*h$. Under the hypothesis $e^*h=\\operatorname{id}_M$, this says $h=\\operatorname{id}_{p^*M}$. This is the rigidity principle used below.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs, final connected-fibre Cech-compatibility argument; applied to the internal Hom and pulled back along (id,e p). Finite etale origin: proetale.tex Tag 099Y, lemma-compare-locally-constant."
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of [def-pur-conventions], in the situation of\n[def-pur-dnc-section-family] with family object $F$, let\n$a:\\mathbf A^1_B\\to B$ be the projection and let\n$i_1:B\\to\\mathbf A^1_B$ be the section $t=1$.\n\n1. *the family is a shift of a lisse line.* The family object\nis a shift of a finite locally constant rank-one sheaf,\n$$\nF\\simeq\\mathcal L_F(d)[2d],\n$$\nand likewise $C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$; in\nparticular no descent of an object or of a morphism of a derived\ncategory is needed below.\n1. *constancy along the affine line.* There is a canonical\nisomorphism\n$$\n\\kappa:\\;F\\;\\xrightarrow{\\ \\sim\\ }\\;a^*C(g,s).\n$$\nSince $i_1^*a^*C(g,s)=C(g,s)=i_1^*F$ by\n[lem-pur-dnc-section-geometry](1), the family object is the\npullback of its own fibre at $t=1$: the deformation family is\nconstant along $\\mathbf A^1_B$ over $B$.\n1. *normalization and uniqueness.* $\\kappa$ is the unique\nisomorphism $F\\to a^*C(g,s)$ which at the section $t=1$\nrestricts to the identity of $C(g,s)$ under the identification\n$i_1^*F\\simeq C(g,s)$ of\n[lem-pur-dnc-section-geometry](1).\n1. *locality and base change.* $\\kappa$ is compatible with\netale localization on $B$ and with arbitrary base change\n$B'\\to B$.",
-    "proof": [
-      {
-        "text": "The family object is the one of [def-pur-dnc-section-family]; tensor inverses and shifts are understood as in [def-weil-derived-tensor].\nWrite $a:\\mathbf A^1_B\\to B$ and let $i_1:B\\to\\mathbf A^1_B$ be the\nunit section.",
-        "uses": [
-          "def-pur-dnc-section-family",
-          "def-weil-derived-tensor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Step 1: the family object is a shift of a lisse rank-one line. By\n[lem-pur-dnc-section-geometry](2),\n$\\widetilde g$ is smooth, so $\\omega_{\\widetilde g}$ is invertible\nby [thm-pur-cohomological-smoothness]; by (2) and (4) it is etale-locally\n$\\Lambda(d)[2d]$, hence so is $F$. An etale cover of $B$ on\nwhich the pair $(V,s)$ has standard coordinates also carries the\nfamily to the standard model, so\n[lem-pur-concentrated-complex-shift] applied to that cover gives\n\n$$\nF\\;\\simeq\\;\\mathcal L_F(d)[2d],\n$$\n\nwith $\\mathcal L_F$ a finite locally constant rank-one sheaf on\n$\\mathbf A^1_B$; the same argument gives\n$C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$. This is (1), and this\nreduction to actual sheaves is the point which makes the glueing at the\nend of the proof the ordinary sheaf axiom.\nStep 2: the local models and their normalization. Refine the etale\ncover so that in addition $C(g,s)|_{B_i}$ is a shift-twist of the free\nrank-one module; such a refinement exists because $C(g,s)$ is finite\nlocally constant by Step 1. Let $B_i\\to B$ be the resulting cover,\non which there are coordinates of pairs\n$(V_i,s_i)\\to(\\mathbf A^d_{B_i},0)$\n([lem-pur-dnc-section-geometry](2)); for the standard pair the\ndeformation space is\n$\\mathbf A^d_{B_i}\\times_{B_i}\\mathbf A^1_{B_i}$, $x_k=tu_k$.\nExceptional pullback along the coordinate map is ordinary pullback, and\nthe vector-bundle Thom calculation\n([cor-pur-vector-bundle-purity] as in\n[lem-pur-dnc-section-geometry](4)) supplies an isomorphism\n\n$$\n\\kappa_i:F|_{\\mathbf A^1_{B_i}}\\xrightarrow{\\ \\sim\\ }\na_i^*C(g,s)|_{B_i},\n$$\n\nwhose restriction $\\kappa_i(1)$ is an automorphism of the free\nrank-one sheaf on $B_i$. Multiplying $\\kappa_i$ by the pullback\nof its inverse $a_i^*(\\kappa_i(1)^{-1})$ normalizes it to the\nidentity at $t=1$, on every connected component of $B_i$.\nStep 3: gluing and uniqueness, i.e. (2) and (3). Apply\n[prop-pur-a1-invariance] over the base $Y=B$ with $C=C(g,s)$, with\n$\\theta:i_1^*F\\xrightarrow{\\sim}C(g,s)$ the identification of\n[lem-pur-dnc-section-geometry](1), and with the cover $\\{B_i\\to B\\}$ of\nStep 2, whose members may be taken affine, hence separated of finite type\nover $k$. Its hypotheses hold: the *local shape* because\n$F\\simeq\\mathcal L_F(d)[2d]$ by Step 1, and the *normalized local\ncomparisons* are the $\\kappa_i$ of Step 2, which restrict at $t=1$ to the\nidentity of $C(g,s)|_{B_i}$ under $\\theta$. Its gluing assertion gives a\nunique isomorphism\n\n$$\n\\kappa:F\\xrightarrow{\\ \\sim\\ }a^*C(g,s)\n$$\n\nrestricting to every $\\kappa_i$, hence to the identity at $t=1$: this is\n(2), and existence in (3). Its uniqueness assertion says that $\\kappa$ is\nthe only isomorphism $F\\to a^*C(g,s)$ restricting to $\\theta$, i.e. to the\nidentity of $C(g,s)$, at $t=1$, which is the uniqueness in (3).\nFinally, the Rees-algebra description of the DNC\nfor the closed section, the local standard models, and the localized\nThom classes all commute with base change and etale localization, hence\nso does the resulting isomorphism: this is (4).",
-        "uses": [
-          "lem-pur-dnc-section-geometry",
-          "thm-pur-cohomological-smoothness",
-          "lem-pur-concentrated-complex-shift",
-          "cor-pur-vector-bundle-purity",
-          "prop-pur-a1-invariance"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Let $b:B'\\to B$ be an arbitrary base change and let $b_1:\\mathbf A^1_{B'}\\to\\mathbf A^1_B$ be its affine-line base change. The canonical comparisons of [lem-pur-dnc-section-geometry](5) identify the primed family, section invariant and punctured comparison with the pullbacks of $F,C(g,s),\\kappa^\\circ$; clause (1), together with the composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], identifies its fibre comparison with $b^*\\theta$. Therefore $b_1^*\\kappa:F'\\xrightarrow{\\sim}a'{}^*C(g',s')$ is a normalized comparison and extends the primed punctured comparison. By exact termwise inverse image [def-weil-derived-pullback-tensor-hom], Step 3 pulls back to $F'\\simeq b_1^*M_F[2d]$ and $C(g',s')\\simeq b^*M_1[2d]$. These sheaves are finite locally constant: by [lem-sf-proetale-locally-constant-origin] choose etale finite local models, pull their trivializing covers back using [lem-weil-pbc-etale-covering-base-change], and use Step 7 to compare the two sites. A constant finite module stays the same constant module under inverse image, since inverse image preserves the final object and coproducts. In particular $M'=b^*M_1$ is finite lisse.\n\nFor any other normalized comparison $\\eta$, the automorphism $h=\\eta\\circ(b_1^*\\kappa)^{-1}$ of $a'{}^*C(g',s')$ becomes, after cancelling the common shift by [lem-weil-pbc-derived-single-fully-faithful], an automorphism of $a'{}^*M'$ whose restriction along the unit section is the identity. Apply the **arbitrary-base rigidity claim of Step 8** with $S=B'$ and $M=M'$; its hypotheses hold for this arbitrary scheme $B'$, and it gives $h=\\operatorname{id}$. Hence $\\eta=b_1^*\\kappa$. No use of [lem-pur-lisse-uniqueness] is made over $B'$; that finite-type lemma occurs only in Step 5 over the separated finite-type coordinate bases $B_i$. For two successive base changes the comparison and the iterated pullback have the same normalization, so the same arbitrary-base rigidity claim identifies them; identity base change is immediate. Etale localization is a special case. This proves clause (4).",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+    "place": "Final assertion: arbitrary base change and etale localization, expanded by pullback and the generic connected-fibre sheaf calculation in Steps 7-8"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-dnc-section-geometry",
+  "thm-pur-cohomological-smoothness",
+  "def-pur-dnc-section-family",
+  "def-pur-section-invariant",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-pur-etale-proetale-cover",
+  "lem-pur-co-smooth-etale-locality",
+  "lem-pur-co-smooth-composition",
+  "def-pur-co-smoothness",
+  "cor-pur-vector-bundle-purity",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-pur-concentrated-complex-shift",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-lisse-uniqueness",
+  "prop-pur-a1-invariance",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-sf-proetale-locally-constant-origin",
+  "thm-weil-pbc-site-comparison",
+  "def-pur-sheaf-hom",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-etale-connected-fibres-section-compatible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/prop-pur-dnc-family-constancy.proof.md",
+  "place": "Steps 1-3, unit sk-thm-dnc Steps 1-3, and final base-change assertion; with explicit adjunction comparison and Stacks Tag 0A3H for the arbitrary-base uniqueness argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizing|deformation.*normal|sectionInvariant|familyObject",
+   "results": "10 hit(s): Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"dualizing\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme morphism with a closed section, the section pullback of the relative dualizing complex on its deformation to the normal cone is pulled back from the fibre at one",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.IdealSheafData.comapIso, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deformation to the normal cone of a smooth section yields a rank one local system constant along the affine line",
+   "results": "8 hit(s): ContMDiffSection.ctorIdx, ContMDiffSection, AlgebraicGeometry.IsSmooth.recOn, ContMDiffSection.ext, ContMDiffSection.toFun, ContMDiffSection.rec, ContMDiffSection.instDFunLike, ContMDiffSection.casesOn",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale locally trivial shifted rank one sheaf family on the algebraic affine line is uniquely the pullback of its fibre at the unit section",
+   "results": "8 hit(s): AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"LocallyConstant\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|DeformationToNormalCone|deformationToNormalCone|sectionInvariant",
+   "results": "0 hit(s): ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary scheme maps, structure sheaves, smooth manifold sections, or categorical dualization; none states the DNC dualizing-family constancy and normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2001,
+ "blueprint_uses": [
+  "cor-pur-vector-bundle-purity",
+  "def-pur-co-smoothness",
+  "def-pur-conventions",
+  "def-pur-dnc-section-family",
+  "def-weil-derived-tensor",
+  "lem-pur-concentrated-complex-shift",
+  "lem-pur-dnc-section-geometry",
+  "prop-pur-a1-invariance",
+  "thm-pur-cohomological-smoothness"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-pur-co-smoothness"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-dnc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-dnc-family-constancy",
+  "worker": "stage1",
+  "summary": "Rechecked the current main-20261015 blueprint and all cited statements, retaining the finite-coefficient coordinate/concentration/normalization/gluing proof. Corrected the old arbitrary-base-change step, which applied finite-type lisse rigidity beyond its hypotheses, by an explicit etale/pro-etale adjunction comparison and the existing generic connected-geometric-fibre section compatibility. No statement change, no new nodes, no new Mathlib leaves, no Lean work. All searches were run through msearch.py and every proof citation has a verbatim statement quote. Independent second reading clarified the adjunction-unit/coherence calculation and finite-presentation argument, and corrected prime notation; no mathematical statement or dependency changed. Fresh second reading on 2026-10-17 explicitly checked cohomological smoothness of both original projections before the open-neighborhood composition comparison, and enlarged the vector-bundle quotation to include the base-change clause actually used. Returned-landing repair: revalidated the current def-pur-dnc-section-family statement and all 42 proof quotations against the current read-only DAG, restricted its quotation to the family-object formula actually used, and clarified in Step 1 that concentration and rank one are consequences proved below. Retained the nine-step reviewed mathematical repair and all dependency edges; the delivery tool rebases onto its freshly fetched current origin.",
+  "blueprint": "Steps 1-3 realize item proof Step 1 and unit Step 1; Steps 2 and 4 realize item Step 2; Step 5 checks agreement with the punctured comparison (unit Step 2); Step 6 realizes item Step 3 and unit Step 3 gluing. Steps 7-9 prove the final arbitrary-base-change assertion using generic sheaf tools; restriction at zero remains the separate key node thm-pur-dnc-invariance.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Its finite-level clause (3) makes the Tate twist a finite lisse line; this is a coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The generic composition comparison inserts the canonical identifications at t=1 and under base change; no DNC route step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Unit-compatible etale composition identifies the pullback of Cech equality along (id,e p)."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Finite etale origin permits a generic sheaf uniqueness calculation after an unrestricted base change; the coordinate and gluing route is unchanged."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Full faithfulness transports the arbitrary-base endomorphism calculation from etale to pro-etale sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "why": "The generic connected-fibre Cech equality replaces the invalid application of finite-type lisse rigidity over an unrestricted base; sk-thm-dnc has no arbitrary-base rigidity statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-sf-proetale-locally-constant-origin",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-etale-connected-fibres-section-compatible"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-62b8b7fee",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-62b8b7fee (reviewer sub-agent of L); spot-checked: PASS: I read all nine steps, all 38 cited statements (10 statement deps, 28 proof deps), the main-20261015 statement and proof, unit sk-thm-dnc, and Stacks 0A3H (lemma-sections-upstairs, whose proof checks agreement fibre by fibre without flatness) and 099Y. Statement: the four clauses match the current blueprint and the hypotheses of def-pur-section-invariant exactly; arbitrary B'->B is kept, with b_1^*F and b^*C as the objects when B' is not of finite type; the coefficients are the finite pro-étale D^b_ctf(-,A_{E,n}) throughout. Steps 1-6: étale coordinates (geometry (2)); étale locality and composition give omega_{pe}=Le^*omega_p after checking co-smoothness of the projection with clauses (1)-(3); vector-bundle purity gives the local models; concentration in degree -2d over the separated finite-type T=A^1_B and B; the normalization h_i calculation is correct; every hypothesis of prop-pur-a1-invariance holds. Steps 7-9: the étale/pro-étale adjunction comparison is formal; the rigidity claim holds for every scheme S (connected fibres Spec Omega[t], pullback along (id,e p)); tested on S=Spec k with M=Lambda and on disconnected and non-reduced bases; lisse uniqueness is never used over a non-finite-type B', so the earlier E1 error is repaired. I accept the six declared off-unit tool uses (twist line, pullback composition, étale composition units, locally-constant origin, site comparison, connected-fibre compatibility). No new nodes; proof_deps equals the union of the step uses; no dependency cycle. Non-blocking remark: Step 5 only asserts that kappa° restricted to t=1 equals theta; it is used only for 'kappa extends kappa°', not for clauses (1)-(4). Some deep ancestors are missing ids (e.g. def-weil-pbc-etale-morphism, '0'); these are older DAG faults, not this delivery's. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso",
+  "statement": "theorem existsUnique_familyObject_iso\n    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj\n      (D.familyObject Λ) ≅ sectionInvariant Λ g s) :\n    ∃! κ : D.familyObject Λ ≅\n        (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s),\n      (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫\n        (leftDerivedUpperStarCompSectionIso _ _ _\n          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).hom.app _ = θ.hom",
+  "branch": "slopmaster2",
+  "by": "Q34",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Finite coefficient specialization Λ=A_{E,n}, with the concrete normalized Kummer Tate twist. The five declarations together give both lisse-line statements, constancy, normalization/uniqueness, and arbitrary base change. The finite-stage pro-etale category is read through its etale-origin presentation: see WeilConjectures.SixFunctors.ProEtale.Derived.Constructible and the fully faithful comparison in Derived.Comparison; comparison commutes canonically with pullback. The theorem is applied to the actual extended-Rees deformation datum constructed in WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates.nonempty_deformationToNormalConeData, and to the canonical fibre comparison, not to a freely chosen replacement of either object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0a515be33",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Audited the immutable node, all dependencies, source blueprint, published declarations, docstrings, edge cases, finite-stage interpretation, and exact normalized/base-change signatures. scompile.py passed with local overlay and server confirmation; no substantive or mechanical defect found."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of [def-pur-conventions], in the situation of\n[def-pur-dnc-section-family] with family object $F$, let\n$a:\\mathbf A^1_B\\to B$ be the projection and let\n$i_1:B\\to\\mathbf A^1_B$ be the section $t=1$.\n\n1. *the family is a shift of a lisse line.* The family object\nis a shift of a finite locally constant rank-one sheaf,\n$$\nF\\simeq\\mathcal L_F(d)[2d],\n$$\nand likewise $C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$; in\nparticular no descent of an object or of a morphism of a derived\ncategory is needed below.\n1. *constancy along the affine line.* There is a canonical\nisomorphism\n$$\n\\kappa:\\;F\\;\\xrightarrow{\\ \\sim\\ }\\;a^*C(g,s).\n$$\nSince $i_1^*a^*C(g,s)=C(g,s)=i_1^*F$ by\n[lem-pur-dnc-section-geometry](1), the family object is the\npullback of its own fibre at $t=1$: the deformation family is\nconstant along $\\mathbf A^1_B$ over $B$.\n1. *normalization and uniqueness.* $\\kappa$ is the unique\nisomorphism $F\\to a^*C(g,s)$ which at the section $t=1$\nrestricts to the identity of $C(g,s)$ under the identification\n$i_1^*F\\simeq C(g,s)$ of\n[lem-pur-dnc-section-geometry](1).\n1. *locality and base change.* $\\kappa$ is compatible with\netale localization on $B$ and with arbitrary base change\n$B'\\to B$.",
+  "proof": [
+   {
+    "text": "The family object is the one of [def-pur-dnc-section-family]; tensor inverses and shifts are understood as in [def-weil-derived-tensor].\nWrite $a:\\mathbf A^1_B\\to B$ and let $i_1:B\\to\\mathbf A^1_B$ be the\nunit section.",
+    "uses": [
+     "def-pur-dnc-section-family",
+     "def-weil-derived-tensor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 1: the family object is a shift of a lisse rank-one line. By\n[lem-pur-dnc-section-geometry](2),\n$\\widetilde g$ is smooth, so $\\omega_{\\widetilde g}$ is invertible\nby [thm-pur-cohomological-smoothness]; by (2) and (4) it is etale-locally\n$\\Lambda(d)[2d]$, hence so is $F$. An etale cover of $B$ on\nwhich the pair $(V,s)$ has standard coordinates also carries the\nfamily to the standard model, so\n[lem-pur-concentrated-complex-shift] applied to that cover gives\n\n$$\nF\\;\\simeq\\;\\mathcal L_F(d)[2d],\n$$\n\nwith $\\mathcal L_F$ a finite locally constant rank-one sheaf on\n$\\mathbf A^1_B$; the same argument gives\n$C(g,s)\\simeq\\mathcal L_1(d)[2d]$ on $B$. This is (1), and this\nreduction to actual sheaves is the point which makes the glueing at the\nend of the proof the ordinary sheaf axiom.\nStep 2: the local models and their normalization. Refine the etale\ncover so that in addition $C(g,s)|_{B_i}$ is a shift-twist of the free\nrank-one module; such a refinement exists because $C(g,s)$ is finite\nlocally constant by Step 1. Let $B_i\\to B$ be the resulting cover,\non which there are coordinates of pairs\n$(V_i,s_i)\\to(\\mathbf A^d_{B_i},0)$\n([lem-pur-dnc-section-geometry](2)); for the standard pair the\ndeformation space is\n$\\mathbf A^d_{B_i}\\times_{B_i}\\mathbf A^1_{B_i}$, $x_k=tu_k$.\nExceptional pullback along the coordinate map is ordinary pullback, and\nthe vector-bundle Thom calculation\n([cor-pur-vector-bundle-purity] as in\n[lem-pur-dnc-section-geometry](4)) supplies an isomorphism\n\n$$\n\\kappa_i:F|_{\\mathbf A^1_{B_i}}\\xrightarrow{\\ \\sim\\ }\na_i^*C(g,s)|_{B_i},\n$$\n\nwhose restriction $\\kappa_i(1)$ is an automorphism of the free\nrank-one sheaf on $B_i$. Multiplying $\\kappa_i$ by the pullback\nof its inverse $a_i^*(\\kappa_i(1)^{-1})$ normalizes it to the\nidentity at $t=1$, on every connected component of $B_i$.\nStep 3: gluing and uniqueness, i.e. (2) and (3). Apply\n[prop-pur-a1-invariance] over the base $Y=B$ with $C=C(g,s)$, with\n$\\theta:i_1^*F\\xrightarrow{\\sim}C(g,s)$ the identification of\n[lem-pur-dnc-section-geometry](1), and with the cover $\\{B_i\\to B\\}$ of\nStep 2, whose members may be taken affine, hence separated of finite type\nover $k$. Its hypotheses hold: the *local shape* because\n$F\\simeq\\mathcal L_F(d)[2d]$ by Step 1, and the *normalized local\ncomparisons* are the $\\kappa_i$ of Step 2, which restrict at $t=1$ to the\nidentity of $C(g,s)|_{B_i}$ under $\\theta$. Its gluing assertion gives a\nunique isomorphism\n\n$$\n\\kappa:F\\xrightarrow{\\ \\sim\\ }a^*C(g,s)\n$$\n\nrestricting to every $\\kappa_i$, hence to the identity at $t=1$: this is\n(2), and existence in (3). Its uniqueness assertion says that $\\kappa$ is\nthe only isomorphism $F\\to a^*C(g,s)$ restricting to $\\theta$, i.e. to the\nidentity of $C(g,s)$, at $t=1$, which is the uniqueness in (3).\nFinally, the Rees-algebra description of the DNC\nfor the closed section, the local standard models, and the localized\nThom classes all commute with base change and etale localization, hence\nso does the resulting isomorphism: this is (4).",
+    "uses": [
+     "lem-pur-dnc-section-geometry",
+     "thm-pur-cohomological-smoothness",
+     "lem-pur-concentrated-complex-shift",
+     "cor-pur-vector-bundle-purity",
+     "prop-pur-a1-invariance"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }
