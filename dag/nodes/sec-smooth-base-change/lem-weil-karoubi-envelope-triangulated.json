@@ -306,5 +306,32 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-796ecc150 (reviewer sub-agent of L); spot-checked: Read all twelve proof steps, the new finite-sum leaf, cited statements, Balmer–Schlichting pp. 2–7, Stacks sources, and pinned Mathlib declarations. Verified hypotheses, octahedron matrices, edge cases, route, and absence of duplicates or cycles. No repairs needed. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5ea3ec08",
+  "group": "NH",
+  "result": "pass",
+  "note": "Verified the node, dependencies, source, exact upstream Karoubi declarations, edge cases, docstrings, H4 searches, and per-file scompile/deliver2 preflight. No substantive or mechanical issues found."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Idempotents.Triangulated",
+  "declaration": "CategoryTheory.Idempotents.Karoubi.isTriangulated",
+  "declarations": [
+   "CategoryTheory.Idempotents.Karoubi.hasShift",
+   "CategoryTheory.Idempotents.toKaroubi.commShift",
+   "CategoryTheory.Idempotents.Karoubi.distinguishedTriangles",
+   "CategoryTheory.Idempotents.Karoubi.pretriangulated",
+   "CategoryTheory.Idempotents.Karoubi.mem_distTriang_iff",
+   "CategoryTheory.Idempotents.toKaroubi.isTriangulated",
+   "CategoryTheory.Idempotents.Karoubi.isTriangulated"
+  ],
+  "statement": "theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C)",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The recorded module and its public imports Shift and Pretriangulated together give every clause. Karoubi.hasShift has (K,e)[n]=(K[n],e[n]); Karoubi.pretriangulated uses Karoubi.distinguishedTriangles, exactly triangle-category retracts of images of distinguished triangles, as made explicit by Karoubi.mem_distTriang_iff. This class is closed under triangle isomorphisms. Karoubi.isTriangulated proves TR4 for that precise structure. The inclusion is Mathlib's toKaroubi C; toKaroubi.commShift and toKaroubi.isTriangulated give its shift compatibility and exactness. All assumptions are exactly those of an arbitrary triangulated category; there is no boundedness, size equality, or preexisting triangulation hypothesis on the envelope. No new module or repeated statement is needed."
  }
 }

@@ -54,7 +54,10 @@
   "lem-weil-pbc-ringed-tensor-cohomological-bounds",
   "def-weil-pbc-etale-origin-witness",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-witness-compatibility",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
  ],
  "proof": [
   {
@@ -393,5 +396,64 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-ed732257e (reviewer sub-agent of L); spot-checked: Read the item, new lemma, report, DAG instructions, unit route, master source, cited node statements, and cited literature. Verified all nine proof steps, coefficient categories, Tor condition, normalization/cocycle arguments, sufficient condition, counterexample, Noetherian constructibility route, witness transport, edge cases, duplicate searches, and recorded tool uses. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LevelwiseAdicTruncations",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_levelwise_truncations",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncations",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseRestrictionCommShift",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseScalarCommShift",
+   "AlgebraicGeometry.Scheme.PbcLevelwiseTorVanishing",
+   "AlgebraicGeometry.Scheme.PbcLevelwiseTruncationData",
+   "AlgebraicGeometry.Scheme.PbcLevelwiseTruncationData.lowerNormalization",
+   "AlgebraicGeometry.Scheme.PbcLevelwiseTruncationData.upperNormalization",
+   "AlgebraicGeometry.Scheme.PbcIsLevelwiseTruncation",
+   "AlgebraicGeometry.Scheme.pbc_adic_levelwise_truncations",
+   "AlgebraicGeometry.Scheme.pbcTruncatedTransitionLE",
+   "AlgebraicGeometry.Scheme.pbcTruncatedTransitionGE",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_cohomology",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_transitions",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_naturality",
+   "AlgebraicGeometry.Scheme.pbc_strict_tower_truncation_cohomology",
+   "AlgebraicGeometry.Scheme.pbcReductionEvaluationIso",
+   "AlgebraicGeometry.Scheme.pbc_reduction_adic_tower_laws",
+   "AlgebraicGeometry.Scheme.pbcReductionAdicTower",
+   "AlgebraicGeometry.Scheme.pbcCompletedConstantSection",
+   "AlgebraicGeometry.Scheme.pbcTruncationResidueLevel",
+   "AlgebraicGeometry.Scheme.pbcTruncationCounterexample",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_tor_of_uniformizer_injective",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncations_constructible",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_counterexample",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseEtaleReductionCommShift",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseOriginReduction",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseOriginLE",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseOriginGE",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseEtaleStepLE",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseEtaleStepGE",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseProEtaleStepLE",
+   "AlgebraicGeometry.Scheme.pbcLevelwiseProEtaleStepGE",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_origins",
+   "AlgebraicGeometry.Scheme.pbcTruncatedRealizationLE",
+   "AlgebraicGeometry.Scheme.pbcTruncatedEtaleNormalizationLE",
+   "AlgebraicGeometry.Scheme.pbcTruncatedRealizationGE",
+   "AlgebraicGeometry.Scheme.pbcTruncatedEtaleNormalizationGE",
+   "AlgebraicGeometry.Scheme.pbc_levelwise_truncation_compatible_origins"
+  ],
+  "file": "lean/Sheaf/Paper/LevelwiseAdicTruncations.lean",
+  "statement": "theorem pbc_levelwise_truncations (K : PbcCompletedDerived T (pbcIntegralDatum l E)) (m : ℤ) (_hTor : PbcLevelwiseTorVanishing T (pbcIntegralDatum l E) (pbcReductionAdicTower T (pbcIntegralDatum l E) K) m) : ∃ N : PbcLevelwiseTruncationData T (pbcIntegralDatum l E) (pbcReductionAdicTower T (pbcIntegralDatum l E) K) m, PbcIsLevelwiseTruncation T (pbcIntegralDatum l E) N",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The primary finite-extension statement is accompanied by the clause statements for unconditional strict-tower cohomology, normalized transitions and naturality, the uniformizer criterion, the nonempty-scheme torsion counterexample, uniform constructibility with the specified cohomological windows, and retained etale origins before and after TC. All helper data and all postponed theorems belong to this node; no other DAG node is restated. Added landed statement dependencies supply the existing integral datum, actual canonical fixed/function coefficient realizations and witnessed towers, and the scalar section of the completed coefficient ring."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-910e4f078",
+  "group": "NC",
+  "result": "pass",
+  "note": "Wrote review.md. Reviewed immutable statements, all twelve dependencies, exact declarations, sources, universes, edge cases, canonical constructions, docstrings, and verbatim signature. Per-file scompile.py reproduced cleanly. No defects or fixes; branch unchanged."
  }
 }
