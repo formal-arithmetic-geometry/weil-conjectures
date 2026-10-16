@@ -15593,7 +15593,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:15 L: returned deliver/P4/Sheaf.AlgebraicGeometry.FormalCompletionAffineSections (reviewer RETURN: (the landing tools, head b8b490ffc) the delivery did not land: lean/Sheaf/AlgebraicGeometry/FormalCompletionAffineSectio)
 - 22:15 L: returned deliver/R2/Sheaf.Paper.GeometricFieldProfiniteDenseSubsite (reviewer RETURN: (the landing tools, head 51eb869b4) the delivery did not land: lean/Sheaf/Paper/GeometricFieldProfiniteDenseSubsite.lean)
 - 22:15 L: returned deliver/T1/Sheaf.CategoryTheory.NaturalTruncationCouple (reviewer RETURN: (the landing tools, head 811de7122) the delivery did not land: lean/Sheaf/CategoryTheory/NaturalTruncationCouple.lean ch)
-- 22:15 L: merged deliver/A2/Sheaf.Paper.IntegralResidueScalarGeometryBridge (stage 3; reviewer PASS; first push; landing 20261016T221552-L-1610642 (interface); batch 20261016T221550; modules 3; new nodes 2)
 - 22:15 L: merged deliver/A3/Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport (stage 3; reviewer PASS; first push; landing 20261016T221553-L-1610887 (interface); batch 20261016T221550; modules 4; new nodes 3)
 - 22:15 L: merged deliver/B2/Sheaf.Paper.CoefficientExchangeFromComparisons (stage 3; reviewer PASS; after a return; landing 20261016T221554-L-1611092 (interface); batch 20261016T221550; modules 5; new nodes 0; change records: coord/changes/B2-coefficient-exchange-derived-caches.md)
 - 22:15 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic (stage 3; reviewer PASS; first push; landing 20261016T221556-L-1611399 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15685,3 +15684,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:42 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
 
 - 07:43 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again
+
+- 07:45 L: red global build after the upstream sync to slopmaster2 e47efb5a5: does not compile against the source; rebase onto sheaf-dag and deliver again

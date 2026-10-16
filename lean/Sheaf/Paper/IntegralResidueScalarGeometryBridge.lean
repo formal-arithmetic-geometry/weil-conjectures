@@ -6,9 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
-import Sheaf.Paper.IntegralResidueTensorRouteModel
-import Sheaf.Paper.IntegralResidueScalarCounitModel
-import Sheaf.Paper.IntegralResidueTensorPullCounitModel
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResiduePullSquare
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! The residue tensor square on K-flat representatives with K-flat pullback.
 
@@ -35,7 +35,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-set_option linter.unusedVariables false in
 /-- The residue tensor square on a K-flat complex whose pullback is K-flat.
 
 Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 50;
@@ -85,26 +84,6 @@ theorem integralResidue_tensorGeometry_component {X Y : Scheme.{u}} (f : X ⟶ Y
           (residueExchangeRestriction ℓ E X).map
             (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫
           (residueExchangeTensorPullIso ℓ E f).hom.app
-            ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) := by
-  let := residueExchangePullMonoidal ℓ E f
-    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
-  have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
-    delta residueExchangeTensorModelTarget residueExchangeUpperStar
-    exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
-      (residueExchangeOrdinaryCoefficient ℓ E Y) P hFP
-  apply (cancel_mono (residueExchangeTensorModelTarget ℓ E f P)).mp
-  have hscalarModel :
-      (residueExchangeRestrictPullIso ℓ E f).hom.app
-          ((residueExchangeReduction ℓ E Y).obj (DerivedCategory.Qh.obj P)) ≫
-        (residueExchangeRestriction ℓ E X).map
-          (((residueExchangePullComparisons ℓ E).pull f).inv.app (DerivedCategory.Qh.obj P)) ≫
-        (residueExchangeTensorPullIso ℓ E f).hom.app
-          ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj (DerivedCategory.Qh.obj P)) ≫
-        residueExchangeTensorModelTarget ℓ E f P = residueExchangeTensorModelMap ℓ E f P := by
-    rw [integralResidue_tensorPullCounit_model ℓ E f P]
-    exact integralResidue_scalarCounit_model ℓ E f P
-  simpa only [Category.assoc] using
-    (integralResidue_tensorRoute_model ℓ E f hFlat P).trans hscalarModel.symm
-
+            ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) := by sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing
