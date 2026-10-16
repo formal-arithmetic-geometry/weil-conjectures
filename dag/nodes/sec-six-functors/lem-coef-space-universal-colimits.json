@@ -28,9 +28,90 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U_B:\\mathcal S_{/B}\\to\\mathcal S$ forget the structure arrow. The small-colimit theorem for spaces supplies the colimit of $U_BF$ for the given $\\mathcal U$-small simplicial set $J$. The slice-colimit theorem, applied with $\\mathcal C=\\mathcal S$ and $x=B$, says that $U_B$ creates this colimit. Thus the given arrows and their coherent compatibilities induce $l:L\\to B$ and a colimiting cocone $F\\to\\Delta_J(L,l)$ in $\\mathcal S_{/B}$. Apply the same two results with $x=A$ to obtain all the small colimits in $\\mathcal S_{/A}$, in particular a colimit $Q$ of $f^*F$. The hypotheses are only smallness of $J,A,B$; no nonempty or filtered indexing assumption is used.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "lem-coef-infinity-relative-slice-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.2.4.8 (small colimits of spaces) and Proposition 1.2.13.8 (colimits in overcategories); used to spell out the existing-colimit hypothesis in Kerodon 05V3. Online references through the two cited nodes; archival copy WANTED."
+   }
+  },
+  {
+   "text": "We record the slice mapping formulas needed for the construction. For $t:T\\to B$ and $z:Z\\to B$, apply the cone-category mapping formula with shape a point and diagram $B$. It gives\n$$\\operatorname{Map}_{/B}(t,z)\\simeq\\operatorname{hofib}_{t}\\bigl(\\operatorname{Map}_{\\mathcal S}(T,Z)\\xrightarrow{z\\circ-}\\operatorname{Map}_{\\mathcal S}(T,B)\\bigr).$$\nThe object $1_B=(B,\\mathrm{id}_B)$ is terminal since this fiber for $z=\\mathrm{id}_B$ is contractible. Spaces have small limits by the cited limit theorem. If $X\\to Z\\leftarrow Y$ is a coherent cospan over $B$, form its homotopy pullback $P$ in spaces with the induced arrow $P\\to B$. For any $T\\to B$, the representable limit formula followed by the displayed fiber formula identifies $\\operatorname{Map}_{/B}(T,P)$ with\n$$\\operatorname{Map}_{/B}(T,X)\\times^h_{\\operatorname{Map}_{/B}(T,Z)}\\operatorname{Map}_{/B}(T,Y).$$\nIndeed both sides specify maps to $X,Y$, their homotopy over $Z$, and the same specified homotopy to $t$ over $B$, including all higher compatibilities; taking these fibers and the pullback in either order imposes precisely the same data. The representable limit criterion therefore proves that $P$ is a pullback in the slice. These formulas are natural in all the displayed objects.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05V1",
+    "place": "Proposition 7.7.3.19, finite limits in slices, with Example 7.6.2.43 cited there; the mapping-space calculation expands the slice universal property. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "For an arbitrary $p:Y\\to A$, regard $a=(A,f)$ and $y=(Y,fp)$ as objects of $\\mathcal C=\\mathcal S_{/B}$. The slice-exponential theorem gives $E_y=[a,y]_B$, $E_a=[a,a]_B$, and the map $p^a:E_y\\to E_a$ induced by $p$. Let $e:1_B\\to E_a$ be the transpose of $\\mathrm{id}_a:1_B\\times_B a\\to a$. Form in $\\mathcal C$ the pullback\n$$P_Y=1_B\\times^h_{E_a}E_y,$$\nusing step 2. It is a small space over $B$. For any $T\\to B$, the pullback mapping formula and the coherent exponential equivalences give\n$$\\begin{aligned}\n\\operatorname{Map}_{/B}(T,P_Y)\n&\\simeq\\operatorname{hofib}_{e\\circ!}\\bigl(\\operatorname{Map}_{/B}(T,E_y)\\to\\operatorname{Map}_{/B}(T,E_a)\\bigr)\\\\\n&\\simeq\\operatorname{hofib}_{\\operatorname{pr}_A}\\bigl(\\operatorname{Map}_{/B}(T\\times_B A,Y)\\xrightarrow{p\\circ-}\\operatorname{Map}_{/B}(T\\times_B A,A)\\bigr)\\\\\n&\\simeq\\operatorname{Map}_{/A}(T\\times_B A,Y).\n\\end{aligned}$$\nIn the last line, a point is exactly a map to $Y$ over $B$ together with the homotopy $p h\\simeq\\operatorname{pr}_A$ in the slice over $B$; forgetting its redundant composite to $B$ is the same data as a map over $A$. Conversely, from a map over $A$ use the composite of its specified homotopy with $f$ as its homotopy over $B$, with the identity higher compatibility. After forgetting back to the map over $A$ this returns the original data. In the other composite the originally supplied compatibility over $B$ identifies the old homotopy with this composite one; the space of the redundant homotopy together with that identification is contractible. The same contraction with simplex parameters retains all higher compatibilities. Thus the cone mapping formula of step 2, applied to $\\mathcal C$ and then to spaces, identifies the full spaces, rather than only their components. Currying sends $e\\circ!$ to $\\operatorname{pr}_A$, so the displayed equivalences respect precomposition in $T$ and postcomposition in $Y$. This constructs the objectwise dependent-product representation explicitly; no colimit-preservation assertion is assumed in its construction.",
+   "uses": [
+    "lem-coef-spaces-slice-cartesian-closure",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05V1",
+    "place": "Proposition 7.7.3.19, expanded internal-Hom construction of the pullback right adjoint; the space-specific input is Proposition 7.7.3.17 (05UY). Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "For every test object $Y\\to A$, apply step 3 to the cocone of step 1. The mapping-space criterion for colimits gives natural equivalences\n$$\\begin{aligned}\n\\operatorname{Map}_{/A}(f^*L,Y)\n&\\simeq\\operatorname{Map}_{/B}(L,P_Y)\\\\\n&\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{/B}(F(j),P_Y)\\\\\n&\\simeq\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}_{/A}(f^*F(j),Y).\n\\end{aligned}$$\nHere the middle equivalence uses that $L$ is the slice colimit, not an assertion that pullback preserves it. Naturality of the currying and pullback equivalences in step 3 identifies the composite with restriction along the actual pulled-back cocone $f^*F\\to\\Delta_J f^*L$. The converse mapping-space criterion now says that this cocone is colimiting in $\\mathcal S_{/A}$. This proves colimit preservation directly, rather than invoking an uncited theorem about infinity-categorical adjoints.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05V2",
+    "place": "Corollary 7.7.3.20, preservation by the pullback left adjoint; this mapping-space proof spells out its appeal to Corollary 7.1.4.28. Combined with 05V3 and 05V5. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "The cocone with apex $Q$ of step 1 and the pulled-back cocone with apex $f^*L=A\\times_B L$ are both initial objects of the same coherent cocone category. Its full subcategory of initial objects is a contractible Kan complex. Therefore the map induced by the second cocone from the first colimit is an equivalence. This is precisely the canonical comparison in the statement, since its composites with the colimit legs are the pulled-back legs by construction. It is a map over $A$, and the colimit defining $L$ remains the colimit in the slice over $B$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05V5",
+    "place": "Corollary 7.7.3.23, identification of universal colimits with the canonical base-change comparison. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "For $J=\\varnothing$, the limits in step 4 are limits of empty diagrams of spaces and hence terminal spaces. Thus $f^*L$ is initial over $A$, just as $Q$ is, and the same comparison is an equivalence. In concrete terms the initial object in a space slice is $\\varnothing\\to B$ and $A\\times_B\\varnothing=\\varnothing$. Consequently the proof includes the empty colimit; it also needs neither a point of $A$ nor a point of $B$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05V5",
+    "place": "Corollary 7.7.3.23; empty-shape case of the mapping-space argument above. Read online; not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-relative-slice-sections",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-spaces-slice-cartesian-closure",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05V5",
+  "place": "Agent-written expansion, checked online against Kerodon 05V5, 05UY, 05V1, 05V2 and 05V3: construct the dependent product from internal exponentials and a pullback, then test the actual cocone on full mapping spaces. The online source has no archived copy in literature/; WANTED recorded in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,10 +189,45 @@
    "results": "{\"t\": \"2026-10-16T21:39:19Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Cc]olimit|[Cc]olimit.*pullback|[Ss]imple.*[Aa]nodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Condensed/Light/Sequence.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\"], \"digest\": \"657934dba3cbcd68\"}",
    "date": "2026-10-16",
    "verdict": "no match: hits are ordinary pullback/coequalizer and coproduct universal properties or the already cited ordinary simplicial pushout-product theorem; they do not state this infinity-categorical theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy colimits in the infinity category of spaces are preserved by arbitrary base change",
+   "results": "{\"t\": \"2026-10-16T22:22:58Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy colimits in the infinity category of spaces are preserved by arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DeltaGenerated.hasColimits\", \"SSet.hasColimits\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"DeltaGenerated.deltaGeneratedToTop.createsColimits\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\"], \"digest\": \"1d48b238043c1a55\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: IsUniversalColimit at Mathlib/CategoryTheory/Limits/VanKampen.lean:43-49 is a predicate on ordinary cocones. IsColimit.pullbackOfHasExactColimitsOfShape at CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean:35-46 assumes ordinary connected indexing and exact colimits. SSet.hasColimits and the homotopy-class hits concern ordinary simplicial sets/model categories. None proves the coherent space-slice comparison for arbitrary small simplicial indexing sets, including the empty one."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUniversalColimit\"",
+   "results": "{\"t\": \"2026-10-16T22:22:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUniversalColimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.IsUniversalColimit.isColimit\", \"CategoryTheory.IsUniversalColimit.of_iso\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence\", \"CategoryTheory.IsUniversalColimit.whiskerEquivalence_iff\", \"CategoryTheory.IsUniversalColimit.of_mapCocone\", \"CategoryTheory.IsUniversalColimit.precompose_isIso\", \"CategoryTheory.IsUniversalColimit.isPullback_of_isColimit_left\"], \"digest\": \"930b9db0e3e33cda\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: IsUniversalColimit at Mathlib/CategoryTheory/Limits/VanKampen.lean:43-49 is a predicate on ordinary cocones. IsColimit.pullbackOfHasExactColimitsOfShape at CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean:35-46 assumes ordinary connected indexing and exact colimits. SSet.hasColimits and the homotopy-class hits concern ordinary simplicial sets/model categories. None proves the coherent space-slice comparison for arbitrary small simplicial indexing sets, including the empty one."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*colimit|colimit.*universal|preservesColimits.*pullback",
+   "results": "{\"t\": \"2026-10-16T22:23:00Z\", \"tool\": \"grep\", \"query\": \"universal.*colimit|colimit.*universal|preservesColimits.*pullback\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\"], \"digest\": \"1b86adee31afa651\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: IsUniversalColimit at Mathlib/CategoryTheory/Limits/VanKampen.lean:43-49 is a predicate on ordinary cocones. IsColimit.pullbackOfHasExactColimitsOfShape at CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean:35-46 assumes ordinary connected indexing and exact colimits. SSet.hasColimits and the homotopy-class hits concern ordinary simplicial sets/model categories. None proves the coherent space-slice comparison for arbitrary small simplicial indexing sets, including the empty one."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of spaces over a base preserves homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T22:23:00Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of spaces over a base preserves homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\", \"TopCat.Presheaf.pullback\", \"CategoryTheory.IsPullback.map_iff\", \"CategoryTheory.Functor.map_isPullback\", \"TopCat.pullbackConeIsLimit\", \"CategoryTheory.IsPullback.map\", \"CategoryTheory.Square.IsPullback.map\", \"CompHausLike.pullback.isLimit\"], \"digest\": \"f8ffc95682832133\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: IsUniversalColimit at Mathlib/CategoryTheory/Limits/VanKampen.lean:43-49 is a predicate on ordinary cocones. IsColimit.pullbackOfHasExactColimitsOfShape at CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean:35-46 assumes ordinary connected indexing and exact colimits. SSet.hasColimits and the homotopy-class hits concern ordinary simplicial sets/model categories. None proves the coherent space-slice comparison for arbitrary small simplicial indexing sets, including the empty one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pullback between infinity groupoid slices commutes with every small homotopy colimit",
+   "results": "{\"t\": \"2026-10-16T22:25:36Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy pullback between infinity groupoid slices commutes with every small homotopy colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\", \"CategoryTheory.PreOneHypercover.cylinderHomotopy\", \"CategoryTheory.PreOneHypercover.exists_nonempty_homotopy\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.id_prod_mapHomotopyCategory_comp_inverse\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.mapHomotopyCategory_prod_id_comp_inverse\", \"HomotopicalAlgebra.PrepathObject.trans_ι\"], \"digest\": \"31ffded24c2834c9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: IsUniversalColimit at Mathlib/CategoryTheory/Limits/VanKampen.lean:43-49 is a predicate on ordinary cocones. IsColimit.pullbackOfHasExactColimitsOfShape at CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean:35-46 assumes ordinary connected indexing and exact colimits. SSet.hasColimits and the homotopy-class hits concern ordinary simplicial sets/model categories. None proves the coherent space-slice comparison for arbitrary small simplicial indexing sets, including the empty one."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-labelled-spine-prism-horn-calculus",
@@ -131,5 +247,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-universal-colimits",
+  "worker": "stage1",
+  "summary": "Checked the unchanged space-valued statement against Kerodon 05V5. Reused existing small-colimit, slice-colimit, mapping-space and limit criteria. Added one genuine internal-Hom theorem for coherent slices (05UY), constructed the dependent product by a pullback of exponentials, and proved preservation and the actual comparison by mapping spaces, including the empty shape. No Lean was written or compiled.",
+  "blueprint": "Realizes the inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient mapping-complex adjunction before R lim), at the space-colimit base-change input reached through the labelled spine/prism and enriched tensor cocontinuity foundations. Both the master proof paragraph and the main-20261015 proof in sk-thm-sf-package were read; the ancestor identity and inherited unit are kept.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone/slice mapping-space formula and uniqueness of initial cocones; the unit has no substitute for this foundational mapping-space tool, and no six-functor route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-25b5a219e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-25b5a219e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-spaces-slice-cartesian-closure, every cited statement and the report in full. Checked the sources online, since no Kerodon copy is archived. Tag 05UY (Prop 7.7.3.17) says S is locally cartesian closed and matches the new node, which is statement-only (B1), self-contained and allows empty fibers. Tag 05V5 (Cor 7.7.3.23) is proved by combining 05UY with 05V3, which is the route the six steps follow. Step 1: relative-slice-sections says the source functor creates colimits, and S has colimits of all small shapes, the empty one included. Step 2: the cone-calculus formula with K=Δ^0 gives the slice hofib formula and slice pullbacks. Step 3: the pullback 1_B×_{[a,a]}[a,y] represents Map_{/A}(f^*T,Y), naturally in T; I checked the hofib over e∘!, the transpose to pr_A, and the step from iterated fibers to the slice over A. Step 4: the dual colimit criterion is applied to L as the slice colimit, so there is no circularity. Steps 5 and 6 are genuinely elementary (initial objects are unique; the empty shape). Edge cases tested: J empty, f=id, A or B empty, coproducts, and the cover R→S^1 over the pushout presentation of S^1. New node edge cases: B=pt, X empty, Y empty. The dependency graph is acyclic and the item statement is unchanged. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), a generic mapping-space and initial-object black box that replaces no route; every other citation is in the same unit. No duplicate of the new node: presheaf-cocompletion is only the B=pt case, and the two relative-exponential nodes fix their target. Note for the maintainer, not a fault here: the existing unsplit node lem-coef-space-universal-colimits-cartesian-pushouts states the item in unsliced form as its first clause, so its later split should cite this item. No fixes, no drops."
  }
 }
