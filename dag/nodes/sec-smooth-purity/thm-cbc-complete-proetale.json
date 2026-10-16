@@ -3,52 +3,257 @@
  "blueprint": {
   "is": "thm-cbc-complete-proetale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Complete pro-etale compact-support base change",
- "statement": "Let $(A,I)$ satisfy [def-weil-pbc-adic-coefficient-datum], let\n$\\square$ be a\ncompact-support\nbase-change square with $f$ separated of finite type and\n$g:Y'\\to Y$ arbitrary, and let $K\\in D(X_{\\Proet},A)$ be derived\n$I$-complete whose reductions $K_n$ carry compatible\netale-origin witnesses.\nThen\n\n$$\n\\Ex^{\\mathrm{comp}}_!(K):\nLg^*_{\\mathrm{comp}}Rf_!K\n\\xrightarrow{\\ \\sim\\ }Rf'_!Lg'^*_{\\mathrm{comp}}K\n$$\n\nof [def-cbc-completed-exchange-map] is an isomorphism, natural\nin $K$ and coherent for identities and pasted squares.",
+ "statement": "Let $(A,I)$ satisfy [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$, and use its completed coefficient sheaves $A_T=\\varprojlim_n(P_n)_T$ and categories $D(T_{\\mathrm{proet}},A)=D(\\operatorname{Mod}(A_T))$. Let\n$$\\begin{array}{ccc}X'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\\end{array}$$\nbe a cartesian compact-support square [def-cbc-compact-support-square], with $f$ separated of finite type and $g$ arbitrary. Supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ quasi-compact open and $p$ proper [def-weil-pbc-projection-compactification], and its base change $c'=(j',p')$, with $\\bar g:\\overline X'\\to\\overline X$. Extension by zero for the completed sheaf $A_{\\overline X}$ means the exact localized ringed-site functor of [lem-pur-site-restriction-module-adjunction-exact]; restriction of $A_{\\overline X}$ to $X$ is $A_X$. Put $Rf_!^c=Rp_*j_!$ and $Rf'_!^{c'}=Rp'_*j'_!$.\nLet $K\\in D(X_{\\mathrm{proet}},A)$ be derived $I$-complete [def-weil-pbc-intrinsic-completion], and equip its reductions $K_n$ with compatible witnesses $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}K_n$, $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness]. Then the completed compact-support exchange intended by [def-cbc-completed-exchange-map], explicitly the ordered composite\n$$\\begin{aligned}\n\\operatorname{Ex}^{\\mathrm{comp},c}_!(K):Lg^*_{\\mathrm{comp}}Rp_*j_!K\n&\\xrightarrow{\\operatorname{Ex}^{\\mathrm{comp}}_{p,j_!K}}Rp'_*L\\bar g^*_{\\mathrm{comp}}j_!K\\\\\n&\\xrightarrow{Rp'_*(\\beta_{j,K})}Rp'_*j'_!Lg'^*_{\\mathrm{comp}}K,\n\\end{aligned}$$\nwhere $Lg^*_{\\mathrm{comp}}$ is [def-weil-pbc-completed-pullback] and $\\beta$ is the canonical comparison intended by [lem-cbc-completed-extension-zero-comparison], is an isomorphism. Specify the open comparison by the ordered maps\n$$L\\bar g^*_{\\mathrm{comp}}j_!K\\cong\\operatorname{Rlim}(G_{\\bar g}j_!K_\\bullet)\\xrightarrow{\\operatorname{Rlim}(\\beta_\\bullet)}\\operatorname{Rlim}(j'_!G_{g'}K_\\bullet)\\cong j'_!Lg'^*_{\\mathrm{comp}}K,$$\nusing the canonical finite-reduction and extension/derived-limit comparisons and the open unit-mate $\\beta_\\bullet$ of [lem-cbc-strict-tower-proper-open-calculus], after restriction to constant $A$ coefficients as in [lem-weil-pbc-constant-completion-equivalence]. The last arrow is the inverse of the canonical $j'_!$ derived-limit comparison. It is natural in $K$, agrees under the canonical compactification comparisons, is the identity for identity base changes, and satisfies horizontal and vertical pasting after inserting the canonical composition identifications. For vertical pasting, compactifications of both morphisms and their composite are supplied, as in [thm-cbc-finite-torsion]. Thus it defines the asserted compactification-independent exchange $Lg^*_{\\mathrm{comp}}Rf_!K\\xrightarrow{\\sim}Rf'_!Lg'^*_{\\mathrm{comp}}K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
   "place": "node thm-cbc-complete-proetale, order 1589"
  },
  "stmt_deps": [
   "def-weil-pbc-adic-coefficient-datum",
-  "def-cbc-completed-exchange-map",
   "def-cbc-compact-support-square",
+  "def-weil-pbc-projection-compactification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-intrinsic-completion",
   "def-weil-pbc-etale-origin-witness",
-  "def-weil-pbc-scheme-conventions"
+  "def-cbc-completed-exchange-map",
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-completed-extension-zero-comparison",
+  "thm-cbc-finite-torsion",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-constant-completion-equivalence"
  ],
  "proof": [
   {
-   "text": "Choose a compactification $c=(j,p)$ of $f$ and its base change\n$c'$; the composite defining\n[def-cbc-completed-exchange-map] consists of two\nisomorphisms: the completed proper base change\n[thm-weil-pbc-complete-proetale] applied to the proper $p$\n(the hypotheses hold: $j_!K$ is derived $I$-complete by the\nexactness of [lem-cbc-proetale-extension-zero], and its\nreductions $j_!K_n$ carry the witnesses $j_!L_n$ if the\nwitnesses of $K$ are $L_n$), and the completed\nextension-by-zero comparison\n[lem-cbc-completed-extension-zero-comparison]. Hence\n$\\Ex^{\\mathrm{comp}}_!(K)$ is an isomorphism, and it is\nindependent of the compactification and natural by the corresponding\nproperties of the two factors (the coherence of\n[def-cbc-exchange-map] and of the completed map of\n[thm-weil-pbc-complete-proetale], with the compatibility of the\ncomparisons of [def-compact-support-direct-image-detailed] with the\ncompleted maps).",
+   "text": "Fix $c$ and its base change. The localized-site identification supplies the ringed-site extension functor for $A_{\\overline X}$. Restriction to the open site is evaluation on objects lying over $X$, so it commutes with limits and identifies $A_{\\overline X}|_X=\\varprojlim_n(P_n)_X=A_X$. The localized module lemma gives exactness and the adjunction for these actual sheaves of rings; we do not apply the finite-constant-coefficient extension lemma to $A_{\\overline X}$. All four operations below consequently have the completed-coefficient types written in the statement.",
    "uses": [
-    "def-cbc-completed-exchange-map",
-    "thm-weil-pbc-complete-proetale",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-completed-extension-zero-comparison",
-    "def-cbc-exchange-map",
-    "def-compact-support-direct-image-detailed"
+    "def-cbc-compact-support-square",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-adic-coefficient-datum"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AE (definition-extension-zero), 03DI and 03DJ (sites-modules.tex, extension by zero and exactness)"
+   }
+  },
+  {
+   "text": "For each $n$, choose a bounded finite-projective $A$-resolution of $P_n$, possible by the perfectness hypothesis. The flat constant-to-completed comparison identifies its scalar extension to $A_{\\overline X}$ with $(P_n)_{\\overline X}$. Apply the open-piece tensor comparison to obtain\n$$(j_!K)\\otimes^L_{A_{\\overline X}}(P_n)_{\\overline X}\\xrightarrow{\\sim}j_!(K\\otimes^L_{A_X}(P_n)_X)=j_!K_n.$$\nThe projection map is natural in the coefficient complex. Thus quotient maps give commuting squares for these identifications, independent of the chosen perfect resolutions, and identify the strict reduction tower with $j_!K_\\bullet$. For its finite levels use the exact finite-coefficient extension functor. Apply its site-comparison isomorphism degreewise to the witness: $\\nu_{\\overline X}^*(j_!^{\\mathrm{et}}L_n)\\simeq j_!^{\\mathrm{proet}}K_n$. For the etale witness use the separate etale extension-exactness lemma: $H^r(j_!^{\\mathrm{et}}L_n)=j_!^{\\mathrm{et}}H^r(L_n)$, because an exact functor preserves the kernels and images defining cohomology. Hence the lower bound for each $L_n$ is preserved. Naturality and restriction-of-scalars compatibility make these witnesses compatible with transitions. No common bound in $n$ or constructibility is used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lemma-weil-pbc-projection-formula-open-piece",
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AF (lemma-jshriek-comparison), 099M (lemma-naive-completion); ringed open-piece tensor formula as specified by the cited node"
+   }
+  },
+  {
+   "text": "The limit-preservation input is elementary from existing nodes. For a small diagram $F_a$ of $A_X$-modules put $M=\\lim_a j_!F_a$ and let $i:Z\\hookrightarrow\\overline X$ be the reduced closed complement. The immersion limit theorem and $j^{-1}j_!=1$, $i^{-1}j_!=0$ give $j^{-1}M=\\lim_aF_a$ and $i^{-1}M=0$. The ringed open/closed exact sequence for $M$ therefore identifies its counit $j_!\\lim_aF_a\\to M$ with an isomorphism. This is the canonical limit comparison, since its composites with all projections are the counits for $j_!F_a$. The quasi-compactness hypothesis required by the ringed open/closed node holds for $j$. This proves the needed instance of Tag 09BP without a new node. Countable products of pro-etale modules are exact, and their termwise complex products represent derived products. The preservation of all small limits established above includes these countable products, so $j_!$ preserves the product complexes used below. Here is a canonical extension/derived-limit comparison, rather than an arbitrary isomorphism between two Roos triangles. Realize both tower categories as modules on their small diagram sites; the K-injective resolution theorem then applies. Represent a strict tower by a K-injective tower complex $I_\\bullet$, and choose a K-injective resolution $q:j_!I_\\bullet\\to J_\\bullet$ in the target tower category. The underived limit identification gives the map\n$$c:j_!\\lim I_\\bullet\\cong\\lim j_!I_\\bullet\\xrightarrow{\\lim q}\\lim J_\\bullet.$$\nFor any tower complex $C_\\bullet$ write $P_C=\\prod_n C_n$, $h_C=1-s_C$, and $R(C)=\\operatorname{Cone}(h_C)[-1]$, with differential $d(y,x)=(-dy-h_Cx,dx)$. The map $\\eta_C:\\lim C\\to R(C)$ is $(0,\\iota_C)$. The cited K-injective Roos theorem says $\\eta_I$ and $\\eta_J$ are quasi-isomorphisms. Since $j_!$ is exact and preserves the products, $j_!\\eta_I$ identifies with $\\eta_{j_!I}$ and is also a quasi-isomorphism. The map $R(q)$ is the diagonal $(y,x)\\mapsto((\\prod q_n)y,(\\prod q_n)x)$. Products preserve quasi-isomorphisms, so its two product components are isomorphisms in the derived category, and the triangle-isomorphism lemma makes $R(q)$ a quasi-isomorphism. The square $\\eta_J(\\lim q)=R(q)\\eta_{j_!I}$ commutes by the formulas $(0,\\iota)$ and the limit projections. Hence $c$ is an isomorphism. The same formulas commute with maps of representatives. The K-injective Hom/localization bijection lifts a derived map to a map into a K-injective representative, uniquely up to homotopy. Additive functors and the diagonal cone construction preserve these homotopies, so the construction is natural on the derived category; applying this to resolution comparison maps identifies the choices. Thus $c:j_!\\operatorname{Rlim}\\to\\operatorname{Rlim}j_!$ is a natural specified comparison, not a cone map selected from the triangulated axioms.\nDerived completeness and Koszul/quotient reconstruction now give\n$$j_!K\\xrightarrow{\\sim}j_!\\operatorname{Rlim}K_\\bullet\\xrightarrow{c}\\operatorname{Rlim}j_!K_\\bullet=\\operatorname{Rlim}(j_!K)_\\bullet.$$\nThe last identification is step 2. On the signed Roos representatives the completion map is $(0,u)$, where $u$ is the compatible family of quotient maps. The product comparison sends $j_!u$ to the family of extended quotient maps, and the diagonal cone map sends $(0,j_!u)$ to $(0,(\\prod q_n)j_!u)$. This is exactly the completion unit after the resolution of the extended tower. (The convention $(u,0)$ in intrinsic completion is identified with this one by $(y,x)\\mapsto(x,-y)$.) Reconstruction identifies it with the Koszul unit. Therefore $j_!K$ is derived complete.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-derived-limit-roos-complex",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-pbc-intrinsic-completion",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BP (lemma-j-shriek-limits), 099M (lemma-naive-completion)"
+   }
+  },
+  {
+   "text": "Apply completed proper base change to $p$ and $j_!K$. Properness is part of $c$, completeness is step 3, and the bounded-below compatible etale-origin witnesses for every reduction are step 2. The first arrow in the statement is therefore an isomorphism. The direct-image/limit theorem also makes $Rp_*j_!K=Rf_!^cK$ complete, so the completed pullback on the left is defined. It identifies the strict reduction tower of this object with $Rp_*^{\\operatorname{Tow}}j_!K_\\bullet$ and gives the same assertions for $p'$ and complete inputs.",
+   "uses": [
+    "thm-weil-pbc-complete-proetale",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9 (theorem-proper-base-change), hypotheses (1)-(3), and Tag 099N (lemma-pushforward-Noetherian-case)"
+   }
+  },
+  {
+   "text": "Use the normalized completed extension-by-zero comparison in the upper open square with vertical arrows $j,j'$ and horizontal arrows $g',\\bar g$. The first comparison in its defining formula is step 2 and the definition of completed pullback; its middle arrow is Rlim of the strict-tower open isomorphism from the new calculus node; the last arrow is the inverse of the extension/Rlim comparison of step 3 for $j'$. Every factor is invertible, giving $\\beta_{j,K}:L\\bar g^*_{\\mathrm{comp}}j_!K\\simeq j'_!Lg'^*_{\\mathrm{comp}}K$, naturally in $K$. The completed-pullback reduction lemma ensures that $Lg'^*_{\\mathrm{comp}}K$ is complete and has reductions $Lg_n'^*K_n$. Step 3 also applies to $j'$ (a base change of the quasi-compact open), so its extension is complete. Applying the functor $Rp'_*$ to $\\beta$ preserves invertibility. The inverse of the displayed two-arrow composite is $(\\operatorname{Ex}^{\\mathrm{comp}}_{p,j_!K})^{-1}\\circ Rp'_*(\\beta^{-1})$. Multiplying in either order cancels adjacent inverse pairs, so this proves the isomorphism assertion for the specified map.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lemma-weil-pbc-completed-pullback-reduction",
+    "def-cbc-completed-exchange-map",
+    "lem-pc-quasi-compact-base-change",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (lemma-pushforward-Noetherian-case), clause (5), and blueprint thm-cbc-complete-proetale, Proof, two-factor composite"
+   }
+  },
+  {
+   "text": "Here is the precise tower realization needed for coherence. Set $M_\\bullet=j_!K_\\bullet$ and work first after restriction to the constant $A$-coefficient tower categories. Extension by zero commutes with this restriction of scalars: its localized presheaf has the same underlying abelian sections before and after restriction, and its scalar action is just restricted along the coefficient map; the same description survives sheafification. Thus the termwise functors on the reduction tower are canonically the constant-$A$ tower functors; the constant-to-completed comparison identifies the derived limits and their units. The specified proper exchange on $M_\\bullet$ is, by strict-tower mate normalization, the mate $E_p^{\\mathcal T}$ of the termwise pullback square, as a morphism in the derived category of strict towers. The strict-tower proper/open calculus supplies the canonical open comparison for the constant ring $A$, even when $A$ is infinite. Apply it to obtain\n$$e^c_\\bullet:G_gR_p^{\\mathcal T}M_\\bullet\\xrightarrow{E_p^{\\mathcal T}}R_{p'}^{\\mathcal T}G_{\\bar g}M_\\bullet\\xrightarrow{R_{p'}^{\\mathcal T}\\beta_\\bullet}R_{p'}^{\\mathcal T}j'_!G_{g'}K_\\bullet.$$\nThe new calculus node normalizes this open comparison as the inverse of the mate of the open-extension unit and the restriction square. It states the construction in the derived strict-tower category and identifies its finite evaluations with the finite-coefficient comparison. Thus this is an actual tower morphism; the finite-coefficient extension lemma is not being applied to the infinite ring $A$. The definitions of completed pullback, completed proper exchange, and the $j'_!$ limit comparison of step 3 identify the map in the statement with $\\operatorname{Rlim}(e^c_\\bullet)$ conjugated by the specified source/target comparisons. At finite $n$ these are precisely the proper mate followed by the open comparison, hence the finite compact-support exchange. This identifies the actual map and does not infer equality of tower maps merely from evaluation.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-completed-pullback",
+    "def-cbc-completed-exchange-map",
+    "prop-weil-pbc-direct-image-limits",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 07A7 (sites-cohomology.tex, remark-base-change), 09BP and 099N; blueprint proof, coefficient-level completed-map compatibility"
+   }
+  },
+  {
+   "text": "Naturality and horizontal pasting hold already for the tower expression of step 6. For $a:K\\to H$, naturality of each mate and of $\\beta$ gives $R_{p'}j'_!G_{g'}(a)\\,e^c_K=e^c_H\\,G_gR_pj_!(a)$. For a second base change $h$, the open mate identity is\n$$\\beta_{gh}=(j''_!c_{g',h'})\\,(\\beta_hG_{g'})\\,(G_h\\beta_g)\\,(c_{g,h}^{-1}j_!),$$\nwhere $c_{g,h}:G_hG_g\\xrightarrow{\\sim}G_{gh}$ denotes the inverse of the cited canonical pullback compositor, applied termwise on the diagram sites. Indeed the strict-tower open comparison is normalized by its adjoint transpose. For the composite and the successive comparisons the transpose is the open-extension unit followed by the same iterated restriction identification; naturality of the unit and the adjunction triangle identities give the same map. The new calculus node supplies this identity in the strict-tower category, before any evaluation. The general mate-pasting lemma applies in these derived tower categories and gives the analogous formula for $E_p^{\\mathcal T}$. Substitute both formulas in $e^c=(R_{p'}\\beta)E_p$; naturality of the proper mate moves the middle $\\beta_g$ past it, leaving exactly\n$$e^c_{gh}=(Rf''_!c_{g',h'})\\,(e^{c'}_hG_{g'})\\,(G_he^c_g)\\,(c_{g,h}^{-1}Rf_!).$$\nFor identity base changes, both square isomorphisms are identities; the identity clause of mate-pasting makes both factors identities. These are equalities of tower transformations. Applying the functor $\\operatorname{Rlim}$ preserves these equalities and compositions, and the canonical comparisons in step 6 give naturality, identity, and horizontal pasting for the completed map.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 07A7 and following remark-compose-base-change-horizontal; the cited generic mate-pasting theorem supplies the identities in tower categories"
+   }
+  },
+  {
+   "text": "Use the common refinement and compatible compactification towers in the two cited existence lemmas. The strict-tower proper/open calculus now applies to every commutative square with proper verticals and quasi-compact open horizontals. In particular, for a refinement of compatible towers, the square $B=(b_1:U_1\\hookrightarrow\\overline X_1,b_2:U_2\\hookrightarrow\\overline X_2,w:U_1\\to U_2,v:\\overline X_1\\to\\overline X_2)$ is of this kind: the compatible-tower statement gives proper $w,v$ and $vb_1=b_2w$. It need not be cartesian and $w$ need not be an identity. The calculus defines its alpha by projection onto the clopen image of $(b_1,w):U_1\\to\\overline X_1\\times_{\\overline X_2}U_2$ and its gamma by the proper-adjunction mate. It supplies normalization, base-change interchange and both composition laws for this square itself, with no factorization assumption. Its normalization clause identifies each finite evaluation, through the specified etale/pro-etale comparisons, with the normalized finite proper/open map. Step 2 supplies the required bounded-below etale-origin inputs; the finite-torsion theorem and finite proper/open coherence node make these evaluated comparisons invertible. The strict-tower comparison is consequently invertible: its cone evaluates to an acyclic complex at every index, and cohomology is levelwise. No faithfulness of derived evaluation is used.\nThe new calculus node supplies the following equality of actual strict-tower maps for any base change of a commutative proper/open square:\n$$(R_{p_1}^{\\mathcal T}\\beta_k)(E_p^{\\mathcal T}k_!)(G_b\\gamma_Q)=(\\gamma_{Q_1}G_d)(i_{1!}E_r^{\\mathcal T})(\\beta_iR_r^{\\mathcal T}).$$\nFor a refinement $u:c_1\\to c_2$, apply $Rp_{2,*}^{\\mathcal T}$ to $\\gamma_Q$, with the proper composition identification, to obtain $C_u:Rf_!^{c_2}\\to Rf_!^{c_1}$. Substitute the displayed equality into $C'_u e^{c_2}$; the proper mate-pasting equation composes the exchanges for $p_2$ and $u$, and the open comparison identifies the remaining factor. The resulting expression is $e^{c_1}G_gC_u$. Hence\n$$C'_u\\,e^{c_2}_\\bullet=e^{c_1}_\\bullet\\,G_gC_u.$$\nThe vertical composition law for $\\gamma$, applied with left proper maps identities, gives $C_{vu}=C_uC_v$ for $u:c_1\\to c_2$, $v:c_2\\to c_3$ and $C_{\\mathrm{id}}=1$. For a common refinement $d\\xrightarrow{u_1}c_1$, $d\\xrightarrow{u_2}c_2$, define $I_{12}=C_{u_2}^{-1}C_{u_1}:Rf_!^{c_1}\\to Rf_!^{c_2}$. To compare two such choices, cofilteredness gives a common dominating compactification and a further refinement equalizing the two pairs of maps to $c_1,c_2$. The formula $C_{vu}=C_uC_v$ then makes both expressions for $I_{12}$ equal after cancelling the common invertible refinement factors. The same calculation for three compactifications gives $I_{23}I_{12}=I_{13}$.\nFor composition $X\\xrightarrow fY\\xrightarrow hZ$, use a compatible tower $X\\xrightarrow a\\overline X\\xrightarrow p\\overline Y\\xrightarrow qZ$, with $Y\\xrightarrow i\\overline Y$, $U=\\overline X\\times_{\\overline Y}Y$, $b:U\\to\\overline X$, $p_Y:U\\to Y$, and $c_X:X\\to U$. The square $(b,i,p_Y,p)$ is cartesian, $bc_X=a$, and $p_Yc_X=f$. Its comparison gives the composition isomorphism\n$$Rh_!Rf_!=Rq_*^{\\mathcal T}i_!R(p_Y)_*^{\\mathcal T}c_{X!}\\xrightarrow{Rq_*^{\\mathcal T}\\gamma_Qc_{X!}}Rq_*^{\\mathcal T}Rp_*^{\\mathcal T}b_!c_{X!}=R(hf)_!.$$\nIn the successive exchange expression first combine the open comparisons for $b,c_X$ into the comparison for $a$. The displayed interchange equation moves the proper exchange for $p_Y$ past $\\gamma_Q$. Then proper mate-pasting combines the exchanges for $p,q$. The resulting two factors are the proper exchange for $qp$ followed by the open comparison for $a$, exactly $e^{hf}$. Therefore, with the above composition isomorphisms,\n$$e^{hf}=(Rh'_!e^f)\\circ(e^hRf_!):G_gRh_!Rf_!\\longrightarrow Rh'_!Rf'_!G_{g_X}.$$\nProper composition here is the ringed-topos derived composition theorem applied to the diagram sites; extension composition is the left adjoint of iterated restriction, normalized by its units. Here is the refinement check for the composition identification. Omit the superscript $\\mathcal T$ in this calculation. For a refinement of towers indexed by $1\\to2$, let $Q_j=(b_j,i_j,p_{Y,j},p_j)$ be their cartesian squares, $B=(b_1,b_2,w,v)$ as above, $H=(c_1,c_2,1_X,w)$, $J=(i_1,i_2,1_Y,u)$ and $F=(a_1,a_2,1_X,v)$. Every one is a commutative proper/open square by the compatible-tower statement. The vertical composition law applied to $B$ above $Q_2$ and to $Q_1$ above $J$ gives, for their identical outer square,\n$$(Rp_{2,*}\\gamma_B)\\circ(\\gamma_{Q_2}Rw_*)=(Ru_*\\gamma_{Q_1})\\circ(\\gamma_JR(p_{Y,1})_*).$$\nHere $p_2v=up_1$ and $p_{Y,2}w=p_{Y,1}$ identify the targets and sources. The horizontal law for $H$ followed by $B$, whose outside square is $F$, gives\n$$(\\gamma_Bc_{1!})\\circ(b_{2!}\\gamma_H)=\\gamma_F.$$\nPut $F_{f,j}=R(p_{Y,j})_*c_{j!}$, $F_{h,j}=Rq_{j,*}i_{j!}$, $F_{hf,j}=R(q_jp_j)_*a_{j!}$, and $D_j=Rq_{j,*}\\gamma_{Q_j}c_{j!}:F_{h,j}F_{f,j}\\to F_{hf,j}$. The refinement maps already constructed are $C_f=R(p_{Y,2})_*\\gamma_H$, $C_h=Rq_{2,*}\\gamma_J$, $C_{hf}=R(q_2p_2)_*\\gamma_F$, all directed from index $2$ to index $1$. Whisker the first displayed equality by $Rq_{2,*}$ and $c_{1!}$, use the second equality, and move $\\gamma_{Q_2}$ past $\\gamma_H$ by naturality. Using $q_2u=q_1$, the result is exactly\n$$C_{hf}\\circ D_2=D_1\\circ(C_hF_{f,1})\\circ(F_{h,2}C_f).$$\nThis is an equality in the derived strict-tower category. Thus the composition identification is unchanged after transport along any refining compatible tower. The common refining tower of the existence lemma and the already proved refinement cocycle remove the choice of compatible tower. Its base change has the same identities, so the vertical exchange equation is independent of that choice as well. The intermediate $Rf_!K$ is complete by steps 3-4 and its finite levels are $Rp_*j_!K_n$; direct-image and open site comparisons give their $D^+$ etale-origin witnesses, allowing the second exchange. Apply the functor $\\operatorname{Rlim}$ to these refinement, cocycle, and vertical equations. The comparisons of step 6 identify their images with the completed maps and composition identifications. Functoriality preserves the equations and inverses, establishing all remaining clauses.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-cbc-compactifiable-compatible-tower",
+    "thm-cbc-finite-torsion",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-tower-category-levelwise-abelian",
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 07A7 and following remark-compose-base-change; blueprint Proof, last sentence, expanded using finite compact-support coherence and strict-tower mates"
+   }
   }
  ],
  "proof_deps": [
-  "def-cbc-completed-exchange-map",
-  "thm-weil-pbc-complete-proetale",
+  "def-cbc-compact-support-square",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lemma-weil-pbc-projection-formula-open-piece",
   "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-pbc-intrinsic-completion",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "thm-weil-pbc-complete-proetale",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-projection-compactification",
   "lem-cbc-completed-extension-zero-comparison",
-  "def-cbc-exchange-map",
-  "def-compact-support-direct-image-detailed"
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "def-cbc-completed-exchange-map",
+  "lem-pc-quasi-compact-base-change",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "thm-cbc-finite-torsion",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-pbc-etale-origin-witness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-complete-proetale.md",
-  "place": "## Proof"
+  "place": "Proof, expanded; literature/stacks-project/proetale.tex Tags 09BP, 099M, 099N, 09C9 and sites-cohomology.tex Tag 07A7 provide the cited interfaces"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*base.?change|base.?change.*completed|compact.?support.*base.?change|derived.?complete",
+   "results": "No hits.; none states completed compact-support exchange.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes, completed compact support base change is an isomorphism for derived adically complete pro etale complexes with etale origin reductions",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, RingHom.Etale.respectsIso, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale; none states completed compact-support exchange.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed compact support base change for derived complete pro etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.IsIso",
+   "results": "AlgebraicGeometry.instIsIsoSchemeMapOfCommRingCat, AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom, AlgebraicGeometry.Scheme.Hom.homeomorph, AlgebraicGeometry.Spec.map_inv, AlgebraicGeometry.Scheme.Hom.isIso_toPshHom, AlgebraicGeometry.Scheme.Hom.isIso_base, AlgebraicGeometry.Scheme.Hom.homeomorph_apply, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; none states completed compact-support exchange.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic compactly supported pushforward commutes with completed inverse image and its exchange transformation satisfies composition and identity coherence",
+   "results": "TopCat.Presheaf.Pushforward.comp_inv_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, CompactlySupportedContinuousMap.compLinearMap, AdicCompletion.map_comp_apply, AdicCompletion.map_comp, SheafOfModules.pushforwardComp_inv_app_val_app, IsAdicComplete.StrictMono.of_comp_lift, TopCat.Presheaf.Pushforward.comp; none states completed compact-support exchange.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +289,139 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-cbc-complete-proetale",
+  "worker": "stage1",
+  "summary": "Repaired C4/E1/E5 by replacing the unsupported two-type/factorization coverage with an intrinsic normalized strict-tower comparison for every commutative proper/open square. Step 8 gives the two precise pasted-square equations and the resulting refinement compatibility of composition. Withdrew the previous false F2 certification, refreshed citations and searches, and corrected new-node metadata.",
+  "blueprint": "Proof, first paragraph: two-factor isomorphism is steps 1-5; final sentence: coefficient/tower comparison and identity/pasting/compactification coherence are steps 6-8. Unit sk-prop-sf-cbc has no proof steps; its complete coefficient-stage clause is realized, without changing its finite-to-complete route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lemma-weil-pbc-projection-formula-open-piece",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "thm-weil-pbc-complete-proetale",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic ringed-site, derived-limit, proper-base-change, or mate-calculus interface used by the indicated proof step; the compact-support unit has no replacement for this tool. The unit route remains finite-level compactification followed by completed limits."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic derived-category product interface used to pass the countable-product preservation of extension by zero to derived products; the compact-support unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "The ringed localization sequence characterizes extension-supported modules and proves limit preservation in step 3. This is a generic tool, with no replacement in the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Closed and open inverse images preserve limits, giving the two restrictions of the limit in step 3. This is a generic tool, with no replacement in the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Realizes the strict-tower categories as ringed sites so the generic proper-composition theorem applies. This is a generic tool, with no replacement in the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the actual proper direct-image compositor on the diagram sites in step 8. This is a generic tool, with no replacement in the compact-support unit."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic geometric base-change stability used to verify the quasi-compact open hypothesis for j-prime in step 5; the compact-support unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-derived-limit-roos-complex",
+    "why": "The natural kernel-to-signed-cone quasi-isomorphism on K-injective towers supplies the canonical extension/Rlim comparison; no arbitrary cone isomorphism is chosen."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "The generic two-out-of-three theorem for morphisms of distinguished triangles verifies that the explicit diagonal Roos comparison is invertible."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The generic canonical compositor fixes the direction of horizontal pasting on the constant-coefficient diagram sites."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic functorial K-injective existence on the ringed diagram sites for the comparison constructed in step 3."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic resolution comparison and homotopy uniqueness, used to descend the explicit comparison of step 3 to the derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lemma-weil-pbc-projection-formula-open-piece",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-koszul-reconstruction",
+  "thm-weil-pbc-complete-proetale",
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "prop-weil-pbc-rlim-functoriality",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-derived-limit-roos-complex",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-790cbfa11",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-790cbfa11 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Corrected step 3’s unsupported sheafification/product inference using its already-proved limit preservation. General-square calculus and refinement equations check out, including the four-point example. Statements remain unchanged; review.md and corrected whole item JSON written. An inherited downstream cycle is reported separately.; 1 file(s) fixed by the reviewer"
+ }
 }
