@@ -15376,3 +15376,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:18 L: merged deliver/E1/Sheaf.Paper.FiniteSplitHypercoverRefinement (stage 3; reviewer PASS; first push; landing 20261016T041811-L-2678814 (interface); batch 20261016T041809; modules 6; new nodes 5)
 - 04:18 L: merged deliver/E2/Sheaf.Paper.FiniteSplitReplacementAttachmentStructure (stage 3; reviewer PASS; first push; landing 20261016T041811-L-2679116 (proof); batch 20261016T041809; modules 1; new nodes 0)
 - 04:18 L: merged deliver/F4/Sheaf.NumberTheory.Padics.CoefficientExtensionFinite (stage 3; reviewer PASS; first push; landing 20261016T041812-L-2679374 (proof); batch 20261016T041809; modules 1; new nodes 0)
+- 04:31 L: returned deliver/G4/Sheaf.Paper.CondensedStratumModelInductionStepNonemptyOpenClosed (reviewer RETURN: (the landing tools, head 45c481ec1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
