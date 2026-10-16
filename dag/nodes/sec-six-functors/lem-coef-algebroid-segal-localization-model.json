@@ -28,104 +28,251 @@
   "def-coef-segal-presheaf-localization",
   "lem-coef-cocomplete-monoidal-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-infinity-presheaf-presentability], applied to the small quasicategories $C$ and $C_\\otimes$ (the total category $C_\\otimes$ is small because $C$ is) and to $D=\\Delta^0$, where evaluation at the unique vertex identifies $P(\\Delta^0)$ with spaces, the categories $P(C)$, $P(C_\\otimes)$ and spaces are presentable. By [lem-coef-space-presheaf-cocompletion], $X\\times-$ has the right adjoint $\\operatorname{Map}(X,-)$. For a small diagram $(Y_i)$ with colimit $Y$ and any space $Z$, $\\operatorname{Map}(X\\times Y,Z)\\simeq\\operatorname{Map}(Y,\\operatorname{Map}(X,Z))\\simeq\\lim_i\\operatorname{Map}(Y_i,\\operatorname{Map}(X,Z))\\simeq\\lim_i\\operatorname{Map}(X\\times Y_i,Z)$, so by the cocone criterion of [lem-coef-infinity-yoneda-presheaf-limits] cartesian product with a fixed space preserves small colimits, in each variable by symmetry. By [lem-coef-infinity-yoneda-presheaf-limits], presheaf colimits are computed pointwise. The Day tensor of [lem-coef-operadic-day-convolution] is separately cocontinuous, hence $P(C)$ is presentably monoidal. These assertions include empty colimits.",
+   "uses": [
+    "lem-coef-infinity-presheaf-presentability",
+    "lem-coef-space-presheaf-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-operadic-day-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 4.9; Chu–Haugseng Remark 6.24; HTT Remark 5.5.3.7"
+   }
+  },
+  {
+   "text": "The labelled spines in [def-coef-segal-presheaf-localization] form a small set of arrows: their labels range over finite lists in the small category $C$. Mapping a spine pushout into $Z$ gives the iterated pullback of edge values over vertex values, by [lem-coef-space-yoneda-density] and the colimit-to-limit formula of [lem-coef-infinity-yoneda-presheaf-limits]. Thus locality for exactly these arrows is exactly the displayed Segal condition, not an extra completeness condition. Apply [lem-coef-presentable-infinity-adjoints] to obtain the presentable reflective category $Q_C$ and its reflector $L_C$.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 4, Segal presheaves and their spine localization"
+   }
+  },
+  {
+   "text": "For the coefficient category let $q:P(C)\\to P^S(C)$ be the small-set reflector furnished by [lem-coef-presentable-infinity-adjoints]. Monoidal compatibility is precisely the condition on tensoring the generators in [def-coef-segal-presheaf-localization]. By [lem-coef-infinity-small-localization-saturation] its inverted arrows are the strongly saturated closure of $S$. For [lem-coef-infinity-reflector-accessibility], use the same small test set $S$: every $S$-local object lies in the right-adjoint image and, by adjunction, tests every $q$-inverted arrow as an equivalence. That criterion makes $rq$ accessible. The generator criterion of [lem-coef-associative-reflective-localization] therefore applies: it makes $q$ strong monoidal and its fully faithful right adjoint $r$ lax monoidal. Only the coefficient category is asserted monoidal here; no internal tensor structure on $Q_C$ is required.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-infinity-small-localization-saturation",
+    "lem-coef-associative-reflective-localization",
+    "lem-coef-infinity-reflector-accessibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definition 8.1; Chu–Haugseng Corollary 7.20"
+   }
+  },
+  {
+   "text": "Fix a small Kan space $X$ and the left-fibration model $\\Delta_X^{\\mathrm{op}}$ of [def-coef-complete-algebroid]. It satisfies the generalized-operad convention of [lem-coef-operadic-algebra-presentability]: its degree-zero fibre is $X$, and its inert transport selects consecutive subtuples of $X^{n+1}$. Its Segal map identifies a tuple with its adjacent pairs glued along the shared vertices; for $n=0$ this is the identity of $X$. To check the incidence axiom, fix a base arrow $\\phi:[m]\\to[n]$ and source and target tuples $a,b$. By the space-transport description [lem-coef-space-transport-classification], the mapping space over $\\phi$ is the space of paths from $\\phi_*a$ to $b$ in $X^{n+1}$. A compatible family of paths on the edges and vertices is exactly one path in each of the $n+1$ coordinates, so its incidence limit is this same path space. For $n=0$ the incidence diagram contains the identity vertex projection. Inert edges mean the cocartesian lifts, not every edge over an inert base map. Thus this operad, including empty $X$, has the full hypotheses required by the Day input. Apply [lem-coef-operadic-day-convolution] to this operad. An algebra $A$ becomes a multiplicative functor $M$ on $\\Delta_X^{\\mathrm{op}}\\times_{\\Delta^{\\mathrm{op}}}C^{\\mathrm{op},\\otimes}$, with $M(x_0,\\ldots,x_n;\\boldsymbol c)=\\prod_i A(x_{i-1},x_i)(c_i)$. Regard this as a family over $X^{n+1}$ and take its total space, using [lem-coef-space-transport-classification], to define\n$$N(A)([n](\\boldsymbol c))=\\int_{X^{n+1}}\\prod_i A(x_{i-1},x_i)(c_i).$$\nTransport along all arrows is supplied by $M$ and by selection or repetition of the vertices; active arrows use its algebra operations, and inert arrows select the indicated sublists. More explicitly, pull the left fibration for $[n]\\mapsto X^{n+1}$ back to $C_\\otimes^{\\mathrm{op}}$; its total category is the displayed fibre product. Unstraighten $M$ there and compose the two left fibrations. Their composite is a left fibration (lift a left horn successively through the two maps), which straightens to the required presheaf. Conversely a presheaf with its vertex map to this tuple family gives the fibre functor by pullback over each tuple. This supplies coherent arrow data, not merely values on objects. Its vertex value is $X$, since the nullary product is a point. Its edge fibres are $A(x,y)$; the displayed products give the Segal equivalences. Conversely for $Z\\in Q_C$ put $X=Z([0])$ and pull $Z([n](\\boldsymbol c))$ back along a specified vertex tuple in $X^{n+1}$. The Segal maps identify this fibre with $\\prod_iH_Z(x_{i-1},x_i)(c_i)$. Straightening these families by [lem-coef-space-transport-classification] gives a functor $M$ on the same fibre product, including active arrows induced by $Z$; the Segal equivalences give precisely its multiplicativity, including contractible vertex fibres. The Day equivalence recovers an algebra $A_Z$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-space-transport-classification",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 5, universal property before Proposition 5.1; explicit construction from fibre families"
+   }
+  },
+  {
+   "text": "The two constructions of step 4 are inverse: on each colour the reconstructed presheaf is $A(x,y)$, with every operation the original operation, by the evaluation and naturality clauses of [lem-coef-operadic-day-convolution]. In the other direction the maps $N(A_Z)([n](\\boldsymbol c))\\to Z([n](\\boldsymbol c))$ are over the identity of $X^{n+1}$ and induce the Segal fibre equivalences. They are equivalences by [lem-coef-spaces-homotopy-fiber-detection]. The pointwise-equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes the comparison an equivalence of coherent presheaves. These maps assemble on every arrow by their construction through the straightening equivalence [lem-coef-space-transport-classification]. Its mapping-space comparison and the Day equivalence show the same inverses on transformations and their higher simplices. Allowing a map of spaces $X\\to X'$ uses pullback of families and the corresponding operad map $\\Delta_X^{\\mathrm{op}}\\to\\Delta_{X'}^{\\mathrm{op}}$; both cited equivalences commute with these. This proves the equivalence of total variable-object categories $\\operatorname{Algd}(P(C))\\simeq Q_C$, with the asserted identifications of objects and homs.",
+   "uses": [
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Propositions 5.1 and 5.3, reconstructed on fibres and transformations"
+   }
+  },
+  {
+   "text": "Write $X=Z([0])$, and $Z_1(c)=Z([1](c))$ viewed over the constant presheaf $X^2$. For the fibre inclusion $u:C\\to C_\\otimes$, extend $c\\mapsto y(u(c))$ cocontinuously using [lem-coef-infinity-presheaf-free-cocompletion]. On a representable $y(c)$, Yoneda gives $\\operatorname{Map}(y(u(c)),Z)\\simeq Z_1(c)\\simeq\\operatorname{Map}(y(c),Z_1)$. Express $\\phi$ as a small colimit of representables by [lem-coef-space-yoneda-density]; mapping out of that colimit converts both sides to the same limit by [lem-coef-infinity-yoneda-presheaf-limits]. Thus the extension is left adjoint to restriction, hence is $J_C$, and $\\operatorname{Map}(J_C\\phi,Z)\\simeq\\operatorname{Map}_{P(C)}(\\phi,Z_1)$. Mapping the defining pushout for $E_C\\phi$ in [def-coef-segal-presheaf-localization] into $Z$, using [lem-coef-infinity-yoneda-presheaf-limits] and [lem-coef-space-yoneda-density], gives\n$$\\operatorname{Map}(E_C\\phi,Z)\\simeq\\operatorname{Map}_{P(C)}(\\phi,Z_1)\\times_{\\operatorname{Map}_{P(C)}(\\phi,\\operatorname{const}X^2)}X^2.$$\nIndeed the shared-boundary term is $\\operatorname{Map}_{\\mathcal S}(a_\\phi,X^2)$, which is the middle denominator by the defining colimit adjunction for $a_\\phi$. The map from $X^2$ sends an endpoint pair to its constant boundary map. The homotopy fibre of this pullback over $(x,y)$ is $\\operatorname{Map}_{P(C)}(\\phi,H_Z(x,y))$, since mapping into a homotopy fibre preserves that limit by the cited mapping-space limit formula. The family/total-space equivalence of [lem-coef-space-transport-classification] now gives exactly the asserted equivalence over $X^2$, natural in $\\phi$ and $Z$. In particular $\\phi=\\varnothing$ gives $X^2$, as required by $E_C(\\varnothing)=v\\amalg v$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corrected Observations 8.6–8.7: fixed endpoints rather than raw fibrewise left Kan extension"
+   }
+  },
+  {
+   "text": "For $s:\\phi\\to\\psi$ the map of step 6 is over the identity of $X^2$; its fibre is $\\operatorname{Map}(\\psi,H_Z(x,y))\\to\\operatorname{Map}(\\phi,H_Z(x,y))$. Thus [lem-coef-spaces-homotopy-fiber-detection] says that $Z$ is local for $E_C(s)$ if and only if each hom fibre is $S$-local. The set of $L_C E_C(s)$ is small. Since $Q_C$ is presentable, [lem-coef-presentable-infinity-adjoints] constructs its reflective localization at this set. The adjunction $L_C\\dashv i_C$ identifies its tests with the tests by $E_C(s)$ in presheaves, so its full local subcategory is exactly $Q_C^S$ of [def-coef-segal-presheaf-localization]. This proves the claimed presentability and universal property, including when $X$ or some fibres are empty.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-presentable-infinity-adjoints",
+    "def-coef-segal-presheaf-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Fibrewise correction of Proposition 8.5"
+   }
+  },
+  {
+   "text": "For each small object space $X$, apply the algebra-adjunction clause of [lem-coef-associative-reflective-localization] to $\\mathcal O=\\Delta_X^{\\mathrm{op}}$ and to $q\\dashv r$ from step 3. It gives $q_*\\dashv r_*$ on algebras with this fixed object space. This assembles to the variable-object adjunction as follows. By [def-coef-complete-algebroid], a morphism from $(X,A)$ to $(Y,B)$ is a map $f:X\\to Y$ together with a transformation $A\\to f^*B$. For each such $f$, the fixed-operad adjunction identifies transformations $q_*A\\to f^*B$ with transformations $A\\to r_*f^*B$. Composition with coefficient functors commutes with precomposition, so $r_*f^*B=f^*r_*B$; naturality under operad restriction in the cited clause makes these equivalences coherent over the space of all $f$. The fibrewise equivalences induce an equivalence on total mapping spaces by [lem-coef-spaces-homotopy-fiber-detection], with the identity on the base $\\operatorname{Map}(X,Y)$; hence they give $q_*\\dashv r_*$ on algebroids, and both functors leave the object space fixed. The coefficient counit is an equivalence, hence its composite with every algebra is an equivalence, so $r_*$ is fully faithful. The full-sub-operad clause of [lem-coef-associative-reflective-localization] identifies its image exactly with algebras whose hom objects are local. Steps 5 and 7 identify this full subcategory with $Q_C^S$, restricting the first equivalence to $\\operatorname{Algd}(P^S(C))\\simeq Q_C^S$. Transporting the adjunction gives a left adjoint to $Q_C^S\\subset Q_C$; its mapping-space universal property identifies it with the reflector in step 7, including the unit. Thus $L_C^S$ fixes the object space and coefficient-reflects each hom.",
+   "uses": [
+    "lem-coef-associative-reflective-localization",
+    "def-coef-complete-algebroid",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Observation 8.4 and corrected Proposition 8.5"
+   }
+  },
+  {
+   "text": "For a presentably monoidal $\\mathcal V$ choose the tensor-closed small category $C$ of $\\kappa$-compact objects provided by [lem-coef-monoidal-compact-generators], with strong monoidal dense inclusion $j$. The Yoneda extension theorem in [lem-coef-operadic-day-convolution] supplies a colimit-preserving strong monoidal $q:P(C)\\to\\mathcal V$ whose right adjoint is restricted Yoneda $R$. This $R$ is fully faithful and preserves $\\kappa$-filtered colimits by the compact density theorem. Consequently $Rq$ is accessible: $q$ preserves all colimits and $R$ preserves these filtered colimits. By [lem-coef-accessible-localization-small-generators], $q$ is generated by a small set $S$ and $\\mathcal V\\simeq P^S(C)$. Since $q$ is strong monoidal, tensoring any generator with any presheaf on either side is still inverted by $q$; hence $S$ is monoidally compatible by [def-coef-segal-presheaf-localization]. The monoidal localization property of [lem-coef-associative-reflective-localization] identifies the descended monoidal structure with that of $\\mathcal V$.",
+   "uses": [
+    "lem-coef-monoidal-compact-generators",
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-accessible-localization-small-generators",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-associative-reflective-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Proposition 8.2; Chu–Haugseng Proposition 7.15 and proof of Corollary 7.16"
+   }
+  },
+  {
+   "text": "Temporarily ignore monoidal structures. By [lem-coef-infinity-presheaf-free-cocompletion], a separately colimit-preserving bifunctor $P(C)\\times P(D)\\to\\mathcal E$ is uniquely determined, including transformations, by its restriction to $C\\times D$: extend along Yoneda one variable at a time. Equivalently it is a colimit-preserving functor $P(C\\times D)\\to\\mathcal E$. Under this equivalence $(p,q)$ maps to the external presheaf $p\\boxtimes q$, since this is separately cocontinuous (step 1) and sends $(y(c),y(d))$ to $y(c,d)$. Such a bifunctor descends to $P^S(C)\\times P^T(D)$ precisely if it inverts $s\\boxtimes y(d)$ and $y(c)\\boxtimes t$. To check sufficiency for an arbitrary other argument, express that argument as a small colimit of representables by [lem-coef-space-yoneda-density]; the map in question is then the colimit of maps already inverted, and colimit functors preserve equivalences. For any one of these small-set reflectors $L:\\mathcal A\\rightleftarrows\\mathcal A_S:i$, [lem-coef-infinity-small-localization-saturation] puts its units and all inverted arrows in the strongly saturated closure of $S$. The class of arrows inverted by a cocontinuous $F:\\mathcal A\\to\\mathcal E$ is closed under equivalences, two-out-of-three, retracts, pushouts and small arrow colimits. Thus $F(S)\\subset\\operatorname{Eq}$ implies $F(\\eta):F\\simeq FiL$. Restriction $F\\mapsto Fi$ and precomposition $G\\mapsto GL$ are inverse, including transformations, using this equivalence and the counit $Li\\simeq\\operatorname{id}$. Moreover $Fi$ preserves colimits: for a diagram $D$ in $\\mathcal A_S$, [lem-coef-presentable-infinity-adjoints] computes its colimit as $L\\operatorname{colim}iD$, and $F(\\eta)$ identifies $FiL\\operatorname{colim}iD$ with $F\\operatorname{colim}iD\\simeq\\operatorname{colim}FiD$. This proves the coherent cocontinuous factorization property used to descend in each variable. Applying it to localization of $P(C\\times D)$ at the small set $S\\odot T$ from [def-coef-segal-presheaf-localization], its colimit-preserving functors to every locally small cocomplete $\\mathcal E$ are therefore exactly these bifunctors. This is the universal property of $\\mathcal V\\otimes_{\\mathrm{coc}}\\mathcal W$ in [lem-coef-cocomplete-monoidal-tensor], and identifies its universal bifunctor with $(p,q)\\mapsto q_{S\\odot T}(p\\boxtimes q)$ after coefficient localization.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-small-localization-saturation",
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Lemma 8.3, expanded using free cocompletion and localizations"
+   }
+  },
+  {
+   "text": "Restore monoidal structures. On representables the functor $(c,d)\\mapsto\\mu(q_Sy(c),q_Ty(d))$ is strong monoidal, by [lem-coef-cocomplete-monoidal-tensor] and the strong monoidal reflectors from step 3. Extend by [lem-coef-operadic-day-convolution] to a colimit-preserving strong monoidal $b:P(C\\times D)\\to\\mathcal V\\otimes_{\\mathrm{coc}}\\mathcal W$. By the preceding universal property, $b$ is the localization at $S\\odot T$, since on all external presheaves it is $\\mu(q_Sp,q_Tq)$ (both sides are separately cocontinuous extensions of the same values on representables). It inverts the generators, and because it is strong monoidal it also inverts every generator tensored on either side with any presheaf. Thus $S\\odot T$ is monoidally compatible. By [lem-coef-associative-reflective-localization] the equivalence of step 10 is strong monoidal and identifies the universal coefficient bifunctor with $(p,q)\\mapsto q_{S\\odot T}(r_Sp\\boxtimes r_Tq)$.",
+   "uses": [
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-operadic-day-convolution",
+    "lem-coef-associative-reflective-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Lemma 8.3 and its identification of the universal monoidal bifunctor"
+   }
+  },
+  {
+   "text": "By [lem-coef-algebroid-external-product], $A\\boxtimes B$ has object space $X\\times Y$ and pairs of hom objects. In the unlocalized presheaf case, step 10 identifies $\\mu$ on hom objects with external cartesian product. The formula of step 4 then identifies its nerve at $[n](\\boldsymbol c,\\boldsymbol d)$ with $N(A)([n](\\boldsymbol c))\\times N(B)([n](\\boldsymbol d))$: over the object tuple this is the equality between the product of the two products of hom spaces and the product of their paired hom spaces; taking total spaces commutes with this external product by the family/total-space comparison of [lem-coef-space-transport-classification]. This also identifies operations, since they are the paired operations. Thus the unlocalized model is exactly the external Segal presheaf. In the localized case apply the lax right adjoints to $A,B$, use this same construction, and apply $q_{S\\odot T,*}$. Step 11 identifies its coefficient functor with $\\mu$, and step 8 identifies its nerve with $L_{C\\times D}^{S\\odot T}(i_C^S N(A)\\boxtimes i_D^T N(B))$. This is the claimed $H$. Naturality on all coherent diagrams and canonical maps follows at the level of functors: the Day equivalence is natural in operads and coefficient functors by [lem-coef-operadic-day-convolution], straightening is natural on transformations and pullbacks by [lem-coef-space-transport-classification], and the unit/counit factorization argument in step 10 identifies the localization equivalences on transformations as well as objects. In particular the transported localization maps are the units already identified in step 8, rather than unspecified isomorphisms of objects.",
+   "uses": [
+    "lem-coef-algebroid-external-product",
+    "lem-coef-space-transport-classification",
+    "lem-coef-operadic-day-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Corollary 5.8, Observation 8.4 and corrected Observations 8.6–8.7; canonical maps included"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-segal-presheaf-localization",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-accessible-localization-small-generators",
+  "lem-coef-algebroid-external-product",
+  "lem-coef-associative-reflective-localization",
+  "lem-coef-cocomplete-monoidal-tensor",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-presheaf-presentability",
+  "lem-coef-infinity-reflector-accessibility",
+  "lem-coef-infinity-small-localization-saturation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-monoidal-compact-generators",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-operadic-day-convolution",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-space-presheaf-cocompletion",
+  "lem-coef-space-transport-classification",
+  "lem-coef-space-yoneda-density",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Sections 4, 5, 8; explicit fixed-endpoint fibre correction of Proposition 8.5 and Observations 8.6–8.7; general inputs from HTT and Chu–Haugseng"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Presentably monoidal infinity categories and their algebroids have compatible localized Segal presheaf presentations",
-   "results": "{\"t\": \"2026-10-16T13:33:57Z\", \"tool\": \"leanfinder\", \"query\": \"Presentably monoidal infinity categories and their algebroids have compatible localized Segal presheaf presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"d4b0eb673855776d\"}",
+   "query": "Localized Segal presheaf presentations of algebroids in Day convolution presheaves",
+   "results": "{\"t\": \"2026-10-16T18:19:05Z\", \"tool\": \"leanfinder\", \"query\": \"Localized Segal presheaf presentations of algebroids in Day convolution presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByLeft\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByRight\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.isPointwiseLeftKanExtensionCan\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit\"], \"digest\": \"5df362c9f4cf2f81\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Localization/Monoidal/Basic.lean:36-47 is ordinary categorical localization; Sites/Monoidal.lean:51-55 treats ordinary presheaf enriched Hom. Neither is a Segal-presheaf model of operadic algebroids."
-  },
-  {
-   "tool": "grep",
-   "query": "Segal.*presheaf|presheaf.*Segal|DayConvolution.*Enriched",
-   "results": "{\"t\": \"2026-10-16T13:33:58Z\", \"tool\": \"grep\", \"query\": \"Segal.*presheaf|presheaf.*Segal|DayConvolution.*Enriched\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Localization/Monoidal/Basic.lean:36-47 is ordinary categorical localization; Sites/Monoidal.lean:51-55 treats ordinary presheaf enriched Hom. Neither is a Segal-presheaf model of operadic algebroids."
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
   },
   {
    "tool": "loogle",
-   "query": "\"Enriched\", \"presheaf\"",
-   "results": "{\"t\": \"2026-10-16T13:33:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\"], \"digest\": \"bb962e6d28239b5f\"}",
+   "query": "CategoryTheory.Nerve.strictSegal, CategoryTheory.EnrichedCat, CategoryTheory.MonoidalCategory.DayConvolution",
+   "results": "{\"t\": \"2026-10-16T18:19:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Nerve.strictSegal, CategoryTheory.EnrichedCat, CategoryTheory.MonoidalCategory.DayConvolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Localization/Monoidal/Basic.lean:36-47 is ordinary categorical localization; Sites/Monoidal.lean:51-55 treats ordinary presheaf enriched Hom. Neither is a Segal-presheaf model of operadic algebroids."
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "Segal.*presheaf|algebroid|DayConvolution",
+   "results": "{\"t\": \"2026-10-16T18:19:06Z\", \"tool\": \"grep\", \"query\": \"Segal.*presheaf|algebroid|DayConvolution\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean\"], \"digest\": \"8297fa4513807bc5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
   },
   {
    "tool": "leansearch",
-   "query": "Presentably monoidal infinity categories and their algebroids have compatible localized Segal presheaf presentations",
-   "results": "{\"t\": \"2026-10-16T13:33:59Z\", \"tool\": \"leansearch\", \"query\": \"Presentably monoidal infinity categories and their algebroids have compatible localized Segal presheaf presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.pentagon_aux₃\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\"], \"digest\": \"3dacc238fb4f5bff\"}",
+   "query": "Localized Segal presheaf presentations of algebroids in Day convolution presheaves",
+   "results": "{\"t\": \"2026-10-16T18:19:07Z\", \"tool\": \"leansearch\", \"query\": \"Localized Segal presheaf presentations of algebroids in Day convolution presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.convolution\", \"CategoryTheory.MonoidalCategory.DayConvolution\", \"CategoryTheory.MonoidalCategory.DayFunctor.term_⊛⥤_\", \"CategoryTheory.MonoidalCategory.DayConvolution.mk\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.DayFunctor.η_comp_isoPointwiseLeftKanExtension_hom\", \"CategoryTheory.MonoidalCategory.DayFunctor.instLawfulDayConvolutionMonoidalCategoryStruct\"], \"digest\": \"493b78ac4fafcc8e\"}",
    "date": "2026-10-16",
-   "verdict": "no match: Localization/Monoidal/Basic.lean:36-47 is ordinary categorical localization; Sites/Monoidal.lean:51-55 treats ordinary presheaf enriched Hom. Neither is a Segal-presheaf model of operadic algebroids."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Equivalence between categorical algebras enriched in Day convolution presheaves and local Segal presheaves",
-   "results": "{\"t\": \"2026-10-16T13:34:31Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence between categorical algebras enriched in Day convolution presheaves and local Segal presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivInverse\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquivFunctor\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_functor\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.TransportEnrichment.ofOrdinaryEnrichedCategoryEquiv\"], \"digest\": \"b321dc9b782c85e1\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: Localization/Monoidal/Basic.lean:36-47 is ordinary categorical localization; Sites/Monoidal.lean:51-55 treats ordinary presheaf enriched Hom. Neither is a Segal-presheaf model of operadic algebroids."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Algebroids enriched in monoidal localizations of Day convolution presheaves correspond to Segal presheaves with local hom fibres",
-   "results": "{\"t\": \"2026-10-16T17:16:11Z\", \"tool\": \"leanfinder\", \"query\": \"Algebroids enriched in monoidal localizations of Day convolution presheaves correspond to Segal presheaves with local hom fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"SSet.StrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Sheaf.monoidalCategory\"], \"digest\": \"d8b3224501d126c9\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Enriched\", \"presheaf\"",
-   "results": "{\"t\": \"2026-10-16T17:16:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Enriched\\\", \\\"presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_functorEnrichedHom\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\"], \"digest\": \"bb962e6d28239b5f\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
   },
   {
    "tool": "grep",
-   "query": "Segal.*presheaf|algebroid|enrich.*localiz",
-   "results": "{\"t\": \"2026-10-16T17:16:12Z\", \"tool\": \"grep\", \"query\": \"Segal.*presheaf|algebroid|enrich.*localiz\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "lem-coef-algebroid-segal-localization-model|algebroid|SegalPresheaf",
+   "results": "{\"t\": \"2026-10-16T18:36:33Z\", \"tool\": \"grep\", \"query\": \"lem-coef-algebroid-segal-localization-model|algebroid|SegalPresheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Algebroids enriched in monoidal localizations of Day convolution presheaves correspond to Segal presheaves with local hom fibres",
-   "results": "{\"t\": \"2026-10-16T17:16:13Z\", \"tool\": \"leansearch\", \"query\": \"Algebroids enriched in monoidal localizations of Day convolution presheaves correspond to Segal presheaves with local hom fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayConvolution.mk\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayFunctor.instLawfulDayConvolutionMonoidalCategoryStruct\", \"CategoryTheory.MonoidalCategory.DayConvolution\", \"CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.ofHasDayConvolutions\", \"CategoryTheory.LocalizedMonoidal\", \"CategoryTheory.EnrichedCat\"], \"digest\": \"06298cd67e9be5b8\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
   },
   {
    "tool": "leanfinder",
-   "query": "Reflective coefficient localization of infinity enriched categories preserves the space of objects",
-   "results": "{\"t\": \"2026-10-16T17:16:21Z\", \"tool\": \"leanfinder\", \"query\": \"Reflective coefficient localization of infinity enriched categories preserves the space of objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.LeftFraction.Localization.Q_obj\", \"CategoryTheory.CatEnrichedOrdinary.toBase\", \"CategoryTheory.ForgetEnrichment\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Localization.Construction.objEquiv_apply\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\", \"CategoryTheory.EnrichedCat.of\"], \"digest\": \"db5906c296bc9242\"}",
+   "query": "Hom fibrewise local Segal presheaves model infinity algebroids enriched in a monoidal localization of presheaves",
+   "results": "{\"t\": \"2026-10-16T18:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"Hom fibrewise local Segal presheaves model infinity algebroids enriched in a monoidal localization of presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.presheafHom\", \"SSet.QCat\", \"SSet.StrictSegalCore\", \"CategoryTheory.Pseudofunctor.presheafHom_obj\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"cc5793a008979790\"}",
    "date": "2026-10-16",
-   "verdict": "no match: read StrictSegal.lean:42-60 (set-valued strict Segal data), Enriched/Basic.lean:58-70 (ordinary enriched categories), Sites/Monoidal.lean:51-55 (ordinary enriched presheaf Hom), Localization/Monoidal/Basic.lean:36-47 (ordinary monoidal localization), and Monoidal/DayConvolution.lean:61-89 (ordinary Day convolution). None gives the labelled space-valued Segal construction, fixed-endpoint localization or operadic infinity-algebroid equivalence; no one-line specialization applies."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Categorical algebras enriched in Day convolution presheaves equivalent to Segal objects with local hom objects",
-   "results": "{\"t\": \"2026-10-16T17:28:05Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical algebras enriched in Day convolution presheaves equivalent to Segal objects with local hom objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByRight\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.corepresentableByLeft\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"dcaced1ee3065e6e\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
-  },
-  {
-   "tool": "grep",
-   "query": "Algd|SegalPresheaf|cocompleteTensor|freeEdge|changeOfEnrichment",
-   "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"grep\", \"query\": \"Algd|SegalPresheaf|cocompleteTensor|freeEdge|changeOfEnrichment\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Segal\", \"colimit\"",
-   "results": "{\"t\": \"2026-10-16T17:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Segal\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. StrictSegal.lean:42-60 is set-valued strict Segal data; Quasicategory/StrictBicategory.lean:16-32,54-59 uses ordinary Cat enrichment; Enriched/Basic.lean:58-70 is ordinary enrichment; DayConvolution.lean:61-89 and ExternalProduct/KanExtension.lean:50-61 concern ordinary Kan extensions; Presentable/Basic.lean:170-179 concerns filtered-colimit preservation by coyoneda; Monoidal/Transport.lean:47-89 transports an ordinary monoidal structure. None states these operadic infinity-category constructions or the required preservation of all small colimits."
+   "verdict": "no match: ordinary DayConvolution.lean:61-89, strict set-valued Segal data, ordinary Cat enrichment, and ordinary presheafHom do not model operadic infinity algebroids with fixed-endpoint local hom fibres."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-bilinear-colimits",
@@ -133,5 +280,29 @@
   "group": "Q05"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-segal-localization-model",
+  "worker": "stage1",
+  "summary": "Twelve-step proof constructing both directions of the Segal equivalence, computing free-edge maps over fixed endpoints, deriving fibrewise locality and coefficient reflection, and proving tensor presentations from free cocompletion. Five general statement-only inputs replace proposed restatements of the conclusion. The original corrected statement is preserved. Second reading removes duplicate free-cocompletion and saturation clauses, reuses existing nodes, and writes the Kan-extension and cocontinuous-factorization arguments explicitly. Server preflight exposed a new reverse dependency from enrichment-change-adjunction; step 8 now derives the variable-object adjunction from the general fixed-operad monoidal-localization adjunction, eliminating that cycle. Landing-refusal repair against returned dd63bb3d86: reread the current operadic-algebra-presentability statement and full dependency list, clarified both helper conventions, and checked the generalized-operad incidence axiom for the concrete tuple left fibration in step 4, including degree zero and empty object space. Revalidated all current dependency statements and literal quotations; no target statement or route changed.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: enriched tensor cocontinuity underlying the finite-coefficient mapping-complex adjunction before R lim.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 5 uses only its pointwise-equivalence criterion for coherent functor categories. No statement in the coefficient unit supplies that generic criterion; this does not replace a step of the six-functor route. This is a proposed tool use for the maintainer to judge (SETUP.md fourth claims/tool-use decision)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-dfd4b7c0a",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-dfd4b7c0a (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, all 15 cited statements, the unit, the main-20261015 ancestor, and Haugseng 2311.13362 sections 5 and 8 (online). Source error confirmed: Prop. 8.5 tests locality on the total edge presheaf and Obs. 8.7 uses the bare edge J(phi); both are wrong. Counterexamples: C terminal with S={empty->pt}, and Map(J(empty),Z)=pt where X^2 is needed. The item's corrected hom-fibre and fixed-endpoint statement is right and was left unchanged. I checked steps 1-12: the generalized-operad axioms for Delta_X^op including n=0 and empty X; the pushout calculation Map(E phi,Z)=Map(phi,Z_1) x_{Map(phi,const X^2)} X^2 with phi=empty giving X^2; fibre detection over identity bases; the variable-object adjunction; the compact presentation; and the S odot T universal property. One duplicate repaired (C5): new lem-coef-space-presheaf-cocompletion restated that P(K) is presentable for every small infinity category K, which is the existing lem-coef-infinity-presheaf-presentability. That node is narrowed to cartesian closedness of spaces only, and item step 1 now cites the existing node and writes out the X x - colimit argument; proof_deps re-unioned. The Day node's opening sentence overlaps lem-coef-monoidal-yoneda-embedding, which sits at a different universe level; I accepted this as notation and noted it. The other four new nodes are true, general and not duplicates. No cycles. Tool use lem-cbc-enhanced-functor-cone-calculus accepted for the pointwise-equivalence criterion in step 5.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-weil1",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-weil-final-rationality"
+  ]
  },
  "kind": "statement",
  "title": "Weil conjectures I: rationality and Euler product",
@@ -13,28 +15,131 @@
   "place": "node sk-thm-weil1, order 3269"
  },
  "stmt_deps": [
-  "sk-def-zeta"
+  "sk-def-zeta",
+  "def-weil-polynomial-ring",
+  "def-weil-formal-power-series",
+  "def-weil-rational-power-series",
+  "def-weil-finite-type-morphism",
+  "def-weil-point-counts-zeta"
  ],
  "proof": [
   {
-   "text": "Combine the rationality of [sk-thm-rationality] with the closed-point\nproduct and the integrality of [sk-prop-euler].",
+   "text": "Apply [sk-thm-rationality] to the given $X_0$. Its hypotheses are exactly that $X_0$ is quasi-compact and locally of finite type over $\\Fq$, as assumed here; no separatedness, smoothness or properness is needed. It supplies $A,B\\in\\Z[T]$ with $B(0)=1$ and $B(T)Z(X_0,T)=A(T)$ in $\\Q[[T]]$, and also $Z(X_0,T)\\in\\Q(T)\\cap(1+T\\Z[[T]])$. Thus the integral polynomial presentation and the rationality-and-integrality clause of the statement hold. The order of the two sets in the intersection does not affect membership.",
    "uses": [
     "sk-thm-rationality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/sk-thm-weil1.proof.md",
+    "place": "The sole proof paragraph, first clause: Combine the rationality of [sk-thm-rationality]."
+   }
+  },
+  {
+   "text": "For $X_0$ of finite type the zeta series of [sk-def-zeta] and of [def-weil-point-counts-zeta] coincide. Both are $\\exp(\\sum_{n\\geq1}N_nT^n/n)$ with $N_n=\\#\\operatorname{Hom}_{\\Fq}(\\operatorname{Spec}\\mathbf F_{q^n},X_0)$. The field $\\mathbf F_{q^n}$ is the splitting field of $T^{q^n}-T$ over $\\Fq$ in the first and the subfield of $k$ with $q^n$ elements in the second; these are isomorphic $\\Fq$-algebras, so the two Hom sets are in bijection. The convention of [sk-def-zeta] that $N_n=0$ when the set is infinite never applies, since [def-weil-point-counts-zeta] states that these sets are finite for finite-type $X_0$. Both nodes define $\\deg(x)=[\\kappa(x):\\Fq]$. Thus the notation in the item and in [prop-euler-product] refers to the same series and degrees. Apply [prop-euler-product] with $Y_0=X_0$, again using precisely the finite-type hypothesis. Its displayed consequence gives $Z(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}\\in1+T\\mathbf Z[[T]]$, where $|X_0|$ denotes the closed points and $\\deg(x)=[\\kappa(x):\\Fq]$ as in the statement. The cited proposition states that this product is coefficientwise locally finite, so the displayed identity is an identity of formal series in $\\Q[[T]]$, as required. Together with the first step, this proves every assertion.",
+   "uses": [
+    "prop-euler-product",
+    "sk-def-zeta",
+    "def-weil-point-counts-zeta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/sk-thm-weil1.proof.md",
+    "place": "The sole proof paragraph, second clause: with the closed-point product and the integrality of [sk-prop-euler]; the existing node prop-euler-product realizes that unit."
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-rationality"
+  "sk-thm-rationality",
+  "prop-euler-product",
+  "sk-def-zeta",
+  "def-weil-point-counts-zeta"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-weil1/sk-thm-weil1.proof.md",
+  "place": "Sole proof paragraph; expanded as two applications of the existing statements, with hypotheses and the coefficientwise interpretation made explicit."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zetaSeries_rational|zetaSeries_eq_tprod|zeta.*rational|[Ee]uler.*product",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean:80: eulerProduct fun p : HeightOneSpectrum (𝓞 K) ↦",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned analytic zeta/Euler products, partition series, or general Laurent/power-series results do not assert the scheme point-count rationality and closed-point product"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationality and closed point Euler product of the zeta function of a scheme of finite type over a finite field",
+   "results": "riemannZeta_eulerProduct_hasProd; riemannZeta_eulerProduct_tprod; riemannZeta_eulerProduct; ArithmeticFunction.LSeries_zeta_eulerProduct_exp_log; riemannZeta_eulerProduct_exp_log; EulerProduct.eulerProduct_completely_multiplicative_tprod; ArithmeticFunction.IsMultiplicative.eulerProduct_tprod; ArithmeticFunction.IsMultiplicative.eulerProduct_hasProd",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned analytic zeta/Euler products, partition series, or general Laurent/power-series results do not assert the scheme point-count rationality and closed-point product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The point-count zeta series of a finite type scheme over a finite field is rational with an integral numerator and denominator of constant coefficient one and has a closed-point Euler product",
+   "results": "NumberField.dedekindZeta; Polynomial.cardPowDegreeIsAdmissible; Nat.Partition.hasProd_powerSeriesMk_card_countRestricted; riemannZeta_eulerProduct; EulerProduct.summable_and_hasSum_smoothNumbers_prod_primesBelow_geometric; ArithmeticFunction.LSeries_zeta_mul_Lseries_moebius; EulerProduct.summable_and_hasSum_factoredNumbers_prod_filter_prime_geometric; Nat.Partition.powerSeriesMk_card_restricted_eq_tprod",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned analytic zeta/Euler products, partition series, or general Laurent/power-series results do not assert the scheme point-count rationality and closed-point product"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, PowerSeries",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dwork theorem Hasse Weil zeta function is a rational formal power series over the integers for every finite type scheme over a finite field",
+   "results": "LaurentSeries.exists_powerSeries_of_memIntegers; LaurentSeries.mem_integers_of_powerSeries; LaurentSeries.exists_Polynomial_intValuation_lt; Polynomial.existsUnique_hilbertPoly; LaurentSeries.exists_ratFunc_val_lt; PadicInt.mahlerSeries; LaurentSeries.RatFuncAdicCompl; Polynomial.coeff_mul_invOneSubPow_eq_hilbertPoly_eval",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned analytic zeta/Euler products, partition series, or general Laurent/power-series results do not assert the scheme point-count rationality and closed-point product"
+  },
+  {
+   "tool": "grep",
+   "query": "Dwork|Hasse.Weil|zetaSeries|zeta.series",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hasse Weil zeta series of a finite type scheme is a quotient of integer polynomials with denominator constant coefficient one",
+   "results": "NumberField.dedekindZeta; LaurentSeries; PowerSeries.IsWeierstrassDivisorAt.isUnit_shift; LaurentSeries.instIsFractionRingPowerSeries; Polynomial.IsDistinguishedAt.algEquivQuotient; ArithmeticFunction.LSeries_zeta_eq; PowerSeries.IsWeierstrassDivisorAt; HurwitzZeta.hasSum_hurwitzZeta_of_one_lt_re",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned analytic zeta/Euler products, partition series, or general Laurent/power-series results do not assert the scheme point-count rationality and closed-point product"
+  },
+  {
+   "tool": "loogle",
+   "query": "zetaSeries",
+   "results": "No hits.; loogle: unknown identifier 'zetaSeries'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*zeta|zeta.*rational|closed.point.*product|pointCount",
+   "results": "Mathlib/Combinatorics/Configuration.lean; Mathlib/Combinatorics/Configuration.lean; Mathlib/Combinatorics/Configuration.lean; Mathlib/Combinatorics/Configuration.lean; Mathlib/Combinatorics/Configuration.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned partition and exponential power-series results and combinatorial point counts do not assert the scheme zeta theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, RatFunc",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a finite field the exponential generating series of its numbers of rational points is a rational power series and a product over closed points",
+   "results": "Polynomial.cardPowDegreeIsAdmissible; PowerSeries.exp_pow_sum; Nat.Partition.powerSeriesMk_card_restricted_eq_tprod; Polynomial.existsUnique_hilbertPoly; PowerSeries.exp; Nat.Partition.hasProd_genFun; Nat.Partition.multipliable_powerSeriesMk_card_restricted; Nat.Partition.multipliable_powerSeriesMk_card_countRestricted",
+   "date": "2026-10-16",
+   "verdict": "no match: returned partition and exponential power-series results and combinatorial point counts do not assert the scheme zeta theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -64,5 +169,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-weil1"
+ "unit": "sk-thm-weil1",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-weil1",
+  "worker": "stage1",
+  "summary": "Kept the current main-20261015 statement unchanged. The imported proof mentioned Euler product and integrality but its uses/proof_deps omitted the corresponding existing node. Expanded the unit assembly into two fully specified applications of sk-thm-rationality and prop-euler-product, whose statements cover all clauses for an arbitrary finite-type finite-field scheme. No new node is necessary. Added existing definition dependencies for polynomials, formal power series and rational power series. The surviving node prop-euler-product carries the sk-prop-euler unit statement. Checked the Lean candidates: Statement.lean:80 has sorry, while EulerProduct.lean:49 covers only the product; no complete finished attachment. All Mathlib queries were run through msearch, twice by concept. The current blueprint thm-weil-final-rationality is the same statement after its recorded blueprint_update; the older reviewed DAG text has stronger geometric hypotheses and is not used. Second reading explicitly identifies the sketch and detailed point-count definitions in Step 2, adds their existing definition dependency and the finite-type definition, and records independent Mathlib searches.",
+  "blueprint": "The sole paragraph of sk-thm-weil1.proof.md is realized by Step 1 (the cited rationality theorem, including the integral normalized polynomial presentation) and Step 2 (the closed-point product and integrality of the sk-prop-euler unit, via its existing prop-euler-product node). same_as records thm-weil-final-rationality in the current main-20261015 blueprint, not its older smooth-proper DAG statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a5af1f191",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a5af1f191 (reviewer sub-agent of L); spot-checked: I read all of it: the item, unit, report, the eight cited/stmt_deps nodes, the blueprint main-20261015 sec-zeta-weil sources (sk-thm-weil1 _section and proof, thm-weil-final-rationality, sk-thm-rationality, sk-prop-euler, prop-euler-product) and slopmaster2 Statement.lean:74-84. The item statement matches main-20261015 word for word; it assumes only finite type and is not weakened. Step 1 = sk-thm-rationality: same hypotheses, and it supplies A, B, B(0)=1 and Q(T) ∩ 1+TZ[[T]]. Step 2 = prop-euler-product with Y_0 = X_0: its DAG statement equals its blueprint_update and gives the closed-point product, integrality and coefficientwise local finiteness. Together the two steps are exactly the unit's single assembly step, and the route stays inside the unit's cited units (sk-thm-rationality, sk-prop-euler). There are no new nodes, no cycle (only the downstream sk-thm-weil-final cites the item), no tool_uses, and same_as thm-weil-final-rationality is correct. Small cases check out: Spec Fq, Spec F_{q^2}, Spec Fq[ε], A^1 and the empty scheme. The Lean zetaSeries_rational ends in sorry, so leaving it unattached is right. FIX: in step 2 the claim that sk-def-zeta and def-weil-point-counts-zeta have an 'identical formula' is not literally true; the corrected file explains the agreement for finite type: isomorphic F_{q^n}, and the N_n=0-if-infinite convention never applies because def-weil-point-counts-zeta states the sets are finite. The report also mentions a citations.json that is not in the commit; this is minor and changes nothing.; 1 file(s) fixed by the reviewer"
+ }
 }
