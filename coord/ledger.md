@@ -15625,7 +15625,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:16 L: merged deliver/F3/WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek (stage 3; reviewer PASS; first push; landing 20261016T221610-L-1615087 (interface); batch 20261016T221550; modules 1; new nodes 0; change records: coord/changes/proetale-compactif-upper-shriek-withdrawal.md)
 - 22:16 L: merged deliver/F4/WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek (stage 3; reviewer PASS; first push; landing 20261016T221610-L-1615266 (interface); batch 20261016T221550; modules 2; new nodes 1; change records: coord/changes/isLeftAdjoint_rightDerivedLowerStar_of_isProper.md)
 - 22:16 L: merged deliver/H1/Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting (stage 3; reviewer PASS; first push; landing 20261016T221611-L-1615454 (proof); batch 20261016T221550; modules 1; new nodes 0)
-- 22:16 L: merged deliver/H1/WeilConjectures.PoincareDuality.ProjectionFormula (stage 3; reviewer PASS; first push; landing 20261016T221611-L-1615633 (interface); batch 20261016T221550; modules 2; new nodes 0; change records: coord/changes/H1-projection-naturality-tensor-instances.md)
 - 22:16 L: merged deliver/H3/WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs (stage 3; reviewer PASS; first push; landing 20261016T221612-L-1615819 (proof); batch 20261016T221550; modules 1; new nodes 2)
 - 22:16 L: merged deliver/J1/WeilConjectures.Compactification.OverRefinement (stage 3; reviewer PASS; first push; landing 20261016T221612-L-1615939 (proof); batch 20261016T221550; modules 1; new nodes 0)
 - 22:16 L: merged deliver/J2/Sheaf.RingTheory.LciConormalFreeRankCodimension (stage 3; reviewer PASS; first push; landing 20261016T221613-L-1616058 (proof); batch 20261016T221550; modules 1; new nodes 0)
@@ -15661,3 +15660,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:48 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
 
 - 06:50 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu
+
+- 06:51 L: red global build after the upstream sync to slopmaster2 e47efb5a5: this delivery was prepared against the pre-sync library and does not compile against the source (or breaks a modu

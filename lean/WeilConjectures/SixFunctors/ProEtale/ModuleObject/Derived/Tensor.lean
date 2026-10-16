@@ -64,38 +64,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (X : Scheme.{u})
 
-/-- A direct instance of the derived monoidal category on module objects. -/
-noncomputable instance monoidalCategory_derivedModule (Z : Scheme.{u}) :
-    MonoidalCategory
-      (DerivedCategory
-        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
-  Mod.derivedMonoidalCategory
-
-/-- Cache the underlying tensor data without reconstructing the derived coherence proofs. -/
-noncomputable instance monoidalCategoryStruct_derivedModule (Z : Scheme.{u}) :
-    MonoidalCategoryStruct
-      (DerivedCategory
-        (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
-  (monoidalCategory_derivedModule Λ Z).toMonoidalCategoryStruct
-
-/-- Cached fourfold tensor existence for graded module objects. -/
-instance hasTensor4_gradedModule (Z : Scheme.{u})
-    (A B C D : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
-
-/-- Cached compatibility for the first parenthesization of a graded triple tensor. -/
-instance hasGoodTensor12_gradedModule (Z : Scheme.{u})
-    (A B C : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
-
-/-- Cached compatibility for the second parenthesization of a graded triple tensor. -/
-instance hasGoodTensor23_gradedModule (Z : Scheme.{u})
-    (A B C : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
-
 /-- The derived tensor product
 `- ⊗ᴸ_{Λ_X} - : D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_X}) ⥤ D(Mod_{Λ_X})` on the unbounded derived
 category of module objects over the coefficient ring object `Λ_X`: the tensor product of the
