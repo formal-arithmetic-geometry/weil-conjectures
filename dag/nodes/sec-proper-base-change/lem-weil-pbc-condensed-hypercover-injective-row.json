@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-condensed-hypercover-injective-row",
+ "kind": "statement",
+ "title": "Hypercover row descent for an injective internal condensed module",
+ "statement": "Let Lambda be a condensed commutative ring and I an injective internal Lambda_X-module sheaf [def-weil-pbc-condensed-e-module-category]. Let U be a simplicial object over a pro-etale X-object W whose augmentation and matching maps are epimorphisms after represented-sheaf formation. Then restriction from I(W), placed in cochain degree zero, to the extended alternating abelian section row [def-weil-pbc-proetale-abelian-hypercover-augmentation] is a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-abelian-hypercover-augmentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)"
+ },
+ "proof": [
+  {
+   "text": "Use the proved sectionwise/internal module equivalence to reconstruct the coefficient ring sheaf and transport the injective. Its forward functor leaves the underlying abelian sheaf and restriction maps unchanged. Lift the site morphism universe with ULiftHom and transport along the resulting site equivalence, again preserving injectivity.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The represented matching-map epimorphisms give local compatible-boundary lifts. Apply ringed injective hypercover augmentation exactness to obtain injectivity in degree zero and exactness of all alternating section maps. Identify these functions with the underlying abelian section maps, prove the natural single-degree augmentation is a quasi-isomorphism, and extend by zero using the canonical single-complex extension isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-hypercover-injective-augmentation",
+    "lem-weil-pbc-proetale-hypercover-local-lifting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-proetale-hypercover-local-lifting",
+  "lem-weil-pbc-ringed-hypercover-injective-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1); G2 explicit abelian-section construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Alternating hypercover section augmentation for an injective sheaf of internal modules is a quasi isomorphism",
+   "results": "Eight generic injective-resolution results; no internal-module hypercover descent.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"QuasiIso\"",
+   "results": "Twelve generic injective-complex and derivability results, including bounded-below injective-resolution existence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ypercover.*[Ii]njective|[Ii]njective.*[Hh]ypercover",
+   "results": "No Mathlib hits. Project search found proved ringed-module descent but no sectionwise/internal-module equivalence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover augmented section row of an injective internal module sheaf is exact",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedHypercoverInjectiveRow",
+  "file": "lean/Sheaf/Paper/CondensedHypercoverInjectiveRow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedHypercoverInjectiveRow",
+  "statement": "theorem condensedHypercoverInjectiveRow\n    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (X : Scheme.{u}) (W : X.ProEt) (U : SimplicialObject (Over W))\n    (hzero : Epi ((Scheme.ProEt.topology X).yoneda.map (U _⦋0⦌).hom))\n    (hone : ∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧\n      ∃ μ : U _⦋1⦌ ⟶ c.pt,\n        (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧\n        Epi ((Scheme.ProEt.topology X).yoneda.map μ.left))\n    (hhigher : ∀ n : ℕ,\n      ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan,\n        Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt,\n          (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧\n          Epi ((Scheme.ProEt.topology X).yoneda.map μ.left))\n    (I : Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n      (condensedRingObj Λ X)) [Injective I] :\n    QuasiIso (Scheme.ProEt.abelianHypercoverRowAugmentationComplex X W U\n      ((Mod.forget (condensedRingObj Λ X)).obj I))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

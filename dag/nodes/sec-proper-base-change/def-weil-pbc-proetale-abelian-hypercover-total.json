@@ -1,0 +1,102 @@
+{
+ "id": "def-weil-pbc-proetale-abelian-hypercover-total",
+ "kind": "definition",
+ "title": "Abelian section rows and coproduct total of a pro-etale simplicial object",
+ "statement": "For a scheme X, a pro-etale object W and a simplicial object U over W [def-weil-pbc-scheme-conventions], define sections of an abelian sheaf in simplicial degree p to be its sections at U_p. Form the alternating coface cochain complex and extend it by zero to negative simplicial degrees. For an integer cochain complex of abelian sheaves, apply this row construction degreewise, flip the bicomplex and take its coproduct total [def-sp-double-complex-total]. The differential is the alternating restriction differential plus (-1)^p times the coefficient differential.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1); G2 explicit abelian-section construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total complex of a bicomplex preserves colimits and bounded below quasi isomorphisms",
+   "results": "Eight total-complex and degreewise-limit results; no total preservation or bounded-below comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Pp]reserves.*[Cc]olimit|[Cc]olimit.*total",
+   "results": "Two unrelated presentability hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover totalization commutes with colimits and preserves bounded below quasi isomorphisms",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverTotal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianHypercoverTotal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.abelianHypercoverTotal",
+  "statement": "def abelianHypercoverTotal (X : Scheme.{u}) (W : X.ProEt)\n    (U : SimplicialObject (Over W)) :\n    CochainComplex (Sheaf (topology X) AddCommGrpCat.{u + 1}) ℤ ⥤\n      CochainComplex AddCommGrpCat.{u + 1} ℤ",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

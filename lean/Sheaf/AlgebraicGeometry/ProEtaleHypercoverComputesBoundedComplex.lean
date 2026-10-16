@@ -31,7 +31,7 @@ open scoped Simplicial
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-private theorem map_eq_of_boundedBelow_homotopy
+theorem map_eq_of_boundedBelow_homotopy
     {C : Type*} [Category* C] [Abelian C] {D : Type*} [Category* D]
     (H : CochainComplex C ℤ ⥤ D)
     (hH : ∀ (K L : CochainComplex.Plus C) (f : K ⟶ L),

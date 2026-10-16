@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-complex-extension-preserves-colimits",
+ "kind": "statement",
+ "title": "Extension by zero of complexes preserves colimits",
+ "statement": "Let C be a category with zero object and zero morphisms, and let e be an embedding of complex shapes c into c′. For a category J such that C has colimits of shape J, extension of C-valued complexes along e by zero preserves colimits of shape J. In degrees in the range this extension is evaluation at the preimage; in the remaining degrees it is zero. This includes the empty colimit.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Mathlib/Algebra/Homology/HomologicalComplexLimits.lean",
+  "place": "Degreewise colimits of complexes; extension by zero from Mathlib/Algebra/Homology/Embedding/Extend.lean. Existing project proof moved unchanged from ProEtaleModuleCohomologyCoproducts."
+ },
+ "proof": [
+  {
+   "text": "Evaluate the extended complex in a degree in the embedding range. The canonical extension component isomorphisms identify this composite functor with evaluation at the preimage degree. Evaluation preserves colimits of complexes, which are computed degreewise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Outside the embedding range the evaluated extension functor is zero, hence preserves colimits. Degreewise detection of colimit cocones now proves the claim for extension itself, including empty diagrams.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/HomologicalComplexLimits.lean",
+  "place": "Degreewise colimits of complexes; extension by zero from Mathlib/Algebra/Homology/Embedding/Extend.lean. Existing project proof moved unchanged from ProEtaleModuleCohomologyCoproducts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an embedding of complex shapes preserves colimits of cochain complexes",
+   "results": "Eight hits: extension definitions and homology comparison facts, no preservation theorem. Direct project rg found the exact private extension_preservesColimits helper in ProEtaleModuleCohomologyCoproducts.",
+   "date": "2026-10-16",
+   "verdict": "Move and reuse the existing proved helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "Zero hits.",
+   "date": "2026-10-16",
+   "verdict": "Reuse the existing project helper."
+  },
+  {
+   "tool": "grep",
+   "query": "extension_preservesColimits|preservesColimits.*extendFunctor|extendFunctor.*preservesColimits",
+   "results": "Zero Mathlib hits. Direct rg on project Lean found the exact existing private helper and its one internal use.",
+   "date": "2026-10-16",
+   "verdict": "Move its unchanged proof to a shared module; delete both old private copies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an embedding of complex shapes preserves colimits of homological complexes",
+   "results": "Unavailable: Internal Server Error. Executed through msearch.py; the other search kinds and direct project searches were inspected.",
+   "date": "2026-10-16",
+   "availability": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proetale-abelian-hypercover-total-colimits",
+   "place": "Extension by zero preserves colimits in the construction of the abelian hypercover total",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ComplexExtensionColimits",
+  "file": "lean/Sheaf/Algebra/Homology/ComplexExtensionColimits.lean",
+  "declaration": "extension_preservesColimits",
+  "statement": "theorem extension_preservesColimits {C : Type u} [Category.{v} C]\n    [HasZeroObject C] [HasZeroMorphisms C]\n    {ι ι' : Type*} {c : ComplexShape ι} {c' : ComplexShape ι'}\n    (e : c.Embedding c') (J : Type w) [Category.{z} J] [HasColimitsOfShape J C] :\n    PreservesColimitsOfShape J (e.extendFunctor C)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

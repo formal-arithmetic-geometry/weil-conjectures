@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-proetale-abelian-hypercover-total-quasi-iso",
+ "kind": "statement",
+ "title": "Abelian hypercover totals invert bounded-below quasi-isomorphisms",
+ "statement": "Let U be a simplicial object over a pro-etale X-object W with affine weakly contractible terms. A quasi-isomorphism of strictly bounded-below complexes of abelian sheaves is carried by the abelian hypercover total [def-weil-pbc-proetale-abelian-hypercover-total] to a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-abelian-hypercover-total",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)"
+ },
+ "proof": [
+  {
+   "text": "Choose a common strict lower bound. Exact term evaluation makes every nonnegative simplicial column map a quasi-isomorphism; extension isomorphisms identify it with the corresponding bicomplex column.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-evaluation-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Negative simplicial columns are zero, and coefficient terms below the common bound are zero. Apply bounded-below total-column comparison.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-weil-pbc-proetale-abelian-evaluation-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1); G2 explicit abelian-section construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total complex of a bicomplex preserves colimits and bounded below quasi isomorphisms",
+   "results": "Eight total-complex and degreewise-limit results; no total preservation or bounded-below comparison theorem.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"totalFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Pp]reserves.*[Cc]olimit|[Cc]olimit.*total",
+   "results": "Two unrelated presentability hits.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover totalization commutes with colimits and preserves bounded below quasi isomorphisms",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianHypercoverQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.abelianHypercoverTotal_map_quasiIso_of_weaklyContractible",
+  "statement": "theorem abelianHypercoverTotal_map_quasiIso_of_weaklyContractible\n    (haff : ∀ p : ℕ, IsAffine (U _⦋p⦌).left.left)\n    (hweak : ∀ (p : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),\n      Epi f → Function.Surjective (f.hom.app (op (U _⦋p⦌).left)))\n    (E F : CochainComplex.Plus (Sheaf (topology X) AddCommGrpCat.{u + 1}))\n    (f : E ⟶ F) (hf : QuasiIso f.hom) :\n    QuasiIso ((abelianHypercoverTotal X W U).map f.hom)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

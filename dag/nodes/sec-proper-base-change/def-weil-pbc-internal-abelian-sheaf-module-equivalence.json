@@ -1,0 +1,115 @@
+{
+ "id": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+ "kind": "definition",
+ "title": "Internal abelian module sheaves as sectionwise module sheaves",
+ "statement": "Let C be a site with objects and morphisms no larger than the coefficient universe and suppose abelian sheafification exists and its local equivalences are monoidal. For a commutative monoid R in tensor abelian sheaves, reconstruct the commutative section-ring sheaf by multiplication mu(r tensor s) and unit eta(1). The category of internal R-modules is equivalent to the category of sectionwise module sheaves over this ring sheaf. The forward functor preserves the underlying abelian sheaves, section groups and restriction maps identically.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, algebraic structures in a ringed topos"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the internal multiplication and action to construct ordinary section rings and modules. Tensor bilinearity proves distributivity; monoid and module identities prove associativity and unit identities. Naturality gives ring and semilinear restriction maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct inverse presheaf module objects from the bilinear scalar action by the universal property of the tensor product. Componentwise linearity proves full faithfulness and the identity section maps give the presheaf counit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the monoidal sheafification adjunction to module objects. Its underlying unit is the ordinary sheafification unit, invertible when the underlying presheaf already is a sheaf. Full faithfulness follows by tensor-sheafification hom extensionality. This proves essential surjectivity on sectionwise module sheaves and yields the displayed equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, algebraic structures in a ringed topos"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between internal modules in abelian sheaves and sheaves of modules over a sectionwise ring sheaf",
+   "results": "Eight sectionwise-module forgetful and sheafification results; no internal-module equivalence.",
+   "date": "2026-10-16",
+   "verdict": "No match; construct the equivalence from the monoidal sheafification adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"SheafOfModules\"",
+   "results": "Twelve basic presheaf module declarations; no equivalence.",
+   "date": "2026-10-16",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.*SheafOfModules|SheafOfModules.*Mod",
+   "results": "25 scheme-module and sectionwise-module hits; no internal abelian module conversion.",
+   "date": "2026-10-16",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal module objects in abelian sheaves are equivalent to sectionwise sheaves of modules",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/InternalAbelianSheafModuleEquivalence.lean",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence",
+  "statement": "def sectionModuleEquivalence\n    (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R] :\n    Mod (Sheaf J AddCommGrpCat.{u}) R ≌\n      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (sectionRingSheaf J R))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

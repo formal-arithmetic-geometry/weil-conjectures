@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-condensed-hypercover-comparison",
+ "kind": "statement",
+ "title": "Natural bounded-below condensed pushforward hypercover comparison",
+ "statement": "Let Lambda be a condensed commutative ring [def-weil-pbc-condensed-e-module-category], f:X to Y a morphism, q an integer and V an affine weakly contractible pro-etale Y-object. Let U be an affine weakly contractible hypercover of W=X times_Y V. On strictly bounded-below complexes of internal Lambda_X-modules there is a natural isomorphism between evaluation at V of degree-q cohomology of the specified derived pushforward [def-weil-pbc-proetale-operations] and degree-q homology of the underlying abelian hypercover total [def-weil-pbc-proetale-abelian-hypercover-total].",
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-abelian-hypercover-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)"
+ },
+ "proof": [
+  {
+   "text": "Exact evaluation at V gives a natural transformation from ordinary section-complex homology to evaluated derived pushforward cohomology, using the derived functor unit and the defining pushforward section formula. It is invertible on K-injectives.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+    "def-sp-kinjective-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose bounded-below termwise-injective resolutions. Their section augmentations are quasi-isomorphisms by injective-row descent and bounded-below row comparison. The total also inverts bounded-below coefficient quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-condensed-hypercover-injective-row",
+    "lem-weil-pbc-proetale-abelian-hypercover-row-comparison",
+    "lem-weil-pbc-proetale-abelian-hypercover-total-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the resulting four isomorphisms on homology. For a coefficient map, lift it to the K-injective resolutions up to homotopy. The reused bounded-below homotopy-invariance theorem shows that any functor inverting the relevant quasi-isomorphisms identifies homotopic maps. Naturality of the derived unit and augmentation, followed by cancellation of the resolution maps, proves naturality of the assembled comparison.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-bounded-below-homotopy-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "lem-weil-pbc-condensed-hypercover-injective-row",
+  "lem-weil-pbc-proetale-abelian-evaluation-colimits",
+  "lem-weil-pbc-proetale-abelian-hypercover-row-comparison",
+  "lem-weil-pbc-proetale-abelian-hypercover-total-quasi-iso",
+  "lem-weil-pbc-bounded-below-homotopy-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Lemma 5.3(1); G2 explicit abelian-section construction, reusing map_eq_of_boundedBelow_homotopy at its original source module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Alternating hypercover section augmentation for an injective sheaf of internal modules is a quasi isomorphism",
+   "results": "Eight generic injective-resolution results; no internal-module hypercover descent.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"QuasiIso\"",
+   "results": "Twelve generic injective-complex and derivability results, including bounded-below injective-resolution existence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ypercover.*[Ii]njective|[Ii]njective.*[Hh]ypercover",
+   "results": "No Mathlib hits. Project search found proved ringed-module descent but no sectionwise/internal-module equivalence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover augmented section row of an injective internal module sheaf is exact",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedHypercoverComparison",
+  "file": "lean/Sheaf/Paper/CondensedHypercoverComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedHypercover_comparison",
+  "statement": "theorem condensedHypercover_comparison\n    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℤ) (V : Y.ProEt) (hVaff : IsAffine V.left)\n    (hV : ∀ (F G : Sheaf (Scheme.ProEt.topology Y) (Type (u + 1))) (g : F ⟶ G),\n      Epi g → Function.Surjective (g.hom.app (op V)))\n    (U : SimplicialObject (Over ((Scheme.proEtaleBaseChange f).obj V)))\n    (haff : ∀ n : ℕ, IsAffine (U _⦋n⦌).left.left)\n    (hweak : ∀ (n : ℕ) (F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),\n      Epi f → Function.Surjective (f.hom.app (op (U _⦋n⦌).left)))\n    (hzero : Epi ((Scheme.ProEt.topology X).yoneda.map (U _⦋0⦌).hom))\n    (hone : ∃ c : Fan (fun _ : Fin 2 ↦ U _⦋0⦌), Nonempty (IsLimit c) ∧\n      ∃ μ : U _⦋1⦌ ⟶ c.pt,\n        (∀ i : Fin 2, μ ≫ c.proj i = U.δ i) ∧\n        Epi ((Scheme.ProEt.topology X).yoneda.map μ.left))\n    (hhigher : ∀ n : ℕ,\n      ∃ c : Cone (SimplicialObject.matchingBoundaryIndex U n).multicospan,\n        Nonempty (IsLimit c) ∧ ∃ μ : U _⦋n + 2⦌ ⟶ c.pt,\n          (∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = U.δ i) ∧\n          Epi ((Scheme.ProEt.topology X).yoneda.map μ.left)) :\n    let A := Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})\n      (condensedRingObj Λ X)\n    let ev := Mod.forget (condensedRingObj Λ Y) ⋙\n      (sheafSections (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1}).obj (op V)\n    let T := (Mod.forget (condensedRingObj Λ X)).mapHomologicalComplex (.up ℤ) ⋙\n      Scheme.ProEt.abelianHypercoverTotal X ((Scheme.proEtaleBaseChange f).obj V) U\n    Nonempty ((CochainComplex.Plus.ι A ⋙ DerivedCategory.Q ⋙\n      (CondensedRing.lowerStar Λ f).rightDerivedFunctor ⋙\n        DerivedCategory.homologyFunctor _ q ⋙ ev) ≅\n      (CochainComplex.Plus.ι A ⋙ T ⋙\n        HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (.up ℤ) q))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

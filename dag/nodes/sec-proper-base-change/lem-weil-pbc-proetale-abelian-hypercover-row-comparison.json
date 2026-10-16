@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-proetale-abelian-hypercover-row-comparison",
+ "kind": "statement",
+ "title": "Exact abelian section rows imply bounded-below total descent",
+ "statement": "Let J be a strictly bounded-below cochain complex of abelian sheaves on the pro-etale site of X and U a simplicial object over W. If the augmented section row [def-weil-pbc-proetale-abelian-hypercover-augmentation] of every term J^n is a quasi-isomorphism, then the augmentation from the section complex J(W) to its abelian hypercover total [def-weil-pbc-proetale-abelian-hypercover-total] is a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-abelian-hypercover-augmentation",
+  "def-weil-pbc-proetale-abelian-hypercover-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)"
+ },
+ "proof": [
+  {
+   "text": "Use restriction as the augmentation into the zeroth simplicial column. The bicomplex is zero in negative simplicial degrees and below a coefficient lower bound. Identify its transposed single-column maps with the hypothesized augmented rows, then apply bounded-below row augmentation comparison.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-row-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-row-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09A2 and 0946; Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1); G2 explicit abelian-section construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Alternating hypercover section augmentation for an injective sheaf of internal modules is a quasi isomorphism",
+   "results": "Eight generic injective-resolution results; no internal-module hypercover descent.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"QuasiIso\"",
+   "results": "Twelve generic injective-complex and derivability results, including bounded-below injective-resolution existence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]ypercover.*[Ii]njective|[Ii]njective.*[Hh]ypercover",
+   "results": "No Mathlib hits. Project search found proved ringed-module descent but no sectionwise/internal-module equivalence.",
+   "date": "2026-10-16",
+   "verdict": "No exact match; use the explicit constructions and the cited project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercover augmented section row of an injective internal module sheaf is exact",
+   "results": "Unavailable: Internal Server Error.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQcqsPushforwardLocalComparison",
+  "date": "2026-10-16",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Derived pushforward continuity by weakly contractible affine hypercovers",
+   "via": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-local-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianHypercoverRowComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianHypercoverRowComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.abelianHypercoverAugmentation_quasiIso_of_rows",
+  "statement": "theorem abelianHypercoverAugmentation_quasiIso_of_rows\n    (J : CochainComplex.Plus (Sheaf (topology X) AddCommGrpCat.{u + 1}))\n    (hrows : ∀ n : ℤ,\n      QuasiIso (abelianHypercoverRowAugmentationComplex X W U (J.obj.X n))) :\n    QuasiIso ((abelianHypercoverAugmentation X W U).app J.obj)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7fe12",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261016T040116-L-2417209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs against DAG statements, recorded interface changes, original modules, direct importers, and axiom checks."
+ }
+}

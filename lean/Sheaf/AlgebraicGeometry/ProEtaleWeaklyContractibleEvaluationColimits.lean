@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- An affine pro-etale object has a finite covering family refining any covering sieve.
 This follows from quasi-compact refinement of the underlying scheme cover. -/
-private theorem finite_cover_refinement (X : Scheme.{u}) (W : X.ProEt)
+theorem finite_cover_refinement (X : Scheme.{u}) (W : X.ProEt)
     [IsAffine W.left] (S : Sieve W) (hS : S ∈ topology X W) :
     ∃ (I : Type (u + 1)) (_ : Finite I) (V : I → X.ProEt) (f : ∀ i, V i ⟶ W),
       Sieve.ofArrows V f ∈ topology X W ∧ ∀ i, S (f i) := by

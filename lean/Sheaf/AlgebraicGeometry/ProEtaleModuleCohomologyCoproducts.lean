@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.AB
+import Sheaf.Algebra.Homology.ComplexExtensionColimits
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
@@ -54,35 +55,6 @@ private theorem alternating_preservesCoproducts (C : Type u) [Category.{v} C] [P
   exact isColimitOfPreserves _ (colimit.isColimit K)
 
 
-private theorem extension_preservesColimits {C : Type u} [Category.{v} C]
-    [HasZeroObject C] [HasZeroMorphisms C]
-    {ι ι' : Type*} {c : ComplexShape ι} {c' : ComplexShape ι'}
-    (e : c.Embedding c') (J : Type w) [Category.{z} J] [HasColimitsOfShape J C] :
-    PreservesColimitsOfShape J (e.extendFunctor C) := by
-  have heval (n : ι') : PreservesColimitsOfShape J
-      (e.extendFunctor C ⋙ HomologicalComplex.eval C c' n) := by
-    classical
-    by_cases hn : ∃ i, e.f i = n
-    · obtain ⟨i, hi⟩ := hn
-      let iso : e.extendFunctor C ⋙ HomologicalComplex.eval C c' n ≅
-          HomologicalComplex.eval C c i := NatIso.ofComponents (fun K ↦ K.extendXIso e hi)
-            (by
-              intro K L f
-              change (HomologicalComplex.extendMap f e).f n ≫
-                (L.extendXIso e hi).hom = (K.extendXIso e hi).hom ≫ f.f i
-              rw [HomologicalComplex.extendMap_f _ _ hi]
-              simp)
-      exact preservesColimitsOfShape_of_natIso iso.symm
-    · exact Functor.preservesColimitsOfShape_of_isZero _
-        (Functor.isZero _ fun K ↦ K.isZero_extend_X e n (by simpa using hn)) J
-  constructor
-  intro K
-  apply preservesColimit_of_preserves_colimit_cocone (colimit.isColimit K)
-  apply HomologicalComplex.isColimitOfEval
-  intro n
-  have := heval n
-  exact isColimitOfPreserves (e.extendFunctor C ⋙ HomologicalComplex.eval C c' n)
-    (colimit.isColimit K)
 
 private def total_coproduct_isColimit {C : Type u} [Category.{v} C] [Preadditive C]
     [HasCoproducts.{0} C] [HasCoproducts.{s} C]
