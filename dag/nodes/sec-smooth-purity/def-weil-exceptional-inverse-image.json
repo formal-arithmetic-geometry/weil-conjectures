@@ -59,25 +59,29 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.FiniteExceptionalInverseImage",
-  "declaration": "AlgebraicGeometry.Scheme.finiteExceptionalInverseImage",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.finiteExceptionalInverseImage"
-  ],
-  "file": "lean/Sheaf/Paper/FiniteExceptionalInverseImage.lean",
-  "statement": "def finiteExceptionalInverseImage (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (k : Type u) [Field k] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E n) ⥤ proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)",
+  "module": "Sheaf.Paper.ConstructibleExceptionalInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicExceptionalInverseImage",
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalInverseImage.lean",
+  "statement": "abbrev sfIntrinsicExceptionalInverseImage",
   "branch": "newtargets-dag",
-  "by": "Q09",
+  "by": "Q42",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B), intrinsic constant-ring coefficient interface: the current recorded ProEtale.finiteTypeExceptionalInverseImage has fixed-scalar ModuleCat sheaves as source and target, whereas the recorded interval predicate uses intrinsic constant-ring SheafOfModules. This module supplies the same canonical composite nu_X^* f^times Rnu_Y,* in that intrinsic presentation. It uses the published realization equivalence directly, the ordinary-etale right adjoint, and Nagata compactifiability; it assumes no ambient pro-etale adjunction. The narrow realization and comparison imports avoid the redundant extension-by-zero import implicated in the returned duplicate UpperLowerStar declarations. Only finite coefficients are consumed by this item."
+  "note": "Section 1(B), intrinsic finite-coefficient interface. The current recorded Sheaf.Paper.FiniteTypeExceptionalInverseImage returns fixed-scalar sheaves and imports the legacy ProEtale.UpperLowerStar.Defs. The intrinsic constructible-interval and Tor predicates use modules over the constant ring sheaf and the finite-coefficient API, whose UpperLowerStar.Defs has duplicate declaration names. This module spells out the identical canonical composite nu_X^* f^times Rnu_Y,* in the intrinsic presentation, conjugated by the specified finiteCoefficientIntrinsicRealization and its asEquivalence inverse. It imports the comparison module directly, without importing extension by zero. exceptionalInverseImage obtains Nagata compactification and quotient finiteness from the source hypotheses. No alternative arbitrary equivalence, ambient pro-etale adjoint, or preservation assumption is introduced. Higher coefficient stages are not consumed by this theorem.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicExceptionalInverseImage",
+   "WeilConjectures.PurityFiniteSetting.ringFinite",
+   "WeilConjectures.PurityFiniteSetting.coefficientFinite",
+   "WeilConjectures.PurityFiniteSetting.exceptionalInverseImage"
+  ],
+  "fixed_by": "NT-stage2-Codex-3d2a3c907"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-abd1ba976",
-  "group": "Q09",
-  "result": "pass",
-  "note": "Reviewed immutable files, all statement dependencies, sources, canonical constructions, universes, edge cases, and report. Both Lean files passed all five scompile.py checks without diagnostics. review.md written; branch unchanged."
+  "reviewer": "NT-stage2-Codex-3d2a3c907",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Statements, dependencies, sources, universes and edge cases checked. Reused the published intrinsic exceptional functor through transparent aliases; preservation statement unchanged. All four original and corrected modules passed scompile.py without diagnostics. Branch head unchanged."
  }
 }

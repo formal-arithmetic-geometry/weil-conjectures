@@ -19,7 +19,8 @@
   "def-sbc-affine-space",
   "def-exc-open-complement-bound",
   "def-weil-constructible-intervals",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-chart-cover"
  ],
  "proof": [
   {
@@ -381,5 +382,26 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-363f9299c (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, source theorem, all 30 cited dependencies and cited source locations. The repaired typed base-change, etale/pro-etale transport, chartwise bounds, empty-chart case, constructibility gluing, and arbitrary-sheaf Tor argument are correct. No new nodes, duplicates, cycles, or weakened targets; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityGeneralAdmissibility",
+  "declaration": "WeilConjectures.PurityFiniteSetting.general_admissibility",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.general_admissibility"
+  ],
+  "file": "lean/Sheaf/Paper/PurityGeneralAdmissibility.lean",
+  "statement": "theorem general_admissibility (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (C : Scheme.PurityAffineChartCover f) (cU : (v : Fin C.baseCount) → Fin (C.chartCount v) → ℕ) (hC : C.openComplementConditions P.Coefficient cU) (a b : ℤ) (hab : a ≤ b) : (∀ K, Scheme.finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos Y (P.coefficientPrime_isUnit_stalk Y (Y ↘ Spec (.of P.field.k))) a b hab K → Scheme.finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos X (P.coefficientPrime_isUnit_stalk X (X ↘ Spec (.of P.field.k))) (a - 2 * (C.maxEmbeddingDimension : ℤ)) (b - 2 * (C.maxEmbeddingDimension : ℤ) + (C.preservationConstant cU : ℤ)) (le_trans (sub_le_sub_right hab _) (le_add_of_nonneg_right (Nat.cast_nonneg _))) ((P.exceptionalInverseImage f).obj K)) ∧ (∀ K, finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K → Scheme.HasProEtaleTorAmplitude Y P.Ring K a b → finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos X ((P.exceptionalInverseImage f).obj K) ∧ Scheme.HasProEtaleTorAmplitude X P.Ring ((P.exceptionalInverseImage f).obj K) (a - 2 * (C.maxEmbeddingDimension : ℤ)) (b - 2 * (C.maxEmbeddingDimension : ℤ) + (C.preservationConstant cU : ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3d2a3c907",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Statements, dependencies, sources, universes and edge cases checked. Reused the published intrinsic exceptional functor through transparent aliases; preservation statement unchanged. All four original and corrected modules passed scompile.py without diagnostics. Branch head unchanged."
  }
 }
