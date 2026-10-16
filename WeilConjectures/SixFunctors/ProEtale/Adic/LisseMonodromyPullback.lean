@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 
 /-!
 # Monodromy of lisse sheaves and pullback
@@ -202,18 +203,27 @@ lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular 
     ConcreteCategory.id_apply]
   rfl
 
+/-- A nonempty scheme has a geometric point with values in the algebraic closure of a field
+(of the residue field at any point). -/
+lemma exists_algebraicClosure_point (Y' : Scheme.{u}) [Nonempty Y'] :
+    ∃ (Ω : Type u) (_ : Field Ω), Nonempty (Spec (.of (AlgebraicClosure Ω)) ⟶ Y') :=
+  let y : Y' := Nonempty.some inferInstance
+  ⟨Y'.residueField y, inferInstance, ⟨Spec.map (CommRingCat.ofHom
+    (algebraMap (Y'.residueField y) (AlgebraicClosure (Y'.residueField y)))) ≫
+      Y'.fromSpecResidueField y⟩⟩
+
 /-- **Lisse subsheaves extend over a dense open** (blueprint `lem-wf-dense-open-pi1-surjective`,
 part (4), geometric form). Let `Y` be a connected regular locally Noetherian scheme,
-`j : Y' ⟶ Y` an open immersion with a geometric point `t` of `Y'`, and `N` lisse on `Y`. Every
-lisse subsheaf `G'` of `j^* N` is the restriction of a lisse sheaf on `Y`: this is
+`j : Y' ⟶ Y` an open immersion with `Y'` nonempty, and `N` lisse on `Y`. Every lisse subsheaf
+`G'` of `j^* N` is the restriction of a lisse sheaf on `Y`: this is
 `AlgebraicGeometry.ProEtale.LisseMonodromy.exists_upperStar_iso_of_injective`, the map
 `π₁(Y', t) → π₁(Y, t)` being surjective. -/
 theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j]
-    (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y') {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N)
-    {G' : AdicSheaf l Y'} (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
+    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] {N : AdicSheaf l Y}
+    (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'} (hG' : IsAdicLisseSheaf G')
+    (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
     ∃ G : AdicSheaf l Y, IsAdicLisseSheaf G ∧ Nonempty ((j)^*ᵃ[l].obj G ≅ G') := by
-  have : Nonempty Y' := ⟨t.base (Nonempty.some inferInstance)⟩
+  obtain ⟨Ω, _, ⟨t⟩⟩ := exists_algebraicClosure_point Y'
   obtain ⟨_, _, _⟩ := isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion j
   obtain ⟨M, M', hM, hM', hc⟩ := exists_lisseMonodromy_isCompatible (l := l) (Ω := Ω) j
   have : (stalkFunctor l t).PreservesMonomorphisms := by
@@ -233,11 +243,11 @@ lisse: `G'` is the restriction of a lisse `G`
 `G ≅ j_* j^* G`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`). -/
 theorem IsAdicLisseSheaf.adicLowerStar_of_mono [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j))
-    (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y') {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N)
-    {G' : AdicSheaf l Y'} (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
+    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] (hj : Dense (Set.range j))
+    {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'}
+    (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
     IsAdicLisseSheaf ((j)_*ᵃ[l].obj G') := by
-  obtain ⟨G, hG, ⟨e⟩⟩ := hN.exists_upperStar_iso_of_mono j t hG' i
+  obtain ⟨G, hG, ⟨e⟩⟩ := hN.exists_upperStar_iso_of_mono j hG' i
   have := hG.isIso_adicUpperStarLowerStarAdjunction_unit_app (fun _ ↦ inferInstance) j hj
   exact hG.of_iso (asIso ((adicUpperStarLowerStarAdjunction l j).unit.app G) ≪≫
     (j)_*ᵃ[l].mapIso e)
@@ -257,22 +267,24 @@ theorem IsAdicLisseSheaf.adicUpperStar_map_bijective
 
 /-- **Restriction to a dense open preserves irreducible local systems** (blueprint
 `lem-wf-dense-open-pi1-surjective`, part (4), geometric form). Let `Y` be a connected regular
-locally Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion with a geometric point `t` of
-`Y'`. If `N` is an irreducible `ℓ`-adic local system on `Y`, so is `j^* N`: a lisse subsheaf of
-`j^* N` is the restriction of a lisse `G` (`IsAdicLisseSheaf.exists_upperStar_iso_of_mono`), and
-the inclusion is the restriction of a monomorphism `G ⟶ N` by full faithfulness. -/
+locally Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion. If `N` is an irreducible
+`ℓ`-adic local system on `Y`, so is `j^* N`: it is nonzero since `N ≅ j_* j^* N`, a lisse
+subsheaf of `j^* N` is the restriction of a lisse `G`
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_upperStar_iso_of_mono`), and the inclusion
+is the restriction of a monomorphism `G ⟶ N` by full faithfulness. -/
 theorem IsIrreducibleAdicLocalSystem.adicUpperStar [IsLocallyNoetherian Y] [IsRegular Y]
     [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j))
-    (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y') {N : AdicSheaf l Y}
-    (hN : IsIrreducibleAdicLocalSystem N) :
+    {N : AdicSheaf l Y} (hN : IsIrreducibleAdicLocalSystem N) :
     IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj N) := by
   obtain ⟨hNl, hN0, hNirr⟩ := hN
   have hY (y : Y) : IsRegularLocalRing (Y.presheaf.stalk y) := inferInstance
-  refine ⟨hNl.upperStar j, fun h ↦ hN0 ?_, fun G' i _ hG' ↦ ?_⟩
-  · have := hNl.isIso_adicUpperStarLowerStarAdjunction_unit_app hY j hj
+  have hjN : ¬ IsZero ((j)^*ᵃ[l].obj N) := fun h ↦ hN0 (by
+    have := hNl.isIso_adicUpperStarLowerStarAdjunction_unit_app hY j hj
     exact ((j)_*ᵃ[l].map_isZero h).of_iso
-      (asIso ((adicUpperStarLowerStarAdjunction l j).unit.app N))
-  obtain ⟨G, hG, ⟨e⟩⟩ := hNl.exists_upperStar_iso_of_mono j t hG' i
+      (asIso ((adicUpperStarLowerStarAdjunction l j).unit.app N)))
+  have : Nonempty Y' := not_isEmpty_iff.1 fun _ ↦ hjN (isZero_adicSheaf_of_isEmpty l _)
+  refine ⟨hNl.upperStar j, hjN, fun G' i _ hG' ↦ ?_⟩
+  obtain ⟨G, hG, ⟨e⟩⟩ := hNl.exists_upperStar_iso_of_mono j hG' i
   obtain ⟨g, hg⟩ := (hNl.adicUpperStar_map_bijective hY j hj G).2 (e.hom ≫ i)
   have : Mono ((j)^*ᵃ[l].map g) := by
     rw [hg]
@@ -285,6 +297,7 @@ theorem IsIrreducibleAdicLocalSystem.adicUpperStar [IsLocallyNoetherian Y] [IsRe
       rw [← hg]
       infer_instance
     exact Or.inr (IsIso.of_isIso_comp_left e.hom i)
+
 end DenseOpen
 
 end AlgebraicGeometry.ProEtale
