@@ -146,6 +146,7 @@ lemma upperStarCongr_hom_app {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g')
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
+set_option maxHeartbeats 1000000 in
 /-- Blueprint `lem-weil-pbc-comparison-pullback` (compatibility with the cartesian
 identification): around a commutative square, the comparisons `σ` of the four sides are
 compatible with the identifications `g^* f'^* ≅ f^* g'^*` of the pullbacks of étale

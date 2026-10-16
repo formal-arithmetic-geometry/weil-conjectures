@@ -27,7 +27,8 @@ exact couple in `C`. Then:
   images `Φ (im α) ≅ im (Φ α)`, on `E`-objects the comparison `Φ (H(E, d)) ≅ H(Φ E, Φ d)`;
   iterating, morphisms `Φ (X_r) ⟶ (Φ X)_r` of all the iterated derived couples with invertible
   components (`CategoryTheory.ExactCouple.mapExactDerivedIterHom`), which are compatible with the
-  inclusions of the `D`-objects into `Φ D` (`CategoryTheory.ExactCouple.mapExactDerivedIterHom_τD_ιIter`)
+  inclusions of the `D`-objects into `Φ D`
+  (`CategoryTheory.ExactCouple.mapExactDerivedIterHom_τD_ιIter`)
   and with all the differentials (being morphisms of exact couples);
 * half-plane couples are carried to half-plane couples
   (`CategoryTheory.ExactCouple.IsHalfPlane.mapExact`), and convergence data of the spectral
@@ -76,7 +77,9 @@ noncomputable def mapExactGrIso (p : ℤ) : Φ.obj (F.gr p) ≅ (F.mapExact Φ).
 lemma map_cokernelπ_mapExactGrIso_hom (p : ℤ) :
     Φ.map (cokernel.π _) ≫ (F.mapExactGrIso Φ p).hom =
       (Subobject.underlyingIso (Φ.map (F.F p).arrow)).inv ≫ cokernel.π _ := by
-  simp [mapExactGrIso]
+  rw [mapExactGrIso, Iso.trans_hom, Iso.symm_hom, asIso_inv, ← π_comp_cokernelComparison,
+    assoc, IsIso.hom_inv_id_assoc]
+  simp
 
 end DecreasingFiltration
 
@@ -290,7 +293,6 @@ lemma mapExactDerivedIterHom_τD_ιIter (n : ℕ) (i : κ) :
   | zero =>
     change 𝟙 _ ≫ 𝟙 _ = Φ.map (𝟙 _)
     rw [Φ.map_id, Category.comp_id]
-    rfl
   | succ n ih =>
     rw [mapExactDerivedIterHom_succ, Hom.comp_τD]
     change (_ ≫ (X.mapExactDerivedIterHom Φ n).τD' i) ≫
@@ -343,12 +345,16 @@ noncomputable def ConvergenceData.mapExact (cd : X.ConvergenceData ι F) :
     obtain ⟨φ, hφ₁, hφ₂⟩ := cd.comm p n N hN
     refine ⟨inv ((X.mapExactDerivedIterHom Φ N).τD (p - N, n)) ≫ Φ.map φ ≫
       (Subobject.underlyingIso (Φ.map ((F n).F p).arrow)).inv, ?_, ?_⟩
-    · rw [DecreasingFiltration.mapExact_F, assoc, assoc, Subobject.underlyingIso_arrow,
-        ← Φ.map_comp, hφ₁, Φ.map_comp, IsIso.inv_comp_eq,
+    · simp only [DecreasingFiltration.mapExact_F, assoc, Subobject.underlyingIso_arrow]
+      rw [← Φ.map_comp, hφ₁, Φ.map_comp, IsIso.inv_comp_eq,
         mapExactDerivedIterHom_τD_ιIter_assoc]
-    · have h₁ := (X.mapExactDerivedIterHom Φ N).commg (p - N, n) (p, n)
+    · have h₁ : ((X.mapExact Φ).derivedIter N).g (p - N, n) (p, n) ≫
+          inv ((X.mapExactDerivedIterHom Φ N).τE (p, n)) =
+          inv ((X.mapExactDerivedIterHom Φ N).τD (p - N, n)) ≫
+            Φ.map ((X.derivedIter N).g (p - N, n) (p, n)) := by
+        rw [IsIso.comp_inv_eq, assoc, IsIso.eq_inv_comp]
+        exact ((X.mapExactDerivedIterHom Φ N).commg (p - N, n) (p, n)).symm
       simp only [Iso.trans_hom, Iso.symm_hom, asIso_inv, Functor.mapIso_hom]
-      rw [← IsIso.eq_inv_comp, ← assoc, ← assoc, IsIso.eq_comp_inv] at h₁
       rw [reassoc_of% h₁, ← Φ.map_comp_assoc, hφ₂, Φ.map_comp_assoc,
         DecreasingFiltration.map_cokernelπ_mapExactGrIso_hom, assoc, assoc]
 

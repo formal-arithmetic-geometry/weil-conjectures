@@ -144,9 +144,8 @@ lemma leftDerivedUpperStarCompactificationIso_ofIsProper_hom_app
       (leftDerivedUpperStarId A X).hom.app (L((f)^*[A]).obj Q) := by
   dsimp only [leftDerivedUpperStarCompactificationIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, eqToIso.hom]
-  rw [eqToHom_app_eq_leftDerivedUpperStarCongr_hom_app, ← leftDerivedUpperStarComp_id_left_app,
-    Iso.inv_hom_id_app_assoc]
-  rfl
+  rw [eqToHom_app_eq_leftDerivedUpperStarCongr_hom_app, ← leftDerivedUpperStarComp_id_left_app]
+  exact Iso.inv_hom_id_app_assoc _ _ _
 
 /-- The identification `Rf_!^{(1,f)} = Rf_* ∘ (𝟙 X)_! ≅ Rf_*` of the compactly supported direct
 image computed with the identity compactification of a proper morphism `f` with the derived
@@ -214,12 +213,25 @@ lemma projectionMapOfCompactification_ofIsProper
         ((rightDerivedLowerStarProjectionMap A f).app E).app Q := by
   have hπ := NatTrans.congr_app ((rightDerivedLowerStarProjectionMap A f).naturality
     ((derivedOpenImmersionLowerShriekIdIso A X).hom.app E)) Q
-  simp only [rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app,
-    projectionMapOfCompactification_app_app, Category.assoc]
-  erw [← Functor.map_comp, ← Functor.map_comp,
-    derivedOpenImmersionLowerShriekProjectionIso_inv_ofIsProper A f E Q]
-  exact hπ.symm
+  have h : R((f)_*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A (𝟙 X)).inv.app
+        E).app (L((f)^*[A]).obj Q)) ≫
+      R((f)_*[A]).map (D((𝟙 X)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj E).map
+          ((leftDerivedUpperStarCompactificationIso A (Compactification.ofIsProper f)).hom.app
+            Q))) ≫
+      R((f)_*[A]).map ((derivedOpenImmersionLowerShriekIdIso A X).hom.app
+          (((-⊗ᴸ-(X)[A]).obj E).obj (L((f)^*[A]).obj Q))) =
+      R((f)_*[A]).map (((-⊗ᴸ-(X)[A]).map ((derivedOpenImmersionLowerShriekIdIso A X).hom.app
+        E)).app (L((f)^*[A]).obj Q)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp,
+      derivedOpenImmersionLowerShriekProjectionIso_inv_ofIsProper A f E Q]
+  rw [projectionMapOfCompactification_app_app,
+    rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app,
+    rightDerivedLowerShriekOfCompactificationOfIsProperIso_hom_app, Category.assoc,
+    Category.assoc]
+  exact (congrArg (((rightDerivedLowerStarProjectionMap A f).app
+    (D((𝟙 X)_!open[A]).obj E)).app Q ≫ ·) h).trans hπ.symm
 
+attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- **Identity compactification recovers the inverse** (blueprint
 `lemma-weil-pbc-projection-formula-identity-compactification`). For a bounded complex `F` of
 finite projective modules with a strict-perfect package, under the identification
