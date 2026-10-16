@@ -3,32 +3,152 @@
  "blueprint": {
   "is": "det-finite-window-bounded",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lower tail vanishing for bounded complexes",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$, and let $L\\in\\Dic(X,\\Lambda)$ be bounded with\n$H^q(L)=0$ for $q>-d_C-1$. Then $\\Hom(C,L)=0$.",
+ "statement": "Let $\\Lambda=E$ or $\\Qlb$, $C\\in\\Cons(X,\\Lambda)$, and let $L\\in\\Dic(X,\\Lambda)$ be bounded with\n$H^q(L)=0$ for $q>-d_C-1$. Then $\\Hom(C,L)=0$.\n\nHere $X$ is a scheme, the coefficients are the condensed coefficient rings of\n[sk-def-sfb-qlbar-condensed], pulled back to $\\Lambda_X$ as in\n[sk-def-sfb-pulled-back-coefficients]; $\\Mod(\\Lambda_X)$ is the module-object category\nof [sk-def-sfb-module-objects], and $\\Cons$ is the category of constructible\n$\\Lambda_X$-modules [sk-def-sfb-constructible]. The integer $d_C\\geq0$ is a chosen\nuniform bound from [sk-lem-uniform-constructible-ext]:\n$\\Ext^r(C,N)=0$ for every constructible $N$ and every $r>d_C$.\nWrite $\\IndCons(X,\\Lambda)$ for the sheaves isomorphic to small filtered colimits\nof constructible sheaves, and define $\\Dic(X,\\Lambda)$ to be the full subcategory\nof $D(\\Mod(\\Lambda_X))$ on objects whose cohomology sheaves all belong to\n$\\IndCons(X,\\Lambda)$. The derived category and cohomology are those of\n[def-weil-abstract-derived-category]. Bounded means that only finitely many\ncohomology sheaves are nonzero; $C$ is placed in degree zero and\n$\\Hom(C,L)$ means morphisms in this ambient derived category, with the shift\nand Ext conventions of [def-pc-ext].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.md",
   "place": "node det-finite-window-bounded, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "sk-lem-uniform-constructible-ext",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext"
+ ],
  "proof": [
   {
-   "text": "Induction on the number of nonzero cohomology sheaves of $L$. If $L=0$ there is nothing to prove. If\n$L\\cong H^q(L)[-q]$, then $\\Hom(C,L)=\\Ext^{-q}(C,H^q(L))$, which vanishes by [sk-cor-ind-heart-ii]\nbecause $H^q(L)\\in\\IndCons(X,\\Lambda)$ and $-q\\geq d_C+1>d_C$. In general let $q_0$ be the smallest degree\nwith $H^{q_0}(L)\\neq0$. The triangle\n\n$$\nH^{q_0}(L)[-q_0]\\to L\\to\\tau_{\\geq q_0+1}L\\to\n$$\n\nhas outer terms satisfying the hypothesis with fewer nonzero cohomology sheaves (and still lying in\n$\\Dic(X,\\Lambda)$ by [sk-cor-ambient-ind-derived]); the exact sequence\n$\\Hom(C,H^{q_0}(L)[-q_0])\\to\\Hom(C,L)\\to\\Hom(C,\\tau_{\\geq q_0+1}L)$ and induction give $\\Hom(C,L)=0$.",
-   "uses": [],
-   "elementary": null
+   "text": "Fix $C$ and $d_C$. We prove the assertion for every such bounded $L$ by strong induction on the finite number $N(L)=\\#\\{q:H^q(L)\\neq0\\}$. If $N(L)=0$, choose a complex $M^\\bullet$ representing $L$. The map $0\\to M^\\bullet$ is a quasi-isomorphism, since it is an isomorphism on every cohomology object. Its image is invertible in the derived category by [def-weil-abstract-derived-category], so $L\\cong0$ and every map $C\\to L$ is zero.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "opening induction sentence; the case L=0, with the acyclic case written out"
+   }
+  },
+  {
+   "text": "If $N(L)=1$, let $q$ be the unique degree with nonzero cohomology. By [lem-sf-derived-concentrated-single], $L\\cong H^q(L)[-q]$. The definition of $\\Dic$ in the statement gives $H^q(L)\\in\\IndCons(X,\\Lambda)$. Since $H^q(L)\\neq0$, the upper-vanishing hypothesis forces $q\\leq-d_C-1$, hence $-q\\geq d_C+1>d_C\\geq0$. By the Ext convention [def-pc-ext], $\\Hom(C,L)\\cong\\Ext^{-q}(C,H^q(L))$ in the ambient module derived category. The last group vanishes by [det-ind-heart-ii-vanishing], applied with $B=H^q(L)$ and Ext degree $-q$.",
+   "uses": [
+    "lem-sf-derived-concentrated-single",
+    "def-pc-ext",
+    "det-ind-heart-ii-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "one-cohomology-sheaf case, from L isomorphic to H^q(L)[-q] through Ext vanishing"
+   }
+  },
+  {
+   "text": "Assume $N(L)\\geq2$ and the induction hypothesis for every complex satisfying the stated hypotheses with fewer nonzero cohomology sheaves. Let $q_0=\\min\\{q:H^q(L)\\neq0\\}$. Apply [lem-pc-derived-lower-truncation-step-triangle] with $E=L$ and $n=-q_0$. It gives the distinguished triangle $H^{q_0}(L)[-q_0]\\to\\tau_{\\geq q_0}L\\to\\tau_{\\geq q_0+1}L\\to H^{q_0}(L)[-q_0+1]$. The good-truncation formula of [def-kun-truncations] says $H^i(\\tau_{\\geq a}L)=H^i(L)$ for $i\\geq a$ and zero otherwise. Thus $L\\to\\tau_{\\geq q_0}L$ is an isomorphism on every cohomology sheaf and hence is invertible in the derived category [def-weil-abstract-derived-category]. Write $A=H^{q_0}(L)[-q_0]$, $T=\\tau_{\\geq q_0}L$, $B=\\tau_{\\geq q_0+1}L$, and let $a:A\\to T$, $b:T\\to B$, $c:B\\to A[1]$ be the displayed triangle maps. With $e:L\\xrightarrow{\\sim}T$ the preceding isomorphism, define $u=e^{-1}\\circ a$ and $v=b\\circ e$. The triple $(1_A,e,1_B)$ is an isomorphism from $(A\\xrightarrow{u}L\\xrightarrow{v}B\\xrightarrow{c}A[1])$ to the displayed distinguished triangle: $e\\circ u=a$, $b\\circ e=v$, and the last square is the identity. Thus the triangle with middle term $L$ is distinguished by (TR1) of [def-weil-triangulated-category]. The zero sheaf is constructible, hence ind-constructible by its constant filtered presentation. The only possibly nonzero cohomology sheaf in $A$ is ind-constructible, so $A\\in\\Dic$ directly from the definition, and $B\\in\\Dic$ by [det-ambient-ind-derived-sums](2). The only cohomology of $A$ is $H^{q_0}(L)$ in degree $q_0$; the nonzero cohomology degrees of $B$ are exactly those of $L$ other than $q_0$. Both are bounded and retain the required upper vanishing. Therefore $N(A)=1<N(L)$ and $N(B)=N(L)-1<N(L)$, and induction gives $\\Hom(C,A)=\\Hom(C,B)=0$.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "det-ambient-ind-derived-sums",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "general case: choice of q_0, canonical triangle, and verification of the hypotheses on both outer terms"
+   }
+  },
+  {
+   "text": "Write $u:A\\to L$ and $v:L\\to B$ for the first two maps of the triangle in step 3. For any $f:C\\to L$, the map $v\\circ f$ lies in $\\Hom(C,B)=0$. Part (ii) of [lem-weil-pbc-hom-into-triangle-exact], with $W=C$, gives $g:C\\to A$ such that $f=u\\circ g$. Since $\\Hom(C,A)=0$, one has $g=0$ and $f=0$. This proves the induction step and hence the assertion.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+    "place": "last exact Hom sequence and conclusion of the induction"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-concentrated-single",
+  "def-pc-ext",
+  "det-ind-heart-ii-vanishing",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "def-kun-truncations",
+  "det-ambient-ind-derived-sums",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-finite-window/sk-lem-finite-window-bounded.proof.md",
+  "place": "complete bounded-case induction; generic tools checked against Stacks Tags 08J5 and 0149"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If Ext from a fixed sheaf C to each cohomology object vanishes in degrees above d, then Hom from C to a bounded complex L whose cohomology vanishes above -d-1 is zero",
+   "results": "8 hits; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.Abelian.Ext; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasInjectiveDimensionLT.mk'; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CategoryTheory.hasProjectiveDimensionLT_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: the projective-source result assumes projectivity; the dimension results quantify over all ambient targets, not only ind-constructible cohomology sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"Ext\"",
+   "results": "12 hits; CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt; CategoryTheory.Abelian.Ext.hom; CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.Abelian.Ext.hom'; CategoryTheory.Abelian.Ext.ext; CategoryTheory.Abelian.Ext.ext_iff; CategoryTheory.hasExt_iff; CategoryTheory.Abelian.Ext.mk₀_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: Ext.homEquiv and Ext.homAddEquiv only identify Ext with shifted Hom; they do not supply this finite-cohomology vanishing argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext dimension bound implies vanishing Hom into bounded complexes with negative cohomology",
+   "results": "8 hits; CategoryTheory.HasInjectiveDimensionLT.subsingleton'; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.hasProjectiveDimensionLT_iff; CochainComplex.isZero_of_isGE; CategoryTheory.hasInjectiveDimensionLT_iff; DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match: dimension classes require vanishing against every object; isZero_of_isLE is a cohomology vanishing result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded complexes, vanishing of Hom from C to each shifted cohomology object implies Hom from C to the complex is zero by induction on truncations",
+   "results": "8 hits; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; CochainComplex.isZero_of_isLE; DerivedCategory.isLE_iff; CochainComplex.isZero_of_isGE; DerivedCategory.isGE_iff; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: standard cohomological bounds and the opposite-direction t-structure orthogonality do not give the requested result"
+  },
+  {
+   "tool": "grep",
+   "query": "from_singleFunctor_obj_eq_zero_of_projective|hasProjectiveDimensionLT_iff|lemma homAddEquiv|def homAddEquiv|exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "11 hits; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Category/Grp/Preadditive.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Category/ModuleCat/Basic.lean; subdirectory Algebra",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: the located projective-source vanishing assumes Projective; homAddEquiv and concentration in one degree are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "coyoneda.*(exact|homological)|homological.*coyoneda|hom.*exact₂|hom_exact",
+   "results": "25 hits; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/WeakKernels.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean; Mathlib/CategoryTheory/Triangulated/Adjunction.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean; subdirectory CategoryTheory/Triangulated",
+   "date": "2026-10-16",
+   "verdict": "general ingredient found: CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, Pretriangulated.lean:260, already represented by lem-weil-pbc-hom-into-triangle-exact; not a match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "from_singleFunctor|subsingleton_hom|ProjectiveDimensionLT",
+   "results": "25 hits; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; Mathlib/RingTheory/Regular/ProjectiveDimension.lean; Mathlib/RingTheory/Regular/ProjectiveDimension.lean; Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: projective-source vanishing assumes Projective; projective-dimension vanishing quantifies over every ambient target, while the bound here applies to ind-constructible cohomology targets only. K-projective orthogonality concerns acyclic targets. Existing truncation and Hom tools remain ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom orthogonality for an object of finite projective dimension and a bounded above complex using cohomological truncation",
+   "results": "8 hits; CategoryTheory.HasProjectiveDimensionLT.subsingleton'; CochainComplex.IsKProjective.leftOrthogonal; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.HasProjectiveDimensionLT.subsingleton; CategoryTheory.HasProjectiveDimensionLT.mk; CategoryTheory.HasProjectiveDimensionLT.mk'; CategoryTheory.hasProjectiveDimensionLT_iff; CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-16",
+   "verdict": "no exact match: projective-source vanishing assumes Projective; projective-dimension vanishing quantifies over every ambient target, while the bound here applies to ind-constructible cohomology targets only. K-projective orthogonality concerns acyclic targets. Existing truncation and Hom tools remain ingredients."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -39,5 +159,20 @@
   "sk-cor-ind-heart-ii"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-finite-window-bounded",
+  "worker": "stage1",
+  "summary": "Retained the bounded lower-tail assertion and spelled out its existing coefficient, bound, and category conventions. Completed the strong induction with cited concentration, Ext, truncation, and covariant-Hom exactness statements; all tools already exist, so no new nodes are needed. The earlier sandbox omitted three non-elementary citations and treated the truncation argument as elementary; repaired. Independent second reading made the triangle isomorphism explicit and removed worker-entered tool-use acceptance metadata; the cross-unit tool request is documented only in the report.",
+  "blueprint": "Steps 1-2 realize the opening induction and one-cohomology case of the bounded-case proof; step 3 realizes its q_0 truncation triangle and all induction hypotheses; step 4 realizes its exact Hom sequence."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-bceb6e75e",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-bceb6e75e (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, and source locations. Checked all four induction steps, shift signs, Ext cutoff, truncation transport, coefficient category, edge cases, and duplicate/circularity candidates. Accepted the existing lower-truncation triangle as a generic tool. No repairs retained; detailed findings are in review.md."
+ }
 }
