@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-condensed-fp-hom-stage",
+ "kind": "statement",
+ "title": "Filtered Hom factorization for finitely presented internal modules",
+ "statement": "In the internal-module convention [def-weil-pbc-condensed-e-module-category], let Y be a quasi-compact quasi-separated scheme, R an arbitrary internal monoid in abelian pro-etale sheaves, D a small filtered diagram of internal R-modules, c its colimit cocone, and P a globally finitely presented R-module. Every homomorphism P→c.pt factors through some D(i). No monicity condition on the diagram or its cocone is needed.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "A regular-module homomorphism is a section of the underlying sheaf at the terminal pro-etale object. The qcqs section theorem makes such sections descend and equality eventual. Forgetting internal module structure preserves colimits.",
+   "uses": [
+    "lem-weil-pbc-proetale-qcqs-fp-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite free modules, take common upper objects for generator lifts, and a filtered wide-span cocone for equality witnesses. This works for the empty finite set because the index category is nonempty.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the given finite free presentation. Descend the map on generators. Its composite with the relation map is zero in the colimit. Eventual equality for the finite relation module gives a later stage where this composite is zero. Descend through the cokernel to obtain the required map and verify its factorization using the cokernel epimorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-qcqs-fp-section-calculus"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
+  "note": "C1 explicit Lean proof/API construction; the only remaining hole is reported by declaration name."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend isomorphism between finitely presented modules along filtered colimit of rings",
+   "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimitCoconeIsColimit, preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.M.mk_eq, ModuleCat.FilteredColimits.M.mk_surjective, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.FilteredColimits.M.mk",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, Mono",
+   "results": "0 hits: ; loogle: unknown identifier 'Mono'",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Mm]ono|[Mm]ono.*unit",
+   "results": "25 hits: Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/Control/Monad/Writer.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms from finitely presented internal modules over coefficient ring sheaves on quasi compact quasi separated proetale schemes descend through filtered colimits to a finite coefficient field.",
+   "results": "8 hits: preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.M, CommRingCat.preservesFilteredColimits_coyoneda, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Presentation.isColimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedFiniteLocalSubmodules",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-finite-local-submodules",
+   "place": "Finite local models: scalar adjoints, qcqs Hom factorization and one-way overlap comparisons.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedFpHomStage",
+  "file": "lean/Sheaf/Paper/CondensedFpHomStage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_fp_hom_stage",
+  "statement": "theorem condensed_fp_hom_stage (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)\n    (hP : Mod.IsFinitelyPresented R P) (a : P ⟶ c.pt) :\n    ∃ (i : I) (b : P ⟶ D.obj i), b ≫ c.ι.app i = a",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T143640-L-3698335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T143640-L-3698335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

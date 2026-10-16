@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-condensed-coefficient-hom-stage",
+ "kind": "statement",
+ "title": "Hom factorization in the canonical finite coefficient diagram",
+ "statement": "Use [def-weil-finite-subextension-directed-set] and [def-weil-pbc-condensed-e-module-category]. Let Y be qcqs, ell prime, E a finite coefficient field, P,Q internal E_Y-modules, and P globally finitely presented. Every map P→Res_EOmega(Omega tensor_E Q) factors through Res_EF(F tensor_E Q) for some finite F≥E, with the specified mixedScalarMap as inclusion into the Omega extension. No finite presentation of Q is assumed.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-condensed-coefficient-complex-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use the universe-lifted under-category of E as the filtered index category. Its forgetful functor to finite fields is final. Apply the coefficient-complex colimit theorem to the complex concentrated in degree zero at Q.",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-complex-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at degree zero preserves this colimit. Apply the internal finitely presented Hom factorization theorem. The cocone legs in degree zero are definitionally the specified mixedScalarMap inclusions.",
+   "uses": [
+    "lem-weil-pbc-condensed-fp-hom-stage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-coefficient-complex-colimit",
+  "lem-weil-pbc-condensed-fp-hom-stage"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
+  "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
+  "note": "C1 explicit Lean proof/API construction; the only remaining hole is reported by declaration name."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend isomorphism between finitely presented modules along filtered colimit of rings",
+   "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimitCoconeIsColimit, preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.M.mk_eq, ModuleCat.FilteredColimits.M.mk_surjective, ModuleCat.FilteredColimits.M.mk_map, ModuleCat.FilteredColimits.M.mk",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, Mono",
+   "results": "0 hits: ; loogle: unknown identifier 'Mono'",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Mm]ono|[Mm]ono.*unit",
+   "results": "25 hits: Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/Control/LawfulFix.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/Control/Monad/Writer.lean, Mathlib/NumberTheory/DirichletCharacter/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms from finitely presented internal modules over coefficient ring sheaves on quasi compact quasi separated proetale schemes descend through filtered colimits to a finite coefficient field.",
+   "results": "8 hits: preservesFilteredColimits_coyoneda, ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.M, CommRingCat.preservesFilteredColimits_coyoneda, AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Presentation.isColimit, FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂",
+   "date": "2026-10-16",
+   "verdict": "No exact theorem for internal-module finite coefficient Hom descent; general filtered-colimit APIs and the proved local library lemmas are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedFiniteLocalSubmodules",
+  "date": "2026-10-16",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-condensed-finite-local-submodules",
+   "place": "Finite local models: scalar adjoints, qcqs Hom factorization and one-way overlap comparisons.",
+   "via": [
+    "lem-weil-pbc-condensed-local-model-gluing",
+    "lem-weil-pbc-condensed-finite-presentation-descent",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedCoefficientHomStage",
+  "file": "lean/Sheaf/Paper/CondensedCoefficientHomStage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_coefficient_hom_stage",
+  "statement": "theorem condensed_coefficient_hom_stage\n    (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (P Q : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (padicSubfieldRingObj Y ℓ E))\n    (hP : Mod.IsFinitelyPresented (padicSubfieldRingObj Y ℓ E) P)\n    (a : P ⟶ (Mod.comap (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj\n      ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj Q)) :\n    ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (hEF : E ≤ F)\n      (b : P ⟶ (Mod.comap (padicSubfieldRingObjMap Y ℓ hEF)).obj\n        ((Mod.extendScalars (padicSubfieldRingObjMap Y ℓ hEF)).obj Q)),\n      b ≫ Mod.mixedScalarMap\n        (padicSubfieldRingObjMap Y ℓ hEF) (padicSubfieldRingObjToPadicAlgCl Y ℓ E)\n        (padicSubfieldRingObjMap Y ℓ hEF) (padicSubfieldRingObjToPadicAlgCl Y ℓ E)\n        (padicSubfieldRingObjToPadicAlgCl Y ℓ F)\n        (padicSubfieldRingObjMap_comp_toPadicAlgCl Y ℓ hEF)\n        (padicSubfieldRingObjMap_comp_toPadicAlgCl Y ℓ hEF) Q = a",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T143640-L-3698335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261016T143640-L-3698335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,45 +14,36 @@
  ],
  "proof": [
   {
-   "text": "The scalar-adjoint local isomorphisms are monic because E→Ω is faithfully flat. Finite coefficient extensions are nonzero finite free and Ω is their filtered union. These facts survive inverse image to the covering schemes.",
+   "text": "Choose the supplied local isomorphisms. At every finite stage construct their canonical scalar adjoints by the explicit local coefficient API. The projection-retraction proof makes them monic, and their scalar adjuncts are isomorphisms.",
    "uses": [
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "def-weil-finite-subextension-directed-set",
-    "def-weil-pbc-condensed-e-module-category"
+    "def-weil-pbc-condensed-local-coefficient-adjoints"
    ],
    "elementary": false
   },
   {
-   "text": "Pairwise overlaps of a finite affine cover of a quasi-separated scheme are qcqs. Identify internal modules with sectionwise modules and use tensor adjunction plus the Hom colimit clause to descend overlap comparisons and their inverses. Choose a common finite field and use eventual equality to enforce both inverse identities.",
+   "text": "Pairwise overlaps are qcqs because X is quasi-separated and the covering schemes are affine. Use the finite family of ordered pairs, in both directions. Apply pairwise Hom descent to obtain a common F and both maps commuting with the canonical adjoints.",
    "uses": [
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-    "def-weil-finite-subextension-directed-set"
+    "lem-weil-pbc-condensed-finite-family-hom-descent",
+    "def-weil-pbc-proetale-covering"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the comparison equalities after extension to Ω to obtain commutation with the local embeddings into Res_FΩ M. The local adjoints remain the original isomorphisms under extension-composition comparisons. If the cover is empty choose F=E.",
+   "text": "The reverse upperStarCompIso is the inverse of the forward one. Compose the two comparison equations and cancel the pulled monomorphisms into the ambient restricted module. Both composites are identities, so the two maps define the required underlying overlap isomorphism. Its compatibility is exactly the forward equation. The scalar-adjoint condition follows from the explicit transitivity computation. The empty cover is included in the finite-family theorem.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finite-subextension-directed-set",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-condensed-flat-coefficient-calculus",
-  "lem-weil-pbc-proetale-qcqs-fp-section-calculus",
-  "lem-weil-proetale-weakly-etale-localization"
+  "def-weil-pbc-condensed-local-coefficient-adjoints",
+  "lem-weil-pbc-condensed-finite-family-hom-descent",
+  "def-weil-pbc-proetale-covering"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/TwoColimit.lean",
   "place": "(Obj) descent paragraph, finite-stage comparisons on pairwise overlaps",
-  "note": "The Lean construction/proof is in the attached module; only explicitly reported named theorems remain unproved."
+  "note": "C1 route: split coefficient units give monicity; finite Hom factorization gives forward and reverse maps; cancel monomorphisms to prove inverse identities without further enlargement. The only new sorry is the named pairwise Hom transport lemma; the internal and canonical-coefficient Hom stage APIs are proved."
  },
  "mathlib_searches": [
   {
@@ -125,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-a08d9",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261016T103837-L-2369142",
+  "landing": "20261016T143640-L-3698335",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all modules and the direct importer compiled, with only the documented arithmetic sorry remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
