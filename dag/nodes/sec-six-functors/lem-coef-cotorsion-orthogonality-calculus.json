@@ -22,11 +22,150 @@
   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent-formulated general extension calculus. WANTED: Hovey, Cotorsion pairs, model category structures, and representation theory (2002), Section 2, extension orthogonality and lifting argument. Stacks homology.tex Section 010I (section-extensions) supplies the extension, pushout and pullback conventions, but does not itself state the whole lemma."
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the abelian category and use functional composition throughout. Short exact means monic first arrow, epic second arrow, and equality of image and kernel, as in [def-weil-pbc-exact-sequence]. In a short exact sequence $0\\to V\\xrightarrow{k}E\\xrightarrow{q}U\\to0$, $q$ is a cokernel of $k$ by [lem-weil-pbc-abelian-exact-epi-cokernel](a), and $k$ is a kernel of $q$: its identification with the image follows from monicity and exactness. Splitting can be tested by a retraction of $k$. Indeed, if $qs=1$, factor $1-sq$ through the kernel as $kr=1-sq$; cancellation of $k$ gives $rk=1$. Conversely, if $rk=1$, factor $1-kr$ through the cokernel as $sq=1-kr$; cancellation of $q$ gives $qs=1$. These formulas use only the displayed kernel and cokernel universal properties.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010E (definition-exact); abelian-category kernel/cokernel conventions; elementary splitting calculation using the extension of Tag 010J (definition-extension)."
+   }
+  },
+  {
+   "text": "Here is the pullback construction used below, with its short exactness verified rather than assumed. For the sequence of step 1 and any $h:W\\to U$, let $F=E\\times_UW$, $u:F\\to E$, $v:F\\to W$. It exists as the kernel of $(q,-h):E\\oplus W\\to U$, by the biproduct and kernel universal properties [def-sp-abelian]. The map $\\ell:V\\to F$ is specified by $u\\ell=k$, $v\\ell=0$. Any map killed by $v$ factors uniquely through $\\ell$, since its $E$ component is killed by $q$; thus $\\ell$ is the kernel of $v$. For $w:T\\to W$, the epimorphism criterion [lem-sp-abelian-refinements](a) lifts $hw$ through $q$ after an epimorphism $\\rho:T'\\to T$; the resulting pair of maps to $E,W$ gives a lift of $w\\rho$ to $F$. The same criterion makes $v$ epic. Thus $0\\to V\\to F\\to W\\to0$ is short exact. This is a three-line universal-property/refinement argument, not a new lemma node.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pullback construction after Tag 010K (definition-ext-group); the epimorphic-refinement criterion is Tag 08N5 (lemma-check-exactness-fibre-product)."
+   }
+  },
+  {
+   "text": "We will also use the following quotient construction, proved here from the cited snake lemma. Suppose $0\\to K\\xrightarrow{k}T\\xrightarrow{q}B\\to0$ is short exact and $j:A\\to T$ has monic composite $i=qj:A\\to B$; then $j$ is monic because $j a=0$ implies $i a=qj a=0$, and monicity of $i$ gives $a=0$. Apply [lem-weil-pbc-snake-lemma-abelian] to the exact top row $0\\to A\\xrightarrow{1}A\\to0$ (the three objects are $0,A,A$), bottom row $0\\to K\\xrightarrow{k}T\\xrightarrow{q}B\\to0$, and vertical maps $0:0\\to K$, $j:A\\to T$, $i:A\\to B$. Their kernels are all zero. Their cokernels are $K,Q=\\operatorname{Coker}j,C=\\operatorname{Coker}i$. The snake sequence therefore gives $0\\to K\\xrightarrow{\\bar k}Q\\xrightarrow{\\bar q}C\\to0$, with $\\bar k=\\pi k$ for $\\pi:T\\to Q$ and $\\bar q\\pi=cq$ for $c:B\\to C$. Exactness at $K$ makes $\\bar k$ monic; the snake lemma gives $\\bar q$ epic since the bottom right arrow $q$ is epic. This proves all the asserted short exactness, without any splitting assumption.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian",
+    "def-weil-pbc-exact-sequence",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010H (lemma-snake), exact six-term kernel/cokernel sequence and the right endpoint assertion; applied to the explicitly specified two rows."
+   }
+  },
+  {
+   "text": "Zero is orthogonal in both variables. In an extension $0\\to V\\xrightarrow{k}E\\to0\\to0$, exactness says that the monomorphism $k$ has image all of $E$, hence is also epic; in an abelian category a morphism that is both monic and epic is an isomorphism, so the sequence splits. In an extension $0\\to0\\to E\\xrightarrow{q}U\\to0$, the map $q$ is the cokernel of the zero map $0\\to E$ by [lem-weil-pbc-abelian-exact-epi-cokernel](a), and therefore is an isomorphism (the identity of $E$ has the same cokernel universal property). Thus both sequences split. This works for every object tested against the class, including an empty class.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010J (definition-extension); elementary zero-object and cokernel-universal-property calculation."
+   }
+  },
+  {
+   "text": "For left retract closure, let $s:X\\to Y$, $r:Y\\to X$ satisfy $rs=1_X$, and suppose $Y\\perp_1 V$. Given an extension $0\\to V\\to E\\xrightarrow{q}X\\to0$, pull it back along $r$ using step 2. Its quotient is $Y$, so choose a section $t:Y\\to E\\times_XY$ by the assumed orthogonality. If $u:E\\times_XY\\to E$ is the other projection, then $quts=rs=1_X$. Hence the original extension splits, proving $X\\perp_1V$. Quantify this argument over all $V\\in\\mathcal S$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pullback operation; elementary section composition after step 2."
+   }
+  },
+  {
+   "text": "For right retract closure with the same $s,r$, suppose $U\\perp_1Y$. Push any extension $0\\to X\\xrightarrow{k}E\\to U\\to0$ out along $s:X\\to Y$. The cited [lem-weil-pbc-pushout-short-exact-sequence] gives $0\\to Y\\xrightarrow{k'}E'\\to U\\to0$ and a map $v:E\\to E'$ with $vk=k's$. Orthogonality and step 1 give a retraction $t:E'\\to Y$ of $k'$. Then $rtv:E\\to X$ retracts $k$, since $rtvk=rs=1_X$, so step 1 splits the original sequence. Quantify over all $U\\in\\mathcal S$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pushout operation; elementary retraction composition after the cited pushed-out short exact sequence."
+   }
+  },
+  {
+   "text": "For left extension closure, fix $V\\in\\mathcal S$ and $0\\to X\\xrightarrow{f}Y\\xrightarrow{g}Z\\to0$ with $X\\perp_1V$ and $Z\\perp_1V$. Given $0\\to V\\xrightarrow{k}E\\xrightarrow{q}Y\\to0$, step 2 pulls it back along $f$, and $X\\perp_1V$ supplies a section. Its $E$ component is $t:X\\to E$ with $qt=f$. Step 3 applied to $j=t$, $i=f$ gives $0\\to V\\xrightarrow{\\pi k}E/tX\\to Z\\to0$. Here $\\operatorname{Coker}f$ is identified with $Z$ by [lem-weil-pbc-abelian-exact-epi-cokernel](a). This sequence splits by $Z\\perp_1V$, so step 1 supplies $R:E/tX\\to V$ with $R\\pi k=1_V$. The composite $R\\pi$ retracts $k$, and step 1 splits the original extension. All quotient exactness is the snake calculation in step 3, not a new orthogonality node.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pullback operation; agent closure argument using the explicit snake-lemma consequence established in step 3 (Tag 010H)."
+   }
+  },
+  {
+   "text": "For right extension closure, fix $U\\in\\mathcal S$ and $0\\to X\\xrightarrow{f}Y\\xrightarrow{g}Z\\to0$ with $U\\perp_1X$ and $U\\perp_1Z$. Push $0\\to Y\\xrightarrow{k}E\\xrightarrow{q}U\\to0$ out along $g:Y\\to Z$. By [lem-weil-pbc-pushout-short-exact-sequence] this gives $0\\to Z\\xrightarrow{k'}E'\\xrightarrow{q'}U\\to0$, with $v:E\\to E'$, $vk=k'g$, $q'v=q$. The map $v$ is epic: if two maps out of $E'$ agree after $v$, their composites with $k'$ agree after the epic $g$, hence agree; the pushout uniqueness then makes the two maps equal. Apply [lem-weil-pbc-pushout-kernel-iso] to the square with top $g$, left $k$, right $k'$, bottom $v$. Its left side $k$ is monic, so $\\ker g\\simeq\\ker v$; since $f$ identifies $X$ with $\\ker g$, this identifies $kf:X\\to E$ with $\\ker v$. Consequently $0\\to X\\xrightarrow{kf}E\\xrightarrow{v}E'\\to0$ is short exact. Choose a section $s:U\\to E'$ of $q'$ by $U\\perp_1Z$, and pull this last sequence back along $s$ by step 2. It is an extension of $U$ by $X$, so $U\\perp_1X$ gives a section and hence a map $t:U\\to E$ with $vt=s$. Now $qt=q'vt=q's=1_U$. This splits the original extension and proves right extension closure.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-pushout-kernel-iso",
+    "def-weil-pbc-exact-sequence",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pushout and pullback operations; Tags 08N4 (lemma-cartesian-cocartesian) and 08N3 (lemma-cartesian-kernel) as combined in the cited pushout-kernel isomorphism; agent closure argument."
+   }
+  },
+  {
+   "text": "For the diagonal-filler assertion, put $K=\\operatorname{Ker}p$, $C=\\operatorname{Coker}i$ and form $T=X\\times_YB$ with projections $u:T\\to X$, $q:T\\to B$. Since $p$ is epic and $K\\to X\\xrightarrow{p}Y$ is exact at $X$, [lem-weil-pbc-abelian-exact-epi-cokernel](a) makes $p$ a cokernel of the kernel inclusion, so $0\\to K\\to X\\xrightarrow{p}Y\\to0$ is short exact. Step 2 therefore gives $0\\to K\\xrightarrow{k}T\\xrightarrow{q}B\\to0$. Commutativity $pa=bi$ gives $j:A\\to T$ with $uj=a$, $qj=i$. Since $i$ is monic, step 3 gives $0\\to K\\xrightarrow{\\pi k}Q\\xrightarrow{\\bar q}C\\to0$, where $Q=\\operatorname{Coker}j$ and $\\pi:T\\to Q$. The assumption $C\\perp_1K$ splits this specific extension. By step 1 choose $R:Q\\to K$ with $R\\pi k=1_K$. Set $r=R\\pi:T\\to K$; then $rk=1_K$ and $rj=0$ because $\\pi j=0$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010J (definition-extension) and Tag 010I (section-extensions), pullback; agent construction of the obstruction extension using step 3 (Tag 010H)."
+   }
+  },
+  {
+   "text": "Finish the lift using only cokernel factorization. The morphism $1_T-kr$ kills $k$, since $rk=1_K$. Because $q$ is a cokernel of $k$ by [lem-weil-pbc-abelian-exact-epi-cokernel](a), there is a unique $w:B\\to T$ with $wq=1_T-kr$. Now $qwq=q$, so epic cancellation of $q$ yields $qw=1_B$. Also $wi=wqj=(1_T-kr)j=j$, using $rj=0$. Define $d=uw:B\\to X$. Then $di=uj=a$ and $pd=puw=bqw=b$, by the pullback relation $pu=bq$. This is the required filler, and steps 4--8 have already established both closure assertions.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Agent final splitting calculation with the cokernel universal property of Tag 010J extensions; no additional Ext vanishing or lifting lemma is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-sp-abelian-refinements",
+  "lem-weil-pbc-snake-lemma-abelian",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-pushout-kernel-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction: lower-level flat model recognition infrastructure. Direct splitting calculus written here using Stacks homology.tex Tags 010J/010I for extension operations, 010H for the snake lemma, and 08N3/08N4 for pushout kernels. The wanted Hovey text was not available."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,15 +208,109 @@
    "results": "8 hits: CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions",
    "date": "2026-10-16",
    "verdict": "No exact match: Ext.covariant_sequence_exact₂ and contravariant_sequence_exact₂ at ExactSequences.lean:152-157,285-290 are long exact Ext inputs with HasExt; neither states the splitting-only closure and arbitrary-square lifting clauses. The Serre-class instance assumes a stronger property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category splitting extension orthogonals are closed under retracts and extensions and Ext1 vanishing gives diagonal fillers for monomorphisms against epimorphisms",
+   "results": "8 hits: CategoryTheory.HasExt.standard, CategoryTheory.HasExt, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.ObjectProperty.isoModSerre, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|orthogon.*[Ee]xt|[Ee]xt.*orthogon|[Ss]plit.*[Ll]ift|[Ll]ift.*[Ss]plit",
+   "results": "4 hits: Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Splitting orthogonals in abelian categories are closed under extensions and retracts and give diagonal lifts",
+   "results": "8 hits: CategoryTheory.ShortComplex.Splitting.ext_r, CategoryTheory.ShortComplex.Splitting.ofExactOfRetraction, CategoryTheory.ShortComplex.Splitting.splitMono_f_retraction, CategoryTheory.Idempotents.isIdempotentComplete_of_abelian, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, CategoryTheory.ShortComplex.Splitting.ext_s, CategoryTheory.Retract.splitEpi",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLiftingProperty\", \"ShortExact\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every extension of U by V splits; monomorphisms with cokernel U have left lifting property against epimorphisms with kernel V",
+   "results": "8 hits: CategoryTheory.SplitMonoCategory, CategoryTheory.StrongMono.rlp, CategoryTheory.IsGrothendieckAbelian.llp_rlp_monomorphisms, CategoryTheory.Injective.instHasLiftingPropertyOfMono, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms_rlp, CategoryTheory.Abelian.monoLift, CategoryTheory.IsGrothendieckAbelian.monoMapFactorizationDataRlp, CategoryTheory.StrongEpi.llp",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category pullbacks of epimorphisms are epimorphisms and pushouts of monomorphisms are monomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.epi_pullback_of_epi_g, CategoryTheory.Abelian.epi_pullback_of_epi_f, CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms, CategoryTheory.Abelian.instIsStableUnderCobaseChangeMonomorphisms, CategoryTheory.Abelian.epi_fst_of_isLimit, CategoryTheory.Abelian.epi_fst_of_factor_thru_epi_mono_factorization, CategoryTheory.Abelian.epi_snd_of_isLimit, CategoryTheory.IsGrothendieckAbelian",
+   "date": "2026-10-16",
+   "verdict": "match for an ingredient only: pullback epic stability is already covered by the existing epimorphic-refinement node; no new node created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a short exact sequence K to P to B and a monomorphism A to P whose composite to B is monic, quotienting P by A gives a short exact sequence K to P/A to B/A",
+   "results": "8 hits: CategoryTheory.Abelian.mono_of_mono_of_mono_of_mono, CategoryTheory.ShortComplex.mono_of_mono_of_mono_of_mono, CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono, CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono', CategoryTheory.ShortComplex.SnakeInput.mono_L₀_f, CategoryTheory.ShortComplex.SnakeInput.mono_v₀₁_τ₃, CategoryTheory.Abelian.epi_of_mono_of_epi_of_mono', CategoryTheory.ShortComplex.SnakeInput.mono_L₂_f",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "epi_pullback_of_epi_f|epi_pullback_of_epi_g",
+   "results": "4 hits: Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.epi_pullback_of_epi_f",
+   "results": "1 hits: CategoryTheory.Abelian.epi_pullback_of_epi_f",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: hits give structural, special injective/projective, splitting, or Ext-sequence tools, not all closure and lifting clauses. Read the relevant declarations; use existing DAG tools for the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category every pullback of an epimorphism is an epimorphism",
+   "results": "8 hits: CategoryTheory.Abelian.epi_pullback_of_epi_f, CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms, CategoryTheory.Abelian.epi_pullback_of_epi_g, CategoryTheory.Limits.hasStrongEpiImages_of_hasPullbacks_of_hasEqualizers, CategoryTheory.Limits.hasPushout_of_epi_comp, CategoryTheory.Abelian.epi_fst_of_isLimit, CategoryTheory.Abelian.hasPullbacks, CategoryTheory.Regular.regularEpiIsStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "match for an ingredient only: pullback epic stability is already covered by the existing epimorphic-refinement node; no new node created."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-small-cotorsion-model-recognition",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-cotorsion-orthogonality-calculus",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No exact project proof found. Gave explicit section/retraction formulas, pullback exactness via existing epimorphic refinements, a snake-lemma quotient calculation, zero and both retract/extension closure arguments, and the obstruction-extension construction of a diagonal. Reused all supporting nodes; created none. Added the exact-sequence definition to statement dependencies. Checked kernels, cokernels, monic/epic hypotheses and degenerate cases.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Splitting orthogonals: extensions, retracts and diagonal fillers.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic pushout of an arbitrary short exact sequence, used in right retract/extension closure; no coefficient-specific lemma replaces this operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-cfe4633fd",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-cfe4633fd (reviewer sub-agent of L); spot-checked: Read the complete item and report, all cited statements, Stacks source locations, and unit/chapter route. All ten proof steps check out; no new nodes, duplicates, cycles, or missing hypotheses found. All 797 finite cyclic-group test squares admitted the required diagonal. Accepted the declared generic pushout tool use. Target coefficient comparisons remain separate obligations. Detailed review written to review.md; no repairs needed."
+ }
 }
