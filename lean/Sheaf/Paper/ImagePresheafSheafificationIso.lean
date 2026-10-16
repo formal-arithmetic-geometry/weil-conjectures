@@ -6,8 +6,6 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.CategoryTheory.Subfunctor.Image
 
 /-!
 # Image presheaf and sheafification
