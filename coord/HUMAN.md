@@ -153,3 +153,15 @@ The launcher found (16:51 UTC) that the `mathlib_searches` of 215 of the 259 nod
 
 ## Lean statement error: finite_sections_higherDirectImage assumes only quasi-coherence (18:11 UTC)
 `AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage` (slopmaster2, WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean:629, sorried) asserts that `Γ(R^q f_* ℱ)` is a finite `Γ(T,⊤)`-module for `f` proper onto an affine Noetherian `T` under the hypothesis `IsQuasicoherent ℱ` only. That is false (`f = id`, `q = 0`, `ℱ` an infinite direct sum of `O_X`): the blueprint lemma it realizes, lem-pc-coherent-hi, needs `ℱ` coherent (finite type). The sorry cannot be closed as stated; it is the only non-formal input to `isFinitePresentation_higherDirectImage` (same file), which inherits the gap. Found by reviewer R-frp1809 while merging H1's thm-pc-f-representable (the delivered helper node lem-pc-finite-sections-higher-direct-image copied the Lean hypothesis and was dropped as false). For the Lean side: add a coherence (finite type / finite presentation) hypothesis on `ℱ` to both declarations and to their uses.
+
+
+## Established unit-route error repaired: Q12 generation (2026-10-16 08:27 UTC)
+
+The generation unit's opening appeal to sk-thm-sf-ctf-stability was circular:
+thm-sf-ctf-stability -> cor-weil-finite-constructible-hom -> lem-weil-finite-duality-site-comparison -> lem-trf-devissage-generation.
+The maintainer confirmed the failing proof order and replaced that appeal
+with the existing open/closed immersion preservation and site-comparison
+interfaces. The unit statement and chapter route are unchanged. This
+established-error replacement is recorded in
+coord/reports/maintenance/Q12-devissage-generation-route.md and the adjacent
+reproducible source patch. Q12's split still requires independent review.

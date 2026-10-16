@@ -1,0 +1,38 @@
+--- a/literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/_section.md
++++ b/literature/blueprint/master/blueprint/sec-six-functors/sk-lem-sf-ctf-generation/_section.md
+@@ -3,7 +3,7 @@
+ kind = "section"
+ title = "Finite/open generation of $\\Dctf$"
+ order = 2219
+-uses = ["sk-lem-sf-determination", "sk-lem-sf-flat-model", "sk-prop-sf-open-closed-triangle", "sk-thm-sf-ctf-stability"]
++uses = ["sk-lem-sf-determination", "sk-lem-sf-flat-model", "sk-prop-sf-open-closed-triangle", "sk-prop-sf-cbc", "sk-prop-sf-comparison", "sk-prop-sf-rf-shriek-preservation", "sk-thm-properbasechange"]
+ lean = ["AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek"]
+ +++
+ *Lemma (sketch).*
+@@ -18,8 +18,18 @@
+ 
+ ## Proof
+ 
+-The generators lie in $\Dctf$: a lisse flat $L$ has Tor amplitude $[0,0]$,
+-and $j_!$, $Rg_*$ preserve $\Dctf$ ([sk-thm-sf-ctf-stability]).
++The generators lie in $\Dctf$ by the open/closed immersion cases, without
++using the aggregate stability theorem. On the small etale site,
++[lem-fin-extension-by-zero] and [lem-fin-closed-immersion] give
++constructibility and exact closed pushforward. The stalks of $g_*j_!L$
++are the stalks of $L$ on $U$ and zero elsewhere, so flatness and Tor
++amplitude $[0,0]$ are preserved. For the small pro-etale convention,
++transport this assertion using [lem-sf-proetale-constructible-origin],
++[lem-sf-comparison-tor-amplitude],
++[lem-cbc-proetale-extension-zero-comparison] and
++[prop-weil-pbc-comparison-direct-image]. The general theorem
++thm-sf-ctf-stability cannot be a prerequisite here: its internal-Hom and
++duality comparison dependencies already use this generation lemma.
+ Conversely, when $\Lambda$ is not a field the truncations of an object of
+ $\Dctf$ need not have finite Tor amplitude, so one dévisses a flat model
+ rather than the cohomology sheaves. By the constructible variant of
+@@ -49,4 +59,4 @@
+ form a thick subcategory containing every $Rg_*j_!\Lambda_U$ but not the
+ order-$2$ Kummer sheaf.
+ 
+-Uses: `\Cref{sk-lem-sf-determination}`, `\Cref{sk-prop-sf-open-closed-triangle}`, `\Cref{thm-sf-ctf-stability}`, `\Cref{lem-sf-flat-model}`
++Uses: `\Cref{sk-lem-sf-determination}`, `\Cref{sk-lem-sf-flat-model}`, `\Cref{sk-prop-sf-open-closed-triangle}`, `\Cref{sk-prop-sf-cbc}`, `\Cref{sk-prop-sf-comparison}`, `\Cref{sk-prop-sf-rf-shriek-preservation}`, `\Cref{sk-thm-properbasechange}`
