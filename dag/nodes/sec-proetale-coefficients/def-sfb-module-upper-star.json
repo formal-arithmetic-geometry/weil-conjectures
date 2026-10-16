@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sfb-module-upper-star",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Pullback of module objects",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([sk-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([sk-def-sfb-module-objects]). The *pullback of module objects* is\n\n$$\nf^*:=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})\\colon\n\\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_X},\n$$\n\nwhere the transport ([sk-def-sfb-transport]) $\\operatorname{mapMod}(f^*_{\\Ab})$ makes $f^*_{\\Ab}M$ an\n$f^*\\Lambda_Y$-module through the strong monoidal structure of the pullback\n$f^*_{\\Ab}$ of abelian sheaves ([sk-def-sfb-finite-pushforward-pullback]), and\n$\\operatorname{Ext}_{\\alpha_f}$ extends scalars ([sk-def-sfb-change-of-scalars])\nalong $\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$ ([sk-def-sfb-coefficient-morphisms]). Thus\n\n$$\nf^*M=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M,\n$$\n\nthe ringed-topos pullback. The functor $f^*$ is additive.",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([sk-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([sk-def-sfb-module-objects]). The *pullback of module objects* is\n\n$$\nf^*:=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})\\colon\n\\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_X},\n$$\n\nwhere the transport ([sk-def-sfb-transport]) $\\operatorname{mapMod}(f^*_{\\Ab})$ makes $f^*_{\\Ab}M$ an\n$f^*\\Lambda_Y$-module through the strong monoidal structure of the pullback\n$f^*_{\\Ab}$ of abelian sheaves ([def-sfb-finite-upper-star], [def-sfb-finite-upper-star-monoidal]), and\n$\\operatorname{Ext}_{\\alpha_f}$ extends scalars ([sk-def-sfb-change-of-scalars])\nalong $\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$ ([sk-def-sfb-coefficient-morphisms]). Thus\n\n$$\nf^*M=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M,\n$$\n\nthe ringed-topos pullback. The functor $f^*$ is additive.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
   "place": "node def-sfb-module-upper-star, order 1687"
@@ -17,14 +17,257 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-transport",
   "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-coefficient-morphisms"
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Put $F=f^*_{\\Ab}$, $R=\\Lambda_Y$ and $S=\\Lambda_X$. The rings $R,S$ are the commutative pulled-back coefficient rings of [sk-def-sfb-pulled-back-coefficients]. Use the abelian-sheaf inverse image of [def-sfb-finite-upper-star] with its strong monoidal structure [def-sfb-finite-upper-star-monoidal]. It preserves commutative ring objects by [lem-sfb-finite-upper-star-braided], so $FR$ is commutative. Apply [def-sfb-modobj-transport]: an $R$-module $(M,\\gamma_M)$ is sent to the $FR$-module $FM$ with action $FR\\otimes FM\\xrightarrow{\\mu^F}F(R\\otimes M)\\xrightarrow{F\\gamma_M}FM$, and a module map $u$ is sent to $Fu$. Thus the first factor has exactly the coefficient ring required for extension along $\\alpha_f$.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star",
+    "def-sfb-finite-upper-star-monoidal",
+    "lem-sfb-finite-upper-star-braided",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+    "place": "display defining the composite and paragraph defining mapMod"
+   }
+  },
+  {
+   "text": "The current statement of [sk-def-sfb-coefficient-morphisms] defines $\\alpha_f$ as the component at $\\Lambda$ of $f^*\\circ p_Y^*\\cong p_X^*$ and explicitly asserts that it is a morphism of ring objects. Its source is $f^*p_Y^*\\Lambda=FR$ with the transported strong-monoidal ring structure used in step 1, and its target is $p_X^*\\Lambda=S$. Thus extension is along this same $\\alpha_f:FR\\to S$; no different coefficient comparison is substituted. Abelian sheaves form an abelian category by [def-weil-pbc-sites-and-cohomology]; in particular the coequalizer of $a,b:A\\rightrightarrows B$ exists as $\\operatorname{coker}(a-b)$, since a map kills $a-b$ exactly when it equalizes $a,b$. The sheaf tensor is symmetric and both tensor factors preserve colimits by [sk-def-sfb-sheaf-tensor]. All the hypotheses of [def-sfb-modobj-extension] therefore hold for $FR\\to S$. Its coequalizer construction defines $E=\\operatorname{Ext}_{\\alpha_f}$, acting on maps by the maps induced by $S\\otimes-$. Composing $E$ with the transport of step 1 defines a functor on the stated module categories. On objects it is exactly $S\\otimes_{FR}FM=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M$. This uses the given ring morphism and the coequalizer construction, and does not choose an inverse to $\\alpha_f$.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "def-weil-pbc-sites-and-cohomology",
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-modobj-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+    "place": "definition of extension along alpha_f and the tensor formula"
+   }
+  },
+  {
+   "text": "We spell out the elementary additive-adjoint calculation used below. If $L\\dashv T$ between preadditive categories and $T$ is additive, the adjunction transpose $h\\mapsto T(h)\\eta_A$ is injective. For $u,v:A\\to B$, naturality of the unit gives\n$$T(L(u+v))\\eta_A=\\eta_B(u+v)=\\eta_Bu+\\eta_Bv=T(Lu+Lv)\\eta_A.$$\nThus $L(u+v)=Lu+Lv$. Also $L(0)=L(0+0)=L(0)+L(0)$, so cancellation in the abelian group $\\Hom(LA,LB)$ gives $L(0)=0$; negatives then follow from $0=L(0)=L(u+(-u))=Lu+L(-u)$. For abelian sheaves the pushforward $f_*^{\\Ab}$ of [def-sfb-finite-lower-star] is additive directly: at $V$ its map is the original map at $V\\times_YX$, so it preserves the sectionwise sum. Apply the displayed calculation to the adjunction [def-sfb-finite-upper-lower-star-adjunction]. This proves that $F=f^*_{\\Ab}$ is additive.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+    "place": "final sentence: additivity, abelian inverse image factor"
+   }
+  },
+  {
+   "text": "The inclusion of abelian sheaves into abelian presheaves preserves sums, which are defined sectionwise. Its left adjoint, the sheafification of [def-weil-pbc-sheafification], is additive by the calculation of step 3. Consequently the tensor of [sk-def-sfb-sheaf-tensor] is additive in either variable: it is the additive sheafification of the objectwise $\\mathbf Z$-tensor. For example, on pure tensors $(1\\otimes(u+v))(x\\otimes m)=x\\otimes(um+vm)=x\\otimes um+x\\otimes vm$, and, for maps $a,b:L\\to L'$, $((a+b)\\otimes1)(x\\otimes m)=(ax+bx)\\otimes m=ax\\otimes m+bx\\otimes m$. Pure tensors generate the objectwise tensor products, so both identities hold on all sections before sheafification, and additive sheafification preserves them. For module maps $u,v:M\\to N$, the defining equation of [sk-def-sfb-module-objects] is closed under addition:\n$$(u+v)\\gamma_M=u\\gamma_M+v\\gamma_M=\\gamma_N(R\\otimes u)+\\gamma_N(R\\otimes v)=\\gamma_N(R\\otimes(u+v)).$$\nThe zero and negative maps are linear because $0\\gamma_M=0=\\gamma_N(R\\otimes0)$ and $(-u)\\gamma_M=-u\\gamma_M=-\\gamma_N(R\\otimes u)=\\gamma_N(R\\otimes(-u))$. Composition is bilinear on underlying sheaves, so these are the usual preadditive module categories. The transport [def-sfb-modobj-transport] acts on underlying morphisms by $F$, hence step 3 proves that this transport is additive as well.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+    "place": "final sentence: additive structures and transport factor"
+   }
+  },
+  {
+   "text": "Finally, write $q_M:S\\otimes M\\to EM$ for the coequalizer map defining extension in [def-sfb-modobj-extension], now for any $FR$-module $M$. For parallel module maps $u,v:M\\to N$, that node's rule on morphisms and the tensor additivity of step 4 give\n$$E(u+v)q_M=q_N(S\\otimes(u+v))=q_N(S\\otimes u)+q_N(S\\otimes v)=(Eu+Ev)q_M.$$\nThe universal property of the coequalizer makes precomposition with $q_M$ injective: two maps out of $EM$ inducing the same map out of $S\\otimes M$ are its same unique factorization. Thus $E(u+v)=Eu+Ev$. The composite $f^*=E\\circ\\operatorname{mapMod}(F)$ preserves sums because each factor does. This proves the last clause without invoking any assertion of exactness of module pullback.",
+   "uses": [
+    "def-sfb-modobj-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+    "place": "final sentence: extension factor and composite are additive"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-sfb-finite-upper-star-braided",
+  "def-sfb-modobj-transport",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-pbc-sites-and-cohomology",
+  "sk-def-sfb-sheaf-tensor",
+  "def-sfb-modobj-extension",
+  "def-sfb-finite-lower-star",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-weil-pbc-sheafification",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star.md",
+  "place": "construction and final additivity sentence, expanded by transport, the defining coequalizer, and explicit additive-adjoint calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaves of modules along a morphism of ringed topoi is inverse image followed by extension of scalars",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, TopCat.Sheaf.pullback, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullback",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMod",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.mapMod'",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|extendScalars|pullback",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Braided/PushoutObjObj.lean; source subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules over a commutative condensed ring on the pro-etale site, by a monoidal inverse image functor followed by extension of scalars",
+   "results": "SheafOfModules.pullbackComp, SheafOfModules.pullback, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|instance.*[Aa]dditive|mapMod",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; source subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of internal module objects along a lax monoidal functor followed by extension of scalars, an additive functor",
+   "results": "ModuleCat.CoextendScalars.obj', CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.coextendScalars, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.extendScalars",
+   "date": "2026-10-16",
+   "verdict": "no match for the full item: internal condensed-coefficient module objects and the specified transport/extension recipe are not identified by these results"
+  },
+  {
+   "tool": "grep",
+   "query": "left_adjoint_additive|right_adjoint_additive",
+   "results": "Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean; source subdirectory: CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Adjunction.left_adjoint_additive (elementary calculation written in step 3; no separate node created)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left adjoint of an additive functor between preadditive categories is additive",
+   "results": "CategoryTheory.Adjunction.left_adjoint_additive, CategoryTheory.Adjunction.right_adjoint_additive, CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.additiveFunctor, CategoryTheory.Localization.functor_additive, CategoryTheory.Functor.leftOp_additive, CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Adjunction.left_adjoint_additive (elementary calculation written in step 3; no separate node created)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_adjoint_additive",
+   "results": "CategoryTheory.Adjunction.left_adjoint_additive",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Adjunction.left_adjoint_additive (elementary calculation written in step 3; no separate node created)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a functor between preadditive categories is left adjoint to an additive functor, then it is additive",
+   "results": "CategoryTheory.Adjunction.left_adjoint_additive, CategoryTheory.Adjunction.right_adjoint_additive, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.additiveFunctor_iff, CategoryTheory.Adjunction.homAddEquiv_add, CategoryTheory.Functor.Additive, CategoryTheory.instAdditiveObjFunctorAdditiveFunctor, CategoryTheory.instAdditiveObjFunctorAdditiveFunctor_1",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.Adjunction.left_adjoint_additive (elementary calculation written in step 3; no separate node created)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_",
+   "results": "CategoryTheory.Mod_",
+   "date": "2026-10-16",
+   "verdict": "CategoryTheory.Mod_ defines internal modules but does not state this pullback or its additivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoid object R in a preadditive monoidal category, a monoidal additive functor induces an additive functor between categories of internal R modules",
+   "results": "CategoryTheory.monoidalLinearOfFaithful, CategoryTheory.MonoidalLinear.ofFaithful, CategoryTheory.tensorLeft_linear, CategoryTheory.tensoringLeft_linear, CategoryTheory.Functor.mapAction_preadditive, CategoryTheory.MonoidalLinear, Action.functorCategoryEquivalence_additive, CategoryTheory.Functor.mapAction_linear",
+   "date": "2026-10-16",
+   "verdict": "No full-item match: monoidal linearity and functors on actions of an ordinary monoid do not construct the specified internal-module pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|extendScalars|Mod_.*[Aa]dditive|[Aa]dditive.*Mod_",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "No full-item match: Mathlib/CategoryTheory/Monoidal/Mon.lean:856 has only a TODO for mapMod."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|extendScalars",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; source subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: internal module pullback over an arbitrary commutative condensed ring is not stated; the returned sheaf-module pullbacks use concrete sheaves of rings, and light condensed modules use a fixed ordinary commutative ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules pullback functor extension of scalars after monoidal transport",
+   "results": "PresheafOfModules.pullback, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.coextendScalars",
+   "date": "2026-10-16",
+   "verdict": "no match: internal module pullback over an arbitrary commutative condensed ring is not stated; the returned sheaf-module pullbacks use concrete sheaves of rings, and light condensed modules use a fixed ordinary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of internal module objects over a condensed commutative ring is monoidal inverse image followed by scalar extension and is additive",
+   "results": "LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.pullbackComp, PresheafOfModules.pullbackObjIsDefined, SheafOfModules.pullbackComp",
+   "date": "2026-10-16",
+   "verdict": "no match: internal module pullback over an arbitrary commutative condensed ring is not stated; the returned sheaf-module pullbacks use concrete sheaves of rings, and light condensed modules use a fixed ordinary commutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "instAdditivePullback|def pullback",
+   "results": "183, 189, 219, 241, 261; source subdirectory: AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-16",
+   "verdict": "no match; msearch received a single file, so rg omitted its filename and the wrapper parsed line numbers as filenames. Read the requested file at the reported lines: scheme structure-sheaf modules and light condensed modules over a fixed ordinary ring do not state this item."
+  },
+  {
+   "tool": "grep",
+   "query": "variable|MonoidalCategory|MonoidalClosed",
+   "results": "34, 38, 46, 47, 49; source subdirectory: Condensed/Light/Monoidal.lean",
+   "date": "2026-10-16",
+   "verdict": "no match; msearch received a single file, so rg omitted its filename and the wrapper parsed line numbers as filenames. Read the requested file at the reported lines: scheme structure-sheaf modules and light condensed modules over a fixed ordinary ring do not state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.scalarRestriction",
+   "results": "CategoryTheory.Mod_.scalarRestriction",
+   "date": "2026-10-16",
+   "verdict": "No exact full-item match: internal-module scalarRestriction/comap restrict scalars, ModuleCat.extendScalars extends ordinary ring scalars, and Mon.lean:856 has only a mapMod TODO. The specified internal module pullback needs transport plus extension."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|def scalarRestriction|def comap",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "No exact full-item match: internal-module scalarRestriction/comap restrict scalars, ModuleCat.extendScalars extends ordinary ring scalars, and Mon.lean:856 has only a mapMod TODO. The specified internal module pullback needs transport plus extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive monoidal functor maps internal modules over a ring object to internal modules over its image ring and scalar extension preserves addition",
+   "results": "ModuleCat.instAdditiveRestrictScalars, MoritaEquivalence.instAdditiveModuleCatFunctorEqv, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.extendScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.coextendScalars, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.monoidalLinearOfFaithful",
+   "date": "2026-10-16",
+   "verdict": "No exact full-item match: internal-module scalarRestriction/comap restrict scalars, ModuleCat.extendScalars extends ordinary ring scalars, and Mon.lean:856 has only a mapMod TODO. The specified internal module pullback needs transport plus extension."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -48,5 +291,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-module-pushforward-pullback"
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-module-upper-star",
+  "worker": "stage1",
+  "summary": "Checked the main-20261015 definition and unit, ruled out a slopmaster2 attachment and an exact Mathlib match, replaced the absent umbrella pullback reference by the existing granular definitions, and supplied the transport/extension construction and explicit additivity calculations. No new nodes are needed. Repaired the returned landing by revalidating the current coefficient-morphism statement: step 2 now identifies its comparison component and transported source ring explicitly, and citations.json quotes the current statement.",
+  "blueprint": "Realizes the full defining composite, its transport action and relative tensor formula in def-sfb-module-upper-star.md, and expands its final additivity sentence. It follows the pullback bullet of sk-def-sfb-module-pushforward-pullback/_section.md without using the later module-pullback exactness theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-abefc5a12",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-abefc5a12 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source locations, and chapter/unit route. All five steps are valid; coefficient map and internal-module categories agree with the source. Checked edge cases, duplicate candidates, and absence of dependency cycles through this item. Accepted the generic abelian-sheaf tool use. No repairs needed; detailed checks are in review.md."
+ }
 }

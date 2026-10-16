@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-cor-coefficient-heart-ii-triangulated",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Bounded constructible complexes with field coefficients form a triangulated subcategory",
@@ -13,38 +13,354 @@
   "place": "node det-cor-coefficient-heart-ii-triangulated, order None"
  },
  "stmt_deps": [
-  "det-def-sfb-constructible-tor-amplitude"
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-triangulated-subcategory"
  ],
  "proof": [
   {
-   "text": "$0$, isomorphisms and shifts are clear: $\\mathcal H^q(K[n])=\\mathcal H^{q+n}(K)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Work throughout with the actual coefficient sheaf $\\Lambda_X$, pulled back from the condensed ring, and put $\\mathcal A=\\Mod(\\Lambda_X)$. Use the universe and small-skeleton convention [def-weil-size-convention], so the site is small relative to the module universe. Then $\\mathcal A$ is abelian by [def-weil-sheaf-of-modules-category], and its cohomology functors are those of [def-weil-derived-cohomology-sheaves], which applies to any sheaf of commutative rings, not just a constant sheaf. By [det-def-sfb-constructible-tor-amplitude] (2), membership in $\\Dbc$ means finite cohomological support and constructibility of every cohomology sheaf. The zero sheaf has a finite constant local model, using the zero finitely presented module in [det-def-sfb-constructible-local-model], so it is constructible on the one-stratum stratification (the empty stratification if $X$ is empty). The zero complex therefore belongs to $\\Dbc$. An isomorphism of complexes in the derived category induces isomorphisms on all cohomology sheaves by functoriality; the same local models and stratification work for an isomorphic sheaf. Thus $\\Dbc$ is closed under isomorphisms.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-derived-cohomology-sheaves",
+    "det-def-sfb-constructible-tor-amplitude",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); blueprint proof, first paragraph: zero and isomorphisms"
+   }
   },
   {
-   "text": "Let $K\\to K'\\to K''\\to K[1]$ be distinguished with $K,K'\\in\\Dbc(X,\\Lambda)$ (by rotation, any\ntwo vertices may be put in these positions, using closure under shifts). The long exact\nsequence\n$$\n\\mathcal H^qK\\to\\mathcal H^qK'\\to\\mathcal H^qK''\\to\\mathcal H^{q+1}K\\to\\mathcal H^{q+1}K'\n$$\nshows that $\\mathcal H^qK''=0$ unless $\\mathcal H^qK'\\ne0$ or $\\mathcal H^{q+1}K\\ne0$, so\n$K''$ is bounded, and gives a short exact sequence\n$$\n0\\to\\coker(\\mathcal H^qK\\to\\mathcal H^qK')\\to\\mathcal H^qK''\\to\\ker(\\mathcal H^{q+1}K\\to\\mathcal H^{q+1}K')\\to0 .\n$$\nThe outer terms are constructible because $\\Cons(X,\\Lambda)$ is closed under kernels and\ncokernels, and then the middle term is constructible because it is closed under extensions\n([det-lem-coefficient-heart-closure]).",
+   "text": "For every integer $n$, [lem-sp-derived-cohomology-shift] applied to $\\mathcal A$ gives $\\mathcal H^q(K[n])\\simeq\\mathcal H^{q+n}(K)$. If the support of the cohomology of $K$ is contained in a finite set $S\\subset\\mathbf Z$, that of $K[n]$ is contained in $S-n$. Each of these cohomology sheaves is constructible by the isomorphism invariance established in step 1. The definition [det-def-sfb-constructible-tor-amplitude] (2) now gives $K[n]\\in\\Dbc$ for every $n$, in particular $n=1,-1$.",
    "uses": [
+    "lem-sp-derived-cohomology-shift",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011H (definition-cohomology-shift); blueprint proof, first paragraph: shifts"
+   }
+  },
+  {
+   "text": "Let $K\\xrightarrow uK'\\xrightarrow vK''\\to K[1]$ be distinguished with $K,K'\\in\\Dbc$. In the derived category of [def-weil-abstract-derived-category], by [lem-sf-derived-homology-long-exact] for the abelian category $\\mathcal A$, there is an exact sequence $\\mathcal H^qK\\to\\mathcal H^qK'\\to\\mathcal H^qK''\\xrightarrow{\\delta^q}\\mathcal H^{q+1}K\\to\\mathcal H^{q+1}K'$ for each $q$. Choose finite cohomological supports $S$ for $K$ and $S'$ for $K'$. If $q\\notin S'\\cup(S-1)$, exactness gives $0\\to\\mathcal H^qK''\\to0$, so $\\mathcal H^qK''=0$. Thus the third vertex has finite cohomological support, as required by [det-def-sfb-constructible-tor-amplitude] (2).",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS (lemma-cohomology-homological: on the homotopy category), Tag 0147 (definition-homological), and Tag 05RU (definition-unbounded-derived-category: the localization and descended cohomology); blueprint proof, second paragraph"
+   }
+  },
+  {
+   "text": "Write the five consecutive terms of step 3 as $A\\xrightarrow f B\\xrightarrow g C\\xrightarrow h D\\xrightarrow k E$. Exactness says $\\ker g=\\operatorname{im}f$, $\\ker h=\\operatorname{im}g$ and $\\operatorname{im}h=\\ker k$. In the abelian category of [def-sp-abelian], every epimorphism is the cokernel of its kernel and every monomorphism is the kernel of its cokernel. The induced map $B/\\ker g\\to C$ is monic by [lem-weil-pbc-coimage-mono], with image $\\ker h$; since $B/\\ker g=B/\\operatorname{im}f=\\operatorname{coker}f$, and $C\\to\\operatorname{im}h=\\ker k$ is epic with that kernel, this gives the short exact sequence\n$$0\\to\\operatorname{coker}(\\mathcal H^q u)\\to\\mathcal H^qK''\\to\\ker(\\mathcal H^{q+1}u)\\to0.$$\nThe endpoints are constructible by the kernel and cokernel clause of [det-lem-coefficient-heart-closure], since the four cohomology sheaves of $K,K'$ are constructible. Its extension clause then makes $\\mathcal H^qK''$ constructible. The hypothesis is satisfied: $X$ is Noetherian and the coefficients are exactly $E$ or $\\Qlb$; no assertion for arbitrary condensed coefficients or finite discrete coefficients is substituted. Combining this for all $q$ with step 3 proves $K''\\in\\Dbc$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-coimage-mono",
     "det-lem-coefficient-heart-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ (lemma-cohomology-in-serre-subcategory), proof via the long exact sequence; abelian image/coimage identity is Tag 0109 (definition-abelian-category); blueprint proof, second paragraph"
+   }
   },
   {
-   "text": "Thickness: if $K_1\\oplus K_2\\in\\Dbc$, then $\\mathcal H^q(K_1)$ is a direct summand of a\nconstructible sheaf, i.e. the kernel of an idempotent endomorphism, hence constructible.",
-   "uses": [],
-   "elementary": null
+   "text": "The rotation axiom in [def-weil-triangulated-category] gives the other two cases explicitly. If $K',K''\\in\\Dbc$, rotate to $K'\\to K''\\to K[1]\\to K'[1]$ and apply steps 3--4 to get $K[1]\\in\\Dbc$, hence $K\\in\\Dbc$ by step 2. If $K,K''\\in\\Dbc$, rotate twice to $K''\\to K[1]\\to K'[1]\\to K''[1]$ and obtain $K'[1]\\in\\Dbc$, hence $K'\\in\\Dbc$. Consequently every distinguished triangle with two vertices in $\\Dbc$ has its third there. Together with zero, isomorphism closure and all shifts, this is the full triangulated-subcategory criterion in [def-weil-triangulated-subcategory]; the ambient category is triangulated by [def-weil-abstract-derived-category]. Thus $\\Dbc$ has the inherited triangulated structure.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated), Tag 05QM (definition-triangulated-subcategory), Tag 05QX (lemma-triangulated-subcategory); blueprint proof, parenthetical rotation argument"
+   }
+  },
+  {
+   "text": "For thickness, let $L\\in\\Dbc$ and let $K$ be any retract of $L$ in the ambient derived category, with $i:K\\to L$, $p:L\\to K$ and $pi=1_K$. Fix $q$ and put $M=\\mathcal H^qK$, $F=\\mathcal H^qL$, $a=\\mathcal H^q(i)$, $b=\\mathcal H^q(p)$. Functoriality in [def-weil-derived-cohomology-sheaves] gives $ba=1_M$. Then $a$ identifies $M$ with $\\ker(1_F-ab)$: $(1_F-ab)a=0$, and whenever $(1_F-ab)t=0$ one has $t=a(bt)$, uniquely since $ba=1_M$. Both source and target of $1_F-ab$ are the constructible sheaf $F$, so the kernel clause of [det-lem-coefficient-heart-closure] makes $M$ constructible. If $F=0$, the equality $ba=1_M$ forces $M=0$; thus the cohomological support of $K$ is contained in that of $L$. By [det-def-sfb-constructible-tor-amplitude] (2), $K\\in\\Dbc$. In particular, take the inclusion and projection of either summand when $L=K_1\\oplus K_2$. Hence $\\Dbc$ is closed under direct summands and is thick. The complementary idempotent $1_F-ab$, rather than $ab$ itself, has the chosen summand as its kernel.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "det-lem-coefficient-heart-closure",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RB (definition-saturated) and Tag 06UQ (lemma-cohomology-in-serre-subcategory), direct-summand paragraph; blueprint proof, final paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "det-lem-coefficient-heart-closure"
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-cohomology-sheaves",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-def-sfb-constructible-local-model",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-homology-long-exact",
+  "def-sp-abelian",
+  "lem-weil-pbc-coimage-mono",
+  "det-lem-coefficient-heart-closure",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-triangulated.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-triangulated.proof.md",
+  "place": "All three paragraphs, expanded using Stacks Tags 03DA, 011H, 05RS, 0147, 0109, 05QM, 05QX, 05RB and 06UQ"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|weakSerre",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full field-coefficient constructibility and thickness statement; generic triangulated and bounded-derived infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes with cohomology in a Serre subcategory form a thick triangulated subcategory of the derived category",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsTriangulated",
+     "CategoryTheory.Triangulated.Subcategory",
+     "HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic",
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full field-coefficient constructibility and thickness statement; generic triangulated and bounded-derived infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Subcategory",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'CategoryTheory.Triangulated.Subcategory'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match: the queried identifier is unknown to Loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of bounded derived complexes whose cohomology sheaves are constructible over a condensed l-adic field is a thick triangulated subcategory",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "DerivedCategory.instIsTriangulated",
+     "CategoryTheory.Triangulated.TStructure.IsLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "CategoryTheory.Triangulated.TStructure.IsGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full field-coefficient constructibility and thickness statement; generic triangulated and bounded-derived infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|IsTriangulated|IsThick",
+   "results": {
+    "hits": 9,
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean"
+    ],
+    "note": "",
+    "subdirectory": "Algebra/Homology/DerivedCategory"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full field-coefficient constructibility and thickness statement; generic triangulated and bounded-derived infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "general triangulated object-property API only; it does not assert closure for this constructibility condition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weak Serre class in an abelian category defines a triangulated subcategory of derived complexes with bounded cohomology in that class",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_iff"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the full field-coefficient constructibility and thickness statement; generic triangulated and bounded-derived infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "homologicalKernel|IsThick|IsStableUnderRetracts|IsClosedUnderRetracts",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+     "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+     "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+     "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+     "Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+     "Mathlib/CategoryTheory/Triangulated/Generators.lean",
+     "Mathlib/CategoryTheory/Triangulated/Generators.lean",
+     "Mathlib/CategoryTheory/Triangulated/Generators.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory/Triangulated"
+   },
+   "date": "2026-10-16",
+   "verdict": "independent second-reader search: generic triangulated-subcategory and retract-envelope APIs; no declaration asserts bounded constructibility for these condensed field coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded homology property closed under kernels cokernels extensions and retracts is a thick triangulated object property",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₁",
+     "CategoryTheory.Triangulated.Subcategory",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₂",
+     "CategoryTheory.ObjectProperty.IsTriangulatedClosed₃",
+     "CategoryTheory.ObjectProperty.IsTriangulated",
+     "CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated",
+     "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "independent second-reader search: generic triangulated-subcategory and retract-envelope APIs; no declaration asserts bounded constructibility for these condensed field coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSerreClass|homology.*[Pp]roperty|[Pp]roperty.*homology",
+   "results": {
+    "hits": 2,
+    "top": [
+     "Mathlib/Algebra/Homology/CochainComplexPlus.lean",
+     "Mathlib/Algebra/Homology/CochainComplexPlus.lean"
+    ],
+    "note": "",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-16",
+   "verdict": "fresh second-reader search: no match for the constructible field-coefficient category; results concern generic derived bounds and quasi-isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the cohomology objects of a bounded derived object lie in a subcategory stable under kernels cokernels and extensions then these objects are closed under cones and direct summands",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.TStructure.t",
+     "CategoryTheory.hasExt_of_hasDerivedCategory",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "fresh second-reader search: no match for the constructible field-coefficient category; results concern generic derived bounds and quasi-isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated.*Serre|Serre.*IsTriangulated|[Cc]onstructible.*[Tt]hick|[Tt]hick.*[Cc]onstructible",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Independent current second reader: no declaration states bounded constructibility and thickness for the pulled-back condensed field coefficients; semantic hits concern general derived t-structure bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category complexes with finitely many nonzero cohomology objects in a kernel cokernel and extension closed class are stable under rotations and retracts",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.instIsLEObjSingleFunctor"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "Independent current second reader: no declaration states bounded constructibility and thickness for the pulled-back condensed field coefficients; semantic hits concern general derived t-structure bounds."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -61,5 +377,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-cor-coefficient-heart-ii"
+ "unit": "sk-cor-coefficient-heart-ii",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-cor-coefficient-heart-ii-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint proof without creating nodes: supplied the ambient abelian category, zero and isomorphism arguments, cited shift and long-exact cohomology lemmas, bounded the third cohomological support, derived the cokernel/kernel short exact sequence and applied the existing field-coefficient closure statement, wrote both rotations and the triangulated inheritance criterion, and proved retract closure by the kernel of the complementary idempotent. The statement is unchanged.",
+  "blueprint": "Steps 1--2 realize the first paragraph; steps 3--4 realize the long exact sequence and constructibility paragraph; step 5 spells out its rotation parenthesis and triangulated-subcategory conclusion; step 6 realizes and corrects the final thickness paragraph. The parent sk-cor-coefficient-heart-ii proof uses exactly the same cohomology/kernel/cokernel route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-ae6d96de7",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-ae6d96de7 (reviewer sub-agent of L); spot-checked: Read the full item, report, blueprint route, cited DAG statements, and Stacks sources. All six proof steps are valid with correct hypotheses, coefficient category, support bounds, rotations, and retract argument; no SGA route, duplicate, cycle, or repair is needed. Review written to review.md."
+ }
 }

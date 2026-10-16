@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-classical-derived-weak-serre",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Classical module sheaves form a weak Serre subcategory",
@@ -12,40 +12,161 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.md",
   "place": "node det-pe-classical-derived-weak-serre, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-pe-classical-definition"
+ ],
  "proof": [
   {
-   "text": "By [det-pe-classical-sheaves-modules], a module sheaf is classical if and only\nif it is isomorphic to some $\\nu_X^*F$, if and only if its counit\n$\\nu_X^*\\nu_{X,*}G\\to G$ is an isomorphism. The zero sheaf is $\\nu_X^*0$.",
+   "text": "By [det-pe-classical-sheaves-modules], a module sheaf is classical exactly when it lies in the essential image of the exact fully faithful functor $\\nu_X^*$. The zero sheaf is $\\nu_X^*0$, hence is classical.",
    "uses": [
     "det-pe-classical-sheaves-modules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "*Kernels and cokernels.* Write $G\\cong\\nu_X^*F$ and $G'\\cong\\nu_X^*F'$. By full\nfaithfulness, $f$ corresponds to $\\nu_X^*\\varphi$ for a unique\n$\\varphi\\colon F\\to F'$. Since $\\nu_X^*$ is exact,\n$\\ker f\\cong\\nu_X^*\\ker\\varphi$ and $\\operatorname{coker}f\\cong\n\\nu_X^*\\operatorname{coker}\\varphi$, which are classical.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Extensions.* Let $0\\to G'\\to E\\to G\\to0$ be exact with $G'\\cong\\nu_X^*F'$ and\n$G\\cong\\nu_X^*F$. Applying the left exact functor $\\nu_{X,*}$ gives the exact\nsequence\n\n$$\n0\\to\\nu_{X,*}G'\\to\\nu_{X,*}E\\to\\nu_{X,*}G\\to R^1\\nu_{X,*}G'.\n$$\n\nBy the derived unit isomorphism $F'\\xrightarrow{\\sim}R\\nu_{X,*}\\nu_X^*F'$ of\n[sk-prop-sf-comparison], $R^1\\nu_{X,*}G'\\cong H^1(F')=0$, so\n$0\\to\\nu_{X,*}G'\\to\\nu_{X,*}E\\to\\nu_{X,*}G\\to0$ is exact. Apply the exact\nfunctor $\\nu_X^*$. The counits give a map of short exact sequences\n\n$$\n\\begin{array}{ccccccccc}\n0&\\to&\\nu_X^*\\nu_{X,*}G'&\\to&\\nu_X^*\\nu_{X,*}E&\\to&\\nu_X^*\\nu_{X,*}G&\\to&0\\\\\n&&\\downarrow&&\\downarrow&&\\downarrow&&\\\\\n0&\\to&G'&\\to&E&\\to&G&\\to&0\n\\end{array}\n$$\n\nwhose outer vertical maps are isomorphisms because $G'$ and $G$ are classical.\nBy the five lemma the middle counit is an isomorphism, so $E$ is classical.",
+   "text": "For a map $f:G\\to G'$ with $G\\cong\\nu_X^*F$ and $G'\\cong\\nu_X^*F'$, full faithfulness gives a unique $\\varphi:F\\to F'$ with $f\\cong\\nu_X^*\\varphi$. Exactness of $\\nu_X^*$ identifies $\\ker(f)$ with $\\nu_X^*\\ker(\\varphi)$ and $\\operatorname{coker}(f)$ with $\\nu_X^*\\operatorname{coker}(\\varphi)$; both are classical by the essential-image clause of [det-pe-classical-sheaves-modules].",
    "uses": [
-    "sk-prop-sf-comparison"
+    "det-pe-classical-sheaves-modules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Kernels and cokernels paragraph"
+   }
+  },
+  {
+   "text": "Use the small site presentations and common universes of [def-weil-size-convention], containing the schemes and coefficient ring under consideration. For each of the two constant commutative ring sheaves, [lem-pur-ringed-site-grothendieck-abelian] makes its module-sheaf category Grothendieck abelian, and [lem-sp-grothendieck-enough-injectives] gives enough injectives. The functor $R=\\nu_{X,*}$ is additive and left exact: it is restriction on sections by [def-weil-pbc-site-comparison-morphism], so it preserves addition and the sectionwise kernels of [def-weil-sheaf-of-modules-category]. Put $L=\\nu_X^*$; its exactness and the module adjunction $L\\dashv R$ are [det-pe-classical-sheaves-modules].",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Extensions paragraph"
+   }
+  },
+  {
+   "text": "Let $0\\to G\\xrightarrow{a}E\\xrightarrow{b}H\\to0$ be exact with $G\\cong LF$ and $H\\cong LF_1$ classical. Apply [sk-prop-sf-comparison] to the degree-zero complex $F[0]\\in D^+(X_{\\mathrm{ét}},\\Lambda)$: its derived unit is an isomorphism $F[0]\\cong R\\nu_{X,*}(LF[0])$. The single-object identification [lem-sp-derived-functor-single-identification], with the abelian categories and enough injectives supplied in step 3, identifies its degree-one cohomology with $R^1\\nu_{X,*}(LF)$.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Extensions paragraph"
+   }
+  },
+  {
+   "text": "Apply the cohomology functor of [def-weil-abstract-derived-category] in degree $1$ to the isomorphism in step 4. It preserves isomorphisms, so $R^1\\nu_{X,*}(LF)\\cong H^1(F[0])$. In the complex $F[0]$, the terms in degrees $1$ and $2$ are zero, hence $\\ker(d^1)=0$ and $\\operatorname{im}(d^0)=0$; thus $H^1(F[0])=0/0=0$. The isomorphism $G\\cong LF$ therefore gives $R^1\\nu_{X,*}G=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Extensions paragraph"
+   }
+  },
+  {
+   "text": "The long exact sequence [lem-weil-pbc-derived-functor-long-exact] applies to the left exact additive $R=\\nu_{X,*}$ and the sequence in step 4, by step 3. Using the natural identification $R^0R\\cong R$ of [lem-sp-derived-well-defined], its beginning is $0\\to RG\\xrightarrow{Ra}RE\\xrightarrow{Rb}RH\\to R^1RG$. Step 5 makes the last term zero. Exactness consequently says $Rb$ is an epimorphism, giving a short exact sequence $0\\to RG\\to RE\\to RH\\to0$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Extensions paragraph"
+   }
+  },
+  {
+   "text": "Apply the exact $L$ of [det-pe-classical-sheaves-modules] to the short exact sequence in step 6. Together with the sequence in step 4, the counits form two short exact rows with vertical maps $\\varepsilon_G:LRG\\to G$, $\\varepsilon_E:LRE\\to E$ and $\\varepsilon_H:LRH\\to H$. The squares commute by the equations $a\\varepsilon_G=\\varepsilon_E LR(a)$ and $b\\varepsilon_E=\\varepsilon_H LR(b)$ expressing naturality of the counit. Since $L$ is fully faithful, the adjunction identifies its Hom bijection with postcomposition by $\\eta_F:F\\to RLF$. Taking the source to be $RLF$ yields $t:RLF\\to F$ with $\\eta_F t=1$; injectivity for source $F$ then gives $t\\eta_F=1$, since $\\eta_F(t\\eta_F)=\\eta_F$. Thus $\\eta_F$ is invertible. The triangle identity $\\varepsilon_{LF}\\,L\\eta_F=1_{LF}$ now makes $\\varepsilon_{LF}$ invertible; naturality with the isomorphisms $G\\cong LF$ and $H\\cong LF_1$ makes $\\varepsilon_G$ and $\\varepsilon_H$ invertible. The short five lemma [lem-weil-pbc-short-five-lemma] makes $\\varepsilon_E$ invertible. Hence $E\\cong LRE$ lies in the classical essential image of $L$, as required.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+    "place": "Extensions paragraph"
+   }
   }
  ],
  "proof_deps": [
   "det-pe-classical-sheaves-modules",
-  "sk-prop-sf-comparison"
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "sk-prop-sf-comparison",
+  "lem-sp-derived-functor-single-identification",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sp-derived-well-defined",
+  "lem-weil-pbc-short-five-lemma"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-classical-derived/sk-cor-pe-classical-derived-weak-serre.proof.md",
+  "place": "Opening paragraph, Kernels and cokernels paragraph, and Extensions paragraph; the elementary cohomology and counit calculations are written explicitly."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeakSerre|weakSerre|IsSerreClass|classical.*[Ss]heaf",
+   "results": "Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean; Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: only generic Serre-class definitions and localization infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The essential image of an exact fully faithful functor with fully faithful derived functor is closed under extensions",
+   "results": "CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits; CategoryTheory.Limits.instIsClosedUnderColimitsOfShapeEssImageOfHasColimitsOfShapeOfPreservesColimitsOfShapeOfFullOfFaithful; CategoryTheory.Functor.toEssImage; CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage; CategoryTheory.Functor.essImage.liftFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Equivalence.fullyFaithfulToEssImage",
+   "date": "2026-10-16",
+   "verdict": "no match: the extension-closure constructor assumes the conclusion; closure under colimits and inverse images does not prove classical extension closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsSerreClass",
+   "results": "CategoryTheory.ObjectProperty.IsSerreClass; CategoryTheory.ObjectProperty.instIsSerreClassIsZero; CategoryTheory.ObjectProperty.IsSerreClass.toContainsZero; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderQuotients; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects; CategoryTheory.ObjectProperty.instIsSerreClassTop; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions; CategoryTheory.ObjectProperty.IsSerreClass.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: a stronger Serre-class definition and its projections do not establish this specific classical subcategory is a weak Serre subcategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classical sheaves of modules on the pro etale site form a weak Serre subcategory closed under kernels cokernels and extensions",
+   "results": "Condensed.instAB4CondensedMod; CondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; Condensed.instAB5CondensedMod; CondensedMod.ofSheafProfinite; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern condensed modules, not the classical essential image on a scheme pro-etale site."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Ee]xtension|[Ee]xtension.*essImage|[Cc]lassical",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the single hit is an introductory comment about future classical cohomology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The essential image of an exact fully faithful left adjoint whose derived unit is an isomorphism is closed under extensions and kernels and cokernels",
+   "results": "CategoryTheory.Adjunction.mem_essImage_of_unit_isIso; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint; CategoryTheory.abelianOfAdjunction; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Adjunction.hasExactLimitsOfShape; CategoryTheory.exactFunctor; CategoryTheory.Adjunction.hasExactColimitsOfShape",
+   "date": "2026-10-16",
+   "verdict": "no match: adjunction essential-image criterion, Ext maps and Bousfield localization do not state the needed weak-Serre essential-image theorem."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -59,5 +180,39 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-classical-derived"
+ "unit": "sk-cor-pe-classical-derived",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-classical-derived-weak-serre",
+  "worker": "stage1",
+  "summary": "Seven steps follow the current blueprint: exact full faithfulness handles zero, kernels and cokernels; the derived unit gives explicit degree-one vanishing; the long exact sequence and counit short-five-lemma diagram give extension closure. No new nodes. Cited the actual classical definition in stmt_deps and the size convention for the small-site hypothesis; retained the previous reader's expanded categorical justifications and corrected proof source.",
+  "blueprint": "Steps 1 and 2 realize the opening and kernels/cokernels paragraphs; steps 3--7 realize the extensions paragraph, including its cohomology calculation and the actual counit diagram.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic ringed-site module-sheaf Grothendieck theorem supplies the hypothesis for the derived-functor argument on the etale and pro-etale sites; the unit does not state this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact sequence is needed in the blueprint extensions paragraph; the classical-sheaves unit has no such categorical input."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Generic identification of total-derived cohomology on a degree-zero object with classical higher derived functors matches the derived unit with the long exact sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-ba4f98f42",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-ba4f98f42 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, cited nodes, sources, hypotheses, coefficient categories, base-change morphism, edge cases, DAG dependencies, and delivery-error criteria. Seven proof steps are mathematically sound; no new nodes or repairs are required. Review written to review.md."
+ }
 }

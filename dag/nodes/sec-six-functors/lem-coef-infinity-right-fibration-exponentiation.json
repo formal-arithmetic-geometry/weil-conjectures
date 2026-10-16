@@ -28,53 +28,133 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary monomorphism $k:K\\hookrightarrow L$ and a lifting square for $\\rho$ against $k$. Unfold the internal functor construction in [def-cbc-enhanced-diagrams-cones]. For arbitrary small simplicial sets $H,V,X$, a map $a:V\\to\\operatorname{Fun}(H,X)$ is equivalent to $\\widetilde a:H\\times V\\to X$: explicitly $\\widetilde a_n(h,v)=a_n(v)_n(h,\\operatorname{id}_{[n]})$, and the inverse sends $v\\in V_n$ to the map with $m$-simplex value $(h,\\alpha:[m]\\to[n])\\mapsto\\widetilde a_m(h,V(\\alpha)v)$. Naturality under simplicial operators verifies that these rules give inverse simplicial maps. Thus the lifting data specify maps $B\\times K\\to E$, $A\\times L\\to E$ agreeing on $A\\times K$, and $B\\times L\\to S$ whose restrictions are their composites with $q$. By the colimit universal property of [def-weil-pbc-category-colimit], glue the first two maps on their pushout $P=(A\\times L)\\amalg_{A\\times K}(B\\times K)$. Fillers of the original square correspond exactly to maps $B\\times L\\to E$ extending this map $P\\to E$ and lying over the prescribed map to $S$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, adjunction of its two displayed lifting problems; the explicit simplex formulas are an agent expansion of the internal-hom definition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-anodyne-product] to the given right-anodyne $i:A\\hookrightarrow B$ and the monomorphism $k:K\\hookrightarrow L$. Its displayed map is exactly $P\\to B\\times L$ in Step 1, so this map is right anodyne. This statement is about the Cartesian product, not the join used elsewhere in the ancestor route.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0153",
+    "place": "Kerodon Proposition 4.2.5.3, right-anodyne assertion."
+   }
+  },
+  {
+   "text": "For the fixed $q:E\\to S$, let $\\mathcal L$ be the class of maps with the left lifting property against $q$, in the precise square-and-diagonal sense of [lem-coef-lifting-class-closure]. Apply that node with $T$ the class consisting of $q$: $\\mathcal L$ contains identities and is closed under pushouts and arrow retracts. Isomorphisms also belong to it directly, since for an isomorphism $a$ a diagonal is $u\\circ a^{-1}$. By [lem-coef-transfinite-left-lifting] with the same singleton $T$, $\\mathcal L$ is closed under all small transfinite compositions. Each generating horn $\\Lambda_j^m\\hookrightarrow\\Delta^m$, $m\\geq1$, $0<j\\leq m$, belongs to $\\mathcal L$ by the right-fibration hypothesis on $q$. The defining minimality of the weakly saturated right-anodyne class therefore puts every right-anodyne map in $\\mathcal L$. In particular, the map $P\\to B\\times L$ of Step 2 has a lift against $q$; transposing its diagonal by Step 1 solves the arbitrary lifting problem for $\\rho$.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0154",
+    "place": "Proposition 4.2.5.4, last sentence; explicit weak-saturation argument, compare Kerodon Corollary 4.2.4.9(2) (0151)."
+   }
+  },
+  {
+   "text": "Use Step 3 for $k:\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ for every $n\\geq0$, using [def-weil-pbc-trivial-kan-fibration]. These are monomorphisms because each boundary is a simplicial subset. For $n\\geq1$ the resulting fillers give precisely the required boundary extensions. For $n=0$ the domain is empty and a map $\\Delta[0]\\to Y$ is exactly a vertex of $Y$ (all its other values are forced degeneracies); consequently the lifting property says that every target vertex of $\\rho$ has a source vertex. This is the surjectivity clause of that same definition. Thus $\\rho$ is a trivial Kan fibration, with no use of a quasicategory hypothesis on $E$ or $S$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Stacks Tag 08NL, label definition-trivial-kan, with the boundary definition immediately preceding it; applies the lifting conclusion to all boundary inclusions, including dimension zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-transfinite-left-lifting",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0154",
+  "place": "Expanded from the online proof of Kerodon Proposition 4.2.5.4 using Proposition 4.2.5.3 (0153), the existing lifting-class closure leaf and the new transfinite-composition leaf. Kerodon is not archived under literature/; WANTED entries in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Exponentiating a right fibration against a right anodyne simplicial inclusion gives a trivial Kan fibration",
-   "results": "{\"t\": \"2026-10-16T11:51:24Z\", \"tool\": \"leanfinder\", \"query\": \"Exponentiating a right fibration against a right anodyne simplicial inclusion gives a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"c1f2efd574974188\"}",
+   "results": "{\"t\": \"2026-10-16T13:35:47Z\", \"tool\": \"leanfinder\", \"query\": \"Exponentiating a right fibration against a right anodyne simplicial inclusion gives a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"c1f2efd574974188\"}",
    "date": "2026-10-16",
-   "verdict": "no match: CategoryWithFibrations.lean:46-49,101-103 (read) concerns the Quillen class generated by ALL horns and its lifting properties. Generic ModelCategory Joyal-trick/trivial-fibration results assume model-category hypotheses and do not supply this one-sided horn exponential theorem; Mathlib has no right-anodyne/right-fibration notion in the targeted grep."
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
   },
   {
    "tool": "loogle",
-   "query": "\"anodyne\", \"fibration\"",
-   "results": "{\"t\": \"2026-10-16T11:51:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "anodyne, fibration",
+   "results": "{\"t\": \"2026-10-16T13:35:48Z\", \"tool\": \"loogle\", \"query\": \"anodyne, fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'anodyne'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: CategoryWithFibrations.lean:46-49,101-103 (read) concerns the Quillen class generated by ALL horns and its lifting properties. Generic ModelCategory Joyal-trick/trivial-fibration results assume model-category hypotheses and do not supply this one-sided horn exponential theorem; Mathlib has no right-anodyne/right-fibration notion in the targeted grep."
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
   },
   {
    "tool": "grep",
    "query": "right.?anodyne|right.?[Ff]ibration|exponent.*[Ff]ibration",
-   "results": "{\"t\": \"2026-10-16T11:51:25Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|right.?[Ff]ibration|exponent.*[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-16T13:35:48Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|right.?[Ff]ibration|exponent.*[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: CategoryWithFibrations.lean:46-49,101-103 (read) concerns the Quillen class generated by ALL horns and its lifting properties. Generic ModelCategory Joyal-trick/trivial-fibration results assume model-category hypotheses and do not supply this one-sided horn exponential theorem; Mathlib has no right-anodyne/right-fibration notion in the targeted grep."
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
   },
   {
    "tool": "leansearch",
    "query": "The relative internal hom map of a right fibration and a right horn generated inclusion is a trivial Kan fibration",
-   "results": "{\"t\": \"2026-10-16T11:51:26Z\", \"tool\": \"leansearch\", \"query\": \"The relative internal hom map of a right fibration and a right horn generated inclusion is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.trivialFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"86b611d2f3b4a727\"}",
+   "results": "{\"t\": \"2026-10-16T13:35:49Z\", \"tool\": \"leansearch\", \"query\": \"The relative internal hom map of a right fibration and a right horn generated inclusion is a trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.trivialFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"86b611d2f3b4a727\"}",
    "date": "2026-10-16",
-   "verdict": "no match: CategoryWithFibrations.lean:46-49,101-103 (read) concerns the Quillen class generated by ALL horns and its lifting properties. Generic ModelCategory Joyal-trick/trivial-fibration results assume model-category hypotheses and do not supply this one-sided horn exponential theorem; Mathlib has no right-anodyne/right-fibration notion in the targeted grep."
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"anodyne\", \"fibration\"",
+   "results": "{\"t\": \"2026-10-16T13:42:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"anodyne\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
   },
   {
    "tool": "leanfinder",
-   "query": "Simplicial restriction map on lifts into any right fibration is a trivial fibration when the domain inclusion is generated by final horns",
-   "results": "{\"t\": \"2026-10-16T11:52:40Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial restriction map on lifts into any right fibration is a trivial fibration when the domain inclusion is generated by final horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"e8cf1a6473c5c504\"}",
+   "query": "Restriction on internal mapping simplicial sets against a right horn generated inclusion is a trivial fibration for any right fibration",
+   "results": "{\"t\": \"2026-10-16T13:42:19Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction on internal mapping simplicial sets against a right horn generated inclusion is a trivial fibration for any right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"ec7f58b4c19fba99\"}",
    "date": "2026-10-16",
-   "verdict": "no match: CategoryWithFibrations.lean:46-49,101-103 (read) concerns the Quillen class generated by ALL horns and its lifting properties. Generic ModelCategory Joyal-trick/trivial-fibration results assume model-category hypotheses and do not supply this one-sided horn exponential theorem; Mathlib has no right-anodyne/right-fibration notion in the targeted grep."
+   "verdict": "no match: read CategoryWithFibrations.lean:38-53,73-103; those declarations concern lifting against all horns. The Joyal-trick and trivialFibrations hits assume general model category data and do not assert one-sided right-fibration exponentiation. No right-anodyne/right-fibration notion occurs in the targeted grep. The unquoted Loogle query reported an unknown identifier and is not evidence of absence; a quoted name query was run afterward."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-anodyne-cocones",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-right-fibration-exponentiation",
+  "worker": "stage1",
+  "summary": "Retained the exact arbitrary-simplicial-set statement. Expanded the internal-hom lifting adjunction in simplicial degrees, isolated the Cartesian right-anodyne pushout-product input, and derived right-anodyne lifting from the existing generic lifting-class closure leaf plus a new Mathlib transfinite closure leaf. Included the empty boundary to verify vertex surjectivity. No Lean attachment, compiler or live-tree edit.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: finite-shape control of coherent diagrams in the stable flat-model enhancement. Proposition 4.2.5.4, right-fibration/right-anodyne assertion. Steps 1-4 supply the exponential lifting input used in Step 3 of lem-coef-infinity-anodyne-cocones, following the inherited stable enhancement route; no unit step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-973960046",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-973960046 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit/chapter route in full. Verified all four proof steps against Kerodon 0154/0153, Stacks 08NL, and the exact Mathlib transfinite-lifting theorem. Checked horn orientation, empty and limit cases, duplicates, and dependency cycles. No repairs or additional tool_uses needed. Detailed checks are in review.md."
+ }
 }

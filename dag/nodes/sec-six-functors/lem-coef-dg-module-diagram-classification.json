@@ -25,9 +25,115 @@
   "lem-coef-dgcat-model-structure",
   "lem-coef-dg-module-projective-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-enriched-projective-diagram-model] first to $\\mathcal N=\\mathrm{Ch}(\\mathbf Z)$ and index $\\mathcal D$. This constructs precisely the asserted projective model structure on $\\mathcal M$, including enrichment, cofibrant generating domains and codomains, and fibrancy of all objects. Apply it again with target $\\mathcal M$ and index $\\mathcal A$ to obtain the projective model structure on strict $\\mathcal A$-diagrams. By [lem-coef-dgcat-model-structure], the cofibrancy of $\\mathcal A$ implies that its morphism complexes are cofibrant; hence evaluation of any cofibrant diagram is cofibrant in $\\mathcal M$. These conclusions require no cofibrancy of the morphism complexes of $\\mathcal D$.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 3, Definition 3.1, enriched-diagram model structures, and Proposition 3.3; compare Toën, https://arxiv.org/pdf/math/0408337, Section 3, Definition 3.1, enriched-diagram model structures, and Proposition 3.3. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "Define $\\mathcal A\\otimes\\mathcal D$ to have object pairs and morphism complexes $\\mathcal A(a,a')\\otimes_{\\mathbf Z}\\mathcal D(d,d')$, with tensor differential and composition using the graded symmetry. Currying identifies a strict $\\mathcal A$-diagram of covariant $\\mathcal D$-modules with a covariant module over $\\mathcal A\\otimes\\mathcal D$, as follows. Put $H(a,d)=F(a)(d)$, and, for homogeneous $\\alpha:a\\to a'$ and $\\delta:d\\to d'$, put $H(\\alpha\\otimes\\delta)=F(\\alpha)_{d'}\\circ F(a)(\\delta)$. Graded naturality gives $F(a')(\\delta)F(\\alpha)_d=(-1)^{|\\alpha||\\delta|}F(\\alpha)_{d'}F(a)(\\delta)$, so compositions obey the tensor-category sign $(-1)^{|\\delta'||\\alpha|}$. Conversely restrict $H$ to $\\alpha\\otimes1$ and $1\\otimes\\delta$ to recover the two actions. A degree-$r$ transformation is a family of maps at $(a,d)$ satisfying the two graded commutation equations; these combine to the module equation with sign $(-1)^{r(|\\alpha|+|\\delta|)}$. The componentwise differential is $d\\eta=d_G\\eta-(-1)^r\\eta d_F$ on both sides. Both categories have the same values at pairs of objects, the same complexes of graded module maps, and the same objectwise quasi-isomorphisms and surjections. Thus their projective model structures agree, by the lifting definition of cofibrations. A projectively cofibrant module $P$ is homotopically projective: for any objectwise acyclic $N$, apply the enriched model axiom of [lem-coef-enriched-projective-diagram-model] to $0\\to P$ and the trivial fibration $N\\to0$. It says that $\\underline{\\operatorname{Hom}}(P,N)\\to0$ is a quasi-isomorphism. Apply [lem-coef-dg-module-projective-resolution] to $(\\mathcal A\\otimes\\mathcal D)^{\\mathrm{op}}$ (a homogeneous left action $bm$ is read as the right action $mb=(-1)^{|b||m|}bm$ over the opposite; this turns the signed left-module map equation into the right-module equation in that node). Between these cofibrant modules, morphisms in the localized diagram category are therefore $H^0$ of the actual module-map complexes. In particular an isomorphism between two cofibrant diagrams has representatives in both directions whose composites differ from identities by boundaries; it is represented by a chain homotopy equivalence of module diagrams, hence by an objectwise quasi-isomorphism.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 3, module conventions and enriched model axiom; Section 4, proof of Sub-lemma 4.5; compare Toën, https://arxiv.org/pdf/math/0408337, Section 3, module conventions and enriched model axiom; Section 4, proof of Sub-lemma 4.5. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "By [lem-coef-dgcat-model-structure], every morphism $\\mathcal A\\to\\operatorname{Int}(\\mathcal S)$ in $\\mathsf{Hqe}$ has a strict dg representative and equality is model-category homotopy. Choose a cofibrant cylinder $\\mathcal A\\amalg\\mathcal A\\hookrightarrow\\mathcal C\\xrightarrow{p}\\mathcal A$ with inclusions $i_0,i_1$ and $pi_t=1$. Its middle object is cofibrant since the first map and the initial maps of both copies of $\\mathcal A$ are cofibrations. Thus all morphism complexes of $\\mathcal C$ and $\\mathcal A$ are cofibrant. Each $i_t$ and $p$ is a quasi-equivalence, by two-out-of-three. Apply [lem-coef-locally-cofibrant-dg-restriction] with target $\\mathcal M$: on localized diagram categories $p^*$ is an equivalence and $i_0^*,i_1^*$ are both its inverses since $i_t^*p^*=1$. Consequently they are naturally isomorphic. A cylinder homotopy $H:\\mathcal C\\to\\operatorname{Int}(\\mathcal S)$ therefore has isomorphic endpoint module diagrams. Their values are in $\\mathcal S$, and this is an isomorphism in the full subcategory $D(\\mathcal M^{\\mathcal A})_{\\mathcal S}$. This proves that the proposed map on $\\mathsf{Hqe}$ is well defined. The same argument works with homotopically projective values, since this step does not need cofibrancy of the values of $H$.",
+   "uses": [
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-locally-cofibrant-dg-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 6, Lemma 6.2, well-definedness via Proposition 3.2; compare Toën, https://arxiv.org/pdf/math/0408337, Section 6, Lemma 6.2, well-definedness via Proposition 3.2. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "Given any diagram $F$ with values in $\\mathcal S$, factor $0\\to F$ in the projective diagram model structure as $0\\to QF\\xrightarrow{q}F$, with $QF$ cofibrant and $q$ a trivial fibration. By step 1 and [lem-coef-enriched-projective-diagram-model], every $QF(a)$ is cofibrant. Since $q(a)$ is a quasi-isomorphism and $F(a)\\in\\mathcal S$, saturation in both directions gives $QF(a)\\in\\mathcal S$. Thus $QF$ is a strict dg functor into $\\operatorname{Int}(\\mathcal S)$, and $q$ identifies its image with $F$ in the localized diagram category. This proves surjectivity for whole diagrams, including their action maps.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 4, Sub-lemma 4.4; Section 6, Lemma 6.2, surjectivity; compare Toën, https://arxiv.org/pdf/math/0408337, Section 4, Sub-lemma 4.4; Section 6, Lemma 6.2, surjectivity. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "Suppose strict dg functors $F,G:\\mathcal A\\to\\operatorname{Int}(\\mathcal S)$ give isomorphic localized diagrams. Their cofibrant replacements $QF,QG$ are isomorphic there. By step 2 and [lem-coef-dg-module-projective-resolution], a closed module map $QF\\to QG$ represents this isomorphism and is an objectwise quasi-isomorphism. Therefore $F,G$ are connected by the zigzag $F\\leftarrow QF\\to QG\\to G$ of objectwise quasi-isomorphisms between diagrams with cofibrant values in $\\mathcal S$. For any arrow $\\alpha:U\\to V$ of such a zigzag, use [lem-coef-enriched-projective-diagram-model] to factor $(\\alpha,1):U\\amalg V\\to V$ as a diagram cofibration $j:U\\amalg V\\to Z$ followed by a trivial fibration $p:Z\\to V$. Evaluation preserves cofibrations by step 1. Each coproduct inclusion is a cofibration at every value, since the other summand is cofibrant (it is a pushout of its initial cofibration). Hence both maps $U\\to Z$ and $V\\to Z$ are objectwise cofibrations. Their composites with $p$ are $\\alpha$ and $1$, so both maps are objectwise quasi-isomorphisms by two-out-of-three. Their values and the values of $Z$ are cofibrant. Moreover $Z(a)\\in\\mathcal S$ since $p(a)$ is a quasi-isomorphism to $V(a)$. We have replaced each arrow by a span of objectwise trivial cofibrations, entirely within cofibrant values in $\\mathcal S$. No closure of $\\mathcal S$ under coproducts is used: $U\\amalg V$ is only an intermediate object in the ambient model category.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dg-module-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 4, Sub-lemma 4.5, reduction to trivial cofibrations (explicit coproduct factorization); compare Toën, https://arxiv.org/pdf/math/0408337, Section 4, Sub-lemma 4.5, reduction to trivial cofibrations (explicit coproduct factorization). The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "Form a dg category $\\mathcal E_{\\mathcal S}$ whose objects are trivial cofibrations $c:P\\to Q$ in $\\mathcal M$ with $P,Q$ cofibrant and in $\\mathcal S$. Between $c:P\\to Q$ and $c':P'\\to Q'$ take the strict-square complex\n$$\\underline{\\operatorname{Hom}}(P,P')\\times_{\\underline{\\operatorname{Hom}}(P,Q')}\\underline{\\operatorname{Hom}}(Q,Q'),$$\nwith differential and composition componentwise. It is a dg category because the square equation is preserved by both operations. Let $e_0,e_1$ be its source and target dg functors to $\\operatorname{Int}(\\mathcal S)$, and let $s$ send $P$ to $1_P$. For the trivial cofibration $c$ and the fibrant object $Q'$, the enriched model axiom in [lem-coef-enriched-projective-diagram-model] makes $\\underline{\\operatorname{Hom}}(Q,Q')\\to\\underline{\\operatorname{Hom}}(P,Q')$ a degreewise surjective quasi-isomorphism. Its pullback is exactly the map of Hom complexes induced by $e_0$. This pullback is again a surjective quasi-isomorphism: its kernel is the same acyclic kernel $K$. To check acyclicity of the kernel of a surjective quasi-isomorphism $t$, a kernel cycle $z$ is a boundary $dx$ in the source by injectivity on cohomology. The element $t(x)$ is a cycle; surjectivity on cohomology gives a source cycle $y$ with $t(x)-t(y)=dv$. Lift $v$ to $w$ using degreewise surjectivity; then $x-y-dw$ is a kernel primitive of $z$. For any degree-$n$ cycle in the target, choose a degree-$n$ lift; its differential is a cycle in $K^{n+1}$, hence a boundary, so subtracting an element of $K^n$ gives a cycle lift. If a cycle maps to a boundary, lift a primitive and subtract its differential; the remaining cycle is in $K$ and is a boundary there. This proves surjectivity and injectivity on cohomology in every degree. Thus $e_0$ is quasi-fully faithful; it is essentially surjective since $e_0s=1$. By [lem-coef-dgcat-model-structure] it is a quasi-equivalence and becomes invertible in $\\mathsf{Hqe}$. Since $e_0s=e_1s=1$, the section $s$ is its inverse and $e_0=e_1$ in $\\mathsf{Hqe}$. Every objectwise trivial-cofibration transformation $U\\to V$ from step 5 defines a strict dg functor $\\mathcal A\\to\\mathcal E_{\\mathcal S}$: naturality is exactly the strict-square equation in each degree. Composing with $e_0,e_1$ shows $[U]=[V]$ in $\\mathsf{Hqe}$. Applying this to the spans of step 5 proves $[F]=[G]$, hence injectivity. This constructs the needed comparison for diagrams and never infers it merely from objectwise isomorphisms.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 4, Sub-lemma 4.5, arrow-category argument, expanded at the level of Hom complexes; compare Toën, https://arxiv.org/pdf/math/0408337, Section 4, Sub-lemma 4.5, arrow-category argument, expanded at the level of Hom complexes. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "Let $\\mathcal P_{\\mathcal S}$ be the full dg category of homotopically projective modules in $\\mathcal S$. The enriched-model argument in step 2, applied to $\\mathcal D$-modules, proves that every cofibrant module is homotopically projective. The inclusion $j:\\operatorname{Int}(\\mathcal S)\\hookrightarrow\\mathcal P_{\\mathcal S}$ is fully faithful on actual Hom complexes. For any $P\\in\\mathcal P_{\\mathcal S}$ choose a projective-model cofibrant replacement $QP\\to P$ using [lem-coef-enriched-projective-diagram-model]. It lies in $\\mathcal S$ by saturation, and both endpoints are homotopically projective. By [lem-coef-dg-module-projective-resolution] this quasi-isomorphism is a chain homotopy equivalence, hence an isomorphism in $H^0\\mathcal P_{\\mathcal S}$. Therefore $j$ is a quasi-equivalence and becomes invertible in $\\mathsf{Hqe}$ by [lem-coef-dgcat-model-structure]. Composing with its inverse gives the asserted bijection for $\\mathcal P_{\\mathcal S}$. To verify its description on a strict functor $T:\\mathcal A\\to\\mathcal P_{\\mathcal S}$, represent $j^{-1}[T]$ by a strict $F:\\mathcal A\\to\\operatorname{Int}(\\mathcal S)$, which is possible since $\\mathcal A$ is cofibrant. Then $jF$ and $T$ are homotopic, and step 3 (with homotopically projective values) makes their underlying module diagrams isomorphic. Thus this variant also sends each strict functor to its entire underlying diagram.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-dgcat-model-structure",
+    "lem-coef-locally-cofibrant-dg-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 6, Lemma 6.2, homotopically projective variant via replacement; compare Toën, https://arxiv.org/pdf/math/0408337, Section 6, Lemma 6.2, homotopically projective variant via replacement. The external source is read online; the argument is written out here."
+   }
+  },
+  {
+   "text": "For a strict dg functor $u:\\mathcal A'\\to\\mathcal A$ between cofibrant test categories, both operations on the classification send a representative $F$ to the underlying diagram $F\\circ u$. Hence the bijections commute with restriction in the test category; the well-definedness in step 3 makes this independent of representatives. The same statement holds after the inclusion $j$ of step 7. Every morphism between these cofibrant test categories in $\\mathsf{Hqe}$ has a strict representative by [lem-coef-dgcat-model-structure]. If two representatives are cylinder-homotopic, composing their cylinder homotopy with $F$ and applying step 3 makes the pulled-back diagrams isomorphic. Consequently restriction on isomorphism classes depends only on the $\\mathsf{Hqe}$ morphism, and the displayed compatibility proves naturality on the full subcategory of cofibrant test categories in $\\mathsf{Hqe}$. All auxiliary dg categories, including $\\mathcal E_{\\mathcal S}$ and $\\mathcal P_{\\mathcal S}$, are taken in an enlarged universe as permitted by [lem-coef-dgcat-model-structure]; no smallness assumption on $\\mathcal S$ in the original universe was used.",
+   "uses": [
+    "lem-coef-dgcat-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Section 6, Lemma 6.2, naturality and universe conventions; compare Toën, https://arxiv.org/pdf/math/0408337, Section 6, Lemma 6.2, naturality and universe conventions. The external source is read online; the argument is written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-enriched-projective-diagram-model",
+  "lem-coef-locally-cofibrant-dg-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite enriched comparison. Expanded from Toën, math/0408337, Section 3, Propositions 3.2-3.3, Section 4, Sub-lemmas 4.4-4.5, and Section 6, Lemma 6.2, read online; not archived locally. The trivial-fibration case is replaced by explicit spans of objectwise trivial cofibrations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -84,10 +190,115 @@
    "results": "{\"t\": \"2026-10-16T11:47:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedFunctor.id_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.EnrichedFunctor.comp\"], \"digest\": \"3c8be03114ad3634\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search. ModelCategory and CofibrantObjectHomotopy assume a model structure; EnrichedFunctor and enrichedNatTransYoneda concern ordinary enriched categories. Read CofibrantObjectHomotopy.lean:60-95, Enriched/Basic.lean:465-510, and Enriched/FunctorCategory.lean:14-100. None constructs the quasi-equivalence model structure, classifies dg mapping spaces by bimodules, or classifies derived dg-module diagrams. The broader Dwyer/dg-category grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classification of dg module diagrams by maps from a cofibrant dg category into a full dg subcategory of cofibrant modules",
+   "results": "{\"t\": \"2026-10-16T12:57:20Z\", \"tool\": \"leanfinder\", \"query\": \"Classification of dg module diagrams by maps from a cofibrant dg category into a full dg subcategory of cofibrant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.homMk_surjective\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.IsCofibrant\", \"HomotopicalAlgebra.CofibrantObject.homMk\", \"HomotopicalAlgebra.cofibrantObjects\"], \"digest\": \"e7773fb118b7c7c9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary model homotopy categories, chain-complex localizations and projective resolutions. Read CofibrantObjectHomotopy.lean:55-100, Enriched/FunctorCategory.lean:14-100 and DerivedCategory/Basic.lean:76-122; none classifies strict dg-indexed module diagrams by morphisms in Hqe. The unquoted Loogle query reports an unknown identifier, so the valid quoted ModelCategory/EnrichedFunctor query was also run; no absence claim rests on the rejected query."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyCategory, Enriched, dg module",
+   "results": "{\"t\": \"2026-10-16T12:57:21Z\", \"tool\": \"loogle\", \"query\": \"HomotopyCategory, Enriched, dg module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Enriched'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary model homotopy categories, chain-complex localizations and projective resolutions. Read CofibrantObjectHomotopy.lean:55-100, Enriched/FunctorCategory.lean:14-100 and DerivedCategory/Basic.lean:76-122; none classifies strict dg-indexed module diagrams by morphisms in Hqe. The unquoted Loogle query reports an unknown identifier, so the valid quoted ModelCategory/EnrichedFunctor query was also run; no absence claim rests on the rejected query."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?representable|dg.?module.*diagram",
+   "results": "{\"t\": \"2026-10-16T12:57:21Z\", \"tool\": \"grep\", \"query\": \"quasi.?representable|dg.?module.*diagram\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary model homotopy categories, chain-complex localizations and projective resolutions. Read CofibrantObjectHomotopy.lean:55-100, Enriched/FunctorCategory.lean:14-100 and DerivedCategory/Basic.lean:76-122; none classifies strict dg-indexed module diagrams by morphisms in Hqe. The unquoted Loogle query reports an unknown identifier, so the valid quoted ModelCategory/EnrichedFunctor query was also run; no absence claim rests on the rejected query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict dg module diagrams up to objectwise quasi-isomorphism are classified by dg functors into cofibrant modules",
+   "results": "{\"t\": \"2026-10-16T12:57:21Z\", \"tool\": \"leansearch\", \"query\": \"Strict dg module diagrams up to objectwise quasi-isomorphism are classified by dg functors into cofibrant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"HomologicalComplexUpToQuasiIso.Q\"], \"digest\": \"d9a60660dcfbeeae\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary model homotopy categories, chain-complex localizations and projective resolutions. Read CofibrantObjectHomotopy.lean:55-100, Enriched/FunctorCategory.lean:14-100 and DerivedCategory/Basic.lean:76-122; none classifies strict dg-indexed module diagrams by morphisms in Hqe. The unquoted Loogle query reports an unknown identifier, so the valid quoted ModelCategory/EnrichedFunctor query was also run; no absence claim rests on the rejected query."
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uillen[Ee]quivalence|[Qq]uillen.*equivalence",
+   "results": "{\"t\": \"2026-10-16T12:59:47Z\", \"tool\": \"grep\", \"query\": \"[Qq]uillen[Ee]quivalence|[Qq]uillen.*equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"80d8c618cea3e9c4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:76-122 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100. The hits localize complexes in an ordinary abelian category or the cofibrant objects of one supplied model category. They do not compare enriched diagram categories along a dg quasi-equivalence. The only Quillen-equivalence grep hit is a TODO in AlgebraicTopology/SingularSet.lean:37. Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*model|model.*enriched|projective.*[Dd]iagram|[Dd]iagram.*projective",
+   "results": "{\"t\": \"2026-10-16T12:59:47Z\", \"tool\": \"grep\", \"query\": \"enriched.*model|model.*enriched|projective.*[Dd]iagram|[Dd]iagram.*projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100 and CategoryTheory/Enriched/FunctorCategory.lean:14-100. The former assumes a supplied model category and replaces objects within it; the latter constructs an ordinary end as the enriched Hom for ordinary diagrams. Neither transfers a model structure to dg-indexed enriched diagrams or proves cofibrancy of evaluations. The projective-resolution hits are ordinary resolutions in abelian categories. Loogle and the enriched-model grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi equivalence of differential graded categories induces equivalence of derived categories of enriched diagrams",
+   "results": "{\"t\": \"2026-10-16T12:59:48Z\", \"tool\": \"leansearch\", \"query\": \"Quasi equivalence of differential graded categories induces equivalence of derived categories of enriched diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"DerivedCategory.isIso_Qh_map_iff\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\"], \"digest\": \"9d2216656ad18ba3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:76-122 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100. The hits localize complexes in an ordinary abelian category or the cofibrant objects of one supplied model category. They do not compare enriched diagram categories along a dg quasi-equivalence. The only Quillen-equivalence grep hit is a TODO in AlgebraicTopology/SingularSet.lean:37. Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective model structure on dg modules generated by representables tensored with sphere and disk complexes",
+   "results": "{\"t\": \"2026-10-16T12:59:48Z\", \"tool\": \"leansearch\", \"query\": \"Projective model structure on dg modules generated by representables tensored with sphere and disk complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.projective\", \"Module.Flat.of_projective\", \"CategoryTheory.HasProjectiveResolutions\", \"ModuleCat.projective_of_categoryTheory_projective\", \"ModuleCat.instProjectiveObjFree\", \"CategoryTheory.projectiveResolutions\", \"ModuleCat.projective_of_module_projective\", \"CategoryTheory.hasExt_of_enoughProjectives\"], \"digest\": \"cf334f3ba68f8136\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100 and CategoryTheory/Enriched/FunctorCategory.lean:14-100. The former assumes a supplied model category and replaces objects within it; the latter constructs an ordinary end as the enriched Hom for ordinary diagrams. Neither transfers a model structure to dg-indexed enriched diagrams or proves cofibrancy of evaluations. The projective-resolution hits are ordinary resolutions in abelian categories. Loogle and the enriched-model grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuillenEquivalence\", \"EnrichedFunctor\"",
+   "results": "{\"t\": \"2026-10-16T12:59:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuillenEquivalence\\\", \\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:76-122 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100. The hits localize complexes in an ordinary abelian category or the cofibrant objects of one supplied model category. They do not compare enriched diagram categories along a dg quasi-equivalence. The only Quillen-equivalence grep hit is a TODO in AlgebraicTopology/SingularSet.lean:37. Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"EnrichedFunctor\"",
+   "results": "{\"t\": \"2026-10-16T12:59:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100 and CategoryTheory/Enriched/FunctorCategory.lean:14-100. The former assumes a supplied model category and replaces objects within it; the latter constructs an ordinary end as the enriched Hom for ordinary diagrams. Neither transfers a model structure to dg-indexed enriched diagrams or proves cofibrancy of evaluations. The projective-resolution hits are ordinary resolutions in abelian categories. Loogle and the enriched-model grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category enriched over cochain complexes has a projective model category of enriched diagrams with objectwise fibrations and weak equivalences and cofibrant evaluation for locally cofibrant source",
+   "results": "{\"t\": \"2026-10-16T12:59:49Z\", \"tool\": \"leanfinder\", \"query\": \"A category enriched over cochain complexes has a projective model category of enriched diagrams with objectwise fibrations and weak equivalences and cofibrant evaluation for locally cofibrant source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfFactorizationDataOfIsStableUnderCompositionCofibrations\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"8cf23344ade1abae\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100 and CategoryTheory/Enriched/FunctorCategory.lean:14-100. The former assumes a supplied model category and replaces objects within it; the latter constructs an ordinary end as the enriched Hom for ordinary diagrams. Neither transfers a model structure to dg-indexed enriched diagrams or proves cofibrancy of evaluations. The projective-resolution hits are ordinary resolutions in abelian categories. Loogle and the enriched-model grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension and restriction of scalars along a quasi equivalence of locally cofibrant differential graded categories give a Quillen equivalence",
+   "results": "{\"t\": \"2026-10-16T12:59:51Z\", \"tool\": \"leanfinder\", \"query\": \"Extension and restriction of scalars along a quasi equivalence of locally cofibrant differential graded categories give a Quillen equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\"], \"digest\": \"b9caaaf88fa05436\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:76-122 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100. The hits localize complexes in an ordinary abelian category or the cofibrant objects of one supplied model category. They do not compare enriched diagram categories along a dg quasi-equivalence. The only Quillen-equivalence grep hit is a TODO in AlgebraicTopology/SingularSet.lean:37. Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched functor category from a locally cofibrant dg category to a chain complex model category has cofibrant values for cofibrant diagrams",
+   "results": "{\"t\": \"2026-10-16T12:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched functor category from a locally cofibrant dg category to a chain complex model category has cofibrant values for cofibrant diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\"], \"digest\": \"228b61ffab759d78\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100 and CategoryTheory/Enriched/FunctorCategory.lean:14-100. The former assumes a supplied model category and replaces objects within it; the latter constructs an ordinary end as the enriched Hom for ordinary diagrams. Neither transfers a model structure to dg-indexed enriched diagrams or proves cofibrancy of evaluations. The projective-resolution hits are ordinary resolutions in abelian categories. Loogle and the enriched-model grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a quasi equivalence between dg categories with cofibrant morphism complexes is a Quillen equivalence on enriched module diagrams",
+   "results": "{\"t\": \"2026-10-16T12:59:54Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a quasi equivalence between dg categories with cofibrant morphism complexes is a Quillen equivalence on enriched module diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"b1530fb07d69b705\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/Algebra/Homology/DerivedCategory/Basic.lean:76-122 and AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean:55-100. The hits localize complexes in an ordinary abelian category or the cofibrant objects of one supplied model category. They do not compare enriched diagram categories along a dg quasi-equivalence. The only Quillen-equivalence grep hit is a TODO in AlgebraicTopology/SingularSet.lean:37. Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived isomorphism classes of strict enriched module diagrams correspond to homotopy classes of maps into the dg category of cofibrant modules",
+   "results": "{\"t\": \"2026-10-16T13:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"Derived isomorphism classes of strict enriched module diagrams correspond to homotopy classes of maps into the dg category of cofibrant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"ComplexShape.strictUniversalPropertyFixedTargetQuotient\", \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\", \"HomotopicalAlgebra.CofibrantObject.HoCat\"], \"digest\": \"fa2e77b5d1a6ef01\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary model homotopy categories, chain-complex localizations and projective resolutions. Read CofibrantObjectHomotopy.lean:55-100, Enriched/FunctorCategory.lean:14-100 and DerivedCategory/Basic.lean:76-122; none classifies strict dg-indexed module diagrams by morphisms in Hqe. The unquoted Loogle query reports an unknown identifier, so the valid quoted ModelCategory/EnrichedFunctor query was also run; no absence claim rests on the rejected query."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-quasifunctor-invariance",
   "by": "worker",
@@ -103,5 +314,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-dg-module-diagram-classification",
+  "worker": "stage1",
+  "summary": "No exact project declaration or Mathlib match. Statement unchanged. Expanded Toën Lemma 6.2 into the projective-diagram replacement, cylinder-invariance, and explicit arrow-dg-category arguments. Isolated two general model-theoretic inputs; all diagram identifications, the saturated-subcategory checks, and the homotopically projective variant are proved in the item. Second reading makes graded currying, acyclic-kernel cohomology lifting, and Hqe naturality explicit; auxiliary model notions and localization classes are defined inline.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, the middle finite mapping-complex comparison before total inverse limit; realizes the existing derived-Yoneda/quasi-functor foundation branch, not a new route at unit level."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q58-aa5c092f1",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-aa5c092f1 (reviewer sub-agent of L); spot-checked: Read all required governance files, the packet/report, item and both new nodes, cited DAG statements, unit/chapter route, and Toën’s exact Definition 3.1, Proposition 3.2(2), Proposition 3.3, Sub-lemmas 4.4–4.5, and Lemma 6.2. Verified hypotheses, variance, saturated coefficient category, whole-diagram comparison, edge cases, searches, route, and absence of duplicates/cycles. Review written to review.md."
  }
 }

@@ -27,9 +27,128 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use simplicial sets as functors to sets from [def-weil-pbc-simplicial-set] and the standard simplices of [def-cbc-enhanced-diagrams-cones]. A monomorphism is exactly a degreewise injection: an $r$-simplex $x$ gives the map $\\Delta^r\\to X$ sending $\\alpha:[s]\\to[r]$ to $X(\\alpha)(x)$, so cancellation against these maps tests injectivity, and degreewise injectivity implies cancellation. Pushouts are degreewise set pushouts, and unions of increasing simplicial subsets are degreewise unions: the operators descend to the quotient or restrict to the union, and compatible degreewise maps give the universal map.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Identify the monomorphisms with their image inclusions. Write $D(i,k)=(A\\star L)\\cup(B\\star K)\\subseteq B\\star L$. The intersection is $A\\star K$, by the join formula in the statement, so this union is the displayed pushout. In degree $r$, $D(i,k)$ contains both pure summands $B_r,L_r$ and, in each mixed summand, exactly $(A_u\\times L_v)\\cup(B_u\\times K_v)$ for $u+v+1=r$. Thus $\\theta_{i,k}$ is its inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "For maps $a:X\\to X'$ and $b:Y\\to Y'$, the join map acts as $a_r,b_r$ on pure summands and as $(x,y)\\mapsto(a_u(x),b_v(y))$ on mixed summands. This commutes with ordered restriction, identities and composition, so commutative squares in $i,k$ induce commutative squares of $\\theta$-maps. If either $i$ or $k$ is an isomorphism, the mixed-subset formula of Step 2 fills every mixed summand, hence $\\theta_{i,k}$ is an isomorphism and is inner anodyne by definition. Finite composites are finite transfinite composites; composing with endpoint isomorphisms therefore preserves membership in the weakly saturated inner-anodyne class. This justifies replacing arbitrary monomorphisms by their image inclusions throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "The restriction to monomorphisms survives all three closure operations. Degreewise the pushout of $A\\subseteq B$ along $A\\to A'$ is $A'\\amalg(B\\setminus A)$, so its map from $A'$ is injective. Equality in an ordinal colimit is witnessed at a common later stage, since a finite zigzag has an upper bound; injectivity then shows that every stage embeds, and continuity identifies limit stages with unions. A retract of an injection is injective: apply the section on its source, cancel in the larger injection, and then apply the retraction on its source. These constructions commute with simplicial operators as in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Fix $k:K\\hookrightarrow L$. Push out $i_0:A_0\\hookrightarrow B_0$ along an arbitrary map $A_0\\to A'$ to obtain $i':A'\\hookrightarrow B'=B_0\\amalg_{A_0}A'$. The natural square with top row $D(i_0,k)\\to B_0\\star L$ and bottom row $D(i',k)\\to B'\\star L$ is a pushout: in degree $r$ the top row adds precisely $(B_{0,u}\\setminus A_{0,u})\\times(L_v\\setminus K_v)$ in each mixed summand, and $B'_u=A'_u\\amalg(B_{0,u}\\setminus A_{0,u})$ shows that the bottom row adds exactly the same elements, without further identifications. Pure summands already belong to the domains. Hence $\\theta_{i',k}$ is a pushout of $\\theta_{i_0,k}$ and is inner anodyne whenever $\\theta_{i_0,k}$ is.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Let $(X_\\alpha)_{\\alpha\\leq\\lambda}$ be a continuous ordinal chain of monomorphisms, represented by subsets of $X_\\lambda$, and assume that every $\\theta_{X_\\alpha\\hookrightarrow X_{\\alpha+1},k}$ is inner anodyne. Inside $X_\\lambda\\star L$ put $P_\\alpha=(X_\\alpha\\star L)\\cup(X_\\lambda\\star K)$. For $\\alpha<\\lambda$, set $E_\\alpha=(X_\\alpha\\star L)\\cup(X_{\\alpha+1}\\star K)$. The mixed-subset formula gives\n$$P_\\alpha\\cap(X_{\\alpha+1}\\star L)=E_\\alpha,\\qquad P_\\alpha\\cup(X_{\\alpha+1}\\star L)=P_{\\alpha+1}.$$\nThus $P_\\alpha\\to P_{\\alpha+1}$ is the pushout of $\\theta_{X_\\alpha\\hookrightarrow X_{\\alpha+1},k}:E_\\alpha\\to X_{\\alpha+1}\\star L$, so it is inner anodyne.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "At every nonzero limit $\\delta\\leq\\lambda$, the join formula gives $P_\\delta=\\bigcup_{\\alpha<\\delta}P_\\alpha$: a mixed simplex involving $X_\\delta$ has its $X$-coordinate in some earlier $X_\\alpha$, while the fixed subset $X_\\lambda\\star K$ belongs to every stage. Thus the preceding chain is continuous, starts at $P_0=D(X_0\\hookrightarrow X_\\lambda,k)$ and ends at $P_\\lambda=X_\\lambda\\star L$. Closure of inner anodyne maps under transfinite composition makes its composite $\\theta_{X_0\\hookrightarrow X_\\lambda,k}$ inner anodyne. If $\\lambda=0$ this is an isomorphism, already covered in Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "If $i$ is a retract of $j$ in the category of maps, the section and retraction squares induce section and retraction squares between $\\theta_{i,k}$ and $\\theta_{j,k}$ by Step 3; their composite is the identity on both source and target because the original composite squares are identities. Thus $\\theta_{i,k}$ is a retract of $\\theta_{j,k}$, and retract closure of inner anodyne maps applies. Steps 3--7 and the preservation of monomorphisms in Step 4 establish every clause of weak saturation for fixed $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Now fix $i:A\\hookrightarrow B$. Push out $k_0:K_0\\hookrightarrow L_0$ along an arbitrary map $K_0\\to K'$ to obtain $k':K'\\hookrightarrow L'=L_0\\amalg_{K_0}K'$. The square with top row $D(i,k_0)\\to B\\star L_0$ and bottom row $D(i,k')\\to B\\star L'$ is a pushout: its top row adds precisely $(B_u\\setminus A_u)\\times(L_{0,v}\\setminus K_{0,v})$, and $L'_v=K'_v\\amalg(L_{0,v}\\setminus K_{0,v})$ identifies these with exactly the new elements of the bottom row; every pure simplex is already in its domain. Consequently $\\theta_{i,k'}$ is a pushout of $\\theta_{i,k_0}$, and inner-anodyne closure under pushout proves the required closure in $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Let $(Y_\\alpha)_{\\alpha\\leq\\lambda}$ be a continuous ordinal chain of monomorphisms with every $\\theta_{i,Y_\\alpha\\hookrightarrow Y_{\\alpha+1}}$ inner anodyne. Represent its stages as subsets of $Y_\\lambda$ and put $Q_\\alpha=(B\\star Y_\\alpha)\\cup(A\\star Y_\\lambda)\\subseteq B\\star Y_\\lambda$. For $\\alpha<\\lambda$, put $F_\\alpha=(B\\star Y_\\alpha)\\cup(A\\star Y_{\\alpha+1})$. Direct intersection and union of the mixed summands gives\n$$Q_\\alpha\\cap(B\\star Y_{\\alpha+1})=F_\\alpha,\\qquad Q_\\alpha\\cup(B\\star Y_{\\alpha+1})=Q_{\\alpha+1}.$$\nHence $Q_\\alpha\\to Q_{\\alpha+1}$ is a pushout of $\\theta_{i,Y_\\alpha\\hookrightarrow Y_{\\alpha+1}}:F_\\alpha\\to B\\star Y_{\\alpha+1}$ and is inner anodyne.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "For nonzero limit $\\delta\\leq\\lambda$, a mixed simplex of $B\\star Y_\\delta$ has its $Y$-coordinate in some earlier $Y_\\alpha$, and $A\\star Y_\\lambda$ is included at every stage; hence $Q_\\delta=\\bigcup_{\\alpha<\\delta}Q_\\alpha$. Also $Q_0=D(i,Y_0\\hookrightarrow Y_\\lambda)$ and $Q_\\lambda=B\\star Y_\\lambda$. The continuous composite of the inner anodyne successor maps in Step 10 is therefore $\\theta_{i,Y_0\\hookrightarrow Y_\\lambda}$, and it is inner anodyne by transfinite-composition closure. For $\\lambda=0$ use the isomorphism case of Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  },
+  {
+   "text": "Finally, if $k$ is a retract of $l$ as a map, applying the explicit join maps of Step 3 with the identity on $A,B$ and the given section and retraction on the second variable yields a retract of $\\theta_{i,l}$ equal to $\\theta_{i,k}$: composition is the identity on pure summands and on each coordinate of every mixed summand, and hence on the pushout domain. Retract closure makes $\\theta_{i,k}$ inner anodyne when $\\theta_{i,l}$ is. Together with the isomorphism case, Steps 9--11 and Step 4, this proves weak saturation for fixed $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof: the two weak-saturation assertions; elementary degreewise details supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/018J",
+  "place": "Proposition 4.3.6.4, proof: the two weak-saturation reductions; the source is online and not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,15 +184,65 @@
    "results": "{\"t\": \"2026-10-16T11:52:39Z\", \"tool\": \"leanfinder\", \"query\": \"Closure under cobase change ordinal compositions and retracts of the Leibniz join inner anodyne property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.MorphismProperty.retracts_transfiniteCompositionsOfShape_pushouts_coproducts_le_llp_rlp\", \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument'\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\"], \"digest\": \"20f2872a1eb4d486\"}",
    "date": "2026-10-16",
    "verdict": "no match: the hits in CategoryTheory/MorphismProperty/Limits.lean (read) supply generic pushout stability, and SmallObject/Basic.lean:114-129 (read) supplies the small object argument. They do not establish preservation of pushouts and ordinal compositions by the simplicial pushout-join. The simplicial grep finds no join construction; this is not a one-line specialization of generic closure."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bjoin\\b|Join|star|Leibniz",
+   "results": "{\"t\": \"2026-10-16T13:58:12Z\", \"tool\": \"grep\", \"query\": \"\\\\bjoin\\\\b|Join|star|Leibniz\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/PiZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\"], \"digest\": \"ff8159c52d4b1f13\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: generic Leibniz constructions define the pushout arrow and its functoriality, but no ordered simplicial-join implementation or this saturation statement was found. Read PullbackObjObj.lean:12-41,72-142 and ParametrizedAdjunction.lean:12-22,39-167. Simplicial inner PushoutProduct.lean concerns the cartesian product, not the ordered join. The needed join-specific subset identities are written as elementary proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "Leibniz|pushoutProduct|joinFunctor|sSetJoin|def join",
+   "results": "{\"t\": \"2026-10-16T13:58:12Z\", \"tool\": \"grep\", \"query\": \"Leibniz|pushoutProduct|joinFunctor|sSetJoin|def join\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"Mathlib/CategoryTheory/Sites/JointlySurjective.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\", \"Mathlib/CategoryTheory/Monoidal/Arrow.lean\"], \"digest\": \"134a91ceb76e31dc\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: generic Leibniz constructions define the pushout arrow and its functoriality, but no ordered simplicial-join implementation or this saturation statement was found. Read PullbackObjObj.lean:12-41,72-142 and ParametrizedAdjunction.lean:12-22,39-167. Simplicial inner PushoutProduct.lean concerns the cartesian product, not the ordered join. The needed join-specific subset identities are written as elementary proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStableUnderCobaseChange\"",
+   "results": "{\"t\": \"2026-10-16T13:58:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStableUnderCobaseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.epimorphisms\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.isomorphisms\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChangeAgainst\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.respectsIso\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.hasOfPrecompProperty_epimorphisms\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChangeAlong\"], \"digest\": \"368209ebfdfc76b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: generic Leibniz constructions define the pushout arrow and its functoriality, but no ordered simplicial-join implementation or this saturation statement was found. Read PullbackObjObj.lean:12-41,72-142 and ParametrizedAdjunction.lean:12-22,39-167. Simplicial inner PushoutProduct.lean concerns the cartesian product, not the ordered join. The needed join-specific subset identities are written as elementary proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separately cocontinuous bifunctor induces a pushout product which preserves weakly saturated classes of morphisms",
+   "results": "{\"t\": \"2026-10-16T13:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"A separately cocontinuous bifunctor induces a pushout product which preserves weakly saturated classes of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PushoutObjObj.ofHasPushout\", \"CategoryTheory.OrthogonalReflection.D₂.hasColimitsOfShape\", \"CategoryTheory.MorphismProperty.le_pushouts\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"CategoryTheory.adhesive_functor\", \"CategoryTheory.MorphismProperty.pushouts_le\", \"CategoryTheory.Functor.PushoutObjObj.isPushout\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange\"], \"digest\": \"56a7bcc56dc62534\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: generic Leibniz constructions define the pushout arrow and its functoriality, but no ordered simplicial-join implementation or this saturation statement was found. Read PullbackObjObj.lean:12-41,72-142 and ParametrizedAdjunction.lean:12-22,39-167. Simplicial inner PushoutProduct.lean concerns the cartesian product, not the ordered join. The needed join-specific subset identities are written as elementary proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Leibniz construction for the ordered join of simplicial sets preserves cobase change and weak saturation separately in each variable",
+   "results": "{\"t\": \"2026-10-16T13:59:33Z\", \"tool\": \"leansearch\", \"query\": \"The Leibniz construction for the ordered join of simplicial sets preserves cobase change and weak saturation separately in each variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.hasColimits\", \"SSet.Subcomplex.preimage_max\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"sSetTopAdj\"], \"digest\": \"4aa99b35d6c939c2\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: generic Leibniz constructions define the pushout arrow and its functoriality, but no ordered simplicial-join implementation or this saturation statement was found. Read PullbackObjObj.lean:12-41,72-142 and ParametrizedAdjunction.lean:12-22,39-167. Simplicial inner PushoutProduct.lean concerns the cartesian product, not the ordered join. The needed join-specific subset identities are written as elementary proof steps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-anodyne-cocones",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-pushout-join-saturation",
+  "worker": "stage1",
+  "summary": "Second reading replaces the five-step proof by twelve elementary degreewise steps, with explicit pushout squares, continuous filtrations by pushouts of the successor theta maps in both variables, and retract diagrams. The unsupported raw-composite comparison and empty-map claim are removed. The unnecessary unsplit join-colimit helper is dropped; zero new nodes, statement unchanged, no Lean work.",
+  "blueprint": "Realizes the weak-saturation reductions in Kerodon Proposition 4.3.6.4 used by lem-coef-infinity-anodyne-cocones in the historical ancestry of the derived coefficient adjunction, proof paragraph 2 of prop-coef-integral-exceptional-adjoint (also present in main-20261015). The twelve steps supply the degreewise details omitted by the source, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-d7517a3d6",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-d7517a3d6 (reviewer sub-agent of L); spot-checked: Read all required instructions, packet, item, twelve proof steps, cited definitions, unit/chapter route, Kerodon 018J, current blueprint source, reports, DAG candidates, and recorded searches. Verified hypotheses, edge cases, ordered-variable pushout filtrations, weak-saturation closures, acyclicity, and no duplicate/new helper node. Wrote review.md; no repairs required."
+ }
 }

@@ -27,9 +27,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $S_y$ to have $n$-simplices $\\sigma:\\Delta^{n+1}\\to\\mathcal D$ with last vertex $y$, operators $\\sigma\\mapsto\\sigma\\alpha^+$ for $\\alpha:[m]\\to[n]$, where $\\alpha^+$ agrees with $\\alpha$ on $[m]$ and sends $m+1$ to $n+1$, and projection $p:S_y\\to\\mathcal D$ given by the entire initial face. Set $T_y=\\operatorname{Fun}(\\Delta^1,\\mathcal D)\\times_{\\operatorname{ev}_1,\\mathcal D}\\{y\\}$ with source projection $q$. The degreewise fibers $p^{-1}(x)$ and $q^{-1}(x)$ are exactly $\\operatorname{Map}_{\\mathcal D}(x,y)$ and $U_{\\mathcal D}(x,y)$: the first fiber makes the whole initial simplex constant at $x$, and the second fixes both endpoint simplices. This uses the explicit mapping-space and functor definitions of [def-cbc-enhanced-diagrams-cones], including all degeneracies.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01KX",
+    "place": "Construction 4.6.5.1 and the degreewise definitions of the right slice and ordinary arrow fiber"
+   }
+  },
+  {
+   "text": "The projection $p$ is a right fibration. Indeed, for a right horn $\\Lambda_i^m\\hookrightarrow\\Delta^m$, $m\\geq1$ and $0<i\\leq m$, a lifting square for $p$ gives maps on the faces of $\\Delta^{m+1}$ as follows: the bottom simplex supplies the face opposite the last vertex; for each $j\\neq i$ with $0\\leq j\\leq m$, the $j$th slice face supplies the face opposite $j$, and the last vertex is $y$. Their intersections agree by the lifting-square identities. These are precisely all faces except the $i$th, hence a map $\\Lambda_i^{m+1}\\to\\mathcal D$. Since $0<i<m+1$, the quasicategory horn axiom of [def-cbc-enhanced-diagrams-cones] fills it. This gives the required slice lift. Also $S_y$ is a quasicategory: project any inner horn to $\\mathcal D$, fill there, then use the just-proved right-fibration lifting property over that filler. This includes $m=1,i=1$, whose coned horn is the inner horn $\\Lambda_1^2$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Proposition 4.3.6.1, singleton right-slice case; explicit inner-horn argument"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-arrow-target-right-fibration] to $\\mathcal D$ and $T=y$. Its displayed arrow pullback is exactly $T_y$, and it says that its source projection $q$ is a right fibration. This verifies the same nonzero-index horn convention used in step 2. The total simplicial set $T_y$ is a quasicategory: for an inner horn in $T_y$, fill its image in $\\mathcal D$ and lift that filler using $q$. Thus both vertical maps $p,q$ are right fibrations between quasicategories over the same quasicategory $\\mathcal D$.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KQ",
+    "place": "Proposition 4.6.4.13, right-handed assertion"
+   }
+  },
+  {
+   "text": "Use the unconditional Kan-fiber assertion of [lem-coef-infinity-right-fibration-fibers] on $p$ and $q$ at $x$. Its hypotheses were checked in steps 2 and 3; the identifications of step 1 show that these two Kan fibers are exactly the two mapping spaces in the statement. There is no requirement that a fiber contain a vertex.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019E",
+    "place": "Corollary 4.4.2.3, applied to the two right fibrations"
+   }
+  },
+  {
+   "text": "The slice comparison of [lem-coef-infinity-slice-arrow-equivalence] supplies an equivalence $\\delta_y:S_y\\to T_y$ over $\\mathcal D$. In degree $n$ its formula is $\\delta_y(\\sigma)=\\sigma\\rho_n$, with $\\rho_n(a,0)=a$ and $\\rho_n(a,1)=n+1$; restriction to the initial layer gives $q\\delta_y(\\sigma)=\\sigma|_{\\Delta^n}=p(\\sigma)$, so it induces a map of the strict fibers. On that fiber its formula is the specified $j_{\\mathcal D,x,y}$, including the factor swap in the internal-functor convention. Apply the equivalence-on-fibers assertion of [lem-coef-infinity-right-fibration-fibers] to $h=\\delta_y$, the identity base functor, and the right fibrations from steps 2 and 3. It proves that this actual map $j_{\\mathcal D,x,y}$ is a homotopy equivalence of the Kan complexes in step 4.",
+   "uses": [
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, right-handed version of the displayed slice/arrow fiber argument"
+   }
+  },
+  {
+   "text": "For every monotone $\\alpha:[m]\\to[n]$, the maps used above satisfy $\\rho_n(\\alpha\\times\\mathrm{id})=\\alpha^+\\rho_m$: at $(a,0)$ both sides give $\\alpha(a)$ and at $(a,1)$ both give $n+1$. Thus precomposition defines a simplicial map, with no choices of fillers involved. Moreover, $\\rho_n$ has a section induced by the monotone map sending $a\\leq n$ to $(a,0)$ and $n+1$ to $(n,1)$. Hence $\\sigma\\rho_n$ determines $\\sigma$ in each degree, so $j$ is degreewise injective, as its name inclusion indicates. The sections need not be natural in $n$ for this injectivity argument. If $H:\\mathcal D\\to\\mathcal D'$ carries $x,y$ to $x',y'$, then on every simplex $H(\\sigma\\rho_n)=(H\\sigma)\\rho_n$. Hence $U(H)\\,j_{\\mathcal D,x,y}=j_{\\mathcal D',x',y'}\\operatorname{Map}(H)$ strictly in every degree. The construction is therefore natural for all the simplicial functors in the statement; no natural choice of inverse homotopy equivalences is asserted or needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L2",
+    "place": "Construction 4.6.5.7 and Construction 4.6.4.15; explicit simplicial-operator and postcomposition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01L5",
+  "place": "Right-handed fiber argument of Proposition 4.6.5.10, expanded with a facewise proof of the slice right-fibration property and explicit naturality; source read online but not archived under literature/, see report WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,15 +143,73 @@
    "results": "{\"t\": \"2026-10-16T11:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"The right Hom Kan complex and ordinary natural transformation Kan complex between two objects of an infinity category model the same homotopy type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory₂\", \"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\"], \"digest\": \"0c2d5b16473109a6\"}",
    "date": "2026-10-16",
    "verdict": "no match: Quasicategory/TwoTruncated.lean:84-94 (read) defines left/right homotopy relations on edges of a 2-truncated simplicial set, not a Kan-complex comparison in all dimensions. DoldKan homotopy equivalences are about complexes; the targeted pinch/mapping-space grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right pinched mapping space of a quasicategory maps by the pinch inclusion homotopy equivalently to the fiber of its arrow category",
+   "results": "{\"t\": \"2026-10-16T13:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"The right pinched mapping space of a quasicategory maps by the pinch inclusion homotopy equivalently to the fiber of its arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.spineEquiv\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"CategoryTheory.nerve.homEquiv_apply\", \"SSet.Truncated.StrictSegal.spineEquiv\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\"], \"digest\": \"14e56a80a89db7bf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pinch\"",
+   "results": "{\"t\": \"2026-10-16T13:33:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"pinch\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|pinch|mappingSpace|morphismSpace",
+   "results": "{\"t\": \"2026-10-16T13:33:54Z\", \"tool\": \"grep\", \"query\": \"pinched|pinch|mappingSpace|morphismSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary morphism Kan complex and right Hom space of an infinity category are homotopy equivalent",
+   "results": "{\"t\": \"2026-10-16T13:33:54Z\", \"tool\": \"leansearch\", \"query\": \"The ordinary morphism Kan complex and right Hom space of an infinity category are homotopy equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.RightHomotopyClass.mk\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.RightHomotopyRel\", \"HomotopicalAlgebra.CofibrantObject.homRel_iff_rightHomotopyRel\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\"], \"digest\": \"c1ba6d27bf19c26a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the right mapping complex Hom right C x y to the ordinary arrow mapping complex is a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T13:34:53Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from the right mapping complex Hom right C x y to the ordinary arrow mapping complex is a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.homotopyEquiv\", \"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy\", \"HomotopyEquiv\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"HomologicalComplex.homotopyEquivalences\", \"CategoryTheory.ShortComplex.HomotopyEquiv\", \"HomotopyCategory.homotopyOutMap\"], \"digest\": \"8e02243ce4f128c5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "RightHomotopyClass|leftHomotopyClassEquivRightHomotopyClass",
+   "results": "{\"t\": \"2026-10-16T13:34:48Z\", \"tool\": \"grep\", \"query\": \"RightHomotopyClass|leftHomotopyClassEquivRightHomotopyClass\", \"sub\": \"AlgebraicTopology/ModelCategory/Homotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"171\", \"178\", \"202\", \"204\"], \"digest\": \"7cb0c92d4e2d41eb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Quasicategory/Basic.lean:32-50, Quasicategory/TwoTruncated.lean:75-94, and ModelCategory/Homotopy.lean:171-195. Nerve edge correspondences and 2-truncated right homotopy relations only describe edges/hom sets; chain-complex cylinder equivalences and model-category left/right homotopy-class bijections do not compare these Kan simplicial mapping spaces. The pinch grep and Loogle returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-anodyne-cocones",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-pinch-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the right-handed slice/fixed-target-arrow fiber proof into six steps. Reused the existing fixed-target arrow right-fibration theorem; proved the slice right-fibration horn calculation explicitly, identified both strict fibers, applied two new generic statement-only tools for the total slice comparison and right-fibration fiber invariance, and wrote strict simplicial naturality. Item statement unchanged; no attachment, Mathlib leaf, Lean write or build.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: coherent enhancement of coefficient diagrams, via the finite-shape generation argument and the right-pinch comparison used in lem-coef-infinity-anodyne-cocones. Steps 1-6 supply the right-pinch convention comparison at the finite-shape/coherent-cocone foundation; the total slice comparison and general fiber theorem are strictly smaller tools, not new versions of the item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-d67ddac1b",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-d67ddac1b (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited interfaces. Verified Kerodon slice comparison, strict-fiber invariance, all six steps, horn directions, naturality, empty cases, duplicate candidates, unit route and archived target typing. No repairs or tool_uses needed; concrete checks are recorded in review.md."
+ }
 }
