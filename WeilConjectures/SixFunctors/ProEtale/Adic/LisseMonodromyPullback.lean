@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.RepresentationTheory.Subrepresentation
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 
 /-!
@@ -140,5 +143,65 @@ theorem exists_upperStar_iso_of_injective {t : Spec (.of (AlgebraicClosure Ω)) 
   exact ⟨G, ⟨asIso φ⟩⟩
 
 end LisseMonodromy
+
+/-- **Compatible monodromies exist** (blueprint: `cor-galois-lisse-representations`, with the
+compatibility of `thm-galois-fundamental` with base change). For a morphism `f : Y' ⟶ Y` of
+connected regular locally Noetherian schemes there are monodromies of lisse `ℓ`-adic sheaves on
+`Y` and on `Y'` which are equivalences at every base point
+(`AlgebraicGeometry.ProEtale.exists_lisseMonodromy`) and are compatible with `f`: the equivalence
+of `cor-galois-lisse-representations` is built from the fibre functors on finite étale covers,
+and pulling back finite étale covers along `f` is compatible with the fibre functors
+(`AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso`), so the monodromy action of
+`π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}` restricted along
+`π₁(Y', y) → π₁(Y, y ≫ f)`. -/
+theorem exists_lisseMonodromy_isCompatible [IsLocallyNoetherian Y] [IsRegular Y]
+    [ConnectedSpace Y] [IsLocallyNoetherian Y'] [IsRegular Y'] [ConnectedSpace Y']
+    (f : Y' ⟶ Y) :
+    ∃ (M : LisseMonodromy l Y Ω) (M' : LisseMonodromy l Y' Ω), (∀ t, M.IsEquivalenceAt t) ∧
+      (∀ t, M'.IsEquivalenceAt t) ∧ LisseMonodromy.IsCompatible f M M' := by
+  sorry
+
+section DenseOpen
+
+
+/-- A nonempty open subscheme of a connected regular locally Noetherian scheme is again
+connected, regular and locally Noetherian. -/
+lemma isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion [IsLocallyNoetherian Y]
+    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] :
+    IsLocallyNoetherian Y' ∧ IsRegular Y' ∧ ConnectedSpace Y' := by
+  have := IsRegular.irreducibleSpace Y
+  refine ⟨isLocallyNoetherian_of_isOpenImmersion j,
+    ⟨isRegularLocalRing_stalk_of_etale j fun _ ↦ inferInstance⟩,
+    Scheme.FiniteEtale.connectedSpace_of_isOpenImmersion j⟩
+
+/-- **The fundamental group of a dense open surjects**, in terms of paths: every automorphism of
+the fibre functor `F_{t ≫ j}` of `Y` is induced by an automorphism of the fibre functor `F_t` of
+the nonempty open `Y'` (blueprint `lem-wf-dense-open-pi1-surjective`, part (1)). -/
+lemma exists_pullbackPathIso_eq_of_isRegular [IsLocallyNoetherian Y] [IsRegular Y]
+    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y')
+    (σ : Aut (fiber (t ≫ j))) : ∃ σ' : Aut (fiber t), pullbackPathIso j σ' = σ := by
+  have : Nonempty Y' := ⟨t.base (Nonempty.some inferInstance)⟩
+  obtain ⟨-, -, _⟩ := isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion j
+  obtain ⟨G', _, _⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup t
+  obtain ⟨G, _, _⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup (t ≫ j)
+  obtain ⟨g', hg'⟩ := Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular j
+    (pullbackFiberIso j t) G' G ((PreGaloisCategory.toAutMulEquiv _ G).symm σ)
+  refine ⟨PreGaloisCategory.toAut (fiber t) G' g', ?_⟩
+  ext P x
+  obtain ⟨y, rfl⟩ : ∃ y, (pullbackFiberIso j t).hom.app P y = x :=
+    ⟨(pullbackFiberIso j t).inv.app P x, ConcreteCategory.congr_hom
+      ((pullbackFiberIso j t).inv_hom_id_app P) x⟩
+  have h := Scheme.FiniteEtale.fundamentalGroupMap_smul (pullbackFiberIso j t) G' G g' P y
+  rw [hg'] at h
+  conv_rhs => rw [← (PreGaloisCategory.toAutMulEquiv _ G).apply_symm_apply σ]
+  rw [PreGaloisCategory.toAutMulEquiv_apply, PreGaloisCategory.toAut_hom_app_apply, h]
+  simp only [pullbackPathIso, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+    NatTrans.comp_app, Functor.whiskerLeft_app]
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply,
+    ← ConcreteCategory.comp_apply ((pullbackFiberIso j t).hom.app P), Iso.hom_inv_id_app,
+    ConcreteCategory.id_apply]
+  rfl
+
+end DenseOpen
 
 end AlgebraicGeometry.ProEtale
