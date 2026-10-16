@@ -18,7 +18,11 @@
   "def-weil-integral-derived-reduction",
   "def-weil-integral-derived-restriction-of-scalars",
   "def-pur-derived-internal-hom",
-  "def-weil-derived-complete"
+  "def-weil-derived-complete",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex"
  ],
  "proof": [
   {
@@ -350,5 +354,52 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-2855f695a (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, master source, unit/chapter route and relevant Stacks/Bhatt–Scholze passages. Checked all eight steps, canonical coefficient-linear comparison, signs, completeness units/transitions, edge cases, duplicates and cycles. No repairs needed; all thirteen declared tool uses accepted. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9642a00ae",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, dependencies, hypotheses, conclusions, canonical comparison, universes, edge cases, report sections, and verbatim statement field. Immutable module passed scompile.py; no corrections required or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralHomReduction",
+  "declaration": "WeilConjectures.integralHomReduction",
+  "declarations": [
+   "WeilConjectures.IntegralHom.abSheafify",
+   "WeilConjectures.IntegralHom.abLocallyBijective",
+   "WeilConjectures.IntegralHom.Modules",
+   "WeilConjectures.IntegralHom.derivedCategory",
+   "WeilConjectures.IntegralHom.Derived",
+   "WeilConjectures.IntegralHom.hom",
+   "WeilConjectures.IntegralHom.tensorLocalization",
+   "WeilConjectures.IntegralHom.ordinaryTensor",
+   "WeilConjectures.IntegralHom.ordinaryTensorZero",
+   "WeilConjectures.IntegralHom.ordinaryTensorObjZero",
+   "WeilConjectures.IntegralHom.countableColimits",
+   "WeilConjectures.IntegralHom.totalTensor",
+   "WeilConjectures.IntegralHom.flat",
+   "WeilConjectures.IntegralHom.pair",
+   "WeilConjectures.IntegralHom.totalPair",
+   "WeilConjectures.IntegralHom.projection",
+   "WeilConjectures.IntegralHom.evaluate",
+   "WeilConjectures.IntegralHom.homModelMap",
+   "WeilConjectures.IntegralHom.TensorPresentation",
+   "WeilConjectures.IntegralHom.reductionAdditive",
+   "WeilConjectures.IntegralHom.reductionZero",
+   "WeilConjectures.IntegralHom.reductionCounit",
+   "WeilConjectures.IntegralHom.reductionUnit",
+   "WeilConjectures.IntegralHom.ReductionPresentation",
+   "WeilConjectures.IntegralHom.comparison",
+   "WeilConjectures.integralHomReduction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralHomReduction.lean",
+  "statement": "theorem integralHomReduction : ∃ a : IntegralHom.TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl), (∀ K L : completedIntegralDerivedCategory l E Y D hl, IsDerivedComplete l E Y D hl L → IsDerivedComplete l E Y D hl ((IntegralHom.hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, L))) ∧ ∀ n : ℕ, ∃ m : IntegralHom.ReductionPresentation l E Y D hl a n, ∀ K L : completedIntegralDerivedCategory l E Y D hl, IsIso (IntegralHom.comparison l E Y D hl m K L) ∧ (m.target.tensor.map (Prod.mkHom (𝟙 ((integralDerivedReduction l E Y D hl n).obj K)) (IntegralHom.comparison l E Y D hl m K L)) ≫ (m.target.adjunction ((integralDerivedReduction l E Y D hl n).obj K)).counit.app ((integralDerivedReduction l E Y D hl n).obj L) = m.mu.inv.app (K, (IntegralHom.hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, L)) ≫ (integralDerivedReduction l E Y D hl n).map ((a.adjunction K).counit.app L)) ∧ ∀ (T : completedIntegralDerivedCategory l E Y D hl) (f : T ⟶ (IntegralHom.hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, L)), (m.target.adjunction ((integralDerivedReduction l E Y D hl n).obj K)).homEquiv ((integralDerivedReduction l E Y D hl n).obj T) ((integralDerivedReduction l E Y D hl n).obj L) (m.mu.inv.app (K, T) ≫ (integralDerivedReduction l E Y D hl n).map (((a.adjunction K).homEquiv T L).symm f)) = (integralDerivedReduction l E Y D hl n).map f ≫ IntegralHom.comparison l E Y D hl m K L",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical uncompleted tensor and evaluation are specified by their K-flat/K-injective representatives at independent site and coefficient universes. The theorem supplies those normalized presentations; comparison is the actual adjoint transpose of reduced evaluation, with invertibility, evaluation and arbitrary-transpose compatibilities, and completeness in the second variable."
  }
 }
