@@ -1,0 +1,119 @@
+{
+ "id": "lem-cbc-comparison-diagonal-section-naturality",
+ "kind": "statement",
+ "title": "Naturality of diagonal inverse-image sections",
+ "statement": "Let F be a sheaf of sets on the small etale site of a scheme X. For each etale U over X define d_F,U(s) by applying the inverse-image adjunction unit along U.hom to s in F(U), then restricting along the diagonal U to U times_X U. For g:V to U in X_et, d_F,V(F(g)(s)) equals the inverse-image unit along g.left applied to d_F,U(s), transported back by the inverse of terminal section transport for the triangle V to U to X. This equality uses exactly the inverse-image adjunctions and terminal transport of [lem-weil-pbc-sets-etale-inverse-image-composition-units] and [def-weil-pbc-sets-terminal-transport].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-terminal-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, diagonal unit and sectionwise transpose argument; https://stacks.math.columbia.edu/tag/0GLZ (read online; local source absent)"
+ },
+ "proof": [
+  {
+   "text": "Use naturality of the inverse-image unit at the diagonal and naturality of the composition isomorphism to move the two diagonal restrictions past these maps.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the composition-unit equality. The remaining pullback morphisms have equal projections, so pullback uniqueness identifies them. Naturality of the composite inverse-image unit then proves the asserted equality.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2 second reader, stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ; explicit diagonal-unit construction and reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality diagonal inverse image unit on etale objects",
+   "results": "Generic equivalence unit naturality and Dold-Kan compatibility; no matching diagonal-section formula.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic homEquiv, unit formula and naturality API. These do not construct the comparison sections.",
+   "date": "2026-10-16",
+   "verdict": "Use generic adjunction API in the assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*unit|unit.*pullback",
+   "results": "Generic pullback statements. EtaleSetTerminalTransition is a related compatibility with additional section comparisons; existing composition-unit theorem gives the direct proof. The identical diagonal-section definition is downstream in ProEtaleComparisonPullbackSections, so its formula is expanded using local notation instead of adding a duplicate public definition.",
+   "date": "2026-10-16",
+   "verdict": "No exact existing naturality statement; reuse existing composition units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale inverse image unit restricted along the diagonal commutes with restriction between etale objects",
+   "results": "Service unavailable: Internal Server Error. No mathematical conclusion inferred; leanfinder, loogle and source grep were used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-comparison-section-adjunction",
+   "place": "Tag 0GLZ, diagonal unit and adjunction transpose",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonDiagonalSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonDiagonalSection.lean",
+  "declaration": "AlgebraicGeometry.proEtaleComparisonDiagonalSection_naturality",
+  "statement": "theorem proEtaleComparisonDiagonalSection_naturality {X : Scheme.{u}}\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (U V : X.Etale) (g : V ⟶ U) (s : F.obj.obj (op U)) :\n    δ[X, F, V] (F.obj.map g.op s) =\n      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n        (MorphismProperty.Over.pullback @Etale ⊤ g.left) (Type (u + 1))\n        (U.left.smallGrothendieckTopology @Etale)\n        (V.left.smallGrothendieckTopology @Etale)).unit.app\n          ((Scheme.etaleSetPullback U.hom).obj F)).hom.app\n            (op (Scheme.Etale.mk (𝟙 U.left))) ≫\n        (etaleSetTerminalTransport U.hom g.left V.hom g.w F).inv)\n          (δ[X, F, U] s)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T015246-L-721346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T015246-L-721346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

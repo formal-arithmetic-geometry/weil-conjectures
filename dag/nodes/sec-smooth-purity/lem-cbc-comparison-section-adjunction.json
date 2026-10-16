@@ -17,43 +17,37 @@
  },
  "proof": [
   {
-   "text": "For a pro-etale sheaf G and weakly etale Y→X, restrict G to etale schemes over Y. Etale covers are pro-etale covers, so the restriction is a sheaf. Given alpha:F→nu_*G, define F→f_*G_Y by alpha followed by restriction to Y times_X U, transpose under f^*⊣f_*, and evaluate at Y to define beta_Y.",
+   "text": "Construct the diagonal unit explicitly: at etale U send s to e_F,U inverse of the etale inverse-image unit restricted along U to U times_X U. Diagonal-section naturality and hres prove naturality in site arrows; hfun and naturality of the inverse-image unit prove naturality in F.",
    "uses": [
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-etale-base-change-finite-limits"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For Z→Y take the two successive inverse-image adjunction transposes. Both resulting maps send s to alpha_U(s) restricted to Z times_X U. Unit compatibility and adjunction injectivity prove beta natural in site arrows. The same construction is natural in F and G.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Conversely restrict beta to etale U and compose with the diagonal-unit identification. The restriction inverse-image isomorphism identifies the first composite with alpha. For the other, beta on etale V over Y has the transpose used to define beta_Y, by naturality at Y times_X U. Hence uniqueness of transpose recovers beta. These inverse natural Hom bijections give the adjunction; their value at identity is the stated diagonal-unit formula.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-restriction",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "def-cbc-comparison-section-diagonal-unit"
    ],
    "elementary": false
+  },
+  {
+   "text": "For F and G use the unique-extension theorem to turn beta maps to the restriction map eta_F followed by restriction(beta) into an equivalence. Prove its naturality in G by functoriality and in F by the constructed unit naturality. Assemble CoreHomEquiv and apply Adjunction.mkOfHomEquiv.",
+   "uses": [
+    "lem-cbc-comparison-section-unit-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assembled adjunction unit is eta_F followed by the restriction of the identity, hence eta_F. Its decoded section formula is e applied to e inverse of the explicit diagonal section, so follows from Equiv.apply_symm_apply.",
+   "uses": [
+    "def-cbc-comparison-section-diagonal-unit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+  "def-cbc-comparison-section-diagonal-unit",
+  "lem-cbc-comparison-section-unit-universal"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "D2 second reader, stage 3",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0GLZ, adjunction construction and final paragraph (original Steps 4–6); explicit Lean reduction by V4"
+  "place": "Tag 0GLZ, diagonal unit and transpose argument; https://stacks.math.columbia.edu/tag/0GLZ",
+  "note": "Concrete diagonal unit, proved naturality, and categorical assembly; only unique extension remains open. The equivalent existential CoreHomEquiv split was rejected and removed."
  },
  "mathlib_searches": [
   {
@@ -123,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261015T224110-L-2885764",
+  "landing": "20261016T015246-L-721346",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

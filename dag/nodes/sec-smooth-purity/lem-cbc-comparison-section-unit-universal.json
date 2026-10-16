@@ -1,0 +1,133 @@
+{
+ "id": "lem-cbc-comparison-section-unit-universal",
+ "kind": "statement",
+ "title": "Unique extension along the concrete diagonal unit",
+ "statement": "Let X be a scheme and A a functor from etale set sheaves on X to pro-etale set sheaves on X. Suppose e_F,Y identifies A(F)(Y) with terminal sections of the etale inverse image Y.hom^*F, naturally in coefficient maps, and intertwines restriction along each Z to Y with the inverse-image unit along that arrow followed by inverse terminal transport [def-weil-pbc-sets-terminal-transport]. let eta be the explicit natural transformation of [def-cbc-comparison-section-diagonal-unit]. For every etale set sheaf F and pro-etale set sheaf G, the map sending beta:A(F) to G to eta_F followed by the restriction of beta is bijective. Equivalently every morphism F to the etale restriction of G has exactly one extension beta with that fixed diagonal restriction. The assertion concerns this specified map, not the existence of a hom-set equivalence or an adjunction.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-terminal-transport",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-cbc-comparison-section-diagonal-unit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, diagonal unit and sectionwise transpose argument; https://stacks.math.columbia.edu/tag/0GLZ (read online; local source absent)"
+ },
+ "proof": [
+  {
+   "text": "Restrict G to the etale site over each weakly etale Y by the composite of Scheme.toProEt Y.left and MorphismProperty.Over.map for Y.hom. Their existing continuity instances make this a sheaf. Restrict alpha_U to Y times_X U, transpose using the etale inverse-image adjunction and evaluate at Y to construct beta_Y.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composition-unit equality proves naturality under Z to Y using hres. On etale U, the inverse-image/restriction unit formula identifies beta on the specified diagonal section with alpha_U, proving surjectivity.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any extension beta, its components on etale V over Y decode to a morphism Y.hom inverse image F to G restricted to Y_et. Naturality at Y times_X U to U and the diagonal formula fix its adjoint transpose. Injectivity of the etale adjunction hom equivalence identifies it with the constructed transpose. Evaluation at Y proves uniqueness and hence injectivity.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2 second reader, stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ; explicit diagonal-unit construction and reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique extension of morphism sheaves etale proetale comparison",
+   "results": "RanIsSheafOfIsCocontinuous.hom_ext, locally faithful site extensionality, and standard etale algebra hom_ext; no comparison unique-extension result.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective",
+   "results": "Generic bijective definitions, composition, identity and involution lemmas, none proving the section extension.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*bijective|bijective.*comparison",
+   "results": "Only unrelated comparison bijectivity statements and constant-sheaf unique extensions. No theorem for arbitrary sheaf F and G with the present diagonal unit.",
+   "date": "2026-10-16",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from an etale sheaf to a restricted proetale sheaf extends uniquely along the diagonal unit",
+   "results": "Service unavailable: Internal Server Error. No mathematical conclusion inferred; leanfinder, loogle and source grep were used.",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionAdjunction",
+  "date": "2026-10-16",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-comparison-section-adjunction",
+   "place": "Tag 0GLZ, diagonal unit and adjunction transpose",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleComparisonSectionUnitUniversal.lean",
+  "declaration": "AlgebraicGeometry.proEtaleComparisonSectionUnit_bijective",
+  "statement": "theorem proEtaleComparisonSectionUnit_bijective (X : Scheme.{u})\n    (A : Sheaf X.smallEtaleTopology (Type (u + 1)) ⥤\n      Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))\n    (e : ∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (Y : X.ProEt),\n      (A.obj F).obj.obj (op Y) ≃\n        ((Scheme.etaleSetPullback Y.hom).obj F).obj.obj\n          (op (Scheme.Etale.mk (𝟙 Y.left))))\n    (hres : ∀ (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n      (Y Z : X.ProEt) (g : Z ⟶ Y) (s : (A.obj F).obj.obj (op Y)),\n      e F Z ((A.obj F).obj.map g.op s) =\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ g.left) (Type (u + 1))\n            (Y.left.smallGrothendieckTopology @Etale)\n            (Z.left.smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback Y.hom).obj F)).hom.app\n                (op (Scheme.Etale.mk (𝟙 Y.left))) ≫\n            (etaleSetTerminalTransport Y.hom g.left Z.hom g.w F).inv) (e F Y s))\n    (hfun : ∀ (F F' : Sheaf X.smallEtaleTopology (Type (u + 1))) (ψ : F ⟶ F')\n      (Y : X.ProEt) (s : (A.obj F).obj.obj (op Y)),\n      e F' Y ((A.map ψ).hom.app (op Y) s) =\n        ((Scheme.etaleSetPullback Y.hom).map ψ).hom.app\n          (op (Scheme.Etale.mk (𝟙 Y.left))) (e F Y s))\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) :\n    Function.Bijective (fun f : A.obj F ⟶ G ↦\n      (proEtaleComparisonSectionUnit X A e hres hfun).app F ≫\n        ((Scheme.toProEt X).sheafPushforwardContinuous\n          (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)).map f)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T015246-L-721346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261016T015246-L-721346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

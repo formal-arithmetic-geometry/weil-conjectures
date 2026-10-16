@@ -7,10 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal
 
 /-! # The adjunction for the section-valued comparison sheaf
 
@@ -86,6 +83,40 @@ theorem proEtaleComparisonSectionAdjunction (X : Scheme.{u})
             (MorphismProperty.Over.pullback @Etale ⊤ U.hom) (Type (u + 1))
             (X.smallGrothendieckTopology @Etale)
             (U.left.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op U) s) := by
-  sorry
+  let R := (Scheme.toProEt X).sheafPushforwardContinuous
+    (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)
+  let η := proEtaleComparisonSectionUnit X A e hres hfun
+  let E (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
+      (G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) :=
+    Equiv.ofBijective (fun f : A.obj F ⟶ G ↦ η.app F ≫ R.map f)
+      (proEtaleComparisonSectionUnit_bijective X A e hres hfun F G)
+  let h : Adjunction.CoreHomEquiv A R := {
+    homEquiv := E
+    homEquiv_naturality_left_symm := by
+      intro F' F G f g
+      apply (E F' G).injective
+      erw [Equiv.apply_symm_apply]
+      change f ≫ g = η.app F' ≫ R.map (A.map f ≫ (E F G).symm g)
+      have hn : f ≫ η.app F = η.app F' ≫ R.map (A.map f) := η.naturality f
+      rw [R.map_comp, ← Category.assoc, ← hn, Category.assoc]
+      change f ≫ g = f ≫ (E F G) ((E F G).symm g)
+      erw [Equiv.apply_symm_apply]
+    homEquiv_naturality_right := by
+      intro F G G' f g
+      change η.app F ≫ R.map (f ≫ g) = (η.app F ≫ R.map f) ≫ R.map g
+      rw [R.map_comp, Category.assoc]
+  }
+  let adj := Adjunction.mkOfHomEquiv h
+  refine ⟨adj, ?_⟩
+  intro F U s
+  have hu : adj.unit.app F = η.app F := by
+    change η.app F ≫ R.map (𝟙 (A.obj F)) = η.app F
+    rw [R.map_id]
+    exact Category.comp_id _
+  rw [hu]
+  change e F ((Scheme.toProEt X).obj U)
+    ((e F ((Scheme.toProEt X).obj U)).symm
+      _) = _
+  exact Equiv.apply_symm_apply _ _
 
 end AlgebraicGeometry
