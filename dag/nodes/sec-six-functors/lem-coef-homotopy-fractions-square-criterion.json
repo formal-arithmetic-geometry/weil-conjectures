@@ -239,5 +239,37 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-265002ecc (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all seven steps against Dwyer–Kan §§5.1–5.2, 6.1(i), 7.1(iii), and 8.2. Diagram equations, naturality, nontrivial identity factorizations, edge cases, and duplicate candidates check out. Corrected split_report.blueprint: the current ancestor proof exists in its separate .proof.md file. Mathematical statements and dependencies unchanged; detailed review and corrected JSON written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.HomotopyFractionsSquareCriterion",
+  "declaration": "CategoryTheory.MorphismProperty.homotopyCalculus_of_functorialSquareCompletions",
+  "declarations": [
+   "CategoryTheory.MorphismProperty.SpanInput",
+   "CategoryTheory.MorphismProperty.SpanInputHom",
+   "CategoryTheory.MorphismProperty.SpanCompletion",
+   "CategoryTheory.MorphismProperty.FunctorialSpanCompletionData",
+   "CategoryTheory.MorphismProperty.CospanInput",
+   "CategoryTheory.MorphismProperty.CospanInputHom",
+   "CategoryTheory.MorphismProperty.CospanCompletion",
+   "CategoryTheory.MorphismProperty.FunctorialCospanCompletionData",
+   "CategoryTheory.MorphismProperty.WeakArrowProperty",
+   "CategoryTheory.MorphismProperty.WeakArrowFactorizations",
+   "CategoryTheory.MorphismProperty.homotopyCalculus_of_functorialSquareCompletions"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/HomotopyFractionsSquareCriterion.lean",
+  "statement": "theorem homotopyCalculus_of_functorialSquareCompletions (W U V : MorphismProperty C) [W.IsMultiplicative] [W.HasTwoOutOfThreeProperty] [U.IsMultiplicative] [V.IsMultiplicative] (hUW : U ≤ W) (hVW : V ≤ W) (span : FunctorialSpanCompletionData W U) (cospan : FunctorialCospanCompletionData W V) (factor : WeakArrowFactorizations W U V) : RelativeZigzag.HasTwoSidedHomotopyCalculus W",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Square-completion helper structures encode the choices and functoriality in this statement. Factorization is restricted to the full subcategory of W arrows, rather than the stronger Mathlib interface that factors every arrow. The landed RelativeZigzag.HasTwoSidedHomotopyCalculus is used unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8dc2f7fad",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Wrote review.md. Verified source, every statement clause, dependencies, universes, edge cases, uniqueness, docstrings, report sections, and verbatim signature. Local scompile.py passed both forms cleanly. No defects found; no clone or branch changes."
  }
 }
