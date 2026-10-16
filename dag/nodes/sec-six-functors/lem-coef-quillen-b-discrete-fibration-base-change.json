@@ -28,9 +28,113 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal P=\\mathcal E\\times_{\\mathcal B}\\mathcal D$, with projections $a:\\mathcal P\\to\\mathcal E$ and $\\pi:\\mathcal P\\to\\mathcal D$. An object is $(e,d')$ with $Ue=Vd'$; an arrow is $(h,k)$ with $Uh=Vk$. The equality $Ua=V\\pi$ holds on objects and arrows. In each degree a functor $[n]\\to\\mathcal P$ is exactly a pair of functors to $\\mathcal E,\\mathcal D$ agreeing in $\\mathcal B$, so this is the indicated strict square of nerves.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p. 183 (PDF p. 198), applied to opposite categories; its overcategory form, followed by contraction of B/b to its terminal object, gives the comma homotopy-fiber comparison. Read online on 2026-10-17; archival copy WANTED. No Stacks tag states this theorem."
+   }
+  },
+  {
+   "text": "For $d\\in\\mathcal D$, define $\\Phi_d:(\\pi\\downarrow d)\\to(U\\downarrow Vd)$ by $((e,d'),\\delta:d'\\to d)\\mapsto(e,V\\delta)$, and $(h,k)\\mapsto h$. For $(e,\\alpha:Ue\\to Vd)$ the unique lift of $\\alpha$ with target $d$ supplies $\\delta:d'\\to d$ with $Vd'=Ue$, hence an inverse on objects. For $h:(e,\\alpha)\\to(e',\\alpha')$, let $\\delta':d''\\to d$ be the lift of $\\alpha'$ and lift $Uh:Ue\\to Ue'$ with target $d''$ to $k:\\widetilde d\\to d''$. The composite $\\delta'k$ and $\\delta$ lift the same arrow $\\alpha$ with target $d$, so uniqueness gives $\\widetilde d=d'$ and $\\delta'k=\\delta$. Thus $(h,k)$ is the required comma arrow. Unique lifting of identities and composites verifies the functor laws and both inverse identities. Consequently $\\Phi_d$ is an isomorphism, not just a weak equivalence. For $\\epsilon:d_0\\to d_1$, postcomposition by $\\epsilon$ corresponds under these isomorphisms to postcomposition by $V\\epsilon$. Therefore all comma-transition nerves for $\\pi$ are weak equivalences by the hypothesis on $U$. These constructions also commute with strictly commuting maps of the original diagrams, since such functors send a lift to the unique lift with its specified target.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p. 183 (PDF p. 198), applied to opposite categories; its overcategory form, followed by contraction of B/b to its terminal object, gives the comma homotopy-fiber comparison. Read online on 2026-10-17; archival copy WANTED. No Stacks tag states this theorem."
+   }
+  },
+  {
+   "text": "Use the functorial Kan replacement $R(K)=\\operatorname{Sing}(|K|)$. It is Kan: under realization--singular adjunction a horn map into $R(K)$ is a map $|\\Lambda_i^n|\\to|K|$, and the horn-pair homeomorphism in [lem-coef-realization-finite-limits] supplies a retraction $|\\Delta^n|\\to|\\Lambda_i^n|$. The characteristic-map unit is a weak equivalence for every $K$ by [lem-cbc-realization-singular-unit-weak]. Choose once a universe containing all the sets of continuous maps used here; the four categories and their commas are small in it. Set $X=RN\\mathcal P$, $A=RN\\mathcal E$, $Z=RN\\mathcal D$, $C=RN\\mathcal B$, $r=RN\\pi$, $f=RNU$, $v=RNV$, $u=RNa$. These are Kan complexes and $fu=vr$ strictly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits",
+    "lem-cbc-realization-singular-unit-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0142",
+    "place": "Theorem 3.6.4.1 for the unit; realized horn-pair retraction and the adjunction are the existing realization-finite-limits statement."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-quillen-b-comma-homotopy-fiber] to $U$ and to $\\pi$, whose hypothesis was verified in Step 2. For every original category object $d$, its naturality for the square $(a,V)$ identifies the induced map $\\operatorname{hofib}_{d}(r)\\to\\operatorname{hofib}_{Vd}(f)$ with $RN\\Phi_d$ through the two comma comparisons. Both comparisons are weak equivalences and $RN\\Phi_d$ is an isomorphism, so this particular homotopy-fiber map is a weak equivalence: on components and on every homotopy group its map is the composite of isomorphisms. This proves more than an abstract equivalence of fibers; it identifies the map induced by the strict square.",
+   "uses": [
+    "lem-coef-quillen-b-comma-homotopy-fiber",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 4.6.12, printed p. 183 (PDF p. 198), applied to opposite categories; its overcategory form, followed by contraction of B/b to its terminal object, gives the comma homotopy-fiber comparison. Read online on 2026-10-17; archival copy WANTED. No Stacks tag states this theorem."
+   }
+  },
+  {
+   "text": "Form $Q=A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}Z$, and let $q:Q\\to Z$ be the last projection. By [lem-coef-space-path-fibration-replacement] the mapping-path projection for $f$ is a Kan fibration; its pullback $q$ is Kan because a horn lifting square in a pullback is exactly a horn lifting square upstairs with the base coordinate retained. Since $Z$ is Kan, projected-horn filling followed by this lifting shows $Q$ Kan. Define $k:X\\to Q$ by $x\\mapsto(u(x),\\operatorname{const}_{fu(x)},r(x))$. The equality $fu=vr$ makes this well-defined. For any vertex $z$ of $Z$, the strict fiber $Q_z$ is exactly $\\operatorname{hofib}_{v(z)}(f)$. Apply [lem-cbc-right-fibration-space-fiber] to $q$ (a Kan fibration lifts every positive-index horn): its natural constant-path map $j_z:Q_z\\to\\operatorname{hofib}_z(q)$ is a weak equivalence. Define $F_z=\\operatorname{hofib}_z(r)$ and $g_z:F_z\\to Q_z$ by $(x,\\gamma)\\mapsto(u(x),v\\gamma,z)$. For an original object $z=d$, this is exactly the strict-square homotopy-fiber map of Step 4, so $g_d$ is a weak equivalence. Write $h_z:F_z\\to\\operatorname{hofib}_z(q)$ for the fiber map of $k$, namely $(x,\\gamma)\\mapsto(k(x),\\gamma)$. There is a specific simplicial homotopy from $h_z$ to $j_zg_z$: at interval parameter $t$ send $(x,\\gamma)$ to the $Q$-point $(u(x),s\\mapsto v\\gamma(\\min(s,t)),\\gamma(t))$, together with the final $Z$-path $s\\mapsto\\gamma(\\max(s,t))$. The order-preserving functions $\\min,\\max:[1]\\times[1]\\to[1]$ induce simplicial maps. Thus these formulas apply to $n$-simplices with their $\\Delta^n$ parameter retained and commute with every simplicial operator. The first path starts at $v r(x)=f u(x)$ and ends at $v\\gamma(t)$; the second starts at $\\gamma(t)$ and ends at $z$. At $t=0$ the first path is constant and the second is $\\gamma$, giving $h_z$; at $t=1$ they are $v\\gamma$ and the constant path at $z$, giving $j_zg_z$. To justify weak-equivalence invariance under this homotopy without a basepoint assumption, the projection $p:F_z\\times\\Delta^1\\to F_z$ is a simplicial homotopy equivalence: its section at $0$ is an inverse, with cylinder contraction $(x,t,s)\\mapsto(x,\\min(t,s))$. By [lem-cbc-simplicial-homotopy-equivalence-weak], $p$ is a weak equivalence; since $p i_0=p i_1=1$, both endpoint inclusions are weak equivalences on components and all groups. If $z=d$, the homotopy $H$ has $H i_1=j_dg_d$ a weak equivalence, so $H$ and then $H i_0=h_d$ are weak equivalences by composing these isomorphisms. Therefore the particular fiber map $\\operatorname{hofib}_d(k)$ is a weak equivalence for every original object $d$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-path-fibration-replacement",
+    "lem-cbc-right-fibration-space-fiber",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZN",
+    "place": "Path-space fibration replacement and fiber comparison as in the cited existing nodes; explicit min/max interval homotopy identifies the particular fiber map. Simplicial homotopy-equivalence input: Kerodon 00UB, via its cited node."
+   }
+  },
+  {
+   "text": "Here original objects suffice, despite the extra vertices of $Z=\\operatorname{Sing}|N\\mathcal D|$. Replace $r:X\\to Z$ and $q:Q\\to Z$ by their mapping-path fibrations, using [lem-coef-space-path-fibration-replacement]. The map $k$ induces a map of these fibrations over $Z$, sending $(x,\\gamma)$ to $(k(x),\\gamma)$; its strict vertex-fiber maps are exactly $\\operatorname{hofib}_z(k)$. For any vertex $z$ of $Z$, regard it as a point of $|N\\mathcal D|$ and choose a simplex representing it. The straight segment in that topological simplex to any of its vertices is a singular edge in $Z$ joining $z$ to the image of an original object $d$. Pull the two mapping-path fibrations back along this edge $\\Delta^1\\to Z$. They remain Kan fibrations by the explicit lifting argument of Step 5; their realizations are Serre fibrations by [lem-coef-kan-realization-serre], and realization identifies their endpoint fibers with the realized simplicial fibers by [lem-coef-realization-finite-limits]. For a Serre fibration over $|\\Delta^1|=[0,1]$, inclusion of either endpoint fiber in the total space is a weak equivalence: in the exact sequence of [lem-coef-serre-homotopy-exact-sequence] all positive homotopy groups of the base vanish, while path lifting and the orbit/stabilizer clause with trivial $\\pi_1([0,1])$ identify components. This holds at every fiber basepoint; every total-space component meets each endpoint fiber by path lifting. The interval is contracted by $(t,s)\\mapsto(1-s)t$ (or $1-(1-s)(1-t)$ at the other endpoint), so the asserted vanishing is explicit. Naturality of that exact sequence gives a commutative square of the endpoint-fiber inclusion maps for our map of fibrations. The weak equivalence at endpoint $d$ from Step 5 therefore implies weak equivalence of the map of total spaces, and then weak equivalence at endpoint $z$, by composing the component and group isomorphisms. If one endpoint fiber is empty, path lifting makes the total space and other endpoint fiber empty as well. We have proved $\\operatorname{hofib}_z(k)$ weakly equivalent for every vertex $z$ of $Z$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-space-path-fibration-replacement",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.6.2 (realized Kan fibrations); Lemma 2.4.16 and Proposition 2.4.18 (natural exact sequence and component/path-lifting argument). Applied only through the cited DAG statements."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-spaces-homotopy-fiber-detection] to $k:X\\to Q$ over $\\mathrm{id}_Z$, with the constant homotopy witnessing $qk=r$. All four spaces $X,Q,Z,Z$ are Kan (Steps 3 and 5), the base map is an identity weak equivalence, and all vertex-fiber maps are weak equivalences by Step 6. It follows that $k$ is a weak equivalence. By the displayed path-space definition in the statement, this says exactly that the original square is a homotopy pullback of weak homotopy types, using the functorial Kan replacement of Step 3. The map $k$ is the constant-path comparison induced by the given strict square, not a chosen abstract equivalence. For commutative maps of such diagrams the nerve, $R$, pullback coordinates, and constant-path maps commute; consequently these comparisons are natural, with the higher simplices retained degree by degree. All auxiliary choices in Step 6 certify weak equivalence only and do not enter $k$. If $\\mathcal D$ is empty, both $X$ and $Q$ are empty and the same conclusion is immediate; if $\\mathcal B$ is empty all the categories mapping to it are empty. No model structure on ordinary categories was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZN",
+    "place": "Fiberwise criterion with identity base, via the existing homotopy-fiber-detection node; final identification is the specified path-space definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-quillen-b-comma-homotopy-fiber",
+  "lem-coef-space-path-fibration-replacement",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Agent-written discrete-fibration reduction to the dual point-fiber Corollary 4.6.12, with an explicit min/max mapping-path homotopy and fiber-detection argument and coverage of additional singular vertices. Source read online; archival PDF WANTED. Avoids the circular use of the downstream Kan-Quillen theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +184,115 @@
    "results": "{\"t\": \"2026-10-16T21:25:35Z\", \"tool\": \"grep\", \"query\": \"Quillen[Bb]|[Qq]uillen.*[Tt]heorem|[Dd]iscreteFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: nerve reconstruction and the homotopy-category adjunction do not assert homotopy Cartesian base change under the comma-category hypothesis. Loogle and grep found no matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen B comma-category homotopy fiber comparison for a functor whose overcategory nerves are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T21:56:05Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen B comma-category homotopy fiber comparison for a functor whose overcategory nerves are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp_assoc\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\"], \"digest\": \"dc74402c36f49768\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen|comma|homotopy.*fiber",
+   "results": "{\"t\": \"2026-10-16T21:56:06Z\", \"tool\": \"grep\", \"query\": \"Quillen|comma|homotopy.*fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"de39acd944303875\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quillen Theorem B identifies the nerve of each comma category with the homotopy fiber of the nerve functor when comma transition maps are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T21:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"Quillen Theorem B identifies the nerve of each comma category with the homotopy fiber of the nerve functor when comma transition maps are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.functorOfNerveMap_obj\"], \"digest\": \"d21f439ca117d369\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "grep",
+   "query": "Comma|homotopy.*fiber|nerve",
+   "results": "{\"t\": \"2026-10-16T21:56:32Z\", \"tool\": \"grep\", \"query\": \"Comma|homotopy.*fiber|nerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"9a0de313f06a908b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quillen Theorem B identifies the nerve of each comma category with the homotopy fiber of the nerve functor when comma transition maps are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T21:56:33Z\", \"tool\": \"leansearch\", \"query\": \"Quillen Theorem B identifies the nerve of each comma category with the homotopy fiber of the nerve functor when comma transition maps are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma\", \"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"7e9c70c621865edf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-16T22:21:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyFiber\"",
+   "results": "{\"t\": \"2026-10-16T22:21:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"homotopyFiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HomologicalComplex.HasHomotopyFiber\", \"HomologicalComplex.instHasHomotopyFiberOfHasBinaryBiproducts\", \"HomologicalComplex.homotopyFiber\", \"HomologicalComplex.HasHomotopyFiber.hasBinaryBiproduct\", \"HomologicalComplex.HasHomotopyFiber.mk\"], \"digest\": \"f58b66dab9bde498\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homotopy constant covariant diagram of comma categories the canonical map from its value to the classifying space homotopy fiber is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T22:21:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a homotopy constant covariant diagram of comma categories the canonical map from its value to the classifying space homotopy fiber is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantBrownFactorization.instWeakEquivalenceS\"], \"digest\": \"29bd975d207e9b3f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "grep",
+   "query": "Quillen.*[Bb]|theorem[Bb]|homotopyFiber|homotopy[Ff]iber",
+   "results": "{\"t\": \"2026-10-16T22:21:59Z\", \"tool\": \"grep\", \"query\": \"Quillen.*[Bb]|theorem[Bb]|homotopyFiber|homotopy[Ff]iber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\"], \"digest\": \"1d1d633698f5ebdb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned nerve/adjunction constructions and general path-object declarations; none identifies comma nerves with homotopy fibers. The homotopyFiber Loogle hits are HomologicalComplex constructions, not spaces (read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58). Grep returns Quillen-model bibliography and ordinary nerve definitions, not Theorem B."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]iscrete[Ff]ibration|Quillen.*[Tt]heorem|[Tt]heorem[Bb]",
+   "results": "{\"t\": \"2026-10-16T22:30:21Z\", \"tool\": \"grep\", \"query\": \"[Dd]iscrete[Ff]ibration|Quillen.*[Tt]heorem|[Tt]heorem[Bb]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\", \"Mathlib/Combinatorics/Additive/Corner/Roth.lean\"], \"digest\": \"cd055ecafeb00690\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned truncated-nerve adjunctions, Cech nerves, ordinary cartesian lifts, and categorical pullbacks; the generic model-category base-change instance assumes a trivial fibration and says nothing about comma conditions. The grep hits cornersTheoremBound concern additive combinatorics. None proves the homotopy-pullback statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict pullback of a functor along a discrete fibration is a homotopy pullback on nerves if comma transition functors are weak equivalences",
+   "results": "{\"t\": \"2026-10-16T22:30:22Z\", \"tool\": \"leansearch\", \"query\": \"The strict pullback of a functor along a discrete fibration is a homotopy pullback on nerves if comma transition functors are weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"CategoryTheory.MorphismProperty.instHasPullbackHomDiscretePUnitOfHasPullbacksAlong\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.MorphismProperty.instHasPullbackSndHomDiscretePUnitOfHasPullbacksAlongOfIsStableUnderBaseChangeAlong\", \"HasFibers.pullbackMap.isCartesian\", \"HasFibers.pullbackMap\", \"CategoryTheory.Over.pullbackComp\", \"CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom\"], \"digest\": \"51b102a8bef90ac6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned truncated-nerve adjunctions, Cech nerves, ordinary cartesian lifts, and categorical pullbacks; the generic model-category base-change instance assumes a trivial fibration and says nothing about comma conditions. The grep hits cornersTheoremBound concern additive combinatorics. None proves the homotopy-pullback statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteFibration\"",
+   "results": "{\"t\": \"2026-10-16T22:30:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"DiscreteFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned truncated-nerve adjunctions, Cech nerves, ordinary cartesian lifts, and categorical pullbacks; the generic model-category base-change instance assumes a trivial fibration and says nothing about comma conditions. The grep hits cornersTheoremBound concern additive combinatorics. None proves the homotopy-pullback statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete-fibration base change of a category functor satisfying the Quillen B overcategory condition gives a homotopy pullback of nerves",
+   "results": "{\"t\": \"2026-10-16T22:30:22Z\", \"tool\": \"leanfinder\", \"query\": \"Discrete-fibration base change of a category functor satisfying the Quillen B overcategory condition gives a homotopy pullback of nerves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.SimplicialObject.cechNerve\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveMap\"], \"digest\": \"ff56304a98cbd111\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned truncated-nerve adjunctions, Cech nerves, ordinary cartesian lifts, and categorical pullbacks; the generic model-category base-change instance assumes a trivial fibration and says nothing about comma conditions. The grep hits cornersTheoremBound concern additive combinatorics. None proves the homotopy-pullback statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comma\" \"homotopy\" \"fiber\"",
+   "results": "{\"t\": \"2026-10-16T21:56:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comma\\\" \\\"homotopy\\\" \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"Comma\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"homotopy\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this malformed query (missing commas); not evidence of absence. The subsequent valid query \"Comma\", \"nerve\" returned no matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nerve\" \"Comma\" \"fiber\"",
+   "results": "{\"t\": \"2026-10-16T21:56:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"nerve\\\" \\\"Comma\\\" \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"nerve\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"Comma\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this malformed query (missing commas); not evidence of absence. The subsequent valid query \"Comma\", \"nerve\" returned no matches."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-fibrant-localization-pullbacks",
@@ -103,5 +312,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quillen-b-discrete-fibration-base-change",
+  "worker": "stage1",
+  "summary": "No finished project declaration was found. Keep the statement unchanged. The unique-lift comma isomorphisms transfer the Quillen B hypothesis, and the new point-fiber theorem identifies the canonical fiber maps. Existing acyclic mapping-path, realization and fiber-detection lemmas prove the square, including all singular vertices. No elementary comma calculation was made a node. Second reading replaces path concatenation by a degreewise min/max homotopy.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed RHom/Rlim coefficient-adjunction calculation, through the inherited coherent-localization infrastructure chain; the unit has no more specific proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Generic characteristic-map Kan-replacement unit theorem; the unit has no acyclic node giving this unit weak equivalence, and its Ex-infinity route depends on this item."
+   },
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic strict-fiber to homotopy-fiber comparison for a Kan fibration over a Kan base; used on the path pullback q. The same-unit pullback-comparison node depends on the downstream Kan theorem and would be cyclic."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial-cylinder homotopy-equivalence theorem, applied only to the projection F_z × Δ¹ → F_z. It supplies endpoint weak equivalences without the unit's cyclic Kan-model route or an uncited passage from k-space products to ordinary products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-cf7440b4d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-cf7440b4d (reviewer sub-agent of L); spot-checked: I read every step and the full statements of all ten cited nodes. The item is Cisinski Prop. 4.6.11 dualised to overcategories, and its statement is unchanged. The source is not in the literature folder and is correctly listed as WANTED. Step 2: I redid the unique-lift calculation; (pi down d) is isomorphic to (U down Vd), compatibly with transition maps, so pi inherits the Quillen B hypothesis. Step 3: Sing|-| is Kan by the horn-pair retraction, and its unit is weak for every simplicial set. Step 4: the naturality square (F=a, G=V) gives exactly Phi_d and the strict-square fiber map. Step 5: Q is the pullback of the path fibration, so it is Kan. I checked that the min/max homotopy is made of monotone maps of [n]x[1], with correct endpoints h_z and j_z g_z. The cylinder projection is weak by the simplicial homotopy-equivalence lemma. Step 6: every singular vertex has a straight-segment edge to an object vertex. Realizations of Kan fibrations over Delta^1 are Serre fibrations (non-Kan base allowed), and the exact sequence over [0,1] gives the endpoint inclusions, empty fibers included. Step 7: fiber detection with X,Q,Z,Z Kan, v=id and a constant homotopy. The new node lem-coef-quillen-b-comma-homotopy-fiber is the classical point form of Theorem B. I tested it on E=* -> BG (discrete G = Omega BG) and on empty comma categories, and checked the path direction against the def-cbc homotopy-fiber convention. It is self-contained, statement-only, and strictly weaker than the item (it follows from the item applied to B/b -> B), not a restated clause. Whoever later splits it must avoid the route through the downstream Kan theorem. A DAG-wide grep for Quillen/Theorem B/4.6.11-12/discrete fibration/comma found no duplicate; I read the aspherical-base-change, special-resolutions, equifibered-diagonal and arrow-source-fibers candidates. No cycle: the dependency closure has 67 nodes and does not contain the item. The blueprint ancestor and via chain are correct, and the unit has no steps. I accept the three declared off-unit cbc tools (realization-singular-unit-weak, right-fibration-space-fiber, simplicial-homotopy-equivalence-weak) for the maintainer to record in tool_uses. No SGA source. No fixes."
  }
 }

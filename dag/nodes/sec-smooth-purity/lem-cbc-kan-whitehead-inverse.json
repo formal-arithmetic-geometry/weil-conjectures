@@ -26,48 +26,142 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In the degreewise product/pullback convention of [def-cbc-enhanced-diagrams-cones], put\n$$P=A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B).$$\nIdentify an $n$-simplex of $\\operatorname{Fun}(\\Delta^1,B)$ with a map $\\Delta^n\\times\\Delta^1\\to B$ by the natural factor interchange from the definition $\\Delta^1\\times\\Delta^n\\to B$; this interchange commutes with all simplicial operators. Write $r:P\\to A$ for projection, $p:P\\to B$ for endpoint $1$, and $i:A\\to P$ for $a\\mapsto(a,\\mathrm{const}_{f(a)})$. These are simplicial maps: evaluation, projection and constant paths commute with every simplicial operator. Directly $ri=1_A$ and $pi=f$. The evaluation map $e:P\\times\\Delta^1\\to B$ has endpoints $fr$ and $p$. Explicitly, on an $n$-simplex $(a,\\gamma)$ of $P$, where $\\gamma:\\Delta^n\\times\\Delta^1\\to B$ has initial endpoint $f(a)$, and $\\theta:[n]\\to[1]$, it is $\\gamma\\circ(1_{\\Delta^n},\\theta)$. This formula commutes with precomposition by $[m]\\to[n]$, so defines the asserted evaluation map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.3, path-space construction; agent-written mapping-path version and explicit evaluation formula"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-internal-hom-fibration-corner-map] with the degreewise inclusion $\\partial\\Delta^1=\\{0\\}\\amalg\\{1\\}\\hookrightarrow\\Delta^1$ and the Kan fibration $B\\to\\Delta^0$. Its conclusion says that $(\\operatorname{ev}_0,\\operatorname{ev}_1):\\operatorname{Fun}(\\Delta^1,B)\\to B\\times B$ is a Kan fibration. To fill a horn for $p$, let $u:\\Lambda_k^m\\to P$ and $v:\\Delta^m\\to B$ satisfy $pu=v|_{\\Lambda_k^m}$. Since $A$ is Kan, extend $ru$ to $a:\\Delta^m\\to A$. The path coordinate of $u$ lies over $(fa,v)$ on the horn. Lift it through the displayed endpoint fibration to $\\gamma:\\Delta^m\\to\\operatorname{Fun}(\\Delta^1,B)$ over $(fa,v)$. Then $(a,\\gamma)$ is the required filler in $P$. Thus $p$ is a Kan fibration, including both outer horns; this uses exactly the horn convention of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.3.1 and Proposition 3.6.3, endpoint path-space fibration; direct horn-lifting verification"
+   }
+  },
+  {
+   "text": "Define $C:P\\times\\Delta^1\\to P$ by\n$$C((a,\\gamma),t)=(a,[s\\mapsto\\gamma(\\min(s,t))]).$$\nThis is a simplicial formula: pointwise minimum takes two monotone maps $[n]\\to[1]$ to a monotone map and commutes with precomposition. More explicitly, for $(a,\\gamma)\\in P_n$ and $\\theta:[n]\\to[1]$, its new path is the composite of $\\gamma$ with $(u,s)\\mapsto(u,\\min(s,\\theta(u)))$ on $\\Delta^n\\times\\Delta^1$. It still starts at $f(a)$, and its endpoint values at $t=0,1$ are $ir$ and $1_P$. The identities $ri=1_A$ and this homotopy meet [lem-cbc-simplicial-homotopy-equivalence-weak] for $u=i$, $v=r$ (use the constant homotopy on $A$). Hence $|i|$ is a weak homotopy equivalence. No interval-reversal map of simplicial sets is used.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.3 path construction and Lemma 3.4.6 monotone interval contractions; Kerodon 00UB forward implication supplies the cited homotopy-equivalence input"
+   }
+  },
+  {
+   "text": "The equality $f=pi$ realizes to $|f|=|p|\\,|i|$. By the two-out-of-three assertion for realized weak homotopy equivalences in [lem-coef-topological-serre-model], the hypothesis on $|f|$ and step 3 imply that $|p|$ is a weak homotopy equivalence. Step 2 and [lem-coef-kan-realization-serre] make $|p|$ a Serre fibration; that theorem does not require $P$ or $B$ to be Kan. Thus $|p|$ belongs to $F\\cap W$ of the topological model structure. For any boundary lifting square $a:\\partial\\Delta^n\\to P$, $b:\\Delta^n\\to B$ against $p$, [lem-coef-realization-finite-limits] identifies its realized left side with $S^{n-1}\\hookrightarrow D^n$. These inclusions, including $\\varnothing\\hookrightarrow D^0$, are generating cofibrations in [lem-coef-topological-serre-model], hence have the left lifting property against $F\\cap W$. The realized square therefore has a continuous filler $h$ with $|p|h=|b|$ and boundary value $|a|$.",
+   "uses": [
+    "lem-coef-topological-serre-model",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.4.23, Corollary 3.6.2 and Theorem 3.6.4; the topological disk-lifting part of the comparison argument"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-kan-relative-realization-lift] to the Kan fibration $p$ of step 2 and each continuous filler of step 4. It produces a simplicial filler of every $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ square against $p$, for all $n\\geq0$. In dimension zero this says that $p_0$ is surjective, and in positive dimensions it is precisely the prescribed-boundary extension. These are exactly the clauses of [def-weil-pbc-trivial-kan-fibration], so $p$ is a trivial Kan fibration.",
+   "uses": [
+    "lem-cbc-kan-relative-realization-lift",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Relative boundary-lifting comparison formulated in lem-cbc-kan-relative-realization-lift; identification with Stacks 08NL, definition-trivial-kan"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-trivial-kan-lifts-monomorphisms] first for $\\varnothing\\hookrightarrow B$, with lower map $1_B$, to obtain a section $s:B\\to P$, $ps=1_B$. Use it again for the degreewise injective endpoint map $P\\amalg P\\hookrightarrow P\\times\\Delta^1$. On the two ends prescribe $sp$ and $1_P$, and below prescribe $p\\operatorname{pr}_P:P\\times\\Delta^1\\to B$. This square commutes because $psp=p$. Its filler is a simplicial map $K:P\\times\\Delta^1\\to P$ with $K_0=sp$, $K_1=1_P$ and $pK=p\\operatorname{pr}_P$. The endpoint map is injective in every degree since the constant maps $[n]\\to[1]$ with values $0$ and $1$ are distinct.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NM, lemma-trivial-kan, lines 5550–5581; applied as in Tag 08NS, lemma-trivial-kan-homotopy, lines 5641–5664, with the desired endpoint order"
+   }
+  },
+  {
+   "text": "Set $g=rs:B\\to A$,\n$$H=rK(i\\times1_{\\Delta^1}):A\\times\\Delta^1\\to A,\\qquad J=e(s\\times1_{\\Delta^1}):B\\times\\Delta^1\\to B.$$\nThe endpoint equations follow by substitution:\n$$H_0=rspi=rsf=gf,\\quad H_1=ri=1_A,\\quad J_0=frs=fg,\\quad J_1=ps=1_B.$$\nAll maps used are simplicial by their displayed formulas and composition. No component or global basepoint was chosen. If one of $A,B$ is empty, the component bijection forces the other empty as well (any simplex has vertices); the unique empty maps satisfy the same equations. For disconnected complexes the argument applies unchanged, with the given weak-equivalence hypotheses on all components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NS, lemma-trivial-kan-homotopy; explicit composition with the mapping-path projection and evaluation, supplied by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-topological-serre-model",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-kan-relative-realization-lift",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Agent-written mapping-path proof using the geometric-fibration comparison of §§3.3–3.6 and Stacks 08NM/08NS. Kerodon 00UB states the result, but its proof via Kan-target testing is not used because the existing testing comparison reaches this item. Online Hovey/Kerodon sources read; permanent archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A map between Kan simplicial sets whose realization is a weak homotopy equivalence has a simplicial homotopy inverse",
-   "results": "{\"t\": \"2026-10-16T20:55:25Z\", \"tool\": \"leanfinder\", \"query\": \"A map between Kan simplicial sets whose realization is a weak homotopy equivalence has a simplicial homotopy inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyRel\"], \"digest\": \"7f2773134e3b4dd0\"}",
+   "query": "simplicial homotopy inverse for weak equivalence between Kan complexes",
+   "results": "{\"t\": \"2026-10-16T22:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial homotopy inverse for weak equivalence between Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_symm_mk\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopyCategory.isoOfHomotopyEquiv_inv\", \"HomotopicalAlgebra.RightHomotopyRel.symm\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyRel.symm\"], \"digest\": \"0e25b8b74d2d3d31\"}",
    "date": "2026-10-16",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead (ModelCategory/Homotopy.lean:216-236, read) require a ModelCategory instance and give abstract homotopy relations. CategoryWithFibrations.lean:66-89 (read) supplies only cofibrations/fibrations for the still TODO Kan-Quillen structure. Identifying geometric weak equivalences and the specified simplicial cylinder is additional mathematics, so this is not a one-line specialization. Other hits concern 2-truncated categories, chain homotopy or topological homotopy equivalences."
+   "verdict": "no match: RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead in ModelCategory/Homotopy.lean:216–235 require an actual ModelCategory instance and give abstract homotopy relations. Read CategoryWithFibrations.lean:66–89: the Kan–Quillen model structure is TODO, with cofibrations/fibrations only. Realization weak-equivalence identification and standard cylinder representation require further mathematics. RelativeMorphism.HomotopyClass and DoldKan results do not state this theorem; no one-line specialization."
   },
   {
    "tool": "loogle",
-   "query": "\"KanComplex\", \"Homotopy\"",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanComplex\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "HomotopicalAlgebra.RightHomotopyClass.whitehead",
+   "results": "{\"t\": \"2026-10-16T22:55:47Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"1e460d0af261d092\"}",
    "date": "2026-10-16",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead (ModelCategory/Homotopy.lean:216-236, read) require a ModelCategory instance and give abstract homotopy relations. CategoryWithFibrations.lean:66-89 (read) supplies only cofibrations/fibrations for the still TODO Kan-Quillen structure. Identifying geometric weak equivalences and the specified simplicial cylinder is additional mathematics, so this is not a one-line specialization. Other hits concern 2-truncated categories, chain homotopy or topological homotopy equivalences."
+   "verdict": "no match: RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead in ModelCategory/Homotopy.lean:216–235 require an actual ModelCategory instance and give abstract homotopy relations. Read CategoryWithFibrations.lean:66–89: the Kan–Quillen model structure is TODO, with cofibrations/fibrations only. Realization weak-equivalence identification and standard cylinder representation require further mathematics. RelativeMorphism.HomotopyClass and DoldKan results do not state this theorem; no one-line specialization."
   },
   {
    "tool": "grep",
-   "query": "(KanComplex|kanComplex).*(homotopy|equivalence)|(homotopyEquiv|homotopy_equiv|homotopyInverse|homotopy_inverse)",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"grep\", \"query\": \"(KanComplex|kanComplex).*(homotopy|equivalence)|(homotopyEquiv|homotopy_equiv|homotopyInverse|homotopy_inverse)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\"], \"digest\": \"4c78c170f49124b9\"}",
+   "query": "whitehead|weakEquivalence.*Kan|Kan.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T22:55:47Z\", \"tool\": \"grep\", \"query\": \"whitehead|weakEquivalence.*Kan|Kan.*weakEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\"], \"digest\": \"0ea62ccf3bd09be0\"}",
    "date": "2026-10-16",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead (ModelCategory/Homotopy.lean:216-236, read) require a ModelCategory instance and give abstract homotopy relations. CategoryWithFibrations.lean:66-89 (read) supplies only cofibrations/fibrations for the still TODO Kan-Quillen structure. Identifying geometric weak equivalences and the specified simplicial cylinder is additional mathematics, so this is not a one-line specialization. Other hits concern 2-truncated categories, chain homotopy or topological homotopy equivalences."
+   "verdict": "no match: RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead in ModelCategory/Homotopy.lean:216–235 require an actual ModelCategory instance and give abstract homotopy relations. Read CategoryWithFibrations.lean:66–89: the Kan–Quillen model structure is TODO, with cofibrations/fibrations only. Realization weak-equivalence identification and standard cylinder representation require further mathematics. RelativeMorphism.HomotopyClass and DoldKan results do not state this theorem; no one-line specialization."
   },
   {
    "tool": "leansearch",
-   "query": "Every weak equivalence between Kan complexes is a simplicial homotopy equivalence",
-   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"leansearch\", \"query\": \"Every weak equivalence between Kan complexes is a simplicial homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.WeakEquivalence\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\"], \"digest\": \"f4931aeaa524b70a\"}",
+   "query": "Whitehead theorem weak homotopy equivalence Kan simplicial sets homotopy inverse",
+   "results": "{\"t\": \"2026-10-16T22:53:52Z\", \"tool\": \"leansearch\", \"query\": \"Whitehead theorem weak homotopy equivalence Kan simplicial sets homotopy inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"HomotopicalAlgebra.weakEquivalence_precomp_iff\", \"HomotopicalAlgebra.weakEquivalence_postcomp_iff\", \"HomotopicalAlgebra.weakEquivalences_op\"], \"digest\": \"1999f089398214e9\"}",
    "date": "2026-10-16",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead (ModelCategory/Homotopy.lean:216-236, read) require a ModelCategory instance and give abstract homotopy relations. CategoryWithFibrations.lean:66-89 (read) supplies only cofibrations/fibrations for the still TODO Kan-Quillen structure. Identifying geometric weak equivalences and the specified simplicial cylinder is additional mathematics, so this is not a one-line specialization. Other hits concern 2-truncated categories, chain homotopy or topological homotopy equivalences."
+   "verdict": "no match: RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead in ModelCategory/Homotopy.lean:216–235 require an actual ModelCategory instance and give abstract homotopy relations. Read CategoryWithFibrations.lean:66–89: the Kan–Quillen model structure is TODO, with cofibrations/fibrations only. Realization weak-equivalence identification and standard cylinder representation require further mathematics. RelativeMorphism.HomotopyClass and DoldKan results do not state this theorem; no one-line specialization."
   },
   {
    "tool": "leanfinder",
-   "query": "Whitehead theorem for fibrant simplicial sets a weak homotopy equivalence of Kan complexes admits inverse maps up to cylinder homotopy",
-   "results": "{\"t\": \"2026-10-16T20:55:55Z\", \"tool\": \"leanfinder\", \"query\": \"Whitehead theorem for fibrant simplicial sets a weak homotopy equivalence of Kan complexes admits inverse maps up to cylinder homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\"], \"digest\": \"916e90d7da0dea30\"}",
+   "query": "A realization weak equivalence between Kan complexes admits a simplicial inverse with homotopies on the standard interval",
+   "results": "{\"t\": \"2026-10-16T22:53:51Z\", \"tool\": \"leanfinder\", \"query\": \"A realization weak equivalence between Kan complexes admits a simplicial inverse with homotopies on the standard interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.nonDegenerateEquivOfIso_symm_apply_coe\", \"SSet.KanComplex\", \"SSet.RelativeMorphism.HomotopyClass\", \"TopCat.toSSetObjEquiv\", \"SSet.nonDegenerateEquivOfIso\", \"SSet.nonDegenerateEquivOfIso_apply_coe\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"2e4e3ec45448bb9d\"}",
    "date": "2026-10-16",
-   "verdict": "no match: HomotopicalAlgebra.RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead (ModelCategory/Homotopy.lean:216-236, read) require a ModelCategory instance and give abstract homotopy relations. CategoryWithFibrations.lean:66-89 (read) supplies only cofibrations/fibrations for the still TODO Kan-Quillen structure. Identifying geometric weak equivalences and the specified simplicial cylinder is additional mathematics, so this is not a one-line specialization. Other hits concern 2-truncated categories, chain homotopy or topological homotopy equivalences."
+   "verdict": "no match: RightHomotopyClass.whitehead and LeftHomotopyClass.whitehead in ModelCategory/Homotopy.lean:216–235 require an actual ModelCategory instance and give abstract homotopy relations. Read CategoryWithFibrations.lean:66–89: the Kan–Quillen model structure is TODO, with cofibrations/fibrations only. Realization weak-equivalence identification and standard cylinder representation require further mathematics. RelativeMorphism.HomotopyClass and DoldKan results do not state this theorem; no one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-realization-mapping-classes",
@@ -87,5 +181,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kan-whitehead-inverse",
+  "worker": "stage1",
+  "summary": "Replaced the unsupported horn-induction sketch and discarded the unpublished standard-cylinder auxiliary. Constructed the mapping path space and its contraction explicitly, proved its endpoint map is a Kan fibration, used realized Serre trivial-fibration disk lifting and one new relative lifting comparison, then constructed the inverse and the oriented cylinder homotopies by Stacks 08NM. The item statement is unchanged; no circular Kan–Quillen or mapping-class citation.",
+  "blueprint": "Technical Kan inversion input through the recorded ancestry of the opening sentence \"Choose a compactification\" in thm-cbc-finite-level-proetale. The current main-20261015 proof is read at sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md; no unit/chapter statement or route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-topological-serre-model",
+    "why": "Generic topological two-out-of-three and disk lifting against a Serre weak equivalence; no node of this unit gives the independent topological model theorem."
+   },
+   {
+    "node": "lem-coef-kan-realization-serre",
+    "why": "Generic realization-of-Kan-fibrations theorem, independent of this item; no node of this unit supplies that comparison without returning through Whitehead."
+   },
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Generic realization and boundary/disk-pair comparison needed for topological lifting; not a replacement of the compact-support unit route."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Stacks 08NM supplies sections and explicitly prescribed endpoint lifts for any boundary-defined trivial Kan fibration, a generic simplicial lifting tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-topological-serre-model",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-realization-finite-limits",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-3e1d5c618",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-3e1d5c618 (reviewer sub-agent of L); spot-checked: I read all seven steps in full, and each is correct. Step 1: in P=A×_{B,ev0}Fun(Δ¹,B), ri=1 and pi=f, and evaluation is natural. Step 2: the corner-map leaf with ∂Δ¹⊂Δ¹ and B→Δ⁰ gives the fibration (ev0,ev1); together with A Kan this fills every horn for p, outer horns included. Step 3: the min-contraction is simplicial and stays in P, with endpoints ir and 1_P, so lem-cbc-simplicial-homotopy-equivalence-weak (either orientation allowed) makes |i| a weak equivalence. Step 4: two-out-of-three, realization of Kan fibrations as Serre fibrations, and the realized pair (Δⁿ,∂Δⁿ)≅(Dⁿ,Sⁿ⁻¹) for n≥0 give a strict continuous filler. Step 5: the new node gives both clauses of 08NL. Step 6: Stacks 08NM (simplicial.tex 5550-5581, read) gives a section s and the endpoint homotopy K from sp to 1, as in 08NS (5641-5664); the square commutes since psp=p. Step 7: g=rs, and H0=gf, H1=1, J0=fg, J1=1 by substitution. Item statement unchanged; it matches Kerodon 00UB, and the empty case is handled. It is not a target node, so the base-change morphism and coefficient category do not arise. No cycles: I traversed the dependencies of every cited node, and none reaches the item. The rejected alternatives (lem-cbc-realization-weak-equivalence, lem-cbc-kan-fibration-fiber-criterion, lem-coef-kan-quillen-right-proper) really are circular. The natural inputs for splitting the new node later (lem-coef-kan-minimal-factorization, lem-coef-kan-path-boundary-bijections) are not. New node lem-cbc-kan-relative-realization-lift is true: I checked the argument independently via the minimal-fibration retract, local triviality, the simplicial/realized obstruction class and a lift through the retraction. Small cases all hold: n=0, n=1, an empty fibre, and the non-Kan Δ¹→pt reverse-edge counterexample, which the horn hypothesis correctly excludes. It does not restate a clause of the item and is not circular: it assumes no weak equivalence and asserts no inverse or homotopy. DAG scan: no duplicate; the minimal-factorization and path-boundary nodes state something different. Statement only, self-contained TeX, honest agent-corollary Hovey source with the archive WANTED, three kinds of search recorded, blueprint fields correct. Accepted tool_uses: lem-coef-topological-serre-model, lem-coef-kan-realization-serre, lem-coef-realization-finite-limits, and lem-weil-pbc-trivial-kan-lifts-monomorphisms (a Mathlib leaf, so declaring it is redundant). No SGA source used. Non-blocking: the new node has no lean_audit key, as several landed unsplit nodes also lack it. No fixes."
  }
 }

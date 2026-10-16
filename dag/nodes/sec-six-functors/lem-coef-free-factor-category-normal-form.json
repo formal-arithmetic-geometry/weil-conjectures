@@ -31,9 +31,63 @@
   "lem-coef-fixed-object-simplicial-free-calculus",
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent a composable arrow candidate by a finite list of tagged letters, each letter a nonidentity arrow of A or B, with the target of each letter equal to the source of the next. Allowing identity letters gives the same generated category because identities are relations in each factor. A reduction deletes an identity letter or replaces two adjacent letters carrying the same tag by their composite in that factor, deleting the result when that composite is an identity. Each reduction strictly decreases the list length, so every reduction sequence terminates. The source and target objects are unchanged throughout, and the empty list at an object is available as its identity.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof of Proposition 3.2, printed p.21: tagged composable lists and reduction by identities and adjacent same-factor composites"
+   }
+  },
+  {
+   "text": "For a letter $f:x\\to y$ with tag $t$ and a reduced word $w$ from $y$ to $z$ define the reduced word $f\\cdot w$ from $x$ to $z$: if $f$ is an identity, $f\\cdot w=w$; if $w$ is empty or its first letter has tag different from $t$, $f\\cdot w$ is $f$ followed by $w$; if $w=g\\,w'$ with $g$ of tag $t$, then $f\\cdot w=w'$ when the composite $f$ then $g$ in that factor is an identity, and otherwise $f\\cdot w$ is that composite followed by $w'$. In each case the result is reduced, since $w'$ is empty or begins with the other tag. For a composable list $l=l_1\\cdots l_n$ ending at $z$ put $N(l)=l_1\\cdot(l_2\\cdot(\\cdots(l_n\\cdot\\varepsilon_z)))$, with $\\varepsilon_z$ the empty word. Then $N(l)=l$ for reduced $l$, because each prepended letter is nonidentity with tag different from the next. $N$ is unchanged by each one-step reduction. Deleting an identity letter is harmless because identities act trivially. For merging adjacent letters $f,g$ of tag $t$ into their composite $fg$ (deleted if it is an identity), it suffices that $f\\cdot(g\\cdot w)=(fg)\\cdot w$ for every reduced $w$, the right side meaning $w$ when $fg$ is an identity. If $w$ is empty or begins with the other tag, both sides are $fg$ followed by $w$, or $w$ when $fg$ is an identity. If $w=h\\,w'$ with $h$ of tag $t$ and $gh$ nonidentity, both sides are $fgh$ followed by $w'$, or $w'$ when $fgh$ is an identity; when $fg$ is an identity this uses $fgh=h$. If $gh$ is an identity, the left side is $f\\cdot w'$, equal to $f$ followed by $w'$, or to $w'$ when $f$ is an identity. On the right, $(fg)h=f(gh)=f$ by associativity and the unit law, and when $fg$ is an identity the right side is $h\\,w'$ with $h=f$. All of this uses only associativity and the unit laws in the factor. Hence $N$ is invariant under every finite reduction sequence. Reductions strictly shorten lists, so every sequence terminates, and a list admitting no reduction is reduced. Its endpoint $r$ satisfies $r=N(r)=N(l)$, so every terminating sequence ends at the same reduced word $N(l)$. This covers loops and invertible arrows: no nonidentity letter is cancelled merely for being invertible, only an actual identity composite is deleted. Dwyer--Kan state the factorization only for free $D,W$; this argument does not use freeness.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer--Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21 (stated there for free factors D, W); the action on reduced words written here for arbitrary factors"
+   }
+  },
+  {
+   "text": "Let R have object set O and let R(x,y) be the reduced words from x to y. Put the empty word at x for the identity and define composition by u followed by v to be N(u concatenated with v). The invariance proved in the preceding step gives N(N(u concatenated with v) concatenated with w)=N(u concatenated with v concatenated with w), so composition is associative; the empty word is a two-sided unit. Sending an A-arrow or B-arrow to its one-letter reduced word gives functors A to R and B to R, and these inclusions are faithful because a one-letter nonidentity word cannot equal a distinct reduced word. For any category C on O and functors A to C and B to C agreeing on objects, evaluate a reduced word by composing the images of its letters. Internal identity and composition relations are respected, so this evaluation is a functor R to C; it is the unique functor extending the two factor functors because reduced words generate R. Thus R satisfies the coproduct universal property, and the fixed-object coproduct convention identifies Q with R.",
+   "uses": [
+    "def-nagata-category",
+    "lem-coef-fixed-object-simplicial-free-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proof of Proposition 3.2, printed pp.20--21: coproduct universal property from unique alternating words"
+   }
+  },
+  {
+   "text": "If A to A' and B to B' have the same object map O to O', send a reduced word to N of the list obtained by applying the appropriate functor to each letter. Functoriality preserves identities and factor composites, so the image of a one-step reduction has the same N as the image of the unreduced list; consequently the assignment respects the defining relations and sends identities to identities. Applying it to a concatenation and using the same N-invariance shows that it preserves composition. It agrees with the given functors on each factor, and every arrow of $Q$ is a composite of one-letter words, so it is the unique functor $Q\\to A'*_{O'}B'$ with object map $O\\to O'$ extending $A\\to A'\\to A'*_{O'}B'$ and $B\\to B'\\to A'*_{O'}B'$, that is, the induced functor. Image letters may become identities or adjacent letters may acquire the same tag, and N handles both cases. The empty-object case is vacuous, while all assertions for loops and arrows whose composites are identities follow from the same reduction calculation.",
+   "uses": [
+    "def-nagata-category",
+    "lem-coef-fixed-object-simplicial-free-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Functoriality of the reduced-word presentation in the proof of Proposition 3.2, printed p.21"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-coef-fixed-object-simplicial-free-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer--Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed pp.20--21; the source is not archived locally, so the word-reduction and universal-property details are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -125,10 +179,31 @@
    "results": "{\"t\": \"2026-10-16T22:24:31Z\", \"tool\": \"leansearch\", \"query\": \"A free amalgamated product of categories has unique alternating morphism expressions even when the factors contain isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.CoprodI.lift\", \"LinearAlgebra.FreeProduct.lift\", \"CategoryTheory.Factorisation.Hom.noConfusion\", \"CategoryTheory.Limits.FormalCoproduct.Hom.noConfusion\", \"CategoryTheory.Limits.FormalCoproduct.Hom.mk.noConfusion\", \"CategoryTheory.FreeGroupoid.strictUniversalPropertyFixedTarget\", \"CategoryTheory.FreeBicategory.Hom.comp.noConfusion\", \"CategoryTheory.FreeMonoidalCategory.Hom.ctorElimType\"], \"digest\": \"273610a6d05791d5\"}",
    "date": "2026-10-16",
    "verdict": "No match: independent second-reader search. Read GroupTheory/CoprodI.lean:88–150: Monoid.CoprodI.lift concerns total monoid multiplication, not composable arrows with many objects. FreeGroupoid.strictUniversalPropertyFixedTarget in CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean:147–153 inverts all arrows of one category; it does not give alternating normal forms of a categorical coproduct. No one-line specialization states this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coproduct of arbitrary small categories with same object set unique reduced alternating words",
+   "results": "Hits Monoid.CoprodI.Word and related one-object monoid word declarations; no category normal-form theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: one-object monoid words are not composable arrows of a multi-object category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Coprod, reduced word",
+   "results": "loogle: unknown identifier 'CategoryTheory'; 0 usable hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating|reduced.*word|category.*coproduct in CategoryTheory",
+   "results": "25 generic coproduct/category hits, none on alternating reduced words; no exact declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-pushout",
@@ -136,5 +211,21 @@
   "group": "Q69"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-free-factor-category-normal-form",
+  "worker": "stage1",
+  "summary": "Expanded the imported empty proof into a direct reduced-word construction. Lists of tagged nonidentity arrows reduce by identities and adjacent same-factor composition; a recursive normalizer is invariant under every reduction, giving termination and a unique alternating word. Reduced words form a category whose universal property identifies it with the fixed-object coproduct, and applying factor functors followed by the same normalizer proves functoriality. No new nodes were needed; the category definition and fixed-object coproduct convention were checked against their existing nodes.",
+  "blueprint": "Realizes the unique alternating factorization used in the second paragraph of prop-coef-integral-exceptional-adjoint and in Dwyer--Kan Proposition 3.2, specifically the finite-adjunction/mapping-space foundation reached through the item's existing via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-dd3f5f95e",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-dd3f5f95e (reviewer sub-agent of L); spot-checked: I read the statement, all four steps, both cited nodes (def-nagata-category; lem-coef-fixed-object-simplicial-free-calculus, statement and all steps), the parent lem-coef-free-factor-hammock-pushout (all 7 steps) and the unit. I also read Dwyer-Kan JPAA 17 printed pp.20-21 from the cited URL scan. Prop 3.2's proof on p.21 gives the unique alternating factorization only for free D and W. The item's arbitrary-factor version is true and is needed, because the parent applies it to D*H(W,W)_k. Small-case tests: one-object free products of monoids (Z/2*Z/2), groupoids with invertible letters, a retraction r∘i=id with i∘r≠id, a(b1 b2)c with b1b2=id, loops, empty O, and a non-injective object map with image letters becoming identities. All clauses hold. No duplicate turned up in an rg search of dag/nodes; free-product-nerve-gluing, coproduct-augmentation and the fixed-object step 5 cover only other or special cases. Fixes, made in fixes/dag/nodes/sec-six-functors/lem-coef-free-factor-category-normal-form.json: (1) E5 in step 2: the left-to-right block normalizer did not merge blocks that become adjacent once an identity-composite block is deleted, which is the one nontrivial point of confluence. I replaced it with the van der Waerden action on reduced words and checked f·(g·w)=(fg)·w case by case. (2) Step 4 appealed to the fixed-object universal property for a target on O'. It now argues uniqueness by generation. (3) source.place and step 2's source place now say that DK states the result only for free factors. Statement, stmt_deps and proof_deps are unchanged. There are no new nodes and no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

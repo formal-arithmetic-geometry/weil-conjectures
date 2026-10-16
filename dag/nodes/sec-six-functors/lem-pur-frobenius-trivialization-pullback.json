@@ -1,0 +1,78 @@
+{
+ "id": "lem-pur-frobenius-trivialization-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-scheme-geometric-frobenius",
+   "place": "Final paragraph: comparison isomorphisms are compatible with pullback-composition identifications and with f.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback naturality of the canonical absolute-Frobenius trivialization",
+ "statement": "Let $p$ be prime, let $X,Y$ be schemes of characteristic $p$ [def-weil-scheme-characteristic-p], let $u:X\\to Y$ be a morphism, and let $A$ be a finite commutative ring. Use the small pro-etale sites and constant coefficient sheaves $A_X,A_Y$ of [def-weil-pbc-proetale-site], and the derived module pullback of [def-weil-pbc-proetale-operations] with the canonical identification $u^{-1}A_Y\\cong A_X$ of [prop-weil-pbc-proetale-constant-ring-map]. For $T=X,Y$, let $F_T:T\\to T$ be absolute Frobenius [def-weil-absolute-frobenius-scheme] and let\n$$\n\\tau_T^{(b)}:L(F_T^b)^*\\xrightarrow{\\sim}\\operatorname{id}_{D(T_{\\mathrm{proet}},A)},\\qquad b\\geq0,\n$$\nbe the canonical trivialization induced by the relative Frobenius isomorphisms $r_{V/T}^{(b)}=(F_V^b,v):V\\xrightarrow{\\sim}V\\times_{T,F_T^b}T$ for weakly etale objects $v:V\\to T$: restriction along these isomorphisms identifies direct image by $F_T^b$ with the identity, the adjoint identification gives the inverse-image trivialization of module sheaves (the coefficient identification being that of [prop-weil-pbc-proetale-constant-ring-map]), and the inverse image being exact, it induces $\\tau_T^{(b)}$ termwise on complexes. For $b=1$ this specifies the canonical trivialization of [lem-trf-absolute-frobenius-site]; $\\tau_T^{(0)}$ is the identity.\n\nUsing the canonical composition isomorphisms of [lem-weil-pbc-proetale-derived-pullback-composition], the equality $uF_X^b=F_Y^bu$ gives the pullback-composition identification\n$$\n c_{u,b}:Lu^*L(F_Y^b)^*\\xrightarrow{\\sim}L(F_X^b)^*Lu^*.\n$$\nAs natural transformations on $D(Y_{\\mathrm{proet}},A)$ one has\n$$\n (\\tau_X^{(b)}Lu^*)\\circ c_{u,b}=Lu^*\\tau_Y^{(b)}.\n$$\nMoreover, for integers $b_1,b_2\\geq0$ and $T=X,Y$, the trivialization $\\tau_T^{(b_1+b_2)}$ equals the composite\n$$\n L(F_T^{b_1+b_2})^*\\xrightarrow{\\sim}L(F_T^{b_1})^*L(F_T^{b_2})^*\\xrightarrow{\\tau_T^{(b_1)}L(F_T^{b_2})^*}L(F_T^{b_2})^*\\xrightarrow{\\tau_T^{(b_2)}}\\operatorname{id},\n$$\nwhose first arrow is the composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition] for $F_T^{b_1+b_2}=F_T^{b_2}\\circ F_T^{b_1}$; in particular $\\tau_T^{(b)}$ is the $b$-fold iterate of $\\tau_T^{(1)}$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; pullback naturality of the induced trivialization, an agent deduction from its relative-Frobenius construction (also main-20261015 lem-trf-absolute-frobenius-site.proof.md)"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-characteristic-p",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-trf-absolute-frobenius-site",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Absolute Frobenius acts trivially on the small etale topos and commutes naturally with inverse image along morphisms of schemes in positive characteristic",
+   "results": "coe_frobeniusEquiv; frobeniusEquiv_apply; iterateFrobeniusEquiv_one; coe_frobenius_comp_coe_frobeniusEquiv_symm; frobeniusEquiv_symm_apply_frobenius; frobenius_apply_frobeniusEquiv_symm; WittVector.frobeniusEquiv_apply; iterateFrobeniusEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|frobenius|relativeFrobenius",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of schemes in characteristic p the canonical isomorphism Frobenius inverse image equals identity on etale sheaves commutes with pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackCongr; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; SheafOfModules.pushforwardCongr_inv_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under base change of the canonical trivialization of absolute Frobenius pullback on pro etale sheaves with constant coefficients",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Hom.naturality_assoc; LightCondSet.hom_naturality_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-scheme-geometric-frobenius",
+  "date": "2026-10-17",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package"
+}

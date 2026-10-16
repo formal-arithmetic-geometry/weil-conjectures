@@ -1,119 +1,223 @@
 {
-  "id": "def-trf-frobenius-operators",
-  "blueprint": {
-    "is": "def-trf-frobenius-operators",
-    "from": null,
-    "same_as": null
+ "id": "def-trf-frobenius-operators",
+ "blueprint": {
+  "is": "def-trf-frobenius-operators",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Global and local geometric Frobenius operators",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ of\n[def-weil-finite-field-fiber], with $q=p^a$, and the finite coefficient\nconventions of [def-trf-coefficient-conventions]: a prime $\\ell\\neq p$,\na finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$,\na uniformizer $\\varpi_E$, an integer $n\\geq1$, and\n$A=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a separated finite-type\n$k_0$-scheme, $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and\n$a_X:X\\to s$ its structure morphism. Write\n$g=g_\\gamma=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$,\nwhere $\\gamma$ is geometric Frobenius, and let $\\Phi$ be the $k$-linear\n$q$-power scheme Frobenius of [def-trf-scheme-frobenius].\nLet $(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex\n[def-trf-strict-weil-complex], write $M=\\operatorname{For}(K,\\varphi)$,\nand fix $m\\geq1$. Use the derived pullback of\n[def-weil-derived-pullback-tensor-hom], and the iterated Weil isomorphism\n$\\varphi^{[m]}:L(g^m)^*M\\xrightarrow{\\sim}M$ of\n[def-trf-iterated-weil-map].\n\n1. The global compact-support Frobenius operator is the composite\n$$\n F_{c,K}^{\\,m}=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}:\n R\\Gamma_c(X,M)\\longrightarrow R\\Gamma_c(X,M).\n$$\nHere $R\\Gamma_c(X,N)=\\operatorname{Fib}_s(Ra_{X!}N)$ is the coefficient\ncomplex of [def-weil-ordinary-compact-cohomology], with point fiber\nfunctor [def-weil-finite-coefficient-point]. To specify the first arrow\nwithout an implicit identification, put $T=Lg^*$ and let\n$\\tau_{c,N}:R\\Gamma_c(X,N)\\to R\\Gamma_c(X,TN)$ be the compact-support\ntransport of [def-weil-frobenius-cohomology-transport]. Let $c_m:L(g^m)^*M\\xrightarrow{\\sim}T^mM$ be the canonical\npullback-composition isomorphism of\n[lem-weil-pbc-proetale-derived-pullback-composition]. Define\n$$\n g_{\\gamma,c}^{m,*}=R\\Gamma_c(X,c_m^{-1})\\circ\n \\tau_{c,T^{m-1}M}\\circ\\cdots\\circ\\tau_{c,TM}\\circ\\tau_{c,M}:\n R\\Gamma_c(X,M)\\xrightarrow{\\sim}R\\Gamma_c(X,L(g^m)^*M),\n$$\nwhere the displayed transport composite has exactly $m$ factors;\nfor $m=1$ it is $\\tau_{c,M}$ and $c_1$ is the identity.\nEach transport is an isomorphism by\n[lem-weil-frobenius-cohomology-transport-iso]. The induced operator on\n$H_c^i(X,M)=\\mathrm H^i(R\\Gamma_c(X,M))$ is $\\mathrm H^i(F_{c,K}^{\\,m})$\nfor every $i\\in\\mathbf Z$, with cohomology functor as in\n[def-weil-ordinary-compact-cohomology].\n\n2. For $x\\in X_0(\\mathbf F_{q^m})$, let $\\bar x:s\\to X$ be its induced\ngeometric point for the fixed inclusion $\\mathbf F_{q^m}\\subset k$.\nBy [lem-sf-pullback-tor-amplitude], $L\\bar x^*M$ is bounded\nconstructible of finite Tor amplitude on $s$, so its point fiber is\ndefined. The stalk coefficient complex is\n$$\n K_{\\bar x}=\\operatorname{Fib}_s(L\\bar x^*M).\n$$\nThus the customary notation $K_{\\bar x}=L\\bar x^*M$ implicitly uses the\npoint fiber functor. By [thm-trf-frobenius-fixed-points] this geometric\npoint satisfies $\\Phi^m\\circ\\bar x=\\bar x$. Let\n$$\n \\rho_{x,m}:K_{\\bar x}\\xrightarrow{\\sim}\n \\operatorname{Fib}_s(L\\bar x^*L(\\Phi^m)^*M)\n$$\nbe the identification obtained by this equality and the canonical\nisomorphism $L(\\Phi^m\\circ\\bar x)^*\\cong L\\bar x^*L(\\Phi^m)^*$ of\n[lem-weil-pbc-proetale-derived-pullback-composition]. Using the specified\ncomparison $\\kappa^{(m)}:L(\\Phi^m)^*\\xrightarrow{\\sim}L(g^m)^*$ of\n[prop-trf-scheme-galois-comparison], define the stalk transport and local\ngeometric Frobenius by\n$$\n \\tau_{x,m}=\\operatorname{Fib}_s\\bigl(L\\bar x^*(\\kappa^{(m)}_M)\\bigr)\n              \\circ\\rho_{x,m}:\n K_{\\bar x}\\xrightarrow{\\sim}(L(g^m)^*M)_{\\bar x},\n \\qquad\n F_{x,m}=\\operatorname{Fib}_s\\bigl(L\\bar x^*(\\varphi^{[m]})\\bigr)\n              \\circ\\tau_{x,m}:\n K_{\\bar x}\\longrightarrow K_{\\bar x}.\n$$\nThe notation $(L(g^m)^*M)_{\\bar x}$ uses the same stalk convention.\n\nThe comparison with the compact-support description is recorded in\n[lem-trf-frobenius-operator-compact-description]; the dependence of the\nlocal operator on the geometric lift and on the degree of the closed\npoint below is recorded in [lem-trf-local-frobenius-conjugacy] and\n[lem-trf-frobenius-degree-formula]. These are forward pointers, not\ninputs to the construction.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-frobenius-operators.md",
+  "place": "node def-trf-frobenius-operators, order 2090",
+  "note": [
+   "*Recorded in advance* from chapter *The trace formula* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-trf-strict-weil-complex",
+  "def-trf-iterated-weil-map",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "thm-trf-frobenius-fixed-points",
+  "prop-trf-scheme-galois-comparison",
+  "lem-sf-pullback-tor-amplitude"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobeniusOperator|Frobenius.*[Cc]ohomology|[Ww]eil[Cc]omplex",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
   },
-  "kind": "definition",
-  "title": "Global and local geometric Frobenius operators",
-  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$.\n\n1. The *$m$-th iterate of the global geometric Frobenius* is\n$$\nF_{c,K}^{\\,m}:\nR\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\nthe composite of the canonical\ndirect-image identification\nwith the compact-support\nglobal geometric\nFrobenius action constructed in the trace-formula chapter applied to\n$\\varphi^{[m]}$. Its description as\n$R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}$, where\n$g_{\\gamma,c}^{m,*}$ is the compact-support base-change isomorphism\nalong the automorphism $g_\\gamma^m$, is\n`lem-trf-frobenius-operator-compact-description` of the trace-formula chapter. It is the\nendomorphism of the\ncompact-support\ncohomology $H_c^i(X,K)$ in the finite coefficient stage.\n1. For a point $x\\in X_0(\\mathbf F_{q^m})$ with geometric point\n$\\bar x:\\Spec k\\to X$ lying over $x$, define the *local\ngeometric Frobenius*\n$$\nF_{x,m}:K_{\\bar x}\\longrightarrow K_{\\bar x},\n\\qquad\nF_{x,m}=\\varphi^{[m]}_{\\bar x}\\circ\\tau_{x,m},\n$$\nwhere $\\tau_{x,m}:K_{\\bar x}\\xrightarrow{\\ \\sim\\ } \\bigl(Lg_\\gamma^{m*}K\\bigr)_{\\bar x}$ is the canonical stalk\ntransport and $K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$ is the\nstalk complex of the\nderived pullback.\nThe dependence of $F_{x,m}$ on the lift and, through a closed point\nbelow, on the degree, is recorded in\n[lem-trf-local-frobenius-conjugacy] and\n[lem-trf-frobenius-degree-formula]; that the transport\n$\\tau_{x,m}$ is defined for every point\n$x\\in X_0(\\mathbf F_{q^m})$ is the fixed-point statement\n[thm-trf-frobenius-fixed-points].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-frobenius-operators.md",
-    "place": "node def-trf-frobenius-operators, order 2090",
-    "note": [
-      "*Recorded in advance* from chapter *The trace formula* of the source."
-    ]
+  {
+   "tool": "leansearch",
+   "query": "Geometric Frobenius action on compactly supported etale cohomology and stalks of Weil sheaves",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.verschiebung_frobenius_comm, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, WittVector.frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
   },
-  "stmt_deps": [
-    "thm-trf-frobenius-fixed-points",
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-field-fiber",
-    "def-weil-global-geometric-frobenius",
-    "def-weil-ordinary-compact-cohomology",
-    "prop-trf-scheme-galois-comparison",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "backtick_citation",
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2090,
-  "blueprint_uses": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-field-fiber",
-    "def-weil-global-geometric-frobenius",
-    "def-weil-ordinary-compact-cohomology",
-    "prop-trf-scheme-galois-comparison",
-    "thm-trf-frobenius-fixed-points",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "uses_not_cited": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-finite-field-fiber",
-    "def-weil-global-geometric-frobenius",
-    "def-weil-ordinary-compact-cohomology",
-    "prop-trf-scheme-galois-comparison",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Frobenius",
+   "results": "0 hits: none; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; superseded by the successful quoted Frobenius search"
   },
-  "pointers": [
-    {
-      "to": "lem-trf-frobenius-operator-compact-description",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: lemma about the defined operators, cited nowhere in the statement text",
-      "date": "2026-10-09"
-    },
-    {
-      "to": "lem-trf-local-frobenius-conjugacy",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: \"recorded in [lem]\"",
-      "date": "2026-10-09"
-    },
-    {
-      "to": "lem-trf-frobenius-degree-formula",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: \"recorded in [lem]\"",
-      "date": "2026-10-09"
-    }
-  ],
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$.\n\n1. The *$m$-th iterate of the global geometric Frobenius* is\n$$\nF_{c,K}^{\\,m}:\nR\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\nthe composite of the canonical\ndirect-image identification\nwith the compact-support\nglobal geometric\nFrobenius action constructed in the trace-formula chapter applied to\n$\\varphi^{[m]}$. It is the\nendomorphism of the\ncompact-support\ncohomology $H_c^i(X,K)$ in the finite coefficient stage.\n1. For a point $x\\in X_0(\\mathbf F_{q^m})$ with geometric point\n$\\bar x:\\Spec k\\to X$ lying over $x$, define the *local\ngeometric Frobenius*\n$$\nF_{x,m}:K_{\\bar x}\\longrightarrow K_{\\bar x},\n\\qquad\nF_{x,m}=\\varphi^{[m]}_{\\bar x}\\circ\\tau_{x,m},\n$$\nwhere $\\tau_{x,m}:K_{\\bar x}\\xrightarrow{\\ \\sim\\ } \\bigl(Lg_\\gamma^{m*}K\\bigr)_{\\bar x}$ is the canonical stalk\ntransport and $K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$ is the\nstalk complex of the\nderived pullback.\n\nEquivalently, $F_{c,K}^{\\,m}=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}$,\nwhere $g_{\\gamma,c}^{m,*}$ is the compact-support base-change isomorphism\nalong the automorphism $g_\\gamma^m$ ([lem-trf-frobenius-operator-compact-description]).\nThe dependence of $F_{x,m}$ on the lift $\\bar x$ and, through a closed point\nbelow, on the degree is described in [lem-trf-local-frobenius-conjugacy] and\n[lem-trf-frobenius-degree-formula]; that the transport $\\tau_{x,m}$ is defined\nfor every point $x\\in X_0(\\mathbf F_{q^m})$ is the fixed-point statement\n[thm-trf-frobenius-fixed-points].",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "Global compactly supported and local stalk geometric Frobenius endomorphisms of a Weil complex over a finite field",
+   "results": "8 hits: Isocrystal.term_≃ᶠⁱ[_,_]_, Isocrystal.term_≃ᶠˡ[_,_]_, IsArithFrobAt.arithFrobAt, WittVector.StandardOneDimIsocrystal, WittVector.Isocrystal.frobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.frobenius_zmodp, WittVector.instIsocrystalStandardOneDimIsocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Ff]rob",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism from the pullback by a scheme automorphism to a constructible complex induces an endomorphism on compact support cohomology and geometric fibers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso, TopCat.Presheaf.pullbackHomIsoPushforwardInv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\"",
+   "results": "12 hits: frobenius, iterateFrobenius, iterateFrobenius_one, iterateFrobenius_zero, iterateFrobenius_zero_apply, frobenius_def, iterateFrobenius_add, iterateFrobenius_one_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquivOfAlgebraic",
+   "results": "13 hits: Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackCongr|pullbackComp",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:241 pullbackComp; :261 pullbackCongr. The command emits the line numbers as file names when its root is a single file. Read the source: these are underived pullbacks of structure-sheaf modules, not constant-coefficient derived pro-etale Frobenius operators.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not define the finite-coefficient compact-support and local-stalk Weil operators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial action of an automorphism with descent datum on derived compactly supported cohomology and stalk complexes",
+   "results": "8 hits: TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue",
+   "date": "2026-10-17",
+   "verdict": "no match: general sheaf, descent and cohomology-presheaf results do not define either finite-coefficient Weil Frobenius operator"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*support|stalk.*[Ff]robenius|[Ww]eil.*[Dd]atum",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: general sheaf, descent and cohomology-presheaf results do not define either finite-coefficient Weil Frobenius operator"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "backtick_citation",
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2090,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-trf-scheme-galois-comparison",
+  "thm-trf-frobenius-fixed-points",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-field-fiber",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-trf-scheme-galois-comparison",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "pointers": [
+  {
+   "to": "lem-trf-frobenius-operator-compact-description",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: lemma about the defined operators, cited nowhere in the statement text",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lem-trf-local-frobenius-conjugacy",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: \"recorded in [lem]\"",
+   "date": "2026-10-09"
+  },
+  {
+   "to": "lem-trf-frobenius-degree-formula",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: \"recorded in [lem]\"",
+   "date": "2026-10-09"
+  }
+ ],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, and let $(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$.\n\n1. The *$m$-th iterate of the global geometric Frobenius* is\n$$\nF_{c,K}^{\\,m}:\nR\\Gamma_c(X,K)\\longrightarrow R\\Gamma_c(X,K),\n$$\nthe composite of the canonical\ndirect-image identification\nwith the compact-support\nglobal geometric\nFrobenius action constructed in the trace-formula chapter applied to\n$\\varphi^{[m]}$. It is the\nendomorphism of the\ncompact-support\ncohomology $H_c^i(X,K)$ in the finite coefficient stage.\n1. For a point $x\\in X_0(\\mathbf F_{q^m})$ with geometric point\n$\\bar x:\\Spec k\\to X$ lying over $x$, define the *local\ngeometric Frobenius*\n$$\nF_{x,m}:K_{\\bar x}\\longrightarrow K_{\\bar x},\n\\qquad\nF_{x,m}=\\varphi^{[m]}_{\\bar x}\\circ\\tau_{x,m},\n$$\nwhere $\\tau_{x,m}:K_{\\bar x}\\xrightarrow{\\ \\sim\\ } \\bigl(Lg_\\gamma^{m*}K\\bigr)_{\\bar x}$ is the canonical stalk\ntransport and $K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$ is the\nstalk complex of the\nderived pullback.\n\nEquivalently, $F_{c,K}^{\\,m}=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}$,\nwhere $g_{\\gamma,c}^{m,*}$ is the compact-support base-change isomorphism\nalong the automorphism $g_\\gamma^m$ ([lem-trf-frobenius-operator-compact-description]).\nThe dependence of $F_{x,m}$ on the lift $\\bar x$ and, through a closed point\nbelow, on the degree is described in [lem-trf-local-frobenius-conjugacy] and\n[lem-trf-frobenius-degree-formula]; that the transport $\\tau_{x,m}$ is defined\nfor every point $x\\in X_0(\\mathbf F_{q^m})$ is the fixed-point statement\n[thm-trf-frobenius-fixed-points].",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-frobenius-operators",
+  "worker": "stage1",
+  "summary": "Expanded the two finite-coefficient Frobenius constructions using existing nodes only. Added the missing strict-Weil and iterated-map dependencies, replaced the E-only global-operator dependency by the finite-level cohomology transport, specified its iterated composite, and constructed the local transport through the scheme-Frobenius fixed point and the specified scheme/Galois comparison. Made the point fiber functor and the induced cohomology operator explicit. Removed unused direct-image, cohomology-sheaf and standalone universal-homeomorphism citations. No new nodes and no proof steps for this definition. Second reading explicitly inserted the inverse pullback-composition map into the global formula, specified its one-factor boundary case, and cited finite-Tor pullback preservation to type the local point fiber.",
+  "blueprint": "Current main-20261015 def-trf-frobenius-operators, clauses 1 and 2: the unnamed global transport, the canonical local stalk transport, and the subsequent equivalent formula. The three subsequent lemmas remain forward pointers. This is a recorded-in-advance trace-formula definition, not a proof of the containing f-shriek preservation unit."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-9ee2236c1",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-9ee2236c1 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; the full review is in review.md. The delivery is the item only, with no new nodes. Every stmt_dep exists, is unmerged and is cited in the statement. The three forward pointers stay as pointers, and walking the dependencies from the item never leads back to it, so there is no cycle. Sources read: the main-20261015 blueprint and its blueprint_update, Deligne Weil II (1.1.7), (1.1.8), (1.1.13) and (1.1.14) (pp. 150-153), and the two Stacks labels the report cites. No SGA source is used. Clause 1: the transport def and clause 3 of the transport-iso lemma both cover A_{E,n}, and each Lg^*N stays in D^b_c, so all T^jM are legitimate inputs. The types of c_m^{-1} and RGamma_c(phi^[m]) match. For m=1 the operator is exactly the compact-support composite of def-weil-global-geometric-frobenius, done at A instead of E. Using naturality of tau_c and def-trf-iterated-weil-map, I showed that the delivered F^m is the m-th power of F^1, so the name 'm-th iterate' is accurate. It agrees with the blueprint's base change along g^m because exchange maps compose. That identification is left to lem-trf-frobenius-operator-compact-description, which keeps true, non-trivial content, and the target is not weakened. Clause 2: x-bar is the k-point that thm-trf-frobenius-fixed-points attaches to x, so Phi^m o x-bar = x-bar holds directly. The report is right that g^m o x-bar != x-bar, and routing through kappa^(m) is necessary, as in Deligne (1.1.14). kappa^(m) has the direction the formula needs, and A satisfies its coefficient hypothesis. x-bar is a section of a separated morphism, hence a closed immersion and separated of finite type, so lem-sf-pullback-tor-amplitude applies and Fib_s is defined. Every arrow of tau and F_{x,m} type-checks. Edge cases pass: m=1, empty X, the zero complex, n=1, and X_0=Spec F_q with phi=u (both operators equal u^m). No hypothesis is added or dropped. Neither def-weil-global-geometric-frobenius (E only) nor def-tw-frobenius-action duplicates the item. There are no tool_uses."
+ }
 }
