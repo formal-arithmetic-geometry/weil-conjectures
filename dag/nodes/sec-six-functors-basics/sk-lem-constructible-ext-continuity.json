@@ -1,65 +1,208 @@
 {
-  "id": "sk-lem-constructible-ext-continuity",
-  "blueprint": {
-    "is": "sk-lem-constructible-ext-continuity",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Continuity of Ext out of a constructible complex",
-  "statement": "Let $\\Lambda=E$, $\\Qlb$ or $\\cO_E$. Let $C\\in D(X_{\\mathrm{proét}},\\Lambda)$ be obtained by finitely\nmany extensions and shifts from sheaves $a_!L$, with $a\\colon S\\hookrightarrow X$ a locally\nclosed immersion and $L$ a finite locally free $\\Lambda_S$-module. Let $(K_i^\\bullet)$ be a\nfiltered diagram of complexes of $\\Lambda_X$-modules that all vanish below a fixed degree.\nThen for every integer $q$ the natural map of $\\Hom$ groups in $D(X_{\\mathrm{proét}},\\Lambda)$\n$$\n\\varinjlim_i\\Hom(C,K_i^\\bullet[q])\\longrightarrow\\Hom\\bigl(C,(\\varinjlim_iK_i^\\bullet)[q]\\bigr)\n$$\nis an isomorphism. The hypothesis on $C$ holds:\n\n1. for every $C\\in\\Dbc(X,\\Lambda)$ if $\\Lambda=E$ or $\\Qlb$, by [sk-cor-coefficient-heart-ii];\n   in particular, for $C\\in\\Cons(X,\\Lambda)$ the functors $\\Ext^q_\\Lambda(C,-)$ commute with\n   filtered colimits of $\\Lambda_X$-modules;\n2. for every finite extension of sheaves $a_!L_0$ with $L_0$ a finite locally free\n   $\\cO_{E,S}$-module, if $\\Lambda=\\cO_E$.",
-  "source": {
+ "id": "sk-lem-constructible-ext-continuity",
+ "blueprint": {
+  "is": "sk-lem-constructible-ext-continuity",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuity of Ext out of a constructible complex",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda$ be one of the condensed coefficient rings $\\underline E$, $\\underline{\\overline{\\mathbf Q}_\\ell}$, or $\\underline{\\mathcal O}_E$ of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed]. Put $\\Lambda_X=p_X^*\\Lambda$ as in [sk-def-sfb-pulled-back-coefficients], and work in the ordinary derived category $D(\\operatorname{Mod}_{\\Lambda_X})$ of module objects [sk-def-sfb-module-objects], [def-weil-abstract-derived-category].\n\nFor a locally closed immersion $a:S\\hookrightarrow X$, write $a=i\\circ u$ with $i:Z\\hookrightarrow X$ closed and $u:S\\hookrightarrow Z$ open, and put $a_!L=i_*u_!L$, with the module-object pushforward of [def-sfb-module-lower-star] and open extension by zero of [def-sfb-module-open-lower-shriek]. A finite locally free (or lisse) $\\Lambda_S$-module means one that is isomorphic to a finite direct sum of $\\Lambda_S$ locally for the pro-étale topology.\n\nLet $C$ be obtained by finitely many extensions, shifts and isomorphisms from such $a_!L$. Let $I$ be a small filtered category and $(K_i^\\bullet)_{i\\in I}$ a diagram of complexes of $\\Lambda_X$-modules with a common integer $b$ such that $K_i^r=0$ for every $i$ and $r<b$. Put $K^\\bullet=\\varinjlim_iK_i^\\bullet$, the termwise colimit in module objects. For every $q\\in\\mathbf Z$, the canonical map induced by $K_i^\\bullet\\to K^\\bullet$ is an isomorphism of abelian groups:\n$$\n\\varinjlim_i\\operatorname{Hom}_{D(\\operatorname{Mod}_{\\Lambda_X})}(C,K_i^\\bullet[q])\n\\longrightarrow\n\\operatorname{Hom}_{D(\\operatorname{Mod}_{\\Lambda_X})}(C,K^\\bullet[q]).\n$$\nThe hypothesis on $C$ holds for every bounded constructible complex when $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$, with constructibility and the bounded constructible category as in [sk-def-sfb-constructible] and [sk-def-sfb-bounded-constructible]. In particular, for every constructible sheaf $C$ with either of these coefficients, all $\\operatorname{Ext}^q_{\\Lambda_X}(C,-)$ commute with filtered colimits of module objects, where $\\operatorname{Ext}^q(C,M)=\\operatorname{Hom}_{D(\\operatorname{Mod}_{\\Lambda_X})}(C,M[q])$ for sheaves regarded as degree-zero complexes. For $\\Lambda=\\underline{\\mathcal O}_E$, the hypothesis holds for every finite iterated extension of sheaves $a_!L_0$ with $L_0$ finite locally free over $\\Lambda_S$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+  "place": "node sk-lem-constructible-ext-continuity, order 1515"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For the fixed filtered diagram let $\\mathcal C$ consist of the objects $D$ whose comparison $\\alpha_D^q$ is bijective for every $q$. For a distinguished triangle $D'\\to D\\to D''\\to D'[1]$, [lem-weil-pbc-hom-out-of-triangle-exact], applied to its rotations, gives the natural exact five-term segment\n$$\n\\operatorname{Hom}(D',K_i[q-1])\\to\\operatorname{Hom}(D'',K_i[q])\\to\\operatorname{Hom}(D,K_i[q])\\to\\operatorname{Hom}(D',K_i[q])\\to\\operatorname{Hom}(D'',K_i[q+1]).\n$$\nTaking the filtered colimit leaves this segment exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Compare it with the segment for $K$: if $D',D''\\in\\mathcal C$, all four outer vertical maps are isomorphisms, so [lem-weil-pbc-five-lemma] makes $\\alpha_D^q$ an isomorphism. For shifts, the natural identities $\\operatorname{Hom}(D[n],K_i[q])=\\operatorname{Hom}(D,K_i[q - n])$ identify the comparison for $D[n]$ with that for $D$ in degree $q-n$. Precomposition with an isomorphism $D\\simeq D_0$ identifies the two comparison maps. Also $0\\in\\mathcal C$, since both groups vanish. Thus $\\mathcal C$ is closed under extensions, shifts and isomorphisms; rotating the cone triangle $A\\to B\\to\\operatorname{Cone}(f)\\to A[1]$ shows that it is closed under cones of morphisms between its objects.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "node sk-lem-constructible-ext-continuity, order 1515"
+    "place": "Proof, first paragraph: reduction by extensions and shifts"
+   }
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Both sides are cohomological functors of $C$, so by the five lemma the class of $C$ for which\nthe claim holds is closed under extensions and shifts. It therefore suffices to treat\n$C=a_!L$, with $a=i\\circ u\\colon S\\hookrightarrow Z\\hookrightarrow X$ as in\n[sk-lem-formal-closed-support]. The only property of $L$ used below is that $L^\\vee\\otimes-$\nis exact. Details: [det-lem-constructible-ext-continuity-devissage].",
-      "uses": [
-        "sk-lem-formal-closed-support"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "By the stratum formula of [sk-lem-formal-closed-support] (2) we must show that the\ncohomology of $R\\Gamma(S,L^\\vee\\otimes u^*R\\underline\\Gamma_ZK)$ commutes with the colimit.\nApply the exact functor\n$L^\\vee\\otimes u^*i^*(-)\\colon D(X_{\\mathrm{proét}},\\Lambda)\\to D(S_{\\mathrm{proét}},\\Lambda)$ to the\ntriangle $K\\to Rj_*j^*K$ whose fiber defines $R\\underline\\Gamma_Z$. By the long exact sequence\nand the five lemma, it suffices to treat the two terms\n$$\nR\\Gamma\\bigl(S,L^\\vee\\otimes u^*i^*K\\bigr)\\quad\\text{and}\\quad\nR\\Gamma\\bigl(S,L^\\vee\\otimes u^*i^*Rj_*j^*K\\bigr).\n$$\nThe functor $L^\\vee\\otimes u^*i^*(-)$ is exact, commutes with colimits and preserves the lower\nbound, so [sk-cor-pe-bounded-continuity] on $S$ handles the first term. For the second, the\nhypercohomology spectral sequence\n$$\nE_2^{p,r}=H^p\\bigl(S,L^\\vee\\otimes u^*i^*R^rj_*(j^*K)\\bigr)\\Longrightarrow\nH^{p+r}\\bigl(S,L^\\vee\\otimes u^*i^*Rj_*j^*K\\bigr)\n$$\nis functorial in $K$. The sheaves $R^rj_*(j^*K_i)$ commute with the colimit by the second\npart of [sk-cor-pe-bounded-continuity], and then $H^p(S,-)$ does by its first part. So the map of\nspectral sequences is an isomorphism on $E_2$, after passing to the colimit. Because of the\ncommon lower bound, only finitely many $E_2^{p,r}$ contribute to a given total degree, so the\nabutments agree as well. Details: [det-lem-constructible-ext-continuity-stratum].",
-      "uses": [
-        "sk-lem-formal-closed-support",
-        "det-lem-constructible-ext-continuity-stratum"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "sk-lem-formal-closed-support",
+  {
+   "text": "For a generator $a_!L$, $X$ is quasi-compact by the Noetherian definition and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open $W\\subseteq X$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The image of the immersion $a$ over any affine open of $X$ is locally closed, hence closed in an open subset of $X$; that open subset is compact, so the image is compact. Since an immersion is a homeomorphism onto its image, $a$ is quasi-compact. Apply [lem-pqf-qc-immersion-open-closed-factor] to choose $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$ with $i$ closed and $u$ open. Thus the open complement $V=X\\setminus Z$ is quasi-compact and its immersion $j$ is quasi-compact: the inverse image of any affine open of $X$ is again an open of $X$. Every open of $Z$ is $Z\\cap W$ for an open $W\\subseteq X$ and is closed in that compact $W$, hence quasi-compact. In particular the inverse image under $u$ of each affine open of $Z$ is quasi-compact, so $u$ is quasi-compact. Our three coefficient rings are among the admissible rings in [det-lem-constructible-ext-continuity-stratum]; $L$ is finite locally free and the diagram has the same common lower bound $b$. That node therefore gives exactly the canonical comparison isomorphism for $a_!L$ in every degree.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-pqf-qc-immersion-open-closed-factor",
     "det-lem-constructible-ext-continuity-stratum"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "## Proof"
+    "place": "Proof, second paragraph, stratum calculation"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "in_cycle"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1515,
-  "blueprint_uses": [
-    "sk-cor-pe-bounded-continuity",
-    "sk-lem-formal-closed-support",
-    "sk-cor-coefficient-heart-ii"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "blueprint_detail_nodes": [
-    "det-lem-constructible-ext-continuity-devissage"
-  ]
+  {
+   "text": "Inducting on the finite expression of $C$ now proves the displayed comparison: the generator case is step 2, and each shift, isomorphism, or extension is handled by step 1. This induction is finite by the hypothesis on $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+    "place": "Proof, first paragraph, finite dévissage"
+   }
+  },
+  {
+   "text": "When $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$, [det-cor-coefficient-heart-ii-generation] applies with precisely our Noetherian hypothesis on $X$: every bounded constructible $C$ is obtained by finitely many cones from $a_!L[n]$, where lisse means the finite locally free condition in our statement. The generator comparison is step 2; the shift, cone and isomorphism closure in step 1, followed by induction on that finite sequence, gives the comparison for $C$. The same finite sequence expresses $C$ by extensions and shifts, since a cone triangle rotates to $B\\to\\operatorname{Cone}(A\\to B)\\to A[1]\\to B[1]$. For a constructible sheaf in degree zero, [sk-def-sfb-bounded-constructible] places it in the bounded constructible category. A diagram of sheaves in degree zero has common lower bound $b=0$ and its termwise colimit is the sheaf colimit in degree zero; by the definition of $\\operatorname{Ext}^q$ in the statement the comparison is exactly the asserted Ext colimit isomorphism.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-generation",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+    "place": "Statement, clause 1; constructible generation"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline{\\mathcal O}_E$, choose the given finite extension filtration $0=C_0\\subset\\cdots\\subset C_m=C$, with $C_k/C_{k-1}=a_{k!}L_{0,k}$. The base $C_0=0$ belongs to $\\mathcal C$ by step 1, each quotient belongs by step 2, and [lem-sf-derived-ses-triangle] turns each short exact sequence into a triangle $C_{k-1}\\to C_k\\to a_{k!}L_{0,k}\\to C_{k-1}[1]$ in the derived category. The extension argument of step 1, inductively for $k=1,\\ldots,m$, gives the integral clause.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+    "place": "Statement, clause 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pqf-qc-immersion-open-closed-factor",
+  "det-lem-constructible-ext-continuity-stratum",
+  "det-cor-coefficient-heart-ii-generation",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sf-derived-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+  "place": "Proof paragraphs: explicit cohomological dévissage, existing stratum continuity, and the Noetherian constructible-generation detail of clause 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(constructible|pro[Ee]tale).*([Ee]xt|[Cc]olimit)|([Ee]xt|[Cc]olimit).*(constructible|pro[Ee]tale)",
+   "results": "0 hits; ; ",
+   "date": "2026-10-16",
+   "verdict": "The first query has no hits. The second has generic filtered-colimit constructions and homological-complex AB5, with no constructible pro-étale Ext theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext from a constructible pro etale sheaf commutes with filtered colimits",
+   "results": "8 hits; ; CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CommGrpCat.FilteredColimits.colimit, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CommGrpCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-16",
+   "verdict": "Hits are filtered-colimit constructions for sheaves and groups, not continuity of derived Hom from a constructible complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ext, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Ext'; ",
+   "date": "2026-10-16",
+   "verdict": "No exact match: the first query reports the unknown identifier CategoryTheory.Ext; the second matches the substring Ext in extend/hom_ext, not the Ext theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of uniformly bounded below complexes of pro-etale sheaves commute with Ext from a bounded constructible complex",
+   "results": "8 hits; ; localCohomology.diagram, HomologicalComplex.ab5OfSize, Condensed.hasExactColimitsOfShape, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, LightCondensed.isColimitLocallyConstantPresheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, LightCondensed.lanPresheafIso",
+   "date": "2026-10-16",
+   "verdict": "Hits concern local cohomology, AB5, exact functors on Ext, and algebraic-geometric section computations; none asserts constructible pro-étale Ext continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "(Ext|ext|hom).*([Ff]iltered[Cc]olimit|preservesFiltered)|([Ff]iltered[Cc]olimit).*([Ee]xt|[Hh]om)",
+   "results": "14 hits; ; Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/MonCat/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean, Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean",
+   "date": "2026-10-16",
+   "verdict": "The first query has no hits. The second has generic filtered-colimit constructions and homological-complex AB5, with no constructible pro-étale Ext theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"colimit\"",
+   "results": "12 hits; ; CategoryTheory.Limits.IsColimit.extendIso, CategoryTheory.Limits.IsColimit.ofExtendIso, CategoryTheory.Limits.IsColimit.extendIsoEquiv, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext_iff, CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext",
+   "date": "2026-10-16",
+   "verdict": "No exact match: the first query reports the unknown identifier CategoryTheory.Ext; the second matches the substring Ext in extend/hom_ext, not the Ext theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free sheaf extended by zero from a locally closed subscheme is compact for filtered colimits of uniformly bounded below complexes",
+   "results": "8 hits; ; AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-16",
+   "verdict": "Hits concern local cohomology, AB5, exact functors on Ext, and algebraic-geometric section computations; none asserts constructible pro-étale Ext continuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Grothendieck abelian category, finitely presented constructible module sheaves have derived Hom commuting with filtered direct limits of complexes bounded below uniformly",
+   "date": "2026-10-16",
+   "results": "8 hits; ; CategoryTheory.IsGrothendieckAbelian.hasExt, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.exists_d_comp_eq_d, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.Presentation.map, SheafOfModules.Presentation.isColimit, CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "verdict": "The semantic hits concern existence of Ext and local finite presentations, not the stated pro-étale derived Hom continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*[Cc]olimit|[Cc]olimit.*Ext|[Cc]ompact.*[Cc]onstructible|[Cc]onstructible.*[Cc]ompact",
+   "date": "2026-10-16",
+   "results": "25 hits; ; Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean, Mathlib/AlgebraicTopology/SimplicialSet/NonsingularColimit.lean, Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean, Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean",
+   "verdict": "The regex hits are hom_ext and colimit constructions, not Ext continuity from constructible sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "in_cycle"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1515,
+ "blueprint_uses": [
+  "sk-cor-pe-bounded-continuity",
+  "sk-lem-formal-closed-support",
+  "sk-cor-coefficient-heart-ii"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "blueprint_detail_nodes": [
+  "det-lem-constructible-ext-continuity-devissage"
+ ],
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-constructible-ext-continuity",
+  "worker": "stage1",
+  "summary": "Restored the missing Noetherian hypothesis and expanded the finite extension argument. Second reading supplies explicit shifts, cone closure and named exactness lemmas, checks quasi-compact immersion hypotheses, and uses the existing Noetherian generation detail instead of the standing-scheme filtration assertion. No new nodes.",
+  "blueprint": "Proof first paragraph: steps 1 and 3; second paragraph: step 2 through the existing stratum continuity detail; field-coefficient clause 1: step 4 through det-cor-coefficient-heart-ii-generation; integral clause 2: step 5."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-67f4f4d42",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-67f4f4d42 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited mathematics; review.md records all five step checks, source locations, edge cases, reuse and cycle checks. The reported counterexample validates the auxiliary Noetherian correction, which preserves the archived targets. No repairs or tool_uses required."
+ }
 }
