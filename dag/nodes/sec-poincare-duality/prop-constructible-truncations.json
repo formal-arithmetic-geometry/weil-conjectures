@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-constructible-truncations",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Construction of constructible truncations",
@@ -17,41 +17,293 @@
  },
  "stmt_deps": [
   "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-morphism-properties",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-t-structure",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "At a finite coefficient stage the truncation functors of the\nt-structure of [def-weil-derived-cohomology-sheaves] are the\ncanonical truncations of complexes, computed levelwise; they are exact\ntriangulated on the bounded constructible derived category, because the\ntruncation of a bounded constructible complex has the cohomology sheaves\nof the original complex in the surviving degrees, hence satisfies the\nfinite-torsion constructibility condition in the same finite partition.\nAt the derived-complete integral level, the truncations are the\nlevelwise ones on the reduction tower of\n[thm-weil-pbc-integral-truncations] of the proper-base-change chapter, and the\nstandard t-structure restricts to the integral category by\n[prop-weil-pbc-integral-tstructure] of the proper-base-change chapter.\nThe canonical truncation triangles give the axioms of a bounded\nt-structure in the sense of [def-weil-t-structure]. Being\ncharacterized by the vanishing of cohomology sheaves,\nthe truncations commute with finite scalar extension and with the\ntransitions of the coefficient tower, so they descend to the rationalized\ncategory of\n[def-weil-rationalization-karoubi] and to the common-stage\ncategory of [def-weil-algebraically-closed-coefficients], where\nthe truncation triangles give the same bounded t-structure axioms; the\ndisplayed definition of $\\mathcal H^i$ is then the canonical\nidentification. For a scheme automorphism $h$, the derived pullback\n$Lh^*$ of [def-weil-derived-pullback-tensor-hom] is exact\ntriangulated, so it commutes with the canonical truncations and hence\nwith $\\mathcal H^i$.",
+   "text": "Write $A=\\mathcal O_E$, $R=\\widehat{\\mathcal O}_{E,Y}$, and $\\mathcal C_A=D^b_c(Y,A)$. The scheme $\\operatorname{Spec}k$ is noetherian and quasi-compact: a field has just the ideals $(0)$ and $(1)$. Apply [lem-weil-pbc-finite-type-over-noetherian] to $Y\\to\\operatorname{Spec}k$. Apply [lem-fin-finite-type-fibre-dimension-bound] to the same morphism; its only fibre is $Y$, so $Y$ is finite-dimensional. Finally $\\ell$ is a unit in $k$ because $\\ell\\ne p$, and its image is a unit in each local ring of $Y$. All hypotheses of [lem-weil-pbc-integral-stratified-perfect-characterization] now hold. Its explicit comparison clause identifies the full subcategory of [def-weil-derived-complete-integral-detailed] with the completed bounded constructible category used by the integral and localized t-structure theorems, with the same ring sheaf and reduction functors. In particular the compatible etale-origin witnesses and uniform local models required there are supplied by this cited theorem; they are not inferred merely from the notation $D^b_c$.",
    "uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "thm-weil-pbc-integral-truncations",
-    "prop-weil-pbc-integral-tstructure",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, integral-category passage; geometric hypotheses and identification of integral conventions"
+   }
+  },
+  {
+   "text": "At a torsion coefficient level, use the standard t-structure of [def-sbc-standard-tstructure-derived-category]. Canonical upper truncation replaces the cutoff term by a kernel and canonical lower truncation replaces its cutoff term by a cokernel, as in Stacks Tag 0118 (homology-section-truncations). Their surviving cohomology sheaves are exactly the original ones and the other cohomology sheaves are zero; the upper calculation is [lem-weil-pbc-truncation-cohomology], and the lower calculation follows directly by taking $\\operatorname{coker}d^{m-1}$ in degree $m$. Thus boundedness and the finite partitions in [def-weil-finite-torsion-constructibility] survive truncation. The standard triangles restrict to this full triangulated subcategory. At the integral stage, apply [prop-weil-pbc-integral-tstructure] after step 1: it supplies the bounded t-structure, both ambient canonical truncation restrictions, their maps and their distinguished triangles on all of $\\mathcal C_A$. This application uses no flat-cohomology assumption. It also does not identify the reductions of an arbitrary integral truncation with the truncations of the reductions; such an identification has the extra Tor hypothesis recorded in the cited integral theorem.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-finite-torsion-constructibility",
+    "prop-weil-pbc-integral-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, first four sentences: finite and integral truncations; corrected use of ambient integral truncations"
+   }
+  },
+  {
+   "text": "Use the raw scalar localization of [def-weil-rationalization-karoubi], so that $\\mathcal C_E=\\mathcal C_A[1/\\varpi_E]$ has the same objects and localized Hom groups; no idempotent completion is involved. By step 1 the categories and localization functor are exactly those in [prop-weil-localized-tstructure]. That theorem gives the bounded t-structure on $\\mathcal C_E$, its natural truncation comparisons $\\tau_E^{\\le m}QK\\cong Q\\tau_A^{\\le m}K$ and $\\tau_E^{\\ge m}QK\\cong Q\\tau_A^{\\ge m}K$, and t-exactness of $Q$. The canonical maps and triangles are the images of the integral ones. This identifies the finite coefficient-field t-structure with the rational standard pair of [def-weil-constructible-standard-tstructure].",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "prop-weil-localized-tstructure",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, rationalized-category descent"
+   }
+  },
+  {
+   "text": "Let $E\\subset L$ be finite coefficient fields, and put $S=\\widehat{\\mathcal O}_{L,Y}$. By [lem-weil-finite-free-completed-scalar-comparison], $S$ is finite free over $R$ and, for a derived-complete $K$, the actual integral scalar extension is naturally $K\\otimes_R^L S$. Choose an $R$-basis of $S$ solely to check exactness: after forgetting the $S$-action, tensoring any module sheaf with $S$ is a finite direct sum of copies of that module sheaf. Finite direct sums preserve kernels and cokernels, so this tensor functor is exact. Apply [lem-sp-exact-functor-preserves-homology] to obtain $\\mathcal H^r(K\\otimes_R^L S)\\cong\\mathcal H^r(K)\\otimes_R S$ naturally. It preserves both cohomological half-categories, and [lem-weil-integral-scalar-extension-constructible] supplies membership in the target integral category. Hence integral scalar extension is t-exact; after localization the same is true of $-\\otimes_E L$, since the rational halves are the isomorphism closures of integral halves. This rational functor is triangulated by [lem-weil-scalar-extension-exact-triangulated]. Apply it to a truncation triangle: its end terms have degrees $\\le m$ and $\\ge m+1$. The characterization of canonical truncation triangles in [def-weil-t-structure] identifies that image triangle with the target truncation triangle, yielding natural isomorphisms $T_{L/E}\\tau_E^{\\le m}\\cong\\tau_L^{\\le m}T_{L/E}$ and $T_{L/E}\\tau_E^{\\ge m}\\cong\\tau_L^{\\ge m}T_{L/E}$, compatible with the maps. The identity and composition comparisons of [lem-weil-scalar-extension-composition] respect these isomorphisms: both composites are the canonical comparison with the same truncation maps. Thus compatibility includes the whole directed coefficient-field tower. Here these transitions are finite field extensions, not non-flat reductions $A/\\varpi^{n+1}\\to A/\\varpi^n$.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-weil-t-structure",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, scalar-extension and coefficient-tower compatibility; exactness and t-exactness supplied explicitly"
+   }
+  },
+  {
+   "text": "In the common-stage category of [def-weil-algebraically-closed-coefficients], define $\\tau^{\\le m}(E,K)=(E,\\tau_E^{\\le m}K)$ and likewise $\\tau^{\\ge m}(E,K)=(E,\\tau_E^{\\ge m}K)$. For a morphism represented by $u:K\\otimes_E L\\to K'\\otimes_{E'}L$, apply $\\tau_L^{\\le m}$ and use step 4's comparisons to regard its source and target as scalar extensions of $\\tau_E^{\\le m}K$ and $\\tau_{E'}^{\\le m}K'$; use the analogous rule for $\\tau^{\\ge m}$. If two representatives agree over a larger field, their truncations agree there by naturality and composition compatibility from step 4. Thus these rules define functors; identities and compositions are checked on representatives over one common field. Define their maps and triangles by the finite-stage maps and triangles. Step 4 makes those independent of enlargement too, and the triangles are distinguished by the common-stage definition. This constructs the requested truncations with every common finite-field presentation.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, descent of truncation functors and triangles to the common-stage category"
+   }
+  },
+  {
+   "text": "For $\\overline{\\mathbf Q}_\\ell$, take the two standard classes of [def-weil-constructible-standard-tstructure], namely objects isomorphic to finite-stage nonpositive or nonnegative objects. Shifting such a representative proves the two shift inclusions in [def-weil-t-structure]. For orthogonality, replace the source and target by representatives in degrees $\\le0$ and $\\ge1$, and extend both to one common field. By step 4 these bounds persist under every further field extension. The finite-stage Hom group is therefore zero at every such stage, and its directed colimit, the Hom group of [def-weil-algebraically-closed-coefficients], is zero. The triangle constructed in step 5 has its end terms in the required halves, giving the truncation axiom. Finally an object $(E,K)$ has upper and lower bounds already over $E$ by step 3; the same bounds work in the common-stage category. This proves all t-structure axioms and boundedness, rather than assuming that functorial descent alone proves them.",
+   "uses": [
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-t-structure",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, bounded t-structure at algebraically closed coefficients"
+   }
+  },
+  {
+   "text": "For either field stage define $\\mathcal H^i$ to be the composite $K\\mapsto(\\tau^{\\ge i}\\tau^{\\le i}K)[i]$ displayed in the statement. The truncation maps are functorial, so this is a functor. Its value lies in the heart: before shifting it has only degree $i$, and the cohomological shift $[i]$ moves that degree to zero. At the integral and torsion stages it is the degree-$i$ cohomology sheaf of [def-weil-derived-cohomology-sheaves], placed in degree zero, by the kernel/image descriptions; at a field stage it is its rationalized or common-stage heart object. Thus no identification of an abstract rational heart with an ambient category of $E$-sheaves is assumed.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, displayed definition of cohomology functors"
+   }
+  },
+  {
+   "text": "Let $h:Y\\xrightarrow{\\sim}Y$ be a scheme automorphism. By [lem-weil-proetale-isomorphism-inverse-image], its inverse image is relabelling the small pro-etale site by $U\\to Y\\mapsto U\\xrightarrow{}Y\\xrightarrow{h}Y$, an exact equivalence preserving all limits and the coefficient maps. On completed coefficient sheaves it therefore identifies $h^{-1}R$ with $R$ by taking the limit of the compatible finite coefficient identifications. This induces an exact equivalence on module sheaves and, termwise, on complexes. It preserves kernels, images and their quotients by [lem-sp-exact-functor-preserves-homology], so $\\mathcal H^r(h^{-1}K)\\cong h^{-1}\\mathcal H^r(K)$. The tensor comparison of [lem-pur-isomorphism-inverse-image-tensor-hom] identifies the pulled-back finite reduction with the finite reduction of the pulled-back complex. If $P$ is K-flat and $C$ is acyclic on the target, then $h^{-1}P\\otimes C\\cong h^{-1}(P\\otimes h_*C)$ by the tensor comparison and the inverse equivalence. Exactness makes $h_*C$ acyclic; K-flatness makes $P\\otimes h_*C$ acyclic; exactness again makes its inverse image acyclic. Thus $h^{-1}P$ is K-flat. It preserves countable products and cones termwise. The products compute derived products by [lem-weil-proetale-countable-products-exact] and [lem-weil-derived-limit-existence](2). Use the strict reduction-tower cone in [def-pur-integral-derived-operations], which is the integral operation named by [def-weil-derived-pullback-tensor-hom]. Applying the equivalence to this cone identifies, naturally and with its projections, the completed pullback $Lh^*K$ of [def-weil-derived-pullback-tensor-hom] with $h^{-1}K$ for derived-complete $K$: the two product maps are both $(x_n)\\mapsto(x_n-t_nx_{n+1})$, and the identification of their shifted cones is termwise. Here the canonical completion map is invertible by [lem-weil-finite-free-completed-scalar-comparison] with $L=E$, and [def-weil-derived-complete-integral-detailed] supplies derived completeness. This uses the functorial strict model, not a claimed uniqueness of maps between abstract Roos triangles. Membership in the target integral category is supplied by [lem-pur-integral-operations-preserve-constructible](1). Termwise inverse image commutes with the cohomological shift (including the sign of the differential) and with the cone matrix of any chain map, so its derived functor preserves distinguished triangles. Its identified integral restriction is coefficient-linear, and therefore preserves the images of these triangles under scalar localization. Thus $Lh^*$ is triangulated and t-exact on the integral category and its rationalization: it preserves the cohomological bounds of steps 2 and 3. For every cutoff $m$, applying it to $\\tau^{\\le m}K\\to K\\to\\tau^{\\ge m+1}K$ gives a distinguished triangle whose end terms have bounds $\\le m$ and $\\ge m+1$. The characterization in [def-weil-t-structure] identifies these terms with the canonical truncations of $Lh^*K$, compatibly with the maps to and from $Lh^*K$. The same characterization for morphisms gives naturality, so both natural truncation comparisons hold at $E$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-integral-operations-preserve-constructible",
     "def-weil-t-structure",
     "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pur-integral-derived-operations"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, automorphism compatibility; exact module equivalence and t-exactness replace the invalid triangulated-exactness inference"
+   }
+  },
+  {
+   "text": "Write $F_E=Lh_E^*$ and $T_{L/E}=-\\otimes_E L$. For either truncation $\\tau_E$ at the fixed cutoff, let $\\alpha_E:F_E\\tau_E\\xrightarrow{\\sim}\\tau_EF_E$ be the natural comparison from step 8. For an integral representative $K$, apply the first comparison of [lem-pur-integral-operations-scalar-extension] to $f=h$; its hypotheses hold by step 1 and step 8. Localizing this integral isomorphism gives $\\beta_{L/E}:T_{L/E}F_E\\xrightarrow{\\sim}F_LT_{L/E}$. On a rational morphism $u\\otimes a$, with $u$ integral and $a\\in E$, its naturality square is the integral square for $u$ multiplied by $a$: both functors are coefficient-linear and the scalar-extension morphism rule is the one in [def-weil-rationalization-karoubi]. Every element of a localized Hom group is a finite sum $\\sum_j u_j\\otimes a_j$. Choose $N\\ge0$ with $b_j=\\varpi_E^N a_j\\in\\mathcal O_E$ for all $j$; this sum equals $(\\sum_j b_j u_j)\\otimes\\varpi_E^{-N}$, so the preceding square calculation covers every rational morphism. Hence $\\beta$ is natural on every rational morphism, not only on integral ones. The integral identity and field-tower coherence equalities in the cited comparison remain equalities after localization, so $\\beta$ is compatible with identity and composite extensions. Combine $\\beta$, the scalar/truncation comparisons of step 4 and $T_{L/E}\\alpha_E$ to compare $F_L\\tau_LT_{L/E}K$ with $\\tau_LF_LT_{L/E}K$. This comparison and $\\alpha_L(T_{L/E}K)$ preserve the canonical truncation maps into or out of $F_LT_{L/E}K$. They agree by the characterization of truncation triangles in [def-weil-t-structure]. For a morphism represented by $u:T_{L/E}K\\to T_{L/E'}K'$ at a common field $L$, use these identifications to write the comparison square as the naturality square of $\\alpha_L$ for $u$, which commutes. If $u$ and $u'$ represent the same morphism, [def-weil-algebraically-closed-coefficients] says they agree over a further common field $M$; their two squares then agree over $M$ by the established extension compatibility, and hence represent the same square in the colimit. The components represented by $\\alpha_E(K)$ therefore give a natural isomorphism in the common-stage category, whose inverse is represented by $\\alpha_E(K)^{-1}$. This is a comparison for the actual pullback on morphisms specified by [def-weil-derived-pullback-tensor-hom], whose morphism rule uses exactly $\\beta$. The two choices $\\tau^{\\le m}$ and $\\tau^{\\ge m}$ give both required comparisons. Finally $Lh^*$ commutes with shifts by the termwise model of step 8 and its scalar and common-stage morphism rules. For $\\Lambda=E$ and $\\overline{\\mathbf Q}_\\ell$, their composition is the natural isomorphism $Lh^*((\\tau^{\\ge i}\\tau^{\\le i}K)[i])\\cong(\\tau^{\\ge i}Lh^*\\tau^{\\le i}K)[i]\\cong(\\tau^{\\ge i}\\tau^{\\le i}Lh^*K)[i]$, which is precisely $Lh^*\\mathcal H^i(K)\\cong\\mathcal H^i(Lh^*K)$.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-t-structure",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+    "place": "Proof, final sentence: descent of automorphism comparisons and compatibility with cohomology"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-cohomology-sheaves",
-  "thm-weil-pbc-integral-truncations",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-finite-torsion-constructibility",
   "prop-weil-pbc-integral-tstructure",
-  "def-weil-t-structure",
   "def-weil-rationalization-karoubi",
+  "prop-weil-localized-tstructure",
+  "def-weil-constructible-standard-tstructure",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-t-structure",
+  "lem-weil-scalar-extension-composition",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
-  "place": "## Proof"
+  "place": "Proof, corrected finite/integral/rational/common-stage argument; Stacks 0118 (homology-section-truncations), 08J5 (derived-remark-truncation-distinguished-triangle); Bhatt-Scholze 6.6.11 and 6.8.14 for the coefficient conventions"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded t-structure and truncation functors on constructible l-adic derived categories over rationalized finite extension coefficients and their filtered common-stage algebraic closure, compatible with scalar extension and automorphism pullback",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGE, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat, CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.triangleLTGE",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*trunc|trunc.*constructible|localized.*[tT][sS]tructure|[tT][sS]tructure.*localized",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical truncations preserve bounded constructible derived categories of l-adic sheaves and commute with flat finite coefficient extension",
+   "results": "8 hits: ComplexShape.Embedding.πTruncGENatTrans, CategoryTheory.Triangulated.TStructure.ge, ComplexShape.Embedding.πTruncGENatTrans_app, CategoryTheory.Triangulated.TStructure.truncGE, HomologicalComplex.ιTruncLE, ComplexShape.Embedding.truncLEFunctor, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.ιTruncLE",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact t-exact functor between triangulated categories with t-structures naturally commutes with both canonical truncation functors",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGEπ, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.map_distinguished_op_exact",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*(Iso|iso)|[tT]Exact",
+   "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*(Iso|iso)|[tT]Exact",
+   "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed common-stage category of constructible rational coefficient complexes inherits bounded standard t-structures from its finite coefficient fields and t-exact flat scalar extension functors",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match for the full proposition: ambient standard t-structure, canonical truncation or general triangulated-functor infrastructure only; no rationalized constructible E stage with common-stage coefficient compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "comm.*trunc|trunc.*comm|IsTExact",
+   "results": "25 hits: Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean, Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/Combinatorics/SetFamily/AhlswedeZhang.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: ambient exact-functor, truncation or unrelated results; none states the rationalized constructible/common-stage proposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor between derived categories induced by an exact equivalence of abelian categories preserves standard truncation and cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: ambient exact-functor, truncation or unrelated results; none states the rationalized constructible/common-stage proposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded t-structure on rationalized constructible adic complexes and finite coefficient field colimit, truncation compatible with scalar extension and automorphisms",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, localCohomology.hasColimitDiagram, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, localCohomology.ofDiagram",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient truncation and t-structure machinery does not state the constructible rational/common-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.bounded, CategoryTheory.Triangulated.TStructure.minus, CategoryTheory.Triangulated.TStructure.plus, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient truncation and t-structure machinery does not state the constructible rational/common-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*trunc|trunc.*rational|constructible.*trunc|trunc.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient truncation and t-structure machinery does not state the constructible rational/common-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical truncations on scalar localization of bounded constructible pro-etale integral complexes, commuting with finite field extension",
+   "results": "8 hits: HomologicalComplex.ιTruncLE, CochainComplex.ιTruncLE, IsLocalization.integralClosure, ComplexShape.Embedding.πTruncGENatTrans, HomologicalComplex.πTruncGE, Algebra.IsStandardEtale.of_isLocalizationAway, IsLocalization.Away.isIntegral_of_isIntegral_map, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient truncation and t-structure machinery does not state the constructible rational/common-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[tT]runc|[tT]runc.*constructible|[tT]Exact",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "Renewed independent second reading: general truncation and exact-functor infrastructure only; no declaration states the full constructible rationalization/common-stage assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact functor commutes naturally with both truncation functors for a t-structure, including scalar extension between constructible adic derived categories",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Triangulated.TStructure.truncGEπ, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-16",
+   "verdict": "Renewed independent second reading: general truncation and exact-functor infrastructure only; no declaration states the full constructible rationalization/common-stage assertion."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -97,5 +349,99 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-constructible-truncations",
+  "worker": "stage1",
+  "summary": "Split into nine steps with no new nodes. Kept the statement. Reused the exact existing integral-category comparison, integral and localized bounded t-structures, and finite-free completed scalar comparison. Proved scalar t-exactness and finite-stage descent explicitly, checked the common-stage t-structure axioms, and proved automorphism t-exactness by exact module transport and the strict completion cone. Corrected the imported proof assertions that truncation is triangulated, that arbitrary reduction commutes with truncation, and that triangulated exactness implies truncation compatibility. Tagged project Lean omits the required E-stage, so no attachment. Independent second reading added the strict integral-operation definition citation, spelled out K-flatness and triangulatedness of automorphism transport, and expanded descent of the natural comparisons on morphism representatives. Merge-lock return repair: compared returned head 2024aa841d with the current DAG, reread changed dependencies (stage-2 records only, plus three added statement dependencies of lem-pur-integral-operations-scalar-extension), and expanded step 9 to derive the rational comparison and its naturality on scalar-localized morphisms from the integral comparison. All dependency statements remain unchanged; citations now include the complete used statements. Renewed second reading: expanded the common-denominator argument for arbitrary scalar-localized morphisms in step 9 and marked that comparison/coherence step non-elementary; retained all statements and citations.",
+  "blueprint": "Steps 1-2 realize the first four sentences of the blueprint proof (finite and integral stages); step 3 its rationalization clause; step 4 its scalar/coefficient compatibility clause; steps 5-6 its common-stage descent and bounded t-structure clause; step 7 its cohomology display; steps 8-9 its final automorphism sentence. The supplied unit sk-lem-finite is background finiteness, not a unit key theorem stated by this item; its realization is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Its explicit final comparison identifies the two integral category definitions; no lemma in sk-lem-finite supplies the compatible witnesses or uniform local models."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "The imported proof already routes through this integral t-structure interface; it supplies the canonical truncations and triangles before rationalization."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Raw scalar-localization t-structure is the rational-stage tool needed after the integral interface; the current unit has no localization theorem."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "A general finite-type geometric dimension bound verifies the dimension hypothesis of the integral coefficient tools."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identifies the actual strict-tower scalar extension with finite-free ordinary derived tensor; necessary to prove t-exactness, not replace the unit finiteness proof."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "General exact-functor kernel/image/cohomology calculus used for flat scalar extension and automorphism inverse image."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Supplies constructible target membership for the exact integral scalar extension."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Supplies preservation of distinguished triangles by rational scalar extension, separately from t-exactness proved here."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Supplies the identity and tower-composition comparisons needed for common-stage well-definedness."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "General site equivalence for an isomorphism supplies exact inverse image, product preservation and compatible coefficient identifications."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "General pro-etale module result ensures termwise products compute the derived products used in completed pullback."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Clause (2) identifies derived products with termwise products; needed for the explicit natural cone comparison."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Its first clause supplies constructible membership for completed automorphism pullback."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Its first comparison and tower-coherence clause allow the automorphism comparison to descend to the algebraic closure."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Its natural tensor comparison identifies automorphism inverse image of each finite reduction with reduction of inverse image, including the completed coefficient sheaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-isomorphism-inverse-image-tensor-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-903a36694",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-903a36694 (reviewer sub-agent of L); spot-checked: Read the complete item, report, route, cited DAG statements, and cited literature. All nine steps are supported; coefficient categories, scalar-extension comparisons, automorphism pullback, and edge cases check out. The three imported proof errors are explicitly repaired, with no weakened target, duplicate node, cycle, or missing citation."
+ }
 }
