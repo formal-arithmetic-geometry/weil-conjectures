@@ -192,5 +192,23 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-7b52369d4 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node in full, and found nothing to fix. The item's statement is the blueprint statement unchanged, and the six steps carry both proof paragraphs. Step 1: the new closure leaf makes the given K^sep an algebraic closure, so lem-weil-unique-subfield-of-closure clauses 1-3 apply with k_0=K and give existence, which the blueprint omitted. Step 2: the coordinate bijection gives |V|=q^dim, and q>=2 turns cardinality into degree. Step 3: the Frobenius leaf gives Galois, order n and the power bijection, so Z/n is isomorphic to Gal(K_n/K). Step 4: inclusion is equivalent to divisibility (division with remainder plus order d), and K^sep is the union of the K_n by the compositum clause of def-pd-separable-closure. Step 5: separable-closure-exists-galois (2) at k'=K, then lem-exc-galois-krull-finite-limit, with its index poset identified with (Z>=1, divisibility). Step 6: transition maps are reductions, the map is a homeomorphism coordinatewise, and phi goes to (1 mod n), including n=1. New leaf lem-sfb-finite-field-separable-closure-algebraic: IsSepClosure.isAlgClosure_of_perfectField (IsSepClosed.lean:244) with PerfectField.ofFinite (Perfect.lean:308); Stacks 030Z = algebra-lemma-perfect checked. New leaf lem-sfb-finite-field-galois-frobenius: Finite/Basic.lean:362,366,392-394,403-406 and GaloisField.lean:196-204, read; Stacks 09HY and 09I1 checked; true on F2/F2 and F4/F2. Neither leaf restates a clause of the item. An rg search of the whole DAG by Mathlib names, finite-field/Galois/Frobenius wording and Z-hat found no duplicates. Removing the earlier limit leaf in favour of the existing lem-exc-galois-krull-finite-limit was correct. I accept the declared tool use of lem-weil-unique-subfield-of-closure; the other off-unit citations are Mathlib leaves. This is not a target node and has no base-change or coefficient issue; no SGA source is used. review.md is written and fixes/ is empty."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60c61e841",
+  "group": "N5",
+  "result": "pass",
+  "note": "All node clauses match the Lean: finite field K (Fintype, q = card) with separable closure Ks (IsSepClosure); Frobenius x↦x^q; for each n≥1 a degree-n intermediate field equal to every degree-n subextension, consisting exactly of the roots of X^(q^n)-X, Galois, with Frobenius of order n generating every automorphism through ZMod n; a homeomorphic group isomorphism to ProfiniteCompletion.completion of Multiplicative ℤ (limit over nℤ, i.e. lim Z/n) sending φ to etaFn(ofAdd 1), additive 1. K and Ks in independent universes u,v; n=1 and every characteristic covered. Delivery checks: no definitions or new nodes, only sorry, source/blueprint docstrings with all six proof steps, both report sections present, only the node's lean field changed, lean.statement matches the signature verbatim, lines ≤100. The module compiles with no errors or warnings via nt_compile.py --json (2.2 s); a deliberate-error control confirmed errors are reported. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteFieldAbsoluteGalois",
+  "declaration": "finiteField_absoluteGaloisGroup",
+  "statement": "theorem finiteField_absoluteGaloisGroup (K : Type u) (Ks : Type v) [Field K] [Field Ks] [Fintype K] [Algebra K Ks] [IsSepClosure K Ks] : ∃ φ : Gal(Ks / K), (∀ x : Ks, φ x = x ^ Fintype.card K) ∧ (∀ n : ℕ, 1 ≤ n → ∃ Kn : IntermediateField K Ks, Module.finrank K Kn = n ∧ (∀ E : IntermediateField K Ks, Module.finrank K E = n → E = Kn) ∧ (∀ x : Ks, x ∈ Kn ↔ Polynomial.eval₂ (algebraMap K Ks) x (Polynomial.X ^ (Fintype.card K ^ n) - Polynomial.X) = 0) ∧ IsGalois K Kn ∧ ∃ φn : Kn ≃ₐ[K] Kn, (∀ x : Kn, φn x = x ^ Fintype.card K) ∧ orderOf φn = n ∧ (∀ g : Kn ≃ₐ[K] Kn, ∃ j : ZMod n, g = φn ^ j.val)) ∧ ∃ e : Gal(Ks / K) ≃ₜ* ProfiniteGrp.ProfiniteCompletion.completion (GrpCat.of (Multiplicative ℤ)), e φ = ProfiniteGrp.ProfiniteCompletion.etaFn (GrpCat.of (Multiplicative ℤ)) (Multiplicative.ofAdd (1 : ℤ))",
+  "by": "N5",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/FieldTheory/FiniteFieldAbsoluteGalois.lean",
+  "branch": "newtargets-dag",
+  "existing": false
  }
 }
