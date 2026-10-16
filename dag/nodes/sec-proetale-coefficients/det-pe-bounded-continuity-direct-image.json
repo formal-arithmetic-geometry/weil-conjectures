@@ -3,46 +3,148 @@
  "blueprint": {
   "is": "det-pe-bounded-continuity-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-lem-bounded-continuity-direct-image"
+  ]
  },
  "kind": "statement",
  "title": "Higher direct images commute with bounded-below filtered colimits",
- "statement": "Let $f\\colon X\\to Y$ be quasi-compact and quasi-separated, and let $(K_i^\\bullet)$ be a\nfiltered diagram of complexes of $\\mathcal R$-modules on $X_{\\mathrm{proét}}$ vanishing\nbelow a fixed degree $a$. Then for every $q$ the canonical map\n$\\varinjlim_iR^qf_*K_i^\\bullet\\to R^qf_*(\\varinjlim_iK_i^\\bullet)$ is an isomorphism of\nsheaves on $Y_{\\mathrm{proét}}$.",
+ "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes [def-pc-scheme] that is quasi-compact [def-weil-finite-type-morphism] and quasi-separated [def-weil-quasi-separated-morphism]. Let $\\mathcal R$ be a sheaf of rings on $X_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site], and let $(K_i^\\bullet)$ be a filtered diagram [def-weil-pbc-category-colimit] of complexes [def-weil-abstract-derived-category] of $\\mathcal R$-modules [def-weil-sheaf-of-modules-category] on $X_{\\mathrm{proét}}$ vanishing\nbelow a fixed degree $a$. Then for every $q$ the canonical map\n$\\varinjlim_iR^qf_*K_i^\\bullet\\to R^qf_*(\\varinjlim_iK_i^\\bullet)$, with $f_*$ as in [det-pe-topos-functoriality-inverse-image] and $R f_*$ as in [def-sfb-right-derived-functor], is an isomorphism of\nsheaves on $Y_{\\mathrm{proét}}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.md",
   "place": "node det-pe-bounded-continuity-direct-image, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "det-pe-topos-functoriality-inverse-image"
+ ],
  "proof": [
   {
-   "text": "For a complex $K$ on $X_{\\mathrm{proét}}$, $R^qf_*K=H^q(Rf_*K)$ is the sheafification of\nthe presheaf $P_K\\colon V\\mapsto H^q(X\\times_YV,K)$ on $Y_{\\mathrm{proét}}$: with a\nK-injective resolution $K\\to J$, $Rf_*K=f_*J$ (base change functor of\n[det-pe-topos-functoriality-inverse-image]), $(f_*J)(V)=J(X\\times_YV)$, and cohomology\nsheaves are sheafified sectionwise cohomology.",
+   "text": "Fix $q$ and, for every complex $L$ vanishing below $a$, put $P_L(V)=H^q(X\\times_YV,L)$ as an abelian presheaf. The base-change functor on pro-etale sites and the direct image on underlying sheaves are those of [det-pe-topos-functoriality-inverse-image]. Apply [lem-pe-bounded-complex-direct-image-presheaf] to obtain $P_L^\\#\\cong R^qf_*L$, naturally in $L$. Here direct image has coefficients in $f_*\\mathcal R$, and all comparisons below are read as abelian sheaves, so no assumption that $\\mathcal R$ is pulled back from $Y$ is needed.",
    "uses": [
-    "det-pe-topos-functoriality-inverse-image"
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-pe-bounded-complex-direct-image-presheaf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+    "place": "First paragraph"
+   }
   },
   {
-   "text": "Let $K=\\varinjlim_iK_i^\\bullet$. The canonical maps give a map of presheaves\n$\\varphi\\colon\\varinjlim_iP_{K_i}\\to P_K$ (presheaf colimit). For an affine object $V$ of\n$Y_{\\mathrm{proét}}$, the morphism $X\\times_YV\\to V$ is quasi-compact and quasi-separated\nand $V$ is affine, so $X\\times_YV$ is a quasi-compact, quasi-separated object of\n$X_{\\mathrm{proét}}$, and $\\varphi(V)$ is an isomorphism by\n[det-pe-bounded-continuity-sections]. Every object of $Y_{\\mathrm{proét}}$ has a covering\nby affine objects ([det-pe-wcb-cover]). A map of presheaves that is bijective on a class of\nobjects covering every object is locally injective and locally surjective, so\n$\\varphi^{\\#}$ is an isomorphism. Sheafification is a left adjoint and commutes with\ncolimits, so $(\\varinjlim_iP_{K_i})^{\\#}=\\varinjlim_iP_{K_i}^{\\#}=\\varinjlim_iR^qf_*K_i$\n(colimit of sheaves). Hence $\\varinjlim_iR^qf_*K_i^\\bullet\\to R^qf_*K$ is an isomorphism.",
+   "text": "Let $V$ be an affine object of $Y_{\\mathrm{proét}}$. It is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. By [det-pe-topos-functoriality-inverse-image], $U=X\\times_YV$ is an object of $X_{\\mathrm{proét}}$. The map $U\\to V$ is quasi-compact and quasi-separated by part (3) of [lem-weil-pbc-qcqs-morphism-permanence], applied to the given $f$. Part (2) of the same node, with $V$ quasi-compact and quasi-separated, shows that $U$ itself is quasi-compact and quasi-separated.",
    "uses": [
-    "det-pe-bounded-continuity-sections",
-    "det-pe-wcb-cover"
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+    "place": "Second paragraph, affine pullback"
+   }
+  },
+  {
+   "text": "Form the termwise colimit $K=\\varinjlim_iK_i$ of module sheaves; its terms below $a$ are zero since those diagrams are identically zero. Module-sheaf colimits exist and their underlying abelian sheaves are the abelian-sheaf colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Functoriality gives a presheaf map $\\varphi:\\varinjlim_iP_{K_i}\\to P_K$, with the colimit here taken sectionwise in abelian groups. On an affine $V$, Step 2 permits applying [det-pe-bounded-continuity-sections] to $U=X\\times_YV$ and the original diagram on $X_{\\mathrm{proét}}$. Its comparison is exactly $\\varphi(V)$; it is an isomorphism. There is no substitution of evaluation of a sheaf colimit for a sectionwise colimit in this argument.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+    "place": "Second paragraph, comparison on affine objects"
+   }
+  },
+  {
+   "text": "Every object $V$ of $Y_{\\mathrm{proét}}$ has a covering by affine objects $V_j$ by [det-pe-wcb-cover]. If two sections of the source of $\\varphi(V)$ have equal images, their restrictions to each $V_j$ are equal because $\\varphi(V_j)$ is injective. Every target section restricts to a section on $V_j$ which lifts because $\\varphi(V_j)$ is surjective. Thus $\\varphi$ is locally injective and locally surjective in the precise sense of [lem-weil-pbc-site-sheafification-iso-locally-bijective], so $\\varphi^\\#$ is an isomorphism. Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact] with the constant ring $\\mathbf Z$ to these abelian presheaves: sheafification preserves colimits, hence $(\\varinjlim_iP_{K_i})^\\#\\cong\\varinjlim_iP_{K_i}^\\#$. The natural identifications in Step 1 turn $\\varphi^\\#$ into the map of the statement: on each colimit cocone leg it is the map induced by $K_i\\to K$. This proves that the canonical comparison is an isomorphism.",
+   "uses": [
+    "det-pe-wcb-cover",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+    "place": "Second paragraph, affine covers and sheafification"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-topos-functoriality-inverse-image",
   "det-pe-bounded-continuity-sections",
-  "det-pe-wcb-cover"
+  "det-pe-topos-functoriality-inverse-image",
+  "det-pe-wcb-cover",
+  "lem-pe-bounded-complex-direct-image-presheaf",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
+  "place": "Both proof paragraphs; expanded into four steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|sheafifyCocone|higherDirectImage",
+   "results": "OK 25 hits. Returned names/files: Mathlib/Condensed/Module.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Geometry/RingedSpace/OpenImmersion.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below filtered colimits commute with higher direct images of complexes of sheaves on a quasi-compact quasi-separated pro-etale morphism",
+   "results": "OK 8 hits. Returned names/files: CategoryTheory.Limits.colimitLimitIso.congr_simp, CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc, CategoryTheory.Limits.ι_colimitLimitIso_limit_π, CategoryTheory.Limits.colimitLimitIso, HomologicalComplex.instHasFilteredColimitsOfSize, CommGrpCat.FilteredColimits.colimit, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Limits.pointwiseProductCompEvaluation. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreservesColimitsOfShape, DerivedCategory.Plus.homologyFunctor, Sheaf.sheafifyCocone",
+   "results": "OK 0 hits. Note: loogle: unknown identifier 'CategoryTheory.PreservesColimitsOfShape'. Returned names/files: none. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "invalid query; supplemented by successful quoted-name Loogle query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image cohomology sheafification filtered colimits bounded below complexes pro-etale",
+   "results": "OK 8 hits. Returned names/files: CategoryTheory.Sheaf.H, LightProfinite.hasSheafify, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightProfinite.hasSheafify_type, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, CategoryTheory.Functor.sheafPushforwardCocontinuous. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "direct.?image|cohomolog|derived|colimit",
+   "results": "OK 0 hits. Search subdirectory: AlgebraicGeometry/Sites/Proetale.lean. Returned names/files: none. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along a qcqs scheme map on proetale module sheaves preserves filtered colimits with one uniform lower bound",
+   "results": "OK 8 hits. Returned names/files: Condensed.instAB5CondensedMod, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.Scheme.Modules.pushforward, instHasColimitsCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, Condensed.profiniteSolid. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "OK 2 hits. Returned names/files: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor. These generic categorical colimit, ordinary sheaf cohomology and underived pushforward results do not state qcqs pro-etale derived continuity for uniformly bounded-below complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -57,5 +159,54 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-bounded-continuity-direct-image",
+  "worker": "stage1",
+  "summary": "Preserved the statement and the blueprint affine-local route. Added one statement-only derived-cohomology-presheaf helper, citing Stacks 0D6I. Made the affine qcqs checks, common lower bound, local bijectivity, naturality and colimit/sheafification identification explicit. Read all cited node statements; used abelian sheafification (constant Z), avoiding coefficient assumptions not in the item. No exact project attachment or Mathlib match found. Corrected the imported statement to introduce the sheaf of rings \\mathcal R on X_{\\mathrm{proét}}, which the proof and source intent require; this fixes an ill-formed free symbol without changing the intended theorem. Added inline definition-node citations for schemes, quasi-compactness, quasi-separatedness, pro-etale sites, filtered diagrams, complexes, modules, direct image and its derived functor.",
+  "blueprint": "Step 1 realizes the first proof paragraph. Steps 2–4 realize the second paragraph: affine pullback, sections continuity, affine-cover local bijectivity and sheafification.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "The blueprint explicitly uses this base-change/direct-image description; the bounded-continuity unit does not construct the geometric morphism."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic base-change stability and source permanence justify the qcqs input; the unit supplies no such tool."
+   },
+   {
+    "node": "det-pe-wcb-cover",
+    "why": "The blueprint uses its affine covering conclusion for local bijectivity; the bounded-continuity unit does not construct these covers."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic colimit existence and forgetting scalars for variable ring sheaves are needed for the termwise diagram; no such tool is proved in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Generic local criterion converts the affine-cover comparison to a sheaf isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Use with constant Z for abelian presheaves, to commute sheafification with colimits; generic site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "det-pe-wcb-cover",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q41-a9394a5b6",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a9394a5b6 (reviewer sub-agent of L); spot-checked: Reviewed item, helper, all proof steps, cited DAG statements, Stacks Tag 0D6I, blueprint route, coefficients, base-change morphism, edge cases, and duplicate candidates. No repairs needed; review.md written."
+ }
 }

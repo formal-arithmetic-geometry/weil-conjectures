@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-comap-open-immersion-shriek-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars commutes with $j_!$",
@@ -19,34 +19,145 @@
  ],
  "proof": [
   {
-   "text": "On module objects $j_!=(j_!)_{\\Lambda_X}\\circ\\operatorname{Res}_{\\alpha_j}$, the linearization of\nthe abelian $j_!$ through its projection formula with respect to $j^*$, after restriction of\nscalars along $\\alpha_j\\colon j^*\\Lambda_X\\to\\Lambda_U$ ([sk-def-sfb-module-lower-shriek]). By\n[def-sfb-projection-formula-comap] (with $S=j^*$, $\\varphi=a_X$),\n$\\operatorname{Res}_{a_X}\\circ(j_!)_{\\Lambda'_X}\\cong(j_!)_{\\Lambda_X}\\circ\n\\operatorname{Res}_{j^*a_X}$, so\n\n$$\n\\operatorname{Res}_{a_X}\\circ j_!\\cong(j_!)_{\\Lambda_X}\\circ\\operatorname{Res}_{j^*a_X}\\circ\n\\operatorname{Res}_{\\alpha'_j}\\cong(j_!)_{\\Lambda_X}\\circ\\operatorname{Res}_{\\alpha'_j\\circ j^*a_X}.\n$$",
+   "text": "Write $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$, $S=j^*_{\\Ab}$ and $P=j^{\\Ab}_!$. By [sk-def-sfb-coefficient-morphisms], $S$ is strong monoidal and $\\alpha_j:S\\Lambda_X\\to\\Lambda_U$, $\\alpha'_j:S\\Lambda'_X\\to\\Lambda'_U$ are ring-object morphisms. By [sk-def-sfb-module-lower-shriek], $P$ has the projection formula $P(SL\\otimes M)\\cong L\\otimes PM$. Denote its linearizations by $P_B:\\Mod_{SB}(\\mathcal C)\\to\\Mod_B(\\mathcal D)$. The same node defines $j_!^\\Lambda=P_{\\Lambda_X}\\circ\\operatorname{Res}_{\\alpha_j}$ and $j_!^{\\Lambda'}=P_{\\Lambda'_X}\\circ\\operatorname{Res}_{\\alpha'_j}$. Thus all functors used below have the indicated module categories as their sources and targets.",
    "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "def-sfb-projection-formula-comap"
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-module-lower-shriek"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.proof.md",
+    "place": "First paragraph: linearization and the definition of module extension by zero"
+   }
   },
   {
-   "text": "By [lem-sfb-coefficient-pullback-square], $\\alpha'_j\\circ j^*a_X=a_U\\circ\\alpha_j$, and\n$\\operatorname{Res}_{a_U\\circ\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j}\\circ\n\\operatorname{Res}_{a_U}$, which gives $j_!\\circ\\operatorname{Res}_{a_U}$.",
+   "text": "Apply [def-sfb-projection-formula-comap] with the $S,P$ of step 1, $B=\\Lambda_X$, $B'=\\Lambda'_X$ and $\\varphi=a_X$. It gives $\\operatorname{Res}_{a_X}\\circ P_{\\Lambda'_X}\\cong P_{\\Lambda_X}\\circ\\operatorname{Res}_{Sa_X}$, identity on underlying objects. Precompose this natural isomorphism with $\\operatorname{Res}_{\\alpha'_j}$ and substitute the definition in step 1, obtaining $\\operatorname{Res}_{a_X}\\circ j_!^{\\Lambda'}\\cong P_{\\Lambda_X}\\circ\\operatorname{Res}_{Sa_X}\\circ\\operatorname{Res}_{\\alpha'_j}$. No extension-of-scalars functor or flatness assumption is involved.",
    "uses": [
+    "def-sfb-projection-formula-comap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.proof.md",
+    "place": "First paragraph: application with S=j^* and phi=a_X"
+   }
+  },
+  {
+   "text": "For composable ring-object maps $u:A\\to B$, $v:B\\to C$, restriction as defined in [def-sfb-modobj-restriction] gives a $C$-module with action $\\gamma:C\\otimes M\\to M$ the action $\\gamma\\circ(v\\otimes1)\\circ(u\\otimes1)=\\gamma\\circ((v\\circ u)\\otimes1)$. Both restrictions fix underlying morphisms. Consequently the identity maps give a natural isomorphism $\\operatorname{Res}_u\\circ\\operatorname{Res}_v\\cong\\operatorname{Res}_{v\\circ u}$. Apply this with $u=Sa_X$, $v=\\alpha'_j$. By [lem-sfb-coefficient-pullback-square] with $f=j$, $\\alpha'_j\\circ Sa_X=a_U\\circ\\alpha_j$. The two restrictions along these equal maps have identical actions and morphisms. Apply the same calculation with $u=\\alpha_j$, $v=a_U$ to obtain $\\operatorname{Res}_{Sa_X}\\circ\\operatorname{Res}_{\\alpha'_j}\\cong\\operatorname{Res}_{\\alpha_j}\\circ\\operatorname{Res}_{a_U}$. Each component and its inverse is the identity on the underlying sheaf; its naturality equation for a module map $h$ is $h\\circ1=1\\circ h$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
     "lem-sfb-coefficient-pullback-square"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.proof.md",
+    "place": "Displayed composite restriction and second paragraph: coefficient square and composition of restrictions"
+   }
+  },
+  {
+   "text": "Postcompose the natural isomorphism of step 3 with $P_{\\Lambda_X}$, and compose with that of step 2. The result is $\\operatorname{Res}_{a_X}\\circ j_!^{\\Lambda'}\\cong P_{\\Lambda_X}\\circ\\operatorname{Res}_{\\alpha_j}\\circ\\operatorname{Res}_{a_U}=j_!^\\Lambda\\circ\\operatorname{Res}_{a_U}$, where the last equality is the definition in [sk-def-sfb-module-lower-shriek]. This composite is the chosen comparison. Its inverse is the reverse composite of the inverses from steps 2 and 3; their componentwise inverse equations imply those for the composite. Naturality follows by composing their naturality squares (applying $P_{\\Lambda_X}$ to that of step 3). The common source is $\\Mod_{\\Lambda'_U}$ and common target is $\\Mod_{\\Lambda_X}$, as required.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.proof.md",
+    "place": "Second paragraph, last clause: identify the final composite with j_! after restriction"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-module-lower-shriek",
   "def-sfb-projection-formula-comap",
+  "def-sfb-modobj-restriction",
   "lem-sfb-coefficient-pullback-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-open-immersion-shriek-iso.proof.md",
+  "place": "Both paragraphs; composition of scalar restrictions and naturality expanded explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comap.*[Ss]hriek|[Ss]hriek.*[Cc]omap|mapModLeftComapIso",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with extension by zero along an open immersion for sheaves of modules",
+   "results": "8 hits; RestrictScalars, AlgebraicGeometry.Scheme.Modules.restrict, PresheafOfModules.restrictScalarsObj, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Submodule.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"shriek\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with extension by zero for an open immersion on module objects over condensed coefficient rings",
+   "results": "8 hits; ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, ModuleCat.Tilde.res_apply, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|mapModLeft|restrictScalars.*[Cc]omp|comapComp",
+   "results": "4 hits; Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Pi/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"mapMod\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor satisfying the projection formula its induced functor on module objects commutes with restriction of scalars",
+   "results": "8 hits; PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.restrictScalarsComp'_hom_app, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_hom_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits do not state compatibility of pro-etale extension by zero with scalar restriction for internal module objects. Scalar restriction alone, Zariski pullback, and reindexing of product categories do not specialize to this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism intertwining scalar restriction of internal modules and the left adjoint associated to a projection formula",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned declarations concern extension/restriction or restriction/coextension adjunctions for ordinary ModuleCat rings; none compares an internal-module projection-formula linearization or pro-etale extension by zero with scalar restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "((extend|extension).*([Zz]ero|[Ss]hriek)|([Zz]ero|[Ss]hriek).*(extend|extension)|mapModLeftComapIso|comapMapMod)",
+   "results": "25 hits; Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/InformationTheory/KullbackLeibler/KLFun.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: The broad regex was truncated to 25 returned hits, all unrelated arithmetic, measure-theory or function-extension occurrences; this search alone is inconclusive and was followed by a scoped CategoryTheory grep."
+  },
+  {
+   "tool": "grep",
+   "query": "(extension by zero|extendByZero|lowerShriek|mapModLeftComapIso|comapMapMod)",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match: No match in the category-theory source for extension-by-zero or the projection-formula comparison names."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Iso\"",
+   "results": "12 hits; AlgCat.restrictScalarsEquivalenceOfRingEquiv_unitIso, AlgCat.restrictScalarsEquivalenceOfRingEquiv_counitIso, ModuleCat.instReflectsIsomorphismsRestrictScalars, ModuleCat.restrictScalarsIsoOfEquiv, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_unitIso, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_counitIso, ModuleCat.restrictScalarsIsoOfEquiv_inv_apply, ModuleCat.restrictScalarsIsoOfEquiv_hom_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: The returned isomorphisms concern scalar restriction along ring equivalences, reflected isomorphisms, normed linear maps or fractional ideals; none states the requested comparison with extension by zero."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -72,5 +183,44 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-comap-open-immersion-shriek-iso",
+  "worker": "stage1",
+  "summary": "Kept the statement and unit route. Checked the current blueprint proof, all cited statements, slopmaster2 absence and master reference construction. Expanded the proof into typed projection-formula specialization, an explicit action calculation for restriction composition, coefficient naturality and an explicit natural-isomorphism composite. No new nodes and no Mathlib match.",
+  "blueprint": "First paragraph realized by steps 1-2 and the first composition in step 3; second paragraph by the coefficient-square calculation in step 3 and assembly in step 4. Unit sk-def-sfb-coefficient-comparisons step 4, first sentence.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-coefficient-morphisms",
+    "why": "Generic coefficient ring maps and strong monoidality provide the typed inputs for the unit's projection-formula comparison; they do not replace its argument."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Uses the stipulated projection formula and definition of module extension by zero, which are the exact input named by the blueprint proof."
+   },
+   {
+    "node": "def-sfb-modobj-restriction",
+    "why": "Uses the action formula for scalar restriction to verify composition by an elementary calculation; the coefficient-comparisons unit does not redefine restriction."
+   },
+   {
+    "node": "lem-sfb-coefficient-pullback-square",
+    "why": "Uses the naturality square for a_X and alpha_j, exactly as the blueprint proof requires."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-lower-shriek",
+  "def-sfb-modobj-restriction",
+  "lem-sfb-coefficient-pullback-square"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-b304c51ae",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-b304c51ae (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and chapter/unit route. All four steps preserve the internal-module coefficient categories and correctly construct the natural isomorphism. Edge cases, nonflat coefficients, reuse candidates, and dependency cycles checked; no repairs needed. Accepted tool uses and concrete checks are recorded in review.md."
+ }
 }
