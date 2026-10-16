@@ -3147,6 +3147,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.CardinalArrow
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
@@ -4191,6 +4192,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
