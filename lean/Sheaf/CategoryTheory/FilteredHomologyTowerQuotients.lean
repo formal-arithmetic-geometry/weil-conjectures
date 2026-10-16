@@ -6,7 +6,6 @@ Authors: SHEAF groups V2 and T3
 module
 
 public import Sheaf.CategoryTheory.FilteredHomologyExactCouple
-public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
