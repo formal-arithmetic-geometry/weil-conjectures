@@ -234,5 +234,32 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-4b50c04bb (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, all 10 cited statements, the parent's citing steps and the blueprint ancestor. None of the sources is archived, so I downloaded the three papers read-only to /tmp and checked them at the cited places. Arakawa, CTGDC LXVI-4: Def 1.2/1.7 match T(A) and D(A); the Prop 2.1 formula is the step-1 predecessor max(S∩[i,k-1]); Remark 2.5's max formula is used in step 3; Prop 3.2 gives the route (Rezk 7.7, DK, fiber map); Cor 4.3 needs fibrant = locally Kan. Rezk: §7.4 DK definition, Thm 7.7, §12 localization at spines and F(0)->E. Joyal-Tierney: r(X)_m=J(X^{Δ[m]}), Props 4.9/4.10. I re-derived every step. Step 1: operator compatibility via k=min{r:α(r)≥ℓ}. Step 2: v is natural (D(R_ρ)v'=v(ρ×1)) and e_Q diagθ=η holds strictly. Step 3: Map^R_Q(x,y)=Sing_Q T; p^n(S)=max(S minus n+1) is forced by naturality; the two coend identities plus 2-of-3 make τ a weak equivalence; f=jτ holds on prism simplices (Remark 2.5 formula on both sides). Step 4: the min-coordinate homotopies are monotone, keep vertical lines and are natural, with endpoints c≃1 and c≃s_Q e_Q. Step 5: Brown factorization, anodyne pushout-product and coproducts summandwise, with no Kan hypothesis. Step 6: the strict naturality square is correct. proof_deps equal the union of uses, there is no cycle (closure of 105 nodes), all statements cited are in the item's unit, and no tool_uses are needed. New DK node: true by Reedy replacement, Rezk 7.7 and diag being left Quillen from CSS to Kan-Quillen (all objects cofibrant). The groupoid example shows it is distinct from the levelwise bisimplicial lemma. New classification node: true by the pointwise equivalence criterion and JT 4.10; I checked the strict fiber = U_Q directly; e_Q is only defined there and its invertibility is proved in item step 4. Tested on empty, point, discrete, [1] and groupoid cases. No duplicates found in a DAG-wide grep (the algebroid nodes are abstract ∞-categorical statements), no restated clauses, no SGA. Minor: the item's page range is slightly off (harmless). I accidentally ran one read-only git log; nothing changed. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1f571047",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read node, both stmt deps (CoherentNerveComparison/Infrastructure LocallyKanReplacement, KanQuillenRightProper weak-equivalence predicate), CofibrantSimplicialInversion Degree/degreeFunctor/FixesObjects, the module and report (Worker report + Second reading by Q77 present). Every clause matches: SCat.{u}; R the recorded replacement type (universal R is faithful since the dependency is only Nonempty, and clause 3 follows from clauses 1-2 for any R); diagonalNerve is the true diagonal of (p,n)->N_p(A_n) with simultaneous operators; ∃ natural η matches the node's existence claim and its sole citer's use; local-Kan and FixesObjects + mapping-set w.h.e. clauses exact; replacedDiagonalComparison is whiskered unit then η, carrying the naturality square; w.h.e. is SSet.Enhanced.IsWeakHomotopyEquivalence as in KanQuillenRightProper. Edge cases (empty objects, n=0, empty products, non-Kan) and universes OK. No hollow defs, docstrings with source/blueprint and 6-step proof, statement verbatim, node changed only in lean, lines ≤100. nt_compile --json at the intended path: rc=0, no errors or warnings in the output. Notes for the maintainer: F1 the Degree/FixesObjects helpers live in downstream CofibrantSimplicialInversion, so its §3.7 proof import is omitted as an import cycle (listed by the worker) and these should move to a neutral upstream module before stage 3; F2 SimplicialHammockPair already duplicates the degree category and operator. Neither is a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiagonalCoherentNerveComparison",
+  "declaration": "CategoryTheory.CoherentNerve.diagonal_coherent_nerve_comparison",
+  "declarations": [
+   "CategoryTheory.CoherentNerve.degreeRestriction",
+   "CategoryTheory.CoherentNerve.diagonalNerve",
+   "CategoryTheory.CoherentNerve.diagonalNerveMap",
+   "CategoryTheory.CoherentNerve.diagonalNerveFunctor",
+   "CategoryTheory.CoherentNerve.replacedDiagonalComparison",
+   "CategoryTheory.CoherentNerve.diagonal_coherent_nerve_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiagonalCoherentNerveComparison.lean",
+  "statement": "theorem diagonal_coherent_nerve_comparison (R : LocallyKanReplacement.{u}) : ∃ η : diagonalNerveFunctor.{u} ⟶ nerveFunctor.{u}, (∀ A : SCat.{u}, IsLocallyKan A → SSet.Enhanced.IsWeakHomotopyEquivalence (η.app A)) ∧ (∀ (A B : SCat.{u}) (F : A ⟶ B), FixesObjects F → (∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (F.map x y)) → SSet.Enhanced.IsWeakHomotopyEquivalence (diagonalNerveFunctor.map F)) ∧ (∀ A : SCat.{u}, SSet.Enhanced.IsWeakHomotopyEquivalence ((replacedDiagonalComparison R η).app A))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded simplicial-category, coherent-nerve, locally Kan replacement and realization-based weak-equivalence interfaces. Reuses the already published degree categories, degree functors and FixesObjects predicate from CofibrantSimplicialInversion rather than defining copies. The comparison is an existential natural transformation; its replacement composite is the actual whiskered unit followed by that transformation, so both naturality squares are retained. The only postponed theorem is this node."
  }
 }
