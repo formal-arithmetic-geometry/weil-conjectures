@@ -1,147 +1,291 @@
 {
-  "id": "thm-trf-lefschetz-verdier",
-  "blueprint": {
-    "is": "thm-trf-lefschetz-verdier",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Lefschetz–Verdier trace comparison",
-  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $X$ be a\nproper finite-type scheme.\nLet $c=(c_1,c_2):C\\to X\\times_sX$ be an\nadmissible\ncohomological correspondence with\n$c_2$ proper and with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ proper over $s$ and with finitely many\nopen-and-closed components. Let $K\\in D^b_{ctf}(X,A)$. Then\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{\\beta\\in\\pi_0(F)}\n\\operatorname{LT}_\\beta(u)\n\\quad\\text{in }A,\n$$\n\nwhere $T_c(u)$ is the\nglobal operator of\n[def-trf-global-operator],\n$\\operatorname{tr}_A$ the\ncategorical trace, and the\n$\\operatorname{LT}_\\beta(u)$ are the\nlocal terms. Equivalently, the\ncategorical trace of the global operator equals the sum of the local\nterms over the fixed points. (Source: the Lefschetz–Verdier trace\nformula for cohomological correspondences; see Milne, Lectures on Etale\nCohomology, Section 29 (the Lefschetz fixed-point formula for\nnonconstant sheaves), with Section 25 for the constant-sheaf case, and\n$SGA5$, Expose III. The comparison is assembled here from the\ntrace-class machinery, the fixed-point localization theorem and the\nperfectness of the global operator; see the proof.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.md",
-    "place": "node thm-trf-lefschetz-verdier, order 2350",
-    "external": [
-      {
-        "document": "Milne",
-        "place": "(Source: the Lefschetz–Verdier trace formula for cohomological correspondences; see Milne, Lectures on Etale Cohomology, Section 29 (the Lefschetz fixed-point formula for nonconstant sheaves), with Section 25 for the constant-sheaf case, and $SGA5$, Expose III."
-      },
-      {
-        "document": "SGA5",
-        "place": "(Source: the Lefschetz–Verdier trace formula for cohomological correspondences; see Milne, Lectures on Etale Cohomology, Section 29 (the Lefschetz fixed-point formula for nonconstant sheaves), with Section 25 for the constant-sheaf case, and $SGA5$, Expose III."
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-trf-global-operator",
-    "def-trf-admissibility",
-    "def-trf-categorical-trace",
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-trf-fixed-scheme",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [
-    {
-      "text": "The categorical trace on the left is defined because the global\noperator $T_c(u)$ of [def-trf-global-operator] is a morphism of\n$D^b_{\\mathrm{fin}}(A)$, hence an endomorphism of a perfect complex,\nby [lem-trf-global-operator-perfect]. With this, the\nlocalization theorem [thm-trf-fixed-point-localization] gives\n\n$$\n\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))\n=\\int_F\\operatorname{Tr}_c(u).\n$$",
-      "uses": [
-        "def-trf-global-operator",
-        "lem-trf-global-operator-perfect",
-        "thm-trf-fixed-point-localization"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The component integration formula\n[lem-trf-integration-component-sum] (applicable since each component\n$\\beta$, being closed in the proper $F$, is proper over $s$) rewrites\nthe right side as\n\n$$\n\\sum_{\\beta\\in\\pi_0(F)}\n\\int_\\beta\\bigl(\\operatorname{Tr}_c(u)|_\\beta\\bigr).\n$$",
-      "uses": [
-        "lem-trf-integration-component-sum"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Each summand is $\\operatorname{LT}_\\beta(u)$ by\n[def-trf-local-term], which proves the comparison.",
-      "uses": [
-        "def-trf-local-term"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-trf-lefschetz-verdier",
+ "blueprint": {
+  "is": "thm-trf-lefschetz-verdier",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lefschetz–Verdier trace comparison",
+ "statement": "Fix the global finite-field datum and the coefficient conventions\n[def-weil-finite-field-fiber], [def-trf-coefficient-conventions], with\n$A=A_{E,n}$ and $s=\\Spec k$. Let $X$ be a proper finite-type $s$-scheme\n[def-weil-scheme-morphism-properties] and let $K\\in D^b_{ctf}(X,A)$.\nLet $c=(c_1,c_2):C\\to X\\times_sX$ together with\n$u:Lc_2^*K\\to Rc_1^!K$ be an admissible cohomological correspondence\n[def-trf-correspondence], [def-trf-admissibility]. Assume $c_2$ is proper\nand the fixed scheme $F=\\operatorname{Fix}(c)$ is proper over $s$ and has\nfinitely many open-and-closed connected components, in the sense of\n[def-trf-fixed-scheme]. Then\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{\\beta\\in\\pi_0(F)}\\operatorname{LT}_\\beta(u)\\quad\\text{in }A,\n$$\nwhere $T_c(u)$ is the global operator of [def-trf-global-operator],\n$\\operatorname{tr}_A$ is the categorical trace of\n[def-trf-categorical-trace], and $\\operatorname{LT}_\\beta(u)$ is the local\nterm on the component $\\beta$ of [def-trf-local-term]. Thus the sum is over\nclopen connected components of the fixed scheme; it is a sum over individual\nfixed points when those components are reduced points.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.md",
+  "place": "node thm-trf-lefschetz-verdier, order 2350",
+  "external": [
+   {
+    "document": "Milne",
+    "place": "(Source: the Lefschetz–Verdier trace formula for cohomological correspondences; see Milne, Lectures on Etale Cohomology, Section 29 (the Lefschetz fixed-point formula for nonconstant sheaves), with Section 25 for the constant-sheaf case, and $SGA5$, Expose III."
+   },
+   {
+    "document": "SGA5",
+    "place": "(Source: the Lefschetz–Verdier trace formula for cohomological correspondences; see Milne, Lectures on Etale Cohomology, Section 29 (the Lefschetz fixed-point formula for nonconstant sheaves), with Section 25 for the constant-sheaf case, and $SGA5$, Expose III."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-trf-global-operator",
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-trf-local-term"
+ ],
+ "proof": [
+  {
+   "text": "The proper ordinary leg $c_2$ defines the endomorphism $T_c(u)$ of $R\\Gamma_c(X,K)$ by [def-trf-global-operator]. Apply [lem-trf-global-operator-perfect] with the given admissible correspondence and $K\\in D^b_{ctf}(X,A)$: this endomorphism lies in $D^b_{\\mathrm{fin}}(A)$, which denotes perfect ring complexes for [def-trf-categorical-trace], so its categorical trace is defined. All hypotheses of [thm-trf-fixed-point-localization] hold: the same finite coefficient ring and geometric base, $X$ proper and finite type, $c$ admissible, $c_2$ proper, $F$ proper and $K$ finite-Tor constructible. Hence\n$$\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))=\\int_F\\operatorname{Tr}_c(u).$$\nBy [def-trf-trace-class], the class on the right is a morphism $\\tau=\\operatorname{Tr}_c(u):A_F\\to\\omega_{F,A}$.",
+   "uses": [
     "def-trf-global-operator",
     "lem-trf-global-operator-perfect",
+    "def-trf-categorical-trace",
     "thm-trf-fixed-point-localization",
-    "lem-trf-integration-component-sum",
+    "def-trf-trace-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.proof.md",
+    "place": "Proof, first paragraph and first displayed identity"
+   }
+  },
+  {
+   "text": "By [def-trf-fixed-scheme], the component hypothesis gives the finite disjoint union $F=\\coprod_{\\beta\\in\\pi_0(F)}\\beta$, with inclusions $j_\\beta$ open and closed. Each $\\beta$ is a closed subscheme of the proper $F$, so [lem-weil-pbc-closed-immersion-proper](c), applied to $j_\\beta:\\beta\\hookrightarrow F$ and $F\\to s$, makes $\\beta$ proper over $s$. In particular $F$ and the components are separated finite type, as required in [lem-trf-integration-component-sum]. Apply that lemma to $T=F$, $B=\\pi_0(F)$ and the section $\\tau$ from step 1 to obtain\n$$\\int_F\\operatorname{Tr}_c(u)=\\sum_{\\beta\\in\\pi_0(F)}\\int_\\beta(\\operatorname{Tr}_c(u)|_\\beta).$$\nThe lemma specifies restriction via $Lj_\\beta^*$, the open-immersion identification with $Rj_\\beta^!$ and the dualizing-composition identification, and explicitly states that these are the restrictions used for the local terms. For empty $F$ its empty-index clause gives the value $0$.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-trf-integration-component-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.proof.md",
+    "place": "Proof, second paragraph; properness uses Stacks Tags 01W5 (lemma-closed-immersion-proper) and 01W3 (lemma-composition-proper), morphisms.tex"
+   }
+  },
+  {
+   "text": "For each $\\beta$, [def-trf-local-term] defines\n$$\\operatorname{LT}_\\beta(u)=\\int_\\beta(\\operatorname{Tr}_c(u)|_\\beta).$$\nSubstitute this equality term by term in the finite sum of step 2 and substitute the result into the equality of step 1. This gives exactly the asserted trace identity in $A$. No assertion that the components are points is used.",
+   "uses": [
     "def-trf-local-term"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2350,
-  "blueprint_uses": [
-    "def-trf-admissibility",
-    "def-trf-categorical-trace",
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-trf-fixed-scheme",
-    "def-trf-global-operator",
-    "def-trf-local-term",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties",
-    "lem-trf-global-operator-perfect",
-    "lem-trf-integration-component-sum",
-    "thm-trf-fixed-point-localization"
-  ],
-  "uses_not_cited": [
-    "def-trf-admissibility",
-    "def-trf-categorical-trace",
-    "def-trf-coefficient-conventions",
-    "def-trf-correspondence",
-    "def-trf-fixed-scheme",
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-p-local",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $X$ be a\nproper finite-type scheme.\nLet $c=(c_1,c_2):C\\to X\\times_sX$ be an\nadmissible\ncohomological correspondence with\n$c_2$ proper and with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ proper over $s$ and with finitely many\nopen-and-closed components. Let $K\\in D^b_{ctf}(X,A)$. Then\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{\\beta\\in\\pi_0(F)}\n\\operatorname{LT}_\\beta(u)\n\\quad\\text{in }A,\n$$\n\nwhere $T_c(u)$ is the\nglobal operator of\n[def-trf-global-operator],\n$\\operatorname{tr}_A$ the\ncategorical trace, and the\n$\\operatorname{LT}_\\beta(u)$ are the\nlocal terms. Equivalently, the\ncategorical trace of the global operator equals the sum of the local\nterms over the fixed points.",
-    "proof": [
-      {
-        "text": "The categorical trace on the left is defined because the global\noperator $T_c(u)$ of [def-trf-global-operator] is a morphism of\n$D^b_{\\mathrm{fin}}(A)$, hence an endomorphism of a perfect complex,\nby [lem-trf-global-operator-perfect]. With this, the\nlocalization theorem [thm-trf-fixed-point-localization] gives\n\n$$\n\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))\n=\\int_F\\operatorname{Tr}_c(u).\n$$",
-        "uses": [
-          "def-trf-global-operator",
-          "lem-trf-global-operator-perfect",
-          "thm-trf-fixed-point-localization"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The component integration formula\n[lem-trf-integration-component-sum] (applicable since each component\n$\\beta$, being closed in the proper $F$, is proper over $s$) rewrites\nthe right side as\n\n$$\n\\sum_{\\beta\\in\\pi_0(F)}\n\\int_\\beta\\bigl(\\operatorname{Tr}_c(u)|_\\beta\\bigr).\n$$",
-        "uses": [
-          "lem-trf-integration-component-sum"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Each summand is $\\operatorname{LT}_\\beta(u)$ by\n[def-trf-local-term], which proves the comparison.",
-        "uses": [
-          "def-trf-local-term"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.proof.md",
+    "place": "Proof, final paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-trf-global-operator",
+  "lem-trf-global-operator-perfect",
+  "def-trf-categorical-trace",
+  "thm-trf-fixed-point-localization",
+  "def-trf-trace-class",
+  "def-trf-fixed-scheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-integration-component-sum",
+  "def-trf-local-term"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/thm-trf-lefschetz-verdier.proof.md",
+  "place": "Complete three-paragraph proof, with the closed-component properness lemma made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lefschetz|Verdier|localTerm|traceClass",
+   "results": "25 printed hits: Verdier references in homological/triangulated-category files, Lean trace-class registration, and the model-theoretic Lefschetz principle. No cohomological-correspondence trace formula.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lefschetz Verdier trace formula for a cohomological correspondence on a proper scheme",
+   "results": "8 hits: AlgebraicGeometry.IsProper and its composition/finite-type instances, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, LinearMap.trace_eq_sum_trace_restrict', and trace_eq_finrank_mul_minpoly_nextCoeff. None constructs cohomological-correspondence local terms.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"localTerm\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme and a cohomological correspondence, the categorical trace on compactly supported cohomology equals the sum of local terms on connected components of the fixed scheme",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict, its variants, and scheme affine-limit section lemmas. The linear-map theorem concerns an invariant internal direct sum of finite free modules; none states a sheaf correspondence trace/local-term identity.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.correspondence|local.term|trace.class|Verdier.*trace|trace.*Verdier",
+   "results": "No hits in Mathlib/AlgebraicGeometry for this regular expression.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lefschetz\"",
+   "results": "0 hits; ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral of the Verdier trace class of a correspondence equals the trace of its induced endomorphism in the derived category of finite coefficient modules",
+   "results": "8 hits: LinearMap.trace_eq_contract and its basis/application variants, trace_comp_cycle and LieModule weight-space trace lemmas. These are ordinary module trace calculations, not Verdier trace classes or integration on fixed schemes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category of constructible sheaves, integrate a correspondence trace class over a proper fixed locus to compute the induced cohomology endomorphism trace",
+   "results": "8 hits: LieModule trace/weight-space identities, LinearMap trace cyclicity and restriction identities, and CategoryTheory.Sheaf.H/cohomologyPresheafFunctor. Read Trace.lean:281-289 and SheafCohomology/Basic.lean:57-76; these are module trace identities or definitions of ordinary sheaf cohomology, with no cohomological-correspondence or fixed-locus integral formula.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"cohomology\"",
+   "results": "0 hits; no error reported.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.?locus|local.?term|cohomolog.*correspond|lefschetz.?trace",
+   "results": "2 printed hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean:127 and Mathlib/Algebra/Homology/LocalCohomology.lean:71. Read both: their comments use corresponding for a homotopy-category morphism or a local-cohomology diagram, and neither states a trace formula.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2350,
+ "blueprint_uses": [
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-trf-global-operator",
+  "def-trf-local-term",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "lem-trf-global-operator-perfect",
+  "lem-trf-integration-component-sum",
+  "thm-trf-fixed-point-localization"
+ ],
+ "uses_not_cited": [
+  "def-trf-admissibility",
+  "def-trf-categorical-trace",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-local",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, $A=A_{E,n}$, $s=\\Spec k$, and let $X$ be a\nproper finite-type scheme.\nLet $c=(c_1,c_2):C\\to X\\times_sX$ be an\nadmissible\ncohomological correspondence with\n$c_2$ proper and with\nfixed scheme\n$F=\\operatorname{Fix}(c)$ proper over $s$ and with finitely many\nopen-and-closed components. Let $K\\in D^b_{ctf}(X,A)$. Then\n\n$$\n\\operatorname{tr}_A\\bigl(T_c(u)\\mid R\\Gamma_c(X,K)\\bigr)\n=\n\\sum_{\\beta\\in\\pi_0(F)}\n\\operatorname{LT}_\\beta(u)\n\\quad\\text{in }A,\n$$\n\nwhere $T_c(u)$ is the\nglobal operator of\n[def-trf-global-operator],\n$\\operatorname{tr}_A$ the\ncategorical trace, and the\n$\\operatorname{LT}_\\beta(u)$ are the\nlocal terms. Equivalently, the\ncategorical trace of the global operator equals the sum of the local\nterms over the fixed points.",
+  "proof": [
+   {
+    "text": "The categorical trace on the left is defined because the global\noperator $T_c(u)$ of [def-trf-global-operator] is a morphism of\n$D^b_{\\mathrm{fin}}(A)$, hence an endomorphism of a perfect complex,\nby [lem-trf-global-operator-perfect]. With this, the\nlocalization theorem [thm-trf-fixed-point-localization] gives\n\n$$\n\\operatorname{tr}_A(T_c(u)\\mid R\\Gamma_c(X,K))\n=\\int_F\\operatorname{Tr}_c(u).\n$$",
+    "uses": [
+     "def-trf-global-operator",
+     "lem-trf-global-operator-perfect",
+     "thm-trf-fixed-point-localization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The component integration formula\n[lem-trf-integration-component-sum] (applicable since each component\n$\\beta$, being closed in the proper $F$, is proper over $s$) rewrites\nthe right side as\n\n$$\n\\sum_{\\beta\\in\\pi_0(F)}\n\\int_\\beta\\bigl(\\operatorname{Tr}_c(u)|_\\beta\\bigr).\n$$",
+    "uses": [
+     "lem-trf-integration-component-sum"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Each summand is $\\operatorname{LT}_\\beta(u)$ by\n[def-trf-local-term], which proves the comparison.",
+    "uses": [
+     "def-trf-local-term"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-lefschetz-verdier",
+  "worker": "stage1",
+  "summary": "Q100 checked the current main-20261015 statement/proof and every used DAG statement; reused the localization, component-integration and local-term route with no new nodes. Added the missing local-term statement dependency and the existing closed-subscheme properness leaf. Introduced u explicitly and corrected the false identification of arbitrary fixed components with fixed points, with the diagonal of P^1 as counterexample in report.md. No exact sorry-free Lean attachment exists; the two relevant Lean comparison/decomposition theorems contain sorry. All Mathlib searches were run through msearch.py and logged.",
+  "blueprint": {
+   "steps": [
+    {
+     "step": 1,
+     "place": "first paragraph: perfectness and fixed-point localization"
+    },
+    {
+     "step": 2,
+     "place": "second paragraph: proper clopen components and component integration"
+    },
+    {
+     "step": 3,
+     "place": "last paragraph: local-term definition"
+    }
+   ],
+   "realizes": "The three paragraphs of the current theorem proof; the item applies the decomposition unit to its trace class and uses the separately stated proper-global comparison. It is not the statement node of sk-p-local, so its unit realization fields are untouched.",
+   "same_as_search": "tools/blueprint_refs.py search 'Lefschetz', 'trace comparison', 'component integration', and 'closed immersions are proper', plus whole-DAG statement search. Other trace formulas impose Frobenius or coefficient specializations; the proper-compatibility theorem has a different conclusion. No other blueprint node states this full formula."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-trf-global-operator-perfect",
+    "why": "Existing generic perfectness lemma ensures the operator has a categorical trace. The decomposition unit addresses integration of a section and does not assert compact-support perfectness; this is the first paragraph of the item's blueprint proof."
+   },
+   {
+    "node": "thm-trf-fixed-point-localization",
+    "why": "Existing proper-global comparison supplies trace = integral as a black box before applying the local-decomposition unit. That unit does not identify the global operator with a trace class; this is expressly the item's first blueprint paragraph."
+   }
+  ],
+  "second_reading": {
+   "group": "Q100",
+   "date": "2026-10-17",
+   "result": "Checked all three steps and all nine cited statements against the current blueprint; no mathematical step changed. Corrected the source pointer to main-20261015/order 2694, expanded citation quotes to retain hypotheses and definitions, and independently ran three differently phrased Mathlib searches. No new nodes or leaves."
+  }
+ },
+ "tool_uses": [
+  "lem-trf-global-operator-perfect",
+  "thm-trf-fixed-point-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-8366b77a0",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-8366b77a0 (reviewer sub-agent of L); spot-checked: I read the item in full, its nine cited statements, the main-20261015 statement (order 2694) and its .proof.md, and the master text (order 2350). The delivery has no new nodes and nothing needed fixing. The statement keeps the source's displayed formula and every hypothesis. Naming u explicitly only spells out data already in def-trf-correspondence. The replaced sentence 'sum over the fixed points' is a correct source-error fix: I checked the counterexample of the diagonal on P^1_k, where F = P^1 is a single positive-dimensional component. The target is not weakened. Step 1: the hypotheses of lem-trf-global-operator-perfect and thm-trf-fixed-point-localization match the item exactly. tr_A is taken on Perf(A) as def-trf-categorical-trace defines it, so there is no substitute coefficient category, and no base change occurs. def-trf-trace-class gives the section A_F->omega_F. Step 2: def-trf-fixed-scheme gives the clopen decomposition, and lem-weil-pbc-closed-immersion-proper(c) (a mathlib leaf) makes each component proper. The 'in particular' clause of lem-trf-integration-component-sum applies to Fix(c), with the same restriction composite as def-trf-local-term; empty F gives 0. Step 3 is the definition of LT_beta(u), a genuinely elementary substitution. There is no cycle: the only citers are imported nodes. I accept both declared tool_uses: they are exactly what the item's blueprint proof cites in its first paragraph, sk-p-local cannot give trace = integral, and no unit step is replaced. B10: the slopmaster2 declarations trace_globalOperator_eq_integral_traceClass (ProperPushforward.lean:325-333) and integral_eq_sum_localTerm (Pairing.lean:437-448) both end in sorry, so nothing can be attached. A grep of the DAG for duplicates found none, so same_as = []. The only SGA source is SGA 5, which is permitted. One inaccuracy in the report: the second reader says top-level source was moved to main-20261015/2694, but the file still points to master/2350. source is maintainer-owned, so unchanged is the right outcome, and I flag it for the maintainer."
+ }
 }

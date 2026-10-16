@@ -3,38 +3,163 @@
  "blueprint": {
   "is": "lem-kun-derived-tensor-t-est",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Connectivity of the derived tensor product",
- "statement": "Let $A,B\\in D(T_{\\Et},\\Lambda)$. If $\\mathcal H^i(A)=0$ for $i<a$\nand $\\mathcal H^i(B)=0$ for $i<b$, then\n$\\mathcal H^i(A\\kunotimes{\\Lambda}B)=0$ for $i<a+b$\n(standard homological algebra: the Kunneth spectral sequence of the\nderived tensor product).",
+ "statement": "Let $T$ be a scheme, with small etale site $T_{\\Et}$ [def-weil-pbc-etale-site], let $\\Lambda$ be a commutative ring, and let $\\Lambda_T$ be its constant sheaf of rings [def-kun-constant-sheaf]. Work in the derived category $D(T_{\\Et},\\Lambda)$ of sheaves of $\\Lambda_T$-modules [def-weil-pbc-derived-categories], with derived tensor product [def-kun-derived-tensor]. Let $A,B\\in D(T_{\\Et},\\Lambda)$ and $a,b\\in\\mathbf Z$. Assume that $A$ has tor amplitude in $[a,\\infty)$ [def-kun-tor-amplitude], meaning that $\\mathcal H^i(A\\kunotimes{\\Lambda}\\mathcal M)=0$ for every sheaf $\\mathcal M$ of $\\Lambda_T$-modules placed in degree zero and every $i<a$. If $\\mathcal H^i(B)=0$ for every $i<b$, then\n$$\n\\mathcal H^i(A\\kunotimes{\\Lambda}B)=0\\qquad(i<a+b).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md",
   "place": "node lem-kun-derived-tensor-t-est, order 1728"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-etale-site",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "Represent $B$ by a K-flat complex $Q$, so that\n$A\\otimes^{\\mathbf L}_\\Lambda B=A\\otimes_\\Lambda Q$ by\n[def-kun-derived-tensor]. The standard Tor spectral sequence of\nthe derived tensor product has\n\n$$\nE^2_{p,q}=\\bigoplus_{q_1+q_2=q}\n\\operatorname{Tor}^{\\Lambda}_{p}\\bigl(\\mathcal H^{q_1}(A),\n\\mathcal H^{q_2}(Q)\\bigr)\n\\Longrightarrow\n\\mathcal H^{p+q}(A\\otimes_\\Lambda Q)\n$$\n\n(this is basic homological algebra: the filtration of the total complex\nof a double complex). If $\\mathcal H^i(A)=0$ for $i<a$ and\n$\\mathcal H^i(B)=0$ for $i<b$, then $q_1\\ge a$ and $q_2\\ge b$\nfor every nonzero term, so $q=q_1+q_2\\ge a+b$ and $p\\ge0$; hence\n$E^2_{p,q}=0$ whenever $p+q<a+b$, and the abutment vanishes in\nthose degrees.",
+   "text": "Apply [lem-kun-0f1m] to $A$ with its assumed tor-amplitude bound $[a,\\infty)$. It gives a representing cochain complex $P^\\bullet$ of $\\Lambda_T$-modules that is K-flat, has flat terms, and satisfies $P^p=0$ for $p<a$. Only the model assertion is needed, not the additional assertion about pullbacks. This is exactly where the tor-amplitude hypothesis, absent from the imported statement, is used.",
+   "uses": [
+    "lem-kun-0f1m"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), implication (1) implies (2)"
+   }
+  },
+  {
+   "text": "Choose a representing complex $C^\\bullet$ for $B$ using [def-weil-pbc-derived-categories] and form $L^\\bullet=\\tau_{\\ge b}C^\\bullet$ as in [def-kun-truncations]. Explicitly, $L^q=0$ for $q<b$, $L^b=\\operatorname{coker}(d_C^{b-1})$, and $L^q=C^q$ for $q>b$. The quotient map $C^\\bullet\\to L^\\bullet$ induces the identity on $\\ker(d_C^b)/\\operatorname{im}(d_C^{b-1})$ in degree $b$; in degree $b+1$ its incoming image is still $\\operatorname{im}(d_C^b)$, and all higher differentials are unchanged. Thus it induces isomorphisms on cohomology in degrees at least $b$. Below $b$, the source cohomology is zero by hypothesis and the target terms are zero. The map is therefore a quasi-isomorphism, hence becomes an isomorphism in the localization defining the derived category. Consequently $L^\\bullet$ represents $B$ and is supported in degrees at least $b$. No flatness or K-flatness of $L^\\bullet$ is asserted or needed.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (section-truncations), cochain canonical lower truncation and its cohomology"
+   }
+  },
+  {
+   "text": "Use $P^\\bullet$ and $L^\\bullet$ as the representing complexes of $A$ and $B$. In [def-kun-derived-tensor] the K-flat replacement of the first representing complex can now be the identity $P^\\bullet\\to P^\\bullet$. Its defining formula therefore computes $A\\kunotimes{\\Lambda}B$ as $Q(P^\\bullet\\otimes_\\Lambda L^\\bullet)$, where $Q$ is localization. This computation requires K-flatness only of the first factor, already supplied in step 1.",
    "uses": [
     "def-kun-derived-tensor"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), K-flat model construction immediately preceding the definition"
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], the degree $i$ term of $P^\\bullet\\otimes_\\Lambda L^\\bullet$ is $\\bigoplus_{p+q=i}P^p\\otimes_{\\Lambda_T}L^q$. If $i<a+b$ and $p+q=i$, the simultaneous inequalities $p\\ge a$ and $q\\ge b$ are impossible. Thus either $P^p=0$ or $L^q=0$, so each tensor summand is zero and their direct sum is zero. It follows that this total complex has zero terms, and hence zero cohomology, in every degree below $a+b$. The cohomology of its image under $Q$ is the cohomology of this representing complex by [def-weil-pbc-derived-categories]. Combined with step 3 this proves the required vanishing. The argument uses actual termwise support and involves no spectral-sequence convergence claim.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z (definition-associated-simple-complex), direct-sum totalization formula, applied to tensor complexes as in Tag 06YM"
+   }
   }
  ],
  "proof_deps": [
-  "def-kun-derived-tensor"
+  "lem-kun-0f1m",
+  "def-weil-pbc-derived-categories",
+  "def-kun-truncations",
+  "def-kun-derived-tensor",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-derived-tensor-t-est.md",
+  "place": "Corrected lower-connectivity statement: replace the false imported Tor-spectral-sequence argument by K-flat lower support (Stacks 0F1M), good truncation (0118), and the defining total tensor (06YU, 012Z). This is the estimate needed in Stacks 0F1J (lemma-punctual-base-change-upgrade), first reduction paragraph."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isLE_tensor|isGE_tensor|KFlat|derivedTensor|HasDerivedMonoidalCategory",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two objects in the derived category of sheaves have cohomology vanishing above a and b, their derived tensor product has cohomology vanishing above a plus b",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of two bounded above complexes is bounded above by the sum of their bounds",
+   "results": "8 hits: HomologicalComplex.tensorObj; HomologicalComplex.tensorHom; TensorProduct.edist_tmul_le; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; SSet.instHasDimensionLTTensorObjHAddNat; SSet.hasDimensionLE_prod; BddAbove.range_mul; BddAbove.mul",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|[Ii]sStrictlyGE.*tensor|tensor.*[Ii]sStrictlyGE|tensor.*[Ii]sGE",
+   "results": "No hits. (Mathlib/Algebra)",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\"",
+   "results": "12 hits: String.toRawSubstring; String.toRawSubstring'; Functor; EStateM.dummyRestore; MonadFunctorT; monadFunctorRefl; MonadFunctor; Applicative.toFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a bounded below derived object with an object of Tor amplitude bounded below adds the lower cohomology bounds",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor; CategoryTheory.Tor'",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If A has Tor amplitude in degrees greater than or equal to a and B has no cohomology below b then A derived tensor B has no cohomology below a plus b",
+   "results": "8 hits: CategoryTheory.Tor'; DerivedCategory.isZero_of_isGE; CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.Tor; DerivedCategory.isZero_of_isLE; DerivedCategory.IsGE; CategoryTheory.Triangulated.TStructure.le_shift; CategoryTheory.Triangulated.TStructure.isGE_shift_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE|isGE_Q_obj_iff|tensorObj",
+   "results": "12 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/Monoidal.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"tensor\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex supported in degrees at least a tensored with a complex with cohomology supported in degrees at least b has total cohomology supported in degrees at least a+b",
+   "results": "8 hits: DerivedCategory.isLE_iff; DerivedCategory.isZero_of_isGE; DerivedCategory.isGE_iff; DerivedCategory.isZero_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CochainComplex.isLE_iff",
+   "date": "2026-10-17",
+   "verdict": "no match for the corrected item: ordinary tensor, cohomological support and projective-object Tor do not state the lower Tor-amplitude tensor estimate for sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +185,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-derived-tensor-t-est",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported lower bound from cohomological connectivity alone is false, even for finite coefficients. Corrected the first-factor hypothesis to tor amplitude in [a,infinity), which is available in the intended Stacks 0F1J flat-tail argument. Replaced the wrongly indexed Tor spectral sequence by four steps using existing K-flat model and truncation nodes; no new nodes. Full counterexample, source comparison, downstream implication, search results and citation audit are in report.md.",
+  "blueprint": "Realizes the K-flat-model opening and final lower-bound conclusion of the master blueprint proof. The intermediate Tor spectral sequence with abutment degree p+q is false in cohomological indexing: Tor_p contributes in degree -p. Its replacement is the lower Tor-amplitude model of Stacks 0F1M, good truncation of the other factor and the direct-sum support calculation. The main-20261015 statement repeats the same error; the replacement stays within the ordinary Kunneth unit and its Stacks 0F1J reduction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-9343e592a",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-9343e592a (reviewer sub-agent of L); spot-checked: Read the item in full, all 8 cited node statements, the citer lem-kun-0f1j (statement and all 4 steps), the unit record, the master and main-20261015 blueprint texts (statement and proof identical in both), and Stacks 0F1M (sites-cohomology l.12472) and 0F1J (etale-cohomology proof l.20736-20756). The imported statement is false; I checked the counterexample myself: over Z/4, Z/2 derived-tensor Z/2 has H^{-k}=Z/2 for every k>=0. The blueprint proof also grades Tor_p in degree +p instead of -p (E7). The report names the change under its own source-error heading. The corrected hypothesis (A has tor amplitude in [a,inf)) is what 0F1J provides for its tail E''=sigma_{>=N+1}E. That tail is K-flat (kernel of a termwise-split map onto a bounded flat complex), supported in degrees >=N+1, and stable under pullback by 0F1M. The new hypothesis implies the old one on A by testing with Lambda_T. The item is not a target and not its unit's statement. Steps: (1) lem-kun-0f1m gives a K-flat complex of flat modules with P^p=0 for p<a, on the same unit, with no cycle. (2) The quotient onto the canonical truncation tau_{>=b} is a quasi-isomorphism; I re-checked the kernel/cokernel calculation. (3) The derived tensor definition allows the identity K-flat model for the first factor. (4) In the total tensor complex every summand in degree <a+b is zero, so no spectral sequence is needed. All three elementary markings are justified, and proof_deps equals the union of uses. There are no new nodes. The duplicate search found only lem-kun-integral-derived-tensor-bounded-torsion (Z coefficients, bound r<a+b-1), which is a different statement. The coefficient category is ordinary Lambda_T-module sheaves on the small etale site, matching the citer. No SGA source, no tool_uses, no fixes. The maintainer should record the statement correction in HUMAN.md and the ledger. The future split of lem-kun-0f1j must justify the tor-amplitude hypothesis for p^{-1}E''."
+ }
 }

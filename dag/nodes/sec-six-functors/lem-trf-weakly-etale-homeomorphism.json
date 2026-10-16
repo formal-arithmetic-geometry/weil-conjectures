@@ -1,98 +1,312 @@
 {
-  "id": "lem-trf-weakly-etale-homeomorphism",
-  "blueprint": {
-    "is": "lem-trf-weakly-etale-homeomorphism",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "A weakly etale universal homeomorphism is an isomorphism",
-  "statement": "Let $f:V\\to W$ be a\nweakly etale morphism\nand a universal homeomorphism.\nThen $f$ is an isomorphism.\n(Source: [Stacks, Tag 0F6V](https://stacks.math.columbia.edu/tag/0F6V).)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-trf-weakly-etale-homeomorphism.md",
-    "place": "node lem-trf-weakly-etale-homeomorphism, order 2074",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F6V"
-      }
-    ],
-    "note": [
-      "*Recorded in advance* from chapter *The trace formula* of the source."
-    ]
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "By [def-weil-scheme-morphism-properties], $f$ is integral,\nsurjective and universally injective, and both $f$ and its diagonal\nare flat. The diagonal is a closed immersion, since an integral map is\nseparated; it is surjective on underlying points by universal\ninjectivity. A flat surjective closed immersion is an isomorphism.\nIndeed, on affines its ring map is $R\\to R/I$, where $I$ is a nil\nideal and $R/I$ is flat. Tensoring the injection $(x)\\to R$ with\n$R/I$, for $x\\in I$, gives $(x)/I(x)=0$; hence $x=ax$ for some\n$a\\in I$. Since $a$ is nilpotent, $1-a$ is a unit and $x=0$.\nThus $I=0$.",
-      "uses": [
-        "def-weil-scheme-morphism-properties"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The diagonal of $f$ is therefore an isomorphism, so $f$ is a\nmonomorphism. On an affine open of $W$, integrality makes its\ninverse image affine. The resulting ring map $R\\to B$ is faithfully\nflat and multiplication $B\\otimes_R B\\to B$ is an isomorphism.\nThe faithfully flat equalizer\n$R\\to B\\rightrightarrows B\\otimes_R B$ identifies $R$ with all of\n$B$, because the two arrows both become the identity under\nmultiplication. Hence $R\\to B$ is an isomorphism. These affine\nidentifications prove the assertion.",
-      "uses": [],
-      "elementary": null
-    }
+ "id": "lem-trf-weakly-etale-homeomorphism",
+ "blueprint": {
+  "is": "lem-trf-weakly-etale-homeomorphism",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A weakly etale universal homeomorphism is an isomorphism",
+ "statement": "Let $f:V\\to W$ be a\nweakly etale morphism\nand a universal homeomorphism.\nThen $f$ is an isomorphism.\n(Source: [Stacks, Tag 0F6V](https://stacks.math.columbia.edu/tag/0F6V).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-trf-weakly-etale-homeomorphism.md",
+  "place": "node lem-trf-weakly-etale-homeomorphism, order 2074",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F6V"
+   }
   ],
-  "proof_deps": [
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-trf-weakly-etale-homeomorphism.md",
-    "place": "## Proof"
+  "note": [
+   "*Recorded in advance* from chapter *The trace formula* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=V\\times_WV$ and let $\\delta:V\\to P$ be the diagonal. By the definition of weakly etale, both $f$ and $\\delta$ are flat. Every base change of $f$ is a homeomorphism, hence injective, so $f$ is universally injective by definition; taking the identity base change also shows that $f$ is surjective.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6V, lemma-weakly-etale-universal-homeomorphism; definition Tag 094P, definition-weakly-etale"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2074,
-  "blueprint_uses": [
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
-      "where": "proof"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "The homeomorphism underlying $f$ has image all of $W$, a closed subset, so [lem-trf-closed-embedding-affine] makes $f$ affine. Clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes $f$ separated and quasi-compact. By the definition of separated, $\\delta$ is a closed immersion. By the equivalence in [def-weil-radicial-morphism], universal injectivity of $f$ makes $\\delta$ surjective.",
+   "uses": [
+    "lem-trf-closed-embedding-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6V, first two sentences of the proof; Morphisms Tags 04DE (lemma-homeomorphism-affine), 01S7 (lemma-affine-separated), 01S4 (lemma-universally-injective)"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:V\\to W$ be a\nweakly etale morphism\nand a universal homeomorphism.\nThen $f$ is an isomorphism.",
-    "proof": [
-      {
-        "text": "By [def-weil-scheme-morphism-properties], $f$ is integral,\nsurjective and universally injective, and both $f$ and its diagonal\nare flat. The diagonal is a closed immersion, since an integral map is\nseparated; it is surjective on underlying points by universal\ninjectivity. A flat surjective closed immersion is an isomorphism.\nIndeed, on affines its ring map is $R\\to R/I$, where $I$ is a nil\nideal and $R/I$ is flat. Tensoring the injection $(x)\\to R$ with\n$R/I$, for $x\\in I$, gives $(x)/I(x)=0$; hence $x=ax$ for some\n$a\\in I$. Since $a$ is nilpotent, $1-a$ is a unit and $x=0$.\nThus $I=0$.",
-        "uses": [
-          "def-weil-scheme-morphism-properties"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The diagonal of $f$ is therefore an isomorphism, so $f$ is a\nmonomorphism. On an affine open of $W$, integrality makes its\ninverse image affine. The resulting ring map $R\\to B$ is faithfully\nflat and multiplication $B\\otimes_R B\\to B$ is an isomorphism.\nThe faithfully flat equalizer\n$R\\to B\\rightrightarrows B\\otimes_R B$ identifies $R$ with all of\n$B$, because the two arrows both become the identity under\nmultiplication. Hence $R\\to B$ is an isomorphism. These affine\nidentifications prove the assertion.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The closed immersion $\\delta$ is affine by clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc], and hence quasi-compact by clause (3) of [lem-weil-pbc-affine-morphism-permanence]. Thus $\\delta$ is flat, surjective and quasi-compact. It is also a monomorphism: if $a,b:T\\to V$ satisfy $\\delta a=\\delta b$, composing with the first projection $P\\to V$ gives $a=b$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S7, lemma-affine-separated; affine property of closed immersions; elementary diagonal identity from the fibre product"
+   }
+  },
+  {
+   "text": "Here is the elementary pullback argument used twice below. For any monomorphism $g:A\\to B$ (meaning that $ga=gb$ implies $a=b$ for all scheme morphisms $a,b:T\\to A$), let $q_1,q_2:A\\times_BA\\to A$ be the projections. The equality $gq_1=gq_2$ and monicity give $q_1=q_2$. The diagonal $d:A\\to A\\times_BA$ satisfies $q_1d=1_A$ and $dq_1=1_{A\\times_BA}$, the latter because both sides have the same two projections. Thus both $q_1$ and $q_2=q_1$ are isomorphisms. The second projection $q_2:A\\times_BA\\to A$ is the base change of $g$ along itself, with the second copy of $A$ as the new base.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L3, lemma-monomorphism: the categorical fibre-product argument, written out"
+   }
+  },
+  {
+   "text": "Apply step 4 to the monomorphism $\\delta$. Its base change along itself is an isomorphism. Apply [lem-weil-pbc-fpqc-descend-isomorphism] with $h=\\varphi=\\delta$: step 3 verifies that this covering morphism is flat, surjective and quasi-compact, and step 4 verifies that the pulled-back morphism is an isomorphism. Therefore $\\delta$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L4, lemma-descending-property-isomorphism; Tag 06NC, lemma-flat-surjective-quasi-compact-monomorphism-isomorphism, applied to the diagonal"
+   }
+  },
+  {
+   "text": "The isomorphism $\\delta$ makes $f$ a monomorphism, as follows directly from the fibre product: if $a,b:T\\to V$ satisfy $fa=fb$, their pairing $c=(a,b):T\\to P$ factors as $\\delta(\\delta^{-1}c)$. Projecting this equality to the first and second factors gives $a=\\delta^{-1}c=b$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L3, lemma-monomorphism, the converse implication written out"
+   }
+  },
+  {
+   "text": "Apply step 4 again, now to $f$, to see that the base change of $f$ along itself is an isomorphism. By steps 1 and 2, $f$ is flat, surjective and quasi-compact. Apply [lem-weil-pbc-fpqc-descend-isomorphism] with $h=\\varphi=f$. It follows that $f$ is an isomorphism, as claimed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NC, lemma-flat-surjective-quasi-compact-monomorphism-isomorphism; Tag 02L4, lemma-descending-property-isomorphism"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-weakly-etale-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-radicial-morphism",
+  "def-weil-surjective-morphism",
+  "lem-trf-closed-embedding-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-descend-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F6V, lemma-weakly-etale-universal-homeomorphism; flat surjective closed immersion proved using the existing fpqc descent node (02L4) and the explicit monomorphism calculation of 06NC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale morphism of schemes which is a universal homeomorphism is an isomorphism",
+   "results": "AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; RingHom.Etale.respectsIso; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.isIso_iff_isIso_stalkMap",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Ww]eakly|[Ww]eakly.*[Hh]omeomorphism|isIso.*[Uu]niversalHomeomorphism",
+   "results": "No hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly etale universal homeomorphism of schemes is an isomorphism",
+   "results": "AlgebraicGeometry.Scheme.homeoOfIso; AlgebraicGeometry.Scheme.coe_homeoOfIso_symm; AlgebraicGeometry.Scheme.coe_homeoOfIso; AlgebraicGeometry.Scheme.homeoOfIso_apply; CategoryTheory.Iso.schemeIsoToHomeo; AlgebraicGeometry.Scheme.Hom.isIso_base; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Hom.homeomorph_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeaklyEtale, IsUniversalHomeomorphism",
+   "results": "No hits; loogle: unknown identifier 'WeaklyEtale'",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniversalHomeomorphism|WeaklyEtale|isIso_of.*[Ff]lat",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean; searched Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat surjective quasi compact monomorphism of schemes is an isomorphism; a flat surjective closed immersion is an isomorphism",
+   "results": "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective; AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective; AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'; AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective; AlgebraicGeometry.isIso_iff_isOpenImmersion_and_epi_base; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omeomorph|[Uu]niversal[Hh]omeo|IsAffineHom|IsSeparated",
+   "results": "No hits; searched Mathlib/AlgebraicGeometry/Morphisms/UniversalHomeomorph.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omeomorph|[Hh]omeo.*[Aa]ffine|[Aa]ffine.*[Hh]omeo|instIsSeparated|[Qq]uasiCompact",
+   "results": "58; 59; searched Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omeomorph|[Cc]losed[Ee]mbedding",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; searched Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom_of_isInducing",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary affine-criterion Mathlib leaf used in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat quasi compact surjective monomorphism of schemes is an isomorphism",
+   "results": "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective; AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective; AlgebraicGeometry.isIso_iff_isOpenImmersion_and_epi_base; AlgebraicGeometry.quasiCompact_of_isIso; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; AlgebraicGeometry.IsOpenImmersion.isIso",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isAffineHom_of_isInducing",
+   "results": "AlgebraicGeometry.isAffineHom_of_isInducing",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary affine-criterion Mathlib leaf used in the proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homeomorphism onto a closed subset of a scheme is an affine morphism",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.isAffineHom_of_isInducing; AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme; AlgebraicGeometry.IsAffineHom.mk; AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary affine-criterion Mathlib leaf used in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono",
+   "results": "AlgebraicGeometry.Flat.isIso_of_surjective_of_mono",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes whose underlying continuous map is a closed embedding is affine",
+   "results": "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsClosedImmersion.hasAffineProperty; AlgebraicGeometry.Scheme.Hom.isClosedEmbedding; AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding; AlgebraicGeometry.isAffineHom_of_isInducing; AlgebraicGeometry.IsClosedImmersion.base_closed; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom; AlgebraicGeometry.IsClosedImmersion",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary affine-criterion Mathlib leaf used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.isIso_of_surjective_of_mono",
+   "results": "25; 57; searched Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; auxiliary results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2074,
+ "blueprint_uses": [
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
+   "where": "proof"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:V\\to W$ be a\nweakly etale morphism\nand a universal homeomorphism.\nThen $f$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "By [def-weil-scheme-morphism-properties], $f$ is integral,\nsurjective and universally injective, and both $f$ and its diagonal\nare flat. The diagonal is a closed immersion, since an integral map is\nseparated; it is surjective on underlying points by universal\ninjectivity. A flat surjective closed immersion is an isomorphism.\nIndeed, on affines its ring map is $R\\to R/I$, where $I$ is a nil\nideal and $R/I$ is flat. Tensoring the injection $(x)\\to R$ with\n$R/I$, for $x\\in I$, gives $(x)/I(x)=0$; hence $x=ax$ for some\n$a\\in I$. Since $a$ is nilpotent, $1-a$ is a unit and $x=0$.\nThus $I=0$.",
+    "uses": [
+     "def-weil-scheme-morphism-properties"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The diagonal of $f$ is therefore an isomorphism, so $f$ is a\nmonomorphism. On an affine open of $W$, integrality makes its\ninverse image affine. The resulting ring map $R\\to B$ is faithfully\nflat and multiplication $B\\otimes_R B\\to B$ is an isomorphism.\nThe faithfully flat equalizer\n$R\\to B\\rightrightarrows B\\otimes_R B$ identifies $R$ with all of\n$B$, because the two arrows both become the identity under\nmultiplication. Hence $R\\to B$ is an isomorphism. These affine\nidentifications prove the assertion.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-weakly-etale-homeomorphism",
+  "worker": "stage1",
+  "summary": "No project declaration states the item. Kept its statement, supplied the specific definition dependencies, and realized the diagonal-then-descent proof. Reused the radicial equivalence and affine/closed-immersion permanence leaves, and the existing general fpqc descent leaf rather than creating a duplicate flat-monomorphism lemma. The only new node is the Mathlib leaf 04DE. Wrote both categorical monomorphism calculations out as elementary steps.",
+  "blueprint": "Current blueprint_update proof, paragraph 1: flatness, surjective closed diagonal and its invertibility, realized by steps 1-5. Paragraph 2: monicity and faithfully flat descent, realized by steps 6-7. The affine consequence of the homeomorphism (04DE) suffices in place of the unnecessary integrality detour; the existing fpqc-descent theorem encapsulates the affine equalizer argument."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NB-3be5c67a7",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-3be5c67a7 (reviewer sub-agent of L); spot-checked: I read all of it in full. The item statement is the same as the main-20261015 blueprint and Stacks 0F6V (more-morphisms.tex:19190) and is not weakened. Every cited node is a Mathlib leaf, and I read each statement: weakly-etale (WeaklyEtale.lean:44-46), universal-homeomorphism, radicial with the 01S4 equivalence (2)<=>(4), surjective, affine-permanence (3), the closed-immersion clause (b), separated in def-weil-proper-morphism, fibre product, and fpqc-descend-isomorphism (FlatDescent.lean:92-94, Stacks 02L4). Steps 1-7 are correct. Steps 1, 4 and 6 really are elementary (01L3 written out). Step 5 applies descent with h=phi=delta, and its hypotheses come from steps 2-3. Step 7 is exactly the proof of 06NC (descent.tex:6382). This replaces 0F6V's citation of characterize-flat-closed-immersions and the blueprint's nil-ideal calculation; that is valid below the unit level, and both blueprint paragraphs are realized. The new leaf lem-trf-closed-embedding-affine is Stacks 04DE (morphisms.tex:11338), and Mathlib's isAffineHom_of_isInducing (Affine.lean:243-248, @[stacks 04DE]) specializes to it in one line. It passes B1-B7, is not a restatement of a clause of the item, and has no duplicate: an rg search for 04DE, the declaration, and homeomorphism-affine or closed-subset wording finds only these files, and def-weil-closed-immersion requires surjectivity on sheaves. No existing node states 06NC either. Edge cases checked: empty schemes, Spec k -> Spec k[eps] (not flat), a purely inseparable field extension (diagonal not flat), and a non-surjective open immersion. There are no off-route statements, no tool_uses, no SGA, and no target or coefficient issues. No fixes."
+ }
 }

@@ -1,180 +1,335 @@
 {
-  "id": "lem-kun-0f1n",
-  "blueprint": {
-    "is": "lem-kun-0f1n",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Base change for pushforward tensored with an arbitrary complex",
-  "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes of finite type over $K$ with\n$X'=X\\times_{\\Spec(K)}S'$ and $Y=X'\\times_{S'}T$. The canonical\nmap\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nis an isomorphism for all $E\\in D(X_{\\Et},\\kunZn)$ and\n$F\\in D(T_{\\Et},\\kunZn)$. (*Source:* Stacks Project, Tag\n[0F1N](https://stacks.math.columbia.edu/tag/0F1N).)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
-    "place": "node lem-kun-0f1n, order 1779",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F1N"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "We reduce this to [lem-kun-0f1j] using that our functors\ncommute with direct sums. Recall that the derived tensor product\ncommutes with direct sums and that (derived) pullback commutes with\ndirect sums ([lem-kun-derived-tensor-direct-sums],\n[def-kun-derived-tensor]); recall that $Rh_*$ and $Rg_*$\ncommute with direct sums: since $h$ and $g$ are quasi-compact\nquasi-separated morphisms of finite type schemes over $K$,\n[lem-kun-0f10](1) gives\n$\\kuncd(h),\\kuncd(g)<\\infty$, and then\n[lem-kun-0f11](1) applies.",
-      "uses": [
-        "lem-kun-0f1j",
-        "lem-kun-derived-tensor-direct-sums",
-        "def-kun-derived-tensor",
-        "lem-kun-0f10",
-        "lem-kun-0f11"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "To finish the proof we argue as follows. First we write\n$E=\\operatorname{hocolim}_N\\tau_{\\le N}E$\n([lem-kun-hocolim-truncations]). Since our functors commute\nwith direct sums, they commute with homotopy colimits\n([lem-kun-functor-preserves-hocolim]). Hence it suffices to\nprove the lemma for $E$ bounded above. Similarly for $F$ we may\nassume $F$ is bounded above.",
-      "uses": [
-        "lem-kun-hocolim-truncations",
-        "lem-kun-functor-preserves-hocolim"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Choose a bounded-above complex representing $E$ and, using\n[lem-kun-bounded-flat-replacement], replace it by a\nbounded-above complex $\\mathcal E^\\bullet$ of flat sheaves of\n$\\kunZn$-modules. Then\n$\\mathcal E^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal E^\\bullet$\n(stupid truncations, [def-kun-truncations]); the filtered\ncolimit of complexes is a homotopy colimit\n([lem-kun-complex-colimit-hocolim]), and our functors commute\nwith homotopy colimits, so we may assume\n$\\mathcal E^\\bullet$ is a bounded complex of flat sheaves. In\nparticular it belongs to $\\Dplus(X_{\\Et},\\kunZn)$ and has tor\namplitude in $[a,\\infty)$, where $a$ is its lowest nonzero degree\n([lem-kun-flat-bounded-tor-amplitude] and\n[def-kun-tor-amplitude]).",
-      "uses": [
-        "lem-kun-bounded-flat-replacement",
-        "def-kun-truncations",
-        "lem-kun-complex-colimit-hocolim",
-        "lem-kun-flat-bounded-tor-amplitude",
-        "def-kun-tor-amplitude"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For $F$, choose merely a bounded-above complex\n$\\mathcal F^\\bullet$ representing it ([def-weil-pbc-derived-categories]);\nno flatness hypothesis on $F$ is needed. Writing\n$\\mathcal F^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal F^\\bullet$\nand using [def-kun-truncations] and\n[lem-kun-complex-colimit-hocolim] in the same way reduces to a\nbounded complex, hence to an object of\n$\\Dplus(T_{\\Et},\\kunZn)$. We have therefore reached exactly the\nhypotheses of [lem-kun-0f1j], which proves the canonical map\nis an isomorphism.",
-      "uses": [
-        "def-weil-pbc-derived-categories",
-        "def-kun-truncations",
-        "lem-kun-complex-colimit-hocolim",
-        "lem-kun-0f1j"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-kun-0f1j",
-    "lem-kun-derived-tensor-direct-sums",
-    "def-kun-derived-tensor",
-    "lem-kun-0f10",
-    "lem-kun-0f11",
-    "lem-kun-hocolim-truncations",
-    "lem-kun-functor-preserves-hocolim",
-    "lem-kun-bounded-flat-replacement",
-    "def-kun-truncations",
-    "lem-kun-complex-colimit-hocolim",
-    "lem-kun-flat-bounded-tor-amplitude",
-    "def-kun-tor-amplitude",
-    "def-weil-pbc-derived-categories"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1779,
-  "blueprint_uses": [
-    "def-kun-derived-tensor",
-    "def-kun-tor-amplitude",
-    "def-kun-truncations",
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image",
+ "id": "lem-kun-0f1n",
+ "blueprint": {
+  "is": "lem-kun-0f1n",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change for pushforward tensored with an arbitrary complex",
+ "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes of finite type over $K$ with\n$X'=X\\times_{\\Spec(K)}S'$ and $Y=X'\\times_{S'}T$. The canonical\nmap\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nis an isomorphism for all $E\\in D(X_{\\Et},\\kunZn)$ and\n$F\\in D(T_{\\Et},\\kunZn)$. (*Source:* Stacks Project, Tag\n[0F1N](https://stacks.math.columbia.edu/tag/0F1N).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.md",
+  "place": "node lem-kun-0f1n, order 1779",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1N"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-unbounded-exchange",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\Lambda=\\mathbf Z/n\\mathbf Z$. The finite-type hypotheses imply that $T$ and $Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian (its only ideals are $0$ and the whole ring). Every open subscheme of either source is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Consequently every morphism with either source is quasi-compact: the inverse image of an affine open is such an open subscheme. Apply this both to $g,h$ and to their diagonals (whose sources are again $T,Y$). By the definition of quasi-separatedness this proves that $g$ and $h$ are qcqs, without a separatedness hypothesis. They are $K$-morphisms between finite-type $K$-schemes, so [lem-kun-0f10](1) gives finite relative cohomological dimension for both. Thus [lem-kun-0f11](1) proves that $Rg_*$ and $Rh_*$ preserve set-indexed direct sums on the unbounded $\\Lambda$-module derived categories.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "def-weil-pbc-scheme-conventions",
     "lem-kun-0f10",
-    "lem-kun-0f11",
-    "lem-kun-0f1j",
-    "lem-kun-bounded-flat-replacement",
-    "lem-kun-complex-colimit-hocolim",
-    "lem-kun-derived-tensor-direct-sums",
-    "lem-kun-flat-bounded-tor-amplitude",
-    "lem-kun-functor-preserves-hocolim",
-    "lem-kun-hocolim-truncations"
-  ],
-  "uses_not_cited": [
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-kun-0f11"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes of finite type over $K$ with\n$X'=X\\times_{\\Spec(K)}S'$ and $Y=X'\\times_{S'}T$. The canonical\nmap\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nis an isomorphism for all $E\\in D(X_{\\Et},\\kunZn)$ and\n$F\\in D(T_{\\Et},\\kunZn)$.",
-    "proof": [
-      {
-        "text": "We reduce this to [lem-kun-0f1j] using that our functors\ncommute with direct sums. Recall that the derived tensor product\ncommutes with direct sums and that (derived) pullback commutes with\ndirect sums ([lem-kun-derived-tensor-direct-sums],\n[def-kun-derived-tensor]); recall that $Rh_*$ and $Rg_*$\ncommute with direct sums: since $h$ and $g$ are quasi-compact\nquasi-separated morphisms of finite type schemes over $K$,\n[lem-kun-0f10](1) gives\n$\\kuncd(h),\\kuncd(g)<\\infty$, and then\n[lem-kun-0f11](1) applies.",
-        "uses": [
-          "lem-kun-0f1j",
-          "lem-kun-derived-tensor-direct-sums",
-          "def-kun-derived-tensor",
-          "lem-kun-0f10",
-          "lem-kun-0f11"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "To finish the proof we argue as follows. First we write\n$E=\\operatorname{hocolim}_N\\tau_{\\le N}E$\n([lem-kun-hocolim-truncations]). Since our functors commute\nwith direct sums, they commute with homotopy colimits\n([lem-kun-functor-preserves-hocolim]). Hence it suffices to\nprove the lemma for $E$ bounded above. Similarly for $F$ we may\nassume $F$ is bounded above.",
-        "uses": [
-          "lem-kun-hocolim-truncations",
-          "lem-kun-functor-preserves-hocolim"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Choose a bounded-above complex representing $E$ and, using\n[lem-kun-bounded-flat-replacement], replace it by a\nbounded-above complex $\\mathcal E^\\bullet$ of flat sheaves of\n$\\kunZn$-modules. Then\n$\\mathcal E^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal E^\\bullet$\n(stupid truncations, [def-kun-truncations]); the filtered\ncolimit of complexes is a homotopy colimit\n([lem-kun-complex-colimit-hocolim]), and our functors commute\nwith homotopy colimits, so we may assume\n$\\mathcal E^\\bullet$ is a bounded complex of flat sheaves. In\nparticular it belongs to $\\Dplus(X_{\\Et},\\kunZn)$ and has tor\namplitude in $[a,\\infty)$, where $a$ is its lowest nonzero degree\n([lem-kun-flat-bounded-tor-amplitude] and\n[def-kun-tor-amplitude]).",
-        "uses": [
-          "lem-kun-bounded-flat-replacement",
-          "def-kun-truncations",
-          "lem-kun-complex-colimit-hocolim",
-          "lem-kun-flat-bounded-tor-amplitude",
-          "def-kun-tor-amplitude"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For $F$, choose merely a bounded-above complex\n$\\mathcal F^\\bullet$ representing it ([def-weil-pbc-derived-categories]);\nno flatness hypothesis on $F$ is needed. Writing\n$\\mathcal F^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal F^\\bullet$\nand using [def-kun-truncations] and\n[lem-kun-complex-colimit-hocolim] in the same way reduces to a\nbounded complex, hence to an object of\n$\\Dplus(T_{\\Et},\\kunZn)$. We have therefore reached exactly the\nhypotheses of [lem-kun-0f1j], which proves the canonical map\nis an isomorphism.",
-        "uses": [
-          "def-weil-pbc-derived-categories",
-          "def-kun-truncations",
-          "lem-kun-complex-colimit-hocolim",
-          "lem-kun-0f1j"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For every edge $u$ of the diagram, [prop-weil-pbc-inverse-image-modules-exact] gives an exact additive inverse image on constant-coefficient module sheaves and its adjunction to direct image. On the unbounded derived categories the adjunction $u^{-1}\\dashv Ru_*$ is the one in [def-kun-unbounded-exchange]. Hence $u^{-1}$ preserves direct sums by [lem-weil-pbc-left-adjoint-preserves-colimits], applied to a small discrete indexing category. It is triangulated by [lem-sf-exact-functor-derived-triangulated]; the unbounded K-injective right derived functors $Rg_*,Rh_*$ are triangulated by [lem-pc-right-derived-functor-triangulated]. Derived tensor is triangulated and preserves sums separately by [lem-kun-derived-tensor-triangulated] and [lem-kun-derived-tensor-direct-sums]. Therefore each side of the displayed map is an exact, direct-sum-preserving functor in either $E$ or $F$, with the other fixed. Here sums exist in these derived module categories; [lem-kun-complex-colimit-hocolim] explicitly supplies the coproducts used for the sequential telescopes below.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-kun-derived-tensor-direct-sums",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "Denote the two sides by $A(E,F)$ and $B(E,F)$. Specify the canonical transformation $\\alpha_{E,F}:A(E,F)\\to B(E,F)$ as the $h^{-1}\\dashv Rh_*$ adjoint of\n$$h^{-1}A(E,F)\\xrightarrow{\\sim}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}g^{-1}Rg_*F\\xrightarrow{1\\otimes e^{-1}\\varepsilon_{g,F}}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}F.$$\nThe first arrow uses the inverse of [lem-kun-inverse-image-monoidal] and the inverse-image composition isomorphism for $f'h=ge$ from [def-kun-unbounded-exchange]. All these maps are natural, so taking the adjoint gives a natural transformation separately in $E$ and $F$. It is compatible with the shift structures of Step 2, as the following direct check shows. Inverse-image composition is degreewise and has no signs; on a total tensor complex the comparison $(P[1])\\otimes Q\\to(P\\otimes Q)[1]$ is the identity on each summand, and $P\\otimes(Q[1])\\to(P\\otimes Q)[1]$ multiplies the summand with first-factor degree $i$ by $(-1)^i$. Every map above preserves the degrees of the two tensor factors, so it commutes with these comparisons. A counit is computed on a K-injective representative by the degreewise sheaf counit; using the shifted representative $I[1]$ computes the shifted right derived functor. Thus its square with the shift comparison commutes degree by degree. The same assertion for the unit follows by taking its adjoint, which is the identity; equivalently both composites have the same adjoint under the shifted Hom bijection. The unit--counit formula for the adjoint defining $\\alpha$ now gives the shift equation for $\\alpha$ in either variable. This checks the last triangle square needed below; mere naturality alone would not check it.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "def-kun-unbounded-exchange",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "Here is the telescope argument, applicable to either variable with the other fixed. Let $C_0\\to C_1\\to\\cdots$ have telescope triangle $D\\xrightarrow{1-s}D\\to H\\to D[1]$, where $D=\\bigoplus_N C_N$ and $s\\iota_N=\\iota_{N+1}u_N$ [def-kun-truncations]. Step 2 and [lem-kun-functor-preserves-hocolim] show that both functors take this to a distinguished telescope triangle. If all $\\alpha_{C_N}$ are invertible, naturality at every $\\iota_N$ identifies $\\alpha_D$, under the coproduct comparisons, with $\\bigoplus_N\\alpha_{C_N}$; its inverse is the map induced by the individual inverses. Naturality at $1-s$ and the next arrow, together with the shift equation checked in Step 3, makes $(\\alpha_D,\\alpha_D,\\alpha_H)$ a morphism of these image triangles. Apply [lem-sf-triangle-two-out-of-three] to this original telescope triangle to conclude that $\\alpha_H$ is invertible. In particular this proves invertibility of the actual component at $H$, without choosing a natural or unique cone comparison.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "By [lem-kun-hocolim-truncations], $E\\cong\\operatorname{hocolim}_{N\\ge0}\\tau_{\\le N}E$ and $F\\cong\\operatorname{hocolim}_{M\\ge0}\\tau_{\\le M}F$. The good truncations of [def-kun-truncations] are bounded above. It suffices to prove the assertion for every pair of bounded-above objects: for each $N$, Step 4 applied to the sequence $\\tau_{\\le M}F$ gives the assertion for $(\\tau_{\\le N}E,F)$, and then Step 4 applied to the $E$ sequence gives it for $(E,F)$. For isomorphisms $u:E_0\\xrightarrow{\\sim}E$ and $v:F_0\\xrightarrow{\\sim}F$, naturality gives $\\alpha_{E,F}=B(u,v)\\,\\alpha_{E_0,F_0}\\,A(u,v)^{-1}$. Both outer factors are isomorphisms, so invertibility for the homotopy-colimit objects implies invertibility for the original objects. No common cohomological bound on $E$ and $F$ is used.",
+   "uses": [
+    "lem-kun-hocolim-truncations",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "Now take $E,F$ bounded above. The representative characterization in [def-sbc-standard-tstructure-derived-category] supplies complexes $C^\\bullet,D^\\bullet$ representing them, zero above integers $b,c$, respectively. Apply [lem-kun-bounded-flat-replacement] to $C^\\bullet$, obtaining a quasi-isomorphism $P^\\bullet\\to C^\\bullet$ with $P^i$ flat and $P^i=0$ for $i>b$. Thus $E\\cong QP^\\bullet$ and $F\\cong QD^\\bullet$. It is $E$ that receives the flat replacement, because the Tor-amplitude hypothesis of the bounded lemma is on $E$; no flatness is imposed on $F$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-kun-bounded-flat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "Set $P_N^\\bullet=\\sigma_{\\ge-N}P^\\bullet$ and $D_M^\\bullet=\\sigma_{\\ge-M}D^\\bullet$ for $N,M\\ge0$, with the subcomplex inclusions specified by [def-kun-truncations]. In each fixed degree $i$, these sequences eventually equal $P^i$ and $D^i$ with identity transition maps; their termwise colimits are therefore $P^\\bullet,D^\\bullet$, including their differentials. By [lem-kun-complex-colimit-hocolim] this gives $QP^\\bullet\\cong\\operatorname{hocolim}_N QP_N^\\bullet$ and $QD^\\bullet\\cong\\operatorname{hocolim}_M QD_M^\\bullet$. Each $P_N^\\bullet$ is bounded with flat terms and each $D_M^\\bullet$ is bounded. Step 4, first with $N$ fixed and $M$ varying and then with $N$ varying, reduces the assertion to these pairs of bounded complexes. The construction works even when one truncation is zero.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
+  },
+  {
+   "text": "For each such pair, $QP_N^\\bullet$ has Tor amplitude in $[-N,\\max(b,-N)]$ by [lem-kun-flat-bounded-tor-amplitude]. In particular it has Tor amplitude in $[-N,\\infty)$ by the vanishing definition in [def-kun-tor-amplitude]. Both bounded complexes define objects of $D^+$ by [def-weil-pbc-derived-categories]. Step 1 verified the qcqs hypothesis on $g$, and the original hypotheses give the two cartesian squares and the invertibility of $n$ in $K$. We may therefore apply [lem-kun-0f1j] to $QP_N^\\bullet,QD_M^\\bullet$. Its canonical map is exactly the mate in Step 3 (the counit and the square and tensor comparisons agree), so that component is invertible. Steps 7, 6 and 5, using Step 4 at each reduction, prove invertibility of the canonical map for every original $E,F$.",
+   "uses": [
+    "lem-kun-flat-bounded-tor-amplitude",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-derived-categories",
+    "lem-kun-0f1j"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-inverse-image-monoidal",
+  "def-kun-derived-tensor",
+  "def-kun-truncations",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-kun-hocolim-truncations",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-kun-bounded-flat-replacement",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-derived-categories",
+  "lem-kun-0f1j"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1N, label lemma-punctual-base-change-upgrade-unbounded, proof (with the flat replacement on E as required by Tag 0F1J and the current blueprint_update)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology base change tensor product for unbounded complexes over a field",
+   "results": "Hits: IsBaseChange.iff_lift_unique, TensorProduct.isBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, IsBaseChange, IsBaseChange.tensorEquiv, Algebra.Etale.baseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, HomologicalComplex.tensorObj",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|punctual.base.change|baseChange.*[Tt]ensor",
+   "results": "Hits: Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean, Mathlib/LinearAlgebra/Span/TensorProduct.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Free.lean, Mathlib/LinearAlgebra/TensorProduct/Free.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"baseChange\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite type schemes over a field, etale derived pushforward base change tensored with an arbitrary unbounded complex is an isomorphism",
+   "results": "Hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instTensorProduct, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStar|derivedTensor|[Kk]unneth",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula for derived etale sheaves with torsion coefficients without boundedness assumptions",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.etaleLocus_eq_compl_support, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.comp, Algebra.Extension.tensorCotangentSpace, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern algebraic etaleness, ordinary tensor products, or unrelated algebraic base change; none states the unbounded etale cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|baseChange",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern stability of coverings under base change, not the cohomological comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and base change with derived tensor of sheaves of modules on small etale sites, unbounded derived categories",
+   "results": "Hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: declarations concern presentations and ordinary pullback of free module sheaves; none states a derived etale tensor/base-change comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1779,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-kun-truncations",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "lem-kun-0f1j",
+  "lem-kun-bounded-flat-replacement",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-flat-bounded-tor-amplitude",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-kun-hocolim-truncations"
+ ],
+ "uses_not_cited": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $K$ be a field and $n\\ge1$ an integer invertible in $K$.\nConsider a commutative diagram\n\n$$\n\\begin{array}{ccccc}\nX&\\xleftarrow{\\;p\\;}&X'&\\xleftarrow{\\;h\\;}&Y\\\\\n\\Big\\downarrow{}&&\\Big\\downarrow{\\scriptstyle f'}&&\\Big\\downarrow{\\scriptstyle e}\\\\\n\\Spec(K)&\\longleftarrow&S'&\\xleftarrow{\\;g\\;}&T\n\\end{array}\n$$\n\nof schemes of finite type over $K$ with\n$X'=X\\times_{\\Spec(K)}S'$ and $Y=X'\\times_{S'}T$. The canonical\nmap\n\n$$\np^{-1}E\\kunotimes{\\kunZn}(f')^{-1}Rg_*F\n\\longrightarrow\nRh_*\\bigl(h^{-1}p^{-1}E\\kunotimes{\\kunZn}e^{-1}F\\bigr)\n$$\n\nis an isomorphism for all $E\\in D(X_{\\Et},\\kunZn)$ and\n$F\\in D(T_{\\Et},\\kunZn)$.",
+  "proof": [
+   {
+    "text": "We reduce this to [lem-kun-0f1j] using that our functors\ncommute with direct sums. Recall that the derived tensor product\ncommutes with direct sums and that (derived) pullback commutes with\ndirect sums ([lem-kun-derived-tensor-direct-sums],\n[def-kun-derived-tensor]); recall that $Rh_*$ and $Rg_*$\ncommute with direct sums: since $h$ and $g$ are quasi-compact\nquasi-separated morphisms of finite type schemes over $K$,\n[lem-kun-0f10](1) gives\n$\\kuncd(h),\\kuncd(g)<\\infty$, and then\n[lem-kun-0f11](1) applies.",
+    "uses": [
+     "lem-kun-0f1j",
+     "lem-kun-derived-tensor-direct-sums",
+     "def-kun-derived-tensor",
+     "lem-kun-0f10",
+     "lem-kun-0f11"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "To finish the proof we argue as follows. First we write\n$E=\\operatorname{hocolim}_N\\tau_{\\le N}E$\n([lem-kun-hocolim-truncations]). Since our functors commute\nwith direct sums, they commute with homotopy colimits\n([lem-kun-functor-preserves-hocolim]). Hence it suffices to\nprove the lemma for $E$ bounded above. Similarly for $F$ we may\nassume $F$ is bounded above.",
+    "uses": [
+     "lem-kun-hocolim-truncations",
+     "lem-kun-functor-preserves-hocolim"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Choose a bounded-above complex representing $E$ and, using\n[lem-kun-bounded-flat-replacement], replace it by a\nbounded-above complex $\\mathcal E^\\bullet$ of flat sheaves of\n$\\kunZn$-modules. Then\n$\\mathcal E^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal E^\\bullet$\n(stupid truncations, [def-kun-truncations]); the filtered\ncolimit of complexes is a homotopy colimit\n([lem-kun-complex-colimit-hocolim]), and our functors commute\nwith homotopy colimits, so we may assume\n$\\mathcal E^\\bullet$ is a bounded complex of flat sheaves. In\nparticular it belongs to $\\Dplus(X_{\\Et},\\kunZn)$ and has tor\namplitude in $[a,\\infty)$, where $a$ is its lowest nonzero degree\n([lem-kun-flat-bounded-tor-amplitude] and\n[def-kun-tor-amplitude]).",
+    "uses": [
+     "lem-kun-bounded-flat-replacement",
+     "def-kun-truncations",
+     "lem-kun-complex-colimit-hocolim",
+     "lem-kun-flat-bounded-tor-amplitude",
+     "def-kun-tor-amplitude"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $F$, choose merely a bounded-above complex\n$\\mathcal F^\\bullet$ representing it ([def-weil-pbc-derived-categories]);\nno flatness hypothesis on $F$ is needed. Writing\n$\\mathcal F^\\bullet=\\varinjlim_N\\sigma_{\\ge-N}\\mathcal F^\\bullet$\nand using [def-kun-truncations] and\n[lem-kun-complex-colimit-hocolim] in the same way reduces to a\nbounded complex, hence to an object of\n$\\Dplus(T_{\\Et},\\kunZn)$. We have therefore reached exactly the\nhypotheses of [lem-kun-0f1j], which proves the canonical map\nis an isomorphism.",
+    "uses": [
+     "def-weil-pbc-derived-categories",
+     "def-kun-truncations",
+     "lem-kun-complex-colimit-hocolim",
+     "lem-kun-0f1j"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-0f1n",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint truncation route into eight steps, verifying qcqs and finite relative cohomological dimension, inverse-image and tensor exactness and sums, the canonical mate and its shift compatibility, and invertibility on telescope triangles. Flat replacement remains on E, as the bounded lemma requires. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "The current blueprint_update proof paragraph 1 is realized in Steps 1--3; paragraph 2 (good truncation telescopes) in Steps 4--5; paragraph 3 (bounded-above flat replacement of E and stupid truncations) in Steps 6--7; paragraph 4 (bounded F and application of 0F1J) in Steps 7--8. The unit statement and its cited Kunneth route are retained. The source Stacks 0F1N proof swaps the flat replacement to F; the current blueprint corrects this to E and this split follows that correction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-29cd42026",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-29cd42026 (reviewer sub-agent of L); spot-checked: Read the whole item: its statement, all 8 steps, the blueprint_update proof, the unit record sk-prop-sf-kunneth-ordinary and the statements of all 25 cited nodes. Also read Stacks etale-cohomology.tex 0F1N (lemma-punctual-base-change-upgrade-unbounded, l.20879) and 0F1J (lemma-punctual-base-change-upgrade, l.20706). The statement matches 0F1N and the main-20261015 blueprint_update hypothesis by hypothesis: Z/n constant-coefficient module categories, unbounded E and F, and the arrow defined as the h-adjoint of the counit composite. It is not weakened. The source error is real. 0F1J needs a lower Tor bound on E, but the Stacks proof flat-resolves F instead. I checked the counterexample: over Z/4, Tor_i(Z/2,Z/2)=Z/2 for every i. The split follows the corrected blueprint and puts the flat replacement on E. Step by step: Step 1 gets qcqs for g and h (and their diagonals) from Noetherian sources with no separatedness, then applies 0F10(1) to K-morphisms and 0F11(1) for sums. Step 2 gets exactness and sums from the cited statements (module inverse-image exactness clause 3, the unbounded adjunction, the tensor lemmas, the complex-colimit coproducts). Step 3 is an explicit shift-sign check, which I accept as elementary. Step 4 applies two-out-of-three to the original telescope triangle; the shift hypothesis is supplied by Step 3, and no uniqueness of cone comparisons is used. Step 5 recovers F, then E, from good truncations, transferring by explicit conjugation. Step 6 uses the representative characterization in the t-structure definition and then flat replacement of E for any commutative Lambda. Step 7 uses stupid-truncation subcomplexes and the complex-colimit hocolim, which needs no boundedness. Step 8 uses the Tor amplitude interval [-N,max(b,-N)] and then 0F1J; every hypothesis of 0F1J holds. The bounded-below and unbounded counits agree on D+. On structure: proof_deps equals the union of the step uses, there is no cycle and no SGA citation. The off-unit dependencies are Mathlib leaves, a definition, or slopmaster2-closed nodes (prop-weil-pbc-inverse-image-modules-exact, lem-pc-right-derived-functor-triangulated, lem-sf-triangle-two-out-of-three), so no tool_uses entry is needed and none was accepted. There are no new nodes. The other 0F1N hits (lem-trf-ordinary-kunneth, sk-lem-sf-kunneth-star) are different exterior-product statements, so same_as=[] is correct. Edge cases checked: n=1, zero objects, empty schemes, zero truncations, b<-N, non-separated T, composite n. No fixes were written."
+ }
 }

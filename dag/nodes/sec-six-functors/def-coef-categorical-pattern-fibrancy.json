@@ -20,7 +20,7 @@
  },
  "kind": "definition",
  "title": "Categorical patterns and their fibered objects (fully scaled quasicategory case)",
- "statement": "Use quasicategories, mapping spaces, coherent diagrams, limits, nerves and universes from [def-cbc-enhanced-diagrams-cones], inner fibrations and cocartesian edges from [def-coef-infinity-fibrations], marked simplicial sets from [lem-coef-marked-point-cartesian-model], and the classification of cocartesian fibrations from [lem-coef-cocartesian-straightening]. A categorical pattern in this statement consists of a small quasicategory $C$, a set $S$ of its edges containing all degenerate edges, and a small family $\\{p_\\alpha:K_\\alpha^{\\triangleleft}\\to C\\}$, where each $K_\\alpha$ is a small quasicategory and every edge of each cone maps into $S$. Here $K^{\\triangleleft}=\\Delta^0\\star K$ is the simplicial left cone, with new initial vertex $*$; its simplices are those of $K$ and the simplices obtained by adjoining that initial vertex. All $2$-simplices of $C$ are included in the scaling; no partial scaling is being used. Write $\\bar C=(C,S)$ and $\\mathsf M_{\\mathfrak P}=\\mathrm{sSet}^+_{/\\bar C}$, whose maps lie over $C$ and preserve marked edges.\n\nFor $\\mathfrak P=(C,S,\\{p_\\alpha\\})$, a marked object $(X,T)\\to\\bar C$ is $\\mathfrak P$-fibered when: (i) $q:X\\to C$ is an inner fibration; (ii) for every edge $a:c\\to d$ in $S$ and every $x\\in X_c$, there is a $q$-cocartesian edge $x\\to y$ lying over $a$, and $T$ consists exactly of the $q$-cocartesian edges lying over $S$; (iii) for every $\\alpha$, the pullback $X_\\alpha\\to K_\\alpha^{\\triangleleft}$ is a cocartesian fibration whose classifying functor to $\\mathrm{Cat}_\\infty$ is a limit diagram; and (iv) for every cocartesian section $s:K_\\alpha^{\\triangleleft}\\to X_\\alpha$, its composite $\\bar s:K_\\alpha^{\\triangleleft}\\to X$ is a $q$-limit diagram. Explicitly, the latter means that for every $x\\in X$ the natural mapping-space square is a homotopy pullback:\n$$\\begin{matrix}\\operatorname{Map}_X(x,\\bar s(*))&\\longrightarrow&\\displaystyle\\lim_{k\\in K_\\alpha}\\operatorname{Map}_X(x,\\bar s(k))\\\\ \\downarrow&&\\downarrow\\\\ \\operatorname{Map}_C(qx,p_\\alpha(*))&\\longrightarrow&\\displaystyle\\lim_{k\\in K_\\alpha}\\operatorname{Map}_C(qx,p_\\alpha(k)).\\end{matrix}$$\nEmpty $K_\\alpha$ are allowed; an empty limit is the terminal object.",
+ "statement": "Fix nested universes $\\mathcal U\\in\\mathcal U'$ as in [def-cbc-enhanced-diagrams-cones]. Use its simplicial sets, quasicategories, coherent diagrams and limits; inner fibrations and cocartesian edges from [def-coef-infinity-fibrations]; marked simplicial sets and marking-preserving maps from [lem-coef-marked-point-cartesian-model]; simplicial joins, left cones and relative limit diagrams from [def-coef-infinity-relative-cone]; and classifying functors of cocartesian fibrations from [lem-coef-cocartesian-straightening]. Simplicial sets defining a pattern or an object over it are $\\mathcal U$-small; $\\mathrm{Cat}_\\infty$ is the infinity category of $\\mathcal U$-small quasicategories, formed in $\\mathcal U'$.\n\nA categorical pattern here is a triple $\\mathfrak P=(C,S,\\{p_\\alpha\\}_{\\alpha\\in A})$, where $C$ is a small quasicategory, $S\\subseteq C_1$ contains every degenerate edge, $A$ is a small set, and $p_\\alpha:K_\\alpha^{\\triangleleft}\\to C$ is a simplicial map for each $\\alpha\\in A$, with $K_\\alpha$ a small quasicategory and every edge of $K_\\alpha^{\\triangleleft}$ mapping into $S$. The left cone is $K^{\\triangleleft}=\\Delta^0\\star K$, with new initial vertex $*$. All $2$-simplices of $C$ are scaled. Write $\\bar C=(C,S)$ and $\\mathsf M_{\\mathfrak P}=\\mathrm{sSet}^+_{/\\bar C}$. An object is a marked simplicial set $(X,T)$ with a marking-preserving map $q:(X,T)\\to(C,S)$; a morphism is a simplicial map over $C$ preserving marked edges, with the usual identities and composition.\n\nSuch an object is $\\mathfrak P$-fibered when all four conditions hold:\n(i) $q:X\\to C$ is an inner fibration.\n(ii) For each edge $a:c\\to d$ in $S$ and vertex $x\\in X_c$, there is a $q$-cocartesian edge with source $x$ over $a$; $T$ is exactly the set of $q$-cocartesian edges whose images lie in $S$.\n(iii) For every $\\alpha\\in A$, put $X_\\alpha=X\\times_C K_\\alpha^{\\triangleleft}$, formed degreewise, and let $q_\\alpha:X_\\alpha\\to K_\\alpha^{\\triangleleft}$ be its projection. This is required to be a cocartesian fibration whose classifying functor $K_\\alpha^{\\triangleleft}\\to\\mathrm{Cat}_\\infty$ is a limit diagram, that is, a $p$-limit diagram in the sense of [def-coef-infinity-relative-cone] for the unique functor $p:\\mathrm{Cat}_\\infty\\to\\Delta^0$. Here classifying functor has the meaning in [lem-coef-cocartesian-straightening], so its values are the fibers and its arrows are cocartesian transport.\n(iv) For every $\\alpha\\in A$ and every cocartesian section $s:K_\\alpha^{\\triangleleft}\\to X_\\alpha$ of $q_\\alpha$, its composite $\\bar s:K_\\alpha^{\\triangleleft}\\to X$ is a $q$-limit diagram in the sense of [def-coef-infinity-relative-cone]. A cocartesian section means $q_\\alpha s=\\mathrm{id}$ and $s$ carries every edge to a $q_\\alpha$-cocartesian edge.\n\nEmpty $A$ and empty $K_\\alpha$ are permitted. An empty limit means a terminal object; it is not omitted from conditions (iii) and (iv).",
  "source": {
   "document": "https://arxiv.org/html/1312.3178",
   "place": "Definitions 3.2.1 and 3.2.3, Remark 3.2.2; relative mapping-space formulation in Remark 3.1.4. Compare Higher Algebra, Definition B.0.19 with all 2-simplices scaled. Read online, not archived in literature/. No Stacks tag treats categorical patterns."
@@ -29,6 +29,7 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-marked-point-cartesian-model",
+  "def-coef-infinity-relative-cone",
   "lem-coef-cocartesian-straightening"
  ],
  "proof": [],
@@ -83,10 +84,59 @@
    "results": "{\"t\": \"2026-10-16T21:56:25Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|CategoricalPattern|[Pp]attern[Ff]iber|[Pp]attern[Ff]ibr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: no marked-pattern declarations in the source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "CategoricalPattern|[Pp]attern.?[Ff]ibr|[Pp]attern.?[Ff]iber|MarkedSSet",
+   "results": "{\"t\": \"2026-10-16T22:37:02Z\", \"tool\": \"grep\", \"query\": \"CategoricalPattern|[Pp]attern.?[Ff]ibr|[Pp]attern.?[Ff]iber|MarkedSSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\" \"InnerFibration\"",
+   "results": "{\"t\": \"2026-10-16T22:37:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\" \\\"InnerFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"SSet\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"InnerFibration\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle reported a parse/type error (Function expected at \"SSet\"); this is not evidence of absence. Repeated successfully with SSet.InnerFibration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A marked simplicial set over an infinity category is fibrant for a categorical pattern when cocartesian transport satisfies specified limit cone conditions",
+   "results": "{\"t\": \"2026-10-16T22:37:03Z\", \"tool\": \"leansearch\", \"query\": \"A marked simplicial set over an infinity category is fibrant for a categorical pattern when cocartesian transport satisfies specified limit cone conditions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.FibrantObject\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.fibrantObjects\", \"HomotopicalAlgebra.isFibrant_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.mk\"], \"digest\": \"89b581c39d05b274\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical patterns on marked quasicategories and pattern fibered objects defined by cocartesian lifts and relative limit cones",
+   "results": "{\"t\": \"2026-10-16T22:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical patterns on marked quasicategories and pattern fibered objects defined by cocartesian lifts and relative limit cones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"SSet.quasicategory_of_filler\", \"CategoryTheory.Functor.IsCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"d3fc9e9908b652c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory equipped with marked edges and a family of left cones determines inner fibrations with cocartesian lifts and classifying functors that are limit diagrams",
+   "results": "{\"t\": \"2026-10-16T22:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory equipped with marked edges and a family of left cones determines inner fibrations with cocartesian lifts and classifying functors that are limit diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.bicategory\", \"SSet.Truncated.Quasicategory₂\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"0166b5fbe781bfe4\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration",
+   "results": "{\"t\": \"2026-10-16T22:37:19Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.InnerFibration.mem\", \"SSet.InnerFibration.mk\", \"SSet.innerFibration_iff\", \"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"46de20d3f879988e\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|marked|pattern",
+   "results": "{\"t\": \"2026-10-16T22:37:19Z\", \"tool\": \"grep\", \"query\": \"cocartesian|marked|pattern\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: source inspection of Quasicategory/Basic.lean:40-59 and InnerFibration.lean:61-99 gives quasicategories and inner fibrations only; FiberedCategory/Cocartesian.lean:46-74 concerns ordinary categories; SimplicialSet/CategoryWithFibrations.lean:44-79 uses all horns; ModelCategory/IsCofibrant.lean:78-87 defines general fibrant objects; StrictBicategory.lean:48-61 gives Cat-enrichment; SimplicialSet/Coskeletal.lean:61-79 concerns strict Segal simplicial sets. None defines marked categorical patterns with the four specified conditions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-operadic-model-structures",
@@ -106,5 +156,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-coef-categorical-pattern-fibrancy",
+  "worker": "stage1",
+  "summary": "Checked all four defining clauses against Gepner-Haugseng Definitions 3.2.1 and 3.2.3, Remark 3.2.2 and Theorem 3.2.5(2). Reused the existing relative-cone node for the join and relative-limit notion, replacing the redundant pointwise mapping-space expansion by that shared definition. Made sizes, maps in the marked slice and cocartesian sections explicit. No mathematical condition was dropped or added, and no new node is needed. The item is a definition, so proof and proof_deps remain empty. Repeated the project-source, whole-blueprint, DAG and Mathlib searches; no project attachment or full Mathlib match was found. Maintainer reader (2026-10-17): the phrase 'limit diagram' in (iii) is pinned to the p-limit notion of def-coef-infinity-relative-cone over the point, since def-cbc-enhanced-diagrams-cones defines limiting cones only as transformations.",
+  "blueprint": "Supports the finite-coefficient mapping-complex adjunction of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (displayed R Hom adjunction before R lim), via the marked operadic model construction. This is foundational terminology for that route, not a replacement proof of the unit. The inherited blueprint ancestry is retained; searches for categorical pattern, cocartesian and relative limit found no blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Uses its explicit definition of marked simplicial sets and marking-preserving maps; no model-structure conclusion is used."
+   },
+   {
+    "node": "lem-coef-cocartesian-straightening",
+    "why": "Uses its classifying functor convention, fiber values and cocartesian transport to state condition (iii); not an alternate adjunction proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-cocartesian-straightening"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NN-cd6b4d57c",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-cd6b4d57c (reviewer sub-agent of L); spot-checked: Read the item in full and checked it online against Gepner–Haugseng arXiv:1312.3178v4 §3.2 (no local archive exists). Def 3.2.1: an ∞-category C, a marking containing the degenerate edges, and diagrams of ∞-categories p_α:K_α^◁→C sending edges into S. Rem 3.2.2: all 2-simplices scaled. Def 3.2.3(1)-(4): inner fibration, full π-cocartesian lifts over S, the classifying functor of X×_C K_α^◁ is a limit diagram in Cat_∞, and cocartesian sections are π-limit diagrams. Thm 3.2.5(2): T is exactly the cocartesian edges over S. The item's (i)-(iv) match these clause by clause. Restricting K_α to quasicategories is the source's own convention. Read all five cited statements. def-coef-infinity-fibrations gives inner fibrations, cocartesian edges and cocartesian fibrations; X and X_α are quasicategories, so these apply. lem-coef-marked-point-cartesian-model is used only for its opening definition of marked simplicial sets and marking-preserving maps; it is in the same unit. def-coef-infinity-relative-cone gives the join, K^◁ and the p-limit diagram used in (iv). lem-coef-cocartesian-straightening gives the classifying functor up to a contractible space of choices, so (iii) is a well-defined property, not a choice from an existence theorem. Small cases checked: A empty gives GH Ex. 3.2.11 coCart; K_α empty gives a terminal fiber and q-terminal objects; C empty is trivial; S equal to the degenerate edges gives the flat case. There are no new nodes. rg over dag/nodes finds no duplicate pattern definition, and a dependency cycle check is clean. The unit and blueprint ancestry are unchanged, no SGA is cited, and the Mathlib searches cover all three kinds. The two declared tool_uses are same-unit uses of definitional content only; accepted. One fix: in (iii), 'limit diagram' had no defining node for K^◁-shaped diagrams, since def-cbc defines only limiting cones as transformations. It is now 'a p-limit diagram in the sense of [def-coef-infinity-relative-cone] for p:Cat_∞→Δ^0'. This is equivalent to the absolute limit condition because the base mapping spaces are contractible, so the meaning is unchanged; the dependency was already cited. Corrected file: fixes/dag/nodes/sec-six-functors/def-coef-categorical-pattern-fibrancy.json.; 1 file(s) fixed by the reviewer"
  }
 }

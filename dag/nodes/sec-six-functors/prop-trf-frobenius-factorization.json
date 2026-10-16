@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-trf-frobenius-factorization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Factorization of the absolute Frobenius",
- "statement": "For every $m\\in\\mathbf Z_{\\geq1}$, the absolute $q^m$-power Frobenius\n$\\operatorname{Fr}^{(q^m)}_X:X\\to X$, $a\\otimes b\\mapsto a^{q^m}\\otimes b^{q^m}$, factors as\n\n$$\n\\operatorname{Fr}^{(q^m)}_X=g_\\sigma{}^m\\Phi^m=\\Phi^mg_\\sigma{}^m.\n$$",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], so $p$ is prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and $k$ is a fixed algebraic closure of $k_0$. Let $X_0$ be a finite-type $k_0$-scheme and put $X=X_0\\times_{k_0}k$. As in [def-trf-scheme-frobenius], let $\\sigma:k\\to k$ be $b\\mapsto b^q$, put $g_\\sigma=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\sigma)$, and let $\\Phi=\\Phi_0\\times\\operatorname{id}_k$, where $\\Phi_0$ is the absolute $q$-power Frobenius of $X_0$. For every integer $m\\geq1$, the absolute $q^m$-power Frobenius [def-weil-absolute-frobenius-scheme]\n$\\operatorname{Fr}^{(q^m)}_X:X\\to X$, whose affine incarnation on the base change of any affine chart $U_0=\\operatorname{Spec}A_0\\subseteq X_0$ is $u\\otimes b\\mapsto u^{q^m}\\otimes b^{q^m}$, factors as an equality of $k_0$-scheme morphisms\n\n$$\n\\operatorname{Fr}^{(q^m)}_X=g_\\sigma^m\\circ\\Phi^m=\\Phi^m\\circ g_\\sigma^m.\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.md",
   "place": "node prop-trf-frobenius-factorization, order 2072",
@@ -15,27 +15,132 @@
    "*Recorded in advance* from chapter *The trace formula* of the source."
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-scheme-frobenius",
+  "def-weil-absolute-frobenius-scheme"
+ ],
  "proof": [
   {
-   "text": "By [def-trf-scheme-frobenius] all three morphisms are $k_0$-maps\nof the geometric fiber whose affine incarnations are the $q^m$-th power\nmap on the $A_0$-factor, the $q^m$-th power map on the $\\bar k$-factor, or their composition, in either order; thus both composites\nequal $\\operatorname{Fr}^{(q^m)}_X$.",
+   "text": "Take the affine charts $U_0=\\operatorname{Spec}A_0$ of $X_0$ and their geometric base changes $U=\\operatorname{Spec}(A_0\\otimes_{k_0}k)$, on which [def-trf-scheme-frobenius] gives the affine incarnations of $\\Phi$ and $g_\\sigma$. These charts cover $X$ and are preserved by both maps: $g_\\sigma$ lies over the identity of $X_0$, while $\\Phi_0$ is identity on the underlying space by [def-weil-absolute-frobenius-scheme]. On $B=A_0\\otimes_{k_0}k$ write their ring maps as $P(u\\otimes b)=u^q\\otimes b$ and $S(u\\otimes b)=u\\otimes b^q$. Induction gives $P^m(u\\otimes b)=u^{q^m}\\otimes b$ and $S^m(u\\otimes b)=u\\otimes b^{q^m}$: for $m=0$ both are identities; composing once more replaces the exponent $q^m$ by $q^m q=q^{m+1}$.",
    "uses": [
+    "def-trf-scheme-frobenius",
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+    "place": "Proof, affine incarnations on the two factors; expanded iteration and chart restriction. Absolute Frobenius is Stacks tag 03SM (varieties.tex, definition-absolute-frobenius)."
+   }
+  },
+  {
+   "text": "On a pure tensor the two ring-map composites satisfy\n$$S^mP^m(u\\otimes b)=u^{q^m}\\otimes b^{q^m}=P^mS^m(u\\otimes b).$$\nThis is also $(u\\otimes b)^{q^m}$, since multiplication in the tensor-product algebra multiplies the two factors. The $q^m=p^{am}$ power map $H$ on $B$ is a ring homomorphism by [def-weil-ring-frobenius]. The formulas for $P,S$ used here are those of [def-trf-scheme-frobenius]. Every tensor is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product] (a scalar multiplying a pure tensor is absorbed in its first factor). Additivity therefore gives, for $t=\\sum_i u_i\\otimes b_i$,\n$$S^mP^m(t)=\\sum_i u_i^{q^m}\\otimes b_i^{q^m}=H(t)=P^mS^m(t).$$\nThus the two composites equal $H$ on the entire ring, including its nilpotent elements.",
+   "uses": [
+    "def-trf-scheme-frobenius",
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+    "place": "Proof, composition in either order; expanded pure-tensor and finite-sum computation. Stacks tag 03SM (varieties.tex, definition-absolute-frobenius) for the power map."
+   }
+  },
+  {
+   "text": "The absolute $q^m$-power Frobenius restricts on $U$ to $\\operatorname{Spec}(H)$ by [def-weil-absolute-frobenius-scheme]. Contravariance and uniqueness in [def-weil-affine-spectrum] turn Step 2 into equality of its restriction with both $g_\\sigma^m\\circ\\Phi^m$ and $\\Phi^m\\circ g_\\sigma^m$ on $U$. This proves the global equality: the underlying continuous maps agree on the covering charts, hence at every point; their maps on structure sheaves then agree locally on those charts, so agree on any open by the uniqueness clause of the sheaf axiom. These are exactly the two data of a scheme morphism in [def-weil-locally-ringed-space-morphism]. The maps are over $k_0$ by their construction in [def-trf-scheme-frobenius], so the same equalities hold as $k_0$-scheme morphisms.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
     "def-trf-scheme-frobenius"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+    "place": "Proof, final equality of morphisms from affine incarnations. Affine uniqueness: Stacks tag 01I1 (schemes.tex, lemma-morphism-into-affine); morphism data: tags 0091 (sheaves.tex, definition-ringed-space) and 01HB (schemes.tex, definition-locally-ringed-space)."
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-scheme-frobenius"
+  "def-trf-scheme-frobenius",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-ring-frobenius",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+  "place": "Complete affine proof, expanded from the sole paragraph of the current blueprint proof; supporting definitions checked against Stacks tags 03SM, 01I1, 0091 and 01HB."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius|Frobenius",
+   "results": "0 hits under AlgebraicGeometry: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.frobenius",
+   "results": "0 hits: none; loogle: unknown identifier 'AlgebraicGeometry.Scheme.frobenius'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute Frobenius of a tensor product is the product of Frobenius on the two factors",
+   "results": "8 hits: LinearMap.frobenius, TensorProduct.AlgebraTensorModule.map_mul, TensorProduct.map_mul, IsTensorProduct.map_mul, CategoryTheory.frobeniusMorphism, Algebra.TensorProduct.tmul_mul_tmul, TensorProduct.map_pow, Algebra.TensorProduct.productMap_apply_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The absolute Frobenius of a scheme obtained by base change from a finite field factors as the commuting product of the base changed Frobenius and the Galois Frobenius",
+   "results": "8 hits: WittVector.IsocrystalHom.frob_equivariant, FiniteField.frobeniusAlgEquiv, RingHom.map_frobeniusEquiv_symm, RingHom.frobenius_comm, WittVector.StandardOneDimIsocrystal.frobenius_apply, MonoidHom.map_frobeniusEquiv_symm, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "iterateFrobenius.*(tensor|tmul)|frobenius.*(tensor|tmul)|(tensor|tmul).*frobenius",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "iterateFrobenius",
+   "results": "12 hits: iterateFrobenius, iterateFrobenius_one, iterateFrobenius_zero, iterateFrobenius_zero_apply, iterateFrobenius_add, iterateFrobenius_one_apply, LinearMap.iterateFrobenius, iterateFrobenius_def",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra over a finite field, on its tensor product with an algebraic closure the two maps a tensor b maps to a power q tensor b and a tensor b maps to a tensor b power q commute and compose to Frobenius",
+   "results": "8 hits: IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar, IsPurelyInseparable.exists_pow_mem_range_tensorProduct, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquiv_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, IsPurelyInseparable.iterateFrobeniusₛₗ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "iterateFrobenius_comm|frobeniusAlgEquiv_apply|map_mul|tmul_mul_tmul",
+   "results": "2 hits under Algebra/CharP/Frobenius.lean: 108, 118",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquiv_apply|coe_frobeniusAlgEquivOfAlgebraic_iterate|tmul_mul_tmul|theorem map_mul|lemma map_mul",
+   "results": "3 hits under FieldTheory/Finite: Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Trace.lean, Mathlib/FieldTheory/Finite/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the commuting factorization of absolute Frobenius on a geometric-fiber scheme"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -67,5 +172,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-frobenius-factorization",
+  "worker": "stage1",
+  "summary": "Made the inherited finite-field setup explicit, supplied the missing statement dependencies, and expanded the affine proof into iteration, computation on arbitrary tensors, and equality of scheme morphisms. Reused existing definition nodes; created no new nodes. No matching finished project declaration or Mathlib result was found.",
+  "blueprint": "All three steps expand the sole paragraph of the current blueprint proof: the two factor maps (step 1), their composites in either order (step 2), and their identification with absolute Frobenius (step 3). The recorded-in-advance item is not the key statement of its container unit; no unit realization is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NC-f30289052",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f30289052 (reviewer sub-agent of L); spot-checked: I read the delivered item, the full report, the current blueprint item and proof (main-20261015, identical to the master text) and the full statements of all 7 cited definition nodes: def-weil-finite-field-fiber, def-trf-scheme-frobenius (blueprint_update identical), def-weil-absolute-frobenius-scheme, def-weil-ring-frobenius, def-weil-pbc-module-tensor-product, def-weil-affine-spectrum and def-weil-locally-ringed-space-morphism. The scope repair binds X, q, Phi and g_sigma through def-trf-scheme-frobenius and keeps m>=1 and both equalities, so the statement is not weakened. sigma is the arithmetic map b->b^q, which is the correct sign; on Spec k_0 the claim is Fr^(q)=Spec(sigma). Fr^(q^m) is the p^(am) iterate of def-weil-absolute-frobenius-scheme, and X has characteristic p because it lies over k. Step 1: the charts U_0 x k are preserved, since pr1.Phi=Phi_0.pr1 with Phi_0 the identity on the space, and pr1.g_sigma=pr1; P is explicit in the definition and S=id(x)sigma; the induction on m has both cases. Step 2: both composites give u^(q^m)(x)b^(q^m) on pure tensors; H is a ring map by the iterate clause of def-weil-ring-frobenius; generation by pure tensors plus additivity extends this to all of B, nilpotents included. Step 3: Fr restricts to Spec(H) on U; contravariance gives Spec(P^m S^m)=g_sigma^m Phi^m, with the composition order checked; agreement on a self-mapping open cover gives equality of scheme morphisms; the maps are over k_0. All steps are elementary instances of the cited statements (C3/C4 ok). Small cases checked: empty X_0, Spec k_0, F_q[t] and F_q[e]/(e^2). There are no new nodes. An rg over the DAG found no duplicate; def-pur-scheme-geometric-frobenius uses the m=1 case consistently. The Mathlib searches cover all three kinds, and Mathlib/AlgebraicGeometry has no Frobenius hits. Every citation is a definition node, so the route is fine; no tool_uses; no SGA use. No fixes were made. Details are in review.md."
+ }
 }

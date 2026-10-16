@@ -1,69 +1,141 @@
 {
-  "id": "def-pur-compact-support-transport",
-  "blueprint": {
-    "is": "def-pur-compact-support-transport",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-compact-support-transport",
+ "blueprint": {
+  "is": "def-pur-compact-support-transport",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Compact-support transport of a Weil datum",
+ "statement": "Work in the purity conventions of [def-pur-conventions], with global finite-field datum $(p,a,q,k_0,k)$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, and coefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, where $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ with $n\\geq1$. Use the small pro-etale coefficient categories and the operation and comparison data on the domains specified in [def-pur-conventions, def-exchange-projection]; in particular, the integral stage uses completed coefficients, and the field stages use rationalization and common finite stages.\n\nFix the geometric-Frobenius datum of [def-pur-scheme-geometric-frobenius]: a separated finite-type morphism $f_0:X_0\\to Y_0$ of finite-type $k_0$-schemes with geometric base change $f:X\\to Y$ smooth of relative dimension $d$, where $X=X_0\\times_{k_0}k$ and $Y=Y_0\\times_{k_0}k$. Write $\\gamma=\\sigma^{-1}$ for geometric Frobenius, where $\\sigma:z\\mapsto z^q$, and $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for $T=X,Y$. Use the first, Cartesian square of that datum, whose horizontal arrows are $g_{X,\\gamma}$ and $g_{Y,\\gamma}$ and whose vertical arrows are $f$.\n\nLet $M\\in D^b_{ctf}(X,\\Lambda)$ carry a strict geometric-Weil datum in the sense of [def-pur-tate-datum], with specified isomorphism $\\varphi_M:Lg_{X,\\gamma}^*M\\xrightarrow{\\sim}M$. Define its compact-support transport to be the composite\n$$\n\\varphi_{f_!M}:Lg_{Y,\\gamma}^*Rf_!M\n\\xrightarrow{\\operatorname{Ex}_!(M)}Rf_!Lg_{X,\\gamma}^*M\n\\xrightarrow{Rf_!(\\varphi_M)}Rf_!M.\n$$\nHere $\\operatorname{Ex}_!(M)$ is the compact-support exchange of [def-exchange-projection] for the first Cartesian square of [def-pur-scheme-geometric-frobenius], taken over the base scheme $S=Y$: then $X$ (via $f$), $Y$ (via the identity) and $Y'=Y$ (via $g_{Y,\\gamma}$) are finite-type $S$-schemes, $f$ and the isomorphism $g_{Y,\\gamma}$ are separated finite-type $S$-morphisms, and $\\ell$ is invertible on $Y$; no $k$-linearity of the semilinear horizontal maps is used. Explicitly, for a chosen compactification $c=(j,p)$ of $f$ and its base change $c'=(j',p')$ along $g_{Y,\\gamma}$, with $\\bar g':\\overline X'\\to\\overline X$, its finite-coefficient component is\n$$\nLg_{Y,\\gamma}^*Rp_*j_!M\n\\xrightarrow{\\operatorname{Ex}^{R}_{*,p}(j_!M)}Rp'_*L\\bar g'^*j_!M\n\\xrightarrow{Rp'_*(\\beta_M)}Rp'_*j'_!Lg_{X,\\gamma}^*M.\n$$\nThe first map is the ambient ringed pro-etale exchange of [def-weil-pbc-ambient-ringed-exchange] and $\\beta_M:L\\bar g'^*j_!M\\xrightarrow{\\sim}j'_!Lg_{X,\\gamma}^*M$ is [lem-cbc-proetale-extension-zero-base-change]. Interpret the source and target via the specified compactification comparison data. At the integral stage use the completed exchange of [def-cbc-completed-exchange-map], and at the field stages its rationalized and common-stage forms, with the supplied comparison data of [def-exchange-projection]. These formulas use only the underlying scheme square.\n\nFor $T=X$ or $Y$ and an object $N$ on $T$ carrying a datum $\\varphi_N:Lg_{T,\\gamma}^*N\\to N$, its scheme-Frobenius form is, by definition,\n$$\nu_N:=\\varphi_N\\circ\\kappa_{T,N}:L\\Phi_T^*N\\longrightarrow N,\n$$\nwhere $\\Phi_T$ is the base-changed $q$-power scheme Frobenius and $\\kappa_{T,N}:L\\Phi_T^*N\\xrightarrow{\\sim}Lg_{T,\\gamma}^*N$ is the comparison of [def-pur-scheme-geometric-frobenius]. In particular this convention applies to $N=M$ and to $N=Rf_!M$ with the transported datum displayed above.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pur-compact-support-transport.md",
+  "place": "node def-pur-compact-support-transport, order 2237"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-pur-tate-datum",
+  "def-exchange-projection",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-cbc-completed-exchange-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriekWeilDatum|WeilDatum|compactSupport.*[Ff]robenius|[Ff]robenius.*compactSupport",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
   },
-  "kind": "definition",
-  "title": "Compact-support transport of a Weil datum",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\ngeometric-Frobenius datum,\nand let $M\\in D^b_{ctf}(X,\\Lambda)$ carry a strict Weil datum\n$\\varphi_M:Lg_{X,\\gamma}^*M\\cong M$. The compact-support transport of the\ndatum is\n\n$$\n\\varphi_{f_!M}:Lg_{Y,\\gamma}^*Rf_!M\n\\xrightarrow{\\ \\operatorname{Ex}_!\\ }\nRf_!Lg_{X,\\gamma}^*M\n\\xrightarrow{\\ Rf_!(\\varphi_M)\\ }Rf_!M,\n$$\n\nthe first arrow being the compact-support base change of\n[def-exchange-projection] for the first Cartesian square of\n[def-pur-scheme-geometric-frobenius]. Its scheme-Frobenius form is\n\n$$\nu_N=\\varphi_N\\circ\\kappa_{T,N}:L\\Phi_T^*N\\longrightarrow N\n$$\n\nfor every object $N$ on $T=X$ or $Y$ carrying a datum, as in\n[def-pur-scheme-geometric-frobenius].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pur-compact-support-transport.md",
-    "place": "node def-pur-compact-support-transport, order 2237"
+  {
+   "tool": "leansearch",
+   "query": "Transport a Weil datum along compact support direct image by the base change exchange isomorphism",
+   "results": "8 hits: IsBaseChange.dual, IsBaseChange.finsuppPow, Module.Dual.baseChange, IsBaseChange.toDual_apply, WeierstrassCurve.baseChange_ΨSq, IsBaseChange.transvection, IsBaseChange.toDualBaseChange, WeierstrassCurve.Projective.baseChange_dblU",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
   },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-exchange-projection",
-    "def-pur-scheme-geometric-frobenius",
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2237,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-exchange-projection",
-    "def-pur-conventions",
-    "def-pur-scheme-geometric-frobenius",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Iso.trans",
+   "results": "12 hits: CategoryTheory.Functor.mapIso_trans, CategoryTheory.eqToIso_map_trans, CategoryTheory.Monoidal.transportStruct_rightUnitor, CategoryTheory.Monoidal.transportStruct_leftUnitor, CategoryTheory.Monoidal.transportStruct_associator, CategoryTheory.CartesianMonoidalCategory.preservesTerminalIso_comp, CategoryTheory.CartesianMonoidalCategory.prodComparisonIso_comp, CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-package",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions]), fix the\ngeometric-Frobenius datum of [def-pur-scheme-geometric-frobenius],\nand let $M\\in D^b_{ctf}(X,\\Lambda)$ carry a strict Weil datum\n$\\varphi_M:Lg_{X,\\gamma}^*M\\cong M$. The compact-support transport of the\ndatum is\n\n$$\n\\varphi_{f_!M}:Lg_{Y,\\gamma}^*Rf_!M\n\\xrightarrow{\\ \\operatorname{Ex}_!\\ }\nRf_!Lg_{X,\\gamma}^*M\n\\xrightarrow{\\ Rf_!(\\varphi_M)\\ }Rf_!M,\n$$\n\nthe first arrow being the compact-support base change of\n[def-exchange-projection] for the first Cartesian square of\n[def-pur-scheme-geometric-frobenius]. Its scheme-Frobenius form is\n\n$$\nu_N=\\varphi_N\\circ\\kappa_{T,N}:L\\Phi_T^*N\\longrightarrow N\n$$\n\nfor every object $N$ on $T=X$ or $Y$ carrying a datum, as in\n[def-pur-scheme-geometric-frobenius].",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "Transport of a strict Weil datum under compactly supported derived pushforward using geometric Frobenius base change and conversion to scheme Frobenius",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, WittVector.IsocrystalHom.mk.inj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, WittVector.IsocrystalEquiv.mk.inj, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, WittVector.IsocrystalEquiv.toLinearEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a Cartesian square and an equivariant sheaf complex, define its equivariance on compactly supported pushforward as the exchange followed by pushforward of the structure morphism",
+   "results": "8 hits: SheafOfModules.pushforwardCongr_symm, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardSections_coe, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|Frobenius.*[Ss]heaf|[Ss]heaf.*Frobenius",
+   "results": "0 hits: none; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapIso|def trans|mapIso_trans",
+   "results": "3 hits: 131, 473, 484; Mathlib subdirectory CategoryTheory/Iso.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDatum\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the two-clause geometric-Weil compact-support transport in the specified pro-etale coefficient categories; generic functor isomorphism composition alone does not supply the operations or Frobenius comparison"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2237,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-exchange-projection",
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions]), fix the\ngeometric-Frobenius datum of [def-pur-scheme-geometric-frobenius],\nand let $M\\in D^b_{ctf}(X,\\Lambda)$ carry a strict Weil datum\n$\\varphi_M:Lg_{X,\\gamma}^*M\\cong M$. The compact-support transport of the\ndatum is\n\n$$\n\\varphi_{f_!M}:Lg_{Y,\\gamma}^*Rf_!M\n\\xrightarrow{\\ \\operatorname{Ex}_!\\ }\nRf_!Lg_{X,\\gamma}^*M\n\\xrightarrow{\\ Rf_!(\\varphi_M)\\ }Rf_!M,\n$$\n\nthe first arrow being the compact-support base change of\n[def-exchange-projection] for the first Cartesian square of\n[def-pur-scheme-geometric-frobenius]. Its scheme-Frobenius form is\n\n$$\nu_N=\\varphi_N\\circ\\kappa_{T,N}:L\\Phi_T^*N\\longrightarrow N\n$$\n\nfor every object $N$ on $T=X$ or $Y$ carrying a datum, as in\n[def-pur-scheme-geometric-frobenius].",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-compact-support-transport",
+  "worker": "stage1",
+  "summary": "Definition split using seven existing nodes and no new nodes. Followed the main-20261015 blueprint_update, repaired the unbound opening, made all coefficient-stage and Frobenius objects explicit, cited the existing strict-datum definition, and removed four unused imported dependencies. Expanded the exchange through the existing ambient exchange, extension-by-zero base change and completed-exchange nodes; the exchange of def-exchange-projection applies to the semilinear square with base S=Y (maintainer review, 2026-10-17). Kept the prescribed compact-support composite and the scheme-Frobenius precomposition, with no proof or preservation assertion inserted into this definition. The finite-etale lowerShriekWeilDatum declaration is only a partial match, not an attachment. Eight genuine Mathlib searches found no exact match.",
+  "blueprint": "main-20261015, def-pur-compact-support-transport, order 2581: opening purity/geometric-Frobenius/strict-datum data; first displayed compact-support composite and identification of its first arrow; final displayed scheme-Frobenius form. The item is itself a blueprint definition, so blueprint.from remains null."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NK-cde58b976",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-cde58b976 (reviewer sub-agent of L); spot-checked: I read the whole item (no new nodes) against the main-20261015 blueprint, order 2581, which matches the node's blueprint_update. Both composites and their order match: phi_{f_!M}=Rf_!(phi_M) o Ex_! and u_N=phi_N o kappa_{T,N}. The binding repair is taken from the current text, all four coefficient stages are kept, and nothing is weakened. I read the full statements of all seven stmt_deps. The arrow directions check out: the ambient exchange mate goes Lg^*Rp_* -> Rp'_*Lgbar'^*; beta (lem-cbc-proetale-extension-zero-base-change) needs no hypothesis on g; def-cbc-completed-exchange-map is the integral component; kappa: LPhi^* -> Lg_gamma^* (prop-trf-scheme-galois-comparison, consistent with Phi=g_gamma o Fr and Fr^* = id). Typing and edge cases (M=0, f=id, d=0, X empty, n=1) are fine. There is no proof, so C and D are vacuous. Duplicate search: def-tw-frobenius-action and def-trf-weil-shriek-pushforward are different objects. The citer thm-pur-weil-equivariance-of-purity-and-trace is consistent with the item. Finding: the report's 'Source error'/STATEMENT-DISPUTED is false. def-exchange-projection applies directly to the semilinear square with base S=Y: X via f, Y via the identity and Y'=Y via the isomorphism g_{Y,gamma} are finite type over Y, both maps are separated finite-type Y-morphisms, and ell is invertible on Y. Do not record it in HUMAN.md. Fix written to fixes/dag/nodes/sec-six-functors/def-pur-compact-support-transport.json: the Ex_! sentence now cites def-exchange-projection with S=Y and lists the checked hypotheses; the stray comma before 'Here' is now a period; the misleading 'not k-morphisms' wording is removed; the split_report summary sentence is corrected. Explicit components and stmt_deps are unchanged. No tool_uses, no SGA.; 1 file(s) fixed by the reviewer"
+ }
 }

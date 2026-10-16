@@ -3,28 +3,103 @@
  "blueprint": {
   "is": "def-trf-karoubi-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Trace on a Karoubi summand",
- "statement": "Fix the global finite-field datum\nand the coefficient\nconventions. In the\ncommon-stage\nalgebraically closed coefficient category of the framework chapter, an object\nof $D^b_c(X,\\Qlb)$ is represented by a finite-stage pair $(E,K_E)$\nwith $E/\\Ql$ finite in $\\Qlb$; the category is idempotent complete,\nso no idempotent appears in the presentation (in the classical\npresentation of the\n$\\Qlb$ coefficient category of\nthe proper-base-change chapter the object was a pair $((E,K_E),e)$ with $e^2=e$ in\nthe common-stage category). The *trace of an endomorphism $v$ on the\nsummand* $e$ of a perfect complex $P$ is the\ncategorical trace\n\n$$\n\\operatorname{tr}_E\\bigl(v\\circ e\\mid P\\bigr),\n$$\n\nwhich depends only on the summand $(eP,ev)$: the decomposition\n$P\\simeq eP\\oplus(1-e)P$ splits $v\\circ e$ as $ev|eP$ on the\nsummand and $0$ on the complement.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] and the coefficient conventions [def-trf-coefficient-conventions]: in particular $\\ell\\neq p$, a fixed algebraic closure $\\Qlb$ of $\\Ql$, a finite extension $E/\\Ql$ contained in $\\Qlb$, and $X=X_0\\times_{k_0}k$ for a separated finite-type $k_0$-scheme $X_0$. The framework coefficient category $\\mathcal C_X=D^b_c(X,\\Qlb)$ of [def-weil-algebraically-closed-coefficients] has objects $(E,K_E)$ at finite coefficient stages and morphisms represented at a common finite stage. Its idempotent completeness is the assertion of [lem-weil-qbar-idempotent-complete]; no extra idempotent is part of an object of $\\mathcal C_X$. If one uses its formal Karoubi envelope [def-weil-karoubi-envelope], an object is $((E,K_E),e)$, where $e$ is an idempotent of $\\mathcal C_X$.\n\nFor the trace construction, let $P\\in\\operatorname{Perf}(E)\\subset D(E)$ be a perfect complex of ordinary $E$-modules [def-pc-perfect-ring-complex], and let $e:P\\to P$ satisfy $e^2=e$. An endomorphism of the Karoubi object $(P,e)$ is represented by a morphism $u:P\\to P$ satisfying $u=e\\circ u\\circ e$, as in [def-weil-karoubi-envelope]. Define its *summand trace* by\n$$\n \\operatorname{Tr}_{E,(P,e)}(u):=\\operatorname{tr}_E(u\\circ e\\mid P)\\in E.\n$$\nHere $\\operatorname{tr}_E$ is the categorical trace of [sk-d-trace], applied to the symmetric monoidal category of perfect $E$-complexes, with unit $E[0]$ and dual $P^\\vee=R\\operatorname{Hom}_E(P,E)$. Explicitly it is the composite\n$$\n E[0]\\xrightarrow{\\operatorname{coev}_P}P\\otimes_E^L P^\\vee\n \\xrightarrow{(u\\circ e)\\otimes1}P\\otimes_E^L P^\\vee\n \\xrightarrow{\\operatorname{sym}}P^\\vee\\otimes_E^L P\n \\xrightarrow{\\operatorname{ev}_P}E[0],\n$$\nread in $\\operatorname{End}_{D(E)}(E[0])\\cong E$ as in [sk-d-trace]. The equation $u=eue$ implies $ue=eu=u$, so the defining value is also $\\operatorname{tr}_E(u\\mid P)$.\n\nEquivalently, for an ambient endomorphism $v:P\\to P$ commuting with $e$, the induced endomorphism of $(P,e)$ is $u=eve=ve=ev$, and its summand trace is exactly the source formula $\\operatorname{tr}_E(v\\circ e\\mid P)$. For such a commuting $v$, a splitting $S\\xrightarrow{i}P\\xrightarrow{r}S$ with $ri=1_S$ and $ir=e$ identifies the notation $(eP,ev)$ with the summand carrying induced endomorphism $(S,rvi)$. The assertion that the defining trace depends only on this summand, together with comparison of finite-stage representatives, is a well-definedness property, rather than additional defining data; see prop-trf-karoubi-independence (forward reference).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-thm-trace-transport/def-trf-karoubi-trace.md",
   "place": "node def-trf-karoubi-trace, order 2397"
  },
  "stmt_deps": [
-  "def-trf-categorical-trace",
+  "def-weil-finite-field-fiber",
   "def-trf-coefficient-conventions",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-finite-field-fiber",
-  "def-weil-pbc-qbar-category"
+  "lem-weil-qbar-idempotent-complete",
+  "def-weil-karoubi-envelope",
+  "def-pc-perfect-ring-complex",
+  "sk-d-trace"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trace|Karoubi",
+   "results": "0 hits: ; source subdirectory CategoryTheory/Monoidal/Rigid",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention",
+   "subdirectory": "CategoryTheory/Monoidal/Rigid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace of an endomorphism of a Karoubi summand of a perfect complex over a field",
+   "results": "8 hits: Algebra.trace, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace, Matrix.trace, Matrix.traceLinearMap, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, Matrix.trace_toLin'_eq, LinearMap.traceAux",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.Karoubi, \"trace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical trace of an endomorphism on an idempotent summand of a perfect complex is the trace of the endomorphism composed with the projector",
+   "results": "8 hits: LinearMap.IsProj.trace, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, LinearMap.trace_eq_zero_of_mapsTo_ne, LinearMap.trace_comp_cycle', LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent, LinearMap.trace_comp_cycle, CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem, LieModule.trace_comp_toEnd_genWeightSpace_eq",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(idempotent|retract|summand)|(idempotent|retract|summand).*trace|def trace",
+   "results": "23 hits: Mathlib/NumberTheory/ModularForms/NormTrace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/Algebra/Lie/TraceForm.lean, Mathlib/Lean/MessageData/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical trace of a retract in the derived category of perfect complexes",
+   "results": "8 hits: HomologicalComplex.instIsStableUnderRetractsQuasiIso, CategoryTheory.ShortComplex.quasiIso_of_retract, CategoryTheory.Retract, CategoryTheory.Retract.mk, CategoryTheory.Retract.map, CategoryTheory.Retract.op, CategoryTheory.Retract.ctorIdx, CategoryTheory.Retract.casesOn",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"comp\"",
+   "results": "12 hits: Lean.Compiler.compiler.traceUnnormalized, Lean.Compiler.LCNF.Pass.trace, Lake.ComputeTrace, Lake.instComputeTraceHashOfComputeHash, Lake.ComputeTrace.computeTrace, Lake.ComputeTrace.mk, Lake.computeTrace, Lake.BuildTrace.compute",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace on the image of an idempotent projector in a derived category and independence of a splitting",
+   "results": "8 hits: CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem, CategoryTheory.Idempotents.Karoubi.HomologicalComplex.p_idem_assoc, CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex, LinearMap.IsProj.trace, AlgebraicTopology.DoldKan.P_f_idem, AlgebraicTopology.DoldKan.P_idem, CategoryTheory.Idempotents.Karoubi.HomologicalComplex.comp_p_d, AlgebraicTopology.DoldKan.P_f_idem_assoc",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, LinearMap.comp",
+   "results": "12 hits: LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract, LinearMap.trace_comp_comm', LinearMap.trace_comp_cycle, LinearMap.trace_comp_cycle', LinearMap.trace_comp_eq_mul_of_commute_of_isNilpotent, LinearMap.trace_transpose, LinearMap.trace_eq_contract_of_basis'",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_comp_comm|trace_prodMap|trace_eq_sum_trace_restrict|IsProj.trace",
+   "results": "5 hits: 208, 218, 220, 240, 265; source subdirectory LinearAlgebra/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: the hits concern ordinary module traces, projector ranks, retracts or Karoubi complexes; none defines this scalar-valued trace on a perfect derived Karoubi summand together with the finite-stage coefficient convention",
+   "subdirectory": "LinearAlgebra/Trace.lean"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -56,5 +131,20 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport"
+ "unit": "sk-thm-trace-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-karoubi-trace",
+  "worker": "stage1",
+  "summary": "Definition-only split, no new nodes. Read both blueprint snapshots, the chapter/unit and the existing dependency statements. STATEMENT-DISPUTED: made the source endomorphism-on-the-summand hypothesis precise using u=eue; arbitrary ambient v need not have the stated block decomposition. The ambient commuting formulation recovers the exact displayed trace. Replaced the finite-coefficient-only trace input by the existing general categorical trace sk-d-trace, and added the existing perfect-complex and Karoubi definitions. Cited the actual common-stage idempotent-completeness statement rather than its definition. Recast the stale historical Karoubi presentation as the formal envelope of the named framework category, without identifying different coefficient models. Kept representative well-definedness as a forward reference to the existing independence proposition, avoiding a cycle. All searches were run through msearch.py and read; no exact Lean attachment or Mathlib match was found.",
+  "blueprint": "Realizes all paragraphs of def-trf-karoubi-trace in master and main-20261015: finite-stage pair convention, optional Karoubi presentation, the displayed trace tr_E(v e | P), and the meaning of the split summand. Makes the implicit summand-endomorphism condition and the general E-valued trace input explicit; independence is the existing following proposition, not an extra construction or new node."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-b7aad66ec",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-b7aad66ec (reviewer sub-agent of L); spot-checked: I read the definition-only split of def-trf-karoubi-trace in full; it creates no new nodes and declares no tool_uses. Sources: the blueprint text is identical in master (order 2397) and main-20261015 (order 2741); I also read sk-d-trace/_section.md and the unit sk-thm-trace-transport, whose Step 4 this item serves. I read the full statement of all 7 stmt_deps and checked each against its use. def-weil-algebraically-closed-coefficients gives C_X as pairs (E,K_E) with common-stage morphisms and no Karoubi completion. lem-weil-qbar-idempotent-complete is about that same framework category. The proper-base-change coefficient model is no longer identified with it. def-weil-karoubi-envelope gives u=eue with identity e. def-pc-perfect-ring-complex applies with R=E. sk-d-trace gives the coev/sym/ev composite on Perf(R) for any commutative R, with values in R. Replacing def-trf-categorical-trace was correct: that node, including its update, covers only A_{E,n}, so it cannot give an E-valued trace, and no other general trace node exists in the DAG. The algebra holds: u=eue implies ue=eu=u, and if ve=ev then eve=ve. The splitting order ri=1, ir=e is correct. The source's block-decomposition sentence is false for a v that does not commute with e: with e=diag(1,0) and v=[[0,0],[1,0]], ve=v but ev=0. The repair loses nothing, because the definition covers every Karoubi endomorphism; also tr(ve)=tr(eve) by cyclicity. No target or unit statement changes. Small cases check out: e=0, e=1, P=0, diagonal v, and the odd-degree Koszul sign. The forward reference to prop-trf-karoubi-independence correctly avoids a cycle, and the dependency closure (10,749 nodes) does not contain the item. No duplicate exists in the DAG, Mathlib has no categorical or Karoubi trace, the TeX is clean and no SGA source is cited. I made no changes."
+ }
 }
