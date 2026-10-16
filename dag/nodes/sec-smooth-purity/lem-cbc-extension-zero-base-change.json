@@ -1,206 +1,242 @@
 {
-  "id": "lem-cbc-extension-zero-base-change",
-  "blueprint": {
-    "is": "lem-cbc-extension-zero-base-change",
-    "from": null,
-    "same_as": []
+ "id": "lem-cbc-extension-zero-base-change",
+ "blueprint": {
+  "is": "lem-cbc-extension-zero-base-change",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extension by zero commutes with arbitrary base change",
+ "statement": "Let $U' \\xrightarrow{g_U} U$ and $X' \\xrightarrow{g} X$ form a cartesian square of schemes in which $j:U\\to X$ and $j':U'\\to X'$ are open immersions. For every abelian sheaf F on U_Et, the canonical base-change morphism\n\n g^{-1} j_! F → j'_! g_U^{-1} F\n\nis an isomorphism; it is the inverse of the adjunction mate, under j'_! ⊣ j'^{-1}, of the composite g_U^{-1}F → g_U^{-1}j^{-1}j_!F ≅ j'^{-1}g^{-1}j_!F, using the unit of j_! ⊣ j^{-1} and the cartesian identification j'^{-1}g^{-1} ≅ g_U^{-1}j^{-1}. For a finite commutative ring Λ and a complex of Λ-module sheaves, the corresponding map is an isomorphism degreewise.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
+  "place": "node lem-cbc-extension-zero-base-change, order 1525"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-cbc-open-immersion-square",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-stalk-as-pullback",
+  "lem-cbc-base-change-mate-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point x̄' of X' and put x̄ = g∘x̄'. By the stalk formula for extension by zero, (j_!F)_x̄ is F_ū when x̄ = j∘ū for a geometric point ū of U, and is zero otherwise; the same formula gives (j'_!g_U^{-1}F)_x̄' as (g_U^{-1}F)_ū' on U' and zero outside U'.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 03S5 (etale-cohomology-proposition-describe-jshriek) and proof; Modules on Sites Lemma 0710"
+   }
   },
-  "kind": "statement",
-  "title": "Extension by zero commutes with arbitrary base change",
-  "statement": "Let $U' \\xrightarrow{g_U} U$ and $X' \\xrightarrow{g} X$ form a cartesian square of schemes in which $j:U\\to X$ and $j':U'\\to X'$ are open immersions. For every abelian sheaf F on U_Et, the canonical base-change morphism\n\n g^{-1} j_! F → j'_! g_U^{-1} F\n\nis an isomorphism; it is the inverse of the adjunction mate, under j'_! ⊣ j'^{-1}, of the composite g_U^{-1}F → g_U^{-1}j^{-1}j_!F ≅ j'^{-1}g^{-1}j_!F, using the unit of j_! ⊣ j^{-1} and the cartesian identification j'^{-1}g^{-1} ≅ g_U^{-1}j^{-1}. For a finite commutative ring Λ and a complex of Λ-module sheaves, the corresponding map is an isomorphism degreewise.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
-    "place": "node lem-cbc-extension-zero-base-change, order 1525"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-extension-by-zero",
+  {
+   "text": "Because the square is cartesian, x̄ lies in U exactly when x̄' lies in U', and in that case the chosen lift ū' maps to ū and the inverse-image stalk identification gives F_ū ≅ (g_U^{-1}F)_ū'. The canonical base-change morphism (the inverse of the adjunction mate) restricts on these stalks to this inverse identification, and restricts to the zero map between zero stalks in the complementary case. Thus the base-change morphism is an isomorphism on every geometric stalk.",
+   "uses": [
     "def-cbc-open-immersion-square",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lemma-weil-pbc-geometric-stalk-conservative",
     "lem-kun-stalk-as-pullback",
     "lem-cbc-base-change-mate-stalk"
-  ],
-  "proof": [
-    {
-      "text": "Fix a geometric point x̄' of X' and put x̄ = g∘x̄'. By the stalk formula for extension by zero, (j_!F)_x̄ is F_ū when x̄ = j∘ū for a geometric point ū of U, and is zero otherwise; the same formula gives (j'_!g_U^{-1}F)_x̄' as (g_U^{-1}F)_ū' on U' and zero outside U'.",
-      "uses": [
-        "lem-weil-pbc-extension-by-zero-stalks"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Proposition 03S5 (etale-cohomology-proposition-describe-jshriek) and proof; Modules on Sites Lemma 0710"
-      }
-    },
-    {
-      "text": "Because the square is cartesian, x̄ lies in U exactly when x̄' lies in U', and in that case the chosen lift ū' maps to ū and the inverse-image stalk identification gives F_ū ≅ (g_U^{-1}F)_ū'. The canonical base-change morphism (the inverse of the adjunction mate) restricts on these stalks to this inverse identification, and restricts to the zero map between zero stalks in the complementary case. Thus the base-change morphism is an isomorphism on every geometric stalk.",
-      "uses": [
-        "def-cbc-open-immersion-square",
-        "lem-kun-stalk-as-pullback",
-        "lem-cbc-base-change-mate-stalk"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
-        "place": "Proof, displayed stalk comparison; Lemma 03S6"
-      }
-    },
-    {
-      "text": "Geometric stalks are conservative for morphisms of etale abelian sheaves, so the base-change morphism is an isomorphism.",
-      "uses": [
-        "lemma-weil-pbc-geometric-stalk-conservative"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
-        "place": "Proof, final appeal to geometric-stalk conservativity"
-      }
-    },
-    {
-      "text": "For a finite commutative ring Λ, the constructions on complexes are degreewise. Applying the abelian-sheaf isomorphism to each term of a complex of Λ-module sheaves gives the asserted degreewise isomorphism (and the component maps commute with the differentials by functoriality).",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Definition 03S3 (etale-cohomology-definition-extension-zero), which defines extension by zero on complexes degreewise"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-cbc-open-immersion-square",
-    "lem-cbc-base-change-mate-stalk",
-    "lem-kun-stalk-as-pullback",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
-    "place": "## Proof, corrected using Proposition 03S5 stalk formula"
+    "place": "Proof, displayed stalk comparison; Lemma 03S6"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "canonical isomorphism pullback of j shriek equals shriek of pullback open immersion",
-      "results": "No exact declaration; hits concern IsOpenImmersion pullback and scheme module restriction.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Functor.sheafPullback sheafFiberComapIso",
-      "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso and Functor.sheafPullback, but hypotheses/identification with etale extension by zero are absent.",
-      "date": "2026-10-15",
-      "verdict": "generalization, not one line"
-    },
-    {
-      "tool": "grep",
-      "query": "grep extension by zero|sheafPullback|sheafFiberComapIso in Mathlib/CategoryTheory/Sites and Mathlib/AlgebraicGeometry",
-      "results": "No extension-by-zero theorem; sheafFiberComapIso at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69-70.",
-      "date": "2026-10-15",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "extension by zero sheaf base change cartesian open immersion square",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1525,
-  "blueprint_uses": [
-    "def-cbc-open-immersion-square",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-inverse-image",
+  {
+   "text": "Geometric stalks are conservative for morphisms of etale abelian sheaves, so the base-change morphism is an isomorphism.",
+   "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "uses_not_cited": [
-    "def-cbc-open-immersion-square",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
+    "place": "Proof, final appeal to geometric-stalk conservativity"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "split_report": {
-    "date": "2026-10-15",
-    "item": "lem-cbc-extension-zero-base-change",
-    "worker": "stage1",
-    "summary": "Repaired the returned split by citing the existing inverse-image/stalk identification node and adding a focused statement-only lemma identifying the canonical mate on both geometric-stalk cases. Step 2 now explicitly checks cartesian membership, the inside-open inverse-image stalk isomorphism, and the outside-open zero map.",
-    "blueprint": "Realizes the blueprint proof: compare both sides at a geometric point, use the cartesian membership equivalence and inverse-image stalk identification, identify the mate on stalks in both cases, then conservativity; extend degreewise to finite-ring complexes.",
-    "tool_uses": [
-      {
-        "node": "lem-kun-stalk-as-pullback",
-        "why": "Generic tool for identifying a geometric stalk with inverse image along the corresponding geometric point; the cbc unit has no node stating this categorical stalk identification."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-kun-stalk-as-pullback"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NN-b0aeb7632",
-    "group": "NN",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-b0aeb7632 (reviewer sub-agent of L); spot-checked: The item and auxiliary mate-stalk lemma are mathematically correct after full source and edge-case checks. Three repairs are supplied under fixes/dag: correct the Step 1 citation to Proposition 03S5, correct Step 4 to Definition 03S3, add required created.by/item/date metadata to the new node, and remove three unused statement dependencies.; 2 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-e7ae5100d",
-    "group": "ND",
-    "result": "pass",
-    "note": "Existing theorem and mate formula match the node; dependencies, universes, edge cases, docstrings, and server source evidence checked."
-  },
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare",
-    "declaration": "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
-    "declarations": [
-      "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
-      "AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap",
-      "AlgebraicGeometry.Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app"
-    ],
-    "statement": "lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :\n    IsIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)",
-    "branch": "slopmaster2",
-    "by": "ND",
-    "date": "2026-10-15",
-    "existing": true,
-    "note": "Existing general-coefficient theorem specialized to AddCommGrpCat and ModuleCat Λ. The canonical map in the node is the inverse of openImmersionLowerShriekBaseChangeMap; unit_map_openImmersionLowerShriekBaseChangeMap_app identifies its adjunction transpose with precisely the stated unit/square composite. For complexes use the inverse natural isomorphism termwise, via NatIso.mapHomologicalComplex (Mathlib.Algebra.Homology.Additive). No new statement or construction is needed."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\n\nbe an open-immersion square.\nFor every abelian sheaf $F$ on $U_{\\Et}$ the canonical map\n\n$$\ng^{-1}j_!F\\xrightarrow{\\ \\sim\\ }j'_!g_U^{-1}F\n$$\n\nis an isomorphism, where the canonical map is the one adjoint to the\nidentification $j'^{-1}g^{-1}=g_U^{-1}j^{-1}$ (the square commutes)\ncomposed with the counit of\n[def-weil-pbc-extension-by-zero]. For a finite commutative ring\n$\\Lambda$ and a complex of $\\Lambda$-module sheaves the isomorphism\nholds degreewise.",
-    "proof": [
-      {
-        "text": "Fix a geometric point $\\bar x'$ of $X'$ with image\n$\\bar x=g(\\bar x')$. By the stalk characterization of\n[def-weil-pbc-extension-by-zero], whose underived form is\n[def-weil-pbc-extension-by-zero],\n\n$$\n(g^{-1}j_!F)_{\\bar x'}=(j_!F)_{\\bar x}=\n\\begin{cases}\nF_{\\bar x},& \\bar x\\in U,\\\\\n0,&\\bar x\\in X\\setminus U,\n\\end{cases}\n\\qquad\n(j'_!g_U^{-1}F)_{\\bar x'}=\n\\begin{cases}\n(g_U^{-1}F)_{\\bar x'}=F_{\\bar x},&\\bar x'\\in U',\\\\\n0,&\\bar x'\\in X'\\setminus U',\n\\end{cases}\n$$\n\nand $\\bar x\\in U$ if and only if $\\bar x'\\in U'$ because the square\nis cartesian. Under these identifications the two stalks of the map\nagree (the adjoint construction of the map is precisely the\ncorresponding restriction of sections); the inverse image functors\nare exact, and\n[lemma-weil-pbc-geometric-stalk-conservative] makes the map an\nisomorphism. For complexes the argument applies termwise, exactness\nof $j_!$ giving the derived statement.",
-        "uses": [
-          "def-weil-pbc-extension-by-zero",
-          "lemma-weil-pbc-geometric-stalk-conservative"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For a finite commutative ring Λ, the constructions on complexes are degreewise. Applying the abelian-sheaf isomorphism to each term of a complex of Λ-module sheaves gives the asserted degreewise isomorphism (and the component maps commute with the differentials by functoriality).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 03S3 (etale-cohomology-definition-extension-zero), which defines extension by zero on complexes degreewise"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-cbc-open-immersion-square",
+  "lem-cbc-base-change-mate-stalk",
+  "lem-kun-stalk-as-pullback",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-base-change.md",
+  "place": "## Proof, corrected using Proposition 03S5 stalk formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical isomorphism pullback of j shriek equals shriek of pullback open immersion",
+   "results": "No exact declaration; hits concern IsOpenImmersion pullback and scheme module restriction.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPullback sheafFiberComapIso",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso and Functor.sheafPullback, but hypotheses/identification with etale extension by zero are absent.",
+   "date": "2026-10-15",
+   "verdict": "generalization, not one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep extension by zero|sheafPullback|sheafFiberComapIso in Mathlib/CategoryTheory/Sites and Mathlib/AlgebraicGeometry",
+   "results": "No extension-by-zero theorem; sheafFiberComapIso at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69-70.",
+   "date": "2026-10-15",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero sheaf base change cartesian open immersion square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1525,
+ "blueprint_uses": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "uses_not_cited": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
+    "AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap",
+    "AlgebraicGeometry.Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare",
+     "lines": [
+      115,
+      122
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare",
+     "lines": [
+      78,
+      113
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare",
+     "lines": [
+      125,
+      145
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "lem-cbc-extension-zero-base-change",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by citing the existing inverse-image/stalk identification node and adding a focused statement-only lemma identifying the canonical mate on both geometric-stalk cases. Step 2 now explicitly checks cartesian membership, the inside-open inverse-image stalk isomorphism, and the outside-open zero map.",
+  "blueprint": "Realizes the blueprint proof: compare both sides at a geometric point, use the cartesian membership equivalence and inverse-image stalk identification, identify the mate on stalks in both cases, then conservativity; extend degreewise to finite-ring complexes.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic tool for identifying a geometric stalk with inverse image along the corresponding geometric point; the cbc unit has no node stating this categorical stalk identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-stalk-as-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-b0aeb7632",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-b0aeb7632 (reviewer sub-agent of L); spot-checked: The item and auxiliary mate-stalk lemma are mathematically correct after full source and edge-case checks. Three repairs are supplied under fixes/dag: correct the Step 1 citation to Proposition 03S5, correct Step 4 to Definition 03S3, add required created.by/item/date metadata to the new node, and remove three unused statement dependencies.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e7ae5100d",
+  "group": "ND",
+  "result": "pass",
+  "note": "Existing theorem and mate formula match the node; dependencies, universes, edge cases, docstrings, and server source evidence checked."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare",
+  "declaration": "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap",
+   "AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap",
+   "AlgebraicGeometry.Etale.unit_map_openImmersionLowerShriekBaseChangeMap_app"
+  ],
+  "statement": "lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :\n    IsIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Existing general-coefficient theorem specialized to AddCommGrpCat and ModuleCat Λ. The canonical map in the node is the inverse of openImmersionLowerShriekBaseChangeMap; unit_map_openImmersionLowerShriekBaseChangeMap_app identifies its adjunction transpose with precisely the stated unit/square composite. For complexes use the inverse natural isomorphism termwise, via NatIso.mapHomologicalComplex (Mathlib.Algebra.Homology.Additive). No new statement or construction is needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let\n\n$$\n\\begin{array}{ccc}\nU'&\\xrightarrow{g_U}&U\\\\\nj'\\downarrow&&\\downarrow j\\\\\nX'&\\xrightarrow{g}&X\n\\end{array}\n$$\n\nbe an open-immersion square.\nFor every abelian sheaf $F$ on $U_{\\Et}$ the canonical map\n\n$$\ng^{-1}j_!F\\xrightarrow{\\ \\sim\\ }j'_!g_U^{-1}F\n$$\n\nis an isomorphism, where the canonical map is the one adjoint to the\nidentification $j'^{-1}g^{-1}=g_U^{-1}j^{-1}$ (the square commutes)\ncomposed with the counit of\n[def-weil-pbc-extension-by-zero]. For a finite commutative ring\n$\\Lambda$ and a complex of $\\Lambda$-module sheaves the isomorphism\nholds degreewise.",
+  "proof": [
+   {
+    "text": "Fix a geometric point $\\bar x'$ of $X'$ with image\n$\\bar x=g(\\bar x')$. By the stalk characterization of\n[def-weil-pbc-extension-by-zero], whose underived form is\n[def-weil-pbc-extension-by-zero],\n\n$$\n(g^{-1}j_!F)_{\\bar x'}=(j_!F)_{\\bar x}=\n\\begin{cases}\nF_{\\bar x},& \\bar x\\in U,\\\\\n0,&\\bar x\\in X\\setminus U,\n\\end{cases}\n\\qquad\n(j'_!g_U^{-1}F)_{\\bar x'}=\n\\begin{cases}\n(g_U^{-1}F)_{\\bar x'}=F_{\\bar x},&\\bar x'\\in U',\\\\\n0,&\\bar x'\\in X'\\setminus U',\n\\end{cases}\n$$\n\nand $\\bar x\\in U$ if and only if $\\bar x'\\in U'$ because the square\nis cartesian. Under these identifications the two stalks of the map\nagree (the adjoint construction of the map is precisely the\ncorresponding restriction of sections); the inverse image functors\nare exact, and\n[lemma-weil-pbc-geometric-stalk-conservative] makes the map an\nisomorphism. For complexes the argument applies termwise, exactness\nof $j_!$ giving the derived statement.",
+    "uses": [
+     "def-weil-pbc-extension-by-zero",
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

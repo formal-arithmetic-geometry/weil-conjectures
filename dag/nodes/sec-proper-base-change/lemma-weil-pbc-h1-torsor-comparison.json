@@ -1,228 +1,228 @@
 {
-  "id": "lemma-weil-pbc-h1-torsor-comparison",
-  "blueprint": {
-    "is": "lemma-weil-pbc-h1-torsor-comparison",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Finite-etale torsor comparison",
-  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], let $f:Y\\to\\operatorname{Spec}A$ be a proper morphism of schemes [def-weil-pbc-scheme-conventions], let $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ be its closed fibre and $i:Y_0\\to Y$ the projection (a closed immersion, the base change of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$). Let $M$ be a finite abelian group, $\\underline M_Y$ and $\\underline M_{Y_0}$ the constant sheaves with value $M$ on the small etale sites $Y_{\\Et}$, $Y_{0,\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], $i^{-1}$ the inverse image [def-weil-pbc-inverse-image] and $c:i^{-1}\\underline M_Y\\xrightarrow{\\sim}\\underline M_{Y_0}$ the canonical isomorphism of [lemma-constructible-pullback-constant]. Let\n\n$$\n i^*:H^1(Y_{\\Et},\\underline M_Y)\\longrightarrow H^1(Y_{0,\\Et},i^{-1}\\underline M_Y)\n$$\n\nbe the pullback map of [def-weil-pbc-cohomology-pullback] between the etale cohomology groups of [def-weil-pbc-etale-cohomology], and $H^1(c)$ the map induced by $c$. Then the restriction map\n\n$$\n H^1(c)\\circ i^*:H^1(Y_{\\Et},\\underline M)\\longrightarrow H^1(Y_{0,\\Et},\\underline M)\n$$\n\nis bijective; equivalently ($H^1(c)$ being bijective as $c$ is an isomorphism and $H^1(-)$ a functor), $i^*$ is bijective.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-torsor-comparison.md",
-    "place": "node lemma-weil-pbc-h1-torsor-comparison, order 1139",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A5G (literature/stacks-project/etale-cohomology.tex, Lemma label lemma-proper-over-henselian-and-h1)"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-inverse-image",
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Apply [thm-weil-pbc-finite-etale-lifting] to the proper henselian-pair pullback square, obtaining the finite etale pullback equivalence hFE. This is the existing theorem in the same Lean module, not an added hypothesis.",
-      "uses": [
-        "thm-weil-pbc-finite-etale-lifting"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply [lem-weil-pbc-finite-etale-equivalence-h1] with i, hFE and M. This general categorical implication has no ring, properness or closed-fibre hypotheses and supplies the exact cohomologyMap codomain. Its torsor classification and lifting route is retained below that node.",
-      "uses": [
-        "lem-weil-pbc-finite-etale-equivalence-h1"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "thm-weil-pbc-finite-etale-lifting",
-    "lem-weil-pbc-finite-etale-equivalence-h1"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A5G, finite etale equivalence followed by its categorical H1 consequence; second reading K1"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "first etale cohomology of a constant sheaf over a proper scheme over a henselian ring equals that of the closed fibre",
-      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.H1InfRes, Algebra.Extension.H1Cotangent, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etalePretopology (none relevant)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "torsors under a sheaf of abelian groups on a site are classified by first sheaf cohomology H^1",
-      "results": "CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic, Ext-defined sheaf cohomology), CategoryTheory.PresheafOfGroups.H1 / OneCocycle.class (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1, Cech-type H^1 of a family of objects), groupCohomology.H1; no torsor classification",
-      "date": "2026-10-09",
-      "verdict": "no match (only the notions Sheaf.H and cocycle H1 exist)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "bijection between isomorphism classes of G-torsors on a site and H^1(G), natural in pullback",
-      "results": "CategoryTheory.PresheafOfGroups.H1, OneCocycle.class, OneCocycle.class_eq_iff, OneCocycle.IsCohomologous (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1)",
-      "date": "2026-10-09",
-      "verdict": "no match: cocycle H^1 of a family, no torsors, no comparison with Sheaf.H"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite etale covers of a proper scheme over a henselian local ring are equivalent to finite etale covers of the closed fibre",
-      "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), Algebra.IsEtaleAt.comp",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H, HenselianRing",
-      "results": "none",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Torsor",
-      "results": "Torsor (Mathlib.Algebra.Torsor.Defs: torsors of a group on a type), Group.instTorsor, Torsor.nonempty, ...; no sheaf torsors",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rni 'torsor' Mathlib/CategoryTheory/Sites/; grep -rln 'HenselianRing|HenselianLocalRing' Mathlib/; grep -rln 'FiniteEtale' Mathlib/AlgebraicGeometry; ls Mathlib/CategoryTheory/Sites/{NonabelianCohomology,SheafCohomology}",
-      "results": "no torsor in Sites; Henselian only in Mathlib/RingTheory/Henselian.lean; no finite etale category; Sites/NonabelianCohomology/H1.lean, SheafCohomology/{Basic,Cech,MayerVietoris}.lean contain no torsors",
-      "date": "2026-10-09",
-      "verdict": "no match: absent from Mathlib (etale torsors, the H^1-torsor comparison and finite etale lifting are all missing)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1139,
-  "blueprint_uses": [
-    "def-weil-pbc-finite-torsors",
-    "def-weil-pbc-strict-henselian-setup",
-    "lemma-weil-pbc-etale-degree-zero",
-    "lemma-weil-pbc-finite-etale-henselian-lifting",
-    "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
-    "thm-galois-lc-etale",
+ "id": "lemma-weil-pbc-h1-torsor-comparison",
+ "blueprint": {
+  "is": "lemma-weil-pbc-h1-torsor-comparison",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite-etale torsor comparison",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], let $f:Y\\to\\operatorname{Spec}A$ be a proper morphism of schemes [def-weil-pbc-scheme-conventions], let $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ be its closed fibre and $i:Y_0\\to Y$ the projection (a closed immersion, the base change of $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$). Let $M$ be a finite abelian group, $\\underline M_Y$ and $\\underline M_{Y_0}$ the constant sheaves with value $M$ on the small etale sites $Y_{\\Et}$, $Y_{0,\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-constant-sheaf], $i^{-1}$ the inverse image [def-weil-pbc-inverse-image] and $c:i^{-1}\\underline M_Y\\xrightarrow{\\sim}\\underline M_{Y_0}$ the canonical isomorphism of [lemma-constructible-pullback-constant]. Let\n\n$$\n i^*:H^1(Y_{\\Et},\\underline M_Y)\\longrightarrow H^1(Y_{0,\\Et},i^{-1}\\underline M_Y)\n$$\n\nbe the pullback map of [def-weil-pbc-cohomology-pullback] between the etale cohomology groups of [def-weil-pbc-etale-cohomology], and $H^1(c)$ the map induced by $c$. Then the restriction map\n\n$$\n H^1(c)\\circ i^*:H^1(Y_{\\Et},\\underline M)\\longrightarrow H^1(Y_{0,\\Et},\\underline M)\n$$\n\nis bijective; equivalently ($H^1(c)$ being bijective as $c$ is an isomorphism and $H^1(-)$ a functor), $i^*$ is bijective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-torsor-comparison.md",
+  "place": "node lemma-weil-pbc-h1-torsor-comparison, order 1139",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A5G (literature/stacks-project/etale-cohomology.tex, Lemma label lemma-proper-over-henselian-and-h1)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [thm-weil-pbc-finite-etale-lifting] to the proper henselian-pair pullback square, obtaining the finite etale pullback equivalence hFE. This is the existing theorem in the same Lean module, not an added hypothesis.",
+   "uses": [
     "thm-weil-pbc-finite-etale-lifting"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-strict-henselian-setup",
-    "lemma-weil-pbc-etale-degree-zero",
-    "lemma-weil-pbc-finite-etale-henselian-lifting",
-    "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "For a finite abelian group $M$ and proper $Y\\to\\operatorname{Spec}A$,\nrestriction induces a bijection\n\n$$\nH^1(Y,\\underline M)\\xrightarrow{\\sim}H^1(Y_0,\\underline M).\n$$",
-      "proof": "An $\\underline M$-torsor is a finite etale $Y$-scheme $P$ with a simply\ntransitive $M$-action by the finite-locally-constant equivalence. Apply the\nhenselian lifting lemma to lift $P$, every automorphism $m:P\\to P$, and the\nmultiplication diagrams. Uniqueness of lifted morphisms preserves the group\nlaw and simple transitivity. Restriction and lifting are inverse on\nisomorphism classes, which is the displayed $H^1$ bijection. This is the\ntorsor subtree of Tag `0A5G`.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
-          "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-          "lines": [
-            163,
-            179
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-    "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
-    "branch": "slopmaster2",
-    "line": 163,
-    "declarations": [
-      "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lemma-weil-pbc-h1-torsor-comparison",
-    "worker": "stage1",
-    "summary": "Statement made precise and self-contained for a henselian pair (A,I), Y proper over A, closed fibre i: Y_0 -> Y, finite abelian M: H^1(c) o i^* : H^1(Y, M_Y) -> H^1(Y_0, M_{Y_0}) is bijective (equivalently i^*), the form the user prop-weil-pbc-p1-acyclicity step 4 reads; the unused stmt dep def-weil-pbc-strict-henselian-setup dropped, thm-weil-pbc-finite-etale-lifting moved from stmt_deps to the proof. The one-paragraph proof replaced by seven steps along Stacks 0A5G (stated there for henselian local A): empty case and nonempty closed fibre (I in the Jacobson radical) so that the geometric-point setting of def-galois-categories applies; H^1 = torsors naturally in T (thm-galois-torsor-h1, Stacks 03AJ); torsors = finite etale surjective schemes with simply transitive M-action compatibly with base change (thm-galois-lc-etale, Stacks 03RV); restriction well defined (elementary), injective and surjective by the equivalence of thm-weil-pbc-finite-etale-lifting, the lifting of simple transitivity by reflection of isomorphisms and of surjectivity by the open-closed image (lem-weil-pbc-flat-lfp-open, lem-weil-pbc-finite-proper). The imported proof_deps lemma-weil-pbc-etale-degree-zero, lemma-weil-pbc-finite-etale-henselian-lifting (the case I = m of thm-weil-pbc-finite-etale-lifting) and lemma-weil-pbc-finite-locally-constant-etale-equivalence (the first clauses of thm-galois-lc-etale, without base change) are not used. Mathlib has none of it (three kinds of search recorded)."
-  },
-  "tool_uses": [
-    "thm-galois-torsor-h1",
-    "lem-weil-pbc-flat-lfp-open"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Seven steps along Stacks 0A5G generalized from a henselian local ring to a henselian pair (the only place the pair enters is I in the Jacobson radical, step 0): torsors = H^1 naturally (thm-galois-torsor-h1, tool use), torsors = finite etale schemes with simply transitive M-action compatibly with base change (thm-galois-lc-etale), restriction well defined, injective by full faithfulness and surjective by essential surjectivity plus lifting of the action, of simple transitivity (equivalence reflects isomorphisms) and of surjectivity (open-closed image; lem-weil-pbc-flat-lfp-open tool use, lem-weil-pbc-finite-proper) in thm-weil-pbc-finite-etale-lifting. Statement self-contained in the form read by prop-weil-pbc-p1-acyclicity step 4. Lean attached earlier (own sorry) kept. Defect recorded: def-weil-pbc-finite-torsors lacks the local-sections condition (Stacks 03AH (2)); the step states it explicitly."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K1",
-    "result": "pass",
-    "landing": "20261012T060743-L-2910299",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $(A,I)$ be a henselian pair, let $Y\\to\\operatorname{Spec}A$ be proper,\nand let $Y_0=Y\\times_AA/I$. For every finite abelian group $M$, restriction\ninduces a bijection\n\n$$\n H^1(Y,\\underline M)\\xrightarrow{\\sim}H^1(Y_0,\\underline M).\n$$",
-    "proof": [
-      {
-        "text": "By [def-weil-pbc-finite-torsors] the two sides classify $M$-torsors, which by\n[thm-galois-lc-etale] are the simply transitive $M$-actions on finite etale schemes surjective over\nthe base. The equivalence of\n[thm-weil-pbc-finite-etale-lifting] preserves such actions and their\nisomorphism classes, giving the bijection.",
-        "uses": [
-          "def-weil-pbc-finite-torsors",
-          "thm-galois-lc-etale",
-          "thm-weil-pbc-finite-etale-lifting"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "In detail: by [lemma-weil-pbc-finite-locally-constant-etale-equivalence], an\n$\\underline M$-torsor on $Y$ is a finite etale $Y$-scheme $P$, surjective\nover $Y$, with a simply transitive $M$-action, and likewise on $Y_0$. By\n[thm-weil-pbc-finite-etale-lifting] for the henselian pair $(A,I)$ and the\nproper $Y\\to\\operatorname{Spec}A$, every finite etale $P_0\\to Y_0$ is the\nrestriction of a finite etale $P\\to Y$, unique up to unique isomorphism, and\nevery automorphism $m:P_0\\to P_0$ and every multiplication diagram lift\nuniquely. Uniqueness of lifted morphisms preserves the group law, and simple\ntransitivity, i.e. that $M\\times P\\to P\\times_YP$ is an isomorphism, lifts\nbecause this morphism is the unique lift of the corresponding isomorphism\nover $Y_0$. Surjectivity lifts as well: the image of a finite etale $P\\to Y$\nis open and closed, and it contains $Y_0$ when $P_0\\to Y_0$ is surjective;\nopen and closed subschemes are finite etale, so by the equivalence of\n[thm-weil-pbc-finite-etale-lifting] an open and closed subscheme of $Y$\ncontaining $Y_0$ is $Y$. Restriction and lifting are therefore inverse on isomorphism\nclasses, which is the displayed $H^1$ bijection.",
-        "uses": [
-          "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
-          "thm-weil-pbc-finite-etale-lifting"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply [lem-weil-pbc-finite-etale-equivalence-h1] with i, hFE and M. This general categorical implication has no ring, properness or closed-fibre hypotheses and supplies the exact cohomologyMap codomain. Its torsor classification and lifting route is retained below that node.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-equivalence-h1"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-finite-etale-lifting",
+  "lem-weil-pbc-finite-etale-equivalence-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G, finite etale equivalence followed by its categorical H1 consequence; second reading K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "first etale cohomology of a constant sheaf over a proper scheme over a henselian ring equals that of the closed fibre",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.H1InfRes, Algebra.Extension.H1Cotangent, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etalePretopology (none relevant)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsors under a sheaf of abelian groups on a site are classified by first sheaf cohomology H^1",
+   "results": "CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic, Ext-defined sheaf cohomology), CategoryTheory.PresheafOfGroups.H1 / OneCocycle.class (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1, Cech-type H^1 of a family of objects), groupCohomology.H1; no torsor classification",
+   "date": "2026-10-09",
+   "verdict": "no match (only the notions Sheaf.H and cocycle H1 exist)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijection between isomorphism classes of G-torsors on a site and H^1(G), natural in pullback",
+   "results": "CategoryTheory.PresheafOfGroups.H1, OneCocycle.class, OneCocycle.class_eq_iff, OneCocycle.IsCohomologous (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1)",
+   "date": "2026-10-09",
+   "verdict": "no match: cocycle H^1 of a family, no torsors, no comparison with Sheaf.H"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale covers of a proper scheme over a henselian local ring are equivalent to finite etale covers of the closed fibre",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), Algebra.IsEtaleAt.comp",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, HenselianRing",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Torsor",
+   "results": "Torsor (Mathlib.Algebra.Torsor.Defs: torsors of a group on a type), Group.instTorsor, Torsor.nonempty, ...; no sheaf torsors",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'torsor' Mathlib/CategoryTheory/Sites/; grep -rln 'HenselianRing|HenselianLocalRing' Mathlib/; grep -rln 'FiniteEtale' Mathlib/AlgebraicGeometry; ls Mathlib/CategoryTheory/Sites/{NonabelianCohomology,SheafCohomology}",
+   "results": "no torsor in Sites; Henselian only in Mathlib/RingTheory/Henselian.lean; no finite etale category; Sites/NonabelianCohomology/H1.lean, SheafCohomology/{Basic,Cech,MayerVietoris}.lean contain no torsors",
+   "date": "2026-10-09",
+   "verdict": "no match: absent from Mathlib (etale torsors, the H^1-torsor comparison and finite etale lifting are all missing)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1139,
+ "blueprint_uses": [
+  "def-weil-pbc-finite-torsors",
+  "def-weil-pbc-strict-henselian-setup",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lemma-weil-pbc-finite-etale-henselian-lifting",
+  "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+  "thm-galois-lc-etale",
+  "thm-weil-pbc-finite-etale-lifting"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-strict-henselian-setup",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lemma-weil-pbc-finite-etale-henselian-lifting",
+  "lemma-weil-pbc-finite-locally-constant-etale-equivalence"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For a finite abelian group $M$ and proper $Y\\to\\operatorname{Spec}A$,\nrestriction induces a bijection\n\n$$\nH^1(Y,\\underline M)\\xrightarrow{\\sim}H^1(Y_0,\\underline M).\n$$",
+   "proof": "An $\\underline M$-torsor is a finite etale $Y$-scheme $P$ with a simply\ntransitive $M$-action by the finite-locally-constant equivalence. Apply the\nhenselian lifting lemma to lift $P$, every automorphism $m:P\\to P$, and the\nmultiplication diagrams. Uniqueness of lifted morphisms preserves the group\nlaw and simple transitivity. Restriction and lifting are inverse on\nisomorphism classes, which is the displayed $H^1$ bijection. This is the\ntorsor subtree of Tag `0A5G`.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+     "lines": [
+      267,
+      283
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+  "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
+  "branch": "slopmaster2",
+  "line": 163,
+  "declarations": [
+   "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-h1-torsor-comparison",
+  "worker": "stage1",
+  "summary": "Statement made precise and self-contained for a henselian pair (A,I), Y proper over A, closed fibre i: Y_0 -> Y, finite abelian M: H^1(c) o i^* : H^1(Y, M_Y) -> H^1(Y_0, M_{Y_0}) is bijective (equivalently i^*), the form the user prop-weil-pbc-p1-acyclicity step 4 reads; the unused stmt dep def-weil-pbc-strict-henselian-setup dropped, thm-weil-pbc-finite-etale-lifting moved from stmt_deps to the proof. The one-paragraph proof replaced by seven steps along Stacks 0A5G (stated there for henselian local A): empty case and nonempty closed fibre (I in the Jacobson radical) so that the geometric-point setting of def-galois-categories applies; H^1 = torsors naturally in T (thm-galois-torsor-h1, Stacks 03AJ); torsors = finite etale surjective schemes with simply transitive M-action compatibly with base change (thm-galois-lc-etale, Stacks 03RV); restriction well defined (elementary), injective and surjective by the equivalence of thm-weil-pbc-finite-etale-lifting, the lifting of simple transitivity by reflection of isomorphisms and of surjectivity by the open-closed image (lem-weil-pbc-flat-lfp-open, lem-weil-pbc-finite-proper). The imported proof_deps lemma-weil-pbc-etale-degree-zero, lemma-weil-pbc-finite-etale-henselian-lifting (the case I = m of thm-weil-pbc-finite-etale-lifting) and lemma-weil-pbc-finite-locally-constant-etale-equivalence (the first clauses of thm-galois-lc-etale, without base change) are not used. Mathlib has none of it (three kinds of search recorded)."
+ },
+ "tool_uses": [
+  "thm-galois-torsor-h1",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Seven steps along Stacks 0A5G generalized from a henselian local ring to a henselian pair (the only place the pair enters is I in the Jacobson radical, step 0): torsors = H^1 naturally (thm-galois-torsor-h1, tool use), torsors = finite etale schemes with simply transitive M-action compatibly with base change (thm-galois-lc-etale), restriction well defined, injective by full faithfulness and surjective by essential surjectivity plus lifting of the action, of simple transitivity (equivalence reflects isomorphisms) and of surjectivity (open-closed image; lem-weil-pbc-flat-lfp-open tool use, lem-weil-pbc-finite-proper) in thm-weil-pbc-finite-etale-lifting. Statement self-contained in the form read by prop-weil-pbc-p1-acyclicity step 4. Lean attached earlier (own sorry) kept. Defect recorded: def-weil-pbc-finite-torsors lacks the local-sections condition (Stacks 03AH (2)); the step states it explicitly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T060743-L-2910299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $(A,I)$ be a henselian pair, let $Y\\to\\operatorname{Spec}A$ be proper,\nand let $Y_0=Y\\times_AA/I$. For every finite abelian group $M$, restriction\ninduces a bijection\n\n$$\n H^1(Y,\\underline M)\\xrightarrow{\\sim}H^1(Y_0,\\underline M).\n$$",
+  "proof": [
+   {
+    "text": "By [def-weil-pbc-finite-torsors] the two sides classify $M$-torsors, which by\n[thm-galois-lc-etale] are the simply transitive $M$-actions on finite etale schemes surjective over\nthe base. The equivalence of\n[thm-weil-pbc-finite-etale-lifting] preserves such actions and their\nisomorphism classes, giving the bijection.",
+    "uses": [
+     "def-weil-pbc-finite-torsors",
+     "thm-galois-lc-etale",
+     "thm-weil-pbc-finite-etale-lifting"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "In detail: by [lemma-weil-pbc-finite-locally-constant-etale-equivalence], an\n$\\underline M$-torsor on $Y$ is a finite etale $Y$-scheme $P$, surjective\nover $Y$, with a simply transitive $M$-action, and likewise on $Y_0$. By\n[thm-weil-pbc-finite-etale-lifting] for the henselian pair $(A,I)$ and the\nproper $Y\\to\\operatorname{Spec}A$, every finite etale $P_0\\to Y_0$ is the\nrestriction of a finite etale $P\\to Y$, unique up to unique isomorphism, and\nevery automorphism $m:P_0\\to P_0$ and every multiplication diagram lift\nuniquely. Uniqueness of lifted morphisms preserves the group law, and simple\ntransitivity, i.e. that $M\\times P\\to P\\times_YP$ is an isomorphism, lifts\nbecause this morphism is the unique lift of the corresponding isomorphism\nover $Y_0$. Surjectivity lifts as well: the image of a finite etale $P\\to Y$\nis open and closed, and it contains $Y_0$ when $P_0\\to Y_0$ is surjective;\nopen and closed subschemes are finite etale, so by the equivalence of\n[thm-weil-pbc-finite-etale-lifting] an open and closed subscheme of $Y$\ncontaining $Y_0$ is $Y$. Restriction and lifting are therefore inverse on isomorphism\nclasses, which is the displayed $H^1$ bijection.",
+    "uses": [
+     "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+     "thm-weil-pbc-finite-etale-lifting"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,152 +1,118 @@
 {
-  "id": "def-pc-f-subfunctor",
-  "blueprint": {
-    "is": "def-pc-f-subfunctor",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "The open subfunctor $F$",
-  "statement": "Let $k$ be a field, $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $\\sigma\\in X(k)$; regard $\\operatorname{Pic}_{X/k,\\sigma}$ [def-pc-pic-sigma-functor] as a functor on schemes $T$ over $k$, a morphism $u:T'\\to T$ over $k$ acting by $[\\mathcal{L}]\\mapsto[u_X^*\\mathcal{L}]$ with $u_X:X_{T'}\\to X_T$ the base change of $u$ [def-pc-base-change]. For a scheme $T$ over $k$, with $f_T:X_T\\to T$ the base change of $X\\to\\operatorname{Spec}k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the subset of those classes $[\\mathcal{L}]$ such that $Rf_{T,*}\\mathcal{L}$ ($Rf_{T,*}$ as in [def-pc-derived-direct-image]) is an object of $D(\\mathcal{O}_T)$ isomorphic to an invertible $\\mathcal{O}_T$-module placed in degree $0$ [def-pc-invertible-in-degree-zero] (a condition depending only on the isomorphism class of $\\mathcal{L}$). This defines the assignment $T\\mapsto F(T)$ only; that it is stable under the maps $u_X^*$, i.e. is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ in the sense of [def-pc-subfunctor], and that the inclusion is representable by open immersions, is Stacks Project, Picard Schemes of Curves, Lemma 44.6.2 (Tag 0B9V), proved separately; only after that lemma is $F$ called the subfunctor $F$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/def-pc-f-subfunctor.md",
-    "place": "node def-pc-f-subfunctor, order 819"
-  },
-  "stmt_deps": [
-    "def-pc-derived-direct-image",
-    "def-pc-base-change",
-    "def-pc-invertible-in-degree-zero",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor",
-    "def-pc-smooth-projective-curve"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 819,
-  "blueprint_uses": [
-    "def-pc-base-change",
-    "def-pc-derived-direct-image",
-    "def-pc-invertible-in-degree-zero",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses",
-    "declaration": "AlgebraicGeometry.picardInvertibleDirectImageClasses",
-    "file": "lean/Sheaf/AlgebraicGeometry/Picard/InvertibleDirectImageClasses.lean",
-    "statement": "def picardInvertibleDirectImageClasses {k : Type v} [Field k] {X : Scheme.{v}} (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k))) [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] (T : Over (Spec (.of k))) : Set ((picardFunctorNormalized f σ hσ).toFunctor.obj (op T))",
-    "branch": "sheaf-dag",
-    "by": "E1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "The old picardFunctorInvertibleDirectImage record requires [IsProper f] to construct its Subfunctor, while the dependency node defines only the pointwise assignment F(T). The recorded IsSmoothProjectiveCurve class does not provide a properness instance. This module states that exact pointwise assignment, reusing picardFunctorNormalized and IsInvertibleDirectImage, without a further properness hypothesis or a duplicate derived-image predicate; base-change stability is left to its separate node."
-  },
-  "blueprint_lean": [
+ "id": "def-pc-f-subfunctor",
+ "blueprint": {
+  "is": "def-pc-f-subfunctor",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The open subfunctor $F$",
+ "statement": "Let $k$ be a field, $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $\\sigma\\in X(k)$; regard $\\operatorname{Pic}_{X/k,\\sigma}$ [def-pc-pic-sigma-functor] as a functor on schemes $T$ over $k$, a morphism $u:T'\\to T$ over $k$ acting by $[\\mathcal{L}]\\mapsto[u_X^*\\mathcal{L}]$ with $u_X:X_{T'}\\to X_T$ the base change of $u$ [def-pc-base-change]. For a scheme $T$ over $k$, with $f_T:X_T\\to T$ the base change of $X\\to\\operatorname{Spec}k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the subset of those classes $[\\mathcal{L}]$ such that $Rf_{T,*}\\mathcal{L}$ ($Rf_{T,*}$ as in [def-pc-derived-direct-image]) is an object of $D(\\mathcal{O}_T)$ isomorphic to an invertible $\\mathcal{O}_T$-module placed in degree $0$ [def-pc-invertible-in-degree-zero] (a condition depending only on the isomorphism class of $\\mathcal{L}$). This defines the assignment $T\\mapsto F(T)$ only; that it is stable under the maps $u_X^*$, i.e. is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ in the sense of [def-pc-subfunctor], and that the inclusion is representable by open immersions, is Stacks Project, Picard Schemes of Curves, Lemma 44.6.2 (Tag 0B9V), proved separately; only after that lemma is $F$ called the subfunctor $F$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/def-pc-f-subfunctor.md",
+  "place": "node def-pc-f-subfunctor, order 819"
+ },
+ "stmt_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-base-change",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 819,
+ "blueprint_uses": [
+  "def-pc-base-change",
+  "def-pc-derived-direct-image",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses",
+  "declaration": "AlgebraicGeometry.picardInvertibleDirectImageClasses",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/InvertibleDirectImageClasses.lean",
+  "statement": "def picardInvertibleDirectImageClasses {k : Type v} [Field k] {X : Scheme.{v}} (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k))) [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] (T : Over (Spec (.of k))) : Set ((picardFunctorNormalized f σ hσ).toFunctor.obj (op T))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The old picardFunctorInvertibleDirectImage record requires [IsProper f] to construct its Subfunctor, while the dependency node defines only the pointwise assignment F(T). The recorded IsSmoothProjectiveCurve class does not provide a properness instance. This module states that exact pointwise assignment, reusing picardFunctorNormalized and IsInvertibleDirectImage, without a further properness hypothesis or a duplicate derived-image predicate; base-change stability is left to its separate node."
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.picardFunctorInvertibleDirectImage"
+ ],
+ "uses_not_cited": [
+  "def-pc-base-change",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
     "AlgebraicGeometry.picardFunctorInvertibleDirectImage"
-  ],
-  "uses_not_cited": [
-    "def-pc-base-change",
-    "def-pc-invertible-in-degree-zero",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.picardFunctorInvertibleDirectImage"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.picardFunctorInvertibleDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-          "lines": [
-            173,
-            196
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            69,
-            87
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            94,
-            135
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-          "lines": [
-            45,
-            52
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardFunctorInvertibleDirectImage",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+     "lines": [
+      173,
+      197
+     ],
+     "kind": "def",
+     "sorry": false
     }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-def-picard-f",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "def-pc-f-subfunctor",
-    "worker": "stage1",
-    "summary": "Checked the definition against the project declaration AlgebraicGeometry.picardFunctorInvertibleDirectImage in WeilConjectures/AlgebraicGeometry/Picard/Representability.lean:171-194 and the unit sketch. The declaration is not attachable because its body depends transitively on sorried project lemmas, but the definition itself is a direct Subfunctor construction and has no proof steps to split. Second reading restricted X to a smooth projective curve, matching the unit and its open-subfunctor lemma; no new DAG nodes are needed.",
-    "blueprint": "Realizes the complete definition node def-pc-f-subfunctor (order 819), including the object predicate and the Subfunctor map field.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fsf1805",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf1805 (reviewer sub-agent of L); spot-checked: Read packet; checked def-pc-subfunctor, def-pc-open-subfunctor, def-pc-pic-sigma-functor, def-pc-base-change, def-pc-invertible-in-degree-zero, def-pc-derived-direct-image and lem-pc-f-open-subfunctor (stmt_deps include def-pc-f-subfunctor; item cites no lemma: no cycle). Smooth-projective-curve restriction correct (matches lem-pc-f-open-subfunctor). FIX more, RETURN less: (1) E/well-definedness: statement asserted 'This defines the subfunctor F' without proof, a claim missed by the second reading; rephrased so the item defines only the assignment T -> F(T) and states that stability under pullback (subfunctor in the sense of [def-pc-subfunctor]) and the open-immersion property are Lemma 44.6.2 (lem-pc-f-open-subfunctor step 1/2), without citing that node (avoids a cycle). (2) Made the object precise: Pic_{X/k,sigma} as a functor on schemes over k with u acting by u_X^* [def-pc-base-change], f_T named as base change, condition independent of representative, [def-pc-invertible-in-degree-zero] cited; uses_not_cited trimmed accordingly.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-aip1134",
-    "group": "E1",
-    "result": "pass",
-    "note": "field/X.Over/IsSmoothProjectiveCurve/GeometricallyIntegral instance/section σ with hσ/∀T HasInjectiveResolutions on X_T (same universe u)/i:T'⟶T in Over/ℒ in F(T) = pointwise subset of picardFunctorNormalized via source IsInvertibleDirectImage (old Subfunctor record needs IsProper, not inferable from IsSmoothProjectiveCurve: checked by inferInstance)/fT = pullback.snd, iX = baseChangeMap/counits of Classical.choose exists_tensorPullbackAdjunction/iX^* via tensorPullback/Nonempty Arrow iso; both modules compiled together in L sandbox with #check of every cited name"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a field, $X$ a scheme over $k$ and $\\sigma\\in X(k)$. For a\nscheme $T$ over $k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the\nsubset of those $\\mathcal{L}$ such that ($f_T:X_T\\to T$, $R^qf_{T,*}$ as in\n[def-pc-derived-direct-image]) $R^0f_{T,*}\\mathcal{L}$ is an invertible\n$\\mathcal{O}_T$-module and $R^qf_{T,*}\\mathcal{L}=0$ for all $q>0$, i.e.\n$Rf_{T,*}\\mathcal{L}$ is isomorphic in $D(\\mathcal{O}_T)$ to an invertible\n$\\mathcal{O}_T$-module placed in degree $0$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "missing": [],
+   "open": []
   }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-def-picard-f",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-f-subfunctor",
+  "worker": "stage1",
+  "summary": "Checked the definition against the project declaration AlgebraicGeometry.picardFunctorInvertibleDirectImage in WeilConjectures/AlgebraicGeometry/Picard/Representability.lean:171-194 and the unit sketch. The declaration is not attachable because its body depends transitively on sorried project lemmas, but the definition itself is a direct Subfunctor construction and has no proof steps to split. Second reading restricted X to a smooth projective curve, matching the unit and its open-subfunctor lemma; no new DAG nodes are needed.",
+  "blueprint": "Realizes the complete definition node def-pc-f-subfunctor (order 819), including the object predicate and the Subfunctor map field.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsf1805",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf1805 (reviewer sub-agent of L); spot-checked: Read packet; checked def-pc-subfunctor, def-pc-open-subfunctor, def-pc-pic-sigma-functor, def-pc-base-change, def-pc-invertible-in-degree-zero, def-pc-derived-direct-image and lem-pc-f-open-subfunctor (stmt_deps include def-pc-f-subfunctor; item cites no lemma: no cycle). Smooth-projective-curve restriction correct (matches lem-pc-f-open-subfunctor). FIX more, RETURN less: (1) E/well-definedness: statement asserted 'This defines the subfunctor F' without proof, a claim missed by the second reading; rephrased so the item defines only the assignment T -> F(T) and states that stability under pullback (subfunctor in the sense of [def-pc-subfunctor]) and the open-immersion property are Lemma 44.6.2 (lem-pc-f-open-subfunctor step 1/2), without citing that node (avoids a cycle). (2) Made the object precise: Pic_{X/k,sigma} as a functor on schemes over k with u acting by u_X^* [def-pc-base-change], f_T named as base change, condition independent of representative, [def-pc-invertible-in-degree-zero] cited; uses_not_cited trimmed accordingly.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aip1134",
+  "group": "E1",
+  "result": "pass",
+  "note": "field/X.Over/IsSmoothProjectiveCurve/GeometricallyIntegral instance/section σ with hσ/∀T HasInjectiveResolutions on X_T (same universe u)/i:T'⟶T in Over/ℒ in F(T) = pointwise subset of picardFunctorNormalized via source IsInvertibleDirectImage (old Subfunctor record needs IsProper, not inferable from IsSmoothProjectiveCurve: checked by inferInstance)/fT = pullback.snd, iX = baseChangeMap/counits of Classical.choose exists_tensorPullbackAdjunction/iX^* via tensorPullback/Nonempty Arrow iso; both modules compiled together in L sandbox with #check of every cited name"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a field, $X$ a scheme over $k$ and $\\sigma\\in X(k)$. For a\nscheme $T$ over $k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the\nsubset of those $\\mathcal{L}$ such that ($f_T:X_T\\to T$, $R^qf_{T,*}$ as in\n[def-pc-derived-direct-image]) $R^0f_{T,*}\\mathcal{L}$ is an invertible\n$\\mathcal{O}_T$-module and $R^qf_{T,*}\\mathcal{L}=0$ for all $q>0$, i.e.\n$Rf_{T,*}\\mathcal{L}$ is isomorphic in $D(\\mathcal{O}_T)$ to an invertible\n$\\mathcal{O}_T$-module placed in degree $0$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

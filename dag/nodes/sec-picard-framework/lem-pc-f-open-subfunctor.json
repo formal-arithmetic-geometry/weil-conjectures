@@ -1,231 +1,195 @@
 {
-  "id": "lem-pc-f-open-subfunctor",
-  "blueprint": {
-    "is": "lem-pc-f-open-subfunctor",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "$F$ is an open subfunctor",
-  "statement": "(Picard Schemes of Curves, Lemma 44.6.2, Tag\n[0B9V](https://stacks.math.columbia.edu/tag/0B9V).)\nLet $k$ be a field, let $X$ be a\nsmooth projective curve over\n$k$ with a $k$-rational point $\\sigma$, and let\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ be the\nsubfunctor\n\n$$\nF(T):=\\{\\mathcal{L}\\in\\operatorname{Pic}_{X/k,\\sigma}(T):Rf_{T,*}\\mathcal{L}\\text{ is isomorphic to an\ninvertible }\\mathcal{O}_T\\text{-module placed in degree }0\\}.\n$$\n\nThen $F$ is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ and the inclusion\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is\nrepresentable by open immersions.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
-    "place": "node lem-pc-f-open-subfunctor, order 824",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B9V"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-derived-category",
-    "def-pc-f-subfunctor",
-    "def-pc-pic-sigma-functor"
-  ],
-  "proof": [
-    {
-      "text": "$F$ is a subfunctor: if $\\mathcal{L}\\in F(T)$ and $u:T'\\to T$ is a morphism, then\n$\\mathcal{L}_{T'}=u_X^*\\mathcal{L}$ satisfies\n$Rf_{T',*}\\mathcal{L}_{T'}\\cong Lu^*(Rf_{T,*}\\mathcal{L})$ (base change, [lem-pc-rf-base-change-flat-module];\nthe morphism $f_T:X_T\\to T$ is proper of finite presentation, being the\nbase change of $X\\to\\operatorname{Spec} k$, and $\\mathcal{L}$ is of finite presentation and\nflat over $T$: $\\mathcal{L}$ is locally free, $f_T$ is smooth hence flat\n[lem-pc-smooth-flat], and flat morphisms compose, so $\\mathcal{L}$ is flat\nover $T$), so $Rf_{T',*}\\mathcal{L}_{T'}\\cong u^*\\mathcal{N}[0]\\cong(u^*\\mathcal{N})[0]$ with\n$u^*\\mathcal{N}$ invertible, i.e. $\\mathcal{L}_{T'}\\in F(T')$.",
-      "uses": [
-        "lem-pc-rf-base-change-flat-module",
-        "lem-pc-smooth-flat"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "It remains to verify that $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open immersions\nin the sense of [def-pc-open-subfunctor]. Let $\\xi\\in\\operatorname{Pic}_{X/k,\\sigma}(T)$ be represented by\nthe invertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$ (proper of finite presentation) and $\\mathcal{F}=\\mathcal{L}$ (of finite presentation and flat over $T$, as in the first step), $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
-      "uses": [
-        "def-pc-open-subfunctor",
-        "lem-pc-flat-rf-open",
-        "def-sc-invertible-module"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-f-open-subfunctor",
+ "blueprint": {
+  "is": "lem-pc-f-open-subfunctor",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "$F$ is an open subfunctor",
+ "statement": "(Picard Schemes of Curves, Lemma 44.6.2, Tag\n[0B9V](https://stacks.math.columbia.edu/tag/0B9V).)\nLet $k$ be a field, let $X$ be a\nsmooth projective curve over\n$k$ with a $k$-rational point $\\sigma$, and let\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ be the\nsubfunctor\n\n$$\nF(T):=\\{\\mathcal{L}\\in\\operatorname{Pic}_{X/k,\\sigma}(T):Rf_{T,*}\\mathcal{L}\\text{ is isomorphic to an\ninvertible }\\mathcal{O}_T\\text{-module placed in degree }0\\}.\n$$\n\nThen $F$ is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ and the inclusion\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is\nrepresentable by open immersions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
+  "place": "node lem-pc-f-open-subfunctor, order 824",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9V"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor"
+ ],
+ "proof": [
+  {
+   "text": "$F$ is a subfunctor: if $\\mathcal{L}\\in F(T)$ and $u:T'\\to T$ is a morphism, then\n$\\mathcal{L}_{T'}=u_X^*\\mathcal{L}$ satisfies\n$Rf_{T',*}\\mathcal{L}_{T'}\\cong Lu^*(Rf_{T,*}\\mathcal{L})$ (base change, [lem-pc-rf-base-change-flat-module];\nthe morphism $f_T:X_T\\to T$ is proper of finite presentation, being the\nbase change of $X\\to\\operatorname{Spec} k$, and $\\mathcal{L}$ is of finite presentation and\nflat over $T$: $\\mathcal{L}$ is locally free, $f_T$ is smooth hence flat\n[lem-pc-smooth-flat], and flat morphisms compose, so $\\mathcal{L}$ is flat\nover $T$), so $Rf_{T',*}\\mathcal{L}_{T'}\\cong u^*\\mathcal{N}[0]\\cong(u^*\\mathcal{N})[0]$ with\n$u^*\\mathcal{N}$ invertible, i.e. $\\mathcal{L}_{T'}\\in F(T')$.",
+   "uses": [
     "lem-pc-rf-base-change-flat-module",
-    "lem-pc-smooth-flat",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to verify that $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open immersions\nin the sense of [def-pc-open-subfunctor]. Let $\\xi\\in\\operatorname{Pic}_{X/k,\\sigma}(T)$ be represented by\nthe invertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$ (proper of finite presentation) and $\\mathcal{F}=\\mathcal{L}$ (of finite presentation and flat over $T$, as in the first step), $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
+   "uses": [
     "def-pc-open-subfunctor",
     "lem-pc-flat-rf-open",
     "def-sc-invertible-module"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 824,
-  "blueprint_uses": [
-    "def-pc-derived-category",
-    "def-pc-f-subfunctor",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor",
-    "def-sc-invertible-module",
-    "lem-pc-flat-rf-open",
-    "lem-pc-rf-base-change-flat-module",
-    "lem-pc-smooth-flat"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-    "declaration": "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι",
-    "branch": "slopmaster2",
-    "line": 214,
-    "sorry_free": false,
-    "body_lines": 3,
-    "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι"
-  ],
-  "uses_not_cited": [
-    "def-pc-derived-category",
-    "def-pc-f-subfunctor",
-    "def-pc-pic-sigma-functor"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-          "lines": [
-            198,
-            222
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-          "lines": [
-            111,
-            147
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-          "lines": [
-            149,
-            171
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            69,
-            87
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-perfect-locus"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            94,
-            135
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-          "lines": [
-            45,
-            52
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-lem-picard-f-open",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-f-open-subfunctor",
-    "worker": "stage1",
-    "summary": "Checked the Stacks Tag 0B9V route and the corresponding slopmaster2 declarations. The proof is split into the base-change/subfunctor argument and the open-locus argument; all dependencies are existing DAG nodes, and the Lean theorem remains non-attachable because its transitive proof graph contains sorry declarations.",
-    "blueprint": "Realizes the item's two proof paragraphs: stability under pullback and the open-immersion criterion via the open locus for Rf_*.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-rf-base-change-flat-module",
-        "why": "The unit sketch explicitly requires the derived base-change comparison for the subfunctor argument, and no node in this unit supplies it."
-      },
-      {
-        "node": "lem-pc-flat-rf-open",
-        "why": "The unit sketch explicitly invokes the perfect/open-locus result for the rank-one degree-zero condition, and no node in this unit supplies it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-rf-base-change-flat-module",
-    "lem-pc-flat-rf-open",
-    "lem-pc-rf-base-change-flat-module",
-    "lem-pc-flat-rf-open"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fos1747",
-    "group": "C1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fos1747 (reviewer sub-agent of L); spot-checked: Read packet; checked Step 1 against lem-pc-rf-base-change-flat-module (qc separated via proper, flat qcoh) and lem-pc-smooth-flat; Step 2 against lem-pc-flat-rf-open (i=0,r=1) and def-sc-invertible-module; both tool_uses accepted as generic tools. FIX more, RETURN less: (1) C4: Step 2 cited def-pc-subfunctor (Tag 01JI subfunctor only) for the open-immersion property; now cites def-pc-open-subfunctor (representable by open immersions) in text, uses and proof_deps, and names the hypotheses of lem-pc-flat-rf-open and the representative L of xi; (2) E7: unnamed statement change (appended '([def-pc-f-subfunctor])') reverted to the imported statement; def-pc-f-subfunctor stays in stmt_deps. Second reading missed fault (1).; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a separably closed field, let $X$ be a $k$-scheme which is\nproper, smooth of relative dimension $1$ and geometrically integral over\n$k$, with a $k$-rational point $\\sigma$, and let\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ be the\nsubfunctor\n\n$$\nF(T):=\\{\\mathcal{L}\\in\\operatorname{Pic}_{X/k,\\sigma}(T):Rf_{T,*}\\mathcal{L}\\text{ is isomorphic to an\ninvertible }\\mathcal{O}_T\\text{-module placed in degree }0\\}.\n$$\n\nThen $F$ is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ and the inclusion\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is\nrepresentable by open immersions.",
-    "proof": [
-      {
-        "text": "$F$ is a subfunctor: if $\\mathcal{L}\\in F(T)$ and $u:T'\\to T$ is a morphism, then\n$\\mathcal{L}_{T'}=u_X^*\\mathcal{L}$ satisfies\n$Rf_{T',*}\\mathcal{L}_{T'}\\cong Lu^*(Rf_{T,*}\\mathcal{L})$ (base change, [lem-pc-rf-base-change-flat-module];\nthe morphism $f_T:X_T\\to T$ is proper of finite presentation, being the\nbase change of $X\\to\\operatorname{Spec} k$, and $\\mathcal{L}$ is of finite presentation and\nflat over $T$: $\\mathcal{L}$ is locally free, $f_T$ is smooth hence flat\n[lem-pc-smooth-flat], and flat morphisms compose, so $\\mathcal{L}$ is flat\nover $T$), so $Rf_{T',*}\\mathcal{L}_{T'}\\cong u^*\\mathcal{N}[0]\\cong(u^*\\mathcal{N})[0]$ with\n$u^*\\mathcal{N}$ invertible, i.e. $\\mathcal{L}_{T'}\\in F(T')$.",
-        "uses": [
-          "lem-pc-rf-base-change-flat-module",
-          "lem-pc-smooth-flat"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "It remains to verify the open-immersion property of\n[def-pc-subfunctor]. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$, $\\mathcal{F}=\\mathcal{L}$, $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
-        "uses": [
-          "def-pc-subfunctor",
-          "lem-pc-flat-rf-open",
-          "def-sc-invertible-module"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-smooth-flat",
+  "def-pc-open-subfunctor",
+  "lem-pc-flat-rf-open",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-f-open-subfunctor.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 824,
+ "blueprint_uses": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor",
+  "def-sc-invertible-module",
+  "lem-pc-flat-rf-open",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-smooth-flat"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι",
+  "branch": "slopmaster2",
+  "line": 214,
+  "sorry_free": false,
+  "body_lines": 3,
+  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι"
+ ],
+ "uses_not_cited": [
+  "def-pc-derived-category",
+  "def-pc-f-subfunctor",
+  "def-pc-pic-sigma-functor"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isOpenImmersion_picardFunctorInvertibleDirectImage_ι",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+     "lines": [
+      199,
+      223
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.exists_opens_isInvertibleDirectImage_map_iff",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+     "lines": [
+      111,
+      147
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsInvertibleDirectImage.map_of_isProper",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
+     "lines": [
+      149,
+      171
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-lem-picard-f-open",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-f-open-subfunctor",
+  "worker": "stage1",
+  "summary": "Checked the Stacks Tag 0B9V route and the corresponding slopmaster2 declarations. The proof is split into the base-change/subfunctor argument and the open-locus argument; all dependencies are existing DAG nodes, and the Lean theorem remains non-attachable because its transitive proof graph contains sorry declarations.",
+  "blueprint": "Realizes the item's two proof paragraphs: stability under pullback and the open-immersion criterion via the open locus for Rf_*.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-base-change-flat-module",
+    "why": "The unit sketch explicitly requires the derived base-change comparison for the subfunctor argument, and no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-flat-rf-open",
+    "why": "The unit sketch explicitly invokes the perfect/open-locus result for the rank-one degree-zero condition, and no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-flat-rf-open",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-flat-rf-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fos1747",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fos1747 (reviewer sub-agent of L); spot-checked: Read packet; checked Step 1 against lem-pc-rf-base-change-flat-module (qc separated via proper, flat qcoh) and lem-pc-smooth-flat; Step 2 against lem-pc-flat-rf-open (i=0,r=1) and def-sc-invertible-module; both tool_uses accepted as generic tools. FIX more, RETURN less: (1) C4: Step 2 cited def-pc-subfunctor (Tag 01JI subfunctor only) for the open-immersion property; now cites def-pc-open-subfunctor (representable by open immersions) in text, uses and proof_deps, and names the hypotheses of lem-pc-flat-rf-open and the representative L of xi; (2) E7: unnamed statement change (appended '([def-pc-f-subfunctor])') reverted to the imported statement; def-pc-f-subfunctor stays in stmt_deps. Second reading missed fault (1).; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a separably closed field, let $X$ be a $k$-scheme which is\nproper, smooth of relative dimension $1$ and geometrically integral over\n$k$, with a $k$-rational point $\\sigma$, and let\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ be the\nsubfunctor\n\n$$\nF(T):=\\{\\mathcal{L}\\in\\operatorname{Pic}_{X/k,\\sigma}(T):Rf_{T,*}\\mathcal{L}\\text{ is isomorphic to an\ninvertible }\\mathcal{O}_T\\text{-module placed in degree }0\\}.\n$$\n\nThen $F$ is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ and the inclusion\n$F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is\nrepresentable by open immersions.",
+  "proof": [
+   {
+    "text": "$F$ is a subfunctor: if $\\mathcal{L}\\in F(T)$ and $u:T'\\to T$ is a morphism, then\n$\\mathcal{L}_{T'}=u_X^*\\mathcal{L}$ satisfies\n$Rf_{T',*}\\mathcal{L}_{T'}\\cong Lu^*(Rf_{T,*}\\mathcal{L})$ (base change, [lem-pc-rf-base-change-flat-module];\nthe morphism $f_T:X_T\\to T$ is proper of finite presentation, being the\nbase change of $X\\to\\operatorname{Spec} k$, and $\\mathcal{L}$ is of finite presentation and\nflat over $T$: $\\mathcal{L}$ is locally free, $f_T$ is smooth hence flat\n[lem-pc-smooth-flat], and flat morphisms compose, so $\\mathcal{L}$ is flat\nover $T$), so $Rf_{T',*}\\mathcal{L}_{T'}\\cong u^*\\mathcal{N}[0]\\cong(u^*\\mathcal{N})[0]$ with\n$u^*\\mathcal{N}$ invertible, i.e. $\\mathcal{L}_{T'}\\in F(T')$.",
+    "uses": [
+     "lem-pc-rf-base-change-flat-module",
+     "lem-pc-smooth-flat"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "It remains to verify the open-immersion property of\n[def-pc-subfunctor]. Apply [lem-pc-flat-rf-open] with\n$f=f_T:X_T\\to T$, $\\mathcal{F}=\\mathcal{L}$, $i=0$, $r=1$: there is an open $U\\subseteq T$\nsuch that a morphism $u:T'\\to T$ factors through $U$ if and only if\n$Rf_{T',*}\\mathcal{L}_{T'}$ is isomorphic to a finite locally free\n$\\mathcal{O}_{T'}$-module of rank $1$ placed in degree $0$, i.e. if and only if\n$u^*\\mathcal{L}\\in F(T')$ (a finite locally free module of rank $1$ is an\ninvertible module, [def-sc-invertible-module]). Taking $U=U_\\xi$\nfor $\\xi=\\mathcal{L}$ gives exactly the property required.",
+    "uses": [
+     "def-pc-subfunctor",
+     "lem-pc-flat-rf-open",
+     "def-sc-invertible-module"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

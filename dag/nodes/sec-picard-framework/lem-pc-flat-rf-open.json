@@ -1,268 +1,232 @@
 {
-  "id": "lem-pc-flat-rf-open",
-  "blueprint": {
-    "is": "lem-pc-flat-rf-open",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The open locus of invertible $Rf_*$",
-  "statement": "Let $f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix $i,r\\in\\mathbb{Z}$.\nThen there exists an open subscheme $U\\subset S$ such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
-    "place": "node lem-pc-flat-rf-open, order 682",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B9S"
-      }
-    ]
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
-      "uses": [
-        "def-pc-derived-category",
-        "lem-pc-rf-perfect-base-change",
-        "def-pc-derived-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. By [def-pc-perfect-complex], choose an affine open\n$V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is represented by a bounded\ncomplex of finite projective $A$-modules. Each term is free after shrinking\n$V$ to a principal neighbourhood of $t$; intersecting these finitely many\nneighbourhoods gives an affine $V$ and integers $a\\le b$ with a complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ and $K^q\\cong A^{n_q}$. For\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nFor $q<0$ both sides are zero by the usual nonnegative cohomological\nconvention; for $q\\ge0$ the identification uses\n[lem-pc-cohomology-sections-affine-base]. In particular $\\beta^q\\equiv0$ on\n$V$ for $q\\notin[a,b]$, so on $V$ only the finitely many conditions with\n$q\\in[a,b]$ matter. By [thm-pc-semicontinuity-base-change](2) each $\\beta^q$\nis upper semicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
-      "uses": [
-        "thm-pc-semicontinuity-base-change",
-        "def-pc-perfect-complex",
-        "lem-pc-flat-complex-derived-pullback",
-        "lem-pc-rf-perfect-base-change",
-        "def-pc-derived-direct-image",
-        "lem-pc-cohomology-sections-affine-base"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The functorial characterization.* Let $U_E$ be the open subscheme\nattached to the perfect object $E$ and to $i,r$ by [lem-pc-perfect-locus].\nA point $s\\in S$ lies in $U_E$ iff $g_s:\\operatorname{Spec}\\kappa(s)\\to S$\nfactors through $U_E$, i.e. iff\n$Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$ is isomorphic to $\\kappa(s)^{r}$\nplaced in degree $i$. As $\\operatorname{Spec}\\kappa(s)$ is a point, the\ncohomology of $Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a\ncomplex over a field is quasi-isomorphic to the sum of its shifted\ncohomology groups; so this holds iff $s\\in U$. Thus $U=U_E$ as sets, and\nwe give $U$ the open subscheme structure. By [lem-pc-perfect-locus] a\nmorphism $g:T\\to S$ factors through $U$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is.\nApplying this to the inclusion $U\\to S$ (and the base-change isomorphism) shows that\n$Rf_*\\mathcal{F}|_U$ is isomorphic to a finite locally free module of rank $r$ placed in degree $i$;\nno reducedness of $S$ is needed.",
-      "uses": [
-        "lem-pc-perfect-locus"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The ancillary global base-change isomorphism on U_i is reduced separately: take the global connective derived model of lem-pc-higher-direct-image-derived-model. At each point of the image of g, the existing local perfect-locus theorem (from lem-pc-perfect-locus and the universal finite-complex model) supplies vanishing and finite local freeness in degree i, with rank equal to the fibre dimension at that point. Transport this condition to the model through its cohomology isomorphisms and the pullback-identity isomorphism. Apply lem-pc-derived-pullback-single-cohomology, then compose with the model's base-change cohomology isomorphism and the ordinary pullback of its source cohomology isomorphism. This proves nonempty_higherDirectImage_iso_pullback_of_isPullback; it does not replace the existing proof of the rank-locus functorial characterization.",
-      "uses": [
-        "lem-pc-higher-direct-image-derived-model",
-        "lem-pc-derived-pullback-single-cohomology",
-        "lem-pc-perfect-locus"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pc-flat-rf-open",
+ "blueprint": {
+  "is": "lem-pc-flat-rf-open",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The open locus of invertible $Rf_*$",
+ "statement": "Let $f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix $i,r\\in\\mathbb{Z}$.\nThen there exists an open subscheme $U\\subset S$ such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
+  "place": "node lem-pc-flat-rf-open, order 682",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9S"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
+   "uses": [
     "def-pc-derived-category",
     "lem-pc-rf-perfect-base-change",
-    "def-pc-derived-pullback",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. By [def-pc-perfect-complex], choose an affine open\n$V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is represented by a bounded\ncomplex of finite projective $A$-modules. Each term is free after shrinking\n$V$ to a principal neighbourhood of $t$; intersecting these finitely many\nneighbourhoods gives an affine $V$ and integers $a\\le b$ with a complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ and $K^q\\cong A^{n_q}$. For\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nFor $q<0$ both sides are zero by the usual nonnegative cohomological\nconvention; for $q\\ge0$ the identification uses\n[lem-pc-cohomology-sections-affine-base]. In particular $\\beta^q\\equiv0$ on\n$V$ for $q\\notin[a,b]$, so on $V$ only the finitely many conditions with\n$q\\in[a,b]$ matter. By [thm-pc-semicontinuity-base-change](2) each $\\beta^q$\nis upper semicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
+   "uses": [
     "thm-pc-semicontinuity-base-change",
     "def-pc-perfect-complex",
     "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-rf-perfect-base-change",
     "def-pc-derived-direct-image",
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-perfect-locus",
-    "lem-pc-higher-direct-image-derived-model",
-    "lem-pc-derived-pullback-single-cohomology"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
-    "place": "Original proof retained; C2 stage-3 reduction of the ancillary global higher-direct-image base-change isomorphism through a derived model and local single-degree cohomology"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 682,
-  "blueprint_uses": [
-    "def-pc-derived-category",
-    "def-pc-derived-pullback",
-    "def-pc-perfect-complex",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-perfect-locus",
-    "lem-pc-rf-perfect-base-change",
-    "thm-pc-semicontinuity-base-change"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
-        "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
-          "lines": [
-            180,
-            201
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity",
-          "lines": [
-            248,
-            294
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            69,
-            87
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-perfect-locus"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            94,
-            135
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-          "lines": [
-            45,
-            52
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-perfect",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-flat-rf-open",
-    "worker": "stage1",
-    "summary": "Rechecked the imported three-step proof against the existing DAG statements. No new nodes were needed; the local-complex step cites the existing perfectness, base-change, derived-direct-image, flat-complex pullback, affine cohomology, and semicontinuity statements.",
-    "blueprint": "Realizes the blueprint proof paragraphs defining E and beta, proving openness from a bounded finite-free complex and semicontinuity, and identifying the open with the perfect-locus functorial characterization.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-rf-perfect-base-change",
-        "why": "The proof needs the generic proper-flat perfect direct-image and arbitrary base-change theorem supplied by the semicontinuity unit."
-      },
-      {
-        "node": "thm-pc-semicontinuity-base-change",
-        "why": "The openness argument uses upper semicontinuity of fibre cohomology."
-      },
-      {
-        "node": "lem-pc-flat-complex-derived-pullback",
-        "why": "The local bounded flat complex must compute derived pullback termwise."
-      },
-      {
-        "node": "lem-pc-cohomology-sections-affine-base",
-        "why": "The fibre base is affine, so higher direct-image cohomology is identified with sheaf cohomology."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-rf-perfect-base-change",
-    "thm-pc-semicontinuity-base-change",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-cohomology-sections-affine-base",
-    "lem-pc-rf-perfect-base-change",
-    "thm-pc-semicontinuity-base-change",
-    "lem-pc-flat-complex-derived-pullback",
     "lem-pc-cohomology-sections-affine-base"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fro3026",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fro3026 (reviewer sub-agent of L); spot-checked: Checked Steps 1-3 against cited statements: Rf_*F perfect + arbitrary base change cited as lem-pc-rf-perfect-base-change (0B91 area); perfect-locus lem-pc-perfect-locus cited not restated; local finite-free model, semicontinuity, Euler-characteristic constancy on W correct for all integer i,r; statement change only drops the citation prefix (tag kept in source.external). FIX more, RETURN less: C5 Step 3 'Nakayama, as in [lem-pc-perfect-locus]' appealed to a proof; replaced by applying the cited statement to the inclusion U->S. Tool uses accepted (generic cohomology/base-change tools).; 1 file(s) fixed by the reviewer"
+   ],
+   "elementary": false
   },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
-    "branch": "slopmaster2",
-    "line": 192,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
-      "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry); Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage:1335"
+  {
+   "text": "*The functorial characterization.* Let $U_E$ be the open subscheme\nattached to the perfect object $E$ and to $i,r$ by [lem-pc-perfect-locus].\nA point $s\\in S$ lies in $U_E$ iff $g_s:\\operatorname{Spec}\\kappa(s)\\to S$\nfactors through $U_E$, i.e. iff\n$Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$ is isomorphic to $\\kappa(s)^{r}$\nplaced in degree $i$. As $\\operatorname{Spec}\\kappa(s)$ is a point, the\ncohomology of $Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a\ncomplex over a field is quasi-isomorphic to the sum of its shifted\ncohomology groups; so this holds iff $s\\in U$. Thus $U=U_E$ as sets, and\nwe give $U$ the open subscheme structure. By [lem-pc-perfect-locus] a\nmorphism $g:T\\to S$ factors through $U$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is.\nApplying this to the inclusion $U\\to S$ (and the base-change isomorphism) shows that\n$Rf_*\\mathcal{F}|_U$ is isomorphic to a finite locally free module of rank $r$ placed in degree $i$;\nno reducedness of $S$ is needed.",
+   "uses": [
+    "lem-pc-perfect-locus"
+   ],
+   "elementary": false
   },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261012T040020-L-1617116",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let\n$f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix integers $i,r\\ge0$.\nThen there exists an open subscheme $U\\subset S$, namely the set $U_{i,r}$ of points\n$s\\in S$ with $H^q(X_s,\\mathcal F_s)=0$ for $q\\neq i$ and\n$\\dim_{\\kappa(s)}H^i(X_s,\\mathcal F_s)=r$, such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$,\nthat is, $R^qf_{T,*}\\mathcal F_T=0$ for $q\\neq i$ and $R^if_{T,*}\\mathcal F_T$ is\nfinite locally free of rank $r$. Here $f_T:X_T\\to T$ is the base change of $f$ and\n$\\mathcal F_T$ the pullback of $\\mathcal F$ to $X_T$.",
-    "proof": [
-      {
-        "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
-        "uses": [
-          "def-pc-derived-category",
-          "lem-pc-rf-perfect-base-change",
-          "def-pc-derived-pullback"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. As in the proof of\n[thm-pc-semicontinuity-base-change], by [def-pc-perfect-complex] there is\nan affine open $V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is\nrepresented by a bounded complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ with $K^q\\cong A^{n_q}$, and for\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nIn particular $\\beta^q\\equiv0$ on $V$ for $q\\notin[a,b]$, so on $V$ only\nthe finitely many conditions with $q\\in[a,b]$ matter. By\n[thm-pc-semicontinuity-base-change](2) each $\\beta^q$ is upper\nsemicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
-        "uses": [
-          "thm-pc-semicontinuity-base-change",
-          "def-pc-perfect-complex",
-          "lem-pc-flat-complex-derived-pullback"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The functorial characterization.* Let $g:T\\to S$. Both sides of the\nclaimed equivalence are local on $T$: $g$ factors through the open $U$ iff\nit does so over each member of an open cover of $T$, and the vanishing and\nlocal freeness of the $R^qf_{T,*}\\mathcal F_T$ are local on $T$, while\nhigher direct images are compatible with restriction to opens of $T$. So\nwe may assume that $g$ maps $T$ into one of the affine opens\n$V=\\operatorname{Spec}(A)$ above, on which $E|_V$ is represented by the\nbounded complex $K$ of finite free modules; padding $K$ with zero terms we\nmay assume $a\\le i$, so that after shifting by $-a$ it is concentrated in\ndegrees $[0,b-a]$ and $i$ becomes $i-a\\ge0$. Let $U_K\\subseteq V$ be the\nopen subscheme attached to this complex and to $i-a,r$ by\n[lem-pc-perfect-locus]; undoing the shift, a morphism into $V$ factors\nthrough $U_K$ iff the pullback of $K$ is a finite locally free module of\nrank $r$ placed in degree $i$. A point $s\\in V$ lies in $U_K$ iff\n$g_s:\\operatorname{Spec}\\kappa(s)\\to V$ factors through $U_K$, i.e. iff\n$K\\otimes_A\\kappa(s)$, which computes $Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$,\nis isomorphic to $\\kappa(s)^{r}$ placed in degree $i$. As\n$\\operatorname{Spec}\\kappa(s)$ is a point, the cohomology of\n$Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a complex over a\nfield is quasi-isomorphic to the sum of its shifted cohomology groups; so\nthis holds iff $s\\in U$. Thus $U\\cap V=U_K$. By [lem-pc-perfect-locus],\n$g:T\\to V$ factors through $U_K=U\\cap V$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is;\nsince $Rf_{T,*}\\mathcal F_T$ has cohomology sheaves\n$R^qf_{T,*}\\mathcal F_T$, this is the condition of the statement.\nOn $U$ itself this gives (Nakayama, as in [lem-pc-perfect-locus]) that\n$Rf_*\\mathcal{F}|_U$ is locally a free module of rank $r$ in degree $i$;\nno reducedness of $S$ is needed.",
-        "uses": [
-          "lem-pc-perfect-locus"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The ancillary global base-change isomorphism on U_i is reduced separately: take the global connective derived model of lem-pc-higher-direct-image-derived-model. At each point of the image of g, the existing local perfect-locus theorem (from lem-pc-perfect-locus and the universal finite-complex model) supplies vanishing and finite local freeness in degree i, with rank equal to the fibre dimension at that point. Transport this condition to the model through its cohomology isomorphisms and the pullback-identity isomorphism. Apply lem-pc-derived-pullback-single-cohomology, then compose with the model's base-change cohomology isomorphism and the ordinary pullback of its source cohomology isomorphism. This proves nonempty_higherDirectImage_iso_pullback_of_isPullback; it does not replace the existing proof of the rank-locus functorial characterization.",
+   "uses": [
+    "lem-pc-higher-direct-image-derived-model",
+    "lem-pc-derived-pullback-single-cohomology",
+    "lem-pc-perfect-locus"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-derived-pullback",
+  "thm-pc-semicontinuity-base-change",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-perfect-locus",
+  "lem-pc-higher-direct-image-derived-model",
+  "lem-pc-derived-pullback-single-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-flat-rf-open.md",
+  "place": "Original proof retained; C2 stage-3 reduction of the ancillary global higher-direct-image base-change isomorphism through a derived model and local single-degree cohomology"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 682,
+ "blueprint_uses": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-perfect-locus",
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+    "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
+     "lines": [
+      180,
+      201
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity",
+     "lines": [
+      248,
+      294
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-rf-open",
+  "worker": "stage1",
+  "summary": "Rechecked the imported three-step proof against the existing DAG statements. No new nodes were needed; the local-complex step cites the existing perfectness, base-change, derived-direct-image, flat-complex pullback, affine cohomology, and semicontinuity statements.",
+  "blueprint": "Realizes the blueprint proof paragraphs defining E and beta, proving openness from a bounded finite-free complex and semicontinuity, and identifying the open with the perfect-locus functorial characterization.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "The proof needs the generic proper-flat perfect direct-image and arbitrary base-change theorem supplied by the semicontinuity unit."
+   },
+   {
+    "node": "thm-pc-semicontinuity-base-change",
+    "why": "The openness argument uses upper semicontinuity of fibre cohomology."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "The local bounded flat complex must compute derived pullback termwise."
+   },
+   {
+    "node": "lem-pc-cohomology-sections-affine-base",
+    "why": "The fibre base is affine, so higher direct-image cohomology is identified with sheaf cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-rf-perfect-base-change",
+  "thm-pc-semicontinuity-base-change",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fro3026",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fro3026 (reviewer sub-agent of L); spot-checked: Checked Steps 1-3 against cited statements: Rf_*F perfect + arbitrary base change cited as lem-pc-rf-perfect-base-change (0B91 area); perfect-locus lem-pc-perfect-locus cited not restated; local finite-free model, semicontinuity, Euler-characteristic constancy on W correct for all integer i,r; statement change only drops the citation prefix (tag kept in source.external). FIX more, RETURN less: C5 Step 3 'Nakayama, as in [lem-pc-perfect-locus]' appealed to a proof; replaced by applying the cited statement to the inclusion U->S. Tool uses accepted (generic cohomology/base-change tools).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+  "branch": "slopmaster2",
+  "line": 192,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree",
+   "AlgebraicGeometry.Scheme.Modules.exists_forall_hFiber_eq_zero"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry); Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage:1335"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T040020-L-1617116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let\n$f:X\\to S$ be a proper morphism of finite presentation and let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module of finite presentation, flat over $S$. Fix integers $i,r\\ge0$.\nThen there exists an open subscheme $U\\subset S$, namely the set $U_{i,r}$ of points\n$s\\in S$ with $H^q(X_s,\\mathcal F_s)=0$ for $q\\neq i$ and\n$\\dim_{\\kappa(s)}H^i(X_s,\\mathcal F_s)=r$, such that a morphism\n$T\\to S$ factors through $U$ if and only if $Rf_{T,*}\\mathcal{F}_T$ is isomorphic\nto a finite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree $i$,\nthat is, $R^qf_{T,*}\\mathcal F_T=0$ for $q\\neq i$ and $R^if_{T,*}\\mathcal F_T$ is\nfinite locally free of rank $r$. Here $f_T:X_T\\to T$ is the base change of $f$ and\n$\\mathcal F_T$ the pullback of $\\mathcal F$ to $X_T$.",
+  "proof": [
+   {
+    "text": "Put $E=Rf_*\\mathcal{F}\\in D(\\mathcal{O}_S)$ (see [def-pc-derived-category]).\nBy [lem-pc-rf-perfect-base-change], $E$ is perfect and for every\n$g:T\\to S$ the canonical map $Lg^*E\\to Rf_{T,*}\\mathcal{F}_T$ is an\nisomorphism, with $Lg^*$ the [def-pc-derived-pullback]. For $s\\in S$\nwrite $\\beta^q(s)=\\dim_{\\kappa(s)}H^q(X_s,\\mathcal{F}_s)$.",
+    "uses": [
+     "def-pc-derived-category",
+     "lem-pc-rf-perfect-base-change",
+     "def-pc-derived-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The locus.* Let $U\\subseteq S$ be the set of points $s$ with\n$\\beta^q(s)=0$ for all $q\\neq i$ and $\\beta^i(s)=r$. We show $U$ is\nopen. Fix $t\\in S$. As in the proof of\n[thm-pc-semicontinuity-base-change], by [def-pc-perfect-complex] there is\nan affine open $V=\\operatorname{Spec}(A)\\ni t$ on which $E|_V$ is\nrepresented by a bounded complex\n$K:\\;0\\to K^a\\to\\cdots\\to K^b\\to0$ with $K^q\\cong A^{n_q}$, and for\n$s\\in V$, since the terms of $K$ are flat,\n[lem-pc-flat-complex-derived-pullback] and the base-change isomorphism\ngive\n\n$$\nH^q(X_s,\\mathcal{F}_s)\\cong H^q(K\\otimes_A\\kappa(s)).\n$$\n\nIn particular $\\beta^q\\equiv0$ on $V$ for $q\\notin[a,b]$, so on $V$ only\nthe finitely many conditions with $q\\in[a,b]$ matter. By\n[thm-pc-semicontinuity-base-change](2) each $\\beta^q$ is upper\nsemicontinuous, so\n\n$$\nW=\\{s\\in V:\\ \\beta^q(s)\\le0\\ (q\\neq i,\\ a\\le q\\le b),\\ \\beta^i(s)\\le r\\}\n$$\n\nis a finite intersection of open subsets of $V$, hence open. For $s\\in W$\nthe complex $K\\otimes_A\\kappa(s)$ of finite dimensional vector spaces has\ncohomology only in degree $i$, so\n\n$$\n(-1)^i\\beta^i(s)=\\sum_q(-1)^q\\dim_{\\kappa(s)}H^q(K\\otimes_A\\kappa(s))\n=\\sum_q(-1)^qn_q ,\n$$\n\nwhich does not depend on $s\\in V$. Hence $\\beta^i$ is constant on $W$,\nand $U\\cap V$ is either $W$ or empty. In either case it is open, and\nsince such $V$ cover $S$, $U$ is open.",
+    "uses": [
+     "thm-pc-semicontinuity-base-change",
+     "def-pc-perfect-complex",
+     "lem-pc-flat-complex-derived-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The functorial characterization.* Let $g:T\\to S$. Both sides of the\nclaimed equivalence are local on $T$: $g$ factors through the open $U$ iff\nit does so over each member of an open cover of $T$, and the vanishing and\nlocal freeness of the $R^qf_{T,*}\\mathcal F_T$ are local on $T$, while\nhigher direct images are compatible with restriction to opens of $T$. So\nwe may assume that $g$ maps $T$ into one of the affine opens\n$V=\\operatorname{Spec}(A)$ above, on which $E|_V$ is represented by the\nbounded complex $K$ of finite free modules; padding $K$ with zero terms we\nmay assume $a\\le i$, so that after shifting by $-a$ it is concentrated in\ndegrees $[0,b-a]$ and $i$ becomes $i-a\\ge0$. Let $U_K\\subseteq V$ be the\nopen subscheme attached to this complex and to $i-a,r$ by\n[lem-pc-perfect-locus]; undoing the shift, a morphism into $V$ factors\nthrough $U_K$ iff the pullback of $K$ is a finite locally free module of\nrank $r$ placed in degree $i$. A point $s\\in V$ lies in $U_K$ iff\n$g_s:\\operatorname{Spec}\\kappa(s)\\to V$ factors through $U_K$, i.e. iff\n$K\\otimes_A\\kappa(s)$, which computes $Lg_s^*E\\cong Rf_{s,*}\\mathcal{F}_s$,\nis isomorphic to $\\kappa(s)^{r}$ placed in degree $i$. As\n$\\operatorname{Spec}\\kappa(s)$ is a point, the cohomology of\n$Rf_{s,*}\\mathcal{F}_s$ is $H^*(X_s,\\mathcal{F}_s)$, and a complex over a\nfield is quasi-isomorphic to the sum of its shifted cohomology groups; so\nthis holds iff $s\\in U$. Thus $U\\cap V=U_K$. By [lem-pc-perfect-locus],\n$g:T\\to V$ factors through $U_K=U\\cap V$ iff $Lg^*E$ is isomorphic to a\nfinite locally free $\\mathcal{O}_T$-module of rank $r$ placed in degree\n$i$, i.e. by the base-change isomorphism iff $Rf_{T,*}\\mathcal{F}_T$ is;\nsince $Rf_{T,*}\\mathcal F_T$ has cohomology sheaves\n$R^qf_{T,*}\\mathcal F_T$, this is the condition of the statement.\nOn $U$ itself this gives (Nakayama, as in [lem-pc-perfect-locus]) that\n$Rf_*\\mathcal{F}|_U$ is locally a free module of rank $r$ in degree $i$;\nno reducedness of $S$ is needed.",
+    "uses": [
+     "lem-pc-perfect-locus"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

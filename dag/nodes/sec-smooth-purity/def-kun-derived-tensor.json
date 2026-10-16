@@ -1,166 +1,243 @@
 {
-  "id": "def-kun-derived-tensor",
-  "blueprint": {
-    "is": "def-kun-derived-tensor",
-    "from": null,
-    "same_as": []
+ "id": "def-kun-derived-tensor",
+ "blueprint": {
+  "is": "def-kun-derived-tensor",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Derived tensor product of etale sheaves",
+ "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme, and work on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. Let $\\Lambda_T$ be the constant sheaf of rings [def-kun-constant-sheaf], and use the derived category $D(T_{\\Et},\\Lambda)$ of sheaves of $\\Lambda_T$-modules [def-weil-pbc-derived-categories]. Complexes are cochain complexes [def-pc-cochain-complex-modules]; acyclic means all cohomology sheaves vanish [def-pc-acyclic-complex-modules], and a quasi-isomorphism induces isomorphisms on all cohomology sheaves [def-pc-quasi-iso-modules].\n\nFor complexes $\\mathcal E^\\bullet,\\mathcal F^\\bullet$, the notation $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ means the direct-sum total tensor complex [def-pc-tensor-complex-sheaves] on the ringed site $(T_{\\Et},\\Lambda_T)$: its degree $n$ term is $\\bigoplus_{p+q=n}\\mathcal E^p\\otimes_{\\Lambda_T}\\mathcal F^q$ and its differential on the $(p,q)$ summand is $d_{\\mathcal E}\\otimes 1+(-1)^p1\\otimes d_{\\mathcal F}$.\n\nA complex $\\mathcal E^\\bullet$ of $\\Lambda_T$-modules is *K-flat* if $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ is acyclic for every acyclic complex $\\mathcal F^\\bullet$. This is the ringed-site K-flat notion [def-pc-kflat-complex], with the tensor factors interchanged by the sign symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in bidegree $(p,q)$.\n\nFor $K_1,K_2\\in D(T_{\\Et},\\Lambda)$ choose representing complexes $C_1^\\bullet,C_2^\\bullet$, and a quasi-isomorphism $P^\\bullet\\to C_1^\\bullet$ with $P^\\bullet$ K-flat (such resolutions are supplied by [lem-pc-kflat-resolution] on $(T_{\\Et},\\Lambda_T)$). The *derived tensor product* is represented by the total tensor complex:\n\n$$\nK_1\\kunotimes{\\Lambda}K_2\n=Q\\bigl(P^\\bullet\\otimes_\\Lambda C_2^\\bullet\\bigr)\n\\in D(T_{\\Et},\\Lambda),\n$$\n\nwhere $Q$ is the localization functor of [def-weil-pbc-derived-categories]. Independence of the chosen K-flat model is recorded with the other properties of this construction. For $K\\in D(T_{\\Et})$ (integer coefficients) and a complex of $\\mathbf Z$-modules $\\mathcal M^\\bullet$, $K\\kunotimes{\\mathbf Z}\\underline{\\mathcal M^\\bullet}$ denotes derived tensor with the termwise constant complex of [def-kun-constant-sheaf].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-derived-tensor.md",
+  "place": "node def-kun-derived-tensor, order 1683"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|derivedTensor|tensorDerived",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Derived tensor product of etale sheaves",
-  "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme, and work on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. Let $\\Lambda_T$ be the constant sheaf of rings [def-kun-constant-sheaf], and use the derived category $D(T_{\\Et},\\Lambda)$ of sheaves of $\\Lambda_T$-modules [def-weil-pbc-derived-categories]. Complexes are cochain complexes [def-pc-cochain-complex-modules]; acyclic means all cohomology sheaves vanish [def-pc-acyclic-complex-modules], and a quasi-isomorphism induces isomorphisms on all cohomology sheaves [def-pc-quasi-iso-modules].\n\nFor complexes $\\mathcal E^\\bullet,\\mathcal F^\\bullet$, the notation $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ means the direct-sum total tensor complex [def-pc-tensor-complex-sheaves] on the ringed site $(T_{\\Et},\\Lambda_T)$: its degree $n$ term is $\\bigoplus_{p+q=n}\\mathcal E^p\\otimes_{\\Lambda_T}\\mathcal F^q$ and its differential on the $(p,q)$ summand is $d_{\\mathcal E}\\otimes 1+(-1)^p1\\otimes d_{\\mathcal F}$.\n\nA complex $\\mathcal E^\\bullet$ of $\\Lambda_T$-modules is *K-flat* if $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ is acyclic for every acyclic complex $\\mathcal F^\\bullet$. This is the ringed-site K-flat notion [def-pc-kflat-complex], with the tensor factors interchanged by the sign symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in bidegree $(p,q)$.\n\nFor $K_1,K_2\\in D(T_{\\Et},\\Lambda)$ choose representing complexes $C_1^\\bullet,C_2^\\bullet$, and a quasi-isomorphism $P^\\bullet\\to C_1^\\bullet$ with $P^\\bullet$ K-flat (such resolutions are supplied by [lem-pc-kflat-resolution] on $(T_{\\Et},\\Lambda_T)$). The *derived tensor product* is represented by the total tensor complex:\n\n$$\nK_1\\kunotimes{\\Lambda}K_2\n=Q\\bigl(P^\\bullet\\otimes_\\Lambda C_2^\\bullet\\bigr)\n\\in D(T_{\\Et},\\Lambda),\n$$\n\nwhere $Q$ is the localization functor of [def-weil-pbc-derived-categories]. Independence of the chosen K-flat model is recorded with the other properties of this construction. For $K\\in D(T_{\\Et})$ (integer coefficients) and a complex of $\\mathbf Z$-modules $\\mathcal M^\\bullet$, $K\\kunotimes{\\mathbf Z}\\underline{\\mathcal M^\\bullet}$ denotes derived tensor with the termwise constant complex of [def-kun-constant-sheaf].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-derived-tensor.md",
-    "place": "node def-kun-derived-tensor, order 1683"
+  {
+   "tool": "leansearch",
+   "query": "K-flat resolutions define the derived tensor product of sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-weil-pbc-etale-site",
-    "def-kun-constant-sheaf",
-    "def-weil-pbc-derived-categories",
-    "def-pc-cochain-complex-modules",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-quasi-iso-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "KFlat|K-flat|derivedTensor|tensorDerived",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "K-flat resolutions define the derived tensor product of sheaves of modules",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"KFlat\"",
-      "results": "Lean.mkFlatCtorOfStructCtorName",
-      "date": "2026-10-14",
-      "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"derived\", \"tensor\"",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived tensor product of complexes of sheaves of modules on an etale site computed by a K-flat resolution",
-      "results": "CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.tensorProd_isSheaf; CategoryTheory.Tor'_map_app; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
-      "date": "2026-10-14",
-      "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Unbounded derived category monoidal tensor product obtained from acyclic complexes and flat replacements",
-      "results": "CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map; HomologicalComplex.monoidalCategory",
-      "date": "2026-10-14",
-      "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
-    },
-    {
-      "tool": "grep",
-      "query": "Tor|mapBifunctor|tensorObj",
-      "results": "Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean (subdirectory Algebra/Homology)",
-      "date": "2026-10-14",
-      "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
-    },
-    {
-      "tool": "grep",
-      "query": "HasDerivedMonoidalCategory|IsKFlat|isKFlat|KFlat",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Left derived bifunctor of tensor product in the localization of unbounded cochain complexes of module sheaves",
-      "results": "CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; Rep.Tor",
-      "date": "2026-10-14",
-      "verdict": "no match: Tor and Tor' are degreewise projective-derived functors on objects, not tensor on the unbounded derived category of sheaves"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1683,
-  "blueprint_uses": [
-    "def-kun-constant-sheaf",
-    "def-weil-pbc-etale-site"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-kun-derived-tensor",
-    "worker": "stage1",
-    "summary": "Split this definition by identifying its existing ringed-site notions, specializing to the constant ring sheaf on the small etale site. Made the direct-sum total tensor and the representing complexes explicit, and reused the generic K-flat-resolution existence theorem. No new nodes; no proof claims inserted into the definition. Searches found no full Mathlib match and no project attachment covering every clause.",
-    "blueprint": "The opening ring/site and K-flat clause, displayed K-flat-model formula, and final constant-complex notation of def-kun-derived-tensor are realized without changing the unit route.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "The arbitrary-ringed-site existence theorem supplies a K-flat representative; the unit-specific version depends back on this definition, so using the generic prerequisite avoids a cycle."
-      }
-    ]
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
   },
-  "tool_uses": [
-    "lem-pc-kflat-resolution"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NC-387c694d2",
-    "group": "NC",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-387c694d2 (reviewer sub-agent of L); spot-checked: Read the complete definition, report, nine dependency statements, unit/chapter route, master sources, and Stacks 06YN/06YS/06YT/06YU. Checked totalization, sign symmetry, unbounded inputs, and small cases. No new nodes or cycles introduced. Accepted lem-pc-kflat-resolution as a generic tool. Report incorrectly claims a pointers entry exists; this is nonblocking. Concrete checks recorded in review.md."
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of complexes of sheaves of modules on an etale site computed by a K-flat resolution",
+   "results": "CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.tensorProd_isSheaf; CategoryTheory.Tor'_map_app; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-4c9ec57eb",
-    "group": "NB",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable files, all nine dependencies, source clauses, exact declarations, universes and edge cases. scompile.py reproduction passed without warnings. No delivery errors or fixes; no repository mutations performed."
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived category monoidal tensor product obtained from acyclic complexes and flat replacements",
+   "results": "CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor; CategoryTheory.Tor'; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map; HomologicalComplex.monoidalCategory",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
   },
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.Derived.Tensor",
-    "declaration": "AlgebraicGeometry.Etale.derivedTensor",
-    "statement": "noncomputable def derivedTensor :\n    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤\n      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤\n        DerivedCategory (Sheaf X.smallEtaleTopology A)",
-    "branch": "slopmaster2",
-    "by": "NB",
-    "date": "2026-10-15",
-    "existing": true,
-    "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and X to T : Scheme.{u}. The result is a bifunctor on exactly Etale.DerivedCategoryModule Λ T, the encoding recorded by def-weil-pbc-derived-categories. This is the existing unbounded K-flat-derived tensor, not the degreewise Tor functor. Ordinary tensor of complexes is HomologicalComplex.tensorObj, defined as mapBifunctor with curriedTensor; ComplexShape.up ℤ gives direct-sum totalization with second differential sign (-1)^p and symmetry (-1)^(pq). DerivedCategory.tensorLeftCounit and isIso_tensorLeftCounit identify the value on Q(P), Q(C₂) with Q(P tensor C₂) for K-flat P; a quasi-isomorphism P → C₁ identifies Q(P) with K₁. The acyclic-test and quasi-isomorphism-preservation definitions of K-flat agree by the mapping-cone criterion and signed symmetry, without boundedness or termwise flatness assumptions. For integer coefficients use ModuleCat.{u + 1} (ULift.{u + 1} ℤ), equivalent to AddCommGrpCat.{u + 1} by restriction along ULift.ringEquiv.symm followed by the integer-module forget₂ and the termwise constant complex from def-kun-constant-sheaf. No duplicate derived-tensor construction is introduced."
+  {
+   "tool": "grep",
+   "query": "Tor|mapBifunctor|tensorObj",
+   "results": "Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/ExactSequence.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean (subdirectory Algebra/Homology)",
+   "date": "2026-10-14",
+   "verdict": "no match for the item: Tor is degreewise and assumes projective resolutions; ordinary sheaf/complex tensor products do not supply an unbounded derived tensor via K-flat models"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme, and work on\nthe small etale site of $T$, [def-weil-pbc-etale-site], with\nsheaves of $\\Lambda_T$-modules. A complex $\\mathcal E^\\bullet$ of\n$\\Lambda_T$-modules is *K-flat* if\n$\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ is acyclic for\nevery acyclic complex $\\mathcal F^\\bullet$. The *derived tensor\nproduct* of $K_1,K_2\\in D(T_{\\Et},\\Lambda)$ is\n\n$$\nK_1\\kunotimes{\\Lambda}K_2=P\\otimes_\\Lambda K_2\n\\in D(T_{\\Et},\\Lambda),\n$$\n\nwhere $P\\to K_1$ is a quasi-isomorphism with $P$ K-flat. For $K\\in D(T_{\\Et})$ and a complex of $\\mathbf Z$-modules\n$\\mathcal M^\\bullet$, $K\\kunotimes{\\mathbf Z}\\underline{\\mathcal M^\\bullet}$\ndenotes derived tensor with the constant complex of\n[def-kun-constant-sheaf].",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "HasDerivedMonoidalCategory|IsKFlat|isKFlat|KFlat",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived bifunctor of tensor product in the localization of unbounded cochain complexes of module sheaves",
+   "results": "CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; Rep.Tor",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor and Tor' are degreewise projective-derived functors on objects, not tensor on the unbounded derived category of sheaves"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1683,
+ "blueprint_uses": [
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-etale-site"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.derivedTensor",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Tensor",
+     "lines": [
+      78,
+      86
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "DerivedCategory.hasDerivedMonoidalCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory",
+     "lines": [
+      70,
+      76
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-derived-monoidal",
+      "sk-def-sfb-derived-tensor-hom"
+     ],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.derivedTensor",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Tensor",
+     "lines": [
+      89,
+      97
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-derived-tensor",
+  "worker": "stage1",
+  "summary": "Split this definition by identifying its existing ringed-site notions, specializing to the constant ring sheaf on the small etale site. Made the direct-sum total tensor and the representing complexes explicit, and reused the generic K-flat-resolution existence theorem. No new nodes; no proof claims inserted into the definition. Searches found no full Mathlib match and no project attachment covering every clause.",
+  "blueprint": "The opening ring/site and K-flat clause, displayed K-flat-model formula, and final constant-complex notation of def-kun-derived-tensor are realized without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "The arbitrary-ringed-site existence theorem supplies a K-flat representative; the unit-specific version depends back on this definition, so using the generic prerequisite avoids a cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-387c694d2",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-387c694d2 (reviewer sub-agent of L); spot-checked: Read the complete definition, report, nine dependency statements, unit/chapter route, master sources, and Stacks 06YN/06YS/06YT/06YU. Checked totalization, sign symmetry, unbounded inputs, and small cases. No new nodes or cycles introduced. Accepted lem-pc-kflat-resolution as a generic tool. Report incorrectly claims a pointers entry exists; this is nonblocking. Concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4c9ec57eb",
+  "group": "NB",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all nine dependencies, source clauses, exact declarations, universes and edge cases. scompile.py reproduction passed without warnings. No delivery errors or fixes; no repository mutations performed."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.Etale.derivedTensor",
+  "statement": "noncomputable def derivedTensor :\n    DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤\n      DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤\n        DerivedCategory (Sheaf X.smallEtaleTopology A)",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Specialize A to ModuleCat.{u + 1} Λ for Λ : Type (u + 1), [CommRing Λ], and X to T : Scheme.{u}. The result is a bifunctor on exactly Etale.DerivedCategoryModule Λ T, the encoding recorded by def-weil-pbc-derived-categories. This is the existing unbounded K-flat-derived tensor, not the degreewise Tor functor. Ordinary tensor of complexes is HomologicalComplex.tensorObj, defined as mapBifunctor with curriedTensor; ComplexShape.up ℤ gives direct-sum totalization with second differential sign (-1)^p and symmetry (-1)^(pq). DerivedCategory.tensorLeftCounit and isIso_tensorLeftCounit identify the value on Q(P), Q(C₂) with Q(P tensor C₂) for K-flat P; a quasi-isomorphism P → C₁ identifies Q(P) with K₁. The acyclic-test and quasi-isomorphism-preservation definitions of K-flat agree by the mapping-cone criterion and signed symmetry, without boundedness or termwise flatness assumptions. For integer coefficients use ModuleCat.{u + 1} (ULift.{u + 1} ℤ), equivalent to AddCommGrpCat.{u + 1} by restriction along ULift.ringEquiv.symm followed by the integer-module forget₂ and the termwise constant complex from def-kun-constant-sheaf. No duplicate derived-tensor construction is introduced."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\Lambda$ be a commutative ring and $T$ a scheme, and work on\nthe small etale site of $T$, [def-weil-pbc-etale-site], with\nsheaves of $\\Lambda_T$-modules. A complex $\\mathcal E^\\bullet$ of\n$\\Lambda_T$-modules is *K-flat* if\n$\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal F^\\bullet$ is acyclic for\nevery acyclic complex $\\mathcal F^\\bullet$. The *derived tensor\nproduct* of $K_1,K_2\\in D(T_{\\Et},\\Lambda)$ is\n\n$$\nK_1\\kunotimes{\\Lambda}K_2=P\\otimes_\\Lambda K_2\n\\in D(T_{\\Et},\\Lambda),\n$$\n\nwhere $P\\to K_1$ is a quasi-isomorphism with $P$ K-flat. For $K\\in D(T_{\\Et})$ and a complex of $\\mathbf Z$-modules\n$\\mathcal M^\\bullet$, $K\\kunotimes{\\mathbf Z}\\underline{\\mathcal M^\\bullet}$\ndenotes derived tensor with the constant complex of\n[def-kun-constant-sheaf].",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

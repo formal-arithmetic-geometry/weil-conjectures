@@ -1,360 +1,447 @@
 {
-  "id": "lem-sc-riemann-roch",
-  "blueprint": {
-    "is": "lem-sc-riemann-roch",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Riemann–Roch on a proper smooth curve",
-  "statement": "Let $k$ be algebraically closed and $C$ a\nproper smooth connected curve of genus $g$ ([def-sc-genus]) over\n$k$, with generic point $\\eta$ and function field $k(C)$\n([def-sc-function-field]). For a coherent $\\mathcal O_C$-module\n$\\mathcal F$ put\n$\\chi(C,\\mathcal F):=\\sum_q(-1)^q\\dim_kH^q(C,\\mathcal F)$, let\n$\\mathcal T\\subseteq\\mathcal F$ be its torsion subsheaf (the kernel of\n$\\mathcal F\\to\\mathcal F_\\eta$), and define the *rank* and the\n*degree* of $\\mathcal F$ by\n\n$$\n\\operatorname{rk}\\mathcal F:=\\dim_{k(C)}\\mathcal F_\\eta,\\qquad\n\\deg\\mathcal F:=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\mathcal F/\\mathcal T),\n$$\n\nwhere $\\mathcal F/\\mathcal T$ is locally free of rank\n$\\operatorname{rk}\\mathcal F$ (see the proof),\n$\\det$ is its top exterior power (with $\\det=\\mathcal O_C$ in rank\n$0$) and $\\deg$ on line bundles is that of [def-sc-pic0]; for a line\nbundle $\\mathcal L$ this is $\\operatorname{rk}\\mathcal L=1$ and\n$\\deg\\mathcal L$ as in [def-sc-pic0]. Then:\n\n1. (*Riemann–Roch for line bundles.*) For every line bundle\n$\\mathcal L$ on $C$,\n\n$$\n\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g.\n$$\n\n(*Stacks Project, Algebraic Curves, Lemma 53.5.2,\n[Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6).*)\nIn particular $\\chi(C,\\mathcal O_C)=1-g$.\n\n2. (*Riemann–Roch for coherent modules.*) For every coherent\n$\\mathcal O_C$-module $\\mathcal F$,\n\n$$\n\\chi(C,\\mathcal F)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)\\,(1-g).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "node lem-sc-riemann-roch, order 706",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0BS6"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02O5"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sc-genus",
-    "def-sc-function-field",
-    "def-sc-pic0",
-    "def-sc-curves",
-    "def-sc-invertible-module",
-    "pqf-def-coherent"
-  ],
-  "proof": [
-    {
-      "text": "The smooth connected curve $C$ is Noetherian and integral, with unique generic point $\\eta$ and one-dimensional DVR local rings at closed points, by [lem-sc-smooth-connected-curve-local-rings]. Proper coherent cohomology is finite-dimensional and eventually zero by [lem-pc-euler-characteristic-well-defined], using [lem-pc-coherent-hi] and the affine-base comparison [lem-pc-cohomology-sections-affine-base]; on this curve it vanishes in degrees $q>1$ by [lem-sc-noetherian-cohomology-above-dimension]. Thus $\\chi(C,-)$ is a finite alternating sum, and [lem-pc-euler-additive] applies to short exact sequences of coherent modules.",
-      "uses": [
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-pc-euler-characteristic-well-defined",
-        "lem-pc-coherent-hi",
-        "lem-pc-cohomology-sections-affine-base",
-        "lem-sc-noetherian-cohomology-above-dimension",
-        "lem-pc-euler-additive"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-        "place": "Proof, Preliminaries; Stacks Tags 02O5, 01XK and 02UZ"
-      }
-    },
-    {
-      "text": "For the structure sheaf, [lem-sc-global-functions] gives $H^0(C,\\mathcal O_C)=k$, [def-sc-genus] gives $g=\\dim_kH^1(C,\\mathcal O_C)$, and Step 1 eliminates all $H^q$ for $q>1$. Therefore $\\chi(C,\\mathcal O_C)=1-g$. This also checks the rank-zero normalization $\\deg(\\mathcal O_C)=0$ from the homomorphism [def-sc-pic0].",
-      "uses": [
-        "lem-sc-global-functions",
-        "def-sc-genus",
-        "def-sc-pic0",
-        "lem-sc-noetherian-cohomology-above-dimension"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-        "place": "Step (RR), clause chi(O_X)=h^0-h^1=1-g"
-      }
-    },
-    {
-      "text": "Let $\\mathcal L$ be invertible. By [lem-sc-line-bundle-rational-section] it is $\\mathcal O_C(D)$ for a finite divisor $D=\\sum_Pn_P[P]$. Every $\\mathcal O_C(D')$, $D'$ a divisor, is invertible by [lem-sc-divisor-class-curve], so the quotients below are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Each closed point is an effective Cartier divisor by [lem-sc-point-cartier]. For $n_P>0$, the local uniformizer calculation in the inclusion $\\mathcal O_C(D-[P])\\hookrightarrow\\mathcal O_C(D)$ gives quotient $\\kappa(P)$: at $P$ it is $t^{-n_P+1}\\mathcal O_{C,P}\\subset t^{-n_P}\\mathcal O_{C,P}$ with one-dimensional quotient over $\\kappa(P)$; away from $P$ it is an isomorphism. For $n_P<0$ use the same sequence with $D+[P]$ and rearrange. By [lem-pc-euler-additive] and [lem-pc-chi-zero-dim-support], each positive step changes $\\chi$ by $\\dim_k\\kappa(P)=1$ and each negative step by $-1$ (since $\\kappa(P)=k$ by [lem-weil-pbc-closed-point-residue-field-base], $k$ being algebraically closed). Induction on $\\sum_P|n_P|$ starts at $D=0$ from Step 2 and yields $\\chi(C,\\mathcal O_C(D))=\\chi(C,\\mathcal O_C)+\\sum_Pn_P$. The degree homomorphism [def-sc-pic0] sends $\\mathcal O_C(D)$ to $\\sum_Pn_P$, so $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, proving part (1).",
-      "uses": [
-        "lem-sc-line-bundle-rational-section",
-        "lem-sc-point-cartier",
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-pc-euler-additive",
-        "lem-pc-chi-zero-dim-support",
-        "def-sc-pic0",
-        "lem-sc-divisor-class-curve",
-        "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-        "lem-weil-pbc-closed-point-residue-field-base"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
-        "place": "Step (RR), divisor induction using 0 to O(D-x) to O(D) to kappa(x) to 0; Stacks Tag 0BS6 is the classical vector-bundle theorem"
-      }
-    },
-    {
-      "text": "For coherent $\\mathcal F$, [lem-sc-torsion-subsheaf-quotient] identifies $\\mathcal T=\\ker(\\mathcal F\\to j_*\\mathcal F_\\eta)$, its torsion stalks, and a torsion-free quotient $\\mathcal E$. The quasi-coherent submodule $\\mathcal T$ and quotient $\\mathcal E$ are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], since $C$ is Noetherian by Step 1. The support of $\\mathcal T$ is closed (on an affine chart it is the zero set of the annihilator of a finite module), excludes $\\eta$, and hence has dimension zero; [lem-sc-dim0-finite] makes it a finite set of closed points. By [lem-pc-chi-zero-dim-support], $H^q(C,\\mathcal T)=0$ for $q>0$ and $\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)$. Its generic stalk is zero, so $\\operatorname{rk}\\mathcal T=0$ and its degree is exactly this $H^0$ dimension, by the rank-zero determinant convention in the statement.",
-      "uses": [
-        "lem-sc-torsion-subsheaf-quotient",
-        "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-sc-dim0-finite",
-        "lem-pc-chi-zero-dim-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-        "place": "Proof, The torsion part; Stacks Tags 0AXT, 01Y1 and 0AYT"
-      }
-    },
-    {
-      "text": "The quotient $\\mathcal E=\\mathcal F/\\mathcal T$ is coherent and torsion-free by Step 4. The curve is integral regular of dimension one by [lem-sc-smooth-connected-curve-local-rings], so [lem-sc-regular-curve-torsionfree-free] makes $\\mathcal E$ finite locally free of constant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta$. Thus its determinant line is defined, and the exact sequence $0\\to\\mathcal T\\to\\mathcal F\\to\\mathcal E\\to0$ gives $\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$ by [lem-pc-euler-additive]. By the degree definition in the item, $\\deg\\mathcal F=\\dim_kH^0(C,\\mathcal T)+\\deg\\det\\mathcal E$. It remains to calculate $\\chi(\\mathcal E)$.",
-      "uses": [
-        "lem-sc-regular-curve-torsionfree-free",
-        "lem-sc-smooth-connected-curve-local-rings",
-        "lem-pc-euler-additive",
-        "lem-sc-torsion-subsheaf-quotient"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-        "place": "Proof, The torsion-free quotient; Stacks Tag 0CC4"
-      }
-    },
-    {
-      "text": "Prove by induction on $r$ that every rank-$r$ finite locally free $\\mathcal E$ on $C$ satisfies $\\chi(\\mathcal E)=\\deg\\det\\mathcal E+r(1-g)$. At $r=0$, $\\mathcal E=0$ and $\\det\\mathcal E=\\mathcal O_C$, so both sides are zero by [def-sc-pic0]. At $r=1$, the determinant is $\\mathcal E$ and Step 3 applies. For $r>1$, choose nonzero $s\\in\\mathcal E_\\eta$ and use [lem-sc-vector-bundle-line-subbundle] to obtain $0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ with $\\mathcal L$ invertible and $\\mathcal E'$ locally free of rank $r-1$. Then [lem-sc-determinant-short-exact] gives $\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$, and the homomorphism [def-sc-pic0] gives $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$. Euler additivity [lem-pc-euler-additive], Step 3 for $\\mathcal L$, and the induction hypothesis for $\\mathcal E'$ yield $\\chi(\\mathcal E)=(\\deg\\mathcal L+1-g)+(\\deg\\det\\mathcal E'+(r-1)(1-g))=\\deg\\det\\mathcal E+r(1-g)$.",
-      "uses": [
-        "lem-sc-vector-bundle-line-subbundle",
-        "lem-sc-determinant-short-exact",
-        "def-sc-pic0",
-        "lem-pc-euler-additive"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-        "place": "Proof of (*), induction on r and determinant paragraph"
-      }
-    },
-    {
-      "text": "Apply Step 6 to the locally free $\\mathcal E$ of Step 5. Using the Step 4 equality for $\\chi(\\mathcal T)$ and Step 5 additivity gives $\\chi(\\mathcal F)=\\dim_kH^0(C,\\mathcal T)+\\deg\\det\\mathcal E+r(1-g)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)(1-g)$ by the definitions of degree and rank in the statement. This is part (2).",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-        "place": "Final sentence of Proof of (*) and The torsion-free quotient"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-riemann-roch",
+ "blueprint": {
+  "is": "lem-sc-riemann-roch",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Riemann–Roch on a proper smooth curve",
+ "statement": "Let $k$ be algebraically closed and $C$ a\nproper smooth connected curve of genus $g$ ([def-sc-genus]) over\n$k$, with generic point $\\eta$ and function field $k(C)$\n([def-sc-function-field]). For a coherent $\\mathcal O_C$-module\n$\\mathcal F$ put\n$\\chi(C,\\mathcal F):=\\sum_q(-1)^q\\dim_kH^q(C,\\mathcal F)$, let\n$\\mathcal T\\subseteq\\mathcal F$ be its torsion subsheaf (the kernel of\n$\\mathcal F\\to\\mathcal F_\\eta$), and define the *rank* and the\n*degree* of $\\mathcal F$ by\n\n$$\n\\operatorname{rk}\\mathcal F:=\\dim_{k(C)}\\mathcal F_\\eta,\\qquad\n\\deg\\mathcal F:=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\mathcal F/\\mathcal T),\n$$\n\nwhere $\\mathcal F/\\mathcal T$ is locally free of rank\n$\\operatorname{rk}\\mathcal F$ (see the proof),\n$\\det$ is its top exterior power (with $\\det=\\mathcal O_C$ in rank\n$0$) and $\\deg$ on line bundles is that of [def-sc-pic0]; for a line\nbundle $\\mathcal L$ this is $\\operatorname{rk}\\mathcal L=1$ and\n$\\deg\\mathcal L$ as in [def-sc-pic0]. Then:\n\n1. (*Riemann–Roch for line bundles.*) For every line bundle\n$\\mathcal L$ on $C$,\n\n$$\n\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g.\n$$\n\n(*Stacks Project, Algebraic Curves, Lemma 53.5.2,\n[Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6).*)\nIn particular $\\chi(C,\\mathcal O_C)=1-g$.\n\n2. (*Riemann–Roch for coherent modules.*) For every coherent\n$\\mathcal O_C$-module $\\mathcal F$,\n\n$$\n\\chi(C,\\mathcal F)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)\\,(1-g).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "node lem-sc-riemann-roch, order 706",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BS6"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02O5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-genus",
+  "def-sc-function-field",
+  "def-sc-pic0",
+  "def-sc-curves",
+  "def-sc-invertible-module",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The smooth connected curve $C$ is Noetherian and integral, with unique generic point $\\eta$ and one-dimensional DVR local rings at closed points, by [lem-sc-smooth-connected-curve-local-rings]. Proper coherent cohomology is finite-dimensional and eventually zero by [lem-pc-euler-characteristic-well-defined], using [lem-pc-coherent-hi] and the affine-base comparison [lem-pc-cohomology-sections-affine-base]; on this curve it vanishes in degrees $q>1$ by [lem-sc-noetherian-cohomology-above-dimension]. Thus $\\chi(C,-)$ is a finite alternating sum, and [lem-pc-euler-additive] applies to short exact sequences of coherent modules.",
+   "uses": [
     "lem-sc-smooth-connected-curve-local-rings",
     "lem-pc-euler-characteristic-well-defined",
     "lem-pc-coherent-hi",
     "lem-pc-cohomology-sections-affine-base",
     "lem-sc-noetherian-cohomology-above-dimension",
-    "lem-pc-euler-additive",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof, Preliminaries; Stacks Tags 02O5, 01XK and 02UZ"
+   }
+  },
+  {
+   "text": "For the structure sheaf, [lem-sc-global-functions] gives $H^0(C,\\mathcal O_C)=k$, [def-sc-genus] gives $g=\\dim_kH^1(C,\\mathcal O_C)$, and Step 1 eliminates all $H^q$ for $q>1$. Therefore $\\chi(C,\\mathcal O_C)=1-g$. This also checks the rank-zero normalization $\\deg(\\mathcal O_C)=0$ from the homomorphism [def-sc-pic0].",
+   "uses": [
     "lem-sc-global-functions",
     "def-sc-genus",
     "def-sc-pic0",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Step (RR), clause chi(O_X)=h^0-h^1=1-g"
+   }
+  },
+  {
+   "text": "Let $\\mathcal L$ be invertible. By [lem-sc-line-bundle-rational-section] it is $\\mathcal O_C(D)$ for a finite divisor $D=\\sum_Pn_P[P]$. Every $\\mathcal O_C(D')$, $D'$ a divisor, is invertible by [lem-sc-divisor-class-curve], so the quotients below are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Each closed point is an effective Cartier divisor by [lem-sc-point-cartier]. For $n_P>0$, the local uniformizer calculation in the inclusion $\\mathcal O_C(D-[P])\\hookrightarrow\\mathcal O_C(D)$ gives quotient $\\kappa(P)$: at $P$ it is $t^{-n_P+1}\\mathcal O_{C,P}\\subset t^{-n_P}\\mathcal O_{C,P}$ with one-dimensional quotient over $\\kappa(P)$; away from $P$ it is an isomorphism. For $n_P<0$ use the same sequence with $D+[P]$ and rearrange. By [lem-pc-euler-additive] and [lem-pc-chi-zero-dim-support], each positive step changes $\\chi$ by $\\dim_k\\kappa(P)=1$ and each negative step by $-1$ (since $\\kappa(P)=k$ by [lem-weil-pbc-closed-point-residue-field-base], $k$ being algebraically closed). Induction on $\\sum_P|n_P|$ starts at $D=0$ from Step 2 and yields $\\chi(C,\\mathcal O_C(D))=\\chi(C,\\mathcal O_C)+\\sum_Pn_P$. The degree homomorphism [def-sc-pic0] sends $\\mathcal O_C(D)$ to $\\sum_Pn_P$, so $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, proving part (1).",
+   "uses": [
     "lem-sc-line-bundle-rational-section",
     "lem-sc-point-cartier",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-euler-additive",
     "lem-pc-chi-zero-dim-support",
+    "def-sc-pic0",
+    "lem-sc-divisor-class-curve",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "Step (RR), divisor induction using 0 to O(D-x) to O(D) to kappa(x) to 0; Stacks Tag 0BS6 is the classical vector-bundle theorem"
+   }
+  },
+  {
+   "text": "For coherent $\\mathcal F$, [lem-sc-torsion-subsheaf-quotient] identifies $\\mathcal T=\\ker(\\mathcal F\\to j_*\\mathcal F_\\eta)$, its torsion stalks, and a torsion-free quotient $\\mathcal E$. The quasi-coherent submodule $\\mathcal T$ and quotient $\\mathcal E$ are coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], since $C$ is Noetherian by Step 1. The support of $\\mathcal T$ is closed (on an affine chart it is the zero set of the annihilator of a finite module), excludes $\\eta$, and hence has dimension zero; [lem-sc-dim0-finite] makes it a finite set of closed points. By [lem-pc-chi-zero-dim-support], $H^q(C,\\mathcal T)=0$ for $q>0$ and $\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)$. Its generic stalk is zero, so $\\operatorname{rk}\\mathcal T=0$ and its degree is exactly this $H^0$ dimension, by the rank-zero determinant convention in the statement.",
+   "uses": [
     "lem-sc-torsion-subsheaf-quotient",
     "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sc-smooth-connected-curve-local-rings",
     "lem-sc-dim0-finite",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof, The torsion part; Stacks Tags 0AXT, 01Y1 and 0AYT"
+   }
+  },
+  {
+   "text": "The quotient $\\mathcal E=\\mathcal F/\\mathcal T$ is coherent and torsion-free by Step 4. The curve is integral regular of dimension one by [lem-sc-smooth-connected-curve-local-rings], so [lem-sc-regular-curve-torsionfree-free] makes $\\mathcal E$ finite locally free of constant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta$. Thus its determinant line is defined, and the exact sequence $0\\to\\mathcal T\\to\\mathcal F\\to\\mathcal E\\to0$ gives $\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$ by [lem-pc-euler-additive]. By the degree definition in the item, $\\deg\\mathcal F=\\dim_kH^0(C,\\mathcal T)+\\deg\\det\\mathcal E$. It remains to calculate $\\chi(\\mathcal E)$.",
+   "uses": [
     "lem-sc-regular-curve-torsionfree-free",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-euler-additive",
+    "lem-sc-torsion-subsheaf-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof, The torsion-free quotient; Stacks Tag 0CC4"
+   }
+  },
+  {
+   "text": "Prove by induction on $r$ that every rank-$r$ finite locally free $\\mathcal E$ on $C$ satisfies $\\chi(\\mathcal E)=\\deg\\det\\mathcal E+r(1-g)$. At $r=0$, $\\mathcal E=0$ and $\\det\\mathcal E=\\mathcal O_C$, so both sides are zero by [def-sc-pic0]. At $r=1$, the determinant is $\\mathcal E$ and Step 3 applies. For $r>1$, choose nonzero $s\\in\\mathcal E_\\eta$ and use [lem-sc-vector-bundle-line-subbundle] to obtain $0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ with $\\mathcal L$ invertible and $\\mathcal E'$ locally free of rank $r-1$. Then [lem-sc-determinant-short-exact] gives $\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$, and the homomorphism [def-sc-pic0] gives $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$. Euler additivity [lem-pc-euler-additive], Step 3 for $\\mathcal L$, and the induction hypothesis for $\\mathcal E'$ yield $\\chi(\\mathcal E)=(\\deg\\mathcal L+1-g)+(\\deg\\det\\mathcal E'+(r-1)(1-g))=\\deg\\det\\mathcal E+r(1-g)$.",
+   "uses": [
     "lem-sc-vector-bundle-line-subbundle",
     "lem-sc-determinant-short-exact",
-    "lem-sc-divisor-class-curve",
-    "lem-weil-pbc-closed-point-residue-field-base"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-sc-pic0",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "## Proof, supplemented by unit sk-thm-picard-rr Step (RR) and Stacks Tags 0AXT, 0CC4, 0AYT, 02O5 and 0BS6"
+    "place": "Proof of (*), induction on r and determinant paragraph"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "partial_undischarged_input",
-    "proof_cites_literature",
-    "lean_multiple",
-    "lean_over_10_lines"
+  {
+   "text": "Apply Step 6 to the locally free $\\mathcal E$ of Step 5. Using the Step 4 equality for $\\chi(\\mathcal T)$ and Step 5 additivity gives $\\chi(\\mathcal F)=\\dim_kH^0(C,\\mathcal T)+\\deg\\det\\mathcal E+r(1-g)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)(1-g)$ by the definitions of degree and rank in the statement. This is part (2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Final sentence of Proof of (*) and The torsion-free quotient"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-coherent-hi",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-euler-additive",
+  "lem-sc-global-functions",
+  "def-sc-genus",
+  "def-sc-pic0",
+  "lem-sc-line-bundle-rational-section",
+  "lem-sc-point-cartier",
+  "lem-pc-chi-zero-dim-support",
+  "lem-sc-torsion-subsheaf-quotient",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-dim0-finite",
+  "lem-sc-regular-curve-torsionfree-free",
+  "lem-sc-vector-bundle-line-subbundle",
+  "lem-sc-determinant-short-exact",
+  "lem-sc-divisor-class-curve",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "## Proof, supplemented by unit sk-thm-picard-rr Step (RR) and Stacks Tags 0AXT, 0CC4, 0AYT, 02O5 and 0BS6"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "partial_undischarged_input",
+  "proof_cites_literature",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 706,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-sc-genus",
+  "def-sc-invertible-module",
+  "def-sc-pic0"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+  "declaration": "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+  "branch": "slopmaster2",
+  "line": 692,
+  "sorry_free": false,
+  "body_lines": 15,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+    "declaration": "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+    "branch": "slopmaster2",
+    "line": 335,
+    "sorry_free": true,
+    "body_lines": 6
+   }
   ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 706,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-sc-function-field",
+  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+  "AlgebraicGeometry.Scheme.eulerChar_unit_eq"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "blueprint_proof_text": "*Preliminaries.* $C$ is integral (its local rings are regular, hence\ndomains, so its irreducible components are disjoint and connectedness\nleaves one), of dimension one, and its local rings at closed points are\ndiscrete valuation rings with residue field $k$. For a coherent\n$\\mathcal F$ the spaces $H^q(C,\\mathcal F)$ are finite-dimensional\n(coherent cohomology of a proper scheme over a field, Stacks Project,\nCohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)) and vanish for\n$q\\ge2$ (Grothendieck vanishing on the one-dimensional Noetherian space\n$C$; Stacks Project, Cohomology of Sheaves), so $\\chi$ is a finite sum,\nand a short exact sequence\n$0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent\nmodules gives\n$\\chi(\\mathcal F_2)=\\chi(\\mathcal F_1)+\\chi(\\mathcal F_3)$: its long\nexact cohomology sequence is a finite exact sequence of\nfinite-dimensional $k$-vector spaces, whose alternating sum of\ndimensions vanishes.\n\n*Part (1).* This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), used in the\ndisplayed form $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, where\n$\\chi(C,\\mathcal L)=\\dim H^0(C,\\mathcal L)-\\dim H^1(C,\\mathcal L)$ and\n$g=\\dim H^1(C,\\mathcal O_C)$ ([def-sc-genus]); no separate proof\nis given. Applied to $\\mathcal L=\\mathcal O_C$, whose degree is $0$\n($\\deg$ is a homomorphism, [def-sc-pic0]), it gives\n$\\chi(C,\\mathcal O_C)=1-g$.\n\n*The torsion part.* The torsion subsheaf $\\mathcal T$ is the kernel of\n$\\mathcal F\\to j_*\\mathcal F_\\eta$ ($j:\\operatorname{Spec}k(C)\\to C$\nthe generic point, $j_*\\mathcal F_\\eta$ quasi-coherent), hence\nquasi-coherent, and coherent as a submodule of the coherent\n$\\mathcal F$ on the Noetherian scheme $C$. Its stalk\n$\\mathcal T_x$ is the torsion submodule of $\\mathcal F_x$ (localization\nis exact, and an element of $\\mathcal F_x$ dies in $\\mathcal F_\\eta$ iff\nit is killed by a nonzero element of $\\mathcal O_{C,x}$). As\n$\\mathcal T_\\eta=0$, the support of $\\mathcal T$ is a closed subset\nnot containing $\\eta$, hence a finite set $Z$ of closed points of the\nirreducible one-dimensional Noetherian space $C$. A sheaf supported on\nthe finite discrete closed set $Z$ is the direct sum\n$\\bigoplus_{x\\in Z}i_{x,*}\\mathcal T_x$ of skyscraper sheaves, which are\nflasque; hence $H^q(C,\\mathcal T)=0$ for $q>0$ and\n\n$$\n\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)\n=\\sum_{x\\in Z}\\dim_k\\mathcal T_x\n$$\n\n(finite, each $\\mathcal T_x$ being a finitely generated torsion module\nover the discrete valuation ring $\\mathcal O_{C,x}$ with residue field\n$k$). Moreover $\\operatorname{rk}\\mathcal T=0$ and\n$\\deg\\mathcal T=\\dim_kH^0(C,\\mathcal T)$, so (2) holds for $\\mathcal T$.\n\n*The torsion-free quotient.* $\\mathcal E:=\\mathcal F/\\mathcal T$ is\ncoherent with stalks $\\mathcal E_x=\\mathcal F_x/(\\mathcal F_x)_{\\rm tors}$,\nfinitely generated and torsion-free over the discrete valuation ring\n$\\mathcal O_{C,x}$ (a principal ideal domain), hence free; a coherent\nmodule with free stalks is locally free (a finitely presented module\nwhose stalk at $x$ is free is free on a neighbourhood of $x$), of\nconstant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta=\\operatorname{rk}\\mathcal F$\nbecause $C$ is irreducible. By additivity,\n$\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$, and by\ndefinition $\\deg\\mathcal F=\\deg\\mathcal T+\\deg\\det\\mathcal E$.\nSo (2) follows once we show, for every locally free $\\mathcal E$ of\nrank $r$,\n\n$$\n\\chi(C,\\mathcal E)=\\deg\\det\\mathcal E+r(1-g). \\tag{$\\ast$}\n$$\n\n*Proof of $(\\ast)$, by induction on $r$.* For $r=0$, $\\mathcal E=0$\nand both sides vanish ($\\det\\mathcal E=\\mathcal O_C$ has degree $0$).\nFor $r=1$, $(\\ast)$ is part (1), since $\\det\\mathcal E=\\mathcal E$.\nLet $r\\ge2$. Choose $0\\neq s\\in\\mathcal E_\\eta$ and let\n$\\mathcal L\\subseteq\\mathcal E$ be the kernel of the composite\n$\\mathcal E\\to j_*\\mathcal E_\\eta\\to j_*(\\mathcal E_\\eta/k(C)s)$; as\nabove, $\\mathcal L$ is coherent, with stalks\n$\\mathcal L_x=\\mathcal E_x\\cap k(C)s$ (intersection inside\n$\\mathcal E_\\eta$; $\\mathcal E_x\\to\\mathcal E_\\eta$ is injective as\n$\\mathcal E_x$ is free over the domain $\\mathcal O_{C,x}$). The module\n$\\mathcal E_x\\cap k(C)s$ is nonzero (clear the denominators of $s$ with\nrespect to a basis of $\\mathcal E_x$), finitely generated\n($\\mathcal O_{C,x}$ is Noetherian) and torsion-free of generic rank one,\nhence free of rank one; and\n$\\mathcal E_x/\\mathcal L_x\\hookrightarrow\\mathcal E_\\eta/k(C)s$ is\ntorsion-free (if $ae\\in k(C)s$ with $0\\neq a\\in\\mathcal O_{C,x}$ then\n$e\\in k(C)s$), hence free of rank $r-1$. Thus $\\mathcal L$ is an\ninvertible module ([def-sc-invertible-module]) and\n$\\mathcal E':=\\mathcal E/\\mathcal L$ is locally free of rank $r-1$,\nby the criterion used above. The exact sequence\n$0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ of locally free\nmodules gives\n$\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$ (the\ndeterminant is multiplicative in short exact sequences of finite\nlocally free modules: locally the sequence splits and\n$\\wedge^r(\\mathcal L\\oplus\\mathcal E')=\\mathcal L\\otimes\\wedge^{r-1}\\mathcal E'$,\nthe isomorphism $l\\wedge\\tilde e_1\\wedge\\dots\\wedge\\tilde e_{r-1}\\mapsto l\\otimes e_1\\wedge\\dots\\wedge e_{r-1}$\nbeing independent of the lifts $\\tilde e_i$ and so gluing). Since\n$\\deg$ is a homomorphism on $\\operatorname{Pic}(C)$\n([def-sc-pic0]), $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$.\nAdditivity of $\\chi$, part (1) for $\\mathcal L$ and the induction\nhypothesis for $\\mathcal E'$ give\n\n$$\n\\chi(\\mathcal E)=\\chi(\\mathcal L)+\\chi(\\mathcal E')\n=\\bigl(\\deg\\mathcal L+1-g\\bigr)+\\bigl(\\deg\\det\\mathcal E'+(r-1)(1-g)\\bigr)\n=\\deg\\det\\mathcal E+r(1-g),\n$$\n\nwhich is $(\\ast)$. This proves (2).",
+ "blueprint_proof_steps": [
+  {
+   "text": "*Preliminaries.* $C$ is integral (its local rings are regular, hence\ndomains, so its irreducible components are disjoint and connectedness\nleaves one), of dimension one, and its local rings at closed points are\ndiscrete valuation rings with residue field $k$. For a coherent\n$\\mathcal F$ the spaces $H^q(C,\\mathcal F)$ are finite-dimensional\n(coherent cohomology of a proper scheme over a field, Stacks Project,\nCohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)) and vanish for\n$q\\ge2$ (Grothendieck vanishing on the one-dimensional Noetherian space\n$C$; Stacks Project, Cohomology of Sheaves), so $\\chi$ is a finite sum,\nand a short exact sequence\n$0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent\nmodules gives\n$\\chi(\\mathcal F_2)=\\chi(\\mathcal F_1)+\\chi(\\mathcal F_3)$: its long\nexact cohomology sequence is a finite exact sequence of\nfinite-dimensional $k$-vector spaces, whose alternating sum of\ndimensions vanishes.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Part (1).* This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), used in the\ndisplayed form $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, where\n$\\chi(C,\\mathcal L)=\\dim H^0(C,\\mathcal L)-\\dim H^1(C,\\mathcal L)$ and\n$g=\\dim H^1(C,\\mathcal O_C)$ ([def-sc-genus]); no separate proof\nis given. Applied to $\\mathcal L=\\mathcal O_C$, whose degree is $0$\n($\\deg$ is a homomorphism, [def-sc-pic0]), it gives\n$\\chi(C,\\mathcal O_C)=1-g$.",
+   "uses": [
     "def-sc-genus",
+    "def-sc-pic0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The torsion part.* The torsion subsheaf $\\mathcal T$ is the kernel of\n$\\mathcal F\\to j_*\\mathcal F_\\eta$ ($j:\\operatorname{Spec}k(C)\\to C$\nthe generic point, $j_*\\mathcal F_\\eta$ quasi-coherent), hence\nquasi-coherent, and coherent as a submodule of the coherent\n$\\mathcal F$ on the Noetherian scheme $C$. Its stalk\n$\\mathcal T_x$ is the torsion submodule of $\\mathcal F_x$ (localization\nis exact, and an element of $\\mathcal F_x$ dies in $\\mathcal F_\\eta$ iff\nit is killed by a nonzero element of $\\mathcal O_{C,x}$). As\n$\\mathcal T_\\eta=0$, the support of $\\mathcal T$ is a closed subset\nnot containing $\\eta$, hence a finite set $Z$ of closed points of the\nirreducible one-dimensional Noetherian space $C$. A sheaf supported on\nthe finite discrete closed set $Z$ is the direct sum\n$\\bigoplus_{x\\in Z}i_{x,*}\\mathcal T_x$ of skyscraper sheaves, which are\nflasque; hence $H^q(C,\\mathcal T)=0$ for $q>0$ and\n\n$$\n\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)\n=\\sum_{x\\in Z}\\dim_k\\mathcal T_x\n$$\n\n(finite, each $\\mathcal T_x$ being a finitely generated torsion module\nover the discrete valuation ring $\\mathcal O_{C,x}$ with residue field\n$k$). Moreover $\\operatorname{rk}\\mathcal T=0$ and\n$\\deg\\mathcal T=\\dim_kH^0(C,\\mathcal T)$, so (2) holds for $\\mathcal T$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*The torsion-free quotient.* $\\mathcal E:=\\mathcal F/\\mathcal T$ is\ncoherent with stalks $\\mathcal E_x=\\mathcal F_x/(\\mathcal F_x)_{\\rm tors}$,\nfinitely generated and torsion-free over the discrete valuation ring\n$\\mathcal O_{C,x}$ (a principal ideal domain), hence free; a coherent\nmodule with free stalks is locally free (a finitely presented module\nwhose stalk at $x$ is free is free on a neighbourhood of $x$), of\nconstant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta=\\operatorname{rk}\\mathcal F$\nbecause $C$ is irreducible. By additivity,\n$\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$, and by\ndefinition $\\deg\\mathcal F=\\deg\\mathcal T+\\deg\\det\\mathcal E$.\nSo (2) follows once we show, for every locally free $\\mathcal E$ of\nrank $r$,\n\n$$\n\\chi(C,\\mathcal E)=\\deg\\det\\mathcal E+r(1-g). \\tag{$\\ast$}\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Proof of $(\\ast)$, by induction on $r$.* For $r=0$, $\\mathcal E=0$\nand both sides vanish ($\\det\\mathcal E=\\mathcal O_C$ has degree $0$).\nFor $r=1$, $(\\ast)$ is part (1), since $\\det\\mathcal E=\\mathcal E$.\nLet $r\\ge2$. Choose $0\\neq s\\in\\mathcal E_\\eta$ and let\n$\\mathcal L\\subseteq\\mathcal E$ be the kernel of the composite\n$\\mathcal E\\to j_*\\mathcal E_\\eta\\to j_*(\\mathcal E_\\eta/k(C)s)$; as\nabove, $\\mathcal L$ is coherent, with stalks\n$\\mathcal L_x=\\mathcal E_x\\cap k(C)s$ (intersection inside\n$\\mathcal E_\\eta$; $\\mathcal E_x\\to\\mathcal E_\\eta$ is injective as\n$\\mathcal E_x$ is free over the domain $\\mathcal O_{C,x}$). The module\n$\\mathcal E_x\\cap k(C)s$ is nonzero (clear the denominators of $s$ with\nrespect to a basis of $\\mathcal E_x$), finitely generated\n($\\mathcal O_{C,x}$ is Noetherian) and torsion-free of generic rank one,\nhence free of rank one; and\n$\\mathcal E_x/\\mathcal L_x\\hookrightarrow\\mathcal E_\\eta/k(C)s$ is\ntorsion-free (if $ae\\in k(C)s$ with $0\\neq a\\in\\mathcal O_{C,x}$ then\n$e\\in k(C)s$), hence free of rank $r-1$. Thus $\\mathcal L$ is an\ninvertible module ([def-sc-invertible-module]) and\n$\\mathcal E':=\\mathcal E/\\mathcal L$ is locally free of rank $r-1$,\nby the criterion used above. The exact sequence\n$0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ of locally free\nmodules gives\n$\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$ (the\ndeterminant is multiplicative in short exact sequences of finite\nlocally free modules: locally the sequence splits and\n$\\wedge^r(\\mathcal L\\oplus\\mathcal E')=\\mathcal L\\otimes\\wedge^{r-1}\\mathcal E'$,\nthe isomorphism $l\\wedge\\tilde e_1\\wedge\\dots\\wedge\\tilde e_{r-1}\\mapsto l\\otimes e_1\\wedge\\dots\\wedge e_{r-1}$\nbeing independent of the lifts $\\tilde e_i$ and so gluing). Since\n$\\deg$ is a homomorphism on $\\operatorname{Pic}(C)$\n([def-sc-pic0]), $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$.\nAdditivity of $\\chi$, part (1) for $\\mathcal L$ and the induction\nhypothesis for $\\mathcal E'$ give\n\n$$\n\\chi(\\mathcal E)=\\chi(\\mathcal L)+\\chi(\\mathcal E')\n=\\bigl(\\deg\\mathcal L+1-g\\bigr)+\\bigl(\\deg\\det\\mathcal E'+(r-1)(1-g)\\bigr)\n=\\deg\\det\\mathcal E+r(1-g),\n$$\n\nwhich is $(\\ast)$. This proves (2).",
+   "uses": [
     "def-sc-invertible-module",
     "def-sc-pic0"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-    "declaration": "AlgebraicGeometry.Scheme.eulerChar_free_eq",
-    "branch": "slopmaster2",
-    "line": 692,
-    "sorry_free": false,
-    "body_lines": 15,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-        "declaration": "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
-        "branch": "slopmaster2",
-        "line": 335,
-        "sorry_free": true,
-        "body_lines": 6
-      }
-    ],
-    "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
-  },
-  "blueprint_lean": [
+   ],
+   "elementary": false
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
     "AlgebraicGeometry.Scheme.eulerChar_free_eq",
     "AlgebraicGeometry.Scheme.eulerChar_unit_eq"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves"
-  ],
-  "blueprint_proof_text": "*Preliminaries.* $C$ is integral (its local rings are regular, hence\ndomains, so its irreducible components are disjoint and connectedness\nleaves one), of dimension one, and its local rings at closed points are\ndiscrete valuation rings with residue field $k$. For a coherent\n$\\mathcal F$ the spaces $H^q(C,\\mathcal F)$ are finite-dimensional\n(coherent cohomology of a proper scheme over a field, Stacks Project,\nCohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)) and vanish for\n$q\\ge2$ (Grothendieck vanishing on the one-dimensional Noetherian space\n$C$; Stacks Project, Cohomology of Sheaves), so $\\chi$ is a finite sum,\nand a short exact sequence\n$0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent\nmodules gives\n$\\chi(\\mathcal F_2)=\\chi(\\mathcal F_1)+\\chi(\\mathcal F_3)$: its long\nexact cohomology sequence is a finite exact sequence of\nfinite-dimensional $k$-vector spaces, whose alternating sum of\ndimensions vanishes.\n\n*Part (1).* This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), used in the\ndisplayed form $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, where\n$\\chi(C,\\mathcal L)=\\dim H^0(C,\\mathcal L)-\\dim H^1(C,\\mathcal L)$ and\n$g=\\dim H^1(C,\\mathcal O_C)$ ([def-sc-genus]); no separate proof\nis given. Applied to $\\mathcal L=\\mathcal O_C$, whose degree is $0$\n($\\deg$ is a homomorphism, [def-sc-pic0]), it gives\n$\\chi(C,\\mathcal O_C)=1-g$.\n\n*The torsion part.* The torsion subsheaf $\\mathcal T$ is the kernel of\n$\\mathcal F\\to j_*\\mathcal F_\\eta$ ($j:\\operatorname{Spec}k(C)\\to C$\nthe generic point, $j_*\\mathcal F_\\eta$ quasi-coherent), hence\nquasi-coherent, and coherent as a submodule of the coherent\n$\\mathcal F$ on the Noetherian scheme $C$. Its stalk\n$\\mathcal T_x$ is the torsion submodule of $\\mathcal F_x$ (localization\nis exact, and an element of $\\mathcal F_x$ dies in $\\mathcal F_\\eta$ iff\nit is killed by a nonzero element of $\\mathcal O_{C,x}$). As\n$\\mathcal T_\\eta=0$, the support of $\\mathcal T$ is a closed subset\nnot containing $\\eta$, hence a finite set $Z$ of closed points of the\nirreducible one-dimensional Noetherian space $C$. A sheaf supported on\nthe finite discrete closed set $Z$ is the direct sum\n$\\bigoplus_{x\\in Z}i_{x,*}\\mathcal T_x$ of skyscraper sheaves, which are\nflasque; hence $H^q(C,\\mathcal T)=0$ for $q>0$ and\n\n$$\n\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)\n=\\sum_{x\\in Z}\\dim_k\\mathcal T_x\n$$\n\n(finite, each $\\mathcal T_x$ being a finitely generated torsion module\nover the discrete valuation ring $\\mathcal O_{C,x}$ with residue field\n$k$). Moreover $\\operatorname{rk}\\mathcal T=0$ and\n$\\deg\\mathcal T=\\dim_kH^0(C,\\mathcal T)$, so (2) holds for $\\mathcal T$.\n\n*The torsion-free quotient.* $\\mathcal E:=\\mathcal F/\\mathcal T$ is\ncoherent with stalks $\\mathcal E_x=\\mathcal F_x/(\\mathcal F_x)_{\\rm tors}$,\nfinitely generated and torsion-free over the discrete valuation ring\n$\\mathcal O_{C,x}$ (a principal ideal domain), hence free; a coherent\nmodule with free stalks is locally free (a finitely presented module\nwhose stalk at $x$ is free is free on a neighbourhood of $x$), of\nconstant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta=\\operatorname{rk}\\mathcal F$\nbecause $C$ is irreducible. By additivity,\n$\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$, and by\ndefinition $\\deg\\mathcal F=\\deg\\mathcal T+\\deg\\det\\mathcal E$.\nSo (2) follows once we show, for every locally free $\\mathcal E$ of\nrank $r$,\n\n$$\n\\chi(C,\\mathcal E)=\\deg\\det\\mathcal E+r(1-g). \\tag{$\\ast$}\n$$\n\n*Proof of $(\\ast)$, by induction on $r$.* For $r=0$, $\\mathcal E=0$\nand both sides vanish ($\\det\\mathcal E=\\mathcal O_C$ has degree $0$).\nFor $r=1$, $(\\ast)$ is part (1), since $\\det\\mathcal E=\\mathcal E$.\nLet $r\\ge2$. Choose $0\\neq s\\in\\mathcal E_\\eta$ and let\n$\\mathcal L\\subseteq\\mathcal E$ be the kernel of the composite\n$\\mathcal E\\to j_*\\mathcal E_\\eta\\to j_*(\\mathcal E_\\eta/k(C)s)$; as\nabove, $\\mathcal L$ is coherent, with stalks\n$\\mathcal L_x=\\mathcal E_x\\cap k(C)s$ (intersection inside\n$\\mathcal E_\\eta$; $\\mathcal E_x\\to\\mathcal E_\\eta$ is injective as\n$\\mathcal E_x$ is free over the domain $\\mathcal O_{C,x}$). The module\n$\\mathcal E_x\\cap k(C)s$ is nonzero (clear the denominators of $s$ with\nrespect to a basis of $\\mathcal E_x$), finitely generated\n($\\mathcal O_{C,x}$ is Noetherian) and torsion-free of generic rank one,\nhence free of rank one; and\n$\\mathcal E_x/\\mathcal L_x\\hookrightarrow\\mathcal E_\\eta/k(C)s$ is\ntorsion-free (if $ae\\in k(C)s$ with $0\\neq a\\in\\mathcal O_{C,x}$ then\n$e\\in k(C)s$), hence free of rank $r-1$. Thus $\\mathcal L$ is an\ninvertible module ([def-sc-invertible-module]) and\n$\\mathcal E':=\\mathcal E/\\mathcal L$ is locally free of rank $r-1$,\nby the criterion used above. The exact sequence\n$0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ of locally free\nmodules gives\n$\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$ (the\ndeterminant is multiplicative in short exact sequences of finite\nlocally free modules: locally the sequence splits and\n$\\wedge^r(\\mathcal L\\oplus\\mathcal E')=\\mathcal L\\otimes\\wedge^{r-1}\\mathcal E'$,\nthe isomorphism $l\\wedge\\tilde e_1\\wedge\\dots\\wedge\\tilde e_{r-1}\\mapsto l\\otimes e_1\\wedge\\dots\\wedge e_{r-1}$\nbeing independent of the lifts $\\tilde e_i$ and so gluing). Since\n$\\deg$ is a homomorphism on $\\operatorname{Pic}(C)$\n([def-sc-pic0]), $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$.\nAdditivity of $\\chi$, part (1) for $\\mathcal L$ and the induction\nhypothesis for $\\mathcal E'$ give\n\n$$\n\\chi(\\mathcal E)=\\chi(\\mathcal L)+\\chi(\\mathcal E')\n=\\bigl(\\deg\\mathcal L+1-g\\bigr)+\\bigl(\\deg\\det\\mathcal E'+(r-1)(1-g)\\bigr)\n=\\deg\\det\\mathcal E+r(1-g),\n$$\n\nwhich is $(\\ast)$. This proves (2).",
-  "blueprint_proof_steps": [
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
     {
-      "text": "*Preliminaries.* $C$ is integral (its local rings are regular, hence\ndomains, so its irreducible components are disjoint and connectedness\nleaves one), of dimension one, and its local rings at closed points are\ndiscrete valuation rings with residue field $k$. For a coherent\n$\\mathcal F$ the spaces $H^q(C,\\mathcal F)$ are finite-dimensional\n(coherent cohomology of a proper scheme over a field, Stacks Project,\nCohomology of Schemes, Proposition 30.19.1,\n[Tag 02O5](https://stacks.math.columbia.edu/tag/02O5)) and vanish for\n$q\\ge2$ (Grothendieck vanishing on the one-dimensional Noetherian space\n$C$; Stacks Project, Cohomology of Sheaves), so $\\chi$ is a finite sum,\nand a short exact sequence\n$0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent\nmodules gives\n$\\chi(\\mathcal F_2)=\\chi(\\mathcal F_1)+\\chi(\\mathcal F_3)$: its long\nexact cohomology sequence is a finite exact sequence of\nfinite-dimensional $k$-vector spaces, whose alternating sum of\ndimensions vanishes.",
-      "uses": [],
-      "elementary": null
+     "name": "AlgebraicGeometry.Scheme.eulerChar_free_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      729,
+      756
+     ],
+     "kind": "theorem",
+     "sorry": false
     },
     {
-      "text": "*Part (1).* This is the recorded classical input of the statement, Stacks Project,\nAlgebraic Curves, Lemma 53.5.2\n([Tag 0BS6](https://stacks.math.columbia.edu/tag/0BS6)), used in the\ndisplayed form $\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g$, where\n$\\chi(C,\\mathcal L)=\\dim H^0(C,\\mathcal L)-\\dim H^1(C,\\mathcal L)$ and\n$g=\\dim H^1(C,\\mathcal O_C)$ ([def-sc-genus]); no separate proof\nis given. Applied to $\\mathcal L=\\mathcal O_C$, whose degree is $0$\n($\\deg$ is a homomorphism, [def-sc-pic0]), it gives\n$\\chi(C,\\mathcal O_C)=1-g$.",
-      "uses": [
-        "def-sc-genus",
-        "def-sc-pic0"
-      ],
-      "elementary": false
+     "name": "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      712,
+      727
+     ],
+     "kind": "theorem",
+     "sorry": false
     },
     {
-      "text": "*The torsion part.* The torsion subsheaf $\\mathcal T$ is the kernel of\n$\\mathcal F\\to j_*\\mathcal F_\\eta$ ($j:\\operatorname{Spec}k(C)\\to C$\nthe generic point, $j_*\\mathcal F_\\eta$ quasi-coherent), hence\nquasi-coherent, and coherent as a submodule of the coherent\n$\\mathcal F$ on the Noetherian scheme $C$. Its stalk\n$\\mathcal T_x$ is the torsion submodule of $\\mathcal F_x$ (localization\nis exact, and an element of $\\mathcal F_x$ dies in $\\mathcal F_\\eta$ iff\nit is killed by a nonzero element of $\\mathcal O_{C,x}$). As\n$\\mathcal T_\\eta=0$, the support of $\\mathcal T$ is a closed subset\nnot containing $\\eta$, hence a finite set $Z$ of closed points of the\nirreducible one-dimensional Noetherian space $C$. A sheaf supported on\nthe finite discrete closed set $Z$ is the direct sum\n$\\bigoplus_{x\\in Z}i_{x,*}\\mathcal T_x$ of skyscraper sheaves, which are\nflasque; hence $H^q(C,\\mathcal T)=0$ for $q>0$ and\n\n$$\n\\chi(C,\\mathcal T)=\\dim_kH^0(C,\\mathcal T)\n=\\sum_{x\\in Z}\\dim_k\\mathcal T_x\n$$\n\n(finite, each $\\mathcal T_x$ being a finitely generated torsion module\nover the discrete valuation ring $\\mathcal O_{C,x}$ with residue field\n$k$). Moreover $\\operatorname{rk}\\mathcal T=0$ and\n$\\deg\\mathcal T=\\dim_kH^0(C,\\mathcal T)$, so (2) holds for $\\mathcal T$.",
-      "uses": [],
-      "elementary": null
+     "name": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_torsionQuotient",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.CoherentSheaf",
+     "lines": [
+      190,
+      213
+     ],
+     "kind": "theorem",
+     "sorry": false
     },
     {
-      "text": "*The torsion-free quotient.* $\\mathcal E:=\\mathcal F/\\mathcal T$ is\ncoherent with stalks $\\mathcal E_x=\\mathcal F_x/(\\mathcal F_x)_{\\rm tors}$,\nfinitely generated and torsion-free over the discrete valuation ring\n$\\mathcal O_{C,x}$ (a principal ideal domain), hence free; a coherent\nmodule with free stalks is locally free (a finitely presented module\nwhose stalk at $x$ is free is free on a neighbourhood of $x$), of\nconstant rank $r=\\dim_{k(C)}\\mathcal E_\\eta=\\dim_{k(C)}\\mathcal F_\\eta=\\operatorname{rk}\\mathcal F$\nbecause $C$ is irreducible. By additivity,\n$\\chi(\\mathcal F)=\\chi(\\mathcal T)+\\chi(\\mathcal E)$, and by\ndefinition $\\deg\\mathcal F=\\deg\\mathcal T+\\deg\\det\\mathcal E$.\nSo (2) follows once we show, for every locally free $\\mathcal E$ of\nrank $r$,\n\n$$\n\\chi(C,\\mathcal E)=\\deg\\det\\mathcal E+r(1-g). \\tag{$\\ast$}\n$$",
-      "uses": [],
-      "elementary": null
+     "name": "AlgebraicGeometry.Scheme.Modules.subsingleton_H_one_torsion",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      233,
+      260
+     ],
+     "kind": "theorem",
+     "sorry": false
     },
     {
-      "text": "*Proof of $(\\ast)$, by induction on $r$.* For $r=0$, $\\mathcal E=0$\nand both sides vanish ($\\det\\mathcal E=\\mathcal O_C$ has degree $0$).\nFor $r=1$, $(\\ast)$ is part (1), since $\\det\\mathcal E=\\mathcal E$.\nLet $r\\ge2$. Choose $0\\neq s\\in\\mathcal E_\\eta$ and let\n$\\mathcal L\\subseteq\\mathcal E$ be the kernel of the composite\n$\\mathcal E\\to j_*\\mathcal E_\\eta\\to j_*(\\mathcal E_\\eta/k(C)s)$; as\nabove, $\\mathcal L$ is coherent, with stalks\n$\\mathcal L_x=\\mathcal E_x\\cap k(C)s$ (intersection inside\n$\\mathcal E_\\eta$; $\\mathcal E_x\\to\\mathcal E_\\eta$ is injective as\n$\\mathcal E_x$ is free over the domain $\\mathcal O_{C,x}$). The module\n$\\mathcal E_x\\cap k(C)s$ is nonzero (clear the denominators of $s$ with\nrespect to a basis of $\\mathcal E_x$), finitely generated\n($\\mathcal O_{C,x}$ is Noetherian) and torsion-free of generic rank one,\nhence free of rank one; and\n$\\mathcal E_x/\\mathcal L_x\\hookrightarrow\\mathcal E_\\eta/k(C)s$ is\ntorsion-free (if $ae\\in k(C)s$ with $0\\neq a\\in\\mathcal O_{C,x}$ then\n$e\\in k(C)s$), hence free of rank $r-1$. Thus $\\mathcal L$ is an\ninvertible module ([def-sc-invertible-module]) and\n$\\mathcal E':=\\mathcal E/\\mathcal L$ is locally free of rank $r-1$,\nby the criterion used above. The exact sequence\n$0\\to\\mathcal L\\to\\mathcal E\\to\\mathcal E'\\to0$ of locally free\nmodules gives\n$\\det\\mathcal E\\cong\\mathcal L\\otimes\\det\\mathcal E'$ (the\ndeterminant is multiplicative in short exact sequences of finite\nlocally free modules: locally the sequence splits and\n$\\wedge^r(\\mathcal L\\oplus\\mathcal E')=\\mathcal L\\otimes\\wedge^{r-1}\\mathcal E'$,\nthe isomorphism $l\\wedge\\tilde e_1\\wedge\\dots\\wedge\\tilde e_{r-1}\\mapsto l\\otimes e_1\\wedge\\dots\\wedge e_{r-1}$\nbeing independent of the lifts $\\tilde e_i$ and so gluing). Since\n$\\deg$ is a homomorphism on $\\operatorname{Pic}(C)$\n([def-sc-pic0]), $\\deg\\det\\mathcal E=\\deg\\mathcal L+\\deg\\det\\mathcal E'$.\nAdditivity of $\\chi$, part (1) for $\\mathcal L$ and the induction\nhypothesis for $\\mathcal E'$ give\n\n$$\n\\chi(\\mathcal E)=\\chi(\\mathcal L)+\\chi(\\mathcal E')\n=\\bigl(\\deg\\mathcal L+1-g\\bigr)+\\bigl(\\deg\\det\\mathcal E'+(r-1)(1-g)\\bigr)\n=\\deg\\det\\mathcal E+r(1-g),\n$$\n\nwhich is $(\\ast)$. This proves (2).",
-      "uses": [
-        "def-sc-invertible-module",
-        "def-sc-pic0"
-      ],
-      "elementary": false
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_shortExact_of_stalkLinearMap_ne_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      309,
+      406
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_exteriorPower_add",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      489,
+      542
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.coherentDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      551,
+      563
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isInvertible_exteriorPower",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Determinant",
+     "lines": [
+      151,
+      160
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_exteriorPower_iso_tensorObj",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Determinant",
+     "lines": [
+      292,
+      316
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.rank",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.GenericRank",
+     "lines": [
+      151,
+      156
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.torsion",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Torsion",
+     "lines": [
+      163,
+      170
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_add",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      758,
+      768
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lem-sc-riemann-roch`, part (1"
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_coherentDegree_add",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent",
+     "lines": [
+      569,
+      595
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lem-sc-riemann-roch`, part (2"
     }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.eulerChar_free_eq",
-        "AlgebraicGeometry.Scheme.eulerChar_unit_eq"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.eulerChar_free_eq",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            729,
-            756
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.eulerChar_unit_eq",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            712,
-            727
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.eulerChar_eq_degree_add",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
-          "lines": [
-            758,
-            768
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-sc-riemann-roch`, part (1"
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            137,
-            152
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-coherent-hi"
-          ],
-          "below": true
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-rr",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-riemann-roch",
-    "worker": "stage1",
-    "summary": "Checked the coherent-sheaf formula against the unit route and the Lean declarations. Made the divisor induction explicit; separated the torsion subsheaf, the torsion-free local-freeness criterion, the saturated line subbundle, and determinant multiplicativity into four cited nodes. Reused existing Euler and zero-dimensional-support nodes and attached the two open Lean dependencies to existing nodes.",
-    "blueprint": "The seven steps realize Preliminaries, Part (1), The torsion part, The torsion-free quotient, and Proof of (*) in the imported blueprint proof text; the divisor induction follows unit sk-thm-picard-rr Step (RR).",
-    "tool_uses": [
-      {
-        "node": "lem-sc-smooth-connected-curve-local-rings",
-        "why": "Supplies the standard integral/generic-point/DVR geometry of a smooth connected curve; no node of this unit states all three, and it does not replace a unit RR step."
-      },
-      {
-        "node": "lem-pc-coherent-hi",
-        "why": "Supplies proper coherent higher-direct-image finiteness used by the unit's preliminary Euler characteristic; no node of this unit gives the general proper-morphism fact."
-      },
-      {
-        "node": "lem-sc-noetherian-cohomology-above-dimension",
-        "why": "Supplies Grothendieck vanishing above dimension one, explicitly invoked in unit Step (RR); no node of this unit states general Noetherian cohomological vanishing."
-      },
-      {
-        "node": "lem-sc-global-functions",
-        "why": "Supplies H0(O_C)=k for the algebraically closed proper connected curve as used in unit Step (RR); no node of this unit states the global-functions fact."
-      },
-      {
-        "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-        "why": "Supplies coherence of quasi-coherent submodules and quotients on a locally Noetherian scheme; this is a general tool for the torsion decomposition, not an RR replacement."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sc-divisor-class-curve",
-    "lem-sc-point-cartier",
-    "lem-sc-dim0-finite",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-pc-coherent-hi",
-    "lem-sc-noetherian-cohomology-above-dimension",
-    "lem-sc-global-functions",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-rr2",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rr2 (reviewer sub-agent of L); spot-checked: Statement unchanged (only same_as [] and stmt_deps +def-sc-invertible-module,pqf-def-coherent, split-owned). Sources: Stacks divisors.tex lemma-torsion-sections (0AXR) and lemma-torsion (0AXT) agree with lem-sc-torsion-subsheaf-quotient (integral X, quasi-coherent F; stalk = torsion submodule from 0AXR (1)-(3)); lemma-torsion-free-over-regular-dim-1 (0CC4) agrees with lem-sc-regular-curve-torsionfree-free (integral regular dim<=1, coherent; rank = generic rank by local constancy on the irreducible X). Line-subbundle (saturation of Ks in DVR stalks) and determinant multiplicativity nodes checked true as stated, they are the blueprint rank-induction paragraph. Steps: 1 by lem-sc-smooth-connected-curve-local-rings (Noetherian integral, all non-generic points closed so dim<=1), lem-pc-euler-characteristic-well-defined, lem-sc-noetherian-cohomology-above-dimension, lem-pc-euler-additive; 2 by lem-sc-global-functions + def-sc-genus; 3 divisor induction via lem-sc-line-bundle-rational-section, DVR local ring (O(D)_P = t^{-n_P}O_P with def-sc-divisor convention v_P(f)+n_P>=0), lem-pc-chi-zero-dim-support, def-sc-pic0 (deg O(D)=deg D) - this replaces the blueprint's direct quote of Tag 0BS6 (whose degree is the Euler-characteristic one), correctly marked by: agent; 4 lem-sc-torsion-subsheaf-quotient, coherent sub/quotient, support closed not containing eta hence closed points, lem-pc-chi-zero-dim-support; 5 0CC4 node + additivity; 6 rank induction with line-subbundle and determinant nodes and deg a homomorphism; 7 arithmetic. No cycle (no proof_deps closure reaches the item). No slopmaster2 sorry-free declaration states the new nodes (grep torsion/exteriorPower/subbundle). Small cases: F=O_C, F=k(P), F=O_C+k(P), rank 1 and split O_C^2. Tool uses accepted: the five declared (generic facts, none replaces an RR step) plus lem-sc-divisor-class-curve, lem-sc-point-cartier, lem-sc-dim0-finite (off-unit, generic). FIX dag/nodes/sec-picard-framework/lem-sc-riemann-roch.json: proof[2] text/uses and proof_deps: cited lem-sc-divisor-class-curve (every O_C(D) invertible, needed for the exact sequences), lem-weil-pbc-coherent-kernel-cokernel-locnoeth (quotient coherent) and lem-weil-pbc-closed-point-residue-field-base (kappa(P)=k). 2026-10-10 14:19-14:21 UTC; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be algebraically closed and $C$ a\nproper smooth connected curve of genus $g$ ([def-sc-genus]) over\n$k$, with generic point $\\eta$ and function field $k(C)$\n([def-sc-function-field]). For a coherent $\\mathcal O_C$-module\n$\\mathcal F$ put\n$\\chi(C,\\mathcal F):=\\sum_q(-1)^q\\dim_kH^q(C,\\mathcal F)$, let\n$\\mathcal T\\subseteq\\mathcal F$ be its torsion subsheaf (the kernel of\n$\\mathcal F\\to\\mathcal F_\\eta$), and define the *rank* and the\n*degree* of $\\mathcal F$ by\n\n$$\n\\operatorname{rk}\\mathcal F:=\\dim_{k(C)}\\mathcal F_\\eta,\\qquad\n\\deg\\mathcal F:=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\mathcal F/\\mathcal T),\n$$\n\nwhere $\\mathcal F/\\mathcal T$ is locally free of rank\n$\\operatorname{rk}\\mathcal F$ (see the proof),\n$\\det$ is its top exterior power (with $\\det=\\mathcal O_C$ in rank\n$0$) and $\\deg$ on line bundles is that of [def-sc-pic0]; for a line\nbundle $\\mathcal L$ this is $\\operatorname{rk}\\mathcal L=1$ and\n$\\deg\\mathcal L$ as in [def-sc-pic0]. Then:\n\n1. (*Riemann–Roch for line bundles.*) For every line bundle\n$\\mathcal L$ on $C$,\n\n$$\n\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g.\n$$\n\nIn particular $\\chi(C,\\mathcal O_C)=1-g$.\n\n2. (*Riemann–Roch for coherent modules.*) For every coherent\n$\\mathcal O_C$-module $\\mathcal F$,\n\n$$\n\\chi(C,\\mathcal F)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)\\,(1-g).\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "missing": [],
+   "open": []
   }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-riemann-roch",
+  "worker": "stage1",
+  "summary": "Checked the coherent-sheaf formula against the unit route and the Lean declarations. Made the divisor induction explicit; separated the torsion subsheaf, the torsion-free local-freeness criterion, the saturated line subbundle, and determinant multiplicativity into four cited nodes. Reused existing Euler and zero-dimensional-support nodes and attached the two open Lean dependencies to existing nodes.",
+  "blueprint": "The seven steps realize Preliminaries, Part (1), The torsion part, The torsion-free quotient, and Proof of (*) in the imported blueprint proof text; the divisor induction follows unit sk-thm-picard-rr Step (RR).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Supplies the standard integral/generic-point/DVR geometry of a smooth connected curve; no node of this unit states all three, and it does not replace a unit RR step."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Supplies proper coherent higher-direct-image finiteness used by the unit's preliminary Euler characteristic; no node of this unit gives the general proper-morphism fact."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Supplies Grothendieck vanishing above dimension one, explicitly invoked in unit Step (RR); no node of this unit states general Noetherian cohomological vanishing."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Supplies H0(O_C)=k for the algebraically closed proper connected curve as used in unit Step (RR); no node of this unit states the global-functions fact."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Supplies coherence of quasi-coherent submodules and quotients on a locally Noetherian scheme; this is a general tool for the torsion decomposition, not an RR replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-divisor-class-curve",
+  "lem-sc-point-cartier",
+  "lem-sc-dim0-finite",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-global-functions",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rr2",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rr2 (reviewer sub-agent of L); spot-checked: Statement unchanged (only same_as [] and stmt_deps +def-sc-invertible-module,pqf-def-coherent, split-owned). Sources: Stacks divisors.tex lemma-torsion-sections (0AXR) and lemma-torsion (0AXT) agree with lem-sc-torsion-subsheaf-quotient (integral X, quasi-coherent F; stalk = torsion submodule from 0AXR (1)-(3)); lemma-torsion-free-over-regular-dim-1 (0CC4) agrees with lem-sc-regular-curve-torsionfree-free (integral regular dim<=1, coherent; rank = generic rank by local constancy on the irreducible X). Line-subbundle (saturation of Ks in DVR stalks) and determinant multiplicativity nodes checked true as stated, they are the blueprint rank-induction paragraph. Steps: 1 by lem-sc-smooth-connected-curve-local-rings (Noetherian integral, all non-generic points closed so dim<=1), lem-pc-euler-characteristic-well-defined, lem-sc-noetherian-cohomology-above-dimension, lem-pc-euler-additive; 2 by lem-sc-global-functions + def-sc-genus; 3 divisor induction via lem-sc-line-bundle-rational-section, DVR local ring (O(D)_P = t^{-n_P}O_P with def-sc-divisor convention v_P(f)+n_P>=0), lem-pc-chi-zero-dim-support, def-sc-pic0 (deg O(D)=deg D) - this replaces the blueprint's direct quote of Tag 0BS6 (whose degree is the Euler-characteristic one), correctly marked by: agent; 4 lem-sc-torsion-subsheaf-quotient, coherent sub/quotient, support closed not containing eta hence closed points, lem-pc-chi-zero-dim-support; 5 0CC4 node + additivity; 6 rank induction with line-subbundle and determinant nodes and deg a homomorphism; 7 arithmetic. No cycle (no proof_deps closure reaches the item). No slopmaster2 sorry-free declaration states the new nodes (grep torsion/exteriorPower/subbundle). Small cases: F=O_C, F=k(P), F=O_C+k(P), rank 1 and split O_C^2. Tool uses accepted: the five declared (generic facts, none replaces an RR step) plus lem-sc-divisor-class-curve, lem-sc-point-cartier, lem-sc-dim0-finite (off-unit, generic). FIX dag/nodes/sec-picard-framework/lem-sc-riemann-roch.json: proof[2] text/uses and proof_deps: cited lem-sc-divisor-class-curve (every O_C(D) invertible, needed for the exact sequences), lem-weil-pbc-coherent-kernel-cokernel-locnoeth (quotient coherent) and lem-weil-pbc-closed-point-residue-field-base (kappa(P)=k). 2026-10-10 14:19-14:21 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be algebraically closed and $C$ a\nproper smooth connected curve of genus $g$ ([def-sc-genus]) over\n$k$, with generic point $\\eta$ and function field $k(C)$\n([def-sc-function-field]). For a coherent $\\mathcal O_C$-module\n$\\mathcal F$ put\n$\\chi(C,\\mathcal F):=\\sum_q(-1)^q\\dim_kH^q(C,\\mathcal F)$, let\n$\\mathcal T\\subseteq\\mathcal F$ be its torsion subsheaf (the kernel of\n$\\mathcal F\\to\\mathcal F_\\eta$), and define the *rank* and the\n*degree* of $\\mathcal F$ by\n\n$$\n\\operatorname{rk}\\mathcal F:=\\dim_{k(C)}\\mathcal F_\\eta,\\qquad\n\\deg\\mathcal F:=\\dim_kH^0(C,\\mathcal T)+\\deg\\det(\\mathcal F/\\mathcal T),\n$$\n\nwhere $\\mathcal F/\\mathcal T$ is locally free of rank\n$\\operatorname{rk}\\mathcal F$ (see the proof),\n$\\det$ is its top exterior power (with $\\det=\\mathcal O_C$ in rank\n$0$) and $\\deg$ on line bundles is that of [def-sc-pic0]; for a line\nbundle $\\mathcal L$ this is $\\operatorname{rk}\\mathcal L=1$ and\n$\\deg\\mathcal L$ as in [def-sc-pic0]. Then:\n\n1. (*Riemann–Roch for line bundles.*) For every line bundle\n$\\mathcal L$ on $C$,\n\n$$\n\\chi(C,\\mathcal L)=\\deg\\mathcal L+1-g.\n$$\n\nIn particular $\\chi(C,\\mathcal O_C)=1-g$.\n\n2. (*Riemann–Roch for coherent modules.*) For every coherent\n$\\mathcal O_C$-module $\\mathcal F$,\n\n$$\n\\chi(C,\\mathcal F)=\\deg\\mathcal F+\\operatorname{rk}(\\mathcal F)\\,(1-g).\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

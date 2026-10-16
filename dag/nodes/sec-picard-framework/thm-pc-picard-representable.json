@@ -1,422 +1,360 @@
 {
-  "id": "thm-pc-picard-representable",
-  "blueprint": {
-    "is": "thm-pc-picard-representable",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The Picard scheme of a curve is representable",
-  "statement": "(Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, Tag\n[0B9Z](https://stacks.math.columbia.edu/tag/0B9Z).)\nLet $k$ be a separably closed field.\nLet $X$ be a\nsmooth projective curve over\n$k$. Then the\nPicard functor $\\operatorname{Pic}_{X/k}$ is\nrepresentable, and the representing scheme\n$\\underline{\\operatorname{Pic}}_{X/k}$ is a group scheme over $k$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-main/thm-pc-picard-representable.md",
-    "place": "node thm-pc-picard-representable, order 837",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B9Z"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-picard-functor",
-    "def-pc-separably-closed",
-    "def-pc-smooth-projective-curve",
-    "def-pc-subfunctor"
-  ],
-  "proof": [
-    {
-      "text": "Since $k$ is separably closed and $X$ is smooth over $k$ (hence nonempty:\n$X$ is a variety), there exists a\n$k$-rational point $\\sigma$ of $X$ by\n[lem-pc-rational-points-dense]. By [cor-pc-sigma-pic-iso] it\nsuffices to show that the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ classifying invertible modules trivial along\n$\\sigma$ is representable (then $\\operatorname{Pic}_{X/k}$ is representable too, and\nthe representing scheme carries the group structure because it represents\nthe group-valued functor; moreover the fact that it is a group scheme\nfollows from the conclusion of [thm-pc-criterion]).",
-      "uses": [
-        "lem-pc-rational-points-dense",
-        "cor-pc-sigma-pic-iso",
-        "thm-pc-criterion"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "We check the conditions (1), (2)(a), (2)(b), (2)(c) of\n[thm-pc-criterion] (with $G=\\operatorname{Pic}_{X/k,\\sigma}$ and $F$ the\nsubfunctor of [lem-pc-f-open-subfunctor]):",
-      "uses": [
-        "thm-pc-criterion",
-        "lem-pc-f-open-subfunctor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "1. **(1)** The functor $\\operatorname{Pic}_{X/k,\\sigma}$ satisfies the sheaf condition\nfor the fppf topology: by [lem-pc-rational-hyp] the hypotheses of\n[thm-pc-pic-split] hold, and the fppf sheaf condition for\n$K=\\operatorname{Pic}_{X/k,\\sigma}$ was shown in\n[lem-pc-k-sheaf]. Since every Zariski covering is an fppf covering ([lem-pc-zariski-coverings-are-fppf])\n(affine-locally the maps $\\operatorname{Spec}(A_f)\\to\\operatorname{Spec}(A)$ are flat and of finite\npresentation, $A\\to A_f$ being the localization), it satisfies the sheaf\nproperty for the Zariski topology. [Condition (1); note that\n[cor-pc-sigma-pic-iso] gives the same conclusion from the fact that\n$\\operatorname{Pic}_{X/k}$ is by definition an fppf sheaf.]",
-      "uses": [
-        "lem-pc-rational-hyp",
-        "thm-pc-pic-split",
-        "lem-pc-k-sheaf",
-        "lem-pc-zariski-coverings-are-fppf",
-        "cor-pc-sigma-pic-iso"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "1. **(2)(a)** The subfunctor $F$ of [lem-pc-f-open-subfunctor] is\nrepresentable: [thm-pc-f-representable] represents it by the open\nsubscheme $W\\subseteq\\underline{\\operatorname{Hilb}}^g_{X/k}$ (the genus $g$ is finite:\n$X$ is a smooth projective curve over $k$, geometrically irreducible by\n[prop-pc-xk-integral], so [def-pc-genus] applies).",
-      "uses": [
-        "lem-pc-f-open-subfunctor",
-        "thm-pc-f-representable",
-        "prop-pc-xk-integral",
-        "def-pc-genus"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "1. **(2)(b)** $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open\nimmersions: [lem-pc-f-open-subfunctor].",
-      "uses": [
-        "lem-pc-f-open-subfunctor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "1. **(2)(c)** Let $K/k$ be a field extension and let\n$g_0\\in\\operatorname{Pic}_{X/k,\\sigma}(K)$, i.e. an invertible module $\\mathcal{L}$ on $X_K$\nwith $\\sigma_K^*\\mathcal{L}\\cong\\mathcal{O}_K$. By [lem-pc-twist] there is an\ninvertible sheaf $\\mathcal{L}_0$ on $X$ with\n$\\dim_KH^0(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=1$ and\n$H^1(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=0$. Since\n$\\operatorname{Pic}_{X/k,\\sigma}(k)=\\operatorname{Pic}(X)$ ([def-pc-pic-sigma-functor], [lem-pc-sigma-k-points]), the\nmodule $\\mathcal{L}_0$ corresponds to an element $g_0'\\in G(k)$; and in\n$G(K)$ the product $g_0'\\cdot g_0$ is the class of\n$\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}$. For it we have\n$H^p(X_K,\\cdot)=0$ for all $p\\geq1$\n(Serre: from [lem-pc-twist] we have $H^1=0$ and\n[lem-pc-vanishing-above-dim], applied over $K$ to $X_K$, which is a smooth projective curve over $K$ by [prop-pc-xk-integral] (its hypotheses $k$ separably closed and $\\sigma\\in X(k)$ hold), gives $H^p=0$ for $p\\geq2$), and\n$H^0$ is $1$-dimensional over $K$, so\n$$\nRf_{K,*}\\bigl(\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}\\bigr)\\cong\\bigl(H^0(X_K,\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L})\\bigr)[0]\n\\cong K[0],\n$$\nwhich is an invertible $\\mathcal{O}_K$-module placed in degree $0$; hence\n$g_0'g_0\\in F(K)$ as required.",
-      "uses": [
-        "lem-pc-twist",
-        "def-pc-pic-sigma-functor",
-        "lem-pc-sigma-k-points",
-        "lem-pc-vanishing-above-dim",
-        "prop-pc-xk-integral"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "All four conditions hold, so by [thm-pc-criterion] the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ is representable by a group scheme over $k$, and\nhence so is $\\operatorname{Pic}_{X/k}$ by [cor-pc-sigma-pic-iso].",
-      "uses": [
-        "thm-pc-criterion",
-        "cor-pc-sigma-pic-iso"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-pc-picard-representable",
+ "blueprint": {
+  "is": "thm-pc-picard-representable",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Picard scheme of a curve is representable",
+ "statement": "(Stacks Project, Picard Schemes of Curves, Proposition 44.6.6, Tag\n[0B9Z](https://stacks.math.columbia.edu/tag/0B9Z).)\nLet $k$ be a separably closed field.\nLet $X$ be a\nsmooth projective curve over\n$k$. Then the\nPicard functor $\\operatorname{Pic}_{X/k}$ is\nrepresentable, and the representing scheme\n$\\underline{\\operatorname{Pic}}_{X/k}$ is a group scheme over $k$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-main/thm-pc-picard-representable.md",
+  "place": "node thm-pc-picard-representable, order 837",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9Z"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-picard-functor",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve",
+  "def-pc-subfunctor"
+ ],
+ "proof": [
+  {
+   "text": "Since $k$ is separably closed and $X$ is smooth over $k$ (hence nonempty:\n$X$ is a variety), there exists a\n$k$-rational point $\\sigma$ of $X$ by\n[lem-pc-rational-points-dense]. By [cor-pc-sigma-pic-iso] it\nsuffices to show that the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ classifying invertible modules trivial along\n$\\sigma$ is representable (then $\\operatorname{Pic}_{X/k}$ is representable too, and\nthe representing scheme carries the group structure because it represents\nthe group-valued functor; moreover the fact that it is a group scheme\nfollows from the conclusion of [thm-pc-criterion]).",
+   "uses": [
     "lem-pc-rational-points-dense",
     "cor-pc-sigma-pic-iso",
+    "thm-pc-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We check the conditions (1), (2)(a), (2)(b), (2)(c) of\n[thm-pc-criterion] (with $G=\\operatorname{Pic}_{X/k,\\sigma}$ and $F$ the\nsubfunctor of [lem-pc-f-open-subfunctor]):",
+   "uses": [
     "thm-pc-criterion",
-    "lem-pc-f-open-subfunctor",
+    "lem-pc-f-open-subfunctor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "1. **(1)** The functor $\\operatorname{Pic}_{X/k,\\sigma}$ satisfies the sheaf condition\nfor the fppf topology: by [lem-pc-rational-hyp] the hypotheses of\n[thm-pc-pic-split] hold, and the fppf sheaf condition for\n$K=\\operatorname{Pic}_{X/k,\\sigma}$ was shown in\n[lem-pc-k-sheaf]. Since every Zariski covering is an fppf covering ([lem-pc-zariski-coverings-are-fppf])\n(affine-locally the maps $\\operatorname{Spec}(A_f)\\to\\operatorname{Spec}(A)$ are flat and of finite\npresentation, $A\\to A_f$ being the localization), it satisfies the sheaf\nproperty for the Zariski topology. [Condition (1); note that\n[cor-pc-sigma-pic-iso] gives the same conclusion from the fact that\n$\\operatorname{Pic}_{X/k}$ is by definition an fppf sheaf.]",
+   "uses": [
     "lem-pc-rational-hyp",
     "thm-pc-pic-split",
     "lem-pc-k-sheaf",
     "lem-pc-zariski-coverings-are-fppf",
+    "cor-pc-sigma-pic-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "1. **(2)(a)** The subfunctor $F$ of [lem-pc-f-open-subfunctor] is\nrepresentable: [thm-pc-f-representable] represents it by the open\nsubscheme $W\\subseteq\\underline{\\operatorname{Hilb}}^g_{X/k}$ (the genus $g$ is finite:\n$X$ is a smooth projective curve over $k$, geometrically irreducible by\n[prop-pc-xk-integral], so [def-pc-genus] applies).",
+   "uses": [
+    "lem-pc-f-open-subfunctor",
     "thm-pc-f-representable",
     "prop-pc-xk-integral",
-    "def-pc-genus",
-    "lem-pc-twist",
-    "def-pc-pic-sigma-functor",
-    "lem-pc-sigma-k-points",
-    "lem-pc-vanishing-above-dim"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-main/thm-pc-picard-representable.md",
-    "place": "Proposition 44.6.6 (Tag 0B9Z), ## Proof"
+    "def-pc-genus"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Picard functor of a smooth projective curve over a separably closed field is representable by a group scheme",
-      "results": "WeierstrassCurve.Affine.Point.toClass_apply; WeierstrassCurve.Affine.Point.toClass_some; WeierstrassCurve.Projective.PointClass; WeierstrassCurve.Jacobian.PointClass; instCommGroupPic; CommRing.Pic.functor; no declaration of Picard-scheme representability.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "RepresentableBy, Picard, GrpObj",
-      "results": "0 hits; Loogle was under load.",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "isRepresentable_picardFunctor|Picard.*representable [Mathlib/AlgebraicGeometry]",
-      "results": "0 matches.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Picard functor representability smooth projective curve group scheme",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 837,
-  "blueprint_uses": [
-    "cor-pc-sigma-pic-iso",
-    "def-pc-genus",
-    "def-pc-pic-sigma-functor",
-    "def-pc-picard-functor",
-    "def-pc-separably-closed",
-    "def-pc-smooth-projective-curve",
-    "def-pc-subfunctor",
-    "lem-pc-f-open-subfunctor",
-    "lem-pc-k-sheaf",
-    "lem-pc-rational-hyp",
-    "lem-pc-rational-points-dense",
-    "lem-pc-sigma-k-points",
+  {
+   "text": "1. **(2)(b)** $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open\nimmersions: [lem-pc-f-open-subfunctor].",
+   "uses": [
+    "lem-pc-f-open-subfunctor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "1. **(2)(c)** Let $K/k$ be a field extension and let\n$g_0\\in\\operatorname{Pic}_{X/k,\\sigma}(K)$, i.e. an invertible module $\\mathcal{L}$ on $X_K$\nwith $\\sigma_K^*\\mathcal{L}\\cong\\mathcal{O}_K$. By [lem-pc-twist] there is an\ninvertible sheaf $\\mathcal{L}_0$ on $X$ with\n$\\dim_KH^0(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=1$ and\n$H^1(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=0$. Since\n$\\operatorname{Pic}_{X/k,\\sigma}(k)=\\operatorname{Pic}(X)$ ([def-pc-pic-sigma-functor], [lem-pc-sigma-k-points]), the\nmodule $\\mathcal{L}_0$ corresponds to an element $g_0'\\in G(k)$; and in\n$G(K)$ the product $g_0'\\cdot g_0$ is the class of\n$\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}$. For it we have\n$H^p(X_K,\\cdot)=0$ for all $p\\geq1$\n(Serre: from [lem-pc-twist] we have $H^1=0$ and\n[lem-pc-vanishing-above-dim], applied over $K$ to $X_K$, which is a smooth projective curve over $K$ by [prop-pc-xk-integral] (its hypotheses $k$ separably closed and $\\sigma\\in X(k)$ hold), gives $H^p=0$ for $p\\geq2$), and\n$H^0$ is $1$-dimensional over $K$, so\n$$\nRf_{K,*}\\bigl(\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}\\bigr)\\cong\\bigl(H^0(X_K,\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L})\\bigr)[0]\n\\cong K[0],\n$$\nwhich is an invertible $\\mathcal{O}_K$-module placed in degree $0$; hence\n$g_0'g_0\\in F(K)$ as required.",
+   "uses": [
     "lem-pc-twist",
+    "def-pc-pic-sigma-functor",
+    "lem-pc-sigma-k-points",
     "lem-pc-vanishing-above-dim",
-    "lem-pc-zariski-coverings-are-fppf",
-    "prop-pc-xk-integral",
+    "prop-pc-xk-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All four conditions hold, so by [thm-pc-criterion] the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ is representable by a group scheme over $k$, and\nhence so is $\\operatorname{Pic}_{X/k}$ by [cor-pc-sigma-pic-iso].",
+   "uses": [
     "thm-pc-criterion",
-    "thm-pc-f-representable",
-    "thm-pc-pic-split"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Scheme",
-    "declaration": "AlgebraicGeometry.isRepresentable_picardFunctor",
-    "branch": "slopmaster2",
-    "line": 314,
-    "sorry_free": false,
-    "body_lines": 5,
-    "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.isRepresentable_picardFunctor"
-  ],
-  "uses_not_cited": [
-    "def-pc-picard-functor",
-    "def-pc-separably-closed",
-    "def-pc-smooth-projective-curve",
-    "def-pc-subfunctor"
-  ],
-  "proof_split_by": "list",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.isRepresentable_picardFunctor"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isRepresentable_picardFunctor",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Scheme",
-          "lines": [
-            304,
-            323
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.IsFiniteFreeComplex.exists_opens_range_subset_iff",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            69,
-            87
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-perfect-locus"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            94,
-            135
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
-          "lines": [
-            137,
-            152
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-pc-coherent-hi"
-          ],
-          "below": true
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
-          "lines": [
-            45,
-            52
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
-          "lines": [
-            102,
-            118
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lem-sc-flat-base-change-coherent"
-          ],
-          "below": true
-        }
-      ]
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-main",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "thm-pc-picard-representable",
-    "worker": "stage1",
-    "summary": "Checked the imported six-step proof against the project Lean declaration AlgebraicGeometry.isRepresentable_picardFunctor in WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean:235-246. The declaration is not attachable because its transitive proof dependencies contain sorry-bearing declarations, so the item remains a natural-language split. The existing route is complete: choose a rational point, transfer representability to the normalized Picard functor, verify the criterion's sheaf and open-subfunctor conditions, use the twisting lemma for the field-extension condition, and transfer the resulting group-scheme representation back to Pic_{X/k}.",
-    "blueprint": "The six proof steps realize the imported proof in the blueprint node: rational point and normalized functor (opening paragraph); criterion conditions (1), (2)(a), (2)(b), (2)(c); and the final application of the criterion and normalized-to-full Picard isomorphism.",
-    "tool_uses": [
-      {
-        "node": "cor-pc-sigma-pic-iso",
-        "why": "The normalized-to-full Picard functor isomorphism is a generic representability transfer used as a black-box tool."
-      },
-      {
-        "node": "lem-pc-f-open-subfunctor",
-        "why": "The open-subfunctor condition is supplied by the already-proved Picard open-locus lemma."
-      },
-      {
-        "node": "lem-pc-rational-hyp",
-        "why": "The rational-point hypotheses for the Picard splitting lemma are supplied by an existing generic lemma."
-      },
-      {
-        "node": "lem-pc-zariski-coverings-are-fppf",
-        "why": "The topology comparison that Zariski covers are fppf covers is a generic site fact."
-      },
-      {
-        "node": "thm-pc-f-representable",
-        "why": "Representability of the auxiliary F subfunctor is a separate Picard/Hilbert theorem used as a black box."
-      },
-      {
-        "node": "prop-pc-xk-integral",
-        "why": "Geometric integrality and finite genus prerequisites for the auxiliary theorem come from this curve base-change proposition."
-      },
-      {
-        "node": "lem-pc-twist",
-        "why": "The twisting construction for the field-extension condition is a separate Picard lemma."
-      },
-      {
-        "node": "lem-pc-sigma-k-points",
-        "why": "Identification of normalized Picard k-points with Pic(X) is a generic definition-level lemma."
-      },
-      {
-        "node": "lem-pc-vanishing-above-dim",
-        "why": "Higher cohomology vanishing above the curve dimension is a generic cohomology lemma used in condition (2)(c)."
-      }
-    ]
-  },
-  "tool_uses": [
-    "cor-pc-sigma-pic-iso",
-    "lem-pc-f-open-subfunctor",
-    "lem-pc-rational-hyp",
-    "lem-pc-zariski-coverings-are-fppf",
-    "thm-pc-f-representable",
-    "prop-pc-xk-integral",
-    "lem-pc-twist",
-    "lem-pc-sigma-k-points",
-    "lem-pc-vanishing-above-dim"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-tpr1837",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpr1837 (reviewer sub-agent of L); spot-checked: Read packet whole; transitive closure of proof/stmt deps at 906512228 (1482 nodes) has no cycle (thm-pc-f-representable -> thm-pc-hilb-curves, lem-pc-f-open-subfunctor, def-pc-f-subfunctor, lem-pc-sigma-k-points do not reach the item); hypotheses: sigma from lem-pc-rational-points-dense (sep. closed, smooth nonempty), geometric integrality/genus via prop-pc-xk-integral for thm-pc-f-representable and lem-pc-twist; covering by translates is the criterion's (2)(c), checked via lem-pc-twist and cited thm-pc-criterion; slopmaster2 isRepresentable_picardFunctor rests on sorry (sorryfree.py: IsVeryAmple.of_pullback etc.), not attachable. FIX more, RETURN less: C4 in step 6, lem-pc-vanishing-above-dim was applied to X_K (a curve over K) without the hypothesis that X_K is a smooth projective curve; added the citation of prop-pc-xk-integral(2) to the step text and uses.; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a separably closed field.\nLet $X$ be a scheme over $k$ which is smooth of relative dimension $1$,\nproper and geometrically integral over $k$ (for instance a smooth\nprojective curve over $k$). Then the\nPicard functor $\\operatorname{Pic}_{X/k}$ is\nrepresentable, and the representing scheme\n$\\underline{\\operatorname{Pic}}_{X/k}$ is a group scheme over $k$.",
-    "proof": [
-      {
-        "text": "*Preliminaries.* The scheme $X$ is projective over $k$: it is separated\nof finite type of dimension $1$ over a field, hence quasi-projective, and a\nproper quasi-projective scheme over a field is projective\n([Tag 0B45](https://stacks.math.columbia.edu/tag/0B45)). Being\ngeometrically integral, it is integral, so $X$ is a smooth projective curve\nover $k$ in the sense of [def-pc-smooth-projective-curve], and the results\non smooth projective curves cited below apply to it.",
-        "uses": [
-          "def-pc-smooth-projective-curve"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Since $k$ is separably closed and $X$ is smooth over $k$ (and nonempty,\nbeing integral), there exists a\n$k$-rational point $\\sigma$ of $X$ by\n[lem-pc-rational-points-dense]. By [cor-pc-sigma-pic-iso] it\nsuffices to show that the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ classifying invertible modules trivial along\n$\\sigma$ is representable (then $\\operatorname{Pic}_{X/k}$ is representable too, and\nthe representing scheme carries the group structure because it represents\nthe group-valued functor; moreover the fact that it is a group scheme\nfollows from the conclusion of [thm-pc-criterion]).",
-        "uses": [
-          "lem-pc-rational-points-dense",
-          "cor-pc-sigma-pic-iso",
-          "thm-pc-criterion"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "We check the conditions (1), (2)(a), (2)(b), (2)(c) of\n[thm-pc-criterion] (with $G=\\operatorname{Pic}_{X/k,\\sigma}$ and $F$ the\nsubfunctor of [lem-pc-f-open-subfunctor]):",
-        "uses": [
-          "thm-pc-criterion",
-          "lem-pc-f-open-subfunctor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "1. **(1)** The functor $\\operatorname{Pic}_{X/k,\\sigma}$ satisfies the sheaf condition\nfor the fppf topology: by [lem-pc-rational-hyp] the hypotheses of\n[thm-pc-pic-split] hold, and the fppf sheaf condition for\n$K=\\operatorname{Pic}_{X/k,\\sigma}$ was shown in\n[lem-pc-k-sheaf]. Since every Zariski covering is an fppf covering ([lem-pc-zariski-coverings-are-fppf])\n(affine-locally the maps $\\operatorname{Spec}(A_f)\\to\\operatorname{Spec}(A)$ are flat and of finite\npresentation, $A\\to A_f$ being the localization), it satisfies the sheaf\nproperty for the Zariski topology. Its values are small: for a\n$k$-scheme $T$, $\\operatorname{Pic}_{X/k,\\sigma}(T)$ is a set of isomorphism\nclasses of invertible modules on $X_T$, and every invertible module is\nisomorphic to one glued from copies of $\\mathcal O$ on an open cover of\n$X_T$ by transition functions, which form a set. [Condition (1); note that\n[cor-pc-sigma-pic-iso] gives the same conclusion from the fact that\n$\\operatorname{Pic}_{X/k}$ is by definition an fppf sheaf.]",
-        "uses": [
-          "lem-pc-rational-hyp",
-          "thm-pc-pic-split",
-          "lem-pc-k-sheaf",
-          "lem-pc-zariski-coverings-are-fppf",
-          "cor-pc-sigma-pic-iso"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "1. **(2)(a)** The subfunctor $F$ of [lem-pc-f-open-subfunctor] is\nrepresentable: the genus $g=\\dim_kH^1(X,\\mathcal O_X)$ is finite ($X$ is\na smooth projective curve over $k$, geometrically irreducible by\n[prop-pc-xk-integral], so [def-pc-genus] applies); the functor\n$\\operatorname{Hilb}^g_{X/k}$ is represented by a $k$-scheme\n$H=\\underline{\\operatorname{Hilb}}^g_{X/k}$ (the representability of the Hilbert\nfunctors of a geometrically integral smooth proper curve, Stacks\n[Tag 0B9I](https://stacks.math.columbia.edu/tag/0B9I)); and\n[thm-pc-f-representable], applied to this $H$, represents $F$ by an open\nsubscheme $W\\subseteq H$.",
-        "uses": [
-          "lem-pc-f-open-subfunctor",
-          "prop-pc-xk-integral",
-          "def-pc-genus",
-          "thm-pc-f-representable"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "1. **(2)(b)** $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open\nimmersions: [lem-pc-f-open-subfunctor].",
-        "uses": [
-          "lem-pc-f-open-subfunctor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "1. **(2)(c)** Let $K/k$ be a field extension and let\n$g_0\\in\\operatorname{Pic}_{X/k,\\sigma}(K)$, i.e. an invertible module $\\mathcal{L}$ on $X_K$\nwith $\\sigma_K^*\\mathcal{L}\\cong\\mathcal{O}_K$. By [lem-pc-twist] there is an\ninvertible sheaf $\\mathcal{L}_0$ on $X$ with\n$\\dim_KH^0(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=1$ and\n$H^1(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=0$. Since\n$\\operatorname{Pic}_{X/k,\\sigma}(k)=\\operatorname{Pic}(X)$ ([def-pc-pic-sigma-functor], [lem-pc-sigma-k-points]), the\nmodule $\\mathcal{L}_0$ corresponds to an element $g_0'\\in G(k)$; and in\n$G(K)$ the product $g_0'\\cdot g_0$ is the class of\n$\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}$. For it we have\n$H^p(X_K,\\cdot)=0$ for all $p\\geq1$\n(Serre: from [lem-pc-twist] we have $H^1=0$ and\n[lem-pc-vanishing-above-dim] gives $H^p=0$ for $p\\geq2$), and\n$H^0$ is $1$-dimensional over $K$, so\n$$\nRf_{K,*}\\bigl(\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}\\bigr)\\cong\\bigl(H^0(X_K,\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L})\\bigr)[0]\n\\cong K[0],\n$$\nwhich is an invertible $\\mathcal{O}_K$-module placed in degree $0$; hence\n$g_0'g_0\\in F(K)$ as required.",
-        "uses": [
-          "lem-pc-twist",
-          "def-pc-pic-sigma-functor",
-          "lem-pc-sigma-k-points",
-          "lem-pc-vanishing-above-dim"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "All four conditions hold, so by [thm-pc-criterion] the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ is representable by a group scheme over $k$, and\nhence so is $\\operatorname{Pic}_{X/k}$ by [cor-pc-sigma-pic-iso].",
-        "uses": [
-          "thm-pc-criterion",
-          "cor-pc-sigma-pic-iso"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "cor-pc-sigma-pic-iso"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-rational-points-dense",
+  "cor-pc-sigma-pic-iso",
+  "thm-pc-criterion",
+  "lem-pc-f-open-subfunctor",
+  "lem-pc-rational-hyp",
+  "thm-pc-pic-split",
+  "lem-pc-k-sheaf",
+  "lem-pc-zariski-coverings-are-fppf",
+  "thm-pc-f-representable",
+  "prop-pc-xk-integral",
+  "def-pc-genus",
+  "lem-pc-twist",
+  "def-pc-pic-sigma-functor",
+  "lem-pc-sigma-k-points",
+  "lem-pc-vanishing-above-dim"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-main/thm-pc-picard-representable.md",
+  "place": "Proposition 44.6.6 (Tag 0B9Z), ## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Picard functor of a smooth projective curve over a separably closed field is representable by a group scheme",
+   "results": "WeierstrassCurve.Affine.Point.toClass_apply; WeierstrassCurve.Affine.Point.toClass_some; WeierstrassCurve.Projective.PointClass; WeierstrassCurve.Jacobian.PointClass; instCommGroupPic; CommRing.Pic.functor; no declaration of Picard-scheme representability.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RepresentableBy, Picard, GrpObj",
+   "results": "0 hits; Loogle was under load.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isRepresentable_picardFunctor|Picard.*representable [Mathlib/AlgebraicGeometry]",
+   "results": "0 matches.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard functor representability smooth projective curve group scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 837,
+ "blueprint_uses": [
+  "cor-pc-sigma-pic-iso",
+  "def-pc-genus",
+  "def-pc-pic-sigma-functor",
+  "def-pc-picard-functor",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve",
+  "def-pc-subfunctor",
+  "lem-pc-f-open-subfunctor",
+  "lem-pc-k-sheaf",
+  "lem-pc-rational-hyp",
+  "lem-pc-rational-points-dense",
+  "lem-pc-sigma-k-points",
+  "lem-pc-twist",
+  "lem-pc-vanishing-above-dim",
+  "lem-pc-zariski-coverings-are-fppf",
+  "prop-pc-xk-integral",
+  "thm-pc-criterion",
+  "thm-pc-f-representable",
+  "thm-pc-pic-split"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Scheme",
+  "declaration": "AlgebraicGeometry.isRepresentable_picardFunctor",
+  "branch": "slopmaster2",
+  "line": 314,
+  "sorry_free": false,
+  "body_lines": 5,
+  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isRepresentable_picardFunctor"
+ ],
+ "uses_not_cited": [
+  "def-pc-picard-functor",
+  "def-pc-separably-closed",
+  "def-pc-smooth-projective-curve",
+  "def-pc-subfunctor"
+ ],
+ "proof_split_by": "list",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isRepresentable_picardFunctor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isRepresentable_picardFunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Scheme",
+     "lines": [
+      304,
+      323
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-main",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pc-picard-representable",
+  "worker": "stage1",
+  "summary": "Checked the imported six-step proof against the project Lean declaration AlgebraicGeometry.isRepresentable_picardFunctor in WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean:235-246. The declaration is not attachable because its transitive proof dependencies contain sorry-bearing declarations, so the item remains a natural-language split. The existing route is complete: choose a rational point, transfer representability to the normalized Picard functor, verify the criterion's sheaf and open-subfunctor conditions, use the twisting lemma for the field-extension condition, and transfer the resulting group-scheme representation back to Pic_{X/k}.",
+  "blueprint": "The six proof steps realize the imported proof in the blueprint node: rational point and normalized functor (opening paragraph); criterion conditions (1), (2)(a), (2)(b), (2)(c); and the final application of the criterion and normalized-to-full Picard isomorphism.",
+  "tool_uses": [
+   {
+    "node": "cor-pc-sigma-pic-iso",
+    "why": "The normalized-to-full Picard functor isomorphism is a generic representability transfer used as a black-box tool."
+   },
+   {
+    "node": "lem-pc-f-open-subfunctor",
+    "why": "The open-subfunctor condition is supplied by the already-proved Picard open-locus lemma."
+   },
+   {
+    "node": "lem-pc-rational-hyp",
+    "why": "The rational-point hypotheses for the Picard splitting lemma are supplied by an existing generic lemma."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "The topology comparison that Zariski covers are fppf covers is a generic site fact."
+   },
+   {
+    "node": "thm-pc-f-representable",
+    "why": "Representability of the auxiliary F subfunctor is a separate Picard/Hilbert theorem used as a black box."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Geometric integrality and finite genus prerequisites for the auxiliary theorem come from this curve base-change proposition."
+   },
+   {
+    "node": "lem-pc-twist",
+    "why": "The twisting construction for the field-extension condition is a separate Picard lemma."
+   },
+   {
+    "node": "lem-pc-sigma-k-points",
+    "why": "Identification of normalized Picard k-points with Pic(X) is a generic definition-level lemma."
+   },
+   {
+    "node": "lem-pc-vanishing-above-dim",
+    "why": "Higher cohomology vanishing above the curve dimension is a generic cohomology lemma used in condition (2)(c)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-pc-sigma-pic-iso",
+  "lem-pc-f-open-subfunctor",
+  "lem-pc-rational-hyp",
+  "lem-pc-zariski-coverings-are-fppf",
+  "thm-pc-f-representable",
+  "prop-pc-xk-integral",
+  "lem-pc-twist",
+  "lem-pc-sigma-k-points",
+  "lem-pc-vanishing-above-dim"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tpr1837",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpr1837 (reviewer sub-agent of L); spot-checked: Read packet whole; transitive closure of proof/stmt deps at 906512228 (1482 nodes) has no cycle (thm-pc-f-representable -> thm-pc-hilb-curves, lem-pc-f-open-subfunctor, def-pc-f-subfunctor, lem-pc-sigma-k-points do not reach the item); hypotheses: sigma from lem-pc-rational-points-dense (sep. closed, smooth nonempty), geometric integrality/genus via prop-pc-xk-integral for thm-pc-f-representable and lem-pc-twist; covering by translates is the criterion's (2)(c), checked via lem-pc-twist and cited thm-pc-criterion; slopmaster2 isRepresentable_picardFunctor rests on sorry (sorryfree.py: IsVeryAmple.of_pullback etc.), not attachable. FIX more, RETURN less: C4 in step 6, lem-pc-vanishing-above-dim was applied to X_K (a curve over K) without the hypothesis that X_K is a smooth projective curve; added the citation of prop-pc-xk-integral(2) to the step text and uses.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a separably closed field.\nLet $X$ be a scheme over $k$ which is smooth of relative dimension $1$,\nproper and geometrically integral over $k$ (for instance a smooth\nprojective curve over $k$). Then the\nPicard functor $\\operatorname{Pic}_{X/k}$ is\nrepresentable, and the representing scheme\n$\\underline{\\operatorname{Pic}}_{X/k}$ is a group scheme over $k$.",
+  "proof": [
+   {
+    "text": "*Preliminaries.* The scheme $X$ is projective over $k$: it is separated\nof finite type of dimension $1$ over a field, hence quasi-projective, and a\nproper quasi-projective scheme over a field is projective\n([Tag 0B45](https://stacks.math.columbia.edu/tag/0B45)). Being\ngeometrically integral, it is integral, so $X$ is a smooth projective curve\nover $k$ in the sense of [def-pc-smooth-projective-curve], and the results\non smooth projective curves cited below apply to it.",
+    "uses": [
+     "def-pc-smooth-projective-curve"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $k$ is separably closed and $X$ is smooth over $k$ (and nonempty,\nbeing integral), there exists a\n$k$-rational point $\\sigma$ of $X$ by\n[lem-pc-rational-points-dense]. By [cor-pc-sigma-pic-iso] it\nsuffices to show that the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ classifying invertible modules trivial along\n$\\sigma$ is representable (then $\\operatorname{Pic}_{X/k}$ is representable too, and\nthe representing scheme carries the group structure because it represents\nthe group-valued functor; moreover the fact that it is a group scheme\nfollows from the conclusion of [thm-pc-criterion]).",
+    "uses": [
+     "lem-pc-rational-points-dense",
+     "cor-pc-sigma-pic-iso",
+     "thm-pc-criterion"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "We check the conditions (1), (2)(a), (2)(b), (2)(c) of\n[thm-pc-criterion] (with $G=\\operatorname{Pic}_{X/k,\\sigma}$ and $F$ the\nsubfunctor of [lem-pc-f-open-subfunctor]):",
+    "uses": [
+     "thm-pc-criterion",
+     "lem-pc-f-open-subfunctor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "1. **(1)** The functor $\\operatorname{Pic}_{X/k,\\sigma}$ satisfies the sheaf condition\nfor the fppf topology: by [lem-pc-rational-hyp] the hypotheses of\n[thm-pc-pic-split] hold, and the fppf sheaf condition for\n$K=\\operatorname{Pic}_{X/k,\\sigma}$ was shown in\n[lem-pc-k-sheaf]. Since every Zariski covering is an fppf covering ([lem-pc-zariski-coverings-are-fppf])\n(affine-locally the maps $\\operatorname{Spec}(A_f)\\to\\operatorname{Spec}(A)$ are flat and of finite\npresentation, $A\\to A_f$ being the localization), it satisfies the sheaf\nproperty for the Zariski topology. Its values are small: for a\n$k$-scheme $T$, $\\operatorname{Pic}_{X/k,\\sigma}(T)$ is a set of isomorphism\nclasses of invertible modules on $X_T$, and every invertible module is\nisomorphic to one glued from copies of $\\mathcal O$ on an open cover of\n$X_T$ by transition functions, which form a set. [Condition (1); note that\n[cor-pc-sigma-pic-iso] gives the same conclusion from the fact that\n$\\operatorname{Pic}_{X/k}$ is by definition an fppf sheaf.]",
+    "uses": [
+     "lem-pc-rational-hyp",
+     "thm-pc-pic-split",
+     "lem-pc-k-sheaf",
+     "lem-pc-zariski-coverings-are-fppf",
+     "cor-pc-sigma-pic-iso"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "1. **(2)(a)** The subfunctor $F$ of [lem-pc-f-open-subfunctor] is\nrepresentable: the genus $g=\\dim_kH^1(X,\\mathcal O_X)$ is finite ($X$ is\na smooth projective curve over $k$, geometrically irreducible by\n[prop-pc-xk-integral], so [def-pc-genus] applies); the functor\n$\\operatorname{Hilb}^g_{X/k}$ is represented by a $k$-scheme\n$H=\\underline{\\operatorname{Hilb}}^g_{X/k}$ (the representability of the Hilbert\nfunctors of a geometrically integral smooth proper curve, Stacks\n[Tag 0B9I](https://stacks.math.columbia.edu/tag/0B9I)); and\n[thm-pc-f-representable], applied to this $H$, represents $F$ by an open\nsubscheme $W\\subseteq H$.",
+    "uses": [
+     "lem-pc-f-open-subfunctor",
+     "prop-pc-xk-integral",
+     "def-pc-genus",
+     "thm-pc-f-representable"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "1. **(2)(b)** $F\\subseteq\\operatorname{Pic}_{X/k,\\sigma}$ is representable by open\nimmersions: [lem-pc-f-open-subfunctor].",
+    "uses": [
+     "lem-pc-f-open-subfunctor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "1. **(2)(c)** Let $K/k$ be a field extension and let\n$g_0\\in\\operatorname{Pic}_{X/k,\\sigma}(K)$, i.e. an invertible module $\\mathcal{L}$ on $X_K$\nwith $\\sigma_K^*\\mathcal{L}\\cong\\mathcal{O}_K$. By [lem-pc-twist] there is an\ninvertible sheaf $\\mathcal{L}_0$ on $X$ with\n$\\dim_KH^0(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=1$ and\n$H^1(X_K,\\mathcal{L}\\otimes\\mathcal{L}_0|_{X_K})=0$. Since\n$\\operatorname{Pic}_{X/k,\\sigma}(k)=\\operatorname{Pic}(X)$ ([def-pc-pic-sigma-functor], [lem-pc-sigma-k-points]), the\nmodule $\\mathcal{L}_0$ corresponds to an element $g_0'\\in G(k)$; and in\n$G(K)$ the product $g_0'\\cdot g_0$ is the class of\n$\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}$. For it we have\n$H^p(X_K,\\cdot)=0$ for all $p\\geq1$\n(Serre: from [lem-pc-twist] we have $H^1=0$ and\n[lem-pc-vanishing-above-dim] gives $H^p=0$ for $p\\geq2$), and\n$H^0$ is $1$-dimensional over $K$, so\n$$\nRf_{K,*}\\bigl(\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L}\\bigr)\\cong\\bigl(H^0(X_K,\\mathcal{L}_0|_{X_K}\\otimes\\mathcal{L})\\bigr)[0]\n\\cong K[0],\n$$\nwhich is an invertible $\\mathcal{O}_K$-module placed in degree $0$; hence\n$g_0'g_0\\in F(K)$ as required.",
+    "uses": [
+     "lem-pc-twist",
+     "def-pc-pic-sigma-functor",
+     "lem-pc-sigma-k-points",
+     "lem-pc-vanishing-above-dim"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "All four conditions hold, so by [thm-pc-criterion] the functor\n$\\operatorname{Pic}_{X/k,\\sigma}$ is representable by a group scheme over $k$, and\nhence so is $\\operatorname{Pic}_{X/k}$ by [cor-pc-sigma-pic-iso].",
+    "uses": [
+     "thm-pc-criterion",
+     "cor-pc-sigma-pic-iso"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

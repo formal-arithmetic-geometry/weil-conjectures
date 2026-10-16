@@ -1,343 +1,423 @@
 {
-  "id": "lem-weil-karoubi-envelope-triangulated",
-  "blueprint": {
-    "is": "lem-weil-karoubi-envelope-triangulated",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Triangulated Karoubi envelope",
-  "statement": "Let $\\mathcal T$ be a triangulated category. With the shift\n$(K,e)[1]=(K[1],e[1])$ and with distinguished triangles the triangles\nisomorphic to direct summands, in the category of triangles, of images of\ndistinguished triangles of $\\mathcal T$, the category $\\Kar(\\mathcal T)$ of\n[def-weil-karoubi-envelope] is an ordinary triangulated category, and the\ncanonical functor of [def-weil-karoubi-envelope] is exact.\n\n(*Source: the classical Balmer--Schlichting idempotent completion of\ntriangulated categories; retained here as the auxiliary model used in the\nproof of the bounded-t-structure theorem below, after which the envelope is\nshown to be redundant; no Stacks Project entry states this form: Stacks' only\nentries on idempotents are the definition of a Karoubian preadditive category\n(Definition 12.4.1, Tag\n[09SG](https://stacks.math.columbia.edu/tag/09SG)), its characterization by\nthe splitting of idempotents (Lemma 12.4.2, Tag\n[09SH](https://stacks.math.columbia.edu/tag/09SH)) and the Karoubianity\ncriteria of Lemma 12.4.3 (Tag\n[05QV](https://stacks.math.columbia.edu/tag/05QV): countable products and\nkernels of maps which have a right inverse, or dually countable coproducts\nand cokernels of maps which have a left inverse), all in Homological Algebra,\nSection 12.4 (Tag [09SF](https://stacks.math.columbia.edu/tag/09SF)); Chapter\n13 contains no idempotent completion of a triangulated category, and the\nderived-limit and K-injective entries 08TC, 07KC, 0BK6, 0BK7, 070M, 079P\nconcern a fixed triangulated category rather than its idempotent completion;\nthe blueprint adds the description of the distinguished triangles of\n$\\Kar(\\mathcal T)$ as retracts of images of distinguished triangles of\n$\\mathcal T$.*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-karoubi-envelope-triangulated.md",
-    "place": "node lem-weil-karoubi-envelope-triangulated, order 1423",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09SG"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09SH"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 05QV"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09SF"
-      }
-    ]
-  },
-  "stmt_deps": [
+ "id": "lem-weil-karoubi-envelope-triangulated",
+ "blueprint": {
+  "is": "lem-weil-karoubi-envelope-triangulated",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Triangulated Karoubi envelope",
+ "statement": "Let $\\mathcal T$ be a triangulated category. With the shift\n$(K,e)[1]=(K[1],e[1])$ and with distinguished triangles the triangles\nisomorphic to direct summands, in the category of triangles, of images of\ndistinguished triangles of $\\mathcal T$, the category $\\Kar(\\mathcal T)$ of\n[def-weil-karoubi-envelope] is an ordinary triangulated category, and the\ncanonical functor of [def-weil-karoubi-envelope] is exact.\n\n(*Source: the classical Balmer--Schlichting idempotent completion of\ntriangulated categories; retained here as the auxiliary model used in the\nproof of the bounded-t-structure theorem below, after which the envelope is\nshown to be redundant; no Stacks Project entry states this form: Stacks' only\nentries on idempotents are the definition of a Karoubian preadditive category\n(Definition 12.4.1, Tag\n[09SG](https://stacks.math.columbia.edu/tag/09SG)), its characterization by\nthe splitting of idempotents (Lemma 12.4.2, Tag\n[09SH](https://stacks.math.columbia.edu/tag/09SH)) and the Karoubianity\ncriteria of Lemma 12.4.3 (Tag\n[05QV](https://stacks.math.columbia.edu/tag/05QV): countable products and\nkernels of maps which have a right inverse, or dually countable coproducts\nand cokernels of maps which have a left inverse), all in Homological Algebra,\nSection 12.4 (Tag [09SF](https://stacks.math.columbia.edu/tag/09SF)); Chapter\n13 contains no idempotent completion of a triangulated category, and the\nderived-limit and K-injective entries 08TC, 07KC, 0BK6, 0BK7, 070M, 079P\nconcern a fixed triangulated category rather than its idempotent completion;\nthe blueprint adds the description of the distinguished triangles of\n$\\Kar(\\mathcal T)$ as retracts of images of distinguished triangles of\n$\\mathcal T$.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/lem-weil-karoubi-envelope-triangulated.md",
+  "place": "node lem-weil-karoubi-envelope-triangulated, order 1423",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09SG"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09SH"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 05QV"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09SF"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-karoubi-envelope",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal E=\\Kar(\\mathcal T)$ and $J:\\mathcal T\\to\\mathcal E$ for [def-weil-karoubi-envelope]. We use ordinary functional composition throughout. Each Hom set is the subgroup of $\\Hom_{\\mathcal T}(K,L)$ consisting of $u=d u e$; the condition is closed under addition and negatives, and composition is bilinear. The zero object is $(0,0)$, and $(K,e)\\oplus(L,d)=(K\\oplus L,\\operatorname{diag}(e,d))$, with inclusions/projections multiplied by the respective projectors, satisfies the biproduct identities. Thus $\\mathcal E$ and $J$ are additive. The shifts are $(K,e)[n]=(K[n],e[n])$ and $u[n]$, with the shift coherence maps induced from those of $\\mathcal T$ and restricted by the projectors. Naturality makes these legitimate morphisms of $\\mathcal E$; inverse coherence maps restrict in the same way, so the usual coherence equations remain true. In particular $[1]$ is an additive autoequivalence and $J$ commutes with shifts. For $A=(K,e)$ put $A^c=(K,1-e)$. The column $(e,1-e)$ and row $(e,1-e)$ give inverse maps $J K\\cong A\\oplus A^c$, since $e(1-e)=(1-e)e=0$ and $e+(1-e)=1$.",
+   "uses": [
     "def-weil-karoubi-envelope",
     "def-weil-triangulated-category"
-  ],
-  "proof": [
-    {
-      "text": "Write $\\mathcal E=\\Kar(\\mathcal T)$ and $J:\\mathcal T\\to\\mathcal E$ for [def-weil-karoubi-envelope]. We use ordinary functional composition throughout. Each Hom set is the subgroup of $\\Hom_{\\mathcal T}(K,L)$ consisting of $u=d u e$; the condition is closed under addition and negatives, and composition is bilinear. The zero object is $(0,0)$, and $(K,e)\\oplus(L,d)=(K\\oplus L,\\operatorname{diag}(e,d))$, with inclusions/projections multiplied by the respective projectors, satisfies the biproduct identities. Thus $\\mathcal E$ and $J$ are additive. The shifts are $(K,e)[n]=(K[n],e[n])$ and $u[n]$, with the shift coherence maps induced from those of $\\mathcal T$ and restricted by the projectors. Naturality makes these legitimate morphisms of $\\mathcal E$; inverse coherence maps restrict in the same way, so the usual coherence equations remain true. In particular $[1]$ is an additive autoequivalence and $J$ commutes with shifts. For $A=(K,e)$ put $A^c=(K,1-e)$. The column $(e,1-e)$ and row $(e,1-e)$ give inverse maps $J K\\cong A\\oplus A^c$, since $e(1-e)=(1-e)e=0$ and $e+(1-e)=1$.",
-      "uses": [
-        "def-weil-karoubi-envelope",
-        "def-weil-triangulated-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Definitions 1.2, 1.10 and proof 1.15 (TR1), pp. 2–4"
-      }
-    },
-    {
-      "text": "Let $\\mathscr D$ be the triangles of $\\mathcal E$ which are retracts of $J\\Delta$ for distinguished triangles $\\Delta$ of $\\mathcal T$: a retract means triangle maps $i:T\\to J\\Delta$, $p:J\\Delta\\to T$ with $p i=1_T$. This already includes triangles isomorphic to such retracts, since precomposing $i$ and postcomposing $p$ with inverse triangle isomorphisms preserves $p i=1_T$. It is also closed under further retracts: if $T\\overset{a}{\\to}T_1\\overset{b}{\\to}T$ with $b a=1_T$ and $T_1\\overset{i}{\\to}J\\Delta\\overset{p}{\\to}T_1$ with $p i=1_{T_1}$, then $(i a,b p)$ exhibits $T$ as a retract of $J\\Delta$. This is precisely the direct-summand class in the statement, not just a termwise condition: for a retract of $J\\Delta$ put $f=i p$, a triangle idempotent with components $f_j$ on the objects $K_j$ of $\\Delta$. Its complement has objects $(K_j,1-f_j)$ and arrows $(1-f_{j+1})d_j(1-f_j)$ (with shifted projector at the last target). The commutation equations for $f$ make this a triangle. The componentwise row $(i_j,1-f_j)$ and column $(p_j,1-f_j)$ identify the sum of the retract triangle and this complement with $J\\Delta$: the mixed composites vanish since $f i=i$ and $p f=p$, while $i p+(1-f)=1$. Conversely every direct-sum decomposition gives a retract by its inclusion and projection. The contractible triangle of $A$ is a retract of the image of the contractible triangle of $K$ via the triangle projector $(e,e,0)$; its image has identities $e,e$ on its first two terms. This verifies the isomorphism and identity parts of TR1 of [def-weil-triangulated-category].",
-      "uses": [
-        "def-weil-karoubi-envelope",
-        "def-weil-triangulated-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Definition 1.10 and proof 1.15 (TR1), pp. 3–4"
-      }
-    },
-    {
-      "text": "To construct cones, first work in $\\mathcal T$. Let $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ be distinguished and let $a^2=a$, $b^2=b$, $b u=u a$. TR3 in [def-weil-triangulated-category] gives $x:Z\\to Z$ with $x v=v b$ and $w x=a[1]w$. Put $h=x^2-x$. Then $h v=v(b^2-b)=0$ and $w h=(a[1]^2-a[1])w=0$. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact], applied with $W=Z$ and $c=h$, gives $h=k w$ for some $k:X[1]\\to Z$. Consequently $h^2=k w h=0$. Since $h$ is a polynomial in $x$, it commutes with $x$. Set $r=x+h-2xh=3x^2-2x^3$. Expanding and using $h^2=0$ gives $r^2=x^2+2xh-4x^2h=x+h-2xh=r$, because $x^2=x+h$ and $x^2h=xh$. Also $(r-x)v=(1-2x)hv=0$ and $w(r-x)=wh-2wxh=0$. Hence $(a,b,r)$ is an idempotent endomorphism of $\\Delta$. No division by 2 or 3 occurs.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-weil-pbc-hom-out-of-triangle-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Lemma 1.13 and proof 1.14, pp. 3–4"
-      }
-    },
-    {
-      "text": "For a morphism $f:(X,a)\\to(Y,b)$ in $\\mathcal E$, the equation $f=b f a$ gives $b f=f=f a$. Complete its underlying morphism $f:X\\to Y$ in $\\mathcal T$ to a distinguished triangle $\\Delta=(X\\xrightarrow{f}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$, using TR1 of [def-weil-triangulated-category], and apply step 3 to $a,b$. The triangle in $\\mathcal E$ with objects $(X,a),(Y,b),(Z,r)$ and arrows $f,r v b,a[1]w r$ is a retract of $J\\Delta$: inclusion and retraction have underlying components $a,b,r$. For example the second-arrow square reads $r(r v b)=r v b=v b$ and $r v=r v b$, by $r v=v b$; the last-arrow squares follow from $w r=a[1]w$. Their composites on the three objects are $a^2=a$, $b^2=b$, $r^2=r$, the respective identities in the envelope. Thus the triangle belongs to $\\mathscr D$ and has first arrow exactly $f$, proving the remaining part of TR1.",
-      "uses": [
-        "def-weil-karoubi-envelope",
-        "def-weil-triangulated-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR1), p. 4"
-      }
-    },
-    {
-      "text": "Rotation and inverse rotation act on triangle maps and preserve $p i=1$ componentwise. They commute with $J$ under the shift identification of step 1. TR2 in [def-weil-triangulated-category] makes both the rotation and the inverse rotation of a distinguished triangle of $\\mathcal T$ distinguished. Applying these operations to a retract diagram therefore proves $T\\in\\mathscr D\\Rightarrow\\operatorname{rot}(T)\\in\\mathscr D$ and $T\\in\\mathscr D\\Rightarrow\\operatorname{rot}^{-1}(T)\\in\\mathscr D$. Applying the latter to $\\operatorname{rot}(T)$ and its canonical triangle isomorphism back to $T$ proves the reverse implication required by TR2. The rotated final arrow is $-u[1]$, exactly the convention in the cited definition.",
-      "uses": [
-        "def-weil-triangulated-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR2), p. 4"
-      }
-    },
-    {
-      "text": "For TR3 let $T,S\\in\\mathscr D$ with retract diagrams $T\\overset{i}{\\to}J\\Delta\\overset{p}{\\to}T$ and $S\\overset{j}{\\to}J\\Gamma\\overset{q}{\\to}S$, and let $(\\alpha,\\beta)$ be a commuting square on their first arrows. The first two components of $j(\\alpha,\\beta)p$ form a commuting square between $J\\Delta$ and $J\\Gamma$. By [lem-weil-karoubi-envelope-fully-faithful] they lift to a commuting square in $\\mathcal T$, where TR3 of [def-weil-triangulated-category] completes them to a triangle map $t:\\Delta\\to\\Gamma$. Then $q J(t)i:T\\to S$ is a triangle map with first components $q_1j_1\\alpha p_1i_1=\\alpha$ and $q_2j_2\\beta p_2i_2=\\beta$. This proves TR3 without requiring the chosen third component itself to be idempotent.",
-      "uses": [
-        "lem-weil-karoubi-envelope-fully-faithful",
-        "def-weil-triangulated-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR3), p. 5"
-      }
-    },
-    {
-      "text": "Steps 1–6 prove that $(\\mathcal E,[1],\\mathscr D)$ is pre-triangulated in the precise sense of [def-weil-triangulated-category]. Moreover $J$ is already an exact functor between these pre-triangulated categories: it is additive, has the shift identification from step 1, and $J\\Delta$ is its own retract for every distinguished $\\Delta$. Only TR4 remains; hence every use below of a theorem for pre-triangulated categories applies without assuming the conclusion we are proving.",
-      "uses": [
-        "def-weil-triangulated-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15, passage between (TR3) and (TR4), p. 5"
-      }
-    },
-    {
-      "text": "Fix composable $u:X\\to Y$, $v:Y\\to Z$ in $\\mathcal E$ and arbitrary distinguished cone triangles $(u,u_1,u_2)$, $(v,v_1,v_2)$, $(vu,w_1,w_2)$, with cones $U,V,W$. Set $A=X^c$, $B=Y^c$, $C=Z^c$ as in step 1. The triangles $A\\to0\\to A[1]\\xrightarrow{1}A[1]$ and $0\\to B\\xrightarrow{1}B\\to0$ are distinguished by TR1 and TR2 of [def-weil-triangulated-category] (rotation of the contractible triangle of $A$ gives final arrow $-1$, and the triangle isomorphism $(1_A,1_0,-1_{A[1]})$ changes it to $1$; inverse rotation of the contractible triangle of $B$ gives the second triangle). Apply [lem-weil-finite-sums-distinguished-triangles] in the pre-triangulated category $\\mathcal E$. Adding these trivial triangles to the first cone, and the corresponding triangles for $B,C$ and $A,C$ to the other cones, gives distinguished padded triangles with first two objects $X\\oplus A,Y\\oplus B,Z\\oplus C$ and cones respectively $U\\oplus B\\oplus A[1]$, $V\\oplus C\\oplus B[1]$, $W\\oplus C\\oplus A[1]$. Their first arrows are $\\operatorname{diag}(u,0)$, $\\operatorname{diag}(v,0)$ and $\\operatorname{diag}(vu,0)$, so the third is the composite of the first two. More explicitly, for each of $(s,s_1,s_2;P,Q,D)=(u,u_1,u_2;A,B,U)$, $(v,v_1,v_2;B,C,V)$, and $(vu,w_1,w_2;A,C,W)$, the padded second arrow sends $(y,q)$ to $(s_1y,q,0)$ and its third arrow sends $(d,q,p)$ to $(s_2d,p)$. These expressions denote biproduct maps by their components, rather than elements of the category. Write these arrows as $\\bar u_1,\\bar u_2$, $\\bar v_1,\\bar v_2$, and $\\bar w_1,\\bar w_2$, and write $\\bar u=\\operatorname{diag}(u,0)$, $\\bar v=\\operatorname{diag}(v,0)$, $\\bar U=U\\oplus B\\oplus A[1]$, $\\bar V=V\\oplus C\\oplus B[1]$, $\\bar W=W\\oplus C\\oplus A[1]$.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-weil-finite-sums-distinguished-triangles"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR4), triangles (4)–(6), p. 5"
-      }
-    },
-    {
-      "text": "Under $X\\oplus A\\cong J K_X$, $Y\\oplus B\\cong J K_Y$, $Z\\oplus C\\cong J K_Z$ from step 1, the two padded arrows are images of morphisms $K_X\\to K_Y\\to K_Z$ of $\\mathcal T$, by [lem-weil-karoubi-envelope-fully-faithful]. Choose distinguished cone triangles in $\\mathcal T$ for these two arrows and their composite using [def-weil-triangulated-category]. Their images in $\\mathcal E$ are distinguished by step 7. TR3 completes the chosen isomorphisms on the first two terms of each padded triangle to a triangle morphism from that padded triangle to the corresponding image triangle. By [lem-sf-triangle-morphism-iso] its third component is an isomorphism. Thus all three padded triangles are isomorphic to images of the three chosen source triangles, with the prescribed isomorphisms on $X\\oplus A,Y\\oplus B,Z\\oplus C$. TR4 in $\\mathcal T$ supplies an octahedron for those source triangles. Here are the induced maps and all compatibilities explicitly. Let $a,b,c$ be the fixed isomorphisms on the padded first, second and third base objects, and let $e_U:\\bar U\\to J U_T$, $e_V:\\bar V\\to J V_T$, $e_W:\\bar W\\to J W_T$ be the three cone isomorphisms. Denote the source cone arrows by $u_1^T,u_2^T,v_1^T,v_2^T,w_1^T,w_2^T$, the source base arrows by $u^T,v^T$, and the source front arrows by $F_T:U_T\\to W_T$, $G_T:W_T\\to V_T$. Set $F=e_W^{-1}J(F_T)e_U$ and $G=e_V^{-1}J(G_T)e_W$. The source octahedron squares and the triangle-isomorphism equations give $e_WF\\bar u_1=J(F_T)J(u_1^T)b=J(w_1^T)J(v^T)b=e_W\\bar w_1\\bar v$, $a[1]\\bar w_2F=J(w_2^T)J(F_T)e_U=J(u_2^T)e_U=a[1]\\bar u_2$, $e_VG\\bar w_1=J(G_T)J(w_1^T)c=J(v_1^T)c=e_V\\bar v_1$, and $b[1]\\bar v_2G=J(v_2^T)J(G_T)e_W=J(u^T)[1]J(w_2^T)e_W=b[1]\\bar u[1]\\bar w_2$. Cancelling $e_W,a[1],e_V,b[1]$ gives the four padded octahedron squares. With $H=\\bar u_1[1]\\bar v_2$, one also has $e_U[1]H=J(u_1^T)[1]b[1]\\bar v_2=J(u_1^T[1]v_2^T)e_V$. Therefore $(e_U,e_W,e_V)$ is a triangle isomorphism from $(F,G,H)$ to the image of the source front triangle. That image is distinguished by step 7, so $(F,G,H)$ is distinguished by TR1. All displayed equalities use the shift identification of step 1.",
-      "uses": [
-        "lem-weil-karoubi-envelope-fully-faithful",
-        "def-weil-triangulated-category",
-        "lem-sf-triangle-morphism-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR4), after triangles (4)–(6), p. 5"
-      }
-    },
-    {
-      "text": "In the following displays, $\\operatorname{rows}[a,b,c;d,e,f;g,h,i]$ denotes the matrix with those three rows. Write the two front morphisms of the padded octahedron as $F:U\\oplus B\\oplus A[1]\\to W\\oplus C\\oplus A[1]$ and $G:W\\oplus C\\oplus A[1]\\to V\\oplus C\\oplus B[1]$. In block notation the four octahedron squares of [def-weil-triangulated-category] give $F=\\operatorname{rows}[f_1,0,f_2;f_3,0,f_4;0,0,1]$ and $G=\\operatorname{rows}[g_1,0,g_2;g_3,1,g_4;0,0,0]$; explicitly, $F\\bar u_1=\\bar w_1\\bar v$ on the $B$ summand gives the zero second column of $F$, and $G\\bar w_1=\\bar v_1$ on the $C$ summand gives the column $(0,1,0)$ of $G$. The $A[1]$-component of $\\bar w_2F=\\bar u_2$ gives the last row $(0,0,1)$ of $F$, while the $B[1]$-component of $\\bar v_2G=\\bar u[1]\\bar w_2$ gives the zero last row of $G$. The front connecting arrow is $H=\\operatorname{rows}[u_1[1]v_2,0,0;0,0,1;0,0,0]$. Projecting those same four squares to the original summands yields $g_1w_1=v_1$, $w_2f_1=u_2$, $f_1u_1=w_1v$, $v_2g_1=u[1]w_2$. The front triangle is distinguished by step 9, so clause (i) of [lem-weil-pbc-hom-into-triangle-exact] gives $GF=0$. Its blocks yield $g_1f_1=0$, $g_1f_2+g_2=0$, $g_3f_1+f_3=0$, and $g_3f_2+f_4+g_4=0$.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-weil-pbc-hom-into-triangle-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR4), equations (8)–(14), pp. 5–6"
-      }
-    },
-    {
-      "text": "On $W\\oplus C\\oplus A[1]$ set $\\sigma=\\operatorname{rows}[1,0,-f_2;g_3,1,g_4;0,0,1]$ and $\\tau=\\operatorname{rows}[1,0,f_2;-g_3,1,f_4;0,0,1]$. Matrix multiplication gives $\\sigma\\tau=\\tau\\sigma=1$, since their only potentially nonzero off-diagonal block is $g_3f_2+f_4+g_4=0$. The relations of step 10 also give $\\sigma F=\\operatorname{rows}[f_1,0,0;0,0,0;0,0,1]$ and $G\\tau=\\operatorname{rows}[g_1,0,0;0,1,0;0,0,0]$. Replacing the middle object of the front triangle by $\\sigma$ thus gives the isomorphic, hence distinguished triangle $(\\sigma F,G\\tau,H)$ by the isomorphism clause of [def-weil-triangulated-category]. This is an actual change of coordinates; taking the raw first blocks before this change would not give a triangle retract.",
-      "uses": [
-        "def-weil-triangulated-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR4), equation (15) and triangle (16), p. 6"
-      }
-    },
-    {
-      "text": "The componentwise inclusion of $U,W,V$ into the first summands, and the componentwise projection back, are triangle maps between $(f_1,g_1,u_1[1]v_2)$ and the distinguished triangle of step 11: the three displayed matrices are block diagonal for these summands. Their composite is the identity triangle map. By the retract closure established in step 2, $U\\xrightarrow{f_1}W\\xrightarrow{g_1}V\\xrightarrow{u_1[1]v_2}U[1]$ therefore belongs to $\\mathscr D$. The four equalities $g_1w_1=v_1$, $w_2f_1=u_2$, $f_1u_1=w_1v$, $v_2g_1=u[1]w_2$ of step 10 are exactly the four octahedron squares for the original three cone triangles, with this front connecting arrow. This proves TR4 for arbitrary initial cone triangles, as formulated in [def-weil-triangulated-category]. Together with steps 1–7 it proves the asserted triangulated structure and exactness of $J$, with exactly the shift and distinguished class in the statement.",
-      "uses": [
-        "def-weil-triangulated-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Proof 1.15 (TR4), end of proof of Theorem 1.12, pp. 6–7"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-karoubi-envelope",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "lem-weil-karoubi-envelope-fully-faithful",
-    "lem-weil-finite-sums-distinguished-triangles",
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-hom-into-triangle-exact"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-    "place": "Definition 1.10, Lemma 1.13 with proof 1.14, and Theorem 1.12 with proof 1.15, pp. 3–7. Shift/additivity from Definitions 1.2, 1.10 and the explicit pair construction."
+    "place": "Definitions 1.2, 1.10 and proof 1.15 (TR1), pp. 2–4"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Idempotents.Karoubi, CategoryTheory.IsTriangulated",
-      "results": "OK, 0 hits. No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "grep",
-      "query": "Karoubi|Idempotents",
-      "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory/Triangulated.",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The idempotent completion of a triangulated category has distinguished triangles the retracts of distinguished triangles and the inclusion is exact",
-      "results": "OK, 8 hits. DerivedCategory.instIsTriangulated; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Triangulated.Localization.isTriangulated_functor",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "grep",
-      "query": "triangulat|distTriang|HasShift",
-      "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory/Idempotents.",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The idempotent completion of a triangulated category is triangulated",
-      "results": "OK, 8 hits. CategoryTheory.Idempotents.Karoubi.noConfusion; CategoryTheory.Idempotents.Karoubi.noConfusionType; CategoryTheory.Idempotents.Karoubi.coe; CategoryTheory.Idempotents.Karoubi.instCategory; CategoryTheory.Idempotents.Karoubi; CategoryTheory.IsIdempotentComplete; CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence; CategoryTheory.IsIdempotentComplete.mk",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Karoubi\", \"distinguished\"",
-      "results": "OK, 0 hits. No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Karoubi envelope shift functor and pretriangulated structure idempotent completion",
-      "results": "OK, 8 hits. CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Pretriangulated.Triangle.shiftFunctor_eq; CategoryTheory.Pretriangulated.Triangle.instHasShiftInt; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Functor.IsHomological; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
-    },
-    {
-      "tool": "grep",
-      "query": "(Karoubi|Idempotents).*(distTriang|triangulat)|(distTriang|triangulat).*(Karoubi|Idempotents)",
-      "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory.",
-      "date": "2026-10-16",
-      "verdict": "no match: independent Mathlib source search; project Karoubi triangulation files are outside Mathlib"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An idempotent endomorphism completion inherits the octahedral axiom and its embedding preserves distinguished triangles",
-      "results": "OK, 8 hits. CategoryTheory.Triangulated.Octahedron.map; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Octahedron.map_m₁; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Triangulated.Octahedron.mem; CategoryTheory.Triangulated.instNonemptyOctahedron; CategoryTheory.IsTriangulated.octahedron_axiom; CategoryTheory.Triangulated.someOctahedron'",
-      "date": "2026-10-16",
-      "verdict": "no match: generic octahedron maps, generic TR4 constructors and triangulated localization do not construct the Karoubi distinguished class; no Karoubi triangulation in the Mathlib source search"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1423,
-  "blueprint_uses": [
-    "def-weil-karoubi-envelope"
-  ],
-  "blueprint_proof_text": "The assertion is the idempotent-completion input recorded in the source note.\nIt is not discharged here: it enters the blueprint only through the auxiliary\nmodel $\\Kar(\\mathcal T)$ of [def-weil-karoubi-envelope] in the\nbounded-t-structure theorem below, whose finite-stage and $\\Qlb$-stage\nconclusions make the envelope redundant for the coefficient categories.",
-  "blueprint_proof_steps": [
-    {
-      "text": "The assertion is the idempotent-completion input recorded in the source note.\nIt is not discharged here: it enters the blueprint only through the auxiliary\nmodel $\\Kar(\\mathcal T)$ of [def-weil-karoubi-envelope] in the\nbounded-t-structure theorem below, whose finite-stage and $\\Qlb$-stage\nconclusions make the envelope redundant for the coefficient categories.",
-      "uses": [
-        "def-weil-karoubi-envelope"
-      ],
-      "elementary": false
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Let $\\mathscr D$ be the triangles of $\\mathcal E$ which are retracts of $J\\Delta$ for distinguished triangles $\\Delta$ of $\\mathcal T$: a retract means triangle maps $i:T\\to J\\Delta$, $p:J\\Delta\\to T$ with $p i=1_T$. This already includes triangles isomorphic to such retracts, since precomposing $i$ and postcomposing $p$ with inverse triangle isomorphisms preserves $p i=1_T$. It is also closed under further retracts: if $T\\overset{a}{\\to}T_1\\overset{b}{\\to}T$ with $b a=1_T$ and $T_1\\overset{i}{\\to}J\\Delta\\overset{p}{\\to}T_1$ with $p i=1_{T_1}$, then $(i a,b p)$ exhibits $T$ as a retract of $J\\Delta$. This is precisely the direct-summand class in the statement, not just a termwise condition: for a retract of $J\\Delta$ put $f=i p$, a triangle idempotent with components $f_j$ on the objects $K_j$ of $\\Delta$. Its complement has objects $(K_j,1-f_j)$ and arrows $(1-f_{j+1})d_j(1-f_j)$ (with shifted projector at the last target). The commutation equations for $f$ make this a triangle. The componentwise row $(i_j,1-f_j)$ and column $(p_j,1-f_j)$ identify the sum of the retract triangle and this complement with $J\\Delta$: the mixed composites vanish since $f i=i$ and $p f=p$, while $i p+(1-f)=1$. Conversely every direct-sum decomposition gives a retract by its inclusion and projection. The contractible triangle of $A$ is a retract of the image of the contractible triangle of $K$ via the triangle projector $(e,e,0)$; its image has identities $e,e$ on its first two terms. This verifies the isomorphism and identity parts of TR1 of [def-weil-triangulated-category].",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Definition 1.10 and proof 1.15 (TR1), pp. 3–4"
+   }
   },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-rem-rest",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-weil-karoubi-envelope-triangulated",
-    "worker": "stage1",
-    "summary": "Kept the exact imported statement and expanded the undischarged Balmer–Schlichting input into twelve proof steps: the additive shift, retract class, explicit polynomial idempotent lifting and cones, TR2/TR3, exactness, padded octahedron, and its matrix diagonalization and retraction. Reused the existing general Hom-exactness, triangle-isomorphism and full-faithfulness nodes. Created only the Mathlib leaf for finite sums of distinguished triangles. All searches were run through msearch.py and all cited statements were read and quoted. The prior attachment refusal is respected: no attachment is proposed and no Lean/maintainer fields are altered. Preflight repair adds the required numeric Mathlib line, uses row-list matrix notation to avoid the gate treating TeX row breaks as doubled command escapes, and records the unchanged historical source-note references as contextual_references in this split report, preserving the maintainer-owned source. Independent second reading expanded the padded cone maps, the four isomorphism-conjugation equations and front connecting-arrow equation, and the block constraints; statements and dependency sets are unchanged.",
-    "blueprint": "The blueprint Proof consists solely of 'The assertion is the idempotent-completion input recorded in the source note. It is not discharged here'. All twelve steps discharge precisely that input using its named classical source, without altering the chapter or unit route. sk-rem-rest has no proof steps, and this auxiliary lemma is not its key statement. Whole-blueprint searches for idempotent, Karoubi, sums and triangle isomorphisms found no other blueprint node with the full item statement; same_as=[]. The new finite-sum tool serves the TR4 portion of the same input, and its from.place records that sentence and the paper location.",
-    "contextual_references": "The unchanged imported statement cites Homological Algebra Definition 12.4.1 (09SG) and Lemma 12.4.3 (05QV), and mentions derived-limit/K-injective entries 08TC, 07KC, 0BK6, 0BK7, 070M, 079P explicitly as nonmatches. These are the historical blueprint source-note references, not inputs to any proof step. The proof source is instead Balmer–Schlichting as specified in proof_origin. Source is a maintainer-owned field, so it is preserved; this split report records the context of the inherited references."
+  {
+   "text": "To construct cones, first work in $\\mathcal T$. Let $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ be distinguished and let $a^2=a$, $b^2=b$, $b u=u a$. TR3 in [def-weil-triangulated-category] gives $x:Z\\to Z$ with $x v=v b$ and $w x=a[1]w$. Put $h=x^2-x$. Then $h v=v(b^2-b)=0$ and $w h=(a[1]^2-a[1])w=0$. Clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact], applied with $W=Z$ and $c=h$, gives $h=k w$ for some $k:X[1]\\to Z$. Consequently $h^2=k w h=0$. Since $h$ is a polynomial in $x$, it commutes with $x$. Set $r=x+h-2xh=3x^2-2x^3$. Expanding and using $h^2=0$ gives $r^2=x^2+2xh-4x^2h=x+h-2xh=r$, because $x^2=x+h$ and $x^2h=xh$. Also $(r-x)v=(1-2x)hv=0$ and $w(r-x)=wh-2wxh=0$. Hence $(a,b,r)$ is an idempotent endomorphism of $\\Delta$. No division by 2 or 3 occurs.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Lemma 1.13 and proof 1.14, pp. 3–4"
+   }
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NS-796ecc150",
-    "group": "NS",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-796ecc150 (reviewer sub-agent of L); spot-checked: Read all twelve proof steps, the new finite-sum leaf, cited statements, Balmer–Schlichting pp. 2–7, Stacks sources, and pinned Mathlib declarations. Verified hypotheses, octahedron matrices, edge cases, route, and absence of duplicates or cycles. No repairs needed. Detailed checks recorded in review.md."
+  {
+   "text": "For a morphism $f:(X,a)\\to(Y,b)$ in $\\mathcal E$, the equation $f=b f a$ gives $b f=f=f a$. Complete its underlying morphism $f:X\\to Y$ in $\\mathcal T$ to a distinguished triangle $\\Delta=(X\\xrightarrow{f}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$, using TR1 of [def-weil-triangulated-category], and apply step 3 to $a,b$. The triangle in $\\mathcal E$ with objects $(X,a),(Y,b),(Z,r)$ and arrows $f,r v b,a[1]w r$ is a retract of $J\\Delta$: inclusion and retraction have underlying components $a,b,r$. For example the second-arrow square reads $r(r v b)=r v b=v b$ and $r v=r v b$, by $r v=v b$; the last-arrow squares follow from $w r=a[1]w$. Their composites on the three objects are $a^2=a$, $b^2=b$, $r^2=r$, the respective identities in the envelope. Thus the triangle belongs to $\\mathscr D$ and has first arrow exactly $f$, proving the remaining part of TR1.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR1), p. 4"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-d5ea3ec08",
-    "group": "NH",
-    "result": "pass",
-    "note": "Verified the node, dependencies, source, exact upstream Karoubi declarations, edge cases, docstrings, H4 searches, and per-file scompile/deliver2 preflight. No substantive or mechanical issues found."
+  {
+   "text": "Rotation and inverse rotation act on triangle maps and preserve $p i=1$ componentwise. They commute with $J$ under the shift identification of step 1. TR2 in [def-weil-triangulated-category] makes both the rotation and the inverse rotation of a distinguished triangle of $\\mathcal T$ distinguished. Applying these operations to a retract diagram therefore proves $T\\in\\mathscr D\\Rightarrow\\operatorname{rot}(T)\\in\\mathscr D$ and $T\\in\\mathscr D\\Rightarrow\\operatorname{rot}^{-1}(T)\\in\\mathscr D$. Applying the latter to $\\operatorname{rot}(T)$ and its canonical triangle isomorphism back to $T$ proves the reverse implication required by TR2. The rotated final arrow is $-u[1]$, exactly the convention in the cited definition.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR2), p. 4"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.CategoryTheory.Idempotents.Triangulated",
-    "declaration": "CategoryTheory.Idempotents.Karoubi.isTriangulated",
-    "declarations": [
-      "CategoryTheory.Idempotents.Karoubi.hasShift",
-      "CategoryTheory.Idempotents.toKaroubi.commShift",
-      "CategoryTheory.Idempotents.Karoubi.distinguishedTriangles",
-      "CategoryTheory.Idempotents.Karoubi.pretriangulated",
-      "CategoryTheory.Idempotents.Karoubi.mem_distTriang_iff",
-      "CategoryTheory.Idempotents.toKaroubi.isTriangulated",
-      "CategoryTheory.Idempotents.Karoubi.isTriangulated"
-    ],
-    "statement": "theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C)",
-    "branch": "slopmaster2",
-    "by": "NH",
-    "date": "2026-10-16",
-    "existing": true,
-    "note": "The recorded module and its public imports Shift and Pretriangulated together give every clause. Karoubi.hasShift has (K,e)[n]=(K[n],e[n]); Karoubi.pretriangulated uses Karoubi.distinguishedTriangles, exactly triangle-category retracts of images of distinguished triangles, as made explicit by Karoubi.mem_distTriang_iff. This class is closed under triangle isomorphisms. Karoubi.isTriangulated proves TR4 for that precise structure. The inclusion is Mathlib's toKaroubi C; toKaroubi.commShift and toKaroubi.isTriangulated give its shift compatibility and exactness. All assumptions are exactly those of an arbitrary triangulated category; there is no boundedness, size equality, or preexisting triangulation hypothesis on the envelope. No new module or repeated statement is needed."
+  {
+   "text": "For TR3 let $T,S\\in\\mathscr D$ with retract diagrams $T\\overset{i}{\\to}J\\Delta\\overset{p}{\\to}T$ and $S\\overset{j}{\\to}J\\Gamma\\overset{q}{\\to}S$, and let $(\\alpha,\\beta)$ be a commuting square on their first arrows. The first two components of $j(\\alpha,\\beta)p$ form a commuting square between $J\\Delta$ and $J\\Gamma$. By [lem-weil-karoubi-envelope-fully-faithful] they lift to a commuting square in $\\mathcal T$, where TR3 of [def-weil-triangulated-category] completes them to a triangle map $t:\\Delta\\to\\Gamma$. Then $q J(t)i:T\\to S$ is a triangle map with first components $q_1j_1\\alpha p_1i_1=\\alpha$ and $q_2j_2\\beta p_2i_2=\\beta$. This proves TR3 without requiring the chosen third component itself to be idempotent.",
+   "uses": [
+    "lem-weil-karoubi-envelope-fully-faithful",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR3), p. 5"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal T$ be a triangulated category. With the shift\n$(K,e)[1]=(K[1],e[1])$ and with distinguished triangles the triangles\nisomorphic to direct summands, in the category of triangles, of images of\ndistinguished triangles of $\\mathcal T$, the category $\\Kar(\\mathcal T)$ of\n[def-weil-karoubi-envelope] is an ordinary triangulated category, and the\ncanonical functor of [def-weil-karoubi-envelope] is exact.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Steps 1–6 prove that $(\\mathcal E,[1],\\mathscr D)$ is pre-triangulated in the precise sense of [def-weil-triangulated-category]. Moreover $J$ is already an exact functor between these pre-triangulated categories: it is additive, has the shift identification from step 1, and $J\\Delta$ is its own retract for every distinguished $\\Delta$. Only TR4 remains; hence every use below of a theorem for pre-triangulated categories applies without assuming the conclusion we are proving.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15, passage between (TR3) and (TR4), p. 5"
+   }
+  },
+  {
+   "text": "Fix composable $u:X\\to Y$, $v:Y\\to Z$ in $\\mathcal E$ and arbitrary distinguished cone triangles $(u,u_1,u_2)$, $(v,v_1,v_2)$, $(vu,w_1,w_2)$, with cones $U,V,W$. Set $A=X^c$, $B=Y^c$, $C=Z^c$ as in step 1. The triangles $A\\to0\\to A[1]\\xrightarrow{1}A[1]$ and $0\\to B\\xrightarrow{1}B\\to0$ are distinguished by TR1 and TR2 of [def-weil-triangulated-category] (rotation of the contractible triangle of $A$ gives final arrow $-1$, and the triangle isomorphism $(1_A,1_0,-1_{A[1]})$ changes it to $1$; inverse rotation of the contractible triangle of $B$ gives the second triangle). Apply [lem-weil-finite-sums-distinguished-triangles] in the pre-triangulated category $\\mathcal E$. Adding these trivial triangles to the first cone, and the corresponding triangles for $B,C$ and $A,C$ to the other cones, gives distinguished padded triangles with first two objects $X\\oplus A,Y\\oplus B,Z\\oplus C$ and cones respectively $U\\oplus B\\oplus A[1]$, $V\\oplus C\\oplus B[1]$, $W\\oplus C\\oplus A[1]$. Their first arrows are $\\operatorname{diag}(u,0)$, $\\operatorname{diag}(v,0)$ and $\\operatorname{diag}(vu,0)$, so the third is the composite of the first two. More explicitly, for each of $(s,s_1,s_2;P,Q,D)=(u,u_1,u_2;A,B,U)$, $(v,v_1,v_2;B,C,V)$, and $(vu,w_1,w_2;A,C,W)$, the padded second arrow sends $(y,q)$ to $(s_1y,q,0)$ and its third arrow sends $(d,q,p)$ to $(s_2d,p)$. These expressions denote biproduct maps by their components, rather than elements of the category. Write these arrows as $\\bar u_1,\\bar u_2$, $\\bar v_1,\\bar v_2$, and $\\bar w_1,\\bar w_2$, and write $\\bar u=\\operatorname{diag}(u,0)$, $\\bar v=\\operatorname{diag}(v,0)$, $\\bar U=U\\oplus B\\oplus A[1]$, $\\bar V=V\\oplus C\\oplus B[1]$, $\\bar W=W\\oplus C\\oplus A[1]$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-finite-sums-distinguished-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR4), triangles (4)–(6), p. 5"
+   }
+  },
+  {
+   "text": "Under $X\\oplus A\\cong J K_X$, $Y\\oplus B\\cong J K_Y$, $Z\\oplus C\\cong J K_Z$ from step 1, the two padded arrows are images of morphisms $K_X\\to K_Y\\to K_Z$ of $\\mathcal T$, by [lem-weil-karoubi-envelope-fully-faithful]. Choose distinguished cone triangles in $\\mathcal T$ for these two arrows and their composite using [def-weil-triangulated-category]. Their images in $\\mathcal E$ are distinguished by step 7. TR3 completes the chosen isomorphisms on the first two terms of each padded triangle to a triangle morphism from that padded triangle to the corresponding image triangle. By [lem-sf-triangle-morphism-iso] its third component is an isomorphism. Thus all three padded triangles are isomorphic to images of the three chosen source triangles, with the prescribed isomorphisms on $X\\oplus A,Y\\oplus B,Z\\oplus C$. TR4 in $\\mathcal T$ supplies an octahedron for those source triangles. Here are the induced maps and all compatibilities explicitly. Let $a,b,c$ be the fixed isomorphisms on the padded first, second and third base objects, and let $e_U:\\bar U\\to J U_T$, $e_V:\\bar V\\to J V_T$, $e_W:\\bar W\\to J W_T$ be the three cone isomorphisms. Denote the source cone arrows by $u_1^T,u_2^T,v_1^T,v_2^T,w_1^T,w_2^T$, the source base arrows by $u^T,v^T$, and the source front arrows by $F_T:U_T\\to W_T$, $G_T:W_T\\to V_T$. Set $F=e_W^{-1}J(F_T)e_U$ and $G=e_V^{-1}J(G_T)e_W$. The source octahedron squares and the triangle-isomorphism equations give $e_WF\\bar u_1=J(F_T)J(u_1^T)b=J(w_1^T)J(v^T)b=e_W\\bar w_1\\bar v$, $a[1]\\bar w_2F=J(w_2^T)J(F_T)e_U=J(u_2^T)e_U=a[1]\\bar u_2$, $e_VG\\bar w_1=J(G_T)J(w_1^T)c=J(v_1^T)c=e_V\\bar v_1$, and $b[1]\\bar v_2G=J(v_2^T)J(G_T)e_W=J(u^T)[1]J(w_2^T)e_W=b[1]\\bar u[1]\\bar w_2$. Cancelling $e_W,a[1],e_V,b[1]$ gives the four padded octahedron squares. With $H=\\bar u_1[1]\\bar v_2$, one also has $e_U[1]H=J(u_1^T)[1]b[1]\\bar v_2=J(u_1^T[1]v_2^T)e_V$. Therefore $(e_U,e_W,e_V)$ is a triangle isomorphism from $(F,G,H)$ to the image of the source front triangle. That image is distinguished by step 7, so $(F,G,H)$ is distinguished by TR1. All displayed equalities use the shift identification of step 1.",
+   "uses": [
+    "lem-weil-karoubi-envelope-fully-faithful",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR4), after triangles (4)–(6), p. 5"
+   }
+  },
+  {
+   "text": "In the following displays, $\\operatorname{rows}[a,b,c;d,e,f;g,h,i]$ denotes the matrix with those three rows. Write the two front morphisms of the padded octahedron as $F:U\\oplus B\\oplus A[1]\\to W\\oplus C\\oplus A[1]$ and $G:W\\oplus C\\oplus A[1]\\to V\\oplus C\\oplus B[1]$. In block notation the four octahedron squares of [def-weil-triangulated-category] give $F=\\operatorname{rows}[f_1,0,f_2;f_3,0,f_4;0,0,1]$ and $G=\\operatorname{rows}[g_1,0,g_2;g_3,1,g_4;0,0,0]$; explicitly, $F\\bar u_1=\\bar w_1\\bar v$ on the $B$ summand gives the zero second column of $F$, and $G\\bar w_1=\\bar v_1$ on the $C$ summand gives the column $(0,1,0)$ of $G$. The $A[1]$-component of $\\bar w_2F=\\bar u_2$ gives the last row $(0,0,1)$ of $F$, while the $B[1]$-component of $\\bar v_2G=\\bar u[1]\\bar w_2$ gives the zero last row of $G$. The front connecting arrow is $H=\\operatorname{rows}[u_1[1]v_2,0,0;0,0,1;0,0,0]$. Projecting those same four squares to the original summands yields $g_1w_1=v_1$, $w_2f_1=u_2$, $f_1u_1=w_1v$, $v_2g_1=u[1]w_2$. The front triangle is distinguished by step 9, so clause (i) of [lem-weil-pbc-hom-into-triangle-exact] gives $GF=0$. Its blocks yield $g_1f_1=0$, $g_1f_2+g_2=0$, $g_3f_1+f_3=0$, and $g_3f_2+f_4+g_4=0$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR4), equations (8)–(14), pp. 5–6"
+   }
+  },
+  {
+   "text": "On $W\\oplus C\\oplus A[1]$ set $\\sigma=\\operatorname{rows}[1,0,-f_2;g_3,1,g_4;0,0,1]$ and $\\tau=\\operatorname{rows}[1,0,f_2;-g_3,1,f_4;0,0,1]$. Matrix multiplication gives $\\sigma\\tau=\\tau\\sigma=1$, since their only potentially nonzero off-diagonal block is $g_3f_2+f_4+g_4=0$. The relations of step 10 also give $\\sigma F=\\operatorname{rows}[f_1,0,0;0,0,0;0,0,1]$ and $G\\tau=\\operatorname{rows}[g_1,0,0;0,1,0;0,0,0]$. Replacing the middle object of the front triangle by $\\sigma$ thus gives the isomorphic, hence distinguished triangle $(\\sigma F,G\\tau,H)$ by the isomorphism clause of [def-weil-triangulated-category]. This is an actual change of coordinates; taking the raw first blocks before this change would not give a triangle retract.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR4), equation (15) and triangle (16), p. 6"
+   }
+  },
+  {
+   "text": "The componentwise inclusion of $U,W,V$ into the first summands, and the componentwise projection back, are triangle maps between $(f_1,g_1,u_1[1]v_2)$ and the distinguished triangle of step 11: the three displayed matrices are block diagonal for these summands. Their composite is the identity triangle map. By the retract closure established in step 2, $U\\xrightarrow{f_1}W\\xrightarrow{g_1}V\\xrightarrow{u_1[1]v_2}U[1]$ therefore belongs to $\\mathscr D$. The four equalities $g_1w_1=v_1$, $w_2f_1=u_2$, $f_1u_1=w_1v$, $v_2g_1=u[1]w_2$ of step 10 are exactly the four octahedron squares for the original three cone triangles, with this front connecting arrow. This proves TR4 for arbitrary initial cone triangles, as formulated in [def-weil-triangulated-category]. Together with steps 1–7 it proves the asserted triangulated structure and exactness of $J$, with exactly the shift and distinguished class in the statement.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Proof 1.15 (TR4), end of proof of Theorem 1.12, pp. 6–7"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-karoubi-envelope",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-karoubi-envelope-fully-faithful",
+  "lem-weil-finite-sums-distinguished-triangles",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+  "place": "Definition 1.10, Lemma 1.13 with proof 1.14, and Theorem 1.12 with proof 1.15, pp. 3–7. Shift/additivity from Definitions 1.2, 1.10 and the explicit pair construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.Karoubi, CategoryTheory.IsTriangulated",
+   "results": "OK, 0 hits. No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "grep",
+   "query": "Karoubi|Idempotents",
+   "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory/Triangulated.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The idempotent completion of a triangulated category has distinguished triangles the retracts of distinguished triangles and the inclusion is exact",
+   "results": "OK, 8 hits. DerivedCategory.instIsTriangulated; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "grep",
+   "query": "triangulat|distTriang|HasShift",
+   "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory/Idempotents.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The idempotent completion of a triangulated category is triangulated",
+   "results": "OK, 8 hits. CategoryTheory.Idempotents.Karoubi.noConfusion; CategoryTheory.Idempotents.Karoubi.noConfusionType; CategoryTheory.Idempotents.Karoubi.coe; CategoryTheory.Idempotents.Karoubi.instCategory; CategoryTheory.Idempotents.Karoubi; CategoryTheory.IsIdempotentComplete; CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence; CategoryTheory.IsIdempotentComplete.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Karoubi\", \"distinguished\"",
+   "results": "OK, 0 hits. No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Karoubi envelope shift functor and pretriangulated structure idempotent completion",
+   "results": "OK, 8 hits. CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Pretriangulated.Triangle.shiftFunctor_eq; CategoryTheory.Pretriangulated.Triangle.instHasShiftInt; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Functor.IsHomological; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern derived categories, triangulated localization or bare Karoubi definitions, not the retract triangulation of the Karoubi envelope; two phrasings and both source directories checked"
+  },
+  {
+   "tool": "grep",
+   "query": "(Karoubi|Idempotents).*(distTriang|triangulat)|(distTriang|triangulat).*(Karoubi|Idempotents)",
+   "results": "OK, 0 hits. No hits. Subdirectory: CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match: independent Mathlib source search; project Karoubi triangulation files are outside Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An idempotent endomorphism completion inherits the octahedral axiom and its embedding preserves distinguished triangles",
+   "results": "OK, 8 hits. CategoryTheory.Triangulated.Octahedron.map; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Octahedron.map_m₁; CategoryTheory.IsTriangulated.mk'; CategoryTheory.Triangulated.Octahedron.mem; CategoryTheory.Triangulated.instNonemptyOctahedron; CategoryTheory.IsTriangulated.octahedron_axiom; CategoryTheory.Triangulated.someOctahedron'",
+   "date": "2026-10-16",
+   "verdict": "no match: generic octahedron maps, generic TR4 constructors and triangulated localization do not construct the Karoubi distinguished class; no Karoubi triangulation in the Mathlib source search"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1423,
+ "blueprint_uses": [
+  "def-weil-karoubi-envelope"
+ ],
+ "blueprint_proof_text": "The assertion is the idempotent-completion input recorded in the source note.\nIt is not discharged here: it enters the blueprint only through the auxiliary\nmodel $\\Kar(\\mathcal T)$ of [def-weil-karoubi-envelope] in the\nbounded-t-structure theorem below, whose finite-stage and $\\Qlb$-stage\nconclusions make the envelope redundant for the coefficient categories.",
+ "blueprint_proof_steps": [
+  {
+   "text": "The assertion is the idempotent-completion input recorded in the source note.\nIt is not discharged here: it enters the blueprint only through the auxiliary\nmodel $\\Kar(\\mathcal T)$ of [def-weil-karoubi-envelope] in the\nbounded-t-structure theorem below, whose finite-stage and $\\Qlb$-stage\nconclusions make the envelope redundant for the coefficient categories.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Idempotents.Karoubi.isTriangulated",
+    "CategoryTheory.Idempotents.Karoubi.hasShift",
+    "CategoryTheory.Idempotents.toKaroubi.commShift",
+    "CategoryTheory.Idempotents.Karoubi.distinguishedTriangles",
+    "CategoryTheory.Idempotents.Karoubi.pretriangulated",
+    "CategoryTheory.Idempotents.Karoubi.mem_distTriang_iff",
+    "CategoryTheory.Idempotents.toKaroubi.isTriangulated"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Idempotents.Karoubi.isTriangulated",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Triangulated",
+     "lines": [
+      73,
+      97
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.Karoubi.hasShift",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Shift",
+     "lines": [
+      67,
+      72
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.toKaroubi.commShift",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Shift",
+     "lines": [
+      158,
+      166
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.Karoubi.distinguishedTriangles",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Pretriangulated",
+     "lines": [
+      217,
+      221
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.Karoubi.pretriangulated",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Pretriangulated",
+     "lines": [
+      331,
+      340
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.Karoubi.mem_distTriang_iff",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Pretriangulated",
+     "lines": [
+      342,
+      344
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Idempotents.toKaroubi.isTriangulated",
+     "module": "WeilConjectures.CategoryTheory.Idempotents.Pretriangulated",
+     "lines": [
+      346,
+      349
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-karoubi-envelope-triangulated",
+  "worker": "stage1",
+  "summary": "Kept the exact imported statement and expanded the undischarged Balmer–Schlichting input into twelve proof steps: the additive shift, retract class, explicit polynomial idempotent lifting and cones, TR2/TR3, exactness, padded octahedron, and its matrix diagonalization and retraction. Reused the existing general Hom-exactness, triangle-isomorphism and full-faithfulness nodes. Created only the Mathlib leaf for finite sums of distinguished triangles. All searches were run through msearch.py and all cited statements were read and quoted. The prior attachment refusal is respected: no attachment is proposed and no Lean/maintainer fields are altered. Preflight repair adds the required numeric Mathlib line, uses row-list matrix notation to avoid the gate treating TeX row breaks as doubled command escapes, and records the unchanged historical source-note references as contextual_references in this split report, preserving the maintainer-owned source. Independent second reading expanded the padded cone maps, the four isomorphism-conjugation equations and front connecting-arrow equation, and the block constraints; statements and dependency sets are unchanged.",
+  "blueprint": "The blueprint Proof consists solely of 'The assertion is the idempotent-completion input recorded in the source note. It is not discharged here'. All twelve steps discharge precisely that input using its named classical source, without altering the chapter or unit route. sk-rem-rest has no proof steps, and this auxiliary lemma is not its key statement. Whole-blueprint searches for idempotent, Karoubi, sums and triangle isomorphisms found no other blueprint node with the full item statement; same_as=[]. The new finite-sum tool serves the TR4 portion of the same input, and its from.place records that sentence and the paper location.",
+  "contextual_references": "The unchanged imported statement cites Homological Algebra Definition 12.4.1 (09SG) and Lemma 12.4.3 (05QV), and mentions derived-limit/K-injective entries 08TC, 07KC, 0BK6, 0BK7, 070M, 079P explicitly as nonmatches. These are the historical blueprint source-note references, not inputs to any proof step. The proof source is instead Balmer–Schlichting as specified in proof_origin. Source is a maintainer-owned field, so it is preserved; this split report records the context of the inherited references."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-796ecc150",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-796ecc150 (reviewer sub-agent of L); spot-checked: Read all twelve proof steps, the new finite-sum leaf, cited statements, Balmer–Schlichting pp. 2–7, Stacks sources, and pinned Mathlib declarations. Verified hypotheses, octahedron matrices, edge cases, route, and absence of duplicates or cycles. No repairs needed. Detailed checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d5ea3ec08",
+  "group": "NH",
+  "result": "pass",
+  "note": "Verified the node, dependencies, source, exact upstream Karoubi declarations, edge cases, docstrings, H4 searches, and per-file scompile/deliver2 preflight. No substantive or mechanical issues found."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Idempotents.Triangulated",
+  "declaration": "CategoryTheory.Idempotents.Karoubi.isTriangulated",
+  "declarations": [
+   "CategoryTheory.Idempotents.Karoubi.hasShift",
+   "CategoryTheory.Idempotents.toKaroubi.commShift",
+   "CategoryTheory.Idempotents.Karoubi.distinguishedTriangles",
+   "CategoryTheory.Idempotents.Karoubi.pretriangulated",
+   "CategoryTheory.Idempotents.Karoubi.mem_distTriang_iff",
+   "CategoryTheory.Idempotents.toKaroubi.isTriangulated",
+   "CategoryTheory.Idempotents.Karoubi.isTriangulated"
+  ],
+  "statement": "theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C)",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The recorded module and its public imports Shift and Pretriangulated together give every clause. Karoubi.hasShift has (K,e)[n]=(K[n],e[n]); Karoubi.pretriangulated uses Karoubi.distinguishedTriangles, exactly triangle-category retracts of images of distinguished triangles, as made explicit by Karoubi.mem_distTriang_iff. This class is closed under triangle isomorphisms. Karoubi.isTriangulated proves TR4 for that precise structure. The inclusion is Mathlib's toKaroubi C; toKaroubi.commShift and toKaroubi.isTriangulated give its shift compatibility and exactness. All assumptions are exactly those of an arbitrary triangulated category; there is no boundedness, size equality, or preexisting triangulation hypothesis on the envelope. No new module or repeated statement is needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal T$ be a triangulated category. With the shift\n$(K,e)[1]=(K[1],e[1])$ and with distinguished triangles the triangles\nisomorphic to direct summands, in the category of triangles, of images of\ndistinguished triangles of $\\mathcal T$, the category $\\Kar(\\mathcal T)$ of\n[def-weil-karoubi-envelope] is an ordinary triangulated category, and the\ncanonical functor of [def-weil-karoubi-envelope] is exact.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

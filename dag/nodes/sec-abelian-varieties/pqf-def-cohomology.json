@@ -1,174 +1,184 @@
 {
-  "id": "pqf-def-cohomology",
-  "blueprint": {
-    "is": "pqf-def-cohomology",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Sheaf cohomology and higher direct images",
-  "statement": "Let $X$ be a scheme. The cohomology functors $\\mathrm H^p(X,-)$ are\nthe right derived functors of the global sections functor $\\Gamma(X,-)$\non $\\mathcal O_X$-modules; a short exact sequence of $\\mathcal O_X$-modules gives a long exact cohomology sequence. For a morphism\n$f:X\\to S$, the higher direct images $R^pf_*\\mathcal F$ are the right\nderived functors of $f_*$.\n(*Stacks Project, Cohomology of Sheaves, Section 20.11, Tag\n[01EO](https://stacks.math.columbia.edu/tag/01EO), and Section\n20.13, Tag\n[01EY](https://stacks.math.columbia.edu/tag/01EY).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-def-cohomology.md",
-    "place": "node pqf-def-cohomology, order 527",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01EO"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01EY"
-      }
-    ]
-  },
-  "stmt_deps": [
+ "id": "pqf-def-cohomology",
+ "blueprint": {
+  "is": "pqf-def-cohomology",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Sheaf cohomology and higher direct images",
+ "statement": "Let $X$ be a scheme. The cohomology functors $\\mathrm H^p(X,-)$ are\nthe right derived functors of the global sections functor $\\Gamma(X,-)$\non $\\mathcal O_X$-modules; a short exact sequence of $\\mathcal O_X$-modules gives a long exact cohomology sequence. For a morphism\n$f:X\\to S$, the higher direct images $R^pf_*\\mathcal F$ are the right\nderived functors of $f_*$.\n(*Stacks Project, Cohomology of Sheaves, Section 20.11, Tag\n[01EO](https://stacks.math.columbia.edu/tag/01EO), and Section\n20.13, Tag\n[01EY](https://stacks.math.columbia.edu/tag/01EY).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-def-cohomology.md",
+  "place": "node pqf-def-cohomology, order 527",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01EO"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01EY"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact"
+ ],
+ "proof": [
+  {
+   "text": "Global sections on ringed-space modules is evaluation at the whole space, so Mathlib SheafOfModules.evaluationPreservesFiniteLimits supplies left exactness. Its additivity is the existing globalSectionsFunctor_additive instance. Enough injectives is inferred from moduleGrothendieckAbelian. Apply Functor.exists_universal_rightDerived_deltaFunctor and retain its degree-functor equality. The definition moduleCohomology is definitionally the family of classical right derived functors; proof irrelevance identifies its enough-injectives proof with the inferred one.",
+   "uses": [
     "def-sc-ringed-space-module-cohomology",
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-global-sections-left-exact"
-  ],
-  "proof": [
-    {
-      "text": "Global sections on ringed-space modules is evaluation at the whole space, so Mathlib SheafOfModules.evaluationPreservesFiniteLimits supplies left exactness. Its additivity is the existing globalSectionsFunctor_additive instance. Enough injectives is inferred from moduleGrothendieckAbelian. Apply Functor.exists_universal_rightDerived_deltaFunctor and retain its degree-functor equality. The definition moduleCohomology is definitionally the family of classical right derived functors; proof irrelevance identifies its enough-injectives proof with the inferred one.",
-      "uses": [
-        "def-sc-ringed-space-module-cohomology",
-        "def-pc-ringed-spaces-derived-direct-image",
-        "lem-weil-pbc-right-derived-universal-delta-functor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For each scheme morphism, take F to be moduleDirectImage of its ringed-space morphism. The shared Grothendieck instance supplies enough injectives and K-injective resolutions, and F is additive. Whisker the inverse of F.rightDerivedFunctorPlusCompatibility by the bounded-below single functor on the left and the target homology functor on the right. Compose with F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. The bounded-below single functor followed by inclusion, and bounded-below homology, identify definitionally with the corresponding unbounded single and homology functors. This gives the required natural isomorphism, without constructing comparison maps afresh.",
-      "uses": [
-        "def-pc-ringed-spaces-derived-direct-image",
-        "src-right-derived-functor-plus-compatibility",
-        "lem-sp-derived-functor-single-identification"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-sc-ringed-space-module-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each scheme morphism, take F to be moduleDirectImage of its ringed-space morphism. The shared Grothendieck instance supplies enough injectives and K-injective resolutions, and F is additive. Whisker the inverse of F.rightDerivedFunctorPlusCompatibility by the bounded-below single functor on the left and the target homology functor on the right. Compose with F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. The bounded-below single functor followed by inclusion, and bounded-below homology, identify definitionally with the corresponding unbounded single and homology functors. This gives the required natural isomorphism, without constructing comparison maps afresh.",
+   "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
     "src-right-derived-functor-plus-compatibility",
     "lem-sp-derived-functor-single-identification"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean",
-    "place": "Tags 01DZ and 079W; rightDerivedFunctorPlusCompatibility; singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. Lean composition by U1, 2026-10-12."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "sheaf cohomology right derived global sections higher direct images",
-      "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; no project-specific higher-direct-image definition",
-      "date": "2026-10-11",
-      "verdict": "generalization only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.rightDerived, Sheaf.H, higherDirectImage",
-      "results": "0 hits; unknown identifier Sheaf.H",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n \"rightDerived|Sheaf\\.H|higherDirectImage\" Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
-      "results": "Sheaf.H primitives and right-derived infrastructure only; no exact combined definition",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 527,
-  "blueprint_uses": [],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.globalSectionsFunctor",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
-          "lines": [
-            47,
-            56
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-pqf-finite",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "pqf-def-cohomology",
-    "worker": "stage1",
-    "summary": "The item was not an exact existing declaration. I split its three clauses into proof steps using the existing general ringed-space module-cohomology definition, the existing K-injective derived direct-image definition, and the existing universal right-derived delta-functor theorem. No child node was created because each required fact already exists in the DAG; the Lean source separately contains Modules.H, higherDirectImage, and the long-exact cohomology consequences.",
-    "blueprint": "the full item statement and its three clauses"
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-pdh2108",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdh2108 (reviewer sub-agent of L); spot-checked: Read packet; checked each cited statement. Step1 cites def-sc-ringed-space-module-cohomology (cites enough injectives, no restatement). Step2 matches def-pc-ringed-spaces-derived-direct-image. FIX more, RETURN less: (1) C1/E step 3: hypotheses of lem-weil-pbc-right-derived-universal-delta-functor uncited; added lem-sc-ringed-space-module-sheaves-enough-injectives and lem-sc-global-sections-left-exact. (2) C1 step 2: identifying H^p(Rf_*F) with R^p f_* via injective resolutions needs injective resolutions to be K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective and enough injectives. (3) source.external Tags 01EO/01EY (Cech, Leray) wrong; replaced by 01DZ, 079W (second reading claimed this change but did not make it).; 1 file(s) fixed by the reviewer"
-  },
-  "lead_note": "2026-10-10 L (R-pdh2108): Second reading claimed source tags were corrected to 01DZ/015B/079W but the branch still had 01EO/01EY; source.external fixed by reviewer. The statement text itself (blueprint wording) still names 01EO/01EY, left unchanged.",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.PQFCohomology",
-    "declaration": "AlgebraicGeometry.sheafCohomologyAndHigherDirectImages",
-    "file": "lean/WeilConjectures/AlgebraicGeometry/PQFCohomology.lean",
-    "statement": "theorem sheafCohomologyAndHigherDirectImages (X : Scheme.{u}) : (∃ G : CohomologicalDeltaFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))), G.F = RingedSpace.moduleCohomology X.toRingedSpace) ∧ ∀ (S : Scheme.{u}) (f : X ⟶ S) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (p : ℕ), Nonempty ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0 ⋙ RingedSpace.derivedModuleDirectImage f.toLRSHom.toShHom ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (p : ℤ)) ≅ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p)",
-    "branch": "sheaf-dag",
-    "by": "T1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "No new definition: H^p(X,-) is the recorded RingedSpace.moduleCohomology (right derived functors of RingedSpace.globalSectionsFunctor by definition, so no separate conjunct); the theorem asserts the long exact sequence (a cohomological delta-functor with degree functors moduleCohomology) and, for f : X ⟶ S, H^p(Rf_*(F[0])) ≅ the p-th right derived functor of the recorded RingedSpace.moduleDirectImage. Injective resolutions come from the shared instance RingedSpace.moduleGrothendieckAbelian (no inline instances).",
-    "fixed_by": "R-pdc",
-    "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Paper.PQFCohomology retired, the source module WeilConjectures.AlgebraicGeometry.PQFCohomology declares the same names"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-pdc",
-    "group": "T1",
-    "result": "fix",
-    "note": "node: H^p(X,-)=R^pΓ on O_X-modules, LES for SES, R^p f_* = R^p of f_*; H^p = recorded moduleCohomology (dropped tautological rfl conjunct moduleCohomology = rightDerived Γ); LES = ∃ CohomologicalDeltaFunctor with G.F = moduleCohomology; R^p f_*: H^p(Rf_*(F[0])) ≅ (moduleDirectImage f).rightDerived p, f scheme morphism, p:ℕ; removed inline @InjectiveResolution.instHasInjectiveResolutions (shared moduleGrothendieckAbelian instance + Mathlib EnoughInjectives import); no new definition"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "U1",
-    "result": "pass",
-    "landing": "20261012T053958-L-2647757",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme. The cohomology functors $\\mathrm H^p(X,-)$ are\nthe right derived functors of the global sections functor $\\Gamma(X,-)$\non $\\mathcal O_X$-modules; a short exact sequence of $\\mathcal O_X$-modules gives a long exact cohomology sequence. For a morphism\n$f:X\\to S$, the higher direct images $R^pf_*\\mathcal F$ are the right\nderived functors of $f_*$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean",
+  "place": "Tags 01DZ and 079W; rightDerivedFunctorPlusCompatibility; singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. Lean composition by U1, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology right derived global sections higher direct images",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; no project-specific higher-direct-image definition",
+   "date": "2026-10-11",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, Sheaf.H, higherDirectImage",
+   "results": "0 hits; unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"rightDerived|Sheaf\\.H|higherDirectImage\" Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "Sheaf.H primitives and right-derived infrastructure only; no exact combined definition",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 527,
+ "blueprint_uses": [],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.globalSectionsFunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
+     "lines": [
+      47,
+      56
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.sheafCohomologyAndHigherDirectImages",
+     "module": "WeilConjectures.AlgebraicGeometry.PQFCohomology",
+     "lines": [
+      32,
+      88
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-def-cohomology",
+  "worker": "stage1",
+  "summary": "The item was not an exact existing declaration. I split its three clauses into proof steps using the existing general ringed-space module-cohomology definition, the existing K-injective derived direct-image definition, and the existing universal right-derived delta-functor theorem. No child node was created because each required fact already exists in the DAG; the Lean source separately contains Modules.H, higherDirectImage, and the long-exact cohomology consequences.",
+  "blueprint": "the full item statement and its three clauses"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pdh2108",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdh2108 (reviewer sub-agent of L); spot-checked: Read packet; checked each cited statement. Step1 cites def-sc-ringed-space-module-cohomology (cites enough injectives, no restatement). Step2 matches def-pc-ringed-spaces-derived-direct-image. FIX more, RETURN less: (1) C1/E step 3: hypotheses of lem-weil-pbc-right-derived-universal-delta-functor uncited; added lem-sc-ringed-space-module-sheaves-enough-injectives and lem-sc-global-sections-left-exact. (2) C1 step 2: identifying H^p(Rf_*F) with R^p f_* via injective resolutions needs injective resolutions to be K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective and enough injectives. (3) source.external Tags 01EO/01EY (Cech, Leray) wrong; replaced by 01DZ, 079W (second reading claimed this change but did not make it).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pdh2108): Second reading claimed source tags were corrected to 01DZ/015B/079W but the branch still had 01EO/01EY; source.external fixed by reviewer. The statement text itself (blueprint wording) still names 01EO/01EY, left unchanged.",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.PQFCohomology",
+  "declaration": "AlgebraicGeometry.sheafCohomologyAndHigherDirectImages",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PQFCohomology.lean",
+  "statement": "theorem sheafCohomologyAndHigherDirectImages (X : Scheme.{u}) : (∃ G : CohomologicalDeltaFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))), G.F = RingedSpace.moduleCohomology X.toRingedSpace) ∧ ∀ (S : Scheme.{u}) (f : X ⟶ S) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (p : ℕ), Nonempty ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0 ⋙ RingedSpace.derivedModuleDirectImage f.toLRSHom.toShHom ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (p : ℤ)) ≅ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "No new definition: H^p(X,-) is the recorded RingedSpace.moduleCohomology (right derived functors of RingedSpace.globalSectionsFunctor by definition, so no separate conjunct); the theorem asserts the long exact sequence (a cohomological delta-functor with degree functors moduleCohomology) and, for f : X ⟶ S, H^p(Rf_*(F[0])) ≅ the p-th right derived functor of the recorded RingedSpace.moduleDirectImage. Injective resolutions come from the shared instance RingedSpace.moduleGrothendieckAbelian (no inline instances).",
+  "fixed_by": "R-pdc",
+  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.Paper.PQFCohomology retired, the source module WeilConjectures.AlgebraicGeometry.PQFCohomology declares the same names"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdc",
+  "group": "T1",
+  "result": "fix",
+  "note": "node: H^p(X,-)=R^pΓ on O_X-modules, LES for SES, R^p f_* = R^p of f_*; H^p = recorded moduleCohomology (dropped tautological rfl conjunct moduleCohomology = rightDerived Γ); LES = ∃ CohomologicalDeltaFunctor with G.F = moduleCohomology; R^p f_*: H^p(Rf_*(F[0])) ≅ (moduleDirectImage f).rightDerived p, f scheme morphism, p:ℕ; removed inline @InjectiveResolution.instHasInjectiveResolutions (shared moduleGrothendieckAbelian instance + Mathlib EnoughInjectives import); no new definition"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T053958-L-2647757",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme. The cohomology functors $\\mathrm H^p(X,-)$ are\nthe right derived functors of the global sections functor $\\Gamma(X,-)$\non $\\mathcal O_X$-modules; a short exact sequence of $\\mathcal O_X$-modules gives a long exact cohomology sequence. For a morphism\n$f:X\\to S$, the higher direct images $R^pf_*\\mathcal F$ are the right\nderived functors of $f_*$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

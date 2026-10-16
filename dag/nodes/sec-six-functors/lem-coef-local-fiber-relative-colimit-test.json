@@ -1,0 +1,82 @@
+{
+ "id": "lem-coef-local-fiber-relative-colimit-test",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Underlying equivalences and operadic colimits of coherent modules. Supporting step: Colimits of sections from preserved local fiber cocones. Fiber-to-relative-colimit criterion used before assembling the chosen cocones.",
+   "via": [
+    "lem-coef-local-transport-section-colimits",
+    "lem-coef-module-operadic-colimit-detection",
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Relative colimits in a fiber tested by all local transports",
+ "statement": "Use quasicategories, coherent functors, colimits and universes of [def-cbc-enhanced-diagrams-cones], relative colimit diagrams and right join cones of [def-coef-infinity-relative-cone], and inner and cocartesian fibrations of [def-coef-infinity-fibrations]. Let $q:E\\to S$ be an inner fibration of quasicategories such that its pullback along each edge $a:\\Delta^1\\to S$ is a cocartesian fibration. For a vertex $s$ put $E_s=E\\times_S\\{s\\}$. For an edge $a:s\\to t$, a transport functor for $a$ is a functor $a_!:E_s\\to E_t$ for which there is a simplicial map $H:E_s\\times\\Delta^1\\to E\\times_{S,a}\\Delta^1$ over $\\Delta^1$ with $H|_{E_s\\times\\{0\\}}$ the inclusion, $H|_{E_s\\times\\{1\\}}=a_!$, and every edge $H|_{\\{x\\}\\times\\Delta^1}$ cocartesian for the edge pullback. Let $K$ be any small simplicial set and $c:K^{\\triangleright}\\to E_s$ any diagram. For a diagram $u:K^{\\triangleright}\\to E_t$ with cone vertex $v$, its induced coherent cocone $u|_K\\to\\Delta_Ku(v)$ is the precomposition of $u$ with the map $K\\times\\Delta^1\\to K^{\\triangleright}$ that sends a simplex $(\\sigma,\\alpha)$, $\\alpha:[n]\\to[1]$, to the join simplex whose initial block is $\\sigma$ restricted to $\\alpha^{-1}(0)$ and whose final block is $\\alpha^{-1}(1)$ at the cone vertex. Then the composite $K^{\\triangleright}\\xrightarrow{c}E_s\\hookrightarrow E$ is a $q$-colimit diagram if and only if, for every edge $a:s\\to t$ of $S$ and every transport functor $a_!$ for $a$, the induced coherent cocone of $a_!c$ is colimiting in $E_t$. Degenerate edges are included. No other colimits are assumed; neither global cocartesian lifts nor coherence of transports under composition is assumed. All objects lie in a fixed sufficiently large universe.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Higher Topos Theory, Proposition 4.3.1.10 and its proof, printed pp. 265-266 (PDF pp. 283-284). Read online 2026-10-17. No Stacks Project tag states this quasicategorical criterion. WANTED: archived HTT in literature/."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Rr]elative|locally.?[Cc]o[Cc]artesian",
+   "results": "{\"t\": \"2026-10-16T21:39:30Z\", \"tool\": \"grep\", \"query\": \"[Rr]elative.*[Cc]olimit|[Cc]olimit.*[Rr]elative|locally.?[Cc]o[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Abstract/Basic.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"d113045fc0b6c8ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-60, 155-182; Limits/FunctorCategory/Basic.lean:127-184; Limits/VanKampen.lean:38-51; AlgebraicTopology/Quasicategory/InnerFibration.lean:55-93. Grothendieck, pointwise, Comma, Kan-extension and universal-colimit hits are for ordinary categories and Hom sets. IsUniversalColimit means stability under ordinary pullbacks, not relative universality for a quasicategory functor. SSet.InnerFibration supplies horn lifting only. None gives local cocartesian transport or its relative-colimit criterion. The second semantic phrasing also returned ordinary-category results."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration",
+   "results": "{\"t\": \"2026-10-16T21:39:31Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.InnerFibration.mem\", \"SSet.InnerFibration.mk\", \"SSet.innerFibration_iff\", \"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"46de20d3f879988e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-60, 155-182; Limits/FunctorCategory/Basic.lean:127-184; Limits/VanKampen.lean:38-51; AlgebraicTopology/Quasicategory/InnerFibration.lean:55-93. Grothendieck, pointwise, Comma, Kan-extension and universal-colimit hits are for ordinary categories and Hom sets. IsUniversalColimit means stability under ordinary pullbacks, not relative universality for a quasicategory functor. SSet.InnerFibration supplies horn lifting only. None gives local cocartesian transport or its relative-colimit criterion. The second semantic phrasing also returned ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally cocartesian fibration of quasicategories a cone in a fiber is a relative colimit if and only if every transport of that cone is colimiting",
+   "results": "{\"t\": \"2026-10-16T21:39:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally cocartesian fibration of quasicategories a cone in a fiber is a relative colimit if and only if every transport of that cone is colimiting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Functor.Final.isColimitExtendCoconeEquiv\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_pt\", \"CategoryTheory.IsUniversalColimit\"], \"digest\": \"bb00230a36f5c553\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-60, 155-182; Limits/FunctorCategory/Basic.lean:127-184; Limits/VanKampen.lean:38-51; AlgebraicTopology/Quasicategory/InnerFibration.lean:55-93. Grothendieck, pointwise, Comma, Kan-extension and universal-colimit hits are for ordinary categories and Hom sets. IsUniversalColimit means stability under ordinary pullbacks, not relative universality for a quasicategory functor. SSet.InnerFibration supplies horn lifting only. None gives local cocartesian transport or its relative-colimit criterion. The second semantic phrasing also returned ordinary-category results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocone in a fiber of a locally cocartesian infinity categorical fibration is a relative colimit exactly when all outgoing edge transports preserve it",
+   "results": "{\"t\": \"2026-10-16T21:39:31Z\", \"tool\": \"leansearch\", \"query\": \"A cocone in a fiber of a locally cocartesian infinity categorical fibration is a relative colimit exactly when all outgoing edge transports preserve it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.coconeOfPreservesIsColimit\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\", \"CategoryTheory.Limits.isColimitOfConeRightOpOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Functor.CoconeTypes.IsColimit\", \"CategoryTheory.Comma.coconeOfPreserves\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\"], \"digest\": \"53de48e57b896766\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-60, 155-182; Limits/FunctorCategory/Basic.lean:127-184; Limits/VanKampen.lean:38-51; AlgebraicTopology/Quasicategory/InnerFibration.lean:55-93. Grothendieck, pointwise, Comma, Kan-extension and universal-colimit hits are for ordinary categories and Hom sets. IsUniversalColimit means stability under ordinary pullbacks, not relative universality for a quasicategory functor. SSet.InnerFibration supplies horn lifting only. None gives local cocartesian transport or its relative-colimit criterion. The second semantic phrasing also returned ordinary-category results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative universality of a fiber cocone tested by preservation under pushforward along every outgoing base edge",
+   "results": "{\"t\": \"2026-10-16T21:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"Relative universality of a fiber cocone tested by preservation under pushforward along every outgoing base edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsUniversalColimit\", \"CategoryTheory.Limits.isColimitOfIsPushoutOfIsConnected\", \"CategoryTheory.IsUniversalColimit.isColimit\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Limits.PushoutCocone.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.MorphismProperty.PreIndSpreads.exists_isPushout\"], \"digest\": \"74d9d6333e03e38a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures and read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:33-60, 155-182; Limits/FunctorCategory/Basic.lean:127-184; Limits/VanKampen.lean:38-51; AlgebraicTopology/Quasicategory/InnerFibration.lean:55-93. Grothendieck, pointwise, Comma, Kan-extension and universal-colimit hits are for ordinary categories and Hom sets. IsUniversalColimit means stability under ordinary pullbacks, not relative universality for a quasicategory functor. SSet.InnerFibration supplies horn lifting only. None gives local cocartesian transport or its relative-colimit criterion. The second semantic phrasing also returned ordinary-category results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-local-transport-section-colimits",
+  "date": "2026-10-17",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
