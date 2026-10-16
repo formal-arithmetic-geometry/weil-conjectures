@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "det-sp-finite-general-ring",
-   "place": "Proof (2): the vector-bundle and deformation steps and the comparisons determined by their normalization at t=1",
+   "place": "Proof (2): the vector-bundle and deformation steps, and the sentence that comparisons are determined by normalization at t=1; expanded through the family fibre identifications",
    "via": []
   },
   "same_as": []
@@ -39,9 +39,122 @@
   "def-weil-closed-immersion",
   "def-sbc-affine-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $E=\\mathbf Q_\\ell$, with uniformizer $\\ell$, so the level-$n$ coefficient ring in the purity conventions is $R=\\mathbf Z/\\ell^n$. The unital map $R\\to B$ implies $\\ell^nB=0$. The unit $R_T$ is a bounded constructible finite-Tor complex, free of rank one in degree zero. Apply [det-sp-reduction-exceptional] to $g$, to $\\widetilde g$, and to the normal-bundle projection, using the same fixed compactification at both rings. The smoothness and relative dimension of $\\widetilde g$, and its normal-bundle fibre, are given by [lem-pur-dnc-section-geometry](1),(2); these are statements about the geometric space, applied at $R$, so no assertion of that lemma at arbitrary coefficients is being assumed. All the maps to which the coefficient comparison is applied have separated finite-type source and target by our scheme setting. Pulling $c_g$ back along $s$, and $c_{\\widetilde g}$ along $\\widetilde s$, with the natural tensor/pullback isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], gives exactly $q_{g,s}$ and $q_F$ of the statement. They are isomorphisms because every factor is an isomorphism. The same defines $q_{\\pi_N,0_N}$.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "lem-pur-dnc-section-geometry",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), coefficient comparisons for the section and family objects"
+   }
+  },
+  {
+   "text": "Apply [det-sp-mixed-base-change] with $f=g_0$, $u=h_V$, $v=h$, $f'=g'_0$, $A=R$, and $K=R_{S_0}$. The unit is eligible for its $D^b_{ctf}$ hypothesis. Its exceptional comparison is explicitly the transpose of the pulled-back counit composed with inverse compact-support base change, exactly the exchange specified in this item; its statement gives that exchange as an isomorphism. Its second identity reads\n$$c_{g'_0}(h^*R_{S_0})\\,(e_R)_B=e_B\\,h_V^*c_{g_0}.$$\nIdentify $h^*R_{S_0}=R_{S'_0}$, $(R_{S_0})_B=B_{S_0}$, and $h^*B_{S_0}=B_{S'_0}$, to get the required equation. This application does not put a section on $g_0$. In particular, apply it to $\\widetilde g$ along each $i_j$, and then pull back along the fibre section. Denote the canonical fibre identifications by $\\eta_{j,D}:i_j^*F_D\\xrightarrow{\\sim}C_{j,D}$, with $C_{1,D}=C_D(g,s)$ and $C_{0,D}=C_D(\\pi_N,0_N)$. The geometric fibre descriptions are [lem-pur-dnc-section-geometry](1). The tensor comparison and the composition comparison [lem-weil-pbc-proetale-derived-pullback-composition] identify the sources, and give the explicit commutative fibre equations\n$$\\eta_{j,B}\\,i_j^*q_F=q_j\\,(\\eta_{j,R})_B,\\qquad q_1=q_{g,s},\\quad q_0=q_{\\pi_N,0_N}.$$\nThus the comparisons respect the specified fibres, rather than merely some abstract isomorphisms between the fibre objects. The same application for an etale base localization of the pair gives its base-localization compatibility.",
+   "uses": [
+    "det-sp-mixed-base-change",
+    "lem-pur-dnc-section-geometry",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), diagonal/base-change step; mixed base change applied to the two family fibres"
+   }
+  },
+  {
+   "text": "Check also the source-coordinate localizations, with their specified adjunction identifications. On an etale coordinate chart of a smooth map $g=p_r e$, [det-sp-reduction-exceptional] identifies $c_g$ with\n$$(e^*p_r^*R(r)[2r])_B\\xrightarrow{\\sim}e^*p_r^*B(r)[2r].$$\nIts chart identification preserves the counit (the etale fibre sum followed by the specified affine-space counit). Hence this is the coefficient comparison for those actual chart adjunctions. Pulling to the section gives the canonical coefficient identification of the section Tate line; applying the same chart clause to $\\widetilde g$ gives the corresponding identification for the family. The local coordinates of [lem-pur-dnc-section-geometry](2),(4) are $x_k=tu_k$; the section is $u_k=0$, so the family chart has the same ordered affine projection with base $\\mathbf A^1$. The free-line and shift clauses of [det-sp-scalar-extension-functor], together with the pullback identifications of [lem-asd-etale-finite-twist-pullback], show that these identifications commute with further restriction and with one another: on a local free generator the map is $x\\otimes b\\mapsto b x$, and both orders of pullback and scalar extension give that map. Thus $q_{g,s},q_F$ respect etale coordinate localization of pairs. For $e=1$ this proves their asserted standard-pair value $(R_S(r)[2r])_B\\simeq B_S(r)[2r]$. No smooth-purity theorem over arbitrary $B$ is used to obtain this normalization.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "lem-pur-dnc-section-geometry",
+    "det-sp-scalar-extension-functor",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), the counit-preserving chart description and the vector-bundle/deformation models"
+   }
+  },
+  {
+   "text": "By [prop-pur-dnc-family-constancy] at $E=\\mathbf Q_\\ell$ and level $n$, the given $\\kappa_R$ is an isomorphism with $i_1^*\\kappa_R=1_{C_R(g,s)}$ under $\\eta_{1,R}$. Scalar extension is a functor by [det-sp-scalar-extension-functor], so it preserves this identity and inverses. Define\n$$\\kappa_B=a^*q_{g,s}\\,(\\kappa_R)_B\\,q_F^{-1}.$$\nThis is an isomorphism by Step 1. Pull back its formula to $i_1$. Use $i_1^*a^*=1$ and the equation for $j=1$ in Step 2: after the fibre identifications the resulting map is\n$$q_{g,s}\\,1_{(C_R(g,s))_B}\\,q_{g,s}^{-1}=1_{C_B(g,s)}.$$\nThis proves normalization at $t=1$ for precisely the canonical fibre identification. The algebra here uses only functoriality and cancellation of isomorphisms.",
+   "uses": [
+    "prop-pur-dnc-family-constancy",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), scalar extension and normalization of the family comparison"
+   }
+  },
+  {
+   "text": "We prove uniqueness over $B$ without applying a fixed-coefficient uniqueness theorem with an ineligible coefficient ring. By [prop-pur-dnc-family-constancy](1) the objects $F_R$ and $C_R(g,s)$ are finite locally constant rank-one $R$-sheaves, with a common shift $[2r]$ (absorb the rank-one Tate twist into the sheaf). By [det-sp-scalar-extension-functor](1),(3), their scalar extensions are actual finite locally constant rank-one $B$-sheaves with the same shift; Step 1 identifies them with $F_B$ and $C_B(g,s)$. In particular $F_B[-2r]$ and $a^*C_B(g,s)[-2r]$ are ordinary finite locally constant $B$-module sheaves. Pullback preserves the local constant models, and the Tate identification is [lem-asd-etale-finite-twist-pullback]. Let $\\lambda:F_B\\to a^*C_B(g,s)$ be any other isomorphism normalized at $t=1$. Remove the common shift. By [lem-weil-pbc-derived-single-fully-faithful] both $\\lambda$ and $\\kappa_B$ are uniquely ordinary $B$-module sheaf maps. Restrict their difference to $R$-module sheaves. On a trivializing cover the underlying module is the finite $R$-module $B$; hence these are finite locally constant $R$-module sheaves, with no requirement that $B$ be free or perfect over $R$. The section $i_1$ meets every connected component of $\\mathbf A^1_S$ by [lem-pur-a1-components](2) when $S$ is nonempty. At a geometric point in each such intersection the difference vanishes, since $i_1^*\\lambda=i_1^*\\kappa_B$. Apply [lem-pur-lisse-morphism-rigidity](2), with coefficient $R=A_{\\mathbf Q_\\ell,n}$, to conclude the difference is zero. Equality of the underlying $R$-module maps is equality of the $B$-module maps, and full faithfulness restores equality in the derived category. If $S$ is empty all the sheaves and morphisms in this argument are unique, so the same conclusion holds. This proves the claimed uniqueness.",
+   "uses": [
+    "prop-pur-dnc-family-constancy",
+    "det-sp-scalar-extension-functor",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-a1-components",
+    "lem-pur-lisse-morphism-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), comparisons determined by normalization at t=1; expanded rigidity argument"
+   }
+  },
+  {
+   "text": "On the standard pair the family geometry in [lem-pur-dnc-section-geometry](4) is the constant family $\\mathbf A^r_S\\times_S\\mathbf A^1_S$, with section $u=0$. Its pullback comparison $F_R\\simeq a^*C_R$ restricts to the identity at $t=1$, so it is $\\kappa_R$ by the uniqueness clause of [prop-pur-dnc-family-constancy]. On an etale coordinate chart of a general pair, the counit-preserving affine identifications in Step 3 likewise identify both $F_D$ and $a^*C_D$ with the same pulled-back Tate line $D(r)[2r]$, for $D=R,B$. The constant-family comparison is the identity between these two models, normalized at $t=1$. Since the coefficient comparisons on these models are the canonical free-line maps of Step 3, conjugating the $R$ identity by $q_F$ and $a^*q_{g,s}$ gives the $B$ identity. Equivalently, it is the unique normalized map by Step 5 applied over the chart base (which can be chosen affine, separated and finite type over $k$). The local $B$ maps therefore are exactly the restrictions of the global $\\kappa_B$ constructed in Step 4. On overlaps they agree as restrictions of that map; after removing $[2r]$ they are sheaf maps by [lem-weil-pbc-derived-single-fully-faithful], and [lem-pur-sheaf-hom-cover-gluing] says their global sheaf map is uniquely specified by these restrictions. This is the direct coordinate comparison over $B$. Thus no descent of arbitrary derived morphisms, and no assertion that arbitrary isomorphisms of lines coincide, is hidden in the chart-to-global assertion.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "prop-pur-dnc-family-constancy",
+    "det-sp-reduction-exceptional",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), agreement on coordinate charts and uniqueness of the global normalized comparison"
+   }
+  },
+  {
+   "text": "Put $T_D:C_D(\\pi_N,0_N)\\to C_D(g,s)$ equal to $i_0^*\\kappa_D$ after the prescribed fibre identifications, so $\\delta_D=T_D^{-1}$. Pull back $\\kappa_B q_F=a^*q_{g,s}(\\kappa_R)_B$ along $i_0$. The $j=0$ equation in Step 2 and $i_0^*a^*=1$ give\n$$T_B q_{\\pi_N,0_N}=q_{g,s}(T_R)_B.$$\nMultiply on the left by $T_B^{-1}$ and on the right by $(T_R^{-1})_B$. Since scalar extension preserves inverses, this gives exactly\n$$\\delta_B q_{g,s}=q_{\\pi_N,0_N}(\\delta_R)_B.$$\nThis calculation also checks the direction of $\\delta_D$ in the statement. All constructions allow $r=0$: the Tate line is $D_S$ and the shift is $[0]$, and the same fibre and cancellation equations apply. For $B=0$, the category of unital $B$-module sheaves has only its zero object and its unique map; $B$ is still the finite underlying $R$-module in Step 5. Thus all isomorphism, normalization and uniqueness assertions include the zero ring.",
+   "uses": [
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+    "place": "Proof (2), specialization at t=0 of the normalized family comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-mixed-base-change",
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-a1-components",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-lisse-morphism-rigidity",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-pur-dnc-family-constancy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), expanded with the existing mixed-base-change statement and finite-sheaf rigidity; the current blueprint is agent-written"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -154,10 +267,52 @@
    "results": "1 hits: CategoryTheory.Adjunction.ofNatIsoRight_counit. Only general adjunction transport or ordinary pullback/tensor interfaces; no smooth exceptional coefficient/base-change or normalized section-family comparison.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "deformationToTheNormal|sectionInvariant|exceptional.*baseChange|dualizing",
+   "results": "10 hits: Mathlib/Data/Set/Defs.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of finite rings preserves the unique normalized constant family comparison for a smooth section",
+   "results": "8 hits: AlgHom.extendScalarsOfSurjective, instRingRestrictScalars, Algebra.Generators.extendScalars_val, ContMDiffSection.coe_smul, AlgEquiv.extendScalarsOfSurjective, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, instNormedRingRestrictScalars, instNonUnitalNormedCommRingRestrictScalars. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.ofNatIsoRight_counit. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of finite coefficient rings commutes with exceptional base change and normalized deformation to the normal cone comparisons",
+   "results": "8 hits: RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, RingHom.isStandardSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCone|deformation.*coefficient|smooth.*[Ee]xchange|extraordinary",
+   "results": "2 hits: Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Geometry/Manifold/Bordism.lean. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image on a smooth morphism commutes with finite ring extension and base change of its relative dualizing complex",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo. Read the returned signatures: scheme smoothness under base change, scheme-module pullback coherence, ordinary scalar restriction, abstract adjunction transport, or unrelated uses of dualizing/extraordinary. None states exceptional finite-coefficient exchange or normalized DNC-family transport.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-finite-general-ring",
@@ -165,5 +320,59 @@
   "group": "Q63"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-smooth-purity"
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-dnc-coefficient-transport",
+  "worker": "stage1",
+  "summary": "Seven-step proof with no new nodes. Reuses the existing mixed-base-change coefficient square, writes both fibre equations, checks the counit-preserving affine coordinate normalization, constructs the conjugated family comparison, proves uniqueness over arbitrary finite B by restricting finite local systems to R and applying rigidity, and calculates the t=0 specialization. No statement change; empty base, relative dimension zero, nonflat coefficients and the zero ring are explicit.",
+  "blueprint": "Realizes det-sp-finite-general-ring Proof (2), especially the coefficient-independent deformation geometry and comparisons determined by normalization at t=1: Steps 1-3 supply the coefficient and fibre identifications, Steps 4-6 justify normalization, uniqueness and the direct coordinate construction, and Step 7 specializes to the normal bundle.",
+  "tool_uses": [
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Its counit-characterized finite-ring comparison and chart clause are the coefficient-change tool; the smooth-purity unit has no replacement for this generic operation comparison."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Use exact scalar extension and scalar extension of locally free lines; this is a coefficient-algebra tool, not an alternative to the diagonal/DNC route."
+   },
+   {
+    "node": "det-sp-mixed-base-change",
+    "why": "Use the canonical exceptional base-change/coefficient commutative square for arbitrary finite rings; it is the generic compatibility tool needed to identify DNC fibres, not a replacement proof of purity."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Use the generic natural tensor/pullback comparison in defining and restricting q."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Use the canonical composition of pullbacks to identify restriction to a fibre section."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Use finite Tate-line local freeness and its canonical pullback identification for the chart normalization."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Use ordinary module-sheaf map uniqueness on a cover after removing the common shift; this is a generic gluing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "det-sp-mixed-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-a6ddba697",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-a6ddba697 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 7 steps, every cited statement, blueprint main-20261015 Proof (2) of sk-thm-smooth-purity-general-ring, and the sk-thm-dnc family-constancy and sk-prop-sp-purity-bc(-mixed) sources. The delivery creates no new nodes, leaves the statement unchanged and does not restate a clause of det-sp-finite-general-ring. All dependencies exist and none is merged; proof_deps equals the union of the step uses; there is no cycle (neither the item nor det-sp-finite-general-ring is in the dependency closure). No SGA is used. Step 1: reduction-exceptional applies to g, g~ and pi_N (smooth by section-geometry(2), separated finite type, input R_T in D_ctf), so q is an isomorphism. Step 2: the second identity of det-sp-mixed-base-change with f=g0, u=h_V, v=h, f'=g0', A=R, K=R is exactly the displayed equation, with no section needed. The iso-ness of e_B at the unit can also be derived from that identity, since c, c' and e_R (co-smoothness(3) at A_{Q_l,n}) are isomorphisms. The exchange is the beta_{f,g} of def-pur-co-smoothness(3), so eta_{j,R} is the identification of section-geometry(1). Step 3: the counit-preserving chart clause gives the free-line map x⊗b↦bx. Steps 4 and 7: I recomputed the cancellations (i_1^*kappa_B=eta_{1,B}; T_B q_0=q_{g,s}(T_R)_B, so delta_B q_{g,s}=q_0(delta_R)_B), and both elementary marks are justified. Step 5: the B-lines become finite locally constant R-sheaves; with single-fully-faithful, a1-components(2) (nonempty S) and rigidity(2) at Lambda=Z/l^n this proves arbitrary-B uniqueness without misusing the fixed-Lambda family constancy; S empty is handled. Step 6: chart restrictions are normalized, so they equal the constant-family identification by Step 5. Edge cases tested: r=0, S empty, B=0, B=R, F_l over Z/l^2, F_l×F_l, F_l[eps]/eps^2. Accepted tool uses: det-sp-reduction-exceptional, det-sp-scalar-extension-functor, det-sp-mixed-base-change (off route, generic; its imported proof has no purity input), lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-proetale-derived-pullback-composition, lem-asd-etale-finite-twist-pullback, lem-pur-sheaf-hom-cover-gluing. No fixes."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-pe-derived-completion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived adic completeness",
@@ -14,14 +14,213 @@
  },
  "stmt_deps": [
   "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-derived-tensor-hom"
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-derived-limit",
+  "def-weil-inverse-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Unpack the notation with $X$ an arbitrary scheme, $\\ell$ prime and $n\\geq1$. Put $R=\\mathcal O_{E,X}$ and $B_n=(\\mathcal O_E/\\pi_E^n)_X$. The valuation ring, uniformizer, quotient rings and quotient homomorphisms are the data of [def-weil-l-adic-coefficient-extension]. Apply the continuous-ring construction of [sk-def-sfb-condensed-ring] and then the functor on ring objects of [sk-def-sfb-pulled-back-coefficients] to obtain compatible maps $R\\to B_{n+1}\\to B_n$. The ambient category is the unbounded Layer B category $D(\\Mod_R)$ of [sk-def-sfb-derived-categories], applied to the commutative condensed coefficient ring $\\underline{\\mathcal O_E}$ and its pulled-back ring object $R$. This invokes the ambient-category row, not the constructible subcategory or the general left-derived existence clause of that node; its relative derived tensor is that of [sk-def-sfb-derived-tensor-hom]. No identification of $R$ with a completed constant coefficient sheaf is made. To apply ringed-site lemmas to these module objects, specialize [det-def-sfb-sheaf-tensor-structure] to $\\mathcal A=\\Ab$ and the essentially small site $C=X_{\\mathrm{proét}}$: its tensor is $a(\\mathcal F\\otimes_p\\mathcal G)$, its unit is the constant $\\mathbf Z$-sheaf, and $a$ is strong symmetric monoidal. Here $a$ is abelian sheafification, not an objectwise tensor assumed already to be a sheaf. The Layer B clause of [sk-def-sfb-derived-tensor-hom] derives the relative tensor of module objects over $R$; thus it is the balanced tensor over this ring object that must be compared with sectionwise module tensor. With the usual small-site/coefficient-universe convention, [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies internal $R$-modules with sectionwise modules over the reconstructed ring sheaf, preserving underlying abelian sheaves and maps identically. An internal balanced bilinear map is precisely a sectionwise balanced bilinear map compatible with restrictions: the two action equations are the same equations on sections. Consequently their representing relative tensor products agree under this equivalence. Since it preserves underlying sheaves and maps, it also preserves exact complexes and the tensor tests for flatness and K-flatness. Thus the K-flat and product arguments below take place over this same ring sheaf $R$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-derived-tensor-hom",
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+    "place": "statement, coefficient sheaves and ambient derived category"
+   }
+  },
+  {
+   "text": "By [lem-pc-kflat-resolution], choose a K-flat representative $P$ of $K$ whose terms are flat $R$-modules. Derived extension of scalars [sk-def-sfb-derived-extension-of-scalars] is computed by this representative, so $P_n=P\\otimes_R B_n$ represents $K_n$ as a complex of $B_n$-modules. Restriction of scalars leaves the underlying objects and maps unchanged by clause 1 of [sk-def-sfb-change-of-scalars]. Its exactness can be checked directly in the sectionwise-module presentation of step 1: a kernel is the underlying kernel with the restricted action, and a cokernel is the underlying quotient with the induced action. Restricting the ring action therefore preserves both and leaves the exact underlying sequence unchanged. This is the exact restriction used in [sk-def-sfb-derived-extension-of-scalars]; no exactness of extension of scalars is asserted. Thus we can regard all $P_n$ as $R$-complexes. The maps $P_{n+1}\\to P_n$ send $p\\otimes b$ to $p\\otimes\\bar b$, and the unit maps $c_n:P\\to P_n$ send $p$ to $p\\otimes1$. They are chain maps and satisfy $t_nc_{n+1}=c_n$ strictly, since both send $p$ to $p\\otimes1$. This constructs the reduction cone appearing in the definition.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change, for identity-topos coefficient change"
+   }
+  },
+  {
+   "text": "Countable products of $R$-module sheaves are exact by [lem-weil-proetale-countable-products-exact], which applies to an arbitrary sheaf of commutative rings and hence to the pulled-back ring $R$. By clause 2 of [lem-weil-derived-limit-existence], the product $Q=\\prod_n K_n$ in $D(\\Mod_R)$ exists and is represented by $\\prod_nP_n$. Let $s:Q\\to Q$ have $n$-th component $t_n\\operatorname{pr}_{n+1}$. By [def-weil-derived-limit], $R\\varprojlim K_n$ means the homotopy limit specified by a distinguished triangle $L\\to Q\\xrightarrow{1-s}Q\\to L[1]$, and it exists by clause 1 of [lem-weil-derived-limit-existence]. On the strict representatives it is modeled by $\\operatorname{Cone}(1-s)[-1]$. The compatible unit maps give $c=(c_n):P\\to\\prod_nP_n$ and $(1-s)c=0$; the comparison to this cone is the chain map $(c,0)$: explicitly write $L^i=Q^i\\oplus Q^{i-1}$ with $d_L(x,y)=(d_Qx,(1-s)x-d_Qy)$, so $d_L(c(p),0)=(c(d_Pp),0)$. The displayed completeness condition requires this specified reduction comparison to be an isomorphism in the derived category, equivalently a quasi-isomorphism of these representatives. This retains the coherent reduction maps and their strict zero homotopy; it does not replace the comparison by an unrelated isomorphism between the underlying objects. The condition does not depend on the chosen representative. Let $P'$ be another K-flat representative of $K$ with flat terms. The isomorphism $P\\cong P'$ in $D(\\Mod_R)$ is represented by a roof $P\\leftarrow W\\to P'$ of chain maps that are quasi-isomorphisms; composing with a resolution of $W$ from [lem-pc-kflat-resolution], we may take $W$ K-flat with flat terms. Write $a\\colon W\\to P$ and $a'\\colon W\\to P'$ for the legs. Since [sk-def-sfb-derived-extension-of-scalars] computes $B_n\\otimes^{\\mathbf L}_R-$ by applying $B_n\\otimes_R-$ to K-flat complexes, $a\\otimes_RB_n\\colon W\\otimes_RB_n\\to P_n$ represents the isomorphism obtained by applying that derived functor to $a$, so it is a quasi-isomorphism; likewise for $a'$. These maps commute strictly with the transitions and the units, since $w\\otimes b\\mapsto a(w)\\otimes b$ and $w\\mapsto a(w)\\otimes1$. By clause 2 of [lem-weil-derived-limit-existence], cohomology commutes with these products, so $\\prod_n(a\\otimes_RB_n)$ is a quasi-isomorphism. The induced map of the complexes $L$ respects the degreewise split exact sequences $0\\to Q[-1]\\to L\\to Q\\to0$, given by $y\\mapsto(0,y)$ and $(x,y)\\mapsto x$. By the five lemma on their long exact cohomology sequences, it is a quasi-isomorphism. It commutes strictly with the comparisons $(c,0)$. By two-out-of-three for quasi-isomorphisms, the comparison for $P$ is a quasi-isomorphism exactly when the one for $W$ is, and exactly when the one for $P'$ is.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "def-weil-inverse-system",
+    "lem-pc-kflat-resolution",
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit and paragraph following it; Bhatt-Scholze, Definition 3.5.2 gives the completeness convention (only the convention, not a coefficient comparison)"
+   }
+  },
+  {
+   "text": "For the normalization assertion, apply [lem-pur-kflat-change-of-rings] to the sheaf-ring homomorphism $R\\to B_{n+1}$ and the representative $P$ of step 2. Its hypotheses hold because $P$ is K-flat with flat terms. Thus $P\\otimes_R B_{n+1}$ is K-flat over $B_{n+1}$. Consequently [sk-def-sfb-derived-extension-of-scalars] computes $K_{n+1}\\otimes^{\\mathbf L}_{B_{n+1}}B_n$ by $(P\\otimes_R B_{n+1})\\otimes_{B_{n+1}}B_n$. Here the second tensor is over $B_{n+1}$, not over $R$; no flatness of $B_n$ over $B_{n+1}$ is assumed.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat, identity-topos coefficient change; Tag 06YY, lemma-derived-base-change"
+   }
+  },
+  {
+   "text": "The last complex is isomorphic to $P\\otimes_R B_n$ by the maps $(p\\otimes a)\\otimes b\\mapsto p\\otimes\\bar a b$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$. These formulas are balanced over $R$ and $B_{n+1}$ and inverse: $\\bar a b$ can be moved to the second tensor factor by the balancing relation. They commute with the differential, which acts only on $p$. The coequalizer definition of relative tensor and extension of scalars [sk-def-sfb-change-of-scalars] makes the formulas maps of sheaves, and step 2 identifies the right-hand complex with $K_n$. This proves the derived reduction identity. For a longer chain $B_r\\to B_m\\to B_n$ both possible composites send $((p\\otimes a)\\otimes b)\\otimes c$ to $p\\otimes\\bar a\\bar b c$; the unit maps send $p\\otimes a$ to $(p\\otimes a)\\otimes1$, which becomes $p\\otimes\\bar a$. Hence the identities are coherent and induce exactly the given transition maps. A normalized tower requires these derived reduction isomorphisms for its transition-induced comparisons, not unrelated isomorphisms between levels.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof specialized to coefficient changes; the displayed balanced tensor calculation supplies the elementary step"
+   }
+  },
+  {
+   "text": "The cohomology warning is substantive. Set $E=\\mathbf Q_\\ell$ and take any nonempty $X$. The finite discrete rings $\\mathbf Z/\\ell^n$ give constant finite ring sheaves $B_n$: for a finite discrete set its condensed sheaf is the corresponding finite coproduct of the terminal sheaf, and geometric inverse image preserves this coproduct. By [lem-weil-pbc-profinite-point-pullback] and [lem-weil-pbc-site-pullback-abelian-exact], $p_X^*$ is exact, so the finite-ring kernel computations can equally be pulled back. Take $K=[R\\xrightarrow{\\ell}R]$ in degrees $-1,0$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site], as its two terms are free of rank one. Its reductions are therefore $[B_n\\xrightarrow{\\ell}B_n]$, a normalized tower by steps 4-5. Their $H^{-1}$ is the constant sheaf associated to $\\ell^{n-1}\\mathbf Z/\\ell^n\\mathbf Z$, nonzero and isomorphic to $\\mathbf F_\\ell$. The transition sends the generator $\\ell^n\\bmod\\ell^{n+1}$ to zero modulo $\\ell^n$. Consequently $H^{-1}(K_{n+1})\\otimes_{B_{n+1}}B_n\\to H^{-1}(K_n)$ is zero between nonzero copies of the constant residue-field sheaf, and is not an isomorphism. Thus derived normalization does not assert ordinary-tensor normalization on cohomology. The only finite-ring arithmetic used is that $\\ell a=0\\bmod\\ell^n$ exactly when $a$ is divisible by $\\ell^{n-1}$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+    "place": "last paragraph, cohomology need not be an ordinary normalized tower; explicit two-term example supplied by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "det-def-sfb-sheaf-tensor-structure",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pc-kflat-resolution",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit",
+  "def-weil-inverse-system",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+  "place": "Definition and its two subsequent normalization paragraphs; explicit Roos interpretation and K-flat calculation using Stacks Tags 08TC, 06YS, 0G7E and 0D6D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.?complet|IsDerivedComplete",
+   "results": "No hits in Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completeness for complexes of sheaves: the canonical map to the derived inverse limit of reductions modulo powers of an ideal is an isomorphism.",
+   "results": "AdicCompletion.of_surjective, AdicCompletion, AdicCompletion.of_apply, IsAdicComplete.of_lift, IsAdicComplete, AdicCompletion.of_bijective_iff, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.of: ordinary module completion, not derived sheaf completion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedComplete\"",
+   "results": "No hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves of modules over an adic coefficient ring is derived complete if it is the homotopy inverse limit of its derived reductions modulo powers of a uniformizer.",
+   "results": "IsAdicComplete, AdicCompletion, IsAdicComplete.toIsPrecomplete, isAdicComplete_iff, IsPrecomplete, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, IsAdicComplete.toIsHausdorff: ordinary module completeness only.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|IsDerivedComplete|homotopyLimit",
+   "results": "No hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy limit of a tower of complexes of sheaves and completeness under derived tensor reduction.",
+   "results": "CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj; CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork; HomologicalComplex.coneOfHasLimitEval, isLimitOfEval, coneOfHasLimitEval_pt_d. These concern Tor or ordinary categorical limits of complexes, not derived adic completeness. Repeated on resumption: Condensed.hasExactLimitsOfShape (Mathlib/Condensed/AB); HomologicalComplex.HasGoodTensor₁₂, HasGoodTensor₂₃ and instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X (Mathlib/Algebra/Homology/Monoidal); CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit, RanIsSheafOfIsCocontinuous.isLimitMultifork, GrothendieckTopology.liftToDiagramLimitObjAux and GrothendieckTopology.OneHypercoverFamily.IsSheafIff.isLimit. None defines the derived completion comparison or finite-level normalization.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "No hits in Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasExactLimitsOfShape|HasGoodTensor₁₂|HasGoodTensor₂₃",
+   "results": "Mathlib/Condensed/AB.lean:44-48 (Condensed.hasExactLimitsOfShape), :67 (AB4Star instance); Mathlib/Condensed/Light/AB.lean:32-33. Read AB.lean: exact ordinary limits of condensed objects, not a derived completion or normalized tower definition. Searched Condensed/.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category completion with respect to an ideal as the homotopy inverse limit of tensor products with quotient rings; compatibility of successive scalar extension",
+   "results": "Eight hits: DerivedCategory.instLinearHomotopyCategoryIntUpQh, AdicCompletion.ofTensorProduct_tmul, DerivedCategory.quotientCompQhIso, AdicCompletion.ofTensorProduct_naturality, DerivedCategory.instLinearCochainComplexIntQ, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map. These state linearity/localization or ordinary completion and tensor identities, not derived sheaf completion or changing finite-level coefficients.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic|completion|homotopy.*limit",
+   "results": "No hits in Mathlib/CategoryTheory/Triangulated. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic completion of an unbounded complex of sheaves of modules over a sheaf of rings, using homotopy inverse limits and derived scalar extension to quotients",
+   "results": "8 hits: localCohomology.diagram, localCohomology, localCohomology.ofDiagram, AdicCompletion, Hausdorffification, AdicCompletion.module, Hausdorffification.of, AdicCompletion.of. Read Mathlib/Algebra/Homology/LocalCohomology.lean:65-100,148-170 and RingTheory/AdicCompletion/Basic.lean:171-173. These are Ext colimits or ordinary module completions, not derived sheaf completion with changing coefficient rings. Independent second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.{0,30}complet|complet.{0,30}derived|normalized.{0,20}tower",
+   "results": "One hit: Mathlib/FieldTheory/NormalizedTrace.lean:29, documentation of normalizedTrace_trans for a tower of field extensions. Read lines 22-35: unrelated to normalized derived coefficient towers. Independent search over all Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -40,5 +239,64 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-pe-derived-completion"
+ "unit": "sk-def-pe-derived-completion",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-pe-derived-completion",
+  "worker": "stage1",
+  "summary": "Repaired the landing return for the changed statement of sk-def-sfb-derived-categories. Reread all 18 direct dependency statements on the current DAG and replaced its stale step-1 citation certificate by the complete current statement. Step 1 explicitly invokes only its unbounded Layer B ambient-category row for the commutative pulled-back coefficient ring; it does not invoke the revised constructibility predicate or general derived-existence assertions. All 21 current citation certificates are verbatim and cover precisely the step uses. The six-step construction, normalization calculation and finite-coefficient cohomology counterexample retain the blueprint statement and route. The existing unit realization file remains included with only realized and realized_by changed. No new node or Mathlib leaf is introduced.",
+  "blueprint": "Statement first paragraph and display: steps 1-3; derived reduction identities and definition of normalized tower: steps 4-5; last paragraph warning about cohomology: step 6. The existing main-20261015 chapter and unit records are read unchanged except for the accompanying unit realization fields: realized.statement=[sk-def-pe-derived-completion], realized.steps=[], and realized_by records this item and the repair date. The unit has no separate proof steps; its two uses are retained by this split. This packages the binding fix in the delivery, rather than leaving an out-of-delivery file for landing to fix.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution theorem for any sheaf of rings; supplies a simultaneous representative, with no change of coefficient ring."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact-product result for arbitrary ring sheaves on the pro-etale site."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic triangulated derived-limit existence and product calculation, independent of coefficient conventions."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of K-flatness for any sheaf-ring homomorphism, applied to pulled-back ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Identifies the geometric inverse image from the profinite point; used only to transport elementary finite coefficient calculations in the example."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of geometric inverse image, used on finite-ring kernels in the example."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-flat K-flatness criterion for the two-term example."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "The existing internal-to-sectionwise module equivalence allows application of general ringed-site K-flat and product lemmas to the same pulled-back ring object; no coefficient comparison is asserted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-ee5d57582",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-ee5d57582 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item and unit statements match main-20261015 sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md word for word; no target or statement is weakened. I read all 18 direct dependency statements; none is merged. Graph: the 475-node closure has no missing dependency and no cycle, and proof_deps equals the union of the step uses. The delivery creates no new nodes. On coefficients, the ambient category is Layer B D(Mod_R) with R = p_X^* of the condensed ring O_E. The split correctly does not identify R with the completed sheaf of def-weil-derived-complete, so that node is not a duplicate and same_as=[] is right. Sources checked at their Stacks labels: 08TC definition-derived-limit, 06YS lemma-K-flat-resolution, 06YQ lemma-bounded-flat-K-flat, 0G7E lemma-pullback-K-flat and 06YY lemma-derived-base-change; I checked the tags for 0D6D, 07KC and 04JC. Steps: I verified that the two relative tensors agree after sheafification and that the two K-flat definitions are equivalent by the cone argument. I recomputed the cone model: d_L squares to zero, and (c,0) is a chain map because (1-s)c=0. The balanced inverse maps in step 5 are the adjoint of t_n. In the step 6 example (ell=2, n=1: {0,2} in Z/4 maps to 0 in Z/2, and F_ell tensored with B_n is still F_ell) the ordinary comparison is zero between nonzero sheaves, as claimed. Edge cases K=0, empty X and n>=1 are fine. I accept all 8 declared tool_uses as generic tools, and no SGA source is used. One repairable fault (E5): step 3 defines the predicate with a chosen K-flat representative P but never shows the result is independent of that choice. FIX: in fixes/dag/nodes/sec-proetale-coefficients/sk-def-pe-derived-completion.json I added that argument to step 3. It resolves the roof by lem-pc-kflat-resolution, uses derived extension of scalars on K-flat complexes, clause 2 of lem-weil-derived-limit-existence for the products, then the five lemma on 0->Q[-1]->L->Q->0 and two-out-of-three. Step 3 now also uses lem-pc-kflat-resolution and sk-def-sfb-derived-extension-of-scalars; proof_deps is unchanged. Outside this delivery, the existing node lem-pc-bounded-above-flat-kflat-site cites 06YS where the right tag is 06YQ; that needs a maintainer fix.; 1 file(s) fixed by the reviewer"
+ }
 }
