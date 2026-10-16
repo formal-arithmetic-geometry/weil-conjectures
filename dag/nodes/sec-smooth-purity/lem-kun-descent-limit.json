@@ -33,7 +33,8 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-category-colimit",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "proof": [
   {
@@ -322,5 +323,28 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-047acb838 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and source mathematics. Verified all seven steps, canonical counit maps, abelian coefficients, filtered-tail orientation, edge cases, and absence of dependency cycles or duplicate reconstruction nodes. Accepted six declared tool uses. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0d1096b9c",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Wrote review.md. Checked source, all statement dependencies, canonical maps, conclusion clauses, universes, edge cases, docstrings, report, and verbatim signature. Snapshot compilation reproduced cleanly through scompile.py in both passes. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KunDescentLimit",
+  "declaration": "AlgebraicGeometry.kun_descent_limit",
+  "file": "lean/Sheaf/CategoryTheory/KunDescentLimit.lean",
+  "statement": "theorem kun_descent_limit (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (X : Iᵒᵖ ⥤ Scheme.{u}) (hX : ∀ i : Iᵒᵖ, IsAffine (X.obj i)) (htransition : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (X.map f)) (c : Cone X) (hc : IsLimit c) (F : Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : CategoryTheory.Sheaf.IsTorsion F) : (∀ i : I, kunDescentStageTransition X c F (𝟙 i) = eqToHom (congrArg (fun a : X.obj (op i) ⟶ X.obj (op i) ↦ (Etale.upperStar AddCommGrpCat.{u + 1} a).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F)) (X.map_id (op i))) ≫ (Etale.upperStarId AddCommGrpCat.{u + 1} (X.obj (op i))).hom.app ((Etale.lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F)) ∧ (∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), kunDescentStageTransition X c F (f ≫ g) = (Etale.upperStarComp AddCommGrpCat.{u + 1} (X.map g.op) (X.map f.op) (X.map (f ≫ g).op) (X.map_comp g.op f.op)).hom.app ((Etale.lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F) ≫ (Etale.upperStar AddCommGrpCat.{u + 1} (X.map g.op)).map (kunDescentStageTransition X c F f) ≫ kunDescentStageTransition X c F g) ∧ ∃ (D : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (e : ∀ i : I, D.obj i ≅ (Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F)) (ι : D ⟶ (Functor.const I).obj F), (∀ {i j : I} (f : i ⟶ j), (e i).inv ≫ D.map f ≫ (e j).hom = kunDescentPullPushTransition X c F f) ∧ (∀ i : I, ι.app i = (e i).hom ≫ (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app (op i))).counit.app F) ∧ Nonempty (IsColimit (Cocone.mk F ι))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.kunDescentStageTransition",
+   "AlgebraicGeometry.kunDescentPullPushTransition",
+   "AlgebraicGeometry.kun_descent_limit"
+  ]
  }
 }

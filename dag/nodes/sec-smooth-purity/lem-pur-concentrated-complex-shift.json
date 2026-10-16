@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-proetale-locally-constant-sheaf"
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
@@ -240,5 +241,28 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-994ea31a9 (reviewer sub-agent of L); spot-checked: Independent full stage-1 review completed. Item and new Mathlib leaf match their sources; all six proof steps, hypotheses, coefficient category, localization, stalk comparison, route, searches, edge cases, and duplicate checks pass. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-953434c38",
+  "group": "NL",
+  "result": "pass",
+  "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings and records. Both Lean files compile cleanly through scompile.py. No fixes needed; detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcentratedComplexShift",
+  "declaration": "AlgebraicGeometry.Scheme.concentratedComplexShift",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantDerivedPullback",
+   "AlgebraicGeometry.Scheme.concentratedComplexShift"
+  ],
+  "file": "lean/Sheaf/Paper/ConcentratedComplexShift.lean",
+  "statement": "theorem concentratedComplexShift (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) (a : T ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (K : proEtaleDerivedCategory T P.Ring) (hK : WeilConjectures.finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos T K) (r : ℤ) : ((∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) → ∃! e : K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) 0).obj ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))⟦-r⟧, (DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).map (e.hom ≫ (((DerivedCategory.singleFunctors (proEtaleRingModules T (proEtaleConstantRing T P.Ring))).shiftIso (-r) r 0 (neg_add_cancel r)).hom.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K))) = (DerivedCategory.singleFunctorCompHomologyFunctorIso (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).inv.app ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)) ∧ ∀ (U : Scheme.{u}) (u : U ⟶ T) [Surjective u] [Etale u], ∀ (L : proEtaleRingModules U (proEtaleConstantRing U P.Ring)), Nonempty ((proEtaleConstantDerivedPullback P u).obj K ≅ ((DerivedCategory.singleFunctor (proEtaleRingModules U (proEtaleConstantRing U P.Ring)) 0).obj L)⟦-r⟧) → IsLocallyConstantProEtaleModuleSheaf U P.Ring L ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ U), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing U P.Ring) L)) → (∀ i : ℤ, i ≠ r → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) i).obj K)) ∧ IsLocallyConstantProEtaleModuleSheaf T P.Ring ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T), Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing T P.Ring) ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T P.Ring)) r).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Second reading: clauses have independent hypotheses; the canonical truncation isomorphism is characterized uniquely by identity on H^r using the standard single-degree and shift comparisons. The constant derived pullback specializes the published exact module pullback with its canonical invertible coefficient map, reusing finiteCoefficientCommRingMap_isIso rather than restating it."
  }
 }

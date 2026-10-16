@@ -245,5 +245,32 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-d93ce42d1 (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, all cited statements, master blueprint, route, and Stacks sources 0F1M/0G7E and supporting lemmas. Verified truncation boundaries, tensor exactness, coefficient category, arbitrary pullback, small cases, duplicate candidates, and absence of dependency cycles. No new nodes or repairs. Accepted the three declared generic tool uses; detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4530ffc54",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Checked node/source clause-by-clause, dependencies, universes, edge cases, docstrings, proofs, report sections, and clean scompile.py evidence; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model",
+  "declarations": [
+   "AlgebraicGeometry.Etale.torModelCoefficientRing",
+   "AlgebraicGeometry.Etale.torModelRing",
+   "AlgebraicGeometry.Etale.torModelScalarUnit",
+   "AlgebraicGeometry.Etale.torModelRestriction",
+   "AlgebraicGeometry.Etale.torModelRestriction_additive",
+   "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeKFlatResolution.lean",
+  "statement": "theorem DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (E : DerivedCategoryModule Λ T) (a : ℤ) : DerivedCategory.hasTorAmplitudeGE Λ T a E ↔ ∃ P : CochainComplex (SheafOfModules.{u + 1} (torModelRing Λ T)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := torModelCoefficientRing Λ T) P ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := T.smallEtaleTopology) (R := torModelCoefficientRing Λ T) (P.X i)) ∧ (∀ i : ℤ, i < a → IsZero (P.X i)) ∧ Nonempty (_root_.DerivedCategory.Q.obj (((torModelRestriction Λ T).mapHomologicalComplex (.up ℤ)).obj P) ≅ E) ∧ (∀ {D : Type uD} [Category.{vD} D] [EssentiallySmall.{u + 1} D] (J : GrothendieckTopology D) (RI S : Sheaf J CommRingCat.{u + 1}) (uInv : Sheaf T.smallEtaleTopology (Type (u + 1)) ⥤ Sheaf J (Type (u + 1))) (uPush : Sheaf J (Type (u + 1)) ⥤ Sheaf T.smallEtaleTopology (Type (u + 1))) (_adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : SheafOfModules.AlgebraicInverseImage uInv (torModelCoefficientRing Λ T) RI) (c : RI ⟶ S) (uStar : SheafOfModules.{u + 1} (torModelRing Λ T) ⥤ SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (hobj : ∀ M : SheafOfModules.{u + 1} (torModelRing Λ T), uStar.obj M = SheafOfModules.changeOfRings c (I.modules.obj M)) (_hmap : ∀ {M N : SheafOfModules.{u + 1} (torModelRing Λ T)} (f : M ⟶ N), uStar.map f = eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫ eqToHom (hobj N).symm) [uStar.Additive], CochainComplex.IsKFlatIndependentCoefficients (R := S) ((uStar.mapHomologicalComplex (.up ℤ)).obj P) ∧ ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{uD, vD, u + 1, u + 1} (J := J) (R := S) (((uStar.mapHomologicalComplex (.up ℤ)).obj P).X i))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The representative is a complex over the sheafified constant commutative ring. Its canonical restriction along the constant-presheaf sheafification unit is the module-valued representative of E. No arbitrary equivalence or map is chosen. The independent-coefficient K-flat predicate and IsFlatOnSite are the recorded pullback and flatness interfaces. The existential representative precedes all ringed-topos pullback data; the same P is used in every pullback conclusion. Small etale objects have universe u+1 and morphisms u, with coefficients u+1; target site universes are independent."
  }
 }

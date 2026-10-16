@@ -19,7 +19,8 @@
   "def-weil-pbc-etale-cohomology",
   "def-pur-sheaf-tensor-product",
   "def-sc-kummer-sequence",
-  "def-kun-constant-sheaf"
+  "def-kun-constant-sheaf",
+  "def-pur-kummer-module-coefficients"
  ],
  "proof": [
   {
@@ -280,5 +281,29 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6052e931e (reviewer sub-agent of L); spot-checked: Read the full item, five proof steps, cited statements, blueprint and Stacks sources. Verified the canonical coefficient map, integral-lift boundary correction, hypotheses and edge cases. No new nodes or repairs needed. Accepted the derived delta-functor tool use. Recorded the pre-existing orientation-citer C4 mismatch separately in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d493d565",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, universes, helper construction, and reproducible per-file compilation all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.kummer_coefficient_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.kummerIntegralLift_hasFiniteBiproducts",
+   "AlgebraicGeometry.Scheme.KummerIntegralLiftBoundary",
+   "AlgebraicGeometry.Scheme.kummer_coefficient_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerCoefficientBaseChange.lean",
+  "statement": "theorem kummer_coefficient_base_change (P : WeilConjectures.PurityFiniteSetting.{u}) (N : ℕ) (hN : 1 ≤ N) (C : Scheme.{u}) (f : C ⟶ Spec (CommRingCat.of P.field.k)) [IsCurve f] [Smooth f] (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (P.coefficients.l ^ N)))) [Module.Free (ULift.{u + 1} (ZMod (P.coefficients.l ^ N))) A] [Module.Finite (ULift.{u + 1} (ZMod (P.coefficients.l ^ N))) A] : ∃ (hm : IsUnit ((P.coefficients.l ^ N : ℕ) : Γ(C, ⊤))) (beta : ∀ q : ℕ, (Sheaf.H (C.rootsOfUnitySheaf (P.coefficients.l ^ N)) q ⊗[ ULift.{u + 1} (ZMod (P.coefficients.l ^ N))] A) ≃ₗ[ ULift.{u + 1} (ZMod (P.coefficients.l ^ N))] Sheaf.H ((kummerAbelianTwist C (P.coefficients.l ^ N)).obj A) q), (∀ (q : ℕ) (x : Sheaf.H (C.rootsOfUnitySheaf (P.coefficients.l ^ N)) q) (a : A), beta q (x ⊗ₜ a) = Sheaf.H.map (kummerCoefficientInsertion C (P.coefficients.l ^ N) A a) q x) ∧ ∃ delta : ∀ q : ℕ, (Sheaf.H C.gmSheaf q ⊗[ℤ] A) →+ Sheaf.H ((kummerAbelianTwist C (P.coefficients.l ^ N)).obj A) (q + 1), (∀ (q : ℕ) (x : Sheaf.H C.gmSheaf q) (a : A), delta q (x ⊗ₜ[ℤ] a) = beta (q + 1) (Sheaf.H.δSucc (C.kummerSequence_shortExact (P.coefficients.l ^ N) hm) q x ⊗ₜ a)) ∧ ∀ q : ℕ, KummerIntegralLiftBoundary C (P.coefficients.l ^ N) q A (delta q)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The published KummerModuleCoefficients interface is reused and its landed node is added to stmt_deps. The integral-lift boundary clause is encoded in any finite integral basis by the finite biproduct of the ordinary Kummer sequence. Both identifications are normalized on generators. The only new helper definition is the explicit Prop KummerIntegralLiftBoundary; no tensor or cohomology object is redefined. The illustrative coefficient example lem-pur-finite-kummer-level is not needed to state the result for arbitrary finite free A."
  }
 }

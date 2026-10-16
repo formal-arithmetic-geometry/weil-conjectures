@@ -320,17 +320,17 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleStalkConservative.lean",
   "statement": "theorem finiteCoefficient_cover_detection {ι : Type v} (U : ι → T.ProEt) (hU : Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.proetalePrecoverage T) : (∀ (F G : FiniteCoefficientDerivedCategory T Λ) (f : F ⟶ G), IsIso f ↔ ∀ i : ι, IsIso ((SheafOfModules.overFunctor.{u + 1} (finiteCoefficientRingSheaf T Λ) (U i)).mapDerivedCategory.map f)) ∧ (∀ K : CochainComplex (FiniteCoefficientModules T Λ) ℤ, K.Acyclic ↔ ∀ n : ℤ, IsZero (K.homology n)) ∧ (∀ H : FiniteCoefficientModules T Λ, IsZero H ↔ ∀ i : ι, IsZero ((SheafOfModules.overFunctor.{u + 1} (finiteCoefficientRingSheaf T Λ) (U i)).obj H))",
   "branch": "newtargets-dag",
-  "by": "Q13",
-  "date": "2026-10-15",
+  "by": "NL",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "All four numbered clauses are stated by the listed theorems: covering locality and acyclicity; affine and affine-open-cover cohomology-sheaf section tests; geometric-stalk detection on etale-origin D+ and arbitrary ambient Dbc morphisms; and the constructed all-functions quotient counterexample. Slice restriction and functorial cohomology stalks are canonical helper constructions for these clauses. No statement correction or new node."
+  "note": "§1(B), second-reading import compatibility repair: the recorded module imports legacy ProEtale.UpperLowerStar declarations through the old localization and derived-comparison proof modules, which collide with the published FiniteCoefficient.UpperLowerStar declarations needed by canonical inverse image. Use the same localizationRestriction construction from the finite-coefficient framework and the recorded Sheaf.ProEtaleSiteComparisonDerived theorem module. All definitions, theorem signatures, proof docstrings, and the four clauses of the node remain verbatim; no mathematical assumption or conclusion changes."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-8bcb918d5",
-  "group": "Q13",
+  "reviewer": "NT-stage2-Codex-953434c38",
+  "group": "NL",
   "result": "pass",
-  "note": "Wrote review.md. Checked all four clauses, seven statement dependencies, source passages, exact declarations, universes, edge cases, and pilot gates. Verbatim statement matches. Immutable module compiled cleanly through scompile.py in both modes. No findings or fixes; branch unchanged."
+  "note": "Reviewed immutable statements, sources, dependencies, canonical constructions, universes, edge cases, docstrings and records. Both Lean files compile cleanly through scompile.py. No fixes needed; detailed review written to review.md."
  }
 }

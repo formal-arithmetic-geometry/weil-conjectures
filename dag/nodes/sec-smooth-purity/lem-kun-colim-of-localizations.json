@@ -217,5 +217,28 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-abb29729c (reviewer sub-agent of L); spot-checked: Read the complete item, report, master blueprint, cited definitions, and unit/chapter route. Verified all five proof steps, preorder correction, transition compatibility, and colimit universal properties in rings and K-algebras. Checked edge cases and existing-DAG generalization candidates. No new nodes, repairs, or accepted tool_uses. Findings recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-80218f5ac",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all hypotheses, conclusions, dependencies, canonical maps, universes, edge cases, docstrings, and report sections. Signature matches verbatim; immutable module compiles cleanly through scompile.py. No defects found. Documented unavailable standalone blueprint source."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ColimOfLocalizations",
+  "declaration": "RingTheory.colim_of_localizations",
+  "file": "lean/Sheaf/RingTheory/ColimOfLocalizations.lean",
+  "statement": "theorem colim_of_localizations {K : Type v} {B : Type u} [CommRing K] [CommRing B] [Algebra K B] [IsDomain B] {I : Type w} (Bi : I → Subalgebra K B) (hI : Nonempty I) (hfin : ∀ i : I, Algebra.FiniteType K (Bi i)) (hcover : ∀ b : B, ∃ i : I, b ∈ Bi i) (hdirected : ∀ i j : I, ∃ k : I, Bi i ≤ Bi k ∧ Bi j ≤ Bi k) : ∃ (e : ∀ p : LocalizationPair Bi, PairLocalization Bi p →ₐ[K] FractionRing B) (t : ∀ (p q : LocalizationPair Bi), PairLocalizationLE Bi p q → PairLocalization Bi p →ₐ[K] PairLocalization Bi q), (∀ (p : LocalizationPair Bi), Function.Injective (e p)) ∧ (∀ (p : LocalizationPair Bi) (x : Bi p.1.1), e p (algebraMap (Bi p.1.1) (PairLocalization Bi p) x) = algebraMap B (FractionRing B) (x : B)) ∧ (∀ (p q : LocalizationPair Bi) (h : PairLocalizationLE Bi p q) (x : Bi p.1.1), t p q h (algebraMap (Bi p.1.1) (PairLocalization Bi p) x) = algebraMap (Bi q.1.1) (PairLocalization Bi q) ⟨(x : B), (h.1 x.property)⟩) ∧ (∀ (p q : LocalizationPair Bi) (h : PairLocalizationLE Bi p q), ∀ f : PairLocalization Bi p →ₐ[K] PairLocalization Bi q, (∀ x : Bi p.1.1, f (algebraMap (Bi p.1.1) (PairLocalization Bi p) x) = algebraMap (Bi q.1.1) (PairLocalization Bi q) ⟨(x : B), (h.1 x.property)⟩) → f = t p q h) ∧ (∀ (p q : LocalizationPair Bi) (h : PairLocalizationLE Bi p q), (e q).comp (t p q h) = e p) ∧ (∀ x : FractionRing B, ∃ (p : LocalizationPair Bi) (y : PairLocalization Bi p), e p y = x) ∧ ∃ (P : Preorder (LocalizationPair Bi)) (D : @CategoryTheory.Functor (LocalizationPair Bi) (@Preorder.smallCategory (LocalizationPair Bi) P) (CommAlgCat.{u} K) inferInstance) (c : @Cocone _ _ _ _ D), (∀ p q : LocalizationPair Bi, @LE.le _ P.toLE p q ↔ PairLocalizationLE Bi p q) ∧ @IsFiltered (LocalizationPair Bi) (@Preorder.smallCategory (LocalizationPair Bi) P) ∧ (∀ p : LocalizationPair Bi, D.obj p = CommAlgCat.of K (PairLocalization Bi p)) ∧ c.pt = CommAlgCat.of K (FractionRing B) ∧ (∀ p : LocalizationPair Bi, HEq (c.ι.app p) (CommAlgCat.ofHom (e p))) ∧ Nonempty (IsColimit c) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} K) CommRingCat).mapCocone c))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "RingTheory.LocalizationPair",
+   "RingTheory.PairLocalization",
+   "RingTheory.PairLocalizationLE"
+  ]
  }
 }
