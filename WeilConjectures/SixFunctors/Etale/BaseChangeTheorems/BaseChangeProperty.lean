@@ -300,7 +300,8 @@ an isomorphism on all of `D⁺(X_ét, Λ)`. This is
 `AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap`, the
 underived base change map being an isomorphism since `f` is proper
 (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`).
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
+(blueprint: `lemma-weil-pbc-property-iff-acyclicity`;
+`lem-weil-pbc-injective-acyclicity-bounded-below` for a torsion coefficient ring) -/
 theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
     [IsProper f] (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
   hf.hasTorsionBaseChange_of_isIso_baseChangeMap Λ hΛ f fun _ _ _ _ _ sq ↦
