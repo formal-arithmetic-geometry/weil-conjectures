@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-sections-conservative",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Evaluation on weakly contractible affines is conservative",
@@ -12,46 +12,165 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-conservative.md",
   "place": "node det-pe-sections-conservative, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-small-proetale-site",
+  "det-pe-weak-contractible-equivalences",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
  "proof": [
   {
-   "text": "The objects $\\operatorname{Spec}D$ with $D$ w-contractible lie in $\\mathcal W$\n([det-pe-weak-contractible-equivalences]), and every object $V$ has a covering by them\n([det-pe-wcb-cover]). Every $W\\in\\mathcal W$ has exact sections (the proof of\n[det-pe-wc-sections-exact] only uses part 3 of [det-pe-weak-contractible-equivalences]).",
+   "text": "First record precisely the local lifting criterion for module exactness. Put $Z=\\ker(g)$ and let $u:A\\to Z$ be induced by $f$; its existence follows from $gf=0$. The sequence is exact at $B$ precisely when $\\operatorname{coker}(u)=Z/\\operatorname{im}(f)=0$. By [lem-weil-pbc-module-sheaves-colimits-forgetful](1), the underlying abelian sheaf of this cokernel is the abelian cokernel of $u$. Faithfulness reflects the zero object: if the identity of its underlying object is zero then the identity of the module is zero. Hence exactness is equivalent to the underlying abelian map $u$ being epic. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] this is equivalent to local lifting of every section of $Z$. Finally $Z(V)=\\ker(g(V))$ by [def-weil-sheaf-of-modules-category]. Thus exactness at $B$ is equivalent to: every $b\\in B(V)$ with $g(b)=0$ lifts through $f$ on some covering of $V$. This argument applies to any sheaf of rings, without commutativity.",
    "uses": [
-    "det-pe-weak-contractible-equivalences",
-    "det-pe-wcb-cover",
-    "det-pe-wc-sections-exact"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03CN (lemma-abelian-abelian), parts (5)-(6)"
+   }
   },
   {
-   "text": "*1.* If the sequence is exact, it stays exact on $W$ by exactness of $\\Gamma(W,-)$.\nConversely, assume exactness on all $W\\in\\mathcal W$. Let $b\\in B(V)$ with $g(b)=0$. Choose\na covering $\\{W_k\\to V\\}$ with $W_k\\in\\mathcal W$. Then $b|_{W_k}\\in\\ker(g(W_k))=\n\\operatorname{im}(f(W_k))$, so $b$ is locally in the image of $f$, i.e. $b$ is a section of\nthe image sheaf $\\operatorname{im}(f)$ (the sheafification of the presheaf image). Thus\n$\\ker g\\subset\\operatorname{im}f$; the reverse inclusion is $g\\circ f=0$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [det-pe-wcb-cover], every site object $V$ admits a covering $\\{W_i\\to V\\}$ with $W_i=\\operatorname{Spec}D_i$ and $D_i$ w-contractible. The last assertion of [det-pe-weak-contractible-equivalences] says each such affine is weakly contractible. Consequently every $V$ has a covering by objects of $\\mathcal W$. Only this inclusion is used; we do not assume the converse between ring-theoretic w-contractibility and weak contractibility of an affine site object.",
+   "uses": [
+    "det-pe-wcb-cover",
+    "det-pe-weak-contractible-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947 (proposition-enough-weakly-contractibles), covering hypothesis; blueprint proof, first paragraph"
+   }
   },
   {
-   "text": "*2.* A complex is acyclic iff it is exact at every term; apply 1 degreewise.",
-   "uses": [],
-   "elementary": null
+   "text": "Assume the sequence is exact and fix any $W\\in\\mathcal W$. In step 1 the underlying abelian map $u:A\\to Z$ is locally surjective. Its underlying map of sheaves of sets is therefore epic by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]. Part 3 of [det-pe-weak-contractible-equivalences] makes $A(W)\\to Z(W)$ surjective. Since $Z(W)=\\ker(g(W))$ by [def-weil-sheaf-of-modules-category], every element of the evaluated kernel is in the image of $f(W)$; the opposite inclusion follows from $gf=0$. This proves the forward implication of clause 1 for every affine weakly contractible $W$, not only those furnished by the ring-theoretic covering theorem.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "det-pe-weak-contractible-equivalences",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0946 (lemma-w-contractible), part (1), and 0947, proof of (1); set epi criterion Tag 00WN"
+   }
   },
   {
-   "text": "*3.* A morphism $\\varphi\\colon M\\to N$ is an isomorphism iff $0\\to M\\to N$ and\n$M\\to N\\to0$ are exact; apply 1 (bijectivity on $W$ is exactness of the evaluated\nsequences). A morphism of complexes is a quasi-isomorphism iff its cone is acyclic;\nevaluation at $W$ commutes with forming cones, so apply 2.",
+   "text": "Conversely, suppose the evaluated sequence is exact for every $W\\in\\mathcal W$. Given $b\\in B(V)$ with $g(b)=0$, take the covering $\\{W_i\\to V\\}$ of step 2. Exactness on $W_i$ gives $a_i\\in A(W_i)$ with $f(a_i)=b|_{W_i}$. The sections $a_i$ need not agree on overlaps: step 1 requires only local lifts. It therefore proves exactness at $B$, completing clause 1.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0947 (proposition-enough-weakly-contractibles), proof of (1)"
+   }
+  },
+  {
+   "text": "For any cochain complex $K$, its cohomology object in degree $q$ is $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ by [def-weil-abstract-derived-category]. It vanishes exactly when $K^{q-1}\\to K^q\\to K^{q+1}$ is exact. Apply clause 1 for each $q\\in\\mathbf Z$; exchanging the two universal quantifiers $q$ and $W$ proves clause 2. No boundedness hypothesis is used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0115 (definition-quasi-isomorphism-cochain), part (2), and the preceding formula for cohomology"
+   }
+  },
+  {
+   "text": "An isomorphism of module sheaves has bijective components, by evaluating its inverse. Conversely suppose $\\varphi(W)$ is bijective for every $W\\in\\mathcal W$. Cover an arbitrary $V$ as in step 2. If $\\varphi(s)=\\varphi(t)$ in $N(V)$, injectivity on each covering member makes $s|_{W_i}=t|_{W_i}$, whence $s=t$ by the sheaf condition. Thus $\\varphi$ is injective on sections of every object. Given $n\\in N(V)$, choose the unique lifts $m_i\\in M(W_i)$. Their restrictions agree on $W_i\\times_VW_j$ by the injectivity just proved for all objects. The sheaf condition glues them to $m\\in M(V)$ with $\\varphi(m)=n$. Hence every component is bijective. Its inverse is linear and commutes with restrictions, since applying $\\varphi$ verifies both assertions and $\\varphi$ is injective. These inverses define the inverse morphism of module sheaves, proving the first assertion of clause 3.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-conservative.proof.md",
+    "place": "Proof, clause 3, expanded with the sheaf gluing argument"
+   }
+  },
+  {
+   "text": "Let $v:K\\to L$ be a morphism of complexes and use its cone $C(v)^q=L^q\\oplus K^{q+1}$ with differential $(l,k)\\mapsto(d_Ll+v(k),-d_Kk)$. By [lem-pur-quasi-iso-cone-acyclic], $v$ is a quasi-isomorphism exactly when $C(v)$ is acyclic; the same lemma applies in the abelian category of $\\mathcal R(W)$-modules. Finite biproducts are finite products, and [lem-weil-pbc-module-sheaves-limits-sectionwise] computes these sectionwise. Evaluation is additive by [def-weil-sheaf-of-modules-category], so the displayed differential evaluates to precisely the differential of $C(v(W))$. Thus $C(v)(W)\\cong C(v(W))$ as complexes. Clause 2 now gives that $v$ is a quasi-isomorphism if and only if every $v(W)$ is, completing clause 3.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), cone criterion; blueprint proof, clause 3"
+   }
   }
  ],
  "proof_deps": [
-  "det-pe-weak-contractible-equivalences",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-sheaf-of-modules-category",
   "det-pe-wcb-cover",
-  "det-pe-wc-sections-exact"
+  "det-pe-weak-contractible-equivalences",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-sections/det-pe-sections-conservative.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0947, proposition-enough-weakly-contractibles, proof of (1); clauses 2-3 follow degreewise and by the cone criterion Tag 05RT, as in the blueprint proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on affine weakly contractible objects of the pro-etale site detects exactness of sheaves of modules and quasi-isomorphisms of complexes",
+   "results": "quasiIsoAt_iff_exactAt; exactAt_iff_of_quasiIsoAt; quasiIsoAt_iff_exactAt'; Profinite.NobelingProof.succ_exact; LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.hasExactLimitsOfShape; Condensed.hasExactColimitsOfShape; AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.Exact",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.Functor.Exact'",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "grep",
+   "query": "WeaklyContractible|weakly.contractible|jointly.*reflect.*exact",
+   "results": "No hits; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative family of evaluation functors on weakly contractible objects of a site",
+   "results": "CategoryTheory.evaluation; PresheafOfModules.evaluation; CategoryTheory.exactFunctor; CategoryTheory.ExactFunctor; CategoryTheory.ExactFunctor.of; CategoryTheory.evaluationIsRightAdjoint; CategoryTheory.evaluationIsLeftAdjoint; CategoryTheory.Limits.evaluationPreservesLimits",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of projective generating objects in a sheaf topos detects exact sequences of module sheaves",
+   "results": "SheafOfModules.generatorsOfIsCokernelFree; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian; ModuleCat.enoughProjectives",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"Exact\"",
+   "results": "CategoryTheory.HasSheafify.isLeftExact; CategoryTheory.Sheaf.hasExactColimitsOfShape; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.Sheaf.H.longSequence_exact; CategoryTheory.Sheaf.H.longSequence_exact₁'",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  },
+  {
+   "tool": "grep",
+   "query": "reflects.*(exact|Exact)|exact.*(iff|of).*eval|eval.*exact",
+   "results": "No hits; searched Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern generic exact functors, presheaf evaluation, condensed categories, or quasi-isomorphisms; none establishes this pro-etale conservative family"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -64,5 +183,44 @@
   "det-pe-wc-sections-exact"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-sections-conservative",
+  "worker": "stage1",
+  "summary": "Kept every clause and all coefficient generality. Expanded local exactness via the exact faithful module forgetful functor and the general-site abelian epi criterion; proved the forward implication for every topos-weakly-contractible affine using the set epi criterion and equivalence (3), rather than using the proof of the narrower ring-theoretic sections lemma. Expanded the degreewise argument, sheaf inverse gluing, and cone evaluation. Reused existing generic nodes; no new nodes. The imported node has no chapter/unit metadata or corresponding chapter/unit record, so the current blueprint section and unit texts were read directly.",
+  "blueprint": "Steps 1-4 realize the initial paragraph and clause 1; step 5 realizes clause 2; steps 6-7 realize both assertions of clause 3. sk-cor-pe-sections retains its prescribed cover/exact-evaluation/local-lifting route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact faithful forgetful functor for arbitrary ringed sites; supplies the coefficient bridge to abelian sheaves, absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "General-site local lifting characterization of abelian epimorphisms, used to spell out the image-sheaf argument of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "General-site set epimorphism criterion converts local module lifts to the hypothesis of weak contractibility."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic homological algebra cone criterion used exactly as in the blueprint clause 3, not a replacement of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-fc12f4e00",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-fc12f4e00 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route and source passages; all seven steps preserve arbitrary ring coefficients and unbounded complexes. No circular dependencies, duplicate new nodes or mathematical gaps found. Accepted four declared generic tools. review.md records source locations, edge cases and a nonblocking report metadata inaccuracy."
+ }
 }
