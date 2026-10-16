@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-bimod-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-modobj-relative-tensor",
+   "place": "Proof, opening two sentences: \"For a monoid object A, the A-A-bimodules form a monoidal category under tensor_A with unit A. The associativity and unit isomorphisms descend ...\"",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The monoidal category of bimodule objects over a fixed monoid",
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-module-category",
+ "statement": "Let $\\mathcal C$ be a monoidal category with associator $\\alpha$ and with coequalizers, and suppose $X\\otimes-$ and $-\\otimes X$ preserve colimits for every object $X$. Let $A$ be a monoid object of $\\mathcal C$, with multiplication $\\mu$ and unit $\\eta$. An $A$-$A$-bimodule is a left $A$-module object as in [sk-def-sfb-module-objects] equipped with a unital associative right action commuting with the left action. A bimodule morphism is a morphism of $\\mathcal C$ commuting with both actions. Write $\\operatorname{Bimod}_A(\\mathcal C)$ for this category. It has a monoidal structure with tensor product\n$$\nP\\otimes_A Q=\\operatorname{coeq}\\bigl((P\\otimes A)\\otimes Q\n\\mathrel{\\substack{\\xrightarrow{\\rho_P\\otimes Q}\\\\[-2pt]\\xrightarrow{(P\\otimes\\gamma_Q)\\circ\\alpha_{P,A,Q}}}}P\\otimes Q\\bigr),\n$$\nwhere $\\gamma_U$ and $\\rho_U$ denote the left and right actions of any bimodule $U$, respectively. The induced left action is through $P$, and the induced right action is through $Q$; on morphisms the tensor is induced by the ambient tensor of the underlying maps. The unit is the regular bimodule $A$, with both actions $\\mu$. For any third bimodule $L$, the associator is induced from the ambient associator on $(P\\otimes Q)\\otimes L$, and the left and right unitors are induced by the left and right action maps. These isomorphisms are natural and satisfy the pentagon and triangle identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+  "place": "Opening two sentences (monoidal structure on bimodules); Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-111,170-173,192-193,201-209,265-273,356-364,745-770,1020-1041; Mathlib/CategoryTheory/Bicategory/End.lean:40-52. The induced associator map is read at Bimod.lean:449-467; the action-induced unitor maps at 622-623 and 685-686."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bicategory of monoid objects and bimodules with coequalizer tensor composition",
+   "results": "Bimod.monBicategory, Bimod.tensorBimod, Bimod.TensorBimod.X, actLeft, actRight, whiskerLeft, whiskerRight in Mathlib/CategoryTheory/Monoidal/Bimod.",
+   "date": "2026-10-16",
+   "verdict": "match: the endomorphisms of A in this bicategory give exactly the stated monoidal structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.monBicategory",
+   "results": "One hit: Bimod.monBicategory, Mathlib.CategoryTheory.Monoidal.Bimod, with HasCoequalizers and preservation of colimits by both tensor functors.",
+   "date": "2026-10-16",
+   "verdict": "match: use its endomorphism monoidal category at A."
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def monBicategory|noncomputable def tensorBimod|noncomputable def associatorBimod|noncomputable def leftUnitorBimod|noncomputable def rightUnitorBimod",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimod.lean:356 tensorBimod; 745 associatorBimod; 755 leftUnitorBimod; 764 rightUnitorBimod; 1020 monBicategory. Directory searched: CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "match: the named constructions are precisely the tensor and constraints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "endomorphism category of an object in a bicategory is a monoidal category",
+   "results": "CategoryTheory.instMonoidalCategoryHom, EndMonoidal, tensorObj_def, associator_def, leftUnitor_def in Mathlib.CategoryTheory.Bicategory.End.",
+   "date": "2026-10-16",
+   "verdict": "match: specializes at the monoid A in Bimod.monBicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\(X : C\\) : MonoidalCategory",
+   "results": "Mathlib/CategoryTheory/Bicategory/End.lean:40, instance (X : C) : MonoidalCategory (X ⟶ X). Directory searched: CategoryTheory/Bicategory.",
+   "date": "2026-10-16",
+   "verdict": "match: lines 40-47 identify tensor, unit and constraints with bicategorical composition, identity and constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "def regular|noncomputable def X|noncomputable def actLeft|noncomputable def actRight|noncomputable def tensorBimod",
+   "results": "Mathlib/CategoryTheory/Monoidal/Bimod.lean:170 regular, 192 TensorBimod.X, 201 actLeft, 265 actRight, 356 tensorBimod; also Mod.lean:336 regular. Directory searched: CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "match: reading lines 192-193 gives the displayed coequalizer; lines 201-209 and 265-273 give its outer actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.instMonoidalCategoryHom",
+   "results": "CategoryTheory.instMonoidalCategoryHom and its tensorUnit_def, tensorObj_def, associator_def, leftUnitor_def, rightUnitor_def and whiskering definitions in Mathlib.CategoryTheory.Bicategory.End.",
+   "date": "2026-10-16",
+   "verdict": "match: named instance for the one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "endomorphism monoidal category of bimodules over an associative algebra object",
+   "results": "Eight hits: Bimod.regular, instInhabited, Bimod, instCategory, homInhabited, Hom, id' and regular_X.",
+   "date": "2026-10-16",
+   "verdict": "Partial match: identifies the general internal bimodule category and regular unit; the full monoidal structure is confirmed by the targeted Loogle query and source read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.tensorBimod",
+   "results": "Twelve hits including Bimod.tensorBimod, leftUnitorBimod, rightUnitorBimod, associatorBimod, tensorBimod_X, tensorBimod_actLeft, tensorBimod_actRight, AssociatorBimod.hom/inv/homAux/invAux and whiskerLeft.",
+   "date": "2026-10-16",
+   "verdict": "Match: the tensor, outer actions and all constraints have exactly the coequalizer and preservation hypotheses of the leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "monBicategory|instMonoidalCategoryHom",
+   "results": "One hit: Mathlib/CategoryTheory/Monoidal/Bimod.lean:1020, noncomputable def monBicategory : Bicategory (Mon C) where.",
+   "date": "2026-10-16",
+   "verdict": "Match: direct reading of lines 1020-1041 and Bicategory/End.lean:40-52 verifies the endomorphism monoidal specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "endomorphisms in the bicategory of bimodules give a tensor category with unit the regular algebra",
+   "results": "Eight hits: Bimod.homInhabited, Bimod.regular_X, Bimod.instCategory, Bimod.instInhabited, Bimod.LeftUnitorBimod.hom, Bimod.regular, Bimod.RightUnitorBimod.hom, Bimod.tensorBimod.",
+   "date": "2026-10-16",
+   "verdict": "Partial match: generic bimodules, regular unit and tensor; the completed monoidal structure is verified from the local bicategory and endomorphism instance."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod.associatorBimod",
+   "results": "Six hits: Bimod.associatorBimod, Bimod.triangle_bimod, Bimod.comp_whiskerLeft_bimod, Bimod.whiskerRight_comp_bimod, Bimod.whisker_assoc_bimod, Bimod.pentagon_bimod.",
+   "date": "2026-10-16",
+   "verdict": "Match: associator and both coherence identities have the stated coequalizer and tensor-colimit-preservation hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "monBicategory|associatorBimod|leftUnitorBimod|rightUnitorBimod",
+   "sub": "CategoryTheory/Monoidal/Bimod.lean",
+   "results": "Five hits, truncated by the wrapper per-file limit: namespace AssociatorBimod at 439, end AssociatorBimod at 614, namespace LeftUnitorBimod at 616, end LeftUnitorBimod at 677, namespace RightUnitorBimod at 679. Direct source reads additionally verified declarations at 745, 755, 764 and 1020.",
+   "date": "2026-10-16",
+   "verdict": "Partial match in wrapper output: constraint namespaces; full declaration and coherence evidence comes from the direct local line reads and earlier targeted searches."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Bimod.monBicategory, CategoryTheory.instMonoidalCategoryHom",
+  "file": "Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+  "line": 1020,
+  "how": "specializes in one line: install Bimod.monBicategory (Bimod.lean:1020), then apply CategoryTheory.instMonoidalCategoryHom (Mathlib/CategoryTheory/Bicategory/End.lean:40) at A. The endomorphism category is definitionally Bimod A A; the tensor and unit are Bimod.tensorBimod (Bimod.lean:356) and Bimod.regular (170). The coequalizer is TensorBimod.X (192), with outer actions actLeft (201) and actRight (265), and the constraints are associatorBimod (745), leftUnitorBimod (755), rightUnitorBimod (764); naturality and coherence are fields of monBicategory (1020-1041). AssociatorBimod.homAux/hom (449-467) descend the ambient associator; LeftUnitorBimod.hom (622-623) and RightUnitorBimod.hom (685-686) descend the left/right action maps."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-modobj-relative-tensor",
+  "date": "2026-10-16",
+  "group": "Q16"
+ }
+}

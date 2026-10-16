@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-relative-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The relative tensor product $\\otimes_{\\mathcal R}$",
@@ -13,33 +13,152 @@
   "place": "node def-sfb-modobj-relative-tensor, order 1579"
  },
  "stmt_deps": [
+  "sk-def-sfb-module-objects",
   "lem-sfb-symmetric-bimod-tensor",
-  "lem-sfb-modobj-symmetric-bimodules"
+  "lem-sfb-modobj-symmetric-bimodules",
+  "lem-sfb-bimod-monoidal"
  ],
  "proof": [
   {
-   "text": "For a monoid object $A$, the $A$-$A$-bimodules form a monoidal category under $\\otimes_A$\nwith unit $A$. The associativity and unit isomorphisms descend from those of $\\mathcal C$\nto the coequalizers because $\\otimes$ preserves coequalizers in each variable. By\n[lem-sfb-symmetric-bimod-tensor], the symmetric $\\mathcal R$-$\\mathcal R$-bimodules are\nclosed under $\\otimes_{\\mathcal R}$. The regular bimodule $\\mathcal R$ is symmetric because\n$\\mathcal R$ is commutative, i.e. $\\mu\\beta_{\\mathcal R,\\mathcal R}=\\mu$. By\n[lem-sfb-modobj-symmetric-bimodules], $\\Mod_{\\mathcal R}(\\mathcal C)$ maps fully faithfully\nto the symmetric bimodules. By [def-sfb-symmetric-bimod-module-iso], every symmetric\nbimodule, in particular every $\\otimes_{\\mathcal R}$-product of bimodules attached to module\nobjects and the unit $\\mathcal R$, is isomorphic to the bimodule attached to a module object\nwith the same underlying object. A monoidal structure therefore transports along this fully\nfaithful functor. The restricted structure is the one on\n$\\Mod_{\\mathcal R}(\\mathcal C)$, and its tensor product is the displayed coequalizer.",
+   "text": "Apply [lem-sfb-bimod-monoidal] with $A=\\mathcal R$: its hypotheses are exactly the assumed coequalizers and colimit preservation in both variables. Denote its monoidal category by $\\mathcal B=\\operatorname{Bimod}_{\\mathcal R}(\\mathcal C)$ and its tensor by $\\odot$. By [lem-sfb-modobj-symmetric-bimodules] there is a fully faithful functor $J\\colon\\operatorname{Mod}_{\\mathcal R}(\\mathcal C)\\to\\mathcal B$, sending $M$ to the bimodule with right action $\\rho_M=\\gamma_M\\circ\\beta_{M,\\mathcal R}$. This fixes both the objects and the morphisms to which the bimodule tensor will be applied.",
+   "uses": [
+    "lem-sfb-bimod-monoidal",
+    "lem-sfb-modobj-symmetric-bimodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "Opening two sentences; sentence beginning \"By [lem-sfb-modobj-symmetric-bimodules]\"."
+   }
+  },
+  {
+   "text": "Define $M\\boxtimes N$ to be the left module obtained from $JM\\odot JN$ by forgetting its right action. Its underlying object and left action are the coequalizer and the action through $M$ in [lem-sfb-symmetric-bimod-tensor]. Substitute $\\rho_M=\\gamma_M\\circ\\beta_{M,\\mathcal R}$ from [lem-sfb-modobj-symmetric-bimodules] into the first parallel map; the two maps are exactly the displayed maps defining the relative tensor product. The same tensor lemma says $JM\\odot JN$ is symmetric. Thus [def-sfb-symmetric-bimod-module-iso] supplies a bimodule isomorphism $\\theta_{M,N}\\colon J(M\\boxtimes N)\\xrightarrow{\\sim}JM\\odot JN$ whose underlying map and inverse are identities.",
    "uses": [
     "lem-sfb-symmetric-bimod-tensor",
     "lem-sfb-modobj-symmetric-bimodules",
     "def-sfb-symmetric-bimod-module-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "Sentences asserting closure of symmetric bimodules and the identity isomorphism; final sentence identifying the coequalizer."
+   }
+  },
+  {
+   "text": "For module maps $f\\colon M\\to M'$ and $g\\colon N\\to N'$, define $f\\boxtimes g$ by forgetting the right-linearity of $Jf\\odot Jg$. This is a left-module map because the tensor in [lem-sfb-bimod-monoidal] is a bimodule morphism. Since the $\\theta$ maps above are identities on the underlying objects, one has $\\theta_{M',N'}\\circ J(f\\boxtimes g)=(Jf\\odot Jg)\\circ\\theta_{M,N}$. The identity and composition rules follow from those of the tensor bifunctor in $\\mathcal B$, since module maps are determined by their underlying maps, as in [sk-def-sfb-module-objects]. This defines the tensor bifunctor on module objects.",
+   "uses": [
+    "lem-sfb-bimod-monoidal",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "Last two sentences: restrict the tensor product to module objects; explicit morphism construction."
+   }
+  },
+  {
+   "text": "Take $I=\\mathcal R$ with action $\\mu$, the regular module of [sk-def-sfb-module-objects]. Its attached right action from [lem-sfb-modobj-symmetric-bimodules] is $\\mu\\circ\\beta_{\\mathcal R,\\mathcal R}=\\mu$ by commutativity of $\\mathcal R$. Consequently $JI$ is the regular bimodule, the unit of $\\mathcal B$ in [lem-sfb-bimod-monoidal]. No symmetry hypothesis on the ambient braiding has been used.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-symmetric-bimodules",
+    "lem-sfb-bimod-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "Sentence \"The regular bimodule R is symmetric because R is commutative\"."
+   }
+  },
+  {
+   "text": "Construct the module associator $a_{M,N,P}$ by forgetting the right action in the composite\n$$\nJ((M\\boxtimes N)\\boxtimes P)\\xrightarrow{\\theta_{M\\boxtimes N,P}}\nJ(M\\boxtimes N)\\odot JP\\xrightarrow{\\theta_{M,N}\\odot 1}\n(JM\\odot JN)\\odot JP\\xrightarrow{a^{\\mathcal B}}\nJM\\odot(JN\\odot JP)\\xrightarrow{1\\odot\\theta_{N,P}^{-1}}\nJM\\odot J(N\\boxtimes P)\\xrightarrow{\\theta_{M,N\\boxtimes P}^{-1}}\nJ(M\\boxtimes(N\\boxtimes P)).\n$$\nHere $a^{\\mathcal B}$ is the natural bimodule associator of [lem-sfb-bimod-monoidal], and all comparisons are the identity isomorphisms of [def-sfb-symmetric-bimod-module-iso]. Take the left unitor to underlie $J(I\\boxtimes M)\\xrightarrow{\\theta_{I,M}}JI\\odot JM=\\mathcal R\\odot JM\\xrightarrow{l^{\\mathcal B}}JM$, and the right unitor to underlie $J(M\\boxtimes I)\\xrightarrow{\\theta_{M,I}}JM\\odot JI\\xrightarrow{r^{\\mathcal B}}JM$. The inverse composites are bimodule maps as well, so these are module isomorphisms. They are the required constraints induced from bimodules.",
+   "uses": [
+    "lem-sfb-bimod-monoidal",
+    "def-sfb-symmetric-bimod-module-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "First two sentences and final two sentences: constraints induced from bimodules; explicit construction instead of invoking transport."
+   }
+  },
+  {
+   "text": "Check naturality, pentagon and triangle using explicit comparison maps. For a parenthesized expression $T$ in module variables and $I$, write $T^{\\mathcal B}$ for the expression obtained by replacing each variable $M$ by $JM$, $I$ by $\\mathcal R$, and $\\boxtimes$ by $\\odot$. Define $c_T\\colon J(T)\\xrightarrow{\\sim}T^{\\mathcal B}$ by $c_M=1$, $c_I=1$ using step 4, and\n$$\nc_{U\\boxtimes V}=(c_U\\odot c_V)\\circ\\theta_{U,V}.\n$$\nFor module arrows $f\\colon U\\to U'$ and $g\\colon V\\to V'$, step 3 and bifunctoriality give\n$$\nc_{U'\\boxtimes V'}\\circ J(f\\boxtimes g)\\circ c_{U\\boxtimes V}^{-1}\n=(c_{U'}\\circ Jf\\circ c_U^{-1})\\odot(c_{V'}\\circ Jg\\circ c_V^{-1}).\n$$\nFor composable arrows $h,k$, insertion of $c_T^{-1}c_T=1$ at the intermediate expression gives the conjugate of $J(k\\circ h)$ as the composite of their conjugates; identities conjugate to identities. Substituting the composite in step 5 and cancelling its two outer $\\theta$ pairs gives\n$$\nc_{U\\boxtimes(V\\boxtimes W)}\\circ J(a_{U,V,W})\\circ c_{(U\\boxtimes V)\\boxtimes W}^{-1}\n=a^{\\mathcal B}_{U^{\\mathcal B},V^{\\mathcal B},W^{\\mathcal B}},\n$$\nwhere naturality of $a^{\\mathcal B}$ moves $c_U,c_V,c_W$ past the middle associator. Substitution of the two unitor composites gives\n$$\nc_U\\circ J(l_U)\\circ c_{I\\boxtimes U}^{-1}=l^{\\mathcal B}_{U^{\\mathcal B}},\\qquad\nc_U\\circ J(r_U)\\circ c_{U\\boxtimes I}^{-1}=r^{\\mathcal B}_{U^{\\mathcal B}},\n$$\nusing naturality of the bimodule unitors. Applying the tensor and composition formulas to the five edges of the module pentagon identifies its two paths with the two paths of the bimodule pentagon. Applying them to the triangle identifies its associator followed by $1\\boxtimes l$ with the bimodule associator followed by $1\\odot l^{\\mathcal B}$, and its $r\\boxtimes1$ path with $r^{\\mathcal B}\\odot1$. These paths agree by [lem-sfb-bimod-monoidal]. For naturality, step 3 gives natural $\\theta$; composing its naturality equations with those for the bimodule associator and each unitor gives naturality of the three composites in step 5. Finally, equality of the resulting underlying maps is equality of module morphisms by [sk-def-sfb-module-objects]. Thus the displayed relative tensor and regular unit satisfy all monoidal axioms.",
+   "uses": [
+    "lem-sfb-bimod-monoidal",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+    "place": "Last two sentences: full verification of the asserted monoidal structure."
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-symmetric-bimod-tensor",
+  "lem-sfb-bimod-monoidal",
   "lem-sfb-modobj-symmetric-bimodules",
-  "def-sfb-symmetric-bimod-module-iso"
+  "lem-sfb-symmetric-bimod-tensor",
+  "def-sfb-symmetric-bimod-module-iso",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-relative-tensor.proof.md",
+  "place": "Whole proof, with the bimodule fact identified in Mathlib and transport expanded explicitly."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative tensor product of module objects over a commutative monoid in a braided monoidal category",
+   "results": "ModuleCat.MonoidalCategory.tensorObj_def, tensorObj, tensorObj_carrier, braiding_hom_apply, braiding_inv_apply; PresheafOfModules.Monoidal.tensorObj.",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary modules or presheaf modules, not modules internal to an arbitrary braided monoidal category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.monoidalCategory, CategoryTheory.Bimod.monBicategory, Bimod.tensorBimod",
+   "results": "Zero hits; loogle: unknown identifier 'CategoryTheory.Mod.monoidalCategory'.",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle rejected an unknown identifier; this result establishes no absence claim. The later valid semantic, Loogle and source searches supply the evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|tensorBimod|monBicategory",
+   "results": "25 hits in CategoryTheory/Monoidal, including fullMonoidalSubcategory and wide-subcategory monoidal structures; this broad search was truncated before the Bimod file.",
+   "date": "2026-10-16",
+   "verdict": "no match in these hits; targeted searches below locate the bimodule tool."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative tensor product module objects monoidal structure",
+   "results": "ModuleCat.MonoidalCategory.tensorObj, instMonoidalCategoryStruct, tensorHom_def, tensorUnit_carrier, tensorObj_isModule; PresheafOfModules.monoidalCategoryStruct.",
+   "date": "2026-10-16",
+   "verdict": "no match: these specialize the ambient category to ordinary modules or presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal modules over a commutative algebra object in a braided monoidal category form a monoidal category via balanced coequalizers",
+   "results": "LightCondensed.instMonoidalCategoryLightCondMod; CategoryTheory.Mod_.instCategory and Mod_.regular; ModuleCat.monoidalCategory; FGModuleCat.instIsMonoidalModuleCatIsFG.",
+   "date": "2026-10-16",
+   "verdict": "no match: Mod_.instCategory is only the underlying category, and the monoidal hits concern specialized ambient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"tensor\"",
+   "results": "Twelve hits, all ordinary TensorProduct or AlgebraTensorModule constructions (including instModule, leftModule, map, lift, rid).",
+   "date": "2026-10-16",
+   "verdict": "no match: no internal-module relative tensor or symmetric-bimodule embedding."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeTensor|toBimod|fullyFaithfulToBimod|IsSymmetric|monoidalCategory",
+   "results": "On CategoryTheory/Monoidal/Mod.lean, two hits from MonoidalCategory in the opening context (lines 19 and 22); no tensor or symmetric-bimodule construction. The single-file output format omits the filename; the file was read directly.",
+   "date": "2026-10-16",
+   "verdict": "no match: Mod.lean defines module objects and their category, not the asserted relative monoidal structure."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -61,5 +180,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-category"
+ "unit": "sk-prop-sfb-module-category",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-relative-tensor",
+  "worker": "stage1",
+  "summary": "Kept the statement and the braided (not necessarily symmetric) hypotheses. Added the general Mathlib bimodule-monoidal leaf and made the tensor bifunctor, regular unit, induced constraints and coherence check explicit. Read all three imported symmetric-bimodule dependencies, the current blueprint chapter/unit texts, and the pinned Mathlib construction. No project declaration matches. The returned imported item lacked chapter/unit metadata. Both sandbox nodes bind to sec-proetale-coefficients/sk-prop-sfb-module-category; the source-verbatim chapter/unit records and item binding now agree with the synchronized shared baseline. The new Mathlib leaf carries created.by/date/group/item in the sandbox; normal delivery currently strips by/date/group, a packaging defect documented in report.md. Second reading clarified the leaf notation, supplied explicit conjugation identities for tensor/composition/constraints in step 6, and corrected the invalid-query verdict.",
+  "blueprint": "Steps 1 and 5 realize the opening bimodule-monoidal assertion; step 2 realizes symmetric closure, the identity comparison, and the displayed coequalizer; steps 3-6 expand the final assertion of a monoidal structure with regular unit. Step 4 realizes the commutativity check for the regular bimodule.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-245a66940",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-245a66940 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, all cited statements, current blueprint route, and cited Mathlib sources. Verified all six construction/coherence steps, hypotheses, balanced maps, unitors, small cases, duplicate candidates, and dependency acyclicity. No repairs or off-route tool uses needed. Concrete checks recorded in review.md."
+ }
 }
