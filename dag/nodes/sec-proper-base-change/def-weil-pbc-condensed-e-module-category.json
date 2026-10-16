@@ -496,32 +496,26 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse",
-  "declaration": "Profinite.continuousCoefficientRingObj",
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing",
+  "declaration": "Profinite.isCommMonObj_continuousCoefficientRingObj",
   "declarations": [
-   "Profinite.continuousCoefficientRingPresheaf",
-   "Profinite.isSheaf_continuousCoefficientRingPresheaf",
-   "Profinite.continuousCoefficientRingSheaf",
-   "Profinite.continuousCoefficientRingObj",
-   "AlgebraicGeometry.ProEtale.continuousCoefficientRingPresheaf",
-   "AlgebraicGeometry.ProEtale.isSheaf_continuousCoefficientRingPresheaf",
-   "AlgebraicGeometry.ProEtale.continuousCoefficientRingSheaf"
+   "Profinite.isCommMonObj_continuousCoefficientRingObj"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientUniverse.lean",
-  "statement": "abbrev continuousCoefficientRingObj : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousCoefficientCommRing.lean",
+  "statement": "instance isCommMonObj_continuousCoefficientRingObj : IsCommMonObj (continuousCoefficientRingObj T)",
   "branch": "newtargets-dag",
-  "by": "NV",
-  "date": "2026-10-15",
+  "by": "M",
+  "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B) universe-interface repair: the recorded Profinite.continuousMapRingObj and scheme continuousMapRingSheaf require T : Type 0, excluding coefficients in the common universe bound. This module supplies the same explicit ULift C(S,T) and ULift C(V,T), pointwise operations and precomposition for T : Type u. The condensed ring is fed to the existing condensedRingObj, internal module, finite-presentation, constructibility, derived-operation, adjunction and base-change definitions, reused without replacement by downstream modules. The stage-3 second reader removed the unused MorphismDefs re-export; the sole direct user imports that framework explicitly. No site universes are equated and no smallness hypothesis is added."
+  "note": "Maintenance repair of the scheme-universe coefficient interface. Publicly reexports ContinuousCoefficientUniverse (all seven original coefficient definitions and sheaf lemmas) and the archived MorphismDefs framework; adds the proved pointwise commutativity instance for every T : Type u with CommRing T. Import this module and open scoped CategoryTheory.Obj to use the unchanged coefficient ring, internal module categories, bounded constructible operations and specified exchange. A side-only companion is needed because nt_compile uses published live artifacts for modules that also exist in live. No coefficient definition, universe, natural statement or target signature changes. See coord/reports/NU/maintenance-condensed-e-realization.md."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e2301cad4",
-  "group": "NV",
+  "reviewer": "MAINT-NU-1792133673",
+  "group": "M",
   "result": "pass",
-  "note": "Wrote review.md. Verified immutable files, all statement dependencies, canonical comparison, universe repair, edge cases, docstrings, and records. Both modules compile cleanly through scompile.py. No fixes required."
+  "note": "Maintenance validation: matched the existing continuousMapRingObj instance; compiled the companion and a downstream import separately with lean_file.sh (60 s per file). Checked arbitrary coefficient universe, ring-object synthesis, bounded constructible category, pullback, pushforward, adjunction, composition and the specified base-change map. The new instance has only standard axioms."
  },
  "reviewed_proof": {
   "date": "2026-10-16",
