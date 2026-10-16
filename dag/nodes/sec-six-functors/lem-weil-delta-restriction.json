@@ -390,5 +390,39 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-7aea8575a (reviewer sub-agent of L); spot-checked: Reviewed item, unit route, complete proof, every cited DAG statement, and cited literature locations. Hypotheses, base-change morphism, coefficient categories, derived Hom restriction, evaluation transpose, pro-etale scope, locality criterion, edge cases, searches, and DAG acyclicity all check out. No new nodes or repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DeltaRestriction",
+  "declaration": "AlgebraicGeometry.Etale.delta_restriction",
+  "declarations": [
+   "CategoryTheory.restrictionDualEvaluation",
+   "CategoryTheory.restrictionDualDelta",
+   "CategoryTheory.DualDeltaRestriction",
+   "AlgebraicGeometry.Etale.deltaRestrictionTensorIso",
+   "AlgebraicGeometry.Etale.deltaRestrictionMap",
+   "AlgebraicGeometry.Etale.deltaRestrictionDualizingIso",
+   "AlgebraicGeometry.Etale.delta_restriction",
+   "AlgebraicGeometry.Etale.isIso_delta_iff_etale_cover",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionTensorIso",
+   "AlgebraicGeometry.ProEtale.delta_restriction",
+   "AlgebraicGeometry.Etale.deltaRestrictionBraiding",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionBraiding",
+   "AlgebraicGeometry.Etale.deltaRestrictionPairingBraiding",
+   "AlgebraicGeometry.ProEtale.deltaRestrictionPairingBraiding"
+  ],
+  "file": "lean/Sheaf/Paper/DeltaRestriction.lean",
+  "statement": "theorem delta_restriction {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {W Y : Scheme.{u}} (j : W ⟶ Y) (aY : Y ⟶ Spec (.of k)) [Etale j] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated (j ≫ aY)] [LocallyOfFiniteType (j ≫ aY)] [QuasiCompact (j ≫ aY)] : DualDeltaRestriction (upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory (derivedTensor (ModuleCat.{u + 1} Λ) Y) (derivedHom (ModuleCat.{u + 1} Λ) Y) (derivedTensor (ModuleCat.{u + 1} Λ) W) (derivedHom (ModuleCat.{u + 1} Λ) W) (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)) (derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ)) (fun K L ↦ ((deltaRestrictionBraiding Λ aY).app K).app L) (fun K L ↦ ((deltaRestrictionBraiding Λ (j ≫ aY)).app K).app L) (deltaRestrictionTensorIso Λ j) (dualizingComplex (ModuleCat.{u + 1} Λ) aY) (dualizingComplex (ModuleCat.{u + 1} Λ) (j ≫ aY)) (deltaRestrictionDualizingIso Λ j aY)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-339759ce7",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement dependencies, source correspondence, canonical constructions, universes, edge cases, docstrings, and verbatim signature. Immutable module compiled cleanly through scompile.py in sandbox and library contexts. No fixes needed."
  }
 }
