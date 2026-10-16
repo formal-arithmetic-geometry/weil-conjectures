@@ -10,7 +10,9 @@ public import Mathlib.RingTheory.Ideal.GoingUp
 public import Mathlib.Algebra.MvPolynomial.Funext
 public import Mathlib.RingTheory.Smooth.Flat
 public import Mathlib.RingTheory.Flat.TorsionFree
-public import WeilConjectures.RingTheory.BertiniInterface
+public import WeilConjectures.RingTheory.BertiniConnected
+public import WeilConjectures.RingTheory.BertiniHypersurface
+public import WeilConjectures.RingTheory.BertiniSmooth
 public import WeilConjectures.RingTheory.BertiniCurveAux
 public import WeilConjectures.RingTheory.BertiniCurveLinear
 
@@ -21,11 +23,12 @@ Let `A` be a smooth finite type domain over an algebraically closed field `k`, w
 differentials of rank `d ≥ 2`, `B` a finite étale `A`-algebra with connected spectrum, and `S` a
 finite nonempty set of maximal ideals of `A`. We find an ideal `J` of `A` contained in every
 `m ∈ S` such that `A ⧸ J` is a smooth domain of dimension one over `k` and `B ⧸ J B` has connected
-spectrum (`Algebra.Smooth.exists_quotient_curve_connectedSpace'`).
+spectrum (`Algebra.Smooth.exists_quotient_curve_connectedSpace`).
 
 The proof cuts down by one generic hypersurface section at a time: a generic member `f` of a
 linear system with base locus `S` gives a smooth domain `A ⧸ (f)` of one less dimension
-(interface lemmas (S) and (D)), over which `B ⧸ f B` stays connected (interface lemma (C)).
+(`Algebra.Smooth.exists_ne_zero_forall_notMem_sq` and `Algebra.Smooth.quotient_span_singleton`),
+over which `B ⧸ f B` stays connected (`exists_ne_zero_forall_connectedSpace_quotient`).
 
 ## References
 
@@ -118,17 +121,20 @@ theorem Algebra.Smooth.exists_mem_quotient_span_singleton_connectedSpace {k A B 
       Module.rank (A ⧸ Ideal.span {f}) Ω[(A ⧸ Ideal.span {f})⁄k] = (e + 1 : ℕ) ∧
       ConnectedSpace (PrimeSpectrum (B ⧸ (Ideal.span {f}).map (algebraMap A B))) := by
   obtain ⟨M, v, hgen, hvS, hcot, hbase⟩ := exists_linearSystem_of_finite (k := k) S hS hSmax
-  obtain ⟨h, hh0, hh⟩ :=
-    Algebra.Smooth.exists_ne_zero_forall_notMem_sq v S hS hgen hSmax hvS hcot
   have : Algebra.Smooth k B := Algebra.Smooth.comp k A B
-  have : IsDomain B := Algebra.Smooth.isDomain_of_connectedSpace' (k := k)
+  have : IsDomain B := Algebra.Smooth.isDomain_of_connectedSpace (k := k)
   have hdim : 2 ≤ ringKrullDim A := by
     have := Algebra.Smooth.natCast_le_ringKrullDim (k := k) (A := A) (n := e + 2)
       (by rw [hA]; push_cast; ring)
     exact le_trans (by exact_mod_cast (by omega : 2 ≤ e + 2)) this
+  have hS0 : ⊥ ∉ S := fun hbot ↦ by
+    rw [ringKrullDim_eq_zero_of_isField (Ring.isField_iff_maximal_bot.mpr (hSmax ⊥ hbot))]
+      at hdim
+    norm_num at hdim
+  obtain ⟨h, hh0, hh⟩ :=
+    Algebra.Smooth.exists_ne_zero_forall_notMem_sq v S hS hgen hvS hcot hS0
   obtain ⟨a, ha0, ha⟩ := exists_ne_zero_forall_connectedSpace_quotient (k := k) (B := B) hdim v S
-    hS
-    hSmax hSne hvS hbase
+    hS hSmax hSne hvS hbase
   obtain ⟨b, hb⟩ : ∃ b : Fin M → k, MvPolynomial.eval b (h * a) ≠ 0 := by
     by_contra! H
     exact mul_ne_zero hh0 ha0 (MvPolynomial.funext fun x ↦ by simpa using H x)
@@ -136,14 +142,8 @@ theorem Algebra.Smooth.exists_mem_quotient_span_singleton_connectedSpace {k A B 
   set f := ∑ i, b i • v i with hf
   have hfS (m : Ideal A) (hm : m ∈ S) : f ∈ m :=
     Ideal.sum_mem _ fun i _ ↦ Submodule.smul_of_tower_mem _ _ (hvS m hm i)
-  have hfsq := hh b (left_ne_zero_of_mul hb)
-  have hf0 : f ≠ 0 := by
-    obtain ⟨m, hm⟩ := hSne
-    intro h0
-    refine hfsq m (hSmax m hm) (hfS m hm) ?_
-    rw [← hf, h0]
-    exact zero_mem _
-  obtain ⟨hsm, hrk⟩ := Algebra.Smooth.quotient_span_singleton hA f hf0 hfsq
+  obtain ⟨hsm, hrk⟩ :=
+    Algebra.Smooth.quotient_span_singleton hA f (hh b (left_ne_zero_of_mul hb))
   have hconnB : ConnectedSpace (PrimeSpectrum (B ⧸ (Ideal.span {f}).map (algebraMap A B))) := by
     rw [Ideal.map_span, Set.image_singleton]
     exact ha b (right_ne_zero_of_mul hb)
@@ -153,7 +153,7 @@ theorem Algebra.Smooth.exists_mem_quotient_span_singleton_connectedSpace {k A B 
     exact (smul_eq_zero.1 hx).resolve_right one_ne_zero
   have : ConnectedSpace (PrimeSpectrum (A ⧸ Ideal.span {f})) :=
     PrimeSpectrum.connectedSpace_quotient_of_isIntegral hinj _
-  have : IsDomain (A ⧸ Ideal.span {f}) := Algebra.Smooth.isDomain_of_connectedSpace' (k := k)
+  have : IsDomain (A ⧸ Ideal.span {f}) := Algebra.Smooth.isDomain_of_connectedSpace (k := k)
   exact ⟨f, hfS, this, hsm, hrk this, hconnB⟩
 
 /-- The conclusion of the ring-level Bertini theorem is invariant under replacing `A ⧸ J` and
@@ -170,7 +170,7 @@ theorem Algebra.Smooth.curve_connectedSpace_of_equiv {k R R' T T' : Type u} [Fie
     PrimeSpectrum.connectedSpace_of_ringEquiv e'⟩
   rw [← KaehlerDifferential.rank_eq_of_algEquiv e, h₃]
 
-/-- The induction behind `Algebra.Smooth.exists_quotient_curve_connectedSpace'`, on the rank
+/-- The induction behind `Algebra.Smooth.exists_quotient_curve_connectedSpace`, on the rank
 `e + 1` of the differentials. (blueprint: `lem-zl-bertini-finite-cover-curve`) -/
 theorem Algebra.Smooth.exists_quotient_curve_connectedSpace_aux {k : Type u} [Field k]
     [IsAlgClosed k] (e : ℕ) :
@@ -232,7 +232,7 @@ contained in every `m ∈ S` such that `A ⧸ J` is a smooth curve (a smooth dom
 differentials have rank one) and `B ⧸ J B` has connected spectrum. This is the ring-level form of
 the Bertini argument of Stacks 0FD5, 0FD6, 0G4F.
 (blueprint: `lem-zl-bertini-finite-cover-curve`) -/
-theorem Algebra.Smooth.exists_quotient_curve_connectedSpace' {k A B : Type u} [Field k]
+theorem Algebra.Smooth.exists_quotient_curve_connectedSpace {k A B : Type u} [Field k]
     [IsAlgClosed k] [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A]
     [Algebra.Smooth k A] {d : ℕ} (hd : 2 ≤ d) (hA : Module.rank A Ω[A⁄k] = d)
     [CommRing B] [Algebra A B] [Algebra.Etale A B] [Module.Finite A B] [Algebra k B]

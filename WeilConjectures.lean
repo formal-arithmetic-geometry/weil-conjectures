@@ -328,6 +328,7 @@ public import WeilConjectures.AlgebraicGeometry.BasicPropertiesIdentity
 public import WeilConjectures.AlgebraicGeometry.BasicPropertiesLinearity
 public import WeilConjectures.AlgebraicGeometry.BasicPropertiesRestriction
 public import WeilConjectures.AlgebraicGeometry.Bertini
+public import WeilConjectures.AlgebraicGeometry.BertiniAux
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.BoundsFiberDegreesComp
 public import WeilConjectures.AlgebraicGeometry.CechNerve
@@ -3594,7 +3595,14 @@ public import WeilConjectures.RingTheory.AssociatedGradedFiniteType
 public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import WeilConjectures.RingTheory.AssociatedPrimePowerQuotient
 public import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
+public import WeilConjectures.RingTheory.BertiniConnected
+public import WeilConjectures.RingTheory.BertiniCurve
+public import WeilConjectures.RingTheory.BertiniCurveAux
+public import WeilConjectures.RingTheory.BertiniCurveLinear
+public import WeilConjectures.RingTheory.BertiniHypersurface
 public import WeilConjectures.RingTheory.BertiniNoether
+public import WeilConjectures.RingTheory.BertiniSmooth
+public import WeilConjectures.RingTheory.BertiniSmoothAux
 public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat
 public import WeilConjectures.RingTheory.CoefficientResidueSection

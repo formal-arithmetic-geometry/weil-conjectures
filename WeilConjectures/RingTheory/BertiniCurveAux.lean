@@ -21,7 +21,7 @@ public import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 /-!
 # Auxiliary results for the ring-level Bertini argument
 
-- `Algebra.Smooth.isDomain_of_connectedSpace'`: a smooth algebra over a field with connected
+- `Algebra.Smooth.isDomain_of_connectedSpace`: a smooth algebra over a field with connected
   spectrum is a domain.
 - `KaehlerDifferential.rank_eq_of_algEquiv`: the rank of the module of differentials is
   invariant under isomorphisms of algebras.
@@ -39,7 +39,7 @@ open scoped TensorProduct
 /-- (E) A smooth algebra over a field with connected spectrum is a domain: its local rings are
 regular, hence domains, so its spectrum is irreducible, and it is reduced.
 (blueprint: `lem-zl-bertini-finite-cover-curve`) -/
-theorem Algebra.Smooth.isDomain_of_connectedSpace' {k A : Type u} [Field k] [CommRing A]
+theorem Algebra.Smooth.isDomain_of_connectedSpace {k A : Type u} [Field k] [CommRing A]
     [Algebra k A] [Algebra.Smooth k A] [ConnectedSpace (PrimeSpectrum A)] : IsDomain A := by
   have := Algebra.FiniteType.isNoetherianRing k A
   have : IsReduced A := Algebra.Smooth.isReduced_of_field k A

@@ -135,7 +135,7 @@ theorem exists_isClosedImmersion_connectedSpace_pullback {k₀ : Type u} [Field 
   have : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))) :=
     IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
   refine ⟨Spec (.of (A ⧸ J)), Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)) ≫ e.inv,
-    inferInstance, inferInstance, ?_, inferInstance, ?_, ?_, m, hm, Φ, hΦ⟩
+    inferInstance, inferInstance, ?_, IrreducibleSpace.connectedSpace _, ?_, ?_, m, hm, Φ, hΦ⟩
   · rw [Category.assoc, he, ← Spec.map_comp]
     exact hsm1
   · intro s hs

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.TensorProduct.Quotient
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
-public import WeilConjectures.RingTheory.BertiniInterface
+public import WeilConjectures.RingTheory.BertiniCurve
 
 /-!
 # Auxiliary results for the Bertini argument
