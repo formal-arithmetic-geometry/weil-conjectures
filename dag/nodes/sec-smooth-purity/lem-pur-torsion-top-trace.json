@@ -23,15 +23,235 @@
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation",
   "def-asd-compactifiable",
+  "def-weil-pure-dimension",
   "def-amb-etale-compact-support",
   "def-weil-pbc-derived-categories",
   "lem-asd-etale-finite-twist-pullback",
   "def-kun-derived-tensor",
   "lem-amb-affine-space-top-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Dimension bound and top composition. Apply [lem-pur-compact-top-localization] to $h$ and the arbitrary sheaf $G$: all its geometric fibres have dimension at most $d$, so $R^ih_!G=0$ for $i>2d$. Its corner comparison gives the displayed top-degree composition isomorphism whenever $g$ has relative dimension $e$. All restricted maps used below are separated finite type and compactifiable: over an affine open of the Noetherian base they are open restrictions of the supplied compactification, or maps between separated finite-type schemes over that base; [thm-nagata-compactification] gives compactifications in the latter case. Use the coherent composition comparisons of [lem-amb-etale-compact-comparisons] throughout, not an unspecified isomorphism.",
+   "uses": [
+    "lem-pur-compact-top-localization",
+    "thm-nagata-compactification",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.1–2.2, 2.7; XVII 5.2.8.1"
+   }
+  },
+  {
+   "text": "Dense Cohen–Macaulay reduction and charts. By [lem-sbc-fibre-cohen-macaulay-locus-open] the fibre Cohen–Macaulay locus $U\\subset V$ is open. By [lem-pur-cohen-macaulay-field-extension], this is equally the geometric-fibre locus and its formation commutes with arbitrary Noetherian base change; thus its geometric fibres are Cohen–Macaulay. At the generic point of each fibre component the fibre local ring has dimension zero; the empty regular sequence gives depth at least zero and [lem-weil-pbc-depth-le-support-dimension], with that local ring as its own module, gives depth at most zero. Thus $U$ meets every component in a dense open. By [lem-sbc-nowhere-dense-closed-fibre-dimension] the complementary fibres have dimension strictly less than $d$. Hence [lem-pur-compact-top-localization] identifies top cohomology on $U$ with top cohomology on $V$. Work first over affine opens $S_0\\subset S$. The CM chart hypotheses are supplied pointwise by [lem-sbc-cohen-macaulay-flat-quasi-finite-chart], and its affine specialization [lem-sbc-affine-base-flat-quasi-finite-chart-core] gives an open cover of $U|_{S_0}$ by $U_i$ with flat locally quasi-finite locally finitely presented maps $q_i:U_i\\to\\mathbf A^{n_i}_{S_i}$ over affine opens $S_i\\subset S_0$. Shrink $U_i$ to affine neighbourhoods. These maps are separated and quasi-compact (maps of affine schemes), hence quasi-finite and finitely presented. Affine space is smooth of the indicated relative dimension by [sbc-lem-affine-space-smooth]. The equidimensional-fibre local-dimension statement [lem-sbc-equidimensional-open-local-dimension], applied to each pure $d$-dimensional geometric fibre, and the chart dimension calculation [lem-sbc-flat-quasi-finite-smooth-local-dimension] then force $n_i=d$. The Noetherian schemes involved are quasi-compact, so take finite covers for all subsequent coequalizers.",
+   "uses": [
+    "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-sbc-nowhere-dense-closed-fibre-dimension",
+    "lem-pur-compact-top-localization",
+    "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+    "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+    "lem-pur-cohen-macaulay-field-extension",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.3–2.4, 2.9(c),(d)"
+   }
+  },
+  {
+   "text": "Local construction. Write $a_d:\\mathbf A^d_{S_0}\\to S_0$. For a flat quasi-finite chart $q:Z\\to\\mathbf A^d_{S_0}$ define, using the corner comparison of [lem-pur-compact-top-localization],\n$$b(q,F)=\\operatorname{tr}_{a_d,F}\\circ R^{2d}a_{d!}(\\tau_{q,a_d^*F(d)}).$$\nHere $\\tau_q$ is the weighted sheaf trace of [lem-pur-quasifinite-flat-weighted-trace] and $\\operatorname{tr}_{a_d,F}$ is the degree-zero map of the ordered affine-space counit in [lem-amb-affine-space-top-trace] with coefficients $R$, tensored with $F$. This tensor description gives the same ordered line integrations: the proper projection formula [lem-amb-proper-coproducts-projection] and the slice extension tensor map [lem-weil-pbc-ringed-slice-extension-tensor] supply the projection formula for each line compactification. The curve functional [lem-pur-curve-kummer-degree-functional] identifies the line trace with extension from $\\mathbf A^1$ into $\\mathbf P^1$, normalized by $c_1(\\mathcal O(1))\\mapsto1$. For arbitrary $F$, the top tensor identification follows at every geometric stalk from [lem-kun-bounded-tensor-tor-spectral-sequence]: for a bounded complex with no positive cohomology tensored with a module in degree zero, only $\\operatorname{Tor}_0(H^0(-),F)$ contributes in degree zero. The derived tensor/stalk comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to the geometric-point morphism, and [lemma-weil-pbc-geometric-stalk-conservative] makes that top sheaf comparison an isomorphism. Thus $b(q,F)$ is a sheaf map, natural in $F$ and compatible with base change. Composition of quasi-finite flat maps inside the chart is compatible with $b$ by the composition identity for $\\tau$.",
+   "uses": [
+    "lem-pur-compact-top-localization",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-curve-kummer-degree-functional",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.8, 2.9(a),(b); 1.1.6.1; XVII 5.2.9"
+   }
+  },
+  {
+   "text": "Independence of the chart. Compare $b(q,F)$ and $b(q',F)$ on geometric stalks of the base, using [thm-cbc-finite-torsion]. The fibres of the relative Cohen–Macaulay locus are Cohen–Macaulay and, since the locus meets every component of each pure $d$-dimensional fibre densely, its nonempty fibres are themselves pure of dimension $d$; over the algebraically closed residue field $k$ one can apply [lem-pur-flat-coordinate-chain]. Its closed-point neighbourhoods cover: a nonempty closed complement in this Noetherian space has a minimal nonempty closed subset $Z$. For every $z\\in Z$, its closure is a nonempty closed subset of $Z$, hence equals $Z$. The T0 axiom makes two points with the same closure equal, so $Z$ is a singleton closed point, contrary to the chosen neighbourhoods. By the cover coequalizer in [lem-pur-compact-top-localization], it suffices to treat consecutive charts differing in one coordinate. Permute that coordinate to the first position; the trace is invariant under this permutation by [lem-amb-linear-trace-invariance]. For $d=0$ the chart to $\\operatorname{Spec}k$ is unique, so there is nothing to compare. Assume henceforth $d\\geq1$. Put $E=\\mathbf A^{d-1}_k$ and let $x:Z\\to E$ be the common remaining coordinates. Both charts factor $x$ as a flat quasi-finite map to $\\mathbf A^1_E$ followed by its projection. That projection is smooth by [sbc-lem-affine-space-smooth] and flat by [lem-pc-smooth-flat], so $x$ is flat by [lem-pc-flat-compose]. On each geometric fibre the same quasi-finite flat chart to the affine line gives local topological dimension one by [lem-sbc-flat-quasi-finite-smooth-local-dimension]; [lem-sbc-constant-local-dimension-components] then gives pure dimension one. Thus $x$ is a compactifiable flat family of pure one-dimensional curves; compactifiability follows from the separated finite-type hypothesis as in Step 1. By [lem-pur-curve-kummer-degree-functional] and its compatibility with quasi-finite flat source maps, both inner degree-two traces are $\\delta_{x,F_E(d-1)}$, where $F_E$ is the pullback to $E$ of the coefficient module on $\\operatorname{Spec}k$. Indeed $x^*(F_E(d-1))(1)=x^*F_E(d)$, so the curve functional has exactly the coefficient twist required by the ordered integration. The two composites are consequently the identical expression $\\operatorname{tr}_{E/k}\\circ R^{2(d-1)}(E/k)_!(\\delta_{x,F_E(d-1)})$. Equality on all geometric stalks gives equality of the sheaf maps: apply [lemma-weil-pbc-geometric-stalk-conservative] to their equalizer inclusion. This argument asserts equality only of sheaf morphisms.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-pur-flat-coordinate-chain",
+    "lem-pur-compact-top-localization",
+    "lem-amb-linear-trace-invariance",
+    "lem-pur-curve-kummer-degree-functional",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pc-flat-compose",
+    "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-smooth-flat",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.9(b), pp. 555–556"
+   }
+  },
+  {
+   "text": "Gluing and extension. On a Cohen–Macaulay source the local maps $b(q_i,F)$ agree on overlaps by Step 4 and are compatible with extension from each overlap by the quasi-finite composition assertion in Step 3. They therefore annihilate the two-map difference in the cover coequalizer of [lem-pur-compact-top-localization], giving a unique $\\operatorname{tr}_{h|_U,F}$. Refining two covers to their union proves independence of the cover. Define $\\operatorname{tr}_{h,F}$ by composing this map with the inverse dense-open comparison of Step 2. Intersections of two admissible dense opens give the same comparison, so the result is independent of the reduction. The same coequalizer argument glues across the affine opens of $S$. Each local formula is natural in $F$ and commutes with base change; after base change the original good open is the relative Cohen–Macaulay locus by [lem-pur-cohen-macaulay-field-extension], and it is still fibrewise dense by the same generic-point argument as in Step 2. Thus [thm-cbc-finite-torsion] and uniqueness give the required base-change identity. Restriction along an open immersion, or a separated etale finite-type source map, follows by composing each local chart with that map and using the quasi-finite trace law of [lem-pur-quasifinite-flat-weighted-trace]. Its etale weights are one, so [lem-asd-etale-compact-support-normalization] gives exactly extension by zero or the specified sum-extension counit.",
+   "uses": [
+    "lem-pur-compact-top-localization",
+    "thm-cbc-finite-torsion",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-pur-cohen-macaulay-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.9(c),(d), 2.10"
+   }
+  },
+  {
+   "text": "Composition, with the non-etale interchange made explicit. To compare $hg$ with the iterated trace, use the cover and dense-open comparisons of [lem-pur-compact-top-localization] to restrict $h$ to its good open, and $g$ to its good open over that open. The inverse image under $g$ of a fibrewise dense open for $h$ is fibrewise dense for $hg$: [lem-weil-pbc-flat-lfp-open] says the image of every nonempty open in a geometric fibre is open, so it meets the chosen dense open downstairs. Intersect also with the good open for $g$: every nonempty open in a composite geometric fibre has open nonempty image in the intermediate fibre by flat openness; its intersection with a nonempty $g$-fibre is open nonempty and meets the fibrewise dense good open for $g$. Thus this intersection remains dense in the composite fibre. The dimension formula [lem-sbc-flat-composite-fibre-dimension-at-point] gives relative dimension $d+e$ on the composite and [lem-sbc-nowhere-dense-closed-fibre-dimension] gives the strict dimension bound on the excluded part. For the iterated trace, apply dense restriction first to the arbitrary sheaf $R^{2e}g_!G$ under $h$, then under the restricted $g$; thus it is legitimate to test on this same open.\n\nThe composite of the restricted maps has Cohen–Macaulay fibres: for a local ring in a geometric fibre, the flat local map from the local ring in the intermediate fibre has Cohen–Macaulay base and Cohen–Macaulay closed fibre. The latter is a residue-field extension of a fibre of the restricted $g$, so [lem-pur-cohen-macaulay-field-extension] applies. The depth formula [lem-weil-pbc-flat-local-depth-formula] and dimension formula [lem-weil-pbc-flat-height-formula] identify both depth and local-ring dimension with the respective sums, hence prove their equality. Flatness of the composite is [lem-pc-flat-compose].\n\nLocally choose $u:V\\to\\mathbf A^d_S$ and $v:W\\to\\mathbf A^e_V$ quasi-finite flat charts. Base change $u$ to $u':\\mathbf A^e_V\\to\\mathbf A^{d+e}_S$. The composite chart is $u'v$. Expanding its trace and the two iterated traces reduces their equality to interchanging the weighted trace for $u$ with the affine-space trace of dimension $e$. Check the interchange before applying the outer integration along $\\mathbf A^d_S\\to S$. Write $T=\\mathbf A^d_S$, the target of $u$. By [thm-cbc-finite-torsion] and the stalk conservativity node, pull the interchange back to each geometric point $\\operatorname{Spec}k\\to T$, with $k$ algebraically closed. The fibre of $u$ is a disjoint union of spectra of finite local Artinian $k$-algebras $B_j$. By [prop-weil-pbc-universal-homeomorphism-topos] each such thickened point and its affine space have the same etale topoi as their reductions. The affine-space traces identify by the base-change assertion in [lem-amb-affine-space-top-trace], whereas both weighted maps are multiplication by $\\dim_kB_j$, by [lem-pur-quasifinite-flat-weighted-trace]. These scalar multiplications commute with integration. Taking the sum proves the interchange; associativity of [lem-amb-etale-compact-comparisons] now gives precisely $\\operatorname{tr}_{hg}=\\operatorname{tr}_h\\circ R^{2d}h_!(\\operatorname{tr}_g)$. In dimension zero the construction is $\\tau_h$, and when $h$ is etale this is the sum-of-sheets counit; on affine space it is the specified ordered line integration, including the identity at rank zero.",
+   "uses": [
+    "lem-pur-compact-top-localization",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-sbc-nowhere-dense-closed-fibre-dimension",
+    "thm-cbc-finite-torsion",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-amb-etale-compact-comparisons",
+    "lem-pur-cohen-macaulay-field-extension",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-pc-flat-compose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.9(d),(e), especially 2.9.2–2.9.3 and the Artinian-length calculation, pp. 557–558"
+   }
+  },
+  {
+   "text": "Truncation and the unit derived trace. Put $C_N=Rh_!R_V(d)[2d]$. Step 1 gives $C_N\\in D^{\\leq0}$, and $H^0(C_N)=R^{2d}h_!R_V(d)$. The truncation triangle in [lem-sf-derived-truncation-triangle], with the standard t-structure of [def-sbc-standard-tstructure-derived-category], supplies $C_N\\to H^0(C_N)$. Compose with the sheaf trace to define $t_{h,N}$. This extension is unique: in the triangle $A\\to C_N\\to H^0(C_N)\\to A[1]$, both $A$ and $A[1]$ have strictly negative cohomology, so t-structure orthogonality makes their Hom groups into a degree-zero sheaf vanish. Hence $\\operatorname{Hom}(H^0(C_N),R_S)\\xrightarrow{\\sim}\\operatorname{Hom}(C_N,R_S)$. In particular equalities of unit derived traces follow from equalities of their top sheaf maps.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.13, interpreting the top trace as a derived morphism"
+   }
+  },
+  {
+   "text": "Projection formula and arbitrary coefficient complexes. Factor $h=rj$ as in the statement. The proper projection map is invertible by [lem-amb-proper-coproducts-projection]. The slice tensor isomorphism [lem-weil-pbc-ringed-slice-extension-tensor] and exactness [lem-weil-pbc-extension-by-zero-exact] give the corresponding derived projection map for $j_!$; it preserves K-flatness because tensoring against an acyclic complex reduces, by this same slice formula, to tensoring against its acyclic restriction. Compose the two maps to obtain the canonical compact-support projection isomorphism. Its composition and base-change coherence follow by expanding the proper maps as counit mates and using [lem-weil-pbc-mate-pasting] and [lem-weil-pbc-ringed-exchange-tensor-coherence]; on the open factor both orders send a local pure tensor to the same tensor extended by zero. These are comparisons of the specified maps.\n\nFor $A,K$ in the statement define $T^A_{h,K}$ by the inverse of this projection isomorphism followed by $1_K\\otimes_R^L t_{h,N}$. All maps exist in $D(S_{\\mathrm{et}},A)$: compute tensors with complexes of $(A,R)$-bimodules and the compact-support construction with $A$-module complexes. The tensor maps are balanced $A$-linear maps; the proper projection mate and the open-extension map commute with that same left $A$-action already on these models. Thus one does not infer $A$-linear equality from forgetting coefficients. Naturality in $K$ is immediate from the construction. For a degree-zero $F$, the top tensor calculation of Step 3 identifies $H^0(T_{h,F})$ with the original sheaf trace; locally this is the weighted sum of the same affine integrations, so the equality descends through Step 5.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.13.1–2.13.2; XVII 5.2.9"
+   }
+  },
+  {
+   "text": "Derived composition and normalization. For $hg$, the shifted unit compact-support complex lies in $D^{\\leq0}$ by Step 1. Expanding the iterated derived trace with the projection formula of Step 8 gives a map from this same complex to $R_S$. Its $H^0$ is exactly the top-corner composite of Step 6, by the top tensor calculation of Step 3. Step 7's Hom bijection therefore identifies the unit derived traces. Tensor this actual equality with $K$, using the projection-formula composition coherence of Step 8, to get the derived composition equality for arbitrary bounded $K$. The base-change identity follows in the same way from the sheaf identity, exact inverse image [prop-weil-pbc-inverse-image-modules-exact], [thm-cbc-finite-torsion], and the tensor pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. In relative dimension zero the unit trace is the weighted counit, and for an etale map it is the exact sum counit [lem-asd-etale-compact-support-normalization]; tensoring it gives the same derived etale counit. For affine space Step 3 and the unit Hom bijection identify the map with [lem-amb-affine-space-top-trace].",
+   "uses": [
+    "lem-pur-compact-top-localization",
+    "lem-sf-derived-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category",
+    "thm-cbc-finite-torsion",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-affine-space-top-trace",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 2.13.2 and 3.2.4; the truncation argument supplies derived equality without testing derived morphisms on stalks"
+   }
+  },
+  {
+   "text": "Independence of the annihilator. For $N\\mid N'$ set $R'=\\mathbf Z/N'$. The twist map [lem-asd-etale-finite-twist-pullback] identifies $R\\otimes^L_{R'}R'_V(d)$ with $R_V(d)$ because the twist is locally free. The projection formula of Step 8 consequently identifies $R\\otimes^L_{R'}C_{N'}$ with $C_N$; no flatness of $R$ over $R'$ is assumed. Both resulting maps to $R_S$ are maps from $C_N\\in D^{\\leq0}$. Their $H^0$ maps coincide: in dimension zero the weights in [lem-pur-quasifinite-flat-weighted-trace] are integers independent of the coefficient ring; for the line this is the Kummer reduction compatibility in [lem-pur-curve-kummer-degree-functional]; the ordered affine-space compositions, coordinate comparison, cover coequalizer and dense restriction in Steps 3–5 preserve those equalities. The upper-edge tensor calculation of Step 3 identifies $H^0(R\\otimes^L_{R'}C_{N'})$ with $R\\otimes_{R'}H^0(C_{N'})$, so this is precisely the claimed equality on top sheaves. Step 7 proves $R\\otimes^L_{R'}t_{h,N'}=t_{h,N}$. Tensor associativity now gives, for any $NA=0$ and bounded $A$-complex $K$,\n$$K\\otimes^L_{R'}t_{h,N'}=K\\otimes_R^L(R\\otimes^L_{R'}t_{h,N'})=K\\otimes_R^L t_{h,N}.$$\nThe comparison is $A$-linear on the bimodule models from Step 8. These maps are therefore independent of the chosen common annihilator, with exactly the power-map twist identifications stated in the item.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-quasifinite-flat-weighted-trace",
+    "lem-pur-curve-kummer-degree-functional",
+    "lem-sf-derived-truncation-triangle",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+    "place": "XVIII 1.1.1.2, 1.1.3.5–1.1.3.6, 2.9 construction and 2.13.1–2.13.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-top-localization",
+  "thm-nagata-compactification",
+  "lem-amb-etale-compact-comparisons",
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sbc-nowhere-dense-closed-fibre-dimension",
+  "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+  "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+  "lem-pur-cohen-macaulay-field-extension",
+  "sbc-lem-affine-space-smooth",
+  "lem-pur-quasifinite-flat-weighted-trace",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pur-curve-kummer-degree-functional",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-cbc-finite-torsion",
+  "lem-pur-flat-coordinate-chain",
+  "lem-amb-linear-trace-invariance",
+  "lem-pc-flat-compose",
+  "lem-pc-smooth-flat",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sf-derived-truncation-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-asd-etale-finite-twist-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/sga/SGA4-expose-18_reedition.pdf",
+  "place": "XVIII 1.1.3–1.1.8, 2.1–2.10 and 2.13; derived coherence and annihilator independence expanded by truncation and the canonical projection maps"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -107,12 +327,206 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-finite-smooth-adjunction-general-base",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-torsion-top-trace",
+  "worker": "stage1",
+  "summary": "Kept the statement, found no attachment, and followed the SGA local chart construction, single-coordinate comparison, gluing and Artinian-length interchange. Five statement-only prerequisites isolate genuine cohomology, weighted trace, curve-degree coordinate-chain and geometric Cohen–Macaulay inputs. Reused the existing Cohen–Macaulay locus/charts, affine trace, ordinary compact-support and tensor comparison nodes. Expanded the derived trace using truncation and checked annihilator independence in the A-linear category.",
+  "blueprint": "Seed target ancestry has no imported blueprint node (blueprint_refs.py ancestor returns None). This realizes the finite normalized-trace input of sk-thm-purity-transport Step 1, via lem-pur-finite-smooth-adjunction-general-base; it changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "def-weil-pbc-depth",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-nowhere-dense-closed-fibre-dimension",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-amb-linear-trace-invariance",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "prop-weil-pbc-universal-homeomorphism-topos",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic supporting interface used exactly as stated in the cited proof step (ordinary etale cohomology, local flat geometry, truncations or tensor/compact-support comparison); no node in sk-thm-purity-transport supplies it, and this does not replace a unit step."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Flat composition and the local flat depth/dimension formulas justify the flat curve family in Step 4 or the Cohen–Macaulay composite fibre in Step 6. These generic algebraic interfaces do not supply or replace the normalized-trace construction."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Flat composition and the local flat depth/dimension formulas justify the flat curve family in Step 4 or the Cohen–Macaulay composite fibre in Step 6. These generic algebraic interfaces do not supply or replace the normalized-trace construction."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Flat composition and the local flat depth/dimension formulas justify the flat curve family in Step 4 or the Cohen–Macaulay composite fibre in Step 6. These generic algebraic interfaces do not supply or replace the normalized-trace construction."
+   },
+   {
+    "node": "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+    "why": "Generic local geometry: supplies the CM hypotheses of the affine chart, affine-space smoothness/flatness, or the equivalence between pure fibre dimension and local topological dimension used in Steps 2 and 4; no normalized trace is constructed by these nodes."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic local geometry: supplies the CM hypotheses of the affine chart, affine-space smoothness/flatness, or the equivalence between pure fibre dimension and local topological dimension used in Steps 2 and 4; no normalized trace is constructed by these nodes."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic local geometry: supplies the CM hypotheses of the affine chart, affine-space smoothness/flatness, or the equivalence between pure fibre dimension and local topological dimension used in Steps 2 and 4; no normalized trace is constructed by these nodes."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic local geometry: supplies the CM hypotheses of the affine chart, affine-space smoothness/flatness, or the equivalence between pure fibre dimension and local topological dimension used in Steps 2 and 4; no normalized trace is constructed by these nodes."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Generic local geometry: supplies the CM hypotheses of the affine chart, affine-space smoothness/flatness, or the equivalence between pure fibre dimension and local topological dimension used in Steps 2 and 4; no normalized trace is constructed by these nodes."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact inverse image for ordinary etale modules with constant coefficients permits passage to H^0 in the derived base-change comparison in Step 9; this is a generic functorial exactness input, not a trace or comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-amb-etale-compact-comparisons",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sbc-nowhere-dense-closed-fibre-dimension",
+  "lem-sbc-affine-base-flat-quasi-finite-chart-core",
+  "lem-sbc-flat-quasi-finite-smooth-local-dimension",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-cbc-finite-torsion",
+  "lem-amb-linear-trace-invariance",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-sf-derived-truncation-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-cohen-macaulay-flat-quasi-finite-chart",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "sbc-lem-affine-space-smooth",
+  "lem-pc-smooth-flat",
+  "lem-sbc-constant-local-dimension-components",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-07d4191d2",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-07d4191d2 (reviewer sub-agent of L); spot-checked: Read all mathematics, cited sources, and target routes. Repaired three minor faults: missing Noetherian hypothesis on the curve covariance target, dimension-zero étale-counit wording, and missing exact-inverse-image citation. SGA XVII–XVIII support the construction; target unchanged. Detailed checks and 35 accepted tool requests are in review.md; two corrected JSON files are under fixes/dag/nodes/sec-smooth-purity.; 2 file(s) fixed by the reviewer"
+ }
 }
