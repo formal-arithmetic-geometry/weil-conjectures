@@ -21,6 +21,8 @@ untwisted, line-valued pairing satisfies
   `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`
   (`sk-thm-frobenius` (a)): `β_K` is a morphism of Weil objects, and the degreewise pairing is
   Frobenius invariant.
+- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator_eq`
+  (`thm-pod-equivariance-of-the-twisted-pairing`): `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`
   (`cor-pod-untwisted-similitude`): the untwisted similitude with factor `q^d`.
 -/
@@ -106,11 +108,18 @@ theorem degreewisePoincarePairing_frobeniusOperator (sq : IsPullback g a a h)
     frobeniusOperator_shiftWeilDatum_comp_shiftFunctorZero']
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
+/-- Blueprint `thm-pod-equivariance-of-the-twisted-pairing`: Equivariance of the twisted
+pairing. This is also blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine,
+reciprocity (a).
 
 **Frobenius invariance of the degreewise pairing**: `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`,
 when every endomorphism of `Λ_Y` is a scalar (as for `Y = Spec k`, `k` separably closed), so
-that geometric Frobenius acts trivially on the value ring `Λ`. -/
+that geometric Frobenius acts trivially on the value ring `Λ`. As in the blueprint proof, `β_K`
+is a morphism of Weil objects
+(`AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing`, Steps 1 and 2), whose
+degree-zero part gives `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = F(⟨x, y⟩_i)`
+(`AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`, Step 3),
+and `F` acts trivially on the canonical datum of `Λ`. -/
 theorem degreewisePoincarePairing_frobeniusOperator_eq (sq : IsPullback g a a h)
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)

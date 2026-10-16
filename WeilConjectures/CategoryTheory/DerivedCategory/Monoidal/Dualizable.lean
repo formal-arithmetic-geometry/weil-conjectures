@@ -85,4 +85,33 @@ theorem isDualizable_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyG
     ⟨{ rightDual := (kFlatQh A).obj Y, exact := ExactPairing.map (kFlatQh A) X Y }⟩
   exact IsDualizable.of_iso ((quotientCompQhIso A).app P) h
 
+/-- A bounded complex `P` of objects with chosen right duals is paired in the derived category
+with its termwise dual complex `P.rightDual`: the image of the chain-level pairing
+`CochainComplex.exactPairingRightDual` is an exact pairing of `Q.obj P` and
+`Q.obj P.rightDual`. -/
+theorem nonempty_exactPairing_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] [∀ n, HasRightDual (P.X n)] :
+    Nonempty (ExactPairing (Q.obj P) (Q.obj P.rightDual)) := by
+  let _ := CochainComplex.exactPairingRightDual P a b
+  let H := HomotopyCategory.quotient A (.up ℤ)
+  have hP (n : ℤ) : IsDualizable (P.X n) := ⟨inferInstance⟩
+  have hP' (n : ℤ) : IsDualizable (P.rightDual.X n) :=
+    ⟨{ rightDual := P.X (-n)
+       exact := (BraidedCategory.exactPairing_swap (P.X (-n)) (P.X (-n))ᘁ :) }⟩
+  let X : (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P a b (fun n ↦ (hP n).flat))⟩
+  let Y : (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory :=
+    ⟨H.obj P.rightDual, (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (CochainComplex.kFlat_of_bounded_of_flat P.rightDual (-b) (-a) (fun n ↦ (hP' n).flat))⟩
+  let _ : ExactPairing ((ObjectProperty.ι _).obj X) ((ObjectProperty.ι _).obj Y) :=
+    ExactPairing.map H P P.rightDual
+  let _ : ExactPairing X Y := ExactPairing.ofFullyFaithful (ObjectProperty.ι _) X Y
+  let _ := Functor.Monoidal.ofLaxMonoidal (kFlatQh A)
+  let _ : ExactPairing ((kFlatQh A).obj X) ((kFlatQh A).obj Y) :=
+    ExactPairing.map (kFlatQh A) X Y
+  exact ⟨exactPairingCongr (X' := (kFlatQh A).obj X) (Y' := (kFlatQh A).obj Y)
+    ((quotientCompQhIso A).app P).symm
+    ((quotientCompQhIso A).app P.rightDual).symm⟩
+
 end DerivedCategory
