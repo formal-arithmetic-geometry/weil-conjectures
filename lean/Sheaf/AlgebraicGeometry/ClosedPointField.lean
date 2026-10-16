@@ -13,6 +13,8 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.ZetaSeries
 
+import WeilConjectures.PointCount
+
 /-!
 # Residue fields of closed points
 
@@ -54,6 +56,47 @@ theorem closedPoint_iff_residueField_trdeg_zero_and_finite
         (IsSepClosed K → x ∈ closedPoints X →
           Module.Finite K (X.residueField x) ∧
           IsPurelyInseparable K (X.residueField x) ∧
-          IsSepClosed (X.residueField x))) := sorry
+          IsSepClosed (X.residueField x))) := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  -- The Jacobson criterion turns finite residue extensions back into closed points.
+  have hfinite : x ∈ closedPoints X ↔ Module.Finite K (X.residueField x) := by
+    constructor
+    · exact f.finite_residueField_of_isClosed x
+    · intro h
+      have := h
+      have : LocallyOfFiniteType (X.fromSpecResidueField x ≫ f) := by
+        rw [← f.specMap_residueFieldAlgebraMap x]
+        apply (HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)).mpr
+        change Algebra.FiniteType K (X.residueField x)
+        infer_instance
+      exact isClosed_singleton_iff_locallyOfFiniteType.mpr
+        (locallyOfFiniteType_of_comp (X.fromSpecResidueField x) f)
+  -- Compose the base residue-field map, the affine comparison, and the stalk map.
+  have hess : (f.residueFieldAlgebraMap x).EssFiniteType := by
+    have h₁ : (algebraMap K (f x).asIdeal.ResidueField).EssFiniteType := by
+      rw [RingHom.essFiniteType_algebraMap]
+      infer_instance
+    have h₂ : (Scheme.Spec.residueFieldIso (.of K) (f x)).inv.hom.EssFiniteType :=
+      (RingHom.FiniteType.of_surjective _
+        (Scheme.Spec.residueFieldIso (.of K) (f x)).symm.commRingCatIsoToRingEquiv.surjective
+        ).essFiniteType
+    have h₃ := (LocallyOfFiniteType.stalkMap f x).residueFieldMap
+    exact (h₁.comp h₂).comp h₃
+  have : Algebra.EssFiniteType K (X.residueField x) := hess
+  refine ⟨?_, hfinite, ?_⟩
+  · rw [trdeg_eq_zero_iff]
+    constructor
+    · intro hx
+      have := hfinite.mp hx
+      infer_instance
+    · intro hx
+      have := hx
+      exact hfinite.mpr Algebra.finite_of_essFiniteType_of_isAlgebraic
+  · intro hK hx
+    have := hK
+    have := hfinite.mp hx
+    exact ⟨inferInstance, inferInstance,
+      Algebra.IsAlgebraic.isSepClosed (F := K) (E := X.residueField x)⟩
 
 end AlgebraicGeometry
