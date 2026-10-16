@@ -3,44 +3,124 @@
  "blueprint": {
   "is": "prop-sf-pf-reduction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compatibility with finite reduction",
- "statement": "In the setting of [def-sf-datum], let $m\\le n$ and let\n$K\\in D^b_{ctf}(X,A_{E,n})$, $L\\in D^b_{ctf}(Y,A_{E,n})$ with reductions\n$K_m,L_m$. Then the square comparing $\\operatorname{PF}_{f,K,L}$ and\n$\\operatorname{PF}_{f,K_m,L_m}$ through the finite-reduction\ncompatibilities of $Rf_!$, $-\\otimes^L$ and $Lf^*$ commutes; hence\n$\\operatorname{PF}_{f,K,L}$ is an isomorphism if and only if\n$\\operatorname{PF}_{f,K_m,L_m}$ is.",
+ "statement": "In the six-functor datum of [def-sf-datum], let $f:X\\to Y$ be a separated finite-type morphism, let $1\\le m\\le n$, and let $K\\in D^b_{ctf}(X,A_{E,n})$ and $L\\in D^b_{ctf}(Y,A_{E,n})$. Write $K_m=K\\otimes^L_{A_{E,n}}A_{E,m}$ and $L_m=L\\otimes^L_{A_{E,n}}A_{E,m}$ for their finite reductions. Then the square comparing $\\operatorname{PF}_{f,K,L}$ and $\\operatorname{PF}_{f,K_m,L_m}$ through the finite-reduction compatibilities of $Rf_!$, $-\\otimes^L$ and $Lf^*$ commutes; hence $\\operatorname{PF}_{f,K,L}$ is an isomorphism if and only if $\\operatorname{PF}_{f,K_m,L_m}$ is.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.md",
   "place": "node prop-sf-pf-reduction, order 1885"
  },
  "stmt_deps": [
-  "def-sf-datum"
+  "def-sf-datum",
+  "def-sf-pf",
+  "lem-fix-operation-reduction",
+  "lem-fix-compact-support-coefficient-change"
  ],
  "proof": [
   {
-   "text": "Use the pullback and tensor comparisons of\n[lem-fix-operation-reduction] and the compact-support comparison\nof [lem-fix-compact-support-coefficient-change]. Transpose both\nroutes around the reduction square for the projection transformation\nof [def-sf-pf]. Each route pulls back the first factor, applies\nthe counit, and tensors with the reductions of the remaining factors.\nAssociativity of derived tensor and compatibility of that counit\nwith coefficient change identify these composites. Thus the square\ncommutes as a square of the specified maps. This argument does not\ninfer equality of morphisms merely from equality on geometric stalks.\nBoth horizontal maps are isomorphisms by [thm-sf-pf-finite];\nin particular the asserted equivalence of invertibility holds.",
+   "text": "First check the coefficient domains, without invoking axioms (A3) or (A5) of the datum. By [lem-sf-proetale-constructible-origin], choose bounded constructible étale representatives of $K,L$ and retain their comparison isomorphisms as étale-origin witnesses. By clause (ii) of [lem-sf-comparison-tor-amplitude], the representatives have the same finite Tor amplitudes. The constructible variant of [lem-sf-flat-model] applies because $X,Y$ are finite type over a field, hence Noetherian: choose bounded flat constructible étale models $P,Q$. With $A=A_{E,n}$ and $B=A_{E,m}$, their termwise tensors with $B$ represent the derived reductions. Each term remains flat over $B$, since $(P^i\\otimes_A B)\\otimes_B N=P^i\\otimes_A N$ for a $B$-module sheaf $N$ and restriction of scalars is exact; it remains constructible since on a common finite stratification its values are finite modules tensored with the finite ring $B$. Thus the reductions are bounded constructible and have finite Tor amplitude, with the same bounds. The same models show that $K\\otimes_A^L Lf^*L$ is bounded constructible of finite Tor amplitude: inverse image is exact for constant coefficients, takes each flat locally constant term on a stratum to such a term on its inverse image, and the bounded total tensor model has amplitude bounded by the sums of the two intervals. Clause (i) of [lem-sf-comparison-tor-amplitude] returns these objects and their finite-Tor properties to the pro-étale site. All operations below are taken on these witnessed realizations.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-flat-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $\\rho_T=-\\otimes_A^L B$ on each scheme $T$, and suppress the subscript when its scheme is determined. Let $c_f(M):\\rho Rf_{!,A}M\\xrightarrow{\\sim}Rf_{!,B}\\rho M$ be [lem-fix-compact-support-coefficient-change], and let $s$ and $t$ denote the tensor and pullback comparisons of [lem-fix-operation-reduction]. Define $u$ by $\\rho(Rf_{!,A}K\\otimes_A^L L)\\xrightarrow{s}\\rho Rf_{!,A}K\\otimes_B^L L_m\\xrightarrow{c_f(K)\\otimes1}Rf_{!,B}K_m\\otimes_B^L L_m$. Define $v$ by $\\rho Rf_{!,A}(K\\otimes_A^L Lf_A^*L)\\xrightarrow{c_f(K\\otimes Lf_A^*L)}Rf_{!,B}\\rho(K\\otimes_A^L Lf_A^*L)\\xrightarrow{Rf_{!,B}(s,t)}Rf_{!,B}(K_m\\otimes_B^L Lf_B^*L_m)$. Both $u$ and $v$ are isomorphisms by the cited statements and the domains checked in step 1. The square to be proved is precisely\n$$\n\\begin{array}{ccc}\n\\rho(Rf_{!,A}K\\otimes_A^L L)&\\xrightarrow{\\rho(\\operatorname{PF}_{A})}&\\rho Rf_{!,A}(K\\otimes_A^L Lf_A^*L)\\\\\n{\\scriptstyle u}\\downarrow&&\\downarrow{\\scriptstyle v}\\\\\nRf_{!,B}K_m\\otimes_B^L L_m&\\xrightarrow{\\operatorname{PF}_{B}}&Rf_{!,B}(K_m\\otimes_B^L Lf_B^*L_m).\n\\end{array}\n$$\nIn particular its upper arrow is the reduction of the level-$n$ map.",
    "uses": [
     "lem-fix-operation-reduction",
-    "lem-fix-compact-support-coefficient-change",
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scheme $Y$ is finite type over $k$, hence quasi-compact and quasi-separated, so [thm-nagata-compactification] supplies a compactification $f=pj$. Put $M=j_!K$. Before applying coefficient comparison to $p$, check its input domain: by exactness of $j_!$ in [lem-cbc-proetale-extension-zero], $M$ is bounded, and extending a finite constructible stratification of $K$ by the closed complement, on which extension by zero is zero, shows that $M$ is constructible. For a sheaf $N$ of $A$-modules on $\\overline X$, [lem-cbc-extension-zero-projection-formula] gives $M\\otimes_A^L N\\cong j_!(K\\otimes_A^L j^{-1}N)$; exactness of $j_!$ therefore gives the same Tor interval as $K$. The tensor argument of step 1 gives the finite-Tor domain for $M\\otimes_A^L Lp_A^*L$ as well. By [lem-sf-proetale-constructible-origin], these bounded constructible objects admit the required étale-origin witnesses. Thus the proper-factor coefficient comparisons below are applied on their stated domains. The definition [def-exchange-projection], with the notation [def-sf-pf], writes $\\operatorname{PF}_{A}=Rp_{*,A}(\\gamma_A)\\circ\\pi_A$, where $\\gamma_A:j_!K\\otimes_A^L Lp_A^*L\\to j_!(K\\otimes_A^L Lf_A^*L)$ is the specified open-immersion tensor isomorphism and $\\pi_A$ is the transpose of $(\\varepsilon_A\\otimes1)\\circ\\mu_A$. To check the proper direct-image part, write $F_A=Lp_A^*$, $G_A=Rp_{*,A}$, and likewise at $B$, and orient the pullback comparison as $t:F_B\\rho\\xrightarrow{\\sim}\\rho F_A$. Write $c_M:\\rho G_A M\\to G_B\\rho M$ for the coefficient comparison; for proper $p$, use the compactification $(\\operatorname{id},p)$ in [def-compact-support-direct-image-detailed], so this is the compact-support comparison. Its counit compatibility in [lem-fix-compact-support-coefficient-change] and [lem-fix-operation-reduction] is the typed identity\n$$\n\\varepsilon_{B,\\rho M}\\circ F_B(c_M)=\\rho(\\varepsilon_{A,M})\\circ t_{G_AM}.\n$$\nAfter identifying the tensor and pullback targets, the transpose under $F_B\\dashv G_B$ of each route in the direct-image comparison square is the following single composite:\n$$\n\\begin{aligned}\nF_B\\rho(G_AM\\otimes_A^L L)\n&\\xrightarrow{t}\\rho F_A(G_AM\\otimes_A^L L)\n\\xrightarrow{\\rho\\mu_A}\\rho(F_AG_AM\\otimes_A^L F_AL)\\\\\n&\\xrightarrow{\\rho(\\varepsilon_A\\otimes1)}\\rho(M\\otimes_A^L F_AL)\n\\xrightarrow{s}\\rho M\\otimes_B^L\\rho F_AL\n\\xrightarrow{1\\otimes t_L^{-1}}\\rho M\\otimes_B^L F_B\\rho L.\n\\end{aligned}\n$$\nFor the route through $\\rho\\pi_A$, this follows by its defining transpose and the displayed counit identity for the target comparison. For the route through $\\pi_B$, substitute the displayed identity for $\\varepsilon_B\\circ F_Bc_M$; coherence of $s,t,\\mu$ gives exactly the written composite. The required coherence and preservation of the units and counits are explicit clauses of [lem-fix-operation-reduction]. Adjunction therefore equates these two routes. For the open-immersion factor, write $d_H:\\rho j_{!,A}H\\xrightarrow{\\sim}j_{!,B}\\rho H$, the compact-support comparison for $j$ (its compactification is $(j,\\operatorname{id})$). Reduction of the specified open tensor map satisfies\n$$\nd_{K\\otimes Lf_A^*L}\\circ\\rho\\gamma_A\n=\\gamma_B\\circ(d_K\\otimes1)\n$$\nafter inserting $s,t$ on the source and target. Indeed $\\gamma$ is the open tensor identification of [def-exchange-projection], built from the tensor comparison and the extension-by-zero adjunction; reducing each tensor, unit and counit arrow gives the corresponding $B$-arrow by [lem-fix-operation-reduction], in the same order. Thus the two sides are the same composite, including the pullback-composition identification $Lj^*Lp^*=Lf^*$. Composing this identity with the direct-image identity proves $v\\circ\\rho(\\operatorname{PF}_A)=\\operatorname{PF}_B\\circ u$, as required. As required by the warning in [lem-sf-generating-class-determination], this equality of natural transformations has been checked from the constructions; no equality is inferred merely from values on generators.",
+   "uses": [
+    "def-exchange-projection",
     "def-sf-pf",
-    "thm-sf-pf-finite"
+    "def-compact-support-direct-image-detailed",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-fix-operation-reduction",
+    "lem-sf-generating-class-determination",
+    "thm-nagata-compactification",
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The commutative square and the inverses of $u,v$ show that $\\rho(\\operatorname{PF}_A)$ is invertible if and only if $\\operatorname{PF}_B$ is invertible. This cancellation concerns the reduced map. For the asserted equivalence with the original map, apply [thm-sf-pf-finite] at $A$ and $B$ to the étale representatives from step 1: both $\\operatorname{PF}_A$ and $\\operatorname{PF}_B$ are isomorphisms, so the claimed equivalence holds. For the pro-étale realizations use the witnessed-realization clause of [lem-weil-finite-compact-projection-formula], which states precisely the same invertibility there. The representatives satisfy its bounded constructibility and finite-Tor hypotheses by step 1. This completes both the commutativity and the original-map invertibility assertion.",
+   "uses": [
+    "thm-sf-pf-finite",
+    "lem-weil-finite-compact-projection-formula"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-fix-operation-reduction",
-  "lem-fix-compact-support-coefficient-change",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
   "def-sf-pf",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-fix-operation-reduction",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-flat-model",
+  "lem-sf-generating-class-determination",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-nagata-compactification",
   "thm-sf-pf-finite"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/prop-sf-pf-reduction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-pf-reduction/_section.md",
+  "place": "Proof paragraph: reduction square, mate comparison, and final invertibility sentence"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|reductionModIdeal",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived compact support projection formula morphism commutes with derived extension of scalars along finite coefficient ring quotients.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|reductionModIdeal",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the derived compact support projection formula map with finite coefficient reduction between quotient coefficient categories",
+   "results": "Eight hits: Profinite.NobelingProof.CC_comp_zero, Profinite.NobelingProof.CC_exact, Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.πs', Profinite.NobelingProof.GoodProducts.smaller_factorization, Profinite.IndexFunctor.map_comp_π_app, Profinite.NobelingProof.πs, AdicCompletion.transitionMap_comp_reduceModIdeal. These concern profinite locally constant functions and ordinary adic module quotient maps, not derived compact-support projection transformations or coefficient-category comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -69,5 +149,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-pf-reduction"
+ "unit": "sk-prop-sf-pf-reduction",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-sf-pf-reduction",
+  "worker": "stage1",
+  "summary": "Second reader repaired the reduction-square type and invertibility inference, added the explicit étale-origin and Tor-amplitude domain checks, and expanded the counit-mate calculation and open-factor compatibility. No new nodes. The proposition statement remains the first worker's standalone source-faithful repair. Maintainer reader supplied the existing Nagata citation, checked the intermediate j_!K domain using exact extension by zero and its projection isomorphism, and recorded actual Mathlib searches (LeanSearch unavailable).",
+  "blueprint": "The unit proof paragraph: step 1 checks the finite-Tor and coefficient domains tacit in its opening sentence; step 2 writes its reduction square; step 3 expands its counit-tensor mate comparison and open-immersion factor; step 4 follows its closing invocation of the finite projection theorem, distinguishing the reduced map from the original map.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Provides étale-origin witnesses for intrinsic pro-étale bounded constructible objects; the reduction unit does not supply the site-comparison theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Transfers finite Tor amplitude to and from the chosen étale representatives; this domain check is not stated by a node of the reduction unit."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Provides bounded flat constructible models for the explicit domain checks without replacing the reduction-square mate calculation."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Supplies the canonical compact-support coefficient isomorphism and counit compatibility explicitly requested by the source proof; it does not replace the proof of commutativity."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Supplies exactness of extension by zero to check the intermediate proper-factor input domain; no lemma of the reduction unit states this exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-flat-model",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-cbc-proetale-extension-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-ecfed0db4",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-ecfed0db4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route. Repaired the compactification citation, j_!K domain check, and missing search record. The mate calculation and finite-level invertibility argument hold; statement unchanged. Corrected JSON and accepted tool uses are documented in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
