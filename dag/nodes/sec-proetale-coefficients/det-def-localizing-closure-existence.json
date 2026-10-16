@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-def-localizing-closure-existence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The localizing closure exists",
- "statement": "Let $\\Lambda$ be a condensed ring, $X$ a scheme and $\\mathcal S$ a class of objects of\n$D(X_{\\mathrm{proét}},\\Lambda)$ (for instance $\\mathcal S=\\Dctf(X,\\Lambda)$,\n[det-def-sfb-constructible-tor-amplitude]).\n\n1. $D(X_{\\mathrm{proét}},\\Lambda)$ has arbitrary (small) direct sums, computed termwise on\n   complexes, and the direct sum of distinguished triangles is distinguished.\n2. The intersection of all full triangulated subcategories of $D(X_{\\mathrm{proét}},\\Lambda)$\n   that contain $\\mathcal S$, are closed under isomorphisms, and are closed under arbitrary\n   direct sums, is again such a subcategory. It is denoted $\\Loc(\\mathcal S)$; it is the\n   smallest localizing subcategory containing $\\mathcal S$.\n3. $\\Loc(\\mathcal S)$ is closed under direct summands, hence thick; and\n   $\\mathcal S\\subseteq\\mathcal S'\\subseteq\\Loc(\\mathcal S)$ implies\n   $\\Loc(\\mathcal S')=\\Loc(\\mathcal S)$.",
+ "statement": "Let $\\Lambda$ be a condensed ring (not necessarily commutative) [sk-def-sfb-ring-object], $X$ a scheme with its small pro-étale site [def-weil-pbc-proetale-site], and $\\Lambda_X=p_X^*\\Lambda$ its pulled-back ring object [sk-def-sfb-pulled-back-coefficients]. Write $\\mathcal A=\\Mod_{\\Lambda_X}$ for its category of left module objects [sk-def-sfb-module-objects], and $D(X_{\\mathrm{proét}},\\Lambda)=D(\\mathcal A)$ for its unbounded derived category [def-weil-abstract-derived-category]. All small sums and site skeletons use the fixed universe convention [def-weil-size-convention]. Let $\\mathcal S$ be any class of objects of this derived category (for instance, when $\\Lambda$ is commutative, $\\mathcal S=\\Dctf(X,\\Lambda)$ of [det-def-sfb-constructible-tor-amplitude]).\n\n1. $D(X_{\\mathrm{proét}},\\Lambda)$ has arbitrary small direct sums, computed termwise on complexes, and the direct sum of distinguished triangles is distinguished [def-weil-triangulated-category].\n2. The intersection of all full triangulated subcategories of $D(X_{\\mathrm{proét}},\\Lambda)$ that contain $\\mathcal S$, are closed under isomorphisms, and are closed under arbitrary small direct sums, is again such a subcategory. It is denoted $\\Loc(\\mathcal S)$; it is the smallest localizing subcategory containing $\\mathcal S$. Here localizing means full, triangulated, closed under isomorphisms and under these sums.\n3. $\\Loc(\\mathcal S)$ is closed under direct summands, hence thick [pur9-def-thick]; and $\\mathcal S\\subseteq\\mathcal S'\\subseteq\\Loc(\\mathcal S)$ implies $\\Loc(\\mathcal S')=\\Loc(\\mathcal S)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.md",
   "place": "node det-def-localizing-closure-existence, order None",
@@ -19,34 +19,188 @@
   ]
  },
  "stmt_deps": [
-  "det-def-sfb-constructible-tor-amplitude"
+  "sk-def-sfb-ring-object",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-triangulated-category",
+  "pur9-def-thick"
  ],
  "proof": [
   {
-   "text": "(1) The category of $\\Lambda_X$-modules is Grothendieck abelian\n([sk-prop-sfb-module-category]), so direct sums exist and are exact. In the homotopy\ncategory $K(\\Lambda_X)$ the termwise direct sum of complexes is the coproduct, and the\ntermwise direct sum of mapping-cone triangles is the mapping-cone triangle of the direct\nsum. By exactness of direct sums, the acyclic complexes form a localizing subcategory of\n$K(\\Lambda_X)$; for a Verdier quotient by a subcategory closed under coproducts, the quotient\nfunctor preserves coproducts (Neeman, *Triangulated categories*, Lemma 3.2.10). So\n$D(X_{\\mathrm{proét}},\\Lambda)$ has direct sums, computed termwise, and direct sums of\ndistinguished triangles are distinguished.",
-   "uses": [],
-   "elementary": null
+   "text": "Identify the coefficient category with ordinary module sheaves, without assuming commutativity. For a ring object $R=\\Lambda_X$ in tensor abelian sheaves, define on every object $U$ the operations $rs=\\mu_U(r\\otimes s)$ and $1_U=\\eta_U(1)$. The ring-object axioms evaluated on pure tensors give associative unital rings $R(U)$; restrictions preserve these operations. For an internal module $(M,\\gamma)$ put $rm=\\gamma_U(r\\otimes m)$. Conversely a sectionwise left action is a natural family of $\\mathbf Z$-bilinear maps $R(U)\\times M(U)\\to M(U)$, so it extends uniquely to $R\\otimes M\\to M$ by [lem-pc-sites-sheaf-tensor-bilinear-universal], specialized to the constant ring sheaf $\\mathbf Z$. An abelian sheaf is canonically a module over this sheaf: locally a section of $\\mathbf Z$ is an integer, acting by repeated addition. Naturality and additivity imply linearity in those locally constant integers by checking on that cover. Consequently this tensor is the sheafified objectwise $\\otimes_{\\mathbf Z}$ used here, by the same bilinear universal property. Evaluating on pure tensors shows that the module axioms in the two descriptions agree. The two constructions are inverse, also on morphisms (the equation $f\\gamma=\\gamma'(R\\otimes f)$ is exactly sectionwise linearity), giving an identification with the category of sheaves of left modules [def-weil-sheaf-of-modules-category] over the reconstructed ring sheaf. This is just the action definition [sk-def-sfb-module-objects] and the tensor definition [sk-def-sfb-sheaf-tensor]; no commutative-ring-module equivalence is used.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV, definition-sheaf-modules; elementary unpacking of internal actions using the sheaf tensor universal property"
+   }
   },
   {
-   "text": "(2) Each condition (containing $0$ and $\\mathcal S$, closure under isomorphisms, under shifts\nin both directions, under cones of morphisms between members, and under direct sums of\nfamilies of members) is preserved by arbitrary intersections. The whole category is one\nsuch subcategory, so the intersection is over a non-empty collection.",
-   "uses": [],
-   "elementary": null
+   "text": "Choose the small site skeleton and the coefficient universe as in [def-weil-pbc-proetale-site, def-weil-size-convention]. The ring-sheaf Grothendieck theorem [lem-weil-pbc-ring-sheaves-grothendieck] applies to this site and the ring sheaf reconstructed in step 1, including when $\\Lambda$ is noncommutative. Thus $\\mathcal A$ is Grothendieck abelian. Apply [lem-kun-grothendieck-derived-coproducts] to $\\mathcal A$: for every small family of complexes $(K_i)$ its termwise coproduct represents the coproduct of $QK_i$ in $D(\\mathcal A)$. Every derived object is represented by a complex by [def-weil-abstract-derived-category], so these give all the required direct sums, including the empty sum. This proves the existence and termwise assertion of (1).",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q, remark-existence-D (ringed-site example), and Tag 07D9, lemma-derived-products (1)-(2)"
+   }
   },
   {
-   "text": "(3) Eilenberg swindle: let $K=K_1\\oplus K_2\\in\\Loc(\\mathcal S)$ and\n$K^{(\\mathbf N)}=\\bigoplus_{\\mathbf N}K\\in\\Loc(\\mathcal S)$. Regrouping summands gives\n$K_1\\oplus K^{(\\mathbf N)}=K_1\\oplus(K_2\\oplus K_1)^{(\\mathbf N)}\\cong(K_1\\oplus K_2)^{(\\mathbf N)}=K^{(\\mathbf N)}$.\nThe split triangle $K^{(\\mathbf N)}\\to K_1\\oplus K^{(\\mathbf N)}\\to K_1\\xrightarrow{0}K^{(\\mathbf N)}[1]$\nexhibits $K_1$ as a cone of a morphism between members, so $K_1\\in\\Loc(\\mathcal S)$. For the\nlast assertion: $\\Loc(\\mathcal S')$ is localizing and contains $\\mathcal S$, so it contains\n$\\Loc(\\mathcal S)$; conversely $\\Loc(\\mathcal S)$ is localizing and contains $\\mathcal S'$.",
+   "text": "For each distinguished triangle choose a cone-triangle representative $Q(K_i\\xrightarrow{f_i}L_i\\to C(f_i)\\to K_i[1])$, using precisely the characterization in [def-weil-abstract-derived-category]. At degree $r$ the rebracketing of coproducts gives\n$$\\bigoplus_i C(f_i)^r=\\bigoplus_i(L_i^r\\oplus K_i^{r+1})\\cong(\\bigoplus_i L_i^r)\\oplus(\\bigoplus_i K_i^{r+1})=C(\\bigoplus_i f_i)^r.$$\nThe differentials on both sides are the same block matrix $\\begin{pmatrix}\\bigoplus d_{L_i}&\\bigoplus f_i\\\\0&-\\bigoplus d_{K_i}\\end{pmatrix}$; the inclusion, the negative projection, and the shift are preserved by this identification. By the coproduct statement used in step 2 [lem-kun-grothendieck-derived-coproducts], the sum of the chosen triangles is therefore isomorphic to the cone triangle of $\\bigoplus f_i$ in the derived category, hence distinguished. Coproducts of the originally chosen triangle isomorphisms are isomorphisms (sum their inverses). Closure of distinguished triangles under isomorphism proves the rest of (1). This calculation also covers the empty family, yielding the zero cone triangle.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
+    "place": "(1), termwise sum of mapping-cone triangles; cone formula as in Stacks Tag 05RU/05RT"
+   }
+  },
+  {
+   "text": "Define the object predicate $P(K)$ by: $K$ belongs to every full replete triangulated subcategory closed under small sums and containing $\\mathcal S$. The ambient derived category is one such subcategory. Every member of $\\mathcal S$, and the zero object, satisfy $P$. If $P(K)$ holds then $P(K[n])$ holds for every $n\\in\\mathbf Z$, and the same is true after an isomorphism. If two vertices of a distinguished triangle satisfy $P$, they belong to every subcategory in the definition, so its third vertex also belongs to each of them. Likewise, a small family of objects satisfying $P$ has its ambient coproduct in every such subcategory, using (1). Thus the full subcategory on $P$ has all the required closure properties. It is contained in each of the subcategories defining it, which is exactly minimality. This proves (2). This is a pointwise intersection of object predicates in the ambient universe, not a colimit indexed by a proper class; no smallness of $\\mathcal S$ is assumed.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
+    "place": "(2), intersection of closure conditions"
+   }
+  },
+  {
+   "text": "Suppose $K\\cong A\\oplus B$ belongs to $\\Loc(\\mathcal S)$. Set $T=\\bigoplus_{n\\in\\mathbf N}(A\\oplus B)$, which belongs to $\\Loc(\\mathcal S)$ by (1)-(2). There is an isomorphism $A\\oplus T\\cong T$: send the extra $A$ to the $A$-summand of copy $0$, send the $A$-summand of copy $n$ to the $A$-summand of copy $n+1$, and send the $B$-summand of copy $n$ to the $B$-summand of copy $n$. The inverse sends $A_0$ to the extra $A$, $A_{n+1}$ to $A_n$, and $B_n$ to $B_n$; both composites are identities on every coprojection. Hence $T\\oplus A$ belongs to $\\Loc(\\mathcal S)$. The split triangle $T\\xrightarrow{\\mathrm{inl}}T\\oplus A\\xrightarrow{\\mathrm{pr}_2}A\\xrightarrow{0}T[1]$ is distinguished by [lem-sbc-biproduct-triangle-distinguished]. Its first two vertices lie in $\\Loc(\\mathcal S)$, so (2) puts $A$ there. Interchange $A,B$ for the other summand. Thus the localizing closure is thick by the definition [pur9-def-thick].",
+   "uses": [
+    "lem-sbc-biproduct-triangle-distinguished",
+    "pur9-def-thick"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
+    "place": "(3), Eilenberg swindle; split triangle is Stacks Tag 05QT, lemma-split (3)"
+   }
+  },
+  {
+   "text": "If $\\mathcal S\\subseteq\\mathcal S'\\subseteq\\Loc(\\mathcal S)$, the localizing category $\\Loc(\\mathcal S')$ contains $\\mathcal S$, so minimality from (2) gives $\\Loc(\\mathcal S)\\subseteq\\Loc(\\mathcal S')$. Conversely $\\Loc(\\mathcal S)$ is localizing and contains $\\mathcal S'$, so the same minimality gives the opposite inclusion. This proves the last assertion of (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
+    "place": "(3), final two sentences"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-abstract-derived-category",
+  "lem-sbc-biproduct-triangle-distinguished",
+  "pur9-def-thick"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-existence.proof.md",
+  "place": "(1)-(3), with existing Stacks ringed-site and derived-coproduct lemmas replacing the unavailable Neeman citation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.LocalizingSubcategory",
+   "results": "loogle: unknown identifier 'CategoryTheory.Triangulated.LocalizingSubcategory'",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|coproduct.*distinguished|PreservesColimits.*DerivedCategory",
+   "results": "Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean, Mathlib/CategoryTheory/Sites/Over.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; grep hits inspected, existing coproduct and split-triangle nodes are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of a Grothendieck abelian category has arbitrary coproducts computed termwise, their triangles are distinguished, and the intersection localizing closure is thick",
+   "results": "CategoryTheory.IsGrothendieckAbelian.hasExt, DerivedCategory, HasDerivedCategory.standard, DerivedCategory.instCategory, HasDerivedCategory, DerivedCategory.instIsTriangulated, DerivedCategory.TStructure.t, DerivedCategory.instPretriangulated",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated category with coproducts has a smallest thick localizing subcategory containing any collection of objects",
+   "results": "CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Pretriangulated.instHasFiniteCoproducts, CategoryTheory.instAB4OfSize, CategoryTheory.Triangulated.Subcategory, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.ObjectProperty.IsTriangulated",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coproducts and preservation of coproducts by the localization functor from complexes to the derived category of a Grothendieck abelian category",
+   "results": "DerivedCategory.Q, HasDerivedCategory.standard, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.IsGrothendieckAbelian.hasExt, HomologicalComplexUpToQuasiIso.Q, HasDerivedCategory, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|coproducts|HasCoproducts|isTriangulated",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; grep hits inspected, existing coproduct and split-triangle nodes are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty, \"coproduct\"",
+   "results": "CategoryTheory.ObjectProperty.coproductFromFamily, CategoryTheory.ObjectProperty.coproductFrom, CategoryTheory.ObjectProperty.IsSeparating.epi_coproductFrom, CategoryTheory.ObjectProperty.ιCoproductFrom, CategoryTheory.ObjectProperty.IsClosedUnderBinaryCoproducts, CategoryTheory.ObjectProperty.IsClosedUnderFiniteCoproducts, CategoryTheory.ObjectProperty.binaryCoproductsClosure, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeDiscreteOfIsClosedUnderFiniteCoproductsOfFinite",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "localizingClosure|localisingClosure|IsLocalizing|localizingSubcategory|isClosedUnderRetracts.*[Cc]oproduct",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; grep hits inspected, existing coproduct and split-triangle nodes are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full triangulated subcategory closed under countable coproducts is closed under direct summands by the Eilenberg swindle",
+   "results": "CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂, CategoryTheory.Triangulated.Subcategory.ext₂', CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, CategoryTheory.Triangulated.Subcategory.ext₃', CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.ext₃', CategoryTheory.Triangulated.Subcategory.ext₁'",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"thick\"",
+   "results": "Disjoint.exists_uniform_thickening_of_basis, Disjoint.exists_uniform_thickening, Metric.cthickening, Metric.thickening, Metric.self_subset_cthickening, Metric.isClosed_cthickening, Metric.isOpen_thickening, Metric.cthickening_empty",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; hits concern derived category foundations, triangulated predicates or unrelated thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct|[Ss]ummand|[Rr]etract|[Ii]ntersection",
+   "results": "318, 319, 320, 335, 336",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item; grep hits inspected, existing coproduct and split-triangle nodes are reused"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -59,5 +213,39 @@
   "sk-prop-sfb-module-category"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-localizing-closure-existence",
+  "worker": "stage1",
+  "summary": "All three clauses proved in six steps, reusing existing ring-sheaf Grothendieck, derived-coproduct and split-triangle nodes. No new nodes. Expanded internal left-action identification to retain noncommutative coefficients, cone compatibility, predicate intersection and the swindle bijection. Clarified that the optional Dctf example is for commutative coefficients; no theorem hypothesis was strengthened.",
+  "blueprint": "Steps 1-3 realize proof (1); step 4 realizes (2); steps 5-6 realize the two assertions of (3) in current main-20261015. The unit is the definition sk-def-localizing-closure, not this auxiliary existence lemma; no unit realization file is changed. The node is its own blueprint ancestor, so from=null; whole-blueprint searches found no other node stating all three clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Tensor-Hom universal property with scalar sheaf Z identifies internal left actions and sectionwise actions; generic tool, not a replacement unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Grothendieck property of left modules on any small ringed site, including noncommutative rings; the imported module-category citation is absent and its blueprint hypothesis is commutativity."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Arbitrary derived coproducts computed termwise in a Grothendieck category; generic Stacks 07D9 tool below the same blueprint clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-fe733926f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-fe733926f (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, current blueprint route, and relevant Stacks sources. All six steps check out, including noncommutative coefficients, unbounded termwise coproducts, cone signs, intersection minimality, and the swindle. No new nodes or repairs. Detailed checks and accepted tool uses are recorded in review.md."
+ }
 }

@@ -3,53 +3,248 @@
  "blueprint": {
   "is": "det-sp-reduction-direct-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compactly supported direct image commutes with extension of coefficients",
- "statement": "Let $f:X\\to Y$ be a separated morphism of finite type with a compactification\n$f=\\bar f\\circ j$ ($j$ an open immersion, $\\bar f$ proper), and let $A\\to B$ be\na map of finite commutative rings killed by a power of $\\ell$. For\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ there is an isomorphism in\n$\\Dctf(Y_{\\mathrm{proét}},B)$, natural in $M$,\n\n$$\nb(M):(Rf_{!,A}M)_B=(R\\bar f_{*}j_!M)\\otimes^{\\mathbf L}_{A_Y}B_Y\n\\xrightarrow{\\ \\sim\\ }R\\bar f_{*}j_!(M\\otimes^{\\mathbf L}_{A_X}B_X)=Rf_{!,B}(M_B),\n$$\n\nwith no flatness or finite projective dimension hypothesis on $B$ over $A$.\nFor a further map $B\\to C$, $b$ for $A\\to C$ is the composite of $(b)_C$ for\n$A\\to B$, $b$ for $B\\to C$ and the associativity isomorphisms of\n[det-sp-scalar-extension-functor].",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Work in the standing scheme setting of [sk-def-sfb-dc-setting]: $X$, $Y$, and $\\bar X$ are separated schemes of finite type over $k$, and all maps are $k$-morphisms. Let $f:X\\to Y$ have a compactification $f=\\bar f\\circ j$, where $j:X\\hookrightarrow\\bar X$ is open and $\\bar f:\\bar X\\to Y$ is proper. Let $A\\to B$ be a homomorphism of finite commutative rings killed by a power of $\\ell$.\n\nUse the ordinary uncompleted module derived categories and constant coefficient sheaves of [def-weil-pbc-proetale-modules]. Write $\\Dctf(T_{\\mathrm{proét}},R)$ for the full subcategory with bounded, intrinsically constructible cohomology [def-weil-proetale-constructible-sheaf] and finite Tor amplitude [def-weil-proetale-tor-amplitude]. Write $K_B=K\\otimes^L_{A_T}B_T$ with its $B_T$-action as in [det-sp-scalar-extension-functor], and $Rf_{!,R}=R\\bar f_{*,R}j_{!,R}$, with extension by zero as in [def-weil-extension-by-zero].\n\nFor $M\\in\\Dctf(X_{\\mathrm{proét}},A)$ the canonical coefficient comparison is an isomorphism, natural in $M$, in $\\Dctf(Y_{\\mathrm{proét}},B)$:\n$$\nb_{A,B}(M):(Rf_{!,A}M)_B=(R\\bar f_{*,A}j_{!,A}M)\\otimes^L_{A_Y}B_Y\n\\xrightarrow{\\sim}R\\bar f_{*,B}j_{!,B}(M\\otimes^L_{A_X}B_X)=Rf_{!,B}(M_B).\n$$\nHere the proper comparison is the $B$-linear adjoint transpose of the $A$-counit after extension of scalars, followed by the canonical extension-by-zero tensor comparison; the derived adjunctions are those of [def-weil-pbc-proetale-operations]. There is no flatness or finite projective dimension hypothesis on $B$ over $A$.\n\nFor every further homomorphism $B\\to C$ of finite commutative $\\ell$-primary rings, the comparison for $A\\to C$ satisfies\n$$\nb_{A,C}(M)\\circ\\alpha_{Rf_{!,A}M}\n=Rf_{!,C}(\\alpha_M)\\circ b_{B,C}(M_B)\\circ(b_{A,B}(M))_C,\n$$\nwhere $\\alpha_K:(K_B)_C\\xrightarrow{\\sim}K_C$ is the associativity isomorphism of [det-sp-scalar-extension-functor].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
   "place": "node det-sp-reduction-direct-image, order None"
  },
  "stmt_deps": [
-  "det-sp-scalar-extension-functor"
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-scalar-extension-functor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero"
  ],
  "proof": [
   {
-   "text": "*Step 1: the natural map.* For any $N\\in D(\\bar X_{\\mathrm{proét}},A)$ there is\na natural projection map\n$R\\bar f_*N\\otimes^{\\mathbf L}_{A_Y}B_Y\\to R\\bar f_*(N\\otimes^{\\mathbf L}_{A_{\\bar X}}B_{\\bar X})$,\nthe transpose under $\\bar f^*\\dashv R\\bar f_*$ of\n$\\bar f^*R\\bar f_*N\\otimes^{\\mathbf L}B_{\\bar X}\\to N\\otimes^{\\mathbf L}B_{\\bar X}$\n(counit tensored with the identity, using $\\bar f^*B_Y=B_{\\bar X}$). Extension\nby zero is exact and commutes with tensoring with the constant sheaf $B$:\n$j_!(M)\\otimes^{\\mathbf L}B_{\\bar X}\\simeq j_!(M\\otimes^{\\mathbf L}B_X)$.\nDefine $b(M)$ as the composite with $N=j_!M$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 2: free terms.* Choose a resolution $F_\\bullet\\to B$ by finite free\n$A$-modules, bounded above but possibly infinite to the left. Represent $M$ by\na bounded complex $P$ of flat constructible $A_X$-modules in degrees $[a,b]$\n([lem-sf-flat-model]). Then $M_B$ is the total complex of\n$j_!P\\otimes_{A}F_\\bullet$, and similarly on $Y$. For a free term\n$F_{-i}=A^{r_i}$ the comparison map is the identity of\n$(R\\bar f_*j_!P)^{\\oplus r_i}$, an isomorphism.",
+   "text": "Put $p=\\bar f$, and let $T_T^{A,B}$ denote scalar extension on a scheme $T$. Pullback carries constant $B$ to constant $B$ by [prop-weil-pbc-proetale-constant-ring-map]. Its derived tensor compatibility [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives a canonical identification $p_B^*T_Y^{A,B}\\simeq T_{\\bar X}^{A,B}p_A^*$; this is $B$-linear, since on tensor representatives its map preserves the right $B$-factor. For $N\\in D(\\bar X_{\\mathrm{proét}},A)$ define\n$$\\gamma_N^{A,B}:T_Y^{A,B}Rp_*^A N\\longrightarrow Rp_*^B T_{\\bar X}^{A,B}N$$\nby the adjunction of [def-weil-pbc-proetale-operations], with transpose\n$$p_B^*T_Y^{A,B}Rp_*^A N\\simeq T_{\\bar X}^{A,B}p_A^*Rp_*^A N\\xrightarrow{T^{A,B}(\\varepsilon_N^A)}T_{\\bar X}^{A,B}N.$$\nThus, under this pullback identification, its defining identity is $\\varepsilon^B_{TN}\\,p_B^*(\\gamma_N^{A,B})=T^{A,B}(\\varepsilon_N^A)$. This constructs an actual $B$-linear map, without an assumption on the Tor dimension of $B/A$.",
    "uses": [
-    "lem-sf-flat-model"
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations",
+    "det-sp-scalar-extension-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, specified counit transpose"
+   }
   },
   {
-   "text": "*Step 3: finite windows.* $R\\bar f_*$ has cohomological dimension at most\n$c=\\operatorname{cd}_\\ell(\\bar f)<\\infty$ on $\\ell$-power torsion sheaves.\nHence in a fixed total degree $q$, only the terms $F_{-i}$ with\n$a-i\\leq q\\leq b-i+c$, i.e. finitely many $i$, contribute to $H^q$ of either\nside (truncate the resolution, the stupid truncation changing the totalization\nonly in degrees below $q$). On this finite window the comparison is a finite\nextension of isomorphisms of Step 2, hence an isomorphism on $H^q$. As $q$ is\narbitrary, $b(M)$ is an isomorphism, regardless of the projective dimension of\n$B$ over $A$; this is the scalar projection argument used for the\ncoefficient comparisons of the six operations.",
-   "uses": [],
-   "elementary": null
+   "text": "First construct the coefficient comparison as a morphism of $B$-complexes. Choose a K-flat resolution $P\\to M$ with flat terms by [lem-pc-kflat-resolution]. The ordinary sheaf identity of [lem-weil-pbc-ringed-slice-extension-tensor], for the open object $X$ of $\\bar X_{\\mathrm{proét}}$ (whose localized-site identification is part of [def-weil-extension-by-zero]), gives $(j_!G)\\otimes Q\\simeq j_!(G\\otimes j^*Q)$. It extends to total tensor complexes: $j_!$ preserves direct sums because it is a left adjoint [lem-cbc-proetale-extension-zero]. For any acyclic complex $Q$, $j^*Q$ is acyclic by exact pullback [def-weil-pbc-proetale-operations], then $P\\otimes j^*Q$ is acyclic by K-flatness, and $j_!(P\\otimes j^*Q)$ is acyclic by exactness of $j_!$. Hence $j_!P$ is K-flat. The same identity on sheaves shows each $j_!P^i$ is flat, since both $j^*$ and $j_!$ are exact. Thus scalar extension on the two sides is computed by $j_!P\\otimes_A B$ and $j_!^B(P\\otimes_A B)$. Their termwise tensor comparison is $B$-linear (it preserves multiplication on the right $B$-factor), and is an isomorphism by the cited ordinary identity. It yields the canonical\n$$e_M^{A,B}:T_{\\bar X}^{A,B}j_!^A M\\xrightarrow{\\sim}j_!^B T_X^{A,B}M.$$\nAfter restriction of scalars, this is the derived open tensor comparison [lem-trf-open-tensor]; compatibility of $j_!$ with restriction of scalars is included in [lem-cbc-proetale-extension-zero]. Its restriction to $X$ is the tensor identity. Define\n$$b_{A,B}(M)=Rp_*^B(e_M^{A,B})\\circ\\gamma_{j_!^AM}^{A,B}.$$\nThese canonical derived comparisons are natural in $M$, without making a functorial choice of the resolution.",
+   "uses": [
+    "lem-trf-open-tensor",
+    "lem-cbc-proetale-extension-zero",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, extension by zero and definition of b"
+   }
   },
   {
-   "text": "*Step 4: naturality and composition.* Naturality in $M$ holds since every map\nused is natural. For $A\\to B\\to C$, the projection maps of Step 1 compose under\nthe associativity isomorphism $(N_B)_C\\simeq N_C$, because the counit\ntransposes compose; hence the stated cocycle identity holds.",
-   "uses": [],
-   "elementary": null
+   "text": "The arbitrary-finite-ring equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin] supplies a bounded constructible etale $A$-complex $L$ with $\\nu_X^*L\\simeq M$. Let $K=j_!^{\\mathrm{et},A}L$. Exactness [lem-weil-pbc-extension-by-zero-exact] makes $K$ bounded. The sheaf comparison [lem-cbc-proetale-extension-zero-comparison] extends termwise to complexes: both extension-by-zero functors and $\\nu^*$ are exact, so the sheaf isomorphism gives a complex isomorphism and survives localization at quasi-isomorphisms. Hence $\\nu_{\\bar X}^*K\\simeq N:=j_!^A M$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], this also identifies $\\nu_{\\bar X}^*(K\\otimes_A^L B_{\\bar X,\\mathrm{et}})$ with $N\\otimes_A^L B_{\\bar X}$. The latter is bounded: Step 2 identifies its underlying $A$-complex with that of $j_!^B M_B$, and $M_B$ is bounded by [det-sp-scalar-extension-functor]. Exactness and the sheaf unit in [prop-weil-pbc-site-comparison-finite-level] reflect vanishing of every cohomology sheaf: $H^i(\\nu^*E)=\\nu^*H^i(E)$ and $H^i(E)\\simeq\\nu_*\\nu^*H^i(E)$. Thus $K\\otimes_A^L B_{\\bar X,\\mathrm{et}}$ is bounded as well. Both etale arguments needed below therefore lie in $D^+$; no fully faithful comparison is applied to an unbounded-below tensor.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-sp-scalar-extension-functor",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK, 09AL; lemma-compare-constructible-derived; jshriek comparison and exactness"
+   }
+  },
+  {
+   "text": "The schemes $\\bar X,Y$ and $p$ satisfy the finite-type-over-a-field hypotheses of [lem-kun-0f10]. By its clause (1) and [def-kun-cd] there is one $c\\geq0$ killing $R^qp_*$ on every torsion abelian etale sheaf for $q>c$. This is also a uniform bound for etale $A$-module sheaves, as follows. Resolve such a sheaf $F$ by injective $A$-module sheaves, using [lem-weil-pbc-module-sheaves-enough-injectives], which also gives enough injectives for the abelian sheaf category. Forgetting the action preserves exactness, and every term is $p_*$-acyclic as an abelian sheaf by [lem-weil-pbc-injective-module-direct-image-acyclic]. The acyclic-resolution criterion, clause (2) of [lemma-weil-pbc-leray-acyclicity], identifies the underlying abelian sheaf of $R^qp_*^A F$ with $R^qp_*F$. The latter vanishes for $q>c$, since $F$ is killed by a power of $\\ell$. Forgetting a module action reflects the zero object, proving the required module-sheaf bound for all $F$.",
+   "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd (1); module-versus-abelian acyclicity: sites-cohomology.tex Tags 03FD and 072W"
+   }
+  },
+  {
+   "text": "A finite commutative ring $A$ is Noetherian: its ideals form a finite set, so an ascending chain stabilizes. The finite set underlying $B$ generates it as an $A$-module, giving a finite free surjection $A^r\\twoheadrightarrow B$; its kernel is a finite set because $A^r$ is finite, so it too has a finite generating set. This is a finite presentation of $B$ over $A$. Apply [lem-sf-projection-finite-constant] to the etale map $p$, coefficient ring $A$, the uniform bound $c$ from Step 4, bounded-above complex $K$ from Step 3, and constant finitely presented $A$-module $B$. It gives invertibility of the specified counit projection\n$$\\pi_K:Rp_{\\mathrm{et},*}^A K\\otimes_A^L B_{Y,\\mathrm{et}}\\longrightarrow Rp_{\\mathrm{et},*}^A(K\\otimes_A^L B_{\\bar X,\\mathrm{et}}).$$\nThis is precisely the finite-free-resolution/finite-window tool of the blueprint's Steps 2–3. Its statement imposes neither finite projective dimension of $B$ nor a bounded constructible flat model for $K$.",
+   "uses": [
+    "lem-sf-projection-finite-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Steps 2–3, finite-free terms and finite windows, specialized through the existing general etale projection lemma"
+   }
+  },
+  {
+   "text": "We check that the map just proved invertible is the underlying map of $\\gamma_N^{A,B}$, not an arbitrarily chosen isomorphism. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_T=A_T$, $S_T=B_T$, and the constant-ring identifications from Step 1. The square of ring maps commutes since all its maps preserve constant sections. That lemma gives the canonical restriction/direct-image comparison and, explicitly, its compatibility with adjoint transposes. Consequently, after forgetting $B$, the transpose of $\\gamma_N^{A,B}$ is $\\varepsilon_N^A\\otimes1_B$ under tensor pullback. Thus the underlying comparison is the ordinary $A$-projection map for $N$ and $B_{\\bar X}$.\n\nFor clarity write $v_T=\\nu_T^*$, $l=p_{\\mathrm{et}}^*$, $r=Rp_{\\mathrm{et},*}^A$, $P=p_{\\mathrm{proét}}^*$, $S=Rp_{\\mathrm{proét},*}^A$. The comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] supplies $a:v_{\\bar X}l\\simeq Pv_Y$ and $\\beta_H:v_YrH\\simeq Sv_{\\bar X}H$ with\n$$\\varepsilon^p\\,P(\\beta_H)\\,a_{rH}=v_{\\bar X}(\\varepsilon^e_H).$$\nIt applies to $H=K$ and $H=K\\otimes_A^L B$ by Step 3; $p$ is proper, hence quasi-compact and quasi-separated. Tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies the source and target of $v_Y\\pi_K$ with $SN\\otimes_A^L B_Y$ and $S(N\\otimes_A^L B_{\\bar X})$, using these $\\beta$'s. Here is the mate calculation explicitly. Put $Q=rK\\otimes_A^L B_Y$ and $H=K\\otimes_A^L B_{\\bar X}$ on the etale sites, and suppress only the canonical tensor-pullback identifications in the following formulas. The resulting map is $t=\\beta_H\\,v_Y(\\pi_K)\\,(\\beta_K^{-1}\\otimes1)$. Its transpose is\n$$\\begin{aligned}\n\\varepsilon^p_{v_{\\bar X}H}\\,P(t)\n&=v_{\\bar X}(\\varepsilon^e_H)\\,a_{rH}^{-1}\\,P(v_Y\\pi_K)\\,P(\\beta_K^{-1}\\otimes1)\\\\\n&=v_{\\bar X}(\\varepsilon^e_H\\,l\\pi_K)\\,a_Q^{-1}\\,P(\\beta_K^{-1}\\otimes1)\\\\\n&=\\bigl(v_{\\bar X}(\\varepsilon^e_K)\\,a_{rK}^{-1}\\,P(\\beta_K^{-1})\\bigr)\\otimes1\\\\\n&=\\varepsilon^p_N\\otimes1.\n\\end{aligned}$$\nThe first and last equalities are the normalization at $H$ and $K$; the second is naturality of $a$ at $\\pi_K$; the third uses the defining etale projection transpose $\\varepsilon^e_H\\,l\\pi_K=\\varepsilon^e_K\\otimes1$ and naturality of tensor pullback. Thus, without suppressed identifications, the transpose is\n$$P(SN\\otimes_A^L B_Y)\\simeq PSN\\otimes_A^L B_{\\bar X}\\xrightarrow{\\varepsilon_N^p\\otimes1}N\\otimes_A^L B_{\\bar X}.$$\nThis is exactly the preceding transpose of $\\operatorname{Res}\\gamma_N^{A,B}$. The adjunction bijection makes the maps equal. As $\\pi_K$, both $\\beta$'s, and the tensor comparisons are isomorphisms, $\\operatorname{Res}\\gamma_N^{A,B}$ is an isomorphism. Restriction of scalars reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Thus $\\gamma_N^{A,B}$ is an isomorphism in $D(Y_{\\mathrm{proét}},B)$, and Step 2 proves the same for $b_{A,B}(M)$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Canonical morphism comparison; blueprint Step 1 normalization, together with sites-cohomology.tex derived tensor/pushforward comparisons"
+   }
+  },
+  {
+   "text": "Both objects of $b$ have the claimed category membership. The restricted adjunction stated in [sk-prop-sf-rf-shriek-preservation] gives $Rf_{!,A}M\\in\\Dctf(Y,A)$ and $Rf_{!,B}M_B\\in\\Dctf(Y,B)$; its finite-commutative-coefficient hypotheses apply to $A$ and $B$. By [det-sp-scalar-extension-functor], $(Rf_{!,A}M)_B$ also belongs to $\\Dctf(Y,B)$. This is a full subcategory, so the isomorphism already obtained is an isomorphism there. Naturality follows from the explicit counit transpose, tensor comparison, and extension-by-zero maps of Steps 1–2: for $u:M\\to M'$ their defining adjuncts agree by naturality of the counit, and hence the corresponding square for $b$ commutes by injectivity of the adjunction bijection.",
+   "uses": [
+    "sk-prop-sf-rf-shriek-preservation",
+    "det-sp-scalar-extension-functor",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Statements of the objects in Dctf and Step 4 naturality"
+   }
+  },
+  {
+   "text": "We now prove the coefficient cocycle on the named proper maps. Suppress the pullback/scalar identifications, and identify $T^{B,C}T^{A,B}$ with $T^{A,C}$ by $\\alpha$ of [det-sp-scalar-extension-functor]. Consider\n$$d_N=\\gamma^{B,C}_{T^{A,B}N}\\circ T_Y^{B,C}(\\gamma_N^{A,B}).$$\nIts $C$-adjoint transpose, using the defining identity in Step 1 first for $B\\to C$ and then for $A\\to B$, is\n$$\\begin{aligned}\n\\varepsilon^C\\,p_C^*(d_N)\n&=T^{B,C}(\\varepsilon^B_{T^{A,B}N})\\,T^{B,C}(p_B^*\\gamma_N^{A,B})\\\\\n&=T^{B,C}\\bigl(T^{A,B}(\\varepsilon_N^A)\\bigr)\n =T^{A,C}(\\varepsilon_N^A).\n\\end{aligned}$$\nNaturality of the pullback tensor comparison justifies the first line; its associativity with $\\alpha$ is the balancing equality $((x\\otimes b)\\otimes c)\\mapsto x\\otimes\\varphi(b)c$ on K-flat tensor representatives, so the displayed identifications do not change this transpose. The last expression is the defining transpose of $\\gamma_N^{A,C}$. Injectivity of the adjunction bijection [def-weil-pbc-proetale-operations] therefore gives the proper-map cocycle, including the indicated $\\alpha$'s. This calculation takes place for all $N$, so it can be used at $N=j_!M$.",
+   "uses": [
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 4, explicit computation of the composed counit transposes"
+   }
+  },
+  {
+   "text": "The open tensor maps satisfy the same cocycle. After restriction to $X$, both composites from $T^{B,C}T^{A,B}j_!^AM$ to $j_!^C T^{A,C}M$ give $((m\\otimes b)\\otimes c)\\mapsto m\\otimes\\varphi(b)c$. The domain is canonically $j_!^C(T^{B,C}T^{A,B}M)$ by Step 2, and $j_!^C\\dashv j^{-1}$ by [lem-cbc-proetale-extension-zero]. The unit $F\\to j^{-1}j_!^CF$ is the identity: in the presheaf construction [def-weil-extension-by-zero], an object $V\\to X$ and every object covering it already factor through $X$, so the presheaf and its sheafification restrict to $F$ on $X_{\\mathrm{proét}}$. This holds degreewise and hence in the derived categories, since both functors are exact. For $Z=T^{B,C}T^{A,B}M$ the adjunction now identifies $\\operatorname{Hom}(j_!^CZ,j_!^CT^{A,C}M)$ with $\\operatorname{Hom}(Z,T^{A,C}M)$, and sends a map to its restriction. Thus equality after restriction proves equality of the two maps in question. This proves, under $\\alpha$, $e_M^{A,C}=e_{T^{A,B}M}^{B,C}\\circ T^{B,C}(e_M^{A,B})$.\n\nFinally expand $b=Rp_*(e)\\gamma$. Naturality of $\\gamma^{B,C}$ with respect to $e_M^{A,B}$ gives, after suppressing the same $\\alpha$'s,\n$$\\begin{aligned}\nb_{B,C}(M_B)\\,T_Y^{B,C}(b_{A,B}(M))\n&=Rp_*^C(e_{M_B}^{B,C})\\,\\gamma^{B,C}_{j_!^BM_B}\\,T_Y^{B,C}(Rp_*^B e_M^{A,B})\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_{M_B}^{B,C})\\,Rp_*^C(T_{\\bar X}^{B,C}e_M^{A,B})\\,\\gamma^{B,C}_{T^{A,B}j_!^AM}\\,T_Y^{B,C}(\\gamma^{A,B}_{j_!^AM})\\\\\n&=Rp_*^C(e_M^{A,C})\\,\\gamma^{A,C}_{j_!^AM}=b_{A,C}(M).\n\\end{aligned}$$\nThe second equality uses naturality, and the third uses the open cocycle and Step 8. Reinsert $\\alpha$ using its naturality from [det-sp-scalar-extension-functor]; the result is exactly the equation in the statement.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "det-sp-scalar-extension-functor",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 4, open tensor cocycle and expansion of the compact-support cocycle"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sf-flat-model"
+  "def-kun-cd",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-operations",
+  "det-sp-scalar-extension-functor",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-kun-0f10",
+  "lem-pc-kflat-resolution",
+  "lem-sf-projection-finite-constant",
+  "lem-trf-open-tensor",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-weil-pbc-leray-acyclicity",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "sk-prop-sf-rf-shriek-preservation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Steps 1–4; finite-window tool reused with explicit etale/pro-etale and counit comparisons; no purity or SGA trace route"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|shriek|scalarExtension",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a finite coefficient algebra commutes with proper direct image of sheaves",
+   "results": "8 hits: Derivation.tensorProductTo_tmul, Submodule.FG.rTensor.directLimit, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, TensorProduct.finsuppLeft, TensorProduct.directLimitLeft_rTensor_of, KaehlerDifferential.derivationTensorProduct_algebraMap, TensorProduct.finsuppRight, Algebra.FormallySmooth.instTensorProduct",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, TensorProduct",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite ring coefficients commutes with compactly supported direct image on bounded constructible sheaves on schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Pp]rojection|[Pp]rojection.*rightDerived|[Cc]oefficient.*[Pp]ushforward",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for derived pushforward of etale sheaves with a finitely presented constant module and finite cohomological dimension",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward_map_val, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|def pushforwardComp|pushforwardPushforwardAdj",
+   "results": "7 hits: Mathlib/CategoryTheory/Sites/Sieves.lean, Mathlib/CategoryTheory/Sites/Sieves.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean, Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean ; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern underived pushforward, sieves, algebraic tensor or ambient categories, not the finite-coefficient compact-support derived comparison and its coefficient cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward tensor projection formula for constant finitely presented module finite cohomological dimension",
+   "results": "8 hits: Ext, SheafOfModules.pushforwardNatIso, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', CategoryTheory.Tor, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned Ext/Tor, underived pushforward and internally projective declarations do not state a derived sheaf projection isomorphism or its coefficient cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|tensor.*[Pp]ushforward|[Pp]ushforward.*tensor",
+   "results": "0 hits:  ; subdirectory Algebra/Category/ModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned Ext/Tor, underived pushforward and internally projective declarations do not state a derived sheaf projection isomorphism or its coefficient cocycle"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -61,5 +256,114 @@
   "lem-sf-flat-model"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-reduction-direct-image",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the standalone import omits the standing finite-type-over-k scheme setting and its Dctf claim is false without a uniform bound (disjoint union of projective spaces of increasing dimension). Restored the setting explicitly. Removed the out-of-domain A_E,n flat-model invocation, retaining the finite-free/finite-window route through the existing general constant-coefficient etale projection lemma. Added explicit B-linear construction, bounded comparison hypotheses, module/abelian cohomological-dimension bridge, counit normalization, Dctf membership and cocycle computations. No new nodes or Lean work.",
+  "blueprint": "Original Step 1 is Steps 1–2 and 6; original Steps 2–3 are Steps 3–6, applying the existing finite-window lemma after the finite-type bound; original Step 4 is Steps 7–9. The invalid flat-constructible-model use is replaced by the already available general finite-constant projection theorem, which proves the same finite-free/finite-window argument.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical inverse image of constant coefficient rings; no coefficient-sheaf construction in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General tensor pullback and K-flat compatibility for the coefficient and site comparisons; not a projection isomorphism."
+   },
+   {
+    "node": "lem-trf-open-tensor",
+    "why": "General open-immersion derived tensor identity used in blueprint Step 1."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Exact module extension by zero, its adjunction and scalar restriction compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Existing bounded constructible etale origin for arbitrary finite rings, needed to use the same finite-window projection tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of etale extension by zero keeps the etale argument bounded."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "General site comparison for extension by zero, applied termwise using exactness."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exactness and underived unit reflect boundedness before any Dplus direct-image comparison."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Uniform finite-type-over-a-field torsion cohomological-dimension bound used in the blueprint finite-window step."
+   },
+   {
+    "node": "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "why": "Generic comparison input between module and abelian higher direct images."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Acyclic resolutions compute derived direct images, making the dimension bound valid for all module sheaves."
+   },
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Existing generic finite-free-resolution/finite-window theorem, precisely the argument in blueprint Steps 2–3; no new or substituted geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "The etale/pro-etale comparison with the exact counit normalization needed to identify the actual map."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "The existing restricted Rf! adjunction supplies Dctf membership for both finite rings; the unit does not prove general preservation."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic coefficient restriction reflects isomorphisms and commutes with pushforward with its precise adjoint-transpose normalization."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives used to construct the open comparison strictly in B-modules."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Ordinary module tensor identity on a localized site; used to show open extension preserves K-flat complexes and the coefficient map is B-linear."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic supply of injective resolutions in both module and abelian etale sheaf categories for the uniform dimension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-open-tensor",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-kun-0f10",
+  "lem-weil-pbc-injective-module-direct-image-acyclic",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sf-projection-finite-constant",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "sk-prop-sf-rf-shriek-preservation",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q15-aa4cca3e9",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-aa4cca3e9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, and source passages. All nine steps check out, including finite-window hypotheses, the canonical B-linear comparison, Dctf membership, and coefficient cocycles. No new nodes, cycles, duplicate replacements, or repairs. Accepted generic tool uses and detailed checks are recorded in review.md; no target weakening or coefficient-category identification."
+ }
 }

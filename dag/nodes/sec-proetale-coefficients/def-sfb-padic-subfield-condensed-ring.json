@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-padic-subfield-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The condensed ring $\\underline E$ of a subfield $E\\subseteq\\overline{\\mathbf Q}_\\ell$",
@@ -19,26 +19,145 @@
  ],
  "proof": [
   {
-   "text": "Since $\\iota$ is an injective ring homomorphism, $|\\cdot|_E$ is an absolute value on $E$.\nSo $E$ is a normed field, in particular a commutative topological ring, and\n[def-sfb-continuous-map-condensed-ring] applies. If $\\iota$ is $\\mathbf Q_\\ell$-linear,\nthen $|\\iota(x)|=|x|$ for $x\\in\\mathbf Q_\\ell$, because the absolute value of $\\Qlb$\nextends that of $\\mathbf Q_\\ell$. Hence $\\mathbf Q_\\ell\\to E$ is an isometric ring\nhomomorphism. It is in particular continuous, so\n[def-sfb-continuous-map-condensed-ring-map] applies.",
+   "text": "Put $a(x)=|\\iota(x)|$. The identities $\\iota(0)=0$, $\\iota(1)=1$, $\\iota(xy)=\\iota(x)\\iota(y)$ and $\\iota(x+y)=\\iota(x)+\\iota(y)$ transfer nonnegativity, normalization, multiplicativity and the triangle inequality from the ambient absolute value; injectivity gives $a(x)=0$ if and only if $x=0$. Thus $a$ is an absolute value and $d_E(x,y)=a(x-y)$ is a metric. Since $d_E(x,y)=|\\iota(x)-\\iota(y)|$, every open ball in $E$ is the inverse image of the corresponding ambient open ball, and conversely these balls form bases. Hence its metric topology is exactly the topology restricted along $\\iota$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.proof.md",
+    "place": "First two sentences: restriction of the absolute value and the resulting topology"
+   }
+  },
+  {
+   "text": "The ring operations are continuous for this topology: $a((x+y)-(x_0+y_0))\\le a(x-x_0)+a(y-y_0)$ and $a((-x)-(-x_0))=a(x-x_0)$. When $a(y-y_0)<1$, the identity $xy-x_0y_0=(x-x_0)y+x_0(y-y_0)$ gives $a(xy-x_0y_0)\\le a(x-x_0)(a(y_0)+1)+a(x_0)a(y-y_0)$. For $\\varepsilon>0$, put $A=a(y_0)+1$, $B=a(x_0)$ and $\\delta=\\min\\{1,\\varepsilon/(A+B)\\}>0$. If both input distances are less than $\\delta$, this bound is strictly less than $(A+B)\\delta\\le\\varepsilon$; addition uses input distances less than $\\varepsilon/2$, and negation preserves distance. Also, for $x_0\\ne0$ and $a(x-x_0)<a(x_0)/2$, the triangle inequality gives $a(x)>a(x_0)/2$, and $a(x^{-1}-x_0^{-1})=a(x-x_0)/(a(x)a(x_0))\\le 2a(x-x_0)/a(x_0)^2$. For a prescribed $\\varepsilon>0$, an input distance less than $\\min\\{a(x_0)/2,\\varepsilon a(x_0)^2/2\\}$ therefore makes the inverse distance less than $\\varepsilon$. Thus inversion is continuous away from zero, so $E$ is a topological field and in particular a commutative topological ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.proof.md",
+    "place": "Second sentence: the induced norm makes E a commutative topological ring; elementary continuity details"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring] to the commutative topological ring $E$ constructed in steps 1 and 2. It gives the sheaf of rings $\\underline E(S)=C(S,E)$ with restrictions by precomposition and pointwise ring operations, and states that its underlying ring object is commutative because $E$ is commutative. This is precisely the condensed ring in the definition.",
    "uses": [
-    "def-sfb-continuous-map-condensed-ring",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.proof.md",
+    "place": "Second sentence: application of def-sfb-continuous-map-condensed-ring"
+   }
+  },
+  {
+   "text": "For the conditional clause, let $j\\colon\\mathbf Q_\\ell\\to E$ be the given extension's structure homomorphism and assume $\\iota$ is $\\mathbf Q_\\ell$-linear. Then $\\iota(j(t))$ is the fixed image of $t$ in $\\Qlb$, so $a(j(t))=|t|_\\ell$ for every $t\\in\\mathbf Q_\\ell$. Applying this equality to $t-s$ shows $d_E(j(t),j(s))=|t-s|_\\ell$, hence $j$ is continuous. The source $\\underline{\\mathbf Q}_\\ell$ is exactly the continuous-map condensed ring of $\\mathbf Q_\\ell$ with this topology by [def-sfb-padic-condensed-ring]. Now [def-sfb-continuous-map-condensed-ring-map] applied to $j$ gives the morphism whose component at every profinite $S$ sends $b\\in C(S,\\mathbf Q_\\ell)$ to $j\\circ b\\in C(S,E)$, as required.",
+   "uses": [
+    "def-sfb-padic-condensed-ring",
     "def-sfb-continuous-map-condensed-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.proof.md",
+    "place": "Last four sentences: Q_l-linearity implies isometry and yields the postcomposition morphism"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-padic-condensed-ring",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-subfield-condensed-ring.proof.md",
+  "place": "Entire proof paragraph, with elementary absolute-value and continuity details expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A topological commutative ring defines a condensed ring with sections the continuous maps from profinite spaces",
+   "results": "Condensed.profiniteFree (Mathlib/Condensed/Solid); CondensedMod (Mathlib/Condensed/Module); TopCat.commRingYoneda (Mathlib/Topology/Sheaves/CommRingCat); Condensed (Mathlib/Condensed/Basic); Profinite.toCondensed, compHausToCondensed' (Mathlib/Condensed/Functors); LightProfinite.toCondensed (Mathlib/Condensed/Light/Functors); CondensedSet (Mathlib/Condensed/Basic).",
+   "date": "2026-10-16",
+   "verdict": "no match: commRingYoneda constructs a presheaf of commutative rings, not the coherent-topology sheaf with its internal ring object and the Q_l coefficient morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.commRingYoneda",
+   "results": "TopCat.commRingYoneda : TopCommRingCat ⥤ TopCatᵒᵖ ⥤ CommRingCat (Mathlib/Topology/Sheaves/CommRingCat.lean:237; source read through line 253).",
+   "date": "2026-10-16",
+   "verdict": "no match: the codomain is presheaves, with no coherent-topology sheaf assertion or internal ring-object comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|topCatToCondensed|continuousMapRingSheaf|padicSubfieldCondensedRing",
+   "results": "Subdirectory Condensed: Mathlib/Condensed/TopComparison.lean:22,146 and Mathlib/Condensed/TopCatAdjunction.lean:15,19,86,104,117. Read TopComparison.lean:120-148: TopCat.toCondensedSet and topCatToCondensedSet have values in condensed sets.",
+   "date": "2026-10-16",
+   "verdict": "no match: these are set-valued constructions, not the full condensed-ring definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The condensed ring associated to a subfield of the algebraic closure of the p-adic numbers and the map induced by the inclusion of the p-adic numbers",
+   "results": "PadicInt.algebraMap_apply, PadicInt.Coe.ringHom, PadicInt.isOpenEmbedding_coe, PadicInt.instCoePadic (Mathlib.NumberTheory.Padics.PadicIntegers); PadicAlgCl.instCoePadic, PadicAlgCl, PadicAlgCl.isAlgebraic (Mathlib.NumberTheory.Padics.Complex); Rat.HeightOneSpectrum.adicCompletion.padicEquiv (Mathlib.NumberTheory.Padics.HeightOneSpectrum).",
+   "date": "2026-10-16",
+   "verdict": "no match: these describe p-adic fields and their inclusions, not any condensed ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field embedded in an algebraic closure of the p-adic numbers inherits an absolute value topology and a condensed ring by continuous functions",
+   "results": "PadicAlgCl.instCoePadic, PadicAlgCl, PadicAlgCl.normedField, PadicAlgCl.valued, PadicComplex, PadicComplex.valued, PadicComplex.instNormedField, PadicComplex.coe_eq (Mathlib/NumberTheory/Padics/Complex). Read Complex.lean:58-104 for the algebraic closure and its norm.",
+   "date": "2026-10-16",
+   "verdict": "no match: ambient normed-field results do not construct the coherent-topology sheaf of rings or its morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|ringYoneda|continuousMapRingSheaf|padicSubfieldCondensedRing",
+   "results": "Whole Mathlib source: Mathlib/Topology/Sheaves/CommRingCat.lean:237 (commRingYoneda) and :263 (presheafToTopCommRing); read lines 200-265. No continuousMapRingSheaf or padicSubfieldCondensedRing hit.",
+   "date": "2026-10-16",
+   "verdict": "no match: only the continuous-function presheaf was found, not the entire item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous ring homomorphisms induce natural maps between ring valued sheaves on profinite spaces",
+   "results": "8 hits: LightCondensed.ihom_map_val_app; TopCat.continuousFunctions.map; Condensed.profiniteFree; LightCondensed.forget_obj_val_map; LocallyConstant.comapRingHom; TopCat.continuousFunctions.pullback; LightCondensed.forget_map_val_app; LightCondMod.hom_naturality_apply. Read Mathlib/Topology/Sheaves/CommRingCat.lean:206-251, especially map at 224-230.",
+   "date": "2026-10-16",
+   "verdict": "no full match: continuousFunctions.map gives the sectionwise ring map; commRingYoneda is a presheaf-valued functor and does not assert the coherent sheaf or internal ring-object comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "CondensedRing|CommRingCat|RingCat|commRingYoneda",
+   "results": "0 hits in Mathlib/Condensed (directory confirmed present).",
+   "date": "2026-10-16",
+   "verdict": "no match in the Condensed directory; this is not claimed as absence from all Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousFunctions.map\"",
+   "results": "0 hits; service message: loogle: Loogle is currently under load, please try again later.",
+   "date": "2026-10-16",
+   "verdict": "unavailable: overload response, not evidence of no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commRingYoneda|toCondensed|continuousFunctions",
+   "results": "5 hits in Mathlib/Topology/Sheaves/CommRingCat.lean:19,161,208,211,215 (msearch output is capped at five hits per file). Read lines 206-265, including TopCat.continuousFunctions, pullback, map, commRingYoneda and presheafToTopCommRing.",
+   "date": "2026-10-16",
+   "verdict": "no full match: these declarations construct continuous-function rings and presheaves, not the whole condensed-ring definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.continuousFunctions.map",
+   "results": "TopCat.continuousFunctions.map : (X : TopCatᵒᵖ) → {R S : TopCommRingCat} → (R ⟶ S) → (TopCat.continuousFunctions X R ⟶ TopCat.continuousFunctions X S). Read Mathlib/Topology/Sheaves/CommRingCat.lean:224-230.",
+   "date": "2026-10-16",
+   "verdict": "no full match: this is a ring homomorphism on one continuous-function section ring, without the coherent-topology sheaf assertion or the internal ring object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring with a topology whose operations are continuous yields a sheaf of rings on the category of profinite spaces by taking continuous functions",
+   "results": "8 hits: Condensed.lanSheafProfinite, Condensed.profiniteFree, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, TopCat.presheafToTopCommRing, LightProfinite.hasSheafify_type, LightCondMod.LocallyConstant.functorToPresheaves, Condensed.isSheafProfinite, CondensedMod.ofSheafProfinite. The candidate TopCat.presheafToTopCommRing was read in Mathlib/Topology/Sheaves/CommRingCat.lean:263; its codomain is a presheaf on opens of a fixed topological space. The other hits concern discrete objects, sheafification, modules, or restriction of an already given condensed object.",
+   "date": "2026-10-16",
+   "verdict": "no full match: none constructs this continuous-function condensed ring for the restricted absolute value together with the conditional coefficient morphism"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -57,5 +176,21 @@
   "Profinite.padicSubfieldCondensedRing"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-padic-subfield-condensed-ring",
+  "worker": "stage1",
+  "summary": "Kept the main-20261015 statement and four-step proof unchanged. Expanded elementary absolute-value and continuity arguments feed the three existing continuous-map/Q_l definition nodes. Twelve logged Mathlib searches (one unavailable response), exact proof-file sources and current verbatim citation quotes. No new nodes or Mathlib leaves.",
+  "blueprint": "Steps 1-2 expand the first two sentences of the blueprint proof; step 3 realizes its application of def-sfb-continuous-map-condensed-ring; step 4 realizes its Q_l-isometry and postcomposition clause. This is the E instance in the sk-def-sfb-condensed-ring unit, with no change of route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-fea356946",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-fea356946 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited nodes, blueprint proof, and stage instructions. The induced absolute value/topology, continuity estimates, conditional Q_l-linear coefficient map, base-change morphism, and coefficient category all check out, including edge cases. No duplicates, cycles, SGA use, missing hypotheses, or repairs found; review.md records source locations and checks."
+ }
 }

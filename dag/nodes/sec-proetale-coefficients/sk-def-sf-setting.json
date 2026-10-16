@@ -3,22 +3,161 @@
  "blueprint": {
   "is": "sk-def-sf-setting",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sf-setting"
+  ]
  },
  "kind": "definition",
  "title": "Coefficients and sites",
- "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$. The *coefficient stages* are\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, with constructibility, finite Tor\namplitude, constructible intervals and Tate twists. At a finite stage, for a\nscheme $X$, $D^b_c(X,\\Lambda)$ is the full subcategory of the derived category\nof sheaves of $\\Lambda$-modules on the small étale site of $X$ consisting of the\nbounded complexes with constructible cohomology sheaves,\n$D^b_{ctf}(X,\\Lambda)\\subseteq D^b_c(X,\\Lambda)$ consists of those of finite Tor\namplitude, and the constant complex $\\Lambda_X$ is the constant sheaf $\\Lambda$\nplaced in degree $0$, the unit of $\\otimes^L_\\Lambda$.\nMorphisms are separated of finite type.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] $(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. The *coefficient stages* are\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, with constructibility, finite Tor\namplitude, constructible intervals and Tate twists. The integral, rational and algebraically closed coefficient conventions are those of [def-weil-derived-complete-integral-detailed], [def-weil-rationalization-karoubi] and [def-weil-algebraically-closed-coefficients]. On schemes where $\\ell$ is invertible, their finite Tor conventions are [def-weil-finite-tor-amplitude], and Tate twists have the domain and coefficient conventions of [def-coefficient-twists-detailed]. At a finite coefficient stage $\\Lambda=A_{E,n}$, for a\nscheme $X$, $D^b_c(X,\\Lambda)$ is the full subcategory of the derived category\nof sheaves of $\\Lambda$-modules on the small étale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-derived-categories] consisting of the\nbounded complexes with constructible cohomology sheaves [def-weil-pbc-constructible-complexes],\n$D^b_{ctf}(X,\\Lambda)\\subseteq D^b_c(X,\\Lambda)$ consists of those objects $K$ of finite Tor\namplitude: there exist integers $u\\leq v$ such that $K$ has Tor amplitude in $[u,v]$ in the sense of [def-kun-tor-amplitude]. At this finite stage, for integers $u\\leq v$, $D_c^{[u,v]}(X,\\Lambda)$ is the full subcategory of $D^b_c(X,\\Lambda)$ of objects with $\\mathcal H^i(K)=0$ for $i\\notin[u,v]$ [def-weil-derived-cohomology-sheaves]. The constant complex $\\Lambda_X$ is the constant sheaf $\\Lambda$\nplaced in degree $0$ [def-kun-constant-sheaf], the unit of $\\otimes^L_\\Lambda$ [def-kun-derived-tensor].\nMorphisms are separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/_section.md",
   "place": "node sk-def-sf-setting, order 869"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The unit assertion is elementary from the constructions. Write $R=\\Lambda_X$ for the constant ring sheaf and $R[0]$ for its degree-zero complex [def-kun-constant-sheaf]. For any complex $C$, the total tensor construction [def-pc-tensor-complex-sheaves] gives chain isomorphisms $R[0]\\otimes_R C\\cong C$ and $C\\otimes_R R[0]\\cong C$: on local pure tensors they are $r\\otimes c\\mapsto rc$ and $c\\otimes r\\mapsto rc$, with inverses $c\\mapsto1\\otimes c$ and $c\\mapsto c\\otimes1$. For each site object $U$ and degree $i$, balancing gives $r\\otimes c=1\\otimes rc$ in $R(U)\\otimes_{R(U)}C^i(U)$ and $c\\otimes r=rc\\otimes1$ in $C^i(U)\\otimes_{R(U)}R(U)$. The displayed maps and inverses commute with restrictions, so these presheaf isomorphisms sheafify to the sheaf tensor isomorphisms by [def-pur-sheaf-tensor-product]. The total differential is the original differential of $C$: on the left its only summand has $p=0$, hence sign $+1$, and on the right $d_R=0$ makes the signed second term vanish. Consequently tensoring an acyclic complex with $R[0]$ is acyclic, so $R[0]$ is K-flat by [def-pc-kflat-complex]. For $K$ in the derived category choose a representing complex $C$ with $Q(C)\\cong K$, where $Q$ is the localization functor. In [def-kun-derived-tensor] use $R[0]$ itself as the K-flat first argument to compute $R[0]\\otimes_R^L K$ by $R[0]\\otimes_R C$. For $K\\otimes_R^L R[0]$, choose a K-flat resolution $P\\to C$ by [lem-pc-kflat-resolution] on the ringed site $(X_{\\mathrm{\\acute et}},R)$ and compute by $P\\otimes_R R[0]$. The displayed chain isomorphisms identify the resulting objects with $Q(C)\\cong K$ and $Q(P)\\cong Q(C)\\cong K$, respectively; the middle isomorphism comes from inverting the quasi-isomorphism $P\\to C$ in the localization. Thus the defined constant complex is the tensor unit. For a chain map $f:C\\to C'$, $f(rc)=rf(c)$ makes both multiplication squares commute in each degree. These squares still commute after $Q$, and a square with a quasi-isomorphism still commutes after inverting that map. Thus they also commute for the roofs representing derived morphisms, giving natural unit identifications on the derived category.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-kun-derived-tensor",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/_section.md",
+    "place": "final finite-stage sentence: the constant complex is the unit; direct calculation with the cited tensor definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/_section.md",
+  "place": "constant-complex unit clause, expanded by the degree-zero tensor calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleHomology|boundedConstructible|finiteTorAmplitude|constantComplex",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, DerivedCategory",
+   "results": "loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-16",
+   "verdict": "query rejected: unknown identifier; not evidence of absence; a second query with quoted names was run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible derived category of etale sheaves finite Tor amplitude",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HasDerivedCategory.standard; DerivedCategory.instIsTriangulated; CategoryTheory.Tor'; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.IsLE; CategoryTheory.hasExt_of_hasDerivedCategory; DerivedCategory.TStructure.t",
+   "date": "2026-10-16",
+   "verdict": "partial only: generic bounded derived categories, sheaf units and constant sheaves do not give the complete coefficient-stage/constructibility/Tor package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of etale sheaves of modules finite Tor amplitude coefficient stages",
+   "results": "DerivedCategory.IsGE; DerivedCategory.IsLE; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; SheafOfModules.IsFiniteType; localCohomology.diagram",
+   "date": "2026-10-16",
+   "verdict": "partial only: generic bounded derived categories, sheaf units and constant sheaves do not give the complete coefficient-stage/constructibility/Tor package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaves on small etale site derived category monoidal unit constant coefficient ring",
+   "results": "SheafOfModules.unit; LightCondMod; CondensedMod.LocallyConstant.functor; SheafOfModules.unit_val; LightCondMod.LocallyConstant.functor; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.constantSheaf",
+   "date": "2026-10-16",
+   "verdict": "partial only: generic bounded derived categories, sheaf units and constant sheaves do not give the complete coefficient-stage/constructibility/Tor package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant complex tensor unit sheaf",
+   "results": "SheafOfModules.unit; CategoryTheory.Sheaf.tensorUnit_isSheaf; AlgebraicGeometry.SheafedSpace.unit; SheafOfModules.unit_val; TopCat.sheafInhabited; CategoryTheory.sheafToPresheaf_ε; HomologicalComplex.tensorUnit; HomologicalComplex.instHasTensorTensorUnit_1",
+   "date": "2026-10-16",
+   "verdict": "Only ingredients, not the full coefficient-stage definition; read HomologicalComplex.tensorUnit and leftUnitor in Mathlib/Algebra/Homology/Monoidal.lean:87,220 and SheafOfModules.unit in Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:173."
+  },
+  {
+   "tool": "loogle",
+   "query": "constant sheaf derived tensor unit",
+   "results": "loogle: Unknown identifier `constant`",
+   "date": "2026-10-16",
+   "verdict": "Rejected query: unknown identifier; no evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "sk-def-sf-setting|def-sf-setting",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "No match for these names in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorUnit\"",
+   "results": "CategoryTheory.MonoidalCategoryStruct.tensorUnit; CategoryTheory.MonoidalCategory.tensorUnitLeft; CategoryTheory.MonoidalCategory.tensorUnitRight; CategoryTheory.MonoidalCategory.prodMonoidal_tensorUnit; CategoryTheory.Functor.LaxMonoidal.tensorUnit_whiskerLeft_comp_leftUnitor_hom; CategoryTheory.Functor.LaxMonoidal.whiskerRight_tensorUnit_comp_rightUnitor_hom; CategoryTheory.Functor.LaxMonoidal.tensorUnit_whiskerLeft_comp_leftUnitor_hom_assoc; CategoryTheory.Functor.LaxMonoidal.whiskerRight_tensorUnit_comp_rightUnitor_hom_assoc",
+   "date": "2026-10-16",
+   "verdict": "Ingredient/topological matches only; does not state the coefficient-stage definition."
+  },
+  {
+   "tool": "grep",
+   "query": "constructib|[Kk]Flat|derivedTensor",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean",
+   "date": "2026-10-16",
+   "verdict": "Ingredient/topological matches only; does not state the coefficient-stage definition."
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleIn|hasTorAmplitudeIn|KFlat|leftUnitor",
+   "results": "Mathlib/Probability/Kernel/Category/Stoch.lean; Mathlib/Probability/Kernel/Category/Stoch.lean; Mathlib/Probability/Kernel/Category/SFinKer.lean; Mathlib/Probability/Kernel/Category/SFinKer.lean; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean; Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredients only: sheaf-module units and tensor complexes do not state this coefficient-stage definition; read SheafOfModules.unit at Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:173 and HomologicalComplex.tensorUnit/leftUnitor at Mathlib/Algebra/Homology/Monoidal.lean:87,220."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category of sheaves of modules ring object tensor identity complex in degree zero",
+   "results": "SheafOfModules.unit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.unit_val; SheafOfModules.unitHomEquiv_apply_coe; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; FGModuleCat.tensorUnit_obj; HomologicalComplex.instHasTensorTensorUnit_1; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "Partial ingredients only: sheaf-module units and tensor complexes do not state this coefficient-stage definition; read SheafOfModules.unit at Mathlib/Algebra/Category/ModuleCat/Sheaf.lean:173 and HomologicalComplex.tensorUnit/leftUnitor at Mathlib/Algebra/Homology/Monoidal.lean:87,220."
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -39,5 +178,29 @@
  "blueprint_tags": [
   "sketch"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sf-setting",
+  "worker": "stage1",
+  "summary": "Split this definition using existing coefficient and small-etale definitions only; made finite Tor and finite constructible interval notation explicit and supplied the elementary constant-complex unit calculation. The pro-etale higher-stage conventions are kept separate from the finite etale construction. No new nodes or complete Lean attachment. Second reading made sheafification and naturality through localized morphisms explicit and directly cited the sheaf tensor definition and K-flat resolution theorem; no new nodes.",
+  "blueprint": "Opening coefficient datum and stage list are realized by the existing global/coefficient definitions; the finite-stage paragraph by the existing etale derived/constructible/Tor/constant/tensor notions; the final morphism convention by the existing separated and finite-type definitions. The unit assertion is the one elementary proof step. The identically worded blueprint node def-sf-setting is recorded as same_as. No unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat replacement on the ringed site (X_et, Lambda_X), used only to compute the right derived tensor unit. The coefficients-and-sites definition has no K-flat resolution theorem of its own; this does not replace any geometric or coefficient-comparison step of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q08-e922d3087",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-e922d3087 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source passages. The tensor-unit proof and coefficient hypotheses check out; no new nodes or circular dependency. Added the missing generic-tool declaration for lem-pc-kflat-resolution in the corrected JSON. Full checks and inherited metadata observations are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
