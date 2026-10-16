@@ -46,9 +46,8 @@ coefficient changes. This file supplies the coefficient-specific input:
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
   (Shriek);
-* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
-  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
-  isomorphism on all unbounded objects for every `f` with a compactification.
+* for `E ⊆ Ω` and proper `f`, (Push) is an isomorphism at bounded-below objects, by
+  the scalar-basis decomposition and uniformly bounded-below coproduct continuity.
 
 ## Coefficient-specific input
 
@@ -65,12 +64,12 @@ coefficient changes. This file supplies the coefficient-specific input:
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
-* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
-  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
-  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
-  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
-  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
-  made here.
+* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE`:
+  for `E ⊆ Ω` and `f` proper, (Push) is invertible at bounded-below complexes. Restriction
+  of scalars reflects isomorphisms; the unit-mate identity identifies the restricted
+  comparison with the coproduct comparison for copies with a common lower bound.
+  This is the scope needed by the bounded constructible consumer. The formerly disputed
+  ambient instance and its all-unbounded (Shriek) example have been retired.
 
 -/
 
@@ -1346,23 +1345,6 @@ by
   let eY := Mod.mapFreeRestrictedRegularIso (upperStarFromPoint Y) a n e
   exact derivedPushHom_of_finiteFree a f n eY
 
-/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
-then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
-extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
-/- STATEMENT-DISPUTED: the asserted all-unbounded scope is stronger than the available
-bounded-below continuity input. The proposed ambient right adjoint is not supplied by
-ModuleObject.Derived.UpperShriek, which constructs an adjoint only on bounded constructible
-categories with additional geometric hypotheses. AmbientCounterexampleCoproducts disproves the
-analogous ambient coproduct claim for ordinary coefficient sheaves; transferring that example
-to these exact internal condensed modules remains to be formalized. The finite-basis argument
-above is valid, but an infinite basis additionally needs the copower comparison isolated in
-CategoryTheory.Adjunction.isIso_iff_unitCoproductComparison. No claim of a Lean-certified
-counterexample to this exact coefficient instance is made here. -/
-instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
-    (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
-  sorry
-
 -- Keep the chosen derived adjunction and sheaf pullbacks folded during the unit comparisons.
 -- Unfold the canonical comparison only for the explicit mate calculation below.
 attribute [local irreducible] derivedPushHom derivedComapLowerStarIso
@@ -1507,12 +1489,6 @@ variable [HasCompactification f]
 /-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
 example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
-  inferInstance
-
-/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
-the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
-example (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
   inferInstance
 
 end Push
