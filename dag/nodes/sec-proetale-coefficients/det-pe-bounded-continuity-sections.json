@@ -3,40 +3,202 @@
  "blueprint": {
   "is": "det-pe-bounded-continuity-sections",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "det-lem-bounded-continuity-sections"
+  ]
  },
  "kind": "statement",
  "title": "Cohomology on a qcqs object commutes with bounded-below filtered colimits",
- "statement": "Let $U$ be a quasi-compact, quasi-separated object of $X_{\\mathrm{proét}}$, let $I$ be a\nfiltered category and $(K_i^\\bullet)_{i\\in I}$ a diagram of complexes of\n$\\mathcal R$-modules with $K_i^b=0$ for all $i$ and all $b<a$. Then for every $q$ the\ncanonical map $\\varinjlim_iH^q(U,K_i^\\bullet)\\to H^q(U,\\varinjlim_iK_i^\\bullet)$ is an\nisomorphism.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and use its small pro-étale site $X_{\\mathrm{proét}}$ [sk-def-pe-site] in the universes of [def-weil-size-convention]. Let $\\mathcal R$ be a sheaf of rings on this site, and let $U$ be a quasi-compact, quasi-separated object (its underlying scheme has a finite affine open cover, and intersections of affine opens are quasi-compact). Let $I$ be a small filtered category [def-weil-pbc-category-colimit], let $a\\in\\mathbf Z$, and let $(K_i^\\bullet)_{i\\in I}$ be a diagram of cochain complexes [def-weil-abstract-derived-category] of sheaves of left $\\mathcal R$-modules [def-weil-sheaf-of-modules-category], with $K_i^b=0$ for every $i$ and $b<a$. Colimits of these complexes are taken termwise in sheaves of $\\mathcal R$-modules. Write $H^q(U,L^\\bullet)=H^q(R\\Gamma(U,L^\\bullet))$ for hypercohomology, where $R\\Gamma(U,-)$ is computed by evaluating a bounded-below injective resolution at $U$, with values in complexes of abelian groups. Then for every $q\\in\\mathbf Z$ the canonical map induced by the colimit cocone is an isomorphism:\n$$\n\\varinjlim_{i\\in I}H^q(U,K_i^\\bullet)\\longrightarrow H^q\\bigl(U,\\varinjlim_{i\\in I}K_i^\\bullet\\bigr).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.md",
   "place": "node det-pe-bounded-continuity-sections, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
  "proof": [
   {
-   "text": "Put $K^\\bullet=\\varinjlim_iK_i^\\bullet$, the termwise colimit of sheaves; it also vanishes\nin degrees below $a$. Fix one hypercovering $W_\\bullet\\to U$ with every $W_r$ affine and\nweakly contractible ([det-pe-hypercover-existence]); it does not depend on $i$. By\n[det-pe-hypercover-complex], naturally in the complex,\n$H^q(U,K_i^\\bullet)=H^q\\operatorname{Tot}(C_i)$ and $H^q(U,K^\\bullet)=\nH^q\\operatorname{Tot}(C)$, with\n$\\operatorname{Tot}(C_i)^q=\\bigoplus_{0\\leq r\\leq q-a}K_i^{q-r}(W_r)$ and similarly for $C$.\nBy [det-pe-sections-limits-colimits], $\\varinjlim_iK_i^b(W_r)\\to K^b(W_r)$ is an\nisomorphism for all $r,b$. Finite direct sums commute with colimits, so\n$\\varinjlim_i\\operatorname{Tot}(C_i)\\to\\operatorname{Tot}(C)$ is an isomorphism of\ncomplexes (the differentials are induced by the same face maps and differentials).\nFiltered colimits of abelian groups are exact, so cohomology commutes with them:\n$\\varinjlim_iH^q\\operatorname{Tot}(C_i)\\cong H^q\\operatorname{Tot}(C)$. By naturality this\nisomorphism is the canonical map of the statement.",
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], the category of left module sheaves over the arbitrary ring sheaf $\\mathcal R$ on our small site has all small colimits. Form $K^b=\\varinjlim_i K_i^b$ in sheaves of $\\mathcal R$-modules, with cocone maps $\\iota_i^b$. The chain-map identities for the transition maps make the maps $\\iota_i^{b+1}d_i^b$ a cocone, hence define $d^b:K^b\\to K^{b+1}$ uniquely by $d^b\\iota_i^b=\\iota_i^{b+1}d_i^b$. The composites $d^{b+1}d^b$ vanish after all $\\iota_i^b$, so vanish by the colimit universal property [def-weil-pbc-category-colimit]. Thus these data give the termwise colimit complex. For $b<a$ the diagram is zero and its colimit is zero: maps from its zero cocone to any object are unique. Consequently $K^b=0$ below the same $a$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Opening sentence: termwise colimit and its common lower bound"
+   }
+  },
+  {
+   "text": "By clause 3 of [det-pe-hypercover-existence], choose one hypercover $W_\\bullet\\to U$ whose terms are affine and weakly contractible; it is fixed throughout the diagram. Apply [det-pe-hypercover-complex] to every $K_i^\\bullet$ and to $K^\\bullet$, using their common lower bound. Put $T_i=\\operatorname{Tot}(K_i^b(W_r))$ and $T=\\operatorname{Tot}(K^b(W_r))$. This gives natural isomorphisms $\\eta_i:H^q(U,K_i^\\bullet)\\xrightarrow{\\sim}H^q(T_i)$ and $\\eta:H^q(U,K^\\bullet)\\xrightarrow{\\sim}H^q(T)$. For every integer $n$, $T_i^n=\\bigoplus_{0\\le r\\le n-a}K_i^{n-r}(W_r)$ and $T^n=\\bigoplus_{0\\le r\\le n-a}K^{n-r}(W_r)$. These sums are finite and are zero when $n<a$.",
    "uses": [
     "det-pe-hypercover-existence",
-    "det-pe-hypercover-complex",
-    "det-pe-sections-limits-colimits"
+    "det-pe-hypercover-complex"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Fix one hypercover; natural hypercover calculation and formula for the finite total degrees"
+   }
+  },
+  {
+   "text": "For each $r,b$, apply [det-pe-sections-limits-colimits] with $W=W_r$ to the diagram of sheaves $K_i^b$. It gives the canonical isomorphism $\\alpha_{r,b}:\\varinjlim_i K_i^b(W_r)\\xrightarrow{\\sim}K^b(W_r)$ induced by the maps $\\iota_i^b(W_r)$. To justify passage to underlying abelian groups, put $A=\\varinjlim_i K_i^b(W_r)$ in abelian groups with legs $j_i$. For each $s\\in\\mathcal R(W_r)$, the compatible additive maps $x\\mapsto j_i(sx)$ induce an additive endomorphism $\\mu_s$ of $A$ by [def-weil-pbc-category-colimit]. Precomposing with all $j_i$ proves $\\mu_{s+t}=\\mu_s+\\mu_t$, $\\mu_{st}=\\mu_s\\mu_t$, and $\\mu_1=1$, so $s\\cdot x=\\mu_s(x)$ makes $A$ a left module; the additive map induced by any compatible linear cocone is linear, again by testing on all $j_i$. Thus $A$ is also the module colimit, and the underlying abelian-group comparison $\\alpha_{r,b}$ is an isomorphism. Each $\\iota_i$ is a morphism of module sheaves, hence commutes with restriction along every face map $W_{r+1}\\to W_r$; and step 1 gives $d^b\\iota_i^b=\\iota_i^{b+1}d_i^b$. Therefore the $\\alpha_{r,b}$ commute with the horizontal alternating face sums and the vertical differentials $(-1)^rd^b$.",
+   "uses": [
+    "det-pe-sections-limits-colimits",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Sectionwise colimit comparison on every hypercover term; compatibility with faces and complex differentials"
+   }
+  },
+  {
+   "text": "For fixed $n$ let $S_n=\\{r\\in\\mathbf Z:0\\le r\\le n-a\\}$. The universal property [def-weil-pbc-category-colimit] and the coproduct property give $\\varinjlim_i\\bigoplus_{r\\in S_n}K_i^{n-r}(W_r)\\cong\\bigoplus_{r\\in S_n}\\varinjlim_iK_i^{n-r}(W_r)$: a map from either side to an abelian group $B$ is precisely a family of maps $K_i^{n-r}(W_r)\\to B$ compatible in $i$, one for each $r$. Composing with $\\bigoplus_r\\alpha_{r,n-r}$ gives an isomorphism $\\beta^n:\\varinjlim_iT_i^n\\to T^n$ whose composite with each cocone map is the total map induced by $\\iota_i$. These maps commute with differentials: on the $(i,r)$ summand both composites are the sum of $\\sum_j(-1)^j d_j^*\\iota_i^{n-r}$ and $(-1)^r d_K^{n-r}\\iota_i^{n-r}$, equal respectively to $\\sum_j(-1)^j\\iota_i^{n-r}d_j^*$ and $(-1)^r\\iota_i^{n-r+1}d_i^{n-r}$ by step 3. Hence $\\beta:\\varinjlim_iT_i\\xrightarrow{\\sim}T$ is an isomorphism of complexes, where the colimit differential is induced degreewise as in step 1. The argument includes $S_n=\\varnothing$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Finite direct sums commute with colimits; differentials are induced by the same face maps and differentials"
+   }
+  },
+  {
+   "text": "For every $n$ write $Z_i^n=\\ker(d_{T_i}^n)$, $B_i^n=\\operatorname{im}(d_{T_i}^{n-1})$, and $H_i^n=Z_i^n/B_i^n$ [def-weil-abstract-derived-category]. Chain maps preserve cycles and boundaries, so the sequences $0\\to Z_i^n\\to T_i^n\\to B_i^{n+1}\\to0$ and $0\\to B_i^n\\to Z_i^n\\to H_i^n\\to0$ are compatible diagrams of short exact sequences. By [lem-weil-pbc-filtered-colimit-abelian-groups-exact], their colimits are short exact. Thus $\\varinjlim B_i^n\\to\\varinjlim Z_i^n\\to\\varinjlim T_i^n$ consists of injections, and the differential of $\\varinjlim T_i$ factors as the surjection $\\varinjlim T_i^n\\to\\varinjlim B_i^{n+1}$ followed by its injection into $\\varinjlim T_i^{n+1}$. Its kernel is therefore $\\varinjlim Z_i^n$ and its image in degree $n$ is $\\varinjlim B_i^n$. The second short exact sequence then identifies $\\varinjlim H_i^n$ with $H^n(\\varinjlim T_i)$. This identification sends a cocone image of a cycle class to the class of the cocone image of that cycle, so it is the canonical comparison $\\gamma:\\varinjlim_iH^q(T_i)\\xrightarrow{\\sim}H^q(\\varinjlim_iT_i)$. Compose with $H^q(\\beta)$ from step 4. No boundedness hypothesis is needed for this algebraic step.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Filtered colimits of abelian groups are exact, so cohomology commutes with them"
+   }
+  },
+  {
+   "text": "Let $\\lambda_i:T_i\\to\\varinjlim_jT_j$ be the colimit legs. Naturality in [det-pe-hypercover-complex], applied to $\\iota_i:K_i\\to K$, gives $\\eta\\circ H^q(U,\\iota_i)=H^q(\\beta\\lambda_i)\\circ\\eta_i$. By step 5 the composite $\\eta^{-1}\\circ H^q(\\beta)\\circ\\gamma\\circ(\\varinjlim_i\\eta_i)$ is an isomorphism, and precomposing it with the $i$-th colimit leg gives exactly $H^q(U,\\iota_i)$. The uniqueness clause of [def-weil-pbc-category-colimit] therefore identifies this composite with the canonical map in the statement. This proves the assertion for all $q\\in\\mathbf Z$, including $q<a$.",
+   "uses": [
+    "det-pe-hypercover-complex",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+    "place": "Final sentence: naturality identifies the constructed isomorphism with the canonical map"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "def-weil-pbc-category-colimit",
   "det-pe-hypercover-existence",
   "det-pe-hypercover-complex",
-  "det-pe-sections-limits-colimits"
+  "det-pe-sections-limits-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-sections.proof.md",
+  "place": "Whole proof, with the cycle/boundary argument for its exact-colimit sentence supplied using Stacks Tag 00DB (algebra-lemma-directed-colimit-exact)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*[Cc]olimit|[Cc]olimit.*homologyFunctor",
+   "results": "Source grep in Algebra/Homology returned zero hits. Search scope: Mathlib/Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale|proEtale|proetale",
+   "results": "Ten grep hits in AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean. Read the former: it constructs the pro-etale site, not the continuity theorem. Search scope: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercohomology of uniformly bounded below complexes of sheaves on the pro-etale site commutes with filtered colimits",
+   "results": "Eight hits including Limits.colimitLimitIso, HomologicalComplex.instHasFilteredColimitsOfSize, Sheaf.hasFilteredColimitsOfSize, and instPreservesHomologyFunctorAddCommGrpCatColim. The last is the algebraic exact-colimit input, not the geometric item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, PreservesFilteredColimits",
+   "results": "Loogle returned zero hits and the error unknown identifier 'PreservesFilteredColimits'; this query is inconclusive and was replaced.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid identifier; replaced by the later colim/PreservesHomology query"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"Colimits\"",
+   "results": "Loogle returned zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact filtered colimit of cochain complexes of abelian groups commutes with homology",
+   "results": "Eight hits including instPreservesHomologyFunctorAddCommGrpCatColim, HomologicalComplex.ab5OfSize, HomologicalComplex.hasExactColimitsOfShape and colim.exact_mapShortComplex. Reuse the existing filtered-exactness node, not a new lemma.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on a quasi-compact quasi-separated pro-etale object commutes with filtered colimits of uniformly bounded below complexes of sheaves of modules",
+   "results": "Eight hits: condensed abelian/module instances, localCohomology.diagram and condensed colimit/sheafification results; none states pro-etale hypercohomology continuity.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesHomology\", \"colim\"",
+   "results": "Loogle returned Functor.preservesFiniteColimits_of_preservesHomology and instPreservesHomologyFunctorAddCommGrpCatColim; the latter is the existing algebraic input.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "instPreservesHomologyFunctorAddCommGrpCatColim|instance.*[Cc]olim|IsFiltered",
+   "results": "Read Mathlib/Algebra/Category/Grp/AB.lean:32–53, especially the filtered-colim PreservesHomology instance at lines 36–53. Directory grep also found filtered-colimit existence/forgetful instances in Colimits.lean and FilteredColimits.lean. The earlier grep on the single AB.lean file printed malformed file/line fields (rg omits a filename for one file), so it was repeated on the containing directory. Search scope: Mathlib/Algebra/Category/Grp/AB.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "instPreservesHomologyFunctorAddCommGrpCatColim|instance.*[Cc]olim|IsFiltered",
+   "results": "Read Mathlib/Algebra/Category/Grp/AB.lean:32–53, especially the filtered-colim PreservesHomology instance at lines 36–53. Directory grep also found filtered-colimit existence/forgetful instances in Colimits.lean and FilteredColimits.lean. The earlier grep on the single AB.lean file printed malformed file/line fields (rg omits a filename for one file), so it was repeated on the containing directory. Search scope: Mathlib/Algebra/Category/Grp",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; algebraic input reused where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtale.*[Cc]ohomology|[Cc]ohomology.*ProEtale|[Hh]ypercohomology.*[Cc]olimit",
+   "date": "2026-10-16",
+   "results": "Independent second reading: 0 hits. No source matches.",
+   "verdict": "no match for pro-étale bounded-below hypercohomology continuity; returned sheaf/condensed colimit infrastructure is not this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation of bounded below sheaf complexes on a coherent site preserves filtered colimits",
+   "date": "2026-10-16",
+   "results": "Independent second reading: 8 hits. Condensed.hasExactColimitsOfShape, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.Sheaf.ab5ofSize, Condensed.instAB5CondensedMod, SheafOfModules.Finite.evaluationPreservesFiniteLimits, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall",
+   "verdict": "no match for pro-étale bounded-below hypercohomology continuity; returned sheaf/condensed colimit infrastructure is not this assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +213,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-cor-pe-bounded-continuity"
+ "unit": "sk-cor-pe-bounded-continuity",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-pe-bounded-continuity-sections",
+  "worker": "stage1",
+  "summary": "Expanded the single imported paragraph into six steps following exactly the fixed-hypercover route. Introduced the implicit base scheme, ring sheaf, degrees, and smallness convention; specified the termwise colimit and hypercohomology. Reused the three geometric blueprint nodes and the existing filtered-exactness Mathlib leaf; wrote out finite-sum and differential compatibility, the cycles/boundaries comparison, and canonical-map naturality. No new nodes. Second reading constructs the scalar action on the underlying abelian-group colimit and checks its module universal property.",
+  "blueprint": "Steps 1–2 realize the opening lower-bound sentence and fixed-hypercover calculation; step 3 realizes the sectionwise colimit comparison; step 4 realizes the finite-sum total comparison and its differential compatibility; step 5 realizes the filtered-exactness sentence; step 6 realizes the final canonical-map sentence. The parallel det-lem-bounded-continuity-sections contains the complementary compound statement and is recorded in same_as, not used to replace the argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Step 1 uses only existence of small colimits of module sheaves on a small ringed site, allowing noncommutative rings. This is generic category infrastructure; the fixed-hypercover route of the unit is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-c1cec8364",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-c1cec8364 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, current blueprint route, and cited source locations. All six steps preserve arbitrary ring-sheaf coefficients and prove the canonical continuity map is an isomorphism. Checked bounds, signs, cycles and boundaries, edge cases, duplicate candidates, and dependency acyclicity. No new nodes or repairs; accepted the declared Grothendieck-category tool use. Details written to review.md."
+ }
 }
