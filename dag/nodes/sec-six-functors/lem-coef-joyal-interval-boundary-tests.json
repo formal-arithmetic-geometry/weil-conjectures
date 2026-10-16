@@ -305,5 +305,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalIntervalBoundaryTests",
+  "declaration": "SSet.joyal_interval_boundary_tests",
+  "declarations": [
+   "SSet.JoyalInterval.firstAttachingMap",
+   "SSet.JoyalInterval.first",
+   "SSet.JoyalInterval.firstEdge",
+   "SSet.JoyalInterval.secondAttachingMap",
+   "SSet.JoyalInterval.obj",
+   "SSet.JoyalInterval.edge",
+   "SSet.JoyalInterval.endpoint",
+   "SSet.JoyalInterval.boundaryCylinderSubcomplex",
+   "SSet.JoyalInterval.boundaryCylinder",
+   "SSet.joyal_interval_boundary_tests"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalIntervalBoundaryTests.lean",
+  "statement": "theorem joyal_interval_boundary_tests (M : HomotopicalAlgebra.ModelCategory SSet.{u}) (hcof : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithCofibrations.cofibrations i ↔ ∀ n : SimplexCategoryᵒᵖ, Function.Injective (i.app n)) (hweak : ∀ {A B : SSet.{u}} (i : A ⟶ B), M.categoryWithWeakEquivalences.weakEquivalences i ↔ ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map i)).app C)).toFunctor).IsEquivalence) : JoyalInterval.obj.{u}.Finite ∧ (∀ ε : Fin 2, anodyneExtensions (JoyalInterval.endpoint.{u} ε)) ∧ (∀ (ε : Fin 2) (n : ℕ), (M.categoryWithCofibrations.cofibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences) (JoyalInterval.boundaryCylinder.{u} ε n)) ∧ (∀ {X Y : SSet.{u}} [Quasicategory X] [Quasicategory Y] (p : X ⟶ Y), M.categoryWithFibrations.fibrations p ↔ innerHornInclusions.rlp p ∧ ∀ (ε : Fin 2) (n : ℕ), HasLiftingProperty (JoyalInterval.boundaryCylinder.{u} ε n) p)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The finite interval and its canonical endpoint and degreewise-union maps are explicit helpers belonging to this node. Kan anodyneness uses Mathlib anodyneExtensions and its cellular characterization. The Joyal model is parametrized by precisely the cofibration and hFun weak-equivalence identifications of exists_joyal_model_structure, retaining the independent enlarged testing universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976f790cb",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Statement matches node clause by clause. Horn pushouts glue triangles (0,1,0) with [0,1]=a,[0,2]=id0 adding b, and (1,0,1) with [1,2]=a,[0,2]=id1 adding c (leg order checked in Mathlib HornColimits); b and c distinct; J asserted Finite. Endpoints are vertices of a. Mathlib anodyneExtensions equals the node's Kan-anodyne saturation via anodyneExtensions_eq_retracts_transfiniteCompositions. unionProd gives (dDn x J) u (Dn x {e}); boundary_zero covers n=0. hcof/hweak are verbatim the first two conjuncts of exists_joyal_model_structure, with independent v. Fibration iff innerHornInclusions.rlp and HasLiftingProperty for all e,n, over quasicategories in universe u. No extra hypotheses. Node differs from live base only in lean; lean.statement verbatim; 10 declarations listed, none hollow; sorry-only; docstrings carry source place, blueprint id and all 12 proof steps; proof-dep imports complete; lines <=100. nt_compile.py: rc 0, no errors or warnings. Cosmetic: worker report promises a dry-run record that is absent."
  }
 }

@@ -24,7 +24,10 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-abstract-derived-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface",
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-coef-coherent-nerve-comparison"
  ],
  "proof": [
   {
@@ -209,5 +212,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PresheafDGFunctionComplex",
+  "declaration": "CategoryTheory.PresheafDGFunctionComplex.comparison_exists",
+  "declarations": [
+   "CategoryTheory.PresheafDGFunctionComplex.freeRepresentable",
+   "CategoryTheory.PresheafDGFunctionComplex.IsFreeBoundedAbove",
+   "CategoryTheory.PresheafDGFunctionComplex.homMap",
+   "CategoryTheory.PresheafDGFunctionComplex.simplicialGroups",
+   "CategoryTheory.PresheafDGFunctionComplex.realization",
+   "CategoryTheory.PresheafDGFunctionComplex.vertexPoint",
+   "CategoryTheory.PresheafDGFunctionComplex.Spaces",
+   "CategoryTheory.PresheafDGFunctionComplex.asSpaces",
+   "CategoryTheory.PresheafDGFunctionComplex.enrichedMaps",
+   "CategoryTheory.PresheafDGFunctionComplex.Comparison",
+   "CategoryTheory.PresheafDGFunctionComplex.comparison_exists"
+  ],
+  "file": "lean/Sheaf/Paper/PresheafDGFunctionComplex.lean",
+  "statement": "theorem comparison_exists (C : Type u) [Category.{v} C] (Λ : Type w) [CommRing Λ] [HasDerivedCategory.{max u v w t + 1} AddCommGrpCat.{max u v w t}] : Nonempty (Comparison.{u, v, w, t} C Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Structured statement with the genuine coherent localization universal property, normalized ordinary Hom bifunctor, derived-Hom comparison, actual natural weak-equivalence zigzag of mapping functors, normalized-chain Dold–Kan realization, homotopy groups at every vertex, and natural derived shift. Added only existing landed statement dependencies for the coherent localization and simplicial-category interfaces. No definitions choose data from the existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c53857614",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read the node, the six stmt_deps and their side-clone Lean interfaces (FiniteReedy.IsLocalization, CoherentNerve.SCat/nerveFunctor, CoherentNerveComparisonStatement, SSet.Enhanced weak equivalences and space localization), the delivered module and both report sections. Comparison's fields match every node clause: freeYoneda-based L_T; IsFreeBoundedAbove (IsStrictlyLE plus termwise small coproducts, empty allowed); the ordinary bifunctor pinned to Mathlib HomComplex and homMap; rhom pinned up to quasi-iso by K-projective replacements, two-sided inversion and projective_comparison; free_comparison for arbitrary G; an enhanced locally Kan SCat with the full coherent IsLocalization and the localization map pinned to the strict nerve of localize in every dimension; an actual natural weak-equivalence zigzag of enriched maps with realization(rhom); good truncation (Z^0 in degree 0) followed by DoldKan.Gamma; factorization through DerivedCategory.Q for arbitrary models; pi_0 = H^0 and pi_{m+1} = H^{-(m+1)} at all vertices with naturality and translation; the precomposition iff over r <= 0; a natural shift k to -k. Joint satisfiability checked via functorial projective replacement. No added hypothesis: the HasDerivedCategory instance is only a model choice, and universes u, v, w, t are independent. Edge cases: empty or terminal C, Lambda = 0, A = 0, unbounded G, m = 0, k = 0 and +-1. Node changes only in lean and stmt_deps; the three added stmt_deps are landed nodes (allowed by brief-stage2 l.140); lean.statement is verbatim. No hollow defs, the sole sorry is in the theorem, docstrings carry source, blueprint tag and all six proof steps, no line exceeds 100 chars, autoImplicit is off. nt_compile.py local overlay: 6.6 s, exit 0, nothing printed. Non-blocking: the nerveComparison field duplicates the universe-polymorphic coherent_nerve_comparison, and mapsKan and realizationKan are redundant."
  }
 }
