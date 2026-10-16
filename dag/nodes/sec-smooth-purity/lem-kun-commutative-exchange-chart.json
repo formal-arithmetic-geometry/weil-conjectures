@@ -36,9 +36,132 @@
   "def-weil-pbc-etale-cohomology",
   "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded below complex $I$ of injective abelian sheaves with a quasi-isomorphism $F[0]\\to I$, and a bounded below complex $J$ of injectives with a quasi-isomorphism $j:g'^{-1}I\\to J$. Enough injectives and the bounded-below representative theorem give the complexes; the K-injective Hom bijection lifts the representing derived isomorphisms to these chain maps. Exactness of $g'^{-1}$ makes the composite $g'^{-1}F[0]\\to J$ a quasi-isomorphism, by the natural exact-functor cohomology comparison. Thus $Rf_*F$ and $Rf'_*g'^{-1}F$ are represented by $f_*I$ and $f'_*J$. No injectivity of $g'^{-1}I$ is claimed. All complexes used here are bounded below.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case, first paragraph of the proof; Tag 07A6, lemma-adjoint"
+   }
+  },
+  {
+   "text": "Write $\\theta^0:f'^{-1}g^{-1}\\simeq g'^{-1}f^{-1}$ for the sheaf-level composition isomorphism for the given equality. It is applied termwise on complexes, and its class is the derived square isomorphism by the termwise clause of the derived inverse-image composition theorem. Put $M=g^{-1}f_*I$, $V=g'^{-1}I$ and\n$$a=g'^{-1}(\\varepsilon_{f,I})\\circ\\theta^0_{f_*I}:f'^{-1}M\\to V,\\qquad e=f'_*(j\\circ a)\\circ\\eta_{f',M}:M\\to f'_*J.$$\nThese are chain maps since their components are natural transformations. We verify, rather than assume, that $Q(e)$ represents the specified derived exchange. The derived counits at the bounded below K-injective complexes $I,J$ are the termwise counits by clause (1) of [prop-weil-pbc-derived-inverse-image-adjunction]. The transpose of $Q(e)$ under $f'^{-1}\\dashv Rf'_*$ is therefore the class of\n$$\\varepsilon_{f',J}\\circ f'^{-1}e\n =\\varepsilon_{f',J}\\circ f'^{-1}f'_*(j a)\\circ f'^{-1}\\eta_{f',M}\n =(j a)\\circ\\varepsilon_{f',f'^{-1}M}\\circ f'^{-1}\\eta_{f',M}=j a.$$\nThe middle equality is counit naturality and the last is the triangle identity. On the other hand the transpose defining exchange is $g'^{-1}(\\varepsilon^D_{f,F})\\circ\\theta^D_{Rf_*F}$, which is the class of $a$, followed by $j$ to identify its target with $QJ$. Injectivity of the adjunction Hom bijection now gives $\\operatorname{Ex}_F=Q(e)$ under the resolution identifications. This uses only the specified equality of scheme composites.",
+   "uses": [
+    "def-kun-commutative-derived-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, counit-adjunct definition; Tag 0736, resolution construction; Tag 07A6, derived adjunction"
+   }
+  },
+  {
+   "text": "We calculate the section map in each complex degree before taking cohomology. For a sheaf $B$ on $X$, let $b_B=g'^{-1}\\varepsilon_{f,B}\\circ\\theta^0_{f_*B}$ and let $\\beta^0_B=f'_*(b_B)\\circ\\eta_{f',g^{-1}f_*B}$. Let $d:f_*g'_*\\simeq g_*f'_*$ be the canonical direct-image composition comparison along $fg'=gf'$; on an etale $U\\to Y$ it is the identification of evaluations on $X'\\times_YU\\simeq X'\\times_{Y'}(Y'\\times_YU)$. To display the adjunction calculation, abbreviate $L=f^{-1}$, $R=f_*$, $L'=f'^{-1}$, $R'=f'_*$, $G=g^{-1}$, $S=g_*$, $H=g'^{-1}$ and $P=g'_*$. Write $\\eta^f,\\eta^{f'},\\eta^g,\\eta^{g'}$ for the four sheaf-adjunction units, and $\\varepsilon^f$ for the $f$-counit. Thus $d:RP\\simeq SR'$ and $\\theta^0:L'G\\simeq HL$. Clause (2) of [lem-weil-pbc-inverse-image-composition], applied once to each composite in $fg'=gf'$, gives, for a sheaf $A$ on $Y$,\n$$\nSR'(\\theta^0_A)\\circ S(\\eta^{f'}_{GA})\\circ\\eta^g_A\n=d_{HLA}\\circ R(\\eta^{g'}_{LA})\\circ\\eta^f_A.\n$$\nIndeed $\\theta^0=c_{f,g'}^{-1}c_{g,f'}$ and $d=d_{g,f'}d_{f,g'}^{-1}$, after identifying the equal composite morphisms; substituting the two unit formulas from that clause gives this equality. Put $A=RB$ and expand $\\beta^0_B=R'(H\\varepsilon^f_B\\circ\\theta^0_{RB})\\circ\\eta^{f'}_{GRB}$. Then\n$$\n\\begin{aligned}\nS(\\beta^0_B)\\circ\\eta^g_{RB}\n&=SR'(H\\varepsilon^f_B)\\circ SR'(\\theta^0_{RB})\\circ S(\\eta^{f'}_{GRB})\\circ\\eta^g_{RB}\\\\\n&=SR'(H\\varepsilon^f_B)\\circ d_{HLRB}\\circ R(\\eta^{g'}_{LRB})\\circ\\eta^f_{RB}\\\\\n&=d_{HB}\\circ RP(H\\varepsilon^f_B)\\circ R(\\eta^{g'}_{LRB})\\circ\\eta^f_{RB}\\\\\n&=d_{HB}\\circ R(\\eta^{g'}_B)\\circ R(\\varepsilon^f_B)\\circ\\eta^f_{RB}\\\\\n&=d_{HB}\\circ R(\\eta^{g'}_B).\n\\end{aligned}\n$$\nThe successive equalities use the displayed composite-unit identity, naturality of $d$ at $H\\varepsilon^f_B$, naturality of $\\eta^{g'}$ at $\\varepsilon^f_B$, and the triangle identity $R(\\varepsilon^f_B)\\circ\\eta^f_{RB}=1$. This is the horizontal transpose of the underived mate, with no assumption that it is invertible. Applying $f'_*j$ degreewise, evaluating on $U$, and writing $p:T\\to X$, $p':T'\\to X'$ gives the explicit formula (the fibre-product universal property identifies $X'\\times_X T\\simeq X'\\times_Y U\\simeq T'$)\n$$e^r(U')\\bigl(\\eta_{g,f_*I^r}(U)(x)\\bigr)=j^r(T')\\bigl(\\eta_{g',I^r}(T)(x)\\bigr),\\qquad x\\in I^r(T).$$\nUnder $p^{-1}I^r=I^r|_T$ and $p'^{-1}g'^{-1}I^r\\simeq t^{-1}p^{-1}I^r$, the section inside $j^r(T')$ is exactly $\\eta_{t,I^r|_T}(T)(x)$. Indeed the two composite units for $pt=g'p'$ agree by the same unit-compatible composition identity, and the units of the etale maps $p,p'$ are restriction. This establishes the actual chart section formula for $e$, including its adjunction-unit factor.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case, pushed-forward adjunction map; Sites Tag 03CB, lemma-composition-morphisms-sites, composition by uniqueness of left adjoints; Etale Cohomology Tag 03S2, section-extension-by-zero, paragraph after definition-extension-zero, restriction on the small etale site. The displayed composite-unit and naturality calculation is agent-written."
+   }
+  },
+  {
+   "text": "The projections $p:T\\to X$ and $p':T'\\to X'$ are etale, by the etale base-change statement applied to $U\\to Y$ and $U'\\to Y'$. Inverse image along them is restriction and preserves injectives (use the constant ring $\\mathbf Z$, so these are abelian sheaves). Exactness of restriction preserves the two resolution quasi-isomorphisms. Consequently $I|_T$ and $J|_{T'}$ are bounded below complexes of injectives computing $H^q(T,F_T)$ and $H^q(T',t^{-1}F_T)$, and $j|_{T'}:t^{-1}(I|_T)\\to J|_{T'}$ is a resolution comparison. By the definition of cohomology pullback, the chain map\n$$w:\\Gamma(T,I|_T)\\longrightarrow\\Gamma(T',J|_{T'}),\\qquad w^r(x)=j^r(T')\\bigl(\\eta_{t,I^r|_T}(x)\\bigr)$$\ninduces exactly $t^*$ on $H^q$. This is the chain map calculated in Step 3. Only the etale projections preserve injectives; $t$ and $g'$ can be arbitrary morphisms.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F3, lemma-cohomology-of-open, restriction of injectives; Tag 0736, resolution comparison"
+   }
+  },
+  {
+   "text": "For clarity, the passage to sheaves is a quotient calculation. A class $z\\in H^q(I(T))$ has a cycle representative $x\\in I^q(T)$, with $d(x)=0$. The canonical map $\\theta_{f,U}$ sends it to the image of $x$ in $H^q(f_*I)(U)$; this is the canonical map from the cohomology presheaf to its associated sheaf in [sbc-lem-higher-direct-image-presheaf]. Apply the inverse-image unit to this image. Naturality of $\\eta_g$ for the cycle inclusion and the cycle-to-cohomology quotient identifies it with the cohomology-sheaf class of $\\eta_{g,f_*I^q}(x)$; the exact-functor comparison identifies $H^q(g^{-1}f_*I)$ with $g^{-1}H^q(f_*I)$ and preserves both cycle inclusions and quotient projections. By Step 2, $E^q$ is $H^q(e)$ under that identification. Thus the left side of the required equality at $z$ is the sheaf cohomology class of $e^q(\\eta_g(x))=w^q(x)$, by Step 3. Step 4 identifies the raw class of $w^q(x)$ with $t^*z$, whose image in $H^q(f'_*J)(U')$ is $\\theta_{f',U'}(t^*z)$. Chain maps carry cycles to cycles and boundaries to boundaries, so this calculation is independent of the chosen representative $x$. It proves the displayed equality for every $z$. We used global cycle representatives only in cohomology of the section complex $I(T)$, not for arbitrary sections of its cohomology sheaf.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03Q8, lemma-higher-direct-images, canonical sheafification map; Tag 0736, induced cohomology map"
+   }
+  },
+  {
+   "text": "For a morphism $U_1\\to U_2$ over $Y$, the fibre-product universal property gives $t_2\\circ(T'_1\\to T'_2)=(T_1\\to T_2)\\circ t_1$. The section formula of Step 3 commutes with these restrictions: $j$ is a sheaf map and units and composition comparisons are natural. Taking cycles and their boundary quotients preserves that equality, and the composition clause of [lem-weil-pbc-cohomology-pullback-functorial] identifies the resulting raw restriction maps. For a coefficient map $\\phi:F\\to\\widetilde F$, write $s:F[0]\\to I$, $\\widetilde s:\\widetilde F[0]\\to\\widetilde I$ and $\\widetilde j:g'^{-1}\\widetilde I\\to\\widetilde J$ for the chosen resolutions. The K-injective Hom bijection gives chain maps $u:I\\to\\widetilde I$ and $v:J\\to\\widetilde J$ representing $\\phi$ and $g'^{-1}\\phi$. Choose them so $us$ and $\\widetilde s\\phi$ have the same derived class, and $v j g'^{-1}s$ and $\\widetilde j g'^{-1}(\\widetilde s\\phi)$ have the same derived class. Since $Q(g'^{-1}s)$ is invertible, cancellation gives\n$$Q(vj)=Q(\\widetilde j\\,g'^{-1}u).$$\nThe target $\\widetilde J$ is K-injective, so the same Hom bijection gives a chain homotopy $v j\\simeq\\widetilde j\\,g'^{-1}u$; it does not require $g'^{-1}I$ to be K-injective. Restrict this homotopy to $T'$ and use unit naturality to get\n$$v(T')\\circ w_I\\simeq w_{\\widetilde I}\\circ u(T).$$\nFor the exchange representatives, naturality of $\\theta^0$, the counit, and the $f'$-unit in Step 2 gives\n$$f'_*(v)\\circ e\\simeq\\widetilde e\\circ g^{-1}f_*(u).$$\nAll these are homotopies of actual complexes: additive functors and evaluation preserve a chain-homotopy equation $a-b=dh+hd$. They therefore induce equal cohomology maps. By the morphism clause of [def-weil-pbc-direct-image], $f_*u$ and $f'_*v$ compute the coefficient maps on the higher direct images. The cycle-to-quotient formula in Step 5 commutes with $u,v$, and the exact cohomology comparison is natural; hence both sides of the asserted equation commute with $\\phi$. Clauses (1), (3) and (4) of [lem-weil-pbc-cohomology-pullback-functorial] identify these raw maps with the canonical cohomology maps. Taking $\\phi=\\mathrm{id}$ with two different choices of resolutions proves independence of those choices as well. Thus both stated naturalities hold.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, homotopy independence of the construction; Tag 03CB, composition coherence; Tag 01F7, cohomology functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-commutative-derived-exchange",
+  "def-pc-fibre-product",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "prop-weil-pbc-inverse-image-exact",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 03F3 (lemma-cohomology-of-open), together with etale-cohomology Tag 03Q8 (lemma-higher-direct-images); explicit transpose, chart and quotient calculations written by the worker. Second reader read the actual .tex files in /home/ubuntu/weil-launcher-nt/literature/stacks-project (read-only literature mirror), including sites.tex Tag 03CB and etale-cohomology.tex Tag 03S2, and expanded the unit and coefficient-homotopy calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -179,10 +302,94 @@
    "results": "10 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; subdirectory CategoryTheory/Sites",
    "date": "2026-10-16",
    "verdict": "No exact match: SheafCohomology/Basic.lean:24-36,69-94 defines the Ext-valued cohomology presheaf; MayerVietoris.lean uses restrictions on a fixed site, without a derived exchange map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived exchange of a commutative square agrees with pullback on etale cohomology charts",
+   "results": "{\"t\": \"2026-10-16T03:39:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived exchange of a commutative square agrees with pullback on etale cohomology charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.t\", \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'\", \"AlgebraicGeometry.Scheme.Pullback.t'\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso\", \"AlgebraicGeometry.Scheme.Pullback.gluing_t'\", \"AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap\", \"AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV\"], \"digest\": \"1c482a4ecc61ef37\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic pullback, underived sheafification or fixed-site cohomology-presheaf infrastructure does not state the specified derived-exchange chart equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "cohomologyPresheaf, derivedBaseChange, baseChange",
+   "results": "{\"t\": \"2026-10-16T03:40:00Z\", \"tool\": \"loogle\", \"query\": \"cohomologyPresheaf, derivedBaseChange, baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'cohomologyPresheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: rejected identifier syntax; reran with the valid quoted name cohomologyPresheaf and mateEquiv"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|derivedBaseChange|baseChange",
+   "results": "{\"t\": \"2026-10-16T03:40:00Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|derivedBaseChange|baseChange\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Local.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Local.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Descent.lean\"], \"digest\": \"820d168839cea4b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic pullback, underived sheafification or fixed-site cohomology-presheaf infrastructure does not state the specified derived-exchange chart equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exchange of a commutative square agrees with pullback on etale cohomology charts",
+   "results": "{\"t\": \"2026-10-16T03:40:01Z\", \"tool\": \"leansearch\", \"query\": \"Derived exchange of a commutative square agrees with pullback on etale cohomology charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.cone\", \"CategoryTheory.IsPullback.flip_iff\", \"CategoryTheory.IsPullback.of_iso\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare\", \"CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff\", \"CategoryTheory.Square.IsPullback.iff_of_equiv\", \"CategoryTheory.IsPullback.toCommSq\", \"CategoryTheory.IsPullback.mk\"], \"digest\": \"781aaa98ee556b6b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic pullback, underived sheafification or fixed-site cohomology-presheaf infrastructure does not state the specified derived-exchange chart equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafified cohomology map of a derived adjunction mate is the restriction of cohomology classes along a map of sites",
+   "results": "{\"t\": \"2026-10-16T03:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"The sheafified cohomology map of a derived adjunction mate is the restriction of cohomology classes along a map of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"CategoryTheory.sheafComposeNatTrans\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"CategoryTheory.plusPlusAdjunction\"], \"digest\": \"d4f921a05734b28d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic pullback, underived sheafification or fixed-site cohomology-presheaf infrastructure does not state the specified derived-exchange chart equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "{\"t\": \"2026-10-16T03:46:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomologyPresheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"bace15c4e66e0559\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:69-94 defines the fixed-site Ext-valued presheaf; it supplies no commutative-square derived mate or chart identity"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|baseChange|exchange",
+   "results": "{\"t\": \"2026-10-16T03:46:03Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|baseChange|exchange\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"ec35eb47dbe2392a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic pullback, underived sheafification or fixed-site cohomology-presheaf infrastructure does not state the specified derived-exchange chart equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "{\"t\": \"2026-10-16T03:46:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"cbff9b4c3d76920b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: generic categorical mates are already represented by def-weil-pbc-adjunction-mate; they give no etale cohomology-chart compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change|mateEquiv|rightDerivedFunctorComparison",
+   "results": "{\"t\": \"2026-10-16T03:55:02Z\", \"tool\": \"grep\", \"query\": \"baseChange|base_change|mateEquiv|rightDerivedFunctorComparison\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"b5e756d47ed587f7\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: CoverLifting.lean:381-419 concerns underived sheafification compatibility; Functor/Derived/RightDerived.lean:48-120 concerns abstract localization and functor comparisons; SheafCohomology/Basic.lean:69-94 defines fixed-site Ext presheaves. None identifies the derived mate on etale cohomology charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived pushforward comparison induced by an adjunction mate, on cohomology over a slice site, is induced by pulling back sections of an injective resolution",
+   "results": "{\"t\": \"2026-10-16T03:55:03Z\", \"tool\": \"leanfinder\", \"query\": \"The right derived pushforward comparison induced by an adjunction mate, on cohomology over a slice site, is induced by pulling back sections of an injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"7d056d8e815c95df\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: CoverLifting.lean:381-419 concerns underived sheafification compatibility; Functor/Derived/RightDerived.lean:48-120 concerns abstract localization and functor comparisons; SheafCohomology/Basic.lean:69-94 defines fixed-site Ext presheaves. None identifies the derived mate on etale cohomology charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "{\"t\": \"2026-10-16T03:55:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightDerivedFunctor\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'\", \"CategoryTheory.Functor.HasRightDerivedFunctor.mk\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.IsRightDerivedFunctor\"], \"digest\": \"d68f9332979872e4\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: CoverLifting.lean:381-419 concerns underived sheafification compatibility; Functor/Derived/RightDerived.lean:48-120 concerns abstract localization and functor comparisons; SheafCohomology/Basic.lean:69-94 defines fixed-site Ext presheaves. None identifies the derived mate on etale cohomology charts."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|rightDerived|baseChange|exchange",
+   "results": "{\"t\": \"2026-10-16T03:59:07Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|rightDerived|baseChange|exchange\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"ec35eb47dbe2392a\"}",
+   "date": "2026-10-16",
+   "verdict": "no exact match: CoverLifting.lean:381-419 concerns underived sheafification compatibility; Functor/Derived/RightDerived.lean:48-120 concerns abstract localization and functor comparisons; SheafCohomology/Basic.lean:69-94 defines fixed-site Ext presheaves. None identifies the derived mate on etale cohomology charts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-0eym",
   "by": "worker",
@@ -202,5 +409,89 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-commutative-exchange-chart",
+  "worker": "stage1",
+  "summary": "Six-step resolution proof with no new nodes. Explicitly verified the derived mate by its transpose, calculated its chart sections by unit-compatible composition, identified the resulting raw map with cohomology pullback using etale restriction of injectives, and passed through the natural cycles/boundaries quotient. Kept the statement and no-cartesianness scope unchanged. No exact completed project declaration or Mathlib match found. Read online Stacks Tags 0736, 07A7, 07A6, 03Q8, 03F3 and 03CB because the local source text is absent. Second reading expanded Step 3 into the composite-unit equality and four typed naturality/triangle equalities, expanded Step 6 into explicit resolution comparisons and their homotopy, and corrected the ordinary-direct-image citation excerpt. Actual Stacks .tex sources were found and read in the launcher literature mirror; the prior WANTED report is superseded.",
+  "blueprint": "Expands ancestor lem-kun-0ezt, proof sentence invoking Tag 0EYM: the actual mate-defined exchange on chart cohomology in the second proof of relative continuity. Realizes the chart compatibility required by steps 2 and 5 of unit sk-lem-kun-relative-continuity, preserving that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for the two small etale sheaf categories; generic resolution input absent from the relative-continuity unit."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Bounded below injective representatives and their K-injectivity let the prescribed chart argument use section complexes."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The generic Hom bijection supplies resolution comparisons and proves homotopy independence."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness keeps coefficient pullback resolutions quasi-isomorphic; the continuity unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Its natural cycles-and-boundaries comparison supplies exactly the degree-q identification in the item."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Its stated termwise counit formula identifies the actual mate with the constructed chain map by transpose injectivity."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Its termwise derived comparison and coherence determine the square isomorphism used in the mate."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Unit-compatible composition identifies the horizontal transpose and the chart section unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Restriction and the explicit unit formula identify section complexes on etale charts."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Shows each chart projection is etale, without assuming the original square cartesian."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Etale restriction preserves injectives, so the section complexes compute raw chart cohomology."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Supplies the canonical higher-direct-image cohomology-presheaf maps explicitly required by unit steps 2 and 5."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Resolution independence, coefficient naturality and composition supply the last naturality clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-b3a65f244",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-b3a65f244 (reviewer sub-agent of L); spot-checked: Read the complete delivery, required instructions, unit/chapter route, all six proof steps and 36 cited node statements, and the cited Stacks source passages. Verified exact base-change mate, coefficient category, hypotheses, chart calculations, naturality, edge cases, Mathlib searches, and no duplicate/new-node issues. Wrote review.md; no repairs required."
  }
 }
