@@ -15393,3 +15393,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:28 L: returned deliver/V1/Sheaf.Paper.RingedTopoiDerivedTensorPullback (reviewer RETURN: (reviewer X-9eb8b, head 9eb8b1415) B2: restore dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-topoi-derived-tensor)
 - 05:29 L: returned deliver/D3/Sheaf.Paper.CondensedQcqsPushforwardContinuity (reviewer RETURN: (reviewer X-fbc38, head fbc380ba6) B5: In dag/nodes/sec-proper-base-change/lem-weil-pbc-bounded-below-section-model.json)
 - 05:31 L: returned deliver/U4/Sheaf.AlgebraicGeometry.ProEtaleSiteComparison (reviewer RETURN: (reviewer X-45944, head 4594461fa) Stage 3 §4 (change-record Users; no corresponding letter is present in coord/delivery)
+- 05:35 L: returned deliver/J1/Sheaf.Paper.CondensedConstructibleOneStep (reviewer RETURN: (reviewer X-5280a, head 5280a8cff) H4/H10: Reuse the already-landed AlgebraicGeometry.ProEtale.condensedLocallyClosedPie)
