@@ -28,48 +28,342 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the lifting tool. For a monomorphism (degreewise injective map) $C\\hookrightarrow D$ and a Kan fibration $a:E\\to B$, define $M(D,E)_m=\\operatorname{Hom}(D\\times\\Delta^m,E)$ with restriction operators, using the degreewise formula for Fun in [def-cbc-enhanced-diagrams-cones], now for arbitrary simplicial sets $E,B$. By [lem-cbc-internal-hom-fibration-corner-map] the restriction/postcomposition map $\\Phi:M(D,E)\\to M(C,E)\\times_{M(C,B)}M(D,B)$, $h\\mapsto(h|_C,a\\circ h)$, with the degreewise pullback, is a Kan fibration; that statement imposes no Kan assumption on $B$, $C$ or $D$. This applies to every Kan fibration used below ($p$, $q$, and their pullbacks), without assuming either domain or base Kan; it includes the case $C=\\varnothing$, where $M(\\varnothing,E)\\times_{M(\\varnothing,B)}M(D,B)=M(D,B)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, lifting input; expanded from the horn-lifting definition rather than invoking the Kan–Quillen model structure."
+   }
+  },
+  {
+   "text": "Translate lifting for $\\Phi$ of Step 1 into prism extension. The evaluation correspondence used here is explicit: a map $k:K\\to M(D,E)$ gives, on an $m$-simplex pair $(d,b)\\in D_m\\times K_m$, the value $(k_m(b))_m(d,1_{[m]})$. Conversely a simplicial map $H:D\\times K\\to E$ gives $k_m(b)$ whose value on $(d,\\theta)\\in D_l\\times\\Delta^m_l$ is $H_l(d,K(\\theta)b)$. The restriction identities verify that these are inverse simplicial constructions, natural in $K$ and compatible with restriction along $C\\hookrightarrow D$ and postcomposition with $a$. Thus a horn-lifting problem for $\\Phi$ against $\\Lambda_j^m\\hookrightarrow\\Delta^m$ is exactly a map $(D\\times\\Lambda_j^m)\\cup_{C\\times\\Lambda_j^m}(C\\times\\Delta^m)\\to E$ over $D\\times\\Delta^m\\to B$, and a lift for $\\Phi$ is exactly an extension to $D\\times\\Delta^m$ over $B$; Step 1 supplies it for every $m\\geq1$ and every $0\\leq j\\leq m$, outer horns included. In particular ($m=1$, $j=0$ or $1$) $\\Phi$ has lifts of edges with either endpoint specified, i.e. we may extend a prism $D\\times\\Delta^1\\to E$ with its restriction to $C\\times\\Delta^1$ and either endpoint specified; and strict fibers of $\\Phi$ over a vertex are Kan, by filling horns over constant base simplices. Equivalently we may fill any relative horn product with $C\\hookrightarrow D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 3.5.5 and Proposition 3.5.3, mapping-space and covering-homotopy lifting inputs; explicit horn-product derivation."
+   }
+  },
+  {
+   "text": "Write $I=\\Delta^1$. Two $n$-simplices of $X$ are $p$-related when they have the same boundary and $p$-image and there is a map $\\Delta^n\\times I\\to X$ between them, constant on the boundary and over the constant homotopy of that image. This is an equivalence relation: its edges are precisely the edges in the strict fiber of the map $\\Phi$ of Step 2 for $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. That fiber is Kan. Constant edges give reflexivity; given an edge $x\\to z$, fill the outer $2$-horn consisting of that edge and the constant edge at $x$ to obtain an edge $z\\to x$; fill the inner $2$-horn of consecutive edges to obtain their composite. Thus every finite chain can be represented by a single edge with the required boundary and base fixed. Call a Kan fibration minimal when related simplices are equal. These are internal abbreviations in this proof, not additional hypotheses on $p$.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 3.5.5, printed p. 91; relation and minimality, with the equivalence-relation argument expanded using Step 2."
+   }
+  },
+  {
+   "text": "Two degenerate $n$-simplices with the same boundary are equal. For $n>0$ write $x=s_i d_i x$ and $z=s_j d_j z$. If $i=j$, their common faces give equality. If $i<j$, the simplicial identities and common faces give $x=s_i d_i z=s_i d_i s_j d_j z=s_i s_{j-1}d_i d_j z=s_j s_i d_i d_j z$, so $x$ is in the image of $s_j$ and $x=s_jd_jx=s_jd_jz=z$. Swap $x,z$ if $j<i$. In dimension zero there are no degenerate simplices. Consequently each $p$-relation class contains at most one degenerate simplex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.5.8, printed p. 93; its simplicial-identity calculation is included here."
+   }
+  },
+  {
+   "text": "Well-order the set of all simplices of $X$ (tagging their dimensions). In each $p$-relation class select its unique degenerate simplex when it has one, and otherwise select the least member. Let $T_n$ be the selected $n$-simplices. Every degenerate simplex is selected by Step 4. Define $A_n$ to consist of the elements of $T_n$ all of whose iterated proper faces are selected in their respective dimensions. Faces preserve this condition. A degeneracy of an element of $A_n$ is selected because it is degenerate; any iterated face of this degeneracy is either degenerate or an iterated face of the original simplex, by the simplicial identities. Hence degeneracies also preserve the condition and $A\\subseteq X$ is a simplicial subset. If all immediate faces of a selected simplex lie in $A$, that simplex lies in $A$. At most one simplex of each $p$-relation class lies in $A$. The well-ordering statement is used solely for representative and later filler choices, not as a homotopical input.",
+   "uses": [
+    "lem-weil-pbc-well-ordering-theorem",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed pp. 93–94, selection of representatives; the largest simplicial subset of the representatives is given explicitly instead of using Zorn."
+   }
+  },
+  {
+   "text": "Apply the relative boundary-cell statement to $A\\hookrightarrow X$. Obtain $A=Z_0\\hookrightarrow Z_1\\hookrightarrow\\cdots$ with union $X$, where $Z_n\\hookrightarrow Z_{n+1}$ attaches the nondegenerate $n$-simplices outside $A$ along their boundaries. We construct compatible homotopies $H_n:Z_n\\times I\\to X$ satisfying $H_n(-,0)$ equal to inclusion, $pH_n=p\\operatorname{pr}_{Z_n}$, $H_n|_{A\\times I}$ constant in the interval coordinate, and $H_n(-,1)$ valued in $A$. Start with the constant homotopy on $A$. The attaching sets and all sets of possible fillers are small sets; fix well-orders on their disjoint union to make the ensuing choices simultaneously.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed pp. 93–94, relative skeletal induction; the cited cell theorem supplies exactly this countable filtration, including zero-dimensional cells."
+   }
+  },
+  {
+   "text": "Suppose $H_n$ is defined, and let $x:\\Delta^n\\to X$ be an attaching cell, so its boundary lies in $Z_n$. Its boundary homotopy $H_n\\partial x$ together with the constant base simplex $px$ gives an edge $e$ in the target of the map $\\Phi$ of Step 2 for $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. Lift this edge starting at $x$, obtaining $U:x\\to z$. The endpoint $z$ has boundary $H_n(-,1)\\partial x$, which lies in $A$. Choose the representative $t\\in T_n$ of the $p$-class of $z$. It has the same boundary, so $t\\in A$ by Step 5. There is an edge $V:z\\to t$ over the constant endpoint of $e$ and fixed on that boundary, by Step 3. In $M(\\Delta^n,X)$ fill the inner horn with edges $01=U$, $12=V$ over the base $2$-simplex $s_1 e$ (vertices $e_0,e_1,e_1$). Its edge $02$ is a homotopy $x\\to t$ whose boundary is exactly $H_n\\partial x$ and whose $p$-image is constant. Choose such a filler for every cell, using the fixed well-orders. Glue these maps with $H_n$: degree by degree an attaching pushout is a disjoint union modulo the boundary identifications, and pairing with an interval simplex preserves these identifications. Agreement on each boundary therefore gives the required simplicial map $H_{n+1}$. This first transports the boundary and only then selects the representative; it does not wrongly treat a moving-boundary homotopy as a path in a fixed fiber.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed p. 94, corrected and expanded cell extension: the boundary is transported before selecting its minimal representative."
+   }
+  },
+  {
+   "text": "The compatible maps $H_n$ give $H:X\\times I\\to X$ by taking their union in every degree. Put $X'=A$, let $s:A\\hookrightarrow X$ be inclusion, and define $r:X\\to A$ by the endpoint $H(-,1)$, which is in $A$. Constancy on $A$ gives $rs=1_A$, while $pH=p\\operatorname{pr}_X$ gives $p=qr$ for $q=ps$. The map $q$ is Kan: include a horn in $A$ into $X$, fill its square against $p$, and apply $r$ to the filler. Moreover $q$ is minimal: a relative homotopy in $A$ over $Y$ is one in $X$, and its endpoints are two representatives of the same $p$-class, hence equal by Step 5.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed p. 94, retraction and minimal subfibration; these follow directly from the constructed homotopy and chosen representatives."
+   }
+  },
+  {
+   "text": "Now prove the claimed boundary lifting for $r$, which does not follow merely from $rs=1$. Given $u:\\partial\\Delta^n\\to X$ and $v:\\Delta^n\\to A$ with $ru=v|_{\\partial\\Delta^n}$, prescribe $G$ on $\\partial\\Delta^n\\times I$ by $H(u,-)$ and on $\\Delta^n\\times\\{1\\}$ by $sv$. The two prescriptions agree since $H(u,1)=sru$. Their image under $p$ is the constant homotopy of $qv$. Step 2 applied to $p$ extends them to $G:\\Delta^n\\times I\\to X$; put $w=G(-,0)$. Thus $w$ extends $u$ and $pw=qv$. It remains to show $rw=v$; the homotopy $rG$ need not itself be fixed on the boundary.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed p. 94, boundary lifting; explicit prism with its endpoint at 1, valid also for empty boundary when n=0."
+   }
+  },
+  {
+   "text": "Set $B=rH(u,-)$. In $A$ prescribe edges $01=rH(w,-)$ and $02=rG$ of a relative $2$-horn $\\Lambda_0^2$; the vertices are $rw,rw,v$ and both boundary edges equal $B$. On $\\partial\\Delta^n\\times\\Delta^2$ prescribe $B\\circ(\\mathrm{id}\\times\\sigma^1)$, where $\\sigma^1:[2]\\to[1]$ has values $0,1,1$; its edges $01,02$ are $B$ and its edge $12$ is the constant endpoint $B_1=ru$. All base data under $q$ are constant at $qv$, since $qr=p$. Step 2 for the Kan fibration $q$ fills this relative horn. The remaining edge $12$ is a homotopy $rw\\to v$ over $Y$ fixed on the boundary. Minimality of $q$ gives $rw=v$. Thus $w$ solves the original boundary square for $r$ in every dimension, including zero.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, printed pp. 94–95, expanded endpoint correction using a relative outer 2-horn; no model-category retract or weak-equivalence argument is used."
+   }
+  },
+  {
+   "text": "Minimal Kan fibrations remain minimal Kan after pullback: lift a horn by projecting to the original total space, lifting there against the prescribed base simplex, and pairing that lift with this base simplex. Two related simplices in the pullback have identical base coordinates and project to related simplices in the original total space, hence have identical total coordinates as well. In particular the fiber over a vertex is a minimal Kan complex, allowing the empty complex. If $F$ is such a fiber, the projection $K\\times F\\to K$ is Kan by filling the $F$ coordinate, and is minimal because a homotopy over $K$ fixes the $K$ coordinate and gives a relative homotopy in $F$. These observations apply for arbitrary $K$, without requiring $K$ Kan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.5.7 and Definition 3.5.5, printed p. 93; pullback and product assertions checked directly on coordinates."
+   }
+  },
+  {
+   "text": "For use over a simplex, derive transport along a homotopy explicitly. Let $a:E\\to B$ be any Kan fibration and $h:K\\times I\\to B$ a homotopy from $f$ to $g$. Write $A=f^*E$, $C=g^*E$ and denote their projections to $E$ by $j_A,j_C$. Lift $h\\circ(\\pi_A\\times\\mathrm{id})$ through $a$, starting at $j_A$, to obtain $U:A\\times I\\to E$. Its endpoint gives $\\alpha:A\\to C$ over $K$. Lift $h\\circ(\\pi_C\\times\\mathrm{id})$ ending at $j_C$, obtaining $V:C\\times I\\to E$ whose initial endpoint gives $\\beta:C\\to A$ over $K$. Both lifts are supplied by Step 2 with monomorphism $\\varnothing\\hookrightarrow A$ or $\\varnothing\\hookrightarrow C$.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.5.3, printed pp. 89–90, transport maps; explicit endpoint-lifting construction."
+   }
+  },
+  {
+   "text": "The maps of Step 12 are fiberwise homotopy inverse. With parameter $A$, prescribe edges $02=V\\circ(\\alpha\\times\\mathrm{id})$ and $12=U$ of a $\\Lambda_2^2$ horn over the base simplex $s_0 h$ (vertices $f,f,g$). Step 2 with $\\varnothing\\hookrightarrow A$ fills it; the edge $01$ gives a homotopy $\\beta\\alpha\\to1_A$ over the constant $f$, hence in $A$ over $K$. With parameter $C$, prescribe edges $01=U\\circ(\\beta\\times\\mathrm{id})$ and $02=V$ of a $\\Lambda_0^2$ horn over $s_1h$ (vertices $f,g,g$). The remaining edge $12$ gives $\\alpha\\beta\\to1_C$ over $g$, hence in $C$ over $K$. Each pair of prescribed edges shares the indicated endpoint, so these really are horn maps; all parameter maps to $K$ are fixed. No homotopy invariance of pullbacks is assumed as an uncited theorem.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.5.3, printed pp. 89–90, fiberwise inverse homotopies; the two horns and their missing edges are specified explicitly."
+   }
+  },
+  {
+   "text": "We also need rigidity, so prove it here. Let $a:D\\to B$ be minimal Kan, and let $f:D\\to D$ be over $B$ with a homotopy $J:f\\to1_D$ over $B$. Induct on $n$ to show $f_n$ bijective. For surjectivity assume bijectivity below $n$, and take $z\\in D_n$. The unique preimages of its faces form a boundary $u:\\partial\\Delta^n\\to D$ with $fu=\\partial z$: compatibility follows by applying $f$ and using injectivity in lower dimensions. In dimension zero use the empty boundary. Extend $J(u,-)$ and $z$ at endpoint 0 to a prism $G:z\\to x$ over the constant simplex $az$ by Step 2. Its endpoint has boundary $u$. Prescribe edges $02=J(x,-)$ and $12=G$ of the relative horn $\\Delta^n\\times\\Lambda_2^2$, and on $\\partial\\Delta^n\\times\\Delta^2$ prescribe $J(u,-)\\circ(\\mathrm{id}\\times\\sigma^0)$, where $\\sigma^0$ has values $0,0,1$. These prescriptions agree; all base maps equal $az$. The relative horn lift gives an edge $01:fx\\to z$ fixed on the boundary. Minimality implies $fx=z$, proving surjectivity in dimension $n$.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.5.6, printed pp. 91–93, degreewise surjectivity; the prism and relative triangle arguments are written out for the needed endomorphism case."
+   }
+  },
+  {
+   "text": "For injectivity in the same induction, suppose $fx=fy$. The lower-dimensional injectivity gives $\\partial x=\\partial y=u$ (vacuous at $n=0$), and $ax=afx=afy=ay$. Prescribe edges $01=J(x,-)$, $02=J(y,-)$ of a relative $\\Lambda_0^2$ horn, and prescribe $J(u,-)\\circ(\\mathrm{id}\\times\\sigma^1)$ on its whole boundary, with $\\sigma^1$ taking values $0,1,1$. Fill over the constant base simplex using Step 2. The missing edge $12$ is a homotopy $x\\to y$ fixed on the boundary, so minimality gives $x=y$. This completes the induction. A natural transformation of simplicial sets that is bijective in every degree has a simplicial inverse: the commutation identities for the inverse follow by composing with these bijections. Thus every endomorphism of a minimal Kan fibration homotopic over the base to its identity is an isomorphism.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.5.6, printed pp. 91–93, degreewise injectivity and the endomorphism rigidity conclusion; no separate minimal-rigidity node is assumed."
+   }
+  },
+  {
+   "text": "Fix $y:\\Delta^n\\to Y$ and set $P_y=\\Delta^n\\times_Y A$. By Step 11 its projection to $\\Delta^n$ is minimal Kan. Let $F_y$ be its fiber over the terminal vertex $n$. This is a minimal Kan complex, possibly empty. The identity of $\\Delta^n$ is simplicially homotopic to the constant terminal-vertex map: identify $\\Delta^n$ with the nerve of the ordered set $[n]$ and use the monotone map $[n]\\times[1]\\to[n]$ taking $(i,0)$ to $i$ and $(i,1)$ to $n$. Explicitly on each pair of increasing maps $a:[m]\\to[n]$, $b:[m]\\to[1]$, the output at $t$ is $a(t)$ if $b(t)=0$ and $n$ otherwise; this is increasing and commutes with restriction. The pullback of $P_y$ along the constant map is canonically $\\Delta^n\\times F_y$ by its defining coordinate equations.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.5.4 and Corollary 3.5.7, printed pp. 91, 93; contraction of a standard simplex and identification of the constant pullback."
+   }
+  },
+  {
+   "text": "Apply Steps 12–13 to the projection $P_y\\to\\Delta^n$ and the homotopy of Step 16. We obtain maps $\\alpha:P_y\\to\\Delta^n\\times F_y$ and $\\beta$ back, over $\\Delta^n$, with $\\beta\\alpha$ and $\\alpha\\beta$ homotopic over $\\Delta^n$ to their respective identities. Both projections are minimal Kan by Steps 11 and 16, so Steps 14–15 make both composites isomorphisms. Therefore $\\alpha$ is an isomorphism: $(\\beta\\alpha)^{-1}\\beta$ is a left inverse and $\\beta(\\alpha\\beta)^{-1}$ a right inverse, and these coincide by associativity. This gives the required simplexwise product isomorphism. If $F_y$ is empty the same construction forces $P_y$ empty; at $n=0$ it identifies the pullback with its fiber. Together with Steps 8–10 this proves every clause of the statement without a Kan assumption on $X$ or $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollaries 3.5.4 and 3.5.7 and Theorem 3.5.9, printed pp. 91, 93–95; concluding isomorphism from the explicitly proved transport and rigidity arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-weil-pbc-well-ordering-theorem",
+  "lem-coef-infinity-monomorphism-boundary-cells"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Theorem 3.5.9, Definition 3.5.5, Lemmas 3.5.6 and 3.5.8, Proposition 3.5.3 and Corollaries 3.5.4 and 3.5.7, printed pp. 89–95; read online, not archived in literature/. Expanded direct proof with a corrected moving-boundary cell extension."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every Kan fibration factors as a boundary lifting retraction onto a subfibration which is trivial over each standard simplex",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm5a\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.trivialCofibrations C).HasFactorization (HomotopicalAlgebra.fibrations C)\", \"doc\": \"In any model category, every morphism factors as a trivial cofibration followed by a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  (h :\\n    (HomotopicalAlgebra.trivialCofibrations C).MapFactorizationData (HomotopicalAlgebra.fibrations C)\\n      (CategoryTheory.Limits.diag A)),\\n  (HomotopicalAlgebra.PathObject.ofFactor\", \"doc\": \"In a model category $\\\\mathcal{C}$, the path object constructed by factoring the diagonal morphism $\\\\Delta_A: A \\\\to A \\\\times A$ into a trivial cofibration followed by a fibration satisfies the addition\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantBrownFactorization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [HomotopicalAlgebra.ModelCategory C] → {X Y : C} → (X ⟶ Y) → Type (max u_1 v_1)\", \"doc\": \"Given a model category $ C $ and a morphism $ X \\to Y $, this inductive type represents the data of a factorization of the morphism into a cofibration followed by a trivial fibration, with the intermed\"}\n",
+   "tool": "grep",
+   "query": "minimalFibration|minimal_fibration|[Mm]inimal.*[Ff]ibration",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"grep\", \"query\": \"minimalFibration|minimal_fibration|[Mm]inimal.*[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: CategoryWithFibrations.lean:73–104 supplies horn-lifting classes, not minimal subfibrations or simplexwise product factorizations. ModelCategory.cm5a and FibrantBrownFactorization are general model factorizations and do not imply the stated local triviality or boundary-lifting retraction; their hypotheses also do not supply a Kan–Quillen model instance. Both semantic phrasings were read."
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "homotop.*pullback|pullback.*homotop|[Ff]iberHomotopy",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"grep\", \"query\": \"homotop.*pullback|pullback.*homotop|[Ff]iberHomotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\"], \"digest\": \"cda67dcc1183aec7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map over a simplicial base homotopic over the base to an isomorphism into a minimal Kan fibration is an isomorphism",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"leansearch\", \"query\": \"A map over a simplicial base homotopic over the base to an isomorphism into a minimal Kan fibration is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.S.mk_map_eq_iff_of_mono\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"HomotopicalAlgebra.instRespectsIsoWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁\", \"SSet.degenerate_iff_of_isIso\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\"], \"digest\": \"687a3ab01a0bfc3d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"Minimal\"",
-   "results": "[loogle] OK 0 hit(s)\n",
+   "query": "\"SSet\", \"homotopy\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"homotopy\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: CategoryWithFibrations.lean:73–104 supplies horn-lifting classes, not minimal subfibrations or simplexwise product factorizations. ModelCategory.cm5a and FibrantBrownFactorization are general model factorizations and do not imply the stated local triviality or boundary-lifting retraction; their hypotheses also do not supply a Kan–Quillen model instance. Both semantic phrasings were read."
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pulling back a Kan fibration along homotopic maps gives a simplicial fibre homotopy equivalence without a fibrant base",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"leansearch\", \"query\": \"Pulling back a Kan fibration along homotopic maps gives a simplicial fibre homotopy equivalence without a fibrant base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.IsFibrant.congr_simp\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.LeftHomotopyRel.precomp\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.ModelCategory.cm3b\"], \"digest\": \"cb72d6959676ed15\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pullback\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-16T19:58:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pullback\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic simplicial maps induce fibre homotopy equivalent pullbacks of every Kan fibration",
+   "results": "{\"t\": \"2026-10-16T19:58:26Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopic simplicial maps induce fibre homotopy equivalent pullbacks of every Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\"], \"digest\": \"884e4129f4c66452\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a minimal Kan fibration any fibrewise simplicial homotopy from an isomorphism to another map makes the other map an isomorphism",
+   "results": "{\"t\": \"2026-10-16T19:58:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a minimal Kan fibration any fibrewise simplicial homotopy from an isomorphism to another map makes the other map an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.instFibrationOfIsWeakFactorizationSystemCofibrationsTrivialFibrationsOfIsIso\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"3c8863b55b437314\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibrewise homotopy into a minimal simplicial fibration cannot change whether a simplicial map is invertible",
+   "results": "{\"t\": \"2026-10-16T19:58:29Z\", \"tool\": \"leanfinder\", \"query\": \"A fibrewise homotopy into a minimal simplicial fibration cannot change whether a simplicial map is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.Fibration.mem\", \"HomotopicalAlgebra.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"f9dc0290e269f908\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibration transport along a simplicial cylinder gives homotopy inverse maps between its endpoint pullbacks",
+   "results": "{\"t\": \"2026-10-16T19:58:31Z\", \"tool\": \"leanfinder\", \"query\": \"Fibration transport along a simplicial cylinder gives homotopy inverse maps between its endpoint pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"CategoryTheory.PreOneHypercover.cylinderHomotopy\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"HomotopicalAlgebra.Cylinder.instIsVeryGoodSymmOfRespectsIsoCofibrations\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.Cylinder.symm_i₀\", \"HomotopicalAlgebra.Cylinder.instIsVeryGoodOfFactorizationData\", \"HomotopicalAlgebra.Cylinder.symm_i₁\"], \"digest\": \"48d04246c430ea63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
   },
   {
    "tool": "grep",
    "query": "minimalFibration|minimal_fibration|locallyTrivial|locally_trivial",
-   "results": "[grep] OK 0 hit(s)\n",
+   "results": "{\"t\": \"2026-10-16T20:00:15Z\", \"tool\": \"grep\", \"query\": \"minimalFibration|minimal_fibration|locallyTrivial|locally_trivial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: CategoryWithFibrations.lean:73–104 supplies horn-lifting classes, not minimal subfibrations or simplexwise product factorizations. ModelCategory.cm5a and FibrantBrownFactorization are general model factorizations and do not imply the stated local triviality or boundary-lifting retraction; their hypotheses also do not supply a Kan–Quillen model instance. Both semantic phrasings were read."
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "fibration_iff|fibrations_eq|covering_homotopy",
+   "results": "{\"t\": \"2026-10-16T20:00:15Z\", \"tool\": \"grep\", \"query\": \"fibration_iff|fibrations_eq|covering_homotopy\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\"], \"digest\": \"5234ce7d7e6edd12\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
   },
   {
    "tool": "leansearch",
-   "query": "Every Kan fibration has a minimal locally trivial subfibration and a retraction lifting all boundary inclusions",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantBrownFactorization.fibration_r\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.BrownLemma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  {f : X ⟶ Y} (self : HomotopicalAlgebra.FibrantBrownFactorization f), HomotopicalAlgebra.Fibration self.r\", \"doc\": \"In a model category $\\\\mathcal{C}$, given a morphism $f : X \\\\to Y$ with a fibrant Brown factorization, the retraction morphism $r : Z \\\\to X$ from the intermediate fibrant object $Z$ to the domain $X$ i\"}\n  {\"name\": \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialFibrations C ≤ fibrations C\", \"doc\": \"In a category equipped with fibrations and weak equivalences, the collection of trivial fibrations is a subset of the collection of fibrations.\"}\n  {\"name\": \"HomotopicalAlgebra.mem_trivialFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"[Fibration f] [WeakEquivalence f] : trivialFibrations C f\", \"doc\": \"If a morphism $ f $ in a category $ \\\\mathcal{C} $ is both a fibration and a weak equivalence, then $ f $ is a trivial fibration in $ \\\\mathcal{C} $.\"}\n  {\"name\": \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \": trivialFibrations C ≤ weakEquivalences C\", \"doc\": \"In a category equipped with fibrations and weak equivalences, every trivial fibration (a morphism that is both a fibration and a weak equivalence) is a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm3b\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.fibrations C).IsStableUnderRetracts\", \"doc\": \"In a model category, the class of fibrations is stable under retracts; that is, if a morphism is a fibration, then any retract of it is also a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n",
+   "query": "A Kan fibration admits a minimal subfibration with boundary lifting retraction and simplexwise product trivializations",
+   "results": "{\"t\": \"2026-10-16T20:00:15Z\", \"tool\": \"leansearch\", \"query\": \"A Kan fibration admits a minimal subfibration with boundary lifting retraction and simplexwise product trivializations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.ModelCategory.cm3b\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"5afd46409f0456b4\"}",
    "date": "2026-10-17",
-   "verdict": "no match: CategoryWithFibrations.lean:73–104 supplies horn-lifting classes, not minimal subfibrations or simplexwise product factorizations. ModelCategory.cm5a and FibrantBrownFactorization are general model factorizations and do not imply the stated local triviality or boundary-lifting retraction; their hypotheses also do not supply a Kan–Quillen model instance. Both semantic phrasings were read."
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Minimal\"",
+   "results": "{\"t\": \"2026-10-16T20:00:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Minimal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
   },
   {
    "tool": "leanfinder",
-   "query": "Minimal Kan fibrations are simplexwise products and every Kan fibration retracts onto a minimal one",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C}\\n  [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] (P : HomotopicalAlgebra.PathObject A)\\n  [inst_2 : CategoryTheory.Limits.HasBinaryProduct A A] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryThe\", \"doc\": \"In a category equipped with weak equivalences and fibrations, the first projection morphism $ P(X) \\to X $ from a path object $ P(X) $ to its underlying object $ X $ satisfies the fibration condition. \"}\n",
+   "query": "Every Kan fibration factors as a retraction lifting all boundaries followed by a simplicial fibration which is a product over every simplex",
+   "results": "{\"t\": \"2026-10-16T20:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every Kan fibration factors as a retraction lifting all boundaries followed by a simplicial fibration which is a product over every simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.cm5a\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\"], \"digest\": \"b28d6e2e777a3196\"}",
    "date": "2026-10-17",
-   "verdict": "no match: CategoryWithFibrations.lean:73–104 supplies horn-lifting classes, not minimal subfibrations or simplexwise product factorizations. ModelCategory.cm5a and FibrantBrownFactorization are general model factorizations and do not imply the stated local triviality or boundary-lifting retraction; their hypotheses also do not supply a Kan–Quillen model instance. Both semantic phrasings were read."
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal Kan fibrations give locally trivial simplicial bundles and are deformation retracts of arbitrary Kan fibrations",
+   "results": "{\"t\": \"2026-10-16T20:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal Kan fibrations give locally trivial simplicial bundles and are deformation retracts of arbitrary Kan fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.IsFibrant\"], \"digest\": \"d32fd471390f5e94\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe generic horn-lifting or model-category homotopy/factorization, not a minimal subfibration or the asserted simplexwise product and boundary-lifting retraction. CategoryWithFibrations.lean:73–104 and LeftHomotopy.lean:173–188 were read; the latter requires a model-category/good-cylinder setup and gives covering homotopy, not this factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"minimal\"",
+   "results": "{\"t\": \"2026-10-16T20:21:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"minimal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the lowercase minimal terminology; no theorem stating the minimal factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial fibration retracts onto a minimal Kan subobject and is locally a product on standard simplices",
+   "results": "{\"t\": \"2026-10-16T20:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial fibration retracts onto a minimal Kan subobject and is locally a product on standard simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.KanComplex\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\"], \"digest\": \"fff15e50d4a5cdac\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: all eight returned declarations concern generating horns/boundaries, Kan complexes, or generic fibrations/path objects. Read CategoryWithFibrations.lean:41–100: these define I, J and horn lifting and do not assert existence of a minimal subfibration, its retraction, or simplexwise trivializations."
+  },
+  {
+   "tool": "grep",
+   "query": "MinimalFibration|minimalFibration|minimal.*[Ff]ibration|[Ff]ibration.*minimal",
+   "results": "{\"t\": \"2026-10-16T20:22:59Z\", \"tool\": \"grep\", \"query\": \"MinimalFibration|minimalFibration|minimal.*[Ff]ibration|[Ff]ibration.*minimal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for minimal-fibration vocabulary across Mathlib; independent second-reader search."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-realization-serre",
@@ -77,5 +371,20 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-minimal-factorization",
+  "worker": "stage1",
+  "summary": "Q14 read Hovey online and checked the full minimal-subfibration argument, its boundary-lifting retraction, and its simplexwise product conclusion. Kept the statement and metadata; expanded the proof into 17 steps using existing right-anodyne product, lifting-closure, well-ordering and relative-skeleton nodes. Corrected the moving-boundary cell extension by first lifting the boundary homotopy, then selecting the representative, then composing over that homotopy. Derived transport and minimal rigidity internally, with exact triangle faces, to avoid duplicate/clause-restatement nodes and circular Kan–Quillen input. No new nodes or Mathlib leaves. Maintainer reader (2026-10-17): Steps 1-2 now take the Kan fibration property of the restriction map $\\Phi$ from the existing Mathlib leaf lem-cbc-internal-hom-fibration-corner-map (SSet.fibration_pullbackObjObjπ) instead of re-deriving it through the right-anodyne pushout-product, lifting-class closure, transfinite lifting and order reversal; the later steps cite that leaf where they used Step 2.",
+  "blueprint": "The existing from.node prop-coef-integral-exceptional-adjoint, proof paragraph 2 and its displayed derived inverse-limit adjunction calculation; the inherited via chain reaches this foundational input through cosimplicial frames and the Kan realization comparison. Current main-20261015 text was read; no alternate coefficient or purity route is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-5f9162a6c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-5f9162a6c (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, the parent's use (lem-coef-kan-realization-serre step 2) and the downstream lem-coef-kan-locally-trivial-realization, and checked all 17 steps of the proof. The statement matches Hovey Thm 3.5.9 with Cor 3.5.7 and Def 3.5.1 (Hovey is not archived under literature/, so it is recorded WANTED and the proof is marked agent-written). That means p = q r with r in I-inj, q minimal Kan and a product over every simplex; no Kan hypothesis on X or Y, and empty fibres allowed. No hypothesis was added and no target touched. Checks: the relation is an equivalence via the Kan strict fibre of Phi. Step 4's identities d_i s_j = s_{j-1} d_i and s_i s_{j-1} = s_j s_i hold. A is closed under faces and degeneracies. The moving-boundary correction in Step 7 is correct (lift the edge, take the representative, fill the inner horn over s_1 e). For the r-lifting in Steps 9–10, every face of the Lambda^2_0 horn agrees with the sigma^1 boundary datum. Transport horns in Step 13 run over s_0 h and s_1 h in the right directions. The rigidity induction in Steps 14–15 uses compatible preimage boundaries, the horns J(u)sigma^0 and J(u)sigma^1, and minimality. In Steps 16–17, alpha is invertible from the two composites. Small cases checked: n=0, X empty, a point base, identity of Delta^n, a non-Kan base, an empty fibre. There are no new nodes, no duplicate of the item, and no cycle. Route: cited statements are in the item's unit or are definitions/Mathlib leaves, so no tool_uses. FIX: Step 2 re-derived, through the non-closed Kerodon right-anodyne node with order reversal and saturation, exactly the reviewed Mathlib leaf lem-cbc-internal-hom-fibration-corner-map (SSet.fibration_pullbackObjObjpi, PushoutProduct.lean:70-93, which I read). The corrected item in fixes/ makes Steps 1–2 cite that leaf while keeping the explicit curry correspondence. Steps 3, 7, 9, 10 and 12–15 now use the leaf, and proof_deps = {def-cbc-enhanced-diagrams-cones, the leaf, well-ordering, monomorphism-boundary-cells}, all definitions or Mathlib leaves. Step numbering and statement are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

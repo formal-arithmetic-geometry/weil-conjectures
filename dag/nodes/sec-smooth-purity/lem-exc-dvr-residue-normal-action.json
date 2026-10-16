@@ -27,9 +27,82 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sc-discrete-valuation-ring], $A$ is a principal ideal domain. Hence [lem-weil-pbc-pid-noetherian-normal] makes $A$ integrally closed in its fraction field $K$. Put $G=\\operatorname{Aut}_K(L)$. The finite normal separable extension $L/K$ satisfies the hypotheses of [lem-weil-pbc-finite-galois-fixed-field]; thus $G$ is finite and $L^G=K$. These are the two inputs in the first sentence of the proof of Stacks 09ED.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ED (lemma-galois-galois), proof of (1)-(2): A=B^G and the application of Tag 0BRJ (lemma-one-orbit-geometric)."
+   }
+  },
+  {
+   "text": "The integral closure $B$ is a subring of $L$ containing $A$, by [def-weil-pbc-integral-closure]. If $b\\in B$ satisfies a monic equation with coefficients in $A$, then applying $\\sigma\\in G$ to that equation gives the same monic equation for $\\sigma(b)$, since $\\sigma$ fixes $K$ and therefore $A$. Thus $\\sigma(B)\\subseteq B$; applying this to $\\sigma^{-1}$ gives equality. Restriction therefore defines an action of $G$ on $B$ by ring automorphisms fixing $A$ pointwise. Restriction preserves the identity and composition: for $b\\in B$, $1(b)=b$ and $(\\sigma\\tau)|_B(b)=\\sigma|_B(\\tau|_B(b))$. Thus the restrictions satisfy the group action laws.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ED (lemma-galois-galois), proof of (1)-(2): A=B^G and the application of Tag 0BRJ (lemma-one-orbit-geometric)."
+   }
+  },
+  {
+   "text": "Every element of $A$ is fixed. Conversely, if $b\\in B$ is fixed by all of $G$, then [lem-weil-pbc-finite-galois-fixed-field] gives $b\\in K$. By [def-weil-pbc-integral-closure] it is integral over $A$, and [lem-weil-pbc-pid-noetherian-normal] gives $b\\in A$. Consequently $B^G=A$, as an equality of subrings inside $L$, not just an abstract isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ED (lemma-galois-galois), proof of (1)-(2): A=B^G and the application of Tag 0BRJ (lemma-one-orbit-geometric)."
+   }
+  },
+  {
+   "text": "Every element of $B$ is integral over $A$ by [def-weil-pbc-integral-closure]. Apply [lem-weil-pbc-integral-algebra-ideal-in-radical] with the zero ideal of $A$ (which is contained in its Jacobson radical): its maximal-preimage clause says that $\\mathfrak n\\cap A$ is maximal. As $A$ is local by [def-sc-discrete-valuation-ring], this preimage is its unique maximal ideal $\\mathfrak m_A$. Thus $\\mathfrak n$ lies over $\\mathfrak m_A$, and both are maximal, precisely the hypotheses on ideals needed in the quotient theorem.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ED (lemma-galois-galois), proof of (1)-(2): A=B^G and the application of Tag 0BRJ (lemma-one-orbit-geometric)."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-finite-invariant-quotient-normal-action] with $R=A$, $S=B$, $H=G$, $\\mathfrak p=\\mathfrak m_A$ and $\\mathfrak q=\\mathfrak n$. Steps 1-3 supply finiteness of $G$, its action fixing $A$, and $A=B^G$; step 4 supplies the maximal-ideal contraction. Its quotient fields are literally $F=A/\\mathfrak m_A=k$ and $E=B/\\mathfrak n$. Its subgroup $D_H(\\mathfrak q)$ is exactly $D$ in the item, and its homomorphism sends the class of $b$ to the class of $\\sigma(b)$, exactly $\\rho$. The normality clause gives the required splitting for every $x\\in E$, and the surjectivity clause lifts every $k$-automorphism of $E$ to $D$. The cited theorem requires no separability of $E/k$.",
+   "uses": [
+    "lem-exc-finite-invariant-quotient-normal-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ED (lemma-galois-galois), proof of (1)-(2): A=B^G and the application of Tag 0BRJ (lemma-one-orbit-geometric)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-exc-finite-invariant-quotient-normal-action"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ED (lemma-galois-galois), proof of assertions (1)-(2), with Tag 0BRJ as a Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +162,74 @@
    "results": "[leanfinder] OK 8 hit(s); Ideal.Quotient.normal, IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, arithFrobAt, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, IsFractionRing.stabilizerHom_surjective, Ideal.Quotient.stabilizerHom_surjective",
    "date": "2026-10-17",
    "verdict": "no match: Ideal.Quotient.normal and Ideal.Quotient.stabilizerHom_surjective state the two clauses for an invariant extension. Read Invariant/Galois.lean:25-68,75-144 and Invariant/Basic.lean:353-366; installing Algebra.isInvariant_of_isGalois and the integral-closure fraction-field setup requires additional theorem applications, not an inferred instance. The project integral-closure surjectivity declaration gives only the second clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite group acting on a commutative ring with invariant subring A the residue field extension at a maximal ideal is normal and its automorphisms lift to the ideal stabilizer",
+   "results": "{\"t\": \"2026-10-16T19:58:54Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group acting on a commutative ring with invariant subring A the residue field extension at a maximal ideal is normal and its automorphisms lift to the ideal stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.normal\", \"IsFractionRing.stabilizerHom_surjective\", \"IsArithFrobAt.arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\", \"arithFrobAt\"], \"digest\": \"456c7b7f924732ad\"}",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acts by automorphisms on a commutative algebra S fixing R and every fixed element lies in the image of R; at maximal ideals q over p the field S/q is normal over R/p and the stabilizer surjects onto its automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsFractionRing.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] (K : Type u_4) (L : Type u\", \"doc\": \"The stabilizer homomorphism from the stabilizer subgroup of the ideal $ Q $ in $ G $ to the Galois group $ \\\\text{Gal}(L/K) $ is surjective, meaning every element of the Galois group is the image of so\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGaloisGroup\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"The group $ G $ acts on the set of prime ideals in $ B $ lying over the ideal $ p $, where the action is defined by applying each group element to the prime ideal.\"}\n  {\"name\": \"Ideal.Quotient.normal\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_4)\\n  [Finite G] [inst_4 : Group G] [inst_5 : MulSemiringAction G B] [Algebra.IsInvariant A B G] (P : Ideal A) (Q : Ideal B)\\n  [inst_7 : Q.LiesOver P] [inst_8 : P.IsMaximal] [inst_9 : Q.IsMaxi\", \"doc\": \"If $ P $ and $ Q $ are maximal ideals in commutative rings $ A $ and $ B $ respectively, then the quotient ring $ A/P $ is a normal field extension of $ B/Q $. This follows because maximal ideals yiel\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"Ideal.isPretransitive_of_isGalois\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  (G : Type u_3) [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : IsGaloisGroup G A B],\\n  MulAction.IsPretransitive G ↑(p.primesOver B)\", \"doc\": \"Let $B$ be a Galois extension of a commutative ring $A$ with a finite Galois group $G$. For any ideal $p$ of $A$, the group $G$ acts transitively on the set of prime ideals of $B$ that lie over $p$.\"}\n  {\"name\": \"IsArithFrobAt.exists_of_isInvariant\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [Finite G]\\n  [Algebra.IsInvariant R S G] [Q.IsPrime] [Finite (S ⧸ Q)], ∃ σ, IsArithFrobAt\", \"doc\": \"If $ Q $ is a prime ideal in $ S $ such that the quotient ring $ S/Q $ is finite, then there exists an element $ \\\\sigma \\\\in G $ such that $ \\\\sigma $ satisfies the arithmetic Frobenius condition at $ Q\"}\n  {\"name\": \"IsArithFrobAt.exists_primesOver_isConj\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] [Finite G]\\n  [Algebra.IsInvariant R S G] (P : Ideal R),\\n  (∃ Q, Finite (S ⧸ ↑Q)) →\\n    ∃ σ, (∀ (Q : ↑(P\", \"doc\": \"Let $ R \\\\subseteq S $ be rings with $ S $ equipped with a monoid action commuting with scalar multiplication from $ R $. For any prime ideal $ P \\\\subseteq R $, if there exists a prime ideal $ Q \\\\subse\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] [Algebra.IsInvariant A B G\", \"doc\": \"The group homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the group of $A/p$-algebra automorphisms of the quotient ring $B/P$ is surjective. This means ever\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient.normal\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Ideal.Quotient.normal\", \"module\": \"Mathlib.RingTheory.Invariant.Galois\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] [Algebra A B] (G : Type u_3) [Finite G] [Group G] [MulSemiringAction G B] [Algebra.IsInvariant A B G] (P : Ideal A) (Q : Ideal B) [Q.LiesOver P] [P.IsMaximal] [Q.IsMaximal] : Normal (A ⧸ P) (B ⧸ Q)\", \"doc\": \"If `Q` is a maximal ideal of `B` lying over a maximal ideal `P` of `A`,\\nthen the extension `B/Q` over `A/P` is normal. \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient.stabilizerHom_surjective\"",
+   "results": "{\"t\": \"2026-10-16T19:59:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal.Quotient.stabilizerHom_surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"3ef29f40cfd4124f\"}",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma Ideal.Quotient.normal|theorem Ideal.Quotient.stabilizerHom_surjective",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"175\", \"text\": \"theorem Ideal.Quotient.stabilizerHom_surjective_of_profinite\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"362\", \"text\": \"theorem Ideal.Quotient.stabilizerHom_surjective :\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Galois.lean\", \"line\": \"140\", \"text\": \"lemma Ideal.Quotient.normal [P.IsMaximal] [Q.IsMaximal] :\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension.",
+   "subdirectory": "RingTheory/Invariant"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite group ring invariants normal maximal quotient field extension stabilizer automorphism surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.normal\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[P.IsMaximal] [Q.IsMaximal] : Normal (A ⧸ P) (B ⧸ Q)\", \"doc\": \"If $ P $ and $ Q $ are maximal ideals in commutative rings $ A $ and $ B $ respectively, then the quotient ring $ A/P $ is a normal field extension of $ B/Q $. This follows because maximal ideals yiel\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \": Function.Surjective (Ideal.Quotient.stabilizerHom Q P G)\", \"doc\": \"The group homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the group of $A/p$-algebra automorphisms of the quotient ring $B/P$ is surjective. This means ever\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"(P : Ideal A) (Q : Ideal B) [Q.IsPrime] [Q.LiesOver P] [Algebra.IsInvariant A B G] :\\n  Function.Surjective (Ideal.Quotient.stabilizerHom Q P G)\", \"doc\": \"Let $ A \\\\subseteq B $ be commutative rings with $ B $ equipped with a profinite group $ G $-action preserving the $ A $-algebra structure. For a prime ideal $ Q \\\\subseteq B $ lying over $ P = Q \\\\cap A\"}\n  {\"name\": \"IsFractionRing.stabilizerHom_surjective\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \": Function.Surjective (stabilizerHom G P Q K L)\", \"doc\": \"The stabilizer homomorphism from the stabilizer subgroup of the ideal $ Q $ in $ G $ to the Galois group $ \\\\text{Gal}(L/K) $ is surjective, meaning every element of the Galois group is the image of so\"}\n  {\"name\": \"FixedPoints.toAlgAut_surjective\", \"module\": \"Mathlib.FieldTheory.Fixed\", \"type\": \"[Finite G] : Function.Surjective (MulSemiringAction.toAlgAut G (FixedPoints.subfield G F) F)\", \"doc\": \"For any finite group $ G $ acting on a field $ F $, the canonical group homomorphism from $ G $ to the group of $ R $-algebra automorphisms of $ F $ induced by the multiplicative semiring action is su\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"(Q : Ideal B) {N N' : OpenNormalSubgroup G} (e : N ≤ N') (x : G ⧸ N.1.1)\\n  (hx : x ∈ MulAction.stabilizer (G ⧸ N.1.1) (Q.under (FixedPoints.subalgebra A B N.1.1))) :\\n  QuotientGroup.map _ _ (.id _) e x ∈ MulAction.stabilizer (G ⧸ N'.1.1) (Q.under (FixedPoints.subalgebra A B N'.1.1))\", \"doc\": \"If an element $ x $ in the quotient group $ G/N $ stabilizes the ideal $ Q $ under the action of $ G/N $ on the fixed points subalgebra $ B^N $, then its image under the quotient map to $ G/N' $ stabi\"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(H : Subgroup G) [H.Normal] [Algebra.IsInvariant A B G] : Algebra.IsInvariant A (FixedPoints.subalgebra A B H) (G ⧸ H)\", \"doc\": \"Given a group $ G $ acting on a commutative ring $ B $ via a multiplicative semiring action, and a normal subgroup $ H \\trianglelefteq G $, the subalgebra $ B^H $ of elements fixed by $ H $ is invarian\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no direct match for the item: the hits are the general invariant-ring quotient clauses. The DVR-to-invariant-ring reduction is a separate argument, written in proof steps 1-4; after that reduction the two hits apply exactly. match: Ideal.Quotient.normal, Mathlib/RingTheory/Invariant/Galois.lean:140, and Ideal.Quotient.stabilizerHom_surjective, Mathlib/RingTheory/Invariant/Basic.lean:362, one declaration per clause. Read their section hypotheses, including finite group, invariant image, scalar compatibility and maximal ideals lying over one another. Neither assumes separability of the quotient extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite group acting on a ring with base ring equal to the fixed ring gives normal residue field extensions and surjective stabilizer maps",
+   "results": "{\"t\": \"2026-10-16T19:59:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite group acting on a ring with base ring equal to the fixed ring gives normal residue field extensions and surjective stabilizer maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"IsGalois.of_fixed_field\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"IntermediateField.normal_iff_forall_map_le'\", \"IsGaloisGroup.fixedPoints\"], \"digest\": \"1882264a78727bb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no direct declaration with the DVR integral-closure hypotheses and both conclusions. The invariant-ring hits require the fixed-ring and maximal-contraction reduction proved in steps 1-4; the general quotient clauses are recorded in the new Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.normal, Ideal.Quotient.stabilizerHom_surjective",
+   "results": "{\"t\": \"2026-10-16T19:59:20Z\", \"tool\": \"loogle\", \"query\": \"Ideal.Quotient.normal, Ideal.Quotient.stabilizerHom_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no direct declaration with the DVR integral-closure hypotheses and both conclusions. The invariant-ring hits require the fixed-ring and maximal-contraction reduction proved in steps 1-4; the general quotient clauses are recorded in the new Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a discrete valuation ring in a finite Galois extension has normal residue fields and decomposition group surjects onto residue automorphisms",
+   "results": "{\"t\": \"2026-10-16T19:59:22Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a discrete valuation ring in a finite Galois extension has normal residue fields and decomposition group surjects onto residue automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_comap_galRestrict_eq\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"IsGaloisGroup.iff_isFractionRing\", \"IsGaloisGroup.to_isFractionRing\", \"instIsGaloisGroupRingOfIntegersOfNumberField\", \"ValuationSubring.inertiaSubgroup\", \"Ideal.Quotient.normal\", \"IsFractionRing.stabilizerHom_surjective\"], \"digest\": \"44d678844c538dfd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no direct declaration with the DVR integral-closure hypotheses and both conclusions. The invariant-ring hits require the fixed-ring and maximal-contraction reduction proved in steps 1-4; the general quotient clauses are recorded in the new Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-dvr-inertia-order-prime-part",
@@ -100,5 +237,20 @@
   "group": "Q62"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-dvr-residue-normal-action",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09ED exactly through the fixed-ring reduction. Reused the existing PID normality, finite Galois fixed-field and maximal-contraction leaves; wrote preservation of integrality and B^G=A explicitly. Added one general finite invariant-ring quotient Mathlib leaf (0BRJ), one declaration per clause, with source-verified hypotheses and logged searches. No separability of the residue extension is used and the statement is unchanged.",
+  "blueprint": "Realizes the residue-normality and decomposition-action input in the first finite-Galois ramification paragraph of lem-exc-dvr-galois.proof.md, especially 'Its residue field is the given algebraically closed field'; this input is exposed via the item's existing ancestry through lem-exc-dvr-inertia-order-prime-part."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-33c0cf60e",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-33c0cf60e (reviewer sub-agent of L); spot-checked: I read everything in full. The item matches Stacks 09ED (more-algebra.tex:33224) clauses (1)-(2) exactly: a DVR A, L/K finite normal separable, B the integral closure of A in L, n maximal; E/k normal and D -> Aut_k(E) surjective. No residue separability is assumed, the target is not weakened and its statement is unchanged. Steps 1-5 follow the 09ED proof (B^G=A, then 0BRJ), and every cited statement gives what its step takes from it. Step 1 (DVR => PID => integrally closed; finite Galois => G finite and L^G=K) checks out. Steps 2-3 correctly give B G-stable and B^G=A in a few written-out lines, so they are rightly marked elementary. Step 4 applies the integral-algebra contraction lemma with I=0, and locality gives n∩A=m_A. In step 5 the substitutions R=A, S=B, H=G, p=m_A, q=n are exact, and D and rho match the leaf's D_H(q) and its map. All proof dependencies are Mathlib leaves or definitions, so there is no route issue and no tool_uses were needed. The new leaf lem-exc-finite-invariant-quotient-normal-action is the maximal-ideal case of Stacks 0BRJ (more-algebra.tex:32704). I checked it against Mathlib Invariant/Galois.lean:140 (Ideal.Quotient.normal; section hypotheses at 71-75), Invariant/Basic.lean:362 (stabilizerHom_surjective; hypotheses at 183-192), Ideal/Over.lean:341 (stabilizerHom is b mod Q -> g.b mod Q) and Invariant/Defs.lean:31 (IsInvariant). There is one declaration per clause. R=S^H gives IsInvariant, and the fact that R is pointwise fixed gives SMulCommClass. The leaf passes B1-B7. I tested it on trivial H with R=S, on k x k with the swap action, and on the worker's characteristic-p C_p purely inseparable example; it is true as stated. On duplicates, lem-exc-finite-galois-prime-residue-lifting already states the surjectivity clause but not normality, and no node states 0BRJ or residue normality. The leaf is strictly more general than the parent and follows the source, so it is not a D1 restatement. Fix: the leaf's mathlib_match.how gave the hypotheses of Ideal.Quotient.normal as Galois.lean '75-79'; the actual section normal hypotheses are at 71-75, and 76-79 are unused IsFractionRing variables. I corrected only that field in fixes/dag/nodes/sec-smooth-purity/lem-exc-finite-invariant-quotient-normal-action.json. No nodes are dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
