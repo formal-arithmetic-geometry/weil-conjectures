@@ -206,5 +206,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c8a3068dc (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, the full statements of the cited definitions (def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit) and how the parent lem-cbc-invertible-prism-extension uses it (steps 1-2: filtration, pushout, q>=2, the p=0 endpoint edge). Source: Kerodon Lemma 4.4.4.7 (01DN), read online 2026-10-17 and still WANTED as an archive copy. The statement matches it hypothesis by hypothesis (m>=0, n>=2, X0=(dDelta^m x Delta^n) u (Delta^m x Lambda^n_0), q>=2, 0<=p<q, pushout along Lambda^q_p, and sigma sends 0,1 to (0,0),(0,1) when p=0) and is not weakened. There are no coefficient categories or base-change morphisms here. Step 1 (strict chains, unique index, Kerodon's ordering) is correct. Step 2 (exhaustion, including p=0 with (0,0) absent) is correct. Step 3: all face cases a<p, a=p+1 (uses n>=2) and a>p+1 are correct, and so is the argument that the missing p-th face is absent (the only other free enlargement has index p-1 and comes later). Fix: I added one sentence ruling out inserting (b,0) before an existing (b,1) with b!=p. Step 4 glues along the image of an embedded simplex; this is elementary and correctly marked. Independent brute force (all strict chains, three random tie-breaks, every (m,n) with m<=3, 2<=n<=4, (m+1)(n+1)<=16): the faces lying in X_{s-1} are exactly the horn, q>=2, 0<=p<q, the endpoint clause holds, and X_t is the whole product. All passed; the counts match the report. There are no new nodes. rg for 01DN, Lambda_0^n and prism found no duplicate: lem-coef-infinity-right-prism-boundary and lem-weil-pbc-simplicial-set-glue-simplex are different statements. The Mathlib pairing candidate is rightly not a leaf. All citations are definitions, so there is no route issue, no tool_uses and no SGA. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-cbc-initial-prism-horn-filtration.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49655b634",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read the item node, both statement deps (def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit), proof dep def-weil-pbc-simplicial-set, Kerodon 01DN source place, module, report and the citer InvertiblePrismExtension. Every clause matches: m,n:ℕ with 2≤n; X:Fin(t+1)→(Δ[m]⊗Δ[n]).Subcomplex, Monotone; X 0=(boundary m).prod ⊤ ⊔ ⊤.prod (horn n 0); X last=⊤; ∀ s:Fin t, ∃ q≥2, p:Fin(q+1), p<q, σ, a with IsPushout (horn q p).ι a σ homOfLE in the correct arrow order; p=0 sends vertices 0,1 to (0,0),(0,1) via obj₀Equiv. Nothing weakened or strengthened, one free universe, no extra assumptions. Edge cases m=0 (empty Mathlib boundary), n=2, q=2, p=0 and q-1, t=0 covered. Statement verbatim; node statement unchanged vs side clone; no defs, sorry only, source/blueprint docstrings and proof plan present; both report sections real; no duplicate in Mathlib or side clone. nt_compile.py --json on the snapshot file: rc 0, no errors; probe #check/#print axioms confirmed elaboration and only sorryAx. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InitialPrismHornFiltration",
+  "declaration": "SSet.exists_initial_prism_horn_filtration",
+  "file": "lean/Sheaf/CategoryTheory/InitialPrismHornFiltration.lean",
+  "statement": "theorem exists_initial_prism_horn_filtration (m n : ℕ) (hn : 2 ≤ n) : ∃ (t : ℕ) (X : Fin (t + 1) → (Δ[m] ⊗ Δ[n] : SSet.{u}).Subcomplex) (hX : Monotone X), X 0 = (boundary m).prod ⊤ ⊔ (⊤ : (Δ[m] : SSet.{u}).Subcomplex).prod (horn n 0) ∧ X (Fin.last t) = ⊤ ∧ ∀ s : Fin t, ∃ (q : ℕ) (hq : 2 ≤ q) (p : Fin (q + 1)), p.val < q ∧ ∃ (σ : (Δ[q] : SSet.{u}) ⟶ (X s.succ).toSSet) (a : (horn q p).toSSet ⟶ (X s.castSucc).toSSet), IsPushout (horn q p).ι a σ (Subcomplex.homOfLE (hX (Fin.castSucc_le_succ s))) ∧ (p.val = 0 → (σ ≫ (X s.succ).ι).app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm 0) = (stdSimplex.obj₀Equiv.symm 0, stdSimplex.obj₀Equiv.symm 0) ∧ (σ ≫ (X s.succ).ι).app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm ⟨1, by omega⟩) = (stdSimplex.obj₀Equiv.symm 0, stdSimplex.obj₀Equiv.symm ⟨1, by omega⟩))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

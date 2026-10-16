@@ -236,5 +236,32 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-dbabc856f (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited node statement, the parent's Step 6, the blueprint paragraph (main-20261015, lem-exc-dvr-galois proof, second paragraph) and Stacks 09HW, 00DT, 00M9 and 0BUB at their labels. The item's statement is true, not weakened, and has the right topologies and divisibility transitions. Steps 1-9 are each correct. Step 1: a is prime to N, and lifting a prescribed primitive root passed my own check over all n|N<=60 and all units b. Steps 2-3: the recursion has an explicit base and step, and the choice of zeta_m is independent of j with exact order m. Step 4: bijection from injectivity plus the cardinality in lem-sc-primitive-root. Steps 5-6: CRT over Z, and the inverse is continuous because each coordinate depends on finitely many inputs. Step 7: lift_spec and point separation give the two inverse laws. Step 8: the kernel and norm clauses give continuity in both directions. The new node lem-exc-padic-residue-universal-property is a genuine Mathlib leaf, one declaration per clause; I checked RingHoms.lean lines 447, 459, 478, 658, 684 and 693 (lift hypotheses at 529 and 548), 713, and PadicIntegers.lean line 470 in the pinned Mathlib. It is correct at n=0 and for the zero ring, satisfies B1-B7, and does not restate the item. The duplicate search found nothing; same_as=[] is correct. The route stays in the unit: lem-sc-primitive-root is Lean-closed and the CRT and new nodes are Mathlib leaves, so no tool_uses are needed. No SGA is used. Minor, non-blocking: the leaf has no lean_audit field, which lean_status fills. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a4559de9",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (IsAlgClosed, PadicInt/toZModPow), the three proof_deps, the citer HenselianDVRTameSequence (same AdicProduct type), the report (real Worker report and Second reading by Q59) and the module. The node diff is only the added lean record; lean.statement is verbatim in the file. Clause match: IsAlgClosed + Fact p.Prime + CharP; Order p = positive and coprime to p; limitSubgroup membership checked by compile to be exactly the rootsOfUnity coordinates plus the power transitions; limitTopology = initial topology of the discrete coordinates; IsCompatiblePrimitiveFamily = exact order + zeta_1 = 1 + compatibility; existence conjunct, then for each family a ContinuousMulEquiv to Multiplicative(prod over r != p of PadicInt r), uniquely determined by the r^a-residue normalization (= the induced map). ContinuousMulEquiv @-argument order checked against Mathlib. Edge cases m=1, a=0, p=2, universe u: fine. Gates: no hollow defs, docstrings with source and blueprint, 9-step proof docstring, sorry only. nt_compile.py --json: rc=0, 1.4 s, no errors or warnings (the wrapper does not display sorry warnings at all). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.TameRootsProduct",
+  "declaration": "TameRoots.compatible_roots_product",
+  "declarations": [
+   "TameRoots.Order",
+   "TameRoots.limitSubgroup",
+   "TameRoots.limitTopology",
+   "TameRoots.IsCompatiblePrimitiveFamily",
+   "TameRoots.AdicProduct",
+   "TameRoots.compatible_roots_product"
+  ],
+  "file": "lean/Sheaf/FieldTheory/TameRootsProduct.lean",
+  "statement": "theorem compatible_roots_product (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) [Fact p.Prime] [CharP k p] : (∃ ζ : Order p → kˣ, IsCompatiblePrimitiveFamily p ζ) ∧ ∀ ζ : Order p → kˣ, IsCompatiblePrimitiveFamily p ζ → ∃ e : @ContinuousMulEquiv (limitSubgroup k p) (limitTopology k p) (AdicProduct p) inferInstance inferInstance inferInstance, ∀ (x : limitSubgroup k p) (r : {r : Nat.Primes // (r : ℕ) ≠ p}) (a : ℕ) (m : Order p), m.1 = (r : ℕ) ^ a → x.1 m = ζ m ^ ((@PadicInt.toZModPow r.1 (Fact.mk r.1.2) a) (Multiplicative.toAdd (e x) r)).val",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Canonical index, compatible-family subgroup, initial topology, primitive-family predicate and additive product are owning-node helpers. The prime-power residue formula characterizes the isomorphism induced by the chosen roots at every level via CRT; no arbitrary equivalence is substituted."
  }
 }

@@ -15,7 +15,8 @@
  },
  "kind": "statement",
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -239,5 +240,46 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read all seven steps and every cited statement in full, and checked the sources against Kerodon 01PF and 00JA online. Kerodon 01PF Corollary 4.6.8.5 is exactly the item's trivial-Kan clause; 4.6.8.9/11/12/15 give the composition, unit, associativity and inverse clauses. Kerodon 00JA Example 1.5.7.7(a) is exactly the new node, with Spine[n] defined by sigma(r)<=sigma(0)+1. Step 1: theta_n is the pullback of rho_n, by factoring through Fun(S_n,Q)->Fun(V_n,Q). Step 2: lem-coef-inner-anodyne-pushout-product applies in its stated orientation (i is the spine inclusion, j is the boundary inclusion of Delta^m); the vertices stay fixed because V_n lies in S_n, and m=0 gives surjectivity. Step 3: H(x,y)=U_Q(x,y) is Kan; a trivial fibration over a Kan base is Kan; 08NS gives the section and homotopy; Fun(T,Z) is Kan by the kan-mapping node with u=id; the Lambda^2_1 and Lambda^2_0 fillers compose and reverse homotopies. Steps 4-7: I checked the degeneracy/unit, the two associativity chains on T=H(x0..x3) precomposed with s_3, naturality, the four inverse composites, and conjugation through the pinch equivalence j. Small cases checked: Sp[0]=Delta^0, Sp[1]=Delta^1, Sp[2]=Lambda^2_1, empty Q. Duplicate search (DAG grep for spine/inner anodyne/Segal/multiarrow; blueprint; Mathlib Inner/Basic.lean, Inner/PushoutProduct.lean:103-109, StrictSegal, Path.lean spineId) found no duplicate and no Mathlib leaf. The new node is statement-only, self-contained and strictly smaller than the item. Accepted tool_uses: lem-coef-infinity-pinch-comparison and lem-weil-pbc-trivial-kan-homotopy-equivalence, both generic, reviewed and declared. No SGA is cited; this is not a target node, so the base-change morphism check does not apply. Minor point: steps 4 and 7 are marked elementary as assemblies of cited homotopies; this is borderline under C2 and I made no change. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31b255c1f",
+  "group": "N2",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by N2), full module, deps evaluation/arrowMappingSpace/mappingSpace/right_pinch_comparison, Mathlib SSet.Homotopy and I. Fixed-vertex pullback fiber, unpinched arrow factors, canonical spine restriction via mkOfSucc, I.rlp over all boundaries incl. m=0 match the node; section family, d1 s2 composition, units, associativity, relative boundary extension over any A and r, ordinal and functor naturality, typed inverse-triangle clause (faces checked) and pinched transport all true and faithful. Edge cases n=0/1, r=0, empty Q handled; single universe u. lean.statement verbatim, 20 declarations present, stmt_deps correct, non-lean node fields unchanged, docstrings with source and blueprint, only sorry is the theorem. nt_compile.py --json: rc 0, clean (2.3 s). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialCompositionSpine",
+  "declaration": "SSet.Enhanced.simplicial_composition_spine",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialCompositionSpine.lean",
+  "statement": "theorem simplicial_composition_spine (Q : SSet.{u}) [Quasicategory Q] (n : ℕ) (hn : 1 ≤ n) (x : Fin (n + 1) → Q _⦋0⦌) : SSet.modelCategoryQuillen.I.rlp (spineRestriction Q n x) ∧ HasCoherentComposition Q",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.multiarrowVertices",
+   "SSet.Enhanced.multiarrowVertexTuple",
+   "SSet.Enhanced.multiarrowSpace",
+   "SSet.Enhanced.multiarrowInclusion",
+   "SSet.Enhanced.multiarrowRestriction",
+   "SSet.Enhanced.consecutiveArrowProduct",
+   "SSet.Enhanced.multiarrowToArrow",
+   "SSet.Enhanced.multiarrowEdge",
+   "SSet.Enhanced.spineRestriction",
+   "SSet.Enhanced.binaryArrowPair",
+   "SSet.Enhanced.arrowUnderlyingEdge",
+   "SSet.Enhanced.multiarrowMap",
+   "SSet.Enhanced.arrowSpaceMap",
+   "SSet.Enhanced.SpineSectionFamily",
+   "SSet.Enhanced.spineComposition",
+   "SSet.Enhanced.spinePostcomposition",
+   "SSet.Enhanced.spinePrecomposition",
+   "SSet.Enhanced.AreSpineHomotopyInverses",
+   "SSet.Enhanced.HasCoherentComposition",
+   "SSet.Enhanced.simplicial_composition_spine"
+  ],
+  "note": "Repairs returned head 268160cdf427: actual fixed-vertex pullback; unpinched arrow factors; canonical spine restriction; composition defined by a binary spine section; all ordinal identities and relative choice fillers; endpoint-typed inverse triangles and both inverse maps for every third object. All helper data are constructed, with only this node theorem postponed."
  }
 }

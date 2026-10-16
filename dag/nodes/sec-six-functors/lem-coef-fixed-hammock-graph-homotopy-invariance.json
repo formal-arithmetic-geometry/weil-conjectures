@@ -228,5 +228,35 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-3a599467b (reviewer sub-agent of L); spot-checked: I read the item, its six steps and the new node lem-coef-two-sided-simplicial-grothendieck-invariance in full. I also read the four cited nodes (all in unit sk-prop-sf-biduality-general, so no tool uses) and the parent hammock-pair node, which uses the item exactly as stated. The item statement matches DK's fixed-type hammock statement: unrestricted forward columns, backward and vertical arrows in U, identity endpoints, no reduction, both local weak-equivalence hypotheses. Step 1: the diagonal theorem with directions exchanged gives f×1_K; factoring f×g and composing gives products; the coproduct argument holds. Step 2: the nerve of Z_w(C_p,W_p) matches the rectangles; the + and − words give discrete categories on C_p(a,b) and W_p(b,a), so lengths 0 and 1 follow from the hypotheses. Step 3: I checked all four endpoint variances by their square equations. Step 4: I checked each of the four joins against the morphism shape (h, a→F(h)a', G(h)b→b'), and composition in the (+,+) case. Step 5: the induction over all endpoints satisfies every hypothesis of the new node, with H=S|_U; Step 1 covers the L×R fibers. Step 6: the induced functor is S on every arrow. New node: true. Degreewise it is a two-sided bar construction (Thomason/BK); taking diagonals turns the comparison into a levelwise weak equivalence of coproducts of products of N F(z), V(z,z') and N G(z), so the diagonal theorem applies. This is DK 10.4 composed with 10.5. It passed the tests: empty O, terminal fibers (which give the existing clause of lem-coef-diagonal-coherent-nerve-comparison as a special case, not a duplicate), discrete V, empty fibers. It is statement-only, self-contained and searched in all three Mathlib kinds. A DAG grep for transfunctor, two-sided, Grothendieck and Thomason found no duplicate; the ordinary-base Thomason, aspherical, BK and zigzag-concatenation nodes differ in scope. It does not restate a clause of the item and creates no cycle. Limitation: DK has no local copy and the network is blocked here, so I could not open the cited pages. The proof is marked by:agent with a WANTED line, and I checked the mathematics independently. No fixes made; cosmetic note only: z\\prime would read better as z'."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-751c36572",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Mathematics correct: every hypothesis and conclusion clause matches the node and Dwyer–Kan 5.1/5.7 (grid = nerve simplices of the existing zigzag category, backward and vertical arrows in U_p, endpoint identities, no reduction, comparison applies S to every arrow, diagonal weak equivalence; the existential presentation is unique up to unique isomorphism, so not a weakening). Edge cases hold: empty O, empty word (only if x=y), one-letter words, q=0, single universe u. No hollow definitions, theorem is the only sorry, docstrings and six-step proof present, report has Worker report and Second reading by Q05, node changes only lean. Finding H4: def-coef-simplicial-hammock-pair (Sheaf.CategoryTheory.SimplicialHammockPair) landed 6 min before the delivery and already provides WideSimplicialSubcategory, SimplicialHammockDegree, .degree and the degree functors/operators; the delivery's Wide/Degree/degreeCategory/marked/Objects/mappingMap duplicate them, and the citer lem-coef-hammock-pair-homotopy-invariance is stated on the landed interface. FIX: complete replacement module on SCat/WideSimplicialSubcategory/SimplicialHammockDegree with the SimplicialHammockComparison object-fixing convention (O≃A, O≃B, S.obj(objectA o)=objectB o), same meaning; lean-record.json (declarations, note) and report.md with a maintainer-fix section. nt_compile.py: delivered and fixed files both clean (rc 0, no warnings); scratch-copy test shows the compiler reports errors; sorryAx only from the theorem. Suggest adding def-coef-simplicial-hammock-pair to stmt_deps (STMT_DEPS MAY GAIN LANDED NODES; no cycle)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.FixedHammockGraphHomotopyInvariance",
+  "declaration": "CategoryTheory.FixedHammockGraph.fixed_hammock_graph_homotopy_invariance",
+  "declarations": [
+   "CategoryTheory.FixedHammockGraph.word",
+   "CategoryTheory.FixedHammockGraph.HorizontalImage",
+   "CategoryTheory.FixedHammockGraph.DiagramImage",
+   "CategoryTheory.FixedHammockGraph.Grid",
+   "CategoryTheory.FixedHammockGraph.GridImage",
+   "CategoryTheory.FixedHammockGraph.Graph",
+   "CategoryTheory.FixedHammockGraph.markedMap",
+   "CategoryTheory.FixedHammockGraph.fixed_hammock_graph_homotopy_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/FixedHammockGraphHomotopyInvariance.lean",
+  "statement": "theorem fixed_hammock_graph_homotopy_invariance {O : Type u} {A B : SCat.{u}} (objectA : O ≃ A) (objectB : O ≃ B) (U : WideSimplicialSubcategory A) (V : WideSimplicialSubcategory B) (S : A ⟶ B) (hS : ∀ o : O, S.obj (objectA o) = objectB o) (hUV : ∀ (n : SimplexCategoryᵒᵖ) {x y : SimplicialHammockDegree A n} (f : x ⟶ y), U.degree n f → V.degree n ((simplicialHammockDegreeFunctor S n).map f)) (hA : ∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (S.map x y)) (hU : ∀ x y : A, SSet.Enhanced.IsWeakHomotopyEquivalence (markedMap U V S hUV x y)) (w : List Bool) (x y : A) : ∃ (DA : Graph U w x y) (DB : Graph V w (S.obj x) (S.obj y)) (f : DA.diagram ⟶ DB.diagram), (∀ (p q : SimplexCategoryᵒᵖ) (s : DA.diagram.obj (p, q)), GridImage U V w (simplicialHammockDegreeFunctor S p) OrderHom.id (DA.simplices p q s) (DB.simplices p q (f.app (p, q) s))) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) f)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded ordinary relative-zigzag categories and, by the reviewer's fix (H4), the landed declarations of def-coef-simplicial-hammock-pair (Sheaf.CategoryTheory.SimplicialHammockPair: SCat, WideSimplicialSubcategory, SimplicialHammockDegree, WideSimplicialSubcategory.degree, simplicialHammockDegreeFunctor, simplicialHammockDegreeOperator), which landed six minutes before the delivery and replace the delivery's private copies Degree/degreeCategory/Wide/marked/Objects/mappingMap. The object-fixing convention (O with objectA, objectB and S.obj (objectA o) = objectB o) is that of the landed SimplicialHammockComparison used by the citer lem-coef-hammock-pair-homotopy-invariance. The theorem supplies canonical graph presentations and the fully characterized induced bisimplicial map, without choosing data from an existence theorem; the only postponed theorem is this node. The Grothendieck proof dependency has no recorded module yet.",
+  "fixed_by": "NT-stage2-cc-751c36572"
  }
 }
