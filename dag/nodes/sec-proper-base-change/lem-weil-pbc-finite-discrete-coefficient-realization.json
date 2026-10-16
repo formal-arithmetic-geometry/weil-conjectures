@@ -1,0 +1,174 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-coefficient-realization",
+ "kind": "statement",
+ "title": "Compatible coefficient encodings and sheaf-level origin",
+ "statement": "Use the module sites and exchange maps of [def-weil-pbc-proetale-modules] and [def-weil-pbc-derived-exchange]. Let B be a finite discrete commutative ring killed by the prime ell, k a field of positive prime characteristic different from ell, and sq any commutative square of separated finite-type k-schemes. Given a family of monoidal identifications of its pulled-back condensed coefficient rings with the sheafified constant rings on all schemes and the constant-ring internal-module encoding hypothesis, there exist abelian coefficient equivalences E0 on X and E1 on Y-prime such that every constructible internal sheaf on X has etale sheaf origin under comparison inverse image followed by E0. Their concretely derived realization functors identify the four vertices and each of the three unit-square-counit arrows of exchange, on every bounded constructible realized complex. These are sheaf-origin and stepwise coherence assertions; no arbitrary bounded-complex origin or assembled arrow comparison is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied ring isomorphisms and the constant-ring internal module encoding. Construct one sectionwise encoding on all schemes and normalize against the canonical coefficient ring family; unrelated scalar-twisted choices must not be treated as coherent. The application supplies the canonical family constructed by inverse image from the point.",
+   "uses": [
+    "lem-weil-pbc-constant-internal-module-sheaf-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport finite local presentations on the finite constructible stratification to ordinary finite-coefficient module sheaves. Each presentation map is a finite matrix of locally constant B-valued sections. After one common refinement all entries are constant, so its cokernel is the constant sheaf of the corresponding finitely presented B-module, which is finite. Thus the original strata have locally constant finite restrictions. Apply finite-ring constructible sheaf origin (Tag 09AK).",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical bounded-below qcqs direct-image comparison of [prop-weil-pbc-comparison-direct-image], not an unspecified isomorphism: it is the mate of comparison inverse image applied to the etale counit. Construct the inverse-image comparisons by uniqueness of left adjoints to restriction. All morphisms here are qcqs. Transport these adjunctions through the sectionwise coefficient encodings. The mate unit identity gives the first square, pullback composition and sq.w give the second, and the mate counit identity gives the third. The defining three-factor formulas identify the total arrows. No exchange invertibility, properness, or Cartesian assumption is needed.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AK",
+  "note": "A3 second reading: sheaf-level origin and coefficient coherence remain open; direct-image comparison is an existing non-elementary input, now explicitly cited and imported. The recorded sheaf-origin and direct-image modules currently conflict with the original upstream notation; see report Second reading by A3. Use compatible original upstream comparison APIs or reconcile those imports when filling the hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
+   "date": "2026-10-16",
+   "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
+   "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Full\", \"essImage\"",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.Full.toEssImage.",
+   "verdict": "Generic essential-image infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
+   "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "A fully faithful triangulated exact realization functor contains bounded complexes when it contains the single complexes of their cohomology",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a constant sheaf of rings and sheaves of modules commutes with inverse image and derived pushforward on etale and proetale sites",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardNatIso_hom",
+   "verdict": "Second reading: generic SheafOfModules APIs do not identify internal Mod coefficient realizations or prove the specified exchange coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"ModuleCat\", \"equivalence\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Second reading: generic SheafOfModules APIs do not identify internal Mod coefficient realizations or prove the specified exchange coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject.*essImage|essImage.*IsConstructibleModuleObject|finiteDiscreteExchangeSteps",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Second reading: generic SheafOfModules APIs do not identify internal Mod coefficient realizations or prove the specified exchange coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence from internal modules in abelian sheaves over a constant ring to sheaves of modules commutes with inverse image and derived direct image",
+   "date": "2026-10-16",
+   "results": "8 hits, including SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.PullbackConstruction.adjunction, and SheafOfModules.pushforwardSections_unitHomEquiv.",
+   "verdict": "A3 second reading: generic external-module interfaces; none supplies internal coefficient encoding and the three exchange squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"essImage\", \"singleFunctor\"",
+   "date": "2026-10-16",
+   "results": "0 hits.",
+   "verdict": "A3 second reading: no replacement for the coefficient-origin obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "internal.*[Mm]odule.*[Ee]quivalence|comparison_derivedBaseChangeMap|prop_of_bounded",
+   "date": "2026-10-16",
+   "results": "msearch Mathlib grep: 0 hits. Local rg separately found comparison_derivedBaseChangeMap in the upstream SmoothBaseChange module and DerivedCategory.prop_of_bounded used by this reduction.",
+   "verdict": "The upstream exchange theorem assumes IsPullback and uses ordinary module-valued sheaves; it does not discharge the residual internal-module comparison for arbitrary CommSq."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Compatible coefficient encodings and sheaf-level origin",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientExchange",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientExchange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteExchange_coefficientRealization",
+  "statement": "theorem finiteDiscreteExchange_coefficientRealization [DiscreteTopology B] [Finite B]\n    (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)\n    (eR : ∀ T : Scheme.{u},\n      Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n        ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n          condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)\n    (heR : ∀ T : Scheme.{u}, IsMonHom (eR T).hom)\n    (hEncoding : ∀ T : Scheme.{u},\n      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤\n            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),\n        G.IsEquivalence ∧ Nonempty (G ⋙\n          sheafCompose (Scheme.ProEt.topology T)\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅\n          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :\n    ∃ (E0 : FiniteDiscreteProEtaleSheaves B X ≌ FiniteDiscreteInternalModules B X)\n      (E1 : FiniteDiscreteProEtaleSheaves B Y' ≌ FiniteDiscreteInternalModules B Y'),\n      (∀ M : FiniteDiscreteInternalModules B X,\n        ProEtale.IsConstructibleModuleObject\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X) M →\n        (ν^*(X)[ModuleCat.{u + 1} (ULift.{u + 1} B)] ⋙ E0.functor).essImage M) ∧\n      finiteDiscreteExchangeSteps B ℓ k sq\n        (finiteDiscreteRealization B X E0) (finiteDiscreteRealization B Y' E1)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+ }
+}

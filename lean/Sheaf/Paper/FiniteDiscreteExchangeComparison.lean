@@ -5,11 +5,10 @@ Authors: SHEAF group C2
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
+import Sheaf.Paper.FiniteDiscreteExchangeRealization
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 
 /-! # Finite discrete internal coefficients and etale exchange
 
@@ -27,6 +26,55 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 -- Fix the size bound explicitly to avoid a recursive instance search on this site.
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+
+private noncomputable def arrowIsoOfObjectIso
+    {C D : Type*} [Category C] [Category D] (P : ObjectProperty D)
+    {F G : C ⥤ P.FullSubcategory} (η : F ⟶ G) {M N : C} (e : M ≅ N) :
+    Arrow.mk (η.app M).hom ≅ Arrow.mk (η.app N).hom :=
+  Arrow.isoMk (P.ι.mapIso (F.mapIso e)) (P.ι.mapIso (G.mapIso e))
+    (congrArg (fun t ↦ t.hom) (η.naturality e.hom))
+
+private theorem nonemptyArrowIsoOfObjectIso
+    {C D : Type*} [Category C] [Category D] (P : ObjectProperty D)
+    {F G : C ⥤ P.FullSubcategory} (η : F ⟶ G) {M N : C} (e : M ≅ N) :
+    Nonempty (Arrow.mk (η.app M).hom ≅ Arrow.mk (η.app N).hom) :=
+  ⟨arrowIsoOfObjectIso P η e⟩
+
+-- Bounded devissage is formulated over an abstract abelian category. This avoids
+-- reducing the concrete coefficient-module representation when using its API.
+private theorem boundedArrowComparison
+    {C A D E : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [Category A] [HasZeroObject A] [HasShift A ℤ] [Preadditive A]
+    [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A]
+    [Category D] [Category E]
+    (F0 : A ⥤ DerivedCategory C) [F0.CommShift ℤ] [F0.Full] [F0.IsTriangulated]
+    (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
+    (Q : ObjectProperty (DerivedCategory C))
+    (hQ : ∀ M, Q M ↔ DerivedCategory.TStructure.t.bounded M ∧
+      ∀ n, P ((DerivedCategory.homologyFunctor C n).obj M))
+    {R : ObjectProperty D} {S T : Q.FullSubcategory ⥤ R.FullSubcategory} (η : S ⟶ T)
+    {S' T' : A ⥤ E} (θ : S' ⟶ T') (F1 : E ⥤ D)
+    (hsingle : ∀ M, P M → F0.essImage ((DerivedCategory.singleFunctor C 0).obj M))
+    (hstep : ∀ L (hL : Q (F0.obj L)),
+      Nonempty (Arrow.mk (η.app ⟨F0.obj L, hL⟩).hom ≅ Arrow.mk (F1.map (θ.app L))))
+    (N : Q.FullSubcategory) :
+    ∃ L, Nonempty (Arrow.mk (η.app N).hom ≅ Arrow.mk (F1.map (θ.app L))) := by
+  have horigin : F0.essImage N.obj :=
+    DerivedCategory.prop_of_bounded F0.essImage P hsingle N.obj
+      ((hQ N.obj).mp N.property).1 ((hQ N.obj).mp N.property).2
+  obtain ⟨L, ⟨e⟩⟩ := horigin
+  have hL : Q (F0.obj L) := by
+    apply (hQ _).mpr
+    refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e.symm
+      ((hQ N.obj).mp N.property).1, ?_⟩
+    intro n
+    exact P.prop_of_iso ((DerivedCategory.homologyFunctor C n).mapIso e.symm)
+      (((hQ N.obj).mp N.property).2 n)
+  let M : Q.FullSubcategory := ⟨F0.obj L, hL⟩
+  let eMN : M ≅ N := ObjectProperty.isoMk _ e
+  refine ⟨L, ?_⟩
+  exact (nonemptyArrowIsoOfObjectIso R η eMN.symm).map2
+    (fun p q ↦ p ≪≫ q) (hstep L hL)
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -68,8 +116,9 @@ abelian sheaf comparison. Transfer along the constant-ring identification. These
 inverse constructions are additive and exact, as detected on abelian sheaves.
 Derive this equivalence and compose it
 with exact etale-to-pro-etale inverse image to obtain the realization functor F.
-The bounded constructible finite-coefficient origin theorem gives an etale bounded
-complex L realizing N. Exact inverse image commutes with pullback, while bounded-below
+The realization is full and triangulated. Its essential image contains constructible
+sheaves in degree zero, so existing bounded triangulated devissage gives an etale
+bounded-below complex L realizing N. Exact inverse image commutes with pullback, while bounded-below
 site comparison identifies derived direct image of etale-origin objects with the
 pro-etale direct image. Both comparisons come from the same underived adjunctions;
 their equations for units, counits, and composition identify the actual exchange maps.
@@ -106,6 +155,25 @@ theorem finiteDiscreteExchange_comparison
           (Profinite.continuousMapRingObj.{u} B) ℓ k sq).app N).hom ≅
         Arrow.mk (F.map ((Etale.baseChange
           (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L))) := by
-  sorry
+  obtain ⟨F0, cs, hfull, htri, hsingle, F1, hsteps⟩ :=
+    finiteDiscreteExchange_stepRealization B ℓ k hB sq hEncoding
+  let := cs
+  let := hfull
+  let := htri
+  let P : ObjectProperty (FiniteDiscreteInternalModules B X) :=
+    ProEtale.IsConstructibleModuleObject
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X)
+  have : P.IsClosedUnderIsomorphisms :=
+    ⟨fun e h ↦ _root_.constructible_of_iso e h⟩
+  refine ⟨F1, ?_⟩
+  refine boundedArrowComparison F0 P
+    (ProEtale.boundedConstructible
+      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))
+    (fun _ ↦ Iff.rfl)
+    (boundedConstructibleBaseChange (Profinite.continuousMapRingObj.{u} B) ℓ k sq)
+    (Etale.baseChange (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq) F1 hsingle ?_ N
+  intro L hL
+  obtain ⟨H⟩ := hsteps L hL
+  exact H.nonemptyArrowIso
 
 end AlgebraicGeometry.ProEtale.CondensedRing

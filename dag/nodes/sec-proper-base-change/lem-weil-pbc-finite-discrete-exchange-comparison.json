@@ -1,123 +1,120 @@
 {
-  "id": "lem-weil-pbc-finite-discrete-exchange-comparison",
-  "kind": "statement",
-  "title": "Finite discrete internal exchange is realized from etale exchange",
-  "statement": "Use the module sites of [def-weil-pbc-proetale-modules] and the exchange construction of [def-weil-pbc-derived-exchange]. Assume for every scheme T the equivalence between internal modules over the sheafified constant ULift B ring and ULift B-module-valued sheaves, compatible with forgetting to abelian sheaves, exactly as in the Lean statement. Fix a prime ℓ, a finite discrete commutative topological ring B killed by ℓ, a field k of positive prime characteristic different from ℓ, and separated finite-type k-schemes and k-morphisms X,Y,X′,Y′ forming any commutative square. Pull the condensed continuous-function ring of B to these schemes. For every bounded constructible complex N of internal B-module objects on X there are a functor F from the bounded-below derived category of etale sheaves of ULift B-modules on Y′ to the full derived category of internal B-module objects on Y′ and a bounded-below etale complex L on X, such that the specified internal-module boundedConstructibleBaseChange component at N and F applied to the specified etale baseChange component at L are isomorphic as arrows. No coefficient extension or integral reduction occurs here, and no properness, Cartesian, nonzero-ring, or exchange invertibility assumption is imposed.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin"
+ "id": "lem-weil-pbc-finite-discrete-exchange-comparison",
+ "kind": "statement",
+ "title": "Finite discrete internal exchange is realized from etale exchange",
+ "statement": "Use the module sites of [def-weil-pbc-proetale-modules] and the exchange construction of [def-weil-pbc-derived-exchange]. Assume for every scheme T the equivalence between internal modules over the sheafified constant ULift B ring and ULift B-module-valued sheaves, compatible with forgetting to abelian sheaves, exactly as in the Lean statement. Fix a prime ℓ, a finite discrete commutative topological ring B killed by ℓ, a field k of positive prime characteristic different from ℓ, and separated finite-type k-schemes and k-morphisms X,Y,X′,Y′ forming any commutative square. Pull the condensed continuous-function ring of B to these schemes. For every bounded constructible complex N of internal B-module objects on X there are a functor F from the bounded-below derived category of etale sheaves of ULift B-modules on Y′ to the full derived category of internal B-module objects on Y′ and a bounded-below etale complex L on X, such that the specified internal-module boundedConstructibleBaseChange component at N and F applied to the specified etale baseChange component at L are isomorphic as arrows. No coefficient extension or integral reduction occurs here, and no properness, Cartesian, nonzero-ring, or exchange invertibility assumption is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use exact derived realization with single-sheaf origin and the three exchange-step comparisons.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-exchange-step-realization"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-derived-exchange"
-  ],
-  "proof": [
-    {
-      "text": "Since B is discrete, its continuous functions on profinite sets are locally constant. The corresponding condensed ring is the constant ring, and exact inverse image sends it to the sheafified constant B ring on each scheme. Use the supplied internal constant-ring module sheaf equivalence. Its forgetful comparison identifies underlying abelian sheaves, so its equivalence functors are additive and exact. The construction preserves finite local presentations on strata, hence the intrinsic constructible property transports to the ordinary finite-coefficient sheaf encoding.",
-      "uses": [
-        "lem-weil-pbc-constant-internal-module-sheaf-equivalence"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Transport the bounded constructible complex through this exact equivalence. Finite-ring constructible derived origin gives a bounded constructible etale complex L with realization isomorphic to N. Regard L as bounded below. Define F as exact etale-to-pro-etale inverse image on bounded-below derived categories, followed by the exact internal-module realization on Y′.",
-      "uses": [
-        "lem-weil-pbc-finite-ring-constructible-derived-origin"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The comparison of inverse images is functorial for every morphism, and the bounded-below direct-image comparison applies because the finite-type morphisms are qcqs. These are the adjunction comparisons of the same site morphisms, hence respect units, counits and the commutative-square pullback comparison. Apply these equations to the unit-square-counit formula for both specified exchange transformations. Transport along the origin isomorphism of N. The two endpoint isomorphisms and the resulting commuting equation give the Arrow isomorphism. No invertibility of exchange itself is used.",
-      "uses": [
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-constant-internal-module-sheaf-equivalence",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "prop-weil-pbc-site-comparison-finite-level"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
-    "note": "C2 specialization to the actual internal module objects; the complete argument and the remaining interface work are recorded in the module docstring and report."
+  {
+   "text": "The full triangulated realization has triangulated, isomorphism-closed essential image. Apply existing DerivedCategory.prop_of_bounded with the constructible cohomology sheaves of N. This supplies L and an isomorphism F0(L) to N without invoking a separate constructible derived-origin theorem.",
+   "uses": [],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Exact equivalence between internal modules over a constant ring object in abelian sheaves and sheaves of modules over that ring",
-      "date": "2026-10-16",
-      "results": "UNAVAILABLE: service unavailable: Internal Server Error",
-      "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Mod\", \"ModuleCat\"",
-      "date": "2026-10-16",
-      "results": "12 hits: SemimoduleCat.delabOf; SemimoduleCat.«term↟_»; SemimoduleCat; SemimoduleCat.carrier; SemimoduleCat.instInhabited; SemimoduleCat.moduleCategory; SemimoduleCat.instCoeSortType; SemimoduleCat.Hom",
-      "verdict": "Mathlib provides sites and discrete condensed modules, but no exact internal-module realization and exchange comparison. The library constant-ring module-sheaf equivalence covers one encoding, not the internal Mod category of the item."
-    },
-    {
-      "tool": "grep",
-      "query": "constantSheaf.*module|module.*constantSheaf",
-      "date": "2026-10-16",
-      "results": "4 hits: Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean",
-      "verdict": "Mathlib provides sites and discrete condensed modules, but no exact internal-module realization and exchange comparison. The library constant-ring module-sheaf equivalence covers one encoding, not the internal Mod category of the item."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
-    "date": "2026-10-16",
-    "group": "C2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "nt-target-proetale-e",
-      "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
-      "via": [
-        "lem-weil-pbc-integral-finite-exchange-comparison",
-        "new-proper-continuous-basechange-app"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
-    "file": "lean/Sheaf/Paper/FiniteDiscreteExchangeComparison.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteExchange_comparison",
-    "statement": "theorem finiteDiscreteExchange_comparison\n    (hB : (ℓ : B) = 0)\n    (sq : CommSq g' f' f g)\n    (N : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))\n    (hEncoding : ∀ T : Scheme.{u},\n      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤\n            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),\n        G.IsEquivalence ∧ Nonempty (G ⋙\n          sheafCompose (Scheme.ProEt.topology T)\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅\n          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :\n    ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology\n          (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤\n        DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) Y')))\n      (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} B)))),\n      Nonempty (Arrow.mk ((boundedConstructibleBaseChange\n          (Profinite.continuousMapRingObj.{u} B) ℓ k sq).app N).hom ≅\n        Arrow.mk (F.map ((Etale.baseChange\n          (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))",
-    "branch": "sheaf-dag",
-    "by": "C2",
-    "date": "2026-10-16"
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261015T224107-L-2885036",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261015T224107-L-2885036",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Transport bounded constructibility to F0(L). Compose the three commuting comparison squares using the generic three-step comparison structure. The defining three-factor formulas for the specified exchange maps give their arrow isomorphism at F0(L). Naturality of the internal exchange transports it along F0(L) isomorphic to N.",
+   "uses": [
+    "lem-weil-pbc-three-step-arrow-comparison"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-exchange-step-realization",
+  "lem-weil-pbc-three-step-arrow-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
+  "note": "B3: sheaf-level origin plus existing triangulated bounded devissage; generic three-step arrow assembly and naturality are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between internal modules over a constant ring object in abelian sheaves and sheaves of modules over that ring",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "UNAVAILABLE: the search request failed; no match verdict was obtained from this service."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"ModuleCat\"",
+   "date": "2026-10-16",
+   "results": "12 hits: SemimoduleCat.delabOf; SemimoduleCat.«term↟_»; SemimoduleCat; SemimoduleCat.carrier; SemimoduleCat.instInhabited; SemimoduleCat.moduleCategory; SemimoduleCat.instCoeSortType; SemimoduleCat.Hom",
+   "verdict": "Mathlib provides sites and discrete condensed modules, but no exact internal-module realization and exchange comparison. The library constant-ring module-sheaf equivalence covers one encoding, not the internal Mod category of the item."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*module|module.*constantSheaf",
+   "date": "2026-10-16",
+   "results": "4 hits: Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean",
+   "verdict": "Mathlib provides sites and discrete condensed modules, but no exact internal-module realization and exchange comparison. The library constant-ring module-sheaf equivalence covers one encoding, not the internal Mod category of the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin",
+   "via": [
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteExchangeComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteExchange_comparison",
+  "statement": "theorem finiteDiscreteExchange_comparison\n    (hB : (ℓ : B) = 0)\n    (sq : CommSq g' f' f g)\n    (N : ProEtale.BoundedConstructible\n      (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X))\n    (hEncoding : ∀ T : Scheme.{u},\n      ∃ G : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n          (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))) ⥤\n            Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} B)),\n        G.IsEquivalence ∧ Nonempty (G ⋙\n          sheafCompose (Scheme.ProEt.topology T)\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ≅\n          Mod.forget (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})\n            (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj\n              (RingCat.of (ULift.{u + 1} B) : RingCat.{u + 1}))))) :\n    ∃ (F : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology\n          (ModuleCat.{u + 1} (ULift.{u + 1} B))) ⥤\n        DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1})\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} B) Y')))\n      (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} B)))),\n      Nonempty (Arrow.mk ((boundedConstructibleBaseChange\n          (Profinite.continuousMapRingObj.{u} B) ℓ k sq).app N).hom ≅\n        Arrow.mk (F.map ((Etale.baseChange\n          (ModuleCat.{u + 1} (ULift.{u + 1} B)) sq).app L)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261015T224107-L-2885036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+ }
 }

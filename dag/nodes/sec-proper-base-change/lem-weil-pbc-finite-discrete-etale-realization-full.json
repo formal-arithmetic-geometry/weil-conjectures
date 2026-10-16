@@ -1,0 +1,123 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-etale-realization-full",
+ "kind": "statement",
+ "title": "Fullness of bounded-below etale realization",
+ "statement": "For every commutative ring B and scheme T, the functor from bounded-below derived etale sheaves of ULift B-modules to the full pro-etale derived category, obtained by inclusion followed by derived comparison inverse image, is full. Use the module sites of [def-weil-pbc-proetale-modules].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Corollary 5.1.6; existing WeilConjectures.SixFunctors.ProEtale.Derived.Comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved bijective_comparisonUpperStar_mapDerivedCategory_map to the underlying bounded-below source and target; take its surjectivity clause and wrap the lifted morphism in the full subcategory. This corollary uses the generic comparison injective-acyclicity theorem recorded by the cited node; its source proof still contains sorry, so this fullness bridge is conditional on that existing hole.",
+   "uses": [
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-grothendieck-injective-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze, Corollary 5.1.6; WeilConjectures.SixFunctors.ProEtale.Derived.Comparison, bijective_comparisonUpperStar_mapDerivedCategory_map",
+  "note": "B3: concrete coefficient realization and existing library APIs. Second reading: its existing dependency rightAcyclic_comparisonUpperStar_obj_of_injective still has sorry; no additional hole is introduced here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
+   "date": "2026-10-16",
+   "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
+   "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Full\", \"essImage\"",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.Full.toEssImage.",
+   "verdict": "Generic essential-image infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
+   "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "A fully faithful triangulated exact realization functor contains bounded complexes when it contains the single complexes of their cohomology",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Ii]so|[Ii]so.*constantSheaf",
+   "date": "2026-10-16",
+   "results": "8 hits: Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "Second reading: generic fullness results only; reuse the exact source-library bijective comparison hom-map theorem, with its pre-existing injective-acyclicity dependency recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Fullness of bounded-below etale realization",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteEtaleRealizationFull",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteEtaleRealizationFull.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteDiscreteEtaleRealization_full",
+  "statement": "theorem finiteDiscreteEtaleRealization_full (B : Type) [CommRing B] (T : Scheme.{u}) :\n    (DerivedCategory.Plus.ι ⋙\n      D(ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)])).Full",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+ }
+}

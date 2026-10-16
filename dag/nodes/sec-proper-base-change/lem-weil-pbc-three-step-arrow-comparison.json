@@ -1,0 +1,109 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-three-step-arrow-comparison",
+ "kind": "statement",
+ "title": "Three consecutive commuting squares give an arrow isomorphism",
+ "statement": "In any category, let a,b,c and d,e,f be three composable arrows. If four vertex isomorphisms make the three corresponding squares commute, then the composites a followed by b followed by c and d followed by e followed by f are isomorphic as objects of the arrow category.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Comma/Arrow.lean",
+  "place": "Arrow.isoMk"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Reassociate compositions and substitute the third, second, and first commuting-square equations. The resulting equality says the endpoint isomorphisms commute with the composite arrows. Apply Arrow.isoMk. The factored-comparison variant carries the specified total arrows as parameters and their three-factor equations as fields; substitution gives the same arrow comparison without unfolding the total functors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Comma/Arrow.lean",
+  "place": "Arrow.isoMk; elementary composition of commutative squares",
+  "note": "B3: concrete coefficient realization and existing library APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful triangulated exact realization functor has bounded complexes in its essential image when their cohomology sheaves have sheaf-level origin",
+   "date": "2026-10-16",
+   "results": "8 hits, including DerivedCategory.TStructure.t and single-complex support lemmas.",
+   "verdict": "No complete coefficient-specific comparison; use the existing derived-category APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Full\", \"essImage\"",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.Functor.Full.toEssImage.",
+   "verdict": "Generic essential-image infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Tt]riangulated|[Tt]riangulated.*essImage",
+   "date": "2026-10-16",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean: F.essImage.IsTriangulated.",
+   "verdict": "Use this API for bounded devissage; coefficient realization still uses source-library comparison."
+  },
+  {
+   "tool": "LeanSearch",
+   "query": "Composition of three commuting squares of isomorphisms gives an isomorphism between composite arrows",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteExchangeComparison",
+  "date": "2026-10-16",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Continuous-coefficient proper base change: comparison of derived integral reduction with finite etale exchange; Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3; Stacks Project Tag 09AL for bounded constructible finite-coefficient origin; finite discrete coefficient step: Three consecutive commuting squares give an arrow isomorphism",
+   "via": [
+    "lem-weil-pbc-finite-discrete-exchange-comparison",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteRealizationFunctor",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteRealizationFunctor.lean",
+  "declaration": "FiniteDiscreteThreeStepComparison.nonemptyArrowIso",
+  "statement": "theorem FiniteDiscreteThreeStepComparison.nonemptyArrowIso\n    {C : Type*} [Category C] {A0 A1 A2 A3 B0 B1 B2 B3 : C}\n    {a : A0 ⟶ A1} {b : A1 ⟶ A2} {c : A2 ⟶ A3}\n    {d : B0 ⟶ B1} {e : B1 ⟶ B2} {f : B2 ⟶ B3}\n    (h : FiniteDiscreteThreeStepComparison a b c d e f) :\n    Nonempty (Arrow.mk (a ≫ b ≫ c) ≅ Arrow.mk (d ≫ e ≫ f))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-7a03c",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261016T054832-L-154891",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the packet and node statements; all files and the direct importer compiled successfully"
+ }
+}
