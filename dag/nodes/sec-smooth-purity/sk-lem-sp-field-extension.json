@@ -3,36 +3,206 @@
  "blueprint": {
   "is": "sk-lem-sp-field-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compatibility with finite extensions of $E$",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$, and let $E\\subset F$ be\nfinite extensions of $\\Ql$. For $M\\in\\Dbc(X,E)$ and $K\\in\\Dbc(Y,E)$ there are\nnatural isomorphisms, in $\\Dbc(Y,F)$ and $\\Dbc(X,F)$ respectively,\n\n$$\n\\begin{aligned}\n(Rf_{!,E}M)\\otimes^{\\mathbf L}_{E_Y}F_Y\n&\\simeq Rf_{!,F}(M\\otimes^{\\mathbf L}_{E_X}F_X),\\\\\n(f_E^*K(d)[2d])\\otimes^{\\mathbf L}_{E_X}F_X\n&\\simeq f_F^*(K\\otimes^{\\mathbf L}_{E_Y}F_Y)(d)[2d],\n\\end{aligned}\n$$\n\nwhich carry the unit and counit of [sk-prop-sp-rational] for $E$ to those for\n$F$. For a further extension $F\\subset L$, the comparison for $E\\subset L$ is\nthe composite of those for $E\\subset F$ and $F\\subset L$.",
+ "statement": "Fix the global finite-field datum of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$ of characteristic $p$, and a prime $\\ell\\ne p$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated finite-type $k$-morphism of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms, def-weil-scheme-morphism-properties]. Let $E\\subset F$ be finite extensions of $\\mathbf Q_\\ell$ inside a fixed algebraic closure, with valuation rings $\\mathcal O_E\\subset\\mathcal O_F$ [def-weil-l-adic-coefficient-extension]. Use the derived-complete integral constructible categories [def-weil-derived-complete-integral-detailed] and their raw scalar localizations $\\Dbc(T,E)$ and $\\Dbc(T,F)$ [def-weil-rationalization-karoubi]. The coefficient extension $C^T_{F/E}= -\\otimes_E F$ is the rationalization of integral completed scalar extension, as defined there; the displayed tensor notation below denotes this functor, not tensor over a discrete constant non-torsion ring sheaf. Use compact supports [def-weil-integral-rational-qbar-compact-support], pullback [def-weil-derived-pullback-tensor-hom], and the Tate twists [def-coefficient-twists-detailed].\n\nFor $M\\in\\Dbc(X,E)$ and $K\\in\\Dbc(Y,E)$ there are natural isomorphisms\n$$\n\\begin{aligned}\nb_{F/E,M}: C^Y_{F/E}(Rf_{!,E}M)&\\xrightarrow{\\sim}Rf_{!,F}(C^X_{F/E}M),\\\\\na_{F/E,K}: C^X_{F/E}(Lf_E^*K(d)[2d])&\\xrightarrow{\\sim}Lf_F^*(C^Y_{F/E}K)(d)[2d],\n\\end{aligned}\n$$\nin $\\Dbc(Y,F)$ and $\\Dbc(X,F)$ respectively. They carry the unit and counit of the smooth purity adjunction $Rf_{!,E}\\dashv Lf_E^*(-)(d)[2d]$ to those over $F$, where these adjunctions are obtained by scalar localization of the integral adjunction and its purity isomorphism in [det-sp-integral-adjunction-bijection]. For $E\\subset F\\subset L$, the comparisons for $E\\subset L$ equal the composites for $E\\subset F$ and $F\\subset L$, under the scalar-extension associators [lem-weil-scalar-extension-composition].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/_section.md",
   "place": "node sk-lem-sp-field-extension, order 1830"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "det-sp-integral-adjunction-bijection",
+  "lem-weil-scalar-extension-composition"
+ ],
  "proof": [
   {
-   "text": "Since $\\mathcal O_F$ is finite free over $\\mathcal O_E$, $-\\otimes\\mathcal O_{F,T}$\ncommutes with $R\\varprojlim$ and reduces at level $n$ to extension along\n$\\mathcal O_E/\\ell^n\\to\\mathcal O_F/\\ell^n$. There [sk-lem-sp-reduction] gives the\ncomparisons with their compatibilities with units, counits, purity maps and\ncomposition; they commute with the reductions $n\\to m$ by the composition\nstatement, so they are maps of the towers defining $Rf_{!,\\mathcal O_E}$ and\n$H_{f,\\mathcal O_E}$ of [sk-prop-sp-integral-adjunction]. Apply $R\\varprojlim$ and\ninvert $\\ell$.",
+   "text": "Put $P_R=Rf_{!,\\mathcal O_R}$, $J_R=H_{f,\\mathcal O_R}$ and $H_R=Lf_{\\mathcal O_R}^*(-)(d)[2d]$ for a coefficient field $R$. The integral adjunction statement gives $P_R\\dashv J_R$ and a natural purity isomorphism $\\gamma_R:H_R\\xrightarrow{\\sim}J_R$. Transport this adjunction to $P_R\\dashv H_R$: explicitly $\\eta_R^H=\\gamma_{R,P_R(-)}^{-1}\\eta_R^J$ and $\\epsilon_R^H=\\epsilon_R^J P_R(\\gamma_R)$. The triangle identities follow by substituting these formulas, using naturality of $\\gamma_R$, and cancelling $\\gamma_R^{-1}\\gamma_R$. These are exactly the integral data used in the blueprint's rational adjunction.",
    "uses": [
-    "sk-lem-sp-reduction"
+    "det-sp-integral-adjunction-bijection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Integral adjunction input; expanded using sk-prop-sp-rational/sk-prop-sp-rational.proof.md, second paragraph"
+   }
+  },
+  {
+   "text": "For $E\\subset F$ write $C_T$ for the strict inverse-limit integral coefficient extension underlying the statement's rational functor. The tensor extension in [det-sp-field-extension-towers] is initially $T_T(-)=(-)\\otimes^L_{\\widehat{\\mathcal O}_{E,T}}\\widehat{\\mathcal O}_{F,T}$. By [lem-weil-finite-free-completed-scalar-comparison] there is a specified natural isomorphism $\\chi_T:T_T\\xrightarrow{\\sim}C_T$ on derived-complete inputs. All inputs here, including $P_EM$ and the exceptional images, are in those categories by the cited integral adjunctions. Transport the tensor-version comparisons $b^t,\\widetilde c^t$ to $C$ by\n$$\n b^0_M=P_F(\\chi_{X,M})\\circ b^t_M\\circ\\chi_{Y,P_EM}^{-1},\n \\qquad\n \\widetilde c^0_K=G_F(\\chi_{Y,K})\\circ\\widetilde c^t_K\\circ\\chi_{X,G_EK}^{-1}.\n$$\nNaturality follows by substitution and naturality of $\\chi$. In the unit and counit equations the inserted $\\chi^{-1}\\chi$ factors cancel, using naturality to move them across the integral units and counits. Composition compatibility is transported with the scalar-extension associators, rather than identifying the two integral functors by definition. Clauses (1)-(2) of the integral field-extension theorem give natural isomorphisms $b^0:C_YP_E\\to P_FC_X$ and $\\widetilde c^0:C_XG_E\\to G_FC_Y$, with unit, counit and composition compatibility, where $G_R$ denotes its integral exceptional right adjoint. Its finite-level maps form actual maps of towers before taking $R\\varprojlim$; no equality of integral morphisms is inferred merely from equality of their reductions. If this is already the normalized tower model $J_R$, set $\\theta_R=1$. For the project's exceptional model use the constructible adjunction in the integral exceptional-adjoint theorem and right-adjoint uniqueness to obtain the counit-preserving isomorphism $\\theta_R:J_R\\to G_R$. Thus\n$$\\epsilon_R^G\\circ P_R(\\theta_R)=\\epsilon_R^J,\\qquad \\theta_{R,P_RM}\\circ\\eta_R^J(M)=\\eta_R^G(M).$$\nFor the second equality, the $G_R$-transpose of its left side is $\\epsilon_R^G(P_RM)P_R(\\theta_{R,P_RM})P_R(\\eta_R^J(M))=\\epsilon_R^J(P_RM)P_R(\\eta_R^J(M))=1_{P_RM}$, which is also the transpose of $\\eta_R^G(M)$. Define\n$$c^0_K=\\theta_{F,C_YK}^{-1}\\circ\\widetilde c^0_K\\circ C_X(\\theta_{E,K}):C_XJ_EK\\to J_FC_YK.$$\nFor the unit equation, naturality of $\\theta_F^{-1}$ for $b^0_M$, then the two displayed unit identities and the unit equation for $\\widetilde c^0$, give\n$$\\begin{aligned}\nJ_F(b^0_M)c^0_{P_EM}C_X(\\eta_E^J(M))\n&=\\theta_{F,P_FC_XM}^{-1}G_F(b^0_M)\\widetilde c^0_{P_EM}C_X(\\eta_E^G(M))\\\\\n&=\\theta_{F,P_FC_XM}^{-1}\\eta_F^G(C_XM)=\\eta_F^J(C_XM).\n\\end{aligned}$$\nFor the counit equation use $\\epsilon_F^JP_F(\\theta_F^{-1})=\\epsilon_F^G$, the counit equation for $\\widetilde c^0$, and naturality of $b^0$ for $\\theta_{E,K}$:\n$$\\begin{aligned}\n\\epsilon_F^J(C_YK)P_F(c^0_K)b^0_{J_EK}\n&=\\epsilon_F^G(C_YK)P_F(\\widetilde c^0_K)P_FC_X(\\theta_{E,K})b^0_{J_EK}\\\\\n&=\\epsilon_F^G(C_YK)P_F(\\widetilde c^0_K)b^0_{G_EK}C_YP_E(\\theta_{E,K})\\\\\n&=C_Y(\\epsilon_E^G(K)P_E(\\theta_{E,K}))=C_Y(\\epsilon_E^J(K)).\n\\end{aligned}$$\nFor consecutive extensions, inserting the definition of $c^0$ leaves adjacent scalar-extended factors $\\theta_F\\theta_F^{-1}$; their cancellation and the composition equation for $\\widetilde c^0$ give that for $c^0$. We can therefore use $b^0,c^0$ with the normalized right adjoints $J_R$.",
+   "uses": [
+    "det-sp-field-extension-towers",
+    "prop-coef-integral-exceptional-adjoint",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Sole paragraph, finite-free tensor, compatible towers, and application of derived limit; detailed integral clauses (1)-(2)"
+   }
+  },
+  {
+   "text": "Define the integral comparison for the twisted pullback by\n$$a^0_K=\\gamma_{F,C_YK}^{-1}\\circ c^0_K\\circ C_X(\\gamma_{E,K}):C_XH_EK\\xrightarrow{\\sim}H_FC_YK.$$\nIt is natural and invertible, being a composite of natural isomorphisms. The unit identity is the following calculation, using naturality of $\\gamma_F^{-1}$ for $b^0_M$ and the normalized unit equation from Step 2:\n$$\\begin{aligned}\nH_F(b^0_M)a^0_{P_EM}C_X(\\eta_E^H(M))\n&=\\gamma_{F,P_FC_XM}^{-1}J_F(b^0_M)c^0_{P_EM}C_X(\\gamma_{E,P_EM}\\eta_E^H(M))\\\\\n&=\\gamma_{F,P_FC_XM}^{-1}J_F(b^0_M)c^0_{P_EM}C_X(\\eta_E^J(M))\\\\\n&=\\gamma_{F,P_FC_XM}^{-1}\\eta_F^J(C_XM)=\\eta_F^H(C_XM).\n\\end{aligned}$$\nFor the counit, cancel $P_F(\\gamma_F)P_F(\\gamma_F^{-1})$, use naturality of $b^0$ for $\\gamma_{E,K}$, and then Step 2's counit equation:\n$$\\begin{aligned}\n\\epsilon_F^H(C_YK)P_F(a^0_K)b^0_{H_EK}\n&=\\epsilon_F^J(C_YK)P_F(c^0_K)P_FC_X(\\gamma_{E,K})b^0_{H_EK}\\\\\n&=\\epsilon_F^J(C_YK)P_F(c^0_K)b^0_{J_EK}C_YP_E(\\gamma_{E,K})\\\\\n&=C_Y(\\epsilon_E^J(K)P_E(\\gamma_{E,K}))=C_Y(\\epsilon_E^H(K)).\n\\end{aligned}$$\nThese are compatibility equations for the actual twisted-pullback adjunction.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection",
+    "det-sp-field-extension-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Sole paragraph, compatibility with unit, counit and purity; expanded conjugation by integral purity"
+   }
+  },
+  {
+   "text": "Let $Q_R$ denote raw scalar localization. By the rational-category definition every rational object has an integral representative, with exactly the same object set and Hom groups $\\operatorname{Hom}_{\\mathcal O_R}(U,V)\\otimes_{\\mathcal O_R}R$. Rational compact supports, pullback and twists are the integral operations followed by $Q_R$, and $C^T_{F/E}$ on objects and morphisms is the rationalization of $C_T$. Therefore define $b_{F/E,M}=Q_F(b^0_{M_0})$ and $a_{F/E,K}=Q_F(a^0_{K_0})$ on the integral representatives $M_0,K_0$. These have exactly the two endpoints in the statement. Their inverses are $Q_F((b^0_{M_0})^{-1})$ and $Q_F((a^0_{K_0})^{-1})$: the localization composition formula sends both integral inverse equations to inverse equations. For an integral morphism $u$ the naturality square is the image of the integral square; for $u\\otimes\\lambda$, $\\lambda\\in E\\subset F$, both sides are that image multiplied by $\\lambda$. Every rational morphism is a finite sum of such tensors, so addition proves naturality for every rational morphism, including every rational isomorphism between representatives. Hence no choice of a lift of a rational isomorphism is needed.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Sole paragraph, invert ell; expanded localized objects, functors, inverses and rational naturality"
+   }
+  },
+  {
+   "text": "The integral Hom bijection is linear, as is needed before tensoring it. For the compactification used in $P_R$, the strict compact-support tower functor is $\\mathcal O_R$-linear [lem-weil-compact-support-reduction-tower-functor]. Its derived inverse limit is computed on K-injective tower resolutions by termwise limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. A scalar multiple of a map between such representatives induces the same scalar multiple on the limit; addition is respected for the same reason. Hence the integral compact-support construction makes $P_R$ linear. The inverse-transpose map $v\\mapsto\\epsilon_R^H(K_0)\\circ P_R(v)$ is therefore linear. It is bijective, so its inverse is linear as well. Tensor the resulting integral adjunction isomorphism $\\operatorname{Hom}(P_RM_0,K_0)\\cong\\operatorname{Hom}(M_0,H_RK_0)$ with $R$ over $\\mathcal O_R$. The localized Hom formulas identify its ends with $\\operatorname{Hom}(Rf_{!,R}M,K)$ and $\\operatorname{Hom}(M,Lf_R^*K(d)[2d])$. Naturality holds for integral maps by the original adjunction, and for arbitrary localized maps by the finite-sum calculation of Step 4. Its inverse is the tensor of the inverse isomorphism, so this is an adjunction. Taking the images of identity morphisms under these inverse bijections shows that its unit and counit are precisely $Q_R(\\eta_R^H)$ and $Q_R(\\epsilon_R^H)$. Apply $Q_F$ to the two equations of Step 3. The localization formula preserves composition and identities, and its functors act on an integral map by its integral image tensored with $1$. Thus the resulting equations are exactly the rational unit and counit compatibility claimed in the statement.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection",
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Sole paragraph, invert ell; rational adjunction units and counits as in sk-prop-sp-rational/sk-prop-sp-rational.proof.md, final paragraph"
+   }
+  },
+  {
+   "text": "For $E\\subset F\\subset L$, let $C_1^T=C^T_{F/E}$, $C_2^T=C^T_{L/F}$ and $C_{21}^T=C^T_{L/E}$ denote integral coefficient extension in this step, and let $\\alpha_T:C_2^TC_1^T\\xrightarrow{\\sim}C_{21}^T$ be the integral associator, transported from ordinary tensor extension using the natural isomorphisms $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison]. Explicitly, writing $T_1,T_2,T_{21}$ for ordinary tensor extension and $\\alpha^t:T_2T_1\\to T_{21}$, this is\n$$\n \\alpha=\\chi_{21}\\circ\\alpha^t\\circ T_2(\\chi_1^{-1})\\circ\\chi_{2,C_1}^{-1}:C_2C_1\\longrightarrow C_{21}.\n$$\nThis is the completed-tensor associator on integral representatives whose rationalization is the canonical associator of [lem-weil-scalar-extension-composition]. Thus the composition equations used below are precisely the tensor-version equations conjugated by the specified comparisons, with no appeal to faithfulness of reduction. Suppressing its canonical endpoint identifications temporarily, direct substitution gives\n$$\\begin{aligned}\na^0_{L/F,C_1^YK}\\,C_2^X(a^0_{F/E,K})\n&=\\gamma_L^{-1}c^0_{L/F}\\,C_2^X(\\gamma_F)\\,C_2^X(\\gamma_F^{-1})\\,C_2^X(c^0_{F/E})\\,C_2^XC_1^X(\\gamma_E)\\\\\n&=\\gamma_L^{-1}c^0_{L/F}\\,C_2^X(c^0_{F/E})\\,C_2^XC_1^X(\\gamma_E).\n\\end{aligned}$$\nThe intermediate factors cancel directly; no extra naturality identity for $c^0$ is required. Restoring associators, the composition equation for $c^0$ from Step 2 and naturality of $\\gamma_L^{-1}$ for $\\alpha_Y$ turn the last expression into the typed equation\n$$H_L(\\alpha_{Y,K})\\circ a^0_{L/F,C_1^YK}\\circ C_2^X(a^0_{F/E,K})=a^0_{L/E,K}\\circ\\alpha_{X,H_EK}.$$\nThe composition equation for $b^0$ is directly the integral field-extension theorem's clause (2):\n$$P_L(\\alpha_{X,M})\\circ b^0_{L/F,C_1^XM}\\circ C_2^Y(b^0_{F/E,M})=b^0_{L/E,M}\\circ\\alpha_{Y,P_EM}.$$\nApply $Q_L$, which preserves composition. The scalar-extension composition theorem identifies these localized integral associators with those for rational coefficient extension. The two displayed equations are precisely the required rational cocycles. Under the coefficient-extension unit identifications, the composition identities for an identity extension read $b^0=b^0b^0$ and $c^0=c^0c^0$; invertibility cancels one factor and makes both identities. Conjugation by $\\gamma$ gives the identity for $a^0$. This covers $F=E$ and $L=F$.",
+   "uses": [
+    "det-sp-field-extension-towers",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-linear-scalar-localization",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+    "place": "Sole paragraph, composition of coefficient extensions before and after inversion of ell"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-sp-reduction"
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-field-extension-towers",
+  "prop-coef-integral-exceptional-adjoint",
+  "det-sp-unique-right-adjoint",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension.proof.md",
+  "place": "Sole proof paragraph, with its detailed integral comparison and rational-adjunction source expanded explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compact.support|lowerShriek|smoothPurity|purityIso",
+   "results": "0 hits (directory CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite l-adic coefficient field extension commutes with compact support pushforward smooth pullback twist shift and adjunction",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Presheaf.pushforwardPullbackAdjunction; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extension\", CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.preservesLeftKanExtension; CategoryTheory.Adjunction.preservesRightKanExtension; CategoryTheory.Adjunction.leftExtensionPostCompose₂RightAdjoint; CategoryTheory.Adjunction.rightExtensionPostCompose₂LeftAdjoint; CategoryTheory.Adjunction.leftExtensionPostcompose₂; CategoryTheory.Adjunction.rightExtensionPostcompose₂; CategoryTheory.Adjunction.leftExtensionPostCompose₂RightAdjoint_obj_right_obj; CategoryTheory.Adjunction.rightExtensionPostCompose₂LeftAdjoint_obj_left_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of finite l-adic coefficient fields commutes with compactly supported derived direct image and smooth purity adjunction units counits",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|lowerShriek|smoothPurity|purityIso|elladic",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean (directory AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.Adjunction",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free extension of coefficient fields preserves the smooth purity adjunction between compact support pushforward and twisted inverse image in bounded constructible derived categories",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf adjunctions, Kan extensions and l-adic cohomology definitions do not state the constructible smooth-purity coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of linear categories carries an adjunction and its unit and counit to an adjunction after localization of Hom modules",
+   "results": "CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical localization/Ext adjunctions do not state the smooth-purity coefficient comparisons or their field cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*(localiz|base.change)|(?:localiz|base.change).*adjunction|ellAdic|lowerShriek",
+   "results": "Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bousfield.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical localization/Ext adjunctions do not state the smooth-purity coefficient comparisons or their field cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"linear\"",
+   "results": "CategoryTheory.Adjunction.extLinearEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match: generic categorical localization/Ext adjunctions do not state the smooth-purity coefficient comparisons or their field cocycle"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +218,49 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-sp-field-extension",
+  "worker": "stage1",
+  "summary": "Restored the chapter coefficient and separated finite-type setting, made rational tensor notation precise, and replaced the missing sk-prop-sp-rational dependency by the explicit localized integral adjunction. Reused existing integral field-extension and right-adjoint comparison nodes; proved rational naturality, unit/counit preservation and transitivity in six steps. No new nodes. Second reading made the k-morphism hypothesis explicit and expanded the model-change, purity-conjugation and associator equations; it corrected the unnecessary c-naturality claim in the cocycle calculation.",
+  "blueprint": "Steps 1-3 realize the sole proof paragraph through the compatible integral tower comparisons, using the existing detailed det-sp-field-extension-towers clauses (1)-(2); Steps 4-5 realize inversion of ell, and Step 6 realizes its final composition assertion. The blueprint rational-adjunction proof specifies the unit/counit normalization used here.",
+  "tool_uses": [
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Only its constructible integral exceptional adjunction is used to identify the project right-adjoint model with the normalized tower adjoint; it does not replace the finite-coefficient/tower purity route."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Generic associators for the already defined rational scalar-extension functors, needed to state the field-extension cocycle; the item supplies the compatibility of its own comparisons."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Its scalar-linear strict tower lift verifies linearity of compact supports before localizing the adjunction Hom bijection."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The K-injective termwise-limit computation verifies scalar linearity of derived limit; it does not replace the integral purity comparison."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identifies the ordinary tensor extension in the reused tower theorem with the strict inverse-limit integral scalar extension underlying the rational coefficient functor; used only to transport comparisons and their associators."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-90997e82a",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-90997e82a (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, report, route, and source passages in full. Repaired C1/C4: explicitly cited the existing finite-free completed-scalar comparison and transported the coefficient maps and associators between ordinary tensor and strict inverse-limit models. No new nodes or target changes. Corrected JSON and concrete step, source, hypothesis, edge-case, and accepted tool-use checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
