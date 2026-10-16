@@ -95,11 +95,21 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection",
+  "declaration": "AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso",
+  "statement": "noncomputable def derivedOpenImmersionLowerShriekProjectionIso\n    {FC : A → A → Type*} {CC : A → Type (u + 1)}\n    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]\n    [(CategoryTheory.forget A).ReflectsIsomorphisms]\n    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]\n    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] :\n    (Functor.postcompose₂.obj D((j)_!open[A])).obj\n        (derivedTensorWhiskeringRightLeftDerivedUpperStar A j) ≅\n      derivedTensorWhiskeringLeftOpenImmersionLowerShriek A j",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso",
-   "AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 13:44 UTC for group Q62, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The projection isomorphism’s inverse gives the node’s comparison, while the second decl"
+  "by": "NX",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Specialize A to ModuleCat.{u + 1} C, C : Type (u + 1), [CommRing C], and j : U ⟶ T with [IsOpenImmersion j]. Take the inverse of this natural isomorphism of bifunctors: its components go from (j_! K) tensor^L M to j_!(K tensor^L Lj^* M). Compose with j_! applied to tensoring K with leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} C) j, giving exactly the node with termwise exact j^*. The displayed generic coefficient hypotheses are all instances for ModuleCat C; in particular upperStarPreservesFlat_moduleCat is supplied by WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat. The scratch specialization was compiled with only CommRing C and IsOpenImmersion j as hypotheses. The isomorphism is asIso of the canonical projection mate of the exact derived adjunction, using the derived tensor comparison induced from ordinary sheaf tensor. Its inverse is the canonical comparison of Stacks 0GL1/0E8I. No boundedness, constructibility, Tor-amplitude, finiteness or invertibility condition is imposed. Uses the existing definitions recorded in all five statement dependencies; no second tensor or extension-by-zero construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e7d1bac61",
+  "group": "NX",
+  "result": "pass",
+  "note": "Existing canonical etale open-extension derived tensor isomorphism matches the statement, dependencies, source tags, universes, edge cases, and hypotheses; scompile source confirmation and recorded specialization compile pass; no repository or branch changes."
  }
 }
