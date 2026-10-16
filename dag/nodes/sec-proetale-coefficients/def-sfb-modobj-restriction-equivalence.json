@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-modobj-restriction-equivalence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction along an isomorphism is an equivalence",
@@ -13,28 +13,156 @@
   "place": "node def-sfb-modobj-restriction-equivalence, order 1593"
  },
  "stmt_deps": [
-  "def-sfb-modobj-restriction"
+  "def-sfb-modobj-restriction",
+  "det-def-sfb-ring-object-monoid",
+  "det-def-sfb-module-objects-definition"
  ],
  "proof": [
   {
-   "text": "The inverse $\\varphi^{-1}$ is again a morphism of monoid objects. Restriction of scalars\n([def-sfb-modobj-restriction]) is the identity on underlying objects and morphisms, and\nsatisfies $\\operatorname{Res}_{\\mathrm{id}}=\\mathrm{id}$ and\n$\\operatorname{Res}_\\varphi\\circ\\operatorname{Res}_\\psi=\\operatorname{Res}_{\\psi\\varphi}$.\nIndeed, both sides of the second identity give $N$ the action\n$\\gamma_N((\\psi\\varphi)\\otimes N)$. Hence\n$\\operatorname{Res}_{\\varphi^{-1}}\\circ\\operatorname{Res}_\\varphi\n=\\operatorname{Res}_{\\varphi\\varphi^{-1}}=\\mathrm{id}$, and similarly in the other order.\nThe argument uses only that $\\varphi$ is an isomorphism of monoid objects.",
+   "text": "Write $\\psi=\\varphi^{-1}\\colon\\mathcal S\\to\\mathcal R$. The morphism-of-monoids equations in [det-def-sfb-ring-object-monoid] give\n$\\psi\\circ\\eta_{\\mathcal S}=\\psi\\circ\\varphi\\circ\\eta_{\\mathcal R}=\\eta_{\\mathcal R}$ and\n$\\psi\\circ\\mu_{\\mathcal S}=\\psi\\circ\\mu_{\\mathcal S}\\circ((\\varphi\\circ\\psi)\\otimes(\\varphi\\circ\\psi))=\\psi\\circ\\varphi\\circ\\mu_{\\mathcal R}\\circ(\\psi\\otimes\\psi)=\\mu_{\\mathcal R}\\circ(\\psi\\otimes\\psi)$.\nThus $\\psi$ is a morphism of monoid objects. Apply [def-sfb-modobj-restriction] to $\\varphi$ and $\\psi$ to obtain\n$F=\\operatorname{Res}_{\\varphi}\\colon\\Mod_{\\mathcal S}(\\mathcal C)\\to\\Mod_{\\mathcal R}(\\mathcal C)$ and\n$G=\\operatorname{Res}_{\\psi}\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{\\mathcal S}(\\mathcal C)$.",
+   "uses": [
+    "det-def-sfb-ring-object-monoid",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.proof.md",
+    "place": "First sentence: the inverse is again a morphism of monoid objects; expand the unit and multiplication equations."
+   }
+  },
+  {
+   "text": "For an $\\mathcal S$-module object $(N,\\gamma_N)$, applying the action formula of [def-sfb-modobj-restriction] twice gives the action on $G(F(N))$:\n$$\\gamma_N\\circ(\\varphi\\otimes\\mathrm{id}_N)\\circ(\\psi\\otimes\\mathrm{id}_N)=\\gamma_N\\circ((\\varphi\\circ\\psi)\\otimes\\mathrm{id}_N)=\\gamma_N.$$\nThe first equality is functoriality of tensoring with $N$, and the second uses $\\varphi\\circ\\psi=\\mathrm{id}_{\\mathcal S}$. The underlying object is $N$ and the underlying map of $G(F(h))$ is $h$ for every $\\mathcal S$-linear $h$, by the same cited definition.",
    "uses": [
     "def-sfb-modobj-restriction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.proof.md",
+    "place": "Composite restriction action formula and the displayed composite Res_{varphi^{-1}} after Res_varphi."
+   }
+  },
+  {
+   "text": "For an $\\mathcal R$-module object $(M,\\gamma_M)$, the same action formula of [def-sfb-modobj-restriction] gives the action on $F(G(M))$:\n$$\\gamma_M\\circ(\\psi\\otimes\\mathrm{id}_M)\\circ(\\varphi\\otimes\\mathrm{id}_M)=\\gamma_M\\circ((\\psi\\circ\\varphi)\\otimes\\mathrm{id}_M)=\\gamma_M.$$\nHere functoriality of tensoring with $M$ and $\\psi\\circ\\varphi=\\mathrm{id}_{\\mathcal R}$ give the equalities. The underlying object is $M$ and the underlying map of $F(G(k))$ is $k$ for every $\\mathcal R$-linear $k$.",
+   "uses": [
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.proof.md",
+    "place": "Last clause of the composite computation: similarly in the other order; write out the R-module action."
+   }
+  },
+  {
+   "text": "Use the underlying identity maps to define $\\eta_N\\colon N\\to G(F(N))$ and $\\varepsilon_M\\colon F(G(M))\\to M$, together with their inverses. Steps 2 and 3 identify the respective actions, so the linearity condition in [det-def-sfb-module-objects-definition] for each of these four maps reduces to $\\gamma=\\gamma$; their composites are identity maps. They form natural isomorphisms $\\eta\\colon\\mathrm{id}_{\\Mod_{\\mathcal S}(\\mathcal C)}\\xrightarrow{\\sim}G\\circ F$ and $\\varepsilon\\colon F\\circ G\\xrightarrow{\\sim}\\mathrm{id}_{\\Mod_{\\mathcal R}(\\mathcal C)}$: by [def-sfb-modobj-restriction], naturality on $h\\colon N\\to N'$ reads $G(F(h))\\circ\\eta_N=h=\\eta_{N'}\\circ h$, and on $k\\colon M\\to M'$ reads $k\\circ\\varepsilon_M=k=\\varepsilon_{M'}\\circ F(G(k))$. These are the data in the definition of a categorical equivalence with quasi-inverse $G$. If an adjoint equivalence is required, both triangle identities hold as well: $\\varepsilon_{F(N)}\\circ F(\\eta_N)$ and $G(\\varepsilon_M)\\circ\\eta_{G(M)}$ are underlying identity maps, hence identity module morphisms by the cited module-morphism definition.",
+   "uses": [
+    "det-def-sfb-module-objects-definition",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001J, Definition definition-equivalence-categories (lines 350–359); the blueprint composite calculation supplies identity components, whose naturality and triangle identities are expanded here."
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-restriction"
+  "det-def-sfb-ring-object-monoid",
+  "def-sfb-modobj-restriction",
+  "det-def-sfb-module-objects-definition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.proof.md",
+  "place": "Entire proof, following the inverse and composite-action route of sk-def-sfb-change-of-scalars part 5; expanded to explicit identity natural isomorphisms, using Stacks Tag 001J (definition-equivalence-categories) for the meaning of equivalence."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comapEquivalence|restrictScalars.*[Ee]quiv|comap.*[Ii]so",
+   "results": "2 hits; top results exactly as logged: Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean. Search subdirectory: CategoryTheory. ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern Pi evaluation and point sheaf fibres, not internal module categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of monoid objects is an equivalence of module object categories",
+   "results": "8 hits; top results exactly as logged: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', CategoryTheory.Mod_.comap, ModuleCat.restrictScalarsId, RestrictScalars.addEquiv, ModuleCat.restrictScalarsId'. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv concerns ordinary rings; Mod_.comap only constructs restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"Equivalence\"",
+   "results": "1 hits; top results exactly as logged: Equivalence.comap. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match: Equivalence.comap concerns equivalence relations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along an isomorphism of monoid objects in a monoidal category is an equivalence of module object categories with inverse restriction along the inverse isomorphism",
+   "results": "8 hits; top results exactly as logged: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv, Action.resEquiv_functor, ModuleCat.restrictScalarsEquivalenceOfRingEquiv, ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear, CategoryTheory.Mod_.comap_obj_mod, Action.resEquiv, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match: ModuleCat restriction equivalence and Action.resEquiv concern ordinary rings and external monoids; internal Mod_.comap only constructs restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "comap|scalarRestriction|[Ee]quivalence",
+   "results": "0 hits; top results exactly as logged: none. Search subdirectory: CategoryTheory/Monoidal/Mod_.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match for the equivalence: the Mod_.lean alias shim has no hits; in Mod.lean the wrapper reports section comap (351), scalarRestriction (363), scalarRestriction_hom (387) and local instance lines (389,390). Reading Mod.lean lines 351–419 confirms it constructs restriction only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.comap",
+   "results": "4 hits; top results exactly as logged: CategoryTheory.Mod.comap, CategoryTheory.Mod.comap_obj_X, CategoryTheory.Mod.comap_obj_mod, CategoryTheory.Mod.comap_map_hom. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match for the equivalence: CategoryTheory.Mod.comap and its object/map equations state restriction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of internal modules over a monoid object changing scalars by an invertible algebra morphism has inverse functor given by comap of the inverse",
+   "results": "8 hits; top results exactly as logged: ModuleCat.MonModuleEquivalenceAlgebra.inverse_map_hom, ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_mon, ModuleCat.MonModuleEquivalenceAlgebra.inverse, ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_X_isModule, ModuleCat.MonModuleEquivalenceAlgebra.inverse_obj_X_carrier, CategoryTheory.instIsMod_HomInvOfHom, CategoryTheory.Mod_.comap_obj_mod, ModuleCat.restrictScalarsComp'_inv_app. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern internal algebras in ModuleCat, inverse linearity of module isomorphisms, comap object formulas, and ordinary-ring restriction composition."
+  },
+  {
+   "tool": "grep",
+   "query": "comap|scalarRestriction|[Ee]quivalence",
+   "results": "5 hits; top results exactly as logged: 351, 363, 387, 389, 390. Search subdirectory: CategoryTheory/Monoidal/Mod.lean. ",
+   "date": "2026-10-16",
+   "verdict": "no match for the equivalence: the Mod_.lean alias shim has no hits; in Mod.lean the wrapper reports section comap (351), scalarRestriction (363), scalarRestriction_hom (387) and local instance lines (389,390). Reading Mod.lean lines 351–419 confirms it constructs restriction only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comap\", \"IsIso\"",
+   "results": "0 hits; top results exactly as logged: none. Search subdirectory: (all Mathlib). ",
+   "date": "2026-10-16",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|comapComp|comapId|comapEquivalence|restrictScalarsEquivalenceOfRingEquiv",
+   "results": "1 hits; top results exactly as logged: Mathlib/CategoryTheory/Monoidal/Mod.lean. Search subdirectory: CategoryTheory/Monoidal. ",
+   "date": "2026-10-16",
+   "verdict": "no match for the equivalence: only Mathlib/CategoryTheory/Monoidal/Mod.lean:403, CategoryTheory.Mod.comap; read through line 419."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsEquivalenceOfRingEquiv|restrictScalars_isEquivalence_of_ringEquiv",
+   "results": "5 hits; top results exactly as logged: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. Search subdirectory: Algebra/Category/ModuleCat. ",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:296–307. These declarations assume ordinary rings and produce ModuleCat equivalences, not arbitrary internal module categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction equivalence internal modules isomorphism monoid",
+   "results": "8 hits; top results exactly as logged: Submodule.restrictScalarsEquiv_apply, ModuleCat.restrictScalarsCongr_symm, RestrictScalars.addEquiv, Submodule.restrictScalarsEquiv_symm_apply, Submodule.restrictScalarsEquiv, ModuleCat.restrictScalarsCongr_inv_app, ModuleCat.restrictScalarsId'App, LinearEquiv.restrictScalars_apply.",
+   "date": "2026-10-16",
+   "verdict": "no match: results concern ordinary submodules, ModuleCat restriction congruences and ordinary linear equivalences; none states the equivalence of arbitrary internal module categories."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -51,5 +179,20 @@
   "CategoryTheory.Mod.comapEquivalenceOfIsIso"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-modobj-restriction-equivalence",
+  "worker": "stage1",
+  "summary": "Preserved the exact main-20261015 statement and all imported metadata. Expanded the inverse monoid-morphism equations, both composite module actions, and identity unit/counit natural isomorphisms with triangle identities. Every step is elementary from the three existing definition nodes explicitly cited; no new nodes. Searched slopmaster2, the complete DAG/blueprint and Mathlib with all required tools; ordinary ModuleCat equivalences do not cover internal module objects.",
+  "blueprint": "Realizes sk-def-sfb-change-of-scalars part 5, first assertion, and the entire def-sfb-modobj-restriction-equivalence.proof.md: step 1 expands its inverse sentence; steps 2–3 expand its two composite calculations; step 4 gives the corresponding natural isomorphisms explicitly. Imported blueprint.from remains null because this is itself a blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-b6444210c",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-b6444210c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited definitions, current blueprint chapter/unit route, and cited source locations. All four steps correctly construct inverse restriction functors and identity natural isomorphisms with triangle identities. Hypotheses are preserved; small cases, duplicate candidates, dependency consistency, and acyclicity checked. No new nodes, repairs, target changes, or accepted tool_uses. Full findings recorded in review.md."
+ }
 }
