@@ -124,7 +124,7 @@ lemma koszulMap_comp (c d : Fin r → R) (n : ℕ) :
     koszulMap c n ∘ₗ koszulMap d n = koszulMap (c * d) n := by
   refine LinearMap.ext fun x ↦ Subtype.ext ?_
   simp only [LinearMap.coe_comp, Function.comp_apply, koszulMap_coe]
-  rw [← AlgHom.comp_apply, ← map_comp_map, diagonalMap_mul]
+  rw [← AlgHom.comp_apply, map_comp_map, diagonalMap_mul]
 
 lemma koszulMap_one (n : ℕ) : koszulMap (1 : Fin r → R) n = LinearMap.id := by
   refine LinearMap.ext fun x ↦ Subtype.ext ?_
@@ -164,9 +164,8 @@ lemma koszulComplexMap_one (g : Fin r → R) :
 lemma koszulComplexMap_comp (c d g h k : Fin r → R) (hh : h = c * g) (hk : k = d * h) :
     koszulComplexMap d h k hk ≫ koszulComplexMap c g h hh =
       koszulComplexMap (c * d) g k (by rw [hk, hh, mul_comm c d, mul_assoc]) := by
-  refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
-  rw [HomologicalComplex.comp_f, koszulComplexMap_f, koszulComplexMap_f, koszulComplexMap_f,
-    ← ModuleCat.ofHom_comp, koszulMap_comp]
+  refine HomologicalComplex.hom_ext _ _ fun n ↦ ModuleCat.hom_ext ?_
+  exact koszulMap_comp c d n
 
 /-! ### The Koszul tower -/
 
@@ -220,15 +219,17 @@ lemma koszulMap_mem_smul_top (c : Fin r → R) (n : ℕ) (x : ⋀[R]^(n + 1) (Fi
         exteriorPower.ιMulti R (n + 1) (diagonalMap c ∘ v) := by
       ext
       simp [ExteriorAlgebra.map_apply_ιMulti]
+      rfl
     rw [hval]
     let L := (exteriorPower.ιMulti R (n + 1)).toMultilinearMap.toLinearMap
       (diagonalMap c ∘ v) 0
     have hL : exteriorPower.ιMulti R (n + 1) (diagonalMap c ∘ v) = L (diagonalMap c (v 0)) := by
-      simp [L, MultilinearMap.toLinearMap_apply, Function.update_eq_self]
+      simp only [L, MultilinearMap.toLinearMap_apply]
+      exact congrArg _ (Function.update_eq_self 0 _).symm
     rw [hL]
     have := Submodule.mem_map_of_mem (f := L) (diagonalMap_mem_smul_top c (v 0))
     rw [Submodule.map_smul''] at this
-    exact Submodule.smul_mono_right _ le_top this
+    exact Submodule.smul_mono le_rfl le_top this
   | zero => simp
   | add y z _ _ hy hz => rw [map_add]; exact add_mem hy hz
   | smul a y _ hy => rw [map_smul]; exact Submodule.smul_mem _ a hy
@@ -238,12 +239,14 @@ lemma koszulMap_mem_smul_top (c : Fin r → R) (n : ℕ) (x : ⋀[R]^(n + 1) (Fi
 /-- Left multiplication by `eᵢ`, the null-homotopy of multiplication by `gᵢ`:
 `d (eᵢ ∧ z) = gᵢ z - eᵢ ∧ d z`. -/
 lemma koszulBoundary_ι_mul (g : Fin r → R) (n : ℕ) (i : Fin r) (z : ⋀[R]^(n + 1) (Fin r →₀ R)) :
-    (koszulBoundary R r g (n + 1) ⟨ι R (Finsupp.single i 1) * z,
+    (koszulBoundary R r g (n + 1) ⟨ι R (Finsupp.single i (1 : R)) * (z : ExteriorAlgebra R (Fin r →₀ R)),
         ι_mul_mem_exteriorPower _ _ z.2⟩ : ExteriorAlgebra R (Fin r →₀ R)) =
       g i • (z : ExteriorAlgebra R (Fin r →₀ R)) -
-        ι R (Finsupp.single i 1) * (koszulBoundary R r g n z : ExteriorAlgebra R (Fin r →₀ R)) :=
+        ι R (Finsupp.single i (1 : R)) * (koszulBoundary R r g n z : ExteriorAlgebra R (Fin r →₀ R)) :=
   (CliffordAlgebra.contractLeft_ι_mul (Q := (0 : QuadraticForm R (Fin r →₀ R)))
-    (Finsupp.linearCombination R g) _ _).trans (by simp)
+    (Finsupp.linearCombination R g) _ _).trans (by
+    simp
+    rfl)
 
 /-- The positive-degree cycles of `K_•(g)` multiplied by an element of `(g₁, …, g_r)` are
 boundaries. -/
@@ -253,7 +256,7 @@ lemma smul_mem_range_koszulBoundary (g : Fin r → R) (n : ℕ) {z : ⋀[R]^(n +
   induction ha using Submodule.span_induction with
   | mem b hb =>
     obtain ⟨i, rfl⟩ := hb
-    refine ⟨⟨_, ι_mul_mem_exteriorPower (Finsupp.single i 1) _ z.2⟩, Subtype.ext ?_⟩
+    refine ⟨⟨_, ι_mul_mem_exteriorPower (Finsupp.single i (1 : R)) _ z.2⟩, Subtype.ext ?_⟩
     rw [koszulBoundary_ι_mul, hz]
     simp
   | zero => simp
@@ -282,8 +285,9 @@ theorem exists_koszulMap_mem_range [IsNoetherianRing R] (f : Fin r → R) (a n :
     have := LinearMap.congr_fun (koszulBoundary_koszulMap (f ^ (c + N)) (f ^ a) n) z
     rw [LinearMap.mem_ker]
     simp only [LinearMap.coe_comp, Function.comp_apply] at this
-    rw [this, ← pow_add, add_comm (c + N) a, ← pow_add, add_comm a, hz, map_zero]
-  have hI : koszulMap (f ^ (c + N)) (n + 1) z ∈ I ^ (c + N) • ⊤ := by
+    rw [this, ← pow_add, hz, map_zero]
+  have hI : koszulMap (f ^ (c + N)) (n + 1) z ∈
+      I ^ (c + N) • (⊤ : Submodule R (⋀[R]^(n + 1) (Fin r →₀ R))) := by
     refine Submodule.smul_mono_left ?_ (koszulMap_mem_smul_top _ n z)
     rw [Ideal.span_le]
     rintro _ ⟨i, rfl⟩
@@ -291,9 +295,10 @@ theorem exists_koszulMap_mem_range [IsNoetherianRing R] (f : Fin r → R) (a n :
   have hmem : koszulMap (f ^ (c + N)) (n + 1) z ∈ I ^ N • Z := by
     have h := hc (c + N) (Nat.le_add_right c N)
     rw [Nat.add_sub_cancel_left] at h
-    have : koszulMap (f ^ (c + N)) (n + 1) z ∈ I ^ (c + N) • ⊤ ⊓ Z := ⟨hI, hZ⟩
+    have : koszulMap (f ^ (c + N)) (n + 1) z ∈
+        I ^ (c + N) • (⊤ : Submodule R (⋀[R]^(n + 1) (Fin r →₀ R))) ⊓ Z := ⟨hI, hZ⟩
     rw [h] at this
-    exact Submodule.smul_mono_right _ inf_le_right this
+    exact Submodule.smul_mono le_rfl inf_le_right this
   refine Submodule.smul_induction_on hmem (fun x hx y hy ↦ ?_) (fun _ _ ↦ add_mem)
   exact smul_mem_range_koszulBoundary (f ^ a) n hy (hN hx)
 

@@ -298,6 +298,11 @@ def comp (F : Morphism S S') (G : Morphism S' S'') : Morphism S S'' where
     simp only [Functor.map_comp]
     rw [reassoc_of% n₁]
 
+lemma comp_β_hom_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i ≤ j) (x : C i) :
+    ((F.comp G).β h).hom.app x =
+      (G.β h).hom.app ((F.Φ i).obj x) ≫ (G.Φ j).map ((F.β h).hom.app x) := by
+  simp
+
 variable [IsDirectedOrder I]
 
 open PairCategory

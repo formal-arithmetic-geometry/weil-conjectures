@@ -81,7 +81,17 @@ noncomputable def shiftMorphismZero : Morphism.Hom (S.shiftMorphism A 0) (Morphi
   comm h x := by
     simp only [shiftMorphism_β, Morphism.id_β, Functor.commShiftIso_zero,
       Functor.CommShift.isoZero_hom_app, Category.assoc]
-    erw [Iso.inv_hom_id_app, Category.comp_id, Category.comp_id]
+    erw [Iso.inv_hom_id_app]
+    rfl
+
+omit [S.ShiftCompatible A] [∀ ⦃i j : I⦄ (h : i ≤ j), (S.T h).CommShift A] in
+/-- The compatibility of the shift comparison of a functor with `shiftFunctorAdd`. -/
+lemma commShiftIso_add_comm {i j : I} (F : C i ⥤ C j) [F.CommShift A] (a b : A) (x : C i) :
+    F.map ((shiftFunctorAdd (C i) a b).hom.app x) ≫
+      (F.commShiftIso b).hom.app ((shiftFunctor (C i) a).obj x) ≫
+        ((F.commShiftIso a).hom.app x)⟦b⟧' =
+      (F.commShiftIso (a + b)).hom.app x ≫ (shiftFunctorAdd (C j) a b).hom.app (F.obj x) := by
+  simp [Functor.commShiftIso_add]
 
 /-- The isomorphisms `K[a + b] ≅ K[a][b]` of the stages, as a compatible family. -/
 @[simps]
@@ -91,10 +101,8 @@ noncomputable def shiftMorphismAdd (a b : A) :
   τ i := ((shiftFunctorAdd (C i) a b).hom :
     shiftFunctor (C i) (a + b) ⟶ shiftFunctor (C i) a ⋙ shiftFunctor (C i) b)
   comm h x := by
-    simp only [shiftMorphism_β, Morphism.comp_β, Functor.commShiftIso_add,
-      Functor.CommShift.isoAdd_hom_app, Category.assoc]
-    erw [Iso.inv_hom_id_app, Category.comp_id]
-    simp
+    rw [Morphism.comp_β_hom_app]
+    exact commShiftIso_add_comm (S.T h) a b x
 
 variable [IsDirectedOrder I]
 

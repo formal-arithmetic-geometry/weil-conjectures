@@ -54,10 +54,10 @@ variable {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
 lemma truncLETower_mor₁_eTruncLTι_app (M : Plus A) (q : ℤ) :
     (truncLETower M).mor₁ q ≫ (t.eTruncLTι ((q + 1 : ℤ) : EInt)).app M =
       (t.eTruncLTι ((q - 1 + 1 : ℤ) : EInt)).app M := by
-  dsimp [truncLETower, truncLETriangle, TStructure.triangleω₁δ]
-  rw [Subsingleton.elim (ComposableArrows.twoδ₂Toδ₁' (⊥ : EInt) _ _ bot_le
-    (coe_sub_one_add_one_le q) |>.app 0) (𝟙 _)]
-  simp only [CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
+  dsimp only [truncLETower, truncLETriangle]
+  rw [TStructure.triangleω₁δ_obj_mor₁]
+  simp only [TStructure.eTruncLT_obj_coe, Functor.id_obj, TStructure.eTruncGE_obj_bot,
+    homOfLE_leOfHom, Functor.id_map, TStructure.eTruncLT_map_eq_truncLTι]
   exact t.eTruncLT_map_app_eTruncLTι_app _ M
 
 section
@@ -96,38 +96,32 @@ noncomputable def functorTruncationCoupleι (p n : ℤ) :
     (functorTruncationCouple F M).D (p, n) ⟶ (homologyFunctor B n).obj (F.obj M) :=
   (homologyFunctor B n).map (F.map ((t.eTruncLTι ((n - p + 1 : ℤ) : EInt)).app M))
 
-/-- The maps `α : D^{p + 1, n} ⟶ D^{p, n}` of the truncation couple of `F` are induced by the
-maps `τ_{≤ n - p - 1} M ⟶ τ_{≤ n - p} M`. -/
-lemma functorTruncationCouple_α (p n : ℤ) :
-    (functorTruncationCouple F M).α (p + 1, n) (p, n) =
-      (homologyFunctor B n).map (F.map (eqToHom (by congr 1; omega) ≫
-        (truncLETower M).mor₁ (n - p))) := by
-  dsimp only [functorTruncationCouple]
-  rw [TriangleTower.exactCoupleTotal_α, TriangleTower.totalEquiv_symm_apply,
-    TriangleTower.totalEquiv_symm_apply,
-    TriangleTower.coupleα_eq _ _ _ _ _ (by dsimp only; omega)]
-  dsimp only [TriangleTower.map_X, TriangleTower.map_mor₁]
-  rw [eqToHom_map F (by congr 1; dsimp only; omega) |>.symm, ← F.map_comp]
-  rfl
+/-- The maps `α : Hⁿ(F(τ_{≤ q} M)) ⟶ Hⁿ(F(τ_{≤ q'} M))` (`q = q' - 1`) of the tower
+`F(τ_{≤ q} M)` are compatible with the maps induced by `τ_{≤ q} M ⟶ M`. -/
+lemma truncLETower_map_coupleα_comp (q q' n : ℤ) (hq : q = q' - 1) :
+    ((truncLETower M).map F).coupleα (homologyFunctor B 0) (q, n) (q', n) ≫
+        ((homologyFunctor B 0).shift n).map
+          (F.map ((t.eTruncLTι ((q' + 1 : ℤ) : EInt)).app M)) =
+      ((homologyFunctor B 0).shift n).map
+        (F.map ((t.eTruncLTι ((q + 1 : ℤ) : EInt)).app M)) := by
+  subst hq
+  rw [TriangleTower.coupleα_self, TriangleTower.map_mor₁, ← Functor.map_comp, ← F.map_comp,
+    truncLETower_mor₁_eTruncLTι_app]
 
 /-- The abutment maps of the truncation couple of `F` are compatible with `α`. -/
 @[reassoc]
 lemma functorTruncationCouple_α_ι (p n : ℤ) :
     (functorTruncationCouple F M).α (p + 1, n) (p, n) ≫ functorTruncationCoupleι F M p n =
-      functorTruncationCoupleι F M (p + 1) n := by
-  rw [functorTruncationCouple_α]
-  dsimp only [functorTruncationCoupleι]
-  rw [← Functor.map_comp, ← F.map_comp, Category.assoc, truncLETower_mor₁_eTruncLTι_app]
-  congr 2
-  rw [show n - p - 1 + 1 = n - (p + 1) + 1 by omega]
-  simp
+      functorTruncationCoupleι F M (p + 1) n :=
+  truncLETower_map_coupleα_comp F M (n - (p + 1)) (n - p) n (by omega)
 
 variable {M} in
 /-- If `M` is `≥ a`, the objects `D^{p, n}` of the truncation couple of `F` vanish for
 `n - p < a`. -/
 lemma isZero_functorTruncationCouple_D (a : ℤ) [M.IsGE a] (p n : ℤ) (h : n - p < a) :
-    IsZero ((functorTruncationCouple F M).D (p, n)) :=
-  Functor.map_isZero _ (F.map_isZero (isZero_truncLETower_X M a _ h))
+    IsZero ((functorTruncationCouple F M).D (p, n)) := by
+  rw [functorTruncationCouple_D]
+  exact (homologyFunctor B n).map_isZero (F.map_isZero (isZero_truncLETower_X M a _ h))
 
 /-- The objects `E^{p, n}` of the truncation couple of `F` vanish if `M` has no cohomology in
 degree `n - p`. -/
@@ -184,7 +178,7 @@ lemma isFiniteSeparated_functorTruncationCoupleFiltration (a : ℤ) [M.IsGE a] (
     (functorTruncationCoupleFiltration F M n).IsFiniteSeparated := by
   have hbot : (functorTruncationCoupleFiltration F M n).F (n - a + 1) = ⊥ := by
     dsimp only [functorTruncationCoupleFiltration, ExactCouple.abutmentFiltration]
-    rw [(isZero_functorTruncationCouple_D F a _ n (by omega)).eq_zero_of_src
+    simp only [(isZero_functorTruncationCouple_D F a (n - a + 1) n (by omega)).eq_zero_of_src
       (functorTruncationCoupleι F M _ n), imageSubobject_zero]
   refine ⟨?_, ⟨_, hbot⟩, fun P hP ↦ eq_bot_iff.2 (hbot ▸ hP _)⟩
   have := isIso_functorTruncationCoupleι F M hF 0 n le_rfl
@@ -245,6 +239,8 @@ lemma homologyFunctor_map_app_comp_shiftIso {G Y : Plus A} (k n m : ℤ) (h : k 
   simp only [Functor.comp_map] at h₂
   erw [← h₂]
   simp only [← Functor.map_comp_assoc, key]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
 
 /-- Under the identifications `E^{p, n} ≅ Hᵖ(Fᵢ(Hⁿ⁻ᵖ(M)))`, the component on `E^{p, n}` of the
 morphism of truncation couples induced by `τ` is `Hᵖ(τ_{Hⁿ⁻ᵖ(M)})`. -/

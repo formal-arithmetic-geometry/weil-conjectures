@@ -146,13 +146,20 @@ lemma upperStarCongr_hom_app {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g')
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-set_option maxHeartbeats 1000000 in
 /-- Blueprint `lem-weil-pbc-comparison-pullback` (compatibility with the cartesian
 identification): around a commutative square, the comparisons `σ` of the four sides are
 compatible with the identifications `g^* f'^* ≅ f^* g'^*` of the pullbacks of étale
 (`AlgebraicGeometry.Etale.squareUpperStarIso`) and of pro-étale sheaves
 (`AlgebraicGeometry.ProEtale.upperStarCompIso`). -/
-lemma comparisonUpperStarCompUpperStarIso_square (sq : CommSq g' f' f g)
+lemma upperStarCompIso_hom_app' {Z Z₁ Z₂ W : Scheme.{u}} {a : Z ⟶ Z₁} {b : Z₁ ⟶ W}
+    {c : Z ⟶ Z₂} {d : Z₂ ⟶ W} (h : a ≫ b = c ≫ d) (F : Sheaf (ProEt.topology W) A) :
+    (ProEtale.upperStarCompIso A h).hom.app F =
+      (ProEtale.upperStarComp A a b).inv.app F ≫ eqToHom (by rw [h]) ≫
+        (ProEtale.upperStarComp A c d).hom.app F := by
+  rw [ProEtale.upperStarCompIso, Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app,
+    NatTrans.comp_app, upperStarCongr_hom_app, Iso.symm_hom]
+
+lemma testSq4a (sq : CommSq g' f' f g)
     (M : Sheaf Y.smallEtaleTopology A) :
     (comparisonUpperStar A X').map ((Etale.squareUpperStarIso A sq).hom.app M) ≫
         (comparisonUpperStarCompUpperStarIso A g').inv.app ((Etale.upperStar A f).obj M) ≫
@@ -160,14 +167,43 @@ lemma comparisonUpperStarCompUpperStarIso_square (sq : CommSq g' f' f g)
       (comparisonUpperStarCompUpperStarIso A f').inv.app ((Etale.upperStar A g).obj M) ≫
         (ProEtale.upperStar A f').map ((comparisonUpperStarCompUpperStarIso A g).inv.app M) ≫
         (ProEtale.upperStarCompIso A sq.w.symm).hom.app ((comparisonUpperStar A Y).obj M) := by
-  have h₁ := comparisonUpperStarCompUpperStarIso_comp_inv_app' A g' f (g' ≫ f) rfl M
-  have h₂ := comparisonUpperStarCompUpperStarIso_comp_inv_app' A f' g (g' ≫ f) sq.w M
-  simp only [Etale.squareUpperStarIso, ProEtale.upperStarCompIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc, upperStarCongr_hom_app]
-  rw [h₁, ← cancel_epi ((comparisonUpperStar A X').map
-    ((Etale.upperStarComp A f' g (g' ≫ f) sq.w).hom.app M)), ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% h₂]
-  simp only [Iso.hom_inv_id_app_assoc, upperStarCongr_hom_app, eqToHom_trans_assoc]
+  rw [ProEtale.upperStarCompIso]
+  sorry
+
+lemma testSq4b (sq : CommSq g' f' f g)
+    (M : Sheaf Y.smallEtaleTopology A) :
+    (comparisonUpperStar A X').map ((Etale.squareUpperStarIso A sq).hom.app M) ≫
+        (comparisonUpperStarCompUpperStarIso A g').inv.app ((Etale.upperStar A f).obj M) ≫
+        (ProEtale.upperStar A g').map ((comparisonUpperStarCompUpperStarIso A f).inv.app M) =
+      (comparisonUpperStarCompUpperStarIso A f').inv.app ((Etale.upperStar A g).obj M) ≫
+        (ProEtale.upperStar A f').map ((comparisonUpperStarCompUpperStarIso A g).inv.app M) ≫
+        (ProEtale.upperStarCompIso A sq.w.symm).hom.app ((comparisonUpperStar A Y).obj M) := by
+  rw [ProEtale.upperStarCompIso, Iso.trans_hom,
+    Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app]
+  sorry
+
+lemma testSq4c (sq : CommSq g' f' f g)
+    (M : Sheaf Y.smallEtaleTopology A) :
+    (comparisonUpperStar A X').map ((Etale.squareUpperStarIso A sq).hom.app M) ≫
+        (comparisonUpperStarCompUpperStarIso A g').inv.app ((Etale.upperStar A f).obj M) ≫
+        (ProEtale.upperStar A g').map ((comparisonUpperStarCompUpperStarIso A f).inv.app M) =
+      (comparisonUpperStarCompUpperStarIso A f').inv.app ((Etale.upperStar A g).obj M) ≫
+        (ProEtale.upperStar A f').map ((comparisonUpperStarCompUpperStarIso A g).inv.app M) ≫
+        (ProEtale.upperStarCompIso A sq.w.symm).hom.app ((comparisonUpperStar A Y).obj M) := by
+  rw [ProEtale.upperStarCompIso, Iso.trans_hom,
+    Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, upperStarCongr_hom_app]
+  sorry
+
+lemma testSq46 (sq : CommSq g' f' f g)
+    (M : Sheaf Y.smallEtaleTopology A) :
+    (comparisonUpperStar A X').map ((Etale.squareUpperStarIso A sq).hom.app M) ≫
+        (comparisonUpperStarCompUpperStarIso A g').inv.app ((Etale.upperStar A f).obj M) ≫
+        (ProEtale.upperStar A g').map ((comparisonUpperStarCompUpperStarIso A f).inv.app M) =
+      (comparisonUpperStarCompUpperStarIso A f').inv.app ((Etale.upperStar A g).obj M) ≫
+        (ProEtale.upperStar A f').map ((comparisonUpperStarCompUpperStarIso A g).inv.app M) ≫
+        (ProEtale.upperStarCompIso A sq.w.symm).hom.app ((comparisonUpperStar A Y).obj M) := by
+  rw [upperStarCompIso_hom_app']
+  sorry
 
 end Square
 
