@@ -316,5 +316,35 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17221e56b",
+  "group": "Q60",
+  "result": "fix",
+  "note": "Substance correct: CategoryTheory.Rationalization := (W M C).Localization with W := (torsion M C).trW and torsion := ∃ m ∈ M, m • 𝟙 X = 0 (checked by rfl/Iff.rfl). Pretriangulated/IsTriangulated quotient, IsTriangulated/IsLocalization Q, isIso_smul_id over all quotient objects, Linear A for any IsLocalization M A (independent universe w') and algebraMap_smul all synthesize/compile via nt_compile. isIso_smul_id/linear/algebraMap_smul carry exactly the node's hypotheses; Rationalization/W/Q need fewer (fine for data); no extra assumptions or universe equalities. Edge cases M={1}, 0∈M, zero ring, powers of 0/1 covered; no duplicate; report sections real. Fault (mechanical): lean.module named the stale side-only path ...DerivedCategory.Complete.Rationalization. The live source is ...DerivedCategory.Rationalization (moved in bcf29a2028, byte-identical). The landed Sheaf.CategoryTheory.RationalizationLinear imports the live path, so importing both fails with a duplicate CategoryTheory.Rationalization (reproduced). Fix: fixes/sk-def-sfb-rationalization.lean-record.json sets module to WeilConjectures.CategoryTheory.DerivedCategory.Rationalization; probe compiles cleanly against it. Informational: the landed torsion/W records carry the same stale path."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Rationalization",
+  "declaration": "CategoryTheory.Rationalization",
+  "declarations": [
+   "CategoryTheory.Rationalization",
+   "CategoryTheory.Rationalization.torsion",
+   "CategoryTheory.Rationalization.instIsTriangulatedTorsion",
+   "CategoryTheory.Rationalization.W",
+   "CategoryTheory.Rationalization.W_smul_id",
+   "CategoryTheory.Rationalization.Q",
+   "CategoryTheory.Rationalization.isIso_smul_id",
+   "CategoryTheory.Rationalization.linear",
+   "CategoryTheory.Rationalization.algebraMap_smul"
+  ],
+  "statement": "def Rationalization : Type _ :=",
+  "branch": "slopmaster2",
+  "by": "Q60",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "The existing definition Rationalization M C := (Rationalization.W M C).Localization is exactly the rationalization of the node. The supporting declarations in the same module cover the other clauses: torsion is ∃ m ∈ M, m • 𝟙 X = 0; W is the distinguished-triangle cone-torsion class; the torsion property is triangulated; Q is the canonical localization functor and has an IsTriangulated instance; the quotient has the Mathlib triangulated localization instances; isIso_smul_id inverts each scalar in M; linear supplies Linear A for every IsLocalization M A and algebraMap_smul gives compatibility. The single-element notation is specialization to Submonoid.powers ℓ. This records the already existing construction and its supporting declarations, without defining a duplicate or adding an aggregate surrogate. Module path: the live published source is WeilConjectures/CategoryTheory/DerivedCategory/Rationalization.lean (upstream-sync bcf29a2028 moved it out of DerivedCategory/Complete/; the content is byte-identical). The old Complete path survives only as a frozen side copy, and importing it together with the live module, as the landed Sheaf.CategoryTheory.RationalizationLinear does, fails with a duplicate CategoryTheory.Rationalization; the record therefore names the live module (fix by the second reader of the maintainer review).",
+  "fixed_by": "NT-stage2-cc-17221e56b"
  }
 }

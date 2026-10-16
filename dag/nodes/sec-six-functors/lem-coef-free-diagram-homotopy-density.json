@@ -28,7 +28,9 @@
   "place": "The generation subargument in the proof of Theorem 7.9.8, printed pp. 411-412, formulas (7.9.8.11)-(7.9.8.14) and the final paragraph, for ordinary model categories. The model hypotheses supply the sequential cofibration condition of Remark 7.9.7. This extracts the free-diagram homotopy-density ingredient, not the full rectification theorem. Read online, not archived in literature/. No Stacks tag states this homotopy-density result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface",
+  "lem-coef-cocomplete-cofibration-localization"
  ],
  "proof": [
   {
@@ -308,5 +310,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0daa1870",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause: M:Type v with Category.{u}, U-small limits/colimits, C/F/W classes, W retract/2-of-3, both functorial WFS (Mathlib trivialFibrations=F⊓W, trivialCofibrations=C⊓W), CofibrantObject = M_c, W_I as inverseImage ι then functorCategory I, A:SSet.{max u v t} with FiniteReedy.IsLocalization (full coherent functor-category UP), HasSmallCoherentColimits.{u,max v t}. freeDiagram reuses Mathlib evaluationLeftAdjoint (rfl-checked value ∐_{i⟶j}X; map g↦g≫f = vu), lifted to cofibrant objects; hE existential is a true membership proof only. Conclusion ∀P replete (δ1 source→δ0 target), closed under all U-small colimiting cocones (apex c.1.1, empty K included), containing q-images of free diagrams ⇒ all vertices = node's equivalent formulation. Universes independent and bound. Edge cases: empty/terminal/discrete/arrow I, empty Hom coproducts, W=isos/all. No duplicate (rg side Sheaf/WeilConjectures, recorded searches). Node diff vs side: only lean record + stmt_deps gaining two landed nodes with lean records (allowed by stage2_delivery). lean.statement verbatim. Docstrings with source+blueprint, 8-step proof plan, single sorry (axioms: sorryAx), no hollow defs, no pro-etale. Report has Worker report and Second reading by Q48. nt_compile.py --json: module compiled clean (2.6 s, no warnings) against the side overlay. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeDiagramHomotopyDensity",
+  "declaration": "HomotopicalAlgebra.FreeDiagram.free_diagram_homotopy_density",
+  "declarations": [
+   "HomotopicalAlgebra.FreeDiagram.freeDiagram",
+   "HomotopicalAlgebra.FreeDiagram.free_diagram_homotopy_density"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeDiagramHomotopyDensity.lean",
+  "statement": "theorem free_diagram_homotopy_density (M : Type v) [Category.{u} M] [HasLimitsOfSize.{u, u} M] [HasColimitsOfSize.{u, u} M] [CategoryWithCofibrations M] [CategoryWithFibrations M] [CategoryWithWeakEquivalences M] [(weakEquivalences M).IsStableUnderRetracts] [(weakEquivalences M).HasTwoOutOfThreeProperty] [MorphismProperty.IsWeakFactorizationSystem (cofibrations M) (trivialFibrations M)] [MorphismProperty.IsWeakFactorizationSystem (trivialCofibrations M) (fibrations M)] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (I : Type u) [Category.{u} I] (A : SSet.{max u v t}) (q : FiniteReedy.largeNerve.{max u v, u, max u v t} (I ⥤ CofibrantObject M) ⟶ A) (hq : FiniteReedy.IsLocalization (((weakEquivalences M).inverseImage CofibrantObject.ι).functorCategory I) q) (hcolim : HasSmallCoherentColimits.{u, max v t} A) : ∃ hE : ∀ (i : I) (X : CofibrantObject M) (j : I), IsCofibrant (((evaluationLeftAdjoint M i).obj X.obj).obj j), ∀ P : A _⦋0⦌ → Prop, (∀ e : A _⦋1⦌, IsEquivalenceEdge A e → P (A.δ 1 e) → P (A.δ 0 e)) → (∀ (K : SSet.{u}) (D : SSet.uliftFunctor.{max v t}.obj K ⟶ A), (∀ k : (SSet.uliftFunctor.{max v t}.obj K) _⦋0⦌, P (D.app _ k)) → ∀ c : (coconeCategory D) _⦋0⦌, IsColimiting D c → P c.1.1) → (∀ (i : I) (X : CofibrantObject M), P (FiniteReedy.object q (freeDiagram M I i X (hE i X)))) → ∀ a : A _⦋0⦌, P a",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

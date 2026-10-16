@@ -265,5 +265,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-652d7b39c",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read the item node, its 6 stmt deps, its 14 proof-dep records, the module, the report (real Worker report and Second reading by Q117) and Stacks more-algebra.tex 09E8/09EA/09EB. Lean renders every clause. A DVR; K fraction field; IsGalois with FiniteDimensional gives finite normal separable; B via IsIntegralClosure (IsDomain B is implied, not stronger). X = primesOver m_A, finite and nonempty, with the iff identifying it with Max(B). Transitivity uses the canonical galRestrict action, checked by rfl. B_q is a DVR and A->B_q is local. For all uniformizers the unit-times-power equation holds with e_q = ramificationIdx and f_q = inertiaDeg, both positive. Common e, f with finrank K L = g*e*f. No added hypotheses; edge cases and the 4 independent universes are fine. Statement field matches the file verbatim; lean record complete; sorry-only; docstrings carry source place, blueprint id and all 8 steps; imports are the statement's plus the proof-dep modules. nt_compile.py --json against the side overlay: rc=0, 1.9 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.DvrGaloisDegreeData",
+  "declaration": "NumberTheory.dvr_galois_degree_data",
+  "file": "lean/Sheaf/NumberTheory/DvrGaloisDegreeData.lean",
+  "statement": "theorem dvr_galois_degree_data (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type w) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [IsGalois K L] (B : Type z) [CommRing B] [IsDomain B] [Algebra A B] [Algebra B L] [IsScalarTower A B L] [IsIntegralClosure B A L] : ((IsLocalRing.maximalIdeal A).primesOver B).Finite ∧ ((IsLocalRing.maximalIdeal A).primesOver B).Nonempty ∧ (∀ q : Ideal B, q.IsMaximal ↔ q ∈ (IsLocalRing.maximalIdeal A).primesOver B) ∧ MulAction.IsPretransitive (Gal(L / K)) {q : Ideal B // q ∈ (IsLocalRing.maximalIdeal A).primesOver B} ∧ (∀ q : {q : Ideal B // q ∈ (IsLocalRing.maximalIdeal A).primesOver B}, IsDiscreteValuationRing (Localization.AtPrime q.1) ∧ IsLocalHom (algebraMap A (Localization.AtPrime q.1))) ∧ (∀ πA : A, Irreducible πA → ∀ q : {q : Ideal B // q ∈ (IsLocalRing.maximalIdeal A).primesOver B}, ∀ tq : Localization.AtPrime q.1, Irreducible tq → ∃ e_q f_q : ℕ, 0 < e_q ∧ 0 < f_q ∧ ∃ u_q : (Localization.AtPrime q.1)ˣ, algebraMap A (Localization.AtPrime q.1) πA = (u_q : Localization.AtPrime q.1) * tq ^ e_q ∧ e_q = Ideal.ramificationIdx q.1 A ∧ f_q = Ideal.inertiaDeg q.1 A) ∧ (∃ e f g : ℕ, 0 < e ∧ 0 < f ∧ g = ((IsLocalRing.maximalIdeal A).primesOver B).ncard ∧ (∀ q : {q : Ideal B // q ∈ (IsLocalRing.maximalIdeal A).primesOver B}, Ideal.ramificationIdx q.1 A = e ∧ Ideal.inertiaDeg q.1 A = f) ∧ Module.finrank K L = g * e * f)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
