@@ -28,9 +28,114 @@
   "lem-coef-rezk-local-model",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the division notation and vertical model of [lem-coef-bisimplicial-reedy-division-calculus]. Choose the vertex inclusion $v:\\Delta^0\\hookrightarrow\\Delta^q$ at $0$ and the collapse $t:\\Delta^q\\to\\Delta^0$. The inclusion $v$ is a Kan trivial cofibration: it is monic, and on geometric realizations the homotopy $(x,s)\\mapsto(1-s)x+se_0$ contracts the standard geometric simplex to that vertex. Vertical Reedy fibrancy therefore makes $d=X/v:X/\\Delta^q\\to X/\\Delta^0$ lift all monomorphisms. Since Joyal cofibrations are precisely monomorphisms, the Joyal weak factorization system makes $d$ a Joyal trivial fibration. The canonical degeneracy map is $s=X/t:X/\\Delta^0\\to X/\\Delta^q$, and contravariance and $tv=1$ give $ds=1$. Two-out-of-three implies that $s$ is a categorical equivalence. Under representable evaluation $X/\\Delta^q=X_{\\bullet,q}$; this proves categorical constancy, including $q=0$, where $s=1$. This argument needs vertical Reedy fibrancy alone.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Propositions 2.5 and 2.8; forward direction of Proposition 4.4"
+   }
+  },
+  {
+   "text": "Let $W$ be a vertically Reedy fibrant homotopy Segal space (in particular $X$, and every Rezk-fibrant object of [lem-coef-rezk-local-model]). For a simplicial set $T$ the division $W/T$ of [lem-coef-bisimplicial-reedy-division-calculus] has $(W/T)_p=\\operatorname{Hom}_{\\mathrm{ss}}(\\Delta^p\\boxtimes T,W)=\\operatorname{Hom}_{\\mathrm{sSet}}(T,W_p)$, with the same operators, so it is the simplicial set $W/T$ of [lem-coef-segal-vertical-restriction-inner]; vertical Reedy fibrancy is Reedy fibrancy for the Kan model structure. That node makes $W/T$ a quasicategory for every $T$ and $W/b:W/T\\to W/S$ an inner fibration for every monomorphism $b:S\\hookrightarrow T$. Taking $W=X$ and $T=\\Delta^q$, the row $X_{\\bullet,q}=X/\\Delta^q$ is a quasicategory. No completeness is needed for this step.",
+   "uses": [
+    "lem-coef-segal-vertical-restriction-inner",
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-rezk-local-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 3.4, (i) implies (v), with v the monomorphism from the empty simplicial set; rows are the representable divisions (Section 2)"
+   }
+  },
+  {
+   "text": "Let $p:U\\to V$ be a Rezk fibration between complete Segal spaces. First $p$ is a vertical Reedy fibration. Indeed let $j$ be a vertical trivial cofibration and let $Z$ be any complete Segal space. The vertical simplicial model axiom makes $\\operatorname{Map}_{\\mathrm{ss}}(j,Z)$ a trivial Kan fibration because $Z$ is vertically Reedy fibrant. The mapping-space definition of Rezk weak equivalences therefore makes $j$ a Rezk weak equivalence. Both model structures have monomorphisms as cofibrations, so every vertical trivial cofibration is a Rezk trivial cofibration. The map $p$ lifts them all, and hence is a vertical fibration by the vertical weak factorization system. This uses only the Rezk mapping tests and existence, not the mixed Joyal/Kan box-product assertion of [lem-coef-rezk-local-model].",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-rezk-local-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorems 2.6 and 4.1: vertical-to-Rezk trivial-cofibration inclusion; preliminary to Lemma 4.3"
+   }
+  },
+  {
+   "text": "For an inner horn $a:A\\hookrightarrow B$ form $r_a=\\langle a\\backslash p\\rangle:B\\backslash U\\to P_a=(B\\backslash V)\\times_{A\\backslash V}(A\\backslash U)$. It is a Kan fibration by step 3 and the vertical division criterion of [lem-coef-bisimplicial-reedy-division-calculus]. The absolute restriction $a\\backslash U:B\\backslash U\\to A\\backslash U$ is the map $\\langle a\\backslash(U\\to *)\\rangle$, since $B\\backslash *$ is terminal. By the division lifting bijection, $\\delta_m\\pitchfork(a\\backslash U)$ is equivalent to $a\\pitchfork(U/\\delta_m)$, and $U/\\delta_m$ is an inner fibration by step 2; so $a\\backslash U$ lifts every boundary inclusion $\\delta_m$, $m\\geq0$, and is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. The same holds for $a\\backslash V$. The projection $P_a\\to A\\backslash U$ is a pullback of $a\\backslash V$ and still lifts all boundary inclusions. Its composite with $r_a$ is $a\\backslash U$; two-out-of-three makes $r_a$ a weak homotopy equivalence and hence a trivial Kan fibration, which lifts every monomorphism. For every monomorphism $b:S\\hookrightarrow T$, transposing its lifting against $r_a$ by the division bijection shows that $\\langle p/b\\rangle:U/T\\to(V/T)\\times_{V/S}(U/S)$ lifts every inner horn. Its domain $U/T$ is a quasicategory by step 2. Its target is also one: $V/b:V/T\\to V/S$ is an inner fibration by step 2, so its pullback to $U/S$ is an inner fibration, and the base $U/S$ is a quasicategory by step 2; a horn lifts first to the base and then through this inner fibration. Thus $\\langle p/b\\rangle$ is an inner fibration between quasicategories.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proposition 3.10, proof using Proposition 3.4 and division adjunction (2.1)"
+   }
+  },
+  {
+   "text": "Let $J$ be the full nerve of the walking isomorphism and $u_0:\\Delta^0\\hookrightarrow J$ its endpoint inclusion, as in [lem-coef-complete-segal-walking-isomorphism]. Completeness makes both $u_0\\backslash U:J\\backslash U\\to U_0$ and $u_0\\backslash V:J\\backslash V\\to V_0$ trivial Kan fibrations. The relative restriction $r_0:J\\backslash U\\to(J\\backslash V)\\times_{V_0}U_0$ is a Kan fibration by step 3. Projection of its target to $U_0$ is the pullback of $u_0\\backslash V$, hence a trivial Kan fibration; its composite with $r_0$ is $u_0\\backslash U$. Two-out-of-three makes $r_0$ a trivial Kan fibration. It lifts every monomorphism $b:S\\hookrightarrow T$. Transposing this lift gives $u_0\\pitchfork\\langle p/b\\rangle$. Step 4 and [lem-coef-joyal-walking-isomorphism-fibration-test] therefore make $\\langle p/b\\rangle$ a Joyal fibration. In particular this holds for $b=\\delta_q$ in all degrees, including $\\delta_0:\\varnothing\\hookrightarrow\\Delta^0$, so $p$ is a horizontal Reedy fibration.",
+   "uses": [
+    "lem-coef-complete-segal-walking-isomorphism",
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-joyal-walking-isomorphism-fibration-test",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Lemma 4.3; Lemma 4.2 and Proposition 1.13; forward direction of Proposition 4.4"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-quillen-fibrant-test] to the identity adjunction $L=\\mathrm{id}$ from the horizontal model structure of [lem-coef-bisimplicial-reedy-division-calculus] to the Rezk model structure of [lem-coef-rezk-local-model], with right adjoint $R=\\mathrm{id}$. Both model structures have the monomorphisms as cofibrations, so by their weak factorization systems both have as trivial fibrations exactly the maps with the right lifting property against all monomorphisms; hence $R$ sends Rezk trivial fibrations to horizontal trivial fibrations. By step 5, $R$ sends every Rezk fibration between Rezk-fibrant objects (the vertically Reedy fibrant complete Segal spaces) to a horizontal fibration. The cited criterion makes the identity a Quillen adjunction: the identity from the horizontal structure preserves cofibrations and trivial cofibrations.",
+   "uses": [
+    "lem-coef-quillen-fibrant-test",
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-rezk-local-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Proof of Theorem 4.5, first statement, via Proposition 7.15 (with Lemma 7.14)"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ now be any rowwise categorical equivalence. It is a weak equivalence in the horizontal Reedy model structure, whose objects are all cofibrant. The weak-equivalence preservation clause of [lem-coef-model-infinity-derived-adjunction], applied to the identity adjunction of step 6, therefore makes $f$ a Rezk weak equivalence. Its domain and codomain need not be fibrant in either structure. This proves the last assertion without applying a fibrant-object theorem to arbitrary bisimplicial sets.",
+   "uses": [
+    "lem-coef-bisimplicial-reedy-division-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/0607820",
+    "place": "Theorem 4.5; Corollary 7.11 (cofibrant-object weak-equivalence preservation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-reedy-division-calculus",
+  "lem-coef-complete-segal-walking-isomorphism",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-walking-isomorphism-fibration-test",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-quillen-fibrant-test",
+  "lem-coef-rezk-local-model",
+  "lem-coef-segal-vertical-restriction-inner"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/0607820",
+  "place": "Online reconstruction following Propositions 2.1, 2.5, 2.8, 3.4 and 3.10, Lemmas 4.2-4.3, Theorem 4.5 and Proposition 7.15; archive absent, WANTED in report.md. No use of Proposition 4.6 or Theorem 4.11."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +178,45 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search returned no declaration for the bisimplicial Rezk model or its rowwise comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rows of complete Segal spaces are quasicategories and rowwise categorical equivalences are Rezk weak equivalences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.Quasicategory\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal\", \"type\": \"∀ (X : SSet) [X.IsStrictSegal], X.Quasicategory\", \"doc\": \"Every simplicial set satisfying the strict Segal condition is a quasi-category. Specifically, if a simplicial set $X$ satisfies the strict Segal condition (which imposes constraints on the compatibili\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.StrictSegal.isCoskeletal'\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} [X.IsStrictSegal], CategoryTheory.SimplicialObject.IsCoskeletal X 2\", \"doc\": \"Any simplicial set satisfying the strict Segal condition is 2-coskeletal, meaning all simplices of dimension greater than 2 are uniquely determined by their boundary maps.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: strict Segal simplicial sets and the ordinary Kan model do not state the complete-Segal-space row comparison; generic localization results do not identify the two model structures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: strict Segal simplicial sets and the ordinary Kan model do not state the complete-Segal-space row comparison; generic localization results do not identify the two model structures."
+  },
+  {
+   "tool": "grep",
+   "query": "Rezk|categoricallyConstant|horizontal.*model",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"line\": \"22\", \"text\": \"* [Charles Rezk, *Introduction to Quasi-categories*, Proposition 21.5][Rezk2022]\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: strict Segal simplicial sets and the ordinary Kan model do not state the complete-Segal-space row comparison; generic localization results do not identify the two model structures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vertical Reedy fibrant complete Segal spaces are categorically constant",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"HomotopicalAlgebra.IsFibrant\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.IsCofibrant\", \"type\": \"(X : C) : Prop\", \"doc\": \"An object $X$ in a category with cofibrations is fibrant if the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.fibrantObjects\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": ObjectProperty C\", \"doc\": \"The property of an object $X$ in a category with cofibrations where the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": Type u\", \"doc\": \"The full subcategory of a category with cofibrations consisting of objects $X$ for which the unique morphism from $X$ to the terminal object is a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \"(X : FibrantObject C) : IsFibrant (FibrantObject.ι.obj X)\", \"doc\": \"Every object in the full subcategory of fibrant objects in a category with cofibrations is fibrant, meaning the unique morphism from the object to the terminal object is a fibration.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.const\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": C ⥤ CosimplicialObject C\", \"doc\": \"The constant functor from a category $\\\\mathcal{C}$ to its category of cosimplicial objects, which maps each object $X \\\\in \\\\mathcal{C}$ to the constant cosimplicial object with value $X$ (sending every\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.const_obj_left\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : C),\\n  (CategoryTheory.SimplicialObject.Augmented.const.obj X).left = (CategoryTheory.SimplicialObject.const C).obj X\", \"doc\": \"For any category $\\\\mathcal{C}$ and object $X \\\\in \\\\mathcal{C}$, the left component of the augmented simplicial object constructed by the constant functor applied to $X$ coincides with the constant simp\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: strict Segal simplicial sets and the ordinary Kan model do not state the complete-Segal-space row comparison; generic localization results do not identify the two model structures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rezk model structure is a left Bousfield localization of the horizontal Joyal Reedy model structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEquivalences C)],\\n  (HomotopicalAlgebra.Cofibrant\", \"doc\": \"Given a category $\\\\mathcal{C}$ with weak equivalences and a localization functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with respect to weak equivalences, the composition of the inclusion functor $\\\\iota : \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C]\\n  {D : Type u_2} [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  (L : CategoryTheory.Functor (HomotopicalAlgebra.CofibrantObject.HoCat C) D)\\n  [L.IsLocalization (HomotopicalAlgebra.weakEqui\", \"doc\": \"In a model category $\\\\mathcal{C}$, if $L$ is a functor from the homotopy category of cofibrant objects $\\\\mathrm{HoCat}(\\\\mathcal{C})$ to another category $D$ that localizes with respect to weak equival\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLeftDerivabilityStructure\", \"doc\": \"The localizer morphism between the weak equivalences in the full subcategory of cofibrant objects and the weak equivalences in the ambient model category, induced by the inclusion functor, satisfies t\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.localizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"In a model category, the inclusion functor from the full subcategory of cofibrant objects induces a morphism of localizers between the weak equivalences in the subcategory and the ambient category. Th\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.homRel C).FactorsThroughLocalization\\n    (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\", \"doc\": \"For any morphisms $f,g$ between cofibrant objects in a model category $\\\\mathcal{C}$, if $f$ and $g$ are right homotopic, then they become equal in the localization category $\\\\mathcal{C}[W^{-1}]$ with \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C],\\n  HomotopicalAlgebra.LeftHomotopyRel.FactorsThroughLocalization (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"In a category equipped with weak equivalences, any two morphisms that are left homotopic become equal in the localization of the category at the weak equivalences. This means their images coincide in \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      CategoryTheory.LocalizerMorphism (HomotopicalAlgebra.weakEquivalences (HomotopicalAlgebra.CofibrantObject C))\\n        (HomotopicalAlgebra.weakEquivalences C)\", \"doc\": \"The morphism of localizers between the weak equivalences in the full subcategory of cofibrant objects and the weak equivalences in the ambient model category, induced by the inclusion functor. This mo\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: strict Segal simplicial sets and the ordinary Kan model do not state the complete-Segal-space row comparison; generic localization results do not identify the two model structures."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-complete-segal-quasicategory-comparison",
@@ -96,5 +236,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-categorical-constancy",
+  "worker": "stage1",
+  "summary": "Separated vertical categorical constancy from horizontal fibrancy and comparison. Wrote the relative inner-horn and walking-isomorphism lifting arguments, then the identity Quillen argument and its all-cofibrant consequence. Added three statement-only technical dependencies after DAG, blueprint, Lean and logged Mathlib searches. Corrected doubled TeX escapes without changing the proposition. Avoided Proposition 4.6 because its source proof uses Theorem 4.5. Maintainer review: the inner-horn restriction is taken from the existing lem-coef-segal-vertical-restriction-inner (Joyal-Tierney 3.4 (v)) by the division transposition, and the identity Quillen criterion from the existing lem-coef-quillen-fibrant-test (Proposition 7.15 form); the two duplicate new nodes were dropped.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: foundational Joyal–Tierney comparison used through lem-coef-enrichment-change-adjunction; Proposition 4.4 and Theorem 4.5; row quasicategories from Proposition 3.4. This is the horizontal regularity and weak-equivalence comparison, before the first-row Quillen equivalence of Theorem 4.11. The steps expose precisely the regularity and weak-equivalence ingredient used in the finite mapping-complex comparison; they do not assume the later first-row Quillen equivalence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-0b6cfad9a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0b6cfad9a (reviewer sub-agent of L); spot-checked: I read the item and all five new nodes in full against Joyal–Tierney math/0607820, fetched to /tmp (Prop 1.13, §2 Props 2.1–2.10, Props 3.4 and 3.10, Lemmas 4.2–4.3, Prop 4.4, Thm 4.5, Cor 7.11, Lemma 7.14, Prop 7.15). The item statement matches the forward half of Prop 4.4, Prop 3.4(v) for the rows, and the third clause of Thm 4.5, with no fibrancy assumed in the last clause and nothing weakened. All seven steps are correct and follow 2.8, 3.4, 3.10, 4.3, 4.5 and 7.15/7.11. Two faults, repaired (D1/C5). (1) lem-coef-segal-inner-horn-restriction states JT 3.4(ii), which is one transposition away (Prop 2.1) from the existing node lem-coef-segal-vertical-restriction-inner (same unit, 3.4(v): W/T is a quasicategory and W/v an inner fibration). Step 2 now cites that node directly, and step 4 gets the trivial fibrancy of a\\U and a\\V by transposition plus the Kan boundary criterion. (2) lem-coef-model-fibrant-fibration-cofibration-test (Lemma 7.14) is not needed: the existing lem-coef-quillen-fibrant-test (Hirschhorn 8.5.4, the Prop 7.15 form) gives step 6 directly for the identity adjunction. Rezk and horizontal trivial fibrations coincide because both are RLP against all monomorphisms, and step 5 gives fibrations between fibrant objects. The corrected item is in fixes/ with proof_deps recomputed; I checked that there is no cycle and every cited node exists. All proof citations stay in unit sk-prop-sf-biduality-general, so no tool_uses. The three kept new nodes are true, self-contained and not duplicates: division calculus (JT §2), complete-Segal walking-isomorphism (Lemma 4.2, project convention for X_eq; lem-coef-segal-equivalence-classifier is the suggested route for its later split), and Joyal walking-isomorphism test (Prop 1.13; it differs from the equivalence-edge characterization and from the finite-interval boundary tests). Archiving Joyal–Tierney and Rezk in literature/ is still WANTED.; 1 file(s) fixed by the reviewer"
  }
 }

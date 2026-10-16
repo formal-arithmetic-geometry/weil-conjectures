@@ -31,9 +31,146 @@
   "def-weil-size-convention",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The arrow category is locally presentable. Indeed apply the small-product clause of [lem-coef-accessible-pie-closure] to $\\mathcal A\\times\\mathcal A$ and then its inserter clause to the two projection functors: the objects of this inserter are precisely triples $(X,Y,f:X\\to Y)$ and its morphisms are commuting squares. The projection functors are accessible by that same product clause. Thus the arrow category is accessible, with a small family of presentable generators at some regular rank. It is cocomplete: for a diagram of arrows take the source and target colimits and use [def-weil-pbc-category-colimit] to induce the arrow between them. A cocone of commuting squares factors uniquely through this arrow, since the two component factorizations are unique and their commuting equation can be checked on all source cocone legs. Hence accessibility plus these colimits is exactly local presentability in the sense used below.",
+   "uses": [
+    "lem-coef-accessible-pie-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion of the ordinary presentable arrow-category background to A.2.6.9; accessibility from the existing PIE theorem and colimits from their cocone universal property."
+   }
+  },
+  {
+   "text": "Fix the regular cardinal $\\lambda$ witnessing the accessibility of $W$ in hypothesis (iii); $\\kappa$ remains the presentability rank of $\\mathcal A$ from the statement. Applied in the locally presentable arrow category of Step 1, [lem-coef-accessible-subdiagram-criterion] gives a uniform bound above which its approximation property holds at every regular $\\tau$ with $\\lambda\\ll\\tau$. Choose $\\tau$ also so that $\\mathcal A$ is locally $\\tau$-presentable, $\\tau>\\lambda$, and every endpoint of the given small generating set $C_0$ for $C$ is $\\tau$-presentable. Here are the cardinal inputs: [lem-coef-object-presentability-rank] gives a rank for each endpoint; [lem-coef-small-family-regular-bound], applied to the small family of underlying ordinal sets of these ranks, bounds all of them by one regular cardinal. Apply [lem-coef-accessible-functor-presentability-ranks] to the identity of $\\mathcal A$; its arbitrarily-large sharp ranks, above both this bound and the subdiagram criterion's bound and sharply above a regular cardinal at least $\\lambda$, provide the required $\\tau$. Presentability at an endpoint's original rank implies presentability at $\\tau$: a $\\tau$-filtered diagram is also filtered at the smaller rank, so its Hom preservation already holds. Increasing the lower sharp rank preserves $\\lambda\\ll\\tau$ directly from its defining inequalities.",
+   "uses": [
+    "lem-coef-accessible-subdiagram-criterion",
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-accessible-functor-presentability-ranks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, first proof paragraph, printed p. 822: common uncountable regular cardinal and approximation bound; the explicit cardinal choices expand that paragraph."
+   }
+  },
+  {
+   "text": "An arrow $i:M\\to N$ with $\\tau$-presentable endpoints is a $\\tau$-presentable object of the arrow category. To check this, a map from $i$ to the colimit of a $\\tau$-filtered arrow diagram consists of two endpoint maps satisfying one commuting equation. Endpoint presentability and clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] put those maps at a common stage. The commuting equation holds at a later stage by clause (3) applied to $\\operatorname{Hom}(M,-)$. Equality of two squares is likewise witnessed at a common later stage by applying clause (2) to their two components. This proves the required Hom bijection. Therefore the approximation property in Step 2 applies to diagrams of arrows with $\\tau$-presentable endpoints, in the compact-endpoint form needed below.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion of the arrow-compactness check implicit in A.2.6.9 and A.2.6.5; the square equation is essential here."
+   }
+  },
+  {
+   "text": "By [lem-coef-ordinary-presentables-small], choose a small family $R$ of representatives of the $\\tau$-presentable objects of $\\mathcal A$. The arrows between pairs of members of $R$ form a small set: it is the union over the small set $R\\times R$ of small Hom sets. Let $J$ be its subset consisting of arrows in $C\\cap W$, and let $\\mathcal S$ be the weakly saturated closure of $J$. Thus $\\mathcal S\\subseteq C\\cap W$. Every arrow in $C\\cap W$ with $\\tau$-presentable endpoints is isomorphic to a member of $J$ after choosing endpoint representatives. A weakly saturated class is invariant under such isomorphisms, since the conjugate is obtained by composition with isomorphisms (finite composition is a transfinite composition). Let $K$ denote the class of all arrows of $C$ with $\\tau$-presentable endpoints; it contains $C_0$. Hence [lem-coef-weak-saturation-tree-presentation] applies to $C,K,\\tau$ and presents any fixed $f:X\\to Y$ in $C\\cap W$ by a $\\tau$-good $K$-tree indexed by a small well-founded poset $T$. Write $Y_E$ for its colimits; $Y_\\varnothing=X$ and $X\\to Y_T$ is isomorphic to $f$.",
+   "uses": [
+    "lem-coef-ordinary-presentables-small",
+    "lem-coef-weak-saturation-tree-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, first and second proof paragraphs, printed p. 822; smallness is made precise using representatives instead of the proper collection of all compact objects."
+   }
+  },
+  {
+   "text": "Call $E\\subseteq T$ good if it is downward-closed and $X\\to Y_E$ lies in $W$. The empty set is good by the identity in $C\\cap W$, and $T$ is good because $X\\to Y_T$ is isomorphic to the given $f\\in W$ and $W$ is replete. The tree transition clause of [lem-coef-weak-saturation-tree-presentation] puts every map $Y_E\\to Y_F$, for $E\\subseteq F$ downward-closed, in $C$. For good $E,F$ with good $E\\cap F$, the square with vertices $Y_{E\\cap F},Y_E,Y_F,Y_{E\\cup F}$ is a pushout: a map out of the last vertex is a pair of compatible cocones on $E,F$, agreeing on their overlap, by [def-weil-pbc-category-colimit]. Two-out-of-three gives $Y_{E\\cap F}\\to Y_E$ in $W$, its pushout gives $Y_F\\to Y_{E\\cup F}$ in $C\\cap W$, and composing with $X\\to Y_F$ proves $E\\cup F$ good. Also an increasing ordinal union of good subsets is good. Explicitly, for an increasing family $(E_\\gamma)$, prove by transfinite induction that $U_\\beta=\\bigcup_{\\gamma<\\beta}E_\\gamma$ is good. The base is empty, a successor union is the assumed good $E_\\beta$, and at a limit the earlier $U_\\delta$ form a continuous chain of good subsets. Their relative maps are in $C\\cap W$ by two-out-of-three, so their continuous composite is in $C\\cap W$. The union colimit identification follows directly because compatible cocones on the increasing subsets are precisely cocones on their union. This induction does not presume that the original family $(E_\\gamma)$ was itself continuous.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, observations (i) and (iii), printed p. 822; pushout and union identifications are expanded by cocones."
+   }
+  },
+  {
+   "text": "Construct a continuous chain $(D_\\alpha)_{\\alpha\\leq\\theta}$ of good downward-closed subsets starting with $D_0=\\varnothing$. At a limit take the union, good by Step 5. If $D_\\alpha\\ne T$, choose a minimal $t\\in T\\setminus D_\\alpha$ and apply [lem-coef-good-subset-enlargement] with $A_0=D_\\alpha$ and $B_0=\\{t\\}$. All of its assumptions hold by Steps 2-4 and hypotheses (i)-(iv), with that node's $\\kappa$ taken to be $\\lambda$. It gives a good downward-closed $B$ of size less than $\\tau$ containing $t$, with $B\\cap D_\\alpha$ good. Put $D_{\\alpha+1}=D_\\alpha\\cup B$, good by Step 5. Each step adds a new element of the small set $T$, so this recursion terminates at a small ordinal $\\theta$ with $D_\\theta=T$; for example fix a well-order of $T$ to choose each minimal element and the strictly added elements inject the successor stages into $T$. At every successor $|D_{\\alpha+1}\\setminus D_\\alpha|<\\tau$.",
+   "uses": [
+    "lem-coef-good-subset-enlargement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, claim (*) and the ensuing transfinite exhaustion, printed pp. 822-823."
+   }
+  },
+  {
+   "text": "Fix a successor transition $g:Z=Y_{D_\\alpha}\\to Y_{D_{\\alpha+1}}=Z'$. It belongs to $C\\cap W$ by Step 5 and two-out-of-three. The relative-tree clause of [lem-coef-weak-saturation-tree-presentation] gives a $K$-tree for this map with fewer than $\\tau$ cells, indexed by $D_{\\alpha+1}\\setminus D_\\alpha$. Apply [lem-coef-small-cellular-tree-descent]: there are $\\tau$-presentable $M,N$, an arrow $h:M\\to N$ in the weakly saturated closure of $K$, and a pushout presentation $Z'=Z\\amalg_M N$. Since $K\\subseteq C$ and $C$ is weakly saturated, $h\\in C$. This does not assert $h\\in W$, and $Z$ need not be presentable.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-coef-small-cellular-tree-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, final proof paragraph, printed p. 823, applying Remark A.1.5.5 and Lemma A.1.5.11."
+   }
+  },
+  {
+   "text": "Present $Z$ as a small $\\tau$-filtered colimit of $\\tau$-presentable objects, and use [lem-coef-cardinal-filtered-poset-reindex] to write it as $\\operatorname{colim}_{p\\in P}Z_p$ over a small $\\tau$-filtered poset. Since $M$ is $\\tau$-presentable, clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] factors $M\\to Z$ through some $Z_{p_0}$. Replace $P$ by the tail $P_{\\geq p_0}$ and use the resulting compatible maps $M\\to Z_p$. This tail is $\\tau$-filtered and computes the same colimit: every finite set of old indices has an upper bound in the tail, so a cocone there extends uniquely to all indices by going to common upper bounds. Put $g_p:Z_p\\to Z_p\\amalg_M N$. Its endpoints are $\\tau$-presentable by [lem-coef-ordinary-small-colimit-presentable] applied to the finite pushout diagram, and $g_p\\in C$ by pushout closure. Its arrow colimit is $g$: a compatible cocone on the pushout targets is exactly a compatible family of maps from the $Z_p$ together with a single map from $N$ agreeing on $M$. This identifies that target colimit with $Z\\amalg_M N$, while the source colimit is $Z$.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, compact filtered-stage construction in the final paragraph, printed p. 823; all colimit and tail identifications are explicit."
+   }
+  },
+  {
+   "text": "The arrow $g$ belongs to $W$, so the approximation property of [lem-coef-accessible-subdiagram-criterion], obtained in Step 2 and checked for compact-endpoint arrows in Step 3, supplies a subset $Q\\subseteq P$ with $|Q|<\\tau$, $Q$ $\\lambda$-filtered, and $g_Q=\\operatorname{colim}_{q\\in Q}g_q$ in $W$. It is nonempty because $\\lambda$-filtered includes the empty test diagram. Put $V=\\operatorname{colim}_{q\\in Q}Z_q$. The same cocone calculation as Step 8 gives $g_Q:V\\to V\\amalg_M N$. Since a poset of size less than an infinite regular $\\tau$ has fewer than $\\tau$ morphisms, [lem-coef-ordinary-small-colimit-presentable] makes $V$ and then $V\\amalg_M N$ $\\tau$-presentable. Moreover $g_Q$ is a pushout of $h$, hence lies in $C$; no closure of $C$ under general filtered colimits is used. Thus $g_Q$ is isomorphic to a member of $J$ and lies in $\\mathcal S$. The original $g$ is its pushout along $V\\to Z$: maps from $Z\\amalg_V(V\\amalg_M N)$ are exactly maps from $Z,N$ agreeing on $M$, so this object is $Z\\amalg_M N$. Therefore $g\\in\\mathcal S$.",
+   "uses": [
+    "lem-coef-accessible-subdiagram-criterion",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, last lines of the proof, printed p. 823; the compact intersection cell and the final pushout are written out."
+   }
+  },
+  {
+   "text": "At limit stages, the cocone identification in Step 5 makes $Y_{D_\\beta}$ the colimit of the preceding $Y_{D_\\alpha}$, so the maps of Step 9 form a continuous transfinite composition from $X$ to $Y_T$. Closure of $\\mathcal S$ under that operation and under isomorphisms gives $f\\in\\mathcal S$. If $T$ is empty this is the identity map and the same conclusion follows from weak saturation. Since $f\\in C\\cap W$ was arbitrary, $C\\cap W\\subseteq\\mathcal S$. The reverse inclusion was proved in Step 4, so the small set $J\\subseteq C\\cap W$ has weakly saturated closure exactly $C\\cap W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.6.9, assembly of the good-subset chain and the small-generator conclusion, printed p. 823."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-pie-closure",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-subdiagram-criterion",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-accessible-functor-presentability-ranks",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-coef-ordinary-presentables-small",
+  "lem-coef-weak-saturation-tree-presentation",
+  "lem-coef-good-subset-enlargement",
+  "lem-coef-small-cellular-tree-descent",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-coef-ordinary-small-colimit-presentable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.2.6.9, printed pp. 821-823, with explicit ordinary-category and pushout calculations; WANTED in report.md because HTT is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +234,45 @@
    "results": "{\"t\": \"2026-10-16T19:36:51Z\", \"tool\": \"leanfinder\", \"query\": \"Small generation of acyclic cofibrations by solution sets for an accessible morphism property in a presentable category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.MorphismProperty.HasSmallObjectArgument.exists_cardinal\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\"], \"digest\": \"192fc0e9ed4fdd0e\"}",
    "date": "2026-10-17",
    "verdict": "No match: OrthogonalReflection.lean:95 and 472 prove accessibility/local presentability of the subcategory of local objects, not generation of an intersection of arrow classes. SmallObject/Basic.lean:88-90 assumes HasSmallObjectArgument and extracts a cardinal, not generators. The remaining hits define presentability or obtain presentable objects/filtered generators, not weak-saturation generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally presentable ordinary category, an accessible two out of three arrow class intersected with a small generated weakly saturated class is small generated if the intersection is weakly saturated",
+   "results": "{\"t\": \"2026-10-16T21:57:29Z\", \"tool\": \"leanfinder\", \"query\": \"In a locally presentable ordinary category, an accessible two out of three arrow class intersected with a small generated weakly saturated class is small generated if the intersection is weakly saturated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.isSmall\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.MorphismProperty.IsStableUnderComposition.ind_of_preIndSpreads\", \"CategoryTheory.IsCardinalLocallyPresentable.iff_exists_isStrongGenerator\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.MorphismProperty.IsMultiplicative.ind_of_preIndSpreads\"], \"digest\": \"e03bf652b13e06f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: accessible orthogonality classes and Ind closure are different properties; the trivial-cofibration closure theorems assume an already available weak factorization system. Generator interfaces and sieve saturation do not give weak-saturation generators of C intersect W. The Loogle query and SmallObject grep returned no hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smith lemma small generators for trivial cofibrations from accessibility of weak equivalences and weak saturation of their intersection with cofibrations",
+   "results": "{\"t\": \"2026-10-16T21:57:31Z\", \"tool\": \"leanfinder\", \"query\": \"Smith lemma small generators for trivial cofibrations from accessibility of weak equivalences and weak saturation of their intersection with cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.PathObject.exists_very_good\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.trivialCofibrations_rlp\"], \"digest\": \"4d1ca3e193696da6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: accessible orthogonality classes and Ind closure are different properties; the trivial-cofibration closure theorems assume an already available weak factorization system. Generator interfaces and sieve saturation do not give weak-saturation generators of C intersect W. The Loogle query and SmallObject grep returned no hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly saturated accessible intersection of classes of arrows is generated by a small set",
+   "results": "{\"t\": \"2026-10-16T21:57:27Z\", \"tool\": \"leansearch\", \"query\": \"A weakly saturated accessible intersection of classes of arrows is generated by a small set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Coverage.mem_toGrothendieck\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.Sieve.exists_eq_ofArrows\", \"CategoryTheory.IsCardinalAccessibleCategory.mk\", \"CategoryTheory.Precoverage.Saturate.casesOn\", \"CategoryTheory.Subgroupoid.generated\", \"CategoryTheory.Sieve.ofArrows\", \"CategoryTheory.MorphismProperty.IsSmall.small_toSet\"], \"digest\": \"7c391e93216c53bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: accessible orthogonality classes and Ind closure are different properties; the trivial-cofibration closure theorems assume an already available weak factorization system. Generator interfaces and sieve saturation do not give weak-saturation generators of C intersect W. The Loogle query and SmallObject grep returned no hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty, CategoryTheory.IsAccessibleCategory",
+   "results": "{\"t\": \"2026-10-16T21:57:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MorphismProperty, CategoryTheory.IsAccessibleCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: accessible orthogonality classes and Ind closure are different properties; the trivial-cofibration closure theorems assume an already available weak factorization system. Generator interfaces and sieve saturation do not give weak-saturation generators of C intersect W. The Loogle query and SmallObject grep returned no hit."
+  },
+  {
+   "tool": "grep",
+   "query": "intersection|inter.*generat|generat.*inter|Smith",
+   "results": "{\"t\": \"2026-10-16T21:57:26Z\", \"tool\": \"grep\", \"query\": \"intersection|inter.*generat|generat.*inter|Smith\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: accessible orthogonality classes and Ind closure are different properties; the trivial-cofibration closure theorems assume an already available weak factorization system. Generator interfaces and sieve saturation do not give weak-saturation generators of C intersect W. The Loogle query and SmallObject grep returned no hit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-perfect-weak-equivalence-model-recognition",
@@ -120,5 +292,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-intersection-generators",
+  "worker": "Q119",
+  "summary": "Rebuilt the direct HTT good-tree proof without the circular Smith citation. Three statement-only helpers isolate good-tree presentation, small-tree compact-root descent and good-subset enlargement; the item carries the small-generator construction, cardinal choice, arrow compactness, recursive exhaustion and final compact pushout argument. Item statement unchanged.",
+  "blueprint": "Realizes the generic small-set generation input beneath the coefficient-adjunction paragraph of prop-coef-integral-exceptional-adjoint, via the recorded marked-point-model ancestry. Steps 1-4 establish the common compact rank and good tree, 5-6 exhaust by good small blocks, 7-10 identify each transition as a pushout of a compact intersection arrow and assemble the original map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Generic elementwise theorem for filtered colimits of sets, used for compact-arrow squares and factoring M into a presentation stage. No same-unit statement supplies these elementwise representative and eventual-equality clauses; this tool does not change the unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-db9932581",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-db9932581 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. HTT Appendix A is not archived (WANTED; proof_origin is agent). I checked against HTT A.1.5.1/5/6/11/12/13 and the proof of A.2.6.9, but could not check the printed page numbers locally. The item statement is unchanged and matches HTT A.2.6.9 (i)-(iv); nothing is weakened. All ten steps hold: inserter of the two projections for the arrow category; tau chosen with lambda<<tau and tau uncountable; compact-endpoint arrows tau-presentable in the arrow category; pushout and continuous-union closure of good subsets, using C cap W saturation rather than W; exhaustion with steps of size less than tau; descent to h in C; tail reindexing; a lambda-filtered small Q with g_Q in C cap W between compact objects, and g its pushout. The three new nodes are true. For good-subset enlargement I reconstructed the proof with a non-compact root: the pushout of g_Q along X_Q->X stays in C cap W. None of them restates the item. The transitive dependencies contain no cycle (the circular Smith node is not cited). Duplicate search over trees, saturation, cellular factorization and small-object nodes found nothing. The one off-unit tool use is lem-weil-pbc-filtered-colimit-sets-elementwise, a Mathlib leaf; accepted. Two repairs in fixes/: (1) item Steps 2 and 9 renamed W's accessibility cardinal from kappa to lambda, matching the statement, and Step 6 notes that the enlargement node's kappa is lambda; (2) the tree definition in lem-coef-weak-saturation-tree-presentation now requires the canonical map Y_{<t}->Y_t to be the pushout leg. Read literally, the old abstract-isomorphism wording makes the transition clause false: in Set with L={empty->1}, a diagram map under X can be non-injective.; 2 file(s) fixed by the reviewer"
  }
 }
