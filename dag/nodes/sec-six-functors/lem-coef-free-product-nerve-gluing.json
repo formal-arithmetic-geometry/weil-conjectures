@@ -27,7 +27,8 @@
   "place": "Dwyer--Kan, Simplicial localizations of categories (1980), Lemma 3.8 and its proof, printed pp.272-273 (PDF pp.6-7), with free product defined in Section 1.4(iii). No Stacks tag states this result."
  },
  "stmt_deps": [
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-free-resolution-coproduct-augmentation"
  ],
  "proof": [
   {
@@ -231,5 +232,27 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-c40f3fc1b (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, plus the statement of each cited node; I made no changes. The statement is Dwyer–Kan Lemma 3.8 and is true. I tested it on O empty, Z/2*Z/2 (BZ/2∨BZ/2), a factor equal to I_O, a single loop and disconnected O; it assumes no freeness or connectedness. Step 1: I checked the horn pairing of NP(Q) by the cut set containing 1 or not. Face d_1 of the upper simplex is the lower simplex, the other inner faces are attached at stage k-1, and the outer faces are shorter. The stages run in order type ω, so the kan-quillen horn-cell clause applies. Step 2: P(Q_D)*P(Q_E)=P(Q_D⊔Q_E), K=K_D⊔_{NI_O}K_E, the legs are monomorphisms, and ja=b holds on the generators; then the gluing pushout clause and two-out-of-three. Step 3: free-resolution-augmentation with A=I_O, then the free-product clause of fixed-object-free-calculus, which needs no cofibrancy. Step 4: the local-equivalence clause of diagonal-coherent-nerve-comparison, which needs no Kan hypothesis, then the gluing lemma. Step 5: rowwise free case, direction exchange in bisimplicial-diagonal, and diag B=U. Step 6: ju=vt on both factors and on NI_O, then two-out-of-three. A BFS from the six dependencies finds no path back to the item. All six are in unit sk-prop-sf-biduality-general, so tool_uses is correctly empty. The delivery has no new nodes, and an rg search over dag/nodes found no node that duplicates the item. No SGA is cited, and this is not a target node. Limit: the DK I PDF is not in literature/ and network access is blocked, so I could not open the source page. proof_origin is agent and I checked the steps as mathematics; the report's WANTED to archive DK I stands. Minor, inherited and unchanged: the statement does not cite def-nagata-category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b8238c4d",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Node diff vs base: only the lean record plus one added stmt_dep, lem-coef-free-resolution-coproduct-augmentation, a landed node with a lean record (allowed by brief-stage2 l.140); statement, proof and proof_deps unchanged; lean.statement verbatim. All 8 items match: O : Type u; I_O = Discrete O with the identity inclusion; D E : Category.{u} O with no extra hypotheses; D*_O E = the existing fixedObjectCategoryCoproduct (Cat pushout over Discrete O, so no duplicate notion); Mathlib nerve; degreewise SSet pushout; canonical map = pushoutComparison nerveFunctor (real, not arbitrary); conclusion = SSet.Enhanced.IsWeakHomotopyEquivalence, the kan-quillen convention. Edge cases (O empty, discrete factor, loops, disconnected, universes) all covered. Proof is only sorry; no hollow definition; source and blueprint docstrings with the full 6-step proof; recorded proof-dependency modules imported privately. nt_compile.py --json on the snapshot file: rc=0, no errors or warnings. Report has Worker report and Second reading by Q96."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FreeProductNerveGluing",
+  "file": "lean/Sheaf/CategoryTheory/FreeProductNerveGluing.lean",
+  "declaration": "CategoryTheory.fixedObjectNerveComparison_isWeakHomotopyEquivalence",
+  "declarations": [
+   "CategoryTheory.fixedObjectNerveComparison",
+   "CategoryTheory.fixedObjectNerveComparison_isWeakHomotopyEquivalence"
+  ],
+  "statement": "theorem fixedObjectNerveComparison_isWeakHomotopyEquivalence (O : Type u) (D E : Category.{u} O) : SSet.Enhanced.IsWeakHomotopyEquivalence (fixedObjectNerveComparison O D E)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17"
  }
 }

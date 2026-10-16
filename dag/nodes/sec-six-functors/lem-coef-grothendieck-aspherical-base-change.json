@@ -264,5 +264,28 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-10ef3cebe (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps in full, plus the full statements of the 5 cited nodes, both citers, the unit and chapter records, and the briefs. The delivery is one commit with the item and report only, and no new nodes. Low arXiv:1409.8062 is not in literature/: the report files a WANTED line and proof_origin=agent is correct. Because I could not open Low, I checked each clause against the node's own definitions rather than Low's naming. (i) Either asphericity gives Nu a weak equivalence: Quillen Theorem A, proved in Steps 3-5 by the two-sided bisimplicial Z_{p,q}. The fibers N(B/u(a0)) (terminal object) and N(b_q↓u) are right; the two directional clauses of lem-coef-bisimplicial-diagonal-equivalence are used as stated. I checked the bridge homotopy b_i→b_n→u(a0)→u(a_j) under d_0/d_n; two-out-of-three comes from lem-coef-kan-quillen-right-proper. (ii) I recomputed both comma calculations. For Th, the composite (u(r)α, kF(u(r))h) gives the arrow equations; section s=(a,F(α)z,α,1) and counit (1,h) is natural iff kF(u(r))h=h'. For Gr, the composite (u(r)α', F(u(r))(h')k), projection to H^op, unit (1,h) natural iff F(u(r))(h')k=h. Since Gr_C F=(Th_C F^op)^op, the two directions are consistent. (iii) (b↓u^op)≅(u↓b)^op, and |NC|≅|NC^op| by chain-plus-coordinate reversal. Step 1's prism, continuity through Mathlib Topology.IsQuotientMap.continuous_lift_prod_left (CompactOpen.lean:584-598) and basepoint transport are correct. The directions match both citers (special-resolutions-aspherical; zigzag-nerve Steps 4-5). proof_deps equals the union of uses; a traversal of 41 reachable nodes found no cycle. There is no SGA citation. I accept both declared tool_uses (def-cbc-enhanced-diagrams-cones and the quotient-cylinder Mathlib leaf: a definition and a leaf, so notions rather than route). rg over the DAG and Mathlib found no duplicate. Small cases checked: F constant at the terminal category; u:1→[1] picking the terminal vs the initial object; empty categories. No statement is weakened and no fixes were needed. review.md is written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f91a2cfb3",
+  "group": "Q02",
+  "result": "fix",
+  "note": "All node clauses checked against the Lean. IsContractible is weak contractibility (map to the point is a weak equivalence); StructuredArrow and CostructuredArrow are the node's two comma categories; Th is Mathlib's Grothendieck (abbrev), so Grothendieck.pre is the canonical functor, and grPre is the recorded canonical oplax functor; the object and base-arrow equations are right, including u on reversed arrows for Gr. The equivalence RightAspherical u iff LeftAspherical u.op is correct. No added hypotheses, quantifier order preserved, edge cases (empty categories, identity, terminal category, empty fibres) fine, no duplicate in Mathlib or the project. Docstrings carry the source place, the blueprint tag and all seven proof steps; the only proof is one sorry; lean.statement matches the file verbatim. nt_compile of the delivered module is clean, and a corrupted copy did report an error. Finding, repaired: LeftAspherical and RightAspherical needlessly forced A and B into one universe pair, which blocks the citer lem-coef-special-resolutions-aspherical (Delta into a large A_x). fixes/GrothendieckAsphericalBaseChange.lean gives B independent universes uB/vB; the theorem signature, node and declarations are unchanged; the fix compiles cleanly and a scratch test with mixed universes typechecks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.GrothendieckAsphericalBaseChange",
+  "declaration": "CategoryTheory.grothendieck_aspherical_base_change",
+  "file": "lean/Sheaf/AlgebraicTopology/GrothendieckAsphericalBaseChange.lean",
+  "statement": "theorem grothendieck_aspherical_base_change {A : Type uA} {B : Type uA} [Category.{vA} A] [Category.{vA} B] (u : A ⥤ B) : (LeftAspherical u → SSet.Enhanced.IsWeakHomotopyEquivalence (nerveMap u)) ∧ (RightAspherical u → SSet.Enhanced.IsWeakHomotopyEquivalence (nerveMap u)) ∧ (RightAspherical u ↔ LeftAspherical u.op) ∧ (∀ (F : B ⥤ Cat.{t, u}), LeftAspherical u → LeftAspherical (Grothendieck.pre F u) ∧ RightAspherical (SSet.Thomason.grPre u F) ∧ (∀ (a : A) (z : F.obj (u.obj a)), (Grothendieck.pre F u).obj ⟨a, z⟩ = ⟨u.obj a, z⟩) ∧ (∀ {x y : Grothendieck (u ⋙ F)} (f : x ⟶ y), ((Grothendieck.pre F u).map f).base = u.map f.base) ∧ (∀ (a : A) (z : F.obj (u.obj a)), (SSet.Thomason.grPre u F).obj (op ⟨a, op z⟩) = op ⟨u.obj a, op z⟩) ∧ (∀ {x y : SSet.Thomason.Gr A (u ⋙ F)} (f : x ⟶ y), ((SSet.Thomason.grPre u F).map f).unop.base = u.map f.unop.base))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-16",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.LeftAspherical",
+   "CategoryTheory.RightAspherical",
+   "CategoryTheory.grothendieck_aspherical_base_change"
+  ]
  }
 }
