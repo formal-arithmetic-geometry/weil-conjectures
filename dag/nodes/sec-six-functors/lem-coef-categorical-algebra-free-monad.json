@@ -26,9 +26,91 @@
  "stmt_deps": [
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal M=\\Delta_S^{\\mathrm{op}}$. In the relative-nerve model of [def-coef-complete-algebroid], all simplices valued in the discrete set $S^{n+1}$ are constant; its compatibility equations say exactly that a base order map selects the appropriate entries. Thus this model is the nerve of the category of lists. Its objects over $[n]$ are lists $(x_0,\\ldots,x_n)$; projection records $[n]$ and an order map selects or repeats the listed entries. Consequently $\\mathcal M_{[0]}=S$, $\\mathcal M_{[1]}=S^2$, and its generalized Segal maps identify a list with its consecutive pairs over their matching endpoints. This is a small generalized nonsymmetric operad with discrete, hence space-valued, zero-fiber. The inert-algebra identification in [lem-coef-free-operadic-active-slice-formula] identifies restriction $\\tau^*$ with the stated graph functor $V_S$, since a functor out of the discrete set $S^2$ is exactly a family $P(s,t)$.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-free-operadic-active-slice-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Definition 4.1.1; Proposition 3.4.5; Definition A.4.8."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-operadic-algebra-presentability] to $\\mathcal M$ to obtain presentability of $\\mathcal A_S$. By [lem-coef-free-operadic-active-slice-formula], the inert part $\\mathcal M_{\\mathrm{triv}}$ is again a small generalized nonsymmetric infinity operad and the inert inclusion $\\tau:\\mathcal M_{\\mathrm{triv}}\\to\\mathcal M$ preserves inert arrows and is the identity over $[0]$, so both zero-fibers are the space $S$. Here this is also visible directly: a morphism of $\\mathcal M$ lies over a map $\\phi^{\\mathrm{op}}$ with $\\phi:[m]\\to[n]$, and all the composites with the inert projections to $[1]$ are inert exactly when $\\phi(i)=\\phi(i-1)+1$ for all $i$, that is, when $\\phi$ is inert; so the generalized Segal decomposition of mapping spaces restricts to $\\mathcal M_{\\mathrm{triv}}$, and inner horn fillers and inert cocartesian lifts stay in $\\mathcal M_{\\mathrm{triv}}$ because inert maps are closed under composition and $\\psi\\circ\\rho$ inert with $\\rho$ inert forces $\\psi$ inert. Thus the first, generalized-operad clause of [lem-coef-operadic-free-extension] gives $\\tau_!\\dashv\\tau^*$. With the graph identification in step 1 set $G_S=\\tau_!$. All required colimits are small, since $S$ and the category of finite lists in $S$ are small; the separately colimit-preserving tensor hypothesis is exactly the compatibility hypothesis for this free extension.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-free-operadic-active-slice-formula",
+    "lem-coef-operadic-free-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Theorem A.4.6; Corollary A.5.7."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-operadic-colorwise-sifted-colimits] to this same $\\mathcal M$. A map of algebras is an equivalence precisely when every map $A(s,t)\\to B(s,t)$ is one, proving conservativity of $V_S$. For a small sifted diagram, its colimit algebra has $(s,t)$-component the colimit of the corresponding graph components. Hence $V_S$ preserves every small sifted colimit, including the geometric realizations explicitly covered by that lemma. No colimit assertion for all arbitrary graph diagrams is needed.",
+   "uses": [
+    "lem-coef-operadic-colorwise-sifted-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Corollary A.5.4 and Lemma A.5.5."
+   }
+  },
+  {
+   "text": "For $c=(s,t)$ compute the active slices in [lem-coef-free-operadic-active-slice-formula]. An object of $\\mathcal P^{\\mathcal M}_{c,n}$ is exactly a list $(x_0,\\ldots,x_n)$ with $x_0=s$ and $x_n=t$: the unique active map is opposite to the endpoint-preserving map $[1]\\to[n]$. A morphism in this fixed-arity slice lies over an inert endomorphism of $[n]$, which must be the identity; the fibers are discrete, so there are no other morphisms. Thus the slice is the discrete set of these paths. Its tensor diagram assigns $P(x_0,x_1)\\otimes\\cdots\\otimes P(x_{n-1},x_n)$. Substituting into the active-slice formula replaces its inner colimit by the coproduct over paths and gives exactly the displayed formula in the statement. When $n=0$ there is one path only if $s=t$, contributing the empty tensor $\\mathbf1$; otherwise this indexing set is empty.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-free-operadic-active-slice-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Definition A.4.8 and Proposition A.4.9; Definition 4.1.1."
+   }
+  },
+  {
+   "text": "The arity-one identity operation at $(s,t)$ is the path $(s,t)$; therefore the unit in [lem-coef-free-operadic-active-slice-formula] inserts the length-one summand. For paths $s=x_0,\\ldots,x_n=t$ and $t=y_0,\\ldots,y_m=u$, substitution of their active operations has list $(x_0,\\ldots,x_n,y_1,\\ldots,y_m)$. The substitution clause of that lemma therefore identifies composition on these summands with concatenation, in the forward tensor order inherited from the consecutive inert colors. The arity-zero operation inserts the length-zero path. Associativity and units are compatible with every further substitution because the same concatenated list results, and the associators and unitors are those of the monoidal infinity-category; their coherences are included in the operadic substitution clause.",
+   "uses": [
+    "lem-coef-free-operadic-active-slice-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Proposition A.4.9 together with Definition A.4.1 (operadic free algebra)."
+   }
+  },
+  {
+   "text": "Given $u:P\\to V_S(A)$, apply the adjunct-cocone description in [lem-coef-free-operadic-active-slice-formula]. On the path of step 4 it tensors the maps $u(x_{i-1},x_i)$ in their listed order and then applies $A$ to the active arrow of that list, which is precisely the coherently specified iterated composition of $A$. For a length-zero path this is its nullary identity-object map. The mapping-space equivalences of [lem-coef-operadic-free-extension] identify this cocone map with the adjunct, not merely a homotopy-category representative. The naturality and substitution compatibility in the active-slice lemma apply to the whole functor infinity-category of graphs, so these formulas are coherent natural transformations for graph maps and all their higher homotopies, as required.",
+   "uses": [
+    "lem-coef-free-operadic-active-slice-formula",
+    "lem-coef-operadic-free-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1312.3178",
+    "place": "Propositions A.4.3 and A.4.9; Haugseng, Rectification, Proposition 5.2(f) for the path specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-free-operadic-active-slice-formula",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-operadic-colorwise-sifted-colimits",
+  "lem-coef-operadic-free-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2: coherent finite-coefficient adjunction before R lim; supporting free categorical-algebra calculation. Detailed split checked against Gepner-Haugseng online; source not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +167,38 @@
    "results": "{\"t\": \"2026-10-16T15:26:04Z\", \"tool\": \"grep\", \"query\": \"operadic.*left|free.*categorical.*algebra|categorical.*algebra.*free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: Monoidal/Free/Basic.lean:12-24 constructs the ordinary free monoidal category on a type, not free operadic algebras in a monoidal quasicategory. The focused global grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free categorical algebra on a graph in a presentably monoidal infinity category has hom objects given by coproducts of tensor products over paths",
+   "results": "{\"t\": \"2026-10-16T16:07:29Z\", \"tool\": \"leanfinder\", \"query\": \"Free categorical algebra on a graph in a presentably monoidal infinity category has hom objects given by coproducts of tensor products over paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Cat.free_obj\", \"CategoryTheory.FreeMonoidalCategory.Hom.tensor\", \"CategoryTheory.Cat.free\", \"CategoryTheory.Free\", \"CategoryTheory.FreeMonoidalCategory.homMk\", \"CategoryTheory.FreeMonoidalCategory.Hom\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv\", \"CategoryTheory.FreeMonoidalCategory\"], \"digest\": \"72c6dae03c9653db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Cat.free (CategoryTheory/Category/Quiv.lean:122) is an ordinary free category on a quiver, and FreeMonoidalCategory (Monoidal/Free/Basic.lean:12-24) is the ordinary free monoidal category on a type. Enriched/Basic.lean:58-70 defines strict ordinary enrichment. Monad and IsSifted hits concern ordinary categories. None gives the stated operadic infinity-category graph adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"free\"",
+   "results": "{\"t\": \"2026-10-16T16:07:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Cat.free (CategoryTheory/Category/Quiv.lean:122) is an ordinary free category on a quiver, and FreeMonoidalCategory (Monoidal/Free/Basic.lean:12-24) is the ordinary free monoidal category on a type. Enriched/Basic.lean:58-70 defines strict ordinary enrichment. Monad and IsSifted hits concern ordinary categories. None gives the stated operadic infinity-category graph adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic.*left|free.*categorical.*algebra|categorical.*algebra.*free",
+   "results": "{\"t\": \"2026-10-16T16:07:29Z\", \"tool\": \"grep\", \"query\": \"operadic.*left|free.*categorical.*algebra|categorical.*algebra.*free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Cat.free (CategoryTheory/Category/Quiv.lean:122) is an ordinary free category on a quiver, and FreeMonoidalCategory (Monoidal/Free/Basic.lean:12-24) is the ordinary free monoidal category on a type. Enriched/Basic.lean:58-70 defines strict ordinary enrichment. Monad and IsSifted hits concern ordinary categories. None gives the stated operadic infinity-category graph adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free operadic algebra in a monoidal infinity category and sifted colimits of enriched infinity categories",
+   "results": "{\"t\": \"2026-10-16T16:07:29Z\", \"tool\": \"leansearch\", \"query\": \"Free operadic algebra in a monoidal infinity category and sifted colimits of enriched infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.isSifted_of_hasBinaryCoproducts_and_nonempty\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.IsSifted.isSiftedOrEmpty_of_colim_preservesFiniteProducts\", \"CategoryTheory.Monad.free_obj_A\", \"CategoryTheory.Monad.free\", \"CategoryTheory.FreeMonoidalCategory.instMonoidalCategory\"], \"digest\": \"2ea664bfb766bf87\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Cat.free (CategoryTheory/Category/Quiv.lean:122) is an ordinary free category on a quiver, and FreeMonoidalCategory (Monoidal/Free/Basic.lean:12-24) is the ordinary free monoidal category on a type. Enriched/Basic.lean:58-70 defines strict ordinary enrichment. Monad and IsSifted hits concern ordinary categories. None gives the stated operadic infinity-category graph adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-enriched-rectification",
@@ -96,5 +206,21 @@
   "group": "Q43"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-categorical-algebra-free-monad",
+  "worker": "stage1",
+  "summary": "Reused the existing general operadic presentability and free-extension nodes. Added only the missing general colorwise sifted-colimit/detection theorem and general active-slice free-algebra formula. Computed the categorical active slices as discrete paths, including zero arity, and checked units, forward tensor order, composition, adjunct maps and full infinity-categorical coherence. No statement change.",
+  "blueprint": "Realizes the graph adjunction supporting fixed-object dg/enriched rectification beneath paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent finite-level mapping-complex adjunction before R lim.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NH-1acedbc2c",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-1acedbc2c (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, both new nodes, the cited statements (def-coef-complete-algebroid, lem-coef-operadic-algebra-presentability, lem-coef-operadic-free-extension), the unit, the ancestor's paragraph 2, and possible duplicates (algebroid-presentability, fixed-object-dg-free-model, monadic-comparison, many-object-accessibility and others). No duplicate found, and neither new node restates a clause of the item. The math checks out: the relative nerve of discrete S^{n+1} is the category of lists; the generalized Segal condition holds with zero-fiber S; equivalences and sifted colimits are colorwise (a sifted K is weakly contractible, which covers arity 0); a fixed-arity active slice is the discrete set of endpoint-fixed paths, since inert endomorphisms of [n] are identities; composition is concatenation in forward order; the adjunct is the tensor of the u's followed by A(alpha). Small cases: S empty (both categories are a point), |S|=1 (tensor algebra), s!=t with n=0 (no summand), all entries initial. The DAG stays acyclic. Every citation is in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. No SGA. Item statement unchanged. Repairs (2): (1) B2/E1: lem-coef-free-operadic-active-slice-formula never said that M is a generalized nonsymmetric infinity operad, and used the free-extension adjunction for tau without stating that tau meets its hypotheses. Fixed by adding the hypothesis and a clause that M_triv is again a small generalized operad with the same zero-fiber and that tau is the identity over [0]. (2) E1: item step 2 did not check that M_triv is a generalized operad before applying the first clause of free-extension. Fixed by citing the new clause and adding the direct check (composites with the inert projections are inert iff phi is inert, so Segal restricts; inner horns fill; inert cocartesian lifts stay cocartesian). Caveat: the network is blocked here, so I could not open Gepner-Haugseng 1312.3178 or Haugseng 1312.3881; I checked their uses by my own derivation, not by the printed numbering (A.4.6/A.4.9/A.5.4/A.5.5/A.5.7). Remark for the citer lem-coef-fixed-object-enriched-rectification: the dg free model writes its words in reversed order, and the rectification must reconcile that with this item's forward convention.; 2 file(s) fixed by the reviewer"
+ }
 }
