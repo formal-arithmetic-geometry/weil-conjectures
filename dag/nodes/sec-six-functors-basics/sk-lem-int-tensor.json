@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-lem-int-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Inverse image and tensor product",
@@ -32,64 +32,43 @@
  ],
  "proof": [
   {
-   "text": "*Extension by zero and closed direct image.* For a quasi-compact open immersion $j$, $j_!$ is exact and\npreserves all limits (Stacks, Tag 09BP). For a closed immersion $i$, the complementary open immersion is\nquasi-compact since our schemes are Noetherian, and $i_*$ is exact (Stacks, Tag 09BM) and preserves limits\n(Stacks, Tag 09AA). Both therefore preserve derived completeness, and being exact they commute with\nreduction modulo $\\pi_E^n$, where they preserve constructibility with torsion coefficients. Hence they\npreserve $\\Dbc(-,\\mathcal O_E)$. Combining this with open–closed localization along a stratification, every\n$K\\in\\Dbc(X,\\mathcal O_E)$ is built by finitely many extensions from objects $a_!M$, where\n$a\\colon S\\hookrightarrow X$ is the inclusion of a stratum and $M$ is pro-étale locally the completion of a\nbounded complex of finite free $\\mathcal O_E$-modules ([sk-lem-int-integral-heart];\n[det-sfb-dc-restricted-functors-closed-image], [lem-sfb-dc-open-lower-shriek-preserves]).",
+   "text": "The extension-by-zero and closed-direct-image assertions, including preservation of derived completeness and constructibility, and the finite open–closed dévissage into locally closed stratum models, are exactly the two conclusions of the existing extension/direct-image lemma.",
    "uses": [
-    "sk-lem-int-integral-heart",
-    "det-sfb-dc-restricted-functors-closed-image",
-    "lem-sfb-dc-open-lower-shriek-preserves"
+    "det-lem-int-tensor-shriek"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+    "place": "statement, parts (1) and (2)"
+   }
   },
   {
-   "text": "*Inverse image.* For such a local model $M$, the inverse image is the same complex of finite free\n$\\mathcal O_E$-modules, completed over the coefficient ring of the new scheme. It is derived complete and its\nreduction is constructible. Since inverse image commutes with $a_!$ (base change for open extension and for\nclosed direct image), the conclusion passes to $a_!M$ and then, through the finitely many localization\ntriangles, to all of $\\Dbc(-,\\mathcal O_E)$. The comparison map to the completed inverse image is an\nisomorphism on the local models, hence on all objects by the same triangles\n([lem-sfb-dc-upper-star-preserves], [det-sfb-dc-restricted-functors-completed-pullback]).",
+   "text": "Apply the existing integral inverse-image lemma to obtain preservation of $\\Dbc$ and the comparison isomorphism with the completed Stacks inverse image after restriction of scalars.",
    "uses": [
-    "lem-sfb-dc-upper-star-preserves",
-    "det-sfb-dc-restricted-functors-completed-pullback"
+    "det-lem-int-tensor-pullback"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
+    "place": "statement, parts (1) and (2)"
+   }
   },
   {
-   "text": "*Tensor product.* For a locally closed immersion $a$,\n\n$$\n(a_!M)\\otimes^{\\mathbf L}L\\simeq a_!(M\\otimes^{\\mathbf L}a^*L);\n$$\n\nthis holds for an open immersion and for a closed immersion, first termwise and then on K-flat\nresolutions, and a locally closed immersion is a composite of the two. It therefore suffices to show that\n$M\\otimes^{\\mathbf L}a^*L\\in\\Dbc(S,\\mathcal O_E)$. The local models of $M$ provide a derived dual and evaluation\nand coevaluation maps locally; these descend, and the triangle identities can be checked locally. Thus $M$\nis dualizable, and $M\\otimes^{\\mathbf L}-$, having adjoints on both sides, preserves products and derived\ninverse limits. Since $a^*L$ is derived complete, so is $M\\otimes^{\\mathbf L}a^*L$. Its reduction modulo\n$\\pi_E$ is the tensor product of the reductions, which is constructible. By the first paragraph, $a_!$\npreserves these properties, and finitely many triangles in the first variable give the claim for all $K$\nand $L$ ([lem-sfb-dc-tensor-preserves]).",
+   "text": "Apply the first paragraph of the existing integral tensor-product lemma: for any $K,L\\in\\Dbc(X,\\mathcal O_E)$, their uncompleted derived tensor product lies in $\\Dbc(X,\\mathcal O_E)$. Its moreover clause also states that a stratum local model is dualizable and that tensoring with it preserves products, derived inverse limits and derived complete objects, which supplies the local-model preservation used in the finite dévissage.",
    "uses": [
-    "lem-sfb-dc-tensor-preserves"
+    "det-lem-int-tensor-product"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Restricted functors.* Since these functors preserve bounded constructible complexes, they restrict to the\nfull subcategories $D_{\\mathrm{cons}}$ (together with $Rf_*$ and the internal Hom for the $\\ell$-adic rings, by\nDeligne's finiteness theorems), and the ambient adjunctions and composition isomorphisms restrict along\nthe fully faithful inclusions: [def-sfb-dc-upper-star], [def-sfb-dc-lower-star], [def-sfb-dc-open-lower-shriek],\n[def-sfb-dc-tensor], [def-sfb-dc-hom], [def-sfb-dc-upper-lower-adjunction],\n[def-sfb-dc-open-lower-shriek-adjunction], [def-sfb-dc-tensor-hom-adjunction], [def-sfb-dc-upper-star-comp],\nwith preservation statements [lem-sfb-dc-hom-preserves].",
-   "uses": [
-    "def-sfb-dc-upper-star",
-    "def-sfb-dc-lower-star",
-    "def-sfb-dc-open-lower-shriek",
-    "def-sfb-dc-tensor",
-    "def-sfb-dc-hom",
-    "def-sfb-dc-upper-lower-adjunction",
-    "def-sfb-dc-open-lower-shriek-adjunction",
-    "def-sfb-dc-tensor-hom-adjunction",
-    "def-sfb-dc-upper-star-comp",
-    "lem-sfb-dc-hom-preserves"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
+    "place": "statement, first paragraph and moreover clause"
+   }
   }
  ],
  "proof_deps": [
-  "sk-lem-int-integral-heart",
-  "det-sfb-dc-restricted-functors-closed-image",
-  "lem-sfb-dc-open-lower-shriek-preserves",
-  "lem-sfb-dc-upper-star-preserves",
-  "det-sfb-dc-restricted-functors-completed-pullback",
-  "lem-sfb-dc-tensor-preserves",
-  "def-sfb-dc-upper-star",
-  "def-sfb-dc-lower-star",
-  "def-sfb-dc-open-lower-shriek",
-  "def-sfb-dc-tensor",
-  "def-sfb-dc-hom",
-  "def-sfb-dc-upper-lower-adjunction",
-  "def-sfb-dc-open-lower-shriek-adjunction",
-  "def-sfb-dc-tensor-hom-adjunction",
-  "def-sfb-dc-upper-star-comp",
-  "lem-sfb-dc-hom-preserves",
-  "sk-thm-sfb-qlbar-two-colimit"
+  "det-lem-int-tensor-shriek",
+  "det-lem-int-tensor-pullback",
+  "det-lem-int-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
@@ -98,7 +77,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -125,5 +104,21 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-tensor"
+ "unit": "sk-lem-int-tensor",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-int-tensor",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against the current main-20261015 blueprint. No finished Lean declaration exists. Replaced the imported four-paragraph proof, whose final paragraph concerned restricted functors outside this item, by three complete steps citing the existing extension/direct-image, inverse-image, and tensor-product lemmas. No new nodes were needed.",
+  "blueprint": "Realizes the three substantive proof clauses in the section node: extension by zero and closed direct image with stratification dévissage; inverse image and completed inverse-image comparison; and tensor-product closure via local-model dualizability.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-47bd9ff5a",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-47bd9ff5a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, blueprint source and proof, all three cited DAG nodes and their source proofs, plus Stacks Tags 09AA, 09BM, and 09BP. The three steps correctly cite existing stronger lemmas; hypotheses, O_E coefficient category, completion comparison, uncompleted tensor, and open/closed preservation match. Edge cases and duplicate-node search pass. Review written to review.md."
+ }
 }

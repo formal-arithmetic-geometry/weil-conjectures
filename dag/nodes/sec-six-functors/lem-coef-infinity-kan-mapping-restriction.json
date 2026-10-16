@@ -26,9 +26,106 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R$ for the restriction map in the statement. For a lifting problem $\\partial\\Delta^n\\to\\operatorname{Map}(F,G)$ over $\\Delta^n\\to\\operatorname{Map}(F|_{\\mathcal A},G|_{\\mathcal A})$, put $m=n+1\\geq1$. The right-pinched definition [def-cbc-enhanced-diagrams-cones] turns its upper boundary into a map $\\mathcal C\\times\\partial\\Delta^m\\to\\mathcal E$: the faces opposite vertices $0,\\ldots,n$ are the prescribed mapping-space faces, and the face opposite $m$ is the entire constant $F$ face. Their intersections agree by the boundary identities. Its last vertex is $G$. The lower simplex gives $\\mathcal A\\times\\Delta^m\\to\\mathcal E$ agreeing on that boundary. For $n=0$ this says precisely that the two vertices of $\\partial\\Delta^1$ are $F,G$; no mapping-space boundary is prescribed. By currying, denote these compatible maps by $s:\\mathcal C\\to\\operatorname{Fun}(\\partial\\Delta^m,\\mathcal E)$ and $h:\\mathcal A\\to\\operatorname{Fun}(\\Delta^m,\\mathcal E)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "Boundary-lifting reformulation in the proof of Proposition 7.3.6.7; explicit right-pinched face calculation"
+   }
+  },
+  {
+   "text": "Assume first the colimit hypothesis on $F$. Apply the structural assertion of [lem-coef-infinity-parameter-cone-extension] with $B=\\Delta^m$ and $P=\\partial\\Delta^m$. It supplies quasicategories $\\mathcal D=\\operatorname{Fun}(\\Delta^m,\\mathcal E)$ and $\\mathcal B=\\operatorname{Fun}(\\partial\\Delta^m,\\mathcal E)$ and an isofibration $r:\\mathcal D\\to\\mathcal B$. We have $rh=s|_{\\mathcal A}$ exactly. The subset $P$ contains every vertex because $m\\geq1$.",
+   "uses": [
+    "lem-coef-infinity-parameter-cone-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3, applied to the parameter boundary inclusion"
+   }
+  },
+  {
+   "text": "For each $c$, set $K=\\mathcal A_{/c}$. The diagram $h$ gives the map on $\\Delta^m\\times K$, and $s$ applied to the specified canonical cocone gives the map on $\\partial\\Delta^m\\times K^{\\triangleright}$. These agree on $\\partial\\Delta^m\\times K$, since $rh=s|_{\\mathcal A}$. A simplex of $\\Delta^m$ outside its boundary is a surjective monotone map onto $[m]$; therefore its initial vertex is $0$, including for degenerate simplices. The cocone at parameter vertex $0$ is exactly $F$ applied to the canonical cocone on $\\mathcal A_{/c}$, hence is colimiting by the item hypothesis. Apply [lem-coef-infinity-parameter-cone-extension] to obtain a lift $q_c:K^{\\triangleright}\\to\\mathcal D$ over this boundary cone and extending $h|_K$. Its universality clause states that $q_c$ is an $r$-colimit diagram, in the sense of [def-coef-infinity-relative-cone]. The lemma applies also when $K$ is empty.",
+   "uses": [
+    "lem-coef-infinity-parameter-cone-extension",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06A5",
+    "place": "Proposition 7.1.8.7 at a point and Corollary 7.1.8.11: missing simplices have initial vertex 0"
+   }
+  },
+  {
+   "text": "The inclusion $\\mathcal A\\subseteq\\mathcal C$ is full by hypothesis, $r$ is the isofibration from step 2, and step 3 supplies the required local $r$-colimit lifts of $s$ at every object. Apply [lem-coef-infinity-relative-kan-existence] with $p=r$, the exact boundary diagram $s$ and the prescribed $h$. The resulting $H:\\mathcal C\\to\\mathcal D$ restricts exactly to $h$ and has $rH=s$. Uncurrying gives the missing $\\mathcal C\\times\\Delta^m$ diagram while keeping every boundary face. Its initial face remains constant at $F$ and its final vertex remains $G$. It is therefore a filler for the original right-pinched mapping-space simplex, with its prescribed restriction to $\\mathcal A$.",
+   "uses": [
+    "lem-coef-infinity-relative-kan-existence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5 applied to restriction from the parameter simplex to its boundary"
+   }
+  },
+  {
+   "text": "Under the alternative limit hypothesis on $G$, use the same $m,s,h,r$ as above, but put $K=\\mathcal A_{c/}$. Combine $\\Delta^m\\times K\\to\\mathcal E$ from $h$ with $\\partial\\Delta^m\\times K^{\\triangleleft}\\to\\mathcal E$ obtained by applying $s$ to the canonical cone. Every parameter simplex outside the boundary ends at $m$. Its specified cone at that vertex is exactly the assumed limit cone of $G$ on $\\mathcal A_{c/}$. The limit assertion of [lem-coef-infinity-parameter-cone-extension] gives an $r$-limit lift at each $c$. Apply the right-hand assertion of [lem-coef-infinity-relative-kan-existence] to obtain the exact global lift $H$. Uncurrying $H$ gives a map $\\mathcal C\\times\\Delta^m\\to\\mathcal E$. The equation $rH=s$ fixes its face opposite $m$ to be the entire constant $F$ face and fixes its last vertex to be $G$; it also fixes every other boundary face to the prescribed mapping-space boundary. The equation $H|_{\\mathcal A}=h$ fixes its restriction to $\\mathcal A$ to the specified lower simplex. These are precisely the defining conditions for a filler in the right-pinched mapping space.",
+   "uses": [
+    "lem-coef-infinity-parameter-cone-extension",
+    "lem-coef-infinity-relative-kan-existence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030F",
+    "place": "Right-hand dual of the boundary lifting proof, using final parameter vertex and local limits"
+   }
+  },
+  {
+   "text": "Steps 1-5 solve every boundary lifting problem for $R$ for $n\\geq0$, with $n=0$ giving surjectivity on vertices. Thus $R$ is a trivial Kan fibration by [def-weil-pbc-trivial-kan-fibration]. Apply [lem-weil-pbc-trivial-kan-homotopy-equivalence]: its section is an inverse to $R$, one composite is the identity and the other is simplicially homotopic to the identity. The mapping objects are Kan complexes by the Kan assertion of [lem-coef-infinity-pinch-comparison], applied to $\\operatorname{Fun}(\\mathcal C,\\mathcal E)$ and $\\operatorname{Fun}(\\mathcal A,\\mathcal E)$; these are quasicategories by the structural assertion of [lem-coef-infinity-parameter-cone-extension]. Hence this actual restriction map is an equivalence of spaces, as required.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-parameter-cone-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/030M",
+    "place": "Corollary 7.3.6.9, equivalence consequence; Stacks trivial Kan definition and its explicit homotopy-inverse lemma"
+   }
+  },
+  {
+   "text": "The comparison proved invertible is $R$ itself. In every simplicial degree restriction takes a map $\\mathcal C\\times\\Delta^d\\to\\mathcal E$ to its composite with $\\mathcal A\\times\\Delta^d\\hookrightarrow\\mathcal C\\times\\Delta^d$. For every monotone $\\alpha:[e]\\to[d]$, restriction before or after $\\mathrm{id}\\times\\Delta(\\alpha)$ gives the same composite. The same equality holds with every additional simplex parameter describing coherent transformations. Thus all faces, degeneracies and higher simplices expressing precomposition or postcomposition restrict to the corresponding ones over $\\mathcal A$. This verifies the stated coherent naturality directly from [def-cbc-enhanced-diagrams-cones]; no choice of the fillers or of a natural homotopy inverse enters the comparison.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/030M",
+    "place": "Naturality of the restriction comparison, checked degreewise in the internal functor simplicial sets"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-parameter-cone-extension",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-relative-kan-existence",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/030F",
+  "place": "Expanded absolute boundary-lifting argument underlying Proposition 7.3.6.7 and Corollary 7.3.6.9. Sources read online, not archived under literature/; right-hand case written with terminal parameter vertices to retain the fixed mapping model."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +182,45 @@
    "results": "{\"t\": \"2026-10-16T14:54:30Z\", \"tool\": \"grep\", \"query\": \"colimit|adjunction|representab|KanExtension\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: the actual directory-wide read-only search returned zero hits. StrictBicategory.lean was separately read; its bicategory structures do not state any of the three claimed results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction between mapping spaces of diagrams in a quasicategory is a homotopy equivalence when the source is pointwise left Kan extended or target right Kan extended",
+   "results": "{\"t\": \"2026-10-16T15:29:52Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction between mapping spaces of diagrams in a quasicategory is a homotopy equivalence when the source is pointwise left Kan extended or target right Kan extended\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.Truncated.nerve₂Adj\"], \"digest\": \"cc6737de76d3ee02\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits. Ordinary CategoryTheory functor colimits and Kan extensions use ordinary hom sets; simplicial-set colimits construct simplicial sets, not relative colimits inside arbitrary quasicategories. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63, Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-24, HornColimits.lean:25-65, and CategoryTheory/Limits/FunctorCategory/Basic.lean:28-65. No returned declaration states this coherent relative assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"Kan\"",
+   "results": "{\"t\": \"2026-10-16T15:29:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"Kan\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"0b562f163c10e67e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits. Ordinary CategoryTheory functor colimits and Kan extensions use ordinary hom sets; simplicial-set colimits construct simplicial sets, not relative colimits inside arbitrary quasicategories. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63, Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-24, HornColimits.lean:25-65, and CategoryTheory/Limits/FunctorCategory/Basic.lean:28-65. No returned declaration states this coherent relative assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "KanExtension|kan.extension|mapping.space",
+   "results": "{\"t\": \"2026-10-16T15:29:52Z\", \"tool\": \"grep\", \"query\": \"KanExtension|kan.extension|mapping.space\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits. Ordinary CategoryTheory functor colimits and Kan extensions use ordinary hom sets; simplicial-set colimits construct simplicial sets, not relative colimits inside arbitrary quasicategories. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63, Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-24, HornColimits.lean:25-65, and CategoryTheory/Limits/FunctorCategory/Basic.lean:28-65. No returned declaration states this coherent relative assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise left Kan extension of infinity category diagrams universal property equivalence of mapping spaces",
+   "results": "{\"t\": \"2026-10-16T15:29:53Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise left Kan extension of infinity category diagrams universal property equivalence of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsUniversal\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension.isUniversal\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.instSubsingletonIsPointwiseLeftKanExtensionAt\"], \"digest\": \"fbc4e5d49f846422\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits. Ordinary CategoryTheory functor colimits and Kan extensions use ordinary hom sets; simplicial-set colimits construct simplicial sets, not relative colimits inside arbitrary quasicategories. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63, Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-24, HornColimits.lean:25-65, and CategoryTheory/Limits/FunctorCategory/Basic.lean:28-65. No returned declaration states this coherent relative assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between homotopy coherent diagrams is determined up to contractible choice by restriction of a pointwise Kan extended diagram",
+   "results": "{\"t\": \"2026-10-16T15:33:00Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between homotopy coherent diagrams is determined up to contractible choice by restriction of a pointwise Kan extended diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtensionAt.hom_ext'\", \"CategoryTheory.Functor.hom_ext_of_isRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.hom_ext\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.homTo\", \"CategoryTheory.Functor.leftKanExtensionUnique_hom\", \"CategoryTheory.Functor.hom_ext_of_isLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.hom_ext'\"], \"digest\": \"0bb3aea309faccff\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected hits. Ordinary CategoryTheory functor colimits and Kan extensions use ordinary hom sets; simplicial-set colimits construct simplicial sets, not relative colimits inside arbitrary quasicategories. Read Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean:38-63, Basic.lean:199-207, AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-24, HornColimits.lean:25-65, and CategoryTheory/Limits/FunctorCategory/Basic.lean:28-65. No returned declaration states this coherent relative assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-finite-poset-kan-extension",
@@ -96,5 +228,34 @@
   "group": "Q33"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-kan-mapping-restriction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved boundary lifting in every right-pinched mapping-space degree, using local relative cone extensions and relative Kan existence; handled the limit case in the same model, and checked coherent naturality. Created one relative-cone definition and two genuine extension tools, all statement-only and searched. No project attachment or Mathlib match. Source item was read from the live DAG mirror because the shared checkout predates it.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction, via the stable enhancement and finite pushout grid of lem-coef-suspension-square-comparison; local cone filling in the mapping-space universal property of pointwise Kan diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial homotopy-inverse theorem turns the explicitly established boundary lifting property into an equivalence; the unit has no such simplicial tool."
+   },
+   {
+    "node": "lem-coef-infinity-pinch-comparison",
+    "why": "Only its Kan assertion is used for right-pinched mapping objects of the two functor quasicategories; this is a generic enhancement tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-92ff66fa4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-92ff66fa4 (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited node statements, Kerodon sources, unit/chapter route, and delivery report. Verified hypotheses, boundary cases, relative cone equations, right-pinched mapping model, duplicate searches, and declared tool uses. Wrote review.md with detailed checks; no repairs required."
+ }
 }

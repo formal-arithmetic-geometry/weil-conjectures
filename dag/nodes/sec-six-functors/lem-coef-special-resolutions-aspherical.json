@@ -28,60 +28,216 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-grothendieck-aspherical-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a trivial fibration $q:v\\to x$. Define $K_m=\\{h:P^m\\to v\\mid qh=p^m\\}$ and, for $\\alpha:[k]\\to[m]$, define $K(\\alpha)(h)=hP(\\alpha)$. This lies over $x$ because $p^mP(\\alpha)=p^k$. The functor identities follow by composition, so $K:\\Delta^{\\mathrm{op}}\\to\\mathrm{Sets}$ is a simplicial set. The augmentation also gives the stated functor $a:\\Delta\\to A_x$, since each $p^m$ is a trivial fibration and $P(\\alpha)$ is over $x$. All these sets and categories lie in the enlarged universe stipulated in the statement.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6, cosimplicial clause; explicit auxiliary simplicial set supplied by the agent"
+   }
+  },
+  {
+   "text": "For $n\\geq0$, a map $\\partial\\Delta^n\\to K$ is the same as a compatible family $h_\\alpha:P^k\\to v$ over $x$, indexed by proper injections $\\alpha:[k]\\hookrightarrow[n]$. Indeed, a non-surjective order-preserving map $\\theta:[r]\\to[n]$ has a unique factorization $\\theta=\\alpha\\sigma$ with $\\sigma$ surjective and $\\alpha$ a proper injection. A boundary map gives $h_\\alpha$ by evaluating at the simplex $\\alpha$; conversely the family gives its value at $\\theta$ as $h_\\alpha P(\\sigma)$. Compatibility for inclusions of proper faces and functoriality of $P$ give naturality under every order-preserving map. For instance, after precomposing $\\theta$ with $\\beta$, factor $\\sigma\\beta=\\gamma\\tau$ with $\\gamma$ injective and $\\tau$ surjective; compatibility identifies $h_{\\alpha\\gamma}P(\\tau)$ with $h_\\alpha P(\\sigma\\beta)$. By the defining colimit for the latching object, these compatible families are exactly maps $\\ell:L_nP\\to v$ with $q\\ell$ equal to the augmentation on $L_nP$. For $n=0$ both the boundary and its latching diagram are empty. Likewise a map $\\Delta^n\\to K$ is specified by its value $h\\in K_n$ on $1_{[n]}$, with value $hP(\\theta)$ on $\\theta$; thus extending the boundary map means extending $\\ell$ to $P^n$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6, cosimplicial clause; agent-written identification of the boundary lifting problem with the latching square"
+   }
+  },
+  {
+   "text": "Let $j_n:L_nP\\to P^n$ be the latching map. Reedy cofibrancy says exactly that $j_n$ is a cofibration: apply the relative latching formula to the map from the initial diagram to $P$. The square with top $\\ell:L_nP\\to v$, bottom $p^n:P^n\\to x$, left $j_n$ and right $q$ commutes by Step 2. The weak factorization system $(C,F\\cap W)$ supplies a lift $h:P^n\\to v$, since $q$ is a trivial fibration. It satisfies $hj_n=\\ell$ and $qh=p^n$, and hence gives the required extension $\\Delta^n\\to K$. This also works for $n=0$, using the cofibration from the initial object to $P^0$; in particular $K_0$ is nonempty.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6, cosimplicial clause; agent-written latching lifting argument"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 prove the right lifting property of $K\\to\\Delta^0$ against every $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, including $n=0$. By the boundary characterization in the Kan--Quillen model-structure statement, $K\\to\\Delta^0$ is a trivial fibration, and therefore is a weak homotopy equivalence. Thus $K$ is weakly contractible. No fibrancy of $v$ or $x$ was needed: it is $q$, not the map from $v$ to a terminal object, that supplies the lifts.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6, cosimplicial clause; boundary characterization supplied by lem-coef-kan-quillen-right-proper"
+   }
+  },
+  {
+   "text": "Put $F([m])=\\operatorname{disc}K_m$, the category with objects $K_m$ and identity arrows only; the operators of $K$ make $F:\\Delta^{\\mathrm{op}}\\to\\mathrm{Cat}$ a functor. Expand the definition of $\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}F$. An arrow $(m,h)\\to(m',h')$ consists of $\\alpha:[m]\\to[m']$ in $\\Delta$ and an arrow $h\\to K(\\alpha)(h')$ in the discrete category on $K_m$; the latter is precisely the equality $h=h'P(\\alpha)$. These are exactly the objects and commuting-triangle arrows of $(a\\downarrow q)$. Identities and composition agree because both use composition of $\\alpha$ and the same equality. Consequently $\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}F\\cong(a\\downarrow q)$.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6, cosimplicial clause; Definition 1.5; explicit identification of the comma category"
+   }
+  },
+  {
+   "text": "The nerve of a discrete category is the constant simplicial set on its objects: a string of composable arrows is a string of identities at a single object. Hence $Z=NF:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$ is the bisimplicial set with $Z_{m,r}=K_m$ and identity operators in the second variable, and $\\operatorname{diag}Z=K$. Apply the Bousfield--Kan diagonal comparison and the Thomason comparison for $\\operatorname{Gr}$ to this same $Z$. They give actual weak homotopy equivalences\n$$K\\ \\xleftarrow{\\simeq}\\ \\mathrm{KB}_{\\Delta^{\\mathrm{op}}}(NF)\\ \\xrightarrow{\\simeq}\\ N\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}F=N(a\\downarrow q).$$\nThe indexing category $\\Delta^{\\mathrm{op}}$ and all the discrete fibers are small in the chosen universe, as required by both cited statements.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Lemma 1.4 and Theorem 1.6, applied to the discrete diagram of simplices; agent proof of Proposition 3.6"
+   }
+  },
+  {
+   "text": "Write $H=\\mathrm{KB}_{\\Delta^{\\mathrm{op}}}(NF)$. The composite $H\\to K\\to\\Delta^0$ is a weak equivalence, because both maps are; it is also the composite $H\\to N(a\\downarrow q)\\to\\Delta^0$, since the maps to a terminal simplicial set are unique. Two-out-of-three now makes $N(a\\downarrow q)\\to\\Delta^0$ a weak equivalence. The definition of right asphericity therefore applies to $a$, since $q:v\\to x$ was arbitrary. This proves the entire cosimplicial assertion.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-grothendieck-aspherical-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 1.7 and Proposition 3.6, cosimplicial clause; two-out-of-three written explicitly"
+   }
+  },
+  {
+   "text": "For the simplicial assertion work in $\\mathcal M^{\\mathrm{op}}$, with cofibrations the opposites of fibrations, fibrations the opposites of cofibrations, and the same weak equivalences. Reversing each lifting square and each functorial factorization verifies the model axioms. The diagram $P'=Q^{\\mathrm{op}}:\\Delta\\to\\mathcal M^{\\mathrm{op}}$ is Reedy cofibrant: its latching maps are the opposites of the matching maps $Q_n\\to M_nQ$, which are fibrations by Reedy fibrancy. The coaugmentation gives $P'\\to\\operatorname{const}y$ with components $i_n^{\\mathrm{op}}$, trivial fibrations in this opposite model category. The category of trivial fibrations over $y$ there is $B_y^{\\mathrm{op}}$, including its arrows. Thus Steps 1--7, applied in $\\mathcal M^{\\mathrm{op}}$, say that $b^{\\mathrm{op}}:\\Delta\\to B_y^{\\mathrm{op}}$ is right aspherical. The opposite-functor equivalence in the asphericity statement makes $b:\\Delta^{\\mathrm{op}}\\to B_y$ left aspherical. Its comma category $(w\\downarrow b)$ has exactly the objects $([n],w\\to Q_n\\text{ under }y)$ and the arrows specified in the item. This argument assumes no cofibrancy of $x$ or $y$ and no fibrancy of either.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-grothendieck-aspherical-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Remark 1.8 and Proposition 3.6, simplicial clause; explicit opposite-model argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-thomason-grothendieck-comparison",
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-grothendieck-aspherical-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Technical special-resolution input to the second proof paragraph; explicit proof of Low Proposition 3.6 supplied by the agent from the cited Reedy, Kan--Quillen, Bousfield--Kan and Thomason statements (Low is not locally obtained)."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "A Reedy cofibrant cosimplicial resolution augmented by trivial fibrations is homotopy coinitial in the category of trivial fibrations over its augmentation object",
-   "results": "[leanfinder] OK 8 hit(s); top hits: HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution_map, HomotopicalAlgebra.CofibrantObject, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution, HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj",
+   "tool": "grep",
+   "query": "aspherical|cosimplicial.*resolution|simplicial.*resolution",
+   "results": "0 hit(s); top: none; subdirectory Mathlib/AlgebraicTopology",
    "date": "2026-10-16",
-   "verdict": "no match: the cofibrant replacement and resolution-map results are about individual replacements and homotopy classes, not contractibility of every comma category for a whole cosimplicial or simplicial resolution."
+   "verdict": "no match: no hits for the resolution/asphericity pattern in AlgebraicTopology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Reedy cofibrant cosimplicial object over x is homotopy initial among trivial fibrations over x: the nerve of each comma category is contractible",
+   "results": "8 hit(s); top: HomotopicalAlgebra.CofibrantObject, HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.isCofibrant_iff, HomotopicalAlgebra.isCofibrant_iff_of_isInitial, HomotopicalAlgebra.cofibrantObjects, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects, HomotopicalAlgebra.CofibrantObject.mk_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match: hits are cofibrant-object definitions, not a theorem on comma-category nerves of cosimplicial resolutions."
   },
   {
    "tool": "loogle",
    "query": "\"CosimplicialObject\", \"TrivialFibration\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "results": "0 hit(s); top: none",
    "date": "2026-10-16",
-   "verdict": "no match: the cofibrant replacement and resolution-map results are about individual replacements and homotopy classes, not contractibility of every comma category for a whole cosimplicial or simplicial resolution."
-  },
-  {
-   "tool": "grep",
-   "query": "aspherical|cosimplicial.*resolution|simplicial.*resolution",
-   "results": "[grep] OK 0 hit(s); Mathlib subdirectory: AlgebraicTopology",
-   "date": "2026-10-16",
-   "verdict": "no match: the cofibrant replacement and resolution-map results are about individual replacements and homotopy classes, not contractibility of every comma category for a whole cosimplicial or simplicial resolution."
+   "verdict": "no match: no hits for the cosimplicial/trivial-fibration pattern."
   },
   {
    "tool": "leansearch",
-   "query": "A Reedy fibrant simplicial resolution coaugmented by trivial cofibrations is homotopy cofinal in the category of trivial cofibrations under the object",
-   "results": "[leansearch] OK 8 hit(s); top hits: HomotopicalAlgebra.trivialCofibrations_sub_cofibrations, HomotopicalAlgebra.trivialCofibrations, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.FibrantObject, HomotopicalAlgebra.CofibrantObject.HoCat.resolution, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap, HomotopicalAlgebra.trivialCofibrations_eq_unop, HomotopicalAlgebra.trivialFibrations_sub_fibrations",
+   "query": "A special cosimplicial resolution is homotopy coinitial in the category of trivial fibrations over its augmentation object",
+   "results": "8 hit(s); top: CategoryTheory.CosimplicialObject.augment, CategoryTheory.CosimplicialObject.Augmented, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution, HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.CofibrantObject.HoCat.resolution",
    "date": "2026-10-16",
-   "verdict": "no match: the cofibrant replacement and resolution-map results are about individual replacements and homotopy classes, not contractibility of every comma category for a whole cosimplicial or simplicial resolution."
+   "verdict": "no match: augmented-object definitions and individual cofibrant replacements do not state special-resolution asphericity."
   },
   {
    "tool": "leanfinder",
-   "query": "The category of simplices of the mapping simplicial set from a cosimplicial frame to a trivial fibration has contractible nerve",
-   "results": "[leanfinder] OK 8 hit(s); top: CategoryTheory.Nerve.isStrictSegal, CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, CategoryTheory.Nerve.quasicategory, CategoryTheory.Nerve.strictSegal, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, SSet.stdSimplex.isoNerve, CategoryTheory.Nerve.nerveFunctor₂",
+   "query": "The category of simplices of the simplicial set of lifts from a Reedy cofibrant cosimplicial diagram to a trivial fibration has weakly contractible nerve",
+   "results": "8 hit(s); top: CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat, CategoryTheory.Nerve.quasicategory, SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.OneTruncation₂.nerveEquiv, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, CategoryTheory.Nerve.isStrictSegal, SSet.stdSimplex.isoNerve, CategoryTheory.nerveFunctor",
    "date": "2026-10-16",
-   "verdict": "no match: StrictSegal, quasicategory and the monoid Cech extra degeneracy do not state contractibility for special model-category resolutions. DerivabilityStructureCofibrant.lean:36-55 proves connectedness for categories of individual replacements, not the required asphericity."
+   "verdict": "no match: nerve coskeletality, quasicategory and Segal properties do not assert this contractibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\"",
+   "results": "12 hit(s); top: Lean.Language.instToSnapshotTreeDynamicSnapshot, Lean.Core.CoreM.parIterGreedy, Lean.Core.CoreM.parIterGreedyWithCancel, Lean.Meta.MetaM.parIterGreedy, Lean.Meta.MetaM.parIterGreedyWithCancel, Lean.Elab.Term.TermElabM.parIterGreedy, Lean.Elab.Tactic.TacticM.parIterGreedy, Lean.Elab.Term.TermElabM.parIterGreedyWithCancel",
+   "date": "2026-10-16",
+   "verdict": "no match: ReedyStructure and its fields only define the indexing structure; source Basic.lean:21-24 leaves the Reedy diagram model structure as TODO."
   },
   {
    "tool": "grep",
-   "query": "resolution|cosimplicial",
-   "results": "[grep] OK 25 hit(s); top: Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+   "query": "aspherical|cosimplicial|resolution",
+   "results": "0 hit(s); top: none; subdirectory Mathlib/AlgebraicTopology/Reedy",
    "date": "2026-10-16",
-   "verdict": "no match: StrictSegal, quasicategory and the monoid Cech extra degeneracy do not state contractibility for special model-category resolutions. DerivabilityStructureCofibrant.lean:36-55 proves connectedness for categories of individual replacements, not the required asphericity."
+   "verdict": "no match: no resolution/asphericity hits in AlgebraicTopology/Reedy."
+  },
+  {
+   "tool": "grep",
+   "query": "ReedyStructure|relativeLatching|relativeMatching",
+   "results": "5 hit(s); top: Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean, Mathlib/AlgebraicTopology/Reedy/Basic.lean; subdirectory Mathlib/AlgebraicTopology",
+   "date": "2026-10-16",
+   "verdict": "no match: Basic.lean:45 defines ReedyStructure and :64 its opposite, not the required asphericity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofibrant cosimplicial frame has contractible category of lifts over an acyclic fibration",
+   "results": "8 hit(s); top: HomotopicalAlgebra.CofibrantObject.mk_surjective, HomotopicalAlgebra.CofibrantObject.homMk_surjective, HomotopicalAlgebra.CofibrantObject, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι, HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι, HomotopicalAlgebra.CofibrantObject.mk, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern individual cofibrant objects and their full subcategory, not a cosimplicial frame or comma-category contractibility."
+  },
+  {
+   "tool": "grep",
+   "query": "aspherical|cofinal.*resolution|resolution.*cofinal|cosimplicialFrame",
+   "results": "0 hit(s); top: none",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits for asphericity, resolution cofinality or cosimplicial frames in the Mathlib source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"IsCofibrant\"",
+   "results": "0 hit(s); top: none",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits for the cosimplicial/cofibrancy pattern."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-special-resolution-zigzag-nerve",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-special-resolutions-aspherical",
+  "worker": "stage1",
+  "summary": "Proved comma-category contractibility by identifying its nerve, through the existing KB/Gr comparisons, with the simplicial set of lifts across a trivial fibration. Every boundary extends by the Reedy latching cofibration. The left-aspherical assertion follows in the opposite model category, with directions spelled out. No new node or statement change. Repeated all required Mathlib searches and found no attachment or Mathlib match.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof second paragraph (derived coefficient adjunction): the historical technical ancestry passes through special-resolution-zigzag-nerve, whose asphericity step is supplied here. This proves Low Proposition 3.6, not a new clause of the ancestor; the main-20261015 ancestor keeps the same displayed calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-358af1362",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-358af1362 (reviewer sub-agent of L); spot-checked: Read the full item, report, six cited statements, sources and unit/chapter route. All eight steps pass, including boundary lifting at n=0, KB/Thomason comparison directions and opposite-category duality. No duplicates, cycles, missing hypotheses or target changes found. No repairs needed; detailed checks are in review.md."
+ }
 }

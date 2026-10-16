@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-complete-residue-cohomology-bounds",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Supporting boundedness input for the residue-basis induction (Stacks 09C2(1),(2)).",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomological bounds for a complete complex from residue Tor amplitude",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and residue field $k=R/(\\varpi)$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a quasi-compact scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme], meaning that every open cover has a finite subcover, with its small pro-etale site [def-weil-pbc-proetale-site]. Put $B_X=\\varprojlim_{n\\geq1}(R/\\varpi^n)_X$, the inverse limit of the constant quotient ring sheaves [def-weil-pbc-constant-sheaf, def-pur-sheaf-inverse-limit]. Let $K\\in D(\\operatorname{Mod}(B_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] be derived complete for its quotient tower, meaning that the quotient maps exhibit $K$ as a derived limit of $(K\\otimes^L_{B_X}(R/\\varpi^n)_X)_{n\\geq1}$, with its canonical reduction transitions and all terms viewed in $D(\\operatorname{Mod}(B_X))$ by restriction of scalars [def-weil-derived-limit, def-pc-sheaf-restrict-scalars]. Suppose there are integers $a\\leq b$ such that $K_1=K\\otimes^L_{B_X}k_X$ [lem-pur-derived-change-of-rings] has Tor amplitude in $[a,b]$: for every site object $V\\to X$ and every sheaf $N$ of $k_V$-modules, $H^j((K_1|_V)\\otimes^L_{k_V}N)=0$ for $j\\notin[a,b]$ [def-weil-proetale-tor-amplitude, def-weil-derived-tensor, def-weil-derived-cohomology-sheaves]. Then $H^j(K)=0$ for every $j\\notin[a,b]$. No constructibility or local constancy of the residue cohomology is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of (1) and (2): these two arguments use completeness and finite residue Tor amplitude, not constructibility; Tag 099Q, proposition-enough-weakly-contractibles, and sites-cohomology.tex Tag 0947, proposition-enough-weakly-contractibles. Transfer from constant to completed coefficients by algebraization.tex Tag 099I, lemma-restriction-derived-complete-equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-limit",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex on the proetale site with finite Tor amplitude residue reduction has bounded cohomology in the same interval",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"complete\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|tor.?amplitude|complete.*cohomology",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completeness and finite Tor dimension modulo an ideal imply bounded cohomology",
+   "results": "8 hits: AdicCompletion, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, IsAdicComplete.bot, IsAdicComplete, AdicCompletion.module, IsAdicComplete.of_subsingleton, AdicCompletion.instCommRing, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a complete complex modulo an ideal has Tor amplitude from a to b then the complete complex has cohomology only from a to b",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|complete.*cohomology|cohomology.*complete",
+   "results": "0 hits:  (Mathlib/Algebra/Homology)",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic modules and t-structure bounds do not relate derived completeness to residue Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Tt][Ss]tructure|[Dd]erived.*[Aa]dic|[Aa]mplitude",
+   "results": "{\"t\": \"2026-10-16T15:38:58Z\", \"tool\": \"grep\", \"query\": \"adic.*[Tt][Ss]tructure|[Dd]erived.*[Aa]dic|[Aa]mplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Solvable.lean\", \"Mathlib/Algebra/Lie/Solvable.lean\"], \"digest\": \"7420e29c077253b8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary finite-module adic exactness, Lie algebra derived series, and generic derived functors do not bound a complete pro-etale sheaf complex from its residue Tor interval"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsLE\"",
+   "results": "{\"t\": \"2026-10-16T15:38:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"IsLE\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary finite-module adic exactness, Lie algebra derived series, and generic derived functors do not bound a complete pro-etale sheaf complex from its residue Tor interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion is t exact on complexes whose reduction modulo the maximal ideal has bounded Tor dimension",
+   "results": "{\"t\": \"2026-10-16T15:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived completion is t exact on complexes whose reduction modulo the maximal ideal has bounded Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_exact\", \"ModuleCat.localizedModule_functor_map_exact\", \"CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"HomologicalComplex.exact_of_degreewise_exact\"], \"digest\": \"3d997a7e53d61cf6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary finite-module adic exactness, Lie algebra derived series, and generic derived functors do not bound a complete pro-etale sheaf complex from its residue Tor interval"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-residue-lisse-projective-models",
+  "date": "2026-10-16",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done"
+}
