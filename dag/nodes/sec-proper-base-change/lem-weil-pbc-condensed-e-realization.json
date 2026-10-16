@@ -24,7 +24,13 @@
   "def-weil-pbc-condensed-e-module-category",
   "prop-weil-pbc-rational-transport",
   "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-cartesian-square"
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lemma-weil-pbc-completed-exchange-coherence",
+  "lem-weil-pbc-condensed-field-continuous-realization"
  ],
  "proof": [
   {
@@ -453,5 +459,46 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c5b4e33e6",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Wrote review.md. All statement clauses, dependencies, sources, canonical maps, universes, edge cases, docstrings, and report sections checked. Immutable module compiled cleanly through scompile.py (23.2s sandbox, 28.8s artifact). No delivery defects or fixes required; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedERealization",
+  "declaration": "WeilConjectures.condensedE_realization",
+  "declarations": [
+   "WeilConjectures.CondensedERealization.Base",
+   "WeilConjectures.CondensedERealization.Integral",
+   "WeilConjectures.CondensedERealization.Rational",
+   "WeilConjectures.CondensedERealization.Coefficient",
+   "WeilConjectures.CondensedERealization.Ambient",
+   "WeilConjectures.CondensedERealization.Constructible",
+   "WeilConjectures.CondensedERealization.SectionRing",
+   "WeilConjectures.CondensedERealization.fieldScalarSections",
+   "WeilConjectures.CondensedERealization.fieldModuleLinear",
+   "WeilConjectures.CondensedERealization.fieldDerivedLinear",
+   "WeilConjectures.CondensedERealization.moduleEncoding",
+   "WeilConjectures.CondensedERealization.At",
+   "WeilConjectures.CondensedERealization.Along",
+   "WeilConjectures.CondensedERealization.Along.rationalPull",
+   "WeilConjectures.CondensedERealization.Along.rationalPush",
+   "WeilConjectures.CondensedERealization.Data",
+   "WeilConjectures.CondensedERealization.Data.pullOnOverHom",
+   "WeilConjectures.CondensedERealization.Data.square",
+   "WeilConjectures.CondensedERealization.Data.mate",
+   "WeilConjectures.CondensedERealization.Exchange"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedERealization.lean",
+  "statement": "theorem condensedE_realization (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] : ∃ D : CondensedERealization.Data l E k, Nonempty (CondensedERealization.Exchange l E k D)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The realization, coefficient maps, localized operations, adjunction coherence, and specified exchange equalities are packaged in records owned by this node. All category abbreviations reuse the recorded dependencies; no new independent notion is introduced."
  }
 }
