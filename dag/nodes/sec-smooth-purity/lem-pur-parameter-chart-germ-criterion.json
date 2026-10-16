@@ -440,5 +440,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-97686c411 (reviewer sub-agent of L); spot-checked: Read the complete item, all 35 cited statements, report, route and cited source passages. All nine steps check out, including closed-fibre dimension, miracle flatness and affine shrinking. No new nodes, duplicates, cycles or target weakening found. Accepted all 19 declared generic tool uses. Detailed review written to review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9d24fb5d2",
+  "group": "NA",
+  "result": "pass",
+  "note": "Recorded review.md. Checked all statement dependencies, source passages, hypotheses, conclusions, edge cases, docstrings, and verbatim signature. Immutable module compiles cleanly through scompile.py in both contexts. No defects found; branch and clones unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ParameterChartGermCriterion",
+  "declaration": "AlgebraicGeometry.flat_quasiFinite_parameterChart_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/ParameterChartGermCriterion.lean",
+  "statement": "theorem flat_quasiFinite_parameterChart_iff {k : Type u} [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] (x : X) (hx : x ∈ closedPoints X) [IsNoetherianRing (X.presheaf.stalk x)] (hCM : (IsLocalRing.depth (R := X.presheaf.stalk x) (X.presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim (X.presheaf.stalk x)) (e : X.residueField x ≃+* k) (he : ∀ c : k, e (X.Γevaluation x ((X ↘ Spec (CommRingCat.of k)).appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c))) = c) (d : ℕ) (V : X.Opens) (hxV : x ∈ V) (s : ULift.{u} (Fin d) → Γ(X, V)) (f : V.toScheme ⟶ 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k))) (hf : f = AffineSpace.homOfVector (V.ι ≫ X ↘ Spec (CommRingCat.of k)) (fun i ↦ V.topIso.inv (s i))) (a : ULift.{u} (Fin d) → k) (ha : ∀ i, a i = e (X.evaluation V x hxV (s i))) (t : ULift.{u} (Fin d) → X.presheaf.stalk x) (ht : ∀ i, t i = X.presheaf.germ V x hxV (s i) - X.presheaf.germ ⊤ x trivial ((X ↘ Spec (CommRingCat.of k)).appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv (a i)))) (I : Ideal (X.presheaf.stalk x)) (hI : I = Ideal.span (Set.range t)) : (∀ i, t i ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ∧ ((∃ (U : X.Opens) (_hxU : x ∈ U) (hUV : U ≤ V), (X.homOfLE hUV ≫ f).IsQuasiFinite ∧ Flat (X.homOfLE hUV ≫ f)) ↔ ringKrullDim (X.presheaf.stalk x) = (d : WithBot ℕ∞) ∧ I.radical = IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ∧ ((∃ (U : X.Opens) (_hxU : x ∈ U) (hUV : U ≤ V), IsAffineOpen U ∧ (X.homOfLE hUV ≫ f).IsQuasiFinite ∧ Flat (X.homOfLE hUV ≫ f)) ↔ ringKrullDim (X.presheaf.stalk x) = (d : WithBot ℕ∞) ∧ I.radical = IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ∧ ((ringKrullDim (X.presheaf.stalk x) = (d : WithBot ℕ∞) ∧ I.radical = IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ↔ ringKrullDim (X.presheaf.stalk x) = (d : WithBot ℕ∞) ∧ Nontrivial ((X.presheaf.stalk x) ⧸ I) ∧ ringKrullDim ((X.presheaf.stalk x) ⧸ I) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
