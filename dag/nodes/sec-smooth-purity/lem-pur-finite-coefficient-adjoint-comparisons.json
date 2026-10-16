@@ -3,7 +3,7 @@
  "blueprint": {
   "is": null,
   "from": {
-   "node": null,
+   "node": "thm-pur-rational-and-qbar-purity",
    "place": "Prerequisite for thm-pur-rational-and-qbar-purity proof Steps 1–2 and sk-thm-purity-transport Steps 2–3: finite geometric adjunction and its coefficient mates. Bhatt–Scholze 6.7.16–6.7.18 (especially the quotient-coefficient square in 6.7.18); SGA4 XVIII 3.1.4 and 3.1.12.1 (adjunction and restriction of scalars). The finite-free case and coherent mate formulation are an agent-formulated strengthening via finite free sums and the enhanced geometric models, not a quotation of 3.1.12 as derived base change.",
    "via": [
     "lem-pur-condensed-exceptional-reconstruction",
@@ -33,9 +33,235 @@
   "thm-weil-pbc-site-comparison",
   "lem-sf-class-compact-support-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first on ordinary etale sites. All schemes in a compactification are finite type over k and hence Noetherian: apply finite-type-over-Noetherian to Spec(k), whose only ideals are 0 and k. The coefficient rings A_n are finite local rings by the DVR and finite-quotient statements. For E contained in F, use only the ring-theoretic sentence of lem-coef-finite-free-extension: B=S/t^nS is finite free over A=R/t^n, and (t^n)=(v^{en}). That sentence has no dependence on the geometric datum; formally instantiate its geometric hypotheses with the auxiliary field overline(F_p) and X=T=Z=Spec(overline(F_p)), f=i=id. We do not use any geometric conclusion of that finite-field lemma for our k. Thus every ring in the question is a positive DVR quotient, is finite Noetherian, and is annihilated by an ell-power invertible on every scheme here. Choose intervals with a<=b, enlarging an interval if necessary for a zero object.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-coef-finite-free-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16-18: finite torsion coefficient setup; coefficient-ring extension is the algebraic clause of the cited node."
+   }
+  },
+  {
+   "text": "For any k-map h between finite-type k-schemes, lem-kun-0f10(1), interpreted by def-kun-cd, supplies a finite c with R^q h_* M=0 for q>c for all torsion abelian sheaves. The restriction-of-scalars comparison, applied to Z/N -> A, transfers this bound to A-module sheaves; the forgetful functor is exact and detects zero objects. In particular this applies to the proper map g and to every complementary open j used below. No assumption on the absolute cohomological dimension of k is made. For bounded inputs, the bound implies Rh_* sends cohomological [a,b] into [a,b+c]: filter by the finitely many cohomology truncations, use Rh_*(M[-r])=Rh_*M[-r], and the long exact cohomology sequences of those triangles.",
+   "uses": [
+    "lem-kun-0f10",
+    "def-kun-cd",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Etale Cohomology, Tag 0F10, assertion (1); finite truncation argument."
+   }
+  },
+  {
+   "text": "Rh_* preserves ordinary bounded constructible finite-Tor complexes for these h and DVR stages A. Indeed thm-dg-finite-type-constructibility gives bounded constructibility. If K has Tor amplitude [a,b], use lem-sf-etale-flat-constructible to represent K by flat constructible terms in [a,b]. Tensoring those terms with any finite A-algebra B gives flat constructible B-module sheaves in the same degrees: on a common finite constructible stratification their fibres are finite modules, and B-flatness follows from (P tensor_A B) tensor_B N=P tensor_A N. In particular K tensor_A^L kappa is bounded constructible in [a,b]. Since kappa is a finitely presented A-module and K belongs to D^-, lem-sf-projection-finite-constant and Step 2 identify (Rh_*K) tensor_A^L kappa with Rh_*(K tensor_A^L kappa). Its cohomology vanishes outside [a,b+c]. Apply lem-exc-residue-tor-test on the target to obtain Tor amplitude [a,b+c]. The same argument with M=B in the projection lemma gives the canonical coefficient comparison T Rh_* K -> Rh_* T K as an isomorphism after restriction of B-scalars. The restriction-of-scalars comparison identifies the target with the B-linear direct image; restriction detects isomorphisms, so this is the B-linear projection isomorphism itself, for both coefficient maps in the question.",
+   "uses": [
+    "thm-dg-finite-type-constructibility",
+    "lem-sf-etale-flat-constructible",
+    "lem-sf-projection-finite-constant",
+    "lem-exc-residue-tor-test",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.17; finite Tor verification by the cited residue-field test and Tag 0F10 from Step 2."
+   }
+  },
+  {
+   "text": "For an open immersion j, exact extension by zero preserves bounded constructibility: extend a constructibility stratification on its open domain by the closed complement, on which the sheaf is zero. Its stalks are the original stalks or zero. Consequently extension by zero takes a flat constructible model to a flat constructible model of the same length, and the natural map T j_! -> j_! T is an isomorphism: use a flat model and check its termwise tensor map on stalks. Conservativity of geometric stalks proves isomorphism of this specified map. Composing with Step 3 for g proves that F_A^et=Rg_*j_! preserves D^b_ctf and that its canonical projection comparison q is invertible. This is the projection comparison built by the geometric open/proper operations, not a newly chosen isomorphism.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-sf-etale-flat-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16 and the open/proper definition of f_!."
+   }
+  },
+  {
+   "text": "The ambient etale adjoint f_A^times exists by thm-amb-etale-exceptional-adjoint. Use the unbounded compactification and composition comparisons of lem-amb-unbounded-compact-support-comparisons; every map here is separated of finite type between Noetherian schemes. For the local factors and their composites, thm-nagata-compactification gives compactifiability: the targets are quasi-compact and quasi-separated (they are separated finite-type k-schemes). Transposing its left-functor composition isomorphism by the two ambient adjunctions identifies (gf)^times with f^times g^times on the whole ordinary derived categories, with the composite unit and counit. Thus this use of composition does not presuppose that an exceptional image is bounded below. Source-open locality is precisely the canonical isomorphism of lem-amb-etale-adjoint-locality. For an open target restriction v, v_! dashv v^* and the same composition comparison give the corresponding v^* factor in the right adjoint. All these identifications use conjugate adjunctions and the mate-pasting identities, so their units and counits have fixed normalizations.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "thm-nagata-compactification",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.18, existence and localization; SGA4 XVIII 3.1.13, using the stated unbounded compact-support composition input."
+   }
+  },
+  {
+   "text": "For a closed immersion i:Z->P between finite-type k-schemes, its complementary open j is quasi-compact since P is Noetherian. Step 2 gives the uniform vanishing required by prop-exc-closed-tor. Theorem thm-dg-finite-type-constructibility, applied to j and a constructible sheaf in degree zero, gives constructibility of each R^qj_* of that sheaf. Thus every hypothesis of prop-exc-closed-tor holds, and i^times=Ri^! preserves D^b_ctf. For a projection pi:A^r_V->V, thm-amb-vector-bundle-purity identifies pi^times L with pi^*L(r)[2r] by the adjoint of the stated trace. Exact inverse image preserves constructibility and flatness; the twist is etale locally free of rank one, as is seen from its stated mu_{ell^s} description on etale covers trivializing the roots of unity. Hence this expression preserves D^b_ctf. Cover Y by finitely many affine V and each inverse image by finitely many affine U. Finite algebra generators give a closed immersion U->A^r_V factoring f|U. By Step 5 and open adjunctions, u^* f^times L identifies with i^times pi^times v^*L, where u:U->X and v:V->Y. The right side is bounded constructible finite-Tor. These properties glue across the finite open cover: take the minimum of the finitely many lower bounds and maximum of upper bounds, and glue the finite constructibility stratifications. Consequently f^times preserves D^b_ctf over the original arbitrary k.",
+   "uses": [
+    "prop-exc-closed-tor",
+    "thm-dg-finite-type-constructibility",
+    "thm-amb-vector-bundle-purity",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.18 proof: local closed/smooth factorization, here using affine-space projections; finite-Tor statement checked separately."
+   }
+  },
+  {
+   "text": "For any finite coefficient ring here, etale/pro-etale comparison identifies bounded etale constructible complexes with intrinsically constructible bounded pro-etale complexes. It also identifies their finite-Tor subcategories. In the forward direction, pull back a bounded flat constructible etale model: exactness of nu^* and the flat-term pullback assertion for ringed topoi give a bounded flat model on the pro-etale site. In the reverse direction, write K=nu^*K0 by constructible derived origin; if K has Tor amplitude [a,b], its tensor with the constant residue field has cohomology in [a,b]. Tensor-pullback compatibility identifies this with nu^*(K0 tensor_A^L kappa). Exactness and full faithfulness of nu^* on D^+ reflect this interval, so the residue-field Tor test shows that K0 has the same Tor amplitude. The etale origin is bounded, so all these uses of D^+ full faithfulness are legitimate. Apply compact-support site comparison to identify F_A nu_X^* with nu_Y^* F_A^et. It follows from Steps 4 and 6 that F_A and G_A=nu_X^* f_A^times Rnu_{Y,*} preserve the stated pro-etale category. For K=nu_X^*K0 and L=nu_Y^*L0 the Hom chain Hom(F_A K,L)=Hom(F_A^et K0,L0)=Hom(K0,f_A^times L0)=Hom(K,G_A L) gives the required adjunction. Each equality uses the specified comparison and unit, so its unit and counit are precisely the transported geometric ones. Tensor-pullback compatibility transports the specified q of Step 4 as well.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-etale-flat-constructible",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "thm-weil-pbc-site-comparison",
+    "lem-exc-residue-tor-test",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16-18 and finite constructible site comparison (Stacks Tag 09AL)."
+   }
+  },
+  {
+   "text": "We next prove invertibility of the specified mate on the ordinary etale category; Step 7 will transport it. Define b_f to be the F_B dashv f_B^times transpose of T epsilon_A composed with q^{-1}, exactly as in the question. For pi:A^r_V->V, the coefficient identification T pi^*(-)(r)[2r] = pi^*T(-)(r)[2r] is canonical. Choose one ell-power N annihilating both A and B and use the twists with that common N. By thm-amb-vector-bundle-purity, the counit under gamma_pi is PF^{-1} followed by the affine integration. By lem-pur-torsion-top-trace, this integration for either ring and bounded input L is the formula 1_L tensor_{Z/N}^L t_{pi,N}. Derived tensor association sends its scalar extension to exactly the formula 1_{T L} tensor_{Z/N}^L t_{pi,N}; naturality of the projection transposes identifies the intervening comparison with q_pi. Thus the displayed coefficient identification satisfies epsilon_B F_B(b)=T epsilon_A q_pi^{-1}. Injectivity of the adjunction transpose identifies it with b_pi, so b_pi is invertible. This verifies the normalization of the mate for nonflat quotients too; invertibility of a general mate has not been inferred from invertibility of q.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "lem-pur-torsion-top-trace",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.18 smooth factor; affine-space trace normalization and scalar-tensor trace formula of the cited nodes."
+   }
+  },
+  {
+   "text": "For a closed immersion i with open complement j, use the canonical enhanced support triangle i_*i^times L -> L -> Rj_*j^*L. Tensor it with B and compare with the B-coefficient support triangle of TL. The middle map is the identity. The right map is the canonical coefficient projection of Step 3, hence invertible; its square with the middle map commutes because the second arrow is the unit of j^* dashv Rj_* and the projection comparison is its tensor transpose. The left map is the canonical map of fibres in the enhanced stable category. Identify T i_* with i_* T: a closed immersion is proper, so Step 3 supplies its coefficient projection (indeed i_* is exact in the support triangle). The resulting left map is an isomorphism by triangle two-out-of-three. Its composite to the middle term equals T epsilon_i by construction of that fibre map. Therefore, after the comparison T i_*=i_*T, it is i_* of the specified adjunction mate b_i. The identity i^*i_*=id shows that i_* detects isomorphisms on complexes. This identity for module sheaves follows from lem-kun-04ca: the left-inverse isomorphism for abelian sheaves respects the A-action by its naturality for scalar multiplications; exactness of i_* and i^* extends it to complexes. Thus b_i is invertible. The fibre construction is essential here: an arbitrary completion of a square to a triangle would not identify the required mate.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-sf-triangle-morphism-iso",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.18 proof: i_*i^! -> id -> Rj_*j^*, with the canonical enhanced fibre map."
+   }
+  },
+  {
+   "text": "The projection comparisons for a composite of geometric maps are the composites of the projection comparisons of the factors. To verify this equality, transpose both maps under pullback/direct-image adjunctions: both become the pullback of the input tensored with B followed by the same two direct-image counits; tensor associativity and the triangle identities identify them. The same calculation for open extension uses its counit, and for a compactification refinement uses the proper/open comparison built from those same units and counits. This proves coefficient compatibility of the compactification and composition isomorphisms of lem-amb-unbounded-compact-support-comparisons. Applying mate-pasting now identifies the coefficient mate for a composite with the pasted mates of its factors and identifies its restriction on each affine U of Step 6 with the composite of b_i, b_pi, and the coefficient identity for v^*. The last identity follows directly from exact pullback commuting with coefficient tensor. Source locality identifies this restriction with u^*b_f, with the adjunctions transported as in Step 5. Steps 8 and 9 make it invertible on each U. Its cone has zero cohomology on an open cover, hence zero geometric stalks; geometric-stalk conservativity applied to the cohomology sheaves proves b_f invertible. Via Step 7 this proves invertibility of the exact b_{A,B} in the question for quotient maps. The same argument proves it for the finite-free map because Step 3, the common-annihilator trace calculation and the support triangle also apply to that map. Alternatively for the finite-free map choose an A-basis of B: both T and q identify with the same finite direct sum, and the right-adjoint mate is that finite-sum identification by counit naturality. This alternative is only a check; the defined b is basis-independent.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-adjoint-locality",
+    "lem-coef-semilinear-derived-sections",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.18 local argument; SGA4 XVIII 3.1.13 for composition, with explicit mate-pasting and coefficient transposes."
+   }
+  },
+  {
+   "text": "The counit identity is the defining equation for the transpose b, so holds as an equality of the specified maps. For the unit equation, let alpha=G_B(q_K) b_{F_A K} T_X(eta_{A,K}). Its F_B dashv G_B transpose is epsilon_{B,F_BT_XK} F_B(alpha). Counit naturality moves q_K to the outside, and the defining counit equation for b changes this expression to q_K (T_Y epsilon_{A,F_AK}) q^{-1}_{G_AF_AK} F_BT_X(eta_{A,K}). Naturality of q changes the last two factors to T_YF_A(eta_{A,K}) q_K^{-1}. The A-triangle identity now reduces the whole composite to q_K id q_K^{-1}=id. The transpose of id is eta_{B,T_XK}, proving exactly the displayed unit equation. This is elementary adjunction algebra, using no invertibility principle for mates.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Adjunction unit/counit calculation supplementing 6.7.18; mate convention as in the statement."
+   }
+  },
+  {
+   "text": "Use the simultaneous enhanced geometric models of lem-coef-semilinear-derived-sections for tensor, exact open extension, proper direct image, site inverse image, and the specified projection/adjunction transposes. Their evaluations give the operations used above; since a morphism in these models is an equivalence exactly when its component is, the q isomorphisms already proved are enhanced equivalences. The tensor associativity coherence for A->B->C, including a quotient followed by a finite-free map or the reverse mixed square, is the coherence of K-flat tensor composition; both projection composites have the same counit transpose as checked in Step 10. Identity, composition, and refinement diagrams use these specified geometric constructions and their coherence homotopies. Once the ordinary right adjoints preserve the full stable subcategories and the specified mates are invertible, apply lem-coef-cartesian-section-adjoint-mates to their coefficient towers to obtain enhanced right-adjoint realizations with those exact units/counits. A constant tower gives the individual enhanced adjunction; any coefficient arrow and any finite composable string can be padded by identities to such a tower. Naturality for coherent transformations and mate-pasting give the same enhanced coherences for b, including the mixed diagrams. Here the node is used only for finite evaluations and their specified section maps, not for an inverse-limit adjunction. It asserts precisely this enhancement under invertible mates; we have verified that hypothesis rather than assumed an enhancement of an arbitrary homotopy-category transformation.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent enhancement/coherence supplement to 6.7.18; specified enhanced models and cartesian-section adjoint-mate statement."
+   }
+  },
+  {
+   "text": "Finally Step 1 gives S/t^nS=S/v^{en} as quotient rings, independently of the unit relating t and v^e. Since e>=1, for any positive integer r there is n with en>=r. Thus the indices en form a cofinal subsystem, and all coefficient, unit and counit comparisons just proved restrict to it. This is only an assertion about finite coefficient systems; no passage to inverse limits or extension to rational or condensed coefficient categories has occurred.",
+   "uses": [
+    "lem-coef-finite-free-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite-free algebraic coefficient statement; cofinality of the positive multiples of e."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-coef-finite-free-extension",
+  "lem-kun-0f10",
+  "def-kun-cd",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sf-derived-homology-long-exact",
+  "thm-dg-finite-type-constructibility",
+  "lem-sf-etale-flat-constructible",
+  "lem-sf-projection-finite-constant",
+  "lem-exc-residue-tor-test",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-mate-pasting",
+  "prop-exc-closed-tor",
+  "thm-amb-vector-bundle-purity",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-pullback-exact",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-torsion-top-trace",
+  "lem-coef-semilinear-derived-sections",
+  "lem-exc-closed-support-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-kun-04ca",
+  "lem-coef-cartesian-section-adjoint-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Follows the closed/smooth local proof of 6.7.18, using 6.7.16-17 and existing generic nodes; supplies arbitrary-field finite-Tor, canonical counit-mate and enhanced coherence details explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -116,15 +342,201 @@
    "date": "2026-10-16",
    "verdict": "no match: second reader inspected the returned signatures; these concern discrete/solid condensed modules or underived sheaf-module adjunctions, not finite exceptional coefficient mates or adic/condensed compact-support realization",
    "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite constructible exceptional adjunction over an arbitrary field and site comparison",
+   "results": "[\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.HasSheafify.mk'\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned signatures; ordinary module-sheaf adjunctions and generic category adjunctions do not state geometric exceptional finite-coefficient comparison, Tor stability or constructible site transport.",
+   "digest": "e50f49a7d489557a"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptionalPullback|constructible.*adjunction",
+   "results": "[]",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned signatures; ordinary module-sheaf adjunctions and generic category adjunctions do not state geometric exceptional finite-coefficient comparison, Tor stability or constructible site transport.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars commutes with compact support right adjoint for torsion etale sheaves",
+   "results": "[\"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"LightCondensed.freeForgetAdjunction\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned signatures; ordinary module-sheaf adjunctions and generic category adjunctions do not state geometric exceptional finite-coefficient comparison, Tor stability or constructible site transport.",
+   "digest": "91d47388c17e1b00"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf exceptional inverse image finite coefficient base change adjunction",
+   "results": "[\"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CompHausLike.LocallyConstant.adjunction\", \"CategoryTheory.Sheaf.adjunction\"]",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected returned signatures; ordinary module-sheaf adjunctions and generic category adjunctions do not state geometric exceptional finite-coefficient comparison, Tor stability or constructible site transport.",
+   "digest": "23c642920c03a171"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-condensed-exceptional-reconstruction",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-finite-coefficient-adjoint-comparisons",
+  "worker": "stage1",
+  "summary": "Split into 13 steps with no new nodes: general-field relative cohomological dimension, residue Tor test and constant projection establish direct-image coefficient change; closed support triangles and trace-normalized affine projections prove the actual exceptional mates invertible. Transport the finite adjunction via constructible site comparison and verify unit, counit and enhanced mixed coherences. The statement is unchanged. Repaired the inherited null blueprint ancestor using the exact target ancestor.",
+  "blueprint": "thm-pur-rational-and-qbar-purity Steps 1-2 and sk-thm-purity-transport Steps 2-3, only their finite coefficient geometric adjunction prerequisite through nt-target-smooth-purity-qbar and lem-pur-condensed-exceptional-reconstruction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Steps 1: use its stated generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-coef-finite-free-extension",
+    "why": "Steps 1, 13: use its stated generic Finite free coefficient extensions and cofinal levels input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Steps 2: use its stated generic Finite cohomological dimension of finite-type morphisms input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Steps 2, 3: use its stated generic Canonical inverse- and direct-image coefficient comparisons input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Steps 3, 6: use its stated generic Bounded constructibility of every finite-type direct image input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Steps 3, 4, 7: use its stated generic Etale bounded flat constructible model input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Steps 3: use its stated generic The projection formula with a finitely presented constant coefficient input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-exc-residue-tor-test",
+    "why": "Steps 3, 7: use its stated generic Testing finite Tor amplitude at the residue field input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Steps 4: use its stated generic Extension by zero is exact (étale site) input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Steps 4: use its stated generic Geometric stalks of extension by zero along an open immersion input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Steps 4, 10: use its stated generic Conservativity of geometric stalks input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Steps 5: use its stated generic The ordinary ambient exceptional adjoint input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Steps 5: use its stated generic Nagata compactification, [stacks-project] input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Steps 5, 6, 10: use its stated generic Unbounded ordinary etale compact-support comparisons input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Steps 5, 6, 10: use its stated generic Etale localization of the ambient adjoint input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Steps 6: use its stated generic Finite Tor amplitude for closed support input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Steps 6, 8: use its stated generic Vector-bundle purity before smooth orientation input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Steps 6, 9: use its stated generic Inverse image of etale sheaves of modules over a constant ring is exact input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Steps 6, 7, 10: use its stated generic Derived tensor comparison for arbitrary ringed topoi input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Steps 7: use its stated generic Constructible derived comparison for arbitrary finite rings input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Steps 7: use its stated generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Steps 7: use its stated generic Bounded-below site comparison input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Steps 7: use its stated generic On the coefficient class the compact-support functor is computed on the étale site input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Steps 8, 9, 10, 12: use its stated generic Derived semilinear sections and coefficient-linear geometric operations input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Steps 9: use its stated generic Closed-support triangle before restriction input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Steps 9: use its stated generic Pushforward along a closed immersion input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   },
+   {
+    "node": "lem-coef-cartesian-section-adjoint-mates",
+    "why": "Steps 12: use its stated generic Adjoint mates on cartesian derived sections input, preserving all its hypotheses; the transport unit has no replacement for this finite etale/category-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-coef-finite-free-extension",
+  "lem-kun-0f10",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "thm-dg-finite-type-constructibility",
+  "lem-sf-etale-flat-constructible",
+  "lem-sf-projection-finite-constant",
+  "lem-exc-residue-tor-test",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-etale-adjoint-locality",
+  "prop-exc-closed-tor",
+  "thm-amb-vector-bundle-purity",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-pullback-exact",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-exc-closed-support-triangle",
+  "lem-kun-04ca",
+  "lem-coef-cartesian-section-adjoint-mates"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-6a02e1d08",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-6a02e1d08 (reviewer sub-agent of L); spot-checked: Reviewed the full item, unit/chapter route, cited nodes, sources, hypotheses, coefficient maps, mate normalizations, edge cases, and recorded searches. No mathematical fault or repair is required; review.md contains the detailed checks."
+ }
 }
