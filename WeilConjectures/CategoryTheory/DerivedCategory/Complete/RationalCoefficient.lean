@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 
 /-!
 
@@ -22,7 +22,7 @@ derived complete objects of the derived category of sheaves of `𝒪_E`-modules 
 ## Inverting the nonzero elements of `𝒪_E`
 
 `D_comp(J, E)` is the rationalization of
-`WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization`,
+`WeilConjectures.CategoryTheory.DerivedCategory.Rationalization`,
 
 ```
   D_comp(J, E)  :=  D_comp(J, 𝒪_E) / (torsion objects),

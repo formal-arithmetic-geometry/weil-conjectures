@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
+public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 

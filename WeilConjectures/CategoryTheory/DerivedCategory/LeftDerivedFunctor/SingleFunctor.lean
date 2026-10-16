@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 
 /-!
 # The functors induced on derived categories and the single-degree embeddings
@@ -17,7 +17,9 @@ For exact functors `F G : C ⥤ D` and `G' : D ⥤ E`, the identifications `D(F)
 degree zero they are the given isomorphisms placed in degree zero
 (`Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor`,
 `Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor`,
-`Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor`).
+`Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor`). The same holds for
+`Functor.leftDerivedFunctorNatIso` and `Functor.leftDerivedFunctorCompIso` through the
+identifications `Functor.singleFunctorCompLeftDerivedFunctorIso`.
 -/
 
 @[expose] public section
@@ -124,5 +126,62 @@ lemma mapDerivedCategoryNatIso_comp_hom_app_singleFunctor (F : C ⥤ D) (G : D �
         (DerivedCategory.singleFunctor E 0).map (e.hom.app X) := by
   rw [mapDerivedCategoryCompIso_hom_app_singleFunctor,
     mapDerivedCategoryNatIso_hom_app_singleFunctor]
+
+end CategoryTheory.Functor
+
+universe wC wD wE vC vD vE uC uD uE
+
+open CategoryTheory Limits MonoidalCategory
+
+namespace CategoryTheory.Functor
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
+  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
+
+variable [MonoidalCategory C] [MonoidalPreadditive C]
+  [HasCountableCoproducts C]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C]
+
+variable {E : Type uE} [Category.{vE} E] [Abelian E] [HasDerivedCategory.{wE} E]
+
+variable [MonoidalCategory D] [MonoidalPreadditive D]
+  [HasCountableCoproducts D]
+  [HasColimitsOfShape ℤ D] [HasExactColimitsOfShape ℤ D]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ D), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).obj X)]
+  [∀ (X : D), PreservesColimitsOfShape ℤ ((curriedTensor D).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution D]
+
+lemma leftDerivedFunctorNatIso_hom_app_singleFunctor_obj
+    (H F : C ⥤ E) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (e : H ≅ F) (X : C) :
+    (leftDerivedFunctorNatIso H e).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+        (F.singleFunctorCompLeftDerivedFunctorIso).hom.app X =
+      (H.singleFunctorCompLeftDerivedFunctorIso).hom.app X ≫
+        (DerivedCategory.singleFunctor E 0).map (e.hom.app X) := by
+  simp [leftDerivedFunctorNatIso, singleFunctorCompLeftDerivedFunctorIso,
+    mapDerivedCategoryNatIso_hom_app_singleFunctor]
+
+-- the `simp` call unfolds the compatibility isomorphisms
+set_option linter.flexible false in
+lemma leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : C) :
+    (leftDerivedFunctorCompIso F G).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
+        G.leftDerivedFunctor.map ((F.singleFunctorCompLeftDerivedFunctorIso).hom.app X) ≫
+          (G.singleFunctorCompLeftDerivedFunctorIso).hom.app (F.obj X) =
+      ((F ⋙ G).singleFunctorCompLeftDerivedFunctorIso).hom.app X := by
+  simp [leftDerivedFunctorCompIso, singleFunctorCompLeftDerivedFunctorIso]
+  exact mapDerivedCategoryCompIso_hom_app_singleFunctor F G X
 
 end CategoryTheory.Functor

@@ -5,8 +5,11 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
+
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 
@@ -29,8 +32,9 @@ which is taken as an instance argument.
   on the unbounded derived categories.
 
 - `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
-  below objects, an instance for torsion coefficients; and
-  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
+  below objects, an instance for torsion coefficients over a quasi-compact base; and
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f` with
+  quasi-compact target.
 
 ## Implementation notes
 
@@ -42,7 +46,8 @@ which is taken as an instance argument.
   only at the torsion coefficients `ModuleCat Λ`, `[Finite Λ]`
   (`isLeftAdjoint_rightDerivedLowerShriek`). That instance is the blueprint theorem
   `thm-amb-etale-exceptional-adjoint` of the smooth-purity chapter (Brown representability,
-  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), and is not proved here.
+  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), proved in
+  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint`.
 * `Rf^!` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint extracted from
   the instance, not a construction. Only the adjunction `rightDerivedUpperShriekAdjunction`
   should be used about it; it has no definitional content.
@@ -52,8 +57,11 @@ which is taken as an instance argument.
   through the finite cohomological amplitude of `Rf_!`, and the bounded below exceptional
   functor of the blueprint is the constructible one of `sk-prop-sf-existence` (c). That `Rf^!`
   preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
-  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
-  is an instance for torsion coefficients (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale adjunction for
+  `Rf^!` assumes; it is an instance for torsion coefficients when `Y` is quasi-compact
+  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`). Quasi-compactness is needed: for
+  `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `f` proper, `Rf^! Λ` is `Λ(n)[2n]` on `ℙⁿ_k`, which is not
+  bounded below.
 
 ## TODO
 
@@ -97,7 +105,7 @@ Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) 
 right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
 instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
     (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
-  sorry
+  isLeftAdjoint_rightDerivedLowerShriekOfCompactification Λ _
 
 end TorsionCoefficients
 
@@ -159,29 +167,38 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- For torsion coefficients, `Rf_!` is a left adjoint
+/-- For torsion coefficients and a quasi-compact target `Y`, `Rf_!` is a left adjoint
 (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
 below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
-by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
-then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. -/
-instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
-    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
+by twice the fibre dimension of the compactification, which is bounded as `Y` is
+quasi-compact: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}` then `Rf^!` sends `D^{≥ 0}` into
+`D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. Without quasi-compactness of `Y` this
+fails: for `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `Rf^! Λ` restricts to `Λ(n)[2n]` on `ℙⁿ_k`. -/
+instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
   plus_rightDerivedUpperShriek_obj := sorry
 
-/-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
-compactification: the coefficients have exceptional inverse images preserving bounded below
-objects. This holds for torsion coefficients
+/-- The coefficients have exceptional inverse images along every morphism admitting a
+compactification, preserving bounded below objects when the target is quasi-compact:
+`Rf_!` is a left adjoint for every such `f`, and
+`AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` holds when moreover the target is
+quasi-compact. This holds for torsion coefficients
 (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks`). -/
 class HasBoundedBelowUpperShrieks : Prop where
-  hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
-    HasBoundedBelowUpperShriek A f
+  isLeftAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (R(f)_![A]).IsLeftAdjoint
+  hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [CompactSpace Y] : HasBoundedBelowUpperShriek A f
 
-attribute [instance] HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
+attribute [instance] HasBoundedBelowUpperShrieks.isLeftAdjoint
+  HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
 
-/-- Torsion coefficients have exceptional inverse images preserving bounded below objects. -/
+/-- Torsion coefficients have exceptional inverse images, preserving bounded below objects over
+a quasi-compact target. -/
 instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
-  hasBoundedBelowUpperShriek _ _ := inferInstance
+  isLeftAdjoint _ _ := inferInstance
+  hasBoundedBelowUpperShriek _ _ _ := inferInstance
 
 end BoundedBelow
 

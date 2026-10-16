@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.CounitStructure
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CounitStructure
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtPullbackHom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtPullbackHom
 
 /-!
 # The pushforward of an elliptic curve does not preserve countable coproducts

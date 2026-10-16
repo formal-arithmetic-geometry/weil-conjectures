@@ -91,10 +91,6 @@ theorem preservesCoproducts_rightDerivedLowerStar {X Y : Scheme.{u}}
     ι d.toNat (fun F q hq ↦ Functor.isZero_rightDerived_of_isZero_homology _ F q (hd F q (by lia)))
     fun n ↦ inferInstance
 
-/-- The final object `𝟙 X` of the small étale site of `X` is terminal. -/
-noncomputable def isTerminalFinalObject (X : Scheme.{u}) : IsTerminal (Etale.finalObject X) :=
-  MorphismProperty.Over.mkIdTerminal _ X
-
 /-- Morphisms out of the constant sheaf `Λ` on the small étale site of `X` are morphisms out of
 the free sheaf `Λ[X]` on the final object: both are the global sections of the target. -/
 noncomputable def constantSheafHomEquivFreeSheafFinalObject (X : Scheme.{u})
