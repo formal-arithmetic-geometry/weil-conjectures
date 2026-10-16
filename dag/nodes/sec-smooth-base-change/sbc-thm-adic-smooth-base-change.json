@@ -324,5 +324,28 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-081e3bc00 (reviewer sub-agent of L); spot-checked: Read the complete item, blueprint route, all eight proof steps, 17 cited node statements, and cited Stacks sources. The corrected X-category target is required by the square typing; finite-dimension and coefficient hypotheses are explicit. Properness is not assumed, reductions and completed mate are justified, constructible landing and étale witness cocycles are checked, and edge cases were tested. No new nodes or duplicate statements; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicSmoothBaseChange",
+  "declaration": "WeilConjectures.adicSmoothBaseChange",
+  "declarations": [
+   "WeilConjectures.sbcAdicFiniteCohomology",
+   "WeilConjectures.adicSmoothBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/AdicSmoothBaseChange.lean",
+  "statement": "theorem adicSmoothBaseChange {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T} (sq : ChosenCartesianSquare h e f g) [IsNoetherian X] [IsNoetherian S] [IsNoetherian T] [IsNoetherian Y] [Smooth f] [QuasiCompact g] [QuasiSeparated g] (_hT : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (_hl : IsUnit (l : Γ(S, ⊤))) (_horder : ∀ n : ℕ, IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(S, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(X, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(T, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(Y, ⊤))) (K : PbcIntegralConstructible l E T) (_horigin : ∀ n : ℕ, ∃ L : Etale.BoundedConstructibleDerivedCategory (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) T, Nonempty ((pbcDerivedFunctionRealization T (pbcIntegralDatum l E) n).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ProEtale.PbcQuotient (pbcIntegralDatum l E) n)) T).mapDerivedCategory.obj L.obj) ≅ (sbcReduction l E T n).obj K.obj)) : IsIso (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)) ∧ ((∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞)) → (∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ, ∀ i : ℤ, (IsConstructibleProEtaleCoefficientModuleSheaf S (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf Y (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i)))) → ∃ (hB : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj) (hD : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj), IsIso (ObjectProperty.homMk (P := PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)) (X := ⟨((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hB⟩) (Y := ⟨((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hD⟩) (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)).hom))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the published ULift valuation-ring specialization pbcIntegralDatum, the existing intrinsic complete/constructible categories, and the exact sbcExchangeApp. The helper only restricts finite cohomology along the canonical constant/function coefficient isomorphism; no new constructibility predicate or alternate map is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-97c50e20c",
+  "group": "N5",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all twelve dependencies, sources, canonical constructions, universes, edge cases, docstrings and verbatim signature. Per-file scompile.py reproduction passed without diagnostics. No defects or fixes; branch unchanged."
  }
 }
