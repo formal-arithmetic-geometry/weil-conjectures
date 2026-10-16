@@ -216,34 +216,42 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a0c998980 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all five steps and the new Mathlib leaf check out. Supplied fixes add the existing linear-functor definition citation, document additivity instances, and restore the accepted completeness tool declaration. Item statement unchanged; no duplicate, cycle, or unsupported coefficient comparison. Details in review.md.; 2 file(s) fixed by the reviewer"
  },
- "reviewed_lean": {
+ "lean_invalidation": {
   "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-fbed1231d",
-  "group": "Q11",
-  "result": "pass",
-  "note": "Full source, node, dependency, Lean, edge-case, docstring, hollow-definition, and report audit completed; recorded five-file scompile/server evidence is clean. Fresh rerun was blocked only by the live library lacking a sibling .olean, with no substantive delivery defect found."
- },
- "lean": {
-  "module": "Sheaf.Paper.IntegralConstructibleLinear",
-  "declaration": "WeilConjectures.integralCoefficientLinear_existsUnique",
-  "declarations": [
-   "WeilConjectures.integralConstructibleTriangulatedStructure",
-   "WeilConjectures.integralConstructible_linear",
-   "WeilConjectures.integralCoefficientLinear_existsUnique",
-   "WeilConjectures.integralCoefficientLinear",
-   "WeilConjectures.integralCoefficientShift_linear",
-   "WeilConjectures.integralConstructibleLinear",
-   "WeilConjectures.integralConstructibleClosedIso",
-   "WeilConjectures.integralConstructibleTriangulated",
-   "WeilConjectures.integralConstructibleShift_linear"
-  ],
-  "file": "lean/Sheaf/Paper/IntegralConstructibleLinear.lean",
-  "statement": "theorem integralCoefficientLinear_existsUnique : ∃! s : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y)), (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y))] ↦ ∀ (a : Padic.coefficientExtensionIntegers l E) (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'), a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s)",
-  "branch": "newtargets-dag",
-  "by": "Q11",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "§1(B), second-reading compatibility repair: retain the published integralConstructible_linear theorem and integralConstructibleTriangulatedStructure declaration verbatim. Its existential instance interface requires the auxiliary finite-field datum and does not expose a chosen action shared with integralScalarDerivedAction or reusable linear instances. Add the unique constant-section characterization, canonical ambient action independent of that auxiliary datum, inherited subcategory instances, and shift-linearity interface needed by scalar localization; mathematical objects and hypotheses are unchanged."
+  "by": "L maintenance Q22",
+  "consumer": "def-weil-integral-rational-qbar-compact-support",
+  "reason": "The recorded integral dependency migrated to Sheaf.Paper.SfIntegralConstructible, but this interface still uses the old boundedConstructibleDerivedCompleteIntegralCategory. No published canonical identification with the current predicate is recorded. A module name alone falsely certified readiness.",
+  "required_interface": "Retain the canonical constant-section action on the ambient category, and expose the linear category and linear shift on the currently recorded sfIntegralConstructibleCategory, using its repaired triangulation. The archived ambient theorem alone does not supply this full node's subcategory clause.",
+  "instruction": "Repair this owning node through the normal bottom-up stage-2 delivery. Search and reuse generic constructions. Preserve legacy declarations for their existing callers; an additive intrinsic interface in an owning-node module is permitted. Do not restore the archived record unchanged, narrow the consumer's base field, or state other DAG nodes. The archived records are historical evidence, not an active Lean attachment.",
+  "previous_lean": {
+   "module": "Sheaf.Paper.IntegralConstructibleLinear",
+   "declaration": "WeilConjectures.integralCoefficientLinear_existsUnique",
+   "declarations": [
+    "WeilConjectures.integralConstructibleTriangulatedStructure",
+    "WeilConjectures.integralConstructible_linear",
+    "WeilConjectures.integralCoefficientLinear_existsUnique",
+    "WeilConjectures.integralCoefficientLinear",
+    "WeilConjectures.integralCoefficientShift_linear",
+    "WeilConjectures.integralConstructibleLinear",
+    "WeilConjectures.integralConstructibleClosedIso",
+    "WeilConjectures.integralConstructibleTriangulated",
+    "WeilConjectures.integralConstructibleShift_linear"
+   ],
+   "file": "lean/Sheaf/Paper/IntegralConstructibleLinear.lean",
+   "statement": "theorem integralCoefficientLinear_existsUnique : ∃! s : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y)), (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E) (DerivedCategory (integralTowerModules l E Y))] ↦ ∀ (a : Padic.coefficientExtensionIntegers l E) (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'), a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s)",
+   "branch": "newtargets-dag",
+   "by": "Q11",
+   "date": "2026-10-15",
+   "existing": false,
+   "note": "§1(B), second-reading compatibility repair: retain the published integralConstructible_linear theorem and integralConstructibleTriangulatedStructure declaration verbatim. Its existential instance interface requires the auxiliary finite-field datum and does not expose a chosen action shared with integralScalarDerivedAction or reusable linear instances. Add the unique constant-section characterization, canonical ambient action independent of that auxiliary datum, inherited subcategory instances, and shift-linearity interface needed by scalar localization; mathematical objects and hypotheses are unchanged."
+  },
+  "previous_reviewed_lean": {
+   "date": "2026-10-16",
+   "by": "L",
+   "reviewer": "NT-stage2-Codex-fbed1231d",
+   "group": "Q11",
+   "result": "pass",
+   "note": "Full source, node, dependency, Lean, edge-case, docstring, hollow-definition, and report audit completed; recorded five-file scompile/server evidence is clean. Fresh rerun was blocked only by the live library lacking a sibling .olean, with no substantive delivery defect found."
+  }
  }
 }

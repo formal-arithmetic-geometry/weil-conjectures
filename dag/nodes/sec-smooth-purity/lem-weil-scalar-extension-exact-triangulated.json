@@ -246,37 +246,6 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-33b76c38d (reviewer sub-agent of L); spot-checked: Reviewed the complete item, DAG route, cited statements, blueprint, Stacks/Bhatt–Scholze sources, coefficient categories, cone signs, derived/K-flat hypotheses, localization morphisms, searches, duplicates, and edge cases. Review written to review.md."
  },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-0ec5d87a2",
-  "group": "Q24",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
- },
- "lean": {
-  "module": "Sheaf.Paper.ScalarExtensionExact",
-  "declaration": "WeilConjectures.rationalConstructibleScalar_exact",
-  "declarations": [
-   "WeilConjectures.integralConstructibleScalarCommShift_existsUnique",
-   "WeilConjectures.integralConstructibleScalarCommShift",
-   "WeilConjectures.rationalOrdinaryScalarCommShift_existsUnique",
-   "WeilConjectures.rationalOrdinaryScalarCommShift",
-   "WeilConjectures.rationalOrdinaryScalar_exact",
-   "WeilConjectures.rationalOrdinaryScalar_additive",
-   "WeilConjectures.rationalConstructibleScalarCommShift_existsUnique",
-   "WeilConjectures.rationalConstructibleScalarCommShift",
-   "WeilConjectures.rationalConstructibleScalar_exact",
-   "WeilConjectures.rationalConstructibleScalar_additive"
-  ],
-  "file": "lean/Sheaf/Paper/ScalarExtensionExact.lean",
-  "statement": "theorem rationalConstructibleScalar_exact : (rationalScalarExtension D l hl E Y L ι).IsTriangulated",
-  "branch": "newtargets-dag",
-  "by": "Q24",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B): state exactness of the published rationalScalarExtension, with its shift comparison uniquely normalized by the ordinary derived tensor model and the canonical quotient-completion comparison. No replacement finite-stage category is used. Import the integral model, constructible restriction and rationalization interfaces directly, without relying on composition-module re-exports."
- },
  "statement_change": {
   "date": "2026-10-16",
   "by": "NY stage 2",
@@ -306,5 +275,44 @@
   "old_stmt_deps": [
    "def-weil-rationalization-karoubi"
   ]
+ },
+ "lean_invalidation": {
+  "date": "2026-10-16",
+  "by": "L maintenance Q22",
+  "consumer": "def-weil-integral-rational-qbar-compact-support",
+  "reason": "The recorded integral dependency migrated to Sheaf.Paper.SfIntegralConstructible, but this interface still uses the old boundedConstructibleDerivedCompleteIntegralCategory. No published canonical identification with the current predicate is recorded. A module name alone falsely certified readiness.",
+  "required_interface": "State shift compatibility and exactness for the repaired rational scalar extension between the intrinsic stages, using the repaired integral restriction.",
+  "instruction": "Repair this owning node through the normal bottom-up stage-2 delivery. Search and reuse generic constructions. Preserve legacy declarations for their existing callers; an additive intrinsic interface in an owning-node module is permitted. Do not restore the archived record unchanged, narrow the consumer's base field, or state other DAG nodes. The archived records are historical evidence, not an active Lean attachment.",
+  "previous_lean": {
+   "module": "Sheaf.Paper.ScalarExtensionExact",
+   "declaration": "WeilConjectures.rationalConstructibleScalar_exact",
+   "declarations": [
+    "WeilConjectures.integralConstructibleScalarCommShift_existsUnique",
+    "WeilConjectures.integralConstructibleScalarCommShift",
+    "WeilConjectures.rationalOrdinaryScalarCommShift_existsUnique",
+    "WeilConjectures.rationalOrdinaryScalarCommShift",
+    "WeilConjectures.rationalOrdinaryScalar_exact",
+    "WeilConjectures.rationalOrdinaryScalar_additive",
+    "WeilConjectures.rationalConstructibleScalarCommShift_existsUnique",
+    "WeilConjectures.rationalConstructibleScalarCommShift",
+    "WeilConjectures.rationalConstructibleScalar_exact",
+    "WeilConjectures.rationalConstructibleScalar_additive"
+   ],
+   "file": "lean/Sheaf/Paper/ScalarExtensionExact.lean",
+   "statement": "theorem rationalConstructibleScalar_exact : (rationalScalarExtension D l hl E Y L ι).IsTriangulated",
+   "branch": "newtargets-dag",
+   "by": "Q24",
+   "date": "2026-10-16",
+   "existing": false,
+   "note": "§1(B): state exactness of the published rationalScalarExtension, with its shift comparison uniquely normalized by the ordinary derived tensor model and the canonical quotient-completion comparison. No replacement finite-stage category is used. Import the integral model, constructible restriction and rationalization interfaces directly, without relying on composition-module re-exports."
+  },
+  "previous_reviewed_lean": {
+   "date": "2026-10-16",
+   "by": "L",
+   "reviewer": "NT-stage2-Codex-0ec5d87a2",
+   "group": "Q24",
+   "result": "pass",
+   "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
+  }
  }
 }

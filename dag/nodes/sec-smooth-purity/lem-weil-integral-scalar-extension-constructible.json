@@ -253,35 +253,43 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-e9742def5 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All five steps check out: normalized quotient transitions, finite residue-layer constructibility, uniform cohomological bounds, effectivity and linearity. No new nodes, duplicate split or dependency path back to the item. Master target morphisms and coefficient categories were checked without assuming a condensed-category comparison. Detailed checks and accepted tool uses are recorded in review.md; no repairs needed."
  },
- "reviewed_lean": {
+ "lean_invalidation": {
   "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-0ec5d87a2",
-  "group": "Q24",
-  "result": "pass",
-  "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
- },
- "lean": {
-  "module": "Sheaf.Paper.IntegralScalarExtensionConstructible",
-  "declaration": "WeilConjectures.integralScalarExtension_constructible",
-  "declarations": [
-   "WeilConjectures.integralScalarExtension_constructible",
-   "WeilConjectures.constructibleIntegralScalarExtension",
-   "WeilConjectures.constructibleIntegralScalarExtension_smul",
-   "WeilConjectures.integralOrdinaryDerivedScalar_constructible",
-   "WeilConjectures.integralConstructibleScalarExtension",
-   "WeilConjectures.integralScalarRoosBoundary",
-   "WeilConjectures.integralScalarCompletionChain_existsUnique",
-   "WeilConjectures.integralScalarCompletionChain",
-   "WeilConjectures.integralConstructibleScalarComparison_existsUnique",
-   "WeilConjectures.integralConstructibleScalarComparison"
-  ],
-  "file": "lean/Sheaf/Paper/IntegralScalarExtensionConstructible.lean",
-  "statement": "theorem integralScalarExtension_constructible (K : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) : boundedConstructibleDerivedCompleteIntegral D l hl L Y ((integralScalarExtension l E L ι Y).obj K.obj)",
-  "branch": "newtargets-dag",
-  "by": "Q24",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B): preserve the published completed constructibility theorem and restricted functor unchanged. Add the ordinary finite-free model and the canonical comparison fixed on good representatives by quotient completion with zero shifted cone coordinate; the existing interface has no such comparison."
+  "by": "L maintenance Q22",
+  "consumer": "def-weil-integral-rational-qbar-compact-support",
+  "reason": "The recorded integral dependency migrated to Sheaf.Paper.SfIntegralConstructible, but this interface still uses the old boundedConstructibleDerivedCompleteIntegralCategory. No published canonical identification with the current predicate is recorded. A module name alone falsely certified readiness.",
+  "required_interface": "State preservation of the currently recorded sfIntegralConstructible predicate by the existing integral scalar extension and expose its restricted functor between sfIntegralConstructibleCategory stages, with its stated linearity.",
+  "instruction": "Repair this owning node through the normal bottom-up stage-2 delivery. Search and reuse generic constructions. Preserve legacy declarations for their existing callers; an additive intrinsic interface in an owning-node module is permitted. Do not restore the archived record unchanged, narrow the consumer's base field, or state other DAG nodes. The archived records are historical evidence, not an active Lean attachment.",
+  "previous_lean": {
+   "module": "Sheaf.Paper.IntegralScalarExtensionConstructible",
+   "declaration": "WeilConjectures.integralScalarExtension_constructible",
+   "declarations": [
+    "WeilConjectures.integralScalarExtension_constructible",
+    "WeilConjectures.constructibleIntegralScalarExtension",
+    "WeilConjectures.constructibleIntegralScalarExtension_smul",
+    "WeilConjectures.integralOrdinaryDerivedScalar_constructible",
+    "WeilConjectures.integralConstructibleScalarExtension",
+    "WeilConjectures.integralScalarRoosBoundary",
+    "WeilConjectures.integralScalarCompletionChain_existsUnique",
+    "WeilConjectures.integralScalarCompletionChain",
+    "WeilConjectures.integralConstructibleScalarComparison_existsUnique",
+    "WeilConjectures.integralConstructibleScalarComparison"
+   ],
+   "file": "lean/Sheaf/Paper/IntegralScalarExtensionConstructible.lean",
+   "statement": "theorem integralScalarExtension_constructible (K : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) : boundedConstructibleDerivedCompleteIntegral D l hl L Y ((integralScalarExtension l E L ι Y).obj K.obj)",
+   "branch": "newtargets-dag",
+   "by": "Q24",
+   "date": "2026-10-16",
+   "existing": false,
+   "note": "§1(B): preserve the published completed constructibility theorem and restricted functor unchanged. Add the ordinary finite-free model and the canonical comparison fixed on good representatives by quotient completion with zero shifted cone coordinate; the existing interface has no such comparison."
+  },
+  "previous_reviewed_lean": {
+   "date": "2026-10-16",
+   "by": "L",
+   "reviewer": "NT-stage2-Codex-0ec5d87a2",
+   "group": "Q24",
+   "result": "pass",
+   "note": "Reviewed node, source, dependencies, Lean modules, docstrings, edge cases, report sections, and compiler evidence. No substantive defects found; fresh compile was blocked only by a missing sibling .olean artifact."
+  }
  }
 }

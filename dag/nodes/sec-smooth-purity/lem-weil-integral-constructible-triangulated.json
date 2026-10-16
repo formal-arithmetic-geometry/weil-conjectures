@@ -361,28 +361,36 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-b667269de (reviewer sub-agent of L); spot-checked: Read the full item, all 26 cited statements, chapter/unit route, report, and cited literature passages. All eight proof steps check out, including completion-unit compatibility, finite-coefficient reduction, and uniform bounds. Repaired one C8 omission by declaring the tower-core triangle theorem as an accepted generic tool. Corrected JSON and detailed source/edge-case checks are in fixes/ and review.md. No targets changed.; 1 file(s) fixed by the reviewer"
  },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-26a22ba19",
-  "group": "NZ",
-  "result": "pass",
-  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
- },
- "lean": {
-  "module": "Sheaf.Paper.IntegralConstructibleTriangulated",
-  "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated",
-  "file": "lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean",
-  "statement": "theorem boundedConstructibleDerivedCompleteIntegral_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) ∧ ObjectProperty.IsTriangulated.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y)",
-  "branch": "newtargets-dag",
-  "by": "NZ",
-  "date": "2026-10-15",
-  "existing": false,
-  "declarations": [
-   "WeilConjectures.integralConstructibleAbSheafify",
-   "WeilConjectures.integralConstructibleAbLocallyBijective",
-   "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated"
-  ],
-  "note": "§1(B), H10 repair: rebuild the existing integral constructibility triangulation statement against the repaired completeness and tower interfaces. It retains arbitrary Y, the original coefficient data, isomorphism closure, zero, all integer shifts, extensions, inherited triangulation and exact inclusion."
+ "lean_invalidation": {
+  "date": "2026-10-16",
+  "by": "L maintenance Q22",
+  "consumer": "def-weil-integral-rational-qbar-compact-support",
+  "reason": "The recorded integral dependency migrated to Sheaf.Paper.SfIntegralConstructible, but this interface still uses the old boundedConstructibleDerivedCompleteIntegralCategory. No published canonical identification with the current predicate is recorded. A module name alone falsely certified readiness.",
+  "required_interface": "State triangulated and isomorphism closure for the currently recorded sfIntegralConstructible predicate, and expose the inherited structures on sfIntegralConstructibleCategory. The old theorem is about a different predicate.",
+  "instruction": "Repair this owning node through the normal bottom-up stage-2 delivery. Search and reuse generic constructions. Preserve legacy declarations for their existing callers; an additive intrinsic interface in an owning-node module is permitted. Do not restore the archived record unchanged, narrow the consumer's base field, or state other DAG nodes. The archived records are historical evidence, not an active Lean attachment.",
+  "previous_lean": {
+   "module": "Sheaf.Paper.IntegralConstructibleTriangulated",
+   "declaration": "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated",
+   "file": "lean/Sheaf/Paper/IntegralConstructibleTriangulated.lean",
+   "statement": "theorem boundedConstructibleDerivedCompleteIntegral_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y) ∧ ObjectProperty.IsTriangulated.{u + 2, u + 2} (C := completedIntegralDerivedCategory.{d, u, u} l E Y D hl) (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y)",
+   "branch": "newtargets-dag",
+   "by": "NZ",
+   "date": "2026-10-15",
+   "existing": false,
+   "declarations": [
+    "WeilConjectures.integralConstructibleAbSheafify",
+    "WeilConjectures.integralConstructibleAbLocallyBijective",
+    "WeilConjectures.boundedConstructibleDerivedCompleteIntegral_isTriangulated"
+   ],
+   "note": "§1(B), H10 repair: rebuild the existing integral constructibility triangulation statement against the repaired completeness and tower interfaces. It retains arbitrary Y, the original coefficient data, isomorphism closure, zero, all integer shifts, extensions, inherited triangulation and exact inclusion."
+  },
+  "previous_reviewed_lean": {
+   "date": "2026-10-15",
+   "by": "L",
+   "reviewer": "NT-stage2-Codex-26a22ba19",
+   "group": "NZ",
+   "result": "pass",
+   "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+  }
  }
 }
