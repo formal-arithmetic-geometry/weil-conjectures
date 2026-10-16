@@ -1,6 +1,6 @@
 # Work queue
 
-25 items; claim with `tools/claim.py next <group> [--stage N]`.
+24 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (25)
+## Stage 3: modules to prove (24)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -24,7 +24,6 @@
 | `Sheaf.Paper.ProEtaleLisseOrigin` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk` | 11 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteConstantModuleIsomSheaf` | 11 | 1 | proof |
 | `Sheaf.Paper.ContinuousLatticeIntersectionSplitData` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullSquare` | 11 | 1 | proof |
