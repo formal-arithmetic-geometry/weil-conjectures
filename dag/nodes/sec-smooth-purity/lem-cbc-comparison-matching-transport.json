@@ -16,23 +16,23 @@
  },
  "proof": [
   {
-   "text": "Normalize terminal transport: restriction along the inverse terminal projection cancels its projection factor, leaving the inverse composition isomorphism and the triangle equality transport. All lifts are the displayed genuine pullback lifts.",
+   "text": "Define the canonical terminal pullback lift and identify it with the inverse of the second-projection isomorphism. Normalize terminal transport by cancelling the two presheaf restriction maps. This gives tr, equality transport followed by the inverse composition isomorphism at the terminal object, and rewrites the assumed restriction formula as res followed by tr.inv. Define t_i = tr(Y.hom,g_i,Z_i.hom).hom(e_i(s_i)); the normalization proves precisely the required displayed formula for t_i.",
    "uses": [
     "def-weil-pbc-sets-terminal-transport"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality of an inverse-image unit in a sheaf map, followed by presheaf naturality, shows that global terminal restriction commutes with coefficient maps. Evaluate the inverse-image associativity law at the terminal object and combine these equations into the triangle square.",
+   "text": "Prove coefficient naturality of terminal restriction res from naturality of the inverse-image unit in a sheaf morphism and presheaf naturality of the pulled-back morphism along the terminal lift. For a commuting triangle, substitute the structure-map equalities and evaluate the associativity clause of the chosen inverse-image composition isomorphisms at the terminal object. Precompose with the first composition isomorphism, apply coefficient naturality and associativity, and cancel the final isomorphism. This proves transport_triangle, relating restriction of the normalized t_i to normalized transport of the corresponding restricted section.",
    "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": true
   },
   {
-   "text": "Form the overlap as a weakly etale X-scheme. Apply the matching equation to its projections. The two triangle squares identify the normalized restrictions with the same transported overlap section. Normalize equality casts to Eq.mp to obtain exactly the fpqc overlap formula, including when the index type is empty.",
+   "text": "Each underlying g_i is weakly etale by cancellation against Y.hom. Thus the scheme fibre product of g_i and g_j, with structure map fst followed by Z_i.hom, defines an object W of X.ProEt. Its two projections a and d satisfy a composed with g_i = d composed with g_j by pullback.condition. Evaluate transport_triangle on e_i(s_i) and e_j(s_j), use hres to identify their restricted sections with e_W(P.map(a.op)(s_i)) and e_W(P.map(d.op)(s_j)), and apply the matching equality hs. Equality elimination in the map to Y identifies the two normalized transports with exactly Eq.mp along pullback.condition.symm. This proves the overlap equality. No covering or nonemptiness hypothesis is used.",
    "uses": [
-    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sets-terminal-transport",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": true
@@ -40,13 +40,13 @@
  ],
  "proof_deps": [
   "def-weil-pbc-sets-terminal-transport",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "def-weil-pbc-proetale-site"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "E2 stage-3 worker",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0GLZ, first proof paragraph, overlap identifications; Sites Tags 03CB and 03CC; explicit Lean reduction by V4"
+  "place": "Tag 0GLZ, first proof paragraph, overlap identifications; Sites Tags 03CB and 03CC; complete Lean calculation using terminal normalization, unit naturality and inverse-image associativity"
  },
  "mathlib_searches": [
   {
@@ -116,13 +116,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261015T224110-L-2885764",
-  "kind": "interface",
+  "landing": "20261016T000943-L-3677675",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
