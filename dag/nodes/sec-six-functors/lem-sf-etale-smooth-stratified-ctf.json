@@ -499,5 +499,24 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-e5a4a96e5 (reviewer sub-agent of L); spot-checked: Read the full item, all nine steps, all 40 cited statements, source passages, and chapter/unit route. Verified reduction, arbitrary-module stalk Tor tests, exact-interval projective models, and proper/open interchange. No duplicate, cycle, missing hypothesis, or coefficient-category substitution found. Accepted generic tool uses are documented in review.md; no fixes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f3fec3e2a",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Wrote review.md and complete merge-compatible fixes. Repaired H3: literal terminal equality excluded arbitrary zero objects when X is empty; replaced it with IsZero. Original and corrected modules compiled cleanly through scompile.py. Dependency, source, signature, docstring, universe, and report checks found no other faults; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothStratificationFiniteTor",
+  "declaration": "AlgebraicGeometry.Etale.exists_smooth_stratification_finiteTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStratificationFiniteTor.lean",
+  "statement": "theorem exists_smooth_stratification_finiteTor (F : Type u) [Field F] [IsAlgClosed F] (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) [X.Over (Spec (.of F))] [IsSeparated (X ↘ Spec (.of F))] [LocallyOfFiniteType (X ↘ Spec (.of F))] [QuasiCompact (X ↘ Spec (.of F))] (a b : ℤ) (hab : a ≤ b) (K : DerivedCategoryModule A X) (hK : DerivedCategory.isBoundedConstructible A X K) (hTor : DerivedCategory.hasTorAmplitudeIn A X a b K) : ∃ (m : ℕ) (S V : Fin m → Scheme.{u}) (i : ∀ r : Fin m, S r ⟶ V r) (j : ∀ r : Fin m, V r ⟶ X) (_ : ∀ r : Fin m, IsClosedImmersion (i r)) (_ : ∀ r : Fin m, IsOpenImmersion (j r)) (e : Fin m → ℕ) (P : ∀ r : Fin m, DerivedCategoryModule A (S r)) (T : Fin (m + 1) → DerivedCategoryModule A X), (∀ r : Fin m, IsReduced (S r) ∧ ConnectedSpace (S r) ∧ Smooth (i r ≫ j r ≫ (X ↘ Spec (.of F)))) ∧ (Set.univ = ⋃ r : Fin m, Set.range (i r ≫ j r).base) ∧ (∀ r t : Fin m, r ≠ t → Disjoint (Set.range (i r ≫ j r).base) (Set.range (i t ≫ j t).base)) ∧ (∀ r : Fin m, (e r : WithBot ℕ∞) ≤ topologicalKrullDim X ∧ ∀ C ∈ irreducibleComponents (S r), topologicalKrullDim C = (e r : WithBot ℕ∞)) ∧ (∀ r : Fin m, P r = (upperStar (ModuleCat.{u + 1} A) (i r ≫ j r)).mapDerivedCategory.obj K) ∧ (∀ (r : Fin m) (q : ℤ), Scheme.IsFiniteLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor (Sheaf (S r).smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj (P r))) ∧ (∀ r : Fin m, ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage (S r), ∀ t : 𝒰.I₀, ∃ Q : CochainComplex (ModuleCat.{u + 1} A) ℤ, (∀ q : ℤ, q < a ∨ b < q → IsZero (Q.X q)) ∧ (∀ q : ℤ, ∃ (n : ℕ) (ι : Q.X q ⟶ ModuleCat.of A (Fin n → A)) (π : ModuleCat.of A (Fin n → A) ⟶ Q.X q), ι ≫ π = 𝟙 (Q.X q)) ∧ Nonempty ((upperStar (ModuleCat.{u + 1} A) (𝒰.f t)).mapDerivedCategory.obj (P r) ≅ _root_.DerivedCategory.Q.obj (((constantSheaf (𝒰.X t).smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q))) ∧ T 0 = K ∧ IsZero (T (Fin.last m)) ∧ (∀ r : Fin m, ∃ (α : (openImmersionLowerShriek (ModuleCat.{u + 1} A) (j r)).mapDerivedCategory.obj ((lowerStar (ModuleCat.{u + 1} A) (i r)).mapDerivedCategory.obj (P r)) ⟶ T r.castSucc) (β : T r.castSucc ⟶ T r.succ) (δ : T r.succ ⟶ ((openImmersionLowerShriek (ModuleCat.{u + 1} A) (j r)).mapDerivedCategory.obj ((lowerStar (ModuleCat.{u + 1} A) (i r)).mapDerivedCategory.obj (P r)))⟦(1 : ℤ)⟧), Triangle.mk α β δ ∈ distTriang (DerivedCategoryModule A X))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-16",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-f3fec3e2a"
  }
 }
