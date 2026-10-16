@@ -243,5 +243,36 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-ed881bc0f (reviewer sub-agent of L); spot-checked: Read in full: the item, the three new nodes, the cited Kan/Reedy statements and the parent lem-coef-rezk-explicit-completion (steps 2, 3 and 5 use only the unchanged item statement). Source: Rezk, local text copy of the cited PDF: §2.3–2.5, §4.1, Thm 7.1 and Cor 7.3, Props 9.1–9.2, Lemmas 10.1 and 10.3 with diagram (10.4). Item statement is unchanged against the base. Steps: (1) elementary Yoneda, union and adjunction formulas, checked degree by degree. (2) j□i lifting against Reedy fibrant V; V^∅=* gives Reedy fibrancy. (3) local objects equal Segal spaces: the product of r_n gives one direction; for the converse, W_0=∅ gives id_∅, otherwise r_n is an arrow retract of the product via degenerate basepoints. (4) Lemma 10.3 makes W^{F(1)} Segal for every local W, verifying the 9.2 hypothesis. (5) A×u=(∅→A)□u, so V^A is local (Rezk 7.3). (6) M_0=*, so the degree-zero map is a Kan fibration. All correct; route stays in the unit; no tool_uses; no SGA. New nodes are true and match their sources. reedy-cartesian uses the correct SM7 variance (Rezk's printed 2.5(2) has X and Y swapped). spine-interval-test is Rezk 10.3 exactly: a strictly smaller special case with its own combinatorial proof, not a relabelling. Duplicate candidates read and rejected: reedy-model-structure, sset-anodyne-pushout-product, rezk-local-model (complete case only), bousfield-quillen-descent and bousfield-local-fibrations (assume the localization exists), lem-cbc-general-bousfield-localization (other unit, no interval criterion), segal-external-local-equivalences, labelled-spine-prism-horn-calculus. One B3 repair: the localization node said 'simplicial model structure' without a definition. Citing lem-coef-simplicial-model-nerve-localization would close a cycle (that node reaches the item; BFS checked), so the SM7 meaning is written inline per Rezk 9.1, and lem-coef-kan-quillen-right-proper is added to stmt_deps (acyclic). Nothing weakened. Fix file: fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-space-localization-interval-criterion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c76c253f5",
+  "group": "Q38",
+  "result": "pass",
+  "note": "One commit on base 4601b5e3a9 touching 3 files; node changed only in lean; report has real Worker report and Second reading sections. Statement matches node and Rezk Def 4.1/§2.3-2.5/Cor 7.3 clause by clause: Reedy fibrancy via the dependency's Reedy.rightClass with (monomorphisms SimplexCategory).op, checked against Mathlib ReedyStructure.op (true matching object over proper injections); IsSegal = Reedy fibrant plus weak equivalence of the strict SSet.Path/spine consecutive-edge maps for n>=2, using the recorded Enhanced.IsWeakHomotopyEquivalence; Mathlib canonical ihom and MonoidalClosed.pre; only hypothesis on j is bidegreewise injectivity; degree-zero Kan Fibration stated explicitly; one explicit universe, empty/identity/infinite cases covered. No duplicate notion: IsHomotopySegalSpace is a different notion and downstream Segal nodes cite this item. Definitions sorry-free per #print axioms, sorry only in the theorem; docstrings carry source, blueprint and the six proof steps; lean.statement verbatim; lines <=100. nt_compile --json rc 0, no errors or warnings, 1.5 s. Only a minor redundant Currying import, no action needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalCartesianExponent",
+  "declaration": "SSet.SegalSpace.cartesian_exponent",
+  "declarations": [
+   "SSet.SegalSpace.SimplicialSpace",
+   "SSet.SegalSpace.instMonoidalClosed",
+   "SSet.SegalSpace.discreteRepresentable",
+   "SSet.SegalSpace.constant",
+   "SSet.SegalSpace.IsReedyFibration",
+   "SSet.SegalSpace.IsReedyFibrant",
+   "SSet.SegalSpace.pathSpace",
+   "SSet.SegalSpace.segalMap",
+   "SSet.SegalSpace.IsSegal",
+   "SSet.SegalSpace.cartesian_exponent"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalCartesianExponent.lean",
+  "statement": "theorem cartesian_exponent (V : SimplicialSpace.{u}) (hV : IsSegal V) : (∀ A : SimplicialSpace.{u}, IsSegal ((ihom A).obj V)) ∧ ∀ (A B : SimplicialSpace.{u}) (j : A ⟶ B), (∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((j.app n).app q)) → IsReedyFibration ((MonoidalClosed.pre j).app V) ∧ Fibration (((MonoidalClosed.pre j).app V).app (op ⦋0⦌))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses Mathlib’s complete-functor-category cartesian internal hom (ihom and MonoidalClosed.pre), the recorded Reedy relative-matching property and Kan fibrations, and realization weak equivalences. The path object is the strict consecutive-edge pullback, using Mathlib SSet.Path. All auxiliary definitions are the terminology introduced by this node itself."
  }
 }
