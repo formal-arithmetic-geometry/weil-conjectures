@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -157,7 +158,7 @@ noncomputable def weilLowerShriekFrobeniusComparison :
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).symm _)) ≪≫
     Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
-      (boundedConstructibleLowerShriekComp (Profinite.padicAlgClRingObj ℓ) ℓ r f').symm) ≪≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').symm) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).symm _ ≪≫
