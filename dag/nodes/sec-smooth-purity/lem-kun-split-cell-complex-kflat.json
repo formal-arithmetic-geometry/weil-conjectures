@@ -222,5 +222,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-590bec080 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, Stacks sources, unit/chapter route, and delivery instructions. Verified all five proof steps, coefficient category, base-change tensor symmetry, unbounded and infinite-rank edge cases, searches, and absence of duplicates or cycles. No repairs required; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SplitCellComplexKFlat",
+  "declaration": "CochainComplex.kFlat_of_split_free_cells",
+  "file": "lean/Sheaf/Algebra/Homology/SplitCellComplexKFlat.lean",
+  "statement": "theorem kFlat_of_split_free_cells {R : Type u} [CommRing R] (C : CochainComplex (ModuleCat.{u} R) ℤ) (F : ℕ → CochainComplex (ModuleCat.{u} R) ℤ) (ι : ∀ m : ℕ, F m ⟶ C) (step : ∀ m : ℕ, F m ⟶ F (m + 1)) (hzero : IsZero (F 0)) (hmono : ∀ m : ℕ, Mono (ι m)) (hcompat : ∀ m : ℕ, step m ≫ ι (m + 1) = ι m) (hexhaustive : ∀ (n : ℤ) (x : C.X n), ∃ (m : ℕ) (y : (F m).X n), (ι m).f n y = x) (hsplit : ∀ (m : ℕ) (n : ℤ), ∃ r : (F (m + 1)).X n ⟶ (F m).X n, (step m).f n ≫ r = 𝟙 ((F m).X n)) (hquot_d : ∀ (m : ℕ) (n : ℤ), (cokernel (step m)).d n (n + 1) = 0) (hquot_free : ∀ (m : ℕ) (n : ℤ), Module.Free R ((cokernel (step m)).X n)) : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat C",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c60537d47",
+  "group": "ND",
+  "result": "pass",
+  "note": "Wrote review.md. Verified snapshot hypotheses, conclusion, dependencies, sources, docstrings, edge cases, and verbatim signature. Explicit-file scompile.py reproduction passed in isolation and under the library module name. No repairs required."
  }
 }
