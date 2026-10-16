@@ -24,9 +24,105 @@
   "def-weil-point-derived-complete-module-complex",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First make the multiplication-tower condition concrete. Products of $A$-modules are exact: kernels and images are checked coordinatewise, and a tuple of elements in images has a tuple of preimages by choice. By [lem-weil-derived-limit-existence], products in $D(A)$ are termwise products and multiplication-tower derived limits exist. For any module $L$ and $f\\in A$, [def-weil-derived-limit] gives a triangle $T\\to(\\prod_{n\\geq1}L)[0]\\xrightarrow{\\Delta_f}(\\prod_{n\\geq1}L)[0]\\to T[1]$, where $\\Delta_f((a_n))=(a_n-fa_{n+1})$. By [lem-sf-derived-homology-long-exact], $H^0(T)=\\ker\\Delta_f$, $H^1(T)=\\operatorname{coker}\\Delta_f$, and all other cohomology vanishes. By [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to $0\\to T$, $T=0$ exactly when $\\Delta_f$ is bijective. Thus [def-weil-point-derived-complete-module-complex] says that $L$ is derived $I$-complete exactly when $\\Delta_f$ is bijective for every $f\\in I$. In particular, in a derived-complete module there is no nonzero sequence $(a_n)$ with $a_n=fa_{n+1}$.",
+   "uses": [
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09BA, lemma-derived-complete-finite, use of derived completeness; multiplication-tower computation underlying Tag 091P, lemma-hom-from-Af"
+   }
+  },
+  {
+   "text": "We will use cokernel closure, proved directly from step 1. Let $u:L\\to N$ be an $A$-linear map between derived $I$-complete modules, put $P=\\prod_{n\\geq1}L$, $Q=\\prod_{n\\geq1}N$, and let $U:P\\to Q$ act coordinatewise by $u$. For each $f\\in I$, the bijections $\\Delta_{f,L}$ and $\\Delta_{f,N}$ satisfy $\\Delta_{f,N}U=U\\Delta_{f,L}$, hence also $\\Delta_{f,N}^{-1}U=U\\Delta_{f,L}^{-1}$. Therefore both $\\Delta_{f,N}$ and its inverse preserve $U(P)$ and induce inverse maps on $Q/U(P)\\cong\\prod_{n\\geq1}(N/u(L))$; this canonical identification follows by coordinatewise lifting of quotient classes and the coordinatewise kernel calculation. The induced map is $\\Delta_{f,N/u(L)}$, so step 1 proves that $N/u(L)$ is derived $I$-complete.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091U, lemma-serre-subcategory, cokernel assertion of part (1), here verified directly using the multiplication-tower criterion of step 1"
+   }
+  },
+  {
+   "text": "For every finite integer $t\\geq0$, put $F=A^t$ with coordinatewise operations. It is ordinarily complete and separated: the canonical map $F\\to\\varprojlim_kF/I^kF$ is the product of $t$ copies of the assumed isomorphism $A\\to\\varprojlim_kA/I^k$ [def-weil-pbc-adic-completion]. Fix $f\\in I$. For a sequence $(b_n)$ in $F$, define $a_n\\in F$ by the compatible residues $a_n\\bmod I^kF=\\sum_{j=0}^{k-1}f^jb_{n+j}\\bmod I^kF$; compatibility holds since the added summand lies in $I^kF$. The equation $a_n-fa_{n+1}=b_n$ holds modulo every $I^kF$ and hence in $F$. Conversely $a_n=fa_{n+1}$ implies $a_n=f^ka_{n+k}\\in I^kF$ for every $k$, so $a_n=0$. Therefore $\\Delta_f$ is bijective and step 1 proves that $F$ is derived $I$-complete. This also covers $t=0$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09BA, lemma-derived-complete-finite, finite free source over a complete ring; explicit geometric-series verification of Tag 091R, lemma-complete-derived-complete"
+   }
+  },
+  {
+   "text": "Choose $x_1,\\ldots,x_t\\in M$ whose residue classes generate $M/IM$, using the hypothesis and [def-weil-finitely-generated-module]. Define $q:F=A^t\\to M$ by $q(a_1,\\ldots,a_t)=\\sum_j a_jx_j$ and put $C=M/q(F)$. The source is derived complete by step 3 and the target by hypothesis; hence the cokernel argument of step 2 makes $C$ derived $I$-complete. For every $m\\in M$ the residue-generation assumption gives $m=\\sum_j a_jx_j+z$ with $z\\in IM$ (lift the residue coefficients to $A$). Consequently every class in $C$ lies in $IC$, so $C/IC=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09BA, lemma-derived-complete-finite, choice of residue generators and the cokernel of q"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-noetherian-ring], choose generators $f_1,\\ldots,f_r$ of $I$, allowing $r=0$ when $I=0$. Define $C_0=C$ and $C_j=C/(f_1,\\ldots,f_j)C$ for $1\\leq j\\leq r$. Each $C_j$ is the cokernel of multiplication by $f_j$ on $C_{j-1}$, so induction using step 2 proves that every $C_j$ is derived $I$-complete. The equality $C=IC$ of step 4 gives $C_r=0$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09B9, lemma-derived-complete-zero, proof by successive quotients; used in Tag 09BA"
+   }
+  },
+  {
+   "text": "Prove $C_j=0$ by descending induction from $j=r$ to $j=0$. If $C_j=0$ and $j\\geq1$, then $C_{j-1}/f_jC_{j-1}=0$, so multiplication by $f_j$ on $C_{j-1}$ is surjective. If $a_1\\neq0$ were in $C_{j-1}$, recursively choose $a_{n+1}$ with $f_ja_{n+1}=a_n$; this gives a nonzero element of $\\ker\\Delta_{f_j}$, contradicting step 1 since $C_{j-1}$ is derived complete and $f_j\\in I$. Hence $C_{j-1}=0$. Thus $C=0$, including the case $r=0$, where the initial equality $C_r=0$ already says this. The map $q$ is surjective, so the chosen $x_1,\\ldots,x_t$ generate $M$ over $A$ by [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09B9, lemma-derived-complete-zero, compatible-sequence contradiction, completing the finite-generation argument of Tag 09BA"
+   }
+  },
+  {
+   "text": "The ring $A$ is Noetherian by hypothesis and is $I$-adically complete in the sense of [def-weil-pbc-adically-complete-ring], since this is exactly the canonical-map assumption. Step 6 proves that $M$ is finite. Apply [lem-weil-pbc-finite-module-complete-over-complete-noetherian] with $(R,J,N)=(A,I,M)$. Its conclusion is precisely that $M\\to\\varprojlim_{n\\geq1}M/I^nM$, $m\\mapsto(m\\bmod I^nM)_n$, is bijective. This is an $A$-linear map to compatible sequences with coordinatewise operations, so its bijectivity is the asserted module isomorphism.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09BA, lemma-derived-complete-finite, final completeness conclusion; existing finite-module completion theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09BA, lemma-derived-complete-finite, specialized to A already complete; Tag 091U, lemma-serre-subcategory, cokernel closure expanded in elementary step 2; Tag 09B9, lemma-derived-complete-zero, expanded in steps 5-6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +186,59 @@
    "results": "0 hits in Mathlib/RingTheory.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complete|derived.?completion|09BA",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic completeness and general Ext/derived category results do not state the derived-complete module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete module over a complete Noetherian ring with finitely generated quotient modulo the ideal is finitely generated",
+   "results": "IsAdicComplete; AdicCompletion.flat_of_isNoetherian; IsAdicComplete.toIsPrecomplete; IsPrecomplete; isAdicComplete_iff; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime; IsHausdorff.of_isLocalRing",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic completeness and general Ext/derived category results do not state the derived-complete module assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Module.Finite",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic completeness and general Ext/derived category results do not state the derived-complete module assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete modules with finite residue over an adically complete Noetherian ring are finite modules",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological Nakayama lemma for derived I-adically complete modules finite modulo I",
+   "results": "IsAdicComplete; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; IsPrecomplete; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; isPrecomplete_iff; isAdicComplete_iff; IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary adic completeness and general Ext/derived category results do not state the derived-complete module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|IsContramodule|contramodule|derivedComplete",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: general Ext and Serre-class infrastructure does not assert derived-complete module cokernel closure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The class of modules satisfying Hom and Ext1 vanishing against a localization is stable under quotient cokernels of maps within the class",
+   "results": "8 hits: instHasExtModuleCatOfSmall; CategoryTheory.IsGrothendieckAbelian.hasExt; CategoryTheory.hasExt_of_enoughInjectives; CategoryTheory.Abelian.Ext.instModule; CategoryTheory.HasExt.standard; CategoryTheory.HasExt; CategoryTheory.hasExt_of_enoughProjectives; CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions",
+   "date": "2026-10-16",
+   "verdict": "no match: general Ext and Serre-class infrastructure does not assert derived-complete module cokernel closure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "item": "lem-weil-point-sections-finiteness",
@@ -109,5 +254,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-derived-complete-module-finite",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps prove the multiplication-tower criterion, elementary cokernel closure, finite-free completeness, residue-generator construction, successive quotients, descending derived Nakayama, and ordinary completeness. No new nodes: the proposed cokernel child is folded into elementary step 2.",
+  "blueprint": "Realizes the integral point-equivalence landing clause of def-weil-finite-coefficient-point via finite generation of the complete cohomology modules in lem-weil-point-sections-finiteness; no unit steps or chapter route are replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "The generic product and Roos-limit existence theorem supplies the degree-zero multiplication-tower calculation; this unit has no replacement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The generic long exact sequence identifies the kernel and cokernel of the Roos map; this unit has no separate homological algebra theorem."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "The general cohomology criterion detects the zero derived limit; it is used only as a categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "After finite generation is proved, this generic algebra theorem gives ordinary module completeness. It does not replace the derived Nakayama argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q19-77d3336e9",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-77d3336e9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages and unit/chapter route. All seven steps are valid, including elementary cokernel closure and derived Nakayama; checked edge cases, canonical completion, coefficient distinctions, duplicates and dependency cycles. No new nodes or repairs. Detailed checks and four accepted tool uses are recorded in review.md."
+ }
 }
