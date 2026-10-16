@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "def-sfb-qlbar-coefficient-ring",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "pur713-def-coefficient-rings"
+  ]
  },
  "kind": "definition",
  "title": "The coefficient ring $\\overline{\\mathbf Q}_{\\ell,X}$",
@@ -19,9 +21,38 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicAlgClRingObj|padicAlgClCondensedRing|condensedRingObj|upperStarFromPoint",
+   "results": "No occurrences in Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pull back the condensed ring of finite-extension-valued continuous functions into the algebraic closure of the l-adic numbers to the pro-etale site of a scheme",
+   "results": "8 hits: Condensed.ofSheafProfinite and CondensedMod.ofSheafProfinite (Mathlib.Condensed.Explicit), LocallyConstant.comapₐ, LightCondensed.lanLightCondSet, Condensed.lanCondensedSet, Condensed.lanSheafProfinite, Algebra.Etale.formallyEtale, profiniteToCondensed. Read Mathlib/Condensed/Explicit.lean:73-84; these construct condensed objects, not the scheme-level coefficient ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"padicAlgClRingObj\"",
+   "results": "No hits for the quoted declaration-name substring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|condensed",
+   "results": "10 hits in Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean and Proetale.lean. Read ElladicCohomology.lean:58-74: ellAdicSheaf uses continuous Z_l-valued functions, not the finite-extension-valued Qbar condensed coefficient ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -38,5 +69,20 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.padicAlgClRingObj"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-qlbar-coefficient-ring",
+  "worker": "stage1",
+  "summary": "Audited the imported definition against the main-20261015 blueprint, its two statement dependencies, and the slopmaster2 source. The definition introduces the scheme-level coefficient ring as the inverse image of the condensed algebraic-closure ring and uses the existing pulled-back-coefficients definition for its commutative ring-object structure. No child node or proof step is needed. The expected Lean declaration was searched in WeilConjectures of slopmaster2 and was not found. The older pur713 coefficient-ring blueprint is recorded in same_as because it gives the same pullback construction for the broader family including Qbar, while using different source definitions.",
+  "blueprint": "The item realizes the complete statement of blueprint node def-sfb-qlbar-coefficient-ring (the definition clause in sk-prop-sfb-qlbar-colimit-x, order 1552); no proof steps are present."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-65e2f0ca6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-65e2f0ca6 (reviewer sub-agent of L); spot-checked: Mathematics and cited definitions read in full; checked finite-extension-valued coefficients, master target category and exchange direction, duplicate candidates, and edge cases. Repaired one missing-search-record fault in the whole corrected DAG JSON. Statement and dependencies unchanged. Full checks in review.md; no new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }
