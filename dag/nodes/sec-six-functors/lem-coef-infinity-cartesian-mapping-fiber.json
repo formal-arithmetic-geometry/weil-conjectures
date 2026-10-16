@@ -31,9 +31,124 @@
   "lem-coef-infinity-mapping-composition",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $w\\in E_s$ and abbreviate $A=\\operatorname{Map}_{E_s}(w,y)$, $M=\\operatorname{Map}_E(w,z)$, $N=\\operatorname{Map}_B(s,t)$ and $M_f=M\\times_N\\{f\\}$. The fiber $E_s$ is a quasicategory: a lifting problem for an inner horn in $E_s$ is the lifting problem for $p$ with lower simplex constant at $s$, and its filler remains over $s$, by [def-coef-infinity-fibrations]. Thus $A,M,N$ are Kan complexes by [lem-coef-infinity-pinch-comparison]. The map $q:M\\to N$ is a Kan fibration by [lem-coef-infinity-inner-mapping-fiber]. Its strict fiber $M_f$ is Kan: a horn in it lifts through $q$ over the constant simplex at $f$. We will construct postcomposition in this strict fiber, rather than assert that an arbitrary representative of an absolute composition class is strictly over $f$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-inner-mapping-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Proposition 5.1.3.11 and Notation 5.1.3.10: relative mapping space over the fixed base edge; Kan input from Proposition 4.6.1.22 (01P8)."
+   }
+  },
+  {
+   "text": "Define a simplicial set $Q$ as follows. A degree-$n$ simplex is a map $\\sigma:\\Delta^{n+2}\\to E$ whose entire face on $\\{0,\\ldots,n\\}$ is constant at $w$, whose vertex $n+1$ is $y$, whose last edge $\\{n+1,n+2\\}$ is $e$, and whose composite with $p$ is $f\\circ\\rho_n$, where $\\rho_n:[n+2]\\to[1]$ sends $0,\\ldots,n+1$ to $0$ and $n+2$ to $1$. For $\\alpha:[m]\\to[n]$, use the extension $[m+2]\\to[n+2]$ equal to $\\alpha$ on the first $m+1$ vertices and sending the two final vertices to $n+1,n+2$. These operators preserve all conditions and obey the simplicial identities. Restricting to the faces omitting the last vertex and the penultimate vertex gives simplicial maps $a:Q\\to A$ and $b:Q\\to M_f$, respectively. The first face lies entirely over $s$; the second lies over the degenerate $n$-simplex of the mapping-space vertex $f$, exactly as required by the right-pinched definition in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Explicit right-pinched version of the relative triangle correspondence in Notation 5.1.3.10 (01U7); all operators and restrictions are given here."
+   }
+  },
+  {
+   "text": "The map $a$ lifts every boundary inclusion $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, including $n=0$. Indeed a degree-$n$ lifting problem specifies the faces $d_0\\sigma,\\ldots,d_n\\sigma$ by its boundary in $Q$ and the face $d_{n+2}\\sigma$ by its given simplex of $A$. Together with the prescribed edge $e$ these are the horn $\\Lambda_{n+1}^{n+2}$ in $E$, over $f\\rho_n$ in $B$. Their intersections agree because the square is commutative and the boundary is simplicial. For $n=0$ this is the two-edge horn with edges $w\\to y$ and $e:y\\to z$; thus the empty boundary case is included. The inner-fibration clause of [def-coef-infinity-fibrations] fills the horn, since $0<n+1<n+2$. The filler has the required constant initial face, final edge and base image, so is a lift in $Q$. By the boundary-lifting characterization in [lem-coef-kan-quillen-right-proper], $a$ is a trivial Kan fibration and a weak homotopy equivalence. In particular $Q$ is Kan, since a horn in $Q$ can first be filled in $A$ and then lifted through the Kan fibration $a$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Direct inner-horn argument for the relative composition correspondence underlying Notation 5.1.3.10; boundary degree n becomes the inner horn of dimension n+2 missing face n+1."
+   }
+  },
+  {
+   "text": "The map $b$ also lifts every $\\partial\\Delta^n\\hookrightarrow\\Delta^n$. The boundary in $Q$ specifies $d_0\\sigma,\\ldots,d_n\\sigma$, while the given simplex of $M_f$ specifies $d_{n+1}\\sigma$. Along with $e$, their union is $\\Lambda_{n+2}^{n+2}$, again over $f\\rho_n$. For $n=0$ its edges are $w\\to z$ and $e:y\\to z$, so this case also has the required prescribed final edge. In every dimension the ordered last edge is precisely $\\{n+1,n+2\\}$ and its image is $e$. Hence the $p$-cartesian horn condition of [def-coef-infinity-fibrations] provides a filler. Its initial face is constant at $w$, its penultimate vertex is $y$, its final edge is $e$, and its base is $f\\rho_n$, so it is a lift in $Q$. Consequently $b$ is a trivial Kan fibration and a weak homotopy equivalence by [lem-coef-kan-quillen-right-proper]. This proves the equivalence of the span $A\\xleftarrow{a}Q\\xrightarrow{b}M_f$ directly; the cartesian mapping-fiber theorem itself has not been used as a premise.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Direct final-horn proof of the forward implication of Proposition 5.1.3.11, specialized to a cartesian edge; boundary degree n becomes the horn of dimension n+2 missing its final face."
+   }
+  },
+  {
+   "text": "Choose a section $r:A\\to Q$ of $a$ by lifting the monomorphism $\\varnothing\\hookrightarrow A$. This is possible because [lem-coef-kan-quillen-right-proper] expresses every monomorphism as a transfinite composite of pushouts of boundary inclusions, against all of which $a$ lifts by Step 3. Lifting along the endpoint inclusion $Q\\times\\partial\\Delta^1\\hookrightarrow Q\\times\\Delta^1$, with upper maps $\\mathrm{id}_Q$ and $ra$ and lower map $a\\,\\mathrm{pr}_Q$, gives a simplicial homotopy $h:\\mathrm{id}_Q\\simeq ra$ satisfying $ah=a\\,\\mathrm{pr}_Q$: the lower maps agree on the two endpoints since $ar=\\mathrm{id}_A$. Thus $r$ is a homotopy inverse to $a$. Define $c_e=br:A\\to M_f$. Since $a$ and $b$ are weak homotopy equivalences, the two-out-of-three property of the model structure in [lem-coef-kan-quillen-right-proper], applied to $ar=\\mathrm{id}_A$, shows that $r$ and then $c_e$ are weak homotopy equivalences. These sections are choices from the explicit boundary-lifting construction, and their homotopy class is fixed by $[c_e]=[b][a]^{-1}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Choice-independent representative of the relative composition class: section and endpoint-cylinder lifts; compare Stacks 08NM (lemma-trivial-kan) and 08NS (lemma-trivial-kan-homotopy), whose lifting argument is written out here."
+   }
+  },
+  {
+   "text": "We check that $c_e$ is the coherent postcomposition required in the statement. Write $j$ for the natural right-pinch map of [lem-coef-infinity-pinch-comparison], and let $V(w,y,z)$, $\\theta$ and $\\ell$ be the triangle space and restrictions of [lem-coef-infinity-mapping-composition]. Precomposition with the monotone map $[2]\\times[n]\\to[n+2]$ sending $(0,i)$ to $i$, $(1,i)$ to $n+1$ and $(2,i)$ to $n+2$ sends $\\sigma\\in Q_n$ to a simplex of $V(w,y,z)$. This construction commutes with every simplicial operator. Its restrictions to $01$, $12$ and $02$ are respectively $j(a\\sigma)$, the constant simplex at $e$, and $j(b\\sigma)$, with $a\\sigma$ viewed in $\\operatorname{Map}_E(w,y)$. Hence $\\theta v=(e,j a)$ and $\\ell v=j b$ exactly. Since $[\\theta]$ is invertible by the cited composition statement, its defining equation gives $[j][b]=[j]\\,[e\\circ-]\\,[a]$. Cancel the homotopy equivalence $[j]$ and then $[a]$ to see that $[b][a]^{-1}$, followed by $M_f\\hookrightarrow M$, is the specified absolute postcomposition class restricted to $A$. The construction through $Q$ retains its strict base $f$, and so provides the relative coherent postcomposition representative, not only its map on components.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Comparison of the explicit relative triangle span with the composition law of Notation 5.1.3.10 and the natural right-pinched comparison of Proposition 4.6.5.10 (01L5)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-path-comparison] with $U=M$, $u=q:M\\to N$, $V=\\Delta^0$ and $v=f:\\Delta^0\\to N$. All three spaces are Kan by Step 1, and $u$ is a Kan fibration. The strict pullback is $M_f$; its path pullback is $M\\times_{N,\\mathrm{ev}_0}\\operatorname{Fun}(\\Delta^1,N)\\times_{\\mathrm{ev}_1,N}\\{f\\}$, exactly the homotopy fiber in [def-cbc-enhanced-diagrams-cones], with paths directed from $q(m)$ to $f$. The comparison $k:M_f\\to\\operatorname{hofib}_f(q)$ sends $m$ to $(m,\\mathrm{const}_f)$ and is a weak homotopy equivalence. Thus $kc_e$ is the required equivalence. The homotopy fiber is Kan by the same comparison lemma's first assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Proposition 3.4.0.7 (0329) and Construction 3.4.0.3 (010B), in the order M, point, so paths go from q(m) to f."
+   }
+  },
+  {
+   "text": "For $T:E\\to E'$ over $B$, composition of every defining simplex with $T$ gives $t_Q:Q\\to Q'$ and the induced maps $t_A:A\\to A'$ and $t_f:M_f\\to M'_f$. Because $p'T=p$, all base simplices remain $f\\rho_n$, and the face restrictions give exact equalities $a't_Q=t_Aa$ and $b't_Q=t_fb$. The assumption that $T(e)$ is cartesian makes Step 4 valid for $b'$. With sections $r,r'$ chosen in Step 5, compose the homotopy $h':\\mathrm{id}_{Q'}\\simeq r'a'$ with $t_Qr$; since $a't_Qr=t_A$, this gives $t_Qr\\simeq r't_A$. Composing with $b'$ proves $t_fc_e=t_fbr=b't_Qr\\simeq b'r't_A=c_{T(e)}t_A$. Finally the path-pullback map sends $(m,\\gamma)$ to $(T(m),\\gamma)$, and therefore carries $(m,\\mathrm{const}_f)$ to $(T(m),\\mathrm{const}_f)$ exactly. It commutes with $k$. Composing the preceding homotopy with this constant-path comparison gives precisely the asserted square of homotopy-fiber equivalences, with left map induced by $T_s$ and right map the induced homotopy-fiber map. Only $e$ and $T(e)$ entered any cartesian horn lifting.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01U8",
+    "place": "Naturality of the constructed relative triangle span and constant-path comparison; the choice-of-section homotopy is given explicitly rather than asserted to restrict from an absolute homotopy."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01U8",
+  "place": "Direct right-pinched relative triangle proof of the cartesian case of Proposition 5.1.3.11: boundary lifts are inner horns and final cartesian horns in dimension n+2. Identifies the span with coherent composition, then uses the existing Kan strict/path comparison and explicit section homotopies for naturality. No appeal to Proposition 5.1.3.11 as a dependency."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +184,31 @@
    "results": "{\"t\": \"2026-10-16T20:03:47Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial inner fibrations, a cartesian arrow gives a homotopy pullback square on incoming mapping complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingProperty\\u03b9HornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.PathObject.instFibrationP\\u2081\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instFibrationP\\u2080\"], \"digest\": \"7f7c801e57d6f9e9\"}",
    "date": "2026-10-17",
    "verdict": "No match on independent second-reader search. Returned generic Quillen all-horn fibrations and abstract model-category homotopy results; these neither state the quasicategory mapping-fiber formula nor identify the relative undercategory projection as an acyclic fibration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian morphism in a quasicategory satisfies unique factorization as an equivalence of incoming mapping spaces over a fixed arrow",
+   "results": "{\"t\": \"2026-10-16T21:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"A cartesian morphism in a quasicategory satisfies unique factorization as an equivalence of incoming mapping spaces over a fixed arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCartesian.map_uniq\", \"CategoryTheory.Functor.IsCartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCartesian.ext\", \"CategoryTheory.Functor.IsStronglyCartesian.universal_property'\"], \"digest\": \"60e47d8da76ec1ac\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the returned IsCartesian/IsStronglyCartesian declarations in Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:49-120: these concern functors of ordinary categories, Hom-set factorization, and ordinary category instances, not quasicategorical mapping spaces or homotopy fibers. The dual cocartesian hits also use ordinary categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartesian\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cartesian\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the service returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|mappingSpace|morphismSpace|homotopyFiber",
+   "results": "{\"t\": \"2026-10-16T21:38:07Z\", \"tool\": \"grep\", \"query\": \"cartesian|mappingSpace|morphismSpace|homotopyFiber\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The sole hit is a comment about cartesian closedness in Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:28, not a declaration about relative mapping spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cartesian-initial-boundary-lift",
@@ -80,5 +216,21 @@
   "group": "Q99"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cartesian-mapping-fiber",
+  "worker": "NK second reader",
+  "summary": "Second reading replaced the unsupported application of the item's source theorem by an explicit eight-step horn proof with no new node. Constructed the relative triangle space Q, proved both face maps are trivial Kan fibrations by boundary-to-horn lifting (including degree zero), identified the resulting span with canonical composition, fixed path orientation in the homotopy fiber, and proved naturality by explicit section homotopies. The statement and inherited creation provenance are unchanged.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: local mapping-space comparison over one base edge preceding the cartesian-family boundary filler. Steps 1-6 construct the fiber equivalence from explicit relative triangles and horn fillers, Step 7 compares with the path homotopy fiber, and Step 8 proves naturality; the inherited via chain is preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NK-bb16b25ef",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-bb16b25ef (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes. The delivery adds no new nodes and does not change the statement. The statement is the cartesian (forward) case of Kerodon 01U8, with hofib orientation as in def-cbc. Kerodon is not archived; the report has the WANTED line and proof_origin is agent. Checked every step against the full statements of the cited nodes. Step 2: the relative triangle space Q is well defined; face maps a and b land in Map_{E_s}(w,y) and M_f (b over the degenerate simplex at f). Step 3: boundary lifts for a are inner Λ^{n+2}_{n+1} horns, including n=0. Step 4: boundary lifts for b are Λ^{n+2}_{n+2} horns with last edge e, so the cartesian clause applies; this proves 01U8 directly instead of assuming it. Step 5: section r and the homotopy over A come from boundary lifting (kan-quillen-right-proper), and two-out-of-three gives the equivalences. Step 6: the [2]x[n]->[n+2] map gives θv=(const_e, j a) and ℓv=j b, and mapping-composition's defining equation identifies br with postcomposition by e. Step 7: path comparison with U=M, u=q, V=Δ^0 gives exactly def-cbc's hofib. Step 8: naturality holds from exact face equalities and h'∘(t_Q r); this matches how both citers use it (initial-boundary-lift steps 1-2, simplex-inverse-extension step 2). All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. No cycle (124 dependencies checked by script) and proof_deps equals the union of uses. No duplicate: cocartesian-mapping-criterion has the opposite orientation and a homotopy-pullback form, and cbc-right-fibration-morphism-space covers right fibrations with a transport map. Edge cases checked: p=id, point base, nerves of ordinary categories, w=y, empty mapping spaces. No SGA used."
+ }
 }

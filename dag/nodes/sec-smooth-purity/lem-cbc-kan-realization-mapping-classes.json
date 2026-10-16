@@ -25,48 +25,114 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=|W|$ and define $V=\\operatorname{Sing}(T)$ with $V_n=\\operatorname{Cont}(|\\Delta^n|,T)$ and affine-precomposition operators. The realization adjunction of [lem-coef-realization-finite-limits] applies: $T$ is a k-space, since it is a realization. Its horn-pair assertion identifies $|\\Lambda_i^n|\\subseteq|\\Delta^n|$ with $D^{n-1}\\times\\{0\\}\\subseteq D^{n-1}\\times[0,1]$ for every $n\\geq1$ and every $i$, including the outer horns. The projection $(z,t)\\mapsto(z,0)$ gives a continuous retraction onto the horn. A map $\\Lambda_i^n\\to V$ is adjoint to a continuous map $|\\Lambda_i^n|\\to T$; precompose the latter with this retraction and take its adjoint to obtain a filler $\\Delta^n\\to V$. Hence $V$ is Kan. No condition in dimension zero has been used.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0149",
+    "place": "Proposition 3.6.5.2, singular Kan assertion; horn-pair and adjunction input expanded explicitly"
+   }
+  },
+  {
+   "text": "The characteristic-map unit $u=u_W:W\\to V$ sends $w\\in W_n$ to $t\\mapsto[w,t]$. By [lem-cbc-realization-singular-unit-weak], $|u|$ induces a bijection on path components and all based homotopy-group isomorphisms. The hypothesis already says $W$ is Kan, and step 1 proves $V$ is Kan. Apply [lem-cbc-kan-whitehead-inverse] to obtain $v:V\\to W$ and simplicial homotopies $vu\\simeq\\mathrm{id}_W$ and $uv\\simeq\\mathrm{id}_V$, with cylinders $W\\times\\Delta^1$ and $V\\times\\Delta^1$.",
+   "uses": [
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0149",
+    "place": "Proposition 3.6.5.2, unit-map argument, using Theorem 3.6.4.1 and Proposition 3.1.7.13"
+   }
+  },
+  {
+   "text": "Postcomposition with $u$ and $v$ gives inverse maps on edge-generated classes of maps from $K$. Indeed an edge $h:K\\times\\Delta^1\\to W$ is taken to $uh$, and similarly for $v$; thus both maps respect the generating relation and its equivalence closure. If $a:K\\to W$, precomposing the homotopy $vu\\simeq\\mathrm{id}_W$ with $a\\times\\mathrm{id}_{\\Delta^1}$ gives an edge between $vua$ and $a$. The homotopy $uv\\simeq\\mathrm{id}_V$ does the same for each $b:K\\to V$. Therefore $u_*:\\pi_0^{\\mathrm e}\\operatorname{Fun}(K,W)\\to\\pi_0^{\\mathrm e}\\operatorname{Fun}(K,V)$ is a bijection, inverse to $v_*$. This uses only the degreewise Fun and product definitions in [def-cbc-enhanced-diagrams-cones], not homotopy invariance under a weak equivalence of source shapes.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0149",
+    "place": "Proposition 3.6.5.2, postcomposition with the chosen homotopy inverse, written on edges"
+   }
+  },
+  {
+   "text": "By the adjunction in [lem-coef-realization-finite-limits], actual simplicial maps $b:K\\to V$ are in bijection with continuous maps $\\bar b:|K|\\to T$. Explicitly $\\bar b([k,t])=b_n(k)(t)$; the simplicial equation makes this independent of the quotient representative, and the quotient topology proves continuity. Conversely a continuous $F:|K|\\to T$ gives $b_n(k)(t)=F([k,t])$. Apply the same adjunction to $K\\times\\Delta^1$. The homeomorphism $\\rho_K:|K\\times\\Delta^1|\\cong|K|\\times[0,1]$ and its endpoint formulas in [lem-coef-simplicial-realization-cylinder] identify edges between $b_0,b_1$ with continuous homotopies between $\\bar b_0,\\bar b_1$, in both directions. Continuous homotopy of maps is already an equivalence relation: use a constant interval, reverse $t\\mapsto1-t$, and concatenate two homotopies by their formulas at $2t$ and $2t-1$ on the two closed half-intervals; they agree at the midpoint, so the pasted map is continuous. Consequently the actual-map bijection descends to a bijection $\\pi_0^{\\mathrm e}\\operatorname{Fun}(K,V)\\cong[|K|,T]_{\\mathrm{top}}$. The cylinder theorem uses the ordinary product topology, exactly as required in the statement.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/013H",
+    "place": "Example 3.6.2.5 on vertices and edges; Construction 3.6.5.1, with the ordinary cylinder theorem"
+   }
+  },
+  {
+   "text": "Compose the bijections of steps 3 and 4. For $a:K\\to W$ the map $u a$ has adjoint $[k,t]\\mapsto u_n(a_n(k))(t)=[a_n(k),t]$, which is exactly $|a|$. Thus this composite is the asserted map, with no unspecified comparison. If $r:K'\\to K$ and $s:W\\to W'$ is a simplicial map to another Kan complex, its two naturality composites both send $[a]$ to the class of the continuous map $[k',t]\\mapsto[s_n(a_n(r_n(k'))),t]$; hence both naturality squares commute. These compositions preserve homotopies by composing a homotopy with $|r|\\times\\mathrm{id}_{[0,1]}$ and $|s|$. Finally, if $K=\\varnothing$, both sides have one element (the empty map). If $W=\\varnothing$ and $K\\ne\\varnothing$, both sides are empty: a nonempty simplicial set has a vertex by face restriction and a nonempty realization. If both are empty the first case applies. These cases also satisfy the formulas above. No Kan property of $K$ or chosen basepoint was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1, the comparison on vertices and its naturality; empty cases made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-kan-whitehead-inverse",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0149",
+  "place": "Proposition 3.6.5.2, expanded on components using Example 3.6.2.5 and Construction 3.6.5.1. Online sources are not archived in literature/; WANTED entries are in report.md. The proof follows the unit/Whitehead route, not the descendant source-shape mapping-invariance theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For any simplicial set K and Kan complex W geometric realization gives a homotopy equivalence from the simplicial mapping complex to the space of continuous maps between their realizations",
-   "results": "{\"t\": \"2026-10-16T19:52:12Z\", \"tool\": \"leanfinder\", \"query\": \"For any simplicial set K and Kan complex W geometric realization gives a homotopy equivalence from the simplicial mapping complex to the space of continuous maps between their realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"sSetTopAdj\", \"SSet.toTop\", \"TopCat.toSSetObjEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.hoFunctor\", \"SSet.toTopSimplex\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"c325b553e81dcdbc\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: both semantic phrasings were read; sSetTopAdj and SSet.toTop (SingularSet.lean:14-100, read) construct the ordinary adjunction only. The file explicitly lists the Kan property of singular complexes and Quillen equivalence as TODOs (lines 34-37). Abstract model-category homotopy equivalence results do not identify these continuous mapping classes. Loogle and the realization/homotopy grep returned no hits."
+   "query": "Geometric realization induces a bijection between simplicial homotopy classes of maps into a Kan complex and continuous homotopy classes of maps between the realizations",
+   "results": "{\"t\": \"2026-10-16T20:55:27Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization induces a bijection between simplicial homotopy classes of maps into a Kan complex and continuous homotopy classes of maps between the realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.toSSetObjEquiv\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.HomotopyCategory.mk_surjective\", \"SSet.hoFunctor\", \"SSet.Truncated.HomotopyCategory₂.mk_surjective\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.mapHomotopyCategory\", \"SSet.hoFunctor.terminalIso\"], \"digest\": \"60c82abd4250142d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read SingularSet.lean:14-119 (SSet.toTop, TopCat.toSSetObjEquiv and sSetTopAdj) and ModelCategory/Homotopy.lean:200-255. The adjunction only identifies actual maps. The abstract model-category results do not identify geometric realization weak equivalences or continuous homotopies with these simplicial classes. SingularSet.lean:34-37 lists singular Kan fibrancy and Quillen equivalence as TODOs. Both semantic phrasings and the Loogle/grep results were inspected."
   },
   {
    "tool": "loogle",
    "query": "SSet.toTop, SSet.KanComplex",
-   "results": "{\"t\": \"2026-10-16T19:52:09Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, SSet.KanComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: both semantic phrasings were read; sSetTopAdj and SSet.toTop (SingularSet.lean:14-100, read) construct the ordinary adjunction only. The file explicitly lists the Kan property of singular complexes and Quillen equivalence as TODOs (lines 34-37). Abstract model-category homotopy equivalence results do not identify these continuous mapping classes. Loogle and the realization/homotopy grep returned no hits."
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, SSet.KanComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read SingularSet.lean:14-119 (SSet.toTop, TopCat.toSSetObjEquiv and sSetTopAdj) and ModelCategory/Homotopy.lean:200-255. The adjunction only identifies actual maps. The abstract model-category results do not identify geometric realization weak equivalences or continuous homotopies with these simplicial classes. SingularSet.lean:34-37 lists singular Kan fibrancy and Quillen equivalence as TODOs. Both semantic phrasings and the Loogle/grep results were inspected."
   },
   {
    "tool": "grep",
    "query": "(toTop|realization|realisation).*(Homotopy|homotop|ihom)|(Homotopy|homotop|ihom).*(toTop|realization|realisation)",
-   "results": "{\"t\": \"2026-10-16T19:52:09Z\", \"tool\": \"grep\", \"query\": \"(toTop|realization|realisation).*(Homotopy|homotop|ihom)|(Homotopy|homotop|ihom).*(toTop|realization|realisation)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: both semantic phrasings were read; sSetTopAdj and SSet.toTop (SingularSet.lean:14-100, read) construct the ordinary adjunction only. The file explicitly lists the Kan property of singular complexes and Quillen equivalence as TODOs (lines 34-37). Abstract model-category homotopy equivalence results do not identify these continuous mapping classes. Loogle and the realization/homotopy grep returned no hits."
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"grep\", \"query\": \"(toTop|realization|realisation).*(Homotopy|homotop|ihom)|(Homotopy|homotop|ihom).*(toTop|realization|realisation)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read SingularSet.lean:14-119 (SSet.toTop, TopCat.toSSetObjEquiv and sSetTopAdj) and ModelCategory/Homotopy.lean:200-255. The adjunction only identifies actual maps. The abstract model-category results do not identify geometric realization weak equivalences or continuous homotopies with these simplicial classes. SingularSet.lean:34-37 lists singular Kan fibrancy and Quillen equivalence as TODOs. Both semantic phrasings and the Loogle/grep results were inspected."
   },
   {
    "tool": "leansearch",
-   "query": "The realization functor induces bijections from simplicial homotopy classes into Kan targets to continuous homotopy classes between realizations",
-   "results": "{\"t\": \"2026-10-16T19:52:09Z\", \"tool\": \"leansearch\", \"query\": \"The realization functor induces bijections from simplicial homotopy classes into Kan targets to continuous homotopy classes between realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"sSetTopAdj\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.mapHomotopyCategory_obj\", \"TopCat.toSSet\", \"SSet.toTopSimplex\", \"SimplexCategory.toTop\", \"SSet.hoFunctor\"], \"digest\": \"ef6ff49ae7438ab9\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: both semantic phrasings were read; sSetTopAdj and SSet.toTop (SingularSet.lean:14-100, read) construct the ordinary adjunction only. The file explicitly lists the Kan property of singular complexes and Quillen equivalence as TODOs (lines 34-37). Abstract model-category homotopy equivalence results do not identify these continuous mapping classes. Loogle and the realization/homotopy grep returned no hits."
+   "query": "Maps from any simplicial set into a Kan complex up to simplicial homotopy agree with continuous maps of realizations up to homotopy",
+   "results": "{\"t\": \"2026-10-16T20:55:18Z\", \"tool\": \"leansearch\", \"query\": \"Maps from any simplicial set into a Kan complex up to simplicial homotopy agree with continuous maps of realizations up to homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"sSetTopAdj\", \"SSet.KanComplex\", \"SSet.hoFunctor\", \"ContinuousMap.Homotopy.toContinuousMap\", \"ContinuousMap.Homotopic\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.RelativeMorphism.homotopyClass\"], \"digest\": \"84da951eea6cdfe6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read SingularSet.lean:14-119 (SSet.toTop, TopCat.toSSetObjEquiv and sSetTopAdj) and ModelCategory/Homotopy.lean:200-255. The adjunction only identifies actual maps. The abstract model-category results do not identify geometric realization weak equivalences or continuous homotopies with these simplicial classes. SingularSet.lean:34-37 lists singular Kan fibrancy and Quillen equivalence as TODOs. Both semantic phrasings and the Loogle/grep results were inspected."
   },
   {
    "tool": "leanfinder",
-   "query": "The natural simplicial map from Fun X Y into continuous maps from the realization of X to the realization of Y is a homotopy equivalence when Y is fibrant Kan",
-   "results": "{\"t\": \"2026-10-16T19:52:33Z\", \"tool\": \"leanfinder\", \"query\": \"The natural simplicial map from Fun X Y into continuous maps from the realization of X to the realization of Y is a homotopy equivalence when Y is fibrant Kan\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.hoFunctor.unitHomEquiv\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\"], \"digest\": \"5c5b0583336815d9\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: both semantic phrasings were read; sSetTopAdj and SSet.toTop (SingularSet.lean:14-100, read) construct the ordinary adjunction only. The file explicitly lists the Kan property of singular complexes and Quillen equivalence as TODOs (lines 34-37). Abstract model-category homotopy equivalence results do not identify these continuous mapping classes. Loogle and the realization/homotopy grep returned no hits."
+   "query": "Simplicial approximation identifies unbased continuous homotopy classes from geometric realization of K to realization of fibrant W with components of the internal hom W to the power K",
+   "results": "{\"t\": \"2026-10-16T20:55:58Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial approximation identifies unbased continuous homotopy classes from geometric realization of K to realization of fibrant W with components of the internal hom W to the power K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"TopCat.toSSetObjEquiv\", \"SSet.Truncated.mapHomotopyCategory\", \"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory.mk\", \"SSet.hoFunctor\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\"], \"digest\": \"b0e1362f69162a0e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read SingularSet.lean:14-119 (SSet.toTop, TopCat.toSSetObjEquiv and sSetTopAdj) and ModelCategory/Homotopy.lean:200-255. The adjunction only identifies actual maps. The abstract model-category results do not identify geometric realization weak equivalences or continuous homotopies with these simplicial classes. SingularSet.lean:34-37 lists singular Kan fibrancy and Quillen equivalence as TODOs. Both semantic phrasings and the Loogle/grep results were inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-realization-weak-equivalence",
@@ -74,5 +140,34 @@
   "group": "NM"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kan-realization-mapping-classes",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split by the realization–singular unit, Kan Whitehead, postcomposition homotopies, and the adjunction on maps and cylinders. Reused the existing realization adjunction/horn-pair and ordinary cylinder nodes. Two statement-only inputs were searched with actual logged queries. Explicitly avoided the circular Kan mapping-invariance and Kan-Quillen nodes, checked ordinary product topology, naturality and empty cases.",
+  "blueprint": "Technical input beneath the opening compactification choice in thm-cbc-finite-level-proetale, through the unchanged recorded ancestry. Steps 1–4 realize the unit-map proof of the mapping-class comparison; step 5 identifies its map and checks the required naturality. No chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Generic realization adjunction, k-space output and realized horn-pair geometry; the compact-support unit contains no such topological input. This supports the existing technical realization route without replacing a unit step."
+   },
+   {
+    "node": "lem-coef-simplicial-realization-cylinder",
+    "why": "Generic identification of the realized simplicial cylinder with the ordinary topological cylinder, including endpoint maps; no node of this compact-support unit supplies that topology comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-624446a1c",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-624446a1c (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of all cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-realization-finite-limits, lem-coef-simplicial-realization-cylinder) and the Kerodon tags online. Kerodon 0149 (Prop. 3.6.5.2) says Fun(X,Y) -> Hom_Top(|X|,|Y|) is a homotopy equivalence when Y is Kan; the item's statement is its pi_0 consequence, unchanged and not weakened. 0142 (Milnor) matches lem-cbc-realization-singular-unit-weak with no extra hypothesis. The converse in 00UB, with 03X7 for the convention, matches lem-cbc-kan-whitehead-inverse. Both new nodes are true, statement-only, self-contained and strictly smaller than the item, so neither restates one of its clauses. Steps: (1) the horn-pair homeomorphism plus the adjunction give retraction fillers, so Sing|W| is Kan, outer horns included. (2) The unit node's conclusion is exactly the Whitehead node's hypothesis, and both Kan hypotheses are in force. (3) Postcomposing the cylinder homotopies H, J with a x id gives edges, so u_* and v_* are inverse. (4) The adjoint formula and the homeomorphism onto the ordinary product |K| x [0,1] with its endpoint formulas turn edges into continuous homotopies; homotopy is shown to be an equivalence relation. (5) The adjoint of u.a is |a|; naturality holds; the cases K empty, W empty and K=W=point are checked. Duplicate search over the whole DAG (Sing, Milnor, Whitehead, homotopy inverse/equivalence with Kan, unit weak equivalence) found no duplicate. Kan-Quillen, contractible-fiber-equivalence and kan-mapping-homotopy-invariance all reach the item, and the delivery correctly avoids them. The cited nodes do not reach the item, so the graph stays acyclic. Accepted tool_uses: lem-coef-realization-finite-limits and lem-coef-simplicial-realization-cylinder (generic topology inputs from sk-prop-sf-biduality-general). No SGA source and no base-change or coefficient question is involved. Kerodon is not archived, so proof_origin agent with WANTED lines is correct. No changes."
+ }
 }
