@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-proetale-inverse-image-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-lisse-uniqueness",
+   "place": "Proof, first assertion: the difference vanishes on G_m,B; second assertion: its stalk vanishes at the unit section. This node justifies passing from restriction equality to equality at the corresponding geometric stalk.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric stalks commute with pro-etale inverse image",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], and use the small pro-etale sites and compatible universes and small skeletons of [def-weil-pbc-proetale-site]. Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point], with $\\Omega$ in the chosen bound, and put $\\bar y=f\\circ\\bar x$. For a sheaf $F$ of sets or of abelian groups on $Y_{\\mathrm{proet}}$ [def-weil-pbc-sites-and-cohomology], let $f^{-1}F$ be the inverse image of [def-weil-proetale-inverse-image]. Stalks mean the colimits over pointed weakly etale neighbourhoods of [def-weil-proetale-geometric-stalk]. There is a canonical isomorphism\n$$\n c_{f,\\bar x,F}:(f^{-1}F)_{\\bar x}\\xrightarrow{\\sim}F_{\\bar y},\n$$\nnatural in $F$; for abelian sheaves it is additive. Explicitly, for every morphism $h:F\\to G$,\n$$\n c_{f,\\bar x,G}\\circ(f^{-1}h)_{\\bar x}=h_{\\bar y}\\circ c_{f,\\bar x,F}.\n$$\nIn particular, equality of the inverse images of two sheaf maps implies equality of their stalk maps at every geometric point of $Y$ obtained by composing $f$ with a geometric point of $X$. No finiteness, separation, smoothness or surjectivity assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 05V1, lemma-point-morphism-sites; specialize to the small pro-etale sites and their classical geometric points, described in proetale.tex Tag 0993, lemma-classical-point",
+  "external": [
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0993, lemma-classical-point"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-geometric-point",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sites and a point of the source site, the stalk of inverse image of any sheaf equals the stalk at the image point.",
+   "results": "TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*stalk|stalk.*proetale|sheafFiber.*(pullback|inverseImage)|point.*proetale",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism f of schemes and a geometric point x of the source, the geometric stalk of f inverse image of a sheaf on the small pro etale site is naturally the original stalk at f(x).",
+   "results": "AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.Scheme.stalkMap_germ, AlgebraicGeometry.Scheme.fromSpecStalk_app, AlgebraicGeometry.Scheme.Hom.germ_stalkMap, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.Scheme.fromSpecStalk_appTop",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks of pro etale inverse image sheaves commute with any morphism of schemes.",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"pullback\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representably flat cover preserving continuous functor of sites induces a point by precomposition and a natural isomorphism between inverse image followed by the fibre functor and the fibre at that point.",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber, CategoryTheory.Functor.IsLocallyFaithful, CategoryTheory.Functor.IsCoverDense.isContinuous, CategoryTheory.Functor.IsCoverDense.compatiblePreserving, CategoryTheory.Functor.isContinuous_of_coverPreserving, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.RepresentablyFlat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|def sheafFiberComapIso",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A point of a site composed with a representably flat continuous functor gives a point whose fibre functor agrees with sheaf pullback then the original fibre.",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism carries a point by composing inverse image functors, and the fibre of the pullback of a sheaf is naturally its fibre at the composite point.",
+   "results": "{\"t\": \"2026-10-15T22:09:11Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric morphism carries a point by composing inverse image functors, and the fibre of the pullback of a sheaf is naturally its fibre at the composite point.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w\", \"TopCat.Sheaf.pullbackIso\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply\", \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"TopCat.Sheaf.pullback\"], \"digest\": \"2b546b46c1e46507\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic site-point or topological comparison; no construction of the pointed weakly etale geometric point or identification of its composite along a scheme morphism. Read Mathlib/CategoryTheory/Sites/Point/Comap.lean:33-74; the scheme-specific assertion is not an exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|fiber.*[Cc]omap|stalk.*[Ii]nverse",
+   "results": "{\"t\": \"2026-10-15T22:09:11Z\", \"tool\": \"grep\", \"query\": \"sheafFiberComapIso|fiber.*[Cc]omap|stalk.*[Ii]nverse\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"ae9eb76b80b546a1\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic site-point or topological comparison; no construction of the pointed weakly etale geometric point or identification of its composite along a scheme morphism. Read Mathlib/CategoryTheory/Sites/Point/Comap.lean:33-74; the scheme-specific assertion is not an exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberComapIso\"",
+   "results": "{\"t\": \"2026-10-15T22:09:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafFiberComapIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app\"], \"digest\": \"6db4072ed88118a5\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: generic site-point or topological comparison; no construction of the pointed weakly etale geometric point or identification of its composite along a scheme morphism. Read Mathlib/CategoryTheory/Sites/Point/Comap.lean:33-74; the scheme-specific assertion is not an exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFiber|sheafFiberComapIso|proetale.*[Ss]talk",
+   "results": "{\"t\": \"2026-10-15T23:49:34Z\", \"tool\": \"grep\", \"query\": \"geometricFiber|sheafFiberComapIso|proetale.*[Ss]talk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"18c81a13da9a4c37\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: Comap.lean:41 constructs a point from an already given site point, and :69 compares its fibre with pullback. The scheme-specific pro-etale point and its pointed-neighbourhood identification are not provided. Scheme.Modules concerns structure-module sheaves; geometricFiber at Etale.lean:97 is etale, not pro-etale. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fiber\", \"Comap\"",
+   "results": "{\"t\": \"2026-10-15T23:49:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fiber\\\", \\\"Comap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\", \"CategoryTheory.GrothendieckTopology.Point.comap_fiber\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app\"], \"digest\": \"df171436eecd86a3\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: Comap.lean:41 constructs a point from an already given site point, and :69 compares its fibre with pullback. The scheme-specific pro-etale point and its pointed-neighbourhood identification are not provided. Scheme.Modules concerns structure-module sheaves; geometricFiber at Etale.lean:97 is etale, not pro-etale. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre functors of geometric points on scheme sites commute with pullback of sheaves under base change of schemes",
+   "results": "{\"t\": \"2026-10-15T23:49:34Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre functors of geometric points on scheme sites commute with pullback of sheaves under base change of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instCanonicallyOverFiber\"], \"digest\": \"9f52d2b3cee99175\"}",
+   "date": "2026-10-16",
+   "verdict": "candidate only: Comap.lean:41 constructs a point from an already given site point, and :69 compares its fibre with pullback. The scheme-specific pro-etale point and its pointed-neighbourhood identification are not provided. Scheme.Modules concerns structure-module sheaves; geometricFiber at Etale.lean:97 is etale, not pro-etale. No exact match or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+  "line": 69,
+  "why": "General site-point inverse-image comparison. Its point is Point.comap (line 41). The scheme-specific identification of the composed pointed-neighbourhood functor with the geometric point f o x, and the construction of the pro-etale geometric point, are not supplied by this declaration; therefore this is not a one-line Mathlib specialization."
+ },
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pur-lisse-uniqueness",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-inv"
+}

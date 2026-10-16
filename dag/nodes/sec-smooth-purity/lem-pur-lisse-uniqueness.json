@@ -3,45 +3,260 @@
  "blueprint": {
   "is": "lem-pur-lisse-uniqueness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniqueness for lisse sheaf maps",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $j:\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$. If $L$ and\n$M$ are finite locally constant $\\Lambda$-sheaves on\n$\\mathbf A^1_B$, then two sheaf morphisms $L\\to M$ which agree after\nrestriction by $j^*$ agree everywhere. Likewise, two maps between\nfinite locally constant sheaves on $\\mathbf G_{m,B}$ agree if they\nagree after restriction to the section $1:B\\to\\mathbf G_{m,B}$.",
+ "statement": "In the purity conventions of this chapter [def-pur-conventions], let $B$ be a separated finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism], as in the affine-line datum of the purity-conventions unit. Let $\\mathbf A^1_B$ be the affine line [def-sbc-affine-space], let $\\mathbf G_{m,B}$ be the open complement of its zero section $t=0$, write $j:\\mathbf G_{m,B}\\hookrightarrow\\mathbf A^1_B$ for the inclusion, and let $e:B\\to\\mathbf G_{m,B}$ be the unit section $t=1$. Work with ordinary sheaves on the small pro-etale sites [def-weil-pbc-proetale-site], with ordinary module restriction as in [def-weil-pbc-proetale-operations]. Here finite locally constant $\\Lambda$-sheaves are locally constant [def-weil-proetale-locally-constant-sheaf] with finite geometric stalks [def-weil-proetale-geometric-stalk].\n\nIf $L,M$ are finite locally constant $\\Lambda$-sheaves on $\\mathbf A^1_B$, then two sheaf morphisms $\\varphi,\\psi:L\\to M$ satisfying $j^*\\varphi=j^*\\psi$ are equal. Likewise, if $L,M$ are finite locally constant $\\Lambda$-sheaves on $\\mathbf G_{m,B}$, two sheaf morphisms $\\varphi,\\psi:L\\to M$ satisfying $e^*\\varphi=e^*\\psi$ are equal.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-uniqueness.md",
   "place": "node lem-pur-lisse-uniqueness, order 1960"
  },
  "stmt_deps": [
   "def-pur-conventions",
-  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-affine-space",
   "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
  ],
  "proof": [
   {
-   "text": "By [lem-pur-lisse-morphism-rigidity](1) the sheaf\n$\\mathcal Hom(L,M)$ is finite locally constant on the source, and by\n[lem-pur-lisse-morphism-rigidity](2) a morphism between finite\nlocally constant sheaves vanishes as soon as it vanishes at one\ngeometric point of every connected component of that source. Apply\nthis to the difference of the two morphisms. For the first assertion\nthe difference vanishes on $\\mathbf G_{m,B}$, and every connected\ncomponent of $\\mathbf A^1_B$ meets $\\mathbf G_{m,B}$ by\n[lem-pur-a1-components](2); for the second assertion the\ndifference is a morphism on $\\mathbf G_{m,B}$ whose stalk vanishes at\nthe unit section, and every connected component of\n$\\mathbf G_{m,B}$ meets the image of that section by\n[lem-pur-a1-components](3). This is ordinary faithfulness for\nmorphisms of sheaves, not the false derived-category faithfulness\nexcluded in the remark after [thm-pur-td-criterion].",
+   "text": "By [def-sbc-affine-space], the affine line here is the relative spectrum $\\underline{\\operatorname{Spec}}_B(\\mathcal O_B[t])$, exactly the space in [lem-pur-a1-components]; its punctured complement and unit section are the same $t=0$ complement and $t=1$ section. First check the geometric hypotheses. On a finite affine cover $\\operatorname{Spec}R_i$ of $B$, the two total spaces have charts $\\operatorname{Spec}R_i[t]$ and $\\operatorname{Spec}R_i[t,t^{-1}]$ by [def-sbc-affine-space]. These algebras are finitely generated over $k$ (adjoin $t$ in the first case and $t,u$ with $tu=1$ in the second), so both total spaces are finite type. Their relative diagonals over $B$ are closed, cut out on these charts by $t_1-t_2=0$ (also in the Laurent algebra). The map from each relative self-product to the self-product over $k$ is a closed immersion, being the pullback of the closed diagonal of $B$: locally, if an ideal $I$ defines that diagonal, its extended ideal defines this map. Adding the equation $t_1-t_2$ to this ideal cuts out the composite with the relative diagonal, which is the diagonal over $k$. Thus both total spaces are separated. If $B$ is empty both total spaces are empty; the empty covering forces every module sheaf on their sites to have its unique zero sections, so any two maps agree. Henceforth assume $B$ nonempty, as required by the component lemma.",
    "uses": [
-    "lem-pur-lisse-morphism-rigidity",
-    "lem-pur-a1-components",
-    "thm-pur-td-criterion"
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pur-a1-components"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-uniqueness.md",
+    "place": "Proof, hypotheses for applying rigidity and the component lemma; elementary chart and empty-base verification"
+   }
+  },
+  {
+   "text": "For the first assertion let $\\delta=\\varphi-\\psi$. For each connected component $C$ of $\\mathbf A^1_B$, [lem-pur-a1-components] says that every connected component of $\\mathbf A^1_B$ meets $\\mathbf G_{m,B}$; choose a point $x$ of $C\\cap\\mathbf G_{m,B}$. By [def-weil-algebraic-closure], choose an algebraic closure of its residue field; [def-weil-geometric-point] then gives a geometric point $\\bar x$ of $\\mathbf G_{m,B}$. By naturality in [lem-pur-proetale-inverse-image-stalk], equality $j^*\\varphi=j^*\\psi$ implies $\\varphi_{j\\bar x}=\\psi_{j\\bar x}$: conjugate the equal restricted stalk maps by the two comparison isomorphisms. For the finite coefficient ring $\\Lambda=A$ of [def-pur-conventions], [prop-weil-pbc-proetale-constant-ring-map] makes the canonical map $c_u:u^{-1}\\Lambda_V\\to\\Lambda_U$ an isomorphism. Use this coefficient identification with $u=j:U=\\mathbf G_{m,B}\\to V=\\mathbf A^1_B$ and $R_U=\\Lambda_U$, $R_V=\\Lambda_V$. The module restriction is, by [def-weil-pbc-proetale-operations], $u^{-1}F\\otimes_{u^{-1}R_V,c}R_U$. Under the prescribed coefficient identification, the elementary maps $m\\otimes r\\mapsto c^{-1}(r)m$ and $m\\mapsto m\\otimes1$ identify its underlying abelian inverse image and its induced stalk map; subtraction of the equal stalk maps therefore gives $\\delta_{j\\bar x}=0$. We now have one vanishing geometric stalk in every component. Apply clauses (1) and (2) of the current [lem-pur-lisse-morphism-rigidity] statement with $T=\\mathbf A^1_B$: clause (1) supplies finite local constancy of the ordinary internal Hom, while clause (2) says that a morphism vanishing at one geometric point of every connected component is zero. The separated-finite-type check in step 1 and the given local constancy of $L,M$ verify its hypotheses. It gives $\\delta=0$, hence $\\varphi=\\psi$.",
+   "uses": [
+    "lem-pur-a1-components",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "lem-pur-proetale-inverse-image-stalk",
+    "def-pur-conventions",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-lisse-morphism-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-uniqueness.md",
+    "place": "Proof, first assertion: components of A1 meet Gm; apply rigidity to the difference"
+   }
+  },
+  {
+   "text": "For the second assertion take $\\delta=\\varphi-\\psi$ on $\\mathbf G_{m,B}$. For each of its connected components $D$, [lem-pur-a1-components] says that every connected component of $\\mathbf G_{m,B}$ meets the image of the unit section; choose $b\\in B$ with $e(b)\\in D$. By [def-weil-algebraic-closure], choose an algebraic closure of $\\kappa(b)$; [def-weil-geometric-point] gives a geometric point $\\bar b$ over $b$. Apply [lem-pur-proetale-inverse-image-stalk] to $e:B\\to\\mathbf G_{m,B}$. Naturality identifies the two equal stalk maps of $e^*\\varphi$ and $e^*\\psi$ at $\\bar b$ with the stalk maps of $\\varphi$ and $\\psi$ at $e\\bar b$, so $\\delta_{e\\bar b}=0$; for $u=e$ and the finite coefficient ring $\\Lambda=A$ of [def-pur-conventions], [prop-weil-pbc-proetale-constant-ring-map] makes the canonical map $c_u:u^{-1}\\Lambda_V\\to\\Lambda_U$ an isomorphism. With $U=B$, $V=\\mathbf G_{m,B}$, $R_U=\\Lambda_U$, $R_V=\\Lambda_V$ and this coefficient identification, the module restriction is $u^{-1}F\\otimes_{u^{-1}R_V,c}R_U$ by [def-weil-pbc-proetale-operations], and the elementary maps $m\\otimes r\\mapsto c^{-1}(r)m$ and $m\\mapsto m\\otimes1$ identify its underlying abelian inverse image and its induced stalk map. The source of $\\delta$ is now $\\mathbf G_{m,B}$, separated finite type by step 1, and its two sheaves are finite locally constant by the second assertion's hypotheses. Apply clauses (1) and (2) of the current [lem-pur-lisse-morphism-rigidity] statement: clause (1) supplies finite local constancy of the ordinary internal Hom, and clause (2) applies because the vanishing points meet every connected component. It gives $\\delta=0$, hence $\\varphi=\\psi$.",
+   "uses": [
+    "lem-pur-a1-components",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "lem-pur-proetale-inverse-image-stalk",
+    "def-pur-conventions",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-lisse-morphism-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-uniqueness.md",
+    "place": "Proof, second assertion: components of Gm meet the unit section; apply rigidity to the difference"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pur-lisse-morphism-rigidity",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
   "lem-pur-a1-components",
-  "thm-pur-td-criterion"
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "lem-pur-proetale-inverse-image-stalk",
+  "def-pur-conventions",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-lisse-morphism-rigidity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-inv/lem-pur-lisse-uniqueness.md",
-  "place": "## Proof"
+  "place": "Proof, both assertions, expanded with Stacks 05V1 inverse-image stalk compatibility and elementary geometry; unit sk-prop-a1-inv Proof (i)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between finite locally constant sheaves on the affine line are determined by restriction to the punctured line; on the multiplicative group they are determined by the unit section.",
+   "results": "CompHausLike.LocallyConstant.presheaf_ext, TopCat.Presheaf.section_ext, LightCondensed.hom_ext, LightCondensed.hom_ext_iff, AlgebraicGeometry.Scheme.Modules.hom_ext, TopCat.Presheaf.IsSheaf.section_ext, Profinite.exists_locallyConstant_finite_aux, AlgebraicGeometry.Scheme.Modules.hom_ext_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of locally constant sheaves is zero if it is zero at one geometric point in each connected component of the scheme.",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of morphisms of local systems is faithful along a morphism of schemes whose image meets every connected component.",
+   "results": "LightCondSet.LocallyConstant.instFaithfulFunctor, CondensedSet.LocallyConstant.instFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.Functor.IsLocallyFaithful.of_faithful, CategoryTheory.Functor.IsCoverDense.faithful_sheafPushforwardContinuous, CategoryTheory.instFaithfulSheafFunctorOppositeCompSheafComposeSheafToPresheaf, AlgebraicGeometry.Scheme.AffineZariskiSite.instFaithfulOpensToOpensFunctor, CategoryTheory.Functor.IsDenseSubsite.faithful_sheafPushforwardContinuous",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyConstant, CategoryTheory.Functor.map",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.IsLocallyConstant'",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier; retried with a quoted substring and the qualified candidate name"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*(injective|faithful)|(injective|faithful).*locallyConstant|oneSection|lisse",
+   "results": "Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/LightProfinite/Basic.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsLocallyConstant",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Sheaf.IsLocallyConstant'",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier; retried with a quoted substring and the qualified candidate name"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant|IsFiniteLocallyConstant|oneSection",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsLocallyConstantSheaf",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.IsLocallyConstantSheaf'",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier; retried with a quoted substring and the qualified candidate name"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*(injective|faithful)|(injective|faithful).*locallyConstant|oneSection|lisse",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\"",
+   "results": "IsLocallyConstant, IsLocallyConstant.const, IsLocallyConstant.of_discrete, LocallyConstant.isLocallyConstant, IsLocallyConstant.continuous, IsLocallyConstant.of_constant, IsLocallyConstant.eventuallyConst, IsLocallyConstant.range_finite",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantSheaf|LocallyConstant.*Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|presheafFiberCompIso|def|iso",
+   "results": "16, 17, 18, 19, 20",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sites and a point of the source site, the stalk of inverse image of any sheaf equals the stalk at the image point.",
+   "results": "TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*stalk|stalk.*proetale|sheafFiber.*(pullback|inverseImage)|point.*proetale",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism f of schemes and a geometric point x of the source, the geometric stalk of f inverse image of a sheaf on the small pro etale site is naturally the original stalk at f(x).",
+   "results": "AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.Scheme.stalkMap_germ, AlgebraicGeometry.Scheme.fromSpecStalk_app, AlgebraicGeometry.Scheme.Hom.germ_stalkMap, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.Scheme.fromSpecStalk_appTop",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalks of pro etale inverse image sheaves commute with any morphism of schemes.",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"pullback\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "class RepresentablyFlat|def RepresentablyFlat|instance.*RepresentablyFlat|IsCofiltered.*StructuredArrow",
+   "results": "Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representably flat cover preserving continuous functor of sites induces a point by precomposition and a natural isomorphism between inverse image followed by the fibre functor and the fibre at that point.",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber, CategoryTheory.Functor.IsLocallyFaithful, CategoryTheory.Functor.IsCoverDense.isContinuous, CategoryTheory.Functor.IsCoverDense.compatiblePreserving, CategoryTheory.Functor.isContinuous_of_coverPreserving, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.RepresentablyFlat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|def sheafFiberComapIso",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A point of a site composed with a representably flat continuous functor gives a point whose fibre functor agrees with sheaf pullback then the original fibre.",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtale|proetale|smallProetale",
+   "results": "34, 50, 52, 57, 58",
+   "date": "2026-10-16",
+   "verdict": "no match: hits do not state geometric-stalk compatibility on the small pro-etale site; general site-point comparison is a candidate requiring identification of geometric point functors"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +289,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-inv"
+ "unit": "sk-prop-a1-inv",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-lisse-uniqueness",
+  "worker": "stage1",
+  "summary": "Made explicit the separated finite-type base required in the source purity-conventions unit; defined the affine-line datum, local constancy, stalks and ordinary restriction through their actual definition nodes. Expanded the proof into the geometric checks and the two componentwise rigidity arguments, including the empty base. Reused both existing local lemmas, removed the derived-category caution from proof dependencies, and created one statement-only pro-etale inverse-image stalk compatibility lemma. Mathlib has a general site-point comparison but not the geometric pro-etale identification; no Mathlib leaf or exact project attachment claimed. Revalidated the changed component lemma against its relative-spectrum definition and maximal-nonempty-component convention; made this identification explicit and refreshed the component citation quotations. Second reading supplies the existing canonical constant-coefficient isomorphism theorem in both restriction arguments, so the scalar identification is applied with its required hypothesis. Fresh second reading also cites the existing algebraic-closure existence statement for the two chosen geometric points.",
+  "blueprint": "Realizes both assertions in the imported proof and unit sk-prop-a1-inv Proof (i); the first sentence about internal Hom is already incorporated in the stated rigidity lemma, whose clause (2) is used directly. The final derived-category warning is explanatory, not a proof dependency.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q24-0341fcf45",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-0341fcf45 (reviewer sub-agent of L); spot-checked: The item and new stalk-comparison node were read in full, with cited nodes, unit route, Stacks Tags 05V1/0993, Mathlib candidate, hypotheses, edge cases, and duplicate checks verified. One repairable metadata fault remains: the new node’s `created` object omitted required `by` and `date`; corrected whole-node JSON is under `fixes/dag/nodes/sec-smooth-purity/lem-pur-proetale-inverse-image-stalk.json`.; 1 file(s) fixed by the reviewer"
+ }
 }
