@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
 # Fourier inversion: pullback of Weil complexes
@@ -31,13 +32,13 @@ theorem WeilComplex.nonempty_iso_upperStar_comp {X Y Z : Scheme.{u}}
     [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) (f ≫ g) ≅
       WeilComplex.upperStar g ⋙ WeilComplex.upperStar f) :=
-  sorry
+  ⟨WeilComplex.upperStarCompIso f g⟩
 
 /-- Pullback of Weil complexes along the identity is the identity. -/
 theorem WeilComplex.nonempty_iso_upperStar_id {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) (𝟙 X) ≅ 𝟭 _) :=
-  sorry
+  ⟨WeilComplex.upperStarIdIso X⟩
 
 
 /-- Pullback commutes with the tensor product with a lisse Weil sheaf:
