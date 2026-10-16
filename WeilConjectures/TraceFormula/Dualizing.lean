@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TraceFormula.Basic
 
@@ -37,8 +38,11 @@ of pure dimension `d` over `s`,
 smooth curve `C`, which is what makes the local terms of the Frobenius correspondence on a curve
 computable (`WeilConjectures.TraceFormula.Correspondence`). In relative dimension zero, for an
 étale morphism `j : U ⟶ X` such as the inclusion of an open and closed subscheme, purity is the
-identification `Rj^! ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U` (`ProEtale.CondensedRing.etalePurityIso`), and for the base
-point `ω_s ≅ ℚ̄_ℓ,s` (`ProEtale.CondensedRing.dualizingComplexPointIso`).
+identification `Rj^! ℚ̄_ℓ,X ≅ ℚ̄_ℓ,U` (`ProEtale.CondensedRing.etalePurityIso`).
+
+For the base point no purity is needed: `a_s` is the identity of `s`, and
+`ω_s = R(𝟙 s)^! ℚ̄_ℓ,s ≅ ℚ̄_ℓ,s` is the identity isomorphism of the exceptional inverse image
+(`ProEtale.CondensedRing.dualizingComplexPointIso`).
 
 ## Borel–Moore sections and integration
 
@@ -60,7 +64,11 @@ integral of its restriction, `LT_B(α) = ∫_B j^* α`
 (`ProEtale.CondensedRing.BorelMooreSection.localTerm`, blueprint `def-trf-local-term`), and the
 integral over a finite disjoint union of open and closed pieces is the sum of the local terms
 (`ProEtale.CondensedRing.BorelMooreSection.integral_eq_sum_localTerm`, blueprint
-`lem-trf-integration-component-sum`).
+`lem-trf-integration-component-sum`). Over the base point the integral of `α` is `α` itself,
+read through `ω_s ≅ ℚ̄_ℓ,s` (`ProEtale.CondensedRing.BorelMooreSection.integral_point`): the
+identity isomorphisms of the six functors for `𝟙 s` are compatible with the unit comparison of
+the monoidal pullback `L(𝟙 s)^*`
+(`ProEtale.CondensedRing.boundedConstructibleLowerStarId_inv_app_unit`).
 
 ## Main definitions
 
@@ -68,8 +76,9 @@ integral over a finite disjoint union of open and closed pieces is the sum of th
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp`: the identity and composition
   isomorphisms of the exceptional inverse image.
 - `ProEtale.CondensedRing.dualizingComplex`, `ProEtale.CondensedRing.dualizingComplexComp`.
-- `ProEtale.CondensedRing.etalePurityIso`, `ProEtale.CondensedRing.dualizingComplexSmoothIso`,
-  `ProEtale.CondensedRing.dualizingComplexPointIso`: smooth purity for the dualizing complexes.
+- `ProEtale.CondensedRing.etalePurityIso`, `ProEtale.CondensedRing.dualizingComplexSmoothIso`:
+  smooth purity for the dualizing complexes.
+- `ProEtale.CondensedRing.dualizingComplexPointIso`: `ω_s ≅ ℚ̄_ℓ,s`.
 - `ProEtale.CondensedRing.BorelMooreSection`, `BorelMooreSection.restrict`,
   `BorelMooreSection.integral`, `BorelMooreSection.localTerm`.
 
@@ -189,13 +198,13 @@ noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension
   smoothPurityIso ℓ (toPoint X) d
 
 variable (k) in
-/-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: étale purity for the
-identity of `s`. -/
+/-- The dualizing complex of the base point is the unit, `ω_s ≅ ℚ̄_ℓ,s`: the structure morphism
+`a_s = toPoint s` is the identity of `s`, and this is the identity isomorphism
+`R(𝟙 s)^! ≅ 𝟭` of the exceptional inverse image (`boundedConstructibleUpperShriekId`) at the
+unit. -/
 noncomputable def dualizingComplexPointIso :
     dualizingComplex ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  haveI : SmoothOfRelativeDimension 0 (toPoint (point k)).left :=
-    inferInstanceAs (SmoothOfRelativeDimension 0 (𝟙 (Spec (.of k))))
-  etalePurityIso ℓ (toPoint (point k))
+  (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 end Dualizing
 
@@ -285,8 +294,30 @@ instance : IsProper (point k).hom :=
 /-- **Point normalization of the integral**: over the base point, where `ω_s ≅ ℚ̄_ℓ,s`
 (`dualizingComplexPointIso`), the integral of a Borel–Moore section is the section itself. -/
 theorem integral_point (α : BorelMooreSection ℓ (point k)) :
-    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom :=
-  sorry
+    α.integral = α ≫ (dualizingComplexPointIso ℓ k).hom := by
+  have h := homEquiv_comp_conjugateEquiv_app
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k)))
+    Adjunction.id (boundedConstructibleLowerShriekId ℓ (point k)).inv
+    (((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (𝟙 (point k))).homEquiv _ _).symm α)
+  rw [Equiv.apply_symm_apply, Adjunction.id_homEquiv_apply, ← Iso.symm_hom,
+    ← conjugateIsoEquiv_apply_hom] at h
+  rw [dualizingComplexPointIso, Iso.app_hom, boundedConstructibleUpperShriekId]
+  erw [h]
+  have hL : (boundedConstructibleLowerShriekId ℓ (point k)).inv.app (𝟙_ _) =
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (𝟙 (point k))).unit.app (𝟙_ _) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).map
+          (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (𝟙 (point k)))).inv ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 (point k))).inv.app
+          (𝟙_ _) := by
+    rw [boundedConstructibleLowerShriekId, Iso.trans_inv, NatTrans.comp_app,
+      boundedConstructibleLowerStarId_inv_app_unit, Category.assoc]
+  refine Eq.trans ?_ (congrArg (· ≫ ((boundedConstructibleUpperShriekAdjunction
+    (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k))).homEquiv _ _).symm α) hL).symm
+  simp only [Category.assoc]
+  rfl
 
 end BorelMooreSection
 

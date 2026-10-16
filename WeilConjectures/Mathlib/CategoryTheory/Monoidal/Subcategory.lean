@@ -35,7 +35,16 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   (F : C ⥤ D) [F.Monoidal] (hF : ∀ X : P.FullSubcategory, Q (F.obj X.obj))
 
 /-- The restriction `Q.lift (P.ι ⋙ F)` of a strong monoidal functor `F` to full monoidal
-subcategories is strong monoidal, with the comparison isomorphisms of `F`. -/
+subcategories is strong monoidal, with the comparison isomorphisms of `F`: it is the functor
+making the square
+```
+P.FullSubcategory --Q.lift (P.ι ⋙ F) hF--> Q.FullSubcategory
+       |                                         |
+      P.ι                                       Q.ι
+       v                                         v
+       C ------------------- F ----------------> D
+```
+commute, `P.ι ⋙ F = Q.lift (P.ι ⋙ F) hF ⋙ Q.ι`. -/
 noncomputable instance monoidalLift : (Q.lift (P.ι ⋙ F) hF).Monoidal :=
   Functor.CoreMonoidal.toMonoidal
     { εIso := Q.fullyFaithfulι.preimageIso (Functor.Monoidal.εIso F)
