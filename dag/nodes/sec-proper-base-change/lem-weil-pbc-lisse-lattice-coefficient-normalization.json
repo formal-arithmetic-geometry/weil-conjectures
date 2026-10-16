@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-lisse-lattice-coefficient-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), Normalization of finite-extension continuous coefficient sheaves",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalization of finite-extension continuous coefficient sheaves",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $\\ell$ be prime, and let $E/\\mathbf Q_\\ell$ be finite in universe zero [def-weil-l-adic-coefficient-extension]. Compare the continuous spectral-norm coefficient sheaves $A_X\\to E_X$ [def-weil-pbc-lisse-lattice-coefficients] with the lattice coefficient sheaves constructed from the lifted field $\\mathrm{ULift}(E)$ equipped with its canonical absolute value [lem-weil-pbc-lattice-sheaf-locally-constant]. There are isomorphisms from the lifted integral and rational coefficient sheaves to $A_X$ and $E_X$ which commute with their inclusion maps. If $L$ is a finite locally free $E_X$-module sheaf [def-weil-sheaf-of-modules-category], its restriction of scalars along the rational isomorphism is finite locally free.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The lift algebra equivalence preserves minimal polynomials and therefore the spectral norm. Its composite with WithAbs.equiv is an isometry. The characterization of the coefficient integer ring by absolute value at most one restricts it to an isometric ring equivalence of the integral coefficients.",
+   "uses": [
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1, finite coefficient fields"
+   }
+  },
+  {
+   "text": "Postcomposition of continuous functions with each isometric ring equivalence and its inverse gives objectwise ring isomorphisms. They are natural under precomposition. The two coefficient maps commute sectionwise, giving the required square of sheaves.",
+   "uses": [
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1, continuous coefficients"
+   }
+  },
+  {
+   "text": "Push forward the module along the rational coefficient isomorphism on the identity site. Keep the original covering and transport each finite set of free generators on its covering slice. Restriction along the coefficient isomorphism identifies the unit modules and preserves colimits, so the transported generating maps remain isomorphisms. The generic restriction step is exposed as finiteLocallyFree_restrict and also reused by integral lattice pair transport, so there is only one proof of it.",
+   "uses": [
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), change of coefficient presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-lattice-sheaf-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The lifted WithAbs presentation of a finite p-adic coefficient field is isomorphic to its spectral norm presentation and restriction of scalars preserves finite locally free module sheaves",
+   "results": "NormedSpace.restrictScalars; Padic.adicCompletionEquiv; restrict-scalars seminormed and normed instances; no continuous-sheaf theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isometric ring equivalence between a finite p-adic coefficient field and its lifted WithAbs presentation gives compatible isomorphisms of their continuous integral and rational coefficient sheaves",
+   "results": "Padic.adicCompletionEquiv; Rat.HeightOneSpectrum.adicCompletion.padicEquiv; Padic.withValRingEquiv; PadicInt.adicCompletionIntegersEquiv; no exact match",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*(equiv|Equiv)|algEquiv_eq|restrictScalarsIsoOfEquiv in Mathlib and the project",
+   "results": "minpoly.algEquiv_eq; spectralNorm_eq_of_equiv only for a field automorphism; RingEquiv.restrict; ModuleCat.restrictScalarsIsoOfEquiv; no normalization of these sheaves",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeCoefficientNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeCoefficientNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.lisse_coefficient_normalization",
+  "statement": "theorem lisse_coefficient_normalization (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X))) (hL : L.IsFiniteLocallyFree) : ∃ eA : latticeCoefficientSheaf X (latticeCoefficientIntegers l (ULift.{u} E)) ≅ lisseIntegerSheaf l E X, ∃ eE : latticeCoefficientSheaf X (WithAbs (Padic.coefficientExtensionAbsoluteValue l (ULift.{u} E))) ≅ lisseFieldSheaf l E X, integralLatticeCoefficientMap X l (ULift.{u} E) ≫ eE.hom = eA.hom ≫ lisseIntegerToField l E X ∧ SheafOfModules.IsFiniteLocallyFree ((SheafOfModules.pushforward (F := 𝟭 X.ProEt) ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map eE.hom)).obj L)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.lisse_coefficient_normalization",
+   "AlgebraicGeometry.ProEtale.finiteLocallyFree_restrict"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}

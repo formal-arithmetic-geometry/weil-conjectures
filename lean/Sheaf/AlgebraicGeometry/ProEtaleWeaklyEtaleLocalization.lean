@@ -30,13 +30,19 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
-private theorem weaklyEtale_slice (X : Scheme.{u}) (W : X.ProEt) (T : Over W) :
+/-- A morphism in a pro-etale slice is weakly etale by cancellation.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+theorem weaklyEtale_slice (X : Scheme.{u}) (W : X.ProEt) (T : Over W) :
     WeaklyEtale T.hom.left := by
   have hcomp : T.hom.left ≫ W.hom = T.left.hom := by simp
   have : WeaklyEtale (T.hom.left ≫ W.hom) := hcomp ▸ inferInstance
   exact WeaklyEtale.of_comp T.hom.left W.hom
 
-private def sliceTo (X : Scheme.{u}) (W : X.ProEt) : Over W ⥤ W.left.ProEt where
+/-- The functor from the slice at W to the small pro-etale site of its scheme.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+def sliceTo (X : Scheme.{u}) (W : X.ProEt) : Over W ⥤ W.left.ProEt where
   obj T := by
     have := weaklyEtale_slice X W T
     exact ProEt.mk T.hom.left
@@ -44,7 +50,10 @@ private def sliceTo (X : Scheme.{u}) (W : X.ProEt) : Over W ⥤ W.left.ProEt whe
     have h := congrArg (fun f ↦ f.left) (Over.w f)
     exact h)
 
-private def sliceFrom (X : Scheme.{u}) (W : X.ProEt) : W.left.ProEt ⥤ Over W where
+/-- The functor to the slice defined by composition with W.hom.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+def sliceFrom (X : Scheme.{u}) (W : X.ProEt) : W.left.ProEt ⥤ Over W where
   obj V := Over.mk (Y := ProEt.mk (V.hom ≫ W.hom))
     (MorphismProperty.Over.homMk V.hom rfl)
   map {V V'} f := Over.homMk (MorphismProperty.Over.homMk f.left (by
@@ -54,7 +63,10 @@ private def sliceFrom (X : Scheme.{u}) (W : X.ProEt) : W.left.ProEt ⥤ Over W w
         apply MorphismProperty.Over.Hom.ext
         exact MorphismProperty.Over.w f)
 
-private def sliceEquiv (X : Scheme.{u}) (W : X.ProEt) : Over W ≌ W.left.ProEt where
+/-- The concrete equivalence from the slice to the small pro-etale site.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+def sliceEquiv (X : Scheme.{u}) (W : X.ProEt) : Over W ≌ W.left.ProEt where
   functor := sliceTo X W
   inverse := sliceFrom X W
   unitIso := NatIso.ofComponents (fun T ↦ Over.isoMk
@@ -65,7 +77,10 @@ private def sliceEquiv (X : Scheme.{u}) (W : X.ProEt) : Over W ≌ W.left.ProEt 
   counitIso := NatIso.ofComponents (fun V ↦
     MorphismProperty.Over.isoMk (Iso.refl _) (by simp [sliceTo, sliceFrom]))
 
-private theorem sliceFrom_cover (X : Scheme.{u}) (W : X.ProEt) :
+/-- Composition into the slice preserves the pro-etale coverings.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+theorem sliceFrom_cover (X : Scheme.{u}) (W : X.ProEt) :
     CoverPreserving (topology W.left) ((topology X).over W) (sliceFrom X W) where
   cover_preserve {V S} hS := by
     rw [GrothendieckTopology.mem_over_iff]
@@ -73,7 +88,10 @@ private theorem sliceFrom_cover (X : Scheme.{u}) (W : X.ProEt) :
     rw [← Sieve.functorPushforward_comp]
     exact (coverPreserving_overMap (inferInstance : WeaklyEtale W.hom)).cover_preserve hS
 
-private theorem sliceFrom_cocont (X : Scheme.{u}) (W : X.ProEt) :
+/-- Composition into the slice is cocontinuous for the pro-etale topologies.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+theorem sliceFrom_cocont (X : Scheme.{u}) (W : X.ProEt) :
     (sliceFrom X W).IsCocontinuous (topology W.left) ((topology X).over W) where
   cover_lift {V S} hS := by
     rw [GrothendieckTopology.mem_over_iff, mem_topology_iff] at hS
@@ -106,7 +124,10 @@ private theorem sliceFrom_cocont (X : Scheme.{u}) (W : X.ProEt) :
       rw [ha]
       exact S.downward_closed ((Sieve.overEquiv_iff _ _).mp (hle _ _ ⟨i⟩)) a
 
-private theorem sliceDense (X : Scheme.{u}) (W : X.ProEt) :
+/-- The inverse slice equivalence is a dense subsite for the pro-etale topologies.
+Source: Stacks Project, Tags 094T, 0951 and 00XZ.
+(blueprint: lem-weil-proetale-weakly-etale-localization) -/
+theorem sliceDense (X : Scheme.{u}) (W : X.ProEt) :
     (sliceEquiv X W).inverse.IsDenseSubsite (topology W.left) ((topology X).over W) where
   functorPushforward_mem_iff {V S} := by
     constructor

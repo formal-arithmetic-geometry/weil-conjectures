@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-integral-lattice-coefficient-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), Invariance of a lattice pair under coefficient isomorphisms",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invariance of a lattice pair under coefficient isomorphisms",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $a:R\\to S$ and $a^{\\prime}:R^{\\prime}\\to S^{\\prime}$ be morphisms of commutative ring sheaves on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. Suppose isomorphisms $e_R:R^{\\prime}\\cong R$ and $e_S:S^{\\prime}\\cong S$ satisfy $e_S a^{\\prime}=a e_R$. Let $L$ be an $S$-module sheaf and $L^{\\prime}$ an $S^{\\prime}$-module sheaf identified with the restriction of scalars of $L$ along $e_S$ [def-weil-sheaf-of-modules-category]. For any object $U$ of the site and any given integral lattice pair for $a^{\\prime},L^{\\prime}$ over $U$ [lem-weil-pbc-lattice-sheaf-locally-constant], there is an integral lattice pair for $a,L$ over $U$, with scalar extension interpreted as the sheafified tensor product [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the coefficient square to the slice at U and the integral module along the inverse integral coefficient isomorphism. Apply finiteLocallyFree_restrict from LisseLatticeCoefficientNormalization to transport its finite local free generators along this equivalence of module-sheaf categories.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), identifying integral coefficients"
+   }
+  },
+  {
+   "text": "On sections send s tensor m to eS.inv(s) tensor m. The coefficient square proves the balancing relation; the map induced by eS.hom is inverse. Check naturality on pure tensors. Restriction of scalars along an isomorphism commutes with sheafification by its universal property, so this gives an isomorphism of the scalar extensions.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), rationalization of a lattice pair"
+   }
+  },
+  {
+   "text": "Compose this isomorphism with the given pair rationalization and the slice restriction of the module identification. The double coefficient restrictions cancel, giving a rationalization to L restricted at U.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), lattice pair"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commuting square of isomorphisms of coefficient ring sheaves transports an integral lattice pair with its rationalization",
+   "results": "CategoryTheory.IsPushout.of_iso; Square.isoMk; IsPullback.of_iso; CatCommSq.iso; no integral lattice pair or module-sheaf rationalization theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of isomorphisms of sheaves of coefficient rings transports an integral lattice pair and its rationalization",
+   "results": "SheafOfModules.pushforwardCongr; PresheafOfModules.isoMk; SheafOfModules.pullbackObjFreeIso; MayerVietorisSquare.mk_toSquare; no lattice-pair result",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct.congr\"",
+   "results": "TensorProduct.congr; congr_tmul; congr_symm_tmul; congr_trans; these give semilinear equivalences of sectionwise tensors, not the module-sheaf lattice transport",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralLatticePair|changeOfRings.*(Iso|iso)|restrictScalarsIsoOfEquiv",
+   "results": "ModuleCat.restrictScalarsIsoOfEquiv and its hom/inv formulas; no lattice-pair coefficient transport theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralLatticeCoefficientTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralLatticeCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_lattice_pair_of_coefficient_iso",
+  "statement": "theorem integral_lattice_pair_of_coefficient_iso {X : Scheme.{u}} {R S R' S' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) (a' : R' ⟶ S') (eR : R' ≅ R) (eS : S' ≅ S) (hsquare : a' ≫ eS.hom = eR.hom ≫ a) (L : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (L' : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S')) (eL : L' ≅ (SheafOfModules.pushforward (F := 𝟭 X.ProEt) ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map eS.hom)).obj L) (U : X.ProEt) (P : IntegralLatticePair a' L' U) : Nonempty (IntegralLatticePair a L U)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}

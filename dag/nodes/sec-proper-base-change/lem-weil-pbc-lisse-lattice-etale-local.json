@@ -32,47 +32,49 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-lattice-sheaf-locally-constant], the isomorphism classes of pairs $(M,\\alpha:E\\otimes_A M\\cong L)$ form a sheaf $\\mathscr L_L$ of sets. Choose the pro-etale covering trivializing $L$ from its locally-free hypothesis, with rank $n_j$ on $U_j$. The cited node identifies $\\mathscr L_L|_{U_j}$ with $\\underline{\\operatorname{GL}_{n_j}(E)/\\operatorname{GL}_{n_j}(A)}$. Thus $\\mathscr L_L$ is locally constant. The identity coset gives the pair $(A_{U_j}^{n_j},\\alpha_j)$ on every $U_j$, including $n_j=0$, so it has sections on all members of this cover.",
+   "text": "Apply the small lattice-class sheaf construction to obtain F, local constancy, pro-etale local inhabitedness, and lattice representatives for inhabited section sets.",
    "uses": [
-    "lem-weil-pbc-lattice-sheaf-locally-constant"
+    "lem-weil-pbc-lisse-lattice-class-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), construction of the lattice sheaf and its local description"
+    "place": "Proposition 6.8.4(6), lattice-class construction"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proetale-locally-classical-etale-cover] to the sheaf $\\mathscr L_L$ of Step 1: it is locally constant and has sections on every member of a pro-etale covering. Obtain an etale covering family $(u_i:Y_i\\to X)_i$ and sections $s_i\\in\\mathscr L_L(Y_i)$. No compatibility between distinct $s_i$ is required.",
+   "text": "Local constancy implies local classicality. Apply etale descent of inhabitedness to F and obtain an etale cover with a section on each member.",
    "uses": [
     "lem-weil-pbc-proetale-locally-classical-etale-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), final passage from pro-etale to etale cover"
+    "place": "Proposition 6.8.4(6), etale-local sections"
    }
   },
   {
-   "text": "Choose a representative $(M_i,\\alpha_i)$ for each isomorphism class $s_i$. By the definition of $\\mathscr L_L$ in [lem-weil-pbc-lattice-sheaf-locally-constant], $M_i$ is pro-etale locally free of finite rank over $A_{Y_i}$ and $\\alpha_i:E_{Y_i}\\otimes_{A_{Y_i}}M_i\\cong L|_{Y_i}$. Since $Y_i\\to X$ is etale, restriction to the localized pro-etale site is $u_i^{-1}L$ with the slice-site coefficient action specified in the item. These are exactly the required modules and isomorphisms. For $X=\\varnothing$ take the empty covering family.",
+   "text": "Choose a representative lattice pair for each of these sections. Transport it from the slice site to the small pro-etale site of the etale member, and retain its finite local freeness and rationalization isomorphism.",
    "uses": [
-    "lem-weil-pbc-lattice-sheaf-locally-constant"
+    "lem-weil-pbc-lisse-lattice-class-sheaf",
+    "lem-weil-pbc-lisse-lattice-slice-transport"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(6), construction of the lattice sheaf and its local description"
+    "place": "Proposition 6.8.4(6), extraction of lattice representatives"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-lisse-lattice-class-sheaf",
+  "lem-weil-pbc-lisse-lattice-slice-transport",
   "lem-weil-pbc-proetale-locally-classical-etale-cover"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4(6)"
+  "place": "Proposition 6.8.4(6), steps formalized by E3, 2026-10-16"
  },
  "mathlib_searches": [
   {
@@ -166,12 +168,6 @@
   "module": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
   "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_etale_local",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
-   "AlgebraicGeometry.ProEtale.lisseFieldSheaf",
-   "AlgebraicGeometry.ProEtale.lisseIntegerSheaf",
-   "AlgebraicGeometry.ProEtale.lisseIntegerToField",
-   "AlgebraicGeometry.ProEtale.lisseEtaleSiteInclusion",
-   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentification",
    "AlgebraicGeometry.ProEtale.exists_lisse_lattice_etale_local"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeEtaleLocal.lean",
@@ -180,5 +176,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
  }
 }

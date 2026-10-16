@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-pbc-lisse-lattice-coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), Continuous coefficient rings and etale slice restrictions",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Continuous coefficient rings and etale slice restrictions",
+ "statement": "For a scheme $X$ [def-pc-scheme] and a topological commutative ring $T$, let $T_X$ on the small pro-etale site [def-weil-pbc-proetale-site] have sections $C(|V|,T)$, pointwise operations, and restrictions by precomposition. For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], give $E$ its spectral norm topology and its valuation ring $A$ the subspace topology. Set $E_X=(E)_X$, $A_X=(A)_X$, and let $A_X\\to E_X$ be postcomposition with inclusion. For an etale arrow $f:Y\\to X$ [def-weil-etale-morphism], the functor $Y_{\\mathrm{proet}}\\to X_{\\mathrm{proet}}$ composes structure maps with $f$; its coefficient comparison $E_Y\\to f_*E_X$ is identity on continuous functions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous commutative ring sheaves on the small pro-etale site with the spectral norm topology of a finite extension of the p-adic numbers",
+   "results": "TopCat.presheafToTopCommRing; TopCat.continuousFunctions; ContinuousMap.instCommRingOfIsTopologicalRing; scheme structure-sheaf results",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring sheaf of continuous functions on a scheme pro-etale site with values in a finite p-adic coefficient field and its valuation ring",
+   "results": "BDeRham; BDeRhamPlus; Tilt; Scheme.Etale.forget; Scheme.ringCatSheaf",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapRingPresheaf|lisseFieldSheaf|lisseIntegerSheaf in Mathlib and the project",
+   "results": "Mathlib continuousMapPresheaf; project continuousMapRingPresheaf and the six existing definitions in the item; no Mathlib definition of this combination",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeCoefficients.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
+  "statement": "def lisseContinuousCommRingSheaf (X : Scheme.{u}) (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.lisseContinuousCommRingSheaf",
+   "AlgebraicGeometry.ProEtale.lisseFieldSheaf",
+   "AlgebraicGeometry.ProEtale.lisseIntegerSheaf",
+   "AlgebraicGeometry.ProEtale.lisseIntegerToField",
+   "AlgebraicGeometry.ProEtale.lisseEtaleSiteInclusion",
+   "AlgebraicGeometry.ProEtale.lisseEtaleCoefficientIdentification"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}

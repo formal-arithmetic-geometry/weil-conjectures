@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-lisse-lattice-class-sheaf",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), A small locally constant and locally inhabited lattice-class sheaf",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A small locally constant and locally inhabited lattice-class sheaf",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A$ [def-weil-l-adic-coefficient-extension], and let $X$ be a scheme [def-pc-scheme]. Use the continuous ring sheaves $A_X\\to E_X$ [def-weil-pbc-lisse-lattice-coefficients] and sheaf modules [def-weil-sheaf-of-modules-category]. If $L$ is a finite locally free $E_X$-module, with varying ranks allowed, there exists a sheaf $F$ of sets in the same universe as the sections of $L$ on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], locally constant in the sense of [lem-weil-pbc-proetale-locally-classical-etale-cover], and a pro-etale covering family $(U_j)_j$ on which $F$ has a section. For every $U\\in X_{\\mathrm{proet}}$, if $F(U)$ is inhabited, there is an integral lattice pair over the slice at $U$: a finite locally free $A_X|_U$-module $M$ and an isomorphism $E_X|_U\\otimes_{A_X|_U}M\\cong L|_U$, in the sense of [lem-weil-pbc-lattice-sheaf-locally-constant] and [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply coefficient normalization to obtain the commuting integral and rational sheaf isomorphisms and a finite locally free restriction of scalars of L.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1 and Proposition 6.8.4(6)"
+   }
+  },
+  {
+   "text": "Apply integralLatticeSheaf_locallyConstant to the lifted coefficient field and the normalized module. Its exact presentation and coset isomorphisms satisfy the hypotheses of the presentation-transport theorem; integralMatrixCosets is nonempty, including in rank zero.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), lattice-class construction"
+   }
+  },
+  {
+   "text": "Apply the shrinking and coefficient-transport theorem to obtain a small locally constant, locally inhabited sheaf with lattice representatives for the original coefficient map.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), representatives and local constancy"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-lisse-lattice-coefficient-normalization",
+  "lem-weil-pbc-lisse-lattice-presentation-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of integral lattice classes of a finite locally free continuous p-adic sheaf is locally constant and locally inhabited",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CompHausLike.LocallyConstant.functorToPresheavesIso; CondensedSet.LocallyConstant.iso; no lattice result",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite locally free sheaf over continuous p-adic coefficients admits an integral lattice etale locally",
+   "results": "Algebra.exists_etale_of_isEtaleAt; Algebra.basicOpen_subset_etaleLocus_iff; Algebra.Etale.exists_subalgebra_fg; no module-sheaf lattice result",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|lattice).*(Sheaf|sheaf)|pro[Ee]tale.*lattice in Mathlib",
+   "results": "Five IdealSheaf lattice-order instances; no lattice-class sheaf. Project integralLatticeSheaf_locallyConstant has different coefficient presentations and a larger universe",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeClassSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeClassSheaf.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_class_sheaf",
+  "statement": "theorem exists_lisse_lattice_class_sheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})\n    (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X)))\n    (hL : L.IsFiniteLocallyFree) :\n    ∃ F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)),\n      Scheme.IsProEtaleLocallyConstant X F ∧\n      (∃ (I : Type (u + 1)) (U : I → X.ProEt),\n        (Scheme.ProEt.topology X).CoversTop U ∧\n          ∀ i : I, Nonempty (F.obj.obj (op (U i)))) ∧\n      ∀ U : X.ProEt, Nonempty (F.obj.obj (op U)) →\n        Nonempty (IntegralLatticePair (lisseIntegerToField l E X) L U)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}

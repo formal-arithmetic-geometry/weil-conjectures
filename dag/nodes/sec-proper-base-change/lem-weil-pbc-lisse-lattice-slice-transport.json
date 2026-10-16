@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-lisse-lattice-slice-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), Transport of a lattice pair from a localized pro-etale site",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transport of a lattice pair from a localized pro-etale site",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ finite with valuation ring $A$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a scheme [def-pc-scheme], let $L$ be a module sheaf over the continuous coefficient sheaf $E_X$ [def-weil-pbc-lisse-lattice-coefficients, def-weil-sheaf-of-modules-category], and let $f:Y\\to X$ be an object of the small etale site [def-weil-pbc-etale-site]. Suppose that over the slice of $X_{\\mathrm{proet}}$ at $Y$ [def-weil-pbc-proetale-site] one has an integral lattice pair $(P,\\alpha)$ for $L$ [lem-weil-pbc-lattice-sheaf-locally-constant]. There exists a finite locally free $A_Y$-module sheaf $M$ on $Y_{\\mathrm{proet}}$ and an isomorphism of module presheaves $(E_Y\\otimes_{A_Y}M)^{\\mathrm{pre}}\\cong f^*_{\\mathrm{pre}}L$, where the tensor is the sheaf tensor product [def-pur-sheaf-tensor-product] and the coefficient action on the right is the identity on continuous functions of [def-weil-pbc-lisse-lattice-coefficients].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct inverse functors between the slice and the member small site. Weak etaleness of an arrow over the member follows by cancellation. Composition, identity, unit, and counit are verified on underlying arrows. Both functors carry exactly the same covering families because their underlying scheme arrows agree. Reuse the concrete slice equivalence and covering lemmas exposed by ProEtaleWeaklyEtaleLocalization instead of copying their proofs.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), restriction; Stacks Tags 098K, 094T, 0951"
+   }
+  },
+  {
+   "text": "Push the integral module along this continuous equivalence. The coefficient map is identity on continuous functions. Transport its local free generators and refine the covering family using cocontinuity. Pushforward on the necessary further slices preserves colimits because the coefficient map is invertible, so the transported generators are finite and free.",
+   "uses": [
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), restriction of a lattice pair"
+   }
+  },
+  {
+   "text": "Sectionwise extension of scalars commutes with this functor: use identity objectwise tensor isomorphisms and check naturality on pure tensors. For sheafification, identify the pushforward of the sheafification unit with the canonical pushforward-sheafification comparison; it is invertible for a site equivalence. Compose with the given rationalization and forget to module presheaves. This is exactly the displayed slice coefficient comparison.",
+   "uses": [
+    "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), scalar extension and restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport finite locally free module sheaves and extension of scalars through the equivalence between a small pro-etale site and its slice over an etale object",
+   "results": "CategoryTheory.Equivalence.transportAndSheafify; SheafOfModules.restrictScalars; SheafOfModules.over; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an integral lattice of a module sheaf from the slice of the pro-etale site to the small pro-etale site of an etale cover member",
+   "results": "Scheme.Etale.forget; Scheme.smallEtaleTopology; etale algebra locus results; no lattice transport theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree.*(iso|pushforward)|pushforwardContinuousSheafificationCompatibility in Mathlib and the project",
+   "results": "SheafOfModules.IsFiniteLocallyFree.of_iso; Functor.pushforwardContinuousSheafificationCompatibility; project private generator-transport argument in PushforwardRankOnOpen; no theorem with these coefficients",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticeSliceTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticeSliceTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.lisse_lattice_of_slice",
+  "statement": "theorem lisse_lattice_of_slice (l : ℕ) [Fact l.Prime] (E : Type) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})\n    (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheaf l E X)))\n    (U : X.Etale)\n    (P : IntegralLatticePair (lisseIntegerToField l E X) L ((Scheme.toProEt X).obj U)) :\n    ∃ M : ringedSiteModules.{u + 1}\n      ((sheafCompose (Scheme.ProEt.topology U.left)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n          (lisseIntegerSheaf l E U.left)),\n      M.IsFiniteLocallyFree ∧\n      Nonempty ((SheafOfModules.changeOfRings\n        (lisseIntegerToField l E U.left) M).val ≅\n        (PresheafOfModules.pushforward\n          (lisseEtaleCoefficientIdentification l E U.hom)).obj L.val)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}

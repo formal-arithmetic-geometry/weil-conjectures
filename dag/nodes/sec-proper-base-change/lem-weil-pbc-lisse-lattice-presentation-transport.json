@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-lisse-lattice-presentation-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; Proposition 6.8.4(6), Shrinking and transporting a locally constant lattice presentation",
+   "via": [
+    "lem-weil-pbc-lisse-lattice-etale-local",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Shrinking and transporting a locally constant lattice presentation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $a:R\\to S$, $a^{\\prime}:R^{\\prime}\\to S^{\\prime}$ be morphisms of commutative ring sheaves on its small pro-etale site [def-weil-pbc-proetale-site]. Suppose coefficient isomorphisms $e_R:R^{\\prime}\\cong R$, $e_S:S^{\\prime}\\cong S$ commute with $a,a^{\\prime}$. Let $L$ be an $S$-module sheaf [def-weil-sheaf-of-modules-category] and let $L^{\\prime}$ be isomorphic to its restriction of scalars along $e_S$. Assume $L^{\\prime}$ finite locally free. Suppose a sheaf $F$ of sets one universe above the sections of $L^{\\prime}$ and maps from integral lattice pairs to $F(U)$ form an exact lattice-class presentation [lem-weil-pbc-lattice-sheaf-locally-constant]. Suppose also that for every finite free trivialization of $L^{\\prime}$ over $U$ its localized sheaf $F|_U$ is isomorphic to a constant sheaf on a nonempty set in the scheme universe. There exists a sheaf $F_0$ of sets in the section universe, locally constant in the sense of [lem-weil-pbc-proetale-locally-classical-etale-cover], pro-etale locally inhabited, such that every inhabited $F_0(U)$ admits an integral lattice pair for $a,L$ over $U$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Proposition 6.8.4(6), pp. 59--60"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover"
+ ],
+ "proof": [
+  {
+   "text": "The class presentation embeds each section set into families of subsets of the module sections over the slice. Use the restriction criterion at the identity to prove injectivity. Shrink the section types and transport the sheaf condition through the natural equivalences. Reuse the concrete slice equivalence and covering lemmas exposed by ProEtaleWeaklyEtaleLocalization instead of copying their proofs.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), classes of lattice pairs"
+   }
+  },
+  {
+   "text": "The universe-lift functor preserves local injectivity and surjectivity, hence sheafification; use this to descend the constant-sheaf descriptions to the smaller universe. Choose finite local free generators, identify their finite bases with Fin n, and apply the constant-coset hypotheses.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), local constancy"
+   }
+  },
+  {
+   "text": "Construct the canonical equivalence from each slice to the cover member small site and check the covering behavior. The dense-subsite equivalence commutes with constant sheaves, so these descriptions give local constancy in the required sense. A value in each nonempty constant set, mapped through the sheafification unit at the identity object, gives a local section.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), local sections of the lattice sheaf"
+   }
+  },
+  {
+   "text": "The inverse shrinking equivalence and surjectivity of the class presentation give a lattice representative for every inhabited section set. Apply coefficient transport of this single pair to obtain a representative for the original coefficient map.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-weil-pbc-integral-lattice-coefficient-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), extraction of a lattice representative"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-lattice-coefficient-transport",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A large sheaf of integral lattice classes with nonempty constant coset presentations shrinks to a locally constant locally inhabited sheaf under coefficient ring isomorphisms",
+   "results": "Sheaf.isConstant_of_iso; Sheaf.isConstant_iff_mem_essImage; Sheaf.isConstant_iff_isIso_counit_app; no lattice presentation result",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lattice class presentation in a higher universe transports to a small locally constant sheaf with integral lattice representatives",
+   "results": "CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.functor; LightCondSet.LocallyConstant.functor; no exact match",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "FunctorToTypes.shrink|isSheaf_of_nat_equiv|constantCommuteCompose|IntegralLatticePair in Mathlib and the project",
+   "results": "Generic shrink, sheaf-transport and constant-sheaf APIs; IntegralLatticePair occurs only in LatticeSheafLocallyConstant, which has no coefficient-isomorphism or shrinking theorem",
+   "date": "2026-10-16",
+   "verdict": "no exact match; the named API only supplies generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal",
+  "date": "2026-10-16",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LisseLatticePresentationTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseLatticePresentationTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.small_lattice_sheaf_of_coset_presentation",
+  "statement": "theorem small_lattice_sheaf_of_coset_presentation {X : Scheme.{u}} {R S R' S' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) (a' : R' ⟶ S') (eR : R' ≅ R) (eS : S' ≅ S) (hsquare : a' ≫ eS.hom = eR.hom ≫ a) (L : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (L' : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S')) (eL : L' ≅ (SheafOfModules.pushforward (F := 𝟭 X.ProEt) ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map eS.hom)).obj L) (hL' : L'.IsFiniteLocallyFree) (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 2))) (c : ∀ U : X.ProEt, IntegralLatticePair a' L' U → F.obj.obj (op U)) (hF : IsLatticeClassPresentation a' L' F c) (hcosets : ∀ (U : X.ProEt) (n : ℕ) (_e : L'.over U ≅ SheafOfModules.free (R := ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S').over U) (ULift.{u + 1} (Fin n))), ∃ A : Type u, Nonempty A ∧ Nonempty ((constantSheaf ((Scheme.ProEt.topology X).over U) (Type (u + 2))).obj (ULift.{u + 2} A) ≅ F.over U)) : ∃ F₀ : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)), Scheme.IsProEtaleLocallyConstant X F₀ ∧ (∃ (I : Type (u + 1)) (U : I → X.ProEt), (Scheme.ProEt.topology X).CoversTop U ∧ ∀ i : I, Nonempty (F₀.obj.obj (op (U i)))) ∧ ∀ U : X.ProEt, Nonempty (F₀.obj.obj (op U)) → Nonempty (IntegralLatticePair a L U)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ae711",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261016T070240-L-770593",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean proofs and signatures with DAG statements, source Proposition 6.8.4(6), change records, clean compilation of eight modules and ten importers, and permitted axioms."
+ }
+}
