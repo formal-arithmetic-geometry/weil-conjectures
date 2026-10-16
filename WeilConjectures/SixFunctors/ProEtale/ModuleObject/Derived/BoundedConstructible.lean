@@ -9,8 +9,10 @@ public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-!
@@ -58,6 +60,9 @@ subcategory `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`,
 `ObjectProperty.fullMonoidalClosedSubcategory`), given by the instances
 `isMonoidal_boundedConstructible` and `isMonoidalClosed_boundedConstructible`; they are again
 compatible with the inclusions, the inclusion being strict monoidal (`ObjectProperty.monoidalι`).
+The restricted pullback `Lf^*` is strong monoidal, with the comparison isomorphisms of the
+strong monoidal derived pullback `ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`
+(`monoidal_boundedConstructibleUpperStar`, by `ObjectProperty.monoidalLift`).
 
 The derived lower shriek is not a restriction: it is assembled on bounded constructible
 complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`,
@@ -387,5 +392,21 @@ noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X.left)⟦�
   (boundedConstructibleTensorHomAdjunction₂ Λ).adj K
 
 end TensorHom
+
+section MonoidalUpperStar
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
+
+/-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes is
+strong monoidal, with the comparison isomorphisms of `L((f)^*⟦Λ⟧)`. -/
+noncomputable instance monoidal_boundedConstructibleUpperStar :
+    (boundedConstructibleUpperStar Λ ℓ f).Monoidal := by
+  unfold boundedConstructibleUpperStar
+  exact ObjectProperty.monoidalLift _ _
+
+end MonoidalUpperStar
 
 end AlgebraicGeometry.ProEtale.CondensedRing
