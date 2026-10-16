@@ -25,9 +25,103 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the small set of generators as $I=\\{i:A_i\\to B_i\\}$. For every $i\\in I$, apply [lem-coef-object-presentability-rank] to $A_i$ in the given locally presentable category. Choose an infinite regular cardinal $\\tau_i\\in\\mathcal U$ such that $\\operatorname{Hom}(A_i,-)$ preserves every $\\mathcal U$-small $\\tau_i$-filtered colimit. These choices concern only the domains; there is no presentability assumption on $X$, $Y$, or the codomains $B_i$.",
+   "uses": [
+    "lem-coef-object-presentability-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, objectwise smallness; Mathlib Presentable/LocallyPresentable.lean:93-101."
+   }
+  },
+  {
+   "text": "For $i\\in I$, let $T_i$ be the set of ordinals below the initial ordinal of cardinality $\\tau_i$. The tagged disjoint union $T=\\coprod_{i\\in I}T_i$ is $\\mathcal U$-small. Apply [lem-coef-small-family-regular-bound] to obtain an infinite regular $\\kappa\\in\\mathcal U$ with $|T|<\\kappa$. Each inclusion $t\\mapsto(i,t)$ proves $\\tau_i=|T_i|\\leq |T|<\\kappa$. If $I$ is empty the same lemma applies to the empty disjoint union, and still gives an infinite regular $\\kappa$. Below, also write $\\kappa$ for its initial ordinal.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, a uniform bound for the domains; Mathlib SetTheory/Cardinal/HasCardinalLT.lean:199-206."
+   }
+  },
+  {
+   "text": "The ordinal category of $\\alpha<\\kappa$ is $\\tau_i$-filtered for every $i$. A diagram with fewer than $\\tau_i$ morphisms has fewer than $\\tau_i$ objects, since every object has an identity. Its object images are fewer than $\\kappa$ ordinals below $\\kappa$. Their union has cardinality less than $\\kappa$ by regularity, and hence is an ordinal $\\beta<\\kappa$ bounding all images. The unique arrows to $\\beta$ give a cocone. For the empty diagram use $0$. Thus the preservation in step 1 applies to every diagram indexed by $\\kappa$. This ordinal is also a nonempty directed poset, so its colimits of sets are filtered colimits. Since $\\kappa$ is an infinite initial ordinal it is a nonzero limit ordinal: for any $\\alpha<\\kappa$ the ordinal $\\alpha+1$ still has cardinality less than $\\kappa$ and is below $\\kappa$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, regular-union argument using the definitions of regularity, filteredness and initial ordinal."
+   }
+  },
+  {
+   "text": "Specify the successor operation at any map $q:V\\to Y$. Let $Q(q)$ be the set of triples $(i,a,b)$ with $i\\in I$, $a:A_i\\to V$, $b:B_i\\to Y$, and $qa=bi$. It is $\\mathcal U$-small, being a subset of the small disjoint union of the sets $\\operatorname{Hom}(A_i,V)\\times\\operatorname{Hom}(B_i,Y)$. Form $A(q)=\\coprod_{(i,a,b)\\in Q(q)}A_i$ and $B(q)=\\coprod_{(i,a,b)\\in Q(q)}B_i$. The summand maps define $a_q:A(q)\\to V$, $i_q:A(q)\\to B(q)$ and $b_q:B(q)\\to Y$ with $qa_q=b_qi_q$. Choose their pushout $s(q)=V\\amalg_{A(q)}B(q)$, with maps $c_q:V\\to s(q)$ and $e_q:B(q)\\to s(q)$. These coproducts and this pushout exist as colimits of small discrete and span diagrams. Their universal properties give $q^+:s(q)\\to Y$ with $q^+c_q=q$ and $q^+e_q=b_q$. For a summand $t=(i,a,b)$ put $d_t=e_q\\iota_t:B_i\\to s(q)$. The pushout equation gives $d_ti=c_qa$ and $q^+d_t=b$. This proves the required filler at the next stage directly, by the defining colimit equations.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent construction by coproduct and pushout universal properties; compare Mathlib SmallObject/Construction.lean:FunctorObjIndex, functorObj, functorObj_comm, and ιFunctorObj_extension."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-transfinite-recursion] on the small well-order $\\{\\beta:\\beta\\leq\\kappa\\}$ to construct objects $Z_\\beta$, maps $p_\\beta:Z_\\beta\\to Y$ and transition maps $u_{\\alpha\\beta}:Z_\\alpha\\to Z_\\beta$ for $\\alpha\\leq\\beta$, with inductive invariant $u_{\\alpha\\alpha}=1$, $u_{\\beta\\gamma}u_{\\alpha\\beta}=u_{\\alpha\\gamma}$ and $p_\\beta u_{\\alpha\\beta}=p_\\alpha$. Here is the entire recursion rule. At zero set $Z_0=X$ and $p_0=f$. At $\\beta=\\alpha+1$ use step 4 on $p_\\alpha$: set $Z_\\beta=s(p_\\alpha)$, $p_\\beta=p_\\alpha^+$, $u_{\\alpha\\beta}=c_{p_\\alpha}$ and $u_{\\delta\\beta}=c_{p_\\alpha}u_{\\delta\\alpha}$ for $\\delta<\\alpha$. Set the new identity transition to $1$. The composition equations and the equation over $Y$ follow immediately from the previous invariant and $p_\\alpha^+c_{p_\\alpha}=p_\\alpha$. At a nonzero limit $\\beta$, take the colimit of the already coherent diagram $(Z_\\alpha)_{\\alpha<\\beta}$ and let $u_{\\alpha\\beta}$ be its cocone maps. The compatible maps $p_\\alpha$ give $p_\\beta$ by the colimit universal property. The cocone equations give all new composition equations, and the definition of $p_\\beta$ gives its equations over $Y$. Thus the invariant holds at zero, successors and limits. To apply the quoted recursion to a rule defined on every family, take its value collection to contain all such stage records and a dummy symbol; on a prefix that is not a coherent family of the required records let the rule return the dummy symbol. The three checks just given show by well-order induction that the actual recursively produced family never takes that value. This specifies a total recursion rule, rather than assuming that arbitrary earlier records already form a diagram. Every colimit used at a limit is small, since $\\beta\\leq\\kappa\\in\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent categorical recursion, with successor and limit rules and coherence invariant written out; the recursion leaf is WellFoundedLT.fix/fix_eq, Mathlib Order/RelClasses.lean:304-313. Its Stacks provenance is Tag 03C3, algebra-lemma-flat-local-given-residue-field, the transfinite-recursion paragraph."
+   }
+  },
+  {
+   "text": "Put $Z=Z_\\kappa$, $j=u_{0\\kappa}$ and $p=p_\\kappa$. The invariant gives $pj=p_0=f$. At every nonzero limit $\\beta\\leq\\kappa$, the chosen $Z_\\beta$ is the colimit of the preceding stages by step 5. For each $\\alpha<\\kappa$, its transition to $Z_{\\alpha+1}$ is exactly the pushout map $c_{p_\\alpha}$ of step 4, a pushout of the coproduct of the maps $i$ indexed by $Q(p_\\alpha)$. Consequently this is the specified cellular presentation of $j$, with $\\theta=\\kappa$ and $T_\\alpha=Q(p_\\alpha)$; no inference from a left lifting property or from a retract of a cellular map is made.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, unpack the constructed chain and its invariant; the ordinal and all attaching sets have already been bounded."
+   }
+  },
+  {
+   "text": "To prove right lifting, fix $i:A_i\\to B_i$ in $I$ and maps $a:A_i\\to Z$, $b:B_i\\to Y$ with $pa=bi$. Since $\\kappa$ is a nonzero limit ordinal, step 5 identifies $Z$ with the colimit of $(Z_\\alpha)_{\\alpha<\\kappa}$. By steps 1 and 3, applying $\\operatorname{Hom}(A_i,-)$ to this cocone gives a colimit cocone of sets whose vertex is $\\operatorname{Hom}(A_i,Z)$ and whose legs send $v$ to $u_{\\alpha\\kappa}v$. Apply clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to its element $a$. Obtain $\\alpha<\\kappa$ and $a_\\alpha:A_i\\to Z_\\alpha$ with $u_{\\alpha\\kappa}a_\\alpha=a$. The invariant implies $p_\\alpha a_\\alpha=p u_{\\alpha\\kappa}a_\\alpha=pa=bi$. Hence $(i,a_\\alpha,b)$ is one of the actual triples attached at stage $\\alpha$, without any need to descend a further equality or to assume $B_i$ presentable.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Tag 04AX, categories-section-directed-colimits, filtered colimits of sets as a quotient of their disjoint union; apply clause (1) to the Hom-colimit preserved by presentability."
+   }
+  },
+  {
+   "text": "Let $d:B_i\\to Z_{\\alpha+1}$ be the summand map of step 4 for that triple. It satisfies $di=c_{p_\\alpha}a_\\alpha$ and $p_{\\alpha+1}d=b$. Define $h=u_{\\alpha+1,\\kappa}d$. Since $\\alpha+1<\\kappa$, this transition exists, and the invariant gives $hi=u_{\\alpha\\kappa}a_\\alpha=a$ and $ph=p_{\\alpha+1}d=b$. Thus $p$ has the required right lifting property. If $I$ is empty, the lifting condition is vacuous, each attaching coproduct is initial and its pushout map is an isomorphism; the same construction and all limit arguments remain valid. Empty attaching sets at individual stages are handled by the same initial-object pushout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof, substitute the successor filler into the final stage and use the explicitly verified transition equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-transfinite-recursion",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Generic cellular small-object infrastructure for proof paragraph 2, derived coefficient adjunction; explicit attach-all-squares construction, using existing presentability, cardinal-bound, recursion and filtered-set-colimit leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +171,38 @@
    "results": "8 hits: CategoryTheory.SmallObject.relativeCellComplexιObj, CategoryTheory.SmallObject.locallySmall, CategoryTheory.SmallObject.hasFunctorialFactorization, CategoryTheory.SmallObject.functorialFactorizationData, CategoryTheory.SmallObject.attachCellsOfSuccStructProp, CategoryTheory.MorphismProperty.HasSmallObjectArgument, CategoryTheory.SmallObject.llp_rlp_ιObj, CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument",
    "date": "2026-10-16",
    "verdict": "no exact match: read Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean:76-87, 313-333, 412-413 and Basic.lean:88-110. The cellular and lifting conclusions require IsCardinalForSmallObjectArgument or HasSmallObjectArgument. They do not deduce this hypothesis from local presentability and an arbitrary small set of arrows. OrthogonalReflection concerns a reflection rather than these factorizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small object argument cellular factorization in a locally presentable category",
+   "results": "8 hits: CategoryTheory.SmallObject.ιObj_πObj, CategoryTheory.MorphismProperty.HasSmallObjectArgument.mk, CategoryTheory.SmallObject.functorialFactorizationData, CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.recOn, CategoryTheory.SmallObject.obj, CategoryTheory.MorphismProperty.HasSmallObjectArgument, CategoryTheory.SmallObject.objMap, CategoryTheory.SmallObject.hasFunctorialFactorization",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the item: the explicit Mathlib cellular factorization needs IsCardinalForSmallObjectArgument. Its local-presentability-to-domain-smallness premise is a separate argument. Read the local source at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,314-333,412-413. The split writes this premise and the cellular construction explicitly using existing leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "^lemma transfiniteCompositionsOfShape_ιObj|^lemma rlp_πObj|^lemma ιObj_πObj|^noncomputable def relativeCellComplexιObj",
+   "results": "5 hits: Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean, Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the item: the explicit Mathlib cellular factorization needs IsCardinalForSmallObjectArgument. Its local-presentability-to-domain-smallness premise is a separate argument. Read the local source at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,314-333,412-413. The split writes this premise and the cellular construction explicitly using existing leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transfiniteCompositionsOfShape_ιObj\"",
+   "results": "1 hits: CategoryTheory.SmallObject.transfiniteCompositionsOfShape_ιObj",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the item: the explicit Mathlib cellular factorization needs IsCardinalForSmallObjectArgument. Its local-presentability-to-domain-smallness premise is a separate argument. Read the local source at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,314-333,412-413. The split writes this premise and the cellular construction explicitly using existing leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism in a locally presentable category factors as a relative cell complex followed by a map with right lifting property",
+   "results": "8 hits: CategoryTheory.SmallObject.hasFunctorialFactorization, CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument, CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument', CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument', CategoryTheory.SmallObject.llp_rlp_ιObj, CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument, CategoryTheory.SmallObject.rlp_πObj, CategoryTheory.SmallObject.functorialFactorizationData",
+   "date": "2026-10-16",
+   "verdict": "no exact match for the item: the explicit Mathlib cellular factorization needs IsCardinalForSmallObjectArgument. Its local-presentability-to-domain-smallness premise is a separate argument. Read the local source at SmallObject/IsCardinalForSmallObjectArgument.lean:76-86,314-333,412-413. The split writes this premise and the cellular construction explicitly using existing leaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-generating-set-cotorsion-smallness",
   "by": "worker",
@@ -96,5 +218,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-presentable-cellular-factorization",
+  "worker": "stage1",
+  "summary": "Reused the existing object-presentability-rank, small-family-regular-bound, transfinite-recursion and filtered-colimit-sets leaves. Constructed all successor pushouts and a continuous small ordinal chain, verified its transition equations by the base/successor/limit cases, and proved right lifting by domain presentability. No new nodes, no statement changes, no Lean or compilation.",
+  "blueprint": "Generic cellular small-object input for prop-coef-integral-exceptional-adjoint, proof paragraph 2: use derived coefficient adjunction to compute, before the displayed derived inverse limit; via the flat-cotorsion construction already recorded in blueprint.from. The chapter and unit route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-bf7c54203",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-bf7c54203 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, eight proof steps, unit/chapter route, five cited statements, exact Mathlib and Stacks passages, blueprint sources, duplicate candidates, edge cases, and archived target coefficient/base-change declarations. The cellular factorization proof is correct, acyclic, and has no repair needs. Review recorded in review.md."
  }
 }
