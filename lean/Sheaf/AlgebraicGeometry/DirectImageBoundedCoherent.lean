@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum

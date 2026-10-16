@@ -124,9 +124,9 @@ theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X]
       ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
       (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F₀).mpr hF₀)).2
-  have hT : CochainComplex.IsKFlat (R :=
+  have hT : CochainComplex.IsAcyclicTensorKFlat (R :=
       (Spec Γ(X, ⊤)).sheaf) (T.obj P) := isKFlat_tilde Γ(X, ⊤) P hacyc
-  have hR : CochainComplex.IsKFlat (R := X.sheaf) (RC.obj (T.obj P)) :=
+  have hR : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) (RC.obj (T.obj P)) :=
     isKFlat_restrict X.toSpecΓ (T.obj P) hT
   let : ∀ {M₁ M₂ : ModuleCat.{u} Γ(X, ⊤)} (f : M₁ ⟶ M₂),
       PreservesLimit (parallelPair f 0) S := fun {_ _} f ↦
