@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-proper-pushforward-support-closed",
+ "kind": "statement",
+ "title": "Closed support of proper pushforward",
+ "statement": "Let Z be Noetherian, q : Y → Z proper, and F coherent on Y. The support of q_*F is a closed subset of Z.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, support of H paragraph; Tag 02O5 and Lemma 056J"
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "A proper morphism to the Noetherian target has locally Noetherian source. Coherence provides finite local generators whose kernels are finite type. Reindex each finite generating family by ULift (Fin n), apply the coherent-kernel condition and the generators-kernel presentation construction, and descend finite presentation along the covering. The coherent/quasi-coherent finite-type equivalence supplies quasi-coherence.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-presentation and quasi-coherence theorems for the zeroth higher direct image. The canonical rightDerivedZeroIsoSelf isomorphism identifies it with the ordinary pushforward; transport both properties along this isomorphism. Finite presentation implies finite type. The finite-type support theorem gives the closed set of points with nonsubsingleton stalk, which supplies D.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-pc-sections-higher-direct-image-quasi-coherent",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-pc-sections-higher-direct-image-quasi-coherent",
+  "lem-weil-pbc-finite-type-module-support-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/088E",
+  "place": "Support of H paragraph, using 02O5 and 056J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Ss]upport|[Ss]upport.*pushforward",
+   "results": "Independent second reading: 0 hits. No direct-image support theorem in Mathlib AlgebraicGeometry.",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation",
+   "results": "Independent second reading: 5 hits. Finite-presentation APIs, including its finite-type and quasi-coherence instances; no combined proper pushforward support result.",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the nonzero stalk locus of a coherent direct image along a proper morphism is closed",
+   "results": "Independent second reading: 8 hits. Hits concern closed maps, zero loci and ideal-sheaf support; none states the coherent direct-image theorem.",
+   "date": "2026-10-17"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The support of the direct image of a coherent sheaf under a proper scheme morphism to a Noetherian scheme is closed.",
+   "results": "Independent second reading: eight hits, including ideal-sheaf support_map and Module.isClosed_support. None states closedness of the support of an arbitrary coherent direct image.",
+   "date": "2026-10-17"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PushforwardSupportClosed",
+  "date": "2026-10-17",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-pushforward-support-closed",
+   "place": "closedness step",
+   "via": [
+    "new-chow-pushforward-support-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperPushforwardSupportClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperPushforwardSupportClosed.lean",
+  "declaration": "AlgebraicGeometry.exists_pushforward_support_closed",
+  "statement": "theorem exists_pushforward_support_closed\n    {Z Y : Scheme.{u}} [IsNoetherian Z]\n    (q : Y ⟶ Z) [IsProper q] (F : CoherentModules Y) :\n    ∃ D : TopologicalSpace.Closeds Z,\n      (D : Set Z) =\n        {x : Z | ¬ Subsingleton (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)}",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T221604-L-1612820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T221604-L-1612820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

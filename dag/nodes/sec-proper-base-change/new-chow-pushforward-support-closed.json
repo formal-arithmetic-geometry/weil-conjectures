@@ -22,58 +22,24 @@
  ],
  "proof": [
   {
-   "text": "Properness and the locally Noetherian target make Y locally Noetherian. Apply the coherent/quasi-coherent finite-type equivalence to F. To supply finite presentation for the higher-direct-image theorem, choose finite local generators, reindex their indices by ULift (Fin n), and apply the kernel clause of coherence. The already proved isFinitePresentation_of_generators_kernel helper in CoherentFiniteTypeLocallyNoetherian gives presentations on this cover; Mathlib locality descends them. This is written in Lean as a generic local argument to avoid expensive unfolding of the concrete scheme sheaf in elaboration.",
+   "text": "Obtain a closed support D for the ordinary pushforward from lem-weil-pbc-proper-pushforward-support-closed. The proper morphism is a closed map, so q(C) is closed. Apply the closed-ambient-support pushforward lemma to q and the closed set q(C), using hC to identify the support of F with C. Rewrite by the defining equality of D to obtain D ⊆ q(C).",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "pqf-def-coherent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the existing Grothendieck-abelian instance for Y.Modules to obtain injective resolutions. In degree zero apply isFinitePresentation_higherDirectImage and isQuasicoherent_higherDirectImage. The pushforward is left exact, so Mathlib rightDerivedZeroIsoSelf identifies its degree-zero right derived functor with the ordinary pushforward. Transport finite presentation and quasi-coherence along this isomorphism.",
-   "uses": [
-    "lem-pc-coherent-hi",
-    "lem-pc-sections-higher-direct-image-quasi-coherent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Finite presentation implies finite type. Apply finite_type_module_support_closed to the ordinary pushforward and use its last conjunct as the closedness proof for D, whose underlying set is exactly the set of points with nonsubsingleton stalk.",
-   "uses": [
-    "lem-weil-pbc-finite-type-module-support-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Properness makes q a closed map. For x outside q(C), let V be the open complement of q(C). For every open U contained in V and y in its inverse image, y is outside C; the support equality hC therefore makes the stalk F_y subsingleton. By section_ext, all sections of F on the inverse image of U agree. Thus every section module of q_*F on an open contained in V is subsingleton.",
-   "uses": [
-    "lem-weil-pbc-sheaf-sections-determined-by-germs",
+    "lem-weil-pbc-proper-pushforward-support-closed",
+    "new-closed-support-pushforward-support",
     "def-weil-proper-morphism"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Represent any two pushforward stalk elements at x by germs on opens U and W contained in V using exists_le_germ_eq. Their restrictions to U intersect W agree by the preceding subsingleton result. Twice apply germ_res_apply to identify their germs. Hence the stalk is subsingleton outside q(C); contraposition proves D is contained in q(C). The argument works for empty opens and zero sheaves as well.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-lem-coherent-ft-locnoeth",
-  "pqf-def-coherent",
-  "lem-pc-coherent-hi",
-  "lem-pc-sections-higher-direct-image-quasi-coherent",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-sheaf-sections-determined-by-germs",
-  "def-weil-proper-morphism",
-  "def-weil-pbc-module-stalk"
+  "lem-weil-pbc-proper-pushforward-support-closed",
+  "new-closed-support-pushforward-support",
+  "def-weil-proper-morphism"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/088E",
-  "place": "Support of H paragraph, using the existing degree-zero case of 02O5 and finite-type support closedness. Lean implementation by A4, 2026-10-13."
+  "place": "support closedness and vanishing outside proper image"
  },
  "mathlib_searches": [
   {
@@ -145,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T015542-L-3016360",
-  "kind": "proof",
+  "landing": "20261016T221604-L-1612820",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
