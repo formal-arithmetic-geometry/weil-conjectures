@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-point-upper-star-tensor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$p^*$ preserves tensor products",
@@ -15,33 +15,207 @@
  "stmt_deps": [
   "lem-sfb-point-upper-star-unit",
   "sk-def-sfb-sheaf-tensor",
-  "def-sfb-point-adjunction"
+  "def-sfb-point-adjunction",
+  "def-sfb-point-upper-star"
  ],
  "proof": [
   {
-   "text": "Both tensor products are sheafified objectwise tensor products, and\nsheafification is monoidal. Also,\n$\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}$ inverts\nsheafification. So it suffices to show that $\\operatorname{Lan}_{u^{\\mathrm{op}}}$\ncommutes with the objectwise tensor product of presheaves.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the small-site and larger-value-universe convention of [def-weil-size-convention]. Put $\\mathcal C=*_{\\mathrm{proét}}$, the profinite site of [sk-def-sfb-condensed-ring], and $\\mathcal D=(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{proét}}$. Take $u:\\mathcal C\\to\\mathcal D$ to be [def-sfb-profinite-to-proetale]. The category of profinite sets has finite limits: its terminal object is a point, finite products are the topological products, and equalizers are the closed subspaces where the two maps agree, with their induced profinite topologies. The functor $u$ preserves these limits by [lem-sfb-profinite-to-proetale-finite-limits], and it sends coverings to coverings by [lem-sfb-profinite-to-proetale-cover-preserving], including the empty cover of the empty object. These are precisely the size, finite-limit and covering hypotheses of the general inverse-image theorem used in step 2.",
+   "uses": [
+    "def-weil-size-convention",
+    "sk-def-sfb-condensed-ring",
+    "def-sfb-profinite-to-proetale",
+    "lem-sfb-profinite-to-proetale-finite-limits",
+    "lem-sfb-profinite-to-proetale-cover-preserving"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6, proposition-get-morphism (hypotheses); the specialized functor and hypotheses are in main-20261015 sk-def-sfb-pullback-from-point, clause 1."
+   }
   },
   {
-   "text": "At $V$, the Kan extension is a colimit over the opposite of the category of\npairs $(S,\\ V\\to u(S))$. That category is cofiltered because $u$ preserves\nfinite limits ([lem-sfb-profinite-to-proetale-finite-limits]), so the colimit\nis filtered. In a filtered category the diagonal is cofinal, and $\\otimes_\\Z$\ncommutes with filtered colimits in each variable. Hence\n$$\n\\colim\\,(F(S)\\otimes G(S))\\cong\\colim F(S)\\otimes\\colim G(S).\n$$\nThis isomorphism is the comparison map.",
+   "text": "Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to the sites and $u$ of step 1, taking only its geometric-morphism and abelian inverse-image clauses. The inverse image is left Kan extension along $u^{op}$ followed by sheafification, hence the specified $p^*$ of [def-sfb-point-upper-star], and the direct image is restriction, hence $p_*$ of [def-sfb-point-lower-star]. Thus they form a morphism of sites with finite-limit-preserving set inverse image. The convention in [def-weil-pbc-sites-and-cohomology], clause (3), identifies the abelian inverse image on underlying sets and its unit with the set inverse image and unit. We use exactly the Kan-extension/sheafification adjunction of [def-sfb-point-adjunction], not an independently chosen adjunction on the same functors. Consequently the bilinear-adjunction statement cited in step 3 applies to these particular functors and unit. No tensor comparison from the generic theorem is selected or assigned a normalization.",
    "uses": [
-    "lem-sfb-profinite-to-proetale-finite-limits"
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-sfb-point-upper-star",
+    "def-sfb-point-lower-star",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-point-adjunction"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6, proposition-get-morphism; Section 00YR and Proposition 00YV(2) for the induced abelian inverse image and its underlying unit."
+   }
+  },
+  {
+   "text": "Use the set inverse image $L=p^*$ and direct image $R=p_*$ from step 2. The statement [def-weil-pbc-sites-and-cohomology] identifies the induced abelian functors and their units with these underlying set functors and units. Apply [lem-sfb-site-inverse-image-bilinear-adjunction] to these particular functors: for abelian sheaves $F,G$ on the profinite site and $H$ on the pro-étale site it gives the bijection\n$$\\operatorname{Bilin}(p^*F\\times p^*G,H)\\xrightarrow{\\sim}\\operatorname{Bilin}(F\\times G,p_*H),\\qquad\\beta\\longmapsto p_*\\beta\\circ(\\eta_F\\times\\eta_G).$$\nThe finite-limit hypothesis is supplied by step 2. Here $\\eta$ is the unit of the specified Kan-extension/sheafification adjunction. The cited lemma asserts both separate additivity and the displayed two-unit formula; we take precisely these clauses of its statement.",
+   "uses": [
+    "lem-sfb-site-inverse-image-bilinear-adjunction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality in the Hom/bilinear chain, specialized to integer-module sheaves; the exact two-unit formula is supplied by the cited bilinear-adjunction node."
+   }
+  },
+  {
+   "text": "Fix $F,G$ and put $A=p^*(F\\otimes G)$ and $B=p^*F\\otimes p^*G$. For any abelian sheaf $H$ on $(\\Spec\\mathbf Z)_{\\mathrm{proét}}$, combine the bilinear bijection supplied in step 3 with the tensor universal property to obtain bijections\n$$\\operatorname{Hom}(B,H)\\cong\\operatorname{Bilin}(p^*F\\times p^*G,H)\\cong\\operatorname{Bilin}(F\\times G,p_*H)\\cong\\operatorname{Hom}(F\\otimes G,p_*H)\\cong\\operatorname{Hom}(A,H).$$\nHere the tensor universal property follows directly from [sk-def-sfb-sheaf-tensor] and [def-weil-pbc-sheafification]: sectionwise integer-bilinear maps uniquely factor through the objectwise $\\mathbf Z$-tensor, and the resulting natural map to a sheaf factors uniquely through its sheafification. Conversely precomposition with the pure-tensor maps recovers the bilinear family, so these operations are inverse. This uses the ordinary abelian-group tensor universal property, not any claim that all sections of a tensor sheaf are globally pure tensors. The last bijection is [def-sfb-point-adjunction]. Denote the composite by $\\Psi_H$. By the formula in step 3 and the restriction formula of [def-sfb-point-lower-star], $\\Psi_H(h)$ is the adjoint of the unique map $r_h:F\\otimes G\\to p_*H$ satisfying\n$$ (r_h)_S(x\\otimes y)=h_{u(S)}\\bigl(\\eta_F(x)\\otimes\\eta_G(y)\\bigr) $$\nfor all profinite $S$ and $x\\in F(S),y\\in G(S)$, where tensors in sections mean their images in the tensor sheaf. In particular $\\Psi_H$ is bijective with this precise formula.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "def-sfb-point-adjunction",
+    "def-sfb-point-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/bilinear-adjunction chain; section-tensor-product (Tag 03EK), universal property preceding the lemma."
+   }
+  },
+  {
+   "text": "Let $\\delta:A\\to B$ be the oplax tensor comparison specified in [lem-sfb-point-upper-star-unit]. Write $\\mu_{K,L}:p_*K\\otimes p_*L\\to p_*(K\\otimes L)$ for the canonical lax comparison of restriction. From [def-sfb-point-lower-star] and the sheafified sectionwise tensor of [sk-def-sfb-sheaf-tensor], $\\mu$ sends $x\\otimes y$ at $S$ to the image of $x\\otimes y$ at $u(S)$: this sectionwise bilinear family uniquely extends through the tensor and its sheafification [def-weil-pbc-sheafification]. The defining formula for the left-adjoint oplax structure says that the adjoint of $\\delta$ under [def-sfb-point-adjunction] is\n$$d=\\mu_{p^*F,p^*G}\\circ(\\eta_F\\otimes\\eta_G):F\\otimes G\\longrightarrow p_*B.$$\nTherefore $d_S(x\\otimes y)=\\eta_F(x)\\otimes\\eta_G(y)$. For $h:B\\to H$, the adjoint of $h\\circ\\delta$ is $p_*h\\circ d$, which has exactly the formula for $r_h$ in step 4. The equality holds on the objectwise tensor presheaf by bilinearity, then on its sheafification by uniqueness. Injectivity of the adjunction bijection now gives $\\Psi_H(h)=h\\circ\\delta$. Hence precomposition with the particular map $\\delta$ is bijective for every $H$. This establishes the specified oplax map directly, without identifying it with an unnamed canonical isomorphism.",
+   "uses": [
+    "lem-sfb-point-upper-star-unit",
+    "def-sfb-point-lower-star",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "def-sfb-point-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, bilinear and adjunction formulas. The defining oplax-mate formula is Mathlib/CategoryTheory/Monoidal/Functor.lean:1064-1066, leftAdjointOplaxMonoidal; exact master Basic.lean:251-265 specifies this structure."
+   }
+  },
+  {
+   "text": "Apply the surjectivity from step 5 with $H=A$: there is $e:B\\to A$ with $e\\circ\\delta=\\operatorname{id}_A$. Apply injectivity with $H=B$. Since $(\\delta\\circ e)\\circ\\delta=\\delta\\circ(e\\circ\\delta)=\\delta=\\operatorname{id}_B\\circ\\delta$, it gives $\\delta\\circ e=\\operatorname{id}_B$. Thus $e$ is a two-sided inverse to $\\delta$, proving the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, conclusion from the representing Hom bijections; the two-sided inverse argument is written out here."
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-profinite-to-proetale-finite-limits"
+  "def-sfb-point-adjunction",
+  "def-sfb-point-lower-star",
+  "def-sfb-point-upper-star",
+  "def-sfb-profinite-to-proetale",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-sfb-point-upper-star-unit",
+  "lem-sfb-profinite-to-proetale-cover-preserving",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-sfb-site-inverse-image-bilinear-adjunction",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-sheaf-tensor"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-tensor.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, Hom/bilinear-adjunction proof specialized to integer sheaves; Tag 00X6 supplies the site morphism."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"Monoidal\"",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no exact item match; sheafification monoidality and cartesian/LightCondensed results do not assert the specified inverse-image tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Mm]onoidal|[Mm]onoidal.*sheafPullback|isIso.*δ.*sheafPullback",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no exact item match; sheafification monoidality and cartesian/LightCondensed results do not assert the specified inverse-image tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left Kan extension along a finite limit preserving continuous functor preserves tensor products of sheaves of abelian groups",
+   "results": "8 hits: CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, instMonoidalClosedLightCondSet, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+   "date": "2026-10-16",
+   "verdict": "partial generic Kan-extension candidates only; no match to this site-specific tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of abelian groups along a continuous left exact functor is monoidal for tensor product",
+   "results": "0 hits: none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isPointwiseLeftKanExtension|colimitIso|pointwiseLeftKanExtension",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Dense.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean",
+   "date": "2026-10-16",
+   "verdict": "partial generic Kan-extension candidates only; no match to this site-specific tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The value of a left Kan extension at an object is the colimit over the structured arrow comma category",
+   "results": "8 hits: CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.pointwiseLeftKanExtension, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension, CategoryTheory.Functor.pointwiseLeftKanExtension_map, CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.Functor.instIsLeftKanExtensionObjLanAppLanUnit, CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension",
+   "date": "2026-10-16",
+   "verdict": "partial generic Kan-extension candidates only; no match to this site-specific tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|pointUpperStar",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no exact item match; sheafification monoidality and cartesian/LightCondensed results do not assert the specified inverse-image tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous left exact functor of sites induces a strong monoidal inverse image functor on abelian sheaves",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types, CategoryTheory.Functor.op_comp_isSheaf, CategoryTheory.Functor.op_comp_isSheaf_of_types",
+   "date": "2026-10-16",
+   "verdict": "no exact item match; sheafification monoidality and cartesian/LightCondensed results do not assert the specified inverse-image tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointOplaxMonoidal|sheafPullbackOplaxMonoidal|isIso_lan_δ",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "Read the left-adjoint oplax formula in Mathlib/CategoryTheory/Monoidal/Functor.lean:1064-1066; it defines the comparison but does not prove its invertibility. Other hits concern adjunctions or unit comparisons, not this tensor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comonoidal map of the left adjoint of restriction between sheaves of abelian groups is invertible for a flat morphism of sites",
+   "results": "8 hits: CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeSheafSheafComposeNatTransPlusPlusAdjunction, CategoryTheory.GrothendieckTopology.instIsIsoSheafAppFunctorOppositeSheafComposeNatTransPlusPlusAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-16",
+   "verdict": "Read the left-adjoint oplax formula in Mathlib/CategoryTheory/Monoidal/Functor.lean:1064-1066; it defines the comparison but does not prove its invertibility. Other hits concern adjunctions or unit comparisons, not this tensor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian left adjoint adjunction on internal abelian groups restricts the hom equivalence to maps additive in each of two variables",
+   "date": "2026-10-16",
+   "results": "8 hits: AddCommGrpCat.adj, CategoryTheory.Adjunction.mapCommGrp, CategoryTheory.Adjunction.homAddEquiv_add, CategoryTheory.Adjunction.homAddEquiv_sub, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.Adjunction.homAddEquiv_apply, CategoryTheory.Adjunction.mapGrp, AddCommGrpCat.instIsRightAdjointForget",
+   "verdict": "Second-reader search: no two-variable bilinear sheaf-adjunction declaration. mapCommGrp (CommGrp_.lean:286-289) lifts the adjunction to group-object homomorphisms; homAddEquiv (Adjunction/Additive.lean:53-57) adds maps in a Hom set. Neither asserts separate additivity. The two-variable bilinear bijection is exposed as lem-sfb-site-inverse-image-bilinear-adjunction in the repaired split."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_add\", \"homEquiv\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Second-reader search: no two-variable bilinear sheaf-adjunction declaration. mapCommGrp (CommGrp_.lean:286-289) lifts the adjunction to group-object homomorphisms; homAddEquiv (Adjunction/Additive.lean:53-57) adds maps in a Hom set. Neither asserts separate additivity. The two-variable bilinear bijection is exposed as lem-sfb-site-inverse-image-bilinear-adjunction in the repaired split."
+  },
+  {
+   "tool": "grep",
+   "query": "bilinear.*[Ee]quiv|[Ee]quiv.*bilinear|[Bb]ilinear.*[Ss]heaf|[Bb]ilinear.*[Aa]djun",
+   "date": "2026-10-16",
+   "results": "17 hits: Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean, Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean, Mathlib/LinearAlgebra/Matrix/BilinearForm.lean, Mathlib/LinearAlgebra/Matrix/BilinearForm.lean, Mathlib/LinearAlgebra/Matrix/BilinearForm.lean, Mathlib/LinearAlgebra/Matrix/BilinearForm.lean, Mathlib/Analysis/InnerProductSpace/LaxMilgram.lean, Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+   "verdict": "Second-reader search: no two-variable bilinear sheaf-adjunction declaration. mapCommGrp (CommGrp_.lean:286-289) lifts the adjunction to group-object homomorphisms; homAddEquiv (Adjunction/Additive.lean:53-57) adds maps in a Hom set. Neither asserts separate additivity. The two-variable bilinear bijection is exposed as lem-sfb-site-inverse-image-bilinear-adjunction in the repaired split."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -66,5 +240,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-pullback-from-point"
+ "unit": "sk-def-sfb-pullback-from-point",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-point-upper-star-tensor",
+  "worker": "stage1",
+  "summary": "Repair of maintainer return 0266eb43f751: the generic tensor isomorphism is no longer used. A statement-only bilinear-adjunction lemma supplies the exact two-unit formula. Non-elementary steps apply this formula, derive the tensor Hom bijection from sheafification, and calculate its equality with precomposition by the specified oplax comparison. The written two-sided-inverse argument finishes. Compared with the returned snapshot and current shared main; the item statement and imported metadata are unchanged.",
+  "blueprint": "Realizes clause 3 of sk-def-sfb-pullback-from-point using the finite-limit/cover-preserving functor of clause 1. The item proof final assertion \"This isomorphism is the comparison map\" is justified by the exact bilinear-adjunction formula and the defining oplax mate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Used only for its geometric-morphism and induced abelian inverse-image clauses under the in-unit finite-limit and cover-preserving hypotheses; its unnamed tensor isomorphism is not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-c50a17c31",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-c50a17c31 (reviewer sub-agent of L); spot-checked: Read all required instructions, report, item/new node, cited statements, unit/chapter route, and sources. Verified hypotheses, coefficient category, base-change functor, oplax normalization, tensor universal-property argument, edge cases, duplicates, and Mathlib searches. The returned normalization and elementary-step faults are repaired; no DAG fix or tool-use exception is needed. Wrote review.md."
+ }
 }

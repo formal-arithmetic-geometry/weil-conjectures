@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-site-inverse-image-bilinear-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-point-upper-star-tensor",
+   "place": "Proof of lem-sfb-point-upper-star-tensor, the bilinear-map adjunction used before the tensor Hom chain; it supplies the exact two-unit normalization needed to identify the specified oplax comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bilinear adjunction for the inverse image of a morphism of sites",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology], small relative to the common universe of sheaf values [def-weil-size-convention]. Let $f:\\mathcal D\\to\\mathcal C$ be a morphism of sites: its inverse image $L=f^{-1}:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ is left adjoint to $R=f_*$ and preserves finite limits. Use the induced functors on abelian sheaves and their canonical adjunction, with unit $\\eta_F:F\\to RLF$, as in [def-weil-pbc-sites-and-cohomology]. For abelian sheaves $F,G$ on $\\mathcal C$ and $H$ on $\\mathcal D$, let $\\operatorname{Bilin}(A\\times B,K)$ denote morphisms of underlying sheaves of sets $A\\times B\\to K$ that are additive separately in each variable on sections over every site object. In the following formula, $R(\\beta)$ means the direct image on underlying sheaves of sets; the bilinear map $\\beta$ need not be a morphism of abelian sheaves from the product. Using the canonical product identification $R(LF\\times LG)\\cong RLF\\times RLG$, the formula\n$$\\Theta_{F,G,H}(\\beta)=R(\\beta)\\circ(\\eta_F\\times\\eta_G)$$\ndefines a bijection\n$$\\operatorname{Bilin}(LF\\times LG,H)\\xrightarrow{\\ \\sim\\ }\\operatorname{Bilin}(F\\times G,RH),$$\nnatural in $F,G,H$. This asserts the displayed formula for the bijection, not merely existence of a bijection.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, third equality in the proof, specialized to integer-module sheaves; the adjoint of a bilinear map is obtained by composing its direct image with the two units."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of sheaf topoi, bilinear maps from inverse images of two abelian sheaves correspond by adjunction to bilinear maps into the direct image, with formula beta maps to R beta composed with the two adjunction units",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-16",
+   "verdict": "No match. Read PullbackFree.lean:92-113 and PullbackContinuous.lean:53-56,84-103: these give the module adjunction and the unit-object mate, not a bijection of separately additive maps with two independent input sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bilinear\", \"adjunction\"",
+   "results": "0 hits:",
+   "date": "2026-10-16",
+   "verdict": "No match: the conjunction returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ilin.*[Aa]djun|[Aa]djun.*[Bb]ilin|[Bb]ilin.*[Ss]heaf|[Ss]heaf.*[Bb]ilin",
+   "results": "0 hits:",
+   "date": "2026-10-16",
+   "verdict": "No match: the regular expression returned zero hits throughout Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image direct image adjunction of a geometric morphism induces an adjunction bijection for bilinear maps of abelian sheaves",
+   "results": "8 hits: TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj, Topology.IsInducing.adjunction, CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "date": "2026-10-16",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Sites/Pullback.lean:59-78 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53-56,84-103: ordinary Hom adjunctions, not bilinear maps out of two inverse images. Other hits are adjunctions for topological presheaves, scheme modules or opens."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit preserving left adjoint transports separately additive maps between internal abelian groups and its adjunction bijection restricts to bilinear maps",
+   "results": "8 hits: AddCommGrpCat.adj, CategoryTheory.Adjunction.left_adjoint_additive, AddCommGrpCat.instIsLeftAdjointFree, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, Condensed.setAbAdjunction, GrpCat.abelianizeAdj, AddCommGrpCat.instIsRightAdjointForget, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+   "date": "2026-10-16",
+   "verdict": "No match. Hits give free abelian group adjunctions, left_adjoint_additive, condensed free abelian groups and a Grothendieck-category tensor adjunction. None states the two-variable bilinear bijection for a geometric inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of abelian groups the inverse image direct image adjunction restricts on maps from a product to a natural bijection of separately additive maps, beta maps to pushforward beta after the product of the units",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "No match. Re-read PullbackFree.lean:70-103 and PullbackContinuous.lean:50-103: the hits give module Hom adjunctions and the unit-object mate, not a two-variable bijection of separately additive maps. The pushforward-composition unit lemma does not state this bijection either."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The hom equivalence for an adjunction of cartesian categories preserves equations expressing additivity in two inputs of internal abelian groups",
+   "results": "8 hits: CategoryTheory.Adjunction.homAddEquiv_add, CategoryTheory.Adjunction.homAddEquiv_sub, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.Adjunction.homAddEquiv_symm_add, CategoryTheory.Adjunction.homAddEquiv_apply, CategoryTheory.Adjunction.homAddEquiv_symm_sub, CategoryTheory.Preadditive.commGrpEquivalenceAux, CategoryTheory.Adjunction.homAddEquiv_zero",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no exact match. mapCommGrp (Mathlib/CategoryTheory/Monoidal/CommGrp_.lean:286-289) lifts ordinary group-object homomorphisms; homAddEquiv (Mathlib/CategoryTheory/Adjunction/Additive.lean:53-57) concerns addition of homomorphisms, not maps additive separately in two arguments. Grep hits concern module colimit Hom, scalar restriction, or additive characters."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCommGrp\"",
+   "results": "12 hits: CategoryTheory.Functor.mapCommGrp, CategoryTheory.Functor.mapCommGrpIdIso, CategoryTheory.Functor.mapCommGrpFunctor, CategoryTheory.Functor.Faithful.mapCommGrp, CategoryTheory.Functor.FullyFaithful.mapCommGrp, CategoryTheory.Functor.Full.mapCommGrp, CategoryTheory.Equivalence.mapCommGrp, CategoryTheory.Functor.mapCommGrp_obj_X",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no exact match. mapCommGrp (Mathlib/CategoryTheory/Monoidal/CommGrp_.lean:286-289) lifts ordinary group-object homomorphisms; homAddEquiv (Mathlib/CategoryTheory/Adjunction/Additive.lean:53-57) concerns addition of homomorphisms, not maps additive separately in two arguments. Grep hits concern module colimit Hom, scalar restriction, or additive characters."
+  },
+  {
+   "tool": "grep",
+   "query": "Bilin.*(Adjunction|Sheaf)|(?:Adjunction|Sheaf).*Bilin|homEquiv.*map_add",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Group/AddChar.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent second reading: no exact match. mapCommGrp (Mathlib/CategoryTheory/Monoidal/CommGrp_.lean:286-289) lifts ordinary group-object homomorphisms; homAddEquiv (Mathlib/CategoryTheory/Adjunction/Additive.lean:53-57) concerns addition of homomorphisms, not maps additive separately in two arguments. Grep hits concern module colimit Hom, scalar restriction, or additive characters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product preserving adjunction between topoi gives a bijection between biadditive morphisms of internal abelian groups by applying the adjunction to the product",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.bijection, Condensed.setAbAdjunction, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.expComparison, CategoryTheory.Adjunction.homAddEquiv_apply, AddCommGrpCat.adj, CategoryTheory.Adjunction.homAddEquiv_add, CategoryTheory.Adjunction.homAddEquiv_symm_add",
+   "verdict": "No exact match. Read CategoryTheory.bijection at Monoidal/Closed/Ideal.lean:249 (cartesian reflector/exponential ideal), expComparison at Monoidal/Closed/Functor.lean:81 (exponential comparison), and homAddEquiv at Adjunction/Additive.lean:53 (additivity of a Hom equivalence). None states separate additivity in two independent inputs under an arbitrary geometric morphism. Free abelian group adjunctions have different functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BilinearMap\", \"Equiv\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No match: the Loogle conjunction returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "biadditive|bilinear.*homEquiv|homEquiv.*bilinear|bilin.*mapCommGrp",
+   "date": "2026-10-16",
+   "results": "2 hits: Mathlib/Algebra/Module/Hom.lean, Mathlib/Algebra/Lie/Basic.lean",
+   "verdict": "No match. Read Algebra/Module/Hom.lean:124, AddMonoidHom.smul, and Algebra/Lie/Basic.lean:238, LieRingModule.toEnd: these construct scalar multiplication and a Lie bracket as biadditive maps, not the two-variable adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-upper-star-tensor",
+  "date": "2026-10-16",
+  "group": "Q54"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-pullback-from-point"
+}

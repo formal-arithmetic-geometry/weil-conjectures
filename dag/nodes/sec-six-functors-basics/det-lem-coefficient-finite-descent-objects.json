@@ -3,57 +3,159 @@
  "blueprint": {
   "is": "det-lem-coefficient-finite-descent-objects",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Objects of $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ descend to a finite extension",
- "statement": "Let $X$ be a standing scheme. For every $K\\in\\Dbc(X,\\Qlb)$ there are a finite $E/\\mathbf Q_\\ell$ and\n$K_E\\in\\Dbc(X,E)$ with $(K_E)_{\\Qlb}\\cong K$. If $K_E$ is a model over $E$ and $F\\supseteq E$ is\nfinite, then $(K_E)_F$ is a model over $F$.",
+ "statement": "Let $X$ be a standing scheme [sk-def-sfb-dc-setting], and fix the prime $\\ell$ and algebraic closure $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Use the bounded constructible categories $\\Dbc(X,\\Lambda)$ of [det-def-sfb-constructible-tor-amplitude], with the pulled-back condensed coefficient rings, not constant discrete rational coefficient sheaves. All finite fields below are intermediate fields of $\\Qlb/\\mathbf Q_\\ell$ [def-weil-finite-subextension-directed-set]. Write $C_F=T_{E,F}C$ and $C_{\\Qlb}=T_{E,\\Qlb}C$ for the derived extensions of scalars [def-sfb-derived-extend-subfield, def-sfb-derived-extend-to-qlbar]. Here these functors act on unbounded derived categories of module objects in $\\Sh(X_{\\mathrm{proét}},\\Ab)$; in particular $T_{E,\\Qlb}$ is the coefficient-change functor for the condensed inclusion $\\underline E\\to\\underline{\\Qlb}$, as specified by [def-sfb-derived-extend-to-qlbar].\n\nFor every $K\\in\\Dbc(X,\\Qlb)$ there are a finite $E/\\mathbf Q_\\ell$ and $K_E\\in\\Dbc(X,E)$ with $(K_E)_{\\Qlb}\\cong K$. If $K_E$ is such a model over $E$ and $E\\subseteq F\\subseteq\\Qlb$ is finite over $\\mathbf Q_\\ell$, then $(K_E)_F\\in\\Dbc(X,F)$ and $((K_E)_F)_{\\Qlb}\\cong K$, so $(K_E)_F$ is a model over $F$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.md",
   "place": "node det-lem-coefficient-finite-descent-objects, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-finite-subextension-directed-set",
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar"
+ ],
  "proof": [
   {
-   "text": "*Models persist.* $((K_E)_F)_{\\Qlb}=(K_E)_{\\Qlb}$ since extension of scalars is transitive; and\n$(K_E)_F$ has constructible cohomology $F_X\\otimes H^q(K_E)$ (flatness, and extension of scalars\npreserves local freeness on strata). So we may always enlarge $E$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Cones.* Suppose $K'\\to K\\to K''\\xrightarrow{\\delta}K'[1]$ is distinguished in $\\Dbc(X,\\Qlb)$ and\n$K'$, $K''$ have models $K'_E$, $K''_E$ over a common $E$ (enlarge to a common one). By\n[det-lem-coefficient-finite-descent-hom] (3), with $C=K''_E$, $D=K'_E$, $r=1$, the class\n$\\delta$, transported along the isomorphisms $(K''_E)_{\\Qlb}\\cong K''$, $(K'_E)_{\\Qlb}\\cong K'$,\nis the image of some $\\delta_F\\colon(K''_E)_F\\to(K'_E)_F[1]$ for a finite $F\\supseteq E$. Let\n$K_F$ be the shifted cone of $\\delta_F$, i.e. a fibre: $K_F\\to(K''_E)_F\\xrightarrow{\\delta_F}(K'_E)_F[1]$.\nExtension of scalars to $\\Qlb$ is exact, so it carries this triangle to one isomorphic to the\ngiven one (by the axiom TR3 a morphism of triangles with two isomorphisms gives an\nisomorphism on the third vertex), whence $(K_F)_{\\Qlb}\\cong K$. Also $K_F\\in\\Dbc(X,F)$ since\n$\\Dbc(X,F)$ is triangulated ([det-cor-coefficient-heart-ii-triangulated]).",
+   "text": "Check the geometric hypotheses used below. The standing setting [sk-def-sfb-dc-setting] makes $X$ separated and of finite type over a field $k$. Since $k$ has only the ideals $0,k$, $\\operatorname{Spec}k$ is Noetherian; [lem-weil-pbc-finite-type-over-noetherian] applied to $X\\to\\operatorname{Spec}k$ gives that $X$ is Noetherian. Its locally closed strata $S$ are qcqs: locally their rings are quotients of localizations of Noetherian rings, and their underlying spaces are Noetherian. Thus $S$, and every intersection of two affine opens of $S$, are quasi-compact (an open cover of a Noetherian space has a finite subcover, by stabilization of finite unions). This verifies the qcqs hypothesis when lisse descent is applied on $S$, and the Noetherian hypothesis when finite generation and triangulated closure are applied on $X$.",
    "uses": [
-    "det-cor-coefficient-heart-ii-triangulated"
+    "sk-def-sfb-dc-setting",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+    "place": "Preliminary verification of the hypotheses of the Sheaves and Complexes paragraphs; Morphisms Lemma 01T6 (lemma-finite-type-noetherian)."
+   }
   },
   {
-   "text": "*Sheaves.* For constructible $K$, take the filtration of [det-lem-coefficient-heart-filtration];\neach $F_k/F_{k-1}=a_{k!}L_k$ with $L_k$ lisse descends by [det-lem-coefficient-finite-descent-lisse]\n(1), because $a_{k!}$ commutes with extension of scalars ($a_{k!}=i_*u_!$, and both $u_!$ and\n$i_*$ commute with the exact functor $\\QbarX\\otimes_{E_X}-$, as one checks on the open and closed\npieces). Induction on $k$ with the cone step gives a model of $F_m=K$.",
+   "text": "Models persist and may be shifted. For $E\\subseteq F$, [lem-sfb-extend-subfield-constructible] gives $(K_E)_F\\in\\Dbc(X,F)$, and [def-sfb-derived-extend-comp-iso] gives $((K_E)_F)_{\\Qlb}\\cong(K_E)_{\\Qlb}\\cong K$. This proves the second assertion. The functor $T_{E,\\Qlb}$ is the left derived extension on the module-object categories over the pulled-back condensed rings, exactly as specified by the current [def-sfb-derived-extend-to-qlbar]; its additional identification with condensed coefficient change uses the same inclusion. The scalar-extension functors to a finite field and to $\\Qlb$ are computed termwise, preserve distinguished triangles and commute with every shift: apply [lem-weil-pbc-exact-functor-derived-factorization] to the flat scalar extensions of [lem-sfb-subfield-flat] and [lem-sfb-qlbar-flat]. Exactness here follows from preservation of finite limits together with right exactness of extension of scalars, which is a tensor left adjoint by [sk-def-sfb-change-of-scalars]. The exact-functor clause of [sk-def-sfb-derived-categories] identifies the left derived extensions just defined with these termwise functors; thus the triangle and shift comparisons apply to the specified $T_{E,F}$ and $T_{E,\\Qlb}$. Thus $K_E[n]$ models $K[n]$; it is bounded constructible by [det-cor-coefficient-heart-ii-triangulated]. For two finite fields $E_1,E_2$, their finite compositum $E_1E_2$ exists by [def-weil-finite-subextension-directed-set], and the just-proved persistence puts two models over a common field.",
    "uses": [
-    "det-lem-coefficient-heart-filtration",
-    "det-lem-coefficient-finite-descent-lisse"
+    "lem-sfb-extend-subfield-constructible",
+    "def-sfb-derived-extend-comp-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "def-weil-finite-subextension-directed-set",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-derived-extend-to-qlbar",
+    "sk-def-sfb-derived-categories"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+    "place": "Models persist paragraph, with exactness and shift compatibility spelled out; Stacks Derived Categories Lemmas 015F and 014X."
+   }
   },
   {
-   "text": "*Complexes.* Induct on the number of nonzero cohomology sheaves using\n$\\tau_{<q}K\\to K\\to\\mathcal H^q(K)[-q]\\to$ and the cone step. Each step enlarges $E$ by a\nfinite extension, and there are finitely many steps.",
-   "uses": [],
-   "elementary": null
+   "text": "Descent is closed under extensions. Suppose $A\\to K\\to B\\xrightarrow{\\delta}A[1]$ is distinguished and $A,B$ have bounded constructible models. By step 2, put them over a common finite $E$ and fix isomorphisms $\\alpha:(A_E)_{\\Qlb}\\xrightarrow{\\sim}A$ and $\\beta:(B_E)_{\\Qlb}\\xrightarrow{\\sim}B$. The transported map $\\alpha[1]^{-1}\\circ\\delta\\circ\\beta:(B_E)_{\\Qlb}\\to(A_E)_{\\Qlb}[1]$ is represented at some finite $F\\supseteq E$ by $\\delta_F:(B_E)_F\\to(A_E)_F[1]$: use the surjectivity in [det-lem-coefficient-finite-descent-hom] (3) with $C=B_E$, $D=A_E$, $r=1$. An element of this filtered colimit has a representative at one finite stage. Write $A_F=(A_E)_F$ and $B_F=(B_E)_F$. By TR1 of [def-weil-triangulated-category], complete $\\delta_F$ to a distinguished triangle $B_F\\xrightarrow{\\delta_F}A_F[1]\\xrightarrow{v_F}C_F\\xrightarrow{w_F}B_F[1]$ and put $K_F=C_F[-1]$. Applying the inverse rotation of TR2 once gives $C_F[-1]\\xrightarrow{-w_F[-1]}B_F\\xrightarrow{\\delta_F}A_F[1]\\xrightarrow{v_F}C_F$; applying it again gives $A_F\\xrightarrow{-v_F[-1]}K_F\\xrightarrow{-w_F[-1]}B_F\\xrightarrow{\\delta_F}A_F[1]$. In particular the connecting arrow is $\\delta_F$, with no sign change. The two endpoints lie in $\\Dbc(X,F)$ by step 2, so $K_F$ does too by [det-cor-coefficient-heart-ii-triangulated]. Apply the exact scalar extension of step 2. Rotate this triangle and the given triangle until their first arrows are respectively $(\\delta_F)_{\\Qlb}$ and $\\delta$. By construction $\\beta$ and $\\alpha[1]$ form a commuting square on these first arrows; TR3 completes it to a morphism of distinguished triangles. Its third component is an isomorphism by [lem-sf-triangle-morphism-iso], and rotating back gives $(K_F)_{\\Qlb}\\cong K$. In particular, if $u:A\\to B$ is any morphism between descended objects, its cone descends: rotate $A\\to B\\to\\operatorname{Cone}(u)\\to A[1]$ to the extension triangle $B\\to\\operatorname{Cone}(u)\\to A[1]\\to B[1]$ and apply the result just proved.",
+   "uses": [
+    "det-lem-coefficient-finite-descent-hom",
+    "def-weil-triangulated-category",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+    "place": "Cones paragraph; the TR3 comparison and the passage from extensions to cones are made explicit."
+   }
+  },
+  {
+   "text": "The generators have models. Let $a:S\\hookrightarrow X$ be locally closed, $L$ a lisse $\\Qlb_S$-module, and $n\\in\\mathbf Z$. By step 1, $S$ is qcqs. Part (1) of [det-lem-coefficient-finite-descent-lisse], applied on $S$, supplies a finite $E$ and a lisse $E_S$-module $L_E$ with $(L_E)_{\\Qlb}\\cong L$. Put $G_E=a_!L_E[n]$. The converse assertion of [det-cor-coefficient-heart-ii-generation], for $\\Lambda=E$, says that this generator is in $\\Dbc(X,E)$. The identification in [def-sfb-derived-extend-to-qlbar], on both $S$ and $X$, makes $T_{E,\\Qlb}$ the coefficient change for the same condensed inclusion $\\underline E\\to\\underline{\\Qlb}$. Consequently part (2) of [det-prop-scalar-six-pullback] gives $(a_!L_E)_{\\Qlb}\\cong a_!((L_E)_{\\Qlb})$. Combining it with the shift compatibility of step 2 and the chosen lisse isomorphism gives $(G_E)_{\\Qlb}\\cong a_!L[n]$. This uses extension by zero for a locally closed immersion, including its closed factor; an open-immersion comparison alone would not suffice.",
+   "uses": [
+    "det-lem-coefficient-finite-descent-lisse",
+    "det-cor-coefficient-heart-ii-generation",
+    "det-prop-scalar-six-pullback",
+    "def-sfb-derived-extend-to-qlbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+    "place": "Sheaves paragraph, its lisse subquotients and the locally closed extension-by-zero compatibility."
+   }
+  },
+  {
+   "text": "Finish by a finite induction, with no infinite passage of coefficient fields. Apply [det-cor-coefficient-heart-ii-generation] for $\\Lambda=\\Qlb$ to $K$. It supplies a finite sequence $K_1,\\ldots,K_N=K$, each term a generator $a_!L[n]$ or isomorphic to a cone between earlier terms, up to shift. Induct on the sequence index: a generator has the model of step 4; a cone has a model by step 3 after putting its two earlier models over a common finite field by step 2; a shift has the shifted model by step 2. An isomorphism to such an object is handled by composing the model isomorphism. The zero object has the zero model over $\\mathbf Q_\\ell$ (and can also be taken as a rank-zero lisse generator). There are only finitely many induction steps, each choosing one finite extension or one finite compositum, so the final model $K_E$ is over a finite extension. The finite-generation lemma packages exactly the source's finite sheaf filtration followed by the finite cohomological truncation induction; its statement supplies the entire finite sequence, rather than requiring access to its proof.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-generation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+    "place": "Sheaves and Complexes paragraphs, using the explicitly cited finite-generation corollary; sk-cor-coefficient-heart-ii-generation.proof.md."
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-dc-setting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-extend-subfield-constructible",
+  "def-sfb-derived-extend-comp-iso",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat",
   "det-cor-coefficient-heart-ii-triangulated",
-  "det-lem-coefficient-heart-filtration",
+  "def-weil-finite-subextension-directed-set",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-derived-extend-to-qlbar",
+  "sk-def-sfb-derived-categories",
+  "det-lem-coefficient-finite-descent-hom",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
   "det-lem-coefficient-finite-descent-lisse",
-  "det-cor-coefficient-heart-ii-generation"
+  "det-cor-coefficient-heart-ii-generation",
+  "det-prop-scalar-six-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-objects.proof.md",
+  "place": "Models persist; Cones; Sheaves; Complexes. The last two inductions are packaged by the existing finite-generation corollary."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(descent|scalar)|finite.*descent.*complex",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state descent of bounded constructible pro-etale coefficient complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"extendScalars\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state descent of bounded constructible pro-etale coefficient complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible derived sheaves over algebraic closure descend to finite extensions of the coefficient field",
+   "results": "finiteExts; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; algebraicClosure.isAlgebraic; AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact; SeparableClosure; SheafOfModules.Finite.hasFiniteLimits; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; separableClosure.isAlgebraic",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state descent of bounded constructible pro-etale coefficient complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded constructible complex of pro-etale sheaves over the algebraic closure of the l-adic numbers descends to a finite coefficient field extension",
+   "results": "BDeRhamPlus; Condensed.profiniteSolidCounit; Condensed.lanSheafProfinite; InfiniteGalois.asProfiniteGaloisGroupFunctor; Condensed.finFree; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state descent of bounded constructible pro-etale coefficient complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex with constructible cohomology is defined over some finite subextension of an algebraic coefficient field",
+   "results": "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; CochainComplex.isLE_iff; CochainComplex.isGE_iff; CochainComplex.cm5b.instIsStrictlyGEI; CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; Algebra.finite_of_essFiniteType_of_isAlgebraic; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits do not state descent of bounded constructible pro-etale coefficient complexes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "in_cycle"
@@ -76,5 +178,29 @@
   "det-lem-coefficient-finite-descent-hom"
  ],
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-qlbar-two-colimit"
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-coefficient-finite-descent-objects",
+  "worker": "stage1",
+  "summary": "Preserved both assertions, made coefficient categories and finite intermediate fields explicit, supplied all citations for scalar compatibility, lisse descent and cone descent, and finished by the existing finite-generation corollary. No new nodes. Checked hypotheses, actual cited statements, source texts, and dependency paths back to the item. Second reading corrected the cone completion sign and wrote both inverse rotations explicitly. Repaired the returned landing against current DAG a701a0d453d1170d61453f0c11d338e77f0c150f: revalidated the clarified definition of T_{E,Qlbar}, made its module-object/unbounded/condensed conventions explicit, and cited the exact-functor identification and the identical coefficient-change functor where used.",
+  "blueprint": "Models persist is step 2; Cones is step 3; the lisse subquotients in Sheaves are step 4; the Sheaves/Complexes finite inductions are step 5 via det-cor-coefficient-heart-ii-generation, which the blueprint already lists. Step 1 verifies the standing Noetherian/qcqs hypotheses.",
+  "tool_uses": [
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Its clause (2) is precisely the generic coefficient compatibility for locally closed extension by zero omitted in the source proof; it does not replace finite descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-scalar-six-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-5654ff215",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-5654ff215 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all five proof steps, every cited node statement and source location, the unit/chapter route, coefficient category and base-change morphism. The repaired cone rotations preserve the connecting morphism; all hypotheses and finite-field edge cases check, no new nodes or duplicates exist, no dependency cycle reaches the item, and the route lock is respected. Review written to review.md."
+ }
 }
