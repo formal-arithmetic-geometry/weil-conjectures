@@ -1,0 +1,130 @@
+{
+ "id": "new-lem-sc-henselian-separably-generated-residue-section",
+ "kind": "statement",
+ "title": "A separating residue-field family gives a henselian coefficient section",
+ "statement": "Let K and E be fields, and R a henselian local commutative ring [def-weil-pbc-henselian-terminology], all in one universe. Give E and R K-algebra structures and let rho:R -> E be a surjective K-algebra map whose kernel is the maximal ideal of R, so E is its residue field [def-weil-residue-field]. Let v:I -> E be an algebraically independent family over K [def-weil-pbc-transcendence-basis], and assume E is separable algebraic [def-weil-pbc-separable-algebraic-extension] over the subfield K(v). Then there is a K-algebra map j:E -> R such that rho composed with j is the identity.",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees"
+ },
+ "proof": [
+  {
+   "text": "Choose lifts u_i of the family v_i. If a nonzero polynomial P evaluated at u were a nonunit, its residue P(v) would vanish. Algebraic independence rules this out. Thus evaluation sends all nonzero polynomials to units and extends to the fraction field of K[T_i]. The algebraic-independent evaluation equivalence identifies this fraction field with L=K(v), giving j_L:L -> R whose reduction is the inclusion in E. This argument also handles the empty family.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Regard rho as an L-algebra map using j_L. A separable algebraic field extension E/L is ind-etale by IndEtale.of_isSeparable, so choose its filtered presentation by etale L-algebras. Identify the residue field at the maximal ideal of R with E via rho, and the residue field at the zero ideal of E with E. Their composite gives the prescribed residual embedding. The zero ideal of L is the pullback of both primes because field maps are injective. Apply the existing henselian-colimit lifting theorem to obtain an L-algebra map E -> R with this prescribed residual map.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the prescribed residue-field equality on each element of E and transport through the residue-field identifications. It says rho(j(x))=x. Restrict scalars from L to K to obtain the asserted section.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees; expanded using the existing Mathlib and henselian-colimit APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A henselian local algebra over a perfect field has a coefficient field section of its residue map",
+   "date": "2026-10-16",
+   "results": "8 hits: HenselianLocalRing.TFAE, Field.henselian, HenselianLocalRing, HenselianLocalRing.is_henselian, instHenselianRingMaximalIdeal, HenselianLocalRing.toIsLocalRing, HenselianRing.is_henselian, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "verdict": "No ready coefficient-section theorem; reuse the existing ind-etale henselian-colimit lifting theorem and Mathlib rational-function evaluation instead of duplicating its proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsSeparable\"",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No ready coefficient-section theorem; reuse the existing ind-etale henselian-colimit lifting theorem and Mathlib rational-function evaluation instead of duplicating its proof."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient_field|residue.*section",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No ready coefficient-section theorem; reuse the existing ind-etale henselian-colimit lifting theorem and Mathlib rational-function evaluation instead of duplicating its proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselian local algebra has a section of the residue map when its residue field has a separating transcendence basis",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-smooth-strict-local-field-model-coeff",
+   "place": "A separating residue-field family gives a henselian coefficient section",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselianSeparablyGeneratedResidueSection",
+  "file": "lean/Sheaf/RingTheory/HenselianSeparablyGeneratedResidueSection.lean",
+  "declaration": "Algebra.exists_section_of_separating_family",
+  "statement": "theorem exists_section_of_separating_family\n    (K E R : Type u) [Field K] [Field E] [CommRing R] [HenselianLocalRing R]\n    [Algebra K E] [Algebra K R]\n    (ρ : R →ₐ[K] E) (hsurj : Function.Surjective ρ)\n    (hker : RingHom.ker ρ.toRingHom = IsLocalRing.maximalIdeal R)\n    (ι : Type u) (v : ι → E) (hv : AlgebraicIndependent K v)\n    [Algebra.IsSeparable (IntermediateField.adjoin K (Set.range v)) E] :\n    ∃ j : E →ₐ[K] R, ρ.comp j = AlgHom.id K E",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "new-lem-sc-smooth-strict-local-field-model-coeff-fraction-trdeg",
+ "kind": "statement",
+ "title": "Subtract transcendence degrees for an embedded coefficient field",
+ "statement": "In the smooth integral finite-type K-scheme setting [def-sbc-smooth-morphisms] [def-pc-integral-scheme] [def-weil-pbc-scheme-conventions], with K algebraically closed [def-weil-algebraic-closure], let d be the dimension of Y [def-kun-dimension] and let s:Spec(Omega) -> Y be a geometric point [def-weil-geometric-point], with Omega algebraically closed, above y. Put a=trdeg_K kappa(y) [def-kun-transcendence-degree], and let R be the strict henselization ring [def-weil-pbc-strict-henselization-limit], assumed local and an integral domain, with structural map r:Spec(R) -> Y. Equip kappa(y) with a K-algebra structure inducing the composite Spec(kappa(y)) -> Y -> Spec(K), and equip Omega with a kappa(y)-algebra structure inducing s after composition with Spec(kappa(y)) -> Y. Equip R with a K-algebra structure inducing r followed by Y -> Spec(K). For any K-field F and K-algebra map j:F -> R with trdeg_K F=a, the fraction field of R, regarded as an F-algebra through j, has transcendence degree d-a over F.",
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-algebraic-closure",
+  "def-kun-dimension",
+  "def-weil-geometric-point",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees"
+ },
+ "proof": [
+  {
+   "text": "Apply the closed-irreducible dimension formula to the whole integral scheme and its generic point. The generic stalk is a field and its surjective residue map is an isomorphism. The structural Spec equations identify the K-algebra structures. Thus trdeg_K K(Y)=d.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The core theorem provides i:K(Y) -> Q=Frac(R), with Q algebraic over K(Y). Full faithfulness of Spec and the structural equations show that i respects K. The tower formula, with zero transcendence degree for the algebraic extension, therefore gives trdeg_K Q=d.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model-core",
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use j to define the F-algebra structure of Q. Since j respects K, K,F,Q is a scalar tower. The tower formula yields a+trdeg_F Q=d as cardinals. The right side is finite, so trdeg_F Q is a natural cardinal b. Injectivity of natural cardinal casts gives a+b=d and hence b=d-a, including the boundary cases a=0 and a=d.",
+   "uses": [
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-strict-local-field-model-core",
+  "lem-sbc-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees; expanded using the existing Mathlib and henselian-colimit APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transcendence degree is additive in a tower of field extensions and algebraic extensions have transcendence degree zero",
+   "date": "2026-10-16",
+   "results": "8 hits: lift_trdeg_add_eq, lift_trdeg_add_le, trdeg_add_eq, trdeg_add_le, trdeg_eq_zero, Algebra.IsAlgebraic.trdeg_le_cardinalMk, trdeg_pos, trdeg_eq_iSup_cardinalMk_isTranscendenceBasis",
+   "verdict": "Mathlib supplies trdeg_add_eq and trdeg_eq_zero; the geometric compatibility and finite-cardinal subtraction are the remaining proved argument."
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg_add_eq|trdeg_eq_zero|exists_isTranscendenceBasis_and_isSeparable",
+   "date": "2026-10-16",
+   "results": "18 hits: Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/FinTrdeg.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean",
+   "verdict": "Mathlib supplies trdeg_add_eq and trdeg_eq_zero; the geometric compatibility and finite-cardinal subtraction are the remaining proved argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transcendence degree of a fraction field over a coefficient field is the difference of finite transcendence degrees in a field tower",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-smooth-strict-local-field-model-coeff",
+   "place": "Subtract transcendence degrees for an embedded coefficient field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeffFractionTrdeg",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStrictLocalFieldModelCoeffFractionTrdeg.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smooth_strict_local_field_model_coeff_fraction_trdeg",
+  "statement": "theorem smooth_strict_local_field_model_coeff_fraction_trdeg\n    (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y]\n    (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (d a : ℕ) (hd : topologicalKrullDim Y = (d : WithBot ℕ∞))\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)\n    (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y)\n    [Algebra K (Y.residueField y)]\n    (hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =\n      Y.fromSpecResidueField y ≫ f)\n    [Algebra (Y.residueField y) Ω]\n    (hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫\n      Y.fromSpecResidueField y = s)\n    (ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal))\n    [Algebra K (strictHenselizationRing s)]\n    (hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =\n      strictHenselizationStructuralMap s ≫ f)\n    [IsLocalRing (strictHenselizationRing s)]\n    [IsDomain (strictHenselizationRing s)]\n    (F : Type u) [Field F] [Algebra K F]\n    (j : F →ₐ[K] strictHenselizationRing s)\n    (htr : Algebra.trdeg K F = (a : Cardinal)) :\n    (letI := ((algebraMap (strictHenselizationRing s)\n        (FractionRing (strictHenselizationRing s))).comp j.toRingHom).toAlgebra\n     Algebra.trdeg F (FractionRing (strictHenselizationRing s)) =\n       ((d - a : ℕ) : Cardinal))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

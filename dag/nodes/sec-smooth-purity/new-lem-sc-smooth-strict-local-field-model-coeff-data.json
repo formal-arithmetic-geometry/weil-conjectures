@@ -1,0 +1,143 @@
+{
+ "id": "new-lem-sc-smooth-strict-local-field-model-coeff-data",
+ "kind": "statement",
+ "title": "Construct the coefficient field and its residue isomorphism",
+ "statement": "Let K be algebraically closed [def-weil-algebraic-closure] and Y a smooth [def-sbc-smooth-morphisms] integral [def-pc-integral-scheme] finite-type K-scheme [def-weil-pbc-scheme-conventions] of dimension d [def-kun-dimension]. Let Omega be an algebraically closed field and s:Spec(Omega) -> Y a geometric point [def-weil-geometric-point], with image y and a=trdeg_K kappa(y) [def-kun-transcendence-degree]. Let R be the strict henselization ring [def-weil-pbc-strict-henselization-limit], assumed local, with structural morphism r:Spec(R) -> Y. Equip kappa(y) with a K-algebra structure whose Spec map is Spec(kappa(y)) -> Y -> Spec(K), and equip Omega with a kappa(y)-algebra structure whose Spec map followed by Spec(kappa(y)) -> Y is s. Equip R with a K-algebra structure whose Spec map is r followed by Y -> Spec(K). There is a separably closed K-field F [def-pc-separably-closed] and a K-algebra map j:F -> R whose composite with reduction to the residue field [def-weil-residue-field] is bijective, with trdeg_K F=a.",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-dimension",
+  "def-weil-geometric-point",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-separably-closed",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees"
+ },
+ "proof": [
+  {
+   "text": "The core theorem identifies the residue field of R with l, the separable closure of k=kappa(y) inside Omega. Compose this comparison with reduction to obtain rho:R -> l. The equations for s and the structural map imply that rho respects K: apply full faithfulness of Spec to the composites into Omega, then use injectivity of l -> Omega. R is henselian by the proved upstream strict-henselization instance.",
+   "uses": [
+    "lem-sc-smooth-strict-local-field-model-core",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk map of the finite-type morphism is essentially of finite type; its residue map is also essentially of finite type. Compose it with the base-point residue-field identification to obtain an essentially finite-type extension k/K for the given K-algebra structure. Since K is perfect, the separating-basis theorem supplies a finite family t that is algebraically independent over K and for which k/K(t) is separable algebraic.",
+   "uses": [
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+    "lem-weil-pbc-algclosed-fg-field-separating-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map t into l. Its algebraic independence is preserved by the injective field map k -> l. Separability is transitive, so l is separable algebraic over K(t); transport along the canonical equivalence between K(t) in k and its image in l. Apply the coefficient-section theorem to rho and the image family, obtaining j:l -> R with rho j=id.",
+   "uses": [
+    "new-lem-sc-henselian-separably-generated-residue-section",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take F=l. It is separably closed by the separable-closure instance. Reduction composed with j is the inverse of the core residue equivalence and hence bijective. The tower formula and algebraicity of l/k give trdeg_K l=trdeg_K k=a.",
+   "uses": [
+    "def-pc-separably-closed",
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-strict-local-field-model-core",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-algclosed-fg-field-separating-basis",
+  "new-lem-sc-henselian-separably-generated-residue-section",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separably-closed",
+  "lem-sbc-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
+  "place": "Proof, Local calculation in dimension d, first paragraph: lift a separating basis and its separable closure; second paragraph: subtract transcendence degrees; expanded using the existing Mathlib and henselian-colimit APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A henselian local algebra over a perfect field has a coefficient field section of its residue map",
+   "date": "2026-10-16",
+   "results": "8 hits: HenselianLocalRing.TFAE, Field.henselian, HenselianLocalRing, HenselianLocalRing.is_henselian, instHenselianRingMaximalIdeal, HenselianLocalRing.toIsLocalRing, HenselianRing.is_henselian, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "verdict": "No ready geometric coefficient-field theorem; combine the existing core and separating-basis results with the proved general henselian section theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientField|coefficient_field|residue.*section",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "No ready geometric coefficient-field theorem; combine the existing core and separating-basis results with the proved general henselian section theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A henselian local algebra has a section of the residue map when its residue field has a separating transcendence basis",
+   "date": "2026-10-16",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeff",
+  "date": "2026-10-16",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-smooth-strict-local-field-model-coeff",
+   "place": "Construct the coefficient field and its residue isomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeffData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStrictLocalFieldModelCoeffData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_strict_local_field_coeff_data",
+  "statement": "theorem exists_smooth_strict_local_field_coeff_data\n    (K : Type u) [Field K] [IsAlgClosed K] (Y : Scheme.{u}) [IsIntegral Y]\n    (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (d a : ℕ) (hd : topologicalKrullDim Y = (d : WithBot ℕ∞))\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y)\n    (y : Y) (hy : s (IsLocalRing.closedPoint Ω) = y)\n    [Algebra K (Y.residueField y)]\n    (hκ : Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) =\n      Y.fromSpecResidueField y ≫ f)\n    [Algebra (Y.residueField y) Ω]\n    (hΩ : Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫\n      Y.fromSpecResidueField y = s)\n    (ha : Algebra.trdeg K (Y.residueField y) = (a : Cardinal))\n    [Algebra K (strictHenselizationRing s)]\n    (hK : Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselizationRing s))) =\n      strictHenselizationStructuralMap s ≫ f)\n    [IsLocalRing (strictHenselizationRing s)] :\n    ∃ (F : Type u) (_ : Field F) (_ : Algebra K F),\n      ∃ j : F →ₐ[K] strictHenselizationRing s,\n        IsSepClosed F ∧\n        Function.Bijective ((IsLocalRing.residue (strictHenselizationRing s)).comp\n          j.toRingHom) ∧\n        Algebra.trdeg K F = (a : Cardinal)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261016T030335-L-1617824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
