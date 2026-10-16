@@ -315,5 +315,30 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-4edf9df8f (reviewer sub-agent of L); spot-checked: The mathematical split and six proof steps check out, including the corrected H^0 formulation, cited Stacks sources, coefficient categories, edge cases, and duplicate/search checks. The statement contains a TeX/JSON escape defect in its first comparison: `\\\\nu^{-1}\\\\iota_V` is stored/rendered incorrectly; it must be `u^{-1}\\\\iota_V`. Corrected whole node: `fixes/dag/nodes/sec-smooth-purity/lem-kun-unbounded-exchange-agrees.json`. Full review: `review.md`.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees",
+  "declaration": "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap_agrees_plus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exchangeSourceZeroIso",
+   "AlgebraicGeometry.Etale.exchangeTargetZeroIso",
+   "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap_agrees_plus",
+   "AlgebraicGeometry.Etale.exactDerivedBaseChangeMap_homology_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedExchangeAgrees.lean",
+  "statement": "theorem exactDerivedBaseChangeMap_agrees_plus {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) : (exactDerivedBaseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app K.obj = (D((g)^*[AddCommGrpCat.{u + 1}])).map (((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusCompatibility.inv.app K) ≫ _root_.DerivedCategory.Plus.ι.map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) ≫ ((f')_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlusCompatibility.hom.app ((D+((g')^*[AddCommGrpCat.{u + 1}])).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The first theorem states bounded-below compatibility at integral (abelian) coefficients. The second states the degree-zero module comparison and its underlying abelian normalization for every commutative coefficient ring. The two helper isomorphisms compose existing canonical comparisons induced by injective-resolution augmentations; no derived functor or exchange is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4d1c85427",
+  "group": "NA",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, Lean module, declarations, edge cases, source metadata, and report headings. Reproduced scompile.py successfully for sandbox and library identities; no substantive or mechanical defects found."
  }
 }

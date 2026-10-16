@@ -202,5 +202,24 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-c8200cdfc (reviewer sub-agent of L); spot-checked: Read the item and all three proof steps in full. The existing relative theorem supplies every required hypothesis and the all-module vanishing conclusion. Source checks confirm the UDV scope correction and removed blueprint errors. No new nodes or repairs; cross-unit tool use accepted. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing",
+  "declaration": "AlgebraicGeometry.etale_direct_image_vanishing_above_twice_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDirectImageVanishing.lean",
+  "statement": "theorem etale_direct_image_vanishing_above_twice_dimension {k : Type u} [Field k] [IsAlgClosed k] (d : ℕ) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ n : ℕ, 0 < n ∧ IsUnit (n : k) ∧ ∀ a : A, n • a = 0) : Etale.HasUniformDirectImageVanishingLE A f (2 * d)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Exact specialization retaining every hypothesis of the DAG statement. The existing UDV predicate expands to vanishing for all etale module sheaves and integer degrees above 2*d. The initially supplied k-structure on X need not agree with f followed by the structure on Y; the proof uses the latter structure. Existing upstream bounds have strictly weaker hypotheses, so they are proof inputs rather than an exact existing signature for this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c2381189a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement, dependencies, edge cases, docstrings, source alignment, and compiler evidence verified; no fixes required."
  }
 }

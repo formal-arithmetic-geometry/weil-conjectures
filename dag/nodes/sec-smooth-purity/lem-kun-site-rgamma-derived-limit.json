@@ -332,5 +332,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-0b9c6ffa4 (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements, unit/chapter route, and cited sources. All four proof steps check: K-injective product models, target exact products, and explicit Roos-triangle maps require no extra hypotheses. No new nodes, duplicates, cycles, or coefficient-category substitutions found. Accepted six declared generic tool uses; detailed checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RGammaDerivedLimit",
+  "declaration": "CategoryTheory.site_rgamma_derivedLimit",
+  "file": "lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean",
+  "statement": "theorem site_rgamma_derivedLimit {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{max c v r}) (U : C) [HasDerivedCategory.{w} (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))] [HasDerivedCategory.{w'} AddCommGrpCat.{max c v r}] (K : ℕ → DerivedCategory (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))) [HasProduct K] (f : ∀ n : ℕ, K (n + 1) ⟶ K n) (L : DerivedCategory (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))) (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle f L p δ) : ∃ e : (siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj (∏ᶜ K) ≅ ∏ᶜ (fun n : ℕ ↦ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj (K n)), (∀ n : ℕ, e.hom ≫ Pi.π _ n = (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (Pi.π K n)) ∧ IsDerivedLimitTriangle (fun n : ℕ ↦ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (f n)) ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj L) ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).map p ≫ e.hom) (e.inv ≫ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map δ ≫ ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).commShiftIso (1 : ℤ)).hom.app L) ∧ (∀ n : ℕ, (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map p ≫ e.hom ≫ Pi.π _ n = (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (p ≫ Pi.π K n))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2f5366dba",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, report sections, and immutable per-file scompile evidence checked; no substantive or mechanical defects found."
  }
 }
