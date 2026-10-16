@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "prop-sf-closed-immersion-unit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The closed-immersion exceptional unit",
- "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$. Let $T$ be a Noetherian scheme on which\n$\\ell$ is invertible (for instance a finite-type scheme over a field in which\n$\\ell$ is invertible), and let $i:Z\\hookrightarrow T$ be a closed immersion\n[def-weil-scheme-morphism-properties], with complementary\nopen immersion $j$, as in the open-closed recollement\n[def-weil-open-closed-recollement]. Let $Ri^!$ be the right adjoint of the\ndirect image $i_*=Ri_*$ on the ambient ordinary derived categories of the\nsmall pro-etale sites, as in [lem-exc-proetale-closed-support]. Then for\nevery $Q\\in D(Z_{\\mathrm{proet}},A)$ the adjunction unit is an isomorphism\n\n$$\nQ\\xrightarrow{\\ \\eta_i^!\\ }Ri^!Ri_*Q .\n$$\n\nNo boundedness or constructibility of $Q$ is required. In particular, for the\nconstructible exceptional adjoint $Ri^!$ of\n[def-weil-exceptional-inverse-image] — which exists without the ambient datum\nof [def-weil-ambient-exceptional-adjoint], that datum being false in general —\ncomputed with the compactification\n$Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{i}T$ so that $Ri_{!,n}=Ri_*$,\nfor $Q\\in D^b_c(Z,A)$ the unit of the adjunction\n$\\Hom_T(Ri_!K,L)\\cong\\Hom_Z(K,Ri^!L)$ of\n[def-weil-exceptional-inverse-image] is an isomorphism\n$Q\\xrightarrow{\\sim}Ri^!Ri_*Q$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf Z_{\\geq1}$, and put $A=A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a Noetherian scheme on which\n$\\ell$ is invertible (for instance a finite-type scheme over a field in which\n$\\ell$ is invertible), and let $i:Z\\hookrightarrow T$ be a closed immersion\n[def-weil-scheme-morphism-properties], with complementary\nopen immersion $j$, as in the open-closed recollement\n[def-weil-open-closed-recollement]. Let $Ri^!$ be the right adjoint of the\ndirect image $i_*=Ri_*$ on the ambient ordinary derived categories of the\nsmall pro-etale sites, as in [lem-exc-proetale-closed-support]. Then for\nevery $Q\\in D(Z_{\\mathrm{proet}},A)$ the adjunction unit is an isomorphism\n\n$$\nQ\\xrightarrow{\\ \\eta_i^!\\ }Ri^!Ri_*Q .\n$$\n\nNo boundedness or constructibility of $Q$ is required. For the following\nconstructible assertion, use the finite-type $k$-scheme setting of the\nblueprint: $k=\\overline{\\mathbf F}_q$ is the fixed algebraic closure\n[def-weil-finite-field-fiber], $T$ and $Z$ are finite-type $k$-schemes,\n$i$ is a $k$-morphism, and $\\ell\\ne\\operatorname{char}k$.\nIn particular, for the constructible exceptional adjoint $Ri^!$ of\n[def-weil-exceptional-inverse-image] — which exists without the ambient datum\nof [def-weil-ambient-exceptional-adjoint], that datum being false in general —\ncomputed with the compactification\n$Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{i}T$ so that $Ri_{!,n}=Ri_*$,\nfor $Q\\in D^b_c(Z,A)$ [def-weil-finite-torsion-constructibility] the unit of the adjunction\n$\\Hom_T(Ri_!K,L)\\cong\\Hom_Z(K,Ri^!L)$ of\n[def-weil-exceptional-inverse-image] is an isomorphism\n$Q\\xrightarrow{\\sim}Ri^!Ri_*Q$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
   "place": "node prop-sf-closed-immersion-unit, order 1860"
@@ -17,53 +17,189 @@
   "def-weil-open-closed-recollement",
   "lem-exc-proetale-closed-support",
   "def-weil-exceptional-inverse-image",
-  "def-weil-ambient-exceptional-adjoint"
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-torsion-constructibility"
  ],
  "proof": [
   {
-   "text": "By [lem-exc-proetale-closed-exact], the closed direct image is exact (the\ncomplement of $Z$ is quasi-compact because $T$ is Noetherian), so $Ri_*$ is\ncomputed by $i_*$ on any complex, and [lem-exc-proetale-closed-support]\nprovides its right adjoint $Ri^!$ on the ambient derived categories.",
+   "text": "Write $j:U\\hookrightarrow T$ for the open complement. The coefficient convention [def-weil-l-adic-coefficient-extension] makes $A$ a finite commutative ring. For every affine open $V\\subset T$, [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes $U\\cap V$ quasi-compact. Hence the complementary open immersion $j$ is quasi-compact as a morphism. Apply [lem-exc-proetale-closed-exact] to obtain exactness of $i_*$. Thus its termwise functor is $Ri_*$, and [lem-exc-proetale-closed-support] supplies the adjunction $I=i_*=Ri_*\\dashv G=Ri^!$ on the whole unbounded derived categories. These are precisely that node's Noetherian and finite-constant-ring hypotheses.",
    "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-exc-proetale-closed-exact",
     "lem-exc-proetale-closed-support"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 1; unit proof: exact closed direct image. Geometric reference: Stacks Tag 09BM (proetale.tex, label lemma-closed-immersion-complement-retrocompact-exact)."
+   }
   },
   {
-   "text": "By [prop-weil-open-closed-recollement-adjunctions], $i^*\\dashv Ri_*$ on the\nambient derived categories and the counit $i^*Ri_*\\to\\operatorname{id}$ is an\nisomorphism. A right adjoint whose counit is an isomorphism is fully\nfaithful, so for all $P,Q\\in D(Z_{\\mathrm{proet}},A)$ the map\n$g\\mapsto Ri_*g$ is a bijection\n\n$$\n\\Hom(P,Q)\\xrightarrow{\\ \\sim\\ }\\Hom(Ri_*P,Ri_*Q).\n$$",
+   "text": "On the same ambient categories, [prop-weil-open-closed-recollement-adjunctions] gives $i^*\\dashv I$ with invertible counit $i^*I\\to\\operatorname{id}$. Apply [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful] with $L=i^*$ and $R=I$. It follows that, for all $P,Q\\in D(Z_{\\mathrm{proet}},A)$, $g\\mapsto I(g)$ is a bijection $\\operatorname{Hom}(P,Q)\\to\\operatorname{Hom}(IP,IQ)$. No restriction to the constructible subcategory has been made.",
    "uses": [
-    "prop-weil-open-closed-recollement-adjunctions"
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 2; unit proof: full faithfulness. Stacks Tag 07RB (categories.tex, lemma-adjoint-fully-faithful), part (2)."
+   }
   },
   {
-   "text": "Now fix $Q$ and consider, for every $P$, the composite\n\n$$\n\\Hom(P,Q)\\xrightarrow{\\ \\eta^!_{i,Q}\\circ-\\ }\\Hom(P,Ri^!Ri_*Q)\n\\xrightarrow{\\ \\sim\\ }\\Hom(Ri_*P,Ri_*Q),\n$$\n\nthe second map being the adjunction bijection of $Ri_*\\dashv Ri^!$. By the\ntriangle identity, the adjoint of $\\eta^!_{i,Q}\\circ g$ is\n$\\epsilon^!_{Ri_*Q}\\circ Ri_*(\\eta^!_{i,Q})\\circ Ri_*g=Ri_*g$, so the\ncomposite is the bijection displayed above. Hence composition with\n$\\eta^!_{i,Q}$ is a bijection $\\Hom(P,Q)\\to\\Hom(P,Ri^!Ri_*Q)$, naturally in\n$P$, and the Yoneda lemma shows that $\\eta^!_{i,Q}$ is an isomorphism.",
+   "text": "Fix $Q$ and write $H=GIQ$ and $\\eta=\\eta^!_{i,Q}:Q\\to H$ for the unit of the adjunction in [lem-exc-proetale-closed-support]. For any $P$, the inverse adjunction bijection sends $\\eta\\circ g$ to $\\epsilon_{IQ}\\circ I(\\eta)\\circ I(g)=I(g)$ by the triangle identity. Step 2 and this adjunction bijection therefore show that $b_P:g\\mapsto\\eta\\circ g$ is bijective for every ambient $P$.",
+   "uses": [
+    "lem-exc-proetale-closed-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 3, adjunction calculation; unit proof: displayed Hom bijections. Stacks Tag 07RB (categories.tex, label lemma-adjoint-fully-faithful), proof of part (1)."
+   }
+  },
+  {
+   "text": "Surjectivity of $b_H$ gives $r:H\\to Q$ with $\\eta\\circ r=\\operatorname{id}_H$. Then $b_Q(r\\circ\\eta)=\\eta\\circ r\\circ\\eta=\\eta=b_Q(\\operatorname{id}_Q)$, so injectivity of $b_Q$ gives $r\\circ\\eta=\\operatorname{id}_Q$. Thus the specified unit itself is an isomorphism. This two-sided inverse argument replaces an appeal to Yoneda and uses arbitrary unbounded test objects $H,Q$.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 3, Yoneda sentence made explicit; unit proof: identify the canonical unit, not just an unspecified object isomorphism."
+   }
   },
   {
-   "text": "For the last assertion, the right adjoint $Ri_n^{\\times}$ of\n$Ri_{!,n}=Ri_*$ given by the datum of [def-weil-ambient-exceptional-adjoint]\nis, by uniqueness of right adjoints, identified with $Ri^!$ together with its\nunit. The functor $Ri^!$ of [def-weil-exceptional-inverse-image] is its\nrestriction to $D^b_c$, with the same unit, so its unit at $Q\\in D^b_c(Z,A)$\nis the isomorphism just proved.",
+   "text": "For the constructible assertion, $I$ carries $D^b_c(Z,A)$ into $D^b_c(T,A)$. Indeed, exactness from [lem-exc-proetale-closed-exact] gives $\\mathcal H^a(IQ)=i_*\\mathcal H^a(Q)$. For a constructible sheaf $M$ choose its finite stratification as in [def-weil-finite-torsion-constructibility]. Regard its strata as locally closed subschemes of $T$ through the closed immersion and add $U$: a subset open in a closed subset of $Z$ is open in a closed subset of $T$. Since $T$ is Noetherian, these locally closed subsets are constructible, using the Noetherian interpretation explicitly recorded in [def-weil-scheme-morphism-properties]. On a stratum $s:S\\hookrightarrow Z$, restriction of $i_*M$ along $i\\circ s$ is $s^*i^*i_*M\\cong s^*M$ by the sheaf counit in [lem-exc-proetale-closed-fully-faithful]. On $U$ it is zero by [lem-exc-proetale-closed-essential-image], applied to $i_*M$, which lies in the image by definition. The open complement $j$ is quasi-compact as a morphism by Step 1, so the essential-image theorem's explicit geometric hypothesis is satisfied here as well. The canonical constant coefficient identifications required by that node are supplied by [prop-weil-pbc-proetale-constant-exact], applied to $i$ and $j$. Thus all these restrictions are locally constant with finite stalks; the same cohomological bounds as $Q$ hold. The constructible categories are full subcategories by their definition, so Step 2 also gives full faithfulness on them.",
    "uses": [
-    "def-weil-ambient-exceptional-adjoint",
-    "def-weil-exceptional-inverse-image"
+    "lem-exc-proetale-closed-exact",
+    "def-weil-finite-torsion-constructibility",
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-exc-proetale-closed-essential-image",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-scheme-morphism-properties"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 4: constructible domains, spelled out by finite stratifications; unit proof: constructible inputs."
+   }
+  },
+  {
+   "text": "Let $G_c$ be the constructible functor of [def-weil-exceptional-inverse-image]. In the finite-type $k$-scheme setting specified in the final clause, apply [thm-sf-ambient-adjoint-class] to $i$ with its identity/closed compactification $Z\\xrightarrow{\\operatorname{id}}Z\\xrightarrow{i}T$. Properness, separatedness and finite type of $i$ follow from [lem-weil-pbc-closed-immersion-proper], so this is a compactification. By [lem-kun-dimension-finite-type], $Z$ has finite total Krull dimension; choose an integer $d\\geq0$ with $\\dim Z\\leq d$ (take $d=0$ if $Z$ is empty). This verifies the compactification dimension hypothesis of the cited existence theorem. The formula of [def-compact-support-direct-image-detailed] is then $Ri_{!,n}=Ri_*\\circ\\operatorname{id}_!=I$; extension by zero along the identity is the identity. Use the bounded-below formula $G_cL=\\nu_Z^*i^\\times R\\nu_{T,*}L$ of [def-weil-exceptional-inverse-image], before its constructible restriction. The theorem's natural Hom bijection applies to every bounded-below $P$ of etale origin and to $L=IQ$, bounded by Step 5. Both $Q$ and $H_c=G_cIQ$ are admissible first variables: the theorem explicitly includes bounded constructible $Q$, while the displayed formula presents $H_c$ as $\\nu_Z^*$ of the bounded-below etale complex $i^\\times R\\nu_{T,*}IQ$, giving the explicit etale-origin witness $(i^\\times R\\nu_{T,*}IQ,\\operatorname{id}_{H_c})$ in [def-sf-etale-origin-subcategory]. This uses only the bounded-below construction's stated domain and codomain, not a constructibility-preservation theorem for $G_c$. Put $\\eta_c=\\Phi_{Q,IQ}(\\operatorname{id}_{IQ})$. Naturality gives $\\Phi_{P,IQ}(I(g))=\\eta_c\\circ g$. Hence ambient full faithfulness from Step 2 makes $g\\mapsto\\eta_c\\circ g$ bijective for every bounded-below $P$ of etale origin. Surjectivity for $P=H_c$ supplies $r_c:H_c\\to Q$ with $\\eta_c\\circ r_c=\\operatorname{id}_{H_c}$. For $P=Q$, the equality $\\eta_c\\circ(r_c\\circ\\eta_c)=\\eta_c\\circ\\operatorname{id}_Q$ and injectivity give $r_c\\circ\\eta_c=\\operatorname{id}_Q$. Thus $r_c$ is a two-sided inverse of $\\eta_c$. In particular $H_c$ is isomorphic to the bounded constructible object $Q$. This proves the final assertion with its own canonical adjunction unit; no identification with an unrestricted ambient exceptional datum is used.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-ambient-adjoint-class",
+    "def-compact-support-direct-image-detailed",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-dimension-finite-type",
+    "def-sf-etale-origin-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
+    "place": "Imported proof paragraph 4 corrected; unit proof: exceptional adjunction from sk-prop-sf-existence and proper compactification."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-exc-proetale-closed-exact",
   "lem-exc-proetale-closed-support",
   "prop-weil-open-closed-recollement-adjunctions",
-  "def-weil-ambient-exceptional-adjoint",
-  "def-weil-exceptional-inverse-image"
+  "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+  "def-weil-finite-torsion-constructibility",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-exc-proetale-closed-essential-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-ambient-adjoint-class",
+  "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "def-sf-etale-origin-subcategory"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-immersion-unit.md",
-  "place": "## Proof"
+  "place": "Imported proof paragraphs 1-4 as preserved in the DAG; unit sk-prop-sf-closed-unit, sole proof step; elementary categorical argument also checked against Stacks Tag 07RB."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_unit|isIso.*unit.*[Ff]ull|[Ff]ull.*[Ff]aithful.*unit",
+   "results": "Mathlib/CategoryTheory/Monad/Adjunction.lean; Mathlib/CategoryTheory/Monad/Adjunction.lean; Mathlib/CategoryTheory/Monad/Adjunction.lean; Mathlib/CategoryTheory/Monad/Adjunction.lean; Mathlib/CategoryTheory/Monad/Basic.lean; Mathlib/CategoryTheory/Monoidal/Grp.lean; Mathlib/CategoryTheory/Monoidal/Grp.lean; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: categorical adjunction tools do not supply the geometric pro-etale hypotheses or the constructible adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of an adjunction with fully faithful left adjoint is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion direct image on unbounded derived categories of pro-etale module sheaves has invertible exceptional adjunction unit",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val; SheafOfModules.bijective_pushforwardSections; SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: categorical adjunction tools do not supply the geometric pro-etale hypotheses or the constructible adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\", \"isIso\"",
+   "results": "CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence; CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1; CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence; CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: categorical adjunction tools do not supply the geometric pro-etale hypotheses or the constructible adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of a fully faithful left adjoint is an isomorphism and a right adjoint is fully faithful if its counit is invertible",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful; CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful; CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull; CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull; CategoryTheory.Adjunction.isIso_unit_app_of_iso; CategoryTheory.Adjunction.fullyFaithfulLOfCompIsoId; CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: categorical adjunction tools do not supply the geometric pro-etale hypotheses or the constructible adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_isIso_of_L_fully_faithful|fullyFaithfulROfIsIsoCounit|counit_isIso_of_R_fully_faithful",
+   "results": "Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; read Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean:75,97,164 (unit isomorphism and fully faithful right adjoint from counit)",
+   "date": "2026-10-16",
+   "verdict": "no match for the item: categorical adjunction tools do not supply the geometric pro-etale hypotheses or the constructible adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Ii]so|[Ii]so.*unit",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: generic categorical unit isomorphism found, but no match for the geometric item; geometric full faithfulness and the class-restricted adjunction are separate inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For adjoint functors F and G, full faithfulness of F implies that the component of the adjunction unit at any object is invertible",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful; CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful; CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull; CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull; CategoryTheory.Adjunction.isIso_unit_app_of_iso; CategoryTheory.Adjunction.fullyFaithfulLOfCompIsoId; CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: generic categorical unit isomorphism found, but no match for the geometric item; geometric full faithfulness and the class-restricted adjunction are separate inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsIsoAppUnitOfFullOfFaithful|unit_isIso_of_L_fully_faithful",
+   "results": "Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+   "date": "2026-10-16",
+   "verdict": "Independent current second reading: generic fully faithful adjunction instances found and read at FullyFaithful.lean:71-76; they do not supply the geometric full faithfulness or the class-restricted exceptional adjunction, so they do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a functor is fully faithful and admits a right adjoint, every component of the unit of that adjunction is an isomorphism",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful; CategoryTheory.Adjunction.instIsIsoAppUnitOfFullOfFaithful; CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull; CategoryTheory.Adjunction.isIso_unit_app_of_iso; CategoryTheory.Adjunction.instIsIsoMapAppUnitOfFaithfulOfFull; CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; CategoryTheory.Adjunction.whiskerLeft_unit_iso_of_R_fully_faithful; CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit",
+   "date": "2026-10-16",
+   "verdict": "Independent current second reading: generic fully faithful adjunction instances found and read at FullyFaithful.lean:71-76; they do not supply the geometric full faithfulness or the class-restricted exceptional adjunction, so they do not state the item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -94,5 +230,49 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-closed-unit"
+ "unit": "sk-prop-sf-closed-unit",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-sf-closed-immersion-unit",
+  "worker": "stage1",
+  "summary": "Six steps and no new nodes. Reused the geometric closed-support and recollement interfaces and the existing Mathlib counit/full-faithfulness leaf. Replaced Yoneda by an explicit inverse and the false ambient-datum identification by the constructible Hom adjunction. Made the final clause’s finite-type global-field scope explicit, retaining the unrestricted Noetherian ambient assertion. Lock-return repair: reread the current-DAG dependency statements, checked all 19 verbatim citation pairs, and explicitly discharged the essential-image theorem's quasi-compact-complement hypothesis again in step 5. The delivery tool rebases the package on the current origin/newtargets-dag; no new nodes or changed mathematical interfaces are needed. Current second reading: repaired the split TeX token in the coefficient exponent, supplied the explicit etale-origin witness in step 6, and independently confirmed all 19 citation pairs and the generic Mathlib unit instance.",
+  "blueprint": [
+   "Paragraph 1: exact direct image and ambient closed-support right adjoint (step 1).",
+   "Paragraph 2: fully faithful derived direct image (step 2).",
+   "Paragraph 3: canonical unit calculation and explicit inverse (steps 3-4).",
+   "Paragraph 4: constructible domain and own exceptional unit, without optional ambient datum (steps 5-6)."
+  ],
+  "tool_uses": [
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "The unit explicitly needs the closed inverse-image/direct-image counit; this recollement interface supplies it on the ambient pro-etale derived categories."
+   },
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "The sheaf-level counit identifies the restrictions on the closed strata in the elementary constructibility check; the derived counit alone is not used to assert a sheaf formula."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Supplies the canonical coefficient identifications needed to apply the closed essential-image theorem with finite constant coefficients."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Checks the finite total dimension hypothesis of the class-restricted adjunction theorem for the identity/closed compactification; the unit has no other finite-dimension interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-exc-proetale-closed-fully-faithful",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-2d66d3ded",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-2d66d3ded (reviewer sub-agent of L); spot-checked: Read the full mathematics and all 20 cited statements; checked Stacks 07RB, 09AA, 09BM, blueprint sources, restricted-adjunction domains, edge cases and cycles. Six-step proof accepted. Corrected the unit realization to include the existing all-stages node. Details in review.md; corrected JSON under fixes/dag/units/.; 1 file(s) fixed by the reviewer"
+ }
 }
