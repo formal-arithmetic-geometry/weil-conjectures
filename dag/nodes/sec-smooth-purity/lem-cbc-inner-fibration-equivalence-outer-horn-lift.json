@@ -178,5 +178,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b20d025f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Every clause matches node and Kerodon 4.4.2.13 (01H0): E,B:SSet.{u} quasicategories, [InnerFibration p] (=innerHornInclusions.rlp), n>=2, base simplex β, horn map over β; initial clause tests horn.edge n 0 0 1 = [0,1], final clause tests horn.edge n last (n-1) last = [n-1,n] via IsEquivalenceEdge (inverse triangles oriented correctly); both conclude strict Λ.ι≫tildeβ=a ∧ tildeβ≫p=β. No Kan/outer-horn/Nonempty extras; n=2 included (card side condition only needs 2<=n). lean.statement byte-identical to the signature; node unchanged except lean; one theorem, proof `sorry` only, no definitions; source/blueprint docstrings; six-step proof docstring. Four citers (core-kan-fibration, equivalence-prism-extension, marked-cocartesian-lifting, relative-join-cartesian-realization) use it as stated. No duplicate (absolute equivalence_iff_outer_horn_filling has no base map). nt_compile.py --json on the snapshot file: rc=0, no errors/warnings, 2.1 s. Cosmetic only: report lines 86/92 show 'Proposition the project server' in place of 4.4.2.13."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InnerFibrationEquivalenceOuterHornLift",
+  "declaration": "SSet.Enhanced.inner_fibration_equivalence_outer_horn_lift",
+  "file": "lean/Sheaf/CategoryTheory/InnerFibrationEquivalenceOuterHornLift.lean",
+  "statement": "theorem inner_fibration_equivalence_outer_horn_lift {E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) [InnerFibration p] : (∀ (n : ℕ), (hn : 2 ≤ n) → ∀ (β : Δ[n] ⟶ B) (a : (Λ[n, (0 : Fin (n + 1))] : SSet.{u}) ⟶ E), a ≫ p = Λ[n, 0].ι ≫ β → IsEquivalenceEdge E (SSet.yonedaEquiv ((SSet.yonedaEquiv.symm (SSet.horn.edge n 0 0 1 (by simp) (by have hset : ({(0 : Fin (n + 1)), 0, 1} : Finset (Fin (n + 1))) = {0, 1} := by ext x simp only [Finset.mem_insert, Finset.mem_singleton] tauto rw [hset] exact Finset.card_le_two.trans hn))) ≫ a)) → ∃ (tildeβ : Δ[n] ⟶ E), Λ[n, 0].ι ≫ tildeβ = a ∧ tildeβ ≫ p = β) ∧ (∀ (n : ℕ), (hn : 2 ≤ n) → ∀ (β : Δ[n] ⟶ B) (a : (Λ[n, (Fin.last n)] : SSet.{u}) ⟶ E), a ≫ p = Λ[n, Fin.last n].ι ≫ β → IsEquivalenceEdge E (SSet.yonedaEquiv ((SSet.yonedaEquiv.symm (SSet.horn.edge n (Fin.last n) ⟨n - 1, by omega⟩ (Fin.last n) (Fin.le_last _) (by have hset : ({(Fin.last n : Fin (n + 1)), (⟨n - 1, by omega⟩ : Fin (n + 1)), Fin.last n} : Finset (Fin (n + 1))) = {Fin.last n, (⟨n - 1, by omega⟩ : Fin (n + 1))} := by ext x constructor · intro hx simp only [Finset.mem_insert, Finset.mem_singleton] at hx ⊢ rcases hx with rfl | rfl | rfl <;> tauto · intro hx simp only [Finset.mem_insert, Finset.mem_singleton] at hx ⊢ rcases hx with rfl | rfl <;> tauto rw [hset] exact Finset.card_le_two.trans hn))) ≫ a)) → ∃ (tildeβ : Δ[n] ⟶ E), Λ[n, Fin.last n].ι ≫ tildeβ = a ∧ tildeβ ≫ p = β)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

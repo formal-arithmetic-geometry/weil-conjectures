@@ -249,5 +249,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ae3d70b2",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: J=Mathlib SSet.coherentIso.{u} (nerve of Codiscrete (ULift Bool)), x0/x1 endpoints; hD=Mathlib hoFunctor.obj D (free reflexive-quiver category modulo HoRel2 triangle relations) via hoFunctor.obj.equiv; first conjunct is a full iff with both endpoint equalities, quantified over all quasicategories D:SSet.{u}; second conjunct uses the recorded SSet.Enhanced.evaluation (restriction along the vertex plus unit iso, read in EnhancedDiagramsCones.lean) and the recorded Mathlib match I.rlp for trivial Kan fibrations (n=0 surjectivity included). No extra hypotheses or universe restrictions; edge cases empty D/C, d0=d1, m=0, lowest universe covered. No definitions, proof is only sorry, source/blueprint docstrings with all 7 proof steps, node differs from base only in lean, lean.statement verbatim. Searches confirm no existing declaration. nt_compile.py --json on the snapshot at module path Sheaf/CategoryTheory/QuasicategoryInvertibleInterval.lean exits 0 with no messages (warn.sorry=false in lakefile). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuasicategoryInvertibleInterval",
+  "declaration": "SSet.Enhanced.quasicategory_invertible_interval",
+  "file": "lean/Sheaf/CategoryTheory/QuasicategoryInvertibleInterval.lean",
+  "statement": "theorem quasicategory_invertible_interval : (∀ (D : SSet.{u}) [Quasicategory D] (d₀ d₁ : D _⦋0⦌), Nonempty ((SSet.hoFunctor.obj.equiv D).symm d₀ ≅ (SSet.hoFunctor.obj.equiv D).symm d₁) ↔ ∃ g : SSet.coherentIso.{u} ⟶ D, g.app _ SSet.coherentIso.x₀ = d₀ ∧ g.app _ SSet.coherentIso.x₁ = d₁) ∧ (∀ (C : SSet.{u}) [Quasicategory C], modelCategoryQuillen.I.rlp (evaluation SSet.coherentIso C SSet.coherentIso.x₀) ∧ modelCategoryQuillen.I.rlp (evaluation SSet.coherentIso C SSet.coherentIso.x₁))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
