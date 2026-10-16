@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-lem-constructible-ext-continuity-stratum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuity of Hom out of $a_!L$",
@@ -12,46 +12,204 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.md",
   "place": "node det-lem-constructible-ext-continuity-stratum, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "sk-def-pe-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "det-lem-formal-closed-support-stratum-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
  "proof": [
   {
-   "text": "Write $\\Phi=L^\\vee\\otimes u^*i^*(-)$, an exact functor from $\\Lambda_X$-modules to\n$\\Lambda_S$-modules which commutes with all colimits ($u^*$, $i^*$ are inverse images and\n$L^\\vee$ is flat) and preserves the lower bound $b$. By\n[det-lem-formal-closed-support-stratum-hom] and the fiber formula of\n[det-lem-formal-closed-support-adjunction] (4),\n$$\n\\Hom(a_!L,K[q])=H^q\\bigl(S,\\Phi(\\fib(K\\to Rj_*j^*K))\\bigr),\n$$\nnaturally in $K$. The triangle $\\Phi(\\fib)\\to\\Phi(K)\\to\\Phi(Rj_*j^*K)\\to$ gives long exact\nsequences in $H^*(S,-)$, natural in $K$; by exactness of filtered colimits and the five lemma\nit suffices to prove that $H^q(S,\\Phi(-))$ commutes with the colimit for the two systems\n$K_i$ and $Rj_*j^*K_i$.",
+   "text": "Geometric hypotheses. Work on the small pro-etale sites, in the ordinary derived categories of module sheaves over the pulled-back coefficient ring. In particular, the colimit in the statement is the degreewise colimit of module sheaves. The closed immersion $i$ is quasi-compact: over an affine of $X$ its source is the spectrum of a quotient ring. Its diagonal is an isomorphism, so it is quasi-separated. The same diagonal argument makes $u$ and $j$ quasi-separated. Apply [lem-weil-pbc-qcqs-morphism-permanence] (2), first to $i$, then to the quasi-compact $u$: $Z$ and $S$ are qcqs. The hypothesis on the complement makes $j$ quasi-compact as well. Thus $j$ satisfies both hypotheses of bounded direct-image continuity, and $S$, viewed as the final object of its own pro-etale site, satisfies qcqs sections continuity.",
    "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IO (definition-immersion), 01KV (lemma-compose-after-separated), 01KU (lemma-separated-permanence); Morphisms Tag 01QO (lemma-closed-immersion); blueprint proof, First term"
+   }
+  },
+  {
+   "text": "Put $L^\\vee=\\mathcal Hom_{\\Lambda_S}(L,\\Lambda_S)$ and $\\Phi(M)=L^\\vee\\otimes_{\\Lambda_S}u^*i^*M$. By [sk-prop-sfb-cartesian-coefficients] the pullbacks here, and also $j^*$, are exact module inverse images. By the module adjunction of [sk-def-sfb-module-pushforward-pullback] they preserve colimits: for a diagram $M_t$ and any $N$, maps from $f^*(\\operatorname{colim}_tM_t)$ to $N$ are compatible families of maps $M_t\\to f_*N$, hence compatible families $f^*M_t\\to N$. On a covering trivializing $L$ as $\\Lambda_S^d$, its dual is also $\\Lambda_S^d$ and tensoring by it is the finite direct-sum functor $N\\mapsto N^d$. This is exact and preserves colimits; these claims are local for module sheaves (kernels are sectionwise and cokernels are sheafified cokernels), so they hold globally. Consequently $\\Phi$ is exact and colimit-preserving. Exactness gives $\\mathcal H^r(\\Phi M)=\\Phi\\mathcal H^r(M)$ by applying it to kernels, images and their quotients; termwise it preserves every strict lower bound. By [lem-sf-exact-functor-derived-triangulated] it also preserves distinguished triangles.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, opening sentence; the local finite-free calculation expands exactness and colimit preservation (Modules on Sites Tag 03DL, definition-site-local)"
+   }
+  },
+  {
+   "text": "For any bounded-below $M$, let $T(M)=Rj_*j^*M$, $B(M)=\\Phi M$, $C(M)=\\Phi T(M)$ and $A(M)=L^\\vee\\otimes u^*R\\underline\\Gamma_ZM$. Clause (4) of [det-lem-formal-closed-support-adjunction], together with Step 2, supplies a natural distinguished triangle $A(M)\\to B(M)\\to C(M)\\to A(M)[1]$, since $R\\underline\\Gamma_ZM=i^*\\operatorname{fib}(M\\to T(M))$ and [det-sf-open-closed-sequence-ring-sheaf] (2) identifies $i^*i_*R\\underline\\Gamma_ZM$ with $R\\underline\\Gamma_ZM$. The natural Hom identification of [det-lem-formal-closed-support-stratum-hom] gives\n$$\\operatorname{Hom}_{D(X)}(a_!L,M[q])=H^q(S,A(M)).$$\nFinite locally free implies finite locally projective, so this node applies to the given $L$. Applying $R\\Gamma(S,-)$ to the triangle and then cohomology gives a natural long exact sequence: right derived functors are triangulated by [lem-pc-right-derived-functor-triangulated], and [lem-sf-derived-homology-long-exact] gives its cohomology sequence. The needed module categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], hence have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence].",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
+    "det-sf-open-closed-sequence-ring-sheaf",
     "det-lem-formal-closed-support-stratum-hom",
-    "det-lem-formal-closed-support-adjunction"
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, first paragraph: Hom formula and the natural triangle; Stacks Tags 0159 (lemma-right-derived-properties) and 05RS (lemma-cohomology-homological)"
+   }
   },
   {
-   "text": "*First term.* $(\\Phi(K_i))$ is a filtered system of complexes on $S$ vanishing below $b$ with\ncolimit $\\Phi(K)$; $S$ is qcqs (locally closed in the qcqs $X$, via quasi-compact\nimmersions), so [det-lem-bounded-continuity-sections] (3) applies.",
+   "text": "First term. The complexes $B(K_t)=\\Phi K_t$ vanish strictly below $b$, and their degreewise colimit is $\\Phi K=B(K)$ by Step 2. Apply [det-pe-bounded-continuity-sections] on the final qcqs object $S$ of $S_{\\mathrm{proet}}$ with coefficient sheaf $\\Lambda_S$. It gives, for every $n$, the canonical isomorphism\n$$\\operatorname{colim}_tH^n(S,B(K_t))\\ \\cong\\ H^n(S,B(K)).$$\nThis version of the existing sections theorem includes the hypercover-existence input; no choice of a hypercover is an extra hypothesis here.",
    "uses": [
-    "det-lem-bounded-continuity-sections"
+    "det-pe-bounded-continuity-sections"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, First term; existing equivalent qcqs-object continuity statement det-pe-bounded-continuity-sections"
+   }
   },
   {
-   "text": "*Second term.* Represent $Rj_*j^*K_i$ by $j_*$ of a K-injective resolution; the cohomology\nsheaves are $R^rj_*(j^*K_i)$, which vanish for $r<b$. The hypercohomology spectral sequence\n$$\nE_2^{p,r}(i)=H^p\\bigl(S,\\Phi(R^rj_*j^*K_i)\\bigr)\\Rightarrow H^{p+r}\\bigl(S,\\Phi(Rj_*j^*K_i)\\bigr)\n$$\n(for bounded below complexes, from the canonical filtration) is natural in $i$, and its\nfiltered colimit over $i$ is again a convergent spectral sequence, since filtered colimits are\nexact. By [det-lem-bounded-continuity-direct-image] (with $j$ qcqs),\n$\\varinjlim_iR^rj_*(j^*K_i)=R^rj_*(j^*K)$; then by\n[det-lem-bounded-continuity-sections] (3) on $S$, applied to sheaves (complexes concentrated\nin degree $0$), $\\varinjlim_iE_2^{p,r}(i)=E_2^{p,r}$ for $K$. So the comparison map is an\nisomorphism on $E_2$ pages. Since $E_2^{p,r}=0$ for $p<0$ or $r<b$, only the finitely many\n$(p,r)$ with $0\\le p$, $b\\le r$, $p+r=n$ contribute to total degree $n$; the induced map on\nthe finite filtrations of the abutments is an isomorphism on graded pieces, hence on the\nabutments.",
+   "text": "Second term: lower bound and spectral sequences. Write $T_t=Rj_*j^*K_t$, $T=Rj_*j^*K$, $N_t=\\Phi T_t$, and $N=\\Phi T$. To check the lower bound for $T_t$ and $T$, apply [thm-sp-truncation-e2] first to $v=j_*$, which is additive and left exact by [sk-def-sfb-module-pushforward-pullback], and the complexes $j^*K_t$ and $j^*K$. The source and target module categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian]. Its quadrant and finite-filtration assertions show $\\mathcal H^r(T_t)=\\mathcal H^r(T)=0$ for $r<b$: in total degree $r<b$ the allowed pairs $p\\ge0$, $q\\ge b$, $p+q=r$ form the empty set. Step 2 gives the same bound for $N_t,N$.\nNow apply [thm-sp-truncation-e2] to $v=\\Gamma(S,-)$ and bounded-below representatives of $N_t,N$. This gives\n$$E_2^{p,r}(t)=H^p(S,\\Phi\\mathcal H^r(T_t))\\Longrightarrow H^{p+r}(S,N_t),\\qquad E_2^{p,r}=H^p(S,\\Phi\\mathcal H^r(T))\\Longrightarrow H^{p+r}(S,N).$$\nThe natural maps from $K_t$ to $K$ give maps of these spectral sequences and of their abutment filtrations. Indeed [lem-weil-pbc-truncation-triangle] gives natural truncation triangles for every derived morphism; applying $R\\Gamma$ and cohomology gives maps of truncation exact couples. Taking kernels, images and quotients gives the maps of successive pages. The abutment identifications in [thm-sp-truncation-e2] (5)-(6) are made from these same truncation maps, their images and quotients, so they commute with these maps. This uses derived morphisms, without assuming a degreewise colimit diagram of injective resolutions.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-truncation-triangle",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, Second term, spectral sequence from the canonical filtration; Stacks Tags 015J (lemma-two-ss-complex-functor), 015K (remark-functorial-ss), 015X (remark-final-functorial), 08J5 (remark-truncation-distinguished-triangle)"
+   }
+  },
+  {
+   "text": "Second term: the second page. Exact, colimit-preserving $j^*$ gives $\\operatorname{colim}_t j^*K_t=j^*K$, with strict common lower bound $b$. Apply [det-lem-bounded-continuity-direct-image] to the qcqs morphism $j$ verified in Step 1. In the notation for higher direct images of complexes it asserts\n$$\\operatorname{colim}_t\\mathcal H^r(T_t)\\ \\cong\\ \\mathcal H^r(T)$$\nfor every integer $r$. Applying the colimit-preserving $\\Phi$ and then [det-pe-bounded-continuity-sections] on $S$ to the sheaves $\\Phi\\mathcal H^r(T_t)$, placed in degree zero, gives\n$$\\operatorname{colim}_t E_2^{p,r}(t)\\ \\cong\\ E_2^{p,r}.$$\nThese are the maps induced by the original cocone $K_t\\to K$, since both cited continuity statements specify the canonical maps and Step 5 constructs the second-page identification naturally.",
    "uses": [
     "det-lem-bounded-continuity-direct-image",
-    "det-lem-bounded-continuity-sections"
+    "det-pe-bounded-continuity-sections"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, Second term: direct-image continuity and sections continuity on the second page"
+   }
+  },
+  {
+   "text": "Comparison at finite pages and at the stationary page. Filtered colimits of abelian groups preserve kernels by [lem-weil-pbc-filtered-colimits-commute-finite-limits]. They preserve cokernels because cokernels and colimits are both colimits: maps out of either iterated colimit are exactly the same compatible families. Thus they are exact and commute with taking the cohomology of a differential. Starting from Step 6, induction with $E_{s+1}=\\ker d_s/\\operatorname{im}d_s$ proves $\\operatorname{colim}_t E_s^{p,r}(t)\\cong E_s^{p,r}$ for every finite $s\\ge2$. The uniform quadrant $p\\ge0,r\\ge b$ forces every outgoing and incoming differential at $(p,r)$ to vanish when $s>\\max(r-b+1,p)$. In particular the integer $s_0=\\max(2,r-b+2,p+1)$ works for every $t$ and for the target, exactly as in [thm-sp-truncation-e2] (4). Apply the finite-page result at this fixed $s_0$ to obtain the same comparison for $E_\\infty^{p,r}$. Only a fixed finite page is used at each bidegree.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, Second term, comparison and uniform first-quadrant stabilization; Stacks Tag 002W (lemma-directed-commutes) and the bound in thm-sp-truncation-e2 (4)"
+   }
+  },
+  {
+   "text": "Comparison on the abutments. Fix $n\\ge b$, and put $H_t=H^n(S,N_t)$, $H=H^n(S,N)$. The canonical filtrations in [thm-sp-truncation-e2] (5)-(6) satisfy $F^0H_t=H_t$, $F^{n-b+1}H_t=0$, and the same formulas for $H$, with $\\operatorname{gr}^pH_t\\cong E_\\infty^{p,n-p}(t)$ and $\\operatorname{gr}^pH\\cong E_\\infty^{p,n-p}$. All these maps are compatible by Step 5. By the exactness proved in Step 7, the colimits of\n$$0\\to F^{p+1}H_t\\to F^pH_t\\to\\operatorname{gr}^pH_t\\to0$$\nare short exact. Descend from $p=n-b+1$, where the comparison is $0\\to0$. At each step the comparisons on $F^{p+1}$ and on the quotient are isomorphisms by induction and Step 7. The middle comparison is then an isomorphism: lift the image of a target element in the quotient, subtract its lift to land in the subobject, and use surjectivity there; for injectivity an element killed in the middle has zero quotient class, so comes from the subobject, where injectivity kills it. At $p=0$ this proves\n$$\\operatorname{colim}_tH^n(S,C(K_t))\\ \\cong\\ H^n(S,C(K)).$$\nFor $n<b$ both sides vanish by Step 5, so the assertion holds for every integer $n$.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, Second term, finite filtrations of the abutments; the finite extension argument is written out"
+   }
+  },
+  {
+   "text": "Finish with the natural triangles of Step 3. Take their long exact cohomology sequences, the cocone maps to the sequence for $K$, and the filtered colimit of the sequences for $K_t$. Exactness of that colimit follows as in Step 7 from [lem-weil-pbc-filtered-colimits-commute-finite-limits] and preservation of cokernels. In the five-term segment\n$$H^{q-1}(S,B)\\to H^{q-1}(S,C)\\to H^q(S,A)\\to H^q(S,B)\\to H^q(S,C),$$\nthe first, second, fourth and fifth comparisons are isomorphisms by Steps 4 and 8. The middle comparison is bijective by the following exact-sequence chase. For surjectivity, lift a target middle element's image in the fourth term; its image in the fifth vanishes, so exactness lifts it to a source middle element. Their difference lies in the image of the target second term; lift that second-term element and correct. For injectivity, a source middle element killed in the target has zero fourth-term image; lift it from the source second term. The image of that lift in the target second term comes from the target first term, which lifts from the source first term. Subtracting this lift leaves zero in the target second term, hence zero in the source second term, proving the original middle element zero. By the natural Hom identification of Step 3, this middle comparison is exactly the map in the statement. It is an isomorphism of abelian groups, hence a bijection, for every $q$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "det-lem-formal-closed-support-stratum-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+    "place": "Proof, first paragraph: exact filtered colimits and five-lemma reduction; Stacks Tag 002W (lemma-directed-commutes)"
+   }
   }
  ],
  "proof_deps": [
-  "det-lem-formal-closed-support-stratum-hom",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
   "det-lem-formal-closed-support-adjunction",
-  "det-lem-bounded-continuity-sections",
-  "det-lem-bounded-continuity-direct-image"
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-lem-formal-closed-support-stratum-hom",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "det-pe-bounded-continuity-sections",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-truncation-triangle",
+  "det-lem-bounded-continuity-direct-image",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
+  "place": "All three paragraphs, expanded with the general truncation spectral-sequence theorem and explicit comparison arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hom from extension by zero of a finite locally free sheaf commutes with filtered colimits of uniformly bounded below complexes on a qcqs pro-etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"SheafOfModules.mapFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"SheafOfModules.Presentation.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, this function constructs a prese\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"SheafOfModules.Presentation.mapGenerators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a presentation $ P $ of a quasicoherent sheaf $ M $ over a ring sheaf $ R $, and a colimit-preserving functor $ F $ between categories of sheaves of modules, this morphism maps the free $ R $-mo\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state Hom/Ext continuity for these supported pro-etale module sheaves and uniformly bounded-below complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext groups from a locally constant finite projective module sheaf preserve filtered colimits in bounded below derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.instAB4CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4 (CondensedMod R)\", \"doc\": \"The category of condensed modules over any ring $ R $ satisfies the AB4 axiom, meaning it has all coproducts and coproducts preserve exact sequences (are exact functors).\"}\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"LightCondensed.instCountableAB4StarLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.CountableAB4Star (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules satisfies the countable AB4* axiom. This means the category has countable products and the product of a family of epimorphisms is itse\"}\n  {\"name\": \"Condensed.hasExactColimitsOfShape\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (A : Type u_1) (J : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Preadditive A]\\n  [∀ (X : CompHausᵒᵖ),\\n      CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow X Stonean.toCompHaus.op) A]\\n  [inst_4 : C\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and has exact colimits of shape $J$, and $\\\\mathcal{A}$ has finite limits, then the category of condensed objects $\\\\text{Condensed } \\\\mathcal{A}\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instHasColimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasColimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all colimits.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state Hom/Ext continuity for these supported pro-etale module sheaves and uniformly bounded-below complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext from finite locally free sheaves commutes with filtered colimits of bounded below complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[HasFilteredColimitsOfSize.{w, w'} C] : HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has filtered colimits of size $ \\\\kappa $, then the category of homological complexes over $ \\\\mathcal{C} $ with shape $ c $ also has filtered colimits of size $ \\\\kappa $.\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.Limits.instPreservesFiniteLimitsFunctorColimOfPreservesColimitsOfShapeOfHasFiniteLimitsOfReflectsIsomorphismsForget\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"[PreservesFiniteLimits (forget C)] [PreservesColimitsOfShape K (forget C)] [HasFiniteLimits C] [HasColimitsOfShape K C]\\n  [(forget C).ReflectsIsomorphisms] : PreservesFiniteLimits (colim : (K ⥤ C) ⥤ _)\", \"doc\": \"In a category $\\\\mathcal{C}$ with finite limits and filtered colimits, if the forgetful functor preserves colimits of shape $\\\\mathcal{K}$ and reflects isomorphisms, then the colimit functor $\\\\mathrm{co\"}\n  {\"name\": \"PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \": PreservesFiniteColimits (toPresheaf R)\", \"doc\": \"The forgetful functor from presheaves of modules over a presheaf of rings $ R $ to presheaves of abelian groups preserves finite colimits.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteLimits A] [HasSheafify J A] [HasColimitsOfShape K A] [HasExactColimitsOfShape K A] :\\n  HasExactColimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, a sheafification functor for a Grothendieck topology $J$, colimits of shape $K$, and exact colimits of shape $K$, then the category of sheaves on $J$ wit\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state Hom/Ext continuity for these supported pro-etale module sheaves and uniformly bounded-below complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ext",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Ext'\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state Hom/Ext continuity for these supported pro-etale module sheaves and uniformly bounded-below complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*[Ff]iltered|[Ff]iltered.*Ext|[Ll]ocally[Ff]ree.*[Cc]ompact|[Cc]ompact.*[Ss]heaf",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: returned results do not state Hom/Ext continuity for these supported pro-etale module sheaves and uniformly bounded-below complexes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +221,74 @@
   "det-lem-bounded-continuity-direct-image"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-lem-constructible-ext-continuity-stratum",
+  "worker": "stage1",
+  "summary": "Kept the statement and the support-triangle / first-term continuity / second-term spectral-sequence route. Supplied the geometric and coefficient hypotheses, replaced the implicit hypercover assumption by the existing unconditional qcqs-object continuity node, cited the general truncation spectral-sequence theorem, and wrote out finite-page, uniform stabilization, finite-filtration and five-term comparisons. No new nodes.",
+  "blueprint": "Opening paragraph: Steps 2-3 and 9; First term: Steps 1 and 4; Second term: Steps 5-8. Uses the main-20261015 proof companion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic permanence of qcqs hypotheses; used only to check the hypotheses of the prescribed continuity route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic existence of K-injective resolutions in a Grothendieck abelian category, needed for total right derived functors in the prescribed argument."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic module-category exactness and existence framework for the prescribed derived-functor arguments."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic derived-functor triangulatedness; supplies the long exact sequence already required by the blueprint."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology exactness for the prescribed support triangle."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise exact functor descent, applied to the blueprint functor Phi."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below truncation spectral sequence, uniform stabilization and finite abutment filtration; exposes the spectral-sequence step already written in this item."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic functorial truncation triangles; justifies naturality of the spectral-sequence comparison already used by the blueprint."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Generic exactness input for the finite-page, finite-filtration and long-exact-sequence comparison."
+   },
+   {
+    "node": "det-pe-bounded-continuity-sections",
+    "why": "Existing qcqs-object formulation of the very same sections continuity input; unlike det-lem-bounded-continuity-sections it does not take a chosen hypercover as an extra hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "det-pe-bounded-continuity-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-a2cf44c24",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-a2cf44c24 (reviewer sub-agent of L); spot-checked: Read all nine proof steps, cited statements, blueprint route and source locations. The mathematics checks, including uniform spectral-sequence stabilization and canonical-map compatibility. Corrected two citations: the statement dependency defining a_!, and Step 5’s left-exactness reference. Statement unchanged; corrected dependency closure acyclic. Review and whole corrected JSON written under review.md and fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
