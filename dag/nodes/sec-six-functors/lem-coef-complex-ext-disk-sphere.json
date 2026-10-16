@@ -251,5 +251,30 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-dab358d32 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited nodes, Stacks sources at tags 010J, 010K, 010L, 08N3–08N5 and 010H, blueprint materials, and delivery report. All eleven proof steps are mathematically coherent with correct hypotheses, indices, Baer/naturality arguments, and edge cases. No new nodes or duplicates exist; recorded searches and agent provenance are adequate. Accepted tool use: lem-weil-pbc-pushout-short-exact-sequence. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-af7876a3a",
+  "group": "ND",
+  "result": "pass",
+  "note": "The completed review finds all seven substantive clauses and naturality requirements match, with no added hypotheses or hollow definitions. Compilation succeeded with only the permitted named-theorem sorry. No fixes or dependency repairs are needed; the packet module matches the immutable snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ComplexExtDiskSphere",
+  "declaration": "CategoryTheory.exists_complexExtDiskSphere",
+  "declarations": [
+   "CategoryTheory.YonedaDerivedExtComparison.mapOne",
+   "CategoryTheory.shortExactYonedaExtension",
+   "CategoryTheory.ComplexExtDiskSphere",
+   "CategoryTheory.exists_complexExtDiskSphere"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ComplexExtDiskSphere.lean",
+  "statement": "theorem exists_complexExtDiskSphere (A : Type u) [Category.{v} A] [Abelian A] : ∃ (cA : @YonedaDerivedExtComparison A _ _ (HasExt.standard A)) (cC : @YonedaDerivedExtComparison (CochainComplex A ℤ) _ _ (HasExt.standard (CochainComplex A ℤ))), Nonempty (@ComplexExtDiskSphere A _ _ (HasExt.standard A) (HasExt.standard (CochainComplex A ℤ)) cA cC)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded actual Yoneda quotient and its Baer laws. The conclusion packages the existing canonical comparison data at HasExt.standard, so the theorem assumes only an abelian category. Includes all six additive equivalences, endpoint naturality, and off-diagonal normalization under degreewise splittings; disks reuse upstream doubleId and spheres reuse Mathlib singleFunctor."
  }
 }
