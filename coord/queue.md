@@ -1,6 +1,6 @@
 # Work queue
 
-14 items; claim with `tools/claim.py next <group> [--stage N]`.
+15 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (14)
+## Stage 3: modules to prove (15)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -20,9 +20,10 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientDirectImageOrigin` | 9 | 1 | proof |
 | `Sheaf.Paper.CondensedQbarFieldCoefficientSquare` | 10 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSections` | 11 | 1 | proof |
-| `Sheaf.Paper.IntegralResiduePullSquare` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.InverseImageModuleFlat` | 12 | 1 | proof |
+| `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquare` | 13 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueOrdinaryRestrictPullComp` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
