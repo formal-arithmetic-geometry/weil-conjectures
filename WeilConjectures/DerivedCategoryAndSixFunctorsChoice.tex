@@ -52,12 +52,15 @@ serve as derived categories, how the $\ell$-adic coefficient rings are modelled,
 constructibility is defined, how each of the six functors is constructed, and how the base
 change morphisms are set up. It describes the state of \texttt{master} after the refactor of
 the coefficient rings, in which every non-finite coefficient ring is a \emph{condensed ring}
-pulled back to each $X_\proet$ from the pro-\'etale site of a point; the design notes for
-this refactor are \texttt{WeilConjectures/RefactorInstruction.tex}. It also records how the
+pulled back to each $X_\proet$ from the pro-\'etale site of a point. It also records how the
 functors interact with a change of coefficient ring, how $\Qlbar$-coefficients relate to
-the finite subextensions $E$, how the (derived) pullback is made strong monoidal, and how
-the six functors are lifted to \emph{Weil objects}, i.e.\ complexes with a Frobenius
-structure isomorphism.
+the finite subextensions $E$, how the (derived) pullback is made strong monoidal and the
+derived category symmetric monoidal, how the lower shriek is made independent of the
+compactification and compatible with composition, and how the six functors are lifted to
+\emph{Weil objects}, i.e.\ complexes with a Frobenius structure isomorphism. Finally it
+records the \emph{definitions and statements} chosen for the Tate twists, smooth purity, and
+Verdier and Poincar\'e duality with $\Qlbar$-coefficients; for these the present scope is to
+pin down the objects and morphisms and the form of the theorems, not to prove them.
 \end{abstract}
 
 \tableofcontents
@@ -355,6 +358,29 @@ $\Dc(X_\proet,\mathcal{R})$ &
 $\D(\Mod_{\mathcal{R}})$ is the two-variable K-flat derived functor of $\otimes$ resp.\ of
 the relative $\otimes_{\mathcal{R}}$. The derived internal hom $\RHom$ is \emph{defined} as
 its right adjoint: $K\lotimes-\dashv\RHom(K,-)$.
+
+\begin{choice}[Braiding on $\D(\mathcal C)$: Koszul signs, then the derived lifting property]
+For $\mathcal C$ braided (resp.\ symmetric) with a derived monoidal structure, $\D(\mathcal C)$
+is braided (resp.\ symmetric) (\lean{CategoryTheory/DerivedCategory/Monoidal/Braided}), in three
+steps:
+\begin{enumerate}
+\item on complexes, the braiding on the summand $X^p\otimes Y^q$ is $(-1)^{pq}\beta_{X^p,Y^q}$,
+  \emph{assembled} from the braiding of $\mathcal C$ transported through the total tensor
+  product and the flip isomorphism of the total complex, which carries the sign
+  (\lean{HomologicalComplex.braiding});
+\item it descends to the homotopy category along the quotient functor
+  (\lean{HomotopyCategory.MonoidalCategory.braiding});
+\item it is transported to $\D(\mathcal C)$ by the universal property of the binary left
+  derived functor (\lean{DerivedMonoidal.flipLift}, \lean{DerivedMonoidal.braiding}), with no
+  further K-flatness hypothesis; this step is abstract
+  (\lean{DerivedMonoidal.braidedCategory}).
+\end{enumerate}
+\end{choice}
+The braiding is constructed; the hexagons and the symmetry axiom are \texttt{sorry} at each
+stage (they reduce to those of $\mathcal C$ and sign identities, and then to ternary resp.\
+binary derived extensionality). Applied to $\Mod_{\Lambda_X}$, this makes
+$\D(\Mod_{\Lambda_X})$ and its full subcategory $\Dc$ symmetric monoidal closed, which is used for
+the biduality morphism of Verdier duality (\S\ref{sec:duality}).
 
 \subsection{$E$-coefficients as $\cO_E$-coefficients with $\ell$ inverted}
 \label{sec:rationalization}
@@ -701,7 +727,7 @@ All the data is constructed; that the degreewise maps commute with differentials
 naturalities, the derived-bifunctor property, the invertibility of $m$ and the coherence axioms
 are \texttt{sorry}. Each is checked on pairs (triples) of K-flat complexes, which $f^*$
 preserves, where both sides are computed by $f^*A\otimes f^*B$ and $f^*(A\otimes B)$ and $m$ is
-induced by $\mu$. The comparison $m$ is the input of the projection morphisms, hence of
+induced by $\mu$. The comparison $m$ is the input of the projection morphisms (\S\ref{sec:duality}), hence of
 Verdier and Poincar\'e duality, and of the Weil structure on $\lotimes$
 (\S\ref{sec:weil-six}).
 
@@ -741,17 +767,65 @@ Write $\Dc(X,\Lambda):=\Dc(X_\proet,\Lambda_X)$.
 Following Bhatt--Scholze \S6.8 in a simplified setting, fix a prime $\ell$ and a field $k$ of
 characteristic $p>0$, $p\neq\ell$. All schemes are separated and of finite type over $k$, and
 all morphisms are $k$-morphisms; no further hypothesis is imposed. Every such morphism has a
-compactification by Nagata's theorem (\lean{HasCompactification.of_isOver}); the one used to
+compactification by Nagata's theorem (\lean{HasCompactification.of_over}); the one used to
 define $Rf_!$ and $Rf^!$ on $\Dc$ is \lean{compactificationOverField}.
 \end{choice}
 
-\begin{choice}[$Lf^*$, $Rf_*$, $j_!$, $\lotimes$, $\RHom$: restrictions]
+\begin{choice}[Schemes over $k$ as objects of $\mathrm{Over}(\operatorname{Spec}k)$]
+The schemes are objects $X$ of the category \lean{Over (Spec (.of k))}, with structure morphism
+\lean{X.hom} locally of finite type, quasi-compact and separated, and the morphisms are
+morphisms $f\colon X\to Y$ of this category; the functors are those of the underlying morphism
+of schemes \lean{f.left}. A compactification $c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$ of
+\lean{f.left} is regarded as a factorization in $\mathrm{Over}(\operatorname{Spec}k)$ through
+\lean{c.overObj}, with \lean{c.overI}, \lean{c.overG} (\lean{Compactification/Over}); its base
+change along a cartesian square of $\mathrm{Over}(\operatorname{Spec}k)$ is again one.
+\end{choice}
+This replaces the earlier unbundled hypotheses \lean{[X.Over (Spec (.of k))]},
+\lean{[f.IsOver (Spec (.of k))]}: composites, compactifications and the Frobenius
+automorphisms of \S\ref{sec:weil} are then morphisms of one category, with no
+\lean{IsOver} instances to propagate.
+
+\begin{choice}[$Lf^*$, $Rf_*$, $j_!$: restrictions]
 These functors on $\Dc$ are the \emph{restrictions} of the corresponding functors on the
 ambient $\D(\Mod_{\Lambda_X})$ of \S\ref{sec:sixB}, via the statement that the ambient functor
 preserves bounded constructible complexes. Thus they commute with the inclusions by
-construction, and the adjunctions $Lf^*\dashv Rf_*$, $j_!\dashv j^*$,
-$K\lotimes-\dashv\RHom(K,-)$ and the composition isomorphism of $Lf^*$ are restrictions of
-the ambient ones along the fully faithful inclusions. Nothing is derived afresh.
+construction, and the adjunctions $Lf^*\dashv Rf_*$, $j_!\dashv j^*$ and the composition
+isomorphism of $Lf^*$ are restrictions of the ambient ones along the fully faithful
+inclusions. Nothing is derived afresh.
+\end{choice}
+
+\begin{choice}[$\lotimes$, $\RHom$: monoidal closed full subcategory]
+The derived tensor product and internal hom on $\Dc$ are \emph{not} defined as separate
+restricted bifunctors: $\Dc(X,\Lambda)$ is a full monoidal closed subcategory of
+$\D(\Mod_{\Lambda_X})$, by the instances that it contains $\Lambda_X$ and is stable under
+$\lotimes$ (\lean{isMonoidal_boundedConstructible}) and under $\RHom$
+(\lean{isMonoidalClosed_boundedConstructible}). Then $\lotimes$, $\RHom$ on $\Dc$ are the
+tensor product and internal hom of this structure (\lean{boundedConstructibleTensor},
+\lean{boundedConstructibleHom}), $\lotimes\dashv_2\RHom$ is its tensor-hom adjunction
+(\lean{boundedConstructibleTensorHomAdjunction}$_2$), and the inclusion is strict monoidal.
+\end{choice}
+So $\Dc$ is a monoidal closed category in its own right, which is what the abstract duality
+constructions of \S\ref{sec:duality} take as input; the braiding of
+\S\ref{sec:derived} restricts to it.
+
+\begin{proposition}[$Lf^*$ on $\Dc$ is strong monoidal]
+The restricted $Lf^*\colon\Dc(Y,\Lambda)\to\Dc(X,\Lambda)$ is strong monoidal
+(\lean{monoidal_boundedConstructibleUpperStar}), with the comparison isomorphisms of the
+ambient $Lf^*$ (\S\ref{sec:sixB-monoidal}).
+\end{proposition}
+This is a formal restriction: a strong monoidal functor sending one full monoidal subcategory
+into another restricts to a strong monoidal functor
+(\lean{ObjectProperty.monoidalLift}).
+
+\begin{choice}[Composition isomorphisms of $Rf_*$ and $j_!$: conjugates]
+The composition isomorphisms
+\[
+  Rg_*\circ Rf_*\ \cong\ R(g\circ f)_*,\qquad (j'\circ j)_!\cong j'_!\circ j_!
+\]
+(\lean{boundedConstructibleLowerStarComp},
+\lean{boundedConstructibleOpenImmersionLowerShriekComp}) are \emph{conjugates}, under
+$Lf^*\dashv Rf_*$ resp.\ $j_!\dashv j^*$, of the composition isomorphism of $Lf^*$, rather than
+restrictions of ambient ones.
 \end{choice}
 
 \begin{choice}[$Rf_!$: assembled on $\Dc$]
@@ -799,7 +873,7 @@ $j_!$ ($j$ open) & restriction of $\D(j_!)$ &
 $Rf_!$ & $Rp_*\circ i_!$ on $\Dc$ & \lean{boundedConstructibleLowerShriek} \\
 $Rf^!$ & $i^*\circ Rp^!$ on $\Dc$ ($\ell$-adic $\Lambda$) &
   \lean{boundedConstructibleUpperShriek} \\
-$\lotimes$, $\RHom$ & restrictions of $\lotimes_{\Lambda_X}$, $\RHom_{\Lambda_X}$ &
+$\lotimes$, $\RHom$ & monoidal closed structure of the full subcategory &
   \lean{boundedConstructibleTensor}, \lean{boundedConstructibleHom}\\
 \bottomrule
 \end{tabularx}
@@ -808,6 +882,88 @@ $\lotimes$, $\RHom$ & restrictions of $\lotimes_{\Lambda_X}$, $\RHom_{\Lambda_X}
 The preservation statements are Deligne's finiteness theorems for the $\ell$-adic rings
 $\underline{\cO}_E$, $\underline E$, $\underline{\Qlbar}$; they are false for a general
 $\Lambda$, and the coefficient ring is an input of the statements.
+
+\subsection{Independence of the compactification and composition of shrieks}
+\label{sec:shriek-comp}
+
+Since $Rf_!$ is defined through a compactification chosen for each $f$ separately, both its
+independence of the compactification and its compatibility with composition are
+comparisons between unrelated compactifications. Both are reduced to two geometric inputs
+about compactifications over $k$ (\lean{Compactification/Refinement}), and otherwise produced
+from the adjunctions and the base change morphisms of \S\ref{sec:basechange}.
+
+\begin{definition}[Refinement; composite compactification]
+A \emph{refinement} of a compactification $c_1=(X\xrightarrow{i_1}Z_1\xrightarrow{p_1}Y)$ by
+$c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$ is a proper $h\colon Z\to Z_1$ over $Y$ with $h\circ i=
+i_1$ and the square $(\mathrm{id}_X,i,i_1,h)$ cartesian, i.e.\ $h^{-1}(X)=X$
+(\lean{Compactification.OverRefinement}). For compactifications $c$ of $f$ and
+$c'=(Y\xrightarrow{j}Z'\xrightarrow{q}S)$ of $g$, and a compactification
+$d=(Z\xrightarrow{i'}W\xrightarrow{p'}Z')$ of $j\circ p$ whose square $(i',p,p',j)$ is
+cartesian, the \emph{composite} $X\xrightarrow{i'\circ i}W\xrightarrow{q\circ p'}S$ is a
+compactification of $g\circ f$ (\lean{Compactification.overComp}).
+\end{definition}
+The two geometric inputs, both \texttt{sorry} (both need the scheme-theoretic closure of a
+quasi-compact immersion), are: any two compactifications have a common refinement
+(\lean{Compactification.exists_overRefinement}, the closure of $X$ in $Z_1\times_YZ_2$); and $d$
+as above exists (\lean{Compactification.exists_isPullback_overG_overI}, the closure of $Z$ in
+any compactification of $j\circ p$).
+
+\begin{choice}[Independence of the compactification via refinements]
+\label{choice:independence}
+For a refinement $h\colon Z\to Z_1$ of $c_1$ by $c$:
+\begin{enumerate}
+\item the \emph{restriction comparison} $i_!\to Lh^*\circ i_{1!}$ is the transpose under
+  $i_!\dashv i^*$ of the unit of $i_{1!}\dashv i_1^*$, followed by $i_1^*\cong
+  i^*\circ Lh^*$ (\lean{boundedConstructibleOpenImmersionLowerShriekRefinement});
+\item the \emph{pushforward comparison} $i_{1!}\to Rh_*\circ i_!$ is the unit of $Lh^*\dashv
+  Rh_*$ followed by the inverse of the restriction comparison
+  (\lean{boundedConstructibleOpenImmersionLowerShriekRefinementPushforward});
+\item $Rf_!^{c_1}=Rp_{1*}i_{1!}\cong Rp_{1*}Rh_*i_!\cong Rp_*i_!=Rf_!^{c}$, by the
+  composition isomorphism of $R(-)_*$ (\lean{boundedConstructibleLowerShriekRefinementIso}).
+\end{enumerate}
+For $\Lambda=\underline E$ ($E/\mathbb Q_\ell$ finite) and $\Lambda=\underline{\Qlbar}$, and
+any two compactifications $c_1,c_2$ of $f$, the isomorphism $Rf_!^{c_1}\cong Rf_!^{c}\cong
+Rf_!^{c_2}$ through a common refinement $c$ is
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso}, resp.\
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl}.
+\end{choice}
+The isomorphisms are now \emph{constructed}; the sorried inputs are that the restriction
+comparison is invertible for a cartesian square
+(\lean{isIso_boundedConstructibleOpenImmersionLowerShriekRefinement}: $h^*i_{1!}K$ is the
+extension by zero of $K$) and that the pushforward comparison is invertible for $h$ proper
+(\lean{isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward} and its
+\lean{_padicAlgCl} version: proper base change along the closed complement, where
+$Rh_*i_!K$ vanishes), besides the existence of refinements. No cocycle condition for these
+isomorphisms is stated, and the isomorphism depends on the refinement chosen.
+
+\begin{choice}[Composition of $Rf_!$; $Rf^!$ by conjugation]
+For $f\colon X\to Y$, $g\colon Y\to S$ with chosen compactifications $c$, $c'$ and $d$ as in
+the definition, with the composite compactification $c''$ of $g\circ f$,
+\begin{align*}
+  R(g\circ f)_!&\cong Rf_!^{c''}=R(q p')_*(i'i)_!
+    &&\text{(independence of the compactification)}\\
+  &\cong Rq_*\,(Rp'_*\,i'_!)\,i_! &&\text{(composition of $R(-)_*$ and of $j_!$)}\\
+  &\cong Rq_*\,(j_!\,Rp_*)\,i_! = Rg_!\circ Rf_! &&\text{(exchange isomorphism)}
+\end{align*}
+(\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekComp} and its \lean{_padicAlgCl}
+version), where the \emph{exchange morphism} $j_!\circ Rp_*\to Rp'_*\circ i'_!$ of the cartesian
+square is the mate, under $Lp^*\dashv Rp_*$ and $Lp'^*\dashv Rp'_*$, of the extension-by-zero
+base change isomorphism $Lp'^*\circ j_!\cong i'_!\circ Lp^*$
+(\lean{boundedConstructibleLowerStarOpenImmersionLowerShriekExchange}; Proposition~\ref{prop:bc-open}).
+The composition isomorphism
+\[
+  R(g\circ f)^!\cong Rf^!\circ Rg^!
+\]
+(\lean{ProEtale.CondensedRing.boundedConstructibleUpperShriekComp} and its \lean{_padicAlgCl}
+version) is its \emph{conjugate} under $R(g\circ f)_!\dashv R(g\circ f)^!$ and the composite
+adjunction $Rg_!Rf_!\dashv Rf^!Rg^!$.
+\end{choice}
+The only new sorried input is that the exchange morphism is an isomorphism for $p'$ proper
+(\lean{isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange} and its
+\lean{_padicAlgCl} version), a form of proper base change. No associativity or unit
+coherence of these composition isomorphisms is stated. The composition isomorphism of $Rf^!$ is
+what identifies the dualizing complexes $Rf^!\omega_Y\cong\omega_X$ in
+\S\ref{sec:duality}.
 
 %======================================================================
 \section{Base change theorems}
@@ -907,14 +1063,10 @@ Taking the inverse of $\mathrm{Ex}_i$ requires base change for extension by zero
 lands in $Rf'^{\,c'}_!$ for the \emph{base-changed} compactification $c'$, not in the lower
 shriek $Rf'_!$ of the compactification chosen for $f'$.
 
-\begin{choice}[Independence of the compactification; $\mathrm{Ex}_!$ for the chosen $Rf_!$]
+\begin{choice}[$\mathrm{Ex}_!$ for the chosen $Rf_!$]
 For $\Lambda=\underline E$ ($E/\mathbb Q_\ell$ finite) and $\Lambda=\underline{\Qlbar}$, two
 compactifications $c_1,c_2$ of $f$ give isomorphic lower shrieks
-\[
-  Rf_!^{c_1}\cong Rf_!^{c_2}\colon\Dc(X,\Lambda)\to\Dc(Y,\Lambda)
-\]
-(\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso},
-\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl}).
+$Rf_!^{c_1}\cong Rf_!^{c_2}$ (Choice~\ref{choice:independence}).
 The compact-support base change morphism for the lower shrieks of the chosen
 compactifications $c_f$, $c_{f'}$ is then
 \[
@@ -924,8 +1076,8 @@ compactifications $c_f$, $c_{f'}$ is then
 (\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange},
 \lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl}).
 \end{choice}
-The independence isomorphisms are data and are currently \texttt{sorry}; no compatibility of
-them with each other (cocycle condition) or with $\mathrm{Ex}_!^c$ is stated.
+No compatibility of the independence isomorphisms with each other (cocycle condition) or
+with $\mathrm{Ex}_!^c$ is stated.
 
 \subsection{The base change theorems}
 
@@ -1047,8 +1199,7 @@ Let $a\colon\Lambda\to\Lambda'$ be a morphism of commutative condensed rings, $a
 \]
 The coefficient changes are compatible with the canonical coefficient morphisms:
 $a_X\circ\alpha_f=\alpha'_f\circ f^*a_Y$ (naturality in $\Lambda$ of $f^*p_Y^*\cong p_X^*$) and
-$f_*a_X\circ\eta_f=\eta'_f\circ a_Y$ (by adjunction). This is
-Corollary~\texttt{cor:coeff-functor} of \texttt{RefactorInstruction.tex}.
+$f_*a_X\circ\eta_f=\eta'_f\circ a_Y$ (by adjunction).
 
 \begin{choice}[Comparisons as mates and conjugates]
 All comparisons between $T$ and the six functors are \emph{produced formally} from these two
@@ -1259,6 +1410,229 @@ identification of $\varphi^{[n]}$ with the structure for $e^n$ via iterated comp
 isomorphisms.
 
 %======================================================================
+\section{Tate twists and smooth purity}
+\label{sec:purity}
+%======================================================================
+
+\paragraph{Scope.} For smooth purity the present goal is to fix the \emph{definitions} of the
+Tate twists and the \emph{statement} of purity, in the form needed downstream by the trace
+and Poincar\'e duality (\S\ref{sec:duality}); no proof is attempted. Throughout,
+$\Lambda=\underline{\Qlbar}$ and the setting is that of \S\ref{sec:sixCons}.
+
+\subsection{Tate twists}
+
+\begin{choice}[Roots of unity]
+$\mu_n$ on $X_\proet$ is the sheafification of $U\mapsto\mu_n(\Gamma(U,\cO_U))$, written
+additively (\lean{ProEtale.rootsOfUnitySheaf}), with the $m$-th power maps
+$\mu_{mn}\to\mu_n$ (\lean{ProEtale.rootsOfUnitySheafPow}), induced from the natural
+transformation $R\mapsto\mu_n(R)$ on commutative rings (\lean{TateTwist/RootsOfUnity}).
+\end{choice}
+The presheaf is already a sheaf ($\mu_n$ is representable), but sheafifying avoids proving it.
+
+\begin{choice}[$\Qlbar(1)$ via $\mathbb Z_\ell(1)$, all coefficients pulled back]
+With $\mathbb Z_{\ell,X}=p_X^*\underline{\mathbb Z}_\ell$ and
+$\Qlbar_X=p_X^*\underline{\Qlbar}$ (\lean{TateTwist/ProEtale}):
+\begin{enumerate}
+\item $\mathbb Z/\ell^n(1):=\mathbb Z_{\ell,X}\otimes\mu_{\ell^n}$, the \emph{free} $\mathbb
+  Z_{\ell,X}$-module on $\mu_{\ell^n}$ (\lean{ProEtale.tateModuleLevel},
+  \lean{Mod.freeFunctor}); as an abelian sheaf it is $\mu_{\ell^n}$, which is killed by $\ell^n$.
+  The free module avoids defining the $\mathbb Z_{\ell,X}$-action on $\mu_{\ell^n}$ by hand;
+\item $\mathbb Z_\ell(1):=\lim_n\mathbb Z/\ell^n(1)$ along the $\ell$-th power maps, a limit in
+  $\Mod_{\mathbb Z_{\ell,X}}$ (\lean{ProEtale.tateModule});
+\item $\Qlbar(1):=\Qlbar_X\otimes_{\mathbb Z_{\ell,X}}\mathbb Z_\ell(1)$, extension of scalars
+  along the pullback $\mathbb Z_{\ell,X}\to\Qlbar_X$ of the inclusion $\underline{\mathbb
+  Z}_\ell\to\underline{\Qlbar}$ of condensed rings (\lean{ProEtale.tateTwistOne},
+  \lean{Profinite.padicIntRingObjToPadicAlgCl});
+\item $\Qlbar(d):=\Qlbar(1)^{\otimes d}$ over $\Qlbar_X$ for $d\ge0$, and the dual
+  $\mathcal Hom_{\Qlbar_X}(\Qlbar(-d),\Qlbar_X)$ (underived internal hom of module objects) for
+  $d<0$ (\lean{ProEtale.tateTwist});
+\item $\Qlbar_X(d)$ in degree $0$ of $\D(\Mod_{\Qlbar_X})$ (\lean{ProEtale.tateTwistDerived}),
+  and the twist functor $K(d):=K\lotimes\Qlbar_X(d)$ (\lean{ProEtale.tateTwistFunctor}).
+\end{enumerate}
+\end{choice}
+The tensor product in (3) must be over $\mathbb Z_{\ell,X}$, not $\mathbb Z$:
+$\Qlbar\otimes_{\mathbb Z}\mu_{\ell^n}=0$. The twists are defined for an arbitrary scheme $X$
+and are functorial in nothing: $f^*\Qlbar_Y(d)\cong\Qlbar_X(d)$,
+$\Qlbar(d)\otimes\Qlbar(e)\cong\Qlbar(d+e)$ and local triviality of $\Qlbar(1)$ when $\ell$ is
+invertible are not stated, and the Galois action is left to the Weil formalism. That
+$\Qlbar_X(d)[n]$ is bounded constructible is \texttt{sorry}
+(\lean{boundedConstructible_tateTwistDerived}), giving
+\lean{boundedConstructibleTateTwist}.
+
+\subsection{Smooth purity}
+
+\begin{choice}[Purity as a chosen isomorphism]
+For $f\colon X\to Y$ in $\mathrm{Over}(\operatorname{Spec}k)$ with \lean{f.left} smooth of pure
+relative dimension $d$, smooth purity is the \emph{data}
+\[
+  \mathrm{pur}_f\colon Rf^!\,\Qlbar_Y\ \xrightarrow{\ \sim\ }\ \Qlbar_X(d)[2d]
+\]
+(\lean{ProEtale.CondensedRing.smoothPurityIso}, a \lean{@[no_expose]} definition with value
+\texttt{sorry}), with $Rf^!$ the exceptional pullback on $\Dc$ of \S\ref{sec:sixCons} and
+$\Qlbar_Y$ the unit of $\Dc(Y,\Qlbar)$. It is stated after the fully faithful inclusion
+$\Dc\to\D(\Mod_{\Qlbar_X})$, so that the constructibility of the twist is not needed for the
+statement; its preimage in $\Dc$ is \lean{boundedConstructibleSmoothPurityIso}.
+\end{choice}
+Purity is an \emph{isomorphism chosen once}, not a proposition that a canonical map is
+invertible: the canonical map would be the adjoint of the SGA~4 trace
+$Rf_!\Qlbar_X(d)[2d]\to\Qlbar_Y$ (Exp.~XVIII), whose construction (reduction to relative curves,
+cycle class of the diagonal) is not formalized. The trace of \S\ref{sec:duality} is
+\emph{defined} from $\mathrm{pur}_f$, so every downstream map inherits its normalization, and no
+second normalization is introduced. Accordingly the expected properties of
+$\mathrm{pur}_f$ --- compatibility with composition of smooth morphisms and with base change,
+$\mathrm{pur}_f$ being $Rf^!=Lf^*$ for $f$ \'etale, and agreement of the induced trace with the
+classical $H^2_c$ trace of a smooth curve --- are not yet stated; they are the conditions that
+will pin $\mathrm{pur}_f$ down.
+
+%======================================================================
+\section{Verdier and Poincar\'e duality}
+\label{sec:duality}
+%======================================================================
+
+\paragraph{Scope.} As for purity, the goal here is to fix the canonical morphisms and the form
+of the duality theorems; the inputs on which they rest are \texttt{sorry}. Verdier and
+Poincar\'e duality are then \emph{deduced} from these inputs, formally.
+
+\subsection{The abstract part}
+
+\begin{choice}[Duality morphisms from two adjunctions and a projection morphism]
+The formal part is isolated in \lean{PoincareDuality/Abstract}, for monoidal closed $\mathcal
+C$, $\mathcal D$ with
+\begin{itemize}
+\item $F\dashv G$ (for $Lf^*\dashv Rf_*$), $F$ oplax monoidal;
+\item $P\dashv S$ (for $Rf_!\dashv Rf^!$);
+\item a natural transformation of bifunctors $\mathrm{pf}_{K,B}\colon PK\otimes B\to
+  P(K\otimes FB)$ (for the exceptional projection morphism), taken as an \emph{input}.
+\end{itemize}
+From these: the \emph{Verdier exchange} $\Phi_{K,L}\colon G\,\RHom(K,SL)\to\RHom(PK,L)$, the
+transpose of
+\[
+  PK\otimes G\RHom(K,SL)\xrightarrow{\mathrm{pf}}P(K\otimes FG\RHom(K,SL))\xrightarrow{\varepsilon}
+  P(K\otimes\RHom(K,SL))\xrightarrow{\mathrm{ev}}PSL\xrightarrow{\varepsilon'}L
+\]
+(\lean{Verdier.exchange}); and, for a chosen $\mathrm{pur}\colon S\mathbb 1\cong T$, the
+\emph{trace} $PT\to PS\mathbb 1\to\mathbb 1$ (\lean{Verdier.trace}), the \emph{Poincar\'e duality
+morphism} $GT\to GS\mathbb 1\cong G\RHom(\mathbb 1,S\mathbb 1)\xrightarrow{\Phi}\RHom(P\mathbb
+1,\mathbb 1)$ (\lean{Verdier.poincareMap}) and the \emph{compact-support cup product}
+$P\mathbb 1\otimes GT\to P(\mathbb 1\otimes FGT)\to PT$ (\lean{Verdier.cupProduct}). With a
+braiding and an object $\omega$, the \emph{double-dual morphism} $K\to\D\D K$, $\D=\RHom(-,\omega)$
+(\lean{Verdier.bidualityMap}); with $\omega_X$, $\omega_Y$ and $\gamma\colon S\omega_Y\cong
+\omega_X$, the \emph{absolute exchange} $G\D_XK\to\D_YPK$ and the \emph{opposite exchange}
+$\Theta_K\colon P\D_XK\to\D_YGK$ (\lean{Verdier.absoluteExchange}, \lean{Verdier.dualExchange}).
+\end{choice}
+$\mathrm{pf}$ is an input because the two adjunctions alone produce no canonical morphism of
+this shape: the projection morphism of $F\dashv G$ concerns $G=Rf_*$, and the projection
+comparison of $P\dashv S$ goes the other way. In the application it is built from a
+compactification. Only its naturality in $B$ is used. The direction of $\mathrm{pf}$ (into
+$P(K\otimes FB)$, with $K$ the \emph{left} factor, matching $\RHom(K,-)$ as right adjoint of
+$K\otimes-$) is chosen so that $\Phi$ is defined directly, without inverting $\mathrm{pf}$.
+
+\begin{proposition}[Formal consequences]
+\leavevmode
+\begin{enumerate}
+\item If every $\mathrm{pf}_{K,B}$ is an isomorphism, so is $\Phi_{K,L}$
+  (\lean{Verdier.isIso_exchange_of_isIso}), by Yoneda.
+\item The transpose $P\mathbb 1\otimes GT\to\mathbb 1$ of the Poincar\'e duality morphism is the
+  cup product followed by the trace (\lean{Verdier.uncurry_poincareMap}).
+\end{enumerate}
+\end{proposition}
+Both are proved.
+
+\subsection{The exceptional projection morphism}
+
+\begin{choice}[$\mathrm{PF}^!$ through the compactification]
+For a compactification $c=(X\xrightarrow{i}Z\xrightarrow{g}Y)$ of $f$,
+\[
+  \mathrm{PF}^!_{f,K,B}\colon Rf_!K\lotimes B=Rg_*(i_!K)\lotimes B
+  \xrightarrow{\mathrm{PF}^*_g}Rg_*(i_!K\lotimes Lg^*B)
+  \xrightarrow{Rg_*(q_i^{-1})}Rg_*i_!(K\lotimes i^*Lg^*B)\cong Rf_!(K\lotimes Lf^*B),
+\]
+where $\mathrm{PF}^*_g$ is the projection morphism of $Lg^*\dashv Rg_*$, the mate of
+$Lg^*(Rg_*A\lotimes B)\cong Lg^*Rg_*A\lotimes Lg^*B\to A\lotimes Lg^*B$, using the monoidal
+structure $m$ of $Lg^*$ (\S\ref{sec:sixB-monoidal}) (\lean{properProjectionMorphism}); $q_i\colon
+i_!(M\lotimes i^*N)\to i_!M\lotimes N$ is the projection comparison of $i_!\dashv i^*$
+(\lean{openImmersionProjectionComparison}); and the last step is $i^*Lg^*\cong Lf^*$
+(\lean{exceptionalProjectionMorphismOfCompactification}, on the unbounded categories). On $\Dc$ it
+is taken for \lean{compactificationOverField} and bundled as a natural transformation of
+bifunctors (\lean{boundedConstructibleExceptionalProjection}).
+\end{choice}
+Sorried: $q_i$ is invertible (\lean{isIso_openImmersionProjectionComparison}; on module objects
+it holds underived, and both sides preserve K-flats); the naturalities of $\mathrm{PF}^!$; and
+the \emph{derived projection formula} that $\mathrm{PF}^!$ is invertible on $\Dc$
+(\lean{isIso_boundedConstructibleExceptionalProjectionMorphism}), which needs proper base change
+and the proper projection formula in derived form.
+
+\subsection{Verdier duality}
+
+\begin{choice}[Verdier duality on $\Dc(-,\Qlbar)$]
+For $f\colon X\to Y$ in the setting of \S\ref{sec:sixCons}, $\Lambda=\underline{\Qlbar}$ (where
+$Rf^!$ exists), the abstract constructions are applied to $Lf^*\dashv Rf_*$, $Rf_!\dashv Rf^!$
+and $\mathrm{PF}^!$ on $\Dc$ (\lean{PoincareDuality/Verdier}):
+\begin{itemize}
+\item the Verdier exchange $\Phi_{f,K,L}\colon Rf_*\RHom(K,Rf^!L)\to\RHom(Rf_!K,L)$
+  (\lean{ProEtale.CondensedRing.verdierExchange});
+\item for a structure morphism $a\colon X\to S$, the dualizing complex $\omega_X:=Ra^!\Qlbar_S$
+  (\lean{ProEtale.CondensedRing.dualizingComplex}) and the Verdier dual $\D_XK:=\RHom(K,\omega_X)$
+  (\lean{ProEtale.CondensedRing.verdierDual}): $\omega_X$ is relative to a chosen $a$, not
+  absolute;
+\item the double-dual morphism $\delta_K\colon K\to\D_X\D_XK$
+  (\lean{ProEtale.CondensedRing.verdierBiduality}), using the braiding of \S\ref{sec:derived};
+\item for $f$ and $a_Y\colon Y\to S$, $\gamma\colon Rf^!\omega_Y\cong\omega_X$ with $\omega_X$
+  relative to $a_Y\circ f$, the composition isomorphism of $R(-)^!$ at the unit
+  (\lean{ProEtale.CondensedRing.upperShriekDualizingComplexIso}; \S\ref{sec:shriek-comp}), and
+  through it the absolute exchange $Rf_*\D_XK\to\D_YRf_!K$ and the opposite exchange
+  $\Theta_K\colon Rf_!\D_XK\to\D_YRf_*K$
+  (\lean{ProEtale.CondensedRing.absoluteVerdierExchange},
+  \lean{ProEtale.CondensedRing.dualVerdierExchange}).
+\end{itemize}
+\end{choice}
+
+\begin{proposition}[Verdier duality]
+$\Phi_{f,K,L}$ is an isomorphism for all $K\in\Dc(X,\Qlbar)$, $L\in\Dc(Y,\Qlbar)$
+(\lean{ProEtale.CondensedRing.isIso_verdierExchange}).
+\end{proposition}
+Proved from the derived projection formula (sorried) by the abstract Yoneda argument.
+\emph{Constructible biduality}, that $\delta_K$ is invertible, is stated and \texttt{sorry}
+(\lean{ProEtale.CondensedRing.isIso_verdierBiduality}). No invertibility is stated for the
+absolute or opposite exchange; the familiar $\D_YRf_*K\cong Rf_!\D_XK$ is meant to be the inverse
+of $\Theta_K$, once biduality is available.
+
+\subsection{Poincar\'e duality}
+
+\begin{choice}[Trace, Poincar\'e morphism and cup product from $\mathrm{pur}_p$]
+For $p\colon X\to S$ smooth of pure relative dimension $d$, with $\mathrm{pur}_p$ of
+\S\ref{sec:purity} on $\Dc$ (\lean{PoincareDuality/Poincare}):
+\begin{align*}
+  \mathrm{Tr}_p&\colon Rp_!\Qlbar_X(d)[2d]\xrightarrow{Rp_!\mathrm{pur}_p^{-1}}Rp_!Rp^!\Qlbar_S
+    \xrightarrow{\varepsilon}\Qlbar_S &&(\lean{ProEtale.CondensedRing.trace}),\\
+  \mathrm{PD}_p&\colon Rp_*\Qlbar_X(d)[2d]\to\RHom(Rp_!\Qlbar_X,\Qlbar_S)
+    &&(\lean{ProEtale.CondensedRing.poincareMap}),\\
+  \cup_c&\colon Rp_!\Qlbar_X\lotimes Rp_*\Qlbar_X(d)[2d]\to Rp_!\Qlbar_X(d)[2d]
+    &&(\lean{ProEtale.CondensedRing.cupProduct}),
+\end{align*}
+the specializations of \lean{Verdier.trace}, \lean{Verdier.poincareMap},
+\lean{Verdier.cupProduct}.
+\end{choice}
+
+\begin{proposition}[Poincar\'e duality]
+\leavevmode
+\begin{enumerate}
+\item The transpose of $\mathrm{PD}_p$ is $\mathrm{Tr}_p\circ\cup_c$
+  (\lean{ProEtale.CondensedRing.uncurry_poincareMap}).
+\item $\mathrm{PD}_p$ is an isomorphism (\lean{ProEtale.CondensedRing.isIso_poincareMap}), i.e.\
+  $\D_S(Rp_!\Qlbar_X)\cong Rp_*\Qlbar_X(d)[2d]$ for $\omega_S=\Qlbar_S$.
+\end{enumerate}
+\end{proposition}
+(1) is formal; (2) is Verdier duality at $K=\Qlbar_X$, $L=\Qlbar_S$. Neither uses anything about
+$\mathrm{pur}_p$ beyond its being an isomorphism, which is the point of fixing it as data: the
+statement is independent of how purity will be proved, and all three maps share its
+normalization. Not yet stated: the perfect pairing $H^i_c(X,\Qlbar)\times
+H^{2d-i}(X,\Qlbar(d))\to\Qlbar$ over $S=\operatorname{Spec}\bar k$ (needs perfectness of
+$Rp_!\Qlbar_X$ and $R\Gamma\circ\RHom(-,\Qlbar_S)$ as the linear dual), Frobenius equivariance
+(via \S\ref{sec:weil}), and compatibility with base change, composition and change of
+compactification.
+
+%======================================================================
 \section{Summary}
 %======================================================================
 
@@ -1291,8 +1665,11 @@ $Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & only on $\Dc$, fo
 $Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; unbounded
   only, no $R^+f^!$ & composite of $i_!\dashv i^*$ and $Rg_*\dashv Rg^!$ on $\Dc$\\
 $\lotimes$, $\RHom$ & K-flat derived $\otimes$, right adjoint &
-  K-flat derived $\otimes_{\Lambda_X}$, right adjoint\\
-on $\Dc$ & --- & restrictions of the above\\
+  K-flat derived $\otimes_{\Lambda_X}$, right adjoint; symmetric via Koszul signs\\
+on $\Dc$ & --- & restrictions of the above; $\lotimes$, $\RHom$ as a monoidal closed full
+  subcategory\\
+composition of $Rf_!$, $Rf^!$ & --- & on $\Dc$ ($E$, $\Qlbar$): independence via refinements,
+  exchange isomorphism; $Rf^!$ by conjugation\\
 monoidality of $f^*$, $Lf^*$ & strong monoidal & strong monoidal: $\mathrm{mapMod}$ along a
   braided functor and $\Ext$ along the isomorphism $\alpha_f$; $m$ for $Lf^*$ via the universal
   property of derived bifunctors\\
@@ -1300,6 +1677,11 @@ base change & $\mathrm{BC}$, $\mathrm{Ex}_!^c$ (\'etale) & $\mathrm{BC}$,
   $\mathrm{Ex}_!^c$ on $\Dc$; $\mathrm{Ex}_!$ for the chosen $Rf_!$ ($E$, $\Qlbar$)\\
 Weil objects & Weil sheaves and complexes (\'etale) & $\mathrm{IsoAlg}(Le^*)$ on
   $\Dc(X,\Qlbar)$; all six functors lifted through their Frobenius comparisons\\
+purity & --- & $\Qlbar(d)$ from $\varprojlim\mu_{\ell^n}$; $\mathrm{pur}_f$ a chosen isomorphism
+  (statement only)\\
+duality & --- & on $\Dc(-,\Qlbar)$: $\Phi$, $\omega_X$, $\D_X$, $\delta$, $\mathrm{Tr}$,
+  $\mathrm{PD}$, $\cup_c$ defined; Verdier and Poincar\'e duality deduced from the sorried
+  projection formula\\
 \bottomrule
 \end{tabularx}
 \medskip
@@ -1317,8 +1699,14 @@ The layer B column is uniform in $\Lambda$; $\underline{\Qlbar}$ is one instance
 \item Compatibility of the base change maps with extension of scalars, to transport base
   change from finite $E$ to $\Qlbar$ via \S\ref{sec:Qlbar-colimit}; compatibility of change of
   coefficients with $\lotimes$, $\RHom$ and $Rf^!$.
-\item The independence isomorphisms $Rf_!^{c_1}\cong Rf_!^{c_2}$ (stated, \texttt{sorry}) and
-  their coherence.
+\item The geometric inputs on compactifications (common refinements, the cartesian
+  compactification of $j\circ p$), the invertibility of the refinement and exchange comparisons,
+  and the coherence of the independence and composition isomorphisms
+  (\S\ref{sec:shriek-comp}).
+\item Smooth purity and duality (\S\S\ref{sec:purity}--\ref{sec:duality}): pinning down
+  $\mathrm{pur}_f$ by its compatibilities (composition, base change, \'etale case, trace of a
+  curve); the functoriality of the Tate twists; then the derived projection formula,
+  constructible biduality, the perfect pairing on cohomology and Frobenius equivariance.
 \item The identity isomorphism $L(\mathrm{id})^*\cong\mathrm{id}$ of the module-object derived
   pullback, which would make the Frobenius pullback an equivalence and remove most of the
   Weil-specific \texttt{sorry}s; the coherences of the monoidal structures on $f^*$ and $Lf^*$.
