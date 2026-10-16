@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sf-fullcd-used-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The full cohomological-dimension condition on the blueprint's coefficient class",
@@ -18,34 +18,265 @@
   "def-sf-fullcd-used-class",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof": [
   {
-   "text": "The vanishing is [thm-sf-fullcd-etale-origin], whose two clauses are\nthe absolute one and the relative one over every base change and whose bound\nis $2\\dim\\overline X\\leq2d$; equivalently, by\n[lem-sf-fullcd-detection-equivalence], it is the vanishing of the\npro-étale cohomology of the base-changed source for those coefficients.\nThe class is stable under inverse image because the comparison pullback\n$\\nu^*$ of [def-weil-pbc-site-comparison-morphism] is exact and\ncommutes with the scheme pullbacks of the comparison sites, so the inverse\nimage of an étale-origin sheaf is étale-origin; it is stable under\nextensions and colimits because $\\nu^*$, being a left adjoint and exact,\npreserves them; and the constructible description of the class is clause (i)\nof [lem-sf-proetale-constructible-origin]. The constant coefficient\nsheaf is the pullback of the constant étale sheaf, hence lies in the class.",
+   "text": "Fix a sheaf $\\mathcal F$ in the class and choose its defining witness $\\mathcal F\\cong\\nu_{\\overline X}^*G$ with $G$ an étale $A$-module sheaf [def-sf-fullcd-used-class]. The coefficient ring $A$ is finite [def-weil-l-adic-coefficient-extension]. In particular some positive integer $N$ kills $1_A$ (two terms of the sequence $0,1_A,2\\cdot1_A,\\ldots$ coincide), and hence kills every section of every $A$-module sheaf. Thus the underlying abelian sheaf of $G$ is torsion, even when $G$ is not constructible or finite. We use only the essential image of $\\nu^*$, not all pro-étale sheaves.",
    "uses": [
-    "thm-sf-fullcd-etale-origin",
-    "lem-sf-fullcd-detection-equivalence",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-proetale-constructible-origin"
+    "def-sf-fullcd-used-class",
+    "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-used-class.md",
+    "place": "Proof, first sentence: identify the coefficient class and torsion hypothesis"
+   }
+  },
+  {
+   "text": "The absolute clause of [thm-sf-fullcd-etale-origin] gives $\\mathcal H^r(Rp_{\\Proet,*}\\nu_{\\overline X}^*G)=0$ for $r>2d$. Here the hypotheses are the original finite-type $k$-schemes, algebraically closed $k$, proper finite-type $p$, and $\\dim\\overline X\\leq d$. This step uses no base-change clause of that theorem.",
+   "uses": [
+    "thm-sf-fullcd-etale-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-used-class.md",
+    "place": "Proof, first sentence: the absolute vanishing clause"
+   }
+  },
+  {
+   "text": "Both $p$ and each $p_V$ are quasi-compact and quasi-separated. Indeed $p_V$ is proper by [lem-weil-pbc-proper-base-change]; a proper morphism is separated and of finite type [def-weil-proper-morphism], so is quasi-compact [def-weil-finite-type-morphism]. Its diagonal is a closed immersion: the inverse image of an affine open under that diagonal is affine, hence quasi-compact, by the affine description in [def-weil-closed-immersion]. This is exactly quasi-separatedness [def-weil-quasi-separated-morphism]. The same reasoning applies to $p$. No finite-type-over-$k$ hypothesis on $V$ is used.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W4, lemma-base-change-proper; properness definition and affine closed-immersion description (Tag 01QO)"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-comparison-direct-image] to $p$ and $G[0]$ to get $Rp_{\\Proet,*}\\nu_{\\overline X}^*G\\cong\\nu_Y^*Rp_{\\Et,*}G$. The comparison inverse image is exact and the unit $M\\to\\nu_{Y,*}\\nu_Y^*M$ is an isomorphism [prop-weil-pbc-site-comparison-finite-level]. Exactness identifies cohomology on the right with $\\nu_Y^*R^rp_{\\Et,*}G$: apply the functor to $\\ker(d)/\\operatorname{im}(d)$ in an injective-resolution complex. Step 2 therefore gives $\\nu_Y^*R^rp_{\\Et,*}G=0$ for $r>2d$. The unit then identifies $R^rp_{\\Et,*}G$ with $\\nu_{Y,*}0=0$.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison; Tag 099T, lemma-fully-faithful; exact comparison inverse image"
+   }
+  },
+  {
+   "text": "For the coefficient-forgetting calculations use the module-valued encoding via [lem-weil-pbc-etale-constant-ring-module-equivalence], which keeps the underlying abelian sheaf unchanged. The equivalence is exact; it transports injective resolutions, since the defining extension property for an injective object is unchanged under an exact equivalence. Direct images correspond because both have sections on $U$ equal to sections over the inverse-image object. Thus their derived cohomology corresponds as well. Let $v:V\\to Y$ be any object of $Y_{\\Proet}$ and write $g:\\overline X_V\\to\\overline X$ for the other projection. Put $B$ equal to the underlying abelian sheaf of $G$. The comparison [lem-sbc-higher-direct-image-forget-comparison] identifies $\\mathcal H^r(Rp_*B[0])$ with the underlying abelian sheaf of $R^rp_*G$, so it vanishes for $r>2d$ by Step 4. Apply [thm-weil-pbc-bounded-below] to the cartesian square $(g,p_V,p,v)$ and $B[0]$, which has torsion cohomology by Step 1. It gives $R(p_V)_{\\Et,*}g^{-1}B\\cong v^{-1}Rp_{\\Et,*}B$. Since $v^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], cohomology on the right is $v^{-1}\\mathcal H^r(Rp_{\\Et,*}B)=0$ for $r>2d$. By [lemma-weil-pbc-etale-pullback-forget-modules], $g^{-1}B$ is the underlying abelian sheaf of $g_{\\Et}^*G$. Apply [lem-sbc-higher-direct-image-forget-comparison] to $p_V$; faithfulness and exactness of forgetting modules [lem-weil-pbc-module-sheaves-colimits-forgetful] now give $R^r(p_V)_{\\Et,*}g_{\\Et}^*G=0$. Indeed if the underlying sheaf of a module object is zero, its identity is zero, and the object is zero. This argument imposes no dimension or finite-type condition on $V$.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "thm-weil-pbc-bounded-below",
+    "prop-weil-pbc-inverse-image-exact",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T, theorem-proper-base-change; exact inverse image and the cited coefficient-forgetting comparisons"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-comparison-pullback], $g_{\\Proet}^*\\mathcal F\\cong\\nu_{\\overline X_V}^*(g_{\\Et}^*G)$, with the same constant coefficient ring $A$. Apply [prop-weil-pbc-comparison-direct-image] to the qcqs morphism $p_V$ (Step 3) and the degree-zero sheaf $g_{\\Et}^*G$. Its right derived image is $\\nu_V^*R(p_V)_{\\Et,*}g_{\\Et}^*G$. Exactness of $\\nu_V^*$ [prop-weil-pbc-site-comparison-finite-level] commutes with cohomology as in Step 4; Step 5 therefore gives $\\mathcal H^r(R(p_V)_{\\Proet,*}g_{\\Proet}^*\\mathcal F)=0$ for $r>2d$. This is the relative clause of [def-weil-full-cohomological-dimension] restricted to the stated coefficient class; Step 2 is the absolute clause. The integer $2d$ is unchanged for every $V$.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-comparison-direct-image",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-full-cohomological-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison, and the commuting square immediately preceding it; restricted FullCD conclusion"
+   }
+  },
+  {
+   "text": "If $h:T'\\to T$ is a morphism of finite-type $k$-schemes and $\\mathcal F\\cong\\nu_T^*G$, then [lem-weil-pbc-comparison-pullback] gives $h_{\\Proet}^*\\mathcal F\\cong\\nu_{T'}^*(h_{\\Et}^*G)$. The sheaf $h_{\\Et}^*G$ is an étale $A$-module sheaf by [prop-weil-pbc-inverse-image-modules-exact]. This is an étale-origin witness on $T'$ [def-sf-fullcd-used-class], so the class is stable under inverse image.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-sf-fullcd-used-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Commuting square of comparison morphisms immediately before Tag 09A6"
+   }
+  },
+  {
+   "text": "For extension closure, fix a finite-type $k$-scheme $T$ and an exact sequence $0\\to\\nu_T^*G'\\to F\\to\\nu_T^*G''\\to0$ of pro-étale $A$-module sheaves. These sheaves form a Grothendieck abelian category [lem-pur-ringed-site-grothendieck-abelian] and hence have enough injectives [lem-sp-grothendieck-enough-injectives]. The functor $\\nu_{T,*}$ is additive and left exact: it is restriction to étale objects [def-weil-pbc-site-comparison-morphism], and kernels of sheaves of modules are sectionwise [lem-weil-pbc-module-sheaves-colimits-forgetful]. The long exact sequence [lem-weil-pbc-derived-functor-long-exact] starts with $0\\to\\nu_{T,*}\\nu_T^*G'\\to\\nu_{T,*}F\\to\\nu_{T,*}\\nu_T^*G''\\to R^1\\nu_{T,*}\\nu_T^*G'$. By [prop-sf-comparison-bound-zero] the last term is zero and the two outer degree-zero terms identify with $G'$ and $G''$. We obtain $0\\to G'\\to\\nu_{T,*}F\\to G''\\to0$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "prop-sf-comparison-bound-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived, proof of (1), using Tag 099V, lemma-relative-comparison"
+   }
+  },
+  {
+   "text": "Pull back the last short exact sequence by exact $\\nu_T^*$ [prop-weil-pbc-site-comparison-finite-level]. The adjunction counit gives a commutative diagram from this pulled-back sequence to the original sequence. Its end components $\\nu_T^*\\nu_{T,*}\\nu_T^*G'\\to\\nu_T^*G'$ and $\\nu_T^*\\nu_{T,*}\\nu_T^*G''\\to\\nu_T^*G''$ are isomorphisms: each is inverse to the pullback of the unit isomorphism, by the triangle identity for the adjunction [def-weil-pbc-site-comparison-morphism]. Thus the short five lemma [lem-weil-pbc-short-five-lemma] makes $\\nu_T^*\\nu_{T,*}F\\to F$ an isomorphism. The étale sheaf $\\nu_{T,*}F$ is the required origin witness. This proves closure under extensions; preservation of extensions by an exact functor alone would not prove it.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived, proof of (1), final pullback/counit argument"
+   }
+  },
+  {
+   "text": "For colimits fix a small category $J$ and a diagram $H:J\\to\\operatorname{Mod}(T_{\\Proet},A)$ whose values are of étale origin. By the unit isomorphism [prop-weil-pbc-site-comparison-finite-level] and the adjunction triangle identity [def-weil-pbc-site-comparison-morphism], the counit $\\epsilon_{H_j}:\\nu_T^*\\nu_{T,*}H_j\\to H_j$ is an isomorphism for each $j$. Explicitly, for an origin isomorphism $\\alpha_j:\\nu_T^*G_j\\xrightarrow{\\sim}H_j$ and unit $\\eta$, the triangle identity gives $\\epsilon_{\\nu_T^*G_j}=(\\nu_T^*\\eta_{G_j})^{-1}$, and counit naturality gives $\\epsilon_{H_j}=\\alpha_j\\circ(\\nu_T^*\\eta_{G_j})^{-1}\\circ\\nu_T^*\\nu_{T,*}(\\alpha_j^{-1})$. Each factor is invertible. Counit naturality makes these into an isomorphism of diagrams, so no incompatible choices of lifts of arrows are involved. The diagram $\\nu_{T,*}H$ has a colimit $G$ in étale $A$-module sheaves [lem-weil-pbc-module-sheaves-colimits-forgetful]. Since $\\nu_T^*$ is a left adjoint [def-weil-pbc-site-comparison-morphism], [lem-weil-pbc-left-adjoint-preserves-colimits] identifies $\\operatorname{colim}_J H\\cong\\nu_T^*G$. This witnesses closure under all small colimits, including the empty colimit.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, lemma-fully-faithful, with the comparison adjunction and elementary lifting of a diagram by the right adjoint"
+   }
+  },
+  {
+   "text": "The constant coefficient sheaf is also in the class. The constant $A$-module sheaf $A_T$ [def-weil-pbc-constant-sheaf] represents the functor of global sections: a map $A_T\\to M$ is determined by the image of $1$, and every global section defines such a map by scalar multiplication and sheafification. By the adjunction [def-weil-pbc-site-comparison-morphism], maps $\\nu_T^*(A_{T,\\Et})\\to M$ correspond to global sections of $\\nu_{T,*}M$. Restriction to étale objects leaves the terminal object $T$ unchanged, so these are exactly the global sections of $M$. The natural universal properties therefore identify $\\nu_T^*(A_{T,\\Et})\\cong A_{T,\\Proet}$ (the two representing maps induced by $1$ compose to the identities). Finally every sheaf of étale origin belongs to the class by its defining witness [def-sf-fullcd-used-class].",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sf-fullcd-used-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-used-class.md",
+    "place": "Proof, last sentence, expanded using the constant-sheaf universal property"
+   }
   }
  ],
  "proof_deps": [
+  "def-sf-fullcd-used-class",
+  "def-weil-l-adic-coefficient-extension",
   "thm-sf-fullcd-etale-origin",
-  "lem-sf-fullcd-detection-equivalence",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-inverse-image-exact",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-full-cohomological-dimension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-sf-proetale-constructible-origin"
+  "lem-weil-pbc-derived-functor-long-exact",
+  "prop-sf-comparison-bound-zero",
+  "lem-weil-pbc-short-five-lemma",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-constant-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-used-class.md",
-  "place": "## Proof"
+  "place": "Proof, repaired using Stacks Tags 095T, 09A6, 099T, 099V and 09B1; all closure arguments written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "etale.*cohomological|proetale.*extension|classical.*sheaf",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of classical proetale sheaves is closed under extensions and colimits",
+   "results": "CategoryTheory.Sheaf.instHasFiniteColimits, CategoryTheory.Sheaf.createsColimitOfIsSheaf, CategoryTheory.Sheaf.hasExactColimitsOfShape, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.instHasColimitsOfShape, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.PresheafedSpace.instHasColimits, CategoryTheory.Sheaf.instHasColimitsOfSize",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The essential image of the pullback from etale sheaves to proetale sheaves is closed under extensions and colimits and has cohomological dimension at most twice the dimension for proper pushforward",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.EssImage, CategoryTheory.Functor.IsLeftAdjoint",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.EssImage'",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier in query; no absence conclusion from this search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of torsion etale sheaves for a proper morphism over an algebraically closed field vanish above twice source dimension and commute with base change",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|HasCohomologicalDimension|comparison.*[Ee]tale",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimits, CategoryTheory.Adjunction",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism from the proetale site to the etale site, classical sheaves are stable under small colimits and extensions and higher direct images along a proper morphism vanish above twice dimension",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: site and topology declarations; none states the full vanishing-and-closure assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "second-reader search: site and topology declarations; none states the full vanishing-and-closure assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -81,5 +312,84 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-fullcd-etale-origin"
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-sf-fullcd-used-class",
+  "worker": "stage1",
+  "summary": "Retained the statement. Replaced the single imported paragraph by eleven steps: absolute vanishing, comparison reflection to etale direct images, arbitrary proper base change with explicit coefficient-forgetting comparisons, and comparison back; then inverse-image, extension, colimit and constant-sheaf arguments. Existing nodes suffice; no new nodes. Removed the unsupported detection-equivalence and unused constructible-origin citations. The original theorem cited for vanishing has a restricted base-change clause, so only its absolute clause is used.",
+  "blueprint": "The first sentence is realized by steps 1–6, with its unrestricted-base-change inference repaired through proper base change. The inverse-image clause is step 7, extension and colimit clauses steps 8–10, and constants/etale origin step 11. The constructible-description aside is unused because the item states no constructible assertion.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Proper base change for torsion abelian sheaves is the generic tool extending the existing absolute bound to arbitrary scheme base changes; the unit has no statement permitting non-finite-type V."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lemma-weil-pbc-etale-pullback-forget-modules",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic comparison, coefficient-forgetting, geometric permanence or abelian-category tool used with exactly its stated hypotheses; it supplies the explicit argument below the unit, without replacing its etale-vanishing/comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "why": "The explicit etale constant-ring/module-valued equivalence retains the underlying abelian sheaf, so the existing higher-direct-image/forgetting comparison is applied to the correct coefficient encoding."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-inverse-image-exact",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-c120a1ab2",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-c120a1ab2 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md with checks for all eleven steps and 34 dependencies. Verified Stacks 095T/09A6/099V/09B1, arbitrary-base-change hypotheses, coefficient encodings, closure arguments, edge cases and acyclicity. Accepted all twelve proposed tool uses. No new nodes, repairs or target weakening."
+ }
 }
