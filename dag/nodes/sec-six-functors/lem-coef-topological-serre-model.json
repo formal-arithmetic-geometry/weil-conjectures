@@ -28,9 +28,128 @@
   "lem-coef-realization-finite-limits",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first in Top, with the same disk sets $I$ and $J$ as in the statement. Its colimits are quotient disjoint unions with the final topology and its limits are the set limits with the initial topology; these descriptions directly satisfy the universal properties. The cited k-space node says that colimits of k-spaces are exactly these topological colimits. Write $W$ also for weak homotopy equivalences in Top. On path components, two-out-of-three and closure under arrow retracts are those of bijections. On based homotopy groups, functoriality gives two-out-of-three for composable group maps and preserves retract diagrams, so retracts of isomorphisms remain isomorphisms. In the case where $f$ and $gf$ are weak equivalences, a basepoint $y$ of the middle space is joined to some $f(x)$ because $\\pi_0(f)$ is surjective; inserting this path and its reverse along the boundary of a based cube gives inverse change-of-basepoint maps, and composing with $g$ gives the corresponding path in the last space. Thus the isomorphism at $f(x)$ implies the isomorphism at $y$. This proves all three cases of two-out-of-three at every basepoint. The compact-open currying lemma will be used below for products with the interval, disks and spheres.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 2.4.3 and Lemma 2.4.4; Section 2.4 opening exponential law; Proposition 2.4.22(3)."
+   }
+  },
+  {
+   "text": "Call an inclusion closed $T_1$ when it is closed and every point outside its image is closed. Every map of $I$ and $J$, and every coproduct of them, has this property. For a pushout $B\\amalg_A X$ of such an inclusion $A\\hookrightarrow B$, the image of a closed $V\\subseteq X$ has preimage $V$ in $X$ and the closed set $i(f^{-1}V)$ in $B$. The quotient topology makes $X\\hookrightarrow B\\amalg_A X$ a closed inclusion. A new point has singleton preimage in $B\\setminus A$ and empty preimage in $X$, so its singleton is closed. For a continuous ordinal chain of these inclusions, an old closed subset stays closed by induction: at a successor use the closed embedding, and at a limit use the final topology. Each new singleton stays closed after the stage where it first occurs; its preimage at earlier stages is empty. Hence every structure inclusion into the union is a closed $T_1$ inclusion. Apply the compact-chain lemma to the compact domains $S^{m-1}$ and $D^m$, including the empty domain and $D^0$. For chains of length $\\omega$, this gives surjectivity of the Hom-colimit map, and injectivity follows from injectivity of all structure maps. Thus the cellular small-object theorem applies to both sets with $\\kappa=\\aleph_0$. Put $C_I={}^{\\pitchfork}(I^{\\pitchfork})$ and $A_J={}^{\\pitchfork}(J^{\\pitchfork})$. It supplies functorial factorizations into $I$-cell then $I^{\\pitchfork}$, and $J$-cell then $J^{\\pitchfork}$, and identifies $C_I,A_J$ with the respective arrow retracts of cell maps. Successive lifting of cells and the colimit universal property at limits show that each cell map has the asserted left lifting property; factoring a left-lifting map and taking its arrow retract proves the converse.",
+   "uses": [
+    "lem-coef-compact-closed-t1-chain",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.5; Proposition 2.4.2; Theorem 2.1.14 and Corollary 2.1.15."
+   }
+  },
+  {
+   "text": "Every $J$-generator is a strong deformation-retract inclusion, using $(x,t,s)\\mapsto(x,(1-s)t)$. A coproduct has the componentwise deformation. In its pushout $B\\amalg_A X$, keep $X$ fixed and apply this deformation on $B$; the two maps agree on $A$. Product with $[0,1]$ preserves the pushout: the compact-open currying bijection converts maps out of its product into compatible maps from $B$ and $X$ into the same function space. The pasted homotopy is therefore continuous and retracts onto $X$. Such an inclusion induces bijections on components and based homotopy groups, since the deformation fixes all old basepoints. Prove by transfinite induction that $X_0\\to X_\\beta$ in a $J$-cell chain is in $W$. The successor step is the deformation and composition. At a limit, a point, a sphere map, a path, or a based sphere homotopy has compact domain and hence factors through one earlier stage by the compact-chain lemma. A point or sphere map can then be represented from $X_0$, and a path or homotopy witnessing equality can be moved back to $X_0$. This gives surjectivity and injectivity on components and on every positive based group. Thus every $J$-cell map is in $W$, and step 1 gives the same for its retracts, so $A_J\\subseteq W$.",
+   "uses": [
+    "lem-coef-compact-closed-t1-chain",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.9 and Lemma 2.4.8, with the pushout homotopy and the limit-ordinal argument written explicitly."
+   }
+  },
+  {
+   "text": "An endpoint inclusion $D^m\\times\\{0\\}\\hookrightarrow D^m\\times[0,1]$ is a finite relative disk-cell map: the rest of the boundary of the cylinder is an $m$-disk attached along $S^{m-1}$ to the initial bottom disk, and the interior is then an $(m+1)$-cell. For $m=0$ this attaches the other endpoint and then the interval. Hence $J\\subseteq I\\text{-cell}$ and any $p\\in I^{\\pitchfork}$ is a Serre fibration. It is surjective by the $m=0$ disk condition, and two points with path-connected images can be joined by lifting a path with prescribed endpoints using $S^0\\hookrightarrow D^1$; therefore $\\pi_0(p)$ is bijective. The pair $(S^n,*)$ is obtained by attaching one $n$-disk along a constant boundary, so each based sphere in the target lifts with prescribed basepoint. For injectivity of $\\pi_n(p)$, a homotopy between two image spheres is a map $(S^n\\times[0,1])/(*\\times[0,1])\\to Y$. Its two ends give $S^n\\vee S^n$; the remaining open cylinder is one $(n+1)$-cell attached to those ends. Lifting that disk gives the based homotopy in the source. Consequently $I^{\\pitchfork}\\subseteq F\\cap W$; also $J^{\\pitchfork}=F$ directly from the definitions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "The boundary-cell observation preceding Lemma 2.4.4 and Proposition 2.4.10."
+   }
+  },
+  {
+   "text": "We next derive the pullback fact needed for disk lifting. Let $p:E\\to B$ be Serre and $g:B'\\to B$ a weak homotopy equivalence. Put $E'=B'\\times_B E$ and write $f:E'\\to E$, $q:E'\\to B'$ for the projections. Kification leaves maps from every compact Hausdorff cube, sphere or cylinder unchanged by the definition of final k-topology. Thus it leaves components, based groups and all the Serre lifting tests unchanged; the k-space fibre is obtained by kifying the topological fibre. Apply the cited natural fibre sequence to these kifications. Corresponding fibres of $E'\\to B'$ and $E\\to B$ are identical. At a chosen $e'$, if $z\\in\\pi_n(E)$, lift $p_*z$ to $t\\in\\pi_n(B')$. Its boundary is zero by naturality, so exactness gives $z'\\in\\pi_n(E')$ above $t$. The element $z(f_*z')^{-1}$ is the image of a fibre class $a$, so multiplying $z'$ by its fibre image gives a preimage of $z$. If $f_*u=1$, the base isomorphism gives $q_*u=1$, so $u$ is the image of a fibre class $a$. Exactness downstairs writes $a=\\delta c$; lift $c$ through the isomorphism on $\\pi_{n+1}(B')$ and use naturality to see that $u=1$. These ordered products apply also for $n=1$. For components, $g$ identifies base components. On a component with a nonempty fibre, use path lifting to compare fibres over the chosen basepoints. The isomorphism on $\\pi_1$ identifies the actions on the common fibre-component set, hence their orbit sets, which the cited node identifies with total-space components. Empty fibres correspond as well, since nonemptiness is constant along a base path by path lifting. Thus $f$ is bijective on components and on all based groups: $f\\in W$.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.18, including the low-degree component argument; Proposition 2.4.22(1)."
+   }
+  },
+  {
+   "text": "For compact disks or spheres $K$, write $Z^K$ for the compact-open mapping space. For $i:S^{n-1}\\hookrightarrow D^n$ and Serre $p:X\\to Y$, put $P=X^{S^{n-1}}\\times_{Y^{S^{n-1}}}Y^{D^n}$ and $Q:X^{D^n}\\to P$, $Q(h)=(h|_{S^{n-1}},ph)$. A Serre lifting problem for $Q$ with parameter $D^m$ is, by compact-open currying, precisely a lifting problem for $p$ with left side $D^m\\times((S^{n-1}\\times[0,1])\\cup(D^n\\times\\{0\\}))\\hookrightarrow D^m\\times D^n\\times[0,1]$. Here is an explicit box-pair identification, so no flattening assertion is left implicit. Use the radial homeomorphism from $D^n$ to $[-1,1]^n$. For $n>0$, put $A=(\\partial[-1,1]^n\\times[0,1])\\cup([-1,1]^n\\times\\{0\\})$. Perspective projection from $(0,2)$ to height 1, followed by vertical reflection, maps $A$ homeomorphically to the bottom face by $(x,t)\\mapsto(x/(2-t),0)$. On the top face use the inverse of perspective projection from $(0,-1)$ of the top-and-sides disk to height 0. Explicitly, $(u,1)$ goes to $(ru,r-1)$, where $r=\\min(2,1/\\|u\\|_\\infty)$ and $r=2$ when $u=0$. On the common top edge both formulas give $(u,0)$. They therefore paste to a boundary homeomorphism taking $A$ onto the bottom face; extend it to the whole box by coning radially from the box centre. For $n=0$ the pair is already the interval with its initial endpoint. With the $D^m$ parameter, it is the generator with index $m+n$. The Serre property therefore provides the lift, proving that $Q$ is Serre. Every $Z\\to *$ is Serre since each cylinder bottom retracts onto itself by projection. Apply the just-proved assertion with $p:Z\\to *$ to get that $Z^{D^n}\\to Z^{S^{n-1}}$ is Serre. All statements here include $n=0$, where the boundary is empty.",
+   "uses": [
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 2.4.13 and Corollary 2.4.14; Lemma 2.4.11 (currying description of Q)."
+   }
+  },
+  {
+   "text": "Now assume $p\\in F\\cap W$. Let $e:Z^{D^n}\\to Z$ be evaluation at the origin and $c:Z\\to Z^{D^n}$ the constant-map section, so $ec=1_Z$. Put $H_t(h)=(v\\mapsto h(tv))$ for $t\\in[0,1]$; its uncurried form $(h,t,v)\\mapsto h(tv)$ is evaluation $Z^{D^n}\\times D^n\\to Z$ (the uncurry of the identity) composed with a continuous map, so currying makes $H:Z^{D^n}\\times[0,1]\\to Z^{D^n}$ continuous, with $H_0=ce$ and $H_1=1$. Hence $e\\in W$: $ec=1$ makes $e$ surjective on components and on every based group; each $h$ is joined to $ce(h)$ by the path $\\gamma_h:t\\mapsto H_t(h)$, so $e$ is injective on components; if $s$ is a based sphere or cube at $h$ with $e_*[s]=1$, then $(x,t)\\mapsto H_t(s(x))$ is a free homotopy from $ces$ to $s$ whose basepoint track is $\\gamma_h$, so $[s]$ is the image of $[ces]=c_*e_*[s]=1$ under the change-of-basepoint isomorphism along $\\gamma_h$ (insert the track along the boundary of the cube as in step 1), whence $[s]=1$. Apply this to $Z=X$ and $Z=Y$: $e_Yp^{D^n}=pe_X$ with $e_X,e_Y,p\\in W$, so two-out-of-three of step 1 gives $p^{D^n}\\in W$. The sphere-mapping lemma gives $p^{S^{n-1}}\\in W$ (kification does not change the compact-domain homotopy tests, as in step 5). The projection $P\\to Y^{D^n}$ is the pullback of $p^{S^{n-1}}$ along the Serre restriction $Y^{D^n}\\to Y^{S^{n-1}}$ from step 6, so step 5 makes it a weak equivalence. Its composite with $Q$ is $p^{D^n}$; two-out-of-three gives $Q\\in W$, and step 6 gives that $Q$ is Serre. Every Serre weak equivalence is surjective: for any target point, choose a source point mapping into its path component by component-surjectivity and lift a path ending at that target point. Thus $Q$ is surjective. Its points are exactly pairs of compatible boundary and disk maps, so its surjectivity says exactly that every square for $i$ and $p$ has a filler. This proves $F\\cap W\\subseteq I^{\\pitchfork}$ and hence equality, without asserting that weakly contractible fibres are homotopy contractible.",
+   "uses": [
+    "lem-coef-compact-open-currying",
+    "lem-coef-sphere-mapping-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemmas 2.4.11 and 2.4.15; Lemma 2.4.17; Theorem 2.4.12 and its displayed pullback square."
+   }
+  },
+  {
+   "text": "By $I^{\\pitchfork}=F\\cap W$, step 2 gives $C_I=C$ and the first required functorial weak factorization system. Since $J^{\\pitchfork}=F$, it gives the second weak factorization system $(A_J,F)$. The inclusion $I^{\\pitchfork}\\subseteq J^{\\pitchfork}$ implies $A_J\\subseteq C$, and step 3 gives $A_J\\subseteq W$. Conversely, let $i:X\\to Y$ be in $C\\cap W$ and factor it as $X\\xrightarrow{j}Z\\xrightarrow{q}Y$ with $j\\in A_J$, $q\\in F$. Since $i$ and $j$ are weak equivalences, $q\\in F\\cap W$. A lift against $i$ gives $s:Y\\to Z$ with $si=j$ and $qs=1_Y$. The arrow maps $(1_X,s)$ and $(1_X,q)$ exhibit $i$ as a retract of $j$. A left lifting class is closed under arrow retracts, by inserting the retract maps into any square and retracting a chosen filler. Therefore $i\\in A_J$ and $A_J=C\\cap W$. This proves both factorizations, both equalities of orthogonal classes, and functoriality of the factorizations.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "The retract argument underlying Theorem 2.1.19, applied after Theorem 2.4.12; no additional recognition theorem is assumed."
+   }
+  },
+  {
+   "text": "Restrict to maps of k-spaces. All domains and codomains of $I,J$ are k-spaces, including $\\varnothing$ and $D^0$, and colimits of k-spaces are the topological colimits by the cited node. The constructions in step 2, starting with a map of k-spaces, therefore stay in k-spaces. Since the inclusion in Top is full, their fillers and functorial maps are the same continuous maps; the right classes are exactly the two lifting classes computed above. The retract argument of step 8, now inside this full subcategory, gives exactly the two stated weak factorization systems on $\\mathcal K$, with its own $C={}^{\\pitchfork}(F\\cap W)$. It does not require extension of a k-space lifting property to arbitrary topological targets. Their generators are $I,J$ because the right classes are precisely $I^{\\pitchfork},J^{\\pitchfork}$. Finally a left lifting class contains its generators and is closed under coproducts, pushouts, continuous transfinite composites and arrow retracts: restrict a square to each summand or pushout piece, choose the fillers there, extend a partial filler at a successor, take the compatible map out of the colimit at a limit, and use the retract maps for a retract. Apply this to ${}^{\\pitchfork}F=C\\cap W$. It proves all of the final closure assertions; only the retract closure of the lifting class is claimed, not a false assertion that unretracted cell maps are closed under retracts.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 2.4.23, proof on printed pp. 58-59; Definition 2.1.9 and Corollary 2.1.15."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-compact-closed-t1-chain",
+  "lem-coef-compact-open-currying",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-sphere-mapping-weak-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Hovey Section 2.4, especially Proposition 2.4.9, Theorem 2.4.12, Proposition 2.4.18 and Theorem 2.4.23. PDF independently read online and in the sandbox on 2026-10-17. Explicit cell induction, Q-mapping-space lifting argument, fibre-sequence chase and restriction to k-spaces; not reconstructed from the theorem statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,15 +192,59 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-16",
    "verdict": "no match: no pinned Mathlib declaration matched the topological model-structure pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre model structure on k-spaces with weak homotopy equivalences and Serre fibrations generated by sphere disk and cylinder endpoint inclusions",
+   "results": "SSet.modelCategoryQuillen.instCategoryWithFibrations; HomotopicalAlgebra.ModelCategory.mk'; HomotopicalAlgebra.ModelCategory; HomotopicalAlgebra.Cylinder; no topological Serre model structure",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat CompactlyGenerated ModelCategory Serre fibrations weak homotopy equivalences",
+   "results": "0 hits (parser error: TopCat was applied as a function to CompactlyGenerated)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|ModelCategory|weakEquivalence|CompactlyGenerated Mathlib/Topology Mathlib/AlgebraicTopology",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Do compactly generated topological spaces have the Serre model structure with weak homotopy equivalences and Serre fibrations?",
+   "results": "CompactlyGeneratedSpace; CompactlyGenerated; HomotopicalAlgebra.ModelCategory.mk'; no topological Serre instance",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-quillen-right-proper",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-topological-serre-model",
+  "worker": "stage1",
+  "summary": "Second reading repaired uncited compactness and sphere-mapping inputs, attached compact-open currying as a Mathlib leaf, and rewrote the proof as nine explicit steps including the Q lifting argument and the k-space restriction. The item statement is unchanged.",
+  "blueprint": "Inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 displayed derived coefficient adjunction, through the recorded cosimplicial-frame ancestry. The blueprint has no separate Serre-model sentence; steps 1-9 supply the foundational topological-model input of the already imported chain. Searched all blueprint chapters for closed T1 and sphere mapping: no matching blueprint theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-08b365bf7",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-08b365bf7 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited node statement in full (realization-finite-limits, def-cbc-enhanced-diagrams-cones, serre-homotopy-exact-sequence, small-object-cell-factorization, def-weil-pbc-category-colimit, def-weil-pbc-quasi-compact-scheme), plus the parent kan-quillen-right-proper, the unit and the chapter. Hovey §2.4 is not archived in literature/ and network access is blocked, so I could not open it at the cited places. proof_origin is agent and WANTED is recorded; every statement and step was instead checked mathematically. The item statement is unchanged; no hypothesis is added and the edge cases S^{-1}=∅ and D^0 are present. Steps 1-9 are correct. Step 2: pushouts of closed T1 inclusions are closed T1, and compact-chain with λ=ω supplies exactly the ℵ_0 smallness hypothesis of the small-object node. Step 3: the pushout deformation is continuous via both currying clauses, and the limit-stage compactness induction is set up. Step 4: J⊆I-cell, and the π_0/π_n lifts use S^0→D^1 and the reduced cylinder. Step 5: the right-properness chase uses only the stated exact-sequence and orbit clauses, and kification is harmless. Step 6: I verified the explicit box homeomorphism formulas, including that they agree on the common edge. Step 7: P→Y^{D^n} is the pullback of p^{S^{n-1}} along the Serre restriction, Q∈W∩F, so Q is surjective. Step 8: the retract argument is sound. Step 9: the restriction to k-spaces works because colimits of k-spaces are topological colimits and 𝒦 is a full subcategory. The new nodes are true and independent, not restatements: compact-chain is Hovey 2.4.2 (proof checked via a closed-discrete-subset argument, tested on A=∅ and non-Hausdorff X_0); sphere-mapping holds for arbitrary spaces by the exponential law and compression (tested r=-1, r=0); the currying leaf was checked at CompactOpen.lean lines 430/435/458/466. rg over the whole DAG found no duplicates, there is no cycle, the route stays in-unit and no tool_uses are needed. FIX 1 (B6): the currying mathlib_match.how gave curry_apply at 436-438; corrected to 435-436. FIX 2 (E5): step 7 claimed 'homotopy equivalence, so p^{D^n}∈W by step 1', which step 1 does not give and the homotopy is not based; I wrote the argument out explicitly (ec=1, track t↦H_t(h), free homotopy with change of basepoint, then 2-of-3 on e_Y p^{D^n}=p e_X). Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -17,10 +17,90 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Construct a simplicial set $E$ by taking $E_k$ to be the maps $u:\\Delta^{k+1}\\to Q$ with last vertex $t$. For a monotone map $\\alpha:[l]\\to[k]$, extend it by $\\alpha^+(l+1)=k+1$ and put $E(\\alpha)(u)=u\\circ\\Delta(\\alpha^+)$. Since $(\\alpha\\beta)^+=\\alpha^+\\beta^+$, these operators satisfy the simplicial identities. Restriction to the initial face $\\Delta^{\\{0,\\ldots,k\\}}$ defines a simplicial map $q:E\\to Q$: restricting $u\\circ\\Delta(\\alpha^+)$ to that face gives $(q(u))\\circ\\Delta(\\alpha)$. All constructions use the simplices and operators of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ET",
+    "place": "Proof, construction of the vertex slice and its projection; explicit degreewise version."
+   }
+  },
+  {
+   "text": "The map $q$ is a right fibration. Indeed, for a square against $\\Lambda_i^k\\hookrightarrow\\Delta^k$ with $k\\ge1$ and $0<i\\le k$, the prescribed slice faces give the faces of $\\Delta^{k+1}$ numbered $j\\ne i,k+1$, and the bottom simplex gives face $k+1$. They agree on intersections by the simplicial identities and the square. Their union is precisely $\\Lambda_i^{k+1}$; its last vertex is $t$. Since $0<i<k+1$, the quasicategory axiom in [def-cbc-enhanced-diagrams-cones] fills this inner horn, giving the required lift in $E$. To fill an inner horn in $E$, first fill its projection in $Q$ and then use this right-fibration lifting property. Hence $E$ is a quasicategory as well.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Proposition 4.3.6.1, vertex-slice special case, proved here directly by the horn-face calculation."
+   }
+  },
+  {
+   "text": "For each vertex $x\\in Q$, the degree-$k$ fiber $E_x=\\{x\\}\\times_QE$ consists exactly of those $u:\\Delta^{k+1}\\to Q$ whose whole initial face is constant at $x$ and whose last vertex is $t$. Its operators are the $\\alpha^+$ of Step 1, so it is literally the right-pinched space $\\operatorname{Map}_Q(x,t)$ of [def-cbc-enhanced-diagrams-cones]. Apply only the Kan-fiber clause of [lem-coef-infinity-right-fibration-fibers], taking its $B=Q$, $E=F$ equal to the constructed $E$, and both projections equal to $q$. Step 2 supplies the quasicategory and right-fibration hypotheses. Thus every $E_x$ is Kan, without a nonemptiness assumption.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01KX",
+    "place": "Construction 4.6.5.1; Kan fibers as in Proposition 4.6.5.5 (01L0), supplied by the cited fiber theorem."
+   }
+  },
+  {
+   "text": "For $k\\ge0$, a lifting square $\\partial\\Delta^k\\to E$ over $b:\\Delta^k\\to Q$ is exactly a map $\\partial\\Delta^{k+1}\\to Q$ with last vertex $t$: its coned faces numbered $0,\\ldots,k$ come from the top boundary map, and its initial face numbered $k+1$ is $b$. The former agree on their intersections by simpliciality of the top map, and agree with $b$ on their initial faces by commutativity of the square. Conversely restrict such a boundary to those coned faces to recover the top map and to the initial face to recover $b$. A lift is in either description a single $(k+1)$-simplex extending all these faces. For $k=0$ the data are just the two vertices $b(0),t$, and a lift is an edge $b(0)\\to t$. Consequently the boundary-extension condition of the item is equivalent to $q$ being a trivial Kan fibration in [def-weil-pbc-trivial-kan-fibration], including its dimension-zero surjectivity clause.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/05ET",
+    "place": "Proof, equivalence of the displayed boundary and relative lifting conditions, specialized to n=-2; all faces and k=0 written explicitly."
+   }
+  },
+  {
+   "text": "Assume every $\\operatorname{Map}_Q(x,t)$ is contractible. By Step 3 these are exactly the Kan vertex fibers of the right fibration $q$. Here contractible means weakly contractible by [def-cbc-enhanced-diagrams-cones]. The hypotheses of [lem-coef-right-fibration-contractible-fibers] therefore hold, and its conclusion says $q$ is a trivial Kan fibration. The explicit correspondence of Step 4 supplies every required extension in $Q$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01NU",
+    "place": "Proposition 4.4.2.14, implication (3) to (1), applied to the vertex slice used in 05ET."
+   }
+  },
+  {
+   "text": "Conversely assume the boundary-extension condition. Step 4 gives all boundary lifts for $q$. Fix $x\\in Q_0$. Given $a:\\partial\\Delta^k\\to E_x$, compose it into $E$ and take the bottom simplex in $Q$ to be constant at $x$. A lift for $q$ then lands in $E_x$, so $E_x\\to\\Delta^0$ lifts every boundary, including $k=0$. It is a Kan fibration because $E_x$ is Kan by Step 3. Apply [lem-cbc-kan-fibration-fiber-criterion] to this map: its trivial-Kan-fibration clause implies it is a weak homotopy equivalence. By [def-cbc-enhanced-diagrams-cones] this means $E_x$ is weakly contractible. Step 3 identifies $E_x$ with $\\operatorname{Map}_Q(x,t)$, proving the assertion for every $x$.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZP",
+    "place": "Proposition 3.3.7.6, trivial Kan implies weak homotopy equivalence, for each vertex fiber over a point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-right-fibration-fibers",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/05ET",
+  "place": "Explicit n=-2 slice/boundary proof underlying Proposition 4.7.3.11 (06R1), using the existing right-fibration fiber criterion (01NU) for the forward direction and the Kan criterion (00ZP) for the reverse. Sources read online; archival copies WANTED in report.md."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +150,63 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"terminal.*boundary|final.*boundary|boundary.*terminal|boundary.*final\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: SimplexCategory.isTerminalZero is about the ordinary indexing category. Inner-horn and ordinary final-functor theorems do not characterize a final vertex of an arbitrary quasicategory by boundary extension."
+  },
+  {
+   "tool": "grep",
+   "query": "RightFibration|right_fibration|contractible.*fiber|boundary.*terminal",
+   "results": "{\"t\": \"2026-10-16T17:18:29Z\", \"tool\": \"grep\", \"query\": \"RightFibration|right_fibration|contractible.*fiber|boundary.*terminal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match; pointed simplices, ordinary terminal objects, and horn inclusions do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial right fibration with contractible point fibers is an acyclic fibration",
+   "results": "{\"t\": \"2026-10-16T17:18:39Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial right fibration with contractible point fibers is an acyclic fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\", \"HomotopicalAlgebra.mem_fibrations\"], \"digest\": \"5d0b8d7f6ae7fb11\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match; pointed simplices, ordinary terminal objects, and horn inclusions do not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"boundary\", \"HasLiftingProperty\"",
+   "results": "{\"t\": \"2026-10-16T17:19:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"boundary\\\", \\\"HasLiftingProperty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match; pointed simplices, ordinary terminal objects, and horn inclusions do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SSet terminal object simplex boundary lifting right mapping space",
+   "results": "{\"t\": \"2026-10-16T17:19:07Z\", \"tool\": \"leanfinder\", \"query\": \"SSet terminal object simplex boundary lifting right mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.Augmented.stdSimplex_map_right\", \"SSet.horn.const\", \"SSet.horn.ι\", \"SSet.PtSimplex.RelStruct.map\", \"SSet.ι₀\", \"SSet.horn_obj_zero\"], \"digest\": \"b34ce5891f210fdc\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match; pointed simplices, ordinary terminal objects, and horn inclusions do not state this criterion."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-terminal-boundary-extension",
+  "worker": "stage1",
+  "summary": "Second reading removed the generalized restatement node. Constructed the vertex slice degreewise, proved right-horn lifting by an inner horn one dimension higher, identified its Kan fibers, and wrote the boundary-lifting correspondence including dimension zero. The existing right-fibration contractible-fiber theorem and Kan-fibration criterion prove the two directions. Statement unchanged; no new nodes.",
+  "blueprint": "The item has no direct blueprint theorem node; its recorded ancestor is thm-cbc-finite-level-proetale. The split realizes the proof opening foundation used by that theorem, specifically the final-vertex boundary criterion needed in the terminal-object contractibility step.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-right-fibration-fibers",
+    "why": "Only the generic Kan-fiber clause is used for the explicitly constructed vertex slice; no cone calculus, equivalence-on-fibers clause, or unit theorem is used."
+   },
+   {
+    "node": "lem-coef-right-fibration-contractible-fibers",
+    "why": "Generic right-fibration lifting criterion, used as a black box after constructing the slice and identifying its fibers. It does not replace a blueprint unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-right-fibration-contractible-fibers"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-0252647d2",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-0252647d2 (reviewer sub-agent of L); spot-checked: I read the contract files, delivery-errors A–F, the packet, the full report, the item's six steps, and the full statements of all five cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-right-fibration-fibers, def-weil-pbc-trivial-kan-fibration, lem-coef-right-fibration-contractible-fibers, lem-cbc-kan-fibration-fiber-criterion), plus the unit sk-prop-sf-cbc and the only citer, lem-cbc-enhanced-functor-cone-calculus. The statement is unchanged and agrees with Kerodon 06R1 (Prop 4.7.3.11, read online; its proof is the n=-2 case of 05ET), with finality taken as contractible right-pinched Map. Step 1 builds the Joyal slice Q_{/t} degreewise. Step 2 uses the identity (Λ^k_i⋆Δ^0)∪Δ^k=Λ^{k+1}_i, which is an inner horn for 0<i≤k, so q is a right fibration and E is a quasicategory. Step 3: E_x is literally Map_Q(x,t) of def-cbc, and the Kan-fiber clause of the fibers lemma applies with F=E. Step 4: lifting squares against ∂Δ^k correspond to boundary maps ∂Δ^{k+1}→Q ending at t, and k=0 gives the p_0-surjectivity of 08NL. Step 5 applies the contractible-fibers lemma (01NU). Step 6 base-changes to E_x→Δ^0, which lifts against every boundary, and the trivial-Kan ⇒ weak-equivalence clause (00ZP) makes E_x weakly contractible. Edge cases checked: Δ^0, N(0→1) at t=1 and t=0, two discrete points, BG with G nontrivial, and Q empty. No new nodes: the earlier truncated-criterion restatement was already dropped and is cited nowhere. The cited nodes' dependency closure contains no cycle. The two declared tool uses (lem-coef-infinity-right-fibration-fibers, lem-coef-right-fibration-contractible-fibers) are generic right-fibration black boxes and replace no unit step: accepted. proof_deps equals the union of the step uses; proof_origin is agent because Kerodon is not archived. No SGA source is used. No fixes written. Details are in review.md."
+ }
 }

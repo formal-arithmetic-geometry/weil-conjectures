@@ -28,9 +28,75 @@
  "stmt_deps": [
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $p,q,x,y$ and the family $F$. All categories used below are small after the universe enlargement in [def-coef-zigzag-homotopy-calculus]: their objects and morphisms are finite diagrams in the chosen small category. Let $P=P_p(x)$ have objects the $p$-diagrams whose initial vertex is $x$ and whose final vertex $a$ is allowed to vary; morphisms are commuting vertical $W$-maps, identity only at $x$. Evaluation at the last vertex is a functor $t:P\\to W$. Define $Q=Q_q(y)$ similarly using $q$-diagrams with variable initial vertex $b$, fixed final vertex $y$, and evaluation $s:Q\\to W$ at the initial vertex. Identity and composition are defined vertexwise. If $p$ is empty, $P$ is the one-object identity category at $x$; if $q$ is empty, $Q$ is the one-object identity category at $y$. These are auxiliary categories explicitly constructed here, not extra hypotheses.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.1 and Example 9.3; auxiliary diagram categories with one free endpoint"
+   }
+  },
+  {
+   "text": "First fix an arbitrary target $b$ and suppose the common first letter of $u,v$ is $-$. The source action is covariant: for $w:a\\to a'$ in $W$, $w_!$ replaces the first arrow $a\\leftarrow c$ by $a'\\xleftarrow{w\\circ h}c$. It changes no other vertex or arrow. Thus $D_u:P\\to\\mathrm{Cat}$, $A\\mapsto Z_u(tA,b)$, is a functor; define $D_v$ likewise. By the definition of $\\operatorname{Th}$ in [lem-coef-thomason-grothendieck-comparison], gluing defines an isomorphism $\\operatorname{Th}_P D_u\\cong Z_{pu}(x,b)$. Indeed a morphism is uniquely a prefix morphism $\\alpha:A\\to A'$ with endpoint $w=t\\alpha$, and a fixed-endpoint morphism $w_!U\\to U'$ in $Z_u(tA',b)$. Its first square is precisely the original seam square $w\\circ h=h'\\circ k$, where $k$ is the next vertical map; all remaining squares are unchanged. Restricting a full diagram gives the inverse correspondence. Vertexwise composition agrees with Grothendieck composition, since composing endpoint maps composes the first arrow and all other vertical maps compose vertexwise. The same identification holds for $v$. Strict naturality of $F$ in the source gives a natural transformation $D_u\\to D_v$. Under these identifications its induced functor is exactly replacement by $F$ on the $u$-part, retaining the prefix.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 9.4; covariant source case, expanded by the one-sided construction of Example 9.2"
+   }
+  },
+  {
+   "text": "If the common first letter is $+$, source composition is contravariant: $w^*$ replaces $a'\\xrightarrow{h'}c'$ by $a\\xrightarrow{h'\\circ w}c'$. Now $D_u:P^{\\mathrm{op}}\\to\\mathrm{Cat}$ sends $A$ to $Z_u(tA,b)$. The definition of $\\operatorname{Gr}$ in [lem-coef-thomason-grothendieck-comparison] gives $\\operatorname{Gr}_{P^{\\mathrm{op}}}D_u\\cong Z_{pu}(x,b)$. Its morphism over $\\alpha:A\\to A'$ in $P$ is a fiber morphism $U\\to w^*U'$ at $tA$, where $w=t\\alpha$. The first-square equation is $k\\circ h=h'\\circ w$, exactly the seam equation in the full diagram. Restriction and gluing are inverse on objects and morphisms and respect vertexwise composition. The same holds for $v$; strict source naturality again gives a natural transformation whose total functor is the desired replacement. In either first-letter case every component is $F_{tA,b}$, a nerve weak homotopy equivalence by hypothesis. The last assertion of [lem-coef-thomason-grothendieck-comparison], using $P$ with $\\operatorname{Th}$ in step 2 or $P^{\\mathrm{op}}$ with $\\operatorname{Gr}$ here, therefore proves that the replacement $F^p_{x,b}:Z_{pu}(x,b)\\to Z_{pv}(x,b)$ induces a weak homotopy equivalence for every $b$. The base category is the same on both sides; no assumption about its homotopy type or about endpoint transport being a weak equivalence is required.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 9.4 and Corollary 9.6, first cut; homotopy-invariance consequence of the existing Thomason node"
+   }
+  },
+  {
+   "text": "The family $F^p_{x,b}$ is strictly natural in $b$ for the common last-letter action. On objects, composing a target $W$-map into the last arrow of the $u$-part before or after applying $F$ agrees by the assumed strict target naturality of $F$; the prefix is unchanged. On a full morphism, the source-seam factorization in step 2 or 3 is preserved by that target action, because composition at the two endpoints commutes. For a one-letter $+$ word $h:a\\to b$, source precomposition by $w:a_0\\to a$ and target postcomposition by $z:b\\to b_1$ give $(z\\circ h)\\circ w=z\\circ(h\\circ w)$. For a one-letter $-$ word $h:b\\to a$, source postcomposition by $w:a\\to a_1$ and target precomposition by $z:b_0\\to b$ give $(w\\circ h)\\circ z=w\\circ(h\\circ z)$. For longer words the actions change separate boundary arrows. On vertical morphisms the interior maps are unchanged. A fixed-target last square $h=h'\\circ k$ for $+$ becomes $z\\circ h=(z\\circ h')\\circ k$ after postcomposition; a square $k\\circ h=h'$ for $-$ becomes $k\\circ(h\\circ z)=h'\\circ z$ after precomposition. Each follows by associativity. Thus target composition preserves the fiber morphisms and their source-seam factorizations in both cases. The same naturality equality holds on the fixed-endpoint fiber morphism by the hypothesis on $F$. Thus the replacements agree on every vertex and vertical arrow, proving equality of functors, rather than just a natural isomorphism. The words $pu,pv$ remain nonempty and have the same last letter.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Example 9.3 and naturality in Section 9.1; compatibility needed for the second cut"
+   }
+  },
+  {
+   "text": "Put $r=pu$ or $pv$ and use the suffix category $Q$ of step 1. If the common last letter is $+$, define $E_r:Q\\to\\mathrm{Cat}$ by $B\\mapsto Z_r(x,sB)$, with covariant target action $w_!$ composing $w:b\\to b'$ after the last forward arrow. Gluing identifies $\\operatorname{Th}_Q E_r$ with $Z_{rq}(x,y)$: a full morphism uniquely consists of a suffix morphism $\\beta:B\\to B'$ and a fiber morphism $w_!R\\to R'$, $w=s\\beta$. For final arrows $h:c\\to b$, $h':c'\\to b'$ and preceding vertical map $k:c\\to c'$, its last-square equation is $w\\circ h=h'\\circ k$. If the common last letter is $-$, use $E_r:Q^{\\mathrm{op}}\\to\\mathrm{Cat}$ and $\\operatorname{Gr}_{Q^{\\mathrm{op}}}E_r$: the target action $w^*$ precomposes the last backward arrow $h':b'\\to c'$ by $w$, and the fiber morphism is $R\\to w^*R'$ with equation $k\\circ h=h'\\circ w$. These equations are exactly the seam squares of the full zigzag in the two cases. Restriction and gluing are inverse, and composition agrees by associativity and vertexwise composition. By step 4 the family $F^p$ gives a natural transformation of these diagrams; its component at $B$ is $F^p_{x,sB}$, which is a nerve weak homotopy equivalence by step 3. Apply the last assertion of [lem-coef-thomason-grothendieck-comparison] over $Q$ or $Q^{\\mathrm{op}}$ respectively. The resulting total functor retains $p$ and $q$ and applies $F$ to the intervening part, so it is the functor in the statement and its nerve is a weak homotopy equivalence. When a surrounding word is empty the corresponding base is the terminal category described in step 1, and the same identifications and argument apply.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Proposition 9.4 and Corollary 9.6, second cut; explicit covariant and contravariant target cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-thomason-grothendieck-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction; auxiliary zigzag foundation. Explicit two-cut argument checked against Dwyer–Kan, Calculating simplicial localizations, Section 9, and Low, arXiv:1409.8062, Definition 1.5, Theorem 1.6 and Lemma 1.3, read online; these papers are not stored locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -136,10 +202,87 @@
    "results": "{\"t\": \"2026-10-16T16:32:09Z\", \"tool\": \"grep\", \"query\": \"homotopyColimit|homotopy_colimit|[Tt]homason|[Gg]rothendieck.*[Ww]eak\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\"], \"digest\": \"74fade311f284188\"}",
    "date": "2026-10-16",
    "verdict": "Independent final second reading: no match. The semantic hits concern ordinary and 2-truncated nerve adjunctions/full faithfulness and their product comparisons. NerveAdjunction.lean:343-383 was read; these are not statements of weak homotopy invariance of relative zigzag substitution. The three source grep hits concern Grothendieck topologies, not Grothendieck constructions, and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly endpoint natural pointwise weak homotopy equivalence of relative zigzag categories remains a nerve weak equivalence after concatenating arbitrary fixed words",
+   "results": "8 hits: CategoryTheory.Nerve.strictSegal, CategoryTheory.nerve.homEquiv_comp, CategoryTheory.nerve.homEquiv, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, CategoryTheory.nerve.homEquiv_apply, CategoryTheory.nerve.homEquiv_symm_apply, CategoryTheory.nerveAdjunction. These concern Segal conditions, nerve edges and the nerve adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"nerve\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "zigzag.*[Nn]erve|[Nn]erve.*zigzag|[Gg]rothendieck.*[Ww]eak|[Tt]homason",
+   "results": "OK, 3 hits: Mathlib/CategoryTheory/Sites/Pretopology.lean:57; Sites/Monoidal.lean:17; Sites/ConstantSheaf.lean:131. All concern Grothendieck topologies, not constructions.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Objectwise weak homotopy equivalences of category valued diagrams induce weak homotopy equivalences of their Grothendieck constructions",
+   "results": "8 hits: HomotopicalAlgebra.weakEquivalences_over_def; CategoryTheory.Grothendieck.grothendieckTypeToCat; HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff; CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence; HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences; HomotopicalAlgebra.weakEquivalences; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff. The Grothendieck hits concern categories of elements and ordinary colimits under final functors.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Thomason homotopy invariance of the Grothendieck construction for natural transformations of diagrams of categories which are weak equivalences on nerves in each fiber",
+   "results": "8 hits, all in Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction: SSet.Truncated.HomotopyCategory.homToNerveMk_comp, homToNerveMk, functorEquiv, homToNerveMk_comp_assoc, descOfTruncation; CategoryTheory.nerve.functorOfNerveMap_nerveFunctor₂_map; CategoryTheory.nerveFunctorCompHoFunctorIso; CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf. These concern the truncated nerve adjunction, not Grothendieck homotopy invariance.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"WeakEquivalence\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyColimit|homotopy_colimit|Grothendieck.*[Nn]erve|[Nn]erve.*Grothendieck|[Hh]omotopy.*[Ff]raction",
+   "results": "OK, 2 hits: Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:34,38, ordinary left/right calculus of fractions on the homotopy category. Read lines 25–43; no relative zigzag nerve comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckTypeToCat|fiberwiseColimitMapCompEquivalence",
+   "results": "OK, 8 hits: Mathlib/CategoryTheory/Grothendieck.lean:397,399,403,405,415; Mathlib/CategoryTheory/Limits/Final.lean:1130,1159,1163. Read Grothendieck.lean:395–428 and Final.lean:1120–1149: the first equivalence identifies a type-valued Grothendieck construction with a category of elements; the second assumes Final components and compares ordinary Type-valued colimits. Neither states the item nor its weak-homotopy ingredient.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states relative-zigzag concatenation invariance or pointwise nerve weak-equivalence invariance of Grothendieck constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]lassifying|[Ww]eak[Ee]quivalence|IsWeakHomotopyEquivalence).*(Grothendieck|[Cc]ategoryOfElements)|(Grothendieck|[Cc]ategoryOfElements).*([Cc]lassifying|[Ww]eak[Ee]quivalence|IsWeakHomotopyEquivalence)",
+   "results": "{\"t\": \"2026-10-16T17:19:26Z\", \"tool\": \"grep\", \"query\": \"([Cc]lassifying|[Ww]eak[Ee]quivalence|IsWeakHomotopyEquivalence).*(Grothendieck|[Cc]ategoryOfElements)|(Grothendieck|[Cc]ategoryOfElements).*([Cc]lassifying|[Ww]eak[Ee]quivalence|IsWeakHomotopyEquivalence)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no match. Read Grothendieck.lean:395–428: grothendieckTypeToCat compares a type-valued Grothendieck construction with the category of elements, not their weak homotopy invariance. The Loogle hit at Sites/Hypercover/Homotopy.lean:271 is about refining two hypercover maps to a homotopy; it makes no assertion about category-valued diagrams or nerves. Other semantic hits concern inherited weak-equivalence properties or nerve adjunctions. The independent source grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"homotopy\"",
+   "results": "{\"t\": \"2026-10-16T17:19:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.exists_nonempty_homotopy\"], \"digest\": \"fe07ade032acc099\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no match. Read Grothendieck.lean:395–428: grothendieckTypeToCat compares a type-valued Grothendieck construction with the category of elements, not their weak homotopy invariance. The Loogle hit at Sites/Hypercover/Homotopy.lean:271 is about refining two hypercover maps to a homotopy; it makes no assertion about category-valued diagrams or nerves. Other semantic hits concern inherited weak-equivalence properties or nerve adjunctions. The independent source grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objectwise weak equivalences on classifying spaces induce weak equivalences on the category of elements of a functor to small categories",
+   "results": "{\"t\": \"2026-10-16T17:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"Objectwise weak equivalences on classifying spaces induce weak equivalences on the category of elements of a functor to small categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.weakEquivalences_over_iff\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"SSet.hoFunctor\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\"], \"digest\": \"48808f7166d1e227\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no match. Read Grothendieck.lean:395–428: grothendieckTypeToCat compares a type-valued Grothendieck construction with the category of elements, not their weak homotopy invariance. The Loogle hit at Sites/Hypercover/Homotopy.lean:271 is about refining two hypercover maps to a homotopy; it makes no assertion about category-valued diagrams or nerves. Other semantic hits concern inherited weak-equivalence properties or nerve adjunctions. The independent source grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-homotopy-fractions-hammock-comparison",
@@ -147,5 +290,20 @@
   "group": "Q68"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-zigzag-concatenation-invariance",
+  "worker": "stage1",
+  "summary": "No exact sorry-free project declaration found. Kept the statement and expanded both cuts using explicitly constructed one-free-endpoint diagram categories. Checked all four boundary variances, strict naturality after the first cut, smallness and empty contexts. Reused the existing Thomason/Grothendieck comparison theorem; no new nodes or duplicate clause nodes are needed. Mathlib searches found nerve and ordinary-colimit facts, not this homotopy-invariance statement.",
+  "blueprint": "Realizes the auxiliary localization-mapping-space foundation of prop-coef-integral-exceptional-adjoint, current blueprint proof paragraph 2 (derived coefficient adjunction in the displayed R Hom / R lim calculation), through the recorded ancestry; expands the two-cut argument cited as Dwyer–Kan Proposition 9.4 and Corollary 9.6. Does not change the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-02cc6cc29",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-02cc6cc29 (reviewer sub-agent of L); spot-checked: Read the item, the report and both cited node statements in full: def-coef-zigzag-homotopy-calculus and lem-coef-thomason-grothendieck-comparison, including its Th/Gr morphism formulas and its last objectwise-invariance assertion. Also read the parent's citing step in lem-coef-homotopy-fractions-hammock-comparison and the blueprint ancestor's paragraph 2. The statement is unchanged and correct. Endpoint variances: first − covariant, first + contravariant, last + covariant, last − contravariant. Step 2: in Th_P D_u the first-letter-minus seam square is h'k = w h. Step 3: Gr over P^op has fiber U -> w^*U' with square k h = h' w. Step 4: target naturality of F^p is strict, by associativity in both last-letter cases and for one-letter u. Step 5: Th over Q for a last + and Gr over Q^op for a last −, with the components being the step-3 equivalences. All of these were checked against the cited formulas. Tested empty p and q, one-letter u, W = C on [1], and u = '−', v = '−−' identity insertion. No invertibility, nonemptiness or 2-of-3 is used. Both cited nodes are in the item's unit sk-prop-sf-biduality-general, so there are no tool_uses. The comparison node's 50-node closure excludes the item, so the graph stays acyclic. Searched the DAG for concatenation, Grothendieck construction, DK 9.4/9.6 and zigzag: the aspherical-base-change, special-resolution, special-hammock, hammock-pair, free-factor and DK-cofibrant nodes state different results, so there is no duplicate, and there are no new nodes. Mathlib searches span all three kinds, verdict no match. Dwyer–Kan and Low are not in the local literature, so the source could not be read at the cited place; the proof is correctly marked agent-written and the WANTED lines stand. Not a target node; no SGA source. No changes made."
+ }
 }

@@ -30,9 +30,84 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m\\geq0$. By [def-cbc-enhanced-diagrams-cones], an $r$-simplex of $\\Delta^1\\times\\Delta^m$ is a pair of weakly increasing maps, equivalently a weak chain in $\\{0,1\\}\\times\\{0,\\ldots,m\\}$. The ordered list $V_q=((0,0),\\ldots,(0,q),(1,q),\\ldots,(1,m))$ is a strictly increasing chain with $m+2$ entries. Postcomposition with this list defines the specified $\\sigma_q$, because it commutes with precomposition. Its entries are distinct, so it is injective in every degree. Its image consists exactly of chains whose vertices belong to $V_q$: the positions of those vertices give the unique weakly increasing preimage.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  },
+  {
+   "text": "Define $X_0$ as in the statement and recursively set $X_{q+1}=X_q\\cup\\operatorname{im}(\\sigma_q)$. Each is a simplicial subset: precomposition preserves membership in each image, in the terminal endpoint, and in the boundary, and preserves unions. Thus $X_q=X_0\\cup\\bigcup_{p<q}\\operatorname{im}(\\sigma_p)$. In the chain description of [def-cbc-enhanced-diagrams-cones], a chain is in $\\Delta^1\\times\\partial\\Delta^m$ exactly when its second coordinates omit some element of $\\{0,\\ldots,m\\}$. For $m=0$ no nonempty chain does so, agreeing with the prescribed empty boundary.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  },
+  {
+   "text": "Every chain belongs to some $\\operatorname{im}(\\sigma_q)$. If it has no vertex with first coordinate $0$, take $q=0$. Otherwise let $q$ be the largest second coordinate among its vertices with first coordinate $0$. All such vertices have second coordinate at most $q$; all vertices with first coordinate $1$ have second coordinate at least $q$, by monotonicity of the original chain. All its vertices therefore lie in $V_q$, and the unique positions in $V_q$ give its preimage. This argument allows repeated vertices and chains with no first coordinate $1$. Consequently $X_{m+1}=\\Delta^1\\times\\Delta^m$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  },
+  {
+   "text": "Fix $q$ and consider each face $d_j\\Delta^m\\subseteq\\Delta^{m+1}$ for $j\\ne q+1$. If $j<q$, deleting the $j$th vertex of $V_q$ omits second coordinate $j$; if $j>q+1$, it omits second coordinate $j-1$. Those faces map into the boundary part of $X_0$. The remaining face is $j=q$. For $q=0$ it has only vertices with first coordinate $1$, so maps into the endpoint part of $X_0$. For $q>0$, its vertices are $(0,0),\\ldots,(0,q-1),(1,q),\\ldots,(1,m)$, all belonging to $V_{q-1}$, so it maps into $\\operatorname{im}(\\sigma_{q-1})\\subseteq X_q$. The horn is the union of precisely these faces, by [def-cbc-enhanced-diagrams-cones]. Hence $\\Lambda_{q+1}^{m+1}\\subseteq\\sigma_q^{-1}X_q$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  },
+  {
+   "text": "Conversely, an $r$-simplex $t:[r]\\to[m+1]$ outside $\\Lambda_{q+1}^{m+1}$ contains every vertex other than possibly $q+1$, by the horn definition of [def-cbc-enhanced-diagrams-cones]. Thus $\\sigma_qt$ contains $(0,0),\\ldots,(0,q)$ and $(1,q+1),\\ldots,(1,m)$. Its second coordinates cover all of $\\{0,\\ldots,m\\}$, so it is outside the boundary part of $X_0$. It contains $(0,q)$, so it is outside the terminal endpoint, and outside every $\\operatorname{im}(\\sigma_p)$ with $p<q$, whose vertices with first coordinate $0$ have second coordinate at most $p$. Therefore it is outside $X_q$. This proves the exact degreewise identity $\\sigma_q^{-1}X_q=\\Lambda_{q+1}^{m+1}$, including all degenerate simplices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  },
+  {
+   "text": "Verify the pushout directly using the colimit universal property [def-weil-pbc-category-colimit]. Given any simplicial set $T$ and maps $f:X_q\\to T$ and $g:\\Delta^{m+1}\\to T$ agreeing after restriction to the horn, define $h:X_{q+1}\\to T$ in each degree by $h(x)=f(x)$ for $x\\in X_q$ and $h(\\sigma_q(t))=g(t)$ on the image of $\\sigma_q$. Injectivity of $\\sigma_q$ makes the second rule unambiguous; Step 5 and the agreement on the horn make the two rules agree on their overlap. For a simplicial operator, both subsets are stable and each rule commutes with that operator because $f,g,\\sigma_q$ are simplicial. Hence $h$ is a simplicial map. It is unique since these two subsets cover $X_{q+1}$. This is the required pushout, with its maps exactly the horn restriction of $\\sigma_q$ and $\\sigma_q$ itself. The recursive definition, the endpoint computation, and Step 3 give every remaining clause. In particular at $m=0$ this is the attachment of $\\Delta^1$ along $\\Lambda_1^1=\\{1\\}$ to $X_0=\\{1\\}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12 (00TH), proof; explicit degreewise details supplied by Q70. This is a Kerodon tag, not a Stacks tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00TH",
+  "place": "Lemma 3.1.2.12 (00TH), explicit chain and universal-property expansion of its proof; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +164,59 @@
    "results": "{\"t\": \"2026-10-16T15:52:00Z\", \"tool\": \"grep\", \"query\": \"weaklySaturated|WeaklySaturated|pushoutObjObj.*(Stable|stable|[Cc]olimit)|[Pp]rism|[Ss]huffle\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no exact match: the semantic hits give horn definitions, product-simplex coordinates and SSet.horn₂₀.isPushout. The Loogle hits are only horn₂₀, horn₂₁ and horn₂₂.isPushout (HornColimits.lean:30-130, read), pushouts constructing individual two-dimensional horns, not the full finite prism filtration. The AlgebraicTopology grep has zero hits. Retain the statement-only helper."
+  },
+  {
+   "tool": "grep",
+   "query": "prism|shuffle|filtration|horn.*[Pp]rod",
+   "results": "{\"t\": \"2026-10-16T16:54:56Z\", \"tool\": \"grep\", \"query\": \"prism|shuffle|filtration|horn.*[Pp]rod\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"c8b85751082125a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial prism has a finite filtration by horn attachments relative to one endpoint and its boundary",
+   "results": "{\"t\": \"2026-10-16T16:54:56Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial prism has a finite filtration by horn attachments relative to one endpoint and its boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Simplicial.term∂Δ[_]\", \"SSet.horn\", \"SSet.horn.faceι_ι\", \"SSet.boundary\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.ι_ι_assoc\", \"SSet.horn_obj\", \"SSet.horn.faceι_ι_assoc\"], \"digest\": \"9ad2b7fcc7d06f5b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"horn\", \"IsPushout\"",
+   "results": "{\"t\": \"2026-10-16T16:54:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"horn\\\", \\\"IsPushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"SSet.horn₂₀.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₂.isPushout\"], \"digest\": \"234be66bbfce17b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prism Delta one times Delta n admits a filtration relative to its terminal endpoint and boundary by pushouts of horns with index i plus one",
+   "results": "{\"t\": \"2026-10-16T16:54:57Z\", \"tool\": \"leanfinder\", \"query\": \"The prism Delta one times Delta n admits a filtration relative to its terminal endpoint and boundary by pushouts of horns with index i plus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn\", \"SSet.horn₂₀.isPushout\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.J\", \"SSet.PtSimplex.MulStruct\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\"], \"digest\": \"a837bd482f025b98\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "objEquiv|orderHomOfSimplex|isPushout",
+   "results": "{\"t\": \"2026-10-16T16:55:18Z\", \"tool\": \"grep\", \"query\": \"objEquiv|orderHomOfSimplex|isPushout\", \"sub\": \"AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"40\", \"43\", \"44\", \"46\", \"48\"], \"digest\": \"b7c1df514f18ef37\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulate the product of two standard simplices by monotone lattice paths and attach the interval shuffles in increasing order along horns",
+   "results": "{\"t\": \"2026-10-16T16:55:28Z\", \"tool\": \"leanfinder\", \"query\": \"Triangulate the product of two standard simplices by monotone lattice paths and attach the interval shuffles in increasing order along horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.triangle\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.prodStdSimplex.orderHomOfSimplex\", \"SSet.horn.primitiveTriangle\", \"SSet.horn.primitiveTriangle_coe\", \"SSet.PtSimplex.MulStruct\", \"SSet.prodStdSimplex.orderHomOfSimplex_coe\", \"SSet.horn\"], \"digest\": \"8f8a17f4d67a717b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def objEquiv|objEquiv_δ_apply|lemma isPushout",
+   "results": "{\"t\": \"2026-10-16T16:55:43Z\", \"tool\": \"grep\", \"query\": \"def objEquiv|objEquiv_δ_apply|lemma isPushout\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits.lean\"], \"digest\": \"e7f74dac6c245777\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HornColimits.lean:54,87,120 constructs individual dimension-two horns as pushouts; ProdStdSimplex.lean:40-76 gives product coordinates and face evaluation only. RelativeCellComplex.lean:129,569 requires a proper pairing and rank function, which are not this explicit finite filtration. Monoidal.lean:299 is the union-product pushout, and Skeleton.lean:395 is the skeletal boundary-cell pushout. UnionProd.lean uses a different general pairing. None states the specified successive sigma maps and horns as a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-right-anodyne-product",
@@ -100,5 +224,20 @@
   "group": "Q39"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-right-prism-boundary",
+  "worker": "stage1",
+  "summary": "Constructed the specified shuffle simplices and filtration, checked coverage in every degree, computed the exact horn preimage on arbitrary weak chains, and proved each pushout by an explicit unique simplicial gluing map. No new nodes: all arguments are finite-order and set operations from the cited definitions. No change to the statement.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, displayed derived coefficient adjunction: this supplies the boundary-prism combinatorics through the pre-existing right-anodyne-product/exponentiation ancestry recorded in blueprint.from. The six steps expand Kerodon 00TH rather than changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-07769651e",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-07769651e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. I checked it against Kerodon 3.1.2.12 (tag 00TH), read online since no archival copy exists. The X(0) = Δ^1×∂Δ^n ∪ {1}×Δ^n form, the right horns Λ_{q+1}^{m+1}, the σ_q vertex formulas and X_{q+1} = X_q ∪ im σ_q all match, and ∂Δ^0 = ∅ is the right convention for m = 0. Both cited statements say what the steps take from them: def-cbc-enhanced-diagrams-cones gives monotone-map simplices, the horn as maps omitting a vertex other than i, and degreewise products; def-weil-pbc-category-colimit gives the unique-factorization colimit. I checked each step. Step 1: σ_q is injective and its image is exactly the chains inside V_q. Step 2: each X_q is a simplicial subset, and the boundary is the set of chains whose second coordinates omit a value. Step 3: coverage via the largest second coordinate among first-coordinate-0 vertices, or q = 0 if there are none. Step 4: faces j<q, j>q+1 and j=q (both q=0 and q>0) land in X_q. Step 5: the horn preimage is exact even for degenerate simplices, which closes the source's 'inspection' step. Step 6: the pushout holds by direct simplicial gluing. All steps are honestly elementary, and none restates a clause of the item. Edge cases m=0, q=0 and q=m are correct, and the item matches its use in the parent lem-coef-infinity-right-anodyne-product. My own enumeration for m≤4 and r≤m+3 confirmed injectivity, the exact horn preimage and coverage. The DAG has no duplicate: prism/shuffle/00TH hits are unrelated, so same_as [] is correct. The live Mathlib's ProdStdSimplexOne only enumerates top nondegenerate simplices, and UnionProd/PushoutProduct prove Kan-anodyne results, so there is no leaf. The delivery has no SGA citation, no off-unit statement and no tool_uses. I made no changes."
+ }
 }

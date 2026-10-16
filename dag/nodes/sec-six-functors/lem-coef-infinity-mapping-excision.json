@@ -18,7 +18,7 @@
  },
  "kind": "statement",
  "title": "Mapping-space excision for a simplicial indexing pushout",
- "statement": "Use simplicial sets, quasicategories, coherent functor categories and right-pinched mapping spaces as defined in [def-cbc-enhanced-diagrams-cones], with all objects small in a sufficiently large fixed universe. Let $i:A\\to D$ and $j:A\\to B$ be maps of simplicial sets, with $i$ degreewise injective, and put $K=B\\amalg_A D$. For any quasicategory $\\mathcal C$ and any two diagrams $F,G:K\\to\\mathcal C$, restriction induces an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(F,G)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal C)}(F|_B,G|_B)\\mathop{\\times}^{h}_{\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal C)}(F|_A,G|_A)}\\operatorname{Map}_{\\operatorname{Fun}(D,\\mathcal C)}(F|_D,G|_D).$$\nHere, for maps $u:U\\to W$ and $v:V\\to W$ of Kan complexes, $U\\times_W^h V$ is the space of triples $(a,b,\\gamma)$, where $a\\in U$, $b\\in V$, and $\\gamma$ is a path in $W$ from $u(a)$ to $v(b)$, with all higher simplices of these data; a model is $U\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\times_{\\operatorname{ev}_1,W}V$. The comparison sends a transformation to its two restrictions and the constant path between their identical restrictions to $A$. It is natural in both diagrams and compatible, up to coherent homotopy, with precomposition and postcomposition of transformations. No existence of limits or colimits in $\\mathcal C$ is assumed.",
+ "statement": "Use simplicial sets, quasicategories, coherent functor categories and right-pinched mapping spaces as defined in [def-cbc-enhanced-diagrams-cones], with all objects small in a sufficiently large fixed universe. Let $i:A\\to D$ and $j:A\\to B$ be maps of simplicial sets, with $i$ degreewise injective (each $i_n:A_n\\to D_n$ is injective), and put $K=B\\amalg_A D$. For any quasicategory $\\mathcal C$ and any two diagrams $F,G:K\\to\\mathcal C$, restriction induces an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(F,G)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal C)}(F|_B,G|_B)\\mathop{\\times}^{h}_{\\operatorname{Map}_{\\operatorname{Fun}(A,\\mathcal C)}(F|_A,G|_A)}\\operatorname{Map}_{\\operatorname{Fun}(D,\\mathcal C)}(F|_D,G|_D).$$\nHere, for maps $u:U\\to W$ and $v:V\\to W$ of Kan complexes, $U\\times_W^h V$ is the space of triples $(a,b,\\gamma)$, where $a\\in U$, $b\\in V$, and $\\gamma$ is a path in $W$ from $u(a)$ to $v(b)$, with all higher simplices of these data; a model is $U\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\times_{\\operatorname{ev}_1,W}V$. The comparison sends a transformation to its two restrictions and the constant path between their identical restrictions to $A$. It is natural in both diagrams and compatible, up to coherent homotopy, with precomposition and postcomposition of transformations. No existence of limits or colimits in $\\mathcal C$ is assumed.",
  "source": {
   "document": "https://kerodon.net/tag/01P9",
   "place": "Agent-formulated mapping-space consequence of Kerodon Example 4.5.5.12 (indexing pushout along a monomorphism), Proposition 4.5.5.4 (0340, functor-category categorical pullback), Corollary 4.4.5.3 (01F3, restriction is an isofibration), Proposition 4.6.1.22 (01P8) and Remark 4.6.1.23 (01P9, ordinary morphism-space Kan fibrations and homotopy fibers), and Propositions 4.6.5.5 (01L0) and 4.6.5.10 (01L5, pinched spaces are Kan and their natural pinch inclusions are homotopy equivalences). Read online 2026-10-16; not archived in literature/. No Stacks tag states this infinity-categorical result."
@@ -26,9 +26,85 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Q_S=\\operatorname{Fun}(S,\\mathcal C)$ for $S=A,B,D,K$. They are quasicategories by [lem-cbc-internal-hom-quasicategory]. There is a strict isomorphism of simplicial sets $Q_K=Q_B\\times_{Q_A}Q_D$. Indeed an $n$-simplex is a map $K\\times\\Delta^n\\to\\mathcal C$. Degree by degree, product with the set $(\\Delta^n)_m$ preserves pushouts of sets, so $K\\times\\Delta^n=(B\\times\\Delta^n)\\amalg_{A\\times\\Delta^n}(D\\times\\Delta^n)$. A map out is exactly a pair agreeing on $A\\times\\Delta^n$, and this description commutes with every face and degeneracy. The formula for $Q_S$ is the one in [def-cbc-enhanced-diagrams-cones]. No injectivity of $j$ is used.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01J4",
+    "place": "Prism-independent degreewise pushout calculation; functor closure from the cited calculus node."
+   }
+  },
+  {
+   "text": "Restriction $Q_D\\to Q_A$ is an isofibration, hence an inner fibration, by the restriction clause of [lem-coef-infinity-isofibration-exponentiation], because $i$ is degreewise injective. Put $H_S=U_{Q_S}(F|_S,G|_S)$ using that node's displayed endpoint-fiber definition. By the internal-hom formula in Step 1, an $n$-simplex of $H_S$ is a map $\\Delta^1\\times\\Delta^n\\to Q_S$ constant at $F|_S$ and $G|_S$ on the two endpoint faces. Swapping the product factors identifies it with a prism $\\Delta^n\\times\\Delta^1\\to Q_S$; this identification commutes with restriction in $\\Delta^n$ and with postcomposition. The final clause of the cited node, applied to $Q_D\\to Q_A$, gives a Kan fibration $H_D\\to H_A$ between Kan complexes. Applied to the identity inner fibration of each $Q_S$, the same clause makes every $H_S$ Kan. All quasicategory hypotheses hold by Step 1. There is no fibration requirement on $Q_B\\to Q_A$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01P8",
+    "place": "Kerodon Corollary 4.4.5.3 (01F3) and Proposition 4.6.1.22 (01P8); elementary expansion of the endpoint fiber by the internal-hom definition."
+   }
+  },
+  {
+   "text": "The strict pullback in Step 1 gives a strict isomorphism $H_K=H_B\\times_{H_A}H_D$. An $n$-simplex on either side is a pair of maps $\\Delta^n\\times\\Delta^1\\to Q_B,Q_D$ agreeing in $Q_A$, with their two endpoint faces constant at the restrictions of $F,G$. The pullback property glues them uniquely into $Q_K$; the endpoint conditions glue to the constant $F,G$ endpoint conditions. Taking faces or degeneracies before or after gluing gives the same map. This proves the isomorphism of entire simplicial sets, rather than of their sets of components.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01J4",
+    "place": "Elementary prism calculation using the definition in Step 2 and the strict pullback in Step 1."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-path-comparison] to $H_B\\to H_A\\leftarrow H_D$. Step 2 verifies that all three are Kan and the second leg is a Kan fibration. Combining it with Step 3 gives a weak homotopy equivalence $r_H:H_K\\to H_B\\times^h_{H_A}H_D$. The map is the pair of restrictions together with the constant path at their common restriction, exactly as specified by the cited comparison.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Kerodon Proposition 3.4.0.7: constant-path comparison."
+   }
+  },
+  {
+   "text": "Put $M_S=\\operatorname{Map}_{Q_S}(F|_S,G|_S)$. By [lem-coef-infinity-pinch-comparison], both $M_S$ and $H_S$ are Kan and the specified pinch maps $\\iota_S:M_S\\to H_S$ are weak homotopy equivalences. In the prism notation of Step 2 they send $\\sigma:\\Delta^{n+1}\\to Q_S$ to $\\sigma c_n$, where $c_n(k,0)=k$ and $c_n(k,1)=n+1$. For a restriction functor $q$, the equality $q(\\sigma c_n)=(q\\sigma)c_n$ proves strict commutation with restriction in every degree. Apply [lem-coef-kan-homotopy-pullback-invariance] to these maps for $S=B,A,D$; the required squares commute by this equality and all six complexes are Kan. The resulting map $\\iota_P:M_B\\times^h_{M_A}M_D\\to H_B\\times^h_{H_A}H_D$ is a weak homotopy equivalence. For the map $r_M$ asserted in the item, $\\iota_P r_M=r_H\\iota_K$ strictly: on each simplex both sides give the two restricted prism maps and the constant path at their common restriction. The right side is a weak equivalence by Step 4 and the pinch comparison. Therefore $r_M$ is a weak homotopy equivalence: on components its map is the composite of the inverse bijection induced by $\\iota_P$ with the bijection induced by $r_H\\iota_K$, and on each based homotopy group the identical cancellation of two isomorphisms applies. This uses only the definition of weak homotopy equivalence from Step 1.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Kerodon Proposition 4.6.5.10 and Proposition 3.4.0.9: comparison of the two mapping-space models."
+   }
+  },
+  {
+   "text": "The equivalence just established is the specified restriction and constant-path map. To check its naturality and composition coherence directly, let $T$ be any simplicial set and $h:K\\times T\\to\\mathcal C$ any family of diagram data. For every $\\alpha:T'\\to T$ and $S=A,B,D$, restriction satisfies $(h\\circ(\\mathrm{id}_K\\times\\alpha))|_{S\\times T'}=(h|_{S\\times T})\\circ(\\mathrm{id}_S\\times\\alpha)$. Also restriction from $B$ or $D$ to $A$ gives the identical map $h|_{A\\times T}$. Taking $T=\\Delta^2$ shows that a triangle witnessing a composite restricts to the same composite triangle on each shape; arbitrary $T=\\Delta^r$ and all their face and degeneracy maps give all higher coherence witnesses, including those for precomposition and postcomposition as the endpoints vary. Inserting the constant path is induced by $T\\times\\Delta^1\\to T$, and this projection commutes with every $\\alpha$. Hence the constant-path data commute with these same triangle and higher-simplex restrictions. This proves naturality in both diagrams and compatibility with precomposition, postcomposition and their coherent homotopies, without choosing inverse pinch maps. Only products and pushouts of indexing simplicial sets were used; no limits or colimits in $\\mathcal C$ were required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Agent argument from the simplicial definitions in def-cbc-enhanced-diagrams-cones",
+    "place": "Elementary functoriality of the restriction and constant-path maps; all their higher simplices are retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent-written foundational split below proof paragraph 2, displayed derived coefficient adjunction, on the inherited finite-shape and colimit-gluing route; uses Kerodon results read online, requested for archival in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -106,10 +182,45 @@
    "results": "{\"t\": \"2026-10-16T09:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"Morphism spaces between objects of a categorical pullback of quasicategories form a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.bicategory\", \"SSet.instFinitePullback\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.HomotopicL.homotopicR\", \"HomotopicalAlgebra.PrepathObject.trans_P\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\"], \"digest\": \"26ddbd7af0cf1d0e\"}",
    "date": "2026-10-16",
    "verdict": "no match: read the returned declarations. SSet.QCat.bicategory in AlgebraicTopology/Quasicategory/StrictBicategory.lean:14-32,67-70 uses homotopy categories of internal homs, not Kan mapping spaces or their homotopy pullbacks. The TwoTruncated.Hom declarations give quotient hom sets; instFinitePullback only asserts finiteness of an ordinary simplicial-set pullback; model-category path objects and homotopy-category squares do not state restriction excision. The Loogle pattern and focused source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping spaces of functors indexed by a simplicial pushout form a homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T11:04:02Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping spaces of functors indexed by a simplicial pushout form a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.SimplicialObject.cechNerve\", \"CategoryTheory.Arrow.cechConerve_map\", \"CategoryTheory.Arrow.mapCechConerve_app\", \"CategoryTheory.CosimplicialObject.cechConerve_obj\", \"CategoryTheory.Arrow.mapCechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"CategoryTheory.SimplicialObject.cechNerve_obj\"], \"digest\": \"b862850c4351d112\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech (co)nerve formulas, ordinary categorical pullbacks, truncated homotopy-category transformations and horn-filling declarations do not state mapping-space excision."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"IsPullback\"",
+   "results": "{\"t\": \"2026-10-16T11:03:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"IsPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech (co)nerve formulas, ordinary categorical pullbacks, truncated homotopy-category transformations and horn-filling declarations do not state mapping-space excision."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingSpace|homotopyPullback|pinched",
+   "results": "{\"t\": \"2026-10-16T11:03:51Z\", \"tool\": \"grep\", \"query\": \"mappingSpace|homotopyPullback|pinched\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech (co)nerve formulas, ordinary categorical pullbacks, truncated homotopy-category transformations and horn-filling declarations do not state mapping-space excision."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coherent natural transformations across a simplicial pushout is a homotopy pullback",
+   "results": "{\"t\": \"2026-10-16T11:03:52Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of coherent natural transformations across a simplicial pushout is a homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.mkNatTrans\", \"SSet.Truncated.HomotopyCategory.mkNatTrans.congr_simp\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp\", \"SSet.Truncated.HomotopyCategory.mkNatTrans_app_mk\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app\", \"SSet.instFinitePullback\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_map_associator\", \"groupCohomology.resNatTrans\"], \"digest\": \"8e3c363679006da1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech (co)nerve formulas, ordinary categorical pullbacks, truncated homotopy-category transformations and horn-filling declarations do not state mapping-space excision."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Excision for morphism Kan complexes of quasicategory diagrams",
+   "results": "{\"t\": \"2026-10-16T11:04:01Z\", \"tool\": \"leanfinder\", \"query\": \"Excision for morphism Kan complexes of quasicategory diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.quasicategory_of_filler\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory\"], \"digest\": \"8e56e0142d4ea7dc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech (co)nerve formulas, ordinary categorical pullbacks, truncated homotopy-category transformations and horn-filling declarations do not state mapping-space excision."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-colimit-gluing",
   "by": "worker",
@@ -124,5 +235,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-mapping-excision",
+  "worker": "stage1",
+  "summary": "Proved mapping-space excision by a degreewise strict functor pullback, endpoint-fiber/prism morphism complexes, the Kan-fibration pullback comparison and existing natural pinch equivalences. Second reading removed three duplicate nodes, including the restriction Mathlib leaf; two new unsplit Kan-space ingredients remain. The original statement and arbitrary attaching map into B are retained.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction, in main-20261015/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md (the proof formerly embedded in the historical master node): stable enhancement through finite-shape generation and colimit gluing. These general foundations stay below the inherited unit route; historical blueprint ancestry and maintainer-owned unit metadata are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-07c712eed",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-07c712eed (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full: def-cbc-enhanced-diagrams-cones, the Mathlib leaf lem-cbc-internal-hom-quasicategory (SSet.instQuasicategoryObjIhom), lem-coef-infinity-isofibration-exponentiation and lem-coef-infinity-pinch-comparison. I also read both citers of the item, the unit record and the ancestor proof file. The item statement is unchanged and not weakened: i degreewise injective, j arbitrary, strict pushout, no limits in C. Step 1: Fun(K,C)=Fun(B,C)x_{Fun(A,C)}Fun(D,C) strictly, by a degreewise set calculation that also holds for noninjective j (checked with dB1->D0, D=D1). Step 2: Q_D->Q_A is an isofibration by the restriction clause; the last clause of the same node (Kerodon 01P8) makes H_D->H_A a Kan fibration between Kan complexes, and the identity case makes each H_S Kan. Step 3: the strict pullback of endpoint fibres is elementary. Step 4: the path-comparison hypotheses hold, with H_D->H_A as the fibration leg. Step 5: the pinch maps are natural under restriction, so the span squares commute strictly; the invariance node then applies, i_P r_M = r_H i_K holds strictly, and two-out-of-three finishes. Step 6: elementary coherence of the strict restriction functors and constant paths. New node kan-pullback-path-comparison (Kerodon 0329/010B/00TM, right properness) is true; tested on empty U, a point base, and two points in S1 to show the fibration hypothesis is needed. New node kan-homotopy-pullback-invariance (Kerodon 032B, Kan specialization) is true; tested on point bases. Neither restates a clause of the item. The nearest existing node, lem-coef-kan-quillen-right-proper, does not state the path model or the constant-path map, so it is not a duplicate. Mathlib has no right properness for sSet. Every cited statement is in the item's unit or is a leaf or definition, so there are no tool_uses and no SGA. Kerodon is WANTED, not archived, and proof_origin is agent. The new node files have no lean_audit field; that field is maintainer-owned and preflight passed. No fixes."
  }
 }

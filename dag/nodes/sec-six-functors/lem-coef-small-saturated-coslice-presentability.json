@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim; Presentability of strongly saturated fixed-source arrow categories, foundational to its coherent adjunction and limit interpretation.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints.",
    "via": [
     "lem-coef-presentable-infinity-adjoints",
     "lem-coef-enriched-category-tensor-calculus",
@@ -25,11 +25,72 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal A=\\mathcal A_W$ be the full coherent arrow subcategory on $W$. By [lem-coef-small-saturated-arrow-accessibility], it is accessible and its inclusion preserves all small colimits. By the objectwise arrow-colimit assertion of [lem-coef-infinity-yoneda-presheaf-limits], source evaluation $p:\\mathcal A\\to\\mathcal C$ preserves all small colimits: first include in $\\operatorname{Fun}(\\Delta^1,\\mathcal C)$ and then evaluate at $0$. In particular it is accessible, meaning that it preserves sufficiently filtered colimits. Smallness of $S$ is used precisely in the arrow-accessibility theorem; no smallness of the entire class $W$ is asserted.",
+   "uses": [
+    "lem-coef-small-saturated-arrow-accessibility",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.14, implication (3) to (1), and Proposition 5.1.2.2"
+   }
+  },
+  {
+   "text": "The category $\\mathcal C$ has pushouts since it is presentable, and $W$ is replete and pushout-stable. Thus [lem-coef-infinity-arrow-source-fibers] identifies $\\mathcal D_X$ with the homotopy pullback of $\\mathcal A\\xrightarrow{p}\\mathcal C\\xleftarrow{X}*$. By [lem-coef-infinity-coslice-colimit-formula], the terminal quasicategory is accessible and the functor $*\\to\\mathcal C$ selecting $X$ preserves filtered colimits, hence is accessible. Both other categories and the functor $p$ are accessible by Step 1 and presentability of $\\mathcal C$. The accessible-pullback assertion of [lem-coef-accessible-infinity-pullback] therefore gives accessibility of $\\mathcal D_X$. All categories may be large relative to the small-colimit universe, but fit in the larger universe fixed in the statement.",
+   "uses": [
+    "lem-coef-infinity-arrow-source-fibers",
+    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-accessible-infinity-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "First paragraph of proof of Lemma 5.5.5.14; Proposition 5.4.6.6; Proposition 4.3.1.12 and filtered weak contractibility"
+   }
+  },
+  {
+   "text": "Let $K$ be any small simplicial set and $q:K\\to\\mathcal D_X$ any coherent diagram, written as $\\alpha:\\Delta_KX\\to Y$ in the ambient coslice. Form $A=\\operatorname{colim}_K\\Delta_KX$, $B=\\operatorname{colim}_K Y$, and $b:A\\to B$ induced by $\\alpha$. Objectwise arrow colimits exist by [lem-coef-infinity-yoneda-presheaf-limits], so $b$ is the colimit in the arrow category of the arrows of $q$. Each such arrow belongs to $W$; its closure under all small arrow colimits gives $b\\in W$, including when $K$ is empty. Push out $b$ along the augmentation $a:A\\to X$. The resulting arrow $u:X\\to P=X\\amalg_A B$ belongs to $W$ by pushout closure. By [lem-coef-infinity-coslice-colimit-formula], this very arrow with its induced coherent cocone is a colimit of $q$ in $\\mathcal C_{X/}$. Since $\\mathcal D_X$ is full and contains $u$, the same cocone is colimiting in $\\mathcal D_X$: mapping spaces from its vertex to a testing object of $\\mathcal D_X$, and the spaces of cocones to that object, agree with their ambient counterparts. Thus every small diagram in $\\mathcal D_X$ has a colimit. In particular $K=\\varnothing$ gives $A=B=0$, $P\\simeq X$ and the initial arrow $1_X$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-coslice-colimit-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.12, with the arbitrary-shape coslice pushout formula replacing its filtered/pushout generation argument"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 give accessibility and all small colimits of $\\mathcal D_X$. This is exactly presentability as defined by [def-coef-presentable-infinity-category]. The fiber and colimit constructions throughout take place in coherent functor categories, retaining all triangle homotopies.",
+   "uses": [
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.5.0.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-saturated-arrow-accessibility",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-infinity-arrow-source-fibers",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-accessible-infinity-pullback",
+  "def-coef-presentable-infinity-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemmas 5.5.4.12 and 5.5.4.14, Proposition 5.4.6.6 and the first paragraph of the proof of Lemma 5.5.5.14; expanded using the general coherent coslice colimit formula. Online source read, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,15 +140,66 @@
    "results": "{\"t\": \"2026-10-16T15:25:21Z\", \"tool\": \"grep\", \"query\": \"[Ss]aturat|[Ff]ixed.*[Ss]ource|[Aa]ccessib\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match: Dense and MorphismProperty.Ind concern ordinary category instances; no Quasicategory grep hit supplies accessible fibers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small generated strongly saturated class of maps in a presentable infinity category is an accessible subcategory of arrows",
+   "results": "{\"t\": \"2026-10-16T16:57:38Z\", \"tool\": \"leanfinder\", \"query\": \"Small generated strongly saturated class of maps in a presentable infinity category is an accessible subcategory of arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\"], \"digest\": \"796a317dec4dc662\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary accessible/local-object or arrow-category declarations were returned; no coherent fixed-source presentability theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAccessibleCategory\", \"Arrow\"",
+   "results": "{\"t\": \"2026-10-16T16:57:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAccessibleCategory\\\", \\\"Arrow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.instIsAccessibleCategory\", \"CategoryTheory.CostructuredArrow.instIsAccessibleCategory\", \"CategoryTheory.StructuredArrow.instIsAccessibleCategory\"], \"digest\": \"7736f4fc953877c6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary accessible/local-object or arrow-category declarations were returned; no coherent fixed-source presentability theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "strongly.*saturat|saturat.*strongly|isCardinalAccessible_ι_isLocal",
+   "results": "{\"t\": \"2026-10-16T16:59:33Z\", \"tool\": \"grep\", \"query\": \"strongly.*saturat|saturat.*strongly|isCardinalAccessible_ι_isLocal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"541682eb262e54fb\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary accessible/local-object or arrow-category declarations were returned; no coherent fixed-source presentability theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full subcategory of arrows in the strongly saturated closure of a small set in a presentable quasicategory is accessible",
+   "results": "{\"t\": \"2026-10-16T16:59:33Z\", \"tool\": \"leansearch\", \"query\": \"The full subcategory of arrows in the strongly saturated closure of a small set in a presentable quasicategory is accessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCofiltered.small_fullSubcategory_cofilteredClosure\", \"CategoryTheory.essentiallySmall_fullSubcategory_mem\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.locallySmall_fullSubcategory\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsCofiltered.instEssentiallySmallFullSubcategoryCofilteredClosure\", \"CategoryTheory.IsAccessibleCategory\"], \"digest\": \"8df94be83dd013a3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary accessible/local-object or arrow-category declarations were returned; no coherent fixed-source presentability theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessibility of strongly saturated small generated morphism classes in infinity categories",
+   "results": "{\"t\": \"2026-10-16T16:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"Accessibility of strongly saturated small generated morphism classes in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.SmallObject.isSmall\"], \"digest\": \"38e2530b33bc7343\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: only ordinary accessible/local-object or arrow-category declarations were returned; no coherent fixed-source presentability theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-infinity-adjoints",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-saturated-coslice-presentability",
+  "worker": "stage1",
+  "summary": "Rebuilt from the now-present authoritative item. Replaced the false sandbox-only fixed-source-fiber lemma by a generic coherent source-fiber theorem and a general coslice colimit formula. The four steps establish accessible source evaluation, accessibility by the existing accessible-pullback node, cocompleteness by arrow colimits followed by a pushout, and presentability by definition. Statement unchanged; no new lemma restates its conclusion.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the displayed derived inverse limit; presentable coherent adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N4-059f638f7",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-059f638f7 (reviewer sub-agent of L); spot-checked: PASS. I read the item, all three new nodes, all six cited statements, the parent's two uses of the item and the blueprint ancestor's proof paragraph 2 in full. No changes made. Caveat: HTT and Kerodon are online-only and not archived, and network commands are blocked for reviewers here, so the cited pages and numbers (including the '(3)⇒(1)' label of HTT 5.5.4.14) were not checked against the text. Every claim was instead checked mathematically against HTT 5.5.4.5/5.5.4.14-15, 1.2.13.8, 4.4.2.2, 5.3.1.18, 5.4.6.6 and 3.3.1.7. (1) arrow-accessibility: its W matches the item's W exactly; true; covers variable sources, so it is not the item's fixed-source claim. (2) source-fibers: ev0 restricted to a full subcategory is an inner fibration; pushout squares give the cocartesian lifts; a cocartesian fibration is a categorical fibration, so the strict fiber is the homotopy pullback. The pushout-stability hypothesis is needed: the empty-source class in Set breaks without it. (3) coslice formula: colimits in C_{X/} come from colimits over K^◁, giving X⊔_A B. Checked for K empty (1_X), a point (Y), two points (Y1⊔_X Y2) and a circle (A≄X, which is why only weakly contractible K gives A≃X). Filtered implies nonempty and weakly contractible; the terminal category is accessible. Steps: 1 accessible source evaluation from colimit closure plus objectwise arrow colimits; 2 accessible-pullback hypotheses all met; 3 arrow colimit b in W, then its pushout u in W, colimit in C_{X/}, restricts to the full subcategory D_X; 4 the presentability definition, correctly marked elementary. Item tested on Set with S={∅→*} and S={*⊔*→*}. No duplicates in the DAG (the factorization nodes are ordinary-category; the nerve-contractibility nodes cover only ordinary nerves) or in the blueprint. Searches recorded with all three kinds. Every cited statement is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. No cycle, no SGA. Cosmetic only: a missing separator in the item's source.place, and coslices are cited to the cocone-category definition, which agrees with the explicit model in the new nodes."
+ }
 }

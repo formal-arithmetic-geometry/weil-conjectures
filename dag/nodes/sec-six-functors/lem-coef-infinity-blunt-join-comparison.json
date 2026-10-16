@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Historical master proof, paragraph beginning “For $K\\in D^b_c(X,R)$”, sentence “use the reduction of integral compact supports ... and derived coefficient adjunction to compute”: inherited coherent-diagram foundation through the finite-adjunction realization, semilinear sections, flat model, pointed model, finite-shape generation, final-index colimit, and anodyne-cocones chain. The fixed-target arrow lifting argument is a supporting lemma from Kerodon, not a statement or proof explicitly present in that blueprint paragraph. The current main-20261015 copy at sec-six-functors/sk-thm-sf-package contains the statement only. This node supplies the blunt-join extension input to the fixed-target arrow lifting argument.",
+   "place": "Historical master proof, paragraph beginning “For $K\\in D^b_c(X,R)$”, sentence “use the reduction of integral compact supports ... and derived coefficient adjunction to compute”: inherited coherent-diagram foundation through the finite-adjunction realization, semilinear sections, flat model, pointed model, finite-shape generation, final-index colimit, and anodyne-cocones chain. The fixed-target arrow lifting argument is a supporting lemma from Kerodon, not a statement or proof explicitly present in that blueprint paragraph. The current main-20261015 statement at sec-six-functors/sk-thm-sf-package has a separate prop-coef-integral-exceptional-adjoint.proof.md with the same paragraph beginning For $K\\in D^b_c(X,R)$. This node supplies the blunt-join extension input to the fixed-target arrow lifting argument.",
    "via": [
     "lem-coef-infinity-arrow-target-right-fibration",
     "lem-coef-infinity-anodyne-cocones",
@@ -29,9 +29,146 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P(K)=K\\diamond\\Delta^0=(K\\times\\Delta^1)\\amalg_{K\\times\\{1\\}}\\Delta^0$, and write $Q(K)=K\\star\\Delta^0$ using the join formula of [lem-coef-infinity-pushout-join-saturation]. All these pushouts are degreewise: the quotient of the disjoint union by the attaching relations has induced simplicial operators and exactly the pushout universal property for natural transformations, using [def-weil-pbc-simplicial-set]. Put $T_r=\\operatorname{Hom}_{\\Delta}([r],[1])\\setminus\\{\\mathrm{const}_1\\}$. There is a disjoint normal form $P(K)_r=\\{v\\}\\amalg(K_r\\times T_r)$; the constant-zero interval gives the base $K_r$. Thus for a degreewise inclusion $A\\subseteq B$, $P(A)$ is a simplicial subset of $P(B)$, its intersection with the base $B$ is exactly $A$, and $B\\amalg_A P(A)$ is the union $B\\cup P(A)$ inside $P(B)$. This proves that the specified $\\theta_i$ is a monomorphism. Replacing an arbitrary degreewise injection by its image changes these descriptions only by canonical isomorphisms.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-infinity-pushout-join-saturation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HR",
+    "place": "Notation 4.6.2.3, singleton right factor; degreewise pushout and intersection calculation; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Construct a natural map $c_K:P(K)\\to Q(K)$ as follows. It sends $v$ to the cone vertex. Represent any other $r$-simplex by $x\\in K_r$ and $t:[r]\\to[1]$. If $t$ is constant zero, send it to the base simplex $x$. Otherwise cut $[r]$ into its initial zero segment $[a]$ and its final one segment: send $(x,t)$ to the mixed join simplex consisting of the restriction $x|_{[a]}$ followed by $r-a$ copies of the cone vertex. If the zero segment is empty, the result is $v$. Restricting along any monotone map restricts the two ordered segments, and gives exactly the same rule, including a segment becoming empty. This proves the simplicial identities. A map $K\\to L$ commutes with restrictions of $x$, so the $c_K$ form a natural transformation $P\\Rightarrow Q$, equal to the identity on the base and the cone point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pushout-join-saturation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HR",
+    "place": "Comparison map in Notation 4.6.2.3, made explicit for a cone; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "For $K=\\Delta^n$, identify $Q(K)=\\Delta^{n+1}$. The map $c_n$ on the cylinder is the nerve of $[n]\\times[1]\\to[n+1]$, $(a,0)\\mapsto a$ and $(a,1)\\mapsto n+1$. Let $s_n:\\Delta^{n+1}\\to P(\\Delta^n)$ be induced by the monotone map $a\\mapsto(a,0)$ for $a\\leq n$ and $n+1\\mapsto(n,1)$. Then $c_ns_n=1$. There is a simplicial homotopy $H:P(\\Delta^n)\\times\\Delta^1\\to P(\\Delta^n)$ from $1$ to $s_nc_n$: before quotienting, use the monotone map on $[n]\\times[1]\\times[1]$ sending $(a,t,u)$ to $(a,t)$ unless $t=u=1$, when it sends it to $(n,1)$. It is monotone, since increasing a coordinate can only increase its first coordinate and never decreases its second. When $t=1$ its image lies in the collapsed top layer, so it descends to $H$ and is constant on the cone-point factor. Products with the parameter preserve this quotient: degreewise, equivalence classes in $(X/\\sim)\\times Z$ are exactly the classes in $X\\times Z$ with the $Z$ coordinate fixed. At $u=0$ the map is the identity, and at $u=1$ it is $s_nc_n$ on each cylinder simplex. Its edge at every vertex of $P(\\Delta^n)$ is degenerate: bottom vertices stay fixed and top vertices lie in the collapsed layer. These assertions also hold for $n=0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01HZ",
+    "place": "Proposition 4.6.2.12, simplex case, with an explicit section and homotopy; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Fix a quasicategory $\\mathcal E$ in a sufficiently large universe. Precomposition gives $c_n^*:\\operatorname{Fun}(Q(\\Delta^n),\\mathcal E)\\to\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ with candidate inverse $s_n^*$ and $s_n^*c_n^*=1$. By evaluation and currying, $H$ gives a coherent transformation from the identity to $c_n^*s_n^*$ on $\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$. More explicitly, at a simplex $f:P(\\Delta^n)\\times\\Delta^r\\to\\mathcal E$ it evaluates $(x,u,z)$ as $f(H(x,u),z)$, so it is compatible with every operator in $z$. For every object $f$ its component is a transformation of diagrams whose component at every vertex $x$ is the degenerate edge at $f(x)$. Here the needed pointwise-equivalence implication follows from the following smaller existing inputs. By [lem-cbc-internal-hom-quasicategory], $\\operatorname{Fun}(K,Z)$ is a quasicategory for every small shape $K$ and quasicategory $Z$. If an edge $e$ in it has equivalence components at every vertex of $K$, any horn $\\Lambda_0^r\\to\\operatorname{Fun}(K,Z)$, $r\\geq2$, whose first edge is $e$, is adjoint to $K\\times\\Lambda_0^r\\to Z$ with every distinguished vertical edge an equivalence. Apply [lem-cbc-invertible-prism-extension] with its $A=\\varnothing$, $B=K$, $Q=Z$ to fill it. Thus $e$ has the outer-horn extension property for every $r$, and the converse clause of [lem-cbc-equivalence-outer-horn-filling] makes $e$ an equivalence in $\\operatorname{Fun}(K,Z)$. Apply this argument first with $K=P(\\Delta^n)$ and $Z=\\mathcal E$ to each component of the displayed transformation, then with $K=\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ and $Z=\\operatorname{Fun}(P(\\Delta^n),\\mathcal E)$ to the transformation itself. Enlarge the universe for these latter small shapes if necessary. It is therefore a coherent natural equivalence. Hence $c_n^*$ is a functor equivalence. This supplies the simplex hypothesis for the cellular criterion used in the next step, with a functor equivalence rather than only an equivalence after applying $h$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-cbc-invertible-prism-extension",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HZ",
+    "place": "Proposition 4.6.2.12, simplex case; homotopy checked by componentwise equivalences; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "The functors $P,Q$ satisfy the hypotheses of [lem-coef-infinity-cellular-natural-equivalence]. Indeed, in degree $r$ the formulas are $P(K)_r=\\{v\\}\\amalg(K_r\\times T_r)$ and $Q(K)_r=\\{v\\}\\amalg\\coprod_{a=0}^{r}K_a$. Each preserves injections. For a nonempty connected small indexing category, taking the colimit of either displayed formula leaves one copy of $v$, since all its copies are identified along the connected diagram; its other summands are the colimits of $K_r\\times T_r$ or of the fixed labelled summands $K_a$. In sets these identifications follow directly from the equivalence relation generated by diagram arrows, which never changes a summand label or the $T_r$ coordinate. Thus these functors preserve all small connected colimits, with compatibility with operators inherited from their constructions. Both send the empty simplicial set to $\\Delta^0$ and $c_{\\varnothing}$ is its identity. Step 4 checks every simplex. The cited cellular criterion now proves, for every small $K$ and every such $\\mathcal E$, that the actual restriction $c_K^*:\\operatorname{Fun}(Q(K),\\mathcal E)\\to\\operatorname{Fun}(P(K),\\mathcal E)$ is a functor equivalence. In particular $c_K$ is a categorical equivalence in the $h\\operatorname{Fun}$ testing convention of the statement: a functor with coherent inverse and equivalence witnesses induces an ordinary equivalence after $h$: the coherent natural equivalence induces a natural isomorphism on $h$. Indeed, for each edge in the source, restrict the transformation to its product with $\\Delta^1$; the two triangles of $\\Delta^1\\times\\Delta^1$ have a common diagonal, so their $2$-simplex relations in $h$ give the naturality square. Each component is invertible in $h$ because its inverse edge and the two inverse-triangle witnesses give the two inverse equations. The same applies to the other composite.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-infinity-cellular-natural-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01HZ",
+    "place": "Proposition 4.6.2.12; cellular extension with every preservation hypothesis checked; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Set $k:\\varnothing\\hookrightarrow\\Delta^0$. For a right generating horn $i:\\Lambda_j^m\\hookrightarrow\\Delta^m$, its pushout join with $k$ is $\\Delta^m\\amalg_{\\Lambda_j^m}(\\Lambda_j^m\\star\\Delta^0)\\hookrightarrow\\Delta^m\\star\\Delta^0$. Identify the target with $\\Delta^{m+1}$ by putting the cone vertex last. The domain contains the face opposite the last vertex, supplied by $\\Delta^m$, and each face opposite $a\\neq j$, $0\\leq a\\leq m$, supplied by the cone on the corresponding face of $\\Lambda_j^m$. It contains no remaining nondegenerate face. Thus it is exactly $\\Lambda_j^{m+1}\\hookrightarrow\\Delta^{m+1}$. Since $0<j\\leq m<m+1$, this is an inner generating horn, including $m=j=1$. By the weak-saturation assertion for fixed $k$ in [lem-coef-infinity-pushout-join-saturation], the class of monomorphisms $i$ for which this pushout join is inner anodyne contains every right anodyne map. The restriction to monomorphisms causes no loss: degreewise injections contain the generating horns and isomorphisms and are closed under pushouts, ordinal composites and retracts (a set pushout adds the complement; continuous chains of injections are unions after identifying images; a retract of an injection cancels by its section and retraction). For the given $i$ we have therefore proved that $j_i:D_\\sharp=B\\amalg_AQ(A)\\to Q(B)$ is inner anodyne.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pushout-join-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, proof, special case of boundary of a zero-simplex; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Use [lem-coef-joyal-model-structure]. Its trivial cofibrations are the left class of the weak factorization system (trivial cofibrations, fibrations), and hence are exactly the maps lifting on the left against all fibrations. Such a left class is weakly saturated directly: a square against a pushout is a square against its original map; for a continuous ordinal chain construct compatible diagonal maps by successor lifts and take their colimit at limit stages, beginning with the specified top map; for a retract apply the section square, lift for the larger map, then apply the retraction. Isomorphisms lift by their inverse. Every inner horn is a trivial cofibration by the cited statement. The weakly saturated inner-anodyne class is therefore contained in this left class. Consequently $j_i$ of step 6 is a categorical equivalence. This argument uses the lifting characterization in the node's statement, rather than assuming an unstated closure property of arbitrary weak equivalences.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01J0",
+    "place": "Corollary 4.6.2.14, ordinary-cone equivalence input, derived from the existing Joyal weak factorization system; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Let $D_\\flat=B\\amalg_AP(A)$, and let $d:D_\\flat\\to D_\\sharp$ be induced by $1_B$ and $c_A$. Fix any quasicategory $\\mathcal E$. Put $\\mathcal S=\\operatorname{Fun}(A,\\mathcal E)$, $\\mathcal A=\\operatorname{Fun}(Q(A),\\mathcal E)$, $\\mathcal B=\\operatorname{Fun}(P(A),\\mathcal E)$ and $\\mathcal R=\\operatorname{Fun}(B,\\mathcal E)$, with their restriction maps to $\\mathcal S$. These four are quasicategories by [lem-cbc-internal-hom-quasicategory]. The maps $p:\\mathcal A\\to\\mathcal S$ and $q:\\mathcal B\\to\\mathcal S$ are isofibrations by the final restriction assertion in the first paragraph of [lem-coef-infinity-isofibration-exponentiation], since both inclusions of the base $A$ are degreewise injective. Step 5 gives the functor equivalence $v=c_A^*:\\mathcal A\\to\\mathcal B$, and $qv=p$ strictly since $c_A$ fixes the base. Apply [lem-coef-infinity-isofibration-base-change] to these $p,q,v$, and to $\\mathcal R\\to\\mathcal S$ given by restriction along $i$. It proves that $\\mathcal R\\times_{\\mathcal S}\\mathcal A\\to\\mathcal R\\times_{\\mathcal S}\\mathcal B$ is a functor equivalence. These are precisely $\\operatorname{Fun}(D_\\sharp,\\mathcal E)$ and $\\operatorname{Fun}(D_\\flat,\\mathcal E)$, and this map is $d^*$. To check the strict identification in degree $r$, maps from the pushout times $\\Delta^r$ are pairs of maps from its pieces times $\\Delta^r$ agreeing on $A\\times\\Delta^r$: products preserve the degreewise set pushout, because its generating equivalence relations never change the parameter coordinate. These bijections commute with operators and restrictions. Passing to $h$ as at the end of step 5 shows that $d$ is a categorical equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01J0",
+    "place": "Corollary 4.6.2.14; comparison of the pushouts via isofibrations, replacing categorical-pushout terminology with an explicit functor pullback; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "There is a strictly commutative square with top map $\\theta_i:D_\\flat\\to P(B)$, bottom map $j_i:D_\\sharp\\to Q(B)$ and vertical maps $d,c_B$. On $B$ both routes are the base inclusion in $Q(B)$; on $P(A)$ equality is exactly naturality of the explicit comparison $c$ from step 2. The pushout universal property proves $c_B\\theta_i=j_id$. The maps $c_B,d,j_i$ are categorical equivalences by steps 5, 8 and 7. The two-out-of-three clause of [lem-coef-joyal-model-structure] first makes $j_id$ a categorical equivalence and then makes $\\theta_i$ one. This proves the asserted equivalence for the specified map, together with its monomorphism from step 1.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01J0",
+    "place": "Corollary 4.6.2.14, comparison square and two-out-of-three; explicit argument supplied here, source not archived under literature/."
+   }
+  },
+  {
+   "text": "Finally, $\\theta_i$ is a cofibration and a weak equivalence in the Joyal model structure by its monomorphism and categorical equivalence. For any quasicategory $\\mathcal C$, its map $\\mathcal C\\to\\Delta^0$ is a fibration by the fibrancy assertion of [lem-coef-joyal-model-structure]. Put $f_0$ on the top of the square with left side $\\theta_i$ and right side this terminal map. The (trivial cofibrations, fibrations) lifting property in that same cited statement gives a diagonal $f:P(B)\\to\\mathcal C$. The upper triangle is the literal equality $f\\theta_i=f_0$, so the conclusion is a strict extension, not merely an equivalence class of extensions.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01FS",
+    "place": "Lemma 4.5.6.2, extension consequence, using the existing Joyal lifting characterization; explicit argument supplied here, source not archived under literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-cbc-invertible-prism-extension",
+  "lem-coef-infinity-cellular-natural-equivalence",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-joyal-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01J0",
+  "place": "Corollary 4.6.2.14 and Lemma 4.5.6.2 (01FS), with singleton blunt-cone comparison (01HZ) proved by an explicit simplex section and homotopy plus the existing cellular criterion. Online sources read 2026-10-17, not archived under literature/; see report WANTED. No categorical-pushout lemma is assumed."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +225,59 @@
    "results": "{\"t\": \"2026-10-16T16:31:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\"], \"digest\": \"b37e3a8e7e323575\"}",
    "date": "2026-10-16",
    "verdict": "no match: read Quasicategory/Basic.lean:70-91; the three returned declarations characterize inner-horn lifting against the terminal map. They do not fill arbitrary monomorphic categorical equivalences, or assert the blunt-join comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "blunt.?[Jj]oin|fat.?[Cc]one|[Cc]ategorical[Ee]quivalence|[Rr]ight[Aa]nodyne",
+   "results": "{\"t\": \"2026-10-16T17:09:41Z\", \"tool\": \"grep\", \"query\": \"blunt.?[Jj]oin|fat.?[Cc]one|[Cc]ategorical[Ee]quivalence|[Rr]ight[Aa]nodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No matching declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a right anodyne inclusion A into B the fat cone comparison from B union the fat cone on A into the fat cone on B is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T17:09:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a right anodyne inclusion A into B the fat cone comparison from B union the fat cone on A into the fat cone on B is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.cechConerveEquiv\", \"CategoryTheory.CosimplicialObject.cechConerveEquiv_apply\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_functor\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_counitIso\", \"CategoryTheory.Limits.Cones.functorialityEquivalence_inverse\", \"CategoryTheory.Functor.mapConePostcomposeEquivalenceFunctor\"], \"digest\": \"fa7f38745de30229\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the displayed hits: ordinary cone equivalences, Cech correspondence, coskeletal Kan extensions and truncated homotopy-category nerve adjunctions do not state the blunt-cone categorical comparison or strict extension. Quasicategory/Basic.lean:32-91 gives inner-horn lifting only; SimplicialObject/Coskeletal.lean:56-78 gives a coskeletal right Kan extension; neither is a one-line specialization of this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of a simplicial set with the fat cone on a right anodyne subobject into its fat cone is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T17:09:41Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of a simplicial set with the fat cone on a right anodyne subobject into its fat cone is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.Limits.Cones.functorialityEquivalence\", \"CategoryTheory.cosimplicialSimplicialEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.Limits.Cones.functorialityEquivalence_functor\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"c1b55391b16f3e97\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the displayed hits: ordinary cone equivalences, Cech correspondence, coskeletal Kan extensions and truncated homotopy-category nerve adjunctions do not state the blunt-cone categorical comparison or strict extension. Quasicategory/Basic.lean:32-91 gives inner-horn lifting only; SimplicialObject/Coskeletal.lean:56-78 gives a coskeletal right Kan extension; neither is a one-line specialization of this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T17:09:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: No matching declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural collapse from the fat right cone of a simplicial set to its ordinary right cone induces an equivalence of functor quasicategories",
+   "results": "{\"t\": \"2026-10-16T17:10:38Z\", \"tool\": \"leanfinder\", \"query\": \"The natural collapse from the fat right cone of a simplicial set to its ordinary right cone induces an equivalence of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Functor.mapConePostcomposeEquivalenceFunctor\", \"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.Over.ConstructProducts.conesEquiv_functor\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso_hom_hom\", \"CategoryTheory.Functor.Initial.conesEquiv_functor\"], \"digest\": \"1c5671aaa3fc1936\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Read the displayed hits: ordinary cone equivalences, Cech correspondence, coskeletal Kan extensions and truncated homotopy-category nerve adjunctions do not state the blunt-cone categorical comparison or strict extension. Quasicategory/Basic.lean:32-91 gives inner-horn lifting only; SimplicialObject/Coskeletal.lean:56-78 gives a coskeletal right Kan extension; neither is a one-line specialization of this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "anodyne|SSet.*join|SSet.*cone",
+   "results": "{\"t\": \"2026-10-16T17:26:27Z\", \"tool\": \"grep\", \"query\": \"anodyne|SSet.*join|SSet.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/WithZeroTopology.lean\", \"Mathlib/Topology/Algebra/WithZeroTopology.lean\", \"Mathlib/MeasureTheory/Measure/AddContent.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean\", \"Mathlib/MeasureTheory/OuterMeasure/OfAddContent.lean\"], \"digest\": \"1ea8ea7d06c12071\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the inner-anodyne cartesian pushout-product declarations and the quasicategory horn-filling declarations; these do not state the blunt-cone/right-anodyne categorical comparison. Other hits concern nondegenerate-simplex colimits or unrelated disjoint constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of simplicial sets induces an equivalence between the relative cylinder with its terminal end collapsed and the cone when the monomorphism is right anodyne",
+   "results": "{\"t\": \"2026-10-16T17:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"A monomorphism of simplicial sets induces an equivalence between the relative cylinder with its terminal end collapsed and the cone when the monomorphism is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.toIsGood\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₀\", \"HomotopicalAlgebra.Cylinder.exists_very_good\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₀\", \"HomotopicalAlgebra.Cylinder.instCofibrationI₁\", \"HomotopicalAlgebra.Cylinder.instWeakEquivalenceI₁\"], \"digest\": \"0869fb9e3eb2145a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the eight hits concern abstract model-category cylinder objects and their good/very-good properties; none states the right-anodyne blunt-cone comparison or a one-line specialization of it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-target-right-fibration",
@@ -99,5 +285,34 @@
   "group": "Q40"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-blunt-join-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Proved monicity by degreewise normal forms; proved the singleton blunt-to-sharp comparison on simplices with an explicit section and vertexwise-identity homotopy and applied the existing cellular criterion; compared strict functor pullbacks using the existing isofibration lemmas; derived the ordinary cone equivalence from the horn calculation and weak saturation; applied Joyal two-out-of-three and lifting for strict extension. No new nodes and no descendant anodyne-cocones citation. The initial check exposed a cycle through the broad enhanced functor/cone node; replaced it with the existing internal-Hom, invertible-prism and outer-horn foundations and wrote out their pointwise-equivalence implication.",
+  "blueprint": "Historical master prop-coef-integral-exceptional-adjoint, proof paragraph beginning For K in D^b_c(X,R), and current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: inherited coherent-diagram foundation along the existing from.via chain. This supplies the blunt-cone extension input to the fixed-target arrow right-fibration lemma; no unit or chapter step is replaced. The current blueprint has no duplicate blunt-join statement.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Step 4 takes its statement with A empty, B=K, Q=Z to fill every outer horn Lambda_0^r of Fun(K,Z) whose first edge has equivalence components; generic quasicategory tool of sk-prop-sf-cbc, no node of sk-prop-sf-biduality-general's route states it, and the broad unit-local cone package depends on this item."
+   },
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Step 4 takes only its converse clause (an edge with the Lambda_0^r extension property for every r>=2 is an equivalence) to make pointwise-equivalence transformations equivalences; generic Joyal-theorem tool of sk-prop-sf-cbc, not replacing any step of the unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-invertible-prism-extension",
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N1-0c62136e6",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-0c62136e6 (reviewer sub-agent of L); spot-checked: I read the whole item: statement and all ten steps. Statement: it agrees with Kerodon Cor 4.6.2.14 (01J0), checked online. That corollary assumes A↪B right anodyne and concludes θ: B⊔_A(A⋄Δ⁰)↪B⋄Δ⁰ is a categorical equivalence; the item matches that and is not strengthened to inner anodyne. The strict-extension clause is 01FS, obtained by Joyal lifting. Small cases checked by hand: A=∅ (P(∅)=Q(∅)=Δ⁰, c_∅ the identity) and i=Λ¹₁, where the domain of θ is Λ²₁ inside P(Δ¹)≃Δ². Steps: (1) the normal form P(K)_r={v}⊔K_r×T_r gives monicity. (2) The cut map to the join formula is correct. (3) I checked the section s_n, c_n s_n=1, monotonicity and descent of the homotopy H (all cases), the endpoints u=0 and u=1, and the degenerate vertex edges, including n=0. (4) The cited prism-extension lemma (01DP) applies with A=∅, B=K, its hypothesis exactly the componentwise one; the converse clause of the outer-horn lemma (019F) then makes such an edge an equivalence. This is done for the components and then for the transformation itself, with a universe enlargement, giving a functor equivalence. (5) Every hypothesis of the cellular criterion holds: injections and connected colimits are preserved, and the empty and simplex cases are done. (6) The pushout-join with ∅→Δ⁰ is Λ^{m+1}_j, which is inner since 0<j≤m; saturation for fixed k then covers every right anodyne map. (7) Inner anodyne maps are trivial cofibrations by the lifting characterization. (8) Fun(−,E) turns the pushout into a strict pullback. p and q are isofibrations by the 'in particular' clause of isofibration-exponentiation, v=c_A^* is an equivalence by step 5, and qv=p; isofibration-base-change has no fibration hypothesis on v or h. (9) The square commutes, and two-out-of-three gives θ_i. (10) Lifting against the fibration C→Δ⁰ gives fθ_i=f₀ strictly. No new nodes. No cycle: the cited nodes have empty proof_deps, except definitions. No duplicate: I checked right-anodyne, cone-mono, anodyne-cocones (a descendant), join-cone-calculus (a left fat cone) and functor-pushout (a homotopy pullback). No SGA source is used. Route: lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling are unsplit statements of sk-prop-sf-cbc, which is outside the transitive route of sk-prop-sf-biduality-general. Both are generic black-box quasicategory tools used in step 4, and I accept them as tool_uses. FIX: the second reader had removed split_report.tool_uses, so the merge would not record these two. The corrected item at fixes/dag/nodes/sec-six-functors/lem-coef-infinity-blunt-join-comparison.json restores them; split_report is the only field that differs.; 1 file(s) fixed by the reviewer"
+ }
 }

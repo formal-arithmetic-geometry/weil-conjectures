@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pur-co-smooth-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition",
@@ -13,40 +13,247 @@
   "place": "node lem-pur-co-smooth-composition, order 1993"
  },
  "stmt_deps": [
-  "def-pur-conventions"
+  "def-pur-conventions",
+  "def-pur-co-smoothness"
  ],
  "proof": [
   {
-   "text": "The three conditions to verify are those of [def-pur-co-smoothness]; pullback and tensor commute by the canonical reassociation in [def-weil-derived-pullback-tensor-hom].\nUsing the composition rule $R(gf)^!\\simeq Rf^!Rg^!$ of\n[def-weil-exceptional-inverse-image] for the two tensor formulas:\n\n$$\nR(gf)^!K\n\\;\\simeq\\;Lf^*\\bigl(Lg^*K\\otimes^L\\omega_g\\bigr)\\otimes^L\\omega_f\n\\;\\simeq\\;L(gf)^*K\\otimes^L\\bigl(\\omega_f\\otimes^LLf^*\\omega_g\\bigr).\n$$",
+   "text": "Work with the finite coefficient $\\Lambda=A_{E,n}$ and the constructible exceptional functors of [def-pur-co-smoothness, def-weil-exceptional-inverse-image]. The morphisms $f,g$ are separated of finite type, hence so is $gf$: composites of separated, of locally finite type and of quasi-compact morphisms are again such (elementary; Mathlib instances `AlgebraicGeometry.IsSeparated` composition, `Morphisms/Separated.lean`:75, `locallyOfFiniteType_comp`, `Morphisms/FiniteType.lean`:68, `quasiCompact_comp`, `Morphisms/QuasiCompact.lean`:69). Use the compact-support composition isomorphism [thm-sf-comp-composition] and its ordinary etale form [lem-amb-etale-compact-comparisons]. Apply [lem-cat-right-adjoint-composition] to the ordinary etale adjunctions defining these functors and then their specified pro-etale constructible realizations. This gives $c:R(gf)^!\\xrightarrow{\\sim}Rf^!Rg^!$. If $\\varepsilon_u:Ru_!Ru^!\\to1$ denotes a counit, its normalization is\n$$\\varepsilon_{gf,K}=\\varepsilon_{g,K}\\circ Rg_!(\\varepsilon_{f,Rg^!K})$$\nafter inserting $c$ and the compact-support composition comparison. This construction uses the etale adjoints and their transported constructible restrictions; it needs no unrestricted pro-etale exceptional adjoint. All applications of clause (2) below have finite-Tor inputs: pullback preserves that category by [lem-sf-pullback-tor-amplitude], and tensor products stay in it by [lem-sf-tensor-ctf].",
    "uses": [
     "def-pur-co-smoothness",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-comp-composition",
+    "lem-cat-right-adjoint-composition",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Opening composition rule; typing of the displayed calculation"
+   }
+  },
+  {
+   "text": "Put $W=\\omega_f\\otimes^L Lf^*\\omega_g$. The monoidal and composite pullback comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-proetale-derived-pullback-composition], followed by the two isomorphisms $\\theta$ of clause (2) in [def-pur-co-smoothness], give for $K\\in D^b_{ctf}(Z,\\Lambda)$\n$$\\Phi_K:L(gf)^*K\\otimes^LW\\xrightarrow{\\sim}Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f\\xrightarrow{\\theta_{f,Lg^*K\\otimes^L\\omega_g}}Rf^!(Lg^*K\\otimes^L\\omega_g)\\xrightarrow{Rf^!\\theta_{g,K}}Rf^!Rg^!K\\xrightarrow{c^{-1}}R(gf)^!K.$$\nAt the unit this gives $a=\\Phi_{\\Lambda_Z}:W\\xrightarrow{\\sim}\\omega_{gf}$. Check the required canonical map, rather than just an abstract tensor isomorphism. Let $e_W:R(gf)_!W\\to\\Lambda_Z$ be the transpose of $a$. By Step 1 and the definition of $\\theta$, it is\n$$Rg_!Rf_!W\\xrightarrow{Rg_!Rf_!\\theta_{f,\\omega_g}}Rg_!Rf_!Rf^!\\omega_g\\xrightarrow{Rg_!\\varepsilon_{f,\\omega_g}}Rg_!\\omega_g\\xrightarrow{\\varepsilon_{g,\\Lambda_Z}}\\Lambda_Z,$$\nwhere the first arrow uses the symmetry $W\\cong Lf^*\\omega_g\\otimes^L\\omega_f$ before applying $\\theta_{f,\\omega_g}$. Expand the two $\\theta$'s in $\\Phi_K$ by their counit transposes. Naturality of the projection formula moves the map $\\theta_{g,K}$ through the $f$-projection formula. Compatibility of the projection formula with composition [fix-prop-projection-formula] identifies the successive $f$- and $g$-projection formulas with that for $gf$. The resulting transpose is exactly\n$$R(gf)_!(L(gf)^*K\\otimes^LW)\\xrightarrow{\\mathrm{sym},\\operatorname{PF}_{gf}^{-1}}R(gf)_!W\\otimes^LK\\xrightarrow{e_W\\otimes1}\\Lambda_Z\\otimes^LK\\cong K.$$\nBy the counit equation defining $a$, this is also the transpose of $\\theta_{gf,K}\\circ(1\\otimes a)$. Uniqueness of transposes proves $\\Phi_K=\\theta_{gf,K}\\circ(1\\otimes a)$. Since $a$ and $\\Phi_K$ are isomorphisms, clause (2) holds for $gf$, and $a^{-1}$ gives the asserted dualizing-object identification.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Displayed calculation, including identification of the canonical tensor map"
+   }
+  },
+  {
+   "text": "Choose two-sided tensor inverses $M_f,M_g$ from clause (1) of [def-pur-co-smoothness]. The objects $\\omega_f=Rf^!\\Lambda_Y$ and $\\omega_g=Rg^!\\Lambda_Z$ lie in $D^b_{ctf}$ by the finite-Tor preservation of the constructible exceptional functor [def-weil-exceptional-inverse-image], and $M_f,M_g\\in D^b_{ctf}$ by clause (1). Hence both $W$ and $B=Lf^*M_g\\otimes^LM_f$ lie in $D^b_{ctf}(X,\\Lambda)$ by [lem-sf-pullback-tor-amplitude, lem-sf-tensor-ctf]. The monoidal comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the inverse identities give\n$$W\\otimes^LB\\cong\\omega_f\\otimes^LLf^*(\\omega_g\\otimes^LM_g)\\otimes^LM_f\\cong\\omega_f\\otimes^LM_f\\cong\\Lambda_X,$$\n$$B\\otimes^LW\\cong Lf^*M_g\\otimes^L(M_f\\otimes^L\\omega_f)\\otimes^LLf^*\\omega_g\\cong Lf^*(M_g\\otimes^L\\omega_g)\\cong\\Lambda_X.$$\nThe pullback of the unit is the unit: on constant-coefficient complexes it is inverse image of the constant coefficient sheaf, as specified in [def-weil-derived-pullback-tensor-hom]. Thus $W$, and hence $\\omega_{gf}$ via $a$, is invertible. This proves clause (1).",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "def-weil-derived-pullback-tensor-hom",
     "def-weil-exceptional-inverse-image"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Sentence on invertibility of the tensor product"
+   }
   },
   {
-   "text": "The tensor product in the parentheses is invertible (a product of\ninvertible objects of [def-weil-derived-tensor]), which gives (1)\nand (2) for $gf$; the same calculation after arbitrary base change\ngives (3).",
+   "text": "For use after base change, verify a formal consequence of the projection formula without assuming the base-changed morphism cohomologically smooth. Let $u:T\\to U$ be separated of finite type in this setting, let $P\\in D^b_{ctf}(U,\\Lambda)$ be tensor-invertible with inverse $P^{-1}$, and write $F_u=Ru_!$, $G_u=Ru^!$, $u^*=Lu^*$. The adjunctions of [def-weil-exceptional-inverse-image] and the projection formula [fix-prop-projection-formula] give natural bijections, for every $A\\in D^b_{ctf}(T,\\Lambda)$,\n$$\\begin{aligned}\n\\operatorname{Hom}(A,G_uP)&\\cong\\operatorname{Hom}(F_uA,P)\\cong\\operatorname{Hom}(F_uA\\otimes^LP^{-1},\\Lambda_U)\\\\\n&\\cong\\operatorname{Hom}(F_u(A\\otimes^Lu^*P^{-1}),\\Lambda_U)\\cong\\operatorname{Hom}(A\\otimes^Lu^*P^{-1},\\omega_u)\\\\\n&\\cong\\operatorname{Hom}(A,u^*P\\otimes^L\\omega_u).\n\\end{aligned}$$\nPullback of the two inverse identities is valid by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; the finite-Tor domains follow from [lem-sf-pullback-tor-amplitude, lem-sf-tensor-ctf]. Yoneda gives an isomorphism $u^*P\\otimes^L\\omega_u\\to G_uP$. Its transpose, undoing the displayed bijections, is $(\\varepsilon_{u,\\Lambda_U}\\otimes1)\\operatorname{PF}_u^{-1}$ with symmetry and units inserted, so it is exactly the canonical $\\theta_{u,P}$ of [def-pur-co-smoothness]. In particular $\\theta_{u,P}$ is invertible for an invertible input even when cohomological smoothness of $u$ has not been established.",
    "uses": [
-    "def-weil-derived-tensor"
+    "def-weil-exceptional-inverse-image",
+    "fix-prop-projection-formula",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "def-pur-co-smoothness"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence: the needed tensor formula on an invertible input"
+   }
+  },
+  {
+   "text": "Here is the projection/base-change compatibility needed for the canonical maps. For a Cartesian square with vertical maps $u:T\\to U$, $u':T'\\to U'$ and horizontal maps $v:U'\\to U$, $w:T'\\to T$, write $E_u:v^*F_u\\xrightarrow{\\sim}F_{u'}w^*$ for compact-support exchange. On etale-origin inputs this is [thm-cbc-finite-level-proetale]. With the tensor and pullback comparisons inserted, the equality needed is\n$$E_u(N\\otimes^Lu^*P)\\circ v^*\\operatorname{PF}_{u,N,P}=\\operatorname{PF}_{u',w^*N,v^*P}\\circ(E_u(N)\\otimes1).$$\nTo prove it, use the chosen-compactification formulas of [def-exchange-projection]: for $u=pj$, exchange is proper exchange followed by the open-extension comparison, and projection is proper projection followed by the open-extension projection. The proper-factor square is precisely [lem-weil-pbc-ringed-exchange-tensor-coherence], applied to $p,j_!N,P$. For the open factor use [lem-cbc-extension-zero-projection-formula, lem-cbc-proetale-extension-zero-base-change]: both its source and target identify with extension by zero from the base-changed open. The presheaf definition [def-weil-extension-by-zero] gives $j'^{-1}j'_!=1$ by restriction, and the exact adjunction of [lem-cbc-proetale-extension-zero] therefore identifies maps between these extensions with maps on that open. There both composites are the canonical pullback-tensor identification on $N\\otimes^Lj^*p^*P$, so they are equal. This argument compares morphisms by the open adjunction, without assuming that geometric stalks detect all derived morphisms. Pasting these two squares gives the displayed equality for $u$, using exactly the compactification formulas above. The map $E_u$ entering clause (3) of [def-pur-co-smoothness] is the compactification composite of [def-cbc-exchange-map] (proper exchange followed by the open-immersion base-change identification) read on the pro-etale site; its formula uses no property of $v$, so the same composite is the one used above for an arbitrary, possibly non-separated, $v$. Where an input is presented by an etale-origin witness, [lem-weil-pbc-transport-identifies-exchange] identifies the etale proper exchange with the pro-etale ambient exchange used here, and [lem-cbc-proetale-extension-zero-comparison] identifies the etale and pro-etale extensions by zero; the two open base-change maps then agree, being maps out of an extension by zero which restrict to the canonical pullback identification over the open, by the adjunction of [lem-cbc-proetale-extension-zero]. [thm-cbc-finite-level-proetale] gives invertibility of $E_u$ on these inputs. No separatedness of $v$ is used.",
+   "uses": [
+    "thm-cbc-finite-level-proetale",
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-extension-by-zero",
+    "lem-cbc-proetale-extension-zero",
+    "def-cbc-exchange-map",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence: compatibility of the specified projection and exchange maps"
+   }
+  },
+  {
+   "text": "In the square of Step 5, define for a finite-Tor input $P$ the map $b_{u,v;P}:w^*G_uP\\to G_{u'}v^*P$ as the transpose of\n$$F_{u'}w^*G_uP\\xrightarrow{E_u(G_uP)^{-1}}v^*F_uG_uP\\xrightarrow{v^*\\varepsilon_{u,P}}v^*P.$$\nFor $P=\\Lambda_U$ this is the specified $\\beta_{u,v}$ in [def-pur-co-smoothness]. The defining counit equation for $\\theta_{u,P}$, the equality in Step 5, and naturality of $E_u$ give\n$$b_{u,v;P}\\circ w^*\\theta_{u,P}=\\theta_{u',v^*P}\\circ(1\\otimes\\beta_{u,v}).$$\nIndeed transpose both sides with source $u'^*v^*P\\otimes^Lw^*\\omega_u$. For the left side, substitute the definition of $b$ and use naturality of $E_u^{-1}$ to put $w^*\\theta_{u,P}$ inside $v^*F_u$; the counit equation for $\\theta$ then leaves $v^*((\\varepsilon_{u,\\Lambda_U}\\otimes1)\\operatorname{PF}_u^{-1})E_u^{-1}$. For the right side, the counit equation for $\\theta_{u',v^*P}$ leaves $(\\varepsilon_{u',\\Lambda_{U'}}\\otimes1)(F_{u'}\\beta_{u,v}\\otimes1)\\operatorname{PF}_{u'}^{-1}$. Substituting the counit equation defining $\\beta_{u,v}$ makes this $(v^*\\varepsilon_{u,\\Lambda_U}\\otimes1)(E_u(\\omega_u)^{-1}\\otimes1)\\operatorname{PF}_{u'}^{-1}$. These expressions agree by Step 5 with $N=\\omega_u$. This proves the equality by injectivity of the adjunction bijection. Consequently, if $P$ is tensor-invertible and $\\beta_{u,v}$ is invertible, then $b_{u,v;P}$ is invertible: both tensor maps are invertible by Step 4 and pullback preserves the inverse of $P$. This argument uses only the canonical definitions, not an assertion that $u'$ is cohomologically smooth.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final base-change sentence: transpose calculation for an invertible input"
+   }
+  },
+  {
+   "text": "Now take any $t:Z'\\to Z$ in the fixed setting, put $Y'=Y\\times_ZZ'$, $X'=X\\times_ZZ'$, and write $h:Y'\\to Y$, $s:X'\\to X$, $g':Y'\\to Z'$, $f':X'\\to Y'$. The vertical maps $f',g'$ remain separated of finite type by [lem-pod-separated-finite-type-base-change]. Clause (3) of [def-pur-co-smoothness] gives isomorphisms $\\beta_{g,t}:h^*\\omega_g\\to\\omega_{g'}$ and $\\beta_{f,h}:s^*\\omega_f\\to\\omega_{f'}$. Since $\\omega_g$ is invertible, Step 6 gives the isomorphism $b_{f,h;\\omega_g}:s^*Rf^!\\omega_g\\to Rf'^!h^*\\omega_g$. Hence\n$$s^*\\omega_{gf}\\xrightarrow{s^*c}s^*Rf^!\\omega_g\\xrightarrow{b_{f,h;\\omega_g}}Rf'^!h^*\\omega_g\\xrightarrow{Rf'^!\\beta_{g,t}}Rf'^!\\omega_{g'}\\xrightarrow{c'^{-1}}\\omega_{g'f'}$$\nis invertible. It is the specified $\\beta_{gf,t}$, as follows by transposing. The transpose of this composite, under the pasted adjunction of Step 1, is\n$$Rg'_!Rf'_!s^*Rf^!Rg^!\\Lambda_Z\\xrightarrow{Rg'_!E_f^{-1}}Rg'_!h^*Rf_!Rf^!Rg^!\\Lambda_Z\\xrightarrow{E_g^{-1}}t^*Rg_!Rf_!Rf^!Rg^!\\Lambda_Z\\xrightarrow{t^*Rg_!\\varepsilon_f}t^*Rg_!Rg^!\\Lambda_Z\\xrightarrow{t^*\\varepsilon_g}\\Lambda_{Z'}.$$\nNaturality moves the $f$-counit through $E_g^{-1}$. The vertical-pasting assertion of [thm-cbc-finite-torsion], transported on etale-origin objects by [thm-cbc-finite-level-proetale], identifies the first two arrows with $E_{gf}^{-1}$ under compact-support composition. The last two arrows are $t^*\\varepsilon_{gf}$ by Step 1. Thus the transpose is exactly the composite defining $\\beta_{gf,t}$; equivalently this is the mate-pasting rule [lem-weil-pbc-mate-pasting]. It is therefore invertible for every $t$, proving clause (3). Together with Steps 2 and 3 this proves cohomological smoothness of $gf$ and the claimed isomorphism.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "thm-cbc-finite-torsion",
+    "thm-cbc-finite-level-proetale",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+    "place": "Final sentence: arbitrary base change, with the canonical comparison identified"
+   }
   }
  ],
  "proof_deps": [
   "def-pur-co-smoothness",
-  "def-weil-derived-pullback-tensor-hom",
   "def-weil-exceptional-inverse-image",
-  "def-weil-derived-tensor"
+  "thm-sf-comp-composition",
+  "lem-cat-right-adjoint-composition",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "fix-prop-projection-formula",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-cbc-finite-level-proetale",
+  "def-exchange-projection",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-extension-by-zero",
+  "lem-cbc-proetale-extension-zero",
+  "def-cbc-exchange-map",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pod-separated-finite-type-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-cohsm/lem-pur-co-smooth-composition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Proof; details of canonical-map compatibility and base change expanded in second reading"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of cohomologically smooth morphisms and tensor formula for exceptional inverse image",
+   "results": "AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth; AlgebraicGeometry.isSmooth_comp; generic Scheme.Modules pullback composition declarations; no cohomological-smoothness or exceptional-inverse-image declaration",
+   "date": "2026-10-16",
+   "verdict": "no match; only ordinary smooth composition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction composition exceptional inverse image tensor invertible",
+   "results": "0 hits; loogle reported Unknown identifier composition",
+   "date": "2026-10-16",
+   "verdict": "unavailable query syntax"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologically[[:space:]]*smooth|R\\(gf\\)\\^!|tensor.*invertible (WeilConjectures)",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of cohomologically smooth morphisms and tensor formula for exceptional inverse image",
+   "results": "AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth; RingHom.isStandardSmooth_stableUnderComposition; AlgebraicGeometry.isSmooth_comp; no cohomological-smoothness declaration",
+   "date": "2026-10-16",
+   "verdict": "no match; only ordinary smoothness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "CategoryTheory.conjugateIsoEquiv and apply_hom/apply_inv variants",
+   "date": "2026-10-16",
+   "verdict": "general generic mate calculus; geometric item absent"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologically[[:space:]]*smooth|R\\(gf\\)\\^!|omega_\\{gf\\} (Mathlib/CategoryTheory)",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomologically smooth composition exceptional inverse image tensor invertible dualizing object",
+   "results": "Module.Invertible.instTensorProduct; generic rigid/tensor results; no exceptional-inverse-image declaration",
+   "date": "2026-10-16",
+   "verdict": "no match; generic module invertibility only"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologically[[:space:]]*smooth|R\\(gf\\)\\^!|omega (CategoryTheory)",
+   "results": "generic triangulated omega references only; no geometric declaration",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateIsoEquiv, tensor invertible",
+   "results": "0 hits; loogle reported Unknown identifier tensor",
+   "date": "2026-10-16",
+   "verdict": "unavailable query syntax"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalSmooth|CohomologicallySmooth|cohomologically_smooth|coSmooth",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint of a composite is the composite of right adjoints and its counit is the pasted counit",
+   "results": "CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Functor.isRightAdjoint_comp; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.comp_unit; CategoryTheory.Adjunction.leftAdjointCompIso_hom; CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+   "date": "2026-10-16",
+   "verdict": "generic adjunction declarations only; no geometric composition theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-16",
+   "verdict": "generic adjunction declarations only; no geometric composition theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric monoidal pullback carries tensor invertible objects to tensor invertible objects",
+   "results": "CategoryTheory.MonoidalCategory.tensor_inv_hom_id'; CategoryTheory.Dial.tensorObj_rel; CategoryTheory.Dial.instSymmetricCategory; CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal; CategoryTheory.Dial.braiding; CategoryTheory.Dial.symmetry; CategoryTheory.Localization.Monoidal.β_hom_app; CategoryTheory.MonoidalCategory.tensor_isIso",
+   "date": "2026-10-16",
+   "verdict": "generic tensor and localization declarations only; no geometric derived composition statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +279,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-cohsm"
+ "unit": "sk-prop-cohsm",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-co-smooth-composition",
+  "worker": "stage1",
+  "summary": "Second reading repairs the conditional mate citation, finite-Tor typing, identification of the canonical tensor map, and arbitrary base change. Seven explicit steps follow the blueprint calculation: constructible adjoint composition, canonical tensor formula, explicit inverse, invertible-input Hom calculation, compact projection/exchange compatibility, its transpose, and vertical pasting. No new nodes; statement unchanged.",
+  "blueprint": "main-20261015 lem-pur-co-smooth-composition.proof.md: opening composition and displayed calculation (Steps 1–2), invertibility sentence (Step 3), final arbitrary-base-change sentence (Steps 4–7)."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N3-05ddf09e0",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-05ddf09e0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps, every cited statement, both blueprint snapshots (the statement is unchanged) and the sk-prop-cohsm route. The mathematics is correct and complete. Step 2's transpose argument for the canonical theta checks out. So do Step 3's two inverse products, Step 4's Hom chain for an invertible P (it does not assume the base-changed map is smooth), Step 6's two transposes, and Step 7's pasted beta computation, which I redid arrow by arrow. The coefficient category and the beta/Ex_! base-change map match def-pur-co-smoothness. There are no new nodes and no duplicates, the graph has no cycle, and no SGA is cited. I fixed three small faults in fixes/dag/nodes/sec-smooth-purity/lem-pur-co-smooth-composition.json. (1) C1, Step 1: it asserted gf is separated of finite type with no support; it now names the Mathlib composition instances (Separated.lean:75, FiniteType.lean:68, QuasiCompact.lean:69). (2) Step 3: it needed omega_f and omega_g in D^b_ctf without saying why; it now cites the finite-Tor preservation in def-weil-exceptional-inverse-image. (3) C4, Step 5: its exchange formula came from def-exchange-projection, which assumes g separated, but clause (3) allows any v. It also credited thm-cbc-finite-level-proetale with a transport identification that the theorem does not state. Step 5 now cites def-cbc-exchange-map, lem-weil-pbc-transport-identifies-exchange and lem-cbc-proetale-extension-zero-comparison, all on the unit's route. I accept three tool uses: lem-sf-pullback-tor-amplitude and lem-sf-tensor-ctf (typing only) and fix-prop-projection-formula (generic projection formula, which def-pur-co-smoothness already relies on).; 1 file(s) fixed by the reviewer"
+ }
 }
