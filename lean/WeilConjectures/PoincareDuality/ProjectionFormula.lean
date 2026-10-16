@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 
 /-!
 
@@ -85,6 +86,182 @@ open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+universe v₁ v₂ u₁ u₂
+
+namespace CategoryTheory.Adjunction
+
+open Functor.OplaxMonoidal Functor.LaxMonoidal
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+section
+variable {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
+@[reassoc]
+private lemma projectionMorphism_natural_left_aux {A A' : C} (h : A ⟶ A') (B : D) :
+    G.map h ▷ B ≫ adj.projectionMorphism A' B =
+      adj.projectionMorphism A B ≫ G.map (h ▷ F.obj B) := by
+  rw [projectionMorphism, projectionMorphism, ← homEquiv_naturality_left,
+    ← homEquiv_naturality_right]
+  congr 1
+  have hc := adj.counit.naturality h
+  simp only [Functor.comp_map, Functor.id_map] at hc
+  rw [← δ_natural_left_assoc, ← comp_whiskerRight, hc,
+    comp_whiskerRight, Category.assoc]
+end
+section
+variable {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.LaxMonoidal]
+@[reassoc]
+private lemma projectionComparison_natural_left_aux {M M' : C} (h : M ⟶ M') (N : D) :
+    P.map (h ▷ S.obj N) ≫ adj.projectionComparison M' N =
+      adj.projectionComparison M N ≫ P.map h ▷ N := by
+  rw [projectionComparison, projectionComparison, ← homEquiv_naturality_left_symm,
+    ← homEquiv_naturality_right_symm, Category.assoc, ← μ_natural_left]
+  congr 1
+  have hu := adj.unit.naturality h
+  simp only [Functor.comp_map, Functor.id_map] at hu
+  rw [← comp_whiskerRight_assoc, hu, comp_whiskerRight_assoc]
+
+@[reassoc]
+private lemma inv_projectionComparison_natural_left_aux
+    {M M' : C} (h : M ⟶ M') (N : D)
+    [IsIso (adj.projectionComparison M N)] [IsIso (adj.projectionComparison M' N)] :
+    P.map h ▷ N ≫ inv (adj.projectionComparison M' N) =
+      inv (adj.projectionComparison M N) ≫ P.map (h ▷ S.obj N) := by
+  rw [IsIso.eq_inv_comp, ← projectionComparison_natural_left_aux_assoc,
+    IsIso.hom_inv_id, Category.comp_id]
+
+end
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory
+section
+variable {C D E : Type*} [Category C] [MonoidalCategory C]
+  [Category D] [MonoidalCategory D] [Category E] [MonoidalCategory E]
+  (F : D ⥤ E) (G : E ⥤ D) (I : C ⥤ E) (U : E ⥤ C) (T : D ⥤ C)
+  (e : F ⋙ U ⟶ T)
+  (p : ∀ (A : E) (B : D), G.obj A ⊗ B ⟶ G.obj (A ⊗ F.obj B))
+  (q : ∀ (K : C) (N : E), I.obj K ⊗ N ⟶ I.obj (K ⊗ U.obj N))
+private lemma composite_natural_right_aux
+    (hp : ∀ (A : E) {B B' : D} (h : B ⟶ B'),
+      G.obj A ◁ h ≫ p A B' = p A B ≫ G.map (A ◁ F.map h))
+    (hq : ∀ (K : C) {N N' : E} (h : N ⟶ N'),
+      I.obj K ◁ h ≫ q K N' = q K N ≫ I.map (K ◁ U.map h))
+    (K : C) {B B' : D} (h : B ⟶ B') :
+    G.obj (I.obj K) ◁ h ≫
+        (p (I.obj K) B' ≫ G.map (q K (F.obj B') ≫ I.map (K ◁ e.app B'))) =
+      (p (I.obj K) B ≫ G.map (q K (F.obj B) ≫ I.map (K ◁ e.app B))) ≫
+        (I ⋙ G).map (K ◁ T.map h) := by
+  rw [← Category.assoc, hp, Category.assoc, ← G.map_comp,
+    reassoc_of% (hq K (F.map h))]
+  simp only [Category.assoc, ← I.map_comp, ← whiskerLeft_comp, Functor.comp_map]
+  have he := e.naturality h
+  simp only [Functor.comp_map] at he
+  rw [he]
+  simp only [Functor.map_comp, whiskerLeft_comp, Category.assoc]
+private lemma composite_natural_left_aux
+    (hp : ∀ {A A' : E} (h : A ⟶ A') (B : D),
+      G.map h ▷ B ≫ p A' B = p A B ≫ G.map (h ▷ F.obj B))
+    (hq : ∀ {K K' : C} (h : K ⟶ K') (N : E),
+      I.map h ▷ N ≫ q K' N = q K N ≫ I.map (h ▷ U.obj N))
+    {K K' : C} (h : K ⟶ K') (B : D) :
+    (I ⋙ G).map h ▷ B ≫
+        (p (I.obj K') B ≫ G.map (q K' (F.obj B) ≫ I.map (K' ◁ e.app B))) =
+      (p (I.obj K) B ≫ G.map (q K (F.obj B) ≫ I.map (K ◁ e.app B))) ≫
+        (I ⋙ G).map (h ▷ T.obj B) := by
+  change G.map (I.map h) ▷ B ≫ _ = _
+  rw [← Category.assoc, hp, Category.assoc, ← G.map_comp,
+    reassoc_of% (hq h (F.obj B))]
+  simp only [Category.assoc, ← I.map_comp, Functor.comp_map]
+  rw [← whisker_exchange]
+  simp only [Functor.map_comp, Category.assoc]
+end
+end CategoryTheory
+
+namespace CategoryTheory.Adjunction
+section
+variable {C D : Type*} [Category C] [MonoidalCategory C]
+  [Category D] [MonoidalCategory D]
+  {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.Monoidal]
+  [adj.HasProjectionFormula] (B : D) [MonObj B] [IsIso adj.unit]
+private lemma linearUnitIso : IsIso (adj.mapModLeftAdjunction (B := B)).unit := by
+  have (M : Mod C (S.obj B)) :
+      IsIso ((adj.mapModLeftAdjunction (B := B)).unit.app M) := by
+    have h : ((adj.mapModLeftAdjunction (B := B)).unit.app M).hom =
+        adj.unit.app M.X := by
+      change adj.homEquiv _ _ (𝟙 _) = _
+      exact adj.homEquiv_id _
+    have : IsIso ((Mod.forget (S.obj B)).map
+        ((adj.mapModLeftAdjunction (B := B)).unit.app M)) := by
+      change IsIso (((adj.mapModLeftAdjunction (B := B)).unit.app M).hom)
+      rw [h]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget (S.obj B))
+  exact NatIso.isIso_of_isIso_app _
+end
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+open Limits MonObj
+section
+variable {C D : Type*} [Category C] [MonoidalCategory C]
+  [Category D] [MonoidalCategory D]
+  {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.Monoidal]
+  [adj.HasProjectionFormula] [IsIso adj.unit]
+variable [BraidedCategory D] [HasCoequalizers D]
+  [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
+  [PreservesColimitsOfShape WalkingParallelPair (S ⋙ P)]
+  (B : D) [MonObj B] [IsCommMonObj B]
+private lemma relativeTensorCounitIso
+    (M : Mod C (S.obj B)) (N : Mod D B) :
+    IsIso (adj.counit.app ((adj.mapModLeft B).obj M ⊗ N).X) := by
+  let M' := (adj.mapModLeft B).obj M
+  have h (Z : D) : IsIso (adj.counit.app (M'.X ⊗ Z)) := by
+    have : P.Full := adj.fullyFaithfulLOfIsIsoUnit.full
+    have : P.Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+    exact adj.isIso_counit_app_of_iso
+      ((β_ M'.X Z) ≪≫ (asIso (adj.projectionFormulaMap Z M.X)).symm)
+  have h' : IsIso (adj.counit.app ((M'.X ⊗ B) ⊗ N.X)) := by
+    have : P.Full := adj.fullyFaithfulLOfIsIsoUnit.full
+    have : P.Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+    exact adj.isIso_counit_app_of_iso
+      ((α_ M'.X B N.X) ≪≫ (β_ M'.X (B ⊗ N.X)) ≪≫
+        (asIso (adj.projectionFormulaMap (B ⊗ N.X) M.X)).symm)
+  let K := parallelPair
+    (((β_ M'.X B).hom ≫ γ[B,M'.X]) ▷ N.X)
+    ((α_ M'.X B N.X).hom ≫ M'.X ◁ γ[B,N.X])
+  have : IsIso (Functor.whiskerLeft K adj.counit) := by
+    have (k : WalkingParallelPair) : IsIso ((Functor.whiskerLeft K adj.counit).app k) := by
+      cases k
+      · exact h'
+      · exact h N.X
+    exact NatIso.isIso_of_isIso_app _
+  exact isIso_app_coconePt_of_preservesColimit K adj.counit
+    (Cofork.ofπ (Mod.tensorObjπ M' N) (Mod.tensorObjπ_condition M' N))
+    (Mod.isColimitTensorπ M' N)
+end
+end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Adjunction
+section
+variable {C D : Type*} [Category C] [MonoidalCategory C]
+  [Category D] [MonoidalCategory D]
+  {P : C ⥤ D} {S : D ⥤ C} (adj : P ⊣ S) [S.Monoidal]
+  [adj.HasProjectionFormula] (B : D) [MonObj B]
+private lemma linearCounitIso (N : Mod D B) [IsIso (adj.counit.app N.X)] :
+    IsIso ((adj.mapModLeftAdjunction (B := B)).counit.app N) := by
+  have h : ((adj.mapModLeftAdjunction (B := B)).counit.app N).hom =
+      adj.counit.app N.X := by
+    change (adj.homEquiv _ _).symm (𝟙 _) = _
+    exact adj.homEquiv_symm_id _
+  have : IsIso ((Mod.forget B).map
+      ((adj.mapModLeftAdjunction (B := B)).counit.app N)) := by
+    change IsIso (((adj.mapModLeftAdjunction (B := B)).counit.app N).hom)
+    rw [h]
+    infer_instance
+  exact isIso_of_reflects_iso _ (Mod.forget B)
+end
+end CategoryTheory.Adjunction
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -143,14 +320,207 @@ noncomputable def openImmersionProjectionComparison
     (D((j)_!open⟦Λ⟧)).obj (M ⊗ (L((j)^*⟦Λ⟧)).obj N) ⟶ (D((j)_!open⟦Λ⟧)).obj M ⊗ N :=
   (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).projectionComparison M N
 
+open Limits DerivedCategory
+
+private lemma openUnitIso : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
+  let adj₀ := ProEtale.openImmersionLowerShriekAdjunction Ab.{u + 1} j
+  have : IsIso adj₀.unit :=
+    (ProEtale.openImmersionAdjunctionTriple Ab.{u + 1} j).isIso_unit_iff_isIso_counit.mpr
+      (ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit Ab.{u + 1} j)
+  have : (j)_!open[Ab.{u + 1}].Full := adj₀.fullyFaithfulLOfIsIsoUnit.full
+  have : (j)_!open[Ab.{u + 1}].Faithful := adj₀.fullyFaithfulLOfIsIsoUnit.faithful
+  have : IsIso (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j)
+  have : IsIso (linearOpenImmersionLowerShriekAdjunction Λ j).unit :=
+    CategoryTheory.Adjunction.linearUnitIso
+      (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j)
+      (condensedRingObj Λ X)
+  have : (linearOpenImmersionLowerShriek Λ j).Full :=
+    (linearOpenImmersionLowerShriekAdjunction Λ j).fullyFaithfulLOfIsIsoUnit.full
+  have : (linearOpenImmersionLowerShriek Λ j).Faithful :=
+    (linearOpenImmersionLowerShriekAdjunction Λ j).fullyFaithfulLOfIsIsoUnit.faithful
+  have : (Mod.comap (condensedPullbackHom Λ j)).Full :=
+    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.full
+  have : (Mod.comap (condensedPullbackHom Λ j)).Faithful :=
+    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.faithful
+  have : (j)_!open⟦Λ⟧.Full := by
+    unfold openImmersionLowerShriek
+    infer_instance
+  have : (j)_!open⟦Λ⟧.Faithful := by
+    unfold openImmersionLowerShriek
+    infer_instance
+  exact (openImmersionLowerShriekUpperStarAdjunction Λ j).unit_isIso_of_L_fully_faithful
+private lemma derivedOpenUnitIso :
+    IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
+  have := openUnitIso Λ j
+  exact Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+    (openImmersionLowerShriekUpperStarAdjunction Λ j)
+
+private lemma openTensorEssImage
+    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))
+    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    ((j)_!open⟦Λ⟧).essImage (((j)_!open⟦Λ⟧).obj M ⊗ N) := by
+  let adj₀ := ProEtale.openImmersionLowerShriekAdjunction Ab.{u + 1} j
+  have : IsIso adj₀.unit :=
+    (ProEtale.openImmersionAdjunctionTriple Ab.{u + 1} j).isIso_unit_iff_isIso_counit.mpr
+      (ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit Ab.{u + 1} j)
+  have : (j)_!open[Ab.{u + 1}].Full := adj₀.fullyFaithfulLOfIsIsoUnit.full
+  have : (j)_!open[Ab.{u + 1}].Faithful := adj₀.fullyFaithfulLOfIsIsoUnit.faithful
+  let adj := ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j
+  have : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
+  have : PreservesColimitsOfShape WalkingParallelPair
+      ((j)^*[Ab.{u + 1}] ⋙ (j)_!open[Ab.{u + 1}]) :=
+    comp_preservesColimitsOfShape _ _
+  let M' := (Mod.comap (condensedPullbackHom Λ j)).obj M
+  let T := ((j)_!open⟦Λ⟧).obj M ⊗ N
+  have : IsIso (adj.counit.app T.X) :=
+    CategoryTheory.Adjunction.relativeTensorCounitIso adj (condensedRingObj Λ X) M' N
+  have : IsIso ((linearOpenImmersionLowerShriekAdjunction Λ j).counit.app T) :=
+    CategoryTheory.Adjunction.linearCounitIso adj (condensedRingObj Λ X) T
+  let E := Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)
+  let Z := ((j)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ X)).obj T
+  refine ⟨E.inverse.obj Z, ⟨?_⟩⟩
+  exact (linearOpenImmersionLowerShriek Λ j).mapIso (E.counitIso.app Z) ≪≫
+    asIso ((linearOpenImmersionLowerShriekAdjunction Λ j).counit.app T)
+
+private lemma openModuleProjectionFormula :
+    (openImmersionLowerShriekUpperStarAdjunction Λ j).HasProjectionFormula := by
+  have := openUnitIso Λ j
+  let adj := openImmersionLowerShriekUpperStarAdjunction Λ j
+  have : (j)_!open⟦Λ⟧.Full := adj.fullyFaithfulLOfIsIsoUnit.full
+  have : (j)_!open⟦Λ⟧.Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+  refine ⟨fun N M ↦ ?_⟩
+  obtain ⟨Z, ⟨e⟩⟩ := openTensorEssImage Λ j M N
+  have : IsIso (adj.counit.app (N ⊗ ((j)_!open⟦Λ⟧).obj M)) :=
+    adj.isIso_counit_app_of_iso ((β_ N _) ≪≫ e.symm)
+  change IsIso (adj.projectionFormulaMap N M)
+  rw [Adjunction.projectionFormulaMap, Adjunction.homEquiv_counit]
+  infer_instance
+
+private noncomputable abbrev tensorPullbackAux :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) ⥤
+        Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) :=
+  (((Functor.whiskeringLeft₂ _).obj (j)^*⟦Λ⟧).obj (𝟭 _)).obj (curriedTensor _)
+
+private instance : (tensorPullbackAux Λ j).PreservesZeroMorphisms where
+  map_zero _ _ := by ext; simp [tensorPullbackAux]
+private instance (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (condensedRingObj Λ X)) : ((tensorPullbackAux Λ j).obj N).PreservesZeroMorphisms where
+  map_zero _ _ := by simp [tensorPullbackAux]
+
+private noncomputable def openModuleProjectionMapAux :
+    (Functor.postcompose₂.obj (j)_!open⟦Λ⟧).obj (tensorPullbackAux Λ j) ⟶
+      (((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj (j)_!open⟦Λ⟧).obj (curriedTensor _) where
+  app N :=
+    { app M := (openImmersionLowerShriekUpperStarAdjunction Λ j).projectionFormulaMap N M
+      naturality _ _ h :=
+        (openImmersionLowerShriekUpperStarAdjunction Λ j).projectionFormulaMap_natural_right N h }
+  naturality _ _ h := by
+    apply NatTrans.ext
+    funext M
+    exact (openImmersionLowerShriekUpperStarAdjunction Λ j).projectionFormulaMap_natural_left h M
+
+private instance tensorPullbackHasMapAux
+    (N : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ)
+    (M : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U)) ℤ) :
+    HomologicalComplex.HasMapBifunctor N M (tensorPullbackAux Λ j) (.up ℤ) := by
+  intro n
+  exact HasColimitsOfShape.has_colimit _
+
+private noncomputable def openComplexTensorIsoAux
+    (N : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ)
+    (M : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U)) ℤ) :
+    (((j)_!open⟦Λ⟧).mapHomologicalComplex (.up ℤ)).obj
+        (HomologicalComplex.mapBifunctor N M (tensorPullbackAux Λ j) (.up ℤ)) ≅
+      N ⊗ (((j)_!open⟦Λ⟧).mapHomologicalComplex (.up ℤ)).obj M := by
+  have := openModuleProjectionFormula Λ j
+  have : ∀ N M, IsIso (((openModuleProjectionMapAux Λ j).app N).app M) :=
+    fun N M ↦ by
+      change IsIso ((openImmersionLowerShriekUpperStarAdjunction Λ j).projectionFormulaMap N M)
+      infer_instance
+  have : IsIso (HomologicalComplex.mapBifunctorComparison
+      (openModuleProjectionMapAux Λ j) (.up ℤ) N M) := by
+    apply HomologicalComplex.Hom.isIso_of_components
+  exact asIso (HomologicalComplex.mapBifunctorComparison
+    (openModuleProjectionMapAux Λ j) (.up ℤ) N M)
+
+private lemma derivedOpenTensorEssImageAux
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U)))
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ∃ Z, Nonempty ((D((j)_!open⟦Λ⟧)).obj K ⊗ N ≅ (D((j)_!open⟦Λ⟧)).obj Z) := by
+  have (Z : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj Z) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft Z)
+      (NatIso.ofComponents (fun W ↦ β_ Z W) (by intros; simp [curriedTensor]))
+  have hcol : ∀ (Z : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)), PreservesColimitsOfShape ℤ ((curriedTensor _).obj Z) :=
+    fun _ ↦ inferInstance
+  have hflat : Abelian.HasFunctorialFlatResolution
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := inferInstance
+  have hexact : HasExactColimitsOfShape ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := inferInstance
+  have hcop : HasCountableCoproducts
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := inferInstance
+  have hK : (HomotopyCategory.quasiIso
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+      (.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure := by
+    infer_instance
+  obtain ⟨P, hP, ⟨eN⟩⟩ := DerivedCategory.exists_kFlat_iso N
+  let K₀ := Q.objPreimage K
+  let K₁ := (((j)_!open⟦Λ⟧).mapHomologicalComplex (.up ℤ)).obj K₀
+  let N₁ := P.as
+  have := Functor.isIso_μNatTrans_Qh_app_app_of_kFlat
+    ((HomotopyCategory.quotient _ _).obj K₁) P hP
+  refine ⟨Q.obj (HomologicalComplex.mapBifunctor N₁ K₀ (tensorPullbackAux Λ j) (.up ℤ)),
+    ⟨?_⟩⟩
+  exact ((curriedTensor _).mapIso ((D((j)_!open⟦Λ⟧)).mapIso (Q.objObjPreimageIso K).symm ≪≫
+      (((j)_!open⟦Λ⟧).mapDerivedCategoryFactors.app K₀) ≪≫
+      ((quotientCompQhIso _).app K₁).symm)).app N ≪≫
+    ((curriedTensor _).obj _).mapIso eN.symm ≪≫
+    asIso (((Functor.LaxMonoidal.μNatTrans Qh).app _).app P) ≪≫
+    Qh.mapIso (Functor.Monoidal.μIso (HomotopyCategory.quotient _ _) K₁ N₁).symm ≪≫
+    (quotientCompQhIso _).app (K₁ ⊗ N₁) ≪≫
+    Q.mapIso ((β_ K₁ N₁) ≪≫ (openComplexTensorIsoAux Λ j N₁ K₀).symm) ≪≫
+    (((j)_!open⟦Λ⟧).mapDerivedCategoryFactors.app _).symm
+
+private lemma derivedOpenProjectionIsoAux
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj Λ U)))
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    IsIso (Adjunction.projectionComparison
+      (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j) M N) := by
+  let adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j
+  have := derivedOpenUnitIso Λ j
+  have : IsIso adj.unit := by
+    dsimp [adj, derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction]
+    rw [Adjunction.ofNatIsoRight_unit]
+    infer_instance
+  have : (D((j)_!open⟦Λ⟧)).Full := adj.fullyFaithfulLOfIsIsoUnit.full
+  have : (D((j)_!open⟦Λ⟧)).Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+  obtain ⟨Z, ⟨e⟩⟩ := derivedOpenTensorEssImageAux Λ j M N
+  have : IsIso (adj.counit.app ((D((j)_!open⟦Λ⟧)).obj M ⊗ N)) :=
+    adj.isIso_counit_app_of_iso e
+  change IsIso (adj.projectionComparison M N)
+  rw [Adjunction.projectionComparison, Adjunction.homEquiv_counit]
+  infer_instance
+
 /-- **The derived projection formula for the extension by zero**: the projection comparison
 `q_j` along an open immersion is an isomorphism. See the module docstring. -/
 instance isIso_openImmersionProjectionComparison
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
     (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    IsIso (openImmersionProjectionComparison Λ j M N) :=
-  sorry
+    IsIso (openImmersionProjectionComparison Λ j M N) := by
+  exact derivedOpenProjectionIsoAux Λ j M N
 
 @[reassoc]
 lemma openImmersionProjectionComparison_natural_right
@@ -212,12 +582,49 @@ lemma exceptionalProjectionMorphismOfCompactification_natural_right
       (condensedRingObj Λ Y))} (h : B ⟶ B') :
     (Rf_!(c)⟦Λ⟧).obj K ◁ h ≫ exceptionalProjectionMorphismOfCompactification Λ c K B' =
       exceptionalProjectionMorphismOfCompactification Λ c K B ≫
-        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) :=
-  sorry
+        (Rf_!(c)⟦Λ⟧).map (K ◁ (L((f)^*⟦Λ⟧)).map h) := by
+  exact CategoryTheory.composite_natural_right_aux
+    (L((c.g)^*⟦Λ⟧)) (R((c.g)_*⟦Λ⟧)) (D((c.i)_!open⟦Λ⟧))
+    (L((c.i)^*⟦Λ⟧)) (L((f)^*⟦Λ⟧))
+    (leftDerivedUpperStarCompactificationIso Λ c).inv
+    (properProjectionMorphism Λ c.g)
+    (fun M N ↦ inv (openImmersionProjectionComparison Λ c.i M N))
+    (properProjectionMorphism_natural_right Λ c.g)
+    (inv_openImmersionProjectionComparison_natural_right Λ c.i) K h
+
+private lemma exceptionalProjectionMorphismOfCompactification_natural_left_aux
+    {K K' : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}
+    (φ : K ⟶ K')
+    (B : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (Rf_!(c)⟦Λ⟧).map φ ▷ B ≫ exceptionalProjectionMorphismOfCompactification Λ c K' B =
+      exceptionalProjectionMorphismOfCompactification Λ c K B ≫
+        (Rf_!(c)⟦Λ⟧).map (φ ▷ (L((f)^*⟦Λ⟧)).obj B) := by
+  exact CategoryTheory.composite_natural_left_aux
+    (L((c.g)^*⟦Λ⟧)) (R((c.g)_*⟦Λ⟧)) (D((c.i)_!open⟦Λ⟧))
+    (L((c.i)^*⟦Λ⟧)) (L((f)^*⟦Λ⟧))
+    (leftDerivedUpperStarCompactificationIso Λ c).inv
+    (properProjectionMorphism Λ c.g)
+    (fun M N ↦ inv (openImmersionProjectionComparison Λ c.i M N))
+    ((derivedUpperStarLowerStarAdjunction Λ c.g).projectionMorphism_natural_left_aux)
+    (fun {M M'} h N ↦ by
+      have : IsIso
+          (Adjunction.projectionComparison
+            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i) M N) :=
+        isIso_openImmersionProjectionComparison Λ c.i M N
+      have : IsIso
+          (Adjunction.projectionComparison
+            (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i) M' N) :=
+        isIso_openImmersionProjectionComparison Λ c.i M' N
+      exact CategoryTheory.Adjunction.inv_projectionComparison_natural_left_aux
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i) h N) φ B
 
 end OfCompactification
 
 /-! ### The exceptional projection morphism on bounded constructible complexes -/
+
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
 
 section BoundedConstructible
 
@@ -254,8 +661,17 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B' =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
-  sorry
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) := by
+  apply ObjectProperty.hom_ext (boundedConstructible (condensedRingObj Λ Y.left))
+  dsimp only [boundedConstructibleExceptionalProjectionMorphism,
+    boundedConstructibleLowerShriek, boundedConstructibleLowerShriekOfCompactification,
+    boundedConstructibleOpenImmersionLowerShriek, boundedConstructibleLowerStar,
+    boundedConstructibleUpperStar, ObjectProperty.lift, ObjectProperty.ι,
+    ObjectProperty.homMk, Functor.comp_obj, Functor.comp_map,
+    ObjectProperty.instMonoidalCategoryStructFullSubcategory,
+    ObjectProperty.FullSubcategory.comp_hom]
+  exact exceptionalProjectionMorphismOfCompactification_natural_right Λ
+    (compactificationOverField f) K.obj h.hom
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
@@ -267,8 +683,17 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_left {K K' : D�
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K' B =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) :=
-  sorry
+          (φ ▷ (boundedConstructibleUpperStar Λ ℓ f).obj B) := by
+  apply ObjectProperty.hom_ext (boundedConstructible (condensedRingObj Λ Y.left))
+  dsimp only [boundedConstructibleExceptionalProjectionMorphism,
+    boundedConstructibleLowerShriek, boundedConstructibleLowerShriekOfCompactification,
+    boundedConstructibleOpenImmersionLowerShriek, boundedConstructibleLowerStar,
+    boundedConstructibleUpperStar, ObjectProperty.lift, ObjectProperty.ι,
+    ObjectProperty.homMk, Functor.comp_obj, Functor.comp_map,
+    ObjectProperty.instMonoidalCategoryStructFullSubcategory,
+    ObjectProperty.FullSubcategory.comp_hom]
+  exact exceptionalProjectionMorphismOfCompactification_natural_left_aux Λ
+    (compactificationOverField f) φ.hom B.obj
 
 /-- The **derived exceptional projection morphism** on bounded constructible complexes, as a
 natural transformation of bifunctors `Dᵇc(X) ⥤ Dᵇc(Y) ⥤ Dᵇc(Y)`
