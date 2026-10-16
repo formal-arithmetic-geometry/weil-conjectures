@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1332**, closure **33**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1333**, closure **36**, holes in definitions **4**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -45,14 +45,14 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1130 | 29 |
-| WeilConjectures | 202 | 4 |
+| Sheaf | 1132 | 33 |
+| WeilConjectures | 201 | 3 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 2279 | 785 | 1494 | 103 | 17 |
-| 660345513 (Application of proof-dependency imports) | library | 2233 | 783 | 1450 | 91 | 17 |
-| 660345513 (Application of proof-dependency imports) | closure | 1978 | 31 | 1947 | 57 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 2280 | 787 | 1493 | 103 | 17 |
+| 660345513 (Application of proof-dependency imports) | library | 2234 | 785 | 1449 | 91 | 17 |
+| 660345513 (Application of proof-dependency imports) | closure | 1978 | 34 | 1944 | 57 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
@@ -60,7 +60,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3591 |
 | decomposed | 52 |
-| moved | 3986 |
+| moved | 3987 |
 | pruned | 131 |
 | other | 603 |
 
@@ -69,7 +69,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 119 | 117 | 84 | 33 | 60/119 (50.4%) |
+| A2 | 120 | 118 | 86 | 32 | 61/120 (50.8%) |
 | A3 | 122 | 118 | 78 | 40 | 53/122 (43.4%) |
 | A4 | 69 | 73 | 45 | 28 | 35/69 (50.7%) |
 | B2 | 125 | 131 | 83 | 48 | 52/125 (41.6%) |
@@ -341,8 +341,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift`
-- `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting`
-- `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1`
 - `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1`
@@ -392,21 +390,15 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover`
 - `Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection`
 - `Sheaf.AlgebraicGeometry.RelativeSpecBaseChange`
-- `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember`
 - `Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings`
 - `Sheaf.AlgebraicGeometry.SchemeTheoreticUnion`
 - `Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology`
 - `Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing`
-- `Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableObject`
 - `Sheaf.AlgebraicGeometry.SemilocalDimOneConductor`
 - `Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleComparison`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleFinite`
-- `Sheaf.AlgebraicGeometry.SimplicialHomObject`
-- `Sheaf.AlgebraicGeometry.SimplicialHomObjectExists`
-- `Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout`
-- `Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex`
 - `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`
 - `Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants`
 - `Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections`
@@ -434,8 +426,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete`
 - `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan`
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
-- `Sheaf.AlgebraicTopology.GlueSimplex`
-- `Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial`
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
@@ -564,12 +554,9 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.DerivationExtendsFiniteType`
 - `Sheaf.Paper.EtaleFiniteDataDescent`
 - `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial`
-- `Sheaf.Paper.EtaleHypercover`
-- `Sheaf.Paper.EtaleHypercoverProduct`
 - `Sheaf.Paper.EtaleStandardCoverCech`
 - `Sheaf.Paper.FiniteHypercoverDescent`
 - `Sheaf.Paper.FiniteSplitEtaleHypercover`
-- `Sheaf.Paper.FiniteSplitHypercoverRefinement`
 - `Sheaf.Paper.GaloisLisseRepresentations`
 - `Sheaf.Paper.HypercoverCohomology`
 - `Sheaf.Paper.HypercoverCohomologyColimit`
@@ -586,7 +573,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.SectionsOverQuasiCompactOpen`
 - `Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange`
 - `Sheaf.Paper.SheavesKilledByNZmodModules`
-- `Sheaf.Paper.SimplicialSetAddSimplices`
 - `Sheaf.Paper.SiteCoveringIsomorphicFamily`
 - `Sheaf.Paper.SiteCoveringMorphismsSameH0Map`
 - `Sheaf.Paper.SitePlusInjectiveSeparated`
