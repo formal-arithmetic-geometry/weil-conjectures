@@ -17,10 +17,114 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Fix $n\\geq1$. Put $V_n=\\{0,\\ldots,n\\}$, viewed as the discrete vertex subset, and let $S_n\\subseteq\\Delta^n$ be the union of the consecutive edges and all vertices. A simplicial map $S_n\\times\\Delta^r\\to Q$ is exactly a family of maps on the edge products agreeing on the intervening vertex products: in each degree these products cover $S_n\\times\\Delta^r$ and their intersections are the specified vertex products. Fixing every vertex product constantly at $x_i$ therefore identifies its parameter space with $P_n=\\prod_{i=1}^nH_Q(x_{i-1},x_i)$. Consequently the required map $\\theta_n:H_Q(x_0,\\ldots,x_n)\\to P_n$ is the pullback of restriction $\\rho_n:\\operatorname{Fun}(\\Delta^n,Q)\\to\\operatorname{Fun}(S_n,Q)$ along that fixed-vertex subspace. This identification is degreewise and commutes with the parameter simplicial operators.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Notation 4.6.8.1 and proof of Proposition 4.6.8.4: fixed-vertex pullback of restriction"
+   }
+  },
+  {
+   "text": "The subset $S_n$ is $\\operatorname{Sp}[n]$, since its simplices have image in a single consecutive edge (or vertex). Its inclusion is inner anodyne by [lem-cbc-spine-inner-anodyne]. The map $Q\\to\\Delta^0$ is an inner fibration by the defining horn property of $Q$. For any degreewise injective $k:U\\hookrightarrow W$, the pushout-product theorem makes $(S_n\\times W)\\amalg_{S_n\\times U}(\\Delta^n\\times U)\\to\\Delta^n\\times W$ inner anodyne. A lifting square from $k$ to $\\rho_n$ is, by the explicit definition of the functor object, precisely a map from this union to $Q$. Its extension follows from the left lifting property against $Q\\to\\Delta^0$ and gives the required lift. In particular take $k:\\partial\\Delta^m\\hookrightarrow\\Delta^m$ for every $m\\geq0$. The fixed-vertex condition survives because the vertices belong to $S_n$: the extension already agrees with the prescribed map on $S_n\\times\\Delta^m$. Thus the pullback $\\theta_n$ lifts every boundary, including the empty boundary in dimension zero, and is a trivial Kan fibration in exactly the convention of [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-spine-inner-anodyne",
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BW",
+    "place": "Proposition 4.1.4.4, product-lifting argument, specialized to Q over the point; compare 01PF Proposition 4.6.8.4"
+   }
+  },
+  {
+   "text": "The arrow mapping space $H_Q(x,y)$ is exactly $U_Q(x,y)$ in [lem-coef-infinity-pinch-comparison], hence is Kan. Products of these spaces are Kan by filling each coordinate horn. To fill a horn in $H_Q(x_0,\\ldots,x_n)$, first extend its image in $P_n$ using these coordinate fillers, then use the lifting of the horn inclusion against $\\theta_n$: a horn is degreewise injective, so [lem-weil-pbc-trivial-kan-lifts-monomorphisms] applies. Hence all these multiarrow spaces are Kan; for $n=0$ the fixed-vertex fiber is the point. By [lem-weil-pbc-trivial-kan-homotopy-equivalence], each $\\theta_n$ has a simplicial section $s_n$ and a homotopy from the identity to $s_n\\theta_n$. Moreover, if two maps $a,b:T\\to H_Q(x_0,\\ldots,x_n)$ have the same image $u:T\\to P_n$, the monomorphism $T\\times\\partial\\Delta^1\\hookrightarrow T\\times\\Delta^1$ and the constant-in-the-interval base map $u$ produce a homotopy between them over $P_n$. More generally the same lifting theorem applies to $T\\times\\partial\\Delta^r\\hookrightarrow T\\times\\Delta^r$ for any prescribed compatible boundary of such choices. To compose the homotopies below, apply [lem-cbc-kan-mapping-homotopy-invariance] with $u=\\mathrm{id}_T$ and $Z=H_Q(x,y)$: the identity induces identity maps on all realized homotopy groups, so $\\operatorname{Fun}(T,H_Q(x,y))$ is Kan. Two consecutive homotopies are edges $a\\to b\\to c$ of this Kan complex; fill $\\Lambda_1^2$ to obtain an edge $a\\to c$. To reverse an edge $a\\to b$, fill $\\Lambda_0^2$ with edges $01=(a\\to b)$ and $02=1_a$, giving an edge $b\\to a$. Thus every finite chain of the homotopies of maps used below yields a single simplicial homotopy, with the indicated parameter $T$ retained.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-cbc-kan-mapping-homotopy-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08NM (lemma-trivial-kan) and 08NS (lemma-trivial-kan-homotopy); arrow Kan property from Kerodon 01L5 as recorded in the cited pinch-comparison statement; Kan function complexes from Kerodon 00TN, as stated in lem-cbc-kan-mapping-homotopy-invariance (specialized to the identity)"
+   }
+  },
+  {
+   "text": "For every monotone $\\alpha:[m]\\to[n]$, restriction gives a simplicial map $\\alpha^*:H_Q(x_0,\\ldots,x_n)\\to H_Q(x_{\\alpha(0)},\\ldots,x_{\\alpha(m)})$. The relations among these maps are literal precomposition identities. Define a representative binary composition by $\\mu_{x,y,z}=d_1s_2:H_Q(x,y)\\times H_Q(y,z)\\to H_Q(x,z)$, ordering the product by consecutive edges. The identity at $x$ is the degenerate edge of $x$. Repeating the first vertex gives a map $H_Q(x,y)\\to H_Q(x,x,y)$ whose consecutive edges are $(1_x,f)$ and whose long edge is $f$; repeating the last gives the counterpart with $(f,1_y)$. Each degeneracy map and the corresponding restriction of $s_2$ lift the same map to $P_2$. The relative homotopy construction of step 3 identifies them over $P_2$. Applying $d_1$ gives the left and right unit homotopies, since the long-edge restriction of either degeneracy is the identity on $H_Q(x,y)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9 and Proposition 4.6.8.11; degeneracies repeating the first or last vertex"
+   }
+  },
+  {
+   "text": "Write $T=H_Q(x_0,x_1,x_2,x_3)$ and let $f_{ij}:T\\to H_Q(x_i,x_j)$ be restriction to the $ij$ edge. The $012$ face and $s_2(f_{01},f_{12})$ lift the same consecutive-edge map; step 3 gives a homotopy $\\mu(f_{01},f_{12})\\simeq f_{02}$. Insert it in the first variable of $\\mu(-,f_{23})$, and compare the $023$ face with $s_2(f_{02},f_{23})$, to obtain $\\mu(\\mu(f_{01},f_{12}),f_{23})\\simeq\\mu(f_{02},f_{23})\\simeq f_{03}$. The $123$ face gives $\\mu(f_{12},f_{23})\\simeq f_{13}$; insert this in the second variable of $\\mu(f_{01},-)$, and compare the $013$ face with $s_2(f_{01},f_{13})$, obtaining $\\mu(f_{01},\\mu(f_{12},f_{23}))\\simeq\\mu(f_{01},f_{13})\\simeq f_{03}$. All these are homotopies with parameter $T$. Reverse the second chain and join the chains by the Kan-function-complex horn fillers of step 3. Precomposition with $s_3:P_3\\to T$ gives the associativity homotopy with parameter the full product of three arrow spaces. The coherent composition data are the complete family $H_Q(x_0,\\ldots,x_n)$ with all ordinal restriction maps of step 4: each spine restriction $\\theta_n$ is a trivial Kan fibration and the ordinal identities hold strictly. Explicitly, a family of choices over a parameter $u:A\\to P_n$ is a lift through $\\theta_n$; a compatible prescribed $r$-boundary of such choices is a map $A\\times\\partial\\Delta^r\\to H_Q(x_0,\\ldots,x_n)$ over $u\\operatorname{pr}_A$. Step 3 extends it across $A\\times\\Delta^r$. For a fixed string, take $A=\\Delta^0$: the choice fiber is nonempty by $r=0$, and it lifts every boundary. Applying the trivial-fibration homotopy theorem of step 3 to this fiber over a point gives a section and a contraction. These relative fillers and the strict ordinal identities are the higher comparison homotopies asserted by the statement; no compatibility of independently chosen binary sections is assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Remark 4.6.8.7 (Segal category), Corollary 4.6.8.8 and proof of Proposition 4.6.8.12; relative choice extensions use Stacks 08NM"
+   }
+  },
+  {
+   "text": "A simplicial functor $F:Q\\to Q'$ acts on every $H$ by postcomposition. For each monotone $\\alpha$, the equality $F\\circ(h\\circ(\\alpha\\times1))=(F\\circ h)\\circ(\\alpha\\times1)$ shows that all face, degeneracy, spine and long-edge maps commute with $F$. This is naturality of the coherent composition data itself. If binary sections in the two quasicategories have been chosen independently, $Fs_2$ and $s'_2(F\\times F)$ are two lifts in the target with the same consecutive edges, hence are homotopic by step 3; their higher comparisons use its relative boundary extensions. Thus the asserted naturality is coherent, as is necessary when simplex fillers are nonunique.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Notation 4.6.8.1, Remark 4.6.8.7 and Construction 4.6.8.9; functoriality of all restrictions"
+   }
+  },
+  {
+   "text": "Let $f:x\\to y$ and $g:y\\to x$ have inverse-triangle witnesses $w_x\\in H_Q(x,y,x)_0$ and $w_y\\in H_Q(y,x,y)_0$ whose long edges are $1_x$ and $1_y$. Compare $w_x$ with $s_2(f,g)$ and $w_y$ with $s_2(g,f)$ over their respective spines by step 3 and apply the long-edge maps. This gives paths $\\mu(f,g)\\simeq1_x$ and $\\mu(g,f)\\simeq1_y$. For any $z$, define $f_*(a)=\\mu(a,f)$ on $H_Q(z,x)$ and $g_*(b)=\\mu(b,g)$ on $H_Q(z,y)$. For the whole parameter spaces, the associativity and unit homotopies of steps 4-5 give $g_*f_*(a)=\\mu(\\mu(a,f),g)\\simeq\\mu(a,\\mu(f,g))\\simeq\\mu(a,1_x)\\simeq a$ and $f_*g_*(b)=\\mu(\\mu(b,g),f)\\simeq\\mu(b,\\mu(g,f))\\simeq\\mu(b,1_y)\\simeq b$. Define $f^*(b)=\\mu(f,b)$ on $H_Q(y,z)$ and $g^*(a)=\\mu(g,a)$ on $H_Q(x,z)$. Then $f^*g^*(a)=\\mu(f,\\mu(g,a))\\simeq\\mu(\\mu(f,g),a)\\simeq\\mu(1_x,a)\\simeq a$, while $g^*f^*(b)=\\mu(g,\\mu(f,b))\\simeq\\mu(\\mu(g,f),b)\\simeq\\mu(1_y,b)\\simeq b$. The middle homotopies insert the inverse-witness paths into the corresponding variable of $\\mu$; step 3 joins each chain into a simplicial homotopy. For the right-pinched convention, use the homotopy equivalences $j_{a,b}:\\operatorname{Map}_Q(a,b)\\to H_Q(a,b)$ of [lem-coef-infinity-pinch-comparison] and choose homotopy inverses $r_{a,b}$. A precomposition or postcomposition map $v:H_Q(a,b)\\to H_Q(c,d)$ is represented in this convention by $\\widetilde v=r_{c,d}vj_{a,b}$. For its inverse $w$, the composite is $\\widetilde w\\widetilde v=r_{a,b}w(j_{c,d}r_{c,d})vj_{a,b}\\simeq r_{a,b}wvj_{a,b}\\simeq r_{a,b}j_{a,b}\\simeq\\mathrm{id}$, and $\\widetilde v\\widetilde w=r_{c,d}v(j_{a,b}r_{a,b})wj_{c,d}\\simeq r_{c,d}vwj_{c,d}\\simeq r_{c,d}j_{c,d}\\simeq\\mathrm{id}$. These homotopies can be joined using the Kan-function-complex conclusion of [lem-cbc-kan-mapping-homotopy-invariance] with identity source map and the Kan right-pinched target. Thus both mapping-space conventions have the asserted inverse homotopies.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-kan-mapping-homotopy-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Propositions 4.6.8.11-12 and Notation 4.6.8.15, applied to the two inverse triangles; change of mapping-space model by Kerodon 01L5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-spine-inner-anodyne",
+  "lem-coef-inner-anodyne-pushout-product",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Agent-written expansion of the coherent-choice foundation supporting the opening compactification choice; checked against Kerodon 01PF, 00JA and 01BW online and Stacks 08NM/08NS. Kerodon archival copies WANTED in report.md."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +174,70 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"spine|Spine|TrivialFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"ba0c315e9fd1fb39\"}",
    "date": "2026-10-16",
    "verdict": "No match: strict Segal spine maps impose unique simplex fillers. Generic model-category trivialFibrations declarations do not state the quasicategorical multiarrow restriction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from a quasicategory simplex mapping object to consecutive edges is a trivial Kan fibration",
+   "results": "SSet.Quasicategory.hornFilling, hornFilling\\prime; SSet.modelCategoryQuillen.J, I, horn_ι_mem_J, instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.spine; CategoryTheory.Nerve.quasicategory. Read the primitive horn/fibration and strict-Segal source: none gives the quasicategorical multiarrow assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spine\", \"innerAnodyneExtensions\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spine|Spine",
+   "results": "20 hits under AlgebraicTopology/SimplicialSet: Path.lean (including spine definition line 149), NerveAdjunction.lean, Coskeletal.lean and StrictSegal.lean; read Path.lean:147-175 and StrictSegal.lean:12-60. These concern paths and unique strict-Segal reconstruction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a quasicategory along the spine inclusion is a trivial fibration of simplicial sets",
+   "results": "SSet.modelCategoryQuillen.instCategoryWithFibrations, fibrations_eq, instHasLiftingPropertyιHornHAddNatOfNatOfFibration; HomotopicalAlgebra.trivialFibrations_sub_fibrations; SSet.Truncated.spine_arrow, StrictSegal.spineEquiv, spine, trunc_spine. No quasicategory multiarrow restriction theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an infinity category coherent composition of mapping spaces is obtained from contractible choices of simplex fillers along a spine",
+   "results": "CategoryTheory.nerve.homEquiv_comp; CategoryTheory.Nerve.isStrictSegal, strictSegal, quasicategory; SSet.Truncated.StrictSegal.spineToDiagonal, spineToSimplex_map, spine_spineToSimplex_apply; SSet.StrictSegal.spineToSimplex_map. Strict-Segal uniqueness and ordinary nerves do not state the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-simplicial-composition-spine",
+  "worker": "stage1",
+  "summary": "Recovered the now-present authoritative node after the previous missing-input failure. Kept its statement verbatim. Reduced the restriction theorem to one new combinatorial spine-inner-anodyne node and the existing Mathlib pushout-product leaf; wrote the boundary-product lifting, fixed-vertex pullback, Kan-space, unit, associativity, coherence, naturality and inverse-map arguments explicitly. Reused existing mapping-space and trivial-fibration statements after checking their exact clauses and acyclic closures. Second reading expanded the two associativity chains, all four inverse-map equations and conjugation through pinch equivalences; cited the existing Kan-function-complex statement to justify joining simplicial homotopies.",
+  "blueprint": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-pinch-comparison",
+    "why": "Generic Kan property and natural equivalence of arrow and right-pinched mapping spaces; this foundation does not replace any compact-support-base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic explicit section and simplicial homotopy for a trivial Kan fibration, used to represent composition; no compact-support unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-pinch-comparison",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read all seven steps and every cited statement in full, and checked the sources against Kerodon 01PF and 00JA online. Kerodon 01PF Corollary 4.6.8.5 is exactly the item's trivial-Kan clause; 4.6.8.9/11/12/15 give the composition, unit, associativity and inverse clauses. Kerodon 00JA Example 1.5.7.7(a) is exactly the new node, with Spine[n] defined by sigma(r)<=sigma(0)+1. Step 1: theta_n is the pullback of rho_n, by factoring through Fun(S_n,Q)->Fun(V_n,Q). Step 2: lem-coef-inner-anodyne-pushout-product applies in its stated orientation (i is the spine inclusion, j is the boundary inclusion of Delta^m); the vertices stay fixed because V_n lies in S_n, and m=0 gives surjectivity. Step 3: H(x,y)=U_Q(x,y) is Kan; a trivial fibration over a Kan base is Kan; 08NS gives the section and homotopy; Fun(T,Z) is Kan by the kan-mapping node with u=id; the Lambda^2_1 and Lambda^2_0 fillers compose and reverse homotopies. Steps 4-7: I checked the degeneracy/unit, the two associativity chains on T=H(x0..x3) precomposed with s_3, naturality, the four inverse composites, and conjugation through the pinch equivalence j. Small cases checked: Sp[0]=Delta^0, Sp[1]=Delta^1, Sp[2]=Lambda^2_1, empty Q. Duplicate search (DAG grep for spine/inner anodyne/Segal/multiarrow; blueprint; Mathlib Inner/Basic.lean, Inner/PushoutProduct.lean:103-109, StrictSegal, Path.lean spineId) found no duplicate and no Mathlib leaf. The new node is statement-only, self-contained and strictly smaller than the item. Accepted tool_uses: lem-coef-infinity-pinch-comparison and lem-weil-pbc-trivial-kan-homotopy-equivalence, both generic, reviewed and declared. No SGA is cited; this is not a target node, so the base-change morphism check does not apply. Minor point: steps 4 and 7 are marked elementary as assemblies of cited homotopies; this is borderline under C2 and I made no change. No fixes."
+ }
 }
