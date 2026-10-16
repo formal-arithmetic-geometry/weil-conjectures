@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-sheaf-tensor-presheaf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Objectwise tensor product and internal hom of presheaves",
@@ -12,38 +12,269 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
   "place": "node det-def-sfb-sheaf-tensor-presheaf, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian"
+ ],
  "proof": [
   {
-   "text": "**Monoidal structure.** The associator, unitors and symmetry are defined objectwise; they are\nnatural in $U$ because those of $\\mathcal A$ are natural, and the pentagon, triangle and hexagon\nidentities hold because they hold at each $U$.",
+   "text": "Define $(F\\otimes_pG)(U)=F(U)\\otimes G(U)$ and $(F\\otimes_pG)(u)=F(u)\\otimes G(u)$; tensor being a bifunctor gives the identity and composition laws. On natural transformations use the tensor of their components. The constant presheaf on $\\mathbf1$ is the unit, and the associator, unitors and symmetry are the corresponding maps in $\\mathcal A$ at each object. Naturality of these maps is their naturality in $\\mathcal A$; every coherence diagram commutes after evaluation at each $U$, since it then is that diagram in $\\mathcal A$. Equality of natural transformations is componentwise equality, so this gives the symmetric monoidal structure.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "clause 1; objectwise monoidal structure"
+   }
   },
   {
-   "text": "**Existence of the end.** Since $C$ is essentially small, so is $C/U$, and the end is the\nequalizer of two maps between products over a set of objects, respectively of arrows, of $C/U$.\nA Grothendieck abelian category has all small limits, so the end exists. Functoriality in $U$ is\ninduced by composition $C/U'\\to C/U$, $(V\\to U')\\mapsto(V\\to U'\\to U)$.",
+   "text": "Use the size convention of the unit sk-def-sfb-sheaf-tensor: essential smallness is relative to the universe of Hom sets and small colimits in $\\mathcal A$. Choose a small full subcategory $S\\subset C$ meeting every isomorphism class; the Hom sets of $C$ are small in that universe. For fixed $U$, let $J_U\\subset C/U$ be the full subcategory of arrows $s\\to U$ with $s\\in S$. Its objects form the small union $\\coprod_{s\\in S}\\operatorname{Hom}_C(s,U)$, and its arrows are subsets of the Hom sets between objects of $S$. Every $v:V\\to U$ is isomorphic in $C/U$ to $(s,v\\circ a)$ for an isomorphism $a:s\\to V$. Thus $J_U$ is a small full subcategory meeting every isomorphism class of the slice; no product indexed by all objects of a possibly large slice is taken.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "clause 2; size convention in the unit statement"
+   }
   },
   {
-   "text": "**Hom formula.** By the universal property of the end and the tensor–hom adjunction of\n$\\mathcal A$, a map $A\\to[F,G](U)$ is a family of maps\n$A\\to\\underline{\\Hom}_{\\mathcal A}(F(V),G(V))$, i.e. maps $F(V)\\otimes A\\to G(V)$, indexed by\n$(V\\to U)$ and satisfying the wedge condition, which is naturality in $(V,v)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $\\mathsf h(X,Y)=\\underline{\\operatorname{Hom}}_{\\mathcal A}(X,Y)$. On the small category $J_U^{\\mathrm{op}}$ take the bifunctor $T(i,j)=\\mathsf h(F(V_i),G(V_j))$, where $V_i$ denotes the domain of the slice object $i$. Define $E_U$ to be the equalizer of the two maps\n$$P_U=\\prod_{i\\in J_U}\\mathsf h(F(V_i),G(V_i))\\rightrightarrows Q_U=\\prod_{(a:i\\to j)\\in J_U}\\mathsf h(F(V_j),G(V_i)).$$\nFor $a:V_i\\to V_j$ over $U$, the first component is postcomposition of the $j$-projection by $G(a):G(V_j)\\to G(V_i)$, and the second is precomposition of the $i$-projection by $F(a):F(V_j)\\to F(V_i)$. Products and this equalizer exist by [lem-coef-grothendieck-small-limits], applied to the small discrete categories and the parallel-pair category. By the product and equalizer universal properties, maps $B\\to E_U$ are precisely families $t_i:B\\to\\mathsf h(F(V_i),G(V_i))$ with $G(a)_*t_j=F(a)^*t_i$ for every $a:i\\to j$. To extend the projections to all slice objects $v:V\\to U$, choose $a:s\\xrightarrow{\\sim}V$ with $s\\in S$, and put $p_v=\\mathsf h(F(a),G(a)^{-1})p_{v\\circ a}$. For a second choice $b:t\\xrightarrow{\\sim}V$, the slice isomorphism $b^{-1}a:(s,v\\circ a)\\to(t,v\\circ b)$ and the equalizer equation show the two formulas agree. For an arbitrary slice arrow $c:(V,v)\\to(W,w)$, apply that equation to $b^{-1}ca:s\\to t$ to obtain $G(c)_*p_w=F(c)^*p_v$. Conversely, any wedge on the whole slice restricts to $J_U$, and the same isomorphism equation forces this extension. Hence $E_U$, with these projections, is exactly the end meant in clause 2, with its universal property over the entire slice. The integrand is mixed variance: it is not an ordinary diagram $v\\mapsto\\mathsf h(F(V),G(V))$ whose maps would require inverse restriction maps.",
+   "uses": [
+    "lem-coef-grothendieck-small-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "clause 2 and the displayed local Hom formula; explicit equalizer interpretation of the end"
+   }
   },
   {
-   "text": "**Closedness.** A morphism $\\psi\\colon H\\to[F,G]$ is a family of maps $\\psi_U\\colon H(U)\\to[F,G](U)$\nnatural in $U$. By the Hom formula with $A=H(U)$, $\\psi_U$ is a natural family\n$\\varphi^U_v\\colon F(V)\\otimes H(U)\\to G(V)$ indexed by $(v\\colon V\\to U)\\in C/U$. Naturality of\n$\\psi$ along $u\\colon U'\\to U$ says $\\varphi^{U'}_{v'}\\circ(F(V)\\otimes H(u))=\\varphi^U_{u\\circ v'}$\nfor all $v'\\colon V\\to U'$. Taking $U'=V$, $u=v$, $v'=\\mathrm{id}_V$ gives\n$$\n\\varphi^U_v=\\chi_V\\circ\\bigl(F(V)\\otimes H(v)\\bigr),\\qquad \\chi_V:=\\varphi^V_{\\mathrm{id}_V}\\colon F(V)\\otimes H(V)\\to G(V).\n$$\nNaturality of $\\varphi^U$ in $(V,v)$ then says exactly that $\\chi$ is natural in $V$, i.e. a\nmorphism $\\chi\\colon F\\otimes_pH\\to G$. Conversely, a morphism $\\chi$ defines $\\varphi^U_v$ by the\ndisplayed formula, natural in $(V,v)$ and in $U$. The two constructions are inverse, and natural\nin $F,G,H$. So $\\Hom(F\\otimes_pH,G)\\cong\\Hom(H,[F,G])$.",
+   "text": "For $u:U'\\to U$, the projections $p_{u\\circ v'}:E_U\\to\\mathsf h(F(V),G(V))$, for $v':V\\to U'$, form a wedge because composition $C/U'\\to C/U$ sends a slice arrow to that same arrow. The universal property constructed in step 3, ultimately the uniqueness of maps to the limits in [lem-coef-grothendieck-small-limits], gives a unique $r_u:E_U\\to E_{U'}$ with $p_{v'}r_u=p_{u\\circ v'}$. Projectionwise, $r_{\\mathrm{id}}=\\mathrm{id}$ and $r_{u\\circ u'}=r_{u'}r_u$. Thus $[F,G](U)=E_U$ is a presheaf. For maps $f:F'\\to F$ and $g:G\\to G'$, precomposition by $f(V)$ and postcomposition by $g(V)$ send wedges to wedges, by naturality of $f,g$. The same uniqueness gives the functorial action of $[F,G]$, commuting with $r_u$, contravariantly in $F$ and covariantly in $G$.",
+   "uses": [
+    "lem-coef-grothendieck-small-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "clause 2, restriction along the slice functor"
+   }
+  },
+  {
+   "text": "For $B\\in\\mathcal A$, apply the given natural tensor–Hom adjunction to each projection of a map $B\\to E_U$. It sends $t_v:B\\to\\mathsf h(F(V),G(V))$ to $\\varphi_v:F(V)\\otimes B\\to G(V)$. Its naturality says that the wedge equation for $a:(V,v)\\to(W,w)$ is exactly\n$$G(a)\\circ\\varphi_w=\\varphi_v\\circ(F(a)\\otimes\\mathrm{id}_B).$$\nConversely this equation curries to the wedge equation, and the universal property in step 3 supplies the unique map $B\\to E_U$. Currying and uncurrying are inverse, giving the stated local Hom bijection, natural in $B,F,G$; restricting $U$ just reindexes its families.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "displayed local Hom formula"
+   }
+  },
+  {
+   "text": "Given a natural transformation $\\chi:F\\otimes_pH\\to G$, set\n$$\\varphi^U_v=\\chi_V\\circ(\\mathrm{id}_{F(V)}\\otimes H(v))\\quad(v:V\\to U).$$\nFor $a:(V,v)\\to(W,w)$, so $v=w\\circ a$, naturality of $\\chi$ gives\n$$G(a)\\circ\\varphi^U_w=\\chi_V\\circ(F(a)\\otimes H(a))\\circ(\\mathrm{id}_{F(W)}\\otimes H(w))=\\varphi^U_v\\circ(F(a)\\otimes\\mathrm{id}_{H(U)}),$$\nusing $H(v)=H(a)H(w)$. Thus the local Hom formula gives $\\psi_U:H(U)\\to E_U$; existence and uniqueness of the map to the equalizer are supplied by the limit universal property [lem-coef-grothendieck-small-limits]. For $u:U'\\to U$ and $v':V\\to U'$, one has\n$$\\varphi^U_{u\\circ v'}=\\varphi^{U'}_{v'}\\circ(\\mathrm{id}_{F(V)}\\otimes H(u)),$$\nbecause $H(u\\circ v')=H(v')H(u)$. Projecting and currying this identity gives $r_u\\psi_U=\\psi_{U'}H(u)$, so $\\psi:H\\to[F,G]$ is a natural transformation.",
+   "uses": [
+    "lem-coef-grothendieck-small-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "global tensor–Hom bijection, map from tensor morphisms to internal-Hom morphisms"
+   }
+  },
+  {
+   "text": "Conversely let $\\psi:H\\to[F,G]$, and let $\\varphi^U_v$ be its local families. Put $\\chi_V=\\varphi^V_{\\mathrm{id}_V}$. Naturality of $\\psi$ along $v:V\\to U$, evaluated at $\\mathrm{id}_V$, gives\n$$\\varphi^U_v=\\chi_V\\circ(\\mathrm{id}_{F(V)}\\otimes H(v)).$$\nFor $a:V\\to W$, the wedge condition inside $C/W$ for the arrow $(V,a)\\to(W,\\mathrm{id}_W)$ gives\n$$G(a)\\chi_W=\\varphi^W_a\\circ(F(a)\\otimes\\mathrm{id}_{H(W)})=\\chi_V\\circ(F(a)\\otimes H(a)).$$\nThis is the naturality of $\\chi:F\\otimes_pH\\to G$. Starting with $\\chi$ recovers it by $v=\\mathrm{id}_V$; starting with $\\psi$ recovers every $\\varphi^U_v$ by the displayed formula, hence recovers $\\psi$ by uniqueness of maps to the limit [lem-coef-grothendieck-small-limits]. For $b:H'\\to H$ both constructions replace $\\chi_V$ by $\\chi_V(\\mathrm{id}\\otimes b_V)$; for $c:G\\to G'$ they replace it by $c_V\\chi_V$; for $d:F'\\to F$ they replace it by $\\chi_V(d_V\\otimes\\mathrm{id})$. These componentwise identities prove naturality in all three variables. Thus $F\\otimes_p-$ has right adjoint $[F,-]$, completing closedness.",
+   "uses": [
+    "lem-coef-grothendieck-small-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
+    "place": "global tensor–Hom bijection, inverse maps and naturality"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-coef-grothendieck-small-limits"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
-  "place": "## Proof"
+  "place": "Clauses 1–2 and both displayed Hom formulas; explicit construction and proof of the claims in this definition. The current source file has no proof section."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "monoidalClosed|internalHom|ihom|pointwise",
+   "results": "0 hits; top results: ; Mathlib/CategoryTheory/Monoidal/FunctorCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for this query; more targeted queries also recorded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presheaves with values in a complete closed symmetric monoidal category have an internal hom given by an end over the over category.",
+   "results": "8 hits; top results: CategoryTheory.ihom, CategoryTheory.presheafHom_obj, CategoryTheory.MonoidalClosed.enrichedCategorySelf_hom, CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom, CategoryTheory.internalHom, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.mk",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"closed\"",
+   "results": "12 hits; top results: CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage, CategoryTheory.instIsClosedUnderIsomorphismsFunctorExactFunctor, CategoryTheory.instIsClosedUnderIsomorphismsFunctorLeftExactFunctor, CategoryTheory.instIsClosedUnderIsomorphismsFunctorRightExactFunctor, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.Functor.LeftExtension.instIsClosedUnderIsomorphismsIsPointwiseLeftKanExtensionAt, CategoryTheory.Functor.RightExtension.instIsClosedUnderIsomorphismsIsPointwiseRightKanExtensionAt, CategoryTheory.Functor.instIsClosedUnderIsomorphismsHomologicalKernel",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of presheaves valued in a complete closed symmetric monoidal category is closed symmetric monoidal for the pointwise tensor, with internal hom given by an end over each slice category.",
+   "results": "8 hits; top results: CategoryTheory.MonoidalClosed.FunctorCategory.closed, CategoryTheory.FunctorToTypes.monoidalClosed, CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed, instMonoidalClosedCondensedSet, CategoryTheory.instMonoidalClosedFunctorType_1, CategoryTheory.instMonoidalClosedFunctorType, CategoryTheory.instMonoidalClosedFunctorTypeOfEssentiallySmall, CategoryTheory.Functor.functorCategoryClosed",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|symmetricCategory|MonoidalClosed|HasEnd|hasEnd",
+   "results": "25 hits; top results: Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean; Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise tensor on a functor category with values in a closed monoidal category, and internal hom using limits over a slice category.",
+   "results": "8 hits; top results: CategoryTheory.MonoidalClosed.FunctorCategory.closed, CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed, CategoryTheory.Functor.functorCategoryMonoidalClosed, CategoryTheory.Functor.functorCategoryClosed, CategoryTheory.FunctorToTypes.monoidalClosed, CategoryTheory.Functor.monoidalClosed, CategoryTheory.instMonoidalClosedFunctorType, CategoryTheory.instMonoidalClosedFunctorType_1",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "functorCategoryClosed|noncomputable|def |theorem |instance ",
+   "results": "14 hits; top results: Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|symmetricCategory|tensorObj|tensorUnit",
+   "results": "5 hits; top results: 26, 31, 43, 55, 62; Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "functorEnrichedHom_obj|def functorEnrichedHom|def enrichedHom|HasFunctorEnrichedHom|end_.hom|hasEnrichedHom",
+   "results": "5 hits; top results: 54, 58, 121, 137, 193; Mathlib/CategoryTheory/Enriched/FunctorCategory.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|HasEnd|hasEnd|EssentiallySmall",
+   "results": "5 hits; top results: 209, 211, 245, 261, 274; Mathlib/CategoryTheory/Limits/Shapes/End.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "functorCategoryMonoidal|functorCategorySymmetric|tensorObj_map",
+   "results": "13 hits; top results: Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Internal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/End.lean; Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "end_\\.lift|end_\\.hom_ext|end_\\.condition",
+   "results": "5 hits; top results: Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean; Mathlib/CategoryTheory/Limits/Shapes",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "hasLimits|LocallySmall",
+   "results": "5 hits; top results: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic.lean; Mathlib/CategoryTheory/Abelian/GrothendieckCategory",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "functorEnrichedHom|HasFunctorEnrichedHom",
+   "results": "5 hits; top results: Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean; Mathlib/CategoryTheory/Enriched",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "EssentiallySmall|essentiallySmall",
+   "results": "7 hits; top results: Mathlib/CategoryTheory/Comma/CardinalArrow.lean, Mathlib/CategoryTheory/Comma/LocallySmall.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean, Mathlib/CategoryTheory/Comma/StructuredArrow/Small.lean; Mathlib/CategoryTheory/Comma",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "^instance functorCategory(Monoidal|Symmetric)|^noncomputable def functorEnrichedHom|^instance hasLimits|^instance.*HasEnd",
+   "results": "25 hits; top results: Mathlib/CategoryTheory/Action/Limits.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean, Mathlib/CategoryTheory/Abelian/Transfer.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "HasEnd.*EssentiallySmall|EssentiallySmall.*HasEnd|hasEnd.*equiv|HasEnd.*equiv|hasEnd_of|hasEnrichedHom_of|HasFunctorEnrichedHom.*:",
+   "results": "7 hits; top results: Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv",
+   "results": "3 hits; top results: CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "HasMultiequalizer|hasMultiequalizer",
+   "results": "3 hits; top results: 1046, 1053, 1068; Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "^abbrev HasEnd|^noncomputable def end_|^lemma end_\\.",
+   "results": "5 hits; top results: Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean; Mathlib/CategoryTheory/Limits/Shapes",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small bifunctor has an end when the target category has small limits; maps into the end are compatible families of maps into its diagonal values.",
+   "results": "8 hits; top results: CategoryTheory.Limits.HasEnd, CategoryTheory.Limits.end_, CategoryTheory.Limits.endFunctor, CategoryTheory.Limits.endFunctor_map, CategoryTheory.Limits.end_.map_comp, CategoryTheory.Limits.end_.hom_ext_iff, CategoryTheory.Limits.end_.hom_ext, CategoryTheory.Limits.isLimitOfPreserves₂.congr_simp",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.end_.lift",
+   "results": "3 hits; top results: CategoryTheory.Limits.end_.lift, CategoryTheory.Limits.end_.lift_π, CategoryTheory.Limits.end_.lift_π_assoc",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The end of a bifunctor from the opposite of a small category times itself into a complete category, with its universal wedge and maps into the end.",
+   "results": "8 hits; top results: CategoryTheory.Limits.end_.lift, CategoryTheory.Limits.end_.π, CategoryTheory.Limits.end_, CategoryTheory.Limits.end_.lift_π, CategoryTheory.Limits.endFunctor_obj, CategoryTheory.Limits.endFunctor, CategoryTheory.Limits.HasEnd, CategoryTheory.Limits.end_.map",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "grep",
+   "query": "^lemma end_\\.hom_ext|^noncomputable def end_\\.lift|^lemma end_\\.lift_π",
+   "results": "3 hits; top results: Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean, Mathlib/CategoryTheory/Limits/Shapes/End.lean; Mathlib/CategoryTheory/Limits/Shapes",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal property of the multiequalizer end of a small diagram in a Grothendieck abelian category: maps into it are wedges.",
+   "results": "8 hits; top results: CategoryTheory.Limits.Multiequalizer.lift, CategoryTheory.GrothendieckTopology.diagram_map, CategoryTheory.GrothendieckTopology.Cover.toMultiequalizer, CategoryTheory.Limits.Multiequalizer.multifork, CategoryTheory.Limits.HasMultiequalizer, CategoryTheory.Limits.Concrete.multiequalizerEquiv_apply, CategoryTheory.Limits.Multiequalizer.ι, CategoryTheory.Limits.multiequalizer",
+   "date": "2026-10-16",
+   "verdict": "partial match: the pointwise monoidal structure, generic end operations and closedness with end-existence hypotheses are present; see mathlib_candidate and the proof for the small-slice construction"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -52,5 +283,35 @@
  "blueprint_order": null,
  "blueprint_uses": [],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-sheaf-tensor-presheaf",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported metadata. Supplied a seven-step construction/proof: pointwise coherence, small slice representatives, an explicit product/equalizer end with extension of wedges to the full slice, restriction and variance, the parameter-object Hom formula, and the two inverse natural maps of the global tensor–Hom bijection. Reused the existing Grothendieck small-limits leaf and definition. No new node: the end construction is written out, not relabeled as a new lemma. Recorded all actual Mathlib searches and the close candidate.",
+  "blueprint": "Clause 1 is step 1; clause 2 is steps 2–4; the local Hom formula is step 5; the global Hom bijection and closedness are steps 6–7. This remains within sk-def-sfb-sheaf-tensor, with the universe convention from its statement.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-grothendieck-small-limits",
+    "why": "Small products and equalizers exist in the arbitrary Grothendieck abelian coefficient category, and their universal properties give wedge maps. This already-existing Mathlib leaf is a generic category-theoretic tool; it does not replace the sheaf-tensor unit route."
+   }
+  ]
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean",
+  "line": 145,
+  "why_not_match": "The class instance requires existence of all global and slice enriched ends. The item includes the construction over essentially small slices and the parameter-object Hom formula; reducing to small diagrams and writing the wedge universal property are not one-line applications of this class instance. The explicit split supplies those arguments. Clause 1 is Mathlib/CategoryTheory/Monoidal/FunctorCategory.lean:85,160,197; the end-valued presheaf is Enriched/FunctorCategory.lean:309 and the global bijection is Closed/FunctorCategory/Basic.lean:48."
+ },
+ "tool_uses": [
+  "lem-coef-grothendieck-small-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-c294594b7",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-c294594b7 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all seven steps, universe bounds, mixed variance, and adjunction formulas check out. Eight finite arrow-category tests passed. No new nodes, duplicates, circular dependencies, or repairs. Accepted the existing small-limits tool use. Detailed checks and reported metadata/dry-run limitations are in review.md."
+ }
 }
