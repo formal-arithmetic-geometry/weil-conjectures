@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-def-sfb-module-objects",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Module objects and the category $\\Mod_{\\Lambda_X}$",
@@ -20,24 +20,103 @@
  ],
  "proof": [
   {
-   "text": "Identities are morphisms of module objects. If $f\\colon M\\to N$ and $g\\colon N\\to P$ are\nmorphisms of module objects, then so is $gf$:\n$$\ngf\\gamma_M=g\\gamma_N(\\mathcal R\\otimes f)=\\gamma_P(\\mathcal R\\otimes g)(\\mathcal R\\otimes f)\n=\\gamma_P(\\mathcal R\\otimes gf).\n$$\nSo $\\Mod_{\\mathcal R}(\\mathcal C)$ is a category, and the forgetful functor is a functor. For\nthe regular module, the two axioms are the left unit law\n$\\mu(\\eta\\otimes\\mathcal R)=\\lambda_{\\mathcal R}$ and the associativity law\n$\\mu(\\mu\\otimes\\mathcal R)=\\mu(\\mathcal R\\otimes\\mu)\\alpha_{\\mathcal R,\\mathcal R,\\mathcal R}$\nof $\\mathcal R$. In part 3, $\\Lambda_X$ is a monoid object of\n$\\Sh(X_{\\mathrm{proét}},\\Ab)$ because $p_X^*$ is strong monoidal\n([sk-def-sfb-pulled-back-coefficients]), so part 2 applies.",
+   "text": "For the identity, $\\mathrm{id}_M\\circ\\gamma_M=\\gamma_M=\\gamma_M\\circ(\\mathcal R\\otimes\\mathrm{id}_M)$ by functoriality of $\\mathcal R\\otimes-$. If $f\\colon M\\to N$ and $g\\colon N\\to P$ commute with the actions, then $g\\circ f\\circ\\gamma_M=g\\circ\\gamma_N\\circ(\\mathcal R\\otimes f)=\\gamma_P\\circ(\\mathcal R\\otimes g)\\circ(\\mathcal R\\otimes f)=\\gamma_P\\circ(\\mathcal R\\otimes(g\\circ f))$. Thus identities and composites are module morphisms. Their category laws are the corresponding laws in $\\mathcal C$. Forgetting the action preserves these identities and composites by definition, hence gives the claimed functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/sk-def-sfb-module-objects.proof.md",
+    "place": "first three sentences: identity and composite calculation; category and forgetful functor"
+   }
+  },
+  {
+   "text": "For $M=\\mathcal R$ and $\\gamma_M=\\mu$, the two module axioms become $\\mu\\circ(\\eta\\otimes\\mathcal R)=\\lambda_{\\mathcal R}$ and $\\mu\\circ(\\mu\\otimes\\mathcal R)=\\mu\\circ(\\mathcal R\\otimes\\mu)\\circ\\alpha_{\\mathcal R,\\mathcal R,\\mathcal R}$. These are exactly the left unit and associativity laws of the given monoid object, as stated in [sk-def-sfb-ring-object]. Hence $(\\mathcal R,\\mu)$ is the regular module.",
    "uses": [
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/sk-def-sfb-module-objects.proof.md",
+    "place": "For the regular module: the displayed left unit and associativity laws"
+   }
+  },
+  {
+   "text": "For the scheme $X$ of part 3, [sk-def-sfb-sheaf-tensor] supplies the monoidal structure on $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$, with sheafified objectwise $\\otimes_{\\mathbf Z}$ and unit $\\underline{\\mathbf Z}$. The statement of [sk-def-sfb-pulled-back-coefficients] supplies the ring object $\\mathcal R=\\Lambda_X=p_X^*\\Lambda$ in this very category. Therefore the objects and morphisms defined in parts 1 and 2 specialize to abelian sheaves with an action $\\Lambda_X\\otimes M\\to M$ satisfying precisely the displayed unit and associativity equations. Step 1 supplies their category and forgetful functor, and step 2 supplies its regular module $\\Lambda_X$. This defines the category $\\Mod_{\\Lambda_X}$ in part 3.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/sk-def-sfb-module-objects.proof.md",
+    "place": "last sentence: specialize to Lambda_X using its pulled-back ring-object structure"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-objects/sk-def-sfb-module-objects.proof.md",
+  "place": "complete proof paragraph, expanded into three steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left module objects over a monoid in a monoidal category with regular module and forgetful functor",
+   "results": "CategoryTheory.Mod_.regular; CategoryTheory.ModObj.regular; CategoryTheory.Mod_.regular_X; CategoryTheory.Mod_.instInhabited; CategoryTheory.Mod_.forget_obj; CategoryTheory.ModObj; CategoryTheory.Mod_.regular_mod_smul; CategoryTheory.Mod_.",
+   "date": "2026-10-16",
+   "verdict": "Exact generic module-object ingredients; the service uses Mod_ names, whereas the pinned local source uses Mod. No declaration of the full condensed pro-etale coefficient specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_, CategoryTheory.ModObj",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class ModObj|structure Mod_|instance.*Category|def forget|def regular",
+   "results": "4 hits in the requested local file at lines 59 (class ModObj), 313 (Category (Mod D A)), 336 (def regular), 347 (def forget). The command prints line numbers in its file field when searching one file; these are the lines read in Mathlib/CategoryTheory/Monoidal/Mod.lean.",
+   "date": "2026-10-16",
+   "verdict": "Exact generic ingredients at the lines read, not the full condensed pro-etale coefficient definition.",
+   "sub": "CategoryTheory/Monoidal/Mod.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of left module objects over monoid objects in a monoidal category",
+   "results": "CategoryTheory.Mod_; CategoryTheory.Mod_.instCategory; CategoryTheory.ModObj; CategoryTheory.ModObj.mk; CategoryTheory.Mod_.mk.noConfusion; CategoryTheory.Mod_.noConfusion; ModuleCat.hom_whiskerLeft; CategoryTheory.Mod_.mk",
+   "date": "2026-10-16",
+   "verdict": "Exact generic module-object ingredients; not a declaration of the full condensed pro-etale coefficient specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of modules over the pullback of an arbitrary condensed ring on a scheme pro etale site",
+   "results": "CondensedMod; AlgebraicGeometry.Scheme.Modules; LightCondMod; AlgebraicGeometry.Scheme.Modules.instCategory; SheafOfModules.over; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.pullback; CondensedMod.LocallyConstant.functor",
+   "date": "2026-10-16",
+   "verdict": "no match: CondensedMod and LightCondMod use an ordinary coefficient ring; Scheme.Modules uses the scheme structure sheaf; SheafOfModules is the external sheaf-of-rings presentation, not this internal coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod.regular\"",
+   "results": "Bimod.regular; Bimod.regular_X; Bimod.regular_actLeft; Bimod.regular_actRight; CategoryTheory.AddMod.regular; CategoryTheory.Mod.regular; CategoryTheory.AddMod.regular_X; CategoryTheory.Mod.regular_X; CategoryTheory.AddMod.regular_addMod_vadd; CategoryTheory.Mod.regular_mod_smul",
+   "date": "2026-10-16",
+   "verdict": "CategoryTheory.Mod.regular is an exact match for the generic regular module, read locally at Mathlib/CategoryTheory/Monoidal/Mod.lean:336; no match for the full item."
+  },
+  {
+   "tool": "grep",
+   "query": "pro.etale|condensed",
+   "results": "0 hits in Mathlib/CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for a condensed pro-etale coefficient declaration in this file",
+   "sub": "CategoryTheory/Monoidal/Mod.lean"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -65,5 +144,21 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-def-sfb-module-objects",
+  "worker": "stage1",
+  "summary": "Preserved the source statement and its four definition dependencies. Expanded the proof into the explicit elementary category and regular-module checks, then specialized using the existing sheaf-tensor and pulled-back-coefficients statements. Rechecked the earlier sandbox attempt and recorded fresh Mathlib searches; no new nodes or attachments.",
+  "blueprint": "The three steps realize, respectively, the identity/composite and forgetful-functor sentences, the regular-module unit/associativity sentences, and the final pro-etale specialization sentence of sk-def-sfb-module-objects.proof.md. The detailed blueprint nodes state individual parts, not the whole combined item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-4ce4f42cf",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-4ce4f42cf (reviewer sub-agent of L); spot-checked: Read the required snapshot guidance, packet, report, item, cited nodes, blueprint sources, and route materials. All three proof steps and hypotheses check out; edge cases and coefficient category are correct. No new nodes or repairs are needed. Review written to review.md. The imported item has pre-existing unit/chapter metadata gap (unit None, no corresponding records), documented without alteration."
+ }
 }
