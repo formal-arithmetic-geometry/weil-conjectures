@@ -1,0 +1,90 @@
+{
+ "id": "lem-coef-finite-reedy-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the derived coefficient adjunction in the displayed R Hom / R lim calculation: stable enhancement of the flat models used to realize the finite enriched adjunctions. Agent-formulated model-localization foundation for proof paragraph 2. WANTED: finite direct/inverse Reedy model structures and their homotopy-coherent diagram comparison for arbitrary model categories (Hovey, Model Categories, Chapter 5, plus a function-complex/localization comparison). Not a consequence of a Stacks tag; no such reference is archived in literature/. HTT 4.2.4.4 alone assumes combinatorial simplicial models and is not a citation for this generality. No properness, simplicial enrichment or combinatorial hypothesis is imposed here.",
+   "via": [
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite direct and inverse Reedy diagrams present coherent diagrams",
+ "statement": "Let $\\mathcal M$ be a complete and cocomplete category with classes of weak equivalences, cofibrations and fibrations. Assume weak equivalences satisfy two-out-of-three and are closed under retracts, and that (cofibrations, trivial fibrations) and (trivial cofibrations, fibrations) are weak factorization systems with functorial factorizations. Here trivial means also a weak equivalence, and a weak factorization system consists of factorizations and the two mutually characterized diagonal-lifting classes. Let $\\mathcal C=\\mathcal M[W^{-1}]_\\infty$ denote its homotopy coherent localization: functors out of it are functors out of $\\mathcal M$ inverting $W$, with their mapping spaces and higher composition homotopies retained. Work in universes large enough for these localizations.\n\nLet $I$ be a category with finitely many objects and morphisms, equipped with a degree in $\\mathbf N$ such that every nonidentity arrow strictly increases degree (the direct case), or every nonidentity arrow strictly decreases degree (the inverse case); the empty category is allowed. Write $N(I)$ for its nerve, whose $n$-simplices are strings of $n$ composable arrows [def-weil-pbc-simplicial-set]. Then evaluation and localization give an equivalence\n$$\\operatorname{Fun}(I,\\mathcal M)[W_I^{-1}]_\\infty\\simeq\\operatorname{Fun}(N(I),\\mathcal C),$$\nwhere $W_I$ means objectwise weak equivalence, and the right side is the infinity category of coherent diagrams and transformations, including mapping spaces. We model infinity categories by simplicial sets with fillers for every inner horn: a horn is the union of all faces of the standard simplex (the nerve of a finite ordered set) except one face, and inner means that the omitted face is neither first nor last.\n\nIn the direct case the diagram category has the Reedy model structure with objectwise fibrations and weak equivalences. Its cofibrant objects $D$ are exactly those for which each latching map $L_iD\\to D_i$ is a cofibration; $L_iD$ is the colimit of the domain diagram on the full subcategory of the slice $I/i$ obtained by removing the identity of $i$. The adjunction $\\operatorname{colim}_I\\dashv\\operatorname{const}_I$ descends, under the displayed equivalence, to an adjunction $\\mathbf L\\operatorname{colim}_I\\dashv\\operatorname{const}_{N(I)}$ of infinity categories, and $\\mathbf L\\operatorname{colim}_I(D)$ is represented by $\\operatorname{colim}_I(QD)$ for a Reedy cofibrant replacement $QD\\to D$, including its cocone. In the inverse case there is dually a Reedy model structure with objectwise cofibrations and weak equivalences; a diagram is fibrant exactly when every matching map $D_i\\to M_iD$ is a fibration, where $M_iD$ is the limit of the codomain diagram on the full subcategory of the coslice $i/I$ obtained by removing the identity of $i$. The induced infinity adjunction is $\\operatorname{const}_{N(I)}\\dashv\\mathbf R\\operatorname{lim}_I$, with $\\mathbf R\\operatorname{lim}_I(D)$ represented by $\\operatorname{lim}_I(RD)$ for a Reedy fibrant replacement, including its cone.",
+ "source": {
+  "document": "Hovey, Model Categories, https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf; Cisinski, Higher Categories and Homotopical Algebra, https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Hovey Definition 5.1.1 (direct/inverse category), Definition 5.1.2 (latching/matching objects), Theorem 5.1.3 (diagram model structures) and Corollary 5.1.5 (colimit Quillen functor and its dual). Cisinski online revision July 30, 2026: Definition 7.4.12 (weak equivalences and fibrations/cofibrations), Theorem 7.6.17 (finite direct inverse-diagram localization; apply also to the opposite model category), Theorem 7.5.30 (derived adjunction of infinity categories), and paragraph 7.5.25 (calculation on replacements). These apply to any model category; no properness, combinatoriality or simplicial enrichment is assumed. Read online/downloaded to the isolated sandbox only; not archived in the shared literature/. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct Reedy diagrams in an arbitrary model category localize to coherent diagrams and derived colimit is left adjoint to the constant diagram functor",
+   "results": "{\"t\": \"2026-10-16T07:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"Finite direct Reedy diagrams in an arbitrary model category localize to coherent diagrams and derived colimit is left adjoint to the constant diagram functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\"], \"digest\": \"1164544f7aaca478\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 explicitly leaves the Reedy model structure as TODO; the localization and derived-adjunction hits concern ordinary categories, not the coherent diagram comparison or its mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModelCategory\", \"Reedy\"",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"ModelCategory\\\", \\\"Reedy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 explicitly leaves the Reedy model structure as TODO; the localization and derived-adjunction hits concern ordinary categories, not the coherent diagram comparison or its mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|homotopyCoherent|infinityCategory",
+   "results": "{\"t\": \"2026-10-16T07:42:20Z\", \"tool\": \"grep\", \"query\": \"Reedy|homotopyCoherent|infinityCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm/PositiveVector.lean\", \"Mathlib/Tactic/Linarith/Frontend.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/MeasureTheory/Covering/Besicovitch.lean\"], \"digest\": \"3ada1c1fc64f71bf\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 explicitly leaves the Reedy model structure as TODO; the localization and derived-adjunction hits concern ordinary categories, not the coherent diagram comparison or its mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Reedy model diagrams present coherent diagrams in the homotopy localization",
+   "results": "{\"t\": \"2026-10-16T07:42:21Z\", \"tool\": \"leansearch\", \"query\": \"Finite Reedy model diagrams present coherent diagrams in the homotopy localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Equivalence.instPrecoherentSmallModel\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"470253737ec7dc8e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 explicitly leaves the Reedy model structure as TODO; the localization and derived-adjunction hits concern ordinary categories, not the coherent diagram comparison or its mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy colimits and homotopy limits of finite Reedy diagrams compute infinity categorical limits in the localization of any model category",
+   "results": "{\"t\": \"2026-10-16T07:42:22Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy colimits and homotopy limits of finite Reedy diagrams compute infinity categorical limits in the localization of any model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"786cdcb17bc94979\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Reedy/Basic.lean:21-24 explicitly leaves the Reedy model structure as TODO; the localization and derived-adjunction hits concern ordinary categories, not the coherent diagram comparison or its mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown cofibration categories and direct diagrams: strict diagram localization is the functor infinity category",
+   "results": "{\"t\": \"2026-10-16T07:53:25Z\", \"tool\": \"leanfinder\", \"query\": \"Brown cofibration categories and direct diagrams: strict diagram localization is the functor infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"0118cdb607577b62\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: CofibrantObject.HoCat and its localization declarations concern the ordinary homotopy category, not the infinity category of coherent diagrams; Reedy/Basic.lean:21-24 still lists construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|reedy|excisive|loop.*suspension",
+   "results": "{\"t\": \"2026-10-16T07:54:55Z\", \"tool\": \"grep\", \"query\": \"quasicategory|reedy|excisive|loop.*suspension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"9b340826eeb0500f\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Quasicategory/Basic.lean:34-42, the Quasicategory directory, and Reedy/Basic.lean:21-24; the hits define quasicategories and Reedy structures but do not state these coherent comparison or finite-(co)limit theorems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-pointed-model-stability",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
