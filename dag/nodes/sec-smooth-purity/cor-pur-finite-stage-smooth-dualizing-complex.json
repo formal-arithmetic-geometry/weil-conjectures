@@ -1,102 +1,223 @@
 {
-  "id": "cor-pur-finite-stage-smooth-dualizing-complex",
-  "blueprint": {
-    "is": "cor-pur-finite-stage-smooth-dualizing-complex",
-    "from": null,
-    "same_as": null
+ "id": "cor-pur-finite-stage-smooth-dualizing-complex",
+ "blueprint": {
+  "is": "cor-pur-finite-stage-smooth-dualizing-complex",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-stage smooth dualizing complex",
+ "statement": "Work in the finite-coefficient purity conventions [def-pur-conventions]: $k$ is the fixed algebraic closure of $\\mathbf F_q$ of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite, $n\\geq1$, and $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $s=\\operatorname{Spec}k$ and let $a_X:X\\to s$ be separated, of finite type, and smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms, def-weil-scheme-morphism-properties]. On the small pro-etale site [def-weil-pbc-proetale-site], put $\\omega_X=Ra_X^!A_s$ as in [def-pur-conventions]. The canonical smooth purity isomorphism of [thm-pur-finite-coefficient-smooth-purity], at $f=a_X$ and $K=A_s$, gives an isomorphism\n$$\n \\eta_X:\\omega_X\\xrightarrow{\\sim}A_X(d)[2d],\n$$\nwhere the twist is [def-coefficient-twists-detailed]. More precisely, $\\eta_X^{-1}$ is $\\gamma_{a_X,A_s}$ after the canonical identification $La_X^*A_s\\cong A_X$.\n\nLet $\\varepsilon_{a_X,A_s}:Ra_{X!}\\omega_X\\to A_s$ be the counit. Then\n$$\n \\varepsilon_{a_X,A_s}\\circ Ra_{X!}(\\eta_X^{-1})\n =\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,A_s}:\n Ra_{X!}(A_X(d)[2d])\\longrightarrow A_s,\n$$\nthe smooth trace of [def-pur-smooth-trace]. After evaluation at the geometric point of $s$ [def-weil-finite-coefficient-point, def-weil-ordinary-compact-cohomology], this is the integration map\n$$\n R\\Gamma_c(X,A_X(d)[2d])\\longrightarrow A.\n$$\nIts normalization is the affine-space normalization of [thm-pur-trace-normalization-transitivity]: for the structural projection $p_d:\\mathbf A_k^d\\to s$, this map sends the ordered fundamental class of $\\mathbf A_k^d$, the $d$-fold tensor of the normalized affine-line classes, to $1\\in A$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/cor-pur-finite-stage-smooth-dualizing-complex.md",
+  "place": "node cor-pur-finite-stage-smooth-dualizing-complex, order 2029"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-pur-trace-normalization-transitivity",
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-smooth-trace",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=\\operatorname{Spec}k$ and $B=A_s$. The object $B$ in degree zero belongs to $D^b_{ctf}(s,A)$: its only cohomology sheaf is the constant finite free rank-one $A$-module, so the single stratum $s$ witnesses constructibility [def-weil-finite-torsion-constructibility], and $B\\otimes_A^L M=M$ for every degree-zero $A$-module sheaf $M$, so its Tor interval is $[0,0]$ [def-weil-finite-tor-amplitude]. The identity is computed by the free rank-one complex itself, with no higher terms. The conventions [def-pur-conventions] define $\\omega_X=Ra_X^!B$ and supply the constructible exceptional adjunction for this separated finite-type structure map. The schemes $X$ and $s$ are separated finite-type $k$-schemes, and the stated smoothness has pure relative dimension $d$, so all geometric hypotheses of finite-coefficient smooth purity hold.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude",
+    "def-pur-conventions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md",
+    "place": "First sentence: verify the coefficient object and all hypotheses before applying purity"
+   }
   },
-  "kind": "statement",
-  "title": "Finite-stage smooth dualizing complex",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, and let $a_X:X\\to\\Spec k$ be a\nseparated finite-type,\nsmooth morphism of pure dimension $d$. The dualizing complex\n\n$$\n\\omega_X=Ra_X^!A\n$$\n\nhas the canonical identification\n\n$$\n\\omega_X\\xrightarrow{\\ \\sim\\ }A_X(d)[2d],\n$$\n\ncoming from [thm-pur-finite-coefficient-smooth-purity], and the counit\n$Ra_{X!}\\omega_X\\to A$ is the normalized integration map\n\n$$\nR\\Gamma_c(X,A_X(d)[2d])\\longrightarrow A\n$$\n\nof [thm-pur-trace-normalization-transitivity], sending the\nfundamental class of the $d$-dimensional oriented fiber to $1$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/cor-pur-finite-stage-smooth-dualizing-complex.md",
-    "place": "node cor-pur-finite-stage-smooth-dualizing-complex, order 2029"
+  {
+   "text": "Apply [thm-pur-finite-coefficient-smooth-purity] to $f=a_X$ and $K=B$, whose hypotheses were checked in Step 1. It gives an isomorphism $\\gamma_{a_X,B}:La_X^*B(d)[2d]\\xrightarrow{\\sim}\\omega_X$. The statement of [def-pur-smooth-trace] explicitly includes the canonical identification $La_X^*B\\cong A_X$ at finite coefficients. Write $u:La_X^*B(d)[2d]\\xrightarrow{\\sim}A_X(d)[2d]$ for this identification with the same twist and shift. Set $c=\\gamma_{a_X,B}\\circ u^{-1}$ and $\\eta_X=u\\circ\\gamma_{a_X,B}^{-1}$. Then $\\eta_Xc=1$ and $c\\eta_X=1$ by cancellation, so $\\eta_X$ is exactly the claimed canonical identification and $c=\\eta_X^{-1}$.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md",
+    "place": "First sentence: specialize purity and invert it in the stated direction"
+   }
   },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "thm-pur-finite-coefficient-smooth-purity",
-    "thm-pur-trace-normalization-transitivity",
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [
-    {
-      "text": "Apply [thm-pur-finite-coefficient-smooth-purity] to $f=a_X$ and\n$K=A$: its source $La_X^*A(d)[2d]$ is $A_X(d)[2d]$, giving the\nidentification of the dualizing complex. Under this identification the\ncounit $Ra_{X!}Ra_X^!A\\to A$ is, by [def-pur-smooth-trace], the\nsmooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,A}$, whose normalization is\n[thm-pur-trace-normalization-transitivity] in the case\n$Y=\\Spec k$.",
-      "uses": [
-        "thm-pur-finite-coefficient-smooth-purity",
-        "def-pur-smooth-trace",
-        "thm-pur-trace-normalization-transitivity"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "thm-pur-finite-coefficient-smooth-purity",
+  {
+   "text": "Let $F=Ra_{X!}$ and $\\varepsilon=\\varepsilon_{a_X,B}$. By the displayed defining composite in [def-pur-smooth-trace], read through its included unit identification, $\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,B}=\\varepsilon\\circ F(c)$. Since $c=\\eta_X^{-1}$, this is precisely the counit expressed on $F(A_X(d)[2d])$. Explicitly, $F(\\eta_X)F(c)=F(1)=1$ and $F(c)F(\\eta_X)=1$, so the change of source is the specified one, with no choice of a scalar. The same definition states that this trace is a morphism between bounded constructible objects, so geometric-point evaluation is defined. Apply $\\operatorname{Fib}_s$, which at finite level is evaluation of complexes at the point [def-weil-finite-coefficient-point]. It sends $B$ to $A$ and, by the defining formula of [def-weil-ordinary-compact-cohomology], sends $F(A_X(d)[2d])$ to $R\\Gamma_c(X,A_X(d)[2d])$. Functoriality carries the displayed equality of maps to the asserted integration map of $A$-complexes.",
+   "uses": [
     "def-pur-smooth-trace",
-    "thm-pur-trace-normalization-transitivity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/cor-pur-finite-stage-smooth-dualizing-complex.md",
-    "place": "## Proof"
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md",
+    "place": "Second sentence: expand the defining smooth trace and apply point evaluation"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2029,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-pur-smooth-trace",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties",
-    "thm-pur-finite-coefficient-smooth-purity",
+  {
+   "text": "For the normalization, specialize the affine-space clause of [thm-pur-trace-normalization-transitivity] to $\\Lambda=A$ and $p_d:\\mathbf A_k^d\\to s$. Its source and target are exactly the integration source and target of Step 3 for $X=\\mathbf A_k^d$. That clause says that the smooth trace is the product of the normalized affine-line traces and sends their ordered $d$-fold fundamental class to $1$. This proves the claimed normalization in the precise model where the cited theorem states it. In particular, the normalization used here is the one fixed by the affine-line/diagonal-purity route, with no replacement of its purity map.",
+   "uses": [
     "thm-pur-trace-normalization-transitivity"
-  ],
-  "blueprint_tags": [
-    "latex:corollary"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let $a_X:X\\to\\Spec k$ be a\nseparated finite-type,\nsmooth morphism of pure dimension $d$. The dualizing complex\n\n$$\n\\omega_X=Ra_X^!A\n$$\n\nhas the canonical identification\n\n$$\n\\omega_X\\xrightarrow{\\ \\sim\\ }A_X(d)[2d],\n$$\n\ncoming from [thm-pur-finite-coefficient-smooth-purity], and the counit\n$Ra_{X!}\\omega_X\\to A$ is the normalized integration map\n\n$$\nR\\Gamma_c(X,A_X(d)[2d])\\longrightarrow A\n$$\n\nof [thm-pur-trace-normalization-transitivity], sending the\nfundamental class of the $d$-dimensional oriented fiber to $1$.",
-    "proof": [
-      {
-        "text": "Apply [thm-pur-finite-coefficient-smooth-purity] to $f=a_X$ and\n$K=A$: its source $La_X^*A(d)[2d]$ is $A_X(d)[2d]$, giving the\nidentification of the dualizing complex. Under this identification the\ncounit $Ra_{X!}Ra_X^!A\\to A$ is, by [def-pur-smooth-trace], the\nsmooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,A}$, whose normalization is\n[thm-pur-trace-normalization-transitivity] in the case\n$Y=\\Spec k$.",
-        "uses": [
-          "thm-pur-finite-coefficient-smooth-purity",
-          "def-pur-smooth-trace",
-          "thm-pur-trace-normalization-transitivity"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md",
+    "place": "Last sentence: use exactly the cited affine-space normalization clause"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-conventions",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "def-pur-smooth-trace",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "thm-pur-trace-normalization-transitivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md",
+  "place": "Entire proof, expanded into hypothesis verification, inverse construction, counit formula, and affine-space normalization; final clause corrected as explained in report.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Adjunction.counit",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated finite type scheme X over an algebraically closed field and finite torsion coefficients A invertible in the field, the dualizing complex is A twisted by d and shifted by 2d and the adjunction counit is normalized integration.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.ΓSpec.adjunction_counit_app, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, Algebra.smoothLocus_eq_compl_support_inter; hits concern normalization of schemes or ordinary sheaves of structure-ring modules and their pullback/pushforward adjunctions, not constructible finite torsion purity and its normalized exceptional counit",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|smoothPurity|smoothTrace|TateTwist|extraordinaryPullback",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dualizing complex of a smooth scheme of dimension d is the constant torsion sheaf with Tate twist d shifted by 2d, with counit the trace map.",
+   "results": "8 hits; HomologicalComplex.dgoEquivHomologicalComplexCounitIso, HomologicalComplex.unopCounitIso, Submodule.traceDual, LinearMap.dualMap, Module.dual_projective, LinearMap.IsPerfPair.dualEval, FGModuleCat.FGModuleCatDual, Subspace.instModuleDualFiniteDimensional; differential complexes, opposite complexes and linear/module duals, not the smooth dualizing complex of a scheme",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for constructible etale torsion sheaves on a smooth scheme: extraordinary inverse image of the unit is the orientation sheaf and compactly supported integration is the adjunction counit.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; hits concern normalization of schemes or ordinary sheaves of structure-ring modules and their pullback/pushforward adjunctions, not constructible finite torsion purity and its normalized exceptional counit",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|purity|Tate.twist|exceptional.inverse",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|orientationDatum|trace.*[Ss]mooth|smooth.*[Tt]race",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale or pro-etale six functor formalism, smooth relative purity identifies extraordinary pullback of constant coefficients with a Tate twist and shift; its counit is the compactly supported trace.",
+   "results": "8 hits; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; ordinary sheaf-module pullback/pushforward and scheme-module adjunctions, not the constructible finite-coefficient exceptional pullback, Tate purity, or normalized compact-support counit",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2029,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-pur-smooth-trace",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-pur-trace-normalization-transitivity"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let $a_X:X\\to\\Spec k$ be a\nseparated finite-type,\nsmooth morphism of pure dimension $d$. The dualizing complex\n\n$$\n\\omega_X=Ra_X^!A\n$$\n\nhas the canonical identification\n\n$$\n\\omega_X\\xrightarrow{\\ \\sim\\ }A_X(d)[2d],\n$$\n\ncoming from [thm-pur-finite-coefficient-smooth-purity], and the counit\n$Ra_{X!}\\omega_X\\to A$ is the normalized integration map\n\n$$\nR\\Gamma_c(X,A_X(d)[2d])\\longrightarrow A\n$$\n\nof [thm-pur-trace-normalization-transitivity], sending the\nfundamental class of the $d$-dimensional oriented fiber to $1$.",
+  "proof": [
+   {
+    "text": "Apply [thm-pur-finite-coefficient-smooth-purity] to $f=a_X$ and\n$K=A$: its source $La_X^*A(d)[2d]$ is $A_X(d)[2d]$, giving the\nidentification of the dualizing complex. Under this identification the\ncounit $Ra_{X!}Ra_X^!A\\to A$ is, by [def-pur-smooth-trace], the\nsmooth trace\n$\\operatorname{Tr}^{\\mathrm{sm}}_{a_X,A}$, whose normalization is\n[thm-pur-trace-normalization-transitivity] in the case\n$Y=\\Spec k$.",
+    "uses": [
+     "thm-pur-finite-coefficient-smooth-purity",
+     "def-pur-smooth-trace",
+     "thm-pur-trace-normalization-transitivity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-pur-finite-stage-smooth-dualizing-complex",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint specialization into four steps with explicit coefficient-domain checks, the inverse of the specified purity map, and the actual counit formula. STATEMENT-DISPUTED: the imported arbitrary-fiber fundamental-class sentence is undefined for disconnected fibers and false if read as the sum of component generators; corrected normalization to the affine-space model stated by the cited theorem, without adding connectedness or properness. Reused all existing interfaces; no new nodes.",
+  "blueprint": "Current snapshot main-20261015, sk-cor-sp-all-coefficients/cor-pur-finite-stage-smooth-dualizing-complex.proof.md: first sentence realized by Steps 1–2; second sentence by Step 3; final normalization reference by Step 4 with the source discrepancy recorded. The inherited unit sk-thm-purity-transport realizes the same structural-morphism specialization in Step 4; no unit fields changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-41e4f6ecb",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-41e4f6ecb (reviewer sub-agent of L); spot-checked: Read in full: the item, both blueprint snapshots (main-20261015 sk-cor-sp-all-coefficients .md/.proof.md and master sk-thm-purity-transport order 2029, same text), the unit sk-thm-purity-transport, every cited node's statement and the three citers. No new nodes. Step 1: A_s is in D^b_ctf(s,A): one stratum, constant free rank-one sheaf, Tor interval [0,0] because it is the unit, still true for n>1; ell is invertible because ell!=p. The hypotheses of thm-pur-finite-coefficient-smooth-purity (smooth, separated, pure relative dimension d, separated finite-type k-schemes) hold. Step 2: gamma and the unit identification La^*Lambda_Y = Lambda_X stated in def-pur-smooth-trace give eta = u o gamma^{-1} with the correct directions. Step 3: by def-pur-smooth-trace, the counit composed with Ra_!(eta^{-1}) is the smooth trace, its K=Lambda_Y case being the first composite. Fib_s (def-weil-finite-coefficient-point item 1) and RGamma_c = Fib_s Ra_! (def-weil-ordinary-compact-cohomology) are applied to objects that def-pur-smooth-trace puts in D^b_c. Step 4: the affine-space clause of thm-pur-trace-normalization-transitivity is used verbatim at Lambda=A; checked at d=0 and d=1. The STATEMENT-DISPUTED correction is justified: for X = two copies of Spec k and d=0 the class (1,1) integrates to 2, and empty X has no class. The replacement is exactly what the cited theorem states, with no hypothesis added and the purity isomorphism and counit identification kept for all X. No citer (thm-sf-dual-perfect, def-pod-conventions, thm-pod-trace-isomorphism) uses the dropped clause. Route: the unit cites sk-thm-smooth-purity, and the normalization theorem is in the item's own unit, so no tool use is needed. No SGA source is cited. thm-pur-diagonal-dualizing-object and cor-pur-adic-and-rational-smooth-dualizing-complexes are related but not duplicates. Separate maintainer metadata note, not a fault of the split: the current blueprint files this item under sk-cor-sp-all-coefficients, while the inherited DAG unit is sk-thm-purity-transport. No fixes written."
+ }
 }

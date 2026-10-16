@@ -31,9 +31,192 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathsf M$ for the absolute marked model and $s_{A,B}$ for the projection comparison. First check the formal cone properties directly. A map from $L_u(A)$ into a fixed enriched diagram is a family of maps on the cone generators of the simplices of $A$, satisfying their face, degeneracy and composition relations, and taking the generators from marked edges to marked edges. A compatible family of such maps for a diagram of marked objects is exactly the same data for its colimit: the simplex relations are glued and the marking is the image-union of the given markings. This proves that $L_u$ preserves small colimits, including colimits identifying vertices. The action preserves markings because an acting edge $h$ sends $g^*\\widetilde e$ to $(gh)^*\\widetilde e$. Each projection of $A\\times B$ takes a marked edge to a marked edge, and hence takes its marked cone generators to marked cone generators. Thus it induces $s_{A,B}$, naturally in both variables. Products of marked objects preserve colimits in each variable by their internal-Hom adjunction, and enriched-diagram colimits are objectwise. Consequently both sides of $s$ preserve colimits separately.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.2.1.2, Remark 3.2.1.3 and Proposition 3.2.1.4(1); the mapping-out argument is supplied explicitly."
+   }
+  },
+  {
+   "text": "For $a:T\\to S$, the cone pushouts for $L_u(a_!A)$ and $L_{u\\mathfrak C[a]}(A)$ have the identical attaching map, and their marked generators agree. For a simplicial functor $\\pi:J\\to I$, the cone pushout for $\\pi^{\\mathrm{op}}v$ is obtained by extending the old category in the pushout for $v$. Its arrows to the cone are composites of an $I^{\\mathrm{op}}$ arrow and an old cone arrow, modulo the composition relations in $J^{\\mathrm{op}}$. This is the enriched coend\n$$L_{\\pi^{\\mathrm{op}}v}(A)(i)=\\int^{j\\in J} I(\\pi j,i)^\\sharp\\times L_v(A)(j)=(\\pi_!L_v(A))(i).$$\nThe relation identifies $I(\\pi f,i)$ on the first factor with the action of $f$ on the second; the marking is the image of the coordinatewise product markings, exactly the prescribed precomposites of marked cone edges. These equalities commute with the projection maps. In particular, for $\\pi:J\\to I$, $\\pi':J'\\to I'$, distributing products over the two coend quotients gives\n$$(\\pi\\times\\pi')_!(G\\boxtimes H)\\cong\\pi_!G\\boxtimes\\pi'_!H.$$\nThis is an equality of quotient presentations: its relation in the $J$ coordinate and its relation in the $J'$ coordinate are independent, in either order. The coend universal property gives a natural enriched bijection $\\operatorname{Map}(\\pi_!G,H)\\cong\\operatorname{Map}(G,\\pi^*H)$, so this $\\pi_!$ is left adjoint to restriction.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.4(2)-(3); enriched substitution and the product coend relation written explicitly."
+   }
+  },
+  {
+   "text": "For every indexing functor, $L_u$ sends monomorphisms to projective cofibrations and marked-anodyne maps to projective trivial cofibrations. Indeed a monomorphism of marked objects is built by adjoining missing nondegenerate simplices along $(\\partial\\Delta^n)^\\flat\\to(\\Delta^n)^\\flat$, in increasing dimension, and then adjoining missing markings along $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$. The existing canonical cone-generator statement gives the asserted cofibrations for these maps. Use the two substitutions of step 2 to obtain the same result over any base and for any index. The coend adjunction displayed in step 2 identifies this left Kan extension as left adjoint to restriction. Restriction of enriched diagrams preserves objectwise fibrations and trivial fibrations; hence its left Kan adjoint preserves cofibrations and trivial cofibrations by adjoint lifting. Step 1 extends the calculation through pushouts, compositions and retracts. Apply this same argument to the four types of marked-anodyne generators in the cited statement to obtain the second assertion. In particular $L_u(A)$ is projectively cofibrant, and evaluation sends every map just described to an absolute marked (trivial) cofibration. This argument does not assert that every objectwise monomorphism is a projective cofibration.",
+   "uses": [
+    "lem-coef-marked-cone-generator-calculations",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 3.2.1.7 and 3.2.1.11; their canonical generator calculations are the cited existing node."
+   }
+  },
+  {
+   "text": "For fixed $B$, the assertion that $s_{A,B}$ is an objectwise weak equivalence has the following closure properties, and the same properties hold after exchanging variables. It is closed under filtered colimits: step 1 identifies the colimit arrow with $s$ on the colimit, and marked weak equivalences are closed under filtered colimits. It is closed under pushouts $A=N\\amalg_C D$ along a monomorphism $C\\to D$, provided the comparison is known for $N,C,D$. At each index, step 1 expresses the source and target as pushouts of the corresponding spans. The attaching map in the source is a cofibration by step 3, because $C\\times B\\to D\\times B$ is a monomorphism. In the target it is the product of $L_u(C)\\to L_u(D)$ with the fixed value of $L_{u'}B$, and is a cofibration by the marked cartesian pushout-product axiom. All six values are cofibrant in $\\mathsf M$. Thus clause (b) of the model cofibrant-colimit comparison applies, with exactly its hypotheses verified, and gives the weak equivalence of pushouts.",
+   "uses": [
+    "lem-coef-marked-saturation-perfect-equivalences",
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, finite cell induction and filtered-colimit passage; gluing is justified by the cited general comparison lemma."
+   }
+  },
+  {
+   "text": "There is also a spine replacement rule in either variable. For $n\\geq2$, put $K=\\operatorname{Sp}[n]\\subseteq\\Delta^n$. Its inclusion is inner anodyne, hence $K^\\flat\\to(\\Delta^n)^\\flat$ is marked anodyne: apply small-object cell factorization to the set of inner horn inclusions. Its domains are finite simplicial sets, so their Hom functors preserve sequential cell unions. The lifting characterization makes the spine map a retract of an inner-horn cell map; minimal marking preserves its cell presentation and retract. Thus it belongs to the weak saturation of marked generator (i). The product of this map with any marked $B$ is marked anodyne, by the marked-anodyne pushout-product theorem with $\\varnothing\\to B$. Step 3 makes the induced source map under $L_{u\\boxtimes u'}$ an objectwise weak equivalence. The map in the target is also a weak equivalence by step 3 and preservation of weak equivalences by products in $\\mathsf M$. Naturality gives a commutative square for $s$ with these two sides weak equivalences. Two-out-of-three says that the comparison for the minimally marked $n$-simplex is a weak equivalence if and only if the comparison for its minimally marked spine is. This includes $n=2$.",
+   "uses": [
+    "lem-cbc-spine-inner-anodyne",
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, spine reduction; use n >= 2, including the triangle case."
+   }
+  },
+  {
+   "text": "The empty-object case has both sides initial. If $A$ is a single vertex $x$ over $S$, its cone diagram is the free diagram $i\\mapsto I(u(x),i)^\\sharp$: every cone arrow is an old arrow to $u(x)$ followed by the unique cone arrow, and degenerate marked edges at $x$ mark all acting edges. For $A\\times B\\cong B$ over the constant first coordinate, the same presentation gives\n$$L_{u\\boxtimes u'}(A\\times B)(i,i')=I(u(x),i)^\\sharp\\times L_{u'}(B)(i').$$\nIndeed an old first-coordinate arrow is independent of every second-coordinate cone generator and relation, so it factors out of the coend of step 2. The comparison is this isomorphism. This proves the vertex case for arbitrary $B$, and symmetrically the case where $B$ is a vertex.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, empty and vertex cases; free-diagram formula checked from the cone presentation."
+   }
+  },
+  {
+   "text": "We compute the case of two single edges first at their canonical indices $J=J'=[1]^{\\mathrm{op}}=\\mathfrak C[\\Delta^1]^{\\mathrm{op}}$. For $E=(\\Delta^1)^\\epsilon$, $\\epsilon\\in\\{\\flat,\\sharp\\}$, the cone formula gives $B_\\epsilon(0)=(\\Delta^1)^\\epsilon$, $B_\\epsilon(1)=\\Delta^0$, with the action $1\\to0$ the terminal-vertex inclusion: the coherent $2$-simplex has mapping interval from $0$ to its cone point. For the product index $J\\times J'$, the diagram $B_\\epsilon\\boxtimes B_{\\epsilon'}$ is projectively cofibrant. An explicit free-cell construction starts with the free point diagram at $(1,1)$, then adjoins at $(0,1)$ the interval along its terminal vertex, then at $(1,0)$ the other interval along its terminal vertex, and finally at $(0,0)$ the product square along its two terminal sides. Each attaching map is an underlying monomorphism in $\\mathsf M$, and the free-diagram adjoints preserve cofibrations by adjoint lifting against objectwise trivial fibrations. These four attachments give exactly the stated values, actions and markings. The source cone diagram for $E\\times E'$ is projectively cofibrant by step 3.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, canonical one-edge reduction; projective cofibrancy verified by four explicit free attachments."
+   }
+  },
+  {
+   "text": "Take both edges minimally marked. Label the vertices of their product $a=(0,0),b=(1,0),c=(0,1),d=(1,1)$, and the corresponding cone-arrow vertices $A,B,C,D$. At $d$ the source comparison is a point, at $b$ it is the interval to $d$, and at $c$ it is the interval to $d$; thus the comparison is an isomorphism at these three objects. At $a$ its source is\n$$V=H_b\\amalg_{\\Delta^{\\{A,D\\}}}H_c,\\qquad H=(\\Delta^1\\times\\Delta^1)/(\\Delta^1\\times\\{1\\}),$$\nwith minimal markings. To verify the presentation, triangulate the input square by the chains $a<b<d$ and $a<c<d$. In the cone on the first triangle, the mapping cube from $a$ to the cone vertex has coordinates indicating whether $b$ and $d$ occur in the subset describing the coherent arrow. Its four vertices are $A,B,D,D$. Its top side is collapsed because the old-category homotopy between the paths $a\\to b\\to d$ and $a\\to d$ becomes equality in the discrete category $[1]\\times[1]$. The other triangle gives the identical quotient with $B$ replaced by $C$. Their intersection is the cone interval for $a\\to d$, namely the uncollapsed side $\\{0\\}\\times\\Delta^1$ in each quotient. The two maximal input triangles and their faces exhaust all generators and relations, so these two quotients glued on that interval give $V$. The comparison at $a$ maps $H_b$ to the triangle $ABD$ of the product square and $H_c$ to $ACD$; it sends both edges $A\\to D$ of each quotient to the diagonal.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, final explicit computation; subset-cube quotient and its common diagonal specified."
+   }
+  },
+  {
+   "text": "The map $q:H^\\flat\\to(\\Delta^2)^\\flat$ just described is a weak equivalence. In fact $H$ has the triangle $ABD$, with long edge $t:A\\to D$, and one further edge $r:A\\to D$ and triangle with vertices $(A,D,D)$, whose long edge is $t$, first edge is $r$ and final edge is degenerate. Hence the inclusion of the first triangle into $H$ is precisely a pushout of the final-horn marked-anodyne generator in dimension $2$: the horn supplies $t$ and the degenerate final edge, and the attachment supplies $r$ and this second triangle. This inclusion is a weak equivalence in $\\mathsf M$ by the marked mapping tests. Its composite with $q$ is the identity of $\\Delta^2$, so two-out-of-three proves that $q$ is a weak equivalence.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, omitted elementary square computation expanded as a final-horn attachment."
+   }
+  },
+  {
+   "text": "The two copies of $q$ in step 9 agree on the common side $\\Delta^{\\{A,D\\}}$: both send it isomorphically to the diagonal of the target square. Both inclusions of this common interval into the respective $H$ and into the corresponding target triangle are monomorphisms. Apply the cofibrant span comparison, clause (b), to these two spans, using the identity on their common interval and $q$ on both outer terms. It proves\n$$V^\\flat\\longrightarrow(\\Delta^1\\times\\Delta^1)^\\flat$$\nis a weak equivalence. Together with the three isomorphism components of step 8, this proves the canonical minimally marked edge-pair case.",
+   "uses": [
+    "lem-coef-model-cofibrant-colimit-comparison",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, final square calculation: gluing the two quotient triangles."
+   }
+  },
+  {
+   "text": "For completeness the marking changes at $a$ are as follows. If only the first input edge is marked, the newly marked cone edges are $AB$ and $CD$; if only the second is marked, they are $AC$ and $BD$. If both are marked, the five input edges are marked, and the cone marking adds $AB,BD,AC,CD$ and the common edge $r=AD$ of the two quotient pieces. The other two edges $t:A\\to D$ in those pieces need not be marked. These lists follow by precomposing the coned edge with each available old arrow; the old index is discrete. Their images in the product square are exactly its two horizontal edges, its two vertical edges, or all five edges, respectively, which are the coordinatewise product markings. Therefore each marked comparison is obtained from the minimally marked comparison by the same pushout on both sides, attaching one copy of $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ for each listed edge. In the comparison of these pushout spans the maps on the two attaching coproducts are identities, the third map is the weak equivalence of step 10, and the attaching marking-inclusion map is a cofibration. Clause (b) of the cofibrant span comparison proves the new comparison is a weak equivalence. At $b,c,d$ the matching marked comparisons remain isomorphisms. Thus all four canonical edge-pair cases hold.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-model-cofibrant-colimit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, four marking cases; the actual added edges and pushout spans are listed."
+   }
+  },
+  {
+   "text": "Return to arbitrary bases and indexing functors for a pair of single edges. Restrict $u,u'$ along their given edge maps to $S,S'$, using the first substitution in step 2. Let $\\pi:[1]^{\\mathrm{op}}\\to I$ and $\\pi':[1]^{\\mathrm{op}}\\to I'$ be the opposites of these restricted functors. The second substitution and its product coend identity identify the actual comparison with $(\\pi\\times\\pi')_!$ applied to the canonical comparison of steps 10-11. By the coend adjunction in step 2, restriction along $\\pi\\times\\pi'$ has the displayed left Kan adjoint. Restriction preserves fibrations and trivial fibrations objectwise, hence this left Kan adjoint is left Quillen. Both ends of the canonical comparison are projectively cofibrant by step 7, so preservation of weak equivalences between cofibrant objects applies. This proves every edge-pair case at arbitrary indices. The argument requires no local Kan assumption on $I$ or $I'$ and does not claim preservation of arbitrary weak equivalences by underived left Kan extension.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 3.2.1.4(3) and 3.2.1.13, change from the canonical edge indices; cofibrancy is verified in step 7."
+   }
+  },
+  {
+   "text": "Here is the noncircular induction completing the proof. Fix a first factor that is a vertex or either type of single edge, with any base map and index. Induct on the lexicographic pair (dimension, number of top-dimensional nondegenerate simplices) of a finite second factor $B$. The empty case and single-vertex cases are step 6. In dimension $0$, adjoin one vertex at a time along the empty subobject and apply step 4; the number of vertices decreases when one is removed. For dimension $1$, remove a top edge and attach that edge with its actual marking along its minimally marked two endpoints; the smaller graph and the endpoints are already known, and the edge itself is known by steps 6 and 12, so step 4 gives the result, also for loops and identified endpoints. For dimension $n\\geq2$, removing a top simplex expresses $B=N\\amalg_{(\\partial\\Delta^n)^\\flat}(\\Delta^n)^\\flat$, with all boundary markings retained in $N$: apply the boundary-cell presentation to the inclusion $N\\subseteq B$, whose only missing nondegenerate simplex is the removed one; the same presentation gives the edge attachment in dimension $1$. The first two terms have smaller induction pairs. For the last term use step 5: its spine has dimension $1<n$ and is therefore already known. Step 4 glues the three comparisons. Every marked object is the filtered union of its finite marked simplicial subobjects, so step 4 extends this result to arbitrary $B$. We now fix any $B$ and perform exactly this finite induction on the first factor $A$; its vertex and edge bases have just been proved for that arbitrary $B$, and its spine reduction has smaller dimension. Pass again to the filtered union. This proves the assertion for all $A,B$. Each comparison is natural by step 1, and the projective weak equivalences are objectwise, as required.",
+   "uses": [
+    "lem-coef-marked-saturation-perfect-equivalences",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.1.13, the two finite inductions and the two filtered-colimit passages, with the induction bases fixed before use."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-spine-inner-anodyne",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-cone-generator-calculations",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-saturation-perfect-equivalences",
+  "lem-coef-model-cofibrant-colimit-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-small-object-cell-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.2.1.13 (printed pp. 176-177, PDF pages 193-194), following Propositions 3.2.1.4, 3.2.1.7 and 3.2.1.11. Read online on 2026-10-17; not archived under literature/. The quotient-square computation, cofibrancy and coend compatibilities are supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +259,45 @@
    "results": "{\"t\": \"2026-10-16T20:02:23Z\", \"tool\": \"leanfinder\", \"query\": \"straightening product simplicial categories comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.isoNerve\", \"SSet.prodStdSimplex.objEquiv_naturality\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\"], \"digest\": \"80cd7aa211438908\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second-reader search returned related ordinary simplicial, enriched-category or model-category declarations, but none states this marked-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked cone straightening external product comparison objectwise weak equivalence",
+   "results": "{\"t\": \"2026-10-16T22:23:37Z\", \"tool\": \"leanfinder\", \"query\": \"Marked cone straightening external product comparison objectwise weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app\", \"CategoryTheory.Limits.Cones.whiskeringEquivalence_counitIso\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.Functor.mapConeMapConeInv\", \"CategoryTheory.Functor.mapConeWhisker\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.Functor.RightExtension.coneAtWhiskerRightIso_hom_hom\", \"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_pt\"], \"digest\": \"c1a037e85fe39f64\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits were read. They concern the ordinary homotopy-category product comparison, products of simplicial sets, ordinary category-theory cones, or model-category products; none constructs enriched marked cone diagrams or states their absolute marked Cartesian product comparison. HoFunctorMonoidal.lean lines 13-20 and 37-43 make the ordinary 2-truncation scope explicit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"prod\"",
+   "results": "{\"t\": \"2026-10-16T22:24:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"nhdsSet_prod_le\", \"Filter.Eventually.prod_nhdsSet\", \"Filter.eventually_nhdsSet_prod_iff\", \"nhdsSetWithin_prod_le\", \"IsCompact.nhdsSet_prod_eq\", \"IsCompact.nhdsSetWithin_prod_eq\", \"IsCompact.mem_nhdsSet_prod_of_forall\", \"IsCompact.mem_prod_nhdsSet_of_forall\"], \"digest\": \"664cc08e61750b22\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits were read. They concern the ordinary homotopy-category product comparison, products of simplicial sets, ordinary category-theory cones, or model-category products; none constructs enriched marked cone diagrams or states their absolute marked Cartesian product comparison. HoFunctorMonoidal.lean lines 13-20 and 37-43 make the ordinary 2-truncation scope explicit."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|external.{0,20}product|MarkedSimplicial",
+   "results": "{\"t\": \"2026-10-16T22:24:11Z\", \"tool\": \"grep\", \"query\": \"straighten|external.{0,20}product|MarkedSimplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal.lean\"], \"digest\": \"f6f45842e1fb69d6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits were read. They concern the ordinary homotopy-category product comparison, products of simplicial sets, ordinary category-theory cones, or model-category products; none constructs enriched marked cone diagrams or states their absolute marked Cartesian product comparison. HoFunctorMonoidal.lean lines 13-20 and 37-43 make the ordinary 2-truncation scope explicit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cone straightening weakly commutes with products of marked simplicial sets",
+   "results": "{\"t\": \"2026-10-16T22:24:11Z\", \"tool\": \"leansearch\", \"query\": \"Coherent cone straightening weakly commutes with products of marked simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.ProdPreservesConnectedLimits.forgetCone_pt\", \"SSet.Subcomplex.prod\", \"SSet.whiskerRight_app_apply\", \"CategoryTheory.Limits.productIsProduct\", \"SSet.prodStdSimplex.objEquiv\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\"], \"digest\": \"b18c2384fd2f4e34\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits were read. They concern the ordinary homotopy-category product comparison, products of simplicial sets, ordinary category-theory cones, or model-category products; none constructs enriched marked cone diagrams or states their absolute marked Cartesian product comparison. HoFunctorMonoidal.lean lines 13-20 and 37-43 make the ordinary 2-truncation scope explicit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched straightening comparison for the product of two simplicial bases",
+   "results": "{\"t\": \"2026-10-16T22:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched straightening comparison for the product of two simplicial bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SSet.prodStdSimplex.objEquiv_map_apply\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.prodStdSimplex.objEquiv_apply_fst\", \"SSet.prodStdSimplex.objEquiv_apply_snd\", \"SSet.prodStdSimplex.objEquiv_naturality\"], \"digest\": \"a52355dc973ddb95\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual hits were read. They concern the ordinary homotopy-category product comparison, products of simplicial sets, ordinary category-theory cones, or model-category products; none constructs enriched marked cone diagrams or states their absolute marked Cartesian product comparison. HoFunctorMonoidal.lean lines 13-20 and 37-43 make the ordinary 2-truncation scope explicit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-straightening-quillen",
@@ -99,5 +317,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-cone-external-product",
+  "worker": "stage1",
+  "summary": "Replaced the earlier unsupported five-step draft by an explicit proof of HTT 3.2.1.13. Proved cone colimit/substitution identities from their quotient presentations, deduced arbitrary-index cofibration and marked-anodyne preservation from the existing canonical generator node, justified cell induction by the existing cofibrant span comparison, computed the two-edge square as two quotient cubes, proved its equivalence by final-horn attachments and gluing, enumerated all marking changes, and justified arbitrary-index Kan extension using projective cofibrancy. No new node is needed. The statement is unchanged.",
+  "blueprint": "Realizes the inherited foundation 'External product comparison for marked cone diagrams' below the finite-coefficient mapping-complex adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint. The current main-20261015 ancestor proof has been read; this is a node-level foundational split without any change to its unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-spine-inner-anodyne",
+    "why": "Generic inner-anodyne spine theorem for the finite cell induction; this unit has no alternative statement supplying the unlabelled simplex spine theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-spine-inner-anodyne"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-64932ac65",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-64932ac65 (reviewer sub-agent of L); spot-checked: Read in full: the 13-step proof of the unchanged statement, which matches HTT Prop 3.2.1.13 (arbitrary simplicial categories, no local Kan hypothesis, objectwise equivalence; HTT is not archived, a WANTED line is in the report, proof_origin=agent). I checked it against all 14 cited statements. Steps 1-2: colimit preservation, a_! substitution, and pi_! as the enriched coend (correct because v has no outgoing arrows); product Fubini. Step 3: general base/index reduced to the canonical generator node via pi_! left Quillen. Step 4: hypotheses of clause (b) of lem-coef-model-cofibrant-colimit-comparison checked objectwise. Step 5: inner anodyne gives a retract of an inner-horn cell map by the small-object node; flat marking is a left adjoint. Step 6: free point diagram, co-Yoneda. Step 7: four free cells verified. Step 8: recomputed C[(Delta^1)^2 * Delta^0] as two C[Delta^3] glued over C[Delta^2]; the coend collapses {adv}->{abdv}, giving V = H_b glued to H_c along r, with b,c,d isomorphisms. Step 9: H is the pushout along Lambda^2_2 (marking stays minimal). Steps 10-11: span comparisons and the marking lists AB,CD / AC,BD / four sides plus r, with t unmarked, all verified. Step 12: left Quillen preservation between cofibrant objects. Step 13: the induction is well-founded and not circular. No new nodes. Not a duplicate of lem-coef-unstraightening-external-products (that is the unmarked right-adjoint isomorphism). No cycle. uses equal proof_deps. Tool use lem-cbc-spine-inner-anodyne accepted. FIX: step 13 now cites lem-coef-infinity-monomorphism-boundary-cells for the top-simplex pushout and the edge attachment; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
