@@ -13,24 +13,44 @@
  ],
  "proof": [
   {
-   "text": "Restriction of scalars followed by geometric direct image and geometric\ndirect image followed by restriction have the same underlying sheaf functor; the natural\nisomorphism comapLowerStarIso is the identity on underlying sheaves. Its compatibility\nwith direct-image composition follows by forgetting the action, which is faithful, and\nusing associativity of direct-image composition. The change-of-coefficients square for\nthe coefficient maps follows from their naturality. Derive these commuting diagrams using\nK-injective resolutions: restriction is exact and preserves K-injectives since its left\nadjoint is exact, and direct images preserve K-injectives. The universal property of the\nright derived functor identifies the resulting comparison with derivedComapLowerStarIso\nand preserves its composition equation. Conjugate that equation along the two geometric\nadjunctions and the extension/restriction adjunctions. Conjugation respects composition\nand associators, giving compatibility of derivedPullIso with geometric composition.\nThe geometric composition maps are the specified leftDerivedUpperStarComp: derive the\nunderived adjunction-conjugate composition equation and use uniqueness of derived\nadjunctions, with exact pullbacks computed termwise. Apply this composition equation to\n(f', g) and (g', f), transport along sq.w, and cancel the common comparison for the equal\ncomposite. Naturality under equality and proof irrelevance handle the commutativity proof.\nThis gives the pullback cube in the displayed inverse-alpha_f' orientation. Restrict along\nthe fully faithful bounded constructible inclusions, whose composition constraints are\nrestrictions of these same maps. This proof uses no base-change exchange morphism, no\npush comparison, and no properness or Cartesianity. For identity morphisms the equation\nreduces to the unit coherence; for a zero object both sides are its unique morphism.",
+   "text": "Specialize the proved generic derived_pull_comp calculation in ContinuousIntegralPullComposition to the flat condensed coefficient map E → PadicAlgCl ℓ. That calculation derives restriction/pushforward composition and conjugates through the scalar and geometric adjunctions, so it applies to this coefficient map independently of the integral specialization in that module. Apply Iso.ext and ObjectProperty.hom_ext. The private projection equations identify restricted scalar-extension and pullback maps and objects with their ambient derived counterparts. Use the proved bounded_comp_hom calculation to identify the bounded composition constraints. Evaluate the generic natural-transformation equality at K.obj, normalize the restricted functor projections, and use congruence to obtain qbarPullIso_comp.",
    "uses": [
+    "lem-weil-pbc-continuous-integral-pull-composition",
     "def-weil-pbc-qbar-condensed-comparisons",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-pbc-adjunction-mate"
+    "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": false
+  },
+  {
+   "text": "The pull comparison respects equality of geometric morphisms: substitute the equality, after which both transports are reflexive isomorphisms and the functorial unit identities close the equation. This is qbarPull_eq.",
+   "uses": [
+    "def-weil-pbc-qbar-condensed-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply qbarPullIso_comp to g′ followed by f and to f′ followed by g. Use qbarPull_eq for sq.w.symm. Expand only the component API of boundedConstructiblePullbackSquareComparison into inverse composition, equality transport, and forward composition. Paste the three isomorphism equalities with the elementary mapped_iso_rectangle calculation already proved in ContinuousIntegralExchangeTargetAdjunct. This yields qbarPull_square_cube_iso.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take hom components of the isomorphism equality. Cancel the isomorphism α_f′ on the left and the image of α_f on the right using the elementary inverse_mapped_square calculation, obtaining exactly the stated inverse-α_f′ orientation. This uses no exchange morphism, push comparison, properness, or Cartesianity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-continuous-integral-pull-composition",
   "def-weil-pbc-qbar-condensed-comparisons",
-  "def-weil-pbc-condensed-e-module-category",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-condensed-e-module-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean",
-  "place": "Geometric composition coherence in parent exchange proof, isolated before taking mates"
+  "place": "Geometric composition coherence in parent exchange proof, isolated before taking mates",
+  "note": "D4: the original composition-and-cancellation route is fully implemented. Reuse the existing generic ambient coherence and bounded projection proofs through proof-only import all; all new private helpers are proved and no sorry is added."
  },
  "mathlib_searches": [
   {
@@ -147,11 +167,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "XREPAIR-0d56945a24047e2a",
-  "group": "XR0d56945a24047e2a",
+  "reviewer": "X-956ce",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261016T095751-L-2157226",
+  "landing": "20261016T104121-L-2376737",
   "kind": "interface",
-  "note": "\nREADY: removed both invalid reducibility annotations; consumer compiles in 29.4s. Report records cached-import limitations and unavailable equality-check dependency. Statements and proofs unchanged.\nDELIVERED: checks and fix"
+  "note": "independent Codex review: Delivered module, node statement, change record, and recorded downstream compile results matched against the review brief and repository baseline; delivered files compiled successfully."
  }
 }
