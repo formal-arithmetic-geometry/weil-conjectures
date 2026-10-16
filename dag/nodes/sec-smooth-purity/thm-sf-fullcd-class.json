@@ -3,60 +3,215 @@
  "blueprint": {
   "is": "thm-sf-fullcd-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The blueprint's coefficient class supplies the restricted datum, with $c=2\\dim\\overline X$",
- "statement": "In the setting of [thm-sf-fullcd-used-class] — $k=\\Fbar$,\nfinite-type $k$-schemes $Y$ and $\\overline X$ with\n$\\dim\\overline X\\leq d$, and a\nproper finite-type morphism\n$p:\\overline X\\to Y$ — the class-restricted datum of\n[def-sf-fullcd-class] holds for $p$ with the bound $2d$:\n\n$$\n\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;2d).\n$$\n\nThe bound is $2\\dim\\overline X\\leq2d$ and it is uniform over all base\nchanges $V\\to Y$ of $Y_{\\Proet}$; the comparison bound on the class is\nmoreover the sharp $M=0$ of [prop-sf-comparison-bound-zero], so that\nthe residual $2\\dim\\overline X$ is the étale direction of the Leray\nspectral sequence of [thm-sp-grothendieck] and not a lower bound on\n$R^q\\nu_{\\overline X,*}$.",
+ "statement": "Fix the global finite-field datum, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$, a chosen uniformizer $\\varpi_E$, $n\\geq1$ and the finite discrete ring $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $d\\in\\mathbf Z_{\\geq0}$, let $Y$ and $\\overline X$ be finite-type $k$-schemes [def-weil-scheme-over-base, def-weil-finite-type-morphism] with $\\dim\\overline X\\leq d$ [def-kun-topological-krull-dimension], and let $p:\\overline X\\to Y$ be a proper finite-type $k$-morphism [def-weil-proper-morphism]. Then the class-restricted datum of [def-sf-fullcd-class] holds:\n$$\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;2d).$$\nThe coefficient class is the entire essential image of the comparison inverse image on étale $A$-module sheaves [def-sf-fullcd-used-class, def-weil-pbc-site-comparison-morphism], with no constructibility condition. The same bound holds uniformly for the pullback of each original-source coefficient sheaf along every object $V\\to Y$ of $Y_{\\Proet}$, exactly as in clause 2 of [def-sf-fullcd-class]; no finite-type or dimension hypothesis is imposed on $V$.\n\nIf $\\overline X$ is nonempty, one may take the intrinsic bound $2\\dim\\overline X\\leq2d$. If $\\overline X$ is empty (so $\\dim\\overline X=-\\infty$), the nonnegative bound is $0$. The comparison direction has bound $M=0$ by [prop-sf-comparison-bound-zero]. For nonempty source the residual $2\\dim\\overline X$ is the étale direction of the Leray spectral sequence of [thm-sp-grothendieck], rather than a lower bound on $R^q\\nu_{\\overline X,*}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
   "place": "node thm-sf-fullcd-class, order 1800"
  },
  "stmt_deps": [
-  "thm-sf-fullcd-used-class",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
   "def-sf-fullcd-class",
+  "def-sf-fullcd-used-class",
+  "def-weil-pbc-site-comparison-morphism",
   "prop-sf-comparison-bound-zero",
-  "thm-sp-grothendieck",
-  "def-weil-scheme-morphism-properties"
+  "thm-sp-grothendieck"
  ],
  "proof": [
   {
-   "text": "The two clauses of [def-sf-fullcd-class] are the two clauses of\n[def-weil-full-cohomological-dimension] read on the blueprint's\ncoefficient class, and [thm-sf-fullcd-used-class] is exactly their\nassertion with the coefficient sheaves of that class. Indeed the class\nquantified over in that theorem is\n[def-sf-fullcd-used-class], which is by its definition the class of\nétale origin on the finite-type source $\\overline X$, the same class that\n[def-sf-fullcd-class] quantifies over; the identification of that class\nwith the constructible one, used only for reading the statement, is\n[lem-sf-proetale-constructible-origin]. The absolute clause is\ntherefore the first clause of [thm-sf-fullcd-used-class], whose bound\n$2\\dim\\overline X$ is the one of [thm-sf-fullcd-etale-origin]. The\nrelative clause is the second clause of [thm-sf-fullcd-used-class],\nwhich asserts the vanishing of the base-changed direct images for every base\nchange $V\\to Y$ and every coefficient sheaf of the class; the restriction\nof such a sheaf to the base-changed source is again a coefficient sheaf of\nthe class there, by [lem-sf-fullcd-class-restriction], so the two\nstatements quantify over the same base-changed coefficients, and the second\nclause of [def-sf-fullcd-class] is exactly that relative clause. The\nlast sentence of the statement is [prop-sf-comparison-bound-zero], the\nresidual $2\\dim\\overline X$ being the étale direction of the Leray\nspectral sequence of [thm-sp-grothendieck]; the comparison morphism\nthat appears there is the one of\n[def-weil-pbc-site-comparison-morphism].",
+   "text": "The sheaf quantifier is identical in the two nodes. Indeed [def-sf-fullcd-used-class] says that membership is existence of an étale $A$-module sheaf $G$ and an isomorphism $\\nu_{\\overline X}^*G\\cong\\mathcal F$. The defining paragraph of [def-sf-fullcd-class] uses precisely the same witness and imposes no constructibility condition. Thus the two definitions specify exactly the same class of sheaves. No choice of witness changes the class.",
    "uses": [
-    "def-sf-fullcd-class",
-    "def-weil-full-cohomological-dimension",
-    "thm-sf-fullcd-used-class",
     "def-sf-fullcd-used-class",
-    "lem-sf-proetale-constructible-origin",
-    "thm-sf-fullcd-etale-origin",
-    "lem-sf-fullcd-class-restriction",
-    "prop-sf-comparison-bound-zero",
-    "thm-sp-grothendieck",
-    "def-weil-pbc-site-comparison-morphism"
+    "def-sf-fullcd-class"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
+    "place": "Proof, sentences identifying the two coefficient-class quantifiers"
+   }
+  },
+  {
+   "text": "Fix such a sheaf $\\mathcal F$ and $r>2d$. Apply the displayed vanishing of [thm-sf-fullcd-used-class] to the site object $V=Y$ with its identity morphism. The fibre product $\\overline X\\times_Y Y$ identifies with $\\overline X$, its first projection is the identity, and its other projection is $p$. Consequently that vanishing is $\\mathcal H_Y^r(Rp_*(\\mathcal F[0]))=0$, the first clause of [def-sf-fullcd-class]. All the theorem's field, coefficient, finite-type, properness and original-source dimension hypotheses are exactly the hypotheses here.",
+   "uses": [
+    "thm-sf-fullcd-used-class",
+    "def-sf-fullcd-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
+    "place": "Proof, sentence asserting the absolute clause"
+   }
+  },
+  {
+   "text": "Now let $v:V\\to Y$ be any object of $Y_{\\Proet}$. The displayed statement of [thm-sf-fullcd-used-class] applies to this $V$ and the same original-source sheaf $\\mathcal F$, and gives $\\mathcal H_V^r(R(p_V)_*((g_V^*\\mathcal F)[0]))=0$ for every $r>2d$. This is exactly clause 2 of [def-sf-fullcd-class]. Its quantifier is not over arbitrary sheaves on $\\overline X_V$. Thus no finite-type assertion about $V$ and no comparison of its dimension with $d$ is needed. Both defining clauses now hold with the same ring and bound, proving $\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;2d)$.",
+   "uses": [
+    "thm-sf-fullcd-used-class",
+    "def-sf-fullcd-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
+    "place": "Proof, sentences asserting the relative clause and identifying its quantifier"
+   }
+  },
+  {
+   "text": "For nonempty $\\overline X$, the dimension convention [def-kun-topological-krull-dimension] and the assumed inequality with the nonnegative integer $d$ imply $m=\\dim\\overline X\\in\\{0,1,\\ldots,d\\}$. Apply [thm-sf-fullcd-used-class] with dimension parameter $m$: for every original-source sheaf $\\mathcal F$ in the class, every site object $V\\to Y$ and every $r>2m$, it gives $\\mathcal H_V^r(R(p_V)_*((g_V^*\\mathcal F)[0]))=0$. At $V=Y$ with its identity this is the absolute clause; at arbitrary $V$ it is the relative clause. These are the two clauses of [def-sf-fullcd-class] with parameter $2m$. If $r>2d$, then $r>2m$, so the same vanishings also give bound $2d$. For empty $\\overline X$ the dimension is $-\\infty\\leq0$ by that definition, so the same theorem applies with $d=0$ and gives $\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;0)$; one does not insert $-\\infty$ as the parameter of [def-sf-fullcd-class].",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "thm-sf-fullcd-used-class",
+    "def-sf-fullcd-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
+    "place": "Statement, intrinsic dimension bound, with the empty-source convention made explicit"
+   }
+  },
+  {
+   "text": "Choose an origin witness $\\nu_{\\overline X}^*G\\cong\\mathcal F$ using [def-sf-fullcd-used-class]. The ring $A$ is finite and discrete by [def-weil-l-adic-coefficient-extension]. Apply [prop-sf-comparison-bound-zero] with $X=\\overline X$: it gives $G\\cong\\nu_{\\overline X,*}\\mathcal F$ and $R^b\\nu_{\\overline X,*}\\mathcal F=0$ for every $b>0$. This statement applies to arbitrary $G$, without assuming constructibility, and to arbitrary schemes. Hence the comparison bound is $M=0$ and has no dimension contribution.",
+   "uses": [
+    "def-sf-fullcd-used-class",
+    "def-weil-l-adic-coefficient-extension",
+    "prop-sf-comparison-bound-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, lemma-relative-comparison, together with the fixed-coefficient statement prop-sf-comparison-bound-zero"
+   }
+  },
+  {
+   "text": "Check the hypotheses for the spectral sequence with first functor $F=\\nu_{\\overline X,*}$ and second functor $G_0=p_{\\Et,*}$. The fixed-$A$ module categories on the three small sites are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], working in the larger universe in which the sites are small, and have enough injectives by [lem-sp-grothendieck-enough-injectives]. The comparison adjunction is [def-weil-pbc-site-comparison-morphism]; its left adjoint is exact by [prop-weil-pbc-site-comparison-finite-level]. The sectionwise restriction formula in [def-weil-pbc-site-comparison-morphism] carries addition and each scalar endomorphism to the same operations on sections, so its right adjoint is additive on fixed-$A$ modules. As a right adjoint it preserves kernels and finite products by their universal properties, hence is left exact. For an injective $I$ on $\\overline X_{\\Proet}$ and a monomorphism $M\\hookrightarrow N$ on $\\overline X_{\\Et}$, exactness makes $\\nu^*M\\hookrightarrow\\nu^*N$ monic. A map $M\\to\\nu_*I$ corresponds to a map $\\nu^*M\\to I$; extend it to $\\nu^*N$ by injectivity and transpose it back to $N\\to\\nu_*I$. By [def-sp-injective-resolutions] this proves $\\nu_*I$ is injective. Use specifically the Module sheaves clause of [def-weil-pbc-direct-image] with $R=A$: its constant-ring module direct image $p_{\\Et,*}$ is additive and left exact and commutes with forgetting to abelian sheaves, and [lem-weil-pbc-derived-functor-injective-vanishing] then gives $R^a p_{\\Et,*}(\\nu_*I)=0$ for $a>0$. Thus the required injective-to-acyclic condition holds.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N, lemma-grothendieck-spectral-sequence: verification of the injective-to-acyclic hypothesis"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-grothendieck] to the pair verified in Step 6. Its page is $E_2^{a,b}=R^a p_{\\Et,*}(R^b\\nu_{\\overline X,*}\\mathcal F)$ and it converges to $R^{a+b}(p_{\\Et,*}\\circ\\nu_{\\overline X,*})(\\mathcal F)$. The first-quadrant double-complex convergence statement [thm-sp-double-complex-spectral-sequences], for the construction specified in [thm-sp-grothendieck], supplies a finite filtration in total degree $n$ with $F^0=H^n$, $F^{n+1}=0$ and graded pieces $E_\\infty^{a,n-a}$. By [prop-sf-comparison-bound-zero], all rows $b>0$ are zero and the row $b=0$ is $R^a p_{\\Et,*}G$. The cohomological differential has bidegree $(r,1-r)$. Induct on $r\\geq2$: all positive rows vanish on page $2$, and a zero entry has zero kernel modulo image on the next page, so these rows remain zero. A differential out of $(a,0)$ has target $(a+r,1-r)$, outside the first quadrant; an incoming differential has source $(a-r,r-1)$, which is zero (or outside the quadrant). Thus the bottom row survives unchanged. In total degree $t\\geq0$, all graded pieces of the finite filtration vanish except the piece with index $a=t$, which is $R^t p_{\\Et,*}G$. Indeed $F^0=\\cdots=F^t=H^t$ and $F^{t+1}=0$, so the abutment in degree $t$ is isomorphic to $R^t p_{\\Et,*}G$. In this Leray calculation every remaining positive degree is therefore in the étale direct-image direction $a$, while the comparison direction $b$ is already bounded by $0$. This explains the residual dimension allowance of Steps 2–4 and excludes interpreting it as a positive lower bound on the comparison direct images. The argument does not claim $R^{2\\dim\\overline X}p_*$ must be nonzero, nor apply the dimension theorem afresh to a possibly non-finite-type base change.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "prop-sf-comparison-bound-zero",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N, lemma-grothendieck-spectral-sequence, specialized to the comparison and étale direct image; Tag 099V eliminates all positive comparison rows"
+   }
+  },
+  {
+   "text": "To relate this étale row to the pro-étale direct image in the conclusion, first check that $p$ is quasi-compact and quasi-separated. Finite type gives quasi-compactness [def-weil-finite-type-morphism]. Properness makes the diagonal a closed immersion [def-weil-proper-morphism]; over each affine $\\operatorname{Spec}R$ in the target of the diagonal, its inverse image is the single affine $\\operatorname{Spec}(R/I)$ for an ideal $I$ [def-weil-closed-immersion]. The algebra $R/I$ is generated over $R$ by the empty set, and this single affine is a finite affine cover of the inverse image. The finite-affine-cover criterion in [def-weil-finite-type-morphism] therefore makes the diagonal finite type, hence quasi-compact. This is quasi-separatedness [def-weil-quasi-separated-morphism]. The bounded-below comparison below computes the total direct image used in the FullCD clauses: by [lem-weil-pbc-dplus-injective-representative], a bounded-below injective resolution of $\\mathcal F[0]$ is K-injective, so the same resolution computes both the bounded-below direct image and the unbounded finite-level functor defined in [def-weil-derived-direct-image]. Apply [prop-weil-pbc-comparison-direct-image] to $p$ and $G[0]$ to get $Rp_{\\Proet,*}\\mathcal F\\cong\\nu_Y^*Rp_{\\Et,*}G$. Since $\\nu_Y^*$ is exact [prop-weil-pbc-site-comparison-finite-level], its application commutes with the kernels, images and quotients defining cohomology; thus $\\mathcal H^a(Rp_{\\Proet,*}\\mathcal F)\\cong\\nu_Y^*R^ap_{\\Et,*}G$. It also detects vanishing: if $\\nu_Y^*M=0$, the unit isomorphism of the same node identifies $M$ with $\\nu_{Y,*}0=0$. The pro-étale vanishings of Steps 2–4 are therefore exactly vanishings in the surviving étale row of Step 7. This proves the asserted interpretation of the residual bound without attributing a positive degree to the comparison direction.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism",
+    "prop-weil-pbc-comparison-direct-image",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6, lemma-morphism-comparison; Tag 099T, lemma-fully-faithful; exactness of comparison pullback"
+   }
   }
  ],
  "proof_deps": [
-  "def-sf-fullcd-class",
-  "def-weil-full-cohomological-dimension",
-  "thm-sf-fullcd-used-class",
   "def-sf-fullcd-used-class",
-  "lem-sf-proetale-constructible-origin",
-  "thm-sf-fullcd-etale-origin",
-  "lem-sf-fullcd-class-restriction",
+  "def-sf-fullcd-class",
+  "thm-sf-fullcd-used-class",
+  "def-kun-topological-krull-dimension",
+  "def-weil-l-adic-coefficient-extension",
   "prop-sf-comparison-bound-zero",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-site-comparison-morphism",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
   "thm-sp-grothendieck",
-  "def-weil-pbc-site-comparison-morphism"
+  "thm-sp-double-complex-spectral-sequences",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-derived-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
-  "place": "## Proof"
+  "place": "Proof, expanded clause by clause; comparison inputs checked against Stacks 099V and spectral-sequence hypotheses against Stacks 015N"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FullCD|HasCohomologicalDimensionLE|cohomological.{0,8}dimension|etale.{0,8}origin",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform vanishing of higher direct images of etale origin module sheaves for proper morphisms of schemes",
+   "results": "AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsProper; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; AlgebraicGeometry.IsProper.toUniversallyClosed; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"cohomological\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomological dimension at most twice the source dimension for proper morphisms of schemes on finite coefficient sheaves of etale origin after pro etale base change",
+   "results": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsEtale; AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme morphism over an algebraically closed field, right derived pushforward of a torsion etale sheaf vanishes in degrees above twice the dimension, uniformly on pullbacks",
+   "results": "DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isGE_iff; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isLE_iff; DerivedCategory.isGE_Q_obj_iff; CategoryTheory.isZero_Tor'_succ_of_projective Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:90–132, especially isLE_iff at 107 and isZero_of_isLE at 129: these characterize support of an individual derived object and do not prove a geometric bound or the uniform class-restricted quantifiers.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isLE_iff|lemma isZero_of_isLE|theorem isLE_iff|theorem isZero_of_isLE",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -109,5 +264,49 @@
   "group": "NL",
   "result": "pass",
   "note": "Reviewed immutable statements, all six dependencies, sources, canonical normalizations, universes, edge cases, and report. Both files compile cleanly through scompile.py; signatures match node records verbatim. No delivery faults found. Detailed evidence is in review.md."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-sf-fullcd-class",
+  "worker": "stage1",
+  "summary": "Separated the two FullCD clauses, intrinsic-bound specialization, comparison bound, and the verified Leray calculation. Reused the uniform used-class theorem with its exact original-source sheaf quantifier. Removed the false constructibility identification and corrected the empty-source intrinsic bound from the ill-typed 2dim(empty) to zero. No new nodes; all Mathlib searches were run with msearch.py. Second reading makes intrinsic specialization explicit, cites finite filtration directly, and checks agreement of bounded-below and total direct images on the degree-zero input. Repair after the merge-lock return: compared all cited nodes against returned head b7e8558139 and the current DAG; their files are unchanged. Made comparison additivity sectionwise and explicitly selected the fixed-A module clause of the direct-image definition; rebased maintainer metadata without changing it. Current second reading writes the spectral-sequence bidegrees and filtration collapse explicitly and checks quasi-compactness of the diagonal by the already cited finite-affine-cover criterion.",
+  "blueprint": "Proof: first three sentences realized in Step 1; absolute and relative clauses in Steps 2–3; intrinsic dimension statement in Step 4; final comparison/Leray sentences in Steps 5–8. Empty-source clarification repairs an undefined nonnegative bound, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic existence of Grothendieck abelian module-sheaf categories, needed to check the hypotheses of the already cited Grothendieck spectral sequence; this unit has no such foundational statement."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exactness of the comparison inverse image is needed to verify preservation of injectives by its right adjoint; the unit comparison route already uses this tool."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "The generic spectral-sequence tool explicitly cited by the original item; its formula identifies the étale and comparison degrees without replacing the unit vanishing route."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The standard qcqs comparison is the original unit comparison route; it identifies the surviving étale Leray row with the pro-étale direct-image cohomology, rather than replacing a vanishing argument."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "The generic K-injectivity assertion identifies the bounded-below comparison computation with the total derived direct image on the degree-zero sheaf; no vanishing route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-sp-grothendieck",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-7d5523a0f",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-7d5523a0f (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, every cited statement, and relevant sources. Verified fixed-A module coefficients, comparison direction, arbitrary-V quantifiers, Leray collapse, empty-source correction, and absence of dependency cycles. No new nodes or repairs. Detailed checks and accepted tool uses are in review.md."
  }
 }
