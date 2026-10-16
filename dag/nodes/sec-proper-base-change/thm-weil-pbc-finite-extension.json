@@ -163,5 +163,27 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-07eb889bf (reviewer sub-agent of L); spot-checked: Repaired step 2's unsupported inference of a common cohomological reduction interval (C4/E1) by applying the integral corollary to identity squares for all four functors. Read the item, cited statements and sources; verified the raw-rational exchange and its distinction from the master's condensed target. Statement and targets unchanged. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3ad0cf5cf",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, canonical helper, report sections, and compiler evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExtensionProperBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteExtensionRationalExchangeComponent",
+   "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExtensionProperBaseChange.lean",
+  "statement": "theorem finiteExtension_properBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) [IsProper f] [IsProper f'] (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlY : IsUnit (l : Γ(Y, ⊤))) (_hlX' : IsUnit (l : Γ(X', ⊤))) (_hlY' : IsUnit (l : Γ(Y', ⊤))) (e : ℕ) (_hFibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ∃ (hRf : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y l E (((pbcPadicCoefficientDatum l E).push f).obj K.obj)) (hRf' : ∀ K : PbcBoundedConstructibleComplete X' (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).push f').obj K.obj)) (hLg : ∀ K : PbcBoundedConstructibleComplete Y (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).completedPull g).obj K.obj)) (hLg' : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete X' l E (((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj)), ∀ K : PbcRationalCategory X (pbcPadicCoefficientDatum l E) (Padic.coefficientExtensionUniformizer l E), IsIso (finiteExtensionRationalExchangeComponent l E sq K (hLg ⟨((pbcPadicCoefficientDatum l E).push f).obj K.obj.obj, hRf K.obj⟩) (hRf' ⟨((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj.obj, hLg' K.obj⟩))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
