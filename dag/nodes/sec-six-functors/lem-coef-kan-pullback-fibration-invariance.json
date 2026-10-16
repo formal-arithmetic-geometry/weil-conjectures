@@ -28,9 +28,60 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the fixed-base calculation, with no fibrancy assumptions on objects. Let $a:A\\to Z$ and $b:B\\to Z$ be Kan fibrations and let $r:A\\to B$ be a weak homotopy equivalence with $br=a$. Set $D=A\\times_Z B$. Both $D\\to A$ and $D\\to B$ are Kan fibrations: a horn lifting square for a projection is precisely a horn lifting square for the other original leg, with the prescribed coordinate retained. Factor the graph $(1_A,r):A\\to D$ as a trivial cofibration $j:A\\to M$ followed by a Kan fibration $k:M\\to D$, using the model structure in [lem-coef-kan-quillen-right-proper]. Write $s=\\operatorname{pr}_A k$ and $t=\\operatorname{pr}_B k$. Composition of Kan fibrations is a Kan fibration: lift the prescribed base simplex first through the second map and then through the first. Thus $s,t$ are Kan fibrations. The equalities $sj=1_A$ and $tj=r$, together with the model two-out-of-three axiom, make $s,t$ weak homotopy equivalences, hence trivial fibrations. Give $M$ the map $as=bt$ to $Z$; then all these maps, including $j$, are over $Z$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 (0109), statement read online 2026-10-17; agent proof by graph factorization and Kan--Quillen right properness, expanding the arbitrary-base comparison. Not archived in literature/."
+   }
+  },
+  {
+   "text": "For any simplicial map $v:T\\to Z$, pull the maps $s,t,j,r$ of step 1 back over $Z$ and denote them by $s_T,t_T,j_T,r_T$. The square with top $s_T:M\\times_ZT\\to A\\times_ZT$, bottom $s:M\\to A$, and vertical coordinate projections is a strict pullback: a pair $(m,(a,u))$ with $s(m)=a$ determines $(m,u)$, since $as(m)=v(u)$. The square with top $t_T:M\\times_ZT\\to B\\times_ZT$ and bottom $t:M\\to B$ is also a strict pullback: a pair $(m,(b,u))$ with $t(m)=b$ determines $(m,u)$, since $bt(m)=v(u)$. These identifications and their inverse coordinate projections commute with all simplicial operators. By the boundary-lifting characterization of trivial fibrations in [lem-coef-kan-quillen-right-proper], $s_T$ and $t_T$ are trivial fibrations. Indeed any boundary lifting problem projects to one for $s$ or $t$; pair its filler with the already prescribed $T$-simplex to obtain the required filler. This includes the boundary in dimension zero. The equations $s_Tj_T=1$ and $t_Tj_T=r_T$ hold degreewise. Since $s_T,t_T$ are weak homotopy equivalences, two-out-of-three first makes $j_T$ a weak homotopy equivalence and then makes $r_T$ one. This proves that a weak equivalence between two Kan fibrations over a fixed arbitrary base remains a weak equivalence after every base change.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 (0109), statement read online 2026-10-17; agent proof by graph factorization and Kan--Quillen right properness, expanding the arbitrary-base comparison. Not archived in literature/."
+   }
+  },
+  {
+   "text": "Return to the cospans of the statement. Put $E=Y_0\\times_{Y,f\\prime,\\beta}X$, with projections $q:E\\to Y_0$ and $p:E\\to X$. The map $p$ is a Kan fibration by the horn lifting argument of step 1, applied to $f\\prime$. Right properness in [lem-coef-kan-quillen-right-proper], applied to the weak equivalence $\\beta:X\\to Y$ and the Kan fibration $f\\prime:Y_0\\to Y$, makes $q$ a weak homotopy equivalence. The equality $f\\prime\\alpha=\\beta f$ defines $h:X_0\\to E$, $x_0\\mapsto(\\alpha(x_0),f(x_0))$. It satisfies $qh=\\alpha$ and $ph=f$. Because $q$ and $\\alpha$ are weak homotopy equivalences, two-out-of-three makes $h$ a weak homotopy equivalence. Its source and target structure maps $f:X_0\\to X$ and $p:E\\to X$ are both Kan fibrations, exactly as required for steps 1--2.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 (0109), statement read online 2026-10-17; agent proof by graph factorization and Kan--Quillen right properness, expanding the arbitrary-base comparison. Not archived in literature/."
+   }
+  },
+  {
+   "text": "Apply the fixed-base result of steps 1--2 to $h$ over $X$ and $g:X_1\\to X$. It makes $h_g:X_0\\times_X X_1\\to E\\times_X X_1$ a weak homotopy equivalence. Degreewise the target identifies with $Q=Y_0\\times_{Y,f\\prime,\\beta g}X_1$ by $((y_0,x),x_1)\\mapsto(y_0,x_1)$; its inverse inserts $x=g(x_1)$. Put $P'=Y_0\\times_Y Y_1$. Its projection $P'\\to Y_1$ is a Kan fibration by lifting a horn through $f\\prime$ while retaining the prescribed $Y_1$ coordinate. Since $\\beta g=g\\prime\\gamma$, the coordinate maps $(y_0,x_1)\\mapsto((y_0,\\gamma(x_1)),x_1)$ and $((y_0,y_1),x_1)\\mapsto(y_0,x_1)$ are inverse simplicial isomorphisms $Q\\cong P'\\times_{Y_1}X_1$: the pullback equation $y_1=\\gamma(x_1)$ and $f\\prime(y_0)=g\\prime(y_1)$ are equivalent to $f\\prime(y_0)=\\beta g(x_1)$. Under these formulas the map $Q\\to P'$, $(y_0,x_1)\\mapsto(y_0,\\gamma(x_1))$, is exactly the pullback of the weak equivalence $\\gamma:X_1\\to Y_1$ along this Kan fibration. Right properness in [lem-coef-kan-quillen-right-proper] makes it a weak homotopy equivalence. Composing these two weak homotopy equivalences gives the desired map: on every simplex it is $(x_0,x_1)\\mapsto(\\alpha(x_0),\\gamma(x_1))$. The coordinate formulas commute with faces and degeneracies, so this is the actual stated simplicial map, not merely a comparison up to homotopy. No step has assumed any of the six original objects Kan.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 (0109), statement read online 2026-10-17; agent proof by graph factorization and Kan--Quillen right properness, expanding the arbitrary-base comparison. Not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0109",
+  "place": "Proposition 3.4.0.2, statement checked online; independent graph-factorization proof from the existing Kan--Quillen model structure and right properness. Source not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +124,66 @@
    "results": "{\"t\": \"2026-10-16T18:35:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback.map\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: Instances.lean:235-246 requires the pulled-back map itself to be a trivial fibration; 281-289 requires every product factor to be a fibration. Neither asserts comparison of two arbitrary objectwise weakly equivalent fibration cospans. Loogle gave no hits; the returned path-object maps only compare path-object projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences of cospans of simplicial sets induce weak equivalences of strict pullbacks when corresponding left legs are Kan fibrations",
+   "results": "{\"t\": \"2026-10-16T20:28:51Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences of cospans of simplicial sets induce weak equivalences of strict pullbacks when corresponding left legs are Kan fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\"], \"digest\": \"42ee110330f36617\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:225-246,275-289, PathObject.lean:273-286, JoyalTrick.lean:69-96, and SimplicialSet/CategoryWithFibrations.lean:72-103. The pullback weak-equivalence instances require the pulled-back map itself to be a trivial fibration; product instances impose fibrations on all factors; path-object and Brown lemmas do not state arbitrary cospan invariance. The ordinary categorical hits require isomorphisms. The simplicial-set file supplies horn fibrations but labels the Quillen model structure TODO. None is an exact or one-line specialization of this arbitrary-base statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*weakEquivalence|weakEquivalence.*pullback",
+   "results": "{\"t\": \"2026-10-16T20:29:01Z\", \"tool\": \"grep\", \"query\": \"pullback.*weakEquivalence|weakEquivalence.*pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\"], \"digest\": \"e7bc9246a9e55525\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:225-246,275-289, PathObject.lean:273-286, JoyalTrick.lean:69-96, and SimplicialSet/CategoryWithFibrations.lean:72-103. The pullback weak-equivalence instances require the pulled-back map itself to be a trivial fibration; product instances impose fibrations on all factors; path-object and Brown lemmas do not state arbitrary cospan invariance. The ordinary categorical hits require isomorphisms. The simplicial-set file supplies horn fibrations but labels the Quillen model structure TODO. None is an exact or one-line specialization of this arbitrary-base statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback invariance under weak equivalences of diagrams of Kan fibrations without fibrant bases",
+   "results": "{\"t\": \"2026-10-16T20:29:01Z\", \"tool\": \"leansearch\", \"query\": \"Pullback invariance under weak equivalences of diagrams of Kan fibrations without fibrant bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.of_iso'\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Square.IsPullback.of_equiv\", \"CategoryTheory.IsPullback.of_iso\", \"CategoryTheory.Square.IsPullback.of_iso\", \"CategoryTheory.IsPullback.map_iff\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"d8f0d097f4deae70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:225-246,275-289, PathObject.lean:273-286, JoyalTrick.lean:69-96, and SimplicialSet/CategoryWithFibrations.lean:72-103. The pullback weak-equivalence instances require the pulled-back map itself to be a trivial fibration; product instances impose fibrations on all factors; path-object and Brown lemmas do not state arbitrary cospan invariance. The ordinary categorical hits require isomorphisms. The simplicial-set file supplies horn fibrations but labels the Quillen model structure TODO. None is an exact or one-line specialization of this arbitrary-base statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\", \"WeakEquivalence\"",
+   "results": "{\"t\": \"2026-10-16T20:29:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback.map\\\", \\\"WeakEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a right proper model category pullbacks of objectwise weakly equivalent fibrant cospans are weakly equivalent",
+   "results": "{\"t\": \"2026-10-16T20:29:34Z\", \"tool\": \"leanfinder\", \"query\": \"In a right proper model category pullbacks of objectwise weakly equivalent fibrant cospans are weakly equivalent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalenceR\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"2be219c2da3ed304\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:225-246,275-289, PathObject.lean:273-286, JoyalTrick.lean:69-96, and SimplicialSet/CategoryWithFibrations.lean:72-103. The pullback weak-equivalence instances require the pulled-back map itself to be a trivial fibration; product instances impose fibrations on all factors; path-object and Brown lemmas do not state arbitrary cospan invariance. The ordinary categorical hits require isomorphisms. The simplicial-set file supplies horn fibrations but labels the Quillen model structure TODO. None is an exact or one-line specialization of this arbitrary-base statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ww]eak|[Ww]eak.*pullback|RightProper|rightProper",
+   "results": "{\"t\": \"2026-10-16T20:42:32Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ww]eak|[Ww]eak.*pullback|RightProper|rightProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Basic.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/WeakPullbacks.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/WeakPullbacks.lean\"], \"digest\": \"4d07b372f38ea6de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source hits for weak limits, sheaf pullback and weakly etale scheme morphisms concern different notions. ModelCategory/Instances.lean:236-246 requires the pulled-back map itself to be a trivial fibration, and PathObject/JoyalTrick concern path objects or lifting rather than the stated cospan comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.map\"",
+   "results": "{\"t\": \"2026-10-16T20:42:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback.map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback.mapDesc\", \"CategoryTheory.Limits.pullback.map_id\", \"CategoryTheory.Limits.pullback.map\", \"CategoryTheory.Limits.pullback.map_isIso\", \"CategoryTheory.Limits.pullback.map_comp\", \"CategoryTheory.Limits.pullback.map_comp_assoc\", \"CategoryTheory.Limits.pullback.mapDesc_comp\", \"CategoryTheory.IsPullback.map\"], \"digest\": \"5241b4c879073144\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HasPullback.lean:339-350 gives pullback.map_isIso under isomorphism hypotheses on all three comparison arrows. The other hits define pullback.map or its functoriality; none replaces the isomorphism hypotheses by weak homotopy equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change functor on slice model categories preserves weak equivalences between fibrant objects",
+   "results": "{\"t\": \"2026-10-16T20:42:36Z\", \"tool\": \"leanfinder\", \"query\": \"base change functor on slice model categories preserves weak equivalences between fibrant objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.over\", \"HomotopicalAlgebra.instWeakEquivalenceLeftDiscretePUnitOfOver\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOverWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instIsStableUnderRetractsOverWeakEquivalences\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\"], \"digest\": \"d537b8d36a01e7c2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Over.lean:39-154 defines the inherited model structures and detects weak equivalences on underlying arrows, but does not assert that arbitrary base change preserves weak equivalences between fibrations. Instances.lean:236-246 only treats pullbacks of trivial fibrations. The six-object cospan comparison requires the argument in this split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-homotopy-pullback-invariance",
@@ -84,5 +191,20 @@
   "group": "Q19"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-pullback-fibration-invariance",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-simplicial-set statement and both Kan-fibration hypotheses after checking Kerodon 0109. Proved fixed-base invariance by graph factorization, then separated changes of central base and right leg using right properness. All non-elementary inputs are explicit clauses of the existing lem-coef-kan-quillen-right-proper; no new nodes or Mathlib leaves. Repeated semantic, Loogle and grep searches and read the candidate sources. No exact project declaration found. Independent second reading by N0 checked the source and each cited clause, repeated slice-category and pullback-map searches, and expanded both base-change coordinate identifications in steps 2 and 4.",
+  "blueprint": "Realizes the technical pullback-comparison input below proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing ancestry lem-coef-kan-homotopy-pullback-invariance -> lem-coef-infinity-mapping-excision: four steps prove the strict comparison after the path-space endpoint replacement. The biduality unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N0-df0d54ef1",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-df0d54ef1 (reviewer sub-agent of L); spot-checked: Read the whole item, its four steps, and the full statement of the one cited node, lem-coef-kan-quillen-right-proper (same unit, reviewed). I fetched the source, Kerodon Prop 3.4.0.2 (tag 0109), online; it is not archived in literature/. The statement matches it hypothesis by hypothesis: arbitrary simplicial sets, three weak equivalences, both squares commute, only f and f' are Kan fibrations, and the conclusion is about the strict pullback map. The statement is unchanged. The weak-equivalence conventions of def-cbc-enhanced-diagrams-cones and of the cited node agree, both based on geometric realization. Step 1 (graph factorization over a fixed base Z): the base changes and composites of Kan fibrations are proved inline, and with sj=1 and tj=r two-out-of-three makes s and t trivial fibrations; no Kan base is needed. Step 2: s_T and t_T are pullbacks of s and t (checked M x_Z T = M x_A (A x_Z T)), so the boundary-lifting clause makes them trivial fibrations, and two-out-of-three gives first j_T and then r_T weak. Step 3: E = Y_0 x_Y X; right properness makes q weak, and h=(α,f) satisfies qh=α and ph=f. Step 4: E x_X X_1 = Q = P' x_{Y_1} X_1 because g'γ=βg, so Q->P' is the pullback of γ along a fibration and right properness applies; the composite is exactly (α,γ). Only statement clauses of the cited node are used (C3, C4). There is no cycle: neither the item nor its parent occurs among the cited node's 99 transitive dependencies. The parent's step 5 uses a special case. Edge cases checked: empty objects, a point base, identity maps, and that both fibration hypotheses are needed. Duplicate search with rg over dag/nodes found no node stating this; I read the seven nearest candidates. There are no new nodes and no tool_uses, and I made no fixes."
+ }
 }

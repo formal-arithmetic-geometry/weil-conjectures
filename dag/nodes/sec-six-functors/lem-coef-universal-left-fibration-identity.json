@@ -32,9 +32,113 @@
   "lem-coef-simplicial-right-fibration-presentation",
   "lem-coef-enriched-diagram-rectification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\operatorname{Kan}_{\\mathcal U}$, $S=N_{\\mathrm{hc}}A$, and $e=\\Delta^0\\in A$. Work in a universe large enough to contain $A$, $S$, and any base under consideration; the Kan model category used for rectification is the category of simplicial sets in that containing universe. Its cofibrations are monomorphisms by [lem-coef-kan-quillen-right-proper], so all its objects are cofibrant, and it is combinatorial and simplicial by [lem-coef-simplicial-presheaf-projective-model]. The simplicial model axiom of [lem-coef-simplicial-model-nerve-localization] applied to $\\varnothing\\to K$ and $L\\to *$ shows that $\\operatorname{Fun}(K,L)$ is Kan when $L$ is Kan. Thus $A$ is locally Kan and $S$ is a quasicategory by [lem-coef-coherent-nerve-comparison]. Let $\\epsilon:\\mathfrak C[S]\\to A$ be the coherent-nerve counit and define the strict covariant diagram $h(x)=A(e,\\epsilon x)$. Evaluation gives an isomorphism $\\operatorname{Fun}(\\Delta^0,K)\\cong K$: in degree $n$ it sends a map $\\Delta^0\\times\\Delta^n\\to K$ to the corresponding $n$-simplex. Postcomposition respects this isomorphism in every simplicial degree. Use this natural isomorphism to identify $h$ with the composite of $\\epsilon$ and the inclusion of $A$ into simplicial sets. If $\\eta_S:S\\to N_{\\mathrm{hc}}\\mathfrak C[S]$ is the unit, the adjunction identity $N_{\\mathrm{hc}}(\\epsilon)\\eta_S=1_S$ shows that enriched evaluation of $h$ gives the identity of $S$, followed by the inclusion into the ambient space category. This inclusion retains exactly the same mapping simplicial sets on $\\mathcal U$-small Kan complexes; no change of the space-valued diagram is being made.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.1.5 and 2.2.1; Proposition 4.2.4.4. Explicit evaluation-at-a-point calculation."
+   }
+  },
+  {
+   "text": "Compute $U^{\\mathrm{cov}}_S h$ using the formula of [lem-coef-simplicial-right-fibration-presentation], rather than inferring a classifier from its fibers. Identify $\\mathfrak C[S^{\\mathrm{op}}]$ with $\\mathfrak C[S]^{\\mathrm{op}}$ by reversal of vertex labels, and use $\\epsilon^{\\mathrm{op}}$ as a functor to $A^{\\mathrm{op}}$. For a simplex $\\sigma:\\Delta^n\\to S^{\\mathrm{op}}$, put $M_\\sigma=\\mathfrak C[\\Delta^n\\star\\Delta^0]\\amalg_{\\mathfrak C[\\Delta^n]}\\mathfrak C[S^{\\mathrm{op}}]$ and let $v$ be its cone vertex. An enriched natural map $T_\\sigma\\to h$ is precisely an enriched functor $M_\\sigma\\to A^{\\mathrm{op}}$ extending $\\epsilon^{\\mathrm{op}}$ and sending $v$ to $e$: its maps on the old-to-$v$ mapping sets are the components $M_\\sigma(x,v)\\to A^{\\mathrm{op}}(\\epsilon x,e)=A(e,\\epsilon x)$ of the natural map. There are no maps from $v$ to an old object, the identity at $v$ is forced, and the remaining composition equations are exactly enriched naturality. The pushout property makes this the same data as a functor $\\mathfrak C[\\Delta^n\\star\\Delta^0]\\to A^{\\mathrm{op}}$ extending $\\epsilon^{\\mathrm{op}}\\mathfrak C[\\sigma]$ with final object $e$. By the nerve adjunction in [lem-coef-coherent-nerve-comparison], these are exactly the $(n+1)$-simplices of $S^{\\mathrm{op}}$ with initial face $\\sigma$ and last vertex $e$. Here $N_{\\mathrm{hc}}(A^{\\mathrm{op}})=(N_{\\mathrm{hc}}A)^{\\mathrm{op}}$ follows directly by reversing the subset labels in the stated thickening; union composition is preserved. Both directions of this bijection restrict by precomposition with every simplex operator. Hence $U_{S^{\\mathrm{op}}}h\\cong(S^{\\mathrm{op}})_{/e}$ over $S^{\\mathrm{op}}$. Taking opposites as required by the specified normalization gives an isomorphism $p:U^{\\mathrm{cov}}_S h\\cong S_{e/}$ over $S$, where an $n$-simplex on the right is a map $\\Delta^0\\star\\Delta^n\\to S$ with first vertex $e$. The slice convention is that of [lem-coef-infinity-slice-right-fibration], dualized.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1, cone definition of straightening and its right adjoint; Section 3.3.2, terminal-space representability. Explicit adjunction and pushout calculation."
+   }
+  },
+  {
+   "text": "The diagram $h$ is objectwise Kan. In its projective model structure factor $\\varnothing\\to h$ as a cofibration followed by a trivial fibration $Qh\\to h$, using the functorial factorization of [lem-coef-simplicial-model-nerve-localization]. Then $Qh$ is cofibrant and fibrant, since $Qh\\to h\\to *$ is a fibration. By [lem-coef-simplicial-right-fibration-presentation], both $U^{\\mathrm{cov}}_S Qh$ and $U^{\\mathrm{cov}}_S h$ are left fibrations and the induced map between them is an equivalence over $S$. Rectification [lem-coef-enriched-diagram-rectification] applies with $K=S$, $\\mathcal C=\\mathfrak C[S]$, $u=1$, and the ambient Kan model category, whose required combinatorial simplicial structure is supplied by [lem-coef-simplicial-presheaf-projective-model]. Its comparison is induced by enriched evaluation. The enriched natural map $Qh\\to h$ gives a coherent transformation from that evaluated diagram to $N_{\\mathrm{hc}}(h)\\eta_S$; each component is a weak equivalence between Kan complexes, hence an equivalence of spaces by [lem-coef-simplicial-model-nerve-localization]. By [lem-cbc-enhanced-functor-cone-calculus] this transformation is an equivalence. Step 1 identifies its target with the identity diagram. Therefore the right-derived ordinary functor prescribed in the question represents the identity by $p:S_{e/}\\to S$. Its fiber equivalences have essentially $\\mathcal U$-small values, so this says identity on $S_{\\mathcal U}$, with the containing universe used only to carry out replacements.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2 and Proposition 4.2.4.4; explicit cofibrant replacement and evaluation comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-arrow-target-right-fibration] to $S^{\\mathrm{op}}$ and the vertex $e$, and then reverse all simplices. A right horn with missing face $j>0$ becomes a left horn with missing face $n-j<n$. Reversing the interval interchanges its endpoints. The resulting left fibration is exactly $r:W\\to S$ in the statement. Dualize [lem-coef-infinity-slice-arrow-equivalence] at the same vertex to get an equivalence $\\delta:S_{e/}\\to W$ over $S$. Explicitly it sends a cone simplex $\\tau:\\Delta^{n+1}\\to S$ to its composite with the nerve of $[n]\\times[1]\\to[n+1]$, $(a,0)\\mapsto0$, $(a,1)\\mapsto a+1$. Restriction at the second endpoint is the base simplex, so the equation over $S$ holds strictly. Applying [lem-coef-infinity-right-fibration-fibers] to $\\delta^{\\mathrm{op}}$ shows that it is an equivalence on vertex fibers. The fiber criterion of [lem-coef-simplicial-right-fibration-presentation] now makes $\\delta$ a simplicial homotopy equivalence over $S$. Thus the arrow model and the normalized representative of step 3 represent the same identity diagram. In particular, this passage between models uses a map over the base, not merely unrelated equivalences of fibers.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02VT",
+    "place": "Corollary 4.6.4.20 (02VT), Construction 4.6.4.15 (02GH), Proposition 4.6.4.13 (01KQ), and Corollary 4.5.3.31 (01HK); these are Kerodon tags, not Stacks tags."
+   }
+  },
+  {
+   "text": "For $F:B\\to S$ put $h_F=h\\circ\\mathfrak C[F]$. The base-change isomorphism of [lem-coef-simplicial-right-fibration-presentation] gives $F^*p\\cong U^{\\mathrm{cov}}_B h_F$. All these are left fibrations: lifting against a horn in a pullback is lifting the corresponding horn against the original projection. Choose a projective cofibrant replacement $Qh_F\\to h_F$ by trivial fibration as in step 3; it is again objectwise Kan. Rectification [lem-coef-enriched-diagram-rectification] with $K=B$, $\\mathcal C=\\mathfrak C[B]$, $u=1$ sends $Qh_F$ to its evaluated coherent diagram. The enriched natural map $Qh_F\\to h_F$ induces a coherent transformation from that diagram to $N_{\\mathrm{hc}}(h_F)\\eta_B$. Its components are the objectwise weak equivalences $Qh_F(b)\\to h_F(b)$ between Kan complexes. Naturality of the unit and step 1 give $N_{\\mathrm{hc}}(h_F)\\eta_B=N_{\\mathrm{hc}}(h)\\eta_S F=F$, interpreted in the ambient space category. The pointwise equivalence criterion [lem-cbc-enhanced-functor-cone-calculus] applies to $Qh_F\\to h_F$ exactly as in step 3; weak equivalences are inverted by [lem-coef-simplicial-model-nerve-localization]. Thus $F^*p$ represents $F$ in the fixed normalization. Pull back $\\delta$ and its inverse and homotopies from step 4; pullback is degreewise and $F^*(X\\times\\Delta^1)=F^*X\\times\\Delta^1$ for a homotopy over $S$. Hence $F^*\\delta:F^*p\\to F^*W$ is a homotopy equivalence over $B$. It follows that $F^*W$ represents $F$. The fiber clause of the presentation gives $(F^*p)_b\\simeq h_F(b)=F(b)$, and the pulled-back $\\delta$ gives the same assertion for $F^*W$, including empty values.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 (base-change isomorphisms), Theorem 2.2.1.2 and Proposition 4.2.4.4; Corollary 3.3.2.8 for the universal-family interpretation."
+   }
+  },
+  {
+   "text": "For a simplicial map $G:C\\to S$ write $h_G=h\\mathfrak C[G]$, even when the simplicial set $C$ is not a quasicategory. The presentation and rectification statements apply to all such $C$. Evaluation gives $N_{\\mathrm{hc}}(h_G)\\eta_C=G$ in the ambient space category, by naturality of the adjunction unit. A projective cofibrant replacement $Qh_G\\to h_G$ induces a coherent transformation of evaluated diagrams with weak-equivalence components; [lem-coef-simplicial-model-nerve-localization] inverts those components and [lem-cbc-enhanced-functor-cone-calculus] makes the transformation an equivalence in the entire category $\\operatorname{Fun}(C,\\mathcal S)$. Thus the comparison holds as a diagram on $C$, rather than as separately chosen equivalences at its vertices. For a map $v:C'\\to C$, restriction sends objectwise weak equivalences to objectwise weak equivalences, and its evaluated diagrams satisfy $N_{\\mathrm{hc}}(h_G\\mathfrak C[v])\\eta_{C'}=Gv$. The ordinary natural replacement maps become natural equivalences after localization, by the entire-functor-category universal property in [lem-coef-simplicial-model-nerve-localization]. Consequently these comparisons descend compatibly with restriction, independently of a choice of enriched replacement functor. For an $n$-simplex of $\\operatorname{Fun}(B,S)$, take $C=B\\times\\Delta^n$ and $G$ its adjoint, as in [def-cbc-enhanced-diagrams-cones]. The comparison between its normalized representative and $G^*W$ is the single pulled-back map $G^*\\delta$, following the cone-extension identification of step 2. For each simplex operator $\\alpha:[m]\\to[n]$, restriction along $1_B\\times\\Delta(\\alpha)$ gives exactly $(G(1_B\\times\\Delta(\\alpha)))^*\\delta$; the cone bijection itself commutes with these restrictions because both sides precompose with the same simplex map. These identities prove compatibility with every higher simplex in $F$. For a base map $u:B'\\to B$, the composition-compatible base-change isomorphisms of [lem-coef-simplicial-right-fibration-presentation] give $u^*U^{\\mathrm{cov}}_B h_F\\cong U^{\\mathrm{cov}}_{B'}(h_F\\mathfrak C[u])=U^{\\mathrm{cov}}_{B'}h_{Fu}$. Degreewise pullback triples give $u^*(F^*W)\\cong(Fu)^*W$, carrying the comparison to $(Fu)^*\\delta$. Applied also on $B\\times\\Delta^n$, these identities prove the asserted joint naturality and show that pullback along $u$ represents $F\\circ u$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 and Proposition 4.2.4.4; explicit simplicial-parameter and iterated-pullback check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent Hom comparisons; explicit proof from the existing cone-unstraightening formula, checked against HTT Sections 2.2.1 and 3.3.2 and Proposition 4.2.4.4, and Kerodon 02VT, 02GH, 01KQ, 01HK read online. These sources are not archived; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +202,80 @@
    "results": "{\"t\": \"2026-10-16T19:40:07Z\", \"tool\": \"grep\", \"query\": \"left.?fibration|right.?fibration|straighten|edgewise|twisted.?arrow\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match. Read the returned types: ordinary Grothendieck arrows, simplicial Hom objects and ordinary nerves do not compare quasicategorical transport; Kan-Quillen model fibrations lift all horns, and their slice structure is not the covariant model structure. The Mathlib source grep found no one-sided fibration or twisted-arrow declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The undercategory of a point in spaces is the universal left fibration classified by the identity functor",
+   "results": "{\"t\": \"2026-10-16T20:13:27Z\", \"tool\": \"leanfinder\", \"query\": \"The undercategory of a point in spaces is the universal left fibration classified by the identity functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Under\", \"CategoryTheory.Over\", \"CategoryTheory.instCategoryUnder\", \"CategoryTheory.Under.forget\", \"CategoryTheory.Grothendieck.functor\", \"CategoryTheory.Under.mapFunctor\", \"CategoryTheory.Functor.toUnder\", \"CategoryTheory.GrothendieckTopology.Point.fiber\"], \"digest\": \"caf715ead8084d46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\"",
+   "results": "{\"t\": \"2026-10-16T20:13:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\"], \"digest\": \"36e7d315fa3504e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|straighten|left.?fibration|under.?category",
+   "results": "{\"t\": \"2026-10-16T20:13:28Z\", \"tool\": \"grep\", \"query\": \"unstraighten|straighten|left.?fibration|under.?category\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal family of pointed Kan complexes over spaces is classified by the identity coherent functor",
+   "results": "{\"t\": \"2026-10-16T20:13:29Z\", \"tool\": \"leansearch\", \"query\": \"The universal family of pointed Kan complexes over spaces is classified by the identity coherent functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BasedFunctor.id\", \"CategoryTheory.BasedCategory.id_def\", \"CategoryTheory.BasedFunctor.term𝟭\", \"CategoryTheory.Functor.coreprx\", \"CategoryTheory.Functor.FullyFaithful.id\", \"CategoryTheory.Coyoneda.punitIso\", \"CategoryTheory.instIsCorepresentableIdType\", \"CategoryTheory.Functor.isRightKanExtensionId\"], \"digest\": \"6f9fedd4e7e6411c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Covariant unstraightening of the simplicially enriched functor of maps from the terminal Kan complex is the category of pointed spaces",
+   "results": "{\"t\": \"2026-10-16T20:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Covariant unstraightening of the simplicially enriched functor of maps from the terminal Kan complex is the category of pointed spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SSet.Augmented\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.hoFunctor.terminalIso\", \"TopCat.toSSet\", \"SSet.toTopSimplex\", \"sSetTopAdj\", \"SSet.isTerminalHoFunctorDeltaZero\"], \"digest\": \"f69979435c4a22d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def SimplicialNerve|def Under|punitIso|instIsCorepresentableIdType",
+   "results": "{\"t\": \"2026-10-16T20:14:58Z\", \"tool\": \"grep\", \"query\": \"def SimplicialNerve|def Under|punitIso|instIsCorepresentableIdType\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Monad/Products.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/StrictInitial.lean\"], \"digest\": \"d3fe52e28641e9d7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def SimplicialNerve",
+   "results": "{\"t\": \"2026-10-16T20:14:58Z\", \"tool\": \"grep\", \"query\": \"def SimplicialNerve\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"193\"], \"digest\": \"111fcb5828047283\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned signatures and the relevant Mathlib sources. Under/Over and Coyoneda.punitIso concern ordinary categories and Type; SimplicialNerve defines a nerve but asserts no normalized one-sided unstraightening theorem. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent nerve of Kan complexes has a universal pointed family classified by evaluation at the terminal object",
+   "results": "{\"t\": \"2026-10-16T20:37:55Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent nerve of Kan complexes has a universal pointed family classified by evaluation at the terminal object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.isTerminalHoFunctorDeltaZero\", \"SSet.S.toN\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.SimplicialNerve\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.nerve\"], \"digest\": \"f12c51bd22d57d50\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned terminal-object, ordinary nerve and coherent-nerve definitions do not state classification of a one-sided fibration; the source grep found no unstraightening or left-fibration declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Unstraightening|unstraightening|LeftFibration|leftFibration|universalFamily",
+   "results": "{\"t\": \"2026-10-16T20:38:09Z\", \"tool\": \"grep\", \"query\": \"Unstraightening|unstraightening|LeftFibration|leftFibration|universalFamily\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned terminal-object, ordinary nerve and coherent-nerve definitions do not state classification of a one-sided fibration; the source grep found no unstraightening or left-fibration declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unstraightening\"",
+   "results": "{\"t\": \"2026-10-16T20:40:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"unstraightening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: no declaration returned by the unstraightening-name search."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-transport-classification",
@@ -109,5 +283,20 @@
   "group": "NJ"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-universal-left-fibration-identity",
+  "worker": "stage1",
+  "summary": "No matching project Lean declaration or Mathlib theorem was found. Kept the full statement and fixed covariant normalization. Wrote the normalized universal-family proof by identifying its strict diagram with the counit followed by inclusion of Kan complexes, computing its unstraightening degree by degree as the join coslice, using the existing over-base slice-to-arrow equivalence, and checking replacements, fibers, simplicial parameters and iterated pullbacks. Reused existing nodes throughout; no new nodes and no parent classification citation.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the first and last coherent R Hom comparisons. Supplies the universal-family normalization needed by the mapping-functor comparison beneath that paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-c02a81299",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c02a81299 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of all 13 cited nodes. The delivery adds no new nodes and leaves the statement unchanged and not weakened. The statement is correct (HTT 3.3.2 dualized): W is the source-fixed arrow model of S_{*/}->S, and its fibers are Map(*,K)≃K. I tested it on the empty base, empty K, contractible K and a two-point discrete K. Step 1: Fun(K,L) is Kan by the simplicial model axiom, Fun(Δ^0,K)≅K, and N_hc(ε)η=1 by the adjunction. Step 2: I checked the variance of the cone pushout: natural maps M_σ(-,v)->A^op(ε^op-,e) are exactly the functors extending ε^op that send v to e, which gives (S^op)_{/e} and, after opposites, S_{e/}. Step 3: the projective cofibrant replacement and rectification hypotheses hold (u=1, combinatorial simplicial Kan model in the containing universe), and h is not assumed cofibrant. Step 4: I recomputed the reversed ρ_n: (a,0)↦0 and (a,1)↦a+1, so the map lies strictly over S; the fiber criterion gives a homotopy equivalence over S. Steps 5 and 6: base change uses the composition-compatible isomorphisms of the presentation node, a fresh replacement is taken after restriction, homotopies pull back degreewise, and a single G^*δ works over B×Δ^n. A transitive closure over all dependencies (244 nodes) does not reach the item, so there is no cycle; the parent transport-classification is not used. A search found no duplicate. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), used only for its generic pointwise test for equivalences of coherent transformations in steps 3, 5 and 6; nothing in sk-prop-sf-biduality-general states it, and it replaces no step of the unit's route. HTT 2.2.1/3.3.2/4.2.4.4 and Kerodon 01KQ/02VT/02GH/01HK are read online and not archived (the report marks them WANTED). No SGA is used. No changes and no fix files."
+ }
 }
