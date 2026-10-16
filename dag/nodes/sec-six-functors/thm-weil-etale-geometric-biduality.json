@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-etale-geometric-biduality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-stage etale Verdier biduality",
@@ -12,78 +12,402 @@
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
   "place": "node thm-weil-etale-geometric-biduality, order 2128"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-duality-pairing",
+  "lem-sf-etale-flat-model"
+ ],
  "proof": [
   {
-   "text": "Induct on $d=\\dim X$, simultaneously for all algebraically closed\nfields of characteristic different from $\\ell$. Dimension zero\nreduces to finitely many geometric points, since nilpotent thickenings\ndo not change the etale site. There the assertion is perfect derived\ncoefficient biduality, [lem-weil-coefficient-frobenius].",
+   "text": "For the final specialization use the global finite-stage coefficient ring $A=A_{E,n}$ and the small etale categories, not the pro-etale or integral categories. The map is the transpose of evaluation from [lem-weil-duality-pairing]. Keep this coefficient ring fixed, but denote a variable algebraically closed geometric base field by $F$; it is not the global $k$ while the induction is running. Prove the assertion simultaneously over algebraically closed base fields of characteristic different from $\\ell$, by strong induction on a dimension bound $d\\geq0$: first prove it for proper schemes of dimension at most $d$, then for all separated finite-type schemes of that dimension. The empty scheme has only the zero sheaf and is immediate. Finite-type schemes over a field have finite dimension by [lem-kun-dimension-finite-type] and are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. At $d=0$ every point is closed: a proper specialization would give a chain of irreducible closed subsets of length one. Thus the nonclosed-point part of the argument below is vacuous at the base of induction.",
    "uses": [
-    "lem-weil-coefficient-frobenius"
+    "def-weil-finite-field-fiber",
+    "lem-weil-duality-pairing",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 1; supporting Stacks tags: 01T6"
+   }
   },
   {
-   "text": "By [lem-weil-delta-restriction] the assertion is local on $X$.\nWe may first choose an affine open and then a proper compactification\n$j:X\\hookrightarrow\\overline X$, using\n[thm-nagata-compactification], and replace $\\overline X$ by the\nscheme-theoretic closure of $X$. Its dimension is $d$. Extension by zero\n$j_!K$ is bounded constructible with the same Tor interval, as is\nchecked on stalks. Restriction of its double-dual map is the original\nmap. It therefore suffices to prove the assertion for proper $X$\nof dimension $d$.",
+   "text": "First establish preservation independently of biduality, for every algebraically closed field $F$ with $\\operatorname{char}F\\ne\\ell$. Let $X/F$ be separated of finite type with $\\dim X\\leq d$ and $K\\in D^b_c(X_{\\mathrm{et}},A)$ of Tor amplitude $[a,b]$. Apply [lem-sf-etale-smooth-stratified-ctf] to obtain the finite localization tower with pieces $Rs_!P$ on smooth strata $s:S\\hookrightarrow X$ of pure dimensions $r\\leq d$, where $P=s^{-1}K$ has local finite-projective models in $[a,b]$. Factor $s$ as $S\\xrightarrow{i}V\\xrightarrow{j}X$ with $i$ closed and $j$ open. The ordinary-etale clause of [lem-weil-delta-restriction] gives $j^*\\omega_X\\cong\\omega_V$. The proper composition statement [lem-sf-unbounded-compact-support-proper-composition] applies to the closed (hence proper) immersion $i$ and the structure morphism $a_V$ over the actual field $F$. Together with the ambient adjoints [thm-amb-etale-exceptional-adjoint, lem-exc-closed-ambient], it gives, for every ambient complex $C$ on $S$, the natural bijections\n$$\\operatorname{Hom}(C,Ri^!\\omega_V)=\\operatorname{Hom}(Ri_*C,\\omega_V)=\\operatorname{Hom}(Ra_{V!}Ri_*C,A)=\\operatorname{Hom}(Ra_{S!}C,A)=\\operatorname{Hom}(C,\\omega_S).$$\nYoneda identifies $Ri^!\\omega_V$ with $\\omega_S$, including counits. Thus $Rs^!\\omega_X=Ri^!j^*\\omega_X\\cong\\omega_S$. Apply [lem-weil-stratum-ambient-hom], whose ordinary-etale clause is unbounded and assumes neither preservation nor biduality, to get\n$$D_X(Rs_!P)\\cong Rs_*R\\mathcal Hom_A(P,Rs^!\\omega_X)\\cong Rs_*D_SP.$$\nAll schemes here are separated finite type over $F$, hence Noetherian; no step identifies $F$ with an algebraic closure of a finite field.",
    "uses": [
+    "lem-sf-etale-smooth-stratified-ctf",
     "lem-weil-delta-restriction",
-    "thm-nagata-compactification"
+    "lem-sf-unbounded-compact-support-proper-composition",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-exc-closed-ambient",
+    "lem-weil-stratum-ambient-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Agent expansion of imported Proof paragraph 3 and the predecessor preservation proof; ordinary-etale composition: Stacks 0F7J, 0F7B; smooth-stratum source: 09BI, 0B8X."
+   }
   },
   {
-   "text": "Set $\\Delta=\\operatorname{Cone}(\\delta_K)$. Preservation from\n[lem-weil-verdier-preservation-strata] makes $\\Delta$ bounded\nconstructible. We show that every cohomology sheaf of $\\Delta$\nvanishes at every nonclosed point $x$. Choose an affine open\n$V\\ni x$. Since $x$ is nonclosed, $\\kappa(x)/k$ has positive\ntranscendence degree. Among a finite set of algebra generators of\n$\\Gamma(V,\\mathcal O_V)$, some $t$ has transcendental image in\n$\\kappa(x)$. The resulting map $V\\to\\mathbf A^1_k$ sends\n$x$ to the generic point. Its generic fibre has dimension at most\n$d-1$, by the dimension argument of\n[lem-fin-coordinate-generic-dimension]: components with constant\n$t$ disappear, and a dominant component loses one dimension.\nAlgebraic field extension preserves this dimension bound.",
+   "text": "For the smooth stratum $S/F$ of dimension $r$, [thm-asd-smooth-tensor] gives $\\omega_S\\cong L[2r]$, with $L$ a locally constant rank-one $A$-sheaf. Its Noetherian base is $\\operatorname{Spec}F$, its structure map is smooth separated and compactifiable by [thm-nagata-compactification], and the coefficient annihilator is invertible in $F$. On an etale cover with the finite-projective model of $P$ and $L\\cong A$, internal Hom is the finite dual complex tensored with $L[2r]$: for a finite free module the map $\\operatorname{Hom}(A^m,A)\\otimes M\\to\\operatorname{Hom}(A^m,M)$ is the coordinate identity, and projecting this identity by a projective summand's idempotent gives the same identity for a finite projective module. Applying it to each term and to the Hom-complex differential yields $D_SP\\cong P^\\vee\\otimes L[2r]$. The dual terms are finite projective and occupy $[-b,-a]$, hence the shifted complex has Tor interval $[-b-2r,-a-2r]$. Its cohomology is constructible by finite locally constant terms and Serre closure [thm-constructible-serre]. Exact stalks and the tensor-stalk identification [prop-weil-pbc-geometric-stalks-exact, lem-pod-etale-stalk-tensor-scalar] with stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative] test the local flatness and cohomological bounds, so these bounds hold on $S$. For $s:S\\to X$, [lem-sf-etale-direct-image-vanishing] gives $R^qs_*M=0$ for all module sheaves and $q>2r$. Use the following direct-image calculation, valid over the actual field $F$ and also used in step 10. For any separated finite-type map $f:T\\to Y$ between finite-type $F$-schemes with $R^pf_*M=0$ for every module sheaf $M$ and $p>N$, and any bounded constructible $G$ of Tor amplitude $[u,v]$, [thm-dg-finite-type-constructibility] makes $Rf_*G$ bounded constructible. Write $\\kappa=A/(\\varpi_E)$, a finitely presented $A$-module (one generator and the relation $\\varpi_E=0$). The tensor $G\\otimes_A^L\\kappa_T$ has cohomology only in $[u,v]$ by the Tor hypothesis. Choose its bounded-below representative using [def-sbc-standard-tstructure-derived-category]. Module sheaf categories are Grothendieck by [lem-weil-pbc-small-module-diagrams-grothendieck] with terminal index. The convergent finite-filtration spectral sequence [thm-sp-truncation-e2] for $f_*$ has only $0\\leq p\\leq N$ and $u\\leq q\\leq v$, so $Rf_*(G\\otimes_A^L\\kappa_T)$ has cohomology in $[u,v+N]$. The arbitrary-morphism ordinary-etale projection theorem [lem-sf-projection-finite-constant] applies: $A$ is Noetherian because it is a finite ring, $G$ is bounded above, and its hypothesis is exactly the displayed all-sheaf bound. It identifies this tensor image with $(Rf_*G)\\otimes_A^L\\kappa_Y$. The residue criterion [lem-exc-residue-tor-test], which is stated on any scheme with this coefficient ring and bounded constructible input, now gives Tor amplitude $[u,v+N]$ of $Rf_*G$. This derivation invokes no global-base UDV definition. Apply it with $f=s$, $G=D_SP$, $N=2r$, $u=-b-2r$ and $v=-a-2r$. It gives $Rs_*D_SP\\in D^b_{ctf}$ with interval $[-b-2r,-a]$, contained in $[-b-2d,-a]$. Apply [lem-sf-hom-triangulated] to each triangle of the finite localization tower of step 2. Starting from its zero end, [lem-sf-derived-homology-long-exact, thm-constructible-serre] give bounded constructible cohomology of $D_XK$ by induction along the tower. For any degree-zero module sheaf choose a K-flat resolution by [lem-pc-kflat-resolution]. With this fixed tensor factor, the total tensor and differential of [def-kun-derived-tensor] carry a cone matrix to the cone matrix of the tensored map (including the shift sign); K-flatness makes this operation descend through quasi-isomorphisms. Hence tensoring each triangle gives a distinguished triangle and the same long exact sequence, so the common Tor interval $[-b-2d,-a]$ is preserved by these extensions. This proves $D_XK\\in D^b_{ctf}(X_{\\mathrm{et}},A)$ over every field in the simultaneous induction. Taking $K=A_X$ also proves $\\omega_X$ bounded constructible with finite Tor amplitude. Preservation here was proved from strata, not from any double-dual isomorphism.",
    "uses": [
-    "lem-weil-verdier-preservation-strata",
-    "lem-fin-coordinate-generic-dimension"
+    "thm-asd-smooth-tensor",
+    "thm-nagata-compactification",
+    "thm-constructible-serre",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-sf-etale-direct-image-vanishing",
+    "lem-sf-hom-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "thm-dg-finite-type-constructibility",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "thm-sp-truncation-e2",
+    "lem-sf-projection-finite-constant",
+    "lem-exc-residue-tor-test",
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Agent expansion of imported Proof paragraph 3 and lem-weil-verdier-preservation-strata Proof; local finite-projective identity and localization; smooth ambient computation as thm-asd-smooth-tensor."
+   }
   },
   {
-   "text": "The induction hypothesis over $\\overline{k(t)}$, together with\n[lem-weil-geometric-generic-duality], says that the restriction of\n$\\delta_{K|_V}$ to the geometric generic fibre is an isomorphism.\nEvery geometric point above $x$ factors through such a fibre after\nchoosing an algebraic closure of $k(t)$ in its algebraically closed\nresidue field. Hence $\\Delta$ has zero stalk at $x$.\nEach of its finitely many cohomology sheaves has constructible support,\nand a constructible subset of a Noetherian finite-type $k$-scheme\ncontaining only closed points is finite: in a finite locally closed\ndecomposition, a positive-dimensional piece would contain a nonclosed\ngeneric point. Thus all the cohomology of $\\Delta$ is supported\non one finite set of closed points.",
+   "text": "Fix a proper $X/F$ with $\\dim X\\leq d$ and $K\\in D^b_{ctf}(X_{\\Et},A)$. Set $\\Delta=\\operatorname{Cone}(\\delta_K)$. By the arbitrary-base preservation proved in steps 2--3, both $D_XK$ and $D_XD_XK$ are bounded constructible. The long cohomology sequence [lem-sf-derived-homology-long-exact] gives, for each $q$, an exact sequence\n$$0\\longrightarrow\\operatorname{coker}(\\mathcal H^q\\delta_K)\\longrightarrow\\mathcal H^q\\Delta\\longrightarrow\\ker(\\mathcal H^{q+1}\\delta_K)\\longrightarrow0.$$\nBy [thm-constructible-serre] its two end terms and hence its middle term are constructible. Outside a finite interval both end terms vanish. Thus $\\Delta$ is bounded constructible; no finite-Tor assertion about the cone is needed.",
    "uses": [
-    "lem-weil-geometric-generic-duality"
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 3; supporting Stacks tags: 05RS, 03RZ"
+   }
   },
   {
-   "text": "Write $a:X\\to\\operatorname{Spec}k$. The direct-image preservation\nin [thm-sf-direct-image-tor-amplitude], with\n[lem-sf-etale-direct-image-vanishing], makes $Ra_*K$ a perfect\ncoefficient complex. Its double-dual map is an isomorphism by\n[lem-weil-coefficient-frobenius]. Proper compatibility of\nevaluation, [lem-weil-delta-proper-pushforward], therefore gives\n$Ra_*\\Delta=0$. For a sheaf supported on finitely many closed\npoints over the algebraically closed field $k$, global sections are\nthe finite direct sum of its stalks and higher cohomology vanishes.\nThe truncation spectral sequence of [thm-sp-truncation-e2] thus\nidentifies\n\n$$\nH^qRa_*\\Delta=\\Gamma(X,\\mathcal H^q\\Delta)\n=\\bigoplus_x(\\mathcal H^q\\Delta)_{\\bar x}.\n$$",
+   "text": "Suppose $d>0$ and $x\\in X$ is nonclosed. Choose an affine open $V=\\operatorname{Spec}B$ containing $x$, with finitely many $F$-algebra generators $t_1,\\ldots,t_m$ of $B$. By [lem-kun-closed-point-field], $\\operatorname{trdeg}_F\\kappa(x)>0$. If every generator had algebraic image in $\\kappa(x)$, the fraction field of their image algebra $B/\\mathfrak p_x$ would be algebraic over $F$, a contradiction. Choose a generator $t=t_r$ with transcendental image. The coordinate morphism $p:V\\to\\mathbf A^1_F$ sends $x$ to its generic point, since $F[t]\\to\\kappa(x)$ is injective. The surjection $F[T_1,\\ldots,T_m]\\twoheadrightarrow B$ given by the generators gives a closed immersion $V\\hookrightarrow\\mathbf A^m_F$. Apply [lem-fin-coordinate-generic-dimension] with $S=\\operatorname{Spec}F$, $Y=V$ and its open subscheme $V$ itself; $\\dim V\\leq\\dim X\\leq d$ follows by viewing chains in an open subspace. Hence $\\dim V_\\eta\\leq d-1$. By [lem-kun-dimension-extension] the same holds for $V_{\\bar\\eta}$ over $L=\\overline{F(t)}$. This fibre is separated and finite type over $L$: on affine charts its rings are obtained from finitely generated $F[t]$-algebras by scalar extension, and its diagonal is the base change of the closed diagonal of $V$; closedness survives scalar extension since $(R/I)\\otimes_R R\\prime=R\\prime/IR\\prime$ on affine charts.",
    "uses": [
-    "thm-sf-direct-image-tor-amplitude",
+    "lem-kun-closed-point-field",
+    "lem-fin-coordinate-generic-dimension",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 3"
+   }
+  },
+  {
+   "text": "Write $u:V\\hookrightarrow X$ and $g:V_{\\bar\\eta}\\to V$. Verify successively that $u^*K$ and $g^*u^*K$ meet the induction hypothesis's constructibility and Tor conditions. For each of the two pairs $(h,Q)=(u,K)$ and $(g,u^*K)$, [prop-weil-pbc-inverse-image-modules-exact] identifies constant-$A$ module pullback $h^*$ with an exact inverse-image functor, so $\\mathcal H^q(h^*Q)=h^{-1}\\mathcal H^q(Q)$ and the finite cohomological range is preserved. By [lem-weil-pbc-constructible-etale-set-pullback] the pulled-back cohomology sheaves are constructible. On a stratum where a cohomology sheaf is a finite constant $A$-module, pull back its trivializing etale cover and its addition and scalar maps; the result is the same finite constant $A$-module on the pulled-back cover. Thus this is module constructibility, not only constructibility of sets. For a Tor interval $[a,b]$ of $Q$, [lem-sf-etale-flat-model] gives a flat complex $P$ supported in $[a,b]$, representing $Q$. It is K-flat by [lem-pc-kflat-closure]. By [lem-weil-pbc-ringed-pullback-preserves-kflat], $h^*P$ has flat terms and is K-flat; it is still supported in $[a,b]$. Exactness of $h^*$ identifies its derived object with $h^*Q$, and the converse implication of [lem-sf-etale-flat-model] gives the same Tor interval. Applying these checks first to $(u,K)$ supplies the hypotheses for $(g,u^*K)$. Write $K_V=u^*K$. In particular $g^*K_V\\in D^b_{ctf}(V_{\\bar\\eta,\\Et},A)$. All cited pullback statements apply to arbitrary scheme morphisms; the geometric-generic morphism need not be finite type over the original $F$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-constructible-etale-set-pullback",
+    "lem-sf-etale-flat-model",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 4; supporting Stacks tags: 04JC, 06YQ (lemma-bounded-flat-K-flat), 0G7E"
+   }
+  },
+  {
+   "text": "Work over the variable algebraically closed field $F$ of the induction, and set $L=\\overline{F(t)}$ and $T=V_{\\bar\\eta}$. On the affine $V$ choose generators of its algebra over $F[t]$ to embed $i:V\\hookrightarrow W=\\mathbf A^r_{\\mathbf A^1_F}$ as a closed subscheme. The same immersion after generic base change is $i_L:T\\hookrightarrow\\mathbf A^r_L$. By [cor-amb-affine-space-adjunction], [lem-sf-unbounded-compact-support-proper-composition] for the closed immersions, and the Hom-adjunction calculation of step 2,\n$$\\omega_V\\cong Ri^!A_W(r+1)[2r+2],\\qquad\\omega_T\\cong Ri_L^!A_{\\mathbf A^r_L}(r)[2r].$$\nApply the closed-support clause of [lem-sf-etale-generic-exchange-algclosed] with $B=\\mathbf A^1_F$ and the bounded constructible input $A_W(r+1)[2r+2]$. Tate pullback and invertibility are [lem-asd-etale-finite-twist-pullback]. Here is the tensor identity needed for $Ri_L^!$, separately from compatibility of the base-change comparison. Write $h=i_L$, let $Q$ be any invertible locally constant rank-one coefficient sheaf on the ambient affine space, and write $Q_T=h^{-1}Q$. On an etale cover trivializing $Q$, the sheaf direct-image formula [def-weil-pbc-direct-image] gives $h_*(C\\otimes Q_T^{-1})=(h_*C)\\otimes Q^{-1}$: both sides are the same sections of $C$ on the closed base change of each etale object. These identities agree on overlaps, because multiplication by a transition unit acts identically on both sides. Closed direct image is exact by [lem-cbc-open-closed-recollement], so the identity applies termwise and passes to derived categories. Tensoring with either rank-one sheaf is exact, with its tensor inverse as inverse; on complexes these functors also commute with shifts. The adjunction of [lem-exc-closed-ambient] consequently gives, naturally in $C$,\n$$\\operatorname{Hom}(C,Rh^!(M\\otimes Q))=\\operatorname{Hom}(Rh_*C,M\\otimes Q)=\\operatorname{Hom}((Rh_*C)\\otimes Q^{-1},M)=\\operatorname{Hom}(C\\otimes Q_T^{-1},Rh^!M)=\\operatorname{Hom}(C,(Rh^!M)\\otimes Q_T).$$\nYoneda gives $Rh^!(M\\otimes Q)\\cong(Rh^!M)\\otimes Q_T$, compatible with the adjunction counit by construction. Use this with $Q=A(1)$ and the shift $[2]$ to compare the two displayed ambient dualizing objects. Thus there is the canonical comparison $\\theta:g^*\\omega_V\\xrightarrow{\\sim}\\omega_T\\otimes J$ with $J=A_T(1)[2]$. Steps 2--3 make $\\omega_V$, $K_V$, and $D_VK_V$ bounded constructible, with the last two of finite Tor amplitude, over this actual $F$. Apply the internal-Hom clause of the same new node first to $(K_V,\\omega_V)$ and then to $(D_VK_V,\\omega_V)$. It identifies $g^*D_VK_V$ with $D_T(g^*K_V)\\otimes J$ and $g^*D_VD_VK_V$ with $D_TD_T(g^*K_V)$: in the latter expression $R\\mathcal Hom(Q\\otimes J,\\omega_T\\otimes J)=R\\mathcal Hom(Q,\\omega_T)$, since tensor with the invertible $J$ is an equivalence; this is the Hom adjunction after applying its inverse, and it respects evaluation. The evaluation identity in [lem-sf-etale-generic-exchange-algclosed] says that the two internal-Hom comparisons identify the pulled-back evaluation pairing with evaluation for $g^*K_V$ after the $J^{-1}\\otimes J$ cancellation. Transposing that identity via [lem-weil-duality-pairing] therefore identifies the actual arrow $g^*\\delta_{K_V}$ with $\\delta_{g^*K_V}$, not merely the two underlying objects. The induction hypothesis at dimension $d-1$ over $L$ now makes this arrow an isomorphism. For $u:V\\hookrightarrow X$, the ordinary-etale canonical comparison of [lem-weil-delta-restriction] carries $u^*\\delta_K$ to $\\delta_{K_V}$. Thus the pullback of $\\delta_K$ to $T$ is an isomorphism. Given a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to V$ over $x$, use the injection $F(t)\\to\\kappa(x)\\to\\Omega$ to choose $L$ inside $\\Omega$: take the subfield of elements algebraic over $F(t)$. It is algebraically closed, since a root in $\\Omega$ of a polynomial with algebraic coefficients is algebraic over the finite extension generated by those coefficients, and hence over $F(t)$. This is an allowed choice of algebraic closure in the arbitrary-base generic exchange and in the induction hypothesis. Thus $\\bar x$ lifts to $V_{\\bar\\eta}$. Exact inverse image and the stalk comparison of [lem-weil-pbc-inverse-image-stalk-germ] identify the cohomology stalks of the pulled-back cone with those of $\\Delta$ at $\\bar x$. They vanish since the pulled-back arrow is an isomorphism. This proves zero stalks at every nonclosed point; exactness of geometric stalks is [prop-weil-pbc-geometric-stalks-exact].",
+   "uses": [
+    "lem-sf-etale-generic-exchange-algclosed",
+    "cor-amb-affine-space-adjunction",
+    "lem-sf-unbounded-compact-support-proper-composition",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-duality-pairing",
+    "lem-weil-delta-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-cbc-open-closed-recollement",
+    "lem-exc-closed-ambient",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Agent expansion of imported Proof paragraph 4: generic comparison computed from closed affine embedding, 0F09/0GIT/0A45 exchange, ambient affine adjunction and evaluation; no restricted generic-duality node is applied."
+   }
+  },
+  {
+   "text": "For each of the finitely many nonzero $\\mathcal H^q\\Delta$, its support is constructible by [lem-weil-pbc-constructible-module-support-constructible]; the preceding step shows it consists only of closed points (also at $d=0$). By [def-weil-constructible-subset] it is a finite union of locally closed subsets. Give each such subset its reduced locally closed subscheme structure. It is Noetherian, being a locally closed subspace of the Noetherian $X$, and has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Each component has a generic point by [lem-sc-scheme-sober]. That point is closed already in $X$, so its closure in the locally closed subscheme is its singleton; hence each component is a singleton. Each support, and then their finite union $Z_0$, is therefore a finite set of closed points. This is the explicit finite-support argument, rather than an assumption that a constructible support is closed.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-support-constructible",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 4; supporting Stacks tags: 09YS, 005L, 0BA8"
+   }
+  },
+  {
+   "text": "Record the coefficient identification at $s=\\operatorname{Spec}F$. In [lem-exc-abelian-sheaves-gmodules] take $F^{\\rm sep}=F$ and the identity geometric point; the Galois group is trivial, so the equivalence is with abelian groups. Transporting the scalar endomorphisms $a\\cdot(-)$ for $a\\in A$, and their ring identities, gives an equivalence between small-etale constant-$A$ module sheaves on $s$ and $A$-modules. It is exact, since an equivalence of abelian categories preserves kernels and cokernels, and monoidal by [lem-pod-etale-stalk-tensor-scalar]. Apply the exact equivalence and its exact quasi-inverse termwise to complexes: they preserve acyclic complexes and quasi-isomorphisms, hence induce inverse derived equivalences. The monoidal equivalence preserves flat objects and K-flat complexes because tensoring with an acyclic complex can be tested through either exact quasi-inverse. Thus the derived equivalence is monoidal; its tensor adjunction identifies derived internal Hom and its evaluation. For the structure map $\\operatorname{id}_s$, use the compactification with both maps the identity in [thm-amb-etale-exceptional-adjoint]. Extension by zero for the whole open is the identity by its presheaf formula [def-weil-pbc-extension-by-zero]; direct image along the identity is the identity since $W\\times_s s=W$ [def-weil-pbc-direct-image]. Therefore $R(\\operatorname{id}_s)_!$ is the identity. Its right adjoint is the identity as well: the adjunction represents $\\operatorname{Hom}(C,-)$ itself, and Yoneda gives the identification with the identity functor. Hence $\\omega_s=A_s$. Consequently $D_s$ and its evaluation transpose [lem-weil-duality-pairing] are exactly derived coefficient duality and canonical coefficient evaluation under this equivalence.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-duality-pairing",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 1; supporting Stacks tags: 04JQ, 03QT"
+   }
+  },
+  {
+   "text": "Let $a:X\\to s$ be the proper structure morphism. The ring $A$ is annihilated by a power of $\\ell$, invertible in $F$. The all-sheaf vanishing theorem [lem-sf-etale-direct-image-vanishing] gives $R^ra_*M=0$ for $r>2d$. Apply the arbitrary-base direct-image calculation established in step 3 with $f=a$, $N=2d$, and a Tor interval $[a_0,b_0]$ of $K$; its finite-type, separatedness, invertible-coefficient and bounded-constructibility hypotheses all hold. Thus $Ra_*K$ is bounded constructible with Tor interval $[a_0,b_0+2d]$. Under the point equivalence of step 9 it is a bounded complex of ordinary algebraic $A$-modules with finitely generated cohomology. Indeed constructibility on the one-point scheme gives finite underlying stalk sets, and the elements of each finite set form a finite generating list. Apply [lem-weil-coefficient-frobenius] with $\\Lambda=A=A_{E,n}=\\mathcal O_E/(\\varpi_E^n)$ and $n\\geq1$. Its current conventions require commutative coefficients and interpret finite modules as finitely generated, self-injective as injective over the ring itself, and derived Hom on the one-object ringed site. These requirements hold: $A$ is the fixed commutative quotient ring, and step 9 identifies the point category, its tensor, derived internal Hom and evaluation with precisely these ordinary algebraic module constructions. We use its finite-stage clause: $\\operatorname{Hom}_A(-,A)$ is exact on modules and evaluation is an isomorphism on finitely generated modules. No ordinary reflexivity assertion for $\\mathcal O_E$ is used. For a representing cochain complex $C$, write $(C^\\vee)^r=\\operatorname{Hom}_A(C^{-r},A)$ with $d_{C^\\vee}^r(\\phi)=(-1)^{r+1}\\phi\\circ d_C^{-r-1}$. Exactness of $\\operatorname{Hom}_A(-,A)$ makes this dual send acyclic complexes to acyclic complexes, so it computes derived coefficient duality. The transpose of evaluation has degree-$q$ component $c\\mapsto(\\phi\\mapsto(-1)^q\\phi(c))$. Substitution in the two displayed differentials verifies that this is a cochain map. Exactness identifies $H^q(C^{\\vee\\vee})$ with $H^q(C)^{\\vee\\vee}$; on cocycles the displayed map is finite-module evaluation up to the invertible sign $(-1)^q$. Finite-module reflexivity therefore makes its cohomology an isomorphism for every $q$. Thus its canonical derived coefficient double-dual arrow is an isomorphism, and hence so is $\\delta_{Ra_*K}$. Apply [lem-weil-delta-proper-pushforward] to the proper morphism $a$: it identifies this arrow with $Ra_*\\delta_K$. Therefore $Ra_*\\Delta=0$. Indeed [lem-weil-pbc-derived-direct-image-triangulated] applies to the additive left exact module direct image of [def-weil-pbc-direct-image], whose source has enough injectives; it preserves the cone triangle, so the image triangle has an isomorphism as its first arrow. This last cone calculation is independent of geometric biduality.",
+   "uses": [
     "lem-sf-etale-direct-image-vanishing",
     "lem-weil-coefficient-frobenius",
     "lem-weil-delta-proper-pushforward",
-    "thm-sp-truncation-e2"
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-derived-direct-image-triangulated"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 5; supporting Stacks tags: 05SE, 05SU"
+   }
   },
   {
-   "text": "Every summand vanishes, so $\\Delta=0$. This completes the induction.\nPreservation was proved before the induction; together with the natural\nevaluation of [lem-weil-duality-pairing], $D_X^2\\cong\\mathrm{id}$\ntherefore gives the claimed anti-equivalence.",
+   "text": "Put the reduced closed subscheme structure on $Z_0$ and write $i:Z\\hookrightarrow X$, $j:X\\setminus Z_0\\hookrightarrow X$. For $M=\\mathcal H^q\\Delta$, its restriction $j^{-1}M$ has zero geometric stalks by construction of $Z_0$ and [lem-weil-pbc-inverse-image-stalk-germ]. It is the zero sheaf by [lemma-weil-pbc-geometric-stalk-conservative]. Apply the recollement triangle of [lem-cbc-open-closed-recollement] to $M[0]$. Its first term is zero and $i_*$ is exact, so the unit gives $M\\cong i_*G$ for the degree-zero sheaf $G=i^{-1}M$. This derives the finite-support representation; the definition of support alone would not give this isomorphism.",
    "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 5; supporting Stacks tags: 03Q1"
+   }
+  },
+  {
+   "text": "The reduced finite closed subscheme $Z$ is separated finite type over $F$ with dimension at most zero. The canonical degree-zero formula of [lem-weil-pbc-zero-dimensional-cohomology] says $\\Gamma(Z,G)=\\prod_{z\\in Z_0}G_{\\bar z}$. It is $A$-linear because the canonical maps commute with the scalar endomorphisms. By [lem-weil-pbc-inverse-image-stalk-germ], these stalks identify with $M_{\\bar z}$. The direct-image formula [def-weil-pbc-direct-image], evaluated at the terminal object, gives $\\Gamma(X,M)=\\Gamma(Z,G)$. Moreover $\\Gamma(Z,-)$ is exact on $A$-module sheaves: its formula is a finite product of exact geometric stalk functors [prop-weil-pbc-geometric-stalks-exact], and exactness of module sheaves is tested on underlying abelian sheaves [def-weil-sheaf-of-modules-category]. For $b=a i:Z\\to s$, the point equivalence of step 9 identifies $b_*$ with this exact sections functor, so $Rb_*=b_*$. Since $i_*$ is exact, the ordinary-etale clause of [lem-weil-derived-direct-image-composition] gives $Ra_*M=Ra_*i_*G\\cong Rb_*G=b_*G$. Thus $R^pa_*M=0$ for $p>0$ and, under the point equivalence, $a_*M=\\prod_{z\\in Z_0}M_{\\bar z}$. This argument works in module sheaves directly and does not silently identify module-derived and abelian-derived cohomology.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 5; supporting Stacks tags: 03Q1"
+   }
+  },
+  {
+   "text": "Choose $a_0$ below the nonzero cohomology of $\\Delta$. By [def-sbc-standard-tstructure-derived-category], $\\Delta$ has a cochain representative zero below $a_0$; concretely the good truncation has $\\operatorname{coker}(d^{a_0-1})$ in degree $a_0$, the original terms above, and zero terms below, and the natural quotient map is a quasi-isomorphism because the discarded cohomology vanishes. Apply [thm-sp-truncation-e2] to that bounded-below representative and the left exact additive functor $v=a_*$ on $A$-module sheaves. Both categories of module sheaves are Grothendieck: use [lem-weil-pbc-small-module-diagrams-grothendieck] with the terminal index category and a universe in which each small etale site is small. The spectral sequence is therefore\n$$E_2^{p,q}=R^pa_*(\\mathcal H^q\\Delta)\\Longrightarrow\\mathcal H^{p+q}(Ra_*\\Delta).$$\nBy step 12 all columns with $p>0$ vanish. The bounded-below hypothesis supplies the theorem's finite, exhaustive, separated filtration in each total degree, so there are no convergence or extension ambiguities: $\\mathcal H^q(Ra_*\\Delta)\\cong a_*\\mathcal H^q\\Delta$. Step 10 makes the left side zero. The point equivalence and step 12 then give $0=\\prod_{z\\in Z_0}(\\mathcal H^q\\Delta)_{\\bar z}$. Each factor is zero, by its inclusion and projection in a finite product. Outside $Z_0$ the stalks were already zero. Stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative] gives $\\mathcal H^q\\Delta=0$ for every $q$, whence $\\Delta=0$ by the definition of the derived category. Thus $\\delta_K$ is an isomorphism for every proper $X$ of dimension at most $d$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 5"
+   }
+  },
+  {
+   "text": "Now let $X/F$ be any separated finite-type scheme with $\\dim X\\leq d$. Apply [thm-nagata-compactification] to its structure morphism (the base $s$ is quasi-compact and quasi-separated), obtaining a quasi-compact open immersion $j_0:X\\hookrightarrow\\bar X$ with $\\bar X$ proper over $F$, as in [def-nagata-compactification]. Replace $\\bar X$ by the closed scheme-theoretic closure $C$ of $X$ [def-nagata-scheme-theoretic-closure]. By [lemma-nagata-immersion-open-in-scheme-image], the resulting $j:X\\hookrightarrow C$ is a quasi-compact dense open immersion. The closed subscheme $C$ remains proper: its diagonal is the restriction of the closed diagonal of $\\bar X$, its coordinate rings are quotients of finite-type $F$-algebras, and after every base change the closed immersion remains closed: on affine charts a quotient $R/I$ pulls back to $R\\prime/IR\\prime$, whose image is the closed subset $V(IR\\prime)$. Composing this closed map with the closed map supplied by properness of $\\bar X$ proves universal closedness [def-weil-proper-morphism]. These verify separatedness, finite type and universal closedness directly. By the dense-open clause of [lem-kun-dimension-extension], $\\dim C=\\dim X\\leq d$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "def-nagata-scheme-theoretic-closure",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-weil-proper-morphism",
+    "lem-kun-dimension-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 2; supporting Stacks tags: 01W1"
+   }
+  },
+  {
+   "text": "Prove the needed preservation by ordinary etale extension by zero directly. For $K$ of Tor amplitude $[a,b]$, use [lem-sf-etale-flat-model] to choose a bounded flat representative $P$ in $[a,b]$. By [lem-weil-pbc-extension-by-zero-exact], degreewise $j_!$ preserves quasi-isomorphisms and $\\mathcal H^q(j_!K)=j_!\\mathcal H^qK$, so its cohomological range is unchanged. On each locally closed stratum of a finite constructibility partition of $X$, [lem-weil-pbc-extension-by-zero-stalks] identifies the restricted extended sheaf with the original finite locally constant sheaf; on the complementary closed subscheme it is zero, by that stalk formula and [lemma-weil-pbc-geometric-stalk-conservative]. The strata are locally closed also in $C$ because $X$ is open. Adding the complement therefore proves constructibility, using the ordinary-etale definition [def-weil-pbc-constructible-complexes]. Each term $j_!P^q$ is flat. Indeed, for an injection $M'\\to M$ of module sheaves on $C$, [prop-weil-pbc-inverse-image-modules-exact] gives an injection $j^{-1}M'\\to j^{-1}M$ on $X$. Tensoring with the flat $P^q$ preserves this injection. At a geometric point of $X$, exact stalks [prop-weil-pbc-geometric-stalks-exact], the extension stalk formula and [lem-pod-etale-stalk-tensor-scalar] identify the stalk of $(j_!P^q)\\otimes M'\\to(j_!P^q)\\otimes M$ with the stalk of the just obtained injection $P^q\\otimes j^{-1}M'\\to P^q\\otimes j^{-1}M$. At a point of $C\\setminus X$ both stalks are zero. Stalk conservativity proves that $(j_!P^q)\\otimes M'\\to(j_!P^q)\\otimes M$ is an injection, which is the flatness condition. Thus $j_!P$ is a bounded flat complex in $[a,b]$, representing $j_!K$; [lem-pc-kflat-closure] makes it K-flat and the converse implication of [lem-sf-etale-flat-model] gives the same Tor interval. Consequently $j_!K\\in D^b_{ctf}(C_{\\mathrm{et}},A)$. The proper case at the current dimension bound, proved in step 13, gives an isomorphism $\\delta_{j_!K}$. Restrict along $j$ and use the ordinary-etale clause of [lem-weil-delta-restriction]: its canonical comparison $(D_X\\alpha_{j_!K})^{-1}\\circ\\alpha_{D_Cj_!K}$ carries $j^*\\delta_{j_!K}$ to $\\delta_{j^*j_!K}$. Here $j$ is an etale $F$-morphism between separated finite-type schemes, $A$ is finite with invertible additive exponent, and all derived categories have constant $A$-module coefficients, as that clause requires. For an etale object $W\\to X$ regarded over $C$, the presheaf formula [def-weil-pbc-extension-by-zero] equals $K(W)$, since $W$ factors through $X$. Sheafification restricted to the open therefore recovers $K$, so $j^*j_!K\\cong K$ canonically and this arrow is $\\delta_K$. This proves the arbitrary separated finite-type case at dimension bound $d$. At $d=0$ steps 5--7 were vacuous and steps 8--15 prove the base; for $d>0$ the only earlier-dimension use was step 7 over $\\overline{F(t)}$. The simultaneous strong induction is therefore well founded.",
+   "uses": [
+    "lem-sf-etale-flat-model",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-constructible-complexes",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-pc-kflat-closure",
+    "lem-weil-delta-restriction",
+    "def-weil-pbc-extension-by-zero",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Agent expansion of imported Proof paragraph 2: ordinary etale exact extension and stalk formulas, Stacks 03S5, 03DJ and 03TT; same Tor interval by a bounded flat model. No pro-etale comparison is invoked."
+   }
+  },
+  {
+   "text": "Finally the preservation proved in steps 2--3 makes $D_X$ an endofunctor with reversed arrows on $D^b_{ctf}(X_{\\Et},A)$. It is exact contravariantly by [lem-sf-hom-triangulated]. The evaluation transpose is natural by [lem-weil-duality-pairing], and the proved isomorphisms give $\\mathrm{id}\\xrightarrow{\\sim}D_XD_X$. Regarding $D_X$ as a functor from the opposite category, its opposite functor is a quasi-inverse: the same natural double-dual isomorphism supplies both composites with the identity. This gives the claimed exact anti-equivalence, with no appeal to an unspecified choice of an isomorphism $K\\cong D_XD_XK$. Specialize the proved simultaneous assertion to the original global $k=\\overline{\\mathbf F}_q$ and the fixed coefficient ring $A=A_{E,n}$ to obtain exactly the item statement.",
+   "uses": [
+    "lem-sf-hom-triangulated",
     "lem-weil-duality-pairing"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Q40 agent proof, refining imported Proof paragraph 6"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-coefficient-frobenius",
+  "def-weil-finite-field-fiber",
+  "lem-weil-duality-pairing",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-etale-smooth-stratified-ctf",
   "lem-weil-delta-restriction",
+  "lem-sf-unbounded-compact-support-proper-composition",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-exc-closed-ambient",
+  "lem-weil-stratum-ambient-hom",
+  "thm-asd-smooth-tensor",
   "thm-nagata-compactification",
-  "lem-weil-verdier-preservation-strata",
-  "lem-fin-coordinate-generic-dimension",
-  "lem-weil-geometric-generic-duality",
-  "thm-sf-direct-image-tor-amplitude",
+  "thm-constructible-serre",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-sf-etale-direct-image-vanishing",
-  "lem-weil-delta-proper-pushforward",
+  "lem-sf-hom-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "thm-dg-finite-type-constructibility",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
   "thm-sp-truncation-e2",
-  "lem-weil-duality-pairing"
+  "lem-sf-projection-finite-constant",
+  "lem-exc-residue-tor-test",
+  "lem-pc-kflat-resolution",
+  "def-kun-derived-tensor",
+  "lem-kun-closed-point-field",
+  "lem-fin-coordinate-generic-dimension",
+  "lem-kun-dimension-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-sf-etale-flat-model",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sf-etale-generic-exchange-algclosed",
+  "cor-amb-affine-space-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "lem-weil-coefficient-frobenius",
+  "lem-weil-delta-proper-pushforward",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-derived-direct-image-composition",
+  "def-nagata-compactification",
+  "def-nagata-scheme-theoretic-closure",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
-  "place": "## Proof"
+  "place": "Agent repair of imported Proof paragraphs 1--6 and the predecessor preservation and generic-exchange proofs, with the variable algebraically closed base made explicit. Supporting available Stacks texts were read; no SGA duality text is claimed available."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-stage étale Verdier biduality double dual map isomorphism constructible finite Tor complex",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; HomologicalComplex.dgoEquivHomologicalComplex_counitIso; CochainComplex.IsKProjective.Qh_map_bijective; HomologicalComplex.dgoEquivHomologicalComplexCounitIso; DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-15",
+   "verdict": "no match: inspected hits concern derived representatives or general sheaf equivalences, not etale Verdier evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "VerdierDual, biduality, IsIso, constructibleFiniteTor",
+   "results": "loogle: unknown identifier 'VerdierDual'",
+   "date": "2026-10-15",
+   "verdict": "invalid pattern; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "VerdierDual|biduality|constructibleFiniteTor",
+   "results": "No hits, but the Mathlib/ prefix was an invalid subdirectory for this wrapper; superseded by the CategoryTheory search.",
+   "date": "2026-10-15",
+   "verdict": "invalid directory; not evidence of absence",
+   "sub": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite-stage étale Verdier biduality double dual map isomorphism constructible finite Tor complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dualizing complex étale sheaves bounded constructible double dual evaluation anti equivalence",
+   "results": "CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app; CategoryTheory.Presheaf.coherentExtensiveEquivalence; CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_val; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CompHausLike.LocallyConstant.functorIso; CategoryTheory.Equivalence.sheafCongr; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+   "date": "2026-10-15",
+   "verdict": "no match: inspected hits concern derived representatives or general sheaf equivalences, not etale Verdier evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bidual\"",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdier|bidual|dualizing|constructibleFiniteTor",
+   "results": "none",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "verdier|bidual|dualizing",
+   "results": "Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Category/Cat/Op.lean; Mathlib/CategoryTheory/ComposableArrows/Basic.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+   "date": "2026-10-15",
+   "verdict": "no match: hits concern Verdier localization or categorical opposite functors, not geometric Verdier biduality",
+   "sub": "CategoryTheory"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -115,5 +439,239 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "thm-weil-etale-geometric-biduality",
+  "worker": "stage1",
+  "summary": "Repair of the mathematical return E1/C4 and C4/E6. The 16-step proof retains the geometric dimension induction, explicitly with a variable algebraically closed base F and a fixed finite coefficient ring. Steps 2--3 prove preservation from smooth-stratum devissage and ambient stratum duality over arbitrary F, rather than applying the restricted preservation node. Step 7 derives the generic dualizing shift and the canonical double-dual arrow from a new arbitrary-base closed-support/internal-Hom exchange node, rather than applying the restricted generic-duality node. Step 15 proves ordinary etale extension preservation from existing exactness, stalk and flat-model statements, without the pro-etale lem-trf-open-ctf. Two new statement-only prerequisites are searched and left unsplit. The item statement and the unit route are unchanged. The direct-image Tor bound is also derived in step 3 from arbitrary-base finiteness, literal all-sheaf vanishing, projection and the any-scheme residue test, eliminating the global-UDV notation dependency of thm-sf-direct-image-tor-amplitude. Second reading expands the rank-one tensor identity for closed exceptional inverse image in step 7 using exact closed direct image and adjunction, rather than attributing that identity to comparison compatibility. Current-DAG repair of the landing refusal: re-read the added conventions of lem-weil-coefficient-frobenius; step 10 explicitly verifies commutative finite-stage coefficients, finitely generated cohomology, ordinary algebraic module duals, and the one-object derived-Hom interpretation under step 9. Refreshed its citation to the entire current statement, including the conventions. That coefficient-interface repair changed neither the item nor prerequisite statements. Fresh second reading clarifies the existing prerequisites with definition references for integral schemes, dimension-one curves and irreducible components, plus explicit connectedness and pure-dimension meanings; mathematical hypotheses and conclusions are unchanged. Six independently executed Mathlib searches and the affected full citation quotes are refreshed.",
+  "blueprint": "Proof paragraph 1: step 1, dimension-zero case of steps 8--13; paragraph 2: steps 14--15; paragraph 3: preservation expansion in steps 2--3, cone/coordinate/pullback in steps 4--6; paragraph 4: steps 7--8, including derived generic duality rather than its restricted imported citation; paragraph 5: steps 9--13; paragraph 6: steps 15--16. The all-coefficient unit is not fully realized by this finite-stage item.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension supplies the integer induction bound, not a replacement duality argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of finite-type schemes is needed for finite constructible support."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The cone cohomology exact sequence exposes the use of Serre closure."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Kernels, cokernels and extensions make the evaluation cone constructible."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The closed-point/trdeg criterion selects a transcendental affine coordinate."
+   },
+   {
+    "node": "lem-fin-coordinate-generic-dimension",
+    "why": "The imported proof uses this coordinate dimension drop for its induction."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Field extension and dense compactification preserve the dimension bound."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "The geometric generic fibre is an arbitrary morphism, requiring exact constant-coefficient pullback."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-set-pullback",
+    "why": "Constructibility of the pulled-back cohomology sheaves for that arbitrary morphism."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "A bounded flat model is K-flat, checking the hypothesis of K-flat pullback."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Flat terms survive pullback to the geometric generic fibre."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Identifies lifted generic-fibre stalks and finite-closed-subscheme stalks with the original ones."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exact stalks justify cohomology-stalk comparisons and exact finite-support sections."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-support-constructible",
+    "why": "Constructible cohomology has constructible support; this is not just a definition."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Each locally closed support piece has finitely many irreducible components."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic points show a locally closed piece with only closed points is finite."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "At an algebraically closed point the etale sheaf category is the ordinary module category."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "The point equivalence respects tensor and hence its internal-Hom adjunction and evaluation."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Its identity compactification computes the ambient point dualizing object directly, without a six-functor datum or biduality assumption."
+   },
+   {
+    "node": "lem-sf-etale-direct-image-vanishing",
+    "why": "Provides the all-sheaf UDV bound 2d required by the imported direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "The general right-derived functor theorem preserves the cone triangle under proper pushforward."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Zero geometric stalks imply zero restriction and zero cone cohomology."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Derives M=i_*i^{-1}M from vanishing on the complementary open."
+   },
+   {
+    "node": "lem-weil-pbc-zero-dimensional-cohomology",
+    "why": "Its canonical H0 finite-product formula gives sections and, with exact stalks, exactness on module sheaves."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Its ordinary-etale clause identifies Ra_*i_*F with R(ai)_*F."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "The convergent truncation spectral sequence detects a bounded finite-supported cone."
+   },
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Terminal diagrams verify Grothendieck categories for both bounded-below spectral-sequence calculations."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "The imported proof reduces arbitrary separated finite-type schemes to a proper compactification."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "The scheme-theoretic closure gives a dense open compactification of the same dimension."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Contravariant exactness of derived internal Hom gives the exactness clause."
+   },
+   {
+    "node": "lem-sf-unbounded-compact-support-proper-composition",
+    "why": "Unbounded ordinary etale compact-support composition for closed embeddings computes their ambient dualizing objects by adjunction over the variable field."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Provides the ordinary etale right adjoint used in the explicit closed-embedding dualizing computation."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Computes the ambient dualizing object on a smooth stratum as a rank-one sheaf shifted by its dimension, independently of biduality."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Ambient stratum Hom identity computes the dual of each localization generator without assuming constructible preservation."
+   },
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "Computes ambient affine-space dualizing objects on both sides of the generic-fibre comparison."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Specifies invertible finite etale Tate twists and their canonical generic pullback."
+   },
+   {
+    "node": "lem-sf-etale-flat-model",
+    "why": "The field-independent ordinary etale flat-model theorem verifies Tor amplitude under generic pullback and extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness for ordinary etale module sheaves keeps the cohomological range under extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Ordinary etale stalk formula establishes constructibility and flatness after extension by zero."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Bounded constructibility of the ordinary-etale direct image over any field, independent of the restricted UDV notation."
+   },
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Arbitrary-morphism projection onto the finitely presented residue coefficient, under the literal all-sheaf dimension bound."
+   },
+   {
+    "node": "lem-exc-residue-tor-test",
+    "why": "On any scheme, the residue tensor detects the Tor interval of a bounded constructible finite-stage complex."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "A fixed K-flat tensor factor carries cone triangles to cone triangles and tests a common Tor interval."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-derived-homology-long-exact",
+  "thm-constructible-serre",
+  "lem-kun-closed-point-field",
+  "lem-fin-coordinate-generic-dimension",
+  "lem-kun-dimension-extension",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-constructible-module-support-constructible",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lem-weil-derived-direct-image-composition",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "thm-nagata-compactification",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lem-sf-hom-triangulated",
+  "lem-sf-unbounded-compact-support-proper-composition",
+  "lem-exc-closed-ambient",
+  "thm-asd-smooth-tensor",
+  "lem-weil-stratum-ambient-hom",
+  "cor-amb-affine-space-adjunction",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sf-etale-flat-model",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "thm-dg-finite-type-constructibility",
+  "lem-sf-projection-finite-constant",
+  "lem-exc-residue-tor-test",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q40-2a6fae00c",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-2a6fae00c (reviewer sub-agent of L); spot-checked: Read all 16 steps, both new nodes, cited statements, sources and unit/chapter route. Checked arbitrary-field induction, canonical generic exchange, coefficient category, signed evaluation and edge cases; no mathematical defect found. Added required provenance/audit fields to both new-node JSON files under fixes/. Statements unchanged; detailed checks and accepted tool uses are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }
