@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-abstract-kflat-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-extend-scalars-kflat",
+   "place": "Proof: “Choose a K-flat resolution Q to S of S as an R-module”; the abstract existence theorem needed after the module-category inheritance results.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "K-flat resolutions in closed monoidal Grothendieck categories",
+ "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category [def-sp-grothendieck-abelian] whose tensor product is additive in each variable. Call an object $F$ flat if both $F\\otimes-$ and $-\\otimes F$ are exact. Suppose there is a functor $B:\\mathcal A\\to\\mathcal A$ with flat values and a natural epimorphism $B\\to\\mathrm{id}_{\\mathcal A}$. For every $\\mathbf Z$-indexed cochain complex $L$ in $\\mathcal A$, there exist a complex $Q$ and a quasi-isomorphism $q:Q\\to L$ such that $Q$ is K-flat for the direct-sum total tensor product of [def-sfb-preserves-kflat-quasi-iso]. No boundedness condition is imposed on $L$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-left-derived-functor.proof.md",
+  "place": "First paragraph, sentences “Every complex has a K-flat resolution” through the quasi-isomorphism assertion, specialized to a closed symmetric monoidal Grothendieck category. Exact abstract project implementation: CochainComplex.exists_quasiIso_flat_kFlat, WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean:173-190; ambient hypotheses at lines 149-151."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every cochain complex in a closed symmetric monoidal Grothendieck abelian category with functorial flat resolutions has a K-flat resolution",
+   "results": "Returned CochainComplex.IsKProjective, IsKInjective, projective/injective resolution instances, bounded projective K-projectivity and HasDerivedCategory.standard. These do not assert K-flat replacements in the stated generality.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every complex admits a quasi-isomorphism from a K-flat complex in a monoidal Grothendieck abelian category with functorial flat resolutions",
+   "results": "Returned HomologicalComplex.quasiIso, QuasiIso, quasiIso_comp, mem_quasiIso_iff, DerivedCategory.isIso_Q_map_iff_quasiIso and generic quasi-isomorphism properties. No K-flat replacement theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\"",
+   "results": "Returned only Lean.mkFlatCtorOfStructCtorName in Lean.Structure, unrelated to K-flat complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_quasiIso_flat|kFlatResolution|kFlat|KFlat",
+   "results": "Zero hits in all Mathlib. The project declaration CochainComplex.exists_quasiIso_flat_kFlat is outside Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial resolutions by flat objects produce K-flat replacements of unbounded cochain complexes",
+   "results": "Returned DerivedCategory.Q, CochainComplex.IsKProjective, HasDerivedCategory.standard, a projective-resolution K-projectivity instance, the exact-functor localization lifting instance, IsKInjective, an injective-resolution instance, and Abelian.LeftResolution.chainComplexFunctor. No K-flat replacement theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Grothendieck tensor category with enough functorial flat objects has a homotopically flat replacement for each unbounded complex",
+   "results": "Eight hits: derived-category localization functors, left/right calculus of fractions and generic localization lifting. None supplies a K-flat replacement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"flat\"",
+   "results": "Successful query with zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopically.flat|K.?flat|flat.*[Rr]esolution|[Rr]esolution.*flat",
+   "results": "Five hits: three unrelated Turing-machine flatMap declarations, a comment in Algebra/Homology/LeftResolution/Basic.lean about future flat resolutions, and an ordinary-ring flat-resolution argument in RingTheory/Flat/Equalizer.lean. No K-flat replacement declaration.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-extend-scalars-kflat",
+  "date": "2026-10-16",
+  "group": "Q03"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-extension-of-scalars",
+ "lean_candidates": [
+  {
+   "name": "CochainComplex.exists_quasiIso_flat_kFlat",
+   "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+   "lines": [
+    173,
+    190
+   ],
+   "kind": "lemma",
+   "sorry": false,
+   "note": "Read hypotheses at lines 149-151 and complete proof at 173-190. Specializes from braided to symmetric; discard the extra termwise-flatness conclusion. Flatness and functorial covers match FromJoel/CategoryTheory/Abelian/Flat/Basic.lean:35-37,89-90 and Mathlib/Algebra/Homology/LeftResolution/Basic.lean:37-45. K-flatness matches FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean:85-88. Archived local/sorry_map_slopmaster2_7d675a26.jsonl.gz contains this declaration; a read-only traversal of all 1057 project dependencies found zero sorry declarations and zero missing records. Maintainer verifies and attaches; no closed audit is set by this split."
+  }
+ ]
+}

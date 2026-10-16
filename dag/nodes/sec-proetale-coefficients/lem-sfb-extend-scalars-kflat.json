@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-extend-scalars-kflat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension of scalars preserves K-flat quasi-isomorphisms",
@@ -13,28 +13,162 @@
   "place": "node lem-sfb-extend-scalars-kflat, order 1626"
  },
  "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-change-of-scalars",
   "def-sfb-preserves-kflat-quasi-iso"
  ],
  "proof": [
   {
-   "text": "The cone $C$ of $s$ is acyclic and K-flat, and the cone of $\\mathcal S\\otimes_{\\mathcal R}s$\nis $\\mathcal S\\otimes_{\\mathcal R}C$. Restriction of scalars is exact and faithful on\nunderlying objects [sk-def-sfb-change-of-scalars], so it detects acyclicity. Hence it\nsuffices to show that $\\mathcal S\\otimes_{\\mathcal R}C$, with $\\mathcal S$ regarded as an\n$\\mathcal R$-module through $\\varphi$, is acyclic. Choose a K-flat resolution\n$Q\\to\\mathcal S$ of $\\mathcal S$ as an $\\mathcal R$-module [sk-prop-sfb-module-category].\nSince $C$ is K-flat, $Q\\otimes_{\\mathcal R}C\\to\\mathcal S\\otimes_{\\mathcal R}C$ is a\nquasi-isomorphism. Since $Q$ is K-flat and $C$ is acyclic, i.e. $0\\to C$ is a\nquasi-isomorphism, $Q\\otimes_{\\mathcal R}C$ is acyclic. Hence\n$\\mathcal S\\otimes_{\\mathcal R}C$ is acyclic.",
+   "text": "Put $\\mathcal A=\\operatorname{Mod}_{\\mathcal R}(\\mathcal C)$. By [lem-sfb-modobj-grothendieck] it is Grothendieck abelian, and [def-sfb-modobj-symmetric-tensor] gives its symmetric relative tensor structure. The hypotheses of both nodes hold: $\\mathcal C$ is closed symmetric monoidal, hence its tensor functors preserve colimits: if $X\\otimes-\\dashv[X,-]$, then for a small diagram $D$ the colimit universal property [def-weil-pbc-category-colimit] gives $\\operatorname{Hom}(X\\otimes\\operatorname{colim}D,Y)\\cong\\operatorname{Hom}(\\operatorname{colim}D,[X,Y])\\cong\\lim_i\\operatorname{Hom}(D_i,[X,Y])\\cong\\lim_i\\operatorname{Hom}(X\\otimes D_i,Y)$. Thus $X\\otimes\\operatorname{colim}D$ with the induced cocone has exactly the colimit universal property; symmetry gives the other variable. Also $\\mathcal R$ is commutative. By [def-sfb-modobj-internal-hom] the relative tensor structure on $\\mathcal A$ is closed. For a module $M$, write $[M,-]_{\\mathcal R}$ for this right adjoint. For every small diagram $D$ of modules, $\\operatorname{Hom}_{\\mathcal A}(M\\otimes_{\\mathcal R}\\operatorname{colim}D,N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\operatorname{colim}D,[M,N]_{\\mathcal R})\\cong\\lim_i\\operatorname{Hom}_{\\mathcal A}(D_i,[M,N]_{\\mathcal R})\\cong\\lim_i\\operatorname{Hom}_{\\mathcal A}(M\\otimes_{\\mathcal R}D_i,N)$, proving preservation of colimits in that variable; the symmetry identifies the other fixed-factor tensor functor with this one. In particular they preserve the zero object and finite biproducts, and hence are additive: writing $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$, the functor sends this to the same formula for $F(f)+F(g)$, since the biproduct injections, projections, diagonal and codiagonal are determined by their identity/zero component equations. Thus the relative tensor is additive in both variables, as required below. By [lem-sfb-modobj-flat-resolutions] it has a functorial flat resolution. These are precisely the ambient hypotheses for the abstract K-flat resolution theorem used next; none asserts that $\\mathcal S$ is flat over $\\mathcal R$.",
    "uses": [
-    "sk-def-sfb-change-of-scalars"
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom",
+    "lem-sfb-modobj-flat-resolutions",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence choosing a K-flat resolution: hypotheses in the module category, supplied by the module-category inheritance statements and def-sfb-modobj-internal-hom."
+   }
+  },
+  {
+   "text": "Let $S_{\\mathcal R}=\\operatorname{Res}_{\\varphi}(\\mathcal S)$ be the regular $\\mathcal S$-module restricted to $\\mathcal R$; its action is $\\mu_{\\mathcal S}\\circ(\\varphi\\otimes\\mathrm{id})$ by [sk-def-sfb-change-of-scalars]. Write $S_{\\mathcal R}[0]$ for the complex with this object in degree zero and zero elsewhere. Apply [lem-sfb-abstract-kflat-resolution] in $\\mathcal A$ to obtain a K-flat complex $Q$ and a quasi-isomorphism $q:Q\\to S_{\\mathcal R}[0]$. The complex $Q$ is an $\\mathcal R$-module complex, and no $\\mathcal S$-action on $Q$ is required.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence “Choose a K-flat resolution Q to S of S as an R-module.”"
+   }
+  },
+  {
+   "text": "For $K=P,P'$, put $a_K=q\\otimes_{\\mathcal R}\\mathrm{id}_K:Q\\otimes_{\\mathcal R}K\\to S_{\\mathcal R}[0]\\otimes_{\\mathcal R}K$. Each $a_K$ is a quasi-isomorphism by the definition of K-flatness of $K$ in [def-sfb-preserves-kflat-quasi-iso], applied to the quasi-isomorphism $q$. Also $b=\\mathrm{id}_Q\\otimes_{\\mathcal R}s$ is a quasi-isomorphism by the K-flatness of $Q$, applied to $s$. Let $t=\\mathrm{id}_{S_{\\mathcal R}[0]}\\otimes_{\\mathcal R}s$. Bifunctoriality gives $t\\circ a_P=a_{P'}\\circ b$: on every $(i,j)$ summand both composites are induced by $q^i\\otimes_{\\mathcal R}s^j$. The total tensor maps and their differentials are exactly those in the cited definition.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Last four sentences: the two applications of K-flatness, performed on s and q rather than on the cone."
+   }
+  },
+  {
+   "text": "Apply $H^n$ to this square. By [def-weil-abstract-derived-category], cohomology is functorial and the three maps $H^n(a_P)$, $H^n(a_{P'})$, $H^n(b)$ are invertible. The square gives the explicit equation\n$$H^n(t)=H^n(a_{P'})\\circ H^n(b)\\circ H^n(a_P)^{-1}.$$\nIts inverse is $H^n(a_P)\\circ H^n(b)^{-1}\\circ H^n(a_{P'})^{-1}$. Thus $t$ is a quasi-isomorphism of $\\mathcal R$-module complexes, with no boundedness or termwise-flatness assumption on $P,P'$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Conclusion of the tensor-resolution argument; cohomology square replaces the cone/acyclicity formulation."
+   }
+  },
+  {
+   "text": "Let $T$ denote the termwise extension-of-scalars map $\\mathcal S\\otimes_{\\mathcal R}s$ in $\\mathcal S$-modules. There are natural identifications $\\operatorname{Res}_{\\varphi}(\\mathcal S\\otimes_{\\mathcal R}K)=S_{\\mathcal R}[0]\\otimes_{\\mathcal R}K$ for $K=P,P'$. Indeed, in degree $n$ both sides are the coequalizer of $\\mathcal S\\otimes\\mathcal R\\otimes K^n\\rightrightarrows\\mathcal S\\otimes K^n$ by [sk-def-sfb-change-of-scalars] and [def-sfb-modobj-relative-tensor]. For the relative-tensor coequalizer, the right $\\mathcal R$-action on $S_{\\mathcal R}$ is $\\mu_{\\mathcal S}(\\varphi\\otimes\\mathrm{id})\\beta_{\\mathcal S,\\mathcal R}=\\mu_{\\mathcal S}(\\mathrm{id}\\otimes\\varphi)$ by naturality of the braiding and commutativity of $\\mathcal S$, exactly the extension-of-scalars balancing arrow. Both $\\mathcal R$-actions on the quotient come from $\\varphi$ followed by multiplication on $\\mathcal S$. For the total tensor, only the summand $(0,n)$ is nonzero; its differential is $\\mathrm{id}_{\\mathcal S}\\otimes_{\\mathcal R}d_K$, with sign $(-1)^0=1$ by [def-sfb-preserves-kflat-quasi-iso]. Both induced maps for $s$ are induced by $\\mathrm{id}_{\\mathcal S}\\otimes s^n$. Consequently these identifications identify $\\operatorname{Res}_{\\varphi}(T)$ with $t$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence restricting scalars, made explicit by the two identical coequalizers and the degree-zero total tensor."
+   }
+  },
+  {
+   "text": "Restriction $U=\\operatorname{Res}_{\\varphi}$ is exact between the two abelian module categories by [sk-def-sfb-change-of-scalars], under the closedness, additivity and colimit hypotheses already verified. The natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] therefore identifies $H^n(U(T))$ with $U(H^n(T))$ up to conjugation by its specified isomorphisms. The former is invertible by steps 4 and 5, so $U(H^n(T))$ is invertible. Finally $U$ reflects isomorphisms, directly from its being the identity on underlying morphisms and the module-morphism equation of [sk-def-sfb-module-objects]: if $f\\gamma_M=\\gamma_N(\\mathcal S\\otimes f)$ has an inverse $g$ on underlying objects, multiplication by $g$ and $\\mathcal S\\otimes g$ gives $g\\gamma_N=\\gamma_M(\\mathcal S\\otimes g)$. Thus $g$ is $\\mathcal S$-linear. Each $H^n(T)$ is an isomorphism, so $T$ is the required quasi-isomorphism by [def-weil-abstract-derived-category].",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-module-objects",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence “Restriction of scalars is exact and faithful on underlying objects ... so it detects acyclicity”, here proved as detection of quasi-isomorphisms; Stacks 010N, homology.tex lemma-exact-functor, supplies the cohomology comparison through the cited node."
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-change-of-scalars"
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-weil-pbc-category-colimit",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-abstract-kflat-resolution",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "def-sfb-modobj-relative-tensor",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+  "place": "Proof, with the resolution argument expanded as the commutative tensor square; exact-functor cohomology from Stacks Tag 010N."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along a morphism of commutative ring objects preserves quasi-isomorphisms between K-flat cochain complexes",
+   "results": "Returned shape-embedding extension quasi-isomorphism lemmas, localization instances, faithfully-flat scalar-extension reflection, CM5b injective factorization and HomologicalComplex.quasiIso_map_of_preservesHomology. None covers arbitrary scalar extension on K-flat complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves quasi-isomorphisms of K-flat complexes",
+   "results": "Returned flat ring-map scalar-extension exactness, module-flat tensor exactness, shape-embedding extension and HomologicalComplex.quasiIso_map_of_preservesHomology. These require flatness/exactness or concern a different extension operation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.quasiIso, CategoryTheory.MonoidalCategory.tensorObj",
+   "results": "Query ran; Loogle reported unknown identifier CategoryTheory.MonoidalCategory.tensorObj and no hits. Corrected using the substring search below.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"tensor\"",
+   "results": "Substring query ran successfully with zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|PreservesKFlatQuasiIso",
+   "results": "Zero hits in all Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a weak equivalence between K-flat complexes with any object preserves weak equivalences using a flat resolution of that object",
+   "results": "Second phrasing returned CategoryTheory.Tor_obj, Tor'_obj_obj, module-flat exactness characterizations and tensor-product injectivity. No abstract K-flat preservation theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary scalar extension functor sends a quasi-isomorphism between homotopically flat unbounded complexes to a quasi-isomorphism",
+   "results": "Eight hits: generic localization lifting and functors requiring preservation of homology, derived-category detection, and extension along complex-shape embeddings. None states scalar-extension preservation on K-flat complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -55,5 +189,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-extension-of-scalars"
+ "unit": "sk-def-sfb-derived-extension-of-scalars",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-extend-scalars-kflat",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the coefficient-resolution argument, replacing the cone packaging by an explicit tensor square and inverse formula on cohomology. Reused module-category infrastructure, relative-tensor definitions and the exact-functor cohomology Mathlib leaf. Created one statement-only abstract K-flat resolution node; the existing project theorem is reported for attachment. No new Mathlib leaf. Independent second reading reuses the local internal-Hom definition for module-category closedness and reports the archived sorry-free resolution attachment through lean_candidates.",
+  "blueprint": "The first part of the blueprint proof is realized by steps 5-6 (restriction and detection); its choice of Q is steps 1-2; its two uses of K-flatness and acyclicity conclusion are steps 3-4, expressed without a cone. This stays within the parent unit's K-flat-resolution construction of derived extension."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-7dd6f561a",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-7dd6f561a (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and source passages in full. All six steps preserve the exact hypotheses and S-module conclusion. The abstract K-flat resolution theorem matches the cited project source and is not a duplicate or parent restatement. Checked nonflat and degenerate cases; 205 reachable nodes have no missing dependencies or cycles. No SGA, repairs, or off-route tool uses. Detailed review written to review.md."
+ }
 }

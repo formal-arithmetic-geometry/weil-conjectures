@@ -27,81 +27,144 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to $u:A\\hookrightarrow B$. This gives $Z_0\\cong A$, a sequence with colimit $B$, and each $Z_n\\hookrightarrow Z_{n+1}$ a pushout of a coproduct of $n$-boundary inclusions. Refine each such successor into individual attachments: well-order its set of cells and, starting with $Z_n$, attach the cells successively along their given boundary maps into $Z_n$. At a limit take the union. A map out of the resulting object is exactly a map out of $Z_n$ and one map from each attached simplex agreeing on its boundary, so the resulting object is the prescribed pushout $Z_{n+1}$. Concatenating these well-ordered refinements gives a continuous transfinite sequence from $A$ to $B$ whose successor maps are pushouts of single boundary inclusions. If there are no cells, the corresponding map is an isomorphism. The endpoint identification with $B$ identifies the structural map from $A$ with $u$, since each intermediate pushout comparison agrees with the given maps into $B$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0077",
+    "place": "Proposition 1.5.5.14, relative skeletal filtration and well-ordering of its cells"
+   }
+  },
+  {
+   "text": "Put $C(X)=X\\star\\Delta^0$. In degree $r$ the explicit join formula identifies $C(X)_r$ with one cone-point simplex and a disjoint copy of $X_k$ for each $0\\leq k\\leq r$; the $k=r$ copy is the pure base. For every map $X\\to Y$, the cone-point simplex is fixed and each $X_k$ maps to $Y_k$ with its label $k$ unchanged. Thus for a pushout span $Y\\leftarrow X\\to Z$, the degreewise pushout of cones has one common cone-point simplex and, separately at each label $k$, the set pushout $Y_k\\amalg_{X_k}Z_k$. This is exactly $C(Y\\amalg_X Z)_r$. For a monotone map $\\alpha:[s]\\to[r]$, a simplex $x\\in X_k$ of label $k$ goes to the cone-point simplex if $\\alpha^{-1}([k])$ is empty; otherwise write this initial segment as $[\\ell]$, and its image is $X(\\alpha|_{[\\ell]})(x)$ of label $\\ell$. The cone-point simplex always maps to the cone-point simplex. This formula commutes with the pushout comparisons, since every map of simplicial sets commutes with restriction. In any nonempty ordinal chain the cone-point simplices are all identified with one point and each fixed-label summand has the colimit of the corresponding $X_k$. Hence coning preserves pushouts and the nonempty limit-ordinal colimits needed in Step 1. Coning also preserves isomorphisms by applying it to the inverse. The same restriction formula commutes with these colimit comparisons, so these too are simplicial identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0196",
+    "place": "Lemma 4.3.7.8: expansion of weak saturation using the explicit join formula"
+   }
+  },
+  {
+   "text": "Use the simplex and horn definitions in [def-cbc-enhanced-diagrams-cones]. A monotone map $[r]\\to[n+1]$ has a unique initial segment landing in $[n]$ and complementary final segment landing in the last vertex. This identifies $\\Delta^n\\star\\Delta^0$ with $\\Delta^{n+1}$, respecting operators by restriction of segments. Its subcomplex $\\partial\\Delta^n\\star\\Delta^0$ consists exactly of maps omitting at least one vertex of $[n]$: this is true for the pure base summand by the boundary definition, for mixed simplices by their boundary base factor, and for the pure cone summand since it omits every base vertex. Thus the subcomplex is the union of the faces opposite vertices $0,\\ldots,n$, namely $\\Lambda_{n+1}^{n+1}$. For $n=0$ it is the final vertex of $\\Delta^1$. Its index satisfies $0<n+1\\leq n+1$, so every coned boundary inclusion is a generating right horn.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0196",
+    "place": "Lemma 4.3.7.8, final-horn calculation; Example 4.3.3.28"
+   }
+  },
+  {
+   "text": "Cone the continuous single-cell sequence of Step 1. Step 2 identifies its initial object with $A^{\\triangleright}$, its final object with $B^{\\triangleright}$, every successor with a pushout of the coned boundary inclusion, and every nonzero limit with the required colimit. Step 3 makes each nonidentity successor a pushout of a generating right horn. The definition of right anodyne in the statement therefore includes every successor and their transfinite composite. That composite is precisely $u\\star\\operatorname{id}_{\\Delta^0}$ by the naturality of the degreewise identifications, proving the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0196",
+    "place": "Lemma 4.3.7.8, closure argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0196",
+  "place": "Lemma 4.3.7.8 first assertion, expanded from the relative skeletal filtration and generating right-horn calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a monomorphism A to B of simplicial sets the induced inclusion of right cones A star point to B star point is right anodyne",
-   "results": "{\"t\": \"2026-10-16T12:49:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a monomorphism A to B of simplicial sets the induced inclusion of right cones A star point to B star point is right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.J\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"ebc689b5406b58f7\"}",
+   "query": "For a simplicial monomorphism A to B, coning with a point gives a right anodyne map",
+   "results": "{\"t\": \"2026-10-16T14:15:15Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial monomorphism A to B, coning with a point gives a right anodyne map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.horn.ι\"], \"digest\": \"906cc171c210c0ee\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) include ALL horns. anodyneExtensions and its stability instances (AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:65-91, read) concern Kan anodyne maps, not the class generated by right horns. horn face and pushout results concern individual horn presentations, not right cones of arbitrary monomorphisms. No one-line specialization gives the statement."
+   "verdict": "no match: inspected CategoryWithFibrations.lean:38-62 and Skeleton.lean:423-446; all-horn/cofibration results and relative boundary cells do not give a right-cone theorem. The boundary-cell result is already an existing DAG Mathlib leaf."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"anodyne\"",
-   "results": "{\"t\": \"2026-10-16T12:49:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "query": "\"SSet\", \"horn\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T14:15:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"horn\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.RankFunction.ιSigmaHorn_jointly_surjective\"], \"digest\": \"4d3b2bb733874872\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) include ALL horns. anodyneExtensions and its stability instances (AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:65-91, read) concern Kan anodyne maps, not the class generated by right horns. horn face and pushout results concern individual horn presentations, not right cones of arbitrary monomorphisms. No one-line specialization gives the statement."
+   "verdict": "no match: inspected AnodyneExtensions/RelativeCellComplex.lean:280-303; jointly_surjective concerns coproduct horn domains, without coning or a right-horn class."
   },
   {
    "tool": "grep",
-   "query": "right.?anodyne|rightAnodyne|join.*anodyne|anodyne.*join",
-   "results": "{\"t\": \"2026-10-16T12:49:23Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|rightAnodyne|join.*anodyne|anodyne.*join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "right.?anodyne|rightAnodyne|join.*horn|cone.*horn",
+   "results": "{\"t\": \"2026-10-16T14:15:11Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|rightAnodyne|join.*horn|cone.*horn\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) include ALL horns. anodyneExtensions and its stability instances (AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:65-91, read) concern Kan anodyne maps, not the class generated by right horns. horn face and pushout results concern individual horn presentations, not right cones of arbitrary monomorphisms. No one-line specialization gives the statement."
+   "verdict": "no match for the item: the targeted right-anodyne/join grep has zero hits; the declaration grep locates all-horn generators and the existing boundary-cell leaf, read in their source."
   },
   {
    "tool": "leansearch",
-   "query": "join with terminal point sends simplicial set monomorphisms to right anodyne maps",
-   "results": "{\"t\": \"2026-10-16T12:49:23Z\", \"tool\": \"leansearch\", \"query\": \"join with terminal point sends simplicial set monomorphisms to right anodyne maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.degenerate_iff_of_mono\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.Augmented.stdSimplex_map_right\", \"SSet.unitHomEquiv\", \"SSet.nonDegenerate_iff_of_mono\", \"SSet.Augmented.stdSimplex\", \"SSet.hoFunctor.preservesTerminal'\", \"CategoryTheory.Join.inclRightFaithful\"], \"digest\": \"e472628392ee4750\"}",
+   "query": "Coning a monomorphism of simplicial sets produces a right anodyne map",
+   "results": "{\"t\": \"2026-10-16T14:15:12Z\", \"tool\": \"leansearch\", \"query\": \"Coning a monomorphism of simplicial sets produces a right anodyne map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"CategoryTheory.Limits.coneOfIsSplitMono_ι\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.Subcomplex.instIsIsoToRangeOfMono\", \"SSet.modelCategoryQuillen.J\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\"], \"digest\": \"3633e9697cfeb577\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) include ALL horns. anodyneExtensions and its stability instances (AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:65-91, read) concern Kan anodyne maps, not the class generated by right horns. horn face and pushout results concern individual horn presentations, not right cones of arbitrary monomorphisms. No one-line specialization gives the statement."
+   "verdict": "no match: all-horn cofibration and ordinary-category cone results do not state right anodyneness of coned monomorphisms."
   },
   {
    "tool": "leanfinder",
-   "query": "Coning a boundary inclusion of simplicial sets produces the last horn inclusion so cone monomorphisms are right anodyne",
-   "results": "{\"t\": \"2026-10-16T12:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"Coning a boundary inclusion of simplicial sets produces the last horn inclusion so cone monomorphisms are right anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.ι\", \"SSet.horn.ι_ι\", \"SSet.horn₂₂.ι₁₂\", \"SSet.horn.faceι\", \"SSet.horn₃₂.ι₃\", \"SSet.face_le_horn\", \"SSet.horn₃₂.ι₀\"], \"digest\": \"3956f8c89e536481\"}",
+   "query": "The cone on a boundary inclusion is the last horn and monomorphisms are generated by boundary cells",
+   "results": "{\"t\": \"2026-10-16T14:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"The cone on a boundary inclusion is the last horn and monomorphisms are generated by boundary cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.ι\", \"SSet.horn_eq_iSup\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.faceι\"], \"digest\": \"7a40334aedee2f6b\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) include ALL horns. anodyneExtensions and its stability instances (AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean:65-91, read) concern Kan anodyne maps, not the class generated by right horns. horn face and pushout results concern individual horn presentations, not right cones of arbitrary monomorphisms. No one-line specialization gives the statement."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The right cone functor on simplicial sets takes every monomorphism into the weakly saturated class generated by final horns",
-   "results": "{\"t\": \"2026-10-16T12:23:02Z\", \"tool\": \"leanfinder\", \"query\": \"The right cone functor on simplicial sets takes every monomorphism into the weakly saturated class generated by final horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.I\", \"SSet.skeletonOfMono_obj_eq_top\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\"], \"digest\": \"6c817c54b5d6837f\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
+   "verdict": "no match: inspected CategoryWithFibrations.lean:38-62 and Skeleton.lean:423-446; all-horn/cofibration results and relative boundary cells do not give a right-cone theorem. The boundary-cell result is already an existing DAG Mathlib leaf."
   },
   {
    "tool": "grep",
-   "query": "cone|join|final|terminal",
-   "results": "{\"t\": \"2026-10-16T12:23:20Z\", \"tool\": \"grep\", \"query\": \"cone|join|final|terminal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"5b96a086ca62d79f\"}",
+   "query": "def J|horn_ι_mem_J|relativeCellComplexOfMono|ιSigmaHorn_jointly_surjective",
+   "results": "{\"t\": \"2026-10-16T14:15:31Z\", \"tool\": \"grep\", \"query\": \"def J|horn_ι_mem_J|relativeCellComplexOfMono|ιSigmaHorn_jointly_surjective\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\"], \"digest\": \"7511faa5e310ab02\"}",
    "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"horn\", \"Mono\"",
-   "results": "{\"t\": \"2026-10-16T12:23:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"horn\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.innerHornInclusions_le_monomorphisms\"], \"digest\": \"32d28d1195a52919\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independently read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:38-62 (boundary and all-horn generators), AlgebraicTopology/Quasicategory/InnerFibration.lean:57-89 (inner horns and terminal simplicial-set codomains), CategoryTheory/Comma/Over/Basic.lean:305-307 (ordinary slice identity terminal), and AlgebraicTopology/SimplicialSet/HomotopyCat.lean:559-561 (homotopy category of the point). None states a normalized identity cone on a quasicategory or right anodyneness of coned monomorphisms."
+   "verdict": "no match for the item: the targeted right-anodyne/join grep has zero hits; the declaration grep locates all-horn generators and the existing boundary-cell leaf, read in their source."
   },
   {
    "tool": "leanfinder",
-   "query": "The join of a simplicial monomorphism with the identity of a point belongs to the weakly saturated right horn class",
-   "results": "{\"t\": \"2026-10-16T12:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"The join of a simplicial monomorphism with the identity of a point belongs to the weakly saturated right horn class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.face_le_horn\", \"SSet.horn.edge\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn.faceι\", \"SSet.horn.ι\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn.face\"], \"digest\": \"bbf0896fd255aa40\"}",
+   "query": "In simplicial sets the join with the terminal simplex sends injective maps to the weakly saturated class of noninitial horn inclusions",
+   "results": "{\"t\": \"2026-10-16T14:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"In simplicial sets the join with the terminal simplex sends injective maps to the weakly saturated class of noninitial horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn_obj\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.horn.ι\", \"SSet.horn_obj_zero\", \"SSet.horn₃₂.ι₁_desc\"], \"digest\": \"d2cef24a590b6e55\"}",
    "date": "2026-10-16",
-   "verdict": "no match: modelCategoryQuillen.J and horn_ι_mem_J (AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:46-55, read) concern all horn generators. Individual face/horn inclusions do not assert right anodyneness of the cone of an arbitrary monomorphism."
+   "verdict": "no match: the returned SSet.modelCategoryQuillen.J and horn_ι_mem_J concern all horns; read CategoryWithFibrations.lean:35-65. None states the right-cone assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T14:32:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"disjoint_nhdsSet_principal\", \"disjoint_principal_nhdsSet\", \"SeparatedNhds.disjoint_nhdsSet\", \"IsCompact.disjoint_nhdsSet_left\", \"IsCompact.disjoint_nhdsSet_right\", \"nhdsSet_prod_le_of_disjoint_cocompact\", \"prod_nhdsSet_le_of_disjoint_cocompact\", \"IsCompact.disjoint_nhdsSet_nhds\"], \"digest\": \"f4b4f5f75c1ca3f3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned neighbourhood and disjointness lemmas concern topology, not the simplicial join."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?anodyne|rightAnodyne|join.*horn|cone.*horn|def join|joinFunctor",
+   "results": "{\"t\": \"2026-10-16T14:32:58Z\", \"tool\": \"grep\", \"query\": \"right.?anodyne|rightAnodyne|join.*horn|cone.*horn|def join|joinFunctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: targeted AlgebraicTopology source search returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-infinity-terminal-anodyne",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-infinity-cone-mono-right-anodyne",
+  "worker": "stage1",
+  "summary": "Expanded the relative skeletal filtration into single-cell attachments, computed the final horn, and checked degreewise that coning preserves pushouts and nonempty ordinal colimits. Reused the existing Mathlib boundary-filtration leaf; zero new nodes. The reviewed parent child is now present on the shared base, with the assigned statement and ancestry unchanged.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2: derived coefficient-adjunction Hom/derived-limit calculation. The cone lemma realizes the inherited auxiliary stable-enhancement/final-index branch through the recorded via chain; it is not a literal claim in the current blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-1bd4940b3",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-1bd4940b3 (reviewer sub-agent of L); spot-checked: Read the item, both cited statements, report, unit/chapter route and cited Kerodon sources in full. All four proof steps check; 780 horn-membership and 106389 simplicial-operator comparisons passed. No new nodes, duplicates, missing dependencies or repairs. Concrete findings are in review.md; no tool_uses accepted."
+ }
 }

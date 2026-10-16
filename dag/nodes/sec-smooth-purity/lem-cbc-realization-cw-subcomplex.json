@@ -16,7 +16,7 @@
  },
  "kind": "statement",
  "title": "Nondegenerate cell presentation and subset embeddings of simplicial realization",
- "statement": "Let $K$ be a small simplicial set with geometric realization as in [def-cbc-enhanced-diagrams-cones], and let $q_\\sigma:|\\Delta^n|\\to|K|$ be its continuous characteristic map for $\\sigma\\in K_n$. Every point of $|K|$ has a unique representative $(\\sigma,t)$ with $\\sigma$ nondegenerate and all barycentric coordinates of $t$ strictly positive; thus these images of simplex interiors are pairwise disjoint and cover $|K|$. Every simplex $\\tau\\in K_n$ is a degeneracy of a unique nondegenerate simplex $\\sigma\\in K_m$: there is an order-preserving surjection $\\alpha:[n]\\twoheadrightarrow[m]$ with $\\tau=K(\\alpha)(\\sigma)$, and $q_\\tau=q_\\sigma\\circ\\alpha_*$, where $(\\alpha_*t)_j=\\sum_{\\alpha(i)=j}t_i$. For every order-preserving map $\\beta:[m]\\to[n]$, the realization relation is $q_{K(\\beta)(\\sigma)}=q_\\sigma\\circ\\beta_*$, where $(\\beta_*t)_j=\\sum_{\\beta(i)=j}t_i$. A subset $B\\subseteq|K|$ is closed if and only if $q_\\tau^{-1}(B)$ is closed in $|\\Delta^n|$ for every simplex $\\tau\\in K_n$. For a simplicial subset $A\\subseteq K$, the inclusion-induced map $|A|\\to|K|$ is a homeomorphism onto a closed subset, and its image consists exactly of the points whose nondegenerate representative belongs to $A$. Here a simplicial subset is a family of subsets of $K_n$ stable under all face and degeneracy maps, and nondegenerate means not in the image of a degeneracy map.",
+ "statement": "Let $K$ be a small simplicial set with geometric realization as in [def-cbc-enhanced-diagrams-cones], and let $q_\\sigma:|\\Delta^n|\\to|K|$ be its continuous characteristic map for $\\sigma\\in K_n$. Every point of $|K|$ has a unique representative $(\\sigma,t)$ with $\\sigma$ nondegenerate and all barycentric coordinates of $t$ strictly positive; thus these images of simplex interiors are pairwise disjoint and cover $|K|$. Every simplex $\\tau\\in K_n$ is a degeneracy of a unique nondegenerate simplex $\\sigma\\in K_m$: there is an order-preserving surjection $\\alpha:[n]\\twoheadrightarrow[m]$ with $\\tau=K(\\alpha)(\\sigma)$, and $q_\\tau=q_\\sigma\\circ\\alpha_*$, where $(\\alpha_*t)_j=\\sum_{\\alpha(i)=j}t_i$. For every simplex $\\rho\\in K_n$ and every order-preserving map $\\beta:[m]\\to[n]$, the realization relation is $q_{K(\\beta)(\\rho)}=q_\\rho\\circ\\beta_*$, where $(\\beta_*t)_j=\\sum_{\\beta(i)=j}t_i$. A subset $B\\subseteq|K|$ is closed if and only if $q_\\tau^{-1}(B)$ is closed in $|\\Delta^n|$ for every simplex $\\tau\\in K_n$. For a simplicial subset $A\\subseteq K$, the inclusion-induced map $|A|\\to|K|$ is a homeomorphism onto a closed subset, and its image consists exactly of the points whose nondegenerate representative belongs to $A$. Here a simplicial subset is a family of subsets of $K_n$ stable under all face and degeneracy maps, and nondegenerate means not in the image of a degeneracy map.",
  "source": {
   "document": "literature/kerodon.pdf",
   "place": "WANTED: archived Kerodon, Proposition 1.1.3.8 (Tag 0014, https://kerodon.net/tag/0014: unique nondegenerate decomposition); proof of Proposition 1.2.3.4 and Remark 1.2.3.12 in Subsection 1.2.3 (Tag 001X, https://kerodon.net/tag/001X: nondegenerate cells), and Remark 1.2.3.16 there (simplex-colimit topology); Subsection 3.6.1 (Tag 0130, https://kerodon.net/tag/0130), paragraph immediately before Proposition 3.6.1.11 (closed embeddings). Online originals independently read on 2026-10-16. No Stacks tag is claimed for these topological assertions."
@@ -24,9 +24,94 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $Q:\\coprod_{n,\\tau\\in K_n}|\\Delta^n|\\to|K|$ be the quotient map in [def-cbc-enhanced-diagrams-cones]. Its restriction $q_\\tau$ to each summand is continuous. The generating quotient identification gives $q_{K(\\beta)(\\sigma)}(t)=q_\\sigma(\\beta_*t)$ for every monotone $\\beta$, with exactly the coordinate sums in the statement. A subset $B$ of the quotient is closed exactly when $Q^{-1}(B)$ is closed, by applying the definition of the quotient topology to its complement. A subset of this disjoint union is closed exactly when its intersection with each summand is closed, by the definition of the disjoint-union topology. This proves the asserted closed-set criterion. The map $\\beta_*$ is continuous because each of its finitely many coordinates is a finite sum of coordinates.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Subsection 1.2.3 (https://kerodon.net/tag/001X), Proposition 1.2.3.4, Remark 1.2.3.12 and Remark 1.2.3.16; Subsection 3.6.1 (https://kerodon.net/tag/0130), closed-embedding paragraph before Proposition 3.6.1.11. Read online 2026-10-16. Agent proof directly from the realization quotient and unique nondegenerate decomposition, rather than assuming a CW structure."
+   }
+  },
+  {
+   "text": "For every simplex $\\tau$, apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to obtain its unique nondegenerate ancestor $\\sigma$ and surjection $\\alpha$. Step 1 gives $q_\\tau=q_\\sigma\\circ\\alpha_*$. To normalize an arbitrary representative $(\\tau,t)$ with $\\tau\\in K_n$, let $J=\\{i:t_i>0\\}$, enumerate it by the increasing injection $i_J:[r]\\hookrightarrow[n]$, and let $u$ be the vector of its positive coordinates. The sum-one condition makes $J$ nonempty, $u\\in|\\Delta^r|$, and $t=(i_J)_*u$. Decompose $K(i_J)(\\tau)=K(\\alpha)(\\sigma)$ by the cited node, with $\\alpha:[r]\\twoheadrightarrow[m]$ and $\\sigma$ nondegenerate. The quotient relations give $(\\tau,t)\\sim(\\sigma,\\alpha_*u)$. Every coordinate of $\\alpha_*u$ is strictly positive, since the corresponding fiber of the surjection is nonempty. Define this last pair to be the normal form of $(\\tau,t)$; the uniqueness clause of the cited node makes this a well-defined function on representatives.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion from unique nondegenerate decomposition to barycentric normal forms."
+   }
+  },
+  {
+   "text": "We check that this normal form is unchanged by every generating relation $(K(\\beta)(\\tau),t)\\sim(\\tau,\\beta_*t)$, where $\\beta:[m]\\to[n]$. Let $J\\subseteq[m]$ be the positive support of $t$, let $H=\\beta(J)\\subseteq[n]$, and enumerate them by $i_J:[r]\\hookrightarrow[m]$ and $i_H:[s]\\hookrightarrow[n]$. Because all coordinates are nonnegative, the positive support of $\\beta_*t$ is exactly $H$. There is a unique increasing surjection $\\gamma:[r]\\twoheadrightarrow[s]$ with $\\beta i_J=i_H\\gamma$: its value is the position in $H$ of $\\beta(i_J(k))$. If $u$ is the positive-coordinate vector of $t$, the positive-coordinate vector of $\\beta_*t$ is $v=\\gamma_*u$. Decompose $K(i_H)(\\tau)=K(\\alpha)(\\sigma)$ using [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. Functoriality gives $K(i_J)K(\\beta)(\\tau)=K(\\alpha\\gamma)(\\sigma)$. The composite $\\alpha\\gamma$ is surjective and $\\sigma$ is nondegenerate, so uniqueness in the cited node says this is exactly the decomposition used to normalize the left side. Its normal form is $(\\sigma,(\\alpha\\gamma)_*u)$; that of the right side is $(\\sigma,\\alpha_*v)$. They coincide, since in each coordinate both sums are $\\sum_{k:\\alpha(\\gamma(k))=j}u_k$. Thus normal forms are invariant under a generating relation, its reverse, and finite chains of them, hence descend to the equivalence classes of the realization quotient.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion from unique nondegenerate decomposition to barycentric normal forms."
+   }
+  },
+  {
+   "text": "A representative $(\\sigma,t)$ already having $\\sigma$ nondegenerate and $t$ strictly positive is its own normal form: its support injection is the identity, and its unique decomposition is the identity surjection with ancestor $\\sigma$. Every representative is equivalent to its normal form by step 2. If two such nondegenerate interior representatives determine the same realization point, step 3 makes their normal forms equal, hence they are the same pair. This proves existence and uniqueness, and therefore the disjoint covering by nondegenerate simplex interiors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Subsection 1.2.3 (https://kerodon.net/tag/001X), Proposition 1.2.3.4, Remark 1.2.3.12 and Remark 1.2.3.16; Subsection 3.6.1 (https://kerodon.net/tag/0130), closed-embedding paragraph before Proposition 3.6.1.11. Read online 2026-10-16. Agent proof directly from the realization quotient and unique nondegenerate decomposition, rather than assuming a CW structure."
+   }
+  },
+  {
+   "text": "Let $A\\subseteq K$ be a simplicial subset. For any $z\\in A_n$, decompose $z=K(\\alpha)(\\sigma)$ by [lem-weil-pbc-simplicial-set-nondegenerate-decomposition]. Choose an increasing section $s:[m]\\to[n]$ of $\\alpha$ by taking the least element in each fiber; the fibers are consecutive nonempty intervals, so $s$ is increasing. Then $\\sigma=K(s)(z)\\in A_m$. Thus a simplex of $A$ is nondegenerate in $A$ if and only if it is nondegenerate in $K$, and its unique decomposition and its barycentric normal form are the same in both simplicial sets. Consequently the realization map $e:|A|\\to|K|$ is injective and its image is exactly the points whose nondegenerate representative belongs to $A$. This map is continuous: by [def-cbc-enhanced-diagrams-cones] its composite with the quotient map presenting $|A|$ is $q_z$ on each simplex summand $z\\in A_n$, hence continuous; the defining quotient topology implies continuity of $e$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017R, lemma-splitting-simplicial-sets; agent expansion from unique nondegenerate decomposition to barycentric normal forms."
+   }
+  },
+  {
+   "text": "To prove that $e$ is closed, fix any closed $C\\subseteq|A|$ and put $B=e(C)$. We prove by strong induction on $n$ that $q_\\tau^{-1}(B)$ is closed for every $\\tau\\in K_n$. If $\\tau\\in A_n$, the equation $q_\\tau=e\\circ q^A_\\tau$ and injectivity of $e$ give $q_\\tau^{-1}(B)=(q^A_\\tau)^{-1}(C)$, which is closed. If $\\tau$ is degenerate, [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] writes $\\tau=K(\\alpha)(\\sigma)$ with $\\dim\\sigma<n$ (a surjective endomorphism of $[n]$ is the identity). Step 1 gives $q_\\tau^{-1}(B)=\\alpha_*^{-1}(q_\\sigma^{-1}(B))$, closed by induction and continuity of the coordinate sums. Finally suppose $\\tau$ is nondegenerate and outside $A_n$. By steps 4 and 5, its simplex interior maps outside $e(|A|)$, so $q_\\tau^{-1}(B)$ lies in the boundary. For $n=0$ that boundary is empty. For $n>0$, on the closed face $F_i=\\{t_i=0\\}$, the insertion-of-zero map $(\\delta_i)_*:|\\Delta^{n-1}|\\to F_i$ is a homeomorphism with inverse deleting that coordinate, and $q_\\tau\\circ(\\delta_i)_*=q_{K(\\delta_i)(\\tau)}$. Induction makes the inverse image on each face closed in that face, hence in the whole simplex because $F_i$ is closed. Their finite union is exactly $q_\\tau^{-1}(B)$ and is closed. This completes the induction. The quotient closed-set criterion of step 1, using [def-cbc-enhanced-diagrams-cones], now shows that $B$ is closed in $|K|$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Subsection 1.2.3 (https://kerodon.net/tag/001X), Proposition 1.2.3.4, Remark 1.2.3.12 and Remark 1.2.3.16; Subsection 3.6.1 (https://kerodon.net/tag/0130), closed-embedding paragraph before Proposition 3.6.1.11. Read online 2026-10-16. Agent proof directly from the realization quotient and unique nondegenerate decomposition, rather than assuming a CW structure."
+   }
+  },
+  {
+   "text": "Taking $C=|A|$ in step 6 shows that $Y=e(|A|)$ is closed in $|K|$. The continuous injective map of step 5, corestricted to $Y$ with its subspace topology, is a continuous bijection $|A|\\to Y$. For each closed $C\\subseteq|A|$, step 6 makes $e(C)$ closed in $|K|$ and hence in $Y$. Thus the inverse bijection is continuous by the closed-set criterion for continuity, and the corestriction is a homeomorphism. Its image description is step 5. This includes $A=\\varnothing$ and $A=K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kerodon.pdf",
+    "place": "WANTED: archived Kerodon, Subsection 1.2.3 (https://kerodon.net/tag/001X), Proposition 1.2.3.4, Remark 1.2.3.12 and Remark 1.2.3.16; Subsection 3.6.1 (https://kerodon.net/tag/0130), closed-embedding paragraph before Proposition 3.6.1.11. Read online 2026-10-16. Agent proof directly from the realization quotient and unique nondegenerate decomposition, rather than assuming a CW structure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification choice, through the inherited finite-nerve-coherence ancestry. Agent proof of realization normal forms and closed subset embeddings from the explicit quotient and Stacks 017R; checked against online Kerodon 1.2.3 and 3.6.1, whose archive is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,15 +168,122 @@
    "results": "{\"t\": \"2026-10-16T12:55:28Z\", \"tool\": \"grep\", \"query\": \"IsClosedEmbedding.*toTop|toTop.*IsClosedEmbedding|unique_nonDegenerate_simplex|isCompact_sphere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean\", \"Mathlib/Analysis/CStarAlgebra/Unitary/Connected.lean\", \"Mathlib/Analysis/Complex/OpenMapping.lean\"], \"digest\": \"8db184391cfaea29\"}",
    "date": "2026-10-16",
    "verdict": "no full topology match: grep found combinatorial unique_nonDegenerate_simplex and sphere compactness, but no realization closed-embedding theorem. Read Degenerate.lean:212-242 and SingularSet.lean:66-85."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point of geometric realization has unique nondegenerate simplex interior representative and realization of simplicial subset is a closed embedding",
+   "results": "{\"t\": \"2026-10-16T13:55:25Z\", \"tool\": \"leanfinder\", \"query\": \"Every point of geometric realization has unique nondegenerate simplex interior representative and realization of simplicial subset is a closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.N.mk'_surjective\", \"SSet.S.existsUnique_n\", \"SSet.N.mk_surjective\", \"SSet.S.mk_surjective\", \"SSet.orderEmbeddingN_apply\", \"SSet.orderEmbeddingN\", \"SSet.Subcomplex.N.mk_surjective\", \"SSet.S.toN\"], \"digest\": \"d466b8f6d716e66b\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.unique_nonDegenerate_simplex, SSet.toTop, IsClosedEmbedding",
+   "results": "{\"t\": \"2026-10-16T13:55:26Z\", \"tool\": \"loogle\", \"query\": \"SSet.unique_nonDegenerate_simplex, SSet.toTop, IsClosedEmbedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsClosedEmbedding'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'IsClosedEmbedding'; retried successfully with SSet.toTop. No absence conclusion drawn from this invalid pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "unique_nonDegenerate_simplex|toTop|IsClosedEmbedding",
+   "results": "{\"t\": \"2026-10-16T13:55:26Z\", \"tool\": \"grep\", \"query\": \"unique_nonDegenerate_simplex|toTop|IsClosedEmbedding\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\"], \"digest\": \"2ef07b8353566df8\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "grep",
+   "query": "unique_nonDegenerate_simplex|SSet.toTop|closed.*embedding|geometric.*realization",
+   "results": "{\"t\": \"2026-10-16T13:58:07Z\", \"tool\": \"grep\", \"query\": \"unique_nonDegenerate_simplex|SSet.toTop|closed.*embedding|geometric.*realization\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Splitting.lean\"], \"digest\": \"74de448f3377c45a\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point in geometric realization has unique nondegenerate simplex interior representative; simplicial subset realization is closed embedding",
+   "results": "{\"t\": \"2026-10-16T13:58:07Z\", \"tool\": \"leansearch\", \"query\": \"Every point in geometric realization has unique nondegenerate simplex interior representative; simplicial subset realization is closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.S.existsUnique_n\", \"SSet.N.subcomplex_injective_iff\", \"SSet.S.subcomplex_toN\", \"SSet.toTop\", \"SSet.S.toN\", \"SSet.Subcomplex.N.ext_iff\", \"sSetTopAdj\", \"SSet.N.subcomplex_injective\"], \"digest\": \"763dc6ec339595d1\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop, SSet.unique_nonDegenerate_simplex, realization, IsClosedEmbedding",
+   "results": "{\"t\": \"2026-10-16T13:58:07Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, SSet.unique_nonDegenerate_simplex, realization, IsClosedEmbedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'realization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: loogle: unknown identifier 'realization'; retried successfully with SSet.toTop. No absence conclusion drawn from this invalid pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric realization simplicial subset closed embedding unique nondegenerate interior representative",
+   "results": "{\"t\": \"2026-10-16T13:58:08Z\", \"tool\": \"leanfinder\", \"query\": \"geometric realization simplicial subset closed embedding unique nondegenerate interior representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.N.mk_surjective\", \"SSet.S.existsUnique_n\", \"SSet.orderEmbeddingN\", \"SSet.S.toN\", \"SSet.N.mk'_surjective\", \"SSet.Subcomplex.N.mk\", \"SSet.Subcomplex.N.toN\", \"SSet.Subcomplex.N.mk_simplex\"], \"digest\": \"a51cc57410fa138a\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop",
+   "results": "{\"t\": \"2026-10-16T14:00:07Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.toTop\", \"instIsLeftAdjointSSetTopCatToTop\", \"sSetTopAdj\", \"SSet.toTopSimplex\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"sSetTopAdj_unit_app_app_down\", \"SSet.stdSimplexToTop_app_app_hom_apply_down_hom_apply\", \"instUniqueCarrierObjSSetTopCatToTopSimplexCategoryStdSimplexMkOfNatNat\"], \"digest\": \"7093aa553cc30060\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric realization|closed.*embed|nondegenerate.*interior",
+   "results": "{\"t\": \"2026-10-16T14:00:07Z\", \"tool\": \"grep\", \"query\": \"geometric realization|closed.*embed|nondegenerate.*interior\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\"], \"digest\": \"c9743d12552a5cbe\"}",
+   "date": "2026-10-16",
+   "verdict": "no full match: read SingularSet.lean:65-85 and SimplicialSet/TopAdj.lean:37-55; these give the realization functor, adjunction and individual standard simplex homeomorphisms, not general realization point normal forms or closed embeddings. Read SimplicialSet/Degenerate.lean:114-124,217-241: the combinatorial decomposition is already the existing leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which this proof cites."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop.*(mono|[Ee]mbed)|([Cc]losed[Ee]mbedding|[Ii]s[Ee]mbedding).*toTop|unique.*[Rr]ealiz|[Rr]ealiz.*unique",
+   "results": "{\"t\": \"2026-10-16T14:16:07Z\", \"tool\": \"grep\", \"query\": \"toTop.*(mono|[Ee]mbed)|([Cc]losed[Ee]mbedding|[Ii]s[Ee]mbedding).*toTop|unique.*[Rr]ealiz|[Rr]ealiz.*unique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean\", \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean\", \"Mathlib/Topology/Algebra/Module/Spaces/UniformConvergenceCLM.lean\", \"Mathlib/Topology/UniformSpace/Basic.lean\", \"Mathlib/Topology/UniformSpace/Basic.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\"], \"digest\": \"83ec80eba4b91c60\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no full match. Semantic hits give SSet.toTop and combinatorial nondegenerate simplices; Loogle found no declaration involving both SSet.toTop and CategoryTheory.Mono. The broad grep also returned unrelated ringed-space, uniform-space and model-theory results; the restricted grep returned only standard-simplex realization API and an Op.lean TODO. Read SingularSet.lean:65-96, SimplicialSet/TopAdj.lean:37-65 and SimplicialSet/Degenerate.lean:114-124,217-241. The latter is already the cited decomposition Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.toTop, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-16T14:16:08Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no full match. Semantic hits give SSet.toTop and combinatorial nondegenerate simplices; Loogle found no declaration involving both SSet.toTop and CategoryTheory.Mono. The broad grep also returned unrelated ringed-space, uniform-space and model-theory results; the restricted grep returned only standard-simplex realization API and an Op.lean TODO. Read SingularSet.lean:65-96, SimplicialSet/TopAdj.lean:37-65 and SimplicialSet/Degenerate.lean:114-124,217-241. The latter is already the cited decomposition Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric realization sends injective morphisms of simplicial sets to closed embeddings; every point has a unique positive barycentric nondegenerate representative",
+   "results": "{\"t\": \"2026-10-16T14:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization sends injective morphisms of simplicial sets to closed embeddings; every point has a unique positive barycentric nondegenerate representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SimplexCategory.toTop\", \"SSet.N.mk'_surjective\", \"SSet.S.toN\", \"SSet.N.toS\", \"SSet.stdSimplex.mem_nonDegenerate_iff_mono\", \"SimplexCategory.toTop₀_map\", \"SSet.N.mk_surjective\"], \"digest\": \"12933e30cfaa17d8\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no full match. Semantic hits give SSet.toTop and combinatorial nondegenerate simplices; Loogle found no declaration involving both SSet.toTop and CategoryTheory.Mono. The broad grep also returned unrelated ringed-space, uniform-space and model-theory results; the restricted grep returned only standard-simplex realization API and an Op.lean TODO. Read SingularSet.lean:65-96, SimplicialSet/TopAdj.lean:37-65 and SimplicialSet/Degenerate.lean:114-124,217-241. The latter is already the cited decomposition Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "grep",
+   "query": "realization|toTop|[Cc]losed[Ee]mbedding",
+   "results": "{\"t\": \"2026-10-16T14:16:27Z\", \"tool\": \"grep\", \"query\": \"realization|toTop|[Cc]losed[Ee]mbedding\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\"], \"digest\": \"ed8fc4e25ae7608d\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reader: no full match. Semantic hits give SSet.toTop and combinatorial nondegenerate simplices; Loogle found no declaration involving both SSet.toTop and CategoryTheory.Mono. The broad grep also returned unrelated ringed-space, uniform-space and model-theory results; the restricted grep returned only standard-simplex realization API and an Op.lean TODO. Read SingularSet.lean:65-96, SimplicialSet/TopAdj.lean:37-65 and SimplicialSet/Degenerate.lean:114-124,217-241. The latter is already the cited decomposition Mathlib leaf, not a new node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-cbc-realization-compact-finite-support",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-realization-cw-subcomplex",
+  "worker": "stage1",
+  "summary": "Proved the cell presentation by deleting zero barycentric coordinates and applying the existing unique-nondegenerate-decomposition Mathlib leaf. Checked normal-form invariance under every monotone realization relation explicitly. Proved closedness for the image of every closed subset of a simplicial subset by strong induction on simplex dimension, yielding the closed embedding without assuming any CW theorem. No new nodes. Second reading corrected the general realization-relation clause to quantify its own simplex in the codomain degree, without changing its intended mathematical content. The assigned node was absent from the shared checkout and was recovered read-only from the synced live DAG mirror.",
+  "blueprint": "Realizes the inherited expansion of the opening compactification-choice sentence of thm-cbc-finite-level-proetale: the finite-support proof used for filtered-nerve contraction needs exactly the nondegenerate interior partition, quotient closed-set criterion and closed subset embedding proved in steps 1--7. This is below the fixed compact-support-base-change unit, not a replacement for its etale/pro-etale route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-3d7e9db49",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-3d7e9db49 (reviewer sub-agent of L); spot-checked: Read all seven proof steps and cited statements in full. Checked Stacks 017R, Kerodon realization sources, Mathlib decomposition, unit route and exact archived targets. Normal-form invariance and closed-image induction cover empty, degenerate and identified-boundary cases. No new nodes, circular dependencies or repairs. Detailed checks are in review.md."
+ }
 }

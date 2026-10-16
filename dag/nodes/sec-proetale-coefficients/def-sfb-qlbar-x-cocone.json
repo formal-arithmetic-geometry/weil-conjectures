@@ -3,36 +3,119 @@
  "blueprint": {
   "is": "def-sfb-qlbar-x-cocone",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The cocone $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$",
- "statement": "Let $\\ell$ be a prime and $X$ a scheme. Consider the diagram $E\\mapsto E_X$\n([def-sfb-subfield-coefficient-ring]), indexed by the poset of finite\nsubextensions $E\\subseteq\\Qlb$ of $\\mathbb Q_\\ell$. Its transition maps\n$E_X\\to F_X$ are $p_X^*$ of the inclusions $\\underline E\\to\\underline F$.\n\nThe cocone over this diagram has vertex $\\overline{\\mathbf Q}_{\\ell,X}$\n([def-sfb-qlbar-coefficient-ring]) and legs $E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$.\nIt is defined as the image under the functor $p_X^*$\n([sk-def-sfb-pullback-from-point]) of the cocone of inclusions\n$\\underline E\\to\\underline{\\Qlb}$ of [sk-prop-sfb-qlbar-colimit-point].",
+ "statement": "Let $\\ell$ be a prime, fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and let $X$ be a scheme. Let $I$ be the poset of finite intermediate fields $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Qlb$ ([sk-def-sfb-qlbar-condensed]), regarded as a category with one arrow $E\\to F$ exactly when $E\\subseteq F$. Write $p_X^*$ for the functor of [sk-def-sfb-pullback-from-point].\n\nDefine $D_X:I\\to\\Sh(X_{\\mathrm{proét}},\\Ab)$ by $D_X(E)=E_X=p_X^*\\underline E$ ([def-sfb-subfield-coefficient-ring]) and $D_X(E\\subseteq F)=p_X^*\\iota_{E,F}$, where $\\iota_{E,F}:\\underline E\\to\\underline F$ is [def-sfb-qlbar-subextension-map].\n\nThe cocone in this definition has vertex $\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\Qlb}$ ([def-sfb-qlbar-coefficient-ring]) and leg $p_X^*j_E:E_X\\to\\overline{\\mathbf Q}_{\\ell,X}$ at $E$, where $j_E:\\underline E\\to\\underline{\\Qlb}$ is [def-sfb-qlbar-subextension-to-qlbar]. Equivalently it is the image under $p_X^*$ of the cocone with vertex $\\underline{\\Qlb}$ and legs $j_E$ over the diagram $E\\mapsto\\underline E$, $E\\subseteq F\\mapsto\\iota_{E,F}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.md",
   "place": "node def-sfb-qlbar-x-cocone, order 1553"
  },
  "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pullback-from-point",
   "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-subextension-map",
   "def-sfb-qlbar-coefficient-ring",
-  "sk-def-sfb-pullback-from-point"
+  "def-sfb-qlbar-subextension-to-qlbar"
  ],
  "proof": [
   {
-   "text": "A functor sends cocones to cocones. The diagram is $p_X^*$ applied to the\ndiagram $E\\mapsto\\underline E$.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the finite-subextension poset $I$ of [sk-def-sfb-qlbar-condensed]. The transition maps of [def-sfb-qlbar-subextension-map] satisfy $\\iota_{E,E}=\\mathrm{id}$ and $\\iota_{F,H}\\circ\\iota_{E,F}=\\iota_{E,H}$. Since $p_X^*$ of [sk-def-sfb-pullback-from-point] is a functor, $p_X^*(\\mathrm{id})=\\mathrm{id}$ and $p_X^*(\\iota_{F,H})\\circ p_X^*(\\iota_{E,F})=p_X^*(\\iota_{E,H})$. These are precisely the identity and composition conditions for $D_X$ with object $E_X$ of [def-sfb-subfield-coefficient-ring].",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "def-sfb-qlbar-subextension-map",
+    "sk-def-sfb-pullback-from-point",
+    "def-sfb-subfield-coefficient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.proof.md",
+    "place": "The diagram is p_X^* applied to the diagram E ↦ underline E; functors send cocones to cocones."
+   }
+  },
+  {
+   "text": "The statement of [def-sfb-qlbar-subextension-to-qlbar] gives $j_F\\circ\\iota_{E,F}=j_E$. Apply the functor $p_X^*$ of [sk-def-sfb-pullback-from-point] to this equality: $p_X^*j_F\\circ p_X^*\\iota_{E,F}=p_X^*j_E$. Thus the displayed legs satisfy exactly the cocone condition. Their domains are $E_X$ by [def-sfb-subfield-coefficient-ring] and their common codomain is $\\overline{\\mathbf Q}_{\\ell,X}$ by [def-sfb-qlbar-coefficient-ring]. Applying a functor to a cocone means applying it to its vertex and each leg, so this is also the asserted image cocone.",
+   "uses": [
+    "def-sfb-qlbar-subextension-to-qlbar",
+    "sk-def-sfb-pullback-from-point",
+    "def-sfb-subfield-coefficient-ring",
+    "def-sfb-qlbar-coefficient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.proof.md",
+    "place": "The diagram is p_X^* applied to the diagram E ↦ underline E; functors send cocones to cocones."
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-qlbar-subextension-map",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-subfield-coefficient-ring",
+  "def-sfb-qlbar-subextension-to-qlbar",
+  "def-sfb-qlbar-coefficient-ring"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/def-sfb-qlbar-x-cocone.proof.md",
+  "place": "The diagram is p_X^* applied to the diagram E ↦ underline E; functors send cocones to cocones."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def mapCocone|padicAlgClRingObjCocone",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "No match for this query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor maps a cocone to a cocone by applying the functor to its vertex and legs",
+   "results": "CategoryTheory.Functor.mapCocone; CategoryTheory.Limits.Cocones.functoriality; CategoryTheory.Functor.cocones; CategoryTheory.Functor.LeftExtension.coconeAtFunctor; CategoryTheory.Functor.costructuredArrowMapCocone; CategoryTheory.Limits.Multicofork.map; CategoryTheory.Limits.PushoutCocone.map; CategoryTheory.cocones",
+   "date": "2026-10-16",
+   "verdict": "Generic mapCocone is available; the specific coefficient objects and point inclusion cocone are project definitions, so this is not a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapCocone",
+   "results": "CategoryTheory.Functor.mapCocone; CategoryTheory.Functor.mapCocone_pt; CategoryTheory.Functor.mapCoconeInvMapCocone; CategoryTheory.Functor.mapCoconeMapCoconeInv; CategoryTheory.Functor.mapCoconeMapCocone; CategoryTheory.Functor.mapCoconeWhisker; CategoryTheory.Functor.mapCoconeOp; CategoryTheory.Functor.mapConeOp",
+   "date": "2026-10-16",
+   "verdict": "Generic mapCocone is available; the specific coefficient objects and point inclusion cocone are project definitions, so this is not a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cocone of finite subextension coefficient sheaves into the algebraic closure of the l-adic rationals on the pro-etale site of a scheme, obtained by mapping the condensed inclusion cocone through pullback from a point",
+   "results": "Condensed.fintypeCatAsCofan; LightCondensed.fintypeCatAsCofan; LightCondensed.fintypeCatAsCofanIsColimit; Condensed.fintypeCatAsCofanIsColimit; Condensed.isColimitLocallyConstantPresheafDiagram; Condensed.isColimitLocallyConstantPresheaf_desc_apply; CategoryTheory.PreGaloisCategory.PointedGaloisObject.cocone; LightProfinite.Extend.cocone",
+   "date": "2026-10-16",
+   "verdict": "No match: hits concern finite cofans, locally constant presheaves, Galois objects and generic cocones, not this pro-etale coefficient cocone."
+  },
+  {
+   "tool": "grep",
+   "query": "mapCocone",
+   "results": "Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/ConeCategory.lean; Mathlib/CategoryTheory/Limits/Comma.lean; Mathlib/CategoryTheory/Limits/Comma.lean; Mathlib/CategoryTheory/Limits/Comma.lean; Mathlib/CategoryTheory/Limits/Comma.lean; Mathlib/CategoryTheory/Limits/Comma.lean; Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean",
+   "date": "2026-10-16",
+   "verdict": "Generic mapped-cocone occurrences found; no project-specific coefficient construction in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a cocone under a functor has mapped vertex and mapped components, defining a cocone for the composite diagram",
+   "results": "CategoryTheory.Functor.mapCocone; CategoryTheory.Functor.mapCoconeMapCocone; CategoryTheory.Limits.Cocone.whisker; CategoryTheory.Functor.mapCoconeWhisker; CategoryTheory.Limits.Cocones.functoriality; CategoryTheory.Functor.CoconeTypes.precomp; CategoryTheory.Limits.Cocones.whiskering; CategoryTheory.Limits.Cocone.toCostructuredArrowCocone",
+   "date": "2026-10-16",
+   "verdict": "Generic mapCocone is available; the specific coefficient objects and point inclusion cocone are project definitions, so this is not a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "image of a cone|mapCone|mapCocone",
+   "results": "622; 625; 629; 631; 632",
+   "date": "2026-10-16",
+   "verdict": "Generic mapCocone is available; the specific coefficient objects and point inclusion cocone are project definitions, so this is not a Mathlib leaf."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -54,5 +137,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-qlbar-colimit-x"
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-qlbar-x-cocone",
+  "worker": "stage1",
+  "summary": "Made the finite-subextension diagram and every leg explicit. Replaced the dangling point-colimit reference by the existing inclusion and compatibility definition nodes; expanded the elementary functoriality and cocone checks. No new nodes. Master gives the same mapped cocone, but slopmaster2 has no matching declaration.",
+  "blueprint": "The two sentences of def-sfb-qlbar-x-cocone.proof.md are realized by steps 1 (the composite diagram) and 2 (the mapped cocone). Read the current chapter record and main-20261015 chapter and sk-prop-sfb-qlbar-colimit-x unit; the comparison unit has no dag/units record in this import."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-ff2a54182",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-ff2a54182 (reviewer sub-agent of L); spot-checked: Read the item, route, blueprint sources, and all six cited dependency statements. The definition correctly specifies the finite-subextension diagram and mapped cocone in Sh(X_proét, Ab), with valid functoriality and cocone equations; no colimit theorem is smuggled in. Identity, compositional, base-field, empty-scheme, category, duplicate, Mathlib-search, route, and delivery-errors A–F checks passed. Review written to review.md."
+ }
 }

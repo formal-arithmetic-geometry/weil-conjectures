@@ -28,9 +28,125 @@
   "lem-coef-special-hammock-reduction",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix universes large enough for the replacement categories and all the Hom sets used below to be small. For arbitrary $P,Q$ in a locally small category, precomposition by $P(\\alpha)$ and postcomposition by $Q(\\beta)$ commute, so $D$ is a bisimplicial set. Put $F_m([n])=\\operatorname{disc}D_{m,n}$, where $\\operatorname{disc}$ means the category with these objects and identity arrows only, and put $C_m=\\operatorname{Th}_{\\Delta^{\\mathrm{op}}}F_m$. Precomposition makes $C$ a functor $\\Delta^{\\mathrm{op}}\\to\\mathrm{Cat}$. The category $\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}C$ is isomorphic to $I(P,Q)$: a morphism from $(m,n,h)$ to $(m',n',h')$ consists of $\\alpha:[m]\\to[m']$, $\\beta:[n']\\to[n]$ and the equality $Q(\\beta)h=h'P(\\alpha)$ in the discrete fiber. This gives the stated arrows, identities and composition without model hypotheses.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7 proof, first Grothendieck-construction comparison; Definition 1.5"
+   }
+  },
+  {
+   "text": "Define $E=\\mathrm{KB}_{m\\in\\Delta^{\\mathrm{op}}}\\mathrm{BK}_{n\\in\\Delta^{\\mathrm{op}}}\\operatorname{disc}D_{m,n}$, now viewing a set as a constant simplicial set. For fixed $m$, the Bousfield–Kan diagonal comparison gives $\\mathrm{BK}_n\\operatorname{disc}D_{m,n}\\to D_{m,\\bullet}$, a natural weak equivalence. Its naturality in $m$, the invariance of $\\mathrm{KB}$ under objectwise weak equivalences, and the outer diagonal comparison give a weak equivalence $E\\to\\operatorname{diag}D$. On the summand with both indices $0$, these maps are the identity on $D_{0,0}$.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Lemma 1.3 and Lemma 1.4 applied twice, as in Proposition 3.7 proof"
+   }
+  },
+  {
+   "text": "The inner Thomason comparisons give weak equivalences $\\mathrm{BK}_n\\operatorname{disc}D_{m,n}\\to NC_m$, natural in $m$. Apply $\\mathrm{KB}_m$ and its objectwise invariance, then the outer Thomason comparison. This gives $E\\to N\\operatorname{Gr}_m C_m=NI(P,Q)$, a weak equivalence. Together with Step 2 this is the required general zigzag $\\operatorname{diag}D\\leftarrow E\\to NI(P,Q)$. Every construction is natural in a map of bisimplicial sets: such a map gives functors on the discrete fibers and hence on both Grothendieck constructions. Applying an ordinary functor to $P,Q,h$ gives exactly such a map. The construction does not use augmentations or model structures.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Lemma 1.3, Theorem 1.6 and Proposition 3.7 proof, first two comparison maps"
+   }
+  },
+  {
+   "text": "Now impose the special-resolution hypotheses. Let $A=A_x$ and $B=B_y$ be the categories of trivial fibrations over $x$ and trivial cofibrations under $y$. The functors $a:\\Delta\\to A$ and $b:\\Delta^{\\mathrm{op}}\\to B$ are right and left aspherical respectively by the special-resolution theorem. Its exact hypotheses hold: the augmentations are natural and degreewise trivial fibrations/cofibrations and $P,Q$ have the required Reedy conditions. In particular their augmentation components are weak equivalences, and naturality plus two-out-of-three makes them weakly constant resolutions. No hypothesis on $x$ or $y$ is introduced. The opposite functor $a^{\\mathrm{op}}:\\Delta^{\\mathrm{op}}\\to A^{\\mathrm{op}}$ is left aspherical.",
+   "uses": [
+    "lem-coef-special-resolutions-aspherical",
+    "lem-coef-grothendieck-aspherical-base-change",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.6 and Remark 1.8, as used in Proposition 3.7"
+   }
+  },
+  {
+   "text": "For $u=(v\\to x)\\in A$ define $G(u)=\\operatorname{Th}_{w\\in B}\\operatorname{disc}\\operatorname{Hom}(v,w)$; this is a functor $A^{\\mathrm{op}}\\to\\mathrm{Cat}$ by precomposition. For fixed $m$, the left-aspherical functor $b$ and Grothendieck base change give a left-aspherical functor $C_m\\to G(a(m))$, hence a weak equivalence on nerves. These functors are natural in $m$. Objectwise invariance for the outer $\\operatorname{Gr}$ therefore shows that the first functor in\n$$I(P,Q)=\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}C\\longrightarrow J:=\\operatorname{Gr}_{\\Delta^{\\mathrm{op}}}(G a^{\\mathrm{op}})\\longrightarrow K:=\\operatorname{Gr}_{A^{\\mathrm{op}}}G$$\ninduces a weak equivalence on nerves. Since $a^{\\mathrm{op}}$ is left aspherical, base change for $\\operatorname{Gr}$ makes the second functor right aspherical, so its nerve too is a weak equivalence. This establishes the actual index-forgetting comparison, not just an abstract agreement of homotopy types.",
+   "uses": [
+    "lem-coef-grothendieck-aspherical-base-change",
+    "lem-coef-thomason-grothendieck-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Theorems 1.9–1.10, Theorem 1.6 invariance, and Proposition 3.7 proof, final comparison"
+   }
+  },
+  {
+   "text": "Expand $K$. An object is a triple $(v\\to x,y\\to w,h:v\\to w)$. An arrow to $(v'\\to x,y\\to w',h')$ is a pair $s:v\\to v'$ over $x$, $t:w\\to w'$ under $y$, with $th=h's$. Thus $K\\cong\\mathcal T(x,y)$ on both objects and arrows, using componentwise composition. Under this isomorphism the composite in Step 5 sends $(m,n,h)$ to $(p^m,i_n,h)$ and $(\\alpha,\\beta)$ to $(P(\\alpha),Q(\\beta))$. This is a functor because $p^{m'}P(\\alpha)=p^m$, $Q(\\beta)i_n=i_{n'}$ and the middle square is the defining equation of $I$. Its nerve is the composite already proved to be a weak equivalence. Compose with Steps 2–3 to obtain the displayed zigzag.",
+   "uses": [
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-special-hammock-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7 proof, identification of the double Grothendieck category with the special-hammock category"
+   }
+  },
+  {
+   "text": "We check endpoint naturality with directions explicit. Suppose $u:P'\\to P$ covers $a:x'\\to x$ and $v:Q\\to Q'$ covers $c:y\\to y'$, so $p^mu^m=a p'^m$ and $v_n i_n=i'_n c$. The formula $h\\mapsto v_nhu^m$ gives the map of bisimplicial sets and the functor of index categories. Steps 2–3 commute strictly with it. For fixed $x,P$ and a target change, pushout gives $\\overline Q_n=Q_n\\amalg_y y'$, with trivial coaugmentation $y'\\to\\overline Q_n$. The equality $v_ni_n=i'_nc$ gives $\\overline Q_n\\to Q'_n$. The pairs $(1_{P^m},\\overline Q_n\\to Q'_n)$ form a natural transformation from the pushout endpoint action on the old forgetting functor to the new forgetting functor. For fixed $y,Q$ and a source change, pullback gives $\\overline P^m=x'\\times_xP^m$ and the equality $p^mu^m=a p'^m$ gives $P'^m\\to\\overline P^m$. The pairs $(P'^m\\to\\overline P^m,1_{Q_n})$ form a natural transformation from the new forgetting functor to the pullback endpoint action on the old one. These are arrows in $\\mathcal T$ since their outer squares and middle squares commute. The endpoint actions cited here ensure that the pulled-back and pushed-out outer maps remain trivial fibrations and trivial cofibrations. Here, writing $j_n:Q_n\\to\\overline Q_n$ and $r_n:\\overline Q_n\\to Q'_n$, the target middle square is $r_nj_nh=v_nh$. For $\\beta:[n']\\to[n]$, the equality $r_{n'}\\overline Q(\\beta)=Q'(\\beta)r_n$ follows by testing on the two pushout maps: on $Q_n$ it is $v_{n'}Q(\\beta)=Q'(\\beta)v_n$, and on $y'$ it is $i'_{n'}=Q'(\\beta)i'_n$. For the source transformation write $k_m:P'^m\\to\\overline P^m$ and $\\pi_m:\\overline P^m\\to P^m$. Its middle square is $h\\pi_m k_m=hu^m$. For $\\alpha:[m]\\to[m']$, test $\\overline P(\\alpha)k_m=k_{m'}P'(\\alpha)$ on the two pullback projections: the $P^{m'}$ equation is $P(\\alpha)u^m=u^{m'}P'(\\alpha)$, and the $x'$ equation is $p'^m=p'^{m'}P'(\\alpha)$. These equalities prove naturality on every index arrow; the unchanged Hom variable is handled by composition. Thus the asserted transformations have both the stated components and the required commuting squares.",
+   "uses": [
+    "lem-coef-special-hammock-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7(ii) proof and Remark 3.3; explicit componentwise pushout and pullback transformations"
+   }
+  },
+  {
+   "text": "A natural transformation $U\\Rightarrow V$ of functors gives a homotopy of nerve maps: on a chain $z_0\\to\\cdots\\to z_r$, insert its component at each possible cut to obtain the chains $Uz_0\\to\\cdots\\to Uz_j\\to Vz_j\\to\\cdots\\to Vz_r$; the commuting squares are exactly the face identities. Equivalently this is the nerve of the functor from the product with $[1]$. The same prism construction contracts the $[1]$ factor, so the projection $N(C\\times[1])\\to NC$ is a homotopy equivalence on geometric realizations and hence a weak homotopy equivalence. Its two sections are equal after inverting this projection. Thus the transformations of Step 7 give equality after passing to the homotopy category of simplicial sets. Factor a simultaneous endpoint change into its source change and target change to obtain the asserted naturality; no replacement theorem on mapping spaces is being used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7(ii), last paragraph; nerve homotopy written out"
+   }
+  },
+  {
+   "text": "When $P^0=x$, $Q_0=y$ and both augmentations in degree zero are identities, let $e_f\\in E_0$ be indexed by $m=n=0$ and $f\\in D_{0,0}$. The maps $E\\to\\operatorname{diag}D$ and $E\\to NI(P,Q)$ send $e_f$ respectively to $f$ and $(0,0,f)$ by the degree-zero clauses of the comparison statements. Step 6 sends the latter object to $x\\xleftarrow{1}x\\xrightarrow{f}y\\xleftarrow{1}y$. Since both maps from $E$ are weak equivalences, their maps on components are bijections, giving exactly the claimed component normalization.",
+   "uses": [
+    "lem-coef-bousfield-kan-comparison-calculus",
+    "lem-coef-thomason-grothendieck-comparison",
+    "lem-coef-special-hammock-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.7, degree-zero normalization of the explicit comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "lem-coef-grothendieck-aspherical-base-change",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-special-hammock-reduction",
+  "lem-coef-special-resolutions-aspherical",
+  "lem-coef-thomason-grothendieck-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, mapping-space foundation: explicit elaboration of Low Proposition 3.7 (online text consulted; local copy WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,15 +196,58 @@
    "results": "[grep] OK 4 hit(s): Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Pretopology.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean",
    "date": "2026-10-16",
    "verdict": "no match: all four hits concern Grothendieck topologies or hypercovers, not Thomason homotopy colimits or bisimplicial diagonals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal bisimplicial Hom of special cosimplicial and simplicial resolutions is weakly equivalent to the nerve of the category of special three arrow zigzags",
+   "results": "[leanfinder] OK 8 hit(s); top hits: SSet.OneTruncation₂.nerveEquiv, CategoryTheory.nerve.homEquiv, SSet.OneTruncation₂.nerveHomEquiv_apply, SSet.OneTruncation₂.nerveHomEquiv, SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.OneTruncation₂.ofNerve₂, CategoryTheory.nerve.homEquiv_apply, CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech conerves and individual model-category replacements do not state the bisimplicial-Hom/three-arrow-nerve comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"nerve\"",
+   "results": "[loogle] OK 10 hit(s); top hits: CategoryTheory.CosimplicialObject.augmentedCechConerve, CategoryTheory.CosimplicialObject.cechConerve, CategoryTheory.CosimplicialObject.cechConerveAdjunction, CategoryTheory.CosimplicialObject.augmentedCechConerve_obj, CategoryTheory.CosimplicialObject.cechConerve_obj, CategoryTheory.CosimplicialObject.cechConerveEquiv, CategoryTheory.CosimplicialObject.augmentedCechConerve_map, CategoryTheory.CosimplicialObject.cechConerve_map",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech conerves and individual model-category replacements do not state the bisimplicial-Hom/three-arrow-nerve comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "special.*resolution|hammock|Thomason",
+   "results": "[grep] OK 0 hit(s); Mathlib subdirectory: AlgebraicTopology",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech conerves and individual model-category replacements do not state the bisimplicial-Hom/three-arrow-nerve comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Special double resolutions compute the weak homotopy type of the nerve of the three arrow category of trivial fibration and trivial cofibration replacements",
+   "results": "[leansearch] OK 8 hit(s); top hits: HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap, HomotopicalAlgebra.ModelCategory.mk', HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution, HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans, HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations, HomotopicalAlgebra.trivialCofibrations_sub_weakEquivalences, HomotopicalAlgebra.mem_trivialCofibrations",
+   "date": "2026-10-16",
+   "verdict": "no match: Cech conerves and individual model-category replacements do not state the bisimplicial-Hom/three-arrow-nerve comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-cosimplicial-frame-mapping",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-special-resolution-zigzag-nerve",
+  "worker": "stage1",
+  "summary": "Preserved the full statement, including the general unaugmented combinatorial comparison and endpoint naturality. Expanded the double Grothendieck argument, both aspherical changes of index, the category isomorphism, the endpoint transformations and degree-zero normalization. Four reusable homotopical inputs are new statement-only nodes, searched using msearch; no Lean writes or compiles.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: technical mapping-space foundation used by lem-coef-cosimplicial-frame-mapping; realizes Low Proposition 3.7 first three comparison maps and its naturality proof."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-7764dd8ab",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-7764dd8ab (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Low’s comparisons/asphericity results, all nine proof steps, endpoint naturality, normalization, small cases, duplicates, and exact master target categories/morphisms. Dependency closure is acyclic. No repairs needed; detailed checks are in review.md."
+ }
 }

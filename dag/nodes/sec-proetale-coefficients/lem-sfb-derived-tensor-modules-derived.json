@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-derived-tensor-modules-derived",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The derived relative tensor product is a two-variable left derived functor",
@@ -17,20 +17,130 @@
  ],
  "proof": [
   {
-   "text": "This is part of [lem-sfb-derived-monoidal], applied to $\\Mod_R(\\mathcal C)$ with the\nrelative tensor product.",
-   "uses": [],
-   "elementary": false
+   "text": "Use $\\mathcal C$ and the commutative ring object $R$ of [def-sfb-derived-tensor-modules], and put $\\mathcal B=\\Mod_R(\\mathcal C)$. The hypotheses on $\\mathcal C$ are exactly those of [lem-sfb-modobj-grothendieck], so $\\mathcal B$ is Grothendieck abelian. The adjunction and closed symmetric monoidal structure stated in [def-sfb-modobj-internal-hom] apply under these same hypotheses. Thus $\\mathcal B$ is closed symmetric monoidal for the relative tensor product $\\otimes_R$, not the ambient tensor product of underlying objects.",
+   "uses": [
+    "def-sfb-derived-tensor-modules",
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-tensor-modules-derived.proof.md",
+    "place": "only paragraph: application to Mod_R(C); hypotheses from sk-prop-sfb-module-category, clause 3"
+   }
+  },
+  {
+   "text": "Check additivity of this relative tensor. For $M\\in\\mathcal B$, the adjunction $T_M=M\\otimes_R-\\dashv\\Hom_R(M,-)$ of [def-sfb-modobj-internal-hom] identifies $\\operatorname{Hom}(T_M(0),N)$ with a singleton and $\\operatorname{Hom}(T_M(U\\oplus V),N)$ with $\\operatorname{Hom}(U,\\Hom_R(M,N))\\times\\operatorname{Hom}(V,\\Hom_R(M,N))$. Consequently $T_M$ preserves the zero object and binary coproducts, with their injections. Zero morphisms factor through the zero object; the biproduct projections are determined by their composites with the injections, so these are preserved too. Applying $T_M$ to $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$ now gives $T_M(f+g)=T_M(f)+T_M(g)$. Symmetry identifies $-\\otimes_R M$ with $M\\otimes_R-$, proving additivity in the other variable as well.",
+   "uses": [
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.md",
+    "place": "last paragraph: adjunction and closed symmetric monoidal structure; elementary biproduct calculation"
+   }
+  },
+  {
+   "text": "The ambient category $\\mathcal C$ has functorial flat resolutions by the hypotheses in [def-sfb-derived-tensor-modules]. Apply [lem-sfb-modobj-flat-resolutions] with $\\mathcal R=R$. Its conclusion supplies functorial flat resolutions in $\\mathcal B$ for $\\otimes_R$; flatness here means exactness of tensoring over $R$ on either side. This checks the remaining hypothesis of the derived-monoidal theorem without assuming $R$ itself flat in $\\mathcal C$.",
+   "uses": [
+    "def-sfb-derived-tensor-modules",
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.md",
+    "place": "statement: inheritance of functorial flat resolutions"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-derived-monoidal] to $\\mathcal B$, whose hypotheses were checked in steps 1–3 (a symmetric monoidal structure is braided). It gives a tensor on $D(\\mathcal B)$ that is the left derived functor in two variables of the tensor of complexes on $K(\\mathcal B)$, for quasi-isomorphisms in each variable, and gives the lax monoidal localization $Q\\colon K(\\mathcal B)\\to D(\\mathcal B)$. By [def-sfb-derived-tensor-modules], the tensor in question is precisely $-\\otimes_R^{\\mathrm L}-$: that definition specifies this very application of the derived-monoidal construction to the relative tensor $\\otimes_R$. Its localization structure map is therefore the comparison map belonging to that construction. Hence the asserted derived-functor property concerns the stated functor and its stated comparison map, rather than an independently chosen tensor or lax structure.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "def-sfb-derived-tensor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-tensor-modules-derived.proof.md",
+    "place": "only paragraph: This is part of lem-sfb-derived-monoidal, applied to Mod_R(C) with relative tensor product"
+   }
+  },
+  {
+   "text": "The parenthetical $R=\\Lambda_X$ case is the particular instance already specified in [def-sfb-derived-tensor-modules]. In that instance $D(\\mathcal B)=D(\\Mod_{\\Lambda_X})$ and the same derived tensor and localization map of step 4 become $-\\otimes^{\\mathrm L}_{\\Lambda_X}-$ and its comparison map. Substitution gives the claimed case without changing the coefficient category.",
+   "uses": [
+    "def-sfb-derived-tensor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/def-sfb-derived-tensor-modules.md",
+    "place": "last sentence and displayed functor: particular condensed-ring case"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-derived-monoidal"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-tensor-modules-derived.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-tensor-modules-derived.proof.md",
+  "place": "only paragraph, expanded hypothesis check using sk-prop-sfb-module-category clause 3"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor₂|isLeftDerivedFunctor.*[Tt]ensor|curriedTensor.*[Dd]erived",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: zero derived-bifunctor hits in the first query; the second query returns ordinary monoidal tensor declarations, not a derived tensor on unbounded module-object categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived relative tensor product is a left derived bifunctor of complexes of module objects",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Tor, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, HomologicalComplex.tensorObj",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern homology-level Tor/projective resolutions, monoidal complexes, or exact functors on derived categories, not the two-variable relative derived tensor for module objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of module objects over a commutative ring object is the two variable left derived functor of relative tensor product with respect to quasi isomorphisms",
+   "results": "OK 8 hit(s); CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, HomologicalComplex.HasTensor, Rep.Tor_obj, CategoryTheory.Tor, HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Tor'",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern homology-level Tor/projective resolutions, monoidal complexes, or exact functors on derived categories, not the two-variable relative derived tensor for module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor₂, curriedTensor",
+   "results": "OK 0 hit(s); loogle: unknown identifier 'Functor.IsLeftDerivedFunctor₂'",
+   "date": "2026-10-16",
+   "verdict": "no match: the two-variable derived-functor identifier is absent from the search index"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|derivedMonoidal|IsLeftDerivedFunctor₂|curriedTensor",
+   "results": "OK 25 hit(s); Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: zero derived-bifunctor hits in the first query; the second query returns ordinary monoidal tensor declarations, not a derived tensor on unbounded module-object categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, \"tensor\"",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: no tensor derived-functor result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal structure on an unbounded derived category obtained by K flat resolutions is the total left derived bifunctor of tensor product",
+   "results": "OK 8 hit(s); HomologicalComplex.monoidalCategoryStruct, HomologicalComplex.monoidalCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinear, HasDerivedCategory.standard, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Tor_obj",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern homology-level Tor/projective resolutions, monoidal complexes, or exact functors on derived categories, not the two-variable relative derived tensor for module objects"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -56,5 +166,34 @@
   "lem-sfb-derived-monoidal"
  ],
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-tensor-hom"
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-derived-tensor-modules-derived",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint specialization to check the module category is closed symmetric monoidal Grothendieck abelian, the relative tensor is additive, and functorial flat resolutions exist. Applied the existing derived-monoidal theorem and identified its functor and localization comparison with the definition. All required facts already have nodes; no new nodes or Mathlib leaves were needed. Matching master declarations were read as reference only and are not attachments.",
+  "blueprint": "The only paragraph of lem-sfb-derived-tensor-modules-derived.proof.md: the application of lem-sfb-derived-monoidal to Mod_R(C) with relative tensor product. Steps 1–3 discharge its hypotheses, step 4 makes the application and comparison-map identification, step 5 substitutes the condensed-ring case.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Step 1 uses the general Grothendieck-abelian structure theorem for module objects to discharge the hypothesis of lem-sfb-derived-monoidal. The unit proof explicitly invokes sk-prop-sfb-module-category; its formal uses list omits that unit, and no statement in the present unit supplies this structural fact."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Step 3 uses the general transfer of functorial flat resolutions to relative module objects to discharge the hypothesis of lem-sfb-derived-monoidal. This is the module-category input expressly requested by the unit proof, not a replacement derived-tensor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-b967a0632",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-b967a0632 (reviewer sub-agent of L); spot-checked: Full mathematical and source review passed. Corrected JSON adds two accepted structural tool declarations for Grothendieck structure and flat resolutions (C8 bookkeeping). All five steps, tensorator direction, coefficient category, edge cases, duplicates, and dependencies checked; statements unchanged. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
