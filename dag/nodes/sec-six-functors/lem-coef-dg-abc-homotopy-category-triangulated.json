@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-dg-abc-homotopy-category-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the three displayed derived Hom objects: generic dg-quotient infrastructure through the recorded ancestry, specifically the finite-cone argument in the final step of lem-coef-dg-quotient-hom-cone. The triangulated structure is obtained from a general cone-closed module-category criterion, before proving invariance of the finite hull. Abstract dg-category axioms (A), (B), (C) supply the generic triangulation theorem used after the module and sign checks.",
+   "via": [
+    "lem-coef-dg-module-cone-triangulation",
+    "lem-coef-dg-finite-twisted-extension",
+    "lem-coef-dg-quotient-hom-cone",
+    "lem-coef-dg-module-projective-resolution",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Triangulation from the abstract dg-category axioms A, B and C",
+ "statement": "Let $\\mathcal A$ be a small cochain dg category over $\\mathbf Z$ as in [lem-coef-dgcat-model-structure]. Write $Z^0\\mathcal A$ for its category of closed degree-zero maps and $H^0\\mathcal A$ for its category of degree-zero cohomology classes. Assume (A) there is a zero object and each pair $x,z$ has a dg direct sum: an object with closed degree-zero inclusions and projections satisfying the biproduct identities. Assume (B) there are dg functors $[n]$, $n\\in\\mathbf Z$, with $[0]=1$, $[n+m]=[n][m]$, and isomorphisms of cochain complexes $\\mathcal A(x,y[n])\\cong\\mathcal A(x,y)[n]$ compatible with composition, with $V[n]^j=V^{j+n}$ and $d_{V[n]}=(-1)^nd_V$.\n\nCall a sequence $x\\xrightarrow{a}y\\xrightarrow{b}z$ in $Z^0\\mathcal A$ admissible if there are degree-zero graded maps $\\pi:y\\to x$ and $s:z\\to y$ with $\\pi a=1$, $bs=1$, $a\\pi+sb=1$, $ba=0$, and $\\pi s=0$. For such a splitting, the degree-one closed map $\\pi\\partial s$ corresponds under (B) to a closed degree-zero map $\\delta:z\\to x[1]$. Assume (C) that for every $f:x\\to y$ in $Z^0\\mathcal A$ there is an admissible sequence $y\\xrightarrow{i}c(f)\\xrightarrow{p}x[1]$ whose associated boundary $x[1]\\to y[1]$ is $f[1]$.\n\nThen $H^0\\mathcal A$, with the induced translations and triangles isomorphic to the admissible-sequence triangles $(x,y,z,a,b,\\delta)$, is a triangulated category in the sense of [def-weil-triangulated-category]. These distinguished triangles are precisely those isomorphic to $(x,y,c(f),f,i,-p)$ for closed degree-zero $f$, with cones as in (C).",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09QJ, TeX label situation-ABC, with axioms (A) and (B) in section-review immediately before it; Tag 09P6, TeX label lemma-get-triangle, defines the boundary; Tag 09QY, TeX label proposition-ABC-homotopy-category-triangulated; Tag 09QU, TeX label lemma-cone-homotopy, parts (1) and (2), identifies the two classes of triangles."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "general differential graded category satisfying zero sums shifts and closed cones has triangulated homotopy category",
+   "results": "{\"t\": \"2026-10-16T19:58:37Z\", \"tool\": \"leanfinder\", \"query\": \"general differential graded category satisfying zero sums shifts and closed cones has triangulated homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPretriangulatedIntUp\", \"DerivedCategory.instIsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CochainComplex.mappingCone.triangleh\", \"HomotopyCategory.hasShift\"], \"digest\": \"c39e1cda0a79c0ad\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"Pretriangulated\", \"mappingCone\"",
+   "results": "{\"t\": \"2026-10-16T19:58:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTriangulated\\\", \\\"Pretriangulated\\\", \\\"mappingCone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "differential.?graded|DGModule|mapping.?cone",
+   "results": "{\"t\": \"2026-10-16T19:58:49Z\", \"tool\": \"grep\", \"query\": \"differential.?graded|DGModule|mapping.?cone\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Situation ABC differential graded category homotopy category triangulated",
+   "results": "{\"t\": \"2026-10-16T19:58:56Z\", \"tool\": \"leansearch\", \"query\": \"Situation ABC differential graded category homotopy category triangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.instIsTriangulatedIntUp\", \"HomotopyCategory\", \"instCategoryHomotopyCategory\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.IsTriangulated.mk\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"HomotopyCategory.instPreadditive\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\"], \"digest\": \"1c638309b6afd60e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier axioms for degree zero cohomology of a dg category with split graded exact sequences and shifts",
+   "results": "{\"t\": \"2026-10-16T19:59:00Z\", \"tool\": \"leanfinder\", \"query\": \"Verdier axioms for degree zero cohomology of a dg category with split graded exact sequences and shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"CategoryTheory.hasExt_iff\", \"DerivedCategory.instHasShiftInt\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"5ee1e4c00f728e07\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "dg[Cc]at|DGCategory|DGModule|situation.?ABC",
+   "results": "{\"t\": \"2026-10-16T19:59:01Z\", \"tool\": \"grep\", \"query\": \"dg[Cc]at|DGCategory|DGModule|situation.?ABC\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean:191-211 and Pretriangulated.lean:574-586. HomotopyCategory.instIsTriangulatedIntUp and instPretriangulatedIntUp treat ordinary complexes in a fixed preadditive category; DerivedCategory instances require an abelian category and localization. They do not state the ABC theorem for arbitrary dg categories, nor construct the homotopy category of right modules over a dg category with a nonzero differential. No one-line specialization; the focused dg-category grep returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-module-cone-triangulation",
+  "date": "2026-10-17",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

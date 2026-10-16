@@ -1,0 +1,118 @@
+{
+ "id": "lem-exc-dvr-norm-valuation-sum",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-dvr-galois",
+   "place": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the general norm/order formula behind this length calculation, Stacks Tag 02MJ.",
+   "via": [
+    "lem-exc-dvr-galois-degree-data",
+    "lem-exc-dvr-inertia-order-prime-part",
+    "lem-exc-finite-dvr-tame-inertia",
+    "lem-exc-henselian-dvr-tame-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Valuation of a field norm over a finite semilocal DVR algebra",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$ and residue field $k$. Let $B$ be a commutative integral domain containing $A$ which is finite as an $A$-module [def-weil-finitely-generated-module], and let $L=\\operatorname{Frac}(B)$ be a finite extension of $K$ [def-pc-field-extension, def-weil-vector-space-dimension] through this inclusion. Suppose that the set $X$ of maximal ideals of $B$ is finite, that every $\\mathfrak q\\in X$ contracts to the maximal ideal of $A$, that each $B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is a discrete valuation ring, and that $f_{\\mathfrak q}=[B/\\mathfrak q:k]$ is finite. For any discrete valuation ring $R$ with fraction field $F$, write $v_R:F^\\times\\to\\mathbf Z$ for its normalized valuation: $v_R(x)=r$ when $x=u t^r$ for a unit $u\\in R^\\times$ and a uniformizer $t$ of $R$, with $r\\in\\mathbf Z$. Define $N_{L/K}(y)$ to be the determinant [def-weil-endomorphism-determinant] over $K$ of the $K$-linear map $L\\to L$, $z\\mapsto yz$. Then for every $y\\in L^\\times$ one has $$v_A(N_{L/K}(y))=\\sum_{\\mathfrak q\\in X}f_{\\mathfrak q}\\,v_{B_{\\mathfrak q}}(y).$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02MJ (lemma-finite-extension-dim-1), norm/order formula specialized to discrete valuation rings, with order expressed as normalized uniformizer exponent."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The order of the norm of an element in a finite extension of one dimensional Noetherian local domains equals the sum of its local orders weighted by residue field degrees",
+   "results": "[leanfinder] OK 8 hit(s); NumberField.FinitePlace.norm_embedding_eq, NumberField.FinitePlace.norm_def', Algebra.intNormAux, NumberField.FinitePlace.norm_def_int, NumberField.FinitePlace.norm_def, Ring.ordFrac_eq_ord, RingOfIntegers.norm_norm, spectralNorm_extends_of_finiteDimensional",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring ordFrac norm equals sum of orders of vanishing in localizations weighted by residue degrees for a finite ring extension",
+   "results": "[leanfinder] OK 8 hit(s); Ring.ordFrac, Ring.ordFrac_eq_ord, Algebra.norm_localization, Algebra.intNorm_eq_of_isLocalization, Ring.ordFrac_eq_div, Ideal.spanIntNorm_localization, Algebra.algebraMap_intNorm_fractionRing, NumberField.FinitePlace.norm_def'",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of fraction fields of discrete valuation rings, the valuation of the field norm of any nonzero element is the sum of residue degrees times the extended normalized valuations",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.intNormAux, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun, NumberField.FinitePlace.norm_def_int, NumberField.FinitePlace.norm_embedding_eq, NumberField.FinitePlace.norm_def', NumberField.FinitePlace.norm_def, NumberField.FinitePlace.norm_le_one, IsDedekindDomain.HeightOneSpectrum.valuation_def",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized discrete valuation of a field norm equals the sum of the valuations at maximal ideals weighted by residue field degrees",
+   "results": "[leansearch] OK 8 hit(s); NumberField.FinitePlace.norm_embedding_eq, NormedField.v_eq_valuation, NormedField.valuation_apply, Valued.norm, Valued.toNontriviallyNormedField, IsDedekindDomain.HeightOneSpectrum.valuation, IsDiscreteValuationRing.isRankOneDiscrete, IsDedekindDomain.HeightOneSpectrum.embedding_mul_absNorm",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.ordFrac, Algebra.norm",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*valuation|valuation.*norm|norm.*ord|ord.*norm|finrank.*valuation",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-17",
+   "verdict": "no match: norm/valuation constructions and localization compatibility only; no weighted norm-order identity. The general finite-flat fundamental identity concerns the single scalar-uniformizer specialization, not the asserted formula for every nonzero y. Pinned OrderOfVanishing/Basic.lean:32-35 defines order, and Ideal/Norm/RelNorm.lean:401-434 concerns ideal norms in a Galois extension, not this norm/order formula.",
+   "subdirectory": "RingTheory/Ideal/Norm"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The principal ideal generated by the norm of an element is the ideal norm of the principal ideal, and prime valuations of the norm are weighted by inertia degrees",
+   "results": "[leanfinder] OK 8 hit(s); Ideal.relNorm_singleton, Ideal.absNorm_span_singleton, Ideal.spanNorm_singleton, Ideal.spanNorm_eq, FractionalIdeal.absNorm_span_singleton, Ideal.absNorm_eq_pow_inertiaDeg, Ideal.absNorm_eq_pow_inertiaDeg', Ideal.relNorm_relNorm",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent ideal-norm search gives principal-ideal norm identities, not the sum of normalized valuations. Read pinned Ideal/Norm/RelNorm.lean:49-83,270-302,401-440: the prime norm comparison either assumes Galois fraction fields or a perfect base fraction field, whereas the present arbitrary finite field extension has neither hypothesis. The other hits are analytic norms or definitions, and no declaration specializes in one line to this formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ordFrac.*(intNorm|norm)|(intNorm|norm).*ordFrac|valuation.*intNorm|intNorm.*valuation",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent ideal-norm search gives principal-ideal norm identities, not the sum of normalized valuations. Read pinned Ideal/Norm/RelNorm.lean:49-83,270-302,401-440: the prime norm comparison either assumes Galois fraction fields or a perfect base fraction field, whereas the present arbitrary finite field extension has neither hypothesis. The other hits are analytic norms or definitions, and no declaration specializes in one line to this formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"length\"",
+   "results": "[loogle] OK 4 hit(s); InnerProductSpace.gramSchmidtNormed_unit_length', InnerProductSpace.gramSchmidtNormed_unit_length, InnerProductSpace.gramSchmidtNormed_unit_length_coe, Manifold.lintegral_norm_mfderiv_Icc_eq_pathELength_projIcc",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent ideal-norm search gives principal-ideal norm identities, not the sum of normalized valuations. Read pinned Ideal/Norm/RelNorm.lean:49-83,270-302,401-440: the prime norm comparison either assumes Galois fraction fields or a perfect base fraction field, whereas the present arbitrary finite field extension has neither hypothesis. The other hits are analytic norms or definitions, and no declaration specializes in one line to this formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite semilocal integral extension of a one dimensional Noetherian local domain, order of vanishing of the field norm is the residue degree weighted sum of orders at maximal ideals",
+   "results": "[leanfinder] OK 8 hit(s); Ring.ordFrac_eq_ord, NumberField.FinitePlace.norm_def, NumberField.FinitePlace.norm_embedding_eq, NumberField.FinitePlace.norm_def', NumberField.FinitePlace.norm_def_int, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun, IsDedekindDomain.HeightOneSpectrum.adicAbvDef, Ideal.relNorm_eq_pow_of_isMaximal",
+   "date": "2026-10-16",
+   "verdict": "no match: the independent ideal-norm search gives principal-ideal norm identities, not the sum of normalized valuations. Read pinned Ideal/Norm/RelNorm.lean:49-83,270-302,401-440: the prime norm comparison either assumes Galois fraction fields or a perfect base fraction field, whereas the present arbitrary finite field extension has neither hypothesis. The other hits are analytic norms or definitions, and no declaration specializes in one line to this formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-dvr-galois-degree-data",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer"
+}

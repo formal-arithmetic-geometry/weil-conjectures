@@ -25,11 +25,97 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-operadic-algebra-presentability"
+  "lem-coef-operadic-algebra-presentability",
+  "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F:\\mathcal V^\\otimes\\to\\mathcal W^\\otimes$ for the strong monoidal functor presenting $f$. By [def-coef-monoidal-infinity-category], its fibers over $[n]$ identify with $f^n:\\mathcal V^n\\to\\mathcal W^n$. The product of the given mapping-space equivalences is\n$$\\prod_{i=1}^n\\operatorname{Map}_{\\mathcal W}(f v_i,w_i)\\simeq\\prod_{i=1}^n\\operatorname{Map}_{\\mathcal V}(v_i,g w_i).$$\nThus $f^n\\dashv g^n$, with coordinatewise units and counits. This includes $n=0$: both fibers and both mapping spaces are terminal. All categories fit in a common enlarged universe. Strongness says exactly that $F$ preserves cocartesian arrows over the base.",
+   "uses": [
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, proof, Segal product calculation, applied to the nonsymmetric simplex model"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-relative-right-adjoint] to $F$ over $S=\\Delta^{\\mathrm{op}}$, using the fiber adjunctions of Step 1 and the cocartesian fibrations of [def-coef-monoidal-infinity-category]. Obtain $G:\\mathcal W^\\otimes\\to\\mathcal V^\\otimes$ over $S$ with a relative adjunction $F\\dashv G$. Denote its unit and counit by $\\eta^\\otimes,\\varepsilon^\\otimes$. Normalize its fiber adjunctions by the supplied equivalences of adjunction data, so that over $[1]$ they are the specified $f\\dashv g$, and over $[n]$ their coordinatewise products. In particular their components lie over identity arrows of $S$.",
+   "uses": [
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 7.3.2.6, opposite-category dual; Remark 7.3.2.4"
+   }
+  },
+  {
+   "text": "We check that $G$ is lax monoidal by computing its effect on inert arrows. For an inert $\\alpha:[n]\\to[m]$, let $P_\\alpha$ select the corresponding consecutive coordinates. In both monoidal fibrations its cocartesian transport is $P_\\alpha$. For a cocartesian lift $e:w\\to P_\\alpha w$ in $\\mathcal W^\\otimes$, factor $G(e)$ through a cocartesian lift in $\\mathcal V^\\otimes$ as a vertical map\n$$v:P_\\alpha g^n w\\longrightarrow g^m P_\\alpha w.$$\nThe factorization and its uniqueness as a mapping-space equivalence follow by taking the fiber over $\\alpha$ in [lem-coef-infinity-cocartesian-mapping-criterion]. Naturality of $\\varepsilon^\\otimes$ identifies the adjunct of $v$ with $P_\\alpha\\varepsilon_w$. Since the fiber counit is coordinatewise, this is the counit of $f^m\\dashv g^m$ at $P_\\alpha w$. The counit calculation identifies $v$ with the canonical coordinate equivalence $P_\\alpha g^n w\\simeq g^mP_\\alpha w$. Hence $v$ is an equivalence, so the same mapping-space criterion makes $G(e)$ cocartesian. For $m=0$ this is the identity in the terminal fiber. Thus $G$ preserves all inert arrows. Its comparison on an active $[r]\\to[1]$ is the adjunct of\n$$ f(\\bigotimes_i g w_i)\\simeq\\bigotimes_i f g w_i\\xrightarrow{\\bigotimes_i\\varepsilon_{w_i}}\\bigotimes_i w_i.$$\nFor $r=0$ the map is $f(\\mathbf1_{\\mathcal V})\\simeq\\mathbf1_{\\mathcal W}$. This identifies its lax structure with the adjoint lax monoidal structure, including the nullary operation. The substitution coherences belong to the already coherent functor $G$ and its counit; no separate aritywise choices are made.",
+   "uses": [
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 7.3.2.7, proof, inert-preservation calculation; Remark 7.3.2.9, mate comparison, in the nonsymmetric model"
+   }
+  },
+  {
+   "text": "For a small ordinary nonsymmetric operad $\\mathcal O$, its algebra category is the category of inert-preserving functors over $S$, as in [lem-coef-operadic-algebra-presentability]. Composition with $F$ and $G$ preserves this condition, so defines $f_{\\mathcal O}$ and $g_{\\mathcal O}$. Whiskering $\\eta^\\otimes$ by $A$ and $\\varepsilon^\\otimes$ by $B$ gives transformations $A\\to GFA$ and $FGB\\to B$ over $S$. Their endpoints are inert-preserving functors, and whiskering gives coherent transformations of such functors, so these are algebra transformations. Their color components are exactly $\\eta_{A(c)}$ and $\\varepsilon_{B(c)}$.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cocartesian-relative-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.5.11, adjunction conclusion; Lemma A.5.12, proof, restriction to the full algebra subcategories"
+   }
+  },
+  {
+   "text": "Apply the coherent-diagram clause of [lem-coef-parametric-universal-arrows] to $T=F$, $\\mathcal D_0=\\mathcal W^\\otimes$, and the universal counit supplied by [lem-coef-cocartesian-relative-right-adjoint], with diagram shape $K=\\mathcal O$. It gives a natural equivalence on the functor-category mapping spaces, with inverse $k\\mapsto G(k)(\\eta^\\otimes A)$. Both formulas lie over the same base transformation because $F,G,\\eta^\\otimes,\\varepsilon^\\otimes$ are over $S$. Restrict to transformations over the identity of the fixed map $\\mathcal O\\to S$, and then to the inert-preserving functors and their coherent transformations that define the algebra categories. The formulas are\n$$\\Phi(k)=G(k)\\eta_A,\\qquad\\Psi(h)=\\varepsilon_BF(h).$$\nThe inverse homotopies can also be seen directly in these subcategories:\n$$\\Psi\\Phi(k)\\simeq k\\,\\varepsilon_{FA}F\\eta_A\\simeq k,\\qquad\n\\Phi\\Psi(h)\\simeq G\\varepsilon_B\\,\\eta_{GB}h\\simeq h.$$\nThe first homotopies are naturality of counit and unit, and the second are their relative triangle homotopies, all whiskered by the same diagrams. These homotopies stay over the identity of the base, so the restriction is an equivalence of entire mapping spaces. This supplies the stated bifunctor equivalence and the algebra triangle homotopies.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.5.11, mapping-space adjunction, with its explicit postcomposition realization as in the proof of Lemma A.5.12"
+   }
+  },
+  {
+   "text": "Let $u:\\mathcal O'\\to\\mathcal O$ preserve inert arrows. Restriction is precomposition. For every algebra map $k$ and $h$, associativity of composition gives, coherently,\n$$u^*(G(k)\\eta_A)=G(u^*k)\\eta_{u^*A},\\qquad\nu^*(\\varepsilon_BF(h))=\\varepsilon_{u^*B}F(u^*h).$$\nBoth identities are identities of whiskered coherent transformations, so also hold on all higher simplices. The precomposition compatibility in [lem-coef-parametric-universal-arrows] supplies the same compatibility for the mapping-space equivalence. Units and counits restrict by their definition in Step 4, and the inverse homotopies in Step 5 restrict by the same whiskering. For an identity, a composite of operad maps, or a higher simplex of such maps, these are restrictions of the same $F,G,\\eta^\\otimes,\\varepsilon^\\otimes$ and triangle homotopies. Thus the compatibility includes all composition coherences in the operad variable.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-cocartesian-relative-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Proposition A.5.11, proof, naturality in the operad; explicit precomposition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, finite mapping-complex adjunction prerequisite. Agent-written relative-adjoint proof of Gepner-Haugseng Proposition A.5.11, using Higher Algebra Proposition 7.3.2.6 dual; both external sources read online and WANTED for archival."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +165,45 @@
    "results": "{\"t\": \"2026-10-16T18:30:34Z\", \"tool\": \"grep\", \"query\": \"mapMon|mapMonoidal|rightAdjointLaxMonoidal\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"f9ae5ba3ddc64c11\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits are ordinary monoidal adjunctions and monoid objects. In the local source, CategoryTheory.Adjunction.mapMon is Mon.lean:1072, with ordinary Category/MonoidalCategory hypotheses at :1065, and rightAdjointLaxMonoidal is Functor.lean:947; neither constructs algebras over nonsymmetric infinity operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal functors with right adjoints induce adjunctions on nonsymmetric infinity operadic algebras coherently under restriction of operads",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Mon_\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given an adjunction between lax monoidal functors $ F $ and $ G $ between monoidal categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, the induced functors $ F.\\text{mapMon} $ and $ G.\\text{mapMon} $ on the\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the lax monoidal structure on the right adjoint $G$ \"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_counit\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Mon_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [inst_4 \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F ⊣ G$ where $F$ is oplax monoidal and $G$ is lax monoidal, the counit of the induced adjunction on the category of monoid\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsMonoidal\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the right adjoint $G$ inherits a lax monoidal struct\"}\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D] {E : Type u₃}\\n  [inst_4 : CategoryTheory.Category.{v₃, u₃} E] [inst_5 : CategoryTheory.M\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $F' \\\\dashv G'$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, where $F\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the right adjoint $G$ inherits a lax monoidal struct\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the unit morphism $\\\\varepsilon$ of the induced lax m\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"module\": \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given an adjunction between monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ where $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is lax monoidal, the cou\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1075 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:939-950. These use ordinary Category and MonoidalCategory, and concern monoid objects and hom sets, not nonsymmetric infinity operads and coherent restriction of mapping-space adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mapMon",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : F\", \"doc\": \"An adjunction of monoidal functors lifts to an adjunction of their lifts to monoid objects. \"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_counit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [a.IsMonoidal] : a\", \"doc\": \"\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1075 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:939-950. These use ordinary Category and MonoidalCategory, and concern monoid objects and hom sets, not nonsymmetric infinity operads and coherent restriction of mapping-space adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic.*[Aa]djoint|[Aa]djoint.*[Oo]perad|rightAdjointLaxMonoidal|def mapMon",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"947\", \"text\": \"def rightAdjointLaxMonoidal : G.LaxMonoidal where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"1008\", \"text\": \"    letI := adj.rightAdjointLaxMonoidal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"1010\", \"text\": \"  let := adj.rightAdjointLaxMonoidal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"1121\", \"text\": \"  rightAdjointLaxMonoidal_ε rightAdjointLaxMonoidal_μ in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"line\": \"1124\", \"text\": \"`Adjunction.rightAdjointLaxMonoidal`, because compatibilities between\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"867\", \"text\": \"def mapMon : Mon C ⥤ Mon D where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"891\", \"text\": \"def mapMonIdIso : mapMon (𝟭 C) ≅ 𝟭 (Mon C) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"898\", \"text\": \"def mapMonCompIso : (F ⋙ G).mapMon ≅ F.mapMon ⋙ G.mapMon :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"909\", \"text\": \"def mapMonNatTrans (f : F ⟶ F') [NatTrans.IsMonoidal f] : F.mapMon ⟶ F'.mapMon where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"line\": \"917\", \"text\": \"def mapMonNatIso (e : F ≅ F') [NatTrans.IsMonoidal e.hom] : F.mapMon ≅ F'.mapMon :=\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1075 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:939-950. These use ordinary Category and MonoidalCategory, and concern monoid objects and hom sets, not nonsymmetric infinity operads and coherent restriction of mapping-space adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces between infinity operadic algebras are adjoint under strong monoidal change of coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon_\", \"type\": \": F.mapMon ⊣ G.mapMon\", \"doc\": \"Given an adjunction between lax monoidal functors $ F $ and $ G $ between monoidal categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, the induced functors $ F.\\text{mapMon} $ and $ G.\\text{mapMon} $ on the\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given an adjunction between functors $ F $ and $ G $ between monoidal categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, where $ F $ is oplax monoidal and $ G $ is lax monoidal, this proposition asserts \"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \":\\n  letI := adj.rightAdjointLaxMonoidal\\n  adj.IsMonoidal\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the right adjoint $G$ inherits a lax monoidal struct\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapGrp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \": F.mapGrp ⊣ G.mapGrp\", \"doc\": \"If $F \\\\dashv G$ is an adjunction between monoidal functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ on Cartesian monoidal categories, then this defines an adjunction betwe\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.pre\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \"(f : B ⟶ A) : ihom A ⟶ ihom B\", \"doc\": \"Given a morphism $ f: B \\to A $ in a closed monoidal category, the morphism $ \\text{pre}(f): [A, -] \\to [B, -] $ is defined via the adjunction between the tensor product and internal hom, translating the\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.casesOn\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F$ is oplax monoidal and $G$ is lax monoidal, this case analysis function allows defining functions on \"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mon_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (a : F ⊣ G) [inst_4 \", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ with $F$ oplax monoidal and $G$ lax monoidal, the unit of the induced adjunction $\\\\text{MapMon}(F) \\\\dashv \\\\text{\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.recOn\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F$ is oplax monoidal and $G$ is lax monoidal, this recursor allows defining functions on the monoidal a\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1075 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:939-950. These use ordinary Category and MonoidalCategory, and concern monoid objects and hom sets, not nonsymmetric infinity operads and coherent restriction of mapping-space adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition with a monoidal adjunction gives an adjunction on infinity operad algebra categories natural in the operad",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.coskAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [inst_1 :\\n          ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.SimplicialObject.truncation n\", \"doc\": \"The truncation functor from simplicial objects to $ n $-truncated simplicial objects is left adjoint to the coskeleton functor, which extends $ n $-truncated simplicial objects to full simplicial obje\"}\n  {\"name\": \"CategoryTheory.Kleisli.Adjunction.adj\", \"module\": \"Mathlib/CategoryTheory/Monad/Kleisli\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (T : CategoryTheory.Monad C) →\\n      CategoryTheory.Kleisli.Adjunction.toKleisli T ⊣ CategoryTheory.Kleisli.Adjunction.fromKleisli T\", \"doc\": \"For a monad $ T $ on a category $ \\\\mathcal{C} $, the functor $ \\\\text{toKleisli} \\\\, T: \\\\mathcal{C} \\\\to \\\\mathcal{C}_T $ embedding $ \\\\mathcal{C} $ into its Kleisli category $ \\\\mathcal{C}_T $ is left adjo\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapMon\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Mon_\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given an adjunction between lax monoidal functors $ F $ and $ G $ between monoidal categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, the induced functors $ F.\\text{mapMon} $ and $ G.\\text{mapMon} $ on the\"}\n  {\"name\": \"CategoryTheory.Adjunction.whiskerRight\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Whiskering\", \"type\": \"(C : Type u_1) →\\n  {D : Type u_2} →\\n    {E : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_3, u_3} E] →\\n            {F : CategoryTheory.Functor D E} →\\n              {G : Categ\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and an adjunction $F \\\\dashv G$ between functors $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ and $G: \\\\mathcal{E} \\\\to \\\\mathcal{D}$, whiskering this adjuncti\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.skAdj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [inst_1 :\\n          ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.SimplicialObject.Truncated.sk \", \"doc\": \"The skeleton functor for $ n $-truncated simplicial objects is left adjoint to the truncation functor. This adjunction arises from the left Kan extension along the inclusion $ \\\\Delta_{\\\\leq n} \\\\to \\\\Del\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory.Adjunction.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:1065-1075 and rightAdjointLaxMonoidal at Mathlib/CategoryTheory/Monoidal/Functor.lean:939-950. These use ordinary Category and MonoidalCategory, and concern monoid objects and hom sets, not nonsymmetric infinity operads and coherent restriction of mapping-space adjunctions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enrichment-change-adjunction",
@@ -90,5 +211,21 @@
   "group": "Q02"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-change-enrichment",
+  "worker": "stage1",
+  "summary": "Construct the relative right adjoint over the simplex base from product fiber adjunctions; explicitly verify inert preservation and the adjoint lax structure, then whisker unit/counit to algebra functors and check the full mapping-space inverse and coherent restriction identities. One new generic relative-adjoint assembly lemma, searched and statement-only; existing parametric universal-arrow and cocartesian mapping criteria reused. Statement unchanged.",
+  "blueprint": "Realizes the finite mapping-complex adjunction prerequisite in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing enrichment-change chain. This is below the unit route; no unit/chapter statement or route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-e700a42ff",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-e700a42ff (reviewer sub-agent of L); spot-checked: PASS, no changes. One limit: neither HA nor Gepner–Haugseng (GH) is in the project literature, and the service blocks network access, so I could not reopen the cited pages. I checked the mathematics independently against the standard results instead, and the WANTED lines stand. The item statement is unchanged; it is no weaker than GH A.5.11 (restricted to ordinary operads) and keeps all its hypotheses. The new node lem-coef-cocartesian-relative-right-adjoint (fiberwise right adjoints of a cocartesian-preserving functor assemble to a right adjoint relative to the base; the dual of HA 7.3.2.6, plus 7.3.2.5 for base change) is true. I proved it directly: Map^α(Fx,y) ≃ Map_{D_t}(α_!F x,y) ≃ Map_{D_t}(F α_!x,y) ≃ Map(α_!x,R_t y) ≃ Map^α(x,R y). I tested it on S a point, S empty, F the identity, and the Set/Ab one-arrow case, where R does not preserve cocartesian edges, as the statement allows. It meets B1–B7 and has three-kind Mathlib searches. rg over the DAG and the main-20261015 blueprint finds no duplicate. It is not a restated clause of the item: it mentions no operads or algebras. Steps: 1 (Segal fibers, f^n ⊣ g^n, n=0 is the point) is elementary. 2 supplies every hypothesis of the new node. 3 is the inert-preservation argument in the style of HA 7.3.2.7: it uses the cocartesian mapping criterion and the counit adjunct P_α ε, and the mate of ⊗ε gives the adjoint lax structure, including the unit. 4 is whiskering into full algebra subcategories. 5 applies the parametric universal-arrow node with K = O^⊗ and restricts to fibers over the identity; the triangle homotopies are checked. 6 is strict compatibility of precomposition with postcomposition and whiskering. proof_deps equals the union of uses, there is no cycle, and every cited statement node is in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. The parent lem-coef-enrichment-change-adjunction gets exactly the clauses it uses."
+ }
 }

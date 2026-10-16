@@ -28,9 +28,124 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-vector-space-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-sc-discrete-valuation-ring], $A$ is an integral domain in which every ideal is principal. Thus [lem-weil-pbc-pid-noetherian-normal] applies and gives both that $A$ is Noetherian and that it is a normal domain. By [lem-sc-dvr-dimension-one], its Krull dimension is one.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sc-dvr-dimension-one"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr) and 00IC (lemma-valuation-ring-normal); preliminary hypotheses of Tag 09E8"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] to the Noetherian normal domain $A$ of Step 1 and the given finite separable extension $L/K$: $B$ is finite over $A$. The integral-closure construction is integral over $A$. By [lem-weil-pbc-integral-closure-finite-extension-normal], $B$ is a domain with fraction field $L$. Apply [lem-sc-integral-closure-dedekind-surjective-fibres] to the one-dimensional Noetherian domain $A$ and the finite field extension $L/K$. It gives that $B$ is Dedekind and the map on spectra is surjective, has finite fibres, and induces finite residue field extensions.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-sc-integral-closure-dedekind-surjective-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8 (remark-finite-separable-extension), first paragraph; Algebra Tags 032L and 09IG"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-algebra-ideal-in-radical] with $I=\\mathfrak m_A$, every maximal ideal of the integral $A$-algebra $B$ contracts to the unique maximal ideal $\\mathfrak m_A$ of $A$. Conversely, a prime of $B$ over $\\mathfrak m_A$ is nonzero, since it contains the nonzero image of a uniformizer of $A$; it is maximal because $B$ is a one-dimensional domain. Thus $X$ is exactly the fibre over $\\mathfrak m_A$, which is finite and nonempty by Step 2.",
+   "uses": [
+    "lem-weil-pbc-integral-algebra-ideal-in-radical"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8, maximal ideals are precisely primes over the base maximal ideal"
+   }
+  },
+  {
+   "text": "For $\\mathfrak q\\in X$, [lem-sc-dedekind-localization-dvr] applies to the Dedekind domain $B$ of Step 2 and makes $B_{\\mathfrak q}$ a DVR. By [def-weil-pbc-localization-at-prime] its maximal ideal is $\\mathfrak q B_{\\mathfrak q}$. The inverse image of this ideal in $A$ is $\\mathfrak q\\cap A=\\mathfrak m_A$, so $A\\to B_{\\mathfrak q}$ is local. Its residue field is $B/\\mathfrak q$: explicitly $b/s\\mapsto\\bar b/\\bar s$ maps onto $B/\\mathfrak q$, has kernel $\\mathfrak q B_{\\mathfrak q}$, and is well-defined since $s\\notin\\mathfrak q$. The finite residue extension in Step 2 therefore gives finite $f_{\\mathfrak q}>0$, the degree of a nonzero field extension.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8, local DVR extensions and residue degrees; Algebra Tag 034X"
+   }
+  },
+  {
+   "text": "The image of $\\pi_A$ in $B_{\\mathfrak q}$ is nonzero (all rings embed in $L$) and lies in its maximal ideal by Step 4. By [def-sc-discrete-valuation-ring], $B_{\\mathfrak q}$ is a local domain whose maximal ideal is $t_{\\mathfrak q}B_{\\mathfrak q}\\neq0$, and every ideal is principal, so it is Noetherian by [lem-weil-pbc-pid-noetherian-normal]. Thus [lem-weil-pbc-dvr-unit-times-uniformizer-power] applies: the image of $\\pi_A$ is $u_{\\mathfrak q}t_{\\mathfrak q}^{e_{\\mathfrak q}}$ with $e_{\\mathfrak q}\\ge0$. The exponent is positive because exponent zero would make $\\pi_A$ a unit. The exponent is unique: if $ut^a=vt^b$ with $a<b$, cancellation in the domain gives the unit $u=vt^{b-a}$ in the maximal ideal, a contradiction. If $t$ and $t′$ generate the same maximal ideal, write $t=at′$ and $t′=bt$; cancellation gives $ab=1$, so $a$ is a unit. Replacing $t$ by $t′$ therefore only changes the unit factor, and uniqueness gives the same exponent.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion; More on Algebra Tag 09E8, ramification indices"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-finite-galois-prime-residue-lifting] with the normal domain $A$ of Step 1 and the given finite normal separable extension. It supplies the restriction action of $G=\\operatorname{Aut}_K(L)$ on $B$. For $\\mathfrak q,\\mathfrak q'\\in X$, their contractions are both $\\mathfrak m_A$ by Step 3, so the same node supplies $\\sigma\\in G$ with $\\sigma(\\mathfrak q)=\\mathfrak q'$. Automorphisms take maximal ideals to maximal ideals; hence this is a transitive action on $X$.",
+   "uses": [
+    "lem-exc-finite-galois-prime-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EA (lemma-galois), using Tag 0BRK (lemma-one-orbit-geometric-galois)(1)"
+   }
+  },
+  {
+   "text": "For such $\\sigma$, the maps $b/s\\mapsto\\sigma(b)/\\sigma(s)$ and its inverse give an $A$-algebra isomorphism $B_{\\mathfrak q}\\simeq B_{\\mathfrak q'}$. It takes $t_{\\mathfrak q}$ to a generator of the target maximal ideal, hence to a unit times $t_{\\mathfrak q'}$. Apply it to $\\pi_A=u_{\\mathfrak q}t_{\\mathfrak q}^{e_{\\mathfrak q}}$; it fixes $\\pi_A$, so the uniqueness proved in Step 5 gives $e_{\\mathfrak q}=e_{\\mathfrak q'}$. The map $b\\bmod\\mathfrak q\\mapsto\\sigma(b)\\bmod\\mathfrak q'$ gives a $k$-linear field isomorphism $B/\\mathfrak q\\simeq B/\\mathfrak q'$. Mapping a basis through it gives equal dimensions, so $f_{\\mathfrak q}=f_{\\mathfrak q'}$. Nonemptiness of $X$ now gives common finite positive integers $e,f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EB (lemma-galois-conclusion), equality of the indices and degrees spelled out"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-dvr-norm-valuation-sum] to $A\\subset B$ with fraction fields $K\\subset L$ and $y=\\pi_A$. Finiteness of $B/A$, the fraction field, and the finite extension are Step 2 and the hypotheses; the finite set of maximal ideals and their contractions are Step 3; the local DVRs and finite residue degrees are Step 4. Put $n=[L:K]$. Multiplication by $\\pi_A$ on an $n$-element $K$-basis of $L$ has diagonal matrix $\\pi_A I_n$, so by [def-weil-endomorphism-determinant] $N_{L/K}(\\pi_A)=\\pi_A^n$. The normalized valuation is the uniformizer exponent, so the left side of the norm formula is $n$ and its summand at $\\mathfrak q$ is $f_{\\mathfrak q}e_{\\mathfrak q}$. Hence $[L:K]=\\sum_{\\mathfrak q\\in X}e_{\\mathfrak q}f_{\\mathfrak q}$. By Step 7 this is the sum of $g=|X|$ identical terms $ef$, namely $gef$.",
+   "uses": [
+    "lem-exc-dvr-norm-valuation-sum",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E8, displayed sum, from Algebra Tag 02MJ at a base uniformizer; Tag 09EB, final equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-sc-dedekind-localization-dvr",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-exc-finite-galois-prime-residue-lifting",
+  "lem-exc-dvr-norm-valuation-sum",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09E8, 09EA, 09EB; the norm/order proof of the degree sum is Algebra Tag 02MJ, and all conjugacy identifications are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +189,39 @@
    "results": "[leanfinder] OK 8 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ncard_primesOver_mul_ncard_primesOver, IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq, Ideal.sum_ramification_inertia, IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq, Ideal.exists_comap_galRestrict_eq, Ideal.ramificationIdx_le_finrank, Ideal.card_primesOverFinset_le_finrank",
    "date": "2026-10-17",
    "verdict": "no match: the pinned Galois.lean:222 identity assumes a finite flat invariant extension and ideal-theoretic indices; this node additionally supplies finite normalization, DVR localizations, the uniformizer-index identification and transitivity. Read Galois.lean:75-100,210-236 and the Stacks normalization discussion."
+  },
+  {
+   "tool": "grep",
+   "query": "ncard_primesOver_mul_ramificationIdxIn|exists_smul_eq_of_isGaloisGroup|sum_ramification_inertia",
+   "results": "[grep] OK 7 hit(s); Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: finite-flat invariant-extension degree identities do not supply the integral-closure finiteness, the DVR localizations, or their comparison with uniformizer exponents. Read pinned NumberTheory/RamificationInertia/Galois.lean:75-100,132-156,210-236 and RingTheory/RamificationInertia/Basic.lean:44-88. The split reuses the existing normalization and transitivity nodes.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "results": "[loogle] OK 1 hit(s); Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: finite-flat invariant-extension degree identities do not supply the integral-closure finiteness, the DVR localizations, or their comparison with uniformizer exponents. Read pinned NumberTheory/RamificationInertia/Galois.lean:75-100,132-156,210-236 and RingTheory/RamificationInertia/Basic.lean:44-88. The split reuses the existing normalization and transitivity nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite Galois extension of a DVR fraction field the normalization has g maximal ideals and common ramification e and residue degree f with field degree g e f",
+   "results": "[leansearch] OK 8 hit(s); Ring.instIsGaloisFractionRingNormalClosure, Ideal.sum_ramification_inertia, Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn, Ideal.ramificationIdx_eq_of_isGaloisGroup, IsGalois.to_normal, Ideal.ramificationIdx_eq_of_isGalois, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.inertiaDeg_eq_of_isGaloisGroup",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: finite-flat invariant-extension degree identities do not supply the integral-closure finiteness, the DVR localizations, or their comparison with uniformizer exponents. Read pinned NumberTheory/RamificationInertia/Galois.lean:75-100,132-156,210-236 and RingTheory/RamificationInertia/Basic.lean:44-88. The split reuses the existing normalization and transitivity nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a discrete valuation ring in a finite normal separable extension has transitive maximal ideals with discrete valuation localizations and common positive e f satisfying degree equals g e f",
+   "results": "[leanfinder] OK 8 hit(s); integralClosure.isDedekindDomain, IsIntegralClosure.isDedekindDomain, Ideal.inertiaDeg_le_finrank, Valuation.HasExtension.instLiesOverSubtypeMemValuationSubringValuationSubringMaximalIdeal, integralClosure.isDedekindDomain_fractionRing, Ring.instIsDedekindDomainNormalClosure, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Valuation.HasExtension.maximalIdeal_comap_algebraMap_eq_maximalIdeal",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: finite-flat invariant-extension degree identities do not supply the integral-closure finiteness, the DVR localizations, or their comparison with uniformizer exponents. Read pinned NumberTheory/RamificationInertia/Galois.lean:75-100,132-156,210-236 and RingTheory/RamificationInertia/Basic.lean:44-88. The split reuses the existing normalization and transitivity nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-exc-dvr-inertia-order-prime-part",
@@ -85,5 +229,29 @@
   "group": "Q62"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-exc-dvr-galois-degree-data",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks Tags 09E8/09EA/09EB. Reused finite normalization, Dedekind/fibre, maximal-contraction, DVR-localization and Galois-prime-conjugacy nodes. Derived equality of e,f by explicit local and residue isomorphisms, and the degree identity by evaluating a general norm/valuation formula at the base uniformizer. One new statement-only helper, no new Mathlib leaves or project attachments.",
+  "blueprint": "Proof, first paragraph of lem-exc-dvr-galois.proof.md: 'The equality between degree and ramification index used here follows from the length of the finite free integral closure modulo a uniformizer'; the general norm/order formula behind this length calculation, Stacks Tag 02MJ.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic Krull-Akizuki/Dedekind and finite residue-fibre theorem, exactly the normalization input of Stacks 09E8; this unit has no general substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-closure-dedekind-surjective-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N7-9402a1b27",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-9402a1b27 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new helper and every cited statement, and checked them against Stacks 02MJ (algebra.tex:30038, with its proof and definition-ord), 09E8, 09EA and 09EB (more-algebra.tex), and the blueprint main-20261015 lem-exc-dvr-galois proof, paragraph 1. The item statement matches 09E8/09EB and is unchanged and not weakened. Small cases work: Q(i)/Q over Z_(2), Z_(3) and Z_(5) all give 2=gef. The helper lem-exc-dvr-norm-valuation-sum is a true DVR special case of 02MJ: ord is the normalized valuation, and I tested it on Z_(2)[i] with y=1+i and y=2+i, on units and on inverses. It is strictly more general than the parent, holding for arbitrary y with no Galois hypothesis. It is not elementary, has no duplicate in the DAG (rg for 02MJ, 09E8, sum_ramification_inertia and norm/valuation statements) and is not a Mathlib one-liner, so unsplit is correct. I checked every step's hypotheses: 032L Noetherian+normal+separable, 09IG one-dimensional Noetherian, the radical node with I=m_A, Dedekind localization, conjugacy from the 0BRK leaf, and the elementary e/f transport by sigma. The tool_use lem-sc-integral-closure-dedekind-surjective-fibres is accepted as a generic Krull-Akizuki black box. Two repairable citation faults are fixed in fixes/: (B3/C1) the helper statement and item step 8 used the field-norm determinant without a node, and both now cite def-weil-endomorphism-determinant; (C4) item step 5 applied the unit-times-uniformizer-power node, which needs Noetherian, without citing where that comes from, and it now cites def-sc-discrete-valuation-ring and lem-weil-pbc-pid-noetherian-normal. proof_deps was recomputed. No nodes are dropped.; 2 file(s) fixed by the reviewer"
+ }
 }

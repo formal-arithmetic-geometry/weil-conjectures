@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "sk-def-sfb-derived-categories",
-   "place": "Left derived functors / Derived adjunctions: the compatible bounded-above resolution stages underlying the sentence \"Choose a K-flat resolution P to K\"; def-sfb-left-derived-functor.proof.md first paragraph, resolution and colimit construction.",
+   "place": "Left derived functors / Derived adjunctions: the compatible bounded-above resolution stages underlying the sentence \"Choose a K-flat resolution P to K\"; the item is the Stacks Tag 06XX special direct system used to make those stages compatible.",
    "via": [
     "lem-sfb-unbounded-kflat-resolution-existence"
    ]
@@ -22,9 +22,118 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The homotopy category $K(\\mathcal A)$ is triangulated with the cone triangles and shifts, and its localization $L:K(\\mathcal A)\\to D(\\mathcal A)$ is exact, by [lem-pur-homotopy-category-triangulated]. We use TR2 and TR3 with the meanings in [def-weil-triangulated-category].",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, first paragraph"
+   }
+  },
+  {
+   "text": "For $n=1$, the complex $T_1$ vanishes above degree $1$. Apply [lem-sfb-subcategory-left-resolution] with $a=1$ to obtain $E_1\\to T_1$, termwise epimorphic and a quasi-isomorphism, with all terms in $\\mathcal P$ and $E_1^i=0$ for $i>1$.",
+   "uses": [
+    "lem-sfb-subcategory-left-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, initial resolution using Tag 05T7(1)"
+   }
+  },
+  {
+   "text": "Assume the finite system through $E_n\\xrightarrow{e_n}T_n$ has been constructed with all asserted properties. Put $a=j_ne_n:E_n\\to T_{n+1}$ and take the actual cone triangle $E_n\\xrightarrow{a}T_{n+1}\\to C\\xrightarrow{\\delta}E_n[1]$ of [lem-pur-homotopy-category-triangulated]. By the cone formula [def-weil-abstract-derived-category], $C^i=T_{n+1}^i\\oplus E_n^{i+1}$, so $C$ vanishes above some integer $b$. Apply [lem-sfb-subcategory-left-resolution] with that $b$ to obtain $q:Q\\to C$, a quasi-isomorphism, with $Q$ bounded above and all its terms in $\\mathcal P$.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-subcategory-left-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, induction: the cone and its bounded-above resolution"
+   }
+  },
+  {
+   "text": "Write $c=\\delta q:Q\\to E_n[1]$ as a chain map and set $B=C(c)[-1]$, using the explicit cone of [def-weil-abstract-derived-category]. Then $B^i=E_n^i\\oplus Q^i$, and $d_B^i$ sends the two summands by $(d_{E_n}^i,0)$ and $(-c^i,d_Q^i)$. Rotate its distinguished cone triangle backwards twice (TR2 of [def-weil-triangulated-category], applied in [lem-pur-homotopy-category-triangulated]); the resulting triangle is $E_n\\xrightarrow{u}B\\xrightarrow{v}Q\\xrightarrow{c}E_n[1]$, where $u$ is minus the first inclusion and $v$ is the second projection. Thus $u^i$ has retraction minus the first projection and cokernel $Q^i$. In particular $B$ is bounded above with terms in $\\mathcal P$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, inductive triangle; explicit cone construction from Tag 0G6C, derived-lemma-improve-distinguished-triangle-homotopy, proof"
+   }
+  },
+  {
+   "text": "Rotate the triangles $E_n\\to B\\to Q\\xrightarrow{c}E_n[1]$ and $E_n\\xrightarrow{a}T_{n+1}\\to C\\xrightarrow{\\delta}E_n[1]$ twice. Since $c=\\delta q$, TR3 [def-weil-triangulated-category] applied to $q:Q\\to C$ and $1:E_n[1]\\to E_n[1]$ gives the third component; shifting it back gives $[f]:B\\to T_{n+1}$ and a morphism of the original triangles $(1,[f],[q])$. Choose a chain representative $f$. Apply the exact localization of [lem-pur-homotopy-category-triangulated]. The first and third components become isomorphisms, so the middle component $L([f])$ is an isomorphism by [lem-sf-triangle-morphism-iso]. Each cohomology functor factors through localization [def-weil-abstract-derived-category], hence every $H^i(f)$ is an isomorphism: $f$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, morphism-of-triangles diagram and quasi-isomorphism conclusion; Tag 014A, derived-lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "The equality $[f][u]=[a]$ means there are maps $h^i:E_n^i\\to T_{n+1}^{i-1}$ with $(fu-a)^i=d_T^{i-1}h^i+h^{i+1}d_{E_n}^i$. For the degreewise retraction $r^i:B^i\\to E_n^i$ set $H^i=h^ir^i$ and $\\widetilde f^i=f^i-d_T^{i-1}H^i-H^{i+1}d_B^i$. The equation $d^2=0$ [def-weil-abstract-derived-category] shows that $\\widetilde f$ is a chain map. Since $r^iu^i=1$ and $d_Bu=ud_{E_n}$, substitution gives $\\widetilde f u=a$ strictly. The correction vanishes on cohomology (on cycles it is a boundary), so $\\widetilde f$ remains a quasi-isomorphism. Replace $f$ by $\\widetilde f$. For $i<n$ the equality $f^iu^i=e_n^i$ makes $f^i$ epic; for $i>n+1$ its target is zero.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, lifting the homotopy through the termwise split injection"
+   }
+  },
+  {
+   "text": "Choose an epimorphism $p:P\\to K^n$ with $P\\in\\mathcal P$. Let $D$ be $P\\xrightarrow{1}P$ in degrees $n,n+1$, zero elsewhere, and define $g:D\\to T_{n+1}$ by $p$ and $d_K^np$ (the latter factors through $\\ker d_K^{n+1}$ because $d_K^{n+1}d_K^n=0$). Then $g^n$ is epic and the image of $g^{n+1}$ is $\\operatorname{im}d_K^n$. The quotient of $T_{n+1}^{n+1}=\\ker d_K^{n+1}$ by this image is $H^{n+1}(T_{n+1})$ [def-weil-abstract-derived-category]. The composite $\\ker d_B^{n+1}\\to H^{n+1}(B)\\xrightarrow{H^{n+1}(f)}H^{n+1}(T_{n+1})$ is epic. Thus the images of $f^{n+1}$ and $g^{n+1}$ together generate $T_{n+1}^{n+1}$, so $[f,g]:B\\oplus D\\to T_{n+1}$ is epic in degree $n+1$, as well as in degree $n$ and all the other degrees already covered in step 6.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, final paragraph: the two-term identity complex makes the last two components epic"
+   }
+  },
+  {
+   "text": "The differential $1_P$ makes $D$ acyclic: in degree $n$ the kernel is zero, and in degree $n+1$ the image is all of $P$. In the finite direct sum $B\\oplus D$, kernels and images are the direct sums of the respective kernels and images, so $H^i(B\\oplus D)=H^i(B)\\oplus0$ and $H^i([f,g])=H^i(f)$ [def-weil-abstract-derived-category]. Set $E_{n+1}=B\\oplus D$, $e_{n+1}=[f,g]$, and $u_n=(u,0)$. This is a termwise epimorphic quasi-isomorphism with strict equality $e_{n+1}u_n=j_ne_n$. Its terms are finite biproducts of objects of $\\mathcal P$; it is bounded above because $B$ is and $D$ vanishes above $n+1$. The transition has degreewise retraction $r\\operatorname{pr}_B$ and cokernel $Q^i\\oplus D^i\\in\\mathcal P$. All earlier maps are retained, so induction constructs the required system for every $n\\ge1$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XX, derived-lemma-special-direct-system, final replacement and completion of the induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sfb-subcategory-left-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XX (derived-lemma-special-direct-system), statement and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -235,7 +344,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-unbounded-kflat-resolution-existence",
@@ -243,5 +352,20 @@
   "group": "NV"
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-derived-categories"
+ "unit": "sk-def-sfb-derived-categories",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-subcategory-truncation-resolution-system",
+  "worker": "stage1",
+  "summary": "The eight steps follow Stacks 06XX: initial bounded-above resolution, resolution of the inductive cone, explicit shifted cone with split inclusion, comparison of triangles, strict homotopy correction, and the two-term identity complex giving degreewise epimorphisms. Only Tag 05T7(1) remains a new helper. The former Tag 0G6C helper is replaced by its explicit cone construction. Existing Mathlib leaves supply triangulation and the isomorphism criterion for morphisms of triangles after exact localization.",
+  "blueprint": "Realizes the compatible bounded-above stages used for the K-flat resolution in sk-def-sfb-derived-categories, Left derived functors and Derived adjunctions (\"Choose a K-flat resolution P to K\"), via lem-sfb-unbounded-kflat-resolution-existence. The proof follows Stacks 06XX without changing the blueprint route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-c027378c9",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-c027378c9 (reviewer sub-agent of L); spot-checked: I read Stacks derived.tex at Tag 06XX (lemma-special-direct-system, lines 9213-9325, statement and full proof), Tag 05T7(1) (lemma-subcategory-left-resolution, 5301-5360) and Tag 0G6C (lemma-improve-distinguished-triangle-homotopy, 3458-3484). The item agrees with 06XX hypothesis by hypothesis. The one extra hypothesis, that P is stable under isomorphisms, is the convention that makes 'cokernel lies in P' meaningful, and the only user (the parent lem-sfb-unbounded-kflat-resolution-existence) applies the item to flat objects, which are stable under isomorphisms. I checked all eight steps. Steps 1-3: the cone C^i = T_{n+1}^i + E_n^{i+1} is bounded above and 05T7(1) applies. Step 4: I recomputed the signs; B = C(c)[-1] has differential with components (d_E,0) and (-c,d_Q), and the two backward rotations give (E_n,B,Q,-i[-1],p[-1],c), split with cokernel Q^i, as in 0G6C. Step 5: TR3 on the twice-rotated triangles uses the square dq = 1c, which holds by definition of c; after exact localization lem-sf-triangle-morphism-iso (Mathlib isIso2_of_isIso13) makes L[f] invertible, and H^i factors through Q. Step 6: the corrected map f~ = f - (dH + Hd) with H = h r satisfies f~ u = a strictly, since r u = 1 and d_B u = u d_E; it is homotopic to f, so still a quasi-isomorphism, and it is epic below degree n. Step 7: the disk map g is a chain map, the image of g^{n+1} is im d_K^n, and surjectivity of H^{n+1}(f) covers degree n+1. Step 8: D is acyclic, e_{n+1} u_n = j_n e_n strictly, the terms and cokernels lie in P by finite biproducts, and the bound is max(b, n+1). The new node lem-sfb-subcategory-left-resolution is exactly 05T7(1). It is statement-only and self-contained, strictly smaller than the item, and passes small-case checks (K = 0, K = M[0]). Duplicate search: grep of the DAG for 05T7, 06XX and key words found only module-sheaf or flat specializations (lem-pc-flat-truncation-tower, lem-pc-flat-truncation-successor, lem-pc-kflat-bounded-flat-replacement, lem-kun-bounded-flat-replacement), the dual 05T6 nodes and functorial-tower nodes; none is a duplicate. Mathlib has only the injective CM5a lemmas, projective resolutions and the functorial LeftResolution, so no Mathlib leaf. Route: every off-unit node cited is a Mathlib leaf, so no tool_uses are needed or accepted. No SGA source is cited. No target, coefficient category or base-change morphism is involved. No fixes."
+ }
 }

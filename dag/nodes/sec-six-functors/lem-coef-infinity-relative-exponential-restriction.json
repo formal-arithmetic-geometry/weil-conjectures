@@ -29,9 +29,85 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The displayed operators define $H_Z$ as a simplicial set. More explicitly, for every simplicial map $k:K\\to S$, maps $a:K\\to H_Z$ over $S$ correspond bijectively to simplicial maps $F:K\\times_S Z\\to\\mathcal E$. Given $a$, write $a(t)=(k(t),h_t)$ for each $n$-simplex $t$ of $K$, and set $F_n(t,z)=(h_t)_n(\\mathrm{id}_{[n]},z)$. Conversely, given $F$, assign to $t$ the map with value $F_l(t\\circ\\alpha,z)$ on an $l$-simplex $(\\alpha:[l]\\to[n],z)$ of $\\Delta^n\\times_S Z$. The simplicial identities make these maps simplicial and show that the two assignments are inverse. This also shows their compatibility with restriction in $K$ and $Z$. Thus $R$ is a simplicial map over $S$. All products and pullbacks here are degreewise as in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  },
+  {
+   "text": "First show that each $H_Z$, for $Z=X,Y$, is a quasicategory. Given an inner horn $A=\\Lambda_i^m\\to H_Z$, its projection to $S$ extends to $\\sigma:B=\\Delta^m\\to S$, since $S$ is a quasicategory [def-cbc-enhanced-diagrams-cones]. The horn inclusion $a:A\\hookrightarrow B$ is a categorical equivalence by [lem-coef-joyal-model-structure]. Apply [lem-coef-cocartesian-categorical-base-change] to $Z\\to S$ and $a$ over $S$: $a_Z:A\\times_S Z\\to B\\times_S Z$ is a categorical equivalence. It is also degreewise injective, by the degreewise pullback description. Hence $a_Z$ is a Joyal trivial cofibration. Since $\\mathcal E$ is a quasicategory, its terminal map is a Joyal fibration [lem-coef-joyal-model-structure]. Extend the map $A\\times_S Z\\to\\mathcal E$ of step 1 along $a_Z$ by the lifting property. Step 1 turns the extension into the required simplex of $H_Z$ with exactly the prescribed horn.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocartesian-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  },
+  {
+   "text": "Fix a lifting square for $R$ with left map $a:A=\\Lambda_i^m\\hookrightarrow B=\\Delta^m$, $0<i<m$. Its bottom simplex in $H_X$ determines $\\sigma:B\\to S$ and $g:B\\times_S X\\to\\mathcal E$. By step 1 its top map determines $f:A\\times_S Y\\to\\mathcal E$. Since $R$ lies over $S$, commutativity of the lifting square identifies the projection of this top map with $\\sigma|_A$; hence both displayed pullbacks use the same map to $S$. Commutativity of the square means $f|_{A\\times_S X}=g|_{A\\times_S X}$, strictly. Because $j$ is injective in every degree, identify $B\\times_S X$ with its image in $B\\times_S Y$; its intersection with $A\\times_S Y$ is exactly $A\\times_S X$, degree by degree. The compatible maps therefore define a simplicial map $w:U\\to\\mathcal E$, where\n$$U=(A\\times_S Y)\\coprod_{A\\times_S X}(B\\times_S X)\\subseteq B\\times_S Y.$$\nThis is an actual union and ordinary simplicial pushout, so its map $v:U\\hookrightarrow B\\times_S Y$ is degreewise injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  },
+  {
+   "text": "The two maps $a_X:A\\times_S X\\to B\\times_S X$ and $a_Y:A\\times_S Y\\to B\\times_S Y$ are categorical equivalences: the inner horn inclusion is one by [lem-coef-joyal-model-structure], and its pullbacks along the two given cocartesian fibrations are ones by [lem-coef-cocartesian-categorical-base-change]. Both maps are monomorphisms by their degreewise description. Thus both are Joyal trivial cofibrations.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocartesian-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  },
+  {
+   "text": "Let $c:A\\times_S Y\\to U$ be the pushout of $a_X$. It is a trivial cofibration, directly from the weak factorization system of [lem-coef-joyal-model-structure]: any lifting square from $c$ to a Joyal fibration restricts to a lifting square from $a_X$; a lift there glues to the already given map on $A\\times_S Y$, by the pushout property. Thus $c$ has the left lifting property against all Joyal fibrations, which the cited weak factorization system characterizes as trivial cofibrations. Since $v\\circ c=a_Y$ and both $c$ and $a_Y$ are categorical equivalences, two-out-of-three in [lem-coef-joyal-model-structure] makes $v$ a categorical equivalence. Together with the monomorphism from step 3, this makes $v$ a Joyal trivial cofibration.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  },
+  {
+   "text": "Apply the lifting property in [lem-coef-joyal-model-structure] to $v:U\\hookrightarrow B\\times_S Y$ and the terminal map of the quasicategory $\\mathcal E$. It supplies $\\widetilde w:B\\times_S Y\\to\\mathcal E$ with $\\widetilde w|_U=w$. By the explicit correspondence of step 1, $(\\sigma,\\widetilde w)$ is a simplex of $H_Y$ restricting to the given horn on $A\\times_S Y$ and restricting under $R$ to $g$ on $B\\times_S X$. These are equalities of simplicial maps, not identifications up to equivalence. This solves every inner-horn square for $R$. Step 2 already established that both its source and target are quasicategories. The argument uses no colimits in $\\mathcal E$ and uses only the degreewise injectivity of $j$, not fullness or preservation of cocartesian edges.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02ZR",
+    "place": "Lemma 7.3.4.5, proof paragraph claiming V is an isofibration, from the relative-exponential lifting square to its categorical-equivalence verification; specialized to a target base point and arbitrary monomorphism X into Y."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-cocartesian-categorical-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02ZR",
+  "place": "Expansion of the proof of the isofibration assertion for V using Kerodon 029H and the existing Joyal-model node; online sources are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +157,45 @@
    "results": "{\"t\": \"2026-10-16T19:14:45Z\", \"tool\": \"grep\", \"query\": \"relativeInitial|relativeExponential|IsInitial.*InnerFibration|InnerFibration.*IsInitial|cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"051a9cc3ad30f2c3\"}",
    "date": "2026-10-16",
    "verdict": "No match. The semantic hits are Quasicategory.hornFilling, StrictSegal.quasicategory and Quillen generating horns. PushoutProduct.lean:142-145 states ordinary internal-Hom restriction for a monomorphism; it does not state a relative exponential with varying base simplex. The grep hit at line 139 uses ofIsInitial for an initial simplicial set, not a relatively initial object or dependent exponent. Ordinary FiberedCategory.Cocartesian.lean:43-80 concerns categories with Hom sets."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?exponential|cocartesian|isofibration",
+   "results": "{\"t\": \"2026-10-16T19:43:53Z\", \"tool\": \"grep\", \"query\": \"relative.?exponential|cocartesian|isofibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-145, CategoryWithFibrations.lean:55-95, and CategoryTheory/FiberedCategory/Cocartesian.lean:43-70. Ordinary internal-Hom restriction concerns products with a fixed simplicial set; it does not prove preservation of categorical equivalences under pullback along a cocartesian fibration, or the relative exponential over varying base simplices. Quillen horn fibrations and ordinary-category cocartesian arrows are different notions. No Joyal model structure or quasicategorical cocartesian-fibration theorem was found in the grep results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative internal Hom restriction lifts inner horns for inclusions between cocartesian fibrations over a common base",
+   "results": "{\"t\": \"2026-10-16T19:43:54Z\", \"tool\": \"leansearch\", \"query\": \"Relative internal Hom restriction lifts inner horns for inclusions between cocartesian fibrations over a common base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"HasFibers.Fib.map_homMk\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"HasFibers.homLift\", \"CategoryTheory.Functor.IsStronglyCartesian.toIsHomLift\", \"CategoryTheory.IsHomLift.lift_comp_id\"], \"digest\": \"ccd00b37434d7d1a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-145, CategoryWithFibrations.lean:55-95, and CategoryTheory/FiberedCategory/Cocartesian.lean:43-70. Ordinary internal-Hom restriction concerns products with a fixed simplicial set; it does not prove preservation of categorical equivalences under pullback along a cocartesian fibration, or the relative exponential over varying base simplices. Quillen horn fibrations and ordinary-category cocartesian arrows are different notions. No Joyal model structure or quasicategorical cocartesian-fibration theorem was found in the grep results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"pre\"",
+   "results": "{\"t\": \"2026-10-16T19:43:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"pre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.instInnerFibrationAppPreOfMonoOfQuasicategory\"], \"digest\": \"e48d737d9d2e7766\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-145, CategoryWithFibrations.lean:55-95, and CategoryTheory/FiberedCategory/Cocartesian.lean:43-70. Ordinary internal-Hom restriction concerns products with a fixed simplicial set; it does not prove preservation of categorical equivalences under pullback along a cocartesian fibration, or the relative exponential over varying base simplices. Quillen horn fibrations and ordinary-category cocartesian arrows are different notions. No Joyal model structure or quasicategorical cocartesian-fibration theorem was found in the grep results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of dependent relative exponential simplicial sets along a monomorphism between cocartesian fibrations is an inner fibration",
+   "results": "{\"t\": \"2026-10-16T19:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of dependent relative exponential simplicial sets along a monomorphism between cocartesian fibrations is an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"d56a4c1e66819ba2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-145, CategoryWithFibrations.lean:55-95, and CategoryTheory/FiberedCategory/Cocartesian.lean:43-70. Ordinary internal-Hom restriction concerns products with a fixed simplicial set; it does not prove preservation of categorical equivalences under pullback along a cocartesian fibration, or the relative exponential over varying base simplices. Quillen horn fibrations and ordinary-category cocartesian arrows are different notions. No Joyal model structure or quasicategorical cocartesian-fibration theorem was found in the grep results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative functor category over a base: restriction along inclusion of cocartesian fibrations has the inner horn lifting property",
+   "results": "{\"t\": \"2026-10-16T19:45:12Z\", \"tool\": \"leanfinder\", \"query\": \"Relative functor category over a base: restriction along inclusion of cocartesian fibrations has the inner horn lifting property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"4284575ad34309b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:70-85,139-145, CategoryWithFibrations.lean:55-95, and CategoryTheory/FiberedCategory/Cocartesian.lean:43-70. Ordinary internal-Hom restriction concerns products with a fixed simplicial set; it does not prove preservation of categorical equivalences under pullback along a cocartesian fibration, or the relative exponential over varying base simplices. Quillen horn fibrations and ordinary-category cocartesian arrows are different notions. No Joyal model structure or quasicategorical cocartesian-fibration theorem was found in the grep results."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-fiber-cocone-simplex-extension",
@@ -92,5 +203,20 @@
   "group": "NA"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-exponential-restriction",
+  "worker": "stage1",
+  "summary": "Verified the exact item against the relative-exponential lifting argument in Kerodon 02ZR and 0472. Kept its statement and hypotheses. Expanded the simplicial universal property, quasicategory proof, union/intersection calculation, pushout lifting argument and strict horn filler. Created only the missing categorical-equivalence pullback theorem for cocartesian fibrations (029H); reused the existing Joyal-model node. No project Lean attachment or Mathlib match was found.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, displayed derived Hom/derived limit calculation; through the recorded finite diagram realization and finite-poset/fiber-cone ancestry. This split supplies the relative-exponential inner-fibration prerequisite to lem-coef-infinity-fiber-cocone-simplex-extension; it does not replace the ancestor unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-320216504",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-320216504 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement is byte-identical to the base copy. I read its six steps, the new node lem-coef-cocartesian-categorical-base-change, and the full statements of def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations and lem-coef-joyal-model-structure (same unit). Each cited clause is there: monos as cofibrations, the lifting characterisations of both weak factorization systems, two-out-of-three, inner horns as trivial cofibrations, and fibrant exactly when a quasicategory. Step 1 (relative-exponential correspondence) is elementary and correct. Step 2 (H_Z is a quasicategory) extends the horn's projection in S, then applies the new node to the horn, which need not be a quasicategory, so the pulled-back horn inclusion is a mono categorical equivalence, and E is fibrant. In step 3 the union inside Δ^m×_S Y is an actual pushout; this uses that j is injective in each degree and that qj=p. Steps 4–6 cover pulling back along p and q, pushout stability of trivial cofibrations through the lifting property, two-out-of-three applied to v∘c=a_Y, and a strict filler. No hypothesis is missing and no off-unit statement is used, so no tool_uses are needed. The new node is true: pullback along a cocartesian fibration preserves categorical equivalences, as in HTT 3.3.1.3/B.3 and Kerodon §5.6.7 (029H). It is not archived; WANTED is filed and the proof is marked agent. I tested S=Δ^0, u=id, r=id and Z empty. It is statement-only, all its notions come from its three stmt_deps, its blueprint from/via are correct, and same_as is [] (the main-20261015 blueprint never mentions cocartesian or categorical equivalence). It has no Mathlib match: the Mathlib in this checkout has no Joyal model structure, and innerFibration_pullbackObjObjπ is a non-relative map. My DAG search over the Joyal, isofibration, marked, straightening and relative-exponential nodes found no duplicate. Item edge cases checked: S a point, X empty, X=Y, non-full j. The parent's use of the item is consistent with its hypotheses. No fixes and no dropped nodes."
+ }
 }
