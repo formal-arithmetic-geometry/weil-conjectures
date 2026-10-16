@@ -25,7 +25,9 @@
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
   "def-weil-closed-immersion",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pur-proetale-supported-exterior-product",
+  "def-pur-etale-derived-supported-sections"
  ],
  "proof": [
   {
@@ -261,5 +263,29 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-94c7f8a3b (reviewer sub-agent of L); spot-checked: Read all three delivered nodes and cited statements; checked localization maps, boundary signs, boundedness, coefficient categories, source tags, target declarations, duplicates and edge cases. Both compatibility children are substantive statement-only lemmas. Accepted all three generic tool_uses. No repairs needed; detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KunnethSupported",
+  "declaration": "AlgebraicGeometry.Etale.isIso_supportedExteriorProduct",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedKunnethCoefficient_finite",
+   "AlgebraicGeometry.Etale.supportedKunnethCoefficient_topology",
+   "AlgebraicGeometry.Etale.supportedKunnethCoefficient_discrete",
+   "AlgebraicGeometry.Etale.isIso_supportedExteriorProduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KunnethSupported.lean",
+  "statement": "theorem isIso_supportedExteriorProduct (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) [Fact (1 ≤ n)] {X Y Z W : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] [IsSeparated (Y ↘ Spec (CommRingCat.of D.k))] (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (K : DerivedCategory.Bounded (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)))) (L : DerivedCategory.Bounded (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)))) (_hL : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Y a b L.obj) : IsIso (supportedExteriorProduct (Padic.coefficientExtensionRing l E n) (X ↘ Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) i j K.obj L.obj) ∧ ∀ (Kp : ProEtale.FiniteCoefficientDerivedCategoryPlus X (Padic.coefficientExtensionRing l E n)) (Lp : ProEtale.FiniteCoefficientDerivedCategoryPlus Y (Padic.coefficientExtensionRing l E n)) (wx : ProEtale.EtaleOriginWitness X (Padic.coefficientExtensionRing l E n) Kp) (wy : ProEtale.EtaleOriginWitness Y (Padic.coefficientExtensionRing l E n) Lp) (_hx : wx.L.obj ≅ K.obj) (_hy : wy.L.obj ≅ L.obj), IsIso (ProEtale.supportedExteriorProductOverField (Padic.coefficientExtensionRing l E n) D.k (X ↘ Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) i j ((ProEtale.fixedRingDerivedTransport X (Padic.coefficientExtensionRing l E n)).obj Kp.obj) ((ProEtale.fixedRingDerivedTransport Y (Padic.coefficientExtensionRing l E n)).obj Lp.obj))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5c1afdfc7",
+  "group": "N4",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all three modules, dependencies, canonical maps, witnesses, universes, edge cases, docstrings and verbatim signatures. scompile.py passed all files. Original blueprint Markdown was unavailable; this source-verification limitation is documented. No repairs or branch changes."
  }
 }
