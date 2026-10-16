@@ -3,22 +3,156 @@
  "blueprint": {
   "is": "def-sf-setting",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sf-setting"
+  ]
  },
  "kind": "definition",
  "title": "Coefficients and sites",
- "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$. The *coefficient stages* are\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, with constructibility, finite Tor\namplitude, constructible intervals and Tate twists. At a finite stage, for a\nscheme $X$, $D^b_c(X,\\Lambda)$ is the full subcategory of the derived category\nof sheaves of $\\Lambda$-modules on the small étale site of $X$ consisting of the\nbounded complexes with constructible cohomology sheaves,\n$D^b_{ctf}(X,\\Lambda)\\subseteq D^b_c(X,\\Lambda)$ consists of those of finite Tor\namplitude, and the constant complex $\\Lambda_X$ is the constant sheaf $\\Lambda$\nplaced in degree $0$, the unit of $\\otimes^L_\\Lambda$.\nMorphisms are separated of finite type.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber] $(p,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring\n$\\mathcal O_E$ and uniformizer $\\varpi_E$, an integer $n\\ge1$, and put\n$A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. The *coefficient stages* are\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, with constructibility, finite Tor\namplitude, constructible intervals and Tate twists. The integral, rational and algebraically closed coefficient conventions are those of [def-weil-derived-complete-integral-detailed], [def-weil-rationalization-karoubi] and [def-weil-algebraically-closed-coefficients]. On schemes where $\\ell$ is invertible, their finite Tor conventions are [def-weil-finite-tor-amplitude], and Tate twists have the domain and coefficient conventions of [def-coefficient-twists-detailed]. At a finite coefficient stage $\\Lambda=A_{E,n}$, for a\nscheme $X$, $D^b_c(X,\\Lambda)$ is the full subcategory of the derived category\nof sheaves of $\\Lambda$-modules on the small étale site [def-weil-pbc-etale-site] of $X$ [def-weil-pbc-derived-categories] consisting of the\nbounded complexes with constructible cohomology sheaves [def-weil-pbc-constructible-complexes],\n$D^b_{ctf}(X,\\Lambda)\\subseteq D^b_c(X,\\Lambda)$ consists of those objects $K$ of finite Tor\namplitude: there exist integers $u\\leq v$ such that $K$ has Tor amplitude in $[u,v]$ in the sense of [def-kun-tor-amplitude]. At this finite stage, for integers $u\\leq v$, $D_c^{[u,v]}(X,\\Lambda)$ is the full subcategory of $D^b_c(X,\\Lambda)$ of objects with $\\mathcal H^i(K)=0$ for $i\\notin[u,v]$ [def-weil-derived-cohomology-sheaves]. The constant complex $\\Lambda_X$ is the constant sheaf $\\Lambda$\nplaced in degree $0$ [def-kun-constant-sheaf], the unit of $\\otimes^L_\\Lambda$ [def-kun-derived-tensor].\nMorphisms are separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/def-sf-setting.md",
   "place": "node def-sf-setting, order 1811"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-constant-sheaf",
+  "def-kun-derived-tensor",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\Lambda_X$, the constant ring sheaf on $X_{\\mathrm{\\acute et}}$, and let $R[0]$ be its complex in degree zero [def-kun-constant-sheaf]. For a complex $C$, the total tensor construction [def-pc-tensor-complex-sheaves] has only one nonzero summand in each degree in $R[0]\\otimes_R C$ and $C\\otimes_R R[0]$. On every site object $U$, multiplication gives mutually inverse module maps $R(U)\\otimes_{R(U)}C^i(U)\\rightleftarrows C^i(U)$, $r\\otimes c\\mapsto rc$, $c\\mapsto1\\otimes c$; on the other side use $c\\otimes r\\mapsto rc$ and $c\\mapsto c\\otimes1$. The inverse identities are the balancing relations $r\\otimes c=1\\otimes rc$ and $c\\otimes r=rc\\otimes1$. These maps commute with restrictions and hence induce inverse sheaf maps by the sheaf-tensor construction [def-pur-sheaf-tensor-product]. The differential is $d_C$: in the left tensor the sign is $(-1)^0=1$, and in the right tensor the term involving $d_R$ vanishes. This gives natural chain isomorphisms $R[0]\\otimes_R C\\cong C$ and $C\\otimes_R R[0]\\cong C$.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/def-sf-setting.md",
+    "place": "finite-stage constant-complex unit clause; direct calculation using Stacks Tag 03EK (sites-modules-section-tensor-product) and Tag 012Z (homology-definition-associated-simple-complex)"
+   }
+  },
+  {
+   "text": "For an acyclic complex $F$, the second chain isomorphism of Step 1 identifies $F\\otimes_R R[0]$ with $F$, which is acyclic. Thus $R[0]$ is K-flat by [def-pc-kflat-complex]. The first chain isomorphism also shows directly that $R[0]\\otimes_R F$ is acyclic, as required by the first-factor convention of [def-kun-derived-tensor].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (sites-cohomology-definition-K-flat), applied to the degree-zero ring complex"
+   }
+  },
+  {
+   "text": "Let $K\\in D(X_{\\mathrm{\\acute et}},\\Lambda)$ and choose a complex $C$ representing it, so $Q(C)\\cong K$, with $Q$ the localization functor [def-weil-pbc-derived-categories]. To compute $R[0]\\otimes_R^L K$ by [def-kun-derived-tensor], use the K-flat complex $R[0]$ itself in the first factor; Step 1 identifies its tensor with $C$. For $K\\otimes_R^L R[0]$, apply [lem-pc-kflat-resolution] to the ringed site $(X_{\\mathrm{\\acute et}},R)$ to choose a quasi-isomorphism $P\\to C$ with $P$ K-flat. The derived tensor definition computes this object as $Q(P\\otimes_R R[0])$. Step 1 identifies it with $Q(P)$, and inverting $P\\to C$ identifies $Q(P)$ with $Q(C)\\cong K$. Both multiplication identifications are natural: for a chain map $f$, the equality $f(rc)=rf(c)$ gives their naturality squares in every degree. These equations remain true after localization; they remain true for inverses of quasi-isomorphisms by composing with those inverses, and for composites by composing the squares. Consequently they give natural left and right unit identifications for the derived tensor product. This proves the assertion that the defined constant complex is its unit.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-derived-tensor",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (sites-cohomology-lemma-K-flat-resolution) and Section 06YL (sites-cohomology-section-flat); the unit is the explicit degree-zero calculation of Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-setting/def-sf-setting.md",
+  "place": "finite-stage unit assertion, expanded by the elementary multiplication calculation and the existing Stacks 06YS resolution theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of etale sheaves finite Tor amplitude finite and adic coefficient stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}",
+   "date": "2026-10-17",
+   "verdict": "partial only: the returned general derived-category or sheaf-module declarations do not state this complete coefficient-stage definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|finiteTorAmplitude|constantComplex",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible derived category of etale sheaves and its subcategory of finite Tor amplitude",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsTriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": IsTriangulated (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $\\\\mathcal{C}$, obtained by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical triangulated structure. This struc\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : C) (n : ℤ) : ((singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}\n  {\"name\": \"DerivedCategory.instPreadditive\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Preadditive (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$, its derived category inherits a canonical preadditive structure. This means that for any two objects in the derived category, the set of morphisms between them \"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (n : ℤ) : Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}",
+   "date": "2026-10-17",
+   "verdict": "partial only: the returned general derived-category or sheaf-module declarations do not state this complete coefficient-stage definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant coefficient sheaf in degree zero is unit of derived tensor product of sheaves of modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] → SheafOfModules R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs the canonical sheaf of $ R $-modules by assigning to each object $ X $ the free $ R(X) $-mo\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_apply_coe\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  (M : SheafOfModules R) (f : SheafOfModules.unit R ⟶ M) (X : Cᵒᵖ),\\n  ↑(M.unitHom\", \"doc\": \"For any sheaf of modules $ M $ over a sheaf of rings $ R $ and any natural transformation $ f : \\\\text{unit}(R) \\\\to M $, the component of the canonical equivalence $ \\\\text{Hom}(\\\\text{unit}(R), M) \\\\cong\"}\n  {\"name\": \"SheafOfModules.unit_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)],\\n  (SheafOfModules.unit R).val = PresheafOfModules.unit R.val\", \"doc\": \"For a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the underlying presheaf of the canonical sheaf of $ R $-modules (constructed by assigning free $ R(X) $-modul\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_comp_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (f : SheafOfModules.unit R ⟶ M) (p : M ⟶ N),\\n  N.unitH\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and sheaves of modules $ M $ and $ N $ over $ R $, the equivalence between natural transformations $ \\\\eta: \\\\t\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (s : M.sections) (p : M ⟶ N),\\n  CategoryTheory.Categor\", \"doc\": \"For any sheaf of modules $M$ and $N$ over a sheaf of rings $R$, any global section $s$ of $M$, and any morphism $p: M \\to N$, the composition of the inverse unit hom equivalence applied to $s$ followed\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          (M : SheafOfModules R) → (SheafOfModules.unit\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and a sheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transform\"}",
+   "date": "2026-10-17",
+   "verdict": "partial only: the returned general derived-category or sheaf-module declarations do not state this complete coefficient-stage definition"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleIn|hasTorAmplitudeIn|KFlat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "^def unit|^noncomputable def unit|^lemma unit_val|^def tensorUnit|^def leftUnitor",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"line\": \"123\", \"text\": \"def unitsFstOne : Subgroup (Unitization R A)ˣ where\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"line\": \"146\", \"text\": \"def unitsFstOne_mulEquiv_quasiregular : unitsFstOne R A ≃* (PreQuasiregular A)ˣ where\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean\", \"line\": \"81\", \"text\": \"def unitization : Unitization R s →ₐ[R] A :=\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean\", \"line\": \"135\", \"text\": \"noncomputable def unitizationAlgEquiv (h1 : (1 : A) ∉ s) :\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean\", \"line\": \"162\", \"text\": \"def unitization : Unitization ℕ s →ₐ[ℕ] R :=\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean\", \"line\": \"184\", \"text\": \"def unitization : Unitization ℤ s →ₐ[ℤ] R :=\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Unitization.lean\", \"line\": \"233\", \"text\": \"def unitization : Unitization R s →⋆ₐ[R] A :=\"}\n  {\"file\": \"Mathlib/Algebra/Ring/Subring/Units.lean\", \"line\": \"25\", \"text\": \"def Units.posSubgroup (R : Type*) [Semiring R] [LinearOrder R] [IsStrictOrderedRing R] :\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"line\": \"81\", \"text\": \"noncomputable def unitIsoAux (F : C ⥤ AddCommGrpCat.{v}) [PreservesFiniteLimits F] (X : C) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"line\": \"107\", \"text\": \"noncomputable def unitIso : 𝟭 (C ⥤ₗ AddCommGrpCat) ≅\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"35\", \"text\": \"def unitary (R : Type*) [Monoid R] [StarMul R] : Submonoid R where\"}\n  {\"file\": \"Mathlib/Algebra/Star/Unitary.lean\", \"line\": \"227\", \"text\": \"def unitarySubgroup : Subgroup G where\"}\n  {\"file\": \"Mathlib/Algebra/Group/Invertible/Basic.lean\", \"line\": \"27\", \"text\": \"def unitOfInvertible [Monoid α] (a : α) [Invertible a] : αˣ where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf.lean\", \"line\": \"304\", \"text\": \"noncomputable def unit : PresheafOfModules R where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf.lean\", \"line\": \"361\", \"text\": \"noncomputable def unitHomEquiv (M : PresheafOfModules R) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf.lean\", \"line\": \"173\", \"text\": \"noncomputable def unit : SheafOfModules R where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf.lean\", \"line\": \"178\", \"text\": \"noncomputable def unitHomEquiv (M : SheafOfModules R) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"60\", \"text\": \"noncomputable def unitToPushforwardObjUnit : unit S ⟶ (pushforward.{u} φ).obj (unit R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean\", \"line\": \"92\", \"text\": \"def leftUnitor (M : SemimoduleCat.{u} R) : SemimoduleCat.of R (R ⊗[R] M) ≅ M :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"798\", \"text\": \"def Unit.map {X : ModuleCat R} : X ⟶ (extendScalars f ⋙ restrictScalars f).obj X :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"813\", \"text\": \"def unit : 𝟭 (ModuleCat R) ⟶ extendScalars f ⋙ restrictScalars.{max v u₂, u₁, u₂} f where\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Opposite.lean\", \"line\": \"28\", \"text\": \"def Units.opEquiv {M} [Monoid M] : Mᵐᵒᵖˣ ≃* Mˣᵐᵒᵖ where\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Equiv.lean\", \"line\": \"187\", \"text\": \"def unitsEquivProdSubtype [Monoid α] : αˣ ≃ {p : α × α // p.1 * p.2 = 1 ∧ p.2 * p.1 = 1} where\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Defs.lean\", \"line\": \"292\", \"text\": \"def Units.mkOfMulEqOne [Monoid α] [IsDedekindFiniteMonoid α] (a b : α) (hab : a * b = 1) : αˣ :=\"}\n  {\"file\": \"Mathlib/Algebra/Group/Units/Defs.lean\", \"line\": \"566\", \"text\": \"def unit' (h : IsUnit a) : αˣ := ⟨a, a⁻¹, h.mul_inv_cancel, h.inv_mul_cancel⟩\"}",
+   "date": "2026-10-17",
+   "verdict": "partial only: SheafOfModules.unit, PresheafOfModules.unit and ordinary module unitors are ingredients, not the complete coefficient-stage definition; searched in Algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category monoidal tensor unit single complex of constant ring sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasTensorXTensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C] {I : Type u_2}\\n  [inst_4 : AddMonoid I] {c : ComplexShape I} (K : HomologicalComplex C c) [inst_5 : D\", \"doc\": \"The tensor product of the tensor unit homological complex (with the unit object at index 0) and another homological complex $ K $ has a grading where each component at indices $ (i, j) $ is mapped to \"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit_1\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"Given a homological complex $ K $ in a monoidal category $ \\\\mathcal{C} $ and the tensor unit complex (which places the unit object $ \\\\mathbf{1}_C $ at index 0 and zero objects elsewhere), this instanc\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"The tensor unit homological complex in a monoidal category $ \\\\mathcal{C} $, when tensored with any homological complex $ K $, results in a complex that satisfies the total complex condition with respe\"}\n  {\"name\": \"HomologicalComplex.tensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [CategoryTheory.Limits.HasZeroObject C] →\\n          {I : Type u_2} → [AddMonoid I] → (c : ComplexShape I) → [DecidableEq I] → Homologic\", \"doc\": \"The homological complex constructed by placing the unit object $\\\\mathbf{1}_C$ of the monoidal category $C$ at index $0$ and zero objects elsewhere, with all differentials being zero morphisms. This is\"}\n  {\"name\": \"HomologicalComplex.leftUnitor'\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"In a monoidal category $\\\\mathcal{C}$ with complex shape $c$, the left unitor isomorphism establishes that tensoring the tensor unit complex (which has the monoidal unit object at index 0 and zero obje\"}\n  {\"name\": \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C] {I : Type u_2}\\n  [inst_4 : AddMonoid I] {c : ComplexShape I} (K : HomologicalComplex C c) [inst_5 : D\", \"doc\": \"The tensor product of the graded object $ K.X $ and the graded object associated to the tensor unit complex $ (\\\\text{tensorUnit} \\\\, C \\\\, c).X $ satisfies the grading compatibility condition. Specifica\"}\n  {\"name\": \"HomologicalComplex.rightUnitor'\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Addit\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (placing the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself, given\"}\n  {\"name\": \"HomologicalComplex.tensorUnitIso\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          {I : Type u_2} →\\n            [inst_4 : AddMonoid I] →\\n           \", \"doc\": \"An isomorphism between the graded object constructed by placing the monoidal unit object at position 0 (via the single₀ functor) and the tensor unit homological complex (which places the monoidal unit\"}",
+   "date": "2026-10-17",
+   "verdict": "partial only: HomologicalComplex.tensorUnit and its unitors give the ordinary complex-level unit; they do not define the finite constructible and integral/rational/common-stage coefficient setting"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory.*Monoidal|Sheaf.*tensorUnit|constantComplex|boundedConstructible",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -39,5 +173,29 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sf-setting"
+ "unit": "sk-def-sf-setting",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-sf-setting",
+  "worker": "stage1",
+  "summary": "Read the current main-20261015 definition and identical sketch, the existing split and all reused dependency statements. Expanded the empty statement-dependency list using existing definitions only, keeping finite-stage small-etale categories distinct from integral/rational/common-stage coefficients. Wrote the tensor-unit calculation and explicitly cited K-flat resolution existence. Ran and recorded Mathlib searches; the full definition is neither an attachment nor a Mathlib leaf. No new nodes.",
+  "blueprint": "Opening finite-field datum and coefficient stages are realized by the existing global/coefficient definitions; the finite-stage paragraph by the small-etale derived, constructible, Tor, constant and tensor definitions; the final convention by the separated and finite-type definitions. Proof Steps 1-3 justify the final finite-stage unit assertion. The current sketch sk-def-sf-setting is verbatim the same imported definition, recorded in same_as. No unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution existence on a ringed site, used to compute the right derived unit. The coefficient-setting unit has no resolution theorem of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NA-33507aa6d",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-33507aa6d (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited node statements, the main-20261015 def-sf-setting.md and _section.md (identical text), and Stacks 06YN (sites-cohomology l.2999), 06YS (l.3207) and 03EK (sites-modules l.3551), with the tag/label pairs checked in tags/tags. The statement matches the source clause by clause. The four stages are kept. The finite stage A_{E,n} is on X_et, using def-weil-pbc-derived-categories, def-weil-pbc-constructible-complexes (needs a finite ring, which A_{E,n} is) and def-kun-tor-amplitude (any scheme). The higher stages point to the pro-etale derived-complete, raw-rationalization and common-stage nodes and are not identified with the etale ones. The Tor and twist conventions of the higher stages are restricted to schemes where ell is invertible, as their nodes require. def-weil-proper-morphism is cited only for separatedness. Nothing is weakened or added. Step 1 (elementary): the total-complex sign check in degree 0 holds in both orders, and the sectionwise multiplication isomorphisms carry over to the sheafified tensor. Step 2 (elementary): R[0] is K-flat under both the 06YN factor order and the def-kun-derived-tensor factor order. Step 3 (non-elementary): the identity resolution handles the left unit, and 06YS (any complex on a ringed site) gives P->C for the right unit. Naturality is shown through chain maps and localization. I accept the tool_use lem-pc-kflat-resolution (generic, the same as on the reviewed sk-def-sf-setting). There are no new nodes. Edge cases checked: empty X, zero complex, n=1, A_{E,2} (D^b_ctf remains an extra condition), characteristic-ell X, unbounded C. No fixes were needed. Maintainer notes: def-sf-setting now has the same statement and stmt_deps as sk-def-sf-setting and nothing cites it, so it is a merge candidate. The unit record's chapter and realized list are stale (sec-smooth-purity, master source). Both are maintainer metadata, not faults of this delivery."
+ }
 }

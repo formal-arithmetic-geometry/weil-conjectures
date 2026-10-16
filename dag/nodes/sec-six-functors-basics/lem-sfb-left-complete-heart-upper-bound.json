@@ -24,9 +24,111 @@
   "def-weil-triangulated-category",
   "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_n=\\tau_{\\ge -n}K$ for $n\\ge0$, with canonical transitions $u_n:K_{n+1}\\to K_n$. For each integer $i$, exactness supplies $T(H^i(K)[-i])\\simeq T(H^i(K)[0])[-i]$. The shift/cohomology isomorphism gives $H^j(T(H^i(K)[-i]))\\simeq H^{j-i}(T(H^i(K)[0]))=0$ for $j>i+c$, by the assumed bound and $H^i(K)\\in\\mathcal S$. This uses the heart hypothesis only on the actual cohomology objects of $K$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-triangulated-category",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05RR (section-derived-categories), cohomological shifts; Tag 014V (definition-exact-functor-triangulated-categories); Homology Tags 011G (definition-shift-cochain) and 011H (definition-cohomology-shift)"
+   }
+  },
+  {
+   "text": "For every integer $a\\le b+1$, prove $H^j(T(\\tau_{\\ge a}K))=0$ for $j>b+c$ by finite induction on $b+1-a$. At $a=b+1$, all cohomology of $\\tau_{\\ge b+1}K$ vanishes, so the zero map from the zero complex is a quasi-isomorphism and this truncation is zero in the derived category; the additive functor $T$ sends it to zero. For the induction step use the cited lower-truncation triangle with its integer parameter equal to $-a$:\n$$H^a(K)[-a]\\longrightarrow\\tau_{\\ge a}K\\longrightarrow\\tau_{\\ge a+1}K\\longrightarrow H^a(K)[-a+1].$$\nApply $T$ and its long exact cohomology sequence. For $j>b+c$, the left term has zero $H^j$ by step 1 since $a\\le b$, and the right term has zero $H^j$ by induction; hence the middle term has zero $H^j$. If $a>b$, the truncation is already zero. Taking $a=-n$ therefore proves $H^j(TK_n)=0$ for every $n\\ge0$ and $j>b+c$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), last displayed triangle; Tag 05RS (lemma-cohomology-homological), with Definition 0147"
+   }
+  },
+  {
+   "text": "For any fixed integer $r$, the same lower-truncation triangle with parameter $n+1$ gives\n$$T(H^{-n-1}(K)[n+1])\\longrightarrow TK_{n+1}\\xrightarrow{T(u_n)}TK_n\\longrightarrow T(H^{-n-1}(K)[n+2]).$$\nStep 1 bounds the first term above by $c-n-1$. Thus, when $r>c-n-1$, its cohomology in degrees $r$ and $r+1$ is zero. Exactness of the segment from $H^r$ of the first term to $H^{r+1}$ of the first term makes $H^r(T(u_n))$ an isomorphism. Consequently, for every $r$ this cohomology tower has invertible transitions for all $n\\ge\\max(0,c-r)$.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), successive lower truncations; Tag 05RS and Definition 0147"
+   }
+  },
+  {
+   "text": "The exact-countable-product theorem applies to both $\\mathcal A$ and $\\mathcal B$: their derived categories have countable products, computed termwise, and cohomology preserves those products with their projections. Left completeness, as assumed in the statement, supplies the Roos triangle for $K$ and $(K_n,u_n)$. The homotopy-limit mapping theorem applies to $T$, since it is exact and preserves precisely these countable products. It yields a distinguished triangle\n$$TK\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow TK[1],\\qquad P=\\prod_{n\\ge0}TK_n,\\quad \\operatorname{pr}_n s=T(u_n)\\operatorname{pr}_{n+1}.$$\nHere the products are derived-category products; no termwise preservation by $T$ is assumed. Indexing from zero rather than one only reindexes the countable product. The maps of $TK$ to the terms are $T$ of the stipulated truncation projections.",
+   "uses": [
+    "lem-weil-derived-limit-products-core",
+    "def-weil-derived-limit",
+    "lem-pc-homotopy-limit-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC (lemma-products); Tag 08TC (definition-derived-limit); Tag 0H72 (remark-map-into-derived-limit-truncations), with the assumed left completeness"
+   }
+  },
+  {
+   "text": "Fix $j>b+c$. Applying the long exact cohomology sequence to step 4 and using the product/cohomology identifications gives the exact segment in $\\mathcal B$\n$$\\prod_n H^{j-1}(TK_n)\\xrightarrow{1-s_{j-1}}\\prod_n H^{j-1}(TK_n)\\longrightarrow H^j(TK)\\longrightarrow\\prod_n H^j(TK_n)=0.$$\nThe last equality is step 2. The components of $s_{j-1}$ are the actual transition morphisms $H^{j-1}(T(u_n))$, by compatibility of the product identifications with projections. Thus it suffices to show that the first displayed morphism is an epimorphism; a uniform upper bound on the terms alone would not justify this.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS (lemma-cohomology-homological), Definition 0147; Tag 07KC (lemma-products); Tag 08TC, the cohomology sequence of its triangle"
+   }
+  },
+  {
+   "text": "Write $A_n=H^{j-1}(TK_n)$ and $f_n=H^{j-1}(T(u_n))$. Choose $N=\\max(0,c-j+1)$; step 3 makes $f_n$ invertible for $n\\ge N$. Let $Q=\\prod_n A_n$ and $p_n:Q\\to A_n$ be its projections. Define morphisms $v_n:Q\\to A_n$ by $v_N=0$, then $v_n=p_n+f_n v_{n+1}$ for $n=N-1,\\ldots,0$, and $v_{n+1}=f_n^{-1}(v_n-p_n)$ for $n\\ge N$. Each $v_n$ is a finite expression in projections and transition maps. The universal property of the product gives $v:Q\\to Q$ with components $v_n$. For every $n$ the displayed recursion says $v_n-f_n v_{n+1}=p_n$; hence $(1-s_{j-1})v=\\mathrm{id}_Q$. This is a section of $1-s_{j-1}$ in the abelian category $\\mathcal B$, so that map is an epimorphism. No argument using elements, surjectivity of arbitrary tower transitions, or enough injectives is required.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit), transition-endomorphism formula; elementary recursive splitting for an eventually invertible tower (agent argument)"
+   }
+  },
+  {
+   "text": "In the exact segment of step 5, the epimorphism of step 6 makes the morphism into $H^j(TK)$ zero. Exactness there says that the kernel of $H^j(TK)\\to0$ is zero, so $H^j(TK)=0$. This holds for every integer $j>b+c$, which is the asserted upper bound. Only finite truncation intervals were used in step 2, while step 3 and the Roos triangle handle the unbounded negative tail.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit), cohomology of the Roos triangle; conclusion of the agent truncation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-homotopy-limit-map",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-derived-cohomology-shift",
+  "lem-weil-derived-limit-products-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (2), lower-tail upper bound; explicit finite induction and eventual-transition splitting using Stacks Tags 08J5, 07KC, 05RS, 08TC."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -125,10 +227,80 @@
    "results": "{\"t\": \"2026-10-16T19:10:02Z\", \"tool\": \"grep\", \"query\": \"homotopyLimit|homotopy_limit|leftComplete|LeftComplete|cohomologicalAmplitude|cohomologicalDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading. ExactFunctor.lean:36-62 constructs the functor induced by an exact heart functor, whereas T here is an arbitrary triangulated functor with a class-relative heart bound. TStructure.lean:84-110 defines support and detects it by cohomology. No result gives the countable lower-truncation amplitude extension."
+  },
+  {
+   "tool": "grep",
+   "query": "leftComplete|LeftComplete|homotopyLimit|cohomologicalAmplitude",
+   "results": "{\"t\": \"2026-10-16T19:34:55Z\", \"tool\": \"grep\", \"query\": \"leftComplete|LeftComplete|homotopyLimit|cohomologicalAmplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper cohomology bound for a product preserving triangulated functor on bounded above complexes from a bound on cohomology objects",
+   "results": "{\"t\": \"2026-10-16T19:34:55Z\", \"tool\": \"leansearch\", \"query\": \"Upper cohomology bound for a product preserving triangulated functor on bounded above complexes from a bound on cohomology objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.mk\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsTriangulated\", \"HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.preservesHomologyOfExact\"], \"digest\": \"f00b2898d3c9de8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-16T19:34:55Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsLE, CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated functor preserving countable products extends an upper cohomology bound on a class in the heart to bounded above complexes in a left complete derived category",
+   "results": "{\"t\": \"2026-10-16T19:35:04Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated functor preserving countable products extends an upper cohomology bound on a class in the heart to bounded above complexes in a left complete derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.left_fac_of_isStrictlyGE\"], \"digest\": \"00fc6115adab6896\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightTExact|IsLeftTExact|IsTExact|homology.*truncGE|IsLE",
+   "results": "{\"t\": \"2026-10-16T19:35:17Z\", \"tool\": \"grep\", \"query\": \"IsRightTExact|IsLeftTExact|IsTExact|homology.*truncGE|IsLE\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\"], \"digest\": \"98e9200a5cf3ee0a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right t-exact bound on cohomology objects implies an upper bound on bounded above complexes by a truncation tower and vanishing of the Milnor lim one term",
+   "results": "{\"t\": \"2026-10-16T19:35:23Z\", \"tool\": \"leanfinder\", \"query\": \"A right t-exact bound on cohomology objects implies an upper bound on bounded above complexes by a truncation tower and vanishing of the Milnor lim one term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isZero_of_isGE\"], \"digest\": \"2e2d83c3c14bf1ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read DerivedCategory/TStructure.lean:84-118 and Triangulated/Functor.lean:186-219. Hits concern support or triangulated structure, not the class-relative bound through the lower truncation tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor commuting with sequential homotopy limits preserves an upper cohomological bound on complexes whose cohomology objects satisfy that bound",
+   "results": "{\"t\": \"2026-10-16T20:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"An exact functor commuting with sequential homotopy limits preserves an upper cohomological bound on complexes whose cohomology objects satisfy that bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CategoryTheory.Functor.map_distinguished_exact\"], \"digest\": \"645f257d07c4e4c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returns acyclicity, exact-functor Ext, support and homological-functor APIs; none states the class-relative upper bound through a truncation tower. Loogle has zero hits. Broad grep includes unrelated names ending in tExact; the anchored grep restricted to Algebra/Homology has zero hits. Read TStructure.lean:84-118, Triangulated/Functor.lean:186-219 and HomologicalFunctor.lean:80-95."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-16T20:00:51Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.IsLE, CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returns acyclicity, exact-functor Ext, support and homological-functor APIs; none states the class-relative upper bound through a truncation tower. Loogle has zero hits. Broad grep includes unrelated names ending in tExact; the anchored grep restricted to Algebra/Homology has zero hits. Read TStructure.lean:84-118, Triangulated/Functor.lean:186-219 and HomologicalFunctor.lean:80-95."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|HomotopyLimit|leftComplete|LeftComplete|tExact|TExact",
+   "results": "{\"t\": \"2026-10-16T20:00:50Z\", \"tool\": \"grep\", \"query\": \"homotopyLimit|HomotopyLimit|leftComplete|LeftComplete|tExact|TExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/CartesianClosed.lean\", \"Mathlib/Condensed/Module.lean\", \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\"], \"digest\": \"725c7fcd745d5207\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returns acyclicity, exact-functor Ext, support and homological-functor APIs; none states the class-relative upper bound through a truncation tower. Loogle has zero hits. Broad grep includes unrelated names ending in tExact; the anchored grep restricted to Algebra/Homology has zero hits. Read TStructure.lean:84-118, Triangulated/Functor.lean:186-219 and HomologicalFunctor.lean:80-95."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(homotopyLimit|HomotopyLimit|leftComplete|LeftComplete|IsTExact|IsRightTExact|IsLeftTExact)\\b",
+   "results": "{\"t\": \"2026-10-16T20:01:25Z\", \"tool\": \"grep\", \"query\": \"\\\\b(homotopyLimit|HomotopyLimit|leftComplete|LeftComplete|IsTExact|IsRightTExact|IsLeftTExact)\\\\b\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading. LeanFinder returns acyclicity, exact-functor Ext, support and homological-functor APIs; none states the class-relative upper bound through a truncation tower. Loogle has zero hits. Broad grep includes unrelated names ending in tExact; the anchored grep restricted to Algebra/Homology has zero hits. Read TStructure.lean:84-118, Triangulated/Functor.lean:186-219 and HomologicalFunctor.lean:80-95."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-int-compactness-direct-sums",
@@ -136,5 +308,74 @@
   "group": "Q68"
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-prop-int-compactness"
+ "unit": "sk-prop-int-compactness",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-left-complete-heart-upper-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved finite upper bounds by descending truncation induction, eventual cohomology stabilization from the successive lower-truncation triangle, and the unbounded-tail conclusion from a Roos triangle and an explicit section of 1-s. Reused existing generic nodes only; no new nodes. The arbitrary-abelian-category argument does not misapply the existing Ab-only Milnor and R^1-limit statements. Repeated the item Mathlib searches in four tools and a second phrasing; no matching declaration.",
+  "blueprint": "Realizes det-prop-int-compactness-direct-sums proof (2): extend the uniform integral heart bound to the lower tail by left completeness and the Milnor sequence, before the finite-window maps. The unit is sk-prop-int-compactness step (4), direct sums.",
+  "tool_uses": [
+   {
+    "node": "def-kun-truncations",
+    "why": "Good truncations and their cohomology ranges; a generic notion, not a replacement of the integral compactness route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "An acyclic complex is zero after localization, used only for the finite induction base."
+   },
+   {
+    "node": "def-weil-category-product",
+    "why": "Universal property constructs the explicit section componentwise."
+   },
+   {
+    "node": "def-weil-derived-limit",
+    "why": "The assumed left-completeness property uses a Roos triangle, not a functorial chosen cone."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Exactness means additivity, shift compatibility and preservation of distinguished triangles."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "Generic successive lower-truncation triangle, explicitly including its canonical transition; no node of this unit gives it."
+   },
+   {
+    "node": "lem-pc-homotopy-limit-map",
+    "why": "Generic product-preserving triangulated functor theorem; the unit requires exactly this passage through the truncation limit."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence, used for the finite induction, stabilization and Roos triangle."
+   },
+   {
+    "node": "lem-sp-derived-cohomology-shift",
+    "why": "Generic cohomology/shift identification used to track the upper bound i+c."
+   },
+   {
+    "node": "lem-weil-derived-limit-products-core",
+    "why": "Generic Tag 07KC for arbitrary abelian categories with exact countable products; no sheaf-specific product theorem is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-homotopy-limit-map",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-derived-cohomology-shift",
+  "lem-weil-derived-limit-products-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-e4348465f",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-e4348465f (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. Repaired one citation: step 1's source said 'Tag 05QL (definition-exact-functor-triangulated-categories)', but 05QL is derived-equation-rotate; the correct tag is 014V. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-left-complete-heart-upper-bound.json. No other change and no new nodes. Checks: the statement matches the use in blueprint main-20261015 det-prop-int-compactness-direct-sums proof (2) and unit sk-prop-int-compactness step 4, and the parent applies it with T=F, S=IndCons, c=2d+1. Step 1: shift substitution with k=-i gives the bound i+c. Step 2: lower-truncation triangle with parameter -a matches Stacks 08J5 derived.tex:4076; the base case a=b+1 is acyclic, hence zero in D(A); the induction is finite. Step 3: the fibre is bounded above by c-n-1, so H^r(T u_n) is an isomorphism for n>=max(0,c-r). Step 4: lem-weil-derived-limit-products-core (07KC, l.10475) gives products in D(A) and D(B), and lem-pc-homotopy-limit-map carries the Roos triangle (08TC, l.10442) through T. Step 5: the long exact segment has the right degree of the connecting map, and H^j of the product is the product of the H^j, which is 0 by step 2. Step 6: the explicit recursion gives a section of 1-s, with N=max(0,c-j+1). Step 7: exactness gives H^j(TK)=0. Left completeness is correctly a hypothesis; 0H72 (l.10558) does not assert it. Small cases checked: T=id, T=[-c] for both signs of c, K=0, b<0, an unbounded negative tail. Not a duplicate of det-proper-unbounded-window-*, det-finite-window-unbounded or lem-kun-site-truncation-derived-limit. Accepted tool uses: lem-pc-derived-lower-truncation-step-triangle, lem-pc-homotopy-limit-map, lem-weil-derived-limit-products-core. No SGA citation.; 1 file(s) fixed by the reviewer"
+ }
 }

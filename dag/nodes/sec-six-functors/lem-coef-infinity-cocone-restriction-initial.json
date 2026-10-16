@@ -28,9 +28,69 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(K,\\mathcal E)$. Define the opposite of a simplicial set $S$ by $S^{\\mathrm{op}}_n=S_n$, with the operator for $\\alpha:[m]\\to[n]$ given by the original operator for $\\alpha^{\\mathrm{rev}}(i)=n-\\alpha(m-i)$. Reversal takes $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, hence preserves quasicategories. It exchanges the two blocks in a join and exchanges the interval endpoints, giving\n$$(K\\star\\Delta^0)^{\\mathrm{op}}=\\Delta^0\\star K^{\\mathrm{op}},\\qquad \\operatorname{Fun}(K,\\mathcal E)^{\\mathrm{op}}\\cong\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal E^{\\mathrm{op}}).$$\nFor the second identification reverse the parameter simplex as well as $K$. Apply [lem-coef-infinity-join-cone-calculus] to $K^{\\mathrm{op}},\\mathcal E^{\\mathrm{op}}$ and take opposites. The joint apex-and-boundary comparison becomes an equivalence from $\\operatorname{Fun}(K^{\\triangleright},\\mathcal E)$ to\n$$\\mathcal T^+_K=D\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\mathcal E,$$\nwhere the first $D\\to D$ is the identity and $\\mathcal E\\to D$ is $\\Delta_K$. Its objects are $(x,F,\\lambda:F\\to\\Delta_Kx)$. Reversal of the fat-cone map retains the initial $K$-vertices labelled $0$ and sends the final vertices labelled $1$ to the apex. It is therefore exactly the comparison prescribed in the item, with both the apex and the boundary retained.\n\nMapping spaces under this reversal must be compared as homotopy types, not identified as right-pinched simplicial sets. Use [lem-coef-infinity-pinch-comparison]: its natural equivalences identify right-pinched $\\operatorname{Map}$ with the arrow spaces $U$. Reversing the arrow interval gives $U_{\\mathcal A^{\\mathrm{op}}}(v,u)\\cong U_{\\mathcal A}(u,v)^{\\mathrm{op}}$. For every simplicial set $S$, reversing barycentric coordinates gives a natural homeomorphism $|S^{\\mathrm{op}}|\\cong|S|$; its compatibility with realization relations is the formula for $\\alpha^{\\mathrm{rev}}$ above. These comparisons preserve the projections induced by apex and boundary restriction. Reversing the path interval in the homotopy-pullback formula gives the dual formula\n$$\\operatorname{Map}_{\\mathcal T^+_K}((x,F,\\lambda),(y,G,\\mu))\\simeq\\operatorname{Map}_D(F,G)\\mathop{\\times}^{h}_{\\operatorname{Map}_D(F,\\Delta_Ky)}\\operatorname{Map}_{\\mathcal E}(x,y),$$\nwith maps $b\\mapsto\\mu b$ and $a\\mapsto\\Delta_K(a)\\lambda$: both composites go from $F$ to $\\Delta_Ky$. Reversal retains the path and all its parameter simplices. By [lem-cbc-enhanced-functor-cone-calculus] the comparison equivalence induces mapping-space equivalences. Thus the displayed formula also computes the join-diagram mapping space, and its projection to $\\operatorname{Map}_D(F,G)$ is the actual restriction map. No boundary diagram has been fixed in this formula.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Agent-written opposite dual of the cited join-cone statement, with explicit reversal and pinch comparison; compare Kerodon 02XB and Example 4.6.6.8 (04J5)."
+   }
+  },
+  {
+   "text": "Let $c$ correspond to $(x,F,\\lambda)$. Its induced coherent cocone $\\lambda:F\\to\\Delta_Kx$ is colimiting by hypothesis. Apply the cocone dual of [lem-cbc-enhanced-functor-cone-calculus]. For every $y\\in\\mathcal E$ and cocone $\\nu:F\\to\\Delta_Ky$, that statement identifies the mapping space from $\\lambda$ to $\\nu$ in the fixed-$F$ cocone category with the homotopy fiber over $\\nu$ of\n$$q_y:\\operatorname{Map}_{\\mathcal E}(x,y)\\longrightarrow\\operatorname{Map}_D(F,\\Delta_Ky),\\qquad a\\longmapsto\\Delta_K(a)\\lambda.$$\nInitiality in that cocone category, as defined in [def-cbc-enhanced-diagrams-cones], says these mapping spaces are contractible. The same cited calculus states the equivalent colimit criterion: $q_y$ is an equivalence for every $y$. This uses the fixed-boundary cocone mapping formula from that node, rather than taking the fiber of Step 1's varying-boundary formula without justification. It includes an empty target mapping space: if the latter is empty, a point of the source would map to a point of it, so both are empty.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Agent-written application of the cocone dual of lem-cbc-enhanced-functor-cone-calculus; the fixed-fiber stage corresponds to Kerodon 02XB, first paragraph of proof."
+   }
+  },
+  {
+   "text": "For arbitrary $t$ let its triple be $(y,G,\\mu)$ and set $B=\\operatorname{Map}_D(F,G)$, $Z=\\operatorname{Map}_D(F,\\Delta_Ky)$, and $A=\\operatorname{Map}_{\\mathcal E}(x,y)$. Step 1 identifies the source mapping space, with restriction to $B$, with $B\\times_Z^h A$ for the maps $b\\mapsto\\mu b$ and $q_y:A\\to Z$. Step 2 says $q_y$ is a weak equivalence. Here is the precise base-change argument using [lem-coef-kan-quillen-right-proper]. Factor $q_y$ as a weak equivalence $A\\to\\widetilde A$ followed by a Kan fibration $p:\\widetilde A\\to Z$. Two-out-of-three makes $p$ a weak equivalence too. The homotopy pullback is represented by $B\\times_Z\\widetilde A$, and its projection to $B$ is the pullback of the trivial fibration $p$. A lifting square for this projection against a boundary inclusion is the corresponding square for $p$ with the $B$-coordinate already prescribed, so it has a filler. The projection is consequently a trivial fibration and a weak equivalence by the cited model-structure statement. Under the natural boundary-projected equivalence of [lem-coef-infinity-join-cone-calculus] from Step 1, this proves that the actual restriction map to $B=\\operatorname{Map}_D(c|_K,t|_K)$ is a weak equivalence. There is no assumption $G=F$.",
+   "uses": [
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Agent-written homotopy-pullback argument from the stated Kan model structure; proves the relative-initiality conclusion of Kerodon 02XB by a different route from its cocartesian-fibration proof."
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], both $\\operatorname{Fun}(K^{\\triangleright},\\mathcal E)$ and $D=\\operatorname{Fun}(K,\\mathcal E)$ are quasicategories and their right-pinched mapping spaces are Kan complexes. In degree $n$, the map between those mapping spaces is precomposition with $K\\hookrightarrow K^{\\triangleright}$ on the $K$-factor of each functor simplex. This is precisely the boundary projection retained in Step 1, so Step 3 proves the asserted weak homotopy equivalence of Kan complexes for every $t$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02XB",
+    "place": "Direct check of restriction using def-cbc-enhanced-diagrams-cones and the Kan assertion of the cited functor-cone calculus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-join-cone-calculus",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02XB",
+  "place": "Agent-written mapping-space proof of the colimit dual of Kerodon Proposition 7.1.6.13 (02XB), using the project coherent-cocone convention. The source proof instead uses cocartesian fibrations and relative-finality promotion; it was read online, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +140,38 @@
    "results": "{\"t\": \"2026-10-16T19:14:45Z\", \"tool\": \"grep\", \"query\": \"relativeInitial|relativeExponential|IsInitial.*InnerFibration|InnerFibration.*IsInitial|cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"051a9cc3ad30f2c3\"}",
    "date": "2026-10-16",
    "verdict": "No match. KanExtension/Basic.lean:176-196,779-788 and KanExtension/Adjunction.lean use ordinary Category instances and Hom-set universal properties. ConeCategory.lean:345 is fixed-diagram initiality of an ordinary cocone. NerveAdjunction fullness and SingularSet left Kan extension do not describe mapping spaces of arbitrary quasicategories. The broad grep has no relative-initial or relative-exponential declaration; its ordinary cocartesian and monoidal hits do not state this node."
+  },
+  {
+   "tool": "grep",
+   "query": "relative initiality coherent cocone restriction",
+   "results": "{\"t\": \"2026-10-16T19:58:08Z\", \"tool\": \"grep\", \"query\": \"relative initiality coherent cocone restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic join hits and Cocone.isColimitEquivIsInitial concern ordinary Category instances and Hom sets; none states coherent varying-boundary mapping-space restriction for arbitrary quasicategories. The grep queries returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "opposite quasicategory join mapping space",
+   "results": "{\"t\": \"2026-10-16T20:00:04Z\", \"tool\": \"leanfinder\", \"query\": \"opposite quasicategory join mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.opEquiv_inverse_map_edge_op\", \"CategoryTheory.Join.opEquiv_functor_map_op_edge\", \"CategoryTheory.Join.opEquiv\", \"CategoryTheory.Join.opEquiv_functor_map_op_inclRight\", \"CategoryTheory.Join.opEquiv_functor_map_op_inclLeft\", \"CategoryTheory.Join.opEquiv_inverse_map_inclRight_op\", \"CategoryTheory.Join.opEquiv_inverse_obj_left_op\", \"CategoryTheory.Join.opEquiv_inverse_map_inclLeft_op\"], \"digest\": \"31108711afa734a5\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic join hits and Cocone.isColimitEquivIsInitial concern ordinary Category instances and Hom sets; none states coherent varying-boundary mapping-space restriction for arbitrary quasicategories. The grep queries returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "opposite quasicategory join mapping space",
+   "results": "{\"t\": \"2026-10-16T20:00:04Z\", \"tool\": \"grep\", \"query\": \"opposite quasicategory join mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic join hits and Cocone.isColimitEquivIsInitial concern ordinary Category instances and Hom sets; none states coherent varying-boundary mapping-space restriction for arbitrary quasicategories. The grep queries returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocone\", \"IsInitial\"",
+   "results": "{\"t\": \"2026-10-16T20:00:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocone\\\", \\\"IsInitial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.isColimitEquivIsInitial\", \"CategoryTheory.Limits.IsColimit.descCoconeMorphism_eq_isInitial_to\", \"CategoryTheory.Limits.IsInitial.to_eq_descCoconeMorphism\"], \"digest\": \"24adce48cf6ca8d9\"}",
+   "date": "2026-10-16",
+   "verdict": "Second reading: no match. The semantic join hits and Cocone.isColimitEquivIsInitial concern ordinary Category instances and Hom sets; none states coherent varying-boundary mapping-space restriction for arbitrary quasicategories. The grep queries returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-fiber-cocone-simplex-extension",
@@ -91,5 +179,29 @@
   "group": "NA"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocone-restriction-initial",
+  "worker": "stage1",
+  "summary": "Statement unchanged; no new nodes. Second reading made opposite/pinch duality explicit, cited the existing fixed-cocone colimit criterion and Kan-space theorem, and supplied the Kan-model homotopy-pullback argument.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction and coherent tower realization, through the pointed-model stability foundation and finite pushout grid in lem-coef-suspension-square-comparison; this node supplies the prerequisite relative initiality of a colimit cocone.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone/cocone calculus used as a black box for the fixed-cocone universal mapping property, functor quasicategories, Kan mapping spaces, and full faithfulness of equivalences; the item unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-66ffc9e30",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-66ffc9e30 (reviewer sub-agent of L); spot-checked: I read in full the item, its 4 steps, the full statements of all 5 cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-join-cone-calculus, lem-coef-infinity-pinch-comparison, lem-cbc-enhanced-functor-cone-calculus, lem-coef-kan-quillen-right-proper), both citers (fiber-cocone-simplex-extension at r=0, parameter-cone-extension step 1) and the unit record. Kerodon 02XB is not archived (listed as WANTED), so proof_origin=agent is correct. I checked the statement against the standard fact that a colimit cone is the left Kan extension of its base, giving Map(c,t)≃Map(c|K,t|K) for an arbitrary target base. It is true and not weakened, and the consumers need exactly this form. It is not a target node, so no base-change or coefficient comparison applies. Small cases: K=∅ gives initiality of the apex; K=Δ⁰ gives an equivalence edge; empty E is vacuous. Step 1: I checked the opposite dualization myself: (K⋆Δ⁰)^op=Δ⁰⋆K^op, Fun(K,E)^op≅Fun(K^op,E^op), ev0 and ev1 swap, and the mapping formula becomes Map_D(F,G)×^h_{Map_D(F,ΔKy)}Map_E(x,y) with maps μb and Δ(a)λ. Mapping spaces in C^op and C are compared as homotopy types via pinch-comparison and |S^op|≅|S|, and boundary-restriction naturality is a clause of join-cone-calculus. Step 2: the cocone dual of functor-cone-calculus gives exactly the hofiber description and the criterion that q_y is an equivalence for all y. Step 3: factor q_y as a trivial Kan fibration; its pullback is a trivial fibration by the RLP characterization in kan-quillen-right-proper, whose homotopy-pullback clause applies. Step 4: the Kan conditions come from functor-cone-calculus; the degreewise precomposition check is elementary. There are no new nodes. Duplicate check by rg (kan-mapping-restriction needs a quasicategory domain, anodyne-cocones covers only constant targets, relative-cone-initial-corner and the others are different): none found, and no cycle. All three kinds of search are recorded. I accept the off-unit tool use of lem-cbc-enhanced-functor-cone-calculus, the same use already accepted for its sibling nodes in this unit. No fixes."
+ }
 }

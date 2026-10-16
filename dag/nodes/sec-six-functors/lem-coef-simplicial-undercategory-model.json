@@ -29,9 +29,152 @@
  "stmt_deps": [
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal U=\\mathcal M_{A/}$. For a small diagram $D:J\\to\\mathcal U$, write its objects $a_j:A\\to X_j$ and take $L=\\lim_J X_j$ in $\\mathcal M$, which exists by completeness in [lem-coef-simplicial-model-nerve-localization]. The compatible $a_j$ give $a:A\\to L$. A cone from $z:A\\to Z$ gives a unique underlying $h:Z\\to L$; each projection of $hz$ is $a_j$, so uniqueness in the limit says $hz=a$. Conversely an arrow under $A$ supplies just such a cone. This proves the limit universal property, including the empty diagram, whose limit is $A\\to1$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; limits in the ordinary undercategory"
+   }
+  },
+  {
+   "text": "For the same diagram set $B=\\operatorname{colim}_J\\operatorname{const}_J A$ and $T=\\operatorname{colim}_J X_j$ in $\\mathcal M$. The arrows $a_j$ induce $B\\to T$, and the identity cocone on $A$ induces $B\\to A$. Put $P=A\\amalg_B T$, with structure arrow $A\\to P$. By the cocone universal property of [def-weil-pbc-category-colimit], a cocone under $A$ to $b:A\\to Y$ is exactly a map $t:T\\to Y$ for which $t(B\\to T)=b(B\\to A)$: this equality can be checked on every coprojection $A\\to B$. Such pairs $(b,t)$ correspond uniquely to maps $P\\to Y$ restricting to $b$. Hence $A\\to P$ is the colimit. For $J$ empty both $B$ and $T$ are initial and $P=A$, giving initial object $1_A$. Completeness and cocompleteness of $\\mathcal M$ supply all these objects; no connectedness assumption on $J$ is used.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; colimits via an explicit pushout, also for an empty or disconnected index"
+   }
+  },
+  {
+   "text": "Define $C_{\\mathcal U},F_{\\mathcal U},W_{\\mathcal U}$ by testing the underlying arrow in $\\mathcal M$. Forgetting preserves composition and arrow-retract diagrams. The retract closure of all three classes and two-out-of-three for $W_{\\mathcal U}$ therefore follow immediately from the model axioms in [lem-coef-simplicial-model-nerve-localization].",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; inherited retract and two-out-of-three axioms"
+   }
+  },
+  {
+   "text": "Given $h:(a:A\\to X)\\to(b:A\\to Y)$, factor its underlying arrow functorially as $X\\xrightarrow{l}Z\\xrightarrow{r}Y$ in either ground weak factorization system. Give $Z$ the arrow $la:A\\to Z$; then $rla=ha=b$, so this is a factorization under $A$ in the desired two classes. A commuting square between arrows under $A$ is a commuting square in $\\mathcal M$; functoriality of the ground factorization makes the induced map $Z\\to Z'$ commute with $la$ and $l'a'$. Thus both undercategory factorizations are functorial.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; both factorizations and their functoriality"
+   }
+  },
+  {
+   "text": "A square in $\\mathcal U$ with left map $i:(a:A\\to X)\\to(a':A\\to X')$ and right map $p:(b:A\\to Y)\\to(b':A\\to Y')$ has top map $u:X\\to Y$ and bottom map $v:X'\\to Y'$. If the ground model lifting axiom supplies $h:X'\\to Y$ with $hi=u$ and $ph=v$, then $ha'=hia=ua=b$. Thus this very lift lies in $\\mathcal U$. Apply this to $(C_{\\mathcal U},F_{\\mathcal U}\\cap W_{\\mathcal U})$ and $(C_{\\mathcal U}\\cap W_{\\mathcal U},F_{\\mathcal U})$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; the diagonal lift automatically fixes the arrow from A"
+   }
+  },
+  {
+   "text": "For either pair $(L,R)$ just constructed, the lifting classes are exactly $L,R$, rather than merely containing them. Indeed, factor $h:X\\to Y$ as $rl$ under $A$. If $h$ lifts on the left against every $R$-map, lifting against $r$ gives $d:Y\\to Z$ with $dh=l$, $rd=1_Y$; the arrow maps $(1_X,d)$ and $(1_X,r)$ exhibit $h$ as an arrow retract of $l$. If $h$ lifts on the right against every $L$-map, lifting against $l$ gives $s:Z\\to X$ with $sl=1_X$, $hs=r$; the arrow maps $(l,1_Y)$ and $(s,1_Y)$ exhibit $h$ as an arrow retract of $r$. All these maps are under $A$ by the lift calculation of the previous step. The retract closure checked in step 3 puts $h$ in $L$ or $R$, respectively. Together with steps 1-5 this verifies precisely the model-category axioms of [lem-coef-simplicial-model-nerve-localization].",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; explicit retract argument for the weak factorization systems"
+   }
+  },
+  {
+   "text": "The unique arrow $1_A\\to(a:A\\to X)$ has underlying map $a$, whereas the unique arrow $(a:A\\to X)\\to(A\\to1)$ has underlying map $X\\to1$. The definitions of cofibrant and fibrant in [lem-coef-simplicial-model-nerve-localization] therefore give exactly the two stated characterizations. In particular cofibrancy of $A$ is irrelevant.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; initial/terminal maps and objectwise fibrancy/cofibrancy"
+   }
+  },
+  {
+   "text": "For $a:A\\to X$ and $b:A\\to Y$, define $U(a,b)$ to be the displayed strict pullback of simplicial sets. Its $n$-simplices are the $n$-simplices $f$ of $\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)$ whose restriction along $a$ is the constant $n$-simplex $b_n$. Faces and degeneracies preserve this equation. If $g\\in U(b,c)_n$ and $f\\in U(a,b)_n$, enriched composition in $\\mathcal M$ satisfies $(gf)a=g(fa)=gb_n=c_n$. It consequently restricts to composition on these pullbacks. Identities restrict too, and associativity and unit equations are inherited. The vertices are exactly the ordinary arrows under $A$. Thus this is an enrichment of the ordinary category $\\mathcal U$, with exactly the mapping formula asserted.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; the strict-fiber enrichment and all category laws"
+   }
+  },
+  {
+   "text": "Let $K$ be a simplicial set, $c_Z:Z\\otimes K\\to Z$ the map induced by $K\\to\\Delta^0$, and $P=A\\amalg_{A\\otimes K}(X\\otimes K)$, using $c_A$ and $a\\otimes K$. We check the enriched tensor adjunction, not only its vertices. For any $V$, tensoring by $\\Delta^n$ preserves a colimit: a map from its tensor to $V$ is, by tensor/cotensor adjunction, a map from that colimit to $V^{\\Delta^n}$, hence a compatible family. Applying this to the pushout proves that $\\underline{\\operatorname{Map}}_{\\mathcal M}(P,Y)$ is the simplicial pullback of $\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y)$ and $\\underline{\\operatorname{Map}}_{\\mathcal M}(X\\otimes K,Y)$ over $\\underline{\\operatorname{Map}}_{\\mathcal M}(A\\otimes K,Y)$. Taking the strict fiber at $b$ over the first factor gives\n$$U(A\\to P,b)\\cong\\underline{\\operatorname{Map}}_{\\mathcal M}(X\\otimes K,Y)\\times_{\\underline{\\operatorname{Map}}_{\\mathcal M}(A\\otimes K,Y)}\\{bc_A\\}\\cong U(a,b)^K.$$\nThe second identification is the ground enriched tensor adjunction: $bc_A$ transposes to the constant map $K\\to\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y)$ at $b$. Exponentiation of a strict pullback of simplicial sets is the pullback of the exponentials, since a map $H\\to E^K$ is exactly a map $H\\times K\\to E$ and the same equations define the pullback. These identifications commute with every map in $a,b,K$, giving the required enriched tensor and its functoriality.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; pushout tensor and its enriched adjunction"
+   }
+  },
+  {
+   "text": "Give $Y^K$ the arrow $b_K:A\\xrightarrow{b}Y\\to Y^K$, where the second map is constant in $K$. The enriched cotensor adjunction in $\\mathcal M$ identifies the restriction map $\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y^K)\\to\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y^K)$ with $\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)^K\\to\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y)^K$, and identifies its distinguished vertex $b_K$ with $\\operatorname{const}_K b$. Consequently\n$$U(a,b_K)=\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y^K)\\times_{\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y^K)}\\{b_K\\}\\cong\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)^K\\times_{\\underline{\\operatorname{Map}}_{\\mathcal M}(A,Y)^K}\\{\\operatorname{const}_K b\\}\\cong U(a,b)^K.$$\nFor the last isomorphism, an $n$-simplex on either side is precisely a map $\\Delta^n\\times K\\to\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)$ whose composite with restriction along $a$ is constant at $b$; this description respects faces and degeneracies. Every identification is natural, since it uses only the ground natural adjunction and restriction maps, so it supplies the enriched cotensor adjunction and its functoriality. Write $T_K$ for the tensor of step 9 and $C_Kb=b_K$. For the unit, $T_{\\Delta^0}a$ is $A\\to A\\amalg_A X\\cong X$ and $C_{\\Delta^0}b\\cong b$. Iteration gives natural isomorphisms $U(T_L(T_Ka),b)\\cong(U(a,b)^K)^L\\cong U(a,b)^{L\\times K}$ and $U(a,C_L(C_Kb))\\cong(U(a,b)^K)^L\\cong U(a,b)^{L\\times K}$. Thus these objects represent $T_{L\\times K}a$ and $C_{L\\times K}b$, respectively. The representing isomorphisms give tensor and cotensor associativity; for three parameters both composites transpose to the identical map on $\\Delta^n\\times H\\times L\\times K$, so the associativity coherence holds, and deleting a $\\Delta^0$ factor proves the unit coherence.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; cotensor by constants and its enriched adjunction"
+   }
+  },
+  {
+   "text": "For a cofibration $i:a\\to a'$ and fibration $p:b\\to b'$ in $\\mathcal U$, write their underlying maps $i:X\\to X'$ and $p:Y\\to Y'$. Ground SM7 in [lem-coef-simplicial-model-nerve-localization] says that\n$$\\theta:\\underline{\\operatorname{Map}}_{\\mathcal M}(X',Y)\\longrightarrow V:=\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y)\\times_{\\underline{\\operatorname{Map}}_{\\mathcal M}(X,Y')}\\underline{\\operatorname{Map}}_{\\mathcal M}(X',Y')$$\nis a Kan fibration, trivial if $i$ or $p$ is a weak equivalence. Put $T=U(a,b)\\times_{U(a,b')}U(a',b')$, with its evident map $T\\to V$. The preimage of $T$ under $\\theta$ is exactly $U(a',b)$: in degree $n$, membership forces $(fi)a=b_n$, hence $fa'=b_n$ because $ia=a'$. Conversely $fa'=b_n$ implies $(fi)a=b_n$ and $(pf)a'=b'_n$, because $pb=b'$. The remaining equality in $T$ is just $p(fi)=(pf)i$. These checks commute with simplicial operators. Therefore the undercategory SM7 map $U(a',b)\\to T$ is the pullback of $\\theta$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; SM7 as an explicitly identified pullback"
+   }
+  },
+  {
+   "text": "By [lem-coef-kan-quillen-right-proper], Kan fibrations and trivial Kan fibrations are characterized by right lifting against horns and boundaries, respectively. Any such lifting property is preserved under pullback: project a lifting square to the original map, choose a diagonal there, and pair that diagonal with the prescribed map to the new base; the commuting equation puts this pair in the pullback and proves both triangle equations. Hence the pullback map of step 11 is a Kan fibration, trivial whenever either input is a weak equivalence. This is exactly the simplicial-model axiom of [lem-coef-simplicial-model-nerve-localization]. Together with the enrichment and adjunctions in steps 8-10 and the model structure in steps 1-7, it proves the statement, using no properness, combinatorial, or cofibrancy hypothesis on $A$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction: agent verification of simplicial-model foundations; horn/boundary lifting and completion of the simplicial model axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-model-nerve-localization",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction; explicit axiom-by-axiom construction of its auxiliary simplicial undercategory, as used in HTT A.3.7.1, printed p. 907. HTT is read online but not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -95,10 +238,73 @@
    "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"18\", \"text\": \"  \\\"coslice\\\" or \\\"under\\\" category under the object `L` maps to.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"22\", \"text\": \"Comma, Slice, Coslice, Over, Under\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Basic.lean\", \"line\": \"46\", \"text\": \"comma, slice, coslice, over, under, arrow\"}\n",
    "date": "2026-10-17",
    "verdict": "No exact match: ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 supplies an ordinary overcategory model, and its line 26 explicitly leaves Under S as TODO. The remaining hits define ordinary coslices or fibrations on simplicial sets; none supplies simplicial undercategory enrichment, tensor/cotensor, and model compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coslice under any object in a simplicial model category is a simplicial model category with strict fiber mapping spaces",
+   "results": "8 hits, including HomotopicalAlgebra.ModelCategory.over; SSet.modelCategoryQuillen.instCategoryWithFibrations, instCategoryWithCofibrations, fibrations_eq; HomotopicalAlgebra.instHasTwoOutOfThreePropertyOverWeakEquivalences, instCategoryWithCofibrationsOver, instCategoryWithFibrationsOver; HomotopicalAlgebra.PathObject.instIsFibrantP.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.Under",
+   "results": "OK 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "ModelCategory.*[Uu]nder|[Uu]nder.*ModelCategory|SimplicialModel|coslice",
+   "results": "OK 3 hits: Mathlib/CategoryTheory/Comma/Basic.lean:46 and Mathlib/CategoryTheory/Comma/Over/Basic.lean:18,22, ordinary comma/coslice documentation.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched coslice categories admit tensors by pushout and cotensors by constant maps and inherit the simplicial model axiom",
+   "results": "8 hits: CategoryTheory.SimplicialObject.instEnrichedCategorySSet, instSimplicialCategorySSet; SSet.instMonoidalClosed; SSet.QCat.catEnrichedOrdinaryCategory; SSet.Truncated.instMonoidalClosed; AugmentedSimplexCategory.instMonoidalCategoryStruct; CategoryTheory.SimplicialThickening.instSimplicialCategory; CategoryTheory.SimplicialCategory.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial model category induces a simplicial model structure on objects under any fixed object",
+   "results": "OK 8 hits: CategoryTheory.instCategorySimplicialObject; HomotopicalAlgebra.ModelCategory.categoryWithCofibrations, categoryWithFibrations, over; CategoryTheory.SimplicialObject.instSimplicialCategory, instSimplicialCategorySSet, instHasColimits; SSet.modelCategoryQuillen.instCategoryWithCofibrations.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "ModelCategory.over|Under S|tensor|cotensor",
+   "results": "OK 3 hits (subdirectory AlgebraicTopology/ModelCategory): Mathlib/AlgebraicTopology/ModelCategory/Over.lean:26 Under TODO, :143 ModelCategory.over; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean:18 unrelated assumptions.",
+   "date": "2026-10-17",
+   "verdict": "No match: read ModelCategory.over at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145 and its Under TODO at line 26. It gives only an ordinary overcategory model. Read SimplicialCategory/Basic.lean:19-30, where simplicial tensors remain TODO, and SimplicialObject.lean:34-41, where the enrichment concerns simplicial objects. These do not state the enriched undercategory construction or all its clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "Under.*[Cc]ofibration|Under.*[Ff]ibration|[Uu]nder.*[Tt]ensor|[Cc]oslice.*[Mm]odel",
+   "results": "{\"t\": \"2026-10-16T19:59:05Z\", \"tool\": \"grep\", \"query\": \"Under.*[Cc]ofibration|Under.*[Ff]ibration|[Uu]nder.*[Tt]ensor|[Cc]oslice.*[Mm]odel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RingTheory/TensorProduct/Finite.lean\", \"Mathlib/RingTheory/TensorProduct/Finite.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean\", \"Mathlib/RingTheory/RingHomProperties.lean\"], \"digest\": \"7188c5c33362ab52\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the full statement. Semantic hits include the ordinary overcategory model, read at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145, with Under left as TODO at line 26. The grep hits concern algebraic tensors or generic model-category closure properties; Loogle returned no hits. None supplies the simplicial undercategory enrichment, tensors, cotensors and SM7."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A model structure on a comma category with fixed domain inherits enriched mapping objects and the Quillen lifting axiom",
+   "results": "{\"t\": \"2026-10-16T19:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"A model structure on a comma category with fixed domain inherits enriched mapping objects and the Quillen lifting axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.over\", \"HomotopicalAlgebra.instCategoryWithCofibrationsOver\", \"HomotopicalAlgebra.instCategoryWithFibrationsOver\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOver\", \"HomotopicalAlgebra.cofibrations_over_def\", \"CategoryTheory.Comma.full_map\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOverWeakEquivalences\", \"CategoryTheory.MorphismProperty.Comma.lift_obj_toComma\"], \"digest\": \"812747ce99245de5\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the full statement. Semantic hits include the ordinary overcategory model, read at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145, with Under left as TODO at line 26. The grep hits concern algebraic tensors or generic model-category closure properties; Loogle returned no hits. None supplies the simplicial undercategory enrichment, tensors, cotensors and SM7."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Under, HomotopicalAlgebra.Cofibration",
+   "results": "{\"t\": \"2026-10-16T19:59:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Under, HomotopicalAlgebra.Cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match for the full statement. Semantic hits include the ordinary overcategory model, read at Mathlib/AlgebraicTopology/ModelCategory/Over.lean:143-145, with Under left as TODO at line 26. The grep hits concern algebraic tensors or generic model-category closure properties; Loogle returned no hits. None supplies the simplicial undercategory enrichment, tensors, cotensors and SM7."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cofibration-local-mapping-test",
@@ -106,5 +312,20 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-undercategory-model",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and verified the construction directly: all small limits and colimits including empty/disconnected indices, both functorial weak factorization systems with explicit retract arguments, strict-fiber enrichment, enriched pushout-tensor and constant-cotensor adjunctions, and SM7 as a pullback. Reused the existing model-category conventions and Kan lifting characterization; no new nodes, attachments, or Mathlib leaves. Searches found only an ordinary overcategory model and simplicial-object enrichments.",
+  "blueprint": "Current main-20261015 ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction in the displayed inverse-limit Hom calculation. This split supplies the undercategory mapping-fiber foundation in the existing auxiliary chain, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-N8-8ce6c5724",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-8ce6c5724 (reviewer sub-agent of L); spot-checked: I read the whole item, all 12 steps, the full statements of the 3 cited nodes (lem-coef-simplicial-model-nerve-localization, def-weil-pbc-category-colimit, lem-coef-kan-quillen-right-proper), and the main-20261015 ancestor proof, paragraph 2, together with its unit and chapter records. HTT is not archived in literature/ (LIST.md has no entry). There is a WANTED line and proof_origin=agent is correct, because HTT A.3.7.1 only invokes the construction. The statement is unchanged and true: it is the standard coslice simplicial model structure with underlying W/C/F, initial object 1_A, terminal object A->1, the strict-fiber mapping set, the pushout tensor and the constant cotensor, and A need not be cofibrant. I tested it on: A initial, K empty or Delta^0, an empty or discrete diagram, and source 1_A. Each step checks against what the cited statements actually say. Colimits come from P=A⊔_B T with B=colim const A, which is right for disconnected and empty J. Factorizations sit under A via la. Lifts satisfy ha'=hia=ua=b. The retract arguments characterize both lifting classes. Tensor and cotensor fibers equal U(a,b)^K through the ground adjunctions. SM7 is the pullback of theta along T⊂V, since theta^{-1}(T)=U(a',b) (fia=fa', pb=b'). Pullback stability of the horn and boundary RLP finishes the proof. Only steps 11-12 are non-elementary, and they are marked so. proof_deps equals the union of uses. The route stays in the unit apart from the definition leaf, so no tool_uses are needed. The dependency closures (197/1/85 nodes) do not contain the item, so there is no cycle. Searching the DAG for undercategory/coslice turned up no duplicate. There are no new nodes, no SGA citations and no target involved. I made no changes."
+ }
 }

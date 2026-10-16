@@ -3,24 +3,140 @@
  "blueprint": {
   "is": "sk-def-ops",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The six operations, the dualizing complex, the duals",
- "statement": "In the setting of [sk-def-set], let $\\Dctf(X,\\Lambda)$ be the bounded\nconstructible finite-Tor category on the small pro-étale site, with\n$Lf^*,Rf_*,Rf_!,Rf^!,\\otimes^L_\\Lambda,R\\mathcal H om_\\Lambda$, where\n$Rf_!$ is defined by a compactification and $Rf^!$ is its right\nadjoint on $\\Dctf$ (the constructible exceptional adjoint of\n[sk-def-set], which exists for every separated finite-type morphism;\nno ambient adjoint on the full derived category is required). Put\n\n$$\n\\omega_{X,\\Lambda}=Ra_X^!\\Lambda,\\qquad\n\\mathbb D_XK=\\RHomX(K,\\omega_{X,\\Lambda}),\\qquad\nK^\\vee=\\RHomX(K,\\Lambda_X),\n$$\n\nand $\\RGammac(X,K)=\\Fib_s(Ra_{X!}K)$,\n$\\RGamma(X,K)=\\Fib_s(Ra_{X*}K)$, with cohomology $H^i_c,H^i$.",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, put $q=p^a$, let $k_0=\\mathbf F_q$, and fix an algebraic closure $k=\\overline{\\mathbf F}_q$ of $k_0$. Fix a finite extension $E/\\mathbf Q_\\ell$ inside a chosen algebraic closure $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and let $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Let $d\\geq0$ be an integer, let $X_0/k_0$ be smooth of relative dimension $d$, separated of finite type and geometrically connected, and put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$ and $a_X:X\\to s$ its structure morphism. These are the geometric and coefficient data of [sk-def-set]; properness of $X_0$ is not assumed.\n\nFor a finite-type $k$-scheme $T$, use the bounded constructible finite-Tor category $\\Dctf(T,\\Lambda)$ on its small pro-etale site defined in [def-weil-finite-tor-amplitude]. For separated finite-type $k$-morphisms $f:T\\to U$ between such schemes, use the six operations\n$$Lf^*,\\quad Rf_*,\\quad Rf_!,\\quad Rf^!,\\quad\\otimes^L_\\Lambda,\\quad R\\mathcal H om_\\Lambda$$\nof [sk-def-sf-operations]. Here $Rf_!$ is defined by a compactification and $Rf^!$ is its constructible right adjoint on $\\Dctf$, which exists for every such $f$; no ambient adjoint on the full pro-etale derived category is required. For $T=X$ or $T=s$, write $\\Lambda_T$ for the coefficient unit at the chosen stage: the constant finite-level unit, the completed integral unit for $\\Lambda=\\mathcal O_E$, or the corresponding rational/common-stage unit, as specified in [def-weil-ordinary-compact-cohomology].\n\nDefine the dualizing complex and, for $K\\in\\Dctf(X,\\Lambda)$, its Verdier and coefficient duals by\n$$\n\\omega_{X,\\Lambda}=Ra_X^!\\Lambda_s,\\qquad\n\\mathbb D_XK=R\\mathcal H om_\\Lambda(K,\\omega_{X,\\Lambda}),\\qquad\nK^\\vee=R\\mathcal H om_\\Lambda(K,\\Lambda_X).\n$$\nWith $\\operatorname{Fib}_s$ the coefficient-point functor of [def-weil-ordinary-compact-cohomology], define\n$$\n\\operatorname{R\\Gamma}_c(X,K)=\\operatorname{Fib}_s(Ra_{X!}K),\\qquad\n\\operatorname{R\\Gamma}(X,K)=\\operatorname{Fib}_s(Ra_{X*}K),\n$$\nand, for every $i\\in\\mathbf Z$,\n$$\nH_c^i(X,K)=H^i\\bigl(\\operatorname{R\\Gamma}_c(X,K)\\bigr),\\qquad\nH^i(X,K)=H^i\\bigl(\\operatorname{R\\Gamma}(X,K)\\bigr).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-ops/_section.md",
   "place": "node sk-def-ops, order 2752"
  },
  "stmt_deps": [
-  "sk-def-set"
+  "sk-def-set",
+  "def-weil-finite-tor-amplitude",
+  "sk-def-sf-operations",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Six operations on bounded constructible finite Tor pro etale sheaves with adic coefficients, dualizing complex and Verdier dual and compact support cohomology",
+   "results": "Eight hits: Condensed.profiniteSolid, localCohomology.diagram and six condensed-module/sheaf constructions. None defines the six operations or Verdier duality on the constructible pro-etale coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"dual\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|compactlySupportedCohomology",
+   "results": "No hits in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual of a constructible pro etale complex is internal Hom into the exceptional inverse image of the coefficient unit",
+   "results": "Eight hits: HomologicalComplex opposite-complex identities and LightCondensed.ihomPoints. These concern opposite homological complexes or internal Hom in light condensed modules, not constructible pro-etale Verdier duality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality functor and derived global sections with compact support for constructible sheaves",
+   "results": "Eight hits: CompHausLike and LightCondensed locally constant sheaf functors and adjunctions, a light-condensed monoidal-closed instance and Condensed.lanSheafProfinite. None is the requested derived six-operation package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|pro.etale|Verdier|dualizing",
+   "results": "Ten grep lines in AlgebraicGeometry/Sites/Proetale.lean and ElladicCohomology.lean. Read Proetale.lean:45-80 and ElladicCohomology.lean:45-90: site, ell-adic coefficient sheaf and nonnegative ell-adic cohomology groups, not the constructible four-stage derived six-operation/duality package.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived sheaves exceptional pullback internal Hom duality functor coefficient ring",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackPushforwardAdjunction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: all eight returned declarations are underived sheaf-module pullback constructions or adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|Verdier|dualizing|compactlySupported",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean",
+     "Mathlib/Probability/CondVar.lean",
+     "Mathlib/LinearAlgebra/Matrix/Cartan.lean",
+     "Mathlib/LinearAlgebra/Matrix/Cartan.lean",
+     "Mathlib/LinearAlgebra/Matrix/Cartan.lean",
+     "Mathlib/LinearAlgebra/Matrix/Cartan.lean",
+     "Mathlib/LinearAlgebra/Matrix/Cartan.lean",
+     "Mathlib/LinearAlgebra/Transvection/Generation.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match in the 25 returned grep lines: exceptional Lie types, transvections, ordinary compactly supported continuous maps and incidental uses of dualizing"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Aa]djoint|[Vv]erdier|[Dd]ualizing[Cc]omplex|[Cc]ompact.*[Cc]ohomology",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Shift/CommShift.lean",
+     "Mathlib/CategoryTheory/Shift/CommShift.lean",
+     "Mathlib/CategoryTheory/Presentable/Directed.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Category.lean",
+     "Mathlib/CategoryTheory/Localization/Triangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean",
+     "Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match in the 25 returned grep lines: references to Verdier or triangulated Verdier quotients, not Verdier duality of sheaves"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -49,5 +165,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-ops"
+ "unit": "sk-def-ops",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-ops",
+  "worker": "stage1",
+  "summary": "Definition split only: retained the current main-20261015 formulas and unconditional constructible exceptional adjoint; made the existing finite-Tor category, six-operation package and ordinary/compact cohomology definitions explicit statement dependencies. Identified the completed coefficient unit and coefficient-point functor without assuming an ambient adjoint or properness. No new node or proof step is needed. The slopmaster2 definitions named in the blueprint cover ambient categorical formulas only, not every coefficient-stage clause, so no attachment is claimed. Expanded the inherited fixed-setting shorthand into all of its geometric and coefficient hypotheses after preflight B2 rejected the opening phrase; also introduced f, K, i and the coefficient unit explicitly. This changes no mathematical hypothesis or construction. Independent second reading removed the added separatedness of the source and target schemes in the explanatory operation package: the source requires the morphism to be separated, with finite-type k-schemes as in sk-def-sf-operations. Restricted the coefficient-unit notation to X and s, precisely the separated schemes used by the defining formulas and covered by def-weil-ordinary-compact-cohomology.",
+  "blueprint": "The full defining paragraph and all five displayed constructions of main-20261015/sec-poincare-duality/sk-def-ops/_section.md: Dctf and its six operations, omega, Verdier dual, coefficient dual, and ordinary/compact cohomology. This definition unit has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-045d3f5ff",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-045d3f5ff (reviewer sub-agent of L); spot-checked: Read the item, the unit, the current main-20261015 sk-def-ops and sk-def-set sources (and the older master text), and the full statements of all four dependencies: sk-def-set, def-weil-finite-tor-amplitude (with its blueprint_update), sk-def-sf-operations (i)-(vi), and def-weil-ordinary-compact-cohomology. The definition matches the current source clause by clause. The expanded setting adds no hypothesis and drops none, and properness stays unassumed. Dctf is the finite-Tor category: explicit at A_{E,n}, a uniform interval at O_E, rationalized/common-stage at E and Q̄_ℓ. The operations apply to separated finite-type morphisms of finite-type k-schemes, as in sk-def-sf-operations. Rf^! is the unconditional constructible adjoint (vi), with no ambient or admissibility datum. omega=Ra_X^!Λ_s, where Λ_s is the unit of def-weil-ordinary-compact-cohomology; its hypotheses hold for X and s, and Λ_s lies in Dctf at all four stages. Both duals use the internal Hom of (i). RΓ_c and RΓ via Fib_s, and H^i_c and H^i, are word for word that dependency's formulas. It is a definition with no proof steps and no new nodes, so D1-D5 and B1-B9 for new nodes do not apply. None of the dependencies reaches the item (no cycle); six nodes cite it. Duplicate grep for omega/Ra_X^!: def-pod-conventions (assumes admissibility, extra data), def-fix-six-functor-datum and def-sf-orientation are not the same definition, so same_as=[] holds. slopmaster2 Duality.lean 72-105 is on the ambient D(X_proét) and needs HasBoundedBelowUpperShriek, so it is correctly not attached. Edge cases: d=0, nonproper A^1, K=0, finite Tor at n=1 and n=2, completed unit at O_E. Only the realized fields of the unit changed. No SGA source. No fixes, no tool_uses."
+ }
 }
