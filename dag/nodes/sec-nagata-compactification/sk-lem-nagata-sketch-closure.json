@@ -3,39 +3,145 @@
  "blueprint": {
   "is": "sk-lem-nagata-sketch-closure",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Schematic closure and uniqueness",
- "statement": "Let $i:U\\to T$ be a quasi-compact immersion, with $T$ quasi-separated. Its\nscheme-theoretic image $\\overline U\\subseteq T$ is a closed subscheme,\n$U\\to\\overline U$ is an open immersion, and $U$ is scheme-theoretically\ndense in $\\overline U$.\n\nIf $U\\subseteq T$ is a scheme-theoretically dense open and $Y\\to S$ is\nseparated, two $S$-maps $T\\to Y$ agreeing on $U$ agree on $T$.",
+ "statement": "Let $i:U\\to T$ be a quasi-compact immersion, with $T$ quasi-separated. Its\nscheme-theoretic image $\\overline U\\subseteq T$ is a closed subscheme,\n$U\\to\\overline U$ is an open immersion, and $U$ is scheme-theoretically\ndense in $\\overline U$.\n\nIf $U\\subseteq T$ is a scheme-theoretically dense open and $Y\\to S$ is\nseparated, two $S$-maps $T\\to Y$ agreeing on $U$ agree on $T$.\n\nHere the scheme-theoretic image means the smallest closed subscheme through which the morphism factors. For an open immersion $j:V\\hookrightarrow X$, scheme-theoretic density means that $\\mathcal O_X\\to j_*\\mathcal O_V$ is injective as a morphism of sheaves; no quasi-compactness of $j$ is assumed in the uniqueness assertion.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/_section.md",
   "place": "node sk-lem-nagata-sketch-closure, order 4"
  },
  "stmt_deps": [
-  "sk-def-nagata-sketch-data"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base"
  ],
  "proof": [
   {
-   "text": "The ideal of the image is $\\ker(\\mathcal O_T\\to i_*\\mathcal O_U)$, which is\nquasi-coherent because $i$ is quasi-compact and quasi-separated. On an open\nof $T$ where the immersion is closed, the image restricts to $U$ itself.\nHence $U$ is open in its image. By construction a section of\n$\\mathcal O_{\\overline U}$ vanishing on $U$ is zero; this is schematic\ndensity. These statements are the image and closure lemmas (Stacks 01R8 and\n01RG).",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lemma-nagata-scheme-image-ideal-qc] to $i:U\\to T$. It supplies a closed subscheme $\\overline U=\\operatorname{SIm}(i)\\hookrightarrow T$ cut out by the image ideal, together with a factor map $q:U\\to\\overline U$. By [lemma-nagata-scheme-image-universal], the composite of $q$ and the closed inclusion is $i$, and every other closed factorization admits a unique compatible closed immersion from $\\overline U$. Thus this is the smallest closed subscheme through which $i$ factors. The quasi-compactness required for the cited image properties is precisely the hypothesis on $i$.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-scheme-image-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, parts (1)-(2), and definition-scheme-theoretic-image"
+   }
   },
   {
-   "text": "For uniqueness, the equalizer of the two maps is a closed subscheme of $T$,\nsince it is the inverse image of the diagonal of $Y/S$. Its ideal vanishes on\n$U$ and thus vanishes on $T$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lemma-nagata-immersion-open-in-scheme-image] with its $g=i$, source $U$ and target $T$. Its factor map is the map $q$ above. The hypotheses are exactly that $i$ is an immersion and is quasi-compact. It states that $q$ is a quasi-compact open immersion and that its image is scheme-theoretically dense in $\\overline U$. To read the density clause in the convention of this statement: in the cited node, $q$ scheme-theoretically dense means that the scheme-theoretic image of $q$ is $\\overline U$ itself, i.e. that the ideal of $\\mathcal O_{\\overline U}$ cut out by the kernel of $\\mathcal O_{\\overline U}\\to q_*\\mathcal O_U$ is zero. Since $q$ is quasi-compact, this kernel is already the quasi-coherent kernel ideal of $q$ (the quasi-compact case of the image definition), so the condition says exactly that $\\mathcal O_{\\overline U}\\to q_*\\mathcal O_U$ is injective as a morphism of sheaves, which is the density convention stated above for the open immersion $q$. These give the two remaining assertions about the closure, with the full scheme structure retained. No reducedness is assumed and the given quasi-separatedness of $T$ may be retained although this result does not require it.",
+   "uses": [
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG, lemma-quasi-compact-immersion, quasi-compact case"
+   }
+  },
+  {
+   "text": "For the independent uniqueness assertion, write $s:Y\\to S$ and $a,b:T\\to Y$ for the two $S$-maps and $j:U\\hookrightarrow T$ for the schematically dense open. Since both maps are over $S$, $s\\circ a=s\\circ b$; agreement on $U$ is $a\\circ j=b\\circ j$. To check schematic dominance, any local section of an ideal sheaf defining a closed factor of $j$ restricts to zero on $U$. Injectivity of $\\mathcal O_T\\to j_*\\mathcal O_U$ forces every such section to be zero. In particular the quasi-coherent kernel ideal of $j$ is zero, which is the schematic dominance condition. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with its $(s,f,g,\\iota)=(s,a,b,j)$. Its separatedness assumption is the given separatedness of $Y\\to S$, and its conclusion is $a=b$. The kernel check is elementary from sheaf injectivity and the definition of the image ideal; it uses no quasi-compactness of $j$. The cited rigidity theorem needs no reducedness of $T$.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RH, lemma-equality-of-morphisms; schematic density as in lemma-characterize-scheme-theoretically-dense"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-universal",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image), 01RG (lemma-quasi-compact-immersion), 01RH (lemma-equality-of-morphisms)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toImage|eq_of.*[Dd]ominant|schematically|SchemeTheoreticallyDominant",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two morphisms to a separated scheme which agree on a schematically dense open subscheme are equal",
+   "results": "AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.Scheme.PartialMap.mk.congr_simp, AlgebraicGeometry.Scheme.hom_ext_of_forall, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.IsSeparated.valuativeCriterion, AlgebraicGeometry.Scheme.Hom.noConfusion, AlgebraicGeometry.Scheme.PartialMap.mk.injEq",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "AlgebraicGeometry.instIsMultiplicativeSchemeIsSchemeTheoreticallyDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.instIsSchemeTheoreticallyDominantOfIsIsoScheme, AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant, AlgebraicGeometry.instIsDominantOfIsSchemeTheoreticallyDominantOfQuasiCompact, AlgebraicGeometry.IsSchemeTheoreticallyDominant.isReduced, AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant, AlgebraicGeometry.IsSchemeTheoreticallyDominant.ker_eq_bot",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact immersion of schemes factors as an open immersion into its scheme theoretic image and is schematically dominant; morphisms into a separated scheme agree if they agree on a schematically dense open",
+   "results": "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "grep",
+   "query": "ext_of_isSchemeTheoreticallyDominant|IsOpenImmersion f.toImage|IsSchemeTheoreticallyDominant f.toImage|IsClosedImmersion f.imageι",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:259 (open immersion of the image factor).",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematically dominant morphisms detect equality of maps into a relatively separated scheme without assuming the source is reduced",
+   "results": "AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.IsSeparated.valuativeCriterion, AlgebraicGeometry.IsSeparated.of_valuativeCriterion, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+   "date": "2026-10-16",
+   "verdict": "partial match only: the image factor is in Mathlib; no uniqueness result without a reduced source was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ext_of_isSchemeTheoreticallyDominant\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage_app_injective|toImage_stalk|image.*ext|ext.*[Kk]er",
+   "results": "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/Topology/Path.lean, Mathlib/Topology/Path.lean, Mathlib/Topology/Path.lean, Mathlib/Topology/Path.lean, Mathlib/Topology/Path.lean, Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-16",
+   "verdict": "partial match: 25 returned hits, including Hom.toImage_app_injective at Subscheme.lean:754; broad grep alone gives no absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an open subscheme is schematically dense, restriction of morphisms to any separated scheme is injective, even for nonreduced schemes",
+   "results": "AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Hom.image_injective, AlgebraicGeometry.injective_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.IsGermInjective",
+   "date": "2026-10-16",
+   "verdict": "partial match: the returned equality lemmas require IsReduced on the source; no full match for the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ext_of_isDominant\"",
+   "results": "AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.ext_of_isDominant_of_isSeparated",
+   "date": "2026-10-16",
+   "verdict": "partial match: the returned equality lemmas require IsReduced on the source; no full match for the item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -68,5 +174,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
- "unit": "sk-lem-nagata-sketch-closure"
+ "unit": "sk-lem-nagata-sketch-closure",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-nagata-sketch-closure",
+  "worker": "stage1",
+  "summary": "Reused the existing closed-image, image-universal-property, immersion-into-image, and schematic-dominance rigidity statements. No new nodes. Preserved both current blueprint assertions and every hypothesis; made the image and density conventions explicit, including the arbitrary open in the uniqueness assertion. Replaced the unrelated compactification-data statement dependency by the precise scheme and morphism definitions. Recorded the stale master unit record and an erroneous external image definition in report.md.",
+  "blueprint": "Current main-20261015 proof paragraph 1: step 1 realizes the closed schematic image and step 2 its open, schematically dense factor. Paragraph 2: step 3 specializes the existing schematic-dominance rigidity theorem, whose equalizer proof is exactly this paragraph. The older dag/units statement is realized jointly by this item and the existing general-image and compactification nodes listed in its realized fields; those additional statements are not attributed to this item."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NE-74a27a1f6",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-74a27a1f6 (reviewer sub-agent of L); spot-checked: Read the whole item, the four cited nodes (with blueprint_update), the definition nodes, main-20261015 _section.md and proof.md, Stacks morphisms.tex 01R8 (l.849), 01RG (l.1139), 01RH (l.1212), definition-scheme-theoretic-image (smallest), definition-scheme-theoretically-dense and 01RE, and the closed slopmaster2 Lean Separated.lean:339-380. The statement matches main-20261015 word for word. The added conventions (smallest closed factor; density as injectivity of O_X -> j_*O_V, equivalent to Stacks' definition by 01RE) add no hypothesis and drop none, and the uniqueness open is still not assumed quasi-compact. Step 1: the image node and its universal property give the smallest closed factor. Step 2: the open-in-image node, which is Stacks 01RG in the quasi-compact case, gives the open immersion and density. Step 3: the rigidity node applies with (s,a,b,j); its kernel ideal is zero because it is the largest quasi-coherent ideal inside the zero kernel; no reducedness and no quasi-compactness of j are used. The rigidity node is Lean-closed, so it is a tool, not part of the route; no tool_uses needed. No cycle, no new nodes, unit realization acceptable. Edge cases checked: empty U; i the identity or a closed immersion; and k[x,e]/(e^2,xe) with D(x), which is topologically but not schematically dense. FIX: step 2 used the cited node's density notion (image equal to the whole target) without translating it to the item's injectivity convention. I added the one-line translation: q is quasi-compact, so the kernel of O_Ubar -> q_*O_U is the quasi-coherent kernel ideal. Only the step 2 text changed; uses, proof_deps and the statement are unchanged. For maintenance: def-nagata-scheme-theoretic-image's current DAG text says 'largest' (wrong; the update and Stacks say 'smallest'), and the unit record still carries the stale master text.; 1 file(s) fixed by the reviewer"
+ }
 }
