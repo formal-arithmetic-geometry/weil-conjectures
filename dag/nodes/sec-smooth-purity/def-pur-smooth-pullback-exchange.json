@@ -1,65 +1,160 @@
 {
-  "id": "def-pur-smooth-pullback-exchange",
-  "blueprint": {
-    "is": "def-pur-smooth-pullback-exchange",
-    "from": null,
-    "same_as": null
+ "id": "def-pur-smooth-pullback-exchange",
+ "blueprint": {
+  "is": "def-pur-smooth-pullback-exchange",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Smooth pullback exchange for exceptional inverse image",
+ "statement": "Work in the finite-coefficient purity conventions [def-pur-conventions], with $\\Lambda=A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $n\\geq1$. Let $X,X',Y,Y'$ be finite-type $k$-schemes [def-weil-scheme-morphism-properties], and let\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ u\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ v\\ }&Y\n\\end{array}\n$$\nbe a Cartesian square of $k$-morphisms [def-pc-base-change], with $f$ separated and of finite type, smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Let $K\\in D^b_{ctf}(Y,A)$, the bounded constructible finite-Tor category of [def-pur-conventions]. The morphism $v$ is arbitrary in this finite-type setting; no smoothness, flatness or properness of $v$ is assumed. All the following objects and maps are on the small pro-etale sites [def-weil-pbc-proetale-site], with the derived pullbacks [def-weil-derived-pullback-tensor-hom] and constructible exceptional inverse images [def-weil-exceptional-inverse-image].\n\nUse the smooth purity maps $\\gamma$ of [def-pur-smooth-purity-map], formed from the canonical diagonal identifications of [thm-pur-diagonal-dualizing-object] and the canonical tensor isomorphisms of [thm-pur-cohomological-smoothness]. Their inverses are thus specified inverses of these maps. Here $f'$ has the same smooth relative dimension by [lem-sbc-smooth-relative-dimension-permanence] and is separated finite type by [lem-pod-separated-finite-type-base-change]. For the finite-Tor constructible domain of $Lv^*K$, use the bounded-constructible pullback and site comparison of [lem-weil-pbc-pullback-preserves-bounded-constructible, lem-sf-proetale-constructible-origin], and the bounded flat models and preservation of flat modules of [lem-sf-flat-model, lem-weil-pbc-ringed-topos-flat-module-pullback].\n\nWrite $c_{h,g}:L(g\\circ h)^*\\xrightarrow{\\sim}Lh^*Lg^*$ for the canonical composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition]. For $M\\in D(X_{\\mathrm{proet}},A)$, write\n$$\n a_{u,M}:Lu^*(M(d)[2d])\\xrightarrow{\\sim}(Lu^*M)(d)[2d]\n$$\nfor the canonical tensor comparison of [lem-pur-derived-pullback-tensor-iso] followed by the pullback identification $Lu^*A_X(d)\\cong A_{X'}(d)$ of [det-prop-sfb-cartesian-coefficients-twists], with the twist convention [def-coefficient-twists-detailed]. The shift comparison is the termwise identification for exact finite-coefficient pullback [def-weil-derived-pullback-tensor-hom] and the cochain shift of [def-weil-abstract-derived-category]. Define the middle identification to be\n$$\n b_{\\square,K}:Lu^*((Lf^*K)(d)[2d])\n \\xrightarrow{a_{u,Lf^*K}}(Lu^*Lf^*K)(d)[2d]\n \\xrightarrow{c_{u,f,K}^{-1}(d)[2d]}(L(f\\circ u)^*K)(d)[2d]\n \\xrightarrow{c_{f',v,K}(d)[2d]}(Lf'^*Lv^*K)(d)[2d],\n$$\nwhere the last arrow uses the equality $f\\circ u=v\\circ f'$ of the square.\n\nThe *smooth pullback exchange* is the isomorphism defined by the typed composite\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}_{f,v,K}:\nLu^*Rf^!K\n\\xrightarrow{\\ (Lu^*\\gamma_{f,K})^{-1}\\ }\nLu^*((Lf^*K)(d)[2d])\n\\xrightarrow{\\ b_{\\square,K}\\ }\n(Lf'^*Lv^*K)(d)[2d]\n\\xrightarrow{\\ \\gamma_{f',Lv^*K}\\ }\nRf'^!Lv^*K.\n$$\nThis notation specifies the purity composite, rather than denoting a right-adjoint mate of compact-support base change.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/def-pur-smooth-pullback-exchange.md",
+  "place": "node def-pur-smooth-pullback-exchange, order 2017"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-base-change",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-pur-cohomological-smoothness",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth purity pullback exchange isomorphism between inverse image of exceptional pullback and exceptional pullback of inverse image",
+   "results": "Eight hits: Scheme.Pullback.pullbackP1Iso and its projection identities, Scheme.IdealSheafData.comapIso_inv_subschemeι; these concern scheme fibre products, not exceptional derived inverse images.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Smooth pullback exchange for exceptional inverse image",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\n$A=A_{E,n}$, and let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ u\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ v\\ }&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $f$ smooth of relative dimension $d$ and\n$K\\in D^b_{ctf}(Y,\\Lambda)$. The *smooth pullback exchange* for the\nexceptional inverse image is the isomorphism\n\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}_{f,v,K}:\nLu^*Rf^!K\\longrightarrow Rf'^!Lv^*K\n$$\n\ndefined as the typed composite\n\n$$\nLu^*Rf^!K\n\\xrightarrow{(Lu^*\\gamma_{f,K})^{-1}}\nLu^*Lf^*K(d)[2d]\n\\xrightarrow{\\ \\sim\\ }\nLf'^*Lv^*K(d)[2d]\n\\xrightarrow{\\ \\gamma_{f',Lv^*K}\\ }\nRf'^!Lv^*K.\n$$\n\nThis is distinct from the right-adjoint mate $\\operatorname{BC}^!_*$ of\nthe compact-support base change; both source and target are fixed\nexplicitly by the definitions.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/def-pur-smooth-pullback-exchange.md",
-    "place": "node def-pur-smooth-pullback-exchange, order 2017"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor.mapIso",
+   "results": "Twelve hits, including CategoryTheory.Functor.mapIso, mapIso_symm, mapIso_trans (Mathlib.CategoryTheory.Iso), and functorial faithfulness/eqToIso lemmas. These provide elementary isomorphism operations only.",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric construction"
   },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2017,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "smoothPullbackExchange|smoothPurity|rightDerivedUpperShriek|exceptional inverse image",
+   "results": "[grep] OK 0 hit(s); searched AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-smooth-purity",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ u\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ v\\ }&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $f$ smooth of relative dimension $d$ and\n$K\\in D^b_{ctf}(Y,\\Lambda)$. The *smooth pullback exchange* for the\nexceptional inverse image is the isomorphism\n\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}_{f,v,K}:\nLu^*Rf^!K\\longrightarrow Rf'^!Lv^*K\n$$\n\ndefined as the typed composite\n\n$$\nLu^*Rf^!K\n\\xrightarrow{(Lu^*\\gamma_{f,K})^{-1}}\nLu^*Lf^*K(d)[2d]\n\\xrightarrow{\\ \\sim\\ }\nLf'^*Lv^*K(d)[2d]\n\\xrightarrow{\\ \\gamma_{f',Lv^*K}\\ }\nRf'^!Lv^*K.\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "smooth purity defines exchange of derived pullback and exceptional inverse image in a cartesian square",
+   "results": "Eight hits: IsPullback.flip_iff, BicartesianSq.toIsPullback, AlgebraicGeometry.IsSmooth.casesOn, IsPullback.flip, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, IsPullback.toCommSq, Square.IsPullback.mono_f₁₂, IsPullback.exact_shortComplex'. None defines purity exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist smooth purity exceptional inverse image base change isomorphism",
+   "results": "Eight hits: Scheme.Modules.pseudofunctor_mapComp_hom_τl and _inv_τl; SheafOfModules.pullbackObjFreeIso, conjugateEquiv_pullbackComp_inv, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, freeFunctorCompPullbackIso, the corresponding _assoc lemma, and pullbackIso. These are ordinary module pullback constructions, not the purity composite.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|TateTwist|UpperShriek",
+   "results": "[grep] OK 0 hit(s); searched AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapIso|def symm|def trans",
+   "results": "[grep] OK 3 hit(s); CategoryTheory/Iso.lean:87 Iso.symm, :131 Iso.trans, :473 Functor.mapIso. The search output mislabels its columns when the search directory is one file; the printed numbers are line numbers.",
+   "date": "2026-10-17",
+   "verdict": "only elementary isomorphism operations; no match for this definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical exchange isomorphism conjugating exceptional inverse image by orientation and pullback composition",
+   "results": "Eight hits: ComplexShape.symmetryEquiv, ComplexShape.σ, RootPairing.Equiv.comp_indexEquiv_symm_apply, SSet.Subcomplex.PairingCore.pairing_p_equivII, RootPairing.Hom.comp_indexEquiv_symm_apply, SSet.Subcomplex.PairingCore.pairing_p_symm_equivI, CategoryTheory.GlueData.t'_inv, CategoryTheory.GlueData.t'_iij. These are signs, root-pairing or gluing comparisons; none defines the exceptional inverse-image exchange.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|UpperShriek|exceptionalInverse|smoothPullbackExchange",
+   "results": "[grep] OK 0 hit(s); independent second-reader query across the default Mathlib source search.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2017,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Work in the purity conventions of [def-pur-conventions], let\n$A=A_{E,n}$, and let\n\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{\\ u\\ }&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{\\ v\\ }&Y\n\\end{array}\n$$\n\nbe a Cartesian square with $f$ smooth of relative dimension $d$ and\n$K\\in D^b_{ctf}(Y,\\Lambda)$. The *smooth pullback exchange* for the\nexceptional inverse image is the isomorphism\n\n$$\n\\operatorname{Ex}^{!,\\mathrm{sm}}_{f,v,K}:\nLu^*Rf^!K\\longrightarrow Rf'^!Lv^*K\n$$\n\ndefined as the typed composite\n\n$$\nLu^*Rf^!K\n\\xrightarrow{(Lu^*\\gamma_{f,K})^{-1}}\nLu^*Lf^*K(d)[2d]\n\\xrightarrow{\\ \\sim\\ }\nLf'^*Lv^*K(d)[2d]\n\\xrightarrow{\\ \\gamma_{f',Lv^*K}\\ }\nRf'^!Lv^*K.\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pur-smooth-pullback-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint definition into its specified inverse-purity, twist/pullback composition, and base-changed-purity factors; named all pre-existing construction and typing dependencies. Made the separated finite-type domain implicit in purity conventions explicit without imposing any condition on v. Rejected the parameterized ordinary-etale Lean construction as an exact attachment. No new nodes.",
+  "blueprint": "main-20261015, sec-smooth-purity/sk-prop-sp-purity-bc/def-pur-smooth-pullback-exchange.md: the displayed three-factor typed composite. The historical unit sk-thm-smooth-purity and its diagonal/DNC orientation route are retained; the middle unnamed arrow is expanded using twists and pullback composition."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-c5444868d",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-c5444868d (reviewer sub-agent of L); spot-checked: PASS with no fixes, no drop_nodes and no tool_uses. Read the master (order 2017) and main-20261015 (order 2361) source definitions, and current def-pur-smooth-purity-map (order 2356). Read in full the statements and updates of all 21 statement dependencies; all exist and none is merged. Only allowed fields changed against the base, and there are no new nodes. The added hypotheses (f separated and finite type; X, X', Y, Y' finite-type k-schemes) are forced: def-weil-exceptional-inverse-image, def-pur-smooth-purity-map and the diagonal and tensor theorems already require them. The line with doubled origin shows smoothness does not give separatedness. Every citer with hypotheses also assumes separated f, so no citer loses a case. Nothing is imposed on v. f' is checked via lem-sbc-smooth-relative-dimension-permanence (1) (01VB/02NK) and lem-pod-separated-finite-type-base-change (01KU/01T4). Lv*K lies in D^b_ctf: P_n is O_E/varpi^n under lem-weil-pbc-pullback-preserves-bounded-constructible, with lem-sf-proetale-constructible-origin for the constructibility convention, and Tor amplitude follows from the flat model of lem-sf-flat-model plus flat pullback (05VD), whose (i) matches def-weil-finite-tor-amplitude verbatim. The twist comparison uses 07A4 (lem-pur-derived-pullback-tensor-iso) with det-prop-sfb-cartesian-coefficients-twists; the shift comparison is termwise and elementary. Directions of c_{u,f}^{-1} and c_{f',v} (0D6D) check out against fu=vf'. Stacks labels verified in tags. Full stmt+proof traversal (12,884 nodes) never returns to the item: no cycle. No duplicate (grep Ex^{!}) and no SGA citation. Small cases checked: d=0, v=id, K=0, empty schemes, non-flat closed-point v, n=1."
+ }
 }

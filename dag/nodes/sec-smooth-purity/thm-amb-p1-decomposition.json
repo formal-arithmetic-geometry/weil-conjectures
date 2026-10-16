@@ -1,103 +1,239 @@
 {
-  "id": "thm-amb-p1-decomposition",
-  "blueprint": {
-    "is": "thm-amb-p1-decomposition",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The projective-line calculation before purity",
-  "statement": "Let $q:P=\\mathbf P^1_S\\to S$, with $S$ Noetherian.\nLet $h$ be the Kummer first Chern class of $\\mathcal O_P(1)$.\nThen\n\n$$\n(1,h):A_S\\oplus A_S(-1)[-2]\\xrightarrow{\\sim}Rq_*A_P\n$$\n\nis an isomorphism, compatible with arbitrary change of $S$.\nThe notation refers to the projective line, Tate twists, ordinary derived categories, and derived direct images.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
-    "place": "node thm-amb-p1-decomposition, order 1570"
-  },
-  "stmt_deps": [
-    "def-coefficient-twists-detailed",
-    "def-sc-p1-standard",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image"
-  ],
-  "proof": [
-    {
-      "text": "For $\\mathbf Z/n$-coefficients, the map is globally\ndefined by the unit and the Cartier class of infinity in\n[lem-amb-cartier-kummer-map]. On a geometric fibre,\n[thm-sc-proper-cohomology] gives cohomology only in\ndegrees $0,2$, each free of rank one; the genus is zero.\nIn its Kummer description, the degree-two map is\n$\\operatorname{Pic}(\\mathbf P^1)/n\\to H^2(\\mathbf P^1,\\mu_n)$,\nand the class of $\\mathcal O(1)$, of degree one, generates.\nThus $(1,h)$ is an isomorphism on every geometric fibre.\nBy [cor-weil-pbc-geometric-fiber-finite], [lemma-weil-pbc-geometric-stalk-conservative]\nit is an isomorphism on $S$. Both defining components\ncommute with base change, so the isomorphism does too. For\ngeneral $A$, tensor this isomorphism over $\\mathbf Z/n$\nwith $A$ and use\n[lem-amb-proper-coproducts-projection].",
-      "uses": [
-        "lem-amb-cartier-kummer-map",
-        "thm-sc-proper-cohomology",
-        "cor-weil-pbc-geometric-fiber-finite",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-amb-proper-coproducts-projection"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-amb-cartier-kummer-map",
-    "thm-sc-proper-cohomology",
-    "cor-weil-pbc-geometric-fiber-finite",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-amb-proper-coproducts-projection"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1570,
-  "blueprint_uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
-    "def-coefficient-twists-detailed",
-    "def-sc-p1-standard",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image",
-    "lem-amb-cartier-kummer-map",
+ "id": "thm-amb-p1-decomposition",
+ "blueprint": {
+  "is": "thm-amb-p1-decomposition",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The projective-line calculation before purity",
+ "statement": "Let $N\\geq1$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme on which $N$ is invertible. Here Noetherian means having a finite affine cover by spectra of Noetherian rings. Put $P=\\mathbf P^1_S$ with projection $q:P\\to S$. Work on small ordinary etale sites and their unbounded derived categories of constant-ring $A$-module sheaves. Define $A_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}A_T$ and $A_T(-1)=\\mathcal Hom_{A_T}(A_T(1),A_T)$ for every $T$ over $S$. On the two standard charts with $t=x_1/x_0$, define $\\mathcal O_P(1)$ by generators $e_0=t^{-1}e_1$. Let $c:A_P\\to A_P(1)[2]$ be the Kummer first Chern class of $\\mathcal O_P(1)$, obtained from the Kummer connecting homomorphism and derived scalar extension from $\\mathbf Z/N$ to $A$. Put $K=A_S(-1)[-2]$. Define $h:K\\to Rq_*A_P$ as the adjoint under $q^{-1}\\dashv Rq_*$ of the composite $q^{-1}K\\cong q^{-1}K\\otimes_A^L A_P\\xrightarrow{1\\otimes c}q^{-1}K\\otimes_A^L A_P(1)[2]\\xrightarrow{\\mathrm{ev}}A_P$, using twist pullback and evaluation. Write $1:A_S\\to Rq_*A_P$ for the adjunction unit. Then\n\n$$\n(1,h):A_S\\oplus A_S(-1)[-2]\\xrightarrow{\\sim}Rq_*A_P\n$$\n\nis an isomorphism. For every morphism $g:S'\\to S$, the corresponding projective-line square and ordinary-etale proper exchange identify the pullback of this isomorphism with the same construction over $S'$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
+  "place": "node thm-amb-p1-decomposition, order 1570"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-kummer-any-base",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-asd-ordinary-finite-p1-adjunction] to $N,A,S,q$. It gives $b_q:A_S(1)[2]\\oplus A_S\\xrightarrow{\\sim}Rq_*A_P(1)[2]$, with components the shifted twisted unit and the adjoint of the scalar-extended Kummer class of $\\mathcal O_P(1)$. The structural map $q$ is proper by [lemma-nagata-projective-space-base-change-proper], hence finite type and quasi-compact. Its source is locally Noetherian by [pqf-lem-locnoeth-lft], and quasi-compact because its base is quasi-compact and $q$ is quasi-compact; thus its source is Noetherian. Consequently [lem-amb-proper-coproducts-projection] applies with coefficient ring $A$, $K=A_S(-1)[-2]$ and $L=A_P(1)[2]$. Tensor $b_q$ by $K$ and use that projection isomorphism to identify the target with $Rq_*(q^{-1}A_S(-1)\\otimes_A^LA_P(1))=Rq_*A_P$. The identifications follow from [lem-asd-etale-finite-twist-pullback]: the twists are locally free of rank one, inverse image preserves them, and the evaluation $A_P(-1)\\otimes_A A_P(1)\\to A_P$ is an isomorphism (check on a local rank-one basis). The first source summand becomes $A_S$ and the second becomes $A_S(-1)[-2]$. For the component calculation, write $L=A_S(1)[2]$, $L_P=A_P(1)[2]$ and $c:A_P\\to L_P$ for the Chern morphism. The first component before projection is $1_K\\otimes\\eta_{q,L}$, and the second is $1_K\\otimes(Rq_*c\\circ\\eta_{q,A_S})$. The projection map is adjoint to $1_{q^{-1}K}\\otimes\\varepsilon_{q,L_P}$. Naturality of the counit and the triangle identity $\\varepsilon_{q,q^{-1}L}\\circ q^{-1}\\eta_{q,L}=1$ show that the first projected component has adjoint $1_{q^{-1}K\\otimes L_P}$; evaluation identifies this with $1_{A_P}$. For the second projected component, naturality gives $\\varepsilon_{q,L_P}\\circ q^{-1}(Rq_*c\\circ\\eta_{q,A_S})=c\\circ\\varepsilon_{q,A_P}\\circ q^{-1}\\eta_{q,A_S}=c$. Tensoring this equation by $q^{-1}K$ and evaluating gives adjoint $1_{q^{-1}K}\\otimes c$, followed by evaluation. This is exactly the defining adjoint of $h$ in the statement. Hence the resulting isomorphism is $(1,h)$. No flatness of $A$ over $\\mathbf Z/N$ is used.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lemma-nagata-projective-space-base-change-proper",
+    "pqf-lem-locnoeth-lft",
     "lem-amb-proper-coproducts-projection",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "thm-sc-proper-cohomology"
-  ],
-  "uses_not_cited": [
-    "def-coefficient-twists-detailed",
-    "def-sc-p1-standard",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof: the projective-line decomposition is the ordinary-etale finite-coefficient calculation"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $q:P=\\mathbf P^1_S\\to S$, with $S$ Noetherian.\nLet $h$ be the Kummer first Chern class of $\\mathcal O_P(1)$.\nThen\n\n$$\n(1,h):A_S\\oplus A_S(-1)[-2]\\xrightarrow{\\sim}Rq_*A_P\n$$\n\nis an isomorphism, compatible with arbitrary change of $S$.",
-    "proof": [
-      {
-        "text": "For $\\mathbf Z/n$-coefficients, the map is globally\ndefined by the unit and the Cartier class of infinity in\n[lem-amb-cartier-kummer-map]. On a geometric fibre,\n[thm-sc-proper-cohomology] gives cohomology only in\ndegrees $0,2$, each free of rank one; the genus is zero.\nIn its Kummer description, the degree-two map is\n$\\operatorname{Pic}(\\mathbf P^1)/n\\to H^2(\\mathbf P^1,\\mu_n)$,\nand the class of $\\mathcal O(1)$, of degree one, generates.\nThus $(1,h)$ is an isomorphism on every geometric fibre.\nBy [cor-weil-pbc-geometric-fiber-finite], [lemma-weil-pbc-geometric-stalk-conservative]\nit is an isomorphism on $S$. Both defining components\ncommute with base change, so the isomorphism does too. For\ngeneral $A$, tensor this isomorphism over $\\mathbf Z/n$\nwith $A$ and use\n[lem-amb-proper-coproducts-projection].",
-        "uses": [
-          "lem-amb-cartier-kummer-map",
-          "thm-sc-proper-cohomology",
-          "cor-weil-pbc-geometric-fiber-finite",
-          "lemma-weil-pbc-geometric-stalk-conservative",
-          "lem-amb-proper-coproducts-projection"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Let $g:S'\\to S$ be arbitrary, without a Noetherian hypothesis on $S'$, and write $g':P'=P\\times_SS'\\to P$ and $q':P'\\to S'$ for the projections. The ring $A$ is torsion since $N1_A=0$, and $q$ is proper by [lemma-nagata-projective-space-base-change-proper]. Thus [lem-kun-proper-base-change-torsion-ring] supplies the isomorphism $\\mathrm{Ex}:g^{-1}Rq_*A_P\\xrightarrow{\\sim}Rq'_*A_{P'}$. Inverse image identifies the source summands with $A_{S'}\\oplus A_{S'}(-1)[-2]$ by [lem-asd-etale-finite-twist-pullback]; invertibility of $N$ pulls back. To verify the class component, take the infinity divisor $D=(x_0=0)$. On its affine chart its ideal is $(s)$ in $B[s]$, where $s=x_0/x_1$, and on the other chart it is the unit ideal. Multiplication by $s$ is injective for every ring $B$, including after arbitrary base change. Thus $D$ and $D'=D\\times_SS'$ are effective Cartier divisors. Dualizing these ideal generators gives the transition $e_0=t^{-1}e_1$, so $\\mathcal O(D)=\\mathcal O_P(1)$ and $\\mathcal O(D')=\\mathcal O_{P'}(1)$. The supported Kummer construction [lem-asd-ordinary-supported-kummer] identifies its composite with the closed-immersion unit as $c_1(\\mathcal O(D))$ and explicitly commutes with this pullback. To include the unit in this comparison, let $i:D\\hookrightarrow P$, $i':D'\\hookrightarrow P'$ and $v_D:D'\\to D$ be the divisor square. The mate formula of [def-kun-unbounded-exchange] and its triangle identity give $\\mathrm{Ex}_i\\circ g'^{-1}u_D=u_{D'}$: both sides have identity adjoint on $A_{D'}$. Combining this equality with $g'^{-1}c_{D,A}=c_{D',A}\\circ\\mathrm{Ex}_i$ gives $g'^{-1}c_1(\\mathcal O_P(1))=c_1(\\mathcal O_{P'}(1))$. Finally use the mate formula of [def-kun-unbounded-exchange]: taking $q'^{-1}$-adjoints, $\\mathrm{Ex}\\circ g^{-1}(1)$ becomes the identity of $A_{P'}$, and $\\mathrm{Ex}\\circ g^{-1}h$ becomes the pulled-back Chern class just computed, hence equals the adjoint defining $h'$. Consequently $\\mathrm{Ex}\\circ g^{-1}(1,h)=(1,h')$. The left side is a composite of isomorphisms, so this proves the isomorphism and compatibility over arbitrary, possibly non-Noetherian $S'$ without applying the Noetherian projection theorem there.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-ordinary-supported-kummer",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof: both defining components commute with arbitrary base change"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lemma-nagata-projective-space-base-change-proper",
+  "pqf-lem-locnoeth-lft",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-asd-ordinary-supported-kummer",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary etale projective line decomposition finite commutative ring Kummer class",
+   "results": "8 hits in the retained search log: StandardEtalePair, StandardEtalePair.Ring, StandardEtalePresentation.toSubmersivePresentation, StandardEtalePair.instCommRingRing, Polynomial.instEtaleUniversalCoprimeFactorizationRing, StandardEtalePair.hasMap_X, StandardEtalePresentation.toPresentation, Algebra.instIsStandardEtale. These are etale algebra/presentation declarations, not the etale projective-line decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, ProjectiveLine, IsIso",
+   "results": "Query rejected: loogle: unknown identifier 'ProjectiveLine'. This is an invalid query, not evidence of absence.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*line|Kummer|proper.*base.?change",
+   "results": "25 hits in general AlgebraicGeometry files; none states the etale projective-line decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary etale projective line Kummer decomposition",
+   "results": "8 hits about formally etale algebras and Kummer extensions; no sheaf-cohomological decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale derived pushforward splits into constant coefficients and inverse Tate twist for every finite torsion ring",
+   "results": "8 hits in Mathlib/RingTheory/Etale and Smooth/NoetherianDescent: StandardEtalePair.hasMap_X, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePair.instEtaleRing, Algebra.Etale.formallyEtale, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.instFormallyEtaleRing. Read signatures: etale ring algebra facts, no projective-line derived decomposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, CategoryTheory.IsIso",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Ll]ine|Kummer|[Cc]hern|[Tt]ate[Tt]wist|[Ee]tale.*[Cc]ohom",
+   "results": "1 hit: Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean:849, map from Weierstrass points to the projective line; no etale derived decomposition. Subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer first Chern class gives derived projective bundle formula for the projective line",
+   "results": "8 hits: Projectivization.mk''_submodule, LinearAlgebra.Projectivization.termℙ, Projectivization.ind, CategoryTheory.ProjectiveResolution.ofComplex_d_1_0, Projectivization.rep, Projectivization, Projectivization.finrank_submodule, Projectivization.submodule_injective. Read signatures: linear projectivization and projective resolutions, no etale cohomology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of constant etale torsion sheaf along projective space decomposes by Chern class powers",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, its _assoc variant, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.mul_apply. Read returned types and descriptions: projective-spectrum chart and structure-sheaf statements, no etale derived projective bundle formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.bundle|firstChern|chernClass|TateTwist",
+   "results": "0 hits in the Mathlib source, as returned by msearch.py.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1570,
+ "blueprint_uses": [
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-coefficient-twists-detailed",
+  "def-sc-p1-standard",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-proper-coproducts-projection",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-sc-proper-cohomology"
+ ],
+ "uses_not_cited": [
+  "def-coefficient-twists-detailed",
+  "def-sc-p1-standard",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $q:P=\\mathbf P^1_S\\to S$, with $S$ Noetherian.\nLet $h$ be the Kummer first Chern class of $\\mathcal O_P(1)$.\nThen\n\n$$\n(1,h):A_S\\oplus A_S(-1)[-2]\\xrightarrow{\\sim}Rq_*A_P\n$$\n\nis an isomorphism, compatible with arbitrary change of $S$.",
+  "proof": [
+   {
+    "text": "For $\\mathbf Z/n$-coefficients, the map is globally\ndefined by the unit and the Cartier class of infinity in\n[lem-amb-cartier-kummer-map]. On a geometric fibre,\n[thm-sc-proper-cohomology] gives cohomology only in\ndegrees $0,2$, each free of rank one; the genus is zero.\nIn its Kummer description, the degree-two map is\n$\\operatorname{Pic}(\\mathbf P^1)/n\\to H^2(\\mathbf P^1,\\mu_n)$,\nand the class of $\\mathcal O(1)$, of degree one, generates.\nThus $(1,h)$ is an isomorphism on every geometric fibre.\nBy [cor-weil-pbc-geometric-fiber-finite], [lemma-weil-pbc-geometric-stalk-conservative]\nit is an isomorphism on $S$. Both defining components\ncommute with base change, so the isomorphism does too. For\ngeneral $A$, tensor this isomorphism over $\\mathbf Z/n$\nwith $A$ and use\n[lem-amb-proper-coproducts-projection].",
+    "uses": [
+     "lem-amb-cartier-kummer-map",
+     "thm-sc-proper-cohomology",
+     "cor-weil-pbc-geometric-fiber-finite",
+     "lemma-weil-pbc-geometric-stalk-conservative",
+     "lem-amb-proper-coproducts-projection"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-amb-p1-decomposition",
+  "worker": "stage1",
+  "summary": "Restored the ordinary-etale finite-A statement and its etale direct-image dependencies. Reuse the existing same-unit finite projective-line adjunction decomposition, explicitly untwist by the proper projection formula, and prove arbitrary-base compatibility by torsion-ring proper exchange and the universal infinity divisor Kummer class. Removed completed/rational/pro-etale assertions and the inaccurate same_as claim.",
+  "blueprint": "The first step realizes the projective-line decomposition paragraph of thm-amb-p1-decomposition.md through lem-asd-ordinary-finite-p1-adjunction. The second realizes the sentence that the unit and Kummer class commute with arbitrary base change, with proper exchange made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "The source requires arbitrary base change, including non-Noetherian bases; this is the generic unbounded proper-exchange tool for the torsion ring A. The same-unit finite projective-line lemma states compatibility only between Noetherian bases."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic properness of finite-dimensional projective space supplies the hypothesis for proper exchange and the same-unit projection formula."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic stability of local Noetherianity under finite type supplies the source hypothesis for the same-unit proper projection formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-proper-base-change-torsion-ring",
+  "lemma-nagata-projective-space-base-change-proper",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-7a6e80ad5",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-7a6e80ad5 (reviewer sub-agent of L); spot-checked: I read every check in full; the details are in review.md. Statement: compared with master sk-prop-sf-cbc/thm-amb-p1-decomposition.md (order 1570, which fixes ordinary derived categories) and main-20261015 sk-lem-geo-p1-cohomology. The delivery restores the ordinary-étale statement for every finite commutative A with NA=0, N invertible on S and S Noetherian. The master finite stage A_{E,n} is an instance of it, so nothing is weakened. The base-change morphism is the def-kun-unbounded-exchange mate and S' is arbitrary. The O(1) convention e_0=t^{-1}e_1 agrees with def-pc-projective-space-twist and with the adjunction and Kummer-class nodes. The citers thm-amb-p1-adjunction, det-sp-p1-trace and det-prop-diagonal-tower-trace use exactly this étale form. Step 1: lem-asd-ordinary-finite-p1-adjunction (same unit, same hypotheses, no cycle back to the item) gives b_q. P is Noetherian via nagata properness and 01T6. lem-amb-proper-coproducts-projection's hypotheses hold. I redid both component calculations (triangle identity and counit naturality) and they give exactly (1,h). Step 2: lem-kun-proper-base-change-torsion-ring holds for a torsion ring with g arbitrary (Stacks 0F0C, etale-cohomology.tex l.18887). The infinity divisor (s) in B[s] is Cartier for every B and O(D)=O(1). lem-asd-ordinary-supported-kummer plus the closed-immersion identity Ex_i∘g'^{-1}u_D=u_{D'} give c_1'=g'^{-1}c_1, and the mate computation gives Ex∘g^{-1}(1,h)=(1,h'). No Noetherian hypothesis on S' is needed. Edge cases checked: A=0, N=1, empty S, Z/4 over an algebraically closed field, non-flat A=Z/2 with N=4, A=Z/6 over Z[1/6], nonreduced or non-Noetherian S'. No new nodes, no restatement, no SGA. Tool uses accepted: lemma-nagata-projective-space-base-change-proper, lem-kun-proper-base-change-torsion-ring, and pqf-lem-locnoeth-lft (a Mathlib leaf). Mathlib searches: LeanSearch, LeanFinder, Loogle (unavailable) and grep found no match. No fixes."
+ }
 }
