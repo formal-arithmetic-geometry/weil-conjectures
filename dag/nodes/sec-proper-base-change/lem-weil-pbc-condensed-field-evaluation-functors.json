@@ -28,24 +28,26 @@
  ],
  "proof": [
   {
-   "text": "Apply final-object abelian evaluation on the pro-etale site of Spec Omega to the internal scalar action. Its lax tensorator sends pure tensors of sections to their tensor section. The monoidal unit and associativity diagrams supply an internal module over the ring of sections.",
+   "text": "Equip presheaf evaluation with its pointwise strong monoidal structure, with identity unit and tensor comparisons. Compose it with the lax monoidal sheaf-to-presheaf functor to obtain final-object abelian sections F on Spec Omega. The theorem geometric_field_proetale_evaluation_exact supplies finite-colimit preservation of F. The source-library mapMod and comap functors transport internal modules and compute their underlying groups and maps.",
    "uses": [
     "lem-weil-pbc-geometric-field-proetale-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical continuous realization identifies the ring of sections with ULift E, because Spec Omega is a singleton. Transport the scalar action and use the tensor universal property to obtain an ordinary E-module, with the evaluated maps as linear maps. The regular module is E and its endomorphisms have the stated coefficient at 1.",
+   "text": "Spec Omega is a singleton. The explicit ring isomorphism pointConstants sends a lifted element of E to its constant continuous function, and its inverse evaluates at z. The sheaf multiplication comparison Sheaf.μ_comp_map_mul shows that the induced monoid object on the sections of the continuous coefficient sheaf is precisely its ordinary section-ring monoid object. Compose constants with F applied to the inverse of condensedFieldContinuousMapIso to obtain the monoid isomorphism r : ULift E -> F(A), where A is the condensed coefficient ring. Define H by F.mapMod A, restriction of internal scalars along r, the already constructed internalToModule functor from the internal-module/ordinary-module equivalence, and restriction from ULift E to E.",
    "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-internal-module-ab-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse of r identifies the internally evaluated regular module with the regular ULift E module: its linearity is the multiplicativity equation for inv r, with r followed by inv r cancelled. Map this module isomorphism through internalToModule and restriction of scalars, and compose with ULift.down to get E-linear coordinates b. Thus b is inv r followed by ULift.down, and b.symm sends a to r(ULift.up a). Expand inv r as the evaluated continuous realization followed by evaluation at z. Applied to H(f) and b.symm(1), this is exactly the definition of condensedFieldPointCoefficient. All four factors of H are additive. F.mapMod preserves finite colimits because F does, internal restriction of scalars computes colimits, internalToModule is an equivalence, and ordinary restriction of scalars preserves finite colimits. This gives all three conjuncts of the claimed existence theorem.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
     "lem-weil-pbc-internal-module-ab-equivalence",
     "lem-weil-pbc-condensed-field-continuous-realization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Abelian evaluation preserves finite colimits over the algebraically closed field. Internal-module forgetful functors compute these colimits and ordinary-module forgetful functors reflect them. The induced functor is additive because the maps are the evaluated additive maps.",
-   "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation"
    ],
    "elementary": false
   }
@@ -58,8 +60,8 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1",
-  "note": "Strict decomposition of the parent evaluation theorem."
+  "place": "Example 3.1; Bhatt--Scholze, Examples 4.1.10 and 4.2.11",
+  "note": "C4 implements the existing evaluation plan without further split-offs. The normalization uses the specified continuous realization, not an arbitrary coefficient-ring isomorphism."
  },
  "mathlib_searches": [
   {
@@ -126,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-dafb2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261016T065200-L-672801",
+  "landing": "20261016T072553-L-972642",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered evaluation construction and scalar normalization with the unchanged node statement, recorded dependencies, DAG proof steps, and direct-importer compilation."
  }
 }
