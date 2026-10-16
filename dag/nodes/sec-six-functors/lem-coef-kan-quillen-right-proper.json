@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -249,5 +250,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-af52e526e (reviewer sub-agent of L); spot-checked: Read all eight steps and six new nodes against Hovey, Cisinski, Stacks, Kerodon and pinned Mathlib. Corrected the item's missing realization/cone definition dependency and the horn-pair source pinpoint. Checked empty/disconnected cases, arbitrary bases, duplicate candidates and coherent pullbacks; no reachable cycles found. Accepted both declared generic tool uses. Whole corrected JSON files and detailed checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanQuillenRightProper",
+  "declaration": "SSet.KanQuillen.right_proper_kan_quillen",
+  "declarations": [
+   "SSet.KanQuillen.weakEquivalenceStructure",
+   "SSet.KanQuillen.replacementMap",
+   "SSet.KanQuillen.right_proper_kan_quillen"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanQuillenRightProper.lean",
+  "statement": "theorem right_proper_kan_quillen : (∃ m : ModelCategory SSet.{u}, m.categoryWithFibrations = (inferInstance : CategoryWithFibrations SSet.{u}) ∧ m.categoryWithCofibrations = (inferInstance : CategoryWithCofibrations SSet.{u}) ∧ m.categoryWithWeakEquivalences = weakEquivalenceStructure) ∧ HasFunctorialFactorization (trivialCofibrations SSet.{u}) (fibrations SSet.{u}) ∧ HasFunctorialFactorization (cofibrations SSet.{u}) (trivialFibrations SSet.{u}) ∧ (cofibrations SSet.{u} = monomorphisms SSet.{u}) ∧ (fibrations SSet.{u} = modelCategoryQuillen.J.rlp) ∧ (∀ X : SSet.{u}, IsFibrant X ↔ KanComplex X) ∧ (trivialFibrations SSet.{u} = modelCategoryQuillen.I.rlp) ∧ (monomorphisms SSet.{u} ≤ transfiniteCompositions.{u} (coproducts.{u} modelCategoryQuillen.I).pushouts) ∧ (trivialCofibrations SSet.{u} = (transfiniteCompositions.{u} (coproducts.{u} modelCategoryQuillen.J).pushouts).retracts) ∧ (∀ (E B B' : SSet.{u}) (p : E ⟶ B) (w : B' ⟶ B), Fibration p → Enhanced.IsWeakHomotopyEquivalence w → Enhanced.IsWeakHomotopyEquivalence (pullback.fst p w)) ∧ (∃ (C : SSet.{u + 1}) (q : largeNerve.{u + 1, u, u + 1} SSet.{u} ⟶ C), IsLocalization (weakEquivalences SSet.{u}) q ∧ ∀ (A B Z : SSet.{u}) (_ : KanComplex A) (_ : KanComplex B) (_ : KanComplex Z) (f : A ⟶ Z) (g : B ⟶ Z), Enhanced.IsContractible (Enhanced.limitingConeSpace (diagram q (cospan f g))) ∧ ∀ (A' : SSet.{u}) (w : A ⟶ A') (p : A' ⟶ Z) (fac : w ≫ p = f), Enhanced.IsWeakHomotopyEquivalence w → Fibration p → KanComplex A' ∧ KanComplex (pullback p g) ∧ ∃ s : ((ihom (largeNerve.{0, 0, u + 1} WalkingCospan)).obj C) _⦋1⦌, IsLimitEdge (diagram q (cospan f g)) (object q (pullback p g)) s ∧ Composes s (transformation q (replacementMap f g w p fac)) (transformation q (pullback.cone p g).π))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the recorded realization-based weak equivalences and coherent localization definitions. The model witness has all three structure fields fixed explicitly. Every weak-equivalence/fibration replacement gives the specified limiting cone, compatible via a compositional two-simplex with its strict pullback cone; contractibility of the full limiting-cone space retains coherent independence. Only definitions are used from the downstream FiniteReedyLocalization module, not its theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-81e1113ff",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signature. Local side-overlay compilation passed in sandbox and library modes. No defects found; branch unchanged."
  }
 }
