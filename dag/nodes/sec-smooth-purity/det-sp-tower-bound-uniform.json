@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "det-sp-tower-bound-uniform",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Uniform Tor bound for compactly supported direct images",
- "statement": "Let $f:X\\to Y$ be separated of finite type with all fibres of dimension\n$\\leq d$, and let $A$ be a finite ring killed by a power of $\\ell$. If\n$M\\in\\Dctf(X_{\\mathrm{proét}},A)$ has Tor amplitude in $[a,b]$, then\n$Rf_{!}M\\in\\Dctf(Y_{\\mathrm{proét}},A)$ has Tor amplitude in $[a,b+2d]$. In\nparticular, if the levels $C_n$ of a tower have a common Tor interval $[a,b]$,\nthe levels of $Rf_{!,\\bullet}C_\\bullet$ have the common Tor interval $[a,b+2d]$,\nand similarly common cohomological bounds.",
+ "statement": "Work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $p>0$, $\\ell\\ne p$ is prime, and $X,Y$ are separated finite-type $k$-schemes. Let $f:X\\to Y$ be a $k$-morphism, separated of finite type, whose geometric fibres have dimension at most $d\\in\\mathbf Z_{\\geq0}$ [def-kun-topological-krull-dimension]. Let $A$ be a finite commutative discrete ring killed by a power of $\\ell$, regarded as the constant coefficient ring on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Use $\\Dctf$ and Tor amplitude as in [det-def-sfb-constructible-tor-amplitude], with the finite discrete comparison of [det-pe-finite-tor-comparison-noetherian]. For integers $a\\leq b$, if $M\\in\\Dctf(X_{\\mathrm{proet}},A)$ has Tor amplitude in $[a,b]$, then $Rf_!M\\in\\Dctf(Y_{\\mathrm{proet}},A)$ has Tor amplitude in $[a,b+2d]$. Here $Rf_!$ is the compactification functor $Rp_*j_!$ for $f=pj$ [def-weil-pbc-projection-compactification], on the etale-origin objects specified by the comparison. In particular, fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. If a coefficient tower $C_\\bullet$ has levels $C_n\\in\\Dctf(X_{\\mathrm{proet}},\\mathcal O_E/\\ell^n)$, $n\\geq1$, of common Tor amplitude $[a,b]$ [sk-def-sp-normalized-towers], then the levels of $Rf_{!,\\bullet}C_\\bullet$ [det-sp-tower-shriek-levels] have common Tor amplitude $[a,b+2d]$ and cohomology vanishing outside that same interval.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.md",
   "place": "node det-sp-tower-bound-uniform, order None",
@@ -18,32 +18,255 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-pe-finite-tor-comparison-noetherian",
+  "def-weil-pbc-projection-compactification",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-weil-l-adic-coefficient-extension"
+ ],
  "proof": [
   {
-   "text": "Tor amplitude of an object of $\\Dctf(Y_{\\mathrm{proét}},A)$ can be checked on\ngeometric stalks: $Rf_!M$ has Tor amplitude in $[a,b+2d]$ iff for every\ngeometric point $\\bar y$ and every $A$-module $N$,\n$(Rf_!M)_{\\bar y}\\otimes^{\\mathbf L}_AN$ has cohomology in $[a,b+2d]$.\nBy compactly supported (proper) base change to $\\bar y$ and the projection\nformula,\n\n$$\n(Rf_!M)_{\\bar y}\\otimes^{\\mathbf L}_AN\\simeq\nR\\Gamma_c\\bigl(X_{\\bar y},M|_{X_{\\bar y}}\\otimes^{\\mathbf L}_AN\\bigr).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "A finite ring is Noetherian since an ascending chain of ideals is an ascending chain of subsets of its finite underlying set. Thus [det-pe-finite-tor-comparison-noetherian] gives an etale representative $M'$ of $M$ with the same Tor interval $[a,b]$. Its qcqs hypothesis holds: a field is Noetherian, $X,Y$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Choose a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$ by [thm-nagata-compactification]. Properness of $r$ includes finite type, so $\\overline X$ is finite type over $k$ and is Noetherian as well. The open part is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target], applied to $X\\to\\overline X\\to Y$. Compute the etale compact-support candidate $H=Rr_*j_!$ as in [def-amb-etale-compact-support].",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "First paragraph: reduce the finite discrete coefficient problem to its etale representative and fix a compactification"
+   }
   },
   {
-   "text": "The complex $M|_{X_{\\bar y}}\\otimes^{\\mathbf L}_AN$ has cohomology sheaves in\ndegrees $[a,b]$, by the Tor amplitude of $M$. The functor $R\\Gamma_c$ on a\nseparated finite type scheme of dimension $\\leq d$ over a separably closed\nfield has cohomological amplitude $[0,2d]$ on torsion sheaves (Stacks, Tag\n0F10). By the hypercohomology spectral sequence the right-hand side has\ncohomology in $[a,b+2d]$. The interval does not depend on $n$ when applied to\nthe levels $C_n$ (with $A=\\mathcal O_E/\\ell^n$), and by\n[det-sp-tower-shriek-levels] these levels compute $Rf_{!,\\bullet}C_\\bullet$; the\ncohomological bounds follow likewise (take $N=A$).",
+   "text": "Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], and preserves constructible sheaves by [lem-fin-extension-by-zero]. Hence $j_!M'$ is bounded constructible: its cohomology is $j_!\\mathcal H^q(M')$, in the same finite range. Apply [lem-fin-proper-bounded-constructible] to the proper map $r$ between finite-type $k$-schemes. Its coefficient hypothesis is satisfied because $A$ is finite commutative and is killed by an invertible power of $\\ell$. We obtain $HM'\\in D^b_c(Y_{\\mathrm{et}},A)$. The coherent compactification comparisons of [lem-amb-etale-compact-comparisons] identify this candidate with $Rf_!$ on bounded-below etale complexes.",
    "uses": [
-    "det-sp-tower-shriek-levels"
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-fin-extension-by-zero",
+    "lem-fin-proper-bounded-constructible",
+    "lem-amb-etale-compact-comparisons"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "First paragraph: establish bounded constructibility independently of the numerical Tor bound"
+   }
+  },
+  {
+   "text": "By [lem-sf-etale-flat-model], choose $M'\\simeq P$ with $P$ a complex of flat etale $A$-module sheaves supported in $[a,b]$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Let $N$ be an arbitrary degree-zero etale $A$-module sheaf on $Y$, with no constructibility, finiteness or flatness requirement. The exact constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact] makes $f^{-1}N$ a sheaf in degree zero. By the K-flat definition of derived tensor [def-kun-derived-tensor], $M'\\otimes_A^L f^{-1}N$ is represented by $P\\otimes_A f^{-1}N$, whose terms are zero outside $[a,b]$. Thus this tensor complex has cohomology only in $[a,b]$.",
+   "uses": [
+    "lem-sf-etale-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "Second paragraph: the tensor test complex has the original interval [a,b]"
+   }
+  },
+  {
+   "text": "We need the projection formula for this arbitrary test sheaf, rather than a formula restricted to finite-Tor constructible second inputs. For sheaves $F$ on $X$ and $G$ on $\\overline X$, the adjunction $j_!\\dashv j^{-1}$ gives the natural map $j_!(F\\otimes_A j^{-1}G)\\to(j_!F)\\otimes_A G$, adjoint to the identity after restriction to $X$. It is an isomorphism: using [lem-kun-stalk-as-pullback] and [lem-cbc-extension-zero-base-change], its geometric stalk is the tensor identity on $X$, and is $0\\to0$ off $X$; [lem-pod-etale-stalk-tensor-scalar] computes these tensors and [lemma-weil-pbc-geometric-stalk-conservative] detects the isomorphism. This sheaf tensor identity extends to $P$ and any complex $Q$ by totalization: in each total degree only the finitely many degrees of $P$ contribute, and the additive exact functor $j_!$ commutes with those finite sums. Naturality with the two differentials preserves $d_P\\otimes1+(-1)^q1\\otimes d_Q$. If $Q$ is acyclic, $j^{-1}Q$ is acyclic by [prop-weil-pbc-inverse-image-modules-exact], so $P\\otimes_A j^{-1}Q$ is acyclic by K-flatness of $P$. Exactness of $j_!$ shows that $(j_!P)\\otimes_A Q$ is acyclic. Thus $j_!P$ is K-flat, and represents $j_!M'$. The preceding sheaf tensor identity applied termwise, with $G=r^{-1}N$, yields $(j_!M')\\otimes_A^L r^{-1}N\\simeq j_!(M'\\otimes_A^L f^{-1}N)$. Apply the proper projection theorem [lem-kun-0f0g] to $r$, $E=j_!M'$ and $K=N[0]$; it allows a torsion ring and arbitrary derived inputs. It gives the well-typed isomorphism\n$$HM'\\otimes_A^L N\\simeq H(M'\\otimes_A^L f^{-1}N).$$",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
+    "lem-cbc-extension-zero-base-change",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-kun-derived-tensor",
+    "lem-kun-0f0g"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "First paragraph: expand the compact-support projection formula with an arbitrary test module; the proper part is Stacks Tag 0F0G"
+   }
+  },
+  {
+   "text": "For every etale $A$-module sheaf $F$, [lem-dg-compact-support-amplitude] gives $\\mathcal H^q(HF)=0$ for $q>2d$; all its hypotheses hold for $f$, including the bound on its own geometric fibres, not on the fibres of the chosen proper compactification. Negative degrees vanish: [lem-weil-pbc-dplus-injective-representative] gives an injective K-injective representative of $j_!F$ with terms zero in negative degrees, and applying $r_*$ leaves those terms zero. To pass to any complex $B$ with cohomology in $[a,b]$, use the finite truncation triangles $\\tau_{\\le t-1}B\\to\\tau_{\\le t}B\\to\\mathcal H^t(B)[-t]\\to$ of [def-sbc-standard-tstructure-derived-category], for $t=a,\\ldots,b$. These triangles follow directly from the displayed good truncation complexes in that definition: the quotient of $\\tau_{\\le t}B$ by $\\tau_{\\le t-1}B$ has only $\\mathcal H^t(B)$ as cohomology, in degree $t$, so its natural map to $\\mathcal H^t(B)[-t]$ is a quasi-isomorphism. The starting object $\\tau_{\\le a-1}B$ is acyclic and hence zero in the derived category. By [lem-weil-pbc-extension-by-zero-exact], [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-derived-direct-image-triangulated], $H=Rr_*j_!$ carries these to distinguished triangles and commutes with shifts. The sheaf term $H(\\mathcal H^t(B))[-t]$ has cohomology in $[t,t+2d]$. Inductively the long exact cohomology sequence [lem-sf-derived-homology-long-exact] places $H\\tau_{\\le t}B$ in $[a,t+2d]$: outside this interval both neighbouring groups are zero. At $t=b$, this gives $HB$ in $[a,b+2d]$. Apply this to the tensor complex of Step 3 and use Step 4. Since $N$ was arbitrary, $HM'$ has Tor amplitude $[a,b+2d]$. This finite-truncation argument writes out the bounded hypercohomology argument in the blueprint.",
+   "uses": [
+    "lem-dg-compact-support-amplitude",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sf-derived-homology-long-exact",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "Second paragraph: the fibre compact-support [0,2d] bound and the finite hypercohomology filtration"
+   }
+  },
+  {
+   "text": "Return to the pro-etale category. Apply [lem-cbc-proetale-extension-zero-comparison] degreewise to a representative of $M'$ and use [prop-weil-pbc-comparison-direct-image] for the proper, hence qcqs, map $r$. Since extension by zero preserves the lower bound, its input to the direct-image comparison is in $D^+$. These natural isomorphisms give\n$$\\nu_Y^*HM'\\simeq Rr_{*,\\mathrm{proet}}j_{!,\\mathrm{proet}}\\nu_X^*M'\\simeq Rf_!M.$$\nBy Step 2, $HM'$ is bounded constructible, and by Step 5 it has the asserted Tor interval. The equivalence and interval comparison of [det-pe-finite-tor-comparison-noetherian], now on the qcqs scheme $Y$, show that $Rf_!M$ is bounded constructible of that same Tor interval. This never tests an arbitrary pro-etale sheaf for vanishing using only geometric points.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "First paragraph: interpret the stalk argument on etale representatives and transport the resulting Tor bound"
+   }
+  },
+  {
+   "text": "By the coefficient description [def-weil-l-adic-coefficient-extension], choose a uniformizer $\\varpi_E$ and write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e\\geq1$. Then $(\\ell^n)=(\\varpi_E^{en})$, so $A_n=\\mathcal O_E/\\ell^n$ is the finite ring $A_{E,en}$, killed by $\\ell^n$, for every $n\\geq1$. Apply the finite-ring assertion just proved to $C_n$ with this ring. The same geometric fibre bound $d$ and the given common input interval $[a,b]$ give $[a,b+2d]$ independently of $n$. The input tower lies in $D^+(\\operatorname{Tow})$, as required for the levelwise comparison: by [sk-def-sp-coefficient-towers], kernels and cokernels are formed levelwise (the induced transition maps descend to the component kernels and quotients). Therefore cohomology is computed levelwise, and vanishing of every $\\mathcal H^q(C_n)$ for $q<a$ makes the cohomology tower zero in those degrees. Clause (1) of [det-sp-tower-shriek-levels] identifies $(Rf_{!,\\bullet}C_\\bullet)_n$ with $Rf_{!,A_n}C_n$. Thus these are the asserted common Tor bounds for the tower levels. In the definition [det-def-sfb-constructible-tor-amplitude], the test module $N=A_n$ is the tensor unit, so each output level itself has cohomology only in $[a,b+2d]$. No compatibility of new projection maps is claimed or needed here.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "det-sp-tower-shriek-levels",
+    "det-def-sfb-constructible-tor-amplitude",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+    "place": "Final sentence: apply the finite-ring bound levelwise, then test with the coefficient ring"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-tower-shriek-levels"
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proper-morphism",
+  "det-def-sfb-constructible-tor-amplitude",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-tower-shriek-levels",
+  "lem-amb-etale-compact-comparisons",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-dg-compact-support-amplitude",
+  "lem-fin-extension-by-zero",
+  "lem-fin-proper-bounded-constructible",
+  "lem-kun-0f0g",
+  "lem-kun-stalk-as-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-etale-flat-model",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sk-def-sp-coefficient-towers",
+  "thm-nagata-compactification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-uniform.proof.md",
+  "place": "Expanded the projection/base-change amplitude argument using existing finite-ring etale comparison, proper projection, compact-support amplitude, and finite truncation triangles."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniform Tor amplitude bound for compactly supported direct image over finite field",
+   "results": "8 hits: HasCompactSupport.uniformContinuous_of_continuous, norm_torusIntegral_le_of_norm_le_const, IsLocalRing.finite_residueField_of_compactSpace, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.Hom.support_ker, IsCompact.uniform_oscillation, ContDiffMapSupportedIn.uniformSpace, AlgebraicGeometry.compactSpace_of_universallyClosed",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported direct image preserves finite Tor amplitude with dimension bound",
+   "results": "8 hits: HomologicalComplex.map_isStrictlySupported, DerivedCategory.IsLE, DerivedCategory.IsGE, Module.supportDim_le_of_injective, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "torAmplitudeIn, lowerShriek, compactSupport",
+   "results": "0 hits: . loogle: unknown identifier 'torAmplitudeIn'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|compact.*support|cohomological.*dimension",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes of relative dimension at most d, compactly supported direct image takes Tor amplitude [a,b] to [a,b+2d] over a finite torsion ring",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn",
+   "results": "0 hits: ; loogle: unknown identifier 'DerivedCategory.torAmplitudeIn'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|lowerShriek",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compactly supported derived direct image of an etale sheaf complex has Tor amplitude bounded by twice the dimension of the geometric fibres",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.instIsSupportedOfIsStrictlySupported, DerivedCategory.TStructure.t, HomologicalComplex.instIsStrictlySupportedTruncLE_1, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|torAmplitude",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The compact support derived direct image has Tor amplitude in [a,b+2d] for fibres of dimension at most d",
+   "results": "8 hits: HasCompactSupport.iteratedFDeriv, HasCompactSupport.deriv, TestFunction.hasCompactSupport, Module.supportDim_le_of_injective, Module.supportDim_le_of_surjective, HomologicalComplex.instIsSupportedOfIsStrictlySupported, DerivedCategory.TStructure.t, HasCompactSupport.comp_isClosedEmbedding",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsLE, DerivedCategory.IsGE",
+   "results": "2 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support direct image increases Tor amplitude by at most twice the maximum geometric fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, HomologicalComplex.map_isStrictlySupported, Module.supportDim_le_of_surjective, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, HasCompactSupport.tsupport_extend_zero, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, Module.supportDim_le_of_injective",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -55,5 +278,149 @@
   "det-sp-tower-shriek-levels"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-tower-bound-uniform",
+  "worker": "stage1",
+  "summary": "Replaced the earlier ill-typed stalk/sheaf tensor expression with an etale test by arbitrary sheaves, the full proper torsion projection formula, and a finite truncation induction. Reused the existing general finite-ring comparison and compact-support amplitude nodes, removing both unnecessary proposed prerequisites. Made the standing scheme setting, commutative discrete coefficients, integer ranges, and tower level membership explicit; retained arbitrary finite coefficient rings. Corrected the attribution of the 2d input: 0F10 gives finiteness, while the reused all-sheaf compact-support amplitude lemma supplies the explicit bound; 095U is the proper analogue.",
+  "blueprint": "First paragraph is realized by Steps 1-4 and 6 (etale-origin comparison and the compact-support projection formula with arbitrary test sheaves). Second paragraph is realized by Step 5 (the existing fibre compact-support amplitude input and explicit finite truncation induction) and Step 7 (levelwise tower comparison). The unit proof follows this same compact-support amplitude route.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Supplies the equivalence of finite-Tor constructible categories and preserves/refects the precise interval under etale/pro-etale comparison; the tower unit supplies no site-comparison theorem."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Clause (1) is the unit-local finite-level identification used in Step 7; it is retained as the original blueprint dependency."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Identifies the chosen compactification candidate with the usual compact-support functor on bounded-below ordinary etale complexes; no tower lemma establishes this finite-level normalization."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Computes the stalks of extension by zero inside and outside the open, including module and degreewise complex versions; the tower unit does not prove open base change."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Identifies the etale and pro-etale open extension functors termwise with the actual comparison pullback; the tower unit has no finite-site open comparison theorem."
+   },
+   {
+    "node": "lem-dg-compact-support-amplitude",
+    "why": "Supplies the precise [0,2d] all-sheaf input attached to the original geometric fibres, exactly the numerical input of the unit; the unit does not prove that fibre vanishing theorem."
+   },
+   {
+    "node": "lem-fin-extension-by-zero",
+    "why": "Gives constructibility of j_! applied to each constructible cohomology sheaf; the tower unit uses finite-level preservation but does not prove the generic sheaf theorem."
+   },
+   {
+    "node": "lem-fin-proper-bounded-constructible",
+    "why": "Gives bounded constructibility for the proper part of a compactification over the general finite coefficient ring A; the tower unit does not prove proper finiteness."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "Supplies the full proper projection formula over a torsion ring with arbitrary derived second input N; finite-Tor constructible projection statements of the tower route would not cover the arbitrary test sheaf."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Identifies the etale stalk test with inverse image to a geometric point for the open tensor calculation; no tower result supplies this generic identification."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Shows that the bounded flat model computes tensor with arbitrary test sheaves; the tower unit does not establish this generic K-flat fact."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Computes ordinary sheaf tensor on etale stalks in the elementary proof of the open tensor identity; no tower theorem gives the module-stalk formula."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Gives the exact cohomology sequence of each truncation triangle used in the finite amplitude induction; no tower result supplies the generic triangle-cohomology theorem."
+   },
+   {
+    "node": "lem-sf-etale-flat-model",
+    "why": "Gives an etale flat complex supported in exactly [a,b] for the bounded constructible input over an arbitrary commutative ring; the tower unit has no flat-model theorem."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Justifies applying exact extension by zero to the truncation triangles and shifts; the tower unit does not establish exact-functor descent to derived categories."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Justifies applying the right derived proper image to truncation triangles and shifts on bounded-below inputs; no tower lemma proves this generic derived-functor property."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Allows a nonnegative injective K-injective representative of a sheaf, proving the lower zero bound for its compact-support candidate; this is a generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Gives exact extension by zero, preservation of quasi-isomorphisms and acyclicity, and unchanged cohomological lower bounds in the compactification calculation; this is a generic etale-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes X, Y and the proper compactification middle scheme Noetherian from their finite-type structure maps; the tower unit does not prove this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Discharges the quasi-separatedness hypothesis in the site comparison and compactification theorem for the Noetherian schemes; no tower statement supplies it."
+   },
+   {
+    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
+    "why": "Gives quasi-compactness of the chosen open part from finite type of f and separatedness of its proper part, as required by compactification comparisons; no tower lemma gives it."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects the open tensor isomorphism on the etale site only; the tower unit does not contain this generic conservative-family theorem."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Identifies the etale/pro-etale proper direct images on the bounded-below open-extension input along a qcqs proper map; no tower lemma gives that finite-site direct-image comparison."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Keeps the inverse image of the arbitrary test sheaf in degree zero and preserves acyclicity in the open K-flatness argument; this is an ordinary constant-coefficient site tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Supplies a compactification of the separated finite-type morphism over the verified qcqs target; this is the compactification input named by the unit, not a replacement for its amplitude argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-tower-shriek-levels",
+  "lem-amb-etale-compact-comparisons",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-dg-compact-support-amplitude",
+  "lem-fin-extension-by-zero",
+  "lem-fin-proper-bounded-constructible",
+  "lem-kun-0f0g",
+  "lem-kun-stalk-as-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-etale-flat-model",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q30-22708abe0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-22708abe0 (reviewer sub-agent of L); spot-checked: Read and checked the complete item, blueprint route, all 32 cited nodes, source locations, hypotheses, canonical base-change/projection maps, coefficient categories, edge cases, searches, and route-lock constraints. No new nodes or repairs are needed; review.md records the full audit."
+ }
 }
