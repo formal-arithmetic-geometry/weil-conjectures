@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.Constructible
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Topology.ConstructibleIsRetrocompact
 
 /-!
@@ -18,6 +17,7 @@ Source: Stacks Project, Topology, Tags 004E, 005J and 09YH; Schemes, Tag 01IT
 -/
 
 @[expose] public section
+
 
 universe u
 
@@ -53,6 +53,39 @@ theorem exists_affineOpen_closed_stratum (Y : Scheme.{u}) (N : ℕ)
       (∀ i, IsLocallyClosed (Subtype.val ⁻¹' S i : Set V) ∧
         Topology.IsConstructible (Subtype.val ⁻¹' S i : Set V)) ∧
       IsCompact ((Subtype.val ⁻¹' S k : Set V)ᶜ) := by
-  sorry
+  classical
+  have _hcover_used := hcover
+  have _hdisjoint_used := hdisjoint
+  obtain ⟨W, Z, hW, hZ, hSk⟩ := hlocallyClosed k
+  let Wop : Y.Opens := ⟨W, hW⟩
+  have hyW : y ∈ Wop := by
+    rw [hSk] at hy
+    exact hy.1
+  obtain ⟨V, hVaff, hyV, hVW⟩ :=
+    exists_isAffineOpen_mem_and_subset hyW
+  refine ⟨V, hVaff, hyV, ?_, ?_, ?_⟩
+  · have hpre : (Subtype.val ⁻¹' S k : Set V) =
+        (Subtype.val ⁻¹' Z : Set V) := by
+      ext x
+      constructor
+      · intro hx
+        exact (hSk ▸ hx).2
+      · intro hx
+        have hxW : (x.1 : Y) ∈ W := hVW x.property
+        exact hSk ▸ ⟨hxW, hx⟩
+    rw [hpre]
+    exact hZ.preimage continuous_subtype_val
+  · intro i
+    constructor
+    · exact (hlocallyClosed i).preimage continuous_subtype_val
+    · exact (hconstructible i).preimage_of_isOpenEmbedding
+        V.2.isOpenEmbedding_subtypeVal
+  · have hC : Topology.IsConstructible
+        ((Subtype.val ⁻¹' S k : Set V)ᶜ) := by
+      rw [← Set.preimage_compl]
+      exact (hconstructible k).compl.preimage_of_isOpenEmbedding
+        V.2.isOpenEmbedding_subtypeVal
+    exact @IsRetrocompact.isCompact V _ _
+      (@Scheme.compactSpace_of_isAffine V hVaff) hC.isRetrocompact
 
 end AlgebraicGeometry

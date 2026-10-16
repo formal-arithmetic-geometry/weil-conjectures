@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "Because $Y_k$ is locally closed, write $Y_k=W\\cap Z$ with $W$ open and $Z$ closed. We have $y\\in W$. By [lem-weil-pbc-affine-opens-basis], applied to the scheme $Y$, the open $W$ and $y\\in W$, choose an affine open $V$ with $y\\in V\\subseteq W$. Then $Y_k\\cap V=Z\\cap V$ is closed in $V$ by the subspace topology.",
+   "text": "From local closedness of S k, write S k = W ∩ Z with W open and Z closed. Regard W as an open of Y and use Mathlib theorem exists_isAffineOpen_mem_and_subset to choose an affine open V containing y and contained in W. The equality of preimages S k ∩ V = Z ∩ V is proved by extensionality, so the selected preimage is closed.",
    "uses": [
     "def-weil-locally-closed-subset",
     "lem-weil-pbc-affine-opens-basis"
@@ -30,11 +30,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01IT (label lemma-basis-affine-opens); locally closed definition in Topology, Basic notions Tag 004E"
+    "place": "Schemes, Lemma Tag 01IT"
    }
   },
   {
-   "text": "For every $\\nu$, write $Y_\\nu=W_\\nu\\cap Z_\\nu$ with $W_\\nu$ open and $Z_\\nu$ closed in $Y$. Then $Y_\\nu\\cap V=(W_\\nu\\cap V)\\cap(Z_\\nu\\cap V)$, with the first factor open and the second closed in $V$, so it is locally closed. Since $V$ is open in $Y$ and $Y_\\nu$ is constructible in $Y$, [lem-weil-pbc-constructible-open-restriction] applied with $X=Y$, $U=V$ and $E=Y_\\nu$ proves constructibility in $V$.",
+   "text": "For each i, local closedness is preserved by the continuous subtype inclusion V → Y via IsLocallyClosed.preimage. Constructibility is preserved by the open embedding subtype inclusion via IsConstructible.preimage_of_isOpenEmbedding, which is the formal version of restriction to an open.",
    "uses": [
     "def-weil-locally-closed-subset",
     "lem-weil-pbc-constructible-open-restriction"
@@ -42,11 +42,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma Tag 005J (inverse image under an open immersion)"
+    "place": "Topology, Lemma Tag 005J"
    }
   },
   {
-   "text": "The complement $C=V\\setminus(Y_k\\cap V)$ is open by Step 1 and constructible in $V$ by Step 2 and the Boolean-complement clause of [def-weil-constructible-subset]. Since $V$ is an affine scheme, [lem-weil-pbc-affine-scheme-qcqs] makes it quasi-compact. Apply [lem-weil-pbc-constructible-is-retrocompact] to the topological space $V$ and its constructible subset $C$: the whole space $V$ is a quasi-compact open test subset, so $C\\cap V=C$ is quasi-compact.",
+   "text": "The complement of the selected preimage is constructible by Boolean complement and open-embedding preimage. Obtain CompactSpace V from Scheme.compactSpace_of_isAffine, the compactness clause of lem-weil-pbc-affine-scheme-qcqs, and apply IsConstructible.isRetrocompact followed by IsRetrocompact.isCompact to conclude compactness.",
    "uses": [
     "def-weil-constructible-subset",
     "lem-weil-pbc-constructible-is-retrocompact",
@@ -55,7 +55,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma Tag 005H (label lemma-constructible) and Lemma Tag 09YH (label lemma-constructible-is-retrocompact), with Algebra Lemma Tag 00E8 (label lemma-quasi-compact)"
+    "place": "Topology, Lemmas Tags 005H and 09YH"
    }
   }
  ],
@@ -70,7 +70,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/topology.tex",
-  "place": "Topology, Lemmas Tags 005J (lemma-open-immersion-constructible-inverse-image), 005H (lemma-constructible) and 09YH (lemma-constructible-is-retrocompact); Schemes Lemma Tag 01IT (lemma-basis-affine-opens); Algebra Lemma Tag 00E8 (lemma-quasi-compact)"
+  "place": "Topology, Lemmas Tags 005J (lemma-open-immersion-constructible-inverse-image), 005H (lemma-constructible) and 09YH (lemma-constructible-is-retrocompact); Schemes Lemma Tag 01IT (lemma-basis-affine-opens), with Mathlib's Scheme.compactSpace_of_isAffine for affine compactness"
  },
  "mathlib_searches": [
   {
@@ -179,5 +179,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Reviewed immutable statement, dependencies, sources, docstrings, report, edge cases, and verbatim signature. Server-only compile reproduced cleanly in 1.2 seconds. No delivery errors found. Wrote review.md; snapshot and branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261016T133215-L-3233665",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
