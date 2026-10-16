@@ -206,5 +206,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-df0d54ef1 (reviewer sub-agent of L); spot-checked: Read the whole item, its four steps, and the full statement of the one cited node, lem-coef-kan-quillen-right-proper (same unit, reviewed). I fetched the source, Kerodon Prop 3.4.0.2 (tag 0109), online; it is not archived in literature/. The statement matches it hypothesis by hypothesis: arbitrary simplicial sets, three weak equivalences, both squares commute, only f and f' are Kan fibrations, and the conclusion is about the strict pullback map. The statement is unchanged. The weak-equivalence conventions of def-cbc-enhanced-diagrams-cones and of the cited node agree, both based on geometric realization. Step 1 (graph factorization over a fixed base Z): the base changes and composites of Kan fibrations are proved inline, and with sj=1 and tj=r two-out-of-three makes s and t trivial fibrations; no Kan base is needed. Step 2: s_T and t_T are pullbacks of s and t (checked M x_Z T = M x_A (A x_Z T)), so the boundary-lifting clause makes them trivial fibrations, and two-out-of-three gives first j_T and then r_T weak. Step 3: E = Y_0 x_Y X; right properness makes q weak, and h=(α,f) satisfies qh=α and ph=f. Step 4: E x_X X_1 = Q = P' x_{Y_1} X_1 because g'γ=βg, so Q->P' is the pullback of γ along a fibration and right properness applies; the composite is exactly (α,γ). Only statement clauses of the cited node are used (C3, C4). There is no cycle: neither the item nor its parent occurs among the cited node's 99 transitive dependencies. The parent's step 5 uses a special case. Edge cases checked: empty objects, a point base, identity maps, and that both fibration hypotheses are needed. Duplicate search with rg over dag/nodes found no node stating this; I read the seven nearest candidates. There are no new nodes and no tool_uses, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-459a50bd7",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Checked all 8 clauses against the node and Kerodon 3.4.0.2 (0109): six arbitrary SSet.{u}, both squares (hf, hg in diagrammatic order), three weak homotopy equivalences via the recorded SSet.Enhanced.IsWeakHomotopyEquivalence, [Fibration f] [Fibration f'] = the scoped modelCategoryQuillen.J.rlp (all horns n>=1, outer horns included), conclusion on the canonical pullback.map f g f' g' α γ β (argument order checked). No Kan, universe or extra hypotheses. lean.statement verbatim; only the lean field changed vs the side clone. Proof dependency right_proper_kan_quillen has right properness for an arbitrary base. Only theorem proved by sorry; source and blueprint docstrings present; non-public proof import. Report has Worker report and Second reading by Q89. nt_compile --json on the side overlay: exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanPullbackFibrationInvariance",
+  "declaration": "SSet.Enhanced.isWeakHomotopyEquivalence_pullback_map",
+  "file": "lean/Sheaf/AlgebraicTopology/KanPullbackFibrationInvariance.lean",
+  "statement": "theorem isWeakHomotopyEquivalence_pullback_map {X₀ X X₁ Y₀ Y Y₁ : SSet.{u}} (f : X₀ ⟶ X) (g : X₁ ⟶ X) (f' : Y₀ ⟶ Y) (g' : Y₁ ⟶ Y) (α : X₀ ⟶ Y₀) (β : X ⟶ Y) (γ : X₁ ⟶ Y₁) (hf : f ≫ β = α ≫ f') (hg : g ≫ β = γ ≫ g') (hα : IsWeakHomotopyEquivalence α) (hβ : IsWeakHomotopyEquivalence β) (hγ : IsWeakHomotopyEquivalence γ) [Fibration f] [Fibration f'] : IsWeakHomotopyEquivalence (pullback.map f g f' g' α γ β hf hg)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

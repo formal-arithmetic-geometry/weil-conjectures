@@ -197,5 +197,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-136c0f27e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, unit sk-prop-sf-cbc and Kerodon 03X7, 0149 and 013X (read online; not archived, and the report's WANTED line is correct). The item statement is unchanged and agrees with 03X7 (1)⇔(2). Step 1: the cw-subcomplex and realized-disk nodes make |P| and |Q| CW in the sense of the Whitehead node (as 03X7 does via Remark 1.2.3.12). Step 2: the mapping-classes node and its precomposition naturality identify the map in (ii) with f^*, and h^* is its inverse. Step 3: Sing(T) is Kan through the horn retraction (x,s)↦(x,0); n=1 and T empty checked. Step 4: the edge/homotopy bijection is checked through finite products, compact-open currying and the explicit formula G(q_k(t),|α|(t)). The existing lem-coef-simplicial-realization-cylinder could also have been cited, but the step is complete as written. Step 5: the two-target argument (T=|P| for surjectivity, T=|Q| for injectivity) gives hf≃1 and fh≃1. Step 6: lem-coef-homotopy-equivalence-weak's hypotheses match exactly, including unbased homotopies and empty spaces. Both new nodes are true and match 0149 (π0 consequence) and 013X. They are statement-only and self-contained, have three kinds of logged searches, are not restated clauses of the item, and have no duplicate in the DAG or blueprint (checked against the Serre model, homotopy-equivalence-weak, simplicial-homotopy-equivalence-weak, cylinder and model-localization nodes). The blueprint from/via fields are correct, there is no cycle, proof_deps equals the union of uses, and no SGA is cited. The declared tool_uses (realization-finite-limits, compact-open-currying, homotopy-equivalence-weak) are generic topology and accepted. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d728680ca",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement matches node/Kerodon 03X7 (1)<=>(2): P Q : SSet.{u}, arbitrary v, no Kan/nonempty/mono binders; LHS is dependency's IsWeakHomotopyEquivalence (pi_0 bijection plus all r>=1 based homotopy groups at every source point); RHS is forall Kan W in SSet.{u} (empty allowed), Bijective (mapπ₀ ((MonoidalClosed.pre v).app W)) = precomposition Fun(Q,W)->Fun(P,W) on edge-generated components (PiZero.lean l.42-91, Closed/Basic.lean pre l.245). Edge cases (empty P/Q/W, r=0 via components) correct. No duplicate in Mathlib/side; downstream kan_mapping_homotopy_invariance uses same interface. Node diff vs published: only lean field added; lean.statement verbatim in file. Single sorry theorem, source/blueprint docstrings with 6 proof steps, no hollow defs or extra assumptions. Report has Worker report and Second reading by Q73. nt_compile.py overlay compile: rc 0, 0 errors, 0 warnings; file identical to d728680."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RealizationWeakEquivalence",
+  "declaration": "SSet.Enhanced.realization_weak_equivalence_iff_kan_targets",
+  "file": "lean/Sheaf/AlgebraicTopology/RealizationWeakEquivalence.lean",
+  "statement": "theorem realization_weak_equivalence_iff_kan_targets {P Q : SSet.{u}} (v : P ⟶ Q) : IsWeakHomotopyEquivalence v ↔ ∀ (W : SSet.{u}) [KanComplex W], Function.Bijective (SSet.mapπ₀ ((MonoidalClosed.pre v).app W))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

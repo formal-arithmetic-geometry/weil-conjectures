@@ -171,5 +171,28 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-23241507c (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited nodes, blueprint sources, chapter/unit route, and delivery requirements. The statement, dependencies, norm/topology verification, condensed-ring specialization, coefficient category, edge cases, searches, and no-SGA route all check out. No new nodes or repairs are needed; review.md records the detailed checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42d8c85e4",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the node's lean field changed, recording Profinite.padicIntCondensedRing (EllAdic.lean:75, (ℓ:ℕ)[Fact ℓ.Prime], universe u, := continuousMapRingSheaf ℤ_[ℓ]). Checked every clause: prime ℓ exact; ℤ_[ℓ]=PadicInt with its norm (ℓ-adic) topology matches def-weil-l-adic-numbers; equals dependency continuousMapRingSheafOfUniverse.{u,0} ℤ_[ℓ] by rfl; sections RingCat.of (ULift C(S,ℤ_[ℓ])) by rfl with precomposition restrictions; commutative ring object via the upstream IsCommMonObj instance and the dependency's isCommMonObj_continuousMapRingObjOfUniverse.{u,0}. Edge cases ℓ=2, empty S, arbitrary u: fine. No hollow definition or sorry; axioms only propext/choice/Quot.sound. Statement field is a verbatim substring; branch slopmaster2 is the convention. Report has real Worker report and Second reading by Q95 sections. My own scratch consumer compiled through nt_compile.py --json with no errors (only a long-line style warning in my scratch file). No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
+  "declaration": "Profinite.padicIntCondensedRing",
+  "declarations": [
+   "Profinite.padicIntCondensedRing",
+   "Profinite.continuousMapRingObj",
+   "Profinite.isCommMonObj_continuousMapRingObj"
+  ],
+  "statement": "abbrev padicIntCondensedRing :\n    Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "Q95",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing declaration in the published side framework. The surrounding binders are (ℓ : ℕ) [Fact ℓ.Prime] and universe u. Its value is continuousMapRingSheaf ℤ_[ℓ], definitionally equal to the recorded dependency continuousMapRingSheafOfUniverse.{u, 0} ℤ_[ℓ]. Sections are ULift C(S, ℤ_[ℓ]), restrictions are precomposition and operations are pointwise. The existing continuousMapRingObj and its isCommMonObj_continuousMapRingObj instance give the final commutativity clause; the recorded dependency also supplies this structure for sfbSheafTensorStructure. Mathlib PadicInt is the norm-at-most-one subtype of Padic with its norm topology. No duplicate module or statement correction. The branch label slopmaster2 is the delivery preflight classification for the existing WeilConjectures module; this machine reads it from the published side framework, not the older source checkout."
  }
 }

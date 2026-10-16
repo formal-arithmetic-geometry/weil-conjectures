@@ -52,12 +52,18 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-rationalization",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization",
+  "declaration": "CategoryTheory.Rationalization.W_smul_id",
   "declarations": [
    "CategoryTheory.Rationalization.smul_id_cone_eq_zero",
    "CategoryTheory.Rationalization.W_smul_id"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-16 18:33 UTC for group NO, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: smul_id_cone_eq_zero gives cone annihilation by m², and W_smul_id gives m • 𝟙 X ∈ W M C."
+  "statement": "lemma W_smul_id {m : R} (hm : m ∈ M) (X : C) : W M C (m • 𝟙 X) :=",
+  "branch": "slopmaster2",
+  "by": "Q71",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Both clauses are already stated upstream in Complete/Rationalization.lean: smul_id_cone_eq_zero universally quantifies the cone maps and distinguished-triangle witness and concludes (m * m) • 𝟙 Z = 0; W_smul_id gives W M C (m • 𝟙 X) for hm : m ∈ M. The upstream context is exactly the pretriangulated R-linear setting with R-linear shifts of def-sfb-rationalization-morphisms. This completes the inherited attachment with the current source module and complete existing-declaration record; no new module is needed."
  },
  "lean_audit": {
   "slopmaster2": {
@@ -87,5 +93,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b35cb1f5",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Existing-declaration delivery; the only change is the lean field of the node. Blueprint source equals the node statement verbatim. Upstream Complete/Rationalization.lean was read: the section context is exactly the pretriangulated R-linear setting with R-linear shifts of the landed dependencies (no IsTriangulated, independent universes w,u,v). smul_id_cone_eq_zero covers every distinguished triangle on m•𝟙X and concludes (m*m)•𝟙Z=0 (every cone killed by m^2); W_smul_id gives W M C (m•𝟙X) for hm : m∈M, and W unfolds to the existential torsion cone of the dependency. The statement field occurs verbatim in the file; the JSON layout is correct; the report has real Worker report and Second reading by Q71 sections. nt_compile.py refused a file outside the side tree, so an lcompile.py probe against the live build was used: it compiled cleanly, and both lemmas use only propext/Classical.choice/Quot.sound. Edge cases m=0, M={1}, zero object and zero ring are covered. Informational: lean_audit keeps a stale module path (maintainer field)."
  }
 }
