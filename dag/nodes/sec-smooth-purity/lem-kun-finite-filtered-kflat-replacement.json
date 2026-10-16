@@ -1,0 +1,137 @@
+{
+ "id": "lem-kun-finite-filtered-kflat-replacement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof, preliminary stalkwise integral homological algebra, paragraph beginning \"Since Z has global dimension 1\": simultaneous filtered resolutions needed before the bounded Tor calculation.",
+   "via": [
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "K-flat replacements within finite filtered module complexes",
+ "statement": "Let $R$ be a commutative ring. A finitely filtered complex means an integer cochain complex $K$ of $R$-modules [def-weil-abstract-derived-category] with a decreasing filtration by subcomplexes [def-sp-filtration] and integers $a<b$ such that $F^aK=K$ and $F^bK=0$ as complexes. Write $\\operatorname{gr}^iK=F^iK/F^{i+1}K$ [def-sp-filtered-complex-subquotients]. A filtered quasi-isomorphism is a filtered chain map inducing a quasi-isomorphism on each $\\operatorname{gr}^i$. Call such a complex good if all modules $K^n,(F^iK)^n,(\\operatorname{gr}^iK)^n$ are flat (tensoring with each preserves exact sequences), and all complexes $K,F^iK,\\operatorname{gr}^iK$ are K-flat [def-pc-module-kflat-complex].\nEvery finitely filtered complex $K$ admits a filtered map $P\\to K$ which is a quasi-isomorphism on the underlying complex, on every filtration step, and on every graded complex, where $P$ is good, $F^aP=P$, $F^bP=0$, and every module $P^n,(F^iP)^n,(\\operatorname{gr}^iP)^n$ is free [def-weil-pbc-free-module]. There is no bound required on the cochain degrees of $P$.\nLet $\\mathcal H_f(R)$ be the homotopy category of all finitely filtered complexes, where for filtered chain maps $f,g:K\\to L$ between finitely filtered complexes a filtration-preserving chain homotopy is a family $h^n:K^n\\to L^{n-1}$ satisfying $f-g=dh+hd$ and $h^n(F^iK^n)\\subseteq F^iL^{n-1}$, and let $\\mathcal G_f(R)$ be its full subcategory of good complexes. Let $W$ denote the filtered quasi-isomorphisms. The inclusion induces an equivalence of localizations\n$$\\mathcal G_f(R)[W^{-1}]\\ \\simeq\\ \\mathcal H_f(R)[W^{-1}].$$\nHere localization means formally inverting the indicated maps. Thus comparisons and their equalities may be represented by roofs of filtered chain maps between good complexes. No choice of a functorial free resolution is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7X, lemma-resolution-filtered-complex, finite-interval form obtained by replacing its resolution P by F^aP/F^bP; filtered quasi-isomorphisms form a saturated multiplicative system by Derived Categories Tag 05S1, lemma-filtered-acyclic, and their localization is Tag 05S2, definition-filtered-derived. The localization equivalence is the finite filtered resolution/roof formulation of the construction; cache /home/ubuntu/c1-stacks-review/more-algebra.tex and derived.tex."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex with a finite decreasing filtration has a filtered quasi-isomorphic resolution with free terms and K-flat filtration steps and graded complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [CategoryTheory.EnoughInjectives C] → C → CochainComplex C ℕ\", \"doc\": \"This definition constructs an injective resolution as a cochain complex in an abelian category with enough injectives. Given an object $ Z $, it recursively builds a cochain complex indexed by $ \\\\math\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.InjectiveResolution X), R.cochainComplex.IsLE 0\", \"doc\": \"The cochain complex associated to an injective resolution, when extended from natural number indices to integer indices by assigning zero objects to negative positions, satisfies the support condition\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsGE 0\", \"doc\": \"The cochain complex constructed from a projective resolution via the embedding of natural number indices into integers is supported in non-negative degrees. Specifically, for any projective resolution\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {Y : C}\\n  (R : CategoryTheory.InjectiveResolution Y), R.cochainComplex.IsKInjective\", \"doc\": \"The cochain complex associated to an injective resolution in an abelian category with zero objects and morphisms is K-injective. This means that for every acyclic cochain complex $ A $, any morphism $\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of_def\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C),\\n  CategoryTheory.InjectiveResolution.of Z =\\n    { cocomplex := CategoryTheory.InjectiveResolution.ofCocomplex Z, injective := ⋯, hasHomology := ⋯\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsKProjective\", \"doc\": \"The cochain complex constructed from a projective resolution in an abelian category satisfies the K-projective property, meaning it is acyclic and has lifting properties with respect to quasi-isomorph\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Filtration\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*resolution|resolution.*filtered|filtered.*K.?flat|K.?flat.*filtered",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered K-flat resolutions of finite filtered cochain complexes of modules",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered complexes admit simultaneous free resolutions of every filtration step and associated graded piece; inclusion of filtered K-flat complexes induces an equivalence after inverting filtered quasi-isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\", \"module\": \"Mathlib/Algebra/Homology/LeftResolution/Basic\", \"type\": \"{A : Type u_1} →\\n  {C : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_2} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_1} A] →\\n        {ι : CategoryTheory.Functor C A} →\\n          (Λ : CategoryTheory.Abelian.LeftResolution ι) →\\n            (X : A) →\\n              [inst_2 : ι.Full] →\", \"doc\": \"For each natural number $ n $, the object at index $ n + 2 $ in the chain complex associated with a left resolution $ \\\\Lambda $ is isomorphic to the image under the resolution functor $ F $ of the ker\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this asserts a natural isomorphism between the composition of the de\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.quotientCompQhIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {ι : Type u_2} →\\n      (c : ComplexShape ι) →\\n        [inst_1 : CategoryTheory.Preadditive C] →\\n          [inst_2 : CategoryTheory.CategoryWithHomology C] →\\n            [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization]\", \"doc\": \"The composition of the quotient functor from the category of chain complexes to the homotopy category followed by the functor to the derived category is naturally isomorphic to the direct localization\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, the lifting condition ensures that the induced functor between deriv\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"module\": \"Mathlib/Algebra/Homology/Localization\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          {ι : Type u_3} →\\n            (c : ComplexShape ι) →\\n              [inst_2 : CategoryTheory.Preadditive \", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories with homology that preserves homology, this constructs the induced functor between the derived categories o\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtered\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"ProofWidgets.RpcEncodablePacket.filtered._@.ProofWidgets.Component.FilterDetails.2598060976._hygCtx._hyg.1\", \"module\": \"ProofWidgets.Component.FilterDetails\", \"type\": \" (self : ProofWidgets.RpcEncodablePacket✝) : Lean.Json\", \"doc\": \"\"}\n  {\"name\": \"ProofWidgets.RpcEncodablePacket.initiallyFiltered._@.ProofWidgets.Component.FilterDetails.2598060976._hygCtx._hyg.1\", \"module\": \"ProofWidgets.Component.FilterDetails\", \"type\": \" (self : ProofWidgets.RpcEncodablePacket✝) : Lean.Json\", \"doc\": \"\"}\n  {\"name\": \"ProofWidgets.FilterDetailsProps.filtered\", \"module\": \"ProofWidgets.Component.FilterDetails\", \"type\": \" (self : ProofWidgets.FilterDetailsProps) : ProofWidgets.Html\", \"doc\": \"What is shown in the filtered state. \"}\n  {\"name\": \"ProofWidgets.FilterDetailsProps.initiallyFiltered\", \"module\": \"ProofWidgets.Component.FilterDetails\", \"type\": \" (self : ProofWidgets.FilterDetailsProps) : Bool\", \"doc\": \"Whether to start in the filtered state. \"}\n  {\"name\": \"Mathlib.Tactic.ClickSuggestions.Result.unfiltered\", \"module\": \"Mathlib.Tactic.ClickSuggestions.SectionState\", \"type\": \" {α : Type} (self : Mathlib.Tactic.ClickSuggestions.Result α) : ProofWidgets.Html\", \"doc\": \"`unfiltered` will be shown in the unfiltered view. \"}\n  {\"name\": \"Mathlib.Tactic.ClickSuggestions.Result.filtered\", \"module\": \"Mathlib.Tactic.ClickSuggestions.SectionState\", \"type\": \" {α : Type} (self : Mathlib.Tactic.ClickSuggestions.Result α) : Option ProofWidgets.Html\", \"doc\": \"`filtered` will be shown in the filtered view. \"}\n  {\"name\": \"CategoryTheory.IsCofiltered\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : Prop\", \"doc\": \"A category `IsCofiltered` if\\n1. for every pair of objects there exists another object \\\"to the left\\\",\\n2. for every pair of parallel morphisms there exists a morphism to the left so the compositions\\n   \"}\n  {\"name\": \"CategoryTheory.IsCofilteredOrEmpty\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : Prop\", \"doc\": \"A category `IsCofilteredOrEmpty` if\\n1. for every pair of objects there exists another object \\\"to the left\\\", and\\n2. for every pair of parallel morphisms there exists a morphism to the left so the compo\"}\n  {\"name\": \"CategoryTheory.IsFiltered\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : Prop\", \"doc\": \"A category `IsFiltered` if\\n1. for every pair of objects there exists another object \\\"to the right\\\",\\n2. for every pair of parallel morphisms there exists a morphism to the right so the compositions\\n   \"}\n  {\"name\": \"CategoryTheory.IsFilteredOrEmpty\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : Prop\", \"doc\": \"A category `IsFilteredOrEmpty` if\\n1. for every pair of objects there exists another object \\\"to the right\\\", and\\n2. for every pair of parallel morphisms there exists a morphism to the right so the compo\"}\n  {\"name\": \"CategoryTheory.instIsCofilteredDiscretePUnit\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" : CategoryTheory.IsCofiltered (CategoryTheory.Discrete PUnit.{u_1 + 1})\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.instIsFilteredDiscretePUnit\", \"module\": \"Mathlib.CategoryTheory.Filtered.Basic\", \"type\": \" : CategoryTheory.IsFiltered (CategoryTheory.Discrete PUnit.{u_1 + 1})\", \"doc\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|filtered",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"line\": \"18\", \"text\": \"(It follows that to any functor `ι ⥤ CochainComplex C ℤ` (e.g. a filtered\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean\", \"line\": \"15\", \"text\": \"Let `F : J ⥤ HomologicalComplex C c` be a functor from a cofiltered category\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean\", \"line\": \"28\", \"text\": \"  {c : ComplexShape ι} [IsCofiltered J]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"line\": \"24\", \"text\": \"be used for spectral sequences associated to a *finite* filtration.)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"line\": \"46\", \"text\": \"instance [HasFilteredColimitsOfSize.{w, w'} C] :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"line\": \"47\", \"text\": \"    HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c) where\"}\n  {\"file\": \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"line\": \"61\", \"text\": \"instance ab5OfSize [HasFilteredColimitsOfSize.{w', w} C] [HasFiniteLimits C]\"}\nSubdirectory of Mathlib/: Algebra/Homology",
+   "date": "2026-10-16",
+   "verdict": "no match: The hits on injective/projective resolutions and derived bounded representatives do not resolve every step and graded piece of an arbitrary finite filtration; filtered-category and spectral-object hits have no K-flat replacement assertion. Read Algebra/Homology/HomotopyCategory/SpectralObject.lean lines 12–69 and DerivedCategory/TStructure.lean, including exists_iso_Q_obj_of_isGE_of_isLE."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite tower of subcomplexes has a simultaneous degreewise free K-flat resolution inducing quasi-isomorphisms on all successive quotients",
+   "results": "Second reader: 8 hits; CochainComplex.cm5b, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, CategoryTheory.ProjectiveResolution.ofComplex, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.InjectiveResolution.quasiIso. Source subdirectory: all Mathlib. Read Factorizations/CM5b.lean lines 12-115: bounded-below factorization with injective kernel, not simultaneous filtered K-flat resolutions; projective/injective resolution hits concern one object.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|associated_graded|filtered.*[Tt]ensor|[Tt]ensor.*[Ff]iltr|[Ff]iltered.*[Rr]esolution|[Ff]iltration.*[Kk][Ff]lat",
+   "results": "Second reader: 0 hits; . Source subdirectory: Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously resolve a finite filtration of a cochain complex by free modules so every filtration quotient is K flat",
+   "results": "Eight hits: ordinary projective/injective resolutions, their integer extensions, and CochainComplex.IsKProjective/isKProjective_of_projective. Read the returned signatures and KProjective.lean lines 42–128. None resolves every step of an arbitrary input filtration or supplies the filtered localization equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(resolution|KFlat)|associatedGraded.*tensor|tensor.*associatedGraded",
+   "results": "Logged source grep in Mathlib/Algebra/Homology returned zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\"",
+   "results": "Service ran successfully and returned zero hits for the quoted declaration-name fragment.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

@@ -27,9 +27,119 @@
   "def-sp-spectral-sequence",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose bounded cochain representatives $K,L$ of $C,D$. Explicitly, if the cohomology of a representative $V$ is supported in $[c,d]$, first replace $V$ by $\\tau_{\\le d}V$ (cycles in degree $d$, zero above), then quotient by the subcomplex having the old terms below $c$, $\\operatorname{im}(d^{c-1})$ in degree $c$, and zero above. The resulting bounded complex has the same cohomology: the removed lower subcomplex is acyclic and upper truncation preserves all nonzero cohomology. This is the canonical truncation construction in [def-sbc-standard-tstructure-derived-category], using the cohomology convention in [def-weil-abstract-derived-category].\nPut $F^iK=\\tau_{\\le -i}K$ and $F^jL=\\tau_{\\le -j}L$. These filtrations are finite as complexes because $K,L$ are bounded termwise. For $m=-i$, the quotient $\\tau_{\\le m}K/\\tau_{\\le m-1}K$ is the two-term complex $\\operatorname{im}(d^{m-1})\\hookrightarrow\\ker(d^m)$ in degrees $m-1,m$. Projection from cycles to cohomology is therefore a natural quasi-isomorphism\n$$\\operatorname{gr}^i_F K\\longrightarrow H^{-i}(C)[i].$$\nThe identical construction gives $\\operatorname{gr}^j_F L\\to H^{-j}(D)[j]$. The quotient maps commute with every chain map because a chain map preserves cycles and boundaries.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncations; Tag 0H7Z, lemma-kunneth-spectral-sequence, first two sentences of the proof"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-finite-filtered-kflat-replacement] to each of the finite filtered complexes $(K,F)$ and $(L,F)$ of Step 1. Obtain filtered quasi-isomorphisms $P\\to K$ and $Q\\to L$, with finite filtrations and with underlying, step and graded complexes K-flat and all their terms flat. Its equivalence after localization says that these replacements may be used for morphisms and equality of morphisms as well as for objects. In particular the canonical graded identifications of Step 1 apply to $P,Q$ in $D(R)$. The resolution complexes need not be bounded in their cochain degrees; only their filtrations must be finite.",
+   "uses": [
+    "lem-kun-finite-filtered-kflat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7X, lemma-resolution-filtered-complex, applied to the finite canonical truncation filtrations; finite-interval/roof form"
+   }
+  },
+  {
+   "text": "Give $T=\\operatorname{Tot}(P\\otimes_R Q)$ its convolution filtration $G$. By [lem-kun-filtered-tensor-graded-comparison] it is finitely filtered, represents the ordinary derived tensor $C\\otimes_R^{\\mathbf L}D$, and has\n$$\\operatorname{gr}^a_G T\\cong\\bigoplus_{i+j=a}\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ.$$\nTo meet the hypothesis of [lem-sp-bounded-filtered-page-core] for every finitely filtered complex $(U,F)$, define $\\varphi(U,a,t):F^aU/F^{a+t}U\\to F^{a-t+1}U/F^{a+1}U$ by sending the class of $x$ to the class of the same $x$. It is well-defined for $t\\ge1$ because $F^{a+t}\\subseteq F^{a+1}$ and $F^a\\subseteq F^{a-t+1}$. Its composite with the source projection is the filtration inclusion followed by the target projection, as required. This construction applies in particular to $(T,G)$. The cited theorem gives a spectral sequence $E'$ beginning on page one, with differentials $(a,b)\\mapsto(a+t,b-t+1)$ and\n$$ (E')_1^{a,b}\\cong\\bigoplus_{i+j=a}H^{a+b}\\bigl(\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ\\bigr).$$\nMore explicitly, choose integer filtration bounds $A_P<B_P$ and $A_Q<B_Q$ with $F^{A_P}P=P$, $F^{B_P}P=0$, $F^{A_Q}Q=Q$, and $F^{B_Q}Q=0$. Put $A=A_P+A_Q$ and $B=B_P+B_Q-1$. Then $G^AT=T$, since the summand with $(i,j)=(A_P,A_Q)$ is all of $T$, and $G^BT=0$, since $i+j=B$ forces $i\\ge B_P$ or $j\\ge B_Q$. In particular the old pages have zero terms outside columns $A\\le a<B$. Only finitely many graded pairs $i,j$ can contribute. Cohomology of this finite direct sum is the direct sum of cohomologies, since its cycles and boundaries are the corresponding finite sums. The theorem also gives the finite image filtration $G^aH^n(T)=\\operatorname{im}(H^n(G^aT)\\to H^n(T))$, stabilization at each bidegree, and stationary-page identifications with its successive quotients.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-sp-bounded-filtered-page-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Y, proposition-kunneth-filtered; Homology Tags 012K and 012W, finite-filtration spectral sequence and convergence"
+   }
+  },
+  {
+   "text": "For modules $M,N$ in degree zero choose a free resolution $A_\\bullet\\to M$ as allowed in [def-weil-pbc-tor-modules], and place $A_s$ in cochain degree $-s$. A free module is flat: tensoring with $\\bigoplus_I R$ is $\\bigoplus_I$ of the original sequence, whose kernels and images are computed coordinatewise on finite-support vectors. Thus this nonpositive free complex is K-flat by [lem-pc-module-bounded-flat-kflat]. By [lem-pc-derived-tensor-second-factor-functor] its tensor with $N$ computes $M\\otimes_R^{\\mathbf L}N$. The Tor definition gives $H^{-s}(M\\otimes_R^{\\mathbf L}N)=\\operatorname{Tor}^R_s(M,N)$ for $s\\ge0$, and positive cochain degrees vanish. These identifications are natural: for a module map $\\phi:M\\to M\\prime$, choose a free-resolution lift as follows. In degree zero lift the images of basis vectors through the target augmentation. Inductively, the required image of the boundary of a basis vector is a cycle in the target resolution; exactness gives a preimage in its next degree, and extend these choices linearly. After this lift, the maps on Tor and on tensor homology agree by [lem-weil-pbc-tor-map-via-resolution-lift]; in the second variable the chain map is $1\\otimes v$ as in that node.\nThe total tensor convention [def-pc-tensor-complex-sheaves] gives $(A[i]\\otimes B[j])\\cong(A\\otimes B)[i+j]$: on an element originally of first-factor degree $k$, multiply by $(-1)^{jk}$. For the first differential the two signs agree because $j(k+1)=jk+j$; for the second they agree because $i$ and $-i$ have the same parity. This is natural in both factors. Applying these computations and Step 1 to Step 3 yields\n$$ (E')_1^{a,b}\\cong\\bigoplus_{i+j=a}\\operatorname{Tor}_{-2a-b}^R(H^{-i}(C),H^{-j}(D)).$$\nHere a negative Tor index denotes zero; no global-dimension bound is used.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Z, lemma-kunneth-spectral-sequence, first-page computation; Tag 064K, lemma-derived-tor-quasi-isomorphism; Algebra Tags 00LY/00LZ, Tor and its functoriality"
+   }
+  },
+  {
+   "text": "For $s\\ge2$, set $E_s^{p,q}=(E')_{s-1}^{-q,p+2q}$. This is an invertible change of bidegrees, with inverse $(a,b)\\mapsto(p,q)=(b+2a,-a)$; it preserves total degree since $a+b=p+q$. With $(a,b)=(-q,p+2q)$, the differential on page $s-1$ goes to\n$$(a',b')=(-q+s-1,p+2q-s+2).$$\nIts new indices are $q'=-a'=q-s+1$ and $p'=b'+2a'=p+s$, as required. The successor-page homology isomorphism of $E'$ is carried to the successor-page isomorphism of $E$ at the same changed bidegree, so this is a spectral sequence in the sense of [def-sp-spectral-sequence]. At $s=2$ the index in Step 4 is $-2(-q)-(p+2q)=-p$; putting $I=-i$, $J=-j$ changes $i+j=-q$ to $I+J=q$. Hence\n$$E_2^{p,q}=\\bigoplus_{I+J=q}\\operatorname{Tor}_{-p}^R(H^I(C),H^J(D)).$$\nThe isomorphisms with this displayed page are the canonical ones from Steps 1, 3 and 4 (one may conjugate the page-two differential by these isomorphisms).",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Z, lemma-kunneth-spectral-sequence, reindexing formula; fills in \"We leave it to the reader to show that this works\""
+   }
+  },
+  {
+   "text": "For a fixed total degree $n$, $q=n-p$ and therefore the old filtration index is $a=-q=p-n$. Define the asserted decreasing filtration by\n$$F^pH^n(C\\otimes_R^{\\mathbf L}D)=G^{p-n}H^n(T).$$\nIt is finite by Step 3, in the sense of [def-sp-filtration]. The graded identification there gives\n$$F^pH^n/F^{p+1}H^n\\cong(E')_\\infty^{p-n,\\,2n-p}=E_\\infty^{p,n-p}.$$\nThe bounds $A,B$ from Step 3 give an explicit stabilization check: on every old page $t\\ge B-A$, a differential from a supported column $a$ lands in column $a+t\\ge B$, and a differential into it originates in column $a-t<A$. Both vanish; the successor-page homology maps are therefore isomorphisms. Thus all new pages are stationary once $s\\ge B-A+1$, independently of $n$. Equivalently, their support is in the finite horizontal strip $-B<q\\le -A$. This does not require any bound in the other bidegree. This is precisely the asserted convergence and finite filtration. In particular finite filtration length does not assert bounded cohomology of the derived tensor: there can be infinitely many nonzero Tor degrees.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Z, lemma-kunneth-spectral-sequence, convergence after reindexing; Tag 0H7Y, proposition-kunneth-filtered, finite cohomology filtration"
+   }
+  },
+  {
+   "text": "We verify descent and naturality, including the abutment maps. A chain map of bounded representatives preserves every canonical truncation step, and a quasi-isomorphism induces a quasi-isomorphism of their graded complexes by Step 1. By [lem-kun-finite-filtered-kflat-replacement], filtered replacements give maps and equalities in the localization of good filtered complexes. By [lem-kun-filtered-tensor-graded-comparison], convolution tensoring respects these localizations and, after forgetting the filtration, gives the ordinary derived tensor on morphisms. Convolution tensoring also respects filtered homotopies: if $u-u\\prime=d h+h d$, a homotopy from $u\\otimes v$ to $u\\prime\\otimes v$ is $x\\otimes y\\mapsto h(x)\\otimes v(y)$; if $v-v\\prime=d k+k d$, use $x\\otimes y\\mapsto(-1)^r u(x)\\otimes k(y)$ for $x\\in P^r$. The total differential gives these homotopy equations, with the mixed terms cancelling. Since $h$ and $k$ preserve filtration steps, both formulas preserve the convolution filtration. By [lem-sp-bounded-filtered-page-core], a filtered map induces the maps of spectral sequences whose first-page components are the cohomology of its graded maps. A filtered quasi-isomorphism therefore induces first-page isomorphisms and hence all later page isomorphisms by successive homology; it also induces isomorphisms on each filtration step and on the total cohomology. The latter assertion follows by finite induction from $0\\to F^{a+1}\\to F^a\\to\\operatorname{gr}^a\\to0$, beginning at the zero upper tail. These isomorphisms identify the images $G^aH^n$ and their quotients. Filtered homotopic maps have equal first-page maps, hence equal later-page maps; their underlying homotopic maps induce equal cohomology maps and equal restrictions to image filtrations. Thus the spectral sequence with its abutment and filtration descends through the localizations.\nAll derived maps between bounded objects are covered here: the right calculus of fractions in [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation] represent a map by a roof $K\\leftarrow V\\to K'$ of complexes. Choose common term bounds for the bounded targets and truncate $V$ to those bounds as in Step 1. The maps factor through the lower quotient since the targets are zero below the lower bound, and restrict through the upper cycles since the targets are zero above the upper bound. This gives a roof of bounded complexes, with left arrow still a quasi-isomorphism. Equal roofs have a common refinement by [lem-pc-right-fraction-common-refinement]. Truncate that finite diagram to a common interval $[c,d]$, chosen to contain the termwise supports of all its already bounded vertices. Chain maps preserve cycles at the upper endpoint and boundaries at the lower endpoint, so they induce maps on the truncated diagram. For a homotopy $h^r:V^r\\to W^{r-1}$, at the upper endpoint restrict $h^d$ to $\\ker d_V^d$; at the lower endpoint compose $h^{c+1}$ with $W^c\\to W^c/\\operatorname{im}d_W^{c-1}$, set its degree-$c$ component to zero, and keep the intervening components. The identity $f-g=dh+hd$ remains valid: the removed upper term vanishes on cycles and the removed lower term is a boundary. This homotopy preserves every canonical truncation step, since it lowers cochain degree. Thus the truncated diagram has the required commutations in the homotopy category; this construction also applies to a diagram composing roofs. Thus equality and composition are respected. Hence the construction is independent of representatives and applies to every $u:C\\to C'$ and $v:D\\to D'$.\nOn $E_2$, Step 1 gives $H^i(u),H^j(v)$ on the two graded factors, and Step 4 identifies their tensor-homology map with $\\operatorname{Tor}_{-p}^R(H^i(u),H^j(v))$. On the total object the map is $u\\otimes_R^{\\mathbf L}v$, so on its degree-$n$ cohomology it is $H^n(u\\otimes_R^{\\mathbf L}v)$. The image-filtration inclusions commute with this map by the defining square of each filtered map. Finally, the graded abutment identifications commute as well: in a sufficiently large old page $t$, the image description in the cited page-core theorem uses the map $G^aT\\to T/G^{a+1}T$; the induced image is canonically $G^aH^n(T)/G^{a+1}H^n(T)$. Both maps send a cohomology class represented from $G^aT$ to its class modulo $G^{a+1}$, so the square commutes with every filtered map and every inverted filtered quasi-isomorphism. Steps 5 and 6 merely relabel these maps. This proves all of the requested functoriality, with no finite-generation assumption.",
+   "uses": [
+    "lem-kun-finite-filtered-kflat-replacement",
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-sp-bounded-filtered-page-core",
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Y, proposition-kunneth-filtered, filtered resolution construction; Tag 0H7Z, canonical truncation construction; Homology Tag 012K, functoriality and quotient-image description. Derived Categories Tag 05S2, filtered localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "lem-kun-finite-filtered-kflat-replacement",
+  "lem-kun-filtered-tensor-graded-comparison",
+  "lem-sp-bounded-filtered-page-core",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H7Z (lemma-kunneth-spectral-sequence), 0H7Y (proposition-kunneth-filtered), and 0H7X (lemma-resolution-filtered-complex); explicit reindexing, finite filtered models and localization/naturality details expanded by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -100,15 +210,70 @@
    "results": "Second reading: 0 hits; none.  Read the returned signatures and Mathlib/CategoryTheory/Monoidal/Tor.lean lines 12–70, Algebra/Homology/SpectralSequence/Basic.lean lines 12–155, and RepresentationTheory/Homological/GroupHomology/Basic.lean lines 53–120. Tor defines a derived functor on modules or representations; HasGoodTensor concerns tensor associativity of complexes. The spectral-sequence file defines pages and their maps only. None states the Tor-of-cohomology spectral sequence or its filtered abutment.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial bounded derived tensor Tor spectral sequence whose second page is Tor of cohomology over a commutative ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"Rep.torIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        {B : Rep k G} →\\n          (P : CategoryTheory.ProjectiveResolution B) →\\n            (n : ℕ) →\\n              ((Rep.Tor k G n).obj A).obj B ≅\\n                HomologicalComplex.homology (HomologicalComplex.\", \"doc\": \"For a commutative ring $ k $ and group $ G $, given representations $ A $ and $ B $, and a projective resolution $ P $ of $ B $, the $ n $-th Tor functor $ \\\\text{Tor}_n(A, B) $ is isomorphic to the $ \"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Tor functors and generic spectral-sequence page functors do not construct this spectral sequence; read Monoidal/Tor.lean and SpectralSequence/Basic.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|hyper.?tor|Tor.*SpectralSequence|SpectralSequence.*Tor",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"line\": \"88\", \"text\": \"/-- The functor `SpectralSequence C c r₀ ⥤ HomologicalComplex C (c r)` which\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Tor functors and generic spectral-sequence page functors do not construct this spectral sequence; read Monoidal/Tor.lean and SpectralSequence/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Tor\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) : CategoryTheory.Functor (CategoryTheory.SpectralSequence C c r₀) (HomologicalComplex C (c r))\", \"doc\": \"The functor `SpectralSequence C c r₀ ⥤ HomologicalComplex C (c r)` which\\nsends a spectral sequence to its `r`th page. \"}\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor_obj\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) (E : CategoryTheory.SpectralSequence C c r₀) : (CategoryTheory.SpectralSequence.pageFunctor C c r₀ r hr).obj E = E.page r ⋯\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.SpectralSequence.pageFunctor_map\", \"module\": \"Mathlib.Algebra.Homology.SpectralSequence.Basic\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{u_3, u_1} C] [CategoryTheory.Abelian C] {κ : Type u_2} (c : ℤ → ComplexShape κ) (r₀ r : ℤ) (hr : r₀ ≤ r := by lia) {X✝ Y✝ : CategoryTheory.SpectralSequence C c r₀} (f : X✝ ⟶ Y✝) : (CategoryTheory.SpectralSequence.pageFunctor C c r₀ r hr).map f = f.hom r ⋯\", \"doc\": \"\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Tor functors and generic spectral-sequence page functors do not construct this spectral sequence; read Monoidal/Tor.lean and SpectralSequence/Basic.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-integral-bounded-kunneth-exact",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the canonical truncation-filtered Kunneth construction using two statement-only generic filtered-complex tools and the existing finite filtered page-core theorem. Wrote the Tor-from-resolution and signed shift calculation, page/differential reindexing, the degree-dependent filtration shift, and descent/naturality through roofs. Searched project, full DAG, blueprint and Mathlib; no exact attachment or Mathlib match found. Read the cached Stacks sources and each cited node statement. Second reading made the universal page-core input explicit and supplied signed tensor homotopies and endpoint formulas for truncated roof homotopies. Repair of merge-lock return: reread all existing dependency statements against the current live DAG (no interface changes); supplied explicit convolution-filtration bounds and a uniform page-stabilization bound, and rebuilt the delivery on the current base.",
+  "blueprint": "Realizes lem-kun-0f0f, preliminary paragraph beginning \"Since Z has global dimension 1\", through the bounded Tor spectral-sequence input to lem-kun-integral-bounded-kunneth-exact. The unit has no additional proof steps; its specified integral projection-formula route and all chapter data are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-bounded-filtered-page-core",
+    "why": "Generic finite filtered-complex spectral sequence with image pages, stabilization and finite abutment; no node in the Kunneth unit supplies this homological algebra construction."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module K-flatness theorem makes a nonpositive free module resolution compute ordinary derived tensor; no node of this unit supplies the ordinary module statement."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary module K-flat tensor construction fixes the tensor used by the item, its resolutions and morphisms; the unit tensor definition is for etale sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-bounded-filtered-page-core",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q07-16bfa12d1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-16bfa12d1 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited interfaces; checked Stacks 0H7X–0H7Z, reindexing, finite convergence, derived functoriality, edge cases and duplicates. Repaired incomplete metadata in both new-node JSON files under fixes/. Statements and proofs unchanged; detailed checks and accepted tool_uses are in review.md.; 2 file(s) fixed by the reviewer"
+ }
 }

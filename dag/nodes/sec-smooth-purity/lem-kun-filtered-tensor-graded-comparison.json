@@ -1,0 +1,145 @@
+{
+ "id": "lem-kun-filtered-tensor-graded-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Proof, preliminary stalkwise integral homological algebra, paragraph beginning \"Since Z has global dimension 1\": filtered tensor construction underlying the bounded Kunneth calculation.",
+   "via": [
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Graded comparison for convolution tensor of filtered K-flat complexes",
+ "statement": "Let $R$ be a commutative ring and let $P,Q$ be integer cochain complexes of $R$-modules [def-weil-abstract-derived-category], with finite decreasing filtrations by subcomplexes [def-sp-filtration]. Assume that each module $P^n,(F^iP)^n,(\\operatorname{gr}^iP)^n,Q^n,(F^jQ)^n,(\\operatorname{gr}^jQ)^n$ is flat (its tensor functor preserves exact sequences), and that each complex $P,F^iP,\\operatorname{gr}^iP,Q,F^jQ,\\operatorname{gr}^jQ$ is K-flat [def-pc-module-kflat-complex]; graded complexes mean successive quotients [def-sp-filtered-complex-subquotients]. On the total tensor complex $T=\\operatorname{Tot}(P\\otimes_R Q)$ [def-pc-tensor-complex-sheaves], specialized to ordinary modules by using the one-point site with ring $R$, define the convolution filtration by\n$$G^aT=\\sum_{i+j=a}\\operatorname{im}\\bigl(\\operatorname{Tot}(F^iP\\otimes_R F^jQ)\\longrightarrow T\\bigr).$$\nThis is a finite filtration, its underlying, step and graded modules are flat, and its underlying, step and graded complexes are K-flat. There are canonical isomorphisms of cochain complexes\n$$\\bigoplus_{i+j=a}\\operatorname{Tot}(\\operatorname{gr}^iP\\otimes_R\\operatorname{gr}^jQ)\\xrightarrow{\\sim}\\operatorname{gr}^a_G T.$$\nThey are induced by tensoring representatives in filtration steps and then taking their class modulo $G^{a+1}$, and are natural simultaneously for filtration-preserving chain maps in both variables. Consequently they give natural isomorphisms in $D(R)$\n$$\\operatorname{gr}^a_G T\\cong\\bigoplus_{i+j=a}\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ,$$\nwhere the ordinary K-flat derived tensor is that of [lem-pc-derived-tensor-second-factor-functor] with $A=R$; the underlying $T$ represents $P\\otimes_R^{\\mathbf L}Q$. If $u:P\\to P'$ and $v:Q\\to Q'$ are filtered quasi-isomorphisms between complexes satisfying these same hypotheses, then $\\operatorname{Tot}(u\\otimes v)$ is a filtered quasi-isomorphism. Here filtered quasi-isomorphism means quasi-isomorphism on every graded complex. All displayed comparisons are compatible with composition and identities. No spectral sequence, truncation filtration or Tor-of-cohomology formula is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y, proposition-kunneth-filtered, and its explicit convolution/graded comparison in section-kunneth-spectral-sequence, paragraphs before Tag 0H7W, lemma-kunneth-converges. Finite-filtration specialization, with functoriality and preservation of filtered quasi-isomorphisms expressed at the complex level; cache /home/ubuntu/c1-stacks-review/more-algebra.tex, lines 15425–15520 and 15755–15800."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associated graded of the convolution filtration on tensor product of two flat filtered complexes is the direct sum of tensor products of associated graded complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TensorProduct.tmul_of_gradedMul_of_tmul\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/External\", \"type\": \"∀ (R : Type u_1) {ι : Type u_2} [inst : CommSemiring ι] [inst_1 : Module ι (Additive ℤˣ)] [inst_2 : DecidableEq ι]\\n  (𝒜 : ι → Type u_3) (ℬ : ι → Type u_4) [inst_3 : CommRing R] [inst_4 : (i : ι) → AddCommGroup (𝒜 i)]\\n  [inst_5 : (i : ι) → AddCommGroup (ℬ i)] [inst_6 : (i : ι) → Module R (𝒜 i)] [inst\", \"doc\": \"For graded modules $\\\\mathcal{A}$ and $\\\\mathcal{B}$ over a commutative semiring $R$, the graded multiplication of tensor products satisfies $$(a_1 \\\\otimes b_1) \\\\cdot (a_2 \\\\otimes b_2) = (-1)^{j_1 \\\\cdot\"}\n  {\"name\": \"GradedTensorProduct\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal\", \"type\": \"(R : Type u_1) →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"The graded tensor product of two algebras $ A $ and $ B $ over a commutative ring $ R $, each equipped with a grading indexed by an additive monoid $ \\\\iota $. Given graded algebra structures $ \\\\mathca\"}\n  {\"name\": \"TensorProduct.gradedMul_def\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/External\", \"type\": \"∀ (R : Type u_5) {ι : Type u_6} [inst : CommSemiring ι] [inst_1 : Module ι (Additive ℤˣ)] [inst_2 : DecidableEq ι]\\n  (𝒜 : ι → Type u_7) (ℬ : ι → Type u_8) [inst_3 : CommRing R] [inst_4 : (i : ι) → AddCommGroup (𝒜 i)]\\n  [inst_5 : (i : ι) → AddCommGroup (ℬ i)] [inst_6 : (i : ι) → Module R (𝒜 i)] [inst\", \"doc\": \"The graded multiplication map on the tensor product of direct sums of graded modules $\\\\bigoplus_{i \\\\in \\\\iota} \\\\mathcal{A}_i$ and $\\\\bigoplus_{i \\\\in \\\\iota} \\\\mathcal{B}_i$ over a commutative semiring $R$\"}\n  {\"name\": \"TensorProduct.gradedMul\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/External\", \"type\": \"(R : Type u_5) →\\n  {ι : Type u_6} →\\n    [inst : CommSemiring ι] →\\n      [Module ι (Additive ℤˣ)] →\\n        [DecidableEq ι] →\\n          (𝒜 : ι → Type u_7) →\\n            (ℬ : ι → Type u_8) →\\n              [inst_3 : CommRing R] →\\n                [inst_4 : (i : ι) → AddCommGroup (𝒜 i)] →\\n               \", \"doc\": \"The bilinear multiplication map on the tensor product of direct sums of graded modules $\\\\bigoplus_{i \\\\in \\\\iota} \\\\mathcal{A}_i$ and $\\\\bigoplus_{i \\\\in \\\\iota} \\\\mathcal{B}_i$ over a commutative semiring $\"}\n  {\"name\": \"GradedTensorProduct.auxEquiv\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal\", \"type\": \"(R : Type u_1) →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"This function constructs an $ R $-linear equivalence between the graded tensor product of two $ R $-algebras $ A $ and $ B $ (equipped with graded algebra structures indexed by an additive monoid $ \\\\i\"}\n  {\"name\": \"GradedTensorProduct.tmul\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal\", \"type\": \"(R : Type u_1) →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"The function maps elements $ m \\\\in A $ and $ n \\\\in B $ to their graded tensor product $ m \\\\otimes n $ in the graded tensor product $ A \\\\otimes_R B $, defined as the equivalence class of the pair $ (m,\"}\n  {\"name\": \"GradedTensorProduct.auxEquiv_tmul\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal\", \"type\": \"∀ {R : Type u_1} {ι : Type u_2} {A : Type u_3} {B : Type u_4} [inst : CommSemiring ι] [inst_1 : DecidableEq ι]\\n  [inst_2 : CommRing R] [inst_3 : Ring A] [inst_4 : Ring B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  (𝒜 : ι → Submodule R A) (ℬ : ι → Submodule R B) [inst_7 : GradedAlgebra 𝒜] [inst_\", \"doc\": \"For elements $ a \\\\in A $ and $ b \\\\in B $, the auxiliary linear equivalence $ \\\\text{auxEquiv} $ applied to their graded tensor product $ a \\\\otimes b $ equals the tensor product of their decomposed comp\"}\n  {\"name\": \"GradedTensorProduct.instMonoid\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/Internal\", \"type\": \"{R : Type u_1} →\\n  {ι : Type u_2} →\\n    {A : Type u_3} →\\n      {B : Type u_4} →\\n        [inst : CommSemiring ι] →\\n          [inst_1 : DecidableEq ι] →\\n            [inst_2 : CommRing R] →\\n              [inst_3 : Ring A] →\\n                [inst_4 : Ring B] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"The graded tensor product of two graded $ R $-algebras is equipped with a monoid structure, where multiplication is an $ R $-linear map respecting the grading (sending homogeneous elements of degrees \"}",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*tensor|tensor.*associatedGraded|convolution.*filtration",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded tensor product convolution filtration on cochain complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of K-flat filtered cochain complexes preserves quasi-isomorphisms on associated graded pieces and computes derived tensor functor with convolution filtration",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $ K_1, K_2, K_3 $ in a category $ \\\\mathcal{C} $ with shape $ c $, if their underlying graded objects $ K_1.X, K_2.X, K_3.X $ satisfy the colimit-preserving tensor pro\"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, if their underlying graded objects $K_1.X, K_2.X, K_3.X$ admit a tensor product preserving colimits, \"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex.tensorObj\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.Preadditive C] [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.curriedTensor C).obj X₁).Additive] {I : Type u_2} [AddMonoid I] {c : C\", \"doc\": \"The tensor product of two homological complexes. \"}",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|filtration",
+   "results": "[grep] OK 0 hit(s)\nSubdirectory of Mathlib/: Algebra/Homology/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: GradedTensorProduct gives a multiplication for already graded algebras, not the associated graded of a filtered complex. HomologicalComplex.tensorObj and HasGoodTensor provide ordinary total tensors and their associativity hypotheses; they do not give the convolution quotient isomorphism or filtered quasi-isomorphism preservation. Read TensorProduct/Graded/Internal.lean lines 12–91, Monoidal.lean tensorObj and HasGoodTensor declarations, and CategoryTheory/Monoidal/Tor.lean lines 12–65."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded functor is strong monoidal for the tensor product filtration on complexes with flat graded pieces",
+   "results": "Second reader: 8 hits; HomologicalComplex.instHasTensorXTensorUnit_1, CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit_1, CategoryTheory.GradedObject.HasTensor, CategoryTheory.GradedObject.HasGoodTensor₁₂Tensor, CategoryTheory.GradedObject.monoidalCategory, CategoryTheory.GradedObject.HasGoodTensorTensor₂₃, CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit, CategoryTheory.GradedObject.Monoidal.tensorObj. Source subdirectory: all Mathlib. Read CategoryTheory/GradedObject/Monoidal.lean lines 12-105: tensor of already graded objects, without filtration subquotients or flatness comparison. HomotopyCategory/SpectralObject.lean lines 12-69 constructs mapping-cone spectral objects, not convolution tensor filtrations.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|associated_graded|filtered.*[Tt]ensor|[Tt]ensor.*[Ff]iltr|[Ff]iltered.*[Rr]esolution|[Ff]iltration.*[Kk][Ff]lat",
+   "results": "Second reader: 0 hits; . Source subdirectory: Algebra/Homology.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*[Tt]ensor|[Tt]ensor.*associatedGraded|[Ff]iltration.*[Tt]ensor|[Tt]ensor.*[Ff]iltration",
+   "results": "Second reader: 0 hits; . Source subdirectory: all Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded complex of the convolution filtration on a tensor product is the direct sum of tensor products of the associated graded complexes",
+   "results": "Eight hits in LinearAlgebra/TensorProduct/Graded/Internal and External: GradedTensorProduct and its multiplication, tensor constructors and auxEquiv. Read the returned signatures and both source introductions/definitions (Internal lines 12–100, External lines 12–90). They concern tensor multiplication of already graded algebras, not associated graded quotients of filtered complexes.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(resolution|KFlat)|associatedGraded.*tensor|tensor.*associatedGraded",
+   "results": "Logged source grep in Mathlib/Algebra/Homology returned zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\"",
+   "results": "Service ran successfully and returned zero hits for the quoted declaration-name fragment.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
