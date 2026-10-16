@@ -182,5 +182,52 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-2b5f57a3b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint sources, and target interfaces. All five steps are supported; tensor categories, transport maps, hypotheses, edge cases, and dependency acyclicity check out. No new nodes, repairs, or tool_uses. Full findings written to review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-ring-object"
+ "unit": "sk-def-sfb-ring-object",
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21066b8a9",
+  "group": "ND",
+  "result": "pass",
+  "note": "Existing binding to WeilConjectures.CategoryTheory.RingObjects.RingPresheaf (+RingObjects.Ab), byte-identical to live; only the node's lean field and the report change; report has Worker report and Second reading by ND. Clauses checked against node and blueprint _section.md (blueprint lean list names these declarations): MonObj/IsMonHom/IsCommMonObj; Ab tensor ⊗[ℤ] with ULift ℤ unit (Mathlib cartesian structure is only a def, so no diamond); ringMonObj for any [Ring R] (zero ring, noncommutative), unit n.down cast, mul a*b, all ring homs, CommRing; presheaf objectwise via monFunctorCategoryEquivalence, whiskerRight morphisms, sectionwise commutativity; sheafification via monoidal/braided presheafToSheaf; sheaf of rings via MonObj.ofIso along the actual counit, morphisms by counit naturality, no monoidal-inclusion assumption. Sheaf tensor equals the dependency's sfbSheafTensorStructure.monoidal (rfl checked); HasWeakSheafify and J.W.IsMonoidal inferred from EssentiallySmall.{w} C, so no stronger hypotheses; universes uC vC w independent. check_existing returned ([],[]) with statement verbatim. nt_compile of a consumer file covering clauses 1-3 compiled clean. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.RingPresheaf",
+  "declaration": "CategoryTheory.Functor.monObjCompForget₂",
+  "declarations": [
+   "CategoryTheory.MonObj",
+   "CategoryTheory.Mon",
+   "CategoryTheory.IsMonHom",
+   "CategoryTheory.IsCommMonObj",
+   "AddCommGrpCat.monoidalCategory",
+   "AddCommGrpCat.symmetricCategory",
+   "AddCommGrpCat.ringMonObj",
+   "AddCommGrpCat.ringMonObj_one_apply",
+   "AddCommGrpCat.ringMonObj_mul_tmul",
+   "AddCommGrpCat.isMonHom_ofHom_ringHom",
+   "AddCommGrpCat.isCommMonObj_of_commRing",
+   "CategoryTheory.RingCat.toMonAb",
+   "CategoryTheory.RingCat.toMonAb_comp_forget",
+   "CategoryTheory.Functor.toMonAb",
+   "CategoryTheory.Functor.toMonAb_X",
+   "CategoryTheory.Functor.monObjCompForget₂",
+   "CategoryTheory.Functor.one_compForget₂_app",
+   "CategoryTheory.Functor.mul_compForget₂_app",
+   "CategoryTheory.Functor.isMonHom_whiskerRight_forget₂",
+   "CategoryTheory.Functor.isCommMonObj_compForget₂",
+   "CategoryTheory.Sheaf.monObj_presheafToSheaf_obj",
+   "CategoryTheory.Sheaf.isCommMonObj_presheafToSheaf_obj",
+   "CategoryTheory.Sheaf.sheafifyRingPresheaf",
+   "CategoryTheory.Sheaf.sheafifyRingPresheafIso",
+   "CategoryTheory.Sheaf.monObj_sheafCompose_obj",
+   "CategoryTheory.Sheaf.isCommMonObj_sheafCompose_obj",
+   "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+  ],
+  "statement": "instance monObjCompForget₂ : MonObj (P ⋙ forget₂ RingCat.{w} Ab.{w})",
+  "branch": "slopmaster2",
+  "by": "ND",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact mixed existing binding. RingPresheaf publicly imports RingObjects.Ab and Mathlib monoid objects. MonObj/IsMonHom/IsCommMonObj give the initial definition; Ab supplies tensor over the integers and clause 1; the presheaf, sheafification and counit-transport declarations give clauses 2 and 3, including morphisms and commutativity. The localized sheaf tensor is the same Sheaf.monoidalCategory packaged by the recorded sk-def-sfb-sheaf-tensor dependency; its essentially-small-site hypotheses supply the auxiliary sheafification and enriched-end instances rather than adding assumptions. Published sources confirmed using scompile.py --source. The prescribed slopmaster2 branch label denotes the WeilConjectures module root, including the published side overlay."
+ }
 }
