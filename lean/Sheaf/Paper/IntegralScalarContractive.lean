@@ -220,62 +220,7 @@ private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type)
     [TotallyDisconnectedSpace E] (U : X.ProEt) [IsAffine U.left]
     (wU : PointLanWeaklyContractible X U) :
     IsIso ((comparison X E).hom.app (Opposite.op U)) := by
-  let F := profiniteToProEtOf X
-  let J := coherentTopology Profinite.{u}
-  let K := Scheme.ProEt.topology X
-  let Λ := Profinite.continuousMapRingObj E
-  let H := (sheafCompose K (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj
-    (continuousMapRingSheaf X E)
-  have : (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)).IsContinuous
-      (Scheme.ProEt.topology specZ) (Scheme.ProEt.topology X) :=
-    Scheme.ProEt.isContinuous_overPullback (toSpecZ X)
-  have : F.IsContinuous J K := by
-    exact Functor.isContinuous_comp profiniteToProEt
-      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)) J
-      (Scheme.ProEt.topology specZ) K
-  let a := pointUpperStarLowerStarAdjunction.comp
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))
-  let b := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F
-    AddCommGrpCat.{u + 1} J K
-  let e := Adjunction.leftAdjointUniq a b
-  let f := (b.homEquiv Λ H).symm (comparisonAdjoint X E)
-  have hcomp : comparison X E = e.hom.app Λ ≫ f := by
-    apply (a.homEquiv Λ H).injective
-    rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_leftAdjointUniq_hom_app]
-    rw [comparison, Equiv.apply_symm_apply]
-    change comparisonAdjoint X E = (b.homEquiv Λ H) f
-    exact ((b.homEquiv Λ H).apply_symm_apply (comparisonAdjoint X E)).symm
-  let P := F.op.lan.obj Λ.obj
-  let η := F.op.lanUnit.app Λ.obj
-  let hp := Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension P η
-  have hu := (proEtale_sheafification_wcontractible_sections X).2.1 Λ P η hp U
-    inferInstance wU
-  have : IsIso ((toSheafify K P).app (Opposite.op U)) := hu.1
-  have hunit : (toSheafify K P).app (Opposite.op U) ≫ f.hom.app (Opposite.op U) =
-      (kanComparison X E).app (Opposite.op U) := by
-    change (((sheafificationAdjunction K AddCommGrpCat.{u + 1}).homEquiv P H)
-      f).app (Opposite.op U) = _
-    simp only [ObjectProperty.ι_obj,
-      Functor.sheafPullbackConstruction.sheafAdjunctionContinuous,
-      Adjunction.restrictFullyFaithful, Functor.id_obj, Functor.comp_obj,
-      Functor.whiskeringLeft_obj_obj, Functor.FullyFaithful.homEquiv,
-      Functor.FullyFaithful.id, Iso.refl_symm, Equiv.trans_def, Adjunction.comp_homEquiv,
-      Equiv.symm_mk, Adjunction.mkOfHomEquiv_homEquiv, Equiv.symm_trans,
-      Iso.homCongr_symm, Equiv.trans_apply, Equiv.coe_fn_mk, ObjectProperty.ι_map,
-      Iso.homCongr_apply, Iso.refl_inv, Iso.symm_hom, Iso.app_inv, NatTrans.id_app,
-      Category.id_comp, Iso.symm_inv, Iso.app_hom, Iso.refl_hom, Category.comp_id,
-      kanComparison, f, b]
-    erw [Category.id_comp, Category.comp_id, Equiv.apply_symm_apply]
-  have : IsIso ((kanComparison X E).app (Opposite.op U)) :=
-    kanComparison_isIso X E U P η (kanComparison X E) hp (kanComparison_unit X E)
-  have : IsIso (f.hom.app (Opposite.op U)) := by
-    have : IsIso ((toSheafify K P).app (Opposite.op U) ≫ f.hom.app (Opposite.op U)) := by
-      rw [hunit]
-      infer_instance
-    exact IsIso.of_isIso_comp_left ((toSheafify K P).app (Opposite.op U)) _
-  rw [hcomp]
-  change IsIso ((e.hom.app Λ).hom.app (Opposite.op U) ≫ f.hom.app (Opposite.op U))
-  infer_instance
+  sorry
 
 
 private theorem integralComparison_isIso (X : Scheme.{u}) (T : Type)

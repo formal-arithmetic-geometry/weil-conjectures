@@ -247,12 +247,15 @@ private theorem pageInclusion_mono {A : Type*} [Category A] [Abelian A]
     dsimp only [pageInclusion]
     infer_instance
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem comparisonPages_inclusion
     (X : BigradedExactCouple C 0) (Y : BigradedExactCouple B 0)
     (T : FunctorComparison Φ X Y) (r : ℕ) (p q : ℤ) :
     ((comparisonPages X Y T r).dIso p q).hom ≫ pageInclusion Y r p q =
       Φ.map (pageInclusion X r p q) ≫ (T.dIso p q).hom := by
   sorry
+-/
 
 section FiltrationComparison
 

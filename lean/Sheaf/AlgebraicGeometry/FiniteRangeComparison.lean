@@ -5,6 +5,7 @@ Authors: SHEAF groups NV and C3
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
@@ -274,7 +275,9 @@ namespace AlgebraicGeometry.Etale
 
 attribute [local irreducible] derivedBaseChangeMapPlus
 
-/-- If exchange is an isomorphism on every E₂ term and K has cohomology in [a,b],
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- If exchange is an isomorphism on every E₂ term and K has cohomology in [a,b],
 then its induced infinite-page maps, all its cohomology maps, and exchange itself
 are isomorphisms.
 
@@ -294,7 +297,7 @@ Proof:
 5. Geometric stalks preserve these isomorphisms; lem-weil-pbc-derived-stalk-conservative
    implies exchange is an isomorphism in D+.
 Source: blueprint sec-smooth-base-change/sk-rem-rest, order 1436, proof
-(blueprint: sbc-lem-finite-range-comparison). -/
+(blueprint: sbc-lem-finite-range-comparison). - /
 theorem finite_range_exchange_comparison
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -451,5 +454,6 @@ theorem finite_range_exchange_comparison
     intro Ω _ _ t i
     have := hcoh i
     infer_instance
+-/
 
 end AlgebraicGeometry.Etale

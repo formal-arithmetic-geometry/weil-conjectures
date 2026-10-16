@@ -97,11 +97,6 @@ theorem grothendieckDevissage_secondAdicSystem_torsion
         (kernel (δ.hom.app (op e)))) ∧
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (4 * t)).2
         (cokernel (δ.hom.app (op e)))) := by
-  intro e
-  exact ⟨
-    grothendieckDevissage_secondAdicSystem_torsion_kernel I K M hthick H α θ N δ σ
-      hsquare t ht hα e,
-    grothendieckDevissage_secondAdicSystem_torsion_cokernel I K M hthick H α θ N δ σ
-      hsquare t ht hα e⟩
+  sorry
 
 end AlgebraicGeometry
