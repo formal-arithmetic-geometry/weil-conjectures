@@ -133,5 +133,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8c9d938bf (reviewer sub-agent of L); spot-checked: I read the item def-weil-pbc-topos in full. It is a definition only: no new nodes, proof=[], and its one stmt_dep is def-weil-size-convention (read: U in V, V-small skeletons). I checked it clause by clause against Stacks sites.tex. Sieve and pullback agree with 00YX definition-sieve (l.10877) and 00Z2. Topology axioms (i)/(ii)/(iii) are 00Z4 definition-topology (l.10993) axioms (3)/(1)/(2) in a different order, same content. The explicit unique-amalgamation sheaf condition agrees with 00Z8 definition-sheaf-sets-topology (l.11088) and the sentence after it. 'Equivalent to Sh(D,J;Sets_V) for a V-small D' is 00XA definition-topos (l.2942) up to equivalence, with the size rule of 00VI (l.708). The item makes no hidden existence, sheafification or Giraud claim, cites no SGA source, and no coefficient category or base-change morphism is involved. blueprint.from.place correctly names main-20261015 det-pe-topos-functoriality-site proof paragraph 3, 'Grothendieck topos'. The unit route is sk-def-sfb-finite-pushforward-pullback step 1 through that parent. Edge cases checked: the empty category gives the terminal topos; a one-object category with only the maximal sieve gives Sh = Sets_V; adding the empty covering sieve gives the singleton sheaf only. So there is no implicit nonemptiness. Mathlib: the recorded LeanSearch, LeanFinder, Loogle and grep searches are all there. My own rg finds no GrothendieckTopos predicate; Sites/Grothendieck.lean:45-51 is only a TODO; Topos/ covers subobject classifiers only. split with no mathlib_match is the correct status. Duplicates: rg over dag/nodes for topos and sieve definitions finds no other node defining a Grothendieck topos or a sieve topology, so same_as=[] stands. Not a fault of this delivery: parent step 1 builds a covering-family site, and steps 3-4 silently treat it as the generated sieve topology (Stacks 00ZC/00ZD). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.GrothendieckTopos",
+  "declaration": "CategoryTheory.IsGrothendieckTopos",
+  "file": "lean/Sheaf/CategoryTheory/Sites/GrothendieckTopos.lean",
+  "statement": "def IsGrothendieckTopos (E : Type u) [Category.{v} E] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded8b52cd",
+  "group": "Q04",
+  "result": "pass",
+  "note": "IsGrothendieckTopos (E : Type u) [Category.{v} E] := ∃ (D : Type w) (c : SmallCategory D) (J : GrothendieckTopology D), Nonempty (E ≌ Sheaf J (Type w)); every node clause matched (Mathlib Sieve/pullback, topology axioms i-iii, Type-valued sheaf = unique amalgamation via isSheaf_iff_isSheaf_of_type, V-small D through SmallCategory in universe w, existential equivalence); no stronger assumptions, u/v independent of w, universe order {w,v,u}; node diff vs side clone only in lean, statement verbatim; edge cases (empty site, one-point/degenerate topos) not excluded; scratch witness Sheaf(⊥ on PUnit) proves the predicate satisfiable; real definition, no sorry, Stacks/blueprint docstrings, Worker report and Second reading by Q04 present; no duplicate in side clone or Mathlib; nt_compile of the snapshot file clean (1.2 s and 0.7 s, no warnings)."
  }
 }

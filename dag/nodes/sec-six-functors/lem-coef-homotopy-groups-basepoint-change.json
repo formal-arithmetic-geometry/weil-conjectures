@@ -321,5 +321,30 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-d4fd1fcee (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, the cited node and the three citers in full and found no fault; I made no fixes. Source caveat: I could not open Hatcher §4.1 pp. 340–342 or Ex. 4.1.2 page by page. It is not in literature/ (the report already lists it as WANTED) and network access is blocked for reviewers. I checked every step from the item's own definitions instead; proof_origin is correctly 'agent'. Statement unchanged and true: the shell formula sends pi_n(T,t1) to pi_n(T,t0); beta_{gamma_x} o (f1)_* = (f0)_* has the right direction; no connectedness or nonemptiness is assumed. Steps checked: pasting along closed sets; seams of the collar (lambda=1-t/2, 2-2r=t at the seam) and of the sweep (mu=(1+s)/2, path parameter 1 at the seam); the endpoints at t=0,1 and s=0,1, including the corner r=s=1; both inverse identities via the reversed sweeps; multiplicativity via the concatenated sweep, with the middle and outer faces at gamma(s) and factor order kept for n=1; homotopy invariance via H(t,a(u)); the three-basepoint homotopy-equivalence argument (qp and vq are isomorphisms, so q and then p are). Step 12 uses only the weak-equivalence sentence of lem-coef-kan-quillen-right-proper, which I confirmed in that node's statement. Elementary flags are justified. No new nodes. The only overlapping node, lem-coef-homotopy-equivalence-weak, is a special case of the item. Mathlib's HomotopyGroup.lean has only fixed basepoints, so no leaf. Same unit, so no tool_uses; no SGA source; not a target node."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.HomotopyGroupsBasepointChange",
+  "declaration": "SSet.Enhanced.homotopyGroups_basepoint_change",
+  "declarations": [
+   "SSet.Enhanced.basepointShellRadius",
+   "SSet.Enhanced.basepointShell",
+   "SSet.Enhanced.IsBasepointShellMap",
+   "SSet.Enhanced.homotopyGroups_basepoint_change"
+  ],
+  "file": "lean/Sheaf/Topology/HomotopyGroupsBasepointChange.lean",
+  "statement": "theorem homotopyGroups_basepoint_change (T : Type u) [TopologicalSpace T] (X : Type v) (Y : Type w) [TopologicalSpace X] [TopologicalSpace Y] : (∀ (n : ℕ) (t₀ t₁ : T) (γ : Path t₀ t₁), ∃ β : HomotopyGroup (Fin (n + 1)) T t₁ ≃* HomotopyGroup (Fin (n + 1)) T t₀, IsBasepointShellMap n γ β ∧ IsBasepointShellMap n γ.symm β.symm) ∧ (∀ (f : C(X, Y)) (n : ℕ) (x : X), ∃ φ : HomotopyGroup (Fin (n + 1)) X x →* HomotopyGroup (Fin (n + 1)) Y (f x), (φ : _ → _) = homotopyGroupMap f (n + 1) x) ∧ (∀ (f₀ f₁ : C(X, Y)) (H : f₀.Homotopy f₁), componentsMap f₀ = componentsMap f₁ ∧ (∀ (n : ℕ) (x : X), ∃ β : HomotopyGroup (Fin (n + 1)) Y (f₁ x) ≃* HomotopyGroup (Fin (n + 1)) Y (f₀ x), IsBasepointShellMap n (H.evalAt x) β ∧ (β : _ → _) ∘ homotopyGroupMap f₁ (n + 1) x = homotopyGroupMap f₀ (n + 1) x) ∧ ((Function.Bijective (componentsMap f₀) ∧ ∀ (n : ℕ) (x : X), Function.Bijective (homotopyGroupMap f₀ (n + 1) x)) ↔ (Function.Bijective (componentsMap f₁) ∧ ∀ (n : ℕ) (x : X), Function.Bijective (homotopyGroupMap f₁ (n + 1) x)))) ∧ (∀ (f : C(X, Y)) (g : C(Y, X)), (g.comp f).Homotopic (ContinuousMap.id X) → (f.comp g).Homotopic (ContinuousMap.id Y) → Function.Bijective (componentsMap f) ∧ ∀ (n : ℕ) (x : X), Function.Bijective (homotopyGroupMap f (n + 1) x)) ∧ (∀ (A B : SSet.{u}) (f₀ f₁ : A ⟶ B), (SSet.toTop.map f₀).hom.Homotopic (SSet.toTop.map f₁).hom → (IsWeakHomotopyEquivalence f₀ ↔ IsWeakHomotopyEquivalence f₁))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The positive degrees are n+1. IsBasepointShellMap characterizes transport on every representative by the exact shell formula, including existence of its continuous boundary-fixed representative; the reverse characterization fixes the inverse. No equivalence or map is chosen as unspecified data. One theorem states every clause of the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0517faaa6",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read the node, the Kan-Quillen dependency, the module, the report (Worker report and Second reading by NS present), the shared Enhanced definitions and Mathlib's HomotopyGroup and Homotopy.evalAt. Every clause matches: radius, shell formula (inner argument in [0,1], both pieces t1 at the seam, t0 on the boundary, direction t1 to t0), the shell map fixed on every representative with the reversed-path inverse, the postcomposition homomorphism, equality of the pi0 maps, the moving-basepoint identity along H.evalAt x, the f0-iff-f1 clause, homotopy equivalences, and the simplicial clause using the dependency's IsWeakHomotopyEquivalence. No extra hypotheses; universes independent; degree 1, degree 0 and empty spaces covered. No hollow definitions, only sorry, docstrings give source and blueprint id, statement verbatim, node changed only in its lean field. nt_compile.py on the snapshot file with the side overlay: exit 0, no warnings. No findings."
  }
 }

@@ -27,7 +27,9 @@
   "place": "Example 4.6.4.9, functor-category formulation of the blunt-to-sharp categorical equivalence (Theorem 4.6.2.8); the comparison is defined in Notation 4.6.2.3. Read the example and both referenced statements online 2026-10-17. Kerodon, not the Stacks Project; not archived under literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-blunt-join-comparison"
  ],
  "proof": [
   {
@@ -290,5 +292,30 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-36e2df0ed (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item and the statements of all 6 cited nodes in full. Statement: unchanged and true. It is the Joyal blunt-to-sharp join comparison (Kerodon 01HR/01HV/05YH, HTT 4.2.1.2) in its functor-equivalence form, with no added hypotheses on X or Y. Edge cases hold: an empty factor gives the identity, and Delta^0 blunt-join Delta^0 = Delta^1. Step 1: the normal form X_r + Y_r + X_r x T_r x Y_r is correct and c is well defined and natural. Step 2: degreewise connected-colimit and injection preservation is correct in both variables, and the empty case gives the identity. Steps 3-4: I checked by hand, and by script for m,n<=3, that f, k, g and h are monotone, that fk=1 (so cs=1), that g<=1 and g<=kf, and that the homotopies keep a on layer 0 and b on layer 1, so they descend and are constant on the pure parts. Step 5: the cited prism extension (with A empty) and the converse outer-horn clause apply with every hypothesis met (r>=2). Step 6: the two homotopies agree at horn vertex 0, the prescription on V x A agrees with them on the overlap, the distinguished edges are degenerate, and edge 12 gives 1 => c*s*. Two applications of Step 5 make this an equivalence edge, which matches the functor-equivalence definition in def-cbc-enhanced-diagrams-cones. Steps 7-8: every hypothesis of lem-coef-infinity-cellular-natural-equivalence (same unit, unsplit, plausible) is supplied. DAG: no cycle and no new nodes. The only citer is lem-coef-infinity-slice-arrow-equivalence. Neither lem-coef-infinity-blunt-join-comparison nor lem-coef-infinity-join-cone-calculus duplicates the item. I accept the declared generic tool uses of lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling (unit sk-prop-sf-cbc). Kerodon is not archived, so the proof is correctly marked by: agent and the report carries a WANTED line. No SGA is cited. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BluntSharpJoinEquivalence",
+  "declaration": "SSet.Enhanced.blunt_sharp_join_equivalence",
+  "declarations": [
+   "SSet.Enhanced.bluntSharpOrdinal",
+   "SSet.Enhanced.bluntSharpCylinderSimplex",
+   "SSet.Enhanced.blunt_sharp_join_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/BluntSharpJoinEquivalence.lean",
+  "statement": "theorem blunt_sharp_join_equivalence (X Y : SSet.{u}) : ∃ c : bluntJoin X Y ⟶ orderedJoinFunctor.obj (X, Y), (∀ (n : SimplexCategory) (x : X.obj (op n)) (e : (joinAugmentation.obj Y).obj (op WithInitial.star)), (bluntJoinBaseIncl X Y ≫ c).app (op n) x = ((tensor AugmentedSimplexCategoryᵒᵖ).lanUnit.app ((externalProductBifunctor _ _ (Type u)).obj (joinAugmentation.obj X, joinAugmentation.obj Y))).app (op (.of n), op WithInitial.star) ((inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app X)).app (op n) x, e)) ∧ (∀ (n : SimplexCategory) (y : Y.obj (op n)) (e : (joinAugmentation.obj X).obj (op WithInitial.star)), (pushout.inr _ (bluntJoinRightProjection X Y) ≫ c).app (op n) y = ((tensor AugmentedSimplexCategoryᵒᵖ).lanUnit.app ((externalProductBifunctor _ _ (Type u)).obj (joinAugmentation.obj X, joinAugmentation.obj Y))).app (op WithInitial.star, op (.of n)) (e, (inv (AugmentedSimplexCategory.inclusion.op.ranCounit.app Y)).app (op n) y)) ∧ (∀ (n : SimplexCategory) (x : X.obj (op n)) (t : (Δ[1] : SSet.{u}).obj (op n)) (y : Y.obj (op n)), ((pushout.inl (bluntJoinEndpoint X Y 0) (bluntJoinLeftProjection X Y) ≫ pushout.inl _ (bluntJoinRightProjection X Y)) ≫ c).app (op n) ((x, t), y) = bluntSharpCylinderSimplex X Y n x t y) ∧ ∀ (E : SSet.{max u v}) (_ : Quasicategory E), IsFunctorEquivalence ((MonoidalClosed.pre (SSet.uliftFunctor.{v}.map c)).app E)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the existing endpoint-pushout blunt join (BluntJoinComparison) and ordered convolution join (PushoutJoinSaturation). The theorem asserts existence of the comparison with its exact values on both pure summands (the convolution generator of a simplex with the unique empty-ordinal simplex of the other factor) and on every cylinder simplex, then the coherent quasi-inverse property of its actual precomposition map in every containing universe. No arbitrary comparison-map parameter or chosen data from a sorry theorem. Second reader's fix: the module no longer imports Sheaf.CategoryTheory.JoinSliceRightFibration (module of lem-coef-infinity-slice-right-fibration, which reaches this item through anodyne-cocones -> pinch-comparison -> slice-arrow-equivalence); the generator is written as the Kan-extension unit it abbreviates and the pure-summand clauses elementwise, proved equivalent to the delivered orderedJoinInl/orderedJoinInr equations.",
+  "fixed_by": "NT-stage2-cc-7e11bd0f2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e11bd0f2",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Statement matches the node and Kerodon 01HR/01HV/05YH clause by clause: arbitrary X,Y:SSet.{u}; recorded blunt join (end 0 to X, end 1 to Y checked) and ordered join; c given on both pure copies and on cylinder simplices (selection i->i if t(i)=0 else n+1+i, matching Mathlib castAdd/natAdd); unique by the pushout, not arbitrary; every quasicategory E in SSet.{max u v} via uliftFunctor, no universe equality; pre direction right; coherent IsFunctorEquivalence. Edge cases (empty factors, constant t, degree 0, v=0) covered. Record statement verbatim; node statement unchanged; the two added stmt_deps are landed and acyclic; no hollow defs; only sorry is the theorem proof; docstrings in place; both report sections real. FIX: the module publicly imported Sheaf.CategoryTheory.JoinSliceRightFibration (joinGenerator/orderedJoinInl/Inr), the module of lem-coef-infinity-slice-right-fibration, which reaches the item (slice-right-fibration->anodyne-cocones->pinch-comparison->slice-arrow-equivalence->item). So the statement depended on a node outside stmt_deps that cannot be added there, and the stage-3 proof imports (via AnodyneCocones->RightPinchComparison) would form an import cycle. fixes/BluntSharpJoinEquivalence.lean drops that import, imports PushoutJoinSaturation directly, writes the generator as the Kan-extension unit and the pure-copy clauses element by element over the one-element empty-ordinal value. A scratch Lean file proved this equivalent to the delivered statement (subsingleton lemma, both pure-clause iffs, cylinder formula rfl). Also adds the CellularNaturalEquivalence proof import and corrects docstring step 4 (h=kf). The lean-record override changes only note; the report gains a 'Maintainer review fix' section. nt_compile: delivered and fixed modules both clean; error control confirms diagnostics are shown; fixed import closure has no cycle (closing_cycle reports none)."
  }
 }

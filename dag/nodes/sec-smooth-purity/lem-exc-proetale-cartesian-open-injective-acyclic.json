@@ -334,5 +334,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-adbac5a06 (reviewer sub-agent of L); spot-checked: I read the item, all 21 cited nodes and the current blueprint proof prop-exc-base-change-proper.proof.md. The statement is identical to the side-DAG copy, so the target is not weakened. The finite-cd hypothesis is kept but not used. No new nodes. There is no cycle: the item does not appear among its dependencies' 905 transitive dependencies. The split is a real reduction, not a restatement. Step 1 evaluates at an affine weakly contractible Q (exact evaluation, restriction of injectives, direct-image section formula). Step 2 exhausts W_Q by finite unions of principal opens; these are quasi-compact over affine Q, k_E is quasi-compact by base change and r_E is proper. Step 3 applies the existing same-unit node lem-sp-proetale-open-injective-proper-acyclic, and every hypothesis matches. That node allows a non-Cartesian square; this is harmless because C is then clopen in B×_D E. Step 4 builds the colimit of a_{E!}J_E by adjunction and gluing. Step 5 applies det-pe-bounded-continuity-sections on the qcqs scheme P with bound 0. Step 6 applies lem-sf-proetale-vanishing-detection (i). Small cases checked: W empty, W=T, T=Spec k (the earlier affine-line counterexample is not Cartesian), A=0. One C1/C4 gap repaired: Step 2 applied lem-cbc-proetale-extension-zero-base-change, which is stated for the inverse image g^{-1}, but used the restriction F|_P. The identification of the two along a weakly étale g was not given, and no pro-étale node states it. I wrote the three-line argument from def-weil-proetale-inverse-image into Step 2 (the index category has an initial object, and the constant-ring map is the identity by lem-weil-proetale-weakly-etale-localization (2)). I also added def-weil-proetale-inverse-image to the step's uses and to proof_deps. I accepted the eight proposed generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExceptionalBaseChangeCartesianOpenInjectiveAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_higherDirectImage_cartesianOpen_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExceptionalBaseChangeCartesianOpenInjectiveAcyclic.lean",
+  "statement": "theorem isZero_higherDirectImage_cartesianOpen_injective (A : Type u) [CommRing A] [Finite A] {V T W : Scheme.{u}} (p : V ⟶ T) (i : W ⟶ T) [IsProper p] [IsOpenImmersion i] (hcd : ∃ d : ℕ, ∀ (F : proEtaleRingModules V (proEtaleConstantRing V A)) (q : ℕ), d < q → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T A)) (q : ℤ)).obj ((proEtaleConstantDerivedDirectImage p A).obj ((DerivedCategory.singleFunctor (proEtaleRingModules V (proEtaleConstantRing V A)) 0).obj F)))) (J : proEtaleRingModules (pullback p i) (proEtaleConstantRing (pullback p i) A)) [Injective J] : ∀ q : ℕ, 0 < q → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules T (proEtaleConstantRing T A)) (q : ℤ)).obj ((proEtaleConstantDerivedDirectImage p A).obj ((DerivedCategory.singleFunctor (proEtaleRingModules V (proEtaleConstantRing V A)) 0).obj ((sfIntrinsicExtensionByZero (pullback.fst p i) A).obj J))))",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-792f623bd",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Checked item node, all 12 stmt deps and their exact Lean declarations (proEtaleRingModules, proEtaleConstantRing, proEtaleConstantDerivedDirectImage = rightDerivedFunctor of canonical sectionwise direct image, sfIntrinsicExtensionByZero = realization-transported upstream openImmersionLowerShriek), source places, docstrings with 6-step proof plan, report sections. Every hypothesis/conclusion clause matches the node (finite comm ring, IsProper p, arbitrary IsOpenImmersion i, pullback/pullback.fst, uniform d:ℕ bound for all F and q>d, any Injective J, H^q(Rp_*(F[0]))=0 for q>0); no extra assumptions; universes follow the recorded u / u+1 convention; edge cases W=∅, W=T, zero ring, J=0, d=0, q=1 covered. lean.statement byte-identical to the signature. Sibling ProEtaleFiniteModules repair removes only the duplicate WeilConjectures constructibility import and is byte-identical to the maintainer fix 25cca60896 already in the side tree (redundant, harmless). nt_compile.py: both files together and item alone exit 0, no diagnostics (warn.sorry=false). No fixes.; reverted the delivery's change of existing node(s) def-weil-pbc-proetale-modules (--revert-nodes; kept as on newtargets-dag)"
  }
 }
