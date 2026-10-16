@@ -30,76 +30,164 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definitions in the statement, accessible and cocomplete means exactly locally presentable. It remains to prove, for accessible $\\mathcal A$, that completeness implies cocompleteness and conversely. All the constructions below use only $\\mathcal U$-small indexing categories and sets; the objects of $\\mathcal A$ need not form a small set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof of the categorical input: logical reduction of Ching--Riehl Theorem A.2 (the cited paper states the result without its proof)."
+   }
+  },
+  {
+   "text": "Assume $\\mathcal A$ accessible and complete, and fix any small $D:J\\to\\mathcal A$. We construct the category $\\mathcal E=\\operatorname{Cocone}(D)$ using the three accessible PIE constructions in [lem-coef-accessible-pie-closure]. First form $\\mathcal B=\\prod_{j\\in\\operatorname{Ob}J}\\mathcal A$. The constant functor $F:\\mathcal A\\to\\mathcal B$, $F(X)=(D(j))_j$, and the diagonal $G(X)=(X)_j$ are accessible: for a filtered diagram in $\\mathcal A$, choose its vertex colimit and the colimit of each coordinate. A family of coordinate cocones factors uniquely coordinate by coordinate, so these coordinate colimits are a colimit in the product. For a constant diagram, compatibility forces all cocone legs to agree: any two index objects map to a common object. Its nonempty index then identifies such a cocone with one arrow from the constant value. Thus $F$ and $G$ preserve the colimits at the accessibility cardinal of $\\mathcal A$. Their inserter $\\mathcal I$ is accessible and has objects $(X,(u_j:D(j)\\to X)_j)$ and arrows $h$ satisfying $hu_j=u'_j$. Its projection $V:\\mathcal I\\to\\mathcal A$ is accessible. Form also $\\mathcal B'=\\prod_{a\\in\\operatorname{Mor}J}\\mathcal A$. The constant functor $H(X,u)=(D(\\operatorname{dom}a))_a$ and the diagonal of $V$, $K(X,u)=(X)_a$, are accessible. Indeed choose a regular cardinal $\\lambda$ at least the original accessibility cardinal of $\\mathcal A$ and a preservation cardinal $\\nu$ for $V$. By the cited definition of accessible functor, $\\mathcal I$ has all small $\\nu$-filtered colimits. Every $\\lambda$-filtered diagram is $\\nu$-filtered, so its colimit exists in $\\mathcal I$ and $V$ preserves it; its image has a colimit in $\\mathcal A$ since it is also filtered at the original cardinal. The coordinate argument above shows $K$ preserves these colimits, and the nonempty-connected constant-diagram argument shows $H$ does too. There are natural transformations $\\alpha,\\beta:H\\Rightarrow K$ with $\\alpha_a=u_{\\operatorname{cod}a}D(a)$ and $\\beta_a=u_{\\operatorname{dom}a}$. Their equifier is precisely $\\mathcal E$, and is accessible by the cited equifier clause. This describes the objects and arrows explicitly, including when $J$ is empty.",
+   "uses": [
+    "lem-coef-accessible-pie-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: accessible cocones from the small-product, inserter and equifier clauses of the sibling categorical input (Ching--Riehl Appendix A, Definition A.3 and the preceding paragraph)."
+   }
+  },
+  {
+   "text": "The category $\\mathcal E$ is locally small: each of its Hom sets is a subset of a Hom set of $\\mathcal A$. It is complete. Given a small diagram $(X_k,u^k)$ of cocones, let $L$ be the limit of its vertices in $\\mathcal A$, with projections $p_k$. For each $j$, the compatible arrows $u_j^k:D(j)\\to X_k$ uniquely define $u_j:D(j)\\to L$. The equations $u_{\\operatorname{cod}a}D(a)=u_{\\operatorname{dom}a}$ follow after every $p_k$ and therefore by uniqueness into $L$. A cone of cocones factors uniquely through $(L,u)$ by the same vertex-limit property. This works also for an empty diagram of cocones, since the terminal object of $\\mathcal A$ has unique arrows from all $D(j)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: limit cones of cocones constructed from their vertices."
+   }
+  },
+  {
+   "text": "Choose a small family $(B_s)_{s\\in S}$ of presentable generators for the accessible category $\\mathcal E$ of Step 2. Every cocone $X$ is a filtered colimit of this family, and the filtered index is nonempty, so at least one of its structure arrows is a map $B_s\\to X$. Thus this family is weakly initial. By Step 3 its product $T=\\prod_{s\\in S}B_s$ exists. For each $X$ choose such an $s$ and compose the projection $T\\to B_s$ with $B_s\\to X$; this makes $T$ weakly initial. There is no empty-family difficulty: Step 3 supplies a terminal cocone, and a presentation of that object forces $S$ to be nonempty.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: a small family of accessible generators gives a weakly initial object by taking its product."
+   }
+  },
+  {
+   "text": "By Step 3, $\\mathcal E$ has every small wide equalizer: these are particular small limits (including the empty family of parallel arrows). Apply [lem-coef-weakly-initial-wide-equalizers] to its weakly initial object $T$ from Step 4. The resulting initial object of $\\operatorname{Cocone}(D)$ is exactly a colimit cocone by [def-weil-pbc-category-colimit]: its unique arrow to a cocone $(M,v)$ is the unique vertex map commuting with every leg. Since $D$ was any small diagram, $\\mathcal A$ is cocomplete.",
+   "uses": [
+    "lem-coef-weakly-initial-wide-equalizers",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: Freyd initial-object theorem, Mathlib WeaklyInitial.lean:46-66, applied in the category of cocones."
+   }
+  },
+  {
+   "text": "Conversely assume $\\mathcal A$ accessible and cocomplete. Choose an accessibility cardinal $\\kappa$ and a small family of $\\kappa$-presentable generators, and let $\\mathcal P$ be the small category with these indexed objects and all their $\\mathcal A$-morphisms. Repeated representatives cause no difficulty. Put $N(X)(P)=\\operatorname{Hom}_{\\mathcal A}(P,X)$; precomposition defines a presheaf on $\\mathcal P$, and postcomposition defines $N:\\mathcal A\\to[\\mathcal P^{\\mathrm{op}},\\operatorname{Set}_{\\mathcal U}]$. This functor is fully faithful. To see fullness, given $\\tau:NX\\to NY$, present $X=\\operatorname{colim}_{i\\in I}P_i$ with $I$ small $\\kappa$-filtered and structure maps $x_i:P_i\\to X$. Naturality makes $\\tau_{P_i}(x_i)$ a cocone to $Y$, so it induces $f:X\\to Y$. For any $g:P\\to X$ with $P\\in\\mathcal P$, presentability gives $g=x_i h$ for some $h:P\\to P_i$: presentability identifies $\\operatorname{Hom}(P,X)$ with $\\operatorname{colim}_i\\operatorname{Hom}(P,P_i)$. For sets, the latter colimit is the quotient of the disjoint union of the sets $\\operatorname{Hom}(P,P_i)$ by the equivalence relation generated by transition pairs. Compatible maps out of this quotient are exactly compatible maps out of the summands, which checks its colimit property. Each quotient element therefore has a representative $h:P\\to P_i$, whose image is $x_i h$. Hence $fg=\\tau_{P_i}(x_i)h=\\tau_P(g)$ by naturality. Thus $N(f)=\\tau$. If $N(f)=N(f')$, then $fx_i=f'x_i$ for every $i$, so $f=f'$ by the colimit property, proving faithfulness.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, cocomplete implies complete: restricted Yoneda is fully faithful, proved explicitly from filtered presentations and presentability, not invoked as an uncited density theorem."
+   }
+  },
+  {
+   "text": "For a presheaf $Q:\\mathcal P^{\\mathrm{op}}\\to\\operatorname{Set}_{\\mathcal U}$, define its category of elements to have objects $(P,q)$ with $q\\in Q(P)$, and arrows $(P,q)\\to(P',q')$ the $h:P\\to P'$ for which $Q(h)(q')=q$. This category is small: its objects form a small disjoint union of small sets and its arrows form a subset of a small disjoint union of Hom sets. The diagram $(P,q)\\mapsto P$ therefore has a colimit $LQ$ in $\\mathcal A$ by cocompleteness, with maps $\\iota_{P,q}:P\\to LQ$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, cocomplete implies complete: small category-of-elements realization; no colimit over a large index category is used."
+   }
+  },
+  {
+   "text": "The colimit property identifies an arrow $LQ\\to X$ with maps $v_{P,q}:P\\to X$ satisfying $v_{P,q}=v_{P',q'}h$ whenever $Q(h)(q')=q$. These are exactly natural transformations $Q\\to NX$: the component at $P$ sends $q$ to $v_{P,q}$, and the stated compatibility is exactly naturality for $h$. Conversely a natural transformation gives these maps and hence a unique arrow $LQ\\to X$. A presheaf map $Q\\to Q'$ sends $(P,q)$ to $(P,q')$ with $q'$ its image, and the colimit property gives $LQ\\to LQ'$; uniqueness gives identities and composition. The displayed bijections are natural in $Q$ and $X$ because both actions compose the same maps $v_{P,q}$. Therefore $L\\dashv N$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, cocomplete implies complete: the adjunction is constructed from its natural Hom bijections, rather than assumed from a representability theorem."
+   }
+  },
+  {
+   "text": "The presheaf category in Step 6 is locally small and complete. The natural transformations between two presheaves form a subset of the small product of all component function sets. For a small diagram $(Q_k)$ define its limit at $P$ to be the set of tuples $(q_k)_k\\in\\prod_k Q_k(P)$ satisfying every diagram equation; this is a small set, with the empty diagram giving the singleton. Restrictions act componentwise and preserve these equations. For any cone of presheaves, the unique componentwise maps into these tuple sets commute with restriction, and so give the unique map of presheaves into the limit. This proves the universal property for all small diagrams.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, cocomplete implies complete: explicit pointwise limits of small-set-valued presheaves."
+   }
+  },
+  {
+   "text": "Steps 6 and 8 exhibit $N$ as a fully faithful right adjoint, and Step 9 proves its target complete in the same small universe. Apply [lem-coef-reflective-subcategory-limits] with $R=N$ and its left adjoint $L$ to conclude that $\\mathcal A$ is complete. Together with Step 5 and the definitional equivalence of Step 1, this proves all three conditions equivalent.",
+   "uses": [
+    "lem-coef-reflective-subcategory-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, cocomplete implies complete: Mathlib Monad/Limits.lean:348-350, reflective completeness, and the final logical assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-pie-closure",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-weakly-initial-wide-equalizers",
+  "lem-coef-reflective-subcategory-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Categorical input to paragraph 2; explicit proof of the equivalence stated without proof in Ching--Riehl Appendix A Theorem A.2. Uses accessible PIE closure and two general Mathlib theorems; see report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An accessible complete category is locally presentable and every locally presentable category is complete",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsAccessibleCategory.{w, v, u} C] (X : C),\\n  CategoryTheory.IsPresentable.{w, v, u} X\", \"doc\": \"In an accessible category, every object is presentable. Specifically, if $\\\\mathcal{C}$ is an accessible category and $X$ is an object of $\\\\mathcal{C}$, then $X$ is presentable in the sense that the ho\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.IsFinitelyAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category is finitely accessible if it is ℵ₀-accessible, meaning it has directed colimits and a set of finitely presentable objects such that every object is a directed colimit of these finitely pres\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $.\"}",
+   "query": "An accessible complete category is locally presentable if and only if it is cocomplete",
+   "results": "{\"t\": \"2026-10-16T20:23:09Z\", \"tool\": \"leanfinder\", \"query\": \"An accessible complete category is locally presentable if and only if it is cocomplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.toHasColimitsOfSize\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.IsCardinalLocallyPresentable\"], \"digest\": \"832a1e5bb96ae9e5\"}",
    "date": "2026-10-17",
-   "verdict": "no match: LocallyPresentable.lean:47-99 supplies definitions and local presentability implies accessibility, but no completeness equivalence. Adjunction.lean:77-96 concerns fully faithful right adjoints and Limits.lean:158-168 concerns Type-valued functors, neither the complete-accessible characterization."
+   "verdict": "no match: read Mathlib CategoryTheory/Presentable/LocallyPresentable.lean:47-99; the definitions and accessibility instances do not assert completeness. The reflective and Freyd theorems are used only as general input leaves, with the categorical constructions proved in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completeness and cocompleteness are equivalent for an accessible ordinary category",
+   "results": "{\"t\": \"2026-10-16T20:25:54Z\", \"tool\": \"leanfinder\", \"query\": \"Completeness and cocompleteness are equivalent for an accessible ordinary category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\"], \"digest\": \"48ac1626b0ef4118\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib CategoryTheory/Presentable/LocallyPresentable.lean:47-99; the definitions and accessibility instances do not assert completeness. The reflective and Freyd theorems are used only as general input leaves, with the categorical constructions proved in this split."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.IsAccessibleCategory, CategoryTheory.Limits.HasLimitsOfSize",
-   "results": "[loogle] OK 0 hit(s)",
+   "results": "{\"t\": \"2026-10-16T20:23:03Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsAccessibleCategory, CategoryTheory.Limits.HasLimitsOfSize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: LocallyPresentable.lean:47-99 supplies definitions and local presentability implies accessibility, but no completeness equivalence. Adjunction.lean:77-96 concerns fully faithful right adjoints and Limits.lean:158-168 concerns Type-valued functors, neither the complete-accessible characterization."
+   "verdict": "no match: read Mathlib CategoryTheory/Presentable/LocallyPresentable.lean:47-99; the definitions and accessibility instances do not assert completeness. The reflective and Freyd theorems are used only as general input leaves, with the categorical constructions proved in this split."
   },
   {
    "tool": "grep",
-   "query": "IsAccessibleCategory|HasLimitsOfSize|HasLimits",
-   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"125\", \"text\": \"lemma isAccessibleCategory [IsAccessibleCategory.{w} C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"126\", \"text\": \"    IsAccessibleCategory.{w} D := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"127\", \"text\": \"  obtain ⟨κ, _, _⟩ := IsAccessibleCategory.exists_cardinal.{w} C\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"line\": \"160\", \"text\": \"    [HasLimitsOfShape K (Type w')] (hK : HasCardinalLT (Arrow K) κ)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"line\": \"176\", \"text\": \"    [HasLimitsOfShape Kᵒᵖ (Type v)] (hK : HasCardinalLT (Arrow K) κ)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"line\": \"186\", \"text\": \"    {K : Type u'} [Category.{v'} K] [HasLimitsOfShape Kᵒᵖ (Type w)] {Y : K ⥤ C}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"line\": \"201\", \"text\": \"    {J : Type u'} [Category.{v'} J] [HasLimitsOfShape Jᵒᵖ (Type w)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"18\", \"text\": \"`IsAccessibleCategory`. We show that in a locally presentable or\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"87\", \"text\": \"class IsAccessibleCategory (C : Type u) [hC : Category.{v} C] : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"93\", \"text\": \"instance [IsLocallyPresentable.{w} C] : IsAccessibleCategory.{w} C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"98\", \"text\": \"instance [IsAccessibleCategory.{w} C] (X : C) : IsPresentable.{w} X := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"99\", \"text\": \"  obtain ⟨κ, _, _⟩ := IsAccessibleCategory.exists_cardinal C\"}",
+   "query": "IsAccessibleCategory|HasLimits|isLocallyPresentable",
+   "results": "{\"t\": \"2026-10-16T20:23:02Z\", \"tool\": \"grep\", \"query\": \"IsAccessibleCategory|HasLimits|isLocallyPresentable\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"08cf8a6897ff4345\"}",
    "date": "2026-10-17",
-   "verdict": "no match: LocallyPresentable.lean:47-99 supplies definitions and local presentability implies accessibility, but no completeness equivalence. Adjunction.lean:77-96 concerns fully faithful right adjoints and Limits.lean:158-168 concerns Type-valued functors, neither the complete-accessible characterization."
+   "verdict": "no match: read Mathlib CategoryTheory/Presentable/LocallyPresentable.lean:47-99; the definitions and accessibility instances do not assert completeness. The reflective and Freyd theorems are used only as general input leaves, with the categorical constructions proved in this split."
   },
   {
    "tool": "leansearch",
-   "query": "An accessible category is complete if and only if it is cocomplete if and only if it is locally presentable",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"[IsLocallyPresentable.{w} C] : IsAccessibleCategory.{w} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"[IsCardinalLocallyPresentable C κ] : IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}\n  {\"name\": \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"[IsAccessibleCategory.{w} C] (X : C) : IsPresentable.{w} X\", \"doc\": \"In an accessible category, every object is presentable. Specifically, if $\\\\mathcal{C}$ is an accessible category and $X$ is an object of $\\\\mathcal{C}$, then $X$ is presentable in the sense that the ho\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [toHasCardinalFilteredGenerator : CategoryTheory.HasCardinalFilteredGenerator C κ]\\n  [toHasColimitsOfSize : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v, u} C],\\n  CategoryTheory.IsCardinalLo\", \"doc\": \"If a category $\\\\mathcal{C}$ has a $\\\\kappa$-filtered generator and all colimits of $\\\\kappa$-small diagrams, then $\\\\mathcal{C}$ is locally presentable with respect to the regular cardinal $\\\\kappa$.\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable.casesOn\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"{C : Type u} →\\n  [hC : CategoryTheory.Category.{v, u} C] →\\n    {motive : CategoryTheory.IsLocallyPresentable.{w, v, u} C → Sort u_1} →\\n      (t : CategoryTheory.IsLocallyPresentable.{w, v, u} C) →\\n        ((exists_cardinal : ∃ κ, ∃ (x : Fact κ.IsRegular), CategoryTheory.IsCardinalLocallyPresentable \", \"doc\": \"Given a category $\\\\mathcal{C}$ and a property $P$ defined on locally presentable categories, if $P$ holds for $\\\\mathcal{C}$ whenever there exists a regular cardinal $\\\\kappa$ such that $\\\\mathcal{C}$ is\"}",
+   "query": "A complete accessible category is cocomplete and a cocomplete accessible category has all limits",
+   "results": "{\"t\": \"2026-10-16T20:23:03Z\", \"tool\": \"leansearch\", \"query\": \"A complete accessible category is cocomplete and a cocomplete accessible category has all limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasLimits\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.Limits.HasColimitsOfSize.recOn\", \"CategoryTheory.Limits.CompleteLattice.hasLimits_of_completeLattice\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\"], \"digest\": \"2fb88df7513d0b62\"}",
    "date": "2026-10-17",
-   "verdict": "no match: LocallyPresentable.lean:47-99 supplies definitions and local presentability implies accessibility, but no completeness equivalence. Adjunction.lean:77-96 concerns fully faithful right adjoints and Limits.lean:158-168 concerns Type-valued functors, neither the complete-accessible characterization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Completeness characterization of locally presentable accessible categories",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsAccessibleCategory.{w, v, u} C] (X : C),\\n  CategoryTheory.IsPresentable.{w, v, u} X\", \"doc\": \"In an accessible category, every object is presentable. Specifically, if $\\\\mathcal{C}$ is an accessible category and $X$ is an object of $\\\\mathcal{C}$, then $X$ is presentable in the sense that the ho\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $.\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable.exists_cardinal\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [self : CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  ∃ κ, ∃ (x : Fact κ.IsRegular), CategoryTheory.IsCardinalLocallyPresentable C κ\", \"doc\": \"Every locally presentable category $\\\\mathcal{C}$ admits a regular cardinal $\\\\kappa$ such that $\\\\mathcal{C}$ is locally presentable with respect to $\\\\kappa$.\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: LocallyPresentable.lean:47-99 supplies definitions and local presentability implies accessibility, but no completeness equivalence. Adjunction.lean:77-96 concerns fully faithful right adjoints and Limits.lean:158-168 concerns Type-valued functors, neither the complete-accessible characterization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A complete accessible category is cocomplete by the adjoint functor theorem",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.IsPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → Prop\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is presentable if the hom-functor $ \\\\text{Hom}(-, X) : \\\\mathcal{C} \\\\to \\\\text{Type} $ is accessible, meaning it preserves sufficiently filtered colimits. T\"}\n  {\"name\": \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsAccessibleCategory.{w, v, u} C] (X : C),\\n  CategoryTheory.IsPresentable.{w, v, u} X\", \"doc\": \"In an accessible category, every object is presentable. Specifically, if $\\\\mathcal{C}$ is an accessible category and $X$ is an object of $\\\\mathcal{C}$, then $X$ is presentable in the sense that the ho\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.toHasColimitsOfSize\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} (κ : Cardinal.{w}) {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.Limits.HasColimitsOfSize.{w, w, v, u} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally presentable with respect to a regular cardinal $\\\\kappa$, then $\\\\mathcal{C}$ has all colimits of shape $\\\\kappa$.\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a $\\\\kappa$-accessible category and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a $\\\\kappa$-accessible, full, and faithful functor in an adjunction, then $\\\\mathcal{D}$ is also a $\\\\kappa$-ac\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read LocallyPresentable.lean:47-99, Adjunction.lean:77-96, and Limits.lean:158-168. Definitions, full/faithful adjunction transfer, and limits of Type-valued functors do not state this theorem."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A locally small accessible category with all limits has all colimits",
-   "results": "{\"t\": \"2026-10-16T19:57:15Z\", \"tool\": \"leanfinder\", \"query\": \"A locally small accessible category with all limits has all colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsCardinalLocallyPresentable.toHasColimitsOfSize\", \"CategoryTheory.Limits.hasFilteredColimitsOfSize_of_hasColimitsOfSize\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.Limits.HasFilteredColimitsOfSize\", \"CategoryTheory.instHasCardinalFilteredColimitsOfHasColimitsOfSize\"], \"digest\": \"46aa79fecfdca8b9\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: definitions and colimit/accessibility instances do not give the completeness characterization. The reflection theorem at OrthogonalReflection.lean:472 assumes an already locally presentable base; Adjunction.lean:77-96 assumes a fully faithful right adjoint."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsLocallyPresentable\", \"HasLimits\"",
-   "results": "{\"t\": \"2026-10-16T19:57:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyPresentable\\\", \\\"HasLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: definitions and colimit/accessibility instances do not give the completeness characterization. The reflection theorem at OrthogonalReflection.lean:472 assumes an already locally presentable base; Adjunction.lean:77-96 assumes a fully faithful right adjoint."
-  },
-  {
-   "tool": "grep",
-   "query": "isLocallyPresentable|IsLocallyPresentable",
-   "results": "{\"t\": \"2026-10-16T19:57:12Z\", \"tool\": \"grep\", \"query\": \"isLocallyPresentable|IsLocallyPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\", \"Mathlib/CategoryTheory/Presentable/Presheaf.lean\"], \"digest\": \"9b154189a6fca28b\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: definitions and colimit/accessibility instances do not give the completeness characterization. The reflection theorem at OrthogonalReflection.lean:472 assumes an already locally presentable base; Adjunction.lean:77-96 assumes a fully faithful right adjoint."
+   "verdict": "no match: read Mathlib CategoryTheory/Presentable/LocallyPresentable.lean:47-99; the definitions and accessibility instances do not assert completeness. The reflective and Freyd theorems are used only as general input leaves, with the categorical constructions proved in this split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-monad-presentability",
@@ -107,5 +195,20 @@
   "group": "NG"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-completeness-characterization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied both implications. Accessible cocones plus Freyd produce colimits from completeness; a fully faithful restricted-Yoneda right adjoint to presheaves produces limits from cocompleteness. Reused the sibling accessible PIE-closure node and added only two general Mathlib leaves. Smallness, empty diagrams, and all cited statements were checked.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md paragraph 2, derived coefficient adjunction before the displayed inverse-limit comparison: the presentability/completeness input below lem-coef-accessible-monad-presentability. Steps 2-5 establish the complete-accessible direction; Steps 6-10 establish the cocomplete-accessible direction; Step 1 is the definitional remaining equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NX-aea832ccf",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-aea832ccf (reviewer sub-agent of L); spot-checked: I read the item's full statement and all ten steps, both new leaves, the cited statements (lem-coef-accessible-pie-closure, def-weil-pbc-category-colimit, def-nagata-category), the blueprint ancestor's paragraph 2, and the pinned Mathlib sources: WeaklyInitial.lean:46-66, WideEqualizers.lean:697, Monad/Limits.lean:338-350 and Reflective.lean:38-42. Mathlib has no completeness characterization in Presentable/, so the item is correctly not a leaf. The statement is unchanged and true; it is AR 2.47 (Ching–Riehl A.2, not archived, so the proof is correctly marked agent-written). It also holds on the empty category, the terminal category and Set. Step 2: the inserter of the constant and diagonal functors gives maps h with h u_j = u'_j; accessibility of F, G, H, K holds via coordinatewise colimits, constant functors on connected filtered indices, and lambda at least kappa_A and nu; the equifier of alpha, beta is exactly Cocone(D), including J empty. Step 3: limits of cocones are computed on vertices. Step 4: the product of the generators is weakly initial, and S is nonempty because there is a terminal object. Step 5: the Freyd lemma applies with every hypothesis met. Steps 6-9: fully faithful restricted Yoneda, left adjoint through the small category of elements, and pointwise presheaf limits are each written out correctly. Step 10: the reflective leaf applies with the same U-small Homs and diagrams. Both leaves are exact matches to the Mathlib declarations, including the empty-family wide-equalizer case, with correct lines (46 and 348) and all three search kinds recorded. Neither leaf is a clause of the item. rg over the DAG found no duplicate. The route stays within unit sk-prop-sf-biduality-general plus Mathlib tools; no tool_uses are needed and no SGA source is used. One fix: lem-coef-reflective-subcategory-limits defined completeness with an undeclared letter E; reworded to 'a category E is complete if ...' in fixes/dag/nodes/sec-six-functors/lem-coef-reflective-subcategory-limits.json.; 1 file(s) fixed by the reviewer"
+ }
 }

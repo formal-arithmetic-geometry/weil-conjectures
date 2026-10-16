@@ -28,9 +28,106 @@
   "def-coef-complete-algebroid",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-dugger-cardinal-choice] to the given combinatorial Quillen adjunction. Choose its regular $\\lambda$, small full subcategory $\\mathcal M_\\lambda$, functorial cofibrant replacement $Q_0\\to\\mathrm{id}$ in $\\mathcal M$, and fibrant replacement $\\mathrm{id}\\to T$ in $\\mathcal N$. These are auxiliary choices; the functor $Q$ in the conclusion need not preserve filtered colimits. For each $A\\in\\mathcal M_\\lambda$ put $C_A=Q_0A$, $Y_A=TL C_A$, and let $s_A:C_A\\to RY_A$ be adjoint to the fibrant replacement $r_A:LC_A\\to Y_A$. The arrows $s_A$ form a small set $S$ because they are indexed by the objects of the small category $\\mathcal M_\\lambda$. They also give the components of the natural transformation $s_X:Q_0X\\to RTLQ_0X$ defined by the same adjunction formula for every $X$.",
+   "uses": [
+    "lem-coef-dugger-cardinal-choice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, conditions (1)-(5) and definition of S, printed pp. 181-182."
+   }
+  },
+  {
+   "text": "Use the derived adjunction of [lem-coef-model-infinity-derived-adjunction], and pass to its homotopy categories (ordinary localizations, by the localization universal property). Homotopical surjectivity says its counit $\\overline\\varepsilon_{Y_A}:\\mathbf LL\\mathbf RR(Y_A)\\to Y_A$ is invertible. The adjunction formula for $s_A$ gives $\\overline\\varepsilon_{Y_A}\\circ\\mathbf LL(s_A)=[r_A]$, under the replacement identifications, and $r_A$ is a weak equivalence. Thus $\\mathbf LL(s_A)$ is invertible. The replacement formula for the derived functor and [lem-coef-model-localization-detects-weak-equivalences], applied in $\\mathcal N$, imply that $LQ(s_A)$ is a weak equivalence for the functor $Q$ fixed in the statement, as well as for $Q_0$. This proves the required image condition without assuming $\\mathcal N$ simplicial or that $Q$ is accessible.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Definition 3.1 and Proposition 3.2 proof, why Lcof inverts S, printed pp. 181-182."
+   }
+  },
+  {
+   "text": "For each $s_A:C_A\\to RY_A$, factor it in the original model structure as a cofibration $i_A:C_A\\to B_A$ followed by a trivial fibration $p_A:B_A\\to RY_A$. Both $C_A$ and $B_A$ are cofibrant. The square from $i_A$ to $s_A$ has vertical maps $1_{C_A}$ and $p_A$, which are weak equivalences. The natural derived mapping-space comparison in [lem-coef-simplicial-model-nerve-localization] therefore identifies the locality tests for the small set $S$ with those for the small set $I=\\{i_A\\}$. For cofibrant endpoints and fibrant test objects, the enriched mapping sets represent these same derived spaces. Apply [lem-coef-simplicial-bousfield-model-structure] to $I$. Its hypotheses hold because $\\mathcal M$ is left proper, combinatorial and simplicial and $I$ consists of cofibrations between cofibrant objects. The resulting $L_I\\mathcal M$ has exactly the $S$-local weak equivalences and the original cofibrations; denote it $L_S\\mathcal M$. In particular every $s_A$ is a weak equivalence there by its defining locality test.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-simplicial-bousfield-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, formation of M/S; cofibrant-cofibration normalization makes explicit the hypotheses of the cited Bousfield existence node, printed p. 182."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-bousfield-quillen-descent] to $L\\dashv R$, the small set $S$, the model structure of Step 3 and the image condition of Step 2. It supplies the Quillen adjunction $L:L_S\\mathcal M\\rightleftarrows\\mathcal N:R$. Since a model structure's trivial fibrations are precisely the right lifting class of its cofibrations, unchanged cofibrations mean unchanged trivial fibrations and cofibrant objects. Consequently every $Q_0X\\to X$ is also a cofibrant replacement in $L_S\\mathcal M$. For fibrant $Y\\in\\mathcal N$ its derived counit is still represented by $LQ_0RY\\to Y$, which is a weak equivalence by the original homotopical-surjectivity assumption and the derived replacement formula. Thus the descended adjunction remains homotopically surjective.",
+   "uses": [
+    "lem-coef-bousfield-quillen-descent",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, descent and continued homotopical surjectivity, printed p. 182; descent is Hirschhorn Proposition 3.3.18(1)."
+   }
+  },
+  {
+   "text": "Here is the filtered-colimit inheritance argument suppressed at the end of Dugger's proof. Fix a small $\\lambda$-filtered category $J$ and a diagram map $f:D\\to E$ whose components are weak equivalences in $L_S\\mathcal M$. By [lem-coef-model-colimit-localization-comparison], both $\\mathcal M^J$ and $(L_S\\mathcal M)^J$ have projective model structures. Their projective cofibrations agree: their trivial fibrations are the same objectwise trivial fibrations, since the base cofibrations agree. Take functorial projective cofibrant replacements $PD\\to D$ and $PE\\to E$ in the original projective structure. They are also cofibrant replacements in the localized projective structure, and two-out-of-three makes $P(f)$ a weak equivalence there. The colimit-constant-diagram adjunction is Quillen for the localized projective structure: its right adjoint preserves fibrations and trivial fibrations because these are objectwise. Thus the weak-equivalence preservation clause of [lem-coef-model-infinity-derived-adjunction] makes $\\operatorname{colim}P(f)$ a localized weak equivalence. Meanwhile the comparison maps $\\operatorname{colim}PD\\to\\operatorname{colim}D$ and $\\operatorname{colim}PE\\to\\operatorname{colim}E$ are original weak equivalences by the $\\lambda$-filtered weak-equivalence closure in [lem-coef-dugger-cardinal-choice], since the replacement maps are objectwise original weak equivalences. Original weak equivalences are local weak equivalences by Step 3's mapping-space test. Two-out-of-three now proves that $\\operatorname{colim}f$ is a localized weak equivalence. The category $J$ is explicitly small; no existence theorem for large projective diagram categories is invoked.",
+   "uses": [
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-dugger-cardinal-choice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, final sentence on inheritance of filtered-colimit preservation by localization, printed p. 182; expanded projective-replacement argument."
+   }
+  },
+  {
+   "text": "For any $X\\in\\mathcal M$, choose a small $\\lambda$-filtered diagram $A:J\\to\\mathcal M_\\lambda$ with colimit $X$, using [lem-coef-dugger-cardinal-choice]. The functors $Q_0,T,R$ preserve these colimits by that node, and $L$ preserves all colimits because it is a left adjoint. Hence the source and target of $s_X:Q_0X\\to RTLQ_0X$ identify with the corresponding colimits of the sources and targets of the $s_{A_j}$. Naturality of the unit and of the replacement maps makes these identifications identify the arrow itself: on each colimit injection its composite is $s_{A_j}$ followed by the target injection, which determines a map out of the colimit. Each $s_{A_j}$ is a localized weak equivalence by Step 3, so Step 5 makes $s_X$ a localized weak equivalence. By the replacement formula of [lem-coef-model-infinity-derived-adjunction] and the weak equivalence $Q_0X\\to X$, this is exactly invertibility of the derived unit of the descended adjunction for every object.",
+   "uses": [
+    "lem-coef-dugger-cardinal-choice",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Proposition 3.2 proof, filtered-colimit computation of the derived unit, printed p. 182."
+   }
+  },
+  {
+   "text": "The descended derived adjunction has invertible unit by Step 6 and invertible counit by Step 4. For completeness, the Quillen-equivalence test follows directly: for a cofibrant $A$ and fibrant $Y$, if $f:LA\\to Y$ has adjoint $g:A\\to RY$, the derived adjunction formulas give $[g]=\\mathbf RR([f])\\circ\\overline\\eta_A$ and $[f]=\\overline\\varepsilon_Y\\circ\\mathbf LL([g])$. Thus either arrow being invertible implies the other is invertible, because both comparison transformations are invertible. Apply [lem-coef-model-localization-detects-weak-equivalences] in $\\mathcal N$ and $L_S\\mathcal M$ to replace invertibility with weak equivalence. Thus, for each cofibrant $A$ and fibrant $Y$, the map $f:LA\\to Y$ is a weak equivalence exactly when its adjoint $g:A\\to RY$ is a weak equivalence. Together with Step 2 it proves both conclusions.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf",
+    "place": "Definition 3.1 and Proposition 3.2 proof, final Quillen-equivalence verification, printed pp. 181-182."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bousfield-quillen-descent",
+  "lem-coef-dugger-cardinal-choice",
+  "lem-coef-model-colimit-localization-comparison",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-bousfield-model-structure",
+  "lem-coef-simplicial-model-nerve-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundation for proof paragraph 2. Expanded proof following Dugger Proposition 3.2, printed pp. 181-182 (read online; not archived locally), with Hirschhorn Proposition 3.3.18(1) as a separate unsplit input. The filtered-colimit inheritance and adjunction tests are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +141,7 @@
    "query": "\"Bousfield\" \"Quillen\" \"Localization\"",
    "results": "0 hits; service reports the first quoted term is not a function.",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "invalid query: the Loogle diagnostic is recorded in results; this is not evidence of absence. Successful semantic searches and grep are recorded separately."
   },
   {
    "tool": "grep",
@@ -101,6 +198,34 @@
    "results": "{\"t\": \"2026-10-16T16:58:17Z\", \"tool\": \"grep\", \"query\": \"Quillen|counit|homotopically\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"04b4cd280af4664c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned declarations concern the ordinary nerve/homotopy-category adjunction, truncation/coskeleton adjunctions, or localizations and derived functors already given as input. None constructs a homotopically surjective small presheaf source or a set presenting a given homotopically surjective Quillen adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopically surjective Quillen adjunction from a left proper combinatorial model category becomes a Quillen equivalence after localization at a small set of maps",
+   "results": "{\"t\": \"2026-10-16T20:21:20Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopically surjective Quillen adjunction from a left proper combinatorial model category becomes a Quillen equivalence after localization at a small set of maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_obj_surjective\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\"], \"digest\": \"6caf29ff6a0f70ac\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean and Localization/Bousfield.lean:13-28,46-63. The hits give ordinary cofibrant-object localization, formal localization criteria, or a particular injective-complex model structure; none constructs a set of maps presenting a homotopically surjective Quillen adjunction. A second phrasing is in the retained earlier search records."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dugger localization criterion for homotopically surjective Quillen functors between combinatorial model categories",
+   "results": "{\"t\": \"2026-10-16T20:21:14Z\", \"tool\": \"leansearch\", \"query\": \"Dugger localization criterion for homotopically surjective Quillen functors between combinatorial model categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Localization.essSurj\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"CategoryTheory.Functor.IsLocalization\"], \"digest\": \"53d4df471540d6cc\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean and Localization/Bousfield.lean:13-28,46-63. The hits give ordinary cofibrant-object localization, formal localization criteria, or a particular injective-complex model structure; none constructs a set of maps presenting a homotopically surjective Quillen adjunction. A second phrasing is in the retained earlier search records."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quillen\"",
+   "results": "{\"t\": \"2026-10-16T20:21:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quillen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.exists_mono_quasiIso_injective\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a\", \"CochainComplex.Plus.modelCategoryQuillen.cm5a_cof\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithCofibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithFibrations\", \"CochainComplex.Plus.modelCategoryQuillen.instCategoryWithWeakEquivalences\", \"CochainComplex.Plus.modelCategoryQuillen.instModelCategory\"], \"digest\": \"422796c20ae7820d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean and Localization/Bousfield.lean:13-28,46-63. The hits give ordinary cofibrant-object localization, formal localization criteria, or a particular injective-complex model structure; none constructs a set of maps presenting a homotopically surjective Quillen adjunction. A second phrasing is in the retained earlier search records."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|homotopically|Quillen",
+   "results": "{\"t\": \"2026-10-16T20:21:17Z\", \"tool\": \"grep\", \"query\": \"Bousfield|homotopically|Quillen\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"954582a411718929\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read CofibrantObjectHomotopy.lean and Localization/Bousfield.lean:13-28,46-63. The hits give ordinary cofibrant-object localization, formal localization criteria, or a particular injective-complex model structure; none constructs a set of maps presenting a homotopically surjective Quillen adjunction. A second phrasing is in the retained earlier search records."
   }
  ],
  "mathlib_match": null,
@@ -112,5 +237,20 @@
   "date": "2026-10-16",
   "group": "Q13"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dugger-localization-criterion",
+  "worker": "stage1",
+  "summary": "Replaced the inherited compressed proof by seven explicit steps: auxiliary accessible replacements, derived-image calculation, normalized localization, separately cited Quillen descent, projective-replacement proof of filtered-colimit inheritance, natural colimit calculation of the unit, and direct unit/counit proof of the Quillen-equivalence criterion. The arbitrary replacement Q in the item is distinguished from Q_0. Corrected the provisional cardinal node and added the missing generic descent lemma. Both new nodes remain statement-only.",
+  "blueprint": "Foundation for prop-coef-integral-exceptional-adjoint proof paragraph 2, the finite-coefficient mapping-complex adjunction preceding R lim, through the recorded small combinatorial presentation chain; no unit-level proof step is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-8bdcce312",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8bdcce312 (reviewer sub-agent of L); spot-checked: Read the whole item, both new nodes and the statements of all six cited nodes; every cited node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Dugger (arXiv math/0007068): read Prop 2.3, section 2.4, Def 3.1, Prop 3.2 with its proof, and Prop 7.1. The item matches Prop 3.2 with the simplicial-source restriction already in the imported statement, which its only citer meets with U(D). Hirschhorn, scan read at printed p. 63: Prop 3.3.18(1) assumes only that L_C M exists and that F sends cofibrant approximations of maps in C to weak equivalences; this matches lem-coef-bousfield-quillen-descent. Step-by-step: Step 1 builds Dugger's set S. Step 2 inverts the derived image of s_A using the counit and the detection node in N. Step 3 normalizes S to cofibrations between cofibrant objects and checks every hypothesis of the existence node. Step 4 applies descent; trivial fibrations are unchanged, so Q_0 still computes the counit. Step 5 writes out Dugger's omitted filtered-colimit inheritance with projective replacements, the colim/const Quillen pair and two-out-of-three. Step 6 writes s_X as a filtered colimit of the s_{A_j}. Step 7 gives the Quillen-equivalence test from the unit/counit formulas. The cardinal-choice node is true: the five conditions hold for all large regular cardinals, using locally presentable implies locally lambda-presentable and AR 1.66. Neither new node duplicates bounded-resolutions, cofibrant-density, weak-equivalences-accessible or simplicial-bousfield-model-structure, and neither restates a clause of the item. Edge cases checked: identity adjunction, terminal target, empty S, non-cofibrant targets of s_A. No fixes and no SGA."
+ }
 }

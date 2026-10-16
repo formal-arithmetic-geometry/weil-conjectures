@@ -30,9 +30,104 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=\\mathcal A[W^{-1}]_\\infty$. Apply [lem-coef-brown-fibrant-localization-pullbacks] to $\\mathcal A^{\\mathrm{op}}$, with terminal object $0$ and fibrations $C^{\\mathrm{op}}$. Its terminal-map, pullback, trivial-pullback and weak-equivalence/fibration factorization hypotheses are respectively the initial-map, pushout, trivial-pushout and cofibration/weak-equivalence hypotheses of the item, with all arrows reversed. Isomorphisms and composition are in the specified classes, and $W^{\\mathrm{op}}$ has two-out-of-three. Opposite localization is localization of the opposite: the universal property follows by taking opposites of coherent functor categories, $\\operatorname{Fun}(B^{\\mathrm{op}},E)\\simeq\\operatorname{Fun}(B,E^{\\mathrm{op}})^{\\mathrm{op}}$. Hence that node gives finite colimits in $L$, sends $0$ to an initial object, and sends every cofibration pushout square to a coherent pushout, including its cocone and naturality. These are coherent universal properties in the sense of [def-cbc-enhanced-diagrams-cones], not colimits of the ordinary homotopy category.",
+   "uses": [
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual finite-localization statement of Theorem 7.5.18, used in the proof of Proposition 7.7.4 Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Coproducts preserve $W$ under the item hypotheses, by the following explicit Brown argument. For $f:X\\to Y$ in $W$, factor $(f,1_Y):X\\amalg Y\\to Y$ as $X\\amalg Y\\xrightarrow{j}Z\\xrightarrow{p}Y$ with $j\\in C$ and $p\\in W$. Each coproduct inclusion belongs to $C$, since it is a pushout of the other object's initial map. Thus $i=j\\operatorname{in}_X$ and $s=j\\operatorname{in}_Y$ belong to $C$; $pi=f$ and $ps=1_Y$ show by two-out-of-three that both belong to $W$. For a $\\mathcal U$-small family $f_a$, perform this construction for each $a$. Then $\\coprod_ai_a$ and $\\coprod_as_a$ belong to $C\\cap W$ by the assumed coproduct axiom, and $(\\coprod_ap_a)(\\coprod_as_a)=1$ forces $\\coprod_ap_a\\in W$. Therefore $\\coprod_af_a=(\\coprod_ap_a)(\\coprod_ai_a)\\in W$. All identities and compositions here are determined by coproduct coprojections using [def-weil-pbc-category-colimit]; no fibration, lifting property or functorial factorization is used. The empty family gives the identity of $0$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual elementary Brown argument of Corollary 7.4.14, as used in Proposition 7.7.4 Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Fix any $\\mathcal U$-small set $J$. The ordinary coproduct and diagonal functors $\\Sigma:\\mathcal A^J\\rightleftarrows\\mathcal A:\\Delta$ preserve the coordinatewise weak equivalences, by step 2 for $\\Sigma$ and directly for $\\Delta$. The comparison of [lem-coef-brown-localization-products] identifies the coherent localization of $\\mathcal A^J$ with $L^J$, since each factor has precisely the all-cofibrant Brown hypotheses already checked in step 1. Descend $\\Sigma,\\Delta$ and their ordinary unit and counit using the entire-functor-category localization property; the descended diagonal is the actual diagonal $L\\to L^J$ by restriction. Naturality, triangle identities and their coherence descend too, since restriction is an equivalence on the entire relevant functor categories. Explicitly the unit and counit give inverse maps of mapping spaces: $g:\\overline\\Sigma X\\to y$ goes to $\\Delta(g)\\eta_X$, and $h:X\\to\\Delta y$ goes to $\\epsilon_y\\overline\\Sigma(h)$; the two composites are identities by naturality and the triangles, including higher simplices. Thus $\\overline\\Sigma$ is left adjoint to the diagonal. This says exactly that its unit cocones are coproducts in $L$. On the family $(qX_a)$ that unit is the image of the ordinary coproduct coprojections, so $q$ preserves the asserted coproduct cocones. The product lemma includes $J=\\varnothing$, agreeing with step 1. Mapping spaces and coherent equivalences are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-coef-brown-localization-products",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.1.14 (localization of adjunctions preserving weak equivalences), dual of Proposition 7.7.1 and proof of Proposition 7.7.4; unit/counit descent written explicitly Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Steps 1 and 3 supply all pushouts and all $\\mathcal U$-small coproducts in $L$. Apply [lem-coef-infinity-small-colimit-generation] to obtain all $\\mathcal U$-small coherent colimits. This application imposes no local $\\mathcal U$-smallness condition: categories and their mapping spaces may lie in the common larger universe while only the indexing shapes must be $\\mathcal U$-small. Together with the actual cocones verified in steps 1 and 3, this proves the existence and localization-functor clauses of the item.",
+   "uses": [
+    "lem-coef-infinity-small-colimit-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual of Theorem 7.3.22, as used in Proposition 7.7.4; Remark 7.7.10 for the universe scope Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Let $T:N(\\mathcal A)\\to\\mathcal E$ satisfy the stated hypotheses, and let $\\overline T:L\\to\\mathcal E$ be its coherent factorization, with $\\overline Tq\\simeq T$. It preserves every pushout in $L$ as follows. Apply [lem-coef-brown-finite-direct-rectification] with the span category $(0\\leftarrow1\\to2)$ to represent any coherent span in $L$ by a strict span $B\\xleftarrow{u}A\\xrightarrow{v}D$ in $\\mathcal A$. Factor $u=pi$ with $i:A\\to B'\\in C$ and $p:B'\\to B\\in W$. The natural map of strict spans $(B'\\leftarrow A\\to D)\\to(B\\leftarrow A\\to D)$ has components $(p,1_A,1_D)$; after $q$ it is a coherent equivalence by [lem-cbc-enhanced-functor-cone-calculus]. The ordinary pushout $P=B'\\amalg_A D$ exists, and step 1 identifies its $q$-cocone as a pushout of the replacement span. By the preservation hypothesis on $T$, its $T$-cocone is a pushout in $\\mathcal E$. The equivalence $\\overline Tq\\simeq T$ identifies this with the $\\overline T$-image of the $q$-cocone. For an equivalence $e:S\\to S_0$ of span diagrams, precomposition sends a cocone $S_0\\to\\Delta x$ to its composite with $e$; precomposition with a chosen inverse of $e$ is inverse up to the whiskered inverse homotopies. These operations keep the apex and commute with $\\overline T$. The cocone categories are therefore equivalent. The dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] shows that initial cocones correspond. Any specified pushout of the original span is equivalent, as a cocone, to the one obtained this way: its mapping spaces to and from that cocone are contractible, so the two comparison arrows compose to identities up to homotopy. Applying $\\overline T$ keeps this equivalence, proving preservation of that specified pushout. All objects are cofibrant, so the factorization needs no extra cofibrancy or properness assumption.",
+   "uses": [
+    "lem-coef-brown-finite-direct-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Dual of Theorem 7.6.17 for the span; preservation part of Corollary 7.7.5, with the strict cofibration replacement and cocone calculation expanded Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Every object of $L$ is equivalent to some $qX$, by the singleton case of [lem-coef-brown-finite-direct-rectification]. Given any $\\mathcal U$-small family in $L$, choose such representatives for its entries in the common larger universe. Step 3 identifies its coproduct cocone, after these equivalences, with $q$ of the ordinary coproduct cocone of the representatives. Its image under $\\overline T$ is identified with $T$ of that cocone, which is a coproduct by the hypothesis on $T$. The chosen component equivalences and their inverses give inverse coherent maps between the two discrete diagrams. Precomposing cocones with these maps, as in step 5, gives inverse equivalences of cocone categories with unchanged apices, and this construction commutes with $\\overline T$. The mapping-space cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore proves preservation of the original coproduct cocone. This includes the empty family and hence initial objects. Apply the preservation assertion of [lem-coef-infinity-small-colimit-generation], using step 5 for pushouts, to conclude that $\\overline T$ preserves every $\\mathcal U$-small coherent colimit.",
+   "uses": [
+    "lem-coef-brown-finite-direct-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-small-colimit-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Corollary 7.7.5 and dual of Proposition 7.3.23: check coproducts on representatives, then use pushout/coproduct generation Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "The assumed localization universal property gives an equivalence $q^*:\\operatorname{Fun}(L,\\mathcal E)\\simeq\\operatorname{Fun}_W(N\\mathcal A,\\mathcal E)$ on entire coherent functor categories. Steps 5 and 6 say that a functor on the right with the stated initial-object, coproduct and cofibration-pushout preservation lies in the image of a colimit-preserving functor. Conversely, if $F:L\\to\\mathcal E$ preserves all $\\mathcal U$-small colimits, then $Fq$ inverts $W$ and preserves those cocones because steps 1 and 3 proved that $q$ does. Thus $q^*$ identifies exactly the indicated objects. Both subcategories in the assertion are full: restricting this equivalence to those objects keeps every transformation and every higher simplex. This proves the transformation clause, rather than merely an objectwise factorization.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proof of Theorem 7.7.7 and dual Theorem 7.7.9: restrict the localization equivalence to matching full subcategories Read online; not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-brown-fibrant-localization-pullbacks",
+  "lem-coef-brown-finite-direct-rectification",
+  "lem-coef-brown-localization-products",
+  "lem-coef-infinity-small-colimit-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent homotopy-colimit foundation used by small-diagram rectification. Expansion of Cisinski Proposition 7.7.4 and Theorem 7.7.9, with the Brown coproduct argument, finite-span rectification and small-colimit generation separated. The book was read online but is not archived in literature/; WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +184,46 @@
    "results": "{\"t\": \"2026-10-16T19:50:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "No match on independent second reading. Read the returned ordinary evaluation adjunction (Adjunction/Evaluation.lean:38-74), ordinary partial-adjoint representability (Adjunction/PartialAdjoint.lean:51-84), ordinary DenseAt definition (Functor/KanExtension/DenseAt.lean:50-62), and ordinary cofibrant HoCat construction (ModelCategory/CofibrantObjectHomotopy.lean:32-105). Model coproduct stability supplies only an elementary axiom check. None states this infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "cofibration.category|homotopy.cocontinu|cocomplete.*locali[sz]",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-16T20:20:49Z\", \"tool\": \"grep\", \"query\": \"cofibration.category|homotopy.cocontinu|cocomplete.*locali[sz]\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: CofibrantObjectHomotopy.lean:30-112 constructs an ordinary quotient/HoCat and ordinary localization, not the full coherent cocompletion. Instances.lean:258-275 gives coproduct stability under model WFS hypotheses only. No result supplies this Brown infinity-localization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown cofibration category localization preserves homotopy colimits",
+   "results": "{\"t\": \"2026-10-16T20:20:50Z\", \"tool\": \"leansearch\", \"query\": \"Brown cofibration category localization preserves homotopy colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\"], \"digest\": \"84f1b77126df9abc\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: CofibrantObjectHomotopy.lean:30-112 constructs an ordinary quotient/HoCat and ordinary localization, not the full coherent cocompletion. Instances.lean:258-275 gives coproduct stability under model WFS hypotheses only. No result supplies this Brown infinity-localization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-16T20:20:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: CofibrantObjectHomotopy.lean:30-112 constructs an ordinary quotient/HoCat and ordinary localization, not the full coherent cocompletion. Instances.lean:258-275 gives coproduct stability under model WFS hypotheses only. No result supplies this Brown infinity-localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinity localization of an all cofibrant Brown cofibration category with arbitrary coproducts admits small colimits",
+   "results": "{\"t\": \"2026-10-16T20:20:53Z\", \"tool\": \"leanfinder\", \"query\": \"The infinity localization of an all cofibrant Brown cofibration category with arbitrary coproducts admits small colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.instCofibrationInrOfIsCofibrant\", \"HomotopicalAlgebra.instCofibrationInlOfIsCofibrant\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_trivialCofibrations\"], \"digest\": \"a41c5a3c1747fd04\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: CofibrantObjectHomotopy.lean:30-112 constructs an ordinary quotient/HoCat and ordinary localization, not the full coherent cocompletion. Instances.lean:258-275 gives coproduct stability under model WFS hypotheses only. No result supplies this Brown infinity-localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cocontinuous functors from Brown cofibration categories are exactly colimit preserving functors on their infinity localizations",
+   "results": "{\"t\": \"2026-10-16T20:21:22Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cocontinuous functors from Brown cofibration categories are exactly colimit preserving functors on their infinity localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\"], \"digest\": \"7033d851d9a3e4a9\"}",
+   "date": "2026-10-16",
+   "verdict": "No match: CofibrantObjectHomotopy.lean:30-112 constructs an ordinary quotient/HoCat and ordinary localization, not the full coherent cocompletion. Instances.lean:258-275 gives coproduct stability under model WFS hypotheses only. No result supplies this Brown infinity-localization theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-diagram-model-rectification",
@@ -100,5 +231,29 @@
   "group": "Q51"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocomplete-cofibration-localization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Dualized the existing Brown finite-localization theorem, proved coproduct weak-equivalence stability from factorization and the coproduct axiom, descended the coproduct/diagonal adjunction using an arbitrary-product comparison, and checked preservation on strict cofibration replacements of coherent spans and on representative families. Three new statement-only generic inputs; no model structure assumed and no downstream rectification node used. Full functor-category restriction supplies the transformation clause.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: coherent homotopy-colimit foundation used by small-diagram rectification. The item supplies the homotopy-colimit foundation of the pre-existing small-diagram rectification branch; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence and cocone mapping-space/initial-object calculus, used to transfer coherent span and coproduct cocones; no statement in this unit provides this general quasicategory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-2704e3604",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-2704e3604 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, the 3 new nodes and every cited statement in full: brown-fibrant-localization-pullbacks, def-cbc-enhanced-diagrams-cones, cbc-enhanced-functor-cone-calculus, weil-pbc-category-colimit. Statement unchanged. Step 1: the Brown pullback node applied to A^op, every hypothesis matched (terminal=0, F=C^op, pullbacks=pushouts, W-then-F = C-then-W). Step 2: elementary coproduct argument checked line by line (inclusions are pushouts of initial maps, i,s in C∩W, coproduct axiom, two-out-of-three). Step 3: descent of the Σ/Δ adjunction through the product-localization node with J=∅ included; mapping-space inverse maps written out. Steps 4 and 6: generation existence and preservation. Step 5: span rectification, factor u=pi, componentwise equivalence (p,1,1), transfer of cocones. Step 7: restriction to full subcategories. New nodes are true, self-contained, statement-only and strictly smaller than the item. Edge cases tested: empty J/I/family, a singleton, the span, and W = isomorphisms. Not duplicates: system-localization-universal gives only finite products; finite-reedy and small-diagram rectification need model hypotheses (the latter depends on this item); finite-shape generation is finite and existence only; Q83's infinity-limits-products-pullbacks is the κ-bounded limit-preservation result with no existence clause. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic cone/equivalence calculus). Closure acyclic (101 nodes). No target, base-change morphism or coefficient category touched; no SGA. The Cisinski CatLR source is not archived and network access is blocked here, so its numbered places were checked from knowledge of the book and HTT 4.4.2.6/4.4.2.7, not against the text; it stays WANTED and proof_origin agent. The 'dual Theorem 7.7.9' wording could not be confirmed without the book; it does not affect the mathematics. No fixes."
+ }
 }

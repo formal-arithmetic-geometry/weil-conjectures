@@ -24,10 +24,125 @@
   },
   "same_as": []
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Use the coherent nerve and functor conventions of [def-cbc-enhanced-diagrams-cones] and the cocartesian convention of [def-coef-infinity-fibrations]. In the definition of a symmetric monoidal infinity category in the statement, the fiber equivalences are induced by precisely the maps $\\rho_i$. Thus the only condition imposed on a cocartesian fibration over $N(\\mathsf{Fin}_*)$, besides being a cocartesian fibration, is that these fiber maps be equivalences, also for the empty family.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 2.0.0.7 and 2.4.2.1; Remark 2.1.2.19 (the condition being compared is explicitly defined in the item)"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cocartesian-straightening] with $S=N(\\mathsf{Fin}_*)$. For every $i$, its identification of fibers and transport identifies pushforward along $\\rho_i$ with $F(\\rho_i)$. Consequently the fiber equivalence of step 1 is exactly the displayed Segal equivalence. Restrict the general straightening equivalence to the full subcategories of objects satisfying these conditions. Its inverse restricts as well: unstraightening such an $F$ has fibers $F(\\langle n\\rangle)$ and the prescribed transport, hence satisfies step 1. When $n=0$, the product is terminal and the condition is $F(\\langle0\\rangle)\\simeq *$; when $n=1$, $\\rho_1$ is the identity.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 2.4.2.4; HTT Theorem 3.2.0.1"
+   }
+  },
+  {
+   "text": "Write $\\mu_n:\\langle n\\rangle\\to\\langle1\\rangle$ for the map sending each non-basepoint to $1$, and use $F(\\mu_n)$ after the Segal equivalence as the tensor. For $n=0$ this is a functor from a terminal category selecting the unit; for $n=1$ it is the identity. For a general pointed map $\\alpha$, the identity $\\rho_j\\alpha=\\mu_{|\\alpha^{-1}(j)|}\\pi_j$, where $\\pi_j$ selects that block, identifies its $j$th output with the tensor of the inputs in that block. Composing pointed maps composes these partitions, so the image under $F$ of each composable string supplies its associativity comparison. Identity maps supply unit comparisons and permutations supply symmetry comparisons. The higher simplices for these strings and their faces give their compatibility, since they are images under a single functor $F$. This describes the coherences, rather than imposing equations on tensor operations alone.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.4.2.3 and Remark 2.1.2.20"
+   }
+  },
+  {
+   "text": "The definition of the infinity category $\\operatorname{coCart}(S)$ in [lem-coef-cocartesian-straightening], with the core convention of [def-cbc-enhanced-diagrams-cones], identifies its mapping spaces with the cores of the strong-functor subcategories. Its straightening equivalence therefore identifies the space of natural transformations $F_{\\mathcal A}\\to F_{\\mathcal B}$ with the core of the full subcategory of functors over $N(\\mathsf{Fin}_*)$ preserving cocartesian edges. By the definition in the item these are exactly strong symmetric monoidal functors. Restricting to Segal objects changes neither mapping space. Thus the correspondence includes natural equivalences between those strong functors and every higher homotopy. This assertion concerns the mapping spaces of the classification; the full infinity category $\\operatorname{Fun}^{\\otimes}$ used next also keeps noninvertible monoidal transformations.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.3.7 and Remark 2.4.2.6, together with general straightening"
+   }
+  },
+  {
+   "text": "We will use the following elementary pullback check. For a cocartesian fibration $q:E\\to B$ and $a:T\\to B$ with $T$ a quasicategory, the degreewise pullback $q_T:T\\times_B E\\to T$ is an inner fibration, because each inner-horn problem is a problem for $q$ with its $T$-coordinate fixed. The same argument with the outer horns in [def-coef-infinity-fibrations] shows that every $q$-cocartesian lift pulls back to a $q_T$-cocartesian lift; these provide lifts for every base edge. Conversely, let $v:x\\to y$ be $q_T$-cocartesian over $\\alpha:t\\to t\\prime$, and choose a $q$-cocartesian lift $w:x\\to y\\prime$ of $a(\\alpha)$. The $K=\\Delta^0$ mapping-space fiber formula of [lem-coef-infinity-pointwise-cocartesian-transport] factors the image of $v$ as $h w$, with $h:y\\prime\\to y$ in the common target fiber. By [lem-coef-infinity-cocartesian-mapping-criterion], applied to the inner fibration $q_T$ between quasicategories, $v$ and the pulled-back $w$ satisfy the homotopy-pullback mapping squares of [lem-coef-cocartesian-straightening]; restricted to that fiber, they says that precomposition by $h$ induces equivalences $\\operatorname{Map}(y,z)\\to\\operatorname{Map}(y\\prime,z)$ for every $z$ in the fiber. At $z=y\\prime$ this gives $g:y\\to y\\prime$ with $gh\\simeq\\mathrm{id}$; injectivity on components at $z=y$ then gives $hg\\simeq\\mathrm{id}$. Hence $h$ is an equivalence. Precomposition with an equivalence preserves the homotopy-pullback mapping square for $w$, so $h w$, the image of $v$, satisfies it, and the converse direction of [lem-coef-infinity-cocartesian-mapping-criterion] for $q$ shows that it is $q$-cocartesian. Thus an edge of the pullback is cocartesian exactly when its $E$-component is. This proves the edge criterion here rather than attributing it to a clause absent from the current straightening node.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual Proposition 2.4.2.3(2) and Remark 2.4.2.13; explicit horn and fiber-universal-property argument from the cited statements."
+   }
+  },
+  {
+   "text": "Set $S=N(\\mathsf{Fin}_*)$ and, using [lem-coef-infinity-cocartesian-mapping-criterion] to identify its horn-cocartesian edges with the mapping-square cocartesian edges, apply [lem-coef-infinity-pointwise-cocartesian-transport] to $p:\\mathcal B^\\otimes\\to S$. The pullback clause of [lem-coef-cocartesian-straightening], applied along the constant-diagram map $S\\to\\operatorname{Fun}(K,S)$, identifies the classifying diagram of the pullback $D_K\\to S$. The horn and edge check in step 5 gives its cocartesian fibration structure and detects its cocartesian edges in the functor category. Combined with the vertex criterion, these are exactly the pointwise cocartesian edges. This pullback has fiber $\\operatorname{Fun}(K,F_{\\mathcal B}(\\langle n\\rangle))$ and transport obtained by postcomposing with that of $\\mathcal B^\\otimes$. Hence straightening identifies its diagram with the one in the statement. Its transport is obtained by taking the pointwise lifts supplied by that theorem, now lying over a constant-base transformation. The Segal equivalences follow because taking simplicial maps from $K\\times\\Delta^r$ commutes with products in every degree, so $\\operatorname{Fun}(K,F_{\\mathcal B}(\\langle1\\rangle)^n)=\\operatorname{Fun}(K,F_{\\mathcal B}(\\langle1\\rangle))^n$. The functor-category theorem [lem-coef-infinity-functor-pushout] ensures these internal Homs are quasicategories and preserve equivalences. Its underlying category is $\\operatorname{Fun}(K,\\mathcal B)$, and its tensors and unit are evaluated at each vertex, by the pointwise transport description.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-functor-pushout",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4; dual HTT Proposition 3.1.2.1"
+   }
+  },
+  {
+   "text": "Simplicial currying gives an isomorphism between functors $\\mathcal A^\\otimes\\to D_K$ over $S$ and functors $K\\to\\operatorname{Fun}_S(\\mathcal A^\\otimes,\\mathcal B^\\otimes)$. Explicitly an $r$-simplex on either side is a map $K\\times\\mathcal A^\\otimes\\times\\Delta^r\\to\\mathcal B^\\otimes$ whose composite with $p$ is the projection through $\\mathcal A^\\otimes\\to S$. These identifications commute with every face and degeneracy. By the pullback edge criterion proved in step 5 from [def-coef-infinity-fibrations], [lem-coef-cocartesian-straightening] and [lem-coef-infinity-pointwise-cocartesian-transport] and the vertex criterion of [lem-coef-infinity-pointwise-cocartesian-transport], a vertex on the left preserves cocartesian edges exactly when each vertex $k$ of $K$ gives a cocartesian-edge-preserving functor on the right. A full subcategory contains exactly simplices whose vertices belong to it, so the isomorphism restricts to the two full subcategories displayed in the statement, including their noninvertible transformations. Permuting the $K$ and $\\mathcal A^\\otimes$ factors and evaluating proves naturality in $K$, $\\mathcal A$ and $\\mathcal B$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4 and Definition 2.1.3.7; explicit restriction of simplicial currying"
+   }
+  },
+  {
+   "text": "For an ordinary symmetric monoidal $A$, use its operadic category $A^\\otimes$: objects are finite tuples and the arrows over $\\alpha$ are the block maps in the statement. Its composition sends block maps $f_j$ over $\\alpha$ and $g_k$ over $\\beta$ to $g_k\\circ(\\bigotimes_{\\beta(j)=k}f_j)$ after the structural regrouping $\\bigotimes_{\\beta\\alpha(i)=k}X_i\\cong\\bigotimes_{\\beta(j)=k}(\\bigotimes_{\\alpha(i)=j}X_i)$. For a tuple $X$ and $\\alpha$, put $Y_j=\\bigotimes_{\\alpha(i)=j}X_i$ and take all block maps to be identities. For every subsequent pointed map $\\beta$ and target tuple $Z$, precomposition with this arrow is a bijection on arrows over $\\beta$ onto arrows from $X$ over $\\beta\\alpha$: both consist of the maps $\\bigotimes_{\\beta\\alpha(i)=k}X_i\\to Z_k$, using exactly the displayed regrouping. A nerve simplex is a string of composable arrows, so an inner horn already determines the missing composite; hence the nerve of any ordinary functor is an inner fibration. Its mapping spaces are the discrete Hom sets: in the right-pinched model every initial vertex is fixed and the remaining edge must be the same in every face. Thus the preceding Hom-set bijection is precisely the homotopy cartesian mapping square defining a cocartesian edge in [lem-coef-cocartesian-straightening]; by [lem-coef-infinity-cocartesian-mapping-criterion] for this inner fibration of quasicategories, the identity block map is a horn-cocartesian lift in $N(A^\\otimes)$. The fiber over $\\langle n\\rangle$ is $N(A^n)$, which is $N(A)^n$ because a chain in a product category is a tuple of chains. Inert projections select the individual objects. The empty tuple is the unique object and arrow of the zero fiber; empty blocks give the tensor unit. Hence these fibers satisfy the Segal condition, and the fiber over $\\langle1\\rangle$ is $N(A)$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.0.0.1 (the ordinary operadic category); Example 2.1.2.21; the cocartesian check is the explicit Hom-set bijection above"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-functor-pushout",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 2.0.0.1, Remark 2.1.2.19, Example 2.1.2.21, Remark 2.1.3.4, Definition 2.1.3.7, Definition 2.4.2.1, Example 2.4.2.4; HTT Theorem 3.2.0.1 and dual Proposition 3.1.2.1. Pointwise/currying and ordinary nerve checks are written out. Repair step 5 expands the dual HTT Proposition 2.4.2.3(2)/Remark 2.4.2.13 argument using the existing mapping-space fiber formula. Higher Algebra and Higher Topos Theory are not in literature/ (read online; WANTED), so the proof is recorded as agent-written."
+ },
  "mathlib_match": null,
  "id": "lem-coef-symmetric-monoidal-segal-classification",
  "title": "Symmetric monoidal infinity categories as Segal diagrams",
@@ -69,5 +184,34 @@
    "verdict": "No exact match. Read Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean:15-34,49-74 and SimplicialSet/StrictSegal.lean:39-58. QCat is a strict bicategory with homotopy-category homs; StrictSegal concerns unique simplex spine extensions. Neither classifies symmetric monoidal infinity categories or strong functor infinity categories."
   }
  ],
- "kind": "statement"
+ "kind": "statement",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-monoidal-segal-classification",
+  "worker": "stage1",
+  "summary": "Repair of the name-collision return: discard the never-landed duplicate general-straightening file and reuse the current Q57 lem-coef-cocartesian-straightening unchanged. Re-read every cited statement; the retained quotes changed only for this node. Add an explicit elementary pullback edge-detection argument for the extra clause absent from the current node, adjust the pointwise and currying steps, and regenerate all citations from current statements. Eight steps and zero new nodes; statement, hypotheses and blueprint ancestry are unchanged.",
+  "blueprint": "The steps realize the ancestor proof's clause 'encode the coherent tensor on coefficient models by its finite-pointed-set diagram before descending operations and their coherent comparisons' in prop-coef-integral-exceptional-adjoint, using the HA classification places recorded above.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Generic coherent simplicial, functor-category, core, and mapping-space conventions used to state and check the infinity-categorical constructions; no node in this coefficient unit defines these foundations."
+   },
+   {
+    "node": "lem-coef-infinity-functor-pushout",
+    "why": "Only its cartesian closedness and coherent internal-Hom clause is used, as a generic infinity-categorical tool; no coefficient or geometric argument changes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-functor-pushout"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-b3c9737e3",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-b3c9737e3 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, every cited node statement in full and both citers' uses. The delivery adds no new nodes; the DAG search for Fin_*, Segal and symmetric monoidal infinity found no duplicate. The statement agrees with HA Def 2.0.0.7, Constr. 2.0.0.1, Def 2.4.2.1, Rem 2.4.2.6, Rem 2.1.3.4 and Def 2.1.3.7. HA and HTT are not in literature/, so these places were checked from my knowledge of the texts. Steps checked: Segal restriction of straightening (n=0 and n=1); the identity rho_j alpha = mu pi_j; mapping spaces of coCart as cores; the pullback edge criterion (the hand-written Yoneda inverse is correct); pointwise structure via the constant-base pullback and Fun(K,X^n)=Fun(K,X)^n; currying as an isomorphism of r-simplices that restricts to full subcategories; and the operadic-nerve block bijection with discrete mapping spaces and inner-fibration nerve. Edge cases n=0, K empty and empty blocks are fine. Two repairs, written to fixes/: (1) steps 5, 6 and 8 used the vague 'equivalent after replacement over S' sentence of lem-coef-cocartesian-straightening for the horn vs mapping-square cocartesian comparison; they now cite the exact same-unit node lem-coef-infinity-cocartesian-mapping-criterion (no cycle), step 5 states that T is a quasicategory, and proof_deps is updated. (2) proof_origin.by is changed from document to agent, since HA and HTT are only online (brief §4, as in sibling nodes). The 'classified by' clause is read as values plus postcomposition transport, which is all the citers use. The declared tool_uses are harmless but unnecessary: functor-pushout is in the same unit and def-cbc is a definition. No statement was changed.; 1 file(s) fixed by the reviewer"
+ }
 }
