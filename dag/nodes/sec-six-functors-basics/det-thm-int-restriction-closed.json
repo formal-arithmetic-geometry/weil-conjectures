@@ -3,42 +3,225 @@
  "blueprint": {
   "is": "det-thm-int-restriction-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integral exceptional inverse image along a closed immersion",
- "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion. For\n$K\\in\\Dbc(X,\\mathcal O_E)$, $R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\mathcal O_E)$, and\nthere is an isomorphism $i^!K\\simeq R\\underline\\Gamma_ZK$, natural in $K$,\nwhere $i^!$ is the right adjoint of [sk-prop-int-brown].",
+ "statement": "Work in the standing setting [sk-def-sfb-dc-setting]: fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and separated finite-type $k$-schemes. Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], regarded as a condensed ring [sk-def-sfb-condensed-ring]. All derived categories use module objects over the pulled-back coefficient ring $\\mathcal O_{E,T}$ [sk-def-sfb-module-objects], and $\\Dbc$ means bounded constructible complexes [sk-def-sfb-constructible]. Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $R\\underline\\Gamma_Z$ be the derived sections-with-support functor of [det-lem-formal-closed-support-derived]. For $K\\in\\Dbc(X,\\mathcal O_E)$, one has $R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\mathcal O_E)$ and an isomorphism $i^!K\\simeq R\\underline\\Gamma_ZK$, natural in $K$, where $i^!$ is the integral right adjoint of [det-prop-int-brown-adjoint] on the full localizing categories $\\Loc(\\Dbc(-,\\mathcal O_E))$ [sk-def-localizing-closure].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.md",
   "place": "node det-thm-int-restriction-closed, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-closed-immersion",
+  "det-lem-formal-closed-support-derived",
+  "det-prop-int-brown-adjoint",
+  "sk-def-localizing-closure"
+ ],
  "proof": [
   {
-   "text": "Let $j:U\\hookrightarrow X$ be the open complement, quasi-compact since $X$ is\nNoetherian. The localization triangle\n$i_*R\\underline\\Gamma_ZK\\to K\\to Rj_*j^*K\\to$ exists for\n$\\mathcal O_{E,X}$-modules with the same proof as in\n[det-prop-closed-adjoint-constructible-support] (the formal properties of\n$R\\underline\\Gamma_Z$, [sk-lem-formal-closed-support], hold for any sheaf of\nrings). Its third term lies in $\\Dbc(X,\\mathcal O_E)$ by\n[det-thm-sf-pf-adic-open], so the first does, and\n$R\\underline\\Gamma_ZK\\simeq i^*i_*R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\mathcal O_E)$,\nsince $i^*$ preserves integral constructibility. The Yoneda argument of\n[det-prop-closed-adjoint-constructible-yoneda] applies verbatim: for $A$ in\n$\\Loc(\\Dbc(Z,\\mathcal O_E))$, both $\\Hom(A,i^!K)$ and\n$\\Hom(A,R\\underline\\Gamma_ZK)$ are identified with $\\Hom(i_*A,K)$ through the\ncounits, using $Ri_!=i_*$ and that the localizing categories are full\nsubcategories of the pro-étale derived categories. Hence\n$i^!K\\simeq R\\underline\\Gamma_ZK$, naturally in $K$.",
+   "text": "Let $j:U\\hookrightarrow X$ be the open complement of $i$. The field $k$ is Noetherian (its only ideals are $0,k$), hence $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For each affine open $V\\subseteq X$, the open subscheme $U\\cap V$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], applied to the Noetherian scheme $X$. Thus $j$ is quasi-compact. It is of finite type by [lem-weil-pbc-qc-open-immersion-finite-type] and separated by [lem-weil-pbc-separated-cancellation](a). Also $U$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Write $a_X:X\\to\\operatorname{Spec}k$ for the structure morphism and equip $U$ with $a_U=a_Xj$. The composite $a_U$ is separated and locally of finite type by [lem-weil-pbc-proper-fp-permanence](e). It is quasi-compact since every affine open of $\\operatorname{Spec}k$ is either empty or the whole one-point space, with preimage empty or $U$. Consequently $a_U$ is of finite type by [def-weil-finite-type-morphism], so $U$ is a standing scheme and $j$ a morphism of the setting. The coefficient ring is the pulled-back condensed $\\mathcal O_E$, so it is among the admissible coefficient rings in [det-lem-formal-closed-support-sheaves]. In particular its assertion (2) gives exactness of the direct image $i_*$.",
    "uses": [
-    "det-prop-closed-adjoint-constructible-support",
-    "sk-lem-formal-closed-support",
-    "det-thm-sf-pf-adic-open",
-    "det-prop-closed-adjoint-constructible-yoneda"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "det-lem-formal-closed-support-sheaves",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Opening sentence; coefficient-ring scope of the formal support construction"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is proper, hence separated of finite type, by [lem-weil-pbc-closed-immersion-proper](a). Use the compactification $c=(Z\\xrightarrow{\\mathrm{id}_Z}Z\\xrightarrow{i}X)$. Its open map is quasi-compact: the preimage of any affine open under the identity is that affine open itself. Apply the current compactification formula in [det-prop-int-brown-construction] to obtain $Ri_!^c=Ri_*D((\\mathrm{id}_Z)_!)$. Extension by zero along the identity is the identity on sheaves and its termwise functor $D((\\mathrm{id}_Z)_!)$ is therefore the identity on complexes and the derived category. The same cited statement supplies the canonical comparison from the chosen compactification defining $Ri_!$ to $c$, so $Ri_!\\simeq Ri_!^c\\simeq Ri_*$. Since $i_*$ is exact by step 1, applying it termwise to a quasi-isomorphism preserves cohomology isomorphisms; applying it to the K-injective resolution that computes $Ri_*$ thus gives $Ri_*\\simeq i_*$. These natural identifications give $Ri_!\\simeq i_*$ on the integral localizing categories.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "det-prop-int-brown-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Final paragraph: use Ri_!=i_* for a closed immersion"
+   }
+  },
+  {
+   "text": "Apply [det-lem-formal-closed-support-derived](1),(3) with $\\Lambda=\\mathcal O_E$. It supplies the natural distinguished triangle $F\\to K\\to Rj_*j^*K\\to F[1]$, with $F=i_*R\\underline\\Gamma_ZK$, the isomorphism $R\\underline\\Gamma_ZK\\simeq i^*F$, and the natural adjunction $\\operatorname{Hom}_X(i_*A,K)\\simeq\\operatorname{Hom}_Z(A,R\\underline\\Gamma_ZK)$ on the ambient derived categories. Its sheaf-level hypotheses are precisely the standing scheme and admissible pulled-back coefficients checked in step 1.",
+   "uses": [
+    "det-lem-formal-closed-support-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Localization triangle and formal support adjunction"
+   }
+  },
+  {
+   "text": "Apply [det-lem-int-tensor-pullback](1) to the morphism $j:U\\to X$ of standing schemes verified in step 1, obtaining $j^*K\\in\\Dbc(U,\\mathcal O_E)$. Apply the current [det-thm-sf-pf-adic-open] with this input: its prime $\\ell$, field $k$ of positive characteristic different from $\\ell$, and finite extension $E/\\mathbf Q_\\ell$ are exactly those fixed in the statement, and $j$ is quasi-compact by step 1. Its coefficient sheaves $\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}$, called completed coefficient sheaves there, are the pulled-back condensed coefficient rings used here; its derived direct image and constructible subcategory are the same module-object ones. Hence $C=Rj_*j^*K$ lies in $\\Dbc(X,\\mathcal O_E)$. Apply clause (1) of the current [det-lem-int-integral-heart-triangulated]. Its field $k$, prime $\\ell$, standing scheme $X$, and finite extension $E$ are those fixed here; choose the uniformizer of the coefficient-extension data. Its completed coefficient sheaf $R_X=\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ is exactly our pulled-back ring, and its ordinary unbounded category $D(\\operatorname{Mod}(R_X))$ is our ambient module-object derived category. Thus its stated full triangulated subcategory is precisely $\\Dbc(X,\\mathcal O_E)$ used here. Since $K$ and $C$ belong to it, the cone of their unit map $K\\to C$ belongs to it; closure under shifts puts $\\operatorname{cone}(K\\to C)[-1]$ in it as well. Rotating the distinguished triangle of step 3 identifies its first term $F=i_*R\\underline\\Gamma_ZK$ with this shifted cone. Membership in the full constructible subcategory is invariant under isomorphism, so $F\\in\\Dbc(X,\\mathcal O_E)$. No assertion about the integral heart, truncations, or essential smallness is used in this inference. Finally apply [det-lem-int-tensor-pullback](1) to $i:Z\\to X$, whose source and target are standing schemes. Only its preservation assertion (1) is needed: the current scalar-restriction comparison with the constant-sheaf completed inverse image in (2) is not used. Combining (1) with the fiber formula of step 3 gives $R\\underline\\Gamma_ZK\\simeq i^*F\\in\\Dbc(Z,\\mathcal O_E)$. This proves the support constructibility clause over integral coefficients.",
+   "uses": [
+    "det-lem-int-tensor-pullback",
+    "det-thm-sf-pf-adic-open",
+    "det-lem-int-integral-heart-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Sentence beginning Its third term lies in Dbc, followed by inverse image"
+   }
+  },
+  {
+   "text": "Put $B=i^!K$ and $H=R\\underline\\Gamma_ZK$, and write $\\mathcal T_T=\\Loc(\\Dbc(T,\\mathcal O_E))$. Apply the current [det-prop-int-brown-adjoint] to $f=i$: the standing separated finite-type schemes and pulled-back condensed coefficients are those of the statement, and step 2 verifies the morphism hypothesis. Its $Ri_!$ is defined using the chosen compactification and the same module-object convention as step 2, so the natural identification $Ri_!\\simeq i_*$ applies to this very left adjoint. The equality $\\Dctf(-,\\mathcal O_E)=\\Dbc(-,\\mathcal O_E)$ recorded in that Brown statement identifies the constructible generators with those in [sk-def-localizing-closure]. Thus $K\\in\\mathcal T_X$, $H\\in\\mathcal T_Z$ by step 4, and $B\\in\\mathcal T_Z$ by the Brown right adjoint's stated codomain. For every $A\\in\\mathcal T_Z$, the explicitly stated natural Brown bijection $\\operatorname{Hom}(Ri_!A,K)\\simeq\\operatorname{Hom}(A,i^!K)$, inverted and composed with step 2 and [det-lem-formal-closed-support-derived](1), gives $\\Phi_A:\\operatorname{Hom}(A,B)\\simeq\\operatorname{Hom}(i_*A,K)\\simeq\\operatorname{Hom}(A,H)$, natural in $A$ and $K$. Fullness in [sk-def-localizing-closure] identifies these Hom sets with the ambient derived Hom sets. Only the given adjunction and its naturality are used; no unqualified uniqueness assertion or preservation of the whole localizing category by the ambient support functor is required.",
+   "uses": [
+    "det-prop-int-brown-adjoint",
+    "det-lem-formal-closed-support-derived",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Yoneda paragraph: the two natural Hom identifications"
+   }
+  },
+  {
+   "text": "Write $\\alpha_K=\\Phi_B(1_B):B\\to H$ and $\\beta_K=\\Phi_H^{-1}(1_H):H\\to B$. Naturality in $A$ says $\\Phi_A(g)=\\alpha_Kg$. Consequently $\\alpha_K\\beta_K=1_H$; injectivity of $\\Phi_B$ then gives $\\beta_K\\alpha_K=1_B$, since both sides map to $\\alpha_K$. For a map $u:K\\to L$, naturality of $\\Phi$ in $K$, evaluated at $1_{i^!K}$, gives $(R\\underline\\Gamma_Zu)\\alpha_K=\\alpha_L(i^!u)$. Thus the $\\alpha_K$ form the required natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+    "place": "Last sentence: explicit Yoneda inverse and naturality"
+   }
   }
  ],
  "proof_deps": [
-  "det-prop-closed-adjoint-constructible-support",
-  "sk-lem-formal-closed-support",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "det-lem-formal-closed-support-sheaves",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-immersion-proper",
+  "det-prop-int-brown-construction",
+  "det-lem-formal-closed-support-derived",
+  "det-lem-int-tensor-pullback",
   "det-thm-sf-pf-adic-open",
-  "det-prop-closed-adjoint-constructible-yoneda"
+  "det-lem-int-integral-heart-triangulated",
+  "det-prop-int-brown-adjoint",
+  "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+  "place": "Localization, integral constructibility, and counit Hom comparison; last sentence expanded explicitly"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral exceptional inverse image along a closed immersion sections with support derived constructible",
+   "results": "AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion; Topology.IsConstructible.preimage_of_isClosedEmbedding; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.IsConstructible.image_of_isClosedEmbedding; AlgebraicGeometry.instIsClosedImmersionLiftCoborder; AlgebraicGeometry.Scheme.Hom.isConstructible_image; PrimeSpectrum.exists_range_eq_of_isConstructible; AlgebraicGeometry.Scheme.Hom.coborderRange",
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale constructibility and support-identification theorem",
+   "digest": "12effa277c73e856"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory, IsIso, closed immersion",
+   "results": "No hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-16",
+   "verdict": "invalid query (unknown identifier IsIso); not evidence of absence",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|rightDerivedUpperShriek",
+   "results": "No hits; subdirectory CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale constructibility and support-identification theorem",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoint of closed immersion direct image equals derived sections with support over integral coefficients",
+   "results": "CategoryTheory.instIsRightAdjointSheafΓ; SheafOfModules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ; AlgebraicGeometry.Scheme.Hom.appIso; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ; AlgebraicGeometry.Scheme.Hom.app_surjective",
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale constructibility and support-identification theorem",
+   "digest": "d3cc35fa3089fd7d"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived local cohomology with support in a closed subscheme preserves bounded constructible l adic sheaves and is right adjoint to extension by zero",
+   "results": "localCohomology.diagram; localCohomology.ofSelfLERadical; localCohomology; localCohomology.ofDiagram; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; localCohomology is a functor on ordinary modules defined by colimits of Ext, not the pro-etale integral support theorem (source read)",
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale constructibility and support-identification theorem",
+   "digest": "4d63c25c9d0788b7"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-16",
+   "verdict": "generic uniqueness of right adjoints only; the two integral support representing objects are constructed in the proof",
+   "digest": "5eabcb2dd173fdd6"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|localCohomology|LocalCohomology|exceptionalInverseImage",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; subdirectory all Mathlib",
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale constructibility and support-identification theorem",
+   "digest": "1b64f7a08010717e"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inclusion of a closed subscheme, extraordinary pullback is the derived functor of sections supported on that subscheme on bounded constructible integral adic complexes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.IdealSheafData.comap; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "date": "2026-10-16",
+   "verdict": "ordinary structure-sheaf modules or module local cohomology only; no match for integral pro-etale constructibility and Brown support comparison",
+   "digest": "f93d3ca5ddb1e3c9"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|sectionsSupport|supportFunctor|closedImmersionAdjunction",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-16",
+   "verdict": "ordinary structure-sheaf modules or module local cohomology only; no match for integral pro-etale constructibility and Brown support comparison",
+   "digest": "1b64f7a08010717e"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_app",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointUniq_hom_app'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*(Adjunction|Constructible)|localCohomology.*(sheaf|Sheaf)|sections.*Support",
+   "results": "No hits",
+   "date": "2026-10-16",
+   "verdict": "no match for integral pro-etale sections with support or closed-immersion constructible adjunction",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed embedding extraordinary inverse image on constructible sheaves over a complete discrete valuation ring is local cohomology supported on the closed subset",
+   "results": "localCohomology.diagram; localCohomology; localCohomology.ofSelfLERadical; localCohomology.isoSelfLERadical; Topology.IsConstructible.preimage_of_isClosedEmbedding; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; Topology.IsConstructible.image_of_isClosedEmbedding; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary module local cohomology or constructible subsets, not integral pro-etale support constructibility and the Brown adjoint",
+   "digest": "bd277081758a4dbd"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -55,5 +238,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-int-restriction"
+ "unit": "sk-thm-int-restriction",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-int-restriction-closed",
+  "worker": "stage1",
+  "summary": "Revalidated the retained six-step split against the current side and live DAG statements after the landing refusal concerning det-lem-int-integral-heart-triangulated. Rewrote step 4 to use only its stated triangulated-subcategory clause, explicitly taking the cone of the localization unit and shifting by -1, with all standing-scheme and condensed integral coefficient hypotheses matched. Replaced the stale adic-open quotation by the current fully scoped statement and checked every other citation verbatim. Retained the explicit identity-compactification Brown comparison, natural Hom bijections, and elementary representing-object calculation. No new nodes, Mathlib leaves, Lean changes, or statement weakening. Second reading also repaired citation drift detected at push after the successful dry run: refreshed the now fully scoped integral-heart statement quote and matched its completed coefficient sheaf R_X and ordinary module derived category explicitly in step 4. Its same triangulated clause remains the sole input; no new dependency or conclusion change. Repair retry against the current DAG: compared all retained citation snapshots and reread the two changed statements, integral-heart-triangulated and integral-tensor-pullback. The former is quoted with its current complete preamble and clause (1); the latter still supplies exactly preservation (1), while its revised constant-sheaf comparison (2) is explicitly not used. Revalidated all 16 quotations and retained all original conclusions and dependencies.",
+  "blueprint": "Steps 1-3 realize the first sentence and localization triangle; step 4 realizes constructibility and the inverse-image step; steps 5-6 realize the final Hom/Yoneda paragraph. This is the closed-immersion step (step 2) of unit sk-thm-int-restriction.",
+  "tool_uses": [
+   {
+    "node": "det-lem-formal-closed-support-sheaves",
+    "why": "Exactness of closed direct image for the pulled-back integral ring, used to identify Ri_* with i_*; this coefficient-independent sheaf fact is the formal support input of the blueprint."
+   },
+   {
+    "node": "det-lem-formal-closed-support-derived",
+    "why": "Ambient support adjunction and localization fiber formula; the unit itself cites the formal closed-support route and gives no replacement construction."
+   },
+   {
+    "node": "det-lem-int-tensor-pullback",
+    "why": "Integral inverse image preserves bounded constructibility, used twice in the localization proof; no node of the restriction unit proves this prerequisite."
+   },
+   {
+    "node": "det-lem-int-integral-heart-triangulated",
+    "why": "Two-out-of-three for the already defined integral constructible category, a generic structural tool in the localization argument."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Properness makes the identity-open compactification available; this generic scheme fact does not replace any restriction-unit proof step."
+   },
+   {
+    "node": "det-prop-int-brown-construction",
+    "why": "The compactification formula and independence identify Ri_! with closed direct image; this is the integral Brown unit expressly used by the source."
+   },
+   {
+    "node": "det-prop-int-brown-adjoint",
+    "why": "The existing exact integral Brown right adjoint supplies the prescribed Hom bijection; the source expressly uses this Brown unit."
+   },
+   {
+    "node": "det-thm-sf-pf-adic-open",
+    "why": "The integral open direct-image theorem is the finiteness input explicitly required by the closed-immersion step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-formal-closed-support-sheaves",
+  "det-lem-formal-closed-support-derived",
+  "det-lem-int-tensor-pullback",
+  "det-lem-int-integral-heart-triangulated",
+  "lem-weil-pbc-closed-immersion-proper",
+  "det-prop-int-brown-construction",
+  "det-prop-int-brown-adjoint",
+  "det-thm-sf-pf-adic-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-0790f9463",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-0790f9463 (reviewer sub-agent of L); spot-checked: PASS: I read the full item (6 steps, no new nodes) and the current statements of all 9 stmt_deps and 15 proof_deps, plus def-weil-triangulated-subcategory, sk-def-sfb-module-derived-lower-shriek, det-def-localizing-closure-ctf-equals-bc and the main-20261015 sk-thm-int-restriction-closed statement and proof. Statement: the only change is that the setting the blueprint inherits (ℓ, k of characteristic p≠ℓ, finite E, pulled-back condensed O_E, module-object D, Brown i^! on Loc(Dbc)) is now stated explicitly. Both conclusions and naturality are kept and nothing is weakened. Step 1: X is Noetherian, so j is quasi-compact, of finite type and separated, and U is in the setting via a_X∘j and the qc check on Spec k; formal-support-sheaves (2) gives i_* exact. Step 2: i is proper; brown-construction allows the compactification (id_Z,i), whose comparison isomorphisms give Ri_!≃Ri_*D(id_!)=Ri_*≃i_* because i_* is exact. Step 3: formal-support-derived (1),(3) give the adjunction, the localization triangle and the fiber formula. Step 4: tensor-pullback (1) for j, then adic-open (same ℓ, k, E, qc j, coefficients p_T^*O_E) puts Rj_*j^*K in Dbc. heart-triangulated (1) makes Dbc a full triangulated subcategory of D(Mod(R_X)); rotating to C[-1]→F→K matches the definition's 2-of-3 rule and Dbc is replete, so F is in Dbc. tensor-pullback (1) for i then puts RΓ_Z K in Dbc(Z). Step 5: Brown adjoint for f=i plus step 3(1) give a bijection Φ_A natural in A and K, with H in Loc(Dbc(Z)) by step 4 and the Hom sets agreeing because Loc is full. Step 6: the Yoneda inverse and naturality algebra check out. Edge cases checked: Z=∅, Z=X, K=0, X=Spec k, non-reduced Z, ramified E. Tool uses accepted: tensor-pullback (1) and heart-triangulated (1), which the blueprint proof itself uses as black boxes; the rest are on route or Mathlib leaves. No SGA source is used, and there are no duplicate or restating nodes. The slopmaster2 declarations use other coefficients, so nothing attaches. Two notes outside this delivery: qc-open-immersion-finite-type cites Stacks tag 01T2 where 01T5 is meant, and the blueprint_update on def-weil-finite-type-morphism touches nothing used here. No fixes were written."
+ }
 }

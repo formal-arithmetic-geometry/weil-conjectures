@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, coherent derived coefficient adjunction before the displayed derived-limit calculation; foundational model-category accessibility tool, expanded using HTT Corollary A.2.6.8. Corollary A.2.6.8, proof, printed p. 821 (PDF p. 838), first two paragraphs: accessibility of the intersections of the right-lifting classes R(i), before the factorization argument; Corollary A.2.6.7 and Proposition 5.4.7.10",
+   "place": "Proof paragraph 2, coherent derived coefficient adjunction before the displayed derived-limit calculation; foundational model-category accessibility tool, expanded using HTT Corollary A.2.6.8. Corollary A.2.6.8, proof, printed p. 821 (PDF p. 838), first three paragraphs: accessibility of the intersections of the right-lifting classes R(i), before the factorization argument; Corollary A.2.6.7 and Proposition 5.4.7.10",
    "via": [
     "lem-coef-model-weak-equivalences-accessible",
     "lem-coef-simplicial-bousfield-model-structure",
@@ -30,48 +30,208 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-lifting-class-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\mathcal C^{[1]}$ and $\\mathcal D=\\operatorname{Fun}(I_{\\rm disc}\\times[1],\\mathsf{Set}_{\\mathcal U})$, where $I_{\\rm disc}$ has objects the generating maps and only identity arrows, and $[1]$ has objects 0,1 and one nonidentity arrow $0\\to1$. Both are locally presentable. To check the pullback hypothesis needed for $\\mathcal A$, apply [lem-coef-accessible-monad-presentability] to a singleton family with value $\\mathcal C$ and the identity monad. Its algebra equation $a1=1$ forces $a=1$, and every underlying map is an algebra map; thus its complete algebra category is exactly $\\mathcal C$. In particular $\\mathcal C$ has pullbacks. Apply [lem-coef-presheaf-local-presentability] with index $[1]^{\\rm op}$ and values in $\\mathcal C$ to obtain local presentability of $\\mathcal A$. For $\\mathcal D$, the same node supplies local presentability of small sets, whose pullbacks are the sets of pairs with equal images; apply its presheaf clause with index $(I_{\\rm disc}\\times[1])^{\\rm op}$. All indexing categories here are $\\mathcal U$-small.",
+   "uses": [
+    "lem-coef-accessible-monad-presentability",
+    "lem-coef-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  },
+  {
+   "text": "Colimits in either displayed diagram category are pointwise. Indeed, for a diagram of diagrams choose the colimit at each vertex. For each indexing arrow the compatible maps from its source diagram to the colimit at its target induce a unique map out of the source colimit, by [def-weil-pbc-category-colimit]. The identity and composition equations hold after precomposing with all structure maps and hence hold by uniqueness. A cocone into any other diagram then gives unique vertex maps; the same uniqueness verifies their naturality. This is the colimit universal property. Hom sets in $\\mathcal A$ and $\\mathcal D$ are small: natural transformations are subsets of products of small Hom sets indexed by a small set.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  },
+  {
+   "text": "Write each $i\\in I$ as $i:A_i\\to B_i$. Apply [lem-coef-object-presentability-rank] to both $A_i$ and $B_i$, obtaining infinite regular cardinals $\\tau_{i,0}$ and $\\tau_{i,1}$ for their Hom functors. For each such cardinal take its set of smaller ordinals, and apply [lem-coef-small-family-regular-bound] to this small family of small sets. Its bound is an infinite regular $\\kappa\\in\\mathcal U$ strictly larger than every $\\tau_{i,e}$. A $\\kappa$-filtered category is $\\tau_{i,e}$-filtered by the definition, since any diagram with fewer than $\\tau_{i,e}$ morphisms has fewer than $\\kappa$ morphisms. Hence both endpoint Hom functors preserve all small $\\kappa$-filtered colimits. For $I=\\varnothing$ use the same bound lemma on the empty family.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  },
+  {
+   "text": "For $p:X\\to Y$ define the small set $Q_i(p)=\\{(u,v)\\in\\operatorname{Hom}(A_i,X)\\times\\operatorname{Hom}(B_i,Y):pu=vi\\}$ and the function $H_i(p):\\operatorname{Hom}(B_i,X)\\to Q_i(p)$ by $h\\mapsto(hi,ph)$. For a commuting square $(a,b):p\\to p'$ with $p'a=bp$, send $h$ to $ah$ and $(u,v)$ to $(au,bv)$. The latter pair belongs to $Q_i(p')$, since $p'au=bpu=bvi$; the two functions form a commuting square because $(ahi,p'ah)=(ahi,bph)$. Identity and composition laws are componentwise function identities. These formulas therefore define a functor $H:\\mathcal A\\to\\mathcal D$, with $i$-component $H_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  },
+  {
+   "text": "Let $J$ be any small $\\kappa$-filtered category and $p_j:X_j\\to Y_j$ a $J$-diagram with pointwise colimit $p:X\\to Y$. There is a canonical description $Q_i(p_j)=\\operatorname{Hom}(A_i,X_j)\\times_{\\operatorname{Hom}(A_i,Y_j)}\\operatorname{Hom}(B_i,Y_j)$, using composition with $p_j$ and precomposition with $i$. By step 3 each of these three Hom diagrams has colimit its Hom set at $X$ or $Y$. Since $\\kappa$ is infinite, $J$ is filtered. Apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to this finite span of sets, obtaining the canonical bijection $\\operatorname{colim}_j Q_i(p_j)\\cong Q_i(p)$. The source comparison $\\operatorname{colim}_j\\operatorname{Hom}(B_i,X_j)\\cong\\operatorname{Hom}(B_i,X)$ is also a bijection. These comparisons form a square of functions, since on a representative $h$ both routes give $(hi,ph)$ after applying the colimit maps. Thus each $H_i$ preserves these colimits, and pointwise computation in step 2 shows that $H$ preserves them. Only a finite limit of sets is interchanged with the colimit, even when $I$ is infinite.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  },
+  {
+   "text": "Let $\\mathcal V\\subseteq\\mathcal D$ be the full subcategory of families of surjections $s_i:S_i\\to T_i$. It is replete: conjugating a surjection by two bijections is a surjection. It is closed under every small filtered colimit in $\\mathcal D$. Indeed, fix $i$ and $t\\in\\operatorname{colim}_jT_{j,i}$. Clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] gives a representative $t_j\\in T_{j,i}$. Surjectivity at that stage supplies $x_j\\in S_{j,i}$ with $s_{j,i}(x_j)=t_j$, and its colimit image maps to $t$. Step 2 computes this as the required component of the ambient colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, p. 821, surjective maps form an accessible subcategory; filtered-colimit closure expanded, using Stacks Tags 04AX and 002V."
+   }
+  },
+  {
+   "text": "Fix a family $s=(s_i:S_i\\twoheadrightarrow T_i)\\in\\mathcal V$. Let $P$ be the poset of finite subsets $E$ of the small disjoint union $\\coprod_i S_i$, ordered by inclusion. It is small, nonempty (it contains $\\varnothing$), and filtered because $E\\cup E'$ bounds $E,E'$. Put $E_i=\\{x:(i,x)\\in E\\}$ and define $s^E_i:E_i\\to s_i(E_i)$ by restriction of $s_i$. These are surjections with finite endpoints, and all but finitely many components are $\\varnothing\\to\\varnothing$. Inclusion of finite subsets gives commuting squares, so the $s^E$ form a $P$-diagram in $\\mathcal V$ with a cocone to $s$. At each source component its union is $S_i$, since every $x$ lies in a singleton finite subset; at each target component its union is $T_i$, since each $t$ has some preimage $x$ and hence lies in $s_i(E_i)$ for such a singleton. For a compatible family of functions out of the source subsets, define its value at $x$ using any $E$ containing $(i,x)$; two choices agree after inclusion into their union. For the target subsets, define its value at $t$ using any $E$ with $t\\in s_i(E_i)$, which exists by surjectivity; two choices again agree in their union. These definitions give the unique functions on $S_i$ and $T_i$ extending the cocone. Their square commutes because it commutes on every $E_i$. Therefore these unions are colimits of sets by [def-weil-pbc-category-colimit], and step 2 identifies $s=\\operatorname{colim}_{E\\in P}s^E$ in $\\mathcal D$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, p. 821: explicit finite-subset generation argument for the surjection test, simultaneously for the small generating set I."
+   }
+  },
+  {
+   "text": "There is a small fixed family of objects containing an isomorphic copy of every $s^E$ used in step 7. Namely choose a finite subset $F\\subseteq I$, natural numbers $n_i,m_i$ for $i\\in F$, and surjective functions $\\{0,\\ldots,n_i-1\\}\\to\\{0,\\ldots,m_i-1\\}$; use the empty arrow at all other indices. Finite subsets of a small set, finite lists of natural numbers, and functions between finite sets each range over small sets, so these data form a small set $G\\subseteq\\mathcal V$. Each $s^E$ is isomorphic to a member of $G$ by numbering its finitely many source and target elements. For the small diagram in step 7 choose such an isomorphism $\\theta_E:g_E\\xrightarrow{\\sim}s^E$ at each object, and replace a transition $k_{EE'}$ by $\\theta_{E'}^{-1}k_{EE'}\\theta_E$. Cancellation verifies the diagram laws and yields an isomorphism of diagrams, so the same colimit is a filtered colimit of objects from $G$. Steps 6-8 prove exactly that $\\mathcal V$ is an accessible subcategory, with witnessing cardinal $\\aleph_0$. This also covers $I=\\varnothing$: there is one empty family and its constant one-object presentation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, p. 821: smallness of the finite-surjection generators, with the simultaneous family argument made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-full-inverse-image] to $H:\\mathcal A\\to\\mathcal D$ and $\\mathcal V$. Step 1 proves local presentability of both ambient categories, step 2 checks Hom-smallness and ambient colimits, step 5 proves preservation of small $\\kappa$-filtered colimits by $H$, and steps 6-8 check repleteness and accessibility of $\\mathcal V$ in precisely the ambient-colimit sense of that node. Its conclusion is that the full inverse image $H^{-1}\\mathcal V\\subseteq\\mathcal A$ is replete and accessible. No common cardinal for the input and conclusion is required.",
+   "uses": [
+    "lem-coef-accessible-full-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.7, p. 820, applied once to the family-valued functor; realizes the small intersection in Corollary A.2.6.8 without an additional intersection theorem."
+   }
+  },
+  {
+   "text": "By [lem-coef-lifting-class-closure], membership of $p$ in $I^{\\square}$ means that for each $i:A_i\\to B_i$ and each $(u,v)\\in Q_i(p)$ there exists $h:B_i\\to X$ with $(hi,ph)=(u,v)$. This is exactly surjectivity of every function $H_i(p)$, and hence exactly $H(p)\\in\\mathcal V$. Thus the full subcategory on $I^{\\square}$ equals $H^{-1}\\mathcal V$ on objects and on all commuting squares. Step 9 gives the claimed repleteness and accessibility. The test asserts existence of $h$, never uniqueness, and the only bounds chosen in step 3 concern the fixed small family of generating endpoints, not the endpoints $X,Y$ of $p$.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.2.6.8 proof, printed p. 821: Hom-square functor and surjection test; details expanded by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-full-inverse-image",
+  "lem-coef-accessible-monad-presentability",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary A.2.6.8 proof, printed p. 821, and Corollary A.2.6.7, p. 820, read online; source not archived. Expanded its surjection argument to I-indexed families to implement the small intersection using one existing general inverse-image theorem."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "In a locally presentable category the full category of arrows with right lifting property against a small set is accessible and accessibly embedded",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ]\\n  [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheor\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ locally presentable with respect to $\\\\kappa$, a small morphism property $W$ in $\\\\mathcal{C}$, and the condition that every morphism in $W$ h\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredColimits C κ],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCardinalPresentable X κ ∧ CategoryTheory.IsCardinalPr\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ with $\\\\kappa$-filtered colimits, and a morphism property $W$ where every $W$-morphism has $\\\\kappa$-presentable domain and codomain, the incl\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalAccessibleCategory C κ] (X : C),\\n  CategoryTheory.IsCardinalFiltered (CategoryTheory.CostructuredArrow (CategoryTheory.isCardinalPresentable C κ).ι X) κ\", \"doc\": \"For any κ-accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from κ-presentable objects to $X$ is κ-filtered. This means that fo\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (J : Type u')\\n  [inst_1 : CategoryTheory.Category.{v', u'} J] [CategoryTheory.EssentiallySmall.{w, v', u'} J] (κ : Cardinal.{w})\\n  [inst_3 : Fact κ.IsRegular] [CategoryTheory.IsCardinalFiltered J κ],\\n  (\", \"doc\": \"Let $\\\\mathcal{C}$ be a category, $W$ a morphism property in $\\\\mathcal{C}$, $J$ a $\\\\kappa$-filtered category for a regular cardinal $\\\\kappa$, and assume every morphism $f \\\\in W$ has $\\\\kappa$-presentabl\"}\n",
+   "tool": "grep",
+   "query": "IsAccessible|IsCardinalAccessible|IsLocallyPresentable",
+   "sub": "CategoryTheory/MorphismProperty",
+   "results": "{\"t\": \"2026-10-16T20:06:33Z\", \"tool\": \"grep\", \"query\": \"IsAccessible|IsCardinalAccessible|IsLocallyPresentable\", \"sub\": \"CategoryTheory/MorphismProperty\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "No match: the returned OrthogonalReflection declarations (lines 75-104 and 474-480 read) require bijective Hom restriction, hence unique fillers, and are not the existential right lifting class. MorphismProperty/Ind.lean:65 and :135 concern filtered presentations of morphisms, not accessibility of I.rlp. Loogle returned zero paired hits; the RLP/weak factorization declarations do not assert accessibility."
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
   },
   {
    "tool": "loogle",
    "query": "\"rlp\", \"IsAccessibleCategory\"",
-   "results": "[loogle] OK 0 hit(s)\n",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:06:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"rlp\\\", \\\"IsAccessibleCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "No match: the returned OrthogonalReflection declarations (lines 75-104 and 474-480 read) require bijective Hom restriction, hence unique fillers, and are not the existential right lifting class. MorphismProperty/Ind.lean:65 and :135 concern filtered presentations of morphisms, not accessibility of I.rlp. Loogle returned zero paired hits; the RLP/weak factorization declarations do not assert accessibility."
-  },
-  {
-   "tool": "grep",
-   "query": "[Aa]ccessib|[Pp]resentab",
-   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"29\", \"text\": \"- `CategoryTheory.MorphismProperty.ind_ind`: If `P` implies finitely presentable, then\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"65\", \"text\": \"lemma exists_hom_of_isFinitelyPresentable {J : Type w} [SmallCategory J] [IsFiltered J] {D : J ⥤ C}\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"66\", \"text\": \"    {c : Cocone D} (hc : IsColimit c) {X A : C} {p : X ⟶ A} (hp : isFinitelyPresentable.{w} C p)\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"134\", \"text\": \"/-- `ind` is idempotent if `P` implies finitely presentable. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"line\": \"135\", \"text\": \"lemma ind_ind (hp : P ≤ isFinitelyPresentable.{w} C) [LocallySmall.{w} C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean\", \"line\": \"102\", \"text\": \"  have : RepresentablyFlat (Over.forget P ⊤ S) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"12\", \"text\": \"# Relatively representable morphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"14\", \"text\": \"In this file we define and develop basic results about relatively representable morphisms.\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"16\", \"text\": \"Classically, a morphism `f : F ⟶ G` of presheaves is said to be representable if for any morphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"27\", \"text\": \"In this file, we define a notion of relative representability which works with respect to any\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"29\", \"text\": \"representable in the classical case will then be given by `yoneda.relativelyRepresentable f`.\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: the returned OrthogonalReflection declarations (lines 75-104 and 474-480 read) require bijective Hom restriction, hence unique fillers, and are not the existential right lifting class. MorphismProperty/Ind.lean:65 and :135 concern filtered presentations of morphisms, not accessibility of I.rlp. Loogle returned zero paired hits; the RLP/weak factorization declarations do not assert accessibility."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Small injectivity classes of morphisms in a locally presentable category are accessible subcategories of the arrow category",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ]\\n  [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheor\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ locally presentable with respect to $\\\\kappa$, a small morphism property $W$ in $\\\\mathcal{C}$, and the condition that every morphism in $W$ h\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredColimits C κ],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCardinalPresentable X κ ∧ CategoryTheory.IsCardinalPr\", \"doc\": \"Given a regular cardinal $\\\\kappa$, a category $\\\\mathcal{C}$ with $\\\\kappa$-filtered colimits, and a morphism property $W$ where every $W$-morphism has $\\\\kappa$-presentable domain and codomain, the incl\"}\n  {\"name\": \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [hC : CategoryTheory.Category.{v, u} C] [CategoryTheory.IsLocallyPresentable.{w, v, u} C],\\n  CategoryTheory.IsAccessibleCategory.{w, v, u} C\", \"doc\": \"Every locally presentable category is accessible. Specifically, if a category $\\\\mathcal{C}$ is locally presentable (i.e., cocomplete and generated by a small set of $\\\\lambda$-presentable objects under\"}\n  {\"name\": \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.IsCardinalAccessibleCategory C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible. This means that a locally presentable category inhere\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {κ : Cardinal.{w}} [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalAccessibleCategory C κ] (X : C),\\n  CategoryTheory.IsCardinalFiltered (CategoryTheory.CostructuredArrow (CategoryTheory.isCardinalPresentable C κ).ι X) κ\", \"doc\": \"For any κ-accessible category $\\\\mathcal{C}$ and object $X$ in $\\\\mathcal{C}$, the costructured arrow category consisting of morphisms from κ-presentable objects to $X$ is κ-filtered. This means that fo\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {P : CategoryTheory.ObjectProperty C} {X : C} {J : Type w}\\n  [inst_1 : CategoryTheory.SmallCategory J] (p : P.ColimitOfShape J X) {κ : Cardinal.{w}} [inst_2 : Fact κ.IsRegular],\\n  P ≤ CategoryTheory.isCardinalPresentable C κ →\\n    ∀ [CategoryT\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category, $J$ a small category, and $X$ an object in $\\\\mathcal{C}$ that is a colimit of a diagram of shape $J$ satisfying property $P$. Suppose $\\\\kappa$ and $\\\\kapp\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n",
-   "date": "2026-10-17",
-   "verdict": "No match: the returned OrthogonalReflection declarations (lines 75-104 and 474-480 read) require bijective Hom restriction, hence unique fillers, and are not the existential right lifting class. MorphismProperty/Ind.lean:65 and :135 concern filtered presentations of morphisms, not accessibility of I.rlp. Loogle returned zero paired hits; the RLP/weak factorization declarations do not assert accessibility."
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
   },
   {
    "tool": "leansearch",
-   "query": "Arrows with the right lifting property against a set form an accessible subcategory",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.rlp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.LiftingProperty\", \"type\": \": MorphismProperty C\", \"doc\": \"The right lifting property for a morphism $ f $ is the property that, for any morphism $ g $ satisfying condition $ T $, the pair $ (g, f) $ satisfies the lifting property. This means that for every c\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.rlp\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.WeakFactorizationSystem\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {W₁ W₂ : CategoryTheory.MorphismProperty C}\\n  [self : W₁.IsWeakFactorizationSystem W₂], W₁.rlp = W₂\", \"doc\": \"In a weak factorization system $(L, R)$ in a category $C$, the class $R$ consists precisely of all morphisms satisfying the right lifting property with respect to $L$, i.e., $R = \\\\{ f \\\\mid \\\\text{$f$ h\"}\n  {\"name\": \"CategoryTheory.HasLiftingPropertyFixedBot\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Basic\", \"type\": \"(b : B ⟶ Y) : Prop\", \"doc\": \"For any morphism $ t: A \\\\to X $ and any commutative square formed by $ t $, $ i: A \\\\to B $, $ p: X \\\\to Y $, and $ b: B \\\\to Y $, there exists a morphism $ X \\\\to B $ that makes the diagram commute.\"}\n  {\"name\": \"CategoryTheory.Arrow.hasLiftingProperty_iff\", \"module\": \"Mathlib.CategoryTheory.LiftingProperties.Basic\", \"type\": \"{A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y) :\\n  HasLiftingProperty i p ↔ ∀ (φ : Arrow.mk i ⟶ Arrow.mk p), Nonempty (LiftStruct φ)\", \"doc\": \"For morphisms $i: A \\to B$ and $p: X \\to Y$ in a category $\\\\mathcal{C}$, the lifting property between $i$ and $p$ holds if and only if for every morphism $\\\\phi$ from $\\\\text{Arrow.mk}(i)$ to $\\\\text{Arrow\"}\n  {\"name\": \"CategoryTheory.SmallObject.llp_rlp_of_isCardinalForSmallObjectArgument\", \"module\": \"Mathlib.CategoryTheory.SmallObject.IsCardinalForSmallObjectArgument\", \"type\": \": I.rlp.llp = (transfiniteCompositions.{w} (coproducts.{w} I).pushouts).retracts\", \"doc\": \"For a morphism property $ I $ in a category satisfying the cardinality conditions of the small object argument, the class of morphisms with the left lifting property against $ I $-right lifting morphi\"}\n  {\"name\": \"CategoryTheory.IsAccessibleCategory\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is accessible if it satisfies the conditions of being accessible, which typically involve the existence of a regular cardinal $\\\\lambda$ such that $\\\\mathcal{C}$ has $\\\\lambda$-f\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.hasLiftingProperty_of_wfs\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.WeakFactorizationSystem\", \"type\": \"{A B X Y : C} (i : A ⟶ B) (p : X ⟶ Y) (hi : W₁ i) (hp : W₂ p) : HasLiftingProperty i p\", \"doc\": \"In a category equipped with a weak factorization system $(\\\\mathcal{L}, \\\\mathcal{R})$, every morphism in $\\\\mathcal{L}$ has the lifting property with respect to every morphism in $\\\\mathcal{R}$.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.llp_rlp_of_hasSmallObjectArgument'\", \"module\": \"Mathlib.CategoryTheory.SmallObject.Basic\", \"type\": \": I.rlp.llp = (transfiniteCompositionsOfShape (coproducts.{w} I).pushouts I.smallObjectκ.ord.ToType).retracts\", \"doc\": \"If a morphism property $ I $ admits the small object argument, then the left lifting property against $ I $-right lifting morphisms equals the retracts of transfinite compositions of coproducts and pu\"}\n",
+   "query": "Small injectivity classes of arrows in locally presentable categories are accessible",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:06:34Z\", \"tool\": \"leansearch\", \"query\": \"Small injectivity classes of arrows in locally presentable categories are accessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsAccessibleCategory.mk\", \"CategoryTheory.instSmallArrowOfLocallySmall\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.locallySmall\", \"CategoryTheory.locallySmall_of_small_arrow\"], \"digest\": \"c2847c494caa3518\"}",
    "date": "2026-10-17",
-   "verdict": "No match: the returned OrthogonalReflection declarations (lines 75-104 and 474-480 read) require bijective Hom restriction, hence unique fillers, and are not the existential right lifting class. MorphismProperty/Ind.lean:65 and :135 concern filtered presentations of morphisms, not accessibility of I.rlp. Loogle returned zero paired hits; the RLP/weak factorization declarations do not assert accessibility."
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arrows with right lifting property against a small set in a locally presentable category form an accessible accessibly embedded full subcategory",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:06:37Z\", \"tool\": \"leanfinder\", \"query\": \"Arrows with right lifting property against a small set in a locally presentable category form an accessible accessibly embedded full subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsLocallyPresentable\"], \"digest\": \"7402cb587f6e38eb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyPresentable_isLocal|isCardinalAccessible_ι_isLocal|def isLocal|def rlp",
+   "sub": "CategoryTheory",
+   "results": "{\"t\": \"2026-10-16T20:06:50Z\", \"tool\": \"grep\", \"query\": \"isLocallyPresentable_isLocal|isCardinalAccessible_ι_isLocal|def isLocal|def rlp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LiftingProperty.lean\"], \"digest\": \"58468bfe72852fa0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existential injectivity classes generated by a set of morphisms are accessible and closed under sufficiently filtered colimits",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:06:54Z\", \"tool\": \"leanfinder\", \"query\": \"Existential injectivity classes generated by a set of morphisms are accessible and closed under sufficiently filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.HasCardinalFilteredGenerator\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\"], \"digest\": \"4134254e5dbe40f2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: read OrthogonalReflection.lean:75-104,472-480 and ObjectProperty/Local.lean:40-48; isLocal requires bijective Hom restriction (unique fillers), whereas this item requires only surjectivity of its square-filler functions. LiftingProperty.lean:35-41 defines rlp but proves no accessibility theorem. Presentable/LocallyPresentable.lean:87-101 supplies accessible-category definitions and presentability ranks, not accessibility of a small existential lifting class."
+  },
+  {
+   "tool": "grep",
+   "query": "injectivity|accessible|presentable",
+   "sub": "CategoryTheory/SmallObject",
+   "results": "{\"t\": \"2026-10-16T20:14:50Z\", \"tool\": \"grep\", \"query\": \"injectivity|accessible|presentable\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\"], \"digest\": \"de4b5463664cde1e\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Second reader opened ObjectProperty/Local.lean:40-48 and Presentable/OrthogonalReflection.lean:75-104,472-480: isLocal requires bijective restriction, hence unique extensions. SmallObject/IsCardinalForSmallObjectArgument.lean:412-413 only proves the constructed factor has RLP; it asserts no accessibility of the full RLP arrow subcategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of the arrow category satisfying the right lifting property with respect to a set of morphisms is accessible",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:14:55Z\", \"tool\": \"leanfinder\", \"query\": \"The full subcategory of the arrow category satisfying the right lifting property with respect to a set of morphisms is accessible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.SmallObject.rlp_πObj\", \"CategoryTheory.SmallObject.hasRightLiftingProperty_πObj\", \"CategoryTheory.IsCardinalAccessibleCategory\"], \"digest\": \"4b4393ed0d8e61ad\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Second reader opened ObjectProperty/Local.lean:40-48 and Presentable/OrthogonalReflection.lean:75-104,472-480: isLocal requires bijective restriction, hence unique extensions. SmallObject/IsCardinalForSmallObjectArgument.lean:412-413 only proves the constructed factor has RLP; it asserts no accessibility of the full RLP arrow subcategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rlp\", \"IsLocallyPresentable\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-16T20:15:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"rlp\\\", \\\"IsLocallyPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Second reader opened ObjectProperty/Local.lean:40-48 and Presentable/OrthogonalReflection.lean:75-104,472-480: isLocal requires bijective restriction, hence unique extensions. SmallObject/IsCardinalForSmallObjectArgument.lean:412-413 only proves the constructed factor has RLP; it asserts no accessibility of the full RLP arrow subcategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-weak-equivalences-accessible",
@@ -79,5 +239,20 @@
   "group": "Q32"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-right-lifting-accessibility",
+  "worker": "stage1",
+  "summary": "Expanded the HTT Hom-square/surjection argument with a common bound for both generator endpoints, pointwise colimits, an explicit small family of finite supported surjection generators, and the existing full inverse-image accessibility theorem. No new nodes. Normalized accidentally doubled TeX escapes in the imported statement; every mathematical hypothesis and clause is unchanged. Second reading corrected the source paragraph range and made the gluing of both components and the commuting-square equation explicit; independent Mathlib searches confirm no exact leaf.",
+  "blueprint": "Realizes the foundational model-accessibility auxiliary below paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent derived coefficient adjunction before the displayed derived-limit calculation. Its small right-lifting intersection is treated by one I-indexed surjection test. Historical unit and ancestry are unchanged; the main-20261015 blueprint paragraph and the fixed unit/chapter were read."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-70fa8d9ce",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-70fa8d9ce (reviewer sub-agent of L); spot-checked: I read the item and all ten steps in full, and opened the statement of each of the nine cited nodes. There are no new nodes. The statement is true: in the DAG's own definition of an accessible subcategory, I^□ is the inverse image of the families of surjections under the functor H that sends p to (Hom(B_i,X) -> Q_i(p))_i. It is the same as HTT A.2.6.8, proof, applied with A.2.6.7. It is strictly smaller than the parent lem-coef-model-weak-equivalences-accessible, so it does not restate a clause of the parent (no D1). Step by step: 1. The identity monad gives pullbacks in C, which the presheaf presentability lemma needs. 2. Colimits in both diagram categories are computed pointwise. 3. Each generator endpoint has a rank tau, and the bound lemma gives one regular kappa above all of them; kappa-filtered implies tau-filtered. 4. I checked the functor equations p'au = bvi. 5. Only a finite fibre product of sets is interchanged with a filtered colimit, via a Mathlib leaf. 6. Surjections are closed under filtered colimits in the ambient category. 7. The finite-subset presentation works, and surjectivity is what makes the target union exhaust T_i. 8. The finitely supported generators form a small set, giving witnessing cardinal aleph_0. 9. Every hypothesis of lem-coef-accessible-full-inverse-image is met; that node allows an arbitrary H, while the arrow version does not apply because H is not induced from endpoints. 10. The lifting condition is exactly surjectivity of each H_i. Edge cases checked: I empty, an identity generator, and in Set the generators empty->point (giving surjections) and 2->1 (giving injections). The route stays in unit sk-prop-sf-biduality-general apart from Mathlib leaves, so no tool_uses are needed. No SGA is used. HTT is not archived, so the proof is marked by=agent and the report carries a WANTED line. Duplicate search with rg over lifting+accessible found no node stating this lemma (smith/intersection/arrow-inverse-image nodes differ), and no Mathlib leaf exists (rlp+accessible grep of pinned Mathlib). FIX: source.place still said 'first two paragraphs', although blueprint.from.place and the report's second reading say 'first three'. I corrected it to 'first three paragraphs' in fixes/dag/nodes/sec-six-functors/lem-coef-small-right-lifting-accessibility.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -29,9 +29,88 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-realization-finite-limits"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $n=j+1$, $T=|\\Delta^n|$, $A=|d_n|(|\\Delta^{n-1}|)$, and $L=|\\Lambda_n^n|$. Thus $\\partial T=A\\cup L$ and $A\\cap L=\\partial A$; for $n=1$, $A$ is vertex 0 and $L$ is vertex 1. These identities follow directly by taking the unions of the ordered faces in [def-cbc-enhanced-diagrams-cones]. The horn-pair homeomorphism of [lem-coef-realization-finite-limits] identifies $(T,L)$ with $(D^{n-1}\\times I,D^{n-1}\\times\\{0\\})$. In the lifting square put the constant map $e$ on $L$ and the given $a$ on $T$; the square commutes because $a(L)=b=p(e)$. The assumed disk homotopy lifting property therefore gives $g:T\\to E$ with $pg=a$ and $g|_L=e$. Since $a(A)=b$, its last-face restriction lands in $F$; since $A\\cap L=\\partial A$, this restriction is $e$ on the boundary. The fibre map is continuous also for the k-space fibre topology: its source $A$ is compact Hausdorff, and the kification topology is final for maps from compact Hausdorff spaces, by the definition in [lem-coef-realization-finite-limits]. The same observation will apply to maps from the compact prisms below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Theorem 4.41, p. 376, surjectivity argument; ordered-simplex version using the existing horn-pair theorem"
+   }
+  },
+  {
+   "text": "Here is the explicit prism-pair calculation needed to compare lifts, rather than an appeal to a relative lifting theorem. Under the same horn-pair homeomorphism the pair $(T\\times I,(T\\times\\{0,1\\})\\cup(L\\times I))$ becomes $(D^{n-1}\\times I^2,D^{n-1}\\times U)$, where $U=(I\\times\\{0,1\\})\\cup(\\{0\\}\\times I)$. Parametrize the boundary of the square by the piecewise affine loop $c:[0,4]\\to\\partial I^2$ with successive vertices $(1,0),(0,0),(0,1),(1,1),(1,0)$. Then $U=c([0,3])$. The increasing piecewise affine circle reparametrization $\\phi(r)=r/3$ for $0\\leq r\\leq3$ and $\\phi(r)=1+3(r-3)$ for $3\\leq r\\leq4$ makes $c(r)\\mapsto c(\\phi(r))$ a boundary homeomorphism taking $U$ to the bottom edge. Extend it over the square by $o+\\rho(z-o)\\mapsto o+\\rho(h(z)-o)$, where $o=(1/2,1/2)$, $z\\in\\partial I^2$ and $0\\leq\\rho\\leq1$. The formula and its inverse are continuous, with the centre fixed. Taking its product with $D^{n-1}$ and grouping the first two factors now gives the cylinder-end pair $(D^n\\times I,D^n\\times\\{0\\})$. Here $D^{n-1}\\times I\\cong D^n$ is explicitly the radial identification of a solid cylinder and ball: after affinely rescaling $I$ to $[-1,1]$, on each unit direction $v$ its cylinder radius is $1/\\max(\\|v'\\|,|v_n|)$, and scale that radial segment to the unit radial segment. For $n=1$ the first disk factor is a point and this is just the square calculation. Consequently every compatible partial lift on the displayed prism subspace extends by precisely the assumed Serre test in dimension $n$.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Theorem 4.41, p. 376, relative lifting paragraph and injectivity argument; explicit elementary square reparametrization supplied here"
+   }
+  },
+  {
+   "text": "Let $a_t:T\\to B$ be a homotopy constant at $b$ on $\\partial T$, and choose any horn-fixed lifts $g_0,g_1$ of its two endpoints as in step 1. On $(T\\times\\{0,1\\})\\cup(L\\times I)$ prescribe $g_0,g_1$ on the ends and $e$ on $L\\times I$. They agree on the intersections and define a continuous partial lift by finite closed pasting. Step 2 and the Serre lifting hypothesis extend it to $G:T\\times I\\to E$ with $pG(x,t)=a_t(x)$. On $A\\times I$ this has image in $F$, and on $\\partial A\\times I$ it equals $e$. Thus its restriction is a based homotopy between the ordered last-face restrictions. Taking $a_t=a$ constant also compares any two lifts of the same representative. With the homotopy-group and component definitions of [def-cbc-enhanced-diagrams-cones] this proves independence of both choices and representatives. In degree $j=0$, $A\\times I$ is an interval and gives a path in $F$ between the two initial endpoints. For the constant representative choose $g=e$, so the resulting maps are pointed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Theorem 4.41, p. 376, injectivity argument, with the prescribed two endpoint lifts"
+   }
+  },
+  {
+   "text": "The operation just constructed is the Serre connecting operation in the stated convention. The relative representative is the map $(T,\\partial T,L)\\to(E,F,e)$ given by $g$; its projection is the absolute representative $a$, and its relative boundary is restriction to the distinguished remaining face $A$, parametrized by the affine ordered map $|d_n|$. This is the definition of the relative boundary operation (Hatcher, pp. 343–344), with the distinguished bottom cube face replaced by the ordered last simplex face. Use the same boundary-pair parametrizations from [lem-coef-realization-finite-limits] to express representatives in the cubical convention of [def-cbc-enhanced-diagrams-cones]; this specifies the last-face convention, rather than assuming an orientation-independent identification. Step 3 proves that restriction gives a well-defined map directly, so no theorem identifying an unspecified connecting map has been used. At $n=1$, $|d_1|$ picks vertex 0, and $L$ is vertex 1, so $g(1)=e$ and the output is the component of $g(0)$, as required. For a pointed commutative square $(u,v)$ with $p'u=vp$, the induced fibre map $u|_F:F\\to F'$ is continuous by the k-space pullback universal property in [lem-coef-realization-finite-limits]. Then $ug$ is a horn-fixed lift of $va$, and $(ug)|_A=u|_F\\circ g|_A$ pointwise. Passing to classes, using the choice independence already proved, gives $\\delta'_j v_*= (u|_F)_*\\delta_j$, including components. This proves naturality with the exact convention in the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Relative homotopy definition and boundary restriction, pp. 343–344; Theorem 4.41, p. 376"
+   }
+  },
+  {
+   "text": "Assume now the stated based contraction $H$ is given. To prove surjectivity, represent any target class by $f:|\\Delta^j|\\to F$, equal to $e$ on its boundary (by [def-cbc-enhanced-diagrams-cones] and the disk-pair parametrization in [lem-coef-realization-finite-limits]); for $j=0$ choose a point of the desired component. Regard $T$ as the affine cone on its ordered face $A$ with apex vertex $v_n$. For $x\\in|\\Delta^j|$ and $0\\leq t\\leq1$ set $g((1-t)|d_n|(x)+tv_n)=H(f(x),t)$. This descends continuously through the cone quotient because $H(f(x),1)=e$ is independent of $x$. Its last-face restriction is exactly $f$, and on $L$, the cone on $\\partial A$, it is $e$ since $H(e,t)=e$. In dimension $j=0$ the horn is just the cone apex and the same endpoint formula applies. Define $a=pg$. It is $b$ on $A$ because $pf=b$, and on $L$ because $g=e$. Hence it is a permitted absolute representative and $\\delta_j([a])=[f]$ by construction. This proves surjectivity for all $j$, without any assertion about other components of $B$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Theorem 4.3 proof, pp. 344–345, boundary of a nullhomotopy; explicit formula using the contraction hypothesis"
+   }
+  },
+  {
+   "text": "For injectivity let $a_0,a_1$ have equal images, and choose horn-fixed lifts $g_0,g_1$ by step 1. Equality of their images supplies a homotopy $K:A\\times I\\to F$ between their face restrictions, equal to $e$ on $\\partial A\\times I$; when $j=0$, it supplies a path in $F$. Define a map $u:\\partial(T\\times I)\\to E$ by $g_0,g_1$ on the two ends, $K$ on $A\\times I$, and $e$ on $L\\times I$. The four prescriptions agree on every intersection, so finite closed pasting makes $u$ continuous. Extend it over the whole convex prism $P=T\\times I$ explicitly using $H$: choose an interior centre $c$ and write every point other than $c$ uniquely as $c+r(y-c)$ with $y\\in\\partial P$, $0<r\\leq1$; put $\\widetilde u(c+r(y-c))=H(u(y),1-r)$ and $\\widetilde u(c)=e$. The radial quotient $(\\partial P\\times[0,1])/(\\partial P\\times\\{0\\})\\cong P$ proves continuity: it is a continuous bijection from a compact space to the Hausdorff convex polytope, with the displayed continuous map constant at the collapsed end. The boundary value at $r=1$ is $u$. Now $p\\widetilde u:T\\times I\\to B$ has end values $a_0,a_1$ and is constantly $b$ on the whole side $\\partial T\\times I$, since $pK=b$ and $p(e)=b$. It is therefore a based homotopy of the original absolute representatives, in the sense of [def-cbc-enhanced-diagrams-cones] and the pair parametrizations of [lem-coef-realization-finite-limits]. This proves injectivity. Together with step 5 and pointedness from step 3 it proves the asserted pointed-set bijections, with no assumption that $B$ is connected or that fibres over its other components are nonempty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+    "place": "Theorem 4.3 proof, pp. 344–345, filled boundary argument; explicit radial extension using the contraction hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-realization-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf",
+  "place": "Agent-written ordered-simplex expansion of Theorem 4.41, p. 376 and the boundary definition/proof of Theorem 4.3, pp. 343–345; online source read, permanent local archive WANTED. Explicit prism and contraction arguments supplied."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +146,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsCoveringMap.liftHomotopy\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    {A : Type u_3} →\\n      [inst : TopologicalSpace E] →\\n        [inst_1 : TopologicalSpace X] →\\n          [inst_2 : TopologicalSpace A] →\\n            {p : E → X} →\\n              IsCoveringMap p →\\n                (H : C(↑unitInterval × A, X)) →\\n                  (\", \"doc\": \"Let $p: E \\\\to X$ be a covering map, $A$ be a topological space, $H: [0,1] \\\\times A \\\\to X$ be a homotopy, and $f: A \\\\to E$ be a continuous map that lifts the initial state of the homotopy (i.e., $p(f(a\"}\n  {\"name\": \"GenLoop.homotopyTo\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"{N : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      {x : X} →\\n        [DecidableEq N] →\\n          (i : N) →\\n            {p q : ↑(GenLoop N X x)} →\\n              (↑p).HomotopyRel (↑q) (Cube.boundary N) →\\n                C(↑unitInterval × ↑unitInterval, C({ j // j ≠ i } → ↑unit\", \"doc\": \"Given an index $i$ and a relative homotopy $H$ between two maps $p,q$ in the space of continuous functions from the $N$-cube to $X$ with boundary fixed at $x$, this constructs a continuous map from $[\"}\n  {\"name\": \"Trivialization.clift\", \"module\": \"Mathlib/Topology/FiberBundle/Trivialization\", \"type\": \"{B : Type u_1} →\\n  {F : Type u_2} →\\n    {Z : Type u_4} →\\n      [inst : TopologicalSpace B] →\\n        [inst_1 : TopologicalSpace F] →\\n          {proj : Z → B} →\\n            [inst_2 : TopologicalSpace Z] →\\n              {ι : Type u_5} →\\n                [inst_3 : TopologicalSpace ι] →\\n                 \", \"doc\": \"Given a trivialization $ T $ of a fiber bundle with base space $ B $, fiber $ F $, and total space $ Z $, and a locally compact space $ \\\\iota $, this constructs a continuous map from $ T.\\\\text{source}\"}\n  {\"name\": \"GenLoop.fromLoop\", \"module\": \"Mathlib/Topology/Homotopy/HomotopyGroup\", \"type\": \"{N : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      {x : X} → [DecidableEq N] → (i : N) → LoopSpace (↑(GenLoop { j // j ≠ i } X x)) GenLoop.const → ↑(GenLoop N X x)\", \"doc\": \"Given an index $i$ in the finite set $N$ and a loop $p$ in the $(\\\\#N-1)$-dimensional loop space of $X$ at basepoint $x$, this constructs a loop in the $N$-dimensional loop space by composing the cube \"}\n  {\"name\": \"IsCoveringMap.monodromy\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    [inst : TopologicalSpace E] →\\n      [inst_1 : TopologicalSpace X] →\\n        {p : E → X} → IsCoveringMap p → {x y : X} → Path.Homotopic.Quotient x y → ↑(p ⁻¹' {x}) → ↑(p ⁻¹' {y})\", \"doc\": \"Given a covering map $ p : E \\to X $ and a homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $, this function maps each point $ e $ in the fiber $ p^{-1}(\\\\{x\\\\}) $ to the endpoint of the uni\"}\n  {\"name\": \"IsCoveringMap.liftHomotopy_apply\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} {A : Type u_3} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X]\\n  [inst_2 : TopologicalSpace A] {p : E → X} (cov : IsCoveringMap p) (H : C(↑unitInterval × A, X)) (f : C(A, E))\\n  (H_0 : ∀ (a : A), H (0, a) = p (f a)) (ta : ↑unitInterval × A),\\n  (cov.liftHomoto\", \"doc\": \"Let $p: E \\\\to X$ be a covering map of topological spaces. Let $H: [0, 1] \\\\times A \\\\to X$ be a homotopy, and let $f: A \\\\to E$ be a continuous map such that $p(f(a)) = H(0, a)$ for all $a \\\\in A$. Let $\\\\\"}\n  {\"name\": \"TopCat.RelativeCWComplex.basicCell\", \"module\": \"Mathlib/Topology/CWComplex/Abstract/Basic\", \"type\": \"(n : ℕ) → Unit → (TopCat.diskBoundary n ⟶ TopCat.disk n)\", \"doc\": \"For each natural number $ n $, the function `basicCell` provides the continuous inclusion map from the boundary of the $ n $-dimensional disk $ S^{n-1} $ into the $ n $-dimensional disk $ D^n $.\"}\n  {\"name\": \"IsCoveringMap.liftHomotopy_zero\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} {A : Type u_3} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X]\\n  [inst_2 : TopologicalSpace A] {p : E → X} (cov : IsCoveringMap p) (H : C(↑unitInterval × A, X)) (f : C(A, E))\\n  (H_0 : ∀ (a : A), H (0, a) = p (f a)) (a : A), (cov.liftHomotopy H f H_0) (0, a) \", \"doc\": \"For any element $a$ in the space $A$, the lift of the homotopy $H$ using $f$ and $H_0$ evaluated at $(0, a)$ equals $f(a)$.\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: returned loop-space equivalences and covering-space homotopy lifts do not give the disk-restriction boundary formula for arbitrary Serre fibrations. No one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Serre|connecting|boundary|liftHomotopy",
+   "results": "OK: 16 hits; returned Mathlib/Topology/Homotopy/TopCat/ZerothHomotopy.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HomotopyGroup.lean, Mathlib/Topology/Homotopy/HSpaces.lean, Mathlib/Topology/Homotopy/HSpaces.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial horn lifting, abstract model-category maps, homological connecting maps, or covering-space lifts do not state this arbitrary Serre-fibration boundary formula and bijectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connecting homomorphism for a Serre fibration with contractible total space is an isomorphism",
+   "results": "OK: 8 hits; returned CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.SnakeInput.δIso, groupCohomology.isIso_δ_of_isZero, CategoryTheory.ShortComplex.ShortExact.isIso_δ, CategoryTheory.ShortComplex.ShortExact.δIso, groupHomology.isIso_δ_of_isZero, groupHomology.δ, groupCohomology.δ",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial horn lifting, abstract model-category maps, homological connecting maps, or covering-space lifts do not state this arbitrary Serre-fibration boundary formula and bijectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopyGroup\", \"Fibration\"",
+   "results": "OK: 0 hits; returned ",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial horn lifting, abstract model-category maps, homological connecting maps, or covering-space lifts do not state this arbitrary Serre-fibration boundary formula and bijectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Serre fibration has a natural connecting map computed by the last face of a lifted simplex, bijective if its total space admits a based contraction",
+   "results": "OK: 8 hits; returned SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.modelCategoryQuillen.fibration_iff, SSet.modelCategoryQuillen.fibrations_eq, HomotopicalAlgebra.FibrantBrownFactorization.r, HomotopicalAlgebra.PathObject.IsGood.fibration_p, HomotopicalAlgebra.PathObject.instFibrationP₀, AlgebraicTopology.DoldKan.MorphComponents.φ",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial horn lifting, abstract model-category maps, homological connecting maps, or covering-space lifts do not state this arbitrary Serre-fibration boundary formula and bijectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last face of a disk lift defines the boundary map from homotopy classes in the base of a topological Serre fibration to its fibre",
+   "results": "OK: 8 hits; returned IsCoveringMap.monodromy, IsLocalHomeomorph.monodromy_theorem, IsCoveringMap.monodromy_map, IsCoveringMap.liftHomotopy_zero, IsCoveringMap.liftHomotopy, IsCoveringMap.liftHomotopy_apply, GenLoop.homotopyTo, FundamentalGroup.map_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: simplicial horn lifting, abstract model-category maps, homological connecting maps, or covering-space lifts do not state this arbitrary Serre-fibration boundary formula and bijectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy groups of a fiber of a continuous map with homotopy lifting property and contractible domain",
+   "results": "[leanfinder] OK 8 hit(s): instInhabitedHomotopyGroup, HomotopyGroup.Pi, HomotopyGroup, HomotopyGroup.auxGroup, HomotopyGroup.group, homotopyGroupEquivFundamentalGroup, homotopyGroupEquivFundamentalGroupOfUnique, HomotopyGroup.pi0EquivZerothHomotopy.",
+   "date": "2026-10-17",
+   "verdict": "no match: these define homotopy groups or identify loop groups; none constructs a connecting map for a continuous map with disk homotopy lifting property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-kan-realization-serre",
@@ -78,5 +199,20 @@
   "group": "Q57"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-serre-disk-lift-boundary-bijection",
+  "worker": "stage1",
+  "summary": "Recovered the authoritative unsplit node by read-only server access because it was initially absent from the shared snapshot. Retained its exact statement and ancestry. Gave six explicit steps: horn lift, elementary prism-pair homeomorphism, independence, last-face convention and naturality, cone contraction surjectivity, and filled-prism injectivity. No new nodes or off-unit theorem tools. Searched Mathlib through msearch.py; no exact match.",
+  "blueprint": "Realizes the homotopy-comparison supporting input named in blueprint.from.place, through lem-coef-kan-realization-serre and the recorded via chain. The ancestor prop-coef-integral-exceptional-adjoint is a coefficient-adjunction statement, not a literal disk-lifting theorem; its retained ancestry is provenance for the foundational model-category branch, not a claimed occurrence of this topological statement in the blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-8b4e05939",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-8b4e05939 (reviewer sub-agent of L); spot-checked: I read the item, its two cited statements, the parent lem-coef-kan-realization-serre (steps 5–6, the only place that uses this item), the duplicate candidates lem-coef-serre-homotopy-exact-sequence and lem-coef-kan-path-boundary-bijections, and the unit record. The delivery is one commit containing the item and its report, with no new nodes. Step 1: I checked that A=d_n, L=Λ^n_n, ∂T=A∪L and A∩L=∂A, including n=1 where A is vertex 0 and L is vertex 1. The horn-pair homeomorphism is stated word for word in lem-coef-realization-finite-limits. The lifting square commutes. The map into the k-ified fibre is continuous because A is compact Hausdorff. Step 2: I checked the square parametrization c and φ: c([0,3])=U, φ(0)=0, φ(4)=4, and [0,3] goes onto the bottom edge. The cylinder-to-ball gauge max(‖v'‖,|v_n|) is correct. Step 3: the pieces agree on L×{0,1}, and the extension restricted to A×I is a based homotopy. Step 4: the last-face convention matches Hatcher's distinguished-face restriction (pp. 343–344, Thm 4.41 p. 376). The j=0 initial-endpoint convention and naturality are correct. Step 5: the cone formula H(f(x),t) is well defined at the apex, equals f on A and e on L. Step 6: the boundary pieces agree on every overlap. The radial extension H(u(y),1−r) is continuous, and its projection is the required based homotopy without using connectedness. Small cases: j=0, the covering R→S^1 with winding k sent to −k on both sides, and a point total space. The item does not duplicate the exact-sequence node. Mathlib was searched with all three kinds of search and has no match. The route stays inside the unit; no tool_uses are needed and there is no SGA citation. Hatcher is not in the local literature archive; it is recorded as WANTED and the proof is marked agent-written. The proof stands on the cited statements alone. The item has no lean_audit field; that dates from Q57 creating the node and is not this delivery's fault. No fixes written."
+ }
 }
