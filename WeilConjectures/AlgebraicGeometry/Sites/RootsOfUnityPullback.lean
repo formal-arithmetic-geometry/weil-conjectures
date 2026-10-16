@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelta
 
 /-!
@@ -19,7 +20,6 @@ Kummer boundary.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf`: `g^* μₙ ⟶ μₙ`.
 - `AlgebraicGeometry.Scheme.gmCohomologyMap`, `AlgebraicGeometry.Scheme.rootsOfUnityCohomologyMap`:
   the pullback maps `Hᵠ(Y, 𝔾ₘ) → Hᵠ(X, 𝔾ₘ)` and `Hᵠ(Y, μₙ) → Hᵠ(X, μₙ)`.
 
@@ -56,30 +56,13 @@ lemma map_nsmul_comp_upperStarGmSheafToGmSheaf :
   rw [Functor.map_nsmul, CategoryTheory.Functor.map_id, Preadditive.nsmul_comp,
     Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]
 
-/-- The comparison `g^* μₙ ⟶ μₙ` of sheaves of `n`-th roots of unity along `g : X ⟶ Y`: the
-restriction of the comparison `g^* 𝔾ₘ ⟶ 𝔾ₘ`
-(`AlgebraicGeometry.Scheme.upperStarGmSheafToGmSheaf`). -/
-noncomputable def upperStarRootsOfUnitySheafToRootsOfUnitySheaf :
-    (g)^*[AddCommGrpCat.{u + 1}].obj (Y.rootsOfUnitySheaf n) ⟶ X.rootsOfUnitySheaf n :=
-  kernel.lift _ ((g)^*[AddCommGrpCat.{u + 1}].map (kernel.ι (n • 𝟙 Y.gmSheaf)) ≫
-    upperStarGmSheafToGmSheaf g) (by
-      rw [Category.assoc, ← map_nsmul_comp_upperStarGmSheafToGmSheaf, ← Category.assoc,
-        ← Functor.map_comp, kernel.condition, Functor.map_zero, zero_comp])
-
-@[reassoc (attr := simp)]
-lemma upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι :
-    upperStarRootsOfUnitySheafToRootsOfUnitySheaf g n ≫ X.rootsOfUnitySheafι n =
-      (g)^*[AddCommGrpCat.{u + 1}].map (Y.rootsOfUnitySheafι n) ≫
-        upperStarGmSheafToGmSheaf g :=
-  kernel.lift_ι _ _ _
-
 /-- The pullback of the Kummer sequence of `Y` maps to the Kummer sequence of `X`. -/
 noncomputable def kummerSequenceUpperStarMap :
     (Y.kummerSequence n).map (g)^*[AddCommGrpCat.{u + 1}] ⟶ X.kummerSequence n where
-  τ₁ := upperStarRootsOfUnitySheafToRootsOfUnitySheaf g n
+  τ₁ := upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g
   τ₂ := upperStarGmSheafToGmSheaf g
   τ₃ := upperStarGmSheafToGmSheaf g
-  comm₁₂ := upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι g n
+  comm₁₂ := upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι n g
   comm₂₃ := (map_nsmul_comp_upperStarGmSheafToGmSheaf g n).symm
 
 /-- The pullback map `Hᵠ(Y, 𝔾ₘ) → Hᵠ(X, 𝔾ₘ)` along `g : X ⟶ Y`. -/
@@ -89,7 +72,7 @@ noncomputable def gmCohomologyMap (q : ℕ) : Sheaf.H Y.gmSheaf q →+ Sheaf.H X
 /-- The pullback map `Hᵠ(Y, μₙ) → Hᵠ(X, μₙ)` along `g : X ⟶ Y`. -/
 noncomputable def rootsOfUnityCohomologyMap (q : ℕ) :
     Sheaf.H (Y.rootsOfUnitySheaf n) q →+ Sheaf.H (X.rootsOfUnitySheaf n) q :=
-  (Sheaf.H.map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf g n) q).comp
+  (Sheaf.H.map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g) q).comp
     (Etale.cohomologyMap g (Y.rootsOfUnitySheaf n) q)
 
 /-- The pullback maps on the cohomology of `μₙ` and of `𝔾ₘ` are compatible with the inclusion
@@ -121,7 +104,7 @@ lemma rootsOfUnityCohomologyMap_kummerδ₁ (hY : IsUnit (n : Γ(Y, ⊤))) (hX :
     ((Y.kummerSequence_shortExact n hY).map_of_exact (g)^*[AddCommGrpCat.{u + 1}])
     (X.kummerSequence_shortExact n hX)
     (kummerSequenceUpperStarMap g n) 1 (Etale.cohomologyMap g Y.gmSheaf 1 c)
-  exact (congrArg (Sheaf.H.map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf g n) 2) h₁).trans h₂
+  exact (congrArg (Sheaf.H.map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf n g) 2) h₁).trans h₂
 
 end Pullback
 
