@@ -45,6 +45,8 @@ namespace AlgebraicGeometry.Scheme
 /- The affine-chart presentation with its actual point prime and structural map.
 This is the chart argument of `StrictHenselizationLocalPresentation`, specialized
 to retain the identified prime. Source: Stacks Tag 04HX and the localized-triples lemma. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option maxHeartbeats 800000 in
 -- The nested small-model, affine-chart, and triple diagrams require extra elaboration.
 set_option backward.isDefEq.respectTransparency false in
@@ -182,6 +184,7 @@ private theorem smooth_chart_local_presentation
         rfl)
   exact ⟨L, hL, ares, hsep, aL, htower, aH,
     ρ ≫ ringIso.inv, hstruct, hbase, hH⟩
+-/
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

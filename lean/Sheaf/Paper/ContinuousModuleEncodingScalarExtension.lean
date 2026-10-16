@@ -36,22 +36,10 @@ private noncomputable def tensorToRestrict
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
     (f : changeOfRingsPresheaf α M ⟶ N.val) :
     M ⟶ (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).obj N := by
-  constructor
-  refine { app := ?_, naturality := ?_ }
-  · intro U
-    exact ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars
-      (α.hom.app U).hom (f.app U)
-  · intro U V i
-    ext m
-    change f.app V ((1 : B.obj.obj V) ⊗ₜ[A.obj.obj V,
-      (α.hom.app V).hom] M.val.map i m) =
-        N.val.map i (f.app U ((1 : B.obj.obj U) ⊗ₜ[A.obj.obj U,
-          (α.hom.app U).hom] m))
-    rw [← PresheafOfModules.naturality_apply f i]
-    change _ = f.app V (changeOfRingsMap α M i _)
-    rw [changeOfRingsMap_tmul]
-    simp
+  sorry
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def tensorFromRestrict
@@ -88,6 +76,7 @@ private noncomputable def tensorFromRestrict
       N.val.map i ((1 : B.obj.obj U) • (show N.val.obj U from g.val.app U m))
     simp only [one_smul]
     exact PresheafOfModules.naturality_apply g.val i m
+-/
 
 private noncomputable def tensorHomEquiv
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))

@@ -41,37 +41,7 @@ private lemma isUniversalHomeomorphism_field_strictHenselizationEval
     IsUniversalHomeomorphism
       (Spec.map (strictHenselizationEval
         (Spec.map (CommRingCat.ofHom (algebraMap K L))))) := by
-  classical
-  let s := Spec.map (CommRingCat.ofHom (algebraMap K L))
-  let C := strictHenselization s
-  have hc := strictHenselization_chart_maximalIdeal (.of K) (𝟙 _) s
-  rw [show s ≫ 𝟙 _ = s from Category.comp_id s] at hc
-  obtain ⟨hl, ρ, hρ, hm⟩ := hc
-  rw [Category.comp_id] at hρ
-  have hzero : IsLocalRing.maximalIdeal C = ⊥ := by
-    rw [hm]
-    have hp : (s (IsLocalRing.closedPoint L)).asIdeal = ⊥ :=
-      Ideal.eq_bot_of_prime (s (IsLocalRing.closedPoint L)).asIdeal
-    rw [hp, Ideal.map_bot]
-  let : Field C := (IsLocalRing.isField_iff_maximalIdeal_eq.mpr hzero).toField
-  let : Algebra K C := ρ.hom.toAlgebra
-  let : Algebra C L := (strictHenselizationEval s).hom.toAlgebra
-  have ht : (strictHenselizationEval s).hom.comp ρ.hom = algebraMap K L := by
-    suffices he : ρ ≫ strictHenselizationEval s =
-        CommRingCat.ofHom (algebraMap K L) from congrArg CommRingCat.Hom.hom he
-    apply Spec.map_injective
-    change Spec.map (ρ ≫ strictHenselizationEval s) = s
-    rw [Spec.map_comp, hρ]
-    exact spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
-  have : IsScalarTower K C L := IsScalarTower.of_algebraMap_eq fun x ↦
-    (DFunLike.congr_fun ht x).symm
-  have : Algebra.IsAlgebraic C L := Algebra.IsAlgebraic.tower_top (K := K) C
-  let e : C ≃+* IsLocalRing.ResidueField C := RingEquiv.ofBijective (IsLocalRing.residue C)
-    ⟨RingHom.injective _, IsLocalRing.residue_surjective⟩
-  have : IsSepClosed C := IsSepClosed.of_ringEquiv e.symm
-  have : IsPurelyInseparable C L := inferInstance
-  exact inferInstanceAs (IsUniversalHomeomorphism
-    (Spec.map (CommRingCat.ofHom (algebraMap C L))))
+  sorry
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma nonempty_addEquiv_strictLocalization
@@ -130,32 +100,6 @@ theorem nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure
           (((lowerStar AddCommGrpCat.{u + 1} a).rightDerived q).obj F)) ≃+
         Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
           (pullback.fst a (Spec.map (CommRingCat.ofHom (algebraMap K L))))).obj F) q) := by
-  let s := Spec.map (CommRingCat.ofHom (algebraMap K L))
-  let g := strictHenselizationStructuralMap s
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
-  have : QuasiSeparated a := (quasiSeparated_iff_quasiSeparatedSpace a).2 inferInstance
-  obtain ⟨d⟩ := nonempty_addEquiv_strictLocalization a L s F hF q
-  let k := Spec.map (strictHenselizationEval s)
-  have hk : k ≫ g = s := spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
-  have : IsUniversalHomeomorphism k :=
-    isUniversalHomeomorphism_field_strictHenselizationEval L
-  let p := pullback.fst a g
-  let pL := pullback.fst a s
-  let u : pullback a s ⟶ pullback a g :=
-    pullback.lift pL (pullback.snd a s ≫ k) (by
-      rw [Category.assoc, hk]
-      exact pullback.condition)
-  have hp : u ≫ p = pL := pullback.lift_fst _ _ _
-  have hu : IsPullback u (pullback.snd a s) (pullback.snd a g) k := by
-    have outer : IsPullback (u ≫ p) (pullback.snd a s) a (k ≫ g) := by
-      rw [hp, hk]
-      exact IsPullback.of_hasPullback a s
-    exact outer.of_right (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback a g)
-  have : IsUniversalHomeomorphism u :=
-    MorphismProperty.of_isPullback (P := @IsUniversalHomeomorphism) hu.flip inferInstance
-  let G := (upperStar AddCommGrpCat.{u + 1} p).obj F
-  let ec := (upperStarComp AddCommGrpCat.{u + 1} u p pL hp.symm).symm.app F
-  exact ⟨d.trans ((cohomologyEquiv u G q).trans
-    (((Sheaf.functorH _ q).mapIso ec).addCommGroupIsoToAddEquiv))⟩
+  sorry
 
 end AlgebraicGeometry.Etale

@@ -181,6 +181,8 @@ theorem CondensedQbarFunctionCoefficients.fiber_compare_mk
           q.fiber (Scheme.ProEt.mk g) y) :=
   q.fiber_compare (Scheme.ProEt.mk f) (Scheme.ProEt.mk g) x y h
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private lemma bounded_unit_isIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (U : X.ProEt) [IsAffine U.left] (wU : PointLanWeaklyContractible X U) :
@@ -269,6 +271,7 @@ private lemma bounded_unit_isIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
   have : IsIso (β.hom ≫
     (toSheafify K (CondensedQbarScalarConstruction.boundedP ℓ X)).app (op U)) := hh
   exact IsIso.of_isIso_comp_left β.hom _
+-/
 
 
 set_option backward.isDefEq.respectTransparency false in

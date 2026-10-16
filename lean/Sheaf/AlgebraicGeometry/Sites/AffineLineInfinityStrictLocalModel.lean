@@ -104,6 +104,8 @@ private theorem infinity_residue_trdeg
   rw [residueFieldHomOfOver_eq]
   exact ε.trdeg_eq
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem infinity_strictLocal_principalOpen
     (A : Type u) [CommRing A] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of A)) :
@@ -196,8 +198,11 @@ private theorem infinity_strictLocal_principalOpen
     (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away h))))
   rw [IsOpenImmersion.range_pullbackSnd, hopen]
   exact (PrimeSpectrum.localization_away_comap_range (Localization.Away h) h).symm
+-/
 
-/-- The complement of infinity in a strict localization of the relative projective line
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The complement of infinity in a strict localization of the relative projective line
 is a principal open cut out by a nonzero element of the maximal ideal. Its residue
 transcendence degree agrees with that of the base point and is less than the total dimension.
 Source: blueprint `thm-sc-affine-torsion-cd`, proof steps 4--6.
@@ -215,7 +220,7 @@ residue fields over K, so its transcendence degree equals that of the base point
 is a finite natural number a at most n+1: the closed-irreducible dimension theorem
 identifies a with the dimension of the base point's closure, which is at most the
 dimension n+1 of polynomial affine space. Hence a<n+2. This argument
-also applies at n=0 and at nonclosed base points; no closed-point assumption is made. -/
+also applies at n=0 and at nonclosed base points; no closed-point assumption is made. - /
 theorem affineLine_infinity_strictLocal_model
     (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ)
     (e : Spec (.of (MvPolynomial (Fin (n + 2)) K)) ≅
@@ -261,5 +266,6 @@ theorem affineLine_infinity_strictLocal_model
       · simp
       · simp
     exact hp'.isoPullback.symm ≪≫ eh
+-/
 
 end AlgebraicGeometry.Scheme

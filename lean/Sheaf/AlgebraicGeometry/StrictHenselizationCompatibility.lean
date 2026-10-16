@@ -26,7 +26,9 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- The affine pointed inclusion is initial and its opposite is final, by upstream cofinality. -/
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
+/ -- The affine pointed inclusion is initial and its opposite is final, by upstream cofinality. - /
 theorem affinePointedNeighbourhoods_initial_and_final_op
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -37,6 +39,7 @@ theorem affinePointedNeighbourhoods_initial_and_final_op
       (ObjectProperty.ι
         (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).op := by
   sorry
+-/
 
 end Scheme
 

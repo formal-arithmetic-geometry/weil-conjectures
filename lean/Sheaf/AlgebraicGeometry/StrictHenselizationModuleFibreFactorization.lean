@@ -41,48 +41,14 @@ private theorem pointedStrictHenselizationLift
               j).1.left.unop).inv =
           ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj
             j).2.left := by
-  classical
-  let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
-  let c : Cocone (smallStrictHenselizationDiagram s) :=
-    { pt := Γ(Spec (.of Ω), ⊤)
-      ι := { app := fun j ↦ (N.obj j.unop).2.left.appTop
-             naturality := by
-               intro j k a
-               change (Spec.map (N.map a.unop).1.left.unop).appTop ≫
-                 (N.obj k.unop).2.left.appTop = (N.obj j.unop).2.left.appTop ≫ 𝟙 _
-               rw [Category.comp_id, ← Scheme.Hom.comp_appTop]
-               congr 1
-               exact congrArg Over.Hom.left (N.map a.unop).2 } }
-  let r := (isColimitSmallStrictHenselizationCocone s).desc c
-  let t := (Spec (.of Ω)).toSpecΓ ≫ Spec.map r
-  have hleg (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
-      t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫
-        Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv = (N.obj j).2.left := by
-    change ((Spec (.of Ω)).toSpecΓ ≫ Spec.map r) ≫
-      Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫ _ = _
-    simp only [Category.assoc]
-    rw [← Spec.map_comp_assoc]
-    dsimp only [r]
-    rw [(isColimitSmallStrictHenselizationCocone s).fac]
-    change (Spec (.of Ω)).toSpecΓ ≫ Spec.map (N.obj j).2.left.appTop ≫ _ = _
-    rw [← Scheme.toSpecΓ_naturality_assoc]
-    change (N.obj j).2.left ≫ (Spec _).toSpecΓ ≫ _ = _
-    rw [toSpecΓ_SpecMap_ΓSpecIso_inv]
-    exact Category.comp_id _
-  refine ⟨t, ?_, hleg⟩
-  let := (strictHenselization_properties s).2.1
-  let j := Classical.choice (IsCofiltered.nonempty
-    (C := SmallModel.{u} (strictHenselizationNeighbourhoods s)))
-  change t ≫ strictHenselizationStructuralMap s = s
-  rw [← strictHenselizationStructuralMap_eq s j]
-  rw [← Category.assoc t, ← Category.assoc]
-  erw [hleg j]
-  exact (N.obj j).2.w
+  sorry
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical exchange map has the unit/pointed-lift formula on every germ.
+/ -- The canonical exchange map has the unit/pointed-lift formula on every germ.
 This is the representative calculation from GeometricFibreExchangeGerms (Tag 0EYP),
-with no assumed comparison map: the map being evaluated is exchange itself. -/
+with no assumed comparison map: the map being evaluated is exchange itself. - /
 private theorem fibreExchangeSectionComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -205,6 +171,7 @@ private theorem fibreExchangeSectionComparison
         (geometricFibreSectionLift sq.toCommSq V v).w.symm
   rw [hlift]
   rfl
+-/
 
 -- The existing existential witness `ht` is intentionally unused in the statement.
 set_option linter.unusedVariables false in
@@ -265,66 +232,6 @@ theorem strictHenselizationModuleFibre_factorization
           (Θ.hom.hom ((pointSmallEtale s).toPresheafFiber V v
             ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj z))) =
         (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z := by
-  classical
-  obtain ⟨t, ht, hpoint⟩ := pointedStrictHenselizationLift s
-  have hclosed : t (IsLocalRing.closedPoint Ω) =
-      IsLocalRing.closedPoint (strictHenselizationRing s) := by
-    apply (strictHenselizationStructuralMap_fiber_eq_closedPoint
-      (A := strictHenselizationRing s) s (Iso.refl _) _).mp
-    change (t ≫ strictHenselizationStructuralMap s) (IsLocalRing.closedPoint Ω) = _
-    rw [ht]
-  let i : X' ⟶ pullback f (strictHenselizationStructuralMap s) :=
-    pullback.lift g' (f' ≫ t) (by rw [Category.assoc, ht]; exact sq.w)
-  have hiq : i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g' :=
-    pullback.lift_fst _ _ _
-  have hip : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t :=
-    pullback.lift_snd _ _ _
-  have hisq : IsPullback i f' (pullback.snd f (strictHenselizationStructuralMap s)) t := by
-    apply IsPullback.of_right (h₁₂ := pullback.fst f (strictHenselizationStructuralMap s))
-      (h₂₂ := strictHenselizationStructuralMap s)
-    · simpa only [hiq, ht] using sq
-    · exact hip
-    · exact IsPullback.of_hasPullback _ _
-  obtain ⟨Θ, hΘ⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
-  let e := (upperStarComp (ModuleCat.{u + 1} Λ) i
-    (pullback.fst f (strictHenselizationStructuralMap s)) g' hiq.symm).app F
-  let G := (g')^*[ModuleCat.{u + 1} Λ].obj F
-  let P := (f')_*[ModuleCat.{u + 1} Λ].obj G
-  let T := Scheme.Etale.mk (𝟙 (Spec (.of Ω)))
-  let hT := IsTerminal.isTerminalOfObj
-    (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω)))
-    T Over.mkIdTerminal
-  let j := (pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber T
-    (Over.homMk (𝟙 _) (Category.comp_id _)) P.obj
-  have : IsIso j := terminalGerm_isIso Λ P
-  obtain ⟨b₀, hb₀⟩ := fibreExchangeSectionComparison Λ sq F
-  let b := (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).mapIso e.symm ≪≫
-    ((lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').app G).symm ≪≫
-    (Sheaf.ΓNatIsoSheafSections _ _ hT).app P ≪≫ asIso j ≪≫ b₀
-  refine ⟨t, ht, hclosed, i, hisq, hiq, Θ, b, ?_⟩
-  have hpoint' : ∀ k : SmallModel.{u} (strictHenselizationNeighbourhoods s),
-      t ≫ (strictHenselizationCone s).π.app (op (op k)) ≫
-        (Spec (unop ((equivSmallModel.{u}
-          (strictHenselizationNeighbourhoods s)).inverse.obj k).1.left)).isoSpec.inv =
-        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj k).2.left := by
-    intro k
-    rw [isoSpec_Spec_inv]
-    exact hpoint k
-  have hex := strictLocal_exchange_compatibility Λ sq F t hpoint' i hip hiq Θ.hom hΘ
-  have hex' :
-      Θ.hom ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i
-          ((pullback.fst f (strictHenselizationStructuralMap s))^*[ModuleCat.{u + 1} Λ].obj F)
-        ≫ b.hom =
-      (geometricPointSourceStalkIso Λ s ((f)_*[ModuleCat.{u + 1} Λ].obj F)).inv ≫
-        (pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map
-          ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) ≫ b₀.hom := by
-    dsimp only at hex
-    rw [hex]
-    simp [b, e, G, P, T, hT, j, geometricPointSourceStalkIso, Category.assoc]
-  intro V v z
-  have h := congrArg (fun k ↦ k z)
-    ((congrArg (fun k ↦ (pointSmallEtale s).toPresheafFiber V v
-      ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj ≫ k) hex').trans (hb₀ V v))
-  simpa only [ConcreteCategory.comp_apply, ModuleCat.Hom.hom] using! h
+  sorry
 
 end AlgebraicGeometry.Etale

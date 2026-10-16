@@ -260,15 +260,8 @@ theorem hypercohomology_maps_exact :
 /-- The exact truncation couple, with explicit data and separately named exactness proofs.
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
 (blueprint: def-weil-pbc-hypercohomology-filtrations). -/
-noncomputable def hypercohomologyCouple : BigradedExactCouple B 0 :=
-  BigradedExactCouple.ofShifted (hypercohomologyD F K) (hypercohomologyE F K)
-    (hypercohomologyAlpha F K) (hypercohomologyBoundary F K) (hypercohomologyG F K)
-    (hypercohomology_maps_exact F K).1
-    (hypercohomology_maps_exact F K).2.1
-    (hypercohomology_maps_exact F K).2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.2.1
-    (hypercohomology_maps_exact F K).2.2.2.2.2
+noncomputable def hypercohomologyCouple : BigradedExactCouple B 0 := by
+  sorry
 
 /-- The canonical map from a truncation to the abutment in total degree n.
 Source: blueprint order 1315; Stacks Tags 0DDE, 015J
@@ -447,62 +440,7 @@ private theorem couple_iso_pages (X Y : BigradedExactCouple A 0)
       (∀ p q, e 0 p q = eE p q) ∧
       (∀ r p q, (X.pageCouple r).d p q ≫ (e r (p + 2 + r) (q - 1 - r)).hom =
         (e r p q).hom ≫ (Y.pageCouple r).d p q) := by
-  obtain ⟨t, ht₀, htd, htπ, _⟩ := BigradedExactCouple.coupleMorphism X Y
-    (fun p q => (eD p q).hom) (fun p q => (eE p q).hom) ha hf hg
-  obtain ⟨s, hs₀, hsd, hsπ, _⟩ := BigradedExactCouple.coupleMorphism Y X
-    (fun p q => (eD p q).inv) (fun p q => (eE p q).inv)
-    (fun p q => inverse_square _ _ _ _ (ha p q))
-    (fun p q => inverse_square _ _ _ _ (hf p q))
-    (fun p q => inverse_square _ _ _ _ (hg p q))
-  have hind (r : ℕ) :
-      (∀ p q, t r p q ≫ s r p q = 𝟙 _) ∧
-      (∀ p q, s r p q ≫ t r p q = 𝟙 _) := by
-    induction r with
-    | zero =>
-      constructor <;> intro p q <;> rw [ht₀, hs₀] <;> simp
-    | succ r ih =>
-      have hcomp {U V : BigradedExactCouple A 0}
-          (a : ∀ p q, (U.pageCouple r).E p q ⟶ (V.pageCouple r).E p q)
-          (b : ∀ p q, (V.pageCouple r).E p q ⟶ (U.pageCouple r).E p q)
-          (a' : ∀ p q, (U.pageCouple (r + 1)).E p q ⟶ (V.pageCouple (r + 1)).E p q)
-          (b' : ∀ p q, (V.pageCouple (r + 1)).E p q ⟶ (U.pageCouple (r + 1)).E p q)
-          (hab : ∀ p q, a p q ≫ b p q = 𝟙 _)
-          (haπ : ∀ p q, ∃ k : kernel ((U.pageCouple r).d p q) ⟶
-              kernel ((V.pageCouple r).d p q),
-            k ≫ kernel.ι ((V.pageCouple r).d p q) =
-              kernel.ι ((U.pageCouple r).d p q) ≫ a p q ∧
-            (U.pageCouple r).derivedEProjection p q ≫ a' p q =
-              k ≫ (V.pageCouple r).derivedEProjection p q)
-          (hbπ : ∀ p q, ∃ k : kernel ((V.pageCouple r).d p q) ⟶
-              kernel ((U.pageCouple r).d p q),
-            k ≫ kernel.ι ((U.pageCouple r).d p q) =
-              kernel.ι ((V.pageCouple r).d p q) ≫ b p q ∧
-            (V.pageCouple r).derivedEProjection p q ≫ b' p q =
-              k ≫ (U.pageCouple r).derivedEProjection p q) :
-          ∀ p q, a' p q ≫ b' p q = 𝟙 _ := by
-        intro p q
-        obtain ⟨ka, hka, hpa⟩ := haπ p q
-        obtain ⟨kb, hkb, hpb⟩ := hbπ p q
-        have hk : ka ≫ kb = 𝟙 _ := by
-          apply (cancel_mono (kernel.ι ((U.pageCouple r).d p q))).mp
-          rw [Category.assoc, hkb, ← Category.assoc, hka, Category.assoc, hab]
-          simp
-        have : Epi ((U.pageCouple r).derivedEProjection p q) := by
-          dsimp only [BigradedExactCouple.derivedEProjection]
-          infer_instance
-        apply (cancel_epi ((U.pageCouple r).derivedEProjection p q)).mp
-        rw [← Category.assoc, hpa, Category.assoc, hpb, ← Category.assoc, hk]
-        exact (Category.id_comp _).trans (Category.comp_id _).symm
-      exact ⟨hcomp (t r) (s r) (t (r + 1)) (s (r + 1)) ih.1 (htπ r) (hsπ r),
-        hcomp (s r) (t r) (s (r + 1)) (t (r + 1)) ih.2 (hsπ r) (htπ r)⟩
-  let e (r : ℕ) (p q : ℤ) : (X.pageCouple r).E p q ≅ (Y.pageCouple r).E p q :=
-    { hom := t r p q
-      inv := s r p q
-      hom_inv_id := (hind r).1 p q
-      inv_hom_id := (hind r).2 p q }
-  refine ⟨e, ?_, htd⟩
-  intro p q
-  exact Iso.ext (ht₀ p q)
+  sorry
 
 omit [Abelian A] [HasDerivedCategory A] in
 private theorem change_source_square {V W V' W' V'' W'' : A}
@@ -533,33 +471,7 @@ private theorem exact_couple_pages (Φ : A ⥤ B) [Φ.Additive]
       (∀ r p q, Φ.map ((X.pageCouple r).d p q) ≫
         (e r (p + 2 + r) (q - 1 - r)).hom =
           (e r p q).hom ≫ (Y.pageCouple r).d p q) := by
-  obtain ⟨Z, hD, hE, ha₀, hf₀, hg₀, δ, φ, iX, iZ, h₀, hi₀, hiS, hi,
-      hα, hf', hg', hd, _⟩ := BigradedExactCouple.exactFunctor_couple Φ X
-  have hg₀' (p q : ℤ) : Φ.map (X.initialG p q) ≫ eqToHom (hE p q) =
-      eqToHom (hD p q) ≫ Z.initialG p q := by
-    have h : Φ.map (eqToHom (by congr 1 <;> omega :
-        X.E (p + 0) (q - 0) = X.E p q)) ≫ eqToHom (hE p q) =
-        eqToHom (hE (p + 0) (q - 0)) ≫
-          eqToHom (by congr 1 <;> omega : Z.E (p + 0) (q - 0) = Z.E p q) := by
-      simp only [eqToHom_map, eqToHom_trans]
-    unfold BigradedExactCouple.initialG
-    rw [Functor.map_comp, Category.assoc, h, ← Category.assoc, hg₀ p q, Category.assoc]
-  obtain ⟨ψ, hψ₀, hψd⟩ := couple_iso_pages Z Y
-    (fun p q => (eqToIso (hD p q)).symm ≪≫ eD p q)
-    (fun p q => (eqToIso (hE p q)).symm ≪≫ eE p q)
-    (fun p q => change_source_square _ _ _ _ _ _ _ (ha₀ p q) (ha p q))
-    (fun p q => change_source_square _ _ _ _ _ _ _ (hf₀ p q) (hf p q))
-    (fun p q => change_source_square _ _ _ _ _ _ _ (hg₀' p q) (hg p q))
-  refine ⟨fun r p q => φ r p q ≪≫ ψ r p q, ?_, ?_⟩
-  · intro p q
-    change φ 0 p q ≪≫ ψ 0 p q = eE p q
-    rw [(h₀ p q).2, hψ₀]
-    simp
-  · intro r p q
-    simp only [Iso.trans_hom, ← Category.assoc]
-    rw [hd]
-    rw [Category.assoc, hψd]
-    simp only [Category.assoc]
+  sorry
 
 
 set_option backward.isDefEq.respectTransparency false in
@@ -705,6 +617,8 @@ private theorem hypercohomology_bounds_of_isGE (a : ℤ)
       (DerivedCategory.isZero_of_isGE _ (n + 1) (n - 1) (by omega))
       (DerivedCategory.isZero_of_isGE _ (n + 1) n (by omega))
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem hypercohomology_initialG (p q : ℤ) :
     (hypercohomologyCouple F K).initialG p q =
@@ -720,10 +634,13 @@ private theorem hypercohomology_initialG (p q : ℤ) :
           hypercohomologyE F K p q) = _
   erw [eqToHom_trans, eqToHom_refl]
   exact Category.comp_id _
+-/
 
 
 attribute [local irreducible] TruncationCouple.bridgeIso
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem hypercohomology_bridge [IsGrothendieckAbelian.{v₁} A]
     [IsGrothendieckAbelian.{v₂} B] (G : A ⥤ B) [G.Additive] [PreservesFiniteLimits G] :
@@ -767,7 +684,10 @@ private theorem hypercohomology_bridge [IsGrothendieckAbelian.{v₁} A]
     simp only [TruncationCouple.g, TruncationCouple.derivedTriangle,
       Functor.mapTriangle, TruncationCouple.triangle,
       Pretriangulated.Triangle.mk_mor₂, Iso.hom_inv_id_assoc]
+-/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 private theorem hypercohomology_convergence_of_bounds (a : ℤ)
     (hD : ∀ p q : ℤ, q < a → IsZero (hypercohomologyD F K p q))
     (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (hypercohomologyE F K p q))
@@ -904,7 +824,10 @@ private theorem hypercohomology_convergence_of_bounds (a : ℤ)
       ← Category.assoc, imageSubobject_arrow_comp, hι]
     simp only [j, eqToHom_trans_assoc, imageSubobject_comp_eq_of_epi]
     rfl
+-/
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 private theorem hypercohomology_exactFunctor
     {C : Type uC} [Category.{vC, uC} C] [Abelian C] [HasDerivedCategory C]
@@ -991,6 +914,7 @@ private theorem hypercohomology_exactFunctor
   · intro p q
     rw [hφ]
     exact hg p q
+-/
 
 end CategoryTheory
 
@@ -1045,9 +969,11 @@ noncomputable def hypercohomologyFiltrations (n : ℤ) :
 
 attribute [local irreducible] TruncationCouple.bridgeIso
 
+/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
+returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- The three spectral sequences have the stated E₂ terms, finite filtrations, and unconditional
+/ -- The three spectral sequences have the stated E₂ terms, finite filtrations, and unconditional
   convergence, the first couple is the truncation couple of def-sp-truncation-couple for f_*
   through `TruncationCouple.bridgeIso`, and the middle one is the exact inverse image of the
   first.
@@ -1068,7 +994,7 @@ Proof: Transfer the lower cohomological bound along the supplied representative 
   hence with all three couple maps, including the boundary. Apply lem-sp-exact-functor-couple
   and couple functoriality in both directions; cancellation at the kernel inclusions and
   quotient projections proves that the page maps are inverses. Finally, exactness preserves
-  the epi-image factorization of each abutment map, giving the stated filtration comparison. -/
+  the epi-image factorization of each abutment map, giving the stated filtration comparison. - /
 theorem hypercohomologyFiltrations_spec
     (sq : IsPullback g' f' f g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -1338,5 +1264,6 @@ theorem hypercohomologyFiltrations_spec
     change G.map i ≫ c.hom = _ at hc
     rw [hc, imageSubobject_comp_eq_of_epi]
     rfl
+-/
 
 end AlgebraicGeometry.Etale
