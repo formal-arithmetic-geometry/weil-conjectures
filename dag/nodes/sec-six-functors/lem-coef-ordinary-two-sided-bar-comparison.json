@@ -249,5 +249,47 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57149d2f9",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Read node, both stmt deps, report (Worker report + Second reading by Q62), module and reused decls (Total/projection/totalMap; Thomason Gr = (Grothendieck (F⋙opFunctor))ᵒᵖ; Enhanced.IsWeakHomotopyEquivalence). E's objects, arrows (h,u,v) and composition match the node via the published iterated Grothendieck construction. terms = Σ over ComposableArrows of N_iF(c_k)×N_jG(c_0); operators: d_0 applies G(h_1), d_k applies F(h_k) contravariantly, interior faces compose, degeneracies repeat, k=0 transports are identities; diagonal checked by rfl. Change = (H, α:F'⇒F∘Hᵒᵖ, β:G'⇒G∘H), no equivalence hypotheses; the bar-end map and nerve(totalMap) end map are correct; the four sorry'd law theorems are true. Main theorem: ReflTransGen of pointwise-weak natural transformations, either direction, in Data ⥤ SSet.{max u v}, giving a fixed-shape natural finite zigzag, neither weaker nor stronger. Universes u, v explicit and independent; edge cases (empty C, empty fibres, k/i/j=0, terminal functors) covered. Docstrings and blueprint ids present, proofs sorry only, lines ≤100, lean.statement verbatim, 21 declarations recorded. nt_compile --json on the side overlay: exit 0, clean; test module confirmed rfl checks and axioms. Note: importing the citer's module to reuse Total means the citer cannot import this item; documented and allowed by stages/2 §3 rule 7. No repair needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrdinaryTwoSidedBarComparison",
+  "declaration": "SSet.OrdinaryTwoSidedBar.ordinary_two_sided_bar_comparison",
+  "declarations": [
+   "SSet.OrdinaryTwoSidedBar.Data",
+   "SSet.OrdinaryTwoSidedBar.Change",
+   "SSet.OrdinaryTwoSidedBar.identity",
+   "SSet.OrdinaryTwoSidedBar.compose",
+   "SSet.OrdinaryTwoSidedBar.change_laws",
+   "SSet.OrdinaryTwoSidedBar.dataCategory",
+   "SSet.OrdinaryTwoSidedBar.Indices",
+   "SSet.OrdinaryTwoSidedBar.terms",
+   "SSet.OrdinaryTwoSidedBar.operator",
+   "SSet.OrdinaryTwoSidedBar.operator_laws",
+   "SSet.OrdinaryTwoSidedBar.trisimplicial",
+   "SSet.OrdinaryTwoSidedBar.diagonalIndex",
+   "SSet.OrdinaryTwoSidedBar.bar",
+   "SSet.OrdinaryTwoSidedBar.changeTerms",
+   "SSet.OrdinaryTwoSidedBar.changeTerms_laws",
+   "SSet.OrdinaryTwoSidedBar.barMap",
+   "SSet.OrdinaryTwoSidedBar.barFunctor",
+   "SSet.OrdinaryTwoSidedBar.totalNerveMap",
+   "SSet.OrdinaryTwoSidedBar.totalNerveMap_laws",
+   "SSet.OrdinaryTwoSidedBar.totalNerveFunctor",
+   "SSet.OrdinaryTwoSidedBar.ordinary_two_sided_bar_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrdinaryTwoSidedBarComparison.lean",
+  "statement": "theorem ordinary_two_sided_bar_comparison : Relation.ReflTransGen (fun A B : Data.{u, v} ⥤ SSet.{max u v} ↦ (∃ f : A ⟶ B, ∀ X : Data.{u, v}, Enhanced.IsWeakHomotopyEquivalence (f.app X)) ∨ (∃ f : B ⟶ A, ∀ X : Data.{u, v}, Enhanced.IsWeakHomotopyEquivalence (f.app X))) barFunctor totalNerveFunctor",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The trisimplicial bar has real chain-indexed data and all three operators. ReflTransGen of pointwise weak natural transformations in either direction, in the functor category on all Data, states precisely one fixed finite strictly natural zigzag. The existing Total and totalMap helpers are reused from TwoSidedSimplicialGrothendieckInvariance; that module is imported only for these ordinary constructions. Its reverse proof import of this item must be omitted to avoid an import cycle. The four named law theorems are the construction and functoriality clauses of this same node. No additional equivalence or nonemptiness hypothesis is present."
  }
 }

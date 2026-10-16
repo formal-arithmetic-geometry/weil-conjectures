@@ -234,5 +234,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-018aa2b3c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "All four clauses match the node and blueprint source verbatim: arbitrary Scheme.{u} morphisms; Etale→WeaklyEtale; Algebra.IndEtale R B → WeaklyEtale(Spec.map (algebraMap R B)); WeaklyEtale ∧ LocallyOfFinitePresentation → Etale; iff over all affine charts (T, V, e) with appLE flat and lmul' flat. A compiled Iff.rfl test shows the clause-4 lambda uses exactly the chart-induced algebra (no competing global instance; lmul'_apply_tmul gives multiplication). Recorded dependency declarations reused (upstream Algebra.IndEtale via Sheaf.RingTheory.IndPrincipalZariski); no definitions, only `by sorry` (axioms: sorryAx only beyond standard), source/blueprint docstrings with all 7 proof steps, lean.statement matches the file verbatim, Worker report and Second reading by Q36 present, no added hypotheses, single universe u, no statement change or new nodes. nt_compile.py: rc=0, clean, 2.1 s."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleComparison",
+  "declaration": "AlgebraicGeometry.etale_indEtale_weaklyEtale_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComparison.lean",
+  "statement": "theorem etale_indEtale_weaklyEtale_comparison : (∀ {U X : Scheme.{u}} (u : U ⟶ X), Etale u → WeaklyEtale u) ∧ (∀ (R B : Type u) [CommRing R] [CommRing B] [Algebra R B], Algebra.IndEtale R B → WeaklyEtale (Spec.map (CommRingCat.ofHom (algebraMap R B)))) ∧ (∀ {U X : Scheme.{u}} (u : U ⟶ X), WeaklyEtale u → LocallyOfFinitePresentation u → Etale u) ∧ (∀ {U X : Scheme.{u}} (u : U ⟶ X), WeaklyEtale u ↔ ∀ (T : X.Opens) (_hT : IsAffineOpen T) (V : U.Opens) (_hV : IsAffineOpen V) (e : V ≤ u ⁻¹ᵁ T), (u.appLE T V e).hom.Flat ∧ (fun (_a : Algebra Γ(X, T) Γ(U, V)) ↦ RingHom.Flat (Algebra.TensorProduct.lmul' Γ(X, T) (S := Γ(U, V))).toRingHom) (u.appLE T V e).hom.toAlgebra)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-16",
+  "existing": false
  }
 }

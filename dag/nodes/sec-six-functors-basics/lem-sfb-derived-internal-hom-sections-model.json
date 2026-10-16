@@ -24,7 +24,8 @@
   "def-pur-kinjective-complex",
   "def-pc-tensor-complex-sheaves",
   "def-pur-ringed-site-zeroth-hypercohomology",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-pur-derived-internal-hom"
  ],
  "proof": [
   {
@@ -327,5 +328,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7482cad87",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Read the node, its 9 statement dependencies (Lean sources for derivedInternalHomOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, homComplex_exists, IsKFlatIndependentCoefficients, map₂HomologicalComplex = mapBifunctor), the report and the module. Every clause is rendered: tensorRightAdjoint_iso takes any right adjoint H of a T characterized by Tot(P⊗-) on K-flat representatives and gives H≅RHom(K,-); conjunct 1 gives RHom(QA,QI)≅Q Hom•(A,I), natural in A and in K-injective I; conjunct 2 gives the full-complex RΓ comparison through the same rightDerivedFunctor of Hom(O,-) as the recorded H0 definition; conjunct 3 gives a chain iso to Mathlib HomComplex (signs d_I f-(-1)^n f d_A checked) with the pre/postcomposition equation; conjunct 4 gives H^n for all n:ℤ. No boundedness or flatness of A; universes independent and bound; no hollow definitions; sorry-only proofs; source and blueprint docstrings; lean.statement verbatim. Added statement dependency def-pur-derived-internal-hom is landed with no cycle; the citer det-lem-int-ext-formula is served. nt_compile.py on the snapshot against the local side overlay: rc=0, no errors."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel",
+  "declaration": "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model",
+  "declarations": [
+   "CategoryTheory.DerivedInternalHomSectionsModel.Modules",
+   "CategoryTheory.DerivedInternalHomSectionsModel.Complexes",
+   "CategoryTheory.DerivedInternalHomSectionsModel.Derived",
+   "CategoryTheory.DerivedInternalHomSectionsModel.sections",
+   "CategoryTheory.DerivedInternalHomSectionsModel.derivedSections",
+   "CategoryTheory.DerivedInternalHomSectionsModel.internalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.injectiveProperty",
+   "CategoryTheory.DerivedInternalHomSectionsModel.representedInternalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.representativeHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.globalHom",
+   "CategoryTheory.DerivedInternalHomSectionsModel.totalTensor",
+   "CategoryTheory.DerivedInternalHomSectionsModel.tensorRightAdjoint_iso",
+   "CategoryTheory.DerivedInternalHomSectionsModel.derived_internalHom_sections_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSectionsModel.lean",
+  "statement": "theorem derived_internalHom_sections_model : Nonempty (representedInternalHom.{c, v, r, w} R ≅ representativeHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ Nonempty (representedInternalHom.{c, v, r, w} R ⋙ derivedSections.{c, v, r, w, z} R ≅ globalHom.{c, v, r} R ⋙ DerivedCategory.Q) ∧ (∃ e : ∀ (A I : Complexes.{c, v, r} R), ((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I) ≅ CochainComplex.HomComplex A I, ∀ (A A' I I' : Complexes.{c, v, r} R) (f : A' ⟶ A) (g : I ⟶ I') (n p q : ℤ) (hpq : p + n = q) (s : (((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).obj (homComplex (R := R) A I)).X n), ((e A' I').hom.f n ((((sections.{c, v, r} R).mapHomologicalComplex (ComplexShape.up ℤ)).map (((homComplexFunctor (R := R)).map f.op).app I ≫ ((homComplexFunctor (R := R)).obj (op A')).map g)).f n s)).v p q hpq = f.f p ≫ ((e A I).hom.f n s).v p q hpq ≫ g.f q) ∧ (∀ (K M : Derived.{c, v, r, w} R) (n : ℤ), Nonempty (((DerivedCategory.homologyFunctor.{z} AddCommGrpCat.{max c v r} n).obj ((derivedSections.{c, v, r, w, z} R).obj (((internalHom.{c, v, r, w} R).obj (op K)).obj M))) ≃+ (K ⟶ M⟦n⟧)))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Two complementary statements render the node: tensorRightAdjoint_iso identifies any specified right adjoint of derived tensor with the existing derived internal Hom; derived_internalHom_sections_model supplies the natural representative and full derived-global-sections comparisons, the ordinary global Hom complex with its componentwise naturality, and the cohomology formula in every integer degree. The added landed dependency def-pur-derived-internal-hom provides the canonical bifunctor; no second internal Hom is constructed. All helper definitions are transparent specializations/composites of the recorded operations. Site object, site morphism, coefficient and derived morphism universes remain independent."
  }
 }
