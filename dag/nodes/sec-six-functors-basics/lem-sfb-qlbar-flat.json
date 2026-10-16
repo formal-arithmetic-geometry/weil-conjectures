@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-qlbar-flat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\overline{\\mathbf Q}_{\\ell,X}$ is flat over $E_X$",
@@ -18,28 +18,172 @@
  ],
  "proof": [
   {
-   "text": "By [sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,X}=\\operatorname{colim}_{F\\ge E}F_X$, a filtered\ncolimit along the inclusions, compatibly with the $E_X$-module structures\n([lem-sfb-subfield-coefficient-map-comp]). The relative tensor product commutes with colimits\nin each variable, so $\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}M\\cong\\operatorname{colim}_FF_X\\otimes_{E_X}M$.\nEach $F_X\\otimes_{E_X}-$ is exact ([lem-sfb-subfield-flat]), and filtered colimits are exact in\nthe Grothendieck abelian category $\\Mod_{\\overline{\\mathbf Q}_{\\ell,X}}$ (equivalently, on underlying abelian\nsheaves), so the colimit is exact.",
+   "text": "Put $R=E_X$ and $B=\\overline{\\mathbf Q}_{\\ell,X}$. Work on the small pro-étale site of $X$, in a coefficient universe containing its skeleton and the set of finite subextensions. The internal modules of [sk-def-sfb-module-objects] identify with the sheaves of modules of [def-weil-sheaf-of-modules-category]: by [sk-def-sfb-sheaf-tensor], a map $R\\otimes M\\to M$ is a compatible family of bilinear sectionwise actions, and its unit and associativity equations are precisely the ordinary module laws. This identifies morphisms too. Under this identification the coequalizer in [sk-def-sfb-change-of-scalars] is the relative sheaf tensor of [def-pur-sheaf-tensor-product]: maps out of either are exactly compatible bilinear maps satisfying $(sr,m)\\mapsto(s,rm)$. Thus all later assertions about sheaves of modules apply to the internal modules and to the very extension-of-scalars functor in the statement.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-sfb-subfield-coefficient-map-comp",
-    "lem-sfb-subfield-flat"
+    "sk-def-sfb-module-objects",
+    "def-weil-sheaf-of-modules-category",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-change-of-scalars",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "first sentence and tensor sentence: identification of the module and tensor conventions"
+   }
+  },
+  {
+   "text": "Let $I$ be the set of finite subextensions $F\\subseteq\\Qlb$ containing $E$, ordered by inclusion. It contains $E$ and is directed: the compositum of two such fields is a finite common upper bound by [det-def-sfb-qlbar-condensed-subextensions]. The ring colimit in [sk-prop-sfb-qlbar-colimit-x] may be restricted to $I$. Explicitly, a cocone on $I$ extends to all finite subextensions by assigning to $H$ the composite $H_X\\to(EH)_X\\to T$. For $H\\subseteq H'$ the square commutes after passing to $EH'$, and for $H\\supseteq E$ the extension is the original map. Conversely any cocone on all subextensions is forced to have this extension by its compatibility with $H\\subseteq EH$. Thus the cocone universal properties agree. Its vertex is $B$, and [lem-sfb-subfield-coefficient-map-comp] says its legs are $R$-linear for the $R$-actions induced by $E_X\\to F_X$ and the specified $E_X\\to B$.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-subfield-coefficient-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "first sentence: restricting the coefficient colimit to F containing E"
+   }
+  },
+  {
+   "text": "Here the coefficient colimit also holds in $R$-modules; the following argument avoids assuming that a colimit in rings is automatically a module colimit. Form $C=\\operatorname{colim}_{F\\in I}F_X$ in $R$-modules, with maps $j_F$, using [lem-weil-pbc-module-sheaves-colimits-forgetful]. By [lem-weil-pbc-independent-sheaf-tensor-colimits], tensoring on the left by any fixed $R$-module preserves this colimit. The balanced maps $x\\otimes y\\mapsto y\\otimes x$ and $y\\otimes x\\mapsto x\\otimes y$ are inverse $R$-linear maps by [def-pur-sheaf-tensor-product], since $R$ is commutative; they commute with morphisms on each factor. Thus tensoring on the right by a fixed module also preserves this colimit. Define multiplication on $C$ as follows: for $F,G\\in I$ choose a common upper field $H$ and use $F_X\\otimes_R G_X\\to H_X\\xrightarrow{j_H}C$, where the first map is multiplication after inclusion. A larger upper field gives the same map, and any two choices have a common upper field, so these maps are independent of the choice and compatible in both variables. Applying the tensor-colimit universal property twice gives $C\\otimes_R C\\to C$. The map $R=E_X\\xrightarrow{j_E}C$ is its unit. Associativity, commutativity and the unit equations follow by precomposing with three, two or one of the maps $j_F$, respectively, and placing the finitely many fields in a single upper field; the tensor-colimit property makes these tests determine the maps. For any compatible ring cocone $F_X\\to T$, give $T$ its $R$-action from its $E$-leg. The unique $R$-linear map $C\\to T$ preserves multiplication because on each $F_X\\otimes_R G_X$, after passage to an upper field $H$, the two maps are the ring-cocone map $H_X\\to T$ applied to the product of the two included factors; these maps agree as that cocone map is multiplicative. It preserves the unit because its composite with $j_E:R\\to C$ is the given unit-preserving map $R\\to T$. Thus $C$ is the ring colimit of the restricted diagram. The preceding step identifies its canonical map $C\\to B$ as an isomorphism of rings under $R$, hence also of $R$-modules. Consequently $B\\cong\\operatorname{colim}_{I}F_X$ as $R$-modules, with the specified inclusions.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits) and 03EP (lemma-tensor-commute-colimits), applied twice to construct multiplication on the module colimit"
+   }
+  },
+  {
+   "text": "Write $T(M)$ for the underlying $R$-module of $B\\otimes_R M$, and $T_F(M)$ for the underlying $R$-module of $F_X\\otimes_R M$. The preceding module-colimit identification and [lem-weil-pbc-independent-sheaf-tensor-colimits] give a natural isomorphism\n$$\\theta_M:\\operatorname{colim}_{F\\in I}T_F(M)\\xrightarrow{\\sim}T(M).$$\nIts component on the $F$-leg sends $s\\otimes m$ to $\\iota_F(s)\\otimes m$. The transition $T_F(M)\\to T_G(M)$ is $s\\otimes m\\mapsto\\iota_{FG}(s)\\otimes m$, and a morphism $u:M\\to N$ sends $s\\otimes m$ to $s\\otimes u(m)$; these formulas commute, proving the claimed naturality. These are maps of the sheafified relative tensors [def-pur-sheaf-tensor-product]. The colimit here is in $R$-modules. Individual terms are not asserted to be $B$-modules.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP (lemma-tensor-commute-colimits), item (2); canonical comparison and its naturality"
+   }
+  },
+  {
+   "text": "For every $F\\in I$, [lem-sfb-subfield-flat] gives preservation of finite limits by extension $F_X\\otimes_R-$. Restriction from $F_X$-modules to $R$-modules preserves limits by [sk-def-sfb-change-of-scalars], so $T_F$ preserves finite limits. In particular, for any $R$-linear morphism $u:M\\to N$ with kernel $K$, the natural morphism $T_F(K)\\to T_F(M)$ identifies $T_F(K)$ with $\\ker(T_F(u))$. The transitions from the preceding step commute with these kernel maps. All of these assertions are in a fixed category of $R$-modules, although the finite extensions initially take values in different categories of $F_X$-modules.",
+   "uses": [
+    "lem-sfb-subfield-flat",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "last sentence: finite-stage flatness, after restricting all stages to E_X"
+   }
+  },
+  {
+   "text": "Filtered colimits in $R$-modules preserve these kernels. To verify the exactness needed here using precisely the statements cited, set $A_F=T_F(K)$, $D_F=T_F(M)$, $H_F=T_F(N)$, $J_F=\\operatorname{im}(T_F(u))$ and $Q_F=\\operatorname{coker}(T_F(u))$. Commutativity with transitions induces diagrams $J_F$ and $Q_F$, with short exact sequences\n$$0\\to A_F\\to D_F\\to J_F\\to0,\\qquad0\\to J_F\\to H_F\\to Q_F\\to0.$$\nBy [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting the $R$-actions preserves these sequences and all their colimits. Apply [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] to both underlying diagrams. The resulting inclusion $\\operatorname{colim}J_F\\to\\operatorname{colim}H_F$ is monic, so the kernel of $\\operatorname{colim}D_F\\to\\operatorname{colim}H_F$ is $\\operatorname{colim}A_F$. This is also the kernel in $R$-modules: the forgetful functor computes limits, and the unique factorization through the underlying kernel is $R$-linear (apply its monic inclusion to the scalar-linearity equation). With the natural isomorphisms $\\theta_K,\\theta_M,\\theta_N$ of the preceding steps, this proves $T(K)\\cong\\ker(T(u))$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits) and 03CO (lemma-limits-colimits-abelian-sheaves), item (5)"
+   }
+  },
+  {
+   "text": "The functor $T$ is additive and preserves zero and finite products. Indeed $B\\otimes_R0=0$, and the mutually inverse maps\n$$B\\otimes_R(M\\oplus N)\\longrightarrow(B\\otimes_R M)\\oplus(B\\otimes_R N),\\quad b\\otimes(m,n)\\longmapsto(b\\otimes m,b\\otimes n),$$\n$$ (b\\otimes m,0)\\longmapsto b\\otimes(m,0),\\qquad(0,b\\otimes n)\\longmapsto b\\otimes(0,n)$$\nare balanced bilinear formulas, hence induce sheaf morphisms by [def-pur-sheaf-tensor-product]; the composites are identities by additivity of tensor. The same formula $b\\otimes(u+v)(m)=b\\otimes u(m)+b\\otimes v(m)$ proves additivity on morphisms. Products and kernels are computed sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], so finite direct sums are also finite products. For a finite diagram $D:J\\to\\operatorname{Mod}_R$, its limit is the kernel of\n$$\\prod_{j\\in\\operatorname{Ob}J}D_j\\longrightarrow\\prod_{a:j\\to k\\in\\operatorname{Mor}J}D_k,\\qquad(x_j)_j\\longmapsto(D(a)x_j-x_k)_a.$$\nThis formula follows directly from the compatible-family description in that same node. Apply product preservation, additivity and the kernel preservation already proved: the kernel is taken to the identical compatible-family kernel for $T\\circ D$. Therefore $T$ preserves every finite limit, including the empty limit $0$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), limits paragraph, plus the explicit balanced tensor formulas and the finite-diagram kernel formula"
+   }
+  },
+  {
+   "text": "Let $\\operatorname{Ext}(M)=B\\otimes_R M$ with its $B$-action. For a finite diagram $D$ the canonical map\n$$a:\\operatorname{Ext}(\\lim D)\\longrightarrow\\lim(\\operatorname{Ext}\\circ D)$$\nis $B$-linear. Limits of $B$-modules and of $R$-modules are computed sectionwise by [lem-weil-pbc-module-sheaves-limits-sectionwise], so restriction takes the right-hand limit to the $R$-module limit of $T\\circ D$. The preceding step says the underlying $R$-linear map of $a$ is invertible. Its inverse is $B$-linear: for a local scalar $b$ and section $y$, apply the injective map $a$ to get $a(b\\,a^{-1}(y))=b\\,y=a(a^{-1}(b\\,y))$. Thus $a$ is an isomorphism of $B$-modules. This proves preservation of finite limits for the extension along the coefficient map in the statement.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), sectionwise limits and explicit reflection of the limit comparison"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-sfb-module-objects",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "def-pur-sheaf-tensor-product",
+  "det-def-sfb-qlbar-condensed-subextensions",
   "sk-prop-sfb-qlbar-colimit-x",
   "lem-sfb-subfield-coefficient-map-comp",
-  "lem-sfb-subfield-flat"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-subfield-flat",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+  "place": "complete filtered-colimit proof, expanded with Stacks Tags 03DA, 03DB, 03CO, 03EP; colimits taken in E_X-modules"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "padicSubfield|padicAlgCl|flat.*colimit|colimit.*flat",
+   "results": "11 hits: Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/NumberTheory/Padics/Complex.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of flat sheaves of modules is flat",
+   "results": "8 hits: ModuleCat.FilteredColimits.M, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, ModuleCat.FilteredColimits.M.mk, ModuleCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CategoryTheory.Sheaf.ab5ofSize, ModuleCat.FilteredColimits.colimit",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from a finite p-adic coefficient field to its algebraic closure on pro-etale module sheaves preserves finite limits",
+   "results": "8 hits: SheafOfModules.Finite.evaluationPreservesFiniteLimits, instHasFiniteLimitsLightCondMod, SheafOfModules.Finite.forgetPreservesFiniteLimits, instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, SheafOfModules.Finite.hasFiniteLimits, PresheafOfModules.evaluation_preservesFiniteLimits, PresheafOfModules.toPresheaf_preservesFiniteLimits",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits.*tensor|tensor.*PreservesFiniteLimits|preservesFilteredColimits",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring sheaves of modules with a filtered colimit of flat modules is left exact",
+   "results": "8 hits: Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.rTensor_exact, Condensed.instAB5CondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern abstract-ring modules, module-sheaf limits or exact sheaf colimits, not this internal extension along E_X to Qbar_ell,X; these ingredients are used through existing DAG nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -58,5 +202,34 @@
   "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-qlbar-flat",
+  "worker": "stage1",
+  "summary": "Expanded the filtered-colimit argument with no new nodes. Identified internal modules with module sheaves, established the coefficient colimit as an E_X-module colimit by its universal property, used tensor-colimit compatibility, and proved kernel and finite-limit preservation before reflecting the comparison to Qbar_ell,X-modules. Corrected the imported proof taking finite-stage colimits in the wrong coefficient category; the statement is unchanged.",
+  "blueprint": "Unit sk-prop-sfb-finite-extension-compatibility, flatness clause (1); realizes all sentences of lem-sfb-qlbar-flat.proof.md. Steps 2-3 realize the first sentence, step 4 the tensor-colimit sentence, steps 5-8 the last sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General ringed-site module limits, colimits and underlying abelian exactness are needed to form the E_X-module diagram; the coefficient-compatibility unit has no such general statement."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "General sheaf tensor preservation of colimits is the generic tool used in the blueprint tensor-colimit step, including independent site and coefficient universes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-9d0b2ba65",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-9d0b2ba65 (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, cited statements, current blueprint route, Stacks 03DA/03DB/03CO/03EP, and master coefficient declarations. The repaired E_X-module colimit argument proves finite-limit preservation without weakening hypotheses. No new nodes, cycles, or applicable duplicates found. Accepted both declared generic tool uses. Detailed checks recorded in review.md; no fixes required."
+ }
 }

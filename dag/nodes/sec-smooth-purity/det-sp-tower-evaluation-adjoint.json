@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-sp-tower-evaluation-adjoint",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Evaluation of towers has an exact right adjoint",
@@ -12,40 +12,126 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
   "place": "node det-sp-tower-evaluation-adjoint, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
  "proof": [
   {
-   "text": "*Well-defined.* The transitions are linear over the reduction maps: for\n$r\\geq n$ the identity $J\\to J$ is linear over\n$\\mathcal O/\\ell^{r+1}\\to\\mathcal O/\\ell^r$ since both act through\n$\\mathcal O/\\ell^n$; the maps into level $n-1$ and below are zero.",
-   "uses": [],
-   "elementary": null
+   "text": "*Well-defined.* The transitions are linear over the reduction maps: for $r\\geq n$ the identity $J\\to J$ is linear over $\\mathcal O/\\ell^{r+1}\\to\\mathcal O/\\ell^r$ since both actions factor through $\\mathcal O/\\ell^n$; all transitions with target level $r<n$ are zero; the boundary $r=n-1$ occurs only when $n>1$. This constructs an object of the tower category described in [det-sp-coefficient-towers-abelian]. For a module-sheaf morphism $f:J\\to J\\prime$, set $(r_nf)_r=f$ for $r\\geq n$ and zero below. These maps commute with the transitions, and identities and compositions are respected levelwise, defining the functor $r_n$.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+    "place": "Proof, *Well-defined.*"
+   }
   },
   {
-   "text": "*Adjunction.* Let $\\phi:C_\\bullet\\to r_nJ$ be a map of towers. Its components\nfor $r<n$ are zero. For $r\\geq n$, compatibility with transitions gives\n$\\phi_r=\\phi_n\\circ(C_r\\to C_n)$, the transition from level $r$ down to\nlevel $n$ (the transitions of $r_nJ$ being identities). Conversely, for any\n$\\mathcal O_{E,T}/\\ell^n$-linear $\\psi:C_n\\to J$, the family $\\phi_r=0$ ($r<n$),\n$\\phi_r=\\psi\\circ(C_r\\to C_n)$ ($r\\geq n$) commutes with the transitions: for\n$r\\geq n$ by construction, and at $r=n-1$ because the target transition\n$(r_nJ)_n\\to(r_nJ)_{n-1}=0$ is zero. So\n$\\operatorname{Hom}(C_\\bullet,r_nJ)=\\operatorname{Hom}(C_n,J)$, naturally.",
-   "uses": [],
-   "elementary": null
+   "text": "*Adjunction.* Let $\\phi:C_\\bullet\\to r_nJ$ be a map of towers. Its components for $r<n$ are zero. For $r\\geq n$, compatibility with transitions gives $\\phi_r=\\phi_n\\circ(C_r\\to C_n)$, the transition from level $r$ down to level $n$ (the transitions of $r_nJ$ are identities). Conversely, for any $\\mathcal O_{E,T}/\\ell^n$-linear $\\psi:C_n\\to J$, define $\\phi_r=0$ for $r<n$ and $\\phi_r=\\psi\\circ(C_r\\to C_n)$ for $r\\geq n$. This family commutes with the transitions: for $r\\geq n$ by construction, and, when $n>1$, at $r=n-1$ because the target transition $(r_nJ)_n\\to(r_nJ)_{n-1}=0$ is zero. The component at $n$ of this family is $\\psi$, since $C_n\\to C_n$ is the identity, and the displayed compatibility determines every component of any tower map. The two constructions are therefore inverse. Precomposing by a tower map $a:C\\prime_\\bullet\\to C_\\bullet$ replaces $\\psi$ by $\\psi a_n$, because $a_n(C\\prime_r\\to C\\prime_n)=(C_r\\to C_n)a_r$; postcomposing by $b:J\\to J\\prime$ replaces it by $b\\psi$ at every level. Thus $\\operatorname{Hom}(C_\\bullet,r_nJ)\\cong\\operatorname{Hom}(C_n,J)$ naturally, so $r_n$ is right adjoint to evaluation at $n$.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+    "place": "Proof, *Adjunction.*"
+   }
   },
   {
-   "text": "*Exactness.* Kernels and cokernels of towers are computed levelwise, and at\neach level $r_n$ is either the identity (restriction of scalars, exact) or zero.",
-   "uses": [],
-   "elementary": null
+   "text": "*Exactness.* Kernels and cokernels in the tower category are computed levelwise by [det-sp-coefficient-towers-abelian]. At each level the functor $r_n$ is either restriction of scalars along a quotient-ring map, which preserves kernels and cokernels because these are the sectionwise kernel and sheafification of the sectionwise cokernel of the unchanged underlying map [def-weil-sheaf-of-modules-category], or the zero functor; therefore $r_n$ is exact.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+    "place": "Proof, *Exactness.*"
+   }
   },
   {
-   "text": "*Consequences.* A right adjoint of an exact functor preserves injectives. For\nthe embedding, the adjoint of $C_n\\hookrightarrow J_n$ is a map\n$C_\\bullet\\to r_nJ_n$, and the product of these maps is, at level $r$, the map\n$C_r\\to\\prod_{n\\leq r}J_n$ whose component $n=r$ is the monomorphism\n$C_r\\hookrightarrow J_r$; so it is a monomorphism at each level, hence a\nmonomorphism of towers (products of towers being levelwise, and only finitely\nmany factors being nonzero at each level).",
-   "uses": [],
-   "elementary": null
+   "text": "*Preservation of injectives.* Evaluation at $n$ is exact by [det-sp-coefficient-towers-abelian], and the preceding step shows that $r_n$ is its right adjoint. The Mathlib leaf [lem-sp-right-adjoint-preserves-injectives] therefore implies that $r_n$ sends every injective $\\mathcal O_{E,T}/\\ell^n$-module sheaf to an injective tower.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+    "place": "Proof, *Consequences.*, first sentence"
+   }
+  },
+  {
+   "text": "*Embedding into products.* Use the small skeleton and universes specified in [def-weil-pbc-proetale-site]. Since $\\mathcal O_{E,T}/\\ell^n$ is a sheaf of commutative rings, [lem-pur-ringed-site-grothendieck-abelian] applies to its module-sheaf category. Together with the Mathlib leaf [lem-sp-grothendieck-enough-injectives], this gives, for each $n$, a monomorphism $i_n:C_n\\hookrightarrow J_n$ with $J_n$ injective. The adjunction gives the tower map with component $i_n(C_r\\to C_n)$ at $r\\geq n$ and zero at $r<n$.\n\nConstruct $P_r=\\prod_{1\\leq n\\leq r}J_n$ with each $J_n$ regarded as an $\\mathcal O_{E,T}/\\ell^r$-module by restriction along the reduction map. Sections, restrictions and operations are coordinatewise; compatible sections glue uniquely in each coordinate, so this is a module sheaf. Define $P_{r+1}\\to P_r$ by dropping the last coordinate. These maps are semilinear over reduction since each retained coordinate acts through $\\mathcal O_{E,T}/\\ell^n$, so $P_\\bullet$ is a tower. For each $n$, its $n$-th projection at levels $r\\geq n$ and zero map at $r<n$ give a tower map $P_\\bullet\\to r_nJ_n$. Given maps $D_\\bullet\\to r_nJ_n$ for all $n$, form at level $r$ the tuple of their components with $n\\leq r$. Tower compatibility makes these tuples commute with the dropping transitions, and each coordinate is forced by its projection. This proves the product universal property $P_\\bullet=\\prod_{n\\geq1}r_nJ_n$ without assuming products of towers are levelwise.\n\nThe induced map $C_\\bullet\\to P_\\bullet$ has components $x\\mapsto(i_n(C_r\\to C_n)(x))_{1\\leq n\\leq r}$. Its last coordinate is $i_r$, so its kernel at level $r$ is zero. Kernels in the tower category are levelwise [det-sp-coefficient-towers-abelian], hence this map is a monomorphism of towers.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "det-sp-coefficient-towers-abelian",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
+    "place": "Proof, *Consequences.*, embedding paragraph"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-coefficient-towers-abelian"
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-right-adjoint-preserves-injectives"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.md",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-adjoint.proof.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightKan|evaluation.*[Aa]dj|[Aa]dj.*evaluation",
+   "results": "Found right Kan extension infrastructure in CategoryTheory; no exact coefficient-tower theorem among returned hits.",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact varying-coefficient tower theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluation, CategoryTheory.Adjunction",
+   "results": "Found evaluationAdjunctionLeft and evaluationRightAdjoint for diagrams in a fixed category; read Adjunction/Evaluation.lean:86-116. The item has different module categories at different levels, so this is not a one-line specialization.",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact varying-coefficient tower theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension of a module valued diagram along inclusion of a single object, right adjoint of evaluation",
+   "results": "Found evaluationIsRightAdjoint, ranAdjunction, and restriction/coextension adjunctions; none states the exact evaluation right adjoint for the varying quotient-coefficient tower category.",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact varying-coefficient tower theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationRightAdjoint|evaluationAdjunctionLeft",
+   "results": "Found evaluationRightAdjoint at line 90 and evaluationAdjunctionLeft at line 100 in CategoryTheory/Adjunction/Evaluation.lean; fixed-target functor category only.",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact varying-coefficient tower theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For towers of sheaves of modules over quotient rings O modulo l^n, evaluation at n has an exact right adjoint which is zero below n and constant above n.",
+   "results": "8 hits: SheafOfModules.evaluation; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.constantSheafAdj; SheafOfModules.hasLimit; SheafOfModules.evaluationPreservesLimit; SheafOfModules.pullbackPushforwardAdjunction; AdicCompletion.eval_apply; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. These concern evaluation on a site, ordinary ringed-site pullback/pushforward, limits, or adic completion, not the varying-quotient-coefficient tower right adjoint. Fresh maintainer search recorded under search/Q45/det-sp-tower-evaluation-adjoint/searches.jsonl.",
+   "date": "2026-10-16",
+   "verdict": "ingredients only; no exact varying-coefficient tower theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -59,5 +145,39 @@
   "det-sp-coefficient-towers-abelian"
  ],
  "proof_split_by": "labels",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-tower-evaluation-adjoint",
+  "worker": "stage1",
+  "summary": "No declaration in either Lean checkout states this item. The split expands the blueprint proof into well-definedness, the explicit evaluation adjunction, exactness, preservation of injectives, and the product embedding. It cites the existing coefficient-tower abelian statement for levelwise structure and exact evaluation, the generic small-ringed-site Grothendieck statement plus enough-injectives leaf for the finite-level embeddings, and the existing Mathlib right-adjoint preservation leaf. The item statement and hypotheses are unchanged. Second reading makes the functor on morphisms and adjunction naturality explicit, justifies restriction exactness via the module-sheaf kernel/cokernel description, and constructs the product tower and its universal property coordinatewise.",
+  "blueprint": "Realizes the four paragraphs of the blueprint proof of det-sp-tower-evaluation-adjoint: *Well-defined.*, *Adjunction.*, *Exactness.*, and *Consequences.*; the last paragraph is split into preservation and embedding steps.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "The route needs Grothendieck abelianness of module sheaves over each finite coefficient ring on the small pro-etale site; this generic result is outside the tower-levels unit."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "The route needs injective embeddings in each finite-level module-sheaf category; this generic theorem is outside the tower-levels unit."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "The route needs the generic categorical result that a right adjoint of an exact functor preserves injectives; this is outside the tower-levels unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-026379c02",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-026379c02 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources, and blueprint route. All five proof steps are correct; finite cases and dependency-cycle checks passed. Repaired one omission: added a verified LeanSearch record to the corrected whole JSON under fixes/dag/nodes/sec-smooth-purity/. Accepted the generic categorical tool uses. Details are in review.md; statements, proofs and targets are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

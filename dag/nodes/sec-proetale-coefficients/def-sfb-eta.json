@@ -3,24 +3,142 @@
  "blueprint": {
   "is": "def-sfb-eta",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The coefficient morphism $\\eta_f$",
- "statement": "Let $\\Lambda$ be a condensed ring and $f\\colon X\\to Y$ a morphism of schemes.\nThe morphism\n$$\n\\eta_f\\colon\\Lambda_Y\\longrightarrow f_*f^*\\Lambda_Y\\xrightarrow{\\ f_*\\alpha_f\\ }f_*\\Lambda_X\n$$\nis the unit of the adjunction $f^*\\dashv f_*$\n([sk-def-sfb-finite-pushforward-pullback]) followed by $f_*$ of $\\alpha_f$\n([def-sfb-alpha]). In other words, it is the mate of $\\alpha_f$.",
+ "statement": "Let $\\Lambda$ be a condensed ring and $f\\colon X\\to Y$ a morphism of schemes.\nThe morphism\n$$\n\\eta_f\\colon\\Lambda_Y\\longrightarrow f_*f^*\\Lambda_Y\\xrightarrow{\\ f_*\\alpha_f\\ }f_*\\Lambda_X\n$$\nis the unit of the adjunction $f^*\\dashv f_*$\n([def-sfb-finite-upper-lower-star-adjunction]) followed by $f_*$ of $\\alpha_f$\n([def-sfb-alpha]). In other words, it is the mate of $\\alpha_f$.\nHere $\\Lambda_X$ and $\\Lambda_Y$ are the pulled-back coefficient objects of [sk-def-sfb-pulled-back-coefficients], and the adjunction is taken on sheaves of abelian groups on the small pro-étale sites.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/def-sfb-eta.md",
   "place": "node def-sfb-eta, order 1562"
  },
  "stmt_deps": [
-  "def-sfb-alpha"
+  "def-sfb-alpha",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "condensedPushforwardHom|condensedPullbackHom|homEquiv_apply",
+   "results": {
+    "hits": [
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean"
+    ],
+    "n_hits": 7,
+    "note": "",
+    "subdirectory": "CategoryTheory/Adjunction",
+    "digest": "4bce26f33ba89c29"
+   },
+   "date": "2026-10-16",
+   "verdict": "No project coefficient-morphism declaration found. Any homEquiv_apply hits concern generic adjunction identities, not the condensed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_apply",
+   "results": {
+    "hits": [
+     "CategoryTheory.Adjunction.homEquiv_apply"
+    ],
+    "n_hits": 1,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a51f5106a5fd0422"
+   },
+   "date": "2026-10-16",
+   "verdict": "No match for the full item. CategoryTheory.Adjunction.homEquiv_apply is the generic mate formula, read via the definition of homEquiv in Mathlib/CategoryTheory/Adjunction/Basic.lean:159-170; it justifies the synonymous mate description, but does not define the project coefficient objects and alpha_f."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate of a sheaf pullback coefficient morphism equals adjunction unit followed by pushforward of the morphism",
+   "results": {
+    "hits": [
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "CategoryTheory.ExponentiableMorphism.coev",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7547c84497aa6b5f"
+   },
+   "date": "2026-10-16",
+   "verdict": "No match. General sheaf adjunctions and module-unit maps; the latter require a prescribed ringed-site map, rather than constructing eta_f from condensed coefficients and alpha_f."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient morphism of a condensed ring on the pro-etale site is the mate of its pullback comparison under pullback pushforward adjunction",
+   "results": {
+    "hits": [
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "LightCondMod.LocallyConstant.adjunction",
+     "SheafOfModules.conjugateEquiv_pullbackId_hom",
+     "LightCondensed.ihomPoints_symm_comp",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "47431c56d8133907"
+   },
+   "date": "2026-10-16",
+   "verdict": "No match. Returned general sheaf-of-modules adjunctions, structure-sheaf maps, or light condensed constructions; these do not define the pro-étale condensed coefficient morphism. Read SheafOfModules.unitToPushforwardObjUnit and pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:60-101: the ringed-site map phi is input there, whereas eta_f is the map constructed here."
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPushforwardHom|condensedPullbackHom",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-16",
+   "verdict": "No project coefficient-morphism declaration found. Any homEquiv_apply hits concern generic adjunction identities, not the condensed coefficient construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the canonical map from the coefficient sheaf on Y to the direct image of the coefficient sheaf on X as the unit followed by direct image of the inverse image comparison",
+   "results": {
+    "hits": [
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom",
+     "SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pushforward_map_val",
+     "SheafOfModules.pushforwardSections",
+     "AlgebraicGeometry.Scheme.Modules.pushforward"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "1b42e1a8673bdbed"
+   },
+   "date": "2026-10-16",
+   "verdict": "No match. Returned general sheaf-of-modules adjunctions, structure-sheaf maps, or light condensed constructions; these do not define the pro-étale condensed coefficient morphism. Read SheafOfModules.unitToPushforwardObjUnit and pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:60-101: the ringed-site map phi is input there, whereas eta_f is the map constructed here."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -37,5 +155,21 @@
  "blueprint_lean_not_found": [
   "AlgebraicGeometry.ProEtale.condensedPushforwardHom"
  ],
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-eta",
+  "worker": "stage1",
+  "summary": "Checked the explicit definition against the current main-20261015 blueprint and the upstream formula, and searched slopmaster2 for an exact closed attachment. The map is the unit on underlying abelian sheaves followed by pushforward of alpha_f. Replaced the unavailable aggregate citation with the existing exact adjunction node, and explicitly named the pulled-back coefficient objects and their definition. Refreshed the logged Mathlib searches, including a second semantic phrasing; generic mate formulas do not replace this coefficient construction. No new nodes and no proof obligations are needed for this explicit definition.",
+  "blueprint": "Realizes the definition in blueprint node def-sfb-eta: the unit of f^* ⊣ f_* followed by f_* of alpha_f (the complete definition; there are no proof steps for a definition).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-8be6d85e6",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-8be6d85e6 (reviewer sub-agent of L); spot-checked: Read the definition, report, cited statements, and current blueprint route in full. The unit–pushforward composite is correctly typed in abelian sheaves for arbitrary scheme morphisms and condensed rings. Checked edge cases, duplicates, cycles, and Mathlib candidates; no repairs or tool uses needed. Detailed findings are in review.md."
+ }
 }
