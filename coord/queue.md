@@ -1,6 +1,6 @@
 # Work queue
 
-58 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (58)
+## Stage 3: modules to prove (59)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -20,6 +20,7 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition` | 2 | 2 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 | proof |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 8 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 10 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap` | 4 | 1 | proof |
@@ -71,11 +72,12 @@
 | `Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
-Also listed above and claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 5 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs` | 3 | 2 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 8 |
 | `Sheaf.RingTheory.PopescuLiftChartFlat` | 12 | 1 |
 | `Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen` | 20 | 1 |
 | `Sheaf.AlgebraicGeometry.IdealPowerQuotientLocalLifting` | 21 | 1 |
