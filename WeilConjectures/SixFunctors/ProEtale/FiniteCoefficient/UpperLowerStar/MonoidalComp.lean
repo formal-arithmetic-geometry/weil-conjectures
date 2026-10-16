@@ -17,8 +17,8 @@ For `h₁ : T ⟶ S` and `h₂ : S ⟶ R`, the composition isomorphism
 (`AlgebraicGeometry.ProEtale.upperStarComp`) is compatible with the oplax monoidal structures of
 the pullbacks: it is the conjugate of the composition isomorphism of the pushforwards, which is
 monoidal for their lax monoidal structures. This holds for an arbitrary coefficient category
-`A`; `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso` treats the strong monoidal
-case of Weil coefficients.
+`A`; `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso` treats
+the strong monoidal case of Weil coefficients.
 
 ## Main results
 

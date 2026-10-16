@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Algebra.Homology.ExactCouple.Convergence
 public import WeilConjectures.Algebra.Homology.ExactCouple.HalfPlane
 public import WeilConjectures.Algebra.Homology.ExactCouple.Hom
@@ -63,11 +64,13 @@ lemma mapExact_F (p : ℤ) : (F.mapExact Φ).F p = Subobject.mk (Φ.map (F.F p).
 graded pieces: `Φ (grᵖ A) ≅ grᵖ (Φ A)`. -/
 noncomputable def mapExactGrIso (p : ℤ) : Φ.obj (F.gr p) ≅ (F.mapExact Φ).gr p :=
   (asIso (cokernelComparison (Subobject.ofLE _ _ (F.F_succ_le p)) Φ)).symm ≪≫
-    cokernel.mapIso _ _ (Subobject.underlyingIso _).symm (Subobject.underlyingIso _).symm (by
-      rw [← cancel_mono (Subobject.mk (Φ.map (F.F p).arrow)).arrow]
-      simp only [Iso.symm_hom, assoc, Subobject.underlyingIso_arrow, Subobject.ofLE_arrow,
-        Subobject.underlyingIso_arrow_assoc, ← Φ.map_comp]
-      rfl)
+    cokernel.mapIso _ (Subobject.ofLE ((F.mapExact Φ).F (p + 1)) ((F.mapExact Φ).F p)
+        ((F.mapExact Φ).F_succ_le p)) (Subobject.underlyingIso _).symm
+      (Subobject.underlyingIso _).symm (by
+        apply (cancel_mono (Subobject.mk (Φ.map (F.F p).arrow)).arrow).1
+        rw [Iso.symm_hom, Iso.symm_hom, assoc, assoc, Subobject.underlyingIso_arrow]
+        erw [Subobject.ofLE_arrow, Subobject.underlyingIso_arrow]
+        rw [← Φ.map_comp, Subobject.ofLE_arrow])
 
 @[reassoc]
 lemma map_cokernelπ_mapExactGrIso_hom (p : ℤ) :
@@ -112,8 +115,9 @@ lemma isIso_τD' [∀ i, IsIso (φ.τD i)] (i : κ) : IsIso (φ.τD' i) := by
 
 /-- If a morphism of exact couples is an isomorphism on the `E`-objects, so is the induced
 morphism of complexes `(E, d) ⟶ (E', d')`. -/
-lemma isIso_dMap [∀ i, IsIso (φ.τE i)] : IsIso φ.dMap :=
-  HomologicalComplex.Hom.isIso_of_components _
+lemma isIso_dMap [∀ i, IsIso (φ.τE i)] : IsIso φ.dMap := by
+  have : ∀ n, IsIso (φ.dMap.f n) := fun n ↦ by rw [dMap_f]; infer_instance
+  exact HomologicalComplex.Hom.isIso_of_components _
 
 instance isIso_derived_τD [∀ i, IsIso (φ.τD i)] (i : κ) : IsIso (φ.derived.τD i) :=
   φ.isIso_τD' i
@@ -166,8 +170,8 @@ lemma mapExactCycles_iCycles (i : κ) :
       Φ.map (X.dComplex.iCycles i) := by
   have h := (X.dComplex.sc i).mapCyclesIso_hom_iCycles Φ
   rw [← Iso.eq_inv_comp] at h
-  change _ ≫ (ShortComplex.iCycles _) = Φ.map (ShortComplex.iCycles _)
-  rw [mapExactCycles, assoc, ShortComplex.cyclesMap_i, h]
+  dsimp only [mapExactCycles, HomologicalComplex.iCycles]
+  rw [assoc, ShortComplex.cyclesMap_i, h]
   simp [mapExactScIso]
 
 /-- The comparison `Φ (H(E, d)) ≅ H(Φ E, Φ d)` of the `E`-objects of the derived couples. -/
@@ -182,20 +186,26 @@ lemma map_homologyπ_mapExactE'Iso_hom (i : κ) :
   have h' : Φ.map (X.dComplex.sc i).homologyπ = ((X.dComplex.sc i).mapCyclesIso Φ).inv ≫
       (((X.dComplex.sc i).map Φ).homologyπ ≫ ((X.dComplex.sc i).mapHomologyIso Φ).hom) :=
     ((Iso.inv_comp_eq _).2 h).symm
-  change Φ.map (X.dComplex.sc i).homologyπ ≫ _ = _ ≫ ((X.mapExact Φ).dComplex.sc i).homologyπ
+  dsimp only [HomologicalComplex.homologyπ]
   rw [mapExactE'Iso, mapExactCycles, Iso.trans_hom, Iso.symm_hom,
     ShortComplex.homologyMapIso_hom, h', assoc, assoc, Iso.hom_inv_id_assoc, assoc,
     ShortComplex.homologyπ_naturality]
 
 /-- The comparison `Φ (im α) ≅ im (Φ α)` of the `D`-objects of the derived couples. -/
 noncomputable def mapExactD'Iso (i : κ) : Φ.obj (X.D' i) ≅ (X.mapExact Φ).D' i :=
+  haveI : Epi (Φ.map (X.πD i)) := Φ.map_epi _
+  haveI : StrongEpi (Φ.map (X.πD i)) := strongEpi_of_epi _
+  haveI : Mono (Φ.map (X.ιD i)) := Φ.map_mono _
   image.isoStrongEpiMono (Φ.map (X.πD i)) (Φ.map (X.ιD i))
     (by rw [← Φ.map_comp, X.πD_ιD]; rfl)
 
 @[reassoc (attr := simp)]
 lemma mapExactD'Iso_hom_ιD (i : κ) :
     (X.mapExactD'Iso Φ i).hom ≫ (X.mapExact Φ).ιD i = Φ.map (X.ιD i) :=
-  image.isoStrongEpiMono_hom_comp_ι _ _ _
+  haveI : Epi (Φ.map (X.πD i)) := Φ.map_epi _
+  haveI : StrongEpi (Φ.map (X.πD i)) := strongEpi_of_epi _
+  haveI : Mono (Φ.map (X.ιD i)) := Φ.map_mono _
+  image.isoStrongEpiMono_hom_comp_ι (Φ.map (X.πD i)) (Φ.map (X.ιD i)) _
 
 @[reassoc (attr := simp)]
 lemma map_πD_mapExactD'Iso_hom (i : κ) :
@@ -261,13 +271,13 @@ lemma mapExactDerivedIterHom_succ (n : ℕ) :
 instance isIso_mapExactDerivedIterHom_τD (n : ℕ) (i : κ) :
     IsIso ((X.mapExactDerivedIterHom Φ n).τD i) := by
   induction n generalizing i with
-  | zero => dsimp [mapExactDerivedIterHom]; infer_instance
+  | zero => rw [show X.mapExactDerivedIterHom Φ 0 = Hom.id _ from rfl, Hom.id_τD]; infer_instance
   | succ n ih => rw [mapExactDerivedIterHom_succ, Hom.comp_τD]; infer_instance
 
 instance isIso_mapExactDerivedIterHom_τE (n : ℕ) (i : κ) :
     IsIso ((X.mapExactDerivedIterHom Φ n).τE i) := by
   induction n generalizing i with
-  | zero => dsimp [mapExactDerivedIterHom]; infer_instance
+  | zero => rw [show X.mapExactDerivedIterHom Φ 0 = Hom.id _ from rfl, Hom.id_τE]; infer_instance
   | succ n ih => rw [mapExactDerivedIterHom_succ, Hom.comp_τE]; infer_instance
 
 /-- The comparison `Φ (X_n) ⟶ (Φ X)_n` is compatible with the inclusions of the `D`-objects into
@@ -277,7 +287,10 @@ subobjects of `Φ D` (blueprint `lem-sp-exact-functor-couple`, part 2). -/
 lemma mapExactDerivedIterHom_τD_ιIter (n : ℕ) (i : κ) :
     (X.mapExactDerivedIterHom Φ n).τD i ≫ (X.mapExact Φ).ιIter n i = Φ.map (X.ιIter n i) := by
   induction n with
-  | zero => simp [mapExactDerivedIterHom, ιIter]
+  | zero =>
+    change 𝟙 _ ≫ 𝟙 _ = Φ.map (𝟙 _)
+    rw [Φ.map_id, Category.comp_id]
+    rfl
   | succ n ih =>
     rw [mapExactDerivedIterHom_succ, Hom.comp_τD]
     change (_ ≫ (X.mapExactDerivedIterHom Φ n).τD' i) ≫
@@ -293,7 +306,7 @@ lemma map_d_mapExactDerivedIterHom_τE (n : ℕ) (i j : κ) :
     Φ.map ((X.derivedIter n).d i j) ≫ (X.mapExactDerivedIterHom Φ n).τE j =
       (X.mapExactDerivedIterHom Φ n).τE i ≫ ((X.mapExact Φ).derivedIter n).d i j := by
   rw [← mapExact_d]
-  exact (X.mapExactDerivedIterHom Φ n).dMap.comm i j
+  exact ((X.mapExactDerivedIterHom Φ n).dMap.comm i j).symm
 
 /-! ### Half-plane couples and convergence -/
 
@@ -330,13 +343,11 @@ noncomputable def ConvergenceData.mapExact (cd : X.ConvergenceData ι F) :
     obtain ⟨φ, hφ₁, hφ₂⟩ := cd.comm p n N hN
     refine ⟨inv ((X.mapExactDerivedIterHom Φ N).τD (p - N, n)) ≫ Φ.map φ ≫
       (Subobject.underlyingIso (Φ.map ((F n).F p).arrow)).inv, ?_, ?_⟩
-    · dsimp only
-      rw [DecreasingFiltration.mapExact_F, assoc, assoc, Subobject.underlyingIso_arrow,
+    · rw [DecreasingFiltration.mapExact_F, assoc, assoc, Subobject.underlyingIso_arrow,
         ← Φ.map_comp, hφ₁, Φ.map_comp, IsIso.inv_comp_eq,
         mapExactDerivedIterHom_τD_ιIter_assoc]
     · have h₁ := (X.mapExactDerivedIterHom Φ N).commg (p - N, n) (p, n)
-      dsimp only [mapExact_g] at h₁
-      dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_inv, Functor.mapIso_hom]
+      simp only [Iso.trans_hom, Iso.symm_hom, asIso_inv, Functor.mapIso_hom]
       rw [← IsIso.eq_inv_comp, ← assoc, ← assoc, IsIso.eq_comp_inv] at h₁
       rw [reassoc_of% h₁, ← Φ.map_comp_assoc, hφ₂, Φ.map_comp_assoc,
         DecreasingFiltration.map_cokernelπ_mapExactGrIso_hom, assoc, assoc]

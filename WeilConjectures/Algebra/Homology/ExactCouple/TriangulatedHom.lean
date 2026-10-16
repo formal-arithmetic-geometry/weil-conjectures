@@ -163,7 +163,9 @@ noncomputable def mapHom (P : TriangleTower T) {G₁ G₂ : T ⥤ T'} [G₁.Comm
   comm₁ q := τ.naturality _
   comm₂ q := τ.naturality _
   comm₃ q := by
-    dsimp
+    change (G₁.map (P.mor₃ q) ≫ (G₁.commShiftIso (1 : ℤ)).hom.app (P.X (q - 1))) ≫
+        (τ.app (P.X (q - 1)))⟦(1 : ℤ)⟧' =
+      τ.app (P.Y q) ≫ G₂.map (P.mor₃ q) ≫ (G₂.commShiftIso (1 : ℤ)).hom.app (P.X (q - 1))
     rw [Category.assoc, NatTrans.shift_app_comm, τ.naturality_assoc]
 
 end Map

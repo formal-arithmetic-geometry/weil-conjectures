@@ -239,6 +239,36 @@ lemma rightDerivedLowerStarProjectionMap_endomorphism
 
 end Complex
 
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **Perfect projection formula** (blueprint `lemma-weil-pbc-perfect-projection-formula`). For
+fixed `f` and `K`, the objects `P` of `D(Y_proét)` at which the projection map
+`π_{f,K,P} : Rf_*K ⊗ᴸ P ⟶ Rf_*(K ⊗ᴸ Lf^*P)` is an isomorphism
+(`AlgebraicGeometry.ProEtale.projectionFormulaLocus`) form a thick triangulated subcategory
+(triangulated, closed under isomorphisms and stable under retracts) which contains every finite
+free module `Λᴺ` placed in any degree; hence it contains every perfect (dualizable) complex.
+
+The remaining assertions of the blueprint node are the following declarations: for a tower
+`P : ℕᵒᵖ ⥤ D(Y_proét)` of perfect coefficients (such as the reductions `Λ/Iⁿ`), the projection
+maps `πₙ` form an isomorphism of towers
+(`AlgebraicGeometry.ProEtale.projectionFormulaTowerIsoOfIsDualizable`) whose inverse is the tower
+of the `ρₙ = πₙ⁻¹`, and they commute with the reduction maps
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_tower_comm`,
+`AlgebraicGeometry.ProEtale.inv_rightDerivedLowerStarProjectionMap_tower_comm`), with
+endomorphisms of `K` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_endomorphism`)
+and with base change
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_derivedBaseChangeMap`). -/
+theorem perfect_projection_formula (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (projectionFormulaLocus A f K).IsTriangulated ∧
+      (projectionFormulaLocus A f K).IsClosedUnderIsomorphisms ∧
+      (projectionFormulaLocus A f K).IsStableUnderRetracts ∧
+      (∀ (N : ℕ) (a : ℤ), projectionFormulaLocus A f K
+        ((DerivedCategory.singleFunctor _ a).obj
+          (⨁ fun _ : Fin N ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology Y) A)))) ∧
+      ∀ P, IsDualizable P → projectionFormulaLocus A f K P :=
+  ⟨inferInstance, inferInstance, inferInstance,
+    isIso_rightDerivedLowerStarProjectionMap_singleFunctor_biproduct_unit A f K,
+    fun _ hP ↦ isIso_rightDerivedLowerStarProjectionMap_of_isDualizable A f K hP⟩
+
 end ProEtale
 
 end AlgebraicGeometry

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPlusSquare
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeMate
@@ -146,7 +147,6 @@ theorem leftDerivedUpperStarComparisonIso_hom_app_comp_counit [QuasiCompact f]
       (rightDerivedLowerStarComparisonPlusIso f (ModuleCat.{u + 1} Λ)).hom := by
     rw [rightDerivedLowerStarComparisonPlusIso, asIso_hom,
       lowerStarComparisonUpperStarBaseChange_eq]
-    rfl
   rw [hc] at hP
   replace hP := congrArg DerivedCategory.Plus.ι.map hP
   rw [Functor.map_comp, Functor.map_comp, ι_map_derivedPlus_counit_app] at hP

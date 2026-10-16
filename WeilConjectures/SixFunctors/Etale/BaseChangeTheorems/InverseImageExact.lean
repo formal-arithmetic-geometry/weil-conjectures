@@ -27,8 +27,6 @@ Right exactness of `g^*` holds because it is a left adjoint.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.preservesFiniteLimits_and_preservesFiniteColimits_upperStar`:
-  `g^*` is exact.
 - `AlgebraicGeometry.Etale.preservesColimitsOfSize_upperStar`: `g^*` preserves all colimits.
 - `AlgebraicGeometry.Etale.shortExact_map_upperStar`: `g^*` sends short exact sequences to
   short exact sequences.
@@ -83,20 +81,9 @@ theorem Etale.preservesFiniteLimits_presheafToSheaf :
         PreservesColimits (presheafToSheaf Y.smallEtaleTopology A) :=
   ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- **Exactness of inverse image**: for an arbitrary morphism of schemes `g : Z ⟶ Y`, the
-inverse image `g^* : Sh(Y_ét, A) ⥤ Sh(Z_ét, A)` preserves finite limits and finite colimits,
-i.e. it is exact. Left exactness is `AlgebraicGeometry.Etale.preservesFiniteLimits_upperStar`
-(inclusion into presheaves, left exact presheaf inverse image, exact sheafification), and
-right exactness holds because `g^*` is left adjoint to `g_*`. For `A` the category of abelian
-groups this is the exactness of `u⁻¹ : Ab(Y_ét) ⥤ Ab(Z_ét)`.
-This is blueprint `prop-weil-pbc-inverse-image-exact`. -/
-@[stacks 03Q1]
-theorem Etale.preservesFiniteLimits_and_preservesFiniteColimits_upperStar :
-    PreservesFiniteLimits (g)^*[A] ∧ PreservesFiniteColimits (g)^*[A] :=
-  ⟨inferInstance, inferInstance⟩
-
 /-- The inverse image `g^*` on étale sheaves sends short exact sequences to short exact
-sequences (`AlgebraicGeometry.Etale.preservesFiniteLimits_and_preservesFiniteColimits_upperStar`).
+sequences (`AlgebraicGeometry.Etale.upperStar_abelian_exact`, blueprint
+`prop-weil-pbc-inverse-image-exact`, for abelian sheaves).
 -/
 theorem Etale.shortExact_map_upperStar {S : ShortComplex (Sheaf Y.smallEtaleTopology A)}
     (hS : S.ShortExact) : (S.map (g)^*[A]).ShortExact :=

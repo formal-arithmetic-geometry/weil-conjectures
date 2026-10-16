@@ -48,18 +48,16 @@ lemma conjugateEquiv_paste_eq (Ecomp' : e₂ ⋙ e₁ ⟶ e₁₂)
       whiskerRight Ecomp' νT := by
   have hinv₁ : conjugateEquiv ((aR.comp aP₂).comp aP₁) (aR.comp (aP₂.comp aP₁))
       (associator _ _ _).inv = (associator _ _ _).inv := by
-    ext X
-    simp only [comp_obj, conjugateEquiv_apply_app, Adjunction.comp_unit_app, comp_map,
-      Category.assoc, ← Functor.map_comp, associator_inv_app, Adjunction.comp_counit_app,
-      Category.id_comp]
-    simp
+    have h := conjugateEquiv_comp (aR.comp (aP₂.comp aP₁)) ((aR.comp aP₂).comp aP₁)
+      (aR.comp (aP₂.comp aP₁)) (associator νR p₂ p₁).hom (associator νR p₂ p₁).inv
+    rw [conjugateEquiv_associator_hom, Iso.inv_hom_id, conjugateEquiv_id] at h
+    exact (Iso.hom_comp_eq_id (associator _ _ _)).1 h
   have hinv₂ : conjugateEquiv ((aE₂.comp aE₁).comp aT) (aE₂.comp (aE₁.comp aT))
       (associator _ _ _).inv = (associator _ _ _).inv := by
-    ext X
-    simp only [comp_obj, conjugateEquiv_apply_app, Adjunction.comp_unit_app, comp_map,
-      Category.assoc, ← Functor.map_comp, associator_inv_app, Adjunction.comp_counit_app,
-      Category.id_comp]
-    simp
+    have h := conjugateEquiv_comp (aE₂.comp (aE₁.comp aT)) ((aE₂.comp aE₁).comp aT)
+      (aE₂.comp (aE₁.comp aT)) (associator e₂ e₁ νT).hom (associator e₂ e₁ νT).inv
+    rw [conjugateEquiv_associator_hom, Iso.inv_hom_id, conjugateEquiv_id] at h
+    exact (Iso.hom_comp_eq_id (associator _ _ _)).1 h
   apply (conjugateEquiv (aE₁₂.comp aT) (aR.comp aP₁₂)).injective
   rw [h, ← conjugateEquiv_comp _ (aR.comp (aP₂.comp aP₁)) _,
     ← conjugateEquiv_comp _ ((aR.comp aP₂).comp aP₁) _,

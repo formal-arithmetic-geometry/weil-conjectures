@@ -77,18 +77,24 @@ noncomputable def shiftMorphism (a : A) : Morphism S S where
 /-- The isomorphisms `K[0] ≅ K` of the stages, as a compatible family. -/
 @[simps]
 noncomputable def shiftMorphismZero : Morphism.Hom (S.shiftMorphism A 0) (Morphism.id S) where
-  τ i := (shiftFunctorZero (C i) A).hom
+  τ i := ((shiftFunctorZero (C i) A).hom : shiftFunctor (C i) (0 : A) ⟶ 𝟭 (C i))
   comm h x := by
-    simp [Functor.commShiftIso_zero]
+    simp only [shiftMorphism_β, Morphism.id_β, Functor.commShiftIso_zero,
+      Functor.CommShift.isoZero_hom_app, Category.assoc]
+    erw [Iso.inv_hom_id_app, Category.comp_id, Category.comp_id]
 
 /-- The isomorphisms `K[a + b] ≅ K[a][b]` of the stages, as a compatible family. -/
 @[simps]
 noncomputable def shiftMorphismAdd (a b : A) :
     Morphism.Hom (S.shiftMorphism A (a + b)) ((S.shiftMorphism A a).comp (S.shiftMorphism A b))
     where
-  τ i := (shiftFunctorAdd (C i) a b).hom
+  τ i := ((shiftFunctorAdd (C i) a b).hom :
+    shiftFunctor (C i) (a + b) ⟶ shiftFunctor (C i) a ⋙ shiftFunctor (C i) b)
   comm h x := by
-    simp [Functor.commShiftIso_add]
+    simp only [shiftMorphism_β, Morphism.comp_β, Functor.commShiftIso_add,
+      Functor.CommShift.isoAdd_hom_app, Category.assoc]
+    erw [Iso.inv_hom_id_app, Category.comp_id]
+    simp
 
 variable [IsDirectedOrder I]
 
@@ -108,8 +114,9 @@ noncomputable def shiftZeroIso : (S.shiftMorphism A 0).functor ≅ 𝟭 S.PairCa
     (fun {X Y} f ↦ by
       have := (Morphism.descNatTrans (S.shiftMorphismZero A) ≫
         (Morphism.functorIdIso (S := S)).hom).naturality f
-      simp only [NatTrans.comp_app, Morphism.functorIdIso_hom_app, comp_id,
+      simp only [NatTrans.comp_app, Morphism.functorIdIso_hom_app,
         Morphism.descNatTrans_app] at this
+      erw [Category.comp_id, Category.comp_id] at this
       exact this)
 
 /-- The isomorphism `(i, K)[a + b] ≅ (i, K)[a][b]`. -/
@@ -121,8 +128,9 @@ noncomputable def shiftAddIso (a b : A) :
     (fun {X Y} f ↦ by
       have := (Morphism.descNatTrans (S.shiftMorphismAdd A a b) ≫
         (Morphism.functorCompIso _ _).hom).naturality f
-      simp only [NatTrans.comp_app, Morphism.functorCompIso_hom_app, comp_id,
+      simp only [NatTrans.comp_app, Morphism.functorCompIso_hom_app,
         Morphism.descNatTrans_app] at this
+      erw [Category.comp_id, Category.comp_id] at this
       exact this)
 
 variable {S A}
@@ -171,9 +179,9 @@ noncomputable def shiftMkCore : ShiftMkCore S.PairCategory A where
     congr 1
     exact shiftFunctorAdd_zero_add_hom_app (C := C X.stage) n X.obj
   add_zero_hom_app n X := by
-    rw [eqToHom_shift X (add_zero n)]
-    simp only [shiftAddIso_hom_app, shiftZeroIso_inv_app]
-    simp only [← Functor.map_comp]
+    rw [eqToHom_shift X (add_zero n), shiftAddIso_hom_app]
+    erw [shiftZeroIso_inv_app]
+    rw [← Functor.map_comp]
     congr 1
     exact shiftFunctorAdd_add_zero_hom_app (C := C X.stage) n X.obj
 
@@ -201,6 +209,11 @@ lemma shiftFunctor_map_mkHom (a : A) {X Y : S.PairCategory} {n : I} (hX : X.stag
         (Y := ⟨Y.stage, (shiftFunctor _ a).obj Y.obj⟩) n hX hY
         (((S.T hX).commShiftIso a).hom.app X.obj ≫ u⟦a⟧' ≫
           ((S.T hY).commShiftIso a).inv.app Y.obj) := rfl
+
+/-- The shift of the image of a stage morphism is the image of its shift. -/
+lemma shiftFunctor_map_ι (a : A) {i : I} {x y : C i} (f : x ⟶ y) :
+    (shiftFunctor S.PairCategory a).map ((S.ι i).map f) = (S.ι i).map (f⟦a⟧') :=
+  Morphism.functor_map_ι _ f
 
 lemma shiftFunctorZero_hom_app (X : S.PairCategory) :
     (shiftFunctorZero S.PairCategory A).hom.app X =
