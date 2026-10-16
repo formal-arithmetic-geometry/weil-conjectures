@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Definitions 2.1-2.7; Gepner-Haugseng sections 4.3 and 5.4",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient mapping-complex adjunction before taking the derived inverse limit; foundational notions for the operadic enrichment used by lem-coef-enriched-category-tensor-calculus. Defines the complete operadic enriched categories and their coefficients used by that mapping-complex construction.",
    "via": [
     "lem-coef-enriched-category-tensor-calculus",
     "lem-coef-enhanced-localization-universal",
@@ -17,13 +17,18 @@
  },
  "kind": "definition",
  "title": "Operadic algebroids and their complete objects",
- "statement": "Use [def-weil-pbc-simplicial-set] for the underlying simplicial-set convention. Fix universes $\\mathcal U\\in\\mathcal U'$; small means $\\mathcal U$-small and all categories under discussion fit in $\\mathcal U'$. For $n\\geq2$ and $0<i<n$, the inner horn $\\Lambda_i^n\\subset\\Delta^n$ is the union of all faces except the $i$-th face; $\\Delta^n$ is the nerve of the ordered set $[n]$. An infinity category is modeled by a simplicial set in which every map from such an inner horn extends to $\\Delta^n$. Spaces are infinity groupoids. A monoidal infinity category $\\mathcal V$ is encoded by a cocartesian fibration $\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ with Segal fibers $\\mathcal V^n$ and operations given by tensor product; inert maps select consecutive subintervals. For a small space $X$, let $\\Delta_X^{\\mathrm{op}}\\to\\Delta^{\\mathrm{op}}$ be the left fibration classified by $[n]\\mapsto X^{n+1}$. A $\\mathcal V$-algebroid with object space $X$ is a functor $\\Delta_X^{\\mathrm{op}}\\to\\mathcal V^\\otimes$ over $\\Delta^{\\mathrm{op}}$ carrying inert maps to cocartesian maps. Its values over $[1]$ are written $A(x,y)$. A morphism over $f:X\\to Y$ is a morphism of these algebras from $A$ to $f^*B$. Write $\\operatorname{Algd}(\\mathcal V)$ for the resulting total infinity category. For a finite set $\\{0,\\ldots,n\\}$, $E^n$ has all mapping objects the tensor unit and all compositions its canonical multiplication. An algebroid $A$ is complete when the map $\\operatorname{Map}(E^0,A)\\to\\operatorname{Map}(E^1,A)$ induced by collapsing $E^1$ to $E^0$ is an equivalence. Write $\\operatorname{Cat}_{\\mathcal V}$ for the full subcategory of complete algebroids. Fully faithful means equivalence on every mapping object; essentially surjective means surjective on equivalence classes of objects in the underlying category with mapping spaces $\\operatorname{Map}_{\\mathcal V}(\\mathbf1,A(x,y))$. A presentable infinity category is an accessible infinity category with all small colimits: for some regular cardinal it is generated under that cardinal's filtered colimits by a small collection of objects whose mapping-space functors preserve those colimits. Presentably monoidal means presentable with tensor preserving small colimits separately.",
+ "statement": "Use the simplicial sets and simplex category of [def-weil-pbc-simplicial-set], and the quasicategories, spaces, mapping spaces, coherent functors, transformations and full subcategories of [def-cbc-enhanced-diagrams-cones]. Fix universes $\\mathcal U\\in\\mathcal U'$; small means $\\mathcal U$-small, and all categories under discussion fit in $\\mathcal U'$. Use the fibrations of [def-coef-infinity-fibrations] and a monoidal infinity category $p:\\mathcal V^\\otimes\\to\\Delta^{\\mathrm{op}}$ with tensor unit $\\mathbf1$ and inert maps as in [def-coef-monoidal-infinity-category].\n\nFor a small space $X$ represented by a Kan complex, define the strict simplicial-set-valued functor $F_X$ on $\\Delta^{\\mathrm{op}}$ by $F_X([n])=X^{n+1}$ and $F_X(\\alpha)((x_0,\\ldots,x_n))=(x_{\\alpha^{\\mathrm{op}}(0)},\\ldots,x_{\\alpha^{\\mathrm{op}}(m)})$ for $\\alpha:[n]\\to[m]$. Specify $\\Delta_X^{\\mathrm{op}}\\to\\Delta^{\\mathrm{op}}$ by the relative nerve of $F_X$: an $r$-simplex consists of a functor $\\sigma:[r]\\to\\Delta^{\\mathrm{op}}$ and, for every nonempty subset $J\\subseteq[r]$, a simplicial map $t_J:\\Delta^J\\to F_X(\\sigma(\\max J))$, satisfying $t_J|_{\\Delta^I}=F_X(\\sigma(\\max I)\\to\\sigma(\\max J))t_I$ for $\\varnothing\\ne I\\subseteq J$. Here $\\Delta^J$ is the simplex on the ordered set $J$, the projection remembers $\\sigma$, and for an order-preserving $\\theta:[r\\prime]\\to[r]$ the induced simplicial operator sends $(\\sigma,t)$ to $(\\sigma\\circ\\theta,t\\prime)$ with $t\\prime_J=t_{\\theta(J)}\\circ(\\theta|_J):\\Delta^J\\to\\Delta^{\\theta(J)}\\to F_X(\\sigma(\\max\\theta(J)))$ for every nonempty $J\\subseteq[r\\prime]$. Each $X^{n+1}$ is Kan: fill any horn independently in each coordinate. By [lem-coef-kan-relative-nerve-left-fibration], this is the specified left-fibration model for the space-valued functor $[n]\\mapsto X^{n+1}$.\n\nA $\\mathcal V$-algebroid with object space $X$ is a coherent functor $A:\\Delta_X^{\\mathrm{op}}\\to\\mathcal V^\\otimes$ over $\\Delta^{\\mathrm{op}}$ sending inert edges to $p$-cocartesian edges; an edge in the domain is inert when it is cocartesian over an inert base map. Write $A(x,y)$ for its value over $(x,y)\\in X^2$ in the fiber over $[1]$. The fiber category $\\operatorname{Alg}_X(\\mathcal V)$ is the full subcategory of functors over $\\Delta^{\\mathrm{op}}$ on these objects. A map of spaces $f:X\\to Y$ gives $f^*B$ by precomposition with the induced map $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$. Write $\\operatorname{Algd}(\\mathcal V)$ for the total infinity category of $X\\mapsto\\operatorname{Alg}_X(\\mathcal V)$: a morphism from $(X,A)$ to $(Y,B)$ consists of $f:X\\to Y$ and a morphism $A\\to f^*B$ in $\\operatorname{Alg}_X(\\mathcal V)$, with higher simplices retaining their coherent compatibilities; composition uses precomposition and composition of these transformations.\n\nFor the discrete object space $\\{0,\\ldots,n\\}$, $E^n$ is the algebroid whose mapping objects are all $\\mathbf1$, with unit and composition maps the unit constraints. Maps of these finite sets give a cosimplicial object $E^\\bullet$. Put $\\iota_n A=\\operatorname{Map}_{\\operatorname{Algd}(\\mathcal V)}(E^n,A)$, a simplicial space by precomposition, and let $\\iota A:=\\operatorname{colim}_{[n]\\in\\Delta^{\\mathrm{op}}}\\iota_n A$ in spaces. Complete means that the canonical map $\\iota_0 A\\to\\iota A$ is an equivalence. Write $\\operatorname{Cat}_{\\mathcal V}$ for the full subcategory of complete algebroids. A morphism $A\\to B$ over $f:X\\to Y$ is fully faithful when every $A(x,y)\\to B(fx,fy)$ is an equivalence in $\\mathcal V$. It is essentially surjective when $\\pi_0(\\iota A)\\to\\pi_0(\\iota B)$ is surjective; here $\\pi_0$ denotes components of a space.\n\nPresentable has the meaning of [def-coef-presentable-infinity-category]. Presentably monoidal means that the underlying infinity category is presentable and tensoring with any fixed object preserves all small colimits in each variable.",
  "source": {
   "document": "https://arxiv.org/html/2311.13362v1",
   "place": "Definitions 2.1-2.7; Gepner-Haugseng sections 4.3 and 5.4 Read online where available; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-kan-relative-nerve-left-fibration"
  ],
  "proof": [],
  "proof_deps": [],
@@ -70,15 +75,65 @@
    "results": "{\"t\": \"2026-10-16T12:28:51Z\", \"tool\": \"leanfinder\", \"query\": \"Weak enriched categories over a quasicategory with many object associative operad and Rezk completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.CatEnriched\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.CatEnrichedOrdinary\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.categoryOfEnrichedCategoryType\"], \"digest\": \"2b20efd9c8fd32c9\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading; the returned declarations concern ordinary category enrichment, ordinary localization or homotopy-category constructions; none states this operadic infinity-category result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete enriched infinity categories as many object associative algebras in a monoidal quasicategory",
+   "results": "{\"t\": \"2026-10-16T13:33:33Z\", \"tool\": \"leanfinder\", \"query\": \"Complete enriched infinity categories as many object associative algebras in a monoidal quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\", \"CategoryTheory.EnrichedCat.str\", \"CategoryTheory.EnrichedCat\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.EnrichedOrdinaryCategory\"], \"digest\": \"2e0ef60542c2dce0\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Enriched/Basic.lean:58 and Enriched/EnrichedCat.lean:37 concern enrichment in an ordinary monoidal category. Quasicategory/StrictBicategory.lean:48 concerns an ordinary Cat-enrichment of quasicategories, not operadic algebroids with varying object spaces or completeness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\"",
+   "results": "{\"t\": \"2026-10-16T13:33:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedCategory\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.enrichedCategoryTypeOfCategory\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\", \"CategoryTheory.EnrichedCategory.Hom\", \"CategoryTheory.EnrichedCategory.id\", \"CategoryTheory.instEnrichedCategoryTransportEnrichment\", \"CategoryTheory.EnrichedCategory.comp\"], \"digest\": \"c29db1fac17c0d12\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Enriched/Basic.lean:58 and Enriched/EnrichedCat.lean:37 concern enrichment in an ordinary monoidal category. Quasicategory/StrictBicategory.lean:48 concerns an ordinary Cat-enrichment of quasicategories, not operadic algebroids with varying object spaces or completeness."
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|complete.*Segal|categorical.?algebra",
+   "results": "{\"t\": \"2026-10-16T13:33:22Z\", \"tool\": \"grep\", \"query\": \"algebroid|complete.*Segal|categorical.?algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\", \"Mathlib/Order/Heyting/Regular.lean\", \"Mathlib/Order/Heyting/Basic.lean\", \"Mathlib/Order/CompleteBooleanAlgebra.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/StrongEpi.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Equalizers.lean\"], \"digest\": \"3961a15717ca643a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Enriched/Basic.lean:58 and Enriched/EnrichedCat.lean:37 concern enrichment in an ordinary monoidal category. Quasicategory/StrictBicategory.lean:48 concerns an ordinary Cat-enrichment of quasicategories, not operadic algebroids with varying object spaces or completeness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete enriched infinity categories and operadic algebroids",
+   "results": "{\"t\": \"2026-10-16T13:33:22Z\", \"tool\": \"leansearch\", \"query\": \"Complete enriched infinity categories and operadic algebroids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatEnriched\", \"CategoryTheory.EnrichedCategory.mk\", \"CategoryTheory.EnrichedCat.bicategory\", \"CategoryTheory.EnrichedCategory\", \"CategoryTheory.Enriched.FunctorCategory.enriched_assoc_assoc\", \"CategoryTheory.EnrichedCat\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\"], \"digest\": \"7e7c9602a2733bf6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Enriched/Basic.lean:58 and Enriched/EnrichedCat.lean:37 concern enrichment in an ordinary monoidal category. Quasicategory/StrictBicategory.lean:48 concerns an ordinary Cat-enrichment of quasicategories, not operadic algebroids with varying object spaces or completeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rezk completeness for a categorical algebra is locality for the degeneracy E1 to E0",
+   "results": "{\"t\": \"2026-10-16T13:33:32Z\", \"tool\": \"leanfinder\", \"query\": \"Rezk completeness for a categorical algebra is locality for the degeneracy E1 to E0\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.IsStrictSegal\", \"SSet.Quasicategory\"], \"digest\": \"2b55dd7e2c360dd2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Enriched/Basic.lean:58 and Enriched/EnrichedCat.lean:37 concern enrichment in an ordinary monoidal category. Quasicategory/StrictBicategory.lean:48 concerns an ordinary Cat-enrichment of quasicategories, not operadic algebroids with varying object spaces or completeness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-coef-complete-algebroid",
+  "worker": "stage1",
+  "summary": "Definition split: reused the existing enhanced-diagram and simplicial-set definitions; isolated three genuinely prerequisite definition nodes for fibrations, monoidal infinity categories and accessibility/presentability. Made inert maps, the relative-nerve model, higher functor categories, completeness test, essential surjectivity and size conventions explicit. No theorem is disguised as a proof step or moved into a restatement child. No project attachment or full Mathlib match was found. Repair: rebased on the current synchronized item and reread its two reused dependencies. Included the missing Kan-valued relative-nerve theorem as an actual delivered statement-only node, with fresh logged searches, so the left-fibration identification is justified without a dangling citation.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 uses finite-level derived coefficient adjunction before Rlim; through its existing created.item chain this definition supplies the operadic enrichment used by lem-coef-enriched-category-tensor-calculus. This is a definition with no proof steps; the six statement dependencies are its one-level split."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q04-31928f57d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-31928f57d (reviewer sub-agent of L); spot-checked: Completeness is stated as iota_0 A ≃ iota_1 A, but Haugseng Definition 2.3 defines it as the canonical iota_0 A → colim iota_n A equivalence. The former requires the separate Corollary 5.2.10 theorem, absent from this route. Corrected item JSON is in fixes/dag/nodes/sec-six-functors/def-coef-complete-algebroid.json; all other nodes and checks passed.; 1 file(s) fixed by the reviewer"
+ }
 }

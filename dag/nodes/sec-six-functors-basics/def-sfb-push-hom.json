@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-push-hom",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Underived (Push)",
@@ -22,9 +22,99 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushHom|pushHomOfComapIso|comapLowerStarIso|mateEquiv",
+   "results": "CategoryTheory.mateEquiv at Mathlib/CategoryTheory/Adjunction/Mates.lean:84, its component identities, and bicategorical mates; no pushHom, pushHomOfComapIso or comapLowerStarIso hit.",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.mateEquiv, using its inverse and the existing statement-dependency data, gives this definition by the explicit one-line specialization recorded in mathlib_match.how."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with direct image of sheaves by a canonical natural transformation constructed as an adjunction mate",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary ModuleCat change-of-rings and SheafOfModules/PresheafOfModules constructions, not module objects over pulled-back condensed ring objects with the specified comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.TwoSquare",
+   "results": "CategoryTheory.mateEquiv and its component/composition identities, Mathlib/CategoryTheory/Adjunction/Mates.lean (mateEquiv at line 84; body read at lines 84–100).",
+   "date": "2026-10-16",
+   "verdict": "match: CategoryTheory.mateEquiv, using its inverse and the existing statement-dependency data, gives this definition by the explicit one-line specialization recorded in mathlib_match.how."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural comparison from extension of scalars after pushforward to pushforward after extension of scalars for sheaves of modules over commutative condensed rings",
+   "results": "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardCongr",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary ModuleCat change-of-rings and SheafOfModules/PresheafOfModules constructions, not module objects over pulled-back condensed ring objects with the specified comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed|pro.etale|extendScalars|comap",
+   "results": "Wrapper reported zero hits for the requested subdirectory CategoryTheory/Monoidal/Module, which is not the actual module path. This query supplies no evidence of absence; repeated on CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "unavailable: incorrect search scope; superseded by the corrected scoped search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given restriction of scalars commuting with direct image of module objects, take its inverse mate along extension restriction adjunctions to define the change of coefficients pushforward comparison",
+   "results": "PresheafOfModules.pushforward_obj_map_apply, PresheafOfModules.pushforward_obj_map_apply', ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, PresheafOfModules.pushforward_map_app_apply', PresheafOfModules.pushforward_map_app_apply, PresheafOfModules.pushforward_obj_obj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary ModuleCat change-of-rings and SheafOfModules/PresheafOfModules constructions, not module objects over pulled-back condensed ring objects with the specified comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed|pro.etale|extendScalars|comap",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mod.lean:351,397,401,403,412; CategoryTheory.Mod.comap at line 403, source and scalarRestriction construction read at lines 351–416. This is restriction of scalars only. No condensed/pro-étale extension/pushforward comparison found. Correct search scope: CategoryTheory/Monoidal.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the generic restriction functor is one ingredient of the existing change-of-scalars dependency"
+  },
+  {
+   "tool": "grep",
+   "query": "structure TwoSquare|def natTrans|natTrans :|def mk",
+   "results": "Wrapper printed three hits with malformed file/line splitting because a single source file was passed. Read source directly: Mathlib/CategoryTheory/Functor/TwoSquare.lean:50 defines TwoSquare, :55 defines mk, :59 defines natTrans; both latter constructions are identity abbreviations.",
+   "date": "2026-10-16",
+   "verdict": "match: TwoSquare packaging/unpackaging in the mate specialization is definitional, not an additional theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "^def TwoSquare|^abbrev (mk|natTrans)",
+   "results": "Mathlib/CategoryTheory/Functor/TwoSquare.lean:50 TwoSquare, :55 TwoSquare.mk, :59 TwoSquare.natTrans; both abbreviations are the identity. Also unrelated Category.lean:220 NatTrans.flipApp.",
+   "date": "2026-10-16",
+   "verdict": "match: verifies exact file/line locations and definitional packaging of the one-line mate specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, its counit and unit identities, composition identities and iterated-mate identities. Read the pinned declaration at Mathlib/CategoryTheory/Adjunction/Mates.lean:84 and inverse formula at lines 93–100.",
+   "date": "2026-10-16",
+   "verdict": "match: inverse mate with the two given extension/restriction adjunctions and e.inv is exactly the recorded one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "def mateEquiv|symm.*TwoSquare",
+   "results": "4 hits in Mathlib/CategoryTheory/Adjunction/Mates.lean:84,128,151,472; line 84 defines the equivalence between the two required TwoSquare types.",
+   "date": "2026-10-16",
+   "verdict": "match: independently verified the declaration and direction in the pinned source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two adjunctions L1 left adjoint R1 and L2 left adjoint R2 and arbitrary vertical functors G H, a transformation R1 composed with G to H composed with R2 corresponds to a transformation G composed with L2 to L1 composed with H",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, leftAdjointCompNatTrans, leftAdjointCompNatTrans_assoc, leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, comp, leftAdjointCompIso, leftAdjointCompIso_hom_app.",
+   "date": "2026-10-16",
+   "verdict": "no exact hit from this semantic query: these are composition/conjugation results, not the arbitrary-vertical-functor mate equivalence. The independent Loogle and grep searches above identify the exact generic construction."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.mateEquiv",
+  "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+  "how": "specializes in one line: at line 84 (inverse construction lines 93–100), take adj₁ = Ext_{a_X} ⊣ Res_{a_X}, adj₂ = Ext_{a_Y} ⊣ Res_{a_Y}, G = f_* with Lambda coefficients, H = f_* with Lambda-prime coefficients. For e = the natural isomorphism of def-sfb-comap-lower-star-iso, use TwoSquare.natTrans ((CategoryTheory.mateEquiv adj₁ adj₂).symm (TwoSquare.mk Res_{a_X} H G Res_{a_Y} e.inv)). Its type is G ⋙ Ext_{a_Y} ⟶ Ext_{a_X} ⋙ H, exactly the stated transformation. TwoSquare.mk and TwoSquare.natTrans are identity abbreviations at Mathlib/CategoryTheory/Functor/TwoSquare.lean:55 and :59. The input categories, functors, adjunctions and e are the existing statement dependencies, with no comparison-of-definitions theorem needed.",
+  "line": 84
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -47,5 +137,20 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-push-hom",
+  "worker": "stage1",
+  "summary": "Audited the definition against the current blueprint and its five existing definition dependencies. Mathlib CategoryTheory.mateEquiv (inverse direction, Mates.lean:84,93–100) defines exactly this natural transformation by a one-line specialization with the existing extension/restriction adjunctions and inverse comparison. Marked the item mathlib with an explicit substitution; no new nodes or proof obligations. Retained the statement and all five statement dependencies unchanged. The master construction is reference material only; no slopmaster2 attachment claimed.",
+  "blueprint": "Realizes the underived (Push) definition def-sfb-push-hom in unit sk-def-sfb-coefficient-comparisons, proof paragraph 2 (Pushforward and pullback), by the generic mate of paragraph 1. This is a definition-only split: its five notions are the five existing statement dependencies; proof and proof_deps remain empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-ebeebefba",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-ebeebefba (reviewer sub-agent of L); spot-checked: Read the item, all five cited statements and sources, unit/chapter route, and report. Mathlib mateEquiv gives exactly the stated underived comparison; reference master confirms its direction and condensed module categories. Identity, zero, empty-scheme and nonflat coefficient cases check out. No new nodes, cycles, missing citations, or repairs. Concrete checks recorded in review.md."
+ }
 }

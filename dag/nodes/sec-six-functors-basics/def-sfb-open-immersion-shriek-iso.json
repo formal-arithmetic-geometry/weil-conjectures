@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-open-immersion-shriek-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extension of scalars commutes with $j_!$",
@@ -22,9 +22,66 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openImmersionShriekIso|extendScalars.*[Ss]hriek|[Ss]hriek.*extendScalars",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: general conjugation implements the existing def-sfb-conjugate-pull-iso dependency; it requires the project-specific adjunctions and input comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with extension by zero for sheaves of modules",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendScalars, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.smul_zero, SheafOfModules.restrictScalars_map_val, ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ModuleCat scalar extension and SheafOfModules restriction hits do not give this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of condensed ring module sheaves commutes with extension by zero along an open immersion",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.homEquiv_extendScalarsComp, Condensed.profiniteSolid, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, LightCondensed.free",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary ring modules or condensed modules over an ordinary ring; none defines this pro-etale ring-object comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateIsoEquiv|extendScalars|extensionByZero",
+   "results": "24 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: Mates.lean:425 and CompositionIso.lean:74 give general conjugation, already represented by def-sfb-conjugate-pull-iso"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: general composition of adjunctions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composites of right adjoints induces the conjugate isomorphism between composites of left adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.conjugateEquiv_symm_comp_assoc, CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item: general adjunction composition and conjugation results supply formal machinery, not the condensed module functors or their commuting pullback comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoints to naturally isomorphic functors are naturally isomorphic; scalar extension commutes with open pushforward for module objects",
+   "results": "8 hits: PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: results give ordinary sheaves of modules pullback/pushforward adjunctions and congruences, not extension by zero for condensed ring module objects"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -47,5 +104,21 @@
  ],
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-open-immersion-shriek-iso",
+  "worker": "stage1",
+  "summary": "Audited this definition against main-20261015 and the upstream master construction. Its five existing statement dependencies supply the coefficient maps, scalar adjunctions, two open-immersion adjunctions, the right-adjoint comparison, and conjugation. Retained the statement verbatim, with no new nodes or proof obligations: the isomorphism is defined by applying the existing conjugate construction. Searches found the general Mathlib conjugation machinery, not the full project-specific construction; no finished slopmaster2 declaration was found. Checked category assignments, orientation, arbitrary coefficient morphisms, and identity, empty-open and non-flat examples.",
+  "blueprint": "The complete definition of def-sfb-open-immersion-shriek-iso (order 1744) realizes the underived conjugate in unit sk-def-sfb-coefficient-comparisons, step 4, Extension by zero. It is a definition, so its construction inputs are stmt_deps and proof/proof_deps remain empty. Blueprint searches for open-immersion-shriek-iso and Extension of scalars commutes found no other node defining this same underived comparison. The derived comparison and the restriction-of-scalars comparison are different constructions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N6-238375dce",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-238375dce (reviewer sub-agent of L); spot-checked: Read the full definition, all five dependency statements and cited blueprint sources, unit/chapter route, and master construction at ChangeOfCoefficients.lean:281–289. Verified condensed coefficient categories, conjugate orientation, and absence of flatness requirements; checked identity, empty-open and non-flat examples. No duplicate, circularity, missing citation or repair found. Detailed review written to review.md."
+ }
 }
