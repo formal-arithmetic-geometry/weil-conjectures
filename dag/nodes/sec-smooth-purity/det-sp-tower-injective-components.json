@@ -3,46 +3,278 @@
  "blueprint": {
   "is": "det-sp-tower-injective-components",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Components of injective towers are acyclic",
- "statement": "Let $I_\\bullet$ be an injective object of $\\operatorname{Tow}(T,\\mathcal O_E)$. Then for\nevery $r$, the component $I_r$ is a direct summand of a finite product of\nsheaves $J_n$ ($n\\leq r$), each an injective $\\mathcal O_{E,T}/\\ell^n$-module\nviewed as an $\\mathcal O_{E,T}/\\ell^r$-module. In particular $I_r$ is acyclic\nfor sections over every object of $T_{\\mathrm{proét}}$, hence $g_*$-acyclic for\nevery morphism $g:T\\to S$. Consequently, for\n$C_\\bullet\\in D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ with a bounded below injective\nresolution $C_\\bullet\\to I_\\bullet^\\cdot$, the complex $I_n^\\cdot$ computes\n$Rg_{*,\\mathcal O_E/\\ell^n}C_n$, and so\n$(Rg_{*,\\bullet}C_\\bullet)_n\\simeq Rg_{*,\\mathcal O_E/\\ell^n}C_n$.",
+ "statement": "Fix a finite extension $E/\\mathbf Q_\\ell$ and schemes $T,S$, and put $R_{T,r}=\\mathcal O_{E,T}/\\ell^r$ and $R_{S,r}=\\mathcal O_{E,S}/\\ell^r$ as in [sk-def-sp-coefficient-towers], with the canonical identification $g^{-1}R_{S,r}\\simeq R_{T,r}$ for every morphism $g:T\\to S$. Use the small pro-etale sites with the size convention of [def-weil-pbc-proetale-site]. Let $I_\\bullet$ be an injective object [def-sp-injective-resolutions] of $\\operatorname{Tow}(T,\\mathcal O_E)$. Then for every $r\\geq1$, the component $I_r$ is a direct summand of a finite product of sheaves $J_n$ ($1\\leq n\\leq r$), each an injective $R_{T,n}$-module viewed as an $R_{T,r}$-module by restriction along $R_{T,r}\\to R_{T,n}$. In particular $I_r$ is acyclic for sections over every object of $T_{\\mathrm{proet}},$ hence $g_*$-acyclic [def-sp-acyclic] for every morphism $g:T\\to S$, where $g_*$ is the ordinary module direct image [def-weil-pbc-proetale-operations] for the coefficient identification $g^{-1}R_{S,r}\\simeq R_{T,r}$.\n\nHere $g_{*,\\bullet}$ denotes the additive left exact functor on coefficient towers obtained by applying these ordinary direct images levelwise, with the transitions induced by the original transitions; $Rg_{*,\\bullet}$ denotes its total right derived functor on $D^+$ [lem-weil-pbc-right-derived-plus-injective]. Evaluation and $C_n$ have the meaning of [det-sp-coefficient-towers-abelian]. Consequently, for $C_\\bullet\\in D^+(\\operatorname{Tow}(T,\\mathcal O_E))$ with a bounded below injective resolution $C_\\bullet\\to I_\\bullet^\\cdot$, the complex $g_*I_n^\\cdot$ represents $Rg_{*,\\mathcal O_E/\\ell^n}C_n$, and there is a natural isomorphism\n$$(Rg_{*,\\bullet}C_\\bullet)_n\\simeq Rg_{*,\\mathcal O_E/\\ell^n}C_n.$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.md",
   "place": "node det-sp-tower-injective-components, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-weil-pbc-proetale-site",
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "det-sp-coefficient-towers-abelian"
+ ],
  "proof": [
   {
-   "text": "By [det-sp-tower-evaluation-adjoint], $I_\\bullet$ embeds into\n$\\prod_nr_nJ_n$ with $J_n$ injective $\\mathcal O_{E,T}/\\ell^n$-modules; as $I_\\bullet$\nis injective the embedding splits, so $I_\\bullet$ is a direct summand of\n$\\prod_nr_nJ_n$, and at level $r$ this is a direct summand of\n$\\prod_{n\\leq r}J_n$, a finite product.",
+   "text": "Work in the common larger universe and small site models specified by [def-weil-pbc-proetale-site]. For either scheme and each coefficient ring sheaf, [lem-weil-pbc-ring-sheaves-grothendieck] gives a Grothendieck abelian module category, hence enough injectives by [lem-sp-grothendieck-enough-injectives]. The tower categories are Grothendieck abelian by [det-sp-coefficient-towers-abelian], so the same enough-injectives theorem applies to them. Thus all module and tower injective resolutions used below exist in the stated categories.",
    "uses": [
-    "det-sp-tower-evaluation-adjoint"
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "det-sp-coefficient-towers-abelian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079H, theorem-injective-embedding-grothendieck; blueprint proof, ambient coefficient categories"
+   }
   },
   {
-   "text": "An injective module over a sheaf of rings $\\mathcal R$ on a site is flasque in\nthe sense that $H^q(U,J)=0$ for $q>0$ and every object $U$; this vanishing is a\nstatement about the underlying abelian sheaf (cohomology of a module sheaf can\nbe computed in abelian sheaves), so it is unaffected by restricting scalars\nalong $\\mathcal O_{E,T}/\\ell^r\\to\\mathcal O_{E,T}/\\ell^n$. Finite products and\ndirect summands of sheaves with vanishing higher cohomology on all objects\nagain have this property. Hence $I_r$ has vanishing higher cohomology on every\nobject of $T_{\\mathrm{proét}}$, so $R^qg_*I_r$, the sheafification of\n$V\\mapsto H^q(V\\times_ST,I_r)$, vanishes for $q>0$: $I_r$ is $g_*$-acyclic.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [det-sp-tower-evaluation-adjoint] to obtain a monomorphism $a:I_\\bullet\\hookrightarrow P_\\bullet=\\prod_{n\\geq1}r_nJ_n$, with $J_n$ injective over $R_n$. By [def-sp-injective-resolutions], the identity of $I_\\bullet$ extends across $a$, giving $b:P_\\bullet\\to I_\\bullet$ with $ba=1$. Products of the systems in [sk-def-sp-coefficient-towers] are levelwise: the projections and a map into the product are defined componentwise, and compatibility with transitions is checked after each projection. Since $(r_nJ_n)_r=0$ for $n>r$ and equals the restriction of $J_n$ for $n\\leq r$, evaluation of $ba=1$ exhibits $I_r$ as a retract of the finite product $\\prod_{n\\leq r}\\operatorname{Res}_{R_r\\to R_n}J_n$.",
+   "uses": [
+    "det-sp-tower-evaluation-adjoint",
+    "def-sp-injective-resolutions",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
+    "place": "First paragraph: embedding, splitting, and finite product at each level"
+   }
   },
   {
-   "text": "Finally, $Rg_{*,\\bullet}C_\\bullet=g_{*,\\bullet}I_\\bullet^\\cdot$, whose level $n$ is\n$g_*I_n^\\cdot$. Evaluation is exact, so $I_n^\\cdot$ is a bounded below resolution of\n$C_n$ by $g_*$-acyclic sheaves, and $g_*I_n^\\cdot$ computes\n$Rg_{*,\\mathcal O_E/\\ell^n}C_n$.",
-   "uses": [],
-   "elementary": null
+   "text": "For every object $U$ of $T_{\\mathrm{proet}}$ and $q>0$, apply [lem-sc-injective-module-abelian-acyclic-zariski] to the ringed site $(T_{\\mathrm{proet}},R_n)$ and the injective $J_n$. Despite its historical Zariski suffix, its statement is for an arbitrary ringed site and gives $H^q(U,(J_n)_{ab})=0$. Restriction along $R_r\\to R_n$ leaves this abelian sheaf unchanged. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] with ring sheaf $R_r$ to deduce $R^q\\Gamma_{R_r}(U,\\operatorname{Res}J_n)=0$. The smallness, common-universe and enough-injectives hypotheses were established in step 1; no flatness of the quotient map or injectivity after restriction of scalars is asserted.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree, second equality and proof of injective-module abelian acyclicity"
+   }
+  },
+  {
+   "text": "Fix $r,U$ and use injective $R_r$-module resolutions $L_n^\\cdot$ of the finitely many restricted $J_n$. Their finite product is an injective resolution of $P_r$: maps into a finite product extend coordinatewise by [def-sp-injective-resolutions], and kernels and images in a finite sum of complexes are coordinatewise. Sections of this resolution and their cohomology are also finite products. The defining formula for derived functors in [def-sp-left-exact-additive] therefore gives $R^q\\Gamma(U,P_r)=\\prod_{n\\leq r}R^q\\Gamma(U,\\operatorname{Res}J_n)=0$ for $q>0$. Applying the functor $R^q\\Gamma(U,-)$ to the two maps splitting $I_r$ off $P_r$ factors its identity through zero, so $R^q\\Gamma(U,I_r)=0$. This proves the section-acyclicity claim without any infinite-product exactness claim.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
+    "place": "Second paragraph: finite products and direct summands preserve higher-section vanishing; explicit elementary argument"
+   }
+  },
+  {
+   "text": "Let $L^\\cdot$ be an injective $R_r$-module resolution of $I_r$. By step 4 and the defining formula of [def-sp-left-exact-additive], $H^q(L^\\cdot(U))=0$ for every $U$ and $q>0$. For an object $V$ of $S_{\\mathrm{proet}}$, [def-weil-pbc-proetale-operations] gives $(g_*L^\\cdot)(V)=L^\\cdot(T\\times_S V)$, whose positive cohomology therefore vanishes. Every positive-degree sectionwise cycle is a sectionwise boundary; since kernels are sectionwise and cokernels are sheafified sectionwise cokernels by [def-weil-sheaf-of-modules-category], the positive cohomology sheaves of $g_*L^\\cdot$ vanish. Thus $R^qg_*I_r=0$ for $q>0$, exactly $g_*$-acyclicity [def-sp-acyclic]. This is the sheafification-of-cohomology argument, written directly on the resolution.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
+    "place": "Second paragraph, final sentence; compare Stacks sites-cohomology.tex Tag 072W, lemma-higher-direct-images"
+   }
+  },
+  {
+   "text": "By exactness of evaluation in [det-sp-coefficient-towers-abelian], $C_n\\to I_n^\\cdot$ is a quasi-isomorphism and $I_n^\\cdot$ has the same lower bound as the tower resolution. Each term is $g_*$-acyclic by step 5. Apply [src-right-derived-functor-plus-acyclic-unit] to the additive left exact finite-level functor $g_*$ of [def-weil-pbc-proetale-operations]: it identifies $g_*I_n^\\cdot$ with $R^+g_*I_n^\\cdot$, hence with $R^+g_*C_n$. The module categories are abelian with enough injectives by step 1. This bounded-below derived functor agrees with the ordinary derived direct image in the statement: a bounded-below complex of injectives is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so its image computes both constructions. The isomorphism uses the derived unit, and is natural.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "src-right-derived-functor-plus-acyclic-unit",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E, lemma-leray-acyclicity; Tag 05TH, lemma-injective-acyclic; blueprint proof, final paragraph"
+   }
+  },
+  {
+   "text": "The levelwise tower direct image defined in the statement is additive and left exact: both properties are checked at each level, using the section formula of [def-weil-pbc-proetale-operations] and the levelwise kernels of [det-sp-coefficient-towers-abelian]. Its source has enough injectives by step 1. Clause (2) of [lem-weil-pbc-right-derived-plus-injective] therefore represents $Rg_{*,\\bullet}C_\\bullet$ by $g_{*,\\bullet}I_\\bullet^\\cdot$. Exact evaluation gives its level-$n$ representative $g_*I_n^\\cdot$. Step 6 identifies this complex with $Rg_{*,\\mathcal O_E/\\ell^n}C_n$, proving the displayed isomorphism. The comparison is the one induced by the underived evaluation identity and the derived units. Their naturality, and the uniqueness clause (3) of the same right-derived-functor node, make it independent of the injective resolution and natural in $C_\\bullet$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
+    "place": "Final paragraph: tower derived direct image, evaluation and the comparison; Stacks derived.tex Tags 05TI and 05TH"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-tower-evaluation-adjoint"
+  "def-sp-acyclic",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-evaluation-adjoint",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "sk-def-sp-coefficient-towers",
+  "src-right-derived-functor-plus-acyclic-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
+  "place": "All three paragraphs, with Stacks 03FD and 015E supplying the cited general tools and elementary finite-product/sheaf-exactness details written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "injective sheaf of modules on a pro-étale site has vanishing higher sections on every object",
+   "results": "8 hits; PresheafOfModules.injective_of_mono; PresheafOfModules.instIsLocallyInjectiveToSheafify; CategoryTheory.Sheaf.isLocallyInjective_iff_injective; PresheafOfModules.IsLocallyInjective; CategoryTheory.Sheaf.isLocallyInjective_forget; CategoryTheory.Presheaf.isLocallyInjective_of_injective; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Injective, Sheaf, rightDerived, evaluation, IsZero",
+   "results": "0 hits; none; loogle: unknown identifier 'Injective'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: unknown identifier 'Injective'"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*acyclic|rightDerived.*injective|pro.?etale.*injective",
+   "results": "Subdirectory of Mathlib/: Mathlib; 0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid duplicated Mathlib subdirectory; not evidence of absence; repeated below in valid directories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective module sheaf on a pro-etale site is acyclic for sections over every object",
+   "results": "8 hits; SheafOfModules.Hom.mk.injEq; SheafOfModules.mk.injEq; SheafOfModules.mk.inj; PresheafOfModules.injective_of_mono; Module.injective_iff_injective_object; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; SheafOfModules.Presentation.mk.injEq; TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite products and direct summands of sheaves with vanishing higher cohomology remain acyclic",
+   "results": "8 hits; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.SheafOfTypes.balanced; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; CategoryTheory.Sheaf.H; HomotopyCategory.subcategoryAcyclic; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero, finite product, retract, rightDerived",
+   "results": "0 hits; none; loogle: unknown identifier 'IsZero'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: unknown identifier 'IsZero'"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*product.*acyclic|retract.*acyclic|direct.*summand.*acyclic",
+   "results": "Subdirectory of Mathlib/: Mathlib; 0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid duplicated Mathlib subdirectory; not evidence of absence; repeated below in valid directories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation of a bounded below injective resolution computes the right derived functor",
+   "results": "8 hits; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.rightDerived; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.Functor.IsRightDerivedFunctor; CategoryTheory.injectiveResolutions; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below injective resolution computes right derived functor",
+   "results": "8 hits; CategoryTheory.Functor.rightDerived; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerived, InjectiveResolution, IsZero",
+   "results": "0 hits; none; loogle: unknown identifier 'rightDerived'",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: loogle: unknown identifier 'rightDerived'"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*Injective|injective.*rightDerived|acyclic.*resolution",
+   "results": "Subdirectory of Mathlib/: Mathlib; 0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "inconclusive: invalid duplicated Mathlib subdirectory; not evidence of absence; repeated below in valid directories"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ii]njective|[Ii]njective.*rightDerived|[Aa]cyclic.*[Rr]etract",
+   "results": "Subdirectory of Mathlib/: CategoryTheory; 5 hits; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective inverse system of module sheaves has evaluation acyclic for direct image; level evaluation commutes with bounded below right derived direct image",
+   "results": "8 hits; SheafOfModules.evaluation; PresheafOfModules.IsLocallyInjective; CategoryTheory.sheafSectionsNatIsoEvaluation_inv_app; PresheafOfModules.evaluationJointlyReflectsColimits; AlgebraicGeometry.Scheme.Modules.inv_app; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; SheafOfModules.evaluationPreservesLimitsOfShape; SheafOfModules.hasLimit",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an injective semilinear inverse system is a retract of a finite product of injective modules restricted along quotient ring maps",
+   "results": "8 hits; Profinite.NobelingProof.eval_eq_πJ; Profinite.NobelingProof.GoodProducts.maxToGood_injective; Module.Injective.pi; AdicCompletion.pi_apply_coe; AdicCompletion.piEquivOfFintype_apply; AdicCompletion.sumInv_comp_sum; AdicCompletion.sum_comp_sumInv; Profinite.NobelingProof.GoodProducts.square_commutes",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "12 hits; CategoryTheory.Functor.HasRightDerivedFunctor; CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'; CategoryTheory.Functor.HasRightDerivedFunctor.mk; CategoryTheory.Functor.totalRightDerived; CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension; CategoryTheory.Functor.hasRightDerivedFunctor_iff; CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso; CategoryTheory.Functor.IsRightDerivedFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Components of injective towers of sheaves of modules over varying quotient rings are acyclic for direct image",
+   "results": "8 hits; PresheafOfModules.IsLocallyInjective; PresheafOfModules.instIsLocallyInjectiveToSheafify; SheafOfModules.instAbelian; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.isLocallyInjective_forget; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.cm5b.I_X; CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_rightAcyclic|rightAcyclic_of_injective",
+   "results": "Subdirectory of Mathlib/: Algebra/Homology; 0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def rightDerived|isZero_rightDerived_obj_injective_succ",
+   "results": "Subdirectory of Mathlib/: CategoryTheory/Abelian; 3 hits; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|injective.*tower|tower.*injective|pro.?etale.*injective",
+   "results": "Subdirectory of Mathlib/: (root); 25 hits; Mathlib/RingTheory/AlgebraTower.lean; Mathlib/RingTheory/AlgebraTower.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory/HopkinsLevitzki.lean; Mathlib/RingTheory/HopkinsLevitzki.lean; Mathlib/NumberTheory/NumberField/Basic.lean; Mathlib/RingTheory/Jacobson/Radical.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole varying-coefficient pro-etale tower statement; generic ingredients only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -53,5 +285,49 @@
   "det-sp-tower-evaluation-adjoint"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-sp-tower-injective-components",
+  "worker": "stage1",
+  "summary": "Kept the blueprint embedding / abelian cohomology / acyclic resolution route. Replaced two provisional new nodes by existing arbitrary-ringed-site statements and explicit elementary finite-product/retract and sectionwise-exactness arguments. Corrected the typed representative to g_*I_n, made the previously implicit levelwise tower functor explicit, and recorded verbatim statement quotations. No new nodes.",
+  "blueprint": "First paragraph is step 2; second paragraph is steps 3--5; final paragraph is steps 6--7. Step 1 verifies all small-site and enough-injectives hypotheses. The imported node has no chapter/unit fields or corresponding unit record; the current main-20261015 parent blueprint proof was read directly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Step 1 uses the generic ringed-site module-category theorem to supply the finite-level ambient categories; it does not replace the tower embedding argument."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Step 3 uses its arbitrary-ringed-site statement, Stacks 03FD, exactly the injective-module abelian acyclicity called for by the blueprint."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Step 3 uses its arbitrary-ringed-site module/abelian evaluation comparison to change coefficient rings without asserting injectivity or flatness."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Step 6 uses the general bounded-below acyclic-complex derived-unit isomorphism, Stacks 015E, after this item has established termwise acyclicity."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Step 6 uses the generic K-injectivity of bounded-below injective complexes only to identify the D+ and ordinary K-injective derived-image realizations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q64-8cd5e3244",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-8cd5e3244 (reviewer sub-agent of L); spot-checked: Read the item, all seven proof steps, cited DAG statements, current blueprint proof, and cited Stacks/Mathlib sources. Verified coefficient categories, base-change identification, finite-product retract, restriction of scalars, pro-etale direct-image acyclicity, derived comparisons, route compliance, and edge cases. No new nodes or repair faults; review.md records the checks."
+ }
 }

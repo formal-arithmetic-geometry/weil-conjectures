@@ -3,60 +3,258 @@
  "blueprint": {
   "is": "lem-pur-support-localization-triangle",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Localization triangle for the exceptional inverse image",
- "statement": "Let $s:Z\\hookrightarrow X$, $j:U\\hookrightarrow X$ be the\nclosed–open pair, and let $K$ be\na bounded below complex of $\\Lambda$-module sheaves. The\nspecified construction gives a\ndistinguished triangle\n\n$$\ns_*Rs^!K\\longrightarrow K\\longrightarrow Rj_*j^*K\n\\longrightarrow s_*Rs^!K[1]\n$$\n\nin $D(X,\\Lambda)$, with $Rs^!$ the\nexceptional inverse image\nwhen that adjoint is defined. It has the canonicality, functoriality\nand etale base-change compatibility of\nthe preceding definition.",
+ "statement": "Let $s:Z\\hookrightarrow X$ be a closed immersion of schemes with complementary open immersion $j:U\\hookrightarrow X$, and assume that $j$ is quasi-compact [def-pur-flasque-support, def-weil-finite-type-morphism]. Fix a finite commutative ring $\\Lambda$. Work with all module sheaves over the constant coefficient sheaves on the small pro-etale sites and their ordinary derived categories [def-weil-pbc-proetale-site, def-weil-pbc-proetale-operations], without a constructibility condition. Let $K$ be a bounded below complex, or its object in $D^+(X_{\\mathrm{proet}},\\Lambda)$ [def-weil-pbc-bounded-derived-subcategories]. Write $s^!M=s^{-1}\\ker(M\\to j_*j^*M)$ as in [def-pur-flasque-support], and let $Rs^!$ be its right derived functor on $D^+$, computed on bounded below complexes of injectives [lem-weil-pbc-right-derived-plus-injective].\n\nThe injective-resolution and cone construction of [def-pur-support-triangle] gives a distinguished triangle\n$$\n s_*Rs^!K\\longrightarrow K\\longrightarrow Rj_*j^*K\n \\longrightarrow (s_*Rs^!K)[1]\n$$\nin $D(X_{\\mathrm{proet}},\\Lambda)$. Here $s_*$ is exact and denotes also its termwise induced derived functor. The functor $Rs^!$ is right adjoint to this $s_*$ on the bounded below derived categories. Consequently any exceptional inverse image defined as a right adjoint to this same $s_*$ on these same categories is naturally identified with $Rs^!$, compatibly with the counit. The triangle is independent of the chosen injective resolution under the derived comparison maps, is functorial in $K$, and is compatible with etale base change in precisely the sense of [def-pur-triangle-meaning, def-weil-etale-morphism].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-localization-triangle.md",
   "place": "node lem-pur-support-localization-triangle, order 1933"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pur-flasque-support",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-support-triangle",
+  "def-pur-triangle-meaning",
+  "def-weil-etale-morphism"
+ ],
  "proof": [
   {
-   "text": "By [lem-pur-support-exact], the three complexes in\n[def-pur-support-triangle] form a short exact sequence. Its cone\ntriangle is distinguished, and the cone-to-quotient quasi-isomorphism\nidentifies its third term with $j_*j^*I(K)$.",
+   "text": "Use the compatible small sites and module universes of [def-weil-pbc-proetale-site]. For each of $T=X,Z,U$, the category $\\mathcal A_T=\\operatorname{Mod}(\\Lambda_T)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], and has enough injectives by [lem-sp-grothendieck-enough-injectives]. The general abelian-category statement [lem-weil-pbc-dplus-injective-representative] therefore supplies a bounded below complex $I$ of injectives representing $K$; it is K-injective. This uses that node's general first clause, not its example restricted to the etale site. For an input complex $K$, the inverse of the chosen isomorphism $QI\\cong QK$ is represented by a chain map $r:K\\to I$ by [lem-weil-pbc-kinjective-hom-derived]. Its derived image is invertible, so its maps on all cohomology objects are isomorphisms; hence $r$ is a quasi-isomorphism and supplies the actual resolution arrow required by [def-pur-support-triangle]. For an input derived object choose a bounded below representative first. All sheaf functors used below are additive; applying one termwise preserves a lower bound. By [lem-weil-pbc-right-derived-plus-injective], the right derived functor of $s^!$ exists and its value on $K$ is represented by $s^!I$.",
    "uses": [
-    "lem-pur-support-exact",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-kinjective-hom-derived",
     "def-pur-support-triangle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), 05TI (lemma-enough-injectives-right-derived); injectives.tex Tag 079H, theorem-injective-embedding-grothendieck"
+   }
   },
   {
-   "text": "The sheaf functor $s^!$ of [def-pur-flasque-support] is right\nadjoint to $s_*$: every map $s_*N\\to M$ has image supported on\n$Z$, hence factors uniquely through $\\mathcal G_ZM$, giving\n$\\operatorname{Hom}_X(s_*N,M)=\\operatorname{Hom}_Z(N,s^!M)$.\nSince $s_*$ is exact for a closed immersion, its derived right\nadjoint is computed on injective resolutions by $s^!I(K)$, and\nuniqueness of right adjoints identifies it with the exceptional\ninverse image of [def-weil-exceptional-inverse-image].\nThe restriction $j^*$ preserves injectives because its left adjoint\n$j_!$ is exact by [def-weil-open-closed-recollement].\nThus $j_*j^*I(K)$ computes $Rj_*j^*K$.",
+   "text": "Put $G_ZM=\\ker(\\eta_{j,M})$. The stated natural comparison in [def-pur-flasque-support] is $q_M:G_ZM\\xrightarrow{\\sim}s_*s^!M$, since $j$ is quasi-compact. The module operations of [def-weil-pbc-proetale-operations] give the open and closed inverse-image/direct-image adjunctions. For a sheaf $N$ on $Z$, [lem-weil-pbc-proetale-ringed-open-closed] gives $j^*s_*N=0$, so the adjunct of any composite $s_*N\\to M\\to j_*j^*M$ is zero. Thus every map $s_*N\\to M$ factors uniquely through $G_ZM$. Using $q_M$ and full faithfulness of $s_*$ from [lem-exc-proetale-closed-fully-faithful] gives natural bijections\n$$\\operatorname{Hom}_X(s_*N,M)=\\operatorname{Hom}_X(s_*N,G_ZM)\n\\cong\\operatorname{Hom}_X(s_*N,s_*s^!M)\n\\cong\\operatorname{Hom}_Z(N,s^!M).$$\nThis proves $s_*\\dashv s^!$. Its counit is exactly the inclusion $G_ZM\\hookrightarrow M$ after $q_M^{-1}$, so the first arrow is specified, rather than a freely chosen map.",
    "uses": [
     "def-pur-flasque-support",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-open-closed-recollement"
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-exc-proetale-closed-fully-faithful"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09AH (lemma-ses-associated-to-open), 09AG (lemma-jshriek-zero); explicit kernel factorization of blueprint proof, second paragraph"
+   }
   },
   {
-   "text": "The comparison theorem for the resolutions of\n[def-weil-pbc-kinjective-resolutions] and the natural kernel and\nquotient maps give canonicality and functoriality in the sense of\n[def-pur-triangle-meaning]. Finally, along an etale map the site\nis localized: the support kernel and the open direct image are\ncomputed on the same objects after restriction. Etale restriction\npreserves injectives, since its extension-by-zero left adjoint is\nexact. Applying this to the displayed injective model identifies its\nderived pullback with the model for the base-changed pair, proving\netale base-change compatibility.",
+   "text": "The exactness of $s_*$ on these finite constant-coefficient module sheaves follows from [lem-weil-pbc-proetale-ringed-open-closed], with its quasi-compact-complement hypothesis satisfied. Hence $s^!$ preserves injectives: for a monomorphism $N\\hookrightarrow N'$ on $Z$, an arrow $N\\to s^!J$ transposes to $s_*N\\to J$; exactness makes $s_*N\\hookrightarrow s_*N'$ monic, so injectivity of $J$ extends the arrow, and transposition gives the extension on $Z$. Consequently $s^!I$ is bounded below with injective terms and is K-injective by [lem-weil-pbc-dplus-injective-representative]. The termwise adjunction descends to homotopy categories by [lem-weil-pbc-termwise-adjunction-homotopy]. For any bounded below representative $L$ on $Z$, [lem-weil-pbc-kinjective-hom-derived] gives\n$$\\operatorname{Hom}_{D(X)}(s_*L,K)\n\\cong\\operatorname{Hom}_{K(\\mathcal A_X)}(s_*L,I)\n\\cong\\operatorname{Hom}_{K(\\mathcal A_Z)}(L,s^!I)\n\\cong\\operatorname{Hom}_{D(Z)}(L,Rs^!K).$$\nExactness of $s_*$ ensures that its termwise value represents its derived value [lem-weil-pbc-exact-functor-derived-functor]. These natural bijections prove the derived adjunction, with the counit from step 2. Apply [det-sp-unique-right-adjoint] to any other right adjoint on these same categories to obtain the claimed counit-compatible identification. No identification with a transported functor on a different category is inferred.",
    "uses": [
-    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070J (lemma-bounded-below-injectives-K-injective), 015F (lemma-right-derived-exact-functor); explicit derived Hom adjunction; blueprint proof, second paragraph"
+   }
+  },
+  {
+   "text": "For the open immersion $j$, [lem-weil-pbc-proetale-restriction-injectives] states that restriction is exact and preserves injectives, and [lem-weil-proetale-weakly-etale-localization] identifies it with restriction to the localized site, including the constant coefficients. Thus $j^*I$ is a bounded below complex of injectives representing $j^*K$. By [lem-weil-pbc-right-derived-plus-injective] its direct image $j_*j^*I$ represents $Rj_*j^*K$. The natural map $I\\to j_*j^*I$ is termwise the open adjunction unit of [def-weil-pbc-proetale-operations], so its derived class is the specified restriction map. This computation also agrees with the unbounded $Rj_*$ fixed in [def-weil-pbc-proetale-operations]: its chosen K-injective model and $j^*I$ represent the same derived object. By [lem-weil-pbc-kinjective-hom-derived] the identity and its inverse lift to mutually inverse homotopy classes of chain maps between those models. The additive termwise $j_*$ preserves their inverse homotopies, so their images are canonically isomorphic in $D(X_{\\mathrm{proet}},\\Lambda)$. The comparison carries the derived unit to the displayed unit by naturality.",
+   "uses": [
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open, and its exact extension-by-zero argument; derived.tex Tag 05TI, lemma-enough-injectives-right-derived"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-support-exact] to $I$, the finite commutative ring $\\Lambda$, and the given quasi-compact complementary $j$. It gives the actual short exact sequence of complexes $0\\to A=s_*s^!I\\xrightarrow{u}B=I\\xrightarrow{\\eta_j}C=j_*j^*I\\to0$, with its first arrow the inverse-comparison inclusion of step 2. Use the cone and differential of [def-pur-support-triangle]. By [lem-pc-cone-short-exact-quasi-iso], the specified map $q:\\operatorname{Cone}(u)\\to C$, $q(b,a)=\\eta_j(b)$, is a quasi-isomorphism. The derived-category structure in [def-weil-abstract-derived-category] makes $Q(q)$ invertible and makes the image of the cone triangle $A\\to B\\to\\operatorname{Cone}(u)\\xrightarrow{-p}A[1]$ distinguished. Identify its third term with $C$ by $Q(q)$. The resulting second arrow is the restriction map, because $q\\circ i=\\eta_j$, and the boundary is $\\delta=-Q(p)\\circ Q(q)^{-1}$, with the shift identification understood. This constructs the specified distinguished triangle. Steps 1, 3 and 4 identify its terms with $s_*Rs^!K,K,Rj_*j^*K$.",
+   "uses": [
+    "lem-pur-support-exact",
+    "def-pur-support-triangle",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, including the preceding explicit construction q and the cone triangle; blueprint proof, first paragraph"
+   }
+  },
+  {
+   "text": "For a derived morphism $K\\to K'$, choose injective models $I,I'$. By [lem-weil-pbc-kinjective-hom-derived] it is represented by a unique homotopy class of chain maps $f:I\\to I'$. Naturality of the support kernel in [def-pur-flasque-support] and the unit in [def-weil-pbc-proetale-operations] makes $(a,b,c)=(s_*s^!f,f,j_*j^*f)$ a map of the short exact sequences in step 5. The cone formula of [def-pur-support-triangle] gives a chain map $t:\\operatorname{Cone}(u)\\to\\operatorname{Cone}(u')$, $t(b_0,a_0)=(b(b_0),a(a_0))$. Direct substitution in the differential gives $q't=cq$ and $p't=a[1]p$. Since both $Q(q)$ and $Q(q')$ are invertible by [lem-pc-cone-short-exact-quasi-iso], these equations give\n$$a[1]\\delta=-a[1]p q^{-1}=-p'tq^{-1}=-p'(q')^{-1}c=\\delta'c$$\nin the derived category. Thus $(a,b,c)$ is a map of the specified triangles, including the fourth square. If $f-g=dh+hd$, applying any of the three additive functors gives $F(f)-F(g)=dF(h)+F(h)d$; the three components consequently have the same derived classes. Hence the triangle map depends only on the derived morphism. Identities and composites are represented by identity chain maps and composites, proving the functor laws. For two resolutions of the same $K$, the unique homotopy class representing the identity is a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. Each additive functor preserves that inverse and its homotopies, so the comparison is an isomorphism of triangles. Three resolutions satisfy the comparison cocycle because the composite represents the same identity. This proves the canonicality and functoriality of [def-pur-triangle-meaning].",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-flasque-support",
+    "def-weil-pbc-proetale-operations",
+    "def-pur-support-triangle",
+    "lem-pc-cone-short-exact-quasi-iso",
     "def-pur-triangle-meaning"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective, and 0152, lemma-derived-canonical-delta-functor; explicit homotopy and comparison calculation for blueprint proof, third paragraph"
+   }
+  },
+  {
+   "text": "Let $v:X'\\to X$ be etale and form the closed/open pair $s':Z'\\to X'$, $j':U'\\to X'$. By [det-pe-morphisms-etale-comparison] the map $v$ is weakly etale, so [lem-weil-proetale-weakly-etale-localization] identifies its constant-coefficient inverse image with restriction to the slice at $X'$. By [lem-weil-pbc-proetale-restriction-injectives], $v^*I$ is a bounded below injective model of $v^*K$. The morphism $j'$ is quasi-compact by [lem-pc-quasi-compact-base-change], so [lem-pur-support-exact] applies also to the primed pair. For an object $V\\to X'$ of the pro-etale site, the direct-image formula of [def-weil-proetale-inverse-image] gives\n$$(v^*j_*j^*I)(V)=I(V\\times_XU)=(j'_*j'^*v^*I)(V).$$\nThese equalities use the fibre-product identification $V\\times_{X'}U'=V\\times_XU$ and commute with every restriction map and coefficient action. Both open units send a section to its restriction along this same fibre product. Exactness of $v^*$ from [prop-weil-pbc-proetale-constant-exact] therefore identifies the kernel of one unit with the kernel of the other. The natural support comparisons of [def-pur-flasque-support], valid for both quasi-compact complements, identify the first terms too. We have obtained an isomorphism between the pulled-back short exact sequence of step 5 and the short exact sequence for $v^*I$, with all three maps specified.",
+   "uses": [
+    "det-pe-morphisms-etale-comparison",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-restriction-injectives",
+    "lem-pc-quasi-compact-base-change",
+    "lem-pur-support-exact",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-pur-flasque-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09A5, section-morphism (direct image by fibre-product evaluation), 09BN, lemma-open-immersion, and 09AH, lemma-ses-associated-to-open; sites-cohomology.tex Tag 08FI; explicit localized-site calculation"
+   }
+  },
+  {
+   "text": "The exact inverse image $v^*$ induces a triangulated functor by [lem-sf-exact-functor-derived-triangulated]. It commutes with the specified cone of [def-pur-support-triangle]: in degree $m$, the identification is $v^*(B^m\\oplus A^{m+1})=v^*B^m\\oplus v^*A^{m+1}$, and additivity carries $d(b,a)=(d_Bb+u(a),-d_Aa)$ to the identical primed matrix. Under step 7's identification of the quotient, the cone map is still $q(b,a)=\\eta_j(b)$ and the projection $p$ is the same shifted projection. Consequently, for the canonical boundary constructed in step 5, with $q$ inverted by [lem-pc-cone-short-exact-quasi-iso], applying $v^*$ sends $-p\\circ q^{-1}$ to $-p'\\circ(q')^{-1}$, using that a functor preserves inverses of isomorphisms. Thus the fourth square commutes as well as the first two. Finally step 6 compares the model $v^*I$ with any chosen injective model on $X'$. This proves the full triangle comparison, including its boundary, required by [def-pur-triangle-meaning].",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-pur-support-triangle",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-pur-triangle-meaning"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152, lemma-derived-canonical-delta-functor (delta=-p q^{-1}), and 015F, lemma-right-derived-exact-functor; explicit cone calculation of etale boundary compatibility"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-flasque-support",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-proetale-weakly-etale-localization",
   "lem-pur-support-exact",
   "def-pur-support-triangle",
-  "def-pur-flasque-support",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-open-closed-recollement",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-pur-triangle-meaning"
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "def-pur-triangle-meaning",
+  "det-pe-morphisms-etale-comparison",
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sf-exact-functor-derived-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-localization-triangle.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-support-localization-triangle.proof.md",
+  "place": "Three blueprint proof paragraphs, expanded using the cited Stacks results; repaired quasi-compactness and the same-category adjoint identification."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The support localization distinguished triangle for a bounded below complex of pro etale module sheaves from an injective resolution",
+   "results": "{\"t\": \"2026-10-16T10:58:23Z\", \"tool\": \"leanfinder\", \"query\": \"The support localization distinguished triangle for a bounded below complex of pro etale module sheaves from an injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"ad8de32c041c378e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale support-localization statement; abstract short-exact-sequence triangles and injective-model results are already existing DAG leaves, read in Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:43-142"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.triangleOfSES",
+   "results": "{\"t\": \"2026-10-16T10:58:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DerivedCategory.triangleOfSES\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory.triangleOfSES'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "invalid query: Loogle reported an unknown identifier; this query is not evidence of absence. The corrected query DerivedCategory.triangleOfSES below returned the generic SES triangle declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "supportLocalization|support.*triangle|triangle.*support",
+   "results": "{\"t\": \"2026-10-16T10:58:36Z\", \"tool\": \"grep\", \"query\": \"supportLocalization|support.*triangle|triangle.*support\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale support-localization statement; abstract short-exact-sequence triangles and injective-model results are already existing DAG leaves, read in Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:43-142"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization triangle of sheaves with support computed by injective complexes",
+   "results": "{\"t\": \"2026-10-16T10:58:53Z\", \"tool\": \"leansearch\", \"query\": \"Localization triangle of sheaves with support computed by injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"DerivedCategory.isGE_Q_obj_iff\", \"ModuleCat.Tilde.stalkIso\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.hasExt_of_enoughInjectives\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\"], \"digest\": \"661dac2f7a65a94d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale support-localization statement; abstract short-exact-sequence triangles and injective-model results are already existing DAG leaves, read in Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:43-142"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES",
+   "results": "{\"t\": \"2026-10-16T10:58:54Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.triangleOfSES\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSES\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES_obj₁\", \"DerivedCategory.triangleOfSES_obj₂\", \"DerivedCategory.triangleOfSES_obj₃\", \"DerivedCategory.triangleOfSES_mor₃\", \"DerivedCategory.triangleOfSESIso\", \"DerivedCategory.triangleOfSES_mor₁\"], \"digest\": \"1edb75598cb36f6b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale support-localization statement; abstract short-exact-sequence triangles and injective-model results are already existing DAG leaves, read in Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:43-142"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open closed pair of schemes sections supported on the closed subset form a functorial derived distinguished triangle compatible with etale pullback",
+   "results": "{\"t\": \"2026-10-16T10:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"For an open closed pair of schemes sections supported on the closed subset form a functorial derived distinguished triangle compatible with etale pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.kerFunctor_map\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.t\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.opensDiagram_map\"], \"digest\": \"144742890124a325\"}",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole pro-etale support-localization statement; abstract short-exact-sequence triangles and injective-model results are already existing DAG leaves, read in Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:43-142"
+  },
+  {
+   "tool": "grep",
+   "query": "localizationTriangle|sectionsWithSupport|sections_with_support|supportLocalization",
+   "results": "{\"t\": \"2026-10-16T11:41:08Z\", \"tool\": \"grep\", \"query\": \"localizationTriangle|sectionsWithSupport|sections_with_support|supportLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no declarations matching the support/localization names in Mathlib; no whole-statement match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of cochain complexes induces a natural distinguished triangle in the derived category, with connecting morphism compatible with exact functors",
+   "results": "{\"t\": \"2026-10-16T11:41:13Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence of cochain complexes induces a natural distinguished triangle in the derived category, with connecting morphism compatible with exact functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"DerivedCategory.triangleOfSES\", \"DerivedCategory.triangleOfSES_mor₂\", \"DerivedCategory.triangleOfSES_mor₁\", \"DerivedCategory.triangleOfSES_mor₃\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.triangleOfSES_obj₁\", \"DerivedCategory.triangleOfSES_obj₂\"], \"digest\": \"0b14a49cddd5e3b0\"}",
+   "date": "2026-10-16",
+   "verdict": "generic SES triangle and boundary declarations returned; source read at Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:35–142; these do not supply the support, adjunction or etale base-change statements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor localization triangle for open and closed immersions of sheaf categories, naturality of the boundary map of an exact sequence of complexes",
+   "results": "{\"t\": \"2026-10-16T13:03:16Z\", \"tool\": \"leanfinder\", \"query\": \"Derived functor localization triangle for open and closed immersions of sheaf categories, naturality of the boundary map of an exact sequence of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"DerivedCategory.triangleOfSES_mor₁\", \"CategoryTheory.Functor.comp_homologySequenceδ_assoc\", \"CategoryTheory.Functor.comp_homologySequenceδ\", \"CategoryTheory.Functor.homologySequenceδ_comp\", \"CategoryTheory.Functor.homologySequenceδ_comp_assoc\"], \"digest\": \"163aa4263f71a011\"}",
+   "date": "2026-10-16",
+   "verdict": "Generic SES boundary/triangle and homological-functor naturality declarations, not the whole pro-etale support adjunction or base-change result. Read Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean:35–142, including triangleOfSESδ_naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*[Tt]riangle|[Tt]riangle.*localization|sectionsWithSupport",
+   "results": "{\"t\": \"2026-10-16T13:03:58Z\", \"tool\": \"grep\", \"query\": \"localization.*[Tt]riangle|[Tt]riangle.*localization|sectionsWithSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\"], \"digest\": \"bdd989c70e89a0cf\"}",
+   "date": "2026-10-16",
+   "verdict": "Two hits in Mathlib/GroupTheory/MonoidLocalization/Basic.lean:85,111 are prose about monoid-localization commutative triangles, not derived support triangles; no match for this item in these results."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -84,5 +282,59 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-pur-support-localization-triangle",
+  "worker": "stage1",
+  "summary": "Expanded the injective-resolution route into eight steps, reusing the existing generic derived-category leaves and pro-etale localization interfaces. Corrected the missing quasi-compact-complement hypothesis using the explicit non-quasi-compact counterexample already established in def-pur-flasque-support; made finite constant pro-etale coefficients and ordinary D+ explicit. Proved the sheaf and derived adjunctions rather than citing a definition, and limited comparison with another exceptional adjoint to the same functor on the same categories. Constructed the boundary from the existing cone-to-quotient quasi-isomorphism and checked its naturality by the explicit cone map; no construction was taken merely from the proof of a cited node. No new nodes or Mathlib leaves.",
+  "blueprint": "The first paragraph is realized by steps 1 and 5; the sheaf/derived adjunction and open derived-image computation of paragraph 2 by steps 2–4; resolution comparison and etale localization of paragraph 3 by steps 6–8. The unit Kummer computation and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic sheaf-level vanishing and exact closed direct image, used to prove the support adjunction and its derived typing; it does not replace the injective-model route."
+   },
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Generic full faithfulness identifies maps between closed direct images in the explicit kernel-factorization proof."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Generic preservation of injective sheaves under localized pro-etale restriction; needed for the displayed models of open direct image and etale pullback."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic equivalence with the slice site, including constant coefficients, used in the sectionwise base-change calculation."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Only clause 1 is used to regard an etale base-changing map as an object of the pro-etale site."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic uniqueness of a right adjoint with its counit, applied only after the derived adjunction has been proved."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness of finite constant-coefficient pullback, needed to identify the pulled-back support kernel."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-morphisms-etale-comparison",
+  "det-sp-unique-right-adjoint",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-e19638870",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-e19638870 (reviewer sub-agent of L); spot-checked: Reviewed the corrected quasi-compact pro-etale localization triangle, all eight proof steps, every cited node statement, blueprint route, Stacks sources, Mathlib searches, base-change morphism, coefficient category, and edge cases. No mathematical or DAG faults found; review.md records the checks."
+ }
 }

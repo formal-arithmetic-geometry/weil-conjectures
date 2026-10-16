@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-def-sfb-ring-object-transport",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Strong monoidal functors preserve ring objects",
@@ -15,32 +15,128 @@
  "stmt_deps": [
   "det-def-sfb-ring-object-monoid"
  ],
- "proof": [
-  {
-   "text": "1. *Associativity.* Using naturality of $\\mu^F$, then the associativity coherence of $F$, then the\n   associativity of $\\mu$,\n   $$\n   \\begin{aligned}\n   \\mu_{FR}(\\mu_{FR}\\otimes FR)&=F\\mu\\circ\\mu^F_{R,R}\\circ(F\\mu\\otimes FR)\\circ(\\mu^F_{R,R}\\otimes FR)\n   =F\\mu\\circ F(\\mu\\otimes R)\\circ\\mu^F_{R\\otimes R,R}\\circ(\\mu^F_{R,R}\\otimes FR)\\\\\n   &=F\\mu\\circ F(\\mu\\otimes R)\\circ F(\\alpha^{-1}_{R,R,R})\\circ\\mu^F_{R,R\\otimes R}\\circ(FR\\otimes\\mu^F_{R,R})\\circ\\alpha_{FR,FR,FR}\\\\\n   &=F\\mu\\circ F(R\\otimes\\mu)\\circ\\mu^F_{R,R\\otimes R}\\circ(FR\\otimes\\mu^F_{R,R})\\circ\\alpha_{FR,FR,FR}\n   =\\mu_{FR}(FR\\otimes\\mu_{FR})\\alpha_{FR,FR,FR}.\n   \\end{aligned}\n   $$\n   *Units.* By naturality of $\\mu^F$, the left unit coherence of $F$ and the left unit law of $R$,\n   $\\mu_{FR}(\\eta_{FR}\\otimes FR)=F\\mu\\circ F(\\eta\\otimes R)\\circ\\mu^F_{\\mathbf 1,R}\\circ(\\varepsilon^F\\otimes FR)\n   =F\\mu\\circ F(\\eta\\otimes R)\\circ F(\\lambda_R^{-1})\\circ\\lambda_{FR}=F(\\lambda_R)F(\\lambda_R^{-1})\\lambda_{FR}=\\lambda_{FR}$;\n   the right unit law is symmetric. *Morphisms.* If $f\\colon R\\to R'$ is a morphism of ring\n   objects, then $Ff\\circ\\mu_{FR}=F(f\\mu)\\mu^F_{R,R}=F(\\mu'(f\\otimes f))\\mu^F_{R,R}=F\\mu'\\circ\\mu^F_{R',R'}\\circ(Ff\\otimes Ff)$\n   by naturality of $\\mu^F$, and $Ff\\circ\\eta_{FR}=F(f\\eta)\\varepsilon^F=\\eta_{FR'}$. Functoriality\n   is that of $F$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "2. $\\mu_{FR}\\beta_{FR,FR}=F\\mu\\circ\\mu^F_{R,R}\\circ\\beta_{FR,FR}=F\\mu\\circ F(\\beta_{R,R})\\circ\\mu^F_{R,R}=F(\\mu\\beta_{R,R})\\mu^F_{R,R}=\\mu_{FR}$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "3. Monoidality of $\\tau$ means $\\tau_{X\\otimes Y}\\circ\\mu^F_{X,Y}=\\mu^{F'}_{X,Y}\\circ(\\tau_X\\otimes\\tau_Y)$ and\n   $\\tau_{\\mathbf 1}\\varepsilon^F=\\varepsilon^{F'}$. Then\n   $\\tau_R\\mu_{FR}=\\tau_RF\\mu\\,\\mu^F_{R,R}=F'\\mu\\,\\tau_{R\\otimes R}\\mu^F_{R,R}=F'\\mu\\,\\mu^{F'}_{R,R}(\\tau_R\\otimes\\tau_R)=\\mu_{F'R}(\\tau_R\\otimes\\tau_R)$\n   and $\\tau_R\\eta_{FR}=F'\\eta\\,\\tau_{\\mathbf 1}\\varepsilon^F=\\eta_{F'R}$, by naturality of $\\tau$. If\n   $\\tau_R$ is invertible, its inverse is then also a morphism of ring objects.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.proof.md",
+  "place": "Proof paragraphs 1–3; all three clauses are already in pinned Mathlib as recorded in mathlib_match."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def mapMon|def mapCommMon|mapMonNatTrans|mapMonIso|instance.*[Cc]omm",
+   "results": "25 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/Basic.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lax monoidal functor induces a functor on monoid objects and a monoidal natural transformation induces morphisms of monoid objects",
+   "results": "8 hits; recorded leading hits: CategoryTheory.Functor.mapMon, CategoryTheory.Functor.map.instIsMonHom, CategoryTheory.Functor.mapMonFunctor, CategoryTheory.LaxMonoidalFunctor.noConfusion, CategoryTheory.Functor.mon_ClassObj, CategoryTheory.Functor.monObjObj, CategoryTheory.LaxMonoidalFunctor, CategoryTheory.Functor.LaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "match: clause 1 (monoid transport), with clauses 2 and 3 supplied by the additional declarations in mathlib_match.how"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMon",
+   "results": "12 hits; recorded leading hits: CategoryTheory.Functor.mapMon, CategoryTheory.Functor.Faithful.mapMon, CategoryTheory.Functor.mapMonIdIso, CategoryTheory.Functor.FullyFaithful.mapMon, CategoryTheory.Functor.Full.mapMon, CategoryTheory.Functor.mapMon_obj_X, CategoryTheory.Functor.instLaxMonoidalMonMapMon, CategoryTheory.Functor.essImage_mapMon",
+   "date": "2026-10-16",
+   "verdict": "match: clause 1 (monoid transport), with clauses 2 and 3 supplied by the additional declarations in mathlib_match.how"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal functor maps monoid objects and morphisms to monoid objects; a braided lax monoidal functor preserves commutative monoids; monoidal natural transformations induce monoid morphisms",
+   "results": "8 hits; recorded leading hits: CategoryTheory.Functor.mon_ClassObj, CategoryTheory.Functor.monObjObj, CategoryTheory.Functor.mapMon, CategoryTheory.Functor.mapCommMon_obj_mon_mul, CategoryTheory.Functor.instIsMonHomμ, CategoryTheory.Functor.map.instIsMonHom, CategoryTheory.Functor.mapMonFunctor, CategoryTheory.Functor.mapCommMonFunctor",
+   "date": "2026-10-16",
+   "verdict": "match: clause 1 (monoid transport), with clauses 2 and 3 supplied by the additional declarations in mathlib_match.how"
+  },
+  {
+   "tool": "grep",
+   "query": "commMonObjObj|def mapCommMon|mapCommMonNat|def monObjObj|def mapMon|app.*instIsMonHom|isMonHom.*app",
+   "results": "14 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/Bimon_.lean, Mathlib/CategoryTheory/Monoidal/Bimon_.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMonNatTrans",
+   "results": "4 hits; recorded leading hits: CategoryTheory.Functor.mapMonNatTrans, CategoryTheory.Functor.mapMonNatTrans_app_hom, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.mapMon_unit",
+   "date": "2026-10-16",
+   "verdict": "match: clause 3 via mapMonNatTrans and mapMonNatIso; targeted grep also checks the clause-1 structure and morphism declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A braided lax monoidal functor sends a commutative monoid object to a commutative monoid object",
+   "results": "8 hits; recorded leading hits: CategoryTheory.Functor.isCommMonObj_obj, CategoryTheory.Functor.mapCommMon, CategoryTheory.Functor.mapCommMon_obj_mon_mul, CategoryTheory.Functor.mapCommMonFunctor_obj, CategoryTheory.Functor.mapCommMon_obj_X, CategoryTheory.Functor.mapCommMon_map_hom_hom, CategoryTheory.Functor.mapCommMonFunctor, CategoryTheory.CommMon.EquivLaxBraidedFunctorPUnit.laxBraidedToCommMon",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "instance isCommMonObj_obj|def mapCommMon :",
+   "results": "3 hits; recorded leading hits: 157, 169, 268; single-file rg output omits the filename, so msearch splits the displayed file/line fields incorrectly; the actual declaration lines were verified by numbered source reads and repeated directory searches.",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal/CommMon_.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev monObjObj|instance map.instIsMonHom|def mapMon :|def mapMonNatTrans|def mapMonNatIso",
+   "results": "5 hits; recorded leading hits: 827, 850, 867, 909, 917; single-file rg output omits the filename, so msearch splits the displayed file/line fields incorrectly; the actual declaration lines were verified by numbered source reads and repeated directory searches.",
+   "date": "2026-10-16",
+   "verdict": "match: clause 3 via mapMonNatTrans and mapMonNatIso; targeted grep also checks the clause-1 structure and morphism declarations",
+   "subdirectory": "CategoryTheory/Monoidal/Mon.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapCommMon",
+   "results": "12 hits; recorded leading hits: CategoryTheory.Functor.mapCommMon, CategoryTheory.Functor.Faithful.mapCommMon, CategoryTheory.Functor.mapCommMonIdIso, CategoryTheory.Functor.FullyFaithful.mapCommMon, CategoryTheory.Functor.Full.mapCommMon, CategoryTheory.Functor.mapCommMon_obj_X, CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Functor.mapCommMonFunctor_obj",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "instance isCommMonObj_obj|def mapCommMon :",
+   "results": "3 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean",
+   "date": "2026-10-16",
+   "verdict": "match: clause 2 via isCommMonObj_obj / mapCommMon, under LaxBraided rather than strong or symmetric hypotheses",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev monObjObj|instance map.instIsMonHom|def mapMonNatTrans|def mapMonNatIso",
+   "results": "4 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-16",
+   "verdict": "match: clause 3 via mapMonNatTrans and mapMonNatIso; targeted grep also checks the clause-1 structure and morphism declarations",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "class LaxBraided|class IsMonoidal|class MonObj|class IsCommMonObj",
+   "results": "7 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-16",
+   "verdict": "definition check: monoid objects, commutativity, monoidal transformations and braided functors have exactly the stated axioms; no extra hypothesis",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxBraided|braided \\(",
+   "results": "10 hits; recorded leading hits: Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "definition check: monoid objects, commutativity, monoidal transformations and braided functors have exactly the stated axioms; no extra hypothesis",
+   "subdirectory": "CategoryTheory/Monoidal/Braided"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapMon",
+  "file": "Mathlib/CategoryTheory/Monoidal/Mon.lean",
+  "line": 867,
+  "how": "Exact, one declaration per clause, with the stipulated operation formulas definitionally equal. Clause 1: CategoryTheory.Functor.mapMon at Mathlib/CategoryTheory/Monoidal/Mon.lean:867–869 sends a bundled monoid A to F.obj A.X and a morphism f to F.map f.hom. Its structure is CategoryTheory.Functor.monObjObj at Mon.lean:827–836, with one := ε F ≫ F.map η and mul := LaxMonoidal.μ F X X ≫ F.map μ; CategoryTheory.Functor.map.instIsMonHom at Mon.lean:850–852 proves preservation of morphisms. Clause 2: CategoryTheory.Functor.isCommMonObj_obj at Mathlib/CategoryTheory/Monoidal/CommMon_.lean:157–159, or equivalently CategoryTheory.Functor.mapCommMon at CommMon_.lean:169–176, requires only F.LaxBraided and braided source and target categories. Clause 3: CategoryTheory.Functor.mapMonNatTrans at Mon.lean:909–910 has component .mk' (τ.app A.X), and CategoryTheory.Functor.mapMonNatIso at Mon.lean:917–918 gives the claimed monoid isomorphism for a monoidal natural isomorphism. These require only lax monoidal F,F' and NatTrans.IsMonoidal τ. Ring objects here mean MonObj (Mon.lean:73–84), exactly the cited definition det-def-sfb-ring-object-monoid, and not cartesian RingObj. LaxBraided is exactly the displayed braided equation (Braided/Basic.lean:386–388); NatTrans.IsMonoidal is exactly compatibility with ε and μ (NaturalTransformation.lean:46–48). Read Mon.lean:815–918 and CommMon_.lean:146–176; no added additivity, symmetry, closedness, or invertibility assumptions. Lean's ≫ is diagrammatic composition, so the formulas agree with the item's right-to-left composition. Taking the named constructions/components is a one-line application for each clause."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +147,20 @@
   "det-def-sfb-ring-object-monoid"
  ],
  "proof_split_by": "list",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-def-sfb-ring-object-transport",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and its existing ring-object definition dependency unchanged. Checked project Lean for the blueprint tag and generic transport declarations: no declaration of the project proves all clauses. Recorded real LeanFinder, LeanSearch, Loogle and source-grep searches, then verified the pinned source declarations clause by clause. The entire item is a Mathlib leaf using mapMon, isCommMonObj_obj, mapMonNatTrans and mapMonNatIso, with the exact stated formulas and only lax/braided hypotheses. Cleared the imported proof because a leaf has no proof steps. No new nodes, attachments, or statement correction.",
+  "blueprint": "The item is its own imported blueprint node (blueprint.is); from stays null. Proof paragraph 1 (associativity, units, morphisms, functoriality) is covered by monObjObj/mapMon; paragraph 2 by isCommMonObj_obj/mapCommMon; paragraph 3 by mapMonNatTrans/mapMonNatIso. Whole-blueprint searches for monoidal functor, ring object and mapMon found no separate blueprint node stating all three clauses; same_as is empty."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-7ac88d490",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-7ac88d490 (reviewer sub-agent of L); spot-checked: Mathlib coverage and all three clauses are correct, with exact checks at Mon.lean 73–84, 827–869, 905–918; CommMon_.lean 157–176; Braided/Basic.lean 383–388; and NaturalTransformation.lean 44–48. The delivered node omits mandatory chapter/unit route metadata, confirmed by its report. I added the corrected full node under fixes/dag/nodes/sec-proetale-coefficients/det-def-sfb-ring-object-transport.json with chapter=sec-proetale-coefficients and unit=sk-def-sfb-ring-object. Full review: review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
