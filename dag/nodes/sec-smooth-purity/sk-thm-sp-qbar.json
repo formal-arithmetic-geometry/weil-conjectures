@@ -3,44 +3,208 @@
  "blueprint": {
   "is": "sk-thm-sp-qbar",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth purity with algebraically closed coefficients",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$. With coefficients\n$\\Qlb$ the functors are $f_{\\Qlb}^*=f^{-1}:\\Dbc(Y,\\Qlb)\\to\\Dbc(X,\\Qlb)$ and\n$Rf_{!,\\Qlb}=R\\bar f_{*,\\Qlb}\\circ j_{!,\\Qlb}:\\Dbc(X,\\Qlb)\\to\\Dbc(Y,\\Qlb)$ for a\ncompactification $f=\\bar f\\circ j$. Then, as functors between $\\Dbc(X,\\Qlb)$\nand $\\Dbc(Y,\\Qlb)$,\n\n$$\nRf_{!,\\Qlb}\\dashv\\bigl(K\\longmapsto f_{\\Qlb}^*K(d)[2d]\\bigr).\n$$",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Qlb$ of $\\Ql$. Let $X,Y$ be separated finite-type $k$-schemes, and let $f:X\\to Y$ be a separated finite-type $k$-morphism [def-weil-scheme-morphism-properties], smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{\\bar f}Y$ of $f$ [def-weil-compactifications-refinements].\n\nUse the common-stage categories $\\Dbc(T,\\Qlb)$ of [def-weil-algebraically-closed-coefficients]: their finite stages $\\Dbc(T,E)$ are the raw rationalizations of the derived-complete integral constructible categories. Let $f_{\\Qlb}^*=Lf_{\\Qlb}^*:\\Dbc(Y,\\Qlb)\\to\\Dbc(X,\\Qlb)$ be the adic pullback, defined by rationalizing completed integral pullback and then passing to common finite coefficient stages [def-weil-derived-pullback-tensor-hom]. Let $Rf_{!,\\Qlb}:\\Dbc(X,\\Qlb)\\to\\Dbc(Y,\\Qlb)$ be compact-support direct image [def-weil-integral-rational-qbar-compact-support], computed from $R\\bar f_*j_!$ at the finite torsion levels, then reconstructed integrally, rationalized and passed to common finite coefficient stages. The twist $(d)$ is that of [def-coefficient-twists-detailed], and $[2d]$ is the cohomological shift. Then\n$$\n Rf_{!,\\Qlb}\\dashv\\bigl(K\\longmapsto f_{\\Qlb}^*K(d)[2d]\\bigr)\n$$\nas functors between $\\Dbc(X,\\Qlb)$ and $\\Dbc(Y,\\Qlb)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/_section.md",
   "place": "node sk-thm-sp-qbar, order 1831"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-compactifications-refinements",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-coefficient-twists-detailed"
+ ],
  "proof": [
   {
-   "text": "By [sk-thm-sfb-qlbar-two-colimit], $\\Dbc(T,\\Qlb)$ is the $2$-colimit of the\ncategories $\\Dbc(T,E)$; in particular, for $K,L\\in\\Dbc(T,E)$,\n$\\varinjlim_{F\\supset E}\\Hom(K_F,L_F[q])\\xrightarrow{\\sim}\\Hom(K_{\\Qlb},L_{\\Qlb}[q])$,\nwith Hom groups in $\\Dbc(T,F)$ and $\\Dbc(T,\\Qlb)$. Hence any finite diagram of\n$\\Qlb$-complexes, with finitely many relations, is defined over one finite\nextension of $\\Ql$. The functors $Rf_{!,\\Qlb}$ and $f^*_{\\Qlb}$ commute with\nextension of scalars from $E$, and $Rf_{!,\\Qlb}$ is independent of the\ncompactification by [sk-prop-sf-comp-coherence].",
+   "text": "First construct the rational adjunction used below. Fix a finite $E\\subset\\Qlb$, put $P_0=Rf_{!,\\mathcal O_E}$ and $H_0=f^*_{\\mathcal O_E}(-)(d)[2d]$, with completed integral pullback. By [det-sp-integral-adjunction-bijection], $P_0$ has right adjoint $G_0=H_{f,\\mathcal O_E}$ and the natural integral purity isomorphism $\\gamma:H_0\\xrightarrow{\\sim}G_0$. If $\\eta^G,\\varepsilon^G$ are that adjunction's unit and counit, put $\\eta^0_M=\\gamma_{P_0M}^{-1}\\eta^G_M$ and $\\varepsilon^0_K=\\varepsilon^G_K P_0(\\gamma_K)$. Write juxtaposition for composition, with the rightmost map applied first. The left triangle is\n$$\\varepsilon^0_{P_0M}P_0(\\eta^0_M)=\\varepsilon^G_{P_0M}P_0(\\gamma_{P_0M})P_0(\\gamma_{P_0M}^{-1})P_0(\\eta^G_M)=\\mathrm{id}_{P_0M}.$$\nFor the right triangle, naturality of $\\gamma$ for $\\varepsilon^0_K$, followed by naturality of $\\eta^G$ for $\\gamma_K$, gives\n$$\\begin{aligned}\nH_0(\\varepsilon^0_K)\\eta^0_{H_0K}\n&=\\gamma_K^{-1}G_0(\\varepsilon^G_K)G_0P_0(\\gamma_K)\\eta^G_{H_0K}\\\\\n&=\\gamma_K^{-1}G_0(\\varepsilon^G_K)\\eta^G_{G_0K}\\gamma_K\n=\\mathrm{id}_{H_0K}.\n\\end{aligned}$$\nThus $P_0\\dashv H_0$.\n\nThe rational categories in [def-weil-rationalization-karoubi] have the same objects and Hom groups $\\operatorname{Hom}_{\\mathcal O_E}(-,-)\\otimes_{\\mathcal O_E}E$. Their operations $P_E=Rf_{!,E}$ and $H_E=f_E^*(-)(d)[2d]$ are obtained by rationalizing the integral operations, including the twist and shift [def-weil-integral-rational-qbar-compact-support, def-weil-derived-pullback-tensor-hom, def-coefficient-twists-detailed]. Apply localization to $\\eta^0,\\varepsilon^0$ to obtain $\\eta^E,\\varepsilon^E$. They are natural for integral arrows; every rational arrow has the form $u/\\varpi_E^n$, and the localized operations are $E$-linear, so multiplying the integral naturality identities by $\\varpi_E^{-n}$ proves naturality for every rational arrow. The triangle identities remain identities after localization. Consequently\n$$\\alpha^E_{M,K}:\\operatorname{Hom}(P_EM,K)\\xrightarrow{\\sim}\\operatorname{Hom}(M,H_EK),\\qquad a\\longmapsto H_E(a)\\eta^E_M,$$\nwith inverse $b\\longmapsto\\varepsilon^E_K P_E(b)$. These are natural bijections for all rational objects, without choosing additional integral lattices.",
    "uses": [
-    "sk-thm-sfb-qlbar-two-colimit"
+    "det-sp-integral-adjunction-bijection",
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-coefficient-twists-detailed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-rational/sk-prop-sp-rational.proof.md",
+    "place": "last paragraph: localize the integral adjunction and its triangle identities"
+   }
   },
   {
-   "text": "Choose models $M_E,K_E$ over one finite $E$. By the compatibility with\nextension of scalars, the colimit formula for Hom groups and\n[sk-prop-sp-rational] over each $F\\supset E$,\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}(Rf_{!,\\Qlb}M,K)\n&\\simeq\\varinjlim_{F}\\operatorname{Hom}\\bigl(Rf_{!,F}M_F,K_F\\bigr)\\\\\n&\\simeq\\varinjlim_{F}\\operatorname{Hom}\\bigl(M_F,f_F^*K_F(d)[2d]\\bigr)\n\\simeq\\operatorname{Hom}(M,f_{\\Qlb}^*K(d)[2d]),\n\\end{aligned}\n$$\n\nwith Hom groups in $\\Dbc(Y,\\Qlb)$, $\\Dbc(Y,F)$, $\\Dbc(X,F)$ and $\\Dbc(X,\\Qlb)$.\nThe middle bijections are given by $\\eta_{f,F}$ and $\\varepsilon_{f,F}$, which\nare compatible with the transition maps by [sk-lem-sp-field-extension]. The\nbijection is independent of the models and natural, because the isomorphisms,\nmorphisms and relations involved are defined over one finite $F$, where the\nadjunction is natural.",
+   "text": "For finite $E\\subset F\\subset\\Qlb$, let $T^X_{F/E},T^Y_{F/E}$ denote scalar extension. The two comparisons of [sk-lem-sp-field-extension] identify $T^Y_{F/E}P_E$ with $P_FT^X_{F/E}$ and $T^X_{F/E}H_E$ with $H_FT^Y_{F/E}$. They preserve precisely the rational units and counits constructed in step 1, and their composites for $E\\subset F\\subset L$ equal the direct comparisons. In these identifications, a morphism $a:P_EM\\to K$ is extended to $a_F:P_FM_F\\to K_F$, and\n$$\\alpha^F(a_F)=H_F(a_F)\\eta^F_{M_F}=(H_E(a)\\eta^E_M)_F=(\\alpha^E(a))_F.$$\nLikewise $\\varepsilon^F_{K_F}P_F(b_F)=(\\varepsilon^E_KP_E(b))_F$. Thus both the bijections and their inverses commute with every transition map, with the comparison isomorphisms included.",
    "uses": [
     "sk-lem-sp-field-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+    "place": "second paragraph: compatibility of the middle bijections with transition maps"
+   }
+  },
+  {
+   "text": "Write $P=Rf_{!,\\Qlb}$ and $H=f_{\\Qlb}^*(-)(d)[2d]$. In the common-stage category of [def-weil-algebraically-closed-coefficients], the object constructions of [def-weil-integral-rational-qbar-compact-support, def-weil-derived-pullback-tensor-hom] and the twist of [def-coefficient-twists-detailed] give\n$$P(E,M_E)=(E,P_EM_E),\\qquad H(E,K_E)=(E,H_EK_E).$$\nHere is the action on morphisms, including its well-definedness. For either family $\\Phi_E=P_E$ or $H_E$, write $c_{F/E}:T_{F/E}\\Phi_E\\xrightarrow{\\sim}\\Phi_FT_{F/E}$ for the comparison of [sk-lem-sp-field-extension]. An arrow from $(E,A)$ to $(E',B)$ represented by $u:A_F\\to B_F$ is sent to the class represented by\n$$c_{F/E',B}^{-1}\\,\\Phi_F(u)\\,c_{F/E,A}.$$\nFor $F\\subset L$, naturality and the composition identity for $c$ from step 2 identify the extension of this composite with the composite for $u_L$. Two equivalent representatives agree over some $L$ by the common-stage definition; applying $\\Phi_L$ preserves that equality. Hence the formula is representative-independent. It preserves identities because the two comparisons cancel, and preserves composition because at one common field the intermediate comparisons cancel and $\\Phi_F$ preserves composition. This supplies the functors on the stated categories. For $P$ its object values are exactly the fixed-compactification compact-support construction, and for $H$ its values and maps are the adic pullback followed by twist and shift. No identification with discrete non-torsion sheaves or with a category of condensed module objects is used.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-coefficient-twists-detailed",
+    "sk-lem-sp-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+    "place": "first paragraph: coefficient comparisons for the two functors"
+   }
+  },
+  {
+   "text": "Let $M\\in\\Dbc(X,\\Qlb)$ and $K\\in\\Dbc(Y,\\Qlb)$. Represent them over fields $E_1,E_2$ and extend both to their compositum $E$; the objects and their representing isomorphisms can be taken over this common finite field by [def-weil-algebraically-closed-coefficients]. Write the resulting representatives as $M_E,K_E$. The defining Hom formula in [def-weil-algebraically-closed-coefficients], together with step 3, gives\n$$\\operatorname{Hom}_Y(PM,K)=\\varinjlim_{F\\supset E}\\operatorname{Hom}_{\\Dbc(Y,F)}(P_FM_F,K_F),$$\n$$\\operatorname{Hom}_X(M,HK)=\\varinjlim_{F\\supset E}\\operatorname{Hom}_{\\Dbc(X,F)}(M_F,H_FK_F),$$\nwhere the identifications use the fixed representing isomorphisms and the scalar comparisons. Define $\\alpha_{M,K}([F,a])=[F,\\alpha^F(a)]$ and $\\beta_{M,K}([F,b])=[F,(\\alpha^F)^{-1}(b)]$. If two representatives agree after extension to $L$, step 2 shows their images agree there as well; hence both maps are well defined. On a representative, $\\beta\\alpha$ and $\\alpha\\beta$ are the identity because they are so at stage $F$. This proves the required Hom bijection without invoking an additional theorem about colimits preserving isomorphisms.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+    "place": "first paragraph: common finite models and Hom formula; second paragraph: the three displayed bijections"
+   }
+  },
+  {
+   "text": "The bijection is independent of the finite models relative to their specified representing isomorphisms. Indeed, [def-weil-algebraically-closed-coefficients] represents each object at a finite field and each morphism over a common finite overfield. For a finite diagram, take the compositum of these finitely many fields and transport all its morphisms there. Each required equality of composites holds after some further finite extension by the defining equivalence relation; taking the compositum of these finitely many extensions makes all the equalities hold at once. Apply this construction to two models of the same object, their specified comparison, its inverse and the two inverse identities. At that field the comparison is an actual isomorphism; naturality of $\\alpha^F$ from step 1 says that changing the models conjugates $\\alpha^F$ by these same isomorphisms. Thus the induced maps on the fixed Hom sets agree. This argument applies separately on $X$ to models of $M$ and on $Y$ to models of $K$, and their finite coefficient fields can be enlarged to one common field.\n\nFor naturality, let $u:M'\\to M$, $v:K\\to K'$ and $a:PM\\to K$. Descend representatives of these finitely many objects and arrows to one field $F$, enlarging it for the needed common-stage relations by the finite-diagram construction just given. The actions of $P,H$ are those of step 3. Over $F$, naturality of the rational adjunction gives\n$$\\alpha^F\\bigl(v_F\\,a_F\\,P_F(u_F)\\bigr)=H_F(v_F)\\,\\alpha^F(a_F)\\,u_F.$$\nPassing to classes and using step 2 gives $\\alpha(v\\,a\\,P(u))=H(v)\\,\\alpha(a)\\,u$. This proves naturality in both variables, including arbitrary common-stage morphisms.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+    "place": "second paragraph: independence of models and naturality"
+   }
+  },
+  {
+   "text": "The natural bijection of steps 4–5 gives the asserted adjunction explicitly: define $\\eta_M=\\alpha_{M,PM}(\\mathrm{id}_{PM})$ and $\\varepsilon_K=\\beta_{HK,K}(\\mathrm{id}_{HK})$. At a finite stage these are exactly $\\eta^F$ and $\\varepsilon^F$ from step 1, by the formulas there. They are natural by step 5. Their two triangle composites, evaluated on any object represented at stage $F$, are the images of\n$$\\varepsilon^F_{P_FM_F}\\,P_F(\\eta^F_{M_F})=\\mathrm{id}_{P_FM_F},\\qquad H_F(\\varepsilon^F_{K_F})\\,\\eta^F_{H_FK_F}=\\mathrm{id}_{H_FK_F}.$$\nFunctoriality of the common-stage operations sends each equality to the corresponding equality over $\\Qlb$. Thus the unit and counit satisfy the two defining triangle identities for $P\\dashv H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+    "place": "second paragraph, conclusion: the natural bijection is an adjunction"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-sfb-qlbar-two-colimit",
-  "sk-lem-sp-field-extension"
+  "det-sp-integral-adjunction-bijection",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "sk-lem-sp-field-extension",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "two-paragraph common-finite-stage proof, with the rational-adjunction localization written out from sk-prop-sp-rational.proof.md"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth purity with algebraically closed Q_l bar coefficients adjunction compact support direct image and pullback Tate twist shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackComp. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory, smoothPurityIso, rightDerivedUpperShriek",
+   "results": "0 hits; actual service note: loogle: unknown identifier 'smoothPurityIso'. No declaration of the item was returned.",
+   "date": "2026-10-16",
+   "verdict": "query error: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|smoothPurityIso|Qlb|Qbar",
+   "results": "0 hits; no match in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth purity with algebraically closed coefficients",
+   "results": "8 hits: Algebra.smoothLocus_eq_univ_iff, Algebra.FormallySmooth.of_algebraicIndependent, Algebra.smoothLocus, RingHom.smooth_def, Algebra.IsSmoothAt, Algebra.smoothLocus_eq_univ, Algebra.formallySmooth_iff, AlgebraicGeometry.IsSmooth.casesOn. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|smooth_purity|TateTwist|lowerShriek",
+   "results": "0 hits; no match in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk'. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity adjunction for l-adic constructible sheaves over algebraic closure of Q_l",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.constantSheafΓAdj, SheafOfModules.pushforwardPushforwardAdj, CompHausLike.LocallyConstant.adjunction_unit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity for bounded constructible l-adic complexes with algebraically closed coefficients: compact support pushforward is left adjoint to pullback with Tate twist and dimension shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj, LightCondMod.LocallyConstant.adjunction. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*purity|purity.*etale|constructible.*adjunction|adjunction.*constructible",
+   "results": "0 hits; no match in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image for smooth morphisms equals the Tate twisted shifted inverse image in the rational l-adic constructible derived category",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatIso_inv. None states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*locali[sz]|locali[sz].*adjunction|Adjunction.*[Cc]olimit",
+   "results": "25 hits. CategoryTheory.Adjunction.localization (Mathlib/CategoryTheory/Localization/Adjunction.lean:91) localizes an adjunction that is already supplied; it does not establish integral smooth purity or coefficient coherence. The generic calculation remains inline in step 1.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic categorical tool"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfHomEquiv",
+   "results": "4 hits. CategoryTheory.Adjunction.mkOfHomEquiv (Mathlib/CategoryTheory/Adjunction/Basic.lean:436) constructs an adjunction from supplied natural Hom equivalences; step 6 already writes this elementary construction.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic categorical tool"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of linear categories descends to scalar localizations, and compatible adjunctions induce an adjunction on a filtered colimit of categories",
+   "results": "8 hits. CategoryTheory.Adjunction.localization (Mathlib/CategoryTheory/Localization/Adjunction.lean:91) localizes an adjunction that is already supplied; it does not establish integral smooth purity or coefficient coherence. The generic calculation remains inline in step 1.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; generic categorical tool"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -58,5 +222,20 @@
   "sketch"
  ],
  "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015"
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-thm-sp-qbar",
+  "worker": "stage1",
+  "summary": "Replaced the imported two-paragraph sketch by a finite-stage proof with every non-elementary input cited. Rational adjunction is obtained by localizing the existing integral adjunction; the existing coefficient-extension lemma supplies both functor comparisons and the unit/counit compatibility needed to descend its Hom bijection. The common-stage definition and an explicit finite-diagram argument replace the untyped Dbc-to-Dcons identification implicit in the old citation. Clarified the omitted standing hypotheses and corrected the bare inverse-image typing. No new nodes and no Mathlib leaves.",
+  "blueprint": "sk-thm-sp-qbar.proof.md paragraph 1 is realized by steps 3–4 (common finite stages, operation comparisons and Hom sets); paragraph 2 by steps 2,4–6 (transition-compatible adjunction bijections, independence, naturality and triangle identities). Step 1 expands the rational adjunction invoked in paragraph 2, following the final paragraph of sk-prop-sp-rational.proof.md. The route remains rational purity followed by finite coefficient descent."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-db1f113c4",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-db1f113c4 (reviewer sub-agent of L); spot-checked: Read the item, report, route documents, delivery errors A–F, current blueprint sources, every cited DAG statement, and all proof steps. Verified hypotheses, typed common-stage coefficient categories, base-change comparisons, unit/counit transport, finite-stage descent, model independence, naturality, triangles, edge cases, searches, and no duplicates or new nodes. No repairs were needed; review.md records the checks."
+ }
 }
