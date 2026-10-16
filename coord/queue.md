@@ -16,12 +16,13 @@
 | `Sheaf.Paper.CondensedQbarExchangeEquality` | 3 | 1 | proof |
 | `Sheaf.Paper.CondensedFlatCoefficientCalculus` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousConstructibleIntegralImage` | 4 | 1 | proof |
-| `Sheaf.Paper.ContinuousConstructibleIntegralSingle` | 4 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralPushComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteExchangeComparison` | 4 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueExchange` | 4 | 1 | proof |
 | `Sheaf.Paper.ProfinitePointPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.CondensedQcqsPushforwardContinuity` | 5 | 1 | proof |
+| `Sheaf.Paper.ContinuousConstructibleIntegralGluing` | 5 | 1 | proof |
+| `Sheaf.Paper.ContinuousConstructibleIntegralStratum` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeSourceAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct` | 5 | 1 | proof |
 | `Sheaf.Paper.IntegralMatrixPivotCover` | 5 | 1 | proof |
@@ -37,7 +38,6 @@
 | `WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineComparisonInjectiveVanishingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ContinuousFieldMatrixSheafNormalForm` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.ModulePullbackTensorIsoE` | 8 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteModuleSheafGluingAux` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProEtaleComparisonSectionUnitUniversal` | 9 | 1 | proof |
@@ -50,9 +50,8 @@
 | `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeSiteComponent` | 40 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositionComponent` | 40 | 1 | proof |
 
-Also listed above and claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
+Also listed above and claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `Sheaf.Paper.ContinuousConstructibleIntegralImage` | 4 | 1 |
-| `Sheaf.Paper.ContinuousConstructibleIntegralSingle` | 4 | 1 |
