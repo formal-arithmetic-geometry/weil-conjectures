@@ -5,10 +5,7 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Sheaf.Paper.FiniteDiscreteConstructibleLocalPiece
 
 /-! # Finite presentations under the common coefficient encoding -/
 
@@ -40,28 +37,27 @@ under the sectionwise finite-coefficient encoding.
 Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
 (blueprint: lem-weil-pbc-finite-discrete-constructible-encoding).
 
-Proof in words. Take the finite stratification in the internal constructibility
-hypothesis. The coefficient identification and sectionwise encoding commute with
-restriction to each stratum and to every member of a pro-etale cover. On a member
-where there is a finite presentation, use exactness of the encoding to turn it
-into a cokernel of a map between finite sums of constant finite B-module sheaves.
-The rank-one constant internal module becomes a constant module whose underlying
-additive group is B, by hG. Each matrix entry is therefore locally constant with
-values in a finite set of homomorphisms. Refine the covering simultaneously for
-these finitely many entries. On every refined member the map is constant. Its
-cokernel is the constant sheaf of the corresponding cokernel of finite B-modules.
-This module is finite, being a quotient of a finite sum of finite modules. Refining
-covers and composing them gives
-a pro-etale cover on which the restriction to this stratum is constant with finite
-stalks. Retain the original finite stratification. Empty strata and covers give
-the empty case, and a zero cokernel gives the constant zero module, so neither
-requires a nonzero-ring or positive-rank assumption. -/
+Proof in words. Retain the finite stratification in the internal constructibility
+hypothesis. On each stratum, normalize the coefficient pullbacks and choose its
+finite-presentation cover. Compatibility of the fixed encoding with restriction
+and preservation of finite sums and cokernels give presentations between finite
+constant module sheaves. The rank-one module has finite carrier by hG. Lift each
+presentation map to constant etale sheaves using full faithfulness of comparison
+pullback. Their cokernel is finite locally constant by the existing etale theorem;
+exact comparison pullback gives finite local constancy of the pro-etale cokernel.
+Bind these trivialization covers with the presentation cover. The original
+stratification and these finite locally constant restrictions witness intrinsic
+constructibility. Empty schemes and covers, rank zero, and the zero ring are
+included without additional assumptions. -/
 theorem finiteDiscreteCoefficient_constructible [DiscreteTopology B] [Finite B]
     (T : Scheme.{u}) (M : FiniteDiscreteInternalModules B T)
     (hM : IsConstructibleModuleObject
       (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T) M) :
     ProEtale.IsConstructible (ULift.{u + 1} B)
       ((finiteDiscreteCoefficientEquivalence B eR G hG T).inverse.obj M) := by
-  sorry
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  -- The local piece now obtains finite presentations through the shared pullback API.
+  exact finiteDiscreteCoefficient_local_piece B eR G hG T S a M (hS a)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
