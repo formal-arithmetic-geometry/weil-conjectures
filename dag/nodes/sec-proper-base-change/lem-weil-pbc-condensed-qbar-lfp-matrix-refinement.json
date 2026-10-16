@@ -26,11 +26,12 @@
  ],
  "proof": [
   {
-   "text": "Normalize the given finite presentation by extension of scalars along the canonical coefficient isomorphism. This sends regular modules and finite free modules to their corresponding modules and preserves cokernels. Prove the coefficient realization on X: apply the existing canonically normalized finite-field comparison to ULift E, transport it back through explicit isomorphisms of rings of continuous functions, and use adjunction naturality to preserve its normalization equation. That equation proves naturality under inclusions of finite subfields. Both Qbar coefficient objects are the already proved filtered colimits of these finite-field objects, and inverse image preserves their colimit. The resulting abelian-sheaf isomorphism is multiplicative: its composites with every finite-field inclusion are ring maps, and the tensor of the two filtered colimit cocones is again a colimit. It also preserves the unit. Supply this ring-object isomorphism to the compatible function-presentation theorem to obtain C, fixed n,m, matrices M, fibrewise linear-cokernel equivalences, and presentations on each open. Quotient dimension plus range dimension equals n, so these linear equivalences give equal ranks. All these comparison, colimit and dimension steps are proved in Lean.",
+   "text": "Normalize the given finite presentation by extension of scalars along the canonical coefficient isomorphism. This sends regular modules and finite free modules to their corresponding modules and preserves cokernels. Import the canonical globalCoefficientIso from CondensedQbarFunctionCoefficients, where the finite-extension universe transport, normalization, diagram naturality and multiplicative filtered-colimit comparison are constructed once. Supply that isomorphism to the compatible function-presentation theorem to obtain C, fixed n,m, matrices M, fibrewise linear-cokernel equivalences, and presentations on each open. Quotient dimension plus range dimension equals n, so these linear equivalences give equal ranks. The matrix-refinement module no longer repeats the private coefficient construction.",
    "uses": [
     "lem-weil-pbc-condensed-lfp-local-triviality",
     "def-weil-finite-subextension-directed-set",
-    "lem-weil-pbc-condensed-qbar-compatible-function-presentations"
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-function-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -85,12 +86,13 @@
   "lem-sc-noetherian-finite-irreducible-components",
   "lem-sc-scheme-sober",
   "def-weil-flat-morphism",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-condensed-qbar-function-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-  "place": "E3: complete Lean proof of coefficient normalization, finite-field universe transport with its normalization equation, naturality in the finite-subextension diagram, the multiplicative filtered-colimit coefficient comparison, quotient-dimension arithmetic and original steps 4--7. The remaining function-presentation statement isolates the basis matrix and geometric-fibre comparison. Gaussian elimination uses the proved lower-level source matrix API."
+  "place": "E3: complete Lean proof of coefficient normalization, finite-field universe transport with its normalization equation, naturality in the finite-subextension diagram, the multiplicative filtered-colimit coefficient comparison, quotient-dimension arithmetic and original steps 4--7. The remaining function-presentation statement isolates the basis matrix and geometric-fibre comparison. Gaussian elimination uses the proved lower-level source matrix API. H3 return repair: consolidate coefficient realization in CondensedQbarFunctionCoefficients and import its explicit globalCoefficientIso; remove the duplicate private coefficient section. The rank-descent, Gaussian-elimination and cokernel proofs are unchanged."
  },
  "mathlib_searches": [
   {
@@ -155,11 +157,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-3e724",
-  "group": "E3",
+  "reviewer": "X-5ded1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261016T054834-L-156276",
+  "landing": "20261016T082348-L-1529163",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and DAG statements; both modules and the direct importer compiled cleanly."
+  "note": "independent Codex review: Delivered Lean matched the DAG statements; existing public signatures are unchanged. All three modules and both direct importers compile cleanly; axiom and edge-case probes pass. The unclaimed-module consolidation is permitted."
  }
 }

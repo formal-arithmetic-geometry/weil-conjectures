@@ -1,0 +1,213 @@
+{
+ "id": "lem-weil-pbc-condensed-qbar-function-coefficients",
+ "kind": "statement",
+ "title": "Naturality and basis properties of explicit bounded coefficient scalars and geometric fibers",
+ "statement": "Let $\\ell$ be prime and let $X$ be a scheme with noetherian underlying topological space [def-weil-pbc-proetale-site]. For every scheme $T$, let $A_T=p_T^*\\underline{\\overline{\\mathbf Q}_\\ell}$ [def-weil-pbc-condensed-e-module-category] and let $F_\\ell(|T|)$ be its finite-subextension-valued continuous function ring [def-weil-finite-subextension-directed-set]. Fix the following explicit constructions, independent of any module presentation. The canonical finite-extension continuous-realization isomorphisms, normalized on every profinite test function, induce by filtered colimit a ring-object isomorphism $c_T:A_T\\simeq(F_\\ell)^{\\#}_T$. Let $s_T:F_\\ell(|T|)\\to\\operatorname{End}_{A_T}(A_T)$ be multiplication on the bounded-function presheaf, monoidally sheafified and transported through $c_T$. At a point $x\\in T$, pull back to $\\operatorname{Spec}(\\overline{\\kappa(x)})$, evaluate at the terminal object, use the coefficient identification obtained from $c$, the invertible bounded-presheaf unit at an algebraically closed field, and evaluation of a constant function, and turn the resulting internal abelian-group module into an ordinary $\\overline{\\mathbf Q}_\\ell$-module by its tensor action. This defines $E_{T,x}$ and its regular-module coordinates $e_{T,x}$. These constructions and their additive and finite-colimit properties are proved in the module. The remaining assertion consists of four properties. (1) For every affine weakly etale $U\\to X$ [def-weil-weakly-etale-morphism] whose terminal-object evaluation takes every epimorphism of set sheaves on $U_{\\mathrm{Proet}}$ to a surjection, $s_U$ is surjective. (2) For weakly etale $V\\xrightarrow{g}U\\to X$, normalized condensed coefficient inverse image, conjugated by its specified regular-module comparison, carries $s_U(a)$ to $s_V(a\\circ g)$. (3) For every $x\\in U$ and bounded $a$, $e_{U,x}(E_{U,x}(s_U(a))(e_{U,x}^{-1}(1)))=a(x)$. (4) If $U\\to X$ and $V\\to X$ send $x$ and $y$ to the same point, the functors $E_{U,x}\\circ(U\\to X)^*$ and $E_{V,y}\\circ(V\\to X)^*$ on all internal $A_X$-modules [def-weil-sheaf-of-modules-category] are naturally isomorphic. There is no presentation, matrix, cover of another scheme, rank, local constancy or local freeness assertion in these coefficient properties.",
+ "source": {
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical realization, already proved in Lean: lift each finite coefficient field to the scheme universe, use the uniquely normalized continuous-field realization, and transport back through ULift. Profinite test-function normalization gives naturality in the finite intermediate field. Preservation of the filtered colimit gives the global ring-object isomorphism, and the tensor-colimit argument proves multiplicativity. No noetherianity or choice from an unproved existence assertion is used for these data. The finite-inclusion factorization and the bounded profinite-test normalization are also proved in Lean: lift a bounded test function to its bounding finite extension, use finite comparison normalization, and use the sheafification unit-counit identity for its inclusion into the bounded sheaf.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Construct the scalar action, already proved in Lean: multiply bounded presheaf sections by restrictions of the given bounded function. Associativity proves internal linearity; commutativity and pointwise ring laws prove the endomorphism-ring laws. Apply monoidal abelian sheafification and transport along the constructed coefficient isomorphism. To finish the restriction property, use profinite-test normalization and uniqueness to show that the canonical finite-extension realizations commute with localization, then pass to their filtered colimit; the bounded presheaf unit and multiplication commute with restriction.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "On an affine U weakly contractible as the terminal object of its own small site, identify coefficient sections by point-basis evaluation with bounded functions on its actual profinite connected-component quotient. Functions descend through this quotient, since the coefficient field is totally disconnected and Hausdorff; the quotient topology gives continuity. Its surjectivity transports the finite-subextension bound. A regular-module endomorphism is determined by its image of one, so the bounded-function scalar action is surjective. The quotient descent and preservation of the finite-subextension bound have already been proved in Lean as boundedComponentsIso, including the empty space. What remains is the coefficient-section identification and its regular-module scalar interpretation. The regular-module scalar classification before sheafification is also proved as presheafScalar_surjective: the image of one at the terminal object, naturality, and module linearity determine every component. The covering used by the parent consists of affine contractible extension schemes, so it supplies weak contractibility over U itself directly, without a localization theorem transporting weak contractibility from the X-site.",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Construct geometric fibers and their regular coordinates, already proved in Lean: every cover of an algebraically closed field splits, so the bounded-presheaf sheafification unit is invertible at its terminal object. Bounded functions on its singleton space evaluate bijectively to the coefficient field; each element lies in its finite generated coefficient extension. Combine this with the explicit coefficient isomorphism, evaluate internal actions, use the actual tensor-action ordinary-module equivalence, and restrict scalars through ULift. Evaluation preserves finite colimits by the field splitting theorem; all module forgetful functors create these colimits. Pull back to the algebraic closure of the residue field of each point. The regular-module comparison gives the explicitly constructed one-dimensional linear coordinates. The remaining scalar-evaluation property follows from naturality of the finite-extension coefficient realization and bounded presheaf multiplication.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "For two points above the same base point, embed their chosen algebraically closed residue representatives into a common algebraically closed overfield over the base residue field. The canonical field-extension evaluation comparisons and inverse-image composition comparisons identify the two evaluated pullbacks from X, naturally in every module. Their coefficient comparisons agree because all finite-field comparisons have the same profinite-test normalization; taking the filtered colimit gives linearity over the fixed algebraic closure of the coefficient field. This proves fiber comparison. Empty schemes have no point clauses and scalar and function rings are zero.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+  "place": "Section 4. The Lean construction proves the scalar action, canonical coefficient realization, geometric fibers, finite-colimit preservation and regular coordinates. The remaining named theorem asserts only four naturality/basis properties. The ordinary-module tensor-action proof is adapted from the proved private construction in Sheaf.Paper.InternalModuleAbEquivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteIntermediateFieldValued|padicAlgClRingObj|PointLanWeaklyContractible",
+   "results": "No hits for the bounded function ring, condensed algebraic-closure ring, or weak-contractibility predicate in pinned Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded continuous functions act on regular condensed algebraic closure module coefficients and geometric evaluation preserves finite colimits",
+   "results": "Eight hits concerning condensed free/solid modules and locally constant modules. None supplies bounded coefficient realization or geometric evaluation for the specified scheme coefficient objects.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"sheaf\"",
+   "results": "Twelve hits concerning regular topologies and sheaf conditions. None concerns regular-module endomorphisms over bounded algebraic-closure coefficients.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded continuous functions on a scheme act on its regular condensed coefficient module and geometric evaluation is compatible with pullback",
+   "digest": "a849da4294da5f63",
+   "date": "2026-10-16",
+   "results": "Eight hits about metrically bounded continuous functions (evaluation CLM, module structures, and the forgetful continuous-map linear map). None concerns finite-subextension-valued condensed coefficient sheaves or their geometric pullback.",
+   "verdict": "No exact match; metric boundedness is different from the finite-subextension bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedQbarFunctionPresentations",
+  "date": "2026-10-16",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Proof, descent through the common-stage colimit: coefficient realization and geometric evaluation used to compare the fibres of the finite presentation, before rank descent and the minor arguments.",
+   "via": [
+    "lem-weil-pbc-condensed-qbar-compatible-function-presentations",
+    "lem-weil-pbc-condensed-qbar-lfp-matrix-refinement",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedQbarFunctionCoefficients",
+  "file": "lean/Sheaf/Paper/CondensedQbarFunctionCoefficients.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedQbar_canonical_coefficient_properties",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.transportedScalar",
+   "AlgebraicGeometry.ProEtale.condensedQbarScalar",
+   "AlgebraicGeometry.ProEtale.condensedQbarRegularPullbackIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldFiber",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fieldRegularCoordinates",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fiber",
+   "AlgebraicGeometry.ProEtale.CondensedQbarGeometricEvaluation.fiberRegularCoordinates",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCanonicalCoefficientProperties",
+   "AlgebraicGeometry.ProEtale.CondensedQbarFunctionCoefficients",
+   "AlgebraicGeometry.ProEtale.CondensedQbarFunctionCoefficients.fiber_compare_mk",
+   "AlgebraicGeometry.ProEtale.condensedQbar_canonical_coefficient_properties",
+   "AlgebraicGeometry.ProEtale.exists_condensedQbar_function_coefficients",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso_fac",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso_test",
+   "AlgebraicGeometry.ProEtale.CondensedQbarFiberData",
+   "AlgebraicGeometry.ProEtale.condensedQbarCanonicalFiberData",
+   "AlgebraicGeometry.ProEtale.CondensedQbarCoefficientProperties",
+   "AlgebraicGeometry.ProEtale.CondensedQbarFunctionCoefficients.ofData",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.boundedComponentsIso",
+   "AlgebraicGeometry.ProEtale.CondensedQbarScalarConstruction.presheafScalar_surjective"
+  ],
+  "statement": "theorem condensedQbar_canonical_coefficient_properties\n    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :\n    CondensedQbarCanonicalCoefficientProperties ℓ X",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-5ded1",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T082348-L-1529163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-5ded1",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261016T082348-L-1529163",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched the DAG statements; existing public signatures are unchanged. All three modules and both direct importers compile cleanly; axiom and edge-case probes pass. The unclaimed-module consolidation is permitted."
+ }
+}

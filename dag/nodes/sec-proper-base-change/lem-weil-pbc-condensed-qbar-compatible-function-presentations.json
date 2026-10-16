@@ -31,13 +31,9 @@
  ],
  "proof": [
   {
-   "text": "Unpack the assumed finite presentation over A_Y as a cokernel of a map A_Y^m to A_Y^n, with fixed m and n. Cover Y by affine objects U weakly contractible over X. Pullback preserves cokernels and finite free modules, using inverse-image exactness and the coefficient comparisons. A homomorphism between finite free modules is recovered from its matrix of regular-module endomorphisms by its inclusions and projections.",
+   "text": "Unpack the finite presentation on Y. Cover Y by its affine open cover, and each affine by the singleton cover supplied by the affine contractible-extension theorem. Bind the covers without increasing their index universe. The theorem supplies affineness and weak contractibility for the terminal object on each cover scheme's own full small site, by applying its final clause to the identity morphism.",
    "uses": [
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-weakly-etale-morphism"
+    "lem-weil-pbc-affine-contractible-extension-full-site"
    ],
    "elementary": false,
    "source": {
@@ -46,10 +42,9 @@
    }
   },
   {
-   "text": "Transport the coefficient object on the original noetherian base X through the supplied ring-object isomorphism to the sheafification of bounded continuous functions. On each weakly contractible affine U, basis evaluation identifies its sections with bounded continuous functions on the profinite component quotient, hence with functions on U. A finite compositum contains all entries of the finite matrix; choose the ground field for an empty matrix. This realizes M. On every open V of U, the bounded presheaf unit gives a ring map to coefficient sections. Localization along the weakly etale morphism V to X, followed by multiplication on the regular module, gives the asserted ring homomorphism. Naturality and exact restriction give the cokernel isomorphism on V. No noetherianity of U or V is asserted or needed.",
+   "text": "Use the constructed coefficient scalar/evaluation datum and its four naturality/basis properties. Pull the fixed presentation to each cover member using the normalized regular-module pullback isomorphism, biproduct comparisons, and preservation of cokernels. Recover the morphism from its biproduct inclusions and projections. Scalar surjectivity chooses one bounded function for each matrix entry. The component-matrix identity proves that these functions reconstruct the pulled-back presentation. All ranks are the original fixed m and n, including zero ranks.",
    "uses": [
-    "lem-weil-pbc-condensed-point-basis-evaluation",
-    "def-weil-finite-subextension-directed-set"
+    "lem-weil-pbc-condensed-qbar-function-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -58,13 +53,20 @@
    }
   },
   {
-   "text": "Evaluate P at a geometric representative over a point x of X. Exactness and the finite-free comparison identify its evaluation with the ordinary linear cokernel of the evaluated function matrix, or equivalently the quotient by its range. Choose an algebraic closure of the residue field of x and embed it into each algebraically closed geometric representative. The extension comparison identifies the evaluated modules in the two representatives. Coefficient realization is natural and sends a function to its value. Thus the two quotient vector spaces are linearly equivalent. This stops before any dimension or rank computation.",
+   "text": "For each open subscheme use its scalar ring map from the same coefficient datum. Pull the reconstructed matrix presentation along the open immersion. The generic free-pullback matrix identity and scalar restriction conjugacy identify its entries with restrictions of the chosen functions. Compose the inverse-image composition isomorphisms and the preserved-cokernel isomorphisms to obtain the required presentation on that open.",
    "uses": [
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "lem-weil-pbc-profinite-point-pullback",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-condensed-point-basis-evaluation",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-condensed-qbar-function-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
+    "place": "Section 4, finite-matrix refinement: presentation and geometric-fibre comparison after coefficient realization (steps 1--3)"
+   }
+  },
+  {
+   "text": "Apply the additive finite-colimit-preserving geometric evaluation functor to each reconstructed matrix presentation. The finite-biproduct coordinate equivalence sends the evaluated morphism to the ordinary value matrix, by evaluating each scalar entry on one. The cokernel has dimension n minus matrix rank, by the linear cokernel/range quotient isomorphism and rank-nullity. At two points with the same image in X the natural comparison of evaluated pullback functors gives equal dimensions. Each quotient of the finite-dimensional coordinate space is finite-dimensional, so equality of dimensions gives the required linear equivalence. These calculations prove only fibre compatibility, not any rank local constancy or freeness assertion.",
+   "uses": [
+    "lem-weil-pbc-condensed-qbar-function-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -74,20 +76,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-weil-weakly-etale-morphism",
-  "lem-weil-pbc-condensed-point-basis-evaluation",
-  "def-weil-finite-subextension-directed-set",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "def-weil-proetale-inverse-image"
+  "lem-weil-pbc-affine-contractible-extension-full-site",
+  "lem-weil-pbc-condensed-qbar-function-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/upstream-master-20261014/WeilConjectures/RefactorInstruction.tex",
-  "place": "Section 4, finite-matrix refinement, steps 1--3 after the ring-object coefficient comparison. The parent proves that comparison, coefficient normalization, quotient-dimension arithmetic and all rank, Gaussian, categorical-cokernel and cover arguments in Lean."
+  "place": "Section 4, finite-matrix refinement, steps 1--3. H3 proves the complete cover, fixed-rank presentation, biproduct reconstruction, restriction, evaluated-cokernel dimension, and quotient-equivalence assembly in Lean. Only the coefficient scalar/evaluation datum remains as a separate obligation."
  },
  "mathlib_searches": [
   {
@@ -168,11 +163,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-3e724",
-  "group": "E3",
+  "reviewer": "X-5ded1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261016T054834-L-156276",
+  "landing": "20261016T082348-L-1529163",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and DAG statements; both modules and the direct importer compiled cleanly."
+  "note": "independent Codex review: Delivered Lean matched the DAG statements; existing public signatures are unchanged. All three modules and both direct importers compile cleanly; axiom and edge-case probes pass. The unclaimed-module consolidation is permitted."
  }
 }
