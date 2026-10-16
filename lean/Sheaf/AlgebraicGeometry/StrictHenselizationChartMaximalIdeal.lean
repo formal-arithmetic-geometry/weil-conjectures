@@ -56,7 +56,96 @@ theorem strictHenselization_chart_maximalIdeal
       Spec.map ρ ≫ i = strictHenselizationStructuralMap (xR ≫ i) ∧
       IsLocalRing.maximalIdeal (strictHenselizationRing (xR ≫ i)) =
         (xR (IsLocalRing.closedPoint Ω)).asIdeal.map ρ.hom  := by
-  sorry
+  classical
+  let s := xR ≫ i
+  let p := (SpecToEquivOfField Ω (Spec R) xR).1
+  let F := (Spec R).residueField p
+  let e := (SpecToEquivOfField Ω (Spec R) xR).2
+  let : Algebra F Ω := e.hom.toAlgebra
+  let K := separableClosure F Ω
+  obtain ⟨_, _, _, _, E, δ, hδ, cn, cu, ct, ⟨hcn⟩, ⟨_⟩, ⟨hct⟩, r, t, _, ht⟩ :=
+    etale_local_ring_triples S Ω R i xR
+  obtain ⟨_, c, ⟨hc⟩, hlocal, ρ, ψ, hρ, _, _, hm, hker, _, _, _⟩ :=
+    strictHenselization_triples R p K
+  let := hlocal
+  let Nall := (pointSmallEtale s).fiber.Elements
+  let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
+  let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale s).fiber ⋙
+    Etale.forget S ⋙ Over.forget S).op ⋙ Scheme.Γ
+  let : HasColimit D := ⟨⟨cn, hcn⟩⟩
+  let incl := strictHenselizationAffineInclusion s
+  let : incl.IsEquivalence := strictHenselizationAffineInclusion_isEquivalence s
+  let rep := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
+  let q := (rep ⋙ incl).op
+  let cmp : strictHenselizationRing s ≅ cn.pt :=
+    (isColimitSmallStrictHenselizationCocone s).coconePointUniqueUpToIso
+        ((Functor.Final.isColimitWhiskerEquiv q cn).symm hcn)
+  let k := hct.coconePointUniqueUpToIso hc
+  let ringIso : strictHenselizationRing s ≅ c.pt := cmp ≪≫ t ≪≫ k
+  let ringEquiv := ringIso.symm.commRingCatIsoToRingEquiv
+  let := ringEquiv.isLocalRing
+  refine ⟨inferInstance, ρ ≫ ringIso.inv, ?_, ?_⟩
+  · let a := AffineEtale.mk i
+    let y : (pointSmallEtale s).fiber.obj ((AffineEtale.Spec S).obj a) :=
+      Over.homMk xR rfl
+    let n := (AffineEtale.Spec S ⋙ (pointSmallEtale s).fiber).elementsMk a y
+    let j := rep.objPreimage n
+    let η := rep.objObjPreimageIso n
+    let g : ((incl.obj (rep.obj j)).obj.1.left) ⟶ Spec R :=
+      (AffineEtale.Spec S).map η.hom.1 |>.1.left
+    have hg : g ≫ i = (incl.obj (rep.obj j)).obj.1.hom := η.hom.1.w
+    let b := incl.obj (rep.obj j)
+    let Q : ObjectProperty P.FullSubcategory := fun z ↦
+      ∃ g : z.obj.1.left ⟶ Spec R, g ≫ i = z.obj.1.hom
+    let d : Q.FullSubcategory := ⟨b, ⟨g, hg⟩⟩
+    have hcmp : (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom =
+        cn.ι.app (op b) := by
+      exact IsColimit.comp_coconePointUniqueUpToIso_hom _ _ _
+    have htrip := (hδ d).1 g hg
+    have hbase : (ΓSpecIso R).inv ≫ g.appTop ≫ δ.hom.app (op d) ≫
+        c.ι.app (E.functor.obj (op d)) = ρ := by
+      simpa only [Category.assoc] using
+        (congrArg (fun f ↦ f ≫ c.ι.app (E.functor.obj (op d))) htrip).trans (hρ _)
+    have hleg : cn.ι.app (op b) ≫ t.hom ≫ k.hom =
+        δ.hom.app (op d) ≫ c.ι.app (E.functor.obj (op d)) := by
+      calc
+        _ = (δ.hom.app (op d) ≫ ct.ι.app (E.functor.obj (op d))) ≫ k.hom :=
+          congrArg (fun f ↦ f ≫ k.hom) (ht (op d))
+        _ = _ := by
+          simp only [Category.assoc, k, IsColimit.comp_coconePointUniqueUpToIso_hom]
+    have hring : (ΓSpecIso R).inv ≫ g.appTop ≫
+        (smallStrictHenselizationCocone s).ι.app (op j) = ρ ≫ ringIso.inv := by
+      apply (cancel_mono ringIso.hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      change (ΓSpecIso R).inv ≫ g.appTop ≫
+        (smallStrictHenselizationCocone s).ι.app (op j) ≫ cmp.hom ≫ t.hom ≫ k.hom = ρ
+      rw [← Category.assoc _ cmp.hom, hcmp, hleg]
+      exact hbase
+    let : IsAffine b.obj.1.left := b.property
+    have hgSpec : Spec.map g.appTop ≫ Spec.map (ΓSpecIso R).inv =
+        Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ g := by
+      have hh := isoSpec_inv_naturality g
+      change Spec.map g.appTop ≫ (Spec R).isoSpec.inv =
+        (Spec (rep.obj j).1.left.unop).isoSpec.inv ≫ g at hh
+      simpa only [isoSpec_Spec_inv] using hh
+    have hstr := strictHenselizationStructuralMap_eq s j
+    change Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+      Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom =
+      strictHenselizationStructuralMap s at hstr
+    calc
+      Spec.map (ρ ≫ ringIso.inv) ≫ i =
+          Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+            Spec.map g.appTop ≫ Spec.map (ΓSpecIso R).inv ≫ i := by
+        simpa only [Spec.map_comp, Category.assoc] using
+          congrArg (fun f ↦ Spec.map f ≫ i) hring.symm
+      _ = Spec.map ((smallStrictHenselizationCocone s).ι.app (op j)) ≫
+          Spec.map (ΓSpecIso (rep.obj j).1.left.unop).inv ≫ b.obj.1.hom := by
+        rw [← Category.assoc (Spec.map g.appTop), hgSpec, Category.assoc, hg]
+      _ = _ := hstr
+  · rw [← IsLocalRing.map_ringEquiv_maximalIdeal ringEquiv, hm, hker]
+    change Ideal.map ringEquiv.toRingHom (Ideal.map ρ.hom p.asIdeal) = _
+    rw [Ideal.map_map]
+    rfl
 -/
 
 end AlgebraicGeometry.Scheme

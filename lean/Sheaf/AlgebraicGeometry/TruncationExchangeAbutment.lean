@@ -452,7 +452,297 @@ theorem truncation_exchange_exact_couple_abutment
           + 1})) (hV p).symm) ≫
         cokernel.π (Subobject.ofLE _ _ (V.antitone_step (by omega : p ≤ p + 1)))) ∧
       (∀ p : ℤ, (e p).hom ≫ gr p = tInf p ≫ (e' p).hom) := by
-  sorry
+  have hPhi (Z : _root_.DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (b : ℤ) (hZ : Z.IsGE b)
+      (i : ℤ) (hi : i < b) :
+      IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ i).obj
+        ((truncationPhi f g).obj Z)) := by
+    have := hZ
+    exact ((upperStar AddCommGrpCat.{u + 1} g).map_isZero
+      (Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+        (lowerStar AddCommGrpCat.{u + 1} f) Z b hi)).of_iso
+      (((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlusHomologyFunctorIso i).app _).symm
+  have hPsi (Z : _root_.DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (b : ℤ) (hZ : Z.IsGE b)
+      (i : ℤ) (hi : i < b) :
+      IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ i).obj
+        ((truncationPsi g' f').obj Z)) := by
+    have := hZ
+    have : ((upperStar AddCommGrpCat.{u + 1} g').mapDerivedCategoryPlus.obj Z).IsGE b := by
+      rw [← _root_.DerivedCategory.Plus.isGE_ι_obj_iff,
+        _root_.DerivedCategory.isGE_iff]
+      intro j hj
+      exact ((upperStar AddCommGrpCat.{u + 1} g').map_isZero
+        (_root_.DerivedCategory.Plus.isZero_homology_of_isGE Z b j hj)).of_iso
+        (((upperStar AddCommGrpCat.{u + 1} g').mapDerivedCategoryPlusHomologyFunctorIso
+          j).app _).symm
+    exact Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+      (lowerStar AddCommGrpCat.{u + 1} f') _ b hi
+  obtain ⟨hDP, hEP⟩ := terms_vanish (truncationPhi f g) hPhi K a hK
+  obtain ⟨hDQ, hEQ⟩ := terms_vanish (truncationPsi g' f') hPsi K a hK
+  have hDP' : ∀ p q : ℤ, q < a → IsZero (P.D p q) := by
+    intro p q hq
+    exact (hDP p q hq).of_iso (eqToIso (congrFun (congrFun hPD p) q))
+  have hEP' : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (P.E p q) := by
+    intro p q hpq
+    exact (hEP p q hpq).of_iso (eqToIso (congrFun (congrFun hPE p) q))
+  have hDQ' : ∀ p q : ℤ, q < a → IsZero (Q.D p q) := by
+    intro p q hq
+    exact (hDQ p q hq).of_iso (eqToIso (congrFun (congrFun hQD p) q))
+  have hEQ' : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (Q.E p q) := by
+    intro p q hpq
+    exact (hEQ p q hpq).of_iso (eqToIso (congrFun (congrFun hQE p) q))
+  let τ := derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq
+  let d (p q : ℤ) : P.D p q ⟶ Q.D p q :=
+    eqToHom (congrFun (congrFun hPD p) q) ≫ tD τ K p q ≫
+      eqToHom (congrFun (congrFun hQD p) q).symm
+  let e (p q : ℤ) : P.E p q ⟶ Q.E p q :=
+    eqToHom (congrFun (congrFun hPE p) q) ≫ tE τ K p q ≫
+      eqToHom (congrFun (congrFun hQE p) q).symm
+  obtain ⟨_, hα, hg, hf, _⟩ := truncation_exchange_couple_morphism sq K
+  let T : CoupleMorphism P Q :=
+    { tD := d
+      tE := e
+      alpha_comm := by
+        intro p q
+        rw [family_map_eq hQD hQD (fun p _ ↦ p - 1) (fun _ q ↦ q + 1)
+          Q.alpha (alpha (truncationPsi g' f') K) _hQalpha,
+          family_map_eq hPD hPD (fun p _ ↦ p - 1) (fun _ q ↦ q + 1)
+            P.alpha (alpha (truncationPhi f g) K) _hPalpha]
+        simp only [d, Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+        rw [← Category.assoc (tD τ K p q), ← hα]
+        simp only [Category.assoc]
+        rfl
+      f_comm := by
+        intro p q
+        rw [family_map_eq hQE hQD (fun p _ ↦ p + 2) (fun _ q ↦ q - 1)
+          Q.f (CategoryTheory.TruncationExchange.f (truncationPsi g' f') K) _hQf,
+          family_map_eq hPE hPD (fun p _ ↦ p + 2) (fun _ q ↦ q - 1)
+            P.f (CategoryTheory.TruncationExchange.f (truncationPhi f g) K) _hPf]
+        simp only [d, e, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+          Category.id_comp]
+        rw [← Category.assoc (tE τ K p q), ← hf]
+        simp only [Category.assoc]
+        rfl
+      g_comm := by
+        intro p q
+        apply (cancel_mono (eqToHom (show Q.E (p + (0 : ℕ)) (q - (0 : ℕ)) =
+          Q.E p q by congr 1 <;> omega))).1
+        simp only [Category.assoc]
+        rw [eqToHom_naturality (fun pq : ℤ × ℤ ↦ e pq.1 pq.2)
+          (show (p + (0 : ℕ), q - (0 : ℕ)) = (p, q) by ext <;> omega)]
+        change d p q ≫ Q.initialG p q = P.initialG p q ≫ e p q
+        rw [initialG_eq (truncationPsi g' f') K Q hQD hQE _hQg,
+          initialG_eq (truncationPhi f g) K P hPD hPE _hPg]
+        simp only [d, e, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+          Category.id_comp]
+        rw [← Category.assoc (tD τ K p q), ← hg]
+        simp only [Category.assoc]
+        rfl }
+  -- Use the same normalized colimits for the abutment and infinite-page comparisons.
+  obtain ⟨L, A, hA, hA0, _, _, _, hAfin, hAinf, _, hAconv⟩ :=
+    P.halfPlaneConvergence a hDP' hEP'
+  obtain ⟨M, B, hB, hB0, _, _, _, hBfin, hBinf, _, hBconv⟩ :=
+    Q.halfPlaneConvergence a hDQ' hEQ'
+  have hi : IsIso ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map
+      ((truncationPhi f g).map
+        ((_root_.DerivedCategory.Plus.TStructure.t.truncLEι n).app K))) :=
+    _root_.DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app
+      (truncationPhi f g) (fun Z b hb i hi ↦ hPhi Z b hb i hi) K n
+  have hj : IsIso ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map
+      ((truncationPsi g' f').map
+        ((_root_.DerivedCategory.Plus.TStructure.t.truncLEι n).app K))) :=
+    _root_.DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app
+      (truncationPsi g' f') (fun Z b hb i hi ↦ hPsi Z b hb i hi) K n
+  obtain ⟨i, hi, hiι⟩ := canonical_iso (truncationPhi f g) K P hPD _hPalpha n
+    (A n) (hA n) (hA0 n) hi
+  obtain ⟨j, hj, hjι⟩ := canonical_iso (truncationPsi g' f') K Q hQD _hQalpha n
+    (B n) (hB n) (hB0 n) hj
+  let U := (P.imageFiltration n (A n)).image i.hom
+  let V := (Q.imageFiltration n (B n)).image j.hom
+  have hU (p : ℤ) : U.step p = imageSubobject ((A n).ι p ≫ i.hom) := by
+    dsimp [U, DecreasingFiltration.image, BigradedExactCouple.imageFiltration]
+    rw [← imageSubobject_comp_of_epi (factorThruImageSubobject ((A n).ι p))]
+    simp only [imageSubobject_arrow_comp_assoc]
+  have hV (p : ℤ) : V.step p = imageSubobject ((B n).ι p ≫ j.hom) := by
+    dsimp [V, DecreasingFiltration.image, BigradedExactCouple.imageFiltration]
+    rw [← imageSubobject_comp_of_epi (factorThruImageSubobject ((B n).ι p))]
+    simp only [imageSubobject_arrow_comp_assoc]
+  have hUtr (p : ℤ) : U.step p = imageSubobject
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map
+        ((truncationPhi f g).map
+          ((_root_.DerivedCategory.Plus.TStructure.t.truncLEι (n - p)).app K))) := by
+    simpa only [hiι, canonicalMap, Category.assoc, imageSubobject_iso_comp] using hU p
+  have hVtr (p : ℤ) : V.step p = imageSubobject
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map
+        ((truncationPsi g' f').map
+          ((_root_.DerivedCategory.Plus.TStructure.t.truncLEι (n - p)).app K))) := by
+    simpa only [hjι, canonicalMap, Category.assoc, imageSubobject_iso_comp] using hV p
+  let H := (_root_.DerivedCategory.Plus.homologyFunctor _ n).map (τ.app K)
+  have hnat (p : ℤ) : ((A n).ι p ≫ i.hom) ≫ H =
+      d p (n - p) ≫ ((B n).ι p ≫ j.hom) := by
+    rw [hiι, hjι]
+    dsimp [d, H]
+    simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+    rw [← canonicalMap_naturality]
+  have hnat0 : eqToHom (hA n) ≫ d 0 n ≫ eqToHom (hB n).symm ≫ j.hom =
+      i.hom ≫ H := by
+    have h0 := hnat 0
+    have hAι : (A n).ι 0 = eqToHom
+        ((show P.D 0 (n - 0) = P.D 0 n by congr 1; omega).trans (hA n).symm) := by
+      apply (cancel_mono (eqToHom (hA n))).1
+      simpa only [eqToHom_trans] using hA0 n
+    have hBι : (B n).ι 0 = eqToHom
+        ((show Q.D 0 (n - 0) = Q.D 0 n by congr 1; omega).trans (hB n).symm) := by
+      apply (cancel_mono (eqToHom (hB n))).1
+      simpa only [eqToHom_trans] using hB0 n
+    rw [hAι, hBι] at h0
+    have : IsIso ((A n).ι 0) := by rw [hAι]; infer_instance
+    apply (cancel_epi ((A n).ι 0)).1
+    rw [hAι]
+    simp only [eqToHom_trans_assoc]
+    have hd0 := eqToHom_naturality (fun pq : ℤ × ℤ ↦ d pq.1 pq.2)
+        (show (0, n - 0) = (0, n) by ext <;> omega)
+    have hd0' := congrArg (fun l ↦ l ≫ eqToHom (hB n).symm ≫ j.hom) hd0
+    simp only [Category.assoc, eqToHom_trans_assoc] at hd0'
+    rw [← hd0']
+    simpa only [Category.assoc, eqToHom_trans_assoc] using h0.symm
+  have hInv (p : ℤ) :
+      (Subobject.«exists»
+        (((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlusHomologyFunctorIso
+          n).symm.app
+          ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.obj K)).hom).obj
+          (U.step p) =
+        imageSubobject ((upperStar AddCommGrpCat.{u + 1} g).map
+          (imageSubobject ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map
+            ((lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus.map
+              ((_root_.DerivedCategory.Plus.TStructure.t.truncLEι (n - p)).app K)))).arrow) := by
+    let c := (_root_.DerivedCategory.Plus.TStructure.t.truncLEι (n - p)).app K
+    let R := (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctorPlus
+    let G := upperStar AddCommGrpCat.{u + 1} g
+    let χ := (G.mapDerivedCategoryPlusHomologyFunctorIso n).symm
+    have hχ := χ.hom.naturality (R.map c)
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hχ
+    rw [hUtr, Subobject.exists_obj_eq_imageSubobject]
+    rw [← imageSubobject_comp_of_epi (factorThruImageSubobject
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map ((truncationPhi f g).map c)))]
+    rw [← Category.assoc, imageSubobject_arrow_comp]
+    change imageSubobject
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map (G.mapDerivedCategoryPlus.map
+        (R.map c)) ≫ χ.hom.app (R.obj K)) = _
+    simp only [hχ, imageSubobject_iso_comp]
+    rw [← imageSubobject_comp_of_epi (G.map (factorThruImageSubobject
+      ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map (R.map c))))]
+    rw [← Functor.map_comp, imageSubobject_arrow_comp]
+  let lift (p : ℤ) : (U.step p : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) ⟶
+      (V.step p : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    eqToHom (congrArg (fun S : Subobject _ ↦
+      (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hU p)) ≫
+      imageSubobjectMap (Arrow.homMk (d p (n - p)) H (hnat p).symm) ≫
+      eqToHom (congrArg (fun S : Subobject _ ↦
+        (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hV p).symm)
+  have hlift (p : ℤ) : lift p ≫ (V.step p).arrow = (U.step p).arrow ≫ H := by
+    dsimp only [lift]
+    simp only [Category.assoc]
+    rw [Subobject.arrow_congr _ _ (hV p).symm,
+      imageSubobjectMap_arrow, ← Category.assoc,
+      Subobject.arrow_congr _ _ (hU p)]
+    rfl
+  have hstep (p : ℤ) :
+      Subobject.ofLE _ _ (U.antitone_step (by omega : p ≤ p + 1)) ≫ lift p =
+        lift (p + 1) ≫ Subobject.ofLE _ _ (V.antitone_step (by omega : p ≤ p + 1)) := by
+    apply (cancel_mono (V.step p).arrow).1
+    rw [Category.assoc, hlift, ← Category.assoc, Subobject.ofLE_arrow,
+      Category.assoc, Subobject.ofLE_arrow, hlift]
+  let gr (p : ℤ) : U.gradedPiece p ⟶ V.gradedPiece p :=
+    cokernel.map _ _ (lift (p + 1)) (lift p) (hstep p)
+  have hgr (p : ℤ) :
+      cokernel.π (Subobject.ofLE _ _ (U.antitone_step (by omega : p ≤ p + 1))) ≫ gr p =
+        lift p ≫ cokernel.π (Subobject.ofLE _ _
+          (V.antitone_step (by omega : p ≤ p + 1))) := by
+    simp only [gr, cokernel.map, cokernel.π_desc]
+  choose en hen using infinity_diagonal P L A hAinf n
+  choose en' hen' using infinity_diagonal Q M B hBinf n
+  let eU (p : ℤ) := en p ≪≫ imageGradedIso (P.imageFiltration n (A n)) i p
+  let eV (p : ℤ) := en' p ≪≫ imageGradedIso (Q.imageFiltration n (B n)) j p
+  have heU (p : ℤ) : P.toPageInfinity L p (n - p) ≫ (eU p).hom =
+      factorThruImageSubobject ((A n).ι p ≫ i.hom) ≫
+        eqToHom (congrArg (fun S : Subobject _ ↦
+          (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hU p).symm) ≫
+        cokernel.π (Subobject.ofLE _ _ (U.antitone_step (by omega : p ≤ p + 1))) := by
+    dsimp [eU]
+    rw [← Category.assoc, hen, Category.assoc, imageGradedIso_π,
+      ← Category.assoc, imageFiltration_factor P n (A n) i p (hU p)]
+    rfl
+  have heV (p : ℤ) : Q.toPageInfinity M p (n - p) ≫ (eV p).hom =
+      factorThruImageSubobject ((B n).ι p ≫ j.hom) ≫
+        eqToHom (congrArg (fun S : Subobject _ ↦
+          (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hV p).symm) ≫
+        cokernel.π (Subobject.ofLE _ _ (V.antitone_step (by omega : p ≤ p + 1))) := by
+    dsimp [eV]
+    rw [← Category.assoc, hen', Category.assoc, imageGradedIso_π,
+      ← Category.assoc, imageFiltration_factor Q n (B n) j p (hV p)]
+    rfl
+  choose tInf z hz htInf using ((derivedCoupleFunctoriality P Q T).2 L M).2
+  have hpage (p q : ℤ) :
+      P.toPageInfinity L p q ≫ tInf p q = d p q ≫ Q.toPageInfinity M p q := by
+    dsimp [toPageInfinity]
+    rw [Category.assoc, ← htInf, ← Category.assoc, ← Category.assoc]
+    apply congrArg (fun k : P.D p q ⟶
+      (M.Z p q : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) ↦
+      k ≫ cokernel.π (Subobject.ofLE _ _ (limitBoundary_le_cycle Q M p q)))
+    apply (cancel_mono (M.Z p q).arrow).1
+    simp only [Category.assoc, ← hz, Subobject.factorThru_arrow]
+    rw [← Category.assoc, Subobject.factorThru_arrow]
+    change P.initialG p q ≫ e p q = d p q ≫ Q.initialG p q
+    rw [initialG_eq (truncationPsi g' f') K Q hQD hQE _hQg,
+      initialG_eq (truncationPhi f g) K P hPD hPE _hPg]
+    simp only [d, e, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+      Category.id_comp]
+    rw [← Category.assoc (CategoryTheory.TruncationExchange.g (truncationPhi f g) K p q),
+      hg]
+    simp only [Category.assoc]
+    rfl
+  have hfac (p : ℤ) :
+      factorThruImageSubobject ((A n).ι p ≫ i.hom) ≫
+          eqToHom (congrArg (fun S : Subobject _ ↦
+            (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hU p).symm) ≫
+          lift p =
+        d p (n - p) ≫ factorThruImageSubobject ((B n).ι p ≫ j.hom) ≫
+          eqToHom (congrArg (fun S : Subobject _ ↦
+            (S : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1})) (hV p).symm) := by
+    apply (cancel_mono (V.step p).arrow).1
+    simp only [Category.assoc, hlift]
+    rw [← Category.assoc _ (U.step p).arrow H,
+      Subobject.arrow_congr _ _ (hU p).symm,
+      Subobject.arrow_congr _ _ (hV p).symm,
+      ← Category.assoc, imageSubobject_arrow_comp,
+      imageSubobject_arrow_comp]
+    exact hnat p
+  have hgraded (p : ℤ) : (eU p).hom ≫ gr p = tInf p (n - p) ≫ (eV p).hom := by
+    have : Epi (P.toPageInfinity L p (n - p)) := (hAconv.2.1.1 p (n - p)).1
+    apply (cancel_epi (P.toPageInfinity L p (n - p))).1
+    have hh := congrArg (fun k ↦ k ≫ cokernel.π
+      (Subobject.ofLE _ _ (V.antitone_step (by omega : p ≤ p + 1)))) (hfac p)
+    simp only [Category.assoc] at hh
+    rw [← Category.assoc, heU, Category.assoc, Category.assoc, hgr, hh,
+      ← heV]
+    simpa only [Category.assoc] using
+      congrArg (fun k ↦ k ≫ (eV p).hom) (hpage p (n - p)).symm
+  refine ⟨hDP', hEP', hDQ', hEQ', L, M, A, B, hA, hB, hA0, hB0, hAconv, hBconv,
+    hAfin, hBfin, hAinf, hBinf, i, j, hi, hj, U, V, rfl, rfl, hUtr, hVtr, hInv,
+    d 0 n, ?_, hnat0, lift, hlift, gr, hgr, (fun p ↦ z p (n - p)),
+    (fun p ↦ tInf p (n - p)), ?_, (fun p ↦ (htInf p (n - p)).symm),
+    eU, eV, hU, hV, heU, heV, hgraded⟩
+  · dsimp [d]
+    exact (eqToHom_comp_heq _ _).trans (comp_eqToHom_heq _ _)
+  · intro p
+    rw [← hz]
+    dsimp [T, e]
+    simpa only [← Category.assoc] using comp_eqToHom_heq
+      ((L.Z p (n - p)).arrow ≫
+        eqToHom (congrFun (congrFun hPE p) (n - p)) ≫ tE τ K p (n - p))
+      (congrFun (congrFun hQE p) (n - p)).symm
 -/
 
 end AlgebraicGeometry.Etale
