@@ -195,5 +195,23 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-19341bbe6 (reviewer sub-agent of L); spot-checked: I read the delivery in full and changed nothing; the review is in review.md. Item: against Kerodon 01DP (Lemma 4.4.4.8, read online) with S=Δ^0 and Y=Q, the statement is exactly the source's, with no hypothesis or conclusion changed. Steps: steps 1–2 build a finite horn-filling induction on the new filtration. Inner horns are filled by the quasicategory definition in def-cbc-enhanced-diagrams-cones. For p=0 horns, the endpoint clause fixes the initial edge as {0}×[0,1], which lies in X_0 (also for n=2) and is an equivalence by hypothesis, so lem-cbc-equivalence-outer-horn-filling (first clause, q≥2) gives the filler. Steps 3–5 run a skeletal induction with lem-coef-infinity-monomorphism-boundary-cells (a Mathlib leaf, SSet.relativeCellComplexOfMono, so an off-unit tool, not a route node) and def-weil-pbc-category-colimit. I checked the boundary and horn agreement on ∂Δ^r×Λ^n_0, the vertex edges at τ(a) when τ is not embedded, the r=0 case, and empty A, empty B, A=B and infinite B. The elementary marks on the written gluing steps 4–5 are justified. New node lem-cbc-initial-prism-horn-filtration: it matches Kerodon 01DN (Lemma 4.4.4.7, read online) clause by clause: m≥0, n≥2, X_0, q≥2, 0≤p<q, and p=0 sending vertices 0,1 to (0,0),(0,1). It is statement only, self-contained (B1–B4, B7) and smaller than the item, so not a restated clause (D1). Mathlib UnionProd.lean pairing (line 676ff) has no endpoint control, so unsplit with a mathlib_candidate is right. My own greedy horn-attachment search completed for all (m,n) with m≤3, n≤4 and (m+1)(n+1)≤16, and its counts agree with the authors' on the cases they share. Duplicates: grep of the whole DAG for 01DN/01DP, Λ_0^n, prism/horn/anodyne and pointwise-equivalence vocabulary, and of the main-20261015 blueprint for horn/prism, found no duplicate; right-prism-boundary and right-anodyne-product were checked and differ. No SGA source, no tool_uses needed, and no target node, so the base-change and coefficient checks do not apply."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InvertiblePrismExtension",
+  "declaration": "SSet.Enhanced.invertible_prism_extension",
+  "file": "lean/Sheaf/CategoryTheory/InvertiblePrismExtension.lean",
+  "statement": "theorem invertible_prism_extension (B : SSet.{u}) (A : B.Subcomplex) (n : ℕ) (hn : 2 ≤ n) (Q : SSet.{u}) [Quasicategory Q] (h : (SSet.Subcomplex.unionProd A (SSet.horn n ⟨0, by omega⟩)).toSSet ⟶ Q) (hedge : ∀ (b : B _⦋0⦌), IsEquivalenceEdge Q (h.app _ (⟨⟨B.map (SimplexCategory.const ⦋1⦌ ⦋0⦌ 0).op b, SSet.horn.edge n ⟨0, by omega⟩ ⟨0, by omega⟩ ⟨1, by omega⟩ (by exact Nat.zero_le 1) (by rw [Finset.insert_idem] exact Finset.card_le_two.trans hn)⟩, Or.inl ⟨Set.mem_univ _, Subtype.coe_prop _⟩⟩))) : ∃ H : B ⊗ Δ[n] ⟶ Q, (SSet.Subcomplex.unionProd A (SSet.horn n ⟨0, by omega⟩)).ι ≫ H = h",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a88b3ba10",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement checked clause by clause against Kerodon 01DP specialized to Q→Δ⁰: Quasicategory Q, A : B.Subcomplex, 2 ≤ n, h on Mathlib unionProd A Λ[n,0] = (⊤×Λ)⊔(A×⊤), hedge on every vertex b using the degenerate edge × horn.edge 0→1 (rfl-checked to be stdSimplex.edge n 0 1) via the dependency's IsEquivalenceEdge, conclusion ∃ H, ι ≫ H = h. Edge cases n=2, empty A/B/Q, A=B, infinite B ok; one universe is forced by the morphism typing. Node unchanged except the lean record; statement field verbatim in file; docstrings carry source and blueprint and follow the 5 proof steps; only sorry, no defs; report has Worker report and Second reading by NG; no duplicate in Mathlib or side lean. nt_compile.py per-file compile with siblings: rc=0, no messages (diagnostics confirmed working). No findings."
  }
 }
