@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-thm-sfb-proper-base-change-integral",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Proper direct image, base change and projection formula for $\\mathcal O_E$",
@@ -12,45 +12,238 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md",
   "place": "node det-thm-sfb-proper-base-change-integral, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-projection-formula-map"
+ ],
  "proof": [
   {
-   "text": "(1) $Rp_*$ is a right adjoint, so it commutes with $\\operatorname{R\\lim}$; derived completeness of\n$K$ means $K\\simeq\\operatorname{R\\lim}_nK\\otimes^{\\mathbf L}\\cO/\\pi_E^n$, and $Rp_*$ of each\nreduction is the reduction of $Rp_*K$ by the cone argument below, so $Rp_*K$ is complete\n(\\stacks{099L}). Reduction: $K\\otimes^{\\mathbf L}\\cO_{E,X}/\\pi_E=\\operatorname{cone}(K\\xrightarrow{\\pi_E}K)$\nsince $\\cO_{E,X}$ is $\\pi_E$-torsion free, and the exact functor $Rp_*$ preserves cones and is\n$\\cO_E$-linear. The reduction $\\bar K$ has torsion coefficients and is classical\n(\\stacks{09B1}), so $Rp_*\\bar K$ is $\\nu^*$ of the étale direct image (\\stacks{09A6}), which is\nbounded constructible by [det-thm-sfb-proper-base-change-finite] (1) with $A=\\cO_E/\\pi_E$. By\n[sk-prop-integral-criterion] (equivalently [sk-lem-integral-models] (2)),\n$Rp_*K\\in\\Dbc(Y,\\cO_E)$.",
+   "text": "Put $A=\\mathcal O_E$, $\\pi=\\pi_E$, $P_n=A/\\pi^n$, $\\kappa=P_1$, and $R_T=\\mathcal O_{E,T}$ for each scheme $T$. The standing schemes and morphisms are those of [sk-def-sfb-dc-setting]. In particular they are Noetherian, as recorded in [sk-lem-integral-models]. By [det-prop-sfb-qlbar-colimit-x-integral-limit], $R_T=\\varprojlim_n(P_n)_T$ canonically as a ring sheaf. Thus the completed coefficient sheaves in [prop-weil-pbc-direct-image-limits] are exactly these pulled-back coefficient sheaves, not the constant sheaves with value $A$. The coefficient datum applies: [lem-weil-l-adic-extension-integers-dvr] makes $A$ a discrete valuation ring, hence Noetherian since every ideal is principal, and [lem-weil-pbc-standard-quotients-perfect] makes each $P_n$ finite and perfect over $A$. Also $|\\ell|_E=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=(\\pi)$ by [def-weil-l-adic-coefficient-extension]; consequently $\\ell\\kappa=0$. For the admissible untwisted coefficients $\\Lambda=\\mathcal O_E$ and $P_n$, [sk-prop-sfb-cartesian-coefficients] (1) gives the canonical ring isomorphism $\\alpha_u:u^{-1}\\Lambda_T\\xrightarrow{\\sim}\\Lambda_{T'}$ for every morphism $u:T'\\to T$. Its final paragraph says that module pullback is exact and canonically naturally isomorphic to the lift of $u^{-1}$, with the $\\Lambda_{T'}$-action transported along $\\alpha_u^{-1}$. We use this natural identification, including the transported scalar action; we do not use the theorem's Tate-twist or finite-extension freeness assertions. The operations in [sk-def-sfb-module-derived-pushpull] are therefore the ordinary ringed-topos derived operations on these same sheaves; throughout, $u^*=Lu^*$ and all tensors are uncompleted derived tensors.",
    "uses": [
-    "det-thm-sfb-proper-base-change-finite",
-    "sk-lem-integral-models"
+    "sk-def-sfb-dc-setting",
+    "sk-lem-integral-models",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "def-weil-l-adic-coefficient-extension",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-derived-pushpull"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (1), coefficient conventions and the hypotheses for the 099L/099N argument; coefficient identification from the integral-limit node; the standing setting is the unit setting."
+   }
   },
   {
-   "text": "(2) This is [sk-lem-pe-derived-nakayama]. Directly: the exact sequences\n$0\\to\\cO/\\pi_E^{n-1}\\to\\cO/\\pi_E^n\\to\\cO/\\pi_E\\to0$ give triangles showing by induction that\n$C\\otimes^{\\mathbf L}\\cO/\\pi_E^n=0$ for all $n$; then $C\\simeq\\operatorname{R\\lim}_nC\\otimes^{\\mathbf L}\\cO/\\pi_E^n=0$.",
-   "uses": [
-    "sk-lem-pe-derived-nakayama"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(3) The base change map $g^*Rp_*K\\to Rp'_*g'^*K$ has derived complete source and target: $Rp_*K$\nand $Rp'_*g'^*K$ are in $\\Dbc$ by (1) and [sk-lem-integral-models] (3), and $g^*$ preserves\n$\\Dbc(-,\\cO_E)$ by [sk-lem-integral-models] (3). Similarly for the projection formula map, using\nthat $\\otimes^{\\mathbf L}$ and $p^*$ preserve $\\Dbc(-,\\cO_E)$. All functors involved are exact\nand $\\cO_E$-linear, so they commute with reduction modulo $\\pi_E$ (the cone of $\\pi_E$), and\nthe reduction of each canonical map is the corresponding canonical map for the torsion\nreductions, which is an isomorphism by [det-thm-sfb-proper-base-change-finite] (2), (3) with\n$A=\\cO_E/\\pi_E$. So the cone of each map is derived complete (cones of maps between complete\nobjects are complete) with zero reduction, hence zero by (2).",
+   "text": "For $L\\in D(\\operatorname{Mod}(R_T))$ write $L_n=L\\otimes^L_{R_T}(P_n)_T$, as an object with its $P_n$-action. If $L\\in\\Dbc(T,\\mathcal O_E)$, [sk-lem-integral-models] (2) says that $L$ is derived complete and $L_1$ is bounded constructible and pulled back from the étale site. Its finite Tor dimension follows from the same clause's formulation using $\\Dc$: $\\operatorname{Res}L\\in\\Dc$ has first reduction of finite Tor dimension. The comparison of [det-prop-integral-criterion-constant-coefficients] (3) identifies that reduction with $L_1$ in $D((\\kappa)_T)$. Thus $L_1\\in\\Dctf(T,\\kappa)$. Conversely, a derived complete $L$ with bounded constructible classical $L_1$ belongs to $\\Dbc(T,\\mathcal O_E)$ by [sk-lem-integral-models] (2). By [det-prop-integral-criterion-reductions], the reductions $L_n$ are bounded constructible in one interval independent of $n$, and this is the bounded constructible derived-complete integral category used by the coefficient-reduction tools below. Apply these assertions to $K$ now, and to the other constructible integral inputs below.",
    "uses": [
     "sk-lem-integral-models",
+    "det-prop-integral-criterion-constant-coefficients",
+    "det-prop-integral-criterion-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (1), use of integral-models (2), with finite Tor hypotheses for the finite-coefficient theorem made explicit."
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-direct-image-limits] with $(A,I)=(\\mathcal O_E,(\\pi))$ and the morphism $p$. It gives, for every $n\\geq1$, the functorial canonical projection-formula comparison\n$$\\rho_{p,n}:(Rp_*K)\\otimes^L_{R_Y}(P_n)_Y\\xrightarrow{\\sim}Rp_*(K_n),$$\ncompatible with the quotient transitions, and identifies the completion map with\n$$Rp_*K\\xrightarrow{\\sim}Rp_*R\\varprojlim_nK_n\\xrightarrow{\\sim}R\\varprojlim_nRp_*K_n.$$\nHere completeness of $K$ is step 2. These comparisons prove derived completeness of $Rp_*K$ in the sense of [sk-def-pe-derived-completion], and $n=1$ gives the reduction isomorphism in clause (1). The finite reduction is represented by the two-term resolution $[R_T\\xrightarrow{\\pi^n}R_T]$, hence by $\\operatorname{cone}(\\pi^n:L\\to L)$, by [det-pe-derived-nakayama-resolution]. This identifies the coefficient quotient used here with the cone quotient used in the blueprint; the comparison is the specified canonical map supplied by the cited direct-image theorem.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "sk-def-pe-derived-completion",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099N (lemma-pushforward-Noetherian-case), clauses (1),(4), and 099M (lemma-naive-completion), in Section 099L; the cited DAG theorem also supplies the perfect-coefficient projection comparisons."
+   }
+  },
+  {
+   "text": "Step 2 gives $K_1\\in\\Dctf(X,\\kappa)$, with $\\kappa$ finite and killed by $\\ell$ as checked in step 1. Apply [det-thm-sfb-proper-base-change-finite] (1): $Rp_*K_1\\in\\Dctf(Y,\\kappa)$, so it is bounded constructible. It is classical by [sk-thm-pe-constructible-comparison], which applies to the discrete Noetherian field $\\kappa$ on the qcqs scheme $Y$. In particular it is pulled back from a bounded constructible étale complex. Step 3 identifies this complex with $(Rp_*K)_1$ as an $R_Y$-complex; since step 2 places $K$ in the bounded integral domain, the direct-image reduction comparison of [lem-fix-operation-reduction] makes this an identification in $D((\\kappa)_Y)$ of $(Rp_*K)_1$, with its $\\kappa$-action, with the $\\kappa$-coefficient direct image $Rp_*K_1$ to which the finite theorem was applied. The converse criterion in [sk-lem-integral-models] (2), applied to the complete object $Rp_*K$, now proves $Rp_*K\\in\\Dbc(Y,\\mathcal O_E)$. This completes clause (1). Classicality here uses constructibility; torsion coefficients alone would not imply it.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-finite",
+    "sk-thm-pe-constructible-comparison",
+    "sk-lem-integral-models",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (1), finite-coefficient finiteness and the integral criterion; the comparison input is constructibility, as in Tag 09AI, not a general assertion about torsion sheaves."
+   }
+  },
+  {
+   "text": "Let $C$ be any derived $\\pi$-complete complex on the scheme in question and suppose $C_1=0$. By [det-pe-derived-nakayama-resolution] the coefficient filtration gives a distinguished triangle $C_1\\to C_{n+1}\\to C_n\\to C_1[1]$ for every $n\\geq1$. Starting with $C_1=0$, if $C_n=0$, both outside terms vanish and the triangle gives $C_{n+1}=0$. Induction proves $C_n=0$ for every $n$. The canonical completeness isomorphism of [sk-def-pe-derived-completion] gives $C\\simeq R\\varprojlim_nC_n=0$. This proves clause (2) without a boundedness assumption on $C$.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (2), the exact-sequence induction and the final completeness identity."
+   }
+  },
+  {
+   "text": "For the cartesian square of clause (3), with $Y'$ a standing scheme and $g$ a morphism of the setting, $p'$ is proper by [lem-weil-pbc-proper-fp-permanence] (b). Hence $X'$ is again a standing scheme: $p'$ is separated and of finite type, so the composite $X'\\to Y'\\to\\operatorname{Spec}k$ is separated and locally of finite type by clause (e) of the same lemma and quasi-compact as a composite of quasi-compact maps, and $g'$, $p'$ are $k$-morphisms. By [sk-lem-integral-models] (3), $g'^*K$ is bounded constructible integral; step 4 for $p'$ gives $Rp'_*g'^*K\\in\\Dbc(Y',\\mathcal O_E)$. Step 4 for $p$ followed by the same pullback assertion gives $g^*Rp_*K\\in\\Dbc(Y',\\mathcal O_E)$. For the projection map, the same lemma's pullback and tensor assertions give $p^*M\\in\\Dbc(X,\\mathcal O_E)$, $K\\otimes^Lp^*M\\in\\Dbc(X,\\mathcal O_E)$ and $(Rp_*K)\\otimes^LM\\in\\Dbc(Y,\\mathcal O_E)$; step 4 gives $Rp_*(K\\otimes^Lp^*M)\\in\\Dbc(Y,\\mathcal O_E)$. All four endpoints are derived complete by [sk-lem-integral-models] (2). In particular no completion of the displayed inverse images or tensors is needed.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), first three sentences: completeness of both endpoints of each map."
+   }
+  },
+  {
+   "text": "Write $\\beta_K:g^*Rp_*K\\to Rp'_*g'^*K$ for the canonical ambient exchange. It is the unit--pullback-comparison--counit composite of [def-weil-pbc-ambient-ringed-exchange]; the coefficient identifications in step 1 make the square a square of ringed topoi. Apply [lem-fix-operation-reduction] on the bounded integral domains checked in step 6. Its comparisons identify the reductions of the endpoints with $g^*Rp_*K_1$ and $Rp'_*g'^*K_1$, respectively (all operations on the latter objects now have coefficient $\\kappa$). They preserve the units and counits used to form exchange, as its statement explicitly asserts. The pullback comparison also reduces to the same comparison, since both routes are the reassociation of the inverse-image and scalar-extension tensors for $p\\circ g'=g\\circ p'$. Thus reducing the defining composite term by term gives\n$$ (\\beta_K)_1=\\eta_{p',\\kappa};\\ Rp'_{*,\\kappa}(\\theta_{\\square,\\kappa});\\ Rp'_{*,\\kappa}g'^*_{\\kappa}(\\varepsilon_{p,\\kappa}),$$\nunder those endpoint identifications, where semicolons mean composition in the written order. This is exactly $\\beta_{K_1}$, the canonical finite-coefficient exchange, not just some morphism between isomorphic endpoints.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), assertion that reduction of the canonical base-change map is the finite-coefficient map; expanded using the ambient mate definition and the existing coefficient-comparison lemma."
+   }
+  },
+  {
+   "text": "The canonical projection map $\\alpha_{K,M}:Rp_*K\\otimes^LM\\to Rp_*(K\\otimes^Lp^*M)$ is, by [def-weil-pbc-projection-formula-map], the adjoint of\n$$p^*(Rp_*K\\otimes^LM)\\xrightarrow{t_p}p^*Rp_*K\\otimes^Lp^*M\\xrightarrow{\\varepsilon_K\\otimes1}K\\otimes^Lp^*M.$$\nThe reduction comparisons of [lem-fix-operation-reduction] identify its source and target with\n$$Rp_*K_1\\otimes^L_{\\kappa}M_1,\\qquad Rp_*(K_1\\otimes^L_{\\kappa}p^*M_1).$$\nHere the tensor comparison is the balancing isomorphism $(U\\otimes^L_{R_T}V)\\otimes^L_{R_T}\\kappa_T\\simeq U_1\\otimes^L_{\\kappa_T}V_1$; inverse image uses the corresponding scalar-extension comparison. The cited lemma preserves tensor associativity, units and counits. Therefore the reduction of the displayed adjunct is $(\\varepsilon_{K_1}\\otimes1)t_{p,\\kappa}$, and reduction of the unit used to take its adjunct is the finite-coefficient unit. The reduced map is exactly $\\alpha_{K_1,M_1}$.",
+   "uses": [
+    "def-weil-pbc-projection-formula-map",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), assertion that reduction of the canonical projection map is the finite-coefficient map; Stacks 0B56 (equation-projection-formula-map) specifies the adjunct used here."
+   }
+  },
+  {
+   "text": "By step 2, $K_1\\in\\Dctf(X,\\kappa)$ and $M_1\\in\\Dctf(Y,\\kappa)$. All square hypotheses and properness are the ones already checked in step 6, and $\\kappa$ is a finite commutative ring killed by $\\ell$. Hence [det-thm-sfb-proper-base-change-finite] (2) makes $\\beta_{K_1}$ an isomorphism and its clause (3) makes $\\alpha_{K_1,M_1}$ an isomorphism. Steps 7 and 8 identify these with the first reductions of the actual integral maps.",
+   "uses": [
     "det-thm-sfb-proper-base-change-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), application of the finite-coefficient theorem (2),(3) with A equal to the residue field."
+   }
+  },
+  {
+   "text": "Take the cone of each integral map. The endpoints are complete by step 6, so the cones are complete by the cone-closure assertion of [det-pe-derived-nakayama-first-reduction]. Derived reduction is exact: using the functorial two-term cone resolution in [det-pe-derived-nakayama-resolution], reduction of a mapping cone is the mapping cone of the reduced map. Step 9 therefore makes the first reduction of each cone zero. Apply the vanishing proved in step 5 to each cone. Both cones vanish, so both integral maps are isomorphisms, proving clause (3).",
+   "uses": [
+    "det-pe-derived-nakayama-first-reduction",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), final two sentences: completeness and vanishing of the cones, followed by derived Nakayama."
+   }
   }
  ],
  "proof_deps": [
-  "det-thm-sfb-proper-base-change-finite",
+  "sk-def-sfb-dc-setting",
   "sk-lem-integral-models",
-  "sk-lem-pe-derived-nakayama"
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-prop-integral-criterion-constant-coefficients",
+  "det-prop-integral-criterion-reductions",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-def-pe-derived-completion",
+  "det-pe-derived-nakayama-resolution",
+  "det-thm-sfb-proper-base-change-finite",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-fix-operation-reduction",
+  "def-weil-pbc-projection-formula-map",
+  "det-pe-derived-nakayama-first-reduction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1)--(3), expanded using existing DAG statements; Stacks Tags 099N, 099M, 099L, 09AI and 0B56 checked in the local sources. The proof keeps the unit route through finite coefficients and integral models."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*base.?change|base.?change.*proper|derived.?[Cc]omplete",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Small.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for derived complete constructible l-adic sheaves and integral projection formula",
+   "results": "8 hits; AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk', AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsProper\"",
+   "results": "1 hits; AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of bounded constructible complexes over the ring of integers of a finite extension of Q_l is derived complete and satisfies proper base change and the projection formula",
+   "results": "8 hits; Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, CondensedMod.IsSolid, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|isIso_baseChange|DerivedComplete|derivedComplete|projectionFormula",
+   "results": "0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Nakayama and reduction of the projection formula for sheaves of l-adic modules on pro-etale sites",
+   "results": "8 hits; Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\"",
+   "results": "0 hits; none",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral l-adic cohomology: pushing a constructible derived complete complex along a proper map commutes with finite reduction and arbitrary base change",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pushforwardComp, Condensed.profiniteSolid, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; the hits concern ordinary module pushforward, condensed module constructions, geometric stability of properness, or ordinary algebraic Nakayama, not integral constructible pro-etale base change and projection formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -66,5 +259,79 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sfb-proper-base-change"
+ "unit": "sk-thm-sfb-proper-base-change",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-sfb-proper-base-change-integral",
+  "worker": "stage1",
+  "summary": "Expanded the three imported paragraphs into ten steps. Identified pulled-back and completed integral coefficient sheaves, checked the finite coefficient datum and finite Tor domains, proved completeness and reduction using the existing direct-image theorem, applied finite finiteness and the integral criterion, wrote the Nakayama induction, checked endpoint completeness, and identified the canonical reduced exchange and projection maps via existing unit/counit-compatible coefficient comparisons before killing their cones. Corrected the proof inference that torsion alone implies classicality: bounded constructibility supplies classicality. Statement unchanged; no new nodes. Repair of landing refusal L: revalidated all retained citation excerpts against the current DAG, re-read the changed cartesian-coefficient statement and its source, restricted its use to admissible untwisted integral/finite coefficients, and replaced the literal inverse-image identification by the canonical natural isomorphism with the inverse-image lift and transported scalar action. Refreshed that citation to its current statement. The ten-step route and item statement are unchanged.",
+  "blueprint": "Current integral.proof.md paragraph (1) is realized by steps 1--4, paragraph (2) by step 5, and paragraph (3) by steps 6--10; unit steps 2--3 retain their finite-reduction/integral-models route.",
+  "tool_uses": [
+   {
+    "node": "det-prop-integral-criterion-reductions",
+    "why": "Identifies the first-reduction constructibility criterion with the uniform finite-level bounded category in which the generic operation-reduction lemma is stated."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "General completed-coefficient direct-image/derived-limit and finite-perfect-reduction comparison, used to implement the unit's 099L argument, not to replace its finite-coefficient finiteness route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Only its ordinary pullback/tensor/direct-image coefficient comparisons and preservation of the units and counits forming exchange/projection are used; it asserts no proper base change or projection isomorphism. The current unit does not contain this generic compatibility lemma."
+   },
+   {
+    "node": "det-pe-derived-nakayama-resolution",
+    "why": "Two-term coefficient resolution and quotient-filtration triangles supply the explicit cone and Nakayama computations in the unit."
+   },
+   {
+    "node": "det-pe-derived-nakayama-first-reduction",
+    "why": "Only closure of derived complete complexes under cones is used to implement the unit's final cone argument."
+   },
+   {
+    "node": "det-prop-integral-criterion-constant-coefficients",
+    "why": "Its reduction comparison transports the finite Tor condition in the constant-coefficient definition of Dc to the actual completed-coefficient first reduction."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Identifies the pulled-back integral coefficient sheaf with the completed sheaf used by the direct-image tool; this prevents conflating it with constant coefficients."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Classicality of the bounded constructible finite-coefficient output, needed by the integral criterion, is the standard comparison input already specified by the unit."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Ensures exact inverse image on the coefficient sheaves and identifies the ringed-topos functors and squares used in the generic reduction tools."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Checks Noetherianity of the coefficient ring and the finite residue field for the generic adic datum."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Supplies finite-set and perfectness hypotheses for the coefficient quotients in the generic direct-image theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-integral-criterion-reductions",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-fix-operation-reduction",
+  "det-pe-derived-nakayama-resolution",
+  "det-pe-derived-nakayama-first-reduction",
+  "det-prop-integral-criterion-constant-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-thm-pe-constructible-comparison",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-1d64987ef",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-1d64987ef (reviewer sub-agent of L); spot-checked: I read the whole delivery: the statement (verbatim from blueprint main-20261015, not weakened), all ten steps, every stmt/proof dependency statement, the proofs of lem-fix-operation-reduction and of the adic coefficient datum, the unit/chapter route, Stacks 09B1 and 099N clauses (1)-(5), the tags 099L/099M/09A6/09AI/0944/0B56/09C9, and the master file Proper.lean. Base-change map and coefficients: the item uses def-weil-pbc-ambient-ringed-exchange. It is the same unit;theta;counit composite as the master BC_sq and sk-def-sfb-base-change-morphism, and it is defined without assuming that the direct image preserves D_cons, which is this item's own clause (1). The rational sibling identifies their components on Dbc. The coefficient ring is the completed O_{E,X}, identified with the A_T of the adic datum through det-prop-sfb-qlbar-colimit-x-integral-limit (3); the datum's hypotheses are checked (Noetherian DVR, P_n finite and perfect, ell in m_E). The worker's correction of the source is right: 09B1 does not make torsion sheaves classical, and classicality comes from constructibility through sk-thm-pe-constructible-comparison. The unit's route is kept. Other checks: there is no cycle, proof_deps equals the union of the step uses, there are no new nodes and no SGA citations, and the off-route statements are exactly the four declared generic tools. I accept all eleven tool_uses. Two small repairs to the item (fixes/dag/nodes/sec-six-functors-basics/det-thm-sfb-proper-base-change-integral.json): (1) step 4 now cites lem-fix-operation-reduction, already in proof_deps, so that (Rp_*K)_1 is identified with the kappa-coefficient Rp_*K_1 in D(kappa_Y), not only as an R_Y-complex (C4/E5); (2) step 6 now checks that X' is a standing scheme before step 4 is applied to p' (E1), as the master hypotheses require. Statement, stmt_deps and proof_deps set are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,85 @@
+{
+ "id": "lem-coef-infinity-free-module-bar",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution.",
+   "via": [
+    "lem-coef-infinity-monadic-bar",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free coherent monad modules and their augmented free resolution",
+ "statement": "Use the coherent-diagram, mapping-space and quasicategory conventions of [def-cbc-enhanced-diagrams-cones], and the index categories and meaning of split augmented diagram of [lem-coef-infinity-split-augmentation-colimit]. Work in universes large enough for the following categories, with small mapping spaces in a possibly enlarged universe. Let $\\mathcal C$ be an infinity-category. A coherent monad $T$ is a unital associative algebra in the monoidal infinity-category $\\operatorname{Fun}(\\mathcal C,\\mathcal C)$ under composition: it has unit $\\eta:1\\to T$, multiplication $\\mu:T^2\\to T$, and all associativity and unit compatibilities. Its module infinity-category $\\mathcal A=\\operatorname{Alg}_T(\\mathcal C)$ consists of objects $A\\in\\mathcal C$ with action $a:TA\\to A$ and all coherent unit and associativity data, retaining coherent module maps and their higher simplices. Let $V:\\mathcal A\\to\\mathcal C$ forget the action. Then $V$ reflects equivalences and has a left adjoint $F$, with $VF=T$, free module $F(c)=(Tc,\\mu_c)$, and natural equivalences\n$$\\operatorname{Map}_{\\mathcal A}(F(c),M)\\simeq\\operatorname{Map}_{\\mathcal C}(c,VM).$$\nThis equivalence sends a module map $f$ to $V(f)\\eta_c$ and its inverse sends $g$ to the module map with underlying map $a_M T(g)$. These are coherent equivalences of mapping-space bifunctors, and the free adjunction unit is $\\eta$.\n\nFor each $M=(A,a)\\in\\mathcal A$ there is a natural augmented coherent simplicial diagram $R_\\bullet M\\to M$ with $R_rM=F(T^rA)$ for $r\\geq0$. For $r\\geq1$, its underlying faces are\n$$d_i=T^i(\\mu_{T^{r-i-1}A})\\quad(0\\leq i<r),\\qquad d_r=T^r(a),$$\nand its underlying degeneracies are $s_i=T^{i+1}(\\eta_{T^{r-i}A})$ for $0\\leq i\\leq r$. Its degree-zero augmentation has underlying map $a:TA\\to A$. The augmentation $R_\\bullet M\\to M$ is colimiting in $\\mathcal A$. The underlying augmented diagram $VR_\\bullet M\\to A$ extends coherently to $N(\\Delta_{-\\infty})^{\\mathrm{op}}$; its extra degeneracies are $h_{-1}=\\eta_A$ and $h_r=\\eta_{T^{r+1}A}$ for $r\\geq0$. All structures and their higher compatibilities are natural in $M$. Neither the existence of all geometric realizations in $\\mathcal C$ nor preservation of arbitrary realizations by $T$ is assumed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra (2017), Corollaries 4.2.3.2 and 4.2.4.8, Construction 4.4.2.7, Example 4.7.2.7, Example 4.7.2.5 and Lemma 4.7.3.12; applied to the evaluation action of endofunctors on C. The free-module bar used in the proof of Lemma 4.7.3.13, printed pp. 688-689, is exactly this diagram. The colimit assertion is in the module category, and the splitting assertion is in C. Online source read; not archived in literature/. No Stacks tag states this infinity-categorical fact."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-split-augmentation-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bar.*(monad|module)|monad.*bar|free.*(algebra|module)",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"grep\", \"query\": \"bar.*(monad|module)|monad.*bar|free.*(algebra|module)\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Equalizer.lean\", \"Mathlib/CategoryTheory/Monad/Equalizer.lean\", \"Mathlib/CategoryTheory/Monad/Equalizer.lean\", \"Mathlib/CategoryTheory/Monad/Coequalizer.lean\", \"Mathlib/CategoryTheory/Monad/Coequalizer.lean\", \"Mathlib/CategoryTheory/Monad/Coequalizer.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\", \"Mathlib/CategoryTheory/Monad/Algebra.lean\"], \"digest\": \"393a4cb94b626923\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monad.Algebra\", \"free\"",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monad.Algebra\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity category modules for a monad free forgetful adjunction and simplicial bar resolution",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"leansearch\", \"query\": \"Infinity category modules for a monad free forgetful adjunction and simplicial bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.adj\", \"ModuleCat.adj\", \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"CategoryTheory.Monad.adj_unit\", \"CategoryTheory.Monad.instIsRightAdjointAlgebraForget\", \"PresheafOfModules.freeAdjunction\", \"ModuleCat.instIsRightAdjointForget\", \"MonCat.adj\"], \"digest\": \"c91143fb279b2fe9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homotopy coherent monad free module bar resolution realizes every algebra and the forgetful functor is conservative",
+   "results": "{\"t\": \"2026-10-16T18:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a homotopy coherent monad free module bar resolution realizes every algebra and the forgetful functor is conservative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.projectiveResolution\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.barResolution\", \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"comonadicExtendScalars\", \"CategoryTheory.Abelian.LeftResolution.karoubi_F\", \"CategoryTheory.Abelian.LeftResolution.reduced\"], \"digest\": \"b511407e5204f636\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monad.free\"",
+   "results": "{\"t\": \"2026-10-16T18:32:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monad.free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.free\", \"CategoryTheory.Monad.free_obj_A\", \"CategoryTheory.Monad.free_obj_a\", \"CategoryTheory.Monad.free_map_f\", \"CategoryTheory.Monad.FreeCoequalizer.π\", \"CategoryTheory.Monad.FreeCoequalizer.π_f\", \"CategoryTheory.Monad.FreeCoequalizer.bottomMap\", \"CategoryTheory.Monad.FreeCoequalizer.topMap\"], \"digest\": \"d52734c9744e65b1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategor.*(monad|bar|split)|(monad|bar|split).*quasicategor",
+   "results": "{\"t\": \"2026-10-16T18:32:21Z\", \"tool\": \"grep\", \"query\": \"quasicategor.*(monad|bar|split)|(monad|bar|split).*quasicategor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad/Algebra.lean:42-175 defines ordinary algebras, free/forget and a Hom-set adjunction; Monad/Coequalizer.lean:43-97 constructs a reflexive coequalizer in an ordinary algebra category. These are not arbitrary coherent monads, coherent simplicial module bars, or colimits tested by mapping spaces. Rep.barResolution and ModuleCat.projectiveResolution concern ordinary modules and chain complexes. The refined AlgebraicTopology grep had zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-monadic-bar",
+  "date": "2026-10-17",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}

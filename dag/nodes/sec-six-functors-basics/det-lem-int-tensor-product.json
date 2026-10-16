@@ -3,58 +3,297 @@
  "blueprint": {
   "is": "det-lem-int-tensor-product",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The integral tensor product preserves $\\Dbc(-,\\mathcal O_E)$",
- "statement": "Let $X$ be a standing scheme and $K,L\\in\\Dbc(X,\\mathcal O_E)$. Then the derived\ntensor product $K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}L\\in\\D(X_{\\mathrm{proét}},\\mathcal O_E)$, formed\nwithout any completion, lies in $\\Dbc(X,\\mathcal O_E)$.\n\nMoreover, if $M\\in\\D(S_{\\mathrm{proét}},\\mathcal O_E)$ is pro-étale locally of the form\n$P\\otimes_{\\mathcal O_E}\\mathcal O_{E,S}$ with $P$ a bounded complex of finite free\n$\\mathcal O_E$-modules, then $M$ is dualizable in $\\D(S_{\\mathrm{proét}},\\mathcal O_E)$, and\n$M\\otimes^{\\mathbf L}-$ preserves products, derived inverse limits and derived\ncomplete objects.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and the standing setting of separated finite-type $k$-schemes [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Use the pulled-back completed coefficient sheaf $R_T=\\mathcal O_{E,T}=p_T^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients], the ambient uncompleted derived tensor and internal Hom [sk-def-sfb-derived-tensor-hom], bounded constructibility [sk-def-sfb-constructible], and derived completeness [sk-def-pe-derived-completion].\n\nLet $X$ be a standing scheme and $K,L\\in\\Dbc(X,\\mathcal O_E)$. Then the ordinary, uncompleted derived tensor $K\\otimes^{\\mathbf L}_{R_X}L$ lies in $\\Dbc(X,\\mathcal O_E)$.\n\nMoreover, let $S$ be a scheme and let $M\\in D(S_{\\mathrm{proét}},R_S)$ be pro-étale locally of the form $P\\otimes_{\\mathcal O_E}R_S$, where $P$ is a bounded complex of finite free $\\mathcal O_E$-modules. Then $M$ is dualizable in this ambient derived category: it has a dual with evaluation and coevaluation satisfying the two triangle identities. The functor $M\\otimes^{\\mathbf L}_{R_S}-$ preserves products, sequential derived inverse limits, and derived $\\pi_E$-complete objects.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
   "place": "node det-lem-int-tensor-product, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-constructible",
+  "sk-def-pe-derived-completion"
+ ],
  "proof": [
   {
-   "text": "*Dualizability of a local model.* Let $M$ be as in the second paragraph, with a\npro-étale cover $\\{W_k\\to S\\}$ and $M|_{W_k}\\simeq P_k\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$. Put\n$M^\\vee=R\\mathcal Hom(M,\\mathcal O_{E,S})$. On $W_k$ it is\n$P_k^\\vee\\otimes_{\\mathcal O_E}\\mathcal O_{E,W_k}$ with $P_k^\\vee=\\Hom_{\\mathcal O_E}(P_k,\\mathcal O_E)$, and the\nevaluation $M^\\vee\\otimes^{\\mathbf L}M\\to\\mathcal O_{E,S}$ and the canonical map\n$M\\otimes^{\\mathbf L}N\\to R\\mathcal Hom(M^\\vee,N)$ are, on $W_k$, the corresponding maps for\nthe bounded complex of finite free modules $P_k$, which are isomorphisms\n(respectively satisfy the triangle identities) because they do so for\n$P=\\mathcal O_E$ and are compatible with finite sums and cones. A morphism in the\nderived category is an isomorphism if it is so on a cover, and the triangle\nidentities are equalities of morphisms that can be checked after the\nisomorphisms just established. So $M$ is dualizable with dual $M^\\vee$, and\n$M\\otimes^{\\mathbf L}-\\simeq R\\mathcal Hom(M^\\vee,-)$ is a right adjoint (of\n$M^\\vee\\otimes^{\\mathbf L}-$) as well as a left adjoint (of $R\\mathcal Hom(M,-)$). Being a\nright adjoint, it preserves products; being exact, it preserves\n$R\\varprojlim$ of sequences, which is the fibre of a map between products. It\nalso commutes with reduction modulo $\\pi_E^n$ by associativity of the derived\ntensor product. Hence, if $N$ is derived complete, applying $M\\otimes^{\\mathbf L}-$ to\nthe isomorphism $N\\simeq R\\varprojlim_nN\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E^n$ shows that\n$M\\otimes^{\\mathbf L}N$ is derived complete ([sk-def-pe-derived-completion]).",
+   "text": "Use a small skeleton of each pro-étale site. The internal-module category can be treated as sheaves of modules over its reconstructed section ring, by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Its hypotheses hold here: abelian sheafification and monoidality of its local equivalences are supplied by [lem-weil-pbc-sheaf-tensor-closed]. This equivalence is identity on the underlying abelian sheaves, hence exact. The coequalizer defining relative module tensor in [def-sfb-modobj-relative-tensor] represents bilinear maps balanced for the section-ring action, so under this equivalence it is exactly sheaf tensor over that ring. Consequently the equivalence identifies the K-flat derived tensors and their internal-Hom right adjoints. All tensors below are these ambient tensors, without completion.\n\nThey are exact in each variable: represent a fixed argument by a K-flat resolution with flat terms, available on a ringed site by [lem-pc-kflat-resolution]. The K-flat tensor functor is triangulated by [lem-sc-source-kflat-tensor-left-triangulated]; the derived tensor of [sk-def-sfb-derived-tensor-hom] is this functor. Symmetry gives exactness in the other variable. The hypotheses apply both to $R_S$-module sheaves and to constant residue-field module sheaves.",
    "uses": [
-    "sk-def-pe-derived-completion"
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-sfb-modobj-relative-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "sk-def-sfb-derived-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "All three paragraphs: exactness of ambient derived tensor; K-flat construction made explicit"
+   }
   },
   {
-   "text": "*Reduction to a stratum.* Fix $L\\in\\Dbc(X,\\mathcal O_E)$. The functor\n$K\\mapsto K\\otimes^{\\mathbf L}L$ is exact and $\\Dbc(X,\\mathcal O_E)$ is triangulated\n([sk-lem-int-integral-heart]), so the class of $K$ with\n$K\\otimes^{\\mathbf L}L\\in\\Dbc(X,\\mathcal O_E)$ is closed under extensions. By\n[det-lem-int-tensor-shriek] (2) it suffices to treat $K=a_!M$ with\n$a\\colon S\\hookrightarrow X$ a stratum and $M$ a local model as above. By\n[det-lem-int-tensor-projection],\n$$\na_!M\\otimes^{\\mathbf L}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}a^*L\\bigr),\n$$\nand by [det-lem-int-tensor-shriek] (1) it suffices to show\n$M\\otimes^{\\mathbf L}a^*L\\in\\Dbc(S,\\mathcal O_E)$.",
+   "text": "First compute the dual on a chart, over any small ringed site $(\\mathcal C,R)$. Let $T$ be a bounded complex of finite free $R$-modules and put $D_T=\\mathcal Hom^\\bullet_R(T,R[0])$. Each $\\mathcal Hom_R(T^i,-)$ is exact and is a finite sum of the identity functor by [lem-sc-finite-free-internal-hom-exact]. Therefore [lem-pc-bounded-exact-term-hom-quasi-iso], applied to a K-injective replacement of an arbitrary complex $F$, shows that $\\mathcal Hom^\\bullet_R(T,F)$ computes $R\\mathcal Hom_R(T,F)$ as defined in [def-pur-derived-internal-hom]. The complex $D_T$ is bounded finite free, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. For each degree $n$, the evaluation map\n$$\\bigoplus_{a+b=n} F^a\\otimes_R(D_T)^b\\longrightarrow\\prod_i\\mathcal Hom_R(T^i,F^{i+n})$$\nis an isomorphism: only finitely many $i$ occur, and for $i=-b$ the summand map sends $y\\otimes\\phi$ to $(x\\mapsto y\\phi(x))$. In a basis its inverse sends $f:T^i\\to F^{i+n}$ to $\\sum_j f(e_j)\\otimes e_j^*$. It is a chain map: the dual differential is $d\\phi=(-1)^{b+1}\\phi d_T$, so the second tensor-differential term has sign $(-1)^{a+b+1}$, exactly the second term of $df=d_Ff-(-1)^nf d_T$ in [def-pur-hom-complex] and [def-pc-tensor-complex-sheaves]. Thus the canonical comparison $F\\otimes_R^{\\mathbf L}D_T\\to R\\mathcal Hom_R(T,F)$ is an isomorphism for every $F$, not merely for bounded or constructible $F$.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH (lemma-Rhom-strictly-perfect); Tag 08JJ (lemma-dual-perfect-complex), finite-free calculation"
+   }
+  },
+  {
+   "text": "Now let $M$ have the local models of the statement and set $D=R\\mathcal Hom_{R_S}(M,R_S)$. For a covering chart $W\\to S$, [lem-weil-proetale-weakly-etale-localization] identifies its pro-étale site with the slice; Apply the untwisted clause (1) of [sk-prop-sfb-cartesian-coefficients] to $f:W\\to S$ and the admissible condensed ring $\\Lambda=\\underline{\\mathcal O_E}$: its canonical ring isomorphism $f^{-1}R_S\\simeq R_W$ identifies the restricted ring with $R_W$. This clause applies to arbitrary schemes and morphisms; it imposes no invertibility condition on $S$, and neither its Tate-twist clause nor its finite-extension clause is used. On each chart, derived internal Hom restricts to internal Hom on the slice by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Tensor restricts to tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the slice morphism with its restricted coefficient ring. Thus for every $N$ the canonical global evaluation comparison\n$$u_N:N\\otimes_{R_S}^{\\mathbf L}D\\longrightarrow R\\mathcal Hom_{R_S}(M,N)$$\nrestricts to the isomorphism in step 2, since $P\\otimes_{\\mathcal O_E}R$ is a bounded finite free complex. It follows that $u_N$ is an isomorphism globally. Here only detection of isomorphisms is local: slice restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], so kernels and cokernels of each $H^q(u_N)$ restrict to zero. Every section of either sheaf is locally zero on the given covering, hence zero by the sheaf axiom. Apply [lem-weil-pbc-unbounded-derived-iso-cohomology] to conclude. This argument uses a small skeleton of the pro-étale site as in [def-weil-pbc-proetale-site].",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Dualizability of a local model: local internal Hom and detection of the canonical comparison; Tag 08JB"
+   }
+  },
+  {
+   "text": "The closed adjunction of [sk-def-sfb-derived-tensor-hom], followed by $u_B^{-1}$, gives natural bijections\n$$\\operatorname{Hom}(M\\otimes^{\\mathbf L}A,B)\\simeq\\operatorname{Hom}(A,R\\mathcal Hom(M,B))\\simeq\\operatorname{Hom}(A,B\\otimes^{\\mathbf L}D).$$\nSuppress associators and the symmetry that moves $B$ past $M,D$. Write $e:D\\otimes^{\\mathbf L}M\\to R_S$ for evaluation. Since $u_B$ is the canonical evaluation comparison, the inverse bijection takes $h:A\\to B\\otimes^{\\mathbf L}D$ to the contraction of $M\\otimes^{\\mathbf L}h$ by $e$. Let $c:R_S\\to M\\otimes^{\\mathbf L}D$ correspond to $1_M$ at $(A,B)=(R_S,M)$. Transposing this defining equality gives $(1_M\\otimes e)(c\\otimes1_M)=1_M$. Tensoring this equality with $1_A$ shows that $c\\otimes1_A$ transposes to $1_{M\\otimes A}$, so it is the adjunction unit at $A$. The inverse-bijection formula gives the counit at $B$ as contraction with $e$. The other adjunction triangle, on the right-adjoint image of $R_S$, is therefore $(e\\otimes1_D)(1_D\\otimes c)=1_D$. Thus $e,c$ satisfy both duality identities globally. Symmetry interchanges the two dual objects and gives also $D\\otimes^{\\mathbf L}-\\dashv M\\otimes^{\\mathbf L}-$.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Dualizability of a local model: evaluation, coevaluation and both adjunctions, with triangle identities proved globally"
+   }
+  },
+  {
+   "text": "Write $T_M=M\\otimes^{\\mathbf L}-$. The adjunction $D\\otimes^{\\mathbf L}-\\dashv T_M$ implies product preservation directly: for any $A$ and family $(N_i)$,\n$$\\operatorname{Hom}(A,T_M\\prod_iN_i)\\simeq\\operatorname{Hom}(D\\otimes^{\\mathbf L}A,\\prod_iN_i)\\simeq\\prod_i\\operatorname{Hom}(A,T_MN_i).$$\nThe bijections respect projections, so they identify the canonical product comparison. Step 1 gives exactness, and [lem-pc-homotopy-limit-map] then identifies $T_M(R\\varprojlim_nN_n)$ with $R\\varprojlim_nT_M(N_n)$. For $B_n=(\\mathcal O_E/\\pi_E^n)_S$, associativity gives $(T_MN)\\otimes^{\\mathbf L}_{R_S}B_n\\simeq T_M(N\\otimes^{\\mathbf L}_{R_S}B_n)$ as $R_S$-complexes. These are the canonical associations of the same threefold tensor, so they commute with $B_{n+1}\\to B_n$ and with $N\\to N\\otimes^{\\mathbf L}B_n$. If $N$ is complete, apply $T_M$ to its completion isomorphism and the preceding limit comparison. The result is exactly the canonical completion map for $T_MN$, hence an isomorphism by [sk-def-pe-derived-completion]. This proves every assertion in the second paragraph of the imported statement.",
+   "uses": [
+    "lem-pc-homotopy-limit-map",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Dualizability of a local model: products, sequential derived limits and the canonical completion map"
+   }
+  },
+  {
+   "text": "We next verify tensor closure with the residue field $\\kappa=\\mathcal O_E/\\pi_E$, which is a field by [def-weil-l-adic-coefficient-extension]. Every sheaf $F$ of $\\kappa_S$-modules is flat. To apply [lem-pc-sites-modules-sheafification-flat], view $F$ as a presheaf of modules over the constant presheaf $\\kappa$. Each $F(U)$ is a vector space, so tensoring with it preserves finite limits of vector spaces (choose a basis, so this is a direct sum of copies of the identity). Finite limits of presheaves are sectionwise; the hypotheses of that lemma hold. The ring sheafification is $\\kappa_S$ and the module sheafification is $F$ with its original action, by [lem-pc-sites-module-sheafification-interface]. This proves finite-limit preservation of sheaf tensor with $F$; sheaf tensor is also a left adjoint by [lem-pc-sheaf-modules-tensor-closed], so it preserves cokernels and is exact. In particular $F[0]$ is K-flat by [lem-pc-bounded-above-flat-kflat-site], and $F[0]\\otimes^{\\mathbf L}G[0]=(F\\otimes G)[0]$ for module sheaves.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pc-sites-modules-sheafification-flat",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "The stratum: flatness over the constant residue field, repaired via Tag 03ET (lemma-flatness-sheafification)"
+   }
+  },
+  {
+   "text": "For constructible $\\kappa_S$-module sheaves $F,G$ on the Noetherian scheme $S$, intersect the strata of their two finite stratifications: base-changing the stratification of $G$ along each stratum immersion $Z_a\\to S$ of $F$ gives, by [lemma-constructible-pullback-stratification], a stratification of $Z_a$ with strata $Z_a\\times_S Z'_b$, and the composites $Z_a\\times_SZ'_b\\to S$ form a finite stratification of $S$ refining both; its strata are constructible since $S$ is Noetherian. Restriction to a stratum or to an object of a pro-étale cover is module inverse image along a morphism $g$; by clause (1) of [sk-prop-sfb-cartesian-coefficients] for the finite admissible ring $\\kappa$, $g^{-1}\\kappa_S\\simeq\\kappa_T$, so restrictions of $\\kappa_S$-modules are $\\kappa_T$-modules and the restriction of a local model $\\kappa_U\\otimes_\\kappa P$ is again $\\kappa\\otimes_\\kappa P$ over the new coefficient sheaf. On each intersection refine a trivializing cover for $F$ by the pullbacks of a trivializing cover for $G$; the covering axiom makes this a common cover. The finite constant local models in [sk-def-sfb-constructible] are finitely presented, hence finite-dimensional, $\\kappa$-vector spaces, so choose bases giving $F|_V\\simeq\\kappa_V^r$, $G|_V\\simeq\\kappa_V^s$ on each covering object $V$. Since $F$ and $G$ are flat (step 6), their tensor is the derived tensor, and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (applied to the restriction morphism with the ring isomorphism above) gives $(F\\otimes G)|_V\\simeq F|_V\\otimes G|_V$. The basis $e_i\\otimes f_j$ identifies this with $\\kappa_V^{rs}$. It is therefore a finite constant local model on each stratum, and $F\\otimes G$ is constructible. This includes rank zero and the empty stratum.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lemma-constructible-pullback-stratification",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "The stratum: common stratification, common trivializing cover, and the rank-rs tensor model"
+   }
+  },
+  {
+   "text": "Let $A,B\\in\\Dbc(S,\\kappa)$ with $S$ a standing scheme. The truncation triangles of [lem-weil-pbc-truncation-triangle] express each bounded object as finitely many extensions of shifts of its constructible cohomology sheaves. Steps 6 and 7 compute the tensor of any pair of these sheaves as a constructible sheaf. By step 1 tensor is exact in both variables, and [sk-def-sfb-bounded-constructible] says that the bounded constructible category is triangulated on this Noetherian $S$. Induct first through the finitely many truncation triangles for $A$ and then those for $B$ to obtain $A\\otimes^{\\mathbf L}_{\\kappa_S}B\\in\\Dbc(S,\\kappa)$. A cohomological bound is $[a+c,b+d]$ when the input bounds are $[a,b]$, $[c,d]$, since the tensor of $H^i(A)[-i]$ and $H^j(B)[-j]$ is concentrated in degree $i+j$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "The stratum: finite truncation induction establishing residue-field tensor closure"
+   }
+  },
+  {
+   "text": "Fix $L\\in\\Dbc(X,\\mathcal O_E)$. By step 1 and the triangulatedness assertion (1) of [sk-lem-int-integral-heart], the full class of $K$ for which $K\\otimes^{\\mathbf L}_{R_X}L$ is bounded constructible is closed under isomorphisms, shifts and extensions. Clause (2) of [det-lem-int-tensor-shriek] therefore reduces the claim to $K=a_!M$, where $a:S\\hookrightarrow X$ is a stratum inclusion and $M\\in\\Dbc(S,\\mathcal O_E)$ has the finite-free local models in the statement. A locally closed subscheme of a standing scheme is again separated finite type over $k$. The projection isomorphism in [det-lem-int-tensor-projection] gives\n$$(a_!M)\\otimes^{\\mathbf L}_{R_X}L\\simeq a_!(M\\otimes^{\\mathbf L}_{R_S}a^*L).$$\nClause (1) of [det-lem-int-tensor-shriek] says that $a_!$ preserves the integral category, so it remains to treat the inside tensor.",
    "uses": [
     "sk-lem-int-integral-heart",
     "det-lem-int-tensor-shriek",
     "det-lem-int-tensor-projection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Reduction to a stratum: finite extension devissage and the locally closed projection formula"
+   }
   },
   {
-   "text": "*The stratum.* By [det-lem-int-tensor-pullback], $N:=a^*L\\in\\Dbc(S,\\mathcal O_E)$; in\nparticular $N$ is derived complete, so $M\\otimes^{\\mathbf L}N$ is derived complete by\nthe first paragraph. Its reduction is, by associativity,\n$$\n(M\\otimes^{\\mathbf L}N)\\otimes^{\\mathbf L}\\mathcal O_E/\\pi_E\\simeq(M/\\pi_E)\\otimes^{\\mathbf L}_{\\mathbf F_{E,S}}(N/\\pi_E),\n\\qquad \\mathbf F_E=\\mathcal O_E/\\pi_E .\n$$\nBoth factors lie in $\\Dbc(S,\\mathbf F_E)$ (by [sk-prop-integral-criterion] for $N$,\nand for $M$ because it is locally a bounded complex of finite free modules on\nthe single stratum $S$). It remains to see that $\\Dbc(S,\\mathbf F_E)$ is closed\nunder $\\otimes^{\\mathbf L}$. Every $\\mathbf F_{E,S}$-module is flat: the tensor product\nover the constant sheaf of the field $\\mathbf F_E$ is the sheafification of the\nsectionwise tensor product over $\\mathbf F_E$, which is exact. So\n$\\otimes^{\\mathbf L}=\\otimes$ is exact in each variable, and by the truncation\ntriangles (both factors are bounded) it suffices to show that $F\\otimes G$ is\nconstructible for constructible sheaves $F$, $G$\n([sk-def-sfb-constructible]). Choose a common refinement of their\nstratifications and, on each stratum, a common refinement of the covers\ncarrying finite constant local models $F\\simeq\\mathbf F_E^r$, $G\\simeq\\mathbf F_E^s$\n(finitely presented modules over a field are free); then\n$F\\otimes G\\simeq\\mathbf F_E^{rs}$ there. Hence $F\\otimes G$ is constructible, the\nreduction of $M\\otimes^{\\mathbf L}N$ is bounded constructible, and\n$M\\otimes^{\\mathbf L}N\\in\\Dbc(S,\\mathcal O_E)$ by [sk-prop-integral-criterion].",
+   "text": "By clause (1) of [det-lem-int-tensor-pullback], $N=a^*L$ lies in $\\Dbc(S,\\mathcal O_E)$. Clause (2) of [sk-lem-integral-models] says precisely that $M$ and $N$ are derived complete and their reductions $\\bar M,\\bar N$ modulo $\\pi_E$ are bounded constructible complexes over the constant field $\\kappa_S$. Step 5 shows that $M\\otimes^{\\mathbf L}_{R_S}N$ is derived complete. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with ring map $R_S\\to\\kappa_S$. Its monoidal scalar-extension isomorphism gives\n$$(M\\otimes^{\\mathbf L}_{R_S}N)\\otimes^{\\mathbf L}_{R_S}\\kappa_S\\simeq\\bar M\\otimes^{\\mathbf L}_{\\kappa_S}\\bar N.$$\nThe right side is bounded constructible by step 8. It is pulled back from the étale site by [sk-thm-pe-constructible-comparison], applicable because $S$ is Noetherian and hence qcqs and $\\kappa$ is a discrete Noetherian ring. The two conditions of clause (2) of [sk-lem-integral-models] now imply $M\\otimes^{\\mathbf L}_{R_S}N\\in\\Dbc(S,\\mathcal O_E)$. This uses that node's actual residue criterion, replacing the nonexistent node sk-prop-integral-criterion in the imported proof.",
    "uses": [
     "det-lem-int-tensor-pullback",
-    "sk-def-sfb-constructible"
+    "sk-lem-integral-models",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-thm-pe-constructible-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "The stratum: completeness, monoidal reduction, residue comparison and integral criterion"
+   }
+  },
+  {
+   "text": "Apply $a_!$ to the membership established in step 10 and use step 9's projection isomorphism. This proves the claim for every generator $a_!M$. Induction through the finite extension construction supplied in step 9 proves it for every $K\\in\\Dbc(X,\\mathcal O_E)$. Throughout, the tensor was the ambient uncompleted tensor; completeness was proved, not imposed by replacing it with a completed tensor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "Reduction to a stratum and The stratum: conclusion through the finite extension construction"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-modobj-relative-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-derived-internal-hom",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-weil-pbc-proetale-site",
+  "lem-pc-homotopy-limit-map",
   "sk-def-pe-derived-completion",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-truncation-triangle",
+  "sk-def-sfb-bounded-constructible",
   "sk-lem-int-integral-heart",
   "det-lem-int-tensor-shriek",
   "det-lem-int-tensor-projection",
   "det-lem-int-tensor-pullback",
-  "sk-def-sfb-constructible"
+  "sk-lem-integral-models",
+  "sk-thm-pe-constructible-comparison",
+  "lemma-constructible-pullback-stratification"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "All three paragraphs, with the finite-free dual calculation from Stacks Tags 08JH, 08JB, 08JJ and the canonical duality construction of 0FPU, and residue flatness via Tag 03ET"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*tensor|tensor.*constructible|derivedComplete",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product preserves constructible integral adic complexes on the proetale site",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; HomologicalComplex.tensorObj; Algebra.IsIntegral.tensorProduct; Algebra.FormallyEtale.instTensorProduct; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, MonoidalCategory",
+   "results": "0 hits; loogle: unknown identifier 'MonoidalCategory'",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The uncompleted derived tensor product of bounded constructible integral adic sheaves is bounded constructible",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes of sheaves are dualizable and tensoring with them commutes with products and derived completion",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; CategoryTheory.Tor'; CategoryTheory.Tor; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyPerfect|dualPerfect|perfect.*[hH]om|[hH]om.*perfect",
+   "results": "Mathlib/RingTheory/Teichmuller.lean; Mathlib/RingTheory/Teichmuller.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a bounded finite free complex of sheaves equals tensor with the dual complex",
+   "results": "dualTensorHomEquivOfBasis; dualTensorHomEquiv; lTensorHomEquivHomLTensor; CategoryTheory.tensorRightHomEquiv; CategoryTheory.sheafHom; FDRep.dualTensorIsoLinHom; HomologicalComplex.tensorObj; PiTensorProduct.dualDistribEquiv",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsDualizable, CategoryTheory.ihom",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.IsDualizable'",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded complex of finite free sheaves on a ringed site the derived internal Hom is tensor with its dual",
+   "results": "SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.freeHomEquiv_comp_apply; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.ihomPoints; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.ihomPoints_symm_comp; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafHom|homComplex|DerivedCategory",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site derived sheaf Hom from a bounded complex of finite free modules is computed by the ordinary total Hom complex",
+   "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.mapFree; SheafOfModules.Presentation.mapGenerators; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.map; SheafOfModules.Presentation.mapRelations; SheafOfModules.freeHomEquiv_comp_apply",
+   "date": "2026-10-16",
+   "verdict": "no match for the item; hits concern ordinary algebraic completion, underived or pointwise tensor-Hom, sheaf free modules, or general complex infrastructure rather than both asserted integral constructibility and local-model preservation clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -71,5 +310,124 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-int-tensor"
+ "unit": "sk-lem-int-tensor",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-int-tensor-product",
+  "worker": "stage1",
+  "summary": "Kept both mathematical clauses and expanded standing coefficients and schemes; interpreted derived inverse limits as sequential towers, as in the source proof. Rebuilt the local-model duality argument from existing finite-free Hom computations and proved its triangle identities through the global closed adjunction, not local equality of derived maps. Proved product, tower and completion compatibility; repaired field-sheaf flatness and gave the finite truncation induction for constructibility. Reused the three same-unit integral-tensor detail statements and the existing integral comparison criterion. No new nodes or attachments. Landing-return repair: re-read the expanded Cartesian-coefficients statement, made its untwisted integral-coefficient specialization explicit in step 3, and refreshed the verbatim citation against the current DAG; no new dependencies or nodes.",
+  "blueprint": "Steps 1–5 realize Dualizability of a local model; steps 9 and 11 realize Reduction to a stratum; steps 6–8 and 10 realize The stratum. Unit sk-lem-int-tensor, step 3, is followed without a route change. The item is a detail node, not the unit key node, so the unit realization fields are not edited.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General existence of a flat-term K-flat replacement, needed for ambient tensor exactness. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "General exactness of tensor computed by a K-flat argument; the unit gives no abstract triangulated-functor lemma. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact",
+    "why": "Finite-free sheaf Hom is exact on any ringed site, used in the local calculation. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "A bounded source whose termwise internal Hom is exact computes RHom against arbitrary targets; this is not the constructibility theorem. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General bounded-flat K-flatness, used for the finite-free dual complex and residue sheaves. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General internal-Hom localization theorem, used to identify the canonical comparison on charts. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General monoidality of derived ringed-topos pullback, used for slices and for the identity-topos residue ring map. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact module restriction to a slice, used to detect isomorphisms on a cover. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General cohomology detection of isomorphisms, with no constructibility restriction. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-homotopy-limit-map",
+    "why": "Exact product-preserving functors preserve tower homotopy limits. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-sites-modules-sheafification-flat",
+    "why": "General Stacks 03ET tool transferring presheaf field flatness to field-module sheaves. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Identifies module sheafification and its scalar action when applying the flatness theorem. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "General sheaf tensor adjunction, supplying right exactness after finite-limit preservation. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "General finite truncation devissage used for the residue-field tensor calculation. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "sk-lem-int-integral-heart",
+    "why": "Its triangulatedness clause makes the tensor-preservation locus extension closed, exactly as the unit requires. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Only clause (2), the integral constructibility criterion, is used; clause (3), which already asserts tensor closure, is not used. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "General discrete Noetherian coefficient comparison supplies etale origin of the residue tensor. No node of the tensor unit states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "General sheafification and monoidal local-equivalence input to the internal-module/section-module equivalence; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies covering-chart pro-etale sites with slices, needed to apply the generic ringed-site Hom calculation; no node of this unit supplies it."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Its clause (1) identifies the chart coefficient ring with the restricted one; this is the coefficient compatibility used by the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pc-homotopy-limit-map",
+  "lem-pc-sites-modules-sheafification-flat",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-truncation-triangle",
+  "sk-lem-int-integral-heart",
+  "sk-lem-integral-models",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-d8bb216f8",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-d8bb216f8 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 11 steps, all 40 cited statements, the blueprint main-20261015 statement and its three-paragraph proof, unit step 3 of sk-lem-int-tensor, and Stacks 08JH/08JJ/08JB/0FPU/03ET at their labels (sites-cohomology.tex:11912, sites-modules.tex:4293). There are no new nodes. The coefficient sheaf is p_X^*O_E as in the source, the tensor is uncompleted, and both clauses are kept. Narrowing 'derived inverse limits' to sequential ones is the source proof's own reading and the report names it. The two source errors are correctly identified and repaired: evaluation is not invertible for R^2, and equalities of maps cannot be checked locally; step 4 proves both triangle identities through the global adjunction. Step 2 signs checked: (-1)^{a+b+1} = -(-1)^n. Steps 3, 5, 6 and 8–11 use hypotheses their cited nodes actually state. Step 10 uses only the iff criterion of sk-lem-integral-models (2), not clause (3), and gets etale origin from sk-thm-pe-constructible-comparison (S qcqs, kappa finite). No path from any dependency leads back to the item or the unit. det-lem-integral-models-operations (2) and lem-sfb-dc-tensor-preserves overlap clause 1 only, so they are not a fault of this split. One repair (C1/C2): step 7 was marked elementary but used the common refinement of scheme stratifications, coefficient and local-model restriction, and restriction commuting with tensor, none of them cited. The fixed file cites lemma-constructible-pullback-stratification (closed), sk-prop-sfb-cartesian-coefficients (1) and lem-weil-pbc-ringed-topoi-derived-tensor-pullback, sets elementary false, and adds the one new dependency to proof_deps. I accept all 20 declared tool_uses.; 1 file(s) fixed by the reviewer"
+ }
 }

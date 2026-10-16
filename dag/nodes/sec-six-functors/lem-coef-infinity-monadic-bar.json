@@ -30,9 +30,112 @@
   "def-weil-pbc-simplicial-set",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Alg}_T(\\mathcal C)$, and write $V:\\mathcal A\\to\\mathcal C$ and $F:\\mathcal C\\to\\mathcal A$ for the forgetful and free adjunction in [lem-coef-infinity-free-module-bar]. Write $K:\\mathcal D\\to\\mathcal A$ for the comparison in the statement, so $VK=U$ with its specified coherence. At $c\\in\\mathcal C$, $KLc$ is $ULc=Tc$ with action $U\\epsilon_{Lc}=\\mu_c$, including the same coherent action data as the free module $Fc$. Thus $KL\\simeq F$. For every $Z$ the original adjunction and the free adjunction give $\\operatorname{Map}_{\\mathcal D}(Lc,Z)\\simeq\\operatorname{Map}_{\\mathcal C}(c,UZ)\\simeq\\operatorname{Map}_{\\mathcal A}(Fc,KZ)$. This is the actual comparison-induced map: a map $f:Lc\\to Z$ goes under the free adjunction to $U(f)\\eta_c$, its original adjunct. In particular the universal arrow $Fc\\to K(Lc)$ has underlying map $1_{Tc}$, since $\\mu_c T\\eta_c=1_{Tc}$.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.7.3.13, proof: free objects belong to the domain of the partial left adjoint; online, not archived."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A_0$ be the full subcategory on objects equivalent to some $Fc$. Step 1 supplies universal arrows $M\\to K(GM)$ with $GM=Lc$ when $M=Fc$. Existence for an equivalent free object follows by precomposing the universal arrow by its specified equivalence. Apply the opposite assertion of [lem-coef-parametric-universal-arrows] to obtain a coherent partial left adjoint $G:\\mathcal A_0\\to\\mathcal D$ and coherent universal transformation $u:\\iota\\to KG$. Its components are equivalences: on $Fc$ this is the identity on the free action from Step 1, and any other universal-arrow choice is equivalent by the contractibility assertion of the same node. The functor-category component criterion makes $u$ a coherent natural equivalence. Hence $UG\\simeq V\\iota$ coherently, and all morphisms between free objects, including those not induced by a map of their generators, have been lifted by this partial adjoint.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.7.3.13, proof: the partial left adjoint on the full subcategory of corepresentable modules; online, not archived."
+   }
+  },
+  {
+   "text": "For $M=(A,a)$ take the coherent free resolution $R_\\bullet M\\to M$ of [lem-coef-infinity-free-module-bar]. Its entire simplicial diagram factors through the full subcategory $\\mathcal A_0$, because all vertices are free modules; fullness retains every simplex. Define $P_\\bullet(M)=G(R_\\bullet M)$ and $H(M)=|P_\\bullet(M)|$ in $\\mathcal D$. This realization exists by the hypothesis on $\\mathcal D$; no realization of an arbitrary diagram in $\\mathcal C$ or $\\mathcal A$ is asserted. The mapping-space colimit criterion, the coherent partial adjunction, and the colimit assertion for $R_\\bullet M$ give, naturally in $Z$,\n$$\\operatorname{Map}_{\\mathcal D}(H(M),Z)\\simeq\\lim_{[r]\\in\\Delta}\\operatorname{Map}_{\\mathcal D}(P_r(M),Z)\\simeq\\lim_{[r]\\in\\Delta}\\operatorname{Map}_{\\mathcal A}(R_rM,KZ)\\simeq\\operatorname{Map}_{\\mathcal A}(M,KZ).$$\nThe middle equivalence respects the whole cosimplicial diagram by the coherent partial adjunction, not just its vertices. Explicitly, by the dual cocone clause of [lem-cbc-enhanced-functor-cone-calculus] the outer two equivalences are $\\operatorname{Map}_{\\mathcal D}(H(M),Z)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(\\Delta)^{\\mathrm{op}},\\mathcal D)}(P_\\bullet(M),\\Delta Z)$ and $\\operatorname{Map}_{\\mathcal A}(M,KZ)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(\\Delta)^{\\mathrm{op}},\\mathcal A)}(R_\\bullet M,\\Delta KZ)$, and the dual functor-category formula of [lem-coef-parametric-universal-arrows], applied with $B=R_\\bullet M$ and the constant diagram at $Z$ (whose image under $K$ is the constant diagram at $KZ$), identifies these two mapping spaces. Apply the dual pointwise adjoint criterion to these representing objects to obtain $H\\dashv K$ with coherent unit $\\alpha$ and counit $\\beta$.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.7.3.13, proof: corepresent the mapping functor by the realization of the lifted free resolution; online, not archived."
+   }
+  },
+  {
+   "text": "The unit $\\alpha_M:M\\to KH(M)$ is the map induced from the coherent cocone $R_rM\\xrightarrow{u}KP_r(M)\\to KH(M)$. Indeed this cocone is the image of $1_{H(M)}$ under the displayed representing equivalence of Step 3; this identifies the unit rather than merely some map with the same source and target. Since $VR_\\bullet M\\to A$ is split, [lem-coef-infinity-split-augmentation-colimit] identifies its realization with $A$. The coherent equivalence $u$ of Step 2 identifies this diagram with $UP_\\bullet(M)$. Consequently the underlying unit is the composite\n$$A\\simeq|VR_\\bullet M|\\xrightarrow{|Vu|}|UP_\\bullet(M)|\\longrightarrow U|P_\\bullet(M)|=UH(M).$$\nThe last arrow is the canonical colimit comparison, an equivalence by preservation of realizations by $U$. Thus $V\\alpha_M$ is an equivalence. Conservativity of $V$, supplied by the free-module lemma, makes $\\alpha_M$ an equivalence in $\\mathcal A$.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-split-augmentation-colimit",
+    "lem-coef-infinity-pointwise-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 4.7.3.13, proof: underlying comparison unit is the realization comparison map; online, not archived."
+   }
+  },
+  {
+   "text": "For $Z\\in\\mathcal D$, the triangle identity $K(\\beta_Z)\\alpha_{KZ}\\simeq1_{KZ}$ and Step 4 imply that $K(\\beta_Z)$ is an equivalence. Applying $V$ shows that $U(\\beta_Z)$ is an equivalence, and the assumed conservativity of $U$ makes $\\beta_Z$ an equivalence. The component criterion upgrades $\\alpha$ and $\\beta$ to coherent natural equivalences. Thus $H$ and $K$ are coherent quasi-inverses. This is an equivalence over $\\mathcal C$: the comparison already satisfies $VK\\simeq U$, and $V\\alpha:V\\simeq UH$ supplies the compatibility for its inverse. The mapping-space clause follows from the functor-equivalence assertion of [lem-cbc-enhanced-functor-cone-calculus]; composition is respected by the coherent functors and these coherent equivalence witnesses.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 4.7.3.5, proof after Lemma 4.7.3.13: conservative comparison with fully faithful left adjoint; online, not archived."
+   }
+  },
+  {
+   "text": "We identify the lifted resolution at $M=KZ$ explicitly. Its terms are $P_r(KZ)=G(F(T^rUZ))\\simeq L T^rUZ$. The degree-zero augmentation, adjunct to the action of $KZ$, is $\\epsilon_Z:LUZ\\to Z$. For $r\\geq1$ the first face of the free resolution is the free-module counit, whose image under $G$ is $\\epsilon_{L T^{r-1}UZ}:LUL T^{r-1}UZ\\to L T^{r-1}UZ$: its adjunct is the identity on $T^rUZ$, by the triangle identity. For $1\\leq i<r$, the $i$th face is $L T^{i-1}(\\mu_{T^{r-i-1}UZ})$, while the last is $L T^{r-1}(U\\epsilon_Z)$. Substituting $\\mu=U\\epsilon L$ shows that these are exactly the counit applied at the $r+1$ possible $LU$ positions in $(LU)^{r+1}Z$. For $0\\leq i\\leq r$ the degeneracy is $L T^i(\\eta_{T^{r-i}UZ})$, inserting $L\\eta U$ between the corresponding adjacent $LU$ factors. These identifications hold coherently: the formulas are the mates of the specified free-module operators under the coherent partial adjunction, whose functor-category version in [lem-coef-parametric-universal-arrows] retains all simplices and commutes with restriction. Hence this is the actual augmented counit bar $B_\\bullet Z$, natural in $Z$, and not a diagram built only in the homotopy category.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Lemma 4.7.3.13, Proposition 4.7.3.14 and Remark 4.7.3.15: identify the lifted free bar for a comparison algebra; online, not archived."
+   }
+  },
+  {
+   "text": "Applying $U$ to Step 6 gives exactly the underlying module bar $VR_\\bullet(KZ)\\to UZ$. Its coherent splitting, supplied by [lem-coef-infinity-free-module-bar], has $h_{-1}=\\eta_{UZ}$ and $h_r=\\eta_{T^{r+1}UZ}$, so inserts the unit before the first factor. By [lem-coef-infinity-split-augmentation-colimit] this augmentation is colimiting. If $b_Z:|B_\\bullet Z|\\to Z$ is the map induced by its augmentation, the composite $|UB_\\bullet Z|\\to U|B_\\bullet Z|\\xrightarrow{U b_Z}UZ$ is the equivalence given by that split augmentation. The first map is an equivalence by the preservation hypothesis, so $U b_Z$, and then $b_Z$ by conservativity, is an equivalence. Thus the specified augmented bar realizes $Z$. Naturality includes the augmentation and the splitting, since the module bar, partial adjunction and realization all used coherent functors. The same mapping-space criterion used in Step 3 makes the space of colimiting choices contractible, so no unrelated objectwise choices replace this coherent construction.",
+   "uses": [
+    "lem-coef-infinity-free-module-bar",
+    "lem-coef-infinity-split-augmentation-colimit",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Example 4.7.2.7 and Proposition 4.7.3.14 with Remark 4.7.3.15: split counit bar and its natural augmentation; online, not archived."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-free-module-bar",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-split-augmentation-colimit",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-parametric-universal-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent finite-level mapping-complex adjunction. Detailed proof follows the online Higher Algebra 4.7.3.13 argument and identifies the specified bar; HA is not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +192,38 @@
    "results": "{\"t\": \"2026-10-16T16:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"Conservative right adjoint preserving geometric realizations is monadic for infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Monad.monadicOfHasPreservesReflectsGSplitCoequalizers\", \"CategoryTheory.monadicOfReflective\", \"CategoryTheory.Monad.monadicOfHasPreservesGSplitCoequalizersOfReflectsIsomorphisms\", \"CategoryTheory.MonadicRightAdjoint\", \"CategoryTheory.monadicLeftAdjoint\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"29a0fe1cf907cfd2\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reader inspected the returned statements. Ordinary monad algebras, full faithful presentability transfer, ordinary derived categories and ordinary Beck coequalizers do not assert this general foundation."
+  },
+  {
+   "tool": "grep",
+   "query": "monadic|BarrBeck|extraDegeneracy|ExtraDegeneracy",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"grep\", \"query\": \"monadic|BarrBeck|extraDegeneracy|ExtraDegeneracy\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"fe27a54839cb7110\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad.Monadicity proves ordinary Beck/coequalizer results; Monad.comparison has an ordinary Category instance, not a quasicategory of coherent actions. No result states the mapping-space equivalence and coherent bar realization here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Barr Beck monadicity of quasicategories via geometric realizations",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"leansearch\", \"query\": \"Barr Beck monadicity of quasicategories via geometric realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monad.monadicOfHasPreservesGSplitCoequalizersOfReflectsIsomorphisms\", \"CategoryTheory.Monad.monadicOfHasPreservesReflectsGSplitCoequalizers\", \"CategoryTheory.Monad.monadicOfHasPreservesReflexiveCoequalizersOfReflectsIsomorphisms\", \"SSet.toTop\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.monadicAdjunction\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\"], \"digest\": \"e87cc629bfaf5617\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad.Monadicity proves ordinary Beck/coequalizer results; Monad.comparison has an ordinary Category instance, not a quasicategory of coherent actions. No result states the mapping-space equivalence and coherent bar realization here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monad\", \"comparison\"",
+   "results": "{\"t\": \"2026-10-16T18:31:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monad\\\", \\\"comparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.comparison\", \"CategoryTheory.Monad.comparison\", \"CategoryTheory.instFaithfulAlgebraToMonadComparison\", \"CategoryTheory.Comonad.comparison_faithful_of_faithful\", \"CategoryTheory.Comonad.comparison_obj_A\", \"CategoryTheory.Monad.comparison_obj_A\", \"CategoryTheory.Comonad.comparisonForget\", \"CategoryTheory.Monad.comparisonForget\"], \"digest\": \"c92c6fd7712c02ba\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad.Monadicity proves ordinary Beck/coequalizer results; Monad.comparison has an ordinary Category instance, not a quasicategory of coherent actions. No result states the mapping-space equivalence and coherent bar realization here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conservative right adjoint of infinity categories preserving geometric realizations is monadic with counit bar resolution",
+   "results": "{\"t\": \"2026-10-16T18:31:56Z\", \"tool\": \"leanfinder\", \"query\": \"Conservative right adjoint of infinity categories preserving geometric realizations is monadic with counit bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isRightAdjoint_triangle_lift_monadic\", \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction\", \"CategoryTheory.Monad.MonadicityInternal.leftAdjointComparison\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit\", \"CategoryTheory.MonadicRightAdjoint.adj\", \"CategoryTheory.instMonadicRightAdjointAlgebraForget\", \"CategoryTheory.Monad.adj_counit\"], \"digest\": \"01aa62b3927b994d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Monad.Monadicity proves ordinary Beck/coequalizer results; Monad.comparison has an ordinary Category instance, not a quasicategory of coherent actions. No result states the mapping-space equivalence and coherent bar realization here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -100,5 +231,29 @@
   "group": "Q42"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-monadic-bar",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved the monadic comparison by a coherent partial left adjoint on free algebras and its extension by module bar realizations, then proved the unit and counit are equivalences and identified the actual counit bar. Added two general statement-only foundations, for arbitrary coherent monads and arbitrary split augmented diagrams, not a restated Barr--Beck theorem. Read HA online, all cited existing statements, project Lean searches and actual Mathlib candidates.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. This supplies only the generic coherent monadic/bar foundation of the finite derived section comparison; the integral coefficient and geometric route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise equivalence and mapping-space calculus for coherent functors, including contractible colimit choices; no geometric unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NI-fc47a8c88",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-fc47a8c88 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the unit and the main-20261015 paragraph 2 in full. HA and HTT are not archived locally; I checked the cited places (HA 4.2.3.2, 4.2.4.8, 4.7.2.1-2.7, 4.7.3.5, 4.7.3.13; HTT 6.1.3.16) from my own knowledge of those texts. The item is Barr-Beck-Lurie with the counit bar. Its hypotheses (D has realizations, U preserves them, U conservative) are stronger than HA's, so the statement is true and unchanged. Step 1: the free adjunct of eta_c has underlying map 1 by the triangle identity, and the induced map sends f to U(f)eta_c, so the arrow is universal. Step 2: the opposite clause of parametric-universal-arrows gives G, and conservativity of V makes u an equivalence. Step 3: the realization chain uses only realizations in D. Fault (C1), now fixed: step 3 compared lim Map(P_r,Z) with lim Map(R_r,KZ) through the parametric node's functor-category formula but did not cite the cocone-to-functor-category bridge. I added lem-cbc-enhanced-functor-cone-calculus to step 3's uses (it was already in proof_deps and declared as a tool use) and one sentence writing out that chain. Step 4: V alpha is a map between two colimits, one by the split, one because U preserves realizations; V conservative then makes alpha an equivalence. Step 5: the triangle identity plus U conservative make beta an equivalence. Step 6: every face, degeneracy and the augmentation match the counit bar, checked including r=0 and r=1. Step 7: the split augmentation, preservation and two-out-of-three make b_Z an equivalence. New split-augmentation node: Delta_{-infty} and 'split' agree with HA 4.7.2.1-2 and the colimit claim with HTT 6.1.3.16; statement only. New free-module node: operator formulas checked against the simplicial and unit laws; the colimit in Alg_T holds because the underlying diagram is split; statement only, and it does not restate a clause of the item. Not duplicates of the existing extra-degeneracy, monadic-comparison, free-simplicial-resolution, free-monad, accessible-monad or operadic nodes, which are strict, need extra realizations, give existence only, or assume presentability. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus. No SGA source; no target, coefficient category or base-change morphism involved. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-infinity-monadic-bar.json.; 1 file(s) fixed by the reviewer"
+ }
 }
