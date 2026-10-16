@@ -33,7 +33,15 @@
   "def-pur-sheaf-inverse-limit",
   "def-weil-derived-limit",
   "def-pc-sheaf-restrict-scalars",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-completed-integral-coefficients"
  ],
  "proof": [
   {
@@ -402,5 +410,27 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-2325107df (reviewer sub-agent of L); spot-checked: Read the full delivery, unit route, cited nodes, Stacks Tags 09C2/09C3 and supporting sources. Verified all eight proof steps, the unsplit bounds lemma, hypotheses, cone induction, edge cases, Mathlib searches, duplicate/cycle checks, and no SGA route. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ResidueLisseProjectiveModels",
+  "declaration": "WeilConjectures.residue_lisse_projective_models",
+  "file": "lean/Sheaf/Paper/ResidueLisseProjectiveModels.lean",
+  "statement": "theorem residue_lisse_projective_models (S : Scheme.{u}) (hS : IsAffine S) (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1} (Scheme.ProEt.mk (𝟙 S))) (K : DerivedCategory (integralTowerModules.{u, u} l E S)) (hcomplete : IsDerivedCompleteUnrestricted l E S K) (hresidue : intrinsicFiniteTorsionConstructible l E 1 (by omega) S ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K)) (hlisse : ∀ q : ℤ, IsLocallyConstantProEtaleModuleSheaf S (Padic.coefficientExtensionRing l E 1) ((DerivedCategory.homologyFunctor (proEtaleRingModules S (proEtaleConstantRing S (Padic.coefficientExtensionRing l E 1))) q).obj ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K))) (hTor : HasFiniteProEtaleTorAmplitude S (Padic.coefficientExtensionRing l E 1) ((scalarReductionDerivedExtension.{u, u} l E S 0).obj K)) : ∃ (n : ℕ) (U : Fin n → S.Opens), (⨆ i, U i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧ ∀ i : Fin n, ∃ (P : CochainComplex (integralTowerModules.{u, u} l E (U i).toScheme) ℤ) (a b : ℤ), a ≤ b ∧ P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ r : ℤ, ∃ (N : ℕ) (ι : P.X r ⟶ ∏ᶜ fun _ : Fin N ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (U i).toScheme)) (ρ : (∏ᶜ fun _ : Fin N ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (U i).toScheme)) ⟶ P.X r), ι ≫ ρ = 𝟙 _) ∧ Nonempty ((integralDerivedPullback l E (U i).ι).obj K ≅ DerivedCategory.Q.obj P)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.residue_lisse_projective_models"
+  ],
+  "note": "Second reading: added the missing global residue local-constancy hypothesis, fixed the set-sheaf universe, supplied the eight-step proof docstring and recorded imports, and reused existing full-site instances instead of four copied transports. Intrinsic sheaf Tor amplitude is the equivalent localization-stable universal test; on the finite clopen cover, completed pullback of the complete K is ordinary restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-39ed497ca",
+  "group": "NB",
+  "result": "pass",
+  "note": "All statement clauses, dependencies, source alignment, universes, edge cases, docstrings, report sections, and per-file scompile evidence checked; no defects found."
  }
 }
