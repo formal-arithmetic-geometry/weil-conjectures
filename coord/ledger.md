@@ -15497,3 +15497,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: returned deliver/D3/Sheaf.Paper.IntegralResidueProjectionNormalization (reviewer RETURN: (the landing tools, head 5d481b7cd) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 
 - 17:18 L: batch 20261016T091259 dependency take-out
+- 09:22 L: returned deliver/A2/Sheaf.Paper.RingedTopoiTensorComparisonConstruction (reviewer RETURN: (the landing tools, head bb80dc85a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
