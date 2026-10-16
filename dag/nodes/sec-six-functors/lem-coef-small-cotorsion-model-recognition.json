@@ -23,9 +23,126 @@
  "stmt_deps": [
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Small colimits are part of [def-sp-grothendieck-abelian]. Apply [lem-coef-grothendieck-small-limits] and [lem-coef-grothendieck-locally-presentable] with the same fixed universe to obtain all small limits and local presentability. Put $C=\\operatorname{Mon}(\\mathcal Q)$, $C_0=\\operatorname{Mon}(\\mathcal Q\\cap\\mathcal W)$, $R=\\operatorname{Epi}(\\mathcal F)$ and $R_0=\\operatorname{Epi}(\\mathcal F\\cap\\mathcal W)$; Mon and Epi specify, respectively, the indicated cokernel and kernel class.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-coef-grothendieck-small-limits",
+    "lem-coef-grothendieck-locally-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: bicompleteness, size convention and four morphism classes"
+   }
+  },
+  {
+   "text": "For either given cotorsion pair $(\\mathcal L,\\mathcal T)$, [lem-coef-cotorsion-orthogonality-calculus] gives extension and retract closure, and zero membership, of both halves, and the lifting property of every $\\operatorname{Mon}(\\mathcal L)$ against every $\\operatorname{Epi}(\\mathcal T)$. For composable monomorphisms $i:A\\to B$ and $j:B\\to D$, apply the snake lemma to the exact rows $A\\xrightarrow{1_A}A\\to0\\to0$ and $B\\xrightarrow{j}D\\to\\operatorname{Coker}j\\to0$, with vertical maps $i,ji$ and $0:0\\to\\operatorname{Coker}j$. All three vertical kernels are zero, and the vertical cokernels are $\\operatorname{Coker}i$, $\\operatorname{Coker}(ji)$ and $\\operatorname{Coker}j$. The cited six-term sequence, with its epic last arrow, therefore gives $0\\to\\operatorname{Coker}i\\to\\operatorname{Coker}(ji)\\to\\operatorname{Coker}j\\to0$ directly. For composable epimorphisms $p:X\\to Y$ and $q:Y\\to Z$, apply the same cited snake statement to the rows $0\\to X\\xrightarrow{1}X\\to0$ and $\\operatorname{Ker}q\\to Y\\xrightarrow{q}Z\\to0$, with vertical maps $0,p,qp$. Its exact sequence is $0\\to\\operatorname{Ker}p\\to\\operatorname{Ker}(qp)\\to\\operatorname{Ker}q\\to0$, since $\\operatorname{Coker}p=0$. Thus each of $C,C_0,R,R_0$ is composition closed. Each is retract closed: kernels and cokernels send retract diagrams of arrows to retract diagrams of objects, and monicity and epicity persist under arrow retracts.",
+   "uses": [
+    "lem-coef-cotorsion-orthogonality-calculus",
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: lifting, closure, and kernel/cokernel sequences for compositions"
+   }
+  },
+  {
+   "text": "Here is the factorization for a complete cotorsion pair $(\\mathcal L,\\mathcal T)$. Given $f:A\\to B$, choose $0\\to A\\xrightarrow{u}T_0\\to L_0\\to0$ by completeness. The graph $h=(f,u):A\\to B\\oplus T_0$ is monic. Let $D=\\operatorname{Coker}h$, and choose $0\\to T_1\\to L_1\\xrightarrow{v}D\\to0$. Pull this sequence back along $B\\oplus T_0\\to D$ to form $E$. The pushout-of-short-exact-sequence theorem, applied in the opposite abelian category, gives $0\\to T_1\\to E\\xrightarrow{e}B\\oplus T_0\\to0$. The graph lifts to $i:A\\to E$ with zero $L_1$ component. It is monic and has cokernel $L_1$: the other pullback projection $E\\to L_1$ has kernel $A$ and is epic, by the same opposite-category theorem applied to $0\\to A\\to B\\oplus T_0\\to D\\to0$. Put $p=\\operatorname{pr}_B e$, an epimorphism with $pi=f$. Pulling back $e$ to $T_0\\subset B\\oplus T_0$ identifies $\\operatorname{Ker}p$ in $0\\to T_1\\to\\operatorname{Ker}p\\to T_0\\to0$, so it lies in $\\mathcal T$ by extension closure. This constructs a $\\operatorname{Mon}(\\mathcal L)$--$\\operatorname{Epi}(\\mathcal T)$ factorization. Opposite-category use is legitimate: kernels become cokernels, monics become epics, and short exactness reverses.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-coef-cotorsion-orthogonality-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: explicit graph and pullback factorization; both completeness sequences used"
+   }
+  },
+  {
+   "text": "Together with lifting and retract closure, these factorizations give the exact lifting classes. If $f$ has the left lifting property against all $\\operatorname{Epi}(\\mathcal T)$, factor $f=pi$ as in Step 3 and use the square with top $i$, bottom identity, left $f$, right $p$. Its diagonal $s$ satisfies $sf=i$ and $ps=1$, making $f$ an arrow retract of $i$. If $f:A\\to B$ has the right lifting property against all $\\operatorname{Mon}(\\mathcal L)$, factor $f=pi$ with $i:A\\to E$ and $p:E\\to B$. Use the square with left side $i$, right side $f$, top $1_A$ and bottom $p$; its diagonal $r:E\\to A$ satisfies $ri=1_A$ and $fr=p$. Thus $(i,1_B):f\\to p$ and $(r,1_B):p\\to f$ compose to the identity, so $f$ is an arrow retract of $p$. Therefore $(C,R_0)$ and $(C_0,R)$ are weak factorization systems. Smallness supplies sets $I,J$ with $I^{\\square}=R_0$ and $J^{\\square}=R$. Apply [lem-coef-presentable-small-object-factorization] using Step 1. Its left classes are ${}^{\\square}R_0=C$ and ${}^{\\square}R=C_0$ by the just-proved equalities. Hence both required factorizations can now be fixed functorially, and the systems are generated by the asserted sets.",
+   "uses": [
+    "lem-coef-presentable-small-object-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: retract argument and functorial upgrade; uses Steps 1-3"
+   }
+  },
+  {
+   "text": "Define $V$ to be the composites $qj$ with $j\\in C_0$, $q\\in R_0$. For any factorization $f=qi$ with $i\\in C$, $q\\in R_0$, we claim $f\\in V$ if and only if $\\operatorname{Coker}i\\in\\mathcal W$. The reverse direction follows directly from the definition. For the forward direction write also $f=q'j$ with $j\\in C_0,q'\\in R_0$, and form $P=\\operatorname{cod}(i)\\times_{\\operatorname{cod}(f)}\\operatorname{cod}(j)$. The two projections are epic with kernels $\\operatorname{Ker}q'$ and $\\operatorname{Ker}q$, by the opposite-category form of [lem-weil-pbc-pushout-short-exact-sequence]. The diagonal $a:\\operatorname{dom}(f)\\to P$ is monic. The snake lemma on the two short exact rows with first vertical map identity gives, respectively, $0\\to\\operatorname{Ker}q'\\to\\operatorname{Coker}a\\to\\operatorname{Coker}i\\to0$ and $0\\to\\operatorname{Ker}q\\to\\operatorname{Coker}a\\to\\operatorname{Coker}j\\to0$. The two kernels and $\\operatorname{Coker}j$ lie in $\\mathcal W$. Thickness first puts $\\operatorname{Coker}a$ and then $\\operatorname{Coker}i$ in $\\mathcal W$. This proves the criterion for every such factorization, not merely the chosen one.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: factorization-independent cokernel criterion"
+   }
+  },
+  {
+   "text": "For $q\\in R_0$ and any $h$ composable after $q$, we prove $hq\\in V\\Longleftrightarrow h\\in V$. Write $h=sk$ with $k\\in C,s\\in R_0$ and $kq=tl$ with $l\\in C,t\\in R_0$. The square $tl=kq$ has horizontal monics $l,k$ and vertical epics $q,t$. Apply [lem-weil-pbc-snake-lemma-abelian] to the exact rows ending in their cokernels. It gives $0\\to\\operatorname{Ker}q\\to\\operatorname{Ker}t\\to\\operatorname{Coker}l\\to\\operatorname{Coker}k\\to0$; the last arrow $\\gamma:\\operatorname{Coker}l\\to\\operatorname{Coker}k$ is epic because $\\gamma\\pi_l=\\pi_k t$ and the quotient $\\pi_k$ and $t$ are epic. Let $H$ be the image of $\\operatorname{Ker}t\\to\\operatorname{Coker}l$. Then $0\\to\\operatorname{Ker}q\\to\\operatorname{Ker}t\\to H\\to0$ and $0\\to H\\to\\operatorname{Coker}l\\to\\operatorname{Coker}k\\to0$ are short exact. The two kernels lie in $\\mathcal W$, so thickness puts $H$ there and shows $\\operatorname{Coker}l\\in\\mathcal W$ if and only if $\\operatorname{Coker}k\\in\\mathcal W$. Since $st\\in R_0$ by Step 2, apply Step 5 to $h=sk$ and $hq=(st)l$. This proves the claimed cancellation equivalence without assuming two-out-of-three.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: cancellation of a trivial epimorphism via a five-term exact sequence"
+   }
+  },
+  {
+   "text": "For composable $f,g$, choose $f=qi$ and $gq=rj$ with $i,j\\in C$ and $q,r\\in R_0$. Then $gf=r(ji)$ with $ji\\in C$. Step 5 gives $f\\in V\\Longleftrightarrow\\operatorname{Coker}i\\in\\mathcal W$, $gq\\in V\\Longleftrightarrow\\operatorname{Coker}j\\in\\mathcal W$, and $gf\\in V\\Longleftrightarrow\\operatorname{Coker}(ji)\\in\\mathcal W$. Step 6 replaces $gq\\in V$ by $g\\in V$. The snake-lemma short exact sequence $0\\to\\operatorname{Coker}i\\to\\operatorname{Coker}(ji)\\to\\operatorname{Coker}j\\to0$ of Step 2 and thickness now prove all three implications of two-out-of-three for $V$. This covers arbitrary arrows; no monicity or epicity of $f,g$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: two-out-of-three reduced to one short exact sequence"
+   }
+  },
+  {
+   "text": "Use the fixed functorial $(C,R_0)$ factorization from Step 4. A retract of arrows $f\\to g\\to f$ induces a retract of the corresponding left factors and therefore a retract $\\operatorname{Coker}i_f\\to\\operatorname{Coker}i_g\\to\\operatorname{Coker}i_f$: the composite is identity because the factorization and cokernel assignments preserve identities and composition. If $g\\in V$, Step 5 puts $\\operatorname{Coker}i_g$ in $\\mathcal W$; retract closure puts $\\operatorname{Coker}i_f$ there, so $f\\in V$. Thus $V$ is retract closed. This uses functoriality already established, not an unproved retract-closure theorem for a class of composites.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: explicit arrow-retract argument using Steps 4-5"
+   }
+  },
+  {
+   "text": "If $i\\in C$, the factorization $i=1\\,i$ and Step 5 give $i\\in V$ exactly when $i\\in C_0$, hence $C\\cap V=C_0$. If $p\\in R\\cap V$, write $p=qj$ with $j\\in C_0,q\\in R_0$. Apply the snake lemma to the rows $A\\xrightarrow{j}E\\to\\operatorname{Coker}j\\to0$ and $B\\xrightarrow{1}B\\to0\\to0$, with vertical maps $p,q,0$. Since $p,q$ are epic, this gives $0\\to\\operatorname{Ker}p\\to\\operatorname{Ker}q\\to\\operatorname{Coker}j\\to0$. The last two objects are in $\\mathcal W$, so thickness gives $\\operatorname{Ker}p\\in\\mathcal W$, hence $p\\in R_0$. Conversely $R_0\\subset V$ by factoring with identity left factor, so $R\\cap V=R_0$. Now the two systems of Step 4 are exactly the cofibration/trivial-fibration and trivial-cofibration/fibration systems; Steps 7-8 give the remaining weak-equivalence axioms, and Step 1 gives small limits and colimits. The cofibrant and fibrant objects are exactly $\\mathcal Q$ and $\\mathcal F$, since $0\\to X$ has cokernel $X$ and $X\\to0$ has kernel $X$. The acyclic objects are exactly $\\mathcal W$: factor $0\\to X$ as $0\\to E\\xrightarrow{q}X$ with $q\\in R_0$; then $0\\to\\operatorname{Ker}q\\to E\\to X\\to0$ and Step 5 show $0\\to X\\in V\\Longleftrightarrow E\\in\\mathcal W\\Longleftrightarrow X\\in\\mathcal W$. Local presentability, generating sets and functoriality have already been established in Steps 1 and 4, giving the claimed combinatorial abelian model structure and every specified class of maps.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent proof: intersection identities and assembly of all model axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-coef-grothendieck-small-limits",
+  "lem-coef-grothendieck-locally-presentable",
+  "lem-coef-cotorsion-orthogonality-calculus",
+  "lem-weil-pbc-snake-lemma-abelian",
+  "def-sp-abelian",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-coef-presentable-small-object-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Full independent argument below the blueprint unit. Hovey 2002 and the general locally presentable small-object reference are not archived; WANTED entries and the exact supporting local sources are recorded in report.md. Online Hovey 2007 Theorem 2.5 was checked only as a statement cross-check, not substituted for a proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,15 +192,67 @@
    "date": "2026-10-16",
    "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
    "verdict": "no match: independently read the returned declarations; none states this foundation. The recognition hits provide injective factorizations or assume model axioms, the flat hits are K-injective/K-projective orthogonality, and the stability hits concern ordinary localization only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hovey correspondence: two compatible complete small cotorsion pairs in a Grothendieck abelian category yield a combinatorial abelian model structure",
+   "results": "8 hits: CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.IsGrothendieckAbelian.instHasFunctorialFactorizationMonomorphismsRlp, CategoryTheory.IsGrothendieckAbelian.hasSeparator, CategoryTheory.IsGrothendieckAbelian, CategoryTheory.IsGrothendieckAbelian.enoughInjectives, CategoryTheory.IsGrothendieckAbelian.ab4OfSize, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms_rlp, CategoryTheory.IsGrothendieckAbelian.locallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match: returned Grothendieck structure and ModelCategory constructors do not deduce model axioms or their functorial factorizations from cotorsion pairs. The two grep hits are bibliographic references, not recognition declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotorsion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: returned Grothendieck structure and ModelCategory constructors do not deduce model axioms or their functorial factorizations from cotorsion pairs. The two grep hits are bibliographic references, not recognition declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "cotorsion|Hovey|abelianModel",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned Grothendieck structure and ModelCategory constructors do not deduce model axioms or their functorial factorizations from cotorsion pairs. The two grep hits are bibliographic references, not recognition declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hovey recognition theorem for abelian model categories from cotorsion pairs",
+   "results": "8 hits: HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, HomotopicalAlgebra.ModelCategory.cm5b, HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution, HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn, HomotopicalAlgebra.ModelCategory.mk', HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick, HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk, HomotopicalAlgebra.ModelCategory.cm1a",
+   "date": "2026-10-16",
+   "verdict": "no match: returned Grothendieck structure and ModelCategory constructors do not deduce model axioms or their functorial factorizations from cotorsion pairs. The two grep hits are bibliographic references, not recognition declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-sheaf-flat-model",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-small-cotorsion-model-recognition",
+  "worker": "stage1",
+  "summary": "Kept the recognition statement, wrote both complete-pair factorizations and the two-out-of-three/retract/intersection arguments explicitly, reused the general abelian snake and pushout theorems, and isolated only generic orthogonality and small-object inputs. Four new statement records: one Mathlib small-limit leaf, one exact sorry-free project local-presentability attachment, and two unsplit generic inputs. Every cited statement was opened and its used clause quoted in citations.json.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Supplies the generic abelian flat-model recognition used by the derived coefficient adjunction; changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic abelian pushout and, on the opposite category, pullback of short exact sequences; the unit has no replacement for this extension calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-bc006f0be",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-bc006f0be (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements and sources, and unit/chapter route. Corrected Step 2's snake-lemma diagram to yield the cokernel sequence directly; statements and citations are unchanged. Accepted the generic pushout tool use. Full checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ }
 }

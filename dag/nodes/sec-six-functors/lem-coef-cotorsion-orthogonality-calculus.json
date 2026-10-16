@@ -1,0 +1,83 @@
+{
+ "id": "lem-coef-cotorsion-orthogonality-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Splitting orthogonals: extensions, retracts and diagonal fillers.",
+   "via": [
+    "lem-coef-small-cotorsion-model-recognition",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Splitting orthogonals: extensions, retracts and diagonal fillers",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Write $U\\perp_1 V$ if every short exact sequence $0\\to V\\to E\\to U\\to0$ splits, meaning that its epimorphism admits a section. For any class $\\mathcal S$ of objects put ${}^{\\perp_1}\\mathcal S=\\{U:U\\perp_1 V\\text{ for every }V\\in\\mathcal S\\}$ and $\\mathcal S^{\\perp_1}=\\{V:U\\perp_1 V\\text{ for every }U\\in\\mathcal S\\}$. Both these classes contain zero and are closed under retracts and extensions: if $X$ is a retract of $Y$ in the class then $X$ belongs to it, and if $0\\to X\\to Y\\to Z\\to0$ is short exact with $X,Z$ in the class then $Y$ belongs to it. Moreover, if $i:A\\to B$ is monic and $p:X\\to Y$ is epic with $(\\operatorname{Coker}i)\\perp_1(\\operatorname{Ker}p)$, every pair $a:A\\to X$, $b:B\\to Y$ satisfying $pa=bi$ has a morphism $d:B\\to X$ with $di=a$ and $pd=b$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; flat model recognition infrastructure, via lem-coef-sheaf-flat-model. Agent-formulated general extension calculus. WANTED: Hovey, Cotorsion pairs, model category structures, and representation theory (2002), Section 2, extension orthogonality and lifting argument. Stacks homology.tex Section 010I (section-extensions) supplies the extension, pushout and pullback conventions, but does not itself state the whole lemma."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category Ext1 of the cokernel of a monomorphism with the kernel of an epimorphism vanishing implies every commutative square admits a diagonal lift",
+   "results": "8 hits: CategoryTheory.HasExt.standard, CategoryTheory.Abelian.monoLift, CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono', CategoryTheory.Abelian.tfae_mono, CategoryTheory.Abelian.mono_of_epi_of_epi_mono', CategoryTheory.injective_iff_subsingleton_ext_one, CategoryTheory.Abelian.Pseudoelement.pseudo_exact_of_exact, CategoryTheory.IsGrothendieckAbelian.monoMapFactorizationDataRlp",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned monoLift, HasExt and Ext.extClass declarations; they do not assert splitting-orthogonal extension closure or the monic/epic lifting statement. IsClosedUnderExtensions.mk assumes closure, and the Serre-class result assumes the stronger Serre property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotorsion pairs are closed under extensions and retracts and give lifting of monomorphisms against epimorphisms when Ext1 of cokernel and kernel vanishes",
+   "results": "8 hits: CategoryTheory.HasExt, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.HasExt.standard, CategoryTheory.ObjectProperty.epiModSerre, CategoryTheory.ObjectProperty.isoModSerre, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.IsGrothendieckAbelian.llp_rlp_monomorphisms, CategoryTheory.ObjectProperty.isoModSerre_of_mono",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned monoLift, HasExt and Ext.extClass declarations; they do not assert splitting-orthogonal extension closure or the monic/epic lifting statement. IsClosedUnderExtensions.mk assumes closure, and the Serre-class result assumes the stronger Serre property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLiftingProperty\", \"Ext\"",
+   "results": "2 hits: CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.ext, CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.ext_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned monoLift, HasExt and Ext.extClass declarations; they do not assert splitting-orthogonal extension closure or the monic/epic lifting statement. IsClosedUnderExtensions.mk assumes closure, and the Serre-class result assumes the stronger Serre property."
+  },
+  {
+   "tool": "grep",
+   "query": "hasLiftingProperty.*(Ext|ext)|Ext.*hasLiftingProperty|orthogonal|cotorsion",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned monoLift, HasExt and Ext.extClass declarations; they do not assert splitting-orthogonal extension closure or the monic/epic lifting statement. IsClosedUnderExtensions.mk assumes closure, and the Serre-class result assumes the stronger Serre property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext orthogonal classes in abelian categories are closed under extensions and lift monomorphisms against epimorphisms",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.recOn, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.casesOn, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.monoLift, CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.mk₀",
+   "date": "2026-10-16",
+   "verdict": "no match: read returned monoLift, HasExt and Ext.extClass declarations; they do not assert splitting-orthogonal extension closure or the monic/epic lifting statement. IsClosedUnderExtensions.mk assumes closure, and the Serre-class result assumes the stronger Serre property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category, the class of objects whose short exact extensions by a fixed object split is closed under extensions and direct summands; Ext orthogonality implies a lifting property",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions",
+   "date": "2026-10-16",
+   "verdict": "No exact match: Ext.covariant_sequence_exact₂ and contravariant_sequence_exact₂ at ExactSequences.lean:152-157,285-290 are long exact Ext inputs with HasExt; neither states the splitting-only closure and arbitrary-square lifting clauses. The Serre-class instance assumes a stronger property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-small-cotorsion-model-recognition",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
