@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-pull-composition",
+ "kind": "statement",
+ "title": "Composition coherence of the specified integral pull comparison",
+ "statement": "Let ℓ be prime, E a normed extension of ℚ_ℓ, and k a field of prime characteristic different from ℓ. Let h:T→U and j:U→V be k-morphisms of separated finite-type k-schemes. For K in the integral bounded constructible category on V, write T_W for the specified integral scalar extension, α_h for the specified pull comparison, and c_I,c_E for the specified bounded pullback composition comparisons of [def-weil-pbc-continuous-integral-comparisons] and [def-weil-pbc-condensed-e-module-category]. Then T_T(c_I(h,j)_K) followed by α_h at j_I^*K and h_E^*(α_j at K) equals α_(h≫j) at K followed by c_E(h,j) at T_V K, as an equality of isomorphisms. No pushforward comparison, base-change arrow, properness or cartesianity is part of this statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, compatibility with adjunctions and base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-comparisons",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Before deriving, restriction of scalars commutes with the pushforward composition comparison: apply Mod.hom_ext; all coefficient comparison components are identities and both paths have the same underlying sheaf pushforward composition component.",
+   "uses": [
+    "def-weil-pbc-condensed-e-module-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Right derive that square with the specified composition units. The pushforwards preserve K-injective complexes because their left adjoints are exact. On K-injective representatives the units are invertible, so cancel the units and use the underived equality. Naturality extends the equality to every derived object. The exact restriction identification R(Res)≅D(Res) is characterized by its unit and respects this equality.",
+   "uses": [
+    "def-weil-pbc-continuous-integral-comparisons",
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the equality through the scalar and pullback adjunctions. Conjugation reverses composition, interchanges left and right whiskering and reverses associators. The underived pullback composition is conjugate to pushforward composition; the right-derived composition conjugation theorem identifies its derived conjugate with the specified exact left-derived comparison. Restrict through the fully faithful bounded constructible inclusions to obtain precisely the displayed isomorphism identity.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-condensed-e-module-category",
+    "def-weil-pbc-continuous-integral-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-integral-comparisons",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; canonical ChangeOfCoefficients and derived pullback-composition constructions",
+  "note": "F1: the remaining strictly smaller composition-coherence part of the target adjunct argument. The underived composition and generic conjugation pasting calculations have been checked in Lean in the worker scratchpad; derived normalization remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars pullback composition coherence mates base change",
+   "date": "2026-10-16",
+   "results": "Eight results about mates, pullback composition and base-change infrastructure.",
+   "verdict": "No theorem identifies the particular derived coefficient comparison with its composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.conjugateEquiv and its composition and whiskering lemmas.",
+   "verdict": "Used to prove underived pasting; does not supply derived coefficient-comparison coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "pullIsoOfComapIso|pushHomOfComapIso|derivedPullIso.*comp",
+   "date": "2026-10-16",
+   "results": "ChangeOfCoefficients.lean and general mate definitions; no derivedPullIso composition theorem.",
+   "verdict": "No existing match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "the canonical extension of scalars pullback comparison respects composition",
+   "date": "2026-10-16",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural isomorphisms obtained by conjugating adjunctions with composition of derived functors",
+   "date": "2026-10-16",
+   "results": "Adjunction.derivedη_fac_app_assoc, derivedε_fac_app_assoc and the corresponding unit/counit factorization lemmas.",
+   "verdict": "Independent second reading: generic derived adjunction identities, not the specified integral pull-comparison composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "date": "2026-10-16",
+   "results": "CategoryTheory.conjugateEquiv_comp in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "Independent second reading: reverses composition under conjugation; still needs the concrete derived restriction/pushforward coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(comp|whisker)|derived.*conjugate",
+   "date": "2026-10-16",
+   "results": "Mathlib.CategoryTheory.Adjunction.CompositionIso and Mates provide conjugation and adjoint-composition formulas.",
+   "verdict": "Independent second reading: infrastructure only; no coefficient-change composition theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousIntegralExchangeTargetAdjunct",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, second paragraph: compatibility of integral extension with the specified continuous-coefficient exchange",
+   "via": [
+    "lem-weil-pbc-continuous-integral-exchange-target-adjunct",
+    "lem-weil-pbc-continuous-integral-exchange-equality",
+    "lem-weil-pbc-continuous-exchange-integral-model",
+    "new-proper-continuous-basechange-app",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralPullComposition",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralPullComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralConstructiblePullIso_comp",
+  "statement": "theorem integralConstructiblePullIso_comp\n    {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]\n    [IsSeparated (T ↘ Spec (.of k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]\n    [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]\n    {V : Scheme.{u}} [V.Over (Spec (.of k))]\n    [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))]\n    [IsSeparated (V ↘ Spec (.of k))] (j : U ⟶ V) [j.IsOver (Spec (.of k))]\n    (K : integralConstructible ℓ E V) :\n    (integralScalarConstructible ℓ E T).mapIso\n        ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ k h j).app K) ≪≫\n      integralConstructiblePullIso ℓ E k h\n        ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ k j).obj K) ≪≫\n      (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ k h).mapIso\n        (integralConstructiblePullIso ℓ E k j K) =\n    integralConstructiblePullIso ℓ E k (h ≫ j) K ≪≫\n      (boundedConstructibleUpperStarComp (Profinite.continuousMapRingObj E) ℓ k h j).app\n        ((integralScalarConstructible ℓ E V).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ebd7d",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T054835-L-156980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-ebd7d",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T054835-L-156980",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled, direct importer compiled against adapted dependencies, DAG proof fields match Lean, and only permitted interface additions/expected sorryAx remain."
+ }
+}

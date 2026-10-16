@@ -55,6 +55,11 @@ functors `D((h)^*⟦Λ⟧)` since the pullback on module objects is exact.
 
 @[expose] public section
 
+open CategoryTheory in
+private lemma triple_app {C D : Type*} [Category C] [Category D]
+    {F G H I : C ⥤ D} (p : F ≅ G) (r : F ≅ H) (q : H ≅ I) (K : C) :
+    (p.symm ≪≫ r ≪≫ q).app K = (p.app K).symm ≪≫ r.app K ≪≫ q.app K := rfl
+
 universe u
 
 open scoped CategoryTheory.Obj
@@ -97,6 +102,19 @@ noncomputable def boundedConstructiblePullbackSquareComparison (sq : CommSq g' f
       boundedConstructibleUpperStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g' :=
   (boundedConstructibleUpperStarComp Λ ℓ k f' g).symm ≪≫
     eqToIso (by simp only [sq.w]) ≪≫ boundedConstructibleUpperStarComp Λ ℓ k g' f
+
+/-- Component of the pullback-square comparison, before taking its forward map. -/
+lemma boundedConstructiblePullbackSquareComparison_app (sq : CommSq g' f' f g)
+    (K : ProEtale.BoundedConstructible (condensedRingObj Λ Y)) :
+    (boundedConstructiblePullbackSquareComparison Λ ℓ k sq).app K =
+      ((boundedConstructibleUpperStarComp Λ ℓ k f' g).app K).symm ≪≫
+        (eqToIso (by simp only [sq.w]) :
+          boundedConstructibleUpperStar Λ ℓ k (f' ≫ g) ≅
+            boundedConstructibleUpperStar Λ ℓ k (g' ≫ f)).app K ≪≫
+        (boundedConstructibleUpperStarComp Λ ℓ k g' f).app K := by
+  exact triple_app (boundedConstructibleUpperStarComp Λ ℓ k f' g)
+    (eqToIso (by simp only [sq.w])) (boundedConstructibleUpperStarComp Λ ℓ k g' f) K
+
 
 end PullbackComparison
 
