@@ -31,9 +31,133 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first establish the inverse-diagram assertion for an ordinary all-fibrant Brown category with retract-closed weak equivalences $\\mathcal C$, with $q:N\\mathcal C\\to L\\mathcal C$: a terminal object $1$, classes $W,F$ containing isomorphisms and closed under composition, $W$ retract closed with two-out-of-three, every $X\\to1$ in $F$, pullbacks of members of $F$ (resp. $F\\cap W$) existing and lying in $F$ (resp. $F\\cap W$), and $W$-then-$F$ factorizations; these are the hypotheses of [lem-coef-brown-reedy-fibrant-replacement] together with retract closure. Then $\\mathcal C^{\\mathrm{op}}$, with initial object $1$, cofibrations $F^{\\mathrm{op}}$ and weak equivalences $W^{\\mathrm{op}}$, satisfies the hypotheses of [lem-coef-brown-left-fractions], and $q^{\\mathrm{op}}:N(\\mathcal C^{\\mathrm{op}})\\to(L\\mathcal C)^{\\mathrm{op}}$ is a localization in its sense (test the universal property on opposite targets and reverse coherent functors and transformations). Reversing its conclusions gives the Brown fractions of $\\mathcal C$ used below: every object of $L\\mathcal C$ is equivalent to some $qX$; every $\\alpha:qX\\to qY$ satisfies $[\\alpha]=[q(a)][q(s)]^{-1}$ in $hL\\mathcal C$ with $s:Z\\to X$ in $F\\cap W$ and $a:Z\\to Y$; and for $u:X\\to Y$, $[q(u)]$ has a right inverse if and only if there is $v:Z\\to X$ in $F$ with $uv\\in W$, so such a fibration $v$ exists whenever $q(u)$ is invertible. They apply equally to $R_J$ and $R_K$, which step 2 shows are Brown categories of this kind. At the end take $\\mathcal C=\\mathcal A^{\\mathrm{op}}$. For a finite inverse category $K$ write $R_K$ for the Reedy fibrant strict diagrams of [lem-coef-brown-reedy-fibrant-replacement]. Its localized inclusion identifies $L(R_K)$ with the localization of all strict $K$-diagrams. Evaluation therefore gives the canonical comparison $F_K:L(R_K)\\to\\operatorname{Fun}(N(K),L\\mathcal C)$. Localization of $\\mathcal C$ exists and has finite limits by [lem-coef-brown-fibrant-localization-pullbacks].",
+   "uses": [
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-left-fractions",
+    "lem-coef-brown-fibrant-localization-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, first paragraph; Theorems 7.4.20 and 7.5.18; dual of Corollary 7.5.19 and formula (7.2.10.4)"
+   }
+  },
+  {
+   "text": "Check finite limits and exactness before using approximation. The parameter-cone-extension lemma supplies pointwise finite limits in $\\operatorname{Fun}(B,L\\mathcal C)$ when $B$ has finitely many vertices: take $P$ to be the discrete set of all vertices of $B$, choose the desired limit cone at every vertex, and apply its limit half to extend these cones to $B$. Restriction to $P$ has the product of those limit cones. For any testing cone, the lower horizontal restriction map in the relative-limit mapping square of [def-coef-infinity-relative-cone] is an equivalence: it is the finite product of the corresponding maps into the chosen vertexwise limit cones. Since this square is a homotopy pullback, its upper horizontal restriction map is also an equivalence. Thus the extended cone has the absolute limit mapping property in the functor category, for every testing cone, and supplies the required finite limit. Apply this with $B=N(K)$. The functor $T_K:R_K\\to\\operatorname{Fun}(N(K),L\\mathcal C)$ preserves the terminal diagram and pullbacks along Reedy fibrations: these are objectwise by the Reedy lemma; each component square has a fibration leg and is sent by $q$ to a pullback by the Brown localization lemma. It inverts objectwise $W$, since a coherent transformation is an equivalence exactly when its components are. The weak equivalences in $R_K$ are retract closed: evaluating a retract diagram of natural transformations at any $k$ gives a retract diagram in $\\mathcal C$, and $W$ is retract closed. Apply [lem-coef-brown-fibrant-localization-pullbacks] also to $R_K$, so $L(R_K)$ has finite limits. Take opposites of $T_K$ and use [lem-coef-brown-right-exact-extension] with the all-cofibrant category $R_K^{\\mathrm{op}}$, cofibrations the opposite Reedy fibrations, and target $\\operatorname{Fun}(N(K),L\\mathcal C)^{\\mathrm{op}}$. Its initial-object and cofibration-pushout hypotheses are exactly the terminal-object and Reedy-fibration-pullback assertions just checked. The localization of $R_K^{\\mathrm{op}}$ is $L(R_K)^{\\mathrm{op}}$: test the localization universal property on opposite targets and reverse coherent functors and transformations. Finite colimits in these opposite categories are precisely the finite limits established above. Thus the cited extension theorem makes $F_K^{\\mathrm{op}}$ preserve finite colimits, which says $F_K$ preserves finite limits.",
+   "uses": [
+    "lem-coef-infinity-parameter-cone-extension",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-brown-right-exact-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, first paragraph; Propositions 7.5.5-7.5.6 and 7.5.28; parameter-cone construction as in section 6.4"
+   }
+  },
+  {
+   "text": "We prove the equivalence of $F_K$ by induction on the largest length of a nonidentity chain; the empty category has length $-1$ and its comparison is the identity of the terminal quasicategory. For $k\\in K$, let $\\ell(k)$ be the largest length of a nonidentity chain starting at $k$. For nonempty $K$, remove the objects $S$ on which $\\ell(k)$ is maximal, obtaining $J$. Any nonidentity arrow into $s\\in S$ would extend a longest chain starting at $s$, a contradiction; hence these objects satisfy the source hypothesis of the gluing lemma. For $s\\in S$ put $B_s=(s/K)\\setminus\\{1_s\\}$; both $J$ and every $B_s$ have strictly smaller length and are finite, including when there are parallel arrows. Write $M_sX=\\lim_{B_s}X$. The source-gluing lemma describes a coherent $K$-diagram as its diagram on $J$ together with the cones at $S$, and gives the homotopy-pullback formula for its mapping spaces. We will use that formula, including the path in the pullback, rather than a pullback of Hom sets. Also $qM_sX\\simeq\\lim_{N(B_s)}qX$ for a Reedy fibrant $X$: induct on the same length, its ordinary cone equations give $\\lim_KX=(\\lim_JX)\\times_{\\prod_{s\\in S}M_sX}\\prod_{s\\in S}X_s$. Apply the Brown localization lemma to this pullback, whose right-hand leg is a finite product of matching fibrations. The source-gluing mapping formula applied to constant testing diagrams gives exactly this homotopy-pullback description of the limit after localization. Thus the inductively identified lower cone and matching cones identify the entire limiting cone, not just its apex. Finite products are iterated pullbacks over $1$, so this proves their preservation too. Boundary restrictions are Reedy fibrant by the Reedy lemma. This argument supplies these specified matching-cone comparisons and their naturality in $X$.",
+   "uses": [
+    "lem-coef-infinity-source-gluing",
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-fibrant-localization-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, induction setup; Propositions 7.4.8, 7.4.11 and 7.5.5"
+   }
+  },
+  {
+   "text": "First prove conservativity. For a strict map $f:X\\to Y$ in $R_K$ whose components become invertible, construct a Reedy fibration $p:Z\\to X$ with $fp$ componentwise in $W$. On $J$, the inductive equivalence makes $f|_J$ invertible in $L(R_J)$; the refinement clause of Brown fractions, applied to $R_J$, gives a Reedy fibration $p':Z'\\to X|_J$ with $(f|_J)p'$ componentwise in $W$. For each $s$, form $P_s=M_sZ'\\times_{M_sX}X_s$, which exists since $X_s\\to M_sX$ is a fibration. On $J$, $qp'$ is a componentwise equivalence, since both $q(fp')$ and $qf$ are. Step 3 therefore makes $q(M_sp')$ an equivalence. The Brown pullback comparison makes $q(P_s\\to X_s)$ an equivalence, and hence so is $q(P_s\\to X_s\\xrightarrow{f_s}Y_s)$. Brown refinement now gives a fibration $v_s:Z_s\\to P_s$ with $Z_s\\to Y_s$ in $W$. Use $Z_s\\to P_s\\to M_sZ'$ to attach the strict diagram at $s$. Its matching map is a composite of fibrations, and its relative matching map for $p$ is $v_s$, so $Z\\in R_K$ and $p$ is a Reedy fibration. We have constructed $fp\\in W_K$. Repeat this construction on $p$, whose localized components are equivalences, to obtain $r$ with $pr\\in W_K$. In the homotopy category of $L(R_K)$, $p$ has a left inverse from $fp$ and a right inverse from $pr$; these inverses agree, so $p$, and then $f$, are invertible. Finally every morphism in $L(R_K)$ has a Brown fraction with trivial-fibration denominator. Applying what we just proved to its numerator shows that $F_K$ is conservative on all morphisms. No saturation of $W$ was presumed.",
+   "uses": [
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-left-fractions",
+    "lem-coef-brown-fibrant-localization-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, conservativity paragraph; Corollary 7.5.19 and pullback preservation"
+   }
+  },
+  {
+   "text": "Every coherent $H:N(K)\\to L\\mathcal C$ is equivalent to $qX$ for a Reedy fibrant strict $X$. By the induction on $J$, choose $X'$ representing $H|_J$. For each $s$, source gluing and step 3 identify its remaining datum with an arrow $H_s\\to qM_sX'$. Brown fractions give an ordinary representative $Z_s\\to M_sX'$ after replacing $H_s$ by an equivalent $qZ_s$; this uses essential surjectivity of $q$ and a trivial-fibration denominator. Factor $Z_s\\to M_sX'$ as $Z_s\\xrightarrow{\\sim}X_s\\twoheadrightarrow M_sX'$. The strict matching maps define $X\\in R_K$. The same source-gluing statement extends the chosen equivalence on $J$ and the equivalences $H_s\\simeq qX_s$, with their cone homotopies, to an equivalence $H\\simeq qX$. This proves essential surjectivity without any coproducts in $\\mathcal C$.",
+   "uses": [
+    "lem-coef-infinity-source-gluing",
+    "lem-coef-brown-left-fractions",
+    "lem-coef-brown-reedy-fibrant-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, essential surjectivity paragraph; Proposition 7.4.11"
+   }
+  },
+  {
+   "text": "Prove surjectivity on components of mapping spaces with the compatibility homotopy retained. Let $X,Y\\in R_K$ and let $a:qX\\to qY$ be a coherent transformation. Induction on $J$ and the Brown fractions of step 1 in $R_J$ give a Reedy trivial fibration $s':Z'\\to X|_J$ and $p':Z'\\to Y|_J$ representing $a|_J$, together with a homotopy to that restriction. For $s\\in S$ define\n$$P_s=M_sZ'\\times_{M_sX}X_s,\\qquad T_s=P_s\\times_{M_sY}Y_s.$$\nHere $P_s\\to M_sY$ uses $M_sp'$. The map $P_s\\to X_s$ is a trivial fibration: limits send the Reedy trivial fibration $s'$ on $B_s$ to a trivial fibration, and we pull it back along $X_s\\to M_sX$. The map $T_s\\to P_s$ is a fibration, being a pullback of the matching fibration for $Y$. In the localization, the component $a_s$ composed with $qP_s\\to qX_s$ and the chosen lower homotopy give a section of $qT_s\\to qP_s$: this is exactly the path between the two composites to $qM_sY$ in the source-gluing mapping formula. Both displayed ordinary pullbacks are sent to coherent pullbacks by the Brown localization lemma. Apply the coherent-section clause of [lem-coef-brown-slice-fraction-calculus] over $P_s$ ($W$ is retract closed). It gives a trivial fibration $t_s:Z_s\\to P_s$ and a strict map $Z_s\\to T_s$ over $P_s$, representing this specified section in the slice. Its projections supply compatible maps $Z_s\\to X_s,Y_s,M_sZ'$. Thus they attach to $Z'$ and define strict maps $s:Z\\to X$, $p:Z\\to Y$; the relative matching map for $s$ at $s$ is precisely $t_s$. Hence $s$ is a Reedy trivial fibration. The homotopy in the slice and the already fixed homotopy on $J$ match the path data of the source-gluing formula, so the coherent fraction $qp(qs)^{-1}$ is homotopic to $a$ in the entire functor category. This proves surjectivity on mapping-space components; it does not try to glue only equality classes of component maps.",
+   "uses": [
+    "lem-coef-infinity-source-gluing",
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-slice-fraction-calculus",
+    "lem-coef-brown-fibrant-localization-pullbacks",
+    "lem-coef-brown-left-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, final paragraph; Proposition 7.4.11 and Corollary 7.6.13; explicit relative-matching pullbacks"
+   }
+  },
+  {
+   "text": "Combine steps 4-6 with step 2 and apply [lem-coef-finite-colimit-approximation] to $F_K^{\\mathrm{op}}$. Its source and target have finite colimits by step 2, and it preserves them. Conservativity is unchanged by taking opposites, so step 4 supplies that hypothesis. To check the approximation triangle, an arrow $F_K^{\\mathrm{op}}(X)\\to H$ in the opposite target is an arrow $H\\to F_K(X)$ before reversal. Choose $e:H\\simeq F_K(Y)$ by step 5. Step 6 supplies an arrow $u:Y\\to X$ in $L(R_K)$ with $F_K(u)e$ homotopic to the given arrow. Reverse this triangle and use $e^{-1}$: it is exactly an arrow $X\\to Y$ in the opposite source and an equivalence $H\\to F_K^{\\mathrm{op}}(Y)$ making the two target arrows equal in the homotopy category, as the cited statement requires. The approximation theorem therefore makes $F_K^{\\mathrm{op}}$, and hence $F_K$, a coherent functor equivalence. The Reedy localized inclusion in step 1 gives the inverse-diagram comparison for $\\mathcal C$, completing the induction.",
+   "uses": [
+    "lem-coef-finite-colimit-approximation",
+    "lem-coef-brown-reedy-fibrant-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.6.17, application of Theorem 7.6.10"
+   }
+  },
+  {
+   "text": "Apply the result to $\\mathcal C=\\mathcal A^{\\mathrm{op}}$ and $K=I^{\\mathrm{op}}$. Opposite arrows turn the given initial object into a terminal object, pushouts into pullbacks, the factorization $C$ then $W$ into $W^{\\mathrm{op}}$ then $C^{\\mathrm{op}}$, and the two pushout-stability hypotheses into exactly the Brown hypotheses used above. The original degree strictly decreases on $K$. Taking opposites of the resulting equivalence gives the displayed comparison in the question: $\\operatorname{Fun}(I^{\\mathrm{op}},\\mathcal A^{\\mathrm{op}})^{\\mathrm{op}}=\\operatorname{Fun}(I,\\mathcal A)$ and reversal of simplices gives $\\operatorname{Fun}(N(I)^{\\mathrm{op}},L^{\\mathrm{op}})^{\\mathrm{op}}=\\operatorname{Fun}(N(I),L)$. Opposite localization follows from its universal property by testing against opposite targets; the two canonical comparisons agree before localization with evaluation followed by $q$, so the same universal property identifies their factorizations. Step 5, or the essential surjectivity of this equivalence followed by the object-surjectivity clause of Brown fractions (step 1) for $R_K$, says that every coherent diagram is equivalent to the localization of an actual strict diagram. At a singleton this says every object of $L$ is equivalent to $qX$. For $I=\\varnothing$ both sides are terminal. The singleton has degree $0$; for the stated span give $1$ degree $0$ and $0,2$ degree $1$. These checks introduce none of the excluded model-category or coproduct hypotheses.",
+   "uses": [
+    "lem-coef-brown-left-fractions",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Duality of Theorem 7.6.17; section 7.1 universal property; empty, singleton and span checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-brown-fibrant-localization-pullbacks",
+  "lem-coef-brown-left-fractions",
+  "lem-coef-brown-reedy-fibrant-replacement",
+  "lem-coef-brown-right-exact-extension",
+  "lem-coef-brown-slice-fraction-calculus",
+  "lem-coef-finite-colimit-approximation",
+  "lem-coef-infinity-parameter-cone-extension",
+  "lem-coef-infinity-source-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Detailed ordinary-nerve dual of Theorem 7.6.17; section 7.4 boundary induction, Corollary 7.6.13 slice refinements and Theorem 7.6.10. Online reference is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +201,46 @@
    "results": "{\"t\": \"2026-10-16T20:38:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category of cofibrant objects, the localization of a product or a finite direct functor category is the corresponding infinity functor category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toπCompToLocalizationIso\"], \"digest\": \"330f20e2dc02c624\"}",
    "date": "2026-10-16",
    "verdict": "No match on second reading: CofibrantObject.factorsThroughLocalization at ModelCategory/CofibrantObjectHomotopy.lean:104-112 and localizerMorphism in DerivabilityStructureCofibrant.lean are ordinary model-category localization assertions; neither states an arbitrary-product nor a coherent finite direct diagram comparison for Brown categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct strict diagrams in a Brown cofibration category localized at pointwise weak equivalences give coherent functors into its infinity localization",
+   "results": "{\"t\": \"2026-10-16T21:25:55Z\", \"tool\": \"leanfinder\", \"query\": \"Finite direct strict diagrams in a Brown cofibration category localized at pointwise weak equivalences give coherent functors into its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\"], \"digest\": \"9239f8e6bdcb6115\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned CofibrantObject/FibrantObject declarations are ordinary model-category homotopy quotients and constructors; they neither allow Brown hypotheses alone nor compare entire coherent diagram categories. FibrantObjectHomotopy.lean:34-155 and Reedy/Basic.lean:14-24 were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomotopicalAlgebra\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-16T21:25:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomotopicalAlgebra\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.FibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.FibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorResolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\"], \"digest\": \"b317984d1be88967\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned CofibrantObject/FibrantObject declarations are ordinary model-category homotopy quotients and constructors; they neither allow Brown hypotheses alone nor compare entire coherent diagram categories. FibrantObjectHomotopy.lean:34-155 and Reedy/Basic.lean:14-24 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|finite.direct|rectif",
+   "results": "{\"t\": \"2026-10-16T21:25:56Z\", \"tool\": \"grep\", \"query\": \"Brown|finite.direct|rectif\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean\"], \"digest\": \"9f2c1e330ebc692b\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned CofibrantObject/FibrantObject declarations are ordinary model-category homotopy quotients and constructors; they neither allow Brown hypotheses alone nor compare entire coherent diagram categories. FibrantObjectHomotopy.lean:34-155 and Reedy/Basic.lean:14-24 were read.",
+   "sub": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct strict diagrams in a Brown cofibration category localized at pointwise weak equivalences give coherent functors into its infinity localization",
+   "results": "{\"t\": \"2026-10-16T21:25:56Z\", \"tool\": \"leansearch\", \"query\": \"Finite direct strict diagrams in a Brown cofibration category localized at pointwise weak equivalences give coherent functors into its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.instDiscreteObjWhiskeringRightFunctorCategoryOfFiniteOfContainsIdentities\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\"], \"digest\": \"e61951595edbb227\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned CofibrantObject/FibrantObject declarations are ordinary model-category homotopy quotients and constructors; they neither allow Brown hypotheses alone nor compare entire coherent diagram categories. FibrantObjectHomotopy.lean:34-155 and Reedy/Basic.lean:14-24 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite inverse coherent diagrams in a category of fibrant objects can be represented by strict Reedy fibrant diagrams",
+   "results": "{\"t\": \"2026-10-16T21:26:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite inverse coherent diagrams in a category of fibrant objects can be represented by strict Reedy fibrant diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.BifibrantObject.mk_surjective\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.FibrantObject.mk\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects\", \"HomotopicalAlgebra.FibrantObject\"], \"digest\": \"8c91a9a33c1fffdc\"}",
+   "date": "2026-10-16",
+   "verdict": "No match. Returned CofibrantObject/FibrantObject declarations are ordinary model-category homotopy quotients and constructors; they neither allow Brown hypotheses alone nor compare entire coherent diagram categories. FibrantObjectHomotopy.lean:34-155 and Reedy/Basic.lean:14-24 were read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-cofibration-localization",
@@ -100,5 +260,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-brown-finite-direct-rectification",
+  "worker": "stage1",
+  "summary": "Kept the item statement. Two strictly smaller Brown/Reedy and slice-fraction inputs; the inverse-boundary induction retains both refinements for conservativity and specified slice sections for map lifting. Second reading removed the redundant exact-approximation node, using the existing right-exact extension and finite-colimit approximation statements on opposites with retract closure and all finite-(co)limit hypotheses checked. Clarified outgoing chain length and made the new nodes self-contained. Maintainer reading: the fraction clauses of the slice node restated the existing lem-coef-brown-left-fractions after reversing arrows; they were removed from that node and steps 1, 4-6 and 8 now cite the existing node on opposites (retract closure holds at every use).",
+  "blueprint": "Realizes the technical finite-diagram rectification subargument in the existing from.place, supporting the paragraph-2 coherent coefficient mapping-limit calculation of prop-coef-integral-exceptional-adjoint, which is unchanged in main-20261015. No unit realization edited.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 2 uses its pointwise criterion for a coherent natural equivalence; this is a general quasicategory tool, not a replacement of any biduality-unit step, and no node of the unit states this basic functor-category equivalence criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-c6f75d5e6",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c6f75d5e6 (reviewer sub-agent of L); spot-checked: I read the item, both delivered new nodes, every cited statement, the unit sk-prop-sf-biduality-general and the parent's uses (span and singleton representability only, both included). The item statement is unchanged; it involves no base-change morphism or coefficient category. The Cisinski CatLR source is not in literature/ and network access is blocked, so I could not open the cited places: I checked the mathematics directly, the WANTED line stays, and proof_origin is agent. Steps 1-8 are correct. Step 2: parameter-cone extension over the discrete vertex set gives an r-limit, and the bottom row is a product of equivalences, so the cone is an absolute limit; I checked every hypothesis of right-exact-extension applied to R_K^op (terminal object = constant 1 because M_k1=1, Reedy fibrations, retract closure, finite limits from the Brown node). Step 3: induction on outgoing chain length; S receives no non-identity arrows; B_s has smaller length, also with parallel arrows; lim_K X = lim_J X x_{prod M_s} prod X_s. Step 4: P_s exists, both refinements are used and give left and right inverses; I verified the refinement clause independently. Step 5: essential surjectivity is correct. Step 6: P_s->X_s is a trivial fibration, T_s->P_s a fibration, and t_s is the relative matching map, so s is a Reedy trivial fibration. Step 7: the triangle reversal for finite-colimit-approximation is correct. Step 8: the duality is formal. Reedy node: every clause checked (replacement, limits, the relative-matching iff via 2-out-of-3, restriction along B_k via j/K); it is not a duplicate of the model-category Reedy nodes. Slice node: C(b) is a Brown category, and the slice equivalence and section clause hold (tested on Kan complexes and b=1). Fault (C5), repaired: the slice node's first paragraph (object representability, trivial-fibration fractions, refinement of a q-invertible arrow) restated the existing same-unit lem-coef-brown-left-fractions with arrows reversed, the same reason the second reader dropped exact-approximation. I removed that paragraph and added retract closure to the slice node, which holds at its only use. Item step 1 now derives the Brown fractions from left-fractions applied to C^op, with the dualization written out; steps 4, 5 and 8 cite left-fractions and step 6 cites both; proof_deps is the exact union of uses. Left-fractions has no proof_deps, so there is no cycle. I accept the tool use lem-cbc-enhanced-functor-cone-calculus (generic componentwise-equivalence criterion). No SGA source is used, no target is touched, and no node is dropped. Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
  }
 }

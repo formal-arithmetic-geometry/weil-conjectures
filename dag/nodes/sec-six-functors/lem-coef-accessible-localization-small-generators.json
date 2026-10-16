@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: general categorical input to the enriched tensor cocontinuity foundation; Proposition 5.5.4.2(3), Proposition 5.5.4.15 and Remark 5.5.4.10; localization universal property (section 5.2.7)",
+   "place": "Proof paragraph 2: the finite-coefficient mapping-complex adjunction before taking R inverse limit; accessible-localization input to the coherent enriched tensor foundation, realized by unit maps on compact representatives (HTT 5.5.4.2(3), (ii) implies (iii)).",
    "via": [
     "lem-coef-algebroid-segal-localization-model",
     "lem-coef-algebroid-bilinear-colimits",
@@ -28,9 +28,83 @@
   "def-coef-presentable-infinity-category",
   "def-coef-complete-algebroid"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=iL$. The category $\\mathcal V$ has small mapping spaces by presentability, and full faithfulness identifies each $\\operatorname{Map}_{\\mathcal U}(u,v)$ with the small space $\\operatorname{Map}_{\\mathcal V}(iu,iv)$ up to equivalence. Thus $\\mathcal U$ is locally small as required by the adjunction statement below. The given adjunction has a coherent unit $\\eta:\\operatorname{id}_{\\mathcal V}\\to T$ and the natural mapping-space bifunctor equivalence, with its unit interpretation, of [lem-coef-infinity-pointwise-adjoint-criterion]. For every $X\\in\\mathcal V$ and $u\\in\\mathcal U$, full faithfulness of $i$ and adjunction give\n$$\\operatorname{Map}_{\\mathcal V}(TX,iu)\\simeq\\operatorname{Map}_{\\mathcal U}(LX,u)\\simeq\\operatorname{Map}_{\\mathcal V}(X,iu).$$\nTheir composite is precomposition with $\\eta_X$: a map $a:LX\\to u$ goes to $i(a)\\eta_X$ by the unit description of the adjunction. Thus every object in the essential image of $i$ is local for every unit map. If $Z\\simeq iu$, postcomposition with that equivalence gives the same assertion for $Z$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(1), first direction; section 5.2.7, mapping-space localization adjunction"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-compact-approximation] to the single accessible infinity category $\\mathcal V$ and its accessible endofunctor $T$. The category is accessible because it is presentable. Accessible for $T$ means that it preserves small $\\rho$-filtered colimits for some infinite regular $\\rho$, as specified in the cited statement. Obtain an infinite regular $\\tau$ for which $\\mathcal V$ is $\\tau$-accessible, $T$ preserves small $\\tau$-filtered colimits, and $\\mathcal V^\\tau$ is essentially small. Choose a small quasicategory $D$ with an equivalence $D\\to\\mathcal V^\\tau$ and denote its vertex images by $d$. Set\n$$S=\\{\\eta_d:d\\longrightarrow Td\\mid d\\text{ is the image of a vertex of }D\\}.$$\nThis is a small set: it is indexed by the small set $D_0$. Only this set of specified unit maps is used; neither all arrows of $\\mathcal V$ nor an entire large compact-source slice is used as an indexing set.",
+   "uses": [
+    "lem-coef-infinity-compact-approximation",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(3), proof of (ii) implies (iii), printed p. 476; Proposition 5.4.2.9 for a common accessibility rank"
+   }
+  },
+  {
+   "text": "Let $X\\in\\mathcal V$. By $\\tau$-accessibility as defined in [def-coef-presentable-infinity-category], choose a small $\\tau$-filtered diagram $p:I\\to\\mathcal V$ of $\\tau$-compact objects and a colimiting cocone $p\\to X$. Since $T$ preserves these colimits, $Tp\\to TX$ is colimiting. The coherent unit restricted to the cocone gives a cocone of arrows $\\eta_{p(q)}:p(q)\\to Tp(q)$ with apex $\\eta_X:X\\to TX$. By the pointwise-colimit statement of [lem-coef-infinity-yoneda-presheaf-limits], this is a colimiting cocone in $\\operatorname{Fun}(\\Delta^1,\\mathcal V)$. Hence every unit is a small filtered colimit of unit maps on compact objects. All colimits here have small indexing quasicategory $I$; $\\mathcal V$ supplies them by presentability.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-compact-approximation",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(3), (ii) implies (iii), printed p. 476; expanded compact-presentation argument in place of the invocation of Proposition 5.3.5.10"
+   }
+  },
+  {
+   "text": "Suppose $Z$ is $S$-local. For each $q\\in I$, choose an equivalence $e:d\\simeq p(q)$ from one of the representatives in Step 2. Naturality gives $T(e)\\eta_d\\simeq\\eta_{p(q)}e$. Choose an inverse to $e$ and its two inverse $2$-simplices. Applying the simplicial functor $T$ gives an inverse to $T(e)$ with both inverse witnesses. Precomposition with $e$ and $T(e)$ therefore gives equivalences of mapping spaces: precomposition with their chosen inverses supplies inverse maps, and the inverse $2$-simplices supply the inverse homotopies. The naturality square identifies the test for $\\eta_{p(q)}$ with the test for $\\eta_d\\in S$ under these equivalences. Consequently every map $\\operatorname{Map}(Tp(q),Z)\\to\\operatorname{Map}(p(q),Z)$ is an equivalence. The coherent unit gives these maps as a transformation of diagrams on $I^{\\mathrm{op}}$. It is an equivalence by the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus]; its limit is an equivalence as well, by applying the limit universal property to this transformation and its inverse. The natural contravariant mapping-space colimit formula of [lem-coef-infinity-yoneda-presheaf-limits] identifies that limit map with\n$$\\operatorname{Map}_{\\mathcal V}(TX,Z)\\longrightarrow\\operatorname{Map}_{\\mathcal V}(X,Z),\\qquad h\\longmapsto h\\eta_X.$$\nMore explicitly the two sides identify with $\\lim_{q\\in I^{\\mathrm{op}}}\\operatorname{Map}(Tp(q),Z)$ and $\\lim_{q\\in I^{\\mathrm{op}}}\\operatorname{Map}(p(q),Z)$, respectively, and naturality of the colimit formulas identifies the displayed map with precomposition by the apex of the arrow cocone in Step 3. Thus $S$-locality implies locality for every unit map, including $\\eta_Z$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(3), (ii) implies (iii), printed p. 476; natural representable-colimit calculation"
+   }
+  },
+  {
+   "text": "Take $X=Z$ in Step 4. Surjectivity on components gives $r:TZ\\to Z$ with $r\\eta_Z\\simeq\\operatorname{id}_Z$. Since $TZ=i(LZ)$ lies in the image of $i$, Step 1 says that precomposition with $\\eta_Z$ gives an equivalence $\\operatorname{Map}(TZ,TZ)\\to\\operatorname{Map}(Z,TZ)$. The two maps $\\eta_Zr$ and $\\operatorname{id}_{TZ}$ have homotopic composites with $\\eta_Z$, because $\\eta_Zr\\eta_Z\\simeq\\eta_Z$. Injectivity on components of this equivalence gives $\\eta_Zr\\simeq\\operatorname{id}_{TZ}$. Thus $r$ is a two-sided homotopy inverse to $\\eta_Z$ and $Z\\simeq TZ=i(LZ)$, so $Z$ is in the essential image. Conversely Step 1 applied to the maps of the specified set $S$ shows that every object of that essential image is $S$-local. This proves the required equality of object classes without invoking a separate retract-closure theorem.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.2(1), converse, printed p. 474; explicit two-sided inverse argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-compact-approximation",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-yoneda-presheaf-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction infrastructure; follows HTT Proposition 5.5.4.2(3), (ii) implies (iii), with its (1). HTT read online, not archived; compact-presentation and inverse arguments expanded by Q12."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -94,10 +168,59 @@
    "results": "{\"t\": \"2026-10-16T19:46:33Z\", \"tool\": \"leanfinder\", \"query\": \"Accessible idempotent localization on a presentable category generated by a set of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.IsFinitelyAccessibleCategory\", \"CategoryTheory.Functor.IsAccessible\"], \"digest\": \"1ccb51367fbbfa7f\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reading search returned ordinary category declarations or simplicial-set/quasicategory constructions, not the stated coherent infinity-category theorem; the returned signatures use ordinary Hom sets and do not specialize to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocal|isCardinalAccessible_ι_isLocal|isLocallyPresentable_isLocal",
+   "results": "{\"t\": \"2026-10-16T22:22:33Z\", \"tool\": \"grep\", \"query\": \"isLocal|isCardinalAccessible_ι_isLocal|isLocallyPresentable_isLocal\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\"], \"digest\": \"fd8c67e800fe92d2\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:458-485 and CategoryTheory/Adjunction/Reflective.lean:25-90. Their types use ordinary Category and Hom sets. They do not give equivalences of coherent mapping spaces for an accessible reflective localization of quasicategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Accessible reflective localization of a presentable infinity category generated by unit maps on compact objects",
+   "results": "{\"t\": \"2026-10-16T22:22:33Z\", \"tool\": \"leansearch\", \"query\": \"Accessible reflective localization of a presentable infinity category generated by unit maps on compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.instIsPresentableOfIsAccessibleCategory\", \"CategoryTheory.MorphismProperty.Localization'\", \"CategoryTheory.unit_obj_eq_map_unit\", \"CategoryTheory.instIsCardinalAccessibleCategoryOfIsCardinalLocallyPresentable\", \"CategoryTheory.unitCompPartialBijective\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\"], \"digest\": \"6dd4cc8005d82303\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:458-485 and CategoryTheory/Adjunction/Reflective.lean:25-90. Their types use ordinary Category and Hom sets. They do not give equivalences of coherent mapping spaces for an accessible reflective localization of quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessible reflective localization of a presentable infinity category generated by unit maps on compact objects",
+   "results": "{\"t\": \"2026-10-16T22:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"Accessible reflective localization of a presentable infinity category generated by unit maps on compact objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\"], \"digest\": \"e0a55cb4c7efdd39\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:458-485 and CategoryTheory/Adjunction/Reflective.lean:25-90. Their types use ordinary Category and Hom sets. They do not give equivalences of coherent mapping spaces for an accessible reflective localization of quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflective infinity subcategory with accessible idempotent endofunctor is the orthogonality class of a small set of morphisms",
+   "results": "{\"t\": \"2026-10-16T22:22:33Z\", \"tool\": \"leanfinder\", \"query\": \"A reflective infinity subcategory with accessible idempotent endofunctor is the orthogonality class of a small set of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.Adjunction.isCardinalFilteredGenerator\", \"CategoryTheory.Adjunction.hasCardinalFilteredGenerator\", \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\"], \"digest\": \"4409df4dc86e85d5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:458-485 and CategoryTheory/Adjunction/Reflective.lean:25-90. Their types use ordinary Category and Hom sets. They do not give equivalences of coherent mapping spaces for an accessible reflective localization of quasicategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Reflective",
+   "results": "{\"t\": \"2026-10-16T22:22:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Reflective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Reflective\", \"CategoryTheory.reflector\", \"CategoryTheory.Reflective.L\", \"CategoryTheory.instIsRightAdjointOfReflective\", \"CategoryTheory.Functor.fullyFaithfulOfReflective\", \"CategoryTheory.Reflective.toFaithful\", \"CategoryTheory.Reflective.toFull\", \"CategoryTheory.instIsLeftAdjointReflector\"], \"digest\": \"cb5d59f0d0eec6e9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean:458-485 and CategoryTheory/Adjunction/Reflective.lean:25-90. Their types use ordinary Category and Hom sets. They do not give equivalences of coherent mapping spaces for an accessible reflective localization of quasicategories."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*[Gg]enerat|[Gg]enerat.*unit|[Ss]mall.*[Rr]eflect|[Oo]rthogonal.*[Aa]ccess",
+   "results": "{\"t\": \"2026-10-16T22:34:20Z\", \"tool\": \"grep\", \"query\": \"unit.*[Gg]enerat|[Gg]enerat.*unit|[Ss]mall.*[Rr]eflect|[Oo]rthogonal.*[Aa]ccess\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean\"], \"digest\": \"0fd80469a6ee6902\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; returned localization predicates and orthogonal reflections are for ordinary Category and Hom sets, while the grep hits concern small ordinary categories, generators in Type and preservation/reflection of colimits. None states this theorem for quasicategories and coherent mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization endofunctor preserving filtered colimits admits a set of unit arrows detecting its local objects",
+   "results": "{\"t\": \"2026-10-16T22:34:20Z\", \"tool\": \"leanfinder\", \"query\": \"A localization endofunctor preserving filtered colimits admits a set of unit arrows detecting its local objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk'\", \"CategoryTheory.Functor.IsLocalization\", \"CategoryTheory.MorphismProperty.hasLocalizationOfLocallySmall'\", \"CategoryTheory.MorphismProperty.HasLocalization.hL\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\", \"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.inverts\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetId\"], \"digest\": \"aef2bc61149b1b7c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: independent second reading; returned localization predicates and orthogonal reflections are for ordinary Category and Hom sets, while the grep hits concern small ordinary categories, generators in Type and preservation/reflection of colimits. None states this theorem for quasicategories and coherent mapping spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -117,5 +240,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-localization-small-generators",
+  "worker": "stage1",
+  "summary": "Construct the small set explicitly from unit maps on compact representatives; reuse the existing common-rank compact-approximation, natural mapping-space colimit, coherent adjunction and componentwise-equivalence statements. Expand the inverse argument instead of silently using retract closure. No new nodes, no statement change, no Mathlib leaf.",
+  "blueprint": "Historical blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite mapping-complex adjunction before R inverse limit. The main-20261015 ancestor has the same displayed finite adjunction; this split supplies its coherent localization foundation below the unit and changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic componentwise detection of equivalences between coherent diagrams, used only to pass the unit-locality tests to a limit; it does not replace any geometric or coefficient step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-b16c3221c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-b16c3221c (reviewer sub-agent of L); spot-checked: I read the item, all five steps and the statements of all seven cited nodes in full. Statement: it agrees with HTT Prop. 5.5.4.2(3), (ii)=>(iii), with (1). HTT is not archived under literature/, so I checked it against my knowledge of HTT. Presentable V, a reflective L -| i with i fully faithful and iL accessible, and a small S whose local objects are exactly the essential image; nothing added or weakened. The only citer (segal-localization-model, i=R, L=q) uses exactly these hypotheses. Steps: (1) the composite Map(TX,iu)~Map(LX,u)~Map(X,iu) is precomposition with eta_X. The local-smallness of U that pointwise-adjoint-criterion needs follows from full faithfulness. (2) compact-approximation applied to one category and one endofunctor gives the rank tau and an essentially small V^tau, so S={eta_d}, indexed by D_0, is small. (3) A tau-filtered presentation plus the objectwise arrow-colimit clause of yoneda-presheaf-limits. (4) The naturality square moves the S-test to each p(q); the componentwise-equivalence clause of enhanced-functor-cone-calculus and the natural contravariant colimit formula identify the limit map with precomposition by eta_X. (5) Elementary two-sided inverse using Step 1 at TZ; not circular. Checks: proof_deps equals the union of uses. The dependency closures of all cited nodes contain no cycle back to the item. Duplicate candidates read: reflector-accessibility (the converse), small-localization-saturation and presentable-infinity-adjoints (start from a given S), associative-reflective-localization, combinatorial-localization-presentability; none states the item. No SGA is used. Small cases checked: identity reflection, spaces to a point, the zero category, empty index excluded by filteredness. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (generic componentwise equivalence, already used this way across the unit). Minor note, no edit: the statement relies on the DAG convention for 'accessible functor' and 'reflective adjunction' rather than defining them inline. No new nodes and no fixes."
  }
 }

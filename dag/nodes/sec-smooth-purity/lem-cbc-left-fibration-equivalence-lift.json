@@ -85,14 +85,117 @@
    "date": "2026-10-17",
    "verdict": "Second reader: no match. Read the returned declarations and Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:35-112 and Quasicategory/InnerFibration.lean:29-100. RelativeMorphism and Subcomplex.fromPreimage define relative maps and preimages, not join coslices or their left-horn lifting. Quillen fibrations require every horn, not only left horns. Generic model-category lifting and fibrant-object homMk declarations do not assert conservativity or equivalence-edge lifting for quasicategories. The independent Loogle and AlgebraicTopology grep queries returned no declarations.",
    "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left fibration between quasicategories reflects equivalences, is an isofibration, and lifts equivalences with prescribed source and target",
+   "results": "msearch.py returned all-horn model-category fibrations, SSet.Quasicategory and generic fibration primitives; no left-fibration equivalence theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftFibration\", \"Equivalence\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "left.?fibration|conservativity|isofibration|equivalence.?edge",
+   "results": "0 hits in Mathlib/AlgebraicTopology.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left fibration of quasicategories is conservative and lifts equivalence edges with prescribed source or target",
+   "results": "msearch.py returned generic all-horn/model-category and ordinary-category declarations; no left-fibration theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "left.?[Ff]ibration|conservative|isofibration|invertible.*edge",
+   "results": "{\"t\": \"2026-10-16T22:33:46Z\", \"tool\": \"grep\", \"query\": \"left.?[Ff]ibration|conservative|isofibration|invertible.*edge\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no full match. LeanFinder returns primitive inner horn filling, HomotopicL/R definitions and their comparison, a setoid instance, and a strict-Segal nerve helper; none states conservativity or prescribed equivalence lifting for left fibrations. Loogle and the focused AlgebraicTopology grep return zero hits. Primitive horn filling is used directly from the existing definition, not a leaf for this entire item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"ReflectsIsomorphisms\"",
+   "results": "{\"t\": \"2026-10-16T22:33:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"ReflectsIsomorphisms\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no full match. LeanFinder returns primitive inner horn filling, HomotopicL/R definitions and their comparison, a setoid instance, and a strict-Segal nerve helper; none states conservativity or prescribed equivalence lifting for left fibrations. Loogle and the focused AlgebraicTopology grep return zero hits. Primitive horn filling is used directly from the existing definition, not a leaf for this entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial map with lifting for the initial and inner horns reflects invertible edges of quasi categories",
+   "results": "{\"t\": \"2026-10-16T22:33:49Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial map with lifting for the initial and inner horns reflects invertible edges of quasi categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Quasicategory\", \"SSet.Truncated.instSetoidEdge\", \"SSet.Truncated.liftOfStrictSegal.hδ'₀\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"17239319d115b36c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no full match. LeanFinder returns primitive inner horn filling, HomotopicL/R definitions and their comparison, a setoid instance, and a strict-Segal nerve helper; none states conservativity or prescribed equivalence lifting for left fibrations. Loogle and the focused AlgebraicTopology grep return zero hits. Primitive horn filling is used directly from the existing definition, not a leaf for this entire item."
   }
  ],
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Let $u:X\\to Y$ be an edge of $\\mathcal L$ such that $r(u)$ is an equivalence. By the equivalence definition, choose an inverse edge $\\bar v:r(Y)\\to r(X)$ and a 2-simplex in $\\mathcal M$ whose edges are $r(u)$, $\\bar v$, and $\\operatorname{id}_{r(X)}$, with the latter witnessing $\\bar v\\circ r(u)\\simeq\\operatorname{id}_{r(X)}$. Use the left-fibration lifting property for the left horn $\\Lambda^2_0\\hookrightarrow\\Delta^2$ on the horn whose edges over $r(u)$ and $\\operatorname{id}_{r(X)}$ are $u$ and $\\operatorname{id}_X$. The filler supplies an edge $v:Y\\to X$ over $\\bar v$ and a 2-simplex witnessing $v\\circ u\\simeq\\operatorname{id}_X$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019K",
+    "place": "Proposition 4.4.2.11, proof: choose a homotopy inverse and lift the displayed 2-simplex along the left fibration."
+   }
+  },
+  {
+   "text": "Since $r(v)=\\bar v$ is an equivalence (exchange the two inverse triangles for $r(u)$), apply Step 1 to $v$. This gives $w:X\\to Y$ and a triangle with ordered edges $(v,w,\\operatorname{id}_Y)$. Denote the Step 1 triangle by $A=(u,v,\\operatorname{id}_X)$ and this triangle by $B=(v,w,\\operatorname{id}_Y)$, where triples list edges $01,12,02$. In $\\mathcal L$, prescribe a horn $\\Lambda_1^3$ with vertices $(X,Y,X,Y)$: its faces $d_0,d_2,d_3$ are respectively $B$, the degenerate triangle $(u,\\operatorname{id}_Y,u)$, and $A$. They agree on their common edges: these are $13=\\operatorname{id}_Y$, $12=v$, and $01=u$. The quasicategory inner-horn axiom supplies a filler, whose face $d_1$ is a triangle $H=(\\operatorname{id}_X,w,u)$. Next prescribe $\\Lambda_2^3$ with vertices $(Y,X,X,Y)$: its faces $d_0,d_1,d_3$ are respectively $H$, $B$, and the degenerate triangle $(v,\\operatorname{id}_X,v)$. Their common edges are $23=w$, $12=\\operatorname{id}_X$, and $02=v$, so they define a horn. An inner-horn filler has face $d_2$ with ordered edges $(v,u,\\operatorname{id}_Y)$. This is the second inverse triangle for $u$ and $v$; together with $A$, it makes $u$ an equivalence by definition. Both 3-horn fillings are absolute fillings in the quasicategory $\\mathcal L$; no outer-horn theorem or homotopy-substitution theorem is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/019K",
+    "place": "Proposition 4.4.2.11, repeated left-inverse lifting; the final homotopy-inverse argument is expanded here into two explicit inner 3-horn fillings."
+   }
+  },
+  {
+   "text": "A left fibration has the right lifting property for every inner horn because the range $0\\leq i<n$ includes all $0<i<n$. Given an equivalence edge $e:r(x)\\to b$ and a chosen vertex $x$ over its source, apply the $n=1$, $i=0$ left-horn lifting property to the vertex $x$ and the edge $e$. This gives an edge $\\widetilde e:x\\to x\\prime$ with $r(\\widetilde e)=e$ exactly. The reflection proved in the first two steps makes $\\widetilde e$ an equivalence. Thus $r$ is an isofibration with the prescribed-source clause.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EW",
+    "place": "Example 4.4.1.11, dual left-fibration assertion: left fibrations are inner fibrations and lift equivalences with prescribed source; Proposition 4.4.2.11 makes the lift an equivalence."
+   }
+  },
+  {
+   "text": "For the prescribed-target clause, let $e:m_0\\to r(y)$ be an equivalence and choose an inverse $e\\prime:r(y)\\to m_0$ together with a 2-simplex in $\\mathcal M$ on vertices $(r(y),m_0,r(y))$ whose edges are $e\\prime$, $\\operatorname{id}_{r(y)}$, and $e$. First lift $e\\prime$ from the prescribed source $y$ using the left 1-horn, obtaining $v:y\\to x$ over $e\\prime$. Now use the left 2-horn lifting property on that base 2-simplex, prescribing $v$ on edge $01$ and $\\operatorname{id}_y$ on edge $02$. The filler has edge $12$ an edge $\\widetilde e:x\\to y$ with $r(\\widetilde e)=e$ exactly. By reflection, $\\widetilde e$ is an equivalence, which proves the final clause.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EW",
+    "place": "Example 4.4.1.11 together with the prescribed-target construction: lift an inverse from the target, then lift its inverse triangle by the left 2-horn."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/019K",
+  "place": "Proposition 4.4.2.11 and Example 4.4.1.11 (01EW), with the prescribed-target inverse-triangle construction. Kerodon is online and not archived in literature/."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -111,5 +214,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-left-fibration-equivalence-lift",
+  "worker": "stage1",
+  "summary": "Checked the exact statement against Kerodon conservativity and isofibration. Four steps lift an inverse triangle, construct the second inverse triangle using two explicit inner 3-horns, deduce source-prescribed isofibration, and lift an inverse triangle for the target-prescribed clause. No new nodes: only the two existing definition nodes are used.",
+  "blueprint": "Realizes the relative lift-space foundation used after the opening compactification choice in thm-cbc-finite-level-proetale: the left-fibration conservativity and prescribed-target lift used by the intervening relative-coslice and outer-horn arguments. The cited Kerodon proof is agent-sourced because it is not archived in literature/.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-4c201d3c0",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-4c201d3c0 (reviewer sub-agent of L); spot-checked: I read the item, both cited definitions (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations), the parent, the unit and the delivery-errors list A–F. I read Kerodon 019K (Prop 4.4.2.11) and 01EW (Ex 4.4.1.11) online; they are not archived, and the proof is correctly marked agent. The statement matches those sources, and the parent uses exactly the reflection clause and the prescribed-target clause. Step 1: the Lambda^2_0 lift of (u, id_X) over (r(u), id) gives v and the triangle A=(u,v,id_X). Step 2: I checked every face and shared edge of the two horns. In Lambda^3_1 on (X,Y,X,Y) the faces are d0=B, d2=s1u, d3=A, and the filler's d1 is H=(id_X,w,u). In Lambda^2_3 on (Y,X,X,Y) the faces are d0=H, d1=B, d3=s1v, and the filler's d2 is (v,u,id_Y). Both horns are inner and are filled in the quasicategory L, so Step 2 gives exactly the definition's two inverse witnesses. Step 3: the Lambda^1_0 lift of e from x satisfies r(lift)=e exactly and is an equivalence by Steps 1-2. Step 4: lift the inverse e' from y, then fill Lambda^2_0 with v and id_y; edge 12 is x->y over e exactly, and reflection makes it an equivalence. I checked the empty, identity and ordinary-nerve cases. The delivery creates no new nodes. I searched for duplicates with rg and found none: equivalence-outer-horn-filling, isofibration-exponentiation and right-fibration-fibers state different things. The unit has no steps and the only cited nodes are definitions, so there is no route issue and no tool_uses. One minor point needs no fix: Step 2's uses omits def-coef-infinity-fibrations, which comes in through Step 1 and is already in proof_deps. I made no changes."
  }
 }

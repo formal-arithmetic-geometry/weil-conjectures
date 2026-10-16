@@ -1,0 +1,129 @@
+{
+ "id": "lem-cbc-weak-equivalence-relative-disk-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Opening sentence of thm-cbc-finite-level-proetale.proof.md, \"Choose a compactification\": supporting homotopical foundation via the recorded refinement/groupoid-localization ancestry. In the CW-source lifting argument of Kerodon 0140, this is the single-cell extension problem in the paragraph beginning \"To construct the pair\", before gluing over the skeleton. The blueprint itself does not name this topological lemma.",
+   "via": [
+    "lem-cbc-cw-source-homotopy-lift",
+    "lem-cbc-whitehead-cw-homotopy-inverse",
+    "lem-cbc-realization-weak-equivalence",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-simplicial-groupoid-localization",
+    "lem-cbc-cofiltered-coherent-equivalence-diagrams",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Relative disk homotopy extension along a weak homotopy equivalence",
+ "statement": "Use path components and continuous based homotopy groups as in [def-cbc-enhanced-diagrams-cones]. Let $A,B$ be arbitrary topological spaces and $w:A\\to B$ a continuous map inducing a bijection on path components and isomorphisms $\\pi_j(A,a)\\to\\pi_j(B,w(a))$ for every $a\\in A$ and $j\\geq1$. Let $n\\geq0$, put $D^n=\\{x\\in\\mathbb R^n:\\|x\\|_2\\leq1\\}$ and $S^{n-1}=\\partial D^n$ (so $D^0$ is a point and $S^{-1}=\\varnothing$), and give all products the ordinary product topology. Suppose $\\alpha:S^{n-1}\\to A$, $\\beta:D^n\\to B$ and $h:S^{n-1}\\times[0,1]\\to B$ are continuous and satisfy $h(s,0)=w(\\alpha(s))$ and $h(s,1)=\\beta(s)$. Then there exist continuous maps $\\widetilde\\alpha:D^n\\to A$ and $\\widetilde h:D^n\\times[0,1]\\to B$ satisfying $\\widetilde\\alpha|_{S^{n-1}}=\\alpha$, $\\widetilde h|_{S^{n-1}\\times[0,1]}=h$, $\\widetilde h(x,0)=w(\\widetilde\\alpha(x))$ and $\\widetilde h(x,1)=\\beta(x)$ for all $x\\in D^n$. No basepoint is fixed, and $A,B$ need not be CW complexes.",
+ "source": {
+  "document": "https://kerodon.net/tag/0140",
+  "place": "Lemma 3.6.3.11 (Kerodon Tag 0140), proof: the single-cell extension problem and its displayed singular mapping-path lifting square, with the concluding trivial-Kan-fibration argument. This is only the local disk assertion used there, not the whole CW-source conclusion. Transfer the simplex/boundary pair to the Euclidean disk/boundary pair. Weak equivalence is expanded by Remark 3.6.3.4 (013T). Read online 2026-10-17; archival copy WANTED. No Stacks tag is claimed for this topological lemma."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A weak homotopy equivalence has the homotopy extension lifting property for a disk relative to its boundary sphere",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.LeftHomotopyRel, HomotopicalAlgebra.RightHomotopyRel, HomotopicalAlgebra.LeftHomotopyClass.whitehead, HomotopicalAlgebra.RightHomotopyClass.whitehead, ContinuousMap.HomotopyEquiv, HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension, HomotopicalAlgebra.PathObject.RightHomotopy.rightHomotopyRel, Homotopy.extendEquiv.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap.Homotopy, Metric.closedBall",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*extension|extension.*homotopy|WeakHomotopy|HasLiftingProperty",
+   "sub": "Topology",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a map from the boundary sphere into A and its specified homotopy in B across a disk along a weak homotopy equivalence A to B",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s): ContinuousMap.Homotopy.extend_apply_coe, ContinuousMap.Homotopy.extend_apply_of_mem_I, Homotopy.ofExtend.congr_simp, ContinuousMap.Homotopy.pathExtend_evalAt, TopCat.diskBoundaryInclusion, SSet.RelativeMorphism.Homotopy.h, ContinuousMap.Homotopy.extend, ContinuousMap.Homotopy.extend_one.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping path projection of a topological weak equivalence lifts every inclusion of a sphere into a closed disk",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s): TopCat.RelativeCWComplex.basicCell, TopCat.ballInclusion, TopCat.diskBoundaryInclusion, TopCat.diskBoundary, ContinuousMap.HomotopyEquiv.NonemptyDiffeomorphSphere, IsLocalHomeomorph.existsUnique_continuousMap_lifts, IsCoveringMap.exists_path_lifts, IsCoveringMap.liftPath.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "HELP|homotopyExtension|relative.*[Dd]isk|[Dd]isk.*[Ll]ift|weakHomotopy",
+   "sub": "AlgebraicTopology",
+   "results": "[grep] OK 25 hit(s), all irrelevant occurrences of Help/helper/helps in comments in CechNerve.lean, SimplexCategory, FundamentalGroupoid, SimplicialSet/AnodyneExtensions/PairingCore.lean, SimplicialSet/StrictSegal.lean.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "diskBoundaryInclusion|HasLiftingProperty|homotopyExtension",
+   "sub": "Topology/CWComplex",
+   "results": "[grep] OK 2 hit(s): Mathlib/Topology/CWComplex/Abstract/Basic.lean:61 (docstring) and :63 (TopCat.RelativeCWComplex.basicCell).",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_continuousMap_lifts|exists_path_lifts|diskBoundaryInclusion",
+   "sub": "Topology",
+   "results": "[grep] OK 10 hit(s): Mathlib/Topology/Category/TopCat/Sphere.lean:58,74,76; Mathlib/Topology/Homotopy/Lifting.lean:18,24,171,218,259; Mathlib/Topology/CWComplex/Abstract/Basic.lean:61,63.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "postcomp_bijective_of_weakEquivalence|homotopy_extension|theorem whitehead",
+   "sub": "AlgebraicTopology/ModelCategory",
+   "results": "[grep] OK 2 hit(s): Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:183; Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean:153.",
+   "date": "2026-10-17",
+   "verdict": "no match: read ModelCategory/RightHomotopy.lean:183-191 and ModelCategory/Homotopy.lean:130-166. Abstract model-category extension/postcomposition does not identify arbitrary topological weak equivalences with the required abstract classes. Topology/Homotopy/Basic.lean:153-177 extends the time parameter by clamping, not a prescribed sphere homotopy over a disk. TopCat.diskBoundaryInclusion (Sphere.lean:58-64) defines the inclusion only. Topology/Homotopy/Lifting.lean:171-176,218 requires a local homeomorphism or covering map, absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-cw-source-homotopy-lift",
+  "date": "2026-10-17",
+  "group": "Q53"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc"
+}

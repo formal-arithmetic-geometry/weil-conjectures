@@ -26,9 +26,68 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the cell structure of $K$ from the statement and write $K_{-1}=\\varnothing$ and $K_n$ for its $n$-skeleton. We construct, by induction on $n\\geq-1$, continuous maps $v_n:K_n\\to A$ and $H_n:K_n\\times I\\to B$, where $I=[0,1]$, such that $H_n(k,0)=w(v_n(k))$, $H_n(k,1)=u(k)$, and both maps restrict exactly to their predecessors. The maps with empty domain give the base case $n=-1$, with all equalities vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0140",
+    "place": "Lemma 3.6.3.11 (Kerodon 0140), proof by recursion on the skeleta; agent expansion of the quotient-continuity details."
+   }
+  },
+  {
+   "text": "Assume $(v_{n-1},H_{n-1})$ has been constructed. For each $n$-cell $e$, let $\\chi_e:D^n\\to K_n$ be its characteristic map and $b_e:S^{n-1}\\to K_{n-1}$ its boundary map. Define $\\alpha_e=v_{n-1}b_e$, $\\beta_e=u\\chi_e$ and $h_e(s,t)=H_{n-1}(b_e(s),t)$. They are continuous, and the inductive endpoint identities give $h_e(s,0)=w(\\alpha_e(s))$ and $h_e(s,1)=\\beta_e|_{S^{n-1}}(s)$ because $\\chi_e|_{S^{n-1}}=b_e$. Apply [lem-cbc-weak-equivalence-relative-disk-extension] with this $w$, this dimension $n$, and these three maps. Its component and based-group hypotheses are exactly the hypotheses on $w$ in the item. Choose the resulting maps $a_e:D^n\\to A$ and $G_e:D^n\\times I\\to B$. In dimension zero the boundary data are empty and the same lemma still applies; no source basepoint or connectedness is needed.",
+   "uses": [
+    "lem-cbc-weak-equivalence-relative-disk-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0140",
+    "place": "Lemma 3.6.3.11 (Kerodon 0140), proof by recursion on the skeleta; agent expansion of the quotient-continuity details."
+   }
+  },
+  {
+   "text": "The attaching construction makes $q_n:K_{n-1}\\amalg\\coprod_eD^n\\to K_n$ a quotient map. Put $v_{n-1}$ and $a_e$ on its summands. They agree at every boundary identification since $a_e|_{S^{n-1}}=v_{n-1}b_e$, so descend to a function $v_n$. It is continuous: for an open $U\\subseteq A$, $q_n^{-1}(v_n^{-1}(U))$ is open on each summand, hence open in the coproduct, and the quotient criterion gives that $v_n^{-1}(U)$ is open. Similarly $H_{n-1}$ and the $G_e$ descend to a function $H_n:K_n\\times I\\to B$, since $G_e(s,t)=H_{n-1}(b_e(s),t)$ for every boundary point and every $t$. Its pullback along $q_n\\times\\operatorname{id}_I$ is continuous: the product of a topological coproduct with $I$ has the corresponding open summands, and each restriction is one of the continuous maps just specified. Apply [lem-cbc-quotient-cylinder-continuity] to $q_n$, $T=I$ and $Z=B$. The interval is locally compact (small closed subinterval neighborhoods form a compact neighborhood basis, with one-sided intervals at its endpoints). Thus $H_n$ is continuous for the ordinary product topology. All endpoint identities and both predecessor restrictions hold on every summand, hence everywhere by surjectivity of $q_n$. This completes the inductive step.",
+   "uses": [
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0140",
+    "place": "Lemma 3.6.3.11 (Kerodon 0140), proof by recursion on the skeleta; agent expansion of the quotient-continuity details."
+   }
+  },
+  {
+   "text": "Induction and choice over the sets of cells produce one compatible sequence $(v_n,H_n)$. Since $K=\\bigcup_{n\\geq0}K_n$, set $v(k)=v_n(k)$ and $H(k,t)=H_n(k,t)$ for any $n$ with $k\\in K_n$. These definitions are independent of $n$ by exact compatibility. For every cell $e$ of dimension $n$, we have $v\\chi_e=a_e$ and $H(\\chi_e(x),t)=G_e(x,t)$, including boundary points, because later stages restrict to stage $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0140",
+    "place": "Lemma 3.6.3.11 (Kerodon 0140), proof by recursion on the skeleta; agent expansion of the quotient-continuity details."
+   }
+  },
+  {
+   "text": "Let $q:\\coprod_{n\\geq0}\\coprod_{e\\text{ an }n\\text{-cell}}D^n\\to K$ be the coproduct of all characteristic maps. These maps cover $K$, and the weak-topology clause in the definition of the CW structure says precisely that $q$ is a quotient map. Each restriction of $v q$ is the continuous map $a_e$, so the same inverse-open-set argument as in step 3 proves $v$ continuous. Each restriction of $(x,t)\\mapsto H(q(x),t)$ is the continuous $G_e$, so the product-coproduct observation in step 3 proves this pullback continuous. Apply [lem-cbc-quotient-cylinder-continuity] again, now to $q$ and $T=I$, to obtain continuity of $H$ on the ordinary product $K\\times I$. The endpoint identities follow on every $K_n$ and hence on $K$: $H(k,0)=w(v(k))$ and $H(k,1)=u(k)$. If $K$ is empty the empty maps already give the conclusion. The construction imposed no CW structure on $A$ or $B$ and no basepoint condition.",
+   "uses": [
+    "lem-cbc-quotient-cylinder-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0140",
+    "place": "Lemma 3.6.3.11 (Kerodon 0140), proof by recursion on the skeleta; agent expansion of the quotient-continuity details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-weak-equivalence-relative-disk-extension",
+  "lem-cbc-quotient-cylinder-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0140",
+  "place": "Lemma 3.6.3.11, proof; online reference not archived. Skeleton construction follows the reference; quotient-cylinder continuity is supplied explicitly from the existing Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +151,50 @@
    "results": "{\"t\": \"2026-10-16T21:36:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopic\\\", \\\"CWComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading. Read ModelCategory/Homotopy.lean:130-166,215-238: abstract model-category homotopy classes require a model structure, cofibrancy and fibrancy. These are not supplied for arbitrary topological A and B by the declarations. Quotient mk-surjectivity only chooses representatives of already existing homotopy classes; Equiv.lean:38-53 packages inverse data rather than producing a lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from a CW complex to the target of a weak homotopy equivalence lifts up to homotopy",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s): Topology.CWComplex.mkFinite_map, Topology.CWComplex.mkFiniteType_map, HomotopicalAlgebra.LeftHomotopyRel, TopCat.RelativeCWComplex, Topology.CWComplex.map_def, HomotopicalAlgebra.LeftHomotopyClass.whitehead, Topology.RelCWComplex.mkFinite_map, Topology.RelCWComplex.mkFiniteType_map.",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory/Homotopy.lean:130-166 requires an abstract model structure and cofibrant/fibrant objects, which do not supply the claimed topological theorem in one line; CWComplex characteristic-map declarations describe cells, not lifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.CWComplex, ContinuousMap.Homotopic",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory/Homotopy.lean:130-166 requires an abstract model structure and cofibrant/fibrant objects, which do not supply the claimed topological theorem in one line; CWComplex characteristic-map declarations describe cells, not lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*homotopy|homotopy.*lift|postcomp_bijective",
+   "sub": "Topology/CWComplex",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory/Homotopy.lean:130-166 requires an abstract model structure and cofibrant/fibrant objects, which do not supply the claimed topological theorem in one line; CWComplex characteristic-map declarations describe cells, not lifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postcomposition by a weak homotopy equivalence is surjective on homotopy classes of maps from a CW complex",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s): HomotopicalAlgebra.LeftHomotopyClass.mk_surjective, HomotopicalAlgebra.LeftHomotopyClass.postcomp, HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence, HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence, HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence, HomotopicalAlgebra.weakEquivalence_of_postcomp, HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence, HomotopicalAlgebra.RightHomotopyClass.mk_surjective.",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory/Homotopy.lean:130-166 requires an abstract model structure and cofibrant/fibrant objects, which do not supply the claimed topological theorem in one line; CWComplex characteristic-map declarations describe cells, not lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a cofibrant cell complex lifts up to homotopy across a weak equivalence",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.CofibrantObject.homRel, HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick, HomotopicalAlgebra.ModelCategory.cm4b, HomotopicalAlgebra.RelativeCellComplex.Cells.ι, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization, HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual, HomotopicalAlgebra.RelativeCellComplex.hom_ext, HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy.",
+   "date": "2026-10-17",
+   "verdict": "no match: ModelCategory/Homotopy.lean:130-166 requires an abstract model structure and cofibrant/fibrant objects, which do not supply the claimed topological theorem in one line; CWComplex characteristic-map declarations describe cells, not lifts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-whitehead-cw-homotopy-inverse",
@@ -115,5 +214,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-cw-source-homotopy-lift",
+  "worker": "stage1",
+  "summary": "Retained the exact statement. Checked project Lean for an attachment and Mathlib for an exact leaf; neither supplies it. Expanded Kerodon 0140 into compatible skeletal induction, separating its single-cell relative disk extension as one new statement-only node and using the existing Mathlib quotient-cylinder leaf to justify continuity at every stage and on the infinite union. No source/target CW assumption or fixed basepoint was added.",
+  "blueprint": "Supporting topological foundation for the opening choice of compactification in thm-cbc-finite-level-proetale.proof.md, through the unchanged recorded via chain. This topological argument is not literal blueprint text: it realizes the CW-source lifting sublemma used twice in the parent Whitehead split. Its steps 1-4 realize Kerodon 0140 skeletal recursion; step 5 makes explicit the continuity implicit in that recursion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-4333781ab",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-4333781ab (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against Kerodon Lemma 3.6.3.11 (tag 0140), read online, and Remark 013T. The item's statement is unchanged and matches the source hypothesis by hypothesis: an arbitrary weak equivalence w:A->B, a CW source K, and an unbased homotopy from w v to u. Both uses in the parent Whitehead node agree with it. Step 1, the skeletal induction with exact restriction and the empty base case, is elementary and correct. Step 2 builds alpha_e, beta_e and h_e with the required endpoint identities, which are exactly the new lemma's hypotheses; n=0 is covered. Steps 3 and 5 use the Mathlib leaf lem-cbc-quotient-cylinder-continuity (Topology.IsQuotientMap.continuous_lift_prod_left, CompactOpen.lean:584-598, which needs only a locally compact Y) on the attaching quotient q_n and on the global characteristic-map quotient, each with T=I. These applications are correct, and the descent and well-definedness checks are written out. Step 4 is elementary. proof_deps equals the union of the uses, both cited nodes are in unit sk-prop-sf-cbc, and no tool_uses are needed. The new node lem-cbc-weak-equivalence-relative-disk-extension is the single-cell homotopy extension lifting property (HELP) for (D^n, S^{n-1}): a true statement and exactly the inductive-step lifting problem in 0140. It is strictly smaller than the item (one cell with fixed boundary data), not a restated clause, and a statement only. I tested it at n=0, n=1, w=id and A empty. An rg search of the DAG found no duplicate: lem-coef-topological-serre-model, kan-realization-serre, cubical-open-box-pair and model-right-homotopy-extension each differ. There is no cycle and no SGA citation. One repair: the new node lacked the lean_audit field required by brief section 3. I added it with state none for master and slopmaster2 in fixes/dag/nodes/sec-smooth-purity/lem-cbc-weak-equivalence-relative-disk-extension.json and changed nothing else.; 1 file(s) fixed by the reviewer"
  }
 }
