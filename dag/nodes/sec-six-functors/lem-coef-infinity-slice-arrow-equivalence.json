@@ -247,5 +247,30 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked Kerodon online (it is not archived): 01HV (Thm 4.6.2.8), 01KV (Lemma 4.6.4.25) and 02VT (Cor 4.6.4.20). The item statement is Cor 4.6.4.20 with the strict q_y delta_y = p_y. S_y is C_{/y}. T_y is the oriented fiber product C x_C {y}, whose n-simplices are the maps from Delta^n blunt-joined with Delta^0. rho_n is the comparison c, so delta_y is the 02GH slice diagonal. Nothing is weakened, and no coefficient category or base-change morphism is involved. Step 1: rho_n(alpha x id) = alpha^+ rho_m holds on both layers. Step 2: the base face plus all coned faces except d_i make Lambda^{m+1}_i, which is inner because i <= m < m+1. So p_y is a right fibration without the cyclic slice-right-fibration node, and q_y is a right fibration exactly as the arrow-target node states. Step 3: the join-slice correspondence holds degreewise. Fun(J,T_y) is the strict fiber at y of Fun(B_J,C) because products preserve the pushout, and c_J^* F_e = delta_y e. Step 4: every hypothesis of isofibration-exponentiation (the 'in particular' clause) and of isofibration-base-change holds (base C, R = Delta^0, h = y), and the pullbacks are A_J and Fun(J,T_y). Step 5: lem-cbc-internal-hom-quasicategory is a Mathlib leaf, and its tool_use is accepted. The new 01KV node is exactly Lemma 4.6.4.25 with K = Delta^0 and F = y, since Fun_{K/}(J*K,C) = A_J. The bijection of equivalence classes follows. Step 6: the surjectivity, whiskering and injectivity argument gives the quasi-inverse in the sense of def-cbc. New node blunt-sharp-join-equivalence is the functor-category form of 01HV and is true; the empty cases are the identity. It is distinct from blunt-join-comparison (theta_i for a right anodyne i) and from join-cone-calculus (a fixed-point left cone, whose proof is cyclic). New node join-slice-diagram-isomorphisms: I tested J empty and J = Delta^0 with C the nerve of an ordinary category. Both new nodes are statement-only and self-contained, have correct blueprint from/via and real searches, and do not restate a clause of the item. The dependency closure has 12 nodes and no cycle. Only the item cites the new nodes. No SGA source is used. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-108e58cd5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Every clause matches the node and Kerodon 02VT/02GH: S_y via appendLast (= alpha+), p_y = initial face, T_y/q_y reuse the existing fixedTargetArrows/fixedTargetSource, prism rho_n with swapped factors, and an existential delta whose degreewise formula pins it down uniquely, plus both quasicategory claims, IsFunctorEquivalence and strict delta>>q_y = p_y. The node is unchanged apart from lean; the statement is verbatim; edge cases n=0, empty C/slice and one universe u are covered. The existing joinSlice can't be used: it is only isomorphic to the explicit model and citing its node would create a cycle. Defs are real, only the theorem is sorry, docstrings and proof steps are present, lines are under 100. nt_compile --json is clean, exit 0. Cosmetic only: 'Corollary the project server' in the report prose."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceArrowEquivalence",
+  "declaration": "SSet.Enhanced.right_vertex_slice_arrow_equivalence",
+  "declarations": [
+   "SSet.Enhanced.rightVertexSlice",
+   "SSet.Enhanced.rightVertexSliceProjection",
+   "SSet.Enhanced.sliceArrowPrism",
+   "SSet.Enhanced.right_vertex_slice_arrow_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SliceArrowEquivalence.lean",
+  "statement": "theorem right_vertex_slice_arrow_equivalence (C : SSet.{u}) [Quasicategory C] (y : C _⦋0⦌) : ∃ δ : rightVertexSlice C y ⟶ fixedTargetArrows C y, (∀ (n : SimplexCategoryᵒᵖ) (s : (rightVertexSlice C y).obj n), MonoidalClosed.uncurry (SSet.yonedaEquiv.symm ((δ ≫ pullback.fst (evaluation Δ[1] C (stdSimplex.obj₀Equiv.symm 1)) (SSet.const (X := Δ[0]) y)).app n s)) = sliceArrowPrism n.unop.len ≫ SSet.yonedaEquiv.symm s.1) ∧ Quasicategory (rightVertexSlice C y) ∧ Quasicategory (fixedTargetArrows C y) ∧ IsFunctorEquivalence δ ∧ δ ≫ fixedTargetSource C y = rightVertexSliceProjection C y",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations give the explicit right slice, its initial-face projection, and the canonical prism. The theorem existentially supplies the diagonal map, uniquely characterized degreewise by the prism equation, and states both quasicategory structures, equivalence, and strict equality over C."
  }
 }

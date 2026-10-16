@@ -197,5 +197,34 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-ab33f738c (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, the five cited existing nodes, the unit record and the ancestor proof (prop-coef-integral-exceptional-adjoint, paragraph 2) in full. DK I is not in literature/ and the network is blocked; I read a local copy at /tmp/dk1src at 1.4(ii)-(vii), 2.5-2.9, 3.1-3.8, 7.1-7.6, 8.1-8.3 and 9.1-9.7. Checked against DK I: free-product invariance with no cofibrancy (2.7), free maps and strong free retracts (7.4-7.6), the bar with i copies of A (8.2, whose proof omits the contraction), and groupoid completion of cofibrant V (9.2, proved from 7.6 and 3.7). Step 2: I checked by hand every extra-degeneracy identity of the shift A_k->A_{k+1}, including d_0h=1, d_1h_0=h_{-1}eps_0, the face/shift identities case by case and the degeneracy/shift identities. They match the Mathlib ExtraDegeneracy fields at lines 72-83. The leaf ExtraDegeneracy.section_/section_comp_hom/homotopy (lines 126/142/174) is stated for any category C, so C=Type is a one-line specialization. Steps 3-7 use only what the cited nodes state: the diagonal theorem in both directions, Reedy latching for the span, R and N_hc applied only to locally Kan objects, and the groupoid-pi_0 Kan clause. Steps 1 and 8 are elementary. All proof citations lie in the unit sk-prop-sf-biduality-general; no tool_uses are needed. I could not open Arakawa or HTT, so I checked those claims directly. For agreement of fixed-object and Bergner cofibrations: trivial fibrations in sCat_O are Bergner trivial fibrations, and a Bergner trivial fibration pulled back along O->Ob P is one in sCat_O; the same holds for cofibrant objects. For the diagonal comparison: I built a natural map C[Delta^n]->F_n (an n-simplex of D(A) is a functor F_n->A), sending S to max{s in S : s<=k-1}, so D(A)->N_hc(A) exists. Local invariance is DK 1.4(vii). Small cases checked: discrete A, a one-object simplicial group, a free category with one or two loops, empty O, A=I_O, i=id. A full-DAG duplicate scan found nothing: the dk-cofibrant-localization, hammock, partial-sum-bar and simplicial-groupoid-localization nodes state different things. No new node restates a clause of the item, and none carries a proof. Fields and blueprint refs are correct. No SGA source; no target or base-change morphism involved. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c8598023",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read the node, dependency lem-coef-coherent-nerve-comparison (full Lean module and infrastructure), module, report (Worker report and Second reading by Q98 present). Clauses: SCat.{u} and N; FixesObjects (type equality plus HEq) for O and identity on objects; IsBergnerCofibrant is Mathlib IsCofibrant under N.bergner.model; completion and inversion fixed by degreewise strict localization at top and at the strictMap image (no saturation); IsPushout on the displayed arrows; IsBergnerHomotopyPushout is the dependency's cofibrant-span criterion; nerve clause is nerveFunctor.map (R.map unit) as WHE plus Kan target; naturality via functors and natural transformations. Extra pair hypotheses on the nerve clause are harmless (i = id admissible). Pushout for all arrows is a true, harmless strengthening of the conclusion. Edge cases (empty O, identity pair, degree 0, object-collapsing i) OK. Only the lean field differs from the side node; the statement is verbatim. Docstrings and 8-step proof present; only sorry is the theorem; imports follow the rules; no duplicate notion found. nt_compile --json against the side overlay compiled clean with no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CofibrantSimplicialInversion",
+  "declaration": "CategoryTheory.CofibrantSimplicialInversion.cofibrant_simplicial_inversion",
+  "declarations": [
+   "CategoryTheory.CofibrantSimplicialInversion.Degree",
+   "CategoryTheory.CofibrantSimplicialInversion.degreeCategory",
+   "CategoryTheory.CofibrantSimplicialInversion.degreeFunctor",
+   "CategoryTheory.CofibrantSimplicialInversion.IsDegreewiseLocalization",
+   "CategoryTheory.CofibrantSimplicialInversion.FixesObjects",
+   "CategoryTheory.CofibrantSimplicialInversion.IsBergnerCofibrant",
+   "CategoryTheory.CofibrantSimplicialInversion.IsBergnerHomotopyPushout",
+   "CategoryTheory.CofibrantSimplicialInversion.Statement",
+   "CategoryTheory.CofibrantSimplicialInversion.cofibrant_simplicial_inversion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CofibrantSimplicialInversion.lean",
+  "statement": "theorem cofibrant_simplicial_inversion (N : CoherentNerveComparisonStatement.{u}) : Nonempty (Statement N)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-16",
+  "existing": false
  }
 }
