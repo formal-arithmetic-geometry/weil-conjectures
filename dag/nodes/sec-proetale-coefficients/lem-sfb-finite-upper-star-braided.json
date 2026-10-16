@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-finite-upper-star-braided",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$g^*$ is symmetric monoidal",
@@ -13,33 +13,164 @@
   "place": "node lem-sfb-finite-upper-star-braided, order 1519"
  },
  "stmt_deps": [
-  "def-sfb-finite-upper-star-monoidal"
+  "def-sfb-finite-upper-star-monoidal",
+  "det-def-sfb-ring-object-monoid"
  ],
  "proof": [
   {
-   "text": "The structure map $\\delta_{F,G}\\colon g^*(F\\otimes G)\\to g^*F\\otimes g^*G$ is the\nadjoint of $(\\eta_F\\otimes\\eta_G)$ followed by the lax structure map of $g_*$, with $\\eta$\nthe unit of $g^*\\dashv g_*$. The braiding commutes with this composite by naturality of the\nbraiding and the compatibility of the lax structure of $g_*$ with the braiding\n([def-sfb-finite-lower-star-lax-monoidal]). Transposing back gives\n\n$$\n\\beta_{g^*F,g^*G}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ g^*(\\beta_{F,G}).\n$$",
+   "text": "Write $L=g^*$, $R=g_*$, $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ and $\\mathcal D=\\Sh(Z_{\\mathrm{proét}},\\mathcal A)$; these are symmetric monoidal under the hypotheses inherited from [def-sfb-finite-upper-star-monoidal]. Let $\\Phi_{H,K}\\colon\\Hom(LH,K)\\cong\\Hom(H,RK)$ be the natural adjunction bijection of [def-sfb-finite-upper-lower-star-adjunction], with unit $\\eta_H=\\Phi_{H,LH}(\\mathrm{id}_{LH})$. Denote the lax tensor map of [def-sfb-finite-lower-star-lax-monoidal] by $m_{P,Q}\\colon RP\\otimes RQ\\to R(P\\otimes Q)$. Unpacking the mate structure specified in [def-sfb-finite-upper-star-monoidal], put\n$$a_{F,G}:=m_{LF,LG}\\circ(\\eta_F\\otimes\\eta_G)\\colon F\\otimes G\\longrightarrow R(LF\\otimes LG),\\qquad \\delta_{F,G}:=\\Phi_{F\\otimes G,LF\\otimes LG}^{-1}(a_{F,G}).$$\nThese $\\delta$ are precisely the invertible oplax tensor maps of the specified strong monoidal structure; write $\\gamma_{F,G}=\\delta_{F,G}^{-1}$ for its lax tensor maps.",
+   "uses": [
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-lower-star-lax-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
+    "place": "proof, first paragraph and displayed braiding identity"
+   }
+  },
+  {
+   "text": "For $F,G\\in\\mathcal C$, expand $a_{F,G}$ and use the symmetry compatibility of the lax functor $R$ in [def-sfb-finite-lower-star-lax-monoidal], followed by naturality of the symmetry for $\\eta_F$ and $\\eta_G$:\n$$\\begin{aligned}\nR(\\beta^{\\mathcal D}_{LF,LG})\\circ a_{F,G}\n&=m_{LG,LF}\\circ\\beta^{\\mathcal C}_{RLF,RLG}\\circ(\\eta_F\\otimes\\eta_G)\\\\\n&=m_{LG,LF}\\circ(\\eta_G\\otimes\\eta_F)\\circ\\beta^{\\mathcal C}_{F,G}\n=a_{G,F}\\circ\\beta^{\\mathcal C}_{F,G}.\n\\end{aligned}$$\nAll these maps have source $F\\otimes G$ and target $R(LG\\otimes LF)$; the two equalities are respectively the defining braided-functor equation for $R$ and the defining naturality square of $\\beta^{\\mathcal C}$.",
    "uses": [
     "def-sfb-finite-lower-star-lax-monoidal"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
+    "place": "proof, first paragraph and displayed braiding identity"
+   }
   },
   {
-   "text": "Since $\\delta$ is invertible, this is the compatibility of the strong monoidal structure with\nthe symmetries.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the naturality in both variables of the Hom bijection in [def-sfb-finite-upper-lower-star-adjunction]. The transpose of $\\beta^{\\mathcal D}_{LF,LG}\\circ\\delta_{F,G}$ is $R(\\beta^{\\mathcal D}_{LF,LG})\\circ a_{F,G}$, while the transpose of $\\delta_{G,F}\\circ L(\\beta^{\\mathcal C}_{F,G})$ is $a_{G,F}\\circ\\beta^{\\mathcal C}_{F,G}$. Step 2 identifies these transposes, so injectivity of $\\Phi$ gives\n$$\\beta^{\\mathcal D}_{LF,LG}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ L(\\beta^{\\mathcal C}_{F,G}).$$\nCompose on the left with $\\gamma_{G,F}$ and on the right with $\\gamma_{F,G}$. The inverse identities for the structure of [def-sfb-finite-upper-star-monoidal] give\n$$L(\\beta^{\\mathcal C}_{F,G})\\circ\\gamma_{F,G}=\\gamma_{G,F}\\circ\\beta^{\\mathcal D}_{LF,LG}.$$\nThis is the required compatibility of the already strong monoidal functor $L$ with the symmetries.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-upper-star-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
+    "place": "proof, transposing the displayed equality and final paragraph"
+   }
+  },
+  {
+   "text": "For a commutative ring object $(B,\\rho,e)$ of $\\mathcal C$, apply [det-def-sfb-ring-object-transport], clauses 1 and 2, to the strong monoidal functor $L$ with lax comparison $\\gamma$ and lax unit map $j\\colon\\mathbf 1_{\\mathcal D}\\to L\\mathbf 1_{\\mathcal C}$, the inverse of its oplax unit comparison from step 1. Clause 1 gives the ring object $LB$ with multiplication $\\rho_L=L(\\rho)\\circ\\gamma_{B,B}$ and unit $e_L=L(e)\\circ j\\colon\\mathbf 1_{\\mathcal D}\\to LB$. Clause 2 applies because step 3 proves its braided-functor hypothesis. Explicitly,\n$$\\rho_L\\circ\\beta^{\\mathcal D}_{LB,LB}=L(\\rho)\\circ L(\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=L(\\rho\\circ\\beta^{\\mathcal C}_{B,B})\\circ\\gamma_{B,B}=\\rho_L,$$\nusing $\\rho\\circ\\beta^{\\mathcal C}_{B,B}=\\rho$. Thus the transported ring object is commutative, including the final clause of the statement.",
+   "uses": [
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-transport.md",
+    "place": "clauses 1 and 2, applied to the final sentence of lem-sfb-finite-upper-star-braided"
+   }
   }
  ],
  "proof_deps": [
-  "def-sfb-finite-lower-star-lax-monoidal"
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "det-def-sfb-ring-object-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/lem-sfb-finite-upper-star-braided.proof.md",
+  "place": "entire mate-braiding proof, expanded by naturality of the adjunction bijection; ring-object consequence from det-def-sfb-ring-object-transport clauses 1 and 2"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjoint.*[Bb]raid|[Bb]raid.*leftAdjoint|[Bb]raid.*[Aa]djunction|[Aa]djunction.*[Bb]raid",
+   "results": "3 hit(s): Mathlib/CategoryTheory/Monoidal/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean; search subdirectory: CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern existing monoidal structures, composition, or functors already assumed braided; none proves that the mate of this lax symmetric pushforward is braided"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor on sheaves of abelian groups on the pro etale site is symmetric monoidal and sends commutative ring objects to commutative ring objects",
+   "results": "8 hit(s): CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.Monoidal.instMonoidalTransportedInverseSymmEquivalenceTransported",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern existing monoidal structures, composition, or functors already assumed braided; none proves that the mate of this lax symmetric pushforward is braided"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.LaxBraided",
+   "results": "3 hit(s): CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.mapCommMon_unit",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: Adjunction.mapCommMon in Monoidal/CommMon_.lean:263-271 assumes the left functor Braided, so cannot prove the missing symmetry compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint of a lax symmetric monoidal functor is symmetric monoidal when its mate oplax tensor comparison maps are invertible",
+   "results": "8 hit(s): CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.rightAdjointLaxMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern existing monoidal structures, composition, or functors already assumed braided; none proves that the mate of this lax symmetric pushforward is braided"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxBraided|OplaxBraided|leftAdjointOplaxMonoidal",
+   "results": "24 hit(s): Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean; search subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: hits concern existing monoidal structures, composition, or functors already assumed braided; none proves that the mate of this lax symmetric pushforward is braided"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+   "results": "4 hit(s): CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: Monoidal/Functor.lean:1064-1066 defines the mate tensor structure but does not assert its braiding compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal left adjoint of a lax braided right adjoint is braided by taking the mate of its braiding equation",
+   "results": "8 hit(s): CategoryTheory.Functor.LaxBraided.braided_assoc, CategoryTheory.leftAdjointMate, CategoryTheory.LaxBraidedFunctor.laxBraided, CategoryTheory.rightAdjointMate, CategoryTheory.Functor.LaxBraided.toLaxMonoidal, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Functor.Braided.toMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: Adjunction.mapCommMon in Monoidal/CommMon_.lean:263-271 assumes the left functor Braided, so cannot prove the missing symmetry compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint with the oplax monoidal structure induced by a braided lax monoidal right adjoint preserves braiding",
+   "results": "8 hit(s): CategoryTheory.Functor.map_braiding, CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Functor.LaxBraided.instComp, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.mapCommMon_unit, CategoryTheory.Functor.Braided.braided, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Functor.Braided.instComp",
+   "date": "2026-10-16",
+   "verdict": "no match for the whole item: Adjunction.mapCommMon in Monoidal/CommMon_.lean:263-271 assumes the left functor Braided, so cannot prove the missing symmetry compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "map_braiding|isCommMonObj_obj",
+   "results": "3 hit(s): Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean, Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean; search subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "partial match only: Functor.isCommMonObj_obj (CommMon_.lean:157-159) proves the ring consequence assuming LaxBraided; Functor.map_braiding (Braided/Basic.lean:535-538) assumes Braided and cannot establish it"
+  },
+  {
+   "tool": "grep",
+   "query": "braided.*adjoint|adjoint.*braided|oplax.*braid|braid.*oplax",
+   "results": "4 hit(s): Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean; search subdirectory: CategoryTheory/Monoidal",
+   "date": "2026-10-16",
+   "verdict": "No mate-braiding theorem: three Cartesian/Basic.lean documentation hits concern cartesian monoidal categories; Closed/Braided.lean:31 concerns adjointness of tensor functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction between braided monoidal categories, the oplax monoidal structure on the left adjoint induced by a lax braided right adjoint satisfies the oplax braiding identity",
+   "results": "8 hit(s): CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Adjunction.mapCommMon_unit, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Functor.map_braiding, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-16",
+   "verdict": "No exact match: Adjunction.mapCommMon assumes F.Braided (CommMon_.lean:263); IsMonoidal describes mates without establishing braiding; map_braiding assumes braidedness. unit_app_tensor_comp_map_δ is a mate equation, not the braiding conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "braid|symmetr",
+   "results": "0 hit(s): none; searched CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: no occurrence of braiding or symmetry in the monoidal-adjunction source file; leftAdjointOplaxMonoidal at lines 1064-1066 supplies only the mate structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Doctrinal adjunction: a monoidal adjunction with braided right adjoint and invertible comonoidal comparisons has braided left adjoint",
+   "results": "8 hit(s): CategoryTheory.Adjunction.mapCommMon, CategoryTheory.Adjunction.mapCommMon_counit, CategoryTheory.Adjunction.mapCommMon_unit, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.BraidedCategory.ofFaithful, CategoryTheory.Functor.Braided.instComp",
+   "date": "2026-10-16",
+   "verdict": "No match: mapCommMon assumes F.Braided (CommMon_.lean:263); IsMonoidal and its equations specify mate structures; BraidedCategory.ofFaithful constructs a braiding from a faithful functor and an already compatible family (Braided/Basic.lean:213-218); instComp assumes braided factors. None proves the item."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -60,5 +191,29 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-finite-pushforward-pullback"
+ "unit": "sk-def-sfb-finite-pushforward-pullback",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-finite-upper-star-braided",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its arbitrary scheme morphism. Ruled out attachment: the slopmaster2 declaration of the same name assumes WeaklyEtale g. Expanded the mate calculation into explicit equal transposes and inversion of tensor comparisons; supplied the ring-object consequence through the existing transport statement. Added the ring-object definition dependency, recorded thirteen actual Mathlib searches, and created no nodes. Second reading makes the transported unit explicit and independently rechecks the source, all four steps, and Mathlib candidates.",
+  "blueprint": "Steps 1-3 realize both paragraphs of lem-sfb-finite-upper-star-braided.proof.md: the specified mate, symmetry/naturality calculation, equality after transposition, and inversion of delta. Step 4 realizes the statement's final commutative-ring-object sentence. This retains the monoidal functoriality route of sk-def-sfb-finite-pushforward-pullback, proof, final paragraph.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-ring-object-transport",
+    "why": "Step 4 uses its generic monoid-object transport and commutativity clauses after steps 1–3 prove braidedness by the unit’s own mate route; this unit has no separate generic ring-object transport statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-ring-object-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-666e621ff",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-666e621ff (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and current-blueprint sources. Verified all four mate-braiding and ring-transport steps, arbitrary-morphism hypotheses, coefficient tensor, and edge cases. No duplicate replacement, missing dependency, or cycle found. Accepted ring-object transport tool use; no DAG fixes needed. Detailed checks are in review.md."
+ }
 }

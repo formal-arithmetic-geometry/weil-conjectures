@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan Section 7.2(ii) for the special-hammock reduction",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Definitions 3.1-3.2, Lemma 3.4 and Proposition 3.5, pp. 11-13; Dwyer-Kan, Calculating simplicial localizations, Propositions 6.2(i) and 8.2 for the special-hammock reduction",
    "via": [
     "lem-coef-cosimplicial-frame-mapping",
     "lem-coef-finite-reedy-localization",
@@ -26,9 +26,136 @@
  "stmt_deps": [
   "lem-coef-hammock-infinity-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form $\\mathcal T(x,y)$ as stated. If $(a,b)$ is a morphism, $p'a=p$ and $bi=i'$ imply $a,b\\in W$ by two-out-of-three. Componentwise composition preserves the three equations. Thus a chain of $k$ morphisms is a width-$k$ hammock with three columns before reduction. By the face, degeneracy and reduction rules of [lem-coef-hammock-infinity-localization], taking its reduction gives a simplicial map $\\rho:N\\mathcal T(x,y)\\to L^H(\\mathcal M,W)(x,y)$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definitions 3.1-3.2; verification of the displayed comparison"
+   }
+  },
+  {
+   "text": "We will use only the following closure properties, all consequences of lifting. Trivial cofibrations are ${}^{\\square}F$, so [lem-coef-lifting-class-closure] gives identities, composition and pushout stability. Trivial fibrations are $C^{\\square}$. To lift a cofibration against a pullback of such a map, project the lifting square to the original map, take its lift, then pair that lift with the given map to the pullback base; the pullback equation holds because the original lift lies over that base map. For a composite of two right-lifting maps first lift against the second factor using the first factor on the top arrow, then lift against the first factor using that first lift on the bottom arrow. The resulting diagonal solves the original square. Identities lift by the prescribed bottom map. Hence trivial fibrations contain identities and are closed under composition and pullback. These arguments require no properness assumption.",
+   "uses": [
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Remark 3.3; elementary lifting arguments, expanding the closure facts used in Proposition 3.5"
+   }
+  },
+  {
+   "text": "Use [def-coef-zigzag-homotopy-calculus] to form $\\mathcal Z=Z_{-+-}(x,y)$ with unrestricted outer weak equivalences. Its full subcategory with left arrow a trivial fibration and right arrow a trivial cofibration is exactly $\\mathcal T$; write $J:\\mathcal T\\hookrightarrow\\mathcal Z$. We give a homotopy inverse for $NJ$ rather than assuming a calculus for special zigzags.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.5, first sentence: comparison with unrestricted three-arrow zigzags"
+   }
+  },
+  {
+   "text": "For $z=(x\\xleftarrow{w}u\\xrightarrow{f}v\\xleftarrow{t}y)$ in $\\mathcal Z$, factor $t$ functorially as $y\\xrightarrow{i}v_1\\xrightarrow{q}v$ with $i$ a trivial cofibration and $q$ a fibration. Since $t,i\\in W$, $q$ is a trivial fibration. Put $u_1=u\\times_v v_1$, let $a:u_1\\to u$ and $f_1:u_1\\to v_1$ be the projections, and set $w_1=wa$. By step 2, $a$ is a trivial fibration; hence $w_1\\in W$. The new zigzag $Rz=(w_1,f_1,i)$ lies in $\\mathcal Z$. The pair $(a,q)$ defines a morphism $Rz\\to z$. Functorial factorization and the maps determined by the pullback projections give a functor $R:\\mathcal Z\\to\\mathcal Z$ and a natural transformation $R\\Rightarrow\\mathrm{id}_{\\mathcal Z}$. The induced vertical maps lie in $W$ by the two augmentation equations and two-out-of-three. If $z\\in\\mathcal T$, $w_1$ is a composite of trivial fibrations, so $Rz\\in\\mathcal T$ too.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.5, first sentence; explicit right-end normalization"
+   }
+  },
+  {
+   "text": "Factor $w_1$ functorially as $u_1\\xrightarrow{j}u_2\\xrightarrow{p}x$ with $j$ a cofibration and $p$ a trivial fibration. Since $w_1,p\\in W$, $j$ is a trivial cofibration. Put $v_2=v_1\\amalg_{u_1}u_2$, with maps $b:v_1\\to v_2$ and $f_2:u_2\\to v_2$. Step 2 makes $b$ a trivial cofibration, and then $i_2=bi$ is a trivial cofibration. Set $Sz=(x\\xleftarrow{p}u_2\\xrightarrow{f_2}v_2\\xleftarrow{i_2}y)$ in $\\mathcal T$. The pair $(j,b)$ defines $Rz\\to JSz$. Functoriality of factorization and the pushout gives $S:\\mathcal Z\\to\\mathcal T$ and $R\\Rightarrow JS$. Its vertical maps on morphisms are in $W$ by their outer-arrow equations. Both transformations restrict to $RJ\\Rightarrow\\mathrm{id}_{\\mathcal T}$ and $RJ\\Rightarrow SJ$, since step 4 showed that $R$ restricts to $\\mathcal T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.5, first sentence; explicit left-end normalization"
+   }
+  },
+  {
+   "text": "For a natural transformation $\\eta:F\\Rightarrow G$, a chain $c_0\\to\\cdots\\to c_n$ gives, for every $0\\leq k\\leq n$, the chain $Fc_0\\to\\cdots\\to Fc_k\\xrightarrow{\\eta_{c_k}}Gc_k\\to\\cdots\\to Gc_n$. Naturality identifies the common faces of these $n+1$ simplices; identities identify their degeneracies. They triangulate a prism and give a homotopy between the realized nerve maps. Apply this explicit construction to the two transformations in steps 4-5 and their restrictions: $N(JS)$ is homotopic to the identity on $N\\mathcal Z$ and $N(SJ)$ to the identity on $N\\mathcal T$. Thus $NJ$ is a homotopy equivalence on realization, so induces the required bijections on components and isomorphisms on homotopy groups.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.5, first sentence; explicit nerve prism argument"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-homotopy-fractions-square-criterion] with $U=C\\cap W$ and $V=F\\cap W$. These are wide subcategories by step 2. Complete a span whose left leg is in $U$ by its pushout; its new leg is in $U$. If the other input leg is in $W$, the remaining new leg is in $W$ by the equation of the square and two-out-of-three. Dually complete a cospan whose right leg is in $V$ by a pullback; its other projection is in $V$, and the extra weak-equivalence condition again follows from the square and two-out-of-three. Limits and colimits can be chosen functorially by their universal properties. Factor each weak equivalence by the model factorization $C$ followed by $F\\cap W$; the first factor also lies in $W$ by two-out-of-three. All three choices have exactly the functoriality and the two extra conditions required by the cited statement. Thus $(\\mathcal M,W)$ has the homotopy calculus of [def-coef-zigzag-homotopy-calculus].",
+   "uses": [
+    "lem-coef-homotopy-fractions-square-criterion",
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer-Kan Proposition 8.2; model-category verification"
+   }
+  },
+  {
+   "text": "By [lem-coef-homotopy-fractions-hammock-comparison], the reduction $r:N\\mathcal Z\\to L^H(\\mathcal M,W)(x,y)$ is a weak homotopy equivalence. Step 7 checks its precise homotopy-calculus hypothesis. On every chain in $\\mathcal T$, the composite $r\\circ NJ$ reduces the same three-column diagram as $\\rho$ in step 1, so they are equal as simplicial maps. Step 6 and composition of the induced isomorphisms on homotopy groups now show that $\\rho$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-homotopy-fractions-hammock-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Proposition 3.5, second sentence, using Dwyer-Kan Proposition 6.2(i)"
+   }
+  },
+  {
+   "text": "For $a:x'\\to x$, pull back $p:u\\to x$ to $p':u'=x'\\times_xu\\to x'$; its projection $u'\\to u$ is denoted $c$. Step 2 keeps the result in $\\mathcal T(x',y)$. Compare the following rows of length five:\n$$x'\\xleftarrow{p'}u'\\xrightarrow{c}u\\xleftarrow{1}u\\xrightarrow{f}v\\xleftarrow{i}y,$$\n$$x'\\xleftarrow{1}x'\\xrightarrow{a}x\\xleftarrow{p}u\\xrightarrow{f}v\\xleftarrow{i}y.$$\nThe vertical arrows from the first row to the second are $1,p',p,1,1,1$; they are weak equivalences, and the middle square commutes by $pc=ap'$. Reduction of the first row is the pulled-back zigzag, while reduction of the second is precomposition of the original hammock by $a$. For a chain of objects of $\\mathcal T$, insert this comparison at each cut of its rows. The pullback maps commute with all original vertical arrows. Deleting and repeating rows commutes with the construction; its prism simplices therefore give the desired homotopy of maps out of $N\\mathcal T$. This is precisely the hammock composition of [lem-coef-hammock-infinity-localization].",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Lemma 3.4; explicit source-end prism"
+   }
+  },
+  {
+   "text": "For $b:y\\to y'$, form $v'=v\\amalg_y y'$ with $k:v\\to v'$ and $i':y'\\to v'$. Here $i'$ is the pushout of $i$, hence a trivial cofibration by step 2. The target action is $(p,kf,i')$. The two rows\n$$x\\xleftarrow{p}u\\xrightarrow{f}v\\xleftarrow{i}y\\xrightarrow{b}y'\\xleftarrow{1}y',$$\n$$x\\xleftarrow{p}u\\xrightarrow{f}v\\xleftarrow{1}v\\xrightarrow{k}v'\\xleftarrow{i'}y'$$\nhave downward vertical arrows $1,1,1,i,i',1$, all weak equivalences; the nontrivial square is $ki=i'b$. Their reductions are respectively postcomposition by $b$ and the pushed-out zigzag. Inserting these rows at the cuts of every chain gives a prism as in step 9. Notice that neither $b$ nor $k$ is required to be a weak equivalence: they are horizontal. The source and target comparisons can be pasted since concatenation and reduction define composition in [lem-coef-hammock-infinity-localization]. Thus simultaneous endpoint changes have the asserted comparisons, with canonical limit/colimit identifications if choices change.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Remark 3.3 and Lemma 3.4; explicit target-end prism"
+   }
+  },
+  {
+   "text": "Finally, for $p=i=1$, reduction deletes the two identity outer columns and leaves exactly the length-one hammock of $f$. By [lem-coef-hammock-infinity-localization] this is the map of the localization on $f$. No replacement of either endpoint was made in the proof.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Definition 3.1, reduction of the identity-outer-arrow zigzag"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-homotopy-fractions-hammock-comparison",
+  "lem-coef-homotopy-fractions-square-criterion",
+  "lem-coef-lifting-class-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1409.8062",
+  "place": "Definitions 3.1-3.2, Remark 3.3, Lemma 3.4, Proposition 3.5; expanded normalization and endpoint prism arguments by Q31, with Dwyer-Kan Propositions 8.2 and 6.2(i) isolated as statement-only inputs. Both papers read online; local archival copies requested in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,15 +191,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 2)), SSet.modelCategoryQuillen.J (SSet.horn (n + 1) i).ι\", \"doc\": \"For any natural number $ n $ and index $ 0 \\\\leq i \\\\leq n+1 $, the inclusion morphism $ \\\\Lambda^{i}[n+1] \\\\to \\\\Delta[n+1] $ of the $ i $-th horn into the standard $ (n+1) $-simplex is a generating acycl\"}\n  {\"name\": \"SSet.Truncated.HomotopicR.homotopicL\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"∀ {X : SSet.Truncated 2} [X.Quasicategory₂]\\n  {x y : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Quasicategory₂._proof_1 })}\\n  {f g : SSet.Truncated.Edge x y}, SSet.Truncated.HomotopicR f g → SSet.Truncated.HomotopicL f g\", \"doc\": \"In a 2-truncated quasicategory, if two edges between 0-simplices are right homotopic (via a 2-simplex witnessing composition with the identity at the source), then they are also left homotopic (via a \"}\n  {\"name\": \"SSet.Truncated.HomotopicL.homotopicR\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"∀ {X : SSet.Truncated 2} [X.Quasicategory₂]\\n  {x y : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Quasicategory₂._proof_1 })}\\n  {f g : SSet.Truncated.Edge x y}, SSet.Truncated.HomotopicL f g → SSet.Truncated.HomotopicR f g\", \"doc\": \"In a 2-truncated quasicategory $X$, for any 0-simplices $x$ and $y$, if two edges $f, g : x \\\\to y$ are homotopic via a left composition witness (i.e., there exists a 2-simplex showing $g$ is the compo\"}\n  {\"name\": \"SSet.Truncated.homotopicL_iff_homotopicR\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"∀ {X : SSet.Truncated 2} [X.Quasicategory₂]\\n  {x y : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Quasicategory₂._proof_1 })}\\n  {f g : SSet.Truncated.Edge x y}, SSet.Truncated.HomotopicL f g ↔ SSet.Truncated.HomotopicR f g\", \"doc\": \"For a 2-truncated quasicategory $X$ and 0-simplices $x,y$, two edges $f,g : x \\to y$ satisfy the left homotopy condition $\\\\text{HomotopicL}(f,g)$ if and only if they satisfy the right homotopy conditio\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_of_edge\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2}\\n  {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 })}\\n  (e : SSet.Truncated.Edge x y),\\n  SSet.Truncated.HomotopyCategory.morphismPropertyHomMk V (SSet.Truncated.HomotopyCategory.homMk e)\", \"doc\": \"In the homotopy category of a 2-truncated simplicial set $ V $, a morphism satisfies the property if it is the image of an edge (1-simplex) between two 0-simplices under the quotient functor that iden\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"(V : SSet.Truncated 2) → CategoryTheory.MorphismProperty V.HomotopyCategory\", \"doc\": \"For a 2-truncated simplicial set $ V $, this is the morphism property in the homotopy category $ V.\\\\text{HomotopyCategory} $ that a morphism satisfies if it is the image of an edge (1-simplex) between\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X : SSet.Truncated 2} {C : Type u} [inst : CategoryTheory.SmallCategory C]\\n  (φ : X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\\n  (x : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ })),\\n  (SSet.Truncated.HomotopyCategory.descOfTruncation φ).obj (SSet.Truncated.H\", \"doc\": \"Given a 2-truncated simplicial set $X$, a category $\\\\mathcal{C}$, and a natural transformation $\\\\phi: X \\\\to \\\\text{trunc}_2(\\\\text{Nerve}(\\\\mathcal{C}))$, the functor $\\\\text{descOfTruncation}(\\\\phi)$ maps\"}\n",
    "date": "2026-10-16",
    "verdict": "no match: ordinary zigzags expressing connectedness and ordinary homotopy-category localizations do not construct or compare simplicial hammock mapping spaces. No special-hammock reduction theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|homotopyCalculus|homotopy.calculus|three.arrow",
+   "results": "{\"t\": \"2026-10-16T13:33:36Z\", \"tool\": \"grep\", \"query\": \"hammock|homotopyCalculus|homotopy.calculus|three.arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ComposableArrows/Three.lean\"], \"digest\": \"3d35e770e64affa9\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: searches locate homotopy classes between cofibrant/fibrant objects, truncated nerves and Cech nerves, not the asserted simplicial hammock comparison for arbitrary endpoints."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hammock\"",
+   "results": "{\"t\": \"2026-10-16T13:33:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"hammock\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: searches locate homotopy classes between cofibrant/fibrant objects, truncated nerves and Cech nerves, not the asserted simplicial hammock comparison for arbitrary endpoints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "nerve of special three arrow zigzags is weakly equivalent to hammock localization",
+   "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"leansearch\", \"query\": \"nerve of special three arrow zigzags is weakly equivalent to hammock localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.nerve₂Adj\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.augmentedCechNerve.congr_simp\", \"CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerveEquiv\"], \"digest\": \"31bd19a435f8e095\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: searches locate homotopy classes between cofibrant/fibrant objects, truncated nerves and Cech nerves, not the asserted simplicial hammock comparison for arbitrary endpoints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In any model category special zigzags with outer trivial fibration and trivial cofibration compute the hammock mapping space for arbitrary endpoints",
+   "results": "{\"t\": \"2026-10-16T13:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"In any model category special zigzags with outer trivial fibration and trivial cofibration compute the hammock mapping space for arbitrary endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.BifibrantObject.homMk\", \"HomotopicalAlgebra.RightHomotopyRel.exists_very_good_pathObject\", \"HomotopicalAlgebra.PrepathObject.RightHomotopy\", \"HomotopicalAlgebra.RightHomotopyRel.exists_good_pathObject\", \"HomotopicalAlgebra.PathObject.RightHomotopy.exists_good_pathObject\"], \"digest\": \"26c896798d1fa547\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: searches locate homotopy classes between cofibrant/fibrant objects, truncated nerves and Cech nerves, not the asserted simplicial hammock comparison for arbitrary endpoints."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-cosimplicial-frame-mapping",
   "by": "worker",
   "date": "2026-10-16"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-coef-special-hammock-reduction",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded functorial two-step normalization of arbitrary three-arrow zigzags to special ones, including a nerve homotopy inverse, and wrote both endpoint prisms with only weak-equivalence vertical maps. Isolated relative zigzag calculus, the generic square-completion criterion and the generic reduction theorem as three searched, statement-only nodes. No project Lean attachment was found.",
+  "blueprint": "Realizes the derived coefficient adjunction foundation in prop-coef-integral-exceptional-adjoint, proof paragraph 2; below its model/finite-diagram frame-mapping chain. Follows Low Proposition 3.5 via unrestricted three-arrow diagrams and Dwyer-Kan 8.2/6.2, and Low Lemma 3.4 for naturality. The current main-20261015 ancestor proof was read; this is a technical split below the unit, not a change of its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q31-be69fe1c9",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-be69fe1c9 (reviewer sub-agent of L); spot-checked: Read all mathematics in full; review.md records checks of all eleven steps, three new nodes, Low and Dwyer–Kan sources, small cases, dependencies, duplicates and routes. No mathematical repairs needed. Inherited maintainer-owned source metadata retains a stale reference; the proof citations are correct."
+ }
 }

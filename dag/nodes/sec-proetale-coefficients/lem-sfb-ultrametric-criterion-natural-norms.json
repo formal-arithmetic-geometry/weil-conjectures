@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-ultrametric-criterion-natural-norms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-padic-integers-condensed-ring",
+   "place": "proof, first sentence: \"The set $\\cO_E$ is a subring of $E$ by the ultrametric inequality\"; supplies the ultrametric inequality for an extending absolute value.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ultrametric criterion by norms of natural numbers",
+ "statement": "Let $K$ be a field [def-weil-field] with a multiplicative real norm: $\\|x\\|\\geq0$, $\\|x\\|=0$ if and only if $x=0$, $\\|1\\|=1$, $\\|xy\\|=\\|x\\|\\|y\\|$, and $\\|x+y\\|\\leq\\|x\\|+\\|y\\|$. Equip $K$ with the induced distance $d(x,y)=\\|x-y\\|$. Then its distance is ultrametric, meaning $d(x,z)\\leq\\max(d(x,y),d(y,z))$ for all $x,y,z\\in K$, if and only if $\\|(n:K)\\|\\leq1$ for every natural number $n$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+  "place": "first sentence, ultrametric inequality used for the valuation subring; exact general tool: Mathlib/Analysis/Normed/Field/Ultra.lean:140–143, isUltrametricDist_iff_forall_norm_natCast_le_one"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An absolute value is nonarchimedean if the absolute values of all natural numbers are bounded by one",
+   "results": "8 hits, including isUltrametricDist_iff_forall_norm_natCast_le_one and IsUltrametricDist.isUltrametricDist_of_forall_norm_natCast_le_one (Mathlib/Analysis/Normed/Field/Ultra); also IsNonarchimedean and natural-cast bounds.",
+   "date": "2026-10-16",
+   "verdict": "match: the normed-division-ring criterion states the node exactly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An absolute value on a field is ultrametric if every natural number has absolute value at most one",
+   "results": "8 hits, led by isUltrametricDist_iff_forall_norm_natCast_le_one and IsUltrametricDist.isUltrametricDist_of_forall_norm_natCast_le_one (Mathlib.Analysis.Normed.Field.Ultra).",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "isUltrametricDist_iff_forall_norm_natCast_le_one",
+   "results": "1 hit: isUltrametricDist_iff_forall_norm_natCast_le_one : [NormedDivisionRing R] → (IsUltrametricDist R ↔ ∀ n : ℕ, ‖(n : R)‖ ≤ 1), Mathlib.Analysis.Normed.Field.Ultra.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem isUltrametricDist_iff_forall_norm_natCast_le_one|^lemma norm_add_le_max",
+   "results": "1 hit in Analysis/Normed: Mathlib/Analysis/Normed/Field/Ultra.lean:140, theorem isUltrametricDist_iff_forall_norm_natCast_le_one. Read lines 140–143 and its proof.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AbsoluteValue, \"isNonarchimedean\"",
+   "results": "7 hits: nonarchimedean adic absolute values and height inequalities; none states this criterion.",
+   "date": "2026-10-16",
+   "verdict": "no match: second search used the normed-division-ring formulation"
+  },
+  {
+   "tool": "grep",
+   "query": "isNonarchimedean.*nat|isNonarchimedean_iff|isNonarchimedean_of",
+   "results": "0 hits in Analysis.",
+   "date": "2026-10-16",
+   "verdict": "no match: the actual criterion uses IsUltrametricDist"
+  },
+  {
+   "tool": "grep",
+   "query": "isUltrametricDist_iff_forall_norm_natCast_le_one|isUltrametricDist_of_forall_norm_natCast_le_one|norm_add_le_max",
+   "results": "10 hits in Analysis/Normed, including Field/Ultra.lean:103 for the sufficient criterion and supporting norm inequalities.",
+   "date": "2026-10-16",
+   "verdict": "match: read Field/Ultra.lean:103–143; a second narrower grep locates the iff at line 140"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normed division ring is nonarchimedean exactly when the norms of its positive integer multiples of one are at most one",
+   "results": "8 hits; first is isUltrametricDist_iff_forall_norm_natCast_le_one, second its sufficient direction; remaining hits include integer and natural norm bounds and Valued.integer.norm_le_one. Read the exact theorem at Ultra.lean:140–143.",
+   "date": "2026-10-16",
+   "verdict": "match: independently confirms the retained leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isUltrametricDist\", \"natCast\"",
+   "results": "4 hits: IsUltrametricDist.norm_natCast_le_one, IsUltrametricDist.nnnorm_natCast_le_one, IsUltrametricDist.isUltrametricDist_of_forall_norm_natCast_le_one, and isUltrametricDist_iff_forall_norm_natCast_le_one.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_natCast_le_one|norm_add_le_max",
+   "results": "6 displayed hits in Analysis/Normed/Field: Krasner.lean:98 and Ultra.lean:20,23,47,72,103 (per-file hit cap). Opened Ultra.lean:1–143 and read theorem lines 140–143 directly.",
+   "date": "2026-10-16",
+   "verdict": "match: source read confirms the iff criterion beyond the capped search output"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normed field, the strong triangle inequality is equivalent to bounded norms of the image of the natural numbers",
+   "results": "8 hits: the first two are isUltrametricDist_iff_forall_norm_natCast_le_one and its sufficient direction. Also finds normedAlgebra_iff and natural/integer norm bounds. Read Ultra.lean:140–143 directly.",
+   "date": "2026-10-16",
+   "verdict": "match: exact generalization to normed division rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isUltrametricDist\", \"norm\"",
+   "results": "12 hits: conversions between IsUltrametricDist and IsNonarchimedean norm or nnnorm, followed by power and integer-multiple norm bounds. This broad query does not display the natural-number iff in the capped results.",
+   "date": "2026-10-16",
+   "verdict": "no exact match in this query; the semantic search and source read confirm the retained leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "forall.*norm_natCast|theorem isUltrametricDist_iff",
+   "results": "5 hits in Analysis/Normed/Field/Ultra.lean:20,23,72,103,140; the last is the exact iff declaration, read through line 143.",
+   "date": "2026-10-16",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A norm on a field satisfies the maximum triangle inequality iff every natural number has norm at most 1",
+   "results": "8 hits; first is isUltrametricDist_iff_forall_norm_natCast_le_one, second is its sufficient direction; remaining hits are natural/integer norm bounds and the norm-add-one criterion.",
+   "date": "2026-10-16",
+   "verdict": "match: exact theorem specializes to the stated normed field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isUltrametricDist_iff\"",
+   "results": "3 hits: the norm and nnnorm nonarchimedean equivalences, and isUltrametricDist_iff_forall_norm_natCast_le_one with [NormedDivisionRing R].",
+   "date": "2026-10-16",
+   "verdict": "match: exact theorem specializes to the stated normed field"
+  },
+  {
+   "tool": "grep",
+   "query": "isUltrametricDist_iff_forall|norm_natCast",
+   "results": "5 hits in Analysis/Normed/Field/Ultra.lean:20,23,72,103,140; opened lines 95–143, including the exact iff at 140–143.",
+   "date": "2026-10-16",
+   "verdict": "match: exact theorem specializes to the stated normed field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary normed field, the natural numbers have norm at most one precisely when its distance satisfies the ultrametric axiom",
+   "results": "8 hits: the iff criterion is first, its sufficient direction second, followed by natural/integer norm bounds and equivalent nonarchimedean conditions.",
+   "verdict": "match: exact NormedDivisionRing criterion specializes to NormedField",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"natCast_le_one\", \"isUltrametric\"",
+   "results": "4 hits: IsUltrametricDist.norm_natCast_le_one, IsUltrametricDist.nnnorm_natCast_le_one, the sufficient criterion, and isUltrametricDist_iff_forall_norm_natCast_le_one.",
+   "verdict": "match: the iff has exactly [NormedDivisionRing R]",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isUltrametricDist_iff_forall_norm_natCast_le_one",
+   "results": "1 hit: Mathlib/Analysis/Normed/Field/Ultra.lean:140. Read source lines 1–143, including the theorem at 140–143.",
+   "verdict": "match",
+   "date": "2026-10-16"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isUltrametricDist_iff_forall_norm_natCast_le_one",
+  "file": "Mathlib/Analysis/Normed/Field/Ultra.lean",
+  "how": "specializes in one line: lines 140–143 hold for every NormedDivisionRing, hence for the NormedField associated to the stated multiplicative real norm with d(x,y)=‖x-y‖; the NormedDivisionRing instance is inferred from NormedField. IsUltrametricDist is exactly the stated distance inequality.",
+  "line": 140
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-sfb-padic-integers-condensed-ring",
+  "by": "worker",
+  "date": "2026-10-16"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-condensed-ring"
+}

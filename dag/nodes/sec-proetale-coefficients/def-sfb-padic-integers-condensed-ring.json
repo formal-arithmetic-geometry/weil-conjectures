@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-padic-integers-condensed-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The condensed ring $\\underline{\\mathcal O}_E$",
@@ -20,28 +20,150 @@
  ],
  "proof": [
   {
-   "text": "The set $\\cO_E$ is a subring of $E$ by the ultrametric inequality, so with the subspace\ntopology it is a commutative topological ring, and [def-sfb-continuous-map-condensed-ring]\napplies. The inclusion $\\cO_E\\subseteq E$ is a continuous ring homomorphism. If\n$\\mathbf Q_\\ell\\to E$ is $\\mathbf Q_\\ell$-linear, it preserves absolute values (see the\nproof of [def-sfb-padic-subfield-condensed-ring]). So it maps\n$\\mathbf Z_\\ell=\\{|x|\\le1\\}$ into $\\cO_E$, and the corestriction\n$\\mathbf Z_\\ell\\to\\cO_E$ is a continuous ring homomorphism. In both cases\n[def-sfb-continuous-map-condensed-ring-map] applies.",
+   "text": "Let $|\\cdot|$ on $\\Qlb$ and $|x|_E=|\\iota(x)|$ be as in [def-sfb-padic-subfield-condensed-ring]. For each $n\\in\\mathbf N$, extension of the $\\ell$-adic absolute value gives $|(n:\\Qlb)|=|(n:\\mathbf Q_\\ell)|_\\ell\\leq1$: for $n\\ne0$ its $\\ell$-adic valuation is nonnegative by the rational valuation formula of [def-weil-l-adic-numbers], and $|0|=0$. Apply [lem-sfb-ultrametric-criterion-natural-norms] to $\\Qlb$ equipped with this norm. Its ultrametric distance inequality, evaluated at $0,a,a+b$, gives $|a+b|\\leq\\max(|a|,|b|)$. Restricting along the ring embedding gives $|x+y|_E\\leq\\max(|x|_E,|y|_E)$ on $E$. This does not require $E$ to contain $\\mathbf Q_\\ell$.",
    "uses": [
-    "def-sfb-continuous-map-condensed-ring",
     "def-sfb-padic-subfield-condensed-ring",
+    "def-weil-l-adic-numbers",
+    "lem-sfb-ultrametric-criterion-natural-norms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
+  },
+  {
+   "text": "The set $\\cO_E=\\{x:|x|_E\\leq1\\}$ contains $0$ and $1$. For $x,y\\in\\cO_E$, the preceding inequality gives $|x+y|_E\\leq1$, while $|-x|_E=|x|_E\\leq1$ and $|xy|_E=|x|_E|y|_E\\leq1$. It is therefore a commutative subring. If $x\\ne0$ lies outside it, then $|x^{-1}|_E=|x|_E^{-1}<1$, so it is a valuation subring. Its subspace topology makes addition, negation and multiplication continuous: each is the restriction of the corresponding continuous operation on the topological field of [def-sfb-padic-subfield-condensed-ring], with image in the subring. Explicitly, if $m:E\\times E\\to E$ is addition or multiplication and $r:\\cO_E\\times\\cO_E\\to\\cO_E$ its restriction, then for an ambient open $U\\subseteq E$, $r^{-1}(U\\cap\\cO_E)=(\\cO_E\\times\\cO_E)\\cap m^{-1}(U)$, which is open in the product subspace topology; for ambient negation $N(x)=-x$ and its restriction $n:\\cO_E\\to\\cO_E$, $n^{-1}(U\\cap\\cO_E)=\\cO_E\\cap N^{-1}(U)$ is open in $\\cO_E$. Thus $\\cO_E$ is a commutative topological ring.",
+   "uses": [
+    "def-sfb-padic-subfield-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
+  },
+  {
+   "text": "Apply [def-sfb-continuous-map-condensed-ring] to this commutative topological ring $\\cO_E$. It gives the sheaf of rings with sections $C(S,\\cO_E)$, restriction by precomposition and pointwise operations, and a commutative underlying ring object. This is the stated $\\underline{\\cO}_E$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
+  },
+  {
+   "text": "The subring inclusion $j:\\cO_E\\hookrightarrow E$ is a unital ring homomorphism. It is continuous since $j^{-1}(U)=U\\cap\\cO_E$ for every open $U\\subseteq E$. Applying [def-sfb-continuous-map-condensed-ring-map] gives $j_*:\\underline{\\cO}_E\\to\\underline E$, where [def-sfb-padic-subfield-condensed-ring] identifies the target sections with $C(S,E)$; its component is $f\\mapsto j\\circ f$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-padic-subfield-condensed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
+  },
+  {
+   "text": "For the final clause let $\\alpha:\\mathbf Q_\\ell\\to E$ be the extension structure map and suppose $\\iota$ is $\\mathbf Q_\\ell$-linear. For $a\\in\\mathbf Q_\\ell$, write $\\alpha(a)=a\\cdot1_E$. Linearity and $\\iota(1_E)=1_{\\Qlb}$ give $\\iota(\\alpha(a))=\\iota(a\\cdot1_E)=a\\cdot\\iota(1_E)=a$ in $\\Qlb$. From the absolute value formula and extension hypothesis in the statement of [def-sfb-padic-subfield-condensed-ring], $|\\alpha(a)|_E=|a|_\\ell$, hence $|\\alpha(a)-\\alpha(b)|_E=|a-b|_\\ell$. Thus $\\alpha$ is isometric and continuous. The description $\\mathbf Z_\\ell=\\{a:|a|_\\ell\\leq1\\}$ in [def-weil-l-adic-numbers] shows its restriction takes values in $\\cO_E$. The map $h:\\mathbf Z_\\ell\\to\\cO_E$ is a ring homomorphism. For every subspace open $U\\cap\\cO_E$, $h^{-1}(U\\cap\\cO_E)=\\mathbf Z_\\ell\\cap\\alpha^{-1}(U)$ is open in $\\mathbf Z_\\ell$ for its induced $\\ell$-adic topology, so $h$ is continuous.",
+   "uses": [
+    "def-sfb-padic-subfield-condensed-ring",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
+  },
+  {
+   "text": "The condensed ring of the source of $h$ is $\\underline{\\mathbf Z}_\\ell$ by [def-sfb-padic-int-condensed-ring]. Apply [def-sfb-continuous-map-condensed-ring-map] to the continuous ring homomorphism $h$ from the preceding step. This gives $\\underline{\\mathbf Z}_\\ell\\to\\underline{\\cO}_E$ with components $f\\mapsto h\\circ f$, exactly the required postcomposition map.",
+   "uses": [
+    "def-sfb-padic-int-condensed-ring",
     "def-sfb-continuous-map-condensed-ring-map"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.proof.md",
+    "place": "single proof paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-padic-int-condensed-ring",
   "def-sfb-padic-subfield-condensed-ring",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-weil-l-adic-numbers",
+  "lem-sfb-ultrametric-criterion-natural-norms"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-padic-integers-condensed-ring.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "condensed ring of continuous functions into the valuation subring of a nonarchimedean field",
+   "results": "8 hits: Valuation.Completion, WithVal, IsNonarchimedeanLocalField, its compactness and DVR instances, WithVal.instRing, IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers, Valued.integer.",
+   "date": "2026-10-16",
+   "verdict": "no match: valuation constructions do not state the condensed-ring construction or maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous functions from compact Hausdorff spaces to a topological ring form a sheaf of rings with maps induced by continuous ring homomorphisms",
+   "results": "8 hits: TopCat.presheafToTopCommRing, TopCat.continuousFunctions and its map and pullback, and locally constant module functors. Read Mathlib/Topology/Sheaves/CommRingCat.lean; these concern opens of one topological space or modules, not this condensed coefficient ring.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A topological commutative ring gives a condensed ring by continuous functions from profinite sets",
+   "results": "8 hits: TopCat.continuousFunctions, ContinuousMap ring instances, TopCat.presheafToTopCommRing, continuousSubring.",
+   "date": "2026-10-16",
+   "verdict": "no match: continuous function rings and ordinary open-site presheaves only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The valuation ring of a subfield of an algebraic closure of the p-adic numbers defines a condensed commutative ring with inclusions from the p-adic integers and into the field",
+   "results": "8 hits: ValuationSubring.instCommRingSubtypeMem, PadicComplexInt.integers, PadicComplexInt, PadicInt.instCommRing, ValuationSubring.ofSubring, ValuationSubring, ValuationRing.instValuationRingInteger, PadicInt.instInhabited.",
+   "date": "2026-10-16",
+   "verdict": "no match: algebraic ring structures only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, TopCat",
+   "results": "12 hits: Condensed identities, hom extensionality, site equivalences and limit/colimit instances; no topological-ring construction.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.toCondensed, RingCat",
+   "results": "0 hits; loogle: unknown identifier 'TopCat.toCondensed'.",
+   "date": "2026-10-16",
+   "verdict": "no match: invalid expected identifier; the broad semantic and source searches provide the absence check"
+  },
+  {
+   "tool": "grep",
+   "query": "topCatToCondensed|topological.*ring|ofTopological|continuous.*ring",
+   "results": "7 hits in Condensed: topCatToCondensedSet (TopComparison.lean:146) and TopCatAdjunction references. Read TopComparison.lean:105–147: the constructor yields a sheaf of sets.",
+   "date": "2026-10-16",
+   "verdict": "no match: no condensed-ring structure or valuation-ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "RingCat|CommRingCat|TopCommRing",
+   "results": "0 hits in Mathlib/Condensed.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -63,5 +185,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-condensed-ring"
+ "unit": "sk-def-sfb-condensed-ring",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-padic-integers-condensed-ring",
+  "worker": "stage1",
+  "summary": "Expanded the valuation-subring and both inclusion constructions into six justified steps. Removed reliance on the proof of the subfield node by computing the absolute-value restriction from its stated hypotheses. Added one general Mathlib leaf for the ultrametric criterion, since an extending absolute value is not explicitly asserted to be nonarchimedean in that dependency statement. All remaining subring and subspace calculations are explicit; no finite-extension or completeness assumption is used.",
+  "blueprint": "Steps 1–3 realize the first sentence of def-sfb-padic-integers-condensed-ring.proof.md; step 4 realizes the O_E inclusion; steps 5–6 realize the compatible Q_l structure map and its Z_l corestriction. The unit is sk-def-sfb-condensed-ring in the current blueprint; this item is its valuation-ring instance, not its key node."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-170aad351",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-170aad351 (reviewer sub-agent of L); spot-checked: Read the full mathematics, all six steps, cited statements, blueprint route, and Mathlib Ultra.lean:140–143. Arguments and edge cases pass; no duplicate or cycle found. Repaired only the new leaf’s missing created.by/date metadata. Details in review.md; corrected JSON under fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
