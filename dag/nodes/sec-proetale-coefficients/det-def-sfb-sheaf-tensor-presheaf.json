@@ -315,5 +315,35 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-c294594b7 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources; all seven steps, universe bounds, mixed variance, and adjunction formulas check out. Eight finite arrow-category tests passed. No new nodes, duplicates, circular dependencies, or repairs. Accepted the existing small-limits tool use. Detailed checks and reported metadata/dry-run limitations are in review.md."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-sheaf-tensor"
+ "unit": "sk-def-sfb-sheaf-tensor",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafTensorInternalHom",
+  "declaration": "CategoryTheory.presheaf_enrichedHoms_exist",
+  "declarations": [
+   "CategoryTheory.Monoidal.functorCategoryMonoidal",
+   "CategoryTheory.Monoidal.functorCategorySymmetric",
+   "CategoryTheory.Monoidal.functorCategoryMonoidalPreadditive",
+   "CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom",
+   "CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv",
+   "CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality",
+   "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv",
+   "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+   "CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafTensorInternalHom.lean",
+  "statement": "theorem presheaf_enrichedHoms_exist {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A] [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] [MonoidalPreadditive A] : (∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasEnrichedHom A F G) ∧ (∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasFunctorEnrichedHom A F G)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Mixed binding: all tensor/internal-Hom data, local equivalences and the closed structure are existing Mathlib/upstream declarations, listed in declarations and publicly imported. The sole new theorem states the global and slice end-existence interface at the node's full essentially-small size convention. Consumers install its first and second components as the HasEnrichedHom and HasFunctorEnrichedHom instance families, then use the existing canonical constructions. This replaces the first worker's Prop wrapper, which omitted naturality and restricted category object and morphism universes. No duplicate tensor or internal-Hom definition is introduced; the node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4a4d58065",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, docstrings, edge cases, declarations, and compile evidence all checked; delivery accepted."
+ }
 }
