@@ -6,11 +6,7 @@ Authors: SHEAF group NV
 module
 
 public import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
-public import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
-public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
-public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-public import Mathlib.Topology.NoetherianSpace
 
 
 import Sheaf.Paper.ProfinitePointPullback
