@@ -17,10 +17,84 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "First prove the boundary-simplex case for every integer $m\\geq0$: let $v:(\\partial\\Delta^m\\times\\Delta^n)\\cup(\\Delta^m\\times\\Lambda_0^n)\\to Q$ have equivalence edges on $\\{a\\}\\times[0,1]$ for every vertex $a$ of $\\Delta^m$. Here $\\partial\\Delta^m$ is the union of proper faces and $\\partial\\Delta^0=\\varnothing$. Apply [lem-cbc-initial-prism-horn-filtration] to obtain $X_0\\subseteq\\cdots\\subseteq X_t=\\Delta^m\\times\\Delta^n$ and its horn pushouts. The initial map is $v_0=v$. In this argument $m$ is arbitrary and independent of the fixed $n\\geq2$; the initial domain already contains each specified vertical edge, including when $n=2$, because the edge $[0,1]$ lies in $\\Lambda_0^n$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-initial-prism-horn-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, proof specialized to the terminal base; finite-prism induction followed by boundary attachment. Relative skeleta replace the source Zorn ordering, using the existing boundary-cell lemma."
+   }
+  },
+  {
+   "text": "Inductively suppose $v_{s-1}:X_{s-1}\\to Q$ extends $v$. Compose it with the attaching map $\\Lambda_{p_s}^{q_s}\\to X_{s-1}$. If $0<p_s<q_s$, this horn has a filler by the quasicategory definition in [def-cbc-enhanced-diagrams-cones]. If $p_s=0$, the endpoint condition in [lem-cbc-initial-prism-horn-filtration] identifies the attaching initial edge with $\\{0\\}\\times[0,1]$: by the standard-simplex definition, an edge of $\\Delta^m\\times\\Delta^n$ is a pair of monotone maps $[1]\\to[m]$ and $[1]\\to[n]$, each determined by its two endpoint values. Consequently its image in $Q$ is exactly the original edge $v|_{\\{0\\}\\times[0,1]}$, since that edge belongs to $X_0$ and all previous maps agree there. This is an equivalence by hypothesis, and $q_s\\geq2$, so [lem-cbc-equivalence-outer-horn-filling] gives a filler for this outer horn. In either case the filler and $v_{s-1}$ agree on the attaching horn; the stated pushout universal property gives $v_s$ restricting exactly to $v_{s-1}$. Finite induction produces $v_t$ on the entire product. This proves the boundary-simplex extension assertion rather than introducing it as a new lemma node.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-initial-prism-horn-filtration",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, proof specialized to the terminal base; finite-prism induction followed by boundary attachment. Relative skeleta replace the source Zorn ordering, using the existing boundary-cell lemma."
+   }
+  },
+  {
+   "text": "For the original inclusion $A\\subseteq B$, apply [lem-coef-infinity-monomorphism-boundary-cells] to its degreewise injective inclusion. Obtain simplicial subsets $Z_0=A\\subseteq Z_1\\subseteq\\cdots$ with union $B$, where $Z_r\\to Z_{r+1}$ is the pushout of boundary inclusions indexed by the nondegenerate $r$-simplices of $B$ outside $A$. Denote the maps supplied by this pushout from its simplex summands by $\\tau:\\Delta^r\\to Z_{r+1}\\hookrightarrow B$; commutativity of the pushout square makes each restriction to $\\partial\\Delta^r$ factor through $Z_r$. Only these attaching maps, not an identification with the indexing simplices, will be used. The degreewise union of the $Z_r$ is a simplicial subset and is itself their colimit: a compatible family of maps defines a map on a simplex by its value in any containing stage, independent of that stage, and the same formula respects all simplicial operators. By the colimit universal property in [def-weil-pbc-category-colimit], this union is $B$. Thus every attaching $\\tau$ carries $\\partial\\Delta^r$ into $Z_r$. Construct maps $H_r:Z_r\\times\\Delta^n\\to Q$ extending the prescribed map on $Z_r\\times\\Lambda_0^n$, with $H_0=h|_{A\\times\\Delta^n}$, and impose $H_{r+1}|_{Z_r\\times\\Delta^n}=H_r$. The base case follows because the two restrictions of the given $h$ agree on their intersection.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, proof specialized to the terminal base; finite-prism induction followed by boundary attachment. Relative skeleta replace the source Zorn ordering, using the existing boundary-cell lemma."
+   }
+  },
+  {
+   "text": "Assume $H_r$ constructed. For each attaching simplex $\\tau$, its boundary pullback of $H_r$ and its horn pullback of $h$ agree on $\\partial\\Delta^r\\times\\Lambda_0^n$. They therefore define a map on $(\\partial\\Delta^r\\times\\Delta^n)\\cup(\\Delta^r\\times\\Lambda_0^n)$. At a vertex $a$ its initial vertical edge is the specified edge for $b=\\tau(a)$ in $B$, hence is an equivalence even if vertices or edges of $\\tau$ become identified in $B$. The boundary-simplex argument of steps 1–2 gives an extension $V_\\tau:\\Delta^r\\times\\Delta^n\\to Q$. Choose one for each simplex in this small set. Glue these maps with $H_r$ using the pushout in [lem-coef-infinity-monomorphism-boundary-cells]. Here is the degreewise pushout presentation directly from its universal property, rather than an appeal to preservation by evaluation. Form a simplicial set $W$ by taking in each degree the disjoint union of the old simplices and the attaching-simplex summands, modulo the boundary identifications; the simplicial operators descend because the attaching boundary maps are simplicial. A compatible pair of maps from the old subcomplex and the attaching summands to any simplicial set $T$ defines exactly one map $W\\to T$ by its values on representatives, and this map is simplicial on every summand. Thus $W$ has the defining pushout property and is canonically identified with $Z_{r+1}$ by the unique maps induced in both directions. In degree $k$ this presents $(Z_{r+1})_k$ as the quotient of $(Z_r)_k\\amalg\\coprod_\\tau(\\Delta^r)_k$ by the boundary identifications. For each $t\\in(\\Delta^n)_k$, assign $(z,t)$ the value $(H_r)_k(z,t)$ and $(u,t)$ in the $\\tau$ summand the value $(V_\\tau)_k(u,t)$. The two values agree on every boundary identification, so they descend to $(Z_{r+1})_k\\times(\\Delta^n)_k$. All face and degeneracy maps preserve these formulas because the maps being glued are simplicial. This gives $H_{r+1}$ extending $H_r$ and agreeing with $h$ on $Z_{r+1}\\times\\Lambda_0^n$, since that equality holds on each summand. This spells out product gluing without assuming that $\\tau$ is an embedded simplex.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, proof specialized to the terminal base; finite-prism induction followed by boundary attachment. Relative skeleta replace the source Zorn ordering, using the existing boundary-cell lemma."
+   }
+  },
+  {
+   "text": "Induction provides the compatible sequence $H_r$. By [lem-coef-infinity-monomorphism-boundary-cells], every $b\\in B_k$ belongs to some $(Z_r)_k$. Set $H_k(b,t)=(H_r)_k(b,t)$ for any such $r$. The extension identities make this independent of $r$ (compare two choices in their larger stage); faces and degeneracies respect this formula since each $Z_r$ is a simplicial subset and each $H_r$ is simplicial. Thus $H:B\\times\\Delta^n\\to Q$ is a simplicial map. It restricts to $h$ on $A\\times\\Delta^n$ by the base case and on $B\\times\\Lambda_0^n$ by the stagewise invariant. This is the required extension. Empty $B$, $A=B$, infinitely many cells, and arbitrarily high-dimensional $B$ require no alteration to this construction.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8, proof specialized to the terminal base; finite-prism induction followed by boundary attachment. Relative skeleta replace the source Zorn ordering, using the existing boundary-cell lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-initial-prism-horn-filtration",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01DP",
+  "place": "Proof of Lemma 4.4.4.8 read online; explicit finite-horn induction follows it. The agent expands arbitrary-subset extension using the existing relative-boundary-cell Mathlib leaf instead of Zorn. No Kerodon archival copy is present in literature/, so this remains agent-marked pending the WANTED archive."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -70,6 +144,56 @@
    "results": "{\"t\": \"2026-10-16T13:06:49Z\", \"tool\": \"grep\", \"query\": \"prism|invertible.*horn|horn.*invertible|horn.*pushout.*product\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"2c4f9532a322ce44\"}",
    "date": "2026-10-16",
    "verdict": "No match: the inner-anodyne definitions and strict-Segal Kan extensions do not give a relative outer-prism extension with only vertical edges assumed invertible."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a relative outer horn prism into a quasicategory when each vertical initial edge is an equivalence",
+   "results": "{\"t\": \"2026-10-16T16:54:49Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a relative outer horn prism into a quasicategory when each vertical initial edge is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₃₂.exists_desc\", \"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.horn₃₁.ι₃_desc\"], \"digest\": \"c20a30d0fad16b1a\"}",
+   "date": "2026-10-17",
+   "verdict": "No complete match: primitive inner-horn fillers and individual horn-colimit descriptions do not assert extension of relative outer prisms with the initial vertical equivalences. UnionProd regular pairing is only combinatorial input; converting it to controlled outer-horn extensions is further work."
+  },
+  {
+   "tool": "grep",
+   "query": "prism|invertible.*horn|horn.*invertible|horn.*pushout.*product",
+   "results": "{\"t\": \"2026-10-16T16:55:05Z\", \"tool\": \"grep\", \"query\": \"prism|invertible.*horn|horn.*invertible|horn.*pushout.*product\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"7ad0cf792266989c\"}",
+   "date": "2026-10-17",
+   "verdict": "No complete match: primitive inner-horn fillers and individual horn-colimit descriptions do not assert extension of relative outer prisms with the initial vertical equivalences. UnionProd regular pairing is only combinatorial input; converting it to controlled outer-horn extensions is further work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"horn\"",
+   "results": "{\"t\": \"2026-10-16T16:55:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"a7d5b141fb3f011c\"}",
+   "date": "2026-10-17",
+   "verdict": "No complete match: primitive inner-horn fillers and individual horn-colimit descriptions do not assert extension of relative outer prisms with the initial vertical equivalences. UnionProd regular pairing is only combinatorial input; converting it to controlled outer-horn extensions is further work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from boundary times simplex union simplex times initial horn into a quasicategory extends if the initial vertical edges are invertible",
+   "results": "{\"t\": \"2026-10-16T16:55:23Z\", \"tool\": \"leansearch\", \"query\": \"A map from boundary times simplex union simplex times initial horn into a quasicategory extends if the initial vertical edges are invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.recOn\", \"SSet.StrictSegal.quasicategory'\", \"SSet.Quasicategory.casesOn\", \"SSet.horn.ι_ι_assoc\", \"SSet.horn.hom_ext\"], \"digest\": \"aac6ad19f19d74e8\"}",
+   "date": "2026-10-17",
+   "verdict": "No complete match: primitive inner-horn fillers and individual horn-colimit descriptions do not assert extension of relative outer prisms with the initial vertical equivalences. UnionProd regular pairing is only combinatorial input; converting it to controlled outer-horn extensions is further work."
+  },
+  {
+   "tool": "grep",
+   "query": "prism|outer.?horn|equivalence.*horn|horn.*equivalence",
+   "results": "{\"t\": \"2026-10-16T16:57:08Z\", \"tool\": \"grep\", \"query\": \"prism|outer.?horn|equivalence.*horn|horn.*equivalence\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No complete match: primitive inner-horn fillers and individual horn-colimit descriptions do not assert extension of relative outer prisms with the initial vertical equivalences. UnionProd regular pairing is only combinatorial input; converting it to controlled outer-horn extensions is further work."
   }
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-invertible-prism-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Kerodon 01DP,01DN,019F and0077; reused the existing outer-horn theorem and relative-boundary-cell Mathlib leaf, added only the genuinely combinatorial initial-prism filtration, and wrote out compatible finite filling, skeleton induction, degreewise pushout gluing and the union map, including the quotient and union colimit universal properties. Checked project declarations, whole-DAG and blueprint duplicates, actual logged Mathlib searches and six finite grid cases. No Lean written or compiled. Second reading clarified that attaching maps come from the pushout, independently of their indexing, and expanded the determination of the controlled edge by endpoints.",
+  "blueprint": "Historical ancestor thm-cbc-finite-level-proetale, proof opening compactification choice: this is the foundational prism-extension argument introduced by the enhanced-functor-cone-calculus split through the cofiltered coherent diagram and local compact-support-extension nodes. The main-20261015 proof opening in sec-six-functors-basics/sk-prop-sf-cbc was read; it does not itself state this combinatorial lemma. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NO-19341bbe6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-19341bbe6 (reviewer sub-agent of L); spot-checked: I read the delivery in full and changed nothing; the review is in review.md. Item: against Kerodon 01DP (Lemma 4.4.4.8, read online) with S=Δ^0 and Y=Q, the statement is exactly the source's, with no hypothesis or conclusion changed. Steps: steps 1–2 build a finite horn-filling induction on the new filtration. Inner horns are filled by the quasicategory definition in def-cbc-enhanced-diagrams-cones. For p=0 horns, the endpoint clause fixes the initial edge as {0}×[0,1], which lies in X_0 (also for n=2) and is an equivalence by hypothesis, so lem-cbc-equivalence-outer-horn-filling (first clause, q≥2) gives the filler. Steps 3–5 run a skeletal induction with lem-coef-infinity-monomorphism-boundary-cells (a Mathlib leaf, SSet.relativeCellComplexOfMono, so an off-unit tool, not a route node) and def-weil-pbc-category-colimit. I checked the boundary and horn agreement on ∂Δ^r×Λ^n_0, the vertex edges at τ(a) when τ is not embedded, the r=0 case, and empty A, empty B, A=B and infinite B. The elementary marks on the written gluing steps 4–5 are justified. New node lem-cbc-initial-prism-horn-filtration: it matches Kerodon 01DN (Lemma 4.4.4.7, read online) clause by clause: m≥0, n≥2, X_0, q≥2, 0≤p<q, and p=0 sending vertices 0,1 to (0,0),(0,1). It is statement only, self-contained (B1–B4, B7) and smaller than the item, so not a restated clause (D1). Mathlib UnionProd.lean pairing (line 676ff) has no endpoint control, so unsplit with a mathlib_candidate is right. My own greedy horn-attachment search completed for all (m,n) with m≤3, n≤4 and (m+1)(n+1)≤16, and its counts agree with the authors' on the cases they share. Duplicates: grep of the whole DAG for 01DN/01DP, Λ_0^n, prism/horn/anodyne and pointwise-equivalence vocabulary, and of the main-20261015 blueprint for horn/prism, found no duplicate; right-prism-boundary and right-anodyne-product were checked and differ. No SGA source, no tool_uses needed, and no target node, so the base-change and coefficient checks do not apply."
+ }
 }
