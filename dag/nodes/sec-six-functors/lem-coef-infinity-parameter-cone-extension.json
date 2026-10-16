@@ -323,5 +323,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-244b4f7bd",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read node, both stmt deps (incl. full IsRelativeColimitDiagram/IsRelativeLimitDiagram defs), module, report (real Worker report + Second reading by Q88). Clause-by-clause match: structural quasicategory/InnerFibration/equivalence-lift clauses for arbitrary P; hP scoped only over extension clauses; pushout domain, sigma(0)/Fin.last vertices via SSet.yonedaEquiv, parameterAt orientation verified; ordinary (co)limit = relative predicate over E -> Delta[0] (bottom mapping spaces are points, so it is weak-equivalence of restriction, Kerodon's colimit notion; H3 repair genuine); existence, two exact agreement equations, and relative universality for every extension, both duals. No extra assumptions or universe restriction; edge cases K empty, P=B, P empty, n=0 ok. Helpers real, Delta[0] instance not duplicated in Mathlib/Sheaf, docstrings with source/blueprint, only sorry is item theorem, lean.statement verbatim, node differs only in lean field. nt_compile.py local side overlay rc=0, no diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ParameterConeExtension",
+  "declaration": "SSet.Enhanced.parameter_cone_extension",
+  "file": "lean/Sheaf/CategoryTheory/ParameterConeExtension.lean",
+  "statement": "theorem parameter_cone_extension {B E K : SSet.{u}} [Quasicategory E] (P : B.Subcomplex) : Quasicategory ((ihom B).obj E) ∧ Quasicategory ((ihom P.toSSet).obj E) ∧ InnerFibration ((MonoidalClosed.pre P.ι).app E) ∧ (∀ (x : ((ihom B).obj E) _⦋0⦌) (y : ((ihom P.toSSet).obj E) _⦋0⦌) (e : ((ihom P.toSSet).obj E) _⦋1⦌), ((ihom P.toSSet).obj E).δ 1 e = ((MonoidalClosed.pre P.ι).app E).app _ x → ((ihom P.toSSet).obj E).δ 0 e = y → IsEquivalenceEdge ((ihom P.toSSet).obj E) e → ∃ e' : ((ihom B).obj E) _⦋1⦌, ((ihom B).obj E).δ 1 e' = x ∧ ((MonoidalClosed.pre P.ι).app E).app _ e' = e ∧ IsEquivalenceEdge ((ihom B).obj E) e') ∧ (∀ hP : ∀ b : B _⦋0⦌, b ∈ P.obj (op ⦋0⦌), (∀ (v : pushout (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (rightJoinConeInclusion K)) ⟶ E), (∀ (n : ℕ) (σ : Δ[n] ⟶ B), SSet.yonedaEquiv σ ∉ P.obj (op ⦋n⦌) → IsRelativeColimitDiagram (stdSimplex.isTerminalObj₀.from E) (parameterAt P.ι (rightJoinConeInclusion K) v (⟨B.map (SimplexCategory.const ⦋0⦌ ⦋n⦌ 0).op (SSet.yonedaEquiv σ), hP _⟩ : P.toSSet _⦋0⦌)) → ∃ vbar : B ⊗ rightJoinCone K ⟶ E, (MonoidalCategoryStruct.tensorHom (𝟙 B) (rightJoinConeInclusion K)) ≫ vbar = pushout.inl (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (rightJoinConeInclusion K)) ≫ v ∧ (MonoidalCategoryStruct.tensorHom P.ι (𝟙 (rightJoinCone K))) ≫ vbar = pushout.inr (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (rightJoinConeInclusion K)) ≫ v ∧ @IsRelativeColimitDiagram K ((ihom B).obj E) ((ihom P.toSSet).obj E) (by infer_instance) (by infer_instance) ((MonoidalClosed.pre P.ι).app E) ((MonoidalClosed.curry vbar : rightJoinCone K ⟶ (ihom B).obj E)) ∧ ∀ w : B ⊗ rightJoinCone K ⟶ E, (MonoidalCategoryStruct.tensorHom (𝟙 B) (rightJoinConeInclusion K)) ≫ w = pushout.inl (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (rightJoinConeInclusion K)) ≫ v → (MonoidalCategoryStruct.tensorHom P.ι (𝟙 (rightJoinCone K))) ≫ w = pushout.inr (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (rightJoinConeInclusion K)) ≫ v → @IsRelativeColimitDiagram K ((ihom B).obj E) ((ihom P.toSSet).obj E) (by infer_instance) (by infer_instance) ((MonoidalClosed.pre P.ι).app E) ((MonoidalClosed.curry w : rightJoinCone K ⟶ (ihom B).obj E))) ∧ (∀ (v : pushout (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (leftJoinConeInclusion K)) ⟶ E), (∀ (n : ℕ) (σ : Δ[n] ⟶ B), SSet.yonedaEquiv σ ∉ P.obj (op ⦋n⦌) → IsRelativeLimitDiagram (stdSimplex.isTerminalObj₀.from E) (parameterAt P.ι (leftJoinConeInclusion K) v (⟨B.map (SimplexCategory.const ⦋0⦌ ⦋n⦌ (Fin.last n)).op (SSet.yonedaEquiv σ), hP _⟩ : P.toSSet _⦋0⦌)) → ∃ vbar : B ⊗ leftJoinCone K ⟶ E, (MonoidalCategoryStruct.tensorHom (𝟙 B) (leftJoinConeInclusion K)) ≫ vbar = pushout.inl (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (leftJoinConeInclusion K)) ≫ v ∧ (MonoidalCategoryStruct.tensorHom P.ι (𝟙 (leftJoinCone K))) ≫ vbar = pushout.inr (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (leftJoinConeInclusion K)) ≫ v ∧ @IsRelativeLimitDiagram K ((ihom B).obj E) ((ihom P.toSSet).obj E) (by infer_instance) (by infer_instance) ((MonoidalClosed.pre P.ι).app E) ((MonoidalClosed.curry vbar : leftJoinCone K ⟶ (ihom B).obj E)) ∧ ∀ w : B ⊗ leftJoinCone K ⟶ E, (MonoidalCategoryStruct.tensorHom (𝟙 B) (leftJoinConeInclusion K)) ≫ w = pushout.inl (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (leftJoinConeInclusion K)) ≫ v → (MonoidalCategoryStruct.tensorHom P.ι (𝟙 (leftJoinCone K))) ≫ w = pushout.inr (P.ι ▷ K) (MonoidalCategoryStruct.tensorHom (𝟙 P.toSSet) (leftJoinConeInclusion K)) ≫ v → @IsRelativeLimitDiagram K ((ihom B).obj E) ((ihom P.toSSet).obj E) (by infer_instance) (by infer_instance) ((MonoidalClosed.pre P.ι).app E) ((MonoidalClosed.curry w : leftJoinCone K ⟶ (ihom B).obj E))))))",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.parameterDiagram",
+   "SSet.Enhanced.parameterAt",
+   "SSet.Enhanced.parameterPointQuasicategory",
+   "SSet.Enhanced.parameter_cone_extension"
+  ],
+  "note": "Ordinary vertex colimits and limits use the canonical E → Δ[0] map, not the identity on E. The point quasicategory instance is constructed by terminal horn fillers; all helpers have real data. Second reading removes the duplicate simplexOf helper and uses Mathlib SSet.yonedaEquiv directly."
  }
 }
