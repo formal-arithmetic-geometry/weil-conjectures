@@ -24,7 +24,8 @@
   "place": "Kerodon Proposition 6.2.6.1 (02FV), local existence criterion; Proposition 6.2.1.17 (02F1) identifies the induced mapping-space equivalences. The unit/counit and triangle identities are the adjunction structure in that criterion. Both pages read online, not archived in literature/. Mapping spaces use the right-pinched convention, checked against Kerodon Propositions 4.6.5.5 and 4.6.5.10. These are Kerodon identifiers, not Stacks tags."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition"
  ],
  "proof": [
   {
@@ -203,5 +204,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a33154a0",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause: objectwise universal arrows as right-pinched mapping-space vertices; comparison v↦R(v)∘u = mappingSpaceMap then canonical composition, correct order; L, η: id→RL and ε: LR→id as functor-space edges; both triangle 2-simplices have correct faces (Lη, εL, id_L) and (ηR, Rε, id_R); final clause evaluates the same η. Helper localAdjointComposition uses Classical.choose of mapping_composition, permitted because c is fixed up to homotopy (j unique by prism equation and a homotopy equivalence per right_pinch_comparison; θ, ℓ fixed; r unique up to homotopy) and its only use, IsWeakHomotopyEquivalence, is homotopy-invariant, so not hollow. Node differs from the clone only in lean and stmt_deps; the added landed dependency lem-coef-infinity-mapping-composition creates no cycle (BFS); lean.statement matches the file verbatim. Edge cases (empty Y/X, R=id, point categories, empty mapping spaces) fine; single universe u, nothing unbound, no extra instances. Docstrings carry source place, blueprint tag and the 4 proof steps; nothing proved beyond sorry; no pro-etale content, no global build, no live write; report has Worker report and Second reading by NW. nt_compile.py --json on the snapshot file against the side overlay: rc=0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityLocalAdjointCriterion",
+  "declaration": "SSet.Enhanced.infinity_local_adjoint_criterion",
+  "declarations": [
+   "SSet.Enhanced.localAdjointComposition",
+   "SSet.Enhanced.localAdjointComparison",
+   "SSet.Enhanced.infinity_local_adjoint_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityLocalAdjointCriterion.lean",
+  "statement": "theorem infinity_local_adjoint_criterion (X Y : SSet.{u}) [Quasicategory X] [Quasicategory Y] (R : X ⟶ Y) (h : ∀ y : Y _⦋0⦌, ∃ x : X _⦋0⦌, ∃ u : (mappingSpace Y y (R.app _ x)) _⦋0⦌, ∀ z : X _⦋0⦌, IsWeakHomotopyEquivalence (localAdjointComparison R y x u z)) : ∃ (L : Y ⟶ X) (η : SSet.Edge (diagramVertex (𝟙 Y)) (diagramVertex (L ≫ R))) (ε : SSet.Edge (diagramVertex (R ≫ L)) (diagramVertex (𝟙 X))), (∃ t : ((ihom Y).obj X) _⦋2⦌, ((ihom Y).obj X).δ 2 t = ((ihom Y).map L).app _ η.edge ∧ ((ihom Y).obj X).δ 0 t = ((MonoidalClosed.pre L).app X).app _ ε.edge ∧ ((ihom Y).obj X).δ 1 t = ((ihom Y).obj X).σ 0 (diagramVertex L)) ∧ (∃ t : ((ihom X).obj Y) _⦋2⦌, ((ihom X).obj Y).δ 2 t = ((MonoidalClosed.pre R).app Y).app _ η.edge ∧ ((ihom X).obj Y).δ 0 t = ((ihom X).map R).app _ ε.edge ∧ ((ihom X).obj Y).δ 1 t = ((ihom X).obj Y).σ 0 (diagramVertex R)) ∧ ∀ y : Y _⦋0⦌, ∃ u : (mappingSpace Y y (R.app _ (L.app _ y))) _⦋0⦌, u.1 = (evaluation Y Y y).app _ η.edge ∧ ∀ z : X _⦋0⦌, IsWeakHomotopyEquivalence (localAdjointComparison R y (L.app _ y) u z)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the landed mapping-composition theorem for its canonical composition class. Unit and counit are actual functor-space edges, and both triangles are full functor-space 2-simplices. Their same unit fixes the displayed mapping comparisons. No arbitrary comparison map or unspecified naturality/triangle proposition occurs."
  }
 }
