@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-comap-upper-star-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Restriction of scalars commutes with $f^*$",
@@ -19,23 +19,59 @@
  ],
  "proof": [
   {
-   "text": "On module objects $f^*=\\operatorname{Ext}_{\\alpha_f}\\circ\\mathrm{mapMod}(f^*)$\n([sk-def-sfb-module-pushforward-pullback]). Transport commutes with restriction of scalars\n([sk-def-sfb-transport]):\n$\\mathrm{mapMod}(f^*)\\circ\\operatorname{Res}_{a_Y}\\cong\\operatorname{Res}_{f^*a_Y}\\circ\n\\mathrm{mapMod}(f^*)$. The square $\\alpha'_f\\circ f^*a_Y=a_X\\circ\\alpha_f$ of\n[lem-sfb-coefficient-pullback-square] has invertible horizontal sides $\\alpha_f$, $\\alpha'_f$\n([sk-prop-sfb-cartesian-coefficients]), so [def-sfb-extend-comap-iso-of-iso] gives\n$\\operatorname{Res}_{a_X}\\circ\\operatorname{Ext}_{\\alpha'_f}\\cong\\operatorname{Ext}_{\\alpha_f}\n\\circ\\operatorname{Res}_{f^*a_Y}$. Combining,\n\n$$\n\\operatorname{Res}_{a_X}\\operatorname{Ext}_{\\alpha'_f}\\mathrm{mapMod}(f^*)\n\\cong\\operatorname{Ext}_{\\alpha_f}\\operatorname{Res}_{f^*a_Y}\\mathrm{mapMod}(f^*)\n\\cong\\operatorname{Ext}_{\\alpha_f}\\mathrm{mapMod}(f^*)\\operatorname{Res}_{a_Y}.\n$$",
+   "text": "Put $F=f^*_{\\Ab}$, the strong monoidal pullback on abelian sheaves supplied by [sk-def-sfb-module-pushforward-pullback]. Write $\\mu^F$ for its monoidal structure and $\\gamma_M$ for the action on a $\\Lambda'_Y$-module $M$. By the action formulas of [sk-def-sfb-transport] and [sk-def-sfb-change-of-scalars], the actions on $FM$ obtained by first restricting along $a_Y$ and then transporting, or first transporting and then restricting along $Fa_Y$, agree:\n$$\nF\\bigl(\\gamma_M\\circ(a_Y\\otimes 1_M)\\bigr)\\circ\\mu^F_{\\Lambda_Y,M}\n=F\\gamma_M\\circ\\mu^F_{\\Lambda'_Y,M}\\circ(Fa_Y\\otimes 1_{FM}).\n$$\nHere the equality is functoriality of $F$ followed by naturality of $\\mu^F$. Both functors send a module morphism $h$ to $Fh$. Hence the identities of $FM$, with themselves as inverses, give a natural isomorphism\n$\\tau:\\operatorname{mapMod}(F)\\circ\\operatorname{Res}_{a_Y}\\cong\\operatorname{Res}_{Fa_Y}\\circ\\operatorname{mapMod}(F)$.",
    "uses": [
     "sk-def-sfb-module-pushforward-pullback",
     "sk-def-sfb-transport",
-    "lem-sfb-coefficient-pullback-square",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-extend-comap-iso-of-iso"
+    "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "sole paragraph, transport/restriction comparison; action calculation supplied in this second reading"
+   }
+  },
+  {
+   "text": "Work in $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$. Its tensor product is symmetric monoidal and closed, and tensoring on either side preserves colimits by [sk-def-sfb-sheaf-tensor]. Equalizers are formed sectionwise: the matching-family condition is preserved by taking the equalizer subgroup. Coequalizers are sheafifications of the sectionwise coequalizer presheaves, because the universal property of sheafification [def-weil-pbc-sheafification] identifies maps from these sheafifications to any sheaf with the maps equalizing the original pair. Thus the ambient hypotheses of [def-sfb-extend-comap-iso-of-iso] hold. Apply it with\n$$\nR=F\\Lambda_Y,\\quad S=F\\Lambda'_Y,\\quad R'=\\Lambda_X,\\quad S'=\\Lambda'_X,\n\\qquad \\varphi=Fa_Y,\\quad\\psi=a_X,\\quad a=\\alpha_f,\\quad b=\\alpha'_f.\n$$\n$F$ is strong monoidal as in [sk-def-sfb-module-pushforward-pullback]. The rings $R$ and $S$ are commutative: $\\Lambda_X$ and $\\Lambda'_X$ are commutative because $\\Lambda$ and $\\Lambda'$ are ([sk-def-sfb-pulled-back-coefficients]), and $\\alpha_f$, $\\alpha'_f$ underlie isomorphisms of ring objects $F\\Lambda_Y\\cong\\Lambda_X$, $F\\Lambda'_Y\\cong\\Lambda'_X$ ([sk-def-sfb-coefficient-morphisms]), along which commutativity of the multiplication is transported. The square commutes by [lem-sfb-coefficient-pullback-square]. Its vertical sides $\\alpha_f$ and $\\alpha'_f$ are isomorphisms by [lem-sfb-alpha-iso], applied separately to the arbitrary condensed rings $\\Lambda$ and $\\Lambda'$. The cited scalar-square construction therefore gives the natural isomorphism\n$$\n\\sigma:\\operatorname{Res}_{a_X}\\circ\\operatorname{Ext}_{\\alpha'_f}\n\\cong\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{Res}_{Fa_Y}.\n$$",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "def-sfb-extend-comap-iso-of-iso",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-coefficient-pullback-square",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "sole paragraph, coefficient square and invertible-square comparison; general invertibility supplied by lem-sfb-alpha-iso"
+   }
+  },
+  {
+   "text": "Use [sk-def-sfb-module-pushforward-pullback] for both coefficient rings to write $f^*_{\\Lambda'}=\\operatorname{Ext}_{\\alpha'_f}\\circ\\operatorname{mapMod}(F)$ and $f^*_{\\Lambda}=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(F)$. Define the required comparison to be the composite\n$$\n\\begin{aligned}\n\\operatorname{Res}_{a_X}\\circ f^*_{\\Lambda'}\n&=\\operatorname{Res}_{a_X}\\circ\\operatorname{Ext}_{\\alpha'_f}\\circ\\operatorname{mapMod}(F)\\\\\n&\\xrightarrow{\\ \\sigma\\,\\operatorname{mapMod}(F)\\ }\n\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{Res}_{Fa_Y}\\circ\\operatorname{mapMod}(F)\\\\\n&\\xrightarrow{\\ \\operatorname{Ext}_{\\alpha_f}\\tau^{-1}\\ }\n\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(F)\\circ\\operatorname{Res}_{a_Y}\n=f^*_{\\Lambda}\\circ\\operatorname{Res}_{a_Y}.\n\\end{aligned}\n$$\nWhiskering the natural isomorphisms $\\sigma$ and $\\tau^{-1}$ from steps 2 and 1 and composing them gives a natural isomorphism. Its source and target are functors from $\\Mod_{\\Lambda'_Y}$ to $\\Mod_{\\Lambda_X}$, as required.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md",
+    "place": "sole paragraph, final displayed composite"
+   }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-module-pushforward-pullback",
   "sk-def-sfb-transport",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "def-sfb-extend-comap-iso-of-iso",
   "lem-sfb-coefficient-pullback-square",
-  "sk-prop-sfb-cartesian-coefficients",
-  "def-sfb-extend-comap-iso-of-iso"
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-coefficient-morphisms"
  ],
  "proof_origin": {
   "by": "agent",
@@ -44,7 +80,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -70,5 +106,21 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-coefficient-comparisons"
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sfb-comap-upper-star-iso",
+  "worker": "stage1",
+  "summary": "Second reading expanded the transport/restriction comparison into the action calculation, replaced admissible-only cartesian coefficients by the existing general lem-sfb-alpha-iso, checked the ambient hypotheses for the scalar-square comparison, and composed the resulting natural isomorphisms. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "The sole proof paragraph is realized in three steps: its transport comparison by an explicit action calculation (step 1), its invertible coefficient square by the existing general alpha-isomorphism lemma and scalar-square construction (step 2), and its final displayed composite with the inverse transport comparison (step 3).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-01a026a3f",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-01a026a3f (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item (statement unchanged, 3 steps, no new nodes), the report, every cited node statement, the main-20261015 blueprint item, its proof and def-sfb-extend-comap-iso-of-iso (order 1731), and the unit record of sk-def-sfb-coefficient-comparisons (route step 2). The statement matches order 1736 exactly: arbitrary commutative condensed rings, arbitrary f, functors Mod_{Lambda'_Y} -> Mod_{Lambda_X}. Step 1: I recomputed the two actions on FM; they are equal by naturality of mu^F, so the identity components give tau. This is elementary. Step 2: I matched all the hypotheses of def-sfb-extend-comap-iso-of-iso. The substitution R=F Lambda_Y, S=F Lambda'_Y, phi=F a_Y, psi=a_X, a=alpha_f, b=alpha'_f gives exactly the square of lem-sfb-coefficient-pullback-square (current text). lem-sfb-alpha-iso correctly replaces the blueprint's admissible-only sk-prop-sfb-cartesian-coefficients, and unit step 2 cites that unit. The item is a definition, so there is no route check and no tool_uses entry is needed or accepted. Step 3: I checked the whisker and composite chain against the blueprint display; it is correct. Repaired one fault (E1): step 2 asserted that R=F Lambda_Y and S=F Lambda'_Y are commutative without a citation. The fix justifies this through sk-def-sfb-pulled-back-coefficients (Lambda_X commutative) and sk-def-sfb-coefficient-morphisms (alpha_f is a ring-object isomorphism), and adds both to uses and proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors-basics/def-sfb-comap-upper-star-iso.json. Edge cases checked: identity f or a, zero ring, empty X. There are no duplicates, cycles or SGA citations. The upstream archive has no comapUpperStarIso, so the Lean orientation was compared against the blueprint only (this is not a target node).; 1 file(s) fixed by the reviewer"
+ }
 }
