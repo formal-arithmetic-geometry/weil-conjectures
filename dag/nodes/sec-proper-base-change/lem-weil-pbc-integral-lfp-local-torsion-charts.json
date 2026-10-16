@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "Choose local finite presentations and extend scalars to E. Finite presentation is preserved by extension. Apply field local triviality to the rational cokernel and refine the presentation and rational free covers simultaneously.",
+   "text": "Extend P to rational coefficients and apply field local triviality (resolutionRationalLF). On a local finite-presentation cover, normalize the pulled-back integral coefficient ring using its canonical isomorphism. The rational cokernel of the resulting finite matrix is locally finite free. Prove local scalar charts for this matrix by strong induction on the number of source generators.",
    "uses": [
     "lem-weil-pbc-condensed-lfp-local-triviality",
     "def-weil-pbc-continuous-integral-coefficients"
@@ -22,33 +22,33 @@
    "elementary": false
   },
   {
-   "text": "Realize the entries as continuous O_E-valued functions. Geometric-field evaluation computes pointwise rational cokernel dimensions. On each rational free chart this fixes the rank; zero rank makes the matrix zero. Otherwise choose a nonzero maximal-norm entry and shrink so its norm is constant and dominates every entry.",
+   "text": "Apply integralMatrix_analytic_cover to obtain zero-matrix pieces or a nowhere-zero entry dominating every matrix entry in norm. The zero matrix has a finite-free cokernel. In the nonzero case, integralMatrix_entry_properties gives row division and rational invertibility of the pivot; integralMatrix_column_divides proves column division using continuous integral division. The finitePivotSplit basis isomorphisms give the explicit two-sided block matrix (finiteBiproduct_double_pivot).",
    "uses": [
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "lem-weil-pbc-integral-matrix-analytic-cover"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Divide the selected row and column by this dominating entry and perform elementary invertible operations. The proved integralColumnDivides supplies the column quotient from its componentwise norm bounds, and integralPivotCokernelIso supplies the actual categorical block diagonalization. Iterate on the smaller source rank; rational cokernel freeness is preserved by the Schur-complement comparison. Retain the analytic entry bounds through the explicit finite-biproduct basis split; the abstract pivot-cover interface alone does not retain column divisibility. This diagonalizes the presentation locally, with all nonzero diagonal functions of constant nonzero norm.",
-   "uses": [
+    "lem-weil-pbc-integral-matrix-analytic-cover",
+    "lem-weil-pbc-integral-matrix-entry-properties",
     "lem-weil-pbc-finite-biproduct-pivot",
-    "lem-weil-pbc-integral-matrix-entry-properties"
+    "lem-weil-pbc-continuous-coefficient-realizations"
    ],
    "elementary": false
   },
   {
-   "text": "The proved integralCyclicLocalChart handles every nonzero rank-one pivot: shrink to a neighborhood of constant positive norm, compare the pivot with its nonzero value at one point using a continuous unit in both directions, identify its categorical cokernel with the finite discrete principal quotient, and choose an eventual annihilating power by norm convergence of powers of ℓ. Thus this step needs no DVR factorization theorem. Combine the cyclic summands and take the maximum of their bounds.",
+   "text": "Elementary block elimination (integralPivotCokernelIso) identifies the matrix cokernel with the binary direct sum of its pivot cokernel and its Schur-complement cokernel. Rational invertibility of the pivot and mappedPivotCokernelIso show that the latter cokernel remains rationally locally finite free. Its source rank is strictly smaller, so the induction hypothesis supplies its local scalar charts. A simultaneous global diagonal form is not needed.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The proved scalarImageBiprodIso and scalarCokernelBiprodIso identify, for n≥N_s, the image with the free summand and the quotient with its scalar quotient plus the torsion summand. The proved integralFiniteFreeQuotientSetConstant identifies the finite-free scalar quotient with a finite constant set. The principal quotient coefficient ring is finite discrete because its nonzero principal ideal is open and O_E is compact; division and discrete lifting identify its categorical cokernel. The proved finiteSetBiproduct and integralCyclicBiproductChart combine finite constant set charts and torsion bounds; integralDiagonalLocalChart proves both scalar assertions for the full free-plus-cyclic diagonal form. What remains is presentation diagonalization and transport through coefficient and underlying-set pullback comparisons. Zero matrices and zero ranks use the free and zero-module cases; empty members impose no conditions.",
+   "text": "For the cyclic pivot, refine by open neighborhoods on which its nonzero norm is constant. integralRegularCoefficient_pullback identifies the restricted pivot function. The proved principal-quotient comparisons identify its cokernel with a constant finite set, and integralConstantNormCokernelBound gives an eventual annihilating power of ℓ. Thus its eventual scalar image is zero and finite free. For a finite-free module, scalar multiplication by ℓ^n is monic, its image is finite free, and integralFiniteFreeQuotientSetConstant gives a finite constant quotient for every exponent.",
    "uses": [
+    "lem-weil-pbc-integral-regular-coefficient-pullback",
     "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the two scalar charts on a common pro-etale refinement using the maximum of their bounds (localScalarCharts_biprod). Images and cokernels of scalar maps respect module isomorphisms, coefficient-ring isomorphisms, and composition of pullbacks. Bind the covers through the induction and the initial finite presentations. Finally, exact pullback preserves images and cokernels, and chartSetPullbackIso identifies the underlying set of the abelian pullback with the actual set-sheaf inverse image in the statement. The latter comparison uses the terminal object in each left Kan extension indexing category, so forgetting abelian groups preserves the colimits in question. This proves the original statement, including zero ranks and empty cover members.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison"
    ],
    "elementary": false
   }
@@ -56,19 +56,20 @@
  "proof_deps": [
   "lem-weil-pbc-condensed-lfp-local-triviality",
   "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "lem-weil-pbc-geometric-field-proetale-evaluation",
   "lem-weil-pbc-integral-matrix-analytic-cover",
-  "lem-weil-pbc-finite-biproduct-pivot",
   "lem-weil-pbc-integral-matrix-entry-properties",
+  "lem-weil-pbc-finite-biproduct-pivot",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-integral-regular-coefficient-pullback",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite DVR resolution; continuous Smith elimination and finite discrete quotients expanded by the agent",
-  "note": "D4: categorical construction, proved rationalization and principal-quotient arithmetic helpers, and the explicit local linear algebra reduction. The source supplies the integral coefficient framework; the expanded reduction is written by the agent."
+  "note": "A4 completes the Lean proof by strong induction on presentation source rank, with explicit two-sided finite-biproduct pivots, cyclic constant-norm refinements, and binary scalar-chart gluing. The existing D4 principal-quotient and rationalization helpers are retained. No new unproved statement is introduced; the theorem and all existing signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -145,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",
-  "reviewer": "X-89293",
-  "group": "D4",
+  "reviewer": "X-447a5",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T073459-L-1080136",
+  "landing": "20261016T090411-L-1837755",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five node signatures and proof records with delivered Lean; verified unchanged existing signature, clean compilation of delivery and direct importer, and expected axiom dependencies."
+  "note": "independent Codex review: Matched delivered Lean and DAG against the packet: clean compilation, unchanged theorem signature, permitted axioms, direct importers compile, and proof dependencies agree."
  }
 }

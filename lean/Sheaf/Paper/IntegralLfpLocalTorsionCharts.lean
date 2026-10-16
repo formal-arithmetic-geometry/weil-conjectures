@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group D4
+Authors: SHEAF groups D4 and A4
 -/
 module
 
@@ -10,15 +10,16 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all Sheaf.Paper.IntegralConstructibleKernels
 import all Sheaf.Paper.IntegralMatrixEntryProperties
+import all Sheaf.Paper.FiniteBiproductPivot
+import Sheaf.Paper.IntegralRegularCoefficientPullback
 import Sheaf.Paper.FiniteDiscreteCondensedRing
 import Sheaf.Paper.FiniteDiscreteSchemeRing
 import Sheaf.Paper.ContinuousRegularFunctions
 import Sheaf.Paper.ContinuousCoefficientRealizations
 import Mathlib.CategoryTheory.Sites.Adjunction
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.Paper.FiniteBiproductPivot
-import Sheaf.Paper.GeometricFieldProEtaleEvaluation
-import Sheaf.Paper.IntegralMatrixAnalyticCover
+import Sheaf.CategoryTheory.SheafPullbackForgetComparison
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
+import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 /-! # Local integral torsion and quotient charts -/
 
@@ -27,7 +28,7 @@ import Sheaf.Paper.IntegralMatrixAnalyticCover
 universe u
 
 open CategoryTheory Limits
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 attribute [local instance] comp_preservesFiniteLimits comp_preservesLimits
@@ -845,6 +846,575 @@ private lemma resolutionRationalLF (ℓ : ℕ) [Fact ℓ.Prime]
   exact locally_free_of_iso (locally_free_comap ψX h)
     ((Mod.comapEquivalenceOfIsIso ψX).counitIso.app P_E)
 
+-- Scalar images and cokernels are invariant under an isomorphism of modules.
+private noncomputable def scalarImageIso
+    {C : Type*} [Category C] [Abelian C] {M N : C} (k : ℕ) (e : M ≅ N) :
+    image (k • 𝟙 M) ≅ image (k • 𝟙 N) := by
+  let q := e.inv ≫ factorThruImage (k • 𝟙 M)
+  let m := image.ι (k • 𝟙 M) ≫ e.hom
+  have : Epi q := by dsimp only [q]; infer_instance
+  have : Mono m := by dsimp only [m]; infer_instance
+  have : StrongEpi q := strongEpi_of_epi q
+  exact image.isoStrongEpiMono q m (by
+    simp [q, m])
+
+private noncomputable def scalarCokernelIso
+    {C : Type*} [Category C] [Abelian C] {M N : C} (k : ℕ) (e : M ≅ N) :
+    cokernel (k • 𝟙 M) ≅ cokernel (k • 𝟙 N) :=
+  cokernel.mapIso _ _ e e (by simp)
+
+-- Underlying sets commute with the actual constructed pro-etale pullback.
+private noncomputable def chartSetPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [WeaklyEtale f] (M : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
+    (sheafCompose (Scheme.ProEt.topology Y) (forget Ab.{u + 1})).obj
+        ((ProEtale.upperStar Ab.{u + 1} f).obj M) ≅
+      (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).obj
+        ((sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj M) := by
+  let G := Scheme.proEtaleBaseChange f
+  have : G.op.IsLeftAdjoint :=
+    ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f ‹WeaklyEtale f›
+      _root_.trivial).op).isLeftAdjoint
+  have hp (A : X.ProEtᵒᵖ ⥤ Ab.{u + 1}) (V : Y.ProEtᵒᵖ) :
+      PreservesColimit (CostructuredArrow.proj G.op V ⋙ A) (forget Ab.{u + 1}) := by
+    let t := mkTerminalOfRightAdjoint _ (Adjunction.ofIsLeftAdjoint G.op) V
+    apply preservesColimit_of_preserves_colimit_cocone (colimitOfDiagramTerminal t _)
+    exact colimitOfDiagramTerminal t _
+  let : (forget Ab.{u + 1}).PreservesLeftKanExtensions G.op := fun A ↦ by
+    let (V : Y.ProEtᵒᵖ) :
+        PreservesColimit (CostructuredArrow.proj G.op V ⋙ A) (forget Ab.{u + 1}) := hp A V
+    infer_instance
+  exact (sheafPullbackForgetIso (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)
+    (Scheme.proEtaleBaseChange f) (forget Ab.{u + 1})).app M
+
+private noncomputable def chartConstantPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    constantSheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⋙
+      Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
+    constantSheaf (Scheme.ProEt.topology Y) (Type (u + 1)) := by
+  let G := Scheme.proEtaleBaseChange f
+  let hT := terminalIsTerminal (C := X.ProEt)
+  exact Functor.isoWhiskerLeft _
+      (Functor.sheafPullbackConstruction.sheafPullbackIso G (Type (u + 1))
+        (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)).symm ≪≫
+    G.constantSheafsheafPullbackIso (Type (u + 1))
+      (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) hT (hT.isTerminalObj G)
+
+private abbrev ScalarChart {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    (k : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
+  Mod.IsFree R (image (k • 𝟙 M)) ∧
+    ∃ n : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj
+          (cokernel (k • 𝟙 M)) ≅
+        (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin n)))
+
+private lemma scalarChart_iso {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (k : ℕ) (e : M ≅ N) (h : ScalarChart R k M) : ScalarChart R k N := by
+  obtain ⟨hI, n, ⟨en⟩⟩ := h
+  exact ⟨free_of_iso hI (scalarImageIso k e), n, ⟨
+    (Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+      (scalarCokernelIso k e).symm ≪≫ en⟩⟩
+
+private lemma scalarChart_of_comap {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    (k : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (h : ScalarChart R k ((Mod.comap φ).obj M)) : ScalarChart S k M := by
+  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) φ
+  let eI : image (k • 𝟙 (F.obj M)) ≅ F.obj (image (k • 𝟙 M)) :=
+    image.eqToIso (by simp) ≪≫ PreservesImage.iso F (k • 𝟙 M)
+  refine ⟨free_of_comap φ (free_of_iso h.1 eI), ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := h.2
+  let eC : F.obj (cokernel (k • 𝟙 M)) ≅ cokernel (k • 𝟙 (F.obj M)) :=
+    PreservesCokernel.iso F _ ≪≫ cokernelIsoOfEq (by simp)
+  exact ⟨n, ⟨(sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+    ((Mod.forget R).mapIso eC) ≪≫ en⟩⟩
+
+attribute [local instance] comp_preservesFiniteColimits
+attribute [local instance] preservesBinaryBiproducts_of_preservesBinaryCoproducts
+
+private lemma scalarChart_pullback {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (k : ℕ) (h : ScalarChart R k M) :
+    ScalarChart ((ProEtale.upperStar Ab.{u + 1} f).obj R) k
+      (((ProEtale.upperStar Ab.{u + 1} f).mapMod R).obj M) := by
+  let F := (ProEtale.upperStar Ab.{u + 1} f).mapMod R
+  let S := (sheafCompose (Scheme.ProEt.topology Y) (forget Ab.{u + 1}))
+  let eI : F.obj (image (k • 𝟙 M)) ≅ image (k • 𝟙 (F.obj M)) :=
+    (PreservesImage.iso F _).symm ≪≫ image.eqToIso (by simp)
+  refine ⟨free_of_iso (free_pullback f h.1) eI, ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := h.2
+  let eC : cokernel (k • 𝟙 (F.obj M)) ≅ F.obj (cokernel (k • 𝟙 M)) :=
+    cokernelIsoOfEq (by simp) ≪≫ (PreservesCokernel.iso F _).symm
+  exact ⟨n, ⟨S.mapIso ((Mod.forget _).mapIso eC) ≪≫
+    chartSetPullbackIso f _ ≪≫
+    (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).mapIso en ≪≫
+    (chartConstantPullbackIso f).app _⟩⟩
+
+private abbrev LocalScalarCharts {X : Scheme.{u}}
+    (ℓ : ℕ) (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop :=
+  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,
+    ∃ N : ℕ, ∀ n : ℕ, N ≤ n →
+      ScalarChart ((ProEtale.upperStar Ab.{u + 1} (C.f i)).obj R) (ℓ ^ n)
+        (((ProEtale.upperStar Ab.{u + 1} (C.f i)).mapMod R).obj M)
+
+private lemma localScalarCharts_iso {X : Scheme.{u}} (ℓ : ℕ)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (e : M ≅ N) (h : LocalScalarCharts ℓ R M) : LocalScalarCharts ℓ R N := by
+  obtain ⟨U, hU⟩ := h
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨N, hN⟩ := hU i
+  exact ⟨N, fun n hn ↦ scalarChart_iso _
+    (((ProEtale.upperStar Ab.{u + 1} (U.f i)).mapMod R).mapIso e) (hN n hn)⟩
+
+private lemma localScalarCharts_of_comap {X : Scheme.{u}} (ℓ : ℕ)
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (h : LocalScalarCharts ℓ R ((Mod.comap φ).obj M)) : LocalScalarCharts ℓ S M := by
+  obtain ⟨U, hU⟩ := h
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨N, hN⟩ := hU i
+  let F := ProEtale.upperStar Ab.{u + 1} (U.f i)
+  refine ⟨N, fun n hn ↦ scalarChart_of_comap (F.map φ) _ _ ?_⟩
+  exact scalarChart_iso _ ((F.mapModComapIso φ).app M) (hN n hn)
+
+private lemma scalarChart_comap {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    (k : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
+    (h : ScalarChart S k M) : ScalarChart R k ((Mod.comap φ).obj M) := by
+  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) φ
+  let eI : F.obj (image (k • 𝟙 M)) ≅ image (k • 𝟙 (F.obj M)) :=
+    (PreservesImage.iso F _).symm ≪≫ image.eqToIso (by simp)
+  refine ⟨free_of_iso (free_comap φ h.1) eI, ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := h.2
+  let eC : cokernel (k • 𝟙 (F.obj M)) ≅ F.obj (cokernel (k • 𝟙 M)) :=
+    cokernelIsoOfEq (by simp) ≪≫ (PreservesCokernel.iso F _).symm
+  exact ⟨n, ⟨(sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+    ((Mod.forget R).mapIso eC) ≪≫ en⟩⟩
+
+private lemma scalarChart_pullback_comp_iff {X Y Z : Scheme.{u}}
+    (f : Z ⟶ Y) (g : Y ⟶ X)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    (k : ℕ) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    ScalarChart ((ProEtale.upperStar Ab.{u + 1} (f ≫ g)).obj R) k
+        (((ProEtale.upperStar Ab.{u + 1} (f ≫ g)).mapMod R).obj M) ↔
+      ScalarChart ((ProEtale.upperStar Ab.{u + 1} f).obj
+        ((ProEtale.upperStar Ab.{u + 1} g).obj R)) k
+        (((ProEtale.upperStar Ab.{u + 1} f).mapMod _).obj
+          (((ProEtale.upperStar Ab.{u + 1} g).mapMod R).obj M)) := by
+  let F := ProEtale.upperStar Ab.{u + 1} g
+  let G := ProEtale.upperStar Ab.{u + 1} f
+  let e := ProEtale.upperStarComp Ab.{u + 1} f g
+  let φ := Functor.compAlgHom F G e.inv R
+  let t := (Functor.mapModCompIso F G e.inv R).app M
+  exact ⟨fun h ↦ scalarChart_iso _ t.symm (scalarChart_comap φ _ _ h),
+    fun h ↦ scalarChart_of_comap φ _ _ (scalarChart_iso _ t h)⟩
+
+private lemma localScalarCharts_of_cover {X : Scheme.{u}} (ℓ : ℕ)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    (h : ∀ i, LocalScalarCharts ℓ ((ProEtale.upperStar Ab.{u + 1} (U.f i)).obj R)
+      (((ProEtale.upperStar Ab.{u + 1} (U.f i)).mapMod R).obj M)) :
+    LocalScalarCharts ℓ R M := by
+  choose V hV using h
+  refine ⟨U.bind V, fun ij ↦ ?_⟩
+  rcases ij with ⟨i, j⟩
+  obtain ⟨N, hN⟩ := hV i j
+  refine ⟨N, fun n hn ↦ ?_⟩
+  let F := ProEtale.upperStar Ab.{u + 1} (U.f i)
+  let G := ProEtale.upperStar Ab.{u + 1} ((V i).f j)
+  let e := ProEtale.upperStarComp Ab.{u + 1} ((V i).f j) (U.f i)
+  let φ := Functor.compAlgHom F G e.inv R
+  let t := (Functor.mapModCompIso F G e.inv R).app M
+  exact scalarChart_of_comap φ _ _ (scalarChart_iso _ t (hN n hn))
+
+private lemma localScalarCharts_of_global {X : Scheme.{u}} (ℓ : ℕ)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (h : ∃ N : ℕ, ∀ n : ℕ, N ≤ n → ScalarChart R (ℓ ^ n) M) :
+    LocalScalarCharts ℓ R M := by
+  obtain ⟨N, hN⟩ := h
+  let U : Scheme.Cover.{u} Scheme.proetalePrecoverage X :=
+    .singleton (𝟙 _) (Precoverage.mem_coverings_of_isIso _)
+  have (i : U.I₀) : WeaklyEtale (U.f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ U.mem₀ (.mk i)
+  exact ⟨U, fun i ↦ ⟨N, fun n hn ↦ scalarChart_pullback (U.f i) _ (hN n hn)⟩⟩
+
+private noncomputable def scalarImageBiprodMapIso
+    {C : Type*} [Category C] [Abelian C] (k : ℕ) (M N : C) :
+    image (k • 𝟙 (M ⊞ N)) ≅ image (k • 𝟙 M) ⊞ image (k • 𝟙 N) := by
+  let q := biprod.map (factorThruImage (k • 𝟙 M)) (factorThruImage (k • 𝟙 N))
+  let m := biprod.map (image.ι (k • 𝟙 M)) (image.ι (k • 𝟙 N))
+  have : Epi q := by dsimp only [q]; infer_instance
+  have : Mono m := by dsimp only [m]; infer_instance
+  have : StrongEpi q := strongEpi_of_epi q
+  exact (image.isoStrongEpiMono q m (by ext <;> simp [q, m])).symm
+
+private lemma scalarChart_biprod {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (k : ℕ) (hM : ScalarChart R k M) (hN : ScalarChart R k N) :
+    ScalarChart R k (M ⊞ N) := by
+  refine ⟨free_of_iso (free_biprod hM.1 hN.1)
+    (scalarImageBiprodMapIso k M N).symm, ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := finiteSetBiprod X R _ _ hM.2 hN.2
+  have he : k • 𝟙 (M ⊞ N) = biprod.map (k • 𝟙 M) (k • 𝟙 N) := by
+    apply biprod.hom_ext <;> apply biprod.hom_ext' <;> simp
+  exact ⟨n, ⟨(Mod.forget R ⋙
+    sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+      (cokernelIsoOfEq he ≪≫ diagonalCokernelIso _ _) ≪≫ en⟩⟩
+
+private lemma localScalarCharts_biprod {X : Scheme.{u}} (ℓ : ℕ)
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (hM : LocalScalarCharts ℓ R M) (hN : LocalScalarCharts ℓ R N) :
+    LocalScalarCharts ℓ R (M ⊞ N) := by
+  obtain ⟨U, hU⟩ := hM
+  obtain ⟨V, hV⟩ := hN
+  have (i : U.I₀) : WeaklyEtale (U.f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ U.mem₀ (.mk i)
+  have (j : V.I₀) : WeaklyEtale (V.f j) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ V.mem₀ (.mk j)
+  refine ⟨U.bind (fun i ↦ V.pullback₁ (U.f i)), fun ij ↦ ?_⟩
+  rcases ij with ⟨i, j⟩
+  obtain ⟨a, ha⟩ := hU i
+  obtain ⟨b, hb⟩ := hV j
+  refine ⟨max a b, fun n hn ↦ ?_⟩
+  let f := pullback.fst (U.f i) (V.f j)
+  let g := pullback.snd (U.f i) (V.f j)
+  have : WeaklyEtale f := by dsimp only [f]; infer_instance
+  have : WeaklyEtale g := by dsimp only [g]; infer_instance
+  have hM' := (scalarChart_pullback_comp_iff f (U.f i) (ℓ ^ n) M).mpr
+    (scalarChart_pullback f _ (ha n ((le_max_left a b).trans hn)))
+  have hN' := (scalarChart_pullback_comp_iff g (V.f j) (ℓ ^ n) N).mpr
+    (scalarChart_pullback g _ (hb n ((le_max_right a b).trans hn)))
+  rw [show g ≫ V.f j = f ≫ U.f i from pullback.condition.symm] at hN'
+  let F := (ProEtale.upperStar Ab.{u + 1} (f ≫ U.f i)).mapMod R
+  exact scalarChart_iso _ (F.mapBiprod M N).symm (scalarChart_biprod _ hM' hN')
+
+private lemma integralScalarChart_of_free (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (integralCoeff ℓ E) X))
+    (hM : Mod.IsFree (condensedRingObj (integralCoeff ℓ E) X) M) (n : ℕ) :
+    ScalarChart (condensedRingObj (integralCoeff ℓ E) X) (ℓ ^ n) M := by
+  let e := chartComparison X (continuousIntegers ℓ E)
+  let K := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (inv e)
+  obtain ⟨r, ⟨i⟩⟩ := free_comap (inv e) hM
+  apply scalarChart_of_comap (inv e)
+  apply scalarChart_iso _ i.symm
+  have hp : (ℓ : ℚ_[ℓ]) ≠ 0 := by exact_mod_cast (Fact.out : ℓ.Prime).ne_zero
+  have hpE : (ℓ : E) ≠ 0 := by
+    simpa only [map_natCast, map_zero] using (algebraMap ℚ_[ℓ] E).injective.ne hp
+  have hk : ((ℓ ^ n : ℕ) : continuousIntegers ℓ E) ≠ 0 := by
+    intro h
+    have he := congrArg (continuousIntegers ℓ E).subtype h
+    simp only [map_zero, Nat.cast_pow] at he
+    exact pow_ne_zero n hpE he
+  have : Mono ((ℓ ^ n) • 𝟙 (Mod.finiteFree (continuousAbRing X _) r)) :=
+    scalarFiniteFreeMono ℓ E X r (ℓ ^ n) hk
+  exact ⟨free_of_iso ⟨r, ⟨Iso.refl _⟩⟩ (imageMonoIsoSource _).symm,
+    integralFiniteFreeQuotientSetConstant ℓ E X r (ℓ ^ n) hk⟩
+
+private lemma scalarChart_torsion {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (k : ℕ)
+    (hk : k • 𝟙 M = 0)
+    (hM : ∃ n : ℕ, Nonempty
+      ((Mod.forget R ⋙ sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).obj M ≅
+        (constantSheaf (Scheme.ProEt.topology X) (Type (u + 1))).obj
+          (ULift.{u + 1} (Fin n)))) : ScalarChart R k M := by
+  have hzero : Mod.IsFree R (0 : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) := by
+    refine ⟨0, ⟨(isZero_zero _).iso ((IsZero.iff_id_eq_zero _).mpr ?_)⟩⟩
+    apply biproduct.hom_ext
+    intro i
+    exact Fin.elim0 i
+  refine ⟨free_of_iso hzero (image.eqToIso hk ≪≫ imageZero).symm, ?_⟩
+  obtain ⟨n, ⟨en⟩⟩ := hM
+  exact ⟨n, ⟨(Mod.forget R ⋙
+    sheafCompose (Scheme.ProEt.topology X) (forget Ab.{u + 1})).mapIso
+      (cokernelIsoOfEq hk ≪≫ cokernelZeroIsoTarget) ≪≫ en⟩⟩
+
+private lemma integralCyclicScalarCharts (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
+    (p : Mod.regular (condensedRingObj (integralCoeff ℓ E) X) ⟶
+      Mod.regular (condensedRingObj (integralCoeff ℓ E) X))
+    (a : continuousIntegers ℓ E) (ha : a ≠ 0)
+    (hp : ∀ x, ‖(integralRegularCoefficient ℓ E X p x : E)‖ = ‖(a : E)‖) :
+    LocalScalarCharts ℓ (condensedRingObj (integralCoeff ℓ E) X) (cokernel p) := by
+  let O := continuousIntegers ℓ E
+  let e := chartComparison X O
+  let K := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (inv e)
+  let j := Mod.regularIsoOfIsIso e
+  let p' := j.inv ≫ K.map p ≫ j.hom
+  let b := integralRegularCoefficient ℓ E X p
+  have hmul : p' = continuousMultiplier X O b := by
+    apply regularCoefficient_injective X O
+    rw [regularCoefficient_multiplier]
+    rfl
+  let ec : K.obj (cokernel p) ≅ cokernel (continuousMultiplier X O b) :=
+    PreservesCokernel.iso K _ ≪≫
+      cokernel.mapIso (K.map p) p' j j (by simp [p']) ≪≫ cokernelIsoOfEq hmul
+  obtain ⟨N, hN⟩ := integralConstantNormCokernelBound ℓ E X b a ha hp
+  apply localScalarCharts_of_global
+  refine ⟨N, fun n hn ↦ scalarChart_of_comap (inv e) _ _ ?_⟩
+  apply scalarChart_iso _ ec.symm
+  exact scalarChart_torsion _ _ (hN n hn)
+    (integralConstantNormCokernelSetConstant ℓ E X b a ha hp)
+
+private lemma integralCyclicLocalScalarCharts (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
+    (p : Mod.regular (condensedRingObj (integralCoeff ℓ E) X) ⟶
+      Mod.regular (condensedRingObj (integralCoeff ℓ E) X))
+    (hp : ∀ x, integralRegularCoefficient ℓ E X p x ≠ 0) :
+    LocalScalarCharts ℓ (condensedRingObj (integralCoeff ℓ E) X) (cokernel p) := by
+  classical
+  let b := integralRegularCoefficient ℓ E X p
+  let bE : C(X, E) := ⟨fun x ↦ (b x : E), continuous_subtype_val.comp b.continuous⟩
+  have hex (x : X) : ∃ U : X.Opens, x ∈ U ∧
+      ∀ y ∈ U, ‖bE y‖ = ‖bE x‖ :=
+    constantNormNeighborhood ℓ E X bE x (fun h ↦ hp x (Subtype.ext h))
+  choose U hx hU using hex
+  let V : X.OpenCover := X.openCoverOfIsOpenCover U (by
+    apply eq_top_iff.mpr
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hx x⟩)
+  let W : Scheme.Cover.{u} Scheme.proetalePrecoverage X :=
+    (V.changeProp (Q := @Etale) (fun _ ↦ inferInstance)).weaken
+      Scheme.etalePrecoverage_le_proetalePrecoverage
+  apply localScalarCharts_of_cover ℓ W
+  intro x
+  let f := (U x).ι
+  let R := condensedRingObj (integralCoeff ℓ E) X
+  let F := (ProEtale.upperStar Ab.{u + 1} f).mapMod R
+  let α := condensedPullbackHom (integralCoeff ℓ E) f
+  let J := Mod.comap (D := Sheaf (Scheme.ProEt.topology (U x)) Ab.{u + 1}) (inv α)
+  let T := F ⋙ J
+  let j := integralRegularPullbackIso ℓ E f
+  let p' := j.inv ≫ T.map p ≫ j.hom
+  have hp' (y : (U x).toScheme) :
+      ‖(integralRegularCoefficient ℓ E (U x) p' y : E)‖ = ‖(b x : E)‖ := by
+    rw [show integralRegularCoefficient ℓ E (U x) p' y = b (f y) from
+      integralRegularCoefficient_pullback ℓ E f p y]
+    exact hU x y.val y.property
+  have h := integralCyclicScalarCharts ℓ E (U x) p' (b x) (hp x) hp'
+  let ec : T.obj (cokernel p) ≅ cokernel p' :=
+    PreservesCokernel.iso T _ ≪≫
+      cokernel.mapIso (T.map p) p' j j (by simp [p'])
+  exact localScalarCharts_of_comap ℓ (inv α) _
+    (localScalarCharts_iso ℓ ec.symm h)
+
+private lemma integralMatrix_column_divides (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
+    {n t : ℕ}
+    (f : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶
+      Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t)
+    (i : Fin t) (j : Fin n)
+    (hp : ∀ x, (integralMatrixFunctions ℓ E X
+      (chartComparison X (continuousIntegers ℓ E)) f i j x).val ≠ 0)
+    (hb : ∀ r x, ‖(integralMatrixFunctions ℓ E X
+        (chartComparison X (continuousIntegers ℓ E)) f r j x).val‖ ≤
+      ‖(integralMatrixFunctions ℓ E X
+        (chartComparison X (continuousIntegers ℓ E)) f i j x).val‖) :
+    ∃ q : Fin t → (Mod.regular (condensedRingObj (integralCoeff ℓ E) X) ⟶
+      Mod.regular (condensedRingObj (integralCoeff ℓ E) X)),
+      ∀ r, (biproduct.ι _ j ≫ f ≫ biproduct.π _ i) ≫ q r =
+        biproduct.ι _ j ≫ f ≫ biproduct.π _ r := by
+  let O := continuousIntegers ℓ E
+  let e := chartComparison X O
+  let K := (Mod.comapEquivalenceOfIsIso (inv e)).functor
+  let jR := Mod.regularIsoOfIsIso e
+  let p := biproduct.ι _ j ≫ f ≫ biproduct.π _ i
+  let p' := jR.inv ≫ K.map p ≫ jR.hom
+  let g (r : Fin t) := biproduct.ι _ j ≫ f ≫ biproduct.π _ r
+  let g' (r : Fin t) := jR.inv ≫ K.map (g r) ≫ jR.hom
+  have hdiv (r : Fin t) : ∃ q, p' ≫ q = g' r := by
+    obtain ⟨q, hq⟩ := continuousIntegral_divides ℓ E X p' (g' r) hp (hb r)
+    refine ⟨q, ?_⟩
+    have hcomm : p' ≫ q = q ≫ p' := by
+      apply regularCoefficient_injective X O
+      rw [regularCoefficient_comp, regularCoefficient_comp]
+      exact mul_comm _ _
+    exact hcomm.trans hq
+  choose q' hq' using hdiv
+  refine ⟨fun r ↦ K.preimage (jR.hom ≫ q' r ≫ jR.inv), fun r ↦ ?_⟩
+  apply K.map_injective
+  rw [K.map_comp, Functor.map_preimage]
+  simpa only [p', g', Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
+    Category.comp_id] using congrArg (fun z ↦ jR.hom ≫ z ≫ jR.inv) (hq' r)
+
+private lemma finiteBiproduct_double_pivot
+    {C : Type*} [Category C] [Preadditive C] [HasFiniteBiproducts C]
+    [HasBinaryBiproducts C] {P : C} {n t : ℕ}
+    (f : (⨁ fun _ : Fin n ↦ P) ⟶ ⨁ fun _ : Fin t ↦ P)
+    (i : Fin t) (j : Fin n) (q : Fin n → (P ⟶ P)) (v : Fin t → (P ⟶ P))
+    (hq : ∀ k, q k ≫ (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) i) =
+      biproduct.ι (fun _ : Fin n ↦ P) k ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) i)
+    (hv : ∀ k, (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫
+        biproduct.π (fun _ : Fin t ↦ P) i) ≫ v k =
+      biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) k) :
+    ∃ (m s : ℕ), m < n ∧
+      ∃ (eA : (⨁ fun _ : Fin n ↦ P) ≅ P ⊞ (⨁ fun _ : Fin m ↦ P))
+        (eB : (⨁ fun _ : Fin t ↦ P) ≅ P ⊞ (⨁ fun _ : Fin s ↦ P))
+        (r : (⨁ fun _ : Fin m ↦ P) ⟶ P)
+        (c : P ⟶ ⨁ fun _ : Fin s ↦ P)
+        (d : (⨁ fun _ : Fin m ↦ P) ⟶ ⨁ fun _ : Fin s ↦ P),
+        eA.inv ≫ f ≫ eB.hom =
+          biprod.lift
+            (biprod.desc (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) i)
+              (r ≫ (biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫ biproduct.π (fun _ : Fin t ↦ P) i)))
+            (biprod.desc
+              ((biproduct.ι (fun _ : Fin n ↦ P) j ≫ f ≫
+                biproduct.π (fun _ : Fin t ↦ P) i) ≫ c) d) := by
+  cases n with
+  | zero => exact Fin.elim0 j
+  | succ m =>
+    cases t with
+    | zero => exact Fin.elim0 i
+    | succ s =>
+      let eA := finitePivotSplit P j
+      let eB := finitePivotSplit P i
+      let b := eA.inv ≫ f ≫ eB.hom
+      let r := biproduct.desc fun k ↦ q (j.succAbove k)
+      let c := biproduct.lift fun k ↦ v (i.succAbove k)
+      refine ⟨m, s, Nat.lt_succ_self m, eA, eB, r, c,
+        biprod.inr ≫ b ≫ biprod.snd, ?_⟩
+      apply biprod.hom_ext' <;> apply biprod.hom_ext
+      · simp [b, eA, eB, finitePivotSplit]
+      · apply biproduct.hom_ext
+        intro k
+        simpa [b, eA, eB, finitePivotSplit, c, Category.assoc] using
+          (hv (i.succAbove k)).symm
+      · apply biproduct.hom_ext'
+        intro k
+        simpa [b, eA, eB, finitePivotSplit, r, Category.assoc] using
+          (hq (j.succAbove k)).symm
+      · simp [b]
+
+-- Strong induction on the number of source generators removes one cyclic block at a time.
+set_option maxHeartbeats 800000 in
+-- The induction elaborates several composed module and coefficient equivalences at each pivot.
+private lemma integralMatrixScalarCharts (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    ∀ (n t : ℕ) (X : Scheme.{u})
+      (a : Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) n ⟶
+        Mod.finiteFree (condensedRingObj (integralCoeff ℓ E) X) t),
+      RationalCokernelFree ℓ E a →
+      LocalScalarCharts ℓ (condensedRingObj (integralCoeff ℓ E) X) (cokernel a) := by
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  intro n
+  induction n using Nat.strong_induction_on with
+  | h n IH =>
+    intro t X a hLF
+    obtain ⟨V, hV⟩ := integralMatrix_analytic_cover ℓ E n t X a hLF
+    apply localScalarCharts_of_cover ℓ V
+    intro k
+    let Y := V.X k
+    let R := condensedRingObj (integralCoeff ℓ E) X
+    let R' := condensedRingObj (integralCoeff ℓ E) Y
+    let F := (ProEtale.upperStar Ab.{u + 1} (V.f k)).mapMod R
+    let α := condensedPullbackHom (integralCoeff ℓ E) (V.f k)
+    let J := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (inv α)
+    let T := F ⋙ J
+    have hT : LocalScalarCharts ℓ R' (cokernel (T.map a)) := by
+      rcases hV k with hz | ⟨i, j, hzero, hbound⟩
+      · have hB : Mod.IsFree R' (T.obj (Mod.finiteFree R t)) :=
+          free_comap (inv α) (free_pullback (V.f k) ⟨t, ⟨Iso.refl _⟩⟩)
+        have hc : cokernel (T.map a) ≅ T.obj (Mod.finiteFree R t) :=
+          cokernelIsoOfEq hz ≪≫ cokernelZeroIsoTarget
+        apply localScalarCharts_of_global
+        exact ⟨0, fun n _ ↦ integralScalarChart_of_free ℓ E Y _
+          (free_of_iso hB hc.symm) n⟩
+      · let eA := integralFiniteFreePullbackIso ℓ E (V.f k) n
+        let eB := integralFiniteFreePullbackIso ℓ E (V.f k) t
+        let f := eA.inv ≫ T.map a ≫ eB.hom
+        let e := chartComparison Y (continuousIntegers ℓ E)
+        let eE := chartComparison Y E
+        have : IsIso eE := chartComparison_isIso Y E
+        have hcompat : coefficientMap (integralScalarMap ℓ E) Y ≫ eE =
+            e ≫ integralFunctionInclusion ℓ E Y :=
+          chartComparison_naturality Y (continuousIntegers ℓ E) E
+            (continuousIntegers ℓ E).subtype continuous_subtype_val
+        obtain ⟨hp, hunit, q, hq⟩ :=
+          integralMatrix_entry_properties ℓ E Y e eE hcompat f i j hzero hbound
+        obtain ⟨v, hv⟩ := integralMatrix_column_divides ℓ E Y f i j hzero
+          (fun r ↦ hbound r j)
+        obtain ⟨m, s, hmn, iA, iB, r, c, d, he⟩ :=
+          finiteBiproduct_double_pivot f i j q v hq hv
+        let p := biproduct.ι (fun _ : Fin n ↦ Mod.regular R') j ≫ f ≫
+          biproduct.π (fun _ : Fin t ↦ Mod.regular R') i
+        let b := biprod.lift (biprod.desc p (r ≫ p)) (biprod.desc (p ≫ c) d)
+        let ec : cokernel (T.map a) ≅ cokernel b :=
+          cokernel.mapIso (T.map a) f eA eB (by simp [f]) ≪≫
+            cokernel.mapIso f b iA iB (by
+              dsimp only [b]
+              rw [← he]
+              simp only [Iso.hom_inv_id_assoc])
+        let L := Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)
+        have : IsIso (L.map p) := hunit
+        let eS := L.mapIso ec ≪≫ mappedPivotCokernelIso L p r (p ≫ c) d
+        have hS : RationalCokernelFree ℓ E (d - r ≫ p ≫ c) :=
+          locally_free_of_iso (rationalCokernelFree_pullback ℓ E (V.f k) a hLF) eS
+        have hsmall := IH m hmn s Y (d - r ≫ p ≫ c) hS
+        have hpzero (x : Y) : integralRegularCoefficient ℓ E Y p x ≠ 0 :=
+          fun h ↦ hzero x (congrArg Subtype.val h)
+        have hcyclic := integralCyclicLocalScalarCharts ℓ E Y p hpzero
+        exact localScalarCharts_iso ℓ
+          (ec ≪≫ integralPivotCokernelIso p r c d).symm
+          (localScalarCharts_biprod ℓ hcyclic hsmall)
+    have hJ := localScalarCharts_iso ℓ (PreservesCokernel.iso J (F.map a)).symm hT
+    have hF := localScalarCharts_of_comap ℓ (inv α) _ hJ
+    exact localScalarCharts_iso ℓ (PreservesCokernel.iso F a).symm hF
+
+private lemma integralLfpScalarCharts (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (integralCoeff ℓ E) X))
+    (hP : IsLocallyFinitelyPresented (condensedRingObj (integralCoeff ℓ E) X) P) :
+    LocalScalarCharts ℓ (condensedRingObj (integralCoeff ℓ E) X) P := by
+  have hPE := resolutionRationalLF ℓ E X P hP
+  have hLF : RationalCokernelFree ℓ E (0 : P ⟶ P) :=
+    locally_free_of_iso hPE
+      ((Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).mapIso
+        cokernelZeroIsoTarget.symm)
+  obtain ⟨U, hU⟩ := hP
+  apply localScalarCharts_of_cover ℓ U
+  intro i
+  let Y := U.X i
+  let R := condensedRingObj (integralCoeff ℓ E) X
+  let R' := condensedRingObj (integralCoeff ℓ E) Y
+  let F := (ProEtale.upperStar Ab.{u + 1} (U.f i)).mapMod R
+  let α := condensedPullbackHom (integralCoeff ℓ E) (U.f i)
+  let J := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (inv α)
+  let T := F ⋙ J
+  have hTP : Mod.IsFinitelyPresented R' (T.obj P) := fp_comap (inv α) (hU i)
+  obtain ⟨n, m, a, ⟨ea⟩⟩ := hTP
+  let L := Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) Y)
+  let ez : cokernel (T.map (0 : P ⟶ P)) ≅ T.obj P :=
+    cokernelIsoOfEq (T.map_zero P P) ≪≫ cokernelZeroIsoTarget
+  have hRat : RationalCokernelFree ℓ E a :=
+    locally_free_of_iso (rationalCokernelFree_pullback ℓ E (U.f i) (0 : P ⟶ P) hLF)
+      (L.mapIso (ez ≪≫ ea))
+  have h := localScalarCharts_iso ℓ ea.symm (integralMatrixScalarCharts ℓ E m n Y a hRat)
+  exact localScalarCharts_of_comap ℓ (inv α) _ h
+
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
@@ -855,32 +1425,30 @@ Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), and the
 continuous Smith invariant argument in the parent integral resolution node.
 (blueprint: lem-weil-pbc-integral-lfp-local-torsion-charts)
 
-Proof: take local finite presentations and extend scalars to E. The field local
-triviality theorem makes the rational cokernel locally finite free. Refine this
-cover and use the continuous coefficient realization. Geometric-field evaluation
-identifies the pointwise matrix rank with target rank minus rational cokernel rank.
-Thus zero-rank pieces have zero matrix; on every other piece choose a maximal-norm
-entry and shrink so its norm is constant and dominates every other entry. Divide
-by this nowhere-zero entry and perform elementary row and column operations.
-Repeat on the smaller matrix. For the finite list of nonzero diagonal functions,
-shrink again so each has constant norm. Each such function differs from its
-nonzero value at a chosen point by a continuous unit: divide the function and its
-point value in both directions, using equality of norms. Its cokernel is therefore
-the constant finite principal quotient for that point value. Powers of ℓ tend to
-zero, so division by the pivot gives a uniform bound killing this cyclic summand.
-These rank-one comparisons and bounds are proved above, as are column division,
-block elimination, finite diagonal cokernels, and finite sums of the cyclic charts.
-The theorem integralDiagonalLocalChart above supplies the scalar image and finite
-quotient conclusions for any such diagonalized presentation, by combining the
-cyclic summands and taking the maximum of their bounds. For every n ≥ N, the
-image of ℓ^n is the scalar multiple of the
-free summand, hence finite free. The quotient is a fixed finite module over
-O_E/(ℓ^n), whose discrete topology and finiteness follow from compactness of O_E
-and openness of the nonzero principal ideal. Its underlying sheaf of sets is
-therefore constant and finite. The construction is local and makes no global
-choice of the bound; quasi-compact refinement in the parent theorem supplies that
-choice. Zero matrices, zero ranks and empty cover members are included. No data
-is chosen from a mere existence theorem in a definition.
+Proof: extend scalars to E and use field local triviality for the rational module.
+On a finite-presentation cover, normalize the pulled-back integral coefficients
+and induct strongly on the number of source generators. The analytic matrix
+cover gives either a zero presentation matrix or a nowhere-zero dominating
+entry. In the zero case the cokernel is finite free. In the other case, divide
+the selected row and column by the pivot, split the finite biproduct bases, and
+use elementary block operations to identify the cokernel with the direct sum
+of the pivot cokernel and the Schur-complement cokernel. After rationalization
+the pivot is invertible, so the latter cokernel remains locally finite free
+and the induction applies to its strictly smaller source rank.
+
+For a nowhere-zero cyclic pivot, shrink to constant-norm neighborhoods. Division
+by its value at the center in both directions identifies its cokernel with a
+finite constant principal quotient, and convergence of powers of ℓ gives an
+eventual annihilating bound. Its eventual scalar image is zero, hence finite
+free. A finite-free module has finite-free scalar image and finite constant
+scalar quotient for every exponent. Binary direct sums preserve both assertions
+on a common refinement, with the maximum of the two bounds. Thus the induction
+combines actual local scalar charts without constructing a simultaneous Smith
+normal form. Finally transport through the presentation isomorphism, coefficient
+isomorphisms, and composition of pullbacks. Preservation of images and cokernels,
+and the underlying-set pullback comparison, give exactly the two pullbacks in
+the statement. Zero ranks and empty cover members are included. No data is
+chosen from a mere existence theorem in a definition.
 -/
 theorem integral_lfp_local_torsion_charts
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
@@ -901,6 +1469,24 @@ theorem integral_lfp_local_torsion_charts
             ((Mod.forget _ ⋙ sheafCompose (Scheme.ProEt.topology X)
               (forget Ab.{u + 1})).obj (cokernel ((ℓ ^ n) • 𝟙 P))) ≅
             (constantSheaf (Scheme.ProEt.topology (C.X s)) (Type (u + 1))).obj
-              (ULift.{u + 1} (Fin k))) := by sorry
+              (ULift.{u + 1} (Fin k))) := by
+  obtain ⟨C, hC⟩ := CondensedRing.integralLfpScalarCharts ℓ E X P hP
+  have (s : C.I₀) : WeaklyEtale (C.f s) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk s)
+  refine ⟨C, fun s ↦ ?_⟩
+  obtain ⟨N, hN⟩ := hC s
+  refine ⟨N, fun n hn ↦ ?_⟩
+  obtain ⟨hI, k, ⟨ek⟩⟩ := hN n hn
+  let R := condensedRingObj (CondensedRing.integralCoeff ℓ E) X
+  let F := (upperStar Ab.{u + 1} (C.f s)).mapMod R
+  let eI : image ((ℓ ^ n) • 𝟙 (F.obj P)) ≅ F.obj (image ((ℓ ^ n) • 𝟙 P)) :=
+    image.eqToIso (by simp) ≪≫ PreservesImage.iso F _
+  refine ⟨free_of_iso hI eI, k, ⟨?_⟩⟩
+  let eQ : F.obj (cokernel ((ℓ ^ n) • 𝟙 P)) ≅
+      cokernel ((ℓ ^ n) • 𝟙 (F.obj P)) :=
+    PreservesCokernel.iso F _ ≪≫ cokernelIsoOfEq (by simp)
+  exact (CondensedRing.chartSetPullbackIso (C.f s) _).symm ≪≫
+    (sheafCompose (Scheme.ProEt.topology (C.X s)) (forget Ab.{u + 1})).mapIso
+      ((Mod.forget _).mapIso eQ) ≪≫ ek
 
 end AlgebraicGeometry.ProEtale
