@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Coherent-end formula for total-site mapping complexes",
- "statement": "Let $I$ be a small poset and $i\\mapsto\\mathcal C_i$ a strict covariant diagram of small categories [def-weil-size-convention] with full-sieve transition inclusions $\\iota_{ij}:\\mathcal C_i\\to\\mathcal C_j$. Form $\\mathcal E$ with objects $(i,T)$, $T\\in\\mathcal C_i$, and arrows $(i,T)\\to(j,S)$ for $i\\le j$ given by arrows $\\iota_{ij}T\\to S$ in $\\mathcal C_j$. Let $\\mathbf D(\\Lambda)$ be the enhanced derived category of modules over a commutative ring $\\Lambda$ [def-weil-abstract-derived-category, def-cbc-enhanced-diagrams-cones], and let $F,G:\\mathcal E^{\\mathrm{op}}\\to\\mathbf D(\\Lambda)$ be coherent presheaves, meaning that they carry every identity-underlying transition arrow to an equivalence with all coherent composition data. The derived mapping complex between $F$ and $G$ in this enhanced coherent-presheaf category is naturally equivalent to the homotopy-coherent end over all strings of arrows of $\\mathcal E$ of the pointwise derived mapping complexes $\\operatorname{Map}(F(T),G(T))$. Under the presheaf straightening equivalence, this end is the derived mapping complex between the corresponding coherent fibre systems. The equivalence is natural in $F$ and $G$ and preserves identities and composition.",
+ "statement": "Let $I$ be a small poset and $i\\mapsto\\mathcal C_i$ a strict covariant diagram of small categories [def-weil-size-convention]: $\\iota_{ii}=\\mathrm{id}$ and $\\iota_{jk}\\iota_{ij}=\\iota_{ik}$. Assume every $\\iota_{ij}$ is a full-sieve inclusion, meaning a full inclusion whose image contains the source of every arrow with target in that image. Form $\\mathcal E$ with objects $x=(i,T)$, $T\\in\\mathcal C_i$, and arrows $(i,T)\\to(j,S)$ for $i\\le j$ given by arrows $\\iota_{ij}T\\to S$ in $\\mathcal C_j$. Let $\\Lambda$ be a commutative ring. Use the enhanced localization $\\mathbf D(\\Lambda)$ of unbounded cochain complexes of $\\Lambda$-modules at quasi-isomorphisms, with its derived Hom complexes, as presented by [lem-coef-projective-cochain-monoidal-model, lem-coef-dg-model-mapping-comparison]; cochains and quasi-isomorphisms have the convention of [def-weil-abstract-derived-category]. Coherent diagrams and full enhanced subcategories have the convention of [def-cbc-enhanced-diagrams-cones], with chain enrichment on diagram categories as in [lem-coef-enriched-category-tensor-calculus]. Let $\\mathscr P_{\\mathrm{inv}}$ be the full enhanced subcategory of $\\operatorname{Fun}(N(\\mathcal E^{\\mathrm{op}}),\\mathbf D(\\Lambda))$ on presheaves carrying every identity-underlying transition $(i,T)\\to(j,\\iota_{ij}T)$ to an equivalence.\n\nFor $F,G\\in\\mathscr P_{\\mathrm{inv}}$, their derived mapping complex is naturally equivalent to the homotopy-coherent end, namely the derived totalization of the cosimplicial replacement with terms\n$$C^r(F,G)=\\prod_{x_0\\xrightarrow{u_1}\\cdots\\xrightarrow{u_r}x_r\\text{ in }\\mathcal E}R\\operatorname{Hom}_{\\Lambda}(F(x_r),G(x_0)),\\qquad r\\ge0.$$\nFor a string of length $r+1$, the zeroth coface postcomposes the component on $x_1\\to\\cdots\\to x_{r+1}$ with $G(u_1)$; the last coface precomposes the component on $x_0\\to\\cdots\\to x_r$ with $F(u_{r+1})$. The intermediate cofaces compose consecutive arrows, and codegeneracies insert identities. The coherent diagram data supply all higher compatibilities; derived totalization means the homotopy limit of this cosimplicial diagram in the enhanced derived category [def-cbc-enhanced-diagrams-cones, lem-coef-quillen-section-rectification]. In degree zero the terms are $R\\operatorname{Hom}_{\\Lambda}(F(x),G(x))$; mixed endpoint terms in higher degrees are part of the formula.\n\nUnder the restriction/straightening equivalence of [lem-cbc-grothendieck-presheaf-coherent-straightening], the same end is the derived mapping complex between the coherent fibre systems $(F_i)$ and $(G_i)$ with transition equivalences $\\iota_{ij}^*F_j\\simeq F_i$ and $\\iota_{ij}^*G_j\\simeq G_i$. The comparison is natural in $F,G$ and preserves identities and composition, including their coherent homotopies.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
   "place": "Opening compactification step; no supplied source proves the enhanced coherent-end identification. WANTED: an enriched/coherent-end Fubini theorem for presheaves on a Grothendieck construction."
@@ -21,48 +21,206 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-abstract-derived-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-dg-model-mapping-comparison",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-quillen-section-rectification",
+  "lem-cbc-grothendieck-presheaf-coherent-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the larger universe in [def-weil-size-convention] large enough for the module and diagram categories; the small poset and its small fibres have a small total category in that bound. For arrows represented by $a:\\iota_{ij}T\\to S$ and $b:\\iota_{jk}S\\to U$, define their composite to be $b\\circ\\iota_{jk}(a):\\iota_{ik}T\\to U$. Strictness of the diagram and associativity in each fibre prove associativity, and fibre identities give identities. This construction does not need the full-sieve assumption; that assumption remains available for the straightening theorem.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 1; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "Use the combinatorial projective model on $\\operatorname{Ch}(\\Lambda)$ of [lem-coef-projective-cochain-monoidal-model]. It is enriched, tensored and cotensored over complexes of abelian groups, by the ordinary total Hom of $\\Lambda$-linear graded maps, tensor over $\\mathbf Z$, and the corresponding total Hom cotensor. Check the dg model axiom required by [lem-coef-quillen-section-rectification]. A cofibration $A\\to B$ is degreewise split with dg-projective cokernel $P$, and a fibration $X\\to Y$ is degreewise surjective with kernel $K$. The map of Hom complexes in that axiom is degreewise surjective: use the graded splitting and projectivity of every $P^q$ to lift the remaining maps to $Y$. Its kernel is $\\underline{\\operatorname{Hom}}_\\Lambda(P,K)$. If the fibration is trivial, $K$ is acyclic by the cohomology long exact sequence, so this Hom complex is acyclic by dg-projectivity. If the cofibration is trivial, the same sequence makes $P$ acyclic. Dg-projectivity then makes $\\underline{\\operatorname{Hom}}(P,P)$ acyclic, so $1_P=dh+hd$ for a degree $-1$ map $h$; the degree $-1$ operator $H(f)=(-1)^{|f|}fh$ satisfies $dH+Hd=1$ on $\\underline{\\operatorname{Hom}}(P,K)$. Thus in either case the surjection is a quasi-isomorphism, again by the long exact sequence. This verifies enriched compatibility over $\\mathbf Z$ for arbitrary $\\Lambda$, without assuming $\\Lambda$ projective over $\\mathbf Z$.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-quillen-section-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 2; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "Verify stability before using section rectification. The zero complex is a zero object. For a cofibrant $P$, put $C(P)^q=P^q\\oplus P^{q+1}$ and $d(y,x)=(dy+x,-dx)$. This complex is contractible; its terms are projective, so it is dg-projective. The inclusion $P\\to C(P)$ is a cofibration because its cokernel is the dg-projective shift $P[1]$. The homotopy pushout of $0\\leftarrow P\\to0$ is therefore represented, by [lem-coef-pointed-model-stability], by $C(P)\\amalg_P C(P)$. Its degree-$q$ terms are $(y,x,z)\\in P^q\\oplus P^{q+1}\\oplus P^{q+1}$, with differential $(dy+x+z,-dx,-dz)$. Projection to $x$ maps onto $P[1]$, with contractible kernel $(y,z)$ having differential $(dy+z,-dz)$. It is a quasi-isomorphism by the cohomology long exact sequence. Consequently suspension is the usual shift $[1]$ on the localized homotopy category, with inverse $[-1]$. The stability criterion in [lem-coef-pointed-model-stability] applies. The model comparison [lem-coef-dg-model-mapping-comparison] identifies its derived mapping objects with the enhanced Hom complexes used in the statement.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-pointed-model-stability",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-coef-dg-model-mapping-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 3; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-quillen-section-rectification] to the small category $J=\\mathcal E^{\\mathrm{op}}$, putting $\\mathcal M_x=\\operatorname{Ch}(\\Lambda)$ at every object and taking the identity enriched Quillen adjunction at every arrow. All compositors and unitors are identities. Steps 2 and 3 verify its stable combinatorial dg hypotheses. A strict section is now exactly a strict $\\Lambda$-complex presheaf, and its coherent localization is the category of coherent presheaves into $\\mathbf D(\\Lambda)$. The theorem gives its mapping complex as the derived totalization with degree-$r$ terms $\\prod_{y_0\\to\\cdots\\to y_r\\text{ in }J}R\\operatorname{Hom}_\\Lambda(F(y_0),G(y_r))$. Reversing this string and writing $x_t=y_{r-t}$ gives exactly $C^r(F,G)$ in the statement. Endpoint action is respectively postcomposition by $G(u_1)$ and precomposition by $F(u_{r+1})$; internal faces compose the indicated arrows and degeneracies insert identities. The theorem supplies the homotopy-coherent replacement and its derived totalization, so this argument does not identify an underived equalizer or an ordinary totalization of arbitrary nonfibrant models with a derived mapping object.",
+   "uses": [
+    "lem-coef-quillen-section-rectification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 4; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "The condition of inverting identity-underlying transitions selects a full enhanced subcategory of the presheaf category. By the full-subcategory definition in [def-cbc-enhanced-diagrams-cones], a simplex belongs to it exactly when its vertices do. Hence every mapping simplex between two allowed vertices is retained, including its faces and degeneracies. With the inherited chain enrichment, the derived Hom object is retained as well. Thus step 4 computes the mapping complex for $F,G\\in\\mathscr P_{\\mathrm{inv}}$, without imposing any further equations or truncation on that complex. In particular this restriction changes neither the mixed terms nor the higher naturality data.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 5; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "Construct the fibre-system comparison on mapping complexes, rather than inferring it from an equivalence of ordinary homotopy categories. The cotensor and enriched limit assertions of [lem-coef-enriched-category-tensor-calculus] form the enriched presheaf categories $\\mathbf D(\\Lambda)^{N(\\mathcal C_i^{\\mathrm{op}})}$ and their limit along restriction. Its underlying enhanced category is the coherent-system category: the underlying-category functor is right adjoint to free enrichment, so maps from a test shape into the underlying enriched limit are the limit of the corresponding spaces of maps, by that adjunction and the limit universal property. Restriction from $\\mathcal E$ is enriched by the coherent evaluation/currying operations in that same node. For $i\\le j$ the arrows $(i,T)\\to(j,\\iota_{ij}T)$ give the transformation $\\iota_{ij}^*F_j\\to F_i$, pointwise an equivalence on $\\mathscr P_{\\mathrm{inv}}$; strings of these arrows give its coherent cone data. Thus enriched restriction induces a map on derived Hom complexes to the fibre-system category. Its underlying enhanced functor is exactly the equivalence stated by [lem-cbc-grothendieck-presheaf-coherent-straightening]. This map on complexes is an equivalence: restriction commutes with every pointwise shift, and for each integer $n$ its map on $H^n$ is the bijection on homotopy-category morphisms $F\\to G[n]$ supplied by that enhanced equivalence. Here $H^n$ of a mapping complex is this morphism group: in dg models a degree-$n$ closed graded map is a chain map to the shifted target and boundaries are chain homotopies, as in [lem-coef-dg-model-mapping-comparison]; the same identification for cotensors and their limits follows by applying the enriched cotensor/limit universal properties to the shifted unit. A map of complexes inducing all these cohomology isomorphisms is a quasi-isomorphism. The restriction maps are $\\Lambda$-linear on every component, so the comparison also retains the $\\Lambda$ action.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-cbc-grothendieck-presheaf-coherent-straightening",
+    "lem-coef-dg-model-mapping-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 6; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  },
+  {
+   "text": "The section-rectification comparison in step 4 preserves mapping complexes and composition by its stated theorem. The restriction functor of step 6 is an enriched functor by evaluation and currying, so it preserves identities, composition and their coherent homotopies. This identifies the end with maps of fibre systems and proves the required compatibility, without claiming that mixed Hom terms can be composed termwise at equal cosimplicial degree. More explicitly, along $x_0\\to\\cdots\\to x_r$ the end composition uses a split at $x_k$: a component from $G(x_k)$ to $H(x_0)$ composes with one from $F(x_r)$ to $G(x_k)$; the theorem supplies the totalization pairing and its coherent compatibility with the faces. The length-zero identity is $1_{F(x)}$, with its naturality data on the longer strings. Finally precomposition with a coherent transformation $F'\\to F$ and postcomposition with $G\\to G'$ commute with all evaluation maps and the two endpoint actions; their higher compatibilities are the specified functorial ones. The comparison is therefore natural in both variables.",
+   "uses": [
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Agent-written expansion of the opening compactification auxiliary foundation, step 7; generic inputs are the cited node statements, not an asserted Stacks formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-coef-quillen-section-rectification",
+  "lem-coef-pointed-model-stability",
+  "lem-coef-dg-model-mapping-comparison",
+  "def-weil-abstract-derived-category",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-cbc-grothendieck-presheaf-coherent-straightening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Opening compactification auxiliary foundation. Repaired using the existing generic projective cochain model, stability criterion, enriched Quillen-section end theorem, cotensor calculus and presheaf straightening. The blueprint opening supplies the application, not this infrastructure."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Derived mapping complexes of coherent sections are coherent ends over strings of arrows",
-   "results": "Hits concern derived functor maps and unrelated homological complexes; no coherent-end theorem.",
+   "tool": "grep",
+   "query": "cosimplicialReplacement|homotopyEnd|homotopy.end|twistedArrow|homotopy.*[Tt]otaliz",
+   "results": "{\"t\": \"2026-10-16T15:54:19Z\", \"tool\": \"grep\", \"query\": \"cosimplicialReplacement|homotopyEnd|homotopy.end|twistedArrow|homotopy.*[Tt]otaliz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: ordinary ends, Ext, Tor and derived-category primitives do not assert an enhanced derived end or coherent fibre-system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations in the derived category of diagrams of modules are computed by a totalization of products of derived Hom complexes",
+   "results": "{\"t\": \"2026-10-16T15:54:20Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations in the derived category of diagrams of modules are computed by a totalization of products of derived Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CategoryTheory.Tor'_map_app\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CategoryTheory.Tor'_obj_map\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearSingleFunctor\", \"CategoryTheory.Tor_map\"], \"digest\": \"47fb6705bcdb4563\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary ends, Ext, Tor and derived-category primitives do not assert an enhanced derived end or coherent fibre-system comparison"
   },
   {
    "tool": "loogle",
-   "query": "presheafHomSectionsEquiv, Functor.sectionsFunctor",
-   "results": "No hits for the combined enriched pattern.",
+   "query": "CategoryTheory.Limits.end_",
+   "results": "{\"t\": \"2026-10-16T15:54:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.end_\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.end_\", \"CategoryTheory.Limits.end_.π\", \"CategoryTheory.Limits.endFunctor_obj\", \"CategoryTheory.Limits.end_.map_id\", \"CategoryTheory.Limits.end_.map\", \"CategoryTheory.Limits.endFunctor_map\", \"CategoryTheory.Limits.end_.hom_ext\", \"CategoryTheory.Limits.end_.hom_ext_iff\"], \"digest\": \"c03ed4d7a3a20820\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "presheafHom|sectionsFunctor|homotopy.*end|coherent",
-   "results": "Ordinary presheaf Hom and sections plus categorical end composition; no derived coherent-end comparison.",
-   "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: ordinary ends, Ext, Tor and derived-category primitives do not assert an enhanced derived end or coherent fibre-system comparison"
   },
   {
    "tool": "leansearch",
-   "query": "Mapping complexes of presheaves are computed by an end and preserve composition",
-   "results": "CategoryTheory.Limits.end_.map_comp and ordinary presheaf Hom declarations; no enhanced derived statement.",
+   "query": "Derived Hom complex in a category of module diagrams is a homotopy end",
+   "results": "{\"t\": \"2026-10-16T15:54:20Z\", \"tool\": \"leansearch\", \"query\": \"Derived Hom complex in a category of module diagrams is a homotopy end\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id\", \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"HasDerivedCategory\", \"CategoryTheory.ShortComplex.Homotopy\", \"Homotopy\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"DerivedCategory\", \"CategoryTheory.NatTrans.leftDerivedToHomotopyCategory\"], \"digest\": \"049b1b8e0c9253bb\"}",
    "date": "2026-10-16",
-   "verdict": "no match"
+   "verdict": "no match: ordinary ends, Ext, Tor and derived-category primitives do not assert an enhanced derived end or coherent fibre-system comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-grothendieck-hypersheaf-sections",
   "date": "2026-10-16"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-cbc-grothendieck-coherent-end",
+  "worker": "stage1",
+  "summary": "Second reader repaired the unsupported definition-only proof. STATEMENT-DISPUTED: the original diagonal-only end wording did not specify the necessary mixed endpoint terms; made the derived totalization and all endpoint maps explicit, preserving all hypotheses and the intended comparison. Verified the projective complex model and its stability, specialized existing Quillen-section rectification to the constant diagram on E^op, restricted to the full transition-inverting subcategory, and used enriched restriction plus shiftwise full faithfulness for the fibre-system comparison. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the opening compactification step: the derived mapping complex of coherent presheaves on the Grothendieck total category is the homotopy-coherent end over all arrow strings, and straightening identifies it with the corresponding coherent fibre-system mapping complex.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-projective-cochain-monoidal-model",
+    "why": "Generic projective model of complexes verifies the coefficient-model hypotheses, below the existing unit route."
+   },
+   {
+    "node": "lem-coef-pointed-model-stability",
+    "why": "Generic suspension criterion; the proof explicitly verifies that suspension is the shift on complexes."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic cohomology criterion for the explicitly displayed short exact sequences of complexes."
+   },
+   {
+    "node": "lem-coef-dg-model-mapping-comparison",
+    "why": "Generic model-to-derived-Hom comparison; it supplies the chain enrichment, absent from the ordinary localization definition."
+   },
+   {
+    "node": "lem-coef-quillen-section-rectification",
+    "why": "Existing generic enriched section theorem already states the mixed-endpoint end formula; specialize its constant diagram rather than create a duplicate."
+   },
+   {
+    "node": "lem-coef-enriched-category-tensor-calculus",
+    "why": "Generic enriched cotensor and limit structure needed to construct the restriction comparison on mapping complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-pointed-model-stability",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-coef-dg-model-mapping-comparison",
+  "lem-coef-quillen-section-rectification",
+  "lem-coef-enriched-category-tensor-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-8d7db4fd7",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-8d7db4fd7 (reviewer sub-agent of L); spot-checked: Read the item and all cited statements in full; checked all seven steps, source locations, route, mixed-endpoint Ext¹ example, model hypotheses, coefficient boundaries, duplicates and dependency cycles. Accepted six declared generic tool uses. No new nodes or repairs. Detailed review written to review.md."
+ }
 }
