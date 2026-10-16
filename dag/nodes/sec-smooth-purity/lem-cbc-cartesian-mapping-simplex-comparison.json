@@ -27,48 +27,164 @@
   "lem-coef-cartesian-mapping-simplex-presentation",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The degreewise map sends $(m,k)$ to $(q(m),k)$. Since $q$ lies over $\\Delta^n$, this is a map of the indicated pullbacks and commutes with every simplicial operator. A marked edge in its source has base edge in $E$ and degenerate second coordinate, so its image is cartesian by the hypothesis on $q$ and has the same base edge in $E$. Thus it preserves markings. If $K'\\subseteq K$ and $E'\\subseteq E$, both routes around the restriction square send $(m,k')$ to $(q(m),k')$. The inclusions preserve markings by $E'\\subseteq E$; the smaller markings need not be the markings induced from the larger objects when $E'$ is strictly smaller.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.2.2 mapping-simplex formula and Notation 3.2.2.3; direct pullback and marking calculation."
+   }
+  },
+  {
+   "text": "The hypotheses on $q$ are precisely those of [lem-cbc-mapping-simplex-universal-equivalence]. Applying that statement to $K\\to\\Delta^n$ gives a categorical equivalence $u:M_K\\to Y_K$ of underlying simplicial sets. For each small quasicategory $C$, [lem-coef-joyal-functor-equivalence-test] therefore gives a coherent equivalence\n$$H=u^*:\\operatorname{Fun}(Y_K,C)\\longrightarrow\\operatorname{Fun}(M_K,C).$$\nThe same assertions apply to every edge map $e:\\Delta^1\\to K\\to\\Delta^n$, even a degenerate one. We will use the resulting equivalences $H_e$ as well as $H$. This step asserts an unmarked equivalence only; the selected marking will be handled in the following steps.",
+   "uses": [
+    "lem-cbc-mapping-simplex-universal-equivalence",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.7(2); its functor-category consequence, as in the proof of Proposition 3.2.2.14."
+   }
+  },
+  {
+   "text": "Fix an edge $e$ of $K$ with endpoints $i\\leq j$. Put $M_e=M^m(A)\\times_{\\Delta^n}\\Delta^1$ and $Y_e=Y\\times_{\\Delta^n}\\Delta^1$. The mapping-simplex operator formula identifies $M_e$ with the mapping simplex of $A_i\\leftarrow A_j$, using the composite transition (the identity when $i=j$). Give $M_e$ all its degenerate-coordinate transport markings, and give $Y_e$ all its cartesian-edge markings. By [lem-coef-relative-marked-anodyne-calculus], $Y_e\\to\\Delta^1$ is cartesian with exactly this pulled-back natural marking. Its two fibre maps are the original categorical equivalences. Thus [lem-coef-cartesian-mapping-simplex-presentation] makes $q_e:M_e\\to Y_e$ a Cartesian equivalence in $\\mathsf M_{\\Delta^1}$.\nFor any quasicategory $C$, [lem-coef-marked-anodyne-lifting-calculus] gives the marked-anodyne lifting property of $C^\\natural\\to *$. The relative calculus identifies this as a naturally marked cartesian fibration over a point and identifies its pullback $\\Delta^1\\times C^\\natural$ as naturally marked cartesian over $\\Delta^1$. Test the Cartesian equivalence $q_e$ against this constant fibration, using [lem-coef-marked-relative-cartesian-model]. A marked map over $\\Delta^1$ to this product is exactly a marked map to $C^\\natural$, also with the sharp simplex parameter. Consequently\n$$\\operatorname{Map}^\\sharp(Y_e,C^\\natural)\\longrightarrow\\operatorname{Map}^\\sharp(M_e,C^\\natural)$$\nis a weak homotopy equivalence for the all-transport markings just specified. These local markings are used only on the interval pullbacks; we have not marked the unselected base edges globally.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.14 and the mapping tests of Section 3.1.3; base change of natural markings, Proposition 2.4.2.3."
+   }
+  },
+  {
+   "text": "For any marked $X$, let $L_X(C)$ be the full simplicial subcategory of $\\operatorname{Fun}(X,C)$ on maps sending its marked edges to equivalences. The formula for product markings identifies $L_X(C)$ with $\\operatorname{Map}^\\flat(X,C^\\natural)$: an edge of $X\\times(\\Delta^r)^\\flat$ is marked just when its $X$-coordinate is marked and its parameter is constant, so the condition is precisely the condition on every vertex map. By [lem-coef-marked-anodyne-lifting-calculus], $L_X(C)$ is a quasicategory and its core is $\\operatorname{Map}^\\sharp(X,C^\\natural)$.\nThe property of belonging to $L_X(C)$ is invariant under coherent equivalence of functors. Indeed [lem-coef-infinity-pointwise-equivalences] gives equivalences $\\tau_x$ at every vertex of a natural equivalence $\\tau:F\\simeq G$. Its square on an edge $a:x\\to y$, triangulated by the two triangles in $\\Delta^1\\times\\Delta^1$, gives $[\\tau_y][F(a)]=[G(a)][\\tau_x]$ in $hC$. By [lem-coef-infinity-mapping-composition], equivalence edges are precisely invertible classes in $hC$, so $F(a)$ is an equivalence if and only if $G(a)$ is. This argument applies to arbitrary simplicial $X$, not only quasicategories.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1 and Remark 3.1.3.4; full-subcategory and naturality-square argument for selected markings."
+   }
+  },
+  {
+   "text": "We claim that a map $F:Y_K\\to C$ sends the selected marked edges to equivalences if and only if $Fu$ does. The forward implication is Step 1. For the reverse, fix $e\\in E$ and restrict $F$ to $F_e:Y_e\\to C$. Every all-transport marked edge in $M_e$ maps to a marked edge in $M_K$, including when $e$ is degenerate, since then the parameter edge maps to a degenerate base edge. Hence $F_eq_e$ is a vertex of $\\operatorname{Map}^\\sharp(M_e,C^\\natural)$. The weak equivalence of Kan complexes in Step 3 is surjective on components, so there is a marked map $G_e:Y_e\\to C^\\natural$ with $G_eq_e$ in the same component as $F_eq_e$. Edges in this sharp mapping complex are equivalences in the full functor quasicategory by Step 4. Thus $H_e(G_e)$ and $H_e(F_e)$ are coherently equivalent. Apply a coherent quasi-inverse of $H_e$ from Step 2 and its inverse homotopies to obtain $G_e\\simeq F_e$. By the invariance proved in Step 4, $F_e$ takes every cartesian edge to an equivalence. Each marked edge of $Y_K$ over $e$ lifts to $Y_e$ by pairing it with the identity edge of $\\Delta^1$; the pulled-back natural-marking assertion of [lem-coef-relative-marked-anodyne-calculus] says this lift is cartesian. Since $e$ was arbitrary in $E$, this proves the claim. No simultaneous or natural choice of the local $G_e$ is needed: each one is used only to test the indicated property of the already specified $F$.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Selected-edge version of the marking-reflection argument in the proof of Proposition 3.2.2.14; Steps 2-4 supply its local mapping tests."
+   }
+  },
+  {
+   "text": "By Steps 4-5 the coherent equivalence $H$ restricts to a coherent equivalence $L_{Y_K}(C)\\to L_{M_K}(C)$. To check this with its inverse, choose a coherent quasi-inverse $R$ of $H$. If $D$ lies in $L_{M_K}(C)$, then $HR(D)\\simeq D$; invariance in Step 4 implies $HR(D)$ also lies there, and Step 5 implies $R(D)$ lies in $L_{Y_K}(C)$. Since both subcategories are full, $R$ and the inverse homotopies restrict to them.\nPassing to cores gives homotopy inverse maps on the sharp mapping Kan complexes of Step 4. Explicitly a coherent natural equivalence restricts to a simplicial homotopy on cores: each component and each horizontal core edge is an equivalence, and a mixed edge is a composite of these in $h$, hence is an equivalence by [lem-coef-infinity-mapping-composition]. The natural homeomorphism $|K\\times\\Delta^1|\\cong|K|\\times[0,1]$ of [lem-coef-simplicial-realization-cylinder], with the ordinary product topology and endpoint inclusions $u\\mapsto(u,0),(u,1)$, realizes these as continuous homotopies. Therefore [lem-coef-homotopy-equivalence-weak] says the specified restriction\n$$\\operatorname{Map}^\\sharp(Y_K,C^\\natural)\\longrightarrow\\operatorname{Map}^\\sharp(M_K,C^\\natural)$$\nis a weak homotopy equivalence. Since this holds for every small $C$, the mapping-test criterion of [lem-coef-marked-point-cartesian-model] proves that $q_{K,E}$ is a weak equivalence over a point.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.3.4 (point mapping test); direct full-subcategory and core argument, following the pattern of Proposition 3.2.2.14."
+   }
+  },
+  {
+   "text": "All choices of interval tests were made only for existing edges of $E$, and only on nonempty components when a vertex $F_eq_e$ was specified. If $K$ is empty, both pullbacks are empty, the unique map is an isomorphism, and both testing mapping complexes are the point. For $n=0$, the only base edges are degenerate; the same argument uses the chain $A_0\\xleftarrow{\\mathrm{id}}A_0$ on an interval and the original categorical equivalence on the point. Empty fibres cause no exception: the universal comparison and presentation explicitly include them, and no vertex is chosen in an empty fibre. Thus the degenerate and empty cases require no added hypotheses. The restriction identity was already proved exactly in Step 1.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-cbc-mapping-simplex-universal-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.7 and Proposition 3.2.2.14, including their zero-dimensional cases; direct empty-pullback check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-mapping-simplex-universal-equivalence",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-simplicial-realization-cylinder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Restriction with selected markings, deduced from Proposition 3.2.2.7(2), Proposition 3.2.2.14 and the Section 3.1.3 mapping tests; local-to-global marking argument written explicitly here. HTT read online; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Every cartesian fibration over a simplex has a mapping simplex presentation by a composable sequence of simplicial sets",
-   "results": "{\"t\": \"2026-10-16T20:21:35Z\", \"tool\": \"leanfinder\", \"query\": \"Every cartesian fibration over a simplex has a mapping simplex presentation by a composable sequence of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve_obj\", \"SSet.PtSimplex.MulStruct.map\", \"SSet.PtSimplex\", \"SSet.stdSimplex.faceRepresentableBy\", \"SSet.S.simplex\", \"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"SSet.stdSimplex.objMk\"], \"digest\": \"2e75cc2ab63464e1\"}",
+   "query": "Restriction of a mapping simplex quasi-equivalence to a simplicial subset with selected marked cartesian edges is a marked categorical equivalence",
+   "results": "{\"t\": \"2026-10-16T21:37:46Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a mapping simplex quasi-equivalence to a simplicial subset with selected marked cartesian edges is a marked categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.faceRepresentableBy\", \"SSet.Subcomplex.topIso\", \"SSet.Subcomplex.yonedaEquiv_coe\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"SSet.RelativeMorphism.map_eq_of_mem\", \"SSet.modelCategoryQuillen.I\", \"SSet.sk\"], \"digest\": \"ebc5b077d4449932\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits concern ordinary fibered categories, Kan fibrations, strict Segal nerves, or general model-category lifting; none supplies cartesian-fibration flatness or marked mapping-simplex comparison for quasicategories."
+   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"MappingCylinder\"",
-   "results": "{\"t\": \"2026-10-16T20:21:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"MappingCylinder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "SSet, Cartesian",
+   "results": "{\"t\": \"2026-10-16T21:37:47Z\", \"tool\": \"loogle\", \"query\": \"SSet, Cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Cartesian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits concern ordinary fibered categories, Kan fibrations, strict Segal nerves, or general model-category lifting; none supplies cartesian-fibration flatness or marked mapping-simplex comparison for quasicategories."
+   "verdict": "query rejected by Loogle: loogle: unknown identifier 'Cartesian'; not evidence of absence; a second quoted-name Loogle query was run."
   },
   {
    "tool": "grep",
-   "query": "mappingSimplex|mapping.simplex|quasiEquivalence|[Cc]artesian[Ff]ibration",
-   "results": "{\"t\": \"2026-10-16T20:21:24Z\", \"tool\": \"grep\", \"query\": \"mappingSimplex|mapping.simplex|quasiEquivalence|[Cc]artesian[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "mappingSimplex|mapping.simplex|[Cc]artesian[Ff]ibration|[Mm]arked[Ss]et",
+   "results": "{\"t\": \"2026-10-16T21:37:47Z\", \"tool\": \"grep\", \"query\": \"mappingSimplex|mapping.simplex|[Cc]artesian[Ff]ibration|[Mm]arked[Ss]et\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits concern ordinary fibered categories, Kan fibrations, strict Segal nerves, or general model-category lifting; none supplies cartesian-fibration flatness or marked mapping-simplex comparison for quasicategories."
+   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
   },
   {
    "tool": "leansearch",
-   "query": "Marked mapping simplex models for cartesian fibrations preserve categorical equivalences on subcomplexes",
-   "results": "{\"t\": \"2026-10-16T20:21:25Z\", \"tool\": \"leansearch\", \"query\": \"Marked mapping simplex models for cartesian fibrations preserve categorical equivalences on subcomplexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Subcomplex.range_eq_ofSimplex\", \"SSet.Subcomplex.lift\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.Subcomplex.toSSetFunctor\"], \"digest\": \"418f5ec1e12f4947\"}",
+   "query": "Marked categorical equivalence of mapping simplices restricted to subcomplexes",
+   "results": "{\"t\": \"2026-10-16T21:38:10Z\", \"tool\": \"leansearch\", \"query\": \"Marked categorical equivalence of mapping simplices restricted to subcomplexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.yonedaEquiv_coe\", \"SSet.Subcomplex.homOfLE\", \"SSet.Subcomplex.toSSetFunctor\", \"SSet.Subcomplex.range_eq_ofSimplex\", \"SSet.Subcomplex.ι\", \"SSet.Subcomplex.N.mk'.hcongr_4\", \"SSet.Subcomplex.image_ofSimplex\", \"ComplexShape.Embedding.homEquiv\"], \"digest\": \"2ea734377ef0e280\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits concern ordinary fibered categories, Kan fibrations, strict Segal nerves, or general model-category lifting; none supplies cartesian-fibration flatness or marked mapping-simplex comparison for quasicategories."
+   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
   },
   {
    "tool": "leanfinder",
-   "query": "Strictification of a cartesian fibration over a standard simplex by iterated mapping cylinders with marked transport edges",
-   "results": "{\"t\": \"2026-10-16T20:21:34Z\", \"tool\": \"leanfinder\", \"query\": \"Strictification of a cartesian fibration over a standard simplex by iterated mapping cylinders with marked transport edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.ofCore\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"2f1fc57d268f7676\"}",
+   "query": "A categorical equivalence of simplicial sets induces equivalence on functor categories and their subcategories of functors inverting specified edges",
+   "results": "{\"t\": \"2026-10-16T21:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"A categorical equivalence of simplicial sets induces equivalence on functor categories and their subcategories of functors inverting specified edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.Truncated.nerve₂Adj\", \"SSet.hoFunctor\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\"], \"digest\": \"e50f1d2306cdeb1f\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the hits concern ordinary fibered categories, Kan fibrations, strict Segal nerves, or general model-category lifting; none supplies cartesian-fibration flatness or marked mapping-simplex comparison for quasicategories."
+   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Fibration\"",
+   "results": "{\"t\": \"2026-10-16T21:38:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"2ff5b9da174778cd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-relative-exponential",
@@ -76,5 +192,74 @@
   "group": "NK"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-cartesian-mapping-simplex-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Separated HTT 3.2.2.7(2), the universal unmarked comparison missing from the existing presentation, as one statement-only child. Proved selected-marking reflection by interval pullbacks, the existing relative marked comparison tested against constant fibrations, and restriction of the unmarked functor equivalence to full subcategories; handled all restriction, zero-dimensional and empty cases. No Lean attachment or Mathlib match found.",
+  "blueprint": "Auxiliary to the opening compactification-choice sentence of thm-cbc-finite-level-proetale, through the existing coherent-choice ancestry. That blueprint paragraph does not state the relative exponential or this comparison. Steps 1-7 supply the subcomplex and selected-marking comparison required by Step 4 of lem-cbc-enhanced-relative-exponential, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-cartesian-mapping-simplex-presentation",
+    "why": "Step 3 uses the existing relative marked equivalence for the two-term chain; this is generic simplicial machinery absent from the compact-support base-change unit. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Steps 1, 4 and 6 use marked products and the absolute mapping-test definition; this is generic marked simplicial machinery. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-relative-marked-anodyne-calculus",
+    "why": "Steps 3 and 5 use pullback of cartesian fibrations and exact pullback of natural markings, and the product test fibrations. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-marked-anodyne-lifting-calculus",
+    "why": "Steps 3-4 use absolute fibrancy and the identification of flat marked maps as a quasicategory with sharp maps as its core. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-marked-relative-cartesian-model",
+    "why": "Step 3 uses the defining mapping tests for a Cartesian equivalence into the constant cartesian fibration. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-joyal-functor-equivalence-test",
+    "why": "Step 2 uses the specified coherent equivalence of functor quasicategories induced by an unmarked categorical equivalence. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-infinity-pointwise-equivalences",
+    "why": "Step 4 obtains equivalences at vertices from a coherent natural equivalence. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-infinity-mapping-composition",
+    "why": "Steps 4 and 6 use the homotopy-category composition law and invertible-class criterion for equivalence edges. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-simplicial-realization-cylinder",
+    "why": "Step 6 realizes the core simplicial homotopies through the natural homeomorphism of |K x Delta^1| with |K| x [0,1] in the ordinary product topology, as lem-coef-homotopy-equivalence-weak requires. No node of sk-prop-sf-cbc supplies this tool."
+   },
+   {
+    "node": "lem-coef-homotopy-equivalence-weak",
+    "why": "Step 6 turns actual homotopy inverse maps on the realizations of the cores into weak homotopy equivalences. No node of sk-prop-sf-cbc supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-dcd6619fb",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-dcd6619fb (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-cbc-mapping-simplex-universal-equivalence in full, the statement of every cited node, the parent's Step 4 (which uses the item at (Delta^n,T_n) and (Lambda^n_0,T_n cap K_1)), and the unit and chapter route. HTT is not archived in literature/ (the delivery records it as WANTED), so I checked against Definition 3.2.2.6 and Proposition 3.2.2.7(2) from my own knowledge of the text. The new node matches 3.2.2.7(2) hypothesis by hypothesis: arbitrary T, non-injective t allowed, no fibrancy assumption. I tested it at n=0 (product with T), at n=1 with T the boundary of Delta^1, at T=Delta^1 constant at a vertex (the degenerate case the item uses), and at T empty; it holds in each. It is statement-only and self-contained, not a clause of the item (it is unmarked; the item's conclusion is marked), and not a duplicate: I compared it with the presentation node, the relative model's homotopy-pullback clause (which needs a cartesian fibration, and M^m(A) is not one), cocartesian-categorical-base-change, marked-mapping-simplex-descent and mapping-simplex-cone-fibers. Steps 1-7 are correct: (1) the restriction and marking-preservation calculation, including that the smaller markings may be strictly smaller than the induced ones; (2) the new node at K and at each edge e, including degenerate e, together with Joyal test (ii); (3) the interval pullback is the two-term mapping simplex, so q_e is a Cartesian equivalence in M_{Delta^1}, and testing against Delta^1 x C gives the absolute mapping complexes; (4) L_X(C) equals the flat mapping complex, and inverting marked edges is invariant under natural equivalence via hC; (5) reflection of the selected marking through local G_e, which I also confirmed directly from transport edges and fibre equivalences; (6) restriction of the coherent equivalence to the full subcategories and to cores; (7) the cases K empty, n=0, empty fibres and degenerate E. One fault, fixed: Step 6 cited lem-coef-realization-finite-limits, which gives only the k-space product, and then asserted without citation that the product with [0,1] has the ordinary product topology, which lem-coef-homotopy-equivalence-weak needs. I replaced it by lem-coef-simplicial-realization-cylinder (split, generic unit), which states |K x Delta^1| = |K| x [0,1] with the ordinary product topology, and updated the text, proof_deps and the tool_uses entry in fixes/dag/nodes/sec-smooth-purity/lem-cbc-cartesian-mapping-simplex-comparison.json. I accept the declared tool_uses from sk-prop-sf-biduality-general. No SGA source is used, no target or coefficient-category route is touched, and no statement changed. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

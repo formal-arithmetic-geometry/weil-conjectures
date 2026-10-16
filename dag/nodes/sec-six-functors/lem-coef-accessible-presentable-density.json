@@ -1,0 +1,109 @@
+{
+ "id": "lem-coef-accessible-presentable-density",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed inverse-limit comparison: Accessibility is closed under products, inserters and equifiers, used in the accessible-monad input to strict section models. Supporting Canonical filtered density of presentable objects.",
+   "via": [
+    "lem-coef-accessible-pie-closure",
+    "lem-coef-accessible-monad-presentability",
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical filtered density of accessible presentable objects",
+ "statement": "Fix a universe $\\mathcal U$; all smallness is relative to it and all categories have small Hom sets. Colimits have the meaning of [def-weil-pbc-category-colimit]. An infinite cardinal $\\eta$ is regular when unions of fewer than $\\eta$ sets each of size less than $\\eta$ have size less than $\\eta$. A category is $\\eta$-filtered when every diagram with fewer than $\\eta$ morphisms has a cocone. An object is $\\eta$-presentable when its Hom functor preserves small $\\eta$-filtered colimits. A category is $\\eta$-accessible when it admits these colimits and has a small family of $\\eta$-presentable objects generating it under these colimits; accessible means $\\eta$-accessible for some infinite regular $\\eta$. A functor is accessible when it preserves small $\\eta$-filtered colimits for some such $\\eta$ for which its source has these colimits.\n\nLet $\\mathcal A$ be $\\kappa$-accessible for an infinite regular $\\kappa$. Let $\\mathcal P$ be its full subcategory of $\\kappa$-presentable objects, and let $X\\in\\mathcal A$. The category $\\mathcal P/X$ has objects arrows $p:P\\to X$ with $P\\in\\mathcal P$ and morphisms $f:(P,p)\\to(Q,q)$ satisfying $qf=p$. Then $\\mathcal P/X$ is $\\kappa$-filtered. The canonical cocone from the diagram $(P,p)\\mapsto P$ to $X$, with components $p$, is colimiting. These assertions are about this explicitly specified cocone, with no assumption that $\\mathcal A$ is cocomplete.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Presentable/Dense.lean",
+  "place": "Lines 60-64: IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι; lines 68-72: IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι. Dense means exactly the canonical cocone is colimiting (Functor/KanExtension/DenseAt.lean:45-58)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an accessible category the canonical diagram of all presentable objects mapping to an object is filtered and has that object as its colimit",
+   "results": "OK; 8 hits; CategoryTheory.instIsPresentableOfIsAccessibleCategory; CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone; CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι; CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits; CategoryTheory.IsAccessibleCategory; CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable; CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator; CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable",
+   "date": "2026-10-17",
+   "verdict": "match: read Dense.lean:60-72 and DenseAt.lean:45-58; the two named instances give exactly the two clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.Functor.IsDense",
+   "results": "OK; 2 hits; CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι; CategoryTheory.Comma.isCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι",
+   "date": "2026-10-17",
+   "verdict": "match: read Dense.lean:60-72 and DenseAt.lean:45-58; the two named instances give exactly the two clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCardinalAccessibleCategory, CategoryTheory.IsCardinalFiltered",
+   "results": "OK; 4 hits; CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι; Cardinal.SharplyLT.tfae; Cardinal.SharplyLT.exists_retract_of_isCardinalPresentable; CategoryTheory.exists_colimitsOfShape_splitMonomorphisms_of_isCardinalPure",
+   "date": "2026-10-17",
+   "verdict": "match: read Dense.lean:60-72 and DenseAt.lean:45-58; the two named instances give exactly the two clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsDense|IsDense where|IsCardinalFiltered \\(CostructuredArrow",
+   "results": "OK; 6 hits; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/Dense.lean; Mathlib/CategoryTheory/Presentable/Dense.lean",
+   "date": "2026-10-17",
+   "verdict": "match: read Dense.lean:60-72 and DenseAt.lean:45-58; the two named instances give exactly the two clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subcategory of kappa presentable objects is dense in a kappa accessible category",
+   "results": "OK; 8 hits; CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι; CategoryTheory.IsFinitelyAccessibleCategory.instIsDenseFullSubcategoryIsFinitelyPresentableι; CategoryTheory.IsCardinalPresentable; CategoryTheory.IsCardinalLocallyPresentable; CategoryTheory.Functor.isDenseAt; CategoryTheory.IsCardinalFilteredGenerator.of_isDense_ι; CategoryTheory.isCardinalPresentable; CategoryTheory.IsCardinalLocallyPresentable.mk",
+   "date": "2026-10-17",
+   "verdict": "match: read Dense.lean:60-72 and DenseAt.lean:45-58; the two named instances give exactly the two clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CostructuredArrow of presentable objects is cardinal filtered and its tautological cocone is a colimit",
+   "results": "{\"t\": \"2026-10-16T22:21:27Z\", \"tool\": \"leanfinder\", \"query\": \"CostructuredArrow of presentable objects is cardinal filtered and its tautological cocone is a colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\"], \"digest\": \"a9f5dc048728b029\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the filtered costructured-arrow instance is returned; read Dense.lean:60-72 and DenseAt.lean:45-58 for both exact clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformization|IsDense|isCardinalAccessible_of_isLimit",
+   "results": "{\"t\": \"2026-10-16T22:22:21Z\", \"tool\": \"grep\", \"query\": \"uniformization|IsDense|isCardinalAccessible_of_isLimit\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"d35a88a294eca6c4\"}",
+   "date": "2026-10-17",
+   "verdict": "match: the filtered costructured-arrow instance is returned; read Dense.lean:60-72 and DenseAt.lean:45-58 for both exact clauses."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι, CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι",
+  "file": "Mathlib/CategoryTheory/Presentable/Dense.lean",
+  "line": 60,
+  "how": "exact: the density instance at lines 60-64 gives the specified canonical colimit by the definition DenseAt (Functor/KanExtension/DenseAt.lean:45-58); the filteredness instance at lines 68-72 gives kappa-filteredness of exactly its costructured-arrow category. Both assume only IsCardinalAccessibleCategory, not local presentability.",
+  "declarations": [
+   {
+    "declaration": "CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι",
+    "file": "Mathlib/CategoryTheory/Presentable/Dense.lean",
+    "line": 60
+   },
+   {
+    "declaration": "CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι",
+    "file": "Mathlib/CategoryTheory/Presentable/Dense.lean",
+    "line": 68
+   }
+  ]
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-accessible-pie-closure",
+  "date": "2026-10-17",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general"
+}
